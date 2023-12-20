@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Text.RegularExpressions
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
@@ -28,6 +29,10 @@ Public Class ucrDataViewReoGrid
 
     Public Event DeleteValueToDataframe() Implements IDataViewGrid.DeleteValuesToDataframe
 
+    Public Event EditCell() Implements IDataViewGrid.EditCell
+
+    Public Event FindRow() Implements IDataViewGrid.FindRow
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
@@ -38,7 +43,8 @@ Public Class ucrDataViewReoGrid
 
         grdData.CurrentWorksheet.Columns = visiblePage.lstColumns.Count
 
-        If GetCurrentDataFrameFocus.clsFilterOrColumnSelection.bColumnSelectionApplied Then
+        If GetCurrentDataFrameFocus.clsFilterOrColumnSelection.bColumnSelectionApplied AndAlso
+           GetCurrentDataFrameFocus.clsVisibleDataFramePage.UseColumnSelectionInDataView Then
             variableTextColour = Color.Red
         Else
             variableTextColour = Color.DarkBlue
@@ -72,8 +78,8 @@ Public Class ucrDataViewReoGrid
         For i = 0 To grdData.CurrentWorksheet.Rows - 1
             For j = 0 To grdData.CurrentWorksheet.Columns - 1
                 Dim strData As String = dataFrame.DisplayedData(i, j)
-                If grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
-                    strData = GetInnerBracketedString(strData)
+                If strData IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
+                    strData = GetTransformedLTColumnContents(strData)
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next
@@ -86,7 +92,9 @@ Public Class ucrDataViewReoGrid
             End If
         Next
 
-        grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
+        If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
+            grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
+        End If
 
         'todo. As of 30/05/2022, the reogrid control version used did not have this setting option
         'see issue #7221 for more information.
@@ -96,20 +104,71 @@ Public Class ucrDataViewReoGrid
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
 
+    ''' <summary>
+    ''' Transforms contents of LT column(s) that have structured R-like data into a more readable and user-friendly format that is consistent with R Viewer.
+    ''' For example, content like list(Birmingham = list(IATA = c("BHM", NA, NA, NA), Hartford = list(IATA = "BDL", ICAO = "KBDL")) 
+    ''' will be transformed to BHM, NA, NA, NA,BDL,KBDL
+    ''' </summary>
+    ''' <param name="strLstData">Data from column type LT</param>
+    ''' <returns>Transformed data</returns>
+    Private Function GetTransformedLTColumnContents(strLstData As String) As String
+        ' Check if strLstData is "numeric(0)", 
+        If strLstData = "numeric(0)" Then
+            '"numeric(0)" represents an empty data set in R so just return an empty output
+            Return String.Empty
+        End If
+
+        ' Check if strLstData contains "list(" or "c(". These are patterns found in R list and vector data structures.
+        If Not strLstData.Contains("list(") AndAlso Not strLstData.Contains("c(") Then
+            Return strLstData
+        End If
+
+        ' Regular expression pattern to match values inside c(...) or "..."
+        Dim pattern As String = "c\(([^)]+)\)|""([^""]+)"""
+        Dim matches As MatchCollection = Regex.Matches(strLstData, pattern)
+        Dim lstExtractedContents As New List(Of String)
+
+        ' Iterate through matches
+        For Each match As Match In matches
+            ' If it's a c(...) match, extracts the content inside the parentheses. Split the extracted content by commas, trimm extra spaces and double quotes then added to a list of extracted contents.
+            ' if it's a string "..." match, directly add the content (minus the double quotes) to the list of extracted contents.
+
+            Dim strInnerListContent As String = If(match.Value.Contains("c("), match.Groups(1).Value, match.Value)
+            Dim arrInnerListContentTrimmed As String() = strInnerListContent.Split(","c).Select(Function(item) item.Trim().Trim(""""c)).ToArray()
+            lstExtractedContents.AddRange(arrInnerListContentTrimmed)
+        Next
+
+        ' Join the extracted contents
+        Dim strExtractedContents As String = String.Join(", ", lstExtractedContents)
+
+        ' Replace ":" with ", " because, in R data structure format, colons are often used to separate key-value pairs. 
+        ' Replacing colons with commas and spaces make the data more user-friendly.
+        strExtractedContents = strExtractedContents.Replace(":", ", ")
+
+        Return strExtractedContents
+    End Function
+
+    Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False) Implements IDataViewGrid.AdjustColumnWidthAfterWrapping
+        Dim iColumnIndex As Integer = GetColumnIndex(strColName:=strColumn)
+        If iColumnIndex < 0 OrElse grdData.CurrentWorksheet.ColumnHeaders(iColumnIndex).Text.Contains("(G)") Then
+            MsgBox("Cannot wrap or unwrap this type of variable.")
+            Exit Sub
+        End If
+
+        If bApplyWrap Then
+            grdData.CurrentWorksheet.AutoFitColumnWidth(iColumnIndex)
+            For i As Integer = 0 To grdData.CurrentWorksheet.RowCount - 1
+                grdData.CurrentWorksheet.AutoFitRowHeight(i)
+            Next
+        Else
+            grdData.CurrentWorksheet.SetRowsHeight(1, grdData.CurrentWorksheet.RowCount, 20)
+            grdData.CurrentWorksheet.SetColumnsWidth(0, grdData.CurrentWorksheet.ColumnCount, 70)
+        End If
+    End Sub
+
     Private Sub RefreshSingleCell(iColumn As Integer, iRow As Integer)
         grdData.CurrentWorksheet(iRow, iColumn) = GetCurrentDataFrameFocus.DisplayedData(iRow, iColumn)
     End Sub
-
-    Private Function GetInnerBracketedString(strData As String) As String
-        Dim intFirstRightBracket As Integer = InStr(strData, ")")
-        Dim intLastLeftBracket As Integer = InStrRev(strData, "(")
-        If intFirstRightBracket = 0 Or intLastLeftBracket = 0 Then
-            Return strData
-        Else
-            Dim strOutput As String = Mid(strData, intLastLeftBracket + 1, intFirstRightBracket - intLastLeftBracket - 1)
-            Return strOutput
-        End If
-    End Function
 
     Public Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay) Implements IDataViewGrid.GetSelectedColumns
         Dim lstColumns As New List(Of clsColumnHeaderDisplay)
@@ -117,6 +176,14 @@ Public Class ucrDataViewReoGrid
             lstColumns.Add(GetCurrentDataFrameFocus().clsVisibleDataFramePage.lstColumns(i))
         Next
         Return lstColumns
+    End Function
+
+    Public Function GetFirstRowHeader() As String Implements IDataViewGrid.GetFirstRowHeader
+        Return grdData.CurrentWorksheet.RowHeaders(0).Text
+    End Function
+
+    Public Function GetLastRowHeader() As String Implements IDataViewGrid.GetLastRowHeader
+        Return grdData.CurrentWorksheet.RowHeaders(grdData.CurrentWorksheet.RowCount - 1).Text
     End Function
 
     Public Function GetWorksheetCount() As Integer Implements IDataViewGrid.GetWorksheetCount
@@ -177,7 +244,6 @@ Public Class ucrDataViewReoGrid
         RefreshSingleCell(e.Cell.Column, e.Cell.Row)
     End Sub
 
-
     Private Sub Worksheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs)
         e.IsCancelled = True 'prevents pasted data from being added directly into the data view
         'validate columns
@@ -202,4 +268,148 @@ Public Class ucrDataViewReoGrid
         End If
     End Sub
 
+    Private Sub Worksheet_AfterCellKeyDownEventArgs(sender As Object, e As KeyEventArgs) Handles grdData.KeyDown
+
+        If (e.KeyCode And Not Keys.Modifiers) = Keys.E AndAlso e.Modifiers = Keys.Control Then
+            'e.IsCancelled = True
+            RaiseEvent EditCell()
+        ElseIf (e.KeyCode And Not Keys.Modifiers) = Keys.F AndAlso e.Modifiers = Keys.Control Then
+            RaiseEvent FindRow()
+        End If
+    End Sub
+
+    Private Function GetColumnIndex(strColName As String) As Integer
+        Dim currWorksheet = grdData.CurrentWorksheet
+        If currWorksheet IsNot Nothing Then
+            For i As Integer = 0 To currWorksheet.Columns - 1
+                Dim strCol As String = currWorksheet.ColumnHeaders(i).Text
+                If Trim(strCol.Split("(")(0)) = strColName.Replace("""", "") Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
+
+    Private Function GetRowIndex(currWorkSheet As Worksheet, strRowName As String) As Integer
+        If currWorkSheet IsNot Nothing Then
+            For i As Integer = 0 To currWorkSheet.Rows - 1
+                Dim strCol As String = currWorkSheet.RowHeaders(i).Text
+                If strCol = strRowName Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
+
+    Private Function GetRowsIndexes(currWorkSheet As Worksheet, lstRows As List(Of Integer)) As List(Of Integer)
+        Dim lstRowsIndexes As New List(Of Integer)
+        If currWorkSheet IsNot Nothing Then
+            For i As Integer = 0 To lstRows.Count - 1
+                For j As Integer = 0 To currWorkSheet.Rows - 1
+                    Dim strCol As String = currWorkSheet.RowHeaders(j).Text
+                    If strCol = lstRows(i) Then
+                        lstRowsIndexes.Add(j)
+                    End If
+                Next
+            Next
+        End If
+        Return lstRowsIndexes
+    End Function
+
+    Private Sub ScrollToCellPos(currWorkSheet As Worksheet, iRow As Integer, iCol As Integer, bApplyToRows As Boolean)
+
+        If bApplyToRows Then
+            currWorkSheet.SelectRows(iRow, 1)
+        Else
+            currWorkSheet.FocusPos = currWorkSheet.Cells(row:=iRow, col:=iCol).Position
+        End If
+        currWorkSheet.ScrollToCell(currWorkSheet.Cells(row:=iRow, col:=iCol).Address)
+    End Sub
+
+    Private Sub SetRowOrCellBackgroundColor(currWorkSheet As Worksheet, rowNumbers As List(Of Integer), colIndex As Integer, bApplyToRows As Boolean, color As Color)
+        ' Create a new style object for the row background color
+        Dim rowStyle As WorksheetRangeStyle = New WorksheetRangeStyle With {
+            .Flag = PlainStyleFlag.BackColor,
+            .BackColor = color
+        }
+
+        ' Iterate over the row numbers and apply the style to each row
+        For Each rowNumber As Integer In rowNumbers
+            ' Check if the row index is within the valid range
+            If rowNumber >= 0 AndAlso rowNumber < currWorkSheet.RowCount Then
+                If bApplyToRows Then
+                    For i As Integer = 0 To currWorkSheet.ColumnCount - 1
+                        ' Apply the row style to the entire row
+                        currWorkSheet.Cells(rowNumber, i).Style.BackColor = color
+                    Next
+                Else
+                    currWorkSheet.Cells(rowNumber, colIndex).Style.BackColor = color
+                End If
+            End If
+        Next
+    End Sub
+
+    Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
+                            Optional bApplyToRows As Boolean = False) Implements IDataViewGrid.SearchRowInGrid
+        Dim currSheet = grdData.CurrentWorksheet
+
+        If currSheet.RowHeaders.Any(Function(x) x.Text = iRow) Then
+            Dim iRowIndex As Integer = GetRowIndex(currSheet, iRow)
+            Dim iColIndex As Integer = If(strColumn = Chr(34) & "filter" & Chr(34), 0, GetColumnIndex(strColName:=strColumn))
+
+            If iRowIndex > -1 AndAlso iColIndex > -1 Then
+                ScrollToCellPos(currWorkSheet:=currSheet, iRow:=iRowIndex, iCol:=iColIndex, bApplyToRows:=bApplyToRows)
+                If bApplyToRows Then
+                    SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
+                                         colIndex:=currSheet.ColumnCount, bApplyToRows:=bApplyToRows, color:=Color.LightGreen)
+                Else
+                    SetRowOrCellBackgroundColor(currWorkSheet:=currSheet, rowNumbers:=GetRowsIndexes(currSheet, rowNumbers),
+                                         colIndex:=iColIndex, bApplyToRows:=bApplyToRows, color:=Color.LightGreen)
+                End If
+            End If
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' This function takes an integer columnNumber as input and returns a string representing the corresponding Reogrid-style column letter. 
+    ''' For example, 1 will be converted to "A", 26 to "Z", 27 to "AA", 28 to "AB", and so on.
+    ''' </summary>
+    ''' <param name="columnNumber"></param>
+    ''' <returns></returns>
+    Private Function ColumnNumberToAlpha(columnNumber As Integer) As String
+        Dim dividend As Integer = columnNumber
+        Dim columnName As String = String.Empty
+        Dim modulo As Integer
+
+        While dividend > 0
+            modulo = (dividend - 1) Mod 26
+            columnName = Convert.ToChar(65 + modulo) & columnName
+            dividend = CInt((dividend - modulo) / 26)
+        End While
+
+        Return columnName
+    End Function
+
+    Public Sub SelectColumnInGrid(strColumn As String) Implements IDataViewGrid.SelectColumnInGrid
+
+        If String.IsNullOrEmpty(strColumn) Then
+            Exit Sub
+        End If
+
+        Dim currSheet = grdData.CurrentWorksheet
+        Dim iColumn As Integer = grdData.CurrentWorksheet.ColumnHeaders.
+                                      Where(Function(col) col.Text.Split("(")(0).Trim = strColumn).
+                                      FirstOrDefault().Index ' Get the correspond index of a column from a column name.
+
+        Dim strOriginalColumnName As String = ColumnNumberToAlpha(iColumn + 1) & "1"
+        currSheet.ScrollToCell(strOriginalColumnName)
+        currSheet.SelectColumns(iColumn, 1)
+        ' Set the background color for the entire column
+        currSheet.SetRangeStyles(0, iColumn, currSheet.RowCount, 1, New WorksheetRangeStyle With {
+            .Flag = PlainStyleFlag.BackColor,
+            .BackColor = Color.LightGreen
+        })
+    End Sub
 End Class

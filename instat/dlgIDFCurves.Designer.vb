@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgPasteSpecial
+Partial Class dlgIDFCurves
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,31 +22,20 @@ Partial Class dlgPasteSpecial
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrCheck1 = New instat.ucrCheck()
         Me.SuspendLayout()
         '
-        'UcrCheck1
+        'dlgIDFCurves
         '
-        Me.UcrCheck1.AutoSize = True
-        Me.UcrCheck1.Checked = False
-        Me.UcrCheck1.Location = New System.Drawing.Point(172, 48)
-        Me.UcrCheck1.Name = "UcrCheck1"
-        Me.UcrCheck1.Size = New System.Drawing.Size(100, 23)
-        Me.UcrCheck1.TabIndex = 0
-        '
-        'dlgPasteSpecial
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(545, 196)
-        Me.Controls.Add(Me.UcrCheck1)
-        Me.Name = "dlgPasteSpecial"
-        Me.Text = "dlgPasteSpecial"
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(487, 450)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "dlgIDFCurves"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "IDF Curves"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents UcrCheck1 As ucrCheck
 End Class

@@ -252,3 +252,7 @@ installer/Output/
 
 /packages/NLog.*/
 /packages/Newtonsoft.Json.*/
+
+# RScript package and dependencies
+/packages/RScript.*/
+/packages/System.Collections.Specialized.*/
