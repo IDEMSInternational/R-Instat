@@ -53,10 +53,10 @@ Partial Class dlgAutoSaveRecovery
         Me.lblInternalLogSavedTo = New System.Windows.Forms.Label()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.grpSavingOptions = New System.Windows.Forms.GroupBox()
-        Me.grpEndChoice = New System.Windows.Forms.GroupBox()
         Me.ucrInputSavedPathInternalLog = New instat.ucrInputTextBox()
         Me.ucrInputSavedPathLog = New instat.ucrInputTextBox()
         Me.ucrInputSavedPathData = New instat.ucrInputTextBox()
+        Me.grpEndChoice = New System.Windows.Forms.GroupBox()
         Me.ucrChkSendInternalLog = New instat.ucrCheck()
         Me.grpSavingOptions.SuspendLayout()
         Me.grpEndChoice.SuspendLayout()
@@ -76,27 +76,27 @@ Partial Class dlgAutoSaveRecovery
         '
         'cmdRunLog
         '
-        Me.cmdRunLog.Location = New System.Drawing.Point(39, 24)
+        Me.cmdRunLog.Location = New System.Drawing.Point(11, 24)
         Me.cmdRunLog.Name = "cmdRunLog"
-        Me.cmdRunLog.Size = New System.Drawing.Size(131, 29)
+        Me.cmdRunLog.Size = New System.Drawing.Size(190, 29)
         Me.cmdRunLog.TabIndex = 1
         Me.cmdRunLog.Text = "Run Backup Log"
         Me.cmdRunLog.UseVisualStyleBackColor = True
         '
         'cmdNewSession
         '
-        Me.cmdNewSession.Location = New System.Drawing.Point(341, 24)
+        Me.cmdNewSession.Location = New System.Drawing.Point(415, 24)
         Me.cmdNewSession.Name = "cmdNewSession"
-        Me.cmdNewSession.Size = New System.Drawing.Size(131, 29)
+        Me.cmdNewSession.Size = New System.Drawing.Size(181, 29)
         Me.cmdNewSession.TabIndex = 2
         Me.cmdNewSession.Text = "Start New Session"
         Me.cmdNewSession.UseVisualStyleBackColor = True
         '
         'cmdLoadData
         '
-        Me.cmdLoadData.Location = New System.Drawing.Point(190, 24)
+        Me.cmdLoadData.Location = New System.Drawing.Point(213, 24)
         Me.cmdLoadData.Name = "cmdLoadData"
-        Me.cmdLoadData.Size = New System.Drawing.Size(131, 29)
+        Me.cmdLoadData.Size = New System.Drawing.Size(195, 29)
         Me.cmdLoadData.TabIndex = 3
         Me.cmdLoadData.Text = "Load Backup Data"
         Me.cmdLoadData.UseVisualStyleBackColor = True
@@ -212,18 +212,6 @@ Partial Class dlgAutoSaveRecovery
         Me.grpSavingOptions.TabStop = False
         Me.grpSavingOptions.Text = "Saving Options"
         '
-        'grpEndChoice
-        '
-        Me.grpEndChoice.Controls.Add(Me.cmdRunLog)
-        Me.grpEndChoice.Controls.Add(Me.cmdNewSession)
-        Me.grpEndChoice.Controls.Add(Me.cmdLoadData)
-        Me.grpEndChoice.Location = New System.Drawing.Point(124, 294)
-        Me.grpEndChoice.Name = "grpEndChoice"
-        Me.grpEndChoice.Size = New System.Drawing.Size(509, 66)
-        Me.grpEndChoice.TabIndex = 20
-        Me.grpEndChoice.TabStop = False
-        Me.grpEndChoice.Text = "Choose one of the following to proceed"
-        '
         'ucrInputSavedPathInternalLog
         '
         Me.ucrInputSavedPathInternalLog.AddQuotesIfUnrecognised = True
@@ -256,6 +244,18 @@ Partial Class dlgAutoSaveRecovery
         Me.ucrInputSavedPathData.Name = "ucrInputSavedPathData"
         Me.ucrInputSavedPathData.Size = New System.Drawing.Size(258, 21)
         Me.ucrInputSavedPathData.TabIndex = 12
+        '
+        'grpEndChoice
+        '
+        Me.grpEndChoice.Controls.Add(Me.cmdRunLog)
+        Me.grpEndChoice.Controls.Add(Me.cmdNewSession)
+        Me.grpEndChoice.Controls.Add(Me.cmdLoadData)
+        Me.grpEndChoice.Location = New System.Drawing.Point(107, 294)
+        Me.grpEndChoice.Name = "grpEndChoice"
+        Me.grpEndChoice.Size = New System.Drawing.Size(602, 66)
+        Me.grpEndChoice.TabIndex = 20
+        Me.grpEndChoice.TabStop = False
+        Me.grpEndChoice.Text = "Choose one of the following to proceed"
         '
         'ucrChkSendInternalLog
         '
