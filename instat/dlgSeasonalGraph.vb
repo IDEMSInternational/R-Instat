@@ -403,8 +403,8 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
                     Dim clsRaesRibFunction As New RFunction
                     clsRaesRibFunction.SetPackageName("ggplot2")
                     clsRaesRibFunction.SetRCommand("aes")
-                    clsRaesRibFunction.AddParameter("ymax", var1, iPosition:=i)
-                    clsRaesRibFunction.AddParameter("ymin", var2, iPosition:=i)
+                    clsRaesRibFunction.AddParameter("ymax", var1, iPosition:=0)
+                    clsRaesRibFunction.AddParameter("ymin", var2, iPosition:=1)
 
                     Dim clsRibFunction As New RFunction
                     clsRibFunction.SetPackageName("ggplot2")
