@@ -98,7 +98,7 @@ Public Class clsOutputElement
             Dim _lstRScriptElements As New List(Of clsRScriptElement)
             Try
                 Dim rScript As New RScript("")
-                Dim lstTokens As List(Of RToken) = New RTokenList(_strScript).Tokens
+                Dim lstTokens As List(Of RToken) = New RTokenList(_strScript).TokensFlat
                 'todo Dim lstTokens As List(Of RToken) = rScript.GetLstTokens(rScript.GetLstLexemes(_strScript)) 'rScript.lstTokens
                 If lstTokens IsNot Nothing Then
                     For Each rToken In lstTokens
