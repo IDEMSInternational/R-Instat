@@ -384,7 +384,6 @@ Imports RDotNet
         OutputFont.RBracketFont = fntNew
         OutputFont.RSeparatorFont = fntNew
         OutputFont.REndStatementFont = fntNew
-        OutputFont.REndScriptFont = fntNew
         OutputFont.RNewLineFont = fntNew
         OutputFont.ROperatorUnaryLeftFont = fntNew
         OutputFont.ROperatorUnaryRightFont = fntNew
@@ -401,7 +400,6 @@ Imports RDotNet
         OutputFont.RBracketColour = clrNew
         OutputFont.RSeparatorColour = clrNew
         OutputFont.REndStatementColour = clrNew
-        OutputFont.REndScriptColour = clrNew
         OutputFont.RNewLineColour = clrNew
         OutputFont.ROperatorUnaryLeftColour = clrNew
         OutputFont.ROperatorUnaryRightColour = clrNew

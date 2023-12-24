@@ -18,7 +18,8 @@ Imports System.Runtime.InteropServices
 Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
-Imports RScript
+'Imports RScript
+Imports RInsightF461
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R interface. 
@@ -724,7 +725,7 @@ Public Class RLink
     '''
     ''' <param name="clsRStatement">  The R code statement to execute </param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub RunRStatement(clsRStatement As clsRStatement)
+    Public Sub RunRStatement(clsRStatement As RInsightF461.RStatement)
 
         Dim strRStatement = clsRStatement.GetAsExecutableScript()
 
@@ -2218,7 +2219,7 @@ Public Class RLink
     '''
     ''' <returns>   The list of clsRParameters. </returns>
     '''--------------------------------------------------------------------------------------------
-    Private Function GetRFunctionDefinitionParameters(strFunctionName As String) As List(Of clsRParameter)
+    Private Function GetRFunctionDefinitionParameters(strFunctionName As String) As List(Of RInsightF461.RParameter)
         'Note: this function is not currently called but it will be used in future
         '      functionality to populate dialogs from script.
         '      Please do not delete this function. (@lloyddewit 24/11/21)
@@ -2227,7 +2228,7 @@ Public Class RLink
         Dim strTempAssignTo As String = ".temp_func"
         Dim expTemp As SymbolicExpression
         Dim clsFormalsFunction As New RFunction
-        Dim lstRParameters As New List(Of clsRParameter)
+        Dim lstRParameters As New List(Of RInsightF461.RParameter)
         Dim clsAsListFunction As New RFunction
 
         clsAsListFunction.SetRCommand("as.list")
@@ -2261,7 +2262,7 @@ Public Class RLink
         'parameter value position
         Dim iParameterValue As Integer = 1
         While (iParameterName < expTemp.AsCharacter().Length)
-            Dim clsNewRParameter As New clsRParameter
+            Dim clsNewRParameter As New RInsightF461.RParameter
 
             'Assign the parameter Name
             clsNewRParameter.strArgName = expTemp.AsCharacter(iParameterName).TrimStart("$")
@@ -2269,13 +2270,13 @@ Public Class RLink
             'check to remove the [1] notation before some parameter values
             If expTemp.AsCharacter(iParameterValue).Contains("[1]") Then
                 Dim strcleanArgument As String = expTemp.AsCharacter(iParameterValue).Remove(expTemp.AsCharacter(iParameterValue).IndexOf("["), 3)
-                clsNewRParameter.clsArgValueDefault = New clsRScript(strcleanArgument).dctRStatements(0).clsElement
+                clsNewRParameter.clsArgValueDefault = New RInsightF461.RScript(strcleanArgument).statements(0).clsElement
             Else
                 'Empty String are Not accepted hence the modification below
                 If String.IsNullOrEmpty(expTemp.AsCharacter(iParameterValue)) Then
-                    clsNewRParameter.clsArgValueDefault = New clsRScript("NODEFAULTVALUE").dctRStatements(0).clsElement
+                    clsNewRParameter.clsArgValueDefault = New RInsightF461.RScript("NODEFAULTVALUE").statements(0).clsElement
                 Else
-                    clsNewRParameter.clsArgValueDefault = New clsRScript(expTemp.AsCharacter(iParameterValue)).dctRStatements(0).clsElement
+                    clsNewRParameter.clsArgValueDefault = New RInsightF461.RScript(expTemp.AsCharacter(iParameterValue)).statements(0).clsElement
                 End If
 
             End If
