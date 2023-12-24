@@ -725,7 +725,7 @@ Public Class RLink
     '''
     ''' <param name="clsRStatement">  The R code statement to execute </param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub RunRStatement(clsRStatement As RInsightF461.RStatement)
+    Public Sub RunRStatement(clsRStatement As RStatement)
 
         Dim strRStatement = clsRStatement.GetAsExecutableScript()
 
@@ -2270,13 +2270,13 @@ Public Class RLink
             'check to remove the [1] notation before some parameter values
             If expTemp.AsCharacter(iParameterValue).Contains("[1]") Then
                 Dim strcleanArgument As String = expTemp.AsCharacter(iParameterValue).Remove(expTemp.AsCharacter(iParameterValue).IndexOf("["), 3)
-                clsNewRParameter.clsArgValueDefault = New RInsightF461.RScript(strcleanArgument).statements(0).clsElement
+                clsNewRParameter.clsArgValueDefault = New RScript(strcleanArgument).statements(0).clsElement
             Else
                 'Empty String are Not accepted hence the modification below
                 If String.IsNullOrEmpty(expTemp.AsCharacter(iParameterValue)) Then
-                    clsNewRParameter.clsArgValueDefault = New RInsightF461.RScript("NODEFAULTVALUE").statements(0).clsElement
+                    clsNewRParameter.clsArgValueDefault = New RScript("NODEFAULTVALUE").statements(0).clsElement
                 Else
-                    clsNewRParameter.clsArgValueDefault = New RInsightF461.RScript(expTemp.AsCharacter(iParameterValue)).statements(0).clsElement
+                    clsNewRParameter.clsArgValueDefault = New RScript(expTemp.AsCharacter(iParameterValue)).statements(0).clsElement
                 End If
 
             End If

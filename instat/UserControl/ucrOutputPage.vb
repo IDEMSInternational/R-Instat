@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Runtime.InteropServices
+Imports RInsightF461
+
 ''' <summary>
 ''' Output page for R outputs
 ''' </summary>
@@ -191,7 +193,7 @@ Public Class ucrOutputPage
             If frmMain.clsInstatOptions.bIncludeCommentDefault Then
                 'show comments only
                 For Each line As clsRScriptElement In formattedRScript
-                    If line.Type = RInsightF461.RToken.TokenTypes.RComment Then
+                    If line.Type = RToken.TokenTypes.RComment Then
                         AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
                     End If
                 Next
@@ -199,7 +201,7 @@ Public Class ucrOutputPage
             ElseIf frmMain.clsInstatOptions.bCommandsinOutput Then
                 'show command lines that are not comments
                 For Each line As clsRScriptElement In formattedRScript
-                    If Not (line.Type = RInsightF461.RToken.TokenTypes.RComment) Then
+                    If Not (line.Type = RToken.TokenTypes.RComment) Then
                         AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
                     End If
                 Next

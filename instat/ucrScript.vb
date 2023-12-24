@@ -17,7 +17,6 @@
 Imports System.Collections.Specialized
 Imports System.IO
 Imports System.Windows.Controls
-'Imports RScript
 Imports RInsightF461
 Imports ScintillaNET
 
