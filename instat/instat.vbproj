@@ -239,6 +239,12 @@
     <Compile Include="dlgEdit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportForCimpact.Designer.vb">
+      <DependentUpon>dlgExportForCimpact.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportForCimpact.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFindInVariableOrFilter.Designer.vb">
       <DependentUpon>dlgFindInVariableOrFilter.vb</DependentUpon>
     </Compile>
@@ -3037,6 +3043,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEdit.resx">
       <DependentUpon>dlgEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportForCimpact.resx">
+      <DependentUpon>dlgExportForCimpact.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToClimsoft.resx">
       <DependentUpon>dlgExportToClimsoft.vb</DependentUpon>
