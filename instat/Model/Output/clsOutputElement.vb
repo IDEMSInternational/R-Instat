@@ -108,11 +108,7 @@ Public Class clsOutputElement
                     Next
                 End If
             Catch ex As Exception
-                MessageBox.Show("Unable to parse the following R Script: '" & _strScript & "'." &
-                            Environment.NewLine & ex.Message,
-                            "Developer Error",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error)
+                Return New List(Of clsRScriptElement)
             End Try
             Return _lstRScriptElements
         End Get

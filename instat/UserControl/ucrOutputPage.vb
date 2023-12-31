@@ -165,8 +165,13 @@ Public Class ucrOutputPage
          .BorderStyle = BorderStyle.None
         }
 
+        Dim formattedRScript As List(Of clsRScriptElement) = outputElement.FormattedRScript
         'if settings are not available or both show commands and comments settings are enabled then just show the whole script
-        FillRichTextWithRScriptBasedOnSettings(richTextBox, outputElement.FormattedRScript)
+        If formattedRScript.Count > 0 Then
+            FillRichTextWithRScriptBasedOnSettings(richTextBox, formattedRScript)
+        Else
+            AddFormatedTextToRichTextBox(richTextBox, outputElement.Script, OutputFont.RPresentationFont, OutputFont.RPresentationColour)
+        End If
 
         'if no contents added just exit sub
         If richTextBox.TextLength = 0 Then
@@ -419,7 +424,13 @@ Public Class ucrOutputPage
     Private Sub AddElementToRichTextBox(element As clsOutputElement, richText As RichTextBox)
         Select Case element.OutputType
             Case OutputType.Script
-                FillRichTextWithRScriptBasedOnSettings(richText, element.FormattedRScript)
+                Dim formattedRScript As List(Of clsRScriptElement) = element.FormattedRScript
+                'if settings are not available or both show commands and comments settings are enabled then just show the whole script
+                If formattedRScript.Count > 0 Then
+                    FillRichTextWithRScriptBasedOnSettings(richText, formattedRScript)
+                Else
+                    AddFormatedTextToRichTextBox(richText, element.Script, OutputFont.RPresentationFont, OutputFont.RPresentationColour)
+                End If
             Case OutputType.TextOutput
                 Dim strOutput As String = ""
                 If element.IsFile Then
