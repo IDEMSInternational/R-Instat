@@ -5537,4 +5537,5 @@ Public Class sdgPlots
         HideShowCanvaFill()
         GroupeColorScale()
     End Sub
+
 End Class
