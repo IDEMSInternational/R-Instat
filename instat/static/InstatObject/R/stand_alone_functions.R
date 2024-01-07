@@ -3006,3 +3006,29 @@ getExample <- function (topic, package = NULL, lib.loc = NULL, character.only = 
   }
   return(example_text)
 }
+
+get_list_all_env_names <- function(){
+  # Get the list of objects in the global environment
+  objects_list <- ls()
+  
+  # Get the list of attached packages
+  attached_packages <- search()
+  attached_packages <- c(attached_packages, "package:base")
+  
+  # Extract package names from the search path
+  package_names <- sapply(strsplit(attached_packages, ":"), function(x) tail(x, 1))
+  
+  # Get the list of functions in the attached packages
+  functions_list <- character(0)  # Initialize an empty character vector
+  for (package in package_names) {
+    if (require(package, character.only = TRUE)){
+      functions_list <- c(functions_list, ls(paste0("package:", package)))
+    }
+  }
+  sd_alone_func <- ls()
+  
+  # Combine the lists
+  combined_list <- c(objects_list, package_names, functions_list, sd_alone_func)
+  return(combined_list)
+}
+

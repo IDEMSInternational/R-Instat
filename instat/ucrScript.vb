@@ -19,6 +19,7 @@ Imports System.IO
 Imports System.Windows.Controls
 Imports RScript
 Imports ScintillaNET
+Imports RDotNet
 
 Public Class ucrScript
 
@@ -26,6 +27,8 @@ Public Class ucrScript
     Private iMaxLineNumberCharLength As Integer = 0
     Private Const iTabIndexLog As Integer = 0
     Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
+
+    Private lstEnvNames As List(Of String)
 
     Friend WithEvents clsScriptActive As Scintilla
     Friend WithEvents clsScriptLog As Scintilla
@@ -71,6 +74,8 @@ Public Class ucrScript
 
         'Make the script tab the selected tab
         TabControl.SelectTab(1)
+
+        GetListEnvNames()
     End Sub
 
     Private Sub SetupInitialLayout()
@@ -758,6 +763,32 @@ Public Class ucrScript
     Private Sub clsScriptActive_CharAdded(sender As Object, e As CharAddedEventArgs) Handles clsScriptActive.CharAdded
         InsertMatchedChars(ChrW(e.Char))
         InsertIndent(e.Char)
+
+        Dim currentPos = clsScriptActive.CurrentPosition
+        Dim wordStartPos = clsScriptActive.WordStartPosition(currentPos, True)
+
+        ' Display the autocompletion list
+        Dim lenEntered = currentPos - wordStartPos
+        If lenEntered > 0 Then
+            If Not clsScriptActive.AutoCActive Then
+                clsScriptActive.AutoCShow(lenEntered, String.Join(" ", lstEnvNames))
+            End If
+        End If
+    End Sub
+
+    Private Sub GetListEnvNames()
+        Dim clsListEnvNamesFunction As New RFunction
+        Dim chrDataFrameNames As CharacterVector = Nothing
+        Dim expNames As SymbolicExpression
+
+        lstEnvNames = New List(Of String)
+
+        clsListEnvNamesFunction.SetRCommand("get_list_all_env_names")
+        expNames = frmMain.clsRLink.RunInternalScriptGetValue(clsListEnvNamesFunction.ToScript(), bSilent:=True)
+        If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
+            chrDataFrameNames = expNames.AsCharacter
+            lstEnvNames.AddRange(chrDataFrameNames)
+        End If
     End Sub
 
     Private Sub clsScriptActive_TextChanged(sender As Object, e As EventArgs) Handles clsScriptActive.TextChanged
@@ -921,6 +952,17 @@ Public Class ucrScript
         End If
 
         RunScript(clsScriptActive.Text, "Code run from Script Window (all text)")
+
+        SetFocusAndScrollCaret()
+    End Sub
+
+    ' Ensure the cursor is visible by scrolling it into view
+    Private Sub SetFocusAndScrollCaret()
+        ' Set focus back to the ScintillaNET editor control
+        clsScriptActive.Focus()
+
+        ' Ensure the cursor is visible by scrolling it into view
+        clsScriptActive.ScrollCaret()
     End Sub
 
     Private Sub mnuRunCurrentStatementSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentStatementSelection.Click, cmdRunStatementSelection.Click
@@ -929,6 +971,8 @@ Public Class ucrScript
         Else
             RunCurrentStatement()
         End If
+
+        SetFocusAndScrollCaret()
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
