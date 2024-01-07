@@ -952,6 +952,17 @@ Public Class ucrScript
         End If
 
         RunScript(clsScriptActive.Text, "Code run from Script Window (all text)")
+
+        SetFocusAndScrollCaret()
+    End Sub
+
+    ' Ensure the cursor is visible by scrolling it into view
+    Private Sub SetFocusAndScrollCaret()
+        ' Set focus back to the ScintillaNET editor control
+        clsScriptActive.Focus()
+
+        ' Ensure the cursor is visible by scrolling it into view
+        clsScriptActive.ScrollCaret()
     End Sub
 
     Private Sub mnuRunCurrentStatementSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentStatementSelection.Click, cmdRunStatementSelection.Click
@@ -960,6 +971,8 @@ Public Class ucrScript
         Else
             RunCurrentStatement()
         End If
+
+        SetFocusAndScrollCaret()
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
