@@ -55,18 +55,18 @@ Partial Class dlgInstallRPackage
         Me.ucrInputMessage.AutoSize = True
         Me.ucrInputMessage.IsMultiline = False
         Me.ucrInputMessage.IsReadOnly = True
-        Me.ucrInputMessage.Location = New System.Drawing.Point(105, 81)
+        Me.ucrInputMessage.Location = New System.Drawing.Point(95, 81)
         Me.ucrInputMessage.Name = "ucrInputMessage"
-        Me.ucrInputMessage.Size = New System.Drawing.Size(319, 22)
+        Me.ucrInputMessage.Size = New System.Drawing.Size(337, 22)
         Me.ucrInputMessage.TabIndex = 17
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(14, 130)
+        Me.ucrBase.Location = New System.Drawing.Point(24, 130)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 15
         '
         'ucrInputTextBoxRPackage
