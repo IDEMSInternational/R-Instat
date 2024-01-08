@@ -727,10 +727,8 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     Public Sub RunRStatement(clsRStatement As RStatement)
 
-        Dim strRStatement = clsRStatement.GetAsExecutableScript()
-
         'if there is no script to run then just ignore and exit sub
-        If String.IsNullOrWhiteSpace(strRStatement) Then
+        If String.IsNullOrWhiteSpace(clsRStatement.Text) Then
             Exit Sub
         End If
 
@@ -738,30 +736,28 @@ Public Class RLink
             Dim strOutput As String = ""
 
             'if not an assignment operation, then capture the output
-            Dim strRStatementNoFormatting As String =
-                    clsRStatement.GetAsExecutableScript(bIncludeFormatting:=False)
-            If IsStatementViewObject(strRStatementNoFormatting) Then
-                strOutput = GetFileOutput(strRStatementNoFormatting, bSilent:=False,
+            If IsStatementViewObject(clsRStatement.TextNoFormatting) Then
+                strOutput = GetFileOutput(clsRStatement.TextNoFormatting, bSilent:=False,
                                       bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
-            ElseIf clsRStatement.clsAssignment Is Nothing _
-                AndAlso Not String.IsNullOrWhiteSpace(strRStatementNoFormatting) Then
+            ElseIf Not clsRStatement.IsAssignment _
+                AndAlso Not String.IsNullOrWhiteSpace(clsRStatement.TextNoFormatting) Then
                 strOutput = GetFileOutput("view_object_data(object = " _
-                                          & strRStatementNoFormatting _
+                                          & clsRStatement.TextNoFormatting _
                                           & " , object_format = 'text' )", bSilent:=False,
                                           bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
             Else
-                Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False,
+                Evaluate(clsRStatement.Text, bSilent:=False, bSeparateThread:=False,
                          bShowWaitDialogOverride:=Nothing)
             End If
 
-            clsOutputLogger.AddOutput(strRStatement, strOutput, bAsFile:=True,
-                    bDisplayOutputInExternalViewer:=strRStatementNoFormatting.StartsWith("view_object_data"))
-            LogScript(strRStatement.TrimEnd(vbCr, vbLf))
+            clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
+                    bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
+            LogScript(clsRStatement.Text.TrimEnd(vbCr, vbLf))
 
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine &
                    "The error occurred in attempting to run the following R command:" &
-                   Environment.NewLine & strRStatement, MsgBoxStyle.Critical,
+                   Environment.NewLine & clsRStatement.Text, MsgBoxStyle.Critical,
                    "Error running R command")
         End Try
     End Sub
@@ -2195,107 +2191,6 @@ Public Class RLink
             Next
         End If
         Return strReconstructedComment
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   
-    ''' Gets the list of clsRParameters from the <paramref name="strFunctionName"/> function 
-    ''' definition. 
-    ''' For example, the function "str_split(string, pattern, n = Inf, simplify = FALSE)" returns 
-    ''' the following parameters:
-    ''' <list type="bullet">
-    '''     <item><description>
-    '''             clsParameter 1: Argument Name ="string" , Parameter position = 0 , Default value = NOTHING 
-    '''     </description></item><item><description>
-    '''             clsParameter 2: Argument Name = "patterm" , Parameter position = 1 , Default value = NOTHING
-    '''     </description></item><item><description>
-    '''             clsParameter 3: Argument Name="n" , Parameter position = 2 , Default value = "Inf"
-    '''     </description></item><item><description>
-    '''             clsParameter 4: Argument Name="simplify" , Parameter position = 3 , Default value = "FALSE")
-    '''     </description></item>
-    ''' </list></summary>
-    ''' 
-    ''' <param name="strFunctionName">  The function name provided. </param>
-    '''
-    ''' <returns>   The list of clsRParameters. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Private Function GetRFunctionDefinitionParameters(strFunctionName As String) As List(Of RInsightF461.RParameter)
-        'Note: this function is not currently called but it will be used in future
-        '      functionality to populate dialogs from script.
-        '      Please do not delete this function. (@lloyddewit 24/11/21)
-
-        'temporary object that retrieves the output from the environment
-        Dim strTempAssignTo As String = ".temp_func"
-        Dim expTemp As SymbolicExpression
-        Dim clsFormalsFunction As New RFunction
-        Dim lstRParameters As New List(Of RInsightF461.RParameter)
-        Dim clsAsListFunction As New RFunction
-
-        clsAsListFunction.SetRCommand("as.list")
-        clsAsListFunction.AddParameter(clsRFunctionParameter:=clsFormalsFunction, bIncludeArgumentName:=False, iPosition:=0)
-
-        'The 'formals' function returns the parameters for a specified function. 
-        'for example, for the function "str_split(string, pattern, n = Inf, simplify = FALSE)", formals returns
-        '    $string
-        '    $pattern 
-        '    $n 
-        '    [1] Inf 
-        '    $simplify 
-        '    [1] FALSE 
-        clsFormalsFunction.SetRCommand("formals")
-        clsFormalsFunction.AddParameter(strParameterValue:=strFunctionName, bIncludeArgumentName:=False, iPosition:=0)
-
-        'TODO check that the fuction name provided has no pening and closing brackets at the end
-        '?QUESTION /CLARIFICATION Parameters value fror the function  ?gt::cols_merge() are being split into different parts
-        If Not Evaluate(strTempAssignTo & " <- " & "capture.output(" & clsAsListFunction.ToScript() & ")", bSilent:=True) Then
-            'Error getting the parameters either the function name provided is incorrect/package containing the function isn't loaded 
-            Return Nothing
-        End If
-        expTemp = GetSymbol(strTempAssignTo)
-        Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
-        If expTemp Is Nothing Then
-            Return Nothing
-        End If
-        Dim iNewArgPosition As Integer = 0
-        'parameter name position
-        Dim iParameterName As Integer = 0
-        'parameter value position
-        Dim iParameterValue As Integer = 1
-        While (iParameterName < expTemp.AsCharacter().Length)
-            Dim clsNewRParameter As New RInsightF461.RParameter
-
-            'Assign the parameter Name
-            clsNewRParameter.strArgName = expTemp.AsCharacter(iParameterName).TrimStart("$")
-            'Adding the parameter value
-            'check to remove the [1] notation before some parameter values
-            If expTemp.AsCharacter(iParameterValue).Contains("[1]") Then
-                Dim strcleanArgument As String = expTemp.AsCharacter(iParameterValue).Remove(expTemp.AsCharacter(iParameterValue).IndexOf("["), 3)
-                clsNewRParameter.clsArgValueDefault = New RScript(strcleanArgument).statements(0).clsElement
-            Else
-                'Empty String are Not accepted hence the modification below
-                If String.IsNullOrEmpty(expTemp.AsCharacter(iParameterValue)) Then
-                    clsNewRParameter.clsArgValueDefault = New RScript("NODEFAULTVALUE").statements(0).clsElement
-                Else
-                    clsNewRParameter.clsArgValueDefault = New RScript(expTemp.AsCharacter(iParameterValue)).statements(0).clsElement
-                End If
-
-            End If
-            'Assign the parameter Value
-            clsNewRParameter.iArgPosDefinition = iNewArgPosition
-
-            'TEMPORARY FUNCTIONALITY FOR PRESENTATION
-            Console.WriteLine("PARAMETER" & clsNewRParameter.iArgPosDefinition)
-            Console.WriteLine("..strArgumentName:" & clsNewRParameter.strArgName)
-            Console.WriteLine("..strArgumentValue:" & clsNewRParameter.clsArgValueDefault.strTxt)
-            Console.WriteLine("..ArgumentPosition:" & clsNewRParameter.iArgPosDefinition)
-
-            iNewArgPosition += 1
-            iParameterName += 3
-            iParameterValue += 3
-            lstRParameters.Add(clsNewRParameter)
-        End While
-
-        Return lstRParameters
     End Function
 
     Private Function IsStatementAssignment(strRStatement As String) As Boolean
