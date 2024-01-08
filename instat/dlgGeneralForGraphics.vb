@@ -56,6 +56,7 @@ Public Class dlgGeneralForGraphics
     Private clsFacetColOp As New ROperator
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
+    Private clsAddCodeOperator As New ROperator
 
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
@@ -162,6 +163,10 @@ Public Class dlgGeneralForGraphics
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
+        ucrChkAddCode.SetText("Add Code")
+        ucrChkAddCode.AddToLinkedControls({ucrInputAddCode}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="geom_hline(y = 20)")
+        ucrInputAddCode.SetItems({"geom_hline(y = 20)", "geom_vline(x=5)", "geom_vline(x=c(5,20))", "scale_x_binned()", "scale_x_binned(n.breaks=20)"})
+
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
@@ -184,6 +189,7 @@ Public Class dlgGeneralForGraphics
         clsFacetColOp = New ROperator
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
+        clsAddCodeOperator = New ROperator
 
         ucrSave.Reset()
 
@@ -235,6 +241,8 @@ Public Class dlgGeneralForGraphics
         clsScaleContinuousFunction.AddParameter("breaks", "1:12", iPosition:=1)
         clsScaleContinuousFunction.AddParameter("labels", clsRFunctionParameter:=clsLevelsFunction, iPosition:=2)
 
+        clsAddCodeOperator.SetOperation("", bBracketsTemp:=False)
+
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
@@ -269,6 +277,8 @@ Public Class dlgGeneralForGraphics
         ucrReceiverX.SetRCode(clsGlobalAesFunction, bReset)
         If bReset Then
             ucrChkUseasNumeric.SetRCode(clsDummyFunction, bReset)
+            ucrChkAddCode.SetRCode(clsAddCodeOperator, bReset)
+            ucrInputAddCode.SetRCode(clsAddCodeOperator, bReset)
         End If
         ucrFillReceiver.SetRCode(clsGlobalAesFunction, bReset)
         ucrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
@@ -743,7 +753,6 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub AddRemoveGroupBy()
-
         If clsPipeOperator.ContainsParameter("mutate") Then
             clsGroupByFunction.ClearParameters()
             If clsBaseOperator.ContainsParameter("facets") Then
@@ -780,5 +789,14 @@ Public Class dlgGeneralForGraphics
     Private Sub ucrGraphicsSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrGraphicsSelector.ControlValueChanged
         AutoFacetStation()
         SetPipeAssignTo()
+    End Sub
+
+    Private Sub ucrChkAddCode_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddCode.ControlValueChanged, ucrInputAddCode.ControlValueChanged
+        If ucrChkAddCode.Checked AndAlso Not ucrInputAddCode.IsEmpty Then
+            clsAddCodeOperator.AddParameter("code1", ucrInputAddCode.GetText(), bIncludeArgumentName:=False, iPosition:=1)
+            clsBaseOperator.AddParameter("newcode", clsROperatorParameter:=clsAddCodeOperator, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("newcode")
+        End If
     End Sub
 End Class
