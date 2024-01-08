@@ -50,6 +50,20 @@ Public Class dlgGeneralForGraphics
     Private clsYScaleDiscreteFunction As New RFunction
     Private clsXScaleDiscreteFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private clsFacetFunction As New RFunction
+    Private clsFacetOperator As New ROperator
+    Private clsFacetRowOp As New ROperator
+    Private clsFacetColOp As New ROperator
+    Private clsPipeOperator As New ROperator
+    Private clsGroupByFunction As New RFunction
+
+    Private ReadOnly strFacetWrap As String = "Facet Wrap"
+    Private ReadOnly strFacetRow As String = "Facet Row"
+    Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strNone As String = "None"
+
+    Private bUpdateComboOptions As Boolean = True
+    Private bUpdatingParameters As Boolean = False
     Private strPackageName As String
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -137,6 +151,17 @@ Public Class dlgGeneralForGraphics
         ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
         ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
 
+        ucrReceiverFacetBy.SetParameter(New RParameter(""))
+        ucrReceiverFacetBy.Selector = ucrGraphicsSelector
+        ucrReceiverFacetBy.SetIncludedDataTypes({"factor"})
+        ucrReceiverFacetBy.strSelectorHeading = "Factors"
+        ucrReceiverFacetBy.bWithQuotes = False
+        ucrReceiverFacetBy.SetParameterIsString()
+        ucrReceiverFacetBy.SetValuesToIgnore({"."})
+
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetDropDownStyleAsNonEditable()
+
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
@@ -153,9 +178,17 @@ Public Class dlgGeneralForGraphics
         clsDummyFunction = New RFunction
         clsScaleContinuousFunction = New RFunction
         clsLevelsFunction = New RFunction
+        clsFacetFunction = New RFunction
+        clsFacetOperator = New ROperator
+        clsFacetRowOp = New ROperator
+        clsFacetColOp = New ROperator
+        clsPipeOperator = New ROperator
+        clsGroupByFunction = New RFunction
 
         ucrSave.Reset()
 
+        ucrInputStation.SetName(strFacetWrap)
+        ucrInputStation.bUpdateRCodeFromControl = True
         ucrGraphicsSelector.Reset()
         ucrGraphicsSelector.SetGgplotFunction(clsBaseOperator)
         ucrReceiverY.SetMeAsReceiver()
@@ -176,6 +209,22 @@ Public Class dlgGeneralForGraphics
 
         clsGlobalAesFunction.SetPackageName("ggplot2")
         clsGlobalAesFunction.SetRCommand("aes")
+
+        clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetRowOp.SetOperation("+")
+        clsFacetRowOp.bBrackets = False
+        clsFacetColOp.SetOperation("+")
+        clsFacetColOp.bBrackets = False
+        clsFacetOperator.SetOperation("~")
+        clsFacetOperator.bForceIncludeOperation = True
+        clsFacetOperator.bBrackets = False
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
+
+        clsPipeOperator.SetOperation("%>%")
+        SetPipeAssignTo()
+
+        clsGroupByFunction.SetPackageName("dplyr")
+        clsGroupByFunction.SetRCommand("group_by")
 
         clsLevelsFunction.SetPackageName("base")
         clsLevelsFunction.SetRCommand("levels")
@@ -425,13 +474,19 @@ Public Class dlgGeneralForGraphics
         ucrChkUseasNumeric.Visible = False
         If Not ucrReceiverX.IsEmpty Then
             clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
-            ucrChkUseasNumeric.Visible = ucrReceiverX.strCurrDataType = "factor" OrElse ucrReceiverX.strCurrDataType = "ordered,factor"
-            If ucrChkUseasNumeric.Checked Then
-                clsGlobalAesFunction.AddParameter("group", "1", iPosition:=2)
+            If ucrReceiverX.strCurrDataType = "factor" OrElse ucrReceiverX.strCurrDataType = "ordered,factor" Then
+                ucrChkUseasNumeric.Visible = True
+                If ucrChkUseasNumeric.Checked Then
+                    clsGlobalAesFunction.AddParameter("group", "1", iPosition:=2)
+                Else
+                    clsGlobalAesFunction.RemoveParameterByName("group")
+                End If
             Else
+                ucrChkUseasNumeric.Visible = False
                 clsGlobalAesFunction.RemoveParameterByName("group")
             End If
         Else
+            clsGlobalAesFunction.RemoveParameterByName("group")
             clsGlobalAesFunction.RemoveParameterByName("x")
         End If
     End Sub
@@ -564,5 +619,166 @@ Public Class dlgGeneralForGraphics
 
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrChkUseasNumeric.ControlValueChanged
         VariableXType()
+    End Sub
+
+    Private Sub AutoFacetStation()
+        Dim ucrCurrentReceiver As ucrReceiver = Nothing
+
+        If ucrGraphicsSelector.CurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver = ucrGraphicsSelector.CurrentReceiver
+        End If
+        ucrReceiverFacetBy.AddItemsWithMetadataProperty(ucrGraphicsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
+        If Not bUpdateComboOptions Then
+            Exit Sub
+        End If
+        Dim strChangedText As String = ucrChangedControl.GetText()
+        If strChangedText <> strNone Then
+            If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
+                    Not ucrInputStation.Equals(ucrChangedControl) AndAlso ucrInputStation.GetText() = strChangedText Then
+                bUpdateComboOptions = False
+                ucrInputStation.SetName(strNone)
+                bUpdateComboOptions = True
+            End If
+            If (strChangedText = strFacetWrap AndAlso ucrInputStation.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
+                    ucrInputStation.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
+                    ucrInputStation.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputStation.GetText = strFacetWrap) Then
+                ucrInputStation.SetName(strNone)
+            End If
+        End If
+        UpdateParameters()
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub UpdateParameters()
+        clsFacetOperator.RemoveParameterByName("wrap" & ucrInputStation.Name)
+        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
+        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        bUpdatingParameters = True
+        ucrReceiverFacetBy.SetRCode(Nothing)
+        Select Case ucrInputStation.GetText()
+            Case strFacetWrap
+                ucrReceiverFacetBy.ChangeParameterName("wrap" & ucrInputStation.Name)
+                ucrReceiverFacetBy.SetRCode(clsFacetOperator)
+            Case strFacetCol
+                ucrReceiverFacetBy.ChangeParameterName("col" & ucrInputStation.Name)
+                ucrReceiverFacetBy.SetRCode(clsFacetColOp)
+            Case strFacetRow
+                ucrReceiverFacetBy.ChangeParameterName("row" & ucrInputStation.Name)
+                ucrReceiverFacetBy.SetRCode(clsFacetRowOp)
+        End Select
+        If Not clsGlobalAesFunction.ContainsParameter("x") Then
+            clsGlobalAesFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
+        bUpdatingParameters = False
+    End Sub
+
+    Private Sub AddRemoveFacets()
+        Dim bWrap As Boolean = False
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+
+        If bUpdatingParameters Then
+            Exit Sub
+        End If
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        If Not ucrReceiverFacetBy.IsEmpty Then
+            Select Case ucrInputStation.GetText()
+                Case strFacetWrap
+                    bWrap = True
+                Case strFacetCol
+                    bCol = True
+                Case strFacetRow
+                    bRow = True
+            End Select
+        End If
+
+        If bWrap OrElse bRow OrElse bCol Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+        End If
+        If bWrap Then
+            clsFacetFunction.SetRCommand("facet_wrap")
+        End If
+        If bRow OrElse bCol Then
+            clsFacetFunction.SetRCommand("facet_grid")
+        End If
+        If bRow Then
+            clsFacetOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
+        ElseIf bCol AndAlso bWrap = False Then
+            clsFacetOperator.AddParameter("left", ".", iPosition:=0)
+        Else
+            clsFacetOperator.RemoveParameterByName("left")
+        End If
+        If bCol Then
+            clsFacetOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
+        ElseIf bRow AndAlso bWrap = False Then
+            clsFacetOperator.AddParameter("right", ".", iPosition:=1)
+        Else
+            clsFacetOperator.RemoveParameterByName("right")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiverX.ControlValueChanged
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+    End Sub
+    Private Sub GetParameterValue(clsOperator As ROperator)
+        Dim i As Integer = 0
+        For Each clsTempParam As RParameter In clsOperator.clsParameters
+            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                i = i + 1
+            End If
+        Next
+    End Sub
+
+    Private Sub AddRemoveGroupBy()
+
+        If clsPipeOperator.ContainsParameter("mutate") Then
+            clsGroupByFunction.ClearParameters()
+            If clsBaseOperator.ContainsParameter("facets") Then
+                Select Case ucrInputStation.GetText()
+                    Case strFacetWrap
+                        GetParameterValue(clsFacetOperator)
+                    Case strFacetCol
+                        GetParameterValue(clsFacetColOp)
+                    Case strFacetRow
+                        GetParameterValue(clsFacetRowOp)
+                End Select
+            End If
+
+            If clsGroupByFunction.iParameterCount > 0 Then
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            Else
+                clsPipeOperator.RemoveParameterByName("group_by")
+            End If
+        Else
+            clsPipeOperator.RemoveParameterByName("group_by")
+        End If
+
+        SetPipeAssignTo()
+    End Sub
+
+    Private Sub SetPipeAssignTo()
+        If ucrGraphicsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsPipeOperator.clsParameters.Count > 1 Then
+            clsPipeOperator.SetAssignTo(ucrGraphicsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Else
+            clsPipeOperator.RemoveAssignTo()
+        End If
+    End Sub
+
+    Private Sub ucrGraphicsSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrGraphicsSelector.ControlValueChanged
+        AutoFacetStation()
+        SetPipeAssignTo()
     End Sub
 End Class
