@@ -96,6 +96,13 @@ Public Class ucrDataViewReoGrid
             grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
         End If
 
+        If dataFrame.clsFilterOrColumnSelection.bColumnSelectionApplied Then
+            dlgDeleteRowsOrColums.rdoEmpty.Enabled = False
+        Else
+            dlgDeleteRowsOrColums.rdoEmpty.Enabled = True
+            'this fixes issue #8535, where the select deletes the hidden columns when bcolumnselectionapplied is used.
+        End If
+
         'todo. As of 30/05/2022, the reogrid control version used did not have this setting option
         'see issue #7221 for more information.
         'get pixel size equivalent of the longest row header text
