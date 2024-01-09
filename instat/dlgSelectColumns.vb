@@ -53,7 +53,7 @@ Public Class dlgSelectColumns
         ucrInputSelectOperation.SetItems({"Columns", "Starts with", "Ends with", "Contains", "Matches", "Numeric range", "Last column", "Where"})
         ucrInputSelectOperation.SetDropDownStyleAsNonEditable()
 
-        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character", "Logical", "Variable label", "Value label", "Empty columns", "NA columns", "Partially labelled"})
+        ucrInputColumnType.SetItems({"Numeric", "Factor", "Character", "Logical", "Variable label", "Value label", "Empty columns", "NA columns", "Partially labelled", "Unused label"})
         ucrInputColumnType.SetDropDownStyleAsNonEditable()
 
         ucrInputSelectOperation.AddToLinkedControls(ucrChkIgnoreCase, {"Starts with", "Ends with", "Contains", "Matches"}, bNewLinkedHideIfParameterMissing:=True)
@@ -222,6 +222,8 @@ Public Class dlgSelectColumns
                     clsParametersList.AddParameter("fn", "is.NAvariable", iPosition:=0)
                 ElseIf strValue = "Partially labelled" Then
                     clsParametersList.AddParameter("fn", "is.containPartialValueLabel", iPosition:=0)
+                ElseIf strValue = "Unused label" Then
+                    clsParametersList.AddParameter("fn", "is.containUnusedValueLabel", iPosition:=0)
                 End If
             Case "Last column"
                 strValue = "Last column"
