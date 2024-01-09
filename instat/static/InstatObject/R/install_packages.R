@@ -172,6 +172,8 @@ pkgs <-
     "modeldata",
     # Data for an Introduction to Statistical Learning with Applications in R
     "ISLR",
+    #Create Waffle Chart Visualizations
+    "waffle",
     # Data and Code Behind the Stories and Interactives at 'FiveThirtyEight'
     "fivethirtyeight",
     "collapse"

@@ -106,7 +106,7 @@ Public Class dlgInstallRPackage
                 ucrInputMessage.SetText("Package is installed but not a current CRAN package")
                 ucrInputMessage.txtInput.BackColor = Color.LightBlue
             Case "4"
-                ucrInputMessage.SetText("Not a current CRAN package. Perhaps it has been archived")
+                ucrInputMessage.SetText("Not a current CRAN package. Perhaps spelled wrongly, or archived?")
                 ucrInputMessage.txtInput.BackColor = Color.LightSkyBlue
             Case "5"
                 ucrInputMessage.SetText("No internet connection.Try reconnecting")

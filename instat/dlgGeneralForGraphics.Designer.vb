@@ -39,12 +39,6 @@ Partial Class dlgGeneralForGraphics
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.cmdFacets = New System.Windows.Forms.Button()
-        Me.cmdTheme = New System.Windows.Forms.Button()
-        Me.cmdYAxis = New System.Windows.Forms.Button()
-        Me.cmdXAxis = New System.Windows.Forms.Button()
-        Me.cmdTitles = New System.Windows.Forms.Button()
         Me.grpAethetics = New System.Windows.Forms.GroupBox()
         Me.ucrChkUseasNumeric = New instat.ucrCheck()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
@@ -90,75 +84,22 @@ Partial Class dlgGeneralForGraphics
         Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrBase = New instat.ucrButtons()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemFacets = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemLayers = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemTitles = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemXaxis = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemYaxis = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemThemes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemCoordinates = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemColour = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemAnnotation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdOptions = New instat.ucrSplitButton()
         Me.grpAethetics.SuspendLayout()
         Me.ContextMenuPackagesList.SuspendLayout()
+        Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(6, 401)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(135, 25)
-        Me.cmdOptions.TabIndex = 7
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Plot Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'cmdFacets
-        '
-        Me.cmdFacets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFacets.Location = New System.Drawing.Point(139, 401)
-        Me.cmdFacets.Name = "cmdFacets"
-        Me.cmdFacets.Size = New System.Drawing.Size(64, 25)
-        Me.cmdFacets.TabIndex = 17
-        Me.cmdFacets.Tag = "Facets"
-        Me.cmdFacets.Text = "Facets"
-        Me.cmdFacets.UseVisualStyleBackColor = True
-        '
-        'cmdTheme
-        '
-        Me.cmdTheme.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTheme.Location = New System.Drawing.Point(401, 401)
-        Me.cmdTheme.Name = "cmdTheme"
-        Me.cmdTheme.Size = New System.Drawing.Size(65, 25)
-        Me.cmdTheme.TabIndex = 21
-        Me.cmdTheme.Tag = "Theme"
-        Me.cmdTheme.Text = "Theme"
-        Me.cmdTheme.UseVisualStyleBackColor = True
-        '
-        'cmdYAxis
-        '
-        Me.cmdYAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdYAxis.Location = New System.Drawing.Point(334, 401)
-        Me.cmdYAxis.Name = "cmdYAxis"
-        Me.cmdYAxis.Size = New System.Drawing.Size(69, 25)
-        Me.cmdYAxis.TabIndex = 20
-        Me.cmdYAxis.Tag = ""
-        Me.cmdYAxis.Text = "Y-Axis"
-        Me.cmdYAxis.UseVisualStyleBackColor = True
-        '
-        'cmdXAxis
-        '
-        Me.cmdXAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdXAxis.Location = New System.Drawing.Point(266, 401)
-        Me.cmdXAxis.Name = "cmdXAxis"
-        Me.cmdXAxis.Size = New System.Drawing.Size(71, 25)
-        Me.cmdXAxis.TabIndex = 19
-        Me.cmdXAxis.Tag = ""
-        Me.cmdXAxis.Text = "X-Axis"
-        Me.cmdXAxis.UseVisualStyleBackColor = True
-        '
-        'cmdTitles
-        '
-        Me.cmdTitles.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTitles.Location = New System.Drawing.Point(201, 401)
-        Me.cmdTitles.Name = "cmdTitles"
-        Me.cmdTitles.Size = New System.Drawing.Size(67, 25)
-        Me.cmdTitles.TabIndex = 18
-        Me.cmdTitles.Tag = ""
-        Me.cmdTitles.Text = "Titles"
-        Me.cmdTitles.UseVisualStyleBackColor = True
         '
         'grpAethetics
         '
@@ -187,7 +128,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrChkUseasNumeric.Location = New System.Drawing.Point(24, 107)
         Me.ucrChkUseasNumeric.Name = "ucrChkUseasNumeric"
         Me.ucrChkUseasNumeric.Size = New System.Drawing.Size(126, 24)
-        Me.ucrChkUseasNumeric.TabIndex = 35
+        Me.ucrChkUseasNumeric.TabIndex = 4
         '
         'ucrReceiverY
         '
@@ -199,7 +140,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrReceiverY.Selector = Nothing
         Me.ucrReceiverY.Size = New System.Drawing.Size(125, 20)
         Me.ucrReceiverY.strNcFilePath = ""
-        Me.ucrReceiverY.TabIndex = 32
+        Me.ucrReceiverY.TabIndex = 1
         Me.ucrReceiverY.ucrSelector = Nothing
         '
         'lblYVariable
@@ -209,7 +150,7 @@ Partial Class dlgGeneralForGraphics
         Me.lblYVariable.Location = New System.Drawing.Point(26, 23)
         Me.lblYVariable.Name = "lblYVariable"
         Me.lblYVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblYVariable.TabIndex = 31
+        Me.lblYVariable.TabIndex = 0
         Me.lblYVariable.Tag = "Y_Variable:"
         Me.lblYVariable.Text = "Y Variable:"
         '
@@ -220,7 +161,7 @@ Partial Class dlgGeneralForGraphics
         Me.lblXVariable.Location = New System.Drawing.Point(26, 67)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
-        Me.lblXVariable.TabIndex = 33
+        Me.lblXVariable.TabIndex = 2
         Me.lblXVariable.Tag = "X_Variable:"
         Me.lblXVariable.Text = "X Variable:"
         '
@@ -234,7 +175,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.Size = New System.Drawing.Size(125, 27)
         Me.ucrReceiverX.strNcFilePath = ""
-        Me.ucrReceiverX.TabIndex = 34
+        Me.ucrReceiverX.TabIndex = 3
         Me.ucrReceiverX.ucrSelector = Nothing
         '
         'lblLabel
@@ -244,7 +185,7 @@ Partial Class dlgGeneralForGraphics
         Me.lblLabel.Location = New System.Drawing.Point(27, 213)
         Me.lblLabel.Name = "lblLabel"
         Me.lblLabel.Size = New System.Drawing.Size(36, 13)
-        Me.lblLabel.TabIndex = 29
+        Me.lblLabel.TabIndex = 8
         Me.lblLabel.Tag = "Label:"
         Me.lblLabel.Text = "Label:"
         '
@@ -258,7 +199,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrLabelReceiver.Selector = Nothing
         Me.ucrLabelReceiver.Size = New System.Drawing.Size(125, 25)
         Me.ucrLabelReceiver.strNcFilePath = ""
-        Me.ucrLabelReceiver.TabIndex = 30
+        Me.ucrLabelReceiver.TabIndex = 9
         Me.ucrLabelReceiver.ucrSelector = Nothing
         '
         'lblColour
@@ -268,7 +209,7 @@ Partial Class dlgGeneralForGraphics
         Me.lblColour.Location = New System.Drawing.Point(27, 173)
         Me.lblColour.Name = "lblColour"
         Me.lblColour.Size = New System.Drawing.Size(40, 13)
-        Me.lblColour.TabIndex = 27
+        Me.lblColour.TabIndex = 6
         Me.lblColour.Tag = "Fill_Colour:"
         Me.lblColour.Text = "Colour:"
         '
@@ -282,7 +223,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrColourReceiver.Selector = Nothing
         Me.ucrColourReceiver.Size = New System.Drawing.Size(125, 25)
         Me.ucrColourReceiver.strNcFilePath = ""
-        Me.ucrColourReceiver.TabIndex = 28
+        Me.ucrColourReceiver.TabIndex = 7
         Me.ucrColourReceiver.ucrSelector = Nothing
         '
         'lblFill
@@ -292,7 +233,7 @@ Partial Class dlgGeneralForGraphics
         Me.lblFill.Location = New System.Drawing.Point(27, 134)
         Me.lblFill.Name = "lblFill"
         Me.lblFill.Size = New System.Drawing.Size(22, 13)
-        Me.lblFill.TabIndex = 25
+        Me.lblFill.TabIndex = 4
         Me.lblFill.Tag = "Fill_Colour:"
         Me.lblFill.Text = "Fill:"
         '
@@ -306,7 +247,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrFillReceiver.Selector = Nothing
         Me.ucrFillReceiver.Size = New System.Drawing.Size(125, 25)
         Me.ucrFillReceiver.strNcFilePath = ""
-        Me.ucrFillReceiver.TabIndex = 26
+        Me.ucrFillReceiver.TabIndex = 5
         Me.ucrFillReceiver.ucrSelector = Nothing
         '
         'ContextMenuPackagesList
@@ -489,7 +430,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrChkFlipCoordinates.Checked = False
         Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(301, 308)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(125, 24)
+        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(174, 24)
         Me.ucrChkFlipCoordinates.TabIndex = 13
         '
         'ucrChkLegend
@@ -539,25 +480,99 @@ Partial Class dlgGeneralForGraphics
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
         '
+        'contextMenuStripOptions
+        '
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemFacets, Me.toolStripMenuItemLayers, Me.toolStripMenuItemTitles, Me.toolStripMenuItemXaxis, Me.toolStripMenuItemYaxis, Me.toolStripMenuItemThemes, Me.toolStripMenuItemCoordinates, Me.toolStripMenuItemColour, Me.toolStripMenuItemAnnotation})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 246)
+        '
+        'toolStripMenuItemPlotOptions
+        '
+        Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
+        '
+        'toolStripMenuItemFacets
+        '
+        Me.toolStripMenuItemFacets.Name = "toolStripMenuItemFacets"
+        Me.toolStripMenuItemFacets.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemFacets.Text = "Facets"
+        '
+        'toolStripMenuItemLayers
+        '
+        Me.toolStripMenuItemLayers.Name = "toolStripMenuItemLayers"
+        Me.toolStripMenuItemLayers.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemLayers.Text = "Layers"
+        '
+        'toolStripMenuItemTitles
+        '
+        Me.toolStripMenuItemTitles.Name = "toolStripMenuItemTitles"
+        Me.toolStripMenuItemTitles.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemTitles.Text = "Titles"
+        '
+        'toolStripMenuItemXaxis
+        '
+        Me.toolStripMenuItemXaxis.Name = "toolStripMenuItemXaxis"
+        Me.toolStripMenuItemXaxis.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemXaxis.Text = "X-Axis"
+        '
+        'toolStripMenuItemYaxis
+        '
+        Me.toolStripMenuItemYaxis.Name = "toolStripMenuItemYaxis"
+        Me.toolStripMenuItemYaxis.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemYaxis.Text = "Y-Axis"
+        '
+        'toolStripMenuItemThemes
+        '
+        Me.toolStripMenuItemThemes.Name = "toolStripMenuItemThemes"
+        Me.toolStripMenuItemThemes.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemThemes.Text = "Themes"
+        '
+        'toolStripMenuItemCoordinates
+        '
+        Me.toolStripMenuItemCoordinates.Name = "toolStripMenuItemCoordinates"
+        Me.toolStripMenuItemCoordinates.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemCoordinates.Text = "Coordinates"
+        '
+        'toolStripMenuItemColour
+        '
+        Me.toolStripMenuItemColour.Name = "toolStripMenuItemColour"
+        Me.toolStripMenuItemColour.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemColour.Text = "Colour"
+        '
+        'toolStripMenuItemAnnotation
+        '
+        Me.toolStripMenuItemAnnotation.Name = "toolStripMenuItemAnnotation"
+        Me.toolStripMenuItemAnnotation.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemAnnotation.Text = "Annotation"
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Location = New System.Drawing.Point(6, 401)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(122, 25)
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.TabIndex = 216
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'dlgGeneralForGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(478, 547)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdRHelp)
         Me.Controls.Add(Me.grpAethetics)
         Me.Controls.Add(Me.ucrInputLegendPosition)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.ucrChkLegend)
-        Me.Controls.Add(Me.cmdTitles)
-        Me.Controls.Add(Me.cmdXAxis)
-        Me.Controls.Add(Me.cmdYAxis)
-        Me.Controls.Add(Me.cmdTheme)
-        Me.Controls.Add(Me.cmdFacets)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.ucrGraphicsSelector)
-        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrAdditionalLayers)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -570,6 +585,7 @@ Partial Class dlgGeneralForGraphics
         Me.grpAethetics.ResumeLayout(False)
         Me.grpAethetics.PerformLayout()
         Me.ContextMenuPackagesList.ResumeLayout(False)
+        Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -577,14 +593,8 @@ Partial Class dlgGeneralForGraphics
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrAdditionalLayers As ucrAdditionalLayers
-    Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrGraphicsSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSave As ucrSave
-    Friend WithEvents cmdTheme As Button
-    Friend WithEvents cmdFacets As Button
-    Friend WithEvents cmdTitles As Button
-    Friend WithEvents cmdXAxis As Button
-    Friend WithEvents cmdYAxis As Button
     Friend WithEvents ucrChkLegend As ucrCheck
     Friend WithEvents ucrChkFlipCoordinates As ucrCheck
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
@@ -626,4 +636,16 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents lblYVariable As Label
     Friend WithEvents lblXVariable As Label
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
+    Friend WithEvents cmdOptions As ucrSplitButton
+    Friend WithEvents contextMenuStripOptions As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemFacets As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemLayers As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemTitles As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemXaxis As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemYaxis As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemThemes As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemCoordinates As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemColour As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemAnnotation As ToolStripMenuItem
 End Class
