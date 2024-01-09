@@ -100,7 +100,7 @@ Public Class ucrDataViewReoGrid
             dlgDeleteRowsOrColums.rdoEmpty.Enabled = False
         Else
             dlgDeleteRowsOrColums.rdoEmpty.Enabled = True
-            'this fixes issue #8535, where the select deletes the hidden columns when bcolumnselectionapplied is used.
+            'this fixes issue #8535, where the dlgDeleteRowsorColumns deletes the hidden columns when bcolumnselectionapplied is used.
         End If
 
         'todo. As of 30/05/2022, the reogrid control version used did not have this setting option
