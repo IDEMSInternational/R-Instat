@@ -230,9 +230,9 @@ Public Class dlgVisualizeData
         ucrSaveGraph.AddAdditionalRCode(clsVisValueFunction, iAdditionalPairNo:=3)
         ucrInputComboboxPalette.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("palette", 1), iAdditionalPairNo:=1)
         ucrChkSortVariables.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("sort_miss", 2), iAdditionalPairNo:=1)
-        'ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsVisMissFunction, ucrByFactorsReceiver.GetParameter(), iAdditionalPairNo:=1)
+        ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsVisMissFunction, ucrByFactorsReceiver.GetParameter(), iAdditionalPairNo:=1)
 
-        'ucrByFactorsReceiver.SetRCode(clsVisDatFunction, bReset)
+        ucrByFactorsReceiver.SetRCode(clsVisDatFunction, bReset)
         ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
         ucrSelectorVisualizeData.SetRCode(clsNRowFunction, bReset)
