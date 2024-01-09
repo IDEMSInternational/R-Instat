@@ -249,7 +249,6 @@ Public Class dlgBoxplot
         clsBoxplotFunction.SetPackageName("ggplot2")
         clsBoxplotFunction.SetRCommand("geom_boxplot")
         clsBoxplotFunction.AddParameter("varwidth", "FALSE", iPosition:=0)
-        clsBoxplotFunction.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
 
         clsTufteBoxplotFunction.SetPackageName("ggthemes")
         clsTufteBoxplotFunction.SetRCommand("geom_tufteboxplot")
