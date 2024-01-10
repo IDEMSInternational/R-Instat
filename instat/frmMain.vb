@@ -291,6 +291,7 @@ Public Class frmMain
         mnuViewColumnMetadata.Checked = False
         mnuViewLogScript.Checked = False
         mnuViewSwapDataAndMetadata.Checked = False
+        mnuViewSwapDataAndScript.Checked = False
         mnuColumnMetadat.Checked = False
         mnuDataFrameMetadat.Checked = False
 
@@ -308,7 +309,8 @@ Public Class frmMain
                             AndAlso Not mnuViewColumnMetadata.Checked _
                             AndAlso Not mnuViewDataFrameMetadata.Checked _
                             AndAlso Not mnuViewLogScript.Checked _
-                            AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
+                            AndAlso Not mnuViewSwapDataAndMetadata.Checked _
+                            AndAlso Not mnuViewSwapDataAndScript.Checked Then
                 splOverall.Hide()
             Else
                 splOverall.Show()
@@ -581,6 +583,19 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub UpdateSwapDataAndScript()
+        If mnuViewSwapDataAndScript.Checked Then
+            splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
+            splExtraWindows.Panel2.Controls.Add(ucrDataViewer)
+            mnuViewLogScript.Text = "Data View"
+            mnuViewDataView.Text = "Log/Script"
+        Else
+            splDataOutput.Panel1.Controls.Add(ucrDataViewer)
+            splExtraWindows.Panel2.Controls.Add(ucrScriptWindow)
+            mnuViewLogScript.Text = "Log/Script"
+            mnuViewDataView.Text = "Data View"
+        End If
+    End Sub
 
     Public Sub SaveInstatOptions(strFilePath As String)
         Dim serializer As New BinaryFormatter()
@@ -2356,7 +2371,22 @@ Public Class frmMain
         dlgClimaticNCMPSummaryFile.ShowDialog()
     End Sub
 
+    Private Sub mnuViewSwapDataAndScript_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndScript.Click
+        mnuViewSwapDataAndMetadata.Enabled = mnuViewSwapDataAndScript.Checked
+        mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
+        UpdateSwapDataAndScript()
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuViewSwapDataAndScript_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndScript.CheckStateChanged
+        If Not mnuViewSwapDataAndScript.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewLogScript.Checked Then
+            mnuViewLogScript.Checked = False
+            mnuViewDataView.Checked = True
+        End If
+    End Sub
+
     Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
+        mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
@@ -2640,4 +2670,5 @@ Public Class frmMain
     Private Sub mnuClimaticDescribeIDF_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeIDF.Click
         dlgIDFCurves.ShowDialog()
     End Sub
+
 End Class
