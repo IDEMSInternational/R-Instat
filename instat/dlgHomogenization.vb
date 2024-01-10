@@ -595,8 +595,8 @@ Public Class dlgHomogenization
         ElseIf rdoPrepare.Checked Then
             Me.Size = New Size(438, 609)
             Me.ucrBase.Location = New Point(12, 515)
-            Me.ucrInputClimateVariables.Location = New Point(272, 464)
-            Me.lblClimaticVariable.Location = New Point(182, 468)
+            Me.ucrInputClimateVariables.Location = New Point(284, 464)
+            Me.lblClimaticVariable.Location = New Point(195, 468)
         Else
             Me.Size = New Size(438, 160)
             Me.ucrBase.Location = New Point(12, 130)

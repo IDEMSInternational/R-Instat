@@ -31,27 +31,46 @@ Partial Class dlgHomogenization
         Me.rdoBuishand = New System.Windows.Forms.RadioButton()
         Me.rdoPettitt = New System.Windows.Forms.RadioButton()
         Me.rdoSnht = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpCptOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrInputComboMeanVarDistribution = New instat.ucrInputComboBox()
+        Me.ucrInputComboVarDistribution = New instat.ucrInputComboBox()
         Me.lblPenaltyValue = New System.Windows.Forms.Label()
+        Me.ucrInputPenValue = New instat.ucrInputTextBox()
         Me.lblMinSegLen = New System.Windows.Forms.Label()
         Me.lblQ = New System.Windows.Forms.Label()
         Me.lblPenalty = New System.Windows.Forms.Label()
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblDistribution = New System.Windows.Forms.Label()
+        Me.ucrNudMinSegLen = New instat.ucrNud()
+        Me.ucrInputQ = New instat.ucrInputTextBox()
+        Me.ucrInputComboMeanDistribution = New instat.ucrInputComboBox()
+        Me.ucrInputComboMethod = New instat.ucrInputComboBox()
+        Me.ucrInputComboPenalty = New instat.ucrInputComboBox()
         Me.grpOutputOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkPlot = New instat.ucrCheck()
+        Me.ucrChkSummary = New instat.ucrCheck()
         Me.ttOptions = New System.Windows.Forms.ToolTip(Me.components)
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.lblNeighbouring = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.rdoPrepare = New System.Windows.Forms.RadioButton()
         Me.grpStationFile = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverElavation = New instat.ucrReceiverSingle()
         Me.lblLongtude = New System.Windows.Forms.Label()
         Me.lblStationName = New System.Windows.Forms.Label()
         Me.lblStationID = New System.Windows.Forms.Label()
         Me.lblElavation = New System.Windows.Forms.Label()
+        Me.ucrReceiverStationId = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStationName = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLongtitude = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
         Me.lblLatitude = New System.Windows.Forms.Label()
+        Me.ucrSelectorStationFile = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpDataFile = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverDataFiles = New instat.ucrReceiverMultiple()
         Me.lblDataFiles = New System.Windows.Forms.Label()
+        Me.ucrSelectorDataFiles = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblClimaticVariable = New System.Windows.Forms.Label()
         Me.lblFinalYear = New System.Windows.Forms.Label()
         Me.lblInitialYear = New System.Windows.Forms.Label()
@@ -62,28 +81,9 @@ Partial Class dlgHomogenization
         Me.ucrInputClimateVariables = New instat.ucrInputTextBox()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrSaveResult = New instat.ucrSave()
-        Me.ucrChkPlot = New instat.ucrCheck()
-        Me.ucrChkSummary = New instat.ucrCheck()
-        Me.ucrInputComboMeanVarDistribution = New instat.ucrInputComboBox()
-        Me.ucrInputComboVarDistribution = New instat.ucrInputComboBox()
-        Me.ucrInputPenValue = New instat.ucrInputTextBox()
-        Me.ucrNudMinSegLen = New instat.ucrNud()
-        Me.ucrInputQ = New instat.ucrInputTextBox()
-        Me.ucrInputComboMeanDistribution = New instat.ucrInputComboBox()
-        Me.ucrInputComboMethod = New instat.ucrInputComboBox()
-        Me.ucrInputComboPenalty = New instat.ucrInputComboBox()
-        Me.ucrPnlMethods = New instat.UcrPanel()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverNeighbour = New instat.ucrReceiverSingle()
-        Me.ucrReceiverElavation = New instat.ucrReceiverSingle()
-        Me.ucrReceiverStationId = New instat.ucrReceiverSingle()
-        Me.ucrReceiverStationName = New instat.ucrReceiverSingle()
-        Me.ucrReceiverLongtitude = New instat.ucrReceiverSingle()
-        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
-        Me.ucrSelectorStationFile = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverDataFiles = New instat.ucrReceiverMultiple()
-        Me.ucrSelectorDataFiles = New instat.ucrSelectorByDataFrameAddRemove()
         Me.rdoHomogenization = New System.Windows.Forms.RadioButton()
         Me.rdoMonthlyTotals = New System.Windows.Forms.RadioButton()
         Me.rdoQualityControl = New System.Windows.Forms.RadioButton()
@@ -186,6 +186,14 @@ Partial Class dlgHomogenization
         Me.rdoSnht.Text = "SNHT"
         Me.rdoSnht.UseVisualStyleBackColor = True
         '
+        'ucrPnlMethods
+        '
+        Me.ucrPnlMethods.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlMethods.Location = New System.Drawing.Point(6, 17)
+        Me.ucrPnlMethods.Name = "ucrPnlMethods"
+        Me.ucrPnlMethods.Size = New System.Drawing.Size(197, 68)
+        Me.ucrPnlMethods.TabIndex = 0
+        '
         'grpCptOptions
         '
         Me.grpCptOptions.Controls.Add(Me.ucrInputComboMeanVarDistribution)
@@ -209,6 +217,28 @@ Partial Class dlgHomogenization
         Me.grpCptOptions.TabStop = False
         Me.grpCptOptions.Text = "Change Point Options"
         '
+        'ucrInputComboMeanVarDistribution
+        '
+        Me.ucrInputComboMeanVarDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMeanVarDistribution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboMeanVarDistribution.GetSetSelectedIndex = -1
+        Me.ucrInputComboMeanVarDistribution.IsReadOnly = False
+        Me.ucrInputComboMeanVarDistribution.Location = New System.Drawing.Point(68, 67)
+        Me.ucrInputComboMeanVarDistribution.Name = "ucrInputComboMeanVarDistribution"
+        Me.ucrInputComboMeanVarDistribution.Size = New System.Drawing.Size(64, 21)
+        Me.ucrInputComboMeanVarDistribution.TabIndex = 8
+        '
+        'ucrInputComboVarDistribution
+        '
+        Me.ucrInputComboVarDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboVarDistribution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboVarDistribution.GetSetSelectedIndex = -1
+        Me.ucrInputComboVarDistribution.IsReadOnly = False
+        Me.ucrInputComboVarDistribution.Location = New System.Drawing.Point(68, 67)
+        Me.ucrInputComboVarDistribution.Name = "ucrInputComboVarDistribution"
+        Me.ucrInputComboVarDistribution.Size = New System.Drawing.Size(64, 21)
+        Me.ucrInputComboVarDistribution.TabIndex = 15
+        '
         'lblPenaltyValue
         '
         Me.lblPenaltyValue.AutoSize = True
@@ -218,6 +248,17 @@ Partial Class dlgHomogenization
         Me.lblPenaltyValue.Size = New System.Drawing.Size(59, 13)
         Me.lblPenaltyValue.TabIndex = 5
         Me.lblPenaltyValue.Text = "Pen.Value:"
+        '
+        'ucrInputPenValue
+        '
+        Me.ucrInputPenValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputPenValue.AutoSize = True
+        Me.ucrInputPenValue.IsMultiline = False
+        Me.ucrInputPenValue.IsReadOnly = False
+        Me.ucrInputPenValue.Location = New System.Drawing.Point(68, 138)
+        Me.ucrInputPenValue.Name = "ucrInputPenValue"
+        Me.ucrInputPenValue.Size = New System.Drawing.Size(55, 21)
+        Me.ucrInputPenValue.TabIndex = 11
         '
         'lblMinSegLen
         '
@@ -269,6 +310,63 @@ Partial Class dlgHomogenization
         Me.lblDistribution.TabIndex = 2
         Me.lblDistribution.Text = "Distribution:"
         '
+        'ucrNudMinSegLen
+        '
+        Me.ucrNudMinSegLen.AutoSize = True
+        Me.ucrNudMinSegLen.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinSegLen.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMinSegLen.Location = New System.Drawing.Point(68, 91)
+        Me.ucrNudMinSegLen.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinSegLen.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinSegLen.Name = "ucrNudMinSegLen"
+        Me.ucrNudMinSegLen.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinSegLen.TabIndex = 9
+        Me.ucrNudMinSegLen.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputQ
+        '
+        Me.ucrInputQ.AddQuotesIfUnrecognised = True
+        Me.ucrInputQ.AutoSize = True
+        Me.ucrInputQ.IsMultiline = False
+        Me.ucrInputQ.IsReadOnly = False
+        Me.ucrInputQ.Location = New System.Drawing.Point(68, 114)
+        Me.ucrInputQ.Name = "ucrInputQ"
+        Me.ucrInputQ.Size = New System.Drawing.Size(55, 21)
+        Me.ucrInputQ.TabIndex = 10
+        '
+        'ucrInputComboMeanDistribution
+        '
+        Me.ucrInputComboMeanDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMeanDistribution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboMeanDistribution.GetSetSelectedIndex = -1
+        Me.ucrInputComboMeanDistribution.IsReadOnly = False
+        Me.ucrInputComboMeanDistribution.Location = New System.Drawing.Point(68, 67)
+        Me.ucrInputComboMeanDistribution.Name = "ucrInputComboMeanDistribution"
+        Me.ucrInputComboMeanDistribution.Size = New System.Drawing.Size(64, 21)
+        Me.ucrInputComboMeanDistribution.TabIndex = 2
+        '
+        'ucrInputComboMethod
+        '
+        Me.ucrInputComboMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboMethod.GetSetSelectedIndex = -1
+        Me.ucrInputComboMethod.IsReadOnly = False
+        Me.ucrInputComboMethod.Location = New System.Drawing.Point(68, 43)
+        Me.ucrInputComboMethod.Name = "ucrInputComboMethod"
+        Me.ucrInputComboMethod.Size = New System.Drawing.Size(64, 21)
+        Me.ucrInputComboMethod.TabIndex = 7
+        '
+        'ucrInputComboPenalty
+        '
+        Me.ucrInputComboPenalty.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboPenalty.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputComboPenalty.GetSetSelectedIndex = -1
+        Me.ucrInputComboPenalty.IsReadOnly = False
+        Me.ucrInputComboPenalty.Location = New System.Drawing.Point(68, 19)
+        Me.ucrInputComboPenalty.Name = "ucrInputComboPenalty"
+        Me.ucrInputComboPenalty.Size = New System.Drawing.Size(64, 21)
+        Me.ucrInputComboPenalty.TabIndex = 6
+        '
         'grpOutputOptions
         '
         Me.grpOutputOptions.Controls.Add(Me.ucrChkPlot)
@@ -280,6 +378,24 @@ Partial Class dlgHomogenization
         Me.grpOutputOptions.TabIndex = 12
         Me.grpOutputOptions.TabStop = False
         Me.grpOutputOptions.Text = "Output Options"
+        '
+        'ucrChkPlot
+        '
+        Me.ucrChkPlot.AutoSize = True
+        Me.ucrChkPlot.Checked = False
+        Me.ucrChkPlot.Location = New System.Drawing.Point(10, 19)
+        Me.ucrChkPlot.Name = "ucrChkPlot"
+        Me.ucrChkPlot.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkPlot.TabIndex = 0
+        '
+        'ucrChkSummary
+        '
+        Me.ucrChkSummary.AutoSize = True
+        Me.ucrChkSummary.Checked = False
+        Me.ucrChkSummary.Location = New System.Drawing.Point(110, 19)
+        Me.ucrChkSummary.Name = "ucrChkSummary"
+        Me.ucrChkSummary.Size = New System.Drawing.Size(93, 23)
+        Me.ucrChkSummary.TabIndex = 1
         '
         'rdoSingle
         '
@@ -359,6 +475,19 @@ Partial Class dlgHomogenization
         Me.grpStationFile.TabStop = False
         Me.grpStationFile.Text = "StationFile"
         '
+        'ucrReceiverElavation
+        '
+        Me.ucrReceiverElavation.AutoSize = True
+        Me.ucrReceiverElavation.frmParent = Me
+        Me.ucrReceiverElavation.Location = New System.Drawing.Point(272, 105)
+        Me.ucrReceiverElavation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverElavation.Name = "ucrReceiverElavation"
+        Me.ucrReceiverElavation.Selector = Nothing
+        Me.ucrReceiverElavation.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverElavation.strNcFilePath = ""
+        Me.ucrReceiverElavation.TabIndex = 6
+        Me.ucrReceiverElavation.ucrSelector = Nothing
+        '
         'lblLongtude
         '
         Me.lblLongtude.AutoSize = True
@@ -399,6 +528,58 @@ Partial Class dlgHomogenization
         Me.lblElavation.TabIndex = 5
         Me.lblElavation.Text = "Elavation:"
         '
+        'ucrReceiverStationId
+        '
+        Me.ucrReceiverStationId.AutoSize = True
+        Me.ucrReceiverStationId.frmParent = Me
+        Me.ucrReceiverStationId.Location = New System.Drawing.Point(272, 175)
+        Me.ucrReceiverStationId.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStationId.Name = "ucrReceiverStationId"
+        Me.ucrReceiverStationId.Selector = Nothing
+        Me.ucrReceiverStationId.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStationId.strNcFilePath = ""
+        Me.ucrReceiverStationId.TabIndex = 10
+        Me.ucrReceiverStationId.ucrSelector = Nothing
+        '
+        'ucrReceiverStationName
+        '
+        Me.ucrReceiverStationName.AutoSize = True
+        Me.ucrReceiverStationName.frmParent = Me
+        Me.ucrReceiverStationName.Location = New System.Drawing.Point(272, 140)
+        Me.ucrReceiverStationName.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStationName.Name = "ucrReceiverStationName"
+        Me.ucrReceiverStationName.Selector = Nothing
+        Me.ucrReceiverStationName.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStationName.strNcFilePath = ""
+        Me.ucrReceiverStationName.TabIndex = 8
+        Me.ucrReceiverStationName.ucrSelector = Nothing
+        '
+        'ucrReceiverLongtitude
+        '
+        Me.ucrReceiverLongtitude.AutoSize = True
+        Me.ucrReceiverLongtitude.frmParent = Me
+        Me.ucrReceiverLongtitude.Location = New System.Drawing.Point(272, 68)
+        Me.ucrReceiverLongtitude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLongtitude.Name = "ucrReceiverLongtitude"
+        Me.ucrReceiverLongtitude.Selector = Nothing
+        Me.ucrReceiverLongtitude.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverLongtitude.strNcFilePath = ""
+        Me.ucrReceiverLongtitude.TabIndex = 4
+        Me.ucrReceiverLongtitude.ucrSelector = Nothing
+        '
+        'ucrReceiverLatitude
+        '
+        Me.ucrReceiverLatitude.AutoSize = True
+        Me.ucrReceiverLatitude.frmParent = Me
+        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(272, 25)
+        Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.TabIndex = 2
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
+        '
         'lblLatitude
         '
         Me.lblLatitude.AutoSize = True
@@ -408,6 +589,18 @@ Partial Class dlgHomogenization
         Me.lblLatitude.Size = New System.Drawing.Size(48, 13)
         Me.lblLatitude.TabIndex = 1
         Me.lblLatitude.Text = "Latitude:"
+        '
+        'ucrSelectorStationFile
+        '
+        Me.ucrSelectorStationFile.AutoSize = True
+        Me.ucrSelectorStationFile.bDropUnusedFilterLevels = False
+        Me.ucrSelectorStationFile.bShowHiddenColumns = False
+        Me.ucrSelectorStationFile.bUseCurrentFilter = True
+        Me.ucrSelectorStationFile.Location = New System.Drawing.Point(6, 16)
+        Me.ucrSelectorStationFile.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorStationFile.Name = "ucrSelectorStationFile"
+        Me.ucrSelectorStationFile.Size = New System.Drawing.Size(213, 185)
+        Me.ucrSelectorStationFile.TabIndex = 0
         '
         'grpDataFile
         '
@@ -421,6 +614,19 @@ Partial Class dlgHomogenization
         Me.grpDataFile.TabStop = False
         Me.grpDataFile.Text = "Data File"
         '
+        'ucrReceiverDataFiles
+        '
+        Me.ucrReceiverDataFiles.AutoSize = True
+        Me.ucrReceiverDataFiles.frmParent = Me
+        Me.ucrReceiverDataFiles.Location = New System.Drawing.Point(265, 38)
+        Me.ucrReceiverDataFiles.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDataFiles.Name = "ucrReceiverDataFiles"
+        Me.ucrReceiverDataFiles.Selector = Nothing
+        Me.ucrReceiverDataFiles.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverDataFiles.strNcFilePath = ""
+        Me.ucrReceiverDataFiles.TabIndex = 2
+        Me.ucrReceiverDataFiles.ucrSelector = Nothing
+        '
         'lblDataFiles
         '
         Me.lblDataFiles.AutoSize = True
@@ -431,11 +637,23 @@ Partial Class dlgHomogenization
         Me.lblDataFiles.TabIndex = 1
         Me.lblDataFiles.Text = "Data Columns:"
         '
+        'ucrSelectorDataFiles
+        '
+        Me.ucrSelectorDataFiles.AutoSize = True
+        Me.ucrSelectorDataFiles.bDropUnusedFilterLevels = False
+        Me.ucrSelectorDataFiles.bShowHiddenColumns = False
+        Me.ucrSelectorDataFiles.bUseCurrentFilter = True
+        Me.ucrSelectorDataFiles.Location = New System.Drawing.Point(6, 16)
+        Me.ucrSelectorDataFiles.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorDataFiles.Name = "ucrSelectorDataFiles"
+        Me.ucrSelectorDataFiles.Size = New System.Drawing.Size(213, 185)
+        Me.ucrSelectorDataFiles.TabIndex = 0
+        '
         'lblClimaticVariable
         '
         Me.lblClimaticVariable.AutoSize = True
         Me.lblClimaticVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblClimaticVariable.Location = New System.Drawing.Point(182, 468)
+        Me.lblClimaticVariable.Location = New System.Drawing.Point(195, 468)
         Me.lblClimaticVariable.Name = "lblClimaticVariable"
         Me.lblClimaticVariable.Size = New System.Drawing.Size(87, 13)
         Me.lblClimaticVariable.TabIndex = 19
@@ -514,9 +732,9 @@ Partial Class dlgHomogenization
         Me.ucrInputClimateVariables.AutoSize = True
         Me.ucrInputClimateVariables.IsMultiline = False
         Me.ucrInputClimateVariables.IsReadOnly = False
-        Me.ucrInputClimateVariables.Location = New System.Drawing.Point(272, 464)
+        Me.ucrInputClimateVariables.Location = New System.Drawing.Point(284, 464)
         Me.ucrInputClimateVariables.Name = "ucrInputClimateVariables"
-        Me.ucrInputClimateVariables.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputClimateVariables.Size = New System.Drawing.Size(125, 21)
         Me.ucrInputClimateVariables.TabIndex = 20
         '
         'ucrPnlOptions
@@ -536,122 +754,6 @@ Partial Class dlgHomogenization
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(320, 24)
         Me.ucrSaveResult.TabIndex = 13
-        '
-        'ucrChkPlot
-        '
-        Me.ucrChkPlot.AutoSize = True
-        Me.ucrChkPlot.Checked = False
-        Me.ucrChkPlot.Location = New System.Drawing.Point(10, 19)
-        Me.ucrChkPlot.Name = "ucrChkPlot"
-        Me.ucrChkPlot.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkPlot.TabIndex = 0
-        '
-        'ucrChkSummary
-        '
-        Me.ucrChkSummary.AutoSize = True
-        Me.ucrChkSummary.Checked = False
-        Me.ucrChkSummary.Location = New System.Drawing.Point(110, 19)
-        Me.ucrChkSummary.Name = "ucrChkSummary"
-        Me.ucrChkSummary.Size = New System.Drawing.Size(93, 23)
-        Me.ucrChkSummary.TabIndex = 1
-        '
-        'ucrInputComboMeanVarDistribution
-        '
-        Me.ucrInputComboMeanVarDistribution.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboMeanVarDistribution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboMeanVarDistribution.GetSetSelectedIndex = -1
-        Me.ucrInputComboMeanVarDistribution.IsReadOnly = False
-        Me.ucrInputComboMeanVarDistribution.Location = New System.Drawing.Point(68, 67)
-        Me.ucrInputComboMeanVarDistribution.Name = "ucrInputComboMeanVarDistribution"
-        Me.ucrInputComboMeanVarDistribution.Size = New System.Drawing.Size(64, 21)
-        Me.ucrInputComboMeanVarDistribution.TabIndex = 8
-        '
-        'ucrInputComboVarDistribution
-        '
-        Me.ucrInputComboVarDistribution.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboVarDistribution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboVarDistribution.GetSetSelectedIndex = -1
-        Me.ucrInputComboVarDistribution.IsReadOnly = False
-        Me.ucrInputComboVarDistribution.Location = New System.Drawing.Point(68, 67)
-        Me.ucrInputComboVarDistribution.Name = "ucrInputComboVarDistribution"
-        Me.ucrInputComboVarDistribution.Size = New System.Drawing.Size(64, 21)
-        Me.ucrInputComboVarDistribution.TabIndex = 15
-        '
-        'ucrInputPenValue
-        '
-        Me.ucrInputPenValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputPenValue.AutoSize = True
-        Me.ucrInputPenValue.IsMultiline = False
-        Me.ucrInputPenValue.IsReadOnly = False
-        Me.ucrInputPenValue.Location = New System.Drawing.Point(68, 138)
-        Me.ucrInputPenValue.Name = "ucrInputPenValue"
-        Me.ucrInputPenValue.Size = New System.Drawing.Size(55, 21)
-        Me.ucrInputPenValue.TabIndex = 11
-        '
-        'ucrNudMinSegLen
-        '
-        Me.ucrNudMinSegLen.AutoSize = True
-        Me.ucrNudMinSegLen.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinSegLen.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinSegLen.Location = New System.Drawing.Point(68, 91)
-        Me.ucrNudMinSegLen.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinSegLen.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinSegLen.Name = "ucrNudMinSegLen"
-        Me.ucrNudMinSegLen.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMinSegLen.TabIndex = 9
-        Me.ucrNudMinSegLen.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputQ
-        '
-        Me.ucrInputQ.AddQuotesIfUnrecognised = True
-        Me.ucrInputQ.AutoSize = True
-        Me.ucrInputQ.IsMultiline = False
-        Me.ucrInputQ.IsReadOnly = False
-        Me.ucrInputQ.Location = New System.Drawing.Point(68, 114)
-        Me.ucrInputQ.Name = "ucrInputQ"
-        Me.ucrInputQ.Size = New System.Drawing.Size(55, 21)
-        Me.ucrInputQ.TabIndex = 10
-        '
-        'ucrInputComboMeanDistribution
-        '
-        Me.ucrInputComboMeanDistribution.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboMeanDistribution.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboMeanDistribution.GetSetSelectedIndex = -1
-        Me.ucrInputComboMeanDistribution.IsReadOnly = False
-        Me.ucrInputComboMeanDistribution.Location = New System.Drawing.Point(68, 67)
-        Me.ucrInputComboMeanDistribution.Name = "ucrInputComboMeanDistribution"
-        Me.ucrInputComboMeanDistribution.Size = New System.Drawing.Size(64, 21)
-        Me.ucrInputComboMeanDistribution.TabIndex = 2
-        '
-        'ucrInputComboMethod
-        '
-        Me.ucrInputComboMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboMethod.GetSetSelectedIndex = -1
-        Me.ucrInputComboMethod.IsReadOnly = False
-        Me.ucrInputComboMethod.Location = New System.Drawing.Point(68, 43)
-        Me.ucrInputComboMethod.Name = "ucrInputComboMethod"
-        Me.ucrInputComboMethod.Size = New System.Drawing.Size(64, 21)
-        Me.ucrInputComboMethod.TabIndex = 7
-        '
-        'ucrInputComboPenalty
-        '
-        Me.ucrInputComboPenalty.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboPenalty.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputComboPenalty.GetSetSelectedIndex = -1
-        Me.ucrInputComboPenalty.IsReadOnly = False
-        Me.ucrInputComboPenalty.Location = New System.Drawing.Point(68, 19)
-        Me.ucrInputComboPenalty.Name = "ucrInputComboPenalty"
-        Me.ucrInputComboPenalty.Size = New System.Drawing.Size(64, 21)
-        Me.ucrInputComboPenalty.TabIndex = 6
-        '
-        'ucrPnlMethods
-        '
-        Me.ucrPnlMethods.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlMethods.Location = New System.Drawing.Point(6, 17)
-        Me.ucrPnlMethods.Name = "ucrPnlMethods"
-        Me.ucrPnlMethods.Size = New System.Drawing.Size(197, 68)
-        Me.ucrPnlMethods.TabIndex = 0
         '
         'ucrReceiverElement
         '
@@ -687,108 +789,6 @@ Partial Class dlgHomogenization
         Me.ucrReceiverNeighbour.strNcFilePath = ""
         Me.ucrReceiverNeighbour.TabIndex = 9
         Me.ucrReceiverNeighbour.ucrSelector = Nothing
-        '
-        'ucrReceiverElavation
-        '
-        Me.ucrReceiverElavation.AutoSize = True
-        Me.ucrReceiverElavation.frmParent = Nothing
-        Me.ucrReceiverElavation.Location = New System.Drawing.Point(272, 105)
-        Me.ucrReceiverElavation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverElavation.Name = "ucrReceiverElavation"
-        Me.ucrReceiverElavation.Selector = Nothing
-        Me.ucrReceiverElavation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverElavation.strNcFilePath = ""
-        Me.ucrReceiverElavation.TabIndex = 6
-        Me.ucrReceiverElavation.ucrSelector = Nothing
-        '
-        'ucrReceiverStationId
-        '
-        Me.ucrReceiverStationId.AutoSize = True
-        Me.ucrReceiverStationId.frmParent = Nothing
-        Me.ucrReceiverStationId.Location = New System.Drawing.Point(272, 175)
-        Me.ucrReceiverStationId.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStationId.Name = "ucrReceiverStationId"
-        Me.ucrReceiverStationId.Selector = Nothing
-        Me.ucrReceiverStationId.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStationId.strNcFilePath = ""
-        Me.ucrReceiverStationId.TabIndex = 10
-        Me.ucrReceiverStationId.ucrSelector = Nothing
-        '
-        'ucrReceiverStationName
-        '
-        Me.ucrReceiverStationName.AutoSize = True
-        Me.ucrReceiverStationName.frmParent = Nothing
-        Me.ucrReceiverStationName.Location = New System.Drawing.Point(272, 140)
-        Me.ucrReceiverStationName.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStationName.Name = "ucrReceiverStationName"
-        Me.ucrReceiverStationName.Selector = Nothing
-        Me.ucrReceiverStationName.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStationName.strNcFilePath = ""
-        Me.ucrReceiverStationName.TabIndex = 8
-        Me.ucrReceiverStationName.ucrSelector = Nothing
-        '
-        'ucrReceiverLongtitude
-        '
-        Me.ucrReceiverLongtitude.AutoSize = True
-        Me.ucrReceiverLongtitude.frmParent = Nothing
-        Me.ucrReceiverLongtitude.Location = New System.Drawing.Point(272, 68)
-        Me.ucrReceiverLongtitude.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLongtitude.Name = "ucrReceiverLongtitude"
-        Me.ucrReceiverLongtitude.Selector = Nothing
-        Me.ucrReceiverLongtitude.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverLongtitude.strNcFilePath = ""
-        Me.ucrReceiverLongtitude.TabIndex = 4
-        Me.ucrReceiverLongtitude.ucrSelector = Nothing
-        '
-        'ucrReceiverLatitude
-        '
-        Me.ucrReceiverLatitude.AutoSize = True
-        Me.ucrReceiverLatitude.frmParent = Nothing
-        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(272, 25)
-        Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
-        Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverLatitude.strNcFilePath = ""
-        Me.ucrReceiverLatitude.TabIndex = 2
-        Me.ucrReceiverLatitude.ucrSelector = Nothing
-        '
-        'ucrSelectorStationFile
-        '
-        Me.ucrSelectorStationFile.AutoSize = True
-        Me.ucrSelectorStationFile.bDropUnusedFilterLevels = False
-        Me.ucrSelectorStationFile.bShowHiddenColumns = False
-        Me.ucrSelectorStationFile.bUseCurrentFilter = True
-        Me.ucrSelectorStationFile.Location = New System.Drawing.Point(6, 16)
-        Me.ucrSelectorStationFile.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorStationFile.Name = "ucrSelectorStationFile"
-        Me.ucrSelectorStationFile.Size = New System.Drawing.Size(213, 185)
-        Me.ucrSelectorStationFile.TabIndex = 0
-        '
-        'ucrReceiverDataFiles
-        '
-        Me.ucrReceiverDataFiles.AutoSize = True
-        Me.ucrReceiverDataFiles.frmParent = Nothing
-        Me.ucrReceiverDataFiles.Location = New System.Drawing.Point(265, 38)
-        Me.ucrReceiverDataFiles.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDataFiles.Name = "ucrReceiverDataFiles"
-        Me.ucrReceiverDataFiles.Selector = Nothing
-        Me.ucrReceiverDataFiles.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverDataFiles.strNcFilePath = ""
-        Me.ucrReceiverDataFiles.TabIndex = 2
-        Me.ucrReceiverDataFiles.ucrSelector = Nothing
-        '
-        'ucrSelectorDataFiles
-        '
-        Me.ucrSelectorDataFiles.AutoSize = True
-        Me.ucrSelectorDataFiles.bDropUnusedFilterLevels = False
-        Me.ucrSelectorDataFiles.bShowHiddenColumns = False
-        Me.ucrSelectorDataFiles.bUseCurrentFilter = True
-        Me.ucrSelectorDataFiles.Location = New System.Drawing.Point(6, 16)
-        Me.ucrSelectorDataFiles.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorDataFiles.Name = "ucrSelectorDataFiles"
-        Me.ucrSelectorDataFiles.Size = New System.Drawing.Size(213, 185)
-        Me.ucrSelectorDataFiles.TabIndex = 0
         '
         'rdoHomogenization
         '
