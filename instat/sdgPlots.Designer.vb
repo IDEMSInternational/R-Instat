@@ -126,6 +126,7 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.tbpColour = New System.Windows.Forms.TabPage()
+        Me.ucrChkColour = New instat.ucrCheck()
         Me.lblCanvasFillPalette = New System.Windows.Forms.Label()
         Me.ucrInputCanvasFillPalette = New instat.ucrInputComboBox()
         Me.lblCanvasColorPalette = New System.Windows.Forms.Label()
@@ -607,51 +608,51 @@ Partial Class sdgPlots
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ttCaptionTitle = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.tbpPlotsOptions.SuspendLayout
-        Me.tbpFacet.SuspendLayout
-        Me.tbpLayers.SuspendLayout
-        Me.tbpTitles.SuspendLayout
-        Me.grpLegendTitle.SuspendLayout
-        Me.tbpXAxis.SuspendLayout
-        Me.tbpYAxis.SuspendLayout
-        Me.tbpTheme.SuspendLayout
-        Me.grpCommonOptions.SuspendLayout
-        Me.tbpCoordinates.SuspendLayout
-        Me.grpPolarCordinates.SuspendLayout
-        Me.tbpColour.SuspendLayout
-        Me.grpScalefillw.SuspendLayout
-        Me.grpColourScale.SuspendLayout
-        Me.grpScaleColorw.SuspendLayout
-        Me.grpScalecolorcal.SuspendLayout
-        Me.grpScalecolorhc.SuspendLayout
-        Me.grpScalecolorfew.SuspendLayout
-        Me.grpScalecolorsol.SuspendLayout
-        Me.grpScalecolorpan.SuspendLayout
-        Me.grpScalecolorg.SuspendLayout
-        Me.grpColourScaleGgthemes.SuspendLayout
-        Me.grpScalecolorEx.SuspendLayout
-        Me.grpScalecolorEcon.SuspendLayout
-        Me.grpScalecolorst.SuspendLayout
-        Me.grpScalecolorExn.SuspendLayout
-        Me.grpScaleColorfiv.SuspendLayout
-        Me.grpScalecolorpt.SuspendLayout
-        Me.grpScalefillg.SuspendLayout
-        Me.grpScaleFillfiv.SuspendLayout
-        Me.grpScalefillpt.SuspendLayout
-        Me.grpScalefillst.SuspendLayout
-        Me.grpScalefillpan.SuspendLayout
-        Me.grpScalefillCal.SuspendLayout
-        Me.grpScalefillEx.SuspendLayout
-        Me.grpScalefillEcon.SuspendLayout
-        Me.grpScalefillExn.SuspendLayout
-        Me.grpScalefillsol.SuspendLayout
-        Me.grpFillScaleggthemes.SuspendLayout
-        Me.grpScalefillfew.SuspendLayout
-        Me.grpScalefillhc.SuspendLayout
-        Me.grpFillScale.SuspendLayout
-        Me.tbpAnnotation.SuspendLayout
-        Me.grpAnnotation.SuspendLayout
-        Me.SuspendLayout
+        Me.tbpPlotsOptions.SuspendLayout()
+        Me.tbpFacet.SuspendLayout()
+        Me.tbpLayers.SuspendLayout()
+        Me.tbpTitles.SuspendLayout()
+        Me.grpLegendTitle.SuspendLayout()
+        Me.tbpXAxis.SuspendLayout()
+        Me.tbpYAxis.SuspendLayout()
+        Me.tbpTheme.SuspendLayout()
+        Me.grpCommonOptions.SuspendLayout()
+        Me.tbpCoordinates.SuspendLayout()
+        Me.grpPolarCordinates.SuspendLayout()
+        Me.tbpColour.SuspendLayout()
+        Me.grpScalefillw.SuspendLayout()
+        Me.grpColourScale.SuspendLayout()
+        Me.grpScaleColorw.SuspendLayout()
+        Me.grpScalecolorcal.SuspendLayout()
+        Me.grpScalecolorhc.SuspendLayout()
+        Me.grpScalecolorfew.SuspendLayout()
+        Me.grpScalecolorsol.SuspendLayout()
+        Me.grpScalecolorpan.SuspendLayout()
+        Me.grpScalecolorg.SuspendLayout()
+        Me.grpColourScaleGgthemes.SuspendLayout()
+        Me.grpScalecolorEx.SuspendLayout()
+        Me.grpScalecolorEcon.SuspendLayout()
+        Me.grpScalecolorst.SuspendLayout()
+        Me.grpScalecolorExn.SuspendLayout()
+        Me.grpScaleColorfiv.SuspendLayout()
+        Me.grpScalecolorpt.SuspendLayout()
+        Me.grpScalefillg.SuspendLayout()
+        Me.grpScaleFillfiv.SuspendLayout()
+        Me.grpScalefillpt.SuspendLayout()
+        Me.grpScalefillst.SuspendLayout()
+        Me.grpScalefillpan.SuspendLayout()
+        Me.grpScalefillCal.SuspendLayout()
+        Me.grpScalefillEx.SuspendLayout()
+        Me.grpScalefillEcon.SuspendLayout()
+        Me.grpScalefillExn.SuspendLayout()
+        Me.grpScalefillsol.SuspendLayout()
+        Me.grpFillScaleggthemes.SuspendLayout()
+        Me.grpScalefillfew.SuspendLayout()
+        Me.grpScalefillhc.SuspendLayout()
+        Me.grpFillScale.SuspendLayout()
+        Me.tbpAnnotation.SuspendLayout()
+        Me.grpAnnotation.SuspendLayout()
+        Me.SuspendLayout()
         '
         'tbpPlotsOptions
         '
@@ -1638,6 +1639,7 @@ Partial Class sdgPlots
         '
         'tbpColour
         '
+        Me.tbpColour.Controls.Add(Me.ucrChkColour)
         Me.tbpColour.Controls.Add(Me.lblCanvasFillPalette)
         Me.tbpColour.Controls.Add(Me.ucrInputCanvasFillPalette)
         Me.tbpColour.Controls.Add(Me.lblCanvasColorPalette)
@@ -1701,6 +1703,15 @@ Partial Class sdgPlots
         Me.tbpColour.TabIndex = 8
         Me.tbpColour.Text = "Colour"
         Me.tbpColour.UseVisualStyleBackColor = True
+        '
+        'ucrChkColour
+        '
+        Me.ucrChkColour.AutoSize = True
+        Me.ucrChkColour.Checked = False
+        Me.ucrChkColour.Location = New System.Drawing.Point(7, 10)
+        Me.ucrChkColour.Name = "ucrChkColour"
+        Me.ucrChkColour.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkColour.TabIndex = 328
         '
         'lblCanvasFillPalette
         '
@@ -7685,6 +7696,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrChkBreaksw As ucrCheck
     Friend WithEvents ucrChkNaValuew As ucrCheck
     Friend WithEvents ucrChkDropUnusedLevelsw As ucrCheck
+    Friend WithEvents ucrChkColour As ucrCheck
 End Class
 
 
