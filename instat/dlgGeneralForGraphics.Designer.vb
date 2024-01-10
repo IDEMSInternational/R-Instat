@@ -94,13 +94,13 @@ Partial Class dlgGeneralForGraphics
         Me.ucrChkLegend = New instat.ucrCheck()
         Me.ucrSave = New instat.ucrSave()
         Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputStation = New instat.ucrInputComboBox()
-        Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
+        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrChkAddCode = New instat.ucrCheck()
         Me.ucrInputAddCode = New instat.ucrInputComboBox()
+        Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.grpAethetics.SuspendLayout()
         Me.ContextMenuPackagesList.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
@@ -119,7 +119,7 @@ Partial Class dlgGeneralForGraphics
         Me.grpAethetics.Controls.Add(Me.ucrColourReceiver)
         Me.grpAethetics.Controls.Add(Me.lblFill)
         Me.grpAethetics.Controls.Add(Me.ucrFillReceiver)
-        Me.grpAethetics.Location = New System.Drawing.Point(277, 41)
+        Me.grpAethetics.Location = New System.Drawing.Point(277, 31)
         Me.grpAethetics.Name = "grpAethetics"
         Me.grpAethetics.Size = New System.Drawing.Size(174, 257)
         Me.grpAethetics.TabIndex = 23
@@ -476,7 +476,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(6, 414)
+        Me.cmdOptions.Location = New System.Drawing.Point(6, 426)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(122, 25)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
@@ -489,9 +489,9 @@ Partial Class dlgGeneralForGraphics
         '
         Me.cmdRHelp.AutoSize = True
         Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuPackagesList
-        Me.cmdRHelp.Location = New System.Drawing.Point(371, 449)
+        Me.cmdRHelp.Location = New System.Drawing.Point(360, 426)
         Me.cmdRHelp.Name = "cmdRHelp"
-        Me.cmdRHelp.Size = New System.Drawing.Size(91, 26)
+        Me.cmdRHelp.Size = New System.Drawing.Size(91, 25)
         Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuPackagesList
         Me.cmdRHelp.TabIndex = 213
         Me.cmdRHelp.Text = "R Help"
@@ -503,7 +503,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(302, 360)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(107, 354)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(125, 21)
         Me.ucrInputLegendPosition.TabIndex = 15
@@ -521,15 +521,15 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(301, 334)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(6, 354)
         Me.ucrChkLegend.Name = "ucrChkLegend"
-        Me.ucrChkLegend.Size = New System.Drawing.Size(125, 24)
+        Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 14
         '
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(6, 449)
+        Me.ucrSave.Location = New System.Drawing.Point(6, 456)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(282, 24)
@@ -541,19 +541,11 @@ Partial Class dlgGeneralForGraphics
         Me.ucrGraphicsSelector.bDropUnusedFilterLevels = False
         Me.ucrGraphicsSelector.bShowHiddenColumns = False
         Me.ucrGraphicsSelector.bUseCurrentFilter = True
-        Me.ucrGraphicsSelector.Location = New System.Drawing.Point(6, 14)
+        Me.ucrGraphicsSelector.Location = New System.Drawing.Point(6, 4)
         Me.ucrGraphicsSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrGraphicsSelector.Name = "ucrGraphicsSelector"
-        Me.ucrGraphicsSelector.Size = New System.Drawing.Size(226, 195)
+        Me.ucrGraphicsSelector.Size = New System.Drawing.Size(226, 185)
         Me.ucrGraphicsSelector.TabIndex = 0
-        '
-        'ucrAdditionalLayers
-        '
-        Me.ucrAdditionalLayers.AutoSize = True
-        Me.ucrAdditionalLayers.Location = New System.Drawing.Point(6, 194)
-        Me.ucrAdditionalLayers.Name = "ucrAdditionalLayers"
-        Me.ucrAdditionalLayers.Size = New System.Drawing.Size(253, 182)
-        Me.ucrAdditionalLayers.TabIndex = 8
         '
         'ucrBase
         '
@@ -570,29 +562,29 @@ Partial Class dlgGeneralForGraphics
         Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(389, 413)
+        Me.ucrInputStation.Location = New System.Drawing.Point(389, 352)
         Me.ucrInputStation.Name = "ucrInputStation"
         Me.ucrInputStation.Size = New System.Drawing.Size(86, 21)
         Me.ucrInputStation.TabIndex = 14
         '
-        'ucrReceiverFacetBy
+        'ucr1stFactorReceiver
         '
-        Me.ucrReceiverFacetBy.AutoSize = True
-        Me.ucrReceiverFacetBy.frmParent = Me
-        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(277, 413)
-        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
-        Me.ucrReceiverFacetBy.Selector = Nothing
-        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(109, 26)
-        Me.ucrReceiverFacetBy.strNcFilePath = ""
-        Me.ucrReceiverFacetBy.TabIndex = 13
-        Me.ucrReceiverFacetBy.ucrSelector = Nothing
+        Me.ucr1stFactorReceiver.AutoSize = True
+        Me.ucr1stFactorReceiver.frmParent = Me
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(277, 352)
+        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(109, 26)
+        Me.ucr1stFactorReceiver.strNcFilePath = ""
+        Me.ucr1stFactorReceiver.TabIndex = 13
+        Me.ucr1stFactorReceiver.ucrSelector = Nothing
         '
         'lblFacetBy
         '
         Me.lblFacetBy.AutoSize = True
         Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFacetBy.Location = New System.Drawing.Point(277, 398)
+        Me.lblFacetBy.Location = New System.Drawing.Point(277, 337)
         Me.lblFacetBy.Name = "lblFacetBy"
         Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
         Me.lblFacetBy.TabIndex = 12
@@ -603,9 +595,9 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrChkAddCode.AutoSize = True
         Me.ucrChkAddCode.Checked = False
-        Me.ucrChkAddCode.Location = New System.Drawing.Point(6, 382)
+        Me.ucrChkAddCode.Location = New System.Drawing.Point(6, 378)
         Me.ucrChkAddCode.Name = "ucrChkAddCode"
-        Me.ucrChkAddCode.Size = New System.Drawing.Size(84, 24)
+        Me.ucrChkAddCode.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkAddCode.TabIndex = 217
         '
         'ucrInputAddCode
@@ -614,21 +606,28 @@ Partial Class dlgGeneralForGraphics
         Me.ucrInputAddCode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputAddCode.GetSetSelectedIndex = -1
         Me.ucrInputAddCode.IsReadOnly = False
-        Me.ucrInputAddCode.Location = New System.Drawing.Point(96, 380)
+        Me.ucrInputAddCode.Location = New System.Drawing.Point(6, 399)
         Me.ucrInputAddCode.Name = "ucrInputAddCode"
-        Me.ucrInputAddCode.Size = New System.Drawing.Size(163, 21)
+        Me.ucrInputAddCode.Size = New System.Drawing.Size(469, 21)
         Me.ucrInputAddCode.TabIndex = 218
+        '
+        'ucrAdditionalLayers
+        '
+        Me.ucrAdditionalLayers.AutoSize = True
+        Me.ucrAdditionalLayers.Location = New System.Drawing.Point(6, 174)
+        Me.ucrAdditionalLayers.Name = "ucrAdditionalLayers"
+        Me.ucrAdditionalLayers.Size = New System.Drawing.Size(247, 181)
+        Me.ucrAdditionalLayers.TabIndex = 8
         '
         'dlgGeneralForGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(478, 547)
         Me.Controls.Add(Me.ucrInputAddCode)
         Me.Controls.Add(Me.ucrChkAddCode)
         Me.Controls.Add(Me.ucrInputStation)
-        Me.Controls.Add(Me.ucrReceiverFacetBy)
+        Me.Controls.Add(Me.ucr1stFactorReceiver)
         Me.Controls.Add(Me.lblFacetBy)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdRHelp)
@@ -657,7 +656,6 @@ Partial Class dlgGeneralForGraphics
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrAdditionalLayers As ucrAdditionalLayers
     Friend WithEvents ucrGraphicsSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSave As ucrSave
     Friend WithEvents ucrChkLegend As ucrCheck
@@ -714,8 +712,9 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents toolStripMenuItemColour As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemAnnotation As ToolStripMenuItem
     Friend WithEvents ucrInputStation As ucrInputComboBox
-    Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
+    Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputAddCode As ucrInputComboBox
     Friend WithEvents ucrChkAddCode As ucrCheck
+    Friend WithEvents ucrAdditionalLayers As ucrAdditionalLayers
 End Class
