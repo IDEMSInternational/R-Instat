@@ -2556,15 +2556,10 @@ is.containValueLabel <- function(x){
 
 is.containPartialValueLabel <- function(x) {
   if(is.containValueLabel(x)) {
-    return(!all(x[!is.na(x)] %in% attr(x, labels_label)))
+    level_counts <- table(x)
+    return(!all(x[!is.na(x)] %in% attr(x, labels_label)) && sum(levelCounts == 0) == 0)
   }
   else{return(FALSE)}
-}
-
-is.containUnusedValueLabel <- function(x) {
-  if(!is.containValueLabel(x)) return(FALSE)
-  level_counts <- table(x)
-  return(length(names(level_counts[level_counts == 0])) > 0)
 }
 
 read_corpora <- function(data){
