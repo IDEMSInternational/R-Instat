@@ -18,7 +18,6 @@ Imports System.Runtime.InteropServices
 Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
-'Imports RScript
 Imports RInsightF461
 
 '''--------------------------------------------------------------------------------------------
