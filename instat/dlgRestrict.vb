@@ -84,7 +84,7 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverFilter.IsEmpty AndAlso ((rdoApplyAsSubset.Checked AndAlso ucrNewDataFrameName.IsComplete) OrElse (rdoApplyAsFilter.Checked)) Then
+        If Not ucrReceiverFilter.IsEmpty AndAlso ((rdoAsSubset.Checked AndAlso ucrNewDataFrameName.IsComplete) OrElse (rdoAsFilter.Checked)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -93,11 +93,11 @@ Public Class dlgRestrict
 
     Private Sub SetFilterSubsetStatus()
         Me.Text = If(bIsSubsetDialog, "Subset", "Filter")
-        rdoApplyAsFilter.Enabled = Not bIsSubsetDialog
+        rdoAsFilter.Enabled = Not bIsSubsetDialog
         If bIsSubsetDialog Then
-            rdoApplyAsSubset.Checked = True
+            rdoAsSubset.Checked = True
         Else
-            rdoApplyAsFilter.Checked = True
+            rdoAsFilter.Checked = True
         End If
     End Sub
 
@@ -171,15 +171,15 @@ Public Class dlgRestrict
         TestOkEnabled()
     End Sub
 
-    Private Sub rdoApplyAs_CheckedChanged(sender As Object, e As EventArgs) Handles rdoApplyAsFilter.CheckedChanged, rdoApplyAsSubset.CheckedChanged
-        ucrNewDataFrameName.Visible = Not rdoApplyAsFilter.Checked
+    Private Sub rdoApplyAs_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAsFilter.CheckedChanged, rdoAsSubset.CheckedChanged
+        ucrNewDataFrameName.Visible = Not rdoAsFilter.Checked
         SetFilterOptions()
         SetBaseFunction()
         TestOkEnabled()
     End Sub
 
     Private Sub SetBaseFunction()
-        If rdoApplyAsFilter.Checked Then
+        If rdoAsFilter.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(If(ucrReceiverFilter.IsEmpty,
                                                 clsRemoveFilter, clsSetCurrentFilter))
             ucrBase.clsRsyntax.RemoveAssignTo()
@@ -231,7 +231,7 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        If rdoApplyAsSubset.Checked Then
+        If rdoAsSubset.Checked Then
             SetDefaults()
         End If
     End Sub
