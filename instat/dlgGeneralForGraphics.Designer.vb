@@ -489,7 +489,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrInputAddCode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputAddCode.GetSetSelectedIndex = -1
         Me.ucrInputAddCode.IsReadOnly = False
-        Me.ucrInputAddCode.Location = New System.Drawing.Point(274, 365)
+        Me.ucrInputAddCode.Location = New System.Drawing.Point(159, 362)
         Me.ucrInputAddCode.Name = "ucrInputAddCode"
         Me.ucrInputAddCode.Size = New System.Drawing.Size(201, 21)
         Me.ucrInputAddCode.TabIndex = 218
@@ -498,7 +498,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrChkAddCode.AutoSize = True
         Me.ucrChkAddCode.Checked = False
-        Me.ucrChkAddCode.Location = New System.Drawing.Point(159, 365)
+        Me.ucrChkAddCode.Location = New System.Drawing.Point(159, 333)
         Me.ucrChkAddCode.Name = "ucrChkAddCode"
         Me.ucrChkAddCode.Size = New System.Drawing.Size(109, 24)
         Me.ucrChkAddCode.TabIndex = 217
