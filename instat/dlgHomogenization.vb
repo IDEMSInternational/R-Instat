@@ -24,6 +24,10 @@ Public Class dlgHomogenization
         clsGetColumnsFunction, clsGetStnColumnsFunction, clsCompleteCasesFunction, clsPmatchFunction, clsPmatch2Function, clsColumnsFunction, clsColumns2Function As New RFunction
     Private clsBracketsOperator, clsLeftBracketOperator, clsVars2ColumnsFunction, clsVars1ColumnsFunction, clsRightBracketOperator As New ROperator
 
+    ' Counter variable to keep track of the enabled radio button
+    Private iEnabledRadioButtonIndex As Integer = 0
+
+    Private lstOfRadioButtons As List(Of RadioButton)
     Private Sub ucrPnlOptions_Load(sender As Object, e As EventArgs) Handles ucrPnlOptions.Load
 
     End Sub
@@ -228,6 +232,8 @@ Public Class dlgHomogenization
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
         ucrReceiverStation.SetLinkedDisplayControl(lblStation)
 
+        lstOfRadioButtons = New List(Of RadioButton) From {rdoSingle, rdoPrepare, rdoQualityControl, rdoMonthlyTotals, rdoHomogenization}
+
     End Sub
 
     Private Sub SetDefaults()
@@ -375,6 +381,8 @@ Public Class dlgHomogenization
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsSnhtFunction)
         AddPlotSummaryParameters()
+
+        ResetRadioButtons()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -431,6 +439,13 @@ Public Class dlgHomogenization
         ucrSelectorStationFile.SetRCode(clsGetStnColumnsFunction, bReset)
         ucrChkPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
+    End Sub
+
+    Private Sub ResetRadioButtons()
+        With lstOfRadioButtons
+            .ForEach(Sub(radioButton) radioButton.Enabled = False)
+            .First().Enabled = True
+        End With
     End Sub
 
     Private Sub TestOkEnabled()
@@ -692,4 +707,14 @@ Public Class dlgHomogenization
         End If
     End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ' Enable the next radio button if within the limit
+        If iEnabledRadioButtonIndex >= 0 AndAlso iEnabledRadioButtonIndex < 5 Then
+            lstOfRadioButtons(iEnabledRadioButtonIndex + 1).Enabled = True
+        Else
+            ' If all radio buttons are enabled, you may want to reset the counter or handle it as per your requirements
+            ' For this example, I am resetting the counter to 0
+            iEnabledRadioButtonIndex = 0
+        End If
+    End Sub
 End Class
