@@ -153,20 +153,21 @@ Public Class dlgGeneralForGraphics
         ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
         ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
 
-        ucr1stFactorReceiver.SetParameter(New RParameter(""))
+        ucr1stFactorReceiver.SetParameter(New RParameter("var1"))
         ucr1stFactorReceiver.Selector = ucrGraphicsSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr1stFactorReceiver.strSelectorHeading = "Factors"
         ucr1stFactorReceiver.bWithQuotes = False
         ucr1stFactorReceiver.SetParameterIsString()
         ucr1stFactorReceiver.SetValuesToIgnore({"."})
+        ucr1stFactorReceiver.SetParameterPosition(0)
 
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        ucrChkAddCode.SetText("Add Code")
+        ucrChkAddCode.SetText("Add Code:")
         ucrChkAddCode.AddToLinkedControls({ucrInputAddCode}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-        ucrInputAddCode.SetItems({"geom_hline(yintercept=20, y = 20)", "geom_vline(xintercept = 5, x=5)", "geom_vline(xintercept = 5, x=c(5,20))", "scale_x_binned()", "scale_x_binned(n.breaks=20)"})
+        ucrInputAddCode.SetItems({"geom_hline(yintercept=20)", "geom_vline(xintercept = 5)", "geom_vline(xintercept = 5)", "scale_x_binned()", "scale_x_binned(n.breaks=20)"})
 
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
@@ -330,7 +331,6 @@ Public Class dlgGeneralForGraphics
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrGraphicsSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
                           clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetOptionsSubdialog)
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
-        'ucr1stFactorReceiver.SetRCode(clsNewBaseOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewFacetV)
         sdgPlots.ShowDialog()
         sdgPlots.EnableLayersTab()
         bResetOptionsSubdialog = False
@@ -680,7 +680,7 @@ Public Class dlgGeneralForGraphics
         ucr1stFactorReceiver.SetRCode(Nothing)
         Select Case ucrInputStation.GetText()
             Case strFacetWrap
-                ucr1stFactorReceiver.ChangeParameterName("wrap" & ucrInputStation.Name)
+                ucr1stFactorReceiver.ChangeParameterName("var1")
                 ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
             Case strFacetCol
                 ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)

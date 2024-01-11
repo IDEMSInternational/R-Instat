@@ -2193,7 +2193,7 @@ Public Class sdgPlots
         If clsFacetFunction.ContainsParameter("facets") Then
             clsTempParam = clsFacetFunction.GetParameter("facets")
             If clsTempParam.bIsOperator AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing Then
-                clsFacetVariablesOperator = clsTempParam.clsArgumentCodeStructure
+                clsFacetVariablesOperator = clsNewFacetVariablesOperator
             Else
                 clsFacetVariablesOperator = New ROperator("~")
             End If
