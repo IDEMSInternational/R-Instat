@@ -117,6 +117,7 @@ Public Class dlgScript
         ucrBase.chkComment.Visible = False
         ucrBase.txtComment.Visible = False
         ucrBase.bAddScriptToScriptWindowOnClickOk = False
+        ucrBase.bMakeVisibleScriptWindow = False
 
     End Sub
 

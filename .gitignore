@@ -255,4 +255,5 @@ installer/Output/
 
 # RScript package and dependencies
 /packages/RScript.*/
+/packages/RInsightF461.*/
 /packages/System.Collections.Specialized.*/
