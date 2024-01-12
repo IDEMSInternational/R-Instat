@@ -28,7 +28,7 @@ Public Class dlgFitModel
     Public clsRestpvalFunction, clsFamilyFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
     Public bResetModelOptions As Boolean = False
     Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsAnovaIIFunction, clsSummaryFunction, clsConfint As New RFunction
-    Public clsGLM, clsLM, clsLMOrGLM, clsGLMNB, clsGLMPolr, clsGLMMultinom, clsAsNumeric As New RFunction
+    Public clsGLMFunction, clsLM, clsLMOrGLM, clsGLMFunctionNB, clsAOVFunction, clsGLMFunctionPolr, clsGLMFunctionMultinom, clsAsNumeric As New RFunction
 
     'Saving Operators/Functions
     Private clsRstandardFunction, clsHatvaluesFunction, clsResidualFunction, clsFittedValuesFunction As New RFunction
@@ -95,10 +95,10 @@ Public Class dlgFitModel
         clsAutoPlot = New RFunction
         clsFormulaFunction = New RFunction
         clsLM = New RFunction
-        clsGLM = New RFunction
-        clsGLMNB = New RFunction
-        clsGLMPolr = New RFunction
-        clsGLMMultinom = New RFunction
+        clsGLMFunction = New RFunction
+        clsGLMFunctionNB = New RFunction
+        clsGLMFunctionPolr = New RFunction
+        clsGLMFunctionMultinom = New RFunction
         clsConfint = New RFunction
         clsAnovaFunction = New RFunction
         clsVisReg = New RFunction
@@ -108,6 +108,7 @@ Public Class dlgFitModel
         clsHatvaluesFunction = New RFunction
         clsResidualFunction = New RFunction
         clsFittedValuesFunction = New RFunction
+        clsAOVFunction = New RFunction
 
         ucrSelectorByDataFrameAddRemoveForFitModel.Reset()
         ucrModelName.Reset()
@@ -135,45 +136,55 @@ Public Class dlgFitModel
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveForFitModel.strCurrentDataFrame,
                                            strObjectName:="last_model")
 
-        'todo. where is clsGLM used?
-        clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone()
-        clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsAOVFunction = clsRegressionDefaults.clsDefaultAovFunction.Clone()
+        clsAOVFunction.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+        clsAOVFunction.AddParameter("na.action", "na.exclude", iPosition:=4)
+        clsAOVFunction.bExcludeAssignedFunctionOutput = False
+        clsAOVFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+                                           strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
+                                           strRObjectFormatToAssignTo:=RObjectFormat.Text,
+                                           strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveForFitModel.strCurrentDataFrame,
+                                           strObjectName:="last_model")
+
+        'todo. where is clsGLMFunction used?
+        clsGLMFunction = clsRegressionDefaults.clsDefaultGlmFunction.Clone()
+        clsGLMFunction.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
 
         clsFamilyFunction = ucrFamily.clsCurrRFunction
-        clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
-        clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
-        clsGLM.bExcludeAssignedFunctionOutput = False
-        clsGLM.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+        clsGLMFunction.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
+        clsGLMFunction.AddParameter("na.action", "na.exclude", iPosition:=4)
+        clsGLMFunction.bExcludeAssignedFunctionOutput = False
+        clsGLMFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveForFitModel.strCurrentDataFrame,
                                            strObjectName:="last_model")
 
 
-        clsGLMNB = clsRegressionDefaults.clsDefaultGLmNBFunction.Clone
-        clsGLMNB.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
-        clsGLMNB.bExcludeAssignedFunctionOutput = False
-        clsGLMNB.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+        clsGLMFunctionNB = clsRegressionDefaults.clsDefaultGLmNBFunction.Clone
+        clsGLMFunctionNB.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLMFunctionNB.bExcludeAssignedFunctionOutput = False
+        clsGLMFunctionNB.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveForFitModel.strCurrentDataFrame,
                                            strObjectName:="last_model")
 
 
-        clsGLMPolr = clsRegressionDefaults.clsDefaultGLmPolrFunction.Clone
-        clsGLMPolr.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
-        clsGLMPolr.bExcludeAssignedFunctionOutput = False
-        clsGLMPolr.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+        clsGLMFunctionPolr = clsRegressionDefaults.clsDefaultGLmPolrFunction.Clone
+        clsGLMFunctionPolr.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLMFunctionPolr.bExcludeAssignedFunctionOutput = False
+        clsGLMFunctionPolr.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveForFitModel.strCurrentDataFrame,
                                            strObjectName:="last_model")
 
 
-        clsGLMMultinom = clsRegressionDefaults.clsDefaultGLmMultinomFunction.Clone
-        clsGLMMultinom.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
-        clsGLMMultinom.bExcludeAssignedFunctionOutput = False
-        clsGLMMultinom.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
+        clsGLMFunctionMultinom = clsRegressionDefaults.clsDefaultGLmMultinomFunction.Clone
+        clsGLMFunctionMultinom.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLMFunctionMultinom.bExcludeAssignedFunctionOutput = False
+        clsGLMFunctionMultinom.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",
                                            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Model,
                                            strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                            strRDataFrameNameToAddObjectTo:=ucrSelectorByDataFrameAddRemoveForFitModel.strCurrentDataFrame,
@@ -318,14 +329,17 @@ Public Class dlgFitModel
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-        ucrModelName.AddAdditionalRCode(clsGLMMultinom, bReset)
-        ucrModelName.AddAdditionalRCode(clsGLMPolr, bReset)
-        ucrModelName.AddAdditionalRCode(clsGLMNB, bReset)
-        ucrModelName.AddAdditionalRCode(clsGLM, bReset)
-        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 1)
-        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMNB, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 2)
-        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMPolr, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 3)
-        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMMultinom, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 4)
+        ucrModelName.AddAdditionalRCode(clsGLMFunctionMultinom, bReset)
+        ucrModelName.AddAdditionalRCode(clsGLMFunctionPolr, bReset)
+        ucrModelName.AddAdditionalRCode(clsGLMFunctionNB, bReset)
+        ucrModelName.AddAdditionalRCode(clsGLMFunction, bReset)
+        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMFunction, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 1)
+        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMFunctionNB, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 2)
+        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMFunctionPolr, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 3)
+        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsGLMFunctionMultinom, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 4)
+
+        ucrSelectorByDataFrameAddRemoveForFitModel.AddAdditionalCodeParameterPair(clsAOVFunction, ucrSelectorByDataFrameAddRemoveForFitModel.GetParameter(), 1)
+        ucrModelName.AddAdditionalRCode(clsAOVFunction, bReset)
 
         ucrChkConvertToVariate.SetRCode(clsFormulaOperator, bReset)
         ucrReceiverResponseVar.SetRCode(clsRConvert, bReset)
@@ -333,6 +347,7 @@ Public Class dlgFitModel
         ucrSelectorByDataFrameAddRemoveForFitModel.SetRCode(clsLM, bReset)
         ucrModelName.SetRCode(clsLM, bReset)
         ucrFamily.SetRCode(clsFamilyFunction, bReset)
+
         bRCodeSet = True
         ResponseConvert()
     End Sub
@@ -442,7 +457,7 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub UpdatePreview()
-        If Not ucrReceiverResponseVar.IsEmpty AndAlso Not ucrReceiverExpressionFitModel.IsEmpty Then
+        If Not ucrReceiverResponseVar.IsEmpty Then
             ucrInputModelPreview.SetName(clsFormulaOperator.ToScript())
         Else
             ucrInputModelPreview.SetName("")
@@ -498,13 +513,15 @@ Public Class dlgFitModel
             If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
                 clsLMOrGLM = clsLM
             ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Negative_Binomial_GLM") Then
-                clsLMOrGLM = clsGLMNB
+                clsLMOrGLM = clsGLMFunctionNB
             ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Ordered_Logistic") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
-                clsLMOrGLM = clsGLMPolr
+                clsLMOrGLM = clsGLMFunctionPolr
             ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Multinomial") Then
-                clsLMOrGLM = clsGLMMultinom
+                clsLMOrGLM = clsGLMFunctionMultinom
+            ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Normal_aov" Then
+                clsLMOrGLM = clsAOVFunction
             Else
-                clsLMOrGLM = clsGLM
+                clsLMOrGLM = clsGLMFunction
             End If
 
             ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
@@ -534,7 +551,7 @@ Public Class dlgFitModel
 
     Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged
         ChooseRFunction()
-        ResponseConvert()
+        'ResponseConvert()
         ChooseAnovaFunction()
     End Sub
 
@@ -550,7 +567,7 @@ Public Class dlgFitModel
         ResponseVariableType()
     End Sub
 
-    Private Sub ucrReceiverExpressionFitModel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlContentsChanged, ucrReceiverResponseVar.ControlContentsChanged
+    Private Sub ucrReceiverExpressionFitModel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlContentsChanged
         UpdatePreview()
         TestOKEnabled()
     End Sub
