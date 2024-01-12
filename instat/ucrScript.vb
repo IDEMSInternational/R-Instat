@@ -17,7 +17,7 @@
 Imports System.Collections.Specialized
 Imports System.IO
 Imports System.Windows.Controls
-Imports RScript
+Imports RInsightF461
 Imports ScintillaNET
 
 Public Class ucrScript
@@ -642,7 +642,7 @@ Public Class ucrScript
         Try
             Dim dctRStatements As OrderedDictionary
             Try
-                dctRStatements = New clsRScript(clsScriptActive.Text).dctRStatements
+                dctRStatements = New RScript(clsScriptActive.Text).statements
             Catch ex As Exception
                 MsgBox("R script parsing failed with message:" & Environment.NewLine _
                    & Environment.NewLine & ex.Message & Environment.NewLine & Environment.NewLine _
@@ -657,7 +657,7 @@ Public Class ucrScript
 
             Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
             Dim iNextStatementPos As Integer = 0
-            Dim clsRStatement As clsRStatement = Nothing
+            Dim clsRStatement As RStatement = Nothing
 
             For Each kvpDictEntry As DictionaryEntry In dctRStatements
                 If kvpDictEntry.Key > iCaretPos Then
@@ -708,8 +708,8 @@ Public Class ucrScript
 
         Dim dctRStatements As OrderedDictionary
         Try
-            dctRStatements = New clsRScript(frmMain.clsRLink.GetFormattedComment(strComment) _
-                                            & Environment.NewLine & strScript).dctRStatements
+            dctRStatements = New RScript(frmMain.clsRLink.GetFormattedComment(strComment) _
+                                            & Environment.NewLine & strScript).statements
         Catch ex As Exception
             MsgBox("R script parsing failed with message:" & Environment.NewLine _
                    & Environment.NewLine & ex.Message & Environment.NewLine & Environment.NewLine _
@@ -913,6 +913,15 @@ Public Class ucrScript
         End If
     End Sub
 
+    ' Ensure the cursor is visible by scrolling it into view
+    Private Sub SetFocusAndScrollCaret()
+        ' Set focus back to the ScintillaNET editor control
+        clsScriptActive.Focus()
+
+        ' Ensure the cursor is visible by scrolling it into view
+        clsScriptActive.ScrollCaret()
+    End Sub
+
     Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click, cmdRunAll.Click
         If clsScriptActive.TextLength < 1 _
                 OrElse MsgBox("Are you sure you want to run the entire contents of the script window?",
@@ -921,6 +930,8 @@ Public Class ucrScript
         End If
 
         RunScript(clsScriptActive.Text, "Code run from Script Window (all text)")
+
+        SetFocusAndScrollCaret()
     End Sub
 
     Private Sub mnuRunCurrentStatementSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentStatementSelection.Click, cmdRunStatementSelection.Click
@@ -929,6 +940,8 @@ Public Class ucrScript
         Else
             RunCurrentStatement()
         End If
+
+        SetFocusAndScrollCaret()
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
