@@ -160,7 +160,7 @@ Public Class dlgGeneralForGraphics
         ucr1stFactorReceiver.bWithQuotes = False
         ucr1stFactorReceiver.SetParameterIsString()
         ucr1stFactorReceiver.SetValuesToIgnore({"."})
-        ucr1stFactorReceiver.SetParameterPosition(0)
+        ucr1stFactorReceiver.SetParameterPosition(1)
 
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
@@ -281,7 +281,6 @@ Public Class dlgGeneralForGraphics
             ucrChkUseasNumeric.SetRCode(clsDummyFunction, bReset)
             ucrChkAddCode.SetRCode(clsAddCodeOperator, bReset)
             ucrInputAddCode.SetRCode(clsAddCodeOperator, bReset)
-            ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset)
         End If
         ucrFillReceiver.SetRCode(clsGlobalAesFunction, bReset)
         ucrColourReceiver.SetRCode(clsGlobalAesFunction, bReset)
