@@ -232,7 +232,7 @@ Public Class dlgHomogenization
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
         ucrReceiverStation.SetLinkedDisplayControl(lblStation)
 
-        lstOfRadioButtons = New List(Of RadioButton) From {rdoSingle, rdoPrepare, rdoQualityControl, rdoMonthlyTotals, rdoHomogenization}
+        lstOfRadioButtons = New List(Of RadioButton) From {rdoPrepare, rdoQualityControl, rdoMonthlyTotals, rdoHomogenization}
 
     End Sub
 
@@ -439,6 +439,8 @@ Public Class dlgHomogenization
         ucrSelectorStationFile.SetRCode(clsGetStnColumnsFunction, bReset)
         ucrChkPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrInputFinalYear.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrInputInitialYear.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub ResetRadioButtons()
@@ -709,12 +711,22 @@ Public Class dlgHomogenization
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ' Enable the next radio button if within the limit
-        If iEnabledRadioButtonIndex >= 0 AndAlso iEnabledRadioButtonIndex < 5 Then
-            lstOfRadioButtons(iEnabledRadioButtonIndex + 1).Enabled = True
+        If iEnabledRadioButtonIndex >= 0 AndAlso iEnabledRadioButtonIndex < lstOfRadioButtons.Count - 1 Then
+            ' Disable the current radio button
+            lstOfRadioButtons(iEnabledRadioButtonIndex).Enabled = False
+
+            ' Enable the next radio button
+            iEnabledRadioButtonIndex += 1
+            lstOfRadioButtons(iEnabledRadioButtonIndex).Enabled = True
         Else
             ' If all radio buttons are enabled, you may want to reset the counter or handle it as per your requirements
             ' For this example, I am resetting the counter to 0
             iEnabledRadioButtonIndex = 0
+
+            ' Disable all radio buttons except the first one
+            For i As Integer = 2 To lstOfRadioButtons.Count - 1
+                lstOfRadioButtons(i).Enabled = False
+            Next
         End If
     End Sub
 End Class
