@@ -19,6 +19,7 @@ Imports instat.Translations
 Public Class dlgHomogenization
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetRCode As Boolean = True
     Private clsCptMeanFunction, clsCptVarianceFunction, clsCptMeanVarianceFunction, clsExcludeNAFunction, clsPlotFunction, clsSummaryFunction, clsSnhtFunction,
         clsPettittFunction, clsBuishandFunction, clsTapplyFunction, clsDummyFunction, clsCsv2climatolFunction, clsHomogenQCFunctin, clsDdm2Function, clsHomogenFunction,
         clsGetColumnsFunction, clsGetStnColumnsFunction, clsCompleteCasesFunction, clsPmatchFunction, clsPmatch2Function, clsColumnsFunction, clsColumns2Function As New RFunction
@@ -659,6 +660,8 @@ Public Class dlgHomogenization
     End Sub
 
     Private Sub ucrInputFinalYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFinalYear.ControlValueChanged
+        TestOkEnabled()
+
         If Not ucrInputFinalYear.IsEmpty Then
             clsHomogenQCFunctin.AddParameter("anyf", ucrInputFinalYear.GetText, iPosition:=2, bIncludeArgumentName:=False)
             clsDdm2Function.AddParameter("initial", ucrInputFinalYear.GetText, bIncludeArgumentName:=False, iPosition:=2)
@@ -671,6 +674,8 @@ Public Class dlgHomogenization
     End Sub
 
     Private Sub ucrInputInitialYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputInitialYear.ControlValueChanged
+        TestOkEnabled()
+
         If Not ucrInputInitialYear.IsEmpty Then
             clsHomogenQCFunctin.AddParameter("anyi", ucrInputInitialYear.GetText, iPosition:=1, bIncludeArgumentName:=False)
             clsDdm2Function.AddParameter("final", ucrInputInitialYear.GetText, bIncludeArgumentName:=False, iPosition:=1)
@@ -710,7 +715,6 @@ Public Class dlgHomogenization
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        ' Enable the next radio button if within the limit
         If iEnabledRadioButtonIndex >= 0 AndAlso iEnabledRadioButtonIndex < lstOfRadioButtons.Count - 1 Then
             ' Disable the current radio button
             lstOfRadioButtons(iEnabledRadioButtonIndex).Enabled = False
