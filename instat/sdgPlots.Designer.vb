@@ -126,6 +126,29 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.tbpColour = New System.Windows.Forms.TabPage()
+        Me.grpColourGradient = New System.Windows.Forms.GroupBox()
+        Me.ucrInputGradientPositionColour = New instat.ucrInputComboBox()
+        Me.ucrInputGradientTransColour = New instat.ucrInputComboBox()
+        Me.ucrInputLowColour = New instat.ucrInputComboBox()
+        Me.ucrInputGradientExpandColour = New instat.ucrInputTextBox()
+        Me.ucrChkGradientExpandColour = New instat.ucrCheck()
+        Me.ucrChkGradientPositionColour = New instat.ucrCheck()
+        Me.ucrInputHighColour = New instat.ucrInputComboBox()
+        Me.ucrChkGradientTransColour = New instat.ucrCheck()
+        Me.ucrChkLowColour = New instat.ucrCheck()
+        Me.ucrChkHighColour = New instat.ucrCheck()
+        Me.grpFillGradient = New System.Windows.Forms.GroupBox()
+        Me.ucrInputGradientPosition = New instat.ucrInputComboBox()
+        Me.ucrInputGradientTrans = New instat.ucrInputComboBox()
+        Me.ucrInputLow = New instat.ucrInputComboBox()
+        Me.ucrInputGradientExpand = New instat.ucrInputTextBox()
+        Me.ucrChkGradientExpand = New instat.ucrCheck()
+        Me.ucrChkGradientPosition = New instat.ucrCheck()
+        Me.ucrInputHigh = New instat.ucrInputComboBox()
+        Me.ucrChkGradientTrans = New instat.ucrCheck()
+        Me.ucrChkLow = New instat.ucrCheck()
+        Me.ucrChkHigh = New instat.ucrCheck()
+        Me.rdoGradient = New System.Windows.Forms.RadioButton()
         Me.ucrChkColour = New instat.ucrCheck()
         Me.lblCanvasFillPalette = New System.Windows.Forms.Label()
         Me.ucrInputCanvasFillPalette = New instat.ucrInputComboBox()
@@ -608,51 +631,53 @@ Partial Class sdgPlots
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ttCaptionTitle = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.tbpPlotsOptions.SuspendLayout()
-        Me.tbpFacet.SuspendLayout()
-        Me.tbpLayers.SuspendLayout()
-        Me.tbpTitles.SuspendLayout()
-        Me.grpLegendTitle.SuspendLayout()
-        Me.tbpXAxis.SuspendLayout()
-        Me.tbpYAxis.SuspendLayout()
-        Me.tbpTheme.SuspendLayout()
-        Me.grpCommonOptions.SuspendLayout()
-        Me.tbpCoordinates.SuspendLayout()
-        Me.grpPolarCordinates.SuspendLayout()
-        Me.tbpColour.SuspendLayout()
-        Me.grpScalefillw.SuspendLayout()
-        Me.grpColourScale.SuspendLayout()
-        Me.grpScaleColorw.SuspendLayout()
-        Me.grpScalecolorcal.SuspendLayout()
-        Me.grpScalecolorhc.SuspendLayout()
-        Me.grpScalecolorfew.SuspendLayout()
-        Me.grpScalecolorsol.SuspendLayout()
-        Me.grpScalecolorpan.SuspendLayout()
-        Me.grpScalecolorg.SuspendLayout()
-        Me.grpColourScaleGgthemes.SuspendLayout()
-        Me.grpScalecolorEx.SuspendLayout()
-        Me.grpScalecolorEcon.SuspendLayout()
-        Me.grpScalecolorst.SuspendLayout()
-        Me.grpScalecolorExn.SuspendLayout()
-        Me.grpScaleColorfiv.SuspendLayout()
-        Me.grpScalecolorpt.SuspendLayout()
-        Me.grpScalefillg.SuspendLayout()
-        Me.grpScaleFillfiv.SuspendLayout()
-        Me.grpScalefillpt.SuspendLayout()
-        Me.grpScalefillst.SuspendLayout()
-        Me.grpScalefillpan.SuspendLayout()
-        Me.grpScalefillCal.SuspendLayout()
-        Me.grpScalefillEx.SuspendLayout()
-        Me.grpScalefillEcon.SuspendLayout()
-        Me.grpScalefillExn.SuspendLayout()
-        Me.grpScalefillsol.SuspendLayout()
-        Me.grpFillScaleggthemes.SuspendLayout()
-        Me.grpScalefillfew.SuspendLayout()
-        Me.grpScalefillhc.SuspendLayout()
-        Me.grpFillScale.SuspendLayout()
-        Me.tbpAnnotation.SuspendLayout()
-        Me.grpAnnotation.SuspendLayout()
-        Me.SuspendLayout()
+        Me.tbpPlotsOptions.SuspendLayout
+        Me.tbpFacet.SuspendLayout
+        Me.tbpLayers.SuspendLayout
+        Me.tbpTitles.SuspendLayout
+        Me.grpLegendTitle.SuspendLayout
+        Me.tbpXAxis.SuspendLayout
+        Me.tbpYAxis.SuspendLayout
+        Me.tbpTheme.SuspendLayout
+        Me.grpCommonOptions.SuspendLayout
+        Me.tbpCoordinates.SuspendLayout
+        Me.grpPolarCordinates.SuspendLayout
+        Me.tbpColour.SuspendLayout
+        Me.grpColourGradient.SuspendLayout
+        Me.grpFillGradient.SuspendLayout
+        Me.grpScalefillw.SuspendLayout
+        Me.grpColourScale.SuspendLayout
+        Me.grpScaleColorw.SuspendLayout
+        Me.grpScalecolorcal.SuspendLayout
+        Me.grpScalecolorhc.SuspendLayout
+        Me.grpScalecolorfew.SuspendLayout
+        Me.grpScalecolorsol.SuspendLayout
+        Me.grpScalecolorpan.SuspendLayout
+        Me.grpScalecolorg.SuspendLayout
+        Me.grpColourScaleGgthemes.SuspendLayout
+        Me.grpScalecolorEx.SuspendLayout
+        Me.grpScalecolorEcon.SuspendLayout
+        Me.grpScalecolorst.SuspendLayout
+        Me.grpScalecolorExn.SuspendLayout
+        Me.grpScaleColorfiv.SuspendLayout
+        Me.grpScalecolorpt.SuspendLayout
+        Me.grpScalefillg.SuspendLayout
+        Me.grpScaleFillfiv.SuspendLayout
+        Me.grpScalefillpt.SuspendLayout
+        Me.grpScalefillst.SuspendLayout
+        Me.grpScalefillpan.SuspendLayout
+        Me.grpScalefillCal.SuspendLayout
+        Me.grpScalefillEx.SuspendLayout
+        Me.grpScalefillEcon.SuspendLayout
+        Me.grpScalefillExn.SuspendLayout
+        Me.grpScalefillsol.SuspendLayout
+        Me.grpFillScaleggthemes.SuspendLayout
+        Me.grpScalefillfew.SuspendLayout
+        Me.grpScalefillhc.SuspendLayout
+        Me.grpFillScale.SuspendLayout
+        Me.tbpAnnotation.SuspendLayout
+        Me.grpAnnotation.SuspendLayout
+        Me.SuspendLayout
         '
         'tbpPlotsOptions
         '
@@ -668,7 +693,7 @@ Partial Class sdgPlots
         Me.tbpPlotsOptions.Location = New System.Drawing.Point(7, 3)
         Me.tbpPlotsOptions.Name = "tbpPlotsOptions"
         Me.tbpPlotsOptions.SelectedIndex = 0
-        Me.tbpPlotsOptions.Size = New System.Drawing.Size(679, 513)
+        Me.tbpPlotsOptions.Size = New System.Drawing.Size(1048, 513)
         Me.tbpPlotsOptions.TabIndex = 0
         '
         'tbpFacet
@@ -693,7 +718,7 @@ Partial Class sdgPlots
         Me.tbpFacet.Location = New System.Drawing.Point(4, 22)
         Me.tbpFacet.Name = "tbpFacet"
         Me.tbpFacet.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpFacet.Size = New System.Drawing.Size(671, 487)
+        Me.tbpFacet.Size = New System.Drawing.Size(1040, 487)
         Me.tbpFacet.TabIndex = 3
         Me.tbpFacet.Tag = "Facet"
         Me.tbpFacet.Text = "Facets"
@@ -883,7 +908,7 @@ Partial Class sdgPlots
         Me.tbpLayers.Location = New System.Drawing.Point(4, 22)
         Me.tbpLayers.Name = "tbpLayers"
         Me.tbpLayers.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLayers.Size = New System.Drawing.Size(671, 487)
+        Me.tbpLayers.Size = New System.Drawing.Size(1040, 487)
         Me.tbpLayers.TabIndex = 4
         Me.tbpLayers.Tag = "Layers"
         Me.tbpLayers.Text = "Layers"
@@ -926,7 +951,7 @@ Partial Class sdgPlots
         Me.tbpTitles.Location = New System.Drawing.Point(4, 22)
         Me.tbpTitles.Name = "tbpTitles"
         Me.tbpTitles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTitles.Size = New System.Drawing.Size(671, 487)
+        Me.tbpTitles.Size = New System.Drawing.Size(1040, 487)
         Me.tbpTitles.TabIndex = 2
         Me.tbpTitles.Tag = "Titles"
         Me.tbpTitles.Text = "Titles"
@@ -1270,7 +1295,7 @@ Partial Class sdgPlots
         Me.tbpXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpXAxis.Name = "tbpXAxis"
         Me.tbpXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpXAxis.Size = New System.Drawing.Size(671, 487)
+        Me.tbpXAxis.Size = New System.Drawing.Size(1040, 487)
         Me.tbpXAxis.TabIndex = 5
         Me.tbpXAxis.Text = "X-Axis"
         Me.tbpXAxis.UseVisualStyleBackColor = True
@@ -1289,7 +1314,7 @@ Partial Class sdgPlots
         Me.tbpYAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpYAxis.Name = "tbpYAxis"
         Me.tbpYAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpYAxis.Size = New System.Drawing.Size(671, 487)
+        Me.tbpYAxis.Size = New System.Drawing.Size(1040, 487)
         Me.tbpYAxis.TabIndex = 6
         Me.tbpYAxis.Text = "Y-Axis"
         Me.tbpYAxis.UseVisualStyleBackColor = True
@@ -1313,7 +1338,7 @@ Partial Class sdgPlots
         Me.tbpTheme.Location = New System.Drawing.Point(4, 22)
         Me.tbpTheme.Name = "tbpTheme"
         Me.tbpTheme.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTheme.Size = New System.Drawing.Size(671, 487)
+        Me.tbpTheme.Size = New System.Drawing.Size(1040, 487)
         Me.tbpTheme.TabIndex = 1
         Me.tbpTheme.Tag = "Theme"
         Me.tbpTheme.Text = "Themes"
@@ -1527,7 +1552,7 @@ Partial Class sdgPlots
         Me.tbpCoordinates.Location = New System.Drawing.Point(4, 22)
         Me.tbpCoordinates.Name = "tbpCoordinates"
         Me.tbpCoordinates.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpCoordinates.Size = New System.Drawing.Size(671, 487)
+        Me.tbpCoordinates.Size = New System.Drawing.Size(1040, 487)
         Me.tbpCoordinates.TabIndex = 7
         Me.tbpCoordinates.Text = "Coordinates"
         Me.tbpCoordinates.UseVisualStyleBackColor = True
@@ -1639,6 +1664,9 @@ Partial Class sdgPlots
         '
         'tbpColour
         '
+        Me.tbpColour.Controls.Add(Me.grpColourGradient)
+        Me.tbpColour.Controls.Add(Me.grpFillGradient)
+        Me.tbpColour.Controls.Add(Me.rdoGradient)
         Me.tbpColour.Controls.Add(Me.ucrChkColour)
         Me.tbpColour.Controls.Add(Me.lblCanvasFillPalette)
         Me.tbpColour.Controls.Add(Me.ucrInputCanvasFillPalette)
@@ -1699,10 +1727,268 @@ Partial Class sdgPlots
         Me.tbpColour.Location = New System.Drawing.Point(4, 22)
         Me.tbpColour.Name = "tbpColour"
         Me.tbpColour.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpColour.Size = New System.Drawing.Size(671, 487)
+        Me.tbpColour.Size = New System.Drawing.Size(1040, 487)
         Me.tbpColour.TabIndex = 8
         Me.tbpColour.Text = "Colour"
         Me.tbpColour.UseVisualStyleBackColor = True
+        '
+        'grpColourGradient
+        '
+        Me.grpColourGradient.Controls.Add(Me.ucrInputGradientPositionColour)
+        Me.grpColourGradient.Controls.Add(Me.ucrInputGradientTransColour)
+        Me.grpColourGradient.Controls.Add(Me.ucrInputLowColour)
+        Me.grpColourGradient.Controls.Add(Me.ucrInputGradientExpandColour)
+        Me.grpColourGradient.Controls.Add(Me.ucrChkGradientExpandColour)
+        Me.grpColourGradient.Controls.Add(Me.ucrChkGradientPositionColour)
+        Me.grpColourGradient.Controls.Add(Me.ucrInputHighColour)
+        Me.grpColourGradient.Controls.Add(Me.ucrChkGradientTransColour)
+        Me.grpColourGradient.Controls.Add(Me.ucrChkLowColour)
+        Me.grpColourGradient.Controls.Add(Me.ucrChkHighColour)
+        Me.grpColourGradient.Location = New System.Drawing.Point(20, 214)
+        Me.grpColourGradient.Name = "grpColourGradient"
+        Me.grpColourGradient.Size = New System.Drawing.Size(444, 165)
+        Me.grpColourGradient.TabIndex = 331
+        Me.grpColourGradient.TabStop = False
+        Me.grpColourGradient.Text = "Colour Scale"
+        '
+        'ucrInputGradientPositionColour
+        '
+        Me.ucrInputGradientPositionColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputGradientPositionColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputGradientPositionColour.GetSetSelectedIndex = -1
+        Me.ucrInputGradientPositionColour.IsReadOnly = False
+        Me.ucrInputGradientPositionColour.Location = New System.Drawing.Point(283, 102)
+        Me.ucrInputGradientPositionColour.Name = "ucrInputGradientPositionColour"
+        Me.ucrInputGradientPositionColour.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputGradientPositionColour.TabIndex = 198
+        '
+        'ucrInputGradientTransColour
+        '
+        Me.ucrInputGradientTransColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputGradientTransColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputGradientTransColour.GetSetSelectedIndex = -1
+        Me.ucrInputGradientTransColour.IsReadOnly = False
+        Me.ucrInputGradientTransColour.Location = New System.Drawing.Point(283, 75)
+        Me.ucrInputGradientTransColour.Name = "ucrInputGradientTransColour"
+        Me.ucrInputGradientTransColour.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputGradientTransColour.TabIndex = 197
+        '
+        'ucrInputLowColour
+        '
+        Me.ucrInputLowColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputLowColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLowColour.GetSetSelectedIndex = -1
+        Me.ucrInputLowColour.IsReadOnly = False
+        Me.ucrInputLowColour.Location = New System.Drawing.Point(283, 47)
+        Me.ucrInputLowColour.Name = "ucrInputLowColour"
+        Me.ucrInputLowColour.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLowColour.TabIndex = 196
+        '
+        'ucrInputGradientExpandColour
+        '
+        Me.ucrInputGradientExpandColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputGradientExpandColour.AutoSize = True
+        Me.ucrInputGradientExpandColour.IsMultiline = False
+        Me.ucrInputGradientExpandColour.IsReadOnly = False
+        Me.ucrInputGradientExpandColour.Location = New System.Drawing.Point(283, 132)
+        Me.ucrInputGradientExpandColour.Name = "ucrInputGradientExpandColour"
+        Me.ucrInputGradientExpandColour.Size = New System.Drawing.Size(137, 23)
+        Me.ucrInputGradientExpandColour.TabIndex = 195
+        '
+        'ucrChkGradientExpandColour
+        '
+        Me.ucrChkGradientExpandColour.AutoSize = True
+        Me.ucrChkGradientExpandColour.Checked = False
+        Me.ucrChkGradientExpandColour.Location = New System.Drawing.Point(10, 134)
+        Me.ucrChkGradientExpandColour.Name = "ucrChkGradientExpandColour"
+        Me.ucrChkGradientExpandColour.Size = New System.Drawing.Size(244, 23)
+        Me.ucrChkGradientExpandColour.TabIndex = 191
+        '
+        'ucrChkGradientPositionColour
+        '
+        Me.ucrChkGradientPositionColour.AutoSize = True
+        Me.ucrChkGradientPositionColour.Checked = False
+        Me.ucrChkGradientPositionColour.Location = New System.Drawing.Point(10, 105)
+        Me.ucrChkGradientPositionColour.Name = "ucrChkGradientPositionColour"
+        Me.ucrChkGradientPositionColour.Size = New System.Drawing.Size(244, 23)
+        Me.ucrChkGradientPositionColour.TabIndex = 190
+        '
+        'ucrInputHighColour
+        '
+        Me.ucrInputHighColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputHighColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputHighColour.GetSetSelectedIndex = -1
+        Me.ucrInputHighColour.IsReadOnly = False
+        Me.ucrInputHighColour.Location = New System.Drawing.Point(283, 19)
+        Me.ucrInputHighColour.Name = "ucrInputHighColour"
+        Me.ucrInputHighColour.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputHighColour.TabIndex = 187
+        '
+        'ucrChkGradientTransColour
+        '
+        Me.ucrChkGradientTransColour.AutoSize = True
+        Me.ucrChkGradientTransColour.Checked = False
+        Me.ucrChkGradientTransColour.Location = New System.Drawing.Point(10, 76)
+        Me.ucrChkGradientTransColour.Name = "ucrChkGradientTransColour"
+        Me.ucrChkGradientTransColour.Size = New System.Drawing.Size(244, 23)
+        Me.ucrChkGradientTransColour.TabIndex = 186
+        '
+        'ucrChkLowColour
+        '
+        Me.ucrChkLowColour.AutoSize = True
+        Me.ucrChkLowColour.Checked = False
+        Me.ucrChkLowColour.Location = New System.Drawing.Point(10, 47)
+        Me.ucrChkLowColour.Name = "ucrChkLowColour"
+        Me.ucrChkLowColour.Size = New System.Drawing.Size(244, 23)
+        Me.ucrChkLowColour.TabIndex = 185
+        '
+        'ucrChkHighColour
+        '
+        Me.ucrChkHighColour.AutoSize = True
+        Me.ucrChkHighColour.Checked = False
+        Me.ucrChkHighColour.Location = New System.Drawing.Point(10, 22)
+        Me.ucrChkHighColour.Name = "ucrChkHighColour"
+        Me.ucrChkHighColour.Size = New System.Drawing.Size(244, 23)
+        Me.ucrChkHighColour.TabIndex = 184
+        '
+        'grpFillGradient
+        '
+        Me.grpFillGradient.Controls.Add(Me.ucrInputGradientPosition)
+        Me.grpFillGradient.Controls.Add(Me.ucrInputGradientTrans)
+        Me.grpFillGradient.Controls.Add(Me.ucrInputLow)
+        Me.grpFillGradient.Controls.Add(Me.ucrInputGradientExpand)
+        Me.grpFillGradient.Controls.Add(Me.ucrChkGradientExpand)
+        Me.grpFillGradient.Controls.Add(Me.ucrChkGradientPosition)
+        Me.grpFillGradient.Controls.Add(Me.ucrInputHigh)
+        Me.grpFillGradient.Controls.Add(Me.ucrChkGradientTrans)
+        Me.grpFillGradient.Controls.Add(Me.ucrChkLow)
+        Me.grpFillGradient.Controls.Add(Me.ucrChkHigh)
+        Me.grpFillGradient.Location = New System.Drawing.Point(20, 215)
+        Me.grpFillGradient.Name = "grpFillGradient"
+        Me.grpFillGradient.Size = New System.Drawing.Size(444, 165)
+        Me.grpFillGradient.TabIndex = 330
+        Me.grpFillGradient.TabStop = False
+        Me.grpFillGradient.Text = "Fill Scale"
+        '
+        'ucrInputGradientPosition
+        '
+        Me.ucrInputGradientPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputGradientPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputGradientPosition.GetSetSelectedIndex = -1
+        Me.ucrInputGradientPosition.IsReadOnly = False
+        Me.ucrInputGradientPosition.Location = New System.Drawing.Point(283, 102)
+        Me.ucrInputGradientPosition.Name = "ucrInputGradientPosition"
+        Me.ucrInputGradientPosition.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputGradientPosition.TabIndex = 198
+        '
+        'ucrInputGradientTrans
+        '
+        Me.ucrInputGradientTrans.AddQuotesIfUnrecognised = True
+        Me.ucrInputGradientTrans.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputGradientTrans.GetSetSelectedIndex = -1
+        Me.ucrInputGradientTrans.IsReadOnly = False
+        Me.ucrInputGradientTrans.Location = New System.Drawing.Point(283, 75)
+        Me.ucrInputGradientTrans.Name = "ucrInputGradientTrans"
+        Me.ucrInputGradientTrans.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputGradientTrans.TabIndex = 197
+        '
+        'ucrInputLow
+        '
+        Me.ucrInputLow.AddQuotesIfUnrecognised = True
+        Me.ucrInputLow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLow.GetSetSelectedIndex = -1
+        Me.ucrInputLow.IsReadOnly = False
+        Me.ucrInputLow.Location = New System.Drawing.Point(283, 46)
+        Me.ucrInputLow.Name = "ucrInputLow"
+        Me.ucrInputLow.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLow.TabIndex = 196
+        '
+        'ucrInputGradientExpand
+        '
+        Me.ucrInputGradientExpand.AddQuotesIfUnrecognised = True
+        Me.ucrInputGradientExpand.AutoSize = True
+        Me.ucrInputGradientExpand.IsMultiline = False
+        Me.ucrInputGradientExpand.IsReadOnly = False
+        Me.ucrInputGradientExpand.Location = New System.Drawing.Point(283, 132)
+        Me.ucrInputGradientExpand.Name = "ucrInputGradientExpand"
+        Me.ucrInputGradientExpand.Size = New System.Drawing.Size(137, 23)
+        Me.ucrInputGradientExpand.TabIndex = 195
+        '
+        'ucrChkGradientExpand
+        '
+        Me.ucrChkGradientExpand.AutoSize = True
+        Me.ucrChkGradientExpand.Checked = False
+        Me.ucrChkGradientExpand.Location = New System.Drawing.Point(10, 134)
+        Me.ucrChkGradientExpand.Name = "ucrChkGradientExpand"
+        Me.ucrChkGradientExpand.Size = New System.Drawing.Size(244, 23)
+        Me.ucrChkGradientExpand.TabIndex = 191
+        '
+        'ucrChkGradientPosition
+        '
+        Me.ucrChkGradientPosition.AutoSize = True
+        Me.ucrChkGradientPosition.Checked = False
+        Me.ucrChkGradientPosition.Location = New System.Drawing.Point(10, 105)
+        Me.ucrChkGradientPosition.Name = "ucrChkGradientPosition"
+        Me.ucrChkGradientPosition.Size = New System.Drawing.Size(244, 23)
+        Me.ucrChkGradientPosition.TabIndex = 190
+        '
+        'ucrInputHigh
+        '
+        Me.ucrInputHigh.AddQuotesIfUnrecognised = True
+        Me.ucrInputHigh.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputHigh.GetSetSelectedIndex = -1
+        Me.ucrInputHigh.IsReadOnly = False
+        Me.ucrInputHigh.Location = New System.Drawing.Point(283, 19)
+        Me.ucrInputHigh.Name = "ucrInputHigh"
+        Me.ucrInputHigh.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputHigh.TabIndex = 187
+        '
+        'ucrChkGradientTrans
+        '
+        Me.ucrChkGradientTrans.AutoSize = True
+        Me.ucrChkGradientTrans.Checked = False
+        Me.ucrChkGradientTrans.Location = New System.Drawing.Point(10, 76)
+        Me.ucrChkGradientTrans.Name = "ucrChkGradientTrans"
+        Me.ucrChkGradientTrans.Size = New System.Drawing.Size(244, 23)
+        Me.ucrChkGradientTrans.TabIndex = 186
+        '
+        'ucrChkLow
+        '
+        Me.ucrChkLow.AutoSize = True
+        Me.ucrChkLow.Checked = False
+        Me.ucrChkLow.Location = New System.Drawing.Point(10, 46)
+        Me.ucrChkLow.Name = "ucrChkLow"
+        Me.ucrChkLow.Size = New System.Drawing.Size(244, 23)
+        Me.ucrChkLow.TabIndex = 185
+        '
+        'ucrChkHigh
+        '
+        Me.ucrChkHigh.AutoSize = True
+        Me.ucrChkHigh.Checked = False
+        Me.ucrChkHigh.Location = New System.Drawing.Point(10, 22)
+        Me.ucrChkHigh.Name = "ucrChkHigh"
+        Me.ucrChkHigh.Size = New System.Drawing.Size(244, 23)
+        Me.ucrChkHigh.TabIndex = 184
+        '
+        'rdoGradient
+        '
+        Me.rdoGradient.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoGradient.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoGradient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoGradient.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoGradient.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGradient.FlatAppearance.BorderSize = 2
+        Me.rdoGradient.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGradient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoGradient.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoGradient.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoGradient.Location = New System.Drawing.Point(505, 46)
+        Me.rdoGradient.Name = "rdoGradient"
+        Me.rdoGradient.Size = New System.Drawing.Size(91, 29)
+        Me.rdoGradient.TabIndex = 329
+        Me.rdoGradient.Text = "Gradient"
+        Me.rdoGradient.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoGradient.UseVisualStyleBackColor = True
         '
         'ucrChkColour
         '
@@ -6135,7 +6421,7 @@ Partial Class sdgPlots
         Me.rdoGgthemes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoGgthemes.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoGgthemes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoGgthemes.Location = New System.Drawing.Point(467, 46)
+        Me.rdoGgthemes.Location = New System.Drawing.Point(416, 46)
         Me.rdoGgthemes.Name = "rdoGgthemes"
         Me.rdoGgthemes.Size = New System.Drawing.Size(91, 29)
         Me.rdoGgthemes.TabIndex = 279
@@ -6155,7 +6441,7 @@ Partial Class sdgPlots
         Me.rdoViridis.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoViridis.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoViridis.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoViridis.Location = New System.Drawing.Point(378, 46)
+        Me.rdoViridis.Location = New System.Drawing.Point(327, 46)
         Me.rdoViridis.Name = "rdoViridis"
         Me.rdoViridis.Size = New System.Drawing.Size(91, 29)
         Me.rdoViridis.TabIndex = 278
@@ -6185,7 +6471,7 @@ Partial Class sdgPlots
         Me.rdoQualitative.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoQualitative.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoQualitative.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoQualitative.Location = New System.Drawing.Point(289, 46)
+        Me.rdoQualitative.Location = New System.Drawing.Point(238, 46)
         Me.rdoQualitative.Name = "rdoQualitative"
         Me.rdoQualitative.Size = New System.Drawing.Size(91, 29)
         Me.rdoQualitative.TabIndex = 275
@@ -6205,7 +6491,7 @@ Partial Class sdgPlots
         Me.rdoSequential.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSequential.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoSequential.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSequential.Location = New System.Drawing.Point(111, 46)
+        Me.rdoSequential.Location = New System.Drawing.Point(60, 46)
         Me.rdoSequential.Name = "rdoSequential"
         Me.rdoSequential.Size = New System.Drawing.Size(91, 29)
         Me.rdoSequential.TabIndex = 273
@@ -6225,7 +6511,7 @@ Partial Class sdgPlots
         Me.rdoDiverging.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDiverging.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoDiverging.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDiverging.Location = New System.Drawing.Point(200, 46)
+        Me.rdoDiverging.Location = New System.Drawing.Point(149, 46)
         Me.rdoDiverging.Name = "rdoDiverging"
         Me.rdoDiverging.Size = New System.Drawing.Size(91, 29)
         Me.rdoDiverging.TabIndex = 274
@@ -6426,9 +6712,9 @@ Partial Class sdgPlots
         'ucrPnlColourPalette
         '
         Me.ucrPnlColourPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColourPalette.Location = New System.Drawing.Point(111, 46)
+        Me.ucrPnlColourPalette.Location = New System.Drawing.Point(60, 46)
         Me.ucrPnlColourPalette.Name = "ucrPnlColourPalette"
-        Me.ucrPnlColourPalette.Size = New System.Drawing.Size(463, 29)
+        Me.ucrPnlColourPalette.Size = New System.Drawing.Size(565, 29)
         Me.ucrPnlColourPalette.TabIndex = 272
         '
         'ucrInputAxisType
@@ -6459,7 +6745,7 @@ Partial Class sdgPlots
         Me.tbpAnnotation.Location = New System.Drawing.Point(4, 22)
         Me.tbpAnnotation.Name = "tbpAnnotation"
         Me.tbpAnnotation.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpAnnotation.Size = New System.Drawing.Size(671, 487)
+        Me.tbpAnnotation.Size = New System.Drawing.Size(1040, 487)
         Me.tbpAnnotation.TabIndex = 9
         Me.tbpAnnotation.Text = "Annotation"
         Me.tbpAnnotation.UseVisualStyleBackColor = True
@@ -7024,7 +7310,7 @@ Partial Class sdgPlots
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(687, 528)
+        Me.ClientSize = New System.Drawing.Size(1107, 528)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tbpPlotsOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -7057,6 +7343,10 @@ Partial Class sdgPlots
         Me.grpPolarCordinates.PerformLayout()
         Me.tbpColour.ResumeLayout(False)
         Me.tbpColour.PerformLayout()
+        Me.grpColourGradient.ResumeLayout(False)
+        Me.grpColourGradient.PerformLayout()
+        Me.grpFillGradient.ResumeLayout(False)
+        Me.grpFillGradient.PerformLayout()
         Me.grpScalefillw.ResumeLayout(False)
         Me.grpScalefillw.PerformLayout()
         Me.grpColourScale.ResumeLayout(False)
@@ -7697,6 +7987,29 @@ Partial Class sdgPlots
     Friend WithEvents ucrChkNaValuew As ucrCheck
     Friend WithEvents ucrChkDropUnusedLevelsw As ucrCheck
     Friend WithEvents ucrChkColour As ucrCheck
+    Friend WithEvents rdoGradient As RadioButton
+    Friend WithEvents grpColourGradient As GroupBox
+    Friend WithEvents ucrInputGradientPositionColour As ucrInputComboBox
+    Friend WithEvents ucrInputGradientTransColour As ucrInputComboBox
+    Friend WithEvents ucrInputLowColour As ucrInputComboBox
+    Friend WithEvents ucrInputGradientExpandColour As ucrInputTextBox
+    Friend WithEvents ucrChkGradientExpandColour As ucrCheck
+    Friend WithEvents ucrChkGradientPositionColour As ucrCheck
+    Friend WithEvents ucrInputHighColour As ucrInputComboBox
+    Friend WithEvents ucrChkGradientTransColour As ucrCheck
+    Friend WithEvents ucrChkLowColour As ucrCheck
+    Friend WithEvents ucrChkHighColour As ucrCheck
+    Friend WithEvents grpFillGradient As GroupBox
+    Friend WithEvents ucrInputGradientPosition As ucrInputComboBox
+    Friend WithEvents ucrInputGradientTrans As ucrInputComboBox
+    Friend WithEvents ucrInputLow As ucrInputComboBox
+    Friend WithEvents ucrInputGradientExpand As ucrInputTextBox
+    Friend WithEvents ucrChkGradientExpand As ucrCheck
+    Friend WithEvents ucrChkGradientPosition As ucrCheck
+    Friend WithEvents ucrInputHigh As ucrInputComboBox
+    Friend WithEvents ucrChkGradientTrans As ucrCheck
+    Friend WithEvents ucrChkLow As ucrCheck
+    Friend WithEvents ucrChkHigh As ucrCheck
 End Class
 
 
