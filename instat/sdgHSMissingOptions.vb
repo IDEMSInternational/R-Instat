@@ -15,25 +15,17 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class sdgMissingOptionsEvapotranspiration
+Public Class sdgHSMissingOptions
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsReadInputsFunction, clsMissingDataVectorFunction As New RFunction
+
     Private Sub sdgMissingOptionsEvapotranspiration_Load(sender As Object, e As EventArgs) Handles ucrSdgButtons.Load
         autoTranslate(Me)
     End Sub
 
     Public Sub InitialiseControls()
         Dim dctInputMissingMethod As New Dictionary(Of String, String)
-
-        ucrInputMissingMethod.SetParameter(New RParameter("missing_method", 8))
-        dctInputMissingMethod.Add("monthly average", Chr(34) & "monthly average" & Chr(34))
-        dctInputMissingMethod.Add("seasonal average", Chr(34) & "seasonal average" & Chr(34))
-        dctInputMissingMethod.Add("DoY average", Chr(34) & "DoY average" & Chr(34))
-        dctInputMissingMethod.Add("neighbouring average", Chr(34) & "neighbouring average" & Chr(34))
-        ucrInputMissingMethod.SetItems(dctInputMissingMethod)
-        ucrInputMissingMethod.SetDropDownStyleAsNonEditable()
-        ucrInputMissingMethod.SetLinkedDisplayControl(lblMissingMethod)
 
         ucrChkInterpMissingDays.SetParameter(New RParameter("interp_missing_days", 5))
         ucrChkInterpMissingDays.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -55,19 +47,19 @@ Public Class sdgMissingOptionsEvapotranspiration
         ucrNudMaxDurationMissingData.SetMinMax(1, 99)
     End Sub
 
-    Public Sub SetRFunction(clsNewReadInputs As RFunction, clsNewMissingDataVector As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewReadInputsFunction As RFunction, clsNewMissingDataVectorFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
-        clsReadInputsFunction = clsNewReadInputs
-        clsMissingDataVectorFunction = clsNewMissingDataVector
+        clsReadInputsFunction = clsNewReadInputsFunction
+        clsMissingDataVectorFunction = clsNewMissingDataVectorFunction
 
-        ucrInputMissingMethod.SetRCode(clsReadInputsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkInterpMissingDays.SetRCode(clsReadInputsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkInterpMissingEntries.SetRCode(clsReadInputsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudMaxMissingData.SetRCode(clsMissingDataVectorFunction, bReset, bCloneIfNeeded:=True)
         ucrNudMaxMissingDays.SetRCode(clsMissingDataVectorFunction, bReset, bCloneIfNeeded:=True)
         ucrNudMaxDurationMissingData.SetRCode(clsMissingDataVectorFunction, bReset, bCloneIfNeeded:=True)
     End Sub
+
 End Class
