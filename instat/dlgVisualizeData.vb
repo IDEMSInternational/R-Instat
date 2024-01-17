@@ -267,15 +267,15 @@ Public Class dlgVisualizeData
 
     Private Sub ucrPnlVisualizeData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlVisualizeData.ControlValueChanged
         If rdoVisDat.Checked Then
-            ucrReceiverVisualizeData.SetIncludedDataTypes({"numeric", "logical", "factor", "character", "interger"})
+            ucrReceiverVisualizeData.SetIncludedDataTypes({"numeric", "logical", "factor", "character", "interger", "Date"})
             ucrSaveGraph.SetPrefix("vis_dat")
             clsCurrBaseFunction = clsVisDatFunction
         ElseIf rdoVisMiss.Checked Then
-            ucrReceiverVisualizeData.SetIncludedDataTypes({"numeric", "logical", "factor", "character", "interger"})
+            ucrReceiverVisualizeData.SetIncludedDataTypes({"numeric", "logical", "factor", "character", "interger", "Date"})
             ucrSaveGraph.SetPrefix("vis_miss")
             clsCurrBaseFunction = clsVisMissFunction
         ElseIf rdoVisGuess.Checked Then
-            ucrReceiverVisualizeData.SetIncludedDataTypes({"numeric", "logical", "factor", "character", "interger"})
+            ucrReceiverVisualizeData.SetIncludedDataTypes({"numeric", "logical", "factor", "character", "interger", "Date"})
             ucrSaveGraph.SetPrefix("vis_guess")
             clsCurrBaseFunction = clsVisGuessFunction
         ElseIf rdoNumeric.Checked Then
