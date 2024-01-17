@@ -717,7 +717,7 @@ Public Class dlgHomogenization
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         If iEnabledRadioButtonIndex >= 0 AndAlso iEnabledRadioButtonIndex < lstOfRadioButtons.Count - 1 Then
             ' Disable the current radio button
-            lstOfRadioButtons(iEnabledRadioButtonIndex).Enabled = False
+            'lstOfRadioButtons(iEnabledRadioButtonIndex).Enabled = False
 
             ' Enable the next radio button
             iEnabledRadioButtonIndex += 1
@@ -728,9 +728,9 @@ Public Class dlgHomogenization
             iEnabledRadioButtonIndex = 0
 
             ' Disable all radio buttons except the first one
-            For i As Integer = 2 To lstOfRadioButtons.Count - 1
-                lstOfRadioButtons(i).Enabled = False
-            Next
+            'For i As Integer = 2 To lstOfRadioButtons.Count - 1
+            '    lstOfRadioButtons(i).Enabled = False
+            'Next
         End If
     End Sub
 End Class
