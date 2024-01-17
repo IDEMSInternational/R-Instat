@@ -49,6 +49,10 @@ Partial Class dlgSurvey
         Me.ucrSelectorSurvey = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputId = New instat.ucrInputTextBox()
         Me.ucrReceiverSingleID = New instat.ucrReceiverSingle()
+        Me.lblVar1srs = New System.Windows.Forms.Label()
+        Me.ucrReceiverVar1srs = New instat.ucrReceiverSingle()
+        Me.lblVar2srs = New System.Windows.Forms.Label()
+        Me.ucrReceiverVar2srs = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblFormula
@@ -352,11 +356,59 @@ Partial Class dlgSurvey
         Me.ucrReceiverSingleID.TabIndex = 46
         Me.ucrReceiverSingleID.ucrSelector = Nothing
         '
+        'lblVar1srs
+        '
+        Me.lblVar1srs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVar1srs.Location = New System.Drawing.Point(423, 131)
+        Me.lblVar1srs.Name = "lblVar1srs"
+        Me.lblVar1srs.Size = New System.Drawing.Size(123, 13)
+        Me.lblVar1srs.TabIndex = 69
+        Me.lblVar1srs.Text = "Var1:"
+        '
+        'ucrReceiverVar1srs
+        '
+        Me.ucrReceiverVar1srs.AutoSize = True
+        Me.ucrReceiverVar1srs.frmParent = Me
+        Me.ucrReceiverVar1srs.Location = New System.Drawing.Point(426, 144)
+        Me.ucrReceiverVar1srs.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverVar1srs.Name = "ucrReceiverVar1srs"
+        Me.ucrReceiverVar1srs.Selector = Nothing
+        Me.ucrReceiverVar1srs.Size = New System.Drawing.Size(123, 20)
+        Me.ucrReceiverVar1srs.strNcFilePath = ""
+        Me.ucrReceiverVar1srs.TabIndex = 68
+        Me.ucrReceiverVar1srs.ucrSelector = Nothing
+        '
+        'lblVar2srs
+        '
+        Me.lblVar2srs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVar2srs.Location = New System.Drawing.Point(423, 168)
+        Me.lblVar2srs.Name = "lblVar2srs"
+        Me.lblVar2srs.Size = New System.Drawing.Size(123, 13)
+        Me.lblVar2srs.TabIndex = 71
+        Me.lblVar2srs.Text = "Var2:"
+        '
+        'ucrReceiverVar2srs
+        '
+        Me.ucrReceiverVar2srs.AutoSize = True
+        Me.ucrReceiverVar2srs.frmParent = Me
+        Me.ucrReceiverVar2srs.Location = New System.Drawing.Point(426, 181)
+        Me.ucrReceiverVar2srs.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverVar2srs.Name = "ucrReceiverVar2srs"
+        Me.ucrReceiverVar2srs.Selector = Nothing
+        Me.ucrReceiverVar2srs.Size = New System.Drawing.Size(123, 20)
+        Me.ucrReceiverVar2srs.strNcFilePath = ""
+        Me.ucrReceiverVar2srs.TabIndex = 70
+        Me.ucrReceiverVar2srs.ucrSelector = Nothing
+        '
         'dlgSurvey
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(431, 465)
+        Me.ClientSize = New System.Drawing.Size(686, 465)
+        Me.Controls.Add(Me.lblVar2srs)
+        Me.Controls.Add(Me.ucrReceiverVar2srs)
+        Me.Controls.Add(Me.lblVar1srs)
+        Me.Controls.Add(Me.ucrReceiverVar1srs)
         Me.Controls.Add(Me.lblFormula)
         Me.Controls.Add(Me.ucrReceiverMultipleContTable)
         Me.Controls.Add(Me.lblVar1)
@@ -422,4 +474,8 @@ Partial Class dlgSurvey
     Friend WithEvents ucrSelectorSurvey As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrInputId As ucrInputTextBox
     Friend WithEvents ucrReceiverSingleID As ucrReceiverSingle
+    Friend WithEvents lblVar2srs As Label
+    Friend WithEvents ucrReceiverVar2srs As ucrReceiverSingle
+    Friend WithEvents lblVar1srs As Label
+    Friend WithEvents ucrReceiverVar1srs As ucrReceiverSingle
 End Class

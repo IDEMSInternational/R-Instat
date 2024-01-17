@@ -21,7 +21,7 @@ Public Class dlgSurvey
     Private clsSvydesignFunction As New RFunction
     Private clsSvrepDesignFunction, clsSvyTotalFunction, clsSvycoFunction, clsSvymeanFunction, clsVarFunction, clsSvyQuantileFunction, clsSvySDFunction As New RFunction
     Private clsSummaryFunction, clsDummyFunction, clsRatioFunction, clsSvychisqFunction As New RFunction
-    Private clsDCastLeftContextFormula, clsformulaOperator, clsDCastLeftContext, clsVar2Operator, clsWeightsOperator, clsIDNewOperator, clsIdOperator, clsFpcOperator, clsStrataOperator, clsXOperator, clsVar1operator As New ROperator
+    Private clsDCastLeftContextFormulaOperator, clsVariablesPlusOperator, clsVariablesOperator, clsformulaOperator, clsDCastLeftContextOperator, clsVar2Operator, clsWeightsOperator, clsIDNewOperator, clsIdOperator, clsFpcOperator, clsStrataOperator, clsXOperator, clsVar1operator As New ROperator
 
     Private Sub dlgSurvey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -51,6 +51,23 @@ Public Class dlgSurvey
         ucrReceiverFPC.SetLinkedDisplayControl(lblFPC)
         ucrReceiverFPC.SetIncludedDataTypes({"numeric"}, bStrict:=True)
         ucrReceiverFPC.strSelectorHeading = "Numerics"
+
+        ucrReceiverVar1srs.SetParameter(New RParameter("variables", 6))
+        ucrReceiverVar1srs.Selector = ucrSelectorSurvey
+        ucrReceiverVar1srs.bWithQuotes = False
+        ucrReceiverVar1srs.SetParameterIsString()
+        ucrReceiverVar1srs.SetMeAsReceiver()
+        ucrReceiverVar1srs.SetLinkedDisplayControl(lblVar1srs)
+        'ucrReceiverVar1srs.AddToLinkedControls(ucrReceiverVar2srs)
+        'ucrReceiverFPC.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+        'ucrReceiverFPC.strSelectorHeading = "Numerics"
+
+        ucrReceiverVar2srs.SetParameter(New RParameter("variables", 7))
+        ucrReceiverVar2srs.Selector = ucrSelectorSurvey
+        ucrReceiverVar2srs.bWithQuotes = False
+        ucrReceiverVar2srs.SetParameterIsString()
+        ucrReceiverVar2srs.SetMeAsReceiver()
+        ucrReceiverVar2srs.SetLinkedDisplayControl(lblVar2srs)
 
         ucrReceiverSingleID.SetParameter(New RParameter("ids", 11))
         ucrReceiverSingleID.Selector = ucrSelectorSurvey
@@ -136,7 +153,8 @@ Public Class dlgSurvey
         ucrPnlMethod.AddRadioButton(rdoStratified, "strati")
         ucrPnlMethod.AddRadioButton(rdoClustered, "cluster")
 
-        ucrPnlMethod.AddToLinkedControls(ucrInputId, {rdoSRS, rdoStratified}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethod.AddToLinkedControls(ucrInputId, {rdoSRS, rdoStratified}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMethod.AddToLinkedControls({ucrReceiverVar1srs, ucrReceiverVar2srs}, {rdoSRS}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrReceiverSingleID, {rdoClustered}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrReceiverStrata, {rdoStratified}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
@@ -163,9 +181,11 @@ Public Class dlgSurvey
         clsStrataOperator = New ROperator
         clsXOperator = New ROperator
         clsVar2Operator = New ROperator
-        clsDCastLeftContextFormula = New ROperator
-        clsDCastLeftContext = New ROperator
+        clsDCastLeftContextFormulaOperator = New ROperator
+        clsDCastLeftContextOperator = New ROperator
         clsformulaOperator = New ROperator
+        clsVariablesOperator = New ROperator
+        clsVariablesPlusOperator = New ROperator
 
         ucrInputSummaryStat.SetName("mean")
 
@@ -174,11 +194,11 @@ Public Class dlgSurvey
         clsDummyFunction.AddParameter("Sampling", "True", iPosition:=2)
         clsDummyFunction.AddParameter("check", "True", iPosition:=1)
 
-        clsDCastLeftContextFormula.SetOperation("+")
-        clsDCastLeftContextFormula.bBrackets = False
+        clsDCastLeftContextFormulaOperator.SetOperation("+")
+        clsDCastLeftContextFormulaOperator.bBrackets = False
 
-        clsDCastLeftContext.SetOperation("+")
-        clsDCastLeftContext.bBrackets = False
+        clsDCastLeftContextOperator.SetOperation("+")
+        clsDCastLeftContextOperator.bBrackets = False
 
         clsWeightsOperator.SetOperation("~")
         clsWeightsOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
@@ -215,6 +235,15 @@ Public Class dlgSurvey
         clsVar1operator.SetOperation("~")
         clsVar1operator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
         clsVar1operator.bSpaceAroundOperation = False
+
+        clsVariablesOperator.SetOperation("~")
+        clsVariablesOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
+        clsVariablesOperator.bSpaceAroundOperation = False
+
+        clsVariablesPlusOperator.SetOperation("+")
+        clsVariablesPlusOperator.AddParameter("left", clsROperatorParameter:=clsVariablesOperator, iPosition:=0)
+        clsVariablesPlusOperator.AddParameter("right", ucrReceiverVar2srs.GetVariableNames(), iPosition:=1)
+        clsVariablesPlusOperator.bSpaceAroundOperation = False
 
         ucrSelectorSurvey.Reset()
         ucrReceiverFPC.SetMeAsReceiver()
@@ -299,7 +328,8 @@ Public Class dlgSurvey
         ucrReceiverWeights.SetRCode(clsWeightsOperator, bReset)
         ucrChkSummary.SetRCode(clsSummaryFunction, bReset)
         ucrPnlMethod.SetRCode(clsDummyFunction, bReset)
-
+        ucrReceiverVar1srs.SetRCode(clsVariablesOperator, bReset)
+        ucrReceiverVar2srs.SetRCode(clsVariablesPlusOperator, bReset)
         ucrChkRatios.SetRCode(clsRatioFunction, bReset)
         If bReset Then
             ucrChkContingencyTables.SetRCode(clsDummyFunction, bReset)
@@ -404,12 +434,12 @@ Public Class dlgSurvey
         Dim i As Integer = 0
 
         If Not ucrReceiverMultipleVar2.IsEmpty Then
-            clsDCastLeftContextFormula.ClearParameters()
+            clsDCastLeftContextFormulaOperator.ClearParameters()
             For Each strContextVar As String In ucrReceiverMultipleVar2.GetVariableNamesAsList
-                clsDCastLeftContextFormula.AddParameter(i, strContextVar, iPosition:=i)
+                clsDCastLeftContextFormulaOperator.AddParameter(i, strContextVar, iPosition:=i)
                 i = i + 1
             Next
-            clsXOperator.AddParameter("right", clsROperatorParameter:=clsDCastLeftContextFormula)
+            clsXOperator.AddParameter("right", clsROperatorParameter:=clsDCastLeftContextFormulaOperator)
         End If
     End Sub
 
@@ -417,12 +447,12 @@ Public Class dlgSurvey
         Dim i As Integer = 0
 
         If Not ucrReceiverMultipleContTable.IsEmpty Then
-            clsDCastLeftContext.ClearParameters()
+            clsDCastLeftContextOperator.ClearParameters()
             For Each strContextVar As String In ucrReceiverMultipleContTable.GetVariableNamesAsList
-                clsDCastLeftContext.AddParameter(i, strContextVar, iPosition:=i)
+                clsDCastLeftContextOperator.AddParameter(i, strContextVar, iPosition:=i)
                 i = i + 1
             Next
-            clsformulaOperator.AddParameter("right", clsROperatorParameter:=clsDCastLeftContext)
+            clsformulaOperator.AddParameter("right", clsROperatorParameter:=clsDCastLeftContextOperator)
         End If
     End Sub
 
@@ -490,5 +520,19 @@ Public Class dlgSurvey
 
     Private Sub ucrReceiverMultipleContTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleContTable.ControlValueChanged
         UpdateContextVariables2()
+    End Sub
+
+    Private Sub ucrReceiverVar1srs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVar1srs.ControlValueChanged
+        If Not ucrReceiverVar1srs.IsEmpty Then
+            ucrReceiverVar2srs.Visible = True
+            If Not ucrReceiverVar2srs.IsEmpty Then
+                clsSvrepDesignFunction.AddParameter("variables", clsROperatorParameter:=clsVariablesPlusOperator, iPosition:=5)
+            Else
+                clsSvrepDesignFunction.AddParameter("variables", clsROperatorParameter:=clsVariablesOperator, iPosition:=5)
+            End If
+        Else
+            ucrReceiverVar2srs.Visible = False
+            clsSvrepDesignFunction.RemoveParameterByName("variables")
+        End If
     End Sub
 End Class
