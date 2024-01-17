@@ -91,6 +91,12 @@ Public Class sdgDataOptions
         ucrSelectorFilters.LoadList()
     End Sub
 
+    Private Sub ApplyColumnSelectionSettings(applyToMetaData As Boolean, applyToDataFrame As Boolean, applyToDialogue As Boolean)
+        frmMain.UseColumnSelectionInMetaData(applyToMetaData)
+        frmMain.UseColumnSelectionInDataView(applyToDataFrame)
+        frmMain.clsRLink.bUseColumnSelection = applyToDialogue
+    End Sub
+
     Private Sub ucrSubDialogueBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrSubDialogueBase.ClickReturn
         Dim clsSetCurrentFilter As New RFunction
         Dim clsSetCurrentColumnSelection As New RFunction
@@ -112,6 +118,7 @@ Public Class sdgDataOptions
             Else
                 'TODO: Set Local column selection
             End If
+            ApplyColumnSelectionSettings(True, True, True)
         End If
     End Sub
 
