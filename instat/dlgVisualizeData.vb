@@ -28,6 +28,7 @@ Public Class dlgVisualizeData
     Private clsAsLogicalFunction As New RFunction
     Private clsRBinonFunction As New RFunction
     Private clsGetVariableFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     Private clsNRowFunction As New RFunction
     Private clsPipeOperator As New ROperator
 
@@ -140,7 +141,8 @@ Public Class dlgVisualizeData
 
         ucrChkFacet.SetText("Facets")
         ucrChkFacet.AddToLinkedControls(ucrByFactorsReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrChkFacet.AddParameterValuesCondition(True, "checked", "True")
+        ucrChkFacet.AddParameterValuesCondition(False, "checked", "False")
 
         ucrNudSamplingFunction.SetLinkedDisplayControl(lblSampling)
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -159,6 +161,7 @@ Public Class dlgVisualizeData
         clsVisValueFunction = New RFunction
         clsFilterFunction = New RFunction
         clsRBinonFunction = New RFunction
+        clsDummyFunction = New RFunction
         clsAsLogicalFunction = New RFunction
         clsNRowFunction = New RFunction
         clsGetVariableFunction = New RFunction
@@ -230,9 +233,7 @@ Public Class dlgVisualizeData
         ucrSaveGraph.AddAdditionalRCode(clsVisValueFunction, iAdditionalPairNo:=3)
         ucrInputComboboxPalette.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("palette", 1), iAdditionalPairNo:=1)
         ucrChkSortVariables.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("sort_miss", 2), iAdditionalPairNo:=1)
-        ucrByFactorsReceiver.AddAdditionalCodeParameterPair(clsVisMissFunction, ucrByFactorsReceiver.GetParameter(), iAdditionalPairNo:=1)
 
-        ucrByFactorsReceiver.SetRCode(clsVisDatFunction, bReset)
         ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
         ucrSelectorVisualizeData.SetRCode(clsNRowFunction, bReset)
@@ -244,7 +245,7 @@ Public Class dlgVisualizeData
         ucrNudSamplingFunction.SetRCode(clsRBinonFunction, bReset)
         If bReset Then
             ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
-            ucrChkFacet.SetRCode(clsVisDatFunction, bReset)
+            ucrChkFacet.SetRCode(clsDummyFunction, bReset)
         End If
     End Sub
 
@@ -382,7 +383,7 @@ Public Class dlgVisualizeData
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrChkFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFacet.ControlValueChanged
+    Private Sub ucrChkFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFacet.ControlValueChanged, ucrByFactorsReceiver.ControlValueChanged
         If ucrChkFacet.Checked Then
             ucrByFactorsReceiver.SetMeAsReceiver()
             If Not ucrByFactorsReceiver.IsEmpty Then
