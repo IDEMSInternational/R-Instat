@@ -23,11 +23,11 @@ Public Class dlgDescribeTwoVariable
     Public strFirstVariablesType, strSecondVariableType, strThirdVariableType As String
 
     'SUMMARY FUNCTIoNS
-    Private clsCombineFrequencyParametersFunction, clsCombineFunction, clsSummariseFunction,
+    Private clsCombineFrequencyParametersFunction, clsCombineFunction, clsCombineAnova2Function, clsSummariseFunction,
        clsDummyFunction, clsGroupByFunction, clsRAnovaFunction, clsCorrFunction, clsRAnovaTableFunction,
         clsRCorrelationFunction, clsSkimrFunction, clsSummariesListFunction, clsCombineAnovaFunction,
         clsSummaryTableCombineFactorsFunction, clsSummaryTableFunction,
-        clsThreeVariableCombineFrequencyParametersFunction, clsPivotWiderFunction As New RFunction
+        clsThreeVariableCombineFrequencyParametersFunction, clsPivotWiderFunction, clsMappingFunction, clsRAnovaTable2Function As New RFunction
 
     'FORMAT TABLE FUNCTIONS
     Private clsFootnoteCellBodyFunction, clsFootnoteCellFunction,
@@ -49,7 +49,7 @@ Public Class dlgDescribeTwoVariable
 
     'Format Operators
     Private clsPipeOperator, clsTabFootnoteOperator,
-            clsJoiningPipeOperator, clsMutableOperator As New ROperator
+            clsJoiningPipeOperator, clsMutableOperator, clsAnovaTable2Operator, clsYlistOperator As New ROperator
     Private iUcrBaseXLocation, iDialogueXsize As Integer
 
     Private Sub dlgDescribeTwoVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -200,6 +200,7 @@ Public Class dlgDescribeTwoVariable
         clsSummaryOperator = New ROperator
         clsPivotWiderFunction = New RFunction
         clsCombineAnovaFunction = New RFunction
+        clsCombineAnova2Function = New RFunction
         clsSummariseFunction = New RFunction
         clsCorrFunction = New RFunction
         clsRAnovaTableFunction = New RFunction
@@ -209,6 +210,10 @@ Public Class dlgDescribeTwoVariable
         clsGroupByPipeOperator3 = New ROperator
         clsGroupByPipeOperator4 = New ROperator
         clsGroupByPipeOperatorData = New ROperator
+        clsMappingFunction = New RFunction
+        clsAnovaTable2Operator = New ROperator
+        clsYlistOperator = New ROperator
+        clsRAnovaTable2Function = New RFunction
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
@@ -242,8 +247,27 @@ Public Class dlgDescribeTwoVariable
 
         clsgtExtrasThemesFuction.SetPackageName("gtExtras")
 
-        'clsGroupByFunction.SetPackageName("dplyr")
-        'clsGroupByFunction.SetRCommand("group_by")
+        clsCombineAnova2Function.SetRCommand("c")
+
+        clsMappingFunction.SetPackageName("purrr")
+        clsMappingFunction.SetRCommand("map")
+        clsMappingFunction.AddParameter(".x", clsROperatorParameter:=clsYlistOperator, iPosition:=0)
+        clsMappingFunction.AddParameter(".f", clsROperatorParameter:=clsAnovaTable2Operator, iPosition:=1)
+
+        clsAnovaTable2Operator.SetOperation("~")
+        clsAnovaTable2Operator.AddParameter("right", clsRFunctionParameter:=clsRAnovaTable2Function, iPosition:=1)
+        clsAnovaTable2Operator.bForceIncludeOperation = True
+
+        clsYlistOperator.SetOperation("", bBracketsTemp:=False)
+        clsYlistOperator.SetAssignTo("y_col_names_list")
+
+        clsRAnovaTable2Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables2")
+        clsRAnovaTable2Function.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsRAnovaTable2Function.AddParameter(" x_col_names", clsRFunctionParameter:=clsCombineAnova2Function, iPosition:=1)
+        clsRAnovaTable2Function.AddParameter("y_col_name", ".x", iPosition:=2)
+        clsRAnovaTable2Function.AddParameter("signif.stars", "FALSE", iPosition:=3)
+        clsRAnovaTable2Function.AddParameter("sign_level", "FALSE", iPosition:=4)
+        clsRAnovaTable2Function.AddParameter("means", "FALSE", iPosition:=5)
 
         clsGroupByPipeOperator.SetOperation("%>%")
         clsGroupByPipeOperator.AddParameter("skim", clsRFunctionParameter:=clsSkimrFunction,
@@ -585,16 +609,16 @@ Public Class dlgDescribeTwoVariable
                                                     strObjectName:="last_table")
             End If
             If IsNumericByNumericByFactor() Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaTableFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             End If
             If IsNumericByFNumericByNumeric() Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaTableFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             End If
             If IsNumericByFactorByFactor() Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaTableFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             End If
             If IsNumericByFactorByNumeric() Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaTableFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             End If
         End If
         FactorColumns()
@@ -675,9 +699,10 @@ Public Class dlgDescribeTwoVariable
         AddRemoveFirstParam()
         AddRemoveSecondParam()
         AddRemoveThirdParam()
-        AddRemoveFirstAnovaParam()
+        'AddRemoveFirstAnovaParam()
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
+        AddRemoveFirstAnova2Param()
     End Sub
 
     Private Sub HideFormatTableButton()
@@ -776,25 +801,37 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    Private Sub AddRemoveFirstAnovaParam()
+    Private Sub AddRemoveFirstAnova2Param()
         If rdoThreeVariable.Checked Then
             If IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
                 If ucrReceiverFirstVars.IsEmpty Then
-                    clsCombineAnovaFunction.RemoveParameterByName("x")
+                    clsYlistOperator.RemoveParameterByName("cols")
                 Else
-                    clsCombineAnovaFunction.AddParameter("x", ucrReceiverFirstVars.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
+                    clsYlistOperator.AddParameter("cols", ucrReceiverFirstVars.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
                 End If
             End If
         End If
     End Sub
 
+    'Private Sub AddRemoveFirstAnovaParam()
+    '    If rdoThreeVariable.Checked Then
+    '        If IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
+    '            If ucrReceiverFirstVars.IsEmpty Then
+    '                clsCombineAnovaFunction.RemoveParameterByName("x")
+    '            Else
+    '                clsCombineAnovaFunction.AddParameter("x", ucrReceiverFirstVars.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
+    '            End If
+    '        End If
+    '    End If
+    'End Sub
+
     Private Sub AddRemoveSecondAnovaParam()
         If rdoThreeVariable.Checked Then
             If IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
                 If ucrReceiverThreeVariableSecondFactor.IsEmpty Then
-                    clsCombineAnovaFunction.RemoveParameterByName("y")
+                    clsCombineAnova2Function.RemoveParameterByName("x")
                 Else
-                    clsCombineAnovaFunction.AddParameter("y", ucrReceiverThreeVariableSecondFactor.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
+                    clsCombineAnova2Function.AddParameter("x", ucrReceiverThreeVariableSecondFactor.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
                 End If
             End If
         End If
@@ -804,9 +841,9 @@ Public Class dlgDescribeTwoVariable
         If rdoThreeVariable.Checked Then
             If IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
                 If ucrReceiverThreeVariableThirdVariable.IsEmpty Then
-                    clsCombineFunction.RemoveParameterByName("y")
+                    clsCombineAnova2Function.RemoveParameterByName("y")
                 Else
-                    clsCombineFunction.AddParameter("y", ucrReceiverThreeVariableThirdVariable.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
+                    clsCombineAnova2Function.AddParameter("y", ucrReceiverThreeVariableThirdVariable.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
                 End If
             End If
         End If
@@ -900,9 +937,10 @@ Public Class dlgDescribeTwoVariable
         AddRemoveFirstParam()
         AddRemoveThirdParam()
         AddRemoveSecondParam()
-        AddRemoveFirstAnovaParam()
+        'AddRemoveFirstAnovaParam()
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
+        AddRemoveFirstAnova2Param()
     End Sub
 
     Private Sub ChangeSumaryLabelText()
@@ -1053,9 +1091,10 @@ Public Class dlgDescribeTwoVariable
         HideFormatTableButton()
         FactorColumns()
         AddRemoveFirstParam()
-        AddRemoveFirstAnovaParam()
+        'AddRemoveFirstAnovaParam()
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
+        AddRemoveFirstAnova2Param()
     End Sub
 
     Private Sub ucrReceiverThreeVariableSecondFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThreeVariableSecondFactor.ControlValueChanged
@@ -1063,8 +1102,9 @@ Public Class dlgDescribeTwoVariable
         AssignSecondVariableType()
         AddRemoveFirstParam()
         AddRemoveSecondParam()
-        AddRemoveFirstAnovaParam()
+        'AddRemoveFirstAnovaParam()
         AddRemoveSecondAnovaParam()
+        AddRemoveFirstAnova2Param()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlContentsChanged,
