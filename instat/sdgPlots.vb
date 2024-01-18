@@ -2144,7 +2144,7 @@ Public Class sdgPlots
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction,
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
-                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
+                        bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewFacetVariablesOperator As ROperator = Nothing,
                         Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
                         Optional bNewEnableFill As Boolean = True, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True, Optional strNewAxisType As String = "discrete")
         Dim clsTempParam As RParameter
@@ -2205,7 +2205,7 @@ Public Class sdgPlots
         If clsFacetFunction.ContainsParameter("facets") Then
             clsTempParam = clsFacetFunction.GetParameter("facets")
             If clsTempParam.bIsOperator AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing Then
-                clsFacetVariablesOperator = clsTempParam.clsArgumentCodeStructure
+                clsFacetVariablesOperator = clsNewFacetVariablesOperator
             Else
                 clsFacetVariablesOperator = New ROperator("~")
             End If
