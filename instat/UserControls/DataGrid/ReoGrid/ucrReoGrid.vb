@@ -219,8 +219,8 @@ Public MustInherit Class ucrReoGrid
     Private Function GetRowIndex(currWorkSheet As Worksheet, strRowName As String) As Integer
         If currWorkSheet IsNot Nothing Then
             For i As Integer = 0 To currWorkSheet.Rows - 1
-                Dim strCol As String = currWorkSheet.RowHeaders(i).Text
-                If strCol = strRowName Then
+                Dim strCol As String = currWorkSheet.RowHeaders(i).Text - 1
+                If CInt(strCol) = CInt(strRowName) Then
                     Return i
                 End If
             Next
@@ -234,7 +234,7 @@ Public MustInherit Class ucrReoGrid
             If strColumnHeader.Contains("(") Then
                 strColumnHeader = strColumnHeader.Split("(")(0)
             End If
-            Dim iRowIndex = GetRowIndex(grdData.CurrentWorksheet, iRow) + 1
+            Dim iRowIndex = GetRowIndex(grdData.CurrentWorksheet, iRow)
             If strColumnHeader.Trim = strColumn _
                 AndAlso iRowIndex > -1 Then
                 Return grdData.CurrentWorksheet(iRowIndex, i).ToString()
