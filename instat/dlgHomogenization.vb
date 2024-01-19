@@ -609,13 +609,23 @@ Public Class dlgHomogenization
     End Sub
 
     Private Sub ucrSelectorDataFiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDataFiles.ControlValueChanged
-        clsColumnsFunction.AddParameter("data", clsRCodeStructureParameter:=ucrSelectorDataFiles.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-        clsCsv2climatolFunction.AddParameter("data", Chr(34) & ucrSelectorDataFiles.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".csv" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        If Not ucrSelectorDataFiles.IsEmpty Then
+            clsColumnsFunction.AddParameter("data", clsRCodeStructureParameter:=ucrSelectorDataFiles.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+            clsCsv2climatolFunction.AddParameter("data", Chr(34) & ucrSelectorDataFiles.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".csv" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsColumnsFunction.RemoveParameterByName("data")
+            clsCsv2climatolFunction.RemoveParameterByName("data")
+        End If
     End Sub
 
     Private Sub ucrSelectorStationFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorStationFile.ControlValueChanged
-        clsColumns2Function.AddParameter("stndata", clsRCodeStructureParameter:=ucrSelectorStationFile.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-        clsCsv2climatolFunction.AddParameter("stnfile", Chr(34) & ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".csv" & Chr(34), iPosition:=2)
+        If Not ucrSelectorStationFile.IsEmpty Then
+            clsColumns2Function.AddParameter("stndata", clsRCodeStructureParameter:=ucrSelectorStationFile.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+            clsCsv2climatolFunction.AddParameter("stnfile", Chr(34) & ucrSelectorStationFile.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".csv" & Chr(34), iPosition:=2)
+        Else
+            clsColumns2Function.RemoveParameterByName("stndata")
+            clsCsv2climatolFunction.RemoveParameterByName("stnfile")
+        End If
     End Sub
 
     Private Sub ucrInputClimateVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputClimateVariables.ControlValueChanged
@@ -633,8 +643,6 @@ Public Class dlgHomogenization
     End Sub
 
     Private Sub ucrInputFinalYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFinalYear.ControlValueChanged
-        TestOkEnabled()
-
         If Not ucrInputFinalYear.IsEmpty Then
             clsHomogenQCFunctin.AddParameter("anyf", ucrInputFinalYear.GetText, iPosition:=2, bIncludeArgumentName:=False)
             clsDdm2Function.AddParameter("initial", ucrInputFinalYear.GetText, bIncludeArgumentName:=False, iPosition:=2)
@@ -647,8 +655,6 @@ Public Class dlgHomogenization
     End Sub
 
     Private Sub ucrInputInitialYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputInitialYear.ControlValueChanged
-        TestOkEnabled()
-
         If Not ucrInputInitialYear.IsEmpty Then
             clsHomogenQCFunctin.AddParameter("anyi", ucrInputInitialYear.GetText, iPosition:=1, bIncludeArgumentName:=False)
             clsDdm2Function.AddParameter("final", ucrInputInitialYear.GetText, bIncludeArgumentName:=False, iPosition:=1)
