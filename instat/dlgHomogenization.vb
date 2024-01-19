@@ -29,9 +29,6 @@ Public Class dlgHomogenization
     Private iEnabledRadioButtonIndex As Integer = 0
 
     Private lstOfRadioButtons As List(Of RadioButton)
-    Private Sub ucrPnlOptions_Load(sender As Object, e As EventArgs) Handles ucrPnlOptions.Load
-
-    End Sub
 
     Private Sub dlgHomogenization_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -135,14 +132,11 @@ Public Class dlgHomogenization
         ucrPnlOptions.AddRadioButton(rdoQualityControl)
         ucrPnlOptions.AddRadioButton(rdoMonthlyTotals)
         ucrPnlOptions.AddRadioButton(rdoHomogenization)
-        'ucrPnlOptions.AddFunctionNamesCondition(rdoSingle, {"cpt.mean", "cpt.var", "cpt.meanvar", "snh.test", "pettitt.test", "br.test", "tapply"})
         ucrPnlOptions.AddParameterValuesCondition(rdoSingle, "checked", "single")
         ucrPnlOptions.AddParameterValuesCondition(rdoPrepare, "checked", "prepare")
         ucrPnlOptions.AddParameterValuesCondition(rdoQualityControl, "checked", "quality")
         ucrPnlOptions.AddParameterValuesCondition(rdoMonthlyTotals, "checked", "month_totals")
         ucrPnlOptions.AddParameterValuesCondition(rdoHomogenization, "checked", "homogen")
-
-
 
         ucrChkPlot.SetText("Plot")
         ucrChkPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"plot"})
@@ -211,12 +205,8 @@ Public Class dlgHomogenization
         ucrInputPenValue.SetValidationTypeAsNumeric()
         ttOptions.SetToolTip(ucrInputPenValue.txtInput, "The theoretical type I error e.g.0.05 when using the Asymptotic penalty. A vector of length 2 (min,max) if using the CROPS penalty")
 
-        'ucrSaveResult.SetDataFrameSelector(ucrSelectorHomogenization.ucrAvailableDataFrames)
         ucrSaveResult.SetCheckBoxText("Save Test Object:")
-        'ucrSaveResult.SetSaveTypeAsModel()
-        'ucrSaveResult.SetIsComboBox()
-        'ucrSaveResult.SetPrefix("Test")
-        'ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
+
         ucrPnlOptions.AddToLinkedControls({ucrSelectorHomogenization, ucrSaveResult, ucrReceiverNeighbour, ucrReceiverStation, ucrReceiverElement}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrInputClimateVariables}, {rdoPrepare, rdoQualityControl, rdoHomogenization, rdoMonthlyTotals}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrInputInitialYear, ucrInputFinalYear}, {rdoQualityControl, rdoHomogenization, rdoMonthlyTotals}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -271,7 +261,6 @@ Public Class dlgHomogenization
         ucrReceiverDataFiles.SetMeAsReceiver()
         ucrSelectorDataFiles.Reset()
         ucrSelectorStationFile.Reset()
-        'ucrSaveResult.Reset()
         'TODO: Set conditions properly!
         rdoSnht.Checked = True
 
@@ -416,19 +405,10 @@ Public Class dlgHomogenization
 
         ucrReceiverStation.SetRCode(clsLeftBracketOperator, bReset)
 
-        'ucrPnlMethods.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        'ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         If bReset Then
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
         End If
 
-        'ucrSaveResult.AddAdditionalRCode(clsCptVarianceFunction, iAdditionalPairNo:=1)
-        'ucrSaveResult.AddAdditionalRCode(clsCptMeanVarianceFunction, iAdditionalPairNo:=2)
-        'ucrSaveResult.AddAdditionalRCode(clsPettittFunction, iAdditionalPairNo:=3)
-        'ucrSaveResult.AddAdditionalRCode(clsSnhtFunction, iAdditionalPairNo:=4)
-        'ucrSaveResult.AddAdditionalRCode(clsBuishandFunction, iAdditionalPairNo:=5)
-
-        'ucrSaveResult.SetRCode(clsCptMeanFunction, bReset)
         ucrReceiverDataFiles.SetRCode(clsGetColumnsFunction, bReset)
         ucrSelectorDataFiles.SetRCode(clsGetColumnsFunction, bReset)
         ucrReceiverLatitude.SetRCode(clsGetColumnsFunction, bReset)
@@ -543,13 +523,6 @@ Public Class dlgHomogenization
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOkEnabled()
-    End Sub
-
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveResult.ControlContentsChanged,
-        ucrInputQ.ControlContentsChanged, ucrInputPenValue.ControlContentsChanged, ucrNudMinSegLen.ControlContentsChanged,
-        ucrInputComboMethod.ControlContentsChanged, ucrInputComboPenalty.ControlContentsChanged, ucrReceiverDataFiles.ControlContentsChanged, ucrInputFinalYear.ControlContentsChanged, ucrInputInitialYear.ControlContentsChanged, ucrInputClimateVariables.ControlContentsChanged,
-        ucrReceiverStationName.ControlContentsChanged, ucrReceiverStationId.ControlContentsChanged, ucrReceiverLongtitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -690,7 +663,7 @@ Public Class dlgHomogenization
     Private Sub ucrReceiverLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlValueChanged, ucrReceiverElavation.ControlValueChanged,
             ucrReceiverLongtitude.ControlValueChanged, ucrReceiverStationId.ControlValueChanged, ucrReceiverStationName.ControlValueChanged
         If Not ucrReceiverLatitude.IsEmpty AndAlso Not ucrReceiverLongtitude.IsEmpty Then
-            Dim lstVariables As List(Of String) = New List(Of String)()
+            Dim lstVariables As New List(Of String)()
 
             lstVariables.Add(ucrReceiverLatitude.GetVariableNames())
             lstVariables.Add(ucrReceiverLongtitude.GetVariableNames())
@@ -716,9 +689,6 @@ Public Class dlgHomogenization
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         If iEnabledRadioButtonIndex >= 0 AndAlso iEnabledRadioButtonIndex < lstOfRadioButtons.Count - 1 Then
-            ' Disable the current radio button
-            'lstOfRadioButtons(iEnabledRadioButtonIndex).Enabled = False
-
             ' Enable the next radio button
             iEnabledRadioButtonIndex += 1
             lstOfRadioButtons(iEnabledRadioButtonIndex).Enabled = True
@@ -726,11 +696,13 @@ Public Class dlgHomogenization
             ' If all radio buttons are enabled, you may want to reset the counter or handle it as per your requirements
             ' For this example, I am resetting the counter to 0
             iEnabledRadioButtonIndex = 0
-
-            ' Disable all radio buttons except the first one
-            'For i As Integer = 2 To lstOfRadioButtons.Count - 1
-            '    lstOfRadioButtons(i).Enabled = False
-            'Next
         End If
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveResult.ControlContentsChanged,
+        ucrInputQ.ControlContentsChanged, ucrInputPenValue.ControlContentsChanged, ucrNudMinSegLen.ControlContentsChanged,
+        ucrInputComboMethod.ControlContentsChanged, ucrInputComboPenalty.ControlContentsChanged, ucrReceiverDataFiles.ControlContentsChanged, ucrInputFinalYear.ControlContentsChanged, ucrInputInitialYear.ControlContentsChanged, ucrInputClimateVariables.ControlContentsChanged,
+        ucrReceiverStationName.ControlContentsChanged, ucrReceiverStationId.ControlContentsChanged, ucrReceiverLongtitude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
