@@ -23,24 +23,24 @@ Partial Class dlgExportForClimpact
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblTN = New System.Windows.Forms.Label()
-        Me.ucrReceiverTN = New instat.ucrReceiverSingle()
         Me.lblTX = New System.Windows.Forms.Label()
-        Me.ucrReceiverTX = New instat.ucrReceiverSingle()
         Me.lblRR = New System.Windows.Forms.Label()
-        Me.ucrReceiverRR = New instat.ucrReceiverSingle()
         Me.lblDay = New System.Windows.Forms.Label()
-        Me.ucrReceiverDay = New instat.ucrReceiverSingle()
         Me.lblMonth = New System.Windows.Forms.Label()
-        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.lblExport = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
-        Me.ucrInputExportFile = New instat.ucrInputTextBox()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lblYear = New System.Windows.Forms.Label()
-        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
-        Me.ucrSelectorImportToClimpact = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblMissingValues = New System.Windows.Forms.Label()
         Me.ucrInputCodeMissingValues = New instat.ucrInputTextBox()
+        Me.ucrReceiverTN = New instat.ucrReceiverSingle()
+        Me.ucrReceiverTX = New instat.ucrReceiverSingle()
+        Me.ucrReceiverRR = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDay = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
+        Me.ucrInputExportFile = New instat.ucrInputTextBox()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrSelectorImportToClimpact = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'lblTN
@@ -51,6 +51,92 @@ Partial Class dlgExportForClimpact
         Me.lblTN.Size = New System.Drawing.Size(93, 13)
         Me.lblTN.TabIndex = 11
         Me.lblTN.Text = "Min. Temperature:"
+        '
+        'lblTX
+        '
+        Me.lblTX.AutoSize = True
+        Me.lblTX.Location = New System.Drawing.Point(278, 197)
+        Me.lblTX.Name = "lblTX"
+        Me.lblTX.Size = New System.Drawing.Size(96, 13)
+        Me.lblTX.TabIndex = 9
+        Me.lblTX.Text = "Max. Temperature:"
+        '
+        'lblRR
+        '
+        Me.lblRR.AutoSize = True
+        Me.lblRR.Location = New System.Drawing.Point(278, 150)
+        Me.lblRR.Name = "lblRR"
+        Me.lblRR.Size = New System.Drawing.Size(45, 13)
+        Me.lblRR.TabIndex = 7
+        Me.lblRR.Text = "Rainfall:"
+        '
+        'lblDay
+        '
+        Me.lblDay.AutoSize = True
+        Me.lblDay.Location = New System.Drawing.Point(278, 106)
+        Me.lblDay.Name = "lblDay"
+        Me.lblDay.Size = New System.Drawing.Size(29, 13)
+        Me.lblDay.TabIndex = 5
+        Me.lblDay.Text = "Day:"
+        '
+        'lblMonth
+        '
+        Me.lblMonth.AutoSize = True
+        Me.lblMonth.Location = New System.Drawing.Point(278, 59)
+        Me.lblMonth.Name = "lblMonth"
+        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
+        Me.lblMonth.TabIndex = 3
+        Me.lblMonth.Text = "Month:"
+        '
+        'lblExport
+        '
+        Me.lblExport.AutoSize = True
+        Me.lblExport.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblExport.Location = New System.Drawing.Point(9, 297)
+        Me.lblExport.Name = "lblExport"
+        Me.lblExport.Size = New System.Drawing.Size(59, 13)
+        Me.lblExport.TabIndex = 16
+        Me.lblExport.Text = "Export File:"
+        '
+        'cmdBrowse
+        '
+        Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdBrowse.Location = New System.Drawing.Point(293, 291)
+        Me.cmdBrowse.Name = "cmdBrowse"
+        Me.cmdBrowse.Size = New System.Drawing.Size(80, 23)
+        Me.cmdBrowse.TabIndex = 18
+        Me.cmdBrowse.Text = "Browse"
+        Me.cmdBrowse.UseVisualStyleBackColor = True
+        '
+        'lblYear
+        '
+        Me.lblYear.AutoSize = True
+        Me.lblYear.Location = New System.Drawing.Point(278, 12)
+        Me.lblYear.Name = "lblYear"
+        Me.lblYear.Size = New System.Drawing.Size(32, 13)
+        Me.lblYear.TabIndex = 1
+        Me.lblYear.Text = "Year:"
+        '
+        'lblMissingValues
+        '
+        Me.lblMissingValues.AutoSize = True
+        Me.lblMissingValues.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMissingValues.Location = New System.Drawing.Point(4, 244)
+        Me.lblMissingValues.Name = "lblMissingValues"
+        Me.lblMissingValues.Size = New System.Drawing.Size(122, 13)
+        Me.lblMissingValues.TabIndex = 33
+        Me.lblMissingValues.Text = "Code Missing Values as:"
+        '
+        'ucrInputCodeMissingValues
+        '
+        Me.ucrInputCodeMissingValues.AddQuotesIfUnrecognised = True
+        Me.ucrInputCodeMissingValues.AutoSize = True
+        Me.ucrInputCodeMissingValues.IsMultiline = False
+        Me.ucrInputCodeMissingValues.IsReadOnly = False
+        Me.ucrInputCodeMissingValues.Location = New System.Drawing.Point(132, 242)
+        Me.ucrInputCodeMissingValues.Name = "ucrInputCodeMissingValues"
+        Me.ucrInputCodeMissingValues.Size = New System.Drawing.Size(99, 21)
+        Me.ucrInputCodeMissingValues.TabIndex = 32
         '
         'ucrReceiverTN
         '
@@ -65,15 +151,6 @@ Partial Class dlgExportForClimpact
         Me.ucrReceiverTN.TabIndex = 12
         Me.ucrReceiverTN.ucrSelector = Nothing
         '
-        'lblTX
-        '
-        Me.lblTX.AutoSize = True
-        Me.lblTX.Location = New System.Drawing.Point(278, 197)
-        Me.lblTX.Name = "lblTX"
-        Me.lblTX.Size = New System.Drawing.Size(96, 13)
-        Me.lblTX.TabIndex = 9
-        Me.lblTX.Text = "Max. Temperature:"
-        '
         'ucrReceiverTX
         '
         Me.ucrReceiverTX.AutoSize = True
@@ -86,15 +163,6 @@ Partial Class dlgExportForClimpact
         Me.ucrReceiverTX.strNcFilePath = ""
         Me.ucrReceiverTX.TabIndex = 10
         Me.ucrReceiverTX.ucrSelector = Nothing
-        '
-        'lblRR
-        '
-        Me.lblRR.AutoSize = True
-        Me.lblRR.Location = New System.Drawing.Point(278, 150)
-        Me.lblRR.Name = "lblRR"
-        Me.lblRR.Size = New System.Drawing.Size(45, 13)
-        Me.lblRR.TabIndex = 7
-        Me.lblRR.Text = "Rainfall:"
         '
         'ucrReceiverRR
         '
@@ -109,15 +177,6 @@ Partial Class dlgExportForClimpact
         Me.ucrReceiverRR.TabIndex = 8
         Me.ucrReceiverRR.ucrSelector = Nothing
         '
-        'lblDay
-        '
-        Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(278, 106)
-        Me.lblDay.Name = "lblDay"
-        Me.lblDay.Size = New System.Drawing.Size(29, 13)
-        Me.lblDay.TabIndex = 5
-        Me.lblDay.Text = "Day:"
-        '
         'ucrReceiverDay
         '
         Me.ucrReceiverDay.AutoSize = True
@@ -130,15 +189,6 @@ Partial Class dlgExportForClimpact
         Me.ucrReceiverDay.strNcFilePath = ""
         Me.ucrReceiverDay.TabIndex = 6
         Me.ucrReceiverDay.ucrSelector = Nothing
-        '
-        'lblMonth
-        '
-        Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(278, 59)
-        Me.lblMonth.Name = "lblMonth"
-        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
-        Me.lblMonth.TabIndex = 3
-        Me.lblMonth.Text = "Month:"
         '
         'ucrReceiverMonth
         '
@@ -153,33 +203,13 @@ Partial Class dlgExportForClimpact
         Me.ucrReceiverMonth.TabIndex = 4
         Me.ucrReceiverMonth.ucrSelector = Nothing
         '
-        'lblExport
-        '
-        Me.lblExport.AutoSize = True
-        Me.lblExport.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExport.Location = New System.Drawing.Point(9, 307)
-        Me.lblExport.Name = "lblExport"
-        Me.lblExport.Size = New System.Drawing.Size(59, 13)
-        Me.lblExport.TabIndex = 16
-        Me.lblExport.Text = "Export File:"
-        '
-        'cmdBrowse
-        '
-        Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrowse.Location = New System.Drawing.Point(293, 302)
-        Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.Size = New System.Drawing.Size(80, 23)
-        Me.cmdBrowse.TabIndex = 18
-        Me.cmdBrowse.Text = "Browse"
-        Me.cmdBrowse.UseVisualStyleBackColor = True
-        '
         'ucrInputExportFile
         '
         Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
         Me.ucrInputExportFile.AutoSize = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(108, 303)
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(108, 293)
         Me.ucrInputExportFile.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
         Me.ucrInputExportFile.Size = New System.Drawing.Size(182, 21)
@@ -189,20 +219,11 @@ Partial Class dlgExportForClimpact
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(7, 332)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 318)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 19
-        '
-        'lblYear
-        '
-        Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(278, 12)
-        Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 1
-        Me.lblYear.Text = "Year:"
         '
         'ucrReceiverYear
         '
@@ -229,32 +250,11 @@ Partial Class dlgExportForClimpact
         Me.ucrSelectorImportToClimpact.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorImportToClimpact.TabIndex = 0
         '
-        'lblMissingValues
-        '
-        Me.lblMissingValues.AutoSize = True
-        Me.lblMissingValues.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMissingValues.Location = New System.Drawing.Point(4, 244)
-        Me.lblMissingValues.Name = "lblMissingValues"
-        Me.lblMissingValues.Size = New System.Drawing.Size(122, 13)
-        Me.lblMissingValues.TabIndex = 33
-        Me.lblMissingValues.Text = "Code Missing Values as:"
-        '
-        'ucrInputCodeMissingValues
-        '
-        Me.ucrInputCodeMissingValues.AddQuotesIfUnrecognised = True
-        Me.ucrInputCodeMissingValues.AutoSize = True
-        Me.ucrInputCodeMissingValues.IsMultiline = False
-        Me.ucrInputCodeMissingValues.IsReadOnly = False
-        Me.ucrInputCodeMissingValues.Location = New System.Drawing.Point(132, 242)
-        Me.ucrInputCodeMissingValues.Name = "ucrInputCodeMissingValues"
-        Me.ucrInputCodeMissingValues.Size = New System.Drawing.Size(99, 21)
-        Me.ucrInputCodeMissingValues.TabIndex = 32
-        '
         'dlgExportForClimpact
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(422, 388)
+        Me.ClientSize = New System.Drawing.Size(422, 370)
         Me.Controls.Add(Me.lblMissingValues)
         Me.Controls.Add(Me.ucrInputCodeMissingValues)
         Me.Controls.Add(Me.lblTN)
