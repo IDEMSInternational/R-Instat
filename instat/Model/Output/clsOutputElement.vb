@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.IO
-Imports RScript
+Imports RInsightF461
 
 ''' <summary>
 ''' Output element for an R script. 
@@ -97,23 +97,18 @@ Public Class clsOutputElement
         Get
             Dim _lstRScriptElements As New List(Of clsRScriptElement)
             Try
-                Dim rScript As New clsRScript("")
-                Dim lstTokens As List(Of clsRToken) = rScript.GetLstTokens(rScript.GetLstLexemes(_strScript)) 'rScript.lstTokens
+                Dim lstTokens As List(Of RToken) = New RTokenList(_strScript).TokensFlat
                 If lstTokens IsNot Nothing Then
                     For Each rToken In lstTokens
                         _lstRScriptElements.Add(New clsRScriptElement With
                     {
-                        .Text = rToken.strTxt,
-                        .Type = rToken.enuToken
+                        .Text = rToken.Lexeme.Text,
+                        .Type = rToken.TokenType
                     })
                     Next
                 End If
             Catch ex As Exception
-                MessageBox.Show("Unable to parse the following R Script: '" & _strScript & "'." &
-                            Environment.NewLine & ex.Message,
-                            "Developer Error",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error)
+                Return New List(Of clsRScriptElement)
             End Try
             Return _lstRScriptElements
         End Get
