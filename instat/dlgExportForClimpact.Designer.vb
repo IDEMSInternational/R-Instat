@@ -32,7 +32,6 @@ Partial Class dlgExportForClimpact
         Me.ucrReceiverDay = New instat.ucrReceiverSingle()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
-        Me.ucrChkExportDataFrame = New instat.ucrCheck()
         Me.lblExport = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.ucrInputExportFile = New instat.ucrInputTextBox()
@@ -154,20 +153,11 @@ Partial Class dlgExportForClimpact
         Me.ucrReceiverMonth.TabIndex = 4
         Me.ucrReceiverMonth.ucrSelector = Nothing
         '
-        'ucrChkExportDataFrame
-        '
-        Me.ucrChkExportDataFrame.AutoSize = True
-        Me.ucrChkExportDataFrame.Checked = False
-        Me.ucrChkExportDataFrame.Location = New System.Drawing.Point(9, 299)
-        Me.ucrChkExportDataFrame.Name = "ucrChkExportDataFrame"
-        Me.ucrChkExportDataFrame.Size = New System.Drawing.Size(266, 23)
-        Me.ucrChkExportDataFrame.TabIndex = 14
-        '
         'lblExport
         '
         Me.lblExport.AutoSize = True
         Me.lblExport.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExport.Location = New System.Drawing.Point(9, 330)
+        Me.lblExport.Location = New System.Drawing.Point(9, 307)
         Me.lblExport.Name = "lblExport"
         Me.lblExport.Size = New System.Drawing.Size(59, 13)
         Me.lblExport.TabIndex = 16
@@ -176,7 +166,7 @@ Partial Class dlgExportForClimpact
         'cmdBrowse
         '
         Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrowse.Location = New System.Drawing.Point(326, 325)
+        Me.cmdBrowse.Location = New System.Drawing.Point(293, 302)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(80, 23)
         Me.cmdBrowse.TabIndex = 18
@@ -189,7 +179,7 @@ Partial Class dlgExportForClimpact
         Me.ucrInputExportFile.AutoSize = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(142, 326)
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(108, 303)
         Me.ucrInputExportFile.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
         Me.ucrInputExportFile.Size = New System.Drawing.Size(182, 21)
@@ -199,7 +189,7 @@ Partial Class dlgExportForClimpact
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(7, 356)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 332)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -264,7 +254,7 @@ Partial Class dlgExportForClimpact
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(422, 412)
+        Me.ClientSize = New System.Drawing.Size(422, 388)
         Me.Controls.Add(Me.lblMissingValues)
         Me.Controls.Add(Me.ucrInputCodeMissingValues)
         Me.Controls.Add(Me.lblTN)
@@ -277,7 +267,6 @@ Partial Class dlgExportForClimpact
         Me.Controls.Add(Me.ucrReceiverDay)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(Me.ucrReceiverMonth)
-        Me.Controls.Add(Me.ucrChkExportDataFrame)
         Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.ucrInputExportFile)
@@ -303,7 +292,6 @@ Partial Class dlgExportForClimpact
     Friend WithEvents ucrReceiverDay As ucrReceiverSingle
     Friend WithEvents lblMonth As Label
     Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
-    Friend WithEvents ucrChkExportDataFrame As ucrCheck
     Friend WithEvents lblExport As Label
     Friend WithEvents cmdBrowse As Button
     Friend WithEvents ucrInputExportFile As ucrInputTextBox

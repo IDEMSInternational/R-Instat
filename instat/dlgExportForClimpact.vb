@@ -22,7 +22,6 @@ Public Class dlgExportForClimpact
     Private bReset As Boolean = True
     Private clsOutputClimpact As New RFunction
 
-
     Private Sub dlgExportForClimpact_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -85,11 +84,6 @@ Public Class dlgExportForClimpact
         ucrReceiverRR.SetParameterIsString()
         ucrReceiverRR.bWithQuotes = False
 
-        ucrChkExportDataFrame.SetText(" Export Data Frame(s)")
-        ucrChkExportDataFrame.AddToLinkedControls(ucrInputExportFile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkExportDataFrame.AddParameterValuesCondition(True, "export", "True")
-        ucrChkExportDataFrame.AddParameterValuesCondition(False, "export", "False")
-
         ucrInputExportFile.SetParameter(New RParameter("output_file ", 9))
         ucrInputExportFile.IsReadOnly = True
         ucrInputExportFile.SetLinkedDisplayControl(lblExport)
@@ -97,11 +91,9 @@ Public Class dlgExportForClimpact
     End Sub
 
     Private Sub SetDefaults()
-
         clsOutputClimpact = New RFunction
 
         ucrSelectorImportToClimpact.Reset()
-
 
         clsOutputClimpact.SetRCommand("write_weather_data")
         clsOutputClimpact.AddParameter("year", clsRFunctionParameter:=ucrReceiverYear.GetVariables, iPosition:=1)
@@ -112,14 +104,10 @@ Public Class dlgExportForClimpact
         clsOutputClimpact.AddParameter("mx_tmp", clsRFunctionParameter:=ucrReceiverTX.GetVariables, iPosition:=6)
         clsOutputClimpact.AddParameter("missing_code", "-99.9", iPosition:=7)
 
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsOutputClimpact)
-
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverDay.SetRCode(clsOutputClimpact, bReset)
         ucrReceiverYear.SetRCode(clsOutputClimpact, bReset)
         ucrSelectorImportToClimpact.SetRCode(clsOutputClimpact, bReset)
 
@@ -136,7 +124,7 @@ Public Class dlgExportForClimpact
                              AndAlso Not ucrReceiverTX.IsEmpty _
                              AndAlso Not ucrReceiverTN.IsEmpty
                              )
-        If ucrChkExportDataFrame.Checked And ucrInputExportFile.IsEmpty Then
+        If ucrInputExportFile.IsEmpty Then
             ucrBase.OKEnabled(False)
         End If
     End Sub
@@ -167,8 +155,7 @@ Public Class dlgExportForClimpact
         End Using
     End Sub
 
-
-    Private Sub ucrReceiverElements_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRR.ControlContentsChanged, ucrReceiverTN.ControlValueChanged, ucrReceiverDay.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrInputExportFile.ControlContentsChanged, ucrChkExportDataFrame.ControlContentsChanged, ucrReceiverTX.ControlValueChanged, ucrReceiverMonth.ControlValueChanged
+    Private Sub ucrReceiverElements_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRR.ControlContentsChanged, ucrReceiverTN.ControlValueChanged, ucrReceiverDay.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrInputExportFile.ControlContentsChanged, ucrReceiverTX.ControlValueChanged, ucrReceiverMonth.ControlValueChanged
         TestOkEnabled()
     End Sub
 
