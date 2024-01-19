@@ -3006,3 +3006,22 @@ getExample <- function (topic, package = NULL, lib.loc = NULL, character.only = 
   }
   return(example_text)
 }
+
+
+write_weather_data <- function(year, month, day, rain, mn_tmp, mx_tmp, missing_code, output_file) {
+  # Create a data frame with the provided inputs
+  weather_data <- data.frame(year = year,
+                             month = month,
+                             day = day,
+                             rain = rain,
+                             mn_tmp = mn_tmp,
+                             mx_tmp = mx_tmp)
+  
+  # Replace missing values with the specified code
+  weather_data[is.na(weather_data)] <- missing_code
+  
+  # Write the data frame to a text file
+  write.table(weather_data, file = output_file, sep = "\t", row.names = FALSE, col.names = TRUE)
+  
+  cat("Weather data has been written to", output_file, "\n")
+}

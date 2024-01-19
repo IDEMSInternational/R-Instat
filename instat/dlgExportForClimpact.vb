@@ -20,8 +20,8 @@ Imports instat.Translations
 Public Class dlgExportForClimpact
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDataFrameFunction, clsCurrentNewColumnFunction, clsOutputClimpact, clsDummyFunction, clsMutateFunction, clsExportClimpactFunction As New RFunction
-    Private clsPipeOperator As New ROperator
+    Private clsOutputClimpact As New RFunction
+
 
     Private Sub dlgExportForClimpact_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -57,21 +57,19 @@ Public Class dlgExportForClimpact
 
         'Day Receiver
         ucrReceiverDay.Selector = ucrSelectorImportToClimpact
-        ucrReceiverDay.SetParameter(New RParameter("day", 0))
+        ucrReceiverDay.SetParameter(New RParameter("day", 5, bNewIncludeArgumentName:=False))
         ucrReceiverDay.SetParameterIsString()
         ucrReceiverDay.bWithQuotes = False
+        ucrReceiverDay.SetClimaticType("day")
         ucrReceiverDay.bAutoFill = True
-        ucrReceiverDay.SetClimaticType("doy")
-        ucrReceiverDay.strSelectorHeading = "Day Variables"
 
         'Element Receiver
         ucrReceiverTX.Selector = ucrSelectorImportToClimpact
-        ucrReceiverTX.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverTX.SetParameter(New RParameter("x", 4, bNewIncludeArgumentName:=False))
         ucrReceiverTX.SetParameterIsString()
         ucrReceiverTX.bWithQuotes = False
         ucrReceiverTX.SetClimaticType("temp_max")
         ucrReceiverTX.bAutoFill = True
-
 
         ucrReceiverTN.Selector = ucrSelectorImportToClimpact
         ucrReceiverTN.SetParameter(New RParameter("x", 1, bNewIncludeArgumentName:=False))
@@ -87,64 +85,36 @@ Public Class dlgExportForClimpact
         ucrReceiverRR.SetParameterIsString()
         ucrReceiverRR.bWithQuotes = False
 
-        ucrChkNewDataFrame.SetText("New Data Frame Name")
-        ucrChkNewDataFrame.AddToLinkedControls(ucrSaveNewDataFrame, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkNewDataFrame.AddParameterValuesCondition(True, "dataframe", "True")
-        ucrChkNewDataFrame.AddParameterValuesCondition(False, "dataframe", "False")
-
         ucrChkExportDataFrame.SetText(" Export Data Frame(s)")
         ucrChkExportDataFrame.AddToLinkedControls(ucrInputExportFile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkExportDataFrame.AddParameterValuesCondition(True, "export", "True")
         ucrChkExportDataFrame.AddParameterValuesCondition(False, "export", "False")
 
-        ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
-        ucrSaveNewDataFrame.SetIsTextBox()
-        ucrSaveNewDataFrame.SetLabelText("Data Frame Name:")
-
-        ucrInputExportFile.SetParameter(New RParameter("file", 1))
+        ucrInputExportFile.SetParameter(New RParameter("output_file ", 9))
         ucrInputExportFile.IsReadOnly = True
         ucrInputExportFile.SetLinkedDisplayControl(lblExport)
 
-        DataFrameAssignTo()
     End Sub
 
     Private Sub SetDefaults()
-        clsDataFrameFunction = New RFunction
-        clsDummyFunction = New RFunction
-        clsCurrentNewColumnFunction = New RFunction
-        clsMutateFunction = New RFunction
-        clsExportClimpactFunction = New RFunction
-        clsPipeOperator = New ROperator
+
         clsOutputClimpact = New RFunction
 
         ucrSelectorImportToClimpact.Reset()
-        ucrSaveNewDataFrame.Reset()
 
 
-        clsDummyFunction.AddParameter("dataframe", "True", iPosition:=0)
-        clsDummyFunction.AddParameter("export", "False", iPosition:=1)
-
-        clsDataFrameFunction.SetRCommand("data.frame")
-        clsDataFrameFunction.AddParameter("x", "columns", iPosition:=5, bIncludeArgumentName:=False)
-
-        clsPipeOperator.SetOperation("%>%")
-        clsPipeOperator.AddParameter("left", clsRFunctionParameter:=clsOutputClimpact, iPosition:=0)
-        clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
-
-        clsOutputClimpact.SetRCommand("output_Climpact")
-        clsOutputClimpact.AddParameter("long.data", "TRUE")
-
-        clsMutateFunction.SetPackageName("dplyr")
-        clsMutateFunction.SetRCommand("mutate")
-
-        clsExportClimpactFunction.SetPackageName("rio")
-        clsExportClimpactFunction.SetRCommand("export")
-        clsExportClimpactFunction.AddParameter("x", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+        clsOutputClimpact.SetRCommand("write_weather_data")
+        clsOutputClimpact.AddParameter("year", clsRFunctionParameter:=ucrReceiverYear.GetVariables, iPosition:=1)
+        clsOutputClimpact.AddParameter("month", clsRFunctionParameter:=ucrReceiverMonth.GetVariables, iPosition:=2)
+        clsOutputClimpact.AddParameter("day", clsRFunctionParameter:=ucrReceiverDay.GetVariables, iPosition:=3)
+        clsOutputClimpact.AddParameter("rain", clsRFunctionParameter:=ucrReceiverRR.GetVariables, iPosition:=4)
+        clsOutputClimpact.AddParameter("mn_tmp", clsRFunctionParameter:=ucrReceiverTN.GetVariables, iPosition:=5)
+        clsOutputClimpact.AddParameter("mx_tmp", clsRFunctionParameter:=ucrReceiverTX.GetVariables, iPosition:=6)
+        clsOutputClimpact.AddParameter("missing_code", "-99.9", iPosition:=7)
 
 
-        'ucrBase.clsRsyntax.SetBaseRFunction(clsExportClimpactFunction)
-        ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
-        'ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOutputClimpact)
+
 
     End Sub
 
@@ -152,12 +122,10 @@ Public Class dlgExportForClimpact
         ucrReceiverDay.SetRCode(clsOutputClimpact, bReset)
         ucrReceiverYear.SetRCode(clsOutputClimpact, bReset)
         ucrSelectorImportToClimpact.SetRCode(clsOutputClimpact, bReset)
-        ucrReceiverRR.SetRCode(clsOutputClimpact, bReset)
-        ucrReceiverTN.SetRCode(clsOutputClimpact, bReset)
-        ucrReceiverTX.SetRCode(clsOutputClimpact, bReset)
+
         ucrReceiverMonth.SetRCode(clsOutputClimpact, bReset)
         ucrInputCodeMissingValues.SetRCode(clsOutputClimpact, bReset)
-        ucrInputExportFile.SetRCode(clsExportClimpactFunction)
+        ucrInputExportFile.SetRCode(clsOutputClimpact)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -168,9 +136,6 @@ Public Class dlgExportForClimpact
                              AndAlso Not ucrReceiverTX.IsEmpty _
                              AndAlso Not ucrReceiverTN.IsEmpty
                              )
-        If ucrChkNewDataFrame.Checked And Not ucrSaveNewDataFrame.IsComplete Then
-            ucrBase.OKEnabled(False)
-        End If
         If ucrChkExportDataFrame.Checked And ucrInputExportFile.IsEmpty Then
             ucrBase.OKEnabled(False)
         End If
@@ -182,14 +147,6 @@ Public Class dlgExportForClimpact
         TestOkEnabled()
     End Sub
 
-    Private Sub DataFrameAssignTo()
-        Dim strDataframeName As String = ucrSelectorImportToClimpact.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-        If strDataframeName = "" OrElse ucrSaveNewDataFrame.bUserTyped Then
-            Exit Sub
-        End If
-        ucrSaveNewDataFrame.SetPrefix(strDataframeName & "__climpact")
-    End Sub
-
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
         SelectFileToSave()
     End Sub
@@ -197,7 +154,7 @@ Public Class dlgExportForClimpact
     Private Sub SelectFileToSave()
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Climpact File"
-            dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Text File (*.txt)|*.txt"
+            dlgSave.Filter = "Text File (*.txt)|*.txt"
             If ucrInputExportFile.GetText() <> "" Then
                 dlgSave.InitialDirectory = ucrInputExportFile.GetText().Replace("/", "\")
             Else
@@ -210,24 +167,8 @@ Public Class dlgExportForClimpact
         End Using
     End Sub
 
-    Private Sub ucrSelectorImportToClimpact_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorImportToClimpact.ControlValueChanged
-        DataFrameAssignTo()
-    End Sub
 
-    'Private Sub ucrChkNewDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNewDataFrame.ControlValueChanged, ucrChkExportDataFrame.ControlValueChanged
-    '    SettingBaseFunction()
-    'End Sub
-
-    'Private Sub ucrReceiverElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRR.ControlValueChanged, ucrReceiverTN.ControlValueChanged, ucrReceiverTX.ControlValueChanged
-    '    ucrBase.clsRsyntax.lstBeforeCodes.Clear()
-    '    clsCurrentNewColumnFunction = ucrReceiver.Get(True).Clone
-    '    clsCurrentNewColumnFunction.SetAssignTo("columns")
-    '    ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
-    '    SettingBaseFunction()
-    'End Sub
-
-    Private Sub ucrReceiverElements_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRR.ControlContentsChanged, ucrReceiverTN.ControlValueChanged,
-        ucrSaveNewDataFrame.ControlContentsChanged, ucrInputExportFile.ControlContentsChanged, ucrChkExportDataFrame.ControlContentsChanged, ucrReceiverTX.ControlValueChanged
+    Private Sub ucrReceiverElements_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRR.ControlContentsChanged, ucrReceiverTN.ControlValueChanged, ucrReceiverDay.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrInputExportFile.ControlContentsChanged, ucrChkExportDataFrame.ControlContentsChanged, ucrReceiverTX.ControlValueChanged, ucrReceiverMonth.ControlValueChanged
         TestOkEnabled()
     End Sub
 
@@ -235,27 +176,6 @@ Public Class dlgExportForClimpact
         If ucrInputExportFile.IsEmpty() Then
             SelectFileToSave()
         End If
-        'SettingBaseFunction()
     End Sub
 
-    Private Sub SettingBaseFunction()
-        cmdBrowse.Visible = False
-        If ucrChkNewDataFrame.Checked And ucrChkExportDataFrame.Checked Then
-            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
-            ucrBase.clsRsyntax.ClearCodes()
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsExportClimpactFunction)
-            cmdBrowse.Visible = True
-        ElseIf ucrChkNewDataFrame.Checked AndAlso Not ucrChkExportDataFrame.Checked Then
-            ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
-            ucrBase.clsRsyntax.lstAfterCodes.Clear()
-            cmdBrowse.Visible = False
-        ElseIf ucrChkExportDataFrame.Checked AndAlso Not ucrChkNewDataFrame.Checked Then
-            ucrBase.clsRsyntax.lstBeforeCodes.Clear()
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsExportClimpactFunction)
-            ucrBase.clsRsyntax.lstAfterCodes.Clear()
-            cmdBrowse.Visible = True
-        End If
-    End Sub
 End Class

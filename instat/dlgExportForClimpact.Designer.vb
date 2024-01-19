@@ -36,8 +36,6 @@ Partial Class dlgExportForClimpact
         Me.lblExport = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.ucrInputExportFile = New instat.ucrInputTextBox()
-        Me.ucrSaveNewDataFrame = New instat.ucrSave()
-        Me.ucrChkNewDataFrame = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -169,7 +167,7 @@ Partial Class dlgExportForClimpact
         '
         Me.lblExport.AutoSize = True
         Me.lblExport.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExport.Location = New System.Drawing.Point(9, 370)
+        Me.lblExport.Location = New System.Drawing.Point(9, 330)
         Me.lblExport.Name = "lblExport"
         Me.lblExport.Size = New System.Drawing.Size(59, 13)
         Me.lblExport.TabIndex = 16
@@ -178,7 +176,7 @@ Partial Class dlgExportForClimpact
         'cmdBrowse
         '
         Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrowse.Location = New System.Drawing.Point(326, 365)
+        Me.cmdBrowse.Location = New System.Drawing.Point(326, 325)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(80, 23)
         Me.cmdBrowse.TabIndex = 18
@@ -191,35 +189,17 @@ Partial Class dlgExportForClimpact
         Me.ucrInputExportFile.AutoSize = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(142, 366)
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(142, 326)
         Me.ucrInputExportFile.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
         Me.ucrInputExportFile.Size = New System.Drawing.Size(182, 21)
         Me.ucrInputExportFile.TabIndex = 17
         '
-        'ucrSaveNewDataFrame
-        '
-        Me.ucrSaveNewDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(9, 331)
-        Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
-        Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(348, 24)
-        Me.ucrSaveNewDataFrame.TabIndex = 15
-        '
-        'ucrChkNewDataFrame
-        '
-        Me.ucrChkNewDataFrame.AutoSize = True
-        Me.ucrChkNewDataFrame.Checked = False
-        Me.ucrChkNewDataFrame.Location = New System.Drawing.Point(9, 270)
-        Me.ucrChkNewDataFrame.Name = "ucrChkNewDataFrame"
-        Me.ucrChkNewDataFrame.Size = New System.Drawing.Size(266, 23)
-        Me.ucrChkNewDataFrame.TabIndex = 13
-        '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(7, 396)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 356)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -284,7 +264,7 @@ Partial Class dlgExportForClimpact
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(422, 450)
+        Me.ClientSize = New System.Drawing.Size(422, 412)
         Me.Controls.Add(Me.lblMissingValues)
         Me.Controls.Add(Me.ucrInputCodeMissingValues)
         Me.Controls.Add(Me.lblTN)
@@ -301,8 +281,6 @@ Partial Class dlgExportForClimpact
         Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.ucrInputExportFile)
-        Me.Controls.Add(Me.ucrSaveNewDataFrame)
-        Me.Controls.Add(Me.ucrChkNewDataFrame)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.ucrReceiverYear)
@@ -329,8 +307,6 @@ Partial Class dlgExportForClimpact
     Friend WithEvents lblExport As Label
     Friend WithEvents cmdBrowse As Button
     Friend WithEvents ucrInputExportFile As ucrInputTextBox
-    Friend WithEvents ucrSaveNewDataFrame As ucrSave
-    Friend WithEvents ucrChkNewDataFrame As ucrCheck
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblYear As Label
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
