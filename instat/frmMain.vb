@@ -2280,10 +2280,6 @@ Public Class frmMain
         dlgInfillMissingValues.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticTidyandExamineVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineVisualiseData.Click
-        dlgVisualizeData.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareCheckDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataVisualiseData.Click
         dlgVisualizeData.ShowDialog()
     End Sub
@@ -2671,4 +2667,7 @@ Public Class frmMain
         dlgIDFCurves.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticExamineEditDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamineEditDataVisualiseData.Click
+        dlgVisualizeData.ShowDialog()
+    End Sub
 End Class
