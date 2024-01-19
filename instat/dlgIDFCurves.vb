@@ -135,7 +135,11 @@ Public Class dlgIDFCurves
     End Sub
 
     Private Sub ucrNudMaxPrec_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaxPrec.ControlValueChanged
-        clsIDFCurvesFunction.AddParameter("mindpy", ucrNudMaxPrec.GetText, iPosition:=5)
+        If Not ucrNudMaxPrec.IsEmpty Then
+            clsIDFCurvesFunction.AddParameter("mindpy", ucrNudMaxPrec.GetText, iPosition:=5)
+        Else
+            clsIDFCurvesFunction.RemoveParameterByName("mindpy")
+        End If
     End Sub
 
     Private Sub ucrStationName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrStationName.ControlValueChanged
@@ -147,8 +151,13 @@ Public Class dlgIDFCurves
     End Sub
 
     Private Sub ucrIDFCurvesSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrIDFCurvesSelector.ControlValueChanged
-        clsColumnsFunction.AddParameter("data", clsRCodeStructureParameter:=ucrIDFCurvesSelector.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-        clsIDFCurvesFunction.AddParameter("data", ucrIDFCurvesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False, iPosition:=0)
+        If Not ucrIDFCurvesSelector.IsEmpty Then
+            clsColumnsFunction.AddParameter("data", clsRCodeStructureParameter:=ucrIDFCurvesSelector.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+            clsIDFCurvesFunction.AddParameter("data", ucrIDFCurvesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsColumnsFunction.RemoveParameterByName("data")
+            clsIDFCurvesFunction.RemoveParameterByName("data")
+        End If
     End Sub
 
     Private Sub ucrReceiverDateTime_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDateTime.ControlContentsChanged,
