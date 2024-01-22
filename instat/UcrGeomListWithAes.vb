@@ -344,7 +344,7 @@ Public Class ucrGeomListWithParameters
 
         'This is a temporary solution to issue which should be solved with geoms
         'This adds "" aes for x or y when no variables are mapped to them for geoms which require it, either adding to the global or local aes.
-        If clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" Then
+        If clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" OrElse clsGeomFunction.strRCommand = "geom_violin" Then
             If (clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse ucrChkIgnoreGlobalAes.Checked) AndAlso clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsCurrentAesFunction.AddParameter("x", Chr(34) & Chr(34))
             End If
@@ -358,6 +358,9 @@ Public Class ucrGeomListWithParameters
         End If
         'Adding stat = identity method 
         If {"geom_bar", "geom_density", "geom_freqpoly"}.Contains(clsGeomFunction.strRCommand) Then
+            If (clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse ucrChkIgnoreGlobalAes.Checked) AndAlso clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
+                clsCurrentAesFunction.AddParameter("x", Chr(34) & Chr(34))
+            End If
             'If there is a y in the global aes, and the global aes are not ignored or if there is a y in the local aes then in case stat has not been set manually, stat is set to identity.
             If (((clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1) AndAlso ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") = -1) OrElse (Not ucrChkIgnoreGlobalAes.Checked))) OrElse (clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1)) AndAlso (clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") = -1) Then
                 clsGeomFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
