@@ -3021,7 +3021,7 @@ write_weather_data <- function(year, month, day, rain, mn_tmp, mx_tmp, missing_c
   weather_data[is.na(weather_data)] <- missing_code
   
   # Write the data frame to a text file
-  write.table(weather_data, file = output_file, sep = "\t", row.names = FALSE, col.names = TRUE)
+  write.table(weather_data, file = output_file, sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
   
   cat("Weather data has been written to", output_file, "\n")
 }
