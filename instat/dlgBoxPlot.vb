@@ -25,6 +25,11 @@ Public Class dlgBoxplot
     Private clsBaseOperator As New ROperator
     Private clsLocalRaesFunction As New RFunction
     Private clsStatSummary As New RFunction
+    Private clsLabelOutlierFunction As New RFunction
+    Private clsNewAesFunction As New RFunction
+    Private clsRoundFunction As New RFunction
+    Private clsBoxplotStatFunction As New RFunction
+    Private clsGeomLabelFunction As New RFunction
     'Similarly clsRgeom_boxplotFunction and clsRaesFunction (respectively the geom_boxplot function and the global aes function) are given through SetupLayer to sdgLayerOptions for edit. 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -59,8 +64,10 @@ Public Class dlgBoxplot
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strStatSummaryParameterName As String = "stat_summary"
+    Private strGeomLabelParameterName As String = "geom_text"
     Private strAdditionalPointsParameterName As String = "add_jitter"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strStatSummaryParameterName, strAdditionalPointsParameterName}
+    Private strLabelOutierParameterName As String = "Label_Outlier"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strStatSummaryParameterName, strAdditionalPointsParameterName, strLabelOutierParameterName, strGeomLabelParameterName}
 
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -95,6 +102,7 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
         ucrPnlPlots.AddToLinkedControls(ucrChkAddPoints, {rdoBoxplotTufte, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrChkLabelOutlier}, {rdoBoxplotTufte}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPlots.AddToLinkedControls({ucrChkTufte}, {rdoBoxplotTufte}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTufte.AddToLinkedControls(ucrChkVarWidth, {"FALSE"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -148,6 +156,11 @@ Public Class dlgBoxplot
         ucrChkAddPoints.SetText("Add Points")
         ucrChkAddPoints.AddToLinkedControls({ucrNudJitter, ucrNudTransparency}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrChkLabelOutlier.SetText("Label Outliers")
+        ucrChkLabelOutlier.AddParameterPresentCondition(True, strLabelOutierParameterName, True)
+        ucrChkLabelOutlier.AddParameterPresentCondition(False, strLabelOutierParameterName, False)
+        ucrChkLabelOutlier.AddToLinkedControls({ucrNudSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrNudJitter.SetParameter(New RParameter("width", 2))
         ucrNudJitter.Minimum = 0
         ucrNudJitter.DecimalPlaces = 2
@@ -161,7 +174,14 @@ Public Class dlgBoxplot
         ucrNudTransparency.SetLinkedDisplayControl(lblTransparency)
         ucrNudTransparency.SetRDefault(1)
 
-        ucrChkTufte.SetText("Tufte Boxplots")
+        ucrNudSize.SetParameter(New RParameter("size", 3))
+        ucrNudSize.Minimum = 0
+        ucrNudSize.Increment = 1
+        ucrNudSize.SetLinkedDisplayControl(lblSize)
+        ucrNudSize.SetRDefault(3)
+
+
+        ucrChkTufte.SetText("Tufte Boxplot")
         ucrChkTufte.AddFunctionNamesCondition(False, "geom_tufteboxplot", False)
         ucrChkTufte.AddFunctionNamesCondition(True, "geom_tufteboxplot")
 
@@ -178,13 +198,12 @@ Public Class dlgBoxplot
         ucrInputSummaries.SetItems(dctSummaries)
         ucrInputSummaries.SetDropDownStyleAsNonEditable()
 
-
         ucrChkGrouptoConnect.SetText("Group to Connect")
         ucrChkGrouptoConnect.AddToLinkedControls(ucrInputSummaries, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
         ucrChkGrouptoConnect.AddParameterPresentCondition(True, strStatSummaryParameterName, True)
         ucrChkGrouptoConnect.AddParameterPresentCondition(False, strStatSummaryParameterName, False)
         'this control exists but diabled for now
-        ucrChkSwapParameters.SetText("swap Parameters")
+        'ucrChkSwapParameters.SetText("swap Parameters")
         DialogueSize()
     End Sub
 
@@ -204,6 +223,11 @@ Public Class dlgBoxplot
         clsViolinplotFunction = New RFunction
         clsSummaryFunction = New RFunction
 
+        clsRoundFunction = New RFunction
+        clsLabelOutlierFunction = New RFunction
+        clsNewAesFunction = New RFunction
+        clsBoxplotStatFunction = New RFunction
+        clsGeomLabelFunction = New RFunction
         clsAddedJitterFunc.Clear()
 
         ucrSelectorBoxPlot.Reset()
@@ -219,10 +243,12 @@ Public Class dlgBoxplot
         clsCurrGeomFunction.SetPackageName("ggplot2")
         clsCurrGeomFunction = clsBoxplotFunction
 
+        clsGeomLabelFunction.SetPackageName("ggplot2")
+        clsGeomLabelFunction.SetRCommand("geom_text")
+
         clsBoxplotFunction.SetPackageName("ggplot2")
         clsBoxplotFunction.SetRCommand("geom_boxplot")
         clsBoxplotFunction.AddParameter("varwidth", "FALSE", iPosition:=0)
-        clsBoxplotFunction.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
 
         clsTufteBoxplotFunction.SetPackageName("ggthemes")
         clsTufteBoxplotFunction.SetRCommand("geom_tufteboxplot")
@@ -265,6 +291,24 @@ Public Class dlgBoxplot
         clsStatSummary.AddParameter("group", 1, iPosition:=1)
         clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
 
+        clsRoundFunction.SetRCommand("round")
+        clsRoundFunction.AddParameter("stat(y)", "stat(y)", bIncludeArgumentName:=False, iPosition:=0)
+        clsRoundFunction.AddParameter("1", "1", bIncludeArgumentName:=False, iPosition:=1)
+
+        clsNewAesFunction.SetRCommand("aes")
+        clsNewAesFunction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=0)
+
+        clsLabelOutlierFunction.SetPackageName("ggplot2")
+        clsLabelOutlierFunction.SetRCommand("stat_summary")
+        clsLabelOutlierFunction.AddParameter("aes", clsRFunctionParameter:=clsNewAesFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsLabelOutlierFunction.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=1)
+        clsLabelOutlierFunction.AddParameter("fun", "stat_summary_fun", iPosition:=2)
+        clsLabelOutlierFunction.AddParameter("hjust", "-1", iPosition:=3)
+        clsLabelOutlierFunction.AddParameter("size", "3", iPosition:=4)
+
+        clsBoxplotStatFunction.SetRCommand("boxplot.stats")
+        clsBoxplotStatFunction.AddParameter("y", "y", bIncludeArgumentName:=False, iPosition:=0)
+
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
@@ -302,8 +346,10 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
 
         ucrChkAddPoints.SetRCode(clsBaseOperator, bReset)
+        ucrChkLabelOutlier.SetRCode(clsBaseOperator, bReset)
         ucrNudJitter.SetRCode(clsAddedJitterFunc, bReset)
         ucrNudTransparency.SetRCode(clsAddedJitterFunc, bReset)
+        ucrNudSize.SetRCode(clsLabelOutlierFunction, bReset)
         ucrInputSummaries.SetRCode(clsStatSummary, bReset)
         ucrChkGrouptoConnect.SetRCode(clsBaseOperator, bReset)
         ucrPnlPlots.SetRCode(clsCurrGeomFunction, bReset)
@@ -440,6 +486,19 @@ Public Class dlgBoxplot
         openSdgLayerOptions(clsSummaryFunction)
     End Sub
 
+    Private Sub toolStripMenuItemGeomTextOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemGeomTextOptions.Click
+        TextOptions()
+        openSdgLayerOptions(clsGeomLabelFunction)
+    End Sub
+
+    Private Sub TextOptions()
+        If Not toolStripMenuItemGeomTextOptions.CheckOnClick Then
+            clsBaseOperator.RemoveParameterByName(strGeomLabelParameterName)
+        Else
+            clsBaseOperator.AddParameter(strGeomLabelParameterName, clsRFunctionParameter:=clsGeomLabelFunction, iPosition:=3)
+        End If
+    End Sub
+
     Private Sub DialogueSize()
         If rdoBoxplotTufte.Checked OrElse rdoViolin.Checked Then
             Me.Size = New Size(441, 505)
@@ -463,6 +522,16 @@ Public Class dlgBoxplot
         toolStripMenuItemSummaryOptions.Enabled = rdoBoxplotTufte.Checked OrElse ((rdoJitter.Checked _
             OrElse rdoViolin.Checked) AndAlso ucrChkGrouptoConnect.Checked)
         toolStripMenuItemTufteOptions.Enabled = (rdoBoxplotTufte.Checked AndAlso ucrChkTufte.Checked)
+    End Sub
+
+    Private Sub ucrChkLabelOutlier_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabelOutlier.ControlValueChanged
+        If ucrChkLabelOutlier.Checked Then
+            clsBaseOperator.AddParameter(strLabelOutierParameterName, clsRFunctionParameter:=clsLabelOutlierFunction, iPosition:=5)
+            ucrNudSize.Visible = True
+        Else
+            clsBaseOperator.RemoveParameterByName(strLabelOutierParameterName)
+            ucrNudSize.Visible = False
+        End If
     End Sub
 
     'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver
