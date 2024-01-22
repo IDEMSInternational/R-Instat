@@ -88,73 +88,48 @@ Public Class ucrAdditionalLayers
 
     Private Sub ucrAdditionalLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetEditDeleteEnabled()
+        cmdAdd.AddItemsToListbox({"geom_bar", "geom_boxplot", "geom_categorical_model", "geom_col", "geom_contour", "geom_count", "geom_density", "geom_density_ridges",
+                                  "geom_histogram", "geom_jitter", "geom_label", "geom_label_repel", "geom_line", "geom_parallel_slopes", "geom_point",
+                                  "geom_rug", "geom_smooth", "geom_text", "geom_text_repel", "geom_tile"})
+        cmdAdd._bUseListBox = True
     End Sub
 
-    Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click, toolStripMenuItemGeomBar.Click, toolStripMenuItemGeomBoxPlot.Click, toolStripMenuItemGeomCol.Click, toolStripMenuItemGeomCount.Click, toolStripMenuItemGeomcategoricalmodel.Click,
-            toolStripMenuItemGeomDensity.Click, toolStripMenuItemGeomJitter.Click, toolStripMenuItemGeomLabel.Click, toolStripMenuItemGeomparallelslopes.Click, toolStripMenuItemGeomtile.Click, toolStripMenuItemGeomcontour.Click, toolStripMenuItemGeomhistogram.Click,
-            toolStripMenuItemGeomLabelRepel.Click, toolStripMenuItemGeomLine.Click, toolStripMenuItemGeomsmooth.Click, toolStripMenuItemGeomPoint.Click, toolStripMenuItemGeomRug.Click, toolStripMenuItemGeomText.Click, toolStripMenuItemGeomTextRepel.Click, toolStripMenuItemGeomDensityRidges.Click
-
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmdAdd.ListBoxSelectedIndexChanged
+        Dim strSelectedGeom As String = cmdAdd._listBox.SelectedItem
         'setup the geom function to use
         Dim clsNewGeomFunction As New RFunction
-        Dim strGeomRCommand As String = "geom_boxplot"
         Dim strPackage As String = "ggplot2"
-        Dim bShowLayerSubdialog As Boolean = False
 
-        If sender Is toolStripMenuItemGeomBoxPlot Then
-            strGeomRCommand = "geom_boxplot"
-        ElseIf sender Is toolStripMenuItemGeomBar Then
-            strGeomRCommand = "geom_bar"
-        ElseIf sender Is toolStripMenuItemGeomCount Then
-            strGeomRCommand = "geom_count"
-        ElseIf sender Is toolStripMenuItemGeomCol Then
-            strGeomRCommand = "geom_col"
-        ElseIf sender Is toolStripMenuItemGeomDensity Then
-            strGeomRCommand = "geom_density"
-        ElseIf sender Is toolStripMenuItemGeomtile Then
-            strGeomRCommand = "geom_tile"
-        ElseIf sender Is toolStripMenuItemGeomJitter Then
-            strGeomRCommand = "geom_jitter"
-        ElseIf sender Is toolStripMenuItemGeomhistogram Then
-            strGeomRCommand = "geom_histogram"
-        ElseIf sender Is toolStripMenuItemGeomcontour Then
-            strGeomRCommand = "geom_contour"
-        ElseIf sender Is toolStripMenuItemGeomDensityRidges Then
+        If strSelectedGeom Is "geom_density_ridges" Then
             strPackage = "ggridges"
-            strGeomRCommand = "geom_density_ridges"
-        ElseIf sender Is toolStripMenuItemGeomLabel Then
-            strGeomRCommand = "geom_label"
-        ElseIf sender Is toolStripMenuItemGeomLabelRepel Then
+        ElseIf strSelectedGeom Is "geom_label_repel" Then
             strPackage = "ggrepel"
-            strGeomRCommand = "geom_label_repel"
-        ElseIf sender Is toolStripMenuItemGeomLine Then
-            strGeomRCommand = "geom_line"
-        ElseIf sender Is toolStripMenuItemGeomPoint Then
-            strGeomRCommand = "geom_point"
-        ElseIf sender Is toolStripMenuItemGeomRug Then
-            strGeomRCommand = "geom_rug"
-        ElseIf sender Is toolStripMenuItemGeomsmooth Then
-            strGeomRCommand = "geom_smooth"
-        ElseIf sender Is toolStripMenuItemGeomText Then
-            strGeomRCommand = "geom_text"
-        ElseIf sender Is toolStripMenuItemGeomTextRepel Then
+        ElseIf strSelectedGeom Is "geom_text_repel" Then
             strPackage = "ggrepel"
-            strGeomRCommand = "geom_text_repel"
-        ElseIf sender Is toolStripMenuItemGeomcategoricalmodel Then
+        ElseIf strSelectedGeom Is "geom_categorical_model" Then
             strPackage = "moderndive"
-            strGeomRCommand = "geom_categorical_model"
-        ElseIf sender Is toolStripMenuItemGeomparallelslopes Then
+        ElseIf strSelectedGeom Is "geom_parallel_slopes" Then
             strPackage = "moderndive"
-            strGeomRCommand = "geom_parallel_slopes"
-        ElseIf sender Is cmdAdd Then
-            bShowLayerSubdialog = True
         End If
 
         clsNewGeomFunction.SetPackageName(strPackage)
-        clsNewGeomFunction.SetRCommand(strGeomRCommand)
+        clsNewGeomFunction.SetRCommand(strSelectedGeom)
+
+        'incremnet the dialog parameter position to get unique argument name
+        iMaxParameterPosition += 1
+
+        AddLayer(clsNewGeomFunction, iMaxParameterPosition)
+    End Sub
+
+    Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
+        'setup the geom function to use
+        Dim clsNewGeomFunction As New RFunction
+
+        clsNewGeomFunction.SetPackageName("ggplot2")
+        clsNewGeomFunction.SetRCommand("geom_boxplot")
 
         'if no specific geom command selected then show the layer subdialog for geom command selection
-        If bShowLayerSubdialog Then
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction,
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction,
                                    clsNewGeomFunc:=clsNewGeomFunction,
                                    clsNewGlobalAesFunc:=clsGlobalAesFunction,
                                    clsNewLocalAes:=GgplotDefaults.clsAesFunction,
@@ -163,24 +138,35 @@ Public Class ucrAdditionalLayers
                                    bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0),
                                    iTabToDisplay:=0,
                                    strDataFrame:=strGlobalDataFrame)
-            ParentForm.SendToBack()
-            sdgLayerOptions.ShowDialog()
-            'get the new options from the subdialog
-            'todo. Should what should happen if a user clicks on Cancel in the sub dialog?
-            strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
-            clsNewGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
-        End If
+        ParentForm.SendToBack()
+        sdgLayerOptions.ShowDialog()
+        'get the new options from the subdialog
+        'todo. Should what should happen if a user clicks on Cancel in the sub dialog?
+        strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
+        clsNewGeomFunction = sdgLayerOptions.clsGeomFunction.Clone()
 
         'incremnet the dialog parameter position to get unique argument name
         iMaxParameterPosition += 1
 
+        AddLayer(clsNewGeomFunction, iMaxParameterPosition)
+
+        ''add the geom function as a new parameter of the dialog base operator
+        'Dim clsNewGeomParameter As New RParameter(clsNewGeomFunction.strRCommand & iMaxParameterPosition,
+        '                                          clsNewGeomFunction, iNewPosition:=iMaxParameterPosition)
+        'clsBaseOperator.AddParameter(clsNewGeomParameter)
+
+        ''add the parameter to the list of layers
+        'AddLayerToList(clsNewGeomParameter, clsNewGeomFunction.strRCommand, bLayerComplete:=sdgLayerOptions.TestForOKEnabled())
+    End Sub
+
+    Private Sub AddLayer(clsNewGeomFunc As RFunction, iParamater As Integer)
         'add the geom function as a new parameter of the dialog base operator
-        Dim clsNewGeomParameter As New RParameter(clsNewGeomFunction.strRCommand & iMaxParameterPosition,
-                                                  clsNewGeomFunction, iNewPosition:=iMaxParameterPosition)
+        Dim clsNewGeomParameter As New RParameter(clsNewGeomFunc.strRCommand & iParamater,
+                                                  clsNewGeomFunc, iNewPosition:=iParamater)
         clsBaseOperator.AddParameter(clsNewGeomParameter)
 
         'add the parameter to the list of layers
-        AddLayerToList(clsNewGeomParameter, clsNewGeomFunction.strRCommand, bLayerComplete:=sdgLayerOptions.TestForOKEnabled())
+        AddLayerToList(clsNewGeomParameter, clsNewGeomFunc.strRCommand, bLayerComplete:=sdgLayerOptions.TestForOKEnabled())
     End Sub
 
     Private Sub SetEditDeleteEnabled()

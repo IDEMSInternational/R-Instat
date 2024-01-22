@@ -43,6 +43,11 @@ Public Class ucrSplitButton
     Private _textFormatFlags As TextFormatFlags = TextFormatFlags.Default
     Private _bSkipNextOpen As Boolean
     Private _bMouseEntered As Boolean
+    Public _bUseListBox As Boolean = False
+    Public WithEvents _listBox As New ListBox()
+
+    ' Event to be raised when ListBox selected index changes
+    Public Event ListBoxSelectedIndexChanged As EventHandler
 
     Public Sub New()
         'by default support the autosize. This control aligns it's elements in runtime
@@ -585,9 +590,37 @@ Public Class ucrSplitButton
 
         State = PushButtonState.Pressed
 
-        If _contextSplitMenuStrip IsNot Nothing Then
-            _contextSplitMenuStrip.Show(Me, New Point(0, Height), ToolStripDropDownDirection.BelowRight)
+        If _bUseListBox Then
+            Dim tmpForm = New Form
+            tmpForm.AutoScaleMode = AutoScaleMode.None
+            tmpForm.FormBorderStyle = FormBorderStyle.None
+            tmpForm.StartPosition = FormStartPosition.Manual
+            tmpForm.ShowInTaskbar = False
+            tmpForm.Size = New Size(150, 130)
+            _listBox.BorderStyle = BorderStyle.FixedSingle
+            _listBox.Dock = DockStyle.Fill ' Make the ListBox fill the form
+            tmpForm.Controls.Add(_listBox)
+
+            tmpForm.Location = PointToScreen(New Point(0, Height))
+            tmpForm.Show()
+        Else
+            If _contextSplitMenuStrip IsNot Nothing Then
+                _contextSplitMenuStrip.Show(Me, New Point(0, Height), ToolStripDropDownDirection.BelowRight)
+            End If
         End If
+    End Sub
+
+    Public Sub AddItemsToListbox(item As Object)
+        If item Is Nothing Then
+            Exit Sub
+        End If
+
+        _listBox.Items.AddRange(item)
+    End Sub
+
+    Private Sub OnListBoxSelectedIndexChanged(sender As Object, e As EventArgs) Handles _listBox.SelectedIndexChanged
+        ' Raise the custom event when ListBox selected index changes
+        RaiseEvent ListBoxSelectedIndexChanged(sender, e)
     End Sub
 
     Private Sub SplitMenuStrip_Opening(sender As Object, e As CancelEventArgs)
