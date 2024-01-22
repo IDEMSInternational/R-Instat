@@ -434,7 +434,7 @@ Public Class dlgDescribeTwoVariable
                 OrElse (Not ucrReceiverThreeVariableSecondFactor.IsEmpty _
                 AndAlso Not ucrReceiverThreeVariableThirdVariable.IsEmpty) _
                 AndAlso (IsFactorByFactor() OrElse IsNumericByFactor() _
-                OrElse IsFactorByNumeric() OrElse IsNumericByNumericByFactor() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFNumericByNumeric() _
+                OrElse IsFactorByNumeric() OrElse IsNumericByNumericByFactor() OrElse IsNumericByFactorByFactor() OrElse IsNumericByNumericByNumeric() _
                 OrElse IsFactorByNumericByNumeric() OrElse IsNumericByFactorByNumeric() OrElse IsFactorByFactorByFactor() OrElse IsNumericByNumeric())) AndAlso ucrSaveTable.IsComplete)
     End Sub
 
@@ -470,7 +470,7 @@ Public Class dlgDescribeTwoVariable
         Return strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "numeric"
     End Function
 
-    Private Function IsNumericByFNumericByNumeric() As Boolean
+    Private Function IsNumericByNumericByNumeric() As Boolean
         Return strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric" AndAlso strThirdVariableType = "numeric"
     End Function
 
@@ -489,10 +489,10 @@ Public Class dlgDescribeTwoVariable
             If IsNumericByFactor() Then
                 sdgSummaries.SetRFunction(clsSummariesListFunction, clsSummaryTableFunction, clsCombineFunction, ucrSelectorDescribeTwoVar, bResetSubdialog)
             End If
-        ElseIf rdoThreeVariable.Checked Then
-            If IsFactorByNumeric() Then
-                sdgSummaries.SetRFunction(clsSummariesListFunction, clsSummaryTableFunction, clsCombineFunction, ucrSelectorDescribeTwoVar, bResetSubdialog)
-            End If
+            'ElseIf rdoThreeVariable.Checked Then
+            '    'If IsFactorByNumeric() Then
+            '    '    sdgSummaries.SetRFunction(clsSummariesListFunction, clsSummaryTableFunction, clsCombineFunction, ucrSelectorDescribeTwoVar, bResetSubdialog)
+            '    'End If
         End If
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
@@ -611,7 +611,7 @@ Public Class dlgDescribeTwoVariable
             If IsNumericByNumericByFactor() Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             End If
-            If IsNumericByFNumericByNumeric() Then
+            If IsNumericByNumericByNumeric() Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             End If
             If IsNumericByFactorByFactor() Then
@@ -694,26 +694,27 @@ Public Class dlgDescribeTwoVariable
         UpdateCombineFactorParameterFunction()
         ChangeLocations()
         AddRemoveNAParameter()
-        HideFormatTableButton()
+        ShowFormatTableButton()
         FactorColumns()
-        AddRemoveFirstParam()
-        AddRemoveSecondParam()
-        AddRemoveThirdParam()
-        'AddRemoveFirstAnovaParam()
+        AddRemoveFirstCorrParam()
+        AddRemoveSecondCorrParam()
+        AddRemoveThirdCorrParam()
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
         AddRemoveFirstAnova2Param()
     End Sub
 
-    Private Sub HideFormatTableButton()
-        cmdFormatTable.Visible = IsNumericByFactor() _
-            OrElse IsFactorByFactor() OrElse (IsFactorByNumeric() _
-            AndAlso rdoThreeVariable.Checked)
+    Private Sub ShowFormatTableButton()
+        If rdoTwoVariable.Checked Then
+            cmdFormatTable.Visible = IsNumericByFactor() _
+            OrElse IsFactorByFactor() OrElse IsFactorByNumeric()
+        Else
+            cmdFormatTable.Visible = False
+        End If
     End Sub
 
     Private Sub ChangeLocations()
-        If IsNumericByFactor() _
-                OrElse (IsFactorByNumeric() AndAlso rdoThreeVariable.Checked) Then
+        If IsNumericByFactor() Then
             ucrBase.Location = New Point(iUcrBaseXLocation, 487)
             Me.Size = New Point(iDialogueXsize, 580)
             cmdFormatTable.Location = New Point(326, 423)
@@ -724,6 +725,9 @@ Public Class dlgDescribeTwoVariable
             ucrBase.Location = New Point(iUcrBaseXLocation, 370)
             Me.Size = New Point(iDialogueXsize, 465)
             cmdFormatTable.Location = New Point(326, 325)
+        ElseIf IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
+            ucrBase.Location = New Point(iUcrBaseXLocation, 328)
+            Me.Size = New Point(iDialogueXsize, 425)
         Else
             ucrBase.Location = New Point(iUcrBaseXLocation, 328)
             Me.Size = New Point(iDialogueXsize, 425)
@@ -738,7 +742,7 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    Private Sub AddRemoveFirstParam()
+    Private Sub AddRemoveFirstCorrParam()
         If rdoThreeVariable.Checked Then
             If IsFactorByNumericByNumeric() Then
                 If ucrReceiverFirstVars.IsEmpty Then
@@ -750,7 +754,7 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    Private Sub AddRemoveSecondParam()
+    Private Sub AddRemoveSecondCorrParam()
         If rdoThreeVariable.Checked Then
             If IsFactorByNumericByNumeric() Then
                 If ucrReceiverThreeVariableSecondFactor.IsEmpty Then
@@ -762,7 +766,7 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    Private Sub AddRemoveThirdParam()
+    Private Sub AddRemoveThirdCorrParam()
         If rdoThreeVariable.Checked Then
             If IsFactorByNumericByNumeric() Then
                 If ucrReceiverThreeVariableThirdVariable.IsEmpty Then
@@ -803,7 +807,7 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub AddRemoveFirstAnova2Param()
         If rdoThreeVariable.Checked Then
-            If IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
+            If IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
                 If ucrReceiverFirstVars.IsEmpty Then
                     clsYlistOperator.RemoveParameterByName("cols")
                 Else
@@ -813,21 +817,9 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    'Private Sub AddRemoveFirstAnovaParam()
-    '    If rdoThreeVariable.Checked Then
-    '        If IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
-    '            If ucrReceiverFirstVars.IsEmpty Then
-    '                clsCombineAnovaFunction.RemoveParameterByName("x")
-    '            Else
-    '                clsCombineAnovaFunction.AddParameter("x", ucrReceiverFirstVars.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
-    '            End If
-    '        End If
-    '    End If
-    'End Sub
-
     Private Sub AddRemoveSecondAnovaParam()
         If rdoThreeVariable.Checked Then
-            If IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
+            If IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
                 If ucrReceiverThreeVariableSecondFactor.IsEmpty Then
                     clsCombineAnova2Function.RemoveParameterByName("x")
                 Else
@@ -839,7 +831,7 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub AddRemoveThirdAnovaParam()
         If rdoThreeVariable.Checked Then
-            If IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
+            If IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
                 If ucrReceiverThreeVariableThirdVariable.IsEmpty Then
                     clsCombineAnova2Function.RemoveParameterByName("y")
                 Else
@@ -933,11 +925,10 @@ Public Class dlgDescribeTwoVariable
         UpdateSummaryTableFunction()
         AddRemoveFrequencyParameters()
         AddRemoveNAParameter()
-        HideFormatTableButton()
-        AddRemoveFirstParam()
-        AddRemoveThirdParam()
-        AddRemoveSecondParam()
-        'AddRemoveFirstAnovaParam()
+        ShowFormatTableButton()
+        AddRemoveFirstCorrParam()
+        AddRemoveThirdCorrParam()
+        AddRemoveSecondCorrParam()
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
         AddRemoveFirstAnova2Param()
@@ -966,7 +957,7 @@ Public Class dlgDescribeTwoVariable
             If rdoThreeVariable.Checked Then
                 If IsFactorByNumericByNumeric() Then
                     strSummaryName = "Correlations"
-                ElseIf IsNumericByNumericByFactor() OrElse IsNumericByFNumericByNumeric() Then
+                ElseIf IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() Then
                     strSummaryName = "ANOVA tables"
                 ElseIf IsNumericByFactorByFactor() Then
                     strSummaryName = "ANOVA tables"
@@ -1026,7 +1017,7 @@ Public Class dlgDescribeTwoVariable
         UpdateSummaryTableFunction()
         ChangeLocations()
         AddRemoveNAParameter()
-        HideFormatTableButton()
+        ShowFormatTableButton()
         ManageControlsVisibility()
         FactorColumns()
     End Sub
@@ -1088,10 +1079,9 @@ Public Class dlgDescribeTwoVariable
         ChangeLocations()
         AddRemoveFrequencyParameters()
         AddRemoveNAParameter()
-        HideFormatTableButton()
+        ShowFormatTableButton()
         FactorColumns()
-        AddRemoveFirstParam()
-        'AddRemoveFirstAnovaParam()
+        AddRemoveFirstCorrParam()
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
         AddRemoveFirstAnova2Param()
@@ -1100,9 +1090,8 @@ Public Class dlgDescribeTwoVariable
     Private Sub ucrReceiverThreeVariableSecondFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThreeVariableSecondFactor.ControlValueChanged
         UpdateCombineFactorParameterFunction()
         AssignSecondVariableType()
-        AddRemoveFirstParam()
-        AddRemoveSecondParam()
-        'AddRemoveFirstAnovaParam()
+        AddRemoveFirstCorrParam()
+        AddRemoveSecondCorrParam()
         AddRemoveSecondAnovaParam()
         AddRemoveFirstAnova2Param()
     End Sub
