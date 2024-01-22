@@ -291,6 +291,7 @@ Public Class frmMain
         mnuViewColumnMetadata.Checked = False
         mnuViewLogScript.Checked = False
         mnuViewSwapDataAndMetadata.Checked = False
+        mnuViewSwapDataAndScript.Checked = False
         mnuColumnMetadat.Checked = False
         mnuDataFrameMetadat.Checked = False
 
@@ -308,7 +309,8 @@ Public Class frmMain
                             AndAlso Not mnuViewColumnMetadata.Checked _
                             AndAlso Not mnuViewDataFrameMetadata.Checked _
                             AndAlso Not mnuViewLogScript.Checked _
-                            AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
+                            AndAlso Not mnuViewSwapDataAndMetadata.Checked _
+                            AndAlso Not mnuViewSwapDataAndScript.Checked Then
                 splOverall.Hide()
             Else
                 splOverall.Show()
@@ -581,6 +583,19 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub UpdateSwapDataAndScript()
+        If mnuViewSwapDataAndScript.Checked Then
+            splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
+            splExtraWindows.Panel2.Controls.Add(ucrDataViewer)
+            mnuViewLogScript.Text = "Data View"
+            mnuViewDataView.Text = "Log/Script"
+        Else
+            splDataOutput.Panel1.Controls.Add(ucrDataViewer)
+            splExtraWindows.Panel2.Controls.Add(ucrScriptWindow)
+            mnuViewLogScript.Text = "Log/Script"
+            mnuViewDataView.Text = "Data View"
+        End If
+    End Sub
 
     Public Sub SaveInstatOptions(strFilePath As String)
         Dim serializer As New BinaryFormatter()
@@ -1365,14 +1380,6 @@ Public Class frmMain
         dlgInfill.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDescribeTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTemperatures.Click
-        dlgTemperature.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticDescribeSunshineRadiation_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSunshineRadiation.Click
-        dlgSunshine.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticPICSARainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSARainfallGraph.Click
         dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.Rainfall
         dlgPICSARainfall.ShowDialog()
@@ -1596,6 +1603,14 @@ Public Class frmMain
         Return 0
     End Function
 
+    Public Sub UseColumnSelectionInMetaData(bUseColumnSelecion As Boolean)
+        ucrColumnMeta.UseColumnSelectionInMetaData(bUseColumnSelecion)
+    End Sub
+
+    Public Sub UseColumnSelectionInDataView(bUseColumnSelecion As Boolean)
+        ucrDataViewer.UseColumnSelectionInDataView(bUseColumnSelecion)
+    End Sub
+
     Public Sub SetCurrentDataFrame(strDataName As String)
         ucrDataViewer.SetCurrentDataFrame(strDataName)
         ucrColumnMeta.SetCurrentDataFrame(strDataName)
@@ -1688,10 +1703,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticCheckDataBoxplot_Click_1(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataBoxplot.Click
         dlgClimaticBoxPlot.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticDescribeWindSpeedDirectionWindRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindSpeedDirectionWindRose.Click
-        dlgWindrose.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticCMSAFPlotRegion_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFPlotRegion.Click
@@ -2076,10 +2087,6 @@ Public Class frmMain
         dlgClimdexIndices.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPrepareSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareSPI.Click
-        dlgSPI.ShowDialog()
-    End Sub
-
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "539")
     End Sub
@@ -2273,10 +2280,6 @@ Public Class frmMain
         dlgInfillMissingValues.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticTidyandExamineVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineVisualiseData.Click
-        dlgVisualizeData.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareCheckDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataVisualiseData.Click
         dlgVisualizeData.ShowDialog()
     End Sub
@@ -2313,19 +2316,11 @@ Public Class frmMain
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuStructuredCircularWindRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindRose.Click
-        dlgWindrose.ShowDialog()
-    End Sub
-
     Private Sub mnuStructuredCircularCalculator_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularCalculator.Click
         If dlgCalculator.bFirstLoad Then
             dlgCalculator.SetDefaultKeyboard("Circular")
         End If
         dlgCalculator.ShowDialog()
-    End Sub
-
-    Private Sub mnuStructuredCircularWindPollutionRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindPollutionRose.Click
-        dlgWindPollutionRose.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticCompareTimeSeriesPlot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareTimeSeriesPlot.Click
@@ -2372,7 +2367,22 @@ Public Class frmMain
         dlgClimaticNCMPSummaryFile.ShowDialog()
     End Sub
 
+    Private Sub mnuViewSwapDataAndScript_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndScript.Click
+        mnuViewSwapDataAndMetadata.Enabled = mnuViewSwapDataAndScript.Checked
+        mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
+        UpdateSwapDataAndScript()
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuViewSwapDataAndScript_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndScript.CheckStateChanged
+        If Not mnuViewSwapDataAndScript.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewLogScript.Checked Then
+            mnuViewLogScript.Checked = False
+            mnuViewDataView.Checked = True
+        End If
+    End Sub
+
     Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
+        mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
@@ -2399,9 +2409,6 @@ Public Class frmMain
 
     Private Sub mnuStructuredCircularDensityPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDensityPlot.Click
         dlgCircularDensityPlot.ShowDialog()
-    End Sub
-    Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
-        dlgOtherRosePlots.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticMappingMap_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingMap.Click
@@ -2520,11 +2527,6 @@ Public Class frmMain
         dlgRandomSplit.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPICSAGeneralGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
-        dlgPICSARainfall.ShowDialog()
-    End Sub
-
     'Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
     '    dlgApsimx.ShowDialog()
     'End Sub
@@ -2563,7 +2565,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticTidyandExamineSplitText_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineSplitText.Click
-        dlgRandomSplit.ShowDialog()
+        dlgSplitText.ShowDialog()
     End Sub
 
     Private Sub mnuExamineEditDataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataOneVariableSummarise.Click
@@ -2612,4 +2614,60 @@ Public Class frmMain
         CheckForUpdates()
     End Sub
 
+    Private Sub AddToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyDataKey.Click
+        dlgAddKey.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeSummarise23Variables_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSummarise23Variables.Click
+        dlgDescribeTwoVariable.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeGraph23Variables_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeGraph23Variables.Click
+        dlgDescribeTwoVarGraph.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeSPISPEI_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSPISPEI.Click
+        dlgSPI.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularWindRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindRose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularWindPollutionRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindPollutionRose.Click
+        dlgWindPollutionRose.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
+        dlgOtherRosePlots.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeWindRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindRose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeWindPollutionRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindPollutionRose.Click
+        dlgWindPollutionRose.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeOtherRosePlots.Click
+        dlgOtherRosePlots.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeTrendGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTrendGraph.Click
+        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
+        dlgPICSARainfall.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeSeasonalGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSeasonalGraph.Click
+        dlgSeasonalGraph.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeIDF_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeIDF.Click
+        dlgIDFCurves.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticExamineEditDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamineEditDataVisualiseData.Click
+        dlgVisualizeData.ShowDialog()
+    End Sub
 End Class

@@ -84,7 +84,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverSingleElements = New instat.ucrReceiverSingle()
         Me.ucrChkZero = New instat.ucrCheck()
         Me.ucrInputComboZero = New instat.ucrInputComboBox()
         Me.ucrSaveGraph = New instat.ucrSave()
@@ -106,7 +105,7 @@ Partial Class dlgDisplayDailyData
         Me.rdoTable.Location = New System.Drawing.Point(268, 12)
         Me.rdoTable.Name = "rdoTable"
         Me.rdoTable.Size = New System.Drawing.Size(124, 29)
-        Me.rdoTable.TabIndex = 1
+        Me.rdoTable.TabIndex = 2
         Me.rdoTable.Text = "Table"
         Me.rdoTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTable.UseVisualStyleBackColor = True
@@ -125,7 +124,7 @@ Partial Class dlgDisplayDailyData
         Me.rdoGraph.Location = New System.Drawing.Point(24, 12)
         Me.rdoGraph.Name = "rdoGraph"
         Me.rdoGraph.Size = New System.Drawing.Size(124, 29)
-        Me.rdoGraph.TabIndex = 2
+        Me.rdoGraph.TabIndex = 0
         Me.rdoGraph.Text = "Graph"
         Me.rdoGraph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoGraph.UseVisualStyleBackColor = True
@@ -137,7 +136,7 @@ Partial Class dlgDisplayDailyData
         Me.lblStation.Location = New System.Drawing.Point(283, 64)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 4
+        Me.lblStation.TabIndex = 15
         Me.lblStation.Text = "Station:"
         '
         'lblElement
@@ -147,7 +146,7 @@ Partial Class dlgDisplayDailyData
         Me.lblElement.Location = New System.Drawing.Point(283, 237)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
-        Me.lblElement.TabIndex = 12
+        Me.lblElement.TabIndex = 7
         Me.lblElement.Text = "Element:"
         '
         'lblDate
@@ -157,7 +156,7 @@ Partial Class dlgDisplayDailyData
         Me.lblDate.Location = New System.Drawing.Point(283, 109)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 6
+        Me.lblDate.TabIndex = 13
         Me.lblDate.Text = "Date:"
         '
         'lblYear
@@ -167,7 +166,7 @@ Partial Class dlgDisplayDailyData
         Me.lblYear.Location = New System.Drawing.Point(283, 193)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 10
+        Me.lblYear.TabIndex = 9
         Me.lblYear.Text = "Year:"
         '
         'lblDayOfTheYear
@@ -177,7 +176,7 @@ Partial Class dlgDisplayDailyData
         Me.lblDayOfTheYear.Location = New System.Drawing.Point(283, 150)
         Me.lblDayOfTheYear.Name = "lblDayOfTheYear"
         Me.lblDayOfTheYear.Size = New System.Drawing.Size(29, 13)
-        Me.lblDayOfTheYear.TabIndex = 8
+        Me.lblDayOfTheYear.TabIndex = 11
         Me.lblDayOfTheYear.Text = "Doy:"
         '
         'lblYaxisUpper
@@ -187,7 +186,7 @@ Partial Class dlgDisplayDailyData
         Me.lblYaxisUpper.Location = New System.Drawing.Point(9, 16)
         Me.lblYaxisUpper.Name = "lblYaxisUpper"
         Me.lblYaxisUpper.Size = New System.Drawing.Size(70, 13)
-        Me.lblYaxisUpper.TabIndex = 0
+        Me.lblYaxisUpper.TabIndex = 25
         Me.lblYaxisUpper.Text = "Y-axis Upper:"
         '
         'grpGraph
@@ -244,7 +243,7 @@ Partial Class dlgDisplayDailyData
         Me.lblBarColour.Location = New System.Drawing.Point(9, 48)
         Me.lblBarColour.Name = "lblBarColour"
         Me.lblBarColour.Size = New System.Drawing.Size(59, 13)
-        Me.lblBarColour.TabIndex = 2
+        Me.lblBarColour.TabIndex = 26
         Me.lblBarColour.Text = "Bar Colour:"
         '
         'ucrNudUpperYaxis
@@ -268,7 +267,7 @@ Partial Class dlgDisplayDailyData
         Me.lblElements.Location = New System.Drawing.Point(283, 237)
         Me.lblElements.Name = "lblElements"
         Me.lblElements.Size = New System.Drawing.Size(59, 13)
-        Me.lblElements.TabIndex = 12
+        Me.lblElements.TabIndex = 5
         Me.lblElements.Text = "Element(s):"
         '
         'grpSummary
@@ -283,7 +282,7 @@ Partial Class dlgDisplayDailyData
         Me.grpSummary.Location = New System.Drawing.Point(9, 256)
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.Size = New System.Drawing.Size(235, 118)
-        Me.grpSummary.TabIndex = 14
+        Me.grpSummary.TabIndex = 16
         Me.grpSummary.TabStop = False
         Me.grpSummary.Text = "Summary"
         '
@@ -369,7 +368,7 @@ Partial Class dlgDisplayDailyData
         '
         Me.lblScales.AutoSize = True
         Me.lblScales.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblScales.Location = New System.Drawing.Point(6, 16)
+        Me.lblScales.Location = New System.Drawing.Point(6, -86)
         Me.lblScales.Name = "lblScales"
         Me.lblScales.Size = New System.Drawing.Size(37, 13)
         Me.lblScales.TabIndex = 36
@@ -443,7 +442,7 @@ Partial Class dlgDisplayDailyData
         Me.rdoGraphByYear.Location = New System.Drawing.Point(146, 12)
         Me.rdoGraphByYear.Name = "rdoGraphByYear"
         Me.rdoGraphByYear.Size = New System.Drawing.Size(124, 29)
-        Me.rdoGraphByYear.TabIndex = 23
+        Me.rdoGraphByYear.TabIndex = 1
         Me.rdoGraphByYear.Text = "Graph by Year"
         Me.rdoGraphByYear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoGraphByYear.UseVisualStyleBackColor = True
@@ -479,7 +478,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverMultipleElements.Selector = Nothing
         Me.ucrReceiverMultipleElements.Size = New System.Drawing.Size(126, 100)
         Me.ucrReceiverMultipleElements.strNcFilePath = ""
-        Me.ucrReceiverMultipleElements.TabIndex = 25
+        Me.ucrReceiverMultipleElements.TabIndex = 4
         Me.ucrReceiverMultipleElements.ucrSelector = Nothing
         '
         'ucrReceiverElement
@@ -492,7 +491,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverElement.Selector = Nothing
         Me.ucrReceiverElement.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.TabIndex = 1
+        Me.ucrReceiverElement.TabIndex = 6
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrInputComboMissing
@@ -504,7 +503,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrInputComboMissing.Location = New System.Drawing.Point(155, 380)
         Me.ucrInputComboMissing.Name = "ucrInputComboMissing"
         Me.ucrInputComboMissing.Size = New System.Drawing.Size(99, 21)
-        Me.ucrInputComboMissing.TabIndex = 16
+        Me.ucrInputComboMissing.TabIndex = 17
         '
         'ucrInputComboTrace
         '
@@ -524,7 +523,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrChkMissing.Location = New System.Drawing.Point(10, 380)
         Me.ucrChkMissing.Name = "ucrChkMissing"
         Me.ucrChkMissing.Size = New System.Drawing.Size(141, 23)
-        Me.ucrChkMissing.TabIndex = 15
+        Me.ucrChkMissing.TabIndex = 27
         '
         'ucrChkTrace
         '
@@ -533,7 +532,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrChkTrace.Location = New System.Drawing.Point(10, 428)
         Me.ucrChkTrace.Name = "ucrChkTrace"
         Me.ucrChkTrace.Size = New System.Drawing.Size(141, 23)
-        Me.ucrChkTrace.TabIndex = 17
+        Me.ucrChkTrace.TabIndex = 18
         '
         'ucrReceiverYear
         '
@@ -545,7 +544,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 11
+        Me.ucrReceiverYear.TabIndex = 8
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'ucrReceiverDayOfYear
@@ -558,7 +557,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverDayOfYear.Selector = Nothing
         Me.ucrReceiverDayOfYear.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverDayOfYear.strNcFilePath = ""
-        Me.ucrReceiverDayOfYear.TabIndex = 9
+        Me.ucrReceiverDayOfYear.TabIndex = 10
         Me.ucrReceiverDayOfYear.ucrSelector = Nothing
         '
         'ucrReceiverDate
@@ -571,7 +570,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 7
+        Me.ucrReceiverDate.TabIndex = 12
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverStations
@@ -584,7 +583,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverStations.Selector = Nothing
         Me.ucrReceiverStations.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverStations.strNcFilePath = ""
-        Me.ucrReceiverStations.TabIndex = 5
+        Me.ucrReceiverStations.TabIndex = 14
         Me.ucrReceiverStations.ucrSelector = Nothing
         '
         'ucrPnlFrequencyDisplay
@@ -615,21 +614,8 @@ Partial Class dlgDisplayDailyData
         Me.ucrBase.Location = New System.Drawing.Point(10, 452)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 22
-        '
-        'ucrReceiverSingleElements
-        '
-        Me.ucrReceiverSingleElements.AutoSize = True
-        Me.ucrReceiverSingleElements.frmParent = Me
-        Me.ucrReceiverSingleElements.Location = New System.Drawing.Point(280, 253)
-        Me.ucrReceiverSingleElements.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSingleElements.Name = "ucrReceiverSingleElements"
-        Me.ucrReceiverSingleElements.Selector = Nothing
-        Me.ucrReceiverSingleElements.Size = New System.Drawing.Size(122, 20)
-        Me.ucrReceiverSingleElements.strNcFilePath = ""
-        Me.ucrReceiverSingleElements.TabIndex = 24
-        Me.ucrReceiverSingleElements.ucrSelector = Nothing
         '
         'ucrChkZero
         '
@@ -658,7 +644,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(320, 23)
-        Me.ucrSaveGraph.TabIndex = 4
+        Me.ucrSaveGraph.TabIndex = 58
         '
         'cmdDispalyDailyOptions
         '
@@ -677,14 +663,14 @@ Partial Class dlgDisplayDailyData
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 511)
+        Me.Controls.Add(Me.lblElements)
+        Me.Controls.Add(Me.lblElement)
+        Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.cmdDispalyDailyOptions)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrInputGraphRugColur)
         Me.Controls.Add(Me.lblGRugColour)
-        Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.rdoGraphByYear)
-        Me.Controls.Add(Me.lblElements)
-        Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrInputComboZero)
         Me.Controls.Add(Me.ucrInputComboMissing)
         Me.Controls.Add(Me.ucrInputComboTrace)
@@ -697,7 +683,6 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.lblDayOfTheYear)
         Me.Controls.Add(Me.ucrReceiverDayOfYear)
         Me.Controls.Add(Me.ucrReceiverDate)
-        Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStations)
         Me.Controls.Add(Me.rdoTable)
@@ -705,10 +690,10 @@ Partial Class dlgDisplayDailyData
         Me.Controls.Add(Me.ucrPnlFrequencyDisplay)
         Me.Controls.Add(Me.ucrSelectorDisplayDailyClimaticData)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrReceiverSingleElements)
         Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpFacet)
+        Me.Controls.Add(Me.ucrReceiverElement)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -762,7 +747,6 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents grpSummary As GroupBox
     Friend WithEvents ucrChkSumMissing As ucrCheck
     Friend WithEvents rdoGraphByYear As RadioButton
-    Friend WithEvents ucrReceiverSingleElements As ucrReceiverSingle
     Friend WithEvents ucrReceiverMultipleElements As ucrReceiverMultiple
     Friend WithEvents lblFacetby As Label
     Friend WithEvents ucrInputFacetBy As ucrInputComboBox

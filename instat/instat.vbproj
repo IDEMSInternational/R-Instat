@@ -155,8 +155,8 @@
     <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RScript, Version=0.1.0.10, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RScript.1.0.11\lib\net461\RScript.dll</HintPath>
+    <Reference Include="RInsightF461, Version=0.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RInsightF461.0.0.7\lib\net461\RInsightF461.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
@@ -245,6 +245,12 @@
     <Compile Include="dlgFindInVariableOrFilter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgIDFCurves.Designer.vb">
+      <DependentUpon>dlgIDFCurves.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgIDFCurves.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromPostgres.Designer.vb">
       <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
     </Compile>
@@ -263,6 +269,12 @@
     <Compile Include="dlgRandomSplit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSeasonalGraph.Designer.vb">
+      <DependentUpon>dlgSeasonalGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSeasonalGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSurvey.Designer.vb">
       <DependentUpon>dlgSurvey.vb</DependentUpon>
     </Compile>
@@ -277,10 +289,40 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgHSConstants.Designer.vb">
+      <DependentUpon>sdgHSConstants.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgHSConstants.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgHSMissingOptions.Designer.vb">
+      <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgHSMissingOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgLocation.Designer.vb">
+      <DependentUpon>sdgLocation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgLocation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPairPlotOptions.Designer.vb">
       <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgPairPlotOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgPMConstants.Designer.vb">
+      <DependentUpon>sdgPMConstants.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPMConstants.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgPTConstants.Designer.vb">
+      <DependentUpon>sdgPTConstants.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPTConstants.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgSummaryThemes.Designer.vb">
@@ -3038,6 +3080,9 @@
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgIDFCurves.resx">
+      <DependentUpon>dlgIDFCurves.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
     </EmbeddedResource>
@@ -3070,6 +3115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSearch.resx">
       <DependentUpon>dlgSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalGraph.resx">
+      <DependentUpon>dlgSeasonalGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
@@ -3110,8 +3158,23 @@
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgHSConstants.resx">
+      <DependentUpon>sdgHSConstants.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgHSMissingOptions.resx">
+      <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLocation.resx">
+      <DependentUpon>sdgLocation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgPairPlotOptions.resx">
       <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPMConstants.resx">
+      <DependentUpon>sdgPMConstants.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPTConstants.resx">
+      <DependentUpon>sdgPTConstants.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
