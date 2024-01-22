@@ -276,6 +276,7 @@ Partial Class dlgExportForClimpact
         Me.Controls.Add(Me.ucrSelectorImportToClimpact)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgExportForClimpact"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Export For Climpact"
         Me.ResumeLayout(False)
         Me.PerformLayout()

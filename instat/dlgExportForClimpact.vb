@@ -38,50 +38,54 @@ Public Class dlgExportForClimpact
 
     Private Sub InitialiseDialog()
 
-        ucrInputCodeMissingValues.SetParameter(New RParameter("na_code"))
+        ucrInputCodeMissingValues.SetParameter(New RParameter("missing_code", 6))
         ucrInputCodeMissingValues.SetRDefault("-99.9")
-        ucrInputCodeMissingValues.AddQuotesIfUnrecognised = False
 
         'Year Receiver
         ucrReceiverYear.Selector = ucrSelectorImportToClimpact
+        ucrReceiverYear.SetParameter(New RParameter("year", 0))
         ucrReceiverYear.SetClimaticType("year")
+        ucrReceiverYear.SetParameterIsRFunction()
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         'Month Receiver
         ucrReceiverMonth.Selector = ucrSelectorImportToClimpact
+        ucrReceiverMonth.SetParameter(New RParameter("month", 1))
         ucrReceiverMonth.SetClimaticType("month")
+        ucrReceiverMonth.SetParameterIsRFunction()
         ucrReceiverMonth.bAutoFill = True
         ucrReceiverMonth.strSelectorHeading = "Month Variables"
+        ucrReceiverMonth.bWithQuotes = False
 
         'Day Receiver
         ucrReceiverDay.Selector = ucrSelectorImportToClimpact
-        ucrReceiverDay.SetParameter(New RParameter("day", 5, bNewIncludeArgumentName:=False))
-        ucrReceiverDay.SetParameterIsString()
+        ucrReceiverDay.SetParameter(New RParameter("day", 2))
+        ucrReceiverDay.SetParameterIsRFunction()
         ucrReceiverDay.bWithQuotes = False
         ucrReceiverDay.SetClimaticType("day")
         ucrReceiverDay.bAutoFill = True
 
         'Element Receiver
         ucrReceiverTX.Selector = ucrSelectorImportToClimpact
-        ucrReceiverTX.SetParameter(New RParameter("x", 4, bNewIncludeArgumentName:=False))
-        ucrReceiverTX.SetParameterIsString()
+        ucrReceiverTX.SetParameter(New RParameter("mx_tmp", 3))
+        ucrReceiverTX.SetParameterIsRFunction()
         ucrReceiverTX.bWithQuotes = False
         ucrReceiverTX.SetClimaticType("temp_max")
         ucrReceiverTX.bAutoFill = True
 
         ucrReceiverTN.Selector = ucrSelectorImportToClimpact
-        ucrReceiverTN.SetParameter(New RParameter("x", 1, bNewIncludeArgumentName:=False))
-        ucrReceiverTN.SetParameterIsString()
+        ucrReceiverTN.SetParameter(New RParameter("mn_tmp", 4))
+        ucrReceiverTN.SetParameterIsRFunction()
         ucrReceiverTN.SetClimaticType("temp_min")
         ucrReceiverTN.bAutoFill = True
         ucrReceiverTN.bWithQuotes = False
 
-        ucrReceiverRR.SetParameter(New RParameter("left", 2, bNewIncludeArgumentName:=False))
+        ucrReceiverRR.SetParameter(New RParameter("rain", 5,))
         ucrReceiverRR.Selector = ucrSelectorImportToClimpact
         ucrReceiverRR.SetClimaticType("rain")
         ucrReceiverRR.bAutoFill = True
-        ucrReceiverRR.SetParameterIsString()
+        ucrReceiverRR.SetParameterIsRFunction()
         ucrReceiverRR.bWithQuotes = False
 
         ucrInputExportFile.SetParameter(New RParameter("output_file ", 9))
@@ -96,24 +100,13 @@ Public Class dlgExportForClimpact
         ucrSelectorImportToClimpact.Reset()
 
         clsOutputClimpact.SetRCommand("write_weather_data")
-        clsOutputClimpact.AddParameter("year", clsRFunctionParameter:=ucrReceiverYear.GetVariables, iPosition:=1)
-        clsOutputClimpact.AddParameter("month", clsRFunctionParameter:=ucrReceiverMonth.GetVariables, iPosition:=2)
-        clsOutputClimpact.AddParameter("day", clsRFunctionParameter:=ucrReceiverDay.GetVariables, iPosition:=3)
-        clsOutputClimpact.AddParameter("rain", clsRFunctionParameter:=ucrReceiverRR.GetVariables, iPosition:=4)
-        clsOutputClimpact.AddParameter("mn_tmp", clsRFunctionParameter:=ucrReceiverTN.GetVariables, iPosition:=5)
-        clsOutputClimpact.AddParameter("mx_tmp", clsRFunctionParameter:=ucrReceiverTX.GetVariables, iPosition:=6)
-        clsOutputClimpact.AddParameter("missing_code", "-99.9", iPosition:=7)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsOutputClimpact)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverYear.SetRCode(clsOutputClimpact, bReset)
-        ucrSelectorImportToClimpact.SetRCode(clsOutputClimpact, bReset)
 
-        ucrReceiverMonth.SetRCode(clsOutputClimpact, bReset)
-        ucrInputCodeMissingValues.SetRCode(clsOutputClimpact, bReset)
-        ucrInputExportFile.SetRCode(clsOutputClimpact)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
