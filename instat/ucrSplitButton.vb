@@ -592,21 +592,12 @@ Public Class ucrSplitButton
             .ShowInTaskbar = False
         }
 
-        '' Event handler for item click
-        'Dim itemClickHandler As EventHandler = Sub(sender As Object, e As ToolStripItemClickedEventArgs)
-        '                                           ' Handle the item click here
-        '                                           ' You can perform actions based on the selected item
-        '                                           ' ...
-
-        '                                           ' Detach the event handler
-        '                                           RemoveHandler _contextSplitMenuStrip.ItemClicked, itemClickHandler
-
-        '                                           ' Close the form
-        '                                           tmpForm.Close()
-        '                                       End Sub
-
-        '' Attach the event handler
-        'AddHandler _contextSplitMenuStrip.ItemClicked, itemClickHandler
+        ' Event handler for item click
+        AddHandler _contextSplitMenuStrip.ItemClicked, Sub(sender As Object, e As ToolStripItemClickedEventArgs)
+                                                           RemoveHandler _contextSplitMenuStrip.ItemClicked
+                                                           ' Close the form
+                                                           tmpForm.Close()
+                                                       End Sub
 
         Dim panel As New Panel With {
             .Dock = DockStyle.Fill,
