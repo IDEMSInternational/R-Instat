@@ -591,45 +591,43 @@ Public Class ucrSplitButton
             .StartPosition = FormStartPosition.Manual,
             .ShowInTaskbar = False
         }
-
-        ' Event handler for item click
-        AddHandler _contextSplitMenuStrip.ItemClicked, Sub(sender As Object, e As ToolStripItemClickedEventArgs)
-                                                           RemoveHandler _contextSplitMenuStrip.ItemClicked
-                                                           ' Close the form
-                                                           tmpForm.Close()
-                                                       End Sub
-
         Dim panel As New Panel With {
             .Dock = DockStyle.Fill,
             .AutoScroll = True
         }
-
         _contextSplitMenuStrip.TopLevel = False
         _contextSplitMenuStrip.Dock = DockStyle.Top
-        panel.Controls.Add(_contextSplitMenuStrip)
 
         ' Set the panel size based on the preferred size of the context menu
         panel.Size = _contextSplitMenuStrip.PreferredSize
 
+        ' Event handler for item click
+        AddHandler _contextSplitMenuStrip.ItemClicked, Sub(sender As Object, e As ToolStripItemClickedEventArgs)
+                                                           tmpForm.Close()
+                                                       End Sub
+
+        AddHandler tmpForm.FormClosed, Sub(sender As Object, e As FormClosedEventArgs)
+                                           If panel.Controls.Contains(_contextSplitMenuStrip) Then
+                                               panel.Controls.Remove(_contextSplitMenuStrip)
+                                           End If
+                                       End Sub
+
+
+        panel.Controls.Add(_contextSplitMenuStrip)
         ' Set a maximum height for the form
         Dim maxHeight As Integer = 100
         If panel.Height > maxHeight Then
             panel.Height = maxHeight
         End If
 
+        If _contextSplitMenuStrip IsNot Nothing Then
+            _contextSplitMenuStrip.Show()
+        End If
+
         tmpForm.Size = New Size(panel.Width, panel.Height)
         tmpForm.Location = PointToScreen(New Point(0, Height))
-
         tmpForm.Controls.Add(panel)
         tmpForm.Show()
-        _contextSplitMenuStrip.Show(panel, New Point(0, 0))
-
-        ' Set the initial vertical scroll position to show the last items in the menu
-        panel.VerticalScroll.Value = panel.VerticalScroll.Maximum
-
-        'If _contextSplitMenuStrip IsNot Nothing Then
-        '    _contextSplitMenuStrip.Show(Me, New Point(0, Height), ToolStripDropDownDirection.BelowRight)
-        'End If
     End Sub
 
     Private Sub SplitMenuStrip_Opening(sender As Object, e As CancelEventArgs)
