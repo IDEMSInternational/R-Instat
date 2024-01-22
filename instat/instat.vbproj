@@ -289,10 +289,40 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgHSConstants.Designer.vb">
+      <DependentUpon>sdgHSConstants.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgHSConstants.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgHSMissingOptions.Designer.vb">
+      <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgHSMissingOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgLocation.Designer.vb">
+      <DependentUpon>sdgLocation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgLocation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPairPlotOptions.Designer.vb">
       <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgPairPlotOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgPMConstants.Designer.vb">
+      <DependentUpon>sdgPMConstants.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPMConstants.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgPTConstants.Designer.vb">
+      <DependentUpon>sdgPTConstants.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPTConstants.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgSummaryThemes.Designer.vb">
@@ -3128,8 +3158,23 @@
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgHSConstants.resx">
+      <DependentUpon>sdgHSConstants.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgHSMissingOptions.resx">
+      <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLocation.resx">
+      <DependentUpon>sdgLocation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgPairPlotOptions.resx">
       <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPMConstants.resx">
+      <DependentUpon>sdgPMConstants.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPTConstants.resx">
+      <DependentUpon>sdgPTConstants.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
