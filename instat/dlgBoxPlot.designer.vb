@@ -108,7 +108,7 @@ Partial Class dlgBoxplot
         Me.rdoBoxplotTufte.Size = New System.Drawing.Size(133, 27)
         Me.rdoBoxplotTufte.TabIndex = 1
         Me.rdoBoxplotTufte.TabStop = True
-        Me.rdoBoxplotTufte.Text = "Boxplot/Tufte Boxplot"
+        Me.rdoBoxplotTufte.Text = "Boxplot"
         Me.rdoBoxplotTufte.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoBoxplotTufte.UseVisualStyleBackColor = True
         '
@@ -172,42 +172,42 @@ Partial Class dlgBoxplot
         '
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBoxOptions, Me.toolStripMenuItemJitterOptions, Me.toolStripMenuItemSummaryOptions, Me.toolStripMenuItemTufteOptions, Me.toolStripMenuItemViolinOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 158)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(171, 136)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(170, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemBoxOptions
         '
         Me.toolStripMenuItemBoxOptions.Name = "toolStripMenuItemBoxOptions"
-        Me.toolStripMenuItemBoxOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemBoxOptions.Size = New System.Drawing.Size(170, 22)
         Me.toolStripMenuItemBoxOptions.Text = "Boxplot Options"
         '
         'toolStripMenuItemJitterOptions
         '
         Me.toolStripMenuItemJitterOptions.Name = "toolStripMenuItemJitterOptions"
-        Me.toolStripMenuItemJitterOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemJitterOptions.Size = New System.Drawing.Size(170, 22)
         Me.toolStripMenuItemJitterOptions.Text = "Jitter Options"
         '
         'toolStripMenuItemSummaryOptions
         '
         Me.toolStripMenuItemSummaryOptions.Name = "toolStripMenuItemSummaryOptions"
-        Me.toolStripMenuItemSummaryOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemSummaryOptions.Size = New System.Drawing.Size(170, 22)
         Me.toolStripMenuItemSummaryOptions.Text = "Summary Options"
         '
         'toolStripMenuItemTufteOptions
         '
         Me.toolStripMenuItemTufteOptions.Name = "toolStripMenuItemTufteOptions"
-        Me.toolStripMenuItemTufteOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemTufteOptions.Size = New System.Drawing.Size(170, 22)
         Me.toolStripMenuItemTufteOptions.Text = "Tufte Options"
         '
         'toolStripMenuItemViolinOptions
         '
         Me.toolStripMenuItemViolinOptions.Name = "toolStripMenuItemViolinOptions"
-        Me.toolStripMenuItemViolinOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemViolinOptions.Size = New System.Drawing.Size(170, 22)
         Me.toolStripMenuItemViolinOptions.Text = "Violin Options"
         '
         'ucrInputSummaries
