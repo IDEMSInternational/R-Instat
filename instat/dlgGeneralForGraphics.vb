@@ -86,6 +86,7 @@ Public Class dlgGeneralForGraphics
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
         Dim dctLegendPosition As New Dictionary(Of String, String)
+        Dim dctAddCode As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 420
         'By default, we want to put in the script the output of our Base R-command (in this case the ...+...+...) even when it has been assigned to some object (in which case we want the name of that object in the script so that it's called when the script is run).
         'For example, when a graph is saved, it is assigned to it's place in an R-instat object. If we had set bExcludeAssignedFunctionOutput to True, then we would never print the graph when running the script.
@@ -165,9 +166,10 @@ Public Class dlgGeneralForGraphics
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
+
         ucrChkAddCode.SetText("Add Code:")
         ucrChkAddCode.AddToLinkedControls({ucrInputAddCode}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-        ucrInputAddCode.SetItems({"geom_hline(yintercept=20)", "geom_vline(xintercept = 5)", "geom_vline(xintercept = 5)", "scale_x_binned()", "scale_x_binned(n.breaks=20)"})
+        ucrInputAddCode.SetItems({"geom_hline(yintercept=20)", "geom_vline(xintercept=5) + geom_hline(yintercept = 1)", "geom_vline(xintercept=c(1,3,5),colour=""green"")", "scale_x_binned()", "scale_x_binned(n.breaks=20)", "scale_y_continuous(trans=""log10"", label=scales::dollar)"})
 
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
@@ -302,12 +304,24 @@ Public Class dlgGeneralForGraphics
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        SetCalculationHistory()
+    End Sub
+
     Private Sub TestOKEnabled()
         If Not ucrSave.IsComplete OrElse (ucrReceiverX.IsEmpty AndAlso ucrReceiverY.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
+    End Sub
+
+    Public Sub Reset()
+        ucrInputAddCode.ResetText()
+    End Sub
+
+    Public Sub SetCalculationHistory()
+        ucrInputAddCode.AddItems({ucrInputAddCode.GetText()})
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
