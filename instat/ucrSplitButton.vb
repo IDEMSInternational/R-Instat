@@ -232,13 +232,18 @@ Public Class ucrSplitButton
         If mevent.Button = MouseButtons.Right AndAlso ClientRectangle.Contains(mevent.Location) AndAlso Not _bSplitMenuVisible Then
             ShowContextMenuStrip()
         ElseIf _contextSplitMenuStrip Is Nothing OrElse Not _bSplitMenuVisible Then
-            SetButtonDrawState()
-
             If ClientRectangle.Contains(mevent.Location) AndAlso Not _dropDownRectangle.Contains(mevent.Location) Then
-                OnClick(New EventArgs())
+                ' Trigger the Click event
+                OnClick(EventArgs.Empty)
             End If
         End If
+
+        ' Set the button state to Normal regardless of other conditions
+        State = PushButtonState.Normal
+
+        MyBase.OnMouseUp(mevent)
     End Sub
+
 
     Protected Overrides Sub OnPaint(pevent As PaintEventArgs)
         MyBase.OnPaint(pevent)
@@ -593,15 +598,13 @@ Public Class ucrSplitButton
         }
         Dim panel As New Panel With {
             .Dock = DockStyle.Fill,
-            .AutoScroll = True
+            .AutoScroll = True,
+            .Size = _contextSplitMenuStrip.PreferredSize,
+            .BorderStyle = BorderStyle.FixedSingle
         }
         _contextSplitMenuStrip.TopLevel = False
         _contextSplitMenuStrip.Dock = DockStyle.Top
 
-        ' Set the panel size based on the preferred size of the context menu
-        panel.Size = _contextSplitMenuStrip.PreferredSize
-
-        ' Event handler for item click
         AddHandler _contextSplitMenuStrip.ItemClicked, Sub(sender As Object, e As ToolStripItemClickedEventArgs)
                                                            tmpForm.Close()
                                                        End Sub
@@ -612,6 +615,10 @@ Public Class ucrSplitButton
                                            End If
                                        End Sub
 
+        AddHandler tmpForm.LostFocus, Sub(sender As Object, e As EventArgs)
+                                          _bSplitMenuVisible = False
+                                          tmpForm.Close()
+                                      End Sub
 
         panel.Controls.Add(_contextSplitMenuStrip)
         ' Set a maximum height for the form
