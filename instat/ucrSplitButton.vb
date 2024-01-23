@@ -598,12 +598,14 @@ Public Class ucrSplitButton
         }
         Dim panel As New Panel With {
             .Dock = DockStyle.Fill,
-            .AutoScroll = True,
             .Size = _contextSplitMenuStrip.PreferredSize,
+            .AutoScroll = True,
             .BorderStyle = BorderStyle.FixedSingle
         }
         _contextSplitMenuStrip.TopLevel = False
         _contextSplitMenuStrip.Dock = DockStyle.Top
+        _contextSplitMenuStrip.Padding = New Padding(0, -2, 0, -2)
+        _contextSplitMenuStrip.ShowImageMargin = False
 
         AddHandler _contextSplitMenuStrip.ItemClicked, Sub(sender As Object, e As ToolStripItemClickedEventArgs)
                                                            tmpForm.Close()
@@ -622,7 +624,7 @@ Public Class ucrSplitButton
 
         panel.Controls.Add(_contextSplitMenuStrip)
         ' Set a maximum height for the form
-        Dim maxHeight As Integer = 100
+        Dim maxHeight As Integer = 250
         If panel.Height > maxHeight Then
             panel.Height = maxHeight
         End If
