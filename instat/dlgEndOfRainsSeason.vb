@@ -276,7 +276,6 @@ Public Class dlgEndOfRainsSeason
         ucrNudCapacity.SetParameter(New RParameter("yes", 1))
         ucrNudCapacity.SetMinMax(1, Integer.MaxValue)
         ucrNudCapacity.Increment = 10
-        ucrNudCapacity.SetRDefault(100)
 
         ucrInputSeasonDoy.SetParameter(New RParameter("result_name", 3))
         ucrInputSeasonDoy.SetValidationTypeAsRVariable()
@@ -1051,12 +1050,16 @@ Public Class dlgEndOfRainsSeason
                     clsPMaxFunction.RemoveParameterByName("0")
                     clsWBMaxEvapOperator.RemoveParameterByName("value")
                     clsWBMinEvapOperator.RemoveParameterByName("value")
+                    clsPMinWBMaxFunction.RemoveParameterByName("1")
+                    clsPMinWBMinFunction.RemoveParameterByName("1")
                 Else
                     clsPMaxFunction.AddParameter("0", "..1 + ..2", iPosition:=0, bIncludeArgumentName:=False)
                     clsPMaxFunction.RemoveParameterByName("wb")
                     clsPMaxFunction.RemoveParameterByName("wb")
                     clsWBMaxEvapOperator.AddParameter("value", ucrInputEvaporation.GetText(), iPosition:=1)
                     clsWBMinEvapOperator.AddParameter("value", ucrInputEvaporation.GetText(), iPosition:=1)
+                    clsPMinWBMaxFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1)
+                    clsPMinWBMinFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1)
                 End If
             Else
                 ucrReceiverEvaporation.SetMeAsReceiver()
@@ -1075,12 +1078,16 @@ Public Class dlgEndOfRainsSeason
                     clsPMaxFunction.RemoveParameterByName("0")
                     clsWBMaxEvapOperator.RemoveParameterByName("value")
                     clsWBMinEvapOperator.RemoveParameterByName("value")
+                    clsPMinWBMaxFunction.RemoveParameterByName("1")
+                    clsPMinWBMinFunction.RemoveParameterByName("1")
                 Else
                     clsPMaxFunction.AddParameter("0", "..1 + ..2", iPosition:=0, bIncludeArgumentName:=False)
                     clsPMaxFunction.RemoveParameterByName("wb")
                     clsPMaxFunction.RemoveParameterByName("wb")
                     clsReduceWBMinFunction1.AddParameter(".y", clsRFunctionParameter:=clsWBMinTailFunction1, iPosition:=1)
                     clsReduceWBMaxFunction1.AddParameter(".y", clsRFunctionParameter:=clsWBMaxTailFunction1, iPosition:=1)
+                    clsPMinWBMaxFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1)
+                    clsPMinWBMinFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1)
                 End If
             End If
         End If
