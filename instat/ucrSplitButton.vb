@@ -598,13 +598,11 @@ Public Class ucrSplitButton
         }
         Dim panel As New Panel With {
             .Dock = DockStyle.Fill,
-            .Size = _contextSplitMenuStrip.PreferredSize,
-            .AutoScroll = True,
-            .BorderStyle = BorderStyle.FixedSingle
+            .BorderStyle = BorderStyle.None,
+            .Size = _contextSplitMenuStrip.PreferredSize
         }
         _contextSplitMenuStrip.TopLevel = False
         _contextSplitMenuStrip.Dock = DockStyle.Top
-        _contextSplitMenuStrip.Padding = New Padding(0, -2, 0, -2)
         _contextSplitMenuStrip.ShowImageMargin = False
 
         AddHandler _contextSplitMenuStrip.ItemClicked, Sub(sender As Object, e As ToolStripItemClickedEventArgs)
@@ -627,14 +625,23 @@ Public Class ucrSplitButton
         Dim maxHeight As Integer = 250
         If panel.Height > maxHeight Then
             panel.Height = maxHeight
+            panel.AutoScroll = True
         End If
 
         If _contextSplitMenuStrip IsNot Nothing Then
             _contextSplitMenuStrip.Show()
         End If
 
+        ' Calculate whether to show the form above or below
+        Dim screenRect As Rectangle = Screen.FromControl(Me).WorkingArea
+        Dim bShowUp As Boolean = PointToScreen(New Point(0, Height + panel.Height)).Y > screenRect.Bottom
+
+        If bShowUp Then
+            tmpForm.Location = PointToScreen(New Point(0, Height - tmpForm.Height))
+        Else
+            tmpForm.Location = PointToScreen(New Point(0, Height))
+        End If
         tmpForm.Size = New Size(panel.Width, panel.Height)
-        tmpForm.Location = PointToScreen(New Point(0, Height))
         tmpForm.Controls.Add(panel)
         tmpForm.Show()
     End Sub
