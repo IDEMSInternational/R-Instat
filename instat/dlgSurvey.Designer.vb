@@ -33,8 +33,6 @@ Partial Class dlgSurvey
         Me.ucrInputSummaryStat = New instat.ucrInputComboBox()
         Me.ucrChkSummary = New instat.ucrCheck()
         Me.lblInputID = New System.Windows.Forms.Label()
-        Me.lblXFormula = New System.Windows.Forms.Label()
-        Me.ucrReceiverMultipleVar2 = New instat.ucrReceiverMultiple()
         Me.lblStrata = New System.Windows.Forms.Label()
         Me.rdoClustered = New System.Windows.Forms.RadioButton()
         Me.rdoStratified = New System.Windows.Forms.RadioButton()
@@ -163,28 +161,6 @@ Partial Class dlgSurvey
         Me.lblInputID.Size = New System.Drawing.Size(80, 14)
         Me.lblInputID.TabIndex = 56
         Me.lblInputID.Text = "Ids:"
-        '
-        'lblXFormula
-        '
-        Me.lblXFormula.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXFormula.Location = New System.Drawing.Point(290, 205)
-        Me.lblXFormula.Name = "lblXFormula"
-        Me.lblXFormula.Size = New System.Drawing.Size(59, 13)
-        Me.lblXFormula.TabIndex = 55
-        Me.lblXFormula.Text = "X/Formula:"
-        '
-        'ucrReceiverMultipleVar2
-        '
-        Me.ucrReceiverMultipleVar2.AutoSize = True
-        Me.ucrReceiverMultipleVar2.frmParent = Me
-        Me.ucrReceiverMultipleVar2.Location = New System.Drawing.Point(293, 218)
-        Me.ucrReceiverMultipleVar2.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleVar2.Name = "ucrReceiverMultipleVar2"
-        Me.ucrReceiverMultipleVar2.Selector = Nothing
-        Me.ucrReceiverMultipleVar2.Size = New System.Drawing.Size(123, 50)
-        Me.ucrReceiverMultipleVar2.strNcFilePath = ""
-        Me.ucrReceiverMultipleVar2.TabIndex = 54
-        Me.ucrReceiverMultipleVar2.ucrSelector = Nothing
         '
         'lblStrata
         '
@@ -359,7 +335,7 @@ Partial Class dlgSurvey
         'lblVar1srs
         '
         Me.lblVar1srs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVar1srs.Location = New System.Drawing.Point(423, 131)
+        Me.lblVar1srs.Location = New System.Drawing.Point(290, 130)
         Me.lblVar1srs.Name = "lblVar1srs"
         Me.lblVar1srs.Size = New System.Drawing.Size(123, 13)
         Me.lblVar1srs.TabIndex = 69
@@ -369,7 +345,7 @@ Partial Class dlgSurvey
         '
         Me.ucrReceiverVar1srs.AutoSize = True
         Me.ucrReceiverVar1srs.frmParent = Me
-        Me.ucrReceiverVar1srs.Location = New System.Drawing.Point(426, 144)
+        Me.ucrReceiverVar1srs.Location = New System.Drawing.Point(293, 143)
         Me.ucrReceiverVar1srs.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVar1srs.Name = "ucrReceiverVar1srs"
         Me.ucrReceiverVar1srs.Selector = Nothing
@@ -381,7 +357,7 @@ Partial Class dlgSurvey
         'lblVar2srs
         '
         Me.lblVar2srs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVar2srs.Location = New System.Drawing.Point(423, 168)
+        Me.lblVar2srs.Location = New System.Drawing.Point(290, 167)
         Me.lblVar2srs.Name = "lblVar2srs"
         Me.lblVar2srs.Size = New System.Drawing.Size(123, 13)
         Me.lblVar2srs.TabIndex = 71
@@ -391,7 +367,7 @@ Partial Class dlgSurvey
         '
         Me.ucrReceiverVar2srs.AutoSize = True
         Me.ucrReceiverVar2srs.frmParent = Me
-        Me.ucrReceiverVar2srs.Location = New System.Drawing.Point(426, 181)
+        Me.ucrReceiverVar2srs.Location = New System.Drawing.Point(293, 180)
         Me.ucrReceiverVar2srs.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVar2srs.Name = "ucrReceiverVar2srs"
         Me.ucrReceiverVar2srs.Selector = Nothing
@@ -420,8 +396,6 @@ Partial Class dlgSurvey
         Me.Controls.Add(Me.ucrInputSummaryStat)
         Me.Controls.Add(Me.ucrChkSummary)
         Me.Controls.Add(Me.lblInputID)
-        Me.Controls.Add(Me.lblXFormula)
-        Me.Controls.Add(Me.ucrReceiverMultipleVar2)
         Me.Controls.Add(Me.lblStrata)
         Me.Controls.Add(Me.rdoClustered)
         Me.Controls.Add(Me.rdoStratified)
@@ -458,8 +432,6 @@ Partial Class dlgSurvey
     Friend WithEvents ucrInputSummaryStat As ucrInputComboBox
     Friend WithEvents ucrChkSummary As ucrCheck
     Friend WithEvents lblInputID As Label
-    Friend WithEvents lblXFormula As Label
-    Friend WithEvents ucrReceiverMultipleVar2 As ucrReceiverMultiple
     Friend WithEvents lblStrata As Label
     Friend WithEvents rdoClustered As RadioButton
     Friend WithEvents rdoStratified As RadioButton
