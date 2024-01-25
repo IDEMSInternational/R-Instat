@@ -26,7 +26,7 @@ Public Class ucrScript
     Private iMaxLineNumberCharLength As Integer = 0
     Private Const iTabIndexLog As Integer = 0
     Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
-    Private strCurrentScriptFileName As String = "" 'holds the saved script file name to help remember the current selected folder path
+
     Friend WithEvents clsScriptActive As Scintilla
     Friend WithEvents clsScriptLog As Scintilla
 
@@ -196,6 +196,10 @@ Public Class ucrScript
         End If
     End Sub
 
+    Private Function SelectedTab() As String
+        Return TabControl.SelectedTab.Text
+    End Function
+
     ''' <summary>
     ''' Displays a file save dialog; allows the user to specify a folder and file name; and saves 
     ''' the log/script to the specified file.
@@ -214,12 +218,8 @@ Public Class ucrScript
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save " & If(bIsLog, "Log", "Script") & " To File"
             dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
-            If Not String.IsNullOrEmpty(strCurrentScriptFileName) Then
-                dlgSave.FileName = Path.GetFileName(strCurrentScriptFileName)
-                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentScriptFileName)
-            Else
-                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            End If
+            dlgSave.FileName = Path.GetFileName(SelectedTab)
+
             'Ensure that dialog opens in correct folder.
             'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
             'not work (I think a bug in WinForms).So we need to use static variables instead.
@@ -230,7 +230,6 @@ Public Class ucrScript
             If dlgSave.ShowDialog() = DialogResult.OK Then
                 Try
                     File.WriteAllText(dlgSave.FileName, If(bIsLog, clsScriptLog.Text, clsScriptActive.Text))
-                    strCurrentScriptFileName = dlgSave.FileName
                     bIsTextChanged = False
                     TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgSave.FileName)
                     frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), System.IO.Path.GetFileName(dlgSave.FileName)), "\", "/"))
