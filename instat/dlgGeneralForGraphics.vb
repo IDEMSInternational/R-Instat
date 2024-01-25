@@ -276,7 +276,7 @@ Public Class dlgGeneralForGraphics
         ucrInputAddCode.ResetText()
     End Sub
 
-    Public Sub SetCalculationHistory()
+    Private Sub SetCalculationHistory()
         ucrInputAddCode.AddItems({ucrInputAddCode.GetText()})
     End Sub
 
