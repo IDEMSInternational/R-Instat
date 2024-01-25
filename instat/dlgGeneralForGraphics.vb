@@ -167,7 +167,7 @@ Public Class dlgGeneralForGraphics
 
         ucrChkAddCode.SetText("Add Code:")
         ucrChkAddCode.AddToLinkedControls({ucrInputAddCode}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-        ucrInputAddCode.SetItems({"geom_hline(yintercept=20)", "geom_vline(xintercept = 5)", "geom_vline(xintercept = 5)", "scale_x_binned()", "scale_x_binned(n.breaks=20)"})
+        ucrInputAddCode.SetItems({"geom_hline(yintercept=20)", "geom_vline(xintercept=5) + geom_hline(yintercept = 1)", "geom_vline(xintercept=c(1,3,5),colour=""green"")", "scale_x_binned()", "scale_x_binned(n.breaks=20)", "scale_y_continuous(trans=""log10"", label=scales::dollar)"})
 
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
@@ -272,6 +272,14 @@ Public Class dlgGeneralForGraphics
         TestOKEnabled()
     End Sub
 
+    Private Sub Reset()
+        ucrInputAddCode.ResetText()
+    End Sub
+
+    Public Sub SetCalculationHistory()
+        ucrInputAddCode.AddItems({ucrInputAddCode.GetText()})
+    End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverX.AddAdditionalCodeParameterPair(clsLevelsFunction, New RParameter("y", ucrReceiverX.GetVariableNames(False), bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrGraphicsSelector.SetRCode(clsGgplotFunction, bReset)
@@ -295,6 +303,10 @@ Public Class dlgGeneralForGraphics
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        SetCalculationHistory()
     End Sub
 
     Private Sub TestOKEnabled()
