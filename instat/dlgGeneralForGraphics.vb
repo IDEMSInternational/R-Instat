@@ -682,7 +682,7 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub UpdateParameters()
-        clsFacetVariablesOperator.RemoveParameterByName("wrap" & ucrInputStation.Name)
+        clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
 
