@@ -148,14 +148,13 @@ Public Class dlgExportForClimpact
         End Using
     End Sub
 
-    Private Sub ucrReceiverElements_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRR.ControlContentsChanged, ucrReceiverTN.ControlValueChanged, ucrReceiverDay.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrInputExportFile.ControlContentsChanged, ucrReceiverTX.ControlValueChanged, ucrReceiverMonth.ControlValueChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
         If ucrInputExportFile.IsEmpty() Then
             SelectFileToSave()
         End If
     End Sub
 
+    Private Sub ucrReceiverElements_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRR.ControlContentsChanged, ucrReceiverTN.ControlValueChanged, ucrReceiverDay.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrInputExportFile.ControlContentsChanged, ucrReceiverTX.ControlValueChanged, ucrReceiverMonth.ControlValueChanged
+        TestOkEnabled()
+    End Sub
 End Class
