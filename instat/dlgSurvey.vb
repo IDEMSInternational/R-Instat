@@ -97,8 +97,6 @@ Public Class dlgSurvey
         ucrReceiverWeights.strSelectorHeading = "Numerics"
         ucrReceiverWeights.SetIncludedDataTypes({"numeric"}, bStrict:=True)
 
-
-
         ucrReceiverMultipleContTable.SetParameter(New RParameter("formula", 13))
         ucrReceiverMultipleContTable.SetParameterIsString()
         ucrReceiverMultipleContTable.bWithQuotes = False
@@ -488,7 +486,7 @@ Public Class dlgSurvey
         RemoveStrata()
     End Sub
 
-    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrReceiverSingleID.ControlContentsChanged, ucrReceiverStrata.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrReceiverFPC.ControlContentsChanged, ucrInputId.ControlContentsChanged
+    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrReceiverSingleID.ControlContentsChanged, ucrReceiverStrata.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrReceiverFPC.ControlContentsChanged, ucrInputId.ControlContentsChanged, ucrReceiverVar1srs.ControlContentsChanged, ucrReceiverVar2srs.ControlContentsChanged
         TestOkEnabled()
         ChangeId()
     End Sub

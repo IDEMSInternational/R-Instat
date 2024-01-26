@@ -335,7 +335,7 @@ Partial Class dlgSurvey
         'lblVar1srs
         '
         Me.lblVar1srs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVar1srs.Location = New System.Drawing.Point(290, 130)
+        Me.lblVar1srs.Location = New System.Drawing.Point(290, 131)
         Me.lblVar1srs.Name = "lblVar1srs"
         Me.lblVar1srs.Size = New System.Drawing.Size(123, 13)
         Me.lblVar1srs.TabIndex = 69
@@ -345,7 +345,7 @@ Partial Class dlgSurvey
         '
         Me.ucrReceiverVar1srs.AutoSize = True
         Me.ucrReceiverVar1srs.frmParent = Me
-        Me.ucrReceiverVar1srs.Location = New System.Drawing.Point(293, 143)
+        Me.ucrReceiverVar1srs.Location = New System.Drawing.Point(293, 144)
         Me.ucrReceiverVar1srs.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVar1srs.Name = "ucrReceiverVar1srs"
         Me.ucrReceiverVar1srs.Selector = Nothing
@@ -357,7 +357,7 @@ Partial Class dlgSurvey
         'lblVar2srs
         '
         Me.lblVar2srs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVar2srs.Location = New System.Drawing.Point(290, 167)
+        Me.lblVar2srs.Location = New System.Drawing.Point(290, 168)
         Me.lblVar2srs.Name = "lblVar2srs"
         Me.lblVar2srs.Size = New System.Drawing.Size(123, 13)
         Me.lblVar2srs.TabIndex = 71
@@ -367,7 +367,7 @@ Partial Class dlgSurvey
         '
         Me.ucrReceiverVar2srs.AutoSize = True
         Me.ucrReceiverVar2srs.frmParent = Me
-        Me.ucrReceiverVar2srs.Location = New System.Drawing.Point(293, 180)
+        Me.ucrReceiverVar2srs.Location = New System.Drawing.Point(293, 181)
         Me.ucrReceiverVar2srs.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVar2srs.Name = "ucrReceiverVar2srs"
         Me.ucrReceiverVar2srs.Selector = Nothing
