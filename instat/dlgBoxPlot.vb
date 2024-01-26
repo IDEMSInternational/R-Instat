@@ -112,7 +112,7 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
         ucrPnlPlots.AddToLinkedControls(ucrChkAddPoints, {rdoBoxplotTufte, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlPlots.AddToLinkedControls({ucrChkTufte, ucrChkLegend, ucrInputStation, ucr1stFactorReceiver}, {rdoBoxplotTufte}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrChkTufte}, {rdoBoxplotTufte}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTufte.AddToLinkedControls(ucrChkVarWidth, {"FALSE"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
@@ -526,12 +526,22 @@ Public Class dlgBoxplot
     Private Sub DialogueSize()
         If rdoBoxplotTufte.Checked OrElse rdoViolin.Checked Then
             Me.Size = New Size(441, 536)
+            Me.ucrChkLegend.Location = New Size(10, 388)
+            Me.ucrInputLegendPosition.Location = New Size(105, 390)
+            Me.ucrInputStation.Location = New Size(335, 390)
+            Me.ucr1stFactorReceiver.Location = New Size(222, 391)
+            Me.lblFacetBy.Location = New Size(222, 376)
             Me.ucrSaveBoxplot.Location = New Point(10, 418)
             Me.ucrBase.Location = New Point(10, 442)
         Else
-            Me.Size = New Size(441, 479)
-            Me.ucrSaveBoxplot.Location = New Point(10, 356)
-            Me.ucrBase.Location = New Point(10, 384)
+            Me.Size = New Size(441, 500)
+            Me.ucrChkLegend.Location = New Size(10, 358)
+            Me.ucrInputLegendPosition.Location = New Size(105, 360)
+            Me.ucrInputStation.Location = New Size(335, 360)
+            Me.ucr1stFactorReceiver.Location = New Size(222, 361)
+            Me.lblFacetBy.Location = New Size(222, 346)
+            Me.ucrSaveBoxplot.Location = New Point(10, 390)
+            Me.ucrBase.Location = New Point(10, 415)
         End If
     End Sub
 
