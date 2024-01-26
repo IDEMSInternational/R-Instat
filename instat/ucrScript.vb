@@ -196,10 +196,6 @@ Public Class ucrScript
         End If
     End Sub
 
-    Private Function SelectedTab() As String
-        Return TabControl.SelectedTab.Text
-    End Function
-
     ''' <summary>
     ''' Displays a file save dialog; allows the user to specify a folder and file name; and saves 
     ''' the log/script to the specified file.
@@ -218,7 +214,7 @@ Public Class ucrScript
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save " & If(bIsLog, "Log", "Script") & " To File"
             dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
-            dlgSave.FileName = Path.GetFileName(SelectedTab)
+            dlgSave.FileName = Path.GetFileName(TabControl.SelectedTab.Text)
 
             'Ensure that dialog opens in correct folder.
             'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
