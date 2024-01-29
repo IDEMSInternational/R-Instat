@@ -300,11 +300,9 @@ Public Class dlgEndOfRainsSeason
         ucrChkWB.SetParameter(New RParameter("WB_evap"))
         ucrChkWB.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkWB.SetText("Reducing")
-        'ucrChkWB.SetLinkedDisplayControl(ucrNudWB)
 
         ucrNudWB.SetParameter(New RParameter("WB_evap_value"))
         ucrNudWB.SetMinMax(0, 1)
-        'ucrNudWB.DecimalPlaces = 0.01
         ucrNudWB.Increment = 0.01
         ucrNudWB.DecimalPlaces = 2
 

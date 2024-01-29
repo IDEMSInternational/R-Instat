@@ -505,6 +505,8 @@ Public Class dlgTransformClimatic
         clsWBOperator.bSpaceAroundOperation = True
         clsWBOperator.bBrackets = False
 
+        clsReduceOpEvapValue.SetOperation("-")
+
         clsWBEvaporation.SetRCommand("WB_evaporation")
         clsWBEvaporation.AddParameter("water_balance", "x", iPosition:=0, bIncludeArgumentName:=False)
         clsWBEvaporation.AddParameter("WB_evap_value", 0.5, iPosition:=1, bIncludeArgumentName:=False)
@@ -1095,6 +1097,7 @@ Public Class dlgTransformClimatic
     Private Sub ReduceWaterBalance()
         If rdoWaterBalance.Checked Then
             If rdoEvapValue.Checked Then
+                clsRTransform.RemoveParameterByName("calculated_from")
                 ucrReceiverData.SetMeAsReceiver()
                 clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")")
                 If ucrChkWB.Checked Then
@@ -1112,7 +1115,6 @@ Public Class dlgTransformClimatic
             ElseIf rdoEvapVariable.Checked Then
                 ucrReceiverEvap.SetMeAsReceiver()
                 clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ", " & strCurrDataName & "=" & ucrReceiverEvap.GetVariableNames & ")")
-                clsReduceOpEvapValue.SetOperation("-")
                 clsRWaterBalanceFunction.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapValue, iPosition:=1, bIncludeArgumentName:=False)
                 clsPMaxOperatorMax.RemoveParameterByName("evaporation.value")
             End If
