@@ -22,10 +22,6 @@ Partial Class dlgSurvey
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblFormula = New System.Windows.Forms.Label()
-        Me.ucrReceiverMultipleContTable = New instat.ucrReceiverMultiple()
-        Me.lblVar1 = New System.Windows.Forms.Label()
-        Me.ucrReceiverVar1 = New instat.ucrReceiverSingle()
         Me.ucrChkRatios = New instat.ucrCheck()
         Me.ucrChkContingencyTables = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
@@ -51,51 +47,8 @@ Partial Class dlgSurvey
         Me.ucrReceiverVar1srs = New instat.ucrReceiverSingle()
         Me.lblVar2srs = New System.Windows.Forms.Label()
         Me.ucrReceiverVar2srs = New instat.ucrReceiverSingle()
+        Me.ucrVariablesAsFactorForContengy = New instat.ucrVariablesAsFactor()
         Me.SuspendLayout()
-        '
-        'lblFormula
-        '
-        Me.lblFormula.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFormula.Location = New System.Drawing.Point(290, 310)
-        Me.lblFormula.Name = "lblFormula"
-        Me.lblFormula.Size = New System.Drawing.Size(91, 16)
-        Me.lblFormula.TabIndex = 67
-        Me.lblFormula.Text = "Formula:"
-        '
-        'ucrReceiverMultipleContTable
-        '
-        Me.ucrReceiverMultipleContTable.AutoSize = True
-        Me.ucrReceiverMultipleContTable.frmParent = Me
-        Me.ucrReceiverMultipleContTable.Location = New System.Drawing.Point(293, 326)
-        Me.ucrReceiverMultipleContTable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleContTable.Name = "ucrReceiverMultipleContTable"
-        Me.ucrReceiverMultipleContTable.Selector = Nothing
-        Me.ucrReceiverMultipleContTable.Size = New System.Drawing.Size(123, 50)
-        Me.ucrReceiverMultipleContTable.strNcFilePath = ""
-        Me.ucrReceiverMultipleContTable.TabIndex = 66
-        Me.ucrReceiverMultipleContTable.ucrSelector = Nothing
-        '
-        'lblVar1
-        '
-        Me.lblVar1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVar1.Location = New System.Drawing.Point(290, 272)
-        Me.lblVar1.Name = "lblVar1"
-        Me.lblVar1.Size = New System.Drawing.Size(123, 13)
-        Me.lblVar1.TabIndex = 65
-        Me.lblVar1.Text = "Var1:"
-        '
-        'ucrReceiverVar1
-        '
-        Me.ucrReceiverVar1.AutoSize = True
-        Me.ucrReceiverVar1.frmParent = Me
-        Me.ucrReceiverVar1.Location = New System.Drawing.Point(293, 285)
-        Me.ucrReceiverVar1.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverVar1.Name = "ucrReceiverVar1"
-        Me.ucrReceiverVar1.Selector = Nothing
-        Me.ucrReceiverVar1.Size = New System.Drawing.Size(123, 20)
-        Me.ucrReceiverVar1.strNcFilePath = ""
-        Me.ucrReceiverVar1.TabIndex = 64
-        Me.ucrReceiverVar1.ucrSelector = Nothing
         '
         'ucrChkRatios
         '
@@ -376,19 +329,29 @@ Partial Class dlgSurvey
         Me.ucrReceiverVar2srs.TabIndex = 70
         Me.ucrReceiverVar2srs.ucrSelector = Nothing
         '
+        'ucrVariablesAsFactorForContengy
+        '
+        Me.ucrVariablesAsFactorForContengy.AutoSize = True
+        Me.ucrVariablesAsFactorForContengy.frmParent = Me
+        Me.ucrVariablesAsFactorForContengy.Location = New System.Drawing.Point(473, 190)
+        Me.ucrVariablesAsFactorForContengy.Name = "ucrVariablesAsFactorForContengy"
+        Me.ucrVariablesAsFactorForContengy.Selector = Nothing
+        Me.ucrVariablesAsFactorForContengy.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorForContengy.strNcFilePath = ""
+        Me.ucrVariablesAsFactorForContengy.TabIndex = 72
+        Me.ucrVariablesAsFactorForContengy.ucrSelector = Nothing
+        Me.ucrVariablesAsFactorForContengy.ucrVariableSelector = Nothing
+        '
         'dlgSurvey
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(686, 465)
+        Me.Controls.Add(Me.ucrVariablesAsFactorForContengy)
         Me.Controls.Add(Me.lblVar2srs)
         Me.Controls.Add(Me.ucrReceiverVar2srs)
         Me.Controls.Add(Me.lblVar1srs)
         Me.Controls.Add(Me.ucrReceiverVar1srs)
-        Me.Controls.Add(Me.lblFormula)
-        Me.Controls.Add(Me.ucrReceiverMultipleContTable)
-        Me.Controls.Add(Me.lblVar1)
-        Me.Controls.Add(Me.ucrReceiverVar1)
         Me.Controls.Add(Me.ucrChkRatios)
         Me.Controls.Add(Me.ucrChkContingencyTables)
         Me.Controls.Add(Me.ucrBase)
@@ -420,11 +383,6 @@ Partial Class dlgSurvey
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents lblFormula As Label
-    Friend WithEvents ucrReceiverMultipleContTable As ucrReceiverMultiple
-    Friend WithEvents lblVar1 As Label
-    Friend WithEvents ucrReceiverVar1 As ucrReceiverSingle
     Friend WithEvents ucrChkRatios As ucrCheck
     Friend WithEvents ucrChkContingencyTables As ucrCheck
     Friend WithEvents ucrBase As ucrButtons
@@ -450,4 +408,5 @@ Partial Class dlgSurvey
     Friend WithEvents ucrReceiverVar2srs As ucrReceiverSingle
     Friend WithEvents lblVar1srs As Label
     Friend WithEvents ucrReceiverVar1srs As ucrReceiverSingle
+    Friend WithEvents ucrVariablesAsFactorForContengy As ucrVariablesAsFactor
 End Class
