@@ -405,12 +405,12 @@ Public Class dlgVisualizeData
         If ucrReceiverVisualizeData.lstSelectedVariables.Items.Count <= 0 Then
             Exit Sub
         End If
-        Dim Lstvariable As List(Of String) = ucrReceiverVisualizeData.GetVariableNamesAsList
-        Dim StrFacetvariable As String = ucrByFactorsReceiver.GetVariableNames(False)
-        If Not ucrByFactorsReceiver.IsEmpty AndAlso Not Lstvariable.Contains(StrFacetvariable) Then
-            Lstvariable.Add(StrFacetvariable)
+        Dim lstvariable As List(Of String) = ucrReceiverVisualizeData.GetVariableNamesAsList
+        Dim strFacetvariable As String = ucrByFactorsReceiver.GetVariableNames(False)
+        If Not ucrByFactorsReceiver.IsEmpty AndAlso Not lstvariable.Contains(strFacetvariable) Then
+            lstvariable.Add(strFacetvariable)
         End If
         clsGetVariableFunction.AddParameter("data_name", Chr(34) & ucrSelectorVisualizeData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
-        clsGetVariableFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(Lstvariable, bWithQuotes:=True), iPosition:=1)
+        clsGetVariableFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstvariable, bWithQuotes:=True), iPosition:=1)
     End Sub
 End Class
