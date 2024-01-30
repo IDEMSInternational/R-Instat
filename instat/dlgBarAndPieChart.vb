@@ -1110,16 +1110,13 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub AutoFacetStation()
-        Dim ucrCurrentReceiver As ucrReceiver = Nothing
+        Dim currentReceiver As ucrReceiver = ucrBarChartSelector.CurrentReceiver
 
-        If ucrBarChartSelector.CurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver = ucrBarChartSelector.CurrentReceiver
+        If currentReceiver IsNot Nothing Then
+            ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+            currentReceiver.SetMeAsReceiver()
+            AddRemoveGroupBy()
         End If
-        ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
-        If ucrCurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver.SetMeAsReceiver()
-        End If
-        AddRemoveGroupBy()
     End Sub
 
     Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged

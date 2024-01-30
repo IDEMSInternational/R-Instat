@@ -582,16 +582,13 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub AutoFacetStation()
-        Dim ucrCurrentReceiver As ucrReceiver = Nothing
+        Dim currentReceiver As ucrReceiver = ucrSelectorForScatter.CurrentReceiver
 
-        If ucrSelectorForScatter.CurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver = ucrSelectorForScatter.CurrentReceiver
+        If currentReceiver IsNot Nothing Then
+            ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+            currentReceiver.SetMeAsReceiver()
+            AddRemoveGroupBy()
         End If
-        ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
-        If ucrCurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver.SetMeAsReceiver()
-        End If
-        AddRemoveGroupBy()
     End Sub
 
     Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
