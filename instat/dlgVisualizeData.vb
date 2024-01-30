@@ -226,7 +226,7 @@ Public Class dlgVisualizeData
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 1)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 2)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisValueFunction, New RParameter("x", 0), 3)
-        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsPipeOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), 3)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsPipeOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), 4)
         ucrSelectorVisualizeData.AddAdditionalCodeParameterPair(clsPipeOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), 1)
         ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=1)
         ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=2)
@@ -401,13 +401,13 @@ Public Class dlgVisualizeData
         AddRemoveDataHideOptionsButtons()
     End Sub
 
-    Private Sub ucrByFactorsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrByFactorsReceiver.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged, ucrSelectorVisualizeData.ControlValueChanged
+    Private Sub ucrByFactorsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrByFactorsReceiver.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged, ucrSelectorVisualizeData.ControlValueChanged, ucrPnlVisualizeData.ControlValueChanged
         If ucrReceiverVisualizeData.lstSelectedVariables.Items.Count <= 0 Then
             Exit Sub
         End If
         Dim lstvariable As List(Of String) = ucrReceiverVisualizeData.GetVariableNamesAsList
         Dim strFacetvariable As String = ucrByFactorsReceiver.GetVariableNames(False)
-        If Not ucrByFactorsReceiver.IsEmpty AndAlso Not lstvariable.Contains(strFacetvariable) Then
+        If Not ucrByFactorsReceiver.IsEmpty AndAlso (rdoVisDat.Checked OrElse rdoVisMiss.Checked) AndAlso Not Lstvariable.Contains(StrFacetvariable) Then
             lstvariable.Add(strFacetvariable)
         End If
         clsGetVariableFunction.AddParameter("data_name", Chr(34) & ucrSelectorVisualizeData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
