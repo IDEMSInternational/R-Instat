@@ -107,14 +107,6 @@ Public Class dlgSurvey
         'ucrVariablesAsFactorForContengy.SetValuesToIgnore({Chr(34) & Chr(34)})
         'ucrVariablesAsFactorForContengy.bAddParameterIfEmpty = True
 
-        'ucrReceiverMultipleContTable.SetParameter(New RParameter("formula", 13))
-        'ucrReceiverMultipleContTable.SetParameterIsString()
-        'ucrReceiverMultipleContTable.bWithQuotes = False
-        'ucrReceiverMultipleContTable.Selector = ucrSelectorSurvey
-        'ucrReceiverMultipleContTable.strSelectorHeading = "factors"
-        'ucrReceiverMultipleContTable.SetIncludedDataTypes({"factor"})
-        'ucrReceiverMultipleContTable.SetLinkedDisplayControl(lblFormula)
-
         ucrChkSummary.SetText("Summary")
         ucrChkSummary.AddParameterPresentCondition(True, "Summary")
         ucrChkSummary.AddParameterPresentCondition(False, "Summary", False)
@@ -259,7 +251,7 @@ Public Class dlgSurvey
 
         clsSvychisqFunction.SetPackageName("survey")
         clsSvychisqFunction.SetRCommand("svychisq")
-        clsSvychisqFunction.AddParameter("formula", clsROperatorParameter:=clsformulaOperator, iPosition:=0)
+        ' clsSvychisqFunction.AddParameter("formula", clsROperatorParameter:=clsformulaOperator, iPosition:=0)
         clsSvychisqFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
         clsSvychisqFunction.AddParameter("statistic", Chr(34) & "F" & Chr(34), iPosition:=2)
         clsSvychisqFunction.iCallType = 2
@@ -324,6 +316,7 @@ Public Class dlgSurvey
         ucrReceiverVar1srs.SetRCode(clsVariablesOperator, bReset)
         ucrReceiverVar2srs.SetRCode(clsVariablesPlusOperator, bReset)
         ucrChkRatios.SetRCode(clsRatioFunction, bReset)
+        ucrVariablesAsFactorForContengy.SetRCode(clsSvychisqFunction, bReset)
         If bReset Then
             ucrChkContingencyTables.SetRCode(clsDummyFunction, bReset)
             ucrInputId.SetRCode(clsIdOperator, bReset)
@@ -412,15 +405,15 @@ Public Class dlgSurvey
     End Sub
 
     Private Sub UpdateContextVariables2()
-        Dim i As Integer = 0
+        Dim strVar = String.Join("+", ucrVariablesAsFactorForContengy.GetVariableNamesList)
 
         If Not ucrVariablesAsFactorForContengy.IsEmpty Then
-            clsDCastLeftContextOperator.ClearParameters()
-            For Each strContextVar As String In ucrVariablesAsFactorForContengy.GetItemsDataFrames
-                clsDCastLeftContextOperator.AddParameter(i, strContextVar, iPosition:=i)
-                i = i + 1
-            Next
-            clsformulaOperator.AddParameter("right", clsROperatorParameter:=clsDCastLeftContextOperator)
+            clsSvychisqFunction.AddParameter("formula", strVar, iPosition:=0)
+            'clsDCastLeftContextOperator.ClearParameters()
+            'clsDCastLeftContextOperator.AddParameter(i, strVar, iPosition:=i)
+            'i = i + 1
+            'Next
+            'clsformulaOperator.AddParameter("right", clsROperatorParameter:=clsDCastLeftContextOperator)
         End If
     End Sub
 
