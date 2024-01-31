@@ -3009,6 +3009,26 @@ getExample <- function (topic, package = NULL, lib.loc = NULL, character.only = 
   return(example_text)
 }
 
+WB_evaporation <- function(water_balance, frac, capacity, evaporation_value, rain){
+  if (water_balance >= frac*capacity){
+    evaporation <- evaporation_value
+  } else {
+    if (rain == 0){
+      evaporation <- evaporation_value * ((water_balance)/(frac*capacity))
+    } else {
+      if (water_balance < frac*capacity){
+        if (rain > evaporation_value){
+          evaporation <- evaporation_value
+        } else {
+          evaporation <- evaporation_value * ((water_balance)/(frac*capacity))
+          evaporation <- evaporation + ((evaporation_value - evaporation)*(rain/evaporation_value))
+        }
+      } else {
+        evaporation <- evaporation_value
+        }
+    }
+  }
+  return(evaporation)
 
 write_weather_data <- function(year, month, day, rain, mn_tmp, mx_tmp, missing_code, output_file) {
   # Create a data frame with the provided inputs
