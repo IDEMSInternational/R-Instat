@@ -936,4 +936,25 @@ Public Class ucrFactor
         lblSelected.Visible = iSelectCol > 0
         SetToggleButtonSettings()
     End Sub
+
+    Private Sub _grdSheet_CellEditTextChanging(sender As Object, e As CellEditTextChangingEventArgs) Handles _grdSheet.CellEditTextChanging
+        Dim bValid As Boolean = True
+        'do levels entry validation
+        If _grdSheet.ColumnHeaders(e.Cell.Column).Text = DefaultColumnNames.Level Then
+            If Not IsNumeric(e.Text) Then
+                MsgBox("Levels must be numeric values", MsgBoxStyle.Information, "Invalid Value")
+                bValid = False
+            ElseIf e.Text.Contains(".") Then
+                MsgBox("Levels must not be decimal", MsgBoxStyle.Information, "Invalid Value")
+
+                bValid = False
+            End If
+        End If
+        If bValid Then
+            _grdSheet(e.Cell.Row, e.Cell.Column) = e.Text
+            'this will raise ControlContentsChanged event
+            'and also update parameter and R code with the values
+            OnControlValueChanged()
+        End If
+    End Sub
 End Class
