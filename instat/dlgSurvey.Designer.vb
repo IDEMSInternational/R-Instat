@@ -48,13 +48,15 @@ Partial Class dlgSurvey
         Me.lblVar2srs = New System.Windows.Forms.Label()
         Me.ucrReceiverVar2srs = New instat.ucrReceiverSingle()
         Me.ucrVariablesAsFactorForContengy = New instat.ucrVariablesAsFactor()
+        Me.lblPlots = New System.Windows.Forms.Label()
+        Me.ucrInputPlots = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'ucrChkRatios
         '
         Me.ucrChkRatios.AutoSize = True
         Me.ucrChkRatios.Checked = False
-        Me.ucrChkRatios.Location = New System.Drawing.Point(14, 332)
+        Me.ucrChkRatios.Location = New System.Drawing.Point(14, 376)
         Me.ucrChkRatios.Name = "ucrChkRatios"
         Me.ucrChkRatios.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkRatios.TabIndex = 63
@@ -63,7 +65,7 @@ Partial Class dlgSurvey
         '
         Me.ucrChkContingencyTables.AutoSize = True
         Me.ucrChkContingencyTables.Checked = False
-        Me.ucrChkContingencyTables.Location = New System.Drawing.Point(14, 361)
+        Me.ucrChkContingencyTables.Location = New System.Drawing.Point(14, 400)
         Me.ucrChkContingencyTables.Name = "ucrChkContingencyTables"
         Me.ucrChkContingencyTables.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkContingencyTables.TabIndex = 62
@@ -72,7 +74,7 @@ Partial Class dlgSurvey
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(14, 401)
+        Me.ucrBase.Location = New System.Drawing.Point(14, 426)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 61
@@ -80,7 +82,7 @@ Partial Class dlgSurvey
         'lblSummaryStat
         '
         Me.lblSummaryStat.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSummaryStat.Location = New System.Drawing.Point(11, 285)
+        Me.lblSummaryStat.Location = New System.Drawing.Point(11, 280)
         Me.lblSummaryStat.Name = "lblSummaryStat"
         Me.lblSummaryStat.Size = New System.Drawing.Size(121, 20)
         Me.lblSummaryStat.TabIndex = 60
@@ -92,7 +94,7 @@ Partial Class dlgSurvey
         Me.ucrInputSummaryStat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSummaryStat.GetSetSelectedIndex = -1
         Me.ucrInputSummaryStat.IsReadOnly = False
-        Me.ucrInputSummaryStat.Location = New System.Drawing.Point(14, 305)
+        Me.ucrInputSummaryStat.Location = New System.Drawing.Point(14, 300)
         Me.ucrInputSummaryStat.Name = "ucrInputSummaryStat"
         Me.ucrInputSummaryStat.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputSummaryStat.TabIndex = 59
@@ -101,7 +103,7 @@ Partial Class dlgSurvey
         '
         Me.ucrChkSummary.AutoSize = True
         Me.ucrChkSummary.Checked = False
-        Me.ucrChkSummary.Location = New System.Drawing.Point(14, 261)
+        Me.ucrChkSummary.Location = New System.Drawing.Point(14, 255)
         Me.ucrChkSummary.Name = "ucrChkSummary"
         Me.ucrChkSummary.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkSummary.TabIndex = 58
@@ -333,20 +335,42 @@ Partial Class dlgSurvey
         '
         Me.ucrVariablesAsFactorForContengy.AutoSize = True
         Me.ucrVariablesAsFactorForContengy.frmParent = Me
-        Me.ucrVariablesAsFactorForContengy.Location = New System.Drawing.Point(473, 190)
+        Me.ucrVariablesAsFactorForContengy.Location = New System.Drawing.Point(292, 259)
         Me.ucrVariablesAsFactorForContengy.Name = "ucrVariablesAsFactorForContengy"
         Me.ucrVariablesAsFactorForContengy.Selector = Nothing
-        Me.ucrVariablesAsFactorForContengy.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorForContengy.Size = New System.Drawing.Size(123, 136)
         Me.ucrVariablesAsFactorForContengy.strNcFilePath = ""
         Me.ucrVariablesAsFactorForContengy.TabIndex = 72
         Me.ucrVariablesAsFactorForContengy.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForContengy.ucrVariableSelector = Nothing
         '
+        'lblPlots
+        '
+        Me.lblPlots.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPlots.Location = New System.Drawing.Point(11, 323)
+        Me.lblPlots.Name = "lblPlots"
+        Me.lblPlots.Size = New System.Drawing.Size(121, 20)
+        Me.lblPlots.TabIndex = 74
+        Me.lblPlots.Text = "Plots:"
+        '
+        'ucrInputPlots
+        '
+        Me.ucrInputPlots.AddQuotesIfUnrecognised = True
+        Me.ucrInputPlots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPlots.GetSetSelectedIndex = -1
+        Me.ucrInputPlots.IsReadOnly = False
+        Me.ucrInputPlots.Location = New System.Drawing.Point(14, 343)
+        Me.ucrInputPlots.Name = "ucrInputPlots"
+        Me.ucrInputPlots.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputPlots.TabIndex = 73
+        '
         'dlgSurvey
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(686, 465)
+        Me.ClientSize = New System.Drawing.Size(686, 503)
+        Me.Controls.Add(Me.lblPlots)
+        Me.Controls.Add(Me.ucrInputPlots)
         Me.Controls.Add(Me.ucrVariablesAsFactorForContengy)
         Me.Controls.Add(Me.lblVar2srs)
         Me.Controls.Add(Me.ucrReceiverVar2srs)
@@ -409,4 +433,6 @@ Partial Class dlgSurvey
     Friend WithEvents lblVar1srs As Label
     Friend WithEvents ucrReceiverVar1srs As ucrReceiverSingle
     Friend WithEvents ucrVariablesAsFactorForContengy As ucrVariablesAsFactor
+    Friend WithEvents lblPlots As Label
+    Friend WithEvents ucrInputPlots As ucrInputComboBox
 End Class
