@@ -405,16 +405,16 @@ Public Class dlgSurvey
     End Sub
 
     Private Sub UpdateContextVariables2()
-        Dim strVar = String.Join("+", ucrVariablesAsFactorForContengy.GetVariableNamesList)
-
         If Not ucrVariablesAsFactorForContengy.IsEmpty Then
-            clsSvychisqFunction.AddParameter("formula", strVar, iPosition:=0)
-            'clsDCastLeftContextOperator.ClearParameters()
-            'clsDCastLeftContextOperator.AddParameter(i, strVar, iPosition:=i)
-            'i = i + 1
-            'Next
-            'clsformulaOperator.AddParameter("right", clsROperatorParameter:=clsDCastLeftContextOperator)
+            Dim lstVariables = ucrVariablesAsFactorForContengy.ucrMultipleVariables.GetVariableNamesList(False).Where(Function(item) item IsNot Nothing).ToList()
+            Dim strVar = If(lstVariables.Count > 1, String.Join("+", lstVariables), lstVariables(0))
+            clsSvychisqFunction.AddParameter("formula", "~" & strVar)
         End If
+        'If Not ucrVariablesAsFactorForContengy.IsEmpty Then
+        '    Dim lstVariables = ucrVariablesAsFactorForContengy.ucrMultipleVariables.GetVariableNamesList(False)
+        '    Dim strVar = If(lstVariables.Count > 1, String.Join("+", lstVariables), lstVariables)
+        '    clsSvychisqFunction.AddParameter("formula", "~" & strVar)
+        'End If
     End Sub
 
     Private Sub RemoveStrata()
