@@ -54,6 +54,7 @@ Public Class dlgHomogenization
         Dim dctMeanVarDistribution As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.iHelpTopicID = 621
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorStationFile.SetParameter(New RParameter("stnfile", 1))
