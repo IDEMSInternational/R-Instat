@@ -4424,7 +4424,6 @@ Partial Class frmMain
         Me.mnuStructuredSurvey.Name = "mnuStructuredSurvey"
         Me.mnuStructuredSurvey.Size = New System.Drawing.Size(186, 22)
         Me.mnuStructuredSurvey.Text = "Survey"
-        Me.mnuStructuredSurvey.Visible = False
         '
         'mnuProcurement
         '
