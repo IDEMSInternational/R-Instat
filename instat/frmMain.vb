@@ -2476,6 +2476,10 @@ Public Class frmMain
         dlgExportToClimsoft.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticFileExportToClimpact_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToClimpact.Click
+        dlgExportForClimpact.ShowDialog()
+    End Sub
+
     Private Sub mnuPrepareDataReshapeScaleOrDistance_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeScaleOrDistance.Click
         dlgCluster.ShowDialog()
     End Sub
