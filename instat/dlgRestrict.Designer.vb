@@ -51,6 +51,7 @@ Partial Class dlgRestrict
         Me.ucrNewDataFrameName = New instat.ucrSave()
         Me.cmdEditFilter = New System.Windows.Forms.Button()
         Me.cmdFilterFromFactors = New System.Windows.Forms.Button()
+        Me.rdoSaveFilter = New System.Windows.Forms.RadioButton()
         Me.grpApplyOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -82,7 +83,7 @@ Partial Class dlgRestrict
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 333)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 8
         '
         'lblFilter
@@ -128,6 +129,7 @@ Partial Class dlgRestrict
         '
         'grpApplyOptions
         '
+        Me.grpApplyOptions.Controls.Add(Me.rdoSaveFilter)
         Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsSubset)
         Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsFilter)
         Me.grpApplyOptions.Location = New System.Drawing.Point(10, 197)
@@ -135,26 +137,26 @@ Partial Class dlgRestrict
         Me.grpApplyOptions.Size = New System.Drawing.Size(396, 53)
         Me.grpApplyOptions.TabIndex = 4
         Me.grpApplyOptions.TabStop = False
-        Me.grpApplyOptions.Text = "Apply Options"
+        Me.grpApplyOptions.Text = "Apply"
         '
         'rdoApplyAsSubset
         '
-        Me.rdoApplyAsSubset.Location = New System.Drawing.Point(174, 22)
+        Me.rdoApplyAsSubset.Location = New System.Drawing.Point(131, 22)
         Me.rdoApplyAsSubset.Name = "rdoApplyAsSubset"
-        Me.rdoApplyAsSubset.Size = New System.Drawing.Size(190, 17)
+        Me.rdoApplyAsSubset.Size = New System.Drawing.Size(119, 17)
         Me.rdoApplyAsSubset.TabIndex = 1
         Me.rdoApplyAsSubset.TabStop = True
-        Me.rdoApplyAsSubset.Text = "Apply As Subset"
+        Me.rdoApplyAsSubset.Text = "As Subset"
         Me.rdoApplyAsSubset.UseVisualStyleBackColor = True
         '
         'rdoApplyAsFilter
         '
         Me.rdoApplyAsFilter.Location = New System.Drawing.Point(6, 22)
         Me.rdoApplyAsFilter.Name = "rdoApplyAsFilter"
-        Me.rdoApplyAsFilter.Size = New System.Drawing.Size(154, 17)
+        Me.rdoApplyAsFilter.Size = New System.Drawing.Size(95, 17)
         Me.rdoApplyAsFilter.TabIndex = 0
         Me.rdoApplyAsFilter.TabStop = True
-        Me.rdoApplyAsFilter.Text = "Apply As Filter"
+        Me.rdoApplyAsFilter.Text = "As Filter"
         Me.rdoApplyAsFilter.UseVisualStyleBackColor = True
         '
         'ucrNewDataFrameName
@@ -189,6 +191,18 @@ Partial Class dlgRestrict
         Me.cmdFilterFromFactors.Text = "Filter From Factors"
         Me.cmdFilterFromFactors.UseVisualStyleBackColor = True
         '
+        'rdoSaveFilter
+        '
+        Me.rdoSaveFilter.AutoSize = True
+        Me.rdoSaveFilter.Location = New System.Drawing.Point(283, 20)
+        Me.rdoSaveFilter.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoSaveFilter.Name = "rdoSaveFilter"
+        Me.rdoSaveFilter.Size = New System.Drawing.Size(75, 17)
+        Me.rdoSaveFilter.TabIndex = 4
+        Me.rdoSaveFilter.TabStop = True
+        Me.rdoSaveFilter.Text = "Save Filter"
+        Me.rdoSaveFilter.UseVisualStyleBackColor = True
+        '
         'dlgRestrict
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -214,6 +228,7 @@ Partial Class dlgRestrict
         Me.Tag = "Filter"
         Me.Text = "Filter"
         Me.grpApplyOptions.ResumeLayout(False)
+        Me.grpApplyOptions.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -232,4 +247,5 @@ Partial Class dlgRestrict
     Friend WithEvents ucrNewDataFrameName As ucrSave
     Friend WithEvents cmdEditFilter As Button
     Friend WithEvents cmdFilterFromFactors As Button
+    Friend WithEvents rdoSaveFilter As RadioButton
 End Class
