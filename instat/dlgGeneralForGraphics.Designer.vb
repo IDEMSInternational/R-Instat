@@ -39,12 +39,6 @@ Partial Class dlgGeneralForGraphics
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.cmdFacets = New System.Windows.Forms.Button()
-        Me.cmdTheme = New System.Windows.Forms.Button()
-        Me.cmdYAxis = New System.Windows.Forms.Button()
-        Me.cmdXAxis = New System.Windows.Forms.Button()
-        Me.cmdTitles = New System.Windows.Forms.Button()
         Me.grpAethetics = New System.Windows.Forms.GroupBox()
         Me.ucrChkUseasNumeric = New instat.ucrCheck()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
@@ -82,6 +76,23 @@ Partial Class dlgGeneralForGraphics
         Me.GgtextToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GgthemesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GgwordbuildToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemFacets = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemLayers = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemTitles = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemXaxis = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemYaxis = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemThemes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemCoordinates = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemColour = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemAnnotation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrInputAddCode = New instat.ucrInputComboBox()
+        Me.ucrChkAddCode = New instat.ucrCheck()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
+        Me.cmdOptions = New instat.ucrSplitButton()
         Me.cmdRHelp = New instat.ucrSplitButton()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
@@ -90,76 +101,10 @@ Partial Class dlgGeneralForGraphics
         Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdColour = New System.Windows.Forms.Button()
         Me.grpAethetics.SuspendLayout()
         Me.ContextMenuPackagesList.SuspendLayout()
+        Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(6, 401)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(60, 25)
-        Me.cmdOptions.TabIndex = 7
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.Text = "Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'cmdFacets
-        '
-        Me.cmdFacets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFacets.Location = New System.Drawing.Point(65, 401)
-        Me.cmdFacets.Name = "cmdFacets"
-        Me.cmdFacets.Size = New System.Drawing.Size(57, 25)
-        Me.cmdFacets.TabIndex = 17
-        Me.cmdFacets.Tag = "Facets"
-        Me.cmdFacets.Text = "Facets"
-        Me.cmdFacets.UseVisualStyleBackColor = True
-        '
-        'cmdTheme
-        '
-        Me.cmdTheme.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTheme.Location = New System.Drawing.Point(303, 401)
-        Me.cmdTheme.Name = "cmdTheme"
-        Me.cmdTheme.Size = New System.Drawing.Size(65, 25)
-        Me.cmdTheme.TabIndex = 21
-        Me.cmdTheme.Tag = "Theme"
-        Me.cmdTheme.Text = "Themes"
-        Me.cmdTheme.UseVisualStyleBackColor = True
-        '
-        'cmdYAxis
-        '
-        Me.cmdYAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdYAxis.Location = New System.Drawing.Point(240, 401)
-        Me.cmdYAxis.Name = "cmdYAxis"
-        Me.cmdYAxis.Size = New System.Drawing.Size(64, 25)
-        Me.cmdYAxis.TabIndex = 20
-        Me.cmdYAxis.Tag = ""
-        Me.cmdYAxis.Text = "Y-Axis"
-        Me.cmdYAxis.UseVisualStyleBackColor = True
-        '
-        'cmdXAxis
-        '
-        Me.cmdXAxis.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdXAxis.Location = New System.Drawing.Point(180, 401)
-        Me.cmdXAxis.Name = "cmdXAxis"
-        Me.cmdXAxis.Size = New System.Drawing.Size(61, 25)
-        Me.cmdXAxis.TabIndex = 19
-        Me.cmdXAxis.Tag = ""
-        Me.cmdXAxis.Text = "X-Axis"
-        Me.cmdXAxis.UseVisualStyleBackColor = True
-        '
-        'cmdTitles
-        '
-        Me.cmdTitles.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTitles.Location = New System.Drawing.Point(121, 401)
-        Me.cmdTitles.Name = "cmdTitles"
-        Me.cmdTitles.Size = New System.Drawing.Size(60, 25)
-        Me.cmdTitles.TabIndex = 18
-        Me.cmdTitles.Tag = ""
-        Me.cmdTitles.Text = "Titles"
-        Me.cmdTitles.UseVisualStyleBackColor = True
         '
         'grpAethetics
         '
@@ -174,7 +119,7 @@ Partial Class dlgGeneralForGraphics
         Me.grpAethetics.Controls.Add(Me.ucrColourReceiver)
         Me.grpAethetics.Controls.Add(Me.lblFill)
         Me.grpAethetics.Controls.Add(Me.ucrFillReceiver)
-        Me.grpAethetics.Location = New System.Drawing.Point(277, 41)
+        Me.grpAethetics.Location = New System.Drawing.Point(277, 31)
         Me.grpAethetics.Name = "grpAethetics"
         Me.grpAethetics.Size = New System.Drawing.Size(174, 257)
         Me.grpAethetics.TabIndex = 23
@@ -461,13 +406,147 @@ Partial Class dlgGeneralForGraphics
         Me.GgwordbuildToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.GgwordbuildToolStripMenuItem.Text = " ggwordbuild"
         '
+        'contextMenuStripOptions
+        '
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemFacets, Me.toolStripMenuItemLayers, Me.toolStripMenuItemTitles, Me.toolStripMenuItemXaxis, Me.toolStripMenuItemYaxis, Me.toolStripMenuItemThemes, Me.toolStripMenuItemCoordinates, Me.toolStripMenuItemColour, Me.toolStripMenuItemAnnotation})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(141, 224)
+        '
+        'toolStripMenuItemPlotOptions
+        '
+        Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
+        '
+        'toolStripMenuItemFacets
+        '
+        Me.toolStripMenuItemFacets.Name = "toolStripMenuItemFacets"
+        Me.toolStripMenuItemFacets.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemFacets.Text = "Facets"
+        '
+        'toolStripMenuItemLayers
+        '
+        Me.toolStripMenuItemLayers.Name = "toolStripMenuItemLayers"
+        Me.toolStripMenuItemLayers.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemLayers.Text = "Layers"
+        '
+        'toolStripMenuItemTitles
+        '
+        Me.toolStripMenuItemTitles.Name = "toolStripMenuItemTitles"
+        Me.toolStripMenuItemTitles.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemTitles.Text = "Titles"
+        '
+        'toolStripMenuItemXaxis
+        '
+        Me.toolStripMenuItemXaxis.Name = "toolStripMenuItemXaxis"
+        Me.toolStripMenuItemXaxis.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemXaxis.Text = "X-Axis"
+        '
+        'toolStripMenuItemYaxis
+        '
+        Me.toolStripMenuItemYaxis.Name = "toolStripMenuItemYaxis"
+        Me.toolStripMenuItemYaxis.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemYaxis.Text = "Y-Axis"
+        '
+        'toolStripMenuItemThemes
+        '
+        Me.toolStripMenuItemThemes.Name = "toolStripMenuItemThemes"
+        Me.toolStripMenuItemThemes.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemThemes.Text = "Themes"
+        '
+        'toolStripMenuItemCoordinates
+        '
+        Me.toolStripMenuItemCoordinates.Name = "toolStripMenuItemCoordinates"
+        Me.toolStripMenuItemCoordinates.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemCoordinates.Text = "Coordinates"
+        '
+        'toolStripMenuItemColour
+        '
+        Me.toolStripMenuItemColour.Name = "toolStripMenuItemColour"
+        Me.toolStripMenuItemColour.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemColour.Text = "Colour"
+        '
+        'toolStripMenuItemAnnotation
+        '
+        Me.toolStripMenuItemAnnotation.Name = "toolStripMenuItemAnnotation"
+        Me.toolStripMenuItemAnnotation.Size = New System.Drawing.Size(140, 22)
+        Me.toolStripMenuItemAnnotation.Text = "Annotation"
+        '
+        'lblFacetBy
+        '
+        Me.lblFacetBy.AutoSize = True
+        Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFacetBy.Location = New System.Drawing.Point(277, 396)
+        Me.lblFacetBy.Name = "lblFacetBy"
+        Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
+        Me.lblFacetBy.TabIndex = 12
+        Me.lblFacetBy.Tag = ""
+        Me.lblFacetBy.Text = "Facet By:"
+        '
+        'ucrInputAddCode
+        '
+        Me.ucrInputAddCode.AddQuotesIfUnrecognised = True
+        Me.ucrInputAddCode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputAddCode.GetSetSelectedIndex = -1
+        Me.ucrInputAddCode.IsReadOnly = False
+        Me.ucrInputAddCode.Location = New System.Drawing.Point(159, 362)
+        Me.ucrInputAddCode.Name = "ucrInputAddCode"
+        Me.ucrInputAddCode.Size = New System.Drawing.Size(267, 21)
+        Me.ucrInputAddCode.TabIndex = 218
+        '
+        'ucrChkAddCode
+        '
+        Me.ucrChkAddCode.AutoSize = True
+        Me.ucrChkAddCode.Checked = False
+        Me.ucrChkAddCode.Location = New System.Drawing.Point(159, 333)
+        Me.ucrChkAddCode.Name = "ucrChkAddCode"
+        Me.ucrChkAddCode.Size = New System.Drawing.Size(175, 24)
+        Me.ucrChkAddCode.TabIndex = 217
+        '
+        'ucrInputStation
+        '
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStation.GetSetSelectedIndex = -1
+        Me.ucrInputStation.IsReadOnly = False
+        Me.ucrInputStation.Location = New System.Drawing.Point(389, 411)
+        Me.ucrInputStation.Name = "ucrInputStation"
+        Me.ucrInputStation.Size = New System.Drawing.Size(86, 21)
+        Me.ucrInputStation.TabIndex = 14
+        '
+        'ucr1stFactorReceiver
+        '
+        Me.ucr1stFactorReceiver.AutoSize = True
+        Me.ucr1stFactorReceiver.frmParent = Me
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(277, 411)
+        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(109, 26)
+        Me.ucr1stFactorReceiver.strNcFilePath = ""
+        Me.ucr1stFactorReceiver.TabIndex = 13
+        Me.ucr1stFactorReceiver.ucrSelector = Nothing
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Location = New System.Drawing.Point(6, 361)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(128, 25)
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.TabIndex = 216
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'cmdRHelp
         '
         Me.cmdRHelp.AutoSize = True
         Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuPackagesList
-        Me.cmdRHelp.Location = New System.Drawing.Point(371, 439)
+        Me.cmdRHelp.Location = New System.Drawing.Point(368, 449)
         Me.cmdRHelp.Name = "cmdRHelp"
-        Me.cmdRHelp.Size = New System.Drawing.Size(91, 30)
+        Me.cmdRHelp.Size = New System.Drawing.Size(91, 25)
         Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuPackagesList
         Me.cmdRHelp.TabIndex = 213
         Me.cmdRHelp.Text = "R Help"
@@ -479,7 +558,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(302, 364)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(107, 411)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(125, 21)
         Me.ucrInputLegendPosition.TabIndex = 15
@@ -488,7 +567,7 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrChkFlipCoordinates.AutoSize = True
         Me.ucrChkFlipCoordinates.Checked = False
-        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(301, 308)
+        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(301, 304)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
         Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(174, 24)
         Me.ucrChkFlipCoordinates.TabIndex = 13
@@ -497,15 +576,15 @@ Partial Class dlgGeneralForGraphics
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(301, 338)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(6, 411)
         Me.ucrChkLegend.Name = "ucrChkLegend"
-        Me.ucrChkLegend.Size = New System.Drawing.Size(125, 24)
+        Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 14
         '
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(6, 443)
+        Me.ucrSave.Location = New System.Drawing.Point(6, 450)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(282, 24)
@@ -517,18 +596,18 @@ Partial Class dlgGeneralForGraphics
         Me.ucrGraphicsSelector.bDropUnusedFilterLevels = False
         Me.ucrGraphicsSelector.bShowHiddenColumns = False
         Me.ucrGraphicsSelector.bUseCurrentFilter = True
-        Me.ucrGraphicsSelector.Location = New System.Drawing.Point(6, 14)
+        Me.ucrGraphicsSelector.Location = New System.Drawing.Point(6, 4)
         Me.ucrGraphicsSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrGraphicsSelector.Name = "ucrGraphicsSelector"
-        Me.ucrGraphicsSelector.Size = New System.Drawing.Size(226, 195)
+        Me.ucrGraphicsSelector.Size = New System.Drawing.Size(226, 185)
         Me.ucrGraphicsSelector.TabIndex = 0
         '
         'ucrAdditionalLayers
         '
         Me.ucrAdditionalLayers.AutoSize = True
-        Me.ucrAdditionalLayers.Location = New System.Drawing.Point(6, 213)
+        Me.ucrAdditionalLayers.Location = New System.Drawing.Point(6, 174)
         Me.ucrAdditionalLayers.Name = "ucrAdditionalLayers"
-        Me.ucrAdditionalLayers.Size = New System.Drawing.Size(253, 182)
+        Me.ucrAdditionalLayers.Size = New System.Drawing.Size(247, 181)
         Me.ucrAdditionalLayers.TabIndex = 8
         '
         'ucrBase
@@ -540,37 +619,24 @@ Partial Class dlgGeneralForGraphics
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 9
         '
-        'cmdColour
-        '
-        Me.cmdColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdColour.Location = New System.Drawing.Point(367, 401)
-        Me.cmdColour.Name = "cmdColour"
-        Me.cmdColour.Size = New System.Drawing.Size(65, 25)
-        Me.cmdColour.TabIndex = 214
-        Me.cmdColour.Tag = "Colour"
-        Me.cmdColour.Text = "Colour"
-        Me.cmdColour.UseVisualStyleBackColor = True
-        '
         'dlgGeneralForGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(478, 547)
-        Me.Controls.Add(Me.cmdColour)
+        Me.Controls.Add(Me.ucrInputAddCode)
+        Me.Controls.Add(Me.ucrChkAddCode)
+        Me.Controls.Add(Me.ucrInputStation)
+        Me.Controls.Add(Me.ucr1stFactorReceiver)
+        Me.Controls.Add(Me.lblFacetBy)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdRHelp)
         Me.Controls.Add(Me.grpAethetics)
         Me.Controls.Add(Me.ucrInputLegendPosition)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.ucrChkLegend)
-        Me.Controls.Add(Me.cmdTitles)
-        Me.Controls.Add(Me.cmdXAxis)
-        Me.Controls.Add(Me.cmdYAxis)
-        Me.Controls.Add(Me.cmdTheme)
-        Me.Controls.Add(Me.cmdFacets)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.ucrGraphicsSelector)
-        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrAdditionalLayers)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -583,21 +649,15 @@ Partial Class dlgGeneralForGraphics
         Me.grpAethetics.ResumeLayout(False)
         Me.grpAethetics.PerformLayout()
         Me.ContextMenuPackagesList.ResumeLayout(False)
+        Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrAdditionalLayers As ucrAdditionalLayers
-    Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrGraphicsSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSave As ucrSave
-    Friend WithEvents cmdTheme As Button
-    Friend WithEvents cmdFacets As Button
-    Friend WithEvents cmdTitles As Button
-    Friend WithEvents cmdXAxis As Button
-    Friend WithEvents cmdYAxis As Button
     Friend WithEvents ucrChkLegend As ucrCheck
     Friend WithEvents ucrChkFlipCoordinates As ucrCheck
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
@@ -639,5 +699,22 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents lblYVariable As Label
     Friend WithEvents lblXVariable As Label
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
-    Friend WithEvents cmdColour As Button
+    Friend WithEvents cmdOptions As ucrSplitButton
+    Friend WithEvents contextMenuStripOptions As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemFacets As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemLayers As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemTitles As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemXaxis As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemYaxis As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemThemes As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemCoordinates As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemColour As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemAnnotation As ToolStripMenuItem
+    Friend WithEvents ucrInputStation As ucrInputComboBox
+    Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
+    Friend WithEvents lblFacetBy As Label
+    Friend WithEvents ucrInputAddCode As ucrInputComboBox
+    Friend WithEvents ucrChkAddCode As ucrCheck
+    Friend WithEvents ucrAdditionalLayers As ucrAdditionalLayers
 End Class
