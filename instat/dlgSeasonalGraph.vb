@@ -48,6 +48,8 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
         End If        bReset = False        autoTranslate(Me)        TestOkEnabled()    End Sub    Private Sub InitialiseDialog()
         Dim dctLegendPosition As New Dictionary(Of String, String)        Dim dctColour As New Dictionary(Of String, String)
 
+        ucrBase.iHelpTopicID = 522
+
         ucrSelectorForSeasonalGraph.SetParameter(New RParameter("data", 0))        ucrSelectorForSeasonalGraph.SetParameterIsrfunction()        ucrPnlOptions.AddRadioButton(rdoLine)        ucrPnlOptions.AddRadioButton(rdoBar)        ucrPnlOptions.AddParameterValuesCondition(rdoLine, "checked", "geom_line")        ucrPnlOptions.AddParameterValuesCondition(rdoBar, "checked", "geom_Bar")
 
         ucrReceiverLines.Selector = ucrSelectorForSeasonalGraph        ucrReceiverLines.strSelectorHeading = "Variables"        ucrReceiverLines.SetParameterIsString()        ucrReceiverLines.SetLinkedDisplayControl(lblLines)        ucrReceiverLines.bWithQuotes = False
