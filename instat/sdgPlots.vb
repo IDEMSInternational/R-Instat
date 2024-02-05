@@ -744,8 +744,6 @@ Public Class sdgPlots
         ucrInputAxisType.AddToLinkedControls(ucrInputPaletteContinuous, {"continuous"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputAxisType.AddToLinkedControls(ucrInputPalettes, {"discrete"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        'ucrInputAxisType.SetRDefault("discrete")
-
         ucrChkPositionColor.SetText("Position")
         ucrChkPositionColor.AddToLinkedControls(ucrInputPositionColor, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="left")
         ucrInputPositionColor.SetDropDownStyleAsNonEditable()
@@ -2117,7 +2115,7 @@ Public Class sdgPlots
         ucrChkHighColour.AddToLinkedControls(ucrInputHighColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="black")
         ucrInputHighColour.SetDropDownStyleAsNonEditable()
         ucrInputHighColour.SetParameter(New RParameter("high"))
-        ucrInputHighColour.SetItems({"black", "red", "yellow", "blue", "violet", "white"})
+        ucrInputHighColour.SetItems({"black", "red", "yellow", "blue", "violet", "white", "orange", "brown", "grey", "purple", "pink", "green"})
         ucrChkHighColour.AddParameterPresentCondition(True, "high")
         ucrChkHighColour.AddParameterPresentCondition(False, "high", False)
 
@@ -2125,7 +2123,7 @@ Public Class sdgPlots
         ucrChkHigh.AddToLinkedControls(ucrInputHigh, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="black")
         ucrInputHigh.SetDropDownStyleAsNonEditable()
         ucrInputHigh.SetParameter(New RParameter("high"))
-        ucrInputHigh.SetItems({"black", "red", "yellow", "blue", "violet", "white"})
+        ucrInputHigh.SetItems({"black", "red", "yellow", "blue", "violet", "white", "orange", "brown", "grey", "purple", "pink", "green"})
         ucrChkHigh.AddParameterPresentCondition(True, "high")
         ucrChkHigh.AddParameterPresentCondition(False, "high", False)
 

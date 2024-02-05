@@ -693,7 +693,7 @@ Partial Class sdgPlots
         Me.tbpPlotsOptions.Location = New System.Drawing.Point(7, 3)
         Me.tbpPlotsOptions.Name = "tbpPlotsOptions"
         Me.tbpPlotsOptions.SelectedIndex = 0
-        Me.tbpPlotsOptions.Size = New System.Drawing.Size(1048, 513)
+        Me.tbpPlotsOptions.Size = New System.Drawing.Size(679, 513)
         Me.tbpPlotsOptions.TabIndex = 0
         '
         'tbpFacet
@@ -718,7 +718,7 @@ Partial Class sdgPlots
         Me.tbpFacet.Location = New System.Drawing.Point(4, 22)
         Me.tbpFacet.Name = "tbpFacet"
         Me.tbpFacet.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpFacet.Size = New System.Drawing.Size(1040, 487)
+        Me.tbpFacet.Size = New System.Drawing.Size(671, 487)
         Me.tbpFacet.TabIndex = 3
         Me.tbpFacet.Tag = "Facet"
         Me.tbpFacet.Text = "Facets"
@@ -1727,7 +1727,7 @@ Partial Class sdgPlots
         Me.tbpColour.Location = New System.Drawing.Point(4, 22)
         Me.tbpColour.Name = "tbpColour"
         Me.tbpColour.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpColour.Size = New System.Drawing.Size(1040, 487)
+        Me.tbpColour.Size = New System.Drawing.Size(671, 487)
         Me.tbpColour.TabIndex = 8
         Me.tbpColour.Text = "Colour"
         Me.tbpColour.UseVisualStyleBackColor = True
@@ -7310,7 +7310,7 @@ Partial Class sdgPlots
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1107, 528)
+        Me.ClientSize = New System.Drawing.Size(687, 528)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tbpPlotsOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
