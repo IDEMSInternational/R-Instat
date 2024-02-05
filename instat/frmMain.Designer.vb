@@ -681,6 +681,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPICSAGeneralGrap = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2275,7 +2276,7 @@ Partial Class frmMain
         '
         'mnuClimaticPICSA
         '
-        Me.mnuClimaticPICSA.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPICSARainfallGraph, Me.mnuClimaticPICSATemperatureGraph, Me.ToolStripSeparator73, Me.mnuClimaticPICSACumExeedenceGraph, Me.mnuClimaticPICSACrops})
+        Me.mnuClimaticPICSA.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPICSARainfallGraph, Me.mnuClimaticPICSATemperatureGraph, Me.mnuClimaticPICSAGeneralGrap, Me.ToolStripSeparator73, Me.mnuClimaticPICSACumExeedenceGraph, Me.mnuClimaticPICSACrops})
         Me.mnuClimaticPICSA.Name = "mnuClimaticPICSA"
         Me.mnuClimaticPICSA.Size = New System.Drawing.Size(212, 22)
         Me.mnuClimaticPICSA.Text = "PICSA"
@@ -5091,6 +5092,12 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuClimaticPICSAGeneralGrap
+        '
+        Me.mnuClimaticPICSAGeneralGrap.Name = "mnuClimaticPICSAGeneralGrap"
+        Me.mnuClimaticPICSAGeneralGrap.Size = New System.Drawing.Size(246, 22)
+        Me.mnuClimaticPICSAGeneralGrap.Text = "General Graph..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5104,11 +5111,9 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-
         Me.Text = "R-Instat " + My.Application.Info.Version.Major.ToString + "." +
                 My.Application.Info.Version.Minor.ToString + "." +
                 My.Application.Info.Version.Build.ToString
-        Me.Text = "R-Instat .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
@@ -5792,5 +5797,5 @@ Partial Class frmMain
     Friend WithEvents mnuViewSwapDataAndScript As ToolStripMenuItem
     Friend WithEvents mnuClimaticExamineEditDataVisualiseData As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
-
+    Friend WithEvents mnuClimaticPICSAGeneralGrap As ToolStripMenuItem
 End Class
