@@ -63,6 +63,21 @@ Public Class dlgLinePlot
     Private clsGeomErrorbarFunction As New RFunction
     Private clsGeomPointrangeFunction As New RFunction
 
+    Private clsFacetFunction As New RFunction
+    Private clsFacetVariablesOperator As New ROperator
+    Private clsFacetRowOp As New ROperator
+    Private clsFacetColOp As New ROperator
+    Private clsPipeOperator As New ROperator
+    Private clsGroupByFunction As New RFunction
+
+    Private ReadOnly strNone As String = "None"
+    Private ReadOnly strFacetWrap As String = "Facet Wrap"
+    Private ReadOnly strFacetRow As String = "Facet Row"
+    Private ReadOnly strFacetCol As String = "Facet Column"
+
+    Private bUpdateComboOptions As Boolean = True
+    Private bUpdatingParameters As Boolean = False
+
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strgeomSmoothParameterName As String = "geom_smooth"
@@ -91,6 +106,7 @@ Public Class dlgLinePlot
         Dim dctFamilyOptions As New Dictionary(Of String, String)
         Dim dctColourOptions As New Dictionary(Of String, String)
         Dim dctSlopeLineColourOptions As New Dictionary(Of String, String)
+        Dim dctLegendPosition As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -396,6 +412,32 @@ Public Class dlgLinePlot
         ucrChkSlopeLegend.AddParameterPresentCondition(True, "slopetheme")
         ucrChkSlopeLegend.AddParameterPresentCondition(False, "slopetheme", False)
 
+        ucrChkLegend.SetText("Legend:")
+        ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
+
+        ucr1stFactorReceiver.SetParameter(New RParameter("var1"))
+        ucr1stFactorReceiver.Selector = ucrLinePlotSelector
+        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.strSelectorHeading = "Factors"
+        ucr1stFactorReceiver.bWithQuotes = False
+        ucr1stFactorReceiver.SetParameterIsString()
+        ucr1stFactorReceiver.SetValuesToIgnore({"."})
+        ucr1stFactorReceiver.SetParameterPosition(1)
+        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
+
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetDropDownStyleAsNonEditable()
+
         ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrInputMethod, ucrInputFormula}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkAddSE, ucrChkFormula, ucrChkSpan}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="FALSE")
@@ -475,6 +517,15 @@ Public Class dlgLinePlot
         clsGeomLinerangeFunction = New RFunction
         clsGeomPointrangeFunction = New RFunction
         clsGeomRibbonFunction = New RFunction
+        clsFacetFunction = New RFunction
+        clsFacetVariablesOperator = New ROperator
+        clsFacetRowOp = New ROperator
+        clsFacetColOp = New ROperator
+        clsPipeOperator = New ROperator
+        clsGroupByFunction = New RFunction
+
+        ucrInputStation.SetName(strFacetWrap)
+        ucrInputStation.bUpdateRCodeFromControl = True
 
         ucrLinePlotSelector.Reset()
         ucrLinePlotSelector.SetGgplotFunction(clsBaseOperator)
@@ -512,6 +563,22 @@ Public Class dlgLinePlot
         clsGgSlopeFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         clsSlopeThemeFunction.SetRCommand("slopegraph_theme")
+
+        clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetRowOp.SetOperation("+")
+        clsFacetRowOp.bBrackets = False
+        clsFacetColOp.SetOperation("+")
+        clsFacetColOp.bBrackets = False
+        clsFacetVariablesOperator.SetOperation("~")
+        clsFacetVariablesOperator.bForceIncludeOperation = True
+        clsFacetVariablesOperator.bBrackets = False
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
+
+        clsPipeOperator.SetOperation("%>%")
+        SetPipeAssignTo()
+
+        clsGroupByFunction.SetPackageName("dplyr")
+        clsGroupByFunction.SetRCommand("group_by")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -615,6 +682,8 @@ Public Class dlgLinePlot
         ucrChkSlopeLabelOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkSlopeTextOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkSlopeLineOptions.SetRCode(clsGgSlopeFunction, bReset)
+        ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         If bReset Then
             ucrChkRibbon.SetRCode(clsOptionsFunction, bReset)
         End If
@@ -818,10 +887,22 @@ Public Class dlgLinePlot
         End If
     End Sub
 
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
+        AddRemoveTheme()
+    End Sub
+
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, PlotOptionsToolStripMenuItem.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
                                 clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
-                                clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector,
+                                clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrLinePlotSelector, clsNewFacetVariablesOperator:=clsFacetVariablesOperator,
  clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
         clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
                                 strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
@@ -877,4 +958,160 @@ Public Class dlgLinePlot
         openSdgLayerOptions(clsGeomRibbonFunction)
     End Sub
 
+    Private Sub AutoFacetStation()
+        Dim currentReceiver As ucrReceiver = ucrLinePlotSelector.CurrentReceiver
+
+        If currentReceiver IsNot Nothing Then
+            ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+            currentReceiver.SetMeAsReceiver()
+            AddRemoveGroupBy()
+        End If
+    End Sub
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
+        If Not bUpdateComboOptions Then
+            Exit Sub
+        End If
+        Dim strChangedText As String = ucrChangedControl.GetText()
+        If strChangedText <> strNone Then
+            If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
+                    Not ucrInputStation.Equals(ucrChangedControl) AndAlso ucrInputStation.GetText() = strChangedText Then
+                bUpdateComboOptions = False
+                ucrInputStation.SetName(strNone)
+                bUpdateComboOptions = True
+            End If
+            If (strChangedText = strFacetWrap AndAlso ucrInputStation.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
+                    ucrInputStation.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
+                    ucrInputStation.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputStation.GetText = strFacetWrap) Then
+                ucrInputStation.SetName(strNone)
+            End If
+        End If
+        UpdateParameters()
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub UpdateParameters()
+        clsFacetVariablesOperator.RemoveParameterByName("var1")
+        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
+        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        bUpdatingParameters = True
+        ucr1stFactorReceiver.SetRCode(Nothing)
+        Select Case ucrInputStation.GetText()
+            Case strFacetWrap
+                ucr1stFactorReceiver.ChangeParameterName("var1")
+                ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
+            Case strFacetCol
+                ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsFacetColOp)
+            Case strFacetRow
+                ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
+        End Select
+        If Not clsRaesFunction.ContainsParameter("x") Then
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
+        bUpdatingParameters = False
+    End Sub
+
+    Private Sub AddRemoveFacets()
+        Dim bWrap As Boolean = False
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+
+        If bUpdatingParameters Then
+            Exit Sub
+        End If
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        If Not ucr1stFactorReceiver.IsEmpty Then
+            Select Case ucrInputStation.GetText()
+                Case strFacetWrap
+                    bWrap = True
+                Case strFacetCol
+                    bCol = True
+                Case strFacetRow
+                    bRow = True
+            End Select
+        End If
+
+        If bWrap OrElse bRow OrElse bCol Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+        End If
+        If bWrap Then
+            clsFacetFunction.SetRCommand("facet_wrap")
+        End If
+        If bRow OrElse bCol Then
+            clsFacetFunction.SetRCommand("facet_grid")
+        End If
+        If bRow Then
+            clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
+        ElseIf bCol AndAlso bWrap = False Then
+            clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
+        Else
+            clsFacetVariablesOperator.RemoveParameterByName("left")
+        End If
+        If bCol Then
+            clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
+        ElseIf bRow AndAlso bWrap = False Then
+            clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
+        Else
+            clsFacetVariablesOperator.RemoveParameterByName("right")
+        End If
+    End Sub
+
+    Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrReceiverX.ControlValueChanged
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub GetParameterValue(clsOperator As ROperator)
+        Dim i As Integer = 0
+        For Each clsTempParam As RParameter In clsOperator.clsParameters
+            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                i = i + 1
+            End If
+        Next
+    End Sub
+
+    Private Sub AddRemoveGroupBy()
+        If clsPipeOperator.ContainsParameter("mutate") Then
+            clsGroupByFunction.ClearParameters()
+            If clsBaseOperator.ContainsParameter("facets") Then
+                Select Case ucrInputStation.GetText()
+                    Case strFacetWrap
+                        GetParameterValue(clsFacetVariablesOperator)
+                    Case strFacetCol
+                        GetParameterValue(clsFacetColOp)
+                    Case strFacetRow
+                        GetParameterValue(clsFacetRowOp)
+                End Select
+            End If
+
+            If clsGroupByFunction.iParameterCount > 0 Then
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            Else
+                clsPipeOperator.RemoveParameterByName("group_by")
+            End If
+        Else
+            clsPipeOperator.RemoveParameterByName("group_by")
+        End If
+
+        SetPipeAssignTo()
+    End Sub
+
+    Private Sub SetPipeAssignTo()
+        If ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsPipeOperator.clsParameters.Count > 1 Then
+            clsPipeOperator.SetAssignTo(ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Else
+            clsPipeOperator.RemoveAssignTo()
+        End If
+    End Sub
+
+    Private Sub ucrLinePlotSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrLinePlotSelector.ControlValueChanged
+        AutoFacetStation()
+        SetPipeAssignTo()
+    End Sub
 End Class

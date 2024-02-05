@@ -66,9 +66,9 @@ Partial Class dlgStartofRains
         Me.rdoTRPercentile = New System.Windows.Forms.RadioButton()
         Me.ucrPnlTRCalculateBy = New instat.UcrPanel()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
+        Me.ucrInputThreshold = New instat.ucrInputComboBox()
         Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.cmdDoyRange = New System.Windows.Forms.Button()
-        Me.ucrNudThreshold = New instat.ucrNud()
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.lblDOY = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
@@ -409,15 +409,26 @@ Partial Class dlgStartofRains
         '
         'grpRainParameters
         '
+        Me.grpRainParameters.Controls.Add(Me.ucrInputThreshold)
         Me.grpRainParameters.Controls.Add(Me.ucrInputFilterPreview)
         Me.grpRainParameters.Controls.Add(Me.cmdDoyRange)
-        Me.grpRainParameters.Controls.Add(Me.ucrNudThreshold)
         Me.grpRainParameters.Controls.Add(Me.lblThreshold)
         Me.grpRainParameters.Location = New System.Drawing.Point(4, 238)
         Me.grpRainParameters.Name = "grpRainParameters"
         Me.grpRainParameters.Size = New System.Drawing.Size(686, 40)
         Me.grpRainParameters.TabIndex = 11
         Me.grpRainParameters.TabStop = False
+        '
+        'ucrInputThreshold
+        '
+        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
+        Me.ucrInputThreshold.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputThreshold.GetSetSelectedIndex = -1
+        Me.ucrInputThreshold.IsReadOnly = False
+        Me.ucrInputThreshold.Location = New System.Drawing.Point(70, 11)
+        Me.ucrInputThreshold.Name = "ucrInputThreshold"
+        Me.ucrInputThreshold.Size = New System.Drawing.Size(62, 21)
+        Me.ucrInputThreshold.TabIndex = 21
         '
         'ucrInputFilterPreview
         '
@@ -440,19 +451,6 @@ Partial Class dlgStartofRains
         Me.cmdDoyRange.Tag = ""
         Me.cmdDoyRange.Text = "Day Range"
         Me.cmdDoyRange.UseVisualStyleBackColor = True
-        '
-        'ucrNudThreshold
-        '
-        Me.ucrNudThreshold.AutoSize = True
-        Me.ucrNudThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudThreshold.Location = New System.Drawing.Point(69, 11)
-        Me.ucrNudThreshold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudThreshold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThreshold.Name = "ucrNudThreshold"
-        Me.ucrNudThreshold.Size = New System.Drawing.Size(42, 20)
-        Me.ucrNudThreshold.TabIndex = 1
-        Me.ucrNudThreshold.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblThreshold
         '
@@ -665,7 +663,7 @@ Partial Class dlgStartofRains
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(5, 514)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 20
         '
         'dlgStartofRains
@@ -741,7 +739,6 @@ Partial Class dlgStartofRains
     Friend WithEvents ucrPnlTRCalculateBy As UcrPanel
     Friend WithEvents ucrNudRDMinimumDays As ucrNud
     Friend WithEvents ucrNudRDOutOfDays As ucrNud
-    Friend WithEvents ucrNudThreshold As ucrNud
     Friend WithEvents ucrChkNumberOfRainyDays As ucrCheck
     Friend WithEvents ucrNudDSLengthOfTime As ucrNud
     Friend WithEvents ucrNudDSMaximumDays As ucrNud
@@ -760,4 +757,5 @@ Partial Class dlgStartofRains
     Friend WithEvents ucrChkStatus As ucrCheck
     Friend WithEvents ucrInputNewStatusColumnName As ucrInputTextBox
     Friend WithEvents grpDisplay As GroupBox
+    Friend WithEvents ucrInputThreshold As ucrInputComboBox
 End Class

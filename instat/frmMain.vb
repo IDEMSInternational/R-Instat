@@ -2280,10 +2280,6 @@ Public Class frmMain
         dlgInfillMissingValues.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticTidyandExamineVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineVisualiseData.Click
-        dlgVisualizeData.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareCheckDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataVisualiseData.Click
         dlgVisualizeData.ShowDialog()
     End Sub
@@ -2480,6 +2476,10 @@ Public Class frmMain
         dlgExportToClimsoft.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticFileExportToClimpact_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToClimpact.Click
+        dlgExportForClimpact.ShowDialog()
+    End Sub
+
     Private Sub mnuPrepareDataReshapeScaleOrDistance_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeScaleOrDistance.Click
         dlgCluster.ShowDialog()
     End Sub
@@ -2671,4 +2671,12 @@ Public Class frmMain
         dlgIDFCurves.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticExamineEditDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamineEditDataVisualiseData.Click
+        dlgVisualizeData.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPICSAGeneralGrap_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGrap.Click
+        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
+        dlgPICSARainfall.ShowDialog()
+    End Sub
 End Class
