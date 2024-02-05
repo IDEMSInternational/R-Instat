@@ -141,7 +141,6 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 118
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
@@ -827,13 +826,16 @@ Public Class dlgPICSARainfall
     Private Sub RemoveFunction()
         Select Case enumPICSAMode
             Case PICSAMode.General
+                ucrBase.iHelpTopicID = 521
                 clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
             Case PICSAMode.Rainfall
+                ucrBase.iHelpTopicID = 118
                 clsBaseOperator.RemoveParameterByName("geom_smooth")
                 clsBaseOperator.RemoveParameterByName("stat_regline")
                 clsBaseOperator.RemoveParameterByName("stat_cor")
                 clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
             Case PICSAMode.Temperature
+                ucrBase.iHelpTopicID = 479
                 clsBaseOperator.RemoveParameterByName("hlinemedian")
                 clsBaseOperator.RemoveParameterByName("annotate_median")
                 clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPICSARainfall.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)

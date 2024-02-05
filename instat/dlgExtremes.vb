@@ -45,6 +45,7 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 488
         Dim dctFevdTypes As New Dictionary(Of String, String)
 
         ucrInputExtremes.SetParameter(New RParameter("type", 1))

@@ -98,6 +98,8 @@ Public Class dlgSeasonalPlot
     End Sub
 
     Private Sub InitiliseDialog()
+        ucrBase.iHelpTopicID = 640
+
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
