@@ -3029,6 +3029,7 @@ WB_evaporation <- function(water_balance, frac, capacity, evaporation_value, rai
     }
   }
   return(evaporation)
+}
 
 write_weather_data <- function(year, month, day, rain, mn_tmp, mx_tmp, missing_code, output_file) {
   # Create a data frame with the provided inputs
