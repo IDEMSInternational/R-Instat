@@ -43,9 +43,11 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
     Private ReadOnly strFacetCol As String = "Facet Column"    Private ReadOnly strNone As String = "None"    Private bUpdateComboOptions As Boolean = True
 
     'Parameter names for geoms
-    Private strFirstParameterName As String = "geomLine"    Private strgeomRibbonParameterName As String = "geom_ribbon"    Private strgeomRibbonParameterName0 As String = "geom_ribbon"    Private strGeomParameterNames() As String = {strFirstParameterName, strgeomRibbonParameterName0, strgeomRibbonParameterName}    Private Sub dlgSeasonalGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load        If bFirstLoad Then            InitialiseDialog()            bFirstLoad = False        End If        If bReset Then            SetDefaults()        End If        SetRCodeForControls(bReset)        If bReset Then
+    Private strFirstParameterName As String = "geomLine"    Private strgeomRibbonParameterName As String = "geom_ribbon"    Private strgeomRibbonParameterName0 As String = "geom_ribbon"    Private strGeomParameterNames() As String = {strFirstParameterName, strgeomRibbonParameterName0, strgeomRibbonParameterName}    Private Sub dlgSeasonalGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load        If bFirstLoad Then            InitialiseDialog()            bFirstLoad = False        End If        If bReset Then            SetDefaults()        End If        SetRCodeForControls(bReset)
+        If bReset Then
             AutoFill()
-        End If        bReset = False        autoTranslate(Me)        TestOkEnabled()    End Sub    Private Sub InitialiseDialog()
+        End If
+        bReset = False        autoTranslate(Me)        TestOkEnabled()    End Sub    Private Sub InitialiseDialog()
         Dim dctLegendPosition As New Dictionary(Of String, String)        Dim dctColour As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 522
@@ -54,12 +56,14 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
 
         ucrReceiverLines.Selector = ucrSelectorForSeasonalGraph        ucrReceiverLines.strSelectorHeading = "Variables"        ucrReceiverLines.SetParameterIsString()        ucrReceiverLines.SetLinkedDisplayControl(lblLines)        ucrReceiverLines.bWithQuotes = False
 
-        ucrReceiverX.SetParameterIsString()        ucrReceiverX.SetParameter(New RParameter("x", 3))        ucrReceiverX.Selector = ucrSelectorForSeasonalGraph        ucrReceiverX.strSelectorHeading = "Variables"
+        ucrReceiverX.SetParameterIsString()        ucrReceiverX.SetParameter(New RParameter("x", 2))        ucrReceiverX.Selector = ucrSelectorForSeasonalGraph        ucrReceiverX.strSelectorHeading = "Variables"
+        ' ucrReceiverX.SetClimaticType("month")
+        ' ucrReceiverX.bAutoFill = True
         ucrReceiverX.bWithQuotes = False
 
         ucrChkRibbons.SetText("Ribbon(s):")        ucrChkRibbons.AddParameterPresentCondition(True, "geom_ribbon")        ucrChkRibbons.AddParameterPresentCondition(False, "geom_ribbon", False)        ucrChkRibbons.AddToLinkedControls(ucrReceiverRibbons, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrReceiverRibbons.SetParameter(New RParameter("y", 2))
+        ucrReceiverRibbons.SetParameter(New RParameter("y", 1))
         ucrReceiverRibbons.Selector = ucrSelectorForSeasonalGraph        ucrReceiverRibbons.strSelectorHeading = "Variables"        ucrReceiverRibbons.SetParameterIsString()        ucrReceiverRibbons.bWithQuotes = False
 
         ucrReceiverFacetBy.SetParameter(New RParameter(""))
@@ -165,9 +169,7 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
         Else
             ucrBase.OKEnabled(True)
         End If
-    End Sub
-
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverRibbons.ControlContentsChanged, ucrReceiverLines.ControlContentsChanged, ucrSave.ControlContentsChanged        TestOkEnabled()    End Sub    Private Sub ListGeomLine()        If ucrReceiverLines.lstSelectedVariables.Items.Count > 0 Then            clsRaesFunction.AddParameter("y", ucrReceiverLines.lstSelectedVariables.Items(0).Text)            For i = 1 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1                Dim clsRaesGeomLineFunction As New RFunction                clsRaesGeomLineFunction.SetPackageName("ggplot2")                clsRaesGeomLineFunction.SetRCommand("aes")                clsRaesGeomLineFunction.AddParameter("y", ucrReceiverLines.lstSelectedVariables.Items(i).Text)                Dim clsGeomLineFunction As New RFunction                clsGeomLineFunction.SetPackageName("ggplot2")                clsGeomLineFunction.SetRCommand("geom_line")                clsGeomLineFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesGeomLineFunction, iPosition:=1)                clsBaseOperator.AddParameter(strFirstParameterName & i, clsRFunctionParameter:=clsGeomLineFunction, iPosition:=2)            Next
+    End Sub    Private Sub ListGeomLine()        If ucrReceiverLines.lstSelectedVariables.Items.Count > 0 Then            clsRaesFunction.AddParameter("y", ucrReceiverLines.lstSelectedVariables.Items(0).Text)            For i = 1 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1                Dim clsRaesGeomLineFunction As New RFunction                clsRaesGeomLineFunction.SetPackageName("ggplot2")                clsRaesGeomLineFunction.SetRCommand("aes")                clsRaesGeomLineFunction.AddParameter("y", ucrReceiverLines.lstSelectedVariables.Items(i).Text)                Dim clsGeomLineFunction As New RFunction                clsGeomLineFunction.SetPackageName("ggplot2")                clsGeomLineFunction.SetRCommand("geom_line")                clsGeomLineFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesGeomLineFunction, iPosition:=1)                clsBaseOperator.AddParameter(strFirstParameterName & i, clsRFunctionParameter:=clsGeomLineFunction, iPosition:=2)            Next
         Else
             clsRaesFunction.RemoveParameterByName("y")            clsBaseOperator.RemoveParameterByName(strFirstParameterName)        End If    End Sub    Private Sub UpdateParameters()
         clsFacetOperator.RemoveParameterByName("wrap" & ucrInputStation.Name)
@@ -305,7 +307,7 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
         End If
     End Sub
 
-    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiverX.ControlValueChanged
+    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged
         AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
@@ -325,14 +327,21 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
 
     Private Sub AutoFill()
         Dim strMonthCol As String
+        Dim strStationCol As String
         Dim strDataFrame As String
         strDataFrame = ucrSelectorForSeasonalGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text
         strMonthCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "month_label")
-
+        strStationCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "station_label")
         If strMonthCol <> "" Then
             ucrReceiverX.Add(strMonthCol, strDataFrame)
         End If
-    End Sub    Private Sub ucrReceiverLines_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLines.ControlValueChanged        ListGeomLine()    End Sub
+
+        If strStationCol <> "" Then
+            ucrReceiverFacetBy.Add(strStationCol, strDataFrame)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverLines_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLines.ControlValueChanged        ListGeomLine()    End Sub
 
     Private Sub AddRemoveTheme()
         If clsThemeFunction.iParameterCount > 0 Then
@@ -359,10 +368,6 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
         End If
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverRibbons.ControlContentsChanged, ucrReceiverLines.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrBase_Click(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         AutoFill()
@@ -381,7 +386,7 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
         bResetSubdialog = False
     End Sub
 
-    Private Sub ucrSelectorForSeasonalGraph_DataFrameChanged() Handles ucrSelectorForSeasonalGraph.DataFrameChanged, ucrReceiverX.ControlValueChanged
+    Private Sub ucrSelectorForSeasonalGraph_DataFrameChanged() Handles ucrSelectorForSeasonalGraph.DataFrameChanged
         AutoFill()
     End Sub
 
@@ -434,6 +439,16 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
                 End If
                 clsBaseOperator.RemoveParameterByName(strFirstParameterName & (loopEnd + 1))
             End If
+        End If
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverRibbons.ControlContentsChanged, ucrReceiverLines.ControlContentsChanged, ucrSave.ControlContentsChanged        TestOkEnabled()    End Sub
+
+    Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
+        If Not ucrReceiverX.IsEmpty AndAlso (ucrReceiverX.strCurrDataType.Contains("factor") OrElse ucrReceiverX.strCurrDataType = "ordered,factor") Then
+            clsRaesFunction.AddParameter("group", "1", iPosition:=3)
+        Else
+            clsRaesFunction.RemoveParameterByName("group")
         End If
     End Sub
 End Class
