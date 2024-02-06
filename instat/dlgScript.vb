@@ -69,7 +69,7 @@ Public Class dlgScript
         ucrInputSaveDataFrame.SetLinkedDisplayControl(lblSaveDataFrame)
         ucrChkSaveDataFrameSingle.SetText("Single")
 
-        ucrChkDisplayGraph.SetText("Display Graph")
+        ucrChkDisplayGraph.SetText("Display Output")
 
         '--------------------------------
         'Get data controls
