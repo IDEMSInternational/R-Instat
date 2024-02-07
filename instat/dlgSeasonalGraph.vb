@@ -443,8 +443,4 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
             clsRaesFunction.RemoveParameterByName("group")
         End If
     End Sub
-
-    Private Sub ucrSelectorForSeasonalGraph_DataFrameChanged()
-
-    End Sub
 End Class
