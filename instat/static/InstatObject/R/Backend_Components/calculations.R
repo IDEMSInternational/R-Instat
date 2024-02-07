@@ -366,7 +366,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by(dplyr::across({{ var }}), .add = TRUE, .drop = FALSE)
   }
   
-  
+
   # Names of the data frames required for the calculation
   data_names <- unique(as.vector(names(calc$calculated_from)))
   # If argument was missing and there were no manipulations or sub_calculations then it should be created.
