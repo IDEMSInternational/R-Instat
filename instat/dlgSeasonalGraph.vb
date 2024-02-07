@@ -164,7 +164,7 @@ Imports instat.TranslationsPublic Class dlgSeasonalGraph    Private clsRaesFu
             ucrBase.OKEnabled(False)
         ElseIf Not ucrSave.IsComplete OrElse (ucrReceiverRibbons.IsEmpty AndAlso ucrChkRibbons.Checked) Then
             ucrBase.OKEnabled(False)
-        ElseIf ucrChkRibbons.Checked AndAlso (ucrReceiverRibbons.lstSelectedVariables.Items.Count = 1 OrElse ucrReceiverRibbons.lstSelectedVariables.Items.Count = 3) Then
+        ElseIf ucrChkRibbons.Checked AndAlso (ucrReceiverRibbons.lstSelectedVariables.Items.Count = 1 OrElse ucrReceiverRibbons.lstSelectedVariables.Items.Count = 3 OrElse ucrReceiverX.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
