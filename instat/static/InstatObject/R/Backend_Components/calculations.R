@@ -363,7 +363,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   #TODO investigate better way to do this
   #     Any case where we don't want this?
   for(var in curr_groups) {
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by_(var, add = TRUE)
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by(dplyr::across({{ var }}), .add = TRUE, .drop = FALSE)
   }
   
   
@@ -390,6 +390,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   }
   
   col_names_exp = c()
+  col_names_exp_2 <- c()
   i = 1
   # This checks that the columns specified in calculated_from appear in the current data
   for(i in seq_along(calc$calculated_from)) {
@@ -447,7 +448,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
         #TODO investigate better way to do this
         #     Any case where we don't want this?
         for(var in curr_groups) {
-          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by_(var, add = TRUE)
+          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(dplyr::across({{ var }}), .add = TRUE, .drop = FALSE)
         }
         # The overall data is joined into the current sub calc, so the curr_data_list is "reset" to default values
         curr_data_list[[c_link_label]] <- list(from_data_frame = data_frame_name, link_cols = c())
@@ -457,6 +458,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
     }
     # This is a character vector containing the column names in a format that can be passed to dplyr functions using Standard Evalulation
     col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
+    col_names_exp_2[i] <- col_name
     i = i + 1
   }
   
@@ -464,7 +466,10 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   # the data is at the same "level" so the link is unchanged
   if(calc$type == "calculation") {
     if(calc$result_name %in% names(curr_data_list[[c_data_label]])) warning(calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::mutate_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% 
+       #dplyr::mutate_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+       dplyr::mutate(!!as.name(calc$result_name) := !!rlang::parse_expr(calc$function_exp))
+
   }
   # this type performs a summary
   # the data is not at a different "level" so the link is changed and link columns are the groups of the data before summarising
@@ -484,35 +489,36 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
         # put in here the ones that DO work for ordered factor
         if (any(grepl("summary_count_non_missing|summary_count_missing|summary_count|summary_min|summary_max|summary_range|summary_median|summary_quantile|p10|p20|p25|p30|p33|p40|p60|p67|p70|p75|p80|p90", formula_fn_exp))){
           curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-            dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+            dplyr::summarise(!!as.name(calc$result_name) := list(!!rlang::parse_expr(calc$function_exp)))
         } else {
           curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-            dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
+            dplyr::summarise(!!as.name(calc$result_name) := list(NA))
         }
         # if it is a factor or character, do not work for anything except...
       } else if (any(stringr::str_detect("factor | character", col_data_type))){
         # put in here the ones that DO work for factor or character
         if (any(grepl("summary_count_non_missing|summary_count_missing|summary_count", formula_fn_exp))){
           curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-            dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+            dplyr::summarise(!!as.name(calc$result_name) := list(!!rlang::parse_expr(calc$function_exp)))
         } else {
           curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-            dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
+            dplyr::summarise(!!as.name(calc$result_name) := list(NA))
         }
       } else if (any(stringr::str_detect("Date | POSIXct | POSIXt", col_data_type))){
         # put in here the ones that DO NOT work for date
         if (any(grepl("summary_sum", formula_fn_exp))){
           curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-            dplyr::summarise_(.dots = setNames(list(NA), calc$result_name))
+            dplyr::summarise(!!as.name(calc$result_name) := list(NA))
         } else {
           curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>%
-            dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+            dplyr::summarise(!!as.name(calc$result_name) := list(!!rlang::parse_expr(calc$function_exp)))
         }
       } else {
-        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+      curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise(!!as.name(calc$result_name) := list(!!rlang::parse_expr(calc$function_exp)))
+        #curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
       }
     } else{
-      curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+      curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise(!!as.name(calc$result_name) := list(!!rlang::parse_expr(calc$function_exp)))
     }
     curr_data_list[[c_has_summary_label]] <- TRUE
   }
@@ -520,19 +526,22 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   # The data remains unchanged so link and require merge remain unchanged
   else if(calc$type == "by") {
     # link unchanged
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by_(.dots = col_names_exp, add = TRUE)
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(dplyr::across({{ col_names_exp_2 }}), .add = TRUE, .drop = FALSE)
+    #curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by_(.dots = col_names_exp, add = TRUE, .drop = FALSE)
   }
   # This type is sorting the data
   # The rows are now in a different order so a merge is required
   else if(calc$type == "sort") {
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::arrange_(.dots = col_names_exp)
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::arrange(across({{ col_names_exp_2 }}))
+    #curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::arrange_(.dots = col_names_exp)
     curr_data_list[[c_has_filter_label]] <- TRUE
   }
   # This type is filtering the data
   # The data is at the same "level" so the link is unchanged
   # The rows are now different so a merge is required
   else if(calc$type == "filter") {
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::filter_(.dots = as.formula(paste0("~", calc$function_exp)))
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::filter(!!rlang::parse_expr(calc$function_exp), .preserve = TRUE)
+    #curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::filter_(.dots = as.formula(paste0("~", calc$function_exp)))
     curr_data_list[[c_has_filter_label]] <- TRUE
   }
   # This type is when there is no main calculation but some sub_calculations
