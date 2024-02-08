@@ -329,7 +329,7 @@ Public Class sdgSummaries
         ucrChkSetseed.AddParameterPresentCondition(False, "seed", False)
 
         ucrChkProportionsPercentages.SetParameter(New RParameter("percentage_type"))
-        ucrChkProportionsPercentages.SetValuesCheckedAndUnchecked("factors", "none")
+        ucrChkProportionsPercentages.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
         ucrChkProportionsPercentages.SetText("Add Percentages")
 
         ucrNudSeed.SetParameter(New RParameter("seed", 11))
@@ -499,11 +499,11 @@ Public Class sdgSummaries
         ucrChkSumOfSquaredResiduals.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkVolumetricEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkSample.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-
+        ucrChkProportionsPercentages.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         If bReset Then
             ucrSelectorSecondVariable.Reset()
             ucrSelectorOrderBy.Reset()
-            ucrChkProportionsPercentages.SetRCode(clsDummyFunction, bReset)
+
 
             If strDefaultTab <> "" Then
                 For i As Integer = 0 To tbSummaries.TabPages.Count - 1
