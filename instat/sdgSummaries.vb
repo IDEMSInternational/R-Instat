@@ -330,7 +330,6 @@ Public Class sdgSummaries
 
         ucrChkProportionsPercentages.SetParameter(New RParameter("percentage_type"))
         ucrChkProportionsPercentages.SetValuesCheckedAndUnchecked("factors", "none")
-        ucrChkProportionsPercentages.SetRDefault("none")
         ucrChkProportionsPercentages.SetText("Add Percentages")
 
         ucrNudSeed.SetParameter(New RParameter("seed", 11))
@@ -401,6 +400,8 @@ Public Class sdgSummaries
         ucrChkCorrelations.SetText("Correlations" & strWeightLabel)
         ucrChkCovariance.SetText("Covariance" & strWeightLabel)
 
+        clsDummyFunction.AddParameter("percentage_type", "none")
+
         'This is meant to force selector select the current dataframe as selected in the main dialog
         ucrBaseSelector = ucrNewBaseSelector
         If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
@@ -421,7 +422,6 @@ Public Class sdgSummaries
         ucrInputJmia.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudSeed.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrChkSetseed.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkProportionsPercentages.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkCount.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkProportion.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -503,6 +503,8 @@ Public Class sdgSummaries
         If bReset Then
             ucrSelectorSecondVariable.Reset()
             ucrSelectorOrderBy.Reset()
+            ucrChkProportionsPercentages.SetRCode(clsDummyFunction, bReset)
+
             If strDefaultTab <> "" Then
                 For i As Integer = 0 To tbSummaries.TabPages.Count - 1
                     If tbSummaries.TabPages(i).Text = strDefaultTab Then
