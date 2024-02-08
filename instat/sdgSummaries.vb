@@ -331,7 +331,7 @@ Public Class sdgSummaries
         ucrChkProportionsPercentages.SetParameter(New RParameter("percentage_type"))
         ucrChkProportionsPercentages.SetValuesCheckedAndUnchecked("factors", "none")
         ucrChkProportionsPercentages.SetRDefault("none")
-        ucrChkProportionsPercentages.SetText("Calculate Proportions or Percentages")
+        ucrChkProportionsPercentages.SetText("Add Percentages")
 
         ucrNudSeed.SetParameter(New RParameter("seed", 11))
 
