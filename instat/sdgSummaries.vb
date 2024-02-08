@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class sdgSummaries
-    Public clsListFunction, clsDefaultFunction, clsConcFunction As New RFunction
+    Public clsListFunction, clsDefaultFunction, clsConcFunction, clsDummyFunction As New RFunction
     Public bControlsInitialised As Boolean = False
     Private lstCheckboxes As New List(Of ucrCheck)
     Private lstVerifCheckboxes As New List(Of ucrCheck)
@@ -25,6 +25,7 @@ Public Class sdgSummaries
     Private strWeightLabel As String
     Public bEnable2VariableTab As Boolean = True
     Public bOkEnabled As Boolean = True
+    Private bResetSubdialog As Boolean = False
 
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -327,6 +328,11 @@ Public Class sdgSummaries
         ucrChkSetseed.AddParameterPresentCondition(True, "seed")
         ucrChkSetseed.AddParameterPresentCondition(False, "seed", False)
 
+        ucrChkProportionsPercentages.SetParameter(New RParameter("percentage_type"))
+        ucrChkProportionsPercentages.SetValuesCheckedAndUnchecked("factors", "none")
+        ucrChkProportionsPercentages.SetRDefault("none")
+        ucrChkProportionsPercentages.SetText("Calculate Proportions or Percentages")
+
         ucrNudSeed.SetParameter(New RParameter("seed", 11))
 
         lstVerifCheckboxes.AddRange({ucrChkCorrelations, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency})
@@ -349,6 +355,8 @@ Public Class sdgSummaries
             ctrTemp.SetParameterIncludeArgumentName(False)
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
         Next
+
+        cmdOptions.Visible = False
         bControlsInitialised = True
         TwoVariablesControls()
         PositionOptions()
@@ -413,6 +421,7 @@ Public Class sdgSummaries
         ucrInputJmia.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudSeed.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrChkSetseed.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkProportionsPercentages.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkCount.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkProportion.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -510,6 +519,7 @@ Public Class sdgSummaries
                 tbSummaries.SelectedIndex = 0
             End If
         End If
+        bResetSubdialog = True
     End Sub
 
     Public ReadOnly Property SummaryCount As Integer
@@ -603,6 +613,16 @@ Public Class sdgSummaries
         clsHelp.AddParameter("package", Chr(34) & strPackageName & Chr(34))
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
         frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Opening help page for" & " " & strPackageName & " " & "Package. Generated from dialog Modelling", iCallType:=2, bSeparateThread:=False, bUpdateGrids:=False)
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgProportionsPercentages.SetRFunction(clsDefaultFunction, bResetSubdialog)
+        sdgProportionsPercentages.ShowDialog()
+        bResetSubdialog = False
+    End Sub
+
+    Private Sub ucrChkProportionsPercentages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProportionsPercentages.ControlValueChanged
+        cmdOptions.Visible = ucrChkProportionsPercentages.Checked
     End Sub
 
     Private Sub ucrChkOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOrderBy.ControlValueChanged
