@@ -39,6 +39,7 @@ Public Class dlgConditionalQuantilePlot
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 642
         Dim dctLegendPosition As New Dictionary(Of String, String)
         Dim dctStatistics As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.iCallType = 3

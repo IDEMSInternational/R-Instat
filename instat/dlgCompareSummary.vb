@@ -37,6 +37,7 @@ Public Class dlgCompareSummary
     End Sub
 
     Private Sub InitialiseDialog()
+ucrBase.iHelpTopicID = 634
         ucrSelectorVerificationSummary.SetParameter(New RParameter("data_name", 0))
         ucrSelectorVerificationSummary.SetParameterIsString()
 
