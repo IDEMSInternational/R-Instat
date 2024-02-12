@@ -528,6 +528,9 @@ Public Class dlgDescribeTwoVariable
                 ucrReorderSummary.Visible = False
                 cmdSummaries.Visible = False
             End If
+            grpDisplay.Visible = IsFactorByFactorByFactor()
+            ucrChkDisplayMargins.Visible = IsFactorByFactorByFactor()
+            ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactorByFactor()
         End If
         cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
     End Sub
@@ -708,26 +711,43 @@ Public Class dlgDescribeTwoVariable
         If rdoTwoVariable.Checked Then
             cmdFormatTable.Visible = IsNumericByFactor() _
             OrElse IsFactorByFactor() OrElse IsFactorByNumeric()
+        ElseIf rdoThreeVariable.Checked Then
+            cmdFormatTable.Visible = IsFactorByFactorByFactor()
         Else
             cmdFormatTable.Visible = False
         End If
     End Sub
 
     Private Sub ChangeLocations()
-        If IsNumericByFactor() Then
-            ucrBase.Location = New Point(iUcrBaseXLocation, 487)
-            Me.Size = New Point(iDialogueXsize, 580)
-            cmdFormatTable.Location = New Point(326, 423)
-        ElseIf IsFactorByNumeric() Then
-            ucrBase.Location = New Point(iUcrBaseXLocation, 319)
-            Me.Size = New Point(iDialogueXsize, 415)
-        ElseIf IsFactorByFactor() Then
-            ucrBase.Location = New Point(iUcrBaseXLocation, 370)
-            Me.Size = New Point(iDialogueXsize, 465)
-            cmdFormatTable.Location = New Point(326, 325)
-        ElseIf IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
-            ucrBase.Location = New Point(iUcrBaseXLocation, 328)
-            Me.Size = New Point(iDialogueXsize, 425)
+        If rdoTwoVariable.Checked Then
+            If IsNumericByFactor() Then
+                ucrBase.Location = New Point(iUcrBaseXLocation, 487)
+                Me.Size = New Point(iDialogueXsize, 580)
+                cmdFormatTable.Location = New Point(326, 423)
+            ElseIf IsFactorByNumeric() Then
+                ucrBase.Location = New Point(iUcrBaseXLocation, 319)
+                Me.Size = New Point(iDialogueXsize, 415)
+            ElseIf IsFactorByFactor() Then
+                ucrBase.Location = New Point(iUcrBaseXLocation, 370)
+                Me.Size = New Point(iDialogueXsize, 465)
+                cmdFormatTable.Location = New Point(326, 325)
+            Else
+                ucrBase.Location = New Point(iUcrBaseXLocation, 328)
+                Me.Size = New Point(iDialogueXsize, 425)
+            End If
+        ElseIf rdoThreeVariable.Checked Then
+            If IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
+                ucrBase.Location = New Point(iUcrBaseXLocation, 328)
+                Me.Size = New Point(iDialogueXsize, 425)
+            ElseIf IsFactorByFactorByFactor() Then
+                ucrBase.Location = New Point(iUcrBaseXLocation, 370)
+                Me.Size = New Point(iDialogueXsize, 465)
+                cmdFormatTable.Visible = True
+                cmdFormatTable.Location = New Point(326, 325)
+            Else
+                ucrBase.Location = New Point(iUcrBaseXLocation, 370)
+                Me.Size = New Point(iDialogueXsize, 480)
+            End If
         Else
             ucrBase.Location = New Point(iUcrBaseXLocation, 328)
             Me.Size = New Point(iDialogueXsize, 425)
@@ -910,8 +930,6 @@ Public Class dlgDescribeTwoVariable
                 clsSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesListFunction, iPosition:=4)
             ElseIf IsFactorByFactor() Then
                 clsSummaryTableFunction.AddParameter("summaries", "count_label", iPosition:=4)
-            ElseIf IsNumericByFactor() Then
-                clsSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesListFunction, iPosition:=4)
             End If
         End If
     End Sub
@@ -954,21 +972,22 @@ Public Class dlgDescribeTwoVariable
                     strSummaryName = ""
                 End If
             End If
-            If rdoThreeVariable.Checked Then
-                If IsFactorByNumericByNumeric() Then
-                    strSummaryName = "Correlations"
-                ElseIf IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() Then
-                    strSummaryName = "ANOVA tables"
-                ElseIf IsNumericByFactorByFactor() Then
-                    strSummaryName = "ANOVA tables"
-                ElseIf IsNumericByFactorByNumeric() Then
-                    strSummaryName = "ANOVA tables"
-                Else
-                    strSummaryName = "Summary tables"
-                End If
+        End If
+        If rdoThreeVariable.Checked Then
+            If IsFactorByNumericByNumeric() Then
+                strSummaryName = "Correlations"
+            ElseIf IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() Then
+                strSummaryName = "ANOVA tables"
+            ElseIf IsNumericByFactorByFactor() Then
+                strSummaryName = "ANOVA tables"
+            ElseIf IsNumericByFactorByNumeric() Then
+                strSummaryName = "ANOVA tables"
+            ElseIf IsFactorByFactorByFactor() Then
+                strSummaryName = "Frequency tables"
+            Else
+                strSummaryName = "Summary tables"
             End If
         End If
-
         If strSummaryName <> "" Then
             lblSummaryName.Text = strSummaryName
             lblSummaryName.ForeColor = SystemColors.Highlight
