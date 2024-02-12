@@ -409,7 +409,7 @@
     <value>2</value>
   </data>
   <data name="rdoChoroplethMap.Text" xml:space="preserve">
-    <value>Chorolopleth Map</value>
+    <value>Choropleth Map</value>
   </data>
   <data name="rdoChoroplethMap.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>

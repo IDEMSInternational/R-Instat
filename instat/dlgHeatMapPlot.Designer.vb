@@ -59,6 +59,7 @@ Partial Class dlgHeatMapPlot
         Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTileOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemPolygonOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemJitterOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrInputStation = New instat.ucrInputComboBox()
         Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
@@ -94,7 +95,6 @@ Partial Class dlgHeatMapPlot
         Me.lblWidth = New System.Windows.Forms.Label()
         Me.ucrNudWidth = New instat.ucrNud()
         Me.ucrChkJitter = New instat.ucrCheck()
-        Me.toolStripMenuItemJitterOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -211,6 +211,11 @@ Partial Class dlgHeatMapPlot
         '
         Me.toolStripMenuItemPolygonOptions.Name = "toolStripMenuItemPolygonOptions"
         resources.ApplyResources(Me.toolStripMenuItemPolygonOptions, "toolStripMenuItemPolygonOptions")
+        '
+        'toolStripMenuItemJitterOptions
+        '
+        Me.toolStripMenuItemJitterOptions.Name = "toolStripMenuItemJitterOptions"
+        resources.ApplyResources(Me.toolStripMenuItemJitterOptions, "toolStripMenuItemJitterOptions")
         '
         'lblFacetBy
         '
@@ -475,11 +480,6 @@ Partial Class dlgHeatMapPlot
         resources.ApplyResources(Me.ucrChkJitter, "ucrChkJitter")
         Me.ucrChkJitter.Checked = False
         Me.ucrChkJitter.Name = "ucrChkJitter"
-        '
-        'toolStripMenuItemJitterOptions
-        '
-        Me.toolStripMenuItemJitterOptions.Name = "toolStripMenuItemJitterOptions"
-        resources.ApplyResources(Me.toolStripMenuItemJitterOptions, "toolStripMenuItemJitterOptions")
         '
         'dlgHeatMapPlot
         '
