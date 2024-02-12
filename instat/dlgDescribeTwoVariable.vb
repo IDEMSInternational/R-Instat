@@ -528,7 +528,6 @@ Public Class dlgDescribeTwoVariable
                 ucrReorderSummary.Visible = False
                 cmdSummaries.Visible = False
             End If
-            grpDisplay.Visible = IsFactorByFactorByFactor()
             ucrChkDisplayMargins.Visible = IsFactorByFactorByFactor()
             ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactorByFactor()
         End If
@@ -745,7 +744,7 @@ Public Class dlgDescribeTwoVariable
                 cmdFormatTable.Visible = True
                 cmdFormatTable.Location = New Point(326, 325)
             Else
-                ucrBase.Location = New Point(iUcrBaseXLocation, 370)
+                ucrBase.Location = New Point(iUcrBaseXLocation, 385)
                 Me.Size = New Point(iDialogueXsize, 480)
             End If
         Else
