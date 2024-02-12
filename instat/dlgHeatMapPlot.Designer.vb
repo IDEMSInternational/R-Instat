@@ -54,6 +54,18 @@ Partial Class dlgHeatMapPlot
         Me.lblLongitude = New System.Windows.Forms.Label()
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.lblFillChoropleth = New System.Windows.Forms.Label()
+        Me.lblGroup = New System.Windows.Forms.Label()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemTileOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemPolygonOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegend = New instat.ucrCheck()
+        Me.cmdOptions = New instat.ucrSplitButton()
+        Me.ucrChkPoints = New instat.ucrCheck()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
         Me.ucrReceiverPointsHeatMap = New instat.ucrReceiverSingle()
         Me.ucrNudShapeHeatMap = New instat.ucrNud()
@@ -71,18 +83,11 @@ Partial Class dlgHeatMapPlot
         Me.ucrVariableAsFactorForHeatMap = New instat.ucrVariablesAsFactor()
         Me.ucrInputReorderVariableX = New instat.ucrInputComboBox()
         Me.ucrInputSize = New instat.ucrInputComboBox()
-        Me.ucrChkAddLabels = New instat.ucrCheck()
         Me.ucrInputPosition = New instat.ucrInputComboBox()
         Me.ucrInputColour = New instat.ucrInputComboBox()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
-        Me.lblGroup = New System.Windows.Forms.Label()
-        Me.ucrChkPoints = New instat.ucrCheck()
-        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemTileOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemPolygonOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdOptions = New instat.ucrSplitButton()
+        Me.ucrChkAddLabels = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -173,6 +178,84 @@ Partial Class dlgHeatMapPlot
         resources.ApplyResources(Me.lblFillChoropleth, "lblFillChoropleth")
         Me.lblFillChoropleth.Name = "lblFillChoropleth"
         Me.lblFillChoropleth.Tag = "fill"
+        '
+        'lblGroup
+        '
+        resources.ApplyResources(Me.lblGroup, "lblGroup")
+        Me.lblGroup.Name = "lblGroup"
+        '
+        'contextMenuStripOptions
+        '
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemTileOptions, Me.toolStripMenuItemPolygonOptions})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        resources.ApplyResources(Me.contextMenuStripOptions, "contextMenuStripOptions")
+        '
+        'toolStripMenuItemPlotOptions
+        '
+        Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
+        resources.ApplyResources(Me.toolStripMenuItemPlotOptions, "toolStripMenuItemPlotOptions")
+        '
+        'toolStripMenuItemTileOptions
+        '
+        Me.toolStripMenuItemTileOptions.Name = "toolStripMenuItemTileOptions"
+        resources.ApplyResources(Me.toolStripMenuItemTileOptions, "toolStripMenuItemTileOptions")
+        '
+        'toolStripMenuItemPolygonOptions
+        '
+        Me.toolStripMenuItemPolygonOptions.Name = "toolStripMenuItemPolygonOptions"
+        resources.ApplyResources(Me.toolStripMenuItemPolygonOptions, "toolStripMenuItemPolygonOptions")
+        '
+        'lblFacetBy
+        '
+        resources.ApplyResources(Me.lblFacetBy, "lblFacetBy")
+        Me.lblFacetBy.Name = "lblFacetBy"
+        Me.lblFacetBy.Tag = ""
+        '
+        'ucrInputStation
+        '
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputStation, "ucrInputStation")
+        Me.ucrInputStation.GetSetSelectedIndex = -1
+        Me.ucrInputStation.IsReadOnly = False
+        Me.ucrInputStation.Name = "ucrInputStation"
+        '
+        'ucr1stFactorReceiver
+        '
+        resources.ApplyResources(Me.ucr1stFactorReceiver, "ucr1stFactorReceiver")
+        Me.ucr1stFactorReceiver.frmParent = Me
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.strNcFilePath = ""
+        Me.ucr1stFactorReceiver.ucrSelector = Nothing
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        resources.ApplyResources(Me.ucrInputLegendPosition, "ucrInputLegendPosition")
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        '
+        'ucrChkLegend
+        '
+        resources.ApplyResources(Me.ucrChkLegend, "ucrChkLegend")
+        Me.ucrChkLegend.Checked = False
+        Me.ucrChkLegend.Name = "ucrChkLegend"
+        '
+        'cmdOptions
+        '
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'ucrChkPoints
+        '
+        resources.ApplyResources(Me.ucrChkPoints, "ucrChkPoints")
+        Me.ucrChkPoints.Checked = False
+        Me.ucrChkPoints.Name = "ucrChkPoints"
         '
         'ucrChkFlipCoordinates
         '
@@ -306,12 +389,6 @@ Partial Class dlgHeatMapPlot
         Me.ucrInputSize.IsReadOnly = False
         Me.ucrInputSize.Name = "ucrInputSize"
         '
-        'ucrChkAddLabels
-        '
-        resources.ApplyResources(Me.ucrChkAddLabels, "ucrChkAddLabels")
-        Me.ucrChkAddLabels.Checked = False
-        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
-        '
         'ucrInputPosition
         '
         Me.ucrInputPosition.AddQuotesIfUnrecognised = True
@@ -346,56 +423,24 @@ Partial Class dlgHeatMapPlot
         Me.ucrReceiverGroup.strNcFilePath = ""
         Me.ucrReceiverGroup.ucrSelector = Nothing
         '
-        'lblGroup
+        'ucrChkAddLabels
         '
-        resources.ApplyResources(Me.lblGroup, "lblGroup")
-        Me.lblGroup.Name = "lblGroup"
-        '
-        'ucrChkPoints
-        '
-        resources.ApplyResources(Me.ucrChkPoints, "ucrChkPoints")
-        Me.ucrChkPoints.Checked = False
-        Me.ucrChkPoints.Name = "ucrChkPoints"
-        '
-        'contextMenuStripOptions
-        '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemTileOptions, Me.toolStripMenuItemPolygonOptions})
-        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        resources.ApplyResources(Me.contextMenuStripOptions, "contextMenuStripOptions")
-        '
-        'toolStripMenuItemPlotOptions
-        '
-        Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        resources.ApplyResources(Me.toolStripMenuItemPlotOptions, "toolStripMenuItemPlotOptions")
-        '
-        'toolStripMenuItemTileOptions
-        '
-        Me.toolStripMenuItemTileOptions.Name = "toolStripMenuItemTileOptions"
-        resources.ApplyResources(Me.toolStripMenuItemTileOptions, "toolStripMenuItemTileOptions")
-        '
-        'toolStripMenuItemPolygonOptions
-        '
-        Me.toolStripMenuItemPolygonOptions.Name = "toolStripMenuItemPolygonOptions"
-        resources.ApplyResources(Me.toolStripMenuItemPolygonOptions, "toolStripMenuItemPolygonOptions")
-        '
-        'cmdOptions
-        '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
-        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Tag = "Plot Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrChkAddLabels, "ucrChkAddLabels")
+        Me.ucrChkAddLabels.Checked = False
+        Me.ucrChkAddLabels.Name = "ucrChkAddLabels"
         '
         'dlgHeatMapPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputStation)
+        Me.Controls.Add(Me.ucr1stFactorReceiver)
+        Me.Controls.Add(Me.lblFacetBy)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
+        Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.ucrChkPoints)
         Me.Controls.Add(Me.lblGroup)
         Me.Controls.Add(Me.lblFillChoropleth)
-        Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.rdoChoroplethMap)
         Me.Controls.Add(Me.rdoHeatMap)
         Me.Controls.Add(Me.lblPointsOptional)
@@ -430,6 +475,8 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.lblReorderVariableX)
         Me.Controls.Add(Me.ucrReceiverGroup)
         Me.Controls.Add(Me.ucrChkAddLabels)
+        Me.Controls.Add(Me.ucrChkPoints)
+        Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -482,4 +529,9 @@ Partial Class dlgHeatMapPlot
     Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemTileOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemPolygonOptions As ToolStripMenuItem
+    Friend WithEvents ucrInputStation As ucrInputComboBox
+    Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
+    Friend WithEvents lblFacetBy As Label
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegend As ucrCheck
 End Class
