@@ -99,9 +99,13 @@ Public Class dlgScript
         ucrCboCommandPackage.SetItems(GetPackages(), bAddConditions:=True)
         ucrCboCommandPackage.SetDropDownStyleAsNonEditable()
 
+        ucrChkOpenRFile.SetText("Open R File")
 
         ucrPnlCommands.AddRadioButton(rdoCommandPackage)
         ucrPnlCommands.AddRadioButton(rdoCommandObject)
+        ucrPnlCommands.AddRadioButton(rdoGgplotify)
+        ucrPnlCommands.AddRadioButton(rdoChooseFile)
+
 
         '--------------------------------
         'Get example controls
@@ -154,6 +158,7 @@ Public Class dlgScript
         rdoSaveDataFrame.Checked = True
         ucrChkSaveDataFrameSingle.Checked = True
         ucrChkDisplayGraph.Checked = True
+        ucrChkOpenRFile.Checked = False
         ucrDataFrameSaveOutputSelect.Reset()
 
         ' Get controls reset
@@ -353,12 +358,23 @@ Public Class dlgScript
     Private Sub ucrPnlCommands_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCommands.ControlValueChanged
         ucrCboCommandPackage.SetVisible(False)
         ucrInputRemoveObjects.SetVisible(False)
+        ucrInputGgplotify.SetVisible(False)
+        ucrChkOpenRFile.Visible = False
+        'ucrInputChooseFile.SetVisible(False)
         If rdoCommandPackage.Checked Then
             ucrCboCommandPackage.SetVisible(True)
             ucrCboCommandPackage.OnControlValueChanged()
         ElseIf rdoCommandObject.Checked Then
             ucrInputRemoveObjects.SetVisible(True)
             ucrInputRemoveObjects.OnControlValueChanged()
+        ElseIf rdoGgplotify.Checked Then
+            ucrInputGgplotify.SetVisible(True)
+            ucrInputGgplotify.OnControlValueChanged()
+        ElseIf rdoChooseFile.Checked Then
+            ucrChkOpenRFile.Visible = True
+            ucrInputChooseFile.Visible = ucrChkOpenRFile.Checked
+            ucrChkOpenRFile.OnControlValueChanged()
+            ucrInputChooseFile.OnControlValueChanged()
         End If
     End Sub
 
@@ -395,6 +411,71 @@ Public Class dlgScript
         End If
 
         PreviewScript(strScript)
+    End Sub
+
+    Private Sub ucrInputGgplotify_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGgplotify.ControlContentsChanged
+        Dim strScript As String = ""
+
+        If Not ucrInputGgplotify.IsEmpty() Then
+            Dim clsGgglorifyFunction As New RFunction
+            'ucrInputGgplotify.UpdateRCode()
+
+            clsGgglorifyFunction.SetRCommand("as.ggplot")
+            Dim strAssignedScript As String = ""
+            clsGgglorifyFunction.SetAssignTo(ucrInputGgplotify.GetText & "_cols")
+            clsGgglorifyFunction.AddParameter("", "~")
+            clsGgglorifyFunction.ToScript(strScript:=strAssignedScript)
+
+            Dim closingBracketIndex As Integer = ucrInputGgplotify.Text.LastIndexOf(")")
+
+            If closingBracketIndex <> -1 Then
+                ' Set cursor position before the closing bracket
+                ucrInputGgplotify.txtInput.SelectionStart = closingBracketIndex
+                ' Optional: You can also set the focus to the TextBox
+                ucrInputGgplotify.Focus()
+            End If
+            strScript = "# Make Graph a ggplot " & Environment.NewLine & strAssignedScript
+
+        End If
+
+
+
+        PreviewScript(strScript)
+    End Sub
+
+    Private Sub ucrChkOpenRFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOpenRFile.ControlValueChanged
+        'Dim strScript As String = ""
+        ''Dim strRdScript As String = ""
+
+        'Dim clsReadRdsFunction As New RFunction
+        'ucrInputChooseFile.SetVisible(False)
+        'If rdoChooseFile.Checked AndAlso Not ucrChkOpenRFile.Checked Then
+        '    Dim clsFileChooseFunction As New RFunction
+
+        '    ucrChkOpenRFile.UpdateRCode()
+        '    rdoChooseFile.Update()
+        '    ucrInputChooseFile.SetVisible(False)
+        '    clsFileChooseFunction.SetRCommand("file.choose")
+        '    Dim strAssignedScript As String = ""
+        '    clsFileChooseFunction.SetAssignTo("filename")
+        '    clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
+        '    strScript = "#Open file interactively" & Environment.NewLine & strAssignedScript
+        'End If
+
+        'PreviewScript(strScript)
+
+        'If ucrChkOpenRFile.Checked Then
+        '    ucrInputChooseFile.SetVisible(True)
+        '    If Not ucrInputChooseFile.IsEmpty Then
+        '        clsReadRdsFunction.SetRCommand("readRDS")
+        '        Dim strRdsAssignedScript As String = ""
+        '        clsReadRdsFunction.SetAssignTo(ucrInputChooseFile.GetText)
+        '        clsReadRdsFunction.ToScript(strScript:=strRdsAssignedScript)
+        '        strRdScript = "#Open R data file interactively" & Environment.NewLine & clsReadRdsFunction.ToScript()
+        '    End If
+        'End If
+        'Dim combinedScript As String = strScript & Environment.NewLine & strRdScript
+        'PreviewScript(combinedScript)
     End Sub
 
     Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboExamplePackages.ControlValueChanged, ucrPnlExample.ControlValueChanged
@@ -514,5 +595,68 @@ Public Class dlgScript
         txtScript.SelectionStart = txtScript.Text.Length
         txtScript.ScrollToCaret()
         txtScript.Refresh()
+    End Sub
+
+    Private Sub ucrInputChooseFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputChooseFile.ControlValueChanged, ucrChkOpenRFile.ControlValueChanged
+        'UpdateRdsFile()
+        UpdateFile()
+    End Sub
+
+    Private Sub rdoChooseFile_CheckedChanged(sender As Object, e As EventArgs) Handles rdoChooseFile.CheckedChanged
+        UpdateFile()
+        UpdateRdsFile()
+    End Sub
+
+    Private Sub UpdateFile()
+
+        Dim strScript As String = ""
+
+        Dim clsReadRdsFunction As New RFunction
+        If rdoChooseFile.Checked Then
+            If Not ucrChkOpenRFile.Checked Then
+                'ucrInputChooseFile.Visible = False
+                'If Not ucrChkOpenRFile.Checked Then
+                Dim clsFileChooseFunction As New RFunction
+                clsFileChooseFunction.SetRCommand("file.choose")
+                Dim strAssignedScript As String = ""
+                clsFileChooseFunction.SetAssignTo("filename")
+                clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
+
+                strScript = "#Open file interactively" & Environment.NewLine & strAssignedScript
+            End If
+        Else
+            UpdateRdsFile()
+        End If
+        PreviewScript(strScript)
+    End Sub
+    Private Sub UpdateRdsFile()
+        Dim strScript As String = ""
+        Dim strRdScript As String = ""
+
+        ucrInputChooseFile.Visible = ucrChkOpenRFile.Checked
+
+        If ucrChkOpenRFile.Checked Then
+            ucrInputChooseFile.Visible = True
+            If Not ucrInputChooseFile.IsEmpty Then
+                'ucrChkOpenRFile.UpdateRCode()
+                ucrInputChooseFile.SetVisible(True)
+                Dim clsFileChooseFunction As New RFunction
+                Dim clsReadRdsFunction As New RFunction
+
+                clsFileChooseFunction.SetRCommand("file.choose")
+                Dim strAssignedScript As String = ""
+                clsFileChooseFunction.SetAssignTo("filename")
+                clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
+                strScript = " " & Environment.NewLine & strAssignedScript
+
+                clsReadRdsFunction.SetRCommand("readRDS")
+                Dim strRdsAssignedScript As String = ""
+                clsReadRdsFunction.SetAssignTo(ucrInputChooseFile.GetText)
+                clsReadRdsFunction.ToScript(strScript:=strRdsAssignedScript)
+                strRdScript = "#Open R data file interactively" & Environment.NewLine & strRdsAssignedScript
+            End If
+        End If
+        Dim combinedScript As String = strScript & Environment.NewLine & strRdScript
+        PreviewScript(combinedScript)
     End Sub
 End Class
