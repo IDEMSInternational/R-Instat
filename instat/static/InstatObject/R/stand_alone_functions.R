@@ -2556,7 +2556,9 @@ is.containValueLabel <- function(x){
 
 is.containPartialValueLabel <- function(x) {
   if(is.containValueLabel(x)) {
-    return(!all(x[!is.na(x)] %in% attr(x, labels_label)))
+    levelCounts <- table(x)
+    return(!all(x[!is.na(x)] %in% attr(x, labels_label)) &&
+             sum(levelCounts == 0) == 0)
   }
   else{return(FALSE)}
 }
@@ -3005,4 +3007,44 @@ getExample <- function (topic, package = NULL, lib.loc = NULL, character.only = 
     cat(example_text)
   }
   return(example_text)
+}
+
+WB_evaporation <- function(water_balance, frac, capacity, evaporation_value, rain){
+  if (water_balance >= frac*capacity){
+    evaporation <- evaporation_value
+  } else {
+    if (rain == 0){
+      evaporation <- evaporation_value * ((water_balance)/(frac*capacity))
+    } else {
+      if (water_balance < frac*capacity){
+        if (rain > evaporation_value){
+          evaporation <- evaporation_value
+        } else {
+          evaporation <- evaporation_value * ((water_balance)/(frac*capacity))
+          evaporation <- evaporation + ((evaporation_value - evaporation)*(rain/evaporation_value))
+        }
+      } else {
+        evaporation <- evaporation_value
+        }
+    }
+  }
+  return(evaporation)
+}
+
+write_weather_data <- function(year, month, day, rain, mn_tmp, mx_tmp, missing_code, output_file) {
+  # Create a data frame with the provided inputs
+  weather_data <- data.frame(year = year,
+                             month = month,
+                             day = day,
+                             rain = rain,
+                             mn_tmp = mn_tmp,
+                             mx_tmp = mx_tmp)
+  
+  # Replace missing values with the specified code
+  weather_data[is.na(weather_data)] <- missing_code
+  
+  # Write the data frame to a text file
+  write.table(weather_data, file = output_file, sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+  
+  cat("Weather data has been written to", output_file, "\n")
 }
