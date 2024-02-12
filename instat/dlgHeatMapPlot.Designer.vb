@@ -45,8 +45,6 @@ Partial Class dlgHeatMapPlot
         Me.lblLabelPosition = New System.Windows.Forms.Label()
         Me.lblLabelColour = New System.Windows.Forms.Label()
         Me.lblLabelSize = New System.Windows.Forms.Label()
-        Me.lblPointsOptional = New System.Windows.Forms.Label()
-        Me.lblPointsSize = New System.Windows.Forms.Label()
         Me.lblReorderVariableX = New System.Windows.Forms.Label()
         Me.lblReorderValue = New System.Windows.Forms.Label()
         Me.rdoChoroplethMap = New System.Windows.Forms.RadioButton()
@@ -66,8 +64,6 @@ Partial Class dlgHeatMapPlot
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
         Me.cmdOptions = New instat.ucrSplitButton()
-        Me.ucrReceiverPointsHeatMap = New instat.ucrReceiverSingle()
-        Me.ucrNudShapeHeatMap = New instat.ucrNud()
         Me.ucrChkColourPalette = New instat.ucrCheck()
         Me.ucrInputColourPalette = New instat.ucrInputComboBox()
         Me.ucrReceiverFill = New instat.ucrReceiverSingle()
@@ -124,17 +120,6 @@ Partial Class dlgHeatMapPlot
         '
         resources.ApplyResources(Me.lblLabelSize, "lblLabelSize")
         Me.lblLabelSize.Name = "lblLabelSize"
-        '
-        'lblPointsOptional
-        '
-        resources.ApplyResources(Me.lblPointsOptional, "lblPointsOptional")
-        Me.lblPointsOptional.Name = "lblPointsOptional"
-        Me.lblPointsOptional.Tag = "Points_Optional"
-        '
-        'lblPointsSize
-        '
-        resources.ApplyResources(Me.lblPointsSize, "lblPointsSize")
-        Me.lblPointsSize.Name = "lblPointsSize"
         '
         'lblReorderVariableX
         '
@@ -262,25 +247,6 @@ Partial Class dlgHeatMapPlot
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.Tag = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverPointsHeatMap
-        '
-        resources.ApplyResources(Me.ucrReceiverPointsHeatMap, "ucrReceiverPointsHeatMap")
-        Me.ucrReceiverPointsHeatMap.frmParent = Me
-        Me.ucrReceiverPointsHeatMap.Name = "ucrReceiverPointsHeatMap"
-        Me.ucrReceiverPointsHeatMap.Selector = Nothing
-        Me.ucrReceiverPointsHeatMap.strNcFilePath = ""
-        Me.ucrReceiverPointsHeatMap.ucrSelector = Nothing
-        '
-        'ucrNudShapeHeatMap
-        '
-        resources.ApplyResources(Me.ucrNudShapeHeatMap, "ucrNudShapeHeatMap")
-        Me.ucrNudShapeHeatMap.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShapeHeatMap.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudShapeHeatMap.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudShapeHeatMap.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShapeHeatMap.Name = "ucrNudShapeHeatMap"
-        Me.ucrNudShapeHeatMap.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkColourPalette
         '
@@ -502,10 +468,6 @@ Partial Class dlgHeatMapPlot
         Me.Controls.Add(Me.lblFillChoropleth)
         Me.Controls.Add(Me.rdoChoroplethMap)
         Me.Controls.Add(Me.rdoHeatMap)
-        Me.Controls.Add(Me.lblPointsOptional)
-        Me.Controls.Add(Me.lblPointsSize)
-        Me.Controls.Add(Me.ucrReceiverPointsHeatMap)
-        Me.Controls.Add(Me.ucrNudShapeHeatMap)
         Me.Controls.Add(Me.ucrChkColourPalette)
         Me.Controls.Add(Me.ucrInputColourPalette)
         Me.Controls.Add(Me.lblFill)
@@ -560,10 +522,6 @@ Partial Class dlgHeatMapPlot
     Friend WithEvents lblLabelSize As Label
     Friend WithEvents ucrInputColourPalette As ucrInputComboBox
     Friend WithEvents ucrChkColourPalette As ucrCheck
-    Friend WithEvents lblPointsOptional As Label
-    Friend WithEvents lblPointsSize As Label
-    Friend WithEvents ucrReceiverPointsHeatMap As ucrReceiverSingle
-    Friend WithEvents ucrNudShapeHeatMap As ucrNud
     Friend WithEvents lblReorderVariableX As Label
     Friend WithEvents ucrInputReorderVariableX As ucrInputComboBox
     Friend WithEvents ucrInputReorderValue As ucrInputComboBox

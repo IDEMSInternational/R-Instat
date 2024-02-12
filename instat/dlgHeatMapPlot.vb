@@ -629,7 +629,7 @@ Public Class dlgHeatMapPlot
         End If
     End Sub
 
-    Private Sub ucrReceiverPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPointsHeatMap.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+    Private Sub ucrReceiverPoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles  ucrPnlOptions.ControlValueChanged
         If bRCodeSet Then
             clsBaseOperator.RemoveParameterByName("heatmap_geom_point")
             MakeNudVisible()
