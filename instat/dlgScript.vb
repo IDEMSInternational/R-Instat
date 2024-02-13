@@ -592,7 +592,6 @@ Public Class dlgScript
                 strScript &= strRdScript
             End If
         End If
-
         PreviewScript(strScript)
     End Sub
 
