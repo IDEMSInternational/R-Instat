@@ -52,6 +52,7 @@ Partial Class dlgScript
         Me.ucrPnlGetData = New instat.UcrPanel()
         Me.ucrSelectorGetObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbPageCommand = New System.Windows.Forms.TabPage()
+        Me.lblGraphObject = New System.Windows.Forms.Label()
         Me.ucrChkOpenRFile = New instat.ucrCheck()
         Me.ucrInputChooseFile = New instat.ucrInputTextBox()
         Me.rdoChooseFile = New System.Windows.Forms.RadioButton()
@@ -451,6 +452,7 @@ Partial Class dlgScript
         '
         'tbPageCommand
         '
+        Me.tbPageCommand.Controls.Add(Me.lblGraphObject)
         Me.tbPageCommand.Controls.Add(Me.ucrChkOpenRFile)
         Me.tbPageCommand.Controls.Add(Me.ucrInputChooseFile)
         Me.tbPageCommand.Controls.Add(Me.rdoChooseFile)
@@ -467,6 +469,15 @@ Partial Class dlgScript
         Me.tbPageCommand.TabIndex = 3
         Me.tbPageCommand.Text = "Commands"
         Me.tbPageCommand.UseVisualStyleBackColor = True
+        '
+        'lblGraphObject
+        '
+        Me.lblGraphObject.AutoSize = True
+        Me.lblGraphObject.Location = New System.Drawing.Point(157, 109)
+        Me.lblGraphObject.Name = "lblGraphObject"
+        Me.lblGraphObject.Size = New System.Drawing.Size(73, 13)
+        Me.lblGraphObject.TabIndex = 54
+        Me.lblGraphObject.Text = "Graph Object:"
         '
         'ucrChkOpenRFile
         '
@@ -507,7 +518,7 @@ Partial Class dlgScript
         Me.ucrInputGgplotify.AutoSize = True
         Me.ucrInputGgplotify.IsMultiline = False
         Me.ucrInputGgplotify.IsReadOnly = False
-        Me.ucrInputGgplotify.Location = New System.Drawing.Point(156, 106)
+        Me.ucrInputGgplotify.Location = New System.Drawing.Point(234, 105)
         Me.ucrInputGgplotify.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputGgplotify.Name = "ucrInputGgplotify"
         Me.ucrInputGgplotify.Size = New System.Drawing.Size(145, 21)
@@ -516,7 +527,7 @@ Partial Class dlgScript
         'rdoGgplotify
         '
         Me.rdoGgplotify.AutoSize = True
-        Me.rdoGgplotify.Location = New System.Drawing.Point(25, 110)
+        Me.rdoGgplotify.Location = New System.Drawing.Point(25, 106)
         Me.rdoGgplotify.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoGgplotify.Name = "rdoGgplotify"
         Me.rdoGgplotify.Size = New System.Drawing.Size(69, 17)
@@ -799,4 +810,5 @@ Partial Class dlgScript
     Friend WithEvents ucrChkOpenRFile As ucrCheck
     Friend WithEvents ucrInputChooseFile As ucrInputTextBox
     Friend WithEvents rdoChooseFile As RadioButton
+    Friend WithEvents lblGraphObject As Label
 End Class

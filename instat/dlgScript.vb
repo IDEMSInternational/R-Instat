@@ -101,11 +101,12 @@ Public Class dlgScript
 
         ucrChkOpenRFile.SetText("Open R File")
 
+        ucrInputGgplotify.SetLinkedDisplayControl(lblGraphObject)
+
         ucrPnlCommands.AddRadioButton(rdoCommandPackage)
         ucrPnlCommands.AddRadioButton(rdoCommandObject)
         ucrPnlCommands.AddRadioButton(rdoGgplotify)
         ucrPnlCommands.AddRadioButton(rdoChooseFile)
-
 
         '--------------------------------
         'Get example controls
@@ -418,7 +419,6 @@ Public Class dlgScript
 
         If Not ucrInputGgplotify.IsEmpty() Then
             Dim clsGgglorifyFunction As New RFunction
-            'ucrInputGgplotify.UpdateRCode()
 
             clsGgglorifyFunction.SetRCommand("as.ggplot")
             Dim strAssignedScript As String = ""
@@ -429,45 +429,7 @@ Public Class dlgScript
             strScript = "# Make Graph a ggplot " & Environment.NewLine & strAssignedScript
 
         End If
-
-
-
         PreviewScript(strScript)
-    End Sub
-
-    Private Sub ucrChkOpenRFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOpenRFile.ControlValueChanged
-        'Dim strScript As String = ""
-        ''Dim strRdScript As String = ""
-
-        'Dim clsReadRdsFunction As New RFunction
-        'ucrInputChooseFile.SetVisible(False)
-        'If rdoChooseFile.Checked AndAlso Not ucrChkOpenRFile.Checked Then
-        '    Dim clsFileChooseFunction As New RFunction
-
-        '    ucrChkOpenRFile.UpdateRCode()
-        '    rdoChooseFile.Update()
-        '    ucrInputChooseFile.SetVisible(False)
-        '    clsFileChooseFunction.SetRCommand("file.choose")
-        '    Dim strAssignedScript As String = ""
-        '    clsFileChooseFunction.SetAssignTo("filename")
-        '    clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
-        '    strScript = "#Open file interactively" & Environment.NewLine & strAssignedScript
-        'End If
-
-        'PreviewScript(strScript)
-
-        'If ucrChkOpenRFile.Checked Then
-        '    ucrInputChooseFile.SetVisible(True)
-        '    If Not ucrInputChooseFile.IsEmpty Then
-        '        clsReadRdsFunction.SetRCommand("readRDS")
-        '        Dim strRdsAssignedScript As String = ""
-        '        clsReadRdsFunction.SetAssignTo(ucrInputChooseFile.GetText)
-        '        clsReadRdsFunction.ToScript(strScript:=strRdsAssignedScript)
-        '        strRdScript = "#Open R data file interactively" & Environment.NewLine & clsReadRdsFunction.ToScript()
-        '    End If
-        'End If
-        'Dim combinedScript As String = strScript & Environment.NewLine & strRdScript
-        'PreviewScript(combinedScript)
     End Sub
 
     Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboExamplePackages.ControlValueChanged, ucrPnlExample.ControlValueChanged
@@ -590,69 +552,14 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrInputChooseFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputChooseFile.ControlContentsChanged, ucrChkOpenRFile.ControlContentsChanged
-        'UpdateRdsFile()
         UpdateScript()
         ucrInputChooseFile.Visible = ucrChkOpenRFile.Checked
     End Sub
 
     Private Sub rdoChooseFile_CheckedChanged(sender As Object, e As EventArgs) Handles rdoChooseFile.CheckedChanged
-        'UpdateFile()
-        'UpdateRdsFile()
         UpdateScript()
     End Sub
 
-    'Private Sub UpdateFile()
-
-    '    Dim strScript As String = ""
-
-    '    Dim clsReadRdsFunction As New RFunction
-    '    If rdoChooseFile.Checked Then
-    '        If Not ucrChkOpenRFile.Checked Then
-    '            'ucrInputChooseFile.Visible = False
-    '            'If Not ucrChkOpenRFile.Checked Then
-    '            Dim clsFileChooseFunction As New RFunction
-    '            clsFileChooseFunction.SetRCommand("file.choose")
-    '            Dim strAssignedScript As String = ""
-    '            clsFileChooseFunction.SetAssignTo("filename")
-    '            clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
-
-    '            strScript = "#Open file interactively" & Environment.NewLine & strAssignedScript
-    '        End If
-    '    Else
-    '        UpdateRdsFile()
-    '    End If
-    '    PreviewScript(strScript)
-    'End Sub
-    'Private Sub UpdateRdsFile()
-    '    Dim strScript As String = ""
-    '    Dim strRdScript As String = ""
-
-    '    ucrInputChooseFile.Visible = ucrChkOpenRFile.Checked
-
-    '    If ucrChkOpenRFile.Checked Then
-    '        ucrInputChooseFile.Visible = True
-    '        If Not ucrInputChooseFile.IsEmpty Then
-    '            'ucrChkOpenRFile.UpdateRCode()
-    '            ucrInputChooseFile.SetVisible(True)
-    '            Dim clsFileChooseFunction As New RFunction
-    '            Dim clsReadRdsFunction As New RFunction
-
-    '            clsFileChooseFunction.SetRCommand("file.choose")
-    '            Dim strAssignedScript As String = ""
-    '            clsFileChooseFunction.SetAssignTo("filename")
-    '            clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
-    '            strScript = " " & Environment.NewLine & strAssignedScript
-
-    '            clsReadRdsFunction.SetRCommand("readRDS")
-    '            Dim strRdsAssignedScript As String = ""
-    '            clsReadRdsFunction.SetAssignTo(ucrInputChooseFile.GetText)
-    '            clsReadRdsFunction.ToScript(strScript:=strRdsAssignedScript)
-    '            strRdScript = "#Open R data file interactively" & Environment.NewLine & strRdsAssignedScript
-    '        End If
-    '    End If
-    '    Dim combinedScript As String = strScript & Environment.NewLine & strRdScript
-    '    PreviewScript(combinedScript)
-    'End Sub
     Private Sub UpdateScript()
         Dim strScript As String = ""
         Dim clsFileChooseFunction As New RFunction
@@ -679,7 +586,7 @@ Public Class dlgScript
                 clsReadRdsFunction.SetAssignTo(ucrInputChooseFile.GetText)
                 clsReadRdsFunction.AddParameter("file", "filename", bIncludeArgumentName:=False)
                 clsReadRdsFunction.ToScript(strScript:=strRdsAssignedScript)
-                Dim strRdScript As String = "" & Environment.NewLine & strRdsAssignedScript
+                Dim strRdScript As String = strRdsAssignedScript
 
                 ' Combine scripts if applicable
                 strScript &= strRdScript
