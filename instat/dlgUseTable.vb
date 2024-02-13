@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgUseTable
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -25,10 +26,10 @@ Public Class dlgUseTable
                                        clsFootnoteTitleLocationFunction, clsFootnoteCellBodyFunction,
                                        clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
                                         clsSecondFootnoteCellFunction, clsTabStyleCellTitleFunction,
-                                       clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction,
-                                       clsgtExtraThemesFunction As New RFunction
+                                       clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction, clsGtFunction,
+                                       clsgtExtraThemesFunction, clsGtColsLabelFunction, clsgtAlignColsFunction As New RFunction
 
-    Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator As ROperator
+    Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator, clsColumnRenameOperator As New ROperator
 
     Private Sub dlgUseTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -39,6 +40,7 @@ Public Class dlgUseTable
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetBaseFunction()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
@@ -71,11 +73,9 @@ Public Class dlgUseTable
         'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsLaTex, "as_word")
 
         ucrSaveTable.SetPrefix("use_table")
-        ucrSaveTable.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrTablesSelector.ucrAvailableDataFrames)
         ucrSaveTable.SetCheckBoxText("Save New Table")
         ucrSaveTable.SetIsComboBox()
-        ucrSaveTable.SetAssignToIfUncheckedValue("table")
     End Sub
 
     Private Sub SetDefaults()
@@ -105,6 +105,10 @@ Public Class dlgUseTable
         clsSummaryOperator = New ROperator
         clsJoiningPipeOperator = New ROperator
         clsgtExtraThemesFunction = New RFunction
+        clsColumnRenameOperator = New ROperator
+        clsGtColsLabelFunction = New RFunction
+        clsGtFunction = New RFunction
+        clsgtAlignColsFunction = New RFunction
 
         'rdoAsHTML.Checked = True
         ucrTablesReceiver.SetMeAsReceiver()
@@ -114,9 +118,6 @@ Public Class dlgUseTable
         clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
 
         clsgtExtraThemesFunction.SetPackageName("gtExtras")
-
-        clsJoiningPipeOperator.SetOperation("%>%")
-        clsJoiningPipeOperator.AddParameter("object", clsRFunctionParameter:=clsUseTableFunction, iPosition:=0)
 
         clsSummaryOperator.SetOperation("+")
 
@@ -186,13 +187,29 @@ Public Class dlgUseTable
 
         clsPipeOperator.SetOperation("%>%")
 
+        clsGtFunction.SetPackageName("gt")
+        clsGtFunction.SetRCommand("gt")
+
+        clsJoiningPipeOperator.SetOperation("%>%")
+        clsJoiningPipeOperator.AddParameter("object", clsRFunctionParameter:=clsUseTableFunction, iPosition:=0)
+
+        clsGtColsLabelFunction.SetPackageName("gt")
+        clsGtColsLabelFunction.SetRCommand("cols_label")
+
+        clsgtAlignColsFunction.SetPackageName("gt")
+        clsgtAlignColsFunction.SetRCommand("cols_align")
+        clsgtAlignColsFunction.AddParameter("align", Chr(34) & "auto" & Chr(34), iPosition:=0)
+        clsgtAlignColsFunction.AddParameter("columns", "everything()", iPosition:=1)
+
+        clsColumnRenameOperator.SetOperation("%>%")
+
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrTablesSelector.SetRCode(clsUseTableFunction, bReset)
         ucrTablesReceiver.SetRCode(clsUseTableFunction, bReset)
-        ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
+        ucrSaveTable.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -216,8 +233,54 @@ Public Class dlgUseTable
                                         clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
                                         clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
                                         clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction,
-                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction, bReset:=bReset)
+                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction, clsNewgtAlignColsFunction:=clsgtAlignColsFunction,
+                                        clsNewGtColsLabelFunction:=clsGtColsLabelFunction, dfEditData:=GetSelectedDataFrame, strDataFrameName:=ucrTablesSelector.strCurrentDataFrame,
+                                        bUseTable:=True, bReset:=bReset)
         sdgFormatSummaryTables.ShowDialog()
+        SetBaseFunction()
+    End Sub
+
+    Public Function GetSelectedDataFrame() As CharacterMatrix
+        Dim dfTemp As CharacterMatrix = Nothing
+        Dim expTemp As SymbolicExpression
+        Dim clsDataFrameFunction As New RFunction
+        Dim clsNamesFunction As New RFunction
+
+        clsDataFrameFunction.SetRCommand("as.data.frame")
+        clsDataFrameFunction.AddParameter("data", clsRFunctionParameter:=clsUseTableFunction, bIncludeArgumentName:=False)
+
+        clsNamesFunction.SetRCommand("names")
+        clsNamesFunction.AddParameter("name", clsRFunctionParameter:=clsDataFrameFunction, bIncludeArgumentName:=False)
+
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsNamesFunction.ToScript(), bSilent:=True)
+        If expTemp IsNot Nothing Then
+            dfTemp = expTemp.AsCharacterMatrix
+        End If
+        Return dfTemp
+    End Function
+
+    Private Sub SetBaseFunction()
+        If clsGtColsLabelFunction.ContainsParameter(".list") Then
+            clsJoiningPipeOperator.RemoveAssignTo()
+            clsJoiningPipeOperator.SetAssignTo("format_table")
+            clsColumnRenameOperator.AddParameter("x", clsROperatorParameter:=clsJoiningPipeOperator, iPosition:=0)
+            clsColumnRenameOperator.AddParameter("y", clsRFunctionParameter:=clsGtColsLabelFunction, iPosition:=1)
+            clsColumnRenameOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table_renamed",
+                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                  strRDataFrameNameToAddObjectTo:=ucrTablesSelector.strCurrentDataFrame,
+                                                  strObjectName:="last_table_renamed")
+            ucrBase.clsRsyntax.SetBaseROperator(clsColumnRenameOperator)
+
+        Else
+
+            clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                  strRDataFrameNameToAddObjectTo:=ucrTablesSelector.strCurrentDataFrame,
+                                                  strObjectName:="last_table")
+            ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
+        End If
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTablesReceiver.ControlContentsChanged, ucrSaveTable.ControlContentsChanged

@@ -15,8 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
+Imports unvell.ReoGrid
+Imports unvell.ReoGrid.Events
 
 Public Class sdgFormatSummaryTables
+    Private bReset As Boolean = True
     Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteCellFunction,
         clsFootnoteTitleLocationFunction, clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
         clsFootnoteCellBodyFunction, clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
@@ -24,18 +28,28 @@ Public Class sdgFormatSummaryTables
     'The dummy Function is used by input controls that add the parameter manually,
     'when opening the subdialogue from multiple dialogues
     Private clsDummyFunction As New RFunction
-    Public clsThemesTabOptionsFunction, clsgtExtrasThemesFunction As New RFunction
-    Private clsPipeOperator, clsJoiningOperator As New ROperator
+    Private clsThemesTabOptionsFunction, clsgtExtrasThemesFunction, clsAsListFunction, clsSetNameFunction, clsGtColsLabelFunction, clsgtAlignColsFunction As New RFunction
+    Private clsPipeOperator, clsJoiningOperator, clsRenamingOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
     Private bResetThemes As Boolean = True
+    Private WithEvents grdCurrentWorkSheet As Worksheet
+    Private chrMatrixData As CharacterMatrix
+    Private strDataName As String = ""
+    Private dctRowsNewNameChanged As New Dictionary(Of String, String)
+    Private bUseTable As Boolean = False
+
 
     Private Sub sdgFormatSummaryTables_load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        If bReset Then
+            SetDefaults()
+        End If
+        UpdateGrid()
     End Sub
 
     Public Sub InitialiseControls()
-        Dim dctgtExtraThemes As New Dictionary(Of String, String)
+        Dim dctgtAlignColumns As New Dictionary(Of String, String)
 
         'Themes
         ucrPnlThemesPanel.AddRadioButton(rdoSelectTheme)
@@ -129,8 +143,35 @@ Public Class sdgFormatSummaryTables
         ucrChkAddSourcenote.AddParameterPresentCondition(True, "source_note")
         ucrChkAddSourcenote.AddParameterPresentCondition(False, "source_note", False)
 
+        ucrChkAlignColumns.SetText("Align Columns")
+        ucrChkAlignColumns.AddToLinkedControls(ucrInputAlignColumn, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAlignColumns.AddParameterPresentCondition(True, "align")
+        ucrChkAlignColumns.AddParameterPresentCondition(False, "align", False)
+
+        ucrInputAlignColumn.SetParameter(New RParameter("align", iNewPosition:=0))
+        dctgtAlignColumns.Add("auto", Chr(34) & "auto" & Chr(34))
+        dctgtAlignColumns.Add("left", Chr(34) & "left" & Chr(34))
+        dctgtAlignColumns.Add("center", Chr(34) & "center" & Chr(34))
+        dctgtAlignColumns.Add("right", Chr(34) & "right" & Chr(34))
+        ucrInputAlignColumn.SetItems(dctgtAlignColumns)
+        'ucrInputAlignColumn.SetRDefault("auto")
+
         bControlsInitialised = True
     End Sub
+
+    Private Sub SetDefaults()
+        clsRenamingOperator = New ROperator
+        clsAsListFunction = New RFunction
+        clsSetNameFunction = New RFunction
+
+        clsRenamingOperator.SetOperation("%>%")
+
+        clsAsListFunction.SetRCommand("as.list")
+
+        clsSetNameFunction.SetPackageName("purrr")
+        clsSetNameFunction.SetRCommand("set_names")
+    End Sub
+
 
     Public Sub SetRCode(bReset As Boolean, clsNewTableTitleFunction As RFunction, clsNewTabFootnoteTitleFunction As RFunction, clsNewFootnoteCellFunction As RFunction,
                         clsNewTableSourcenoteFunction As RFunction, clsNewTabStyleFunction As RFunction, clsNewMutableOperator As ROperator,
@@ -138,12 +179,19 @@ Public Class sdgFormatSummaryTables
                         clsNewTabFootnoteSubtitleFunction As RFunction, clsNewFootnoteCellBodyFunction As RFunction, clsNewJoiningOperator As ROperator,
                         clsNewSecondFootnoteCellFunction As RFunction, clsNewTabStyleCellTextFunction As RFunction,
                         clsNewSecondFootnoteCellBodyFunction As RFunction, clsNewTabStylePxFunction As RFunction, clsNewDummyFunction As RFunction,
-                        clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction)
+                        clsNewThemesTabOptionFunction As RFunction, clsNewgtExtraThemesFunction As RFunction,
+                        Optional clsNewgtAlignColsFunction As RFunction = Nothing, Optional clsNewGtColsLabelFunction As RFunction = Nothing,
+                        Optional dfEditData As CharacterMatrix = Nothing, Optional strDataFrameName As String = "", Optional bUseTable As Boolean = False)
 
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         AddRemoveManualTheme()
+        dctRowsNewNameChanged.Clear()
+
+        Me.chrMatrixData = dfEditData
+        Me.strDataName = strDataFrameName
+        Me.bUseTable = bUseTable
 
         bRCodeSet = False
         clsTableTitleFunction = clsNewTableTitleFunction
@@ -164,6 +212,18 @@ Public Class sdgFormatSummaryTables
         clsDummyFunction = clsNewDummyFunction
         clsThemesTabOptionsFunction = clsNewThemesTabOptionFunction
         clsgtExtrasThemesFunction = clsNewgtExtraThemesFunction
+        clsgtAlignColsFunction = clsNewgtAlignColsFunction
+
+        Dim tbPageColumns As TabPage = tbpColumns
+
+        If bUseTable Then
+            clsGtColsLabelFunction = clsNewGtColsLabelFunction
+            If Not tbpFormatOptions.TabPages.Contains(tbPageColumns) Then
+                tbpFormatOptions.TabPages.Add(tbPageColumns)
+            End If
+        ElseIf Not bUseTable Then
+            tbpFormatOptions.TabPages.Remove(tbPageColumns)
+        End If
 
         If bReset Then
             ucrInputSelectThemes.SetText("Dark Theme")
@@ -189,9 +249,47 @@ Public Class sdgFormatSummaryTables
         ucrInputTitleFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrInputSubtitleFootnote.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlThemesPanel.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputAlignColumn.SetRCode(clsgtAlignColsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkAlignColumns.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
     End Sub
+
+    Private Sub UpdateGrid()
+
+        If chrMatrixData Is Nothing AndAlso String.IsNullOrEmpty(Me.strDataName) Then
+            Exit Sub
+        End If
+
+        grdColumnFormat.Worksheets.Clear()
+
+        grdCurrentWorkSheet = grdColumnFormat.CreateWorksheet(Me.strDataName)
+        grdCurrentWorkSheet.ColumnCount = 2
+
+        grdCurrentWorkSheet.ColumnHeaders(0).Text = "Name"
+        grdCurrentWorkSheet.ColumnHeaders(1).Text = "New Name"
+        grdCurrentWorkSheet.SetColumnsWidth(2, 1, 150)
+
+
+
+        grdCurrentWorkSheet.RowCount = chrMatrixData.ItemCount
+        For i As Integer = 0 To chrMatrixData.RowCount - 1
+            grdCurrentWorkSheet.Item(row:=i, col:=0) = chrMatrixData(i, 0)
+            grdCurrentWorkSheet.GetCell(row:=i, col:=0).IsReadOnly = True
+            grdCurrentWorkSheet.Item(row:=i, col:=1) = chrMatrixData(i, 0)
+        Next
+
+        grdCurrentWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdCurrentWorkSheet.Rows, grdCurrentWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
+        grdCurrentWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
+
+        grdColumnFormat.AddWorksheet(grdCurrentWorkSheet)
+        grdColumnFormat.SheetTabNewButtonVisible = False
+        grdColumnFormat.SheetTabWidth = 450
+    End Sub
+
 
     Private Sub ucrChkAddTitleSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddTitleSubtitle.ControlValueChanged
         AddTableTitle()
@@ -452,8 +550,42 @@ Public Class sdgFormatSummaryTables
     End Sub
 
     Private Sub tbpFormatOptions_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles tbpFormatOptions.Selecting
-        If e.TabPageIndex = 1 Or e.TabPageIndex = 2 Or e.TabPageIndex = 3 Then
+        If e.TabPageIndex = 1 Or e.TabPageIndex = 2 Then
             e.Cancel = True
+        End If
+    End Sub
+
+    Private Sub AddChangedNewNameRows(strData As String, strNewData As String)
+        If Not dctRowsNewNameChanged.ContainsKey(strData) Then
+            dctRowsNewNameChanged.Add(strData, strNewData)
+        Else
+            dctRowsNewNameChanged(strData) = strNewData
+        End If
+    End Sub
+
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
+        Dim strData As String = grdCurrentWorkSheet(row:=e.Cell.Row, col:=0).ToString
+        AddChangedNewNameRows(strData, e.NewData)
+        clsAsListFunction.AddParameter("new", frmMain.clsRLink.GetListAsRString(dctRowsNewNameChanged.Values.ToList), bIncludeArgumentName:=False)
+        clsSetNameFunction.AddParameter("old", frmMain.clsRLink.GetListAsRString(dctRowsNewNameChanged.Keys.ToList), bIncludeArgumentName:=False)
+        GetRenamedColumns()
+    End Sub
+
+    Private Sub GetRenamedColumns()
+        If clsAsListFunction.ContainsParameter("new") Then
+            clsRenamingOperator.AddParameter("x", clsRFunctionParameter:=clsAsListFunction, iPosition:=0)
+            clsRenamingOperator.AddParameter("y", clsRFunctionParameter:=clsSetNameFunction, iPosition:=1)
+            clsRenamingOperator.SetAssignTo("col_list")
+
+            clsGtColsLabelFunction.AddParameter(".list", clsROperatorParameter:=clsRenamingOperator, iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrChkAlignColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAlignColumns.ControlValueChanged
+        If ucrChkAlignColumns.Checked Then
+            clsJoiningOperator.AddParameter("align", clsRFunctionParameter:=clsgtAlignColsFunction, iPosition:=7)
+        Else
+            clsJoiningOperator.RemoveParameterByName("align")
         End If
     End Sub
 End Class
