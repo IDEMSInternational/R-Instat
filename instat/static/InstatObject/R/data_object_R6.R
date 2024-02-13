@@ -1406,7 +1406,9 @@ DataSheet$set("public", "sort_dataframe", function(col_names = c(), decreasing =
       i = i + 1
     }
     if(by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
-    self$set_data(dplyr::arrange_(curr_data, .dots = col_names_exp))
+    #self$set_data(dplyr::arrange_(curr_data, .dots = col_names_exp))
+    self$set_data(dplyr::arrange(curr_data, dplyr::across(dplyr::all_of(col_names_exp))))
+
   }
   self$data_changed <- TRUE
 }
@@ -3247,6 +3249,7 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
         }
     }
     grouped_data <- self$get_data_frame(use_current_filter = FALSE) %>% dplyr::group_by_(.dots = col_names_exp)
+    # TODO
     date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(lazyeval::interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("min_date", "max_date")))
     date_lengths <- grouped_data %>% dplyr::summarise(count = n())
     if(!missing(start_date) | !missing(end_date)) {
@@ -3812,7 +3815,9 @@ DataSheet$set("public","generate_rolling_contract_no_winners", function() {
       col_name <- next_default_item(corruption_roll_num_winner_label, self$get_column_names(), include_index = FALSE)
       exp <- lazyeval::interp(~ sum(temp[[authority_id1]] == authority_id2 & temp[[winner_id1]] == winner_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), winner_id1 = winner_id_label, winner_id2 = as.name(winner_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label))
       temp <- self$get_data_frame(use_current_filter = FALSE)
-      temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate_(.dots = setNames(list(exp), col_name))
+      # todo
+      temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate(!!as.name(col_name) := !!rlang::parse_expr(exp)) # or sym(exp)?
+      #temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate_(.dots = setNames(list(exp), col_name))
       self$add_columns_to_data(col_name, temp[[col_name]])
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_roll_num_winner_label)
       self$append_to_variables_metadata(col_name, "label", "12 month rolling contract number of winner for each contract awarded")
@@ -3835,7 +3840,9 @@ DataSheet$set("public","generate_rolling_contract_no_issuer", function() {
       col_name <- next_default_item(corruption_roll_num_issuer_label, self$get_column_names(), include_index = FALSE)
       exp <- lazyeval::interp(~ sum(temp[[authority_id1]] == authority_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label))
       temp <- self$get_data_frame(use_current_filter = FALSE)
-      temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate_(.dots = setNames(list(exp), col_name))
+      # todo
+      temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate(!!as.name(col_name) := !!rlang::parse_expr(exp)) # or sym(exp)?
+      #temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate_(.dots = setNames(list(exp), col_name))
       self$add_columns_to_data(col_name, temp[[col_name]])
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_roll_num_issuer_label)
       self$append_to_variables_metadata(col_name, "label", "12 month rolling contract number of issuer for each contract awarded")
@@ -3869,7 +3876,8 @@ DataSheet$set("public","generate_rolling_contract_value_sum_issuer", function() 
       col_name <- next_default_item(corruption_roll_sum_issuer_label, self$get_column_names(), include_index = FALSE)
       exp <- lazyeval::interp(~ sum(temp[[contract_value]][temp[[authority_id1]] == authority_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365]), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label), contract_value = contract_value_label)
       temp <- self$get_data_frame(use_current_filter = FALSE)
-      temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate_(.dots = setNames(list(exp), col_name))
+      temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate(!!as.name(col_name) := !!rlang::parse_expr(exp)) # or sym(exp)?
+      #temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate_(.dots = setNames(list(exp), col_name))
       self$add_columns_to_data(col_name, temp[[col_name]])
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_roll_sum_issuer_label)
       self$append_to_variables_metadata(col_name, "label", "12 month rolling sum of contract value of issuer")
@@ -3904,7 +3912,8 @@ DataSheet$set("public","generate_rolling_contract_value_sum_winner", function() 
       col_name <- next_default_item(corruption_roll_sum_winner_label, self$get_column_names(), include_index = FALSE)
       exp <- lazyeval::interp(~ sum(temp[[contract_value]][temp[[authority_id1]] == authority_id2 & temp[[winner_id1]] == winner_id2 & temp[[award_date1]] <= award_date2 & temp[[award_date1]] > award_date2 - 365]), authority_id1 = authority_id_label, authority_id2 = as.name(authority_id_label), winner_id1 = winner_id_label, winner_id2 = as.name(winner_id_label), award_date1 = award_date_label, award_date2 = as.name(award_date_label), contract_value = contract_value_label)
       temp <- self$get_data_frame(use_current_filter = FALSE)
-      temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate_(.dots = setNames(list(exp), col_name))
+      temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate(!!as.name(col_name) := !!rlang::parse_expr(exp)) # or sym(exp)?
+      #temp <- temp %>% dplyr::rowwise() %>% dplyr::mutate_(.dots = setNames(list(exp), col_name
       self$add_columns_to_data(col_name, temp[[col_name]])
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_roll_sum_winner_label)
       self$append_to_variables_metadata(col_name, "label", "12 month rolling sum of contract value of winner")
