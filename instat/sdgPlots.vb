@@ -2383,6 +2383,7 @@ Public Class sdgPlots
         urChkSelectTheme.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+
         ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
         ucr2ndFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
 
@@ -2391,11 +2392,11 @@ Public Class sdgPlots
         ucrChkFreeScalesX.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         If bReset Then
             ucrChkFreeScalesY.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+            ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         End If
         ucrNudNumberofRows.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkLabeler.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkDrop.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         'Annnotation
         ucrChkAnnotation.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
