@@ -167,18 +167,19 @@ Public Class ucrReceiverMultiple
         'it's not clear when the receiver will ever have more than one data frame
 
         'reset the header text with the name
-        lstSelectedVariables.Groups(0).Header = ShortenString(lstSelectedVariables.Groups(0).Name, 10)
+        lstSelectedVariables.Groups(0).Header = ShortenString(lstSelectedVariables.Groups(0).Name)
         If lstSelectedVariables.Groups.Count = 1 AndAlso lstSelectedVariables.Items.Count > 0 Then
             lstSelectedVariables.Groups(0).Header = lstSelectedVariables.Groups(0).Header & " (" & lstSelectedVariables.Items.Count & ")"
         End If
     End Sub
 
-    Private Function ShortenString(strText As String, maxLength As Integer) As String
+    Private Function ShortenString(strText As String) As String
+        Dim maxLength As Integer = 10
         If strText.Length <= maxLength Then
             Return strText
         Else
             ' Trim the string to the specified length and add ellipsis
-            Return strText.Substring(0, maxLength - 3) & "..."
+            Return strText.Substring(0, maxLength) & "..."
         End If
     End Function
 
