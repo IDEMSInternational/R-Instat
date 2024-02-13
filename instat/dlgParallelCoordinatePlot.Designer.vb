@@ -40,6 +40,11 @@ Partial Class dlgParallelCoordinatePlot
         Me.toolStripMenuItemParcoordOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ucrChkBoxplots = New instat.ucrCheck()
         Me.ucrChkPoints = New instat.ucrCheck()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
+        Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegend = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -86,7 +91,7 @@ Partial Class dlgParallelCoordinatePlot
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(11, 313)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(11, 351)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(324, 24)
@@ -120,7 +125,7 @@ Partial Class dlgParallelCoordinatePlot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 342)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 380)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 13
@@ -212,12 +217,72 @@ Partial Class dlgParallelCoordinatePlot
         Me.ucrChkPoints.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkPoints.TabIndex = 11
         '
+        'ucrInputStation
+        '
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStation.GetSetSelectedIndex = -1
+        Me.ucrInputStation.IsReadOnly = False
+        Me.ucrInputStation.Location = New System.Drawing.Point(315, 315)
+        Me.ucrInputStation.Name = "ucrInputStation"
+        Me.ucrInputStation.Size = New System.Drawing.Size(101, 21)
+        Me.ucrInputStation.TabIndex = 106
+        '
+        'ucr1stFactorReceiver
+        '
+        Me.ucr1stFactorReceiver.AutoSize = True
+        Me.ucr1stFactorReceiver.frmParent = Me
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(204, 316)
+        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(110, 26)
+        Me.ucr1stFactorReceiver.strNcFilePath = ""
+        Me.ucr1stFactorReceiver.TabIndex = 105
+        Me.ucr1stFactorReceiver.ucrSelector = Nothing
+        '
+        'lblFacetBy
+        '
+        Me.lblFacetBy.AutoSize = True
+        Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFacetBy.Location = New System.Drawing.Point(206, 301)
+        Me.lblFacetBy.Name = "lblFacetBy"
+        Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
+        Me.lblFacetBy.TabIndex = 104
+        Me.lblFacetBy.Tag = ""
+        Me.lblFacetBy.Text = "Facet By:"
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(90, 315)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
+        Me.ucrInputLegendPosition.TabIndex = 108
+        '
+        'ucrChkLegend
+        '
+        Me.ucrChkLegend.AutoSize = True
+        Me.ucrChkLegend.Checked = False
+        Me.ucrChkLegend.Location = New System.Drawing.Point(11, 316)
+        Me.ucrChkLegend.Name = "ucrChkLegend"
+        Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkLegend.TabIndex = 107
+        '
         'dlgParallelCoordinatePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(417, 399)
+        Me.ClientSize = New System.Drawing.Size(417, 436)
+        Me.Controls.Add(Me.ucrInputStation)
+        Me.Controls.Add(Me.ucr1stFactorReceiver)
+        Me.Controls.Add(Me.lblFacetBy)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
+        Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.ucrChkPoints)
         Me.Controls.Add(Me.ucrChkBoxplots)
         Me.Controls.Add(Me.cmdOptions)
@@ -261,4 +326,9 @@ Partial Class dlgParallelCoordinatePlot
     Friend WithEvents toolStripMenuItemParcoordOptions As ToolStripMenuItem
     Friend WithEvents ucrChkPoints As ucrCheck
     Friend WithEvents ucrChkBoxplots As ucrCheck
+    Friend WithEvents ucrInputStation As ucrInputComboBox
+    Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
+    Friend WithEvents lblFacetBy As Label
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegend As ucrCheck
 End Class

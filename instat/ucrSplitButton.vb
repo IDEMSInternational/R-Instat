@@ -232,13 +232,18 @@ Public Class ucrSplitButton
         If mevent.Button = MouseButtons.Right AndAlso ClientRectangle.Contains(mevent.Location) AndAlso Not _bSplitMenuVisible Then
             ShowContextMenuStrip()
         ElseIf _contextSplitMenuStrip Is Nothing OrElse Not _bSplitMenuVisible Then
-            SetButtonDrawState()
-
             If ClientRectangle.Contains(mevent.Location) AndAlso Not _dropDownRectangle.Contains(mevent.Location) Then
-                OnClick(New EventArgs())
+                ' Trigger the Click event
+                OnClick(EventArgs.Empty)
             End If
         End If
+
+        ' Set the button state to Normal regardless of other conditions
+        State = PushButtonState.Normal
+
+        MyBase.OnMouseUp(mevent)
     End Sub
+
 
     Protected Overrides Sub OnPaint(pevent As PaintEventArgs)
         MyBase.OnPaint(pevent)
@@ -585,9 +590,66 @@ Public Class ucrSplitButton
 
         State = PushButtonState.Pressed
 
-        If _contextSplitMenuStrip IsNot Nothing Then
-            _contextSplitMenuStrip.Show(Me, New Point(0, Height), ToolStripDropDownDirection.BelowRight)
+        Dim tmpForm As New Form With {
+            .AutoScaleMode = AutoScaleMode.None,
+            .FormBorderStyle = FormBorderStyle.None,
+            .StartPosition = FormStartPosition.Manual,
+            .ShowInTaskbar = False
+        }
+        Dim panel As New Panel With {
+            .Dock = DockStyle.Fill,
+            .BorderStyle = BorderStyle.None
+        }
+        _contextSplitMenuStrip.TopLevel = False
+        _contextSplitMenuStrip.Dock = DockStyle.Top
+        _contextSplitMenuStrip.ShowImageMargin = False
+
+        AddHandler _contextSplitMenuStrip.ItemClicked, Sub(sender As Object, e As ToolStripItemClickedEventArgs)
+                                                           tmpForm.Close()
+                                                       End Sub
+
+        AddHandler tmpForm.FormClosed, Sub(sender As Object, e As FormClosedEventArgs)
+                                           If panel.Controls.Contains(_contextSplitMenuStrip) Then
+                                               panel.Controls.Remove(_contextSplitMenuStrip)
+                                           End If
+                                       End Sub
+
+        AddHandler tmpForm.LostFocus, Sub(sender As Object, e As EventArgs)
+                                          _bSplitMenuVisible = False
+                                          tmpForm.Close()
+                                      End Sub
+
+        panel.Controls.Add(_contextSplitMenuStrip)
+        ' Set a maximum height for the form
+        Dim maxHeight As Integer = 250
+
+        ' Ensure that the panel fits the preferred size of the context menu without extra space
+        Dim preferredSize As Size = _contextSplitMenuStrip.PreferredSize
+        If preferredSize.Height > maxHeight Then
+            panel.AutoScroll = True
+            preferredSize.Height = maxHeight
+        Else
+            panel.AutoScroll = False
         End If
+
+        If _contextSplitMenuStrip IsNot Nothing Then
+            _contextSplitMenuStrip.Show()
+        End If
+
+        ' Calculate whether to show the form above or below
+        Dim screenRect As Rectangle = Screen.FromControl(Me).WorkingArea
+        Dim showUp As Boolean = PointToScreen(New Point(0, Height + PreferredSize.Height)).Y > screenRect.Bottom
+
+        ' Set the form size and location accordingly
+        tmpForm.Size = New Size(PreferredSize.Width, PreferredSize.Height)
+        If showUp Then
+            tmpForm.Location = PointToScreen(New Point(0, Height - tmpForm.Height))
+        Else
+            tmpForm.Location = PointToScreen(New Point(0, Height))
+        End If
+
+        tmpForm.Controls.Add(panel)
+        tmpForm.Show()
     End Sub
 
     Private Sub SplitMenuStrip_Opening(sender As Object, e As CancelEventArgs)

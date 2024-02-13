@@ -67,9 +67,10 @@ Partial Class dlgBarAndPieChart
         Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemBarchartOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemLollipopOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTextOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemLollipopOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTreemapOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemTreemapTextOptionsOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemWordcloudOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrChkReorderValue = New instat.ucrCheck()
@@ -111,7 +112,11 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkAddLabelsTreemap = New instat.ucrCheck()
         Me.ucrChkBacktoback = New instat.ucrCheck()
         Me.ucrChkIncreaseSize = New instat.ucrCheck()
-        Me.toolStripMenuItemTreemapTextOptionsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
+        Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegend = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -390,7 +395,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBarchartOptions, Me.toolStripMenuItemTextOptions, Me.toolStripMenuItemLollipopOptions, Me.toolStripMenuItemTreemapOptions, Me.toolStripMenuItemTreemapTextOptionsOptions, Me.toolStripMenuItemWordcloudOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(189, 180)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(189, 158)
         '
         'toolStripMenuItemPlotOptions
         '
@@ -404,23 +409,29 @@ Partial Class dlgBarAndPieChart
         Me.toolStripMenuItemBarchartOptions.Size = New System.Drawing.Size(188, 22)
         Me.toolStripMenuItemBarchartOptions.Text = "BarChart Options"
         '
-        'toolStripMenuItemLollipopOptions
-        '
-        Me.toolStripMenuItemLollipopOptions.Name = "toolStripMenuItemLollipopOptions"
-        Me.toolStripMenuItemLollipopOptions.Size = New System.Drawing.Size(188, 22)
-        Me.toolStripMenuItemLollipopOptions.Text = "Lollipop Options"
-        '
         'toolStripMenuItemTextOptions
         '
         Me.toolStripMenuItemTextOptions.Name = "toolStripMenuItemTextOptions"
         Me.toolStripMenuItemTextOptions.Size = New System.Drawing.Size(188, 22)
         Me.toolStripMenuItemTextOptions.Text = "Text Options"
         '
+        'toolStripMenuItemLollipopOptions
+        '
+        Me.toolStripMenuItemLollipopOptions.Name = "toolStripMenuItemLollipopOptions"
+        Me.toolStripMenuItemLollipopOptions.Size = New System.Drawing.Size(188, 22)
+        Me.toolStripMenuItemLollipopOptions.Text = "Lollipop Options"
+        '
         'toolStripMenuItemTreemapOptions
         '
         Me.toolStripMenuItemTreemapOptions.Name = "toolStripMenuItemTreemapOptions"
         Me.toolStripMenuItemTreemapOptions.Size = New System.Drawing.Size(188, 22)
         Me.toolStripMenuItemTreemapOptions.Text = "Treemap Options"
+        '
+        'toolStripMenuItemTreemapTextOptionsOptions
+        '
+        Me.toolStripMenuItemTreemapTextOptionsOptions.Name = "toolStripMenuItemTreemapTextOptionsOptions"
+        Me.toolStripMenuItemTreemapTextOptionsOptions.Size = New System.Drawing.Size(188, 22)
+        Me.toolStripMenuItemTreemapTextOptionsOptions.Text = "Treemap Text Options"
         '
         'toolStripMenuItemWordcloudOptions
         '
@@ -576,7 +587,7 @@ Partial Class dlgBarAndPieChart
         'ucrSaveBar
         '
         Me.ucrSaveBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveBar.Location = New System.Drawing.Point(10, 461)
+        Me.ucrSaveBar.Location = New System.Drawing.Point(10, 512)
         Me.ucrSaveBar.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveBar.Name = "ucrSaveBar"
         Me.ucrSaveBar.Size = New System.Drawing.Size(372, 24)
@@ -611,7 +622,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(7, 491)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 542)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 60
@@ -863,18 +874,72 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkIncreaseSize.Size = New System.Drawing.Size(88, 23)
         Me.ucrChkIncreaseSize.TabIndex = 63
         '
-        'toolStripMenuItemTreemapTextOptionsOptions
+        'ucrInputStation
         '
-        Me.toolStripMenuItemTreemapTextOptionsOptions.Name = "toolStripMenuItemTreemapTextOptionsOptions"
-        Me.toolStripMenuItemTreemapTextOptionsOptions.Size = New System.Drawing.Size(188, 22)
-        Me.toolStripMenuItemTreemapTextOptionsOptions.Text = "Treemap Text Options"
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStation.GetSetSelectedIndex = -1
+        Me.ucrInputStation.IsReadOnly = False
+        Me.ucrInputStation.Location = New System.Drawing.Point(327, 478)
+        Me.ucrInputStation.Name = "ucrInputStation"
+        Me.ucrInputStation.Size = New System.Drawing.Size(86, 21)
+        Me.ucrInputStation.TabIndex = 71
+        '
+        'ucr1stFactorReceiver
+        '
+        Me.ucr1stFactorReceiver.AutoSize = True
+        Me.ucr1stFactorReceiver.frmParent = Me
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(214, 479)
+        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(109, 26)
+        Me.ucr1stFactorReceiver.strNcFilePath = ""
+        Me.ucr1stFactorReceiver.TabIndex = 70
+        Me.ucr1stFactorReceiver.ucrSelector = Nothing
+        '
+        'lblFacetBy
+        '
+        Me.lblFacetBy.AutoSize = True
+        Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFacetBy.Location = New System.Drawing.Point(214, 464)
+        Me.lblFacetBy.Name = "lblFacetBy"
+        Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
+        Me.lblFacetBy.TabIndex = 69
+        Me.lblFacetBy.Tag = ""
+        Me.lblFacetBy.Text = "Facet By:"
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(97, 478)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
+        Me.ucrInputLegendPosition.TabIndex = 73
+        '
+        'ucrChkLegend
+        '
+        Me.ucrChkLegend.AutoSize = True
+        Me.ucrChkLegend.Checked = False
+        Me.ucrChkLegend.Location = New System.Drawing.Point(10, 479)
+        Me.ucrChkLegend.Name = "ucrChkLegend"
+        Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkLegend.TabIndex = 72
         '
         'dlgBarAndPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(415, 547)
+        Me.ClientSize = New System.Drawing.Size(415, 596)
+        Me.Controls.Add(Me.ucrInputStation)
+        Me.Controls.Add(Me.ucr1stFactorReceiver)
+        Me.Controls.Add(Me.lblFacetBy)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
+        Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrChkReorderValue)
         Me.Controls.Add(Me.ucrChkReorderFrequency)
@@ -1024,4 +1089,9 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents cmdOptions As ucrSplitButton
     Friend WithEvents toolStripMenuItemLollipopOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemTreemapTextOptionsOptions As ToolStripMenuItem
+    Friend WithEvents ucrInputStation As ucrInputComboBox
+    Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
+    Friend WithEvents lblFacetBy As Label
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegend As ucrCheck
 End Class

@@ -26,7 +26,6 @@ Public Class ucrReceiverMultiple
         If bFirstLoad Then
             If lstSelectedVariables.Columns.Count = 0 Then
                 lstSelectedVariables.Columns.Add("Selected Data")
-                lstSelectedVariables.Columns(0).Width = lstSelectedVariables.Width - 25
             End If
             'by default multiple receivers will not be autoswitched on selection change
             bAutoSwitchFromReceiver = False
@@ -168,11 +167,20 @@ Public Class ucrReceiverMultiple
         'it's not clear when the receiver will ever have more than one data frame
 
         'reset the header text with the name
-        lstSelectedVariables.Groups(0).Header = lstSelectedVariables.Groups(0).Name
+        lstSelectedVariables.Groups(0).Header = ShortenString(lstSelectedVariables.Groups(0).Name)
         If lstSelectedVariables.Groups.Count = 1 AndAlso lstSelectedVariables.Items.Count > 0 Then
             lstSelectedVariables.Groups(0).Header = lstSelectedVariables.Groups(0).Header & " (" & lstSelectedVariables.Items.Count & ")"
         End If
     End Sub
+
+    Private Function ShortenString(strText As String) As String
+        Dim maxLength As Integer = 10
+        If strText.Length > maxLength Then
+            ' Trim the string to the specified length and add ellipsis
+            Return strText.Substring(0, maxLength) & "..."
+        End If
+        Return strText
+    End Function
 
     Public Overrides Function IsEmpty() As Boolean
         Return lstSelectedVariables.Items.Count = 0
@@ -500,6 +508,12 @@ Public Class ucrReceiverMultiple
         bSingleType = bIsSingleType
         bCategoricalNumeric = bIsCategoricalNumeric
         CheckSingleType()
+    End Sub
+
+    Private Sub lstSelectedVariables_ClientSizeChanged(ByVal sender As Object, ByVal e As EventArgs) Handles lstSelectedVariables.ClientSizeChanged
+        If lstSelectedVariables.Columns.Count > 0 Then
+            lstSelectedVariables.Columns(0).Width = lstSelectedVariables.ClientSize.Width
+        End If
     End Sub
 
     Private Sub ucrReceiverMultiple_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
