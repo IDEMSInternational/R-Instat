@@ -175,12 +175,11 @@ Public Class ucrReceiverMultiple
 
     Private Function ShortenString(strText As String) As String
         Dim maxLength As Integer = 10
-        If strText.Length <= maxLength Then
-            Return strText
-        Else
+        If strText.Length > maxLength Then
             ' Trim the string to the specified length and add ellipsis
             Return strText.Substring(0, maxLength) & "..."
         End If
+        Return strText
     End Function
 
     Public Overrides Function IsEmpty() As Boolean
