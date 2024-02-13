@@ -173,7 +173,7 @@ Public Class ucrReceiverMultiple
         End If
     End Sub
 
-    Function ShortenString(strText As String, maxLength As Integer) As String
+    Private Function ShortenString(strText As String, maxLength As Integer) As String
         If strText.Length <= maxLength Then
             Return strText
         Else
