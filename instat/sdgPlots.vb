@@ -109,6 +109,7 @@ Public Class sdgPlots
     Private dctDivergingPairsContinuous As New Dictionary(Of String, String)
     Private dctQualititivePairsContinuous As New Dictionary(Of String, String)
     Public strAxisType As String
+    Public Fillvariable As Boolean = False
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -2221,7 +2222,7 @@ Public Class sdgPlots
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
                         bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewFacetVariablesOperator As ROperator = Nothing,
                         Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
-                        Optional bNewEnableFill As Boolean = True, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True, Optional strNewAxisType As String = "discrete")
+                        Optional bNewEnableFill As Boolean = True, Optional NewFillvariable As Boolean = False, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True, Optional strNewAxisType As String = "discrete")
         Dim clsTempParam As RParameter
         bRCodeSet = False
 
@@ -2263,6 +2264,8 @@ Public Class sdgPlots
 
         strAxisType = strNewAxisType
         ucrInputAxisType.SetName(strAxisType)
+
+        Fillvariable = NewFillvariable
 
         If Not IsNothing(clsCoordPolarStartOperator) Then
             clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
@@ -2500,7 +2503,9 @@ Public Class sdgPlots
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True, bStrictDiscrete:=IsFactor(True, GetAesParameterArgValue("x"))), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("x"))
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("y"))
 
-        ucrInputAxisType.SetName(GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))))
+        ucrInputAxisType.SetName(GetAxisType(True, bStrictDiscrete:=IsFactor(True, GetAesParameterArgValue("y"))))
+        ucrInputAxisType.SetName(GetVariableType(False, bStrictDiscrete:=Variable(False, GetAesParameterArgValue("fill"))))
+
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab
@@ -2977,6 +2982,34 @@ Public Class sdgPlots
         Return bIsFactor
     End Function
 
+    Private Function Variable(Fillvariable As Boolean, strVariable As String) As Boolean
+        Dim strAes As String
+        strAes = If(Fillvariable, "fill", "y")
+
+        Dim bVariable As Boolean = False
+        If clsGlobalAesFunction IsNot Nothing AndAlso clsGlobalAesFunction.ContainsParameter(strAes) Then
+
+            Dim strCurrDataType As String = ""
+            Dim clsGetDataType As New RFunction
+            Dim expColumnType As SymbolicExpression
+
+            clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+            clsGetDataType.AddParameter("property", "data_type_label")
+            clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+            clsGetDataType.AddParameter("column", Chr(34) & strVariable & Chr(34))
+
+            expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+            If expColumnType?.Type <> Internals.SymbolicExpressionType.Null Then
+                strCurrDataType = If(expColumnType.AsCharacter.Count > 1, Join(expColumnType.AsCharacter.ToArray, ","), expColumnType.AsCharacter(0))
+            End If
+
+            bVariable = If({"factor", "ordered,factor"}.Contains(strCurrDataType), True, False)
+
+        End If
+
+        Return bVariable
+    End Function
+
     Private Sub SetFacetParameters()
         'Depending on the settings on the dialog, this function sets the Facets command, stored within clsRFacetFunction.
         'Then IncludeFacetsParameter() will add the facets command to the ggplot script as a parameter within RSyntax (unless no factor has been for fasceting, as R requires at least one facets argument).
@@ -3196,6 +3229,28 @@ Public Class sdgPlots
 
         If bIsX Then
             strAes = "x"
+        Else
+            strAes = "y"
+        End If
+        If clsGlobalAesFunction IsNot Nothing Then
+            If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) AndAlso Not bStrictDiscrete Then
+                'Run R code to determine type
+                'Temp default to continuous
+                Return "continuous"
+            Else
+                'When aes not present discrete scale function works
+                Return "discrete"
+            End If
+        Else
+            Return "discrete"
+        End If
+    End Function
+
+    Private Function GetVariableType(FillVariable As Boolean, Optional bStrictDiscrete As Boolean = False) As String
+        Dim strAes As String
+
+        If FillVariable Then
+            strAes = "fill"
         Else
             strAes = "y"
         End If

@@ -19,6 +19,7 @@ Public Class dlgHeatMapPlot
     Private bFirstLoad As Boolean = True
     Private bRCodeSet As Boolean = True
     Private bReset As Boolean = True
+    Private Fillvariable As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private bResetRugLayerSubdialog As Boolean = True
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -557,6 +558,7 @@ Public Class dlgHeatMapPlot
              clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
+
     End Sub
 
     Private Sub toolStripMenuItemTileOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTileOptions.Click, toolStripMenuItemPolygonOptions.Click
