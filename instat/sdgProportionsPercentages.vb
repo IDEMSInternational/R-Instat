@@ -49,7 +49,6 @@ Public Class sdgProportionsPercentages
 
         ucrChkProportionsPercentages.SetParameter(New RParameter("percentage_type"))
         ucrChkProportionsPercentages.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
-        ucrChkProportionsPercentages.SetRDefault(Chr(34) & "none" & Chr(34))
         ucrChkProportionsPercentages.SetText("Calculate Proportions or Percentages")
 
         ucrPnlBY.AddToLinkedControls({ucrReceiverByFactor, ucrChkDisplayAsDecimal}, objValues:={rdoByFactors}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -70,6 +69,8 @@ Public Class sdgProportionsPercentages
             InitialiseControls()
         End If
         clsDefaultFunction = clsNewDefaultFunction
+        clsDefaultFunction.AddParameter("percentage_type", Chr(34) & "factors" & Chr(34))
+
         SetRCode(Me, clsDefaultFunction, bReset)
     End Sub
 
