@@ -257,8 +257,21 @@ Public Class dlgHistogram
         If rdoHistogram.Checked Then
             If ucrChkDisplayAsDotPlot.Checked Then
                 clsRgeomPlotFunction.SetRCommand("geom_dotplot")
+                clsRgeomPlotFunction.RemoveParameterByName("mapping")
+                If Not ucrFactorReceiver.IsEmpty Then
+                    clsRgeomPlotFunction.AddParameter("binpositions", Chr(34) & "all" & Chr(34), iPosition:=0)
+                    clsRgeomPlotFunction.AddParameter("stackgroups", "TRUE", iPosition:=1)
+                Else
+                    clsRgeomPlotFunction.RemoveParameterByName("binpositions")
+                    clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
+                End If
             Else
                 clsRgeomPlotFunction.SetRCommand("geom_histogram")
+                clsRgeomPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsHistAesFunction)
+                If Not ucrFactorReceiver.IsEmpty Then
+                    clsRgeomPlotFunction.RemoveParameterByName("binpositions")
+                    clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
+                End If
             End If
             ucrFactorReceiver.ChangeParameterName("fill")
             If Not ucrSaveHist.bUserTyped Then ucrSaveHist.SetPrefix("histogram")
