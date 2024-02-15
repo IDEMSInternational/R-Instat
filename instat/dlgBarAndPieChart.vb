@@ -949,21 +949,26 @@ Public Class dlgBarAndPieChart
                         clsReorderFunction.AddParameter("X", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
                         clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
                         clsPieAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
+                        clsGeomLollipopAesFunction.AddParameter("colour", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
                     Case strDescending
                         clsReorderFunction.AddParameter("X", "-" & ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
                         clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
                         clsPieAesFunction.AddParameter("x", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
+                        clsGeomLollipopAesFunction.AddParameter("colour", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
                     Case strReverse
                         clsForecatsReverse.AddParameter("f", ucrReceiverX.GetVariableNames(False), iPosition:=0)
                         clsBarAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
                         clsPieAesFunction.AddParameter("x", clsRFunctionParameter:=clsForecatsReverse, iPosition:=0)
+                        clsGeomLollipopAesFunction.AddParameter("f", clsRFunctionParameter:=clsReorderFunction, iPosition:=0)
                     Case strNone
                         clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
                         clsPieAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+                        clsGeomLollipopAesFunction.AddParameter("f", ucrReceiverX.GetVariableNames(False), iPosition:=0)
                 End Select
             Else
                 clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=1)
                 clsPieAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+                clsGeomLollipopAesFunction.AddParameter("f", ucrReceiverX.GetVariableNames(False), iPosition:=1)
             End If
             If ucrChkPolarCoordinates.Checked Then
                 If rdoPie.Checked OrElse rdoDonut.Checked Then
@@ -991,17 +996,21 @@ Public Class dlgBarAndPieChart
                         clsReorderFunctionValue.AddParameter("X", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
                         clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
                         clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
+                        clsGeomLollipopAesFunction.AddParameter("colour", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
                     Case strDescending
                         clsReorderFunctionValue.AddParameter("X", "-" & ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
                         clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
                         clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
+                        clsGeomLollipopAesFunction.AddParameter("colour", clsRFunctionParameter:=clsReorderFunctionValue, iPosition:=2)
                     Case strReverse
                         clsForecatsReverseValue.AddParameter("f", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
                         clsBarAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=2)
                         clsPieAesFunction.AddParameter("fill", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=2)
+                        clsGeomLollipopAesFunction.AddParameter("colour", clsRFunctionParameter:=clsForecatsReverseValue, iPosition:=2)
                     Case strNone
                         clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
                         clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
+                        clsGeomLollipopAesFunction.AddParameter("colour", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
                 End Select
             End If
         End If
@@ -1018,7 +1027,7 @@ Public Class dlgBarAndPieChart
         clsRggplotFunction.RemoveParameterByName("aes")
         clsGeomLollipopAesFunction.RemoveParameterByName("x")
         clsGeomLollipopAesFunction.RemoveParameterByName("y")
-        clsGeomLollipopAesFunction.RemoveParameterByName("fill")
+        clsGeomLollipopAesFunction.RemoveParameterByName("colour")
         If rdoValue.Checked Then
             clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             clsBarAesFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
@@ -1033,7 +1042,7 @@ Public Class dlgBarAndPieChart
             End If
             clsGeomLollipopAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             clsGeomLollipopAesFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
-            clsGeomLollipopAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
+            clsGeomLollipopAesFunction.AddParameter("colour", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
             clsRgeomBarFunction1.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=2)
             clsRgeomBarFunction2.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
             clsRgeomBarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
