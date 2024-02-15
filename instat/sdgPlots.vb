@@ -2503,8 +2503,9 @@ Public Class sdgPlots
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True, bStrictDiscrete:=IsFactor(True, GetAesParameterArgValue("x"))), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("x"))
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("y"))
 
-        ucrInputAxisType.SetName(GetAxisType(True, bStrictDiscrete:=IsFactor(True, GetAesParameterArgValue("y"))))
-        ucrInputAxisType.SetName(GetVariableType(False, bStrictDiscrete:=Variable(False, GetAesParameterArgValue("fill"))))
+        Dim strAes As String = ""
+        strAes = If(NewFillvariable, "fill", "y")
+        ucrInputAxisType.SetName(GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue(strAes))))
 
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
@@ -2956,8 +2957,23 @@ Public Class sdgPlots
 
     Private Function IsFactor(bIsX As Boolean, strVariable As String) As Boolean
         Dim strAes As String
-        strAes = If(bIsX, "x", "y")
-
+        ''strAes = If(bIsX, "x", "y")
+        'If bIsX AndAlso Not bHeatMap Then
+        '    strAes = "x"
+        'ElseIf Not bIsX AndAlso Not bHeatMap Then
+        '    strAes = "y"
+        'Else
+        '    strAes = "fill"
+        'End If
+        If bIsX Then
+            strAes = "x"
+        Else
+            If bHeatMap Then
+                strAes = "fill"
+            Else
+                strAes = "y"
+            End If
+        End If
         Dim bIsFactor As Boolean = False
         If clsGlobalAesFunction IsNot Nothing AndAlso clsGlobalAesFunction.ContainsParameter(strAes) Then
 
@@ -2980,34 +2996,6 @@ Public Class sdgPlots
         End If
 
         Return bIsFactor
-    End Function
-
-    Private Function Variable(Fillvariable As Boolean, strVariable As String) As Boolean
-        Dim strAes As String
-        strAes = If(Fillvariable, "fill", "y")
-
-        Dim bVariable As Boolean = False
-        If clsGlobalAesFunction IsNot Nothing AndAlso clsGlobalAesFunction.ContainsParameter(strAes) Then
-
-            Dim strCurrDataType As String = ""
-            Dim clsGetDataType As New RFunction
-            Dim expColumnType As SymbolicExpression
-
-            clsGetDataType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
-            clsGetDataType.AddParameter("property", "data_type_label")
-            clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
-            clsGetDataType.AddParameter("column", Chr(34) & strVariable & Chr(34))
-
-            expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
-            If expColumnType?.Type <> Internals.SymbolicExpressionType.Null Then
-                strCurrDataType = If(expColumnType.AsCharacter.Count > 1, Join(expColumnType.AsCharacter.ToArray, ","), expColumnType.AsCharacter(0))
-            End If
-
-            bVariable = If({"factor", "ordered,factor"}.Contains(strCurrDataType), True, False)
-
-        End If
-
-        Return bVariable
     End Function
 
     Private Sub SetFacetParameters()
@@ -3224,36 +3212,24 @@ Public Class sdgPlots
         SetFacetParameters()
     End Sub
 
-    Private Function GetAxisType(bIsX As Boolean, Optional bStrictDiscrete As Boolean = False) As String
+    Private Function GetAxisType(bIsX As Boolean, Optional bStrictDiscrete As Boolean = False, Optional bHeatMap As Boolean = False) As String
         Dim strAes As String
-
         If bIsX Then
             strAes = "x"
         Else
-            strAes = "y"
-        End If
-        If clsGlobalAesFunction IsNot Nothing Then
-            If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) AndAlso Not bStrictDiscrete Then
-                'Run R code to determine type
-                'Temp default to continuous
-                Return "continuous"
+            If bHeatMap Then
+                strAes = "fill"
             Else
-                'When aes not present discrete scale function works
-                Return "discrete"
+                strAes = "y"
             End If
-        Else
-            Return "discrete"
         End If
-    End Function
-
-    Private Function GetVariableType(FillVariable As Boolean, Optional bStrictDiscrete As Boolean = False) As String
-        Dim strAes As String
-
-        If FillVariable Then
-            strAes = "fill"
-        Else
-            strAes = "y"
-        End If
+        'If bIsX AndAlso Not bHeatMap Then
+        '    strAes = "x"
+        'ElseIf Not bIsX AndAlso Not bHeatMap Then
+        '    strAes = "y"
+        'Else
+        '    strAes = "fill"
+        'End If
         If clsGlobalAesFunction IsNot Nothing Then
             If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) AndAlso Not bStrictDiscrete Then
                 'Run R code to determine type
