@@ -60,7 +60,6 @@ Partial Class dlgBoxplot
         Me.ucrNudTransparency = New instat.ucrNud()
         Me.ucrNudJitter = New instat.ucrNud()
         Me.ucrChkAddPoints = New instat.ucrCheck()
-        Me.ucrChkSwapParameters = New instat.ucrCheck()
         Me.ucrSaveBoxplot = New instat.ucrSave()
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrChkVarWidth = New instat.ucrCheck()
@@ -75,6 +74,8 @@ Partial Class dlgBoxplot
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
+        Me.ucrChkWidth = New instat.ucrCheck()
+        Me.ucrInputWidth = New instat.ucrInputTextBox()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -84,10 +85,10 @@ Partial Class dlgBoxplot
         Me.lblByFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblByFactors.Location = New System.Drawing.Point(272, 205)
         Me.lblByFactors.Name = "lblByFactors"
-        Me.lblByFactors.Size = New System.Drawing.Size(88, 13)
+        Me.lblByFactors.Size = New System.Drawing.Size(83, 13)
         Me.lblByFactors.TabIndex = 6
         Me.lblByFactors.Tag = "By_Factor:"
-        Me.lblByFactors.Text = "Factor (Optional):"
+        Me.lblByFactors.Text = "Factor (Usually):"
         '
         'lblBySecondFactor
         '
@@ -221,7 +222,7 @@ Partial Class dlgBoxplot
         Me.ucrInputSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSummaries.GetSetSelectedIndex = -1
         Me.ucrInputSummaries.IsReadOnly = False
-        Me.ucrInputSummaries.Location = New System.Drawing.Point(130, 327)
+        Me.ucrInputSummaries.Location = New System.Drawing.Point(130, 293)
         Me.ucrInputSummaries.Name = "ucrInputSummaries"
         Me.ucrInputSummaries.Size = New System.Drawing.Size(81, 21)
         Me.ucrInputSummaries.TabIndex = 16
@@ -252,7 +253,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrChkGrouptoConnect.AutoSize = True
         Me.ucrChkGrouptoConnect.Checked = False
-        Me.ucrChkGrouptoConnect.Location = New System.Drawing.Point(10, 328)
+        Me.ucrChkGrouptoConnect.Location = New System.Drawing.Point(10, 294)
         Me.ucrChkGrouptoConnect.Name = "ucrChkGrouptoConnect"
         Me.ucrChkGrouptoConnect.Size = New System.Drawing.Size(144, 23)
         Me.ucrChkGrouptoConnect.TabIndex = 15
@@ -292,16 +293,6 @@ Partial Class dlgBoxplot
         Me.ucrChkAddPoints.Size = New System.Drawing.Size(115, 23)
         Me.ucrChkAddPoints.TabIndex = 17
         '
-        'ucrChkSwapParameters
-        '
-        Me.ucrChkSwapParameters.AutoSize = True
-        Me.ucrChkSwapParameters.Checked = False
-        Me.ucrChkSwapParameters.Enabled = False
-        Me.ucrChkSwapParameters.Location = New System.Drawing.Point(275, 290)
-        Me.ucrChkSwapParameters.Name = "ucrChkSwapParameters"
-        Me.ucrChkSwapParameters.Size = New System.Drawing.Size(145, 23)
-        Me.ucrChkSwapParameters.TabIndex = 10
-        '
         'ucrSaveBoxplot
         '
         Me.ucrSaveBoxplot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -315,7 +306,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrChkHorizontalBoxplot.AutoSize = True
         Me.ucrChkHorizontalBoxplot.Checked = False
-        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 300)
+        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 266)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
         Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(238, 23)
         Me.ucrChkHorizontalBoxplot.TabIndex = 14
@@ -324,9 +315,9 @@ Partial Class dlgBoxplot
         '
         Me.ucrChkVarWidth.AutoSize = True
         Me.ucrChkVarWidth.Checked = False
-        Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 272)
+        Me.ucrChkVarWidth.Location = New System.Drawing.Point(275, 290)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
-        Me.ucrChkVarWidth.Size = New System.Drawing.Size(238, 23)
+        Me.ucrChkVarWidth.Size = New System.Drawing.Size(146, 23)
         Me.ucrChkVarWidth.TabIndex = 13
         '
         'ucrVariablesAsFactorForBoxplot
@@ -452,12 +443,34 @@ Partial Class dlgBoxplot
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 27
         '
+        'ucrChkWidth
+        '
+        Me.ucrChkWidth.AutoSize = True
+        Me.ucrChkWidth.Checked = False
+        Me.ucrChkWidth.Location = New System.Drawing.Point(10, 321)
+        Me.ucrChkWidth.Name = "ucrChkWidth"
+        Me.ucrChkWidth.Size = New System.Drawing.Size(144, 23)
+        Me.ucrChkWidth.TabIndex = 29
+        '
+        'ucrInputWidth
+        '
+        Me.ucrInputWidth.AddQuotesIfUnrecognised = True
+        Me.ucrInputWidth.AutoSize = True
+        Me.ucrInputWidth.IsMultiline = False
+        Me.ucrInputWidth.IsReadOnly = False
+        Me.ucrInputWidth.Location = New System.Drawing.Point(130, 319)
+        Me.ucrInputWidth.Name = "ucrInputWidth"
+        Me.ucrInputWidth.Size = New System.Drawing.Size(83, 21)
+        Me.ucrInputWidth.TabIndex = 30
+        '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(425, 497)
+        Me.Controls.Add(Me.ucrInputWidth)
+        Me.Controls.Add(Me.ucrChkWidth)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucr1stFactorReceiver)
         Me.Controls.Add(Me.lblFacetBy)
@@ -472,7 +485,6 @@ Partial Class dlgBoxplot
         Me.Controls.Add(Me.ucrNudJitter)
         Me.Controls.Add(Me.lblJitter)
         Me.Controls.Add(Me.ucrChkAddPoints)
-        Me.Controls.Add(Me.ucrChkSwapParameters)
         Me.Controls.Add(Me.ucrSaveBoxplot)
         Me.Controls.Add(Me.ucrChkHorizontalBoxplot)
         Me.Controls.Add(Me.ucrChkVarWidth)
@@ -515,7 +527,6 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrChkHorizontalBoxplot As ucrCheck
     Friend WithEvents ucrChkVarWidth As ucrCheck
     Friend WithEvents ucrPnlPlots As UcrPanel
-    Friend WithEvents ucrChkSwapParameters As ucrCheck
     Friend WithEvents ucrNudTransparency As ucrNud
     Friend WithEvents lblTransparency As Label
     Friend WithEvents ucrNudJitter As ucrNud
@@ -537,4 +548,6 @@ Partial Class dlgBoxplot
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
+    Friend WithEvents ucrInputWidth As ucrInputTextBox
+    Friend WithEvents ucrChkWidth As ucrCheck
 End Class

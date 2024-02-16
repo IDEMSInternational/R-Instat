@@ -51,6 +51,7 @@ Public Class dlgBoxplot
     Private clsViolinplotFunction As New RFunction
     Private clsCurrGeomFunction As New RFunction
     Private clsSummaryFunction As New RFunction
+    Private clsCutWitdhFunction As New RFunction
     ' Jitter function that can be added to the boxplot/violin base layer
     Private clsAddedJitterFunc As New RFunction
     Private clsXScaleDateFunction As New RFunction
@@ -128,8 +129,8 @@ Public Class dlgBoxplot
 
         ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
-        ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
-        ucrByFactorsReceiver.strSelectorHeading = "Factors"
+        'ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
+        'ucrByFactorsReceiver.strSelectorHeading = "Factors"
         ucrByFactorsReceiver.SetParameterIsString()
         ucrByFactorsReceiver.bWithQuotes = False
         ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
@@ -221,12 +222,20 @@ Public Class dlgBoxplot
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
+        ucrChkWidth.SetText("Width")
+        ucrChkLegend.AddToLinkedControls({ucrInputWidth}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.25)
+        ucrChkWidth.AddParameterPresentCondition(True, "cut_width")
+        ucrChkWidth.AddParameterPresentCondition(False, "cut_width", False)
+
+        ucrInputWidth.SetParameter(New RParameter("width"))
+        ucrInputWidth.SetValidationTypeAsNumeric()
+
+
         ucrChkGrouptoConnect.SetText("Group to Connect")
         ucrChkGrouptoConnect.AddToLinkedControls(ucrInputSummaries, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
         ucrChkGrouptoConnect.AddParameterPresentCondition(True, strStatSummaryParameterName, True)
         ucrChkGrouptoConnect.AddParameterPresentCondition(False, strStatSummaryParameterName, False)
         'this control exists but diabled for now
-        ucrChkSwapParameters.SetText("swap Parameters")
         DialogueSize()
     End Sub
 
@@ -274,6 +283,10 @@ Public Class dlgBoxplot
         clsBoxplotFunction.SetRCommand("geom_boxplot")
         clsBoxplotFunction.AddParameter("varwidth", "FALSE", iPosition:=0)
         clsBoxplotFunction.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
+
+        clsCutWitdhFunction.SetPackageName("ggplot2")
+        clsCutWitdhFunction.SetRCommand("cut_width")
+        clsCutWitdhFunction.AddParameter("Carat", "carat", bIncludeArgumentName:=False, iPosition:=0)
 
         clsTufteBoxplotFunction.SetPackageName("ggthemes")
         clsTufteBoxplotFunction.SetRCommand("geom_tufteboxplot")
@@ -377,6 +390,7 @@ Public Class dlgBoxplot
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrChkTufte.SetRCode(clsCurrGeomFunction, bReset)
+        ucrInputWidth.SetRCode(clsCutWitdhFunction, bReset)
         If bReset Then
             AutoFacetStation()
         End If
@@ -719,15 +733,11 @@ Public Class dlgBoxplot
         toolStripMenuItemTufteOptions.Enabled = (rdoBoxplotTufte.Checked AndAlso ucrChkTufte.Checked)
     End Sub
 
-    'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver
-    'Private Sub SwapFactors()
-    '    If ucrChkSwapParameters.Checked Then
-    '        ucrByFactorsReceiver.ChangeParameterName("fill")
-    '        ucrSecondFactorReceiver.ChangeParameterName("x")
-    '    End If
-    'End Sub
-
-    'Private Sub ucrChkSwapParameters_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSwapParameters.ControlValueChanged
-    '    SwapFactors()
-    'End Sub
+    Private Sub ucrInputWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputWidth.ControlValueChanged
+        If Not ucrInputWidth.IsEmpty Then
+            clsCutWitdhFunction.AddParameter("width", ucrInputWidth.GetText(), iPosition:=1)
+        Else
+            clsCutWitdhFunction.RemoveParameterByName("width")
+        End If
+    End Sub
 End Class
