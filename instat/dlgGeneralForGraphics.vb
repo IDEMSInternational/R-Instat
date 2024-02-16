@@ -273,7 +273,11 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub SetCalculationHistory()
-        ucrInputAddCode.AddItems({ucrInputAddCode.GetText()})
+        Dim newItem As String = ucrInputAddCode.GetText().Trim()
+
+        If Not String.IsNullOrEmpty(newItem) AndAlso Not ucrInputAddCode.cboInput.Items.Contains(newItem) Then
+            ucrInputAddCode.AddItems({newItem})
+        End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -299,10 +303,6 @@ Public Class dlgGeneralForGraphics
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        SetCalculationHistory()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -802,6 +802,7 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub ucrChkAddCode_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddCode.ControlValueChanged, ucrInputAddCode.ControlValueChanged
+        SetCalculationHistory()
         If ucrChkAddCode.Checked AndAlso Not ucrInputAddCode.IsEmpty Then
             clsAddCodeOperator.AddParameter("code1", ucrInputAddCode.GetText(), bIncludeArgumentName:=False, iPosition:=1)
             clsBaseOperator.AddParameter("newcode", clsROperatorParameter:=clsAddCodeOperator, bIncludeArgumentName:=False)
