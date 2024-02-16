@@ -2505,7 +2505,7 @@ Public Class sdgPlots
 
         Dim strAes As String = ""
         strAes = If(NewFillvariable, "fill", "y")
-        ucrInputAxisType.SetName(GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue(strAes))))
+        ucrInputAxisType.SetName(GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue(strAes), bHeatMap:=NewFillvariable), bHeatMap:=NewFillvariable))
 
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
@@ -2955,16 +2955,8 @@ Public Class sdgPlots
         Return strVariable
     End Function
 
-    Private Function IsFactor(bIsX As Boolean, strVariable As String) As Boolean
+    Private Function IsFactor(bIsX As Boolean, strVariable As String, Optional bHeatMap As Boolean = False) As Boolean
         Dim strAes As String
-        ''strAes = If(bIsX, "x", "y")
-        'If bIsX AndAlso Not bHeatMap Then
-        '    strAes = "x"
-        'ElseIf Not bIsX AndAlso Not bHeatMap Then
-        '    strAes = "y"
-        'Else
-        '    strAes = "fill"
-        'End If
         If bIsX Then
             strAes = "x"
         Else
@@ -2974,6 +2966,7 @@ Public Class sdgPlots
                 strAes = "y"
             End If
         End If
+
         Dim bIsFactor As Boolean = False
         If clsGlobalAesFunction IsNot Nothing AndAlso clsGlobalAesFunction.ContainsParameter(strAes) Then
 
@@ -3214,6 +3207,7 @@ Public Class sdgPlots
 
     Private Function GetAxisType(bIsX As Boolean, Optional bStrictDiscrete As Boolean = False, Optional bHeatMap As Boolean = False) As String
         Dim strAes As String
+
         If bIsX Then
             strAes = "x"
         Else
@@ -3223,13 +3217,6 @@ Public Class sdgPlots
                 strAes = "y"
             End If
         End If
-        'If bIsX AndAlso Not bHeatMap Then
-        '    strAes = "x"
-        'ElseIf Not bIsX AndAlso Not bHeatMap Then
-        '    strAes = "y"
-        'Else
-        '    strAes = "fill"
-        'End If
         If clsGlobalAesFunction IsNot Nothing Then
             If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) AndAlso Not bStrictDiscrete Then
                 'Run R code to determine type
