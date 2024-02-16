@@ -102,11 +102,13 @@ Public Class dlgScript
         ucrChkOpenRFile.SetText("Open R File")
 
         ucrInputGgplotify.SetLinkedDisplayControl(lblGraphObject)
+        ucrInputGraphCommand.SetLinkedDisplayControl(lblGraphCommand)
 
         ucrPnlCommands.AddRadioButton(rdoCommandPackage)
         ucrPnlCommands.AddRadioButton(rdoCommandObject)
         ucrPnlCommands.AddRadioButton(rdoGgplotify)
         ucrPnlCommands.AddRadioButton(rdoChooseFile)
+        ucrPnlCommands.AddRadioButton(rdoViewData)
 
         '--------------------------------
         'Get example controls
@@ -360,8 +362,11 @@ Public Class dlgScript
         ucrCboCommandPackage.SetVisible(False)
         ucrInputRemoveObjects.SetVisible(False)
         ucrInputGgplotify.SetVisible(False)
+        ucrInputGraphCommand.SetVisible(False)
         ucrChkOpenRFile.SetVisible(False)
         ucrInputChooseFile.SetVisible(False)
+        ucrInputViewData.SetVisible(False)
+        rdoChooseFile.Enabled = False
         If rdoCommandPackage.Checked Then
             ucrCboCommandPackage.SetVisible(True)
             ucrCboCommandPackage.OnControlValueChanged()
@@ -371,11 +376,15 @@ Public Class dlgScript
         ElseIf rdoGgplotify.Checked Then
             ucrInputGgplotify.SetVisible(True)
             ucrInputGgplotify.OnControlValueChanged()
+            ucrInputGraphCommand.SetVisible(True)
+            ucrInputGraphCommand.OnControlValueChanged()
         ElseIf rdoChooseFile.Checked Then
             ucrChkOpenRFile.SetVisible(True)
-
             ucrChkOpenRFile.OnControlValueChanged()
             ucrInputChooseFile.OnControlValueChanged()
+        ElseIf rdoViewData.Checked Then
+            ucrInputViewData.SetVisible(True)
+            ucrInputViewData.OnControlValueChanged()
         End If
     End Sub
 
@@ -414,19 +423,40 @@ Public Class dlgScript
         PreviewScript(strScript)
     End Sub
 
-    Private Sub ucrInputGgplotify_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGgplotify.ControlContentsChanged
+    Private Sub ucrInputGgplotify_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGgplotify.ControlContentsChanged, ucrInputGraphCommand.ControlContentsChanged
         Dim strScript As String = ""
 
-        If Not ucrInputGgplotify.IsEmpty() Then
+        If Not ucrInputGgplotify.IsEmpty() AndAlso Not ucrInputGraphCommand.IsEmpty Then
             Dim clsGgglorifyFunction As New RFunction
+            Dim clsPlotFunction As New RFunction
 
+            clsGgglorifyFunction.SetPackageName("ggplotify")
             clsGgglorifyFunction.SetRCommand("as.ggplot")
+
+            clsPlotFunction.SetRCommand("~plot")
+
             Dim strAssignedScript As String = ""
-            clsGgglorifyFunction.SetAssignTo(ucrInputGgplotify.GetText & "_cols")
-            clsGgglorifyFunction.AddParameter("", "~")
+            clsPlotFunction.AddParameter("plot", ucrInputGraphCommand.GetText(), bIncludeArgumentName:=False)
+            clsGgglorifyFunction.SetAssignTo(ucrInputGgplotify.GetText)
+            clsGgglorifyFunction.AddParameter("", clsRFunctionParameter:=clsPlotFunction)
             clsGgglorifyFunction.ToScript(strScript:=strAssignedScript)
 
             strScript = "# Make Graph a ggplot " & Environment.NewLine & strAssignedScript
+
+        End If
+        PreviewScript(strScript)
+    End Sub
+
+    Private Sub ucrInputViewData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputViewData.ControlContentsChanged
+        Dim strScript As String = ""
+
+        If Not ucrInputViewData.IsEmpty Then
+            Dim clsViewDataFunction As New RFunction
+
+            clsViewDataFunction.SetRCommand("View")
+            clsViewDataFunction.AddParameter("view", ucrInputViewData.GetText(), bIncludeArgumentName:=False)
+
+            strScript = "#Show data in the R spreadsheet-type viewer" & Environment.NewLine & clsViewDataFunction.ToScript()
 
         End If
         PreviewScript(strScript)
