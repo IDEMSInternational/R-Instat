@@ -48,7 +48,6 @@ Partial Class dlgColumnStats
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.cmdSummaries = New System.Windows.Forms.Button()
-        Me.cmdProportionsPercentages = New System.Windows.Forms.Button()
         Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
@@ -62,9 +61,10 @@ Partial Class dlgColumnStats
         '
         Me.lblSelectedVariables.AutoSize = True
         Me.lblSelectedVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectedVariables.Location = New System.Drawing.Point(273, 9)
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(410, 14)
+        Me.lblSelectedVariables.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Size = New System.Drawing.Size(125, 13)
+        Me.lblSelectedVariables.Size = New System.Drawing.Size(191, 20)
         Me.lblSelectedVariables.TabIndex = 1
         Me.lblSelectedVariables.Text = "Variable(s) to Summarise:"
         '
@@ -72,9 +72,10 @@ Partial Class dlgColumnStats
         '
         Me.lblSummariseBy.AutoSize = True
         Me.lblSummariseBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSummariseBy.Location = New System.Drawing.Point(272, 176)
+        Me.lblSummariseBy.Location = New System.Drawing.Point(408, 264)
+        Me.lblSummariseBy.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSummariseBy.Name = "lblSummariseBy"
-        Me.lblSummariseBy.Size = New System.Drawing.Size(76, 13)
+        Me.lblSummariseBy.Size = New System.Drawing.Size(115, 20)
         Me.lblSummariseBy.TabIndex = 5
         Me.lblSummariseBy.Text = "Summarise By:"
         '
@@ -86,9 +87,11 @@ Partial Class dlgColumnStats
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
         Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
-        Me.grpOptions.Location = New System.Drawing.Point(10, 196)
+        Me.grpOptions.Location = New System.Drawing.Point(15, 294)
+        Me.grpOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(258, 155)
+        Me.grpOptions.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpOptions.Size = New System.Drawing.Size(387, 232)
         Me.grpOptions.TabIndex = 7
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
@@ -96,9 +99,10 @@ Partial Class dlgColumnStats
         'cmdMissingOptions
         '
         Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(190, 114)
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(285, 174)
+        Me.cmdMissingOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"
-        Me.cmdMissingOptions.Size = New System.Drawing.Size(62, 26)
+        Me.cmdMissingOptions.Size = New System.Drawing.Size(93, 39)
         Me.cmdMissingOptions.TabIndex = 20
         Me.cmdMissingOptions.Tag = "MissingOptions"
         Me.cmdMissingOptions.Text = "Options"
@@ -108,87 +112,83 @@ Partial Class dlgColumnStats
         '
         Me.ucrChkOriginalLevel.AutoSize = True
         Me.ucrChkOriginalLevel.Checked = False
-        Me.ucrChkOriginalLevel.Location = New System.Drawing.Point(25, 42)
+        Me.ucrChkOriginalLevel.Location = New System.Drawing.Point(38, 63)
+        Me.ucrChkOriginalLevel.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkOriginalLevel.Name = "ucrChkOriginalLevel"
-        Me.ucrChkOriginalLevel.Size = New System.Drawing.Size(218, 23)
+        Me.ucrChkOriginalLevel.Size = New System.Drawing.Size(327, 34)
         Me.ucrChkOriginalLevel.TabIndex = 1
         '
         'ucrChkStoreResults
         '
         Me.ucrChkStoreResults.AutoSize = True
         Me.ucrChkStoreResults.Checked = False
-        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
+        Me.ucrChkStoreResults.Location = New System.Drawing.Point(9, 26)
+        Me.ucrChkStoreResults.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(237, 23)
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(356, 51)
         Me.ucrChkStoreResults.TabIndex = 0
         '
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(6, 117)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(9, 176)
+        Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(178, 23)
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(267, 51)
         Me.ucrChkOmitMissing.TabIndex = 4
         '
         'ucrChkPrintOutput
         '
         Me.ucrChkPrintOutput.AutoSize = True
         Me.ucrChkPrintOutput.Checked = False
-        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 67)
+        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(9, 100)
+        Me.ucrChkPrintOutput.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(246, 23)
+        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(369, 34)
         Me.ucrChkPrintOutput.TabIndex = 2
         '
         'ucrChkDropUnusedLevels
         '
         Me.ucrChkDropUnusedLevels.AutoSize = True
         Me.ucrChkDropUnusedLevels.Checked = False
-        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 92)
+        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(9, 138)
+        Me.ucrChkDropUnusedLevels.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
-        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(237, 23)
+        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(356, 34)
         Me.ucrChkDropUnusedLevels.TabIndex = 3
         '
         'cmdSummaries
         '
         Me.cmdSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSummaries.Location = New System.Drawing.Point(274, 302)
+        Me.cmdSummaries.Location = New System.Drawing.Point(411, 453)
+        Me.cmdSummaries.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(134, 23)
+        Me.cmdSummaries.Size = New System.Drawing.Size(201, 34)
         Me.cmdSummaries.TabIndex = 8
         Me.cmdSummaries.Tag = "Summaries"
         Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
-        'cmdProportionsPercentages
-        '
-        Me.cmdProportionsPercentages.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdProportionsPercentages.Location = New System.Drawing.Point(274, 328)
-        Me.cmdProportionsPercentages.Name = "cmdProportionsPercentages"
-        Me.cmdProportionsPercentages.Size = New System.Drawing.Size(134, 23)
-        Me.cmdProportionsPercentages.TabIndex = 9
-        Me.cmdProportionsPercentages.Tag = "Proportions/Percentages..."
-        Me.cmdProportionsPercentages.Text = "Prop. and Percentages..."
-        Me.cmdProportionsPercentages.UseVisualStyleBackColor = True
-        '
         'ucrChkWeights
         '
         Me.ucrChkWeights.AutoSize = True
         Me.ucrChkWeights.Checked = False
-        Me.ucrChkWeights.Location = New System.Drawing.Point(274, 127)
+        Me.ucrChkWeights.Location = New System.Drawing.Point(411, 190)
+        Me.ucrChkWeights.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkWeights.Name = "ucrChkWeights"
-        Me.ucrChkWeights.Size = New System.Drawing.Size(119, 23)
+        Me.ucrChkWeights.Size = New System.Drawing.Size(178, 34)
         Me.ucrChkWeights.TabIndex = 3
         '
         'ucrReceiverWeights
         '
         Me.ucrReceiverWeights.AutoSize = True
         Me.ucrReceiverWeights.frmParent = Me
-        Me.ucrReceiverWeights.Location = New System.Drawing.Point(274, 150)
+        Me.ucrReceiverWeights.Location = New System.Drawing.Point(411, 225)
         Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
-        Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWeights.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverWeights.strNcFilePath = ""
         Me.ucrReceiverWeights.TabIndex = 4
         Me.ucrReceiverWeights.ucrSelector = Nothing
@@ -197,11 +197,11 @@ Partial Class dlgColumnStats
         '
         Me.ucrReceiverByFactor.AutoSize = True
         Me.ucrReceiverByFactor.frmParent = Me
-        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(274, 190)
+        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(411, 285)
         Me.ucrReceiverByFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
         Me.ucrReceiverByFactor.Selector = Nothing
-        Me.ucrReceiverByFactor.Size = New System.Drawing.Size(133, 100)
+        Me.ucrReceiverByFactor.Size = New System.Drawing.Size(200, 150)
         Me.ucrReceiverByFactor.strNcFilePath = ""
         Me.ucrReceiverByFactor.TabIndex = 6
         Me.ucrReceiverByFactor.ucrSelector = Nothing
@@ -210,11 +210,11 @@ Partial Class dlgColumnStats
         '
         Me.ucrReceiverSelectedVariables.AutoSize = True
         Me.ucrReceiverSelectedVariables.frmParent = Me
-        Me.ucrReceiverSelectedVariables.Location = New System.Drawing.Point(274, 24)
+        Me.ucrReceiverSelectedVariables.Location = New System.Drawing.Point(411, 36)
         Me.ucrReceiverSelectedVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSelectedVariables.Name = "ucrReceiverSelectedVariables"
         Me.ucrReceiverSelectedVariables.Selector = Nothing
-        Me.ucrReceiverSelectedVariables.Size = New System.Drawing.Size(133, 100)
+        Me.ucrReceiverSelectedVariables.Size = New System.Drawing.Size(200, 150)
         Me.ucrReceiverSelectedVariables.strNcFilePath = ""
         Me.ucrReceiverSelectedVariables.TabIndex = 2
         Me.ucrReceiverSelectedVariables.ucrSelector = Nothing
@@ -225,30 +225,30 @@ Partial Class dlgColumnStats
         Me.ucrSelectorForColumnStatistics.bDropUnusedFilterLevels = False
         Me.ucrSelectorForColumnStatistics.bShowHiddenColumns = False
         Me.ucrSelectorForColumnStatistics.bUseCurrentFilter = True
-        Me.ucrSelectorForColumnStatistics.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForColumnStatistics.Location = New System.Drawing.Point(15, 15)
         Me.ucrSelectorForColumnStatistics.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForColumnStatistics.Name = "ucrSelectorForColumnStatistics"
-        Me.ucrSelectorForColumnStatistics.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForColumnStatistics.Size = New System.Drawing.Size(320, 274)
         Me.ucrSelectorForColumnStatistics.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(6, 363)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 544)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 10
         '
         'dlgColumnStats
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(416, 419)
+        Me.ClientSize = New System.Drawing.Size(624, 628)
         Me.Controls.Add(Me.ucrChkWeights)
         Me.Controls.Add(Me.ucrReceiverWeights)
-        Me.Controls.Add(Me.cmdProportionsPercentages)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrReceiverByFactor)
@@ -258,6 +258,7 @@ Partial Class dlgColumnStats
         Me.Controls.Add(Me.ucrSelectorForColumnStatistics)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgColumnStats"
@@ -283,7 +284,6 @@ Partial Class dlgColumnStats
     Friend WithEvents ucrChkOmitMissing As ucrCheck
     Friend WithEvents ucrChkPrintOutput As ucrCheck
     Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
-    Friend WithEvents cmdProportionsPercentages As Button
     Friend WithEvents ucrChkOriginalLevel As ucrCheck
     Friend WithEvents ucrChkWeights As ucrCheck
     Friend WithEvents ucrReceiverWeights As ucrReceiverSingle

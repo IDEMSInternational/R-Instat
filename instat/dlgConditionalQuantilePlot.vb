@@ -42,6 +42,7 @@ Public Class dlgConditionalQuantilePlot
         Dim dctLegendPosition As New Dictionary(Of String, String)
         Dim dctStatistics As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.iHelpTopicID = 642
 
         ucrConditionalQuantilePlotSelector.SetParameter(New RParameter("mydata", 0))
         ucrConditionalQuantilePlotSelector.SetParameterIsrfunction()

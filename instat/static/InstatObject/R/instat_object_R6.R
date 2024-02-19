@@ -365,15 +365,15 @@ DataBook$set("public", "get_data_frame", function(data_name, convert_to_characte
 }
 )
 
-DataBook$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) { 
+DataBook$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE, use_column_selection = TRUE) { 
   if(missing(data_name)) {
     retlist <- list()
     for (curr_obj in private$.data_sheets) {
-      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes)
+      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes, use_column_selection = use_column_selection)
     }
     return(retlist)
   }
-  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes))
+  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes, use_column_selection = use_column_selection))
 } 
 )
 
@@ -1921,14 +1921,14 @@ DataBook$set("public", "export_workspace", function(data_names, file, include_gr
   for(temp_name in data_names) {
     e[[temp_name]] <- self$get_data_frame(temp_name, use_current_filter = FALSE)
     if(include_graphs) {
-      graphs <- self$get_graphs(temp_name)
+      graphs <- self$get_objects(data_name = temp_name, object_type_label = "graph")
       graph_names <- names(graphs)
       for(i in seq_along(graphs)) {
         e[[paste(temp_name, graph_names[i], sep = "_")]] <- graphs[[i]]
       }
     }
     if(include_models) {
-      models <- self$get_models(temp_name)
+      models <- self$get_objects(data_name = temp_name, object_type_label = "model")
       model_names <- names(models)
       for(i in seq_along(models)) {
         e[[paste(temp_name, model_names[i], sep = "_")]] <- models[[i]]
