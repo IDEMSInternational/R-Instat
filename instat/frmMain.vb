@@ -2548,6 +2548,10 @@ Public Class frmMain
         dlgWordwrap.ShowDialog()
     End Sub
 
+    Private Sub mnuEditUndo_Click(sender As Object, e As EventArgs) Handles mnuEditUndo.Click
+        dlgRestoreBackup.ShowDialog()
+    End Sub
+
     Private Sub mnuPrepareColumnTextSearch_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSearch.Click
         dlgSearch.ShowDialog()
     End Sub

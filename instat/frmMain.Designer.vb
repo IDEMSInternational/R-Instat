@@ -680,6 +680,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditUndo = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2875,7 +2876,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditCopy, Me.mnuEditPaste, Me.mnuEditPasteNew, Me.mnuEditWordwrap, Me.mnuEditSelectAll})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditCopy, Me.mnuEditPaste, Me.mnuEditPasteNew, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.mnuEditUndo})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(39, 22)
         Me.mnuEdit.Tag = "Edit"
@@ -2885,7 +2886,7 @@ Partial Class frmMain
         '
         Me.mnuEditFind.Name = "mnuEditFind"
         Me.mnuEditFind.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
-        Me.mnuEditFind.Size = New System.Drawing.Size(167, 22)
+        Me.mnuEditFind.Size = New System.Drawing.Size(180, 22)
         Me.mnuEditFind.Tag = "Find"
         Me.mnuEditFind.Text = "Find"
         '
@@ -2893,7 +2894,7 @@ Partial Class frmMain
         '
         Me.mnuEditCopy.Name = "mnuEditCopy"
         Me.mnuEditCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.mnuEditCopy.Size = New System.Drawing.Size(167, 22)
+        Me.mnuEditCopy.Size = New System.Drawing.Size(180, 22)
         Me.mnuEditCopy.Tag = "Copy"
         Me.mnuEditCopy.Text = "Copy"
         '
@@ -2901,27 +2902,27 @@ Partial Class frmMain
         '
         Me.mnuEditPaste.Name = "mnuEditPaste"
         Me.mnuEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.mnuEditPaste.Size = New System.Drawing.Size(167, 22)
+        Me.mnuEditPaste.Size = New System.Drawing.Size(180, 22)
         Me.mnuEditPaste.Tag = "Paste"
         Me.mnuEditPaste.Text = "Paste"
         '
         'mnuEditPasteNew
         '
         Me.mnuEditPasteNew.Name = "mnuEditPasteNew"
-        Me.mnuEditPasteNew.Size = New System.Drawing.Size(167, 22)
+        Me.mnuEditPasteNew.Size = New System.Drawing.Size(180, 22)
         Me.mnuEditPasteNew.Text = "Paste New"
         '
         'mnuEditWordwrap
         '
         Me.mnuEditWordwrap.Name = "mnuEditWordwrap"
-        Me.mnuEditWordwrap.Size = New System.Drawing.Size(167, 22)
+        Me.mnuEditWordwrap.Size = New System.Drawing.Size(180, 22)
         Me.mnuEditWordwrap.Text = "Wordwrap"
         '
         'mnuEditSelectAll
         '
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
         Me.mnuEditSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.mnuEditSelectAll.Size = New System.Drawing.Size(167, 22)
+        Me.mnuEditSelectAll.Size = New System.Drawing.Size(180, 22)
         Me.mnuEditSelectAll.Tag = "Select_All"
         Me.mnuEditSelectAll.Text = "Select All "
         '
@@ -5085,6 +5086,12 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuEditUndo
+        '
+        Me.mnuEditUndo.Name = "mnuEditUndo"
+        Me.mnuEditUndo.Size = New System.Drawing.Size(180, 22)
+        Me.mnuEditUndo.Text = "Undo"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5098,9 +5105,6 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat " + My.Application.Info.Version.Major.ToString + "." +
-                My.Application.Info.Version.Minor.ToString + "." +
-                My.Application.Info.Version.Build.ToString
         Me.Text = "R-Instat .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
@@ -5782,4 +5786,5 @@ Partial Class frmMain
     Friend WithEvents mnuViewSwapDataAndScript As ToolStripMenuItem
     Friend WithEvents mnuClimaticExamineEditDataVisualiseData As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
+    Friend WithEvents mnuEditUndo As ToolStripMenuItem
 End Class

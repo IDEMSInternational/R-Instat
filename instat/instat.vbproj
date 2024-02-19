@@ -269,6 +269,12 @@
     <Compile Include="dlgRandomSplit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRestoreBackup.Designer.vb">
+      <DependentUpon>dlgRestoreBackup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRestoreBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSeasonalGraph.Designer.vb">
       <DependentUpon>dlgSeasonalGraph.vb</DependentUpon>
     </Compile>
@@ -3109,6 +3115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSplit.resx">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRestoreBackup.resx">
+      <DependentUpon>dlgRestoreBackup.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgScript.resx">
       <DependentUpon>dlgScript.vb</DependentUpon>
