@@ -126,6 +126,24 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.tbpColour = New System.Windows.Forms.TabPage()
+        Me.grpfillmanual = New System.Windows.Forms.GroupBox()
+        Me.ucrInputNavaluesManual = New instat.ucrInputTextBox()
+        Me.ucrInputBreackmanual = New instat.ucrInputTextBox()
+        Me.ucrInputLimitsmanual = New instat.ucrInputTextBox()
+        Me.ucrChkaesth = New instat.ucrCheck()
+        Me.ucrChkLimitsManual = New instat.ucrCheck()
+        Me.ucrChkBreacksManual = New instat.ucrCheck()
+        Me.ucrChkNavaluemanual = New instat.ucrCheck()
+        Me.ucrChkValueManual = New instat.ucrCheck()
+        Me.grpmanualColour = New System.Windows.Forms.GroupBox()
+        Me.ucrInputNavaluesManualColor = New instat.ucrInputTextBox()
+        Me.ucrInputBreackmanualcolor = New instat.ucrInputTextBox()
+        Me.ucrInputLimitsmanualcolor = New instat.ucrInputTextBox()
+        Me.ucrChkAesthColor = New instat.ucrCheck()
+        Me.ucrChkLimitsManualColor = New instat.ucrCheck()
+        Me.ucrChkBreacksManualColor = New instat.ucrCheck()
+        Me.ucrChkNavaluemanualColor = New instat.ucrCheck()
+        Me.ucrChkValueManualColor = New instat.ucrCheck()
         Me.grpColourGradient = New System.Windows.Forms.GroupBox()
         Me.ucrColorsHighColour = New instat.ucrColors()
         Me.ucrColourText = New instat.ucrColors()
@@ -631,6 +649,10 @@ Partial Class sdgPlots
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ttCaptionTitle = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputAesth = New instat.ucrInputTextBox()
+        Me.ucrInputAthsColor = New instat.ucrInputTextBox()
+        Me.ucrInputValue = New instat.ucrInputTextBox()
+        Me.ucrInputValueColor = New instat.ucrInputTextBox()
         Me.tbpPlotsOptions.SuspendLayout
         Me.tbpFacet.SuspendLayout
         Me.tbpLayers.SuspendLayout
@@ -643,6 +665,8 @@ Partial Class sdgPlots
         Me.tbpCoordinates.SuspendLayout
         Me.grpPolarCordinates.SuspendLayout
         Me.tbpColour.SuspendLayout
+        Me.grpfillmanual.SuspendLayout
+        Me.grpmanualColour.SuspendLayout
         Me.grpColourGradient.SuspendLayout
         Me.grpFillGradient.SuspendLayout
         Me.grpScalefillw.SuspendLayout
@@ -718,7 +742,7 @@ Partial Class sdgPlots
         Me.tbpFacet.Location = New System.Drawing.Point(4, 22)
         Me.tbpFacet.Name = "tbpFacet"
         Me.tbpFacet.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpFacet.Size = New System.Drawing.Size(971, 487)
+        Me.tbpFacet.Size = New System.Drawing.Size(671, 487)
         Me.tbpFacet.TabIndex = 3
         Me.tbpFacet.Tag = "Facet"
         Me.tbpFacet.Text = "Facets"
@@ -908,7 +932,7 @@ Partial Class sdgPlots
         Me.tbpLayers.Location = New System.Drawing.Point(4, 22)
         Me.tbpLayers.Name = "tbpLayers"
         Me.tbpLayers.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLayers.Size = New System.Drawing.Size(971, 487)
+        Me.tbpLayers.Size = New System.Drawing.Size(671, 487)
         Me.tbpLayers.TabIndex = 4
         Me.tbpLayers.Tag = "Layers"
         Me.tbpLayers.Text = "Layers"
@@ -951,7 +975,7 @@ Partial Class sdgPlots
         Me.tbpTitles.Location = New System.Drawing.Point(4, 22)
         Me.tbpTitles.Name = "tbpTitles"
         Me.tbpTitles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTitles.Size = New System.Drawing.Size(971, 487)
+        Me.tbpTitles.Size = New System.Drawing.Size(671, 487)
         Me.tbpTitles.TabIndex = 2
         Me.tbpTitles.Tag = "Titles"
         Me.tbpTitles.Text = "Titles"
@@ -1295,7 +1319,7 @@ Partial Class sdgPlots
         Me.tbpXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpXAxis.Name = "tbpXAxis"
         Me.tbpXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpXAxis.Size = New System.Drawing.Size(971, 487)
+        Me.tbpXAxis.Size = New System.Drawing.Size(671, 487)
         Me.tbpXAxis.TabIndex = 5
         Me.tbpXAxis.Text = "X-Axis"
         Me.tbpXAxis.UseVisualStyleBackColor = True
@@ -1314,7 +1338,7 @@ Partial Class sdgPlots
         Me.tbpYAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpYAxis.Name = "tbpYAxis"
         Me.tbpYAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpYAxis.Size = New System.Drawing.Size(971, 487)
+        Me.tbpYAxis.Size = New System.Drawing.Size(671, 487)
         Me.tbpYAxis.TabIndex = 6
         Me.tbpYAxis.Text = "Y-Axis"
         Me.tbpYAxis.UseVisualStyleBackColor = True
@@ -1338,7 +1362,7 @@ Partial Class sdgPlots
         Me.tbpTheme.Location = New System.Drawing.Point(4, 22)
         Me.tbpTheme.Name = "tbpTheme"
         Me.tbpTheme.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTheme.Size = New System.Drawing.Size(971, 487)
+        Me.tbpTheme.Size = New System.Drawing.Size(671, 487)
         Me.tbpTheme.TabIndex = 1
         Me.tbpTheme.Tag = "Theme"
         Me.tbpTheme.Text = "Themes"
@@ -1552,7 +1576,7 @@ Partial Class sdgPlots
         Me.tbpCoordinates.Location = New System.Drawing.Point(4, 22)
         Me.tbpCoordinates.Name = "tbpCoordinates"
         Me.tbpCoordinates.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpCoordinates.Size = New System.Drawing.Size(971, 487)
+        Me.tbpCoordinates.Size = New System.Drawing.Size(671, 487)
         Me.tbpCoordinates.TabIndex = 7
         Me.tbpCoordinates.Text = "Coordinates"
         Me.tbpCoordinates.UseVisualStyleBackColor = True
@@ -1664,6 +1688,8 @@ Partial Class sdgPlots
         '
         'tbpColour
         '
+        Me.tbpColour.Controls.Add(Me.grpfillmanual)
+        Me.tbpColour.Controls.Add(Me.grpmanualColour)
         Me.tbpColour.Controls.Add(Me.grpColourGradient)
         Me.tbpColour.Controls.Add(Me.grpFillGradient)
         Me.tbpColour.Controls.Add(Me.rdoGradient)
@@ -1731,6 +1757,200 @@ Partial Class sdgPlots
         Me.tbpColour.TabIndex = 8
         Me.tbpColour.Text = "Colour"
         Me.tbpColour.UseVisualStyleBackColor = True
+        '
+        'grpfillmanual
+        '
+        Me.grpfillmanual.Controls.Add(Me.ucrInputValue)
+        Me.grpfillmanual.Controls.Add(Me.ucrInputAesth)
+        Me.grpfillmanual.Controls.Add(Me.ucrInputNavaluesManual)
+        Me.grpfillmanual.Controls.Add(Me.ucrInputBreackmanual)
+        Me.grpfillmanual.Controls.Add(Me.ucrInputLimitsmanual)
+        Me.grpfillmanual.Controls.Add(Me.ucrChkaesth)
+        Me.grpfillmanual.Controls.Add(Me.ucrChkLimitsManual)
+        Me.grpfillmanual.Controls.Add(Me.ucrChkBreacksManual)
+        Me.grpfillmanual.Controls.Add(Me.ucrChkNavaluemanual)
+        Me.grpfillmanual.Controls.Add(Me.ucrChkValueManual)
+        Me.grpfillmanual.Location = New System.Drawing.Point(17, 214)
+        Me.grpfillmanual.Name = "grpfillmanual"
+        Me.grpfillmanual.Size = New System.Drawing.Size(444, 165)
+        Me.grpfillmanual.TabIndex = 333
+        Me.grpfillmanual.TabStop = False
+        Me.grpfillmanual.Text = "Fill Scale"
+        '
+        'ucrInputNavaluesManual
+        '
+        Me.ucrInputNavaluesManual.AddQuotesIfUnrecognised = True
+        Me.ucrInputNavaluesManual.AutoSize = True
+        Me.ucrInputNavaluesManual.IsMultiline = False
+        Me.ucrInputNavaluesManual.IsReadOnly = False
+        Me.ucrInputNavaluesManual.Location = New System.Drawing.Point(250, 129)
+        Me.ucrInputNavaluesManual.Name = "ucrInputNavaluesManual"
+        Me.ucrInputNavaluesManual.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputNavaluesManual.TabIndex = 9
+        '
+        'ucrInputBreackmanual
+        '
+        Me.ucrInputBreackmanual.AddQuotesIfUnrecognised = True
+        Me.ucrInputBreackmanual.AutoSize = True
+        Me.ucrInputBreackmanual.IsMultiline = False
+        Me.ucrInputBreackmanual.IsReadOnly = False
+        Me.ucrInputBreackmanual.Location = New System.Drawing.Point(250, 101)
+        Me.ucrInputBreackmanual.Name = "ucrInputBreackmanual"
+        Me.ucrInputBreackmanual.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputBreackmanual.TabIndex = 8
+        '
+        'ucrInputLimitsmanual
+        '
+        Me.ucrInputLimitsmanual.AddQuotesIfUnrecognised = True
+        Me.ucrInputLimitsmanual.AutoSize = True
+        Me.ucrInputLimitsmanual.IsMultiline = False
+        Me.ucrInputLimitsmanual.IsReadOnly = False
+        Me.ucrInputLimitsmanual.Location = New System.Drawing.Point(250, 72)
+        Me.ucrInputLimitsmanual.Name = "ucrInputLimitsmanual"
+        Me.ucrInputLimitsmanual.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputLimitsmanual.TabIndex = 7
+        '
+        'ucrChkaesth
+        '
+        Me.ucrChkaesth.AutoSize = True
+        Me.ucrChkaesth.Checked = False
+        Me.ucrChkaesth.Location = New System.Drawing.Point(6, 40)
+        Me.ucrChkaesth.Name = "ucrChkaesth"
+        Me.ucrChkaesth.Size = New System.Drawing.Size(193, 23)
+        Me.ucrChkaesth.TabIndex = 4
+        '
+        'ucrChkLimitsManual
+        '
+        Me.ucrChkLimitsManual.AutoSize = True
+        Me.ucrChkLimitsManual.Checked = False
+        Me.ucrChkLimitsManual.Location = New System.Drawing.Point(6, 70)
+        Me.ucrChkLimitsManual.Name = "ucrChkLimitsManual"
+        Me.ucrChkLimitsManual.Size = New System.Drawing.Size(193, 23)
+        Me.ucrChkLimitsManual.TabIndex = 3
+        '
+        'ucrChkBreacksManual
+        '
+        Me.ucrChkBreacksManual.AutoSize = True
+        Me.ucrChkBreacksManual.Checked = False
+        Me.ucrChkBreacksManual.Location = New System.Drawing.Point(6, 98)
+        Me.ucrChkBreacksManual.Name = "ucrChkBreacksManual"
+        Me.ucrChkBreacksManual.Size = New System.Drawing.Size(193, 23)
+        Me.ucrChkBreacksManual.TabIndex = 2
+        '
+        'ucrChkNavaluemanual
+        '
+        Me.ucrChkNavaluemanual.AutoSize = True
+        Me.ucrChkNavaluemanual.Checked = False
+        Me.ucrChkNavaluemanual.Location = New System.Drawing.Point(6, 128)
+        Me.ucrChkNavaluemanual.Name = "ucrChkNavaluemanual"
+        Me.ucrChkNavaluemanual.Size = New System.Drawing.Size(193, 23)
+        Me.ucrChkNavaluemanual.TabIndex = 1
+        '
+        'ucrChkValueManual
+        '
+        Me.ucrChkValueManual.AutoSize = True
+        Me.ucrChkValueManual.Checked = False
+        Me.ucrChkValueManual.Location = New System.Drawing.Point(6, 15)
+        Me.ucrChkValueManual.Name = "ucrChkValueManual"
+        Me.ucrChkValueManual.Size = New System.Drawing.Size(193, 23)
+        Me.ucrChkValueManual.TabIndex = 0
+        '
+        'grpmanualColour
+        '
+        Me.grpmanualColour.Controls.Add(Me.ucrInputValueColor)
+        Me.grpmanualColour.Controls.Add(Me.ucrInputAthsColor)
+        Me.grpmanualColour.Controls.Add(Me.ucrInputNavaluesManualColor)
+        Me.grpmanualColour.Controls.Add(Me.ucrInputBreackmanualcolor)
+        Me.grpmanualColour.Controls.Add(Me.ucrInputLimitsmanualcolor)
+        Me.grpmanualColour.Controls.Add(Me.ucrChkAesthColor)
+        Me.grpmanualColour.Controls.Add(Me.ucrChkLimitsManualColor)
+        Me.grpmanualColour.Controls.Add(Me.ucrChkBreacksManualColor)
+        Me.grpmanualColour.Controls.Add(Me.ucrChkNavaluemanualColor)
+        Me.grpmanualColour.Controls.Add(Me.ucrChkValueManualColor)
+        Me.grpmanualColour.Location = New System.Drawing.Point(18, 215)
+        Me.grpmanualColour.Name = "grpmanualColour"
+        Me.grpmanualColour.Size = New System.Drawing.Size(444, 165)
+        Me.grpmanualColour.TabIndex = 332
+        Me.grpmanualColour.TabStop = False
+        Me.grpmanualColour.Text = "Colour Scale"
+        '
+        'ucrInputNavaluesManualColor
+        '
+        Me.ucrInputNavaluesManualColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputNavaluesManualColor.AutoSize = True
+        Me.ucrInputNavaluesManualColor.IsMultiline = False
+        Me.ucrInputNavaluesManualColor.IsReadOnly = False
+        Me.ucrInputNavaluesManualColor.Location = New System.Drawing.Point(250, 130)
+        Me.ucrInputNavaluesManualColor.Name = "ucrInputNavaluesManualColor"
+        Me.ucrInputNavaluesManualColor.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputNavaluesManualColor.TabIndex = 11
+        '
+        'ucrInputBreackmanualcolor
+        '
+        Me.ucrInputBreackmanualcolor.AddQuotesIfUnrecognised = True
+        Me.ucrInputBreackmanualcolor.AutoSize = True
+        Me.ucrInputBreackmanualcolor.IsMultiline = False
+        Me.ucrInputBreackmanualcolor.IsReadOnly = False
+        Me.ucrInputBreackmanualcolor.Location = New System.Drawing.Point(250, 101)
+        Me.ucrInputBreackmanualcolor.Name = "ucrInputBreackmanualcolor"
+        Me.ucrInputBreackmanualcolor.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputBreackmanualcolor.TabIndex = 10
+        '
+        'ucrInputLimitsmanualcolor
+        '
+        Me.ucrInputLimitsmanualcolor.AddQuotesIfUnrecognised = True
+        Me.ucrInputLimitsmanualcolor.AutoSize = True
+        Me.ucrInputLimitsmanualcolor.IsMultiline = False
+        Me.ucrInputLimitsmanualcolor.IsReadOnly = False
+        Me.ucrInputLimitsmanualcolor.Location = New System.Drawing.Point(250, 72)
+        Me.ucrInputLimitsmanualcolor.Name = "ucrInputLimitsmanualcolor"
+        Me.ucrInputLimitsmanualcolor.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputLimitsmanualcolor.TabIndex = 9
+        '
+        'ucrChkAesthColor
+        '
+        Me.ucrChkAesthColor.AutoSize = True
+        Me.ucrChkAesthColor.Checked = False
+        Me.ucrChkAesthColor.Location = New System.Drawing.Point(6, 43)
+        Me.ucrChkAesthColor.Name = "ucrChkAesthColor"
+        Me.ucrChkAesthColor.Size = New System.Drawing.Size(193, 23)
+        Me.ucrChkAesthColor.TabIndex = 4
+        '
+        'ucrChkLimitsManualColor
+        '
+        Me.ucrChkLimitsManualColor.AutoSize = True
+        Me.ucrChkLimitsManualColor.Checked = False
+        Me.ucrChkLimitsManualColor.Location = New System.Drawing.Point(6, 70)
+        Me.ucrChkLimitsManualColor.Name = "ucrChkLimitsManualColor"
+        Me.ucrChkLimitsManualColor.Size = New System.Drawing.Size(193, 23)
+        Me.ucrChkLimitsManualColor.TabIndex = 3
+        '
+        'ucrChkBreacksManualColor
+        '
+        Me.ucrChkBreacksManualColor.AutoSize = True
+        Me.ucrChkBreacksManualColor.Checked = False
+        Me.ucrChkBreacksManualColor.Location = New System.Drawing.Point(6, 98)
+        Me.ucrChkBreacksManualColor.Name = "ucrChkBreacksManualColor"
+        Me.ucrChkBreacksManualColor.Size = New System.Drawing.Size(193, 23)
+        Me.ucrChkBreacksManualColor.TabIndex = 2
+        '
+        'ucrChkNavaluemanualColor
+        '
+        Me.ucrChkNavaluemanualColor.AutoSize = True
+        Me.ucrChkNavaluemanualColor.Checked = False
+        Me.ucrChkNavaluemanualColor.Location = New System.Drawing.Point(6, 128)
+        Me.ucrChkNavaluemanualColor.Name = "ucrChkNavaluemanualColor"
+        Me.ucrChkNavaluemanualColor.Size = New System.Drawing.Size(193, 23)
+        Me.ucrChkNavaluemanualColor.TabIndex = 1
+        '
+        'ucrChkValueManualColor
+        '
+        Me.ucrChkValueManualColor.AutoSize = True
+        Me.ucrChkValueManualColor.Checked = False
+        Me.ucrChkValueManualColor.Location = New System.Drawing.Point(6, 15)
+        Me.ucrChkValueManualColor.Name = "ucrChkValueManualColor"
+        Me.ucrChkValueManualColor.Size = New System.Drawing.Size(193, 23)
+        Me.ucrChkValueManualColor.TabIndex = 0
         '
         'grpColourGradient
         '
@@ -6745,7 +6965,7 @@ Partial Class sdgPlots
         Me.tbpAnnotation.Location = New System.Drawing.Point(4, 22)
         Me.tbpAnnotation.Name = "tbpAnnotation"
         Me.tbpAnnotation.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpAnnotation.Size = New System.Drawing.Size(971, 487)
+        Me.tbpAnnotation.Size = New System.Drawing.Size(671, 487)
         Me.tbpAnnotation.TabIndex = 9
         Me.tbpAnnotation.Text = "Annotation"
         Me.tbpAnnotation.UseVisualStyleBackColor = True
@@ -7305,12 +7525,56 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
+        'ucrInputAesth
+        '
+        Me.ucrInputAesth.AddQuotesIfUnrecognised = True
+        Me.ucrInputAesth.AutoSize = True
+        Me.ucrInputAesth.IsMultiline = False
+        Me.ucrInputAesth.IsReadOnly = False
+        Me.ucrInputAesth.Location = New System.Drawing.Point(250, 42)
+        Me.ucrInputAesth.Name = "ucrInputAesth"
+        Me.ucrInputAesth.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputAesth.TabIndex = 10
+        '
+        'ucrInputAthsColor
+        '
+        Me.ucrInputAthsColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputAthsColor.AutoSize = True
+        Me.ucrInputAthsColor.IsMultiline = False
+        Me.ucrInputAthsColor.IsReadOnly = False
+        Me.ucrInputAthsColor.Location = New System.Drawing.Point(250, 43)
+        Me.ucrInputAthsColor.Name = "ucrInputAthsColor"
+        Me.ucrInputAthsColor.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputAthsColor.TabIndex = 12
+        '
+        'ucrInputValue
+        '
+        Me.ucrInputValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputValue.AutoSize = True
+        Me.ucrInputValue.IsMultiline = False
+        Me.ucrInputValue.IsReadOnly = False
+        Me.ucrInputValue.Location = New System.Drawing.Point(250, 12)
+        Me.ucrInputValue.Name = "ucrInputValue"
+        Me.ucrInputValue.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputValue.TabIndex = 11
+        '
+        'ucrInputValueColor
+        '
+        Me.ucrInputValueColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputValueColor.AutoSize = True
+        Me.ucrInputValueColor.IsMultiline = False
+        Me.ucrInputValueColor.IsReadOnly = False
+        Me.ucrInputValueColor.Location = New System.Drawing.Point(250, 13)
+        Me.ucrInputValueColor.Name = "ucrInputValueColor"
+        Me.ucrInputValueColor.Size = New System.Drawing.Size(177, 21)
+        Me.ucrInputValueColor.TabIndex = 13
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(687, 528)
+        Me.ClientSize = New System.Drawing.Size(687, 523)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tbpPlotsOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -7343,6 +7607,10 @@ Partial Class sdgPlots
         Me.grpPolarCordinates.PerformLayout
         Me.tbpColour.ResumeLayout(False)
         Me.tbpColour.PerformLayout
+        Me.grpfillmanual.ResumeLayout(False)
+        Me.grpfillmanual.PerformLayout
+        Me.grpmanualColour.ResumeLayout(False)
+        Me.grpmanualColour.PerformLayout
         Me.grpColourGradient.ResumeLayout(False)
         Me.grpColourGradient.PerformLayout
         Me.grpFillGradient.ResumeLayout(False)
@@ -8010,6 +8278,28 @@ Partial Class sdgPlots
     Friend WithEvents ucrColorsHighColour As ucrColors
     Friend WithEvents ucrColorsLow As ucrColors
     Friend WithEvents ucrColorsHigh As ucrColors
+    Friend WithEvents grpfillmanual As GroupBox
+    Friend WithEvents ucrChkaesth As ucrCheck
+    Friend WithEvents ucrChkLimitsManual As ucrCheck
+    Friend WithEvents ucrChkBreacksManual As ucrCheck
+    Friend WithEvents ucrChkNavaluemanual As ucrCheck
+    Friend WithEvents ucrChkValueManual As ucrCheck
+    Friend WithEvents grpmanualColour As GroupBox
+    Friend WithEvents ucrChkAesthColor As ucrCheck
+    Friend WithEvents ucrChkLimitsManualColor As ucrCheck
+    Friend WithEvents ucrChkBreacksManualColor As ucrCheck
+    Friend WithEvents ucrChkNavaluemanualColor As ucrCheck
+    Friend WithEvents ucrChkValueManualColor As ucrCheck
+    Friend WithEvents ucrInputNavaluesManual As ucrInputTextBox
+    Friend WithEvents ucrInputBreackmanual As ucrInputTextBox
+    Friend WithEvents ucrInputLimitsmanual As ucrInputTextBox
+    Friend WithEvents ucrInputNavaluesManualColor As ucrInputTextBox
+    Friend WithEvents ucrInputBreackmanualcolor As ucrInputTextBox
+    Friend WithEvents ucrInputLimitsmanualcolor As ucrInputTextBox
+    Friend WithEvents ucrInputValue As ucrInputTextBox
+    Friend WithEvents ucrInputAesth As ucrInputTextBox
+    Friend WithEvents ucrInputValueColor As ucrInputTextBox
+    Friend WithEvents ucrInputAthsColor As ucrInputTextBox
 End Class
 
 
