@@ -386,7 +386,10 @@ Public Class sdgCalculationsSummmary
             If i > 0 Then
                 strCalcFromList = strCalcFromList & ","
             End If
-            strCalcFromList = strCalcFromList & ucrCurrentSelector.strCurrentDataFrame & " = " & Chr(34) & lstVariables(i) & Chr(34)
+            Dim strDataName = lstVariables(i)
+            If Not String.IsNullOrEmpty(strDataName) Then
+                strCalcFromList = strCalcFromList & ucrCurrentSelector.strCurrentDataFrame & " = " & Chr(34) & strDataName & Chr(34)
+            End If
         Next
         strCalcFromList = strCalcFromList & ")"
         Return strCalcFromList
