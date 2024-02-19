@@ -37,7 +37,7 @@ Partial Class dlgRestoreBackup
         Me.ucrInputSavedPathData = New instat.ucrInputTextBox()
         Me.grpEndChoice = New System.Windows.Forms.GroupBox()
         Me.cmdRunLog = New System.Windows.Forms.Button()
-        Me.cmdNewSession = New System.Windows.Forms.Button()
+        Me.cmdCloseSession = New System.Windows.Forms.Button()
         Me.cmdLoadData = New System.Windows.Forms.Button()
         Me.ucrChkSendInternalLog = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
@@ -183,7 +183,7 @@ Partial Class dlgRestoreBackup
         'grpEndChoice
         '
         Me.grpEndChoice.Controls.Add(Me.cmdRunLog)
-        Me.grpEndChoice.Controls.Add(Me.cmdNewSession)
+        Me.grpEndChoice.Controls.Add(Me.cmdCloseSession)
         Me.grpEndChoice.Controls.Add(Me.cmdLoadData)
         Me.grpEndChoice.Location = New System.Drawing.Point(131, 221)
         Me.grpEndChoice.Name = "grpEndChoice"
@@ -201,14 +201,14 @@ Partial Class dlgRestoreBackup
         Me.cmdRunLog.Text = "Run Backup Log"
         Me.cmdRunLog.UseVisualStyleBackColor = True
         '
-        'cmdNewSession
+        'cmdCloseSession
         '
-        Me.cmdNewSession.Location = New System.Drawing.Point(415, 24)
-        Me.cmdNewSession.Name = "cmdNewSession"
-        Me.cmdNewSession.Size = New System.Drawing.Size(181, 29)
-        Me.cmdNewSession.TabIndex = 2
-        Me.cmdNewSession.Text = "Start New Session"
-        Me.cmdNewSession.UseVisualStyleBackColor = True
+        Me.cmdCloseSession.Location = New System.Drawing.Point(415, 24)
+        Me.cmdCloseSession.Name = "cmdCloseSession"
+        Me.cmdCloseSession.Size = New System.Drawing.Size(181, 29)
+        Me.cmdCloseSession.TabIndex = 2
+        Me.cmdCloseSession.Text = "Close"
+        Me.cmdCloseSession.UseVisualStyleBackColor = True
         '
         'cmdLoadData
         '
@@ -274,7 +274,7 @@ Partial Class dlgRestoreBackup
     Friend WithEvents ucrInputSavedPathData As ucrInputTextBox
     Friend WithEvents grpEndChoice As GroupBox
     Friend WithEvents cmdRunLog As Button
-    Friend WithEvents cmdNewSession As Button
+    Friend WithEvents cmdCloseSession As Button
     Friend WithEvents cmdLoadData As Button
     Friend WithEvents ucrChkSendInternalLog As ucrCheck
     Friend WithEvents ucrBase As ucrButtons
