@@ -875,6 +875,7 @@ Public Class dlgPICSARainfall
                 ucrChkLineofBestFit.Visible = True
                 ucrChkWithSE.Visible = True
                 Me.Text = "PICSA General Graphs"
+                ucrBase.iHelpTopicID = 521
             Case PICSAMode.Rainfall
                 ucrChkLineofBestFit.Visible = False
                 ucrChkWithSE.Visible = False
@@ -883,6 +884,7 @@ Public Class dlgPICSARainfall
                 ucrChkLineofBestFit.Visible = True
                 ucrChkWithSE.Visible = True
                 Me.Text = "PICSA Temperature Graphs"
+                ucrBase.iHelpTopicID = 479
         End Select
     End Sub
 
