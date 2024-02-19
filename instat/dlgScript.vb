@@ -428,17 +428,14 @@ Public Class dlgScript
 
         If Not ucrInputGgplotify.IsEmpty() AndAlso Not ucrInputGraphCommand.IsEmpty Then
             Dim clsGgglorifyFunction As New RFunction
-            Dim clsPlotFunction As New RFunction
 
             clsGgglorifyFunction.SetPackageName("ggplotify")
             clsGgglorifyFunction.SetRCommand("as.ggplot")
 
-            clsPlotFunction.SetRCommand("~plot")
 
             Dim strAssignedScript As String = ""
-            clsPlotFunction.AddParameter("plot", ucrInputGraphCommand.GetText(), bIncludeArgumentName:=False)
+            clsGgglorifyFunction.AddParameter("plot", "~" & ucrInputGraphCommand.GetText(), bIncludeArgumentName:=False)
             clsGgglorifyFunction.SetAssignTo(ucrInputGgplotify.GetText)
-            clsGgglorifyFunction.AddParameter("", clsRFunctionParameter:=clsPlotFunction)
             clsGgglorifyFunction.ToScript(strScript:=strAssignedScript)
 
             strScript = "# Make Graph a ggplot " & Environment.NewLine & strAssignedScript
