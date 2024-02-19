@@ -740,4 +740,13 @@ Public Class dlgBoxplot
             clsCutWitdhFunction.RemoveParameterByName("width")
         End If
     End Sub
+
+    Private Sub ucrChkWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWidth.ControlValueChanged
+        If ucrChkWidth.Checked Then
+            clsBoxplotFunction.AddParameter("group", clsRFunctionParameter:=clsCutWitdhFunction, iPosition:=1)
+
+        Else
+            clsBoxplotFunction.RemoveParameterByName("group")
+        End If
+    End Sub
 End Class
