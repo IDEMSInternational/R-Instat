@@ -374,6 +374,11 @@ Public Class sdgCalculationsSummmary
 
     'Need to do this instead of with RFunctions because the calculated_from list can have multiple items with the same label
     Private Function CreateCalcFromList(lstVariables As String(), ucrCurrentSelector As ucrSelectorByDataFrame) As String
+
+        If lstVariables Is Nothing Then
+            Return ""
+        End If
+
         Dim strCalcFromList As String
 
         strCalcFromList = "list("
