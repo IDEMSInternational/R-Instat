@@ -20,13 +20,13 @@ Public Class dlgUseTable
     Private bReset As Boolean = True
     Private clsRFunctionAsHTML, clsRFunctionAsRTF, clsRFunctionAsWord, clsRFunctionAsLaTex, clsUseTableFunction As New RFunction
 
-    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsDummyFunction,
+    Private clsTableTitleFunction, clsStubFunction, clsStubFootnoteFunction, clsStubCellsfunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsDummyFunction,
                                         clsThemesTabOptionsFunction, clsFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
                                        clsFootnoteTitleLocationFunction, clsFootnoteCellBodyFunction,
                                        clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
                                         clsSecondFootnoteCellFunction, clsTabStyleCellTitleFunction,
                                        clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction,
-                                       clsgtExtraThemesFunction As New RFunction
+                                       clsgtExtraThemesFunction, clsGtFunction As New RFunction
 
     Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator As ROperator
 
@@ -105,6 +105,7 @@ Public Class dlgUseTable
         clsSummaryOperator = New ROperator
         clsJoiningPipeOperator = New ROperator
         clsgtExtraThemesFunction = New RFunction
+        clsGtFunction = New RFunction
 
         'rdoAsHTML.Checked = True
         ucrTablesReceiver.SetMeAsReceiver()
@@ -119,6 +120,9 @@ Public Class dlgUseTable
         clsJoiningPipeOperator.AddParameter("object", clsRFunctionParameter:=clsUseTableFunction, iPosition:=0)
 
         clsSummaryOperator.SetOperation("+")
+
+        clsGtFunction.SetPackageName("gt")
+        clsGtFunction.SetRCommand("gt")
 
         clsTabStyleFunction.SetRCommand("tab_style")
         clsTabStyleFunction.SetPackageName("gt")
@@ -210,7 +214,7 @@ Public Class dlgUseTable
     End Sub
 
     Private Sub cmdFormatOptions_Click(sender As Object, e As EventArgs) Handles cmdFormatOptions.Click
-        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
+        sdgFormatSummaryTables.SetRCode(clsNewStubFunction:=clsStubFunction, clsNewGtFunction:=clsGtFunction, clsNewStubFootnoteFunction:=clsStubFootnoteFunction, clsNewStubCellsFunction:=clsStubCellsfunction, clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
                                         clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                         clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                         clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,

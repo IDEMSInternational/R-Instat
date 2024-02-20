@@ -24,7 +24,7 @@ Public Class dlgOneVariableSummarise
         clsConcFunction, clsSummaryTableFunction, clsDummyFunction,
         clsSkimrFunction, clsPivotWiderFunction As New RFunction
 
-    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteTitleLocationFunction,
+    Private clsTableTitleFunction, clsStubFunction, clsStubFootnoteFunction, clsStubCellsFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsFootnoteTitleLocationFunction,
         clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction, clsFootnoteCellFunction, clsFootnoteCellBodyFunction,
             clsSecondFootnoteCellFunction, clsSecondFootnoteCellBodyFunction, clsTabStyleFunction, clsTabStyleCellTextFunction,
             clsTabStylePxFunction, clsTabStyleCellTitleFunction, clsThemesTabOptionsFunction, clsgtExtraThemesFunction As New RFunction
@@ -127,6 +127,9 @@ Public Class dlgOneVariableSummarise
         clsSkimrFunction = New RFunction
         clsSummaryOperator = New ROperator
         clsPivotWiderFunction = New RFunction
+        clsStubFunction = New RFunction
+        clsStubCellsFunction = New RFunction
+        clsStubFootnoteFunction = New RFunction
 
         clsTableTitleFunction = New RFunction
         clsTabFootnoteTitleFunction = New RFunction
@@ -161,6 +164,15 @@ Public Class dlgOneVariableSummarise
         clsTabStyleFunction.SetPackageName("gt")
         clsTabStyleFunction.AddParameter("style", clsRFunctionParameter:=clsTabStyleCellTextFunction, iPosition:=0)
         clsTabStyleFunction.AddParameter("location", clsRFunctionParameter:=clsTabStyleCellTitleFunction, iPosition:=1)
+
+        clsStubFunction.SetPackageName("gt")
+        clsStubFunction.SetRCommand("tab_stubhead")
+
+        clsStubCellsFunction.SetPackageName("gt")
+        clsStubCellsFunction.SetRCommand("cells_stubhead")
+
+        clsStubFootnoteFunction.SetPackageName("gt")
+        clsStubFootnoteFunction.SetRCommand("tab_footnote")
 
         clsTabStyleCellTitleFunction.SetPackageName("gt")
         clsTabStyleCellTitleFunction.SetRCommand("cells_title")
@@ -414,7 +426,7 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
-        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
+        sdgFormatSummaryTables.SetRCode(clsNewStubFunction:=clsStubFunction, clsNewGtFunction:=clsGtFunction, clsNewStubCellsFunction:=clsStubCellsFunction, clsNewStubFootnoteFunction:=clsStubFootnoteFunction, clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
                                      clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
                                    clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
                                    clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
