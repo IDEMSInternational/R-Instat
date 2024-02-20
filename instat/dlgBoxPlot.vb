@@ -238,9 +238,10 @@ Public Class dlgBoxplot
         ucrChkBoxPlot.AddParameterValuesCondition(False, "boxplot", "False")
 
         ucrNudBoxPlot.SetParameter(New RParameter("width", 2))
-        ucrNudBoxPlot.Minimum = 0
+        ucrNudBoxPlot.SetMinMax(0, 1)
         ucrNudBoxPlot.DecimalPlaces = 2
         ucrNudBoxPlot.Increment = 0.01
+        ucrNudBoxPlot.SetLinkedDisplayControl(lblWidth)
 
         ucrInputWidth.SetParameter(New RParameter("width"))
         ucrInputWidth.SetValidationTypeAsNumeric()
@@ -781,23 +782,28 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub ucrChkWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWidth.ControlValueChanged
-        If ucrChkWidth.Checked Then
-            clsWidthRaesFunction.AddParameter("group", clsRFunctionParameter:=clsCutWitdhFunction, iPosition:=1)
-            clsBoxplotFunction.AddParameter("aes", clsRFunctionParameter:=clsWidthRaesFunction, bIncludeArgumentName:=False, iPosition:=1)
-            clsViolinplotFunction.AddParameter("aes", clsRFunctionParameter:=clsWidthRaesFunction, bIncludeArgumentName:=False, iPosition:=1)
-        Else
-            clsWidthRaesFunction.RemoveParameterByName("group")
-            clsBoxplotFunction.RemoveParameterByName("aes")
-            clsViolinplotFunction.RemoveParameterByName("aes")
-        End If
         EnableDisableWidth()
     End Sub
 
     Private Sub EnableDisableWidth()
         If ucrByFactorsReceiver.strCurrDataType = "Date" OrElse ucrByFactorsReceiver.strCurrDataType = "factor" OrElse ucrByFactorsReceiver.strCurrDataType = "orderded, factor" Then
             ucrChkWidth.Enabled = False
+            ucrInputWidth.Enabled = False
+            clsBoxplotFunction.RemoveParameterByName("aes")
+            clsWidthRaesFunction.RemoveParameterByName("group")
+            clsViolinplotFunction.RemoveParameterByName("aes")
         Else
             ucrChkWidth.Enabled = True
+            ucrInputWidth.Enabled = True
+            If ucrChkWidth.Checked AndAlso Not ucrByFactorsReceiver.IsEmpty Then
+                clsWidthRaesFunction.AddParameter("group", clsRFunctionParameter:=clsCutWitdhFunction, iPosition:=1)
+                clsBoxplotFunction.AddParameter("aes", clsRFunctionParameter:=clsWidthRaesFunction, bIncludeArgumentName:=False, iPosition:=1)
+                clsViolinplotFunction.AddParameter("aes", clsRFunctionParameter:=clsWidthRaesFunction, bIncludeArgumentName:=False, iPosition:=1)
+            Else
+                clsWidthRaesFunction.RemoveParameterByName("group")
+                clsBoxplotFunction.RemoveParameterByName("aes")
+                clsViolinplotFunction.RemoveParameterByName("aes")
+            End If
         End If
     End Sub
 
@@ -805,18 +811,10 @@ Public Class dlgBoxplot
         If ucrChkBoxPlot.Checked Then
             clsGeomBoxPlotFunction.AddParameter("width", ucrNudBoxPlot.GetText(), iPosition:=3)
             clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxPlotFunction)
-
         Else
             clsGeomBoxPlotFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameterByName("geom_boxplot")
         End If
     End Sub
 
-    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged, ucrChkAddPoints.ControlValueChanged
-
-    End Sub
 End Class

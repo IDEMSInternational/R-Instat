@@ -78,6 +78,7 @@ Partial Class dlgBoxplot
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlPlots = New instat.UcrPanel()
+        Me.lblWidth = New System.Windows.Forms.Label()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -234,7 +235,7 @@ Partial Class dlgBoxplot
         Me.ucrNudBoxPlot.AutoSize = True
         Me.ucrNudBoxPlot.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBoxPlot.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBoxPlot.Location = New System.Drawing.Point(130, 335)
+        Me.ucrNudBoxPlot.Location = New System.Drawing.Point(165, 335)
         Me.ucrNudBoxPlot.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBoxPlot.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBoxPlot.Name = "ucrNudBoxPlot"
@@ -246,9 +247,9 @@ Partial Class dlgBoxplot
         '
         Me.ucrChkBoxPlot.AutoSize = True
         Me.ucrChkBoxPlot.Checked = False
-        Me.ucrChkBoxPlot.Location = New System.Drawing.Point(11, 335)
+        Me.ucrChkBoxPlot.Location = New System.Drawing.Point(11, 334)
         Me.ucrChkBoxPlot.Name = "ucrChkBoxPlot"
-        Me.ucrChkBoxPlot.Size = New System.Drawing.Size(144, 23)
+        Me.ucrChkBoxPlot.Size = New System.Drawing.Size(114, 23)
         Me.ucrChkBoxPlot.TabIndex = 31
         '
         'ucrInputWidth
@@ -257,18 +258,18 @@ Partial Class dlgBoxplot
         Me.ucrInputWidth.AutoSize = True
         Me.ucrInputWidth.IsMultiline = False
         Me.ucrInputWidth.IsReadOnly = False
-        Me.ucrInputWidth.Location = New System.Drawing.Point(130, 312)
+        Me.ucrInputWidth.Location = New System.Drawing.Point(130, 311)
         Me.ucrInputWidth.Name = "ucrInputWidth"
-        Me.ucrInputWidth.Size = New System.Drawing.Size(83, 21)
+        Me.ucrInputWidth.Size = New System.Drawing.Size(69, 21)
         Me.ucrInputWidth.TabIndex = 30
         '
         'ucrChkWidth
         '
         Me.ucrChkWidth.AutoSize = True
         Me.ucrChkWidth.Checked = False
-        Me.ucrChkWidth.Location = New System.Drawing.Point(10, 314)
+        Me.ucrChkWidth.Location = New System.Drawing.Point(10, 310)
         Me.ucrChkWidth.Name = "ucrChkWidth"
-        Me.ucrChkWidth.Size = New System.Drawing.Size(144, 23)
+        Me.ucrChkWidth.Size = New System.Drawing.Size(121, 23)
         Me.ucrChkWidth.TabIndex = 29
         '
         'ucrInputStation
@@ -321,7 +322,7 @@ Partial Class dlgBoxplot
         Me.ucrInputSummaries.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputSummaries.GetSetSelectedIndex = -1
         Me.ucrInputSummaries.IsReadOnly = False
-        Me.ucrInputSummaries.Location = New System.Drawing.Point(130, 287)
+        Me.ucrInputSummaries.Location = New System.Drawing.Point(130, 285)
         Me.ucrInputSummaries.Name = "ucrInputSummaries"
         Me.ucrInputSummaries.Size = New System.Drawing.Size(81, 21)
         Me.ucrInputSummaries.TabIndex = 16
@@ -352,7 +353,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrChkGrouptoConnect.AutoSize = True
         Me.ucrChkGrouptoConnect.Checked = False
-        Me.ucrChkGrouptoConnect.Location = New System.Drawing.Point(10, 288)
+        Me.ucrChkGrouptoConnect.Location = New System.Drawing.Point(10, 285)
         Me.ucrChkGrouptoConnect.Name = "ucrChkGrouptoConnect"
         Me.ucrChkGrouptoConnect.Size = New System.Drawing.Size(144, 23)
         Me.ucrChkGrouptoConnect.TabIndex = 15
@@ -405,7 +406,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrChkHorizontalBoxplot.AutoSize = True
         Me.ucrChkHorizontalBoxplot.Checked = False
-        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 264)
+        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 263)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
         Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(238, 23)
         Me.ucrChkHorizontalBoxplot.TabIndex = 14
@@ -487,12 +488,24 @@ Partial Class dlgBoxplot
         Me.ucrPnlPlots.Size = New System.Drawing.Size(410, 35)
         Me.ucrPnlPlots.TabIndex = 0
         '
+        'lblWidth
+        '
+        Me.lblWidth.AutoSize = True
+        Me.lblWidth.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblWidth.Location = New System.Drawing.Point(125, 338)
+        Me.lblWidth.Name = "lblWidth"
+        Me.lblWidth.Size = New System.Drawing.Size(38, 13)
+        Me.lblWidth.TabIndex = 33
+        Me.lblWidth.Tag = "By_Factor:"
+        Me.lblWidth.Text = "Width:"
+        '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(425, 497)
+        Me.Controls.Add(Me.lblWidth)
         Me.Controls.Add(Me.ucrNudBoxPlot)
         Me.Controls.Add(Me.ucrChkBoxPlot)
         Me.Controls.Add(Me.ucrInputWidth)
@@ -578,4 +591,5 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrChkWidth As ucrCheck
     Friend WithEvents ucrNudBoxPlot As ucrNud
     Friend WithEvents ucrChkBoxPlot As ucrCheck
+    Friend WithEvents lblWidth As Label
 End Class
