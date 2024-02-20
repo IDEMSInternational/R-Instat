@@ -124,13 +124,6 @@ Public Class sdgTableOptionsTextFormat
         ucrCboUnderLineColor.SetRCode(clsNewStyleRFunction, bReset:=True)
 
         ucrCboAlignHorizontal.SetRCode(clsNewStyleRFunction, bReset:=True)
-
-
-
     End Sub
-
-
-
-
 
 End Class
