@@ -41,7 +41,7 @@ Public Class dlgWindPollutionRose
         Dim dctStatistic As New Dictionary(Of String, String)
         Dim dctPosition As New Dictionary(Of String, String)
         Dim dctColor As New Dictionary(Of String, String)
-
+        ucrBase.iHelpTopicID = 184
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorWindPollutionRose.SetParameter(New RParameter("mydata", 0))
