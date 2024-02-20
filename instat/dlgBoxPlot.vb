@@ -24,7 +24,9 @@ Public Class dlgBoxplot
     Private clsRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsLocalRaesFunction As New RFunction
+    Private clsWidthRaesFunction As New RFunction
     Private clsStatSummary As New RFunction
+    Private clsDummyFunction As New RFunction
     'Similarly clsRgeom_boxplotFunction and clsRaesFunction (respectively the geom_boxplot function and the global aes function) are given through SetupLayer to sdgLayerOptions for edit. 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -52,6 +54,7 @@ Public Class dlgBoxplot
     Private clsCurrGeomFunction As New RFunction
     Private clsSummaryFunction As New RFunction
     Private clsCutWitdhFunction As New RFunction
+    Private clsGeomBoxPlotFunction As New RFunction
     ' Jitter function that can be added to the boxplot/violin base layer
     Private clsAddedJitterFunc As New RFunction
     Private clsXScaleDateFunction As New RFunction
@@ -112,9 +115,11 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoBoxplotTufte, {"geom_boxplot", "geom_tufteboxplot"})
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
-        ucrPnlPlots.AddToLinkedControls(ucrChkAddPoints, {rdoBoxplotTufte, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrChkAddPoints, ucrChkWidth}, {rdoBoxplotTufte, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPlots.AddToLinkedControls({ucrChkTufte}, {rdoBoxplotTufte}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTufte.AddToLinkedControls(ucrChkVarWidth, {"FALSE"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls(ucrChkBoxPlot, {rdoJitter, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
 
         ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorBoxPlot.SetParameterIsrfunction()
@@ -223,13 +228,22 @@ Public Class dlgBoxplot
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrChkWidth.SetText("Width")
-        ucrChkLegend.AddToLinkedControls({ucrInputWidth}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.25)
-        ucrChkWidth.AddParameterPresentCondition(True, "cut_width")
-        ucrChkWidth.AddParameterPresentCondition(False, "cut_width", False)
+        ucrChkWidth.AddToLinkedControls({ucrInputWidth}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.25)
+        ucrChkWidth.AddParameterValuesCondition(True, "cut_width", "True")
+        ucrChkWidth.AddParameterValuesCondition(False, "cut_width", "False")
+
+        ucrChkBoxPlot.SetText("Add Boxplot")
+        ucrChkBoxPlot.AddToLinkedControls({ucrNudBoxPlot}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
+        ucrChkBoxPlot.AddParameterValuesCondition(True, "boxplot", "True")
+        ucrChkBoxPlot.AddParameterValuesCondition(False, "boxplot", "False")
+
+        ucrNudBoxPlot.SetParameter(New RParameter("width", 2))
+        ucrNudBoxPlot.Minimum = 0
+        ucrNudBoxPlot.DecimalPlaces = 2
+        ucrNudBoxPlot.Increment = 0.01
 
         ucrInputWidth.SetParameter(New RParameter("width"))
         ucrInputWidth.SetValidationTypeAsNumeric()
-
 
         ucrChkGrouptoConnect.SetText("Group to Connect")
         ucrChkGrouptoConnect.AddToLinkedControls(ucrInputSummaries, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
@@ -253,6 +267,9 @@ Public Class dlgBoxplot
         clsFacetColOp = New ROperator
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
+        clsDummyFunction = New RFunction
+        clsWidthRaesFunction = New RFunction
+        clsGeomBoxPlotFunction = New RFunction
 
         'Setting up new functions
         clsBoxplotFunction = New RFunction
@@ -275,6 +292,9 @@ Public Class dlgBoxplot
         bResetSubdialog = True
         bResetBoxLayerSubdialog = True
 
+        clsDummyFunction.AddParameter("cut_width", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("boxplot", "False", iPosition:=1)
+
         'Setting current geom as boxplot
         clsCurrGeomFunction.SetPackageName("ggplot2")
         clsCurrGeomFunction = clsBoxplotFunction
@@ -284,9 +304,14 @@ Public Class dlgBoxplot
         clsBoxplotFunction.AddParameter("varwidth", "FALSE", iPosition:=0)
         clsBoxplotFunction.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
 
+        clsWidthRaesFunction.SetPackageName("ggplot2")
+        clsWidthRaesFunction.SetRCommand("aes")
+
         clsCutWitdhFunction.SetPackageName("ggplot2")
         clsCutWitdhFunction.SetRCommand("cut_width")
-        clsCutWitdhFunction.AddParameter("Carat", "carat", bIncludeArgumentName:=False, iPosition:=0)
+
+        clsGeomBoxPlotFunction.SetPackageName("ggplot2")
+        clsGeomBoxPlotFunction.SetRCommand("geom_boxplot")
 
         clsTufteBoxplotFunction.SetPackageName("ggthemes")
         clsTufteBoxplotFunction.SetRCommand("geom_tufteboxplot")
@@ -391,8 +416,11 @@ Public Class dlgBoxplot
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrChkTufte.SetRCode(clsCurrGeomFunction, bReset)
         ucrInputWidth.SetRCode(clsCutWitdhFunction, bReset)
+        ucrNudBoxPlot.SetRCode(clsGeomBoxPlotFunction, bReset)
         If bReset Then
             AutoFacetStation()
+            ucrChkBoxPlot.SetRCode(clsDummyFunction, bReset)
+            ucrChkWidth.SetRCode(clsDummyFunction, bReset)
         End If
     End Sub
 
@@ -444,6 +472,13 @@ Public Class dlgBoxplot
         SetGeomPrefixFillColourAes()
         DialogueSize()
         EnableDisableBoxplotOptions()
+        If rdoBoxplotTufte.Checked Then
+            If ucrChkAddPoints.Checked Then
+                clsBoxplotFunction.AddParameter("outlier_shape", "NA", iPosition:=2)
+            Else
+                clsBoxplotFunction.RemoveParameterByName("outlier_shape")
+            End If
+        End If
     End Sub
 
     Private Sub ucrChkGrouptoConnect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGrouptoConnect.ControlValueChanged
@@ -669,6 +704,7 @@ Public Class dlgBoxplot
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrByFactorsReceiver.ControlValueChanged
         AddRemoveFacets()
         AddRemoveGroupBy()
+        EnableDisableWidth()
     End Sub
 
     Private Sub GetParameterValue(clsOperator As ROperator)
@@ -733,20 +769,54 @@ Public Class dlgBoxplot
         toolStripMenuItemTufteOptions.Enabled = (rdoBoxplotTufte.Checked AndAlso ucrChkTufte.Checked)
     End Sub
 
-    Private Sub ucrInputWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputWidth.ControlValueChanged
+    Private Sub ucrInputWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputWidth.ControlValueChanged, ucrByFactorsReceiver.ControlValueChanged
         If Not ucrInputWidth.IsEmpty Then
             clsCutWitdhFunction.AddParameter("width", ucrInputWidth.GetText(), iPosition:=1)
+            clsCutWitdhFunction.AddParameter("var", ucrByFactorsReceiver.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=0)
         Else
             clsCutWitdhFunction.RemoveParameterByName("width")
+            clsCutWitdhFunction.RemoveParameterByName("var")
         End If
+        EnableDisableWidth()
     End Sub
 
     Private Sub ucrChkWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWidth.ControlValueChanged
         If ucrChkWidth.Checked Then
-            clsBoxplotFunction.AddParameter("group", clsRFunctionParameter:=clsCutWitdhFunction, iPosition:=1)
+            clsWidthRaesFunction.AddParameter("group", clsRFunctionParameter:=clsCutWitdhFunction, iPosition:=1)
+            clsBoxplotFunction.AddParameter("aes", clsRFunctionParameter:=clsWidthRaesFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsViolinplotFunction.AddParameter("aes", clsRFunctionParameter:=clsWidthRaesFunction, bIncludeArgumentName:=False, iPosition:=1)
+        Else
+            clsWidthRaesFunction.RemoveParameterByName("group")
+            clsBoxplotFunction.RemoveParameterByName("aes")
+            clsViolinplotFunction.RemoveParameterByName("aes")
+        End If
+        EnableDisableWidth()
+    End Sub
+
+    Private Sub EnableDisableWidth()
+        If ucrByFactorsReceiver.strCurrDataType = "Date" OrElse ucrByFactorsReceiver.strCurrDataType = "factor" OrElse ucrByFactorsReceiver.strCurrDataType = "orderded, factor" Then
+            ucrChkWidth.Enabled = False
+        Else
+            ucrChkWidth.Enabled = True
+        End If
+    End Sub
+
+    Private Sub ucrChkBoxPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBoxPlot.ControlValueChanged, ucrNudBoxPlot.ControlValueChanged
+        If ucrChkBoxPlot.Checked Then
+            clsGeomBoxPlotFunction.AddParameter("width", ucrNudBoxPlot.GetText(), iPosition:=3)
+            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxPlotFunction)
 
         Else
-            clsBoxplotFunction.RemoveParameterByName("group")
+            clsGeomBoxPlotFunction.RemoveParameterByName("width")
+            clsBaseOperator.RemoveParameterByName("geom_boxplot")
         End If
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged, ucrChkAddPoints.ControlValueChanged
+
     End Sub
 End Class
