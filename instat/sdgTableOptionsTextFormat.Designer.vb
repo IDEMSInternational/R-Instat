@@ -29,24 +29,24 @@ Partial Class sdgTableOptionsTextFormat
         Me.lblUnderlineStyle = New System.Windows.Forms.Label()
         Me.lblAlignHorizontal = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ucrTxtFontSize = New instat.ucrInputTextBox()
+        Me.ucrCboFontWeight = New instat.ucrInputComboBox()
+        Me.lblFontWeight = New System.Windows.Forms.Label()
         Me.ucrCboFontStyle = New instat.ucrInputComboBox()
         Me.ucrCboFontFamily = New instat.ucrInputComboBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblUnderlineType = New System.Windows.Forms.Label()
+        Me.ucrCboUnderlineType = New instat.ucrInputComboBox()
+        Me.ucrCboUnderLineColor = New instat.ucrColors()
         Me.ucrCboUnderlineStyle = New instat.ucrInputComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.ucrCboAlignHorizontal = New instat.ucrInputComboBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrCboFontWeight = New instat.ucrInputComboBox()
-        Me.lblFontWeight = New System.Windows.Forms.Label()
-        Me.ucrTxtFontSize = New instat.ucrInputTextBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.ucrCboColorBackground = New instat.ucrColors()
+        Me.ucrCboColorText = New instat.ucrColors()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.ucrCboColorText = New instat.ucrColors()
-        Me.ucrCboColorBackground = New instat.ucrColors()
-        Me.ucrCboUnderLineColor = New instat.ucrColors()
-        Me.lblUnderlineType = New System.Windows.Forms.Label()
-        Me.ucrCboUnderlineType = New instat.ucrInputComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -124,6 +124,37 @@ Partial Class sdgTableOptionsTextFormat
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Font"
         '
+        'ucrTxtFontSize
+        '
+        Me.ucrTxtFontSize.AddQuotesIfUnrecognised = True
+        Me.ucrTxtFontSize.AutoSize = True
+        Me.ucrTxtFontSize.IsMultiline = False
+        Me.ucrTxtFontSize.IsReadOnly = False
+        Me.ucrTxtFontSize.Location = New System.Drawing.Point(447, 35)
+        Me.ucrTxtFontSize.Name = "ucrTxtFontSize"
+        Me.ucrTxtFontSize.Size = New System.Drawing.Size(137, 21)
+        Me.ucrTxtFontSize.TabIndex = 15
+        '
+        'ucrCboFontWeight
+        '
+        Me.ucrCboFontWeight.AddQuotesIfUnrecognised = True
+        Me.ucrCboFontWeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboFontWeight.GetSetSelectedIndex = -1
+        Me.ucrCboFontWeight.IsReadOnly = False
+        Me.ucrCboFontWeight.Location = New System.Drawing.Point(300, 35)
+        Me.ucrCboFontWeight.Name = "ucrCboFontWeight"
+        Me.ucrCboFontWeight.Size = New System.Drawing.Size(137, 21)
+        Me.ucrCboFontWeight.TabIndex = 13
+        '
+        'lblFontWeight
+        '
+        Me.lblFontWeight.AutoSize = True
+        Me.lblFontWeight.Location = New System.Drawing.Point(297, 19)
+        Me.lblFontWeight.Name = "lblFontWeight"
+        Me.lblFontWeight.Size = New System.Drawing.Size(44, 13)
+        Me.lblFontWeight.TabIndex = 14
+        Me.lblFontWeight.Text = "Weight:"
+        '
         'ucrCboFontStyle
         '
         Me.ucrCboFontStyle.AddQuotesIfUnrecognised = True
@@ -160,6 +191,37 @@ Partial Class sdgTableOptionsTextFormat
         Me.GroupBox2.TabIndex = 22
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Underline"
+        '
+        'lblUnderlineType
+        '
+        Me.lblUnderlineType.AutoSize = True
+        Me.lblUnderlineType.Location = New System.Drawing.Point(6, 16)
+        Me.lblUnderlineType.Name = "lblUnderlineType"
+        Me.lblUnderlineType.Size = New System.Drawing.Size(34, 13)
+        Me.lblUnderlineType.TabIndex = 21
+        Me.lblUnderlineType.Text = "Type:"
+        '
+        'ucrCboUnderlineType
+        '
+        Me.ucrCboUnderlineType.AddQuotesIfUnrecognised = True
+        Me.ucrCboUnderlineType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboUnderlineType.GetSetSelectedIndex = -1
+        Me.ucrCboUnderlineType.IsReadOnly = False
+        Me.ucrCboUnderlineType.Location = New System.Drawing.Point(9, 32)
+        Me.ucrCboUnderlineType.Name = "ucrCboUnderlineType"
+        Me.ucrCboUnderlineType.Size = New System.Drawing.Size(137, 21)
+        Me.ucrCboUnderlineType.TabIndex = 20
+        '
+        'ucrCboUnderLineColor
+        '
+        Me.ucrCboUnderLineColor.AddQuotesIfUnrecognised = True
+        Me.ucrCboUnderLineColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboUnderLineColor.GetSetSelectedIndex = -1
+        Me.ucrCboUnderLineColor.IsReadOnly = False
+        Me.ucrCboUnderLineColor.Location = New System.Drawing.Point(302, 32)
+        Me.ucrCboUnderLineColor.Name = "ucrCboUnderLineColor"
+        Me.ucrCboUnderLineColor.Size = New System.Drawing.Size(137, 21)
+        Me.ucrCboUnderLineColor.TabIndex = 19
         '
         'ucrCboUnderlineStyle
         '
@@ -203,37 +265,6 @@ Partial Class sdgTableOptionsTextFormat
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 4
         '
-        'ucrCboFontWeight
-        '
-        Me.ucrCboFontWeight.AddQuotesIfUnrecognised = True
-        Me.ucrCboFontWeight.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrCboFontWeight.GetSetSelectedIndex = -1
-        Me.ucrCboFontWeight.IsReadOnly = False
-        Me.ucrCboFontWeight.Location = New System.Drawing.Point(300, 35)
-        Me.ucrCboFontWeight.Name = "ucrCboFontWeight"
-        Me.ucrCboFontWeight.Size = New System.Drawing.Size(137, 21)
-        Me.ucrCboFontWeight.TabIndex = 13
-        '
-        'lblFontWeight
-        '
-        Me.lblFontWeight.AutoSize = True
-        Me.lblFontWeight.Location = New System.Drawing.Point(297, 19)
-        Me.lblFontWeight.Name = "lblFontWeight"
-        Me.lblFontWeight.Size = New System.Drawing.Size(44, 13)
-        Me.lblFontWeight.TabIndex = 14
-        Me.lblFontWeight.Text = "Weight:"
-        '
-        'ucrTxtFontSize
-        '
-        Me.ucrTxtFontSize.AddQuotesIfUnrecognised = True
-        Me.ucrTxtFontSize.AutoSize = True
-        Me.ucrTxtFontSize.IsMultiline = False
-        Me.ucrTxtFontSize.IsReadOnly = False
-        Me.ucrTxtFontSize.Location = New System.Drawing.Point(447, 35)
-        Me.ucrTxtFontSize.Name = "ucrTxtFontSize"
-        Me.ucrTxtFontSize.Size = New System.Drawing.Size(137, 21)
-        Me.ucrTxtFontSize.TabIndex = 15
-        '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.ucrCboColorBackground)
@@ -246,6 +277,28 @@ Partial Class sdgTableOptionsTextFormat
         Me.GroupBox4.TabIndex = 24
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Colour"
+        '
+        'ucrCboColorBackground
+        '
+        Me.ucrCboColorBackground.AddQuotesIfUnrecognised = True
+        Me.ucrCboColorBackground.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboColorBackground.GetSetSelectedIndex = -1
+        Me.ucrCboColorBackground.IsReadOnly = False
+        Me.ucrCboColorBackground.Location = New System.Drawing.Point(157, 37)
+        Me.ucrCboColorBackground.Name = "ucrCboColorBackground"
+        Me.ucrCboColorBackground.Size = New System.Drawing.Size(137, 21)
+        Me.ucrCboColorBackground.TabIndex = 18
+        '
+        'ucrCboColorText
+        '
+        Me.ucrCboColorText.AddQuotesIfUnrecognised = True
+        Me.ucrCboColorText.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboColorText.GetSetSelectedIndex = -1
+        Me.ucrCboColorText.IsReadOnly = False
+        Me.ucrCboColorText.Location = New System.Drawing.Point(9, 37)
+        Me.ucrCboColorText.Name = "ucrCboColorText"
+        Me.ucrCboColorText.Size = New System.Drawing.Size(137, 21)
+        Me.ucrCboColorText.TabIndex = 17
         '
         'Label1
         '
@@ -265,59 +318,6 @@ Partial Class sdgTableOptionsTextFormat
         Me.Label2.TabIndex = 16
         Me.Label2.Text = "Background:"
         '
-        'ucrCboColorText
-        '
-        Me.ucrCboColorText.AddQuotesIfUnrecognised = True
-        Me.ucrCboColorText.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrCboColorText.GetSetSelectedIndex = -1
-        Me.ucrCboColorText.IsReadOnly = False
-        Me.ucrCboColorText.Location = New System.Drawing.Point(9, 37)
-        Me.ucrCboColorText.Name = "ucrCboColorText"
-        Me.ucrCboColorText.Size = New System.Drawing.Size(137, 21)
-        Me.ucrCboColorText.TabIndex = 17
-        '
-        'ucrCboColorBackground
-        '
-        Me.ucrCboColorBackground.AddQuotesIfUnrecognised = True
-        Me.ucrCboColorBackground.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrCboColorBackground.GetSetSelectedIndex = -1
-        Me.ucrCboColorBackground.IsReadOnly = False
-        Me.ucrCboColorBackground.Location = New System.Drawing.Point(157, 37)
-        Me.ucrCboColorBackground.Name = "ucrCboColorBackground"
-        Me.ucrCboColorBackground.Size = New System.Drawing.Size(137, 21)
-        Me.ucrCboColorBackground.TabIndex = 18
-        '
-        'ucrCboUnderLineColor
-        '
-        Me.ucrCboUnderLineColor.AddQuotesIfUnrecognised = True
-        Me.ucrCboUnderLineColor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrCboUnderLineColor.GetSetSelectedIndex = -1
-        Me.ucrCboUnderLineColor.IsReadOnly = False
-        Me.ucrCboUnderLineColor.Location = New System.Drawing.Point(302, 32)
-        Me.ucrCboUnderLineColor.Name = "ucrCboUnderLineColor"
-        Me.ucrCboUnderLineColor.Size = New System.Drawing.Size(137, 21)
-        Me.ucrCboUnderLineColor.TabIndex = 19
-        '
-        'lblUnderlineType
-        '
-        Me.lblUnderlineType.AutoSize = True
-        Me.lblUnderlineType.Location = New System.Drawing.Point(6, 16)
-        Me.lblUnderlineType.Name = "lblUnderlineType"
-        Me.lblUnderlineType.Size = New System.Drawing.Size(34, 13)
-        Me.lblUnderlineType.TabIndex = 21
-        Me.lblUnderlineType.Text = "Type:"
-        '
-        'ucrCboUnderlineType
-        '
-        Me.ucrCboUnderlineType.AddQuotesIfUnrecognised = True
-        Me.ucrCboUnderlineType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrCboUnderlineType.GetSetSelectedIndex = -1
-        Me.ucrCboUnderlineType.IsReadOnly = False
-        Me.ucrCboUnderlineType.Location = New System.Drawing.Point(9, 32)
-        Me.ucrCboUnderlineType.Name = "ucrCboUnderlineType"
-        Me.ucrCboUnderlineType.Size = New System.Drawing.Size(137, 21)
-        Me.ucrCboUnderlineType.TabIndex = 20
-        '
         'sdgTableOptionsTextFormat
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -330,6 +330,7 @@ Partial Class sdgTableOptionsTextFormat
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgTableOptionsTextFormat"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Text Format"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
