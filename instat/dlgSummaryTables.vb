@@ -227,16 +227,17 @@ Public Class dlgSummaryTables
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
         clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=2)
 
-        clsSummaryOperator.SetOperation("%>%")
-        clsSummaryOperator.bBrackets = False
+
 
         clsConcFunction.SetRCommand("c")
+
+
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.bBrackets = False
 
-        clsJoiningPipeOperator.SetOperation("%>%")
-        clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
+
+
 
         clsThemesTabOptionsFunction.SetPackageName("gt")
         clsThemesTabOptionsFunction.SetRCommand("tab_options")
@@ -270,13 +271,7 @@ Public Class dlgSummaryTables
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=1)
 
-        clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
-        clsSummaryOperator.AddParameter("gttbl", clsRFunctionParameter:=clsGtFunction, iPosition:=2)
 
-        clsFrequencyOperator.SetOperation("%>%")
-        clsFrequencyOperator.bBrackets = False
-        clsFrequencyOperator.AddParameter("tableFun", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
-        clsFrequencyOperator.AddParameter("gt", clsRFunctionParameter:=clsGtFunction, iPosition:=2)
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
@@ -321,6 +316,20 @@ Public Class dlgSummaryTables
 
         clsSecondFootnoteCellBodyFunction.SetPackageName("gt")
         clsSecondFootnoteCellBodyFunction.SetRCommand("cells_body")
+
+
+        clsSummaryOperator.SetOperation("%>%")
+        clsSummaryOperator.bBrackets = False
+        clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
+        clsSummaryOperator.AddParameter("gt", clsRFunctionParameter:=clsGtFunction, iPosition:=2)
+
+        clsFrequencyOperator.SetOperation("%>%")
+        clsFrequencyOperator.bBrackets = False
+        clsFrequencyOperator.AddParameter("tableFun", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
+        clsFrequencyOperator.AddParameter("gt", clsRFunctionParameter:=clsGtFunction, iPosition:=2)
+
+        clsJoiningPipeOperator.SetOperation("%>%")
+        clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
         clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
@@ -418,6 +427,9 @@ Public Class dlgSummaryTables
 
         'sdgFormatSummaryTables.ShowDialog()
         'bResetFormatSubdialog = False
+
+
+
 
         Dim clsROperator As ROperator
         If rdoFrequencyTable.Checked Then

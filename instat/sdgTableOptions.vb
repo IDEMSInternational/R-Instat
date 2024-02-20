@@ -67,13 +67,10 @@ Public Class sdgTableOptions
             Exit Sub
         End If
 
-
-
         SetupHeaderRFunctionsInOperatorOnNew(clsOperator)
         SetupFooterNotesRFunctionsInOperatorOnNew(clsOperator)
         SetupSouceNotesRFunctionsInOperatorOnNew(clsOperator)
         SetupThemeRFunctionsInOperatorOnNew(clsOperator)
-
 
     End Sub
 
@@ -85,32 +82,42 @@ Public Class sdgTableOptions
         ' Use existing header function it's in the operator,
         ' if it's not in the operator create one and add it to the operator.
         Dim clsHeaderRFunction As RFunction
+
         If clsOperator.ContainsParameter("tab_header") Then
             clsHeaderRFunction = clsOperator.GetParameter("tab_header").clsArgumentCodeStructure
-            clsTitleRFunction = clsHeaderRFunction.GetParameter("title").clsArgumentCodeStructure
-            clsSubtitleRFunction = clsHeaderRFunction.GetParameter("subtitle").clsArgumentCodeStructure
         Else
-            ' create new header function
+            ' Create new header function
             clsHeaderRFunction = New RFunction
             clsHeaderRFunction.SetPackageName("gt")
             clsHeaderRFunction.SetRCommand("tab_header")
+            ' add the header function into the operator
+            clsOperator.AddParameter("tab_header", clsRFunctionParameter:=clsHeaderRFunction, bIncludeArgumentName:=False)
+        End If
 
+        If clsHeaderRFunction.ContainsParameter("title") Then
+            clsTitleRFunction = clsHeaderRFunction.GetParameter("title").clsArgumentCodeStructure
+        Else
             ' create new title function and add it to into the header function
             clsTitleRFunction = GetNewHtmlDivRFunction()
             clsTitleRFunction.AddParameter(strParameterValue:=Chr(34) & "" & Chr(34), iPosition:=0)
             clsTitleRFunction.AddParameter(strParameterName:="style", clsRFunctionParameter:=GetNewStyleRFunction(), iPosition:=1)
-            ' add the title function as the paramter value of header function
+
+            ' Add the title function as the paramter value of header function
             clsHeaderRFunction.AddParameter("title", clsRFunctionParameter:=clsTitleRFunction)
 
-            'create new sub title function and add it to into the header function
+        End If
+
+        If clsHeaderRFunction.ContainsParameter("subtitle") Then
+            clsSubtitleRFunction = clsHeaderRFunction.GetParameter("subtitle").clsArgumentCodeStructure
+        Else
+            ' Create new sub title function and add it to into the header function
             clsSubtitleRFunction = GetNewHtmlDivRFunction()
             clsSubtitleRFunction.AddParameter(strParameterValue:=Chr(34) & "" & Chr(34), iPosition:=0)
             clsSubtitleRFunction.AddParameter(strParameterName:="style", clsRFunctionParameter:=GetNewStyleRFunction(), iPosition:=1)
-            ' add the subtitle function as the paramter value of header function
+
+            ' Add the subtitle function as the paramter value of header function
             clsHeaderRFunction.AddParameter("subtitle", clsRFunctionParameter:=clsSubtitleRFunction)
 
-            ' add the header function into the operator
-            clsOperator.AddParameter("tab_header", clsRFunctionParameter:=clsHeaderRFunction, bIncludeArgumentName:=False)
         End If
 
         ' set the header controls values
