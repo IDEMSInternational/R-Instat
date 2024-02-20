@@ -23,6 +23,8 @@ Public Class sdgTableOptions
     Private clsOperator As ROperator
     Private clsTitleRFunction As RFunction
     Private clsSubtitleRFunction As RFunction
+    Private clsThemeRFunction As RFunction
+    Private bDialogInitialised As Boolean = False
 
     Private Sub sdgTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -32,7 +34,17 @@ Public Class sdgTableOptions
         SetHeaderOptionsInOperatorOnReturn(clsOperator)
         SetGridOptionsInOperatorOnReturn(dataGridFooterNotes, "tab_footnote", clsOperator)
         SetGridOptionsInOperatorOnReturn(dataGridSourceNotes, "tab_source_note", clsOperator)
+        SetThemesInOperatorOnReturn(clsOperator)
     End Sub
+
+    Private Sub initialiseDialog()
+        ucrPnlThemesPanel.AddRadioButton(rdoSelectTheme)
+        ucrPnlThemesPanel.AddRadioButton(rdoManualTheme)
+
+        ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
+        ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
+    End Sub
+
 
 
     ''' <summary>
@@ -41,6 +53,12 @@ Public Class sdgTableOptions
     ''' </summary>
     ''' <param name="clsNewOperator"></param>
     Public Sub Setup(clsNewOperator As ROperator)
+
+        If Not bDialogInitialised Then
+            initialiseDialog()
+            bDialogInitialised = True
+        End If
+
         clsOperator = clsNewOperator
 
         If Not clsNewOperator.ContainsParameter("gt") Then
@@ -54,6 +72,8 @@ Public Class sdgTableOptions
         SetupHeaderRFunctionsInOperatorOnNew(clsOperator)
         SetupFooterNotesRFunctionsInOperatorOnNew(clsOperator)
         SetupSouceNotesRFunctionsInOperatorOnNew(clsOperator)
+        SetupThemeRFunctionsInOperatorOnNew(clsOperator)
+
 
     End Sub
 
@@ -253,7 +273,6 @@ Public Class sdgTableOptions
 
     End Sub
 
-
     Private Sub dataGridNotes_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridFooterNotes.CellEndEdit, dataGridSourceNotes.CellEndEdit
         Dim dataGrid As DataGridView = sender
         Dim row As DataGridViewRow = dataGrid.Rows.Item(e.RowIndex)
@@ -345,6 +364,91 @@ Public Class sdgTableOptions
     End Sub
 
 
+    '-----------------------------------------
+
+    '-----------------------------------------
+    ' Themes
+
+    Private Sub SetupThemeRFunctionsInOperatorOnNew(clsOperator As ROperator)
+        clsThemeRFunction = New RFunction
+
+        If Not clsOperator.ContainsParameter("theme_format") Then
+            Exit Sub
+        End If
+
+        clsThemeRFunction = clsOperator.GetParameter("theme_format").clsArgumentCodeStructure
+
+        If clsThemeRFunction.strRCommand = "tab_options" Then
+            rdoManualTheme.Checked = True
+        Else
+            rdoSelectTheme.Checked = True
+        End If
+
+
+    End Sub
+
+    Private Sub SetThemesInOperatorOnReturn(clsOperator As ROperator)
+        ' Set the themes parameter if there was a theme selected
+        If clsThemeRFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsThemeRFunction.strRCommand) Then
+            clsOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
+        Else
+            clsOperator.RemoveParameterByName("theme_format")
+        End If
+    End Sub
+
+    Private Sub ucrPnlThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlThemesPanel.ControlValueChanged
+        ucrCboSelectThemes.Visible = False
+        btnManualTheme.Visible = False
+
+        'clsThemeRFunction = New RFunction
+
+        If rdoSelectTheme.Checked Then
+            ucrCboSelectThemes.Visible = True
+            clsThemeRFunction.SetPackageName("gtExtras")
+            clsThemeRFunction.ClearParameters()
+        ElseIf rdoManualTheme.Checked Then
+            btnManualTheme.Visible = True
+            clsThemeRFunction.SetPackageName("gt")
+            clsThemeRFunction.SetRCommand("tab_options")
+        End If
+
+    End Sub
+
+    Private Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
+
+        If clsThemeRFunction Is Nothing Then
+            Exit Sub
+        End If
+
+        Dim strCommand As String = ""
+        Select Case ucrCboSelectThemes.GetText
+            Case "Dark Theme"
+                strCommand = "gt_theme_dark"
+            Case "538 Theme"
+                strCommand = "gt_theme_538"
+            Case "Dot Matrix Theme"
+                strCommand = "gt_theme_dot_matrix"
+            Case "Espn Theme"
+                strCommand = "gt_theme_espn"
+            Case "Excel Theme"
+                strCommand = "gt_theme_excel"
+            Case "Guardian Theme"
+                strCommand = "gt_theme_guardian"
+            Case "NY Times Theme"
+                strCommand = "gt_theme_nytimes"
+            Case "PFF Theme"
+                strCommand = "gt_theme_pff"
+        End Select
+
+        clsThemeRFunction.SetRCommand(strCommand)
+    End Sub
+
+
+
+    Private Sub btnManualTheme_Click(sender As Object, e As EventArgs) Handles btnManualTheme.Click
+        sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
+        sdgSummaryThemes.ShowDialog(Me)
+    End Sub
     '-----------------------------------------
 
     '-----------------------------------------

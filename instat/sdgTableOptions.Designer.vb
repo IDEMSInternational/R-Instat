@@ -26,29 +26,29 @@ Partial Class sdgTableOptions
         Me.tbpHeader = New System.Windows.Forms.TabPage()
         Me.btnHeaderSubTitleFormat = New System.Windows.Forms.Button()
         Me.btnHeaderTitleFormat = New System.Windows.Forms.Button()
+        Me.ucrInputHeaderSubtitle = New instat.ucrInputTextBox()
+        Me.ucrInputHeaderTitle = New instat.ucrInputTextBox()
         Me.lblHeaderSubtitle = New System.Windows.Forms.Label()
         Me.lblHeaderTitle = New System.Windows.Forms.Label()
         Me.tbpFooters = New System.Windows.Forms.TabPage()
         Me.dataGridFooterNotes = New System.Windows.Forms.DataGridView()
-        Me.lblFooterNotes = New System.Windows.Forms.Label()
-        Me.tbpSourceNotes = New System.Windows.Forms.TabPage()
-        Me.dataGridSourceNotes = New System.Windows.Forms.DataGridView()
-        Me.lblSourceNotes = New System.Windows.Forms.Label()
-        Me.tbpThemes = New System.Windows.Forms.TabPage()
-        Me.cmdManualTheme = New System.Windows.Forms.Button()
-        Me.rdoSelectTheme = New System.Windows.Forms.RadioButton()
-        Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
-        Me.ucrInputHeaderSubtitle = New instat.ucrInputTextBox()
-        Me.ucrInputHeaderTitle = New instat.ucrInputTextBox()
-        Me.ucrInputSelectThemes = New instat.ucrInputComboBox()
-        Me.ucrPnlThemesPanel = New instat.UcrPanel()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.colFooterNoteText = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colFooterColName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colFooterRowExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colFooterFormat = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.lblFooterNotes = New System.Windows.Forms.Label()
+        Me.tbpSourceNotes = New System.Windows.Forms.TabPage()
+        Me.dataGridSourceNotes = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colSourceNoteFormat = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.lblSourceNotes = New System.Windows.Forms.Label()
+        Me.tbpThemes = New System.Windows.Forms.TabPage()
+        Me.ucrCboSelectThemes = New instat.ucrInputComboBox()
+        Me.btnManualTheme = New System.Windows.Forms.Button()
+        Me.rdoSelectTheme = New System.Windows.Forms.RadioButton()
+        Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlThemesPanel = New instat.UcrPanel()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
         Me.tbpFooters.SuspendLayout()
@@ -104,6 +104,30 @@ Partial Class sdgTableOptions
         Me.btnHeaderTitleFormat.Text = "Format"
         Me.btnHeaderTitleFormat.UseVisualStyleBackColor = True
         '
+        'ucrInputHeaderSubtitle
+        '
+        Me.ucrInputHeaderSubtitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputHeaderSubtitle.AutoSize = True
+        Me.ucrInputHeaderSubtitle.IsMultiline = False
+        Me.ucrInputHeaderSubtitle.IsReadOnly = False
+        Me.ucrInputHeaderSubtitle.Location = New System.Drawing.Point(67, 49)
+        Me.ucrInputHeaderSubtitle.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputHeaderSubtitle.Name = "ucrInputHeaderSubtitle"
+        Me.ucrInputHeaderSubtitle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputHeaderSubtitle.TabIndex = 11
+        '
+        'ucrInputHeaderTitle
+        '
+        Me.ucrInputHeaderTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputHeaderTitle.AutoSize = True
+        Me.ucrInputHeaderTitle.IsMultiline = False
+        Me.ucrInputHeaderTitle.IsReadOnly = False
+        Me.ucrInputHeaderTitle.Location = New System.Drawing.Point(67, 19)
+        Me.ucrInputHeaderTitle.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputHeaderTitle.Name = "ucrInputHeaderTitle"
+        Me.ucrInputHeaderTitle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputHeaderTitle.TabIndex = 10
+        '
         'lblHeaderSubtitle
         '
         Me.lblHeaderSubtitle.AutoSize = True
@@ -147,6 +171,36 @@ Partial Class sdgTableOptions
         Me.dataGridFooterNotes.Size = New System.Drawing.Size(630, 193)
         Me.dataGridFooterNotes.TabIndex = 5
         '
+        'colFooterNoteText
+        '
+        Me.colFooterNoteText.HeaderText = "Note Text"
+        Me.colFooterNoteText.MinimumWidth = 8
+        Me.colFooterNoteText.Name = "colFooterNoteText"
+        Me.colFooterNoteText.Width = 220
+        '
+        'colFooterColName
+        '
+        Me.colFooterColName.HeaderText = "Column Expression(s)"
+        Me.colFooterColName.MinimumWidth = 8
+        Me.colFooterColName.Name = "colFooterColName"
+        Me.colFooterColName.Width = 140
+        '
+        'colFooterRowExpression
+        '
+        Me.colFooterRowExpression.HeaderText = "Row Expression(s)"
+        Me.colFooterRowExpression.MinimumWidth = 8
+        Me.colFooterRowExpression.Name = "colFooterRowExpression"
+        Me.colFooterRowExpression.Width = 140
+        '
+        'colFooterFormat
+        '
+        Me.colFooterFormat.HeaderText = ""
+        Me.colFooterFormat.Name = "colFooterFormat"
+        Me.colFooterFormat.ReadOnly = True
+        Me.colFooterFormat.Text = "Format"
+        Me.colFooterFormat.UseColumnTextForButtonValue = True
+        Me.colFooterFormat.Width = 60
+        '
         'lblFooterNotes
         '
         Me.lblFooterNotes.AutoSize = True
@@ -179,6 +233,22 @@ Partial Class sdgTableOptions
         Me.dataGridSourceNotes.Size = New System.Drawing.Size(630, 193)
         Me.dataGridSourceNotes.TabIndex = 7
         '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Note Text"
+        Me.DataGridViewTextBoxColumn1.MinimumWidth = 8
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        '
+        'colSourceNoteFormat
+        '
+        Me.colSourceNoteFormat.HeaderText = ""
+        Me.colSourceNoteFormat.Name = "colSourceNoteFormat"
+        Me.colSourceNoteFormat.ReadOnly = True
+        Me.colSourceNoteFormat.Text = "Format"
+        Me.colSourceNoteFormat.UseColumnTextForButtonValue = True
+        Me.colSourceNoteFormat.Width = 55
+        '
         'lblSourceNotes
         '
         Me.lblSourceNotes.AutoSize = True
@@ -190,8 +260,8 @@ Partial Class sdgTableOptions
         '
         'tbpThemes
         '
-        Me.tbpThemes.Controls.Add(Me.ucrInputSelectThemes)
-        Me.tbpThemes.Controls.Add(Me.cmdManualTheme)
+        Me.tbpThemes.Controls.Add(Me.ucrCboSelectThemes)
+        Me.tbpThemes.Controls.Add(Me.btnManualTheme)
         Me.tbpThemes.Controls.Add(Me.rdoSelectTheme)
         Me.tbpThemes.Controls.Add(Me.rdoManualTheme)
         Me.tbpThemes.Controls.Add(Me.ucrPnlThemesPanel)
@@ -202,14 +272,26 @@ Partial Class sdgTableOptions
         Me.tbpThemes.Text = "Themes"
         Me.tbpThemes.UseVisualStyleBackColor = True
         '
-        'cmdManualTheme
+        'ucrCboSelectThemes
         '
-        Me.cmdManualTheme.Location = New System.Drawing.Point(157, 59)
-        Me.cmdManualTheme.Name = "cmdManualTheme"
-        Me.cmdManualTheme.Size = New System.Drawing.Size(168, 21)
-        Me.cmdManualTheme.TabIndex = 2
-        Me.cmdManualTheme.Text = "Themes Sub Dialog"
-        Me.cmdManualTheme.UseVisualStyleBackColor = True
+        Me.ucrCboSelectThemes.AddQuotesIfUnrecognised = True
+        Me.ucrCboSelectThemes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboSelectThemes.GetSetSelectedIndex = -1
+        Me.ucrCboSelectThemes.IsReadOnly = False
+        Me.ucrCboSelectThemes.Location = New System.Drawing.Point(157, 29)
+        Me.ucrCboSelectThemes.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrCboSelectThemes.Name = "ucrCboSelectThemes"
+        Me.ucrCboSelectThemes.Size = New System.Drawing.Size(168, 21)
+        Me.ucrCboSelectThemes.TabIndex = 3
+        '
+        'btnManualTheme
+        '
+        Me.btnManualTheme.Location = New System.Drawing.Point(157, 59)
+        Me.btnManualTheme.Name = "btnManualTheme"
+        Me.btnManualTheme.Size = New System.Drawing.Size(168, 21)
+        Me.btnManualTheme.TabIndex = 2
+        Me.btnManualTheme.Text = "Custom Theme"
+        Me.btnManualTheme.UseVisualStyleBackColor = True
         '
         'rdoSelectTheme
         '
@@ -233,42 +315,6 @@ Partial Class sdgTableOptions
         Me.rdoManualTheme.Text = "Manual Theme"
         Me.rdoManualTheme.UseVisualStyleBackColor = True
         '
-        'ucrInputHeaderSubtitle
-        '
-        Me.ucrInputHeaderSubtitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputHeaderSubtitle.AutoSize = True
-        Me.ucrInputHeaderSubtitle.IsMultiline = False
-        Me.ucrInputHeaderSubtitle.IsReadOnly = False
-        Me.ucrInputHeaderSubtitle.Location = New System.Drawing.Point(67, 49)
-        Me.ucrInputHeaderSubtitle.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputHeaderSubtitle.Name = "ucrInputHeaderSubtitle"
-        Me.ucrInputHeaderSubtitle.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputHeaderSubtitle.TabIndex = 11
-        '
-        'ucrInputHeaderTitle
-        '
-        Me.ucrInputHeaderTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputHeaderTitle.AutoSize = True
-        Me.ucrInputHeaderTitle.IsMultiline = False
-        Me.ucrInputHeaderTitle.IsReadOnly = False
-        Me.ucrInputHeaderTitle.Location = New System.Drawing.Point(67, 19)
-        Me.ucrInputHeaderTitle.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputHeaderTitle.Name = "ucrInputHeaderTitle"
-        Me.ucrInputHeaderTitle.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputHeaderTitle.TabIndex = 10
-        '
-        'ucrInputSelectThemes
-        '
-        Me.ucrInputSelectThemes.AddQuotesIfUnrecognised = True
-        Me.ucrInputSelectThemes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputSelectThemes.GetSetSelectedIndex = -1
-        Me.ucrInputSelectThemes.IsReadOnly = False
-        Me.ucrInputSelectThemes.Location = New System.Drawing.Point(157, 29)
-        Me.ucrInputSelectThemes.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputSelectThemes.Name = "ucrInputSelectThemes"
-        Me.ucrInputSelectThemes.Size = New System.Drawing.Size(168, 21)
-        Me.ucrInputSelectThemes.TabIndex = 3
-        '
         'ucrPnlThemesPanel
         '
         Me.ucrPnlThemesPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -286,52 +332,6 @@ Partial Class sdgTableOptions
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 4
-        '
-        'colFooterNoteText
-        '
-        Me.colFooterNoteText.HeaderText = "Note Text"
-        Me.colFooterNoteText.MinimumWidth = 8
-        Me.colFooterNoteText.Name = "colFooterNoteText"
-        Me.colFooterNoteText.Width = 220
-        '
-        'colFooterColName
-        '
-        Me.colFooterColName.HeaderText = "Column Expression(s)"
-        Me.colFooterColName.MinimumWidth = 8
-        Me.colFooterColName.Name = "colFooterColName"
-        Me.colFooterColName.Width = 140
-        '
-        'colFooterRowExpression
-        '
-        Me.colFooterRowExpression.HeaderText = "Row Expression(s)"
-        Me.colFooterRowExpression.MinimumWidth = 8
-        Me.colFooterRowExpression.Name = "colFooterRowExpression"
-        Me.colFooterRowExpression.Width = 140
-        '
-        'colFooterFormat
-        '
-        Me.colFooterFormat.HeaderText = ""
-        Me.colFooterFormat.Name = "colFooterFormat"
-        Me.colFooterFormat.ReadOnly = True
-        Me.colFooterFormat.Text = "Format"
-        Me.colFooterFormat.UseColumnTextForButtonValue = True
-        Me.colFooterFormat.Width = 60
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Note Text"
-        Me.DataGridViewTextBoxColumn1.MinimumWidth = 8
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        '
-        'colSourceNoteFormat
-        '
-        Me.colSourceNoteFormat.HeaderText = ""
-        Me.colSourceNoteFormat.Name = "colSourceNoteFormat"
-        Me.colSourceNoteFormat.ReadOnly = True
-        Me.colSourceNoteFormat.Text = "Format"
-        Me.colSourceNoteFormat.UseColumnTextForButtonValue = True
-        Me.colSourceNoteFormat.Width = 55
         '
         'sdgTableOptions
         '
@@ -366,8 +366,8 @@ Partial Class sdgTableOptions
     Friend WithEvents tbpFooters As TabPage
     Friend WithEvents tbpSourceNotes As TabPage
     Friend WithEvents tbpThemes As TabPage
-    Friend WithEvents ucrInputSelectThemes As ucrInputComboBox
-    Friend WithEvents cmdManualTheme As Button
+    Friend WithEvents ucrCboSelectThemes As ucrInputComboBox
+    Friend WithEvents btnManualTheme As Button
     Friend WithEvents rdoSelectTheme As RadioButton
     Friend WithEvents rdoManualTheme As RadioButton
     Friend WithEvents ucrPnlThemesPanel As UcrPanel
