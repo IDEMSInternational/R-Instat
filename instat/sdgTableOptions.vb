@@ -18,9 +18,18 @@ Imports instat.Translations
 Public Class sdgTableOptions
 
     Private clsOperator As ROperator
+    Private clsTitleRFunction As RFunction
+    Private clsSubtitleRFunction As RFunction
 
     Private Sub sdgTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+    End Sub
+
+    Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn
+
+        SetHeaderOptionsInOperatorOnReturn(clsOperator)
+
+        SetFootersRFunctions(clsOperator)
     End Sub
 
 
@@ -38,65 +47,114 @@ Public Class sdgTableOptions
             Exit Sub
         End If
 
-        SetHeaderControlsContents(clsOperator)
+
+
+        SetupHeaderRFunctionsInOperatorOnNew(clsOperator)
+
         SetFootersControlsContents(clsOperator)
 
-    End Sub
 
-    Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn
-        SetHeaderRFunctions(clsOperator)
-        SetFootersRFunctions(clsOperator)
     End Sub
 
     '-----------------------------------------
-    ' Header controls
-    Private Sub SetHeaderControlsContents(clsOperator As ROperator)
+    ' HEADER CONTROLS 
 
-        ucrInputHeaderTitle.SetName("")
-        ucrInputHeaderSubtitle.SetName("")
+    Private Sub SetupHeaderRFunctionsInOperatorOnNew(clsOperator As ROperator)
 
-        If Not clsOperator.ContainsParameter("tab_header") Then
-            Exit Sub
+        ' Use existing header function it's in the operator,
+        ' if it's not in the operator create one and add it to the operator.
+        Dim clsHeaderRFunction As RFunction
+        If clsOperator.ContainsParameter("tab_header") Then
+            clsHeaderRFunction = clsOperator.GetParameter("tab_header").clsArgumentCodeStructure
+            clsTitleRFunction = clsHeaderRFunction.GetParameter("title").clsArgumentCodeStructure
+            clsSubtitleRFunction = clsHeaderRFunction.GetParameter("subtitle").clsArgumentCodeStructure
+        Else
+            ' create new header function
+            clsHeaderRFunction = New RFunction
+            clsHeaderRFunction.SetPackageName("gt")
+            clsHeaderRFunction.SetRCommand("tab_header")
+
+            ' create new title function and add it to into the header function
+            clsTitleRFunction = GetNewHtmlDivRFunction()
+            clsTitleRFunction.AddParameter(strParameterValue:=Chr(34) & "" & Chr(34), iPosition:=0)
+            clsTitleRFunction.AddParameter(strParameterName:="style", clsRFunctionParameter:=GetNewStyleRFunction(), iPosition:=1)
+            ' add the title function as the paramter value of header function
+            clsHeaderRFunction.AddParameter("title", clsRFunctionParameter:=clsTitleRFunction)
+
+            'create new sub title function and add it to into the header function
+            clsSubtitleRFunction = GetNewHtmlDivRFunction()
+            clsSubtitleRFunction.AddParameter(strParameterValue:=Chr(34) & "" & Chr(34), iPosition:=0)
+            clsSubtitleRFunction.AddParameter(strParameterName:="style", clsRFunctionParameter:=GetNewStyleRFunction(), iPosition:=1)
+            ' add the subtitle function as the paramter value of header function
+            clsHeaderRFunction.AddParameter("subtitle", clsRFunctionParameter:=clsSubtitleRFunction)
+
+            ' add the header function into the operator
+            clsOperator.AddParameter("tab_header", clsRFunctionParameter:=clsHeaderRFunction, bIncludeArgumentName:=False)
         End If
 
-        Dim clsParam As RParameter = clsOperator.GetParameter("tab_header")
-        If clsParam.clsArgumentCodeStructure.ContainsParameter("title") Then
-            ucrInputHeaderTitle.SetName(GetStringValue(clsParam.clsArgumentCodeStructure.GetParameter("title").strArgumentValue, False))
-        End If
-
-        If clsParam.clsArgumentCodeStructure.ContainsParameter("subtitle") Then
-            ucrInputHeaderSubtitle.SetName(GetStringValue(clsParam.clsArgumentCodeStructure.GetParameter("subtitle").strArgumentValue, False))
-        End If
+        ' set the header controls values
+        ucrInputHeaderTitle.SetName(GetStringValue(clsTitleRFunction.clsParameters(0).strArgumentValue, False))
+        ucrInputHeaderTitle.SetName(GetStringValue(clsSubtitleRFunction.clsParameters(0).strArgumentValue, False))
     End Sub
 
-    Private Sub SetHeaderRFunctions(clsOperator As ROperator)
+    Private Sub SetHeaderOptionsInOperatorOnReturn(clsOperator As ROperator)
+        'Remove any header additions if both title and sub title are empty
+
         If ucrInputHeaderTitle.IsEmpty() AndAlso ucrInputHeaderSubtitle.IsEmpty() Then
             clsOperator.RemoveParameterByName("tab_header")
             Exit Sub
         End If
+        Dim clsHeaderRFunction As RFunction = clsOperator.GetParameter("tab_header").clsArgumentCodeStructure
 
-        Dim clsHeaderRFunction As New RFunction
-
-        If clsOperator.ContainsParameter("tab_header") Then
-            clsHeaderRFunction = clsOperator.GetParameter("tab_header").clsArgumentCodeStructure
+        If ucrInputHeaderTitle.IsEmpty() Then
+            clsHeaderRFunction.RemoveParameterByName("title")
         Else
-            clsHeaderRFunction.SetPackageName("gt")
-            clsHeaderRFunction.SetRCommand("tab_header")
-            clsOperator.AddParameter("tab_header", clsRFunctionParameter:=clsHeaderRFunction, bIncludeArgumentName:=False)
+            clsTitleRFunction.AddParameter(strParameterValue:=GetStringValue(ucrInputHeaderTitle.GetText(), True), iPosition:=0)
         End If
 
-        If Not ucrInputHeaderTitle.IsEmpty() Then
-            clsHeaderRFunction.AddParameter("title", GetStringValue(ucrInputHeaderTitle.GetText(), True))
+        If ucrInputHeaderSubtitle.IsEmpty() Then
+            clsHeaderRFunction.RemoveParameterByName("subtitle")
+        Else
+            clsSubtitleRFunction.AddParameter(strParameterValue:=GetStringValue(ucrInputHeaderSubtitle.GetText(), True), iPosition:=0)
         End If
 
-        If Not ucrInputHeaderSubtitle.IsEmpty() Then
-            clsHeaderRFunction.AddParameter("subtitle", GetStringValue(ucrInputHeaderSubtitle.GetText(), True))
-        End If
+    End Sub
+
+    Private Function GetNewHtmlDivRFunction() As RFunction
+        Dim clsHtmlDivRFunction As New RFunction
+        clsHtmlDivRFunction.SetPackageName("htmltools")
+        clsHtmlDivRFunction.SetRCommand("tags$div")
+        Return clsHtmlDivRFunction
+    End Function
+
+    Private Function GetNewStyleRFunction() As RFunction
+        Dim clsStyleRFunction As New RFunction
+        clsStyleRFunction.SetPackageName("htmltools")
+        clsStyleRFunction.SetRCommand("css")
+        Return clsStyleRFunction
+    End Function
+
+    Private Sub ucrInputHeaderTitle_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputHeaderTitle.ControlContentsChanged
+        btnHeaderTitleFormat.Enabled = Not ucrInputHeaderTitle.IsEmpty
+    End Sub
+
+    Private Sub btnHeaderTitleFormat_Click(sender As Object, e As EventArgs) Handles btnHeaderTitleFormat.Click
+        sdgTableOptionsTextFormat.Setup(clsTitleRFunction.GetParameter("style").clsArgumentCodeStructure)
+        sdgTableOptionsTextFormat.Show(Me)
+    End Sub
+
+    Private Sub ucrInputHeaderSubtitle_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputHeaderSubtitle.ControlContentsChanged
+        btnHeaderSubTitleFormat.Enabled = Not ucrInputHeaderSubtitle.IsEmpty
+    End Sub
+
+    Private Sub btnHeaderSubTitleFormat_Click(sender As Object, e As EventArgs) Handles btnHeaderSubTitleFormat.Click
+        sdgTableOptionsTextFormat.Setup(clsSubtitleRFunction.GetParameter("style").clsArgumentCodeStructure)
+        sdgTableOptionsTextFormat.Show(Me)
     End Sub
     '-----------------------------------------
 
     '-----------------------------------------
-    ' Footer controls
+    ' FOOTER CONTROLS
 
     Private Sub SetFootersControlsContents(clsOperator As ROperator)
         dataGridFooterNotes.Rows.Clear()
@@ -183,18 +241,6 @@ Public Class sdgTableOptions
     End Sub
 
 
-    Private Sub sdgTableOptions_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
-
-    End Sub
-
-    Private Sub sdgTableOptions_Leave(sender As Object, e As EventArgs) Handles Me.Leave
-
-    End Sub
-
-    Private Sub dataGridFooterNotes_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridFooterNotes.CellValueChanged
-
-    End Sub
-
     Private Sub dataGridFooterNotes_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridFooterNotes.CellEndEdit
         AddNewEmptyRowAfterUserInput()
     End Sub
@@ -208,6 +254,9 @@ Public Class sdgTableOptions
 
     '-----------------------------------------
     Private Function GetStringValue(str As String, bwithQuotes As Boolean) As String
+        If String.IsNullOrEmpty(str) Then
+            str = ""
+        End If
         Return If(bwithQuotes, """" & str & """", str.Replace("""", ""))
     End Function
 

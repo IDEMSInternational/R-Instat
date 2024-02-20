@@ -337,10 +337,10 @@
     <Compile Include="sdgSummaryThemes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgTableTextFormatOptions.Designer.vb">
-      <DependentUpon>sdgTableTextFormatOptions.vb</DependentUpon>
+    <Compile Include="sdgTableOptionsTextFormat.Designer.vb">
+      <DependentUpon>sdgTableOptionsTextFormat.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgTableTextFormatOptions.vb">
+    <Compile Include="sdgTableOptionsTextFormat.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgTableOptions.Designer.vb">
@@ -3200,8 +3200,8 @@
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgTableTextFormatOptions.resx">
-      <DependentUpon>sdgTableTextFormatOptions.vb</DependentUpon>
+    <EmbeddedResource Include="sdgTableOptionsTextFormat.resx">
+      <DependentUpon>sdgTableOptionsTextFormat.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgTableOptions.resx">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
