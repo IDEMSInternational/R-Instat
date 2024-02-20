@@ -39,7 +39,7 @@ Public Class dlgExportToClimsoft
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID=476
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.Selector = ucrSelectorImportToClimsoft

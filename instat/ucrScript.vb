@@ -214,6 +214,7 @@ Public Class ucrScript
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save " & If(bIsLog, "Log", "Script") & " To File"
             dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgSave.FileName = Path.GetFileName(TabControl.SelectedTab.Text)
 
             'Ensure that dialog opens in correct folder.
             'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does

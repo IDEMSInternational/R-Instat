@@ -491,7 +491,7 @@ Partial Class dlgGeneralForGraphics
         Me.ucrInputAddCode.IsReadOnly = False
         Me.ucrInputAddCode.Location = New System.Drawing.Point(159, 362)
         Me.ucrInputAddCode.Name = "ucrInputAddCode"
-        Me.ucrInputAddCode.Size = New System.Drawing.Size(267, 21)
+        Me.ucrInputAddCode.Size = New System.Drawing.Size(316, 21)
         Me.ucrInputAddCode.TabIndex = 218
         '
         'ucrChkAddCode

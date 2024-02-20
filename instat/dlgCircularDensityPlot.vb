@@ -39,7 +39,7 @@ Public Class dlgCircularDensityPlot
     Private Sub InitialiseDialog()
         Dim dctKernel As New Dictionary(Of String, String)
         Dim dctUnits As New Dictionary(Of String, String)
-
+        ucrBase.iHelpTopicID = 181
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
