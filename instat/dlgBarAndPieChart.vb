@@ -1318,8 +1318,10 @@ Public Class dlgBarAndPieChart
                 ucrChkPolarCoordinates.Enabled = False
                 ucrChkPolarCoordinates.Checked = Not ucrChkBacktoback.Checked
                 clsBaseOperator.RemoveParameterByName("geom_bar")
-                clsSubsetFunction1.AddParameter("subset", clsROperatorParameter:=clsIsEqualToOperator1, iPosition:=1, bIncludeArgumentName:=False)
-                clsSubsetFunction2.AddParameter("subset", clsROperatorParameter:=clsIsEqualToOperator2, iPosition:=1, bIncludeArgumentName:=False)
+                clsSubsetFunction1.AddParameter("data", ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=1, bIncludeArgumentName:=False)
+                clsSubsetFunction1.AddParameter("subset", clsROperatorParameter:=clsIsEqualToOperator1, iPosition:=2, bIncludeArgumentName:=False)
+                clsSubsetFunction2.AddParameter("data", ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=1, bIncludeArgumentName:=False)
+                clsSubsetFunction2.AddParameter("subset", clsROperatorParameter:=clsIsEqualToOperator2, iPosition:=2, bIncludeArgumentName:=False)
                 clsBaseOperator.AddParameter("geom_bar2", clsRFunctionParameter:=clsRgeomBarFunction2, iPosition:=1)
                 clsBaseOperator.AddParameter("geom_bar1", clsRFunctionParameter:=clsRgeomBarFunction1, iPosition:=2)
                 clsBaseOperator.AddParameter("scale_y_symmetric", clsRFunctionParameter:=clsScaleYSymmetricFunction, iPosition:=3)
