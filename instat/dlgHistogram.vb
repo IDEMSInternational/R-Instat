@@ -125,6 +125,7 @@ Public Class dlgHistogram
         ucrNudBinwidth.Increment = 0.01
         ucrNudBinwidth.SetRDefault(1.5)
 
+
         ucrChkRidges.SetText("Density Ridges")
         ucrChkRidges.AddFunctionNamesCondition(True, "geom_density_ridges")
         ucrChkRidges.AddFunctionNamesCondition(False, "geom_density_ridges", False)
@@ -237,6 +238,7 @@ Public Class dlgHistogram
         ucrChkDisplayAsDotPlot.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkRidges.SetRCode(clsRgeomPlotFunction, bReset)
         ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
+
         If bReset Then
             ucrInputStats.SetRCode(clsHistAesFunction, bReset)
             ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
@@ -266,8 +268,6 @@ Public Class dlgHistogram
         clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         ucrInputAddReorder.Visible = Not ucrFactorReceiver.IsEmpty()
-
-
 
         If Not ucrNudBinwidth.IsEmpty Then
             clsRgeomPlotFunction.AddParameter("binwidth", 1.5, iPosition:=1)
