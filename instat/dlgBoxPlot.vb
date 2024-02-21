@@ -475,9 +475,9 @@ Public Class dlgBoxplot
         EnableDisableBoxplotOptions()
         If rdoBoxplotTufte.Checked Then
             If ucrChkAddPoints.Checked Then
-                clsBoxplotFunction.AddParameter("outlier_shape", "NA", iPosition:=2)
+                clsBoxplotFunction.AddParameter("outlier.shape", "NA", iPosition:=2)
             Else
-                clsBoxplotFunction.RemoveParameterByName("outlier_shape")
+                clsBoxplotFunction.RemoveParameterByName("outlier.shape")
             End If
         End If
     End Sub
