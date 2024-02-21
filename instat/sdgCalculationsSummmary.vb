@@ -61,7 +61,7 @@ Public Class sdgCalculationsSummmary
 
         ucrManipulations.lstAvailableData.View = View.List
 
-        ucrCalcSummary.ucrReceiverForCalculation.bAttachedToPrimaryDataFrame = False
+        'ucrCalcSummary.ucrReceiverForCalculation.bAttachedToPrimaryDataFrame = False
 
         'temp until working
         ucrCalcSummary.ucrSaveResultInto.Visible = False
