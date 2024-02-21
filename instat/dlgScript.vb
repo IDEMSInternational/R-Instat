@@ -99,16 +99,22 @@ Public Class dlgScript
         ucrCboCommandPackage.SetItems(GetPackages(), bAddConditions:=True)
         ucrCboCommandPackage.SetDropDownStyleAsNonEditable()
 
+        ucrCboCommandDataPackage.SetParameter(New RParameter("package", 0))
+        ucrCboCommandDataPackage.SetItems(GetPackages(), bAddConditions:=True)
+        ucrCboCommandDataPackage.SetDropDownStyleAsNonEditable()
+
         ucrChkOpenRFile.SetText("Open R File")
 
         ucrInputGgplotify.SetLinkedDisplayControl(lblGraphObject)
         ucrInputGraphCommand.SetLinkedDisplayControl(lblGraphCommand)
+        ucrInputSaveData.SetLinkedDisplayControl(lblIntoOptional)
 
         ucrPnlCommands.AddRadioButton(rdoCommandPackage)
         ucrPnlCommands.AddRadioButton(rdoCommandObject)
         ucrPnlCommands.AddRadioButton(rdoGgplotify)
         ucrPnlCommands.AddRadioButton(rdoChooseFile)
         ucrPnlCommands.AddRadioButton(rdoViewData)
+        ucrPnlCommands.AddRadioButton(rdoListData)
 
         '--------------------------------
         'Get example controls
@@ -153,6 +159,8 @@ Public Class dlgScript
         ' Command controls
         rdoCommandPackage.Checked = True
         ucrCboCommandPackage.GetSetSelectedIndex = -1
+        ucrCboCommandDataPackage.GetSetSelectedIndex = -1
+
         ucrInputRemoveObjects.Reset()
 
         ' Save controls reset
@@ -366,6 +374,8 @@ Public Class dlgScript
         ucrChkOpenRFile.SetVisible(False)
         ucrInputChooseFile.SetVisible(False)
         ucrInputViewData.SetVisible(False)
+        ucrCboCommandDataPackage.SetVisible(False)
+        ucrInputSaveData.SetVisible(False)
         rdoChooseFile.Enabled = False
         If rdoCommandPackage.Checked Then
             ucrCboCommandPackage.SetVisible(True)
@@ -385,6 +395,11 @@ Public Class dlgScript
         ElseIf rdoViewData.Checked Then
             ucrInputViewData.SetVisible(True)
             ucrInputViewData.OnControlValueChanged()
+        ElseIf rdoListData.Checked Then
+            ucrInputSaveData.SetVisible(True)
+            ucrCboCommandDataPackage.SetVisible(True)
+            ucrCboCommandDataPackage.OnControlValueChanged()
+            ucrInputSaveData.OnControlValueChanged()
         End If
     End Sub
 
@@ -399,6 +414,37 @@ Public Class dlgScript
         End If
 
         PreviewScript(strScript)
+    End Sub
+
+    Private Sub ucrCboCommandDataPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboCommandDataPackage.ControlValueChanged, ucrInputSaveData.ControlContentsChanged
+        Dim strScript As String = ""
+        Dim strScriptDataFrame As String = ""
+
+        If Not ucrCboCommandDataPackage.IsEmpty() Then
+            Dim clsDatasetFunction As New RFunction
+            clsDatasetFunction.SetPackageName("vcdExtra")
+            clsDatasetFunction.SetRCommand("datasets")
+            clsDatasetFunction.AddParameter("package", Chr(34) & ucrCboCommandDataPackage.GetText() & Chr(34), bIncludeArgumentName:=False)
+            strScript = "#List of data sets " & Environment.NewLine & clsDatasetFunction.ToScript
+        End If
+
+        If Not ucrInputSaveData.IsEmpty() Then
+            Dim strDataFrameName As String = ucrInputSaveData.GetText()
+            Dim clsImportRFunction As New RFunction
+
+            clsImportRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+
+            Dim clsDataListRFunction As New RFunction
+            clsDataListRFunction.SetRCommand("list")
+            clsDataListRFunction.AddParameter(strParameterName:=strDataFrameName, strParameterValue:=strDataFrameName)
+            clsImportRFunction.AddParameter(strParameterName:="data_tables", clsRFunctionParameter:=clsDataListRFunction)
+
+            strScriptDataFrame = "# Save data frame """ & strDataFrameName & """" & Environment.NewLine & clsImportRFunction.ToScript()
+        End If
+
+        Dim combinedScript As String = strScript & Environment.NewLine & " " & Environment.NewLine & strScriptDataFrame
+
+        PreviewScript(combinedScript)
     End Sub
 
     Private Sub ucrInputRemoveObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputRemoveObjects.ControlContentsChanged
