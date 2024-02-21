@@ -2552,7 +2552,7 @@ Public Class frmMain
         dlgWordwrap.ShowDialog()
     End Sub
 
-    Private Sub mnuEditUndo_Click(sender As Object, e As EventArgs) Handles mnuEditUndo.Click
+    Private Sub mnuToolsRestoreBackup_Click(sender As Object, e As EventArgs) Handles mnuToolsRestoreBackup.Click
         dlgRestoreBackup.ShowDialog()
     End Sub
 
