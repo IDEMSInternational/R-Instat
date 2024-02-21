@@ -235,13 +235,13 @@ Public Class dlgHistogram
         ucrPnlOptions.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkPercentages.SetRCode(clsYScalecontinuousFunction, bReset)
         ucrChkDisplayAsDotPlot.SetRCode(clsRgeomPlotFunction, bReset)
-        ucrNudBinwidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkRidges.SetRCode(clsRgeomPlotFunction, bReset)
         ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
         If bReset Then
             ucrInputStats.SetRCode(clsHistAesFunction, bReset)
             ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
             ucrChkBinWidth.SetRCode(clsRgeomPlotFunction, bReset)
+            ucrNudBinwidth.SetRCode(clsRgeomPlotFunction, bReset)
         End If
     End Sub
 
@@ -266,6 +266,14 @@ Public Class dlgHistogram
         clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         ucrInputAddReorder.Visible = Not ucrFactorReceiver.IsEmpty()
+
+
+
+        If Not ucrNudBinwidth.IsEmpty Then
+            clsRgeomPlotFunction.AddParameter("binwidth", 1.5, iPosition:=1)
+        Else
+            clsRgeomPlotFunction.RemoveParameterByName("binwidth")
+        End If
 
         If rdoHistogram.Checked Then
             If ucrChkDisplayAsDotPlot.Checked Then
