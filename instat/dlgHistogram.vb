@@ -235,13 +235,13 @@ Public Class dlgHistogram
         ucrPnlOptions.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkPercentages.SetRCode(clsYScalecontinuousFunction, bReset)
         ucrChkDisplayAsDotPlot.SetRCode(clsRgeomPlotFunction, bReset)
-        ucrChkBinWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrNudBinwidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkRidges.SetRCode(clsRgeomPlotFunction, bReset)
         ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
         If bReset Then
             ucrInputStats.SetRCode(clsHistAesFunction, bReset)
             ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
+            ucrChkBinWidth.SetRCode(clsRgeomPlotFunction, bReset)
         End If
     End Sub
 
