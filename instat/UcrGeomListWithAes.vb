@@ -342,9 +342,31 @@ Public Class ucrGeomListWithParameters
             clsCurrentAesFunction = clsLocalAesFunction
         End If
 
-        'This is a temporary solution to issue which should be solved with geoms
-        'This adds "" aes for x or y when no variables are mapped to them for geoms which require it, either adding to the global or local aes.
-        If clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" OrElse clsGeomFunction.strRCommand = "geom_violin" Then
+        If clsGeomFunction.strRCommand = "geom_mosaic" Then 'OrElse clsGeomFunction.strRCommand = "geom_mosaic_jitter" OrElse clsGeomFunction.strRCommand = "geom_mosaic_text" Then
+            If clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") >= 0 Then
+                ' If clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") >= 0 Then
+                Dim strArgNameValue = clsGlobalAesFunction.clsParameters(0).strArgumentValue
+                Dim clsProductFunction As New RFunction
+                clsProductFunction.SetPackageName("ggmosaic")
+                clsProductFunction.SetRCommand("product")
+                clsProductFunction.AddParameter("x", strArgNameValue, bIncludeArgumentName:=False)
+                clsCurrentAesFunction.AddParameter("x", clsRFunctionParameter:=clsProductFunction)
+            End If
+            If clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "conds") >= 0 Then
+                'If clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "conds") >= 0 Then
+                Dim strArgNameValue = clsGlobalAesFunction.clsParameters(2).strArgumentValue
+                Dim clsProductFunction As New RFunction
+                clsProductFunction.SetPackageName("ggmosaic")
+                clsProductFunction.SetRCommand("product")
+                clsProductFunction.AddParameter("conds", strArgNameValue, bIncludeArgumentName:=False)
+                clsCurrentAesFunction.AddParameter("conds", clsRFunctionParameter:=clsProductFunction)
+            End If
+
+        End If
+
+            'This is a temporary solution to issue which should be solved with geoms
+            'This adds "" aes for x or y when no variables are mapped to them for geoms which require it, either adding to the global or local aes.
+            If clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" OrElse clsGeomFunction.strRCommand = "geom_violin" Then
             If (clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse ucrChkIgnoreGlobalAes.Checked) AndAlso clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsCurrentAesFunction.AddParameter("x", Chr(34) & Chr(34))
             End If

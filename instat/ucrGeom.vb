@@ -1459,10 +1459,10 @@ Public Class ucrGeom
         clsgeom_mosaic.SetGeomPackage("ggmosaic")
         clsgeom_mosaic.strGeomName = "geom_mosaic"
         'mandatory
-        'clsgeom_mosaic.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
-        'clsgeom_mosaic.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
-        'clsgeom_mosaic.AddAesParameter("conds", strIncludedDataTypes:={"factor"})
-        'clsgeom_mosaic.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
+        clsgeom_mosaic.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic.AddAesParameter("conds", strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
 
         'adding layerParameters
         clsgeom_mosaic.AddLayerParameter("divider", "editablelist", "ggmosaic::mosaic(" & Chr(34) & "h" & Chr(34) & ")", lstParameterStrings:={Chr(34) & "vspine" & Chr(34), Chr(34) & "hspine" & Chr(34), Chr(34) & "vbar" & Chr(34), Chr(34) & "hbar" & Chr(34), "ggmosaic::mosaic(" & Chr(34) & "h" & Chr(34) & ")", "ggmosaic::mosaic(" & Chr(34) & "v" & Chr(34) & ")", "ggmosaic::ddecker()"})
