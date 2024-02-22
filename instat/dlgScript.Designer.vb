@@ -52,7 +52,7 @@ Partial Class dlgScript
         Me.ucrPnlGetData = New instat.UcrPanel()
         Me.ucrSelectorGetObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbPageCommand = New System.Windows.Forms.TabPage()
-        Me.lblIntoOptional = New System.Windows.Forms.Label()
+        Me.ucrChkInto = New instat.ucrCheck()
         Me.rdoListData = New System.Windows.Forms.RadioButton()
         Me.ucrInputSaveData = New instat.ucrInputTextBox()
         Me.ucrCboCommandDataPackage = New instat.ucrInputComboBox()
@@ -460,7 +460,7 @@ Partial Class dlgScript
         '
         'tbPageCommand
         '
-        Me.tbPageCommand.Controls.Add(Me.lblIntoOptional)
+        Me.tbPageCommand.Controls.Add(Me.ucrChkInto)
         Me.tbPageCommand.Controls.Add(Me.rdoListData)
         Me.tbPageCommand.Controls.Add(Me.ucrInputSaveData)
         Me.tbPageCommand.Controls.Add(Me.ucrCboCommandDataPackage)
@@ -486,14 +486,14 @@ Partial Class dlgScript
         Me.tbPageCommand.Text = "Commands"
         Me.tbPageCommand.UseVisualStyleBackColor = True
         '
-        'lblIntoOptional
+        'ucrChkInto
         '
-        Me.lblIntoOptional.AutoSize = True
-        Me.lblIntoOptional.Location = New System.Drawing.Point(246, 49)
-        Me.lblIntoOptional.Name = "lblIntoOptional"
-        Me.lblIntoOptional.Size = New System.Drawing.Size(73, 13)
-        Me.lblIntoOptional.TabIndex = 62
-        Me.lblIntoOptional.Text = "Into(Optional):"
+        Me.ucrChkInto.AutoSize = True
+        Me.ucrChkInto.Checked = False
+        Me.ucrChkInto.Location = New System.Drawing.Point(233, 48)
+        Me.ucrChkInto.Name = "ucrChkInto"
+        Me.ucrChkInto.Size = New System.Drawing.Size(84, 23)
+        Me.ucrChkInto.TabIndex = 63
         '
         'rdoListData
         '
@@ -525,7 +525,7 @@ Partial Class dlgScript
         Me.ucrCboCommandDataPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboCommandDataPackage.GetSetSelectedIndex = -1
         Me.ucrCboCommandDataPackage.IsReadOnly = False
-        Me.ucrCboCommandDataPackage.Location = New System.Drawing.Point(128, 46)
+        Me.ucrCboCommandDataPackage.Location = New System.Drawing.Point(109, 46)
         Me.ucrCboCommandDataPackage.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboCommandDataPackage.Name = "ucrCboCommandDataPackage"
         Me.ucrCboCommandDataPackage.Size = New System.Drawing.Size(117, 21)
@@ -921,8 +921,8 @@ Partial Class dlgScript
     Friend WithEvents ucrInputGraphCommand As ucrInputTextBox
     Friend WithEvents ucrInputViewData As ucrInputTextBox
     Friend WithEvents rdoViewData As RadioButton
-    Friend WithEvents lblIntoOptional As Label
     Friend WithEvents rdoListData As RadioButton
     Friend WithEvents ucrInputSaveData As ucrInputTextBox
     Friend WithEvents ucrCboCommandDataPackage As ucrInputComboBox
+    Friend WithEvents ucrChkInto As ucrCheck
 End Class

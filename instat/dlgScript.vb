@@ -105,9 +105,10 @@ Public Class dlgScript
 
         ucrChkOpenRFile.SetText("Open R File")
 
+        ucrChkInto.SetText("Into:")
+
         ucrInputGgplotify.SetLinkedDisplayControl(lblGraphObject)
         ucrInputGraphCommand.SetLinkedDisplayControl(lblGraphCommand)
-        ucrInputSaveData.SetLinkedDisplayControl(lblIntoOptional)
 
         ucrPnlCommands.AddRadioButton(rdoCommandPackage)
         ucrPnlCommands.AddRadioButton(rdoCommandObject)
@@ -170,6 +171,7 @@ Public Class dlgScript
         ucrChkSaveDataFrameSingle.Checked = True
         ucrChkDisplayGraph.Checked = True
         ucrChkOpenRFile.Checked = False
+        ucrChkInto.Checked = False
         ucrDataFrameSaveOutputSelect.Reset()
 
         ' Get controls reset
@@ -372,6 +374,7 @@ Public Class dlgScript
         ucrInputGgplotify.SetVisible(False)
         ucrInputGraphCommand.SetVisible(False)
         ucrChkOpenRFile.SetVisible(False)
+        ucrChkInto.SetVisible(False)
         ucrInputChooseFile.SetVisible(False)
         ucrInputViewData.SetVisible(False)
         ucrCboCommandDataPackage.SetVisible(False)
@@ -396,10 +399,11 @@ Public Class dlgScript
             ucrInputViewData.SetVisible(True)
             ucrInputViewData.OnControlValueChanged()
         ElseIf rdoListData.Checked Then
-            ucrInputSaveData.SetVisible(True)
             ucrCboCommandDataPackage.SetVisible(True)
+            ucrChkInto.SetVisible(True)
             ucrCboCommandDataPackage.OnControlValueChanged()
             ucrInputSaveData.OnControlValueChanged()
+            ucrChkInto.OnControlValueChanged()
         End If
     End Sub
 
@@ -416,21 +420,30 @@ Public Class dlgScript
         PreviewScript(strScript)
     End Sub
 
-    Private Sub ucrCboCommandDataPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboCommandDataPackage.ControlValueChanged, ucrInputSaveData.ControlContentsChanged
+    Private Sub ucrCboCommandDataPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboCommandDataPackage.ControlValueChanged, ucrInputSaveData.ControlContentsChanged, ucrChkInto.ControlContentsChanged
+        ucrInputSaveData.Visible = ucrChkInto.Checked
+
         Dim strScript As String = ""
         Dim strScriptDataFrame As String = ""
+        Dim clsDatasetFunction As New RFunction
+        clsDatasetFunction.SetPackageName("vcdExtra")
 
         If Not ucrCboCommandDataPackage.IsEmpty() Then
-            Dim clsDatasetFunction As New RFunction
-            clsDatasetFunction.SetPackageName("vcdExtra")
             clsDatasetFunction.SetRCommand("datasets")
             clsDatasetFunction.AddParameter("package", Chr(34) & ucrCboCommandDataPackage.GetText() & Chr(34), bIncludeArgumentName:=False)
             strScript = "#List of data sets " & Environment.NewLine & clsDatasetFunction.ToScript
         End If
 
-        If Not ucrInputSaveData.IsEmpty() Then
+        If ucrChkInto.Checked AndAlso Not ucrInputSaveData.IsEmpty() Then
             Dim strDataFrameName As String = ucrInputSaveData.GetText()
             Dim clsImportRFunction As New RFunction
+            Dim strAssignedScript As String = ""
+
+            clsDatasetFunction.SetRCommand("datasets")
+            clsDatasetFunction.SetAssignTo(strDataFrameName)
+            clsDatasetFunction.AddParameter("package", Chr(34) & ucrCboCommandDataPackage.GetText() & Chr(34), bIncludeArgumentName:=False)
+            clsDatasetFunction.ToScript(strScript:=strAssignedScript)
+            strScript = "#List of data sets " & Environment.NewLine & strAssignedScript
 
             clsImportRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
 
@@ -442,7 +455,7 @@ Public Class dlgScript
             strScriptDataFrame = "# Save data frame """ & strDataFrameName & """" & Environment.NewLine & clsImportRFunction.ToScript()
         End If
 
-        Dim combinedScript As String = strScript & Environment.NewLine & " " & Environment.NewLine & strScriptDataFrame
+        Dim combinedScript As String = strScript & Environment.NewLine & strScriptDataFrame
 
         PreviewScript(combinedScript)
     End Sub
