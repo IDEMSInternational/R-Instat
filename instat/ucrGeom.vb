@@ -1481,7 +1481,7 @@ Public Class ucrGeom
         clsgeom_mosaic_jitter.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
         clsgeom_mosaic_jitter.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
         clsgeom_mosaic_jitter.AddAesParameter("conds", strIncludedDataTypes:={"factor"})
-        clsgeom_mosaic_jitter.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
+        clsgeom_mosaic_jitter.AddAesParameter("color", strIncludedDataTypes:={"numeric"})
 
         'adding layerParameters
         clsgeom_mosaic_jitter.AddLayerParameter("divider", "editablelist", "ggmosaic::mosaic(" & Chr(34) & "h" & Chr(34) & ")", lstParameterStrings:={Chr(34) & "vspine" & Chr(34), Chr(34) & "hspine" & Chr(34), Chr(34) & "vbar" & Chr(34), Chr(34) & "hbar" & Chr(34), "ggmosaic::mosaic(" & Chr(34) & "h" & Chr(34) & ")", "ggmosaic::mosaic(" & Chr(34) & "v" & Chr(34) & ")", "ggmosaic::ddecker()"})
