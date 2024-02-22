@@ -298,9 +298,10 @@ Public Class sdgTableOptions
             ' Add column and row expressions as paramters if user has typed them
             If Not String.IsNullOrEmpty(row.Cells(1).Value) AndAlso Not String.IsNullOrEmpty(row.Cells(2).Value) Then
                 Dim clsFooterLocationNoteRFunction As New RFunction
+                clsFooterLocationNoteRFunction.SetPackageName("gt")
                 clsFooterLocationNoteRFunction.SetRCommand("cells_body")
-                clsFooterLocationNoteRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=GetStringValue(row.Cells(1).Value, True)))
-                clsFooterLocationNoteRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=GetStringValue(row.Cells(2).Value, True)))
+                clsFooterLocationNoteRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=GetStringValue(row.Cells(1).Value, False)))
+                clsFooterLocationNoteRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=GetStringValue(row.Cells(2).Value, False)))
                 clsNoteRFunction.AddParameter(New RParameter(strParameterName:="locations", strParamValue:=clsFooterLocationNoteRFunction, iNewPosition:=1))
             End If
         ElseIf dataGrid Is dataGridSourceNotes Then
@@ -379,6 +380,10 @@ Public Class sdgTableOptions
     Private Sub SetupThemeRFunctionsInOperatorOnNew(clsOperator As ROperator)
         clsThemeRFunction = New RFunction
 
+        ' Uncheck then the select radio button to orces the panel to raise it ControlValueChanged event
+        rdoSelectTheme.Checked = False
+        rdoSelectTheme.Checked = True
+
         If Not clsOperator.ContainsParameter("theme_format") Then
             Exit Sub
         End If
@@ -389,8 +394,8 @@ Public Class sdgTableOptions
             rdoManualTheme.Checked = True
         Else
             rdoSelectTheme.Checked = True
+            ucrCboSelectThemes.SetName(clsThemeRFunction.strRCommand)
         End If
-
 
     End Sub
 
@@ -406,8 +411,6 @@ Public Class sdgTableOptions
     Private Sub ucrPnlThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlThemesPanel.ControlValueChanged
         ucrCboSelectThemes.Visible = False
         btnManualTheme.Visible = False
-
-        'clsThemeRFunction = New RFunction
 
         If rdoSelectTheme.Checked Then
             ucrCboSelectThemes.Visible = True
@@ -449,8 +452,6 @@ Public Class sdgTableOptions
 
         clsThemeRFunction.SetRCommand(strCommand)
     End Sub
-
-
 
     Private Sub btnManualTheme_Click(sender As Object, e As EventArgs) Handles btnManualTheme.Click
         sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
