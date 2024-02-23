@@ -119,7 +119,6 @@ Public Class dlgHistogram
         ucrChkOmitYAxis.SetText("Omit Y Axis")
 
         ucrChkBinWidth.SetText("Binwidth")
-        'ucrChkBinWidth.SetParameter(New RParameter("binwidth", 3))
         ucrChkBinWidth.AddToLinkedControls({ucrNudBinwidth}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudBinwidth.SetParameter(New RParameter("binwidth", 3))
@@ -132,6 +131,16 @@ Public Class dlgHistogram
         ucrChkRidges.SetText("Density Ridges")
         ucrChkRidges.AddFunctionNamesCondition(True, "geom_density_ridges")
         ucrChkRidges.AddFunctionNamesCondition(False, "geom_density_ridges", False)
+        ucrChkRidges.AddToLinkedControls({ucrChkMinHeight}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkMinHeight.SetText("Min Height")
+        ucrChkMinHeight.AddToLinkedControls({ucrNudMinHeight}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudMinHeight.SetParameter(New RParameter("rel_min_height", 4))
+        ucrNudMinHeight.SetMinMax(0.00, 10.0)
+        ucrNudMinHeight.DecimalPlaces = 3
+        ucrNudMinHeight.Increment = 0.01
+        ucrNudMinHeight.SetRDefault(0.01)
 
         ucrVariablesAsFactorforHist.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
@@ -252,7 +261,9 @@ Public Class dlgHistogram
             ucrInputStats.SetRCode(clsHistAesFunction, bReset)
             ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
             ucrChkBinWidth.SetRCode(clsRgeomPlotFunction, bReset)
+            ucrChkMinHeight.SetRCode(clsRgeomPlotFunction, bReset)
             ucrNudBinwidth.SetRCode(clsRgeomPlotFunction, bReset)
+            ucrNudMinHeight.SetRCode(clsRgeomPlotFunction, bReset)
             ucrChkOmitYAxis.SetRCode(clsYlabScalesFunction, bReset)
         End If
     End Sub
@@ -388,7 +399,7 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrChkOmitYAxis.ControlValueChanged
+    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrChkOmitYAxis.ControlValueChanged, ucrNudBinwidth.ControlValueChanged
         toolStripMenuItemHistogramOptions.Enabled = rdoHistogram.Checked AndAlso Not ucrChkDisplayAsDotPlot.Checked
         toolStripMenuItemDotOptions.Enabled = rdoHistogram.Checked AndAlso ucrChkDisplayAsDotPlot.Checked
         toolStripMenuItemDensityOptions.Enabled = rdoDensity_ridges.Checked AndAlso Not ucrChkRidges.Checked
@@ -512,13 +523,10 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged, ucrChkBinWidth.ControlContentsChanged, ucrNudBinwidth.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged, ucrChkBinWidth.ControlContentsChanged, ucrNudBinwidth.ControlContentsChanged, ucrNudMinHeight.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnlOptions_Control(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforHist.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged
-
-    End Sub
     Private Sub ucrChkOmitYAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitYAxis.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged
         If ucrChkDisplayAsDotPlot.Checked Then
             If ucrChkOmitYAxis.Checked Then
@@ -528,4 +536,5 @@ Public Class dlgHistogram
             End If
         End If
     End Sub
+
 End Class

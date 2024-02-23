@@ -67,6 +67,8 @@ Partial Class dlgHistogram
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrChkOmitYAxis = New instat.ucrCheck()
+        Me.ucrNudMinHeight = New instat.ucrNud()
+        Me.ucrChkMinHeight = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -350,10 +352,32 @@ Partial Class dlgHistogram
         '
         Me.ucrChkOmitYAxis.AutoSize = True
         Me.ucrChkOmitYAxis.Checked = False
-        Me.ucrChkOmitYAxis.Location = New System.Drawing.Point(8, 262)
+        Me.ucrChkOmitYAxis.Location = New System.Drawing.Point(10, 262)
         Me.ucrChkOmitYAxis.Name = "ucrChkOmitYAxis"
         Me.ucrChkOmitYAxis.Size = New System.Drawing.Size(153, 23)
         Me.ucrChkOmitYAxis.TabIndex = 42
+        '
+        'ucrNudMinHeight
+        '
+        Me.ucrNudMinHeight.AutoSize = True
+        Me.ucrNudMinHeight.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinHeight.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMinHeight.Location = New System.Drawing.Point(100, 313)
+        Me.ucrNudMinHeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinHeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinHeight.Name = "ucrNudMinHeight"
+        Me.ucrNudMinHeight.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinHeight.TabIndex = 44
+        Me.ucrNudMinHeight.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkMinHeight
+        '
+        Me.ucrChkMinHeight.AutoSize = True
+        Me.ucrChkMinHeight.Checked = False
+        Me.ucrChkMinHeight.Location = New System.Drawing.Point(10, 311)
+        Me.ucrChkMinHeight.Name = "ucrChkMinHeight"
+        Me.ucrChkMinHeight.Size = New System.Drawing.Size(153, 23)
+        Me.ucrChkMinHeight.TabIndex = 43
         '
         'dlgHistogram
         '
@@ -361,6 +385,8 @@ Partial Class dlgHistogram
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(448, 422)
+        Me.Controls.Add(Me.ucrNudMinHeight)
+        Me.Controls.Add(Me.ucrChkMinHeight)
         Me.Controls.Add(Me.ucrChkOmitYAxis)
         Me.Controls.Add(Me.ucrNudBinwidth)
         Me.Controls.Add(Me.ucrChkBinWidth)
@@ -422,4 +448,6 @@ Partial Class dlgHistogram
     Friend WithEvents ucrChkBinWidth As ucrCheck
     Friend WithEvents ucrNudBinwidth As ucrNud
     Friend WithEvents ucrChkOmitYAxis As ucrCheck
+    Friend WithEvents ucrNudMinHeight As ucrNud
+    Friend WithEvents ucrChkMinHeight As ucrCheck
 End Class
