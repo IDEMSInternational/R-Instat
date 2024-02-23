@@ -20,9 +20,7 @@ Public Class dlgHistogram
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsBaseOperator As New ROperator
-    Private clsBaseOperator2 As New ROperator
     Private clsYlabScalesFunction As New RFunction
-    Private clsBreaksFunction As New RFunction
     Private clsRggplotFunction As New RFunction
     Private clsRgeomPlotFunction As New RFunction
     Private clsRaesFunction As New RFunction
@@ -163,14 +161,12 @@ Public Class dlgHistogram
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
-        clsBaseOperator2 = New ROperator
         clsRggplotFunction = New RFunction
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
         clsHistAesFunction = New RFunction
         clsPercentage = New RFunction
         clsYlabScalesFunction = New RFunction
-        clsBreaksFunction = New RFunction
         clsForecatsReverse = New RFunction
         clsForecatsInfreqValue = New RFunction
         clsForecatsReverseValue = New RFunction
@@ -215,9 +211,6 @@ Public Class dlgHistogram
 
         clsForecatsInfreqValue.SetPackageName("forcats")
         clsForecatsInfreqValue.SetRCommand("fct_infreq")
-
-        'clsBaseOperator2.SetOperation("+")
-        'clsBaseOperator2.AddParameter("ggplot", clsRFunctionParameter:=clsYlabScalesFunction, iPosition:=0)
 
         clsYlabScalesFunction.SetRCommand("scale_y_continuous")
         clsYlabScalesFunction.AddParameter("NULL", "NULL", bIncludeArgumentName:=False, iPosition:=0)
