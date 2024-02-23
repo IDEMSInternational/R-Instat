@@ -66,9 +66,19 @@ Partial Class dlgHistogram
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+
         Me.ucrChkOmitYAxis = New instat.ucrCheck()
         Me.ucrNudMinHeight = New instat.ucrNud()
         Me.ucrChkMinHeight = New instat.ucrCheck()
+
+        Me.lblReorder = New System.Windows.Forms.Label()
+        Me.ucrInputAddReorder = New instat.ucrInputComboBox()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
+        Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegend = New instat.ucrCheck()
+
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -284,7 +294,7 @@ Partial Class dlgHistogram
         'ucrSaveHist
         '
         Me.ucrSaveHist.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 342)
+        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 385)
         Me.ucrSaveHist.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrSaveHist.Name = "ucrSaveHist"
         Me.ucrSaveHist.Size = New System.Drawing.Size(322, 24)
@@ -333,7 +343,7 @@ Partial Class dlgHistogram
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 365)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 408)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -379,17 +389,81 @@ Partial Class dlgHistogram
         Me.ucrChkMinHeight.Size = New System.Drawing.Size(153, 23)
         Me.ucrChkMinHeight.TabIndex = 43
         '
+        'ucrInputStation
+        '
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputStation.GetSetSelectedIndex = -1
+        Me.ucrInputStation.IsReadOnly = False
+        Me.ucrInputStation.Location = New System.Drawing.Point(318, 348)
+        Me.ucrInputStation.Name = "ucrInputStation"
+        Me.ucrInputStation.Size = New System.Drawing.Size(101, 21)
+        Me.ucrInputStation.TabIndex = 86
+        '
+        'ucr1stFactorReceiver
+        '
+        Me.ucr1stFactorReceiver.AutoSize = True
+        Me.ucr1stFactorReceiver.frmParent = Me
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(205, 349)
+        Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
+        Me.ucr1stFactorReceiver.Selector = Nothing
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(110, 26)
+        Me.ucr1stFactorReceiver.strNcFilePath = ""
+        Me.ucr1stFactorReceiver.TabIndex = 85
+        Me.ucr1stFactorReceiver.ucrSelector = Nothing
+        '
+        'lblFacetBy
+        '
+        Me.lblFacetBy.AutoSize = True
+        Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFacetBy.Location = New System.Drawing.Point(208, 334)
+        Me.lblFacetBy.Name = "lblFacetBy"
+        Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
+        Me.lblFacetBy.TabIndex = 84
+        Me.lblFacetBy.Tag = ""
+        Me.lblFacetBy.Text = "Facet By:"
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(87, 348)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
+        Me.ucrInputLegendPosition.TabIndex = 88
+        '
+        'ucrChkLegend
+        '
+        Me.ucrChkLegend.AutoSize = True
+        Me.ucrChkLegend.Checked = False
+        Me.ucrChkLegend.Location = New System.Drawing.Point(11, 349)
+        Me.ucrChkLegend.Name = "ucrChkLegend"
+        Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkLegend.TabIndex = 87
+        '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+
         Me.ClientSize = New System.Drawing.Size(448, 422)
         Me.Controls.Add(Me.ucrNudMinHeight)
         Me.Controls.Add(Me.ucrChkMinHeight)
         Me.Controls.Add(Me.ucrChkOmitYAxis)
         Me.Controls.Add(Me.ucrNudBinwidth)
         Me.Controls.Add(Me.ucrChkBinWidth)
+
+        Me.ClientSize = New System.Drawing.Size(448, 461)
+        Me.Controls.Add(Me.ucrInputStation)
+        Me.Controls.Add(Me.ucr1stFactorReceiver)
+        Me.Controls.Add(Me.lblFacetBy)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
+        Me.Controls.Add(Me.ucrChkLegend)
+
         Me.Controls.Add(Me.lblReorder)
         Me.Controls.Add(Me.ucrInputAddReorder)
         Me.Controls.Add(Me.cmdOptions)
@@ -445,9 +519,17 @@ Partial Class dlgHistogram
     Friend WithEvents toolStripMenuItemDotOptions As ToolStripMenuItem
     Friend WithEvents lblReorder As Label
     Friend WithEvents ucrInputAddReorder As ucrInputComboBox
+
     Friend WithEvents ucrChkBinWidth As ucrCheck
     Friend WithEvents ucrNudBinwidth As ucrNud
     Friend WithEvents ucrChkOmitYAxis As ucrCheck
     Friend WithEvents ucrNudMinHeight As ucrNud
     Friend WithEvents ucrChkMinHeight As ucrCheck
+
+    Friend WithEvents ucrInputStation As ucrInputComboBox
+    Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
+    Friend WithEvents lblFacetBy As Label
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegend As ucrCheck
+
 End Class
