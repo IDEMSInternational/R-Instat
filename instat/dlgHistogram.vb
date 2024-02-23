@@ -794,9 +794,6 @@ Public Class dlgHistogram
         AutoFacetStation()
         SetPipeAssignTo()
     End Sub
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
 
 
 End Class
