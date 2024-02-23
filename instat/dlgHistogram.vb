@@ -20,6 +20,9 @@ Public Class dlgHistogram
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsBaseOperator As New ROperator
+    Private clsBaseOperator2 As New ROperator
+    Private clsYlabScalesFunction As New RFunction
+    Private clsBreaksFunction As New RFunction
     Private clsRggplotFunction As New RFunction
     Private clsRgeomPlotFunction As New RFunction
     Private clsRaesFunction As New RFunction
@@ -114,6 +117,8 @@ Public Class dlgHistogram
         ucrChkDisplayAsDotPlot.SetText("Display as Dotplot")
         ucrChkDisplayAsDotPlot.AddFunctionNamesCondition(True, "geom_dotplot")
         ucrChkDisplayAsDotPlot.AddFunctionNamesCondition(False, "geom_dotplot", False)
+        ucrChkDisplayAsDotPlot.AddToLinkedControls({ucrChkOmitYAxis}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkOmitYAxis.SetText("Omit Y Axis")
 
         ucrChkBinWidth.SetText("Binwidth")
         'ucrChkBinWidth.SetParameter(New RParameter("binwidth", 3))
@@ -158,11 +163,14 @@ Public Class dlgHistogram
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
+        clsBaseOperator2 = New ROperator
         clsRggplotFunction = New RFunction
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
         clsHistAesFunction = New RFunction
         clsPercentage = New RFunction
+        clsYlabScalesFunction = New RFunction
+        clsBreaksFunction = New RFunction
         clsForecatsReverse = New RFunction
         clsForecatsInfreqValue = New RFunction
         clsForecatsReverseValue = New RFunction
@@ -175,6 +183,7 @@ Public Class dlgHistogram
 
         ucrInputAddReorder.SetText(strNone)
         ucrInputAddReorder.bUpdateRCodeFromControl = True
+
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -206,6 +215,13 @@ Public Class dlgHistogram
 
         clsForecatsInfreqValue.SetPackageName("forcats")
         clsForecatsInfreqValue.SetRCommand("fct_infreq")
+
+        'clsBaseOperator2.SetOperation("+")
+        'clsBaseOperator2.AddParameter("ggplot", clsRFunctionParameter:=clsYlabScalesFunction, iPosition:=0)
+
+        clsYlabScalesFunction.SetRCommand("scale_y_continuous")
+        clsYlabScalesFunction.AddParameter("NULL", "NULL", bIncludeArgumentName:=False, iPosition:=0)
+        clsYlabScalesFunction.AddParameter("breaks", "NULL", iPosition:=1)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -244,6 +260,7 @@ Public Class dlgHistogram
             ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
             ucrChkBinWidth.SetRCode(clsRgeomPlotFunction, bReset)
             ucrNudBinwidth.SetRCode(clsRgeomPlotFunction, bReset)
+            ucrChkOmitYAxis.SetRCode(clsYlabScalesFunction, bReset)
         End If
     End Sub
 
@@ -269,12 +286,6 @@ Public Class dlgHistogram
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         ucrInputAddReorder.Visible = Not ucrFactorReceiver.IsEmpty()
 
-        If Not ucrNudBinwidth.IsEmpty Then
-            clsRgeomPlotFunction.AddParameter("binwidth", 1.5, iPosition:=1)
-        Else
-            clsRgeomPlotFunction.RemoveParameterByName("binwidth")
-        End If
-
         If rdoHistogram.Checked Then
             If ucrChkDisplayAsDotPlot.Checked Then
                 clsRgeomPlotFunction.SetRCommand("geom_dotplot")
@@ -294,11 +305,7 @@ Public Class dlgHistogram
                     clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
                 End If
             End If
-            If Not ucrNudBinwidth.IsEmpty Then
-                clsRgeomPlotFunction.AddParameter("binwidth", 1.5, iPosition:=1)
-            Else
-                clsRgeomPlotFunction.RemoveParameterByName("binwidth")
-            End If
+
             ucrFactorReceiver.ChangeParameterName("fill")
             If Not ucrSaveHist.bUserTyped Then ucrSaveHist.SetPrefix("histogram")
         End If
@@ -331,6 +338,7 @@ Public Class dlgHistogram
         End If
         autoTranslate(Me)
         UpdateParameter()
+
     End Sub
 
     Private Sub UpdateParameter()
@@ -387,7 +395,7 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged, ucrInputAddReorder.ControlValueChanged
+    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrChkOmitYAxis.ControlValueChanged
         toolStripMenuItemHistogramOptions.Enabled = rdoHistogram.Checked AndAlso Not ucrChkDisplayAsDotPlot.Checked
         toolStripMenuItemDotOptions.Enabled = rdoHistogram.Checked AndAlso ucrChkDisplayAsDotPlot.Checked
         toolStripMenuItemDensityOptions.Enabled = rdoDensity_ridges.Checked AndAlso Not ucrChkRidges.Checked
@@ -518,5 +526,13 @@ Public Class dlgHistogram
     Private Sub ucrPnlOptions_Control(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforHist.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged
 
     End Sub
-
+    Private Sub ucrChkOmitYAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitYAxis.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged
+        If ucrChkDisplayAsDotPlot.Checked Then
+            If ucrChkOmitYAxis.Checked Then
+                clsBaseOperator.AddParameter("scale", clsRFunctionParameter:=clsYlabScalesFunction, iPosition:=4, bIncludeArgumentName:=False)
+            Else
+                clsBaseOperator.RemoveParameterByName("scale")
+            End If
+        End If
+    End Sub
 End Class
