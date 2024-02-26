@@ -56,6 +56,7 @@ Public Class sdgTimeSeries
     End Sub
 
     Public Sub InitialiseControls()
+        ucrButtonsSummaries.iHelpTopicID = 268
         ucrPnlSummaries.AddRadioButton(rdoComparison)
         ucrPnlSummaries.AddRadioButton(rdoIndividual)
 

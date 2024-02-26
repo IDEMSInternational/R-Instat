@@ -155,8 +155,8 @@
     <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RInsightF461, Version=0.0.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RInsightF461.0.0.7\lib\net461\RInsightF461.dll</HintPath>
+    <Reference Include="RInsightF461, Version=0.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RInsightF461.0.0.10\lib\net461\RInsightF461.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
@@ -237,6 +237,12 @@
       <DependentUpon>dlgEdit.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportForClimpact.Designer.vb">
+      <DependentUpon>dlgExportForClimpact.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportForClimpact.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFindInVariableOrFilter.Designer.vb">
@@ -3067,6 +3073,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEdit.resx">
       <DependentUpon>dlgEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportForClimpact.resx">
+      <DependentUpon>dlgExportForClimpact.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToClimsoft.resx">
       <DependentUpon>dlgExportToClimsoft.vb</DependentUpon>
