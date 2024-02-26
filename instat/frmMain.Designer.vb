@@ -2185,7 +2185,6 @@ Partial Class frmMain
         '
         'mnuClimaticDescribeClimograph
         '
-        Me.mnuClimaticDescribeClimograph.Enabled = False
         Me.mnuClimaticDescribeClimograph.Name = "mnuClimaticDescribeClimograph"
         Me.mnuClimaticDescribeClimograph.Size = New System.Drawing.Size(211, 22)
         Me.mnuClimaticDescribeClimograph.Text = "Climograph..."
