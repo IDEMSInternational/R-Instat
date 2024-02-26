@@ -351,9 +351,10 @@ Public Class sdgCalculationsSummmary
                 clsCalculationFunction.RemoveParameterByName("function_exp")
             End If
 
-            If Not ucrCalcSummary.ucrSelectorForCalculations.CurrentReceiver.IsEmpty Then
+            If ucrCalcSummary.ucrSelectorForCalculations.lstAvailableVariable.Items.Count > 0 Then
+                Dim lstItems As String() = ucrCalcSummary.ucrSelectorForCalculations.lstAvailableVariable.Items.Cast(Of ListViewItem)().Select(Function(item) item.Text).ToArray()
                 clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(
-                                                    ucrCalcSummary.ucrSelectorForCalculations.CurrentReceiver.GetVariableNamesList(bWithQuotes:=False),
+                                                    lstItems,
                                                      ucrCalcSummary.ucrSelectorForCalculations))
             Else
                 clsCalculationFunction.RemoveParameterByName("calculated_from")
@@ -383,11 +384,12 @@ Public Class sdgCalculationsSummmary
 
         strCalcFromList = "list("
         For i = 0 To lstVariables.Count - 1
-            If i > 0 Then
-                strCalcFromList = strCalcFromList & ","
-            End If
             Dim strDataName = lstVariables(i)
             If Not String.IsNullOrEmpty(strDataName) Then
+                If i > 0 Then
+                    strCalcFromList = strCalcFromList & ","
+                End If
+
                 strCalcFromList = strCalcFromList & ucrCurrentSelector.strCurrentDataFrame & " = " & Chr(34) & strDataName & Chr(34)
             End If
         Next
