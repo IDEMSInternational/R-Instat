@@ -419,6 +419,8 @@ Public Class dlgHistogram
         ElseIf rdoFrequencyPolygon.Checked Then
             ucrFactorReceiver.ChangeParameterName("colour")
             clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
+            clsRgeomPlotFunction.RemoveParameterByName("binpositions")
+            clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("frequency_polygon")
             End If
@@ -740,6 +742,25 @@ Public Class dlgHistogram
         End If
     End Sub
 
+    Private Sub ucrChkMinHeight_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMinHeight.ControlValueChanged, ucrNudMinHeight.ControlValueChanged
+        If ucrChkRidges.Checked Then
+            If ucrChkMinHeight.Checked Then
+                clsRgeomPlotFunction.AddParameter("rel_min_height", ucrNudMinHeight.GetText, iPosition:=4)
+            Else
+                clsRgeomPlotFunction.RemoveParameterByName("rel_min_height")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkBinWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBinWidth.ControlValueChanged, ucrNudBinwidth.ControlValueChanged
+        If Not rdoDensity_ridges.Checked Then
+            If ucrChkBinWidth.Checked Then
+                clsRgeomPlotFunction.AddParameter("binwidth", ucrNudBinwidth.GetText, iPosition:=4)
+            Else
+                clsRgeomPlotFunction.RemoveParameterByName("binwidth")
+            End If
+        End If
+    End Sub
 
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged
         AddRemoveFacets()
