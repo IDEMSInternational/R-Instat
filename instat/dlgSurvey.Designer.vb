@@ -22,62 +22,41 @@ Partial Class dlgSurvey
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrChkRatios = New instat.ucrCheck()
-        Me.ucrChkContingencyTables = New instat.ucrCheck()
-        Me.ucrBase = New instat.ucrButtons()
         Me.lblSummaryStat = New System.Windows.Forms.Label()
-        Me.ucrInputSummaryStat = New instat.ucrInputComboBox()
-        Me.ucrChkSummary = New instat.ucrCheck()
         Me.lblInputID = New System.Windows.Forms.Label()
         Me.lblStrata = New System.Windows.Forms.Label()
         Me.rdoClustered = New System.Windows.Forms.RadioButton()
         Me.rdoStratified = New System.Windows.Forms.RadioButton()
         Me.rdoSRS = New System.Windows.Forms.RadioButton()
         Me.lblFPC = New System.Windows.Forms.Label()
+        Me.lblId = New System.Windows.Forms.Label()
+        Me.lblWeights = New System.Windows.Forms.Label()
+        Me.lblVar1srs = New System.Windows.Forms.Label()
+        Me.lblVar2srs = New System.Windows.Forms.Label()
+        Me.lblPlots = New System.Windows.Forms.Label()
+        Me.ucrInputPlots = New instat.ucrInputComboBox()
+        Me.ucrVariablesAsFactorForContengy = New instat.ucrVariablesAsFactor()
+        Me.ucrReceiverVar2srs = New instat.ucrReceiverSingle()
+        Me.ucrReceiverVar1srs = New instat.ucrReceiverSingle()
+        Me.ucrChkRatios = New instat.ucrCheck()
+        Me.ucrChkContingencyTables = New instat.ucrCheck()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputSummaryStat = New instat.ucrInputComboBox()
+        Me.ucrChkSummary = New instat.ucrCheck()
         Me.ucrReceiverFPC = New instat.ucrReceiverSingle()
         Me.ucrPnlMethod = New instat.UcrPanel()
         Me.ucrReceiverStrata = New instat.ucrReceiverSingle()
-        Me.lblId = New System.Windows.Forms.Label()
-        Me.lblWeights = New System.Windows.Forms.Label()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrSelectorSurvey = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputId = New instat.ucrInputTextBox()
         Me.ucrReceiverSingleID = New instat.ucrReceiverSingle()
-        Me.lblVar1srs = New System.Windows.Forms.Label()
-        Me.ucrReceiverVar1srs = New instat.ucrReceiverSingle()
-        Me.lblVar2srs = New System.Windows.Forms.Label()
-        Me.ucrReceiverVar2srs = New instat.ucrReceiverSingle()
-        Me.ucrVariablesAsFactorForContengy = New instat.ucrVariablesAsFactor()
-        Me.lblPlots = New System.Windows.Forms.Label()
-        Me.ucrInputPlots = New instat.ucrInputComboBox()
+        Me.ucrChkModels = New instat.ucrCheck()
+        Me.lblModelsType = New System.Windows.Forms.Label()
+        Me.ucrInputModelsType = New instat.ucrInputComboBox()
+        Me.ucrChkModelsSummary = New instat.ucrCheck()
+        Me.ucrChkModelsPlot = New instat.ucrCheck()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.SuspendLayout()
-        '
-        'ucrChkRatios
-        '
-        Me.ucrChkRatios.AutoSize = True
-        Me.ucrChkRatios.Checked = False
-        Me.ucrChkRatios.Location = New System.Drawing.Point(14, 376)
-        Me.ucrChkRatios.Name = "ucrChkRatios"
-        Me.ucrChkRatios.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkRatios.TabIndex = 63
-        '
-        'ucrChkContingencyTables
-        '
-        Me.ucrChkContingencyTables.AutoSize = True
-        Me.ucrChkContingencyTables.Checked = False
-        Me.ucrChkContingencyTables.Location = New System.Drawing.Point(14, 400)
-        Me.ucrChkContingencyTables.Name = "ucrChkContingencyTables"
-        Me.ucrChkContingencyTables.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkContingencyTables.TabIndex = 62
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(14, 426)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 61
         '
         'lblSummaryStat
         '
@@ -87,26 +66,6 @@ Partial Class dlgSurvey
         Me.lblSummaryStat.Size = New System.Drawing.Size(121, 20)
         Me.lblSummaryStat.TabIndex = 60
         Me.lblSummaryStat.Text = "Summary Statistic:"
-        '
-        'ucrInputSummaryStat
-        '
-        Me.ucrInputSummaryStat.AddQuotesIfUnrecognised = True
-        Me.ucrInputSummaryStat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputSummaryStat.GetSetSelectedIndex = -1
-        Me.ucrInputSummaryStat.IsReadOnly = False
-        Me.ucrInputSummaryStat.Location = New System.Drawing.Point(14, 300)
-        Me.ucrInputSummaryStat.Name = "ucrInputSummaryStat"
-        Me.ucrInputSummaryStat.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputSummaryStat.TabIndex = 59
-        '
-        'ucrChkSummary
-        '
-        Me.ucrChkSummary.AutoSize = True
-        Me.ucrChkSummary.Checked = False
-        Me.ucrChkSummary.Location = New System.Drawing.Point(14, 255)
-        Me.ucrChkSummary.Name = "ucrChkSummary"
-        Me.ucrChkSummary.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkSummary.TabIndex = 58
         '
         'lblInputID
         '
@@ -186,6 +145,148 @@ Partial Class dlgSurvey
         Me.lblFPC.TabIndex = 43
         Me.lblFPC.Text = "FPC:"
         '
+        'lblId
+        '
+        Me.lblId.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblId.Location = New System.Drawing.Point(297, 89)
+        Me.lblId.Name = "lblId"
+        Me.lblId.Size = New System.Drawing.Size(80, 14)
+        Me.lblId.TabIndex = 45
+        Me.lblId.Text = "Ids:"
+        '
+        'lblWeights
+        '
+        Me.lblWeights.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblWeights.Location = New System.Drawing.Point(290, 130)
+        Me.lblWeights.Name = "lblWeights"
+        Me.lblWeights.Size = New System.Drawing.Size(123, 13)
+        Me.lblWeights.TabIndex = 47
+        Me.lblWeights.Text = "Weights:"
+        '
+        'lblVar1srs
+        '
+        Me.lblVar1srs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVar1srs.Location = New System.Drawing.Point(290, 131)
+        Me.lblVar1srs.Name = "lblVar1srs"
+        Me.lblVar1srs.Size = New System.Drawing.Size(123, 13)
+        Me.lblVar1srs.TabIndex = 69
+        Me.lblVar1srs.Text = "Var1:"
+        '
+        'lblVar2srs
+        '
+        Me.lblVar2srs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVar2srs.Location = New System.Drawing.Point(290, 168)
+        Me.lblVar2srs.Name = "lblVar2srs"
+        Me.lblVar2srs.Size = New System.Drawing.Size(123, 13)
+        Me.lblVar2srs.TabIndex = 71
+        Me.lblVar2srs.Text = "Var2:"
+        '
+        'lblPlots
+        '
+        Me.lblPlots.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPlots.Location = New System.Drawing.Point(11, 323)
+        Me.lblPlots.Name = "lblPlots"
+        Me.lblPlots.Size = New System.Drawing.Size(121, 20)
+        Me.lblPlots.TabIndex = 74
+        Me.lblPlots.Text = "Plots:"
+        '
+        'ucrInputPlots
+        '
+        Me.ucrInputPlots.AddQuotesIfUnrecognised = True
+        Me.ucrInputPlots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPlots.GetSetSelectedIndex = -1
+        Me.ucrInputPlots.IsReadOnly = False
+        Me.ucrInputPlots.Location = New System.Drawing.Point(14, 343)
+        Me.ucrInputPlots.Name = "ucrInputPlots"
+        Me.ucrInputPlots.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputPlots.TabIndex = 73
+        '
+        'ucrVariablesAsFactorForContengy
+        '
+        Me.ucrVariablesAsFactorForContengy.AutoSize = True
+        Me.ucrVariablesAsFactorForContengy.frmParent = Me
+        Me.ucrVariablesAsFactorForContengy.Location = New System.Drawing.Point(290, 207)
+        Me.ucrVariablesAsFactorForContengy.Name = "ucrVariablesAsFactorForContengy"
+        Me.ucrVariablesAsFactorForContengy.Selector = Nothing
+        Me.ucrVariablesAsFactorForContengy.Size = New System.Drawing.Size(123, 136)
+        Me.ucrVariablesAsFactorForContengy.strNcFilePath = ""
+        Me.ucrVariablesAsFactorForContengy.TabIndex = 72
+        Me.ucrVariablesAsFactorForContengy.ucrSelector = Nothing
+        Me.ucrVariablesAsFactorForContengy.ucrVariableSelector = Nothing
+        '
+        'ucrReceiverVar2srs
+        '
+        Me.ucrReceiverVar2srs.AutoSize = True
+        Me.ucrReceiverVar2srs.frmParent = Me
+        Me.ucrReceiverVar2srs.Location = New System.Drawing.Point(293, 181)
+        Me.ucrReceiverVar2srs.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverVar2srs.Name = "ucrReceiverVar2srs"
+        Me.ucrReceiverVar2srs.Selector = Nothing
+        Me.ucrReceiverVar2srs.Size = New System.Drawing.Size(123, 20)
+        Me.ucrReceiverVar2srs.strNcFilePath = ""
+        Me.ucrReceiverVar2srs.TabIndex = 70
+        Me.ucrReceiverVar2srs.ucrSelector = Nothing
+        '
+        'ucrReceiverVar1srs
+        '
+        Me.ucrReceiverVar1srs.AutoSize = True
+        Me.ucrReceiverVar1srs.frmParent = Me
+        Me.ucrReceiverVar1srs.Location = New System.Drawing.Point(293, 144)
+        Me.ucrReceiverVar1srs.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverVar1srs.Name = "ucrReceiverVar1srs"
+        Me.ucrReceiverVar1srs.Selector = Nothing
+        Me.ucrReceiverVar1srs.Size = New System.Drawing.Size(123, 20)
+        Me.ucrReceiverVar1srs.strNcFilePath = ""
+        Me.ucrReceiverVar1srs.TabIndex = 68
+        Me.ucrReceiverVar1srs.ucrSelector = Nothing
+        '
+        'ucrChkRatios
+        '
+        Me.ucrChkRatios.AutoSize = True
+        Me.ucrChkRatios.Checked = False
+        Me.ucrChkRatios.Location = New System.Drawing.Point(14, 376)
+        Me.ucrChkRatios.Name = "ucrChkRatios"
+        Me.ucrChkRatios.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkRatios.TabIndex = 63
+        '
+        'ucrChkContingencyTables
+        '
+        Me.ucrChkContingencyTables.AutoSize = True
+        Me.ucrChkContingencyTables.Checked = False
+        Me.ucrChkContingencyTables.Location = New System.Drawing.Point(14, 400)
+        Me.ucrChkContingencyTables.Name = "ucrChkContingencyTables"
+        Me.ucrChkContingencyTables.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkContingencyTables.TabIndex = 62
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(14, 514)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.TabIndex = 61
+        '
+        'ucrInputSummaryStat
+        '
+        Me.ucrInputSummaryStat.AddQuotesIfUnrecognised = True
+        Me.ucrInputSummaryStat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSummaryStat.GetSetSelectedIndex = -1
+        Me.ucrInputSummaryStat.IsReadOnly = False
+        Me.ucrInputSummaryStat.Location = New System.Drawing.Point(14, 300)
+        Me.ucrInputSummaryStat.Name = "ucrInputSummaryStat"
+        Me.ucrInputSummaryStat.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSummaryStat.TabIndex = 59
+        '
+        'ucrChkSummary
+        '
+        Me.ucrChkSummary.AutoSize = True
+        Me.ucrChkSummary.Checked = False
+        Me.ucrChkSummary.Location = New System.Drawing.Point(14, 255)
+        Me.ucrChkSummary.Name = "ucrChkSummary"
+        Me.ucrChkSummary.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSummary.TabIndex = 58
+        '
         'ucrReceiverFPC
         '
         Me.ucrReceiverFPC.AutoSize = True
@@ -219,24 +320,6 @@ Partial Class dlgSurvey
         Me.ucrReceiverStrata.strNcFilePath = ""
         Me.ucrReceiverStrata.TabIndex = 49
         Me.ucrReceiverStrata.ucrSelector = Nothing
-        '
-        'lblId
-        '
-        Me.lblId.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblId.Location = New System.Drawing.Point(297, 89)
-        Me.lblId.Name = "lblId"
-        Me.lblId.Size = New System.Drawing.Size(80, 14)
-        Me.lblId.TabIndex = 45
-        Me.lblId.Text = "Ids:"
-        '
-        'lblWeights
-        '
-        Me.lblWeights.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblWeights.Location = New System.Drawing.Point(290, 130)
-        Me.lblWeights.Name = "lblWeights"
-        Me.lblWeights.Size = New System.Drawing.Size(123, 13)
-        Me.lblWeights.TabIndex = 47
-        Me.lblWeights.Text = "Weights:"
         '
         'ucrReceiverWeights
         '
@@ -287,88 +370,73 @@ Partial Class dlgSurvey
         Me.ucrReceiverSingleID.TabIndex = 46
         Me.ucrReceiverSingleID.ucrSelector = Nothing
         '
-        'lblVar1srs
+        'ucrChkModels
         '
-        Me.lblVar1srs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVar1srs.Location = New System.Drawing.Point(290, 131)
-        Me.lblVar1srs.Name = "lblVar1srs"
-        Me.lblVar1srs.Size = New System.Drawing.Size(123, 13)
-        Me.lblVar1srs.TabIndex = 69
-        Me.lblVar1srs.Text = "Var1:"
+        Me.ucrChkModels.AutoSize = True
+        Me.ucrChkModels.Checked = False
+        Me.ucrChkModels.Location = New System.Drawing.Point(277, 376)
+        Me.ucrChkModels.Name = "ucrChkModels"
+        Me.ucrChkModels.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkModels.TabIndex = 75
         '
-        'ucrReceiverVar1srs
+        'lblModelsType
         '
-        Me.ucrReceiverVar1srs.AutoSize = True
-        Me.ucrReceiverVar1srs.frmParent = Me
-        Me.ucrReceiverVar1srs.Location = New System.Drawing.Point(293, 144)
-        Me.ucrReceiverVar1srs.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverVar1srs.Name = "ucrReceiverVar1srs"
-        Me.ucrReceiverVar1srs.Selector = Nothing
-        Me.ucrReceiverVar1srs.Size = New System.Drawing.Size(123, 20)
-        Me.ucrReceiverVar1srs.strNcFilePath = ""
-        Me.ucrReceiverVar1srs.TabIndex = 68
-        Me.ucrReceiverVar1srs.ucrSelector = Nothing
+        Me.lblModelsType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblModelsType.Location = New System.Drawing.Point(274, 402)
+        Me.lblModelsType.Name = "lblModelsType"
+        Me.lblModelsType.Size = New System.Drawing.Size(103, 21)
+        Me.lblModelsType.TabIndex = 76
+        Me.lblModelsType.Text = "Models Type:"
         '
-        'lblVar2srs
+        'ucrInputModelsType
         '
-        Me.lblVar2srs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVar2srs.Location = New System.Drawing.Point(290, 168)
-        Me.lblVar2srs.Name = "lblVar2srs"
-        Me.lblVar2srs.Size = New System.Drawing.Size(123, 13)
-        Me.lblVar2srs.TabIndex = 71
-        Me.lblVar2srs.Text = "Var2:"
+        Me.ucrInputModelsType.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelsType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputModelsType.GetSetSelectedIndex = -1
+        Me.ucrInputModelsType.IsReadOnly = False
+        Me.ucrInputModelsType.Location = New System.Drawing.Point(373, 400)
+        Me.ucrInputModelsType.Name = "ucrInputModelsType"
+        Me.ucrInputModelsType.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputModelsType.TabIndex = 77
         '
-        'ucrReceiverVar2srs
+        'ucrChkModelsSummary
         '
-        Me.ucrReceiverVar2srs.AutoSize = True
-        Me.ucrReceiverVar2srs.frmParent = Me
-        Me.ucrReceiverVar2srs.Location = New System.Drawing.Point(293, 181)
-        Me.ucrReceiverVar2srs.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverVar2srs.Name = "ucrReceiverVar2srs"
-        Me.ucrReceiverVar2srs.Selector = Nothing
-        Me.ucrReceiverVar2srs.Size = New System.Drawing.Size(123, 20)
-        Me.ucrReceiverVar2srs.strNcFilePath = ""
-        Me.ucrReceiverVar2srs.TabIndex = 70
-        Me.ucrReceiverVar2srs.ucrSelector = Nothing
+        Me.ucrChkModelsSummary.AutoSize = True
+        Me.ucrChkModelsSummary.Checked = False
+        Me.ucrChkModelsSummary.Location = New System.Drawing.Point(277, 429)
+        Me.ucrChkModelsSummary.Name = "ucrChkModelsSummary"
+        Me.ucrChkModelsSummary.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkModelsSummary.TabIndex = 78
         '
-        'ucrVariablesAsFactorForContengy
+        'ucrChkModelsPlot
         '
-        Me.ucrVariablesAsFactorForContengy.AutoSize = True
-        Me.ucrVariablesAsFactorForContengy.frmParent = Me
-        Me.ucrVariablesAsFactorForContengy.Location = New System.Drawing.Point(292, 259)
-        Me.ucrVariablesAsFactorForContengy.Name = "ucrVariablesAsFactorForContengy"
-        Me.ucrVariablesAsFactorForContengy.Selector = Nothing
-        Me.ucrVariablesAsFactorForContengy.Size = New System.Drawing.Size(123, 136)
-        Me.ucrVariablesAsFactorForContengy.strNcFilePath = ""
-        Me.ucrVariablesAsFactorForContengy.TabIndex = 72
-        Me.ucrVariablesAsFactorForContengy.ucrSelector = Nothing
-        Me.ucrVariablesAsFactorForContengy.ucrVariableSelector = Nothing
+        Me.ucrChkModelsPlot.AutoSize = True
+        Me.ucrChkModelsPlot.Checked = False
+        Me.ucrChkModelsPlot.Location = New System.Drawing.Point(277, 458)
+        Me.ucrChkModelsPlot.Name = "ucrChkModelsPlot"
+        Me.ucrChkModelsPlot.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkModelsPlot.TabIndex = 79
         '
-        'lblPlots
+        'ucrSaveGraph
         '
-        Me.lblPlots.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPlots.Location = New System.Drawing.Point(11, 323)
-        Me.lblPlots.Name = "lblPlots"
-        Me.lblPlots.Size = New System.Drawing.Size(121, 20)
-        Me.lblPlots.TabIndex = 74
-        Me.lblPlots.Text = "Plots:"
-        '
-        'ucrInputPlots
-        '
-        Me.ucrInputPlots.AddQuotesIfUnrecognised = True
-        Me.ucrInputPlots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputPlots.GetSetSelectedIndex = -1
-        Me.ucrInputPlots.IsReadOnly = False
-        Me.ucrInputPlots.Location = New System.Drawing.Point(14, 343)
-        Me.ucrInputPlots.Name = "ucrInputPlots"
-        Me.ucrInputPlots.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputPlots.TabIndex = 73
+        Me.ucrSaveGraph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(14, 484)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(339, 24)
+        Me.ucrSaveGraph.TabIndex = 80
         '
         'dlgSurvey
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(686, 503)
+        Me.ClientSize = New System.Drawing.Size(520, 573)
+        Me.Controls.Add(Me.ucrSaveGraph)
+        Me.Controls.Add(Me.ucrChkModelsPlot)
+        Me.Controls.Add(Me.ucrChkModelsSummary)
+        Me.Controls.Add(Me.ucrInputModelsType)
+        Me.Controls.Add(Me.lblModelsType)
+        Me.Controls.Add(Me.ucrChkModels)
         Me.Controls.Add(Me.lblPlots)
         Me.Controls.Add(Me.ucrInputPlots)
         Me.Controls.Add(Me.ucrVariablesAsFactorForContengy)
@@ -435,4 +503,10 @@ Partial Class dlgSurvey
     Friend WithEvents ucrVariablesAsFactorForContengy As ucrVariablesAsFactor
     Friend WithEvents lblPlots As Label
     Friend WithEvents ucrInputPlots As ucrInputComboBox
+    Friend WithEvents ucrChkModelsPlot As ucrCheck
+    Friend WithEvents ucrChkModelsSummary As ucrCheck
+    Friend WithEvents ucrInputModelsType As ucrInputComboBox
+    Friend WithEvents lblModelsType As Label
+    Friend WithEvents ucrChkModels As ucrCheck
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class

@@ -20,8 +20,8 @@ Public Class dlgSurvey
     Public bRCodeSet As Boolean = True
     Private clsSvydesignFunction As New RFunction
     Private clsSvrepDesignFunction, clsSvysmoothFunction, clsSvyhistFunction, clsSvyboxplotFunction, clsSvyTotalFunction, clsSvycoFunction, clsSvymeanFunction, clsVarFunction, clsSvyQuantileFunction, clsSvySDFunction As New RFunction
-    Private clsSummaryFunction, clsDummyFunction, clsRatioFunction, clsSvychisqFunction As New RFunction
-    Private clsVariablesOperator2, clsPlusSignOperator, clsVariablesPlusOperator, clsVariablesOperator, clsformulaOperator, clsDCastLeftContextOperator, clsVar2Operator, clsWeightsOperator, clsIDNewOperator, clsIdOperator, clsFpcOperator, clsStrataOperator As New ROperator
+    Private clsPoissonFunction, clsGetObjectRFunction, clsSvyqqplotFunction, clsSvyqqmathFunction, clsBinomialFunction, clsPlotsFunction, clsSummaryFunction, clsDummyFunction, clsRatioFunction, clsSvychisqFunction, clsSvyglmFunction As New RFunction
+    Private clsVariablesOperator2, clsPlusSignOperator, clsVariablesPlusOperator, clsVariablesOperator, clsformulaOperator, clsVar2Operator, clsWeightsOperator, clsIDNewOperator, clsIdOperator, clsFpcOperator, clsStrataOperator As New ROperator
 
     Private Sub dlgSurvey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -129,7 +129,7 @@ Public Class dlgSurvey
         ucrInputSummaryStat.SetDropDownStyleAsNonEditable()
 
         ucrInputPlots.SetParameter(New RParameter("y", 11, bNewIncludeArgumentName:=False))
-        ucrInputPlots.SetItems({"Boxplot", "Histogram", "Smooth Plot", "dot Plot", "Conditional Plot", "Quantile Plot"})
+        ucrInputPlots.SetItems({"Boxplot", "Histogram", "Smooth Plot", "Quantile Plot"})
         ucrInputPlots.SetDropDownStyleAsNonEditable()
 
         'panel setting
@@ -144,12 +144,39 @@ Public Class dlgSurvey
         ucrPnlMethod.AddToLinkedControls(ucrReceiverStrata, {rdoStratified}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrReceiverWeights, {rdoStratified, rdoClustered}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrChkModels.SetText("Models")
+        ucrChkModels.AddParameterValuesCondition(True, "check", "False")
+        ucrChkModels.AddParameterValuesCondition(False, "check", "True")
+        ucrChkModels.AddToLinkedControls({ucrVariablesAsFactorForContengy, ucrInputModelsType, ucrChkModelsSummary, ucrChkModelsPlot}, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrInputModelsType.SetParameter(New RParameter("x", 11, bNewIncludeArgumentName:=False))
+        ucrInputModelsType.SetDropDownStyleAsNonEditable()
+        ucrInputModelsType.SetItems({"Linear regression", "Multiple regression", "Logistic regression", "log-linear regression", "Linear association"})
+        ucrInputModelsType.SetRDefault(Chr(34) & "Linear regression" & Chr(34))
+        ucrInputModelsType.SetLinkedDisplayControl(lblModelsType)
+
+        ucrChkModelsSummary.SetText("Model Summary")
+        ucrChkModelsSummary.AddParameterValuesCondition(True, "check", "False")
+        ucrChkModelsSummary.AddParameterValuesCondition(False, "check", "True")
+
+        ucrChkModelsPlot.SetText("Model Plot")
+        ucrChkModelsPlot.AddParameterValuesCondition(True, "check", "False")
+        ucrChkModelsPlot.AddParameterValuesCondition(False, "check", "True")
+        ucrChkModelsPlot.AddToLinkedControls(ucrSaveGraph, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrSaveGraph.SetPrefix("SPI_plot")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorSurvey.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
-
+        clsGetObjectRFunction = New RFunction
         clsSvydesignFunction = New RFunction
         clsSummaryFunction = New RFunction
+        clsPlotsFunction = New RFunction
         clsSvrepDesignFunction = New RFunction
         clsSvymeanFunction = New RFunction
         clsVarFunction = New RFunction
@@ -163,7 +190,11 @@ Public Class dlgSurvey
         clsSvyboxplotFunction = New RFunction
         clsSvyhistFunction = New RFunction
         clsSvysmoothFunction = New RFunction
-
+        clsSvyglmFunction = New RFunction
+        clsPoissonFunction = New RFunction
+        clsBinomialFunction = New RFunction
+        clsSvyqqmathFunction = New RFunction
+        clsSvyqqplotFunction = New RFunction
         clsPlusSignOperator = New ROperator
         clsWeightsOperator = New ROperator
         clsIDNewOperator = New ROperator
@@ -176,6 +207,9 @@ Public Class dlgSurvey
         clsVariablesOperator2 = New ROperator
         clsVariablesPlusOperator = New ROperator
 
+        ucrSaveGraph.Reset()
+
+        ucrInputModelsType.SetName("Linear regression")
         ucrInputSummaryStat.SetName("mean")
         ucrInputPlots.SetName("Boxplot")
 
@@ -274,18 +308,16 @@ Public Class dlgSurvey
 
         clsSvyboxplotFunction.SetPackageName("survey")
         clsSvyboxplotFunction.SetRCommand("svyboxplot")
-        ' clsSvyboxplotFunction.AddParameter("formula", clsROperatorParameter:=clsXOperator, iPosition:=0)
         clsSvyboxplotFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
-        clsSvyboxplotFunction.iCallType = 2
+        clsSvyboxplotFunction.iCallType = 3
 
         clsSvysmoothFunction.SetPackageName("survey")
         clsSvysmoothFunction.SetRCommand("svysmooth")
         clsSvysmoothFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
-        clsSvysmoothFunction.iCallType = 2
+        clsSvysmoothFunction.iCallType = 3
 
         clsSvySDFunction.SetPackageName("jtools")
         clsSvySDFunction.SetRCommand("svysd")
-        'clsSvySDFunction.AddParameter("formula", clsROperatorParameter:=clsPlusSignOperator, iPosition:=0)
         clsSvySDFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
         clsSvySDFunction.iCallType = 2
 
@@ -307,6 +339,35 @@ Public Class dlgSurvey
         clsVarFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
         clsVarFunction.iCallType = 2
 
+        clsSvyglmFunction.SetPackageName("survey")
+        clsSvyglmFunction.SetRCommand("svyglm")
+        clsSvyglmFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
+        clsSvyglmFunction.iCallType = 2
+
+        clsSvyqqmathFunction.SetPackageName("survey")
+        clsSvyqqmathFunction.SetRCommand("svycoplot")
+        clsSvyqqmathFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
+        clsSvyqqmathFunction.iCallType = 2
+
+        clsSvyqqplotFunction.SetPackageName("survey")
+        clsSvyqqplotFunction.SetRCommand("svycoplot")
+        clsSvyqqplotFunction.AddParameter("design", clsRFunctionParameter:=clsSvrepDesignFunction, iPosition:=1)
+        clsSvyqqplotFunction.iCallType = 2
+
+        ' clsPoissonFunction.SetPackageName("stats")
+        clsPoissonFunction.SetRCommand("poisson")
+        clsPoissonFunction.AddParameter("link", Chr(34) & "log" & Chr(34), iPosition:=0)
+
+        ' clsBinomialFunction.SetPackageName("stats")
+        clsBinomialFunction.SetRCommand("binomial")
+        clsBinomialFunction.AddParameter("link", Chr(34) & "logit" & Chr(34), iPosition:=0)
+
+        clsPlotsFunction.SetRCommand("plot")
+
+        clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectRFunction.AddParameter("data_name", Chr(34) & ucrSelectorSurvey.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetObjectRFunction.AddParameter("as_file", "TRUE", iPosition:=3)
+
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsSvydesignFunction)
         AddSummaryParameters()
@@ -314,12 +375,15 @@ Public Class dlgSurvey
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverVar2srs.AddAdditionalCodeParameterPair(clsVariablesOperator2, New RParameter("variable2", iNewPosition:=7), iAdditionalPairNo:=1)
+        ucrVariablesAsFactorForContengy.AddAdditionalCodeParameterPair(clsSvyglmFunction, New RParameter("formula", 13), iAdditionalPairNo:=1)
 
+        ucrSaveGraph.SetRCode(clsPlotsFunction, bReset)
         ucrReceiverFPC.SetRCode(clsFpcOperator, bReset)
         ucrReceiverSingleID.SetRCode(clsIDNewOperator, bReset)
         ucrReceiverStrata.SetRCode(clsStrataOperator, bReset)
         ucrReceiverWeights.SetRCode(clsWeightsOperator, bReset)
         ucrChkSummary.SetRCode(clsSummaryFunction, bReset)
+        ucrChkModelsSummary.SetRCode(clsSummaryFunction, bReset)
         ucrPnlMethod.SetRCode(clsDummyFunction, bReset)
         ucrReceiverVar1srs.SetRCode(clsVariablesOperator, bReset)
         ucrReceiverVar2srs.SetRCode(clsVariablesPlusOperator, bReset)
@@ -348,7 +412,6 @@ Public Class dlgSurvey
         Else
             ucrBase.OKEnabled(Not ucrReceiverFPC.IsEmpty AndAlso Not ucrInputId.IsEmpty AndAlso Not ucrReceiverVar1srs.IsEmpty)
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -432,17 +495,15 @@ Public Class dlgSurvey
             ucrBase.clsRsyntax.AddToAfterCodes(clsSvyboxplotFunction, iPosition:=0)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyhistFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvysmoothFunction)
-            '    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
-            '    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
-            '    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyqqmathFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyqqplotFunction)
         ElseIf ucrInputPlots.GetText = "Histogram" Then
             clsSvyhistFunction.AddParameter("formula", clsROperatorParameter:=clsVariablesOperator, iPosition:=0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsSvyhistFunction, iPosition:=0)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyboxplotFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvysmoothFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyqqmathFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyqqplotFunction)
         ElseIf ucrInputPlots.GetText = "Smooth Plot" Then
             If ucrReceiverVar2srs.IsEmpty Then
                 clsSvysmoothFunction.AddParameter("formula", clsROperatorParameter:=clsPlusSignOperator, iPosition:=0)
@@ -452,30 +513,21 @@ Public Class dlgSurvey
             ucrBase.clsRsyntax.AddToAfterCodes(clsSvysmoothFunction, iPosition:=0)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyboxplotFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyhistFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
-            '    ElseIf ucrInputSummaryStat.GetText = "standard deviation" Then
-            '        ucrBase.clsRsyntax.AddToAfterCodes(clsSvySDFunction, iPosition:=0)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
-            '    ElseIf ucrInputSummaryStat.GetText = "quantile" Then
-            '        ucrBase.clsRsyntax.AddToAfterCodes(clsSvyQuantileFunction, iPosition:=0)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvycoFunction)
-            '    Else
-            '        ucrBase.clsRsyntax.AddToAfterCodes(clsSvycoFunction, iPosition:=0)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvymeanFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsVarFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyTotalFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvySDFunction)
-            '        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyQuantileFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyqqmathFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyqqplotFunction)
+        Else
+            If ucrReceiverVar2srs.IsEmpty Then
+                clsSvyqqmathFunction.AddParameter("x", clsROperatorParameter:=clsPlusSignOperator, iPosition:=0)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsSvyqqmathFunction, iPosition:=0)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyqqplotFunction)
+            Else
+                clsSvyqqmathFunction.AddParameter("formula", clsROperatorParameter:=clsVariablesOperator, iPosition:=0)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsSvyqqplotFunction, iPosition:=0)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyqqmathFunction)
+            End If
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvysmoothFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyboxplotFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyhistFunction)
         End If
     End Sub
 
@@ -502,7 +554,7 @@ Public Class dlgSurvey
         RemoveStrata()
     End Sub
 
-    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrReceiverSingleID.ControlContentsChanged, ucrReceiverStrata.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrReceiverFPC.ControlContentsChanged, ucrInputId.ControlContentsChanged, ucrReceiverVar1srs.ControlContentsChanged, ucrReceiverVar2srs.ControlContentsChanged
+    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrReceiverVar2srs.ControlContentsChanged, ucrReceiverVar1srs.ControlContentsChanged, ucrReceiverStrata.ControlContentsChanged, ucrReceiverSingleID.ControlContentsChanged, ucrReceiverFPC.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged, ucrInputId.ControlContentsChanged
         TestOkEnabled()
         ChangeId()
     End Sub
@@ -537,7 +589,8 @@ Public Class dlgSurvey
         End If
     End Sub
 
-    Private Sub ucrReceiverVar1srs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVar1srs.ControlValueChanged, ucrReceiverVar2srs.ControlValueChanged, ucrChkSummary.ControlValueChanged, ucrChkRatios.ControlValueChanged
+    Private Sub ucrReceiverVar1srs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVar2srs.ControlValueChanged, ucrReceiverVar1srs.ControlValueChanged, ucrChkSummary.ControlValueChanged, ucrChkRatios.ControlValueChanged
+
         If rdoSRS.Checked Then
             'Dim additionOperator As New ROperator
             'additionOperator.SetOperation("+", bBracketsTemp:=False)
@@ -587,10 +640,62 @@ Public Class dlgSurvey
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRatioFunction)
             End If
         End If
-
+        Plots()
     End Sub
 
     Private Sub ucrVariablesAsFactorForContengy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForContengy.ControlValueChanged
         UpdateContextVariables2()
+    End Sub
+
+    Private Sub ucrChkModels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkModels.ControlValueChanged, ucrInputModelsType.ControlValueChanged, ucrChkModelsPlot.ControlValueChanged, ucrChkModelsSummary.ControlValueChanged
+        If ucrChkModels.Checked AndAlso Not ucrVariablesAsFactorForContengy.bSingleVariable Then
+            Dim lstVariables = ucrVariablesAsFactorForContengy.ucrMultipleVariables.GetVariableNamesList(False).Where(Function(item) item IsNot Nothing).ToList()
+            Dim strVar1 = If(lstVariables.Count > 1, String.Join("+", lstVariables), lstVariables(1))
+            Dim strVar0 = If(lstVariables.Count > 1, String.Join("~", lstVariables(1)), lstVariables(0))
+            clsSvyglmFunction.AddParameter("formula", strVar0 & strVar1, iPosition:=0)
+
+            If ucrInputModelsType.GetText = "Linear regression" Then
+                ucrBase.clsRsyntax.AddToAfterCodes(clsSvyglmFunction, iPosition:=0)
+            ElseIf ucrInputModelsType.GetText = "Multiple regression" Then
+                ucrBase.clsRsyntax.AddToAfterCodes(clsSvyglmFunction, iPosition:=0)
+            ElseIf ucrInputModelsType.GetText = "Logistic regression" Then
+                clsSvyglmFunction.AddParameter("family", clsRFunctionParameter:=clsBinomialFunction, iPosition:=2)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsSvyglmFunction, iPosition:=0)
+            ElseIf ucrInputModelsType.GetText = "log-linear regression" Then
+                clsSvyglmFunction.AddParameter("family", clsRFunctionParameter:=clsPoissonFunction, iPosition:=2)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsSvyglmFunction, iPosition:=0)
+            Else
+                ucrBase.clsRsyntax.AddToAfterCodes(clsSvyglmFunction, iPosition:=0)
+            End If
+            If ucrChkModelsSummary.Checked Then
+                ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=0)
+            Else
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
+            End If
+            If ucrChkModelsPlot.Checked Then
+                clsPlotsFunction.AddParameter("plot", clsRFunctionParameter:=clsSvyglmFunction, iPosition:=0, bIncludeArgumentName:=False)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsPlotsFunction, iPosition:=0)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectRFunction, iPosition:=1)
+                clsPlotsFunction.iCallType = 3
+                clsGetObjectRFunction.iCallType = 3
+            Else
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsPlotsFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectRFunction)
+            End If
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSvyglmFunction)
+        End If
+    End Sub
+
+    Private Sub ucrInputPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPlots.ControlValueChanged
+        Plots()
+    End Sub
+
+    Private Sub ucrSaveGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlValueChanged
+        If ucrSaveGraph.ucrChkSave.Checked Then
+            clsGetObjectRFunction.AddParameter("object_name", Chr(34) & ucrSaveGraph.GetText & Chr(34), iPosition:=1)
+        Else
+            clsGetObjectRFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        End If
     End Sub
 End Class
