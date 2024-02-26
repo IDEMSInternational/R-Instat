@@ -227,6 +227,12 @@
     <Compile Include="dlgApsimx.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimograph.Designer.vb">
+      <DependentUpon>dlgClimograph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimograph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClusterAnalysis.Designer.vb">
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
     </Compile>
@@ -3054,6 +3060,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticNCMPVariogram.resx">
       <DependentUpon>dlgClimaticNCMPVariogram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimograph.resx">
+      <DependentUpon>dlgClimograph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
