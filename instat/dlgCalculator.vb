@@ -198,10 +198,13 @@ Public Class dlgCalculator
                 ucrBase.iHelpTopicID = 598
             Case "Integer"
                 Me.Width = iBasicWidth * 1.5
+                ucrBase.iHelpTopicID = 463
             Case "Complex"
                 Me.Width = iBasicWidth * 1.5
+                ucrBase.iHelpTopicID = 455
             Case "List"
                 Me.Width = iBasicWidth * 1.5
+                ucrBase.iHelpTopicID = 439
             Case Else
                 Me.Width = iBasicWidth
         End Select
