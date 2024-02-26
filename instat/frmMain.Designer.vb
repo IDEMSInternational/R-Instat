@@ -4900,13 +4900,6 @@ Partial Class frmMain
         Me.mnuToolsRestoreBackup.Size = New System.Drawing.Size(198, 22)
         Me.mnuToolsRestoreBackup.Tag = "Load_Options..."
         Me.mnuToolsRestoreBackup.Text = "Restore Backup..."
-
-        Me.mnuToolsLoadOptions.Enabled = False
-        Me.mnuToolsLoadOptions.Name = "mnuToolsLoadOptions"
-        Me.mnuToolsLoadOptions.Size = New System.Drawing.Size(198, 22)
-        Me.mnuToolsLoadOptions.Tag = "Load_Options..."
-        Me.mnuToolsLoadOptions.Text = "Load Options..."
-
         '
         'mnuToolsInstallRPackage
         '
