@@ -22,6 +22,7 @@ Public Class dlgRestrict
     Private clsSetCurrentFilter As New RFunction
     Private clsSubset As New RFunction
     Private clsFilterView As New RFunction
+    Private clsCatFunction As New RFunction
     Public bIsSubsetDialog As Boolean
     Public strDefaultDataframe As String = ""
     Public strDefaultColumn As String = ""
@@ -37,8 +38,10 @@ Public Class dlgRestrict
         clsRemoveFilter = New RFunction
         clsSetCurrentFilter = New RFunction
         clsFilterView = New RFunction
+        clsCatFunction = New RFunction
 
         bFirstLoad = True
+        clsCatFunction.SetRCommand("cat")
         clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
         clsSetCurrentFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_filter")
         clsSubset.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_object")
@@ -84,7 +87,7 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverFilter.IsEmpty AndAlso ((rdoApplyAsSubset.Checked AndAlso ucrNewDataFrameName.IsComplete) OrElse (rdoApplyAsFilter.Checked)) Then
+        If Not ucrReceiverFilter.IsEmpty AndAlso ((rdoApplyAsSubset.Checked AndAlso ucrNewDataFrameName.IsComplete) OrElse (rdoApplyAsFilter.Checked) OrElse (rdoSavefilter.Checked)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -171,8 +174,8 @@ Public Class dlgRestrict
         TestOkEnabled()
     End Sub
 
-    Private Sub rdoApplyAs_CheckedChanged(sender As Object, e As EventArgs) Handles rdoApplyAsFilter.CheckedChanged, rdoApplyAsSubset.CheckedChanged
-        ucrNewDataFrameName.Visible = Not rdoApplyAsFilter.Checked
+    Private Sub rdoApplyAs_CheckedChanged(sender As Object, e As EventArgs) Handles rdoApplyAsFilter.CheckedChanged, rdoApplyAsSubset.CheckedChanged, rdoSavefilter.CheckedChanged
+        ucrNewDataFrameName.Visible = Not (rdoApplyAsFilter.Checked OrElse rdoSavefilter.Checked)
         SetFilterOptions()
         SetBaseFunction()
         TestOkEnabled()
@@ -183,9 +186,12 @@ Public Class dlgRestrict
             ucrBase.clsRsyntax.SetBaseRFunction(If(ucrReceiverFilter.IsEmpty,
                                                 clsRemoveFilter, clsSetCurrentFilter))
             ucrBase.clsRsyntax.RemoveAssignTo()
-        Else
+        ElseIf rdoApplyAsSubset.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSubset)
             clsSubset.AddParameter("new_name", Chr(34) & ucrNewDataFrameName.GetText() & Chr(34), iPosition:=1)
+        Else
+            clsCatFunction.AddParameter("dispay", Chr(34) & "Saved column selection" & Chr(34), bIncludeArgumentName:=False)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCatFunction)
         End If
     End Sub
 
