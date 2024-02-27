@@ -397,6 +397,8 @@ Public Class dlgHistogram
             If Not ucrSaveHist.bUserTyped Then ucrSaveHist.SetPrefix("histogram")
         End If
         If rdoDensity_ridges.Checked Then
+            clsRgeomPlotFunction.RemoveParameterByName("binpositions")
+            clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
             If ucrChkRidges.Checked Then
                 ucrFactorReceiver.ChangeParameterName("y")
                 clsHistAesFunction.RemoveParameterByName("y")
