@@ -345,7 +345,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdwhichmax, "Row number of the maximum value. So which.max(c(4,3,10,1,2)) is 3")
         'ttCalculator.SetToolTip(cmdwheremax, "Value of a variable at the which.max position. So for c("a","b","c","d","e"), is "c", for the data in which.max tooltip.")
         ttCalculator.SetToolTip(cmdwhichmin, "Row number of the minimum value. So which.min(c(4,3,10,1,2)) is 4")
-        'ttCalculator.SetToolTip(cmdwheremin, "Value of a variable at the which.min position. So for c("a","b","c","d","e"), is "d", for the data in which.min tooltip")
+        ttCalculator.SetToolTip(cmdwheremin, "Value of a variable at the where.min position. So for c(""a"",""b"",""c"",""d"",""e""), is ""d"", for the data in where.min tooltip")
         ttCalculator.SetToolTip(cmdFreqDistinct, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
         ttCalculator.SetToolTip(cmdFreqIQR, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
         ttCalculator.SetToolTip(cmdFreqLength, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
@@ -5388,9 +5388,9 @@ Public Class ucrCalculator
 
     Private Sub cmdwheremin_Click(sender As Object, e As EventArgs) Handles cmdwheremin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("where.min(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("  [where.min(  )](x= )", 1)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("where.min()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [where.min(  )]()", 1)
         End If
     End Sub
 
@@ -5404,9 +5404,9 @@ Public Class ucrCalculator
 
     Private Sub cmdwheremax_Click(sender As Object, e As EventArgs) Handles cmdwheremax.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("where.max(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max( x= )]", 1)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("where.max()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max(  )]", 1)
         End If
     End Sub
 End Class
