@@ -124,7 +124,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblByFactor.AutoSize = True
         Me.lblByFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblByFactor.Location = New System.Drawing.Point(256, 286)
+        Me.lblByFactor.Location = New System.Drawing.Point(256, 272)
         Me.lblByFactor.Name = "lblByFactor"
         Me.lblByFactor.Size = New System.Drawing.Size(76, 13)
         Me.lblByFactor.TabIndex = 24
@@ -154,7 +154,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblPosition.AutoSize = True
         Me.lblPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPosition.Location = New System.Drawing.Point(256, 364)
+        Me.lblPosition.Location = New System.Drawing.Point(256, 349)
         Me.lblPosition.Name = "lblPosition"
         Me.lblPosition.Size = New System.Drawing.Size(47, 13)
         Me.lblPosition.TabIndex = 39
@@ -183,7 +183,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblXvariable.AutoSize = True
         Me.lblXvariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXvariable.Location = New System.Drawing.Point(256, 196)
+        Me.lblXvariable.Location = New System.Drawing.Point(256, 187)
         Me.lblXvariable.Name = "lblXvariable"
         Me.lblXvariable.Size = New System.Drawing.Size(58, 13)
         Me.lblXvariable.TabIndex = 5
@@ -247,7 +247,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLollipopSize.AutoSize = True
         Me.lblLollipopSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLollipopSize.Location = New System.Drawing.Point(84, 390)
+        Me.lblLollipopSize.Location = New System.Drawing.Point(84, 393)
         Me.lblLollipopSize.Name = "lblLollipopSize"
         Me.lblLollipopSize.Size = New System.Drawing.Size(30, 13)
         Me.lblLollipopSize.TabIndex = 42
@@ -257,7 +257,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLollipopColour.AutoSize = True
         Me.lblLollipopColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLollipopColour.Location = New System.Drawing.Point(181, 390)
+        Me.lblLollipopColour.Location = New System.Drawing.Point(181, 393)
         Me.lblLollipopColour.Name = "lblLollipopColour"
         Me.lblLollipopColour.Size = New System.Drawing.Size(40, 13)
         Me.lblLollipopColour.TabIndex = 44
@@ -267,7 +267,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblReorder.AutoSize = True
         Me.lblReorder.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReorder.Location = New System.Drawing.Point(256, 323)
+        Me.lblReorder.Location = New System.Drawing.Point(256, 309)
         Me.lblReorder.Name = "lblReorder"
         Me.lblReorder.Size = New System.Drawing.Size(48, 13)
         Me.lblReorder.TabIndex = 36
@@ -456,7 +456,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkReorderValue.AutoSize = True
         Me.ucrChkReorderValue.Checked = False
-        Me.ucrChkReorderValue.Location = New System.Drawing.Point(258, 236)
+        Me.ucrChkReorderValue.Location = New System.Drawing.Point(258, 223)
         Me.ucrChkReorderValue.Name = "ucrChkReorderValue"
         Me.ucrChkReorderValue.Size = New System.Drawing.Size(119, 23)
         Me.ucrChkReorderValue.TabIndex = 65
@@ -521,7 +521,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrNudLollipopSize.AutoSize = True
         Me.ucrNudLollipopSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLollipopSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLollipopSize.Location = New System.Drawing.Point(131, 387)
+        Me.ucrNudLollipopSize.Location = New System.Drawing.Point(131, 390)
         Me.ucrNudLollipopSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLollipopSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLollipopSize.Name = "ucrNudLollipopSize"
@@ -548,7 +548,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLollipopColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLollipopColour.GetSetSelectedIndex = -1
         Me.ucrInputLollipopColour.IsReadOnly = False
-        Me.ucrInputLollipopColour.Location = New System.Drawing.Point(237, 387)
+        Me.ucrInputLollipopColour.Location = New System.Drawing.Point(237, 390)
         Me.ucrInputLollipopColour.Name = "ucrInputLollipopColour"
         Me.ucrInputLollipopColour.Size = New System.Drawing.Size(93, 21)
         Me.ucrInputLollipopColour.TabIndex = 45
@@ -557,7 +557,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkLollipop.AutoSize = True
         Me.ucrChkLollipop.Checked = False
-        Me.ucrChkLollipop.Location = New System.Drawing.Point(10, 384)
+        Me.ucrChkLollipop.Location = New System.Drawing.Point(10, 390)
         Me.ucrChkLollipop.Name = "ucrChkLollipop"
         Me.ucrChkLollipop.Size = New System.Drawing.Size(93, 23)
         Me.ucrChkLollipop.TabIndex = 41
@@ -579,7 +579,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputBarChartPositions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputBarChartPositions.GetSetSelectedIndex = -1
         Me.ucrInputBarChartPositions.IsReadOnly = False
-        Me.ucrInputBarChartPositions.Location = New System.Drawing.Point(257, 379)
+        Me.ucrInputBarChartPositions.Location = New System.Drawing.Point(257, 364)
         Me.ucrInputBarChartPositions.Name = "ucrInputBarChartPositions"
         Me.ucrInputBarChartPositions.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputBarChartPositions.TabIndex = 40
@@ -597,7 +597,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrReceiverByFactor.AutoSize = True
         Me.ucrReceiverByFactor.frmParent = Me
-        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(257, 301)
+        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(257, 287)
         Me.ucrReceiverByFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
         Me.ucrReceiverByFactor.Selector = Nothing
@@ -667,7 +667,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputReorderValue.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputReorderValue.GetSetSelectedIndex = -1
         Me.ucrInputReorderValue.IsReadOnly = False
-        Me.ucrInputReorderValue.Location = New System.Drawing.Point(257, 261)
+        Me.ucrInputReorderValue.Location = New System.Drawing.Point(257, 248)
         Me.ucrInputReorderValue.Name = "ucrInputReorderValue"
         Me.ucrInputReorderValue.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputReorderValue.TabIndex = 22
@@ -715,7 +715,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrReceiverX.AutoSize = True
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(257, 212)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(257, 201)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
@@ -741,7 +741,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputAddReorder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputAddReorder.GetSetSelectedIndex = -1
         Me.ucrInputAddReorder.IsReadOnly = False
-        Me.ucrInputAddReorder.Location = New System.Drawing.Point(257, 339)
+        Me.ucrInputAddReorder.Location = New System.Drawing.Point(257, 325)
         Me.ucrInputAddReorder.Name = "ucrInputAddReorder"
         Me.ucrInputAddReorder.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputAddReorder.TabIndex = 37
@@ -816,7 +816,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrVariablesAsFactorForBarChart.AutoSize = True
         Me.ucrVariablesAsFactorForBarChart.frmParent = Me
-        Me.ucrVariablesAsFactorForBarChart.Location = New System.Drawing.Point(257, 52)
+        Me.ucrVariablesAsFactorForBarChart.Location = New System.Drawing.Point(257, 47)
         Me.ucrVariablesAsFactorForBarChart.Name = "ucrVariablesAsFactorForBarChart"
         Me.ucrVariablesAsFactorForBarChart.Selector = Nothing
         Me.ucrVariablesAsFactorForBarChart.Size = New System.Drawing.Size(125, 141)
@@ -842,7 +842,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkAddLabelsText.AutoSize = True
         Me.ucrChkAddLabelsText.Checked = False
-        Me.ucrChkAddLabelsText.Location = New System.Drawing.Point(10, 405)
+        Me.ucrChkAddLabelsText.Location = New System.Drawing.Point(10, 411)
         Me.ucrChkAddLabelsText.Name = "ucrChkAddLabelsText"
         Me.ucrChkAddLabelsText.Size = New System.Drawing.Size(135, 23)
         Me.ucrChkAddLabelsText.TabIndex = 46
@@ -941,12 +941,9 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrInputLegendPosition)
         Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.ucrChkReorderValue)
-        Me.Controls.Add(Me.ucrChkReorderFrequency)
         Me.Controls.Add(Me.ucrInputPlace)
         Me.Controls.Add(Me.lblPlace)
         Me.Controls.Add(Me.ucrInputLayout)
-        Me.Controls.Add(Me.ucrReceiverLabel)
         Me.Controls.Add(Me.ucrInputLabelSize)
         Me.Controls.Add(Me.lblLabelColour)
         Me.Controls.Add(Me.ucrNudLollipopSize)
@@ -997,12 +994,15 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.lblWordcloudLabel)
         Me.Controls.Add(Me.lblArea)
         Me.Controls.Add(Me.ucrVariablesAsFactorForBarChart)
-        Me.Controls.Add(Me.lblXvariable)
-        Me.Controls.Add(Me.ucrReceiverWordcloudAngle)
         Me.Controls.Add(Me.ucrChkAddLabelsText)
         Me.Controls.Add(Me.ucrChkAddLabelsTreemap)
         Me.Controls.Add(Me.ucrChkBacktoback)
         Me.Controls.Add(Me.ucrChkIncreaseSize)
+        Me.Controls.Add(Me.ucrReceiverLabel)
+        Me.Controls.Add(Me.lblXvariable)
+        Me.Controls.Add(Me.ucrReceiverWordcloudAngle)
+        Me.Controls.Add(Me.ucrChkReorderFrequency)
+        Me.Controls.Add(Me.ucrChkReorderValue)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
