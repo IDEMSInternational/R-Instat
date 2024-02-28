@@ -323,6 +323,7 @@ Public Class dlgBarAndPieChart
         ucrChkLollipop.AddToLinkedControls({ucrNudLollipopSize, ucrInputLollipopColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudLollipopSize.SetLinkedDisplayControl(lblLollipopSize)
         ucrInputLollipopColour.SetLinkedDisplayControl(lblLollipopColour)
+        ucrChkLollipop.AddToLinkedControls({ucrInputLollipopColour}, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="steelBlue")
 
         ucrInputAddReorder.SetItems({strAscending, strDescending, strReverse, strNone})
         ucrInputAddReorder.SetDropDownStyleAsNonEditable()
@@ -506,7 +507,6 @@ Public Class dlgBarAndPieChart
 
         clsGeomLollipopFunction.SetPackageName("ggalt")
         clsGeomLollipopFunction.SetRCommand("geom_lollipop")
-        clsGeomLollipopFunction.AddParameter("point.colour", "steelblue", iPosition:=0)
         clsGeomLollipopFunction.AddParameter("point.size", "1", iPosition:=1)
 
         clsGeomLollipopAesFunction.SetPackageName("ggplot2")
@@ -662,8 +662,6 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrBarChartSelector.AddAdditionalCodeParameterPair(clsSubsetFunction1, ucrBarChartSelector.GetParameter(), iAdditionalPairNo:=1)
-        'ucrBarChartSelector.AddAdditionalCodeParameterPair(clsSubsetFunction2, ucrBarChartSelector.GetParameter(), iAdditionalPairNo:=2)
         ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsIsEqualToOperator1, New RParameter("left", 0), iAdditionalPairNo:=1)
         ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsIsEqualToOperator2, New RParameter("left", 0), iAdditionalPairNo:=2)
         ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsLevelsFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
@@ -875,6 +873,15 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
+    Private Sub AddRemovelollipopparameter()
+        If ucrChkLollipop.Checked AndAlso Not ucrReceiverByFactor.IsEmpty Then
+            clsGeomLollipopFunction.RemoveParameterByName("point.colour")
+            clsGeomLollipopAesFunction.AddParameter("colour", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
+        Else
+            clsGeomLollipopFunction.AddParameter("point.colour", "steelblue", iPosition:=0)
+        End If
+    End Sub
+
     Private Sub UpdateParameter()
         Dim strChangedTextFreq As String = ucrInputReorderX.GetText()
         Dim strChangedTextValue As String = ucrInputAddReorder.GetText()
@@ -1062,6 +1069,7 @@ Public Class dlgBarAndPieChart
                 clsBarAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
                 clsPieAesFunction.AddParameter("fill", Chr(34) & Chr(34), iPosition:=2)
                 clsRgeomBarFunction.RemoveParameterByName("position")
+                clsGeomLollipopAesFunction.AddParameter("colour", Chr(34) & Chr(34), iPosition:=2)
             End If
             If ucrChkLollipop.Checked Then
                 clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGeomLollipopAesFunction, iPosition:=1)
@@ -1089,12 +1097,10 @@ Public Class dlgBarAndPieChart
                     clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
                     clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=1)
                 End If
-                'clsRgeomBarFunction1.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=2)
                 clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
                 clsRgeomBarFunction2.RemoveParameterByName("stat")
             End If
             clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
-            'clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             clsBaseOperator.RemoveParameterByName("geom_treemap")
             clsBaseOperator.RemoveParameterByName("geom_text_wordcloud")
         ElseIf rdoTreeMap.Checked Then
@@ -1281,6 +1287,7 @@ Public Class dlgBarAndPieChart
         ucrChkAddLabelsText.ControlValueChanged, ucrChkReorderValue.ControlValueChanged, ucrInputReorderX.ControlValueChanged,
         ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged,
         ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged
+        AddRemovelollipopparameter()
         SetDialogOptions()
         ChangeParameterName()
         If rdoTreeMap.Checked Then
