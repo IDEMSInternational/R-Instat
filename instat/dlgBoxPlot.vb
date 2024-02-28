@@ -25,7 +25,9 @@ Public Class dlgBoxplot
     Private clsBaseOperator As New ROperator
     Private clsLocalRaesFunction As New RFunction
     Private clsWidthRaesFunction As New RFunction
+    Private clsStatAesFunction As New RFunction
     Private clsStatSummary As New RFunction
+    Private clsPositionNodgeFunction As New RFunction
     Private clsDummyFunction As New RFunction
     'Similarly clsRgeom_boxplotFunction and clsRaesFunction (respectively the geom_boxplot function and the global aes function) are given through SetupLayer to sdgLayerOptions for edit. 
     Private bFirstLoad As Boolean = True
@@ -271,6 +273,8 @@ Public Class dlgBoxplot
         clsDummyFunction = New RFunction
         clsWidthRaesFunction = New RFunction
         clsGeomBoxPlotFunction = New RFunction
+        clsStatAesFunction = New RFunction
+        clsPositionNodgeFunction = New RFunction
 
         'Setting up new functions
         clsBoxplotFunction = New RFunction
@@ -310,6 +314,9 @@ Public Class dlgBoxplot
 
         clsCutWitdhFunction.SetPackageName("ggplot2")
         clsCutWitdhFunction.SetRCommand("cut_width")
+
+        clsStatAesFunction.SetPackageName("ggplot2")
+        clsStatAesFunction.SetRCommand("aes")
 
         clsGeomBoxPlotFunction.SetPackageName("ggplot2")
         clsGeomBoxPlotFunction.SetRCommand("geom_boxplot")
@@ -354,6 +361,10 @@ Public Class dlgBoxplot
         clsStatSummary.AddParameter("geom", Chr(34) & "line" & Chr(34), iPosition:=0)
         clsStatSummary.AddParameter("group", 1, iPosition:=1)
         clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
+
+        clsPositionNodgeFunction.SetPackageName("ggplot2")
+        clsPositionNodgeFunction.SetRCommand("position_dodge")
+        clsPositionNodgeFunction.AddParameter("width", 0.9, iPosition:=0)
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetRowOp.SetOperation("+")
@@ -817,4 +828,21 @@ Public Class dlgBoxplot
         End If
     End Sub
 
+    Private Sub AddRemove()
+        If Not ucrSecondFactorReceiver.IsEmpty Then
+            clsStatAesFunction.AddParameter("group", ucrSecondFactorReceiver.GetVariableNames(False), iPosition:=0)
+            clsStatAesFunction.AddParameter("colour", ucrSecondFactorReceiver.GetVariableNames(False), iPosition:=1)
+            clsStatSummary.AddParameter("stat_aes", clsRFunctionParameter:=clsStatAesFunction, bIncludeArgumentName:=False)
+            clsStatSummary.AddParameter("position_nodge", clsRFunctionParameter:=clsPositionNodgeFunction, bIncludeArgumentName:=False)
+        Else
+            clsStatAesFunction.RemoveParameterByName("group")
+            clsStatAesFunction.RemoveParameterByName("colour")
+            clsStatSummary.RemoveParameterByName("stat_aes")
+            clsStatSummary.RemoveParameterByName("position_nodge")
+        End If
+    End Sub
+
+    Private Sub ucrSecondFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSecondFactorReceiver.ControlValueChanged
+        AddRemove()
+    End Sub
 End Class
