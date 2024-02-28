@@ -136,8 +136,6 @@ Public Class dlgBoxplot
 
         ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
-        'ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
-        'ucrByFactorsReceiver.strSelectorHeading = "Factors"
         ucrByFactorsReceiver.SetParameterIsString()
         ucrByFactorsReceiver.bWithQuotes = False
         ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
