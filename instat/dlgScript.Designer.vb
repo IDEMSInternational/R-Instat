@@ -83,6 +83,8 @@ Partial Class dlgScript
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.txtScript = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkWindow = New instat.ucrCheck()
+        Me.rdoWindow = New System.Windows.Forms.RadioButton()
         Me.tbFeatures.SuspendLayout()
         Me.tbPageSaveData.SuspendLayout()
         Me.tbPageGetData.SuspendLayout()
@@ -460,6 +462,8 @@ Partial Class dlgScript
         '
         'tbPageCommand
         '
+        Me.tbPageCommand.Controls.Add(Me.ucrChkWindow)
+        Me.tbPageCommand.Controls.Add(Me.rdoWindow)
         Me.tbPageCommand.Controls.Add(Me.ucrChkInto)
         Me.tbPageCommand.Controls.Add(Me.rdoListData)
         Me.tbPageCommand.Controls.Add(Me.ucrInputSaveData)
@@ -490,7 +494,7 @@ Partial Class dlgScript
         '
         Me.ucrChkInto.AutoSize = True
         Me.ucrChkInto.Checked = False
-        Me.ucrChkInto.Location = New System.Drawing.Point(233, 48)
+        Me.ucrChkInto.Location = New System.Drawing.Point(233, 33)
         Me.ucrChkInto.Name = "ucrChkInto"
         Me.ucrChkInto.Size = New System.Drawing.Size(84, 23)
         Me.ucrChkInto.TabIndex = 63
@@ -498,7 +502,7 @@ Partial Class dlgScript
         'rdoListData
         '
         Me.rdoListData.AutoSize = True
-        Me.rdoListData.Location = New System.Drawing.Point(25, 50)
+        Me.rdoListData.Location = New System.Drawing.Point(25, 35)
         Me.rdoListData.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoListData.Name = "rdoListData"
         Me.rdoListData.Size = New System.Drawing.Size(70, 17)
@@ -513,7 +517,7 @@ Partial Class dlgScript
         Me.ucrInputSaveData.AutoSize = True
         Me.ucrInputSaveData.IsMultiline = False
         Me.ucrInputSaveData.IsReadOnly = False
-        Me.ucrInputSaveData.Location = New System.Drawing.Point(319, 46)
+        Me.ucrInputSaveData.Location = New System.Drawing.Point(319, 31)
         Me.ucrInputSaveData.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputSaveData.Name = "ucrInputSaveData"
         Me.ucrInputSaveData.Size = New System.Drawing.Size(110, 21)
@@ -525,7 +529,7 @@ Partial Class dlgScript
         Me.ucrCboCommandDataPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboCommandDataPackage.GetSetSelectedIndex = -1
         Me.ucrCboCommandDataPackage.IsReadOnly = False
-        Me.ucrCboCommandDataPackage.Location = New System.Drawing.Point(109, 46)
+        Me.ucrCboCommandDataPackage.Location = New System.Drawing.Point(109, 31)
         Me.ucrCboCommandDataPackage.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboCommandDataPackage.Name = "ucrCboCommandDataPackage"
         Me.ucrCboCommandDataPackage.Size = New System.Drawing.Size(117, 21)
@@ -537,7 +541,7 @@ Partial Class dlgScript
         Me.ucrInputViewData.AutoSize = True
         Me.ucrInputViewData.IsMultiline = False
         Me.ucrInputViewData.IsReadOnly = False
-        Me.ucrInputViewData.Location = New System.Drawing.Point(156, 121)
+        Me.ucrInputViewData.Location = New System.Drawing.Point(156, 129)
         Me.ucrInputViewData.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputViewData.Name = "ucrInputViewData"
         Me.ucrInputViewData.Size = New System.Drawing.Size(145, 21)
@@ -546,7 +550,7 @@ Partial Class dlgScript
         'rdoViewData
         '
         Me.rdoViewData.AutoSize = True
-        Me.rdoViewData.Location = New System.Drawing.Point(25, 121)
+        Me.rdoViewData.Location = New System.Drawing.Point(25, 129)
         Me.rdoViewData.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoViewData.Name = "rdoViewData"
         Me.rdoViewData.Size = New System.Drawing.Size(77, 17)
@@ -589,7 +593,7 @@ Partial Class dlgScript
         '
         Me.ucrChkOpenRFile.AutoSize = True
         Me.ucrChkOpenRFile.Checked = False
-        Me.ucrChkOpenRFile.Location = New System.Drawing.Point(156, 80)
+        Me.ucrChkOpenRFile.Location = New System.Drawing.Point(156, 64)
         Me.ucrChkOpenRFile.Name = "ucrChkOpenRFile"
         Me.ucrChkOpenRFile.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkOpenRFile.TabIndex = 53
@@ -600,7 +604,7 @@ Partial Class dlgScript
         Me.ucrInputChooseFile.AutoSize = True
         Me.ucrInputChooseFile.IsMultiline = False
         Me.ucrInputChooseFile.IsReadOnly = False
-        Me.ucrInputChooseFile.Location = New System.Drawing.Point(265, 80)
+        Me.ucrInputChooseFile.Location = New System.Drawing.Point(265, 64)
         Me.ucrInputChooseFile.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputChooseFile.Name = "ucrInputChooseFile"
         Me.ucrInputChooseFile.Size = New System.Drawing.Size(145, 21)
@@ -609,7 +613,7 @@ Partial Class dlgScript
         'rdoChooseFile
         '
         Me.rdoChooseFile.AutoSize = True
-        Me.rdoChooseFile.Location = New System.Drawing.Point(27, 80)
+        Me.rdoChooseFile.Location = New System.Drawing.Point(25, 64)
         Me.rdoChooseFile.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoChooseFile.Name = "rdoChooseFile"
         Me.rdoChooseFile.Size = New System.Drawing.Size(83, 17)
@@ -657,7 +661,7 @@ Partial Class dlgScript
         'rdoCommandPackage
         '
         Me.rdoCommandPackage.AutoSize = True
-        Me.rdoCommandPackage.Location = New System.Drawing.Point(25, 23)
+        Me.rdoCommandPackage.Location = New System.Drawing.Point(25, 9)
         Me.rdoCommandPackage.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoCommandPackage.Name = "rdoCommandPackage"
         Me.rdoCommandPackage.Size = New System.Drawing.Size(91, 17)
@@ -684,7 +688,7 @@ Partial Class dlgScript
         Me.ucrCboCommandPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboCommandPackage.GetSetSelectedIndex = -1
         Me.ucrCboCommandPackage.IsReadOnly = False
-        Me.ucrCboCommandPackage.Location = New System.Drawing.Point(156, 19)
+        Me.ucrCboCommandPackage.Location = New System.Drawing.Point(156, 5)
         Me.ucrCboCommandPackage.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboCommandPackage.Name = "ucrCboCommandPackage"
         Me.ucrCboCommandPackage.Size = New System.Drawing.Size(137, 21)
@@ -693,7 +697,7 @@ Partial Class dlgScript
         'ucrPnlCommands
         '
         Me.ucrPnlCommands.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlCommands.Location = New System.Drawing.Point(9, 8)
+        Me.ucrPnlCommands.Location = New System.Drawing.Point(2, 8)
         Me.ucrPnlCommands.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlCommands.Name = "ucrPnlCommands"
         Me.ucrPnlCommands.Size = New System.Drawing.Size(429, 238)
@@ -834,6 +838,27 @@ Partial Class dlgScript
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 16
         '
+        'ucrChkWindow
+        '
+        Me.ucrChkWindow.AutoSize = True
+        Me.ucrChkWindow.Checked = False
+        Me.ucrChkWindow.Location = New System.Drawing.Point(160, 94)
+        Me.ucrChkWindow.Name = "ucrChkWindow"
+        Me.ucrChkWindow.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkWindow.TabIndex = 67
+        '
+        'rdoWindow
+        '
+        Me.rdoWindow.AutoSize = True
+        Me.rdoWindow.Location = New System.Drawing.Point(25, 94)
+        Me.rdoWindow.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoWindow.Name = "rdoWindow"
+        Me.rdoWindow.Size = New System.Drawing.Size(134, 17)
+        Me.rdoWindow.TabIndex = 66
+        Me.rdoWindow.TabStop = True
+        Me.rdoWindow.Text = "Output Graph Window:"
+        Me.rdoWindow.UseVisualStyleBackColor = True
+        '
         'dlgScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -925,4 +950,6 @@ Partial Class dlgScript
     Friend WithEvents ucrInputSaveData As ucrInputTextBox
     Friend WithEvents ucrCboCommandDataPackage As ucrInputComboBox
     Friend WithEvents ucrChkInto As ucrCheck
+    Friend WithEvents ucrChkWindow As ucrCheck
+    Friend WithEvents rdoWindow As RadioButton
 End Class

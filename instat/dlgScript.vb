@@ -107,6 +107,8 @@ Public Class dlgScript
 
         ucrChkInto.SetText("Into:")
 
+        ucrChkWindow.SetText("Multiple Graphs:")
+
         ucrInputGgplotify.SetLinkedDisplayControl(lblGraphObject)
         ucrInputGraphCommand.SetLinkedDisplayControl(lblGraphCommand)
 
@@ -116,6 +118,7 @@ Public Class dlgScript
         ucrPnlCommands.AddRadioButton(rdoChooseFile)
         ucrPnlCommands.AddRadioButton(rdoViewData)
         ucrPnlCommands.AddRadioButton(rdoListData)
+        ucrPnlCommands.AddRadioButton(rdoWindow)
 
         '--------------------------------
         'Get example controls
@@ -172,6 +175,7 @@ Public Class dlgScript
         ucrChkDisplayGraph.Checked = True
         ucrChkOpenRFile.Checked = False
         ucrChkInto.Checked = False
+        ucrChkDisplayGraph.Checked = False
         ucrDataFrameSaveOutputSelect.Reset()
 
         ' Get controls reset
@@ -379,6 +383,7 @@ Public Class dlgScript
         ucrInputViewData.SetVisible(False)
         ucrCboCommandDataPackage.SetVisible(False)
         ucrInputSaveData.SetVisible(False)
+        ucrChkWindow.SetVisible(False)
         rdoChooseFile.Enabled = False
         If rdoCommandPackage.Checked Then
             ucrCboCommandPackage.SetVisible(True)
@@ -404,6 +409,9 @@ Public Class dlgScript
             ucrCboCommandDataPackage.OnControlValueChanged()
             ucrInputSaveData.OnControlValueChanged()
             ucrChkInto.OnControlValueChanged()
+        ElseIf rdoWindow.Checked Then
+            ucrChkWindow.SetVisible(True)
+            ucrChkWindow.OnControlValueChanged()
         End If
     End Sub
 
@@ -678,6 +686,23 @@ Public Class dlgScript
                 strScript &= strRdScript
             End If
         End If
+        PreviewScript(strScript)
+    End Sub
+
+    Private Sub ucrChkWindow_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkWindow.ControlContentsChanged
+        Dim strScript As String = ""
+        Dim clsWindowFunction As New RFunction
+
+        If ucrChkWindow.Checked Then
+            clsWindowFunction.SetRCommand("windows")
+            clsWindowFunction.AddParameter("record", "TRUE", iPosition:=0)
+            strScript = "#Recording multiple graphs" & Environment.NewLine & clsWindowFunction.ToScript()
+        Else
+            clsWindowFunction.SetRCommand("windows")
+            clsWindowFunction.RemoveParameterByName("record")
+            strScript = "#Output graph window" & Environment.NewLine & clsWindowFunction.ToScript()
+        End If
+
         PreviewScript(strScript)
     End Sub
 
