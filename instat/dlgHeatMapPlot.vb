@@ -19,7 +19,6 @@ Public Class dlgHeatMapPlot
     Private bFirstLoad As Boolean = True
     Private bRCodeSet As Boolean = True
     Private bReset As Boolean = True
-    Private Fillvariable As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private bResetRugLayerSubdialog As Boolean = True
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -555,7 +554,7 @@ Public Class dlgHeatMapPlot
              clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
              clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector, clsNewFacetVariablesOperator:=clsFacetVariablesOperator,
              strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
-             clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, NewFillvariable:=True, bReset:=bResetSubdialog)
+             clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, NewFillAesdetection:=True, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub

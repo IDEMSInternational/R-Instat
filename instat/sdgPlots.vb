@@ -110,7 +110,7 @@ Public Class sdgPlots
     Private dctDivergingPairsContinuous As New Dictionary(Of String, String)
     Private dctQualititivePairsContinuous As New Dictionary(Of String, String)
     Public strAxisType As String
-    Public Fillvariable As Boolean = False
+    Public FillAesdetection As Boolean = False
 
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -2289,7 +2289,7 @@ Public Class sdgPlots
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
                         bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewFacetVariablesOperator As ROperator = Nothing,
                         Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
-                        Optional bNewEnableFill As Boolean = True, Optional NewFillvariable As Boolean = False, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True, Optional strNewAxisType As String = "discrete")
+                        Optional bNewEnableFill As Boolean = True, Optional NewFillAesdetection As Boolean = False, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True, Optional strNewAxisType As String = "discrete")
         Dim clsTempParam As RParameter
         bRCodeSet = False
 
@@ -2332,7 +2332,7 @@ Public Class sdgPlots
         strAxisType = strNewAxisType
         ucrInputAxisType.SetName(strAxisType)
 
-        Fillvariable = NewFillvariable
+        FillAesdetection = NewFillAesdetection
 
         If Not IsNothing(clsCoordPolarStartOperator) Then
             clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
@@ -2577,8 +2577,8 @@ Public Class sdgPlots
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("y"))
 
         Dim strAes As String = ""
-        strAes = If(NewFillvariable, "fill", "y")
-        ucrInputAxisType.SetName(GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue(strAes), bHeatMap:=NewFillvariable), bHeatMap:=NewFillvariable))
+        strAes = If(NewFillAesdetection, "fill", "y")
+        ucrInputAxisType.SetName(GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue(strAes), bHeatMap:=NewFillAesdetection), bHeatMap:=NewFillAesdetection))
 
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)

@@ -56,7 +56,6 @@ Public Class dlgBoxplot
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
     Private clsFacetsFunction As New RFunction
-    Private Fillvariable As Boolean = True
 
     Private clsFacetFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
@@ -499,7 +498,7 @@ Public Class dlgBoxplot
                                 clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, clsNewFacetVariablesOperator:=clsFacetVariablesOperator,
                                 clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
                                 clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
-                                strMainDialogGeomParameterNames:=strGeomParameterNames, NewFillvariable:=True, bReset:=bResetSubdialog)
+                                strMainDialogGeomParameterNames:=strGeomParameterNames, NewFillAesdetection:=True, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
