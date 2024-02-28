@@ -359,8 +359,6 @@ Public Class dlgBoxplot
         clsStatSummary.SetPackageName("ggplot2")
         clsStatSummary.SetRCommand("stat_summary")
         clsStatSummary.AddParameter("geom", Chr(34) & "line" & Chr(34), iPosition:=0)
-        clsStatSummary.AddParameter("group", 1, iPosition:=1)
-        clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
 
         clsPositionNodgeFunction.SetPackageName("ggplot2")
         clsPositionNodgeFunction.SetRCommand("position_dodge")
@@ -499,6 +497,7 @@ Public Class dlgBoxplot
         Else
             clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
         End If
+        AddRemoveAesParm()
     End Sub
 
     Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
@@ -717,6 +716,7 @@ Public Class dlgBoxplot
         AddRemoveFacets()
         AddRemoveGroupBy()
         EnableDisableWidth()
+        AddRemoveAesParm()
     End Sub
 
     Private Sub GetParameterValue(clsOperator As ROperator)
@@ -828,21 +828,25 @@ Public Class dlgBoxplot
         End If
     End Sub
 
-    Private Sub AddRemove()
-        If Not ucrSecondFactorReceiver.IsEmpty Then
+    Private Sub AddRemoveAesParm()
+        If Not ucrSecondFactorReceiver.IsEmpty AndAlso Not (ucrSecondFactorReceiver.GetVariableNames = ucrByFactorsReceiver.GetVariableNames) Then
             clsStatAesFunction.AddParameter("group", ucrSecondFactorReceiver.GetVariableNames(False), iPosition:=0)
             clsStatAesFunction.AddParameter("colour", ucrSecondFactorReceiver.GetVariableNames(False), iPosition:=1)
             clsStatSummary.AddParameter("stat_aes", clsRFunctionParameter:=clsStatAesFunction, bIncludeArgumentName:=False)
-            clsStatSummary.AddParameter("position_nodge", clsRFunctionParameter:=clsPositionNodgeFunction, bIncludeArgumentName:=False)
+            clsStatSummary.AddParameter("position", clsRFunctionParameter:=clsPositionNodgeFunction)
+            clsStatSummary.RemoveParameterByName("group")
+            clsStatSummary.RemoveParameterByName("color")
         Else
+            clsStatSummary.AddParameter("group", 1, iPosition:=1)
+            clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
             clsStatAesFunction.RemoveParameterByName("group")
             clsStatAesFunction.RemoveParameterByName("colour")
             clsStatSummary.RemoveParameterByName("stat_aes")
-            clsStatSummary.RemoveParameterByName("position_nodge")
+            clsStatSummary.RemoveParameterByName("position")
         End If
     End Sub
 
     Private Sub ucrSecondFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSecondFactorReceiver.ControlValueChanged
-        AddRemove()
+        AddRemoveAesParm()
     End Sub
 End Class
