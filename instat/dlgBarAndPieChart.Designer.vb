@@ -247,7 +247,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLollipopSize.AutoSize = True
         Me.lblLollipopSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLollipopSize.Location = New System.Drawing.Point(123, 408)
+        Me.lblLollipopSize.Location = New System.Drawing.Point(84, 390)
         Me.lblLollipopSize.Name = "lblLollipopSize"
         Me.lblLollipopSize.Size = New System.Drawing.Size(30, 13)
         Me.lblLollipopSize.TabIndex = 42
@@ -257,7 +257,7 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLollipopColour.AutoSize = True
         Me.lblLollipopColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLollipopColour.Location = New System.Drawing.Point(220, 408)
+        Me.lblLollipopColour.Location = New System.Drawing.Point(181, 390)
         Me.lblLollipopColour.Name = "lblLollipopColour"
         Me.lblLollipopColour.Size = New System.Drawing.Size(40, 13)
         Me.lblLollipopColour.TabIndex = 44
@@ -521,7 +521,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrNudLollipopSize.AutoSize = True
         Me.ucrNudLollipopSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLollipopSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLollipopSize.Location = New System.Drawing.Point(170, 405)
+        Me.ucrNudLollipopSize.Location = New System.Drawing.Point(131, 387)
         Me.ucrNudLollipopSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLollipopSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLollipopSize.Name = "ucrNudLollipopSize"
@@ -548,7 +548,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLollipopColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLollipopColour.GetSetSelectedIndex = -1
         Me.ucrInputLollipopColour.IsReadOnly = False
-        Me.ucrInputLollipopColour.Location = New System.Drawing.Point(276, 405)
+        Me.ucrInputLollipopColour.Location = New System.Drawing.Point(237, 387)
         Me.ucrInputLollipopColour.Name = "ucrInputLollipopColour"
         Me.ucrInputLollipopColour.Size = New System.Drawing.Size(93, 21)
         Me.ucrInputLollipopColour.TabIndex = 45
