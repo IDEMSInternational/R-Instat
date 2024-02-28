@@ -2288,7 +2288,7 @@ Public Class sdgPlots
                         clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector,
                         bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional clsNewFacetVariablesOperator As ROperator = Nothing,
                         Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional clsNewAnnotateFunction As RFunction = Nothing,
-                        Optional bNewEnableFill As Boolean = True, Optional bNewFillAesdetection As Boolean = False, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True, Optional strNewAxisType As String = "discrete")
+                        Optional bNewEnableFill As Boolean = True, Optional bChangeAesParameter As Boolean = False, Optional bNewChangeScales As Boolean = False, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True, Optional strNewAxisType As String = "discrete")
         Dim clsTempParam As RParameter
         bRCodeSet = False
 
@@ -2574,8 +2574,8 @@ Public Class sdgPlots
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue("y"))), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True, strDataFrame:=strDataFrame, strNewVariable:=GetAesParameterArgValue("y"))
 
         Dim strAes As String = ""
-        strAes = If(bNewFillAesdetection, "fill", "y")
-        ucrInputAxisType.SetName(GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue(strAes), bHeatMap:=bNewFillAesdetection), bHeatMap:=bNewFillAesdetection))
+        strAes = If(bChangeAesParameter, "fill", "y")
+        ucrInputAxisType.SetName(GetAxisType(False, bStrictDiscrete:=IsFactor(False, GetAesParameterArgValue(strAes), bHeatMap:=bChangeAesParameter), bHeatMap:=bChangeAesParameter))
 
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)

@@ -498,7 +498,7 @@ Public Class dlgBoxplot
                                 clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, clsNewFacetVariablesOperator:=clsFacetVariablesOperator,
                                 clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
                                 clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
-                                strMainDialogGeomParameterNames:=strGeomParameterNames, bNewFillAesdetection:=True, bReset:=bResetSubdialog)
+                                strMainDialogGeomParameterNames:=strGeomParameterNames, bChangeAesParameter:=True, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
