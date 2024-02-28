@@ -1060,6 +1060,7 @@ Public Class dlgBarAndPieChart
             If ucrReceiverX.IsEmpty Then
                 clsBarAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
                 clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
+                clsGeomLollipopAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
             End If
             If ucrVariablesAsFactorForBarChart.IsEmpty Then
                 clsBarAesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
