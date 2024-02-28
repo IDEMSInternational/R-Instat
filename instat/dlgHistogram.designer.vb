@@ -216,7 +216,7 @@ Partial Class dlgHistogram
         '
         Me.ucrChkBinWidth.AutoSize = True
         Me.ucrChkBinWidth.Checked = False
-        Me.ucrChkBinWidth.Location = New System.Drawing.Point(10, 260)
+        Me.ucrChkBinWidth.Location = New System.Drawing.Point(10, 262)
         Me.ucrChkBinWidth.Name = "ucrChkBinWidth"
         Me.ucrChkBinWidth.Size = New System.Drawing.Size(153, 23)
         Me.ucrChkBinWidth.TabIndex = 40
