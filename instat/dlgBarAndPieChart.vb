@@ -296,20 +296,18 @@ Public Class dlgBarAndPieChart
         ucrReceiverLabel.SetLinkedDisplayControl(lblLabel)
 
         'ucrInputLollipopColour.SetParameter(New RParameter("point.colour", 0))
-        dctLollipopColours.Add("SteelBlue", Chr(34) & "steelBlue" & Chr(34))
-        dctLollipopColours.Add("Black", Chr(34) & "black" & Chr(34))
-        dctLollipopColours.Add("White", Chr(34) & "white" & Chr(34))
-        dctLollipopColours.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctLollipopColours.Add("Red", Chr(34) & "red" & Chr(34))
-        dctLollipopColours.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctLollipopColours.Add("Purple", Chr(34) & "purple" & Chr(34))
-        dctLollipopColours.Add("Green", Chr(34) & "green" & Chr(34))
-        dctLollipopColours.Add("Orange", Chr(34) & "orange" & Chr(34))
-        dctLollipopColours.Add("Grey", Chr(34) & "grey" & Chr(34))
-        dctLollipopColours.Add("Brown", Chr(34) & "brown" & Chr(34))
-        dctLollipopColours.Add("Pink", Chr(34) & "pink" & Chr(34))
-        'ucrInputLollipopColour.SetItems(dctLollipopColours)
-        'ucrInputLollipopColour.bAllowNonConditionValues = True
+        'dctLollipopColours.Add("SteelBlue", Chr(34) & "steelBlue" & Chr(34))
+        'dctLollipopColours.Add("Black", Chr(34) & "black" & Chr(34))
+        'dctLollipopColours.Add("White", Chr(34) & "white" & Chr(34))
+        'dctLollipopColours.Add("Blue", Chr(34) & "blue" & Chr(34))
+        'dctLollipopColours.Add("Red", Chr(34) & "red" & Chr(34))
+        'dctLollipopColours.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        'dctLollipopColours.Add("Purple", Chr(34) & "purple" & Chr(34))
+        'dctLollipopColours.Add("Green", Chr(34) & "green" & Chr(34))
+        'dctLollipopColours.Add("Orange", Chr(34) & "orange" & Chr(34))
+        'dctLollipopColours.Add("Grey", Chr(34) & "grey" & Chr(34))
+        'dctLollipopColours.Add("Brown", Chr(34) & "brown" & Chr(34))
+        'dctLollipopColours.Add("Pink", Chr(34) & "pink" & Chr(34))
 
         ucrNudLollipopSize.SetParameter(New RParameter("point.size", 1))
         ucrNudLollipopSize.DecimalPlaces = 0
@@ -322,8 +320,6 @@ Public Class dlgBarAndPieChart
         ucrChkLollipop.AddParameterPresentCondition(False, "geom_lollipop", False)
         ucrChkLollipop.AddToLinkedControls({ucrNudLollipopSize}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudLollipopSize.SetLinkedDisplayControl(lblLollipopSize)
-        'ucrInputLollipopColour.SetLinkedDisplayControl(lblLollipopColour)
-        ' ucrChkLollipop.AddToLinkedControls({'ucrInputLollipopColour}, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="steelBlue")
 
         ucrInputAddReorder.SetItems({strAscending, strDescending, strReverse, strNone})
         ucrInputAddReorder.SetDropDownStyleAsNonEditable()
@@ -681,7 +677,6 @@ Public Class dlgBarAndPieChart
         ucrInputLabelPosition.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelSize.SetRCode(clsGeomTextFunction, bReset)
         ucrNudLollipopSize.SetRCode(clsGeomLollipopFunction, bReset)
-        'ucrInputLollipopColour.SetRCode(clsGeomLollipopFunction, bReset)
         ucrChkLollipop.SetRCode(clsBaseOperator, bReset)
         ucrReceiverArea.SetRCode(clsAsNumericFunction, bReset)
         ucrReceiverFill.SetRCode(clsGeomTreemapAesFunction, bReset)
@@ -873,14 +868,14 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-    Private Sub AddRemovelollipopparameter()
-        If ucrChkLollipop.Checked AndAlso Not ucrReceiverByFactor.IsEmpty Then
-            clsGeomLollipopFunction.RemoveParameterByName("point.colour")
-            clsGeomLollipopAesFunction.AddParameter("colour", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
-        Else
-            clsGeomLollipopFunction.AddParameter("point.colour", "steelblue", iPosition:=0)
-        End If
-    End Sub
+    'Private Sub AddRemovelollipopparameter()
+    '    If ucrChkLollipop.Checked AndAlso Not ucrReceiverByFactor.IsEmpty Then
+    '        clsGeomLollipopFunction.RemoveParameterByName("point.colour")
+    '        clsGeomLollipopAesFunction.AddParameter("colour", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
+    '    Else
+    '        clsGeomLollipopFunction.AddParameter("point.colour", "steelblue", iPosition:=0)
+    '    End If
+    'End Sub
 
     Private Sub UpdateParameter()
         Dim strChangedTextFreq As String = ucrInputReorderX.GetText()
@@ -1288,7 +1283,7 @@ Public Class dlgBarAndPieChart
         ucrChkAddLabelsText.ControlValueChanged, ucrChkReorderValue.ControlValueChanged, ucrInputReorderX.ControlValueChanged,
         ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged,
         ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged
-        AddRemovelollipopparameter()
+        ' AddRemovelollipopparameter()
         SetDialogOptions()
         ChangeParameterName()
         If rdoTreeMap.Checked Then
