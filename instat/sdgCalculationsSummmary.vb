@@ -61,8 +61,6 @@ Public Class sdgCalculationsSummmary
 
         ucrManipulations.lstAvailableData.View = View.List
 
-        'ucrCalcSummary.ucrReceiverForCalculation.bAttachedToPrimaryDataFrame = False
-
         'temp until working
         ucrCalcSummary.ucrSaveResultInto.Visible = False
         'ucrCalcSummary.ucrTryModelling.Visible = False
@@ -385,7 +383,7 @@ Public Class sdgCalculationsSummmary
 
         strCalcFromList = "list("
         For i = 0 To lstVariables.Count - 1
-            Dim strDataName = lstVariables(i)
+            Dim strDataName As String = lstVariables(i)
             If Not String.IsNullOrEmpty(strDataName) Then
                 If i > 0 Then
                     strCalcFromList = strCalcFromList & ","
