@@ -345,17 +345,18 @@ Public Class sdgCalculationsSummmary
 
     Private Sub ucrCalcSummary_SelectionChanged() Handles ucrCalcSummary.SelectionChanged
         If {"Calculation", "Summary"}.Contains(ucrInputType.GetText()) Then
+            Dim strExpression As String = ucrCalcSummary.ucrReceiverForCalculation.GetText()
             If Not ucrCalcSummary.ucrReceiverForCalculation.IsEmpty Then
-                clsCalculationFunction.AddParameter("function_exp", Chr(34) & ucrCalcSummary.ucrReceiverForCalculation.GetText() & Chr(34))
+                clsCalculationFunction.AddParameter("function_exp", Chr(34) & strExpression & Chr(34))
             Else
                 clsCalculationFunction.RemoveParameterByName("function_exp")
             End If
 
-            If ucrCalcSummary.ucrSelectorForCalculations.lstAvailableVariable.Items.Count > 0 Then
+            If ucrCalcSummary.ucrSelectorForCalculations.lstAvailableVariable.Items.Count > 0 AndAlso
+                Not ucrCalcSummary.ucrReceiverForCalculation.IsEmpty Then
                 Dim lstItems As String() = ucrCalcSummary.ucrSelectorForCalculations.lstAvailableVariable.Items.Cast(Of ListViewItem)().Select(Function(item) item.Text).ToArray()
-                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(
-                                                    lstItems,
-                                                     ucrCalcSummary.ucrSelectorForCalculations))
+                Dim strSelectedVariables As String() = lstItems.Where(Function(variable) strExpression.Contains(variable)).ToArray()
+                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(strSelectedVariables, ucrCalcSummary.ucrSelectorForCalculations))
             Else
                 clsCalculationFunction.RemoveParameterByName("calculated_from")
             End If
