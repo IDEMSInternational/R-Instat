@@ -52,6 +52,8 @@ Partial Class dlgScript
         Me.ucrPnlGetData = New instat.UcrPanel()
         Me.ucrSelectorGetObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbPageCommand = New System.Windows.Forms.TabPage()
+        Me.ucrChkWindow = New instat.ucrCheck()
+        Me.rdoWindow = New System.Windows.Forms.RadioButton()
         Me.ucrChkInto = New instat.ucrCheck()
         Me.rdoListData = New System.Windows.Forms.RadioButton()
         Me.ucrInputSaveData = New instat.ucrInputTextBox()
@@ -72,6 +74,7 @@ Partial Class dlgScript
         Me.ucrCboCommandPackage = New instat.ucrInputComboBox()
         Me.ucrPnlCommands = New instat.UcrPanel()
         Me.tbPageExamples = New System.Windows.Forms.TabPage()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.rdoExampleData = New System.Windows.Forms.RadioButton()
         Me.rdoExampleFunction = New System.Windows.Forms.RadioButton()
         Me.ucrPnlExample = New instat.UcrPanel()
@@ -83,8 +86,6 @@ Partial Class dlgScript
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.txtScript = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkWindow = New instat.ucrCheck()
-        Me.rdoWindow = New System.Windows.Forms.RadioButton()
         Me.tbFeatures.SuspendLayout()
         Me.tbPageSaveData.SuspendLayout()
         Me.tbPageGetData.SuspendLayout()
@@ -490,6 +491,27 @@ Partial Class dlgScript
         Me.tbPageCommand.Text = "Commands"
         Me.tbPageCommand.UseVisualStyleBackColor = True
         '
+        'ucrChkWindow
+        '
+        Me.ucrChkWindow.AutoSize = True
+        Me.ucrChkWindow.Checked = False
+        Me.ucrChkWindow.Location = New System.Drawing.Point(160, 94)
+        Me.ucrChkWindow.Name = "ucrChkWindow"
+        Me.ucrChkWindow.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkWindow.TabIndex = 67
+        '
+        'rdoWindow
+        '
+        Me.rdoWindow.AutoSize = True
+        Me.rdoWindow.Location = New System.Drawing.Point(25, 94)
+        Me.rdoWindow.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoWindow.Name = "rdoWindow"
+        Me.rdoWindow.Size = New System.Drawing.Size(134, 17)
+        Me.rdoWindow.TabIndex = 66
+        Me.rdoWindow.TabStop = True
+        Me.rdoWindow.Text = "Output Graph Window:"
+        Me.rdoWindow.UseVisualStyleBackColor = True
+        '
         'ucrChkInto
         '
         Me.ucrChkInto.AutoSize = True
@@ -705,6 +727,7 @@ Partial Class dlgScript
         '
         'tbPageExamples
         '
+        Me.tbPageExamples.Controls.Add(Me.cmdHelp)
         Me.tbPageExamples.Controls.Add(Me.rdoExampleData)
         Me.tbPageExamples.Controls.Add(Me.rdoExampleFunction)
         Me.tbPageExamples.Controls.Add(Me.ucrPnlExample)
@@ -715,8 +738,17 @@ Partial Class dlgScript
         Me.tbPageExamples.Name = "tbPageExamples"
         Me.tbPageExamples.Size = New System.Drawing.Size(438, 245)
         Me.tbPageExamples.TabIndex = 4
-        Me.tbPageExamples.Text = "Examples"
+        Me.tbPageExamples.Text = "Library"
         Me.tbPageExamples.UseVisualStyleBackColor = True
+        '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(357, 7)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
+        Me.cmdHelp.TabIndex = 61
+        Me.cmdHelp.Text = "R Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'rdoExampleData
         '
@@ -838,27 +870,6 @@ Partial Class dlgScript
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 16
         '
-        'ucrChkWindow
-        '
-        Me.ucrChkWindow.AutoSize = True
-        Me.ucrChkWindow.Checked = False
-        Me.ucrChkWindow.Location = New System.Drawing.Point(160, 94)
-        Me.ucrChkWindow.Name = "ucrChkWindow"
-        Me.ucrChkWindow.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkWindow.TabIndex = 67
-        '
-        'rdoWindow
-        '
-        Me.rdoWindow.AutoSize = True
-        Me.rdoWindow.Location = New System.Drawing.Point(25, 94)
-        Me.rdoWindow.Margin = New System.Windows.Forms.Padding(2)
-        Me.rdoWindow.Name = "rdoWindow"
-        Me.rdoWindow.Size = New System.Drawing.Size(134, 17)
-        Me.rdoWindow.TabIndex = 66
-        Me.rdoWindow.TabStop = True
-        Me.rdoWindow.Text = "Output Graph Window:"
-        Me.rdoWindow.UseVisualStyleBackColor = True
-        '
         'dlgScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -952,4 +963,5 @@ Partial Class dlgScript
     Friend WithEvents ucrChkInto As ucrCheck
     Friend WithEvents ucrChkWindow As ucrCheck
     Friend WithEvents rdoWindow As RadioButton
+    Friend WithEvents cmdHelp As Button
 End Class

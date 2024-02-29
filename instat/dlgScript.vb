@@ -30,10 +30,13 @@ Public Class dlgScript
             SetDefaults()
             bFirstload = False
         End If
+
         autoTranslate(Me)
+        EnableHelp()
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 180
 
         ' Supported output object types and formats
         dctOutputObjectTypes.Add("Summary", RObjectTypeLabel.Summary)
@@ -384,7 +387,6 @@ Public Class dlgScript
         ucrCboCommandDataPackage.SetVisible(False)
         ucrInputSaveData.SetVisible(False)
         ucrChkWindow.SetVisible(False)
-        rdoChooseFile.Enabled = False
         If rdoCommandPackage.Checked Then
             ucrCboCommandPackage.SetVisible(True)
             ucrCboCommandPackage.OnControlValueChanged()
@@ -428,7 +430,7 @@ Public Class dlgScript
         PreviewScript(strScript)
     End Sub
 
-    Private Sub ucrCboCommandDataPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboCommandDataPackage.ControlValueChanged, ucrInputSaveData.ControlContentsChanged, ucrChkInto.ControlContentsChanged
+    Private Sub ucrCboCommandDataPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSaveData.ControlContentsChanged, ucrChkInto.ControlContentsChanged, ucrCboCommandDataPackage.ControlValueChanged
         ucrInputSaveData.Visible = ucrChkInto.Checked
 
         Dim strScript As String = ""
@@ -490,7 +492,7 @@ Public Class dlgScript
         PreviewScript(strScript)
     End Sub
 
-    Private Sub ucrInputGgplotify_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGgplotify.ControlContentsChanged, ucrInputGraphCommand.ControlContentsChanged
+    Private Sub ucrInputGgplotify_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphCommand.ControlContentsChanged, ucrInputGgplotify.ControlContentsChanged
         Dim strScript As String = ""
 
         If Not ucrInputGgplotify.IsEmpty() AndAlso Not ucrInputGraphCommand.IsEmpty Then
@@ -526,7 +528,7 @@ Public Class dlgScript
         PreviewScript(strScript)
     End Sub
 
-    Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboExamplePackages.ControlValueChanged, ucrPnlExample.ControlValueChanged
+    Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExample.ControlValueChanged, ucrCboExamplePackages.ControlValueChanged
         PreviewScript("")
         lstExampleCollection.Items.Clear()
 
@@ -544,7 +546,7 @@ Public Class dlgScript
             lstExampleCollection.Items.AddRange(GetFunctions(strSelectedPackage))
         End If
         lstExampleCollection.Select()
-
+        EnableHelp()
     End Sub
 
     Private Function GetDatasets(strPackage As String) As ListViewItem()
@@ -609,6 +611,7 @@ Public Class dlgScript
         Catch ex As Exception
             MsgBox(strTopic & " has a help file but no examples.")
         End Try
+        EnableHelp()
     End Sub
 
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
@@ -618,6 +621,7 @@ Public Class dlgScript
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        EnableHelp()
     End Sub
 
     Private Sub tbFeatures_Selected(sender As Object, e As TabControlEventArgs) Handles tbFeatures.Selected
@@ -688,6 +692,9 @@ Public Class dlgScript
         End If
         PreviewScript(strScript)
     End Sub
+    Private Sub EnableHelp()
+        cmdHelp.Enabled = rdoExampleData.Checked AndAlso lstExampleCollection.SelectedItems.Count > 0
+    End Sub
 
     Private Sub ucrChkWindow_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkWindow.ControlContentsChanged
         Dim strScript As String = ""
@@ -700,10 +707,18 @@ Public Class dlgScript
         Else
             clsWindowFunction.SetRCommand("windows")
             clsWindowFunction.RemoveParameterByName("record")
-            strScript = "#Output graph window" & Environment.NewLine & clsWindowFunction.ToScript()
+            strScript = "#Open the R graph viewer" & Environment.NewLine & clsWindowFunction.ToScript()
         End If
 
         PreviewScript(strScript)
     End Sub
 
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Dim strPackageName As String = ucrCboExamplePackages.cboInput.SelectedItem
+        Dim strTopic As String = lstExampleCollection.SelectedItems(0).Text
+        If strPackageName <> "" AndAlso strTopic <> "" Then
+            Dim frmMaximiseOutput As New frmMaximiseOutput
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName, strTopic:=strTopic), bReplace:=False)
+        End If
+    End Sub
 End Class
