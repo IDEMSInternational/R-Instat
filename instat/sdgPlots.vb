@@ -6188,4 +6188,12 @@ Public Class sdgPlots
         HideShowCanvaFill()
         GroupeColorScale()
     End Sub
+
+    Private Sub ucrInputLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLegendPosition.ControlValueChanged
+        If Not ucrInputLegendPosition.IsEmpty Then
+            clsThemeFunction.AddParameter("legend.position", Chr(34) & ucrInputLegendPosition.GetText().ToLower() & Chr(34), iPosition:=0)
+        Else
+            clsThemeFunction.RemoveParameterByName("legend.position")
+        End If
+    End Sub
 End Class
