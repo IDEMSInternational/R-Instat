@@ -743,7 +743,7 @@ Partial Class dlgScript
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(357, 7)
+        Me.cmdHelp.Location = New System.Drawing.Point(361, 4)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 61

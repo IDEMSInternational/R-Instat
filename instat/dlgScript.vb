@@ -721,4 +721,5 @@ Public Class dlgScript
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName, strTopic:=strTopic), bReplace:=False)
         End If
     End Sub
+
 End Class
