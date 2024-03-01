@@ -55,17 +55,14 @@ Public Class sdgThemesSub
         ucrPanelGridMinor.SetLabel("Minor Grid Lines")
         ucrPanelBorder.SetLabel("Panel Border")
         ucrPanelBackground.SetLabel("Panel Background")
-
         ucrChkRemoveLegend.SetText("Remove Legend")
-        ucrChkRemoveLegend.AddParameterPresentCondition(True, "legend", True)
-        ucrChkRemoveLegend.AddParameterPresentCondition(False, "legend", False)
 
         ucrPnlOptions.AddRadioButton(rdoCoordinated)
         ucrPnlOptions.AddRadioButton(rdoSpecific)
         ucrPnlOptions.AddParameterValuesCondition(rdoCoordinated, "legend", "coordinated")
         ucrPnlOptions.AddParameterValuesCondition(rdoSpecific, "legend", "specific")
         ucrPnlOptions.AddToLinkedControls({ucrNudX, ucrNudY}, {rdoCoordinated}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
-        ucrPnlOptions.AddToLinkedControls(ucrInputLegendPosition, {rdoSpecific}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrInputLegendPosition, {rdoSpecific}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
 
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
@@ -78,14 +75,14 @@ Public Class sdgThemesSub
 
         ucrNudX.SetParameter(New RParameter("legend.position", 3))
         ucrNudX.SetMinMax(0, 1)
-        ucrNudX.DecimalPlaces = 1
-        ucrNudX.Increment = 0.1
+        ucrNudX.DecimalPlaces = 2
+        ucrNudX.Increment = 0.01
         ucrNudX.SetLinkedDisplayControl(lblXCoord)
 
         ucrNudY.SetParameter(New RParameter("legend.position", 4))
         ucrNudY.SetMinMax(0, 1)
-        ucrNudY.DecimalPlaces = 1
-        ucrNudY.Increment = 0.1
+        ucrNudY.DecimalPlaces = 2
+        ucrNudY.Increment = 0.01
         ucrNudY.SetLinkedDisplayControl(lblYCoord)
 
         bControlsInitialised = True
@@ -96,10 +93,10 @@ Public Class sdgThemesSub
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        ucrInputLegendPosition.SetName("None")
+        'ucrInputLegendPosition.SetName("None")
 
         clsDummyFunction = New RFunction
-        clsDummyFunction.AddParameter("legend", "specific", iPosition:=0)
+        clsDummyFunction.AddParameter("legend", "coordinated", iPosition:=0)
 
         clsThemesFunction = clsNewThemesFunction
         ' The position MUST be larger than the position of the theme_* argument
@@ -151,9 +148,9 @@ Public Class sdgThemesSub
         ucrPanelBackground.SetRCodeForControl("panel.background", clsThemesSubFunctions.clsElementPanelBackGround, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         If bReset Then
+            ucrInputLegendPosition.SetRCode(clsThemesFunction, bReset, bCloneIfNeeded:=True)
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         End If
-        LegendOptions()
     End Sub
 
     Private Sub LegendOptions()
@@ -161,10 +158,9 @@ Public Class sdgThemesSub
         clsCFunction.SetRCommand("c")
         clsCFunction.AddParameter("x", ucrNudX.GetText(), iPosition:=0, bIncludeArgumentName:=False)
         clsCFunction.AddParameter("y", ucrNudY.GetText(), iPosition:=1, bIncludeArgumentName:=False)
-        clsThemesFunction.RemoveParameterByName("legend.position")
-        If rdoSpecific.Checked Then
+        If rdoSpecific.Checked AndAlso Not ucrInputLegendPosition.IsEmpty Then
             clsThemesFunction.AddParameter("legend.position", Chr(34) & ucrInputLegendPosition.GetText().ToLower() & Chr(34), iPosition:=0)
-        Else
+        ElseIf rdoCoordinated.Checked AndAlso Not (ucrNudY.IsEmpty AndAlso ucrNudX.IsEmpty) Then
             clsThemesFunction.AddParameter("legend.position", clsRFunctionParameter:=clsCFunction, iPosition:=0)
         End If
     End Sub

@@ -46,9 +46,6 @@ Partial Class sdgThemesSub
         Me.ucrPanelBackground = New instat.ucrElementRectControl()
         Me.ucrPanelBorder = New instat.ucrElementRectControl()
         Me.tbLegend = New System.Windows.Forms.TabPage()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ucrChkLegTitleTextSize = New instat.ucrCheck()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.grpLegendPosition = New System.Windows.Forms.GroupBox()
         Me.rdoCoordinated = New System.Windows.Forms.RadioButton()
         Me.rdoSpecific = New System.Windows.Forms.RadioButton()
@@ -60,6 +57,9 @@ Partial Class sdgThemesSub
         Me.lblLegendPosition = New System.Windows.Forms.Label()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrChkRemoveLegend = New instat.ucrCheck()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ucrChkLegTitleTextSize = New instat.ucrCheck()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.TabThemes.SuspendLayout()
         Me.tbTitles.SuspendLayout()
         Me.tbLabels.SuspendLayout()
@@ -67,8 +67,8 @@ Partial Class sdgThemesSub
         Me.tbPanel.SuspendLayout()
         Me.tbBackground.SuspendLayout()
         Me.tbLegend.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.grpLegendPosition.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabThemes
@@ -297,33 +297,6 @@ Partial Class sdgThemesSub
         Me.tbLegend.Text = "Legend"
         Me.tbLegend.UseVisualStyleBackColor = True
         '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.ucrChkLegTitleTextSize)
-        Me.GroupBox1.Location = New System.Drawing.Point(6, 126)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(413, 100)
-        Me.GroupBox1.TabIndex = 4
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "GroupBox1"
-        '
-        'ucrChkLegTitleTextSize
-        '
-        Me.ucrChkLegTitleTextSize.AutoSize = True
-        Me.ucrChkLegTitleTextSize.Checked = False
-        Me.ucrChkLegTitleTextSize.Location = New System.Drawing.Point(3, 19)
-        Me.ucrChkLegTitleTextSize.Name = "ucrChkLegTitleTextSize"
-        Me.ucrChkLegTitleTextSize.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkLegTitleTextSize.TabIndex = 5
-        '
-        'ucrBaseSubdialog
-        '
-        Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(160, 495)
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 30)
-        Me.ucrBaseSubdialog.TabIndex = 2
-        '
         'grpLegendPosition
         '
         Me.grpLegendPosition.Controls.Add(Me.rdoCoordinated)
@@ -445,6 +418,33 @@ Partial Class sdgThemesSub
         Me.ucrChkRemoveLegend.Size = New System.Drawing.Size(166, 23)
         Me.ucrChkRemoveLegend.TabIndex = 5
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.ucrChkLegTitleTextSize)
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 126)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(413, 100)
+        Me.GroupBox1.TabIndex = 4
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "GroupBox1"
+        '
+        'ucrChkLegTitleTextSize
+        '
+        Me.ucrChkLegTitleTextSize.AutoSize = True
+        Me.ucrChkLegTitleTextSize.Checked = False
+        Me.ucrChkLegTitleTextSize.Location = New System.Drawing.Point(3, 19)
+        Me.ucrChkLegTitleTextSize.Name = "ucrChkLegTitleTextSize"
+        Me.ucrChkLegTitleTextSize.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkLegTitleTextSize.TabIndex = 5
+        '
+        'ucrBaseSubdialog
+        '
+        Me.ucrBaseSubdialog.AutoSize = True
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(160, 495)
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBaseSubdialog.TabIndex = 2
+        '
         'sdgThemesSub
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -473,10 +473,10 @@ Partial Class sdgThemesSub
         Me.tbBackground.PerformLayout()
         Me.tbLegend.ResumeLayout(False)
         Me.tbLegend.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.grpLegendPosition.ResumeLayout(False)
         Me.grpLegendPosition.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

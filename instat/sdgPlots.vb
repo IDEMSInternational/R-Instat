@@ -3406,7 +3406,7 @@ Public Class sdgPlots
 
     Private Sub SetRcodeForCommonThemesControls(bReset As Boolean)
         ucrChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        'ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkXaxisAngle.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
         ucrNudXAngle.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
