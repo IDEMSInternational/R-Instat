@@ -495,9 +495,9 @@ Partial Class dlgScript
         '
         Me.ucrChkWindow.AutoSize = True
         Me.ucrChkWindow.Checked = False
-        Me.ucrChkWindow.Location = New System.Drawing.Point(160, 94)
+        Me.ucrChkWindow.Location = New System.Drawing.Point(233, 94)
         Me.ucrChkWindow.Name = "ucrChkWindow"
-        Me.ucrChkWindow.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkWindow.Size = New System.Drawing.Size(126, 23)
         Me.ucrChkWindow.TabIndex = 67
         '
         'rdoWindow

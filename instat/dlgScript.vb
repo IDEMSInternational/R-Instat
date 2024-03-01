@@ -31,6 +31,13 @@ Public Class dlgScript
             bFirstload = False
         End If
 
+        If lstExampleCollection.SelectedItems.Count > 0 Then
+            'make the listview have the focus
+            lstExampleCollection.Select()
+            'set the selected item to be visible 
+            lstExampleCollection.TopItem = lstExampleCollection.Items(lstExampleCollection.Items.IndexOf(lstExampleCollection.SelectedItems.Item(0)))
+        End If
+
         autoTranslate(Me)
         EnableHelp()
     End Sub
@@ -179,6 +186,7 @@ Public Class dlgScript
         ucrChkOpenRFile.Checked = False
         ucrChkInto.Checked = False
         ucrChkDisplayGraph.Checked = False
+        ucrChkWindow.Checked = True
         ucrDataFrameSaveOutputSelect.Reset()
 
         ' Get controls reset
@@ -666,14 +674,14 @@ Public Class dlgScript
         If rdoChooseFile.Checked Then
             If Not ucrChkOpenRFile.Checked Then
                 ' Only file choosing logic
-                clsFileChooseFunction.SetRCommand("file.choose")
+                clsFileChooseFunction.SetRCommand("choose.files")
                 Dim strAssignedScript As String = ""
                 clsFileChooseFunction.SetAssignTo("filename")
                 clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
                 strScript = "#Open file interactively" & Environment.NewLine & strAssignedScript
             ElseIf ucrChkOpenRFile.Checked AndAlso Not ucrInputChooseFile.IsEmpty Then
                 ' File choosing and RDS file reading logic
-                clsFileChooseFunction.SetRCommand("file.choose")
+                clsFileChooseFunction.SetRCommand("choose.files")
                 Dim strAssignedScript As String = ""
                 clsFileChooseFunction.SetAssignTo("filename")
                 clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
