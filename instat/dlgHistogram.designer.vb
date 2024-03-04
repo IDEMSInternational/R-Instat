@@ -215,7 +215,7 @@ Partial Class dlgHistogram
         Me.ucrNudMinHeight.AutoSize = True
         Me.ucrNudMinHeight.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinHeight.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinHeight.Location = New System.Drawing.Point(159, 313)
+        Me.ucrNudMinHeight.Location = New System.Drawing.Point(138, 313)
         Me.ucrNudMinHeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinHeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinHeight.Name = "ucrNudMinHeight"
@@ -246,7 +246,7 @@ Partial Class dlgHistogram
         Me.ucrNudBinwidth.AutoSize = True
         Me.ucrNudBinwidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBinwidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBinwidth.Location = New System.Drawing.Point(161, 262)
+        Me.ucrNudBinwidth.Location = New System.Drawing.Point(139, 262)
         Me.ucrNudBinwidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBinwidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBinwidth.Name = "ucrNudBinwidth"
