@@ -47,15 +47,15 @@ Partial Class sdgThemesSub
         Me.ucrPanelBorder = New instat.ucrElementRectControl()
         Me.tbLegend = New System.Windows.Forms.TabPage()
         Me.grpLegendPosition = New System.Windows.Forms.GroupBox()
-        Me.rdoCoordinated = New System.Windows.Forms.RadioButton()
+        Me.ucrNudY = New instat.ucrNud()
+        Me.rdoCoordinates = New System.Windows.Forms.RadioButton()
+        Me.ucrNudX = New instat.ucrNud()
         Me.rdoSpecific = New System.Windows.Forms.RadioButton()
         Me.lblYCoord = New System.Windows.Forms.Label()
+        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.lblXCoord = New System.Windows.Forms.Label()
-        Me.ucrNudY = New instat.ucrNud()
-        Me.ucrNudX = New instat.ucrNud()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.lblLegendPosition = New System.Windows.Forms.Label()
-        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrChkRemoveLegend = New instat.ucrCheck()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ucrChkLegTitleTextSize = New instat.ucrCheck()
@@ -299,15 +299,15 @@ Partial Class sdgThemesSub
         '
         'grpLegendPosition
         '
-        Me.grpLegendPosition.Controls.Add(Me.rdoCoordinated)
+        Me.grpLegendPosition.Controls.Add(Me.ucrNudY)
+        Me.grpLegendPosition.Controls.Add(Me.rdoCoordinates)
+        Me.grpLegendPosition.Controls.Add(Me.ucrNudX)
         Me.grpLegendPosition.Controls.Add(Me.rdoSpecific)
         Me.grpLegendPosition.Controls.Add(Me.lblYCoord)
+        Me.grpLegendPosition.Controls.Add(Me.ucrPnlOptions)
         Me.grpLegendPosition.Controls.Add(Me.lblXCoord)
-        Me.grpLegendPosition.Controls.Add(Me.ucrNudY)
-        Me.grpLegendPosition.Controls.Add(Me.ucrNudX)
         Me.grpLegendPosition.Controls.Add(Me.ucrInputLegendPosition)
         Me.grpLegendPosition.Controls.Add(Me.lblLegendPosition)
-        Me.grpLegendPosition.Controls.Add(Me.ucrPnlOptions)
         Me.grpLegendPosition.Location = New System.Drawing.Point(6, 32)
         Me.grpLegendPosition.Name = "grpLegendPosition"
         Me.grpLegendPosition.Size = New System.Drawing.Size(413, 84)
@@ -315,24 +315,50 @@ Partial Class sdgThemesSub
         Me.grpLegendPosition.TabStop = False
         Me.grpLegendPosition.Text = "Legend Position"
         '
-        'rdoCoordinated
+        'ucrNudY
         '
-        Me.rdoCoordinated.AutoSize = True
-        Me.rdoCoordinated.Location = New System.Drawing.Point(242, 22)
-        Me.rdoCoordinated.Name = "rdoCoordinated"
-        Me.rdoCoordinated.Size = New System.Drawing.Size(81, 17)
-        Me.rdoCoordinated.TabIndex = 6
-        Me.rdoCoordinated.TabStop = True
-        Me.rdoCoordinated.Text = "Coordinates"
-        Me.rdoCoordinated.UseVisualStyleBackColor = True
+        Me.ucrNudY.AutoSize = True
+        Me.ucrNudY.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudY.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudY.Location = New System.Drawing.Point(346, 52)
+        Me.ucrNudY.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudY.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudY.Name = "ucrNudY"
+        Me.ucrNudY.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudY.TabIndex = 330
+        Me.ucrNudY.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'rdoCoordinates
+        '
+        Me.rdoCoordinates.AutoSize = True
+        Me.rdoCoordinates.Location = New System.Drawing.Point(195, 22)
+        Me.rdoCoordinates.Name = "rdoCoordinates"
+        Me.rdoCoordinates.Size = New System.Drawing.Size(81, 17)
+        Me.rdoCoordinates.TabIndex = 329
+        Me.rdoCoordinates.TabStop = True
+        Me.rdoCoordinates.Text = "Coordinates"
+        Me.rdoCoordinates.UseVisualStyleBackColor = True
+        '
+        'ucrNudX
+        '
+        Me.ucrNudX.AutoSize = True
+        Me.ucrNudX.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudX.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudX.Location = New System.Drawing.Point(259, 51)
+        Me.ucrNudX.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudX.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudX.Name = "ucrNudX"
+        Me.ucrNudX.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudX.TabIndex = 7
+        Me.ucrNudX.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoSpecific
         '
         Me.rdoSpecific.AutoSize = True
-        Me.rdoSpecific.Location = New System.Drawing.Point(6, 22)
+        Me.rdoSpecific.Location = New System.Drawing.Point(10, 22)
         Me.rdoSpecific.Name = "rdoSpecific"
         Me.rdoSpecific.Size = New System.Drawing.Size(63, 17)
-        Me.rdoSpecific.TabIndex = 7
+        Me.rdoSpecific.TabIndex = 328
         Me.rdoSpecific.TabStop = True
         Me.rdoSpecific.Text = "Specific"
         Me.rdoSpecific.UseVisualStyleBackColor = True
@@ -346,6 +372,14 @@ Partial Class sdgThemesSub
         Me.lblYCoord.TabIndex = 8
         Me.lblYCoord.Text = "y:"
         '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(6, 19)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(356, 26)
+        Me.ucrPnlOptions.TabIndex = 327
+        '
         'lblXCoord
         '
         Me.lblXCoord.AutoSize = True
@@ -354,32 +388,6 @@ Partial Class sdgThemesSub
         Me.lblXCoord.Size = New System.Drawing.Size(15, 13)
         Me.lblXCoord.TabIndex = 7
         Me.lblXCoord.Text = "x:"
-        '
-        'ucrNudY
-        '
-        Me.ucrNudY.AutoSize = True
-        Me.ucrNudY.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudY.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudY.Location = New System.Drawing.Point(348, 52)
-        Me.ucrNudY.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudY.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudY.Name = "ucrNudY"
-        Me.ucrNudY.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudY.TabIndex = 6
-        Me.ucrNudY.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudX
-        '
-        Me.ucrNudX.AutoSize = True
-        Me.ucrNudX.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudX.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudX.Location = New System.Drawing.Point(258, 51)
-        Me.ucrNudX.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudX.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudX.Name = "ucrNudX"
-        Me.ucrNudX.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudX.TabIndex = 4
-        Me.ucrNudX.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputLegendPosition
         '
@@ -400,14 +408,6 @@ Partial Class sdgThemesSub
         Me.lblLegendPosition.Size = New System.Drawing.Size(47, 13)
         Me.lblLegendPosition.TabIndex = 1
         Me.lblLegendPosition.Text = "Position:"
-        '
-        'ucrPnlOptions
-        '
-        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(3, 19)
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(395, 26)
-        Me.ucrPnlOptions.TabIndex = 9
         '
         'ucrChkRemoveLegend
         '
@@ -510,14 +510,14 @@ Partial Class sdgThemesSub
     Friend WithEvents ucrChkLegTitleTextSize As ucrCheck
     Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
     Friend WithEvents grpLegendPosition As GroupBox
-    Friend WithEvents rdoCoordinated As RadioButton
-    Friend WithEvents rdoSpecific As RadioButton
     Friend WithEvents lblYCoord As Label
     Friend WithEvents lblXCoord As Label
-    Friend WithEvents ucrNudY As ucrNud
-    Friend WithEvents ucrNudX As ucrNud
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents lblLegendPosition As Label
-    Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents ucrChkRemoveLegend As ucrCheck
+    Friend WithEvents ucrNudX As ucrNud
+    Friend WithEvents rdoCoordinates As RadioButton
+    Friend WithEvents rdoSpecific As RadioButton
+    Friend WithEvents ucrPnlOptions As UcrPanel
+    Friend WithEvents ucrNudY As ucrNud
 End Class
