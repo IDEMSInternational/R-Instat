@@ -152,9 +152,9 @@ Public Class dlgHistogram
         ucrChkMinHeight.AddToLinkedControls({ucrNudMinHeight}, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudMinHeight.SetParameter(New RParameter("rel_min_height", 4))
-        ucrNudMinHeight.SetMinMax(0.00, 10.0)
+        ucrNudMinHeight.SetMinMax(0.000, 10.0)
         ucrNudMinHeight.DecimalPlaces = 3
-        ucrNudMinHeight.Increment = 0.01
+        ucrNudMinHeight.Increment = 0.001
         ucrNudMinHeight.SetRDefault(0.01)
 
         ucrVariablesAsFactorforHist.SetParameter(New RParameter("x", 0))
@@ -327,15 +327,15 @@ Public Class dlgHistogram
 
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
-
+        ucrNudBinwidth.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrNudMinHeight.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrChkMinHeight.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrChkBinWidth.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrChkOmitYAxis.SetRCode(clsBaseOperator, bReset)
         If bReset Then
             ucrInputStats.SetRCode(clsHistAesFunction, bReset)
             ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
-            ucrChkBinWidth.SetRCode(clsRgeomPlotFunction, bReset)
-            ucrChkMinHeight.SetRCode(clsRgeomPlotFunction, bReset)
-            ucrNudBinwidth.SetRCode(clsRgeomPlotFunction, bReset)
-            ucrNudMinHeight.SetRCode(clsRgeomPlotFunction, bReset)
-            ucrChkOmitYAxis.SetRCode(clsYlabScalesFunction, bReset)
+
         End If
     End Sub
 
@@ -377,6 +377,7 @@ Public Class dlgHistogram
             If ucrChkDisplayAsDotPlot.Checked Then
                 clsRgeomPlotFunction.SetRCommand("geom_dotplot")
                 clsRgeomPlotFunction.RemoveParameterByName("mapping")
+                clsRgeomPlotFunction.RemoveParameterByName("rel_min_height")
                 If Not ucrFactorReceiver.IsEmpty Then
                     clsRgeomPlotFunction.AddParameter("binpositions", Chr(34) & "all" & Chr(34), iPosition:=0)
                     clsRgeomPlotFunction.AddParameter("stackgroups", "TRUE", iPosition:=1)
@@ -392,13 +393,15 @@ Public Class dlgHistogram
                     clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
                 End If
             End If
-
+            clsBaseOperator.RemoveParameterByName("scale")
             ucrFactorReceiver.ChangeParameterName("fill")
             If Not ucrSaveHist.bUserTyped Then ucrSaveHist.SetPrefix("histogram")
         End If
         If rdoDensity_ridges.Checked Then
             clsRgeomPlotFunction.RemoveParameterByName("binpositions")
             clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
+            clsRgeomPlotFunction.RemoveParameterByName("binwidth")
+            clsBaseOperator.RemoveParameterByName("scale")
             If ucrChkRidges.Checked Then
                 ucrFactorReceiver.ChangeParameterName("y")
                 clsHistAesFunction.RemoveParameterByName("y")
@@ -423,6 +426,8 @@ Public Class dlgHistogram
             clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
             clsRgeomPlotFunction.RemoveParameterByName("binpositions")
             clsRgeomPlotFunction.RemoveParameterByName("stackgroups")
+            clsRgeomPlotFunction.RemoveParameterByName("rel_min_height")
+            clsBaseOperator.RemoveParameterByName("scale")
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("frequency_polygon")
             End If
@@ -751,8 +756,8 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub ucrChkMinHeight_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMinHeight.ControlValueChanged, ucrNudMinHeight.ControlValueChanged
-        If ucrChkRidges.Checked Then
-            If ucrChkMinHeight.Checked Then
+        If ucrChkRidges.Checked AndAlso ucrChkMinHeight.Checked Then
+            If Not ucrNudMinHeight.IsEmpty Then
                 clsRgeomPlotFunction.AddParameter("rel_min_height", ucrNudMinHeight.GetText, iPosition:=4)
             Else
                 clsRgeomPlotFunction.RemoveParameterByName("rel_min_height")
@@ -761,8 +766,8 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub ucrChkBinWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBinWidth.ControlValueChanged, ucrNudBinwidth.ControlValueChanged
-        If Not rdoDensity_ridges.Checked Then
-            If ucrChkBinWidth.Checked Then
+        If ucrChkDisplayAsDotPlot.Checked OrElse ucrChkBinWidth.Checked Then
+            If Not ucrNudBinwidth.IsEmpty Then
                 clsRgeomPlotFunction.AddParameter("binwidth", ucrNudBinwidth.GetText, iPosition:=4)
             Else
                 clsRgeomPlotFunction.RemoveParameterByName("binwidth")
@@ -823,6 +828,5 @@ Public Class dlgHistogram
         AutoFacetStation()
         SetPipeAssignTo()
     End Sub
-
 
 End Class
