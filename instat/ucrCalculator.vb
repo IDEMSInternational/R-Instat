@@ -5388,9 +5388,9 @@ Public Class ucrCalculator
 
     Private Sub cmdwheremin_Click(sender As Object, e As EventArgs) Handles cmdwheremin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("  [where.min(  )](x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.min(x= )]", 17)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [where.min(  )]()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.min( )]", 15)
         End If
     End Sub
 
@@ -5404,9 +5404,9 @@ Public Class ucrCalculator
 
     Private Sub cmdwheremax_Click(sender As Object, e As EventArgs) Handles cmdwheremax.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max( x= )]", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max(x= )]", 17)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max(  )]", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max( )]", 15)
         End If
     End Sub
 End Class
