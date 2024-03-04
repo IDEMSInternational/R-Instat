@@ -61,9 +61,9 @@ Public Class sdgThemesSub
         ucrPnlOptions.AddRadioButton(rdoSpecific)
         ucrPnlOptions.AddParameterValuesCondition(rdoCoordinates, "legend", "coordinated")
         ucrPnlOptions.AddParameterValuesCondition(rdoSpecific, "legend", "specific")
-        ucrPnlOptions.AddToLinkedControls(ucrNudY, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True) ', bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrPnlOptions.AddToLinkedControls(ucrNudX, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True) ', bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrPnlOptions.AddToLinkedControls(ucrInputLegendPosition, {rdoSpecific}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrPnlOptions.AddToLinkedControls(ucrNudY, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrNudX, {rdoCoordinates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrInputLegendPosition, {rdoSpecific}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True) 
 
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
@@ -73,6 +73,7 @@ Public Class sdgThemesSub
         dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
         dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
         ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrInputLegendPosition.SetRDefault(Chr(34) & "None" & Chr(34))
 
         ucrNudX.SetParameter(New RParameter("x", 0, False))
         ucrNudX.SetMinMax(0, 1)
@@ -96,7 +97,6 @@ Public Class sdgThemesSub
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        'ucrInputLegendPosition.SetName("None")
 
         clsDummyFunction = New RFunction
         clsDummyFunction.AddParameter("legend", "coordinated", iPosition:=0)
@@ -154,9 +154,7 @@ Public Class sdgThemesSub
         ucrPanelBackground.SetRCodeForControl("panel.background", clsThemesSubFunctions.clsElementPanelBackGround, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         If bReset Then
-            ucrNudX.SetRCode(clsCFunction, bReset)
-            ucrNudY.SetRCode(clsCFunction, bReset)
-            ucrInputLegendPosition.SetRCode(clsThemesFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputLegendPosition.SetRCode(clsThemesFunction, bReset)
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
         End If
     End Sub

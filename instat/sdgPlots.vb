@@ -3406,7 +3406,6 @@ Public Class sdgPlots
 
     Private Sub SetRcodeForCommonThemesControls(bReset As Boolean)
         ucrChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
-        'ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkXaxisAngle.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
         ucrNudXAngle.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
@@ -3428,6 +3427,7 @@ Public Class sdgPlots
         sdgThemesSub.SetRCode(clsBaseOperator, clsNewThemesFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
         Me.SendToBack()
         sdgThemesSub.ShowDialog()
+        bResetThemes = False
         SetRcodeForCommonThemesControls(False)
     End Sub
 
