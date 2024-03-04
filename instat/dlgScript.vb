@@ -99,9 +99,23 @@ Public Class dlgScript
         ucrCboCommandPackage.SetItems(GetPackages(), bAddConditions:=True)
         ucrCboCommandPackage.SetDropDownStyleAsNonEditable()
 
+        ucrCboCommandDataPackage.SetParameter(New RParameter("package", 0))
+        ucrCboCommandDataPackage.SetItems(GetPackages(), bAddConditions:=True)
+        ucrCboCommandDataPackage.SetDropDownStyleAsNonEditable()
+
+        ucrChkOpenRFile.SetText("Open R File")
+
+        ucrChkInto.SetText("Into:")
+
+        ucrInputGgplotify.SetLinkedDisplayControl(lblGraphObject)
+        ucrInputGraphCommand.SetLinkedDisplayControl(lblGraphCommand)
 
         ucrPnlCommands.AddRadioButton(rdoCommandPackage)
         ucrPnlCommands.AddRadioButton(rdoCommandObject)
+        ucrPnlCommands.AddRadioButton(rdoGgplotify)
+        ucrPnlCommands.AddRadioButton(rdoChooseFile)
+        ucrPnlCommands.AddRadioButton(rdoViewData)
+        ucrPnlCommands.AddRadioButton(rdoListData)
 
         '--------------------------------
         'Get example controls
@@ -146,6 +160,8 @@ Public Class dlgScript
         ' Command controls
         rdoCommandPackage.Checked = True
         ucrCboCommandPackage.GetSetSelectedIndex = -1
+        ucrCboCommandDataPackage.GetSetSelectedIndex = -1
+
         ucrInputRemoveObjects.Reset()
 
         ' Save controls reset
@@ -154,6 +170,8 @@ Public Class dlgScript
         rdoSaveDataFrame.Checked = True
         ucrChkSaveDataFrameSingle.Checked = True
         ucrChkDisplayGraph.Checked = True
+        ucrChkOpenRFile.Checked = False
+        ucrChkInto.Checked = False
         ucrDataFrameSaveOutputSelect.Reset()
 
         ' Get controls reset
@@ -353,12 +371,39 @@ Public Class dlgScript
     Private Sub ucrPnlCommands_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCommands.ControlValueChanged
         ucrCboCommandPackage.SetVisible(False)
         ucrInputRemoveObjects.SetVisible(False)
+        ucrInputGgplotify.SetVisible(False)
+        ucrInputGraphCommand.SetVisible(False)
+        ucrChkOpenRFile.SetVisible(False)
+        ucrChkInto.SetVisible(False)
+        ucrInputChooseFile.SetVisible(False)
+        ucrInputViewData.SetVisible(False)
+        ucrCboCommandDataPackage.SetVisible(False)
+        ucrInputSaveData.SetVisible(False)
+        rdoChooseFile.Enabled = False
         If rdoCommandPackage.Checked Then
             ucrCboCommandPackage.SetVisible(True)
             ucrCboCommandPackage.OnControlValueChanged()
         ElseIf rdoCommandObject.Checked Then
             ucrInputRemoveObjects.SetVisible(True)
             ucrInputRemoveObjects.OnControlValueChanged()
+        ElseIf rdoGgplotify.Checked Then
+            ucrInputGgplotify.SetVisible(True)
+            ucrInputGgplotify.OnControlValueChanged()
+            ucrInputGraphCommand.SetVisible(True)
+            ucrInputGraphCommand.OnControlValueChanged()
+        ElseIf rdoChooseFile.Checked Then
+            ucrChkOpenRFile.SetVisible(True)
+            ucrChkOpenRFile.OnControlValueChanged()
+            ucrInputChooseFile.OnControlValueChanged()
+        ElseIf rdoViewData.Checked Then
+            ucrInputViewData.SetVisible(True)
+            ucrInputViewData.OnControlValueChanged()
+        ElseIf rdoListData.Checked Then
+            ucrCboCommandDataPackage.SetVisible(True)
+            ucrChkInto.SetVisible(True)
+            ucrCboCommandDataPackage.OnControlValueChanged()
+            ucrInputSaveData.OnControlValueChanged()
+            ucrChkInto.OnControlValueChanged()
         End If
     End Sub
 
@@ -373,6 +418,46 @@ Public Class dlgScript
         End If
 
         PreviewScript(strScript)
+    End Sub
+
+    Private Sub ucrCboCommandDataPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboCommandDataPackage.ControlValueChanged, ucrInputSaveData.ControlContentsChanged, ucrChkInto.ControlContentsChanged
+        ucrInputSaveData.Visible = ucrChkInto.Checked
+
+        Dim strScript As String = ""
+        Dim strScriptDataFrame As String = ""
+        Dim clsDatasetFunction As New RFunction
+        clsDatasetFunction.SetPackageName("vcdExtra")
+
+        If Not ucrCboCommandDataPackage.IsEmpty() Then
+            clsDatasetFunction.SetRCommand("datasets")
+            clsDatasetFunction.AddParameter("package", Chr(34) & ucrCboCommandDataPackage.GetText() & Chr(34), bIncludeArgumentName:=False)
+            strScript = "#List of data sets " & Environment.NewLine & clsDatasetFunction.ToScript
+        End If
+
+        If ucrChkInto.Checked AndAlso Not ucrInputSaveData.IsEmpty() Then
+            Dim strDataFrameName As String = ucrInputSaveData.GetText()
+            Dim clsImportRFunction As New RFunction
+            Dim strAssignedScript As String = ""
+
+            clsDatasetFunction.SetRCommand("datasets")
+            clsDatasetFunction.SetAssignTo(strDataFrameName)
+            clsDatasetFunction.AddParameter("package", Chr(34) & ucrCboCommandDataPackage.GetText() & Chr(34), bIncludeArgumentName:=False)
+            clsDatasetFunction.ToScript(strScript:=strAssignedScript)
+            strScript = "#List of data sets " & Environment.NewLine & strAssignedScript
+
+            clsImportRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+
+            Dim clsDataListRFunction As New RFunction
+            clsDataListRFunction.SetRCommand("list")
+            clsDataListRFunction.AddParameter(strParameterName:=strDataFrameName, strParameterValue:=strDataFrameName)
+            clsImportRFunction.AddParameter(strParameterName:="data_tables", clsRFunctionParameter:=clsDataListRFunction)
+
+            strScriptDataFrame = "# Save data frame """ & strDataFrameName & """" & Environment.NewLine & clsImportRFunction.ToScript()
+        End If
+
+        Dim combinedScript As String = strScript & Environment.NewLine & strScriptDataFrame
+
+        PreviewScript(combinedScript)
     End Sub
 
     Private Sub ucrInputRemoveObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputRemoveObjects.ControlContentsChanged
@@ -394,6 +479,42 @@ Public Class dlgScript
             strScript = "# Remove object(s) " & String.Join(",", lstAssignToStrings) & Environment.NewLine & clsRemoveFunc.ToScript()
         End If
 
+        PreviewScript(strScript)
+    End Sub
+
+    Private Sub ucrInputGgplotify_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGgplotify.ControlContentsChanged, ucrInputGraphCommand.ControlContentsChanged
+        Dim strScript As String = ""
+
+        If Not ucrInputGgplotify.IsEmpty() AndAlso Not ucrInputGraphCommand.IsEmpty Then
+            Dim clsGgglorifyFunction As New RFunction
+
+            clsGgglorifyFunction.SetPackageName("ggplotify")
+            clsGgglorifyFunction.SetRCommand("as.ggplot")
+
+
+            Dim strAssignedScript As String = ""
+            clsGgglorifyFunction.AddParameter("plot", "~" & ucrInputGraphCommand.GetText(), bIncludeArgumentName:=False)
+            clsGgglorifyFunction.SetAssignTo(ucrInputGgplotify.GetText)
+            clsGgglorifyFunction.ToScript(strScript:=strAssignedScript)
+
+            strScript = "# Make Graph a ggplot " & Environment.NewLine & strAssignedScript
+
+        End If
+        PreviewScript(strScript)
+    End Sub
+
+    Private Sub ucrInputViewData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputViewData.ControlContentsChanged
+        Dim strScript As String = ""
+
+        If Not ucrInputViewData.IsEmpty Then
+            Dim clsViewDataFunction As New RFunction
+
+            clsViewDataFunction.SetRCommand("View")
+            clsViewDataFunction.AddParameter("view", ucrInputViewData.GetText(), bIncludeArgumentName:=False)
+
+            strScript = "#Show data in the R spreadsheet-type viewer" & Environment.NewLine & clsViewDataFunction.ToScript()
+
+        End If
         PreviewScript(strScript)
     End Sub
 
@@ -515,4 +636,49 @@ Public Class dlgScript
         txtScript.ScrollToCaret()
         txtScript.Refresh()
     End Sub
+
+    Private Sub ucrInputChooseFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputChooseFile.ControlContentsChanged, ucrChkOpenRFile.ControlContentsChanged
+        UpdateScript()
+        ucrInputChooseFile.Visible = ucrChkOpenRFile.Checked
+    End Sub
+
+    Private Sub rdoChooseFile_CheckedChanged(sender As Object, e As EventArgs) Handles rdoChooseFile.CheckedChanged
+        UpdateScript()
+    End Sub
+
+    Private Sub UpdateScript()
+        Dim strScript As String = ""
+        Dim clsFileChooseFunction As New RFunction
+        Dim clsReadRdsFunction As New RFunction
+
+        If rdoChooseFile.Checked Then
+            If Not ucrChkOpenRFile.Checked Then
+                ' Only file choosing logic
+                clsFileChooseFunction.SetRCommand("file.choose")
+                Dim strAssignedScript As String = ""
+                clsFileChooseFunction.SetAssignTo("filename")
+                clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
+                strScript = "#Open file interactively" & Environment.NewLine & strAssignedScript
+            ElseIf ucrChkOpenRFile.Checked AndAlso Not ucrInputChooseFile.IsEmpty Then
+                ' File choosing and RDS file reading logic
+                clsFileChooseFunction.SetRCommand("file.choose")
+                Dim strAssignedScript As String = ""
+                clsFileChooseFunction.SetAssignTo("filename")
+                clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
+                strScript = "#Open R data file interactively" & Environment.NewLine & strAssignedScript
+
+                clsReadRdsFunction.SetRCommand("readRDS")
+                Dim strRdsAssignedScript As String = ""
+                clsReadRdsFunction.SetAssignTo(ucrInputChooseFile.GetText)
+                clsReadRdsFunction.AddParameter("file", "filename", bIncludeArgumentName:=False)
+                clsReadRdsFunction.ToScript(strScript:=strRdsAssignedScript)
+                Dim strRdScript As String = strRdsAssignedScript
+
+                ' Combine scripts if applicable
+                strScript &= strRdScript
+            End If
+        End If
+        PreviewScript(strScript)
+    End Sub
+
 End Class

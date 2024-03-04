@@ -82,9 +82,10 @@ Partial Class sdgCalculationsSummmary
         Me.tbSummaryCalcs.Controls.Add(Me.tbManipulations)
         Me.tbSummaryCalcs.Controls.Add(Me.tbSubCalcs)
         Me.tbSummaryCalcs.Location = New System.Drawing.Point(0, 0)
+        Me.tbSummaryCalcs.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tbSummaryCalcs.Name = "tbSummaryCalcs"
         Me.tbSummaryCalcs.SelectedIndex = 0
-        Me.tbSummaryCalcs.Size = New System.Drawing.Size(803, 533)
+        Me.tbSummaryCalcs.Size = New System.Drawing.Size(1004, 666)
         Me.tbSummaryCalcs.TabIndex = 1
         '
         'tbMain
@@ -104,10 +105,11 @@ Partial Class sdgCalculationsSummmary
         Me.tbMain.Controls.Add(Me.ucrSelectorBy)
         Me.tbMain.Controls.Add(Me.ucrPnlSave)
         Me.tbMain.Controls.Add(Me.ucrCalcSummary)
-        Me.tbMain.Location = New System.Drawing.Point(4, 22)
+        Me.tbMain.Location = New System.Drawing.Point(4, 25)
+        Me.tbMain.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tbMain.Name = "tbMain"
-        Me.tbMain.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMain.Size = New System.Drawing.Size(795, 507)
+        Me.tbMain.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbMain.Size = New System.Drawing.Size(996, 637)
         Me.tbMain.TabIndex = 0
         Me.tbMain.Text = "Main"
         Me.tbMain.UseVisualStyleBackColor = True
@@ -115,20 +117,21 @@ Partial Class sdgCalculationsSummmary
         'ucrDefineFilter
         '
         Me.ucrDefineFilter.AutoSize = True
-        Me.ucrDefineFilter.Location = New System.Drawing.Point(8, 55)
+        Me.ucrDefineFilter.Location = New System.Drawing.Point(10, 69)
+        Me.ucrDefineFilter.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrDefineFilter.Name = "ucrDefineFilter"
-        Me.ucrDefineFilter.Size = New System.Drawing.Size(770, 389)
+        Me.ucrDefineFilter.Size = New System.Drawing.Size(962, 608)
         Me.ucrDefineFilter.TabIndex = 19
         '
         'ucrReceiverByOrSort
         '
         Me.ucrReceiverByOrSort.AutoSize = True
         Me.ucrReceiverByOrSort.frmParent = Nothing
-        Me.ucrReceiverByOrSort.Location = New System.Drawing.Point(239, 143)
+        Me.ucrReceiverByOrSort.Location = New System.Drawing.Point(299, 179)
         Me.ucrReceiverByOrSort.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverByOrSort.Name = "ucrReceiverByOrSort"
         Me.ucrReceiverByOrSort.Selector = Nothing
-        Me.ucrReceiverByOrSort.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverByOrSort.Size = New System.Drawing.Size(150, 125)
         Me.ucrReceiverByOrSort.strNcFilePath = ""
         Me.ucrReceiverByOrSort.TabIndex = 18
         Me.ucrReceiverByOrSort.ucrSelector = Nothing
@@ -139,17 +142,19 @@ Partial Class sdgCalculationsSummmary
         Me.ucrInputCalculationName.AutoSize = True
         Me.ucrInputCalculationName.IsMultiline = False
         Me.ucrInputCalculationName.IsReadOnly = False
-        Me.ucrInputCalculationName.Location = New System.Drawing.Point(373, 439)
+        Me.ucrInputCalculationName.Location = New System.Drawing.Point(466, 549)
+        Me.ucrInputCalculationName.Margin = New System.Windows.Forms.Padding(8, 8, 8, 8)
         Me.ucrInputCalculationName.Name = "ucrInputCalculationName"
-        Me.ucrInputCalculationName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputCalculationName.Size = New System.Drawing.Size(171, 26)
         Me.ucrInputCalculationName.TabIndex = 12
         '
         'lblReceiverLabel
         '
         Me.lblReceiverLabel.AutoSize = True
-        Me.lblReceiverLabel.Location = New System.Drawing.Point(236, 126)
+        Me.lblReceiverLabel.Location = New System.Drawing.Point(295, 158)
+        Me.lblReceiverLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblReceiverLabel.Name = "lblReceiverLabel"
-        Me.lblReceiverLabel.Size = New System.Drawing.Size(45, 13)
+        Me.lblReceiverLabel.Size = New System.Drawing.Size(55, 16)
         Me.lblReceiverLabel.TabIndex = 15
         Me.lblReceiverLabel.Text = "Factors:"
         '
@@ -159,35 +164,39 @@ Partial Class sdgCalculationsSummmary
         Me.ucrInputResultName.AutoSize = True
         Me.ucrInputResultName.IsMultiline = False
         Me.ucrInputResultName.IsReadOnly = False
-        Me.ucrInputResultName.Location = New System.Drawing.Point(102, 439)
+        Me.ucrInputResultName.Location = New System.Drawing.Point(128, 549)
+        Me.ucrInputResultName.Margin = New System.Windows.Forms.Padding(8, 8, 8, 8)
         Me.ucrInputResultName.Name = "ucrInputResultName"
-        Me.ucrInputResultName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputResultName.Size = New System.Drawing.Size(171, 26)
         Me.ucrInputResultName.TabIndex = 13
         '
         'lblResultName
         '
         Me.lblResultName.AutoSize = True
-        Me.lblResultName.Location = New System.Drawing.Point(12, 442)
+        Me.lblResultName.Location = New System.Drawing.Point(15, 552)
+        Me.lblResultName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblResultName.Name = "lblResultName"
-        Me.lblResultName.Size = New System.Drawing.Size(71, 13)
+        Me.lblResultName.Size = New System.Drawing.Size(88, 16)
         Me.lblResultName.TabIndex = 10
         Me.lblResultName.Text = "Result Name:"
         '
         'lblCalcName
         '
         Me.lblCalcName.AutoSize = True
-        Me.lblCalcName.Location = New System.Drawing.Point(273, 442)
+        Me.lblCalcName.Location = New System.Drawing.Point(341, 552)
+        Me.lblCalcName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblCalcName.Name = "lblCalcName"
-        Me.lblCalcName.Size = New System.Drawing.Size(93, 13)
+        Me.lblCalcName.Size = New System.Drawing.Size(116, 16)
         Me.lblCalcName.TabIndex = 9
         Me.lblCalcName.Text = "Calculation Name:"
         '
         'rdoSaveCalcAndResult
         '
         Me.rdoSaveCalcAndResult.AutoSize = True
-        Me.rdoSaveCalcAndResult.Location = New System.Drawing.Point(12, 476)
+        Me.rdoSaveCalcAndResult.Location = New System.Drawing.Point(15, 595)
+        Me.rdoSaveCalcAndResult.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoSaveCalcAndResult.Name = "rdoSaveCalcAndResult"
-        Me.rdoSaveCalcAndResult.Size = New System.Drawing.Size(159, 17)
+        Me.rdoSaveCalcAndResult.Size = New System.Drawing.Size(196, 20)
         Me.rdoSaveCalcAndResult.TabIndex = 8
         Me.rdoSaveCalcAndResult.TabStop = True
         Me.rdoSaveCalcAndResult.Text = "Save Calculation and Result"
@@ -196,9 +205,10 @@ Partial Class sdgCalculationsSummmary
         'rdoSaveCalculation
         '
         Me.rdoSaveCalculation.AutoSize = True
-        Me.rdoSaveCalculation.Location = New System.Drawing.Point(186, 476)
+        Me.rdoSaveCalculation.Location = New System.Drawing.Point(232, 595)
+        Me.rdoSaveCalculation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoSaveCalculation.Name = "rdoSaveCalculation"
-        Me.rdoSaveCalculation.Size = New System.Drawing.Size(129, 17)
+        Me.rdoSaveCalculation.Size = New System.Drawing.Size(159, 20)
         Me.rdoSaveCalculation.TabIndex = 7
         Me.rdoSaveCalculation.TabStop = True
         Me.rdoSaveCalculation.Text = "Save Calculation Only"
@@ -207,9 +217,10 @@ Partial Class sdgCalculationsSummmary
         'rdoDoNotSave
         '
         Me.rdoDoNotSave.AutoSize = True
-        Me.rdoDoNotSave.Location = New System.Drawing.Point(330, 476)
+        Me.rdoDoNotSave.Location = New System.Drawing.Point(412, 595)
+        Me.rdoDoNotSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoDoNotSave.Name = "rdoDoNotSave"
-        Me.rdoDoNotSave.Size = New System.Drawing.Size(90, 17)
+        Me.rdoDoNotSave.Size = New System.Drawing.Size(109, 20)
         Me.rdoDoNotSave.TabIndex = 6
         Me.rdoDoNotSave.TabStop = True
         Me.rdoDoNotSave.Text = "Save Nothing"
@@ -218,9 +229,10 @@ Partial Class sdgCalculationsSummmary
         'lblType
         '
         Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(9, 12)
+        Me.lblType.Location = New System.Drawing.Point(11, 15)
+        Me.lblType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblType.Name = "lblType"
-        Me.lblType.Size = New System.Drawing.Size(34, 13)
+        Me.lblType.Size = New System.Drawing.Size(42, 16)
         Me.lblType.TabIndex = 4
         Me.lblType.Text = "Type:"
         '
@@ -230,9 +242,10 @@ Partial Class sdgCalculationsSummmary
         Me.ucrInputType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(8, 28)
+        Me.ucrInputType.Location = New System.Drawing.Point(10, 35)
+        Me.ucrInputType.Margin = New System.Windows.Forms.Padding(8, 8, 8, 8)
         Me.ucrInputType.Name = "ucrInputType"
-        Me.ucrInputType.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputType.Size = New System.Drawing.Size(150, 26)
         Me.ucrInputType.TabIndex = 3
         '
         'ucrSelectorBy
@@ -241,40 +254,43 @@ Partial Class sdgCalculationsSummmary
         Me.ucrSelectorBy.bDropUnusedFilterLevels = False
         Me.ucrSelectorBy.bShowHiddenColumns = False
         Me.ucrSelectorBy.bUseCurrentFilter = True
-        Me.ucrSelectorBy.Location = New System.Drawing.Point(8, 114)
+        Me.ucrSelectorBy.Location = New System.Drawing.Point(10, 142)
         Me.ucrSelectorBy.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorBy.Name = "ucrSelectorBy"
-        Me.ucrSelectorBy.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorBy.Size = New System.Drawing.Size(334, 285)
         Me.ucrSelectorBy.TabIndex = 14
         '
         'ucrPnlSave
         '
         Me.ucrPnlSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSave.Location = New System.Drawing.Point(3, 466)
+        Me.ucrPnlSave.Location = New System.Drawing.Point(4, 582)
+        Me.ucrPnlSave.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlSave.Name = "ucrPnlSave"
-        Me.ucrPnlSave.Size = New System.Drawing.Size(427, 38)
+        Me.ucrPnlSave.Size = New System.Drawing.Size(534, 48)
         Me.ucrPnlSave.TabIndex = 20
         '
         'ucrCalcSummary
         '
         Me.ucrCalcSummary.AutoSize = True
-        Me.ucrCalcSummary.Location = New System.Drawing.Point(8, 50)
+        Me.ucrCalcSummary.Location = New System.Drawing.Point(10, 62)
+        Me.ucrCalcSummary.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrCalcSummary.Name = "ucrCalcSummary"
-        Me.ucrCalcSummary.Size = New System.Drawing.Size(860, 338)
+        Me.ucrCalcSummary.Size = New System.Drawing.Size(1355, 518)
         Me.ucrCalcSummary.TabIndex = 17
         '
         'tbManipulations
         '
-        Me.tbManipulations.Controls.Add(Me.ucrManipulations)
         Me.tbManipulations.Controls.Add(Me.cmdManipDuplicate)
         Me.tbManipulations.Controls.Add(Me.cmdManipDelete)
         Me.tbManipulations.Controls.Add(Me.lblManipulations)
         Me.tbManipulations.Controls.Add(Me.cmdManipEdit)
         Me.tbManipulations.Controls.Add(Me.cmdManipAdd)
-        Me.tbManipulations.Location = New System.Drawing.Point(4, 22)
+        Me.tbManipulations.Controls.Add(Me.ucrManipulations)
+        Me.tbManipulations.Location = New System.Drawing.Point(4, 25)
+        Me.tbManipulations.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tbManipulations.Name = "tbManipulations"
-        Me.tbManipulations.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbManipulations.Size = New System.Drawing.Size(795, 507)
+        Me.tbManipulations.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbManipulations.Size = New System.Drawing.Size(996, 637)
         Me.tbManipulations.TabIndex = 1
         Me.tbManipulations.Text = "Manipulations"
         Me.tbManipulations.UseVisualStyleBackColor = True
@@ -282,27 +298,30 @@ Partial Class sdgCalculationsSummmary
         'ucrManipulations
         '
         Me.ucrManipulations.AutoSize = True
-        Me.ucrManipulations.Location = New System.Drawing.Point(6, 32)
+        Me.ucrManipulations.Location = New System.Drawing.Point(8, 40)
+        Me.ucrManipulations.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrManipulations.Name = "ucrManipulations"
-        Me.ucrManipulations.Size = New System.Drawing.Size(199, 150)
+        Me.ucrManipulations.Size = New System.Drawing.Size(375, 235)
         Me.ucrManipulations.TabIndex = 21
         Me.ucrManipulations.ucrDataFrameList = Nothing
         Me.ucrManipulations.ucrReceiver = Nothing
         '
         'cmdManipDuplicate
         '
-        Me.cmdManipDuplicate.Location = New System.Drawing.Point(166, 132)
+        Me.cmdManipDuplicate.Location = New System.Drawing.Point(273, 199)
+        Me.cmdManipDuplicate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdManipDuplicate.Name = "cmdManipDuplicate"
-        Me.cmdManipDuplicate.Size = New System.Drawing.Size(75, 23)
+        Me.cmdManipDuplicate.Size = New System.Drawing.Size(94, 29)
         Me.cmdManipDuplicate.TabIndex = 20
         Me.cmdManipDuplicate.Text = "Duplicate"
         Me.cmdManipDuplicate.UseVisualStyleBackColor = True
         '
         'cmdManipDelete
         '
-        Me.cmdManipDelete.Location = New System.Drawing.Point(166, 103)
+        Me.cmdManipDelete.Location = New System.Drawing.Point(273, 163)
+        Me.cmdManipDelete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdManipDelete.Name = "cmdManipDelete"
-        Me.cmdManipDelete.Size = New System.Drawing.Size(75, 23)
+        Me.cmdManipDelete.Size = New System.Drawing.Size(94, 29)
         Me.cmdManipDelete.TabIndex = 17
         Me.cmdManipDelete.Text = "Delete"
         Me.cmdManipDelete.UseVisualStyleBackColor = True
@@ -310,26 +329,29 @@ Partial Class sdgCalculationsSummmary
         'lblManipulations
         '
         Me.lblManipulations.AutoSize = True
-        Me.lblManipulations.Location = New System.Drawing.Point(9, 17)
+        Me.lblManipulations.Location = New System.Drawing.Point(11, 21)
+        Me.lblManipulations.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblManipulations.Name = "lblManipulations"
-        Me.lblManipulations.Size = New System.Drawing.Size(75, 13)
+        Me.lblManipulations.Size = New System.Drawing.Size(93, 16)
         Me.lblManipulations.TabIndex = 16
         Me.lblManipulations.Text = "Manipulations:"
         '
         'cmdManipEdit
         '
-        Me.cmdManipEdit.Location = New System.Drawing.Point(166, 74)
+        Me.cmdManipEdit.Location = New System.Drawing.Point(273, 126)
+        Me.cmdManipEdit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdManipEdit.Name = "cmdManipEdit"
-        Me.cmdManipEdit.Size = New System.Drawing.Size(75, 23)
+        Me.cmdManipEdit.Size = New System.Drawing.Size(94, 29)
         Me.cmdManipEdit.TabIndex = 18
         Me.cmdManipEdit.Text = "Edit"
         Me.cmdManipEdit.UseVisualStyleBackColor = True
         '
         'cmdManipAdd
         '
-        Me.cmdManipAdd.Location = New System.Drawing.Point(166, 45)
+        Me.cmdManipAdd.Location = New System.Drawing.Point(273, 90)
+        Me.cmdManipAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdManipAdd.Name = "cmdManipAdd"
-        Me.cmdManipAdd.Size = New System.Drawing.Size(75, 23)
+        Me.cmdManipAdd.Size = New System.Drawing.Size(94, 29)
         Me.cmdManipAdd.TabIndex = 19
         Me.cmdManipAdd.Text = "Add"
         Me.cmdManipAdd.UseVisualStyleBackColor = True
@@ -342,10 +364,11 @@ Partial Class sdgCalculationsSummmary
         Me.tbSubCalcs.Controls.Add(Me.cmdSubCalcAdd)
         Me.tbSubCalcs.Controls.Add(Me.lblSubCalcs)
         Me.tbSubCalcs.Controls.Add(Me.cmdSubCalcEdit)
-        Me.tbSubCalcs.Location = New System.Drawing.Point(4, 22)
+        Me.tbSubCalcs.Location = New System.Drawing.Point(4, 25)
+        Me.tbSubCalcs.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tbSubCalcs.Name = "tbSubCalcs"
-        Me.tbSubCalcs.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbSubCalcs.Size = New System.Drawing.Size(795, 507)
+        Me.tbSubCalcs.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbSubCalcs.Size = New System.Drawing.Size(996, 637)
         Me.tbSubCalcs.TabIndex = 2
         Me.tbSubCalcs.Text = "Sub Calculations"
         Me.tbSubCalcs.UseVisualStyleBackColor = True
@@ -353,36 +376,40 @@ Partial Class sdgCalculationsSummmary
         'lstSubCalcs
         '
         Me.lstSubCalcs.HideSelection = False
-        Me.lstSubCalcs.Location = New System.Drawing.Point(9, 33)
+        Me.lstSubCalcs.Location = New System.Drawing.Point(11, 41)
+        Me.lstSubCalcs.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lstSubCalcs.Name = "lstSubCalcs"
-        Me.lstSubCalcs.Size = New System.Drawing.Size(121, 133)
+        Me.lstSubCalcs.Size = New System.Drawing.Size(150, 165)
         Me.lstSubCalcs.TabIndex = 21
         Me.lstSubCalcs.UseCompatibleStateImageBehavior = False
         Me.lstSubCalcs.View = System.Windows.Forms.View.List
         '
         'cmdSubCalcDuplicate
         '
-        Me.cmdSubCalcDuplicate.Location = New System.Drawing.Point(166, 132)
+        Me.cmdSubCalcDuplicate.Location = New System.Drawing.Point(208, 165)
+        Me.cmdSubCalcDuplicate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdSubCalcDuplicate.Name = "cmdSubCalcDuplicate"
-        Me.cmdSubCalcDuplicate.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSubCalcDuplicate.Size = New System.Drawing.Size(94, 29)
         Me.cmdSubCalcDuplicate.TabIndex = 26
         Me.cmdSubCalcDuplicate.Text = "Duplicate"
         Me.cmdSubCalcDuplicate.UseVisualStyleBackColor = True
         '
         'cmdSubCalcDelete
         '
-        Me.cmdSubCalcDelete.Location = New System.Drawing.Point(166, 103)
+        Me.cmdSubCalcDelete.Location = New System.Drawing.Point(208, 129)
+        Me.cmdSubCalcDelete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdSubCalcDelete.Name = "cmdSubCalcDelete"
-        Me.cmdSubCalcDelete.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSubCalcDelete.Size = New System.Drawing.Size(94, 29)
         Me.cmdSubCalcDelete.TabIndex = 23
         Me.cmdSubCalcDelete.Text = "Delete"
         Me.cmdSubCalcDelete.UseVisualStyleBackColor = True
         '
         'cmdSubCalcAdd
         '
-        Me.cmdSubCalcAdd.Location = New System.Drawing.Point(166, 45)
+        Me.cmdSubCalcAdd.Location = New System.Drawing.Point(208, 56)
+        Me.cmdSubCalcAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdSubCalcAdd.Name = "cmdSubCalcAdd"
-        Me.cmdSubCalcAdd.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSubCalcAdd.Size = New System.Drawing.Size(94, 29)
         Me.cmdSubCalcAdd.TabIndex = 25
         Me.cmdSubCalcAdd.Text = "Add"
         Me.cmdSubCalcAdd.UseVisualStyleBackColor = True
@@ -390,17 +417,19 @@ Partial Class sdgCalculationsSummmary
         'lblSubCalcs
         '
         Me.lblSubCalcs.AutoSize = True
-        Me.lblSubCalcs.Location = New System.Drawing.Point(9, 17)
+        Me.lblSubCalcs.Location = New System.Drawing.Point(11, 21)
+        Me.lblSubCalcs.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSubCalcs.Name = "lblSubCalcs"
-        Me.lblSubCalcs.Size = New System.Drawing.Size(89, 13)
+        Me.lblSubCalcs.Size = New System.Drawing.Size(111, 16)
         Me.lblSubCalcs.TabIndex = 22
         Me.lblSubCalcs.Text = "Sub-Calculations:"
         '
         'cmdSubCalcEdit
         '
-        Me.cmdSubCalcEdit.Location = New System.Drawing.Point(166, 74)
+        Me.cmdSubCalcEdit.Location = New System.Drawing.Point(208, 92)
+        Me.cmdSubCalcEdit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdSubCalcEdit.Name = "cmdSubCalcEdit"
-        Me.cmdSubCalcEdit.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSubCalcEdit.Size = New System.Drawing.Size(94, 29)
         Me.cmdSubCalcEdit.TabIndex = 24
         Me.cmdSubCalcEdit.Text = "Edit"
         Me.cmdSubCalcEdit.UseVisualStyleBackColor = True
@@ -408,20 +437,22 @@ Partial Class sdgCalculationsSummmary
         'ucrBaseSubDialog
         '
         Me.ucrBaseSubDialog.AutoSize = True
-        Me.ucrBaseSubDialog.Location = New System.Drawing.Point(307, 533)
+        Me.ucrBaseSubDialog.Location = New System.Drawing.Point(384, 666)
+        Me.ucrBaseSubDialog.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.ucrBaseSubDialog.Name = "ucrBaseSubDialog"
-        Me.ucrBaseSubDialog.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBaseSubDialog.Size = New System.Drawing.Size(281, 38)
         Me.ucrBaseSubDialog.TabIndex = 0
         '
         'sdgCalculationsSummmary
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(806, 565)
+        Me.ClientSize = New System.Drawing.Size(1008, 706)
         Me.Controls.Add(Me.ucrBaseSubDialog)
         Me.Controls.Add(Me.tbSummaryCalcs)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgCalculationsSummmary"

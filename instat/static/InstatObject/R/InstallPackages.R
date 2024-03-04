@@ -159,4 +159,5 @@ install.packages(packs, dependencies = FALSE, repos='https://cloud.r-project.org
 devtools::install_github("ianmoran11/mmtable2")
 devtools::install_github("michael-franke/aida-package")
 devtools::install_github("rijaf-iri/CDT")
+devtools::install_github("IDEMSInternational/rapidpror")
 
