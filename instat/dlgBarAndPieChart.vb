@@ -1007,6 +1007,9 @@ Public Class dlgBarAndPieChart
         clsGeomLollipopAesFunction.RemoveParameterByName("x")
         clsGeomLollipopAesFunction.RemoveParameterByName("y")
         clsGeomLollipopAesFunction.RemoveParameterByName("colour")
+        clsRgeomBarFunction1.RemoveParameterByName("stat")
+        clsRgeomBarFunction2.RemoveParameterByName("stat")
+        clsRgeomBarFunction.RemoveParameterByName("stat")
         If rdoValue.Checked Then
             clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
             clsBarAesFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
