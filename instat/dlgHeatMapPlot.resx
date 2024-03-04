@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabelPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 391</value>
+    <value>130, 391</value>
   </data>
   <data name="lblLabelPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -217,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabelColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 391</value>
+    <value>233, 391</value>
   </data>
   <data name="lblLabelColour.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -247,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 391</value>
+    <value>327, 391</value>
   </data>
   <data name="lblLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -525,6 +525,15 @@
   <metadata name="contextMenuStripOptions.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="contextMenuStripOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 92</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripOptions.Name" xml:space="preserve">
+    <value>contextMenuStripOptions</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="toolStripMenuItemPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 22</value>
   </data>
@@ -548,15 +557,6 @@
   </data>
   <data name="toolStripMenuItemJitterOptions.Text" xml:space="preserve">
     <value>Jitter Options</value>
-  </data>
-  <data name="contextMenuStripOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 92</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripOptions.Name" xml:space="preserve">
-    <value>contextMenuStripOptions</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblFacetBy.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -625,7 +625,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblHeith.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 360</value>
+    <value>233, 360</value>
   </data>
   <data name="lblHeith.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -655,7 +655,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblWidth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 360</value>
+    <value>129, 360</value>
   </data>
   <data name="lblWidth.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -706,7 +706,7 @@
     <value>True</value>
   </data>
   <data name="ucrNudHeigth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 358</value>
+    <value>278, 358</value>
   </data>
   <data name="ucrNudHeigth.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 20</value>
@@ -730,7 +730,7 @@
     <value>True</value>
   </data>
   <data name="ucrNudWidth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 358</value>
+    <value>172, 358</value>
   </data>
   <data name="ucrNudWidth.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 20</value>
@@ -766,7 +766,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="ucrColourFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 326</value>
+    <value>286, 327</value>
   </data>
   <data name="ucrColourFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 21</value>
@@ -790,7 +790,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="ucrColourTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 325</value>
+    <value>353, 327</value>
   </data>
   <data name="ucrColourTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 21</value>
@@ -817,7 +817,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoFRomTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 326</value>
+    <value>216, 328</value>
   </data>
   <data name="rdoFRomTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 17</value>
@@ -844,7 +844,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputPalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 326</value>
+    <value>141, 327</value>
   </data>
   <data name="ucrInputPalette.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 21</value>
@@ -868,7 +868,7 @@
     <value>True</value>
   </data>
   <data name="rdoPalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 330</value>
+    <value>8, 328</value>
   </data>
   <data name="rdoPalette.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -1048,7 +1048,7 @@
     <value>True</value>
   </data>
   <data name="ucrChkColourPalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 299</value>
+    <value>8, 301</value>
   </data>
   <data name="ucrChkColourPalette.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 23</value>
@@ -1072,7 +1072,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputColourPalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 299</value>
+    <value>141, 299</value>
   </data>
   <data name="ucrInputColourPalette.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 21</value>
@@ -1354,7 +1354,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 387</value>
+    <value>357, 387</value>
   </data>
   <data name="ucrInputSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 23</value>
@@ -1378,7 +1378,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 387</value>
+    <value>177, 387</value>
   </data>
   <data name="ucrInputPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 23</value>
@@ -1402,7 +1402,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="ucrInputColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 387</value>
+    <value>279, 387</value>
   </data>
   <data name="ucrInputColour.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 23</value>
@@ -1480,7 +1480,7 @@
     <value>True</value>
   </data>
   <data name="ucrChkAddLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 387</value>
+    <value>8, 389</value>
   </data>
   <data name="ucrChkAddLabels.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 23</value>
