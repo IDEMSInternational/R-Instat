@@ -181,11 +181,7 @@ Public Class sdgThemesSub
         LegendOptions()
     End Sub
 
-    Private Sub ucrNudX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudX.ControlValueChanged
-        LegendOptions()
-    End Sub
-
-    Private Sub ucrNudY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudY.ControlValueChanged
+    Private Sub ucrNudX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudX.ControlValueChanged, ucrNudY.ControlValueChanged
         LegendOptions()
     End Sub
 End Class
