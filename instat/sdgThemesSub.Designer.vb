@@ -415,7 +415,7 @@ Partial Class sdgThemesSub
         Me.ucrChkRemoveLegend.Checked = False
         Me.ucrChkRemoveLegend.Location = New System.Drawing.Point(9, 6)
         Me.ucrChkRemoveLegend.Name = "ucrChkRemoveLegend"
-        Me.ucrChkRemoveLegend.Size = New System.Drawing.Size(166, 23)
+        Me.ucrChkRemoveLegend.Size = New System.Drawing.Size(193, 23)
         Me.ucrChkRemoveLegend.TabIndex = 5
         '
         'GroupBox1
