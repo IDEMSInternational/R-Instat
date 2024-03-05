@@ -4,8 +4,11 @@ Public Class dlgInstallRPackage
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsInstallPackage As New RFunction
+    Private clsRepositoryFunction As New RFunction
     Private clsBeforeOptionsFunc As New RFunction
     Private clsAfterOptionsFunc As New RFunction
+    Private clsPasteFunction As New RFunction
+    Private clsDummyFunction As New RFunction
 
     Private Sub dlgRPackages_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -24,6 +27,19 @@ Public Class dlgInstallRPackage
         ucrBase.iHelpTopicID = 592
         ucrBase.clsRsyntax.iCallType = 2
         ucrInputTextBoxRPackage.SetParameter(New RParameter("pkgs", 1))
+        ucrPnlRPackages.AddRadioButton(rdoCRAN)
+        ucrPnlRPackages.AddRadioButton(rdoRPackage)
+
+        ucrInputRepositoryName.SetLinkedDisplayControl(lblRepository)
+
+        ucrPnlRPackages.AddParameterValuesCondition(rdoCRAN, "checked", "cran")
+        ucrPnlRPackages.AddParameterValuesCondition(rdoRPackage, "checked", "rpackage")
+
+        ucrInputMessage.SetLinkedDisplayControl(cmdCheck)
+
+        ucrPnlRPackages.AddToLinkedControls(ucrInputRepositoryName, {rdoRPackage}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRPackages.AddToLinkedControls(ucrInputMessage, {rdoCRAN}, bNewLinkedHideIfParameterMissing:=True)
+
         CheckEnable()
     End Sub
 
@@ -31,6 +47,10 @@ Public Class dlgInstallRPackage
         clsInstallPackage = New RFunction
         clsBeforeOptionsFunc = New RFunction
         clsAfterOptionsFunc = New RFunction
+        clsRepositoryFunction = New RFunction
+        clsDummyFunction = New RFunction
+
+        clsDummyFunction.AddParameter("checked", "cran", iPosition:=1)
 
         clsInstallPackage.SetRCommand("install.packages")
         clsInstallPackage.AddParameter("repos", Chr(34) & "https://cran.rstudio.com/" & Chr(34), iPosition:=1)
@@ -38,24 +58,30 @@ Public Class dlgInstallRPackage
         clsBeforeOptionsFunc.SetRCommand("options")
         clsBeforeOptionsFunc.AddParameter(strParameterName:="warn", strParameterValue:="2")
 
+        clsPasteFunction.SetRCommand("paste0")
+
+        clsRepositoryFunction.SetRCommand("install_github")
+        clsRepositoryFunction.SetPackageName("devtools")
 
         clsAfterOptionsFunc.SetRCommand("options")
         clsAfterOptionsFunc.AddParameter(strParameterName:="warn", strParameterValue:="0")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsBeforeOptionsFunc)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAfterOptionsFunc)
         ucrBase.clsRsyntax.SetBaseRFunction(clsInstallPackage)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputTextBoxRPackage.SetRCode(clsInstallPackage, bReset)
+        If bReset Then
+            ucrPnlRPackages.SetRCode(clsDummyFunction, bReset)
+            ucrInputRepositoryName.SetRCode(clsRepositoryFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrInputTextBoxRPackage.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
+        If rdoCRAN.Checked Then
+            ucrBase.OKEnabled(Not ucrInputTextBoxRPackage.IsEmpty)
+        ElseIf rdoRPackage.Checked Then
+            ucrBase.OKEnabled(Not ucrInputRepositoryName.IsEmpty AndAlso Not ucrInputTextBoxRPackage.IsEmpty)
         End If
     End Sub
 
@@ -64,6 +90,7 @@ Public Class dlgInstallRPackage
         ucrInputMessage.txtInput.BackColor = Color.White
         CheckEnable()
         TestOkEnabled()
+        GithubOption()
     End Sub
 
     Private Sub Check()
@@ -126,5 +153,41 @@ Public Class dlgInstallRPackage
 
     Private Sub cmdCheck_Click(sender As Object, e As EventArgs) Handles cmdCheck.Click
         check()
+    End Sub
+
+    Private Sub ucrPnlRPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRPackages.ControlValueChanged
+        If rdoCRAN.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsInstallPackage)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsBeforeOptionsFunc)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAfterOptionsFunc)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRepositoryFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsBeforeOptionsFunc)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAfterOptionsFunc)
+        End If
+        ucrInputTextBoxRPackage.txtInput.Clear()
+    End Sub
+
+    Private Sub ucrInputRepositoryName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRepositoryName.ControlContentsChanged
+        TestOkEnabled()
+        GithubOption()
+    End Sub
+
+    Private Sub GithubOption()
+        If Not (ucrInputTextBoxRPackage.IsEmpty AndAlso ucrInputRepositoryName.IsEmpty) Then
+            clsPasteFunction.AddParameter("paste", Chr(34) & ucrInputRepositoryName.GetText & "/" & ucrInputTextBoxRPackage.GetText & Chr(34), bIncludeArgumentName:=False)
+
+            clsRepositoryFunction.AddParameter("package", clsRFunctionParameter:=clsPasteFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+        Else
+            clsPasteFunction.RemoveParameterByName("paste")
+            clsRepositoryFunction.RemoveParameterByName("package")
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 End Class

@@ -24,15 +24,20 @@ Partial Class dlgInstallRPackage
     Private Sub InitializeComponent()
         Me.cmdCheck = New System.Windows.Forms.Button()
         Me.lblRPackage = New System.Windows.Forms.Label()
-        Me.ucrInputMessage = New instat.ucrInputTextBox()
+        Me.rdoCRAN = New System.Windows.Forms.RadioButton()
+        Me.rdoRPackage = New System.Windows.Forms.RadioButton()
+        Me.lblRepository = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputTextBoxRPackage = New instat.ucrInputTextBox()
+        Me.ucrPnlRPackages = New instat.UcrPanel()
+        Me.ucrInputMessage = New instat.ucrInputTextBox()
+        Me.ucrInputRepositoryName = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'cmdCheck
         '
         Me.cmdCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCheck.Location = New System.Drawing.Point(14, 81)
+        Me.cmdCheck.Location = New System.Drawing.Point(14, 94)
         Me.cmdCheck.Name = "cmdCheck"
         Me.cmdCheck.Size = New System.Drawing.Size(75, 22)
         Me.cmdCheck.TabIndex = 16
@@ -43,22 +48,59 @@ Partial Class dlgInstallRPackage
         '
         Me.lblRPackage.AutoSize = True
         Me.lblRPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRPackage.Location = New System.Drawing.Point(11, 33)
+        Me.lblRPackage.Location = New System.Drawing.Point(21, 44)
         Me.lblRPackage.Name = "lblRPackage"
         Me.lblRPackage.Size = New System.Drawing.Size(64, 13)
         Me.lblRPackage.TabIndex = 1
         Me.lblRPackage.Text = "R Package:"
         '
-        'ucrInputMessage
+        'rdoCRAN
         '
-        Me.ucrInputMessage.AddQuotesIfUnrecognised = True
-        Me.ucrInputMessage.AutoSize = True
-        Me.ucrInputMessage.IsMultiline = False
-        Me.ucrInputMessage.IsReadOnly = True
-        Me.ucrInputMessage.Location = New System.Drawing.Point(95, 81)
-        Me.ucrInputMessage.Name = "ucrInputMessage"
-        Me.ucrInputMessage.Size = New System.Drawing.Size(337, 22)
-        Me.ucrInputMessage.TabIndex = 17
+        Me.rdoCRAN.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoCRAN.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoCRAN.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCRAN.FlatAppearance.BorderSize = 2
+        Me.rdoCRAN.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCRAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoCRAN.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoCRAN.Location = New System.Drawing.Point(104, 3)
+        Me.rdoCRAN.Name = "rdoCRAN"
+        Me.rdoCRAN.Size = New System.Drawing.Size(91, 28)
+        Me.rdoCRAN.TabIndex = 21
+        Me.rdoCRAN.TabStop = True
+        Me.rdoCRAN.Tag = "Frequency"
+        Me.rdoCRAN.Text = "CRAN"
+        Me.rdoCRAN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoCRAN.UseVisualStyleBackColor = False
+        '
+        'rdoRPackage
+        '
+        Me.rdoRPackage.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoRPackage.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoRPackage.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRPackage.FlatAppearance.BorderSize = 2
+        Me.rdoRPackage.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRPackage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoRPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoRPackage.Location = New System.Drawing.Point(192, 3)
+        Me.rdoRPackage.Name = "rdoRPackage"
+        Me.rdoRPackage.Size = New System.Drawing.Size(91, 28)
+        Me.rdoRPackage.TabIndex = 22
+        Me.rdoRPackage.TabStop = True
+        Me.rdoRPackage.Tag = "Frequency"
+        Me.rdoRPackage.Text = "R Package "
+        Me.rdoRPackage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoRPackage.UseVisualStyleBackColor = False
+        '
+        'lblRepository
+        '
+        Me.lblRepository.AutoSize = True
+        Me.lblRepository.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRepository.Location = New System.Drawing.Point(3, 98)
+        Me.lblRepository.Name = "lblRepository"
+        Me.lblRepository.Size = New System.Drawing.Size(91, 13)
+        Me.lblRepository.TabIndex = 24
+        Me.lblRepository.Text = "Repository Name:"
         '
         'ucrBase
         '
@@ -75,10 +117,40 @@ Partial Class dlgInstallRPackage
         Me.ucrInputTextBoxRPackage.AutoSize = True
         Me.ucrInputTextBoxRPackage.IsMultiline = False
         Me.ucrInputTextBoxRPackage.IsReadOnly = False
-        Me.ucrInputTextBoxRPackage.Location = New System.Drawing.Point(75, 31)
+        Me.ucrInputTextBoxRPackage.Location = New System.Drawing.Point(95, 42)
         Me.ucrInputTextBoxRPackage.Name = "ucrInputTextBoxRPackage"
         Me.ucrInputTextBoxRPackage.Size = New System.Drawing.Size(197, 22)
         Me.ucrInputTextBoxRPackage.TabIndex = 0
+        '
+        'ucrPnlRPackages
+        '
+        Me.ucrPnlRPackages.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlRPackages.Location = New System.Drawing.Point(83, 2)
+        Me.ucrPnlRPackages.Name = "ucrPnlRPackages"
+        Me.ucrPnlRPackages.Size = New System.Drawing.Size(226, 34)
+        Me.ucrPnlRPackages.TabIndex = 20
+        '
+        'ucrInputMessage
+        '
+        Me.ucrInputMessage.AddQuotesIfUnrecognised = True
+        Me.ucrInputMessage.AutoSize = True
+        Me.ucrInputMessage.IsMultiline = False
+        Me.ucrInputMessage.IsReadOnly = True
+        Me.ucrInputMessage.Location = New System.Drawing.Point(95, 94)
+        Me.ucrInputMessage.Name = "ucrInputMessage"
+        Me.ucrInputMessage.Size = New System.Drawing.Size(337, 22)
+        Me.ucrInputMessage.TabIndex = 17
+        '
+        'ucrInputRepositoryName
+        '
+        Me.ucrInputRepositoryName.AddQuotesIfUnrecognised = True
+        Me.ucrInputRepositoryName.AutoSize = True
+        Me.ucrInputRepositoryName.IsMultiline = False
+        Me.ucrInputRepositoryName.IsReadOnly = False
+        Me.ucrInputRepositoryName.Location = New System.Drawing.Point(93, 95)
+        Me.ucrInputRepositoryName.Name = "ucrInputRepositoryName"
+        Me.ucrInputRepositoryName.Size = New System.Drawing.Size(197, 22)
+        Me.ucrInputRepositoryName.TabIndex = 23
         '
         'dlgInstallRPackage
         '
@@ -86,11 +158,16 @@ Partial Class dlgInstallRPackage
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(448, 194)
-        Me.Controls.Add(Me.ucrInputMessage)
-        Me.Controls.Add(Me.cmdCheck)
+        Me.Controls.Add(Me.rdoRPackage)
+        Me.Controls.Add(Me.rdoCRAN)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblRPackage)
         Me.Controls.Add(Me.ucrInputTextBoxRPackage)
+        Me.Controls.Add(Me.ucrPnlRPackages)
+        Me.Controls.Add(Me.cmdCheck)
+        Me.Controls.Add(Me.ucrInputMessage)
+        Me.Controls.Add(Me.ucrInputRepositoryName)
+        Me.Controls.Add(Me.lblRepository)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -106,4 +183,9 @@ Partial Class dlgInstallRPackage
     Friend WithEvents ucrInputMessage As ucrInputTextBox
     Friend WithEvents cmdCheck As Button
     Friend WithEvents lblRPackage As Label
+    Friend WithEvents ucrPnlRPackages As UcrPanel
+    Friend WithEvents rdoCRAN As RadioButton
+    Friend WithEvents rdoRPackage As RadioButton
+    Friend WithEvents lblRepository As Label
+    Friend WithEvents ucrInputRepositoryName As ucrInputTextBox
 End Class
