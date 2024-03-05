@@ -349,7 +349,13 @@ Public Class sdgSummaries
         ucrChkP80.SetParameter(New RParameter("p80", 74), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "p80" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkP90.SetParameter(New RParameter("p90", 75), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "p90" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkP10, ucrChkP20, ucrChkP25, ucrChkP30, ucrChkP33, ucrChkP40, ucrChkP60, ucrChkP67, ucrChkP70, ucrChkP75, ucrChkP80, ucrChkP90, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar, ucrChkAngDev, ucrChkrho, ucrChkCircRange, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency, ucrChkSample})
+        ucrChkWhichmin.SetParameter(New RParameter("summary_which_min", 76), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_which_min" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkWhichmin.SetText("Min")
+
+        ucrChkWhichmax.SetParameter(New RParameter("summary_which_max", 77), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_which_max" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkWhichmax.SetText("Max")
+
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkWhichmax, ucrChkWhichmin, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkP10, ucrChkP20, ucrChkP25, ucrChkP30, ucrChkP33, ucrChkP40, ucrChkP60, ucrChkP67, ucrChkP70, ucrChkP75, ucrChkP80, ucrChkP90, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar, ucrChkAngDev, ucrChkrho, ucrChkCircRange, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency, ucrChkSample})
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
@@ -432,6 +438,8 @@ Public Class sdgSummaries
         ucrChkNMissing.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMean.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMinimum.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkWhichmax.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkWhichmin.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMode.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMaximum.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMedian.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)

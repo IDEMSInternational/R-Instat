@@ -487,7 +487,8 @@ ratio_of_standard_deviations_label <- "rSD"
 ratio_of_RMSE_label <- "rsr"
 sum_of_squared_residuals_label <- "ssq"
 volumetric_efficiency_label <- "VE"
-
+which_min_label <- "summary_which_min"
+which_max_label <- "summary_which_max"
 
 
 # list of all summary function names
@@ -736,6 +737,24 @@ summary_min <- function (x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     return(min(x, na.rm = na.rm))
+  } 
+}
+
+summary_which_max <- function (x, na.rm = TRUE, na_type = "", ...) {
+  #TODO This prevents warning and -Inf being retured. Is this desirable?
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(which.max(x))
+  } 
+}
+
+summary_which_min <- function (x, na.rm = TRUE, na_type = "", ...) {
+  #TODO This prevents warning and Inf being retured. Is this desirable?
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(which.min(x))
   } 
 }
 # get the range of the data
