@@ -35,6 +35,7 @@ Public Class dlgTaylorDiagram
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID= 643
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorTaylorDiagram.SetParameter(New RParameter("mydata", 0))
