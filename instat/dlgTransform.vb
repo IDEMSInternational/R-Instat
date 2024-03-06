@@ -567,12 +567,14 @@ Public Class dlgTransform
                 clsDummyTransformFunction.AddParameter("check", "select", iPosition:=0)
                 ucrSelectorForRank.SetItemType("column_selection")
                 ucrReceiverRank.strSelectorHeading = "Column selections"
+                lblSelectColumns.Text = "Select:"
             ElseIf rdoSingle.Checked Then
                 clsDummyTransformFunction.AddParameter("check", "variable", iPosition:=0)
                 ucrReceiverRank.bUseFilteredData = False
                 ucrReceiverRank.SetParameterIsRFunction()
                 ucrSelectorForRank.SetItemType("column")
                 ucrReceiverRank.strSelectorHeading = "Numerics"
+                lblSelectColumns.Text = "Column:"
 
             End If
             If rdoRank.Checked Then
