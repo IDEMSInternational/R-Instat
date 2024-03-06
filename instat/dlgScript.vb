@@ -76,12 +76,10 @@ Public Class dlgScript
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetDataFrameSelector(ucrDataFrameSaveOutputSelect)
 
-        'ucrInputSaveDataFrame.SetLinkedDisplayControl(lblSaveDataFrame)
         ucrPnlSaveDataFrame.AddRadioButton(rdoDataFrame)
         ucrPnlSaveDataFrame.AddRadioButton(rdoFromRFile)
 
         ucrChkSaveDataFrameSingle.SetText("Single")
-
 
         ucrChkDisplayGraph.SetText("Display Output")
 
@@ -199,7 +197,6 @@ Public Class dlgScript
         rdoGetDataFrame.Checked = True
         rdoDataFrame.Checked = True
 
-
         'activate the selected tab to library tab
         tbFeatures.SelectedIndex = -1
         tbFeatures.SelectedTab = tbPageSaveData
@@ -214,8 +211,6 @@ Public Class dlgScript
         ucrChkDisplayGraph.Visible = False
         ucrPnlSaveDataFrame.SetVisible(False)
         If rdoSaveDataFrame.Checked Then
-            'ucrInputSaveDataFrame.SetVisible(True)
-            ' ucrChkSaveDataFrameSingle.SetVisible(True)
             ucrPnlSaveDataFrame.SetVisible(True)
             VisiilityOfControls()
             ucrChkDisplayGraph.Visible = False
@@ -295,7 +290,6 @@ Public Class dlgScript
 
             End If
         End If
-
 
         PreviewScript(strScript)
     End Sub
@@ -763,6 +757,7 @@ Public Class dlgScript
     Private Sub ucrPnlSaveDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveDataFrame.ControlValueChanged
         VisiilityOfControls()
     End Sub
+
     Private Sub VisiilityOfControls()
         ucrInputSaveRFile.SetVisible(False)
         ucrInputSaveDataFrame.SetVisible(False)
@@ -777,6 +772,5 @@ Public Class dlgScript
             ucrInputSaveRFile.OnControlValueChanged()
         End If
     End Sub
-
 
 End Class

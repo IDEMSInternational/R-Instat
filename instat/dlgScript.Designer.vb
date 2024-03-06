@@ -137,7 +137,7 @@ Partial Class dlgScript
         'rdoFromRFile
         '
         Me.rdoFromRFile.AutoSize = True
-        Me.rdoFromRFile.Location = New System.Drawing.Point(89, 125)
+        Me.rdoFromRFile.Location = New System.Drawing.Point(83, 125)
         Me.rdoFromRFile.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoFromRFile.Name = "rdoFromRFile"
         Me.rdoFromRFile.Size = New System.Drawing.Size(81, 17)
