@@ -157,6 +157,7 @@ Public Class ucrReceiverMultiple
             lstSelectedVariables.Items.Remove(lvi)
         Next
 
+        SetGroupHeaderVariablesCount()
         OnSelectionChanged()
         MyBase.RemoveSelected()
     End Sub
