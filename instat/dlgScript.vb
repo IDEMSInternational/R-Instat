@@ -189,7 +189,6 @@ Public Class dlgScript
         ucrChkDisplayGraph.Checked = True
         ucrChkOpenRFile.Checked = False
         ucrChkInto.Checked = False
-        'ucrChkDispla.Checked = False
         ucrChkWindow.Checked = True
         ucrDataFrameSaveOutputSelect.Reset()
 
@@ -198,6 +197,7 @@ Public Class dlgScript
         ucrCboGetOutputObjectType.GetSetSelectedIndex = 0
         ucrDataFrameGetDF.Reset()
         rdoGetDataFrame.Checked = True
+        rdoDataFrame.Checked = True
 
 
         'activate the selected tab to library tab
@@ -211,15 +211,13 @@ Public Class dlgScript
         ucrCboSaveOutputObjectType.SetVisible(False)
         ucrCboSaveOutputObjectFormat.SetVisible(False)
         ucrSaveObject.SetVisible(False)
-        'ucrInputSaveDataFrame.SetVisible(False)
         ucrChkDisplayGraph.Visible = False
         ucrPnlSaveDataFrame.SetVisible(False)
-        ' ucrChkSaveDataFrameSingle.SetVisible(False)
         If rdoSaveDataFrame.Checked Then
             'ucrInputSaveDataFrame.SetVisible(True)
             ' ucrChkSaveDataFrameSingle.SetVisible(True)
             ucrPnlSaveDataFrame.SetVisible(True)
-
+            VisiilityOfControls()
             ucrChkDisplayGraph.Visible = False
             ucrInputSaveDataFrame.SetName("")
         ElseIf rdoSaveColumn.Checked Then
@@ -227,6 +225,10 @@ Public Class dlgScript
             ucrSaveObject.SetVisible(True)
             ucrDataFrameSaveOutputSelect.SetVisible(True)
             ucrChkDisplayGraph.Visible = False
+            ucrInputSaveRFile.SetVisible(False)
+            ucrInputSaveDataFrame.SetVisible(False)
+            ucrChkSaveDataFrameSingle.SetVisible(False)
+            ucrPnlSaveDataFrame.SetVisible(False)
             SetupSaveDataControl("Column", RObjectTypeLabel.Column, "")
         ElseIf rdoSaveOutputObject.Checked Then
             ucrSaveObject.Location = New Point(ucrSaveObject.Location.X, ucrCboSaveOutputObjectFormat.Location.Y + 33)
@@ -234,7 +236,11 @@ Public Class dlgScript
             ucrDataFrameSaveOutputSelect.SetVisible(True)
             ucrChkDisplayGraph.Visible = True
             ucrCboSaveOutputObjectType.SetVisible(True)
+            ucrInputSaveRFile.SetVisible(False)
+            ucrInputSaveDataFrame.SetVisible(False)
             ucrCboSaveOutputObjectFormat.SetVisible(True)
+            ucrChkSaveDataFrameSingle.SetVisible(False)
+            ucrPnlSaveDataFrame.SetVisible(False)
             SetupSaveDataControl(ucrCboSaveOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboSaveOutputObjectType.GetText()), dctOutputObjectFormats.Item(ucrCboSaveOutputObjectFormat.GetText()))
         End If
     End Sub
@@ -251,39 +257,45 @@ Public Class dlgScript
         ucrSaveObject.SetName("")
     End Sub
 
-    Private Sub ucrSaveDataFrameControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSaveDataFrame.ControlContentsChanged, ucrChkSaveDataFrameSingle.ControlContentsChanged
+    Private Sub ucrSaveDataFrameControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSaveDataFrame.ControlContentsChanged, ucrChkSaveDataFrameSingle.ControlContentsChanged,
+            ucrInputSaveRFile.ControlContentsChanged
+
         Dim strScript As String = ""
 
-        If Not ucrInputSaveDataFrame.IsEmpty() Then
-            Dim strDataFrameName As String = ucrInputSaveDataFrame.GetText()
-            Dim clsImportRFunction As New RFunction
+        If rdoDataFrame.Checked Then
+            If Not ucrInputSaveDataFrame.IsEmpty() Then
+                Dim clsImportRFunction As New RFunction
+                Dim strDataFrameName As String = ucrInputSaveDataFrame.GetText()
 
-            clsImportRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+                clsImportRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
 
-            If ucrChkSaveDataFrameSingle.Checked Then
-                ' If it's a single data frame then wrap it into a list
-                Dim clsDataListRFunction As New RFunction
-                clsDataListRFunction.SetRCommand("list")
-                clsDataListRFunction.AddParameter(strParameterName:=strDataFrameName, strParameterValue:=strDataFrameName)
-                clsImportRFunction.AddParameter(strParameterName:="data_tables", clsRFunctionParameter:=clsDataListRFunction)
-            Else
-                ' If it's already a list of data frames, then add the name directly
-                clsImportRFunction.AddParameter(strParameterName:="data_tables", strParameterValue:=strDataFrameName)
+                If ucrChkSaveDataFrameSingle.Checked Then
+                    ' If it's a single data frame then wrap it into a list
+                    Dim clsDataListRFunction As New RFunction
+                    clsDataListRFunction.SetRCommand("list")
+                    clsDataListRFunction.AddParameter(strParameterName:=strDataFrameName, strParameterValue:=strDataFrameName)
+                    clsImportRFunction.AddParameter(strParameterName:="data_tables", clsRFunctionParameter:=clsDataListRFunction)
+                Else
+                    ' If it's already a list of data frames, then add the name directly
+                    clsImportRFunction.AddParameter(strParameterName:="data_tables", strParameterValue:=strDataFrameName)
+                End If
+
+                strScript = "# Save data frame(s) """ & strDataFrameName & """" & Environment.NewLine & clsImportRFunction.ToScript()
+
             End If
-
-            strScript = "# Save data frame(s) """ & strDataFrameName & """" & Environment.NewLine & clsImportRFunction.ToScript()
-            If ucrInputSaveRFile.IsEmpty Then
-                ucrChkSaveDataFrameSingle.Enabled = False
+        Else
+            If Not ucrInputSaveRFile.IsEmpty Then
                 Dim clsImportRDSFunction As New RFunction
-                clsImportRDSFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
-                clsImportRDSFunction.AddParameter(strParameterName:="data_RDS", strParameterValue:=strDataFrameName)
+                Dim strRFileName As String = ucrInputSaveRFile.GetText()
 
-                strScript = "# Save RDS File(s) """ & strDataFrameName & """" & Environment.NewLine & clsImportRDSFunction.ToScript()
-            Else
-                ucrChkSaveDataFrameSingle.Enabled = True
+                clsImportRDSFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
+                clsImportRDSFunction.AddParameter(strParameterName:="data_RDS", strParameterValue:=strRFileName)
+
+                strScript = "# Save RDS File(s) """ & strRFileName & """" & Environment.NewLine & clsImportRDSFunction.ToScript()
 
             End If
         End If
+
 
         PreviewScript(strScript)
     End Sub
@@ -749,11 +761,13 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrPnlSaveDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveDataFrame.ControlValueChanged
-
+        VisiilityOfControls()
+    End Sub
+    Private Sub VisiilityOfControls()
         ucrInputSaveRFile.SetVisible(False)
         ucrInputSaveDataFrame.SetVisible(False)
         ucrChkSaveDataFrameSingle.SetVisible(False)
-        If rdoSaveDataFrame.Checked Then
+        If rdoDataFrame.Checked Then
             ucrInputSaveDataFrame.SetVisible(True)
             ucrChkSaveDataFrameSingle.SetVisible(True)
             ucrInputSaveDataFrame.OnControlValueChanged()
@@ -763,4 +777,6 @@ Public Class dlgScript
             ucrInputSaveRFile.OnControlValueChanged()
         End If
     End Sub
+
+
 End Class
