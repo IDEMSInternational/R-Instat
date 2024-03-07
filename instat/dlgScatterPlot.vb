@@ -124,7 +124,7 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
         ucrFactorOptionalReceiver.strSelectorHeading = "Variables"
 
-        ucrChkLineofBestFit.SetText("Add Line of Best Fit")
+        ucrChkLineofBestFit.SetText("Line of Best Fit")
         ucrChkLineofBestFit.AddParameterPresentCondition(True, "geom_smooth")
         ucrChkLineofBestFit.AddParameterPresentCondition(False, "geom_smooth", False)
         ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -134,10 +134,13 @@ Public Class dlgScatterPlot
         ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkWithSE.SetRDefault("TRUE")
 
-        ucrChkAddRugPlot.SetText("Add Rug Plot")
+        ucrChkAddRugPlot.SetText("Rug Plot")
         ucrChkAddRugPlot.AddParameterPresentCondition(True, "geom_rug")
         ucrChkAddRugPlot.AddParameterPresentCondition(False, "geom_rug", False)
         ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkSidePlot.SetText("Side Plot")
+        ucrChkSidePlot.Enabled = False
 
         ucrPnlGeoms.AddRadioButton(rdoJitter)
         ucrPnlGeoms.AddRadioButton(rdoPoint)
@@ -433,7 +436,7 @@ Public Class dlgScatterPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineofBestFit.ControlValueChanged
+    Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore)
         If ucrChkLineofBestFit.Checked Then
             clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunction, iPosition:=4)
         Else
@@ -442,7 +445,7 @@ Public Class dlgScatterPlot
         toolStripMenuItemSmoothOptions.Enabled = ucrChkLineofBestFit.Checked
     End Sub
 
-    Private Sub ucrChkAddRugPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddRugPlot.ControlValueChanged
+    Private Sub ucrChkAddRugPlot_ControlValueChanged(ucrChangedControl As ucrCore)
         If ucrChkAddRugPlot.Checked Then
             clsBaseOperator.AddParameter("geom_rug", clsRFunctionParameter:=clsGeomRugFunction, iPosition:=3)
         Else
@@ -724,6 +727,14 @@ Public Class dlgScatterPlot
         End If
 
         SetPipeAssignTo()
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrSaveScatterPlot_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+
     End Sub
 
     Private Sub SetPipeAssignTo()
