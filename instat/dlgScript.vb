@@ -30,10 +30,20 @@ Public Class dlgScript
             SetDefaults()
             bFirstload = False
         End If
+
+        If lstExampleCollection.SelectedItems.Count > 0 Then
+            'make the listview have the focus
+            lstExampleCollection.Select()
+            'set the selected item to be visible 
+            lstExampleCollection.TopItem = lstExampleCollection.Items(lstExampleCollection.Items.IndexOf(lstExampleCollection.SelectedItems.Item(0)))
+        End If
+
         autoTranslate(Me)
+        EnableHelp()
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 180
 
         ' Supported output object types and formats
         dctOutputObjectTypes.Add("Summary", RObjectTypeLabel.Summary)
@@ -66,7 +76,9 @@ Public Class dlgScript
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetDataFrameSelector(ucrDataFrameSaveOutputSelect)
 
-        ucrInputSaveDataFrame.SetLinkedDisplayControl(lblSaveDataFrame)
+        ucrPnlSaveDataFrame.AddRadioButton(rdoDataFrame)
+        ucrPnlSaveDataFrame.AddRadioButton(rdoFromRFile)
+
         ucrChkSaveDataFrameSingle.SetText("Single")
 
         ucrChkDisplayGraph.SetText("Display Output")
@@ -107,6 +119,8 @@ Public Class dlgScript
 
         ucrChkInto.SetText("Into:")
 
+        ucrChkWindow.SetText("Multiple Graphs:")
+
         ucrInputGgplotify.SetLinkedDisplayControl(lblGraphObject)
         ucrInputGraphCommand.SetLinkedDisplayControl(lblGraphCommand)
 
@@ -116,6 +130,7 @@ Public Class dlgScript
         ucrPnlCommands.AddRadioButton(rdoChooseFile)
         ucrPnlCommands.AddRadioButton(rdoViewData)
         ucrPnlCommands.AddRadioButton(rdoListData)
+        ucrPnlCommands.AddRadioButton(rdoWindow)
 
         '--------------------------------
         'Get example controls
@@ -172,6 +187,7 @@ Public Class dlgScript
         ucrChkDisplayGraph.Checked = True
         ucrChkOpenRFile.Checked = False
         ucrChkInto.Checked = False
+        ucrChkWindow.Checked = True
         ucrDataFrameSaveOutputSelect.Reset()
 
         ' Get controls reset
@@ -179,7 +195,7 @@ Public Class dlgScript
         ucrCboGetOutputObjectType.GetSetSelectedIndex = 0
         ucrDataFrameGetDF.Reset()
         rdoGetDataFrame.Checked = True
-
+        rdoDataFrame.Checked = True
 
         'activate the selected tab to library tab
         tbFeatures.SelectedIndex = -1
@@ -192,12 +208,11 @@ Public Class dlgScript
         ucrCboSaveOutputObjectType.SetVisible(False)
         ucrCboSaveOutputObjectFormat.SetVisible(False)
         ucrSaveObject.SetVisible(False)
-        ucrInputSaveDataFrame.SetVisible(False)
         ucrChkDisplayGraph.Visible = False
-        ucrChkSaveDataFrameSingle.SetVisible(False)
+        ucrPnlSaveDataFrame.SetVisible(False)
         If rdoSaveDataFrame.Checked Then
-            ucrInputSaveDataFrame.SetVisible(True)
-            ucrChkSaveDataFrameSingle.SetVisible(True)
+            ucrPnlSaveDataFrame.SetVisible(True)
+            HideShowSaveDataFrameControls()
             ucrChkDisplayGraph.Visible = False
             ucrInputSaveDataFrame.SetName("")
         ElseIf rdoSaveColumn.Checked Then
@@ -205,6 +220,10 @@ Public Class dlgScript
             ucrSaveObject.SetVisible(True)
             ucrDataFrameSaveOutputSelect.SetVisible(True)
             ucrChkDisplayGraph.Visible = False
+            ucrInputSaveRFile.SetVisible(False)
+            ucrInputSaveDataFrame.SetVisible(False)
+            ucrChkSaveDataFrameSingle.SetVisible(False)
+            ucrPnlSaveDataFrame.SetVisible(False)
             SetupSaveDataControl("Column", RObjectTypeLabel.Column, "")
         ElseIf rdoSaveOutputObject.Checked Then
             ucrSaveObject.Location = New Point(ucrSaveObject.Location.X, ucrCboSaveOutputObjectFormat.Location.Y + 33)
@@ -212,7 +231,11 @@ Public Class dlgScript
             ucrDataFrameSaveOutputSelect.SetVisible(True)
             ucrChkDisplayGraph.Visible = True
             ucrCboSaveOutputObjectType.SetVisible(True)
+            ucrInputSaveRFile.SetVisible(False)
+            ucrInputSaveDataFrame.SetVisible(False)
             ucrCboSaveOutputObjectFormat.SetVisible(True)
+            ucrChkSaveDataFrameSingle.SetVisible(False)
+            ucrPnlSaveDataFrame.SetVisible(False)
             SetupSaveDataControl(ucrCboSaveOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboSaveOutputObjectType.GetText()), dctOutputObjectFormats.Item(ucrCboSaveOutputObjectFormat.GetText()))
         End If
     End Sub
@@ -229,27 +252,43 @@ Public Class dlgScript
         ucrSaveObject.SetName("")
     End Sub
 
-    Private Sub ucrSaveDataFrameControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSaveDataFrame.ControlContentsChanged, ucrChkSaveDataFrameSingle.ControlContentsChanged
+    Private Sub ucrSaveDataFrameControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSaveDataFrame.ControlContentsChanged, ucrChkSaveDataFrameSingle.ControlContentsChanged,
+            ucrInputSaveRFile.ControlContentsChanged
+
         Dim strScript As String = ""
 
-        If Not ucrInputSaveDataFrame.IsEmpty() Then
-            Dim strDataFrameName As String = ucrInputSaveDataFrame.GetText()
-            Dim clsImportRFunction As New RFunction
+        If rdoDataFrame.Checked Then
+            If Not ucrInputSaveDataFrame.IsEmpty() Then
+                Dim clsImportRFunction As New RFunction
+                Dim strDataFrameName As String = ucrInputSaveDataFrame.GetText()
 
-            clsImportRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+                clsImportRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
 
-            If ucrChkSaveDataFrameSingle.Checked Then
-                ' If it's a single data frame then wrap it into a list
-                Dim clsDataListRFunction As New RFunction
-                clsDataListRFunction.SetRCommand("list")
-                clsDataListRFunction.AddParameter(strParameterName:=strDataFrameName, strParameterValue:=strDataFrameName)
-                clsImportRFunction.AddParameter(strParameterName:="data_tables", clsRFunctionParameter:=clsDataListRFunction)
-            Else
-                ' If it's already a list of data frames, then add the name directly
-                clsImportRFunction.AddParameter(strParameterName:="data_tables", strParameterValue:=strDataFrameName)
+                If ucrChkSaveDataFrameSingle.Checked Then
+                    ' If it's a single data frame then wrap it into a list
+                    Dim clsDataListRFunction As New RFunction
+                    clsDataListRFunction.SetRCommand("list")
+                    clsDataListRFunction.AddParameter(strParameterName:=strDataFrameName, strParameterValue:=strDataFrameName)
+                    clsImportRFunction.AddParameter(strParameterName:="data_tables", clsRFunctionParameter:=clsDataListRFunction)
+                Else
+                    ' If it's already a list of data frames, then add the name directly
+                    clsImportRFunction.AddParameter(strParameterName:="data_tables", strParameterValue:=strDataFrameName)
+                End If
+
+                strScript = "# Save data frame(s) """ & strDataFrameName & """" & Environment.NewLine & clsImportRFunction.ToScript()
+
             End If
+        Else
+            If Not ucrInputSaveRFile.IsEmpty Then
+                Dim clsImportRDSFunction As New RFunction
+                Dim strRFileName As String = ucrInputSaveRFile.GetText()
 
-            strScript = "# Save data frame(s) """ & strDataFrameName & """" & Environment.NewLine & clsImportRFunction.ToScript()
+                clsImportRDSFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
+                clsImportRDSFunction.AddParameter(strParameterName:="data_RDS", strParameterValue:=strRFileName)
+
+                strScript = "# Save RDS File(s) """ & strRFileName & """" & Environment.NewLine & clsImportRDSFunction.ToScript()
+
+            End If
         End If
 
         PreviewScript(strScript)
@@ -379,7 +418,7 @@ Public Class dlgScript
         ucrInputViewData.SetVisible(False)
         ucrCboCommandDataPackage.SetVisible(False)
         ucrInputSaveData.SetVisible(False)
-        rdoChooseFile.Enabled = False
+        ucrChkWindow.SetVisible(False)
         If rdoCommandPackage.Checked Then
             ucrCboCommandPackage.SetVisible(True)
             ucrCboCommandPackage.OnControlValueChanged()
@@ -404,6 +443,9 @@ Public Class dlgScript
             ucrCboCommandDataPackage.OnControlValueChanged()
             ucrInputSaveData.OnControlValueChanged()
             ucrChkInto.OnControlValueChanged()
+        ElseIf rdoWindow.Checked Then
+            ucrChkWindow.SetVisible(True)
+            ucrChkWindow.OnControlValueChanged()
         End If
     End Sub
 
@@ -420,7 +462,7 @@ Public Class dlgScript
         PreviewScript(strScript)
     End Sub
 
-    Private Sub ucrCboCommandDataPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboCommandDataPackage.ControlValueChanged, ucrInputSaveData.ControlContentsChanged, ucrChkInto.ControlContentsChanged
+    Private Sub ucrCboCommandDataPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSaveData.ControlContentsChanged, ucrChkInto.ControlContentsChanged, ucrCboCommandDataPackage.ControlValueChanged
         ucrInputSaveData.Visible = ucrChkInto.Checked
 
         Dim strScript As String = ""
@@ -482,7 +524,7 @@ Public Class dlgScript
         PreviewScript(strScript)
     End Sub
 
-    Private Sub ucrInputGgplotify_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGgplotify.ControlContentsChanged, ucrInputGraphCommand.ControlContentsChanged
+    Private Sub ucrInputGgplotify_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphCommand.ControlContentsChanged, ucrInputGgplotify.ControlContentsChanged
         Dim strScript As String = ""
 
         If Not ucrInputGgplotify.IsEmpty() AndAlso Not ucrInputGraphCommand.IsEmpty Then
@@ -518,7 +560,7 @@ Public Class dlgScript
         PreviewScript(strScript)
     End Sub
 
-    Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboExamplePackages.ControlValueChanged, ucrPnlExample.ControlValueChanged
+    Private Sub ucrComboGetPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExample.ControlValueChanged, ucrCboExamplePackages.ControlValueChanged
         PreviewScript("")
         lstExampleCollection.Items.Clear()
 
@@ -536,7 +578,7 @@ Public Class dlgScript
             lstExampleCollection.Items.AddRange(GetFunctions(strSelectedPackage))
         End If
         lstExampleCollection.Select()
-
+        EnableHelp()
     End Sub
 
     Private Function GetDatasets(strPackage As String) As ListViewItem()
@@ -601,6 +643,7 @@ Public Class dlgScript
         Catch ex As Exception
             MsgBox(strTopic & " has a help file but no examples.")
         End Try
+        EnableHelp()
     End Sub
 
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
@@ -610,6 +653,7 @@ Public Class dlgScript
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        EnableHelp()
     End Sub
 
     Private Sub tbFeatures_Selected(sender As Object, e As TabControlEventArgs) Handles tbFeatures.Selected
@@ -654,14 +698,14 @@ Public Class dlgScript
         If rdoChooseFile.Checked Then
             If Not ucrChkOpenRFile.Checked Then
                 ' Only file choosing logic
-                clsFileChooseFunction.SetRCommand("file.choose")
+                clsFileChooseFunction.SetRCommand("choose.files")
                 Dim strAssignedScript As String = ""
                 clsFileChooseFunction.SetAssignTo("filename")
                 clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
                 strScript = "#Open file interactively" & Environment.NewLine & strAssignedScript
             ElseIf ucrChkOpenRFile.Checked AndAlso Not ucrInputChooseFile.IsEmpty Then
                 ' File choosing and RDS file reading logic
-                clsFileChooseFunction.SetRCommand("file.choose")
+                clsFileChooseFunction.SetRCommand("choose.files")
                 Dim strAssignedScript As String = ""
                 clsFileChooseFunction.SetAssignTo("filename")
                 clsFileChooseFunction.ToScript(strScript:=strAssignedScript)
@@ -679,6 +723,54 @@ Public Class dlgScript
             End If
         End If
         PreviewScript(strScript)
+    End Sub
+    Private Sub EnableHelp()
+        cmdHelp.Enabled = rdoExampleData.Checked AndAlso lstExampleCollection.SelectedItems.Count > 0
+    End Sub
+
+    Private Sub ucrChkWindow_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkWindow.ControlContentsChanged
+        Dim strScript As String = ""
+        Dim clsWindowFunction As New RFunction
+
+        If ucrChkWindow.Checked Then
+            clsWindowFunction.SetRCommand("windows")
+            clsWindowFunction.AddParameter("record", "TRUE", iPosition:=0)
+            strScript = "#Recording multiple graphs" & Environment.NewLine & clsWindowFunction.ToScript()
+        Else
+            clsWindowFunction.SetRCommand("windows")
+            clsWindowFunction.RemoveParameterByName("record")
+            strScript = "#Open the R graph viewer" & Environment.NewLine & clsWindowFunction.ToScript()
+        End If
+
+        PreviewScript(strScript)
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Dim strPackageName As String = ucrCboExamplePackages.cboInput.SelectedItem
+        Dim strTopic As String = lstExampleCollection.SelectedItems(0).Text
+        If Not String.IsNullOrEmpty(strPackageName) AndAlso Not String.IsNullOrEmpty(strTopic) Then
+            Dim frmMaximiseOutput As New frmMaximiseOutput
+            frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName, strTopic:=strTopic), bReplace:=False)
+        End If
+    End Sub
+
+    Private Sub ucrPnlSaveDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveDataFrame.ControlValueChanged
+        HideShowSaveDataFrameControls()
+    End Sub
+
+    Private Sub HideShowSaveDataFrameControls()
+        ucrInputSaveRFile.SetVisible(False)
+        ucrInputSaveDataFrame.SetVisible(False)
+        ucrChkSaveDataFrameSingle.SetVisible(False)
+        If rdoDataFrame.Checked Then
+            ucrInputSaveDataFrame.SetVisible(True)
+            ucrChkSaveDataFrameSingle.SetVisible(True)
+            ucrInputSaveDataFrame.OnControlValueChanged()
+            ucrChkSaveDataFrameSingle.OnControlValueChanged()
+        ElseIf rdoFromRFile.Checked Then
+            ucrInputSaveRFile.SetVisible(True)
+            ucrInputSaveRFile.OnControlValueChanged()
+        End If
     End Sub
 
 End Class
