@@ -212,7 +212,7 @@ Public Class dlgScript
         ucrPnlSaveDataFrame.SetVisible(False)
         If rdoSaveDataFrame.Checked Then
             ucrPnlSaveDataFrame.SetVisible(True)
-            VisiilityOfControls()
+            HideShowSaveDataFrameControls()
             ucrChkDisplayGraph.Visible = False
             ucrInputSaveDataFrame.SetName("")
         ElseIf rdoSaveColumn.Checked Then
@@ -748,17 +748,17 @@ Public Class dlgScript
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim strPackageName As String = ucrCboExamplePackages.cboInput.SelectedItem
         Dim strTopic As String = lstExampleCollection.SelectedItems(0).Text
-        If strPackageName <> "" AndAlso strTopic <> "" Then
+        If Not String.IsNullOrEmpty(strPackageName) AndAlso Not String.IsNullOrEmpty(strTopic) Then
             Dim frmMaximiseOutput As New frmMaximiseOutput
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName, strTopic:=strTopic), bReplace:=False)
         End If
     End Sub
 
     Private Sub ucrPnlSaveDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSaveDataFrame.ControlValueChanged
-        VisiilityOfControls()
+        HideShowSaveDataFrameControls()
     End Sub
 
-    Private Sub VisiilityOfControls()
+    Private Sub HideShowSaveDataFrameControls()
         ucrInputSaveRFile.SetVisible(False)
         ucrInputSaveDataFrame.SetVisible(False)
         ucrChkSaveDataFrameSingle.SetVisible(False)
