@@ -194,7 +194,7 @@ Public Class dlgTimeSeriesPlot
     End Sub
 
     Private Sub InitialiseDialog()
-        'ucrBase.iHelpTopicID =
+        ucrBase.iHelpTopicID = 639
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 

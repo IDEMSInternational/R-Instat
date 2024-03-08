@@ -37,6 +37,7 @@ Public Class dlgIDFCurves
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 523
         ucrBase.clsRsyntax.bSeparateThread = False
 
         ucrIDFCurvesSelector.SetParameter(New RParameter("prdat", 0))

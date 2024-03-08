@@ -167,7 +167,7 @@ Public Class dlgGeneralForGraphics
 
         ucrChkAddCode.SetText("Add Code:")
         ucrChkAddCode.AddToLinkedControls({ucrInputAddCode}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
-        ucrInputAddCode.SetItems({"geom_hline(yintercept=20)", "geom_vline(xintercept = 5)", "geom_vline(xintercept = 5)", "scale_x_binned()", "scale_x_binned(n.breaks=20)"})
+        ucrInputAddCode.SetItems({"scale_colour_manual(values=c(" & Chr(34) & "red" & Chr(34) & "," & Chr(34) & "blue" & Chr(34) & "," & Chr(34) & "green" & Chr(34) & "," & Chr(34) & "black" & Chr(34) & "," & Chr(34) & "brown" & Chr(34) & "))", "scale_fill_manual(values = c(" & Chr(34) & "coral" & Chr(34) & "," & Chr(34) & "bisque4" & Chr(34) & "," & Chr(34) & "gold" & Chr(34) & "," & Chr(34) & "cyan" & Chr(34) & "," & Chr(34) & "khaki" & Chr(34) & "," & Chr(34) & "orange" & Chr(34) & "," & Chr(34) & "orchid" & Chr(34) & "))", "geom_hline(yintercept=20)", "geom_vline(xintercept=5) + geom_hline(yintercept = 1)", "geom_vline(xintercept=c(1,3,5),colour=" & Chr(34) & "green" & Chr(34) & ")", "scale_x_binned()", "scale_x_binned(n.breaks=20)", "scale_y_continuous(trans=" & Chr(34) & "log10" & Chr(34) & ", label=scales::dollar)"})
 
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
@@ -270,6 +270,14 @@ Public Class dlgGeneralForGraphics
         sdgPlots.Reset()
         'Warning/to be discussed: sdgPlots doesn't work like sdgLayerOptions. Information actually stays on the dialogue, as it cannot be editted on the general for graphics (yet) I think that sdgPlots should work like LayerOptions and be filled in at load, thanks to a setup function and setsettings sub. 
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetCalculationHistory()
+        Dim newItem As String = ucrInputAddCode.GetText().Trim()
+
+        If Not String.IsNullOrEmpty(newItem) AndAlso Not ucrInputAddCode.cboInput.Items.Contains(newItem) Then
+            ucrInputAddCode.AddItems({newItem})
+        End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -670,7 +678,7 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub UpdateParameters()
-        clsFacetVariablesOperator.RemoveParameterByName("wrap" & ucrInputStation.Name)
+        clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
 
@@ -794,6 +802,7 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub ucrChkAddCode_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddCode.ControlValueChanged, ucrInputAddCode.ControlValueChanged
+        SetCalculationHistory()
         If ucrChkAddCode.Checked AndAlso Not ucrInputAddCode.IsEmpty Then
             clsAddCodeOperator.AddParameter("code1", ucrInputAddCode.GetText(), bIncludeArgumentName:=False, iPosition:=1)
             clsBaseOperator.AddParameter("newcode", clsROperatorParameter:=clsAddCodeOperator, bIncludeArgumentName:=False)
