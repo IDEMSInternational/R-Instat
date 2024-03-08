@@ -114,6 +114,7 @@ Public Class dlgSeasonalGraph
         ucrReceiverRibbons.strSelectorHeading = "Variables"
         ucrReceiverRibbons.SetParameterIsString()
         ucrReceiverRibbons.bWithQuotes = False
+        ucrReceiverRibbons.iMaxItems = 4
 
         ucrReceiverFacetBy.SetParameter(New RParameter(""))
         ucrReceiverFacetBy.Selector = ucrSelectorForSeasonalGraph
