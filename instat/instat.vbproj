@@ -301,6 +301,7 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="RSyntax2024.vb" />
     <Compile Include="sdgHSConstants.Designer.vb">
       <DependentUpon>sdgHSConstants.vb</DependentUpon>
     </Compile>
