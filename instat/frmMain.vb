@@ -478,13 +478,128 @@ Public Class frmMain
 
         '---------------------------------------
         'delete the recovery files
-        If strAutoSavedLogFilePaths.Length > 0 Then
+        'This was done to prevent the previous autolog file from being overwritten by the new autolog file- Derrick
+        'If strAutoSavedLogFilePaths.Length > 0 Then
+        '    Try
+        '        File.Delete(strAutoSavedLogFilePaths(0))
+        '    Catch ex As Exception
+        '        MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+        '    End Try
+        'End If
+
+        If strAutoSavedInternalLogFilePaths.Length > 0 Then
             Try
-                File.Delete(strAutoSavedLogFilePaths(0))
+                For Each strFilePath As String In strAutoSavedInternalLogFilePaths
+                    'debug log is created when checking r version. 
+                    'so always delete the previous session debug file only
+                    If strFilePath <> clsRLink.strAutoSaveDebugLogFilePath Then
+                        File.Delete(strFilePath)
+                    End If
+                Next
             Catch ex As Exception
-                MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+                MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
             End Try
         End If
+
+        If strAutoSavedDataFilePaths.Length > 0 Then
+            Try
+                File.Delete(strAutoSavedDataFilePaths(0))
+            Catch ex As Exception
+                MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+            End Try
+        End If
+        '---------------------------------------
+
+    End Sub
+    Private Sub mnuToolsRestoreBackup_Click(sender As Object, e As EventArgs) Handles mnuToolsRestoreBackup.Click
+        Dim strRScripts As String = ""
+        Dim strDataFilePath As String = ""
+        dlgRestoreBackup.ShowDialog()
+        PromptRestoreData(strRScripts, strDataFilePath)
+
+        'if no script recovered then use the default R set up script
+        If String.IsNullOrEmpty(strRScripts) Then
+            strRScripts = "# Initialising R (e.g Loading R packages)" & Environment.NewLine & clsRLink.GetRSetupScript()
+        End If
+
+        'if data file recovered then add it as part of the initial R set up script
+        If Not String.IsNullOrEmpty(strDataFilePath) Then
+            strRScripts = strRScripts & Environment.NewLine &
+                        "# Importing auto recovered data" & Environment.NewLine &
+                        clsRLink.GetImportRDSRScript(strDataFilePath, False)
+        End If
+
+
+        'execute the R-Instat set up R scripts
+        For Each strLine As String In strRScripts.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            clsRLink.RunScript(strScript:=strLine.Trim(), bSeparateThread:=True, bSilent:=True)
+        Next
+
+        'as of 16/05/2023. clsDataBook depends on clsRLink.bInstatObjectExists property
+        'to check if R object has been set up at R level.
+
+        'grids are only updated when clsRLink.bInstatObjectExists = True
+        If clsRLink.RunInternalScriptGetValue(strScript:="exists('" & clsRLink.strInstatDataObject & "')",
+                                              bSeparateThread:=True, bSilent:=True).AsCharacter(0) = "TRUE" Then
+            'set R-Instat R object as exists if it has been set up in R level and refresh the grids
+            'refreshing grids internally updates the .Net databook object as well.
+            clsRLink.bInstatObjectExists = True
+            UpdateAllGrids()
+        End If
+    End Sub
+
+    Private Sub PromptRestoreData(ByRef strScript As String, ByRef strDataFilePath As String)
+
+        'if there is  another R-Instat process in the machine then no need to check for autorecovery files
+        If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
+            Return
+        End If
+        'copy of the original code used for PromptAndSetAutoRecoveredPrevSessionData
+        Dim strAutoSavedLogFilePaths() As String = {}
+        Dim strAutoSavedInternalLogFilePaths() As String = {}
+        Dim strAutoSavedDataFilePaths() As String = {}
+
+        If (Directory.Exists(strAutoSaveLogFolderPath)) Then
+            strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
+        End If
+        If Directory.Exists(strAutoSaveDataFolderPath) Then
+            strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
+        End If
+        If (Directory.Exists(strAutoSaveInternalLogFolderPath)) Then
+            strAutoSavedInternalLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveInternalLogFolderPath).ToArray
+        End If
+
+        '---------------------------------------
+        'prompt user for recovery selection
+        If (strAutoSavedLogFilePaths.Length > 0 OrElse
+            strAutoSavedDataFilePaths.Length > 0) Then
+
+
+            dlgRestoreBackup.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
+            dlgRestoreBackup.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
+            dlgRestoreBackup.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
+
+
+            'todo. the dialog design is meant to only return just one option; script, data file path or new session.
+            'refactor the dialog to enforce the design
+
+            'get the R script from read file if selected by the user
+            strScript = dlgRestoreBackup.GetScript()
+            'get the data file path if selected by the user
+            strDataFilePath = dlgRestoreBackup.GetDataFilePath()
+        End If
+        '---------------------------------------
+
+        '---------------------------------------
+        'delete the recovery files
+        'This was done to prevent the previous autolog file from being overwritten by the new autolog file- Derrick
+        'If strAutoSavedLogFilePaths.Length > 0 Then
+        '    Try
+        '        File.Delete(strAutoSavedLogFilePaths(0))
+        '    Catch ex As Exception
+        '        MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+        '    End Try
+        'End If
 
         If strAutoSavedInternalLogFilePaths.Length > 0 Then
             Try
@@ -2550,10 +2665,6 @@ Public Class frmMain
 
     Private Sub mnuEditWordwrap_Click(sender As Object, e As EventArgs) Handles mnuEditWordwrap.Click
         dlgWordwrap.ShowDialog()
-    End Sub
-
-    Private Sub mnuToolsRestoreBackup_Click(sender As Object, e As EventArgs) Handles mnuToolsRestoreBackup.Click
-        dlgRestoreBackup.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareColumnTextSearch_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSearch.Click
