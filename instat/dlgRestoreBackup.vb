@@ -162,9 +162,8 @@ Public Class dlgRestoreBackup
     End Sub
 
     Private Sub cmdRunLog_Click(sender As Object, e As EventArgs) Handles cmdRunLog.Click
-        If MsgBox("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost." & Environment.NewLine & "Warning: running the log file can fail if files have been moved.", MessageBoxButtons.YesNo, "Are you sure you are finished?") = MsgBoxResult.Yes Then
-            SaveFiles()
-            If File.Exists(strAutoSavedLogFilePaths(0)) Then
+        SaveFiles()
+        If File.Exists(strAutoSavedLogFilePaths(0)) Then
                 Try
                     strScript = File.ReadAllText(strAutoSavedLogFilePaths(0))
                 Catch ex As Exception
@@ -174,7 +173,7 @@ Public Class dlgRestoreBackup
             End If
             bUserClose = False
             Close()
-        End If
+
     End Sub
 
     Private Sub cmdLoadData_Click(sender As Object, e As EventArgs) Handles cmdLoadData.Click
