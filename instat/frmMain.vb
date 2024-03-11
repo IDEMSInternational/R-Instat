@@ -591,15 +591,6 @@ Public Class frmMain
         '---------------------------------------
 
         '---------------------------------------
-        'delete the recovery files
-        'This was done to prevent the previous autolog file from being overwritten by the new autolog file- Derrick
-        'If strAutoSavedLogFilePaths.Length > 0 Then
-        '    Try
-        '        File.Delete(strAutoSavedLogFilePaths(0))
-        '    Catch ex As Exception
-        '        MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
-        '    End Try
-        'End If
 
         If strAutoSavedInternalLogFilePaths.Length > 0 Then
             Try
