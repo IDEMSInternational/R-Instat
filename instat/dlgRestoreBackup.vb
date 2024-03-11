@@ -31,6 +31,7 @@ Public Class dlgRestoreBackup
 
 
     Private Sub dlgRestoreBackup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ucrBase.iHelpTopicID = 411
         'temporary - not yet implemented
         ucrChkSendInternalLog.Visible = False
 
