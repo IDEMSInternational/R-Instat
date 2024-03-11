@@ -276,12 +276,12 @@ Public Class dlgUseModel
             ucrInputModels.SetName(String.Join(", ", lstModels))
         End If
         'Checking if the commandString contains the commands from the segmented ,davie and pscore buttons.If so Again check if the list of before codes contains the clsAttach function before adiing
-        If Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::segmented") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::davies.test") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::pscore.test") = 0) Then
-            If Not ucrBase.clsRsyntax.lstBeforeCodes.Contains(clsAttach) Then
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
-            End If
+        'If Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::segmented") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::davies.test") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::pscore.test") = 0) Then
+        '    If Not ucrBase.clsRsyntax.lstBeforeCodes.Contains(clsAttach) Then
+        '        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        '    End If
 
-        End If
+        'End If
     End Sub
 
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click

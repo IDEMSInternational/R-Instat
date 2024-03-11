@@ -17,11 +17,7 @@
     Public clsBaseOperator As New ROperator
 
     ''' <summary>   An R command (of any type). </summary>
-    Public clsBaseCommandString As New RCodeStructure 'TODO SJL 17/04/20 What's the connection between this and 'bUeseCommandString' and 'strCommandString'? 
-
-
-    ''' <summary>   The R command in the form of a string. </summary>
-    Public strCommandString As String = ""
+    Public clsBaseCommandString As New RCodeStructure 'TODO SJL 17/04/20 What's the connection between this and 'bUseCommandString' and 'strCommandString'? 
 
     ''' <summary>   The R functions/operators/commands that should be run before the base R code. </summary>
     Public lstBeforeCodes As New List(Of RCodeStructure)
@@ -31,13 +27,16 @@
 
 
     ''' <summary>   If true then use 'clsBaseFunction' as this object's base R code. </summary>
-    Public bUseBaseFunction As Boolean = False
+    Private bUseBaseFunction As Boolean = False
 
     ''' <summary>   If true then use 'clsBaseOperator' as this object's base R code. </summary>
-    Public bUseBaseOperator As Boolean = False
+    Private bUseBaseOperator As Boolean = False
 
     ''' <summary>   If true then use 'clsBaseCommandString' as this object's base R code. </summary>
-    Public bUseCommandString As Boolean = False
+    Private bUseCommandString As Boolean = False
+
+    ''' <summary>   The R command in the form of a string. </summary>
+    Private strCommandString As String = ""
 
 
     ''' <summary>   Defines how to display the R output.
@@ -53,7 +52,7 @@
 
 
     ''' <summary>   The script associated with the base R code. </summary>
-    Public strScript As String 'TODO SJL This is only used in the RSyntax.GetScript function. Also cleared once in ucrButtons. Refactor?
+    Private strScript As String 'TODO SJL This is only used in the RSyntax.GetScript function. Also cleared once in ucrButtons. Refactor?
 
     ''' <summary>   If true then don't include the output part in the script (i.e. the part of the 
     '''             script to the left of the assignment operator '&lt;-'). </summary>
@@ -63,7 +62,7 @@
     Public bSeparateThread As Boolean = True
 
     ''' <summary>   TODO SJL 07/04/20 Is only ever Nothing (or in one rare case False). Remove? </summary>
-    Public bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing
+    Private bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the function's name (e.g. "facet_grid") and flags that the R script 
@@ -322,18 +321,18 @@
     '''             list of R functions/operators/commands. </returns>
     '''--------------------------------------------------------------------------------------------
     Private Function GetScriptsFromCodeList(lstCodes As List(Of RCodeStructure)) As List(Of String)
-        Dim strScript As String = "" 'TODO SJL 06/04/20 redundant assignments
+        Dim strItemScript As String = "" 'TODO SJL 06/04/20 redundant assignments
         Dim strTemp As String = ""
         Dim lstScripts As New List(Of String)
 
         For Each clsTempCode In lstCodes
-            strScript = ""
-            strTemp = clsTempCode.ToScript(strScript)
+            strItemScript = ""
+            strTemp = clsTempCode.ToScript(strItemScript)
             'Sometimes the output of the R-command we deal with should not be part of the script... 
             If clsTempCode.bExcludeAssignedFunctionOutput AndAlso Not String.IsNullOrEmpty(clsTempCode.GetRObjectToAssignTo) Then
-                lstScripts.Add(strScript)
+                lstScripts.Add(strItemScript)
             Else
-                lstScripts.Add(strScript & strTemp)
+                lstScripts.Add(strItemScript & strTemp)
             End If
         Next
         Return lstScripts
@@ -622,5 +621,9 @@
         bUseBaseFunction = False
         bUseBaseOperator = False
         bUseCommandString = False
+    End Sub
+
+    Public Sub ClearScript()
+        strScript = ""
     End Sub
 End Class

@@ -48,7 +48,7 @@ Public Class dlgImportFromODK
         ucrInputUsername.SetParameter(New RParameter("username", 1))
 
         ucrBase.clsRsyntax.bSeparateThread = False
-        ucrBase.clsRsyntax.bShowWaitDialogOverride = False
+        'ucrBase.clsRsyntax.bShowWaitDialogOverride = False
     End Sub
 
     Private Sub SetDefaults()
