@@ -97,12 +97,12 @@ Public Class sdgOneVarCompareModels
         'ucrSaveGOF.SetRCode(clsRGofStat, bReset)
         'ucrSaveDisplayChi.SetRCode(clsRAsDataFrame, bReset)
 
-        ucrChkDensity.SetRSyntax(clsRSyntax, bReset)
-        ucrChkPP.SetRSyntax(clsRSyntax, bReset)
-        ucrChkQQ.SetRSyntax(clsRSyntax, bReset)
-        ucrChkCDF.SetRSyntax(clsRSyntax, bReset)
+        'ucrChkDensity.SetRSyntax(clsRSyntax, bReset)
+        'ucrChkPP.SetRSyntax(clsRSyntax, bReset)
+        'ucrChkQQ.SetRSyntax(clsRSyntax, bReset)
+        'ucrChkCDF.SetRSyntax(clsRSyntax, bReset)
 
-        ucrChkInputChiSquareBreakpoints.SetRSyntax(clsRSyntax, bReset)
+        'ucrChkInputChiSquareBreakpoints.SetRSyntax(clsRSyntax, bReset)
 
         If bReset Then
             tbpOneVarCompareModels.SelectedIndex = 0

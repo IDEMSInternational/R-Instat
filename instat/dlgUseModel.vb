@@ -96,7 +96,7 @@ Public Class dlgUseModel
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 2
 
-        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+        'ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
 
         ucrBase.clsRsyntax.iCallType = 2
 

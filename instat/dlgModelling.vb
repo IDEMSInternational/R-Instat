@@ -220,7 +220,7 @@ Public Class dlgModelling
         ucrReceiverForTestColumn.SetMeAsReceiver()
         ucrReceiverForTestColumn.AddToReceiverAtCursorPosition("lm(, na.action = na.exclude)", 25)
         ucrSaveResult.Reset()
-        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+        'ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
         bResetDisplayOptions = True
         bUpdating = False
     End Sub
@@ -651,7 +651,7 @@ Public Class dlgModelling
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, dctNewPlot:=dctPlotFunctions, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorModelling.ucrAvailableDataFrames, bReset:=bResetDisplayOptions)
+        'sdgSimpleRegOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, dctNewPlot:=dctPlotFunctions, clsNewResidualFunction:=clsResidualFunction, clsNewFittedValuesFunction:=clsFittedValuesFunction, clsNewRstandardFunction:=clsRstandardFunction, clsNewHatvaluesFunction:=clsHatvaluesFunction, ucrNewAvailableDatafrane:=ucrSelectorModelling.ucrAvailableDataFrames, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
         bResetDisplayOptions = False
     End Sub

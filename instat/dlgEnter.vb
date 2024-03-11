@@ -78,7 +78,7 @@ Public Class dlgEnter
         chkShowEnterArguments.Checked = False
         ucrDataFrameEnter.Reset()
         ucrReceiverForEnterCalculation.Clear()
-        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+        'ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
         ucrSaveEnterResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
     End Sub
     Private Sub ReopenDialog()

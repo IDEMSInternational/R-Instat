@@ -140,7 +140,7 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Private Sub cmdDisplayObjects_Click(sender As Object, e As EventArgs) Handles cmdDisplayObjects.Click
-        sdgOneVarCompareModels.SetRCode(ucrBase.clsRsyntax, clsGofStat, clsDenscompFunction, clsCdfcompFunction, clsQqcompFunction, clsPpcompFunction, clsRAsDataFrame, clsChisqtableOperator, clsChisqbreaksOperator, bResetSubdialog)
+        'sdgOneVarCompareModels.SetRCode(ucrBase.clsRsyntax, clsGofStat, clsDenscompFunction, clsCdfcompFunction, clsQqcompFunction, clsPpcompFunction, clsRAsDataFrame, clsChisqtableOperator, clsChisqbreaksOperator, bResetSubdialog)
         sdgOneVarCompareModels.ShowDialog()
         bResetSubdialog = False
     End Sub

@@ -222,7 +222,7 @@ Public Class dlgOneVarUseModel
     'End Sub
 
     Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModelandBootstrap.Click
-        sdgOneVarUseModFit.SetRcode(ucrBase.clsRsyntax, clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, clsRPlotAllFunction, clsRplotPPfunction, clsRplotCDFfunction, clsRplotQQfunction, clsRplotDensfunction, clsRplotCIfunction, bResetSubdialog)
+        'sdgOneVarUseModFit.SetRcode(ucrBase.clsRsyntax, clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, clsRPlotAllFunction, clsRplotPPfunction, clsRplotCDFfunction, clsRplotQQfunction, clsRplotDensfunction, clsRplotCIfunction, bResetSubdialog)
         bPlot = Not sdgOneVarUseModFit.rdoNoPlot.Checked
         sdgOneVarUseModFit.ShowDialog()
         sdgOneVarUseModFit.SetPlotOptions()

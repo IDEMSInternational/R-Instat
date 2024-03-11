@@ -167,7 +167,7 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
         'ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction)
         'ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsFevdFunction)
-        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+        'ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
 
@@ -200,10 +200,10 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
         ucrBase.OKEnabled(Not ucrReceiverVariable.IsEmpty)
     End Sub
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
-        sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction, clsNewPriorParamListFunction:=clsPriorParamListFunction,
-                                   clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubDialogue,
-                                   clsNewPlotFunction:=clsPlotsFunction, clsNewConfidenceIntervalFunction:=clsConfidenceIntervalFunction,
-                                   clsNewInitialListFunction:=clsInitialListFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
+        'sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction, clsNewPriorParamListFunction:=clsPriorParamListFunction,
+        '                           clsNewConcatenateFunction:=clsConcatenateFunction, bReset:=bResetSubDialogue,
+        '                           clsNewPlotFunction:=clsPlotsFunction, clsNewConfidenceIntervalFunction:=clsConfidenceIntervalFunction,
+        '                           clsNewInitialListFunction:=clsInitialListFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
         sdgExtremesMethod.ShowDialog()
         bResetSubDialogue = False
     End Sub

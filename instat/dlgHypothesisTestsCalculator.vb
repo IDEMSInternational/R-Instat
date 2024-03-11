@@ -115,7 +115,7 @@ Public Class dlgHypothesisTestsCalculator
         ucrReceiverForTestColumn.SetMeAsReceiver()
         ucrSaveResult.Reset()
         ucrSaveResult.ucrChkSave.Checked = False
-        ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+        'ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
 
     End Sub
 

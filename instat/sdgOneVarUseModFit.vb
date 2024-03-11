@@ -125,7 +125,7 @@ Public Class sdgOneVarUseModFit
         clsRplotCIfunction = clsNewplotCIfunction
 
         'Setting Rcode for the sub dialog
-        ucrPnlPlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        'ucrPnlPlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
         ucrPnlQuantiles.SetRCode(clsRSeqFunction, bReset,)
         ucrNudFrom.SetRCode(clsRSeqFunction, bReset, bCloneIfNeeded:=True)
         ucrNudTo.SetRCode(clsRSeqFunction, bReset, bCloneIfNeeded:=True)

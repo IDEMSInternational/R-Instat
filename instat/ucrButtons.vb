@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class ucrButtons
-    Public clsRsyntax As RSyntax
+    Public clsRsyntax As RSyntax2024
     Public iHelpTopicID As Integer
     Public bFirstLoad As Boolean
 
@@ -41,7 +41,7 @@ Public Class ucrButtons
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        clsRsyntax = New RSyntax
+        clsRsyntax = New RSyntax2024
         iHelpTopicID = -1
         bFirstLoad = True
     End Sub

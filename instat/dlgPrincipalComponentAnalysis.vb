@@ -339,7 +339,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
-        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsDummyFunction, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRBarPlotFunction, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue, clsRFactor, clsBaseOperator, clsRThemeMinimal, bResetSubdialog)
+        'sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsDummyFunction, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRBarPlotFunction, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue, clsRFactor, clsBaseOperator, clsRThemeMinimal, bResetSubdialog)
         bResetSubdialog = False
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub

@@ -638,13 +638,13 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModelFunction, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPCompFunction, clsNewRplotCdfcomp:=clsRplotCdfCompFunction, clsNewRplotQqComp:=clsRplotQqCompFunction, clsNewRplotDenscomp:=clsRplotDensCompFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay)
+        'sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModelFunction, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPCompFunction, clsNewRplotCdfcomp:=clsRplotCdfCompFunction, clsNewRplotQqComp:=clsRplotQqCompFunction, clsNewRplotDenscomp:=clsRplotDensCompFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetFitModDisplay)
         bResetFitModDisplay = False
         sdgOneVarFitModDisplay.ShowDialog()
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
-        sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModelFunction, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetFittingOptions)
+        'sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModelFunction, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetFittingOptions)
         bResetFittingOptions = False
         sdgOneVarFitModel.ShowDialog()
     End Sub

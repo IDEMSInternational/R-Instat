@@ -210,12 +210,12 @@ Public Class sdgSimpleRegOptions
         ucrSaveLeverageColumnName.SetDataFrameSelector(ucrAvailableDataframe)
 
         'Display tab controls
-        ucrChkModel.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-        ucrChkANOVA.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-        ucrChkEstimates.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-        ucrChkConfLimits.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-        ucrNudConfLevel.SetRCode(clsConfint, bReset)
-        ucrChkFittedModel.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        'ucrChkModel.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        'ucrChkANOVA.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        'ucrChkEstimates.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        'ucrChkConfLimits.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        'ucrNudConfLevel.SetRCode(clsConfint, bReset)
+        'ucrChkFittedModel.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
 
         ucrPnlScale.SetRCode(clsVisReg, bReset)
         ucrPnlPlotType.SetRCode(clsVisReg, bReset)

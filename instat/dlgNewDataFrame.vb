@@ -118,7 +118,7 @@ Public Class dlgNewDataFrame
 
         'reset the controls
         ucrNewDFName.Reset()
-        ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
+        'ucrTryNewDataFrame.SetRSyntax(ucrBase.clsRsyntax)
         clsDummyVarFunction.AddParameter("variablename", "True", iPosition:=0)
         clsDummyVarFunction.AddParameter("checked", "defaults", iPosition:=1)
 

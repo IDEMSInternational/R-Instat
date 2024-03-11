@@ -89,14 +89,14 @@ Public Class sdgOneVarFitModDisplay
         clsRplotDenscomp = clsNewRplotDenscomp
         clsRLogLikFunction = clsNewRLogLikFunction
         ucrDistribution = ucrNewDistribution
-        ucrPnlPlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        'ucrPnlPlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
         ucrSavePlots.AddAdditionalRCode(clsRplotDenscomp, 1)
         ucrSavePlots.AddAdditionalRCode(clsRplotQqComp, 2)
         ucrSavePlots.AddAdditionalRCode(clsRplotCdfcomp, 3)
         ucrSavePlots.AddAdditionalRCode(clsRplotPPComp, 4)
         ucrSavePlots.SetRCode(clsRplotFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlLikelihood.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkPLotLogLik.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        'ucrChkPLotLogLik.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
         ucrSaveLikelihood.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
         SetPlotOptions()
         If bReset Then
