@@ -227,7 +227,9 @@
     <Compile Include="sdgCreateFilter.Designer.vb">
       <DependentUpon>sdgCreateFilter.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgCreateFilter.vb" />
+    <Compile Include="sdgCreateFilter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UserControls\frmMaximiseOutput.Designer.vb">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
     </Compile>
