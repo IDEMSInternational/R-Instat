@@ -74,11 +74,11 @@ Public Class sdgCombineGraphOptions
 
     Public Sub SetDefaultRowAndColumns()
         Dim NoOfgraphs As Integer
-        If dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count > 0 Then
-            NoOfgraphs = dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count
-            ucrNudRows.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
-            ucrNudColumns.Value = Math.Ceiling(NoOfgraphs / (Math.Ceiling(Math.Sqrt(NoOfgraphs))))
-        End If
+        ''If dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count > 0 Then
+        'NoOfgraphs = dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count
+        '    ucrNudRows.Value = Math.Ceiling(Math.Sqrt(NoOfgraphs))
+        '    ucrNudColumns.Value = Math.Ceiling(NoOfgraphs / (Math.Ceiling(Math.Sqrt(NoOfgraphs))))
+        'End If
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
@@ -99,9 +99,9 @@ Public Class sdgCombineGraphOptions
     Public Sub LoadGraphs()
         Dim i As Integer = 0
         lstGraphs.Items.Clear()
-        For i = 0 To dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count - 1
-            lstGraphs.Items.Add((i + 1) & Chr(32) & "." & dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items(i).Text)
-        Next
+        'For i = 0 To dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items.Count - 1
+        '    lstGraphs.Items.Add((i + 1) & Chr(32) & "." & dlgCombineforGraphics.ucrCombineGraphReceiver.lstSelectedVariables.Items(i).Text)
+        'Next
     End Sub
 
     Public Sub SetMatrixFunction()

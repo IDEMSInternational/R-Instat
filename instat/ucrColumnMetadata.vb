@@ -323,8 +323,8 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuSort_Click(sender As Object, e As EventArgs) Handles mnuSort.Click
-        dlgSort.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
-        dlgSort.ShowDialog()
+        'dlgSort.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
+        'dlgSort.ShowDialog()
     End Sub
 
     Private Sub StartWait()
@@ -366,14 +366,14 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplicateColumn.Click
-        dlgDuplicateColumns.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
-        dlgDuplicateColumns.ShowDialog()
+        'dlgDuplicateColumns.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
+        'dlgDuplicateColumns.ShowDialog()
     End Sub
 
     Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilterRows.Click
-        dlgRestrict.bIsSubsetDialog = False
-        dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
-        dlgRestrict.ShowDialog()
+        'dlgRestrict.bIsSubsetDialog = False
+        'dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
+        'dlgRestrict.ShowDialog()
     End Sub
 
     Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
@@ -396,20 +396,20 @@ Public Class ucrColumnMetadata
         End If
     End Sub
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
-        dlgName.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
-        dlgName.ShowDialog()
+        'dlgName.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
+        'dlgName.ShowDialog()
     End Sub
 
     Private Sub mnuConvert_Click(sender As Object, e As EventArgs)
         'TODO Selected column should automatically appear in dialog
-        dlgConvertColumns.ShowDialog()
+        'dlgConvertColumns.ShowDialog()
     End Sub
 
     Private Sub mnuLabelsLevels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
         If IsFirstSelectedDataFrameColumnAFactor() Then
-            dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), GetCurrentDataFrameFocus().strName)
+            'dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), GetCurrentDataFrameFocus().strName)
         End If
-        dlgLabelsLevels.ShowDialog()
+        'dlgLabelsLevels.ShowDialog()
     End Sub
 
     Private Sub columnContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles columnContextMenuStrip.Opening
@@ -429,7 +429,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
-        dlgReorderColumns.ShowDialog()
+        'dlgReorderColumns.ShowDialog()
     End Sub
 
     Private Sub propertiesContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles propertiesContextMenuStrip.Opening
@@ -449,13 +449,13 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub deleteDataFrame_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
-        dlgDeleteDataFrames.SetDataFrameToAdd(_grid.CurrentWorksheet.Name)
-        dlgDeleteDataFrames.ShowDialog()
+        'dlgDeleteDataFrames.SetDataFrameToAdd(_grid.CurrentWorksheet.Name)
+        'dlgDeleteDataFrames.ShowDialog()
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
-        dlgRenameDataFrame.SetCurrentDataframe(_grid.CurrentWorksheet.Name)
-        dlgRenameDataFrame.ShowDialog()
+        'dlgRenameDataFrame.SetCurrentDataframe(_grid.CurrentWorksheet.Name)
+        'dlgRenameDataFrame.ShowDialog()
     End Sub
 
     Private Sub hideSheet_Click(sender As Object, e As EventArgs) Handles hideSheet.Click
@@ -465,12 +465,12 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub unhideSheet_Click(sender As Object, e As EventArgs) Handles unhideSheet.Click
-        dlgHideDataframes.ShowDialog()
+        'dlgHideDataframes.ShowDialog()
     End Sub
 
     Private Sub copySheet_Click(sender As Object, e As EventArgs) Handles copySheet.Click
-        dlgCopyDataFrame.SetCurrentDataframe(_grid.CurrentWorksheet.Name)
-        dlgCopyDataFrame.ShowDialog()
+        'dlgCopyDataFrame.SetCurrentDataframe(_grid.CurrentWorksheet.Name)
+        'dlgCopyDataFrame.ShowDialog()
     End Sub
 
     Private Sub viewSheet_Click(sender As Object, e As EventArgs) Handles viewSheet.Click
@@ -480,7 +480,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
-        dlgReorderDataFrame.ShowDialog()
+        'dlgReorderDataFrame.ShowDialog()
     End Sub
 
     Private Sub statusColumnMenu_Opening(sender As Object, e As CancelEventArgs) Handles statusColumnMenu.Opening
@@ -488,18 +488,18 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
-        dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name, strColumn:=GetFirstSelectedDataframeColumnFromSelectedRow())
-        dlgAddComment.ShowDialog()
+        'dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name, strColumn:=GetFirstSelectedDataframeColumnFromSelectedRow())
+        'dlgAddComment.ShowDialog()
     End Sub
 
     Private Sub mnuBottomAddComment_Click(sender As Object, e As EventArgs) Handles mnuBottomAddComment.Click
-        dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name)
-        dlgAddComment.ShowDialog()
+        'dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name)
+        'dlgAddComment.ShowDialog()
     End Sub
 
     Private Sub mnuColumnContextColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnContextSelectColumns.Click
-        dlgSelect.SetDefaultDataFrame(_grid.CurrentWorksheet.Name)
-        dlgSelect.ShowDialog()
+        'dlgSelect.SetDefaultDataFrame(_grid.CurrentWorksheet.Name)
+        'dlgSelect.ShowDialog()
     End Sub
 
     Private Sub mnuColumnContextRemoveCurrentColumnSelection_Click(sender As Object, e As EventArgs) Handles mnuColumnContextRemoveCurrentColumnSelection.Click

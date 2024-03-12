@@ -60,14 +60,14 @@ Public Class sdgOneVarFitModDisplay
 
         ucrSavePlots.SetPrefix("plot")
         ucrSavePlots.SetSaveTypeAsGraph()
-        ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+        'ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
         ucrSavePlots.SetCheckBoxText("Save Graph")
         ucrSavePlots.SetIsComboBox()
         ucrSavePlots.SetAssignToIfUncheckedValue("last_graph")
 
         ucrSaveLikelihood.SetPrefix("likelihood")
         ucrSaveLikelihood.SetSaveTypeAsGraph()
-        ucrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+        'ucrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
         ucrSaveLikelihood.SetCheckBoxText("Save Graph")
         ucrSaveLikelihood.SetIsComboBox()
         ucrSaveLikelihood.SetAssignToIfUncheckedValue("last_likelihood")

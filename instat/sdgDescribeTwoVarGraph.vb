@@ -113,7 +113,7 @@ Public Class sdgDescribeTwoVarGraph
 
     Private Sub ucrGraphs_NameChanged() Handles ucrNumericByNumeric.NameChanged, ucrNumericByCategorical.NameChanged, ucrCategoricalByNumeric.NameChanged, ucrCategoricalByCategorical.NameChanged
         If bLoaded Then
-            dlgDescribeTwoVarGraph.Results()
+            'dlgDescribeTwoVarGraph.Results()
         End If
     End Sub
 End Class

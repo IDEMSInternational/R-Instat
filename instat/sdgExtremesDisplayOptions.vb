@@ -50,7 +50,7 @@ Public Class sdgExtremesDisplayOptions
 
         ucrSavePlots.SetPrefix("plot")
         ucrSavePlots.SetSaveTypeAsGraph()
-        ucrSavePlots.SetDataFrameSelector(dlgExtremes.ucrSelectorExtremes.ucrAvailableDataFrames)
+        'ucrSavePlots.SetDataFrameSelector(dlgExtremes.ucrSelectorExtremes.ucrAvailableDataFrames)
         ucrSavePlots.SetCheckBoxText("Save Graph:")
         ucrSavePlots.SetIsComboBox()
         ucrSavePlots.SetAssignToIfUncheckedValue("last_graph")

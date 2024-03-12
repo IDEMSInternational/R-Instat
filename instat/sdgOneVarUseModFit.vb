@@ -185,16 +185,16 @@ Public Class sdgOneVarUseModFit
 
 
     Public Sub SetPlotOptions()
-        If Not dlgOneVarUseModel.ucrChkProduceBootstrap.Checked Then
-            rdoCIcdf.Enabled = False
-            tbpBootstrapOptions.Enabled = False
-            If rdoCIcdf.Checked Then
-                rdoPlotAll.Checked = True
-            End If
-        Else
-            rdoCIcdf.Enabled = True
-            tbpBootstrapOptions.Enabled = True
-        End If
+        'If Not dlgOneVarUseModel.ucrChkProduceBootstrap.Checked Then
+        '    rdoCIcdf.Enabled = False
+        '    tbpBootstrapOptions.Enabled = False
+        '    If rdoCIcdf.Checked Then
+        '        rdoPlotAll.Checked = True
+        '    End If
+        'Else
+        '    rdoCIcdf.Enabled = True
+        '    tbpBootstrapOptions.Enabled = True
+        'End If
     End Sub
 
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn

@@ -69,12 +69,12 @@ Public Class sdgDescribeDisplay
     End Sub
 
     Public Sub GrpBoxEnable()
-        If ((dlgDescribeTwoVariable.strFirstVariablesType = "factor") And (dlgDescribeTwoVariable.strSecondVariableType = "numeric" OrElse dlgDescribeTwoVariable.strSecondVariableType = "integer")) Then
-            grpAnovaOptions.Enabled = True
-            grpFrequenciesOptions.Enabled = False
-        ElseIf ((dlgDescribeTwoVariable.strSecondVariableType = "factor") And (dlgDescribeTwoVariable.strFirstVariablesType = "factor")) Then
-            grpFrequenciesOptions.Enabled = True
-            grpAnovaOptions.Enabled = False
-        End If
+        'If ((dlgDescribeTwoVariable.strFirstVariablesType = "factor") And (dlgDescribeTwoVariable.strSecondVariableType = "numeric" OrElse dlgDescribeTwoVariable.strSecondVariableType = "integer")) Then
+        '    grpAnovaOptions.Enabled = True
+        '    grpFrequenciesOptions.Enabled = False
+        'ElseIf ((dlgDescribeTwoVariable.strSecondVariableType = "factor") And (dlgDescribeTwoVariable.strFirstVariablesType = "factor")) Then
+        '    grpFrequenciesOptions.Enabled = True
+        '    grpAnovaOptions.Enabled = False
+        'End If
     End Sub
 End Class
