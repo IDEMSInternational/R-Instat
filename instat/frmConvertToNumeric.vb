@@ -75,7 +75,7 @@ Public Class frmConvertToNumeric
 
     Private Sub cmdInspectValues_Click(sender As Object, e As EventArgs) Handles cmdInspectValues.Click
         Me.Close()
-        dlgFindNonnumericValues.SetCurrentColumn(strColumnName, strDataFrameName)
-        dlgFindNonnumericValues.ShowDialog()
+        'dlgFindNonnumericValues.SetCurrentColumn(strColumnName, strDataFrameName)
+        'dlgFindNonnumericValues.ShowDialog()
     End Sub
 End Class

@@ -787,7 +787,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuInsertScript_Click(sender As Object, e As EventArgs) Handles mnuInsertScript.Click, cmdInsertScript.Click
-        dlgScript.ShowDialog()
+        'dlgScript.ShowDialog()
     End Sub
 
     Private Sub cmdRemoveTab_Click(sender As Object, e As EventArgs) Handles cmdRemoveTab.Click

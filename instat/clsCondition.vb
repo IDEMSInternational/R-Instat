@@ -168,7 +168,7 @@ Public Class Condition
         bIsPositive = bNewIsPositive
     End Sub
 
-    Public Function IsSatisfied(clsRCode As RCodeStructure, Optional clsParameter As RParameter = Nothing, Optional clsRSyntax As RSyntax = Nothing) As Boolean
+    Public Function IsSatisfied(clsRCode As RCodeStructure, Optional clsParameter As RParameter = Nothing, Optional clsRSyntax As RSyntax2024 = Nothing) As Boolean
         Dim clsTempParam As RParameter
         Dim clsTempFunc As RFunction
 

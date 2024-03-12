@@ -155,8 +155,8 @@ Public Class sdgDataOptions
     End Sub
 
     Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
-        dlgSelectColumns.SetDefaultDataFrame(strCurrentDataFrame)
-        dlgSelectColumns.ShowDialog()
+        'dlgSelectColumns.SetDefaultDataFrame(strCurrentDataFrame)
+        'dlgSelectColumns.ShowDialog()
         ucrSelectorForSelectColumns.LoadList()
     End Sub
 

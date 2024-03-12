@@ -86,7 +86,7 @@ Public Class ucrCore
 
     ''' <summary> Only used within the conditions.
     ''' A condition may apply to an RSyntax object rather than the primary command-parameter pair. </summary>
-    Protected clsRSyntax As RSyntax = Nothing
+    Protected clsRSyntax As RSyntax2024 = Nothing
 
 
 
@@ -504,7 +504,7 @@ Public Class ucrCore
     ''' <param name="bCloneIfNeeded"> (Optional) If true then clone each of the control's parameters
     '''                       (but only if the command does not already contain the parameter, 
     '''                       or a cloned parameter with the same name). </param>
-    Public Overridable Sub SetRSyntax(clsNewRSyntax As RSyntax, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+    Public Overridable Sub SetRSyntax(clsNewRSyntax As RSyntax2024, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If clsRSyntax Is Nothing OrElse Not clsRSyntax.Equals(clsNewRSyntax) Then
             clsRSyntax = clsNewRSyntax
             If bUpdateRCodeFromControl AndAlso CanUpdate() Then

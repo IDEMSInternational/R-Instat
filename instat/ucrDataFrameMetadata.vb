@@ -175,13 +175,13 @@ Public Class ucrDataFrameMetadata
     End Function
 
     Private Sub deleteDataFrame_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
-        dlgDeleteDataFrames.SetDataFrameToAdd(GetSelectedDataframeNameFromSelectedRow)
-        dlgDeleteDataFrames.ShowDialog()
+        'dlgDeleteDataFrames.SetDataFrameToAdd(GetSelectedDataframeNameFromSelectedRow)
+        'dlgDeleteDataFrames.ShowDialog()
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
-        dlgRenameDataFrame.SetCurrentDataframe(GetSelectedDataframeNameFromSelectedRow)
-        dlgRenameDataFrame.ShowDialog()
+        'dlgRenameDataFrame.SetCurrentDataframe(GetSelectedDataframeNameFromSelectedRow)
+        'dlgRenameDataFrame.ShowDialog()
     End Sub
 
     Private Sub hideSheet_Click(sender As Object, e As EventArgs) Handles hideSheet.Click
@@ -192,12 +192,12 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Private Sub unhideSheet_Click(sender As Object, e As EventArgs) Handles unhideSheet.Click
-        dlgHideDataframes.ShowDialog()
+        'dlgHideDataframes.ShowDialog()
     End Sub
 
     Private Sub copySheet_Click(sender As Object, e As EventArgs) Handles copySheet.Click
-        dlgCopyDataFrame.SetCurrentDataframe(GetSelectedDataframeNameFromSelectedRow)
-        dlgCopyDataFrame.ShowDialog()
+        'dlgCopyDataFrame.SetCurrentDataframe(GetSelectedDataframeNameFromSelectedRow)
+        'dlgCopyDataFrame.ShowDialog()
     End Sub
 
     Private Sub viewSheet_Click(sender As Object, e As EventArgs) Handles viewSheet.Click
@@ -211,7 +211,7 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
-        dlgReorderDataFrame.ShowDialog()
+        'dlgReorderDataFrame.ShowDialog()
     End Sub
 
     Private Sub rowRightClickMenu_Opening(sender As Object, e As EventArgs) Handles rowRightClickMenu.Opening
@@ -219,7 +219,7 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
-        dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name)
-        dlgAddComment.ShowDialog()
+        'dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name)
+        'dlgAddComment.ShowDialog()
     End Sub
 End Class

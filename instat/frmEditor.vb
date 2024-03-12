@@ -137,7 +137,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuUnhideColumns_Click(sender As Object, e As EventArgs) Handles mnuUnhideColumns.Click
-        dlgHideShowColumns.ShowDialog()
+        'dlgHideShowColumns.ShowDialog()
         'grdData.DoAction(New unvell.ReoGrid.Actions.UnhideColumnsAction(grdData.CurrentWorksheet.SelectionRange.Col, grdData.CurrentWorksheet.SelectionRange.Cols))
     End Sub
 
@@ -293,7 +293,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub insertSheet_Click(sender As Object, e As EventArgs) Handles insertSheet.Click
-        dlgNewDataFrame.ShowDialog()
+        'dlgNewDataFrame.ShowDialog()
     End Sub
 
     Private Sub dlgDeleteDataFrames_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
@@ -305,7 +305,7 @@ Public Class frmEditor
         '        frmMain.clsRLink.RunScript(strScript)
         '    End If
         'End If
-        dlgDeleteDataFrames.ShowDialog()
+        'dlgDeleteDataFrames.ShowDialog()
     End Sub
 
     Private Sub grdData_WorksheetRemoved(sender As Object, e As WorksheetRemovedEventArgs) Handles grdData.WorksheetRemoved
@@ -318,8 +318,8 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
-        dlgName.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
-        dlgName.ShowDialog()
+        'dlgName.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        'dlgName.ShowDialog()
     End Sub
 
     Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged, Me.Load, grdData.WorksheetInserted
@@ -439,11 +439,11 @@ Public Class frmEditor
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
-        dlgRenameDataFrame.ShowDialog()
+        'dlgRenameDataFrame.ShowDialog()
     End Sub
 
     Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles CopySheet.Click
-        dlgCopyDataFrame.ShowDialog()
+        'dlgCopyDataFrame.ShowDialog()
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
@@ -544,13 +544,13 @@ Public Class frmEditor
     End Function
 
     Private Sub columnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles columnFilterToolStripMenuItem.Click
-        dlgRestrict.bIsSubsetDialog = False
-        dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
-        dlgRestrict.ShowDialog()
+        'dlgRestrict.bIsSubsetDialog = False
+        'dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
+        'dlgRestrict.ShowDialog()
     End Sub
 
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
-        dlgReorderDataFrame.ShowDialog()
+        'dlgReorderDataFrame.ShowDialog()
     End Sub
 
     Private Sub UpdateRFunctionDataFrameParameters()
@@ -583,9 +583,9 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuFilter_Click(sender As Object, e As EventArgs) Handles mnuFilter.Click
-        dlgRestrict.bIsSubsetDialog = False
-        dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
-        dlgRestrict.ShowDialog()
+        'dlgRestrict.bIsSubsetDialog = False
+        'dlgRestrict.strDefaultDataframe = grdCurrSheet.Name
+        'dlgRestrict.ShowDialog()
     End Sub
 
     Private Sub mnuRemoveCurrentFilter_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilter.Click
@@ -601,7 +601,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub SortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SortToolStripMenuItem.Click
-        dlgSort.ShowDialog()
+        'dlgSort.ShowDialog()
     End Sub
 
     Private Sub FreezeToHereToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FreezeToHereToolStripMenuItem.Click
@@ -648,7 +648,7 @@ Public Class frmEditor
 
     Private Sub mnuConvert_Click(sender As Object, e As EventArgs) Handles mnuConvert.Click
         'TODO Selected column should automatically appear in dialog
-        dlgConvertColumns.ShowDialog()
+        'dlgConvertColumns.ShowDialog()
     End Sub
 
     Private Sub copyRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles copyRangeToolStripMenuItem.Click
@@ -662,8 +662,8 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
-        dlgMakeDate.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
-        dlgMakeDate.ShowDialog()
+        'dlgMakeDate.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        'dlgMakeDate.ShowDialog()
     End Sub
 
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
@@ -673,8 +673,8 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplicateColumn.Click
-        dlgDuplicateColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
-        dlgDuplicateColumns.ShowDialog()
+        'dlgDuplicateColumns.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+        'dlgDuplicateColumns.ShowDialog()
     End Sub
 
     Private Function GetFirstSelectedRow() As String
@@ -682,12 +682,12 @@ Public Class frmEditor
     End Function
 
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
-        dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow())
-        dlgAddComment.ShowDialog()
+        'dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow())
+        'dlgAddComment.ShowDialog()
     End Sub
 
     Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddComment.Click
-        dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow(), SelectedColumnsAsArray()(0))
-        dlgAddComment.ShowDialog()
+        'dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow(), SelectedColumnsAsArray()(0))
+        'dlgAddComment.ShowDialog()
     End Sub
 End Class

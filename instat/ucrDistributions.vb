@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports instat.RSyntax
+'Imports instat.RSyntax
 
 Public Class ucrDistributions
     Public lstAllDistributions As List(Of Distribution)

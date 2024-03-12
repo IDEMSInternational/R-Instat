@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class ucrButtons
-    Public clsRsyntax As RSyntax
+    Public clsRsyntax As RSyntax2024
     Public iHelpTopicID As Integer
     Public bFirstLoad As Boolean
 
@@ -41,7 +41,7 @@ Public Class ucrButtons
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        clsRsyntax = New RSyntax
+        clsRsyntax = New RSyntax2024
         iHelpTopicID = -1
         bFirstLoad = True
     End Sub
@@ -175,7 +175,7 @@ Public Class ucrButtons
 
         'This clears the script after it has been run, but leave the function and parameters in the base function
         'so that it can be run exactly the same when reopened.
-        clsRsyntax.strScript = ""
+        clsRsyntax.ClearScript()
 
         'Run additional after codes
         lstAfterScripts = clsRsyntax.GetAfterCodesScripts()
@@ -188,7 +188,7 @@ Public Class ucrButtons
                 Else
                     strComment = ""
                 End If
-                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=clsRsyntax.bShowWaitDialogOverride)
+                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=False)
             Else
                 frmMain.AddToScriptWindow(lstAfterScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If

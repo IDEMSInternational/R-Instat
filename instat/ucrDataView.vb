@@ -228,8 +228,8 @@ Public Class ucrDataView
     End Sub
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
-        dlgDeleteDataFrames.SetDataFrameToAdd(_grid.CurrentWorksheet.Name)
-        dlgDeleteDataFrames.ShowDialog()
+        'dlgDeleteDataFrames.SetDataFrameToAdd(_grid.CurrentWorksheet.Name)
+        'dlgDeleteDataFrames.ShowDialog()
     End Sub
 
     Public Sub WorksheetRemoved(worksheet As clsWorksheetAdapter)
@@ -237,8 +237,8 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuColumnRename_Click(sender As Object, e As EventArgs) Handles mnuColumnRename.Click
-        dlgName.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
-        dlgName.ShowDialog()
+        'dlgName.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
+        'dlgName.ShowDialog()
     End Sub
 
     Public Sub CurrentWorksheetChanged()
@@ -412,20 +412,20 @@ Public Class ucrDataView
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
-        dlgRenameDataFrame.SetCurrentDataframe(_grid.CurrentWorksheet.Name)
-        dlgRenameDataFrame.ShowDialog()
+        'dlgRenameDataFrame.SetCurrentDataframe(_grid.CurrentWorksheet.Name)
+        'dlgRenameDataFrame.ShowDialog()
     End Sub
 
     Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles CopySheet.Click
-        dlgCopyDataFrame.SetCurrentDataframe(_grid.CurrentWorksheet.Name)
-        dlgCopyDataFrame.ShowDialog()
+        'dlgCopyDataFrame.SetCurrentDataframe(_grid.CurrentWorksheet.Name)
+        'dlgCopyDataFrame.ShowDialog()
     End Sub
 
     Private Sub mnuLevelsLabels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
         If IsFirstSelectedColumnAFactor() Then
-            dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
+            'dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
         End If
-        dlgLabelsLevels.ShowDialog()
+        'dlgLabelsLevels.ShowDialog()
     End Sub
 
     Public Sub UseColumnSelectionInDataView(bUseColumnSelecion As Boolean)
@@ -503,19 +503,19 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuColumnFilterRows.Click
-        dlgRestrict.bIsSubsetDialog = False
-        dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
-        dlgRestrict.ShowDialog()
+        'dlgRestrict.bIsSubsetDialog = False
+        'dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
+        'dlgRestrict.ShowDialog()
     End Sub
 
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
-        dlgReorderDataFrame.ShowDialog()
+        'dlgReorderDataFrame.ShowDialog()
     End Sub
 
     Private Sub mnuFilter_Click(sender As Object, e As EventArgs) Handles mnuFilter.Click
-        dlgRestrict.bIsSubsetDialog = False
-        dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
-        dlgRestrict.ShowDialog()
+        'dlgRestrict.bIsSubsetDialog = False
+        'dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
+        'dlgRestrict.ShowDialog()
     End Sub
 
     Private Sub mnuRemoveCurrentFilter_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilter.Click
@@ -531,8 +531,8 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuSort_Click(sender As Object, e As EventArgs) Handles mnuSort.Click
-        dlgSort.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
-        dlgSort.ShowDialog()
+        'dlgSort.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
+        'dlgSort.ShowDialog()
     End Sub
 
     Private Sub mnuFreezeToHere_Click(sender As Object, e As EventArgs)
@@ -560,18 +560,18 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplicateColumn.Click
-        dlgDuplicateColumns.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
-        dlgDuplicateColumns.ShowDialog()
+        'dlgDuplicateColumns.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
+        'dlgDuplicateColumns.ShowDialog()
     End Sub
 
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
-        dlgAddComment.SetPosition(_grid.CurrentWorksheet.Name, GetFirstSelectedRow())
-        dlgAddComment.ShowDialog()
+        'dlgAddComment.SetPosition(_grid.CurrentWorksheet.Name, GetFirstSelectedRow())
+        'dlgAddComment.ShowDialog()
     End Sub
 
     Private Sub mnuComment_Click(sender As Object, e As EventArgs) Handles mnuComment.Click
-        dlgAddComment.SetPosition(_grid.CurrentWorksheet.Name, GetFirstSelectedRow(), GetFirstSelectedColumnName())
-        dlgAddComment.ShowDialog()
+        'dlgAddComment.SetPosition(_grid.CurrentWorksheet.Name, GetFirstSelectedRow(), GetFirstSelectedColumnName())
+        'dlgAddComment.ShowDialog()
     End Sub
 
     Public Sub SetCurrentDataFrame(strDataName As String)
@@ -605,7 +605,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub unhideSheet_Click(sender As Object, e As EventArgs) Handles unhideSheet.Click
-        dlgHideDataframes.ShowDialog()
+        'dlgHideDataframes.ShowDialog()
     End Sub
 
     Private Sub statusColumnMenu_Opening(sender As Object, e As CancelEventArgs) Handles statusColumnMenu.Opening
@@ -613,21 +613,21 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
-        dlgReorderColumns.ShowDialog()
+        'dlgReorderColumns.ShowDialog()
     End Sub
 
     Private Sub mnuRenameColumn_Click(sender As Object, e As EventArgs) Handles mnuRenameColumn.Click
-        dlgName.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
-        dlgName.ShowDialog()
+        'dlgName.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
+        'dlgName.ShowDialog()
     End Sub
 
     Private Sub mnuDuplColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplColumn.Click
-        dlgDuplicateColumns.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
-        dlgDuplicateColumns.ShowDialog()
+        'dlgDuplicateColumns.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
+        'dlgDuplicateColumns.ShowDialog()
     End Sub
 
     Private Sub mnuReorderColumn_Click(sender As Object, e As EventArgs) Handles mnuReorderColumn.Click
-        dlgReorderColumns.ShowDialog()
+        'dlgReorderColumns.ShowDialog()
     End Sub
 
     Private Sub mnuConvertToFact_Click(sender As Object, e As EventArgs) Handles mnuConvertToFact.Click
@@ -681,20 +681,20 @@ Public Class ucrDataView
 
     Private Sub mnuLebelsLevel_Click(sender As Object, e As EventArgs) Handles mnuLabelsLevel.Click
         If IsFirstSelectedColumnAFactor() Then
-            dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedColumnName, _grid.CurrentWorksheet.Name)
+            'dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedColumnName, _grid.CurrentWorksheet.Name)
         End If
-        dlgLabelsLevels.ShowDialog()
+        'dlgLabelsLevels.ShowDialog()
     End Sub
 
     Private Sub mnuSorts_Click(sender As Object, e As EventArgs) Handles mnuSorts.Click
-        dlgSort.SetCurrentColumn(GetFirstSelectedColumnName, _grid.CurrentWorksheet.Name)
-        dlgSort.ShowDialog()
+        'dlgSort.SetCurrentColumn(GetFirstSelectedColumnName, _grid.CurrentWorksheet.Name)
+        'dlgSort.ShowDialog()
     End Sub
 
     Private Sub mnuFilters_Click(sender As Object, e As EventArgs) Handles mnuFilterRows.Click
-        dlgRestrict.bIsSubsetDialog = False
-        dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
-        dlgRestrict.ShowDialog()
+        'dlgRestrict.bIsSubsetDialog = False
+        'dlgRestrict.strDefaultDataframe = _grid.CurrentWorksheet.Name
+        'dlgRestrict.ShowDialog()
     End Sub
 
     Private Sub mnuRemoveCurrentFilters_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilters.Click
@@ -708,15 +708,15 @@ Public Class ucrDataView
     End Sub
 
     Private Sub linkStartNewDataFrame_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartNewDataFrame.LinkClicked
-        dlgNewDataFrame.ShowDialog()
+        'dlgNewDataFrame.ShowDialog()
     End Sub
 
     Private Sub linkStartOpenFile_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenFile.LinkClicked
-        dlgImportDataset.ShowDialog()
+        'dlgImportDataset.ShowDialog()
     End Sub
 
     Private Sub linkStartOpenLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenLibrary.LinkClicked
-        dlgFromLibrary.ShowDialog()
+        'dlgFromLibrary.ShowDialog()
     End Sub
 
     ''' <summary>
@@ -769,7 +769,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub linkHelpRpackages_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRpackages.LinkClicked
-        dlgHelpVignettes.ShowDialog()
+        'dlgHelpVignettes.ShowDialog()
     End Sub
 
     Private Sub linkHelpRInstatWebsite_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRInstatWebsite.LinkClicked
@@ -788,13 +788,13 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuColumnAddComment_Click(sender As Object, e As EventArgs) Handles mnuColumnAddComment.Click
-        dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name, strColumn:=GetFirstSelectedColumnName)
-        dlgAddComment.ShowDialog()
+        'dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name, strColumn:=GetFirstSelectedColumnName)
+        'dlgAddComment.ShowDialog()
     End Sub
 
     Private Sub mnuBottomAddComment_Click(sender As Object, e As EventArgs) Handles mnuBottomAddComment.Click
-        dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name)
-        dlgAddComment.ShowDialog()
+        'dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name)
+        'dlgAddComment.ShowDialog()
     End Sub
 
     ''' <summary>
@@ -881,8 +881,8 @@ Public Class ucrDataView
     End Sub
 
     Private Sub LoadColumnSelectionDialog()
-        dlgSelect.SetDefaultDataFrame(_grid.CurrentWorksheet.Name)
-        dlgSelect.ShowDialog()
+        'dlgSelect.SetDefaultDataFrame(_grid.CurrentWorksheet.Name)
+        'dlgSelect.ShowDialog()
     End Sub
 
     Private Sub RemoveCurrentColumnSelection()
@@ -988,9 +988,9 @@ Public Class ucrDataView
     End Sub
 
     Private Sub EditCell()
-        dlgEdit.SetCurrentDataframe(GetCurrentDataFrameNameFocus)
-        dlgEdit.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.GetCellValue(GetFirstSelectedRow() - 1, GetFirstSelectedColumnName), GetFirstSelectedRow())
-        dlgEdit.ShowDialog()
+        ''dlgEdit.SetCurrentDataframe(GetCurrentDataFrameNameFocus)
+        ''dlgEdit.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.GetCellValue(GetFirstSelectedRow() - 1, GetFirstSelectedColumnName), GetFirstSelectedRow())
+        ''dlgEdit.ShowDialog()
     End Sub
 
     Private Sub mnuEditCell_Click(sender As Object, e As EventArgs) Handles mnuEditCell.Click
@@ -998,7 +998,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub FindRow()
-        dlgFindInVariableOrFilter.ShowDialog()
+        ''dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 
     Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
