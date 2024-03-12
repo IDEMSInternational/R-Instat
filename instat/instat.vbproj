@@ -224,48 +224,10 @@
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
     <Compile Include="RSyntax2024.vb" />
-    <Compile Include="sdgHSConstants.Designer.vb">
-      <DependentUpon>sdgHSConstants.vb</DependentUpon>
+    <Compile Include="sdgCreateFilter.Designer.vb">
+      <DependentUpon>sdgCreateFilter.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgHSConstants.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgHSMissingOptions.Designer.vb">
-      <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgHSMissingOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgLocation.Designer.vb">
-      <DependentUpon>sdgLocation.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgLocation.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgPairPlotOptions.Designer.vb">
-      <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgPairPlotOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgPMConstants.Designer.vb">
-      <DependentUpon>sdgPMConstants.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgPMConstants.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgPTConstants.Designer.vb">
-      <DependentUpon>sdgPTConstants.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgPTConstants.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgSummaryThemes.Designer.vb">
-      <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgSummaryThemes.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="sdgCreateFilter.vb" />
     <Compile Include="UserControls\frmMaximiseOutput.Designer.vb">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
     </Compile>
@@ -320,88 +282,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Record\clsColumnHeaderDisplay.vb" />
-    <Compile Include="sdgClimaticDataEntry.Designer.vb">
-      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgClimaticDataEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgClimaticDataEntryOptions.Designer.vb">
-      <DependentUpon>sdgClimaticDataEntryOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgClimaticDataEntryOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
-      <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgClimaticNCMPMetadata.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgCommentForDataEntry.Designer.vb">
-      <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCommentForDataEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgConstructRegexExpression.Designer.vb">
       <DependentUpon>sdgConstructRegexExpression.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgConstructRegexExpression.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgDistributionOptions.Designer.vb">
-      <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgDistributionOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgExportToWWR.Designer.vb">
-      <DependentUpon>sdgExportToWWR.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgExportToWWR.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgExtremesDisplayOptions.Designer.vb">
-      <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgExtremesDisplayOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgExtremesMethod.Designer.vb">
-      <DependentUpon>sdgExtremesMethod.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgExtremesMethod.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgFiltersFromFactor.Designer.vb">
-      <DependentUpon>sdgFiltersFromFactor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgFiltersFromFactor.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgFormatSummaryTables.Designer.vb">
-      <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgFormatSummaryTables.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgImportFromRapidPro.Designer.vb">
-      <DependentUpon>sdgImportFromRapidPro.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgImportFromRapidPro.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgMergeColumnsToInclude.Designer.vb">
-      <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgMergeColumnsToInclude.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgMissingOptions.Designer.vb">
-      <DependentUpon>sdgMissingOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgMissingOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemesSub.Designer.vb">
@@ -411,18 +295,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="clsRains.vb" />
-    <Compile Include="sdgComment.Designer.vb">
-      <DependentUpon>sdgComment.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgComment.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgMapOption.Designer.vb">
-      <DependentUpon>sdgMapOption.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgMapOption.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmPackageIssues.Designer.vb">
       <DependentUpon>frmPackageIssues.vb</DependentUpon>
     </Compile>
@@ -436,166 +308,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="mdlCoreControl.vb" />
-    <Compile Include="sdgAddLink.Designer.vb">
-      <DependentUpon>sdgAddLink.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgAddLink.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgAddNewDistribution.Designer.vb">
-      <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgAddNewDistribution.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgClimdexIndices.Designer.vb">
-      <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgClimdexIndices.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgCorruptionCalculatedColumns.Designer.vb">
-      <DependentUpon>sdgCorruptionCalculatedColumns.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCorruptionCalculatedColumns.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgCorruptionCountryLevelColumns.Designer.vb">
-      <DependentUpon>sdgCorruptionCountryLevelColumns.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCorruptionCountryLevelColumns.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgCountryColouredMapOptions.Designer.vb">
-      <DependentUpon>sdgCountryColouredMapOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCountryColouredMapOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgDescribeDisplay.Designer.vb">
-      <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgDescribeDisplay.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgDescribeTwoVarGraph.Designer.vb">
-      <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgDescribeTwoVarGraph.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgDoyRange.Designer.vb">
       <DependentUpon>sdgDoyRange.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDoyRange.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgFactorDataFrame.Designer.vb">
-      <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgFactorDataFrame.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgFitCorruptionModelDisplay.Designer.vb">
-      <DependentUpon>sdgFitCorruptionModelDisplay.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgFitCorruptionModelDisplay.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgFrequency.Designer.vb">
-      <DependentUpon>sdgFrequency.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgFrequency.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgImportFromClimSoft.Designer.vb">
-      <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgImportFromClimSoft.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgInventoryPlot.Designer.vb">
-      <DependentUpon>sdgInventoryPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgInventoryPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgMerge.Designer.vb">
-      <DependentUpon>sdgMerge.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgMerge.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgOneVarCompareModels.Designer.vb">
-      <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgOneVarCompareModels.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgOneVarFitModDisplay.Designer.vb">
-      <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgOneVarFitModDisplay.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgOneVarFitModel.Designer.vb">
-      <DependentUpon>sdgOneVarFitModel.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgOneVarFitModel.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgOneVarGraph.Designer.vb">
-      <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgOneVarGraph.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgOneVarUseModFit.Designer.vb">
-      <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgOneVarUseModFit.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgCalculationsSummmary.Designer.vb">
-      <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCalculationsSummmary.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgOneWayFrequencies.Designer.vb">
-      <DependentUpon>sdgOneWayFrequencies.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgOneWayFrequencies.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgOpenNetCDF.Designer.vb">
-      <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgOpenNetCDF.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgParallelPlots.Designer.vb">
-      <DependentUpon>sdgParallelPlots.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgParallelPlots.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgPICSARainfallGraph.Designer.vb">
-      <DependentUpon>sdgPICSARainfallGraph.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgPICSARainfallGraph.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgPlotRegion.Designer.vb">
-      <DependentUpon>sdgPlotRegion.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgPlotRegion.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgProportionsPercentages.Designer.vb">
-      <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgProportionsPercentages.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgSaveColumnPosition.Designer.vb">
@@ -604,52 +320,16 @@
     <Compile Include="sdgSaveColumnPosition.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgSelectMonth.Designer.vb">
-      <DependentUpon>sdgSelectMonth.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgSelectMonth.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgThemes.Designer.vb">
       <DependentUpon>sdgThemes.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgThemes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgTimeSeries.Designer.vb">
-      <DependentUpon>sdgTimeSeries.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgTimeSeries.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgTwoWayFrequencies.Designer.vb">
-      <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgTwoWayFrequencies.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgVerificationSummaries.Designer.vb">
-      <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgVerificationSummaries.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgWindowNumber.Designer.vb">
       <DependentUpon>sdgWindowNumber.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgWindowNumber.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgWindrose.Designer.vb">
-      <DependentUpon>sdgWindrose.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgWindrose.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgMissingOptionsEvapotranspiration.Designer.vb">
-      <DependentUpon>sdgMissingOptionsEvapotranspiration.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgMissingOptionsEvapotranspiration.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAxes.Designer.vb">
@@ -676,52 +356,16 @@
     <Compile Include="frmSetupLoading.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgCreateFilter.Designer.vb">
-      <DependentUpon>sdgCreateFilter.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCreateFilter.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgDataOptions.Designer.vb">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDataOptions.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgSummaries.Designer.vb">
-      <DependentUpon>sdgSummaries.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgSummaries.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgLayerOptions.Designer.vb">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgLayerOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgCombineGraphOptions.Designer.vb">
-      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCombineGraphOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgModelOptions.Designer.vb">
-      <DependentUpon>sdgModelOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgModelOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgPrincipalComponentAnalysis.Designer.vb">
-      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgPrincipalComponentAnalysis.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgVariableTransformations.Designer.vb">
-      <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgVariableTransformations.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ucrAdditionalLayers.Designer.vb">
@@ -838,24 +482,6 @@
     <Compile Include="ucrInputComboBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="sdgCorrPlot.Designer.vb">
-      <DependentUpon>sdgCorrPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgCorrPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgANOVAOptions.Designer.vb">
-      <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgANOVAOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgRestrict.Designer.vb">
-      <DependentUpon>sdgRestrict.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgRestrict.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgImportDataset.Designer.vb">
       <DependentUpon>dlgImportDataset.vb</DependentUpon>
     </Compile>
@@ -923,12 +549,6 @@
       <DependentUpon>sdgPlots.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgPlots.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="sdgSimpleRegOptions.Designer.vb">
-      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgSimpleRegOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Translations.vb" />
@@ -1243,26 +863,11 @@
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgHSConstants.resx">
-      <DependentUpon>sdgHSConstants.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCreateFilter.resx">
+      <DependentUpon>sdgCreateFilter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgHSMissingOptions.resx">
-      <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgLocation.resx">
-      <DependentUpon>sdgLocation.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPairPlotOptions.resx">
-      <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPMConstants.resx">
-      <DependentUpon>sdgPMConstants.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPTConstants.resx">
-      <DependentUpon>sdgPTConstants.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgSummaryThemes.resx">
-      <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
+    <EmbeddedResource Include="sdgCreateFilter.sw-KE.resx">
+      <DependentUpon>sdgCreateFilter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmMaximiseOutput.resx">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
@@ -1271,56 +876,11 @@
     <EmbeddedResource Include="frmOutputWindow.resx">
       <DependentUpon>frmOutputWindow.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgClimaticDataEntry.resx">
-      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgClimaticDataEntryOptions.resx">
-      <DependentUpon>sdgClimaticDataEntryOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
-      <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCommentForDataEntry.resx">
-      <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgConstructRegexExpression.resx">
       <DependentUpon>sdgConstructRegexExpression.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgDistributionOptions.resx">
-      <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgExportToWWR.resx">
-      <DependentUpon>sdgExportToWWR.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgExtremesDisplayOptions.resx">
-      <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgExtremesMethod.resx">
-      <DependentUpon>sdgExtremesMethod.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFiltersFromFactor.resx">
-      <DependentUpon>sdgFiltersFromFactor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFormatSummaryTables.resx">
-      <DependentUpon>sdgFormatSummaryTables.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgImportFromRapidPro.resx">
-      <DependentUpon>sdgImportFromRapidPro.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgMergeColumnsToInclude.resx">
-      <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgMissingOptions.resx">
-      <DependentUpon>sdgMissingOptions.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgThemesSub.resx">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgComment.resx">
-      <DependentUpon>sdgComment.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgMapOption.resx">
-      <DependentUpon>sdgMapOption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSplitText.resx">
       <DependentUpon>dlgSplitText.vb</DependentUpon>
@@ -1346,225 +906,23 @@
     <EmbeddedResource Include="ImportFromDatabases.sw-KE.resx">
       <DependentUpon>ImportFromDatabases.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgAddLink.resx">
-      <DependentUpon>sdgAddLink.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgAddLink.sw-KE.resx">
-      <DependentUpon>sdgAddLink.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgAddNewDistribution.resx">
-      <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgAddNewDistribution.sw-KE.resx">
-      <DependentUpon>sdgAddNewDistribution.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCalculationsSummmary.resx">
-      <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCalculationsSummmary.sw-KE.resx">
-      <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgClimdexIndices.resx">
-      <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgClimdexIndices.sw-KE.resx">
-      <DependentUpon>sdgClimdexIndices.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCorrPlot.resx">
-      <DependentUpon>sdgCorrPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCorrPlot.sw-KE.resx">
-      <DependentUpon>sdgCorrPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCorruptionCalculatedColumns.resx">
-      <DependentUpon>sdgCorruptionCalculatedColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCorruptionCalculatedColumns.sw-KE.resx">
-      <DependentUpon>sdgCorruptionCalculatedColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCorruptionCountryLevelColumns.resx">
-      <DependentUpon>sdgCorruptionCountryLevelColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCorruptionCountryLevelColumns.sw-KE.resx">
-      <DependentUpon>sdgCorruptionCountryLevelColumns.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCountryColouredMapOptions.resx">
-      <DependentUpon>sdgCountryColouredMapOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCountryColouredMapOptions.sw-KE.resx">
-      <DependentUpon>sdgCountryColouredMapOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCreateFilter.resx">
-      <DependentUpon>sdgCreateFilter.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCreateFilter.sw-KE.resx">
-      <DependentUpon>sdgCreateFilter.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgDataOptions.resx">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDataOptions.sw-KE.resx">
       <DependentUpon>sdgDataOptions.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgDescribeTwoVarGraph.resx">
-      <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgDescribeTwoVarGraph.sw-KE.resx">
-      <DependentUpon>sdgDescribeTwoVarGraph.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgDoyRange.resx">
       <DependentUpon>sdgDoyRange.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgFactorDataFrame.resx">
-      <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFactorDataFrame.sw-KE.resx">
-      <DependentUpon>sdgFactorDataFrame.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFitCorruptionModelDisplay.resx">
-      <DependentUpon>sdgFitCorruptionModelDisplay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFitCorruptionModelDisplay.sw-KE.resx">
-      <DependentUpon>sdgFitCorruptionModelDisplay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFrequency.resx">
-      <DependentUpon>sdgFrequency.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgFrequency.sw-KE.resx">
-      <DependentUpon>sdgFrequency.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgImportFromClimSoft.resx">
-      <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgImportFromClimSoft.sw-KE.resx">
-      <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgInventoryPlot.resx">
-      <DependentUpon>sdgInventoryPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgInventoryPlot.sw-KE.resx">
-      <DependentUpon>sdgInventoryPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgMerge.resx">
-      <DependentUpon>sdgMerge.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgMerge.sw-KE.resx">
-      <DependentUpon>sdgMerge.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarCompareModels.resx">
-      <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarCompareModels.sw-KE.resx">
-      <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarFitModDisplay.resx">
-      <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarFitModDisplay.sw-KE.resx">
-      <DependentUpon>sdgOneVarFitModDisplay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarFitModel.resx">
-      <DependentUpon>sdgOneVarFitModel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarFitModel.sw-KE.resx">
-      <DependentUpon>sdgOneVarFitModel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarGraph.resx">
-      <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarGraph.sw-KE.resx">
-      <DependentUpon>sdgOneVarGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarUseModFit.resx">
-      <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneVarUseModFit.sw-KE.resx">
-      <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneWayFrequencies.resx">
-      <DependentUpon>sdgOneWayFrequencies.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOneWayFrequencies.sw-KE.resx">
-      <DependentUpon>sdgOneWayFrequencies.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOpenNetCDF.resx">
-      <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgOpenNetCDF.sw-KE.resx">
-      <DependentUpon>sdgOpenNetCDF.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgParallelPlots.resx">
-      <DependentUpon>sdgParallelPlots.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPICSARainfallGraph.resx">
-      <DependentUpon>sdgPICSARainfallGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPlotRegion.resx">
-      <DependentUpon>sdgPlotRegion.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPlotRegion.sw-KE.resx">
-      <DependentUpon>sdgPlotRegion.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgProportionsPercentages.resx">
-      <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgProportionsPercentages.sw-KE.resx">
-      <DependentUpon>sdgProportionsPercentages.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgSaveColumnPosition.resx">
       <DependentUpon>sdgSaveColumnPosition.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgSelectMonth.resx">
-      <DependentUpon>sdgSelectMonth.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgSummaries.resx">
-      <DependentUpon>sdgSummaries.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgSummaries.sw-KE.resx">
-      <DependentUpon>sdgSummaries.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgDescribeDisplay.resx">
-      <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgDescribeDisplay.sw-KE.resx">
-      <DependentUpon>sdgDescribeDisplay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLayerOptions.resx">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLayerOptions.sw-KE.resx">
       <DependentUpon>sdgLayerOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCombineGraphOptions.resx">
-      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgCombineGraphOptions.sw-KE.resx">
-      <DependentUpon>sdgCombineGraphOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgModelOptions.resx">
-      <DependentUpon>sdgModelOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgModelOptions.sw-KE.resx">
-      <DependentUpon>sdgModelOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgANOVAOptions.resx">
-      <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgANOVAOptions.sw-KE.resx">
-      <DependentUpon>sdgANOVAOptions.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPrincipalComponentAnalysis.resx">
-      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgPrincipalComponentAnalysis.sw-KE.resx">
-      <DependentUpon>sdgPrincipalComponentAnalysis.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgRestrict.resx">
-      <DependentUpon>sdgRestrict.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgRestrict.sw-KE.resx">
-      <DependentUpon>sdgRestrict.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportDataset.resx">
       <DependentUpon>dlgImportDataset.vb</DependentUpon>
@@ -1625,47 +983,14 @@
     <EmbeddedResource Include="sdgPlots.sw-KE.resx">
       <DependentUpon>sdgPlots.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgSimpleRegOptions.resx">
-      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
-      <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgThemes.resx">
       <DependentUpon>sdgThemes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemes.sw-KE.resx">
       <DependentUpon>sdgThemes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgTimeSeries.resx">
-      <DependentUpon>sdgTimeSeries.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgTwoWayFrequencies.resx">
-      <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgTwoWayFrequencies.sw-KE.resx">
-      <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgVariableTransformations.resx">
-      <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgVariableTransformations.sw-KE.resx">
-      <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgVerificationSummaries.resx">
-      <DependentUpon>sdgVerificationSummaries.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="sdgWindowNumber.resx">
       <DependentUpon>sdgWindowNumber.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgWindrose.resx">
-      <DependentUpon>sdgWindrose.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgWindrose.sw-KE.resx">
-      <DependentUpon>sdgWindrose.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgMissingOptionsEvapotranspiration.resx">
-      <DependentUpon>sdgMissingOptionsEvapotranspiration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
