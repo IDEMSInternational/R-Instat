@@ -124,7 +124,7 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
         ucrFactorOptionalReceiver.strSelectorHeading = "Variables"
 
-        ucrChkLineofBestFit.SetText("Add Line of Best Fit")
+        ucrChkLineofBestFit.SetText("Line of Best Fit")
         ucrChkLineofBestFit.AddParameterPresentCondition(True, "geom_smooth")
         ucrChkLineofBestFit.AddParameterPresentCondition(False, "geom_smooth", False)
         ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -134,10 +134,15 @@ Public Class dlgScatterPlot
         ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkWithSE.SetRDefault("TRUE")
 
-        ucrChkAddRugPlot.SetText("Add Rug Plot")
+        ucrChkAddRugPlot.SetText("Rug Plot")
         ucrChkAddRugPlot.AddParameterPresentCondition(True, "geom_rug")
         ucrChkAddRugPlot.AddParameterPresentCondition(False, "geom_rug", False)
         ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkAddSidePlot.SetText("Side Plot")
+        ucrChkAddSidePlot.Enabled = False
+
+
 
         ucrPnlGeoms.AddRadioButton(rdoJitter)
         ucrPnlGeoms.AddRadioButton(rdoPoint)
@@ -724,6 +729,42 @@ Public Class dlgScatterPlot
         End If
 
         SetPipeAssignTo()
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrSaveScatterPlot_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrChkLegend_Load(sender As Object, e As EventArgs) Handles ucrChkLegend.Load
+
+    End Sub
+
+    Private Sub ucrInputLegendPosition_Load(sender As Object, e As EventArgs) Handles ucrInputLegendPosition.Load
+
+    End Sub
+
+    Private Sub ucr1stFactorReceiver_Load(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.Load
+
+    End Sub
+
+    Private Sub lblFacetBy_Click(sender As Object, e As EventArgs) Handles lblFacetBy.Click
+
+    End Sub
+
+    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
+
+    End Sub
+
+    Private Sub ucrInputStation_Load(sender As Object, e As EventArgs) Handles ucrInputStation.Load
+
+    End Sub
+
+    Private Sub ucrSaveScatterPlot_Load(sender As Object, e As EventArgs) Handles ucrSaveScatterPlot.Load
+
     End Sub
 
     Private Sub SetPipeAssignTo()
