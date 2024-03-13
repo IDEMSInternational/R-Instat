@@ -219,7 +219,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsFileUrlUtilities.vb" />
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
@@ -258,10 +257,7 @@
     <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsGridROperations.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
-    <Compile Include="clsPopup.vb" />
-    <Compile Include="clsQualityControl.vb" />
     <Compile Include="clsRCodeStructure.vb" />
-    <Compile Include="clsRegressionDefaults.vb" />
     <Compile Include="clsThemeSubFunctions.vb" />
     <Compile Include="Enum\OutputType.vb" />
     <Compile Include="frmConvertToNumeric.Designer.vb">
@@ -338,7 +334,6 @@
     <Compile Include="ucrAxes.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="clsDistribution.vb" />
     <Compile Include="clsGeom.vb" />
     <Compile Include="clsInstatOptions.vb" />
     <Compile Include="clsRecentFiles.vb" />
