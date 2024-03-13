@@ -49,6 +49,7 @@ Public Class dlgTransform
     Private clsConstantDummyFunction As New RFunction
     Private clsNumericDummyFunction As New RFunction
     Private clsNonNegativeDummyFunction As New RFunction
+    Private clsGetColSelectionNamesFunction As New RFunction
     Private clsPreviewTextFunction As New RCodeStructure
     Private clsBooleanOperator As New ROperator
     Private clsIsNAFunction As New RFunction
@@ -77,17 +78,22 @@ Public Class dlgTransform
         Dim dctAddValues As New Dictionary(Of String, String)
         Dim dctPowerValues As New Dictionary(Of String, String)
 
+
         ucrPnlTransformOptions.AddRadioButton(rdoRank)
         ucrPnlTransformOptions.AddRadioButton(rdoNumeric)
         ucrPnlTransformOptions.AddRadioButton(rdoSort)
         ucrPnlTransformOptions.AddRadioButton(rdoNonNegative)
         ucrPnlTransformOptions.AddRadioButton(rdoScale)
+        ucrPnlColumnSelectOptions.AddRadioButton(rdoSingle)
+        ucrPnlColumnSelectOptions.AddRadioButton(rdoMultiple)
 
         ucrPnlTransformOptions.AddParameterValuesCondition(rdoRank, "check", "rank")
         ucrPnlTransformOptions.AddParameterValuesCondition(rdoNumeric, "check", "numeric")
         ucrPnlTransformOptions.AddParameterValuesCondition(rdoSort, "check", "sort")
         ucrPnlTransformOptions.AddParameterValuesCondition(rdoNonNegative, "check", "non-negative")
         ucrPnlTransformOptions.AddParameterValuesCondition(rdoScale, "check", "scale")
+        ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoSingle, "check", "single")
+        ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoMultiple, "check", "multiple")
 
         ucrReceiverRank.SetParameter(New RParameter("x", 0))
         ucrReceiverRank.Selector = ucrSelectorForRank
@@ -147,6 +153,7 @@ Public Class dlgTransform
         ucrPnlNonNegative.AddParameterValuesCondition(rdoNaturalLog, "check", "log")
         ucrPnlNonNegative.AddParameterValuesCondition(rdoPower, "check", "power")
 
+        ucrPnlColumnSelectOptions.AddToLinkedControls(ucrNewColName, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudSignifDigits, {rdoSignificantDigits}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudRoundOfDigits, {rdoRoundOf}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlNumericOptions.AddToLinkedControls(ucrNudLagLeadPosition, {rdoLead}, bNewLinkedHideIfParameterMissing:=True)
@@ -289,6 +296,12 @@ Public Class dlgTransform
         ucrChkPreview.AddParameterValuesCondition(True, "preview", "FALSE")
         ucrChkPreview.AddParameterValuesCondition(False, "preview", "TRUE")
 
+        'ucrNewColName
+        ucrNewColName.SetIsComboBox()
+        ucrNewColName.SetSaveTypeAsColumn()
+        ucrNewColName.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
+        ucrNewColName.SetLabelText("New Column:")
+        ucrNewColName.setLinkedReceiver(ucrReceiverRank)
 
         ucrChkOmitNA.SetText("Omit NA")
         ucrChkOmitNA.SetParameter(New RParameter("na.rm", 1))
@@ -333,11 +346,17 @@ Public Class dlgTransform
         clsBooleanOperator = New ROperator
         clsIsNAFunction = New RFunction
         clsRemoveLabelsFunction = New RFunction
+        clsGetColSelectionNamesFunction = New RFunction
+
 
         ucrSelectorForRank.Reset()
         ucrReceiverRank.SetMeAsReceiver()
         ucrSaveNew.Reset()
+        ucrNewColName.Reset()
         ucrInputLogicOperations.SetText("==")
+        rdoSingle.Checked = True
+        ucrNewColName.Visible = False
+        rdoMultiple.Checked = ucrNewColName.Visible
 
         clsConstantDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
         clsConstantDummyFunction.AddParameter("preview", "TRUE", iPosition:=1)
@@ -349,6 +368,8 @@ Public Class dlgTransform
         clsSortFunction.SetRCommand("sort")
         clsSortFunction.AddParameter("decreasing", "TRUE", iPosition:=1)
         clsSortFunction.AddParameter("na.last", "TRUE", iPosition:=2)
+
+        clsGetColSelectionNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_selected_column_names")
 
         clsRoundFunction.SetRCommand("round")
 
@@ -439,6 +460,7 @@ Public Class dlgTransform
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bResetRCode = False
+
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsSortFunction, ucrReceiverRank.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsRoundFunction, ucrReceiverRank.GetParameter(), iAdditionalPairNo:=2)
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsSignifFunction, ucrReceiverRank.GetParameter(), iAdditionalPairNo:=3)
@@ -455,7 +477,9 @@ Public Class dlgTransform
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsScaleMinFunction, New RParameter("x", 0), iAdditionalPairNo:=13)
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsBooleanOperator, New RParameter("x", 0), iAdditionalPairNo:=14)
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsIsNAFunction, New RParameter("x", 0), iAdditionalPairNo:=15)
+        ucrReceiverRank.AddAdditionalCodeParameterPair(clsGetColSelectionNamesFunction, New RParameter("x", 0), iAdditionalPairNo:=16)
         ucrChkOmitNA.AddAdditionalCodeParameterPair(clsStandardDevFunction, ucrChkOmitNA.GetParameter(), iAdditionalPairNo:=1)
+        ucrSelectorForRank.AddAdditionalCodeParameterPair(clsGetColSelectionNamesFunction, ucrSelectorForRank.GetParameter, iAdditionalPairNo:=1)
 
         ucrSaveNew.AddAdditionalRCode(clsLeadFunction, iAdditionalPairNo:=1)
         ucrSaveNew.AddAdditionalRCode(clsLagFunction, iAdditionalPairNo:=2)
@@ -496,6 +520,8 @@ Public Class dlgTransform
         ucrPnlNonNegative.SetRCode(clsNonNegativeDummyFunction, bReset)
         ucrChkOmitNA.SetRCode(clsMeanFunction, bReset)
         ucrChkPreview.SetRCode(clsConstantDummyFunction, bReset)
+
+
         bResetRCode = True
     End Sub
 
@@ -512,8 +538,14 @@ Public Class dlgTransform
     End Sub
 
     Private Sub NewDefaultName()
-        If (Not ucrSaveNew.bUserTyped) AndAlso Not ucrReceiverRank.IsEmpty Then
-            ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
+        If rdoSingle.Checked Then
+            If (Not ucrSaveNew.bUserTyped) AndAlso Not ucrReceiverRank.IsEmpty Then
+                ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
+            End If
+        ElseIf rdoMultiple.Checked Then
+            If (Not ucrNewColName.bUserTyped) AndAlso Not ucrReceiverRank.IsEmpty Then
+                ucrNewColName.SetName(ucrReceiverRank.GetVariableNames(bWithQuotes:=False) & "_transformed")
+            End If
         End If
     End Sub
 
@@ -524,13 +556,27 @@ Public Class dlgTransform
         ucrChkEditPreview.Checked = False
     End Sub
 
-    Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged, ucrInputLogicalValues.ControlValueChanged,
+    Private Sub ucrPnlTransformOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformOptions.ControlValueChanged, ucrPnlNumericOptions.ControlValueChanged, ucrPnlColumnSelectOptions.ControlValueChanged, ucrInputLogicalValues.ControlValueChanged,
         ucrPnlNonNegative.ControlValueChanged, ucrPnlMissingValues.ControlValueChanged, ucrPnlTies.ControlValueChanged, ucrChkPreview.ControlValueChanged, ucrReceiverRank.ControlValueChanged, ucrNudDiffLag.ControlValueChanged, ucrNudLagLeadPosition.ControlValueChanged,
         ucrNudLagPosition.ControlValueChanged, ucrNudRoundOfDigits.ControlValueChanged, ucrNudSignifDigits.ControlValueChanged, ucrInputPower.ControlValueChanged, ucrInputMultiply.ControlValueChanged,
         ucrInputDivide.ControlValueChanged, ucrInputConstant.ControlValueChanged, ucrInputAdd.ControlValueChanged, ucrChkOmitNA.ControlValueChanged, ucrInputLogicOperations.ControlValueChanged, ucrChkAddConstant.ControlValueChanged,
         ucrChkMissingLast.ControlValueChanged, ucrChkDecreasing.ControlValueChanged, ucrChkDivide.ControlValueChanged, ucrChkAdd.ControlValueChanged, ucrChkMultiply.ControlValueChanged, ucrChkSubtract.ControlValueChanged
         If bResetRCode Then
             ucrBase.clsRsyntax.ClearCodes()
+            If rdoMultiple.Checked Then
+                clsDummyTransformFunction.AddParameter("check", "select", iPosition:=0)
+                ucrSelectorForRank.SetItemType("column_selection")
+                ucrReceiverRank.strSelectorHeading = "Column selections"
+                lblSelectColumns.Text = "Select:"
+            ElseIf rdoSingle.Checked Then
+                clsDummyTransformFunction.AddParameter("check", "variable", iPosition:=0)
+                ucrReceiverRank.bUseFilteredData = False
+                ucrReceiverRank.SetParameterIsRFunction()
+                ucrSelectorForRank.SetItemType("column")
+                ucrReceiverRank.strSelectorHeading = "Numerics"
+                lblSelectColumns.Text = "Column:"
+
+            End If
             If rdoRank.Checked Then
                 clsPreviewTextFunction = clsRankFunction.Clone
                 clsDummyTransformFunction.AddParameter("check", "rank", iPosition:=0)
@@ -722,7 +768,7 @@ Public Class dlgTransform
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveNew.ControlContentsChanged,
-        ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged, ucrPnlNonNegative.ControlContentsChanged, ucrChkDivide.ControlContentsChanged,
+        ucrPnlTransformOptions.ControlContentsChanged, ucrPnlNumericOptions.ControlContentsChanged, ucrPnlColumnSelectOptions.ControlContentsChanged, ucrPnlNonNegative.ControlContentsChanged, ucrChkDivide.ControlContentsChanged,
         ucrChkMultiply.ControlContentsChanged, ucrChkSubtract.ControlContentsChanged, ucrChkAdd.ControlContentsChanged, ucrChkPreview.ControlContentsChanged,
         ucrChkAddConstant.ControlContentsChanged, ucrInputPower.ControlContentsChanged, ucrInputPreview.ControlContentsChanged, ucrInputLogicalValues.ControlContentsChanged, ucrInputLogicOperations.ControlContentsChanged
         TestOKEnabled()
