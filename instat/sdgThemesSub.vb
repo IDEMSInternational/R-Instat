@@ -19,7 +19,7 @@ Imports instat.Translations
 
 Public Class sdgThemesSub
     Public bControlsInitialised As Boolean = False
-    Private clsThemesFunction, clsCFunction, clsElementPlotTitle, clsAxesTitles, clsElementPanelGridMinor, clsElementPanelGridMajor, clsXElementTitle, clsYElementTitle, clsAllLabels, clsXAxisLables, clsYAxisLabels, clsAllTickMarks, clsXAxisTickMarks, clsYAxisTickMarks, clsUnitAxisTickLength, clsAllAxisLines, clsXAxisLine, clsYAxisLine, clsElementLineXAxis, clsElementLineYAxis As New RFunction
+    Private clsThemesFunction, clsCFunction, clsGuideFunction1, clsGuideFunction, clsElementPlotTitle, clsAxesTitles, clsElementPanelGridMinor, clsElementPanelGridMajor, clsXElementTitle, clsYElementTitle, clsAllLabels, clsXAxisLables, clsYAxisLabels, clsAllTickMarks, clsXAxisTickMarks, clsYAxisTickMarks, clsUnitAxisTickLength, clsAllAxisLines, clsXAxisLine, clsYAxisLine, clsElementLineXAxis, clsElementLineYAxis As New RFunction
     Private clsAllPanelGrid, clsPanelGridMajor, clsPanelGridMinor, clsDummyFunction, clsPanelBackground, clsPanelBorder As New RFunction
     Private clsBaseOperator As New ROperator
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -92,17 +92,45 @@ Public Class sdgThemesSub
         ucrNudY.SetRDefault("0")
         ucrNudY.SetLinkedDisplayControl(lblYCoord)
 
+        ucrPnlDirection.AddRadioButton(rdoVertical)
+        ucrPnlDirection.AddRadioButton(rdoHorizontal)
+        ucrPnlDirection.AddParameterValuesCondition(rdoVertical, "legend.direction", "Vertical")
+        ucrPnlDirection.AddParameterValuesCondition(rdoHorizontal, "legend.direction", "Horizontal")
+
+        ucrPnlReverse.AddRadioButton(rdoColour)
+        ucrPnlReverse.AddRadioButton(rdoFill)
+        ucrPnlReverse.AddParameterValuesCondition(rdoColour, "checked", "Colour")
+        ucrPnlReverse.AddParameterValuesCondition(rdoFill, "checked", "Fill")
+
+        ucrChkDirection.SetParameter(New RParameter("legend.direction", 8))
+        ucrChkDirection.SetText("Direction")
+        ucrChkDirection.AddParameterPresentCondition(True, "legend.direction", True)
+        ucrChkDirection.AddParameterPresentCondition(False, "legend.direction", False)
+        ucrChkDirection.AddToLinkedControls(ucrPnlDirection, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkReverse.SetText("Reverse")
+         ucrChkReverse.SetParameter(New RParameter("guides", 4))
+        ucrChkReverse.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkReverse.SetRDefault("FALSE")
+        ucrChkReverse.AddToLinkedControls(ucrPnlReverse, {True}, bNewLinkedHideIfParameterMissing:=True)
+
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsBaseOperator As ROperator, clsNewThemesFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewBaseOperator As ROperator, clsNewGuideFunction As RFunction, clsNewGuideLegendFunction As RFunction, clsNewGuideFunction1 As RFunction, clsNewGuideLegendFunction1 As RFunction, clsNewThemesFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), Optional bReset As Boolean = False)
 
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
+        clsGuideFunction = clsNewGuideFunction
+        clsGuideFunction1 = clsNewGuideFunction1
+        clsBaseOperator = clsNewBaseOperator
+
         clsDummyFunction = New RFunction
         clsDummyFunction.AddParameter("legend", "coordinated", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "Fill", iPosition:=1)
+        clsDummyFunction.AddParameter("legend.direction", "Vertical", iPosition:=2)
 
         clsCFunction = New RFunction
         clsCFunction.SetRCommand("c")
@@ -157,11 +185,15 @@ Public Class sdgThemesSub
         ucrPanelBackground.SetRCodeForControl("panel.background", clsThemesSubFunctions.clsElementPanelBackGround, clsNewThemeFunction:=clsThemesFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         If bReset Then
+            ucrChkReverse.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
             ucrNudX.SetRCode(clsCFunction, bReset)
             ucrNudY.SetRCode(clsCFunction, bReset)
             ucrChkRemoveLegend.SetRCode(clsThemesFunction, bReset, bCloneIfNeeded:=True)
             ucrInputLegendPosition.SetRCode(clsThemesFunction, bReset, bCloneIfNeeded:=True)
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+            ucrPnlReverse.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+            ucrPnlDirection.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
+            ucrChkDirection.SetRCode(clsThemesFunction, bReset, bCloneIfNeeded:=True)
         End If
     End Sub
 
@@ -185,6 +217,31 @@ Public Class sdgThemesSub
 
     Private Sub ucrNudX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudX.ControlValueChanged, ucrNudY.ControlValueChanged
         LegendOptions()
+    End Sub
+
+    Private Sub ucrChkReverse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkReverse.ControlValueChanged, ucrPnlReverse.ControlValueChanged
+        clsBaseOperator.RemoveParameterByName("guides")
+        clsBaseOperator.RemoveParameterByName("guides1")
+        If ucrChkReverse.Checked Then
+
+            If rdoFill.Checked Then
+                clsBaseOperator.AddParameter("guides", clsRFunctionParameter:=clsGuideFunction)
+            ElseIf rdoColour.Checked Then
+                clsBaseOperator.AddParameter("guides1", clsRFunctionParameter:=clsGuideFunction1)
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkDirection_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDirection.ControlValueChanged, ucrPnlDirection.ControlValueChanged
+        If ucrChkDirection.Checked Then
+            If rdoVertical.Checked Then
+                clsThemesFunction.AddParameter("legend.direction", Chr(34) & "vertical" & Chr(34), iPosition:=1)
+            Else
+                clsThemesFunction.AddParameter("legend.direction", Chr(34) & "horizontal" & Chr(34), iPosition:=1)
+            End If
+        Else
+            clsThemesFunction.RemoveParameterByName("legend.direction")
+        End If
     End Sub
 End Class
 
