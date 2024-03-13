@@ -376,12 +376,6 @@
     <Compile Include="ucrAdditionalLayers.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrCalculator.Designer.vb">
-      <DependentUpon>ucrCalculator.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrCalculator.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucrCheck.Designer.vb">
       <DependentUpon>ucrCheck.vb</DependentUpon>
     </Compile>
@@ -1017,12 +1011,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrButtonsSubdialogue.sw-KE.resx">
       <DependentUpon>ucrButtonsSubdialogue.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrCalculator.resx">
-      <DependentUpon>ucrCalculator.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrCalculator.sw-KE.resx">
-      <DependentUpon>ucrCalculator.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrCheck.resx">
       <DependentUpon>ucrCheck.vb</DependentUpon>
