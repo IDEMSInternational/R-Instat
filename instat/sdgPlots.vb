@@ -23,7 +23,7 @@ Public Class sdgPlots
     'Question to be discussed: Maybe there is a need for a more radical change: create a clsGgplot that would be carried through all graphics components and contain all the well organised ggplot necessary info, about different Layers, different parameters, theme, ... Then in the main dlg's initiating plots, there would be a method that interprets the info in clsGgplot inside the RSyntax. Big project, don't know if it's worth it, but could make things cleaner, easier to work with ? Maybe need a more detailed sketch of how this would be implemented before making decision whether it's worth the time investment or not...
     'Reaction to question/Task/more questions: Alternatively the RSyntax is already sort of playing this role. So maybe facilitating the access to the information stored inthe Rsyntax instead ? (Would consist in just writing a few methods ?) Then cleaning the material that is carried through to different graphics components editors by essentially sending the RSyntax ? But extracting deep info is probably combersome to do several times... Which is why there are these clsGgplotFunction, clsAesFunction ... ? Need to create a diagram of what is shared by whom, how and for what purpose in order to clarify best strategy...
     'Task: write an issue/proposal about this when ideas are a bit clearer.
-    Public clsRsyntax As New RSyntax
+    Public clsRsyntax As New RSyntax2024
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
     Public clsRggplotFunction As New RFunction
     Public clsGlobalAesFunction As New RFunction
@@ -3152,11 +3152,6 @@ Public Class sdgPlots
         tbpLayers.Enabled = True
     End Sub
 
-
-    'To be removed but affects multiple dialogs
-    Public Sub SetRSyntax(Optional clsRSyntax As RSyntax = Nothing)
-
-    End Sub
 
     'To be removed but affects multiple dialogs
     Public Sub Reset()
