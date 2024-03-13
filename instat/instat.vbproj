@@ -630,12 +630,6 @@
     <Compile Include="ucrReceiverSingle.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrReceiverSingleNew.Designer.vb">
-      <DependentUpon>ucrReceiverSingleNew.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrReceiverSingleNew.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucrReorder.Designer.vb">
       <DependentUpon>ucrReorder.vb</DependentUpon>
     </Compile>
@@ -658,12 +652,6 @@
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrSelector.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrSelectorAddRemove.designer.vb">
-      <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrSelectorAddRemove.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrSelectorByDataFrame.Designer.vb">
@@ -692,18 +680,6 @@
     </Compile>
     <Compile Include="ucrSplitButton.vb">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ucrTry.Designer.vb">
-      <DependentUpon>ucrTry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrTry.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrVariablename.designer.vb">
-      <DependentUpon>ucrVariablename.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrVariablename.vb">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrVariablesAsFactor.Designer.vb">
       <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
@@ -1123,9 +1099,6 @@
     <EmbeddedResource Include="ucrReceiverSingle.sw-KE.resx">
       <DependentUpon>ucrReceiverSingle.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrReceiverSingleNew.resx">
-      <DependentUpon>ucrReceiverSingleNew.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ucrReorder.resx">
       <DependentUpon>ucrReorder.vb</DependentUpon>
     </EmbeddedResource>
@@ -1150,12 +1123,6 @@
     <EmbeddedResource Include="ucrSelector.sw-KE.resx">
       <DependentUpon>ucrSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrSelectorAddRemove.resx">
-      <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrSelectorAddRemove.sw-KE.resx">
-      <DependentUpon>ucrSelectorAddRemove.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorByDataFrame.resx">
       <DependentUpon>ucrSelectorByDataFrame.vb</DependentUpon>
     </EmbeddedResource>
@@ -1173,15 +1140,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrElementLineControl.resx">
       <DependentUpon>ucrElementLineControl.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrTry.resx">
-      <DependentUpon>ucrTry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrVariablename.resx">
-      <DependentUpon>ucrVariablename.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrVariablename.sw-KE.resx">
-      <DependentUpon>ucrVariablename.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablesAsFactor.resx">
       <DependentUpon>ucrVariablesAsFactor.vb</DependentUpon>
