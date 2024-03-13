@@ -96,7 +96,7 @@ Partial Class dlgInstallRPackage
         '
         Me.lblRepository.AutoSize = True
         Me.lblRepository.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRepository.Location = New System.Drawing.Point(3, 98)
+        Me.lblRepository.Location = New System.Drawing.Point(3, 72)
         Me.lblRepository.Name = "lblRepository"
         Me.lblRepository.Size = New System.Drawing.Size(91, 13)
         Me.lblRepository.TabIndex = 24
@@ -147,7 +147,7 @@ Partial Class dlgInstallRPackage
         Me.ucrInputRepositoryName.AutoSize = True
         Me.ucrInputRepositoryName.IsMultiline = False
         Me.ucrInputRepositoryName.IsReadOnly = False
-        Me.ucrInputRepositoryName.Location = New System.Drawing.Point(93, 95)
+        Me.ucrInputRepositoryName.Location = New System.Drawing.Point(93, 69)
         Me.ucrInputRepositoryName.Name = "ucrInputRepositoryName"
         Me.ucrInputRepositoryName.Size = New System.Drawing.Size(197, 22)
         Me.ucrInputRepositoryName.TabIndex = 23
@@ -164,10 +164,10 @@ Partial Class dlgInstallRPackage
         Me.Controls.Add(Me.lblRPackage)
         Me.Controls.Add(Me.ucrInputTextBoxRPackage)
         Me.Controls.Add(Me.ucrPnlRPackages)
-        Me.Controls.Add(Me.cmdCheck)
-        Me.Controls.Add(Me.ucrInputMessage)
         Me.Controls.Add(Me.ucrInputRepositoryName)
         Me.Controls.Add(Me.lblRepository)
+        Me.Controls.Add(Me.cmdCheck)
+        Me.Controls.Add(Me.ucrInputMessage)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
