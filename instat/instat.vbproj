@@ -576,12 +576,6 @@
     <Compile Include="ucrLayerParamsControls.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrMultipleInput.Designer.vb">
-      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrMultipleInput.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucrNewColumnName.Designer.vb">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
     </Compile>
@@ -1074,12 +1068,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrLayerParamsControls.sw-KE.resx">
       <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrMultipleInput.resx">
-      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrMultipleInput.sw-KE.resx">
-      <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNewColumnName.resx">
       <DependentUpon>ucrNewColumnName.vb</DependentUpon>
