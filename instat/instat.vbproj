@@ -424,22 +424,10 @@
     <Compile Include="ucrDayOfYear.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrDialogDisabled.Designer.vb">
-      <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrDialogDisabled.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="ucrElementRectControl.Designer.vb">
       <DependentUpon>ucrElementRectControl.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrElementRectControl.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrFilePath.Designer.vb">
-      <DependentUpon>ucrFilePath.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrFilePath.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrFilter.Designer.vb">
@@ -558,24 +546,6 @@
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrDataFrame.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrDataSelection.designer.vb">
-      <DependentUpon>ucrDataSelection.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrDataSelection.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrDistributions.Designer.vb">
-      <DependentUpon>ucrDistributions.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrDistributions.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucrDistributionsWithParameters.Designer.vb">
-      <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrDistributionsWithParameters.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrFactor.Designer.vb">
@@ -1033,12 +1003,6 @@
     <EmbeddedResource Include="ucrDataFrameMetadata.sw-KE.resx">
       <DependentUpon>ucrDataFrameMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrDataSelection.resx">
-      <DependentUpon>ucrDataSelection.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrDataSelection.sw-KE.resx">
-      <DependentUpon>ucrDataSelection.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataView.resx">
       <DependentUpon>ucrDataView.vb</DependentUpon>
     </EmbeddedResource>
@@ -1050,24 +1014,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDayOfYear.resx">
       <DependentUpon>ucrDayOfYear.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrDialogDisabled.resx">
-      <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrDialogDisabled.sw-KE.resx">
-      <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrDistributions.resx">
-      <DependentUpon>ucrDistributions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrDistributions.sw-KE.resx">
-      <DependentUpon>ucrDistributions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrDistributionsWithParameters.resx">
-      <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrDistributionsWithParameters.sw-KE.resx">
-      <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrElementLineControl.sw-KE.resx">
       <DependentUpon>ucrElementLineControl.vb</DependentUpon>
@@ -1086,9 +1032,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucrFilePath.resx">
-      <DependentUpon>ucrFilePath.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFilter.resx">
       <DependentUpon>ucrFilter.vb</DependentUpon>
