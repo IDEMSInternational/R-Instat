@@ -99,36 +99,6 @@
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the list of scripts associated with the <paramref name="lstCodes"/> 
-    '''             list of R functions/operators/commands.
-    '''             If a list object is flagged to exclude the script's output, and the output has 
-    '''             already been assigned, then the list object's script does not include the output 
-    '''             part.</summary>
-    '''
-    ''' <param name="lstCodes"> The list of R functions/operators/commands. </param>
-    '''
-    ''' <returns>   list of scripts associated with the <paramref name="lstCodes"/>
-    '''             list of R functions/operators/commands. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Private Function GetScriptsFromCodeList(lstCodes As List(Of RCodeStructure)) As List(Of String)
-        Dim strItemScript As String = "" 'TODO SJL 06/04/20 redundant assignments
-        Dim strTemp As String = ""
-        Dim lstScripts As New List(Of String)
-
-        For Each clsTempCode In lstCodes
-            strItemScript = ""
-            strTemp = clsTempCode.ToScript(strItemScript)
-            'Sometimes the output of the R-command we deal with should not be part of the script... 
-            If clsTempCode.bExcludeAssignedFunctionOutput AndAlso Not String.IsNullOrEmpty(clsTempCode.GetRObjectToAssignTo) Then
-                lstScripts.Add(strItemScript)
-            Else
-                lstScripts.Add(strItemScript & strTemp)
-            End If
-        Next
-        Return lstScripts
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Returns the list of scripts associated with the list of 'before' R 
     '''             functions/operators/commands (i.e. the ones that run before the base R code).
     '''             If a list object is flagged to exclude the script's output, and the output has
@@ -213,35 +183,6 @@
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the relative positions of <paramref name="clsMain"/> and 
-    '''             <paramref name="clsRelative"/>.
-    '''             If both have the same position then returns 0.
-    '''             If <paramref name="clsMain"/> is positioned before, then returns -1.
-    '''             If <paramref name="clsRelative"/> is positioned before, then returns 1. </summary>
-    '''
-    ''' <param name="clsMain">      First object to compare </param>
-    ''' <param name="clsRelative">  Second object to compare. </param>
-    '''
-    ''' <returns>   The relative positions of <paramref name="clsMain"/> and <paramref name="clsRelative"/>.
-    '''             If both have the same position then returns 0.
-    '''             If <paramref name="clsMain"/> is positioned before, then returns -1.
-    '''             If <paramref name="clsRelative"/> is positioned before, then returns 1.
-    '''             </returns>
-    '''--------------------------------------------------------------------------------------------
-    Private Function CompareCodePositions(ByVal clsMain As RCodeStructure, ByVal clsRelative As RCodeStructure) As Integer
-        'Compares two RParameters according to their Position property. If x is "smaller" than y, then return -1, if they are "equal" return 0 else return 1.
-        If clsMain.iPosition = clsRelative.iPosition Then
-            Return 0
-        ElseIf clsRelative.iPosition = -1 Then
-            Return -1
-        ElseIf clsMain.iPosition = -1 Then
-            Return 1
-        Else
-            Return clsMain.iPosition.CompareTo(clsRelative.iPosition)
-        End If
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Returns true if the <paramref name="clsRCode"/> R function/operator/command is
     '''             the R function/operator/command associated with this object. Also returns true 
     '''             if <paramref name="clsRCode"/> is in this object's 'before' or 'after' lists. 
@@ -309,4 +250,64 @@
             lstAfterCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPosition
         End If
     End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Returns the list of scripts associated with the <paramref name="lstCodes"/> 
+    '''             list of R functions/operators/commands.
+    '''             If a list object is flagged to exclude the script's output, and the output has 
+    '''             already been assigned, then the list object's script does not include the output 
+    '''             part.</summary>
+    '''
+    ''' <param name="lstCodes"> The list of R functions/operators/commands. </param>
+    '''
+    ''' <returns>   list of scripts associated with the <paramref name="lstCodes"/>
+    '''             list of R functions/operators/commands. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function GetScriptsFromCodeList(lstCodes As List(Of RCodeStructure)) As List(Of String)
+        Dim strItemScript As String
+        Dim strTemp As String
+        Dim lstScripts As New List(Of String)
+
+        For Each clsTempCode In lstCodes
+            strItemScript = ""
+            strTemp = clsTempCode.ToScript(strItemScript)
+            'Sometimes the output of the R-command we deal with should not be part of the script... 
+            If clsTempCode.bExcludeAssignedFunctionOutput AndAlso Not String.IsNullOrEmpty(clsTempCode.GetRObjectToAssignTo) Then
+                lstScripts.Add(strItemScript)
+            Else
+                lstScripts.Add(strItemScript & strTemp)
+            End If
+        Next
+        Return lstScripts
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Returns the relative positions of <paramref name="clsMain"/> and 
+    '''             <paramref name="clsRelative"/>.
+    '''             If both have the same position then returns 0.
+    '''             If <paramref name="clsMain"/> is positioned before, then returns -1.
+    '''             If <paramref name="clsRelative"/> is positioned before, then returns 1. </summary>
+    '''
+    ''' <param name="clsMain">      First object to compare </param>
+    ''' <param name="clsRelative">  Second object to compare. </param>
+    '''
+    ''' <returns>   The relative positions of <paramref name="clsMain"/> and <paramref name="clsRelative"/>.
+    '''             If both have the same position then returns 0.
+    '''             If <paramref name="clsMain"/> is positioned before, then returns -1.
+    '''             If <paramref name="clsRelative"/> is positioned before, then returns 1.
+    '''             </returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function CompareCodePositions(ByVal clsMain As RCodeStructure, ByVal clsRelative As RCodeStructure) As Integer
+        'Compares two RParameters according to their Position property. If x is "smaller" than y, then return -1, if they are "equal" return 0 else return 1.
+        If clsMain.iPosition = clsRelative.iPosition Then
+            Return 0
+        ElseIf clsRelative.iPosition = -1 Then
+            Return -1
+        ElseIf clsMain.iPosition = -1 Then
+            Return 1
+        Else
+            Return clsMain.iPosition.CompareTo(clsRelative.iPosition)
+        End If
+    End Function
+
 End Class
