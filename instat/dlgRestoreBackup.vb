@@ -178,27 +178,21 @@ Public Class dlgRestoreBackup
     End Sub
 
     Private Sub cmdLoadData_Click(sender As Object, e As EventArgs) Handles cmdLoadData.Click
-        If MsgBox("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.Yes Then
-            SaveFiles()
-            strLoadDateFilePath = strAutoSavedDataFilePaths(0)
-            bUserClose = False
-            Close()
-        End If
+        SaveFiles()
+        strLoadDateFilePath = strAutoSavedDataFilePaths(0)
+        bUserClose = False
+        Close()
     End Sub
 
     Private Sub cmdCloseSession_Click(sender As Object, e As EventArgs) Handles cmdCloseSession.Click
-        If MsgBox("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.Yes Then
-            SaveFiles()
-            bUserClose = False
-            Close()
-        End If
+        SaveFiles()
+        bUserClose = False
+        Close()
     End Sub
 
     Private Sub dlgRestoreBackup_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If bUserClose Then
-            If MsgBox("Are you sure you are finished?" & Environment.NewLine & "You cannot return to this dialog after leaving and any unsaved recovered files will be lost.", MessageBoxButtons.YesNo, "Are you finished?") = MsgBoxResult.No Then
-                e.Cancel = True
-            End If
+            e.Cancel = True
         End If
         DeleteTempFiles()
     End Sub
