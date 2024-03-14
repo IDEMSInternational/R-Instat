@@ -526,7 +526,6 @@ Public Class ucrCalculator
     Private Sub CalculationsOptions()
         Select Case ucrInputCalOptions.GetText
             Case "Maths"
-                '  strPackageName = "base"
                 strPackageName = "stats"
                 grpSummary.Visible = False
                 grpMaths.Visible = True
@@ -4795,19 +4794,34 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
-    Private Sub cmdMathsHelp_Click(sender As Object, e As EventArgs) Handles cmdMathsHelp.Click, MathsStatsStripMenuItem.Click
+    Private Sub cmdMathsHelp_Click(sender As Object, e As EventArgs) Handles cmdMathsHelp.Click, MathsBaseStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Maths" Then
             strPackageName = "base"
-            OpenHelpPage()
-            strPackageName = "stats"
-            OpenHelpPage()
-            'strPackageName = "car"
-            'OpenHelpPage()
-            'strPackageName = "circular"
-            'OpenHelpPage()
         End If
-        '  OpenHelpPage()
+        OpenHelpPage()
+    End Sub
+
+
+    Private Sub MathsStatsStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsStatsStripMenuItem.Click
+        If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MathsCarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsCarToolStripMenuItem.Click
+        If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "car"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MathsCirucarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsCirucarToolStripMenuItem.Click
+        If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "circular"
+        End If
+        OpenHelpPage()
     End Sub
 
     Private Sub cmdTransformHelp_Click(sender As Object, e As EventArgs) Handles cmdTransformHelp.Click, FactorForcatsToolStripMenuItem.Click

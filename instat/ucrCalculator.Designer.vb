@@ -612,42 +612,45 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.grpBasic.SuspendLayout
-        Me.grpDates.SuspendLayout
-        Me.ContextMenuStripDate.SuspendLayout
-        Me.ContextMenuStripComplex.SuspendLayout
-        Me.grpInteger.SuspendLayout
-        Me.ContextMenuStripInteger.SuspendLayout
-        Me.grpFactor.SuspendLayout
-        Me.ContextMenuStripFactor.SuspendLayout
-        Me.grpHydroGOF.SuspendLayout
-        Me.ContextMenuStripHydroGOF.SuspendLayout
-        Me.grpWakefield.SuspendLayout
-        Me.grpMaths.SuspendLayout
-        Me.ContextMenuStripMaths.SuspendLayout
-        Me.grpSummary.SuspendLayout
-        Me.ContextMenuStripSummary.SuspendLayout
-        Me.grpFrequencies.SuspendLayout
-        Me.grpProbabilty.SuspendLayout
-        Me.ContextMenuStripProbability.SuspendLayout
-        Me.grpRandom.SuspendLayout
-        Me.grpTransform.SuspendLayout
-        Me.ContextMenuStripTransform.SuspendLayout
-        Me.grpLogical.SuspendLayout
-        Me.ContextMenuStripLogical.SuspendLayout
-        Me.grpTestString.SuspendLayout
-        Me.grpCircular.SuspendLayout
-        Me.ContextMenuStripCircular.SuspendLayout
-        Me.grpModifier.SuspendLayout
-        Me.grpSymbols.SuspendLayout
-        Me.grpComplex.SuspendLayout
-        Me.ContextMenuStripTxtString.SuspendLayout
-        Me.ContextMenuStripWakefield.SuspendLayout
-        Me.ContextMenuStripList.SuspendLayout
-        Me.grpList.SuspendLayout
-        Me.GroupBox1.SuspendLayout
-        Me.grpMathBloc.SuspendLayout
-        Me.SuspendLayout
+        Me.MathsBaseStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MathsCarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MathsCirucarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.grpBasic.SuspendLayout()
+        Me.grpDates.SuspendLayout()
+        Me.ContextMenuStripDate.SuspendLayout()
+        Me.ContextMenuStripComplex.SuspendLayout()
+        Me.grpInteger.SuspendLayout()
+        Me.ContextMenuStripInteger.SuspendLayout()
+        Me.grpFactor.SuspendLayout()
+        Me.ContextMenuStripFactor.SuspendLayout()
+        Me.grpHydroGOF.SuspendLayout()
+        Me.ContextMenuStripHydroGOF.SuspendLayout()
+        Me.grpWakefield.SuspendLayout()
+        Me.grpMaths.SuspendLayout()
+        Me.ContextMenuStripMaths.SuspendLayout()
+        Me.grpSummary.SuspendLayout()
+        Me.ContextMenuStripSummary.SuspendLayout()
+        Me.grpFrequencies.SuspendLayout()
+        Me.grpProbabilty.SuspendLayout()
+        Me.ContextMenuStripProbability.SuspendLayout()
+        Me.grpRandom.SuspendLayout()
+        Me.grpTransform.SuspendLayout()
+        Me.ContextMenuStripTransform.SuspendLayout()
+        Me.grpLogical.SuspendLayout()
+        Me.ContextMenuStripLogical.SuspendLayout()
+        Me.grpTestString.SuspendLayout()
+        Me.grpCircular.SuspendLayout()
+        Me.ContextMenuStripCircular.SuspendLayout()
+        Me.grpModifier.SuspendLayout()
+        Me.grpSymbols.SuspendLayout()
+        Me.grpComplex.SuspendLayout()
+        Me.ContextMenuStripTxtString.SuspendLayout()
+        Me.ContextMenuStripWakefield.SuspendLayout()
+        Me.ContextMenuStripList.SuspendLayout()
+        Me.grpList.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.grpMathBloc.SuspendLayout()
+        Me.SuspendLayout()
         '
         'lblExpression
         '
@@ -3027,14 +3030,14 @@ Partial Class ucrCalculator
         'ContextMenuStripMaths
         '
         Me.ContextMenuStripMaths.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ContextMenuStripMaths.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MathsStatsStripMenuItem})
+        Me.ContextMenuStripMaths.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MathsBaseStripMenuItem, Me.MathsStatsStripMenuItem, Me.MathsCarToolStripMenuItem, Me.MathsCirucarToolStripMenuItem})
         Me.ContextMenuStripMaths.Name = "ContextMenuStrip1"
-        Me.ContextMenuStripMaths.Size = New System.Drawing.Size(109, 28)
+        Me.ContextMenuStripMaths.Size = New System.Drawing.Size(211, 128)
         '
         'MathsStatsStripMenuItem
         '
         Me.MathsStatsStripMenuItem.Name = "MathsStatsStripMenuItem"
-        Me.MathsStatsStripMenuItem.Size = New System.Drawing.Size(108, 24)
+        Me.MathsStatsStripMenuItem.Size = New System.Drawing.Size(210, 24)
         Me.MathsStatsStripMenuItem.Text = "stats"
         '
         'cmdAtan2
@@ -7308,6 +7311,24 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'MathsBaseStripMenuItem
+        '
+        Me.MathsBaseStripMenuItem.Name = "MathsBaseStripMenuItem"
+        Me.MathsBaseStripMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.MathsBaseStripMenuItem.Text = "base"
+        '
+        'MathsCarToolStripMenuItem
+        '
+        Me.MathsCarToolStripMenuItem.Name = "MathsCarToolStripMenuItem"
+        Me.MathsCarToolStripMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.MathsCarToolStripMenuItem.Text = "car"
+        '
+        'MathsCirucarToolStripMenuItem
+        '
+        Me.MathsCirucarToolStripMenuItem.Name = "MathsCirucarToolStripMenuItem"
+        Me.MathsCirucarToolStripMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.MathsCirucarToolStripMenuItem.Text = "cirucar"
+        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -7344,44 +7365,44 @@ Partial Class ucrCalculator
         Me.Size = New System.Drawing.Size(1123, 572)
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
-        Me.grpDates.PerformLayout
+        Me.grpDates.PerformLayout()
         Me.ContextMenuStripDate.ResumeLayout(False)
         Me.ContextMenuStripComplex.ResumeLayout(False)
         Me.grpInteger.ResumeLayout(False)
-        Me.grpInteger.PerformLayout
+        Me.grpInteger.PerformLayout()
         Me.ContextMenuStripInteger.ResumeLayout(False)
         Me.grpFactor.ResumeLayout(False)
-        Me.grpFactor.PerformLayout
+        Me.grpFactor.PerformLayout()
         Me.ContextMenuStripFactor.ResumeLayout(False)
         Me.grpHydroGOF.ResumeLayout(False)
-        Me.grpHydroGOF.PerformLayout
+        Me.grpHydroGOF.PerformLayout()
         Me.ContextMenuStripHydroGOF.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
         Me.grpMaths.ResumeLayout(False)
-        Me.grpMaths.PerformLayout
+        Me.grpMaths.PerformLayout()
         Me.ContextMenuStripMaths.ResumeLayout(False)
         Me.grpSummary.ResumeLayout(False)
-        Me.grpSummary.PerformLayout
+        Me.grpSummary.PerformLayout()
         Me.ContextMenuStripSummary.ResumeLayout(False)
         Me.grpFrequencies.ResumeLayout(False)
         Me.grpProbabilty.ResumeLayout(False)
-        Me.grpProbabilty.PerformLayout
+        Me.grpProbabilty.PerformLayout()
         Me.ContextMenuStripProbability.ResumeLayout(False)
         Me.grpRandom.ResumeLayout(False)
         Me.grpTransform.ResumeLayout(False)
-        Me.grpTransform.PerformLayout
+        Me.grpTransform.PerformLayout()
         Me.ContextMenuStripTransform.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
-        Me.grpLogical.PerformLayout
+        Me.grpLogical.PerformLayout()
         Me.ContextMenuStripLogical.ResumeLayout(False)
         Me.grpTestString.ResumeLayout(False)
         Me.grpCircular.ResumeLayout(False)
-        Me.grpCircular.PerformLayout
+        Me.grpCircular.PerformLayout()
         Me.ContextMenuStripCircular.ResumeLayout(False)
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
         Me.grpComplex.ResumeLayout(False)
-        Me.grpComplex.PerformLayout
+        Me.grpComplex.PerformLayout()
         Me.ContextMenuStripTxtString.ResumeLayout(False)
         Me.ContextMenuStripWakefield.ResumeLayout(False)
         Me.ContextMenuStripList.ResumeLayout(False)
@@ -7389,7 +7410,7 @@ Partial Class ucrCalculator
         Me.GroupBox1.ResumeLayout(False)
         Me.grpMathBloc.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout
+        Me.PerformLayout()
 
     End Sub
 
@@ -7973,4 +7994,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdwhichmax As Button
     Friend WithEvents cmdwheremax As Button
     Friend WithEvents cmdwhichmin As Button
+    Friend WithEvents MathsBaseStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MathsCarToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MathsCirucarToolStripMenuItem As ToolStripMenuItem
 End Class
