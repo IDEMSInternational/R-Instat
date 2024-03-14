@@ -16,29 +16,6 @@
     ''' <summary>   An R operation of the form 'leftSide Operator rightSide' (e.g. "x+y"). </summary>
     Public clsBaseOperator As New ROperator
 
-    ''' <summary>   An R command (of any type). </summary>
-    Public clsBaseCommandString As New RCodeStructure 'TODO SJL 17/04/20 What's the connection between this and 'bUseCommandString' and 'strCommandString'? 
-
-    ''' <summary>   The R functions/operators/commands that should be run before the base R code. </summary>
-    Public lstBeforeCodes As New List(Of RCodeStructure)
-
-    ''' <summary>   The R functions/operators/commands that should be run after the base R code. </summary>
-    Public lstAfterCodes As New List(Of RCodeStructure)
-
-
-    ''' <summary>   If true then use 'clsBaseFunction' as this object's base R code. </summary>
-    Private bUseBaseFunction As Boolean = False
-
-    ''' <summary>   If true then use 'clsBaseOperator' as this object's base R code. </summary>
-    Private bUseBaseOperator As Boolean = False
-
-    ''' <summary>   If true then use 'clsBaseCommandString' as this object's base R code. </summary>
-    Private bUseCommandString As Boolean = False
-
-    ''' <summary>   The R command in the form of a string. </summary>
-    Private strCommandString As String = ""
-
-
     ''' <summary>   Defines how to display the R output.
     ''' <list type="bullet">
     '''     <item><description>0 Ignore the result.</description></item>
@@ -50,19 +27,23 @@
     ''' </list> </summary>
     Public iCallType As Integer = 0 'TODO SJL 07/04/20 Use enumeration?
 
-
-    ''' <summary>   The script associated with the base R code. </summary>
-    Private strScript As String 'TODO SJL This is only used in the RSyntax.GetScript function. Also cleared once in ucrButtons. Refactor?
-
     ''' <summary>   If true then don't include the output part in the script (i.e. the part of the 
     '''             script to the left of the assignment operator '&lt;-'). </summary>
     Public bExcludeAssignedFunctionOutput As Boolean = True
 
-    ''' <summary>   If true then run the R script in a separate thread. </summary>
-    Public bSeparateThread As Boolean = True
 
-    ''' <summary>   TODO SJL 07/04/20 Is only ever Nothing (or in one rare case False). Remove? </summary>
-    Private bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing
+    ''' <summary>   If true then use 'clsBaseFunction' as this object's base R code. </summary>
+    Private bUseBaseFunction As Boolean = False
+
+    ''' <summary>   If true then use 'clsBaseOperator' as this object's base R code. </summary>
+    Private bUseBaseOperator As Boolean = False
+
+    ''' <summary>   The R functions/operators/commands that should be run before the base R code. </summary>
+    Private lstBeforeCodes As New List(Of RCodeStructure)
+
+    ''' <summary>   The R functions/operators/commands that should be run after the base R code. </summary>
+    Private lstAfterCodes As New List(Of RCodeStructure)
+
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets this object to be R function <paramref name="clsFunction"/>. </summary>
@@ -73,7 +54,6 @@
         clsBaseFunction = clsFunction
         bUseBaseFunction = True
         bUseBaseOperator = False
-        bUseCommandString = False
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -85,7 +65,6 @@
         clsBaseOperator = clsOperator
         bUseBaseFunction = False
         bUseBaseOperator = True
-        bUseCommandString = False
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -100,21 +79,19 @@
     '''--------------------------------------------------------------------------------------------
     Public Function GetScript() As String
         Dim strTemp As String = ""
+        Dim strScript As String = ""
 
         If bUseBaseFunction Then
             strTemp = clsBaseFunction.ToScript(strScript)
         ElseIf bUseBaseOperator Then
             strTemp = clsBaseOperator.ToScript(strScript)
-        ElseIf bUseCommandString Then
-            strTemp = clsBaseCommandString.ToScript(strScript, strCommandString)
         End If
 
         If bExcludeAssignedFunctionOutput Then
             'Sometimes the output of the R-command we deal with should not be part of the script...  
             'That's only the case when this output has already been assigned.
             If (bUseBaseFunction AndAlso clsBaseFunction.IsAssigned()) OrElse
-                (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) OrElse
-                (bUseCommandString AndAlso clsBaseFunction.IsAssigned()) Then
+                (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) Then
                 Return strScript
             End If
         End If
@@ -224,8 +201,6 @@
             clsBaseFunction.GetAllAssignTo(lstCodes, lstValues)
         ElseIf bUseBaseOperator Then
             clsBaseOperator.GetAllAssignTo(lstCodes, lstValues)
-        ElseIf bUseCommandString Then
-            clsBaseCommandString.GetAllAssignTo(lstCodes, lstValues)
         End If
         lstBeforeCodes.Sort(AddressOf CompareCodePositions)
         For Each clsTempCode As RCodeStructure In lstBeforeCodes
@@ -333,9 +308,5 @@
         Else
             lstAfterCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPosition
         End If
-    End Sub
-
-    Public Sub ClearScript()
-        strScript = ""
     End Sub
 End Class

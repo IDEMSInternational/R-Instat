@@ -146,7 +146,7 @@ Public Class ucrButtons
         'Run additional before codes
         lstBeforeScripts = clsRsyntax.GetBeforeCodesScripts()
         lstBeforeCodes = clsRsyntax.GetBeforeCodes()
-        For i As Integer = 0 To clsRsyntax.lstBeforeCodes.Count - 1
+        For i As Integer = 0 To lstBeforeCodes.Count - 1
             If bFirstCode Then
                 strComment = strComments
                 bFirstCode = False
@@ -154,7 +154,7 @@ Public Class ucrButtons
                 strComment = ""
             End If
             If bRun Then
-                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
+                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=True)
             Else
                 frmMain.AddToScriptWindow(lstBeforeScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
@@ -168,14 +168,10 @@ Public Class ucrButtons
             Else
                 strComment = ""
             End If
-            frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
+            frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=True)
         Else
             frmMain.AddToScriptWindow(clsRsyntax.GetScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
-
-        'This clears the script after it has been run, but leave the function and parameters in the base function
-        'so that it can be run exactly the same when reopened.
-        clsRsyntax.ClearScript()
 
         'Run additional after codes
         lstAfterScripts = clsRsyntax.GetAfterCodesScripts()
@@ -188,7 +184,7 @@ Public Class ucrButtons
                 Else
                     strComment = ""
                 End If
-                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=False)
+                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=True, bShowWaitDialogOverride:=False)
             Else
                 frmMain.AddToScriptWindow(lstAfterScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
