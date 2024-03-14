@@ -20,15 +20,15 @@ Public Class dlgClimograph
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsAstibleFunction, clsCFunction, clsRepFunction0, clsRepFunction1, clsRbindFunction, clsAsdataframeFunction, clsTFunction, clsAsfactorFunction, clsGgwalterliethFunction As RFunction
-    Private clsFacetFunction As New RFunction
-    Private clsBaseOperator As New ROperator
+    Private clsRFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
-    Private clsFacetRowOp As New ROperator
-    Private clsFacetColOp As New ROperator
+    Private clsCFunction1 As New RFunction
+    Private clsGetObjectRFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
     Private clsRFacetFunction As New RFunction
-    Private clsDummyFunction As New RFunction
+    Private strtemp As String = ""
+    Private strCurrDataName As String = ""
     Private strDatLong As String = "dat_long"
     Private strDatLongmonth As String = "dat_long$month"
     Private strDatLong1 As String = "dat_long1"
@@ -56,13 +56,14 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrSelectorClimograph.SetParameter(New RParameter("data", 0))
+        ucrSelectorClimograph.SetParameterIsString()
+
         ucrPnlClimograph.AddRadioButton(rdoClimograph)
         ucrPnlClimograph.AddRadioButton(rdoWalterLieth)
-
-        ucrSelectorClimograph.SetParameter(New RParameter("data", 0))
-        'ucrSelectorClimograph.SetParameterIsString()
-        ucrSelectorClimograph.SetParameterIsrfunction()
-        ucrSelectorClimograph.bUseCurrentFilter = False
+        ucrPnlClimograph.AddParameterValuesCondition(rdoWalterLieth, "checked", "WalterLieth")
+        ucrPnlClimograph.AddParameterValuesCondition(rdoClimograph, "checked", "Climograph")
+        ucrPnlClimograph.SetRDefault(rdoWalterLieth)
 
         ucrReceiverMonth.SetParameter(New RParameter("month", 1))
         ucrReceiverMonth.SetParameterIsString()
@@ -110,10 +111,6 @@ Public Class dlgClimograph
         ucrReceiverStation.strSelectorHeading = "Factors"
         ucrReceiverStation.SetParameterIsString()
 
-        ucrPnlClimograph.AddParameterValuesCondition(rdoWalterLieth, "checked", "WalterLieth")
-        ucrPnlClimograph.AddParameterValuesCondition(rdoClimograph, "checked", "Climograph")
-        ucrPnlClimograph.SetRDefault(rdoWalterLieth)
-
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
@@ -123,7 +120,6 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub SetDefaults()
-        clsBaseOperator = New ROperator
         clsGgwalterliethFunction = New RFunction
         clsTFunction = New RFunction
         clsAsdataframeFunction = New RFunction
@@ -133,22 +129,19 @@ Public Class dlgClimograph
         clsRepFunction0 = New RFunction
         clsRepFunction1 = New RFunction
         clsCFunction = New RFunction
-        clsDummyFunction = New RFunction
-        'clsBaseOperator.SetOperation("+")
-        'clsBaseOperator.AddParameter("ggwalter_lieth", clsRFunctionParameter:=clsGgwalterliethFunction, iPosition:=0)
-        'clsDummyFunction.AddParameter("checked", "walterLieth", iPosition:=0)
+        clsCFunction1 = New RFunction
+        clsGetObjectRFunction = New RFunction
 
         ucrSelectorClimograph.Reset()
         ucrSave.Reset()
 
+        clsRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsRFunction.AddParameter(strParameterName:="data_name", strParameterValue:=Chr(34) & ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsRFunction.SetAssignTo(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsRFunction.ToScript(strtemp)
+
         clsGgwalterliethFunction.SetRCommand("ggwalter_lieth")
         clsGgwalterliethFunction.AddParameter("data", strDatLong1, iPosition:=0)
-        'clsGgwalterliethFunction.AddParameter("month", Chr(34) & "" & Chr(34), iPosition:=1)
-        'clsGgwalterliethFunction.AddParameter("station", Chr(34) & "" & Chr(34), iPosition:=2)
-        'clsGgwalterliethFunction.AddParameter("rain", Chr(34) & "" & Chr(34), iPosition:=3)
-        'clsGgwalterliethFunction.AddParameter("Tmax", Chr(34) & "" & Chr(34), iPosition:=4)
-        'clsGgwalterliethFunction.AddParameter("Tmin", Chr(34) & "" & Chr(34), iPosition:=5)
-        'clsGgwalterliethFunction.AddParameter("station", Chr(34) & "" & Chr(34), iPosition:=6)
 
         clsAstibleFunction.SetPackageName("tibble")
         clsAstibleFunction.SetRCommand("as_tibble")
@@ -163,7 +156,7 @@ Public Class dlgClimograph
 
         clsAsfactorFunction.SetPackageName("forcats")
         clsAsfactorFunction.SetRCommand("as_factor")
-        clsAsfactorFunction.AddParameter("month", , iPosition:=0, bIncludeArgumentName:=False)
+        clsAsfactorFunction.AddParameter("month", clsRFunctionParameter:=clsCFunction1, iPosition:=0, bIncludeArgumentName:=False)
         clsAsfactorFunction.SetAssignTo(strDatLongmonth)
 
         clsRbindFunction.SetRCommand("rbind")
@@ -171,28 +164,46 @@ Public Class dlgClimograph
         clsRbindFunction.AddParameter("bind1", strDatLong, iPosition:=0, bIncludeArgumentName:=False)
         clsRbindFunction.SetAssignTo(strDatLong1)
 
+        clsRepFunction0.SetRCommand("rep")
+        clsRepFunction0.AddParameter("A", Chr(34) & "A" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsRepFunction0.AddParameter("12", "12", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsRepFunction1.SetRCommand("rep")
+        clsRepFunction1.AddParameter("B", Chr(34) & "B" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsRepFunction1.AddParameter("12", "12", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsCFunction1.SetRCommand("c")
+        clsCFunction1.AddParameter("0", Chr(34) & "Jan" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsCFunction1.AddParameter("1", Chr(34) & "Feb" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsCFunction1.AddParameter("2", Chr(34) & "Mar" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsCFunction1.AddParameter("3", Chr(34) & "Apr" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
+        clsCFunction1.AddParameter("4", Chr(34) & "May" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
+        clsCFunction1.AddParameter("5", Chr(34) & "Jun" & Chr(34), iPosition:=5, bIncludeArgumentName:=False)
+        clsCFunction1.AddParameter("6", Chr(34) & "Jul" & Chr(34), iPosition:=6, bIncludeArgumentName:=False)
+        clsCFunction1.AddParameter("7", Chr(34) & "Aug" & Chr(34), iPosition:=7, bIncludeArgumentName:=False)
+        clsCFunction1.AddParameter("8", Chr(34) & "Sep" & Chr(34), iPosition:=8, bIncludeArgumentName:=False)
+        clsCFunction1.AddParameter("9", Chr(34) & "Oct" & Chr(34), iPosition:=9, bIncludeArgumentName:=False)
+        clsCFunction1.AddParameter("10", Chr(34) & "Nov" & Chr(34), iPosition:=10, bIncludeArgumentName:=False)
+        clsCFunction1.AddParameter("11", Chr(34) & "Dec" & Chr(34), iPosition:=11, bIncludeArgumentName:=False)
+
         clsCFunction.SetRCommand("c")
         clsCFunction.AddParameter("x", clsRFunctionParameter:=clsRepFunction0, iPosition:=0, bIncludeArgumentName:=False)
         clsCFunction.AddParameter("y", clsRFunctionParameter:=clsRepFunction1, iPosition:=1, bIncludeArgumentName:=False)
         clsCFunction.SetAssignTo(strDatLong1station)
 
-        clsRepFunction0.SetRCommand("rep")
-        clsRepFunction0.AddParameter("A", Chr(34) & "A" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction0.AddParameter("12", Chr(34) & "12" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectRFunction.AddParameter("as_file", "TRUE", iPosition:=3)
 
-        clsRepFunction1.SetRCommand("rep")
-        clsRepFunction1.AddParameter("B", Chr(34) & "B" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsRepFunction1.AddParameter("12", Chr(34) & "12" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAstibleFunction, 0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAsfactorFunction, 1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRbindFunction, 2)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsCFunction, 3)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsGgwalterliethFunction, 4)
 
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGgwalterliethFunction)
-        'clsGgwalterliethFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectRFunction, 6)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        'ucrPnlClimograph.SetRCode(clsDummyFunction, bReset)
-
-        ucrSelectorClimograph.SetRCode(clsTFunction, bReset)
         ucrReceiverMonth.SetRCode(clsGgwalterliethFunction, bReset)
         ucrReceiverRain.SetRCode(clsGgwalterliethFunction, bReset)
         ucrReceiverMintemp.SetRCode(clsGgwalterliethFunction, bReset)
@@ -212,8 +223,6 @@ Public Class dlgClimograph
         End If
     End Sub
 
-
-
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlClimograph.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverAbsolutetem.ControlContentsChanged, ucrReceiverMaxtem.ControlContentsChanged, ucrReceiverMintemp.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrSave.ControlContentsChanged
         TestOKEnabled()
     End Sub
@@ -222,5 +231,9 @@ Public Class dlgClimograph
         If rdoWalterLieth.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGgwalterliethFunction)
         End If
+    End Sub
+
+    Private Sub ucrSelectorClimograph_DataFrameChanged() Handles ucrSelectorClimograph.DataFrameChanged
+        clsGetObjectRFunction.AddParameter("data_name", Chr(34) & ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub
 End Class

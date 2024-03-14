@@ -174,7 +174,7 @@ Partial Class dlgClimograph
         'ucrPnlClimograph
         '
         Me.ucrPnlClimograph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlClimograph.Location = New System.Drawing.Point(108, -1)
+        Me.ucrPnlClimograph.Location = New System.Drawing.Point(108, 0)
         Me.ucrPnlClimograph.Name = "ucrPnlClimograph"
         Me.ucrPnlClimograph.Size = New System.Drawing.Size(236, 41)
         Me.ucrPnlClimograph.TabIndex = 38
