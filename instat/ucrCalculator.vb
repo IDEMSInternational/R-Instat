@@ -162,6 +162,13 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdQt, "t quantiles. For example qt(0.05, 5) = -2.015; qt(0.05, 100) = -1.66")
         ttCalculator.SetToolTip(cmdqF, "F quantiles. For example qf(0.95,1,10) = 4.965; qf(0.95, 50,50)= 1.599")
 
+        ttCalculator.SetToolTip(cmdDeg, "Change for radians to degrees. For example deg(pi/2) = 90.")
+        ttCalculator.SetToolTip(cmdExp, "The exponential function. exp(1) = e = 2.71828. exp(0) = 1, exp(-2) = 0.1353 = 1/exp(2). It is the inverse of the log function, so exp(6.238) = 512, while log(512) = 6.238.")
+        ttCalculator.SetToolTip(cmdAbs, "The absolute (or positive) value. For example abs (-4.4) = abs(4.4) = 4.4.")
+        ttCalculator.SetToolTip(cmdSign, "The sign of the corresponding values. So sign(4.2)=1, sign(-20)=-1, sign(c(-2,-1,0,1,2,3))= (-1,-1,0,1,1,1)")
+        ttCalculator.SetToolTip(cmdLogit, "log(p/(1-p)) for p between 0 and 1, or between 0 and 100 if you have percentages. For example logit(c(0.2, 0.5, 0.95)) is (-1.386, 0, 2.944).")
+        ttCalculator.SetToolTip(cmdLogistic, "Distribution function for the logistic distribution. For example dlogis(c(-2,-1,0,1,2), 0, 5513) = (0.026, 0.14, 0.5, 0.86, 0.974). The scale of 0.5513 gives a standard deviation of 1.")
+        ttCalculator.SetToolTip(cmdAtan2, "atan2(x,y) gives the angle between the x axis and the vector between to origin and the point (x,y). For example atan2(1,1) = 0.7854 = pi/4 (=45 degrees).")
         ttCalculator.SetToolTip(cmdSqrt, "square root. For example sqrt(3) = 3 ^ 0.5 = 1.732")
         ttCalculator.SetToolTip(cmdCos, "cosine of angle in radians. For example cos(pi) = -1, cos(rad(90)) = (almost) 0.")
         ttCalculator.SetToolTip(cmdAcos, "angle corresponding to a given cosine (in the range 0 to pi). For example acos(0) = 1.57 = pi/2; deg(acos(-1))=180.")
@@ -519,6 +526,7 @@ Public Class ucrCalculator
     Private Sub CalculationsOptions()
         Select Case ucrInputCalOptions.GetText
             Case "Maths"
+                '  strPackageName = "base"
                 strPackageName = "stats"
                 grpSummary.Visible = False
                 grpMaths.Visible = True
@@ -1800,7 +1808,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMc_Click(sender As Object, e As EventArgs) Handles cmdMc.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x = , na.rm = TRUE, doReflect = (length(x = ) <= 100),doScale = TRUE, maxit = 100, trace.lev = 0, full.result = FALSE)", 113)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x = , na.rm = TRUE, doReflect = (length(x = ) <= 100),doScale = TRUE, maxit= 100, trace.lev= 0, full.result= FALSE)", 113)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc( , na.rm = TRUE)", 16)
         End If
@@ -4790,9 +4798,16 @@ Public Class ucrCalculator
     Private Sub cmdMathsHelp_Click(sender As Object, e As EventArgs) Handles cmdMathsHelp.Click, MathsStatsStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "base"
+            OpenHelpPage()
             strPackageName = "stats"
+            OpenHelpPage()
+            'strPackageName = "car"
+            'OpenHelpPage()
+            'strPackageName = "circular"
+            'OpenHelpPage()
         End If
-        OpenHelpPage()
+        '  OpenHelpPage()
     End Sub
 
     Private Sub cmdTransformHelp_Click(sender As Object, e As EventArgs) Handles cmdTransformHelp.Click, FactorForcatsToolStripMenuItem.Click
