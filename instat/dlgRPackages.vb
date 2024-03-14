@@ -195,13 +195,9 @@ Public Class dlgInstallRPackage
 
     Private Sub GithubOption()
         If Not (ucrInputTextBoxRPackage.IsEmpty AndAlso ucrInputRepositoryName.IsEmpty) Then
-            clsPasteFunction.AddParameter("paste", Chr(34) & ucrInputRepositoryName.GetText & "/" & ucrInputTextBoxRPackage.GetText & Chr(34), bIncludeArgumentName:=False)
-
-            clsRepositoryFunction.AddParameter("package", clsRFunctionParameter:=clsPasteFunction, iPosition:=0, bIncludeArgumentName:=False)
-
+            clsRepositoryFunction.AddParameter("paste", Chr(34) & ucrInputRepositoryName.GetText & "/" & ucrInputTextBoxRPackage.GetText & Chr(34), bIncludeArgumentName:=False)
         Else
-            clsPasteFunction.RemoveParameterByName("paste")
-            clsRepositoryFunction.RemoveParameterByName("package")
+            clsRepositoryFunction.RemoveParameterByName("paste")
         End If
     End Sub
 
