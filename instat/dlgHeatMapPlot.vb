@@ -54,8 +54,11 @@ Public Class dlgHeatMapPlot
     clsXScalecontinuousFunction, clsYScalecontinuousFunction, clsRFacetFunction, clsThemeFunction, clsRoundFunction,
     clsXRangeFunction, clsYRangeFunction, clsXMeanFunction, clsYMeanFunction, clsGroupByFunction,
     clsSummariseFunction, clsDummyFunction, clsGeomJitterFunction, clsScalefillDistillerFunction,
-     clsFillBrewerFunction, clsScalefillgradientFunction As New RFunction
+     clsFillBrewerFunction, clsScalefillmanualFunction, clsScalefillgradientFunction As New RFunction
 
+    Private Sub AllControlsContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrInputColour.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged
+
+    End Sub
 
     Private Sub dlgHeatMapPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -89,20 +92,25 @@ Public Class dlgHeatMapPlot
         ucrPnlOptions.AddRadioButton(rdoHeatMap)
         ucrPnlOptions.AddRadioButton(rdoChoroplethMap)
 
-        ucrPnlPalette.AddRadioButton(rdoPalette)
-        ucrPnlPalette.AddRadioButton(rdoFRomTo)
+        ucrPnlColour.AddRadioButton(rdoViridis)
+        ucrPnlColour.AddRadioButton(rdoPalette)
+        ucrPnlColour.AddRadioButton(rdoGradient)
 
         ucrPnlOptions.AddParameterPresentCondition(rdoHeatMap, "geom_tile")
         ucrPnlOptions.AddParameterPresentCondition(rdoChoroplethMap, "geom_polygon")
 
-        ucrPnlPalette.AddParameterValuesCondition(rdoPalette, "Check", "palette")
-        ucrPnlPalette.AddParameterValuesCondition(rdoFRomTo, "Check", "gradient")
+        ucrPnlColour.AddParameterValuesCondition(rdoPalette, "Check", "palette")
+        ucrPnlColour.AddParameterValuesCondition(rdoViridis, "Check", "viridis")
+        ucrPnlColour.AddParameterValuesCondition(rdoGradient, "Check", "gradient")
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkAddLabels, ucrChkColourPalette}, {rdoHeatMap, rdoChoroplethMap})
+        ucrPnlOptions.AddToLinkedControls(ucrChkAddLabels, {rdoHeatMap, rdoChoroplethMap})
         ucrPnlOptions.AddToLinkedControls({ucrChkPoints, ucrReceiverFillChoropleth, ucrReceiverLongitude, ucrReceiverLatitude, ucrReceiverGroup}, {rdoChoroplethMap}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrChkColourPalette, ucrChkFlipCoordinates, ucrInputReorderValue, ucrReceiverFill, ucrInputReorderVariableX, ucrReceiverX, ucrReceiverY}, {rdoHeatMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlPalette.AddToLinkedControls(ucrInputPalette, {rdoPalette}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Blues")
-        ucrPnlPalette.AddToLinkedControls({ucrColourFrom, ucrColourTo}, {rdoFRomTo}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="black")
+        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrInputReorderValue, ucrReceiverFill, ucrInputReorderVariableX, ucrReceiverX, ucrReceiverY}, {rdoHeatMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrPnlColour, {rdoHeatMap, rdoChoroplethMap})
+        ucrPnlColour.AddToLinkedControls(ucrInputPalette, {rdoPalette}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Blues")
+        ucrPnlColour.AddToLinkedControls(ucrInputColourPalette, {rdoViridis}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Viridis")
+        ucrPnlColour.AddToLinkedControls({ucrColourFrom, ucrColourTo}, {rdoGradient}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
+        ucrPnlColour.AddToLinkedControls(ucrInputValue, {rdoGradient}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
         ucrReceiverX.SetLinkedDisplayControl(lblXVariable)
         ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitude)
         ucrReceiverLongitude.SetLinkedDisplayControl(lblLongitude)
@@ -195,16 +203,11 @@ Public Class dlgHeatMapPlot
         ucrChkPoints.AddParameterValuesCondition(True, "choropleth_geom_point", "True")
         ucrChkPoints.AddParameterValuesCondition(False, "choropleth_geom_point", "False")
 
-        ucrChkColourPalette.SetText("Colour Palette")
-        ucrChkColourPalette.AddParameterPresentCondition(True, "option")
-        ucrChkColourPalette.AddParameterPresentCondition(False, "option", False)
-
         ucrChkAddLabels.SetText("Add Labels")
         ucrChkAddLabels.AddParameterPresentCondition(True, "geom_text")
         ucrChkAddLabels.AddParameterPresentCondition(False, "geom_text", False)
 
         ucrChkAddLabels.AddToLinkedControls({ucrInputPosition, ucrInputSize, ucrInputColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkColourPalette.AddToLinkedControls({ucrInputColourPalette}, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Viridis")
         ucrInputColour.SetLinkedDisplayControl(lblLabelColour)
         ucrInputPosition.SetLinkedDisplayControl(lblLabelPosition)
         ucrInputSize.SetLinkedDisplayControl(lblLabelSize)
@@ -311,9 +314,15 @@ Public Class dlgHeatMapPlot
 
         ucrColourFrom.SetParameter(New RParameter("low", 8))
         ucrColourFrom.SetColours()
+        ucrColourFrom.SetLinkedDisplayControl(lblFrom)
 
         ucrColourTo.SetParameter(New RParameter("high", 9))
         ucrColourTo.SetColours()
+        ucrColourTo.SetLinkedDisplayControl(lblTo)
+
+        ucrInputValue.SetParameter(New RParameter("values", ))
+        ucrInputValue.SetValidationTypeAsList()
+        ucrInputValue.SetLinkedDisplayControl(lblValue)
     End Sub
 
     Private Sub SetDefaults()
@@ -458,7 +467,7 @@ Public Class dlgHeatMapPlot
         clsGroupFunction.SetRCommand("aes")
 
         clsDummyFunction.AddParameter("choropleth_geom_point", False, iPosition:=0)
-        clsDummyFunction.AddParameter("Check", "palette", iPosition:=1)
+        clsDummyFunction.AddParameter("Check", "viridis", iPosition:=1)
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.AddParameter("data", ucrHeatMapSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
@@ -483,6 +492,10 @@ Public Class dlgHeatMapPlot
         clsYMeanFunction.AddParameter("y", clsRFunctionParameter:=clsYRangeFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         clsYRangeFunction.SetRCommand("range")
+
+        clsScalefillmanualFunction = New RFunction
+        clsScalefillmanualFunction.SetRCommand("scale_fill_manual")
+        clsScalefillmanualFunction.AddParameter("aesthetics", Chr(34) & "fill" & Chr(34), iPosition:=1)
 
         clsGeomPointSizeChoroplethFunction.SetPackageName("ggplot2")
         clsGeomPointSizeChoroplethFunction.SetRCommand("geom_point")
@@ -568,7 +581,6 @@ Public Class dlgHeatMapPlot
         ucrInputColour.SetRCode(clsGeomTextFunction, bReset)
         ucrInputPosition.SetRCode(clsGeomTextFunction, bReset)
         ucrInputSize.SetRCode(clsGeomTextFunction, bReset)
-        ucrChkColourPalette.SetRCode(clsColourPaletteFunction, bReset)
         ucrInputColourPalette.SetRCode(clsColourPaletteFunction, bReset)
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
@@ -577,11 +589,12 @@ Public Class dlgHeatMapPlot
             ucrNudHeigth.SetRCode(clsGeomJitterFunction, bReset)
             ucrNudWidth.SetRCode(clsGeomJitterFunction, bReset)
             ucrChkJitter.SetRCode(clsGeomJitterFunction, bReset)
-            ucrPnlPalette.SetRCode(clsDummyFunction, bReset)
+            ucrPnlColour.SetRCode(clsDummyFunction, bReset)
         End If
         ucrColourFrom.SetRCode(clsScalefillgradientFunction, bReset)
         ucrColourTo.SetRCode(clsScalefillgradientFunction, bReset)
         ucrInputPalette.SetRCode(clsFillBrewerFunction, bReset)
+        ucrInputValue.SetRCode(clsScalefillmanualFunction, bReset, bCloneIfNeeded:=True)
         bRCodeSet = True
     End Sub
 
@@ -683,14 +696,6 @@ Public Class dlgHeatMapPlot
         End If
     End Sub
 
-    Private Sub ucrChkColourPalette_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkColourPalette.ControlValueChanged
-        If ucrChkColourPalette.Checked Then
-            clsBaseOperator.AddParameter("palette", clsRFunctionParameter:=clsColourPaletteFunction, iPosition:=6)
-        Else
-            clsBaseOperator.RemoveParameterByName("palette")
-        End If
-    End Sub
-
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverFill.ControlValueChanged, ucrInputReorderVariableX.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrReceiverY.ControlValueChanged
         clsGeomTextFunction.RemoveParameterByName("data")
         clsLabelAesFunction.RemoveParameterByName("x")
@@ -764,6 +769,7 @@ Public Class dlgHeatMapPlot
         UpdateParameter()
         AddRemoveGeomParameter()
         ChangePalette()
+        Visibility()
     End Sub
 
     Private Sub AutoFacetStation()
@@ -951,36 +957,76 @@ Public Class dlgHeatMapPlot
         End If
     End Sub
 
+    Private Sub Visibility()
+        If rdoGradient.Checked Then
+            ucrInputValue.Visible = (ucrReceiverFill.strCurrDataType = "factor" OrElse ucrReceiverFill.strCurrDataType = "ordered,factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "ordered,factor")
+            ucrColourFrom.Visible = Not (ucrReceiverFill.strCurrDataType = "factor" OrElse ucrReceiverFill.strCurrDataType = "ordered,factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "ordered,factor")
+            ucrColourTo.Visible = Not (ucrReceiverFill.strCurrDataType = "factor" OrElse ucrReceiverFill.strCurrDataType = "ordered,factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "ordered,factor")
+        Else
+            ucrColourFrom.Visible = False
+            ucrColourTo.Visible = False
+            ucrInputValue.Visible = False
+        End If
+    End Sub
+
     Private Sub ChangePalette()
-        If rdoPalette.Checked Then
+        If rdoViridis.Checked Then
+            clsBaseOperator.AddParameter("palette", clsRFunctionParameter:=clsColourPaletteFunction, iPosition:=6)
+            clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
+            clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
+            clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
+            clsBaseOperator.RemoveParameterByName("scale_fill_manual")
+        ElseIf rdoPalette.Checked Then
+            clsBaseOperator.RemoveParameterByName("palette")
+            clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
+            clsBaseOperator.RemoveParameterByName("scale_fill_manual")
             If Not ucrReceiverFill.IsEmpty OrElse Not ucrReceiverFillChoropleth.IsEmpty Then
                 If ucrReceiverFill.strCurrDataType = "factor" OrElse ucrReceiverFill.strCurrDataType = "ordered,factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "ordered,factor" Then
-                    clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
                     clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
                     clsFillBrewerFunction.AddParameter("palette", Chr(34) & ucrInputPalette.GetText() & Chr(34))
                     clsBaseOperator.AddParameter("scale_fill_brewer", clsRFunctionParameter:=clsFillBrewerFunction, iPosition:=2)
                 Else
                     clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
-                    clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
                     clsScalefillDistillerFunction.AddParameter("palette", Chr(34) & ucrInputPalette.GetText() & Chr(34))
                     clsBaseOperator.AddParameter("scale_fill_distiller", clsRFunctionParameter:=clsScalefillDistillerFunction, iPosition:=2)
                 End If
             Else
                 clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
-                clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
-                clsScalefillDistillerFunction.AddParameter("palette", Chr(34) & ucrInputPalette.GetText() & Chr(34))
-                clsBaseOperator.AddParameter("scale_fill_distiller", clsRFunctionParameter:=clsScalefillDistillerFunction, iPosition:=2)
+                clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
             End If
-        Else
+        ElseIf rdoGradient.Checked Then
+            clsBaseOperator.RemoveParameterByName("palette")
             clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
             clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
-            clsScalefillgradientFunction.AddParameter("low", Chr(34) & ucrColourFrom.GetText() & Chr(34), iPosition:=0)
-            clsScalefillgradientFunction.AddParameter("high", Chr(34) & ucrColourTo.GetText() & Chr(34), iPosition:=1)
-            clsBaseOperator.AddParameter("scale_fill_gradient", clsRFunctionParameter:=clsScalefillgradientFunction, iPosition:=2)
+            If Not ucrReceiverFill.IsEmpty OrElse Not ucrReceiverFillChoropleth.IsEmpty Then
+                If ucrReceiverFill.strCurrDataType = "factor" OrElse ucrReceiverFill.strCurrDataType = "ordered,factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "ordered,factor" Then
+                    clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
+                    If Not ucrInputValue.IsEmpty() Then
+                        clsScalefillmanualFunction.AddParameter("values", ucrInputValue.clsRList.ToScript(), iPosition:=0)
+                        clsBaseOperator.AddParameter("scale_fill_manual", clsRFunctionParameter:=clsScalefillmanualFunction, iPosition:=2)
+                    Else
+                        clsScalefillmanualFunction.RemoveParameterByName("values")
+                    End If
+                Else
+                    clsBaseOperator.RemoveParameterByName("scale_fill_manual")
+                    If Not ucrColourTo.IsEmpty AndAlso Not ucrColourFrom.IsEmpty Then
+                        clsScalefillgradientFunction.AddParameter("low", Chr(34) & ucrColourFrom.GetText() & Chr(34), iPosition:=0)
+                        clsScalefillgradientFunction.AddParameter("high", Chr(34) & ucrColourTo.GetText() & Chr(34), iPosition:=1)
+                        clsBaseOperator.AddParameter("scale_fill_gradient", clsRFunctionParameter:=clsScalefillgradientFunction, iPosition:=2)
+                    Else
+                        clsScalefillgradientFunction.RemoveParameterByName("low")
+                        clsScalefillgradientFunction.RemoveParameterByName("high")
+                    End If
+                End If
+            Else
+                clsBaseOperator.RemoveParameterByName("scale_fill_manual")
+                clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
+            End If
         End If
     End Sub
 
-    Private Sub ucrPnlPalette_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPalette.ControlValueChanged, ucrInputPalette.ControlValueChanged, ucrColourFrom.ControlValueChanged, ucrColourTo.ControlValueChanged, ucrReceiverFillChoropleth.ControlValueChanged
+    Private Sub ucrPnlColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColour.ControlValueChanged, ucrInputPalette.ControlValueChanged, ucrInputColourPalette.ControlValueChanged, ucrInputValue.ControlValueChanged, ucrColourFrom.ControlValueChanged, ucrColourTo.ControlValueChanged
         ChangePalette()
+        Visibility()
     End Sub
 End Class
