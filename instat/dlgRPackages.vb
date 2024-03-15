@@ -7,7 +7,6 @@ Public Class dlgInstallRPackage
     Private clsRepositoryFunction As New RFunction
     Private clsBeforeOptionsFunc As New RFunction
     Private clsAfterOptionsFunc As New RFunction
-    Private clsPasteFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
     Private Sub dlgRPackages_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -38,7 +37,6 @@ Public Class dlgInstallRPackage
         ucrInputMessage.SetLinkedDisplayControl(cmdCheck)
 
         ucrPnlRPackages.AddToLinkedControls(ucrInputRepositoryName, {rdoRPackage}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlRPackages.AddToLinkedControls(ucrInputMessage, {rdoCRAN}, bNewLinkedHideIfParameterMissing:=True)
 
         CheckEnable()
     End Sub
@@ -57,8 +55,6 @@ Public Class dlgInstallRPackage
 
         clsBeforeOptionsFunc.SetRCommand("options")
         clsBeforeOptionsFunc.AddParameter(strParameterName:="warn", strParameterValue:="2")
-
-        clsPasteFunction.SetRCommand("paste0")
 
         clsRepositoryFunction.SetRCommand("install_github")
         clsRepositoryFunction.SetPackageName("devtools")
@@ -104,6 +100,7 @@ Public Class dlgInstallRPackage
         ElseIf rdoRPackage.Checked Then
             clsPackageCheck.SetRCommand("check_github_repo")
             clsPackageCheck.AddParameter("repo", Chr(34) & ucrInputTextBoxRPackage.GetText() & Chr(34))
+            clsPackageCheck.AddParameter("owner", Chr(34) & ucrInputRepositoryName.GetText() & Chr(34))
         End If
 
         expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)
