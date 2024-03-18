@@ -3962,7 +3962,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdPbiasfde_Click(sender As Object, e As EventArgs) Handles cmdPbiasfde.Click
+    Private Sub cmdPbiasfdc_Click(sender As Object, e As EventArgs) Handles cmdPbiasfdc.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbiasfdc(sim = , obs = , plot = FALSE)", 24)
         Else
