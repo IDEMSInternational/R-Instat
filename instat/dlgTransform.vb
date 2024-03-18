@@ -20,74 +20,54 @@ Public Class dlgTransform
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsRankFunction As New RFunction
-    Private clsRankColsFunction As New RFunction
-
     Private clsSortFunction As New RFunction
-    Private clsSortColsFunction As New RFunction
-
     Private clsRoundFunction As New RFunction
-    Private clsRoundColsFunction As New RFunction
-
     Private clsSignifFunction As New RFunction
-    Private clsSignifColsFunction As New RFunction
-
     Private clsLagFunction As New RFunction
-    Private clsLagColsFunction As New RFunction
-
     Private clsLeadFunction As New RFunction
-    Private clsLeadColsFunction As New RFunction
-
     Private clsDiffFunction As New RFunction
-    Private clsDiffColsFunction As New RFunction
-
     Private clsConcDiffFunction As New RFunction
-    Private clsConcDiffColsFunction As New RFunction
-
     Private clsReplicateFunction As New RFunction
-    Private clsReplicateColsFunction As New RFunction
-
     Private clsMeanFunction As New RFunction
-    Private clsMeanColsFunction As New RFunction
-
     Private clsStandardDevFunction As New RFunction
-    Private clsStandardDevColsFunction As New RFunction
-
     Private clsSubtractOperator As New ROperator
-    Private clsSubtractColsOperator As New ROperator
-
     Private clsDivisionOperator As New ROperator
 
     Private clsDivisionColsOperator As New ROperator
-
     Private clsSquarerootFunction As New RFunction
+    Private clsSubtractColsOperator As New ROperator
     Private clsSquarerootColsFunction As New RFunction
-
     Private clsAddConstantOperator As New ROperator
     Private clsAddConstantColsOperator As New ROperator
     Private clsNaturalLogFunction As New RFunction
     Private clsNaturalLogColsFunction As New RFunction
-
+    Private clsLagColsFunction As New RFunction
+    Private clsRankColsFunction As New RFunction
     Private clsLogBase10Function As New RFunction
     Private clsLogBase10ColsFunction As New RFunction
+    Private clsStandardDevColsFunction As New RFunction
+    Private clsMeanColsFunction As New RFunction
+    Private clsReplicateColsFunction As New RFunction
+    Private clsConcDiffColsFunction As New RFunction
+    Private clsDiffColsFunction As New RFunction
+    Private clsLeadColsFunction As New RFunction
+    Private clsSignifColsFunction As New RFunction
+    Private clsRoundColsFunction As New RFunction
+    Private clsSortColsFunction As New RFunction
+    Private clsPowerColsOperator As New ROperator
+    Private clsScaleSubtractColsOperator As New ROperator
+    Private clsScaleAddColsOperator As New ROperator
+    Private clsScaleMeanColsFunction As New RFunction
+    Private clsScaleMinColsFunction As New RFunction
 
     Private clsRemoveLabelsFunction As New RFunction
     Private clsPowerOperator As New ROperator
-    Private clsPowerColsOperator As New ROperator
-
     Private clsScaleSubtractOperator As New ROperator
-    Private clsScaleSubtractColsOperator As New ROperator
-
     Private clsScaleMultiplyOperator As New ROperator
     Private clsScaleDivideOperator As New ROperator
-
     Private clsScaleAddOperator As New ROperator
-    Private clsScaleAddColsOperator As New ROperator
-
     Private clsScaleMeanFunction As New RFunction
-    Private clsScaleMeanColsFunction As New RFunction
-
     Private clsScaleMinFunction As New RFunction
-    Private clsScaleMinColsFunction As New RFunction
 
     Private clsPreviewOperator As New ROperator
     Private clsDummyTransformFunction As New RFunction
@@ -569,12 +549,12 @@ Public Class dlgTransform
         clsDivisionColsOperator.AddParameter("x", clsROperatorParameter:=clsSubtractColsOperator, iPosition:=0)
         clsDivisionColsOperator.AddParameter("y", clsRFunctionParameter:=clsStandardDevColsFunction, iPosition:=1)
 
-        clsSquarerootFunction.SetRCommand("sqrt")
+        clsSquarerootColsFunction.SetRCommand("~sqrt")
 
         clsAddConstantColsOperator.SetOperation("+")
         clsAddConstantColsOperator.AddParameter("c", "0", iPosition:=1)
 
-        clsNaturalLogColsFunction.SetRCommand("log")
+        clsNaturalLogColsFunction.SetRCommand("~log")
 
         clsLogBase10ColsFunction.SetRCommand("~log10")
 
@@ -709,7 +689,10 @@ Public Class dlgTransform
         ucrNudRoundOfDigits.AddAdditionalCodeParameterPair(clsRoundColsFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
         ucrChkOmitNA.AddAdditionalCodeParameterPair(clsMeanColsFunction, ucrChkOmitNA.GetParameter(), iAdditionalPairNo:=2)
         ucrChkOmitNA.AddAdditionalCodeParameterPair(clsStandardDevColsFunction, ucrChkOmitNA.GetParameter(), iAdditionalPairNo:=3)
-
+        ucrPnlTies.AddAdditionalCodeParameterPair(clsRankColsFunction, New RParameter("ties.method", 1), iAdditionalPairNo:=1)
+        ucrPnlMissingValues.AddAdditionalCodeParameterPair(clsRankColsFunction, New RParameter("na.last", 2), iAdditionalPairNo:=1)
+        ucrChkMissingLast.AddAdditionalCodeParameterPair(clsSortColsFunction, New RParameter("na.last", 1), iAdditionalPairNo:=1)
+        ucrChkDecreasing.AddAdditionalCodeParameterPair(clsSortColsFunction, New RParameter("decreasing", 2), iAdditionalPairNo:=1)
         ucrSaveNew.AddAdditionalRCode(clsLeadFunction, iAdditionalPairNo:=1)
         ucrSaveNew.AddAdditionalRCode(clsLagFunction, iAdditionalPairNo:=2)
         ucrSaveNew.AddAdditionalRCode(clsSignifFunction, iAdditionalPairNo:=3)
@@ -725,11 +708,9 @@ Public Class dlgTransform
         ucrSaveNew.AddAdditionalRCode(clsPreviewOperator, iAdditionalPairNo:=13)
         ucrSaveNew.AddAdditionalRCode(clsBooleanOperator, iAdditionalPairNo:=14)
         ucrSaveNew.AddAdditionalRCode(clsIsNAFunction, iAdditionalPairNo:=15)
-        'ucrSaveNew.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=16)
 
         ucrPnlTransformOptions.SetRCode(clsDummyTransformFunction, bReset)
         ucrPnlColumnSelectOptions.SetRCode(clsDummyTransformFunction, bReset)
-        ucrReceiverRank.SetRCode(clsRankFunction, bReset)
         ucrChkDecreasing.SetRCode(clsSortFunction, bReset)
         ucrChkMissingLast.SetRCode(clsSortFunction, bReset)
         ucrSaveNew.SetRCode(clsRoundFunction, bReset)
@@ -752,7 +733,9 @@ Public Class dlgTransform
         ucrChkOmitNA.SetRCode(clsMeanFunction, bReset)
         ucrChkPreview.SetRCode(clsConstantDummyFunction, bReset)
 
-
+        If bReset Then
+            ucrReceiverRank.SetRCode(clsRankFunction, bReset)
+        End If
         bResetRCode = True
     End Sub
 
@@ -769,25 +752,13 @@ Public Class dlgTransform
     End Sub
 
     Private Sub NewDefaultName()
-        Dim strColNames As String
-        If rdoNumeric.Checked Then
-            strColNames = "Numeric"
-        ElseIf rdoNonNegative.Checked Then
-            strColNames = "NonNumeric"
-        ElseIf rdoRank.Checked Then
-            strColNames = "Rank"
-        ElseIf rdoScale.Checked Then
-            strColNames = "sort"
-        ElseIf rdoScale.Checked Then
-            strColNames = "scale"
-        End If
         If rdoSingle.Checked Then
             If (Not ucrSaveNew.bUserTyped) AndAlso Not ucrReceiverRank.IsEmpty Then
                 ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
             End If
         ElseIf rdoMultiple.Checked Then
             If Not ucrReceiverRank.IsEmpty Then
-                clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & strColNames & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+                clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & "transformed" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
 
                 clsAddColumnsFunction.AddParameter("col_data", "col", iPosition:=1)
             End If
@@ -808,127 +779,117 @@ Public Class dlgTransform
         ucrChkMissingLast.ControlValueChanged, ucrChkDecreasing.ControlValueChanged, ucrChkDivide.ControlValueChanged, ucrChkAdd.ControlValueChanged, ucrChkMultiply.ControlValueChanged, ucrChkSubtract.ControlValueChanged
 
         ucrBase.clsRsyntax.ClearCodes()
-        If bResetRCode Then
+        'If bResetRCode Then
 
-            If rdoSingle.Checked Then
+        If rdoSingle.Checked Then
 
-                If rdoRank.Checked Then
-                    clsPreviewTextFunction = clsRankFunction.Clone
-                    clsDummyTransformFunction.AddParameter("check", "rank", iPosition:=0)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsRankFunction)
-                    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
-                ElseIf rdoSort.Checked Then
-                    clsPreviewTextFunction = clsSortFunction.Clone
-                    clsDummyTransformFunction.AddParameter("check", "sort", iPosition:=0)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
-                    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
-                ElseIf rdoNumeric.Checked Then
-                    clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
-                    If rdoRoundOf.Checked Then
-                        clsPreviewTextFunction = clsRoundFunction.Clone
-                        clsNumericDummyFunction.AddParameter("check", "round", iPosition:=0)
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
-                    ElseIf rdoSignificantDigits.Checked Then
-                        clsPreviewTextFunction = clsSignifFunction.Clone
-                        clsNumericDummyFunction.AddParameter("check", "signif", iPosition:=0)
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsSignifFunction)
-                    ElseIf rdoLag.Checked Then
-                        clsPreviewTextFunction = clsLagFunction.Clone
-                        clsNumericDummyFunction.AddParameter("check", "lag", iPosition:=0)
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsLagFunction)
-                    ElseIf rdoLead.Checked Then
-                        clsPreviewTextFunction = clsLeadFunction.Clone
-                        clsNumericDummyFunction.AddParameter("check", "lead", iPosition:=0)
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsLeadFunction)
-                    ElseIf rdoDifference.Checked Then
-                        clsPreviewTextFunction = clsConcDiffFunction.Clone
-                        clsNumericDummyFunction.AddParameter("check", "diff", iPosition:=0)
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsConcDiffFunction)
-                    ElseIf rdoStandardize.Checked Then
-                        clsPreviewTextFunction = clsDivisionOperator.Clone
-                        clsNumericDummyFunction.AddParameter("check", "standardise", iPosition:=0)
-                        ucrBase.clsRsyntax.SetBaseROperator(clsDivisionOperator)
-                    ElseIf rdoLogical.Checked Then
-                        clsNumericDummyFunction.AddParameter("check", "logical", iPosition:=0)
-                        clsPreviewTextFunction = clsBooleanOperator.Clone
-                        ucrBase.clsRsyntax.SetBaseROperator(clsBooleanOperator)
-                        Select Case ucrInputLogicOperations.GetText
-                            Case "=="
-                                clsBooleanOperator.SetOperation("==")
-                            Case "<"
-                                clsBooleanOperator.SetOperation("<")
-                            Case "<="
-                                clsBooleanOperator.SetOperation("<=")
-                            Case ">"
-                                clsBooleanOperator.SetOperation(">")
-                            Case ">="
-                                clsBooleanOperator.SetOperation(">=")
-                            Case "!="
-                                clsBooleanOperator.SetOperation("!=")
-                            Case "%in%"
-                                clsBooleanOperator.SetOperation("%in%")
-                            Case "is.na"
-                                clsIsNAFunction.SetRCommand("is.na")
-                                clsPreviewTextFunction = clsIsNAFunction.Clone
-                                ucrBase.clsRsyntax.SetBaseRFunction(clsIsNAFunction)
-                            Case "!is.na"
-                                clsIsNAFunction.SetRCommand("!is.na")
-                                clsPreviewTextFunction = clsIsNAFunction.Clone
-                                ucrBase.clsRsyntax.SetBaseRFunction(clsIsNAFunction)
-                        End Select
-                    End If
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-                ElseIf rdoNonNegative.Checked Then
-                    UpdateConstantParameter()
-                    clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
-                    If rdoSquareRoot.Checked Then
-                        clsPreviewTextFunction = clsSquarerootFunction.Clone
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsSquarerootFunction)
-                        clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
-                    ElseIf rdoPower.Checked Then
-                        clsPreviewTextFunction = clsPowerOperator.Clone
-                        clsNonNegativeDummyFunction.AddParameter("check", "power", iPosition:=0)
-                        ucrBase.clsRsyntax.SetBaseROperator(clsPowerOperator)
-                    ElseIf rdoLogToBase10.Checked Then
-                        clsPreviewTextFunction = clsLogBase10Function.Clone
-                        clsNonNegativeDummyFunction.AddParameter("check", "log10", iPosition:=0)
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsLogBase10Function)
-                    ElseIf rdoNaturalLog.Checked Then
-                        clsPreviewTextFunction = clsNaturalLogFunction.Clone
-                        clsNonNegativeDummyFunction.AddParameter("check", "log", iPosition:=0)
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsNaturalLogFunction)
-                    End If
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-                ElseIf rdoScale.Checked Then
-                    clsDummyTransformFunction.AddParameter("check", "scale", iPosition:=0)
-                    clsPreviewTextFunction = clsScaleAddOperator.Clone
-                    ucrBase.clsRsyntax.SetBaseROperator(clsScaleAddOperator)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
+            If rdoRank.Checked Then
+                clsPreviewTextFunction = clsRankFunction.Clone
+                clsDummyTransformFunction.AddParameter("check", "rank", iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRankFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
+            ElseIf rdoSort.Checked Then
+                clsPreviewTextFunction = clsSortFunction.Clone
+                clsDummyTransformFunction.AddParameter("check", "sort", iPosition:=0)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsSortFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
+            ElseIf rdoNumeric.Checked Then
+                clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
+                If rdoRoundOf.Checked Then
+                    clsPreviewTextFunction = clsRoundFunction.Clone
+                    clsNumericDummyFunction.AddParameter("check", "round", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsRoundFunction)
+                ElseIf rdoSignificantDigits.Checked Then
+                    clsPreviewTextFunction = clsSignifFunction.Clone
+                    clsNumericDummyFunction.AddParameter("check", "signif", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSignifFunction)
+                ElseIf rdoLag.Checked Then
+                    clsPreviewTextFunction = clsLagFunction.Clone
+                    clsNumericDummyFunction.AddParameter("check", "lag", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLagFunction)
+                ElseIf rdoLead.Checked Then
+                    clsPreviewTextFunction = clsLeadFunction.Clone
+                    clsNumericDummyFunction.AddParameter("check", "lead", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLeadFunction)
+                ElseIf rdoDifference.Checked Then
+                    clsPreviewTextFunction = clsConcDiffFunction.Clone
+                    clsNumericDummyFunction.AddParameter("check", "diff", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsConcDiffFunction)
+                ElseIf rdoStandardize.Checked Then
+                    clsPreviewTextFunction = clsDivisionOperator.Clone
+                    clsNumericDummyFunction.AddParameter("check", "standardise", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseROperator(clsDivisionOperator)
+                ElseIf rdoLogical.Checked Then
+                    clsNumericDummyFunction.AddParameter("check", "logical", iPosition:=0)
+                    clsPreviewTextFunction = clsBooleanOperator.Clone
+                    ucrBase.clsRsyntax.SetBaseROperator(clsBooleanOperator)
+                    Select Case ucrInputLogicOperations.GetText
+                        Case "=="
+                            clsBooleanOperator.SetOperation("==")
+                        Case "<"
+                            clsBooleanOperator.SetOperation("<")
+                        Case "<="
+                            clsBooleanOperator.SetOperation("<=")
+                        Case ">"
+                            clsBooleanOperator.SetOperation(">")
+                        Case ">="
+                            clsBooleanOperator.SetOperation(">=")
+                        Case "!="
+                            clsBooleanOperator.SetOperation("!=")
+                        Case "%in%"
+                            clsBooleanOperator.SetOperation("%in%")
+                        Case "is.na"
+                            clsIsNAFunction.SetRCommand("is.na")
+                            clsPreviewTextFunction = clsIsNAFunction.Clone
+                            ucrBase.clsRsyntax.SetBaseRFunction(clsIsNAFunction)
+                        Case "!is.na"
+                            clsIsNAFunction.SetRCommand("!is.na")
+                            clsPreviewTextFunction = clsIsNAFunction.Clone
+                            ucrBase.clsRsyntax.SetBaseRFunction(clsIsNAFunction)
+                    End Select
                 End If
-                'End If
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAssignOperator)
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddColumnsFunction)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
+            ElseIf rdoNonNegative.Checked Then
+                UpdateConstantParameter()
+                clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
+                If rdoSquareRoot.Checked Then
+                    clsPreviewTextFunction = clsSquarerootFunction.Clone
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSquarerootFunction)
+                    clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
+                ElseIf rdoPower.Checked Then
+                    clsPreviewTextFunction = clsPowerOperator.Clone
+                    clsNonNegativeDummyFunction.AddParameter("check", "power", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseROperator(clsPowerOperator)
+                ElseIf rdoLogToBase10.Checked Then
+                    clsPreviewTextFunction = clsLogBase10Function.Clone
+                    clsNonNegativeDummyFunction.AddParameter("check", "log10", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLogBase10Function)
+                ElseIf rdoNaturalLog.Checked Then
+                    clsPreviewTextFunction = clsNaturalLogFunction.Clone
+                    clsNonNegativeDummyFunction.AddParameter("check", "log", iPosition:=0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsNaturalLogFunction)
+                End If
+                ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
+            ElseIf rdoScale.Checked Then
+                clsDummyTransformFunction.AddParameter("check", "scale", iPosition:=0)
+                clsPreviewTextFunction = clsScaleAddOperator.Clone
+                ucrBase.clsRsyntax.SetBaseROperator(clsScaleAddOperator)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
+            End If
 
-                'clsDummyTransformFunction.AddParameter("checked", "single", iPosition:=1)
-                'ucrReceiverRank.bUseFilteredData = False
-                'ucrReceiverRank.SetParameterIsRFunction()
-                'ucrSelectorForRank.SetItemType("column")
-                'ucrReceiverRank.strSelectorHeading = "Numerics"
-                'lblSelectColumns.Text = "Column:"
-            Else
-                LoopsParameters()
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAssignOperator)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddColumnsFunction)
+        Else
+            LoopsParameters()
                 ucrBase.clsRsyntax.ClearCodes()
                 ucrBase.clsRsyntax.SetAssignTo("col")
                 ucrBase.clsRsyntax.AddToAfterCodes(clsPipeOperator, 0)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsAssignOperator, 1)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsAddColumnsFunction, 2)
 
-                'clsDummyTransformFunction.AddParameter("checked", "multiple", iPosition:=1)
-                'ucrSelectorForRank.SetItemType("column_selection")
-                'ucrReceiverRank.strSelectorHeading = "Column selections"
-                'lblSelectColumns.Text = "Select:"
-            End If
+
         End If
+        'End If
         SetPreviewText()
         UpdateNonNegativeParameters()
         NewDefaultName()
@@ -936,50 +897,40 @@ Public Class dlgTransform
     End Sub
 
     Private Sub LoopsParameters()
-        'ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
         If rdoRank.Checked Then
             clsDummyTransformFunction.AddParameter("check", "rank", iPosition:=0)
             clsPreviewTextFunction = clsRankColsFunction.Clone
             clsRankColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-            'clsTildaOperator.AddParameter("right", clsRFunctionParameter:=clsRankColsFunction, iPosition:=1)
             clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsRankColsFunction, bIncludeArgumentName:=False, iPosition:=1)
         ElseIf rdoSort.Checked Then
             clsDummyTransformFunction.AddParameter("check", "sort", iPosition:=0)
             clsPreviewTextFunction = clsSortColsFunction.Clone
             clsSortColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-            'clsTildaOperator.AddParameter("left", clsRFunctionParameter:=clsSortColsFunction, iPosition:=0)
             clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsSortColsFunction, bIncludeArgumentName:=False, iPosition:=1)
         ElseIf rdoNumeric.Checked Then
             clsDummyTransformFunction.AddParameter("check", "numeric", iPosition:=0)
             If rdoRoundOf.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "round", iPosition:=0)
-
                 clsRoundColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                'clsTildaOperator.AddParameter("round", clsRFunctionParameter:=clsRoundColsFunction, iPosition:=1, bIncludeArgumentName:=False)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsRoundColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoSignificantDigits.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "signif", iPosition:=0)
 
                 clsSignifColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                'clsTildaOperator.AddParameter("sig", clsRFunctionParameter:=clsSignifColsFunction, iPosition:=1, bIncludeArgumentName:=False)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsSignifColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoLag.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "lag", iPosition:=0)
 
                 clsLagColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                'clsTildaOperator.AddParameter("sig", clsRFunctionParameter:=clsLagColsFunction, iPosition:=1, bIncludeArgumentName:=False)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLagColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoLead.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "lead", iPosition:=0)
 
                 clsLeadColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                'clsTildaOperator.AddParameter("sig", clsRFunctionParameter:=clsLeadColsFunction, iPosition:=1, bIncludeArgumentName:=False)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLeadColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoDifference.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "diff", iPosition:=0)
-
                 clsConcDiffColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                'clsTildaOperator.AddParameter("sig", clsRFunctionParameter:=clsConcDiffColsFunction, iPosition:=1, bIncludeArgumentName:=False)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsConcDiffColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoStandardize.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "standardise", iPosition:=0)
@@ -987,12 +938,10 @@ Public Class dlgTransform
                 clsMeanColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsStandardDevColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
 
-                'clsTildaOperator.AddParameter("sig", clsROperatorParameter:=clsDivisionColsOperator, iPosition:=1, bIncludeArgumentName:=False)
                 clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsDivisionColsOperator, bIncludeArgumentName:=False)
             ElseIf rdoLogical.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "logical", iPosition:=0)
                 clsBooleanColsOperator.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                'clsTildaOperator.AddParameter("sig", clsROperatorParameter:=clsBooleanColsOperator, iPosition:=1, bIncludeArgumentName:=False)
                 clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsBooleanColsOperator, bIncludeArgumentName:=False)
                 Select Case ucrInputLogicOperations.GetText
                     Case "=="
@@ -1028,7 +977,6 @@ Public Class dlgTransform
                 clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
 
                 clsSquarerootColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                'clsTildaOperator.AddParameter("sig", clsRFunctionParameter:=clsSquarerootFunction, iPosition:=1, bIncludeArgumentName:=False)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsSquarerootColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoPower.Checked Then
                 clsNonNegativeDummyFunction.AddParameter("check", "log", iPosition:=0)
@@ -1036,27 +984,23 @@ Public Class dlgTransform
                 clsNonNegativeDummyFunction.AddParameter("check", "power", iPosition:=0)
 
                 clsPowerColsOperator.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                'clsTildaOperator.AddParameter("sig", clsROperatorParameter:=clsPowerOperator, iPosition:=1, bIncludeArgumentName:=False)
                 clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsPowerColsOperator, bIncludeArgumentName:=False)
             ElseIf rdoLogToBase10.Checked Then
                 clsNonNegativeDummyFunction.AddParameter("check", "log10", iPosition:=0)
 
 
                 clsLogBase10ColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                'clsTildaOperator.AddParameter("sig", clsRFunctionParameter:=clsLogBase10Function, iPosition:=1, bIncludeArgumentName:=False)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLogBase10ColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoNaturalLog.Checked Then
                 clsNonNegativeDummyFunction.AddParameter("check", "log", iPosition:=0)
 
                 clsNaturalLogColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-                'clsTildaOperator.AddParameter("sig", clsRFunctionParameter:=clsNaturalLogFunction, iPosition:=1, bIncludeArgumentName:=False)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsNaturalLogColsFunction, bIncludeArgumentName:=False)
             End If
         ElseIf rdoScale.Checked Then
             clsDummyTransformFunction.AddParameter("check", "scale", iPosition:=0)
 
             clsScaleAddColsOperator.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-            'clsTildaOperator.AddParameter("sig", clsROperatorParameter:=clsScaleAddOperator, iPosition:=1, bIncludeArgumentName:=False)
             clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsScaleAddColsOperator, bIncludeArgumentName:=False)
         End If
 
@@ -1183,8 +1127,6 @@ Public Class dlgTransform
             lblSelectColumns.Text = "Select:"
         ElseIf rdoSingle.Checked Then
             clsDummyTransformFunction.AddParameter("col", "single", iPosition:=0)
-            'ucrReceiverRank.bUseFilteredData = False
-            'ucrReceiverRank.SetParameterIsRFunction()
             ucrSelectorForRank.SetItemType("column")
             ucrReceiverRank.strSelectorHeading = "Numerics"
             lblSelectColumns.Text = "Column:"
