@@ -514,6 +514,8 @@ Partial Class ucrCalculator
         Me.cmdbegin = New System.Windows.Forms.Button()
         Me.cmdAny1 = New System.Windows.Forms.Button()
         Me.grpComplex = New System.Windows.Forms.GroupBox()
+        Me.cmdAsComplex = New System.Windows.Forms.Button()
+        Me.cmdComplexi = New System.Windows.Forms.Button()
         Me.cmdComplexTanH = New System.Windows.Forms.Button()
         Me.cmdComplexTan = New System.Windows.Forms.Button()
         Me.cmdComplexPi = New System.Windows.Forms.Button()
@@ -596,8 +598,6 @@ Partial Class ucrCalculator
         Me.cmdListSum = New System.Windows.Forms.Button()
         Me.cmdListSumd = New System.Windows.Forms.Button()
         Me.cmdListMissing = New System.Windows.Forms.Button()
-        Me.cmdComplexi = New System.Windows.Forms.Button()
-        Me.cmdAsComplex = New System.Windows.Forms.Button()
         Me.cmdRhelpList = New instat.ucrSplitButton()
         Me.cmdWakefieldHelp = New instat.ucrSplitButton()
         Me.cmdStringRHelp = New instat.ucrSplitButton()
@@ -617,42 +617,42 @@ Partial Class ucrCalculator
         Me.cmdMathsHelp = New instat.ucrSplitButton()
         Me.cmdProbRHelp = New instat.ucrSplitButton()
         Me.cmdIntegerRHelp = New instat.ucrSplitButton()
-        Me.grpBasic.SuspendLayout
-        Me.grpDates.SuspendLayout
-        Me.ContextMenuStripDate.SuspendLayout
-        Me.ContextMenuStripComplex.SuspendLayout
-        Me.grpInteger.SuspendLayout
-        Me.ContextMenuStripInteger.SuspendLayout
-        Me.grpFactor.SuspendLayout
-        Me.ContextMenuStripFactor.SuspendLayout
-        Me.grpHydroGOF.SuspendLayout
-        Me.ContextMenuStripHydroGOF.SuspendLayout
-        Me.grpWakefield.SuspendLayout
-        Me.grpMaths.SuspendLayout
-        Me.ContextMenuStripMaths.SuspendLayout
-        Me.grpSummary.SuspendLayout
-        Me.ContextMenuStripSummary.SuspendLayout
-        Me.grpFrequencies.SuspendLayout
-        Me.grpProbabilty.SuspendLayout
-        Me.ContextMenuStripProbability.SuspendLayout
-        Me.grpRandom.SuspendLayout
-        Me.grpTransform.SuspendLayout
-        Me.ContextMenuStripTransform.SuspendLayout
-        Me.grpLogical.SuspendLayout
-        Me.ContextMenuStripLogical.SuspendLayout
-        Me.grpTestString.SuspendLayout
-        Me.grpCircular.SuspendLayout
-        Me.ContextMenuStripCircular.SuspendLayout
-        Me.grpModifier.SuspendLayout
-        Me.grpSymbols.SuspendLayout
-        Me.grpComplex.SuspendLayout
-        Me.ContextMenuStripTxtString.SuspendLayout
-        Me.ContextMenuStripWakefield.SuspendLayout
-        Me.ContextMenuStripList.SuspendLayout
-        Me.grpList.SuspendLayout
-        Me.GroupBox1.SuspendLayout
-        Me.grpMathBloc.SuspendLayout
-        Me.SuspendLayout
+        Me.grpBasic.SuspendLayout()
+        Me.grpDates.SuspendLayout()
+        Me.ContextMenuStripDate.SuspendLayout()
+        Me.ContextMenuStripComplex.SuspendLayout()
+        Me.grpInteger.SuspendLayout()
+        Me.ContextMenuStripInteger.SuspendLayout()
+        Me.grpFactor.SuspendLayout()
+        Me.ContextMenuStripFactor.SuspendLayout()
+        Me.grpHydroGOF.SuspendLayout()
+        Me.ContextMenuStripHydroGOF.SuspendLayout()
+        Me.grpWakefield.SuspendLayout()
+        Me.grpMaths.SuspendLayout()
+        Me.ContextMenuStripMaths.SuspendLayout()
+        Me.grpSummary.SuspendLayout()
+        Me.ContextMenuStripSummary.SuspendLayout()
+        Me.grpFrequencies.SuspendLayout()
+        Me.grpProbabilty.SuspendLayout()
+        Me.ContextMenuStripProbability.SuspendLayout()
+        Me.grpRandom.SuspendLayout()
+        Me.grpTransform.SuspendLayout()
+        Me.ContextMenuStripTransform.SuspendLayout()
+        Me.grpLogical.SuspendLayout()
+        Me.ContextMenuStripLogical.SuspendLayout()
+        Me.grpTestString.SuspendLayout()
+        Me.grpCircular.SuspendLayout()
+        Me.ContextMenuStripCircular.SuspendLayout()
+        Me.grpModifier.SuspendLayout()
+        Me.grpSymbols.SuspendLayout()
+        Me.grpComplex.SuspendLayout()
+        Me.ContextMenuStripTxtString.SuspendLayout()
+        Me.ContextMenuStripWakefield.SuspendLayout()
+        Me.ContextMenuStripList.SuspendLayout()
+        Me.grpList.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.grpMathBloc.SuspendLayout()
+        Me.SuspendLayout()
         '
         'lblExpression
         '
@@ -6132,6 +6132,30 @@ Partial Class ucrCalculator
         Me.grpComplex.TabStop = False
         Me.grpComplex.Text = "Complex"
         '
+        'cmdAsComplex
+        '
+        Me.cmdAsComplex.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdAsComplex.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAsComplex.Location = New System.Drawing.Point(111, 22)
+        Me.cmdAsComplex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdAsComplex.Name = "cmdAsComplex"
+        Me.cmdAsComplex.Size = New System.Drawing.Size(88, 38)
+        Me.cmdAsComplex.TabIndex = 211
+        Me.cmdAsComplex.Text = "as.complex"
+        Me.cmdAsComplex.UseVisualStyleBackColor = True
+        '
+        'cmdComplexi
+        '
+        Me.cmdComplexi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexi.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexi.Location = New System.Drawing.Point(111, 202)
+        Me.cmdComplexi.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexi.Name = "cmdComplexi"
+        Me.cmdComplexi.Size = New System.Drawing.Size(88, 38)
+        Me.cmdComplexi.TabIndex = 210
+        Me.cmdComplexi.Text = "i"
+        Me.cmdComplexi.UseVisualStyleBackColor = True
+        '
         'cmdComplexTanH
         '
         Me.cmdComplexTanH.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -7108,30 +7132,6 @@ Partial Class ucrCalculator
         Me.cmdListMissing.TabIndex = 164
         Me.cmdListMissing.Text = "missing"
         Me.cmdListMissing.UseVisualStyleBackColor = True
-        '
-        'cmdComplexi
-        '
-        Me.cmdComplexi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdComplexi.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexi.Location = New System.Drawing.Point(111, 202)
-        Me.cmdComplexi.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdComplexi.Name = "cmdComplexi"
-        Me.cmdComplexi.Size = New System.Drawing.Size(88, 38)
-        Me.cmdComplexi.TabIndex = 210
-        Me.cmdComplexi.Text = "i"
-        Me.cmdComplexi.UseVisualStyleBackColor = True
-        '
-        'cmdAsComplex
-        '
-        Me.cmdAsComplex.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdAsComplex.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAsComplex.Location = New System.Drawing.Point(111, 22)
-        Me.cmdAsComplex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdAsComplex.Name = "cmdAsComplex"
-        Me.cmdAsComplex.Size = New System.Drawing.Size(88, 38)
-        Me.cmdAsComplex.TabIndex = 211
-        Me.cmdAsComplex.Text = "as.complex"
-        Me.cmdAsComplex.UseVisualStyleBackColor = True
         '
         'cmdRhelpList
         '
