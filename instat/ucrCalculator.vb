@@ -5035,11 +5035,11 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSampleFunction.ToScript, 36)
     End Sub
 
-    Private Sub cmdAsComplex_Click(sender As Object, e As EventArgs) Handles cmdAsComplex.Click
+    Private Sub cmdAsComplex_Click(sender As Object, e As EventArgs) Handles cmdComplex.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex(x = )", 1)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex( )", 1)
         End If
     End Sub
 
@@ -5180,7 +5180,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdComplexPi_Click(sender As Object, e As EventArgs) Handles cmdComplexPi.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi()", 1)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi", -1)
     End Sub
 
     Private Sub cmdPascal_Click(sender As Object, e As EventArgs) Handles cmdPascal.Click
@@ -5436,6 +5436,18 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max(x= )]", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max( )]", 15)
+        End If
+    End Sub
+
+    Private Sub cmdComplexi_Click(sender As Object, e As EventArgs) Handles cmdComplexi.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("i", 1)
+    End Sub
+
+    Private Sub cmdAsComplex_Click_1(sender As Object, e As EventArgs) Handles cmdAsComplex.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
         End If
     End Sub
 End Class
