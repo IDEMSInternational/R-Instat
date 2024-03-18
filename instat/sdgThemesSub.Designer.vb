@@ -47,6 +47,9 @@ Partial Class sdgThemesSub
         Me.ucrPanelBorder = New instat.ucrElementRectControl()
         Me.tbLegend = New System.Windows.Forms.TabPage()
         Me.grpLegendPosition = New System.Windows.Forms.GroupBox()
+        Me.rdoColour = New System.Windows.Forms.RadioButton()
+        Me.rdoFill = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlReverse = New instat.UcrPanel()
         Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
         Me.rdoVertical = New System.Windows.Forms.RadioButton()
         Me.ucrPnlDirection = New instat.UcrPanel()
@@ -61,13 +64,7 @@ Partial Class sdgThemesSub
         Me.lblXCoord = New System.Windows.Forms.Label()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.lblLegendPosition = New System.Windows.Forms.Label()
-        Me.ucrChkRemoveLegend = New instat.ucrCheck()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ucrChkLegTitleTextSize = New instat.ucrCheck()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.rdoColour = New System.Windows.Forms.RadioButton()
-        Me.rdoFill = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlReverse = New instat.UcrPanel()
         Me.TabThemes.SuspendLayout()
         Me.tbTitles.SuspendLayout()
         Me.tbLabels.SuspendLayout()
@@ -76,7 +73,6 @@ Partial Class sdgThemesSub
         Me.tbBackground.SuspendLayout()
         Me.tbLegend.SuspendLayout()
         Me.grpLegendPosition.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabThemes
@@ -296,8 +292,6 @@ Partial Class sdgThemesSub
         'tbLegend
         '
         Me.tbLegend.Controls.Add(Me.grpLegendPosition)
-        Me.tbLegend.Controls.Add(Me.ucrChkRemoveLegend)
-        Me.tbLegend.Controls.Add(Me.GroupBox1)
         Me.tbLegend.Location = New System.Drawing.Point(4, 22)
         Me.tbLegend.Name = "tbLegend"
         Me.tbLegend.Size = New System.Drawing.Size(519, 461)
@@ -324,12 +318,42 @@ Partial Class sdgThemesSub
         Me.grpLegendPosition.Controls.Add(Me.lblXCoord)
         Me.grpLegendPosition.Controls.Add(Me.ucrInputLegendPosition)
         Me.grpLegendPosition.Controls.Add(Me.lblLegendPosition)
-        Me.grpLegendPosition.Location = New System.Drawing.Point(6, 32)
+        Me.grpLegendPosition.Location = New System.Drawing.Point(6, 21)
         Me.grpLegendPosition.Name = "grpLegendPosition"
         Me.grpLegendPosition.Size = New System.Drawing.Size(413, 146)
         Me.grpLegendPosition.TabIndex = 6
         Me.grpLegendPosition.TabStop = False
         Me.grpLegendPosition.Text = "Legend Position"
+        '
+        'rdoColour
+        '
+        Me.rdoColour.AutoSize = True
+        Me.rdoColour.Location = New System.Drawing.Point(244, 84)
+        Me.rdoColour.Name = "rdoColour"
+        Me.rdoColour.Size = New System.Drawing.Size(55, 17)
+        Me.rdoColour.TabIndex = 341
+        Me.rdoColour.TabStop = True
+        Me.rdoColour.Text = "Colour"
+        Me.rdoColour.UseVisualStyleBackColor = True
+        '
+        'rdoFill
+        '
+        Me.rdoFill.AutoSize = True
+        Me.rdoFill.Location = New System.Drawing.Point(119, 84)
+        Me.rdoFill.Name = "rdoFill"
+        Me.rdoFill.Size = New System.Drawing.Size(37, 17)
+        Me.rdoFill.TabIndex = 340
+        Me.rdoFill.TabStop = True
+        Me.rdoFill.Text = "Fill"
+        Me.rdoFill.UseVisualStyleBackColor = True
+        '
+        'ucrPnlReverse
+        '
+        Me.ucrPnlReverse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlReverse.Location = New System.Drawing.Point(115, 81)
+        Me.ucrPnlReverse.Name = "ucrPnlReverse"
+        Me.ucrPnlReverse.Size = New System.Drawing.Size(281, 26)
+        Me.ucrPnlReverse.TabIndex = 339
         '
         'rdoHorizontal
         '
@@ -473,34 +497,6 @@ Partial Class sdgThemesSub
         Me.lblLegendPosition.TabIndex = 1
         Me.lblLegendPosition.Text = "Position:"
         '
-        'ucrChkRemoveLegend
-        '
-        Me.ucrChkRemoveLegend.AutoSize = True
-        Me.ucrChkRemoveLegend.Checked = False
-        Me.ucrChkRemoveLegend.Location = New System.Drawing.Point(9, 6)
-        Me.ucrChkRemoveLegend.Name = "ucrChkRemoveLegend"
-        Me.ucrChkRemoveLegend.Size = New System.Drawing.Size(193, 23)
-        Me.ucrChkRemoveLegend.TabIndex = 5
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.ucrChkLegTitleTextSize)
-        Me.GroupBox1.Location = New System.Drawing.Point(6, 184)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(413, 100)
-        Me.GroupBox1.TabIndex = 4
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "GroupBox1"
-        '
-        'ucrChkLegTitleTextSize
-        '
-        Me.ucrChkLegTitleTextSize.AutoSize = True
-        Me.ucrChkLegTitleTextSize.Checked = False
-        Me.ucrChkLegTitleTextSize.Location = New System.Drawing.Point(3, 19)
-        Me.ucrChkLegTitleTextSize.Name = "ucrChkLegTitleTextSize"
-        Me.ucrChkLegTitleTextSize.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkLegTitleTextSize.TabIndex = 5
-        '
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
@@ -508,36 +504,6 @@ Partial Class sdgThemesSub
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSubdialog.TabIndex = 2
-        '
-        'rdoColour
-        '
-        Me.rdoColour.AutoSize = True
-        Me.rdoColour.Location = New System.Drawing.Point(244, 84)
-        Me.rdoColour.Name = "rdoColour"
-        Me.rdoColour.Size = New System.Drawing.Size(55, 17)
-        Me.rdoColour.TabIndex = 341
-        Me.rdoColour.TabStop = True
-        Me.rdoColour.Text = "Colour"
-        Me.rdoColour.UseVisualStyleBackColor = True
-        '
-        'rdoFill
-        '
-        Me.rdoFill.AutoSize = True
-        Me.rdoFill.Location = New System.Drawing.Point(119, 84)
-        Me.rdoFill.Name = "rdoFill"
-        Me.rdoFill.Size = New System.Drawing.Size(37, 17)
-        Me.rdoFill.TabIndex = 340
-        Me.rdoFill.TabStop = True
-        Me.rdoFill.Text = "Fill"
-        Me.rdoFill.UseVisualStyleBackColor = True
-        '
-        'ucrPnlReverse
-        '
-        Me.ucrPnlReverse.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlReverse.Location = New System.Drawing.Point(115, 81)
-        Me.ucrPnlReverse.Name = "ucrPnlReverse"
-        Me.ucrPnlReverse.Size = New System.Drawing.Size(281, 26)
-        Me.ucrPnlReverse.TabIndex = 339
         '
         'sdgThemesSub
         '
@@ -566,11 +532,8 @@ Partial Class sdgThemesSub
         Me.tbBackground.ResumeLayout(False)
         Me.tbBackground.PerformLayout()
         Me.tbLegend.ResumeLayout(False)
-        Me.tbLegend.PerformLayout()
         Me.grpLegendPosition.ResumeLayout(False)
         Me.grpLegendPosition.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -600,15 +563,12 @@ Partial Class sdgThemesSub
     Friend WithEvents ucrPanelGridMinor As ucrElementLineControl
     Friend WithEvents ucrPanelBackground As ucrElementRectControl
     Friend WithEvents ucrPanelBorder As ucrElementRectControl
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents ucrChkLegTitleTextSize As ucrCheck
     Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
     Friend WithEvents grpLegendPosition As GroupBox
     Friend WithEvents lblYCoord As Label
     Friend WithEvents lblXCoord As Label
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents lblLegendPosition As Label
-    Friend WithEvents ucrChkRemoveLegend As ucrCheck
     Friend WithEvents ucrNudX As ucrNud
     Friend WithEvents rdoCoordinates As RadioButton
     Friend WithEvents rdoSpecific As RadioButton

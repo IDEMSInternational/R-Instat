@@ -56,10 +56,6 @@ Public Class sdgThemesSub
         ucrPanelBorder.SetLabel("Panel Border")
         ucrPanelBackground.SetLabel("Panel Background")
 
-        ucrChkRemoveLegend.SetText("Remove Legend")
-        ucrChkRemoveLegend.AddParameterPresentCondition(True, "legend", True)
-        ucrChkRemoveLegend.AddParameterPresentCondition(False, "legend", False)
-
         ucrPnlOptions.AddRadioButton(rdoCoordinates)
         ucrPnlOptions.AddRadioButton(rdoSpecific)
         ucrPnlOptions.AddParameterValuesCondition(rdoCoordinates, "legend", "coordinated")
@@ -188,7 +184,6 @@ Public Class sdgThemesSub
             ucrChkReverse.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
             ucrNudX.SetRCode(clsCFunction, bReset)
             ucrNudY.SetRCode(clsCFunction, bReset)
-            ucrChkRemoveLegend.SetRCode(clsThemesFunction, bReset, bCloneIfNeeded:=True)
             ucrInputLegendPosition.SetRCode(clsThemesFunction, bReset, bCloneIfNeeded:=True)
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
             ucrPnlReverse.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=True)
@@ -198,20 +193,16 @@ Public Class sdgThemesSub
     End Sub
 
     Private Sub LegendOptions()
-        If Not ucrChkRemoveLegend.Checked Then
-            If rdoSpecific.Checked AndAlso Not ucrInputLegendPosition.IsEmpty Then
-                clsThemesFunction.AddParameter("legend.position", Chr(34) & ucrInputLegendPosition.GetText().ToLower() & Chr(34), iPosition:=0)
-            ElseIf rdoCoordinates.Checked AndAlso Not (ucrNudY.IsEmpty AndAlso ucrNudX.IsEmpty) Then
-                clsCFunction.AddParameter("x", ucrNudX.GetText(), iPosition:=0, bIncludeArgumentName:=False)
-                clsCFunction.AddParameter("y", ucrNudY.GetText(), iPosition:=1, bIncludeArgumentName:=False)
-                clsThemesFunction.AddParameter("legend.position", clsRFunctionParameter:=clsCFunction, iPosition:=0)
-            End If
-        Else
-            clsThemesFunction.RemoveParameterByName("legend.position")
+        If rdoSpecific.Checked AndAlso Not ucrInputLegendPosition.IsEmpty Then
+            clsThemesFunction.AddParameter("legend.position", Chr(34) & ucrInputLegendPosition.GetText().ToLower() & Chr(34), iPosition:=0)
+        ElseIf rdoCoordinates.Checked AndAlso Not (ucrNudY.IsEmpty AndAlso ucrNudX.IsEmpty) Then
+            clsCFunction.AddParameter("x", ucrNudX.GetText(), iPosition:=0, bIncludeArgumentName:=False)
+            clsCFunction.AddParameter("y", ucrNudY.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+            clsThemesFunction.AddParameter("legend.position", clsRFunctionParameter:=clsCFunction, iPosition:=0)
         End If
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged, ucrChkRemoveLegend.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
         LegendOptions()
     End Sub
 
