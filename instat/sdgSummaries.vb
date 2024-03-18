@@ -583,9 +583,9 @@ Public Class sdgSummaries
     End Sub
 
     Private Sub OrderByCheckEnabled()
-        If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked Then
+        If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked OrElse ucrChkWhichmax.Checked OrElse ucrChkWhichmin.Checked Then
             ucrChkOrderBy.Enabled = True
-        ElseIf Not ucrChkFirst.Checked AndAlso Not ucrChkLast.Checked AndAlso Not ucrChknth.Checked Then
+        ElseIf Not ucrChkFirst.Checked AndAlso Not ucrChkLast.Checked AndAlso Not ucrChknth.Checked AndAlso Not ucrChkWhichmax.Checked AndAlso Not ucrChkWhichmin.Checked Then
             ucrChkOrderBy.Checked = False
             ucrChkOrderBy.Enabled = False
         End If
@@ -600,13 +600,17 @@ Public Class sdgSummaries
         End If
     End Sub
 
-    Private Sub ucrReceiverOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderBy.ControlValueChanged
-        PositionOptions()
+    Private Sub OrderBy()
         If Not ucrReceiverOrderBy.IsEmpty Then
             clsDefaultFunction.AddParameter("order_by", ucrReceiverOrderBy.GetVariableNames, iPosition:=4)
         Else
             clsDefaultFunction.RemoveParameterByName("order_by")
         End If
+    End Sub
+
+    Private Sub ucrReceiverOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderBy.ControlValueChanged
+        PositionOptions()
+        OrderBy()
     End Sub
 
     Private Sub ucrChkFirst_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirst.ControlValueChanged, ucrChkLast.ControlValueChanged, ucrChknth.ControlValueChanged
@@ -638,6 +642,8 @@ Public Class sdgSummaries
     Private Sub ucrChkOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOrderBy.ControlValueChanged
         PositionOptions()
         OrderByCheckEnabled()
+        OrderBy()
+        WhereParameter()
     End Sub
 
     Private Sub ucrChkSelectAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectAll.ControlValueChanged
@@ -652,5 +658,23 @@ Public Class sdgSummaries
             Next
             ucrChkSelectAll.SetText("Select all")
         End If
+    End Sub
+
+    Private Sub WhereParameter()
+        If ucrChkWhichmin.Checked AndAlso ucrChkOrderBy.Checked Then
+            clsListFunction.AddParameter("summary_where_min", Chr(34) & "summary_where_min" & Chr(34), bIncludeArgumentName:=False)
+        Else
+            clsListFunction.RemoveParameterByName("summary_where_min")
+        End If
+        If ucrChkWhichmax.Checked AndAlso ucrChkOrderBy.Checked Then
+            clsListFunction.AddParameter("summary_where_max", Chr(34) & "summary_where_max" & Chr(34), bIncludeArgumentName:=False)
+        Else
+            clsListFunction.RemoveParameterByName("summary_where_max")
+        End If
+    End Sub
+
+    Private Sub ucrChkWhichmax_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWhichmax.ControlValueChanged, ucrChkWhichmin.ControlValueChanged
+        WhereParameter()
+        OrderByCheckEnabled()
     End Sub
 End Class

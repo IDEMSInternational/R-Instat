@@ -489,6 +489,8 @@ sum_of_squared_residuals_label <- "ssq"
 volumetric_efficiency_label <- "VE"
 which_min_label <- "summary_which_min"
 which_max_label <- "summary_which_max"
+where_min_label <- "summary_where_min"
+where_max_label <- "summary_where_max"
 
 
 # list of all summary function names
@@ -498,8 +500,8 @@ all_summaries <- c(
   min_label, p10_label, p20_label, p25_label, p30_label, p33_label, p40_label, p60_label, p67_label, p70_label, p75_label, p80_label, p90_label, quartile_label, median_label,
   summary_median_absolute_deviation_label, summary_coef_var_label,
   summary_Qn_label, summary_Sn_label,
-  mode_label, mean_label,
-  trimmed_mean_label, max_label, sum_label,
+  mode_label, mean_label, which_min_label, which_max_label,where_min_label,
+  trimmed_mean_label, max_label, sum_label, where_min_label,
   sd_label, var_label, range_label, standard_error_mean_label,
   skewness_label, summary_skewness_mc_label, kurtosis_label,
   summary_outlier_limit_label,
@@ -522,8 +524,8 @@ all_summaries <- c(
 # which of the summaries should return a Date value when x is a Date?
 date_summaries <- c(
   min_label, p10_label, p20_label, p25_label, p30_label, p33_label, p40_label, p60_label, p67_label, p70_label, p75_label, p80_label, p90_label, quartile_label, median_label,
-  mode_label, mean_label, trimmed_mean_label,
-  max_label, first_label, last_label, nth_label,
+  mode_label, mean_label, trimmed_mean_label, which_min_label, which_max_label, where_min_label,
+  max_label, first_label, last_label, nth_label, where_min_label,
   circular_min_label, circular_Q1_label, circular_quantile_label,
   circular_median_label, circular_medianHL_label, circular_mean_label,
   circular_Q3_label, circular_max_label
@@ -757,6 +759,25 @@ summary_which_min <- function (x, na.rm = TRUE, na_type = "", ...) {
     return(which.min(x))
   } 
 }
+
+summary_where_max <- function (x, values=TRUE, na.rm = TRUE, list=FALSE, na_type = "", ...) {
+  #TODO This prevents warning and -Inf being retured. Is this desirable?
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(where.max(x))
+  } 
+}
+
+summary_where_min <- function (x, values=TRUE, na.rm = TRUE, list=FALSE, na_type = "", ...) {
+  #TODO This prevents warning and Inf being retured. Is this desirable?
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    return(where.min(x))
+  } 
+}
+
 # get the range of the data
 summary_range <- function(x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
