@@ -212,21 +212,6 @@ Public Class RSyntax
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the list of scripts associated with the list of 'after' R
-    '''             functions/operators/commands (i.e. the ones that run after the base R code).
-    '''             If a list object is flagged to exclude the script's output, and the output has
-    '''             already been assigned, then the list object's script does not include the output
-    '''             part. </summary>
-    '''
-    ''' <returns>   The list of scripts associated with the list of 'after' R
-    '''             functions/operators/commands. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetAfterCodesScripts() As List(Of String)
-        lstAfterCodes.Sort(AddressOf CompareCodePositions)
-        Return GetScriptsFromCodeList(lstAfterCodes)
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Adds this object and its associated assign script to <paramref name="lstCodes"/>
     '''             and <paramref name="lstValues"/> respectively.<para>
     '''             If this object's parameters also contain functions or operators then also 
@@ -266,21 +251,6 @@ Public Class RSyntax
     Public Function GetBeforeCodes() As List(Of RCodeStructure)
         lstBeforeCodes.Sort(AddressOf CompareCodePositions)
         Return lstBeforeCodes
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the list of scripts associated with the list of 'before' R 
-    '''             functions/operators/commands (i.e. the ones that run before the base R code).
-    '''             If a list object is flagged to exclude the script's output, and the output has
-    '''             already been assigned, then the list object's script does not include the output
-    '''             part. </summary>
-    '''
-    ''' <returns>   The list of scripts associated with the list of 'before' R
-    '''             functions/operators/commands. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetBeforeCodesScripts() As List(Of String)
-        lstBeforeCodes.Sort(AddressOf CompareCodePositions)
-        Return GetScriptsFromCodeList(lstBeforeCodes)
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -341,6 +311,36 @@ Public Class RSyntax
             End If
         End If
         Return strScript & strTemp
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Returns the list of scripts associated with the <paramref name="lstCodes"/> 
+    '''             list of R functions/operators/commands.
+    '''             If a list object is flagged to exclude the script's output, and the output has 
+    '''             already been assigned, then the list object's script does not include the output 
+    '''             part.</summary>
+    '''
+    ''' <param name="lstCodes"> The list of R functions/operators/commands. </param>
+    '''
+    ''' <returns>   list of scripts associated with the <paramref name="lstCodes"/>
+    '''             list of R functions/operators/commands. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function GetScriptsFromCodeList(lstCodes As List(Of RCodeStructure)) As List(Of String)
+        Dim strItemScript As String
+        Dim strTemp As String
+        Dim lstScripts As New List(Of String)
+
+        For Each clsTempCode In lstCodes
+            strItemScript = ""
+            strTemp = clsTempCode.ToScript(strItemScript)
+            'Sometimes the output of the R-command we deal with should not be part of the script... 
+            If clsTempCode.bExcludeAssignedFunctionOutput AndAlso Not String.IsNullOrEmpty(clsTempCode.GetRObjectToAssignTo) Then
+                lstScripts.Add(strItemScript)
+            Else
+                lstScripts.Add(strItemScript & strTemp)
+            End If
+        Next
+        Return lstScripts
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -497,36 +497,6 @@ Public Class RSyntax
         Else
             Return clsMain.iPosition.CompareTo(clsRelative.iPosition)
         End If
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the list of scripts associated with the <paramref name="lstCodes"/> 
-    '''             list of R functions/operators/commands.
-    '''             If a list object is flagged to exclude the script's output, and the output has 
-    '''             already been assigned, then the list object's script does not include the output 
-    '''             part.</summary>
-    '''
-    ''' <param name="lstCodes"> The list of R functions/operators/commands. </param>
-    '''
-    ''' <returns>   list of scripts associated with the <paramref name="lstCodes"/>
-    '''             list of R functions/operators/commands. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Private Function GetScriptsFromCodeList(lstCodes As List(Of RCodeStructure)) As List(Of String)
-        Dim strItemScript As String
-        Dim strTemp As String
-        Dim lstScripts As New List(Of String)
-
-        For Each clsTempCode In lstCodes
-            strItemScript = ""
-            strTemp = clsTempCode.ToScript(strItemScript)
-            'Sometimes the output of the R-command we deal with should not be part of the script... 
-            If clsTempCode.bExcludeAssignedFunctionOutput AndAlso Not String.IsNullOrEmpty(clsTempCode.GetRObjectToAssignTo) Then
-                lstScripts.Add(strItemScript)
-            Else
-                lstScripts.Add(strItemScript & strTemp)
-            End If
-        Next
-        Return lstScripts
     End Function
 
 End Class
