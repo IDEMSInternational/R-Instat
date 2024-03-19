@@ -601,8 +601,12 @@ Public Class sdgSummaries
     End Sub
 
     Private Sub OrderBy()
-        If Not ucrReceiverOrderBy.IsEmpty Then
-            clsDefaultFunction.AddParameter("order_by", ucrReceiverOrderBy.GetVariableNames, iPosition:=4)
+        If ucrChkOrderBy.Checked Then
+            If Not ucrReceiverOrderBy.IsEmpty Then
+                clsDefaultFunction.AddParameter("order_by", ucrReceiverOrderBy.GetVariableNames, iPosition:=4)
+            Else
+                clsDefaultFunction.RemoveParameterByName("order_by")
+            End If
         Else
             clsDefaultFunction.RemoveParameterByName("order_by")
         End If
