@@ -290,7 +290,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdComplexRad, "Change from degrees to radians. For example rad(90 + 180i) gives (1.571 + 3.142i)")
         ttCalculator.SetToolTip(cmdComplexDeg, " Change from radians to degrees. For example deg(pi/2 + 3.142i) gives (90 + 180i)")
         ttCalculator.SetToolTip(cmdComplexSqrt, "Square root. For example sqrt(-9 + 0i) gives (0 + 3i) or just 3i. sqrt(-9 + 2i) gives 0.331 + 3.018i)")
-        ttCalculator.SetToolTip(cmdComplexExp, "The exponential function. For example exp(3 + 2i) gives")
+        'to add  ttCalculator.SetToolTip(cmdComplexExp, "The exponential function. For example exp(3 + 2i) gives")
         ttCalculator.SetToolTip(cmdComplexRound, "round(pi/2 + 3.14259i) gives 2 + 3i) so rounds to whole numbers. round(pi/2 + 3.14259i, 2) gives 1.57 + 3.14i, so rounds to 2 decimals.")
         ttCalculator.SetToolTip(cmdComplexSignif, "Rounds to give the specified number off digits in the larger of the components. For example signif(0.424 + 511.38i, 3) gives (0 + 511i)")
 

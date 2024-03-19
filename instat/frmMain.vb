@@ -2283,7 +2283,6 @@ Public Class frmMain
     Private Sub mnuPrepareCheckDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataVisualiseData.Click
         dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Prepare
         dlgVisualizeData.ShowDialog()
-        ' ucrBase.iHelpTopicID = 54
     End Sub
 
     Private Sub mnuClimaticCompareCalculation_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareCalculation.Click
