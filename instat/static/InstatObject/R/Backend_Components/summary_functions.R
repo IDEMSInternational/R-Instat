@@ -760,14 +760,22 @@ summary_which_min <- function (x, na.rm = TRUE, na_type = "", ...) {
   } 
 }
 
-summary_where_max <- function (x, values=TRUE, na.rm = TRUE, list=FALSE, na_type = "", ...) {
-  #TODO This prevents warning and -Inf being retured. Is this desirable?
+summary_where_max <- function (x, columns_to_summarise = NULL, na.rm = TRUE, na_type = "", ...) {
   if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    return(where.max(x))
-  } 
+  
+  if (!is.null(columns_to_summarise) && length(columns_to_summarise) > 0) {
+    # Subset x based on factors
+    x <- x[columns_to_summarise]
+  }
+  
+  return(which.max(x))
 }
+
+
+
+
+
 
 summary_where_min <- function (x, values=TRUE, na.rm = TRUE, list=FALSE, na_type = "", ...) {
   #TODO This prevents warning and Inf being retured. Is this desirable?
