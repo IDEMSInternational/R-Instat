@@ -42,17 +42,6 @@
 ''' </summary>
 '''--------------------------------------------------------------------------------------------
 Public Class RSyntax
-    'TODO Legacy - Adapt RSyntax to new style... 
-
-    ' An object of this class is associated with a base R code. This R code must be (only one of):
-    '   - An R function,
-    '   - An R operator
-    '   - A generic R command
-    ' 
-    ' Use the 3 booleans below to set the type
-    ' 'TODO SJL It's not valid for an object of this class to be more than one of the 3 types above. 
-    '     However the booleans potentially allow this. Replace with an enumeration?
-
     ''' <summary>   If true then don't include the output part in the script (i.e. the part of the 
     '''             script to the left of the assignment operator '&lt;-'). </summary>
     Public bExcludeAssignedFunctionOutput As Boolean = True
@@ -63,6 +52,15 @@ Public Class RSyntax
     ''' <summary>   TODO SJL 07/04/20 Is only ever Nothing (or in one rare case False). Remove? </summary>
     Public bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing
 
+    ' An object of this class is associated with a base R code. This R code must be (only one of):
+    '   - An R function,
+    '   - An R operator
+    '   - A generic R command
+    ' 
+    ' Use the 3 booleans below to set the type
+    ' 'TODO SJL It's not valid for an object of this class to be more than one of the 3 types above. 
+    '     However the booleans potentially allow this. Replace with an enumeration?
+
     ''' <summary>   If true then use 'clsBaseFunction' as this object's base R code. </summary>
     Public bUseBaseFunction As Boolean = False
 
@@ -71,6 +69,7 @@ Public Class RSyntax
 
     ''' <summary>   If true then use 'clsBaseCommandString' as this object's base R code. </summary>
     Public bUseCommandString As Boolean = False
+
 
     ''' <summary>   An R command (of any type). </summary>
     Public clsBaseCommandString As New RCodeStructure 'TODO SJL 17/04/20 What's the connection between this and 'bUseCommandString' and 'strCommandString'? 
@@ -124,7 +123,6 @@ Public Class RSyntax
     '''--------------------------------------------------------------------------------------------
     Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional clsRCodeStructureParameter As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         'TODO SJL 17/04/20 This function should only be used if this class encapsulates a function. But it doesn't check the booleans for this.
-        '                  Also, 'clsBaseFunction' is public so 'AddParameter' can be called directly. Remove this function?
         clsBaseFunction.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, clsRCodeStructureParameter, bIncludeArgumentName, iPosition)
     End Sub
 
@@ -139,7 +137,7 @@ Public Class RSyntax
     Public Sub AddToAfterCodes(clsNewRCode As RCodeStructure, Optional iPosition As Integer = -1)
         If Not lstAfterCodes.Contains(clsNewRCode) Then
             lstAfterCodes.Add(clsNewRCode)
-            clsNewRCode.iPosition = iPosition 'TODO SJL 06/04/20 remove this line and the 'Else' (same as function above)?
+            clsNewRCode.iPosition = iPosition 'TODO SJL 06/04/20 remove this line and the 'Else' (see AddToBeforeCodes)?
         Else
             lstAfterCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPosition
         End If
@@ -164,7 +162,6 @@ Public Class RSyntax
     ''' <summary>   Resets all the data members to default values. </summary>
     '''--------------------------------------------------------------------------------------------
     Public Sub ClearCodes()
-        'TODO SJL Some data members are not reset by this function. Add them?
         lstBeforeCodes = New List(Of RCodeStructure)
         lstAfterCodes = New List(Of RCodeStructure)
         clsBaseFunction = New RFunction
@@ -174,6 +171,8 @@ Public Class RSyntax
         bUseBaseFunction = False
         bUseBaseOperator = False
         bUseCommandString = False
+        'TODO SJL 19/03/24 also reset iCallType?
+        'iCallType = 0
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -361,20 +360,20 @@ Public Class RSyntax
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 06/04/20 This is a single line function on a public data member.
-    '''             I'm not sure what it adds. Remove?.</summary>
+    ''' <summary> Removes <paramref name="clsNewRCode"/> from the statements executed after the 
+    ''' base statement.</summary>
     '''
-    ''' <param name="clsNewRCode">  The cls new r code. </param>
+    ''' <param name="clsNewRCode">  The R statement to remove. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub RemoveFromAfterCodes(clsNewRCode As RCodeStructure)
         lstAfterCodes.Remove(clsNewRCode)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 06/04/20 This is a single line function on a public data member. 
-    '''             I'm not sure what it adds. Remove? </summary>
+    ''' <summary> Removes <paramref name="clsNewRCode"/> from the statements executed before the 
+    ''' base statement.</summary>
     '''
-    ''' <param name="clsNewRCode">  The cls new r code. </param>
+    ''' <param name="clsNewRCode">  The R statement to remove. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub RemoveFromBeforeCodes(clsNewRCode As RCodeStructure)
         lstBeforeCodes.Remove(clsNewRCode)
@@ -389,7 +388,6 @@ Public Class RSyntax
     '''--------------------------------------------------------------------------------------------
     Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
         'TODO SJL 17/04/20 This function should only be used if this class encapsulates a function. But it doesn't check the booleans for this.
-        '                  Also, 'clsBaseFunction' is public so 'RemoveParameterByName' can be called directly. Remove this function?
         If clsFunction Is Nothing Then
             clsFunction = clsBaseFunction
         End If
@@ -463,7 +461,6 @@ Public Class RSyntax
     ''' <param name="strFunctionName">  Name of the R command. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SetFunction(strFunctionName As String)
-        'TODO legacy -  confusing name
         clsBaseFunction.SetRCommand(strFunctionName)
         bUseBaseFunction = True
         bUseBaseOperator = False
