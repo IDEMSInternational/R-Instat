@@ -526,13 +526,13 @@ Public Class dlgTransform
         clsLeadColsFunction.SetPackageName("~dplyr")
         clsLeadColsFunction.SetRCommand("lead")
 
-        clsDiffColsFunction.SetRCommand("~diff")
+        clsDiffColsFunction.SetRCommand("diff")
         clsDiffColsFunction.AddParameter("lag", "1", iPosition:=1)
 
-        clsReplicateColsFunction.SetRCommand("~rep")
+        clsReplicateColsFunction.SetRCommand("rep")
         clsReplicateColsFunction.AddParameter("x", "NA", iPosition:=0)
 
-        clsConcDiffColsFunction.SetRCommand("c")
+        clsConcDiffColsFunction.SetRCommand("~c")
         clsConcDiffColsFunction.AddParameter("y", clsRFunctionParameter:=clsReplicateColsFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsConcDiffColsFunction.AddParameter("x", clsRFunctionParameter:=clsDiffColsFunction, iPosition:=1, bIncludeArgumentName:=False)
 
@@ -559,7 +559,6 @@ Public Class dlgTransform
         clsLogBase10ColsFunction.SetRCommand("~log10")
 
         clsPowerColsOperator.SetOperation("^")
-        clsPowerColsOperator.AddParameter("y", "1", iPosition:=1)
         clsPowerColsOperator.bSpaceAroundOperation = False
 
         clsScaleMeanColsFunction.SetRCommand("~mean")
@@ -651,7 +650,7 @@ Public Class dlgTransform
         ucrReceiverRank.AddAdditionalCodeParameterPair(clsStandardDevFunction, New RParameter("x", 0), iAdditionalPairNo:=9)
         ucrNudDiffLag.AddAdditionalCodeParameterPair(clsReplicateFunction, New RParameter("times", 1), iAdditionalPairNo:=1)
         ucrNudDiffLag.AddAdditionalCodeParameterPair(clsReplicateColsFunction, New RParameter("times", 1), iAdditionalPairNo:=2)
-        ucrNudDiffLag.AddAdditionalCodeParameterPair(clsDiffColsFunction, New RParameter("times", 1), iAdditionalPairNo:=3)
+        ucrNudDiffLag.AddAdditionalCodeParameterPair(clsDiffColsFunction, New RParameter("lag", 1), iAdditionalPairNo:=3)
         ucrNudLagLeadPosition.AddAdditionalCodeParameterPair(clsLeadColsFunction, New RParameter("n", 1), iAdditionalPairNo:=1)
         ucrNudLagPosition.AddAdditionalCodeParameterPair(clsLagColsFunction, New RParameter("lag", 1), iAdditionalPairNo:=1)
         ucrNudSignifDigits.AddAdditionalCodeParameterPair(clsSignifColsFunction, New RParameter("digits", 1), iAdditionalPairNo:=1)
@@ -693,6 +692,8 @@ Public Class dlgTransform
         ucrPnlMissingValues.AddAdditionalCodeParameterPair(clsRankColsFunction, New RParameter("na.last", 2), iAdditionalPairNo:=1)
         ucrChkMissingLast.AddAdditionalCodeParameterPair(clsSortColsFunction, New RParameter("na.last", 1), iAdditionalPairNo:=1)
         ucrChkDecreasing.AddAdditionalCodeParameterPair(clsSortColsFunction, New RParameter("decreasing", 2), iAdditionalPairNo:=1)
+        ucrInputLogicalValues.AddAdditionalCodeParameterPair(clsBooleanColsOperator, New RParameter("x", 1), iAdditionalPairNo:=1)
+
         ucrSaveNew.AddAdditionalRCode(clsLeadFunction, iAdditionalPairNo:=1)
         ucrSaveNew.AddAdditionalRCode(clsLagFunction, iAdditionalPairNo:=2)
         ucrSaveNew.AddAdditionalRCode(clsSignifFunction, iAdditionalPairNo:=3)
@@ -732,7 +733,7 @@ Public Class dlgTransform
         ucrPnlNonNegative.SetRCode(clsNonNegativeDummyFunction, bReset)
         ucrChkOmitNA.SetRCode(clsMeanFunction, bReset)
         ucrChkPreview.SetRCode(clsConstantDummyFunction, bReset)
-
+        ucrInputLogicalValues.SetRCode(clsBooleanOperator, bReset)
         If bReset Then
             ucrReceiverRank.SetRCode(clsRankFunction, bReset)
         End If
@@ -741,13 +742,21 @@ Public Class dlgTransform
 
     Private Sub TestOKEnabled()
         If rdoNumeric.Checked AndAlso rdoLogical.Checked Then
-            If Not ucrInputLogicOperations.GetText = "is.na" AndAlso Not ucrInputLogicOperations.GetText = "!is.na" Then
-                ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete AndAlso Not ucrInputLogicalValues.IsEmpty)
+            If rdoSingle.Checked Then
+                If Not ucrInputLogicOperations.GetText = "is.na" AndAlso Not ucrInputLogicOperations.GetText = "!is.na" Then
+                    ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete AndAlso Not ucrInputLogicalValues.IsEmpty)
+                Else
+                    ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete)
+                End If
+            ElseIf rdoMultiple.Checked Then
+                If Not ucrInputLogicOperations.GetText = "is.na" AndAlso Not ucrInputLogicOperations.GetText = "!is.na" Then
+                    ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso Not ucrInputLogicalValues.IsEmpty)
+                Else
+                    ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete)
+                End If
             Else
-                ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete)
+                ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty())
             End If
-        Else
-            ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty())
         End If
     End Sub
 
@@ -930,7 +939,7 @@ Public Class dlgTransform
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLeadColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoDifference.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "diff", iPosition:=0)
-                clsConcDiffColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
+                clsDiffColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsConcDiffColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoStandardize.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "standardise", iPosition:=0)
@@ -941,7 +950,7 @@ Public Class dlgTransform
                 clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsDivisionColsOperator, bIncludeArgumentName:=False)
             ElseIf rdoLogical.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "logical", iPosition:=0)
-                clsBooleanColsOperator.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
+                clsBooleanColsOperator.AddParameter("x", "~.x", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsBooleanColsOperator, bIncludeArgumentName:=False)
                 Select Case ucrInputLogicOperations.GetText
                     Case "=="
@@ -979,11 +988,11 @@ Public Class dlgTransform
                 clsSquarerootColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsSquarerootColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoPower.Checked Then
-                clsNonNegativeDummyFunction.AddParameter("check", "log", iPosition:=0)
 
                 clsNonNegativeDummyFunction.AddParameter("check", "power", iPosition:=0)
+                clsPowerColsOperator.AddParameter("y", ucrInputPower.GetText, iPosition:=1)
 
-                clsPowerColsOperator.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
+                clsPowerColsOperator.AddParameter("x", "~.", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsPowerColsOperator, bIncludeArgumentName:=False)
             ElseIf rdoLogToBase10.Checked Then
                 clsNonNegativeDummyFunction.AddParameter("check", "log10", iPosition:=0)
@@ -1087,11 +1096,19 @@ Public Class dlgTransform
         SetPreviewText()
     End Sub
 
-    Private Sub ucrInputLogicalValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLogicalValues.ControlValueChanged
-        If Not ucrInputLogicalValues.IsEmpty Then
-            clsBooleanOperator.AddParameter("right", ucrInputLogicalValues.GetText, iPosition:=1)
-        Else
-            clsBooleanOperator.RemoveParameterByName("right")
+    Private Sub ucrInputLogicalValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLogicalValues.ControlValueChanged, ucrInputLogicOperations.ControlValueChanged
+        If rdoSingle.Checked Then
+            If Not ucrInputLogicalValues.IsEmpty Then
+                clsBooleanOperator.AddParameter("right", ucrInputLogicalValues.GetText, iPosition:=1)
+            Else
+                clsBooleanOperator.RemoveParameterByName("right")
+            End If
+        ElseIf rdoMultiple.Checked Then
+            If Not ucrInputLogicalValues.IsEmpty Then
+                clsBooleanColsOperator.AddParameter("right", ucrInputLogicalValues.GetText, iPosition:=1)
+            Else
+                clsBooleanColsOperator.RemoveParameterByName("right")
+            End If
         End If
     End Sub
 
