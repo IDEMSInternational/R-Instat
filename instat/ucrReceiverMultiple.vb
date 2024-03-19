@@ -322,7 +322,7 @@ Public Class ucrReceiverMultiple
     End Function
 
     Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
-        Dim arrItems(lstSelectedVariables.Items.Count) As String
+        Dim arrItems(lstSelectedVariables.Items.Count - 1) As String
         Dim strQuoteHolder As String = If(bWithQuotes, strQuotes, "")
         For i = 0 To lstSelectedVariables.Items.Count - 1
             arrItems(i) = strQuoteHolder & lstSelectedVariables.Items(i).Text & strQuoteHolder
