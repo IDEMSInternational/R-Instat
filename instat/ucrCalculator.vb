@@ -163,7 +163,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdqF, "F quantiles. For example qf(0.95,1,10) = 4.965; qf(0.95, 50,50)= 1.599")
 
         'maths keyboard tooltips
-        ttCalculator.SetToolTip(cmdDeg, "Change for radians to degrees. For example deg(pi/2) = 90.")
+        ttCalculator.SetToolTip(cmdDeg, "Change from radians to degrees. For example deg(pi/2) = 90.")
         ttCalculator.SetToolTip(cmdExp, "The exponential function. exp(1) = e = 2.71828. exp(0) = 1, exp(-2) = 0.1353 = 1/exp(2). It is the inverse of the log function, so exp(6.238) = 512, while log(512) = 6.238.")
         ttCalculator.SetToolTip(cmdAbs, "The absolute (or positive) value. For example abs (-4.4) = abs(4.4) = 4.4.")
         ttCalculator.SetToolTip(cmdSign, "The sign of the corresponding values. So sign(4.2)=1, sign(-20)=-1, sign(c(-2,-1,0,1,2,3))= (-1,-1,0,1,1,1)")
@@ -284,7 +284,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdAsComplex, "Define a variable as complex. For example as.complex(-1) gives 1 + 0i")
         ttCalculator.SetToolTip(cmdReal, "The real part of a complex number. For example Re(3 + 2i) gives 3.")
         ttCalculator.SetToolTip(cmdImaginary, "The imaginary part of a complex number or variable. For example Im(3 + 2i) gives 2.")
-        ttCalculator.SetToolTip(cmdMod, "The modulus (polar coordinate) of a complex number or variable. For example Mod(3 + 2i) gives 3.606, which is sqrt(33 + 22). Also abs(3 + 2i) is the same as Mod(3 + 2i).")
+        ttCalculator.SetToolTip(cmdMod, "The modulus (polar coordinate) of a complex number or variable. For example Mod(3 + 2i) gives 3.606, which is sqrt(33 + 22 ). Also abs(3 + 2i) is the same as Mod(3 + 2i).")
         ttCalculator.SetToolTip(cmdArg, " The argument (polar coordinate) of a complex number or variable. For example Arg(3 + 2i) gives 0.588 where 3 = 3.606cos(0.588) and 2 = 3.606sin(0.588).")
         ttCalculator.SetToolTip(cmdConjugate, "Conjugate of a complex number or variable: For example Conj(3 + 2i) gives 3 - 2i.")
         ttCalculator.SetToolTip(cmdComplexRad, "Change from degrees to radians. For example rad(90 + 180i) gives (1.571 + 3.142i)")
