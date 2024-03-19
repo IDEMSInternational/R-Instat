@@ -40,7 +40,7 @@ Partial Class dlgInstallRPackage
         Me.cmdCheck.Location = New System.Drawing.Point(14, 94)
         Me.cmdCheck.Name = "cmdCheck"
         Me.cmdCheck.Size = New System.Drawing.Size(75, 22)
-        Me.cmdCheck.TabIndex = 16
+        Me.cmdCheck.TabIndex = 7
         Me.cmdCheck.Text = "Check"
         Me.cmdCheck.UseVisualStyleBackColor = True
         '
@@ -51,7 +51,7 @@ Partial Class dlgInstallRPackage
         Me.lblRPackage.Location = New System.Drawing.Point(21, 44)
         Me.lblRPackage.Name = "lblRPackage"
         Me.lblRPackage.Size = New System.Drawing.Size(64, 13)
-        Me.lblRPackage.TabIndex = 1
+        Me.lblRPackage.TabIndex = 3
         Me.lblRPackage.Text = "R Package:"
         '
         'rdoCRAN
@@ -66,7 +66,7 @@ Partial Class dlgInstallRPackage
         Me.rdoCRAN.Location = New System.Drawing.Point(104, 3)
         Me.rdoCRAN.Name = "rdoCRAN"
         Me.rdoCRAN.Size = New System.Drawing.Size(91, 28)
-        Me.rdoCRAN.TabIndex = 21
+        Me.rdoCRAN.TabIndex = 1
         Me.rdoCRAN.TabStop = True
         Me.rdoCRAN.Tag = "Frequency"
         Me.rdoCRAN.Text = "CRAN"
@@ -85,7 +85,7 @@ Partial Class dlgInstallRPackage
         Me.rdoRPackage.Location = New System.Drawing.Point(192, 3)
         Me.rdoRPackage.Name = "rdoRPackage"
         Me.rdoRPackage.Size = New System.Drawing.Size(91, 28)
-        Me.rdoRPackage.TabIndex = 22
+        Me.rdoRPackage.TabIndex = 2
         Me.rdoRPackage.TabStop = True
         Me.rdoRPackage.Tag = "Frequency"
         Me.rdoRPackage.Text = "R Package "
@@ -99,7 +99,7 @@ Partial Class dlgInstallRPackage
         Me.lblRepository.Location = New System.Drawing.Point(3, 72)
         Me.lblRepository.Name = "lblRepository"
         Me.lblRepository.Size = New System.Drawing.Size(91, 13)
-        Me.lblRepository.TabIndex = 24
+        Me.lblRepository.TabIndex = 5
         Me.lblRepository.Text = "Repository Name:"
         '
         'ucrBase
@@ -109,7 +109,7 @@ Partial Class dlgInstallRPackage
         Me.ucrBase.Location = New System.Drawing.Point(24, 130)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 15
+        Me.ucrBase.TabIndex = 9
         '
         'ucrInputTextBoxRPackage
         '
@@ -120,7 +120,7 @@ Partial Class dlgInstallRPackage
         Me.ucrInputTextBoxRPackage.Location = New System.Drawing.Point(95, 42)
         Me.ucrInputTextBoxRPackage.Name = "ucrInputTextBoxRPackage"
         Me.ucrInputTextBoxRPackage.Size = New System.Drawing.Size(197, 22)
-        Me.ucrInputTextBoxRPackage.TabIndex = 0
+        Me.ucrInputTextBoxRPackage.TabIndex = 4
         '
         'ucrPnlRPackages
         '
@@ -128,7 +128,7 @@ Partial Class dlgInstallRPackage
         Me.ucrPnlRPackages.Location = New System.Drawing.Point(83, 2)
         Me.ucrPnlRPackages.Name = "ucrPnlRPackages"
         Me.ucrPnlRPackages.Size = New System.Drawing.Size(226, 34)
-        Me.ucrPnlRPackages.TabIndex = 20
+        Me.ucrPnlRPackages.TabIndex = 0
         '
         'ucrInputMessage
         '
@@ -139,7 +139,7 @@ Partial Class dlgInstallRPackage
         Me.ucrInputMessage.Location = New System.Drawing.Point(95, 94)
         Me.ucrInputMessage.Name = "ucrInputMessage"
         Me.ucrInputMessage.Size = New System.Drawing.Size(337, 22)
-        Me.ucrInputMessage.TabIndex = 17
+        Me.ucrInputMessage.TabIndex = 8
         '
         'ucrInputRepositoryName
         '
@@ -150,7 +150,7 @@ Partial Class dlgInstallRPackage
         Me.ucrInputRepositoryName.Location = New System.Drawing.Point(93, 69)
         Me.ucrInputRepositoryName.Name = "ucrInputRepositoryName"
         Me.ucrInputRepositoryName.Size = New System.Drawing.Size(197, 22)
-        Me.ucrInputRepositoryName.TabIndex = 23
+        Me.ucrInputRepositoryName.TabIndex = 6
         '
         'dlgInstallRPackage
         '
