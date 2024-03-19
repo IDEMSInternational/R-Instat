@@ -56,10 +56,6 @@ Public Class dlgHeatMapPlot
     clsSummariseFunction, clsDummyFunction, clsGeomJitterFunction, clsScalefillDistillerFunction,
      clsFillBrewerFunction, clsScalefillmanualFunction, clsScalefillgradientFunction As New RFunction
 
-    Private Sub AllControlsContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrInputColour.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged
-
-    End Sub
-
     Private Sub dlgHeatMapPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -970,57 +966,38 @@ Public Class dlgHeatMapPlot
     End Sub
 
     Private Sub ChangePalette()
+        ' Remove all existing palette-related parameters
+        clsBaseOperator.RemoveParameterByName("palette")
+        clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
+        clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
+        clsBaseOperator.RemoveParameterByName("scale_fill_manual")
+        clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
         If rdoViridis.Checked Then
             clsBaseOperator.AddParameter("palette", clsRFunctionParameter:=clsColourPaletteFunction, iPosition:=6)
-            clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
-            clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
-            clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
-            clsBaseOperator.RemoveParameterByName("scale_fill_manual")
         ElseIf rdoPalette.Checked Then
-            clsBaseOperator.RemoveParameterByName("palette")
-            clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
-            clsBaseOperator.RemoveParameterByName("scale_fill_manual")
             If Not ucrReceiverFill.IsEmpty OrElse Not ucrReceiverFillChoropleth.IsEmpty Then
-                If ucrReceiverFill.strCurrDataType = "factor" OrElse ucrReceiverFill.strCurrDataType = "ordered,factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "ordered,factor" Then
-                    clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
+                If ucrReceiverFill.strCurrDataType = "factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "factor" Then
                     clsFillBrewerFunction.AddParameter("palette", Chr(34) & ucrInputPalette.GetText() & Chr(34))
                     clsBaseOperator.AddParameter("scale_fill_brewer", clsRFunctionParameter:=clsFillBrewerFunction, iPosition:=2)
                 Else
-                    clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
                     clsScalefillDistillerFunction.AddParameter("palette", Chr(34) & ucrInputPalette.GetText() & Chr(34))
                     clsBaseOperator.AddParameter("scale_fill_distiller", clsRFunctionParameter:=clsScalefillDistillerFunction, iPosition:=2)
                 End If
-            Else
-                clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
-                clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
             End If
         ElseIf rdoGradient.Checked Then
-            clsBaseOperator.RemoveParameterByName("palette")
-            clsBaseOperator.RemoveParameterByName("scale_fill_brewer")
-            clsBaseOperator.RemoveParameterByName("scale_fill_distiller")
-            If Not ucrReceiverFill.IsEmpty OrElse Not ucrReceiverFillChoropleth.IsEmpty Then
-                If ucrReceiverFill.strCurrDataType = "factor" OrElse ucrReceiverFill.strCurrDataType = "ordered,factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "ordered,factor" Then
-                    clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
+            If Not ucrReceiverFill.IsEmpty Or Not ucrReceiverFillChoropleth.IsEmpty Then
+                If ucrReceiverFill.strCurrDataType = "factor" OrElse ucrReceiverFillChoropleth.strCurrDataType = "factor" Then
                     If Not ucrInputValue.IsEmpty() Then
                         clsScalefillmanualFunction.AddParameter("values", ucrInputValue.clsRList.ToScript(), iPosition:=0)
                         clsBaseOperator.AddParameter("scale_fill_manual", clsRFunctionParameter:=clsScalefillmanualFunction, iPosition:=2)
-                    Else
-                        clsScalefillmanualFunction.RemoveParameterByName("values")
                     End If
                 Else
-                    clsBaseOperator.RemoveParameterByName("scale_fill_manual")
                     If Not ucrColourTo.IsEmpty AndAlso Not ucrColourFrom.IsEmpty Then
                         clsScalefillgradientFunction.AddParameter("low", Chr(34) & ucrColourFrom.GetText() & Chr(34), iPosition:=0)
                         clsScalefillgradientFunction.AddParameter("high", Chr(34) & ucrColourTo.GetText() & Chr(34), iPosition:=1)
                         clsBaseOperator.AddParameter("scale_fill_gradient", clsRFunctionParameter:=clsScalefillgradientFunction, iPosition:=2)
-                    Else
-                        clsScalefillgradientFunction.RemoveParameterByName("low")
-                        clsScalefillgradientFunction.RemoveParameterByName("high")
                     End If
                 End If
-            Else
-                clsBaseOperator.RemoveParameterByName("scale_fill_manual")
-                clsBaseOperator.RemoveParameterByName("scale_fill_gradient")
             End If
         End If
     End Sub
