@@ -52,7 +52,7 @@ Partial Class dlgClimograph
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(109, 26)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 48
+        Me.ucrReceiverStation.TabIndex = 33
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'lblStation
@@ -62,7 +62,7 @@ Partial Class dlgClimograph
         Me.lblStation.Location = New System.Drawing.Point(265, 249)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 47
+        Me.lblStation.TabIndex = 14
         Me.lblStation.Tag = ""
         Me.lblStation.Text = "Station:"
         '
@@ -76,7 +76,7 @@ Partial Class dlgClimograph
         Me.ucrReceiverRain.Selector = Nothing
         Me.ucrReceiverRain.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverRain.strNcFilePath = ""
-        Me.ucrReceiverRain.TabIndex = 46
+        Me.ucrReceiverRain.TabIndex = 7
         Me.ucrReceiverRain.ucrSelector = Nothing
         '
         'lblRain
@@ -85,7 +85,7 @@ Partial Class dlgClimograph
         Me.lblRain.Location = New System.Drawing.Point(268, 84)
         Me.lblRain.Name = "lblRain"
         Me.lblRain.Size = New System.Drawing.Size(48, 13)
-        Me.lblRain.TabIndex = 45
+        Me.lblRain.TabIndex = 6
         Me.lblRain.Text = "RainFall:"
         '
         'ucrReceiverMaxtem
@@ -98,7 +98,7 @@ Partial Class dlgClimograph
         Me.ucrReceiverMaxtem.Selector = Nothing
         Me.ucrReceiverMaxtem.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMaxtem.strNcFilePath = ""
-        Me.ucrReceiverMaxtem.TabIndex = 44
+        Me.ucrReceiverMaxtem.TabIndex = 9
         Me.ucrReceiverMaxtem.ucrSelector = Nothing
         '
         'lblMaxtem
@@ -107,7 +107,7 @@ Partial Class dlgClimograph
         Me.lblMaxtem.Location = New System.Drawing.Point(268, 127)
         Me.lblMaxtem.Name = "lblMaxtem"
         Me.lblMaxtem.Size = New System.Drawing.Size(93, 13)
-        Me.lblMaxtem.TabIndex = 43
+        Me.lblMaxtem.TabIndex = 8
         Me.lblMaxtem.Text = "Temperature Max:"
         '
         'ucrReceiverMintemp
@@ -120,7 +120,7 @@ Partial Class dlgClimograph
         Me.ucrReceiverMintemp.Selector = Nothing
         Me.ucrReceiverMintemp.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMintemp.strNcFilePath = ""
-        Me.ucrReceiverMintemp.TabIndex = 42
+        Me.ucrReceiverMintemp.TabIndex = 11
         Me.ucrReceiverMintemp.ucrSelector = Nothing
         '
         'lblMintem
@@ -129,7 +129,7 @@ Partial Class dlgClimograph
         Me.lblMintem.Location = New System.Drawing.Point(268, 168)
         Me.lblMintem.Name = "lblMintem"
         Me.lblMintem.Size = New System.Drawing.Size(90, 13)
-        Me.lblMintem.TabIndex = 41
+        Me.lblMintem.TabIndex = 10
         Me.lblMintem.Text = "Temperature Min:"
         '
         'rdoClimograph
@@ -145,7 +145,7 @@ Partial Class dlgClimograph
         Me.rdoClimograph.Location = New System.Drawing.Point(196, 8)
         Me.rdoClimograph.Name = "rdoClimograph"
         Me.rdoClimograph.Size = New System.Drawing.Size(119, 28)
-        Me.rdoClimograph.TabIndex = 40
+        Me.rdoClimograph.TabIndex = 3
         Me.rdoClimograph.TabStop = True
         Me.rdoClimograph.Tag = ""
         Me.rdoClimograph.Text = "Ordinary Climograph"
@@ -164,7 +164,7 @@ Partial Class dlgClimograph
         Me.rdoWalterLieth.Location = New System.Drawing.Point(118, 8)
         Me.rdoWalterLieth.Name = "rdoWalterLieth"
         Me.rdoWalterLieth.Size = New System.Drawing.Size(80, 28)
-        Me.rdoWalterLieth.TabIndex = 39
+        Me.rdoWalterLieth.TabIndex = 2
         Me.rdoWalterLieth.TabStop = True
         Me.rdoWalterLieth.Tag = ""
         Me.rdoWalterLieth.Text = "Walter Lieth"
@@ -177,7 +177,7 @@ Partial Class dlgClimograph
         Me.ucrPnlClimograph.Location = New System.Drawing.Point(108, 0)
         Me.ucrPnlClimograph.Name = "ucrPnlClimograph"
         Me.ucrPnlClimograph.Size = New System.Drawing.Size(236, 41)
-        Me.ucrPnlClimograph.TabIndex = 38
+        Me.ucrPnlClimograph.TabIndex = 1
         '
         'ucrBase
         '
@@ -195,7 +195,7 @@ Partial Class dlgClimograph
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(282, 24)
-        Me.ucrSave.TabIndex = 36
+        Me.ucrSave.TabIndex = 16
         '
         'ucrReceiverAbsolutetem
         '
@@ -207,7 +207,7 @@ Partial Class dlgClimograph
         Me.ucrReceiverAbsolutetem.Selector = Nothing
         Me.ucrReceiverAbsolutetem.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverAbsolutetem.strNcFilePath = ""
-        Me.ucrReceiverAbsolutetem.TabIndex = 35
+        Me.ucrReceiverAbsolutetem.TabIndex = 13
         Me.ucrReceiverAbsolutetem.ucrSelector = Nothing
         '
         'lblAbsoluteTemp
@@ -216,7 +216,7 @@ Partial Class dlgClimograph
         Me.lblAbsoluteTemp.Location = New System.Drawing.Point(268, 209)
         Me.lblAbsoluteTemp.Name = "lblAbsoluteTemp"
         Me.lblAbsoluteTemp.Size = New System.Drawing.Size(114, 13)
-        Me.lblAbsoluteTemp.TabIndex = 34
+        Me.lblAbsoluteTemp.TabIndex = 12
         Me.lblAbsoluteTemp.Text = "Absolute Temperature:"
         '
         'ucrReceiverMonth
@@ -229,7 +229,7 @@ Partial Class dlgClimograph
         Me.ucrReceiverMonth.Selector = Nothing
         Me.ucrReceiverMonth.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMonth.strNcFilePath = ""
-        Me.ucrReceiverMonth.TabIndex = 33
+        Me.ucrReceiverMonth.TabIndex = 5
         Me.ucrReceiverMonth.ucrSelector = Nothing
         '
         'lblMonth
@@ -238,7 +238,7 @@ Partial Class dlgClimograph
         Me.lblMonth.Location = New System.Drawing.Point(268, 43)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
-        Me.lblMonth.TabIndex = 32
+        Me.lblMonth.TabIndex = 4
         Me.lblMonth.Text = "Month:"
         '
         'ucrSelectorClimograph
@@ -251,7 +251,7 @@ Partial Class dlgClimograph
         Me.ucrSelectorClimograph.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorClimograph.Name = "ucrSelectorClimograph"
         Me.ucrSelectorClimograph.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorClimograph.TabIndex = 31
+        Me.ucrSelectorClimograph.TabIndex = 0
         '
         'dlgClimograph
         '
