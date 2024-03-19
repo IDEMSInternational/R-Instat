@@ -252,7 +252,7 @@ Partial Class ucrCalculator
         Me.MathsBaseStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MathsStatsStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MathsCarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MathsCirucarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MathsCircularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdAtan2 = New System.Windows.Forms.Button()
         Me.cmdLogistic = New System.Windows.Forms.Button()
         Me.cmdLogit = New System.Windows.Forms.Button()
@@ -3032,33 +3032,33 @@ Partial Class ucrCalculator
         'ContextMenuStripMaths
         '
         Me.ContextMenuStripMaths.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ContextMenuStripMaths.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MathsBaseStripMenuItem, Me.MathsStatsStripMenuItem, Me.MathsCarToolStripMenuItem, Me.MathsCirucarToolStripMenuItem})
+        Me.ContextMenuStripMaths.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MathsBaseStripMenuItem, Me.MathsStatsStripMenuItem, Me.MathsCarToolStripMenuItem, Me.MathsCircularToolStripMenuItem})
         Me.ContextMenuStripMaths.Name = "ContextMenuStrip1"
-        Me.ContextMenuStripMaths.Size = New System.Drawing.Size(123, 100)
+        Me.ContextMenuStripMaths.Size = New System.Drawing.Size(211, 128)
         '
         'MathsBaseStripMenuItem
         '
         Me.MathsBaseStripMenuItem.Name = "MathsBaseStripMenuItem"
-        Me.MathsBaseStripMenuItem.Size = New System.Drawing.Size(122, 24)
+        Me.MathsBaseStripMenuItem.Size = New System.Drawing.Size(210, 24)
         Me.MathsBaseStripMenuItem.Text = "base"
         '
         'MathsStatsStripMenuItem
         '
         Me.MathsStatsStripMenuItem.Name = "MathsStatsStripMenuItem"
-        Me.MathsStatsStripMenuItem.Size = New System.Drawing.Size(122, 24)
+        Me.MathsStatsStripMenuItem.Size = New System.Drawing.Size(210, 24)
         Me.MathsStatsStripMenuItem.Text = "stats"
         '
         'MathsCarToolStripMenuItem
         '
         Me.MathsCarToolStripMenuItem.Name = "MathsCarToolStripMenuItem"
-        Me.MathsCarToolStripMenuItem.Size = New System.Drawing.Size(122, 24)
+        Me.MathsCarToolStripMenuItem.Size = New System.Drawing.Size(210, 24)
         Me.MathsCarToolStripMenuItem.Text = "car"
         '
-        'MathsCirucarToolStripMenuItem
+        'MathsCircularToolStripMenuItem
         '
-        Me.MathsCirucarToolStripMenuItem.Name = "MathsCirucarToolStripMenuItem"
-        Me.MathsCirucarToolStripMenuItem.Size = New System.Drawing.Size(122, 24)
-        Me.MathsCirucarToolStripMenuItem.Text = "cirucar"
+        Me.MathsCircularToolStripMenuItem.Name = "MathsCircularToolStripMenuItem"
+        Me.MathsCircularToolStripMenuItem.Size = New System.Drawing.Size(210, 24)
+        Me.MathsCircularToolStripMenuItem.Text = "circular"
         '
         'cmdAtan2
         '
@@ -8024,7 +8024,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdwhichmin As Button
     Friend WithEvents MathsBaseStripMenuItem As ToolStripMenuItem
     Friend WithEvents MathsCarToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents MathsCirucarToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MathsCircularToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents cmdComplexi As Button
     Friend WithEvents cmdAsComplex As Button
 End Class

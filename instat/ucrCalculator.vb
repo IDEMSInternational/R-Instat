@@ -162,6 +162,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdQt, "t quantiles. For example qt(0.05, 5) = -2.015; qt(0.05, 100) = -1.66")
         ttCalculator.SetToolTip(cmdqF, "F quantiles. For example qf(0.95,1,10) = 4.965; qf(0.95, 50,50)= 1.599")
 
+        'maths keyboard tooltips
         ttCalculator.SetToolTip(cmdDeg, "Change for radians to degrees. For example deg(pi/2) = 90.")
         ttCalculator.SetToolTip(cmdExp, "The exponential function. exp(1) = e = 2.71828. exp(0) = 1, exp(-2) = 0.1353 = 1/exp(2). It is the inverse of the log function, so exp(6.238) = 512, while log(512) = 6.238.")
         ttCalculator.SetToolTip(cmdAbs, "The absolute (or positive) value. For example abs (-4.4) = abs(4.4) = 4.4.")
@@ -181,7 +182,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdRad, "change from degrees to radians. For example rad(90) = 2*pi * 90/360 = 1.57 ( = pi/2)")
         ttCalculator.SetToolTip(cmdLogTen, "logarithm to base 10. For example log10(1000) =3 (=10^3)")
         ttCalculator.SetToolTip(cmdTan, " tangent of angle in radians. For example tan(pi/4) = sin(pi/4)/cos(pi/4) = tan(rad(45)) = 1")
-        ttCalculator.SetToolTip(cmdAtan, "angle corresponding to a given tangent (in the range 0 to pi). For example atan(1) = 0..7854 (= pi/4); deg(atan(1)) = 45.")
+        ttCalculator.SetToolTip(cmdAtan, "angle corresponding to a given tangent (in the range 0 to pi). For example atan(1) = 0.7854 (= pi/4); deg(atan(1)) = 45.")
+        ttCalculator.SetToolTip(cmdTrunc, "truncates the values towards 0. So trunc(3.5) = 3, trunc(-3.5)= -3")
 
         ttCalculator.SetToolTip(cmdUpper, "Change to upper case. For example str_to_upper(""Dr. Foster"") gives ""DR. FOSTER""")
         ttCalculator.SetToolTip(cmdLower, "Change to lower case. For example str_to_lower(""Dr. Foster"") gives ""dr. foster""")
@@ -276,6 +278,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPrimorial, "gives the primorial (like the factorial, but just the primes up to the number) for a variable. For example primorial(c(7,8,9)) = 235*7 = (210, 210, 210)")
 
         ' Complex keyboard tooltips
+        ttCalculator.SetToolTip(cmdComplexPi, "pi = 3.14159")
+        ttCalculator.SetToolTip(cmdComplexi, "i is defined as the square root of -1. So sqrt(as.complex(-1)) = 0 + 1i")
         ttCalculator.SetToolTip(cmdComplex, "Construct a complex number. For example complex(3, 2) gives 3 + 2i.")
         ttCalculator.SetToolTip(cmdAsComplex, "Define a variable as complex. For example as.complex(-1) gives 1 + 0i")
         ttCalculator.SetToolTip(cmdReal, "The real part of a complex number. For example Re(3 + 2i) gives 3.")
@@ -299,7 +303,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdMd, "modified index of agreement between sim and obsmNSE")
         ttCalculator.SetToolTip(cmdMe, "mean error between sim and obs")
         ttCalculator.SetToolTip(cmdmNSE, "modified Nash-Sutcliffe efficiency between sim and obs")
-        ttCalculator.SetToolTip(cmdMse, "mean squared error between sim and obs,")
+        ttCalculator.SetToolTip(cmdMse, "mean squared error between sim and obs")
         ttCalculator.SetToolTip(cmdNrmse, "normalized root mean square error between sim and obs")
         ttCalculator.SetToolTip(cmdNSE, "Nash-Sutcliffe efficiency between sim and obs")
         ttCalculator.SetToolTip(cmdPbias, "percent bias between sim and obs")
@@ -4855,7 +4859,7 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
-    Private Sub MathsCirucarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsCirucarToolStripMenuItem.Click
+    Private Sub MathsCircularToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsCircularToolStripMenuItem.Click
         If ucrInputCalOptions.GetText = "Maths" Then
             strPackageName = "circular"
         End If
