@@ -2636,12 +2636,12 @@ view_object_data <- function(object, object_format = NULL) {
     file_name <- view_html_object(object)
   } else if ("list" %in% class(object)) {  # Check if object is a list
     # Convert list to HTML
-    html_content <- paste("<pre>", capture.output(print(object)), "</pre>", collapse="\n")
+    html_content <- paste("<pre>", utils::capture.output(print(object)), "</pre>", collapse="\n")
     # Write HTML to a temporary file
     temp_file <- tempfile(fileext=".html")
     writeLines(html_content, temp_file)
     # Open HTML file in default browser
-    browseURL(temp_file)
+    utils::browseURL(temp_file)
   } else{
     print(object)
   }
