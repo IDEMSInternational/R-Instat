@@ -162,6 +162,14 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdQt, "t quantiles. For example qt(0.05, 5) = -2.015; qt(0.05, 100) = -1.66")
         ttCalculator.SetToolTip(cmdqF, "F quantiles. For example qf(0.95,1,10) = 4.965; qf(0.95, 50,50)= 1.599")
 
+        'maths keyboard tooltips
+        ttCalculator.SetToolTip(cmdDeg, "Change from radians to degrees. For example deg(pi/2) = 90.")
+        ttCalculator.SetToolTip(cmdExp, "The exponential function. exp(1) = e = 2.71828. exp(0) = 1, exp(-2) = 0.1353 = 1/exp(2). It is the inverse of the log function, so exp(6.238) = 512, while log(512) = 6.238.")
+        ttCalculator.SetToolTip(cmdAbs, "The absolute (or positive) value. For example abs (-4.4) = abs(4.4) = 4.4.")
+        ttCalculator.SetToolTip(cmdSign, "The sign of the corresponding values. So sign(4.2)=1, sign(-20)=-1, sign(c(-2,-1,0,1,2,3))= (-1,-1,0,1,1,1)")
+        ttCalculator.SetToolTip(cmdLogit, "log(p/(1-p)) for p between 0 and 1, or between 0 and 100 if you have percentages. For example logit(c(0.2, 0.5, 0.95)) is (-1.386, 0, 2.944).")
+        ttCalculator.SetToolTip(cmdLogistic, "Distribution function for the logistic distribution. For example dlogis(c(-2,-1,0,1,2), 0, 5513) = (0.026, 0.14, 0.5, 0.86, 0.974). The scale of 0.5513 gives a standard deviation of 1.")
+        ttCalculator.SetToolTip(cmdAtan2, "atan2(x,y) gives the angle between the x axis and the vector between to origin and the point (x,y). For example atan2(1,1) = 0.7854 = pi/4 (=45 degrees).")
         ttCalculator.SetToolTip(cmdSqrt, "square root. For example sqrt(3) = 3 ^ 0.5 = 1.732")
         ttCalculator.SetToolTip(cmdCos, "cosine of angle in radians. For example cos(pi) = -1, cos(rad(90)) = (almost) 0.")
         ttCalculator.SetToolTip(cmdAcos, "angle corresponding to a given cosine (in the range 0 to pi). For example acos(0) = 1.57 = pi/2; deg(acos(-1))=180.")
@@ -174,7 +182,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdRad, "change from degrees to radians. For example rad(90) = 2*pi * 90/360 = 1.57 ( = pi/2)")
         ttCalculator.SetToolTip(cmdLogTen, "logarithm to base 10. For example log10(1000) =3 (=10^3)")
         ttCalculator.SetToolTip(cmdTan, " tangent of angle in radians. For example tan(pi/4) = sin(pi/4)/cos(pi/4) = tan(rad(45)) = 1")
-        ttCalculator.SetToolTip(cmdAtan, "angle corresponding to a given tangent (in the range 0 to pi). For example atan(1) = 0..7854 (= pi/4); deg(atan(1)) = 45.")
+        ttCalculator.SetToolTip(cmdAtan, "angle corresponding to a given tangent (in the range 0 to pi). For example atan(1) = 0.7854 (= pi/4); deg(atan(1)) = 45.")
+        ttCalculator.SetToolTip(cmdTrunc, "truncates the values towards 0. So trunc(3.5) = 3, trunc(-3.5)= -3")
 
         ttCalculator.SetToolTip(cmdUpper, "Change to upper case. For example str_to_upper(""Dr. Foster"") gives ""DR. FOSTER""")
         ttCalculator.SetToolTip(cmdLower, "Change to lower case. For example str_to_lower(""Dr. Foster"") gives ""dr. foster""")
@@ -267,6 +276,46 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdSquare, "squares of each integer, so 1, 4, 9, 16.")
         ttCalculator.SetToolTip(cmdLucas, "generates Lucas numbers to the length of the dataframe. For example the 10th Lucas number is 76")
         ttCalculator.SetToolTip(cmdPrimorial, "gives the primorial (like the factorial, but just the primes up to the number) for a variable. For example primorial(c(7,8,9)) = 235*7 = (210, 210, 210)")
+
+        ' Complex keyboard tooltips
+        ttCalculator.SetToolTip(cmdComplexPi, "pi = 3.14159")
+        ttCalculator.SetToolTip(cmdComplexi, "i is defined as the square root of -1. So sqrt(as.complex(-1)) = 0 + 1i")
+        ttCalculator.SetToolTip(cmdComplex, "Construct a complex number. For example complex(3, 2) gives 3 + 2i.")
+        ttCalculator.SetToolTip(cmdAsComplex, "Define a variable as complex. For example as.complex(-1) gives 1 + 0i")
+        ttCalculator.SetToolTip(cmdReal, "The real part of a complex number. For example Re(3 + 2i) gives 3.")
+        ttCalculator.SetToolTip(cmdImaginary, "The imaginary part of a complex number or variable. For example Im(3 + 2i) gives 2.")
+        ttCalculator.SetToolTip(cmdMod, "The modulus (polar coordinate) of a complex number or variable. For example Mod(3 + 2i) gives 3.606, which is sqrt(3*3 + 2*2). Also abs(3 + 2i) is the same as Mod(3 + 2i).")
+        ttCalculator.SetToolTip(cmdArg, " The argument (polar coordinate) of a complex number or variable. For example Arg(3 + 2i) gives 0.588 where 3 = 3.606cos(0.588) and 2 = 3.606sin(0.588).")
+        ttCalculator.SetToolTip(cmdConjugate, "Conjugate of a complex number or variable: For example Conj(3 + 2i) gives 3 - 2i.")
+        ttCalculator.SetToolTip(cmdComplexRad, "Change from degrees to radians. For example rad(90 + 180i) gives (1.571 + 3.142i)")
+        ttCalculator.SetToolTip(cmdComplexDeg, " Change from radians to degrees. For example deg(pi/2 + 3.142i) gives (90 + 180i)")
+        ttCalculator.SetToolTip(cmdComplexSqrt, "Square root. For example sqrt(-9 + 0i) gives (0 + 3i) or just 3i. sqrt(-9 + 2i) gives 0.331 + 3.018i)")
+        'to add  ttCalculator.SetToolTip(cmdComplexExp, "The exponential function. For example exp(3 + 2i) gives")
+        ttCalculator.SetToolTip(cmdComplexRound, "round(pi/2 + 3.14259i) gives 2 + 3i) so rounds to whole numbers. round(pi/2 + 3.14259i, 2) gives 1.57 + 3.14i, so rounds to 2 decimals.")
+        ttCalculator.SetToolTip(cmdComplexSignif, "Rounds to give the specified number off digits in the larger of the components. For example signif(0.424 + 511.38i, 3) gives (0 + 511i)")
+
+        'Hydro GOF keyboard tooltips
+        ttCalculator.SetToolTip(cmdBr2, "r-squared times the slope of the regression line between sim and obs")
+        ttCalculator.SetToolTip(cmdCp, "coefficent of persistence between sim and obs")
+        ttCalculator.SetToolTip(cmdD, "Index of agreement between sim and obs")
+        ttCalculator.SetToolTip(cmdKGE, "Kling-Gupta efficiency between sim and obs")
+        ttCalculator.SetToolTip(cmdMae, "mean absolute error between sim and obs")
+        ttCalculator.SetToolTip(cmdMd, "modified index of agreement between sim and obsmNSE")
+        ttCalculator.SetToolTip(cmdMe, "mean error between sim and obs")
+        ttCalculator.SetToolTip(cmdmNSE, "modified Nash-Sutcliffe efficiency between sim and obs")
+        ttCalculator.SetToolTip(cmdMse, "mean squared error between sim and obs")
+        ttCalculator.SetToolTip(cmdNrmse, "normalized root mean square error between sim and obs")
+        ttCalculator.SetToolTip(cmdNSE, "Nash-Sutcliffe efficiency between sim and obs")
+        ttCalculator.SetToolTip(cmdPbias, "percent bias between sim and obs")
+        ttCalculator.SetToolTip(cmdPbiasfdc, "percent bias in the slope of the midsegment of the flow duration curve")
+        ttCalculator.SetToolTip(cmdRd, "relative index of agreement (d) between sim and obs. (Value is between 0 and 1)")
+        ttCalculator.SetToolTip(cmdRmse, "root mean square error between sim and obs, so the standard deviation of the model prediction error")
+        ttCalculator.SetToolTip(cmdRNSE, "relative Nash-Sutcliffe efficiency between sim and obs")
+        ttCalculator.SetToolTip(cmdRPearson, "correlation between sim and obs")
+        ttCalculator.SetToolTip(cmdRSD, "ratio of standard deviations between sim and obs")
+        ttCalculator.SetToolTip(cmdRsr, "ratio of the root mean square error between sim and obs to the standard deviation of obs")
+        ttCalculator.SetToolTip(cmdSsq, "sum of squared residuals between sim and obs")
+        ttCalculator.SetToolTip(cmdVE, " volumetric efficiency between sim and obs (Value is between 0 and 1)")
 
         Const strTooltipCmdLength = "number of observations: For example length(c(1,2,3,4,NA)) = 5 "
         ttCalculator.SetToolTip(cmdLength, strTooltipCmdLength)
@@ -1800,7 +1849,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMc_Click(sender As Object, e As EventArgs) Handles cmdMc.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x = , na.rm = TRUE, doReflect = (length(x = ) <= 100),doScale = TRUE, maxit = 100, trace.lev = 0, full.result = FALSE)", 113)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x = , na.rm = TRUE, doReflect = (length(x = ) <= 100),doScale = TRUE, maxit= 100, trace.lev= 0, full.result= FALSE)", 113)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc( , na.rm = TRUE)", 16)
         End If
@@ -3917,7 +3966,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdPbiasfde_Click(sender As Object, e As EventArgs) Handles cmdPbiasfde.Click
+    Private Sub cmdPbiasfdc_Click(sender As Object, e As EventArgs) Handles cmdPbiasfdc.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbiasfdc(sim = , obs = , plot = FALSE)", 24)
         Else
@@ -4787,10 +4836,31 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
-    Private Sub cmdMathsHelp_Click(sender As Object, e As EventArgs) Handles cmdMathsHelp.Click, MathsStatsStripMenuItem.Click
+    Private Sub cmdMathsHelp_Click(sender As Object, e As EventArgs) Handles cmdMathsHelp.Click, MathsBaseStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MathsStatsStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsStatsStripMenuItem.Click
+        If ucrInputCalOptions.GetText = "Maths" Then
             strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MathsCarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsCarToolStripMenuItem.Click
+        If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "car"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MathsCircularToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsCircularToolStripMenuItem.Click
+        If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "circular"
         End If
         OpenHelpPage()
     End Sub
@@ -5006,11 +5076,11 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSampleFunction.ToScript, 36)
     End Sub
 
-    Private Sub cmdAsComplex_Click(sender As Object, e As EventArgs) Handles cmdAsComplex.Click
+    Private Sub cmdAsComplex_Click(sender As Object, e As EventArgs) Handles cmdComplex.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex(x = )", 1)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex( )", 1)
         End If
     End Sub
 
@@ -5151,7 +5221,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdComplexPi_Click(sender As Object, e As EventArgs) Handles cmdComplexPi.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi()", 1)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi", -1)
     End Sub
 
     Private Sub cmdPascal_Click(sender As Object, e As EventArgs) Handles cmdPascal.Click
@@ -5407,6 +5477,18 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max(x= )]", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max( )]", 15)
+        End If
+    End Sub
+
+    Private Sub cmdComplexi_Click(sender As Object, e As EventArgs) Handles cmdComplexi.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("i", -1)
+    End Sub
+
+    Private Sub cmdAsComplex_Click_1(sender As Object, e As EventArgs) Handles cmdAsComplex.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
         End If
     End Sub
 End Class
