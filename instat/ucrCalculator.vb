@@ -2188,7 +2188,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldPrimaryFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdDate_Stamp_Click(sender As Object, e As EventArgs) Handles cmdDate_Stamp.Click
+    Private Sub cmdWakefieldDates_Click(sender As Object, e As EventArgs) Handles cmdWakefieldDates.Click
         Dim clsWakefieldDateStampFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsStartDateFunction As New RFunction
@@ -2228,20 +2228,21 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldDeathFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdDied_Click(sender As Object, e As EventArgs) Handles cmdDied.Click
-        Dim clsWakefieldDiedFunction As New RFunction
+    Private Sub cmdgrade_letter_Click(sender As Object, e As EventArgs) Handles cmdgrade_letter.Click
+        Dim clsWakefieldgrade_letterFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
 
-        clsWakefieldDiedFunction.SetPackageName("wakefield")
-        clsWakefieldDiedFunction.SetRCommand("died")
-        clsWakefieldDiedFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
-        clsWakefieldDiedFunction.AddParameter("prob", "NULL", iPosition:=1)
-        clsWakefieldDiedFunction.AddParameter("name", Chr(34) & "Died" & Chr(34), iPosition:=2)
+        clsWakefieldgrade_letterFunction.SetPackageName("wakefield")
+        clsWakefieldgrade_letterFunction.SetRCommand("grade_letter")
+        clsWakefieldgrade_letterFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldgrade_letterFunction.AddParameter("mean", "88", iPosition:=1)
+        clsWakefieldgrade_letterFunction.AddParameter("sd", "4", iPosition:=2)
+        clsWakefieldgrade_letterFunction.AddParameter("name", Chr(34) & "Grade_letter" & Chr(34), iPosition:=3)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldDiedFunction.ToScript, 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldgrade_letterFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdDice_Click(sender As Object, e As EventArgs) Handles cmdDice.Click
@@ -2632,7 +2633,7 @@ Public Class ucrCalculator
         clsWakefieldIQFunction.SetRCommand("iq")
         clsWakefieldIQFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
         clsWakefieldIQFunction.AddParameter("mean", "100", iPosition:=1)
-        clsWakefieldIQFunction.AddParameter("sd", "10", iPosition:=2)
+        clsWakefieldIQFunction.AddParameter("sd", "15", iPosition:=2)
         clsWakefieldIQFunction.AddParameter("min", "0", iPosition:=3)
         clsWakefieldIQFunction.AddParameter("max", "NULL", iPosition:=4)
         clsWakefieldIQFunction.AddParameter("digits", "0", iPosition:=5)
@@ -2659,7 +2660,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldLanguageFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdLevel_Click(sender As Object, e As EventArgs) Handles cmdLevel.Click
+    Private Sub cmdWakefieldLower_Click(sender As Object, e As EventArgs) Handles cmdWakefieldLower.Click
         Dim clsWakefieldLevelFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
@@ -2699,7 +2700,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldMathFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdEla_Click(sender As Object, e As EventArgs) Handles cmdEla.Click
+    Private Sub cmdWakefieldMinute_Click(sender As Object, e As EventArgs) Handles cmdWakefieldMinute.Click
         Dim clsWakefieldElaFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsELAProbFunction As New RFunction
@@ -3013,10 +3014,10 @@ Public Class ucrCalculator
         clsWakefieldSatFunction.SetPackageName("wakefield")
         clsWakefieldSatFunction.SetRCommand("sat")
         clsWakefieldSatFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
-        clsWakefieldSatFunction.AddParameter("mean", "1500", iPosition:=1)
-        clsWakefieldSatFunction.AddParameter("sd", "100", iPosition:=2)
-        clsWakefieldSatFunction.AddParameter("min", "0", iPosition:=3)
-        clsWakefieldSatFunction.AddParameter("max", "2400", iPosition:=4)
+        clsWakefieldSatFunction.AddParameter("mean", "1000", iPosition:=1)
+        clsWakefieldSatFunction.AddParameter("sd", "150", iPosition:=2)
+        clsWakefieldSatFunction.AddParameter("min", "400", iPosition:=3)
+        clsWakefieldSatFunction.AddParameter("max", "1600", iPosition:=4)
         clsWakefieldSatFunction.AddParameter("digits", "0", iPosition:=5)
         clsWakefieldSatFunction.AddParameter("name", Chr(34) & "SAT" & Chr(34), iPosition:=6)
 
@@ -3090,31 +3091,20 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldSexInclusiveFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdSex_Click(sender As Object, e As EventArgs) Handles cmdSex.Click
-        Dim clsWakefieldSexFunction As New RFunction
-        Dim clsWakefieldNrowFunction As New RFunction
-        Dim clsSexListFunction As New RFunction
-        Dim clsSexProbFunction As New RFunction
+    Private Sub cmdWakefieldTimes_Click(sender As Object, e As EventArgs) Handles cmdWakefieldTimes.Click
+        Dim clsWakefieldtimestampFunction As New RFunction
+        ' Dim clsWakefieldNrowFunction As New RFunction
 
-        clsWakefieldNrowFunction.SetRCommand("nrow")
-        clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        ' clsWakefieldNrowFunction.SetRCommand("nrow")
+        ' clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
 
-        clsSexListFunction.SetRCommand("c")
-        clsSexListFunction.AddParameter("male", Chr(34) & "Male" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsSexListFunction.AddParameter("female", Chr(34) & "Female" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        ' clsWakefieldtimestampFunction.SetPackageName("wakefield")
+        clsWakefieldtimestampFunction.SetRCommand("timestamp")
+        ' clsWakefieldtimestampFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        ' clsWakefieldtimestampFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldtimestampFunction.AddParameter("name", Chr(34) & "Time-stamp" & Chr(34), iPosition:=2)
 
-        clsSexProbFunction.SetRCommand("c")
-        clsSexProbFunction.AddParameter("0.51219512195122", "0.51219512195122", iPosition:=0, bIncludeArgumentName:=False)
-        clsSexProbFunction.AddParameter("0.48780487804878", "0.48780487804878", iPosition:=1, bIncludeArgumentName:=False)
-
-        clsWakefieldSexFunction.SetPackageName("wakefield")
-        clsWakefieldSexFunction.SetRCommand("sex")
-        clsWakefieldSexFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
-        clsWakefieldSexFunction.AddParameter("x", clsRFunctionParameter:=clsSexListFunction, iPosition:=1)
-        clsWakefieldSexFunction.AddParameter("prob", clsRFunctionParameter:=clsSexProbFunction, iPosition:=2)
-        clsWakefieldSexFunction.AddParameter("name", Chr(34) & "Sex" & Chr(34), iPosition:=3)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldSexFunction.ToScript, 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldtimestampFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdSmokes_Click(sender As Object, e As EventArgs) Handles cmdSmokes.Click
@@ -3200,7 +3190,7 @@ Public Class ucrCalculator
         clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
 
         clsWakefieldUpperFunction.SetPackageName("wakefield")
-        clsWakefieldUpperFunction.SetRCommand("upper")
+        clsWakefieldUpperFunction.SetRCommand("upper_factor")
         clsWakefieldUpperFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
         clsWakefieldUpperFunction.AddParameter("k", "5", iPosition:=1)
         clsWakefieldUpperFunction.AddParameter("x", "LETTERS", iPosition:=2)
@@ -3208,6 +3198,24 @@ Public Class ucrCalculator
         clsWakefieldUpperFunction.AddParameter("name", Chr(34) & "Upper" & Chr(34), iPosition:=4)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldUpperFunction.ToScript, 0)
+    End Sub
+
+    Private Sub cmdWakefield_lower_click(sender As Object, e As EventArgs) Handles cmdWakefield_lower.Click
+        Dim clsWakefieldLowerFunction As New RFunction
+        Dim clsWakefieldNrowFunction As New RFunction
+
+        clsWakefieldNrowFunction.SetRCommand("nrow")
+        clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsWakefieldLowerFunction.SetPackageName("wakefield")
+        clsWakefieldLowerFunction.SetRCommand("lower_factor")
+        clsWakefieldLowerFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldLowerFunction.AddParameter("k", "5", iPosition:=1)
+        clsWakefieldLowerFunction.AddParameter("x", "LETTERS", iPosition:=2)
+        clsWakefieldLowerFunction.AddParameter("prob", "NULL", iPosition:=3)
+        clsWakefieldLowerFunction.AddParameter("name", Chr(34) & "Lower" & Chr(34), iPosition:=4)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldLowerFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdValid_Click(sender As Object, e As EventArgs) Handles cmdValid.Click
