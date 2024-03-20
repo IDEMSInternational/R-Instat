@@ -2634,7 +2634,9 @@ view_object_data <- function(object, object_format = NULL) {
     file_name <- view_text_object(object)
   } else if (identical(object_format, "html")) {
     file_name <- view_html_object(object)
-  }else{
+  } else if ("list" %in% class(object)) {  # Check if object is a list
+    print(object)
+  } else{
     print(object)
   }
   return(file_name)
