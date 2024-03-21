@@ -38,7 +38,7 @@ Public Class dlgDescribeTwoVariable
         clsTabStyleCellTextFunction, clsTabStyleCellTitleFunction, clsTabStyleFunction,
         clsTabStylePxFunction, clsgtExtrasThemesFuction As New RFunction
 
-    Private clsGroupByPipeOperator, clsSummaryOperator, clsTildOperator, clsTildPivotOperator, clsMapOperator As New ROperator
+    Private clsGroupByPipeOperator, clsSummaryOperator, clsTildOperator, clsTildPivotOperator, clsMapOperator, clsPivotOperator As New ROperator
 
     Private clsgtFunction, clsMapSummaryFunction, clsMapGtFunction, clsMapPivotFunction As New RFunction
     'Frequency Parameters
@@ -206,6 +206,7 @@ Public Class dlgDescribeTwoVariable
         clsMapSummaryFunction = New RFunction
         clsMapPivotFunction = New RFunction
         clsMapGtFunction = New RFunction
+        clsPivotOperator = New ROperator
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
@@ -223,7 +224,7 @@ Public Class dlgDescribeTwoVariable
         clsDummyFunction.AddParameter("row_sum", "False", iPosition:=3)
 
         clsPivotWiderFunction.SetRCommand("pivot_wider")
-        clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=1)
+        clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=2)
 
         clsFootnoteCellBodyFunction.SetPackageName("gt")
         clsFootnoteCellBodyFunction.SetRCommand("cells_body")
@@ -287,38 +288,39 @@ Public Class dlgDescribeTwoVariable
         clsTildOperator.SetOperation("~")
         clsTildOperator.AddParameter("right", clsRFunctionParameter:=clsSummaryTableFunction)
         clsTildOperator.bBrackets = False
-
-        clsTildPivotOperator.SetOperation("~")
-        clsTildPivotOperator.AddParameter("right", clsRFunctionParameter:=clsPivotWiderFunction)
-        clsTildPivotOperator.bBrackets = False
+        clsTildOperator.bForceIncludeOperation = True
+        clsTildOperator.bSpaceAroundOperation = False
 
         clsMapSummaryFunction.SetPackageName("purrr")
         clsMapSummaryFunction.SetRCommand("map")
-        clsMapSummaryFunction.AddParameter(".f", clsROperatorParameter:=clsTildOperator, iPosition:=1)
-
-        clsMapPivotFunction.SetPackageName("purrr")
-        clsMapPivotFunction.SetRCommand("map")
-        clsMapPivotFunction.AddParameter("pivot", clsROperatorParameter:=clsTildPivotOperator)
+        clsMapSummaryFunction.AddParameter(".f", clsROperatorParameter:=clsMapOperator, iPosition:=1)
 
         clsMapGtFunction.SetPackageName("purrr")
         clsMapGtFunction.SetRCommand("map")
-        clsMapGtFunction.AddParameter("gttbl", clsRFunctionParameter:=clsgtFunction)
+        clsMapGtFunction.AddParameter("gttbl", clsRFunctionParameter:=clsgtFunction, bIncludeArgumentName:=False)
 
         clsgtFunction.SetPackageName("gt")
         clsgtFunction.SetRCommand("gt")
 
         clsSummaryOperator.SetOperation("%>%")
-        clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=0)
+        clsSummaryOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=1)
         'clsSummaryOperator.AddParameter("gttbl", clsRFunctionParameter:=clsgtFunction, iPosition:=1)
 
+        clsPivotOperator.SetOperation("%>%")
+        clsPivotOperator.AddParameter("left", clsRFunctionParameter:=clsPivotWiderFunction)
+        clsPivotOperator.AddParameter("right", clsRFunctionParameter:=clsgtFunction)
+        clsPivotOperator.bBrackets = False
+
         clsMapOperator.SetOperation("%>%")
-        clsMapOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=1)
-        clsMapOperator.AddParameter("pivot", clsRFunctionParameter:=clsMapPivotFunction, iPosition:=2)
-        clsMapOperator.AddParameter("gt", clsRFunctionParameter:=clsMapGtFunction, iPosition:=3)
+        clsMapOperator.AddParameter("left", clsROperatorParameter:=clsTildOperator)
+        'clsMapOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        'clsMapOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=1)
+        clsMapOperator.AddParameter("right", clsROperatorParameter:=clsPivotOperator)
         clsMapOperator.bBrackets = False
 
         clsJoiningPipeOperator.SetOperation("%>%")
-        clsJoiningPipeOperator.AddParameter("gtable", clsROperatorParameter:=clsMapOperator, iPosition:=0)
+        clsJoiningPipeOperator.AddParameter("gtable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
         clsJoiningPipeOperator.bBrackets = False
 
         clsTableSourcenoteFunction.SetPackageName("gt")
@@ -645,13 +647,13 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub FactorColumns()
         If rdoTwoVariable.Checked Then
-            clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+            'clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
             If IsFactorByFactor() Then
                 clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverSecondTwoVariableFactor.GetVariableNames & "," & ".x" & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ".x")
-                clsPivotWiderFunction.AddParameter("names_from", "{{.x}}", iPosition:=0)
+                clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
             Else
-                clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
+                clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=1)
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverFirstVars.GetVariableNames)
                 SummariesInRowsOrCols()
             End If
@@ -801,10 +803,10 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub SummariesInRowsOrCols()
         If ucrChkSummariesRowCol.Checked Then
-            clsPivotWiderFunction.AddParameter("names_from", ucrReceiverSecondTwoVariableFactor.GetVariableNames(False), iPosition:=0)
+            clsPivotWiderFunction.AddParameter("names_from", ucrReceiverSecondTwoVariableFactor.GetVariableNames(False), iPosition:=1)
             clsDummyFunction.AddParameter("row_sum", "True", iPosition:=3)
         Else
-            clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
+            clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=1)
             clsDummyFunction.AddParameter("row_sum", "False", iPosition:=3)
         End If
         ManageControlsVisibility()
