@@ -277,7 +277,6 @@ Public Class ROperator
         Else
             clsParameters.Clear()
         End If
-        OnParametersChanged()
     End Sub
 
     ''' <summary>   Clears this object to its blank/initial state. </summary>
@@ -310,7 +309,6 @@ Public Class ROperator
         clsTempROperator.iPosition = iPosition
         clsTempROperator.iCallType = iCallType
         clsTempROperator.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
-        clsTempROperator.bClearFromGlobal = bClearFromGlobal
         clsTempROperator.bToScriptAsRString = bToScriptAsRString
         clsTempROperator.Tag = Tag
         For Each clsRParam In clsParameters
