@@ -284,7 +284,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdAsComplex, "Define a variable as complex. For example as.complex(-1) gives 1 + 0i")
         ttCalculator.SetToolTip(cmdReal, "The real part of a complex number. For example Re(3 + 2i) gives 3.")
         ttCalculator.SetToolTip(cmdImaginary, "The imaginary part of a complex number or variable. For example Im(3 + 2i) gives 2.")
-        ttCalculator.SetToolTip(cmdMod, "The modulus (polar coordinate) of a complex number or variable. For example Mod(3 + 2i) gives 3.606, which is sqrt(33 + 22 ). Also abs(3 + 2i) is the same as Mod(3 + 2i).")
+        ttCalculator.SetToolTip(cmdMod, "The modulus (polar coordinate) of a complex number or variable. For example Mod(3 + 2i) gives 3.606, which is sqrt(3*3 + 2*2). Also abs(3 + 2i) is the same as Mod(3 + 2i).")
         ttCalculator.SetToolTip(cmdArg, " The argument (polar coordinate) of a complex number or variable. For example Arg(3 + 2i) gives 0.588 where 3 = 3.606cos(0.588) and 2 = 3.606sin(0.588).")
         ttCalculator.SetToolTip(cmdConjugate, "Conjugate of a complex number or variable: For example Conj(3 + 2i) gives 3 - 2i.")
         ttCalculator.SetToolTip(cmdComplexRad, "Change from degrees to radians. For example rad(90 + 180i) gives (1.571 + 3.142i)")
@@ -4851,7 +4851,6 @@ Public Class ucrCalculator
         End If
         OpenHelpPage()
     End Sub
-
 
     Private Sub MathsStatsStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsStatsStripMenuItem.Click
         If ucrInputCalOptions.GetText = "Maths" Then
