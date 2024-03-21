@@ -319,11 +319,11 @@ Public Class ucrCalculator
         ' circular keyboard tooltips
         ttCalculator.SetToolTip(cmdCircular, "Define a variable as circular. Specify whether the data are in radians (default), degrees, or hours.")
         ttCalculator.SetToolTip(cmdCircMean, "The circular mean. For example with 1, 2, 3, 6, mean(circular(c(1,2,3,6)) gives 1.51.")
-        ttCalculator.SetToolTip(cmdCircSd, "The circular standard deviation. This is not the sqrt(circular.var). It is reasonably close to the ordinary sd for data in radians, so from 0 and 6.28.")
+        ttCalculator.SetToolTip(cmdCircSd, "The circular standard deviation. This is not the sqrt(circular.var). It is reasonably close to the ordinary sd for data in radians.")
         ttCalculator.SetToolTip(cmdCircRho, "The mean resultant length is between 0 and 1. Small values imply large (circular) variation. For 1,2,3,6 rho is 0.4036. With 1,2,3,4,5,6 it is 0.049.")
         ttCalculator.SetToolTip(cmdCircRange, "Circular range is the shortest arc containing the data. For example with 1,2,3,6 gives 3.28 (6 is also -0.28 on circle from 0 to 2*pi)")
         ttCalculator.SetToolTip(cmdCircVar, "The circular variance is (1 - rho), so between 0 and 1, with small values implying low (circular) variation. For 1,2,3,6 var is 0.5964. With 1,2,3,4,5,6 var is 0.951.")
-        ttCalculator.SetToolTip(cmdCircQuantile, "Defined quantile round the circle. With 0.5 it is the (circular) median, so is 1.5 for 1,2,3,6.")
+        ttCalculator.SetToolTip(cmdCircQuantiles, "Defined quantiles round the circle. With 0.5 it is the (circular) median, so is 1.5 for 1,2,3,6.")
         ttCalculator.SetToolTip(cmdCircMax, "Largest value round the circle. For example, for 1,2,3,6 max is 3.")
         ttCalculator.SetToolTip(cmdCircMin, " Smallest value round the circle. For 1,2,3,6 min is 6. (values are from 6 (almost 2 * pi  to 3)")
         ttCalculator.SetToolTip(cmdCircQ1, "Lower quartile round the circle. For 1,2,3,6, q1 is 0.68")
@@ -3279,7 +3279,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMedianHL_Click(sender As Object, e As EventArgs) Handles cmdMedianHL.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular(x = , na.rm = TRUE, method = c(HL1,HL2,HL3), prop = NULL)", 55)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular(x = , na.rm = TRUE, method = c(""HL1"",""HL2"",""HL3""), prop = NULL)", 55)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular()", 1)
         End If
@@ -3365,7 +3365,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdCircQuantile_Click_1(sender As Object, e As EventArgs) Handles cmdCircQuantile.Click
+    Private Sub cmdCircQuantiles_Click_1(sender As Object, e As EventArgs) Handles cmdCircQuantiles.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm = TRUE, names = TRUE, type = 7)", 66)
         Else
