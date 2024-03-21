@@ -3054,7 +3054,7 @@ prepare_walter_lieth <- function(data, month, tm_min, ta_min){
   for (j in seq(nrow(data) - 1)) {
     intres <- NULL
     for (i in seq_len(ncol(data))) {
-      if (is.character(data[j, i])) {
+      if (is.character(data[j, i]) | is.factor(data[j, i])) {
         val <- as.data.frame(data[j, i])
       }
       else {
