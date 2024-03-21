@@ -996,9 +996,12 @@ Public Class RLink
                 End If
             End If
 
+            Dim lines() As String = strOutput.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            For Each line In lines
+                'log script and output
+                clsOutputLogger.AddOutput(strScriptWithComment, line, bAsFile, bDisplayOutputInExternalViewer)
+            Next
 
-            'log script and output
-            clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
 
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
@@ -1032,9 +1035,9 @@ Public Class RLink
             'get the file path name, check if it exists and whether it has contents
             'if not, just return empty file path
             strFilePath = String.Join(Environment.NewLine, expTemp.AsCharacter())
-            If Not File.Exists(strFilePath) OrElse New FileInfo(strFilePath).Length = 0 Then
-                strFilePath = ""
-            End If
+            Dim lines() As String = strFilePath.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            lines = lines.Where(Function(line) File.Exists(line) OrElse New FileInfo(line).Length = 0).ToArray()
+            strFilePath = If(lines.Length = 0, "", String.Join(Environment.NewLine, lines))
         End If
         Return strFilePath
     End Function

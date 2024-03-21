@@ -643,16 +643,22 @@ DataBook$set("public", "get_object", function(data_name = NULL, object_name) {
 
 DataBook$set("public", "get_object_data", function(data_name = NULL, object_name, as_file = FALSE) {
   out <- self$get_object(data_name = data_name, object_name = object_name)
-  if(is.null(out)){
+  result_list <- list()
+  
+  if (is.null(out)) {
     return(NULL)
-  }else if(as_file){
-    out <- view_object_data(object = out$object, object_format = out$object_format)
-  }else{
+  } else if (as_file) {
+      for (i in seq_along(out$object)) {
+        result_list[[i]] <- view_object_data(object = out$object[[i]], object_format = out$object_format)
+      }
+    out <- result_list
+  } else {
     out <- out$object
   }
+  
   return(out)
-}
-)  
+})
+
 
 #returns object data from the object_names character vector
 DataBook$set("public", "get_objects_data", function(data_name = NULL, object_names = NULL, as_files = FALSE) {
