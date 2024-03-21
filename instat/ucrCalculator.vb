@@ -317,22 +317,22 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdVE, " volumetric efficiency between sim and obs (Value is between 0 and 1)")
 
         ' circular keyboard tooltips
-        ttCalculator.SetToolTip(cmdCircular, "define a variable as circular. Specify whether the data are in radians (default), degrees, or hours.")
-        ttCalculator.SetToolTip(cmdCircMean, "the circular mean. For example with 1, 2, 3, 6, mean(circular(c(1,2,3,6)) gives 1.51.")
+        ttCalculator.SetToolTip(cmdCircular, "Define a variable as circular. Specify whether the data are in radians (default), degrees, or hours.")
+        ttCalculator.SetToolTip(cmdCircMean, "The circular mean. For example with 1, 2, 3, 6, mean(circular(c(1,2,3,6)) gives 1.51.")
         ttCalculator.SetToolTip(cmdCircSd, "The circular standard deviation. This is not the sqrt(circular.var). It is reasonably close to the ordinary sd for data in radians, so from 0 and 6.28.")
-        ttCalculator.SetToolTip(cmdCircRho, "the mean resultant length is between 0 and 1. Small values imply large (circular) variation. For 1,2,3,6 rho is 0.4036. With 1,2,3,4,5,6 it is 0.049.")
-        ttCalculator.SetToolTip(cmdCircRange, "circular range is the shortest arc containing the data. For example with 1,2,3,6 gives 3.28 (6 is also -0.28 on circle from 0 to 2*pi)")
-        ttCalculator.SetToolTip(cmdCircVar, "the circular variance is (1 - rho), so between 0 and 1, with small values implying low (circular) variation. For 1,2,3,6 var is 0.5964. With 1,2,3,4,5,6 var is 0.951.")
+        ttCalculator.SetToolTip(cmdCircRho, "The mean resultant length is between 0 and 1. Small values imply large (circular) variation. For 1,2,3,6 rho is 0.4036. With 1,2,3,4,5,6 it is 0.049.")
+        ttCalculator.SetToolTip(cmdCircRange, "Circular range is the shortest arc containing the data. For example with 1,2,3,6 gives 3.28 (6 is also -0.28 on circle from 0 to 2*pi)")
+        ttCalculator.SetToolTip(cmdCircVar, "The circular variance is (1 - rho), so between 0 and 1, with small values implying low (circular) variation. For 1,2,3,6 var is 0.5964. With 1,2,3,4,5,6 var is 0.951.")
         ttCalculator.SetToolTip(cmdCircQuantile, "Defined quantile round the circle. With 0.5 it is the (circular) median, so is 1.5 for 1,2,3,6.")
         ttCalculator.SetToolTip(cmdCircMax, "Largest value round the circle. For example, for 1,2,3,6 max is 3.")
         ttCalculator.SetToolTip(cmdCircMin, " Smallest value round the circle. For 1,2,3,6 min is 6. (values are from 6 (almost 2 * pi  to 3)")
         ttCalculator.SetToolTip(cmdCircQ1, "Lower quartile round the circle. For 1,2,3,6, q1 is 0.68")
         ttCalculator.SetToolTip(cmdCircQ3, "Upper quartile round the circle. For 1,2,3,6 q3 is 2.25.")
-        ttCalculator.SetToolTip(cmdMedianHL, " median using Hodges-Lehmann estimate. For example with 1,2,3,6, medianHL (and median) give 1.5.")
-        ttCalculator.SetToolTip(cmdCircMedian, "circular median. For example with 23 and 2 representing hours, median(circular(c(23,2), units=""hours"")) gives 0,5.")
-        ttCalculator.SetToolTip(cmdAngVar, "the angular variance is twice the circular variance, so between 0 and 2.")
+        ttCalculator.SetToolTip(cmdMedianHL, " Median using Hodges-Lehmann estimate. For example with 1,2,3,6, medianHL (and median) give 1.5.")
+        ttCalculator.SetToolTip(cmdCircMedian, "Circular median. For example with 23 and 2 representing hours, median(circular(c(23,2), units=""hours"")) gives 0,5.")
+        ttCalculator.SetToolTip(cmdAngVar, "The angular variance is twice the circular variance, so between 0 and 2.")
         ttCalculator.SetToolTip(cmdA1, "Ratio of Bessel functions for values of kappa parameter. Used in the von Mises (circular normal) distribution kappa = 0.9 gives A1 same as rho value for 1,2,3,6 data.")
-        ttCalculator.SetToolTip(cmdAngDev, "the angular deviation is square root of the angular variance, so between 0 and sqrt(2).")
+        ttCalculator.SetToolTip(cmdAngDev, "The angular deviation is square root of the angular variance, so between 0 and sqrt(2).")
 
 
         Const strTooltipCmdLength = "number of observations: For example length(c(1,2,3,4,NA)) = 5 "
