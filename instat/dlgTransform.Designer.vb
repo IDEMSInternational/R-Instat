@@ -111,7 +111,6 @@ Partial Class dlgTransform
         Me.ucrPnlColumnSelectOptions = New instat.UcrPanel()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
-        Me.ucrNewColName = New instat.ucrSave()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.grpNumericOptions.SuspendLayout()
@@ -963,22 +962,12 @@ Partial Class dlgTransform
         Me.rdoMultiple.Text = "Multiple"
         Me.rdoMultiple.UseVisualStyleBackColor = True
         '
-        'ucrNewColName
-        '
-        Me.ucrNewColName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewColName.Location = New System.Drawing.Point(10, 368)
-        Me.ucrNewColName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrNewColName.Name = "ucrNewColName"
-        Me.ucrNewColName.Size = New System.Drawing.Size(331, 22)
-        Me.ucrNewColName.TabIndex = 69
-        '
         'dlgTransform
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(440, 445)
-        Me.Controls.Add(Me.ucrNewColName)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.ucrPnlColumnSelectOptions)
@@ -1102,5 +1091,4 @@ Partial Class dlgTransform
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents rdoSingle As RadioButton
     Friend WithEvents ucrPnlColumnSelectOptions As UcrPanel
-    Friend WithEvents ucrNewColName As ucrSave
 End Class
