@@ -648,10 +648,13 @@ DataBook$set("public", "get_object_data", function(data_name = NULL, object_name
   if (is.null(out)) {
     return(NULL)
   } else if (as_file) {
+     if("html" %in% out$object_format){
       for (i in seq_along(out$object)) {
         result_list[[i]] <- view_object_data(object = out$object[[i]], object_format = out$object_format)
       }
     out <- result_list
+     } else{ out <- view_object_data(object = out$object, object_format = out$object_format)
+}
   } else {
     out <- out$object
   }
