@@ -773,10 +773,12 @@ Public Class dlgTransform
 
     Private Sub NewDefaultName()
         If rdoSingle.Checked Then
+            ucrSaveNew.SetLabelText("New Column Name:")
             If (Not ucrSaveNew.bUserTyped) AndAlso Not ucrReceiverRank.IsEmpty Then
                 ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
             End If
         ElseIf rdoMultiple.Checked Then
+            ucrSaveNew.SetLabelText("Suffix Name:")
             If Not ucrReceiverRank.IsEmpty AndAlso (Not ucrSaveNew.bUserTyped) Then
                 Dim strDataframeName As String = ucrReceiverRank.GetVariableNames(bWithQuotes:=False)
                 ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
