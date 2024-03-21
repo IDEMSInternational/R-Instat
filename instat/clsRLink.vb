@@ -997,11 +997,14 @@ Public Class RLink
             End If
 
             Dim lines() As String = strOutput.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-            For Each line In lines
-                'log script and output
-                clsOutputLogger.AddOutput(strScriptWithComment, line, bAsFile, bDisplayOutputInExternalViewer)
-            Next
-
+            If Not String.IsNullOrEmpty(strOutput) AndAlso lines.All(Function(line) File.Exists(line) AndAlso New FileInfo(line).Length > 0 AndAlso
+                    Path.GetExtension(line).Equals(".html", StringComparison.OrdinalIgnoreCase)) Then
+                For Each line In lines
+                    clsOutputLogger.AddOutput(strScriptWithComment, line, bAsFile, bDisplayOutputInExternalViewer)
+                Next
+            Else
+                clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
+            End If
 
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
@@ -1036,7 +1039,7 @@ Public Class RLink
             'if not, just return empty file path
             strFilePath = String.Join(Environment.NewLine, expTemp.AsCharacter())
             Dim lines() As String = strFilePath.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-            lines = lines.Where(Function(line) File.Exists(line) OrElse New FileInfo(line).Length = 0).ToArray()
+            lines = lines.Where(Function(line) File.Exists(line) OrElse New FileInfo(line).Length > 0).ToArray()
             strFilePath = If(lines.Length = 0, "", String.Join(Environment.NewLine, lines))
         End If
         Return strFilePath
