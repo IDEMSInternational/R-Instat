@@ -38,10 +38,9 @@ Public Class dlgDescribeTwoVariable
         clsTabStyleCellTextFunction, clsTabStyleCellTitleFunction, clsTabStyleFunction,
         clsTabStylePxFunction, clsgtExtrasThemesFuction As New RFunction
 
-    Private clsGroupByPipeOperator, clsSummaryOperator As New ROperator
+    Private clsGroupByPipeOperator, clsSummaryOperator, clsTildOperator, clsTildPivotOperator, clsMapOperator As New ROperator
 
-    Private clsFrequencyTablesFunction, clsgtFunction, clsCombineFrequencyFactorParameterFunction,
-        clsSelectFunction, clsRenameCombineFunction As New RFunction
+    Private clsgtFunction, clsMapSummaryFunction, clsMapGtFunction, clsMapPivotFunction As New RFunction
     'Frequency Parameters
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
                                                           "perc_total_factors", "perc_decimal",
@@ -198,9 +197,15 @@ Public Class dlgDescribeTwoVariable
         clsTabFootnoteOperator = New ROperator
         clsgtFunction = New RFunction
         clsSummaryOperator = New ROperator
+        clsMapOperator = New ROperator
         clsPivotWiderFunction = New RFunction
         clsgtExtrasThemesFuction = New RFunction
         clsMutableOperator = New ROperator
+        clsTildOperator = New ROperator
+        clsTildPivotOperator = New ROperator
+        clsMapSummaryFunction = New RFunction
+        clsMapPivotFunction = New RFunction
+        clsMapGtFunction = New RFunction
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
@@ -277,17 +282,43 @@ Public Class dlgDescribeTwoVariable
 
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=3)
-        clsSummaryTableFunction.SetAssignTo("summary_table")
+        'clsSummaryTableFunction.SetAssignTo("summary_table")
+
+        clsTildOperator.SetOperation("~")
+        clsTildOperator.AddParameter("right", clsRFunctionParameter:=clsSummaryTableFunction)
+        clsTildOperator.bBrackets = False
+
+        clsTildPivotOperator.SetOperation("~")
+        clsTildPivotOperator.AddParameter("right", clsRFunctionParameter:=clsPivotWiderFunction)
+        clsTildPivotOperator.bBrackets = False
+
+        clsMapSummaryFunction.SetPackageName("purrr")
+        clsMapSummaryFunction.SetRCommand("map")
+        clsMapSummaryFunction.AddParameter(".f", clsROperatorParameter:=clsTildOperator, iPosition:=1)
+
+        clsMapPivotFunction.SetPackageName("purrr")
+        clsMapPivotFunction.SetRCommand("map")
+        clsMapPivotFunction.AddParameter("pivot", clsROperatorParameter:=clsTildPivotOperator)
+
+        clsMapGtFunction.SetPackageName("purrr")
+        clsMapGtFunction.SetRCommand("map")
+        clsMapGtFunction.AddParameter("gttbl", clsRFunctionParameter:=clsgtFunction)
 
         clsgtFunction.SetPackageName("gt")
         clsgtFunction.SetRCommand("gt")
 
         clsSummaryOperator.SetOperation("%>%")
-        clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryTableFunction, iPosition:=0)
-        clsSummaryOperator.AddParameter("gttbl", clsRFunctionParameter:=clsgtFunction, iPosition:=1)
+        clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=0)
+        'clsSummaryOperator.AddParameter("gttbl", clsRFunctionParameter:=clsgtFunction, iPosition:=1)
+
+        clsMapOperator.SetOperation("%>%")
+        clsMapOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=1)
+        clsMapOperator.AddParameter("pivot", clsRFunctionParameter:=clsMapPivotFunction, iPosition:=2)
+        clsMapOperator.AddParameter("gt", clsRFunctionParameter:=clsMapGtFunction, iPosition:=3)
+        clsMapOperator.bBrackets = False
 
         clsJoiningPipeOperator.SetOperation("%>%")
-        clsJoiningPipeOperator.AddParameter("gtable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
+        clsJoiningPipeOperator.AddParameter("gtable", clsROperatorParameter:=clsMapOperator, iPosition:=0)
         clsJoiningPipeOperator.bBrackets = False
 
         clsTableSourcenoteFunction.SetPackageName("gt")
@@ -340,6 +371,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRAnovaFunction, New RParameter("x_col_names", 1), iAdditionalPairNo:=1)
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsRCorrelationFunction, New RParameter("x_col_names", 1), iAdditionalPairNo:=2)
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsSkimrFunction, New RParameter("col_names", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsMapSummaryFunction, New RParameter(".x", 1), iAdditionalPairNo:=4)
 
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsRAnovaFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=1)
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsSummaryTableFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=2)
@@ -615,9 +647,9 @@ Public Class dlgDescribeTwoVariable
         If rdoTwoVariable.Checked Then
             clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
             If IsFactorByFactor() Then
-                clsSummaryTableFunction.AddParameter("factors", "c(" & Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34) & "," & ucrReceiverSecondTwoVariableFactor.GetVariableNames & ")")
-                clsSummaryTableFunction.AddParameter("columns_to_summarise", Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34))
-                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text, iPosition:=0)
+                clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverSecondTwoVariableFactor.GetVariableNames & "," & ".x" & ")")
+                clsSummaryTableFunction.AddParameter("columns_to_summarise", ".x")
+                clsPivotWiderFunction.AddParameter("names_from", "{{.x}}", iPosition:=0)
             Else
                 clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverFirstVars.GetVariableNames)
