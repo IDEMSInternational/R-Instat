@@ -1039,7 +1039,7 @@ Public Class RLink
             'if not, just return empty file path
             strFilePath = String.Join(Environment.NewLine, expTemp.AsCharacter())
             Dim lines() As String = strFilePath.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-            lines = lines.Where(Function(line) File.Exists(line) OrElse New FileInfo(line).Length > 0).ToArray()
+            lines = lines.Where(Function(line) File.Exists(line) AndAlso New FileInfo(line).Length > 0).ToArray()
             strFilePath = If(lines.Length = 0, "", String.Join(Environment.NewLine, lines))
         End If
         Return strFilePath
