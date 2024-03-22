@@ -3049,7 +3049,8 @@ write_weather_data <- function(year, month, day, rain, mn_tmp, mx_tmp, missing_c
   cat("Weather data has been written to", output_file, "\n")
 }
 
-prepare_walter_lieth <- function(data, month, tm_min, ta_min){
+prepare_walter_lieth <- function(data, month, tm_min){
+  data <- data %>% dplyr::mutate(ta_min = min(data[[tm_min]]))
   dat_long_int <- NULL
   for (j in seq(nrow(data) - 1)) {
     intres <- NULL
@@ -3076,7 +3077,7 @@ prepare_walter_lieth <- function(data, month, tm_min, ta_min){
   dat_long_end <- dat_long_end[order(dat_long_end$indrow), ]
   dat_long_end <- dat_long_end[dat_long_end$indrow >= 0 & dat_long_end$indrow <= 12, ]
   dat_long_end <- tibble::as_tibble(dat_long_end)
-  
+
   getpolymax <- function(x, y, y_lim) {
     initpoly <- FALSE
     yres <- NULL
@@ -3128,11 +3129,11 @@ prepare_walter_lieth <- function(data, month, tm_min, ta_min){
   pm_max_line <- getlines(x = dat_long_end$indrow, y = pmin(dat_long_end$pm_reesc, 
                                                             50), y_lim = dat_long_end$tm)
   dat_real <- dat_long_end[dat_long_end$interpolate == FALSE, 
-                           c("indrow", ta_min)]
+                           c("indrow", "ta_min")]
   x <- NULL
   y <- NULL
   for (i in seq_len(nrow(dat_real))) {
-    if (dat_real[i, ][[ta_min]] < 0) {
+    if (dat_real[i, ][["ta_min"]] < 0) {
       x <- c(x, NA, rep(dat_real[i, ]$indrow - 0.5, 2), 
              rep(dat_real[i, ]$indrow + 0.5, 2), NA)
       y <- c(y, NA, -3, 0, 0, -3, NA)
@@ -3171,7 +3172,7 @@ prepare_walter_lieth <- function(data, month, tm_min, ta_min){
   return(return_list)
 }
 
-ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, ta_min, station_name = "", 
+ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, station_name = "", 
                             alt = NA, per = NA, pcol = "#002F70", 
                             tcol = "#ff0000", pfcol = "#9BAEE2", sfcol = "#3C6FC4", 
                             shem = FALSE, p3line = FALSE, ...) 
@@ -3182,7 +3183,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
     dplyr::mutate(tm = (.data[[tm_max]] + .data[[tm_min]]) / 2,
                   pm_reesc = dplyr::if_else(.data[[p_mes]] < 100, .data[[p_mes]] * 0.5, .data[[p_mes]] * 0.05 + 45),
                   p3line = .data[[p_mes]] / 3) %>%
-    dplyr::mutate(across(.data[[month]], ~ forcats::fct_expand(.data[[month]], ""))) %>%
+    dplyr::mutate(across(.data[[month]], ~ fct_expand(.data[[month]], ""))) %>%
     dplyr::arrange(.data[[month]])
   
   # do this for each station, if we have a station
@@ -3207,7 +3208,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
   
   # split by station
   if (is.null(station)){
-    data_list <- prepare_walter_lieth(data, month, tm_min, ta_min)
+    data_list <- prepare_walter_lieth(data, month, tm_min)
     # data things
     dat_long_end <- data_list$dat_long_end
     tm_max_line <- data_list$tm_max_line
@@ -3219,7 +3220,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
     results <-
       map(.x = unique(data[[station]]),
           .f = ~{filtered_data <- data %>% filter(!!sym(station) == .x)
-          prepare_walter_lieth(filtered_data, month, tm_min, ta_min)})
+          prepare_walter_lieth(filtered_data, month, tm_min)})
     # Function to bind rows for a specific sub-element across all main elements
     n <- length(results)
     m <- length(results[[1]])
@@ -3298,7 +3299,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
     wandlplot <- wandlplot + ggplot2::geom_polygon(data = prep_max_poly, aes(x, y),
                                                    fill = pcol)
   }
-  if (min(dat_long_end[[ta_min]]) < 0) {
+  if (min(dat_long_end[["ta_min"]]) < 0) {
     wandlplot <- wandlplot + ggplot2::geom_polygon(data = probfreeze, aes(x = x, y = y),
                                                    fill = pfcol, colour = "black")
   }
@@ -3307,7 +3308,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
                                           fill = sfcol, colour = "black")
   }
   wandlplot <- wandlplot + geom_hline(yintercept = c(0, 50), 
-                                      size = 0.5) +
+                                      linewidth = 0.5) +
     geom_segment(data = ticks, aes(x = x, xend = x, y = ymin, yend = ymax)) +
     scale_x_continuous(breaks = month_breaks, name = "", labels = month_labs, expand = c(0, 0)) + 
     scale_y_continuous("C", limits = c(ymin, ymax), labels = templabs, 
