@@ -38,9 +38,9 @@ Public Class dlgDescribeTwoVariable
         clsTabStyleCellTextFunction, clsTabStyleCellTitleFunction, clsTabStyleFunction,
         clsTabStylePxFunction, clsgtExtrasThemesFuction As New RFunction
 
-    Private clsGroupByPipeOperator, clsSummaryOperator, clsTildOperator, clsTildPivotOperator, clsMapOperator, clsPivotOperator As New ROperator
+    Private clsGroupByPipeOperator, clsSummaryOperator, clsTildOperator, clsMapOperator, clsPivotOperator As New ROperator
 
-    Private clsgtFunction, clsMapSummaryFunction, clsMapGtFunction, clsMapPivotFunction As New RFunction
+    Private clsgtFunction, clsMapSummaryFunction, clsMapGtFunction As New RFunction
     'Frequency Parameters
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
                                                           "perc_total_factors", "perc_decimal",
@@ -202,9 +202,7 @@ Public Class dlgDescribeTwoVariable
         clsgtExtrasThemesFuction = New RFunction
         clsMutableOperator = New ROperator
         clsTildOperator = New ROperator
-        clsTildPivotOperator = New ROperator
         clsMapSummaryFunction = New RFunction
-        clsMapPivotFunction = New RFunction
         clsMapGtFunction = New RFunction
         clsPivotOperator = New ROperator
 
@@ -380,8 +378,8 @@ Public Class dlgDescribeTwoVariable
         ucrSaveTable.AddAdditionalRCode(clsJoiningPipeOperator, iAdditionalPairNo:=1)
 
         ucrChkOmitMissing.SetRCode(clsSummaryTableFunction, bReset)
-        ucrReceiverFirstVars.SetRCode(clsSummaryTableFunction, bReset)
-        ucrReceiverSecondTwoVariableFactor.SetRCode(clsSummaryTableFunction, bReset)
+        ucrReceiverFirstVars.SetRCode(clsDummyFunction, bReset)
+        ucrReceiverSecondTwoVariableFactor.SetRCode(clsDummyFunction, bReset)
         ucrSelectorDescribeTwoVar.SetRCode(clsRCorrelationFunction, bReset)
         ucrReceiverSkimrGroupByFactor.SetRCode(clsGroupByFunction, bReset)
         ucrReceiverSecondSkimrGroupByFactor.SetRCode(clsGroupByFunction, bReset)
@@ -647,12 +645,12 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub FactorColumns()
         If rdoTwoVariable.Checked Then
-            'clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
             If IsFactorByFactor() Then
                 clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverSecondTwoVariableFactor.GetVariableNames & "," & ".x" & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ".x")
                 clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
             Else
+                clsSummaryTableFunction.AddParameter("factors", ucrReceiverSecondTwoVariableFactor.GetVariableNames)
                 clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=1)
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverFirstVars.GetVariableNames)
                 SummariesInRowsOrCols()
