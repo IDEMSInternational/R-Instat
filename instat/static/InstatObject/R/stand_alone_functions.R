@@ -3053,17 +3053,6 @@ prepare_walter_lieth <- function(data, month, tm_min, ta_min){
   dat_long_int <- NULL
   for (j in seq(nrow(data) - 1)) {
     intres <- NULL
-
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -3076,7 +3077,7 @@ prepare_walter_lieth <- function(data, month, tm_min, ta_min){
-  
     for (i in seq_len(ncol(data))) {
       if (is.character(data[j, i]) | is.factor(data[j, i])) {
         val <- as.data.frame(data[j, i])
@@ -3091,23 +3080,6 @@ prepare_walter_lieth <- function(data, month, tm_min, ta_min){
   getpolymax <- function(x, y, y_lim) {
     initpoly <- FALSE
     yres <- NULL
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -3128,11 +3129,11 @@ prepare_walter_lieth <- function(data, month, tm_min, ta_min){
-  
     xres <- NULL
     for (i in seq_len(length(y))) {
       lastobs <- i == length(x)
@@ -3164,23 +3136,6 @@ prepare_walter_lieth <- function(data, month, tm_min, ta_min){
       x <- c(x, NA, rep(dat_real[i, ]$indrow - 0.5, 2), 
              rep(dat_real[i, ]$indrow + 0.5, 2), NA)
       y <- c(y, NA, -3, 0, 0, -3, NA)
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -3171,7 +3172,7 @@ prepare_walter_lieth <- function(data, month, tm_min, ta_min){
-  
     }
     else {
       x <- c(x, NA)
@@ -3220,17 +3175,6 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
                             alt = NA, per = NA, pcol = "#002F70", 
                             tcol = "#ff0000", pfcol = "#9BAEE2", sfcol = "#3C6FC4", 
                             shem = FALSE, p3line = FALSE, ...) 
-
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -3182,7 +3183,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min,
-  
 {
   
   # Preprocess data with vectorised operations
@@ -3240,19 +3184,8 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
                   p3line = .data[[p_mes]] / 3) %>%
     dplyr::mutate(across(.data[[month]], ~ forcats::fct_expand(.data[[month]], ""))) %>%
     dplyr::arrange(.data[[month]])
-
-  # do this for each station, if we have a station
-
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -3207,7 +3208,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min,
   
+  # do this for each station, if we have a station
   if (!is.null(station)){
     data <- data %>% group_by(!!sym(station))
   }
@@ -3271,24 +3204,13 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
     data <- data %>% ungroup()
   }
   data <- data.frame(data)
-
+  
   # split by station
   if (is.null(station)){
     data_list <- prepare_walter_lieth(data, month, tm_min, ta_min)
     # data things
     dat_long_end <- data_list$dat_long_end
     tm_max_line <- data_list$tm_max_line
-
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -3219,7 +3220,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min,
-  
     pm_max_line <- data_list$pm_max_line
     prep_max_poly <- data_list$prep_max_poly
     probfreeze <- data_list$prob_freeze
@@ -3301,23 +3223,6 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
     # Function to bind rows for a specific sub-element across all main elements
     n <- length(results)
     m <- length(results[[1]])
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -3298,7 +3299,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min,
-  
     station_name <- unique(data[[station]])
     binds <- NULL
     combined <- NULL
@@ -3397,17 +3302,6 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
     wandlplot <- wandlplot + ggplot2::geom_polygon(data = probfreeze, aes(x = x, y = y),
                                                    fill = pfcol, colour = "black")
   }
-
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -3307,7 +3308,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min,
-  
   if (min(dat_long_end[[tm_min]]) < 0) {
     wandlplot <- wandlplot + geom_polygon(data = surefreeze, aes(x = x, y = y),
                                           fill = sfcol, colour = "black")
@@ -3417,17 +3311,6 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
     geom_segment(data = ticks, aes(x = x, xend = x, y = ymin, yend = ymax)) +
     scale_x_continuous(breaks = month_breaks, name = "", labels = month_labs, expand = c(0, 0)) + 
     scale_y_continuous("C", limits = c(ymin, ymax), labels = templabs, 
-
-    
-          
-            
-    
-
-          
-          Expand Down
-    
-    
-  
                        breaks = range_tm, sec.axis = dup_axis(name = "mm", labels = preclabs))
   wandlplot <- wandlplot +
     ggplot2::labs(title = title, subtitle = sub, tag = tags) +
