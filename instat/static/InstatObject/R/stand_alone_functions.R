@@ -3183,7 +3183,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
     dplyr::mutate(tm = (.data[[tm_max]] + .data[[tm_min]]) / 2,
                   pm_reesc = dplyr::if_else(.data[[p_mes]] < 100, .data[[p_mes]] * 0.5, .data[[p_mes]] * 0.05 + 45),
                   p3line = .data[[p_mes]] / 3) %>%
-    dplyr::mutate(across(.data[[month]], ~ fct_expand(.data[[month]], ""))) %>%
+    dplyr::mutate(across(.data[[month]], ~ forcats::fct_expand(.data[[month]], ""))) %>%
     dplyr::arrange(.data[[month]])
   
   # do this for each station, if we have a station
