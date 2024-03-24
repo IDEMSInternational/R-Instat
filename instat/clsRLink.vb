@@ -996,15 +996,26 @@ Public Class RLink
                 End If
             End If
 
-            Dim lines() As String = strOutput.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-            If Not String.IsNullOrEmpty(strOutput) AndAlso lines.All(Function(line) File.Exists(line) AndAlso New FileInfo(line).Length > 0 AndAlso
+            ' Split the strOutput into an array of lines, removing empty entries
+            Dim arrFilesPaths() As String = strOutput.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+
+            ' Check if strOutput is not empty and all lines correspond to existing HTML files with content
+            If Not String.IsNullOrEmpty(strOutput) AndAlso arrFilesPaths.All(Function(line) File.Exists(line) AndAlso New FileInfo(line).Length > 0 AndAlso
                     Path.GetExtension(line).Equals(".html", StringComparison.OrdinalIgnoreCase)) Then
-                For Each line In lines
-                    clsOutputLogger.AddOutput(strScriptWithComment, line, bAsFile, bDisplayOutputInExternalViewer)
+                ' Iterate through each HTML files
+                For Each file In arrFilesPaths
+                    ' Add each HTML file as an output to clsOutputLogger
+                    ' strScriptWithComment: the script with associated comments
+                    ' line: the path to the HTML file
+                    ' bAsFile: a boolean indicating whether the output should be treated as a file
+                    ' bDisplayOutputInExternalViewer: a boolean indicating whether to display the output in an external viewer
+                    clsOutputLogger.AddOutput(strScriptWithComment, file, bAsFile, bDisplayOutputInExternalViewer)
                 Next
             Else
+                ' If strOutput is empty or does not contain valid HTML files, add strOutput itself as an output
                 clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
             End If
+
 
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")

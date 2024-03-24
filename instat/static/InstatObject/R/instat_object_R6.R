@@ -641,42 +641,18 @@ DataBook$set("public", "get_object", function(data_name = NULL, object_name) {
 }
 )
 
-DataBook$set("public", "get_object_data", function(data_name = NULL,
-                                                   object_name,
-                                                   as_file = FALSE) {
-  out <-
-    self$get_object(data_name = data_name, object_name = object_name)
-  result_list <- list()
-  
-  if (is.null(out)) {
+DataBook$set("public", "get_object_data", function(data_name = NULL, object_name, as_file = FALSE) {
+  out <- self$get_object(data_name = data_name, object_name = object_name)
+  if(is.null(out)){
     return(NULL)
-  } else if(as_file) {
-    if ("html" %in% out$object_format) {
-      if ("gt_tbl" %in% sapply(out$object, class)) {
-        result_list <- lapply(out$object, function(obj) {
-          if ("gt_tbl" %in% class(obj)) {
-            view_object_data(object = obj,
-                             object_format = out$object_format)
-          } else {
-            obj
-          }
-        })
-        out <- result_list
-      } else {
-        out <-
-          view_object_data(object = out$object,
-                           object_format = out$object_format)
-      }
-    } else {
-      out <-
-        view_object_data(object = out$object,
-                         object_format = out$object_format)
-    }
-  } else {
+  }else if(as_file){
+    out <- view_object_data(object = out$object, object_format = out$object_format)
+  }else{
     out <- out$object
   }
   return(out)
-})
+}
+) 
 
 
 #returns object data from the object_names character vector
