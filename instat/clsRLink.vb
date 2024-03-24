@@ -999,17 +999,17 @@ Public Class RLink
             ' Split the strOutput into an array of lines, removing empty entries
             Dim arrFilesPaths() As String = strOutput.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
 
-            ' Check if strOutput is not empty and all lines correspond to existing HTML files with content
-            If Not String.IsNullOrEmpty(strOutput) AndAlso arrFilesPaths.All(Function(line) File.Exists(line) AndAlso New FileInfo(line).Length > 0 AndAlso
-                    Path.GetExtension(line).Equals(".html", StringComparison.OrdinalIgnoreCase)) Then
+            ' Check if strOutput is not empty and all files correspond to existing HTML files with content
+            If Not String.IsNullOrEmpty(strOutput) AndAlso arrFilesPaths.All(Function(_path) File.Exists(_path) AndAlso New FileInfo(_path).Length > 0 AndAlso
+                    Path.GetExtension(_path).Equals(".html", StringComparison.OrdinalIgnoreCase)) Then
                 ' Iterate through each HTML files
-                For Each file In arrFilesPaths
+                For Each _path In arrFilesPaths
                     ' Add each HTML file as an output to clsOutputLogger
                     ' strScriptWithComment: the script with associated comments
                     ' line: the path to the HTML file
                     ' bAsFile: a boolean indicating whether the output should be treated as a file
                     ' bDisplayOutputInExternalViewer: a boolean indicating whether to display the output in an external viewer
-                    clsOutputLogger.AddOutput(strScriptWithComment, file, bAsFile, bDisplayOutputInExternalViewer)
+                    clsOutputLogger.AddOutput(strScriptWithComment, _path, bAsFile, bDisplayOutputInExternalViewer)
                 Next
             Else
                 ' If strOutput is empty or does not contain valid HTML files, add strOutput itself as an output
@@ -1037,7 +1037,7 @@ Public Class RLink
     ''' <param name="bShowWaitDialogOverride"></param>
     ''' <returns>file path name if file is avaialble and has contents else empty string</returns>
     Private Function GetFileOutput(strScript As String, bSilent As Boolean, bSeparateThread As Boolean, bShowWaitDialogOverride As Nullable(Of Boolean)) As String
-        Dim strFilePath As String = ""
+        Dim strFilesPath As String = ""
         Dim strTempAssignTo As String = ".temp_val"
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
@@ -1046,14 +1046,20 @@ Public Class RLink
         expTemp = GetSymbol(strTempAssignTo, bSilent:=True)
         Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
         If expTemp IsNot Nothing Then
-            'get the file path name, check if it exists and whether it has contents
-            'if not, just return empty file path
-            strFilePath = String.Join(Environment.NewLine, expTemp.AsCharacter())
-            Dim lines() As String = strFilePath.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-            lines = lines.Where(Function(line) File.Exists(line) AndAlso New FileInfo(line).Length > 0).ToArray()
-            strFilePath = If(lines.Length = 0, "", String.Join(Environment.NewLine, lines))
+            ' If expTemp is not null
+            ' Extract the file path names from the expTemp and join into a single string
+            ' Split the string into an array of file path names, removing empty entries
+            ' Check if each file path name corresponds to an existing file with content
+            ' If so, filter out invalid file paths
+            ' Combine the valid file paths into a single string separated by newline characters
+            ' If no valid file paths remain, set strFilesPath to an empty string
+            strFilesPath = String.Join(Environment.NewLine, expTemp.AsCharacter())
+            Dim arrFilesPath() As String = strFilesPath.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            arrFilesPath = arrFilesPath.Where(Function(path) File.Exists(path) AndAlso New FileInfo(path).Length > 0).ToArray()
+            strFilesPath = If(arrFilesPath.Length = 0, "", String.Join(Environment.NewLine, arrFilesPath))
         End If
-        Return strFilePath
+
+        Return strFilesPath
     End Function
 
     '''--------------------------------------------------------------------------------------------
