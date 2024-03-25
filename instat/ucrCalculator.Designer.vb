@@ -217,7 +217,7 @@ Partial Class ucrCalculator
         Me.cmdGpa = New System.Windows.Forms.Button()
         Me.cmdEla = New System.Windows.Forms.Button()
         Me.cmdMath = New System.Windows.Forms.Button()
-        Me.cmdLevel = New System.Windows.Forms.Button()
+        Me.cmdWakefieldLower = New System.Windows.Forms.Button()
         Me.cmdLanguage = New System.Windows.Forms.Button()
         Me.cmdIq = New System.Windows.Forms.Button()
         Me.cmdInternet_Browser = New System.Windows.Forms.Button()
@@ -231,7 +231,7 @@ Partial Class ucrCalculator
         Me.cmdDice = New System.Windows.Forms.Button()
         Me.cmdDied = New System.Windows.Forms.Button()
         Me.cmdDeath = New System.Windows.Forms.Button()
-        Me.cmdDate_Stamp = New System.Windows.Forms.Button()
+        Me.cmdWakefieldDates = New System.Windows.Forms.Button()
         Me.cmdPrimary = New System.Windows.Forms.Button()
         Me.cmdColor = New System.Windows.Forms.Button()
         Me.cmdCoin = New System.Windows.Forms.Button()
@@ -2341,7 +2341,7 @@ Partial Class ucrCalculator
         Me.grpWakefield.Controls.Add(Me.cmdGpa)
         Me.grpWakefield.Controls.Add(Me.cmdEla)
         Me.grpWakefield.Controls.Add(Me.cmdMath)
-        Me.grpWakefield.Controls.Add(Me.cmdLevel)
+        Me.grpWakefield.Controls.Add(Me.cmdWakefieldLower)
         Me.grpWakefield.Controls.Add(Me.cmdLanguage)
         Me.grpWakefield.Controls.Add(Me.cmdIq)
         Me.grpWakefield.Controls.Add(Me.cmdInternet_Browser)
@@ -2355,7 +2355,7 @@ Partial Class ucrCalculator
         Me.grpWakefield.Controls.Add(Me.cmdDice)
         Me.grpWakefield.Controls.Add(Me.cmdDied)
         Me.grpWakefield.Controls.Add(Me.cmdDeath)
-        Me.grpWakefield.Controls.Add(Me.cmdDate_Stamp)
+        Me.grpWakefield.Controls.Add(Me.cmdWakefieldDates)
         Me.grpWakefield.Controls.Add(Me.cmdPrimary)
         Me.grpWakefield.Controls.Add(Me.cmdColor)
         Me.grpWakefield.Controls.Add(Me.cmdCoin)
@@ -2385,7 +2385,7 @@ Partial Class ucrCalculator
         Me.cmdLinkert7.Name = "cmdLinkert7"
         Me.cmdLinkert7.Size = New System.Drawing.Size(107, 38)
         Me.cmdLinkert7.TabIndex = 54
-        Me.cmdLinkert7.Text = "linkert7 (o.f)"
+        Me.cmdLinkert7.Text = "linkert7 (O.F)"
         Me.cmdLinkert7.UseVisualStyleBackColor = True
         '
         'cmdWakefield_Year
@@ -2418,7 +2418,7 @@ Partial Class ucrCalculator
         Me.cmdWakefield_Upper.Name = "cmdWakefield_Upper"
         Me.cmdWakefield_Upper.Size = New System.Drawing.Size(107, 38)
         Me.cmdWakefield_Upper.TabIndex = 51
-        Me.cmdWakefield_Upper.Text = "upper (c)"
+        Me.cmdWakefield_Upper.Text = "upper (C)"
         Me.cmdWakefield_Upper.UseVisualStyleBackColor = True
         '
         'cmdString
@@ -2429,7 +2429,7 @@ Partial Class ucrCalculator
         Me.cmdString.Name = "cmdString"
         Me.cmdString.Size = New System.Drawing.Size(107, 38)
         Me.cmdString.TabIndex = 50
-        Me.cmdString.Text = "string (c)"
+        Me.cmdString.Text = "string (C)"
         Me.cmdString.UseVisualStyleBackColor = True
         '
         'cmdState
@@ -2440,7 +2440,7 @@ Partial Class ucrCalculator
         Me.cmdState.Name = "cmdState"
         Me.cmdState.Size = New System.Drawing.Size(107, 38)
         Me.cmdState.TabIndex = 49
-        Me.cmdState.Text = "state (f)"
+        Me.cmdState.Text = "state (F)"
         Me.cmdState.UseVisualStyleBackColor = True
         '
         'cmdSpeed
@@ -2473,7 +2473,7 @@ Partial Class ucrCalculator
         Me.cmdSex.Name = "cmdSex"
         Me.cmdSex.Size = New System.Drawing.Size(107, 38)
         Me.cmdSex.TabIndex = 46
-        Me.cmdSex.Text = "sex (f)"
+        Me.cmdSex.Text = "sex (F)"
         Me.cmdSex.UseVisualStyleBackColor = True
         '
         'cmdSex_Inclusive
@@ -2484,7 +2484,7 @@ Partial Class ucrCalculator
         Me.cmdSex_Inclusive.Name = "cmdSex_Inclusive"
         Me.cmdSex_Inclusive.Size = New System.Drawing.Size(107, 38)
         Me.cmdSex_Inclusive.TabIndex = 45
-        Me.cmdSex_Inclusive.Text = "sex_inclusive (f)"
+        Me.cmdSex_Inclusive.Text = "sex_inclusive (F)"
         Me.cmdSex_Inclusive.UseVisualStyleBackColor = True
         '
         'cmdGender
@@ -2495,7 +2495,7 @@ Partial Class ucrCalculator
         Me.cmdGender.Name = "cmdGender"
         Me.cmdGender.Size = New System.Drawing.Size(107, 38)
         Me.cmdGender.TabIndex = 44
-        Me.cmdGender.Text = "gender (f)"
+        Me.cmdGender.Text = "gender (F)"
         Me.cmdGender.UseVisualStyleBackColor = True
         '
         'cmdSentence
@@ -2506,7 +2506,7 @@ Partial Class ucrCalculator
         Me.cmdSentence.Name = "cmdSentence"
         Me.cmdSentence.Size = New System.Drawing.Size(107, 38)
         Me.cmdSentence.TabIndex = 43
-        Me.cmdSentence.Text = "sentence (c)"
+        Me.cmdSentence.Text = "sentence (C)"
         Me.cmdSentence.UseVisualStyleBackColor = True
         '
         'cmdSat
@@ -2528,7 +2528,7 @@ Partial Class ucrCalculator
         Me.cmdReligion.Name = "cmdReligion"
         Me.cmdReligion.Size = New System.Drawing.Size(107, 38)
         Me.cmdReligion.TabIndex = 41
-        Me.cmdReligion.Text = "religion (f)"
+        Me.cmdReligion.Text = "religion (F)"
         Me.cmdReligion.UseVisualStyleBackColor = True
         '
         'cmdRace
@@ -2539,7 +2539,7 @@ Partial Class ucrCalculator
         Me.cmdRace.Name = "cmdRace"
         Me.cmdRace.Size = New System.Drawing.Size(107, 38)
         Me.cmdRace.TabIndex = 40
-        Me.cmdRace.Text = "race (f)"
+        Me.cmdRace.Text = "race (F)"
         Me.cmdRace.UseVisualStyleBackColor = True
         '
         'cmdPolitical
@@ -2550,7 +2550,7 @@ Partial Class ucrCalculator
         Me.cmdPolitical.Name = "cmdPolitical"
         Me.cmdPolitical.Size = New System.Drawing.Size(107, 38)
         Me.cmdPolitical.TabIndex = 39
-        Me.cmdPolitical.Text = "political (f)"
+        Me.cmdPolitical.Text = "political (F)"
         Me.cmdPolitical.UseVisualStyleBackColor = True
         '
         'cmdNormal
@@ -2572,7 +2572,7 @@ Partial Class ucrCalculator
         Me.cmdName.Name = "cmdName"
         Me.cmdName.Size = New System.Drawing.Size(107, 38)
         Me.cmdName.TabIndex = 37
-        Me.cmdName.Text = "name (c)"
+        Me.cmdName.Text = "name (C)"
         Me.cmdName.UseVisualStyleBackColor = True
         '
         'cmdWakefield_Month
@@ -2583,7 +2583,7 @@ Partial Class ucrCalculator
         Me.cmdWakefield_Month.Name = "cmdWakefield_Month"
         Me.cmdWakefield_Month.Size = New System.Drawing.Size(107, 38)
         Me.cmdWakefield_Month.TabIndex = 36
-        Me.cmdWakefield_Month.Text = "month (f)"
+        Me.cmdWakefield_Month.Text = "month (F)"
         Me.cmdWakefield_Month.UseVisualStyleBackColor = True
         '
         'cmdMilitary
@@ -2594,7 +2594,7 @@ Partial Class ucrCalculator
         Me.cmdMilitary.Name = "cmdMilitary"
         Me.cmdMilitary.Size = New System.Drawing.Size(107, 38)
         Me.cmdMilitary.TabIndex = 35
-        Me.cmdMilitary.Text = "military (f)"
+        Me.cmdMilitary.Text = "military (F)"
         Me.cmdMilitary.UseVisualStyleBackColor = True
         '
         'cmdMarital
@@ -2605,7 +2605,7 @@ Partial Class ucrCalculator
         Me.cmdMarital.Name = "cmdMarital"
         Me.cmdMarital.Size = New System.Drawing.Size(107, 38)
         Me.cmdMarital.TabIndex = 34
-        Me.cmdMarital.Text = "marital (f)"
+        Me.cmdMarital.Text = "marital (F)"
         Me.cmdMarital.UseVisualStyleBackColor = True
         '
         'cmdLorem_ipsum
@@ -2616,7 +2616,7 @@ Partial Class ucrCalculator
         Me.cmdLorem_ipsum.Name = "cmdLorem_ipsum"
         Me.cmdLorem_ipsum.Size = New System.Drawing.Size(107, 38)
         Me.cmdLorem_ipsum.TabIndex = 33
-        Me.cmdLorem_ipsum.Text = "lorem_ipsum (c)"
+        Me.cmdLorem_ipsum.Text = "lorem_ipsum (C)"
         Me.cmdLorem_ipsum.UseVisualStyleBackColor = True
         '
         'cmdLikert
@@ -2627,7 +2627,7 @@ Partial Class ucrCalculator
         Me.cmdLikert.Name = "cmdLikert"
         Me.cmdLikert.Size = New System.Drawing.Size(107, 38)
         Me.cmdLikert.TabIndex = 32
-        Me.cmdLikert.Text = "likert (o.f)"
+        Me.cmdLikert.Text = "likert (O.F)"
         Me.cmdLikert.UseVisualStyleBackColor = True
         '
         'cmdGpa
@@ -2663,16 +2663,16 @@ Partial Class ucrCalculator
         Me.cmdMath.Text = "math"
         Me.cmdMath.UseVisualStyleBackColor = True
         '
-        'cmdLevel
+        'cmdWakefieldLower
         '
-        Me.cmdLevel.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.25!)
-        Me.cmdLevel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLevel.Location = New System.Drawing.Point(322, 200)
-        Me.cmdLevel.Name = "cmdLevel"
-        Me.cmdLevel.Size = New System.Drawing.Size(107, 38)
-        Me.cmdLevel.TabIndex = 28
-        Me.cmdLevel.Text = "level"
-        Me.cmdLevel.UseVisualStyleBackColor = True
+        Me.cmdWakefieldLower.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.25!)
+        Me.cmdWakefieldLower.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdWakefieldLower.Location = New System.Drawing.Point(322, 200)
+        Me.cmdWakefieldLower.Name = "cmdWakefieldLower"
+        Me.cmdWakefieldLower.Size = New System.Drawing.Size(107, 38)
+        Me.cmdWakefieldLower.TabIndex = 28
+        Me.cmdWakefieldLower.Text = "lower(F)"
+        Me.cmdWakefieldLower.UseVisualStyleBackColor = True
         '
         'cmdLanguage
         '
@@ -2682,7 +2682,7 @@ Partial Class ucrCalculator
         Me.cmdLanguage.Name = "cmdLanguage"
         Me.cmdLanguage.Size = New System.Drawing.Size(107, 38)
         Me.cmdLanguage.TabIndex = 27
-        Me.cmdLanguage.Text = "language (f)"
+        Me.cmdLanguage.Text = "language (F)"
         Me.cmdLanguage.UseVisualStyleBackColor = True
         '
         'cmdIq
@@ -2704,7 +2704,7 @@ Partial Class ucrCalculator
         Me.cmdInternet_Browser.Name = "cmdInternet_Browser"
         Me.cmdInternet_Browser.Size = New System.Drawing.Size(107, 38)
         Me.cmdInternet_Browser.TabIndex = 25
-        Me.cmdInternet_Browser.Text = "browser (f)"
+        Me.cmdInternet_Browser.Text = "browser (F)"
         Me.cmdInternet_Browser.UseVisualStyleBackColor = True
         '
         'cmdGrade_Level
@@ -2715,7 +2715,7 @@ Partial Class ucrCalculator
         Me.cmdGrade_Level.Name = "cmdGrade_Level"
         Me.cmdGrade_Level.Size = New System.Drawing.Size(107, 38)
         Me.cmdGrade_Level.TabIndex = 19
-        Me.cmdGrade_Level.Text = "grade_level (f)"
+        Me.cmdGrade_Level.Text = "grade_level (F)"
         Me.cmdGrade_Level.UseVisualStyleBackColor = True
         '
         'cmdEye
@@ -2726,7 +2726,7 @@ Partial Class ucrCalculator
         Me.cmdEye.Name = "cmdEye"
         Me.cmdEye.Size = New System.Drawing.Size(107, 38)
         Me.cmdEye.TabIndex = 18
-        Me.cmdEye.Text = "eye (f)"
+        Me.cmdEye.Text = "eye (F)"
         Me.cmdEye.UseVisualStyleBackColor = True
         '
         'cmdEmployment
@@ -2737,7 +2737,7 @@ Partial Class ucrCalculator
         Me.cmdEmployment.Name = "cmdEmployment"
         Me.cmdEmployment.Size = New System.Drawing.Size(107, 38)
         Me.cmdEmployment.TabIndex = 17
-        Me.cmdEmployment.Text = "employment (f)"
+        Me.cmdEmployment.Text = "employment (F)"
         Me.cmdEmployment.UseVisualStyleBackColor = True
         '
         'cmdEducation
@@ -2748,7 +2748,7 @@ Partial Class ucrCalculator
         Me.cmdEducation.Name = "cmdEducation"
         Me.cmdEducation.Size = New System.Drawing.Size(107, 38)
         Me.cmdEducation.TabIndex = 16
-        Me.cmdEducation.Text = "education (f)"
+        Me.cmdEducation.Text = "education (F)"
         Me.cmdEducation.UseVisualStyleBackColor = True
         '
         'cmdDummy
@@ -2781,7 +2781,7 @@ Partial Class ucrCalculator
         Me.cmdDna.Name = "cmdDna"
         Me.cmdDna.Size = New System.Drawing.Size(107, 38)
         Me.cmdDna.TabIndex = 13
-        Me.cmdDna.Text = "dna (f)"
+        Me.cmdDna.Text = "dna (F)"
         Me.cmdDna.UseVisualStyleBackColor = True
         '
         'cmdDice
@@ -2817,16 +2817,16 @@ Partial Class ucrCalculator
         Me.cmdDeath.Text = "death (L)"
         Me.cmdDeath.UseVisualStyleBackColor = True
         '
-        'cmdDate_Stamp
+        'cmdWakefieldDates
         '
-        Me.cmdDate_Stamp.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.25!)
-        Me.cmdDate_Stamp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDate_Stamp.Location = New System.Drawing.Point(427, 53)
-        Me.cmdDate_Stamp.Name = "cmdDate_Stamp"
-        Me.cmdDate_Stamp.Size = New System.Drawing.Size(107, 38)
-        Me.cmdDate_Stamp.TabIndex = 9
-        Me.cmdDate_Stamp.Text = "date_stamp"
-        Me.cmdDate_Stamp.UseVisualStyleBackColor = True
+        Me.cmdWakefieldDates.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.25!)
+        Me.cmdWakefieldDates.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdWakefieldDates.Location = New System.Drawing.Point(427, 53)
+        Me.cmdWakefieldDates.Name = "cmdWakefieldDates"
+        Me.cmdWakefieldDates.Size = New System.Drawing.Size(107, 38)
+        Me.cmdWakefieldDates.TabIndex = 9
+        Me.cmdWakefieldDates.Text = "dates (D)"
+        Me.cmdWakefieldDates.UseVisualStyleBackColor = True
         '
         'cmdPrimary
         '
@@ -2836,7 +2836,7 @@ Partial Class ucrCalculator
         Me.cmdPrimary.Name = "cmdPrimary"
         Me.cmdPrimary.Size = New System.Drawing.Size(107, 38)
         Me.cmdPrimary.TabIndex = 8
-        Me.cmdPrimary.Text = "primary (f)"
+        Me.cmdPrimary.Text = "primary (F)"
         Me.cmdPrimary.UseVisualStyleBackColor = True
         '
         'cmdColor
@@ -2847,7 +2847,7 @@ Partial Class ucrCalculator
         Me.cmdColor.Name = "cmdColor"
         Me.cmdColor.Size = New System.Drawing.Size(107, 38)
         Me.cmdColor.TabIndex = 7
-        Me.cmdColor.Text = "color (f)"
+        Me.cmdColor.Text = "color (F)"
         Me.cmdColor.UseVisualStyleBackColor = True
         '
         'cmdCoin
@@ -2858,7 +2858,7 @@ Partial Class ucrCalculator
         Me.cmdCoin.Name = "cmdCoin"
         Me.cmdCoin.Size = New System.Drawing.Size(107, 38)
         Me.cmdCoin.TabIndex = 6
-        Me.cmdCoin.Text = "coin (f)"
+        Me.cmdCoin.Text = "coin (F)"
         Me.cmdCoin.UseVisualStyleBackColor = True
         '
         'cmdChildren
@@ -2880,7 +2880,7 @@ Partial Class ucrCalculator
         Me.cmdCar.Name = "cmdCar"
         Me.cmdCar.Size = New System.Drawing.Size(107, 38)
         Me.cmdCar.TabIndex = 4
-        Me.cmdCar.Text = "car (f)"
+        Me.cmdCar.Text = "car (F)"
         Me.cmdCar.UseVisualStyleBackColor = True
         '
         'cmdAnswer
@@ -2891,7 +2891,7 @@ Partial Class ucrCalculator
         Me.cmdAnswer.Name = "cmdAnswer"
         Me.cmdAnswer.Size = New System.Drawing.Size(107, 38)
         Me.cmdAnswer.TabIndex = 3
-        Me.cmdAnswer.Text = "answer (f)"
+        Me.cmdAnswer.Text = "answer (F)"
         Me.cmdAnswer.UseVisualStyleBackColor = True
         '
         'cmdPet
@@ -2902,7 +2902,7 @@ Partial Class ucrCalculator
         Me.cmdPet.Name = "cmdPet"
         Me.cmdPet.Size = New System.Drawing.Size(107, 38)
         Me.cmdPet.TabIndex = 2
-        Me.cmdPet.Text = "pet (f)"
+        Me.cmdPet.Text = "pet (F)"
         Me.cmdPet.UseVisualStyleBackColor = True
         '
         'cmdAnimal
@@ -2913,7 +2913,7 @@ Partial Class ucrCalculator
         Me.cmdAnimal.Name = "cmdAnimal"
         Me.cmdAnimal.Size = New System.Drawing.Size(107, 38)
         Me.cmdAnimal.TabIndex = 1
-        Me.cmdAnimal.Text = "animal (f)"
+        Me.cmdAnimal.Text = "animal (F)"
         Me.cmdAnimal.UseVisualStyleBackColor = True
         '
         'cmdAge
@@ -2957,7 +2957,7 @@ Partial Class ucrCalculator
         Me.cmdHair.Name = "cmdHair"
         Me.cmdHair.Size = New System.Drawing.Size(107, 38)
         Me.cmdHair.TabIndex = 22
-        Me.cmdHair.Text = "hair (f)"
+        Me.cmdHair.Text = "hair (F)"
         Me.cmdHair.UseVisualStyleBackColor = True
         '
         'cmdGroup
@@ -2968,7 +2968,7 @@ Partial Class ucrCalculator
         Me.cmdGroup.Name = "cmdGroup"
         Me.cmdGroup.Size = New System.Drawing.Size(107, 38)
         Me.cmdGroup.TabIndex = 21
-        Me.cmdGroup.Text = "group (f)"
+        Me.cmdGroup.Text = "group (F)"
         Me.cmdGroup.UseVisualStyleBackColor = True
         '
         'cmdGrade
@@ -7362,6 +7362,7 @@ Partial Class ucrCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpList)
         Me.Controls.Add(Me.cmdRhelpList)
         Me.Controls.Add(Me.cmdWakefieldHelp)
@@ -7383,7 +7384,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpModifier)
         Me.Controls.Add(Me.grpComplex)
         Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpDates)
@@ -7636,7 +7636,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdGpa As Button
     Friend WithEvents cmdEla As Button
     Friend WithEvents cmdMath As Button
-    Friend WithEvents cmdLevel As Button
+    Friend WithEvents cmdWakefieldLower As Button
     Friend WithEvents cmdLanguage As Button
     Friend WithEvents cmdIq As Button
     Friend WithEvents cmdInternet_Browser As Button
@@ -7650,7 +7650,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdDice As Button
     Friend WithEvents cmdDied As Button
     Friend WithEvents cmdDeath As Button
-    Friend WithEvents cmdDate_Stamp As Button
+    Friend WithEvents cmdWakefieldDates As Button
     Friend WithEvents cmdPrimary As Button
     Friend WithEvents cmdColor As Button
     Friend WithEvents cmdCoin As Button
