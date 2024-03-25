@@ -2281,6 +2281,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCheckDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataVisualiseData.Click
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Prepare
         dlgVisualizeData.ShowDialog()
     End Sub
 
@@ -2485,6 +2486,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeOneVariableVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableVisualiseData.Click
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Describe
         dlgVisualizeData.ShowDialog()
     End Sub
 
@@ -2672,6 +2674,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticExamineEditDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamineEditDataVisualiseData.Click
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Climatic
         dlgVisualizeData.ShowDialog()
     End Sub
 
