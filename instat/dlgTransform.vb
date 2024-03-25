@@ -782,7 +782,7 @@ Public Class dlgTransform
             ucrSaveNew.SetLabelText("Suffix Name:")
             ucrSaveNew.btnColumnPosition.Visible = False
             If Not ucrReceiverRank.IsEmpty AndAlso (Not ucrSaveNew.bUserTyped) Then
-                ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
+
                 clsAddColumnsFunction.AddParameter("col_data", "col", iPosition:=1)
             End If
         End If
