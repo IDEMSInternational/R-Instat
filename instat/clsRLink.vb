@@ -1006,7 +1006,7 @@ Public Class RLink
                 For Each _path In arrFilesPaths
                     ' Add each HTML file as an output to clsOutputLogger
                     ' strScriptWithComment: the script with associated comments
-                    ' line: the path to the HTML file
+                    ' _path: the path to the HTML file
                     ' bAsFile: a boolean indicating whether the output should be treated as a file
                     ' bDisplayOutputInExternalViewer: a boolean indicating whether to display the output in an external viewer
                     clsOutputLogger.AddOutput(strScriptWithComment, _path, bAsFile, bDisplayOutputInExternalViewer)
