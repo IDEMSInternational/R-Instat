@@ -192,7 +192,7 @@ Partial Class ucrCalculator
         Me.cmdBr2 = New System.Windows.Forms.Button()
         Me.grpWakefield = New System.Windows.Forms.GroupBox()
         Me.cmdWakefield_lower_factor = New System.Windows.Forms.Button()
-        Me.cmdLinkert7 = New System.Windows.Forms.Button()
+        Me.cmdLikert7 = New System.Windows.Forms.Button()
         Me.cmdWakefield_Year = New System.Windows.Forms.Button()
         Me.cmdValid = New System.Windows.Forms.Button()
         Me.cmdWakefield_Upper_factor = New System.Windows.Forms.Button()
@@ -208,9 +208,6 @@ Partial Class ucrCalculator
         Me.cmdReligion = New System.Windows.Forms.Button()
         Me.cmdRace = New System.Windows.Forms.Button()
         Me.cmdPolitical = New System.Windows.Forms.Button()
-        Me.cmdWakefieldHelp = New instat.ucrSplitButton()
-        Me.ContextMenuStripWakefield = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.WakefieldToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdNormal = New System.Windows.Forms.Button()
         Me.cmdName = New System.Windows.Forms.Button()
         Me.cmdWakefield_Month = New System.Windows.Forms.Button()
@@ -249,6 +246,9 @@ Partial Class ucrCalculator
         Me.cmdHair = New System.Windows.Forms.Button()
         Me.cmdGroup = New System.Windows.Forms.Button()
         Me.cmdGrade = New System.Windows.Forms.Button()
+        Me.cmdWakefieldHelp = New instat.ucrSplitButton()
+        Me.ContextMenuStripWakefield = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.WakefieldToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpMaths = New System.Windows.Forms.GroupBox()
         Me.cmdMathsHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripMaths = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -2316,7 +2316,7 @@ Partial Class ucrCalculator
         'grpWakefield
         '
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_lower_factor)
-        Me.grpWakefield.Controls.Add(Me.cmdLinkert7)
+        Me.grpWakefield.Controls.Add(Me.cmdLikert7)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper_factor)
@@ -2388,16 +2388,16 @@ Partial Class ucrCalculator
         Me.cmdWakefield_lower_factor.Text = "lower (F)"
         Me.cmdWakefield_lower_factor.UseVisualStyleBackColor = True
         '
-        'cmdLinkert7
+        'cmdLikert7
         '
-        Me.cmdLinkert7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.25!)
-        Me.cmdLinkert7.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLinkert7.Location = New System.Drawing.Point(427, 382)
-        Me.cmdLinkert7.Name = "cmdLinkert7"
-        Me.cmdLinkert7.Size = New System.Drawing.Size(107, 38)
-        Me.cmdLinkert7.TabIndex = 54
-        Me.cmdLinkert7.Text = "linkert7 (O.F)"
-        Me.cmdLinkert7.UseVisualStyleBackColor = True
+        Me.cmdLikert7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.25!)
+        Me.cmdLikert7.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdLikert7.Location = New System.Drawing.Point(427, 382)
+        Me.cmdLikert7.Name = "cmdLikert7"
+        Me.cmdLikert7.Size = New System.Drawing.Size(107, 38)
+        Me.cmdLikert7.TabIndex = 54
+        Me.cmdLikert7.Text = "likert7 (O.F)"
+        Me.cmdLikert7.UseVisualStyleBackColor = True
         '
         'cmdWakefield_Year
         '
@@ -2564,31 +2564,6 @@ Partial Class ucrCalculator
         Me.cmdPolitical.Text = "political (F)"
         Me.cmdPolitical.UseVisualStyleBackColor = True
         '
-        'cmdWakefieldHelp
-        '
-        Me.cmdWakefieldHelp.AutoSize = True
-        Me.cmdWakefieldHelp.ContextMenuStrip = Me.ContextMenuStripWakefield
-        Me.cmdWakefieldHelp.Location = New System.Drawing.Point(963, 32)
-        Me.cmdWakefieldHelp.Name = "cmdWakefieldHelp"
-        Me.cmdWakefieldHelp.Size = New System.Drawing.Size(113, 28)
-        Me.cmdWakefieldHelp.SplitMenuStrip = Me.ContextMenuStripWakefield
-        Me.cmdWakefieldHelp.TabIndex = 211
-        Me.cmdWakefieldHelp.Text = "R Help"
-        Me.cmdWakefieldHelp.UseVisualStyleBackColor = True
-        '
-        'ContextMenuStripWakefield
-        '
-        Me.ContextMenuStripWakefield.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ContextMenuStripWakefield.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WakefieldToolStripMenuItem})
-        Me.ContextMenuStripWakefield.Name = "ContextMenuStrip1"
-        Me.ContextMenuStripWakefield.Size = New System.Drawing.Size(143, 28)
-        '
-        'WakefieldToolStripMenuItem
-        '
-        Me.WakefieldToolStripMenuItem.Name = "WakefieldToolStripMenuItem"
-        Me.WakefieldToolStripMenuItem.Size = New System.Drawing.Size(142, 24)
-        Me.WakefieldToolStripMenuItem.Text = "wakefield"
-        '
         'cmdNormal
         '
         Me.cmdNormal.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.25!)
@@ -2663,7 +2638,7 @@ Partial Class ucrCalculator
         Me.cmdLikert.Name = "cmdLikert"
         Me.cmdLikert.Size = New System.Drawing.Size(107, 38)
         Me.cmdLikert.TabIndex = 32
-        Me.cmdLikert.Text = "likert7 (O.F)"
+        Me.cmdLikert.Text = "likert(O.F)"
         Me.cmdLikert.UseVisualStyleBackColor = True
         '
         'cmdGpa
@@ -2828,7 +2803,7 @@ Partial Class ucrCalculator
         Me.cmdGrade_Letter.Name = "cmdGrade_Letter"
         Me.cmdGrade_Letter.Size = New System.Drawing.Size(107, 38)
         Me.cmdGrade_Letter.TabIndex = 11
-        Me.cmdGrade_Letter.Text = "grade_letter"
+        Me.cmdGrade_Letter.Text = "grade_letter(F)"
         Me.cmdGrade_Letter.UseVisualStyleBackColor = True
         '
         'cmdDeath
@@ -3006,6 +2981,31 @@ Partial Class ucrCalculator
         Me.cmdGrade.TabIndex = 20
         Me.cmdGrade.Text = "grade"
         Me.cmdGrade.UseVisualStyleBackColor = True
+        '
+        'cmdWakefieldHelp
+        '
+        Me.cmdWakefieldHelp.AutoSize = True
+        Me.cmdWakefieldHelp.ContextMenuStrip = Me.ContextMenuStripWakefield
+        Me.cmdWakefieldHelp.Location = New System.Drawing.Point(963, 32)
+        Me.cmdWakefieldHelp.Name = "cmdWakefieldHelp"
+        Me.cmdWakefieldHelp.Size = New System.Drawing.Size(113, 28)
+        Me.cmdWakefieldHelp.SplitMenuStrip = Me.ContextMenuStripWakefield
+        Me.cmdWakefieldHelp.TabIndex = 211
+        Me.cmdWakefieldHelp.Text = "R Help"
+        Me.cmdWakefieldHelp.UseVisualStyleBackColor = True
+        '
+        'ContextMenuStripWakefield
+        '
+        Me.ContextMenuStripWakefield.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.ContextMenuStripWakefield.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WakefieldToolStripMenuItem})
+        Me.ContextMenuStripWakefield.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripWakefield.Size = New System.Drawing.Size(143, 28)
+        '
+        'WakefieldToolStripMenuItem
+        '
+        Me.WakefieldToolStripMenuItem.Name = "WakefieldToolStripMenuItem"
+        Me.WakefieldToolStripMenuItem.Size = New System.Drawing.Size(142, 24)
+        Me.WakefieldToolStripMenuItem.Text = "wakefield"
         '
         'grpMaths
         '
@@ -7393,52 +7393,52 @@ Partial Class ucrCalculator
         Me.Size = New System.Drawing.Size(1123, 572)
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
-        Me.grpDates.PerformLayout
+        Me.grpDates.PerformLayout()
         Me.ContextMenuStripDate.ResumeLayout(False)
         Me.ContextMenuStripComplex.ResumeLayout(False)
         Me.grpInteger.ResumeLayout(False)
-        Me.grpInteger.PerformLayout
+        Me.grpInteger.PerformLayout()
         Me.ContextMenuStripInteger.ResumeLayout(False)
         Me.grpFactor.ResumeLayout(False)
-        Me.grpFactor.PerformLayout
+        Me.grpFactor.PerformLayout()
         Me.ContextMenuStripFactor.ResumeLayout(False)
         Me.grpHydroGOF.ResumeLayout(False)
-        Me.grpHydroGOF.PerformLayout
+        Me.grpHydroGOF.PerformLayout()
         Me.ContextMenuStripHydroGOF.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
         Me.ContextMenuStripWakefield.ResumeLayout(False)
         Me.grpMaths.ResumeLayout(False)
-        Me.grpMaths.PerformLayout
+        Me.grpMaths.PerformLayout()
         Me.ContextMenuStripMaths.ResumeLayout(False)
         Me.grpSummary.ResumeLayout(False)
-        Me.grpSummary.PerformLayout
+        Me.grpSummary.PerformLayout()
         Me.ContextMenuStripSummary.ResumeLayout(False)
         Me.grpFrequencies.ResumeLayout(False)
         Me.grpProbabilty.ResumeLayout(False)
-        Me.grpProbabilty.PerformLayout
+        Me.grpProbabilty.PerformLayout()
         Me.ContextMenuStripProbability.ResumeLayout(False)
         Me.grpRandom.ResumeLayout(False)
         Me.grpTransform.ResumeLayout(False)
-        Me.grpTransform.PerformLayout
+        Me.grpTransform.PerformLayout()
         Me.ContextMenuStripTransform.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
-        Me.grpLogical.PerformLayout
+        Me.grpLogical.PerformLayout()
         Me.ContextMenuStripLogical.ResumeLayout(False)
         Me.grpTestString.ResumeLayout(False)
         Me.grpCircular.ResumeLayout(False)
-        Me.grpCircular.PerformLayout
+        Me.grpCircular.PerformLayout()
         Me.ContextMenuStripCircular.ResumeLayout(False)
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
         Me.grpComplex.ResumeLayout(False)
-        Me.grpComplex.PerformLayout
+        Me.grpComplex.PerformLayout()
         Me.ContextMenuStripTxtString.ResumeLayout(False)
         Me.ContextMenuStripList.ResumeLayout(False)
         Me.grpList.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.grpMathBloc.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout
+        Me.PerformLayout()
 
     End Sub
 
@@ -7732,7 +7732,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdQbinom As Button
     Friend WithEvents cmdQbirth As Button
     Friend WithEvents cmdQbeta As Button
-    Friend WithEvents cmdLinkert7 As Button
+    Friend WithEvents cmdLikert7 As Button
     Friend WithEvents cmdEncodeb As Button
     Friend WithEvents cmdSquishb As Button
     Friend WithEvents cmdExtract2 As Button
