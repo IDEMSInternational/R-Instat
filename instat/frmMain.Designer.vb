@@ -2198,7 +2198,6 @@ Partial Class frmMain
         '
         'mnuClimaticDescribeSeasonalGraph
         '
-        Me.mnuClimaticDescribeSeasonalGraph.Enabled = False
         Me.mnuClimaticDescribeSeasonalGraph.Name = "mnuClimaticDescribeSeasonalGraph"
         Me.mnuClimaticDescribeSeasonalGraph.Size = New System.Drawing.Size(211, 22)
         Me.mnuClimaticDescribeSeasonalGraph.Text = "Seasonal Graph..."
