@@ -721,7 +721,7 @@ Public Class dlgTransform
         ucrPnlColumnSelectOptions.SetRCode(clsDummyTransformFunction, bReset)
         ucrChkDecreasing.SetRCode(clsSortFunction, bReset)
         ucrChkMissingLast.SetRCode(clsSortFunction, bReset)
-        ucrSaveNew.SetRCode(clsRoundFunction, bReset)
+
         ucrPnlTies.SetRCode(clsRankFunction, bReset)
         ucrPnlMissingValues.SetRCode(clsRankFunction, bReset)
         ucrNudRoundOfDigits.SetRCode(clsRoundFunction, bReset)
@@ -747,6 +747,7 @@ Public Class dlgTransform
             ucrChkAdd.SetRCode(clsNumericDummyFunction, bReset)
             ucrChkMultiply.SetRCode(clsNumericDummyFunction, bReset)
             ucrChkSubtract.SetRCode(clsNumericDummyFunction, bReset)
+            ucrSaveNew.SetRCode(clsRoundFunction, bReset)
         End If
         bResetRCode = True
     End Sub
@@ -779,11 +780,9 @@ Public Class dlgTransform
             End If
         ElseIf rdoMultiple.Checked Then
             ucrSaveNew.SetLabelText("Suffix Name:")
+            ucrSaveNew.btnColumnPosition.Visible = False
             If Not ucrReceiverRank.IsEmpty AndAlso (Not ucrSaveNew.bUserTyped) Then
-                Dim strDataframeName As String = ucrReceiverRank.GetVariableNames(bWithQuotes:=False)
                 ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
-                clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & strDataframeName & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
-
                 clsAddColumnsFunction.AddParameter("col_data", "col", iPosition:=1)
             End If
         End If
@@ -1141,6 +1140,8 @@ Public Class dlgTransform
     Private Sub ucrSaveNew_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveNew.ControlValueChanged
         If ucrSaveNew.GetText <> "" AndAlso ucrSaveNew.IsComplete() Then
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrSaveNew.GetText & Chr(34), iPosition:=1)
+            clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & ucrSaveNew.GetText & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+
         End If
     End Sub
 
