@@ -996,10 +996,9 @@ Public Class RLink
                 End If
             End If
 
-            ' Split the strOutput into an array of lines, removing empty entries
-            Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-
             If bAsFile Then
+                ' Split the strOutput into an array of lines, removing empty entries
+                Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
                 ' Iterate through each HTML files
                 For Each _path In arrFilesPaths
                     ' Add each HTML file as an output to clsOutputLogger
