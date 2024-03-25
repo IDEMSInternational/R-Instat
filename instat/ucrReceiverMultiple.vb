@@ -21,12 +21,12 @@ Public Class ucrReceiverMultiple
     Public bSingleType As Boolean = False
     ' If bSingleType and bCategoricalNumeric then categorical and numeric are the only considered types
     Public bCategoricalNumeric As Boolean = False
+    Public iMaxItems As Integer
 
     Private Sub ucrReceiverMultiple_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             If lstSelectedVariables.Columns.Count = 0 Then
                 lstSelectedVariables.Columns.Add("Selected Data")
-                lstSelectedVariables.Columns(0).Width = lstSelectedVariables.Width - 25
             End If
             'by default multiple receivers will not be autoswitched on selection change
             bAutoSwitchFromReceiver = False
@@ -56,8 +56,12 @@ Public Class ucrReceiverMultiple
             Exit Sub
         End If
 
-        'then add the new items
+        'Then add the new items with limit check
         For Each kvpTempItem As KeyValuePair(Of String, String) In lstActualItemsToAdd
+            If iMaxItems <> 0 AndAlso lstSelectedVariables.Items.Count >= iMaxItems Then
+                MessageBox.Show($"Cannot add more than {iMaxItems} items.", "Item Limit Exceeded", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit For ' Exit the loop if the maximum limit is reached
+            End If
             lstSelectedVariables.Items.Add(New ListViewItem With {
                     .Name = kvpTempItem.Value,
                     .Text = kvpTempItem.Value,
@@ -153,6 +157,7 @@ Public Class ucrReceiverMultiple
             lstSelectedVariables.Items.Remove(lvi)
         Next
 
+        SetGroupHeaderVariablesCount()
         OnSelectionChanged()
         MyBase.RemoveSelected()
     End Sub
@@ -168,11 +173,20 @@ Public Class ucrReceiverMultiple
         'it's not clear when the receiver will ever have more than one data frame
 
         'reset the header text with the name
-        lstSelectedVariables.Groups(0).Header = lstSelectedVariables.Groups(0).Name
+        lstSelectedVariables.Groups(0).Header = ShortenString(lstSelectedVariables.Groups(0).Name)
         If lstSelectedVariables.Groups.Count = 1 AndAlso lstSelectedVariables.Items.Count > 0 Then
             lstSelectedVariables.Groups(0).Header = lstSelectedVariables.Groups(0).Header & " (" & lstSelectedVariables.Items.Count & ")"
         End If
     End Sub
+
+    Private Function ShortenString(strText As String) As String
+        Dim maxLength As Integer = 10
+        If strText.Length > maxLength Then
+            ' Trim the string to the specified length and add ellipsis
+            Return strText.Substring(0, maxLength) & "..."
+        End If
+        Return strText
+    End Function
 
     Public Overrides Function IsEmpty() As Boolean
         Return lstSelectedVariables.Items.Count = 0
@@ -308,7 +322,7 @@ Public Class ucrReceiverMultiple
     End Function
 
     Public Overrides Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
-        Dim arrItems(lstSelectedVariables.Items.Count) As String
+        Dim arrItems(lstSelectedVariables.Items.Count - 1) As String
         Dim strQuoteHolder As String = If(bWithQuotes, strQuotes, "")
         For i = 0 To lstSelectedVariables.Items.Count - 1
             arrItems(i) = strQuoteHolder & lstSelectedVariables.Items(i).Text & strQuoteHolder
@@ -500,6 +514,12 @@ Public Class ucrReceiverMultiple
         bSingleType = bIsSingleType
         bCategoricalNumeric = bIsCategoricalNumeric
         CheckSingleType()
+    End Sub
+
+    Private Sub lstSelectedVariables_ClientSizeChanged(ByVal sender As Object, ByVal e As EventArgs) Handles lstSelectedVariables.ClientSizeChanged
+        If lstSelectedVariables.Columns.Count > 0 Then
+            lstSelectedVariables.Columns(0).Width = lstSelectedVariables.ClientSize.Width
+        End If
     End Sub
 
     Private Sub ucrReceiverMultiple_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
