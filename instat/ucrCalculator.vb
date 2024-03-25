@@ -73,38 +73,37 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdRound, "round(x) to round to whole numbers, round(x,2) to round to 2 decimal places, round(x,-2) to round to the nearest 100")
         ttCalculator.SetToolTip(cmdSiginf, "signif(x,3) to round to 3 significant figures")
 
-        ttCalculator.SetToolTip(cmdSortF, "sorts a vector into ascending or descending order. For example sort(c(5,7,4,4,3)) = (3,4,4,5,7)")
-        ttCalculator.SetToolTip(cmdScale, "centre and scale the data - usually by producing (x - xbar)/s")
-        ttCalculator.SetToolTip(cmdMASSFractions, "changes decimal data into a character variable with fractions. So 1.5 becomes 3/2, 0.25 becomes 1/4 etc.")
-        ttCalculator.SetToolTip(cmdDecimals, "the inverse of the fractions key. So 3/2 becomes 1.5, 1/4 becomes 0.25 etc.")
-        ttCalculator.SetToolTip(cmdLag, "shift a variable down. For example lag(1:5) = (NA,1,2,3,4); lag(1:5,3) = (NA,NA,NA, 1,2)")
-        ttCalculator.SetToolTip(cmdLead, "shift a variable up. For example lead(1:5) = (2,3,4,5,NA); lead(1:5;3) = (4,5, NA,NA,NA)")
-        ttCalculator.SetToolTip(cmdDiff, "difference between successive elements. For example diff(c(1,4,3,7)) = (NA 3,-1,4)")
-        ttCalculator.SetToolTip(cmdRev, "reverse a variable. For example rev(c(1,2,3,4,5)) =(5,4,3,2,1)")
-        ttCalculator.SetToolTip(cmdPMax, " maximum of a set of variables. For examples pmax(c(1,3,5),c(6,4,2)) = (6,4,5)")
-        ttCalculator.SetToolTip(cmdPMin, "minimum of a set of variables. For examples pmin(c(1,3,5),c(6,4,2)) = (1,3,2)")
-        ttCalculator.SetToolTip(cmdCumMax, "cumulative maxima. For example cummax(c(3,2,1,4,0)) = (3,3,3,4,4)")
-        ttCalculator.SetToolTip(cmdMovMax, "moving (or rolling) maxima. For example rollmax(x=c(3,2,1,4,0) ,3,fill=NA, align=""right"") = (NA,NA, 3,4,4)")
-        ttCalculator.SetToolTip(cmdCumSum, "cumulative sums. For example cumsum(c(3,2,1,4,0)) = (3,5,6,10,10)")
-        ttCalculator.SetToolTip(cmdCumProd, "cumulative products. For example cumprod(c(2,3,5,7)) = (2,6,30,210)")
-        ttCalculator.SetToolTip(cmdMovProd, "moving products Fror example rollapply(c(2,3,5,7,11),width=3,fill=NA, FUN=prod) = (NA,30,105,385,NA)")
-        ttCalculator.SetToolTip(cmdCumMean, "cumulative means. For example cummean(c(3,2,1,4,0)) = (3,2.5,2,2.5,2)")
-        ttCalculator.SetToolTip(cmdCumMin, "cumulative minima. For example cummin(c(3,2,1,4,0)) = (3,2.,1,1,0)")
-        ttCalculator.SetToolTip(cmdMovSum, "moving (or rolling) totals. For example rollsum(c(3,2,1,4,0) ,3,fill=NA, align=""left"") = (6,7,5,NA,NA)")
-        ttCalculator.SetToolTip(cmdMovMean, "moving (or rolling) mean. For example rollmean(c(3,2,1,6,2) ,3,fill=NA) = (NA,2,3,3,NA)")
-        ttCalculator.SetToolTip(cmMovMed, "moving (or rolling) medians. For example rollmedian(c(3,2,1,6,2) ,3,fill=NA) = (NA,2,2,2,NA)")
-        ttCalculator.SetToolTip(cmdMovmin, "moving (or rolling) minima. For example rollapply(c(3,2,1,6,2),width=3,fill=NA, FUN=min) = (NA,1,1,1,NA)")
-        ttCalculator.SetToolTip(cmdNtile, " use ranks to divide into (almost) equal sized groups. For example ntile(c(15,11,13,12,NA,12),2) = (2,1,2,1,NA,1)")
-        ttCalculator.SetToolTip(cmdCumdist, "proportion of values less than or equal to the current rank. For example cume_dist(c(2,4,6,8,3)) = (0.2, 0.6, 0.8, 1.0, 0.4)")
-        ttCalculator.SetToolTip(cmdRowRank, "row numbers as ranks. For example :row_number(c(15,11,13,12,NA,12)) = (5,1,3,2,NA,3)")
-        ttCalculator.SetToolTip(cmdPercentRank, "rescale of minimum ranks to [0,1]. For example percent_rank(c(15,11,13,12,NA,12)) = (1,0,0.75,0.25,NA,0.25)")
-        ttCalculator.SetToolTip(cmdDRank, "dense ranks. For example d_rank(c(15,11,13,12,NA,12)) = (4,1,3,2,NA,2)")
-        ttCalculator.SetToolTip(cmdMRank, " minimum ranks. For example m_rank(c(15,11,13,12,NA,12)) = (5,1,4,2,NA,2)")
-        ttCalculator.SetToolTip(cmdNafill, "fills missing values at the start, middle and end. For example na.fill(c(NA,2,NA,4,5,NA),fill=""extend"") = (2,2,3,4,5,5); while fill=c(15,""extend"",NA) = (15,2,3,4,5,NA)")
-        ttCalculator.SetToolTip(cmdNaapprox, "linear interpolation of missing values. For example na.approx(c(5,NA,NA,2,2,NA,4,7,NA),maxgap=1,na.rm=FALSE) = (5,NA,NA,2,2,3,4,7,NA)")
+        ttCalculator.SetToolTip(cmdSortF, "Sorts a vector into ascending or descending order. For example sort(c(5,7,4,4,3)) = (3,4,4,5,7)")
+        ttCalculator.SetToolTip(cmdScale, "Centre and scale the data - usually by producing (x - xbar)/s")
+        ttCalculator.SetToolTip(cmdMASSFractions, "Changes decimal data into a character variable with fractions. So 1.5 becomes 3/2, 0.25 becomes 1/4 etc.")
+        ttCalculator.SetToolTip(cmdDecimals, "The inverse of the fractions key. So 3/2 becomes 1.5, 1/4 becomes 0.25 etc.")
+        ttCalculator.SetToolTip(cmdLag, "Shift a variable down. For example lag(1:5) = (NA,1,2,3,4); lag(1:5,3) = (NA,NA,NA, 1,2)")
+        ttCalculator.SetToolTip(cmdLead, "Shift a variable up. For example lead(1:5) = (2,3,4,5,NA); lead(1:5;3) = (4,5, NA,NA,NA)")
+        ttCalculator.SetToolTip(cmdDiff, "Difference between successive elements. For example diff(c(1,4,3,7)) = (NA 3,-1,4)")
+        ttCalculator.SetToolTip(cmdRev, "Reverse a variable. For example rev(c(1,2,3,4,5)) =(5,4,3,2,1)")
+        ttCalculator.SetToolTip(cmdPMax, " Maximum of a set of variables. For examples pmax(c(1,3,5),c(6,4,2)) = (6,4,5)")
+        ttCalculator.SetToolTip(cmdPMin, "Minimum of a set of variables. For examples pmin(c(1,3,5),c(6,4,2)) = (1,3,2)")
+        ttCalculator.SetToolTip(cmdCumMax, "Cumulative maxima. For example cummax(c(3,2,1,4,0)) = (3,3,3,4,4)")
+        ttCalculator.SetToolTip(cmdMovMax, "Moving (or rolling) maxima. For example rollmax(x=c(3,2,1,4,0) ,3,fill=NA, align=""right"") = (NA,NA, 3,4,4)")
+        ttCalculator.SetToolTip(cmdCumSum, "Cumulative sums. For example cumsum(c(3,2,1,4,0)) = (3,5,6,10,10)")
+        ttCalculator.SetToolTip(cmdCumProd, "Cumulative products. For example cumprod(c(2,3,5,7)) = (2,6,30,210)")
+        ttCalculator.SetToolTip(cmdMovProd, "Moving products Fror example rollapply(c(2,3,5,7,11),width=3,fill=NA, FUN=prod) = (NA,30,105,385,NA)")
+        ttCalculator.SetToolTip(cmdCumMean, "Cumulative means. For example cummean(c(3,2,1,4,0)) = (3,2.5,2,2.5,2)")
+        ttCalculator.SetToolTip(cmdCumMin, "Cumulative minima. For example cummin(c(3,2,1,4,0)) = (3,2.,1,1,0)")
+        ttCalculator.SetToolTip(cmdMovSum, "Moving (or rolling) totals. For example rollsum(c(3,2,1,4,0) ,3,fill=NA, align=""left"") = (6,7,5,NA,NA)")
+        ttCalculator.SetToolTip(cmdMovMean, "Moving (or rolling) mean. For example rollmean(c(3,2,1,6,2) ,3,fill=NA) = (NA,2,3,3,NA)")
+        ttCalculator.SetToolTip(cmMovMed, "Moving (or rolling) medians. For example rollmedian(c(3,2,1,6,2) ,3,fill=NA) = (NA,2,2,2,NA)")
+        ttCalculator.SetToolTip(cmdMovmin, "Moving (or rolling) minima. For example rollapply(c(3,2,1,6,2),width=3,fill=NA, FUN=min) = (NA,1,1,1,NA)")
+        ttCalculator.SetToolTip(cmdNtile, " Use ranks to divide into (almost) equal sized groups. For example ntile(c(15,11,13,12,NA,12),2) = (2,1,2,1,NA,1)")
+        ttCalculator.SetToolTip(cmdCumdist, "Proportion of values less than or equal to the current rank. For example cume_dist(c(2,4,6,8,3)) = (0.2, 0.6, 0.8, 1.0, 0.4)")
+        ttCalculator.SetToolTip(cmdRowRank, "Row numbers as ranks. For example :row_number(c(15,11,13,12,NA,12)) = (5,1,3,2,NA,3)")
+        ttCalculator.SetToolTip(cmdPercentRank, "Rescale of minimum ranks to [0,1]. For example percent_rank(c(15,11,13,12,NA,12)) = (1,0,0.75,0.25,NA,0.25)")
+        ttCalculator.SetToolTip(cmdDRank, "Dense ranks. For example d_rank(c(15,11,13,12,NA,12)) = (4,1,3,2,NA,2)")
+        ttCalculator.SetToolTip(cmdMRank, " Minimum ranks. For example m_rank(c(15,11,13,12,NA,12)) = (5,1,4,2,NA,2)")
+        ttCalculator.SetToolTip(cmdNafill, "Fills missing values at the start, middle and end. For example na.fill(c(NA,2,NA,4,5,NA),fill=""extend"") = (2,2,3,4,5,5); while fill=c(15,""extend"",NA) = (15,2,3,4,5,NA)")
+        ttCalculator.SetToolTip(cmdNaapprox, "Linear interpolation of missing values. For example na.approx(c(5,NA,NA,2,2,NA,4,7,NA),maxgap=1,na.rm=FALSE) = (5,NA,NA,2,2,3,4,7,NA)")
         ttCalculator.SetToolTip(cmdNasplin, "Spline interpolation of missing values. For example na.spline(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,2.5,4,7,12)")
         ttCalculator.SetToolTip(cmdNaest, "Missing values as the mean (usually) overall or with a factor. For example na.aggregate(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,3.75,4,7,3.75)")
-
 
         ttCalculator.SetToolTip(cmdPower, "power(^)or exponent and can also be given as **. For example 2^3 = 8")
         ttCalculator.SetToolTip(cmdLesser, "less than(<). For example (2 < 3) is TRUE. (2 < 2) is FALSE, (2 < 1) is FALSE")
@@ -136,14 +135,14 @@ Public Class ucrCalculator
 
         ttCalculator.SetToolTip(cmdPf, "F probabilities. For example pf(2,1,10) = 0.8123; pf(2,50,50) = 0.9921")
         ttCalculator.SetToolTip(cmdQnorm, "qnormal quantiles. For example qnorm(0.05) = -1.6449; qnorm(0.9772, 100,15) = 130")
-        ttCalculator.SetToolTip(cmdPbirth, "simultaneous birthday probabilities. For example pbirthday(10) = 0.1169 ; pbirthday(50) = 0.97")
-        ttCalculator.SetToolTip(cmdQbirth, "simultaneous birthday quantiles. For example qbirthday(0.5) = 23, qbirthday(0.99) = 57")
-        ttCalculator.SetToolTip(cmdPbinom, "binomial probabilities. For example pbinom(3,5,0.4) = 0.0.913")
-        ttCalculator.SetToolTip(cmdQbinom, " binomial quantiles. For example qbinom(0.9,5,0.4) = 3")
+        ttCalculator.SetToolTip(cmdPbirth, "Simultaneous birthday probabilities. For example pbirthday(10) = 0.1169 ; pbirthday(50) = 0.97")
+        ttCalculator.SetToolTip(cmdQbirth, "Simultaneous birthday quantiles. For example qbirthday(0.5) = 23, qbirthday(0.99) = 57")
+        ttCalculator.SetToolTip(cmdPbinom, "Binomial probabilities. For example pbinom(3,5,0.4) = 0.0.913")
+        ttCalculator.SetToolTip(cmdQbinom, " Binomial quantiles. For example qbinom(0.9,5,0.4) = 3")
         ttCalculator.SetToolTip(cmdPpois, "Poisson probabilities. For example ppois(8, 5) = 0.93")
         ttCalculator.SetToolTip(cmdQpois, "Poisson quantiles. For example qpois(0.9, 5) = 8")
-        ttCalculator.SetToolTip(cmdPnbin, "negative binomial probabilities. For example pnbinom(4,1,0.4) = 0.922 (geometric); pnbinom(13,5,0.4) = 0.9058")
-        ttCalculator.SetToolTip(cmdQnbin, "negative binomial quantiles. For example qnbinom(0.9,1,0.4) = 4 (geometric); qnbinom(0.9, 5,0.4) = 13")
+        ttCalculator.SetToolTip(cmdPnbin, "Negative binomial probabilities. For example pnbinom(4,1,0.4) = 0.922 (geometric); pnbinom(13,5,0.4) = 0.9058")
+        ttCalculator.SetToolTip(cmdQnbin, "Negative binomial quantiles. For example qnbinom(0.9,1,0.4) = 4 (geometric); qnbinom(0.9, 5,0.4) = 13")
         ttCalculator.SetToolTip(cmdFact, "factorial. For example factorial(4) = 4*3*2*1 = 24; factorial(3.5) = gamma(4.5) = 11.63")
         ttCalculator.SetToolTip(cmdLfact, "log factorial. For example lfactorial(400) = 2001")
         ttCalculator.SetToolTip(cmdChoose, "binomial coefficient. For example choose(7,4) = 7!/(4!*3!) = 35")
@@ -162,6 +161,14 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdQt, "t quantiles. For example qt(0.05, 5) = -2.015; qt(0.05, 100) = -1.66")
         ttCalculator.SetToolTip(cmdqF, "F quantiles. For example qf(0.95,1,10) = 4.965; qf(0.95, 50,50)= 1.599")
 
+        'maths keyboard tooltips
+        ttCalculator.SetToolTip(cmdDeg, "Change from radians to degrees. For example deg(pi/2) = 90.")
+        ttCalculator.SetToolTip(cmdExp, "The exponential function. exp(1) = e = 2.71828. exp(0) = 1, exp(-2) = 0.1353 = 1/exp(2). It is the inverse of the log function, so exp(6.238) = 512, while log(512) = 6.238.")
+        ttCalculator.SetToolTip(cmdAbs, "The absolute (or positive) value. For example abs (-4.4) = abs(4.4) = 4.4.")
+        ttCalculator.SetToolTip(cmdSign, "The sign of the corresponding values. So sign(4.2)=1, sign(-20)=-1, sign(c(-2,-1,0,1,2,3))= (-1,-1,0,1,1,1)")
+        ttCalculator.SetToolTip(cmdLogit, "log(p/(1-p)) for p between 0 and 1, or between 0 and 100 if you have percentages. For example logit(c(0.2, 0.5, 0.95)) is (-1.386, 0, 2.944).")
+        ttCalculator.SetToolTip(cmdLogistic, "Distribution function for the logistic distribution. For example dlogis(c(-2,-1,0,1,2), 0, 5513) = (0.026, 0.14, 0.5, 0.86, 0.974). The scale of 0.5513 gives a standard deviation of 1.")
+        ttCalculator.SetToolTip(cmdAtan2, "atan2(x,y) gives the angle between the x axis and the vector between to origin and the point (x,y). For example atan2(1,1) = 0.7854 = pi/4 (=45 degrees).")
         ttCalculator.SetToolTip(cmdSqrt, "square root. For example sqrt(3) = 3 ^ 0.5 = 1.732")
         ttCalculator.SetToolTip(cmdCos, "cosine of angle in radians. For example cos(pi) = -1, cos(rad(90)) = (almost) 0.")
         ttCalculator.SetToolTip(cmdAcos, "angle corresponding to a given cosine (in the range 0 to pi). For example acos(0) = 1.57 = pi/2; deg(acos(-1))=180.")
@@ -171,10 +178,11 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdSin, "sine of angle in radians. For example sin(pi/2) = sin(rad(90)) = 1.")
         ttCalculator.SetToolTip(cmdAsin, "angle corresponding to a given sine (in the range (0 to pi). For example asin(1) = 1.57 = pi/2.")
         ttCalculator.SetToolTip(cmdFloor, "integer below the given value. For example floor(3.5)=3; floor(-3.5) = -4.")
-        ttCalculator.SetToolTip(cmdRad, "change from degrees to radians. For example rad(90) = 2*pi * 90/360 = 1.57 ( = pi/2)")
+        ttCalculator.SetToolTip(cmdRad, "Change from degrees to radians. For example rad(90) = 2*pi * 90/360 = 1.57 ( = pi/2)")
         ttCalculator.SetToolTip(cmdLogTen, "logarithm to base 10. For example log10(1000) =3 (=10^3)")
         ttCalculator.SetToolTip(cmdTan, " tangent of angle in radians. For example tan(pi/4) = sin(pi/4)/cos(pi/4) = tan(rad(45)) = 1")
-        ttCalculator.SetToolTip(cmdAtan, "angle corresponding to a given tangent (in the range 0 to pi). For example atan(1) = 0..7854 (= pi/4); deg(atan(1)) = 45.")
+        ttCalculator.SetToolTip(cmdAtan, "angle corresponding to a given tangent (in the range 0 to pi). For example atan(1) = 0.7854 (= pi/4); deg(atan(1)) = 45.")
+        ttCalculator.SetToolTip(cmdTrunc, "truncates the values towards 0. So trunc(3.5) = 3, trunc(-3.5)= -3")
 
         ttCalculator.SetToolTip(cmdUpper, "Change to upper case. For example str_to_upper(""Dr. Foster"") gives ""DR. FOSTER""")
         ttCalculator.SetToolTip(cmdLower, "Change to lower case. For example str_to_lower(""Dr. Foster"") gives ""dr. foster""")
@@ -268,6 +276,65 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdLucas, "generates Lucas numbers to the length of the dataframe. For example the 10th Lucas number is 76")
         ttCalculator.SetToolTip(cmdPrimorial, "gives the primorial (like the factorial, but just the primes up to the number) for a variable. For example primorial(c(7,8,9)) = 235*7 = (210, 210, 210)")
 
+        ' Complex keyboard tooltips
+        ttCalculator.SetToolTip(cmdComplexPi, "pi = 3.14159")
+        ttCalculator.SetToolTip(cmdComplexi, "i is defined as the square root of -1. So sqrt(as.complex(-1)) = 0 + 1i")
+        ttCalculator.SetToolTip(cmdComplex, "Construct a complex number. For example complex(3, 2) gives 3 + 2i.")
+        ttCalculator.SetToolTip(cmdAsComplex, "Define a variable as complex. For example as.complex(-1) gives 1 + 0i")
+        ttCalculator.SetToolTip(cmdReal, "The real part of a complex number. For example Re(3 + 2i) gives 3.")
+        ttCalculator.SetToolTip(cmdImaginary, "The imaginary part of a complex number or variable. For example Im(3 + 2i) gives 2.")
+        ttCalculator.SetToolTip(cmdMod, "The modulus (polar coordinate) of a complex number or variable. For example Mod(3 + 2i) gives 3.606, which is sqrt(3*3 + 2*2). Also abs(3 + 2i) is the same as Mod(3 + 2i).")
+        ttCalculator.SetToolTip(cmdArg, " The argument (polar coordinate) of a complex number or variable. For example Arg(3 + 2i) gives 0.588 where 3 = 3.606cos(0.588) and 2 = 3.606sin(0.588).")
+        ttCalculator.SetToolTip(cmdConjugate, "Conjugate of a complex number or variable: For example Conj(3 + 2i) gives 3 - 2i.")
+        ttCalculator.SetToolTip(cmdComplexRad, "Change from degrees to radians. For example rad(90 + 180i) gives (1.571 + 3.142i)")
+        ttCalculator.SetToolTip(cmdComplexDeg, " Change from radians to degrees. For example deg(pi/2 + 3.142i) gives (90 + 180i)")
+        ttCalculator.SetToolTip(cmdComplexSqrt, "Square root. For example sqrt(-9 + 0i) gives (0 + 3i) or just 3i. sqrt(-9 + 2i) gives 0.331 + 3.018i)")
+        'to add  ttCalculator.SetToolTip(cmdComplexExp, "The exponential function. For example exp(3 + 2i) gives")
+        ttCalculator.SetToolTip(cmdComplexRound, "round(pi/2 + 3.14259i) gives 2 + 3i) so rounds to whole numbers. round(pi/2 + 3.14259i, 2) gives 1.57 + 3.14i, so rounds to 2 decimals.")
+        ttCalculator.SetToolTip(cmdComplexSignif, "Rounds to give the specified number off digits in the larger of the components. For example signif(0.424 + 511.38i, 3) gives (0 + 511i)")
+
+        'Hydro GOF keyboard tooltips
+        ttCalculator.SetToolTip(cmdBr2, "r-squared times the slope of the regression line between sim and obs")
+        ttCalculator.SetToolTip(cmdCp, "coefficent of persistence between sim and obs")
+        ttCalculator.SetToolTip(cmdD, "Index of agreement between sim and obs")
+        ttCalculator.SetToolTip(cmdKGE, "Kling-Gupta efficiency between sim and obs")
+        ttCalculator.SetToolTip(cmdMae, "Mean absolute error between sim and obs")
+        ttCalculator.SetToolTip(cmdMd, "Modified index of agreement between sim and obsmNSE")
+        ttCalculator.SetToolTip(cmdMe, "Mean error between sim and obs")
+        ttCalculator.SetToolTip(cmdmNSE, "Modified Nash-Sutcliffe efficiency between sim and obs")
+        ttCalculator.SetToolTip(cmdMse, "Mean squared error between sim and obs")
+        ttCalculator.SetToolTip(cmdNrmse, "Normalized root mean square error between sim and obs")
+        ttCalculator.SetToolTip(cmdNSE, "Nash-Sutcliffe efficiency between sim and obs")
+        ttCalculator.SetToolTip(cmdPbias, "Percent bias between sim and obs")
+        ttCalculator.SetToolTip(cmdPbiasfdc, "Percent bias in the slope of the midsegment of the flow duration curve")
+        ttCalculator.SetToolTip(cmdRd, "Relative index of agreement (d) between sim and obs. (Value is between 0 and 1)")
+        ttCalculator.SetToolTip(cmdRmse, "Root mean square error between sim and obs, so the standard deviation of the model prediction error")
+        ttCalculator.SetToolTip(cmdRNSE, "Relative Nash-Sutcliffe efficiency between sim and obs")
+        ttCalculator.SetToolTip(cmdRPearson, "Correlation between sim and obs")
+        ttCalculator.SetToolTip(cmdRSD, "Ratio of standard deviations between sim and obs")
+        ttCalculator.SetToolTip(cmdRsr, "Ratio of the root mean square error between sim and obs to the standard deviation of obs")
+        ttCalculator.SetToolTip(cmdSsq, "Sum of squared residuals between sim and obs")
+        ttCalculator.SetToolTip(cmdVE, " Volumetric efficiency between sim and obs (Value is between 0 and 1)")
+
+        ' circular keyboard tooltips
+        ttCalculator.SetToolTip(cmdCircular, "Define a variable as circular. Specify whether the data are in radians (default), degrees, or hours.")
+        ttCalculator.SetToolTip(cmdCircMean, "The circular mean. For example with 1, 2, 3, 6, mean(circular(c(1,2,3,6)) gives 1.51.")
+        ttCalculator.SetToolTip(cmdCircSd, "The circular standard deviation. This is not the sqrt(circular.var). It is reasonably close to the ordinary sd for data in radians.")
+        ttCalculator.SetToolTip(cmdCircRho, "The mean resultant length is between 0 and 1. Small values imply large (circular) variation. For 1,2,3,6 rho is 0.4036. With 1,2,3,4,5,6 it is 0.049.")
+        ttCalculator.SetToolTip(cmdCircRange, "Circular range is the shortest arc containing the data. For example with 1,2,3,6 gives 3.28 (6 is also -0.28 on circle from 0 to 2*pi)")
+        ttCalculator.SetToolTip(cmdCircVar, "The circular variance is (1 - rho), so between 0 and 1, with small values implying low (circular) variation. For 1,2,3,6 var is 0.5964. With 1,2,3,4,5,6 var is 0.951.")
+        ttCalculator.SetToolTip(cmdCircQuantiles, "Defined quantiles round the circle. With 0.5 it is the (circular) median, so is 1.5 for 1,2,3,6.")
+        ttCalculator.SetToolTip(cmdCircMax, "Largest value round the circle. For example, for 1,2,3,6 max is 3.")
+        ttCalculator.SetToolTip(cmdCircMin, " Smallest value round the circle. For 1,2,3,6 min is 6. (values are from 6 (almost 2 * pi  to 3)")
+        ttCalculator.SetToolTip(cmdCircQ1, "Lower quartile round the circle. For 1,2,3,6, q1 is 0.68")
+        ttCalculator.SetToolTip(cmdCircQ3, "Upper quartile round the circle. For 1,2,3,6 q3 is 2.25.")
+        ttCalculator.SetToolTip(cmdMedianHL, " Median using Hodges-Lehmann estimate. For example with 1,2,3,6, medianHL (and median) give 1.5.")
+        ttCalculator.SetToolTip(cmdCircMedian, "Circular median. For example with 23 and 2 representing hours, median(circular(c(23,2), units=""hours"")) gives 0,5.")
+        ttCalculator.SetToolTip(cmdAngVar, "The angular variance is twice the circular variance, so between 0 and 2.")
+        ttCalculator.SetToolTip(cmdA1, "Ratio of Bessel functions for values of kappa parameter. Used in the von Mises (circular normal) distribution kappa = 0.9 gives A1 same as rho value for 1,2,3,6 data.")
+        ttCalculator.SetToolTip(cmdAngDev, "The angular deviation is square root of the angular variance, so between 0 and sqrt(2).")
+
+
         Const strTooltipCmdLength = "number of observations: For example length(c(1,2,3,4,NA)) = 5 "
         ttCalculator.SetToolTip(cmdLength, strTooltipCmdLength)
         ttCalculator.SetToolTip(cmdListLength, strTooltipCmdLength)
@@ -342,7 +409,10 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCor, "correlation between 2 variables. It is a value between -1 and +1.")
         ttCalculator.SetToolTip(cmdCov, "covariance between 2 variables.")
         ttCalculator.SetToolTip(cmdQuantile, "a quantile, given a value between 0 and 1. So quantile(c(1,2,3,4,10), 0.25) = 2 and is the lower quartile.")
-
+        ttCalculator.SetToolTip(cmdwhichmax, "Row number of the maximum value. So which.max(c(4,3,10,1,2)) is 3")
+        ttCalculator.SetToolTip(cmdwhichmin, "Row number of the minimum value. So which.min(c(4,3,10,1,2)) is 4")
+        ttCalculator.SetToolTip(cmdwheremax, "Value of a variable at the which.max position. So for c(""a"",""b"",""c"",""d"",""e""), is ""c"", for the data in which.max tooltip.")
+        ttCalculator.SetToolTip(cmdwheremin, "Value of a variable at the which.min position. So for c(""a"",""b"",""c"",""d"",""e""), is ""d"", for the data in which.min tooltip.")
         ttCalculator.SetToolTip(cmdFreqDistinct, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
         ttCalculator.SetToolTip(cmdFreqIQR, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
         ttCalculator.SetToolTip(cmdFreqLength, "complete the command by rep(d ,f) for data in variable called d and frequencies in f")
@@ -1797,7 +1867,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMc_Click(sender As Object, e As EventArgs) Handles cmdMc.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x = , na.rm = TRUE, doReflect = (length(x = ) <= 100),doScale = TRUE, maxit = 100, trace.lev = 0, full.result = FALSE)", 113)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc(x = , na.rm = TRUE, doReflect = (length(x = ) <= 100),doScale = TRUE, maxit= 100, trace.lev= 0, full.result= FALSE)", 113)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("robustbase::mc( , na.rm = TRUE)", 16)
         End If
@@ -3193,7 +3263,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircMean_Click(sender As Object, e As EventArgs) Handles cmdCircMean.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular:: mean.circular(x = , na.rm = FALSE, control.circular = list())", 44)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular:: mean.circular(x = , na.rm = TRUE, control.circular = list())", 43)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::mean.circular()", 1)
         End If
@@ -3201,7 +3271,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircMedian_Click(sender As Object, e As EventArgs) Handles cmdCircMedian.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::median.circular(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::median.circular(x = , na.rm = TRUE)", 16)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::median.circular()", 1)
         End If
@@ -3209,7 +3279,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMedianHL_Click(sender As Object, e As EventArgs) Handles cmdMedianHL.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular(x = , na.rm = FALSE, method = c(HL1,HL2,HL3), prop = NULL)", 55)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular(x = , na.rm = TRUE, method = c(""HL1"",""HL2"",""HL3""), prop = NULL)", 60)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::medianHL.circular()", 1)
         End If
@@ -3217,7 +3287,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircRange_Click(sender As Object, e As EventArgs) Handles cmdCircRange.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular(x = , test = FALSE, na.rm = FALSE, finite = FALSE, control.circular = list(), )", 76)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular(x = , test = FALSE, na.rm = TRUE, finite = FALSE, control.circular = list(), )", 75)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::range.circular()", 1)
         End If
@@ -3225,7 +3295,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircSd_Click(sender As Object, e As EventArgs) Handles cmdCircSd.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::sd.circular(x = ,  na.rm = FALSE)", 18)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::sd.circular(x = ,  na.rm = TRUE)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::sd.circular()", 1)
         End If
@@ -3233,7 +3303,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircVar_Click(sender As Object, e As EventArgs) Handles cmdCircVar.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::var.circular(x = ,  na.rm = FALSE)", 18)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::var.circular(x = ,  na.rm = TRUE)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::var.circular()", 1)
         End If
@@ -3243,13 +3313,13 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::A1(kappa = )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::besselI()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::A1()", 1)
         End If
     End Sub
 
     Private Sub cmdAngVar_Click(sender As Object, e As EventArgs) Handles cmdAngVar.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.variance(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.variance(x = , na.rm = TRUE)", 16)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.variance()", 1)
         End If
@@ -3257,7 +3327,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAngDev_Click(sender As Object, e As EventArgs) Handles cmdAngDev.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.deviation(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.deviation(x = , na.rm = TRUE)", 16)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::angular.deviation()", 1)
         End If
@@ -3265,7 +3335,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircQ1_Click(sender As Object, e As EventArgs) Handles cmdCircQ1.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.25, na.rm = FALSE, names = TRUE, type = 7)", 55)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.25, na.rm = TRUE, names = TRUE, type = 7)", 54)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.25)", 16)
         End If
@@ -3273,7 +3343,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircMin_Click(sender As Object, e As EventArgs) Handles cmdCircMin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0, na.rm = FALSE, names = TRUE, type = 7)", 52)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0, na.rm = TRUE, names = TRUE, type = 7)", 51)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0)", 13)
         End If
@@ -3281,7 +3351,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCircMax_Click(sender As Object, e As EventArgs) Handles cmdCircMax.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 1, na.rm = FALSE, names = TRUE, type = 7)", 52)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 1, na.rm = TRUE, names = TRUE, type = 7)", 51)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 1)", 13)
         End If
@@ -3289,23 +3359,23 @@ Public Class ucrCalculator
 
     Private Sub cmdCircQ3_Click(sender As Object, e As EventArgs) Handles cmdCircQ3.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.75, na.rm = FALSE, names = TRUE, type = 7)", 55)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.75, na.rm = TRUE, names = TRUE, type = 7)", 54)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = 0.75)", 16)
         End If
     End Sub
 
-    Private Sub cmdCircQuantile_Click_1(sender As Object, e As EventArgs) Handles cmdCircQuantile.Click
+    Private Sub cmdCircQuantiles_Click_1(sender As Object, e As EventArgs) Handles cmdCircQuantiles.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm = FALSE, names = TRUE, type = 7)", 66)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm = TRUE, names = TRUE, type = 7)", 65)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25))", 28)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25))", 27)
         End If
     End Sub
 
     Private Sub cmdCircRho_Click_1(sender As Object, e As EventArgs) Handles cmdCircRho.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rho.circular(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rho.circular(x = , na.rm = TRUE)", 16)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rho.circular()", 1)
         End If
@@ -3914,7 +3984,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdPbiasfde_Click(sender As Object, e As EventArgs) Handles cmdPbiasfde.Click
+    Private Sub cmdPbiasfdc_Click(sender As Object, e As EventArgs) Handles cmdPbiasfdc.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::pbiasfdc(sim = , obs = , plot = FALSE)", 24)
         Else
@@ -4784,10 +4854,31 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
-    Private Sub cmdMathsHelp_Click(sender As Object, e As EventArgs) Handles cmdMathsHelp.Click, MathsStatsStripMenuItem.Click
+    Private Sub cmdMathsHelp_Click(sender As Object, e As EventArgs) Handles cmdMathsHelp.Click, MathsBaseStripMenuItem.Click
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "base"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MathsStatsStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsStatsStripMenuItem.Click
+        If ucrInputCalOptions.GetText = "Maths" Then
             strPackageName = "stats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MathsCarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsCarToolStripMenuItem.Click
+        If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "car"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MathsCircularToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MathsCircularToolStripMenuItem.Click
+        If ucrInputCalOptions.GetText = "Maths" Then
+            strPackageName = "circular"
         End If
         OpenHelpPage()
     End Sub
@@ -5003,11 +5094,11 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSampleFunction.ToScript, 36)
     End Sub
 
-    Private Sub cmdAsComplex_Click(sender As Object, e As EventArgs) Handles cmdAsComplex.Click
+    Private Sub cmdAsComplex_Click(sender As Object, e As EventArgs) Handles cmdComplex.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex(x = )", 1)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex( )", 1)
         End If
     End Sub
 
@@ -5148,7 +5239,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdComplexPi_Click(sender As Object, e As EventArgs) Handles cmdComplexPi.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi()", 1)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pi", -1)
     End Sub
 
     Private Sub cmdPascal_Click(sender As Object, e As EventArgs) Handles cmdPascal.Click
@@ -5373,5 +5464,49 @@ Public Class ucrCalculator
 
     Private Sub cmdListDuplicated_Click(sender As Object, e As EventArgs) Handles cmdListDuplicated.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply(  ,duplicated)", 13)
+    End Sub
+
+    Private Sub cmdwhichmax_Click(sender As Object, e As EventArgs) Handles cmdwhichmax.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("which.max(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("which.max()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdwheremin_Click(sender As Object, e As EventArgs) Handles cmdwheremin.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.min(x= )]", 17)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.min( )]", 15)
+        End If
+    End Sub
+
+    Private Sub cmdwhichmin_Click(sender As Object, e As EventArgs) Handles cmdwhichmin.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("which.min(x= )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("which.min()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdwheremax_Click(sender As Object, e As EventArgs) Handles cmdwheremax.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max(x= )]", 17)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max( )]", 15)
+        End If
+    End Sub
+
+    Private Sub cmdComplexi_Click(sender As Object, e As EventArgs) Handles cmdComplexi.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("i", -1)
+    End Sub
+
+    Private Sub cmdAsComplex_Click_1(sender As Object, e As EventArgs) Handles cmdAsComplex.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
+        End If
     End Sub
 End Class
