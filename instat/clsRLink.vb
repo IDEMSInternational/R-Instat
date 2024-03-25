@@ -997,11 +997,9 @@ Public Class RLink
             End If
 
             ' Split the strOutput into an array of lines, removing empty entries
-            Dim arrFilesPaths() As String = strOutput.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
 
-            ' Check if strOutput is not empty and all files correspond to existing HTML files with content
-            If Not String.IsNullOrEmpty(strOutput) AndAlso arrFilesPaths.All(Function(_path) File.Exists(_path) AndAlso New FileInfo(_path).Length > 0 AndAlso
-                    Path.GetExtension(_path).Equals(".html", StringComparison.OrdinalIgnoreCase)) Then
+            If bAsFile Then
                 ' Iterate through each HTML files
                 For Each _path In arrFilesPaths
                     ' Add each HTML file as an output to clsOutputLogger
@@ -1046,17 +1044,14 @@ Public Class RLink
         expTemp = GetSymbol(strTempAssignTo, bSilent:=True)
         Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
         If expTemp IsNot Nothing Then
-            ' If expTemp is not null
-            ' Extract the file path names from the expTemp and join into a single string
-            ' Split the string into an array of file path names, removing empty entries
-            ' Check if each file path name corresponds to an existing file with content
-            ' If so, filter out invalid file paths
-            ' Combine the valid file paths into a single string separated by newline characters
-            ' If no valid file paths remain, set strFilesPath to an empty string
-            strFilesPath = String.Join(Environment.NewLine, expTemp.AsCharacter())
-            Dim arrFilesPath() As String = strFilesPath.Split({vbCrLf, Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            ' Convert CharacterVector to String() array
+            Dim arrFilesPath As String() = expTemp.AsCharacter().Select(Function(x) x.ToString()).ToArray()
+
+            ' Filter out invalid file paths
             arrFilesPath = arrFilesPath.Where(Function(path) File.Exists(path) AndAlso New FileInfo(path).Length > 0).ToArray()
-            strFilesPath = If(arrFilesPath.Length = 0, "", String.Join(Environment.NewLine, arrFilesPath))
+
+            ' Join the valid file paths with newline characters
+            strFilesPath = String.Join(Environment.NewLine, arrFilesPath)
         End If
 
         Return strFilesPath

@@ -2755,7 +2755,7 @@ view_html_object <- function(html_objects) {
     object_class_names <- class(html_object)
     
     # Generate a unique temporary file name
-    file_name <- tempfile(pattern = paste0("viewhtml_", i, "_"), fileext = ".html")
+    file_name <- tempfile(pattern = "viewhtml_", fileext = ".html")
     
     if ("htmlwidget" %in% object_class_names) {
       # Note: When selfcontained is set to True 
@@ -2781,11 +2781,11 @@ view_html_object <- function(html_objects) {
   
   # Save unrecognized HTML objects as generic HTML
   unrecognized_objects <- html_objects[!sapply(html_objects, function(x) any(class(x) %in% c("htmlwidget", "sjTable", "gt_tbl")))]
+  
+  # Check if there are any unrecognized objects
   if (length(unrecognized_objects) > 0) {
-    file_names <- NULL  # Clear file_names
-    file_name <- tempfile(pattern = "viewhtml_unrecognized_", fileext = ".html")
-    gt::gtsave(html_objects, filename = file_name)
-    file_names <- file_name
+    # Print the unrecognized objects
+    print(unrecognized_objects)
   }
   
   message("R viewer not detected. Files saved in locations: ", paste(file_names, collapse = ", "))
