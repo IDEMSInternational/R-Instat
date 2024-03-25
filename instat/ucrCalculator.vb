@@ -327,7 +327,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCoin, "Sample giving heads or tails with default of equal probability")
         ttCalculator.SetToolTip(cmdColor, "Sample by default from the 657 colours in the grDevices package")
         ttCalculator.SetToolTip(cmdPrimary, "Sample by default from the colours, red, green, blue, yellow, black, and white. Are those your primary colours?")
-        ttCalculator.SetToolTip(cmdWakefieldDates, " Sample of dates with default being dates in order, by month, for the past year")
+        'ttCalculator.SetToolTip(cmdWakefieldDates, " Sample of dates with default being dates in order, by month, for the past year")
         ttCalculator.SetToolTip(cmdDeath, "Sample giving FALSE/TRUE with default being equally likely")
         ttCalculator.SetToolTip(cmdDice, "Sample with default being equally likely from a 6 sided dice")
         ttCalculator.SetToolTip(cmdDna, "Sample with default being equally likely from Guanine, Adenine, Thymine, Cytosine")
@@ -338,7 +338,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdEye, "Sample of 5 eye colours, namely: brown, blue green, hazel, grey")
         ttCalculator.SetToolTip(cmdGrade_Level, "Sample of grade levels from 1 to 12")
         ttCalculator.SetToolTip(cmdGrade, "Sample from normal disribution with default mean 88 and sd 4. See also grade_letter and gpa")
-        ttCalculator.SetToolTip(cmdGrade_Letter, "Sample from normal distribution with default mean 88 snd sd 4, with fixed translation into A+ to F")
+        ' ttCalculator.SetToolTip(cmdGrade_Letter, "Sample from normal distribution with default mean 88 snd sd 4, with fixed translation into A+ to F")
         ttCalculator.SetToolTip(cmdGpa, "Sample from normal distribution with default mean 88 and sd 4, with fixed translation into gpa of 4 to 0")
         ttCalculator.SetToolTip(cmdGroup, "Sample generating 2 groups, with default of random assignment to Control and Treatment, with equal probabilities")
         ttCalculator.SetToolTip(cmdHair, "Sample with default of 4 hair colours, brown, black, blonde, red, and defined probabilities")
@@ -347,9 +347,9 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdInternet_Browser, "Sample from ""Which browser do you use?"" with Chrome, IE, Firefox, Safari, Opera, Android, being the options")
         ttCalculator.SetToolTip(cmdIq, "Sample from normal distribution with default of mean 100 and sd 15 - not 10 as provided by the package")
         ttCalculator.SetToolTip(cmdLanguage, "Sample of world's languages with default being list of 99 languages, provided, together with their proportions")
-        ttCalculator.SetToolTip(cmdWakefield_lower_factor, "Sample of single letters, with default being one of a,b,c,d,e")
+        '   ttCalculator.SetToolTip(cmdWakefield_lower_factor, "Sample of single letters, with default being one of a,b,c,d,e")
         ttCalculator.SetToolTip(cmdMath, "Sample of integers with default of 1 to 4, and probabilities based on New York grading in maths for Grades 3 to 8 children. (Called level instead if equally likely)")
-        ttCalculator.SetToolTip(cmdWakefieldMinute, "Sample of minutes as H:M:S time elements. (Tweak command to hours or seconds if needed)")
+        '    ttCalculator.SetToolTip(cmdWakefieldMinute, "Sample of minutes as H:M:S time elements. (Tweak command to hours or seconds if needed)")
         ttCalculator.SetToolTip(cmdLikert, "Sample from 5-point scale, ranging from strongly agree to strongly disagree, with default of equal probabilities")
         ttCalculator.SetToolTip(cmdLorem_ipsum, "Provides random gibberish text, based on Latin")
         ttCalculator.SetToolTip(cmdMarital, "Sample with default of 5 categories, Married, Divorced, Widowed, Separated, Never Married, equally likely")
@@ -364,12 +364,12 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdSentence, "Sample of sentences with default supplied list from 2012 presidential debate")
         ttCalculator.SetToolTip(cmdGender, "Sample of male, female with default proportions matching gender makeup")
         ttCalculator.SetToolTip(cmdSex_Inclusive, "Sample of male, female, intersex, with default proportion of transgender from 2011 report")
-        ttCalculator.SetToolTip(cmdWakefieldTimes, "Sample of times of day as H:M:S time elements")
+        '    ttCalculator.SetToolTip(cmdWakefieldTimes, "Sample of times of day as H:M:S time elements")
         ttCalculator.SetToolTip(cmdSmokes, "Logical (TRUE/FALSE) sample with default of 18% smokers")
         ttCalculator.SetToolTip(cmdSpeed, "Sample from normal distribution, with default mean 55 and sd 10")
         ttCalculator.SetToolTip(cmdState, "Sample with default from the 50 US states in proportion to their 2010 populations")
         ttCalculator.SetToolTip(cmdString, "Sample with default of 10 random alphanumeric characters")
-        ttCalculator.SetToolTip(cmdWakefield_Upper_factor, "Sample of single capital letter, with default being one of A, B, C, D, E")
+        '   ttCalculator.SetToolTip(cmdWakefield_Upper_factor, "Sample of single capital letter, with default being one of A, B, C, D, E")
         ttCalculator.SetToolTip(cmdValid, "Logical (TRUE/FALSE) sample with default being equal probability")
         ttCalculator.SetToolTip(cmdWakefield_Year, "Sample of years with default from 1996 to current year, with equal probability")
 
@@ -2244,7 +2244,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldPrimaryFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdWakefieldDates_Click(sender As Object, e As EventArgs) Handles cmdWakefieldDates.Click
+    Private Sub cmdWakefieldDates_Click(sender As Object, e As EventArgs) Handles cmdDate.Click '"""""
         Dim clsWakefieldDateStampFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsStartDateFunction As New RFunction
@@ -2284,7 +2284,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldDeathFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdGrade_Letter_Click(sender As Object, e As EventArgs) Handles cmdGrade_Letter.Click
+    Private Sub cmdGrade_Letter_Click(sender As Object, e As EventArgs) Handles cmdDate.Click '""""
         Dim clsWakefieldgrade_letterFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
@@ -2757,7 +2757,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldMathFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdWakefieldMinute_Click(sender As Object, e As EventArgs) Handles cmdWakefieldMinute.Click
+    Private Sub cmdWakefieldMinute_Click(sender As Object, e As EventArgs) Handles cmdDate.Click '""""""
         Dim clsWakefieldMinuteFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
@@ -3139,7 +3139,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldSexInclusiveFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdWakefieldTimes_Click(sender As Object, e As EventArgs) Handles cmdWakefieldTimes.Click
+    Private Sub cmdWakefieldTimes_Click(sender As Object, e As EventArgs) Handles cmdDate.Click '"""""""
         Dim clsWakefieldtime_stampFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
@@ -3229,7 +3229,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldStringFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdWakefield_Upper_Click(sender As Object, e As EventArgs) Handles cmdWakefield_Upper_factor.Click
+    Private Sub cmdWakefield_Upper_Click(sender As Object, e As EventArgs) Handles cmdDate.Click '""""""
         Dim clsWakefieldUpper_factorFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
@@ -3247,7 +3247,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldUpper_factorFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdWakefield_lower_factor_click(sender As Object, e As EventArgs) Handles cmdWakefield_lower_factor.Click
+    Private Sub cmdWakefield_lower_factor_click(sender As Object, e As EventArgs) Handles cmdDate.Click '"""""""
         Dim clsWakefieldLower_FactorFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
@@ -3402,7 +3402,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdCircQuantile_Click_1(sender As Object, e As EventArgs) Handles cmdCircQuantile.Click
+    Private Sub cmdCircQuantiles_Click_1(sender As Object, e As EventArgs) Handles cmdCircQuantiles.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm = FALSE, names = TRUE, type = 7)", 66)
         Else
@@ -3726,7 +3726,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdLikert7_Click(sender As Object, e As EventArgs) Handles cmdLikert7.Click
+    Private Sub cmdLikert7_Click(sender As Object, e As EventArgs) Handles cmdLinkert7.Click '""""""""
         Dim clsWakefieldLikert7Function As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsLikert7ListFunction As New RFunction
