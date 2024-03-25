@@ -2185,7 +2185,6 @@ Partial Class frmMain
         '
         'mnuClimaticDescribeClimograph
         '
-        Me.mnuClimaticDescribeClimograph.Enabled = False
         Me.mnuClimaticDescribeClimograph.Name = "mnuClimaticDescribeClimograph"
         Me.mnuClimaticDescribeClimograph.Size = New System.Drawing.Size(211, 22)
         Me.mnuClimaticDescribeClimograph.Text = "Climograph..."
@@ -5112,9 +5111,7 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat " + My.Application.Info.Version.Major.ToString + "." +
-                My.Application.Info.Version.Minor.ToString + "." +
-                My.Application.Info.Version.Build.ToString
+        Me.Text = "R-Instat .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
