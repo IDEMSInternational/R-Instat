@@ -268,7 +268,6 @@ Public Class dlgInventoryPlot
         ucrChkOmitStart.SetRCode(clsClimaticMissing, bReset)
         ucrChkOmitEnd.SetRCode(clsClimaticMissing, bReset)
         ucrPnlOrder.SetRCode(clsClimaticDetails, bReset)
-
         If bReset Then
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
             ucrChkSummary.SetRCode(clsDummyFunction, bReset)
