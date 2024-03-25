@@ -2716,7 +2716,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldLanguageFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdWakefieldLower_Click(sender As Object, e As EventArgs) Handles cmdWakefieldLower.Click
+    Private Sub cmdWakefieldLower_Click(sender As Object, e As EventArgs)
         Dim clsWakefieldLowerFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
