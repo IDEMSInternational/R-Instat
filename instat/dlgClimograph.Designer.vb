@@ -61,9 +61,9 @@ Partial Class dlgClimograph
         Me.lblAbsolute.AutoSize = True
         Me.lblAbsolute.Location = New System.Drawing.Point(273, 262)
         Me.lblAbsolute.Name = "lblAbsolute"
-        Me.lblAbsolute.Size = New System.Drawing.Size(114, 13)
+        Me.lblAbsolute.Size = New System.Drawing.Size(111, 13)
         Me.lblAbsolute.TabIndex = 57
-        Me.lblAbsolute.Text = "Absolute Temperature:"
+        Me.lblAbsolute.Text = "Temperature min, min:"
         '
         'ucrInputStation
         '
