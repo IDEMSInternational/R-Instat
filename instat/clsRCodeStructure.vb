@@ -149,8 +149,7 @@ Public Class RCodeStructure
     '''             For example: <c>seq(from = 1, to = 10)</c> becomes <c>"seq(from = 1, to = 10)"</c>.
     '''             </para><para>
     '''             Note: if true then the returned string can no longer be used for the 
-    '''             function or its parameters because it will not produce the correct script
-    '''             (i.e. it should not be true if 'bToBeAssigned' or 'bIsAssigned' is true.</para>
+    '''             function or its parameters because it will not produce the correct script.</para>
     '''             </summary>
     Public bToScriptAsRString As Boolean = False
 
@@ -416,8 +415,6 @@ Public Class RCodeStructure
     '''             </para><para>
     '''             This function sets the value of several data members. It stores the new 
     '''             assign-to script in 'strAssignTo' (replacing the previous value stored).
-    '''             This function also updates the 'bIsAssigned' and 'bToBeAssigned' flags that
-    '''             store this object's assignment status.
     '''             </para></summary>
     '''
     ''' <param name="strScript">    [in,out] (Optional) The existing script including any 
