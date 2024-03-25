@@ -2736,7 +2736,7 @@ view_text_object <- function(text_object){
 #and returns the file path.
 view_html_object <- function(html_object){
   # Check if html_object is a list and has more than one element
-  if (is.list(html_object) && length(html_object) > 1 && all(sapply(html_object, class) == class(html_object[[1]]))) {
+  if (is.list(html_object) && all(sapply(html_object, class) == class(html_object[[1]]))) {
     # If html_object is a list with multiple elements of the same class, 
     # recursively call view_html_object on each element
     file_names <- vector("list", length(html_object))
