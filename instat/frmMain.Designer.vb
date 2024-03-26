@@ -190,6 +190,7 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuExportToWWRToolStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileExportToClimpact = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExamineEditData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticExamineEditDataVisualiseData = New System.Windows.Forms.ToolStripMenuItem()
@@ -682,7 +683,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticFileExportToGoogleBucketsToolStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1722,6 +1722,13 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToClimpact.Name = "mnuClimaticFileExportToClimpact"
         Me.mnuClimaticFileExportToClimpact.Size = New System.Drawing.Size(282, 22)
         Me.mnuClimaticFileExportToClimpact.Text = "Export to Climpact..."
+        '
+        'mnuClimaticFileExportToGoogleBucketsToolStrip
+        '
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Enabled = False
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Name = "mnuClimaticFileExportToGoogleBucketsToolStrip"
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Size = New System.Drawing.Size(282, 22)
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Text = "Export to Google Buckets..."
         '
         'ToolStripSeparator18
         '
@@ -5099,12 +5106,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuClimaticFileExportToGoogleBucketsToolStrip
-        '
-        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Name = "mnuClimaticFileExportToGoogleBucketsToolStrip"
-        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Size = New System.Drawing.Size(282, 22)
-        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Text = "Export to Google Buckets..."
         '
         'frmMain
         '
