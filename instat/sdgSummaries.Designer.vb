@@ -58,6 +58,16 @@ Partial Class sdgSummaries
         Me.tbModel = New System.Windows.Forms.TabPage()
         Me.ucrChkStandardErrorOfMean = New instat.ucrCheck()
         Me.tbPosition = New System.Windows.Forms.TabPage()
+        Me.ucrReceiverInclude = New instat.ucrReceiverSingle()
+        Me.ucrChkInclude = New instat.ucrCheck()
+        Me.lblInclude = New System.Windows.Forms.Label()
+        Me.ucrSelectorInclude = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.grpDisplay = New System.Windows.Forms.GroupBox()
+        Me.ucrChkWhichmax = New instat.ucrCheck()
+        Me.ucrChkWhichmin = New instat.ucrCheck()
+        Me.rdoUsePositions = New System.Windows.Forms.RadioButton()
+        Me.rdoDisplay = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlPosition = New instat.UcrPanel()
         Me.ucrReceiverOrderBy = New instat.ucrReceiverSingle()
         Me.ucrChkOrderBy = New instat.ucrCheck()
         Me.lblOrderBy = New System.Windows.Forms.Label()
@@ -166,13 +176,12 @@ Partial Class sdgSummaries
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.ttVerificationSummaries = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkWhichmin = New instat.ucrCheck()
-        Me.ucrChkWhichmax = New instat.ucrCheck()
         Me.tbCircular.SuspendLayout()
         Me.grpCircScale.SuspendLayout()
         Me.grpCircLocation.SuspendLayout()
         Me.tbModel.SuspendLayout()
         Me.tbPosition.SuspendLayout()
+        Me.grpDisplay.SuspendLayout()
         Me.grpPosition.SuspendLayout()
         Me.tbTwoVariables.SuspendLayout()
         Me.grpRelationships.SuspendLayout()
@@ -201,7 +210,7 @@ Partial Class sdgSummaries
         Me.tbCircular.Margin = New System.Windows.Forms.Padding(2)
         Me.tbCircular.Name = "tbCircular"
         Me.tbCircular.Padding = New System.Windows.Forms.Padding(2)
-        Me.tbCircular.Size = New System.Drawing.Size(409, 397)
+        Me.tbCircular.Size = New System.Drawing.Size(923, 397)
         Me.tbCircular.TabIndex = 8
         Me.tbCircular.Text = "Circular"
         Me.tbCircular.UseVisualStyleBackColor = True
@@ -377,7 +386,7 @@ Partial Class sdgSummaries
         Me.tbModel.Location = New System.Drawing.Point(4, 22)
         Me.tbModel.Name = "tbModel"
         Me.tbModel.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbModel.Size = New System.Drawing.Size(409, 397)
+        Me.tbModel.Size = New System.Drawing.Size(923, 397)
         Me.tbModel.TabIndex = 6
         Me.tbModel.Text = "Model"
         Me.tbModel.UseVisualStyleBackColor = True
@@ -394,6 +403,14 @@ Partial Class sdgSummaries
         '
         'tbPosition
         '
+        Me.tbPosition.Controls.Add(Me.ucrReceiverInclude)
+        Me.tbPosition.Controls.Add(Me.lblInclude)
+        Me.tbPosition.Controls.Add(Me.ucrChkInclude)
+        Me.tbPosition.Controls.Add(Me.ucrSelectorInclude)
+        Me.tbPosition.Controls.Add(Me.grpDisplay)
+        Me.tbPosition.Controls.Add(Me.rdoUsePositions)
+        Me.tbPosition.Controls.Add(Me.rdoDisplay)
+        Me.tbPosition.Controls.Add(Me.ucrPnlPosition)
         Me.tbPosition.Controls.Add(Me.ucrReceiverOrderBy)
         Me.tbPosition.Controls.Add(Me.ucrChkOrderBy)
         Me.tbPosition.Controls.Add(Me.lblOrderBy)
@@ -402,10 +419,116 @@ Partial Class sdgSummaries
         Me.tbPosition.Location = New System.Drawing.Point(4, 22)
         Me.tbPosition.Name = "tbPosition"
         Me.tbPosition.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbPosition.Size = New System.Drawing.Size(409, 397)
+        Me.tbPosition.Size = New System.Drawing.Size(923, 397)
         Me.tbPosition.TabIndex = 7
         Me.tbPosition.Text = "Position"
         Me.tbPosition.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverInclude
+        '
+        Me.ucrReceiverInclude.AutoSize = True
+        Me.ucrReceiverInclude.frmParent = Nothing
+        Me.ucrReceiverInclude.Location = New System.Drawing.Point(601, 228)
+        Me.ucrReceiverInclude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverInclude.Name = "ucrReceiverInclude"
+        Me.ucrReceiverInclude.Selector = Nothing
+        Me.ucrReceiverInclude.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverInclude.strNcFilePath = ""
+        Me.ucrReceiverInclude.TabIndex = 12
+        Me.ucrReceiverInclude.ucrSelector = Nothing
+        '
+        'ucrChkInclude
+        '
+        Me.ucrChkInclude.AutoSize = True
+        Me.ucrChkInclude.Checked = False
+        Me.ucrChkInclude.Location = New System.Drawing.Point(382, 150)
+        Me.ucrChkInclude.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrChkInclude.Name = "ucrChkInclude"
+        Me.ucrChkInclude.Size = New System.Drawing.Size(188, 25)
+        Me.ucrChkInclude.TabIndex = 9
+        '
+        'lblInclude
+        '
+        Me.lblInclude.AutoSize = True
+        Me.lblInclude.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblInclude.Location = New System.Drawing.Point(599, 212)
+        Me.lblInclude.Name = "lblInclude"
+        Me.lblInclude.Size = New System.Drawing.Size(51, 13)
+        Me.lblInclude.TabIndex = 11
+        Me.lblInclude.Text = "Order By:"
+        '
+        'ucrSelectorInclude
+        '
+        Me.ucrSelectorInclude.AutoSize = True
+        Me.ucrSelectorInclude.bDropUnusedFilterLevels = False
+        Me.ucrSelectorInclude.bShowHiddenColumns = False
+        Me.ucrSelectorInclude.bUseCurrentFilter = True
+        Me.ucrSelectorInclude.Location = New System.Drawing.Point(380, 184)
+        Me.ucrSelectorInclude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorInclude.Name = "ucrSelectorInclude"
+        Me.ucrSelectorInclude.Size = New System.Drawing.Size(350, 198)
+        Me.ucrSelectorInclude.TabIndex = 10
+        '
+        'grpDisplay
+        '
+        Me.grpDisplay.Controls.Add(Me.ucrChkWhichmax)
+        Me.grpDisplay.Controls.Add(Me.ucrChkWhichmin)
+        Me.grpDisplay.Location = New System.Drawing.Point(423, 44)
+        Me.grpDisplay.Name = "grpDisplay"
+        Me.grpDisplay.Size = New System.Drawing.Size(269, 80)
+        Me.grpDisplay.TabIndex = 8
+        Me.grpDisplay.TabStop = False
+        Me.grpDisplay.Text = "Position"
+        '
+        'ucrChkWhichmax
+        '
+        Me.ucrChkWhichmax.AutoSize = True
+        Me.ucrChkWhichmax.Checked = False
+        Me.ucrChkWhichmax.Location = New System.Drawing.Point(4, 25)
+        Me.ucrChkWhichmax.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrChkWhichmax.Name = "ucrChkWhichmax"
+        Me.ucrChkWhichmax.Size = New System.Drawing.Size(101, 34)
+        Me.ucrChkWhichmax.TabIndex = 12
+        '
+        'ucrChkWhichmin
+        '
+        Me.ucrChkWhichmin.AutoSize = True
+        Me.ucrChkWhichmin.Checked = False
+        Me.ucrChkWhichmin.Location = New System.Drawing.Point(162, 25)
+        Me.ucrChkWhichmin.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrChkWhichmin.Name = "ucrChkWhichmin"
+        Me.ucrChkWhichmin.Size = New System.Drawing.Size(101, 34)
+        Me.ucrChkWhichmin.TabIndex = 11
+        '
+        'rdoUsePositions
+        '
+        Me.rdoUsePositions.AutoSize = True
+        Me.rdoUsePositions.Location = New System.Drawing.Point(14, 15)
+        Me.rdoUsePositions.Name = "rdoUsePositions"
+        Me.rdoUsePositions.Size = New System.Drawing.Size(89, 17)
+        Me.rdoUsePositions.TabIndex = 7
+        Me.rdoUsePositions.TabStop = True
+        Me.rdoUsePositions.Text = "Use Positions"
+        Me.rdoUsePositions.UseVisualStyleBackColor = True
+        '
+        'rdoDisplay
+        '
+        Me.rdoDisplay.AutoSize = True
+        Me.rdoDisplay.Location = New System.Drawing.Point(172, 15)
+        Me.rdoDisplay.Name = "rdoDisplay"
+        Me.rdoDisplay.Size = New System.Drawing.Size(104, 17)
+        Me.rdoDisplay.TabIndex = 6
+        Me.rdoDisplay.TabStop = True
+        Me.rdoDisplay.Text = "Display Positions"
+        Me.rdoDisplay.UseVisualStyleBackColor = True
+        '
+        'ucrPnlPosition
+        '
+        Me.ucrPnlPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlPosition.Location = New System.Drawing.Point(6, 6)
+        Me.ucrPnlPosition.Name = "ucrPnlPosition"
+        Me.ucrPnlPosition.Size = New System.Drawing.Size(365, 34)
+        Me.ucrPnlPosition.TabIndex = 5
         '
         'ucrReceiverOrderBy
         '
@@ -424,10 +547,10 @@ Partial Class sdgSummaries
         '
         Me.ucrChkOrderBy.AutoSize = True
         Me.ucrChkOrderBy.Checked = False
-        Me.ucrChkOrderBy.Location = New System.Drawing.Point(12, 141)
+        Me.ucrChkOrderBy.Location = New System.Drawing.Point(12, 150)
         Me.ucrChkOrderBy.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkOrderBy.Name = "ucrChkOrderBy"
-        Me.ucrChkOrderBy.Size = New System.Drawing.Size(188, 34)
+        Me.ucrChkOrderBy.Size = New System.Drawing.Size(188, 25)
         Me.ucrChkOrderBy.TabIndex = 1
         '
         'lblOrderBy
@@ -450,11 +573,9 @@ Partial Class sdgSummaries
         Me.grpPosition.Controls.Add(Me.ucrChkFirst)
         Me.grpPosition.Controls.Add(Me.ucrChkLast)
         Me.grpPosition.Controls.Add(Me.ucrChknth)
-        Me.grpPosition.Controls.Add(Me.ucrChkWhichmax)
-        Me.grpPosition.Controls.Add(Me.ucrChkWhichmin)
-        Me.grpPosition.Location = New System.Drawing.Point(6, 6)
+        Me.grpPosition.Location = New System.Drawing.Point(6, 44)
         Me.grpPosition.Name = "grpPosition"
-        Me.grpPosition.Size = New System.Drawing.Size(397, 118)
+        Me.grpPosition.Size = New System.Drawing.Size(397, 80)
         Me.grpPosition.TabIndex = 0
         Me.grpPosition.TabStop = False
         Me.grpPosition.Text = "Position"
@@ -463,7 +584,7 @@ Partial Class sdgSummaries
         '
         Me.ucrChkSetseed.AutoSize = True
         Me.ucrChkSetseed.Checked = False
-        Me.ucrChkSetseed.Location = New System.Drawing.Point(166, 77)
+        Me.ucrChkSetseed.Location = New System.Drawing.Point(166, 43)
         Me.ucrChkSetseed.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkSetseed.Name = "ucrChkSetseed"
         Me.ucrChkSetseed.Size = New System.Drawing.Size(101, 34)
@@ -474,7 +595,7 @@ Partial Class sdgSummaries
         Me.ucrNudSeed.AutoSize = True
         Me.ucrNudSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSeed.Location = New System.Drawing.Point(273, 77)
+        Me.ucrNudSeed.Location = New System.Drawing.Point(273, 43)
         Me.ucrNudSeed.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -487,7 +608,7 @@ Partial Class sdgSummaries
         '
         Me.ucrChkSample.AutoSize = True
         Me.ucrChkSample.Checked = False
-        Me.ucrChkSample.Location = New System.Drawing.Point(8, 77)
+        Me.ucrChkSample.Location = New System.Drawing.Point(8, 43)
         Me.ucrChkSample.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkSample.Name = "ucrChkSample"
         Me.ucrChkSample.Size = New System.Drawing.Size(113, 34)
@@ -499,7 +620,7 @@ Partial Class sdgSummaries
         Me.ucrInputN.AutoSize = True
         Me.ucrInputN.IsMultiline = False
         Me.ucrInputN.IsReadOnly = False
-        Me.ucrInputN.Location = New System.Drawing.Point(233, 51)
+        Me.ucrInputN.Location = New System.Drawing.Point(233, 17)
         Me.ucrInputN.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputN.Name = "ucrInputN"
         Me.ucrInputN.Size = New System.Drawing.Size(64, 20)
@@ -509,7 +630,7 @@ Partial Class sdgSummaries
         '
         Me.lblInputN.AutoSize = True
         Me.lblInputN.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblInputN.Location = New System.Drawing.Point(215, 54)
+        Me.lblInputN.Location = New System.Drawing.Point(215, 21)
         Me.lblInputN.Name = "lblInputN"
         Me.lblInputN.Size = New System.Drawing.Size(16, 13)
         Me.lblInputN.TabIndex = 2
@@ -519,7 +640,7 @@ Partial Class sdgSummaries
         '
         Me.ucrChkFirst.AutoSize = True
         Me.ucrChkFirst.Checked = False
-        Me.ucrChkFirst.Location = New System.Drawing.Point(8, 51)
+        Me.ucrChkFirst.Location = New System.Drawing.Point(8, 17)
         Me.ucrChkFirst.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkFirst.Name = "ucrChkFirst"
         Me.ucrChkFirst.Size = New System.Drawing.Size(101, 34)
@@ -529,7 +650,7 @@ Partial Class sdgSummaries
         '
         Me.ucrChkLast.AutoSize = True
         Me.ucrChkLast.Checked = False
-        Me.ucrChkLast.Location = New System.Drawing.Point(309, 51)
+        Me.ucrChkLast.Location = New System.Drawing.Point(309, 17)
         Me.ucrChkLast.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkLast.Name = "ucrChkLast"
         Me.ucrChkLast.Size = New System.Drawing.Size(80, 34)
@@ -539,7 +660,7 @@ Partial Class sdgSummaries
         '
         Me.ucrChknth.AutoSize = True
         Me.ucrChknth.Checked = False
-        Me.ucrChknth.Location = New System.Drawing.Point(166, 53)
+        Me.ucrChknth.Location = New System.Drawing.Point(166, 19)
         Me.ucrChknth.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChknth.Name = "ucrChknth"
         Me.ucrChknth.Size = New System.Drawing.Size(59, 34)
@@ -567,7 +688,7 @@ Partial Class sdgSummaries
         Me.tbTwoVariables.Location = New System.Drawing.Point(4, 22)
         Me.tbTwoVariables.Name = "tbTwoVariables"
         Me.tbTwoVariables.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbTwoVariables.Size = New System.Drawing.Size(409, 397)
+        Me.tbTwoVariables.Size = New System.Drawing.Size(923, 397)
         Me.tbTwoVariables.TabIndex = 5
         Me.tbTwoVariables.Text = " Two-Variables"
         Me.tbTwoVariables.UseVisualStyleBackColor = True
@@ -913,7 +1034,7 @@ Partial Class sdgSummaries
         Me.tbMore.Location = New System.Drawing.Point(4, 22)
         Me.tbMore.Name = "tbMore"
         Me.tbMore.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMore.Size = New System.Drawing.Size(409, 397)
+        Me.tbMore.Size = New System.Drawing.Size(923, 397)
         Me.tbMore.TabIndex = 1
         Me.tbMore.Text = "More"
         Me.tbMore.UseVisualStyleBackColor = True
@@ -1254,7 +1375,7 @@ Partial Class sdgSummaries
         Me.tbsum.Location = New System.Drawing.Point(4, 22)
         Me.tbsum.Name = "tbsum"
         Me.tbsum.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbsum.Size = New System.Drawing.Size(409, 397)
+        Me.tbsum.Size = New System.Drawing.Size(923, 397)
         Me.tbsum.TabIndex = 0
         Me.tbsum.Text = "Summaries"
         Me.tbsum.UseVisualStyleBackColor = True
@@ -1595,7 +1716,7 @@ Partial Class sdgSummaries
         Me.tbSummaries.Location = New System.Drawing.Point(6, 7)
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
-        Me.tbSummaries.Size = New System.Drawing.Size(417, 423)
+        Me.tbSummaries.Size = New System.Drawing.Size(931, 423)
         Me.tbSummaries.TabIndex = 0
         '
         'ucrButtonsSummaries
@@ -1607,32 +1728,12 @@ Partial Class sdgSummaries
         Me.ucrButtonsSummaries.Size = New System.Drawing.Size(224, 31)
         Me.ucrButtonsSummaries.TabIndex = 1
         '
-        'ucrChkWhichmin
-        '
-        Me.ucrChkWhichmin.AutoSize = True
-        Me.ucrChkWhichmin.Checked = False
-        Me.ucrChkWhichmin.Location = New System.Drawing.Point(166, 22)
-        Me.ucrChkWhichmin.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrChkWhichmin.Name = "ucrChkWhichmin"
-        Me.ucrChkWhichmin.Size = New System.Drawing.Size(101, 34)
-        Me.ucrChkWhichmin.TabIndex = 9
-        '
-        'ucrChkWhichmax
-        '
-        Me.ucrChkWhichmax.AutoSize = True
-        Me.ucrChkWhichmax.Checked = False
-        Me.ucrChkWhichmax.Location = New System.Drawing.Point(8, 22)
-        Me.ucrChkWhichmax.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrChkWhichmax.Name = "ucrChkWhichmax"
-        Me.ucrChkWhichmax.Size = New System.Drawing.Size(101, 34)
-        Me.ucrChkWhichmax.TabIndex = 10
-        '
         'sdgSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(429, 465)
+        Me.ClientSize = New System.Drawing.Size(992, 465)
         Me.Controls.Add(Me.ucrButtonsSummaries)
         Me.Controls.Add(Me.tbSummaries)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -1651,6 +1752,8 @@ Partial Class sdgSummaries
         Me.tbModel.PerformLayout()
         Me.tbPosition.ResumeLayout(False)
         Me.tbPosition.PerformLayout()
+        Me.grpDisplay.ResumeLayout(False)
+        Me.grpDisplay.PerformLayout()
         Me.grpPosition.ResumeLayout(False)
         Me.grpPosition.PerformLayout()
         Me.tbTwoVariables.ResumeLayout(False)
@@ -1816,6 +1919,14 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkProportionsPercentages As ucrCheck
     Friend WithEvents cmdOptions As Button
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents ucrReceiverInclude As ucrReceiverSingle
+    Friend WithEvents ucrChkInclude As ucrCheck
+    Friend WithEvents lblInclude As Label
+    Friend WithEvents ucrSelectorInclude As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents grpDisplay As GroupBox
     Friend WithEvents ucrChkWhichmax As ucrCheck
     Friend WithEvents ucrChkWhichmin As ucrCheck
+    Friend WithEvents rdoUsePositions As RadioButton
+    Friend WithEvents rdoDisplay As RadioButton
+    Friend WithEvents ucrPnlPosition As UcrPanel
 End Class
