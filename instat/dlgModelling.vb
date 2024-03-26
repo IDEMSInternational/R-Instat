@@ -228,7 +228,16 @@ Public Class dlgModelling
     Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
 
         Dim strAssginTo As String
-        strAssginTo = ucrBase.clsRsyntax.GetstrAssignTo()
+        If ucrBase.clsRsyntax.bUseBaseFunction Then
+            strAssginTo = ucrBase.clsRsyntax.clsBaseFunction.GetRObjectToAssignTo()
+        ElseIf ucrBase.clsRsyntax.bUseBaseOperator Then
+            strAssginTo = ucrBase.clsRsyntax.clsBaseOperator.GetRObjectToAssignTo()
+        ElseIf ucrBase.clsRsyntax.bUseCommandString Then
+            strAssginTo = ucrBase.clsRsyntax.clsBaseCommandString.GetRObjectToAssignTo()
+        Else
+            strAssginTo = ""
+        End If
+
 
         '---------------------------------------------------------------------
         'model summaries outputs

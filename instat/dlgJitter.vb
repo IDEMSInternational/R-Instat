@@ -42,9 +42,9 @@ Public Class dlgJitter
         ucrReceiverJitter.SetMeAsReceiver()
 
         ucrReceiverJitter.strSelectorHeading = "Numerics"
-        ucrBase.clsRsyntax.SetOperation("+")
+        ucrBase.clsRsyntax.clsBaseOperator.SetOperation("+")
         clsRunif.SetRCommand("runif")
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRunif)
+        ucrBase.clsRsyntax.clsBaseOperator.AddParameter(clsRFunctionParameter:=clsRunif)
         'ucrInputNewColumnName.SetItemsTypeAsColumns()
         'ucrInputNewColumnName.SetDefaultTypeAsColumn()
         'ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForJitter.ucrAvailableDataFrames)
@@ -164,7 +164,7 @@ Public Class dlgJitter
     End Sub
 
     Private Sub ucrReceiverJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverJitter.ControlValueChanged
-        ucrBase.clsRsyntax.SetOperatorParameter(1, clsRFunc:=ucrReceiverJitter.GetVariables)
+        ucrBase.clsRsyntax.clsBaseOperator.AddParameter(clsRFunctionParameter:=ucrReceiverJitter.GetVariables, iPosition:=1)
     End Sub
 
 

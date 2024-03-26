@@ -96,7 +96,7 @@ Public Class dlgCalculationsSummary
         For Each lviTemp As ListViewItem In lstCalculations.SelectedItems
             iIndex = lstCalculations.Items.IndexOf(lviTemp)
             lstCalculations.Items.Remove(lviTemp)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(ucrBase.clsRsyntax.lstBeforeCodes.Find(Function(x) x.Tag = lviTemp.Text))
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(ucrBase.clsRsyntax.GetBeforeCodes().Find(Function(x) x.Tag = lviTemp.Text))
             dctCalculations.Remove(lviTemp.Text)
         Next
     End Sub
@@ -139,7 +139,7 @@ Public Class dlgCalculationsSummary
                     strCalcName = lstCalculations.SelectedItems(0).Text
                 End If
                 lstCalculations.SelectedItems(0).Text = strCalcName
-                clsApplyCalculation = ucrBase.clsRsyntax.lstBeforeCodes.Find(Function(x) x.Tag = strCalcName)
+                clsApplyCalculation = ucrBase.clsRsyntax.GetBeforeCodes().Find(Function(x) x.Tag = strCalcName)
                 If clsSelectedCalculationFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "save") <> -1 AndAlso clsSelectedCalculationFunction.GetParameter("save").strArgumentValue = "2" Then
                     clsApplyCalculation.iCallType = 0
                     clsApplyCalculation.AddParameter("display", "FALSE")

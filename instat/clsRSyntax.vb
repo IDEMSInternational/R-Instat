@@ -42,7 +42,15 @@
 ''' </summary>
 '''--------------------------------------------------------------------------------------------
 Public Class RSyntax
-    'TODO Legacy - Adapt RSyntax to new style... 
+    ''' <summary>   If true then don't include the output part in the script (i.e. the part of the 
+    '''             script to the left of the assignment operator '&lt;-'). </summary>
+    Public bExcludeAssignedFunctionOutput As Boolean = True
+
+    ''' <summary>   If true then run the R script in a separate thread. </summary>
+    Public bSeparateThread As Boolean = True
+
+    ''' <summary>   TODO SJL 07/04/20 Is only ever Nothing (or in one rare case False). Remove? </summary>
+    Public bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing
 
     ' An object of this class is associated with a base R code. This R code must be (only one of):
     '   - An R function,
@@ -53,26 +61,6 @@ Public Class RSyntax
     ' 'TODO SJL It's not valid for an object of this class to be more than one of the 3 types above. 
     '     However the booleans potentially allow this. Replace with an enumeration?
 
-    ''' <summary>   An R function of the form 'RCommand(param1=param1Val, param2=param2Val, ...)'. </summary>
-    Public clsBaseFunction As New RFunction
-
-    ''' <summary>   An R operation of the form 'leftSide Operator rightSide' (e.g. "x+y"). </summary>
-    Public clsBaseOperator As New ROperator
-
-    ''' <summary>   An R command (of any type). </summary>
-    Public clsBaseCommandString As New RCodeStructure 'TODO SJL 17/04/20 What's the connection between this and 'bUeseCommandString' and 'strCommandString'? 
-
-
-    ''' <summary>   The R command in the form of a string. </summary>
-    Public strCommandString As String = ""
-
-    ''' <summary>   The R functions/operators/commands that should be run before the base R code. </summary>
-    Public lstBeforeCodes As New List(Of RCodeStructure)
-
-    ''' <summary>   The R functions/operators/commands that should be run after the base R code. </summary>
-    Public lstAfterCodes As New List(Of RCodeStructure)
-
-
     ''' <summary>   If true then use 'clsBaseFunction' as this object's base R code. </summary>
     Public bUseBaseFunction As Boolean = False
 
@@ -82,6 +70,15 @@ Public Class RSyntax
     ''' <summary>   If true then use 'clsBaseCommandString' as this object's base R code. </summary>
     Public bUseCommandString As Boolean = False
 
+
+    ''' <summary>   An R command (of any type). </summary>
+    Public clsBaseCommandString As New RCodeStructure 'TODO SJL 17/04/20 What's the connection between this and 'bUseCommandString' and 'strCommandString'? 
+
+    ''' <summary>   An R function of the form 'RCommand(param1=param1Val, param2=param2Val, ...)'. </summary>
+    Public clsBaseFunction As New RFunction
+
+    ''' <summary>   An R operation of the form 'leftSide Operator rightSide' (e.g. "x+y"). </summary>
+    Public clsBaseOperator As New ROperator
 
     ''' <summary>   Defines how to display the R output.
     ''' <list type="bullet">
@@ -94,147 +91,16 @@ Public Class RSyntax
     ''' </list> </summary>
     Public iCallType As Integer = 0 'TODO SJL 07/04/20 Use enumeration?
 
+    ''' <summary>   The R command in the form of a string. </summary>
+    Public strCommandString As String = ""
 
-    ''' <summary>   The script associated with the base R code. </summary>
-    Public strScript As String 'TODO SJL This is only used in the RSyntax.GetScript function. Also cleared once in ucrButtons. Refactor?
 
-    ''' <summary>   TODO SJL 07/04/20 Not used. Remove? </summary>
-    Public i As Integer
+    ''' <summary>   The R functions/operators/commands that should be run before the base R code. </summary>
+    Private lstBeforeCodes As New List(Of RCodeStructure)
 
-    ''' <summary>   If true then don't include the output part in the script (i.e. the part of the 
-    '''             script to the left of the assignment operator '&lt;-'). </summary>
-    Public bExcludeAssignedFunctionOutput As Boolean = True
+    ''' <summary>   The R functions/operators/commands that should be run after the base R code. </summary>
+    Private lstAfterCodes As New List(Of RCodeStructure)
 
-    ''' <summary>   If true then run the R script in a separate thread. </summary>
-    Public bSeparateThread As Boolean = True
-
-    ''' <summary>   TODO SJL 07/04/20 Is only ever Nothing (or in one rare case False). Remove? </summary>
-    Public bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets the function's name (e.g. "facet_grid") and flags that the R script 
-    '''             associated with this object is no longer correctly assigned.</summary>
-    '''
-    ''' <param name="strFunctionName">  Name of the R command. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetFunction(strFunctionName As String)
-        'TODO legacy -  confusing name
-        clsBaseFunction.SetRCommand(strFunctionName)
-        bUseBaseFunction = True
-        bUseBaseOperator = False
-        bUseCommandString = False
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <param name="strName">  The name. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetPackageName(strName As String)
-        If clsBaseFunction Is Nothing Then
-            MsgBox("Developer error: base function must be set before package name is set.")
-        Else
-            clsBaseFunction.SetPackageName(strName)
-            bUseBaseFunction = True
-            bUseBaseOperator = False
-            bUseCommandString = False
-        End If
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets this object to be R function <paramref name="clsFunction"/>. </summary>
-    '''
-    ''' <param name="clsFunction">  The R function to associate with this object. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetBaseRFunction(clsFunction As RFunction)
-        clsBaseFunction = clsFunction
-        bUseBaseFunction = True
-        bUseBaseOperator = False
-        bUseCommandString = False
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets this object to be R operator <paramref name="clsOperator"/>. </summary>
-    '''
-    ''' <param name="clsOperator">  The R operator to associate with this object. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetBaseROperator(clsOperator As ROperator)
-        clsBaseOperator = clsOperator
-        bUseBaseFunction = False
-        bUseBaseOperator = True
-        bUseCommandString = False
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets the operation's symbol to <paramref name="strOp"/> (e.g. "+") and if
-    '''             <paramref name="bBracketTemp"/> is true then includes the first operation 
-    '''             parameter in brackets. </summary>
-    '''
-    ''' <param name="strOp">          The operation symbol (e.g. "+"). </param>
-    ''' <param name="bBracketTemp">   (Optional) If true then enclose first parameter in brackets.
-    '''                               </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetOperation(strOp As String, Optional bBracketTemp As Boolean = True)
-        clsBaseOperator.SetOperation(strOp, bBracketTemp)
-        bUseBaseFunction = False
-        bUseBaseOperator = True
-        bUseCommandString = False
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets this object's R command to <paramref name="strCommand"/>. This object's 
-    '''             R command is then just a string (rather than a function or operation object)
-    '''             </summary>
-    '''
-    ''' <param name="strCommand">   The R command string. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetCommandString(strCommand As String)
-        strCommandString = strCommand
-        bUseBaseFunction = False
-        bUseBaseOperator = False
-        bUseCommandString = True
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>    Sets the 'assignTo' variables for this object's associated R function, R 
-    '''              operation or R command string. </summary>
-    '''
-    ''' <param name="strAssignToName">              The new value for the assignment string. </param>
-    ''' <param name="strTempDataframe">             (Optional) The new value for the dataframe. </param>
-    ''' <param name="strTempColumn">                (Optional) The new value for the column. </param>
-    ''' <param name="strTempModel">                 (Optional) The new value for the model. </param>
-    ''' <param name="strTempGraph">                 (Optional) The new value for the graph. </param>
-    ''' <param name="bAssignToIsPrefix">            (Optional) The new value for bAssignToIsPrefix. </param>
-    ''' <param name="bAssignToColumnWithoutNames">  (Optional) The new value for bAssignToColumnWithoutNames. </param>
-    ''' <param name="bInsertColumnBefore">          (Optional) The new value for bInsertColumnBefore. </param>
-    ''' <param name="bRequireCorrectLength">        (Optional) The new value for bRequireCorrectLength. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetAssignTo(strAssignToName As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional strAdjacentColumn As String = "")
-        If bUseBaseOperator Then
-            clsBaseOperator.SetAssignTo(strTemp:=strAssignToName, strTempDataframe:=strTempDataframe, strTempColumn:=strTempColumn, strTempModel:=strTempModel, strTempGraph:=strTempGraph, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore, bRequireCorrectLength:=bRequireCorrectLength, strAdjacentColumn:=strAdjacentColumn)
-        ElseIf bUseBaseFunction Then
-            clsBaseFunction.SetAssignTo(strAssignToName, strTempDataframe:=strTempDataframe, strTempColumn:=strTempColumn, strTempModel:=strTempModel, strTempGraph:=strTempGraph, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore, bRequireCorrectLength:=bRequireCorrectLength, strAdjacentColumn:=strAdjacentColumn)
-        ElseIf bUseCommandString Then
-            clsBaseCommandString.SetAssignTo(strAssignToName, strTempDataframe:=strTempDataframe, strTempColumn:=strTempColumn, strTempModel:=strTempModel, strTempGraph:=strTempGraph, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore, bRequireCorrectLength:=bRequireCorrectLength, strAdjacentColumn:=strAdjacentColumn)
-        End If
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Resets all the 'AssignTo' variables. 
-    '''             String variables are set to "".
-    '''             Booleans are set to false. 
-    '''             </summary>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub RemoveAssignTo()
-        If bUseBaseOperator Then
-            clsBaseOperator.RemoveAssignTo()
-        End If
-        If bUseBaseFunction Then 'TODO SJL 04/04/20 should this be ElseIf?
-            clsBaseFunction.RemoveAssignTo()
-        ElseIf bUseCommandString Then
-            clsBaseCommandString.RemoveAssignTo()
-        End If
-    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
@@ -257,245 +123,79 @@ Public Class RSyntax
     '''--------------------------------------------------------------------------------------------
     Public Sub AddParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunctionParameter As RFunction = Nothing, Optional clsROperatorParameter As ROperator = Nothing, Optional clsRCodeStructureParameter As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True, Optional iPosition As Integer = -1)
         'TODO SJL 17/04/20 This function should only be used if this class encapsulates a function. But it doesn't check the booleans for this.
-        '                  Also, 'clsBaseFunction' is public so 'AddParameter' can be called directly. Remove this function?
         clsBaseFunction.AddParameter(strParameterName, strParameterValue, clsRFunctionParameter, clsROperatorParameter, clsRCodeStructureParameter, bIncludeArgumentName, iPosition)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>TODO SJL 04/04/20 This function is not used, remove?</summary>
+    ''' <summary>   Adds R function/operation/command <paramref name="clsNewRCode"/> to the 
+    '''             'after' list. </summary>
     '''
-    ''' <param name="clsRParam"> The new parameter to add. </param>
+    ''' <param name="clsNewRCode">  The R function/operation/command to add. </param>
+    ''' <param name="iPosition">    (Optional) The relative position of the parameter in this 
+    '''                             object's 'after' list. </param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub AddParameter(clsRParam As RParameter)
-        'TODO SJL 04/04/20 if we keep this function, should it also handle adding parameters to operations or string R commands?
-        clsBaseFunction.AddParameter(clsRParam)
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <param name="strName">  The name. </param>
-    '''
-    ''' <returns>   The parameter. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetParameter(strName As String) As RParameter
-        If bUseBaseFunction Then
-            Return clsBaseFunction.GetParameter(strName)
-        ElseIf bUseBaseOperator Then
-            Return clsBaseOperator.GetParameter(strName)
-        End If
-        Return Nothing
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is superceded by the 'SetOperatorParameter' 
-    '''             function below, remove? </summary>
-    '''
-    ''' <param name="iPos">                 True to position. </param>
-    ''' <param name="strParameterName">     (Optional) Name of the parameter. </param>
-    ''' <param name="strValue">             (Optional) The value. </param>
-    ''' <param name="clsRFunc">             (Optional) The cls r function. </param>
-    ''' <param name="clsOp">                (Optional) The cls operation. </param>
-    ''' <param name="clsCs">                (Optional) The cls create struct. </param>
-    ''' <param name="bIncludeArgumentName"> (Optional) True to include, false to exclude the argument
-    '''                                     name. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetOperatorParameter(iPos As Boolean, Optional strParameterName As String = "", Optional strValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional clsCs As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True)
-        'TODO legacy comment: This is temporary, just don't want to change all the files in one pull request... 
-        '                     Will have to change the first argument to an integer...
-        Dim iPosition As Integer
-        If iPos Then
-            iPosition = 0
+    Public Sub AddToAfterCodes(clsNewRCode As RCodeStructure, Optional iPosition As Integer = -1)
+        If Not lstAfterCodes.Contains(clsNewRCode) Then
+            lstAfterCodes.Add(clsNewRCode)
+            clsNewRCode.iPosition = iPosition 'TODO SJL 06/04/20 remove this line and the 'Else' (see AddToBeforeCodes)?
         Else
-            iPosition = -1
+            lstAfterCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPosition
         End If
-        clsBaseOperator.AddParameter(strParameterName, strValue, clsRFunc, clsOp, clsCs, bIncludeArgumentName, iPosition)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Creates and adds a parameter to the R operator associated with this object.
-    '''             Sets the parameter's name to <paramref name="strParameterName"/>.
-    '''             <para>Sets the parameter's argument to <b>one of</b> <paramref name="strValue"/>,
-    '''             <paramref name="clsRFunc"/>, <paramref name="clsOp"/>,
-    '''             or <paramref name="clsCs"/>.</para>
-    '''             Sets the parameter's position and include/exclude argument name flag to 
-    '''             <paramref name="iPosition"/> and <paramref name="bIncludeArgumentName"/> 
-    '''             respectively.
+    ''' <summary>   Adds R function/operation/command <paramref name="clsNewRCode"/> to the 
+    '''             'before' list. </summary>
+    '''
+    ''' <param name="clsNewRCode">  The R function/operation/command to add. </param>
+    ''' <param name="iPosition">    (Optional) The relative position of the parameter in this 
+    '''                             object's 'before' list. </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub AddToBeforeCodes(clsNewRCode As RCodeStructure, Optional iPosition As Integer = -1)
+        If Not lstBeforeCodes.Contains(clsNewRCode) Then
+            lstBeforeCodes.Add(clsNewRCode)
+        End If
+        lstBeforeCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPosition
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Resets all the data members to default values. </summary>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub ClearCodes()
+        lstBeforeCodes = New List(Of RCodeStructure)
+        lstAfterCodes = New List(Of RCodeStructure)
+        clsBaseFunction = New RFunction
+        clsBaseOperator = New ROperator
+        clsBaseCommandString = New RCodeStructure
+        strCommandString = ""
+        bUseBaseFunction = False
+        bUseBaseOperator = False
+        bUseCommandString = False
+        'TODO SJL 19/03/24 also reset iCallType?
+        'iCallType = 0
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Returns true if the <paramref name="clsRCode"/> R function/operator/command is
+    '''             the R function/operator/command associated with this object. Also returns true 
+    '''             if <paramref name="clsRCode"/> is in this object's 'before' or 'after' lists. 
+    '''             Else returns false.
     '''             </summary>
     '''
-    ''' <param name="strParameterName">     (Optional) Name of the parameter. </param>
-    ''' <param name="strValue">             (Optional) The parameter value. </param>
-    ''' <param name="clsRFunc">             (Optional) The R function parameter. </param>
-    ''' <param name="clsOp">                (Optional) The R operator parameter. </param>
-    ''' <param name="clsCs">                (Optional) The R code structure parameter. </param>
-    ''' <param name="bIncludeArgumentName"> (Optional) True to include, false to exclude the 
-    '''                                     argument name. </param>
-    ''' <param name="iPosition">            (Optional) The relative position of the
-    '''                                     parameter in this object's parameter list. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub SetOperatorParameter(iPosition As Integer, Optional strParameterName As String = "", Optional strValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional clsCs As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True)
-        'TODO SJL 17/04/20 This function should only be used if this class encapsulates an operator. But it doesn't check the booleans for this.
-        '                  Also, 'clsBaseOperator' is public so 'AddParameter' can be called directly. Remove this function?
-        clsBaseOperator.AddParameter(strParameterName, strValue, clsRFunc, clsOp, clsCs, bIncludeArgumentName, iPosition)
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Adds an operator parameter. </summary>
+    ''' <param name="clsRCode"> The R function/operator/command to search for. </param>
     '''
-    ''' <param name="strParameterName">     Name of the parameter. </param>
-    ''' <param name="strParameterValue">    (Optional) The parameter value. </param>
-    ''' <param name="clsRFunc">             (Optional) The cls r function. </param>
-    ''' <param name="clsOp">                (Optional) The cls operation. </param>
-    ''' <param name="clsCs">                (Optional) The cls create struct. </param>
-    ''' <param name="bIncludeArgumentName"> (Optional) True to include, false to exclude the argument
-    '''                                     name. </param>
+    ''' <returns>   True if the <paramref name="clsRCode"/> R function/operator/command is
+    '''             the R function/operator/command associated with this object. Also returns true
+    '''             if <paramref name="clsRCode"/> is in this object's 'before' or 'after' lists.
+    '''             Else returns false. </returns>
     '''--------------------------------------------------------------------------------------------
-    Public Sub AddOperatorParameter(strParameterName As String, Optional strParameterValue As String = "", Optional clsRFunc As RFunction = Nothing, Optional clsOp As ROperator = Nothing, Optional clsCs As RCodeStructure = Nothing, Optional bIncludeArgumentName As Boolean = True)
-        'TDDO SJL 17/04/20 What's the difference between this function and the one above? Remove this function?
-        clsBaseOperator.AddParameter(strParameterName, strParameterValue, clsRFunc, clsOp, clsCs, bIncludeArgumentName)
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Removes the parameter named <paramref name="strParameterName"/>. </summary>
-    '''
-    ''' <param name="strParameterName"> Name of the parameter. </param>
-    ''' <param name="clsFunction">      [in,out] (Optional) The function to add the parameter to.
-    '''                                 If not specified then adds the parameter to 'clsBaseFunction'. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
-        'TODO SJL 17/04/20 This function should only be used if this class encapsulates a function. But it doesn't check the booleans for this.
-        '                  Also, 'clsBaseFunction' is public so 'RemoveParameterByName' can be called directly. Remove this function?
-        If clsFunction Is Nothing Then
-            clsFunction = clsBaseFunction
-        End If
-        clsFunction.RemoveParameterByName(strParameterName)
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <param name="strParameterName"> Name of the parameter. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub RemoveOperatorParameter(strParameterName As String)
-        clsBaseOperator.RemoveParameterByName(strParameterName)
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <param name="clsFunction">  [in,out] (Optional) The cls function. </param>
-    '''--------------------------------------------------------------------------------------------
-    Public Sub ClearParameters(Optional ByRef clsFunction As RFunction = Nothing)
-        If clsFunction Is Nothing Then
-            clsFunction = clsBaseFunction
-        End If
-
-        clsFunction.ClearParameters()
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the script associated with this object's R function, R operator or 
-    '''             R command string. 
-    '''             If this object is flagged to exclude the script's output, and the output has 
-    '''             already been assigned, then the returned script does not include the output 
-    '''             part.</summary>
-    '''
-    ''' <returns>   The script associated with this object's R function, R operator or R command 
-    '''             string. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetScript() As String
-        Dim strTemp As String = ""
-
-        If bUseBaseFunction Then
-            strTemp = clsBaseFunction.ToScript(strScript)
-        ElseIf bUseBaseOperator Then
-            strTemp = clsBaseOperator.ToScript(strScript)
-        ElseIf bUseCommandString Then
-            strTemp = clsBaseCommandString.ToScript(strScript, strCommandString)
-        End If
-
-        If bExcludeAssignedFunctionOutput Then
-            'Sometimes the output of the R-command we deal with should not be part of the script...  
-            'That's only the case when this output has already been assigned.
-            If (bUseBaseFunction AndAlso clsBaseFunction.IsAssigned()) OrElse
-                (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) OrElse
-                (bUseCommandString AndAlso clsBaseFunction.IsAssigned()) Then
-                Return strScript
-            End If
-        End If
-        Return strScript & strTemp
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the list of scripts associated with the <paramref name="lstCodes"/> 
-    '''             list of R functions/operators/commands.
-    '''             If a list object is flagged to exclude the script's output, and the output has 
-    '''             already been assigned, then the list object's script does not include the output 
-    '''             part.</summary>
-    '''
-    ''' <param name="lstCodes"> The list of R functions/operators/commands. </param>
-    '''
-    ''' <returns>   list of scripts associated with the <paramref name="lstCodes"/>
-    '''             list of R functions/operators/commands. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Private Function GetScriptsFromCodeList(lstCodes As List(Of RCodeStructure)) As List(Of String)
-        Dim strScript As String = "" 'TODO SJL 06/04/20 redundant assignments
-        Dim strTemp As String = ""
-        Dim lstScripts As New List(Of String)
-
-        For Each clsTempCode In lstCodes
-            strScript = ""
-            strTemp = clsTempCode.ToScript(strScript)
-            'Sometimes the output of the R-command we deal with should not be part of the script... 
-            If clsTempCode.bExcludeAssignedFunctionOutput AndAlso Not String.IsNullOrEmpty(clsTempCode.GetRObjectToAssignTo) Then
-                lstScripts.Add(strScript)
-            Else
-                lstScripts.Add(strScript & strTemp)
-            End If
-        Next
-        Return lstScripts
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the list of scripts associated with the list of 'before' R 
-    '''             functions/operators/commands (i.e. the ones that run before the base R code).
-    '''             If a list object is flagged to exclude the script's output, and the output has
-    '''             already been assigned, then the list object's script does not include the output
-    '''             part. </summary>
-    '''
-    ''' <returns>   The list of scripts associated with the list of 'before' R
-    '''             functions/operators/commands. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetBeforeCodesScripts() As List(Of String)
-        lstBeforeCodes.Sort(AddressOf CompareCodePositions)
-        Return GetScriptsFromCodeList(lstBeforeCodes)
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the list of 'before' R functions/operators/commands (i.e. the ones that 
-    '''             run before the base R code). </summary>
-    '''
-    ''' <returns>   The list of 'before' R functions/operators/commands (i.e. the ones that run 
-    '''             before the base R code). </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetBeforeCodes() As List(Of RCodeStructure)
-        lstBeforeCodes.Sort(AddressOf CompareCodePositions)
-        Return lstBeforeCodes
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the list of scripts associated with the list of 'after' R
-    '''             functions/operators/commands (i.e. the ones that run after the base R code).
-    '''             If a list object is flagged to exclude the script's output, and the output has
-    '''             already been assigned, then the list object's script does not include the output
-    '''             part. </summary>
-    '''
-    ''' <returns>   The list of scripts associated with the list of 'after' R
-    '''             functions/operators/commands. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetAfterCodesScripts() As List(Of String)
-        lstAfterCodes.Sort(AddressOf CompareCodePositions)
-        Return GetScriptsFromCodeList(lstAfterCodes)
+    Public Function ContainsCode(clsRCode As RCodeStructure) As Boolean
+        Return (clsBaseFunction IsNot Nothing AndAlso clsBaseFunction.Equals(clsRCode)) _
+                OrElse (clsBaseOperator IsNot Nothing _
+                        AndAlso clsBaseOperator.Equals(clsRCode) _
+                        AndAlso clsBaseOperator.Equals(clsRCode)) _
+                OrElse lstBeforeCodes.Contains(clsRCode) _
+                OrElse lstAfterCodes.Contains(clsRCode)
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -529,8 +229,6 @@ Public Class RSyntax
             clsBaseFunction.GetAllAssignTo(lstCodes, lstValues)
         ElseIf bUseBaseOperator Then
             clsBaseOperator.GetAllAssignTo(lstCodes, lstValues)
-        ElseIf bUseCommandString Then
-            clsBaseCommandString.GetAllAssignTo(lstCodes, lstValues)
         End If
         lstBeforeCodes.Sort(AddressOf CompareCodePositions)
         For Each clsTempCode As RCodeStructure In lstBeforeCodes
@@ -542,176 +240,16 @@ Public Class RSyntax
         Next
     End Sub
 
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    Public Sub SortParameters()
-        'This sub is used to reorder the parameters according to their Position property.
-        'It will be called only in places where it is necessary ie before ToScript or RemoveAdditionalParameters in ROperator.
-    End Sub
-
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns the relative positions of <paramref name="clsMain"/> and 
-    '''             <paramref name="clsRelative"/>.
-    '''             If both have the same position then returns 0.
-    '''             If <paramref name="clsMain"/> is positioned before, then returns -1.
-    '''             If <paramref name="clsRelative"/> is positioned before, then returns 1. </summary>
+    ''' <summary>   Returns the list of 'before' R functions/operators/commands (i.e. the ones that 
+    '''             run before the base R code). </summary>
     '''
-    ''' <param name="clsMain">      First object to compare </param>
-    ''' <param name="clsRelative">  Second object to compare. </param>
-    '''
-    ''' <returns>   The relative positions of <paramref name="clsMain"/> and <paramref name="clsRelative"/>.
-    '''             If both have the same position then returns 0.
-    '''             If <paramref name="clsMain"/> is positioned before, then returns -1.
-    '''             If <paramref name="clsRelative"/> is positioned before, then returns 1.
-    '''             </returns>
+    ''' <returns>   The list of 'before' R functions/operators/commands (i.e. the ones that run 
+    '''             before the base R code). </returns>
     '''--------------------------------------------------------------------------------------------
-    Private Function CompareCodePositions(ByVal clsMain As RCodeStructure, ByVal clsRelative As RCodeStructure) As Integer
-        'Compares two RParameters according to their Position property. If x is "smaller" than y, then return -1, if they are "equal" return 0 else return 1.
-        If clsMain.iPosition = clsRelative.iPosition Then
-            Return 0
-        ElseIf clsRelative.iPosition = -1 Then
-            Return -1
-        ElseIf clsMain.iPosition = -1 Then
-            Return 1
-        Else
-            Return clsMain.iPosition.CompareTo(clsRelative.iPosition)
-        End If
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   If the output from the R command needs to be assigned, then returns
-    '''             the part of the script to the left of the assignment operator ('&lt;-').
-    '''             If the output from the R command doesn't to be assigned, then returns an empty 
-    '''             string. </summary>
-    '''
-    ''' <returns>   If the output from the R command needs to be assigned, then returns
-    '''             the part of the script to the left of the assignment operator ('&lt;-').
-    '''             If the output from the R command doesn't to be assigned, then returns an empty
-    '''             string. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetstrAssignTo() As String
-        If bUseBaseFunction Then
-            Return clsBaseFunction.GetRObjectToAssignTo()
-        ElseIf bUseBaseOperator Then
-            Return clsBaseOperator.GetRObjectToAssignTo()
-        ElseIf bUseCommandString Then
-            Return clsBaseCommandString.GetRObjectToAssignTo()
-        Else
-            Return ""
-        End If
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns true if <paramref name="clsNewRCode"/> is in the list of 'before' R
-    '''             functions/operators/commands (i.e. the ones that run before the base R code),
-    '''             else returns false.  </summary>
-    '''
-    ''' <param name="clsNewRCode">  The object to search for in the list of 'before' R
-    '''             functions/operators/commands. </param>
-    '''
-    ''' <returns>   True if <paramref name="clsNewRCode"/> is in the list of 'before' R
-    '''             functions/operators/commands (i.e. the ones that run before the base R code),
-    '''             else returns false. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function BeforeCodesContain(clsNewRCode As RCodeStructure) As Boolean
-        'TODO SJL 04/04/20 This function is only called from within this class. Make private? Or remove and inline the code?
-        Return lstBeforeCodes.Contains(clsNewRCode)
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns true if <paramref name="clsNewRCode"/> is in the list of 'after' R
-    '''             functions/operators/commands (i.e. the ones that run after the base R code),
-    '''             else returns false.  </summary>
-    '''
-    ''' <param name="clsNewRCode">  The object to search for in the list of 'after' R
-    '''             functions/operators/commands. </param>
-    '''
-    ''' <returns>   True if <paramref name="clsNewRCode"/> is in the list of 'after' R
-    '''             functions/operators/commands (i.e. the ones that run after the base R code),
-    '''             else returns false. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function AfterCodesContain(clsNewRCode As RCodeStructure) As Boolean
-        'TODO SJL 04/04/20 This function is only called from within this class. Make private? Or remove and inline the code?
-        Return lstAfterCodes.Contains(clsNewRCode)
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns true if a function named <paramref name="strFunctionName"/> is in the 
-    '''             list of 'before' R functions/operators/commands (i.e. the ones that run before 
-    '''             the base R code), else returns false.  </summary>
-    '''
-    ''' <param name="strFunctionName">  The function to search for in the list of 'before' R
-    '''                                 functions/operators/commands. </param>
-    '''
-    ''' <returns>   True if a function named <paramref name="strFunctionName"/> is in the
-    '''             list of 'before' R functions/operators/commands (i.e. the ones that run before
-    '''             the base R code), else returns false. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function BeforeCodesContain(strFunctionName As String) As Boolean
-        'TODO SJL 04/04/20 This function is only called from within this class. Inline or make private? 
-        Dim clsTempFunc As RFunction
-        For Each clsRCode As RCodeStructure In lstBeforeCodes
-            clsTempFunc = TryCast(clsRCode, RFunction)
-            If clsTempFunc IsNot Nothing AndAlso clsTempFunc.strRCommand = strFunctionName Then
-                Return True
-            End If
-        Next
-        Return False
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns true if a function named <paramref name="strFunctionName"/> is in the 
-    '''             list of 'after' R functions/operators/commands (i.e. the ones that run after 
-    '''             the base R code), else returns false.  </summary>
-    '''
-    ''' <param name="strFunctionName">  The function to search for in the list of 'after' R
-    '''                                 functions/operators/commands. </param>
-    '''
-    ''' <returns>   True if function <paramref name="strFunctionName"/> is in the list of 'after' R
-    '''             functions/operators/commands (i.e. the ones that run after the base R code),
-    '''             else returns false. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function AfterCodesContain(strFunctionName As String) As Boolean
-        'TODO SJL 04/04/20 This function is only called from within this class. Make private? 
-        'TODO SJL 06/04/20I think this function is identical to the function above! 
-        ' There's a bug in the list name below. Even after this is corrected, both functions could be 
-        ' combined into one (or they could call a shared private function).
-        Dim clsTempFunc As RFunction
-        For Each clsRCode As RCodeStructure In lstBeforeCodes 'TODO SJL 06/04/20 Should this be 'lstAfterCodes'?
-            clsTempFunc = TryCast(clsRCode, RFunction)
-            If clsTempFunc IsNot Nothing AndAlso clsTempFunc.strRCommand = strFunctionName Then
-                Return True
-            End If
-        Next
-        Return False
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Returns true if the <paramref name="clsRCode"/> R function/operator/command is
-    '''             the R function/operator/command associated with this object. Also returns true 
-    '''             if <paramref name="clsRCode"/> is in this object's 'before' or 'after' lists. 
-    '''             Else returns false.
-    '''             </summary>
-    '''
-    ''' <param name="clsRCode"> The R function/operator/command to search for. </param>
-    '''
-    ''' <returns>   True if the <paramref name="clsRCode"/> R function/operator/command is
-    '''             the R function/operator/command associated with this object. Also returns true
-    '''             if <paramref name="clsRCode"/> is in this object's 'before' or 'after' lists.
-    '''             Else returns false. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function ContainsCode(clsRCode As RCodeStructure) As Boolean
-        Return (clsBaseFunction IsNot Nothing AndAlso clsBaseFunction.Equals(clsRCode)) OrElse (clsBaseOperator IsNot Nothing AndAlso clsBaseOperator.Equals(clsRCode) AndAlso clsBaseOperator.Equals(clsRCode)) OrElse BeforeCodesContain(clsRCode) OrElse AfterCodesContain(clsRCode)
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 04/04/20 This function is not used, remove? </summary>
-    '''
-    ''' <param name="strFunctionName">  Name of the function. </param>
-    '''
-    ''' <returns>   True if it succeeds, false if it fails. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function ContainsFunctionName(strFunctionName As String) As Boolean
-        Return (clsBaseFunction IsNot Nothing AndAlso clsBaseFunction.strRCommand = strFunctionName) OrElse BeforeCodesContain(strFunctionName) OrElse AfterCodesContain(strFunctionName)
+    Public Function GetBeforeCodes() As List(Of RCodeStructure)
+        lstBeforeCodes.Sort(AddressOf CompareCodePositions)
+        Return lstBeforeCodes
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -744,68 +282,218 @@ Public Class RSyntax
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Adds R function/operation/command <paramref name="clsNewRCode"/> to the 
-    '''             'before' list. </summary>
+    ''' <summary>   Returns the script associated with this object's R function, R operator or 
+    '''             R command string. 
+    '''             If this object is flagged to exclude the script's output, and the output has 
+    '''             already been assigned, then the returned script does not include the output 
+    '''             part.</summary>
     '''
-    ''' <param name="clsNewRCode">  The R function/operation/command to add. </param>
-    ''' <param name="iPosition">    (Optional) The relative position of the parameter in this 
-    '''                             object's 'before' list. </param>
+    ''' <returns>   The script associated with this object's R function, R operator or R command 
+    '''             string. </returns>
     '''--------------------------------------------------------------------------------------------
-    Public Sub AddToBeforeCodes(clsNewRCode As RCodeStructure, Optional iPosition As Integer = -1)
-        If Not BeforeCodesContain(clsNewRCode) Then
-            lstBeforeCodes.Add(clsNewRCode)
+    Public Function GetScript() As String
+        Dim strTemp As String = ""
+        Dim strScript As String = ""
+
+        If bUseBaseFunction Then
+            strTemp = clsBaseFunction.ToScript(strScript)
+        ElseIf bUseBaseOperator Then
+            strTemp = clsBaseOperator.ToScript(strScript)
         End If
-        lstBeforeCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPosition
+
+        If bExcludeAssignedFunctionOutput Then
+            'Sometimes the output of the R-command we deal with should not be part of the script...  
+            'That's only the case when this output has already been assigned.
+            If (bUseBaseFunction AndAlso clsBaseFunction.IsAssigned()) OrElse
+                (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) Then
+                Return strScript
+            End If
+        End If
+        Return strScript & strTemp
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Returns the list of scripts associated with the <paramref name="lstCodes"/> 
+    '''             list of R functions/operators/commands.
+    '''             If a list object is flagged to exclude the script's output, and the output has 
+    '''             already been assigned, then the list object's script does not include the output 
+    '''             part.</summary>
+    '''
+    ''' <param name="lstCodes"> The list of R functions/operators/commands. </param>
+    '''
+    ''' <returns>   list of scripts associated with the <paramref name="lstCodes"/>
+    '''             list of R functions/operators/commands. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function GetScriptsFromCodeList(lstCodes As List(Of RCodeStructure)) As List(Of String)
+        Dim strItemScript As String
+        Dim strTemp As String
+        Dim lstScripts As New List(Of String)
+
+        For Each clsTempCode In lstCodes
+            strItemScript = ""
+            strTemp = clsTempCode.ToScript(strItemScript)
+            'Sometimes the output of the R-command we deal with should not be part of the script... 
+            If clsTempCode.bExcludeAssignedFunctionOutput AndAlso Not String.IsNullOrEmpty(clsTempCode.GetRObjectToAssignTo) Then
+                lstScripts.Add(strItemScript)
+            Else
+                lstScripts.Add(strItemScript & strTemp)
+            End If
+        Next
+        Return lstScripts
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Resets all the 'AssignTo' variables. 
+    '''             String variables are set to "".
+    '''             Booleans are set to false. 
+    '''             </summary>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub RemoveAssignTo()
+        If bUseBaseOperator Then
+            clsBaseOperator.RemoveAssignTo()
+        End If
+        If bUseBaseFunction Then 'TODO SJL 04/04/20 should this be ElseIf?
+            clsBaseFunction.RemoveAssignTo()
+        ElseIf bUseCommandString Then
+            clsBaseCommandString.RemoveAssignTo()
+        End If
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Adds R function/operation/command <paramref name="clsNewRCode"/> to the 
-    '''             'after' list. </summary>
+    ''' <summary> Removes <paramref name="clsNewRCode"/> from the statements executed after the 
+    ''' base statement.</summary>
     '''
-    ''' <param name="clsNewRCode">  The R function/operation/command to add. </param>
-    ''' <param name="iPosition">    (Optional) The relative position of the parameter in this 
-    '''                             object's 'after' list. </param>
+    ''' <param name="clsNewRCode">  The R statement to remove. </param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub AddToAfterCodes(clsNewRCode As RCodeStructure, Optional iPosition As Integer = -1)
-        If Not AfterCodesContain(clsNewRCode) Then
-            lstAfterCodes.Add(clsNewRCode)
-            clsNewRCode.iPosition = iPosition 'TODO SJL 06/04/20 remove this line and the 'Else' (same as function above)?
-        Else
-            lstAfterCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPosition
-        End If
+    Public Sub RemoveFromAfterCodes(clsNewRCode As RCodeStructure)
+        lstAfterCodes.Remove(clsNewRCode)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 06/04/20 This is a single line function on a public data member. 
-    '''             I'm not sure what it adds. Remove? </summary>
+    ''' <summary> Removes <paramref name="clsNewRCode"/> from the statements executed before the 
+    ''' base statement.</summary>
     '''
-    ''' <param name="clsNewRCode">  The cls new r code. </param>
+    ''' <param name="clsNewRCode">  The R statement to remove. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub RemoveFromBeforeCodes(clsNewRCode As RCodeStructure)
         lstBeforeCodes.Remove(clsNewRCode)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO SJL 06/04/20 This is a single line function on a public data member.
-    '''             I'm not sure what it adds. Remove?.</summary>
+    ''' <summary>   Removes the parameter named <paramref name="strParameterName"/>. </summary>
     '''
-    ''' <param name="clsNewRCode">  The cls new r code. </param>
+    ''' <param name="strParameterName"> Name of the parameter. </param>
+    ''' <param name="clsFunction">      [in,out] (Optional) The function to add the parameter to.
+    '''                                 If not specified then adds the parameter to 'clsBaseFunction'. </param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub RemoveFromAfterCodes(clsNewRCode As RCodeStructure)
-        lstAfterCodes.Remove(clsNewRCode)
+    Public Sub RemoveParameter(strParameterName As String, Optional ByRef clsFunction As RFunction = Nothing)
+        'TODO SJL 17/04/20 This function should only be used if this class encapsulates a function. But it doesn't check the booleans for this.
+        If clsFunction Is Nothing Then
+            clsFunction = clsBaseFunction
+        End If
+        clsFunction.RemoveParameterByName(strParameterName)
     End Sub
 
-    ''' <summary>   Resets all the data members to default values. </summary>
-    Public Sub ClearCodes()
-        'TODO SJL Some data members are not reset by this function. Add them?
-        lstBeforeCodes = New List(Of RCodeStructure)
-        lstAfterCodes = New List(Of RCodeStructure)
-        clsBaseFunction = New RFunction
-        clsBaseOperator = New ROperator
-        clsBaseCommandString = New RCodeStructure
-        strCommandString = ""
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>    Sets the 'assignTo' variables for this object's associated R function, R 
+    '''              operation or R command string. </summary>
+    '''
+    ''' <param name="strAssignToName">              The new value for the assignment string. </param>
+    ''' <param name="strTempDataframe">             (Optional) The new value for the dataframe. </param>
+    ''' <param name="strTempColumn">                (Optional) The new value for the column. </param>
+    ''' <param name="strTempModel">                 (Optional) The new value for the model. </param>
+    ''' <param name="strTempGraph">                 (Optional) The new value for the graph. </param>
+    ''' <param name="bAssignToIsPrefix">            (Optional) The new value for bAssignToIsPrefix. </param>
+    ''' <param name="bAssignToColumnWithoutNames">  (Optional) The new value for bAssignToColumnWithoutNames. </param>
+    ''' <param name="bInsertColumnBefore">          (Optional) The new value for bInsertColumnBefore. </param>
+    ''' <param name="bRequireCorrectLength">        (Optional) The new value for bRequireCorrectLength. </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub SetAssignTo(strAssignToName As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional strAdjacentColumn As String = "")
+        If bUseBaseOperator Then
+            clsBaseOperator.SetAssignTo(strTemp:=strAssignToName, strTempDataframe:=strTempDataframe, strTempColumn:=strTempColumn, strTempModel:=strTempModel, strTempGraph:=strTempGraph, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore, bRequireCorrectLength:=bRequireCorrectLength, strAdjacentColumn:=strAdjacentColumn)
+        ElseIf bUseBaseFunction Then
+            clsBaseFunction.SetAssignTo(strAssignToName, strTempDataframe:=strTempDataframe, strTempColumn:=strTempColumn, strTempModel:=strTempModel, strTempGraph:=strTempGraph, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore, bRequireCorrectLength:=bRequireCorrectLength, strAdjacentColumn:=strAdjacentColumn)
+        ElseIf bUseCommandString Then
+            clsBaseCommandString.SetAssignTo(strAssignToName, strTempDataframe:=strTempDataframe, strTempColumn:=strTempColumn, strTempModel:=strTempModel, strTempGraph:=strTempGraph, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore, bRequireCorrectLength:=bRequireCorrectLength, strAdjacentColumn:=strAdjacentColumn)
+        End If
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets this object to be R function <paramref name="clsFunction"/>. </summary>
+    '''
+    ''' <param name="clsFunction">  The R function to associate with this object. </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub SetBaseRFunction(clsFunction As RFunction)
+        clsBaseFunction = clsFunction
+        bUseBaseFunction = True
+        bUseBaseOperator = False
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets this object to be R operator <paramref name="clsOperator"/>. </summary>
+    '''
+    ''' <param name="clsOperator">  The R operator to associate with this object. </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub SetBaseROperator(clsOperator As ROperator)
+        clsBaseOperator = clsOperator
         bUseBaseFunction = False
+        bUseBaseOperator = True
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets this object's R command to <paramref name="strCommand"/>. This object's 
+    '''             R command is then just a string (rather than a function or operation object)
+    '''             </summary>
+    '''
+    ''' <param name="strCommand">   The R command string. </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub SetCommandString(strCommand As String)
+        strCommandString = strCommand
+        bUseBaseFunction = False
+        bUseBaseOperator = False
+        bUseCommandString = True
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Sets the function's name (e.g. "facet_grid") and flags that the R script 
+    '''             associated with this object is no longer correctly assigned.</summary>
+    '''
+    ''' <param name="strFunctionName">  Name of the R command. </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub SetFunction(strFunctionName As String)
+        clsBaseFunction.SetRCommand(strFunctionName)
+        bUseBaseFunction = True
         bUseBaseOperator = False
         bUseCommandString = False
     End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Returns the relative positions of <paramref name="clsMain"/> and 
+    '''             <paramref name="clsRelative"/>.
+    '''             If both have the same position then returns 0.
+    '''             If <paramref name="clsMain"/> is positioned before, then returns -1.
+    '''             If <paramref name="clsRelative"/> is positioned before, then returns 1. </summary>
+    '''
+    ''' <param name="clsMain">      First object to compare </param>
+    ''' <param name="clsRelative">  Second object to compare. </param>
+    '''
+    ''' <returns>   The relative positions of <paramref name="clsMain"/> and <paramref name="clsRelative"/>.
+    '''             If both have the same position then returns 0.
+    '''             If <paramref name="clsMain"/> is positioned before, then returns -1.
+    '''             If <paramref name="clsRelative"/> is positioned before, then returns 1.
+    '''             </returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function CompareCodePositions(ByVal clsMain As RCodeStructure, ByVal clsRelative As RCodeStructure) As Integer
+        'Compares two RParameters according to their Position property. If x is "smaller" than y, then return -1, if they are "equal" return 0 else return 1.
+        If clsMain.iPosition = clsRelative.iPosition Then
+            Return 0
+        ElseIf clsRelative.iPosition = -1 Then
+            Return -1
+        ElseIf clsMain.iPosition = -1 Then
+            Return 1
+        Else
+            Return clsMain.iPosition.CompareTo(clsRelative.iPosition)
+        End If
+    End Function
+
 End Class

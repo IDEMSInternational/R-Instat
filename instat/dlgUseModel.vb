@@ -256,7 +256,7 @@ Public Class dlgUseModel
         Dim strModel As String
         Dim item As ListViewItem
 
-        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+        ucrBase.clsRsyntax.GetBeforeCodes.Clear()
         clsGetModel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
         ucrInputModels.SetName("[No models selected]")
         strExpression = ucrReceiverForTestColumn.GetVariableNames(False)
@@ -277,7 +277,7 @@ Public Class dlgUseModel
         End If
         'Checking if the commandString contains the commands from the segmented ,davie and pscore buttons.If so Again check if the list of before codes contains the clsAttach function before adiing
         If Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::segmented") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::davies.test") = 0) Or Not (InStr(ucrBase.clsRsyntax.strCommandString, "segmented::pscore.test") = 0) Then
-            If Not ucrBase.clsRsyntax.lstBeforeCodes.Contains(clsAttach) Then
+            If Not ucrBase.clsRsyntax.GetBeforeCodes().Contains(clsAttach) Then
                 ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
             End If
 

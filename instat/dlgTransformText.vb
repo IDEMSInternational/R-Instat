@@ -50,7 +50,6 @@ Public Class dlgTransformText
         Dim dctInputSeparator As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 343
-        ucrBase.clsRsyntax.bUseBaseFunction = True
 
         'ucrReceiver
         ucrReceiverTransformText.SetParameter(New RParameter("string", 0))
