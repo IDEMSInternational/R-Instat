@@ -3444,6 +3444,7 @@ Public Class sdgPlots
         sdgThemesSub.ShowDialog()
         bResetThemes = False
         SetRcodeForCommonThemesControls(False)
+        ucrChkLegendPosition.Checked = False
     End Sub
 
     Private Sub ucrChkUsePolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUsePolarCoordinates.ControlValueChanged
