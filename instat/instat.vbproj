@@ -245,6 +245,12 @@
     <Compile Include="dlgEdit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportClimaticDefinitions.Designer.vb">
+      <DependentUpon>dlgExportClimaticDefinitions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportClimaticDefinitions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportForClimpact.Designer.vb">
       <DependentUpon>dlgExportForClimpact.vb</DependentUpon>
     </Compile>
@@ -3082,6 +3088,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEdit.resx">
       <DependentUpon>dlgEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportClimaticDefinitions.resx">
+      <DependentUpon>dlgExportClimaticDefinitions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportForClimpact.resx">
       <DependentUpon>dlgExportForClimpact.vb</DependentUpon>
