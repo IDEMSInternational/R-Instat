@@ -142,6 +142,26 @@ Public Class dlgScatterPlot
         ucrChkAddSidePlot.SetText("Side Plot")
         ucrChkAddSidePlot.Enabled = False
 
+        ucrChkSize.SetText("Size")
+        ucrChkSize.AddParameterPresentCondition(True, "geom_point")
+        ucrChkSize.AddParameterPresentCondition(False, "geom_point", False)
+        ucrChkSize.AddToLinkedControls({ucrNudPointsize}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkShape.SetText("Shape")
+        ucrChkShape.AddParameterPresentCondition(True, "geom_point")
+        ucrChkShape.AddParameterPresentCondition(False, "geom_point", False)
+        ucrChkShape.AddToLinkedControls({ucrInputShape}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkColour.SetText("Colour")
+        ucrChkColour.AddParameterPresentCondition(True, "geom_count")
+        ucrChkColour.AddParameterPresentCondition(False, "geom_count", False)
+        ucrChkColour.AddToLinkedControls({ucrInputLegend}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkPosition.SetText("Position")
+        ucrChkPosition.AddParameterPresentCondition(True, "geom_count")
+        ucrChkPosition.AddParameterPresentCondition(False, "geom_count", False)
+        ucrChkPosition.AddToLinkedControls({ucrInputPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlGeoms.AddRadioButton(rdoJitter)
         ucrPnlGeoms.AddRadioButton(rdoPoint)
         ucrPnlGeoms.AddRadioButton(rdoCount)
@@ -150,9 +170,10 @@ Public Class dlgScatterPlot
         ucrPnlGeoms.AddParameterValuesCondition(rdoCount, "checked", "geom_count")
         ucrPnlGeoms.AddParameterValuesCondition(rdoJitter, "checked", "geom_jitter")
         ucrPnlGeoms.AddToLinkedControls({ucrNudWidth, ucrNudHeigth}, {rdoJitter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.40")
-        ucrPnlGeoms.AddToLinkedControls({ucrNudPointsize, ucrInputShape}, {rdoPoint}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGeoms.AddToLinkedControls(ucrInputPosition, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="identity")
-        ucrPnlGeoms.AddToLinkedControls(ucrInputLegend, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
+        ucrPnlGeoms.AddToLinkedControls({ucrNudPointsize, ucrChkSize, ucrInputShape, ucrChkShape}, {rdoPoint}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeoms.AddToLinkedControls({ucrInputPosition}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="identity")
+        ucrPnlGeoms.AddToLinkedControls({ucrInputLegend}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
+        ucrPnlGeoms.AddToLinkedControls({ucrChkPosition, ucrChkColour}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveScatterPlot.SetPrefix("scatter_plot")
         ucrSaveScatterPlot.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph,
@@ -727,6 +748,14 @@ Public Class dlgScatterPlot
         End If
 
         SetPipeAssignTo()
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrSaveScatterPlot_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+
     End Sub
 
     Private Sub SetPipeAssignTo()
