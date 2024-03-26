@@ -754,21 +754,14 @@ Public Class dlgTransform
 
     Private Sub TestOKEnabled()
         If rdoNumeric.Checked AndAlso rdoLogical.Checked Then
-            If rdoSingle.Checked Then
-                If Not ucrInputLogicOperations.GetText = "is.na" AndAlso Not ucrInputLogicOperations.GetText = "!is.na" Then
-                    ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete AndAlso Not ucrInputLogicalValues.IsEmpty)
-                Else
-                    ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete)
-                End If
-            ElseIf rdoMultiple.Checked Then
-                If Not ucrInputLogicOperations.GetText = "is.na" AndAlso Not ucrInputLogicOperations.GetText = "!is.na" Then
-                    ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso Not ucrInputLogicalValues.IsEmpty)
-                Else
-                    ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty())
-                End If
+            If Not ucrInputLogicOperations.GetText = "is.na" AndAlso Not ucrInputLogicOperations.GetText = "!is.na" Then
+                ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete AndAlso Not ucrInputLogicalValues.IsEmpty)
             Else
-                ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty())
+                ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty() AndAlso ucrSaveNew.IsComplete)
             End If
+
+        Else
+            ucrBase.OKEnabled(Not ucrReceiverRank.IsEmpty())
         End If
     End Sub
 
