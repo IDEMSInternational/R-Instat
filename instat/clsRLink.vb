@@ -749,8 +749,24 @@ Public Class RLink
                          bShowWaitDialogOverride:=Nothing)
             End If
 
-            clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
-                    bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
+             ' Split the strOutput into an array of lines, removing empty entries
+            Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+
+            ' Check if arrFilesPaths has at least one element before iterating
+            If arrFilesPaths.Length > 0 Then
+                ' Iterate through each file path
+                For Each _path In arrFilesPaths
+                    ' Add output to logger
+                    clsOutputLogger.AddOutput(clsRStatement.Text, _path, bAsFile:=True,
+                        bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
+                Next
+            Else
+                ' Add output to logger
+                clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
+                        bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
+            End If
+
+            ' Log the script
             LogScript(clsRStatement.Text.TrimEnd(vbCr, vbLf))
 
         Catch e As Exception
