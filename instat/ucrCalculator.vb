@@ -105,7 +105,6 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdNasplin, "Spline interpolation of missing values. For example na.spline(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,2.5,4,7,12)")
         ttCalculator.SetToolTip(cmdNaest, "Missing values as the mean (usually) overall or with a factor. For example na.aggregate(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,3.75,4,7,3.75)")
 
-
         ttCalculator.SetToolTip(cmdPower, "power(^)or exponent and can also be given as **. For example 2^3 = 8")
         ttCalculator.SetToolTip(cmdLesser, "less than(<). For example (2 < 3) is TRUE. (2 < 2) is FALSE, (2 < 1) is FALSE")
         ttCalculator.SetToolTip(cmdLesserOrEqualsTo, "less than or equals(<=). For example (2 <= 3) is TRUE, (2 <=2) is TRUE, (2 <= 1) is FALSE")
@@ -348,7 +347,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdInternet_Browser, "Sample from ""Which browser do you use?"" with Chrome, IE, Firefox, Safari, Opera, Android, being the options")
         ttCalculator.SetToolTip(cmdIq, "Sample from normal distribution with default of mean 100 and sd 15 - not 10 as provided by the package")
         ttCalculator.SetToolTip(cmdLanguage, "Sample of world's languages with default being list of 99 languages, provided, together with their proportions")
-        ttCalculator.SetToolTip(cmdWakefield_lower_factor, "Sample of single letters, with default being one of a,b,c,d,e")
+        ttCalculator.SetToolTip(cmdWakefieldLower, "Sample of single letters, with default being one of a,b,c,d,e")
         ttCalculator.SetToolTip(cmdMath, "Sample of integers with default of 1 to 4, and probabilities based on New York grading in maths for Grades 3 to 8 children. (Called level instead if equally likely)")
         ttCalculator.SetToolTip(cmdWakefieldMinute, "Sample of minutes as H:M:S time elements. (Tweak command to hours or seconds if needed)")
         ttCalculator.SetToolTip(cmdLikert, "Sample from 5-point scale, ranging from strongly agree to strongly disagree, with default of equal probabilities")
@@ -370,9 +369,10 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdSpeed, "Sample from normal distribution, with default mean 55 and sd 10")
         ttCalculator.SetToolTip(cmdState, "Sample with default from the 50 US states in proportion to their 2010 populations")
         ttCalculator.SetToolTip(cmdString, "Sample with default of 10 random alphanumeric characters")
-        ttCalculator.SetToolTip(cmdWakefield_Upper_factor, "Sample of single capital letter, with default being one of A, B, C, D, E")
+        ttCalculator.SetToolTip(cmdWakefieldUpper, "Sample of single capital letter, with default being one of A, B, C, D, E")
         ttCalculator.SetToolTip(cmdValid, "Logical (TRUE/FALSE) sample with default being equal probability")
         ttCalculator.SetToolTip(cmdWakefield_Year, "Sample of years with default from 1996 to current year, with equal probability")
+        ttCalculator.SetToolTip(cmdLikert7, " Sample from 7-point scale, ranging from strongly agree to strongly disagree, with default of equal probabilities")
 
         Const strTooltipCmdLength = "number of observations: For example length(c(1,2,3,4,NA)) = 5 "
         ttCalculator.SetToolTip(cmdLength, strTooltipCmdLength)
@@ -2285,7 +2285,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldDeathFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdGrade_Letter_Click(sender As Object, e As EventArgs) Handles cmdGrade_letter.Click
+    Private Sub cmdGrade_Letter_Click(sender As Object, e As EventArgs) Handles cmdGrade_Letter.Click
         Dim clsWakefieldgrade_letterFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
@@ -2297,7 +2297,7 @@ Public Class ucrCalculator
         clsWakefieldgrade_letterFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
         clsWakefieldgrade_letterFunction.AddParameter("mean", "88", iPosition:=1)
         clsWakefieldgrade_letterFunction.AddParameter("sd", "4", iPosition:=2)
-        clsWakefieldgrade_letterFunction.AddParameter("name", Chr(34) & "Grade_letter" & Chr(34), iPosition:=3)
+        clsWakefieldgrade_letterFunction.AddParameter("name", Chr(34) & "Grade_Letter" & Chr(34), iPosition:=3)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldgrade_letterFunction.ToScript, 0)
     End Sub
@@ -2717,23 +2717,6 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldLanguageFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdWakefieldLower_Click(sender As Object, e As EventArgs)
-        Dim clsWakefieldLowerFunction As New RFunction
-        Dim clsWakefieldNrowFunction As New RFunction
-
-        clsWakefieldNrowFunction.SetRCommand("nrow")
-        clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
-
-        clsWakefieldLowerFunction.SetPackageName("wakefield")
-        clsWakefieldLowerFunction.SetRCommand("lower")
-        clsWakefieldLowerFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
-        clsWakefieldLowerFunction.AddParameter("k", "5", iPosition:=1)
-        clsWakefieldLowerFunction.AddParameter("x", "LETTERS", iPosition:=2)
-        clsWakefieldLowerFunction.AddParameter("prob", "NULL", iPosition:=3)
-        clsWakefieldLowerFunction.AddParameter("name", Chr(34) & "Lower" & Chr(34), iPosition:=4)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldLowerFunction.ToScript, 0)
-    End Sub
     Private Sub cmdMath_Click(sender As Object, e As EventArgs) Handles cmdMath.Click
         Dim clsWakefieldMathFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
@@ -2758,7 +2741,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldMathFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdWakefieldMinute_Click(sender As Object, e As EventArgs) Handles cmdWakefieldMinute.Click '""""""
+    Private Sub cmdWakefieldMinute_Click(sender As Object, e As EventArgs) Handles cmdWakefieldMinute.Click
         Dim clsWakefieldMinuteFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
@@ -2768,7 +2751,10 @@ Public Class ucrCalculator
         clsWakefieldMinuteFunction.SetPackageName("wakefield")
         clsWakefieldMinuteFunction.SetRCommand("minute")
         clsWakefieldMinuteFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
-        clsWakefieldMinuteFunction.AddParameter("name", Chr(34) & "Minute" & Chr(34), iPosition:=3)
+        clsWakefieldMinuteFunction.AddParameter("x", "seq(0, 59, by = 1)/60 ", iPosition:=1)
+        clsWakefieldMinuteFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldMinuteFunction.AddParameter("random", "FALSE", iPosition:=3)
+        clsWakefieldMinuteFunction.AddParameter("name", Chr(34) & "Minute" & Chr(34), iPosition:=4)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldMinuteFunction.ToScript, 0)
     End Sub
@@ -3141,18 +3127,21 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdWakefieldTimes_Click(sender As Object, e As EventArgs) Handles cmdWakefieldTimes.Click
-        Dim clsWakefieldtime_stampFunction As New RFunction
+        Dim clsWakefieldTimestampFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
 
-        clsWakefieldtime_stampFunction.SetPackageName("wakefield")
-        clsWakefieldtime_stampFunction.SetRCommand("time_stamp")
-        clsWakefieldtime_stampFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
-        clsWakefieldtime_stampFunction.AddParameter("name", Chr(34) & "Time_stamp" & Chr(34), iPosition:=3)
+        clsWakefieldTimestampFunction.SetPackageName("wakefield")
+        clsWakefieldTimestampFunction.SetRCommand("time_stamp")
+        clsWakefieldTimestampFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldTimestampFunction.AddParameter("x", "seq(0, 23, by = 1)", iPosition:=1)
+        clsWakefieldTimestampFunction.AddParameter("prob", "NULL", iPosition:=2)
+        clsWakefieldTimestampFunction.AddParameter("random", "FALSE", iPosition:=3)
+        clsWakefieldTimestampFunction.AddParameter("name", Chr(34) & "Time" & Chr(34), iPosition:=4)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldtime_stampFunction.ToScript, 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldTimestampFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdSmokes_Click(sender As Object, e As EventArgs) Handles cmdSmokes.Click
@@ -3243,12 +3232,12 @@ Public Class ucrCalculator
         clsWakefieldUpper_factorFunction.AddParameter("k", "5", iPosition:=1)
         clsWakefieldUpper_factorFunction.AddParameter("x", "LETTERS", iPosition:=2)
         clsWakefieldUpper_factorFunction.AddParameter("prob", "NULL", iPosition:=3)
-        clsWakefieldUpper_factorFunction.AddParameter("name", Chr(34) & "Upper_factor" & Chr(34), iPosition:=4)
+        clsWakefieldUpper_factorFunction.AddParameter("name", Chr(34) & "Upper" & Chr(34), iPosition:=4)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldUpper_factorFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdWakefield_lower_factor_click(sender As Object, e As EventArgs) Handles cmdWakefieldLower.Click
+    Private Sub cmdWakefieldLower_click(sender As Object, e As EventArgs) Handles cmdWakefieldLower.Click
         Dim clsWakefieldLower_FactorFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
 
@@ -3261,7 +3250,7 @@ Public Class ucrCalculator
         clsWakefieldLower_FactorFunction.AddParameter("k", "5", iPosition:=1)
         clsWakefieldLower_FactorFunction.AddParameter("x", "letters", iPosition:=2)
         clsWakefieldLower_FactorFunction.AddParameter("prob", "NULL", iPosition:=3)
-        clsWakefieldLower_FactorFunction.AddParameter("name", Chr(34) & "Lower_factor" & Chr(34), iPosition:=4)
+        clsWakefieldLower_FactorFunction.AddParameter("name", Chr(34) & "Lower" & Chr(34), iPosition:=4)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldLower_FactorFunction.ToScript, 0)
     End Sub
@@ -3727,7 +3716,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdLikert7_Click(sender As Object, e As EventArgs) Handles cmdLinkert7.Click '""""""""
+    Private Sub cmdLikert7_Click(sender As Object, e As EventArgs) Handles cmdLikert7.Click
         Dim clsWakefieldLikert7Function As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsLikert7ListFunction As New RFunction
@@ -5546,9 +5535,5 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
         End If
-    End Sub
-
-    Private Sub cmdWakefieldLower_Click_1(sender As Object, e As EventArgs) Handles cmdWakefieldLower.Click
-
     End Sub
 End Class
