@@ -2686,4 +2686,8 @@ Public Class frmMain
     Private Sub mnuClimaticDescribeClimograph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeClimograph.Click
         dlgClimograph.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticFileExportToGoogleBucketsToolStrip_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToGoogleBucketsToolStrip.Click
+        dlgExportClimaticDefinitions.ShowDialog()
+    End Sub
 End Class
