@@ -3141,14 +3141,6 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
   if (!is.na(per)) {
     title <- paste0(title, "\n", per)
   }
-  sub <- paste(round(mean(dat_long_end[dat_long_end$interpolate == FALSE, ]$tm), 1),
-               "C        ",
-               prettyNum(round(sum(dat_long_end[dat_long_end$interpolate == FALSE, ][[p_mes]])), big.mark = ","), " mm", sep = "")
-  
-  maxtm <- prettyNum(round(max(dat_long_end[[tm_max]]), 1))
-  mintm <- prettyNum(round(min(dat_long_end[[tm_min]]), 1))
-  tags <- paste0(paste0(rep(" \n", 6), collapse = ""), maxtm, 
-                 paste0(rep(" \n", 10), collapse = ""), mintm)
   month_breaks <- dat_long_end[dat_long_end[[month]] != "", ]$indrow
   month_labs <- dat_long_end[dat_long_end[[month]] != "", ][[month]]
   
@@ -3203,7 +3195,6 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
     scale_y_continuous("C", limits = c(ymin, ymax), labels = templabs, 
      breaks = range_tm, sec.axis = dup_axis(name = "mm", labels = preclabs))
   wandlplot <- wandlplot +
-    ggplot2::labs(title = title, subtitle = sub, tag = tags) +
     ggplot2::theme_classic() +
     ggplot2::theme(plot.title = element_text(lineheight = 1, size = 14, face = "bold"),
                    plot.subtitle = element_text(hjust = 1, vjust = 1, size = 14),
