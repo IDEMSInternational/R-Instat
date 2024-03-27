@@ -814,4 +814,12 @@ Public Class dlgScatterPlot
     Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorOptionalReceiver.ControlValueChanged
         AddRemoveGroupAesVar()
     End Sub
+
+    Private Sub ucrChkSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSize.ControlValueChanged, ucrNudPointsize.ControlValueChanged
+        If ucrChkSize.Checked AndAlso (Not ucrNudPointsize.IsEmpty) Then
+            clsRScatterGeomFunction.AddParameter("size", ucrNudPointsize.GetText, iPosition:=0)
+        Else
+            clsRScatterGeomFunction.RemoveParameterByName("size")
+        End If
+    End Sub
 End Class
