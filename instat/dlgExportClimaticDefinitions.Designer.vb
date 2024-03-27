@@ -39,12 +39,12 @@ Partial Class dlgExportClimaticDefinitions
         Me.lblCropData = New System.Windows.Forms.Label()
         Me.lblMaxTemp = New System.Windows.Forms.Label()
         Me.grpSummaries = New System.Windows.Forms.GroupBox()
-        Me.ucrChkAnnualRainfall = New instat.ucrCheck()
-        Me.ucrChkAnnualTemp = New instat.ucrCheck()
-        Me.ucrCropSuccessProp = New instat.ucrCheck()
-        Me.ucrChkExtremes = New instat.ucrCheck()
-        Me.ucrChkSeasonStartProp = New instat.ucrCheck()
         Me.ucrChkMonthlyTemp = New instat.ucrCheck()
+        Me.ucrChkSeasonStartProp = New instat.ucrCheck()
+        Me.ucrChkExtremes = New instat.ucrCheck()
+        Me.ucrCropSuccessProp = New instat.ucrCheck()
+        Me.ucrChkAnnualTemp = New instat.ucrCheck()
+        Me.ucrChkAnnualRainfall = New instat.ucrCheck()
         Me.ucrChkIncludeSummaryData = New instat.ucrCheck()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
@@ -238,41 +238,14 @@ Partial Class dlgExportClimaticDefinitions
         Me.grpSummaries.TabStop = False
         Me.grpSummaries.Text = "Summaries"
         '
-        'ucrChkAnnualRainfall
+        'ucrChkMonthlyTemp
         '
-        Me.ucrChkAnnualRainfall.AutoSize = True
-        Me.ucrChkAnnualRainfall.Checked = False
-        Me.ucrChkAnnualRainfall.Location = New System.Drawing.Point(5, 18)
-        Me.ucrChkAnnualRainfall.Name = "ucrChkAnnualRainfall"
-        Me.ucrChkAnnualRainfall.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkAnnualRainfall.TabIndex = 0
-        '
-        'ucrChkAnnualTemp
-        '
-        Me.ucrChkAnnualTemp.AutoSize = True
-        Me.ucrChkAnnualTemp.Checked = False
-        Me.ucrChkAnnualTemp.Location = New System.Drawing.Point(5, 46)
-        Me.ucrChkAnnualTemp.Name = "ucrChkAnnualTemp"
-        Me.ucrChkAnnualTemp.Size = New System.Drawing.Size(143, 23)
-        Me.ucrChkAnnualTemp.TabIndex = 1
-        '
-        'ucrCropSuccessProp
-        '
-        Me.ucrCropSuccessProp.AutoSize = True
-        Me.ucrCropSuccessProp.Checked = False
-        Me.ucrCropSuccessProp.Location = New System.Drawing.Point(154, 16)
-        Me.ucrCropSuccessProp.Name = "ucrCropSuccessProp"
-        Me.ucrCropSuccessProp.Size = New System.Drawing.Size(138, 23)
-        Me.ucrCropSuccessProp.TabIndex = 2
-        '
-        'ucrChkExtremes
-        '
-        Me.ucrChkExtremes.AutoSize = True
-        Me.ucrChkExtremes.Checked = False
-        Me.ucrChkExtremes.Location = New System.Drawing.Point(160, 76)
-        Me.ucrChkExtremes.Name = "ucrChkExtremes"
-        Me.ucrChkExtremes.Size = New System.Drawing.Size(132, 23)
-        Me.ucrChkExtremes.TabIndex = 3
+        Me.ucrChkMonthlyTemp.AutoSize = True
+        Me.ucrChkMonthlyTemp.Checked = False
+        Me.ucrChkMonthlyTemp.Location = New System.Drawing.Point(7, 78)
+        Me.ucrChkMonthlyTemp.Name = "ucrChkMonthlyTemp"
+        Me.ucrChkMonthlyTemp.Size = New System.Drawing.Size(141, 23)
+        Me.ucrChkMonthlyTemp.TabIndex = 5
         '
         'ucrChkSeasonStartProp
         '
@@ -283,14 +256,41 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkSeasonStartProp.Size = New System.Drawing.Size(136, 23)
         Me.ucrChkSeasonStartProp.TabIndex = 4
         '
-        'ucrChkMonthlyTemp
+        'ucrChkExtremes
         '
-        Me.ucrChkMonthlyTemp.AutoSize = True
-        Me.ucrChkMonthlyTemp.Checked = False
-        Me.ucrChkMonthlyTemp.Location = New System.Drawing.Point(7, 78)
-        Me.ucrChkMonthlyTemp.Name = "ucrChkMonthlyTemp"
-        Me.ucrChkMonthlyTemp.Size = New System.Drawing.Size(141, 23)
-        Me.ucrChkMonthlyTemp.TabIndex = 5
+        Me.ucrChkExtremes.AutoSize = True
+        Me.ucrChkExtremes.Checked = False
+        Me.ucrChkExtremes.Location = New System.Drawing.Point(160, 76)
+        Me.ucrChkExtremes.Name = "ucrChkExtremes"
+        Me.ucrChkExtremes.Size = New System.Drawing.Size(132, 23)
+        Me.ucrChkExtremes.TabIndex = 3
+        '
+        'ucrCropSuccessProp
+        '
+        Me.ucrCropSuccessProp.AutoSize = True
+        Me.ucrCropSuccessProp.Checked = False
+        Me.ucrCropSuccessProp.Location = New System.Drawing.Point(154, 16)
+        Me.ucrCropSuccessProp.Name = "ucrCropSuccessProp"
+        Me.ucrCropSuccessProp.Size = New System.Drawing.Size(138, 23)
+        Me.ucrCropSuccessProp.TabIndex = 2
+        '
+        'ucrChkAnnualTemp
+        '
+        Me.ucrChkAnnualTemp.AutoSize = True
+        Me.ucrChkAnnualTemp.Checked = False
+        Me.ucrChkAnnualTemp.Location = New System.Drawing.Point(5, 46)
+        Me.ucrChkAnnualTemp.Name = "ucrChkAnnualTemp"
+        Me.ucrChkAnnualTemp.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkAnnualTemp.TabIndex = 1
+        '
+        'ucrChkAnnualRainfall
+        '
+        Me.ucrChkAnnualRainfall.AutoSize = True
+        Me.ucrChkAnnualRainfall.Checked = False
+        Me.ucrChkAnnualRainfall.Location = New System.Drawing.Point(5, 18)
+        Me.ucrChkAnnualRainfall.Name = "ucrChkAnnualRainfall"
+        Me.ucrChkAnnualRainfall.Size = New System.Drawing.Size(143, 23)
+        Me.ucrChkAnnualRainfall.TabIndex = 0
         '
         'ucrChkIncludeSummaryData
         '
