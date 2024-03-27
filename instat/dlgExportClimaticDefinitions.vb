@@ -48,6 +48,8 @@ Public Class dlgExportClimaticDefinitions
 
         ucrChkCropSuccessProp.SetText("Crop Success Probabilities")
 
+        ucrChkIncludeSummaryData.SetText("Include Summary Data")
+
     End Sub
 
     Private Sub SetDefaults()
@@ -62,5 +64,29 @@ Public Class dlgExportClimaticDefinitions
 
     End Sub
 
+    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+        SelectFileToSave()
+    End Sub
 
+    Private Sub SelectFileToSave()
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save Climatic Def File"
+            dlgSave.Filter = "Comma separated file (*.csv)|*.csv"
+            If ucrInputExportFile.GetText() <> "" Then
+                dlgSave.InitialDirectory = ucrInputExportFile.GetText().Replace("/", "\")
+            Else
+                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            End If
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                ucrInputExportFile.SetName(dlgSave.FileName.Replace("\", "/"))
+            End If
+            TestOkEnabled()
+        End Using
+    End Sub
+
+    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
+        If ucrInputExportFile.IsEmpty() Then
+            SelectFileToSave()
+        End If
+    End Sub
 End Class
