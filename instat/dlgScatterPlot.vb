@@ -20,6 +20,8 @@ Public Class dlgScatterPlot
     Private clsRScatterGeomFunction, clsLabelFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsLocalRaesFunction As New RFunction
+    Private clsGroupAesFuction As New RFunction
+    Private clsGroupAesVarFuction As New RFunction
     Private clsBaseOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -318,6 +320,9 @@ Public Class dlgScatterPlot
         clsFacetColOp = New ROperator
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
+        clsGroupAesFuction = New RFunction
+        clsGroupAesVarFuction = New RFunction
+
 
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
@@ -359,6 +364,12 @@ Public Class dlgScatterPlot
 
         clsLabelFunction.SetPackageName("ggrepel")
         clsLabelFunction.SetRCommand("geom_text_repel")
+
+        clsGroupAesFuction.SetPackageName("ggplot2")
+        clsGroupAesFuction.SetRCommand("aes")
+
+        clsGroupAesVarFuction.SetPackageName("ggplot2")
+        clsGroupAesVarFuction.SetRCommand("aes")
 
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
@@ -712,6 +723,7 @@ Public Class dlgScatterPlot
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrReceiverX.ControlValueChanged
         AddRemoveFacets()
         AddRemoveGroupBy()
+        AddRemoveGroupAesVar()
     End Sub
 
     Private Sub GetParameterValue(clsOperator As ROperator)
@@ -771,4 +783,43 @@ Public Class dlgScatterPlot
         SetPipeAssignTo()
     End Sub
 
+    Private Sub AddRemoveGroupAesVar()
+        clsGroupAesFuction.RemoveParameterByName("group")
+        clsGroupAesVarFuction.RemoveParameterByName("group")
+        clsGeomSmoothFunction.RemoveParameterByName("group_aes")
+        clsGeomSmoothFunction.RemoveParameterByName("group_aes1")
+        If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType = "factor" OrElse ucrReceiverX.strCurrDataType = "ordered,factor" Then
+            If Not ucrFactorOptionalReceiver.IsEmpty AndAlso ucrFactorOptionalReceiver.strCurrDataType = "factor" OrElse ucrFactorOptionalReceiver.strCurrDataType = "ordered,factor" Then
+                ' Add group parameter with variable names
+                clsGroupAesFuction.AddParameter("group", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=0)
+                clsGeomSmoothFunction.AddParameter("group_aes1", clsRFunctionParameter:=clsGroupAesFuction, bIncludeArgumentName:=False)
+                clsGroupAesVarFuction.RemoveParameterByName("group")
+                clsGeomSmoothFunction.RemoveParameterByName("group_aes")
+            Else
+                ' Add group parameter without variable names
+                clsGroupAesVarFuction.AddParameter("group", 1, iPosition:=0)
+                clsGeomSmoothFunction.AddParameter("group_aes", clsRFunctionParameter:=clsGroupAesVarFuction, bIncludeArgumentName:=False)
+                clsGroupAesFuction.RemoveParameterByName("group")
+                clsGeomSmoothFunction.RemoveParameterByName("group_aes1")
+            End If
+        Else
+            ' Remove group parameters
+            clsGroupAesFuction.RemoveParameterByName("group")
+            clsGroupAesVarFuction.RemoveParameterByName("group")
+            clsGeomSmoothFunction.RemoveParameterByName("group_aes")
+            clsGeomSmoothFunction.RemoveParameterByName("group_aes1")
+        End If
+    End Sub
+
+    Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorOptionalReceiver.ControlValueChanged
+        AddRemoveGroupAesVar()
+    End Sub
+
+    Private Sub ucrChkSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSize.ControlValueChanged, ucrNudPointsize.ControlValueChanged
+        If ucrChkSize.Checked AndAlso (Not ucrNudPointsize.IsEmpty) Then
+            clsRScatterGeomFunction.AddParameter("size", ucrNudPointsize.GetText, iPosition:=0)
+        Else
+            clsRScatterGeomFunction.RemoveParameterByName("size")
+        End If
+    End Sub
 End Class

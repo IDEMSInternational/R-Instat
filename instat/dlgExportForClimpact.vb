@@ -37,7 +37,7 @@ Public Class dlgExportForClimpact
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 506
         ucrInputCodeMissingValues.SetParameter(New RParameter("missing_code", 6))
         ucrInputCodeMissingValues.SetRDefault("-99.9")
 
