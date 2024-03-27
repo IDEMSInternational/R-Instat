@@ -36,6 +36,17 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub InitialiseDialog()
 
+        ucrChkAnnualRainfall.SetText("Annual Rainfall")
+
+        ucrChkAnnualTemp.SetText("Annual Temperature")
+
+        ucrChkExtremes.SetText("Extremes")
+
+        ucrChkMonthlyTemp.SetText("Monthly Temperature")
+
+        ucrChkSeasonStartProp.SetText("Season Start Probabilities")
+
+        ucrChkCropSuccessProp.SetText("Crop Success Probabilities")
 
     End Sub
 

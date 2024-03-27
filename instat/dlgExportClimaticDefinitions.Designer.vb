@@ -42,7 +42,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkMonthlyTemp = New instat.ucrCheck()
         Me.ucrChkSeasonStartProp = New instat.ucrCheck()
         Me.ucrChkExtremes = New instat.ucrCheck()
-        Me.ucrCropSuccessProp = New instat.ucrCheck()
+        Me.ucrChkCropSuccessProp = New instat.ucrCheck()
         Me.ucrChkAnnualTemp = New instat.ucrCheck()
         Me.ucrChkAnnualRainfall = New instat.ucrCheck()
         Me.ucrChkIncludeSummaryData = New instat.ucrCheck()
@@ -228,7 +228,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.grpSummaries.Controls.Add(Me.ucrChkMonthlyTemp)
         Me.grpSummaries.Controls.Add(Me.ucrChkSeasonStartProp)
         Me.grpSummaries.Controls.Add(Me.ucrChkExtremes)
-        Me.grpSummaries.Controls.Add(Me.ucrCropSuccessProp)
+        Me.grpSummaries.Controls.Add(Me.ucrChkCropSuccessProp)
         Me.grpSummaries.Controls.Add(Me.ucrChkAnnualTemp)
         Me.grpSummaries.Controls.Add(Me.ucrChkAnnualRainfall)
         Me.grpSummaries.Location = New System.Drawing.Point(7, 222)
@@ -265,14 +265,14 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkExtremes.Size = New System.Drawing.Size(132, 23)
         Me.ucrChkExtremes.TabIndex = 3
         '
-        'ucrCropSuccessProp
+        'ucrChkCropSuccessProp
         '
-        Me.ucrCropSuccessProp.AutoSize = True
-        Me.ucrCropSuccessProp.Checked = False
-        Me.ucrCropSuccessProp.Location = New System.Drawing.Point(154, 16)
-        Me.ucrCropSuccessProp.Name = "ucrCropSuccessProp"
-        Me.ucrCropSuccessProp.Size = New System.Drawing.Size(138, 23)
-        Me.ucrCropSuccessProp.TabIndex = 2
+        Me.ucrChkCropSuccessProp.AutoSize = True
+        Me.ucrChkCropSuccessProp.Checked = False
+        Me.ucrChkCropSuccessProp.Location = New System.Drawing.Point(154, 16)
+        Me.ucrChkCropSuccessProp.Name = "ucrChkCropSuccessProp"
+        Me.ucrChkCropSuccessProp.Size = New System.Drawing.Size(138, 23)
+        Me.ucrChkCropSuccessProp.TabIndex = 2
         '
         'ucrChkAnnualTemp
         '
@@ -346,7 +346,7 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents ucrChkMonthlyTemp As ucrCheck
     Friend WithEvents ucrChkSeasonStartProp As ucrCheck
     Friend WithEvents ucrChkExtremes As ucrCheck
-    Friend WithEvents ucrCropSuccessProp As ucrCheck
+    Friend WithEvents ucrChkCropSuccessProp As ucrCheck
     Friend WithEvents ucrChkAnnualTemp As ucrCheck
     Friend WithEvents ucrChkAnnualRainfall As ucrCheck
     Friend WithEvents lblMaxTemp As Label
