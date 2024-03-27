@@ -380,8 +380,6 @@ Public Class sdgSummaries
         cmdOptions.Visible = False
         bControlsInitialised = True
         TwoVariablesControls()
-        PositionOptions()
-        'IncludePosition()
         OrderByCheckEnabled()
         IncludeControlsEnabled()
     End Sub
@@ -435,8 +433,9 @@ Public Class sdgSummaries
             ucrSelectorOrderBy.SetDataframe(strDataFrame, False)
             ucrSelectorInclude.SetDataframe(strDataFrame, False)
         End If
-
-        ucrPnlPosition.SetRCode(clsDummyFunction, bReset)
+        If bReset Then
+            ucrPnlPosition.SetRCode(clsDummyFunction, bReset)
+        End If
         ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPropValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputComboPropTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
@@ -534,7 +533,6 @@ Public Class sdgSummaries
             ucrSelectorOrderBy.Reset()
             ucrSelectorInclude.Reset()
 
-
             If strDefaultTab <> "" Then
                 For i As Integer = 0 To tbSummaries.TabPages.Count - 1
                     If tbSummaries.TabPages(i).Text = strDefaultTab Then
@@ -592,30 +590,6 @@ Public Class sdgSummaries
         End If
     End Sub
 
-    Private Sub PositionOptions()
-        If ucrChkOrderBy.Checked Then
-            ucrSelectorOrderBy.Show()
-            ucrReceiverOrderBy.Show()
-            lblOrderBy.Show()
-        Else
-            ucrSelectorOrderBy.Hide()
-            ucrReceiverOrderBy.Hide()
-            lblOrderBy.Hide()
-        End If
-    End Sub
-
-    'Private Sub IncludePosition()
-    '    If ucrChkInclude.Checked Then
-    '        ucrSelectorInclude.Show()
-    '        ucrReceiverInclude.Show()
-    '        lblInclude.Show()
-    '    Else
-    '        ucrSelectorInclude.Hide()
-    '        ucrReceiverInclude.Hide()
-    '        lblInclude.Hide()
-    '    End If
-    'End Sub
-
     Private Sub OrderByCheckEnabled()
         If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked OrElse ucrChkWhichmax.Checked OrElse ucrChkWhichmin.Checked Then
             ucrChkOrderBy.Enabled = True
@@ -656,7 +630,6 @@ Public Class sdgSummaries
     End Sub
 
     Private Sub ucrReceiverOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderBy.ControlValueChanged
-        PositionOptions()
         OrderBy()
     End Sub
 
@@ -687,7 +660,6 @@ Public Class sdgSummaries
     End Sub
 
     Private Sub ucrChkOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOrderBy.ControlValueChanged
-        PositionOptions()
         OrderByCheckEnabled()
         OrderBy()
     End Sub
@@ -710,23 +682,16 @@ Public Class sdgSummaries
         If rdoUsePositions.Checked Then
             grpPosition.Show()
             grpDisplay.Hide()
-            PositionOptions()
             OrderByCheckEnabled()
         ElseIf rdoDisplay.Checked Then
             grpDisplay.Show()
             grpPosition.Hide()
-            '  IncludePosition()
             IncludeControlsEnabled()
         End If
     End Sub
 
     Private Sub ucrChkInclude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkInclude.ControlValueChanged
-        'IncludePosition()
         IncludeControlsEnabled()
-    End Sub
-
-    Private Sub ucrReceiverInclude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverInclude.ControlValueChanged
-        'IncludePosition()
     End Sub
 
     Private Sub ucrChkWhichmax_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWhichmax.ControlValueChanged, ucrChkWhichmin.ControlValueChanged
