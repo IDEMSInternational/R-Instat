@@ -2634,7 +2634,7 @@ view_object_data <- function(object, object_format = NULL) {
     file_name <- view_text_object(object)
   } else if (identical(object_format, "html")) {
     file_name <- view_html_object(object)
-  }else{
+  }  else{
     print(object)
   }
   return(file_name)
@@ -2730,11 +2730,28 @@ view_text_object <- function(text_object){
   
 }
 
+view_html_object <- function(html_object) {
+  # Check if html_object is a list and has more than one element
+  if (is.list(html_object) && all(sapply(html_object, class) == class(html_object[[1]]))) {
+    file_names <- vector("list", length(html_object))
+    for (i in seq_along(html_object)) {
+      # If html_object is a list with multiple elements of the same class, 
+      # use a for loop to process each element
+      file_names[[i]] <- process_html_object(html_object[[i]])
+    }
+    return(file_names)
+  }
+  
+  # Process the html_object
+  return(process_html_object(html_object))
+}
+
+#Function to process individual HTML object
 #displays the html object in the set R "viewer".
 #if the viewer is not available then 
 #it saves the object as a file in the temporary folder
 #and returns the file path.
-view_html_object <- function(html_object){
+process_html_object <- function(html_object) {
   #if there is a viewer, like in the case of RStudio then just print the object
   #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
   r_viewer <- base::getOption("viewer")
@@ -2745,14 +2762,13 @@ view_html_object <- function(html_object){
     return(html_object)
   }
   
-  
-  file_name <- ""
-  #get a vector of available class names
-  object_class_names <- class(html_object)
-  #get a unique temporary file name from the tempdir path
+  # Get a unique temporary file name from the tempdir path
   file_name <- tempfile(pattern = "viewhtml", fileext = ".html")
   
-  #save the object as a html file depending on the object type
+  # Get a vector of available class names
+  object_class_names <- class(html_object)
+  
+  # Save the object as an HTML file depending on the object type
   if ("htmlwidget" %in% object_class_names) {
     #Note. When selfcontained is set to True 
     #a "Saving a widget with selfcontained = TRUE requires pandoc" error is thrown in R-Instat
@@ -2768,12 +2784,14 @@ view_html_object <- function(html_object){
   } else if ("gt_tbl" %in% object_class_names) {
     #"gt table" objects are not compatible with "htmlwidgets" package. So they have to be saved differently.
     #"mmtable2" package produces "gt_tbl" objects 
-    gt::gtsave(html_object,filename = file_name)
+    gt::gtsave(html_object, filename = file_name)
   }
   
   message("R viewer not detected. File saved in location ", file_name)
   return(file_name)
-} 
+}
+
+
 
 #tries to recordPlot if graph_object = NULL, then returns graph object of class "recordedplot".
 #applicable to base graphs only

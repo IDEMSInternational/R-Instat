@@ -652,7 +652,7 @@ DataBook$set("public", "get_object_data", function(data_name = NULL, object_name
   }
   return(out)
 }
-)  
+) 
 
 #returns object data from the object_names character vector
 DataBook$set("public", "get_objects_data", function(data_name = NULL, object_names = NULL, as_files = FALSE) {
