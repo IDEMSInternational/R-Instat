@@ -349,6 +349,18 @@
     <Compile Include="sdgSummaryThemes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgTableOptionsTextFormat.Designer.vb">
+      <DependentUpon>sdgTableOptionsTextFormat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTableOptionsTextFormat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgTableOptions.Designer.vb">
+      <DependentUpon>sdgTableOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTableOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UserControls\frmMaximiseOutput.Designer.vb">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
     </Compile>
@@ -3205,6 +3217,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTableOptionsTextFormat.resx">
+      <DependentUpon>sdgTableOptionsTextFormat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTableOptions.resx">
+      <DependentUpon>sdgTableOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmMaximiseOutput.resx">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
