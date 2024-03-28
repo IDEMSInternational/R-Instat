@@ -611,9 +611,6 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdRHelp = New instat.ucrSplitButton()
-        Me.cmdHydroHelp = New instat.ucrSplitButton()
-        Me.cmdTransformHelp = New instat.ucrSplitButton()
         Me.cmdCircularHelp = New instat.ucrSplitButton()
         Me.cmdMathsHelp = New instat.ucrSplitButton()
         Me.cmdProbRHelp = New instat.ucrSplitButton()
@@ -622,42 +619,45 @@ Partial Class ucrCalculator
         Me.cmdSummaryRHelp = New instat.ucrSplitButton()
         Me.cmdTransformRHelp = New instat.ucrSplitButton()
         Me.cmdLogicalHelp = New instat.ucrSplitButton()
-        Me.grpBasic.SuspendLayout
-        Me.grpDates.SuspendLayout
-        Me.ContextMenuStripDate.SuspendLayout
-        Me.ContextMenuStripComplex.SuspendLayout
-        Me.grpInteger.SuspendLayout
-        Me.ContextMenuStripInteger.SuspendLayout
-        Me.grpFactor.SuspendLayout
-        Me.ContextMenuStripFactor.SuspendLayout
-        Me.grpHydroGOF.SuspendLayout
-        Me.ContextMenuStripHydroGOF.SuspendLayout
-        Me.grpWakefield.SuspendLayout
-        Me.grpMaths.SuspendLayout
-        Me.ContextMenuStripMaths.SuspendLayout
-        Me.grpSummary.SuspendLayout
-        Me.ContextMenuStripSummary.SuspendLayout
-        Me.grpFrequencies.SuspendLayout
-        Me.grpProbabilty.SuspendLayout
-        Me.ContextMenuStripProbability.SuspendLayout
-        Me.grpRandom.SuspendLayout
-        Me.grpTransform.SuspendLayout
-        Me.ContextMenuStripTransform.SuspendLayout
-        Me.grpLogical.SuspendLayout
-        Me.ContextMenuStripLogical.SuspendLayout
-        Me.grpTestString.SuspendLayout
-        Me.grpCircular.SuspendLayout
-        Me.ContextMenuStripCircular.SuspendLayout
-        Me.grpModifier.SuspendLayout
-        Me.grpSymbols.SuspendLayout
-        Me.grpComplex.SuspendLayout
-        Me.ContextMenuStripTxtString.SuspendLayout
-        Me.ContextMenuStripWakefield.SuspendLayout
-        Me.ContextMenuStripList.SuspendLayout
-        Me.grpList.SuspendLayout
-        Me.GroupBox1.SuspendLayout
-        Me.grpMathBloc.SuspendLayout
-        Me.SuspendLayout
+        Me.cmdRHelp = New instat.ucrSplitButton()
+        Me.cmdHydroHelp = New instat.ucrSplitButton()
+        Me.cmdTransformHelp = New instat.ucrSplitButton()
+        Me.grpBasic.SuspendLayout()
+        Me.grpDates.SuspendLayout()
+        Me.ContextMenuStripDate.SuspendLayout()
+        Me.ContextMenuStripComplex.SuspendLayout()
+        Me.grpInteger.SuspendLayout()
+        Me.ContextMenuStripInteger.SuspendLayout()
+        Me.grpFactor.SuspendLayout()
+        Me.ContextMenuStripFactor.SuspendLayout()
+        Me.grpHydroGOF.SuspendLayout()
+        Me.ContextMenuStripHydroGOF.SuspendLayout()
+        Me.grpWakefield.SuspendLayout()
+        Me.grpMaths.SuspendLayout()
+        Me.ContextMenuStripMaths.SuspendLayout()
+        Me.grpSummary.SuspendLayout()
+        Me.ContextMenuStripSummary.SuspendLayout()
+        Me.grpFrequencies.SuspendLayout()
+        Me.grpProbabilty.SuspendLayout()
+        Me.ContextMenuStripProbability.SuspendLayout()
+        Me.grpRandom.SuspendLayout()
+        Me.grpTransform.SuspendLayout()
+        Me.ContextMenuStripTransform.SuspendLayout()
+        Me.grpLogical.SuspendLayout()
+        Me.ContextMenuStripLogical.SuspendLayout()
+        Me.grpTestString.SuspendLayout()
+        Me.grpCircular.SuspendLayout()
+        Me.ContextMenuStripCircular.SuspendLayout()
+        Me.grpModifier.SuspendLayout()
+        Me.grpSymbols.SuspendLayout()
+        Me.grpComplex.SuspendLayout()
+        Me.ContextMenuStripTxtString.SuspendLayout()
+        Me.ContextMenuStripWakefield.SuspendLayout()
+        Me.ContextMenuStripList.SuspendLayout()
+        Me.grpList.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.grpMathBloc.SuspendLayout()
+        Me.SuspendLayout()
         '
         'lblExpression
         '
@@ -5759,7 +5759,7 @@ Partial Class ucrCalculator
         'cmdCircMax
         '
         Me.cmdCircMax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCircMax.Location = New System.Drawing.Point(223, 138)
+        Me.cmdCircMax.Location = New System.Drawing.Point(224, 139)
         Me.cmdCircMax.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCircMax.Name = "cmdCircMax"
         Me.cmdCircMax.Size = New System.Drawing.Size(82, 40)
@@ -5781,7 +5781,7 @@ Partial Class ucrCalculator
         'cmdAngVar
         '
         Me.cmdAngVar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAngVar.Location = New System.Drawing.Point(77, 100)
+        Me.cmdAngVar.Location = New System.Drawing.Point(76, 100)
         Me.cmdAngVar.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAngVar.Name = "cmdAngVar"
         Me.cmdAngVar.Size = New System.Drawing.Size(75, 40)
@@ -5792,7 +5792,7 @@ Partial Class ucrCalculator
         'cmdCircRho
         '
         Me.cmdCircRho.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCircRho.Location = New System.Drawing.Point(223, 100)
+        Me.cmdCircRho.Location = New System.Drawing.Point(224, 100)
         Me.cmdCircRho.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCircRho.Name = "cmdCircRho"
         Me.cmdCircRho.Size = New System.Drawing.Size(82, 40)
@@ -5803,7 +5803,7 @@ Partial Class ucrCalculator
         'cmdCircQ3
         '
         Me.cmdCircQ3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCircQ3.Location = New System.Drawing.Point(150, 138)
+        Me.cmdCircQ3.Location = New System.Drawing.Point(150, 139)
         Me.cmdCircQ3.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCircQ3.Name = "cmdCircQ3"
         Me.cmdCircQ3.Size = New System.Drawing.Size(75, 40)
@@ -5814,7 +5814,7 @@ Partial Class ucrCalculator
         'cmdCircQ1
         '
         Me.cmdCircQ1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCircQ1.Location = New System.Drawing.Point(77, 138)
+        Me.cmdCircQ1.Location = New System.Drawing.Point(76, 139)
         Me.cmdCircQ1.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCircQ1.Name = "cmdCircQ1"
         Me.cmdCircQ1.Size = New System.Drawing.Size(75, 40)
@@ -5825,7 +5825,7 @@ Partial Class ucrCalculator
         'cmdCircMin
         '
         Me.cmdCircMin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCircMin.Location = New System.Drawing.Point(2, 138)
+        Me.cmdCircMin.Location = New System.Drawing.Point(2, 139)
         Me.cmdCircMin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCircMin.Name = "cmdCircMin"
         Me.cmdCircMin.Size = New System.Drawing.Size(75, 40)
@@ -5836,7 +5836,7 @@ Partial Class ucrCalculator
         'cmdAngDev
         '
         Me.cmdAngDev.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAngDev.Location = New System.Drawing.Point(150, 62)
+        Me.cmdAngDev.Location = New System.Drawing.Point(150, 61)
         Me.cmdAngDev.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAngDev.Name = "cmdAngDev"
         Me.cmdAngDev.Size = New System.Drawing.Size(75, 40)
@@ -5847,7 +5847,7 @@ Partial Class ucrCalculator
         'cmdCircVar
         '
         Me.cmdCircVar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCircVar.Location = New System.Drawing.Point(223, 62)
+        Me.cmdCircVar.Location = New System.Drawing.Point(224, 61)
         Me.cmdCircVar.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCircVar.Name = "cmdCircVar"
         Me.cmdCircVar.Size = New System.Drawing.Size(82, 40)
@@ -5858,7 +5858,7 @@ Partial Class ucrCalculator
         'cmdCircSd
         '
         Me.cmdCircSd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCircSd.Location = New System.Drawing.Point(77, 62)
+        Me.cmdCircSd.Location = New System.Drawing.Point(76, 61)
         Me.cmdCircSd.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCircSd.Name = "cmdCircSd"
         Me.cmdCircSd.Size = New System.Drawing.Size(75, 40)
@@ -5869,7 +5869,7 @@ Partial Class ucrCalculator
         'cmdCircRange
         '
         Me.cmdCircRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCircRange.Location = New System.Drawing.Point(2, 62)
+        Me.cmdCircRange.Location = New System.Drawing.Point(2, 61)
         Me.cmdCircRange.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCircRange.Name = "cmdCircRange"
         Me.cmdCircRange.Size = New System.Drawing.Size(75, 40)
@@ -5880,7 +5880,7 @@ Partial Class ucrCalculator
         'cmdMedianHL
         '
         Me.cmdMedianHL.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMedianHL.Location = New System.Drawing.Point(223, 22)
+        Me.cmdMedianHL.Location = New System.Drawing.Point(224, 22)
         Me.cmdMedianHL.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMedianHL.Name = "cmdMedianHL"
         Me.cmdMedianHL.Size = New System.Drawing.Size(82, 40)
@@ -5902,7 +5902,7 @@ Partial Class ucrCalculator
         'cmdCircMean
         '
         Me.cmdCircMean.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCircMean.Location = New System.Drawing.Point(77, 22)
+        Me.cmdCircMean.Location = New System.Drawing.Point(76, 22)
         Me.cmdCircMean.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCircMean.Name = "cmdCircMean"
         Me.cmdCircMean.Size = New System.Drawing.Size(75, 40)
@@ -7285,42 +7285,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdRHelp
-        '
-        Me.cmdRHelp.AutoSize = True
-        Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripDate
-        Me.cmdRHelp.Location = New System.Drawing.Point(194, 248)
-        Me.cmdRHelp.Name = "cmdRHelp"
-        Me.cmdRHelp.Size = New System.Drawing.Size(113, 38)
-        Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuStripDate
-        Me.cmdRHelp.TabIndex = 212
-        Me.cmdRHelp.Text = "R Help"
-        Me.cmdRHelp.UseVisualStyleBackColor = True
-        '
-        'cmdHydroHelp
-        '
-        Me.cmdHydroHelp.AutoSize = True
-        Me.cmdHydroHelp.ContextMenuStrip = Me.ContextMenuStripHydroGOF
-        Me.cmdHydroHelp.Location = New System.Drawing.Point(113, 298)
-        Me.cmdHydroHelp.Name = "cmdHydroHelp"
-        Me.cmdHydroHelp.Size = New System.Drawing.Size(108, 38)
-        Me.cmdHydroHelp.SplitMenuStrip = Me.ContextMenuStripHydroGOF
-        Me.cmdHydroHelp.TabIndex = 212
-        Me.cmdHydroHelp.Text = "R Help"
-        Me.cmdHydroHelp.UseVisualStyleBackColor = True
-        '
-        'cmdTransformHelp
-        '
-        Me.cmdTransformHelp.AutoSize = True
-        Me.cmdTransformHelp.ContextMenuStrip = Me.ContextMenuStripFactor
-        Me.cmdTransformHelp.Location = New System.Drawing.Point(188, 218)
-        Me.cmdTransformHelp.Name = "cmdTransformHelp"
-        Me.cmdTransformHelp.Size = New System.Drawing.Size(113, 38)
-        Me.cmdTransformHelp.SplitMenuStrip = Me.ContextMenuStripFactor
-        Me.cmdTransformHelp.TabIndex = 212
-        Me.cmdTransformHelp.Text = "R Help"
-        Me.cmdTransformHelp.UseVisualStyleBackColor = True
-        '
         'cmdCircularHelp
         '
         Me.cmdCircularHelp.AutoSize = True
@@ -7417,6 +7381,42 @@ Partial Class ucrCalculator
         Me.cmdLogicalHelp.Text = "R Help"
         Me.cmdLogicalHelp.UseVisualStyleBackColor = True
         '
+        'cmdRHelp
+        '
+        Me.cmdRHelp.AutoSize = True
+        Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripDate
+        Me.cmdRHelp.Location = New System.Drawing.Point(194, 248)
+        Me.cmdRHelp.Name = "cmdRHelp"
+        Me.cmdRHelp.Size = New System.Drawing.Size(113, 38)
+        Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuStripDate
+        Me.cmdRHelp.TabIndex = 212
+        Me.cmdRHelp.Text = "R Help"
+        Me.cmdRHelp.UseVisualStyleBackColor = True
+        '
+        'cmdHydroHelp
+        '
+        Me.cmdHydroHelp.AutoSize = True
+        Me.cmdHydroHelp.ContextMenuStrip = Me.ContextMenuStripHydroGOF
+        Me.cmdHydroHelp.Location = New System.Drawing.Point(113, 298)
+        Me.cmdHydroHelp.Name = "cmdHydroHelp"
+        Me.cmdHydroHelp.Size = New System.Drawing.Size(108, 38)
+        Me.cmdHydroHelp.SplitMenuStrip = Me.ContextMenuStripHydroGOF
+        Me.cmdHydroHelp.TabIndex = 212
+        Me.cmdHydroHelp.Text = "R Help"
+        Me.cmdHydroHelp.UseVisualStyleBackColor = True
+        '
+        'cmdTransformHelp
+        '
+        Me.cmdTransformHelp.AutoSize = True
+        Me.cmdTransformHelp.ContextMenuStrip = Me.ContextMenuStripFactor
+        Me.cmdTransformHelp.Location = New System.Drawing.Point(188, 218)
+        Me.cmdTransformHelp.Name = "cmdTransformHelp"
+        Me.cmdTransformHelp.Size = New System.Drawing.Size(113, 38)
+        Me.cmdTransformHelp.SplitMenuStrip = Me.ContextMenuStripFactor
+        Me.cmdTransformHelp.TabIndex = 212
+        Me.cmdTransformHelp.Text = "R Help"
+        Me.cmdTransformHelp.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -7435,10 +7435,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
         Me.Controls.Add(Me.grpSymbols)
-        Me.Controls.Add(Me.grpDates)
-        Me.Controls.Add(Me.grpHydroGOF)
-        Me.Controls.Add(Me.grpFactor)
-        Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpProbabilty)
@@ -7449,48 +7445,52 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpModifier)
+        Me.Controls.Add(Me.grpDates)
+        Me.Controls.Add(Me.grpHydroGOF)
+        Me.Controls.Add(Me.grpFactor)
+        Me.Controls.Add(Me.grpWakefield)
         Me.Name = "ucrCalculator"
         Me.Size = New System.Drawing.Size(1123, 572)
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
-        Me.grpDates.PerformLayout
+        Me.grpDates.PerformLayout()
         Me.ContextMenuStripDate.ResumeLayout(False)
         Me.ContextMenuStripComplex.ResumeLayout(False)
         Me.grpInteger.ResumeLayout(False)
-        Me.grpInteger.PerformLayout
+        Me.grpInteger.PerformLayout()
         Me.ContextMenuStripInteger.ResumeLayout(False)
         Me.grpFactor.ResumeLayout(False)
-        Me.grpFactor.PerformLayout
+        Me.grpFactor.PerformLayout()
         Me.ContextMenuStripFactor.ResumeLayout(False)
         Me.grpHydroGOF.ResumeLayout(False)
-        Me.grpHydroGOF.PerformLayout
+        Me.grpHydroGOF.PerformLayout()
         Me.ContextMenuStripHydroGOF.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
         Me.grpMaths.ResumeLayout(False)
-        Me.grpMaths.PerformLayout
+        Me.grpMaths.PerformLayout()
         Me.ContextMenuStripMaths.ResumeLayout(False)
         Me.grpSummary.ResumeLayout(False)
-        Me.grpSummary.PerformLayout
+        Me.grpSummary.PerformLayout()
         Me.ContextMenuStripSummary.ResumeLayout(False)
         Me.grpFrequencies.ResumeLayout(False)
         Me.grpProbabilty.ResumeLayout(False)
-        Me.grpProbabilty.PerformLayout
+        Me.grpProbabilty.PerformLayout()
         Me.ContextMenuStripProbability.ResumeLayout(False)
         Me.grpRandom.ResumeLayout(False)
         Me.grpTransform.ResumeLayout(False)
-        Me.grpTransform.PerformLayout
+        Me.grpTransform.PerformLayout()
         Me.ContextMenuStripTransform.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
-        Me.grpLogical.PerformLayout
+        Me.grpLogical.PerformLayout()
         Me.ContextMenuStripLogical.ResumeLayout(False)
         Me.grpTestString.ResumeLayout(False)
         Me.grpCircular.ResumeLayout(False)
-        Me.grpCircular.PerformLayout
+        Me.grpCircular.PerformLayout()
         Me.ContextMenuStripCircular.ResumeLayout(False)
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
         Me.grpComplex.ResumeLayout(False)
-        Me.grpComplex.PerformLayout
+        Me.grpComplex.PerformLayout()
         Me.ContextMenuStripTxtString.ResumeLayout(False)
         Me.ContextMenuStripWakefield.ResumeLayout(False)
         Me.ContextMenuStripList.ResumeLayout(False)
@@ -7498,7 +7498,7 @@ Partial Class ucrCalculator
         Me.GroupBox1.ResumeLayout(False)
         Me.grpMathBloc.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout
+        Me.PerformLayout()
 
     End Sub
 
