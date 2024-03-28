@@ -94,7 +94,6 @@ Public Class ROperator
     Public Sub SetOperation(strTemp As String, Optional bBracketsTemp As Boolean = True)
         strOperation = strTemp
         bBrackets = bBracketsTemp
-        'bIsAssigned = False
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -264,22 +263,6 @@ Public Class ROperator
         Return Nothing
     End Function
 
-    ''' <summary>   Removes all additional parameters. </summary>
-    Public Sub RemoveAllAdditionalParameters()
-        'TODO SJL 03/04/20 this function is only used by 1 dialog. This hints that there may be an alternative way of doing the same thing.
-        '   It's also suspicious that the other RCodeStructure classes don't have such a function. Why is it only needed for an operator?
-        '   Can this function be removed?
-        SortParameters() 'This is used to bring the parameter with position 0 to the front if it exists, then clear all the others using range.
-        If clsParameters(0).Position = 0 Then
-            If clsParameters.Count > 1 Then
-                clsParameters.RemoveRange(1, clsParameters.Count - 1)
-            End If
-        Else
-            clsParameters.Clear()
-        End If
-        OnParametersChanged()
-    End Sub
-
     ''' <summary>   Clears this object to its blank/initial state. </summary>
     Public Overrides Sub Clear()
         SetOperation("")
@@ -310,7 +293,6 @@ Public Class ROperator
         clsTempROperator.iPosition = iPosition
         clsTempROperator.iCallType = iCallType
         clsTempROperator.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
-        clsTempROperator.bClearFromGlobal = bClearFromGlobal
         clsTempROperator.bToScriptAsRString = bToScriptAsRString
         clsTempROperator.Tag = Tag
         For Each clsRParam In clsParameters
