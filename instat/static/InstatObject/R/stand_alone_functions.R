@@ -2,7 +2,6 @@ get_default_significant_figures <- function(data) {
   if(is.numeric(data)) return(3)
   else return(NA)  
 }
-
 convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places, is_scientific = FALSE, return_data_frame = TRUE, na_display = NULL, check.names = TRUE) {
   if(nrow(data) == 0) {
     out <- matrix(nrow = 0, ncol = ncol(data))
@@ -40,7 +39,6 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
   if(return_data_frame) out <- data.frame(out, stringsAsFactors = FALSE, check.names = check.names)
   return(out)
 }
-
 next_default_item = function(prefix, existing_names = c(), include_index = FALSE, start_index = 1) {
   if(!is.character(prefix)) stop("prefix must be of type character")
   
@@ -59,7 +57,6 @@ next_default_item = function(prefix, existing_names = c(), include_index = FALSE
   }
   return(out)
 }
-
 import_from_ODK = function(username, form_name, platform) {
   if(platform == "kobo") {
     url <- "https://kc.kobotoolbox.org/api/v1/data"
@@ -97,7 +94,6 @@ import_from_ODK = function(username, form_name, platform) {
   out <- jsonlite::fromJSON(form_data, flatten = TRUE)
   return(out)
 }
-
 get_odk_form_names = function(username, platform) {
   #TODO This should not be repeated
   if(platform == "kobo") {
@@ -122,7 +118,6 @@ get_odk_form_names = function(username, platform) {
   form_names <- sapply(forms, function(x) x$title)
   return(form_names)
 }
-
 convert_SST <- function(datafile, data_from = 5){
   start_year <- get_years_from_data(datafile)[1]
   end_year <- get_years_from_data(datafile)[length(get_years_from_data(datafile))]
@@ -152,19 +147,15 @@ convert_SST <- function(datafile, data_from = 5){
   my_data = cbind(period, lat_lon_df, SST_value)
   return(list(my_data, lat_lon_df))
 }
-
 get_years_from_data <- function(datafile){
   return(na.omit(t(unique(datafile[3,2:ncol(datafile)]))))
 }
-
 get_lat_from_data <- function(datafile){
   return(unique(na.omit(as.numeric(as.character(datafile[5:nrow(datafile),1])))))
 }
-
 get_lon_from_data <- function(datafile){
   return(na.omit(as.numeric(unique(t(datafile[5,2:ncol(datafile)])))))
 }
-
 lat_lon_dataframe <- function(datafile){
   latitude  <- get_lat_from_data(datafile)
   longitude <- get_lon_from_data(datafile)
@@ -182,7 +173,6 @@ lat_lon_dataframe <- function(datafile){
   }
   return(cbind(lat_lon,station))
 }
-
 output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitude, station, year, element, long.data = TRUE, na_code = -999) {
   
   if(missing(data)) stop("data should be provided")
@@ -256,24 +246,20 @@ output_CPT <- function(data, lat_lon_data, station_latlondata, latitude, longitu
   cpt_data <- rbind(t_lat_lon_data, unstacked_data)
   return(cpt_data)
 }
-
 yday_366 <- function(date) {
   temp_doy <- lubridate::yday(date)
   temp_leap <- lubridate::leap_year(date)
   temp_doy[(!is.na(temp_doy)) & temp_doy > 59 & (!temp_leap)] <- 1 + temp_doy[(!is.na(temp_doy)) & temp_doy > 59 & (!temp_leap)]
   return(temp_doy)
 }
-
 dekade <- function(date) {
   temp_dekade <- 3 * (lubridate::month(date)) - 2 + (lubridate::mday(date) > 10) + (lubridate::mday(date) > 20)
   return(temp_dekade)
 }
-
 pentad <- function(date){
 	temp_pentad <- 6*(lubridate::month(date)) - 5 + (lubridate::mday(date) > 5) + (lubridate::mday(date) > 10) + (lubridate::mday(date) > 15) + (lubridate::mday(date) > 20) + (lubridate::mday(date) > 25)
 	return(temp_pentad)	
  }	 
-
 nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   if(!dimension %in% names(nc$dim)) stop(dimension, " not found in file.")
   vals <- nc$dim[[dimension]]$vals
@@ -299,7 +285,6 @@ nc_get_dim_min_max <- function(nc, dimension, time_as_date = TRUE) {
   bounds <- c(min(vals, na.rm = TRUE), max(vals, na.rm = TRUE))
   return(bounds)
 }
-
 nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE) {
   if(missing(vars)) vars <- ncdf4.helpers::nc.get.variable.list(nc)
   if(sum(is.null(lon_points), is.null(lat_points)) == 1) stop("You must specificy both lon_points and lat_points")
@@ -418,7 +403,6 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
     count_list[[1]] <- count
     dim_values_list[[1]] <- dim_values
   }
-
   dim_axes <- ncdf4.helpers::nc.get.dim.axes(nc)
   time_dims <- names(dim_axes[which(dim_axes == "T" & names(dim_axes) %in% dim_names)])
   var_data_list <- list()
@@ -533,7 +517,6 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
   }
   return(var_data)
 }
-
 # open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_names){
 #   variables = names(nc_data$var)
 #   lat_lon_names = names(nc_data$dim)
@@ -613,7 +596,6 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
 #   }
 #   return(list(my_data, lat_lon_df, new_lat_lon_column_names))
 # }
-
 multiple_nc_as_data_frame <- function(path, vars, keep_raw_time = TRUE, include_metadata = TRUE, boundary = NULL, lon_points = NULL, lat_points = NULL, id_points = NULL, show_requested_points = TRUE, great_circle_dist = TRUE, id = "id") {
   filepaths <- list.files(path = path, pattern="*\\.nc", full.names = TRUE)
   filenames <- basename(filepaths)
@@ -635,7 +617,6 @@ multiple_nc_as_data_frame <- function(path, vars, keep_raw_time = TRUE, include_
   merged_data <- dplyr::bind_rows(nc_list, .id = id)
   return(merged_data)
 }
-
 import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_area_point){
   if(path == ""){
     gaugelocdir = getwd()
@@ -795,46 +776,38 @@ import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_ar
   file.remove(paste(gaugelocdir,"tmp_iri.csv",sep="/"))
   return(list(dataout,lat_lon_dataframe))
 }
-
 is.logical.like <- function(x) {
   if(is.logical(x)) return(TRUE)
   else if(is.numeric(x)) return(all(na.omit(x) %in% c(1,0)))
   else return(FALSE)
 }
-
 is.binary <- function(x) {
   if(is.logical(x)) return(TRUE)
   else if(is.numeric(x)) return(all(na.omit(x) %in% c(1,0)))
   else if(is.factor(x)) return(nlevels(x) == 2)
   else return(FALSE)
 }
-
 get_column_attributes <- function(x, drop = c("class", "levels")) {
   tmp_attr <- attributes(x)
   tmp_attr <- tmp_attr[!names(tmp_attr) %in% drop]
   return(tmp_attr)
 }
-
 split_items_in_groups <- function(items, num) {
   if(length(items) %% num != 0) stop("The number of items must be divisible by the number of groups")
   x <- split(items, rep(1:num, each = length(items)/num))
   return(x)
 }
-
 cancor_coef <- function(object) {
   object[c("xcoef", "ycoef")]
 }
 ###################
-
 # cmsaf Plot.Region script
-
 #
 # This script displays a map of the selected product. 
 # You can either specify a certain year / month from a data file with several time steps
 # or plot one 2D field. 
 # Prepare the your netcdf-files with the R-script "Prep.Data.R" or "Apply.Function.R"
 ##########################################################################################
-
 plot.region <- function(lon, lat, product, time, time_point = as.Date("2002-01-01"), add2title = "CM SAF, ", lonmin = NA, lonmax = NA, latmin = NA, latmax = NA, height = 600, width = 600, plot.ano = FALSE, set.col.breaks = FALSE, brk.set = seq(240,310,5), colmin0 = NA, colmax0 = NA, ncol = 14, plotHighRes = FALSE, plotCoastline = TRUE, plotCountries = TRUE, plotRivers = FALSE, contour.thick = 2, plotCities = TRUE, pch.cities = 2, cex.cities = 1, label.cities = TRUE, plotCapitals = 1, cex.label.cities = 0.5, dlat = 0.25, plotOwnLocations = FALSE, loc_lon = c(), loc_lat = c(), loc_name = c(""), label_pos = 1, variable = "Tm", level = 5, CTY.type = 4) {
   
   # Set the variable name
@@ -913,7 +886,6 @@ plot.region <- function(lon, lat, product, time, time_point = as.Date("2002-01-0
   if (varname == "CTY") datalev <- CTY.type
   
   #--------------------------------------------------#
-
   # Invert the latitude dimension if necessary
   if (lat[ny] < lat[1]) {
     sort.out <- sort(lat,index.return=TRUE)
@@ -1062,7 +1034,6 @@ plot.region <- function(lon, lat, product, time, time_point = as.Date("2002-01-0
   axis(3,lwd=1,at=c(lonmin,lonmax),tick=TRUE,lwd.ticks=0,labels=FALSE)
   axis(4,lwd=1,at=c(latmin,latmax), tick=TRUE,lwd.ticks=0,labels=FALSE)
 }
-
 duplicated_cases <- function(col_name, ignore = NULL, tolerance=0.01) {
   col_name <- as.vector(col_name)
   col_data1 <- c(1, rep(NA, length(col_name) - 1))
@@ -1089,7 +1060,6 @@ duplicated_cases <- function(col_name, ignore = NULL, tolerance=0.01) {
   }
   return(col_data1)
 }
-
 #This is Sam function from issue #4270
 duplicated_count_index<-function(x, type = "count"){
   if(type == "count"){
@@ -1122,21 +1092,17 @@ duplicated_count_index<-function(x, type = "count"){
     return(x$count)
   }
 }
-
-
 get_installed_packages_with_data <- function(with_data = TRUE) {
   all_installed_packages <- .packages(all.available = TRUE)
   if (with_data) all_installed_packages <- unique(data(package = all_installed_packages)[["results"]][,1]) 
   return(all_installed_packages)
 }
-
 drop_unused_levels <- function(dat, columns) {
   for(i in seq_along(columns)) {
     if(is.factor(dat[[columns[i]]])) dat[[columns[i]]] <- droplevels(dat[[columns[i]]])
   }
   return(dat)
 }
-
 compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstnotsecond = TRUE, secondnotfirst = TRUE, display_intersection = FALSE, display_union = FALSE, display_values = TRUE) {
   x_name <- deparse(substitute(x))
   y_name <- deparse(substitute(y))
@@ -1177,8 +1143,6 @@ compare_columns <- function(x, y, use_unique = TRUE, sort_values = TRUE, firstno
     if(display_union) cat(paste0("Union (Values that appear in either column): ", paste0("'", dplyr::union(x, y), "'", collapse = ", ")))
   }
 }
-
-
 consecutive_sum <- function(x, initial_value = NA){
   out = x
   for(i in 1:length(x)){
@@ -1194,11 +1158,9 @@ consecutive_sum <- function(x, initial_value = NA){
   }
   return(out)
 }
-
 max_consecutive_sum <- function(x){
   max(consecutive_sum(x, initial_value = 0))
 }
-
 hashed_id <- function(x, salt, algo = "crc32") {
   if (missing(salt)){
       y <- x
@@ -1207,9 +1169,7 @@ hashed_id <- function(x, salt, algo = "crc32") {
     }
   y <- sapply(y, function(X) digest::digest(X, algo = algo))
   as.character(y)
-
 }
-
 # Possible alternative but is slower:
 # spells <- function(z) {
 #   Reduce(function(x,y) {y = dplyr::if_else(y == 0, 0, x + 1)}, z[-1], 
@@ -1227,7 +1187,6 @@ hashed_id <- function(x, salt, algo = "crc32") {
   }
   return(y)
 }
-
 convert_to_dec_deg <- function (dd, mm = 0 , ss = 0, dir) {
   if(missing(dd))  stop("dd must be supplied")
   if(!missing(dir)) {
@@ -1241,17 +1200,14 @@ convert_to_dec_deg <- function (dd, mm = 0 , ss = 0, dir) {
   decdeg <- (dd + ((mm * 60) + ss)/3600) * sgn
   return(decdeg)
 }
-
 convert_yy_to_yyyy <- function (x, base) {
     if(missing(base))  stop("base year must be supplied")
     dplyr::if_else(x+2000 <= base, x+2000, x+1900)
 }
-
 create_av_packs <- function() {
   av_packs <<- available.packages(repos = "https://cran.rstudio.com/")
   av_packs <<- data.frame(av_packs)
 }
-
 package_check <- function(package) {
   out <- c()
   if  (!pingr::is_online())  out[[1]] <- "5" 
@@ -1294,13 +1250,11 @@ in_top_n <- function(x, n = 10, wt, fun = sum) {
   else dat <- dat %>% dplyr::count(x, sort = TRUE, name = "fq")
   return(x %in% dat$x[1:n])
 }
-
 summary_sample <- function(x, size, replace = FALSE){
   if(length(x)==0){return(NA)}
   else if(length(x)==1){return(x)}
   else{sample(x = x, size = size, replace = replace)}
 }
-
 add_xy_area_range <- function(path, min_lon, max_lon, min_lat, max_lat, dim_x = "X", dim_y = "Y") {
   paste0(
     path, "/", dim_x, "/",
@@ -1313,7 +1267,6 @@ add_xy_area_range <- function(path, min_lon, max_lon, min_lat, max_lat, dim_x = 
     "RANGEEDGES", "/"
   )
 }
-
 add_xy_point_range <- function(path, min_lon, min_lat, dim_x = "X", dim_y = "Y") {
   paste0(
     path, "/", dim_x, "/",
@@ -1324,7 +1277,6 @@ add_xy_point_range <- function(path, min_lon, min_lat, dim_x = "X", dim_y = "Y")
     "VALUES", "/"
   )
 }
-
 add_t_range <- function(path, min_date, max_date, dim_t = "T") {
   paste0(
     path, dim_t, "/",
@@ -1335,7 +1287,6 @@ add_t_range <- function(path, min_date, max_date, dim_t = "T") {
     "RANGEEDGES", "/"
   )
 }
-
 add_nc <- function(path) {
   paste0(path, "data.nc")
 }
@@ -1347,8 +1298,6 @@ fourier_series <- function(x, n, period) {
          "cos(", x, " * ", h, " * ", p2, " / ", period, ")", 
          collapse = " + ")
 }
-
-
 climatic_missing <- function(data, date, elements = ..., stations,
                              start = TRUE, end = FALSE){
   
@@ -1368,7 +1317,6 @@ climatic_missing <- function(data, date, elements = ..., stations,
                  values_to = "value")
   
   # sort start/end times
-
     # set start date
     if (start){
       data.stack <- data.stack %>%
@@ -1418,10 +1366,8 @@ climatic_missing <- function(data, date, elements = ..., stations,
     if (missing(stations)){
       summary.data$stations <- NULL
     }
-
   return(summary.data)
 }  
-
   
   
 climatic_details <- function(data, date, elements = ..., stations,
@@ -1490,7 +1436,6 @@ climatic_details <- function(data, date, elements = ..., stations,
                   From = dplyr::first({{ date }}),
                   To = dplyr::last({{ date }})) %>%
         dplyr::mutate(is.complete = ifelse(no == na, 1, 0)) # 0 if all are missing
-
       detail.table.month <- detail.table.month %>%
         dplyr::group_by({{ stations }}, Element) %>%
         dplyr::mutate(element.na = data.table::rleid(is.complete)) %>%
@@ -1548,15 +1493,11 @@ climatic_details <- function(data, date, elements = ..., stations,
                       dplyr::mutate(Level = make_factor(Level))
   
   return(detail.table.all)
-
 }
-
 slope <- function(y, x) {
   x <- as.numeric(x)
   lm(y ~ x)$coefficients[2]
-
 }
-
 # make_factor is intended to be somewhat equivalent to forcats::as_factor() or base::as.factor().
 # It provides default behaviour for converting to factor depending on the data type, similar to forcats::as_factor().
 # For "character" and "numeric" types make_factor is consistent with forcats::as_factor() in terms of the order of the factor levels.
@@ -1583,9 +1524,6 @@ make_factor <- function(x, ordered = is.ordered(x)) {
     factor(x, levels = as.character(unique(x)), ordered = ordered)
   }
 }
-
-
-
 # wwr_export function is meant to reshape data into formats required by WMO for submission of climatic data
 # this gives Yearly data records with monthly and annual data for a particular year:
 wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_pressure, 
@@ -1851,7 +1789,6 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   }
   cat(i, "file(s) created at:", folder)
 }
-
 dd_to_dms <- function(x, lat) {
   if (lat) dir <- ifelse(x >= 0, "N", "S")
   else dir <- ifelse(x >= 0, "E", "W")
@@ -1861,7 +1798,6 @@ dd_to_dms <- function(x, lat) {
   s <- round((x - d - m/60) * 3600)
   return(paste(sprintf(ifelse(lat, "%02d", "%03d"), d), sprintf("%02d", m), sprintf("%02d", s), dir))
 }
-
 plot_mrl <- function(data, station_name, element_name, umin, umax, ncol = 1,
                      xlab = "Threshold", ylab = "Mean excess", fill = "red",
                      col = "black", rug = TRUE, addNexcesses = TRUE, textsize = 4) {
@@ -1899,13 +1835,10 @@ plot_mrl <- function(data, station_name, element_name, umin, umax, ncol = 1,
       )
   }
 }
-
-
 ### Constants
 month_abb_english <- c("Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 month_name_english <- c("January", "February", "March", "April", "May", "June", "July", 
                         "August", "September", "October", "November", "December")
-
 # factored out code for a multiple indices for a single station.
 # Called by climdex().
 # Not intended to be used externally.
@@ -1963,7 +1896,6 @@ climdex_single_station <- function(ci, freq = "annual", indices, year, month,
   }
   return(df_ind)
 }
-
 climdex <- function(data, station, date, year, month, prec, tmax, tmin, indices, freq = "annual",
                     base.range = c(1961, 1990), n = 5, northern.hemisphere = TRUE,
                     quantiles = NULL, temp.qtiles = c(0.1, 0.9), 
@@ -2053,7 +1985,6 @@ climdex <- function(data, station, date, year, month, prec, tmax, tmin, indices,
   }
   return(df_out)
 }
-
 spei_input <- function(data, station, year, month, element) {
   if (missing(station)) id_cols <- c(year, month) else id_cols <- c(station, year, month)
   # SPEI package assumes data is ordered so must be sorted
@@ -2093,7 +2024,6 @@ spei_input <- function(data, station, year, month, element) {
   }
   ts_data
 }
-
 # This function extracts the SPEI/SPI column from an spei object x.
 # It requires the original data in order to return a vector of the correct length by removing NA values introduced when unstacking.
 # An alternative to this is to have a single wrapper SPEI/SPI function to handle this.
@@ -2127,9 +2057,7 @@ spei_output <- function(x, data, station, year, month) {
     col <- as.vector(vals)
   }
   col
-
 }
-
 # This function has been adapted from extRemes::threshrange.plot().
 # It has been adapted for use in R-Instat and uses ggplot2 graphical system rather than base plot().
 threshold_Plot <- function(x, r, type = c("GP", "PP", "Exponential"), nint = 10,
@@ -2244,7 +2172,6 @@ threshold_Plot <- function(x, r, type = c("GP", "PP", "Exponential"), nint = 10,
   }
   patchwork::wrap_plots(lst_plots, ncol = 1) 
 }
-
 # This function produces multiple threshold plots for various stations at a time.
 plot_multiple_threshold <- function(data, station_col_name, element_col_name, r, type = c("GP", "PP", "Exponential"), nint = 10,
                             alpha = 0.05, ncol = 1, xlb = "", main = NULL , verbose = FALSE,...) {
@@ -2264,8 +2191,6 @@ plot_multiple_threshold <- function(data, station_col_name, element_col_name, r,
     threshold_Plot(x = element_col, r = r, type = type, nint = nint, alpha = alpha, verbose = verbose)
   }
 }
-
-
 plot_declustered <- function(data, station_col_name, element_col_name, threshold, r = NULL, xlab = NULL, ylab = NULL, ncol = 1, print_summary = FALSE) {
   if (!missing(station_col_name)) {
     plts <- list()
@@ -2301,7 +2226,6 @@ plot_declustered <- function(data, station_col_name, element_col_name, threshold
     }
   }
 }
-
 #This function creates a wrapper around functions from openair package
 other_rose_plots <- function(data, type1_col_name, type2_col_name, date_col_name, wd_col_name, ws_col_name, main_method, single_pollutant, multiple_pollutant, ...) {
   type <- "default"
@@ -2336,7 +2260,6 @@ other_rose_plots <- function(data, type1_col_name, type2_col_name, date_col_name
     openair::polarFreq(mydata = data, type = type, pollutant = single_pollutant, ...)
   }
 }
-
 #This function creates a wrapper around windRose and pollutionRose functions from openair package
 wind_pollution_rose <- function(mydata, date_name, pollutant, type1_col_name, type2_col_name, ...) {
   type <-  "default"
@@ -2358,12 +2281,10 @@ wind_pollution_rose <- function(mydata, date_name, pollutant, type1_col_name, ty
     openair::pollutionRose(mydata = mydata, type = type, pollutant, ...)
   }
 }
-
 n_non_numeric <- function(x) {
   x <- as.character(x)
   sum(is.na(x) != is.na(suppressWarnings(as.numeric(x))))
 }
-
 # This function creates a wrapper around grDevices::recordPlot() to enable non-ggplot graphs to be saved as recorded_plot objects.
 # It also handles graphics devices carefully.
 record_graph <- function(x) {
@@ -2395,8 +2316,6 @@ slopegraph_theme <- function(x_text_size = 12){
                   ggplot2::theme(axis.text.x.top = ggplot2::element_text(size = x_text_size, face = "bold")),
                   ggplot2::theme(axis.ticks = ggplot2::element_blank()))
 }
-
-
 # slightly amended the "newggslopegraph" function in the CGPfunctions package
 slopegraph <- function(data, x, y, colour, data_label = NULL, 
           y_text_size = 3, 
@@ -2523,7 +2442,6 @@ slopegraph <- function(data, x, y, colour, data_label = NULL,
     ggplot2::geom_label(ggplot2::aes_string(label = Ndata_label), size = data_text_size, label.padding = unit(data_label_padding, "lines"),
                label.size = data_label_line_size, colour = data_text_colour, fill = data_label_fill_colour)
 }
-
 # Returns a three-letter string representing a specific quarter in a year (e.g. "JFM", "AMJ" etc.). 
 get_quarter_label <-   function(quarter, start_month){
   if (!start_month %in% 1:12) stop(start_month, " is an invalid start month, must be in range of 1:12")
@@ -2533,27 +2451,21 @@ get_quarter_label <-   function(quarter, start_month){
   paste(mabb[start_pos:(start_pos+2)], collapse = "")})
   return(factor(x = qtr, levels = unique(qtr)))
 }
-
 is.containVariableLabel <- function(x){
   return(isTRUE(sjlabelled::get_label(x) != ""))
 }
-
 is.emptyvariable <- function(x){
  return(isTRUE(length(x) == sum(x == "")))
 }
-
 is.NAvariable <- function(x){
   return(isTRUE(length(x) == sum(is.na(x))))
 }
-
 is.levelscount <- function(x, n){
  return(isTRUE(sum(levels(x)) == n))
 }
-
 is.containValueLabel <- function(x){
   return(labels_label %in% names(attributes(x)))
 }
-
 is.containPartialValueLabel <- function(x) {
   if(is.containValueLabel(x)) {
     levelCounts <- table(x)
@@ -2562,7 +2474,6 @@ is.containPartialValueLabel <- function(x) {
   }
   else{return(FALSE)}
 }
-
 read_corpora <- function(data){
   data_all <- NULL
   description <- NULL
@@ -2611,8 +2522,6 @@ read_corpora <- function(data){
   } 
   return (data.frame(data_all))
 }
-
-
 # Bind two data frames
 # and remove any duplicates from data frame x that are in data frame y
 # x = our data to remove duplicates from
@@ -2622,7 +2531,6 @@ cbind_unique <- function(x, y, cols){
   x <- x %>% dplyr::select(c(setdiff(names(x), cols)))
   x <- dplyr::bind_cols(x = x, y = dplyr::select(y, tidyselect::all_of(cols)))
 }
-
 #object is the object to be displayed
 #object_format is the display format. If supplied, then returns file name of the object
 #if not then it prints the object
@@ -2639,7 +2547,6 @@ view_object_data <- function(object, object_format = NULL) {
   }
   return(file_name)
 }
-
 view_object <- function(data_book_object) {
   return(
     view_object_data(
@@ -2648,7 +2555,6 @@ view_object <- function(data_book_object) {
     )
   )
 }
-
 #displays the graph object in the set R "viewer".
 #if the viewer is not available then 
 #it saves the object as a file in the temporary folder
@@ -2683,7 +2589,6 @@ view_graph_object <- function(graph_object){
     print(graph_object)
   }
   dev.off() #todo. use graphics.off() which one is better?
-
   
   #todo. should we use respective package "convenience" functions to save the objects as image files depending on the class names?
   #investigate if it will help with resolution and scaling?
@@ -2698,7 +2603,6 @@ view_graph_object <- function(graph_object){
   return(file_name)
   
 }
-
 #displays the object in the set R "viewer".
 #if the viewer is not available then 
 #it saves the object as a file in the temporary folder
@@ -2729,7 +2633,6 @@ view_text_object <- function(text_object){
   return(file_name)
   
 }
-
 #displays the html object in the set R "viewer".
 #if the viewer is not available then 
 #it saves the object as a file in the temporary folder
@@ -2774,7 +2677,6 @@ view_html_object <- function(html_object){
   message("R viewer not detected. File saved in location ", file_name)
   return(file_name)
 } 
-
 #tries to recordPlot if graph_object = NULL, then returns graph object of class "recordedplot".
 #applicable to base graphs only
 check_graph <- function(graph_object){
@@ -2804,8 +2706,6 @@ check_graph <- function(graph_object){
   
   return(out)
 } 
-
-
 get_data_book_output_object_names <- function(output_object_list,
                                               object_type_label = NULL, 
                                               excluded_items = c(), 
@@ -2849,7 +2749,6 @@ get_data_book_output_object_names <- function(output_object_list,
   }
   
 }
-
 get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE) 
 {   
   oneLink <- function(s) {
@@ -2909,7 +2808,6 @@ get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE)
                    port, basename(file)))}
   else return(sprintf("file://%s", file))
 }
-
 # for issue 8342 - adding in a count of the number of elements that have missing values by period (and station)
 cumulative_inventory <- function(data, station = NULL, from, to){
   if (is.null(station)){
@@ -2939,7 +2837,6 @@ cumulative_inventory <- function(data, station = NULL, from, to){
     }
     return(data)
 }
-
 getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_regex) {
   if(use_regex){
     # Find the rows that match the search text using regex
@@ -2955,7 +2852,6 @@ getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_reg
   # Return the row headers
   return(rowHeaders)
 }
-
 # Custom function to convert character to list of numeric vector
 convert_to_list <- function(x) {
   if (grepl("^c\\(", x)) {
@@ -2968,7 +2864,6 @@ convert_to_list <- function(x) {
     return(as.numeric(x))
   }
 }
-
 getExample <- function (topic, package = NULL, lib.loc = NULL, character.only = TRUE, give.lines = FALSE, local = FALSE, echo = TRUE, verbose = getOption("verbose"), setRNG = FALSE, ask = getOption("example.ask"), prompt.prefix = abbreviate(topic, 6), run.dontrun = FALSE, run.donttest = interactive()) {
   if (!character.only) {
     topic <- substitute(topic)
@@ -3008,7 +2903,6 @@ getExample <- function (topic, package = NULL, lib.loc = NULL, character.only = 
   }
   return(example_text)
 }
-
 WB_evaporation <- function(water_balance, frac, capacity, evaporation_value, rain){
   if (water_balance >= frac*capacity){
     evaporation <- evaporation_value
@@ -3030,7 +2924,6 @@ WB_evaporation <- function(water_balance, frac, capacity, evaporation_value, rai
   }
   return(evaporation)
 }
-
 write_weather_data <- function(year, month, day, rain, mn_tmp, mx_tmp, missing_code, output_file) {
   # Create a data frame with the provided inputs
   weather_data <- data.frame(year = year,
@@ -3047,4 +2940,289 @@ write_weather_data <- function(year, month, day, rain, mn_tmp, mx_tmp, missing_c
   write.table(weather_data, file = output_file, sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
   
   cat("Weather data has been written to", output_file, "\n")
+}
+prepare_walter_lieth <- function(data, month, tm_min, ta_min){
+  dat_long_int <- NULL
+  for (j in seq(nrow(data) - 1)) {
+    intres <- NULL
+     for (i in seq_len(ncol(data))) {
+      if (is.character(data[j, i]) | is.factor(data[j, i])) {
+        val <- as.data.frame(data[j, i])
+      }
+      else {
+        interpol <- approx(x = data[c(j, j + 1), "indrow"],
+                           y = data[c(j, j + 1), i],
+                           n = 50)
+        val <- as.data.frame(interpol$y)
+      }
+      names(val) <- names(data)[i]
+      intres <- dplyr::bind_cols(intres, val)
+    }
+    dat_long_int <- dplyr::bind_rows(dat_long_int, intres)
+  }
+  dat_long_int$interpolate <- TRUE
+  dat_long_int[[month]] <- ""
+  data$interpolate <- FALSE
+  dat_long_int <- dat_long_int[!dat_long_int$indrow %in% data$indrow, ]
+  dat_long_end <- dplyr::bind_rows(data, dat_long_int)
+  dat_long_end <- dat_long_end[order(dat_long_end$indrow), ]
+  dat_long_end <- dat_long_end[dat_long_end$indrow >= 0 & dat_long_end$indrow <= 12, ]
+  dat_long_end <- tibble::as_tibble(dat_long_end)
+  
+  getpolymax <- function(x, y, y_lim) {
+    initpoly <- FALSE
+    yres <- NULL
+     xres <- NULL
+    for (i in seq_len(length(y))) {
+      lastobs <- i == length(x)
+      if (y[i] > y_lim[i]) {
+        if (isFALSE(initpoly)) {
+          xres <- c(xres, x[i])
+          yres <- c(yres, y_lim[i])
+          initpoly <- TRUE
+        }
+        xres <- c(xres, x[i])
+        yres <- c(yres, y[i])
+        if (lastobs) {
+          xres <- c(xres, x[i], NA)
+          yres <- c(yres, y_lim[i], NA)
+        }
+      }
+      else {
+        if (initpoly) {
+          xres <- c(xres, x[i - 1], NA)
+          yres <- c(yres, y_lim[i - 1], NA)
+          initpoly <- FALSE
+        }
+      }
+    }
+    poly <- tibble::tibble(x = xres, y = yres)
+    return(poly)
+  }
+  getlines <- function(x, y, y_lim) {
+    yres <- NULL
+    xres <- NULL
+    ylim_res <- NULL
+    for (i in seq_len(length(y))) {
+      if (y[i] > y_lim[i]) {
+        xres <- c(xres, x[i])
+        yres <- c(yres, y[i])
+        ylim_res <- c(ylim_res, y_lim[i])
+      }
+    }
+    line <- tibble::tibble(x = xres, y = yres, ylim_res = ylim_res)
+    return(line)
+  }
+  prep_max_poly <- getpolymax(x = dat_long_end$indrow, y = pmax(dat_long_end$pm_reesc, 
+                                                                50), y_lim = rep(50, length(dat_long_end$indrow)))
+  tm_max_line <- getlines(x = dat_long_end$indrow, y = dat_long_end$tm, 
+                          y_lim = dat_long_end$pm_reesc)
+  pm_max_line <- getlines(x = dat_long_end$indrow, y = pmin(dat_long_end$pm_reesc, 
+                                                            50), y_lim = dat_long_end$tm)
+  dat_real <- dat_long_end[dat_long_end$interpolate == FALSE, 
+                           c("indrow", ta_min)]
+  x <- NULL
+  y <- NULL
+  for (i in seq_len(nrow(dat_real))) {
+    if (dat_real[i, ][[ta_min]] < 0) {
+      x <- c(x, NA, rep(dat_real[i, ]$indrow - 0.5, 2), 
+             rep(dat_real[i, ]$indrow + 0.5, 2), NA)
+      y <- c(y, NA, -3, 0, 0, -3, NA)
+       }
+    else {
+      x <- c(x, NA)
+      y <- c(y, NA)
+    }
+  }
+  probfreeze <- tibble::tibble(x = x, y = y)
+  rm(dat_real)
+  dat_real <- dat_long_end[dat_long_end$interpolate == FALSE, 
+                           c("indrow", tm_min)]
+  x <- NULL
+  y <- NULL
+  for (i in seq_len(nrow(dat_real))) {
+    if (dat_real[i, ][[tm_min]] < 0) {
+      x <- c(x, NA, rep(dat_real[i, ]$indrow - 0.5, 2), 
+             rep(dat_real[i, ]$indrow + 0.5, 2), NA)
+      y <- c(y, NA, -3, 0, 0, -3, NA)
+    }
+    else {
+      x <- c(x, NA)
+      y <- c(y, NA)
+    }
+  }
+  surefreeze <- tibble::tibble(x = x, y = y)
+  return_list <- list(dat_long_end,
+                      tm_max_line,
+                      pm_max_line,
+                      prep_max_poly,
+                      probfreeze,
+                      surefreeze)
+  names(return_list) <- c("dat_long_end", "tm_max_line", "pm_max_line",
+                          "prep_max_poly", "prob_freeze", "surefreeze")
+  return(return_list)
+}
+ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, ta_min, station_name = "", 
+                            alt = NA, per = NA, pcol = "#002F70", 
+                            tcol = "#ff0000", pfcol = "#9BAEE2", sfcol = "#3C6FC4", 
+                            shem = FALSE, p3line = FALSE, ...) 
+                            {
+
+  # Preprocess data with vectorised operations
+  data <- data %>%
+    dplyr::mutate(tm = (.data[[tm_max]] + .data[[tm_min]]) / 2,
+                  pm_reesc = dplyr::if_else(.data[[p_mes]] < 100, .data[[p_mes]] * 0.5, .data[[p_mes]] * 0.05 + 45),
+                  p3line = .data[[p_mes]] / 3) %>%
+    dplyr::mutate(across(.data[[month]], ~ forcats::fct_expand(.data[[month]], ""))) %>%
+    dplyr::arrange(.data[[month]])
+    # do this for each station, if we have a station
+  if (!is.null(station)){
+    data <- data %>% group_by(!!sym(station))
+  }
+  data <- data %>%
+    group_modify(~{
+      # Add dummy rows at the beginning and end for each group
+      .x <- bind_rows(.x[nrow(.x), , drop = FALSE], .x, .x[1, , drop = FALSE])
+      # Clear month value for the dummy rows
+      .x[c(1, nrow(.x)), which(names(.x) == data[[month]])] <- ""
+      # Add an index column for plotting or further transformations
+      .x <- cbind(indrow = seq(-0.5, 12.5, 1), .x)
+      .x
+    })
+  
+  if (!is.null(station)){
+    data <- data %>% ungroup()
+  }
+  data <- data.frame(data)
+
+   # split by station
+  if (is.null(station)){
+    data_list <- prepare_walter_lieth(data, month, tm_min, ta_min)
+    # data things
+    dat_long_end <- data_list$dat_long_end
+    tm_max_line <- data_list$tm_max_line
+    pm_max_line <- data_list$pm_max_line
+    prep_max_poly <- data_list$prep_max_poly
+    probfreeze <- data_list$prob_freeze
+    surefreeze <- data_list$surefreeze
+  } else {
+    results <-
+      map(.x = unique(data[[station]]),
+          .f = ~{filtered_data <- data %>% filter(!!sym(station) == .x)
+          prepare_walter_lieth(filtered_data, month, tm_min, ta_min)})
+    # Function to bind rows for a specific sub-element across all main elements
+    n <- length(results)
+    m <- length(results[[1]])
+     station_name <- unique(data[[station]])
+    binds <- NULL
+    combined <- NULL
+    for (j in 1:m){
+      for (i in 1:n) { # for each station data set
+        binds[[i]] <- results[[i]][[j]] %>% mutate(!!sym(station) := station_name[i])
+      }
+      combined[[j]] <- do.call(rbind, binds) # Combine all the sub-elements row-wise
+    }
+    # data things
+    dat_long_end <- combined[[1]]
+    tm_max_line <- combined[[2]]
+    pm_max_line <- combined[[3]]
+    prep_max_poly <- combined[[4]]
+    probfreeze <- combined[[5]]
+    surefreeze <- combined[[6]]
+  }
+  
+  # data frame pretty things ------------------------------------------------------
+  ticks <- data.frame(x = seq(0, 12), ymin = -3, ymax = 0)
+  title <- station_name
+  if (!is.na(alt)) {
+    title <- paste0(title, " (", prettyNum(alt, big.mark = ",", 
+                                           decimal.mark = "."), " m)")
+  }
+  if (!is.na(per)) {
+    title <- paste0(title, "\n", per)
+  }
+  sub <- paste(round(mean(dat_long_end[dat_long_end$interpolate == FALSE, ]$tm), 1),
+               "C        ",
+               prettyNum(round(sum(dat_long_end[dat_long_end$interpolate == FALSE, ][[p_mes]])), big.mark = ","), " mm", sep = "")
+  
+  maxtm <- prettyNum(round(max(dat_long_end[[tm_max]]), 1))
+  mintm <- prettyNum(round(min(dat_long_end[[tm_min]]), 1))
+  tags <- paste0(paste0(rep(" \n", 6), collapse = ""), maxtm, 
+                 paste0(rep(" \n", 10), collapse = ""), mintm)
+  month_breaks <- dat_long_end[dat_long_end[[month]] != "", ]$indrow
+  month_labs <- dat_long_end[dat_long_end[[month]] != "", ][[month]]
+  
+  ymax <- max(60, 10 * floor(max(dat_long_end$pm_reesc)/10) + 10)
+  ymin <- min(-3, min(dat_long_end$tm))
+  range_tm <- seq(0, ymax, 10)
+  if (ymin < -3) {
+    ymin <- floor(ymin/10) * 10
+    range_tm <- seq(ymin, ymax, 10)
+  }
+  templabs <- paste0(range_tm)
+  templabs[range_tm > 50] <- ""
+  range_prec <- range_tm * 2
+  range_prec[range_tm > 50] <- range_tm[range_tm > 50] * 20 - 900
+  preclabs <- paste0(range_prec)
+  preclabs[range_tm < 0] <- ""
+  
+  wandlplot <- ggplot2::ggplot() + ggplot2::geom_line(data = dat_long_end, 
+                                                      aes(x = .data$indrow, y = .data$pm_reesc), color = pcol) + 
+    ggplot2::geom_line(data = dat_long_end, aes(x = .data$indrow, 
+                                                y = .data$tm), color = tcol)
+  if (nrow(tm_max_line > 0)) {
+    wandlplot <- wandlplot + ggplot2::geom_segment(aes(x = .data$x, 
+                                                       y = .data$ylim_res, xend = .data$x, yend = .data$y), 
+                                                   data = tm_max_line, color = tcol, alpha = 0.2)
+  }
+  if (nrow(pm_max_line > 0)) {
+    wandlplot <- wandlplot + ggplot2::geom_segment(aes(x = .data$x, 
+                                                       y = .data$ylim_res, xend = .data$x, yend = .data$y), 
+                                                   data = pm_max_line, color = pcol, alpha = 0.2)
+  }
+  if (p3line) {
+    wandlplot <- wandlplot + ggplot2::geom_line(data = dat_long_end, 
+                                                aes(x = .data$indrow, y = .data$p3line), color = pcol)
+  }
+  if (max(dat_long_end$pm_reesc) > 50) {
+    wandlplot <- wandlplot + ggplot2::geom_polygon(data = prep_max_poly, aes(x, y),
+                                                   fill = pcol)
+  }
+  if (min(dat_long_end[[ta_min]]) < 0) {
+    wandlplot <- wandlplot + ggplot2::geom_polygon(data = probfreeze, aes(x = x, y = y),
+                                                   fill = pfcol, colour = "black")
+  }
+   if (min(dat_long_end[[tm_min]]) < 0) {
+    wandlplot <- wandlplot + geom_polygon(data = surefreeze, aes(x = x, y = y),
+                                          fill = sfcol, colour = "black")
+  }
+  wandlplot <- wandlplot + geom_hline(yintercept = c(0, 50), 
+                                      size = 0.5) +
+    geom_segment(data = ticks, aes(x = x, xend = x, y = ymin, yend = ymax)) +
+    scale_x_continuous(breaks = month_breaks, name = "", labels = month_labs, expand = c(0, 0)) + 
+    scale_y_continuous("C", limits = c(ymin, ymax), labels = templabs, 
+     breaks = range_tm, sec.axis = dup_axis(name = "mm", labels = preclabs))
+  wandlplot <- wandlplot +
+    ggplot2::labs(title = title, subtitle = sub, tag = tags) +
+    ggplot2::theme_classic() +
+    ggplot2::theme(plot.title = element_text(lineheight = 1, size = 14, face = "bold"),
+                   plot.subtitle = element_text(hjust = 1, vjust = 1, size = 14),
+                   plot.tag = element_text(size = 10), 
+                   plot.tag.position = "left", axis.ticks.length.x.bottom = unit(0, "pt"), 
+                   axis.line.x.bottom = element_blank(), 
+                   axis.title.y.left = element_text(angle = 0, 
+                                                    vjust = 0.9, size = 10, colour = tcol,
+                                                    margin = unit(rep(10, 4), "pt")),
+                   axis.text.x.bottom = element_text(size = 10), 
+                   axis.text.y.left = element_text(colour = tcol, size = 10), 
+                   axis.title.y.right = element_text(angle = 0, vjust = 0.9, 
+                                                     size = 10, colour = pcol,
+                                                     margin = unit(rep(10, 4), "pt")),
+                   axis.text.y.right = element_text(colour = pcol, size = 10))
+  
+  if (!is.null(station)){
+    wandlplot <- wandlplot + facet_wrap(station)
+  }
+  
+  return(wandlplot)
 }
