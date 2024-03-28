@@ -743,29 +743,21 @@ Public Class dlgHistogram
         End If
     End Sub
 
-
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged, ucrChkBinWidth.ControlContentsChanged, ucrNudBinwidth.ControlContentsChanged, ucrNudMinHeight.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrChkOmitYAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitYAxis.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged
-        If ucrChkDisplayAsDotPlot.Checked Then
-            If ucrChkOmitYAxis.Checked Then
-                clsBaseOperator.AddParameter("scale", clsRFunctionParameter:=clsYlabScalesFunction, iPosition:=4, bIncludeArgumentName:=False)
-            Else
-                clsBaseOperator.RemoveParameterByName("scale")
-            End If
+        If ucrChkDisplayAsDotPlot.Checked AndAlso ucrChkOmitYAxis.Checked Then
+            clsBaseOperator.AddParameter("scale", clsRFunctionParameter:=clsYlabScalesFunction, iPosition:=4, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("scale")
         End If
     End Sub
 
     Private Sub ucrChkMinHeight_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMinHeight.ControlValueChanged, ucrNudMinHeight.ControlValueChanged
-        If ucrChkRidges.Checked Then
-            If ucrChkMinHeight.Checked Then
-                clsRgeomPlotFunction.AddParameter("rel_min_height", ucrNudMinHeight.GetText, iPosition:=4)
-            Else
-                clsRgeomPlotFunction.RemoveParameterByName("rel_min_height")
-            End If
+        If ucrChkRidges.Checked AndAlso ucrChkMinHeight.Checked Then
+            clsRgeomPlotFunction.AddParameter("rel_min_height", ucrNudMinHeight.GetText, iPosition:=4)
+        Else
+            clsRgeomPlotFunction.RemoveParameterByName("rel_min_height")
         End If
+
     End Sub
 
     Private Sub ucrChkBinWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBinWidth.ControlValueChanged, ucrNudBinwidth.ControlValueChanged
@@ -830,4 +822,7 @@ Public Class dlgHistogram
         SetPipeAssignTo()
     End Sub
 
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged, ucrChkBinWidth.ControlContentsChanged, ucrNudBinwidth.ControlContentsChanged, ucrNudMinHeight.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
 End Class
