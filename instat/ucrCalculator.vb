@@ -1525,7 +1525,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdYear_Click(sender As Object, e As EventArgs) Handles cmdYear.Click
+    Private Sub cmdYear_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::year(x= )", 1)
         Else
@@ -1533,7 +1533,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdMonth_Click(sender As Object, e As EventArgs) Handles cmdMonth.Click
+    Private Sub cmdMonth_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::month(x= , label=FALSE, abbr=TRUE)", 25)
         Else
@@ -1541,7 +1541,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdDay_Click(sender As Object, e As EventArgs) Handles cmdDay.Click
+    Private Sub cmdDay_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::day(x= )", 1)
         Else
@@ -1549,7 +1549,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdWday_Click(sender As Object, e As EventArgs) Handles cmdWday.Click
+    Private Sub cmdWday_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::wday(x= , label=FALSE, abbr=TRUE)", 25)
         Else
@@ -1557,7 +1557,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdYday_Click(sender As Object, e As EventArgs) Handles cmdYday.Click
+    Private Sub cmdYday_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::yday(x= )", 1)
         Else
@@ -1565,7 +1565,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdDate_Click(sender As Object, e As EventArgs) Handles cmdDate.Click
+    Private Sub cmdDate_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::date(x= )", 1)
         Else
@@ -1573,7 +1573,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdLeap_Click(sender As Object, e As EventArgs) Handles cmdLeap.Click
+    Private Sub cmdLeap_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::leap_year(x= )", 1)
         Else
@@ -1581,7 +1581,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdYmd_Click(sender As Object, e As EventArgs) Handles cmdYmd.Click
+    Private Sub cmdYmd_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::ymd(x= )", 1)
         Else
@@ -1589,14 +1589,14 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdMdy_Click(sender As Object, e As EventArgs) Handles cmdMdy.Click
+    Private Sub cmdMdy_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::mdy(x= )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::mdy()", 1)
         End If
     End Sub
-    Private Sub cmdDmy_Click(sender As Object, e As EventArgs) Handles cmdDmy.Click
+    Private Sub cmdDmy_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::dmy(x= )", 1)
         Else
@@ -1605,42 +1605,42 @@ Public Class ucrCalculator
     End Sub
 
 
-    Private Sub cmdHour_Click(sender As Object, e As EventArgs) Handles cmdHour.Click
+    Private Sub cmdHour_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::hour(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::hour()", 1)
         End If
     End Sub
-    Private Sub cmdMinutes_Click(sender As Object, e As EventArgs) Handles cmdminutes.Click
+    Private Sub cmdMinutes_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::minute(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::minute()", 1)
         End If
     End Sub
-    Private Sub cmdSec_Click(sender As Object, e As EventArgs) Handles cmdSec.Click
+    Private Sub cmdSec_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::second(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::second()", 1)
         End If
     End Sub
-    Private Sub cmdAm_Click(sender As Object, e As EventArgs) Handles cmdAm.Click
+    Private Sub cmdAm_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::am(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::am()", 1)
         End If
     End Sub
-    Private Sub cmdD_In_M_Click(sender As Object, e As EventArgs) Handles cmdD_In_M.Click
+    Private Sub cmdD_In_M_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::days_in_month(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::days_in_month()", 1)
         End If
     End Sub
-    Private Sub cmdQuarter_Click(sender As Object, e As EventArgs) Handles cmdQuarter.Click
+    Private Sub cmdQuarter_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::quarter(x =, with_year = FALSE, fiscal_start = 1 )", 39)
         Else
@@ -4083,7 +4083,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdDateTime_Click(sender As Object, e As EventArgs) Handles cmdDateTime.Click
+    Private Sub cmdDateTime_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::as_datetime(x = )", 2)
         Else
@@ -4091,7 +4091,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdTime_Click(sender As Object, e As EventArgs) Handles cmdTime.Click
+    Private Sub cmdTime_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hms::hms(seconds = , minutes = , hours = , days = )", 32)
         Else
@@ -4099,7 +4099,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdPm_Click(sender As Object, e As EventArgs) Handles cmdPm.Click
+    Private Sub cmdPm_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::pm(x = )", 2)
         Else
@@ -5535,5 +5535,25 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
         End If
+    End Sub
+
+    Private Sub cmdYmdHms_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub cmdYmdHm_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub cmdAsDate_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub cmdAsTime_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub cmdYmdH_Click(sender As Object, e As EventArgs)
+
     End Sub
 End Class
