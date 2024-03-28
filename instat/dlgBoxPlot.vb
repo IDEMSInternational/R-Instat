@@ -24,7 +24,11 @@ Public Class dlgBoxplot
     Private clsRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsLocalRaesFunction As New RFunction
+    Private clsWidthRaesFunction As New RFunction
+    Private clsStatAesFunction As New RFunction
     Private clsStatSummary As New RFunction
+    Private clsPositionNodgeFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     'Similarly clsRgeom_boxplotFunction and clsRaesFunction (respectively the geom_boxplot function and the global aes function) are given through SetupLayer to sdgLayerOptions for edit. 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -51,10 +55,28 @@ Public Class dlgBoxplot
     Private clsViolinplotFunction As New RFunction
     Private clsCurrGeomFunction As New RFunction
     Private clsSummaryFunction As New RFunction
+    Private clsCutWitdhFunction As New RFunction
+    Private clsGeomBoxPlotFunction As New RFunction
     ' Jitter function that can be added to the boxplot/violin base layer
     Private clsAddedJitterFunc As New RFunction
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
+    Private clsFacetsFunction As New RFunction
+
+    Private clsFacetFunction As New RFunction
+    Private clsFacetVariablesOperator As New ROperator
+    Private clsFacetRowOp As New ROperator
+    Private clsFacetColOp As New ROperator
+    Private clsPipeOperator As New ROperator
+    Private clsGroupByFunction As New RFunction
+
+    Private ReadOnly strFacetWrap As String = "Facet Wrap"
+    Private ReadOnly strFacetRow As String = "Facet Row"
+    Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strNone As String = "None"
+
+    Private bUpdateComboOptions As Boolean = True
+    Private bUpdatingParameters As Boolean = False
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
@@ -83,6 +105,7 @@ Public Class dlgBoxplot
         Dim clsCoordFlipParam As New RParameter
         Dim clsAddedJitterParam As New RParameter
         Dim dctSummaries As New Dictionary(Of String, String)
+        Dim dctLegendPosition As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 436
         ucrBase.clsRsyntax.iCallType = 3
@@ -94,9 +117,11 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoBoxplotTufte, {"geom_boxplot", "geom_tufteboxplot"})
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
-        ucrPnlPlots.AddToLinkedControls(ucrChkAddPoints, {rdoBoxplotTufte, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlPlots.AddToLinkedControls({ucrChkTufte}, {rdoBoxplotTufte}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrChkAddPoints, ucrChkWidth}, {rdoBoxplotTufte, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrChkTufte}, {rdoBoxplotTufte}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTufte.AddToLinkedControls(ucrChkVarWidth, {"FALSE"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls(ucrChkBoxPlot, {rdoJitter, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
 
         ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorBoxPlot.SetParameterIsrfunction()
@@ -111,8 +136,6 @@ Public Class dlgBoxplot
 
         ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
-        ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
-        ucrByFactorsReceiver.strSelectorHeading = "Factors"
         ucrByFactorsReceiver.SetParameterIsString()
         ucrByFactorsReceiver.bWithQuotes = False
         ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
@@ -178,13 +201,56 @@ Public Class dlgBoxplot
         ucrInputSummaries.SetItems(dctSummaries)
         ucrInputSummaries.SetDropDownStyleAsNonEditable()
 
+        ucrChkLegend.SetText("Legend:")
+        ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
+
+        ucr1stFactorReceiver.SetParameter(New RParameter("var1"))
+        ucr1stFactorReceiver.Selector = ucrSelectorBoxPlot
+        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.strSelectorHeading = "Factors"
+        ucr1stFactorReceiver.bWithQuotes = False
+        ucr1stFactorReceiver.SetParameterIsString()
+        ucr1stFactorReceiver.SetValuesToIgnore({"."})
+        ucr1stFactorReceiver.SetParameterPosition(1)
+        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
+
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetDropDownStyleAsNonEditable()
+
+        ucrChkWidth.SetText("Width")
+        ucrChkWidth.AddToLinkedControls({ucrInputWidth}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.25)
+        ucrChkWidth.AddParameterValuesCondition(True, "cut_width", "True")
+        ucrChkWidth.AddParameterValuesCondition(False, "cut_width", "False")
+
+        ucrChkBoxPlot.SetText("Add Boxplot")
+        ucrChkBoxPlot.AddToLinkedControls({ucrNudBoxPlot}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.5)
+        ucrChkBoxPlot.AddParameterValuesCondition(True, "boxplot", "True")
+        ucrChkBoxPlot.AddParameterValuesCondition(False, "boxplot", "False")
+
+        ucrNudBoxPlot.SetParameter(New RParameter("width", 2))
+        ucrNudBoxPlot.SetMinMax(0, 1)
+        ucrNudBoxPlot.DecimalPlaces = 2
+        ucrNudBoxPlot.Increment = 0.01
+        ucrNudBoxPlot.SetLinkedDisplayControl(lblWidth)
+
+        ucrInputWidth.SetParameter(New RParameter("width"))
+        ucrInputWidth.SetValidationTypeAsNumeric()
 
         ucrChkGrouptoConnect.SetText("Group to Connect")
         ucrChkGrouptoConnect.AddToLinkedControls(ucrInputSummaries, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="mean")
         ucrChkGrouptoConnect.AddParameterPresentCondition(True, strStatSummaryParameterName, True)
         ucrChkGrouptoConnect.AddParameterPresentCondition(False, strStatSummaryParameterName, False)
         'this control exists but diabled for now
-        ucrChkSwapParameters.SetText("swap Parameters")
         DialogueSize()
     End Sub
 
@@ -196,6 +262,17 @@ Public Class dlgBoxplot
         clsRaesFunction = New RFunction
         clsLocalRaesFunction = New RFunction
         clsStatSummary = New RFunction
+        clsFacetFunction = New RFunction
+        clsFacetVariablesOperator = New ROperator
+        clsFacetRowOp = New ROperator
+        clsFacetColOp = New ROperator
+        clsPipeOperator = New ROperator
+        clsGroupByFunction = New RFunction
+        clsDummyFunction = New RFunction
+        clsWidthRaesFunction = New RFunction
+        clsGeomBoxPlotFunction = New RFunction
+        clsStatAesFunction = New RFunction
+        clsPositionNodgeFunction = New RFunction
 
         'Setting up new functions
         clsBoxplotFunction = New RFunction
@@ -206,6 +283,9 @@ Public Class dlgBoxplot
 
         clsAddedJitterFunc.Clear()
 
+        ucrInputStation.SetName(strFacetWrap)
+        ucrInputStation.bUpdateRCodeFromControl = True
+
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.SetGgplotFunction(clsBaseOperator)
 
@@ -215,6 +295,9 @@ Public Class dlgBoxplot
         bResetSubdialog = True
         bResetBoxLayerSubdialog = True
 
+        clsDummyFunction.AddParameter("cut_width", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("boxplot", "False", iPosition:=1)
+
         'Setting current geom as boxplot
         clsCurrGeomFunction.SetPackageName("ggplot2")
         clsCurrGeomFunction = clsBoxplotFunction
@@ -223,6 +306,18 @@ Public Class dlgBoxplot
         clsBoxplotFunction.SetRCommand("geom_boxplot")
         clsBoxplotFunction.AddParameter("varwidth", "FALSE", iPosition:=0)
         clsBoxplotFunction.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
+
+        clsWidthRaesFunction.SetPackageName("ggplot2")
+        clsWidthRaesFunction.SetRCommand("aes")
+
+        clsCutWitdhFunction.SetPackageName("ggplot2")
+        clsCutWitdhFunction.SetRCommand("cut_width")
+
+        clsStatAesFunction.SetPackageName("ggplot2")
+        clsStatAesFunction.SetRCommand("aes")
+
+        clsGeomBoxPlotFunction.SetPackageName("ggplot2")
+        clsGeomBoxPlotFunction.SetRCommand("geom_boxplot")
 
         clsTufteBoxplotFunction.SetPackageName("ggthemes")
         clsTufteBoxplotFunction.SetRCommand("geom_tufteboxplot")
@@ -262,8 +357,26 @@ Public Class dlgBoxplot
         clsStatSummary.SetPackageName("ggplot2")
         clsStatSummary.SetRCommand("stat_summary")
         clsStatSummary.AddParameter("geom", Chr(34) & "line" & Chr(34), iPosition:=0)
-        clsStatSummary.AddParameter("group", 1, iPosition:=1)
-        clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
+
+        clsPositionNodgeFunction.SetPackageName("ggplot2")
+        clsPositionNodgeFunction.SetRCommand("position_dodge")
+        clsPositionNodgeFunction.AddParameter("width", 0.9, iPosition:=0)
+
+        clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetRowOp.SetOperation("+")
+        clsFacetRowOp.bBrackets = False
+        clsFacetColOp.SetOperation("+")
+        clsFacetColOp.bBrackets = False
+        clsFacetVariablesOperator.SetOperation("~")
+        clsFacetVariablesOperator.bForceIncludeOperation = True
+        clsFacetVariablesOperator.bBrackets = False
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
+
+        clsPipeOperator.SetOperation("%>%")
+        SetPipeAssignTo()
+
+        clsGroupByFunction.SetPackageName("dplyr")
+        clsGroupByFunction.SetRCommand("group_by")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -307,8 +420,16 @@ Public Class dlgBoxplot
         ucrInputSummaries.SetRCode(clsStatSummary, bReset)
         ucrChkGrouptoConnect.SetRCode(clsBaseOperator, bReset)
         ucrPnlPlots.SetRCode(clsCurrGeomFunction, bReset)
-
+        ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrChkTufte.SetRCode(clsCurrGeomFunction, bReset)
+        ucrInputWidth.SetRCode(clsCutWitdhFunction, bReset)
+        ucrNudBoxPlot.SetRCode(clsGeomBoxPlotFunction, bReset)
+        If bReset Then
+            AutoFacetStation()
+            ucrChkBoxPlot.SetRCode(clsDummyFunction, bReset)
+            ucrChkWidth.SetRCode(clsDummyFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -359,6 +480,13 @@ Public Class dlgBoxplot
         SetGeomPrefixFillColourAes()
         DialogueSize()
         EnableDisableBoxplotOptions()
+        If rdoBoxplotTufte.Checked Then
+            If ucrChkAddPoints.Checked Then
+                clsBoxplotFunction.AddParameter("outlier.shape", "NA", iPosition:=2)
+            Else
+                clsBoxplotFunction.RemoveParameterByName("outlier.shape")
+            End If
+        End If
     End Sub
 
     Private Sub ucrChkGrouptoConnect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGrouptoConnect.ControlValueChanged
@@ -367,6 +495,7 @@ Public Class dlgBoxplot
         Else
             clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
         End If
+        AddRemoveAesParm()
     End Sub
 
     Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
@@ -409,13 +538,25 @@ Public Class dlgBoxplot
         TestOkEnabled()
     End Sub
 
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
+        AddRemoveTheme()
+    End Sub
+
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
                                 clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
-                                clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot,
+                                clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, clsNewFacetVariablesOperator:=clsFacetVariablesOperator,
                                 clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
                                 clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
-                                strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+                                strMainDialogGeomParameterNames:=strGeomParameterNames, bChangeAesParameter:=True, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -442,14 +583,187 @@ Public Class dlgBoxplot
 
     Private Sub DialogueSize()
         If rdoBoxplotTufte.Checked OrElse rdoViolin.Checked Then
-            Me.Size = New Size(441, 505)
-            Me.ucrSaveBoxplot.Location = New Point(10, 384)
-            Me.ucrBase.Location = New Point(10, 413)
+            Me.Size = New Size(441, 536)
+            Me.ucrChkLegend.Location = New Size(10, 388)
+            Me.ucrInputLegendPosition.Location = New Size(105, 390)
+            Me.ucrInputStation.Location = New Size(335, 390)
+            Me.ucr1stFactorReceiver.Location = New Size(222, 391)
+            Me.lblFacetBy.Location = New Size(222, 376)
+            Me.ucrSaveBoxplot.Location = New Point(10, 418)
+            Me.ucrBase.Location = New Point(10, 442)
         Else
-            Me.Size = New Size(441, 479)
-            Me.ucrSaveBoxplot.Location = New Point(10, 356)
-            Me.ucrBase.Location = New Point(10, 384)
+            Me.Size = New Size(441, 500)
+            Me.ucrChkLegend.Location = New Size(10, 358)
+            Me.ucrInputLegendPosition.Location = New Size(105, 360)
+            Me.ucrInputStation.Location = New Size(335, 360)
+            Me.ucr1stFactorReceiver.Location = New Size(222, 361)
+            Me.lblFacetBy.Location = New Size(222, 346)
+            Me.ucrSaveBoxplot.Location = New Point(10, 390)
+            Me.ucrBase.Location = New Point(10, 415)
         End If
+    End Sub
+
+    Private Sub AutoFacetStation()
+        Dim ucrCurrentReceiver As ucrReceiver = Nothing
+
+        If ucrSelectorBoxPlot.CurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver = ucrSelectorBoxPlot.CurrentReceiver
+        End If
+        ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
+        If Not bUpdateComboOptions Then
+            Exit Sub
+        End If
+        Dim strChangedText As String = ucrChangedControl.GetText()
+        If strChangedText <> strNone Then
+            If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
+                    Not ucrInputStation.Equals(ucrChangedControl) AndAlso ucrInputStation.GetText() = strChangedText Then
+                bUpdateComboOptions = False
+                ucrInputStation.SetName(strNone)
+                bUpdateComboOptions = True
+            End If
+            If (strChangedText = strFacetWrap AndAlso ucrInputStation.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
+                    ucrInputStation.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
+                    ucrInputStation.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputStation.GetText = strFacetWrap) Then
+                ucrInputStation.SetName(strNone)
+            End If
+        End If
+        UpdateParameters()
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub UpdateParameters()
+        clsFacetVariablesOperator.RemoveParameterByName("var1")
+        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
+        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        bUpdatingParameters = True
+        ucr1stFactorReceiver.SetRCode(Nothing)
+        Select Case ucrInputStation.GetText()
+            Case strFacetWrap
+                ucr1stFactorReceiver.ChangeParameterName("var1")
+                ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
+            Case strFacetCol
+                ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsFacetColOp)
+            Case strFacetRow
+                ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
+        End Select
+        If Not clsRaesFunction.ContainsParameter("x") Then
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
+        bUpdatingParameters = False
+    End Sub
+
+    Private Sub AddRemoveFacets()
+        Dim bWrap As Boolean = False
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+
+        If bUpdatingParameters Then
+            Exit Sub
+        End If
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        If Not ucr1stFactorReceiver.IsEmpty Then
+            Select Case ucrInputStation.GetText()
+                Case strFacetWrap
+                    bWrap = True
+                Case strFacetCol
+                    bCol = True
+                Case strFacetRow
+                    bRow = True
+            End Select
+        End If
+
+        If bWrap OrElse bRow OrElse bCol Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+        End If
+        If bWrap Then
+            clsFacetFunction.SetRCommand("facet_wrap")
+        End If
+        If bRow OrElse bCol Then
+            clsFacetFunction.SetRCommand("facet_grid")
+        End If
+        If bRow Then
+            clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
+        ElseIf bCol AndAlso bWrap = False Then
+            clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
+        Else
+            clsFacetVariablesOperator.RemoveParameterByName("left")
+        End If
+        If bCol Then
+            clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
+        ElseIf bRow AndAlso bWrap = False Then
+            clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
+        Else
+            clsFacetVariablesOperator.RemoveParameterByName("right")
+        End If
+    End Sub
+
+    Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged, ucrByFactorsReceiver.ControlValueChanged
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+        EnableDisableWidth()
+        AddRemoveAesParm()
+    End Sub
+
+    Private Sub GetParameterValue(clsOperator As ROperator)
+        Dim i As Integer = 0
+        For Each clsTempParam As RParameter In clsOperator.clsParameters
+            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                i = i + 1
+            End If
+        Next
+    End Sub
+
+    Private Sub AddRemoveGroupBy()
+        If clsPipeOperator.ContainsParameter("mutate") Then
+            clsGroupByFunction.ClearParameters()
+            If clsBaseOperator.ContainsParameter("facets") Then
+                Select Case ucrInputStation.GetText()
+                    Case strFacetWrap
+                        GetParameterValue(clsFacetVariablesOperator)
+                    Case strFacetCol
+                        GetParameterValue(clsFacetColOp)
+                    Case strFacetRow
+                        GetParameterValue(clsFacetRowOp)
+                End Select
+            End If
+
+            If clsGroupByFunction.iParameterCount > 0 Then
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            Else
+                clsPipeOperator.RemoveParameterByName("group_by")
+            End If
+        Else
+            clsPipeOperator.RemoveParameterByName("group_by")
+        End If
+
+        SetPipeAssignTo()
+    End Sub
+
+    Private Sub SetPipeAssignTo()
+        If ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsPipeOperator.clsParameters.Count > 1 Then
+            clsPipeOperator.SetAssignTo(ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Else
+            clsPipeOperator.RemoveAssignTo()
+        End If
+    End Sub
+
+    Private Sub ucrSelectorBoxPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorBoxPlot.ControlValueChanged
+        AutoFacetStation()
+        SetPipeAssignTo()
     End Sub
 
     Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
@@ -465,15 +779,72 @@ Public Class dlgBoxplot
         toolStripMenuItemTufteOptions.Enabled = (rdoBoxplotTufte.Checked AndAlso ucrChkTufte.Checked)
     End Sub
 
-    'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver
-    'Private Sub SwapFactors()
-    '    If ucrChkSwapParameters.Checked Then
-    '        ucrByFactorsReceiver.ChangeParameterName("fill")
-    '        ucrSecondFactorReceiver.ChangeParameterName("x")
-    '    End If
-    'End Sub
+    Private Sub ucrInputWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputWidth.ControlValueChanged, ucrByFactorsReceiver.ControlValueChanged
+        If Not ucrInputWidth.IsEmpty Then
+            clsCutWitdhFunction.AddParameter("width", ucrInputWidth.GetText(), iPosition:=1)
+            clsCutWitdhFunction.AddParameter("var", ucrByFactorsReceiver.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsCutWitdhFunction.RemoveParameterByName("width")
+            clsCutWitdhFunction.RemoveParameterByName("var")
+        End If
+        EnableDisableWidth()
+    End Sub
 
-    'Private Sub ucrChkSwapParameters_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSwapParameters.ControlValueChanged
-    '    SwapFactors()
-    'End Sub
+    Private Sub ucrChkWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWidth.ControlValueChanged
+        EnableDisableWidth()
+    End Sub
+
+    Private Sub EnableDisableWidth()
+        If ucrByFactorsReceiver.strCurrDataType = "Date" OrElse ucrByFactorsReceiver.strCurrDataType = "factor" OrElse ucrByFactorsReceiver.strCurrDataType = "orderded, factor" Then
+            ucrChkWidth.Enabled = False
+            ucrInputWidth.Enabled = False
+            clsBoxplotFunction.RemoveParameterByName("aes")
+            clsWidthRaesFunction.RemoveParameterByName("group")
+            clsViolinplotFunction.RemoveParameterByName("aes")
+        Else
+            ucrChkWidth.Enabled = True
+            ucrInputWidth.Enabled = True
+            If ucrChkWidth.Checked AndAlso Not ucrByFactorsReceiver.IsEmpty Then
+                clsWidthRaesFunction.AddParameter("group", clsRFunctionParameter:=clsCutWitdhFunction, iPosition:=1)
+                clsBoxplotFunction.AddParameter("aes", clsRFunctionParameter:=clsWidthRaesFunction, bIncludeArgumentName:=False, iPosition:=1)
+                clsViolinplotFunction.AddParameter("aes", clsRFunctionParameter:=clsWidthRaesFunction, bIncludeArgumentName:=False, iPosition:=1)
+            Else
+                clsWidthRaesFunction.RemoveParameterByName("group")
+                clsBoxplotFunction.RemoveParameterByName("aes")
+                clsViolinplotFunction.RemoveParameterByName("aes")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkBoxPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBoxPlot.ControlValueChanged, ucrNudBoxPlot.ControlValueChanged
+        If ucrChkBoxPlot.Checked Then
+            clsGeomBoxPlotFunction.AddParameter("width", ucrNudBoxPlot.GetText(), iPosition:=3)
+            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxPlotFunction)
+        Else
+            clsGeomBoxPlotFunction.RemoveParameterByName("width")
+            clsBaseOperator.RemoveParameterByName("geom_boxplot")
+        End If
+    End Sub
+
+    Private Sub AddRemoveAesParm()
+        If Not ucrSecondFactorReceiver.IsEmpty AndAlso Not (ucrSecondFactorReceiver.GetVariableNames = ucrByFactorsReceiver.GetVariableNames) Then
+            clsStatAesFunction.AddParameter("group", ucrSecondFactorReceiver.GetVariableNames(False), iPosition:=0)
+            clsStatAesFunction.AddParameter("colour", ucrSecondFactorReceiver.GetVariableNames(False), iPosition:=1)
+            clsStatSummary.AddParameter("stat_aes", clsRFunctionParameter:=clsStatAesFunction, bIncludeArgumentName:=False)
+            clsStatSummary.AddParameter("position", clsRFunctionParameter:=clsPositionNodgeFunction)
+            clsStatSummary.RemoveParameterByName("group")
+            clsStatSummary.RemoveParameterByName("color")
+        Else
+            clsStatSummary.AddParameter("group", 1, iPosition:=1)
+            clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
+            clsStatAesFunction.RemoveParameterByName("group")
+            clsStatAesFunction.RemoveParameterByName("colour")
+            clsStatSummary.RemoveParameterByName("stat_aes")
+            clsStatSummary.RemoveParameterByName("position")
+        End If
+    End Sub
+
+    Private Sub ucrSecondFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSecondFactorReceiver.ControlValueChanged
+        AddRemoveAesParm()
+    End Sub
 End Class

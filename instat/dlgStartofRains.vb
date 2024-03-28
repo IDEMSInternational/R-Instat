@@ -87,6 +87,7 @@ Public Class dlgStartofRains
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 199
+        Dim dctInputThreshold As New Dictionary(Of String, String)
 
         ' setting the selector
         ucrSelectorForStartofRains.SetParameter(New RParameter("data_name", 0))
@@ -129,8 +130,17 @@ Public Class dlgStartofRains
         ucrReceiverRainfall.SetClimaticType("rain")
         ucrReceiverRainfall.bAutoFill = True
 
-        ucrNudThreshold.SetParameter(New RParameter("threshold", 1))
-        ucrNudThreshold.DecimalPlaces = 2
+        ucrInputThreshold.SetParameter(New RParameter("threshold", 1))
+        dctInputThreshold.Add("0.85", "0.85")
+        dctInputThreshold.Add("0.5", "0.5")
+        dctInputThreshold.Add("0.05", "0.05")
+        dctInputThreshold.Add("0.99", "0.99")
+        ucrInputThreshold.SetItems(dctInputThreshold)
+        ucrInputThreshold.AddQuotesIfUnrecognised = False
+        ucrInputThreshold.SetLinkedDisplayControl(lblThreshold)
+        ucrInputThreshold.SetRDefault(0.85)
+
+
 
         'Total Rainfall
         ucrPnlTRCalculateBy.AddRadioButton(rdoTRAmount)
@@ -715,7 +725,7 @@ Public Class dlgStartofRains
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRainDayConditionOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsFirstRain, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsIsNaRain, New RParameter("x", 0), iAdditionalPairNo:=5)
-        ucrNudThreshold.AddAdditionalCodeParameterPair(clsRainDayConditionOperator, New RParameter("threshold", 1), iAdditionalPairNo:=1)
+        ucrInputThreshold.AddAdditionalCodeParameterPair(clsRainDayConditionOperator, New RParameter("threshold", 1), iAdditionalPairNo:=1)
 
         'clsSORStartSummary.SetControlParameters(ucrReceiverRainfall, iAdditionalPairNo:=4)
         'clsSORStatusSummary.SetControlParameters(ucrReceiverRainfall, iAdditionalPairNo:=5)
@@ -727,7 +737,7 @@ Public Class dlgStartofRains
         ucrChkAsDoy.SetRCode(clsCombinationSubCalcList, bReset)
         ucrChkStatus.SetRCode(clsCombinationSubCalcList, bReset)
         ucrChkAsDate.SetRCode(clsCombinationSubCalcList, bReset)
-        ucrNudThreshold.SetRCode(clsRainDayOperator, bReset)
+        ucrInputThreshold.SetRCode(clsRainDayOperator, bReset)
 
         ucrReceiverDate.SetRCode(clsFirstDate, bReset)
         ucrInputNewDoyColumnName.SetRCode(clsCalcStartDOY, bReset)
@@ -766,7 +776,7 @@ Public Class dlgStartofRains
                 Not ucrReceiverDate.IsEmpty AndAlso
                 Not ucrReceiverDOY.IsEmpty AndAlso
                 Not ucrReceiverYear.IsEmpty AndAlso
-                ucrNudThreshold.GetText <> "" AndAlso
+                ucrInputThreshold.GetText <> "" AndAlso
                 (
                     (ucrChkNumberOfRainyDays.Checked AndAlso ucrNudRDMinimumDays.GetText <> "" AndAlso ucrNudRDOutOfDays.GetText <> "") OrElse
                     Not ucrChkNumberOfRainyDays.Checked) AndAlso
@@ -970,7 +980,7 @@ Public Class dlgStartofRains
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrInputNewDoyColumnName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrNudThreshold.ControlContentsChanged, ucrChkNumberOfRainyDays.ControlContentsChanged, ucrNudRDMinimumDays.ControlContentsChanged, ucrNudRDOutOfDays.ControlContentsChanged, ucrChkTotalRainfall.ControlContentsChanged, ucrNudTROverDays.ControlContentsChanged, ucrPnlTRCalculateBy.ControlContentsChanged, ucrNudTRAmount.ControlContentsChanged, ucrNudTRPercentile.ControlContentsChanged, ucrChkDrySpell.ControlContentsChanged, ucrNudDSMaximumDays.ControlContentsChanged, ucrNudDSLengthOfTime.ControlContentsChanged, ucrNudDPMaxRain.ControlContentsChanged, ucrChkAsDoy.ControlContentsChanged, ucrChkAsDate.ControlContentsChanged, ucrInputNewDateColumnName.ControlContentsChanged, ucrChkStatus.ControlContentsChanged, ucrInputNewStatusColumnName.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrInputNewDoyColumnName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrChkNumberOfRainyDays.ControlContentsChanged, ucrNudRDMinimumDays.ControlContentsChanged, ucrNudRDOutOfDays.ControlContentsChanged, ucrChkTotalRainfall.ControlContentsChanged, ucrNudTROverDays.ControlContentsChanged, ucrPnlTRCalculateBy.ControlContentsChanged, ucrNudTRAmount.ControlContentsChanged, ucrNudTRPercentile.ControlContentsChanged, ucrChkDrySpell.ControlContentsChanged, ucrNudDSMaximumDays.ControlContentsChanged, ucrNudDSLengthOfTime.ControlContentsChanged, ucrNudDPMaxRain.ControlContentsChanged, ucrChkAsDoy.ControlContentsChanged, ucrChkAsDate.ControlContentsChanged, ucrInputNewDateColumnName.ControlContentsChanged, ucrChkStatus.ControlContentsChanged, ucrInputNewStatusColumnName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
