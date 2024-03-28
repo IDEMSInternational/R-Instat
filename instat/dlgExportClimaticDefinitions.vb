@@ -40,6 +40,7 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverData.SetParameter(New RParameter("data", 0))
         ucrReceiverData.Selector = ucrSelectorExportDefinitions
         ucrReceiverData.SetParameterIsRFunction()
+        ucrReceiverData.SetMeAsReceiver()
 
         ucrReceiverDataYear.SetParameter(New RParameter("data_by_year", 1))
         ucrReceiverDataYear.Selector = ucrSelectorExportDefinitions
