@@ -280,7 +280,7 @@ Public Class ucrCalculator
         ' Complex keyboard tooltips
         ttCalculator.SetToolTip(cmdComplexPi, "pi = 3.14159")
         ttCalculator.SetToolTip(cmdComplexi, "i is defined as the square root of -1. So sqrt(as.complex(-1)) = 0 + 1i")
-        ttCalculator.SetToolTip(cmdComplex, "Construct a complex number. For example complex(3, 2) gives 3 + 2i.")
+        ttCalculator.SetToolTip(cmdComplex, "Generate a complex variable. For example complex(3, 2:4,1. 5) gives 2+1.5i, 3+1.5i, 4+1.5i")
         ttCalculator.SetToolTip(cmdAsComplex, "Define a variable as complex. For example as.complex(-1) gives 1 + 0i")
         ttCalculator.SetToolTip(cmdReal, "The real part of a complex number. For example Re(3 + 2i) gives 3.")
         ttCalculator.SetToolTip(cmdImaginary, "The imaginary part of a complex number or variable. For example Im(3 + 2i) gives 2.")
@@ -290,9 +290,19 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdComplexRad, "Change from degrees to radians. For example rad(90 + 180i) gives (1.571 + 3.142i)")
         ttCalculator.SetToolTip(cmdComplexDeg, " Change from radians to degrees. For example deg(pi/2 + 3.142i) gives (90 + 180i)")
         ttCalculator.SetToolTip(cmdComplexSqrt, "Square root. For example sqrt(-9 + 0i) gives (0 + 3i) or just 3i. sqrt(-9 + 2i) gives 0.331 + 3.018i)")
-        'to add  ttCalculator.SetToolTip(cmdComplexExp, "The exponential function. For example exp(3 + 2i) gives")
+        ttCalculator.SetToolTip(cmdComplexExp, "exponential function. For example exp(1 + 2i) gives -1.131+2.472i")
         ttCalculator.SetToolTip(cmdComplexRound, "round(pi/2 + 3.14259i) gives 2 + 3i) so rounds to whole numbers. round(pi/2 + 3.14259i, 2) gives 1.57 + 3.14i, so rounds to 2 decimals.")
         ttCalculator.SetToolTip(cmdComplexSignif, "Rounds to give the specified number off digits in the larger of the components. For example signif(0.424 + 511.38i, 3) gives (0 + 511i)")
+        ttCalculator.SetToolTip(cmdComplexSin, "sine of the angle in radians For example sin(1-1i) gives (1.2985-0.635i)")
+        ttCalculator.SetToolTip(cmdComplexCos, "cosine of the angle in radians. For example cos(1-1i) gives (0.8337+0.9889i)")
+        ttCalculator.SetToolTip(cmdComplexTan, "tangent of the angle in radians. For example tan(1-i) gives (0.272-1.084i)")
+        'ttCalculator.SetToolTip(cmdComplexAsin, "arcsine, or inverse of the sine. It is the angle in radians corresponding to a given sine. For example asin(1.2985-0.635i) gives (1-1i)")
+        '  ttCalculator.SetToolTip(cmdComplexAcos, "arccos, or inverse of the cosine. It is the angle corresponding to a given cos. For example acos(0.8337+0.9889i) gives (1-1i)")
+        ' ttCalculator.SetToolTip(cmdComplexAtan, "arctan or inverse of the tangent. It is the angle corresponding to a given tan. For example atan(0.272-1.084i) gives (1-1i)")
+        ttCalculator.SetToolTip(cmdComplexSinH, " hyperbolic sin of a number in radians (asinh also exists)")
+        ttCalculator.SetToolTip(cmdComplexCosH, "hyperbolic cosine of a number in radians (acosh also exists)")
+        ttCalculator.SetToolTip(cmdComplexTanH, "hyperbolic tangent of a number in radians (atanh also exists)")
+        ttCalculator.SetToolTip(cmdComplexLog, "natural logarithm. For example log(1 + 2i) gives 0.805+1.107i")
 
         'Hydro GOF keyboard tooltips
         ttCalculator.SetToolTip(cmdBr2, "r-squared times the slope of the regression line between sim and obs")
@@ -418,7 +428,29 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdSec, "Extract second from date-time variable. For example second(""1984-05-12 14:23:45"") is 45")
         ttCalculator.SetToolTip(cmdQuarter, " 3-month period of the year from a date or date-time variable. For example quarter(""1984-05-12"") gives 2")
 
-        Const strTooltipCmdLength = "number of observations: For example length(c(1,2,3,4,NA)) = 5 "
+        ' Factor keyboard tooltips
+        ttCalculator.SetToolTip(cmdFactor, "Make a factor from a numeric or character variable")
+        ttCalculator.SetToolTip(cmdAnon, "Anonymise factor levels, replacing them by a number. Optionally add a profix, for example fct_anon(name, ""n"")")
+        ttCalculator.SetToolTip(cmdLabelled, "Create a labelled variable")
+        ttCalculator.SetToolTip(cmdCollapse, "Combine factor levels. For example fct_collapse(variety, trad=""TRAD"",improved=c(""NEW"",""OLD""))")
+        ttCalculator.SetToolTip(cmdCross, "Make interaction variable. For example fct_cross(variety,fertgrp, keep_empty=TRUE)")
+        ttCalculator.SetToolTip(cmdDrop, "Drop unused levels")
+        ttCalculator.SetToolTip(cmdExpand, "Add additional levels. For example fct_expand(Village, ""New"", ""Newer"")")
+        ttCalculator.SetToolTip(cmdAdd_na, "Make missing values into an additional factor level. For example fct_na_value_to_level(fertgrp)")
+        ttCalculator.SetToolTip(cmdInorder, "Order the factor levels by their appearance in the data")
+        ttCalculator.SetToolTip(cmdInfreq, "Order the factor levels by their frequency ")
+        ttCalculator.SetToolTip(cmdInseq, "Order a factor with numeric levels")
+        ttCalculator.SetToolTip(cmdLump, "Change all levels appearing less than min times into Other. For example fct_lump_min(Variety,10)")
+        ttCalculator.SetToolTip(cmdmatch, "Make a logical variable with TRUE when levels are in the factor. For example fct_match(variety,c(""NEW"",""OLD""))")
+        ttCalculator.SetToolTip(cmdOther, " Replace levels with Other. For example fct_other(variety, keep=""NEW"")")
+        ttCalculator.SetToolTip(cmdRecode, "Change factor levels. For example fct_recode(variety,improved=""NEW"",improved=""OLD"")")
+        ttCalculator.SetToolTip(cmdRelevel, " Reorder factor levels. For example fct_relevel(fertgrp,""0cwt"", "".5-2cwt"")")
+        ttCalculator.SetToolTip(cmdReorder, "Reorder levels using (default ofmedian of another variable. For example fct_reorder(variety,yield)")
+        ttCalculator.SetToolTip(cmdReverse, "Reverse the order of the factor levels")
+        ttCalculator.SetToolTip(cmdShift, "Shift the order of the factor levels")
+        ttCalculator.SetToolTip(cmdShuffle, "Shuffle the order of the factor levels")
+
+        Const strTooltipCmdLength = "number Of observations: For example length(c(1,2,3,4,NA)) = 5 "
         ttCalculator.SetToolTip(cmdLength, strTooltipCmdLength)
         ttCalculator.SetToolTip(cmdListLength, strTooltipCmdLength)
 
@@ -1068,16 +1100,15 @@ Public Class ucrCalculator
 
     Private Sub cmdAcos_Click(sender As Object, e As EventArgs) Handles cmdAcos.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos()", 1)
         End If
-
     End Sub
 
     Private Sub cmdAsin_Click(sender As Object, e As EventArgs) Handles cmdAsin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin(x = )", 1)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin()", 1)
         End If
@@ -3607,9 +3638,9 @@ Public Class ucrCalculator
 
     Private Sub cmdAdd_na_Click(sender As Object, e As EventArgs) Handles cmdAdd_na.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_explicit_na(f = , na_level = ""(Missing)"")", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_na_value_to_level(f = , na_level = ""(Missing)"")", 26)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_explicit_na()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_na_value_to_level()", 1)
         End If
     End Sub
 
@@ -3639,9 +3670,9 @@ Public Class ucrCalculator
 
     Private Sub cmdLump_Click(sender As Object, e As EventArgs) Handles cmdLump.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_lump(f = , n, prop, w = NULL, other_level = ""Other"", ties.method = c(""min"", ""average"", ""first"", ""last"", ""random"", ""max""))", 113)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_lump_min(f = , n, prop, w = NULL, other_level = ""Other"", ties.method = c(""min"", ""average"", ""first"", ""last"", ""random"", ""max""))", 113)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_lump()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_lump_min()", 1)
         End If
     End Sub
 
@@ -5211,17 +5242,41 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSampleFunction.ToScript, 36)
     End Sub
 
-    Private Sub cmdAsComplex_Click(sender As Object, e As EventArgs) Handles cmdComplex.Click
+    Private Sub cmdComplex_Click(sender As Object, e As EventArgs) Handles cmdComplex.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex(x = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex( )", 1)
         End If
     End Sub
 
+    'Private Sub cmdComplexAsin_Click(sender As Object, e As EventArgs) Handles cmdComplexAsin.Click
+    '    If chkShowParameters.Checked Then
+    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin(x = )", 1)
+    '    Else
+    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin()", 1)
+    '    End If
+    'End Sub
+
+    'Private Sub cmdComplexAcos_Click(sender As Object, e As EventArgs) Handles cmdComplexAcos.Click
+    '    If chkShowParameters.Checked Then
+    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos(x = )", 1)
+    '    Else
+    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos()", 1)
+    '    End If
+    'End Sub
+
+    'Private Sub cmdComplexAtan_Click(sender As Object, e As EventArgs) Handles cmdComplexAtan.Click
+    '    If chkShowParameters.Checked Then
+    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan(x = )", 2)
+    '    Else
+    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan()", 1)
+    '    End If
+    'End Sub
+
     Private Sub cmdReal_Click(sender As Object, e As EventArgs) Handles cmdReal.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Re(z = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Re(z = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Re( )", 1)
         End If
@@ -5229,7 +5284,7 @@ Public Class ucrCalculator
 
     Private Sub cmdImaginary_Click(sender As Object, e As EventArgs) Handles cmdImaginary.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Im(z = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Im(z = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Im( )", 1)
         End If
@@ -5237,7 +5292,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMod_Click(sender As Object, e As EventArgs) Handles cmdMod.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod(z = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod(z = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod( )", 1)
         End If
@@ -5245,7 +5300,7 @@ Public Class ucrCalculator
 
     Private Sub cmdArg_Click(sender As Object, e As EventArgs) Handles cmdArg.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Arg(z = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Arg(z = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Arg( )", 1)
         End If
@@ -5253,15 +5308,27 @@ Public Class ucrCalculator
 
     Private Sub cmdConjugate_Click(sender As Object, e As EventArgs) Handles cmdConjugate.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Conj(z = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Conj(z = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Conj( )", 1)
         End If
     End Sub
 
+    Private Sub cmdComplexi_Click(sender As Object, e As EventArgs) Handles cmdComplexi.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("i", -1)
+    End Sub
+
+    Private Sub cmdAsComplex_Click(sender As Object, e As EventArgs) Handles cmdAsComplex.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
+        End If
+    End Sub
+
     Private Sub cmdComplexLog_Click(sender As Object, e As EventArgs) Handles cmdComplexLog.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log(x= , base=exp(1))", 14)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log(x= , base=exp(1))", 15)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("log()", 1)
         End If
@@ -5269,7 +5336,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexSqrt_Click_1(sender As Object, e As EventArgs) Handles cmdComplexSqrt.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sqrt(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sqrt(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sqrt()", 1)
         End If
@@ -5277,7 +5344,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexRound_Click(sender As Object, e As EventArgs) Handles cmdComplexRound.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round(x= , digits=0)", 11)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round(x= , digits=0)", 12)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round()", 1)
         End If
@@ -5285,7 +5352,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexExp_Click_1(sender As Object, e As EventArgs) Handles cmdComplexExp.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("exp(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("exp(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("exp()", 1)
         End If
@@ -5293,7 +5360,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexSignif_Click(sender As Object, e As EventArgs) Handles cmdComplexSignif.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif(x= , digits=6)", 11)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif(x= , digits=6)", 12)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("signif()", 1)
         End If
@@ -5301,7 +5368,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexCos_Click(sender As Object, e As EventArgs) Handles cmdComplexCos.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cos(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cos(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cos()", 1)
         End If
@@ -5309,7 +5376,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexSin_Click(sender As Object, e As EventArgs) Handles cmdComplexSin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sin(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sin(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sin()", 1)
         End If
@@ -5317,7 +5384,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexTan_Click(sender As Object, e As EventArgs) Handles cmdComplexTan.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tan(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tan(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tan()", 1)
         End If
@@ -5325,7 +5392,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexCosH_Click(sender As Object, e As EventArgs) Handles cmdComplexCosH.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cosh(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cosh(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cosh()", 1)
         End If
@@ -5333,7 +5400,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexSinH_Click(sender As Object, e As EventArgs) Handles cmdComplexSinH.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sinh(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sinh(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sinh()", 1)
         End If
@@ -5341,7 +5408,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexTanH_Click(sender As Object, e As EventArgs) Handles cmdComplexTanH.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tanh(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tanh(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("tanh()", 1)
         End If
@@ -5612,18 +5679,6 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max(x= )]", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max( )]", 15)
-        End If
-    End Sub
-
-    Private Sub cmdComplexi_Click(sender As Object, e As EventArgs) Handles cmdComplexi.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("i", -1)
-    End Sub
-
-    Private Sub cmdAsComplex_Click_1(sender As Object, e As EventArgs) Handles cmdAsComplex.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 1)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 1)
         End If
     End Sub
 End Class
