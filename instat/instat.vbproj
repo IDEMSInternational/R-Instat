@@ -152,8 +152,8 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
+    <Reference Include="RDotNet, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R.NET.1.9.0\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
     <Reference Include="RInsightF461, Version=0.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RInsightF461.0.0.10\lib\net461\RInsightF461.dll</HintPath>
@@ -243,6 +243,12 @@
       <DependentUpon>dlgEdit.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportClimaticDefinitions.Designer.vb">
+      <DependentUpon>dlgExportClimaticDefinitions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportClimaticDefinitions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExportForClimpact.Designer.vb">
@@ -3082,6 +3088,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEdit.resx">
       <DependentUpon>dlgEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportClimaticDefinitions.resx">
+      <DependentUpon>dlgExportClimaticDefinitions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportForClimpact.resx">
       <DependentUpon>dlgExportForClimpact.vb</DependentUpon>
