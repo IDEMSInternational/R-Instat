@@ -1100,7 +1100,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAcos_Click(sender As Object, e As EventArgs) Handles cmdAcos.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos(x = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos()", 1)
         End If
@@ -1108,7 +1108,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAsin_Click(sender As Object, e As EventArgs) Handles cmdAsin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin(x = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin()", 1)
         End If
@@ -1116,7 +1116,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAtan_Click(sender As Object, e As EventArgs) Handles cmdAtan.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan(x = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan()", 1)
         End If
@@ -5252,7 +5252,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexAsin_Click(sender As Object, e As EventArgs) Handles cmdComplexAsin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin(x = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin()", 1)
         End If
@@ -5260,7 +5260,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplexAcos_Click(sender As Object, e As EventArgs) Handles cmdComplexAcos.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos(x = )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos()", 1)
         End If
