@@ -152,7 +152,7 @@ Public Class dlgExportClimaticDefinitions
     Private Sub SelectFileToSave()
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Climatic Def File"
-            dlgSave.Filter = "Comma separated file (*.csv)|*.csv"
+            dlgSave.Filter = "JavaScript Object Notation (*.json)|*.json"
             If ucrInputExportFile.GetText() <> "" Then
                 dlgSave.InitialDirectory = ucrInputExportFile.GetText().Replace("/", "\")
             Else
