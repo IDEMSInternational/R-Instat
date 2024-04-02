@@ -190,6 +190,7 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuExportToWWRToolStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileExportToClimpact = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExamineEditData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticExamineEditDataVisualiseData = New System.Windows.Forms.ToolStripMenuItem()
@@ -1632,7 +1633,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileImportSST, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportfromClimSoft, Me.mnuClimateFileImportfromClimSoftWizard, Me.mnuClimaticFileImportfromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToClimsoft, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip, Me.mnuClimaticFileExportToClimpact})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileImportSST, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportfromClimSoft, Me.mnuClimateFileImportfromClimSoftWizard, Me.mnuClimaticFileImportfromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToClimsoft, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip, Me.mnuClimaticFileExportToClimpact, Me.mnuClimaticFileExportToGoogleBucketsToolStrip})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         Me.mnuClimaticFile.Size = New System.Drawing.Size(212, 22)
         Me.mnuClimaticFile.Text = "File"
@@ -1721,6 +1722,13 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToClimpact.Name = "mnuClimaticFileExportToClimpact"
         Me.mnuClimaticFileExportToClimpact.Size = New System.Drawing.Size(282, 22)
         Me.mnuClimaticFileExportToClimpact.Text = "Export to Climpact..."
+        '
+        'mnuClimaticFileExportToGoogleBucketsToolStrip
+        '
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Enabled = False
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Name = "mnuClimaticFileExportToGoogleBucketsToolStrip"
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Size = New System.Drawing.Size(282, 22)
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Text = "Export to Google Buckets..."
         '
         'ToolStripSeparator18
         '
@@ -5112,7 +5120,9 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat .."
+        Me.Text = "R-Instat " + My.Application.Info.Version.Major.ToString + "." +
+                My.Application.Info.Version.Minor.ToString + "." +
+                My.Application.Info.Version.Build.ToString
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
@@ -5798,5 +5808,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
 
     Friend WithEvents mnuClimaticPICSAGeneralGrap As ToolStripMenuItem
+
+    Friend WithEvents mnuClimaticFileExportToGoogleBucketsToolStrip As ToolStripMenuItem
 
 End Class

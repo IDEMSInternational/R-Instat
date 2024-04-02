@@ -41,11 +41,6 @@ Public Class RFunction
     ''' <summary>   The R command's package name. </summary>
     Private strPackageName As String = ""
 
-    ''' <summary>   Initializes a new instance of this class. </summary>
-    Public Sub New()
-        OnParametersChanged() 'TODO SJL is this still needed?
-    End Sub
-
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the R command's name (e.g. "facet_grid") and flags that the R script
     '''             associated with this object is no longer correctly assigned.</summary>
@@ -228,7 +223,6 @@ Public Class RFunction
         clsRFunction.iPosition = iPosition
         clsRFunction.iCallType = iCallType
         clsRFunction.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
-        clsRFunction.bClearFromGlobal = bClearFromGlobal
         clsRFunction.bToScriptAsRString = bToScriptAsRString
         clsRFunction.Tag = Tag
         For Each clsRParam In clsParameters

@@ -50,7 +50,6 @@ Partial Class dlgBarAndPieChart
         Me.lblLabelColour = New System.Windows.Forms.Label()
         Me.lblLabelSize = New System.Windows.Forms.Label()
         Me.lblLollipopSize = New System.Windows.Forms.Label()
-        Me.lblLollipopColour = New System.Windows.Forms.Label()
         Me.lblReorder = New System.Windows.Forms.Label()
         Me.rdoTreeMap = New System.Windows.Forms.RadioButton()
         Me.lblFill = New System.Windows.Forms.Label()
@@ -81,7 +80,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLabelSize = New instat.ucrInputComboBox()
         Me.ucrNudLollipopSize = New instat.ucrNud()
         Me.ucrNudMaxSize = New instat.ucrNud()
-        Me.ucrInputLollipopColour = New instat.ucrInputComboBox()
         Me.ucrChkLollipop = New instat.ucrCheck()
         Me.ucrInputLabelPosition = New instat.ucrInputComboBox()
         Me.ucrInputBarChartPositions = New instat.ucrInputComboBox()
@@ -247,21 +245,11 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLollipopSize.AutoSize = True
         Me.lblLollipopSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLollipopSize.Location = New System.Drawing.Point(123, 408)
+        Me.lblLollipopSize.Location = New System.Drawing.Point(123, 390)
         Me.lblLollipopSize.Name = "lblLollipopSize"
         Me.lblLollipopSize.Size = New System.Drawing.Size(30, 13)
         Me.lblLollipopSize.TabIndex = 42
         Me.lblLollipopSize.Text = "Size:"
-        '
-        'lblLollipopColour
-        '
-        Me.lblLollipopColour.AutoSize = True
-        Me.lblLollipopColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLollipopColour.Location = New System.Drawing.Point(220, 408)
-        Me.lblLollipopColour.Name = "lblLollipopColour"
-        Me.lblLollipopColour.Size = New System.Drawing.Size(40, 13)
-        Me.lblLollipopColour.TabIndex = 44
-        Me.lblLollipopColour.Text = "Colour:"
         '
         'lblReorder
         '
@@ -521,7 +509,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrNudLollipopSize.AutoSize = True
         Me.ucrNudLollipopSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLollipopSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLollipopSize.Location = New System.Drawing.Point(170, 405)
+        Me.ucrNudLollipopSize.Location = New System.Drawing.Point(170, 387)
         Me.ucrNudLollipopSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLollipopSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLollipopSize.Name = "ucrNudLollipopSize"
@@ -541,17 +529,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrNudMaxSize.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudMaxSize.TabIndex = 64
         Me.ucrNudMaxSize.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'ucrInputLollipopColour
-        '
-        Me.ucrInputLollipopColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputLollipopColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputLollipopColour.GetSetSelectedIndex = -1
-        Me.ucrInputLollipopColour.IsReadOnly = False
-        Me.ucrInputLollipopColour.Location = New System.Drawing.Point(276, 405)
-        Me.ucrInputLollipopColour.Name = "ucrInputLollipopColour"
-        Me.ucrInputLollipopColour.Size = New System.Drawing.Size(93, 21)
-        Me.ucrInputLollipopColour.TabIndex = 45
         '
         'ucrChkLollipop
         '
@@ -954,8 +931,6 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.rdoWordCloud)
         Me.Controls.Add(Me.lblLabel)
         Me.Controls.Add(Me.rdoTreeMap)
-        Me.Controls.Add(Me.ucrInputLollipopColour)
-        Me.Controls.Add(Me.lblLollipopColour)
         Me.Controls.Add(Me.lblLollipopSize)
         Me.Controls.Add(Me.ucrChkLollipop)
         Me.Controls.Add(Me.lblLabelSize)
@@ -1042,8 +1017,6 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrInputLabelColour As ucrInputComboBox
     Friend WithEvents lblLabelSize As Label
     Friend WithEvents ucrInputLabelSize As ucrInputComboBox
-    Friend WithEvents ucrInputLollipopColour As ucrInputComboBox
-    Friend WithEvents lblLollipopColour As Label
     Friend WithEvents ucrNudLollipopSize As ucrNud
     Friend WithEvents lblLollipopSize As Label
     Friend WithEvents ucrChkLollipop As ucrCheck
