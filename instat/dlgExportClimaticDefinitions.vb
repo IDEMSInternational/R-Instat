@@ -54,27 +54,23 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverCropData.Selector = ucrSelectorExportDefinitions
         ucrReceiverCropData.SetParameterIsRFunction()
 
-        ucrReceiverRain.SetParameter(New RParameter("rain", 4))
-        ucrReceiverRain.Selector = ucrSelectorExportDefinitions
-        ucrReceiverRain.SetParameterIsRFunction()
-
-        ucrReceiverMinTemp.SetParameter(New RParameter("tmin", 5))
+        ucrReceiverMinTemp.SetParameter(New RParameter("tmin", 4))
         ucrReceiverMinTemp.Selector = ucrSelectorExportDefinitions
         ucrReceiverMinTemp.SetParameterIsRFunction()
 
-        ucrReceiverMaxTemp.SetParameter(New RParameter("tmax", 6))
+        ucrReceiverMaxTemp.SetParameter(New RParameter("tmax", 5))
         ucrReceiverMaxTemp.Selector = ucrSelectorExportDefinitions
         ucrReceiverMaxTemp.SetParameterIsRFunction()
 
-        ucrReceiverRain.SetParameter(New RParameter("rain", 7))
+        ucrReceiverRain.SetParameter(New RParameter("rain", 6))
         ucrReceiverRain.Selector = ucrSelectorExportDefinitions
         ucrReceiverRain.SetParameterIsRFunction()
 
-        ucrReceiverYear.SetParameter(New RParameter("year", 8))
+        ucrReceiverYear.SetParameter(New RParameter("year", 7))
         ucrReceiverYear.Selector = ucrSelectorExportDefinitions
         ucrReceiverYear.SetParameterIsRFunction()
 
-        ucrReceiverMonth.SetParameter(New RParameter("month", 9))
+        ucrReceiverMonth.SetParameter(New RParameter("month", 8))
         ucrReceiverMonth.Selector = ucrSelectorExportDefinitions
         ucrReceiverMonth.SetParameterIsRFunction()
 
@@ -142,7 +138,19 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub TestOkEnabled()
-
+        ucrBase.OKEnabled(Not ucrReceiverData.IsEmpty _
+                             AndAlso Not ucrReceiverMonth.IsEmpty _
+                             AndAlso Not ucrReceiverYear.IsEmpty _
+                             AndAlso Not ucrReceiverCropData.IsEmpty _
+                             AndAlso Not ucrReceiverRain.IsEmpty _
+                             AndAlso Not ucrReceiverMinTemp.IsEmpty _
+                             AndAlso Not ucrReceiverDataYear.IsEmpty _
+                             AndAlso Not ucrReceiverDataYearMonth.IsEmpty _
+                             AndAlso Not ucrReceiverMaxTemp.IsEmpty
+                             )
+        If ucrInputExportFile.IsEmpty Then
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -169,5 +177,11 @@ Public Class dlgExportClimaticDefinitions
         If ucrInputExportFile.IsEmpty() Then
             SelectFileToSave()
         End If
+    End Sub
+
+    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrInputExportFile.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged,
+            ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged,
+            ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
