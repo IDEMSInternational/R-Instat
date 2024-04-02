@@ -501,9 +501,9 @@ Public Class frmMain
             End Try
         End If
 
-        If strAutoSavedDataFilePaths.Length > 0 Then
+        If strAutoSavedDataFilePaths.Length > 1 Then
             Try
-                File.Delete(strAutoSavedDataFilePaths(0))
+                File.Delete(strAutoSavedDataFilePaths(1))
             Catch ex As Exception
                 MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
             End Try
@@ -554,7 +554,7 @@ Public Class frmMain
         If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
             Return
         End If
-        'copy of the original code used for PromptAndSetAutoRecoveredPrevSessionData
+        'this is the copy of the original code used for PromptAndSetAutoRecoveredPrevSessionData function
         Dim strAutoSavedLogFilePaths() As String = {}
         Dim strAutoSavedInternalLogFilePaths() As String = {}
         Dim strAutoSavedDataFilePaths() As String = {}
@@ -605,15 +605,6 @@ Public Class frmMain
                 MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
             End Try
         End If
-
-        If strAutoSavedDataFilePaths.Length > 0 Then
-            Try
-                File.Delete(strAutoSavedDataFilePaths(0))
-            Catch ex As Exception
-                MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
-            End Try
-        End If
-        '---------------------------------------
 
     End Sub
 
