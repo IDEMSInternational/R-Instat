@@ -294,22 +294,6 @@ Partial Class ucrCalculator
         Me.E1071ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RobustbaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RasterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.grpFrequencies = New System.Windows.Forms.GroupBox()
-        Me.cmdFreqQuantile = New System.Windows.Forms.Button()
-        Me.cmdFreqPropn = New System.Windows.Forms.Button()
-        Me.cmdFreqDistinct = New System.Windows.Forms.Button()
-        Me.cmdFreqIQR = New System.Windows.Forms.Button()
-        Me.cmdFreqMedian = New System.Windows.Forms.Button()
-        Me.cmdFreqSd = New System.Windows.Forms.Button()
-        Me.cmdFreqVar = New System.Windows.Forms.Button()
-        Me.cmdFreqMean = New System.Windows.Forms.Button()
-        Me.cmdFreqMad = New System.Windows.Forms.Button()
-        Me.cmdFreqMiss = New System.Windows.Forms.Button()
-        Me.cmdFreqMode1 = New System.Windows.Forms.Button()
-        Me.cmdFreqMax = New System.Windows.Forms.Button()
-        Me.cmdFreqMin = New System.Windows.Forms.Button()
-        Me.cmdFreqSum = New System.Windows.Forms.Button()
-        Me.cmdFreqLength = New System.Windows.Forms.Button()
         Me.cmdKurtosis = New System.Windows.Forms.Button()
         Me.cmdMode1 = New System.Windows.Forms.Button()
         Me.cmdMode = New System.Windows.Forms.Button()
@@ -338,6 +322,22 @@ Partial Class ucrCalculator
         Me.cmdLength = New System.Windows.Forms.Button()
         Me.cmdSum = New System.Windows.Forms.Button()
         Me.cmdVar = New System.Windows.Forms.Button()
+        Me.grpFrequencies = New System.Windows.Forms.GroupBox()
+        Me.cmdFreqQuantile = New System.Windows.Forms.Button()
+        Me.cmdFreqPropn = New System.Windows.Forms.Button()
+        Me.cmdFreqDistinct = New System.Windows.Forms.Button()
+        Me.cmdFreqIQR = New System.Windows.Forms.Button()
+        Me.cmdFreqMedian = New System.Windows.Forms.Button()
+        Me.cmdFreqSd = New System.Windows.Forms.Button()
+        Me.cmdFreqVar = New System.Windows.Forms.Button()
+        Me.cmdFreqMean = New System.Windows.Forms.Button()
+        Me.cmdFreqMad = New System.Windows.Forms.Button()
+        Me.cmdFreqMiss = New System.Windows.Forms.Button()
+        Me.cmdFreqMode1 = New System.Windows.Forms.Button()
+        Me.cmdFreqMax = New System.Windows.Forms.Button()
+        Me.cmdFreqMin = New System.Windows.Forms.Button()
+        Me.cmdFreqSum = New System.Windows.Forms.Button()
+        Me.cmdFreqLength = New System.Windows.Forms.Button()
         Me.grpProbabilty = New System.Windows.Forms.GroupBox()
         Me.cmdPascal = New System.Windows.Forms.Button()
         Me.cmdProbRHelp = New instat.ucrSplitButton()
@@ -622,6 +622,9 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdComplexAsin = New System.Windows.Forms.Button()
+        Me.cmdComplexAtan = New System.Windows.Forms.Button()
+        Me.cmdComplexAcos = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout
         Me.grpDates.SuspendLayout
         Me.ContextMenuStripDate.SuspendLayout
@@ -3522,210 +3525,6 @@ Partial Class ucrCalculator
         Me.RasterToolStripMenuItem.Size = New System.Drawing.Size(155, 24)
         Me.RasterToolStripMenuItem.Text = "Raster"
         '
-        'grpFrequencies
-        '
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqQuantile)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqPropn)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqDistinct)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqIQR)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqMedian)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqSd)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqVar)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqMean)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqMad)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqMiss)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqMode1)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqMax)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqMin)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqSum)
-        Me.grpFrequencies.Controls.Add(Me.cmdFreqLength)
-        Me.grpFrequencies.Location = New System.Drawing.Point(2, 283)
-        Me.grpFrequencies.Name = "grpFrequencies"
-        Me.grpFrequencies.Size = New System.Drawing.Size(353, 133)
-        Me.grpFrequencies.TabIndex = 184
-        Me.grpFrequencies.TabStop = False
-        Me.grpFrequencies.Text = "Frequencies"
-        '
-        'cmdFreqQuantile
-        '
-        Me.cmdFreqQuantile.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqQuantile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqQuantile.Location = New System.Drawing.Point(282, 90)
-        Me.cmdFreqQuantile.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqQuantile.Name = "cmdFreqQuantile"
-        Me.cmdFreqQuantile.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqQuantile.TabIndex = 186
-        Me.cmdFreqQuantile.Text = "quantile"
-        Me.cmdFreqQuantile.UseVisualStyleBackColor = True
-        '
-        'cmdFreqPropn
-        '
-        Me.cmdFreqPropn.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqPropn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqPropn.Location = New System.Drawing.Point(212, 90)
-        Me.cmdFreqPropn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqPropn.Name = "cmdFreqPropn"
-        Me.cmdFreqPropn.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqPropn.TabIndex = 185
-        Me.cmdFreqPropn.Text = "propn"
-        Me.cmdFreqPropn.UseVisualStyleBackColor = True
-        '
-        'cmdFreqDistinct
-        '
-        Me.cmdFreqDistinct.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqDistinct.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqDistinct.Location = New System.Drawing.Point(142, 90)
-        Me.cmdFreqDistinct.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqDistinct.Name = "cmdFreqDistinct"
-        Me.cmdFreqDistinct.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqDistinct.TabIndex = 184
-        Me.cmdFreqDistinct.Text = "distinct"
-        Me.cmdFreqDistinct.UseVisualStyleBackColor = True
-        '
-        'cmdFreqIQR
-        '
-        Me.cmdFreqIQR.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqIQR.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqIQR.Location = New System.Drawing.Point(70, 90)
-        Me.cmdFreqIQR.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqIQR.Name = "cmdFreqIQR"
-        Me.cmdFreqIQR.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqIQR.TabIndex = 183
-        Me.cmdFreqIQR.Text = "IQR"
-        Me.cmdFreqIQR.UseVisualStyleBackColor = True
-        '
-        'cmdFreqMedian
-        '
-        Me.cmdFreqMedian.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqMedian.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqMedian.Location = New System.Drawing.Point(142, 53)
-        Me.cmdFreqMedian.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqMedian.Name = "cmdFreqMedian"
-        Me.cmdFreqMedian.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqMedian.TabIndex = 182
-        Me.cmdFreqMedian.Text = "median"
-        Me.cmdFreqMedian.UseVisualStyleBackColor = True
-        '
-        'cmdFreqSd
-        '
-        Me.cmdFreqSd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqSd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqSd.Location = New System.Drawing.Point(282, 53)
-        Me.cmdFreqSd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqSd.Name = "cmdFreqSd"
-        Me.cmdFreqSd.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqSd.TabIndex = 181
-        Me.cmdFreqSd.Text = "sd"
-        Me.cmdFreqSd.UseVisualStyleBackColor = True
-        '
-        'cmdFreqVar
-        '
-        Me.cmdFreqVar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqVar.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqVar.Location = New System.Drawing.Point(212, 53)
-        Me.cmdFreqVar.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqVar.Name = "cmdFreqVar"
-        Me.cmdFreqVar.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqVar.TabIndex = 180
-        Me.cmdFreqVar.Text = "var"
-        Me.cmdFreqVar.UseVisualStyleBackColor = True
-        '
-        'cmdFreqMean
-        '
-        Me.cmdFreqMean.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqMean.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqMean.Location = New System.Drawing.Point(70, 53)
-        Me.cmdFreqMean.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqMean.Name = "cmdFreqMean"
-        Me.cmdFreqMean.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqMean.TabIndex = 179
-        Me.cmdFreqMean.Text = "mean"
-        Me.cmdFreqMean.UseVisualStyleBackColor = True
-        '
-        'cmdFreqMad
-        '
-        Me.cmdFreqMad.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqMad.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqMad.Location = New System.Drawing.Point(0, 90)
-        Me.cmdFreqMad.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqMad.Name = "cmdFreqMad"
-        Me.cmdFreqMad.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqMad.TabIndex = 178
-        Me.cmdFreqMad.Text = "mad"
-        Me.cmdFreqMad.UseVisualStyleBackColor = True
-        '
-        'cmdFreqMiss
-        '
-        Me.cmdFreqMiss.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqMiss.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqMiss.Location = New System.Drawing.Point(0, 53)
-        Me.cmdFreqMiss.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqMiss.Name = "cmdFreqMiss"
-        Me.cmdFreqMiss.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqMiss.TabIndex = 177
-        Me.cmdFreqMiss.Text = "miss"
-        Me.cmdFreqMiss.UseVisualStyleBackColor = True
-        '
-        'cmdFreqMode1
-        '
-        Me.cmdFreqMode1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqMode1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqMode1.Location = New System.Drawing.Point(282, 18)
-        Me.cmdFreqMode1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqMode1.Name = "cmdFreqMode1"
-        Me.cmdFreqMode1.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqMode1.TabIndex = 176
-        Me.cmdFreqMode1.Text = "mode1"
-        Me.cmdFreqMode1.UseVisualStyleBackColor = True
-        '
-        'cmdFreqMax
-        '
-        Me.cmdFreqMax.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqMax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqMax.Location = New System.Drawing.Point(212, 18)
-        Me.cmdFreqMax.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqMax.Name = "cmdFreqMax"
-        Me.cmdFreqMax.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqMax.TabIndex = 175
-        Me.cmdFreqMax.Text = "max"
-        Me.cmdFreqMax.UseVisualStyleBackColor = True
-        '
-        'cmdFreqMin
-        '
-        Me.cmdFreqMin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqMin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqMin.Location = New System.Drawing.Point(142, 18)
-        Me.cmdFreqMin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqMin.Name = "cmdFreqMin"
-        Me.cmdFreqMin.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqMin.TabIndex = 174
-        Me.cmdFreqMin.Text = "min"
-        Me.cmdFreqMin.UseVisualStyleBackColor = True
-        '
-        'cmdFreqSum
-        '
-        Me.cmdFreqSum.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqSum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqSum.Location = New System.Drawing.Point(70, 18)
-        Me.cmdFreqSum.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqSum.Name = "cmdFreqSum"
-        Me.cmdFreqSum.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqSum.TabIndex = 173
-        Me.cmdFreqSum.Text = "sum"
-        Me.cmdFreqSum.UseVisualStyleBackColor = True
-        '
-        'cmdFreqLength
-        '
-        Me.cmdFreqLength.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFreqLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFreqLength.Location = New System.Drawing.Point(0, 18)
-        Me.cmdFreqLength.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdFreqLength.Name = "cmdFreqLength"
-        Me.cmdFreqLength.Size = New System.Drawing.Size(72, 38)
-        Me.cmdFreqLength.TabIndex = 172
-        Me.cmdFreqLength.Text = "length"
-        Me.cmdFreqLength.UseVisualStyleBackColor = True
-        '
         'cmdKurtosis
         '
         Me.cmdKurtosis.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -4046,6 +3845,210 @@ Partial Class ucrCalculator
         Me.cmdVar.TabIndex = 159
         Me.cmdVar.Text = "var"
         Me.cmdVar.UseVisualStyleBackColor = True
+        '
+        'grpFrequencies
+        '
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqQuantile)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqPropn)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqDistinct)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqIQR)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqMedian)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqSd)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqVar)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqMean)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqMad)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqMiss)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqMode1)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqMax)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqMin)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqSum)
+        Me.grpFrequencies.Controls.Add(Me.cmdFreqLength)
+        Me.grpFrequencies.Location = New System.Drawing.Point(2, 283)
+        Me.grpFrequencies.Name = "grpFrequencies"
+        Me.grpFrequencies.Size = New System.Drawing.Size(353, 133)
+        Me.grpFrequencies.TabIndex = 184
+        Me.grpFrequencies.TabStop = False
+        Me.grpFrequencies.Text = "Frequencies"
+        '
+        'cmdFreqQuantile
+        '
+        Me.cmdFreqQuantile.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqQuantile.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqQuantile.Location = New System.Drawing.Point(282, 90)
+        Me.cmdFreqQuantile.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqQuantile.Name = "cmdFreqQuantile"
+        Me.cmdFreqQuantile.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqQuantile.TabIndex = 186
+        Me.cmdFreqQuantile.Text = "quantile"
+        Me.cmdFreqQuantile.UseVisualStyleBackColor = True
+        '
+        'cmdFreqPropn
+        '
+        Me.cmdFreqPropn.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqPropn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqPropn.Location = New System.Drawing.Point(212, 90)
+        Me.cmdFreqPropn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqPropn.Name = "cmdFreqPropn"
+        Me.cmdFreqPropn.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqPropn.TabIndex = 185
+        Me.cmdFreqPropn.Text = "propn"
+        Me.cmdFreqPropn.UseVisualStyleBackColor = True
+        '
+        'cmdFreqDistinct
+        '
+        Me.cmdFreqDistinct.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqDistinct.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqDistinct.Location = New System.Drawing.Point(142, 90)
+        Me.cmdFreqDistinct.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqDistinct.Name = "cmdFreqDistinct"
+        Me.cmdFreqDistinct.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqDistinct.TabIndex = 184
+        Me.cmdFreqDistinct.Text = "distinct"
+        Me.cmdFreqDistinct.UseVisualStyleBackColor = True
+        '
+        'cmdFreqIQR
+        '
+        Me.cmdFreqIQR.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqIQR.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqIQR.Location = New System.Drawing.Point(70, 90)
+        Me.cmdFreqIQR.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqIQR.Name = "cmdFreqIQR"
+        Me.cmdFreqIQR.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqIQR.TabIndex = 183
+        Me.cmdFreqIQR.Text = "IQR"
+        Me.cmdFreqIQR.UseVisualStyleBackColor = True
+        '
+        'cmdFreqMedian
+        '
+        Me.cmdFreqMedian.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqMedian.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqMedian.Location = New System.Drawing.Point(142, 53)
+        Me.cmdFreqMedian.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqMedian.Name = "cmdFreqMedian"
+        Me.cmdFreqMedian.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqMedian.TabIndex = 182
+        Me.cmdFreqMedian.Text = "median"
+        Me.cmdFreqMedian.UseVisualStyleBackColor = True
+        '
+        'cmdFreqSd
+        '
+        Me.cmdFreqSd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqSd.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqSd.Location = New System.Drawing.Point(282, 53)
+        Me.cmdFreqSd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqSd.Name = "cmdFreqSd"
+        Me.cmdFreqSd.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqSd.TabIndex = 181
+        Me.cmdFreqSd.Text = "sd"
+        Me.cmdFreqSd.UseVisualStyleBackColor = True
+        '
+        'cmdFreqVar
+        '
+        Me.cmdFreqVar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqVar.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqVar.Location = New System.Drawing.Point(212, 53)
+        Me.cmdFreqVar.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqVar.Name = "cmdFreqVar"
+        Me.cmdFreqVar.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqVar.TabIndex = 180
+        Me.cmdFreqVar.Text = "var"
+        Me.cmdFreqVar.UseVisualStyleBackColor = True
+        '
+        'cmdFreqMean
+        '
+        Me.cmdFreqMean.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqMean.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqMean.Location = New System.Drawing.Point(70, 53)
+        Me.cmdFreqMean.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqMean.Name = "cmdFreqMean"
+        Me.cmdFreqMean.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqMean.TabIndex = 179
+        Me.cmdFreqMean.Text = "mean"
+        Me.cmdFreqMean.UseVisualStyleBackColor = True
+        '
+        'cmdFreqMad
+        '
+        Me.cmdFreqMad.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqMad.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqMad.Location = New System.Drawing.Point(0, 90)
+        Me.cmdFreqMad.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqMad.Name = "cmdFreqMad"
+        Me.cmdFreqMad.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqMad.TabIndex = 178
+        Me.cmdFreqMad.Text = "mad"
+        Me.cmdFreqMad.UseVisualStyleBackColor = True
+        '
+        'cmdFreqMiss
+        '
+        Me.cmdFreqMiss.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqMiss.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqMiss.Location = New System.Drawing.Point(0, 53)
+        Me.cmdFreqMiss.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqMiss.Name = "cmdFreqMiss"
+        Me.cmdFreqMiss.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqMiss.TabIndex = 177
+        Me.cmdFreqMiss.Text = "miss"
+        Me.cmdFreqMiss.UseVisualStyleBackColor = True
+        '
+        'cmdFreqMode1
+        '
+        Me.cmdFreqMode1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqMode1.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqMode1.Location = New System.Drawing.Point(282, 18)
+        Me.cmdFreqMode1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqMode1.Name = "cmdFreqMode1"
+        Me.cmdFreqMode1.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqMode1.TabIndex = 176
+        Me.cmdFreqMode1.Text = "mode1"
+        Me.cmdFreqMode1.UseVisualStyleBackColor = True
+        '
+        'cmdFreqMax
+        '
+        Me.cmdFreqMax.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqMax.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqMax.Location = New System.Drawing.Point(212, 18)
+        Me.cmdFreqMax.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqMax.Name = "cmdFreqMax"
+        Me.cmdFreqMax.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqMax.TabIndex = 175
+        Me.cmdFreqMax.Text = "max"
+        Me.cmdFreqMax.UseVisualStyleBackColor = True
+        '
+        'cmdFreqMin
+        '
+        Me.cmdFreqMin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqMin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqMin.Location = New System.Drawing.Point(142, 18)
+        Me.cmdFreqMin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqMin.Name = "cmdFreqMin"
+        Me.cmdFreqMin.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqMin.TabIndex = 174
+        Me.cmdFreqMin.Text = "min"
+        Me.cmdFreqMin.UseVisualStyleBackColor = True
+        '
+        'cmdFreqSum
+        '
+        Me.cmdFreqSum.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqSum.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqSum.Location = New System.Drawing.Point(70, 18)
+        Me.cmdFreqSum.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqSum.Name = "cmdFreqSum"
+        Me.cmdFreqSum.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqSum.TabIndex = 173
+        Me.cmdFreqSum.Text = "sum"
+        Me.cmdFreqSum.UseVisualStyleBackColor = True
+        '
+        'cmdFreqLength
+        '
+        Me.cmdFreqLength.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFreqLength.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFreqLength.Location = New System.Drawing.Point(0, 18)
+        Me.cmdFreqLength.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdFreqLength.Name = "cmdFreqLength"
+        Me.cmdFreqLength.Size = New System.Drawing.Size(72, 38)
+        Me.cmdFreqLength.TabIndex = 172
+        Me.cmdFreqLength.Text = "length"
+        Me.cmdFreqLength.UseVisualStyleBackColor = True
         '
         'grpProbabilty
         '
@@ -6282,6 +6285,9 @@ Partial Class ucrCalculator
         '
         'grpComplex
         '
+        Me.grpComplex.Controls.Add(Me.cmdComplexAsin)
+        Me.grpComplex.Controls.Add(Me.cmdComplexAtan)
+        Me.grpComplex.Controls.Add(Me.cmdComplexAcos)
         Me.grpComplex.Controls.Add(Me.cmdAsComplex)
         Me.grpComplex.Controls.Add(Me.cmdComplexi)
         Me.grpComplex.Controls.Add(Me.cmdComplexRHelp)
@@ -6328,7 +6334,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexi.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexi.Location = New System.Drawing.Point(30, 240)
+        Me.cmdComplexi.Location = New System.Drawing.Point(30, 239)
         Me.cmdComplexi.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexi.Name = "cmdComplexi"
         Me.cmdComplexi.Size = New System.Drawing.Size(82, 38)
@@ -6376,7 +6382,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexPi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexPi.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexPi.Location = New System.Drawing.Point(279, 164)
+        Me.cmdComplexPi.Location = New System.Drawing.Point(279, 165)
         Me.cmdComplexPi.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexPi.Name = "cmdComplexPi"
         Me.cmdComplexPi.Size = New System.Drawing.Size(78, 38)
@@ -6412,7 +6418,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexSignif.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexSignif.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexSignif.Location = New System.Drawing.Point(198, 203)
+        Me.cmdComplexSignif.Location = New System.Drawing.Point(198, 202)
         Me.cmdComplexSignif.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexSignif.Name = "cmdComplexSignif"
         Me.cmdComplexSignif.Size = New System.Drawing.Size(82, 38)
@@ -6484,7 +6490,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexRound.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexRound.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexRound.Location = New System.Drawing.Point(111, 203)
+        Me.cmdComplexRound.Location = New System.Drawing.Point(111, 202)
         Me.cmdComplexRound.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexRound.Name = "cmdComplexRound"
         Me.cmdComplexRound.Size = New System.Drawing.Size(88, 38)
@@ -6496,7 +6502,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexLog.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexLog.Location = New System.Drawing.Point(279, 203)
+        Me.cmdComplexLog.Location = New System.Drawing.Point(279, 202)
         Me.cmdComplexLog.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexLog.Name = "cmdComplexLog"
         Me.cmdComplexLog.Size = New System.Drawing.Size(79, 38)
@@ -6508,7 +6514,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexSqrt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexSqrt.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexSqrt.Location = New System.Drawing.Point(30, 203)
+        Me.cmdComplexSqrt.Location = New System.Drawing.Point(30, 202)
         Me.cmdComplexSqrt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexSqrt.Name = "cmdComplexSqrt"
         Me.cmdComplexSqrt.Size = New System.Drawing.Size(82, 38)
@@ -7417,6 +7423,42 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdComplexAsin
+        '
+        Me.cmdComplexAsin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexAsin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexAsin.Location = New System.Drawing.Point(31, 165)
+        Me.cmdComplexAsin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexAsin.Name = "cmdComplexAsin"
+        Me.cmdComplexAsin.Size = New System.Drawing.Size(81, 38)
+        Me.cmdComplexAsin.TabIndex = 217
+        Me.cmdComplexAsin.Text = "asin"
+        Me.cmdComplexAsin.UseVisualStyleBackColor = True
+        '
+        'cmdComplexAtan
+        '
+        Me.cmdComplexAtan.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexAtan.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexAtan.Location = New System.Drawing.Point(198, 165)
+        Me.cmdComplexAtan.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexAtan.Name = "cmdComplexAtan"
+        Me.cmdComplexAtan.Size = New System.Drawing.Size(82, 38)
+        Me.cmdComplexAtan.TabIndex = 216
+        Me.cmdComplexAtan.Text = "atan"
+        Me.cmdComplexAtan.UseVisualStyleBackColor = True
+        '
+        'cmdComplexAcos
+        '
+        Me.cmdComplexAcos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdComplexAcos.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComplexAcos.Location = New System.Drawing.Point(111, 165)
+        Me.cmdComplexAcos.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdComplexAcos.Name = "cmdComplexAcos"
+        Me.cmdComplexAcos.Size = New System.Drawing.Size(88, 38)
+        Me.cmdComplexAcos.TabIndex = 215
+        Me.cmdComplexAcos.Text = "acos"
+        Me.cmdComplexAcos.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
@@ -8092,4 +8134,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdMdy As Button
     Friend WithEvents cmdYmd As Button
     Friend WithEvents cmdLeap As Button
+    Friend WithEvents cmdComplexAsin As Button
+    Friend WithEvents cmdComplexAtan As Button
+    Friend WithEvents cmdComplexAcos As Button
 End Class

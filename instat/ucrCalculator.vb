@@ -296,9 +296,9 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdComplexSin, "sine of the angle in radians For example sin(1-1i) gives (1.2985-0.635i)")
         ttCalculator.SetToolTip(cmdComplexCos, "cosine of the angle in radians. For example cos(1-1i) gives (0.8337+0.9889i)")
         ttCalculator.SetToolTip(cmdComplexTan, "tangent of the angle in radians. For example tan(1-i) gives (0.272-1.084i)")
-        'ttCalculator.SetToolTip(cmdComplexAsin, "arcsine, or inverse of the sine. It is the angle in radians corresponding to a given sine. For example asin(1.2985-0.635i) gives (1-1i)")
-        '  ttCalculator.SetToolTip(cmdComplexAcos, "arccos, or inverse of the cosine. It is the angle corresponding to a given cos. For example acos(0.8337+0.9889i) gives (1-1i)")
-        ' ttCalculator.SetToolTip(cmdComplexAtan, "arctan or inverse of the tangent. It is the angle corresponding to a given tan. For example atan(0.272-1.084i) gives (1-1i)")
+        ttCalculator.SetToolTip(cmdComplexAsin, "arcsine, or inverse of the sine. It is the angle in radians corresponding to a given sine. For example asin(1.2985-0.635i) gives (1-1i)")
+        ttCalculator.SetToolTip(cmdComplexAcos, "arccos, or inverse of the cosine. It is the angle corresponding to a given cos. For example acos(0.8337+0.9889i) gives (1-1i)")
+        ttCalculator.SetToolTip(cmdComplexAtan, "arctan or inverse of the tangent. It is the angle corresponding to a given tan. For example atan(0.272-1.084i) gives (1-1i)")
         ttCalculator.SetToolTip(cmdComplexSinH, " hyperbolic sin of a number in radians (asinh also exists)")
         ttCalculator.SetToolTip(cmdComplexCosH, "hyperbolic cosine of a number in radians (acosh also exists)")
         ttCalculator.SetToolTip(cmdComplexTanH, "hyperbolic tangent of a number in radians (atanh also exists)")
@@ -441,7 +441,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdInfreq, "Order the factor levels by their frequency ")
         ttCalculator.SetToolTip(cmdInseq, "Order a factor with numeric levels")
         ttCalculator.SetToolTip(cmdLump, "Change all levels appearing less than min times into Other. For example fct_lump_min(Variety,10)")
-        ttCalculator.SetToolTip(cmdmatch, "Make a logical variable with TRUE when levels are in the factor. For example fct_match(variety,c(""NEW"",""OLD""))")
+        ttCalculator.SetToolTip(cmdFmatch, "Make a logical variable with TRUE when levels are in the factor. For example fct_match(variety,c(""NEW"",""OLD""))")
         ttCalculator.SetToolTip(cmdOther, " Replace levels with Other. For example fct_other(variety, keep=""NEW"")")
         ttCalculator.SetToolTip(cmdRecode, "Change factor levels. For example fct_recode(variety,improved=""NEW"",improved=""OLD"")")
         ttCalculator.SetToolTip(cmdRelevel, " Reorder factor levels. For example fct_relevel(fertgrp,""0cwt"", "".5-2cwt"")")
@@ -5250,29 +5250,29 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    'Private Sub cmdComplexAsin_Click(sender As Object, e As EventArgs) Handles cmdComplexAsin.Click
-    '    If chkShowParameters.Checked Then
-    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin(x = )", 1)
-    '    Else
-    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin()", 1)
-    '    End If
-    'End Sub
+    Private Sub cmdComplexAsin_Click(sender As Object, e As EventArgs) Handles cmdComplexAsin.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin(x = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("asin()", 1)
+        End If
+    End Sub
 
-    'Private Sub cmdComplexAcos_Click(sender As Object, e As EventArgs) Handles cmdComplexAcos.Click
-    '    If chkShowParameters.Checked Then
-    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos(x = )", 1)
-    '    Else
-    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos()", 1)
-    '    End If
-    'End Sub
+    Private Sub cmdComplexAcos_Click(sender As Object, e As EventArgs) Handles cmdComplexAcos.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos(x = )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("acos()", 1)
+        End If
+    End Sub
 
-    'Private Sub cmdComplexAtan_Click(sender As Object, e As EventArgs) Handles cmdComplexAtan.Click
-    '    If chkShowParameters.Checked Then
-    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan(x = )", 2)
-    '    Else
-    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan()", 1)
-    '    End If
-    'End Sub
+    Private Sub cmdComplexAtan_Click(sender As Object, e As EventArgs) Handles cmdComplexAtan.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("atan()", 1)
+        End If
+    End Sub
 
     Private Sub cmdReal_Click(sender As Object, e As EventArgs) Handles cmdReal.Click
         If chkShowParameters.Checked Then
