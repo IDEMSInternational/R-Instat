@@ -132,7 +132,7 @@ Public Class dlgCalculator
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
             ucrBase.clsRsyntax.RemoveAssignTo()
-            ucrBase.clsRsyntax.iCallType = 1
+            ucrBase.clsRsyntax.iCallType = 5
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
 
