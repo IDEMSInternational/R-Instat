@@ -300,13 +300,16 @@ Public Class RSyntax
             strTemp = clsBaseFunction.ToScript(strScript)
         ElseIf bUseBaseOperator Then
             strTemp = clsBaseOperator.ToScript(strScript)
+        ElseIf bUseCommandString Then
+            strTemp = clsBaseCommandString.ToScript(strScript, strCommandString)
         End If
 
         If bExcludeAssignedFunctionOutput Then
             'Sometimes the output of the R-command we deal with should not be part of the script...  
             'That's only the case when this output has already been assigned.
             If (bUseBaseFunction AndAlso clsBaseFunction.IsAssigned()) OrElse
-                (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) Then
+                (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) OrElse
+                (bUseCommandString AndAlso clsBaseFunction.IsAssigned()) Then
                 Return strScript
             End If
         End If
