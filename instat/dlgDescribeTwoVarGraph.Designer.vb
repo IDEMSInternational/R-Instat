@@ -42,6 +42,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.lblFirstVariables = New System.Windows.Forms.Label()
         Me.grpSummaries = New System.Windows.Forms.GroupBox()
+        Me.lblThreeBy = New System.Windows.Forms.Label()
         Me.lblThirdType = New System.Windows.Forms.Label()
         Me.ucrInputCategoricalByCategorical = New instat.ucrInputComboBox()
         Me.ucrInputCategoricalByNumeric = New instat.ucrInputComboBox()
@@ -110,7 +111,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblThreeVariable = New System.Windows.Forms.Label()
         Me.ucrReceiverThreeVariableSecond = New instat.ucrReceiverSingle()
         Me.lblThreeVariableSecond = New System.Windows.Forms.Label()
-        Me.lblThreeBy = New System.Windows.Forms.Label()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpTypeOfDispaly.SuspendLayout()
@@ -166,6 +166,16 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpSummaries.Size = New System.Drawing.Size(210, 72)
         Me.grpSummaries.TabIndex = 15
         Me.grpSummaries.TabStop = False
+        '
+        'lblThreeBy
+        '
+        Me.lblThreeBy.AutoSize = True
+        Me.lblThreeBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblThreeBy.Location = New System.Drawing.Point(139, 16)
+        Me.lblThreeBy.Name = "lblThreeBy"
+        Me.lblThreeBy.Size = New System.Drawing.Size(18, 13)
+        Me.lblThreeBy.TabIndex = 19
+        Me.lblThreeBy.Text = "by"
         '
         'lblThirdType
         '
@@ -928,16 +938,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblThreeVariableSecond.TabIndex = 71
         Me.lblThreeVariableSecond.Text = "Second Variable:"
         '
-        'lblThreeBy
-        '
-        Me.lblThreeBy.AutoSize = True
-        Me.lblThreeBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblThreeBy.Location = New System.Drawing.Point(139, 16)
-        Me.lblThreeBy.Name = "lblThreeBy"
-        Me.lblThreeBy.Size = New System.Drawing.Size(18, 13)
-        Me.lblThreeBy.TabIndex = 19
-        Me.lblThreeBy.Text = "by"
-        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -978,7 +978,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.MinimizeBox = False
         Me.Name = "dlgDescribeTwoVarGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Two Plus Variable Graph"
+        Me.Text = "Two/Three Variable Graph"
         Me.grpSummaries.ResumeLayout(False)
         Me.grpSummaries.PerformLayout()
         Me.grpOptions.ResumeLayout(False)
