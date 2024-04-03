@@ -80,7 +80,7 @@ Public Class dlgRandomSubsets
 
         ucrSelectorRandomSubsets.Reset()
         ucrNewDataFrame.Reset()
-        ucrBase.clsRsyntax.GetBeforeCodes().Clear()
+        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
         NewDefaultName()
         ReplaceParameters()
 

@@ -50,11 +50,11 @@ Public Class dlgTwoVariableUseModel
         'autoplot function does not support glm/lm models
         '  sdgSimpleRegOptions.chkFittedModel.Enabled = False
         'ucrBase.iHelpTopicID = 
-        ucrBaseUseModel.clsRsyntax.clsBaseOperator.SetOperation("+")
+        ucrBaseUseModel.clsRsyntax.SetOperation("+")
         ucrReceiverUseModel.SetItemType(RObjectTypeLabel.Model)
         ucrReceiverUseModel.Selector = ucrSelectorUseModel
         clsRCommand.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
-        ucrBaseUseModel.clsRsyntax.clsBaseOperator.AddParameter(clsRFunctionParameter:=clsRCommand, iPosition:=0)
+        ucrBaseUseModel.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRCommand)
         ucrModel.IsReadOnly = True
         ' sdgSimpleRegOptions.SetRModelFunction(clsRCommand)
         ucrReceiverUseModel.strSelectorHeading = "Models"

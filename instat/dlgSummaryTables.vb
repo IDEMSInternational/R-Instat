@@ -221,7 +221,7 @@ Public Class dlgSummaryTables
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
 
-        ucrBase.clsRsyntax.GetBeforeCodes().Clear()
+        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
 
         clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)

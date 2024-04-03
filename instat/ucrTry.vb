@@ -94,7 +94,7 @@ Public Class ucrTry
             ElseIf IsNothing(ucrReceiverScript) AndAlso CheckForEmptyInputControl() Then
                 ucrInputTryMessage.SetName("")
             Else
-                For Each clsTempCode In clsRSyntax.GetBeforeCodes()
+                For Each clsTempCode In clsRSyntax.lstBeforeCodes
                     Dim clsCodeClone As RCodeStructure = clsTempCode.Clone()
                     Dim strBeforeAfterScript As String = ""
                     Dim strBeforeAfterTemp As String = clsCodeClone.ToScript(strBeforeAfterScript)
@@ -181,7 +181,7 @@ Public Class ucrTry
             AddButtonInTryTextBox()
         Finally
             lstScripts = New List(Of String)
-            For Each clsTempCode In clsRSyntax.GetAfterCodes()
+            For Each clsTempCode In clsRSyntax.lstAfterCodes
                 Dim clsCodeClone As RCodeStructure = clsTempCode.Clone()
                 Dim strBeforeAfterScript As String = ""
                 Dim strBeforeAfterTemp As String = clsCodeClone.ToScript(strBeforeAfterScript)

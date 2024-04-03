@@ -171,7 +171,7 @@ Public Class dlgExportToClimsoft
     End Sub
 
     Private Sub ucrReceiverElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElements.ControlValueChanged
-        ucrBase.clsRsyntax.GetBeforeCodes().Clear()
+        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
         clsCurrentNewColumnFunction = ucrReceiverElements.GetVariables(True).Clone
         clsCurrentNewColumnFunction.SetAssignTo("columns")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
@@ -212,14 +212,14 @@ Public Class dlgExportToClimsoft
             cmdBrowse.Visible = True
         ElseIf ucrChkNewDataFrame.Checked AndAlso Not ucrChkExportDataFrame.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
-            ucrBase.clsRsyntax.GetAfterCodes().Clear()
+            ucrBase.clsRsyntax.lstAfterCodes.Clear()
             cmdBrowse.Visible = False
 
         ElseIf ucrChkExportDataFrame.Checked AndAlso Not ucrChkNewDataFrame.Checked Then
-            ucrBase.clsRsyntax.GetBeforeCodes().Clear()
+            ucrBase.clsRsyntax.lstBeforeCodes.Clear()
             ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
             ucrBase.clsRsyntax.SetBaseRFunction(clsExportClimsoftFunction)
-            ucrBase.clsRsyntax.GetAfterCodes().Clear()
+            ucrBase.clsRsyntax.lstAfterCodes.Clear()
             cmdBrowse.Visible = True
         End If
     End Sub

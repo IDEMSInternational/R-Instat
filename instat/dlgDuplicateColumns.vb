@@ -125,7 +125,7 @@ Public Class dlgDuplicateColumns
     Private Sub SetDefaults()
         clsDuplicateFunction = New RFunction
         clsConvertFunction = New RFunction
-        ucrBase.clsRsyntax.GetAfterCodes.Clear()
+        ucrBase.clsRsyntax.lstAfterCodes.Clear()
 
         ucrSelectorForDuplicateColumn.Reset()
         ucrSaveColumn.Reset()
