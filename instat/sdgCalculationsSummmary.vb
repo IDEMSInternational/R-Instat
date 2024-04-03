@@ -61,8 +61,6 @@ Public Class sdgCalculationsSummmary
 
         ucrManipulations.lstAvailableData.View = View.List
 
-        ucrCalcSummary.ucrReceiverForCalculation.bAttachedToPrimaryDataFrame = False
-
         'temp until working
         ucrCalcSummary.ucrSaveResultInto.Visible = False
         'ucrCalcSummary.ucrTryModelling.Visible = False
@@ -345,14 +343,18 @@ Public Class sdgCalculationsSummmary
 
     Private Sub ucrCalcSummary_SelectionChanged() Handles ucrCalcSummary.SelectionChanged
         If {"Calculation", "Summary"}.Contains(ucrInputType.GetText()) Then
+            Dim strExpression As String = ucrCalcSummary.ucrReceiverForCalculation.GetText()
             If Not ucrCalcSummary.ucrReceiverForCalculation.IsEmpty Then
-                clsCalculationFunction.AddParameter("function_exp", Chr(34) & ucrCalcSummary.ucrReceiverForCalculation.GetText() & Chr(34))
+                clsCalculationFunction.AddParameter("function_exp", Chr(34) & strExpression & Chr(34))
             Else
                 clsCalculationFunction.RemoveParameterByName("function_exp")
             End If
 
-            If ucrCalcSummary.ucrSelectorForCalculations.lstVariablesInReceivers.Count > 0 Then
-                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(ucrCalcSummary.ucrSelectorForCalculations.lstVariablesInReceivers, ucrCalcSummary.ucrSelectorForCalculations))
+            If ucrCalcSummary.ucrSelectorForCalculations.lstAvailableVariable.Items.Count > 0 AndAlso
+                Not ucrCalcSummary.ucrReceiverForCalculation.IsEmpty Then
+                Dim lstItems As String() = ucrCalcSummary.ucrSelectorForCalculations.lstAvailableVariable.Items.Cast(Of ListViewItem)().Select(Function(item) item.Text).ToArray()
+                Dim strSelectedVariables As String() = lstItems.Where(Function(variable) strExpression.Contains(variable)).ToArray()
+                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(strSelectedVariables, ucrCalcSummary.ucrSelectorForCalculations))
             Else
                 clsCalculationFunction.RemoveParameterByName("calculated_from")
             End If
@@ -364,29 +366,31 @@ Public Class sdgCalculationsSummmary
             If ucrReceiverByOrSort.IsEmpty Then
                 clsCalculationFunction.RemoveParameterByName("calculated_from")
             Else
-                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(ucrSelectorBy.lstVariablesInReceivers, ucrSelectorBy))
+                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(
+                                                    ucrSelectorBy.CurrentReceiver.GetVariableNamesList(bWithQuotes:=False), ucrSelectorBy))
             End If
         End If
     End Sub
 
     'Need to do this instead of with RFunctions because the calculated_from list can have multiple items with the same label
-    Private Function CreateCalcFromList(lstVariables As List(Of Tuple(Of String, String)), ucrCurrentSelector As ucrSelectorByDataFrame) As String
+    Private Function CreateCalcFromList(lstVariables As String(), ucrCurrentSelector As ucrSelectorByDataFrame) As String
+
+        If lstVariables Is Nothing Then
+            Return ""
+        End If
+
         Dim strCalcFromList As String
-        Dim strColumn As String
-        Dim strDataFrame As String
 
         strCalcFromList = "list("
         For i = 0 To lstVariables.Count - 1
-            strColumn = lstVariables(i).Item1
-            If lstVariables(i).Item1 = "" Then
-                strDataFrame = ucrCurrentSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-            Else
-                strDataFrame = lstVariables(i).Item2
+            Dim strDataName As String = lstVariables(i)
+            If Not String.IsNullOrEmpty(strDataName) Then
+                If i > 0 Then
+                    strCalcFromList = strCalcFromList & ","
+                End If
+
+                strCalcFromList = strCalcFromList & ucrCurrentSelector.strCurrentDataFrame & " = " & Chr(34) & strDataName & Chr(34)
             End If
-            If i > 0 Then
-                strCalcFromList = strCalcFromList & ","
-            End If
-            strCalcFromList = strCalcFromList & strDataFrame & " = " & Chr(34) & strColumn & Chr(34)
         Next
         strCalcFromList = strCalcFromList & ")"
         Return strCalcFromList
@@ -399,7 +403,9 @@ Public Class sdgCalculationsSummmary
                 clsCalculationFunction.RemoveParameterByName("calculated_from")
             Else
                 clsCalculationFunction.AddParameter("function_exp", Chr(34) & ucrDefineFilter.ucrFilterPreview.GetText() & Chr(34))
-                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(ucrDefineFilter.ucrSelectorForFitler.lstVariablesInReceivers, ucrDefineFilter.ucrSelectorForFitler))
+                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(
+                                                    ucrDefineFilter.ucrSelectorForFitler.CurrentReceiver.GetVariableNamesList(bWithQuotes:=False),
+                                                    ucrDefineFilter.ucrSelectorForFitler))
             End If
         End If
     End Sub

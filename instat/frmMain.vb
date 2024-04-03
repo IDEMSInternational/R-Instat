@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
+Imports System.Net
 Imports System.IO
 Imports System.Globalization
 Imports System.Threading
@@ -54,6 +55,7 @@ Public Class frmMain
 
     Public strCurrentAutoSaveDataFilePath As String = ""
 
+    Private strLatestVersion As String = ""
 
     Public isMinimised As Boolean = False
     Public isMaximised As Boolean = False
@@ -80,6 +82,10 @@ Public Class frmMain
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+
+        'set controls layout
+        SetupInitialLayout()
+
         clsOutputLogger = New clsOutputLogger
         clsRLink = New RLink(clsOutputLogger)
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
@@ -128,8 +134,6 @@ Public Class frmMain
 
         ucrOutput.SetLogger(clsOutputLogger)
 
-        SetToDefaultLayout()
-
         '---------------------------------------
         'set up R-Instat options (settings)
         'load any saved options if available
@@ -151,6 +155,8 @@ Public Class frmMain
         mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+        mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
+        mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
         strCurrLang = clsInstatOptions.strLanguageCultureCode
         '---------------------------------------
@@ -214,6 +220,145 @@ Public Class frmMain
         '---------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
+    End Sub
+
+    Private Sub CheckForUpdates()
+        Dim webClient As New WebClient()
+
+        Try
+            ' Download the version information file from the website
+            strLatestVersion = webClient.DownloadString("https://r-instat.org/version.txt")
+            Dim strCurrVersion = My.Application.Info.Version.ToString()
+
+            ' Compare with the current version of your app
+            If strLatestVersion > strCurrVersion Then
+                ' New version available, show a notification
+                Dim result As DialogResult = MessageBox.Show("R-Instat " & strLatestVersion & " is now available -- you have " & strCurrVersion & Environment.NewLine & "Do you want to dowload it?", "A new version of R-Instat Available!",
+                                                             MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+                If result = DialogResult.Yes Then
+                    Dim myProcess = New System.Diagnostics.Process
+                    myProcess.StartInfo.FileName = "https://r-instat.org/"
+                    myProcess.Start()
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox("Network issues or website not accessible")
+        End Try
+    End Sub
+
+    Private Sub SetupInitialLayout()
+        'splOverall has 2 panels
+        'splOverall.Panel1 contains splExtraWindows
+        'splOverall.Panel2 contains splDataOutput
+
+        'splExtraWindows has 2 panels
+        'splExtraWindows.Panel1 contains splMetadata
+        'splExtraWindows.Panel2 contains script window
+
+        'splMetadata has 2 panels
+        'splMetadata.Panel1 contains data frame
+        'splMetadata.Panel2 contains column metadata
+
+        'splDataOutput has 2 panels
+        'splDataOutput.Panel1 contains data viewer window
+        'splDataOutput.Panel2 contains output window
+
+        'collaspe all the panels initially (on application startup)
+        splOverall.Panel1Collapsed = True
+        splOverall.Panel2Collapsed = True
+
+        splExtraWindows.Panel1Collapsed = True
+        splExtraWindows.Panel2Collapsed = True
+
+        splMetadata.Panel1Collapsed = True
+        splMetadata.Panel2Collapsed = True
+
+        splDataOutput.Panel1Collapsed = True
+        splDataOutput.Panel2Collapsed = True
+
+        SetToDefaultLayout()
+    End Sub
+
+    Private Sub SetToDefaultLayout()
+        splOverall.SplitterDistance = splOverall.Height / 4
+        splDataOutput.SplitterDistance = splDataOutput.Width / 2
+        splExtraWindows.SplitterDistance = splExtraWindows.Width / 2
+        splMetadata.SplitterDistance = splMetadata.Width / 2
+
+        mnuViewDataView.Checked = True
+        mnuViewOutput.Checked = True
+        mnuViewDataFrameMetadata.Checked = False
+        mnuViewColumnMetadata.Checked = False
+        mnuViewLogScript.Checked = False
+        mnuViewSwapDataAndMetadata.Checked = False
+        mnuViewSwapDataAndScript.Checked = False
+        mnuColumnMetadat.Checked = False
+        mnuDataFrameMetadat.Checked = False
+
+        mnuTbDataView.Checked = True
+        mnuOutputWindow.Checked = True
+        mnuLogScript.Checked = False
+        UpdateLayout()
+    End Sub
+
+    Public Sub UpdateLayout()
+
+        Try
+            If Not mnuViewDataView.Checked _
+                            AndAlso Not mnuViewOutput.Checked _
+                            AndAlso Not mnuViewColumnMetadata.Checked _
+                            AndAlso Not mnuViewDataFrameMetadata.Checked _
+                            AndAlso Not mnuViewLogScript.Checked _
+                            AndAlso Not mnuViewSwapDataAndMetadata.Checked _
+                            AndAlso Not mnuViewSwapDataAndScript.Checked Then
+                splOverall.Hide()
+            Else
+                splOverall.Show()
+
+                'determine splOverall contents visibility 
+
+                '-------------------------------
+                'determine splOverall.Panel1 and it's contents visibility
+
+                If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLogScript.Checked Then
+                    'expand panel 1
+                    splOverall.Panel1Collapsed = False
+                    'change splOverall.Panel1Collapsed contents visibilty
+                    If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
+                        splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
+                        splMetadata.Panel2Collapsed = Not mnuViewDataFrameMetadata.Checked
+                        splExtraWindows.Panel1Collapsed = False
+                    Else
+                        splExtraWindows.Panel1Collapsed = True
+                    End If
+                    'expand panel 2 based on log script menu item checked status
+                    splExtraWindows.Panel2Collapsed = Not mnuViewLogScript.Checked
+                Else
+                    splOverall.Panel1Collapsed = True
+                End If
+                '-------------------------------
+
+                '-------------------------------
+                'determine splOverall.Panel2 and it's contents visibility
+
+                If mnuViewDataView.Checked OrElse mnuViewOutput.Checked Then
+                    splDataOutput.Panel1Collapsed = Not mnuViewDataView.Checked
+                    splDataOutput.Panel2Collapsed = Not mnuViewOutput.Checked
+                    splOverall.Panel2Collapsed = False
+                Else
+                    splOverall.Panel2Collapsed = True
+                End If
+                '-------------------------------
+
+
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        mnuTbDataView.Checked = mnuViewDataView.Checked
+        mnuOutputWindow.Checked = mnuViewOutput.Checked
+        mnuLogScript.Checked = mnuViewLogScript.Checked
     End Sub
 
     Private Function GetSavedRInstatOptions() As InstatOptions
@@ -424,27 +569,32 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub UpdateSwapDataAndMetadata()
+        If mnuViewSwapDataAndMetadata.Checked Then
+            splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
+            splMetadata.Panel1.Controls.Add(ucrDataViewer)
+            mnuViewColumnMetadata.Text = "Data View"
+            mnuViewDataView.Text = "Column Metadata"
+        Else
+            splDataOutput.Panel1.Controls.Add(ucrDataViewer)
+            splMetadata.Panel1.Controls.Add(ucrColumnMeta)
+            mnuViewColumnMetadata.Text = "Column Metadata"
+            mnuViewDataView.Text = "Data View"
+        End If
+    End Sub
 
-
-    Private Sub SetToDefaultLayout()
-        splOverall.SplitterDistance = splOverall.Height / 4
-        splDataOutput.SplitterDistance = splDataOutput.Width / 2
-        splExtraWindows.SplitterDistance = splExtraWindows.Width / 2
-        splMetadata.SplitterDistance = splMetadata.Width / 2
-
-        mnuViewDataView.Checked = True
-        mnuViewOutput.Checked = True
-        mnuViewDataFrameMetadata.Checked = False
-        mnuViewColumnMetadata.Checked = False
-        mnuViewLogScript.Checked = False
-        mnuViewSwapDataAndMetadata.Checked = False
-        mnuColumnMetadat.Checked = False
-        mnuDataFrameMetadat.Checked = False
-
-        mnuTbDataView.Checked = True
-        mnuTbOutput.Checked = True
-        mnuLogScript.Checked = False
-        UpdateLayout()
+    Private Sub UpdateSwapDataAndScript()
+        If mnuViewSwapDataAndScript.Checked Then
+            splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
+            splExtraWindows.Panel2.Controls.Add(ucrDataViewer)
+            mnuViewLogScript.Text = "Data View"
+            mnuViewDataView.Text = "Log/Script"
+        Else
+            splDataOutput.Panel1.Controls.Add(ucrDataViewer)
+            splExtraWindows.Panel2.Controls.Add(ucrScriptWindow)
+            mnuViewLogScript.Text = "Log/Script"
+            mnuViewDataView.Text = "Data View"
+        End If
     End Sub
 
     Public Sub SaveInstatOptions(strFilePath As String)
@@ -467,8 +617,8 @@ Public Class frmMain
         End Try
     End Sub
 
-    Public Sub AddToScriptWindow(strText As String, Optional bMakeVisible As Boolean = True)
-        ucrScriptWindow.AppendText(strText)
+    Public Sub AddToScriptWindow(strText As String, Optional bMakeVisible As Boolean = True, Optional bAppendAtCurrentCursorPosition As Boolean = False)
+        ucrScriptWindow.AppendText(strText, bAppendAtCurrentCursorPosition:=bAppendAtCurrentCursorPosition)
         If bMakeVisible Then
             mnuViewLogScript.Checked = True
             UpdateLayout()
@@ -548,62 +698,6 @@ Public Class frmMain
         dlgName.ShowDialog()
     End Sub
 
-    Public Sub UpdateLayout()
-        If Not mnuViewDataView.Checked _
-                AndAlso Not mnuViewOutput.Checked _
-                AndAlso Not mnuViewColumnMetadata.Checked _
-                AndAlso Not mnuViewDataFrameMetadata.Checked _
-                AndAlso Not mnuViewLogScript.Checked _
-                AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
-            splOverall.Hide()
-        Else
-            splOverall.Show()
-            If mnuViewDataView.Checked OrElse mnuViewOutput.Checked Then
-                splOverall.Panel2Collapsed = False
-                splDataOutput.Panel1Collapsed = Not mnuViewDataView.Checked
-                splDataOutput.Panel2Collapsed = Not mnuViewOutput.Checked
-            Else
-                splOverall.Panel2Collapsed = True
-            End If
-            If mnuViewColumnMetadata.Checked _
-                    OrElse mnuViewDataFrameMetadata.Checked _
-                    OrElse mnuViewLogScript.Checked Then
-                splOverall.Panel1Collapsed = False
-                If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
-                    splExtraWindows.Panel1Collapsed = False
-                    splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
-                    splMetadata.Panel2Collapsed = Not mnuViewDataFrameMetadata.Checked
-                Else
-                    splExtraWindows.Panel1Collapsed = True
-                End If
-                If mnuViewLogScript.Checked Then
-                    splExtraWindows.Panel2Collapsed = False
-                Else
-                    splExtraWindows.Panel2Collapsed = True
-                End If
-            Else
-                splOverall.Panel1Collapsed = True
-            End If
-        End If
-        mnuTbDataView.Checked = mnuViewDataView.Checked
-        mnuTbOutput.Checked = mnuViewOutput.Checked
-        mnuLogScript.Checked = mnuViewLogScript.Checked
-    End Sub
-
-    Private Sub UpdateSwapDataAndMetadata()
-        If mnuViewSwapDataAndMetadata.Checked Then
-            splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
-            splMetadata.Panel1.Controls.Add(ucrDataViewer)
-            mnuViewColumnMetadata.Text = "Data View"
-            mnuViewDataView.Text = "Column Metadata"
-        Else
-            splDataOutput.Panel1.Controls.Add(ucrDataViewer)
-            splMetadata.Panel1.Controls.Add(ucrColumnMeta)
-            mnuViewColumnMetadata.Text = "Column Metadata"
-            mnuViewDataView.Text = "Data View"
-        End If
-    End Sub
-
     Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuViewDataFrameMetadata.Click
         mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
         mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
@@ -638,8 +732,20 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
-        mnuViewColumnMetadata.Checked = True
+        mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         UpdateLayout()
+    End Sub
+
+    Private Sub mnuShowRCommand_Click(sender As Object, e As EventArgs) Handles mnuShowRCommand.Click
+        mnuShowRCommand.Checked = Not mnuShowRCommand.Checked
+        clsInstatOptions.SetCommandInOutpt(mnuShowRCommand.Checked)
+        clsInstatOptions.ExecuteRGlobalOptions()
+    End Sub
+
+    Private Sub mnuIncludeComments_Click(sender As Object, e As EventArgs) Handles mnuIncludeComments.Click
+        mnuIncludeComments.Checked = Not mnuIncludeComments.Checked
+        clsInstatOptions.SetIncludeCommentByDefault(mnuIncludeComments.Checked)
+        clsInstatOptions.ExecuteRGlobalOptions()
     End Sub
 
     Private Sub mnuPrepareSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameInsertColumnsRows.Click
@@ -801,10 +907,6 @@ Public Class frmMain
     '    dlgGeneralRegression.ShowDialog()
     'End Sub
 
-    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralGraphics.Click
-        dlgGeneralForGraphics.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareTextTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextTransform.Click
         dlgTransformText.ShowDialog()
     End Sub
@@ -825,6 +927,8 @@ Public Class frmMain
 
     Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
         dlgOptions.ShowDialog()
+        mnuShowRCommand.Checked = dlgOptions.ucrChkShowRCommandsinOutputWindow.chkCheck.Checked
+        mnuIncludeComments.Checked = dlgOptions.ucrChkIncludeCommentsbyDefault.chkCheck.Checked
     End Sub
 
     Private Sub mnuOrganiseDataFrameHideColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameHideColumns.Click
@@ -916,10 +1020,6 @@ Public Class frmMain
 
     Private Sub mnuEditFind_Click(sender As Object, e As EventArgs) Handles mnuEditFind.Click
         dlgFindInVariableOrFilter.ShowDialog()
-    End Sub
-
-    Private Sub mnuEditFindNext_Click(sender As Object, e As EventArgs) Handles mnuEditFindNext.Click
-        mnuEditFind_Click(sender, e)
     End Sub
 
     Private Sub ColourByPropertyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataframeColourByProperty.Click
@@ -1124,7 +1224,6 @@ Public Class frmMain
         dlgEndOfRainsSeason.ShowDialog()
     End Sub
 
-
     Private Sub mnuDescribeSpecificScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificPointPlot.Click
         dlgScatterPlot.ShowDialog()
     End Sub
@@ -1171,10 +1270,6 @@ Public Class frmMain
 
     Private Sub mnuModelProbabilityDistributionsCompareModels_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsCompareModels.Click
         dlgCompareModels.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeGeneralColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralColumnSummaries.Click
-        dlgColumnStats.ShowDialog()
     End Sub
 
     Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateUseDate.Click
@@ -1283,14 +1378,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticPrepareInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesInfillMissingDates.Click
         dlgInfill.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticDescribeTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTemperatures.Click
-        dlgTemperature.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticDescribeSunshineRadiation_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSunshineRadiation.Click
-        dlgSunshine.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPICSARainfall_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSARainfallGraph.Click
@@ -1505,9 +1592,6 @@ Public Class frmMain
         dlgExportRObjects.ShowDialog()
     End Sub
 
-    Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralUseSummaries.Click
-        dlgSummaryBarOrPieChart.ShowDialog()
-    End Sub
     Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
         dlgClimaticSummary.ShowDialog()
     End Sub
@@ -1518,6 +1602,14 @@ Public Class frmMain
         End If
         Return 0
     End Function
+
+    Public Sub UseColumnSelectionInMetaData(bUseColumnSelecion As Boolean)
+        ucrColumnMeta.UseColumnSelectionInMetaData(bUseColumnSelecion)
+    End Sub
+
+    Public Sub UseColumnSelectionInDataView(bUseColumnSelecion As Boolean)
+        ucrDataViewer.UseColumnSelectionInDataView(bUseColumnSelecion)
+    End Sub
 
     Public Sub SetCurrentDataFrame(strDataName As String)
         ucrDataViewer.SetCurrentDataFrame(strDataName)
@@ -1613,10 +1705,6 @@ Public Class frmMain
         dlgClimaticBoxPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDescribeWindSpeedDirectionWindRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindSpeedDirectionWindRose.Click
-        dlgWindrose.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticCMSAFPlotRegion_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFPlotRegion.Click
         dlgPlotRegion.ShowDialog()
     End Sub
@@ -1634,7 +1722,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.Click
+    Private Sub mnuTbOutput_Click(sender As Object, e As EventArgs) Handles mnuTbOutput.ButtonClick, mnuOutputWindow.Click
         mnuViewOutput.Checked = Not mnuViewOutput.Checked
         UpdateLayout()
     End Sub
@@ -1999,10 +2087,6 @@ Public Class frmMain
         dlgClimdexIndices.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPrepareSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareSPI.Click
-        dlgSPI.ShowDialog()
-    End Sub
-
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "539")
     End Sub
@@ -2196,11 +2280,8 @@ Public Class frmMain
         dlgInfillMissingValues.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticTidyandExamineVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineVisualiseData.Click
-        dlgVisualizeData.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareCheckDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataVisualiseData.Click
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Prepare
         dlgVisualizeData.ShowDialog()
     End Sub
 
@@ -2236,19 +2317,11 @@ Public Class frmMain
         dlgColumnStats.ShowDialog()
     End Sub
 
-    Private Sub mnuStructuredCircularWindRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindRose.Click
-        dlgWindrose.ShowDialog()
-    End Sub
-
     Private Sub mnuStructuredCircularCalculator_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularCalculator.Click
         If dlgCalculator.bFirstLoad Then
             dlgCalculator.SetDefaultKeyboard("Circular")
         End If
         dlgCalculator.ShowDialog()
-    End Sub
-
-    Private Sub mnuStructuredCircularWindPollutionRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindPollutionRose.Click
-        dlgWindPollutionRose.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticCompareTimeSeriesPlot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareTimeSeriesPlot.Click
@@ -2295,7 +2368,22 @@ Public Class frmMain
         dlgClimaticNCMPSummaryFile.ShowDialog()
     End Sub
 
+    Private Sub mnuViewSwapDataAndScript_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndScript.Click
+        mnuViewSwapDataAndMetadata.Enabled = mnuViewSwapDataAndScript.Checked
+        mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
+        UpdateSwapDataAndScript()
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuViewSwapDataAndScript_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndScript.CheckStateChanged
+        If Not mnuViewSwapDataAndScript.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewLogScript.Checked Then
+            mnuViewLogScript.Checked = False
+            mnuViewDataView.Checked = True
+        End If
+    End Sub
+
     Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
+        mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
@@ -2323,9 +2411,6 @@ Public Class frmMain
     Private Sub mnuStructuredCircularDensityPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDensityPlot.Click
         dlgCircularDensityPlot.ShowDialog()
     End Sub
-    Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
-        dlgOtherRosePlots.ShowDialog()
-    End Sub
 
     Private Sub mnuClimaticMappingMap_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingMap.Click
         dlgClimaticStationMaps.ShowDialog()
@@ -2343,10 +2428,6 @@ Public Class frmMain
         dlgImportERA5Data.ShowDialog()
     End Sub
 
-    Private Sub mnuEditPasteNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNewDataFrame.Click
-        dlgPasteNewDataFrame.ShowDialog()
-    End Sub
-
     Private Sub mnuTbLan_Click(sender As Object, e As EventArgs) Handles mnuTbLan.Click
         If strCurrLang <> "en-GB" Then
             strCurrLang = "en-GB"
@@ -2358,12 +2439,6 @@ Public Class frmMain
         Me.clsInstatOptions.strLanguageCultureCode = strCurrLang
         translateMenu(mnuBar.Items, Me)
         Me.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
-    End Sub
-
-    Private Sub mnuEditCut_Click(sender As Object, e As EventArgs) Handles mnuEditCut.Click
-        If ctrActive.Equals(ucrScriptWindow) Then
-            ucrScriptWindow.CutText()
-        End If
     End Sub
 
     Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
@@ -2378,8 +2453,20 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuEditScript_Click(sender As Object, e As EventArgs) Handles mnuEditScript.Click
-        dlgScript.ShowDialog()
+    Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuEditPaste.Click
+        If ctrActive.Equals(ucrDataViewer) Then
+            ucrDataViewer.PasteValuesToDataFrame()
+        ElseIf ctrActive.Equals(ucrColumnMeta) Then
+            'todo
+        ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
+            'todo
+        ElseIf ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.PasteText()
+        End If
+    End Sub
+
+    Private Sub mnuEditPasteNew_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNew.Click
+        dlgPasteNewColumns.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareDataFrameSelectColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSelectColumns.Click
@@ -2390,11 +2477,16 @@ Public Class frmMain
         dlgExportToClimsoft.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticFileExportToClimpact_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToClimpact.Click
+        dlgExportForClimpact.ShowDialog()
+    End Sub
+
     Private Sub mnuPrepareDataReshapeScaleOrDistance_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataReshapeScaleOrDistance.Click
         dlgCluster.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOneVariableVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableVisualiseData.Click
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Describe
         dlgVisualizeData.ShowDialog()
     End Sub
 
@@ -2441,11 +2533,6 @@ Public Class frmMain
         dlgRandomSplit.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPICSAGeneralGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGraph.Click
-        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
-        dlgPICSARainfall.ShowDialog()
-    End Sub
-
     'Private Sub mnuOptionsByContextCropModel_Click(sender As Object, e As EventArgs) Handles mnuOptionsByContextCropModel.Click
     '    dlgApsimx.ShowDialog()
     'End Sub
@@ -2484,7 +2571,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticTidyandExamineSplitText_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineSplitText.Click
-        dlgRandomSplit.ShowDialog()
+        dlgSplitText.ShowDialog()
     End Sub
 
     Private Sub mnuExamineEditDataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataOneVariableSummarise.Click
@@ -2518,5 +2605,89 @@ Public Class frmMain
 
     Private Sub mnuStructuredSurvey_Click(sender As Object, e As EventArgs) Handles mnuStructuredSurvey.Click
         dlgSurvey.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeGraphGraphics_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneral.Click
+        dlgGeneralForGraphics.ShowDialog()
+    End Sub
+
+    Private Sub mnuPrepareCheckDataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataPivotTable.Click
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Describe
+        dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
+    Private Sub mnuToolsCheckForUpdates_Click(sender As Object, e As EventArgs) Handles mnuToolsCheckForUpdates.Click
+        CheckForUpdates()
+    End Sub
+
+    Private Sub AddToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyDataKey.Click
+        dlgAddKey.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeSummarise23Variables_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSummarise23Variables.Click
+        dlgDescribeTwoVariable.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeGraph23Variables_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeGraph23Variables.Click
+        dlgDescribeTwoVarGraph.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeSPISPEI_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSPISPEI.Click
+        dlgSPI.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularWindRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindRose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularWindPollutionRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindPollutionRose.Click
+        dlgWindPollutionRose.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
+        dlgOtherRosePlots.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeWindRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindRose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeWindPollutionRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeWindPollutionRose.Click
+        dlgWindPollutionRose.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeOtherRosePlots.Click
+        dlgOtherRosePlots.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeTrendGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTrendGraph.Click
+        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
+        dlgPICSARainfall.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeSeasonalGraph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSeasonalGraph.Click
+        dlgSeasonalGraph.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeIDF_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeIDF.Click
+        dlgIDFCurves.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticExamineEditDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuClimaticExamineEditDataVisualiseData.Click
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Climatic
+        dlgVisualizeData.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPICSAGeneralGrap_Click(sender As Object, e As EventArgs) Handles mnuClimaticPICSAGeneralGrap.Click
+        dlgPICSARainfall.enumPICSAMode = dlgPICSARainfall.PICSAMode.General
+        dlgPICSARainfall.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticDescribeClimograph_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeClimograph.Click
+        dlgClimograph.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileExportToGoogleBucketsToolStrip_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToGoogleBucketsToolStrip.Click
+        dlgExportClimaticDefinitions.ShowDialog()
     End Sub
 End Class

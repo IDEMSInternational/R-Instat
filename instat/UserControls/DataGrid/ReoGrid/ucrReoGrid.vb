@@ -139,8 +139,11 @@ Public MustInherit Class ucrReoGrid
         For i = grdData.Worksheets.Count - 1 To 0 Step -1
             Dim iGridWorkheetsPosition As Integer = i 'Needed to prevent warning
             If _clsDataBook.DataFrames.Where(Function(x) x.strName = grdData.Worksheets(iGridWorkheetsPosition).Name).Count = 0 Then
-                grdData.RemoveWorksheet(i)
-                bDeleted = True
+                ' Check if we are deleting the last worksheet
+                If grdData.Worksheets.Count > 1 Then
+                    grdData.RemoveWorksheet(i)
+                    bDeleted = True
+                End If
             End If
         Next
         ' Force the grid to refresh if a sheet has been deleted as there is sometimes a UI problem otherwise.
@@ -216,8 +219,8 @@ Public MustInherit Class ucrReoGrid
     Private Function GetRowIndex(currWorkSheet As Worksheet, strRowName As String) As Integer
         If currWorkSheet IsNot Nothing Then
             For i As Integer = 0 To currWorkSheet.Rows - 1
-                Dim strCol As String = currWorkSheet.RowHeaders(i).Text
-                If strCol = strRowName Then
+                Dim strCol As String = currWorkSheet.RowHeaders(i).Text - 1
+                If CInt(strCol) = CInt(strRowName) Then
                     Return i
                 End If
             Next
@@ -231,7 +234,7 @@ Public MustInherit Class ucrReoGrid
             If strColumnHeader.Contains("(") Then
                 strColumnHeader = strColumnHeader.Split("(")(0)
             End If
-            Dim iRowIndex = GetRowIndex(grdData.CurrentWorksheet, iRow) + 1
+            Dim iRowIndex = GetRowIndex(grdData.CurrentWorksheet, iRow)
             If strColumnHeader.Trim = strColumn _
                 AndAlso iRowIndex > -1 Then
                 Return grdData.CurrentWorksheet(iRowIndex, i).ToString()

@@ -18,18 +18,13 @@ Imports instat.Translations
 Public Class dlgRenameObjects
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Dim bUseSelectedColumn As Boolean = False
-    Dim strSelectedColumn As String = ""
-    Dim strSelectedDataFrame As String = ""
-    Private clsDefaultFunction As New RFunction
+    Private clsRenameRFunction As New RFunction
     Private dctTypes As New Dictionary(Of String, String)
 
     Private Sub dlgRenameObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -37,59 +32,53 @@ Public Class dlgRenameObjects
         SetRCodeforControls(bReset)
         bReset = False
         TestOKEnabled()
-        If bUseSelectedColumn Then
-            SetDefaultColumn()
-        End If
         autoTranslate(Me)
-    End Sub
-
-    Private Sub ReopenDialog()
-        ' temp. fix, the receivers should clear only if the name of the object in it has changed
-        ucrSelectorForRenameObject.Reset()
-        ucrInputNewName.SetName("")
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 350
 
-        'ucrSelector
         ucrSelectorForRenameObject.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForRenameObject.SetParameterIsString()
 
-        'ucrReceiver
+        ucrInputType.SetParameter(New RParameter("object_type", 3))
+        dctTypes.Add("Objects", Chr(34) & "object" & Chr(34))
+        dctTypes.Add("Summaries", Chr(34) & RObjectTypeLabel.Summary & Chr(34))
+        dctTypes.Add("Tables", Chr(34) & RObjectTypeLabel.Table & Chr(34))
+        dctTypes.Add("Graphs", Chr(34) & RObjectTypeLabel.Graph & Chr(34))
+        dctTypes.Add("Models", Chr(34) & RObjectTypeLabel.Model & Chr(34))
+        dctTypes.Add("Structured", Chr(34) & RObjectTypeLabel.StructureLabel & Chr(34))
+        dctTypes.Add("Filters", Chr(34) & "filter" & Chr(34))
+        dctTypes.Add("Column selections", Chr(34) & "column_selection" & Chr(34))
+        dctTypes.Add("Calculations", Chr(34) & "calculation" & Chr(34))
+        ucrInputType.SetItems(dctTypes)
+        ucrInputType.SetDropDownStyleAsNonEditable()
+
         ucrReceiverCurrentName.SetParameter(New RParameter("object_name", 1))
         ucrReceiverCurrentName.Selector = ucrSelectorForRenameObject
         ucrReceiverCurrentName.SetMeAsReceiver()
         ucrReceiverCurrentName.SetParameterIsString()
 
-        'ucrNewName
         ucrInputNewName.SetParameter(New RParameter("new_name", 2))
         ucrInputNewName.SetValidationTypeAsRVariable()
 
-        ucrInputType.SetParameter(New RParameter("object_type", 3))
-        dctTypes.Add("Objects", Chr(34) & "object" & Chr(34))
-        dctTypes.Add("Filters", Chr(34) & "filter" & Chr(34))
-        dctTypes.Add("Column selections", Chr(34) & "column_selection" & Chr(34))
-        dctTypes.Add("Calculations", Chr(34) & "calculation" & Chr(34))
-        dctTypes.Add("Tables", Chr(34) & "table" & Chr(34))
-        dctTypes.Add("Graphs", Chr(34) & "graph" & Chr(34))
-        dctTypes.Add("Models", Chr(34) & "model" & Chr(34))
-        ucrInputType.SetItems(dctTypes)
-        ucrInputType.SetDropDownStyleAsNonEditable()
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
+        clsRenameRFunction = New RFunction
 
         ucrSelectorForRenameObject.Reset()
 
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_object")
-        clsDefaultFunction.AddParameter("object_type", Chr(34) & "object" & Chr(34), iPosition:=3)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        clsRenameRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_object")
+        clsRenameRFunction.AddParameter("object_type", Chr(34) & "object" & Chr(34), iPosition:=3)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRenameRFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorForRenameObject.SetRCode(clsRenameRFunction, bReset)
+        ucrInputType.SetRCode(clsRenameRFunction, bReset)
+        ucrReceiverCurrentName.SetRCode(clsRenameRFunction, bReset)
+        ucrInputNewName.SetRCode(clsRenameRFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -100,22 +89,17 @@ Public Class dlgRenameObjects
         End If
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeforControls(True)
+
+    Private Sub CoreControls_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrSelectorForRenameObject.ControlContentsChanged, ucrReceiverCurrentName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Public Sub SetCurrentColumn(strcolumn As String, strdataframe As String)
-        strSelectedColumn = strcolumn
-        strSelectedDataFrame = strdataframe
-        bUseSelectedColumn = True
-    End Sub
-
-    Private Sub SetDefaultColumn()
-        ucrSelectorForRenameObject.SetDataframe(strSelectedDataFrame)
-        ucrReceiverCurrentName.Add(strSelectedColumn, strSelectedDataFrame)
-        bUseSelectedColumn = False
+    Private Sub ucrInputType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputType.ControlValueChanged
+        ucrReceiverCurrentName.Clear()
+        If dctTypes.ContainsKey(ucrInputType.GetText()) Then
+            ucrReceiverCurrentName.strSelectorHeading = ucrInputType.GetText()
+            ucrReceiverCurrentName.SetItemType(dctTypes.Item(ucrInputType.GetText()).Replace(Chr(34), ""))
+        End If
     End Sub
 
     Private Sub ucrReceiverCurrentName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCurrentName.ControlValueChanged
@@ -124,17 +108,13 @@ Public Class dlgRenameObjects
         End If
     End Sub
 
-    Private Sub ucrInputType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputType.ControlValueChanged
-        Dim key As String = dctTypes.Keys(ucrInputType.cboInput.SelectedIndex)
-        Dim value As String = ""
 
-        If key IsNot Nothing AndAlso dctTypes.TryGetValue(key, value) Then
-            ucrReceiverCurrentName.strSelectorHeading = key
-            ucrReceiverCurrentName.SetItemType(value.Replace(Chr(34), ""))
-        End If
-    End Sub
 
-    Private Sub CoreControls_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrSelectorForRenameObject.ControlContentsChanged, ucrReceiverCurrentName.ControlContentsChanged
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
+
+
 End Class
