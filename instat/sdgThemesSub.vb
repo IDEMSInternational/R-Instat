@@ -214,10 +214,9 @@ Public Class sdgThemesSub
         clsBaseOperator.RemoveParameterByName("guides")
         clsBaseOperator.RemoveParameterByName("guides1")
         If ucrChkReverse.Checked Then
-
             If rdoFill.Checked Then
                 clsBaseOperator.AddParameter("guides", clsRFunctionParameter:=clsGuideFunction)
-            ElseIf rdoColour.Checked Then
+            Else
                 clsBaseOperator.AddParameter("guides1", clsRFunctionParameter:=clsGuideFunction1)
             End If
         End If
