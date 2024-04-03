@@ -419,7 +419,6 @@ Public Class dlgTransform
         ucrReceiverRank.SetMeAsReceiver()
         ucrSaveNew.Reset()
         ucrInputLogicOperations.SetText("==")
-        rdoSingle.Checked = True
 
         clsConstantDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
         clsConstantDummyFunction.AddParameter("preview", "TRUE", iPosition:=1)
@@ -635,7 +634,6 @@ Public Class dlgTransform
         clsAssignOperator.AddParameter("left", clsRFunctionParameter:=clsColumnsFunction, iPosition:=0)
         clsAssignOperator.AddParameter("right", clsRFunctionParameter:=clsPasteFunction, iPosition:=1)
 
-
         clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=2)
@@ -768,14 +766,13 @@ Public Class dlgTransform
     Private Sub NewDefaultName()
         If rdoSingle.Checked Then
             ucrSaveNew.SetLabelText("New Column Name:")
-            If (Not ucrSaveNew.bUserTyped) AndAlso Not ucrReceiverRank.IsEmpty Then
+            If Not ucrSaveNew.bUserTyped AndAlso Not ucrReceiverRank.IsEmpty Then
                 ucrSaveNew.SetPrefix(ucrReceiverRank.GetVariableNames(bWithQuotes:=False))
             End If
         ElseIf rdoMultiple.Checked Then
             ucrSaveNew.SetLabelText("Suffix Name:")
             ucrSaveNew.btnColumnPosition.Visible = False
             If Not ucrReceiverRank.IsEmpty AndAlso (Not ucrSaveNew.bUserTyped) Then
-
                 clsAddColumnsFunction.AddParameter("col_data", "col", iPosition:=1)
             End If
         End If
@@ -796,7 +793,6 @@ Public Class dlgTransform
 
         ucrBase.clsRsyntax.ClearCodes()
         If rdoSingle.Checked Then
-
             If rdoRank.Checked Then
                 clsPreviewTextFunction = clsRankFunction.Clone
                 clsDummyTransformFunction.AddParameter("check", "rank", iPosition:=0)
@@ -894,7 +890,7 @@ Public Class dlgTransform
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAssignOperator)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddColumnsFunction)
         Else
-            LoopsParameters()
+            UpdateLoopParameters()
             ucrBase.clsRsyntax.ClearCodes()
             ucrBase.clsRsyntax.SetAssignTo("col")
             ucrBase.clsRsyntax.AddToAfterCodes(clsPipeOperator, 0)
@@ -910,7 +906,7 @@ Public Class dlgTransform
         AddRemoveLogicalValues()
     End Sub
 
-    Private Sub LoopsParameters()
+    Private Sub UpdateLoopParameters()
         If rdoRank.Checked Then
             clsDummyTransformFunction.AddParameter("check", "rank", iPosition:=0)
             clsPreviewTextFunction = clsRankColsFunction.Clone
@@ -984,7 +980,6 @@ Public Class dlgTransform
             End If
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
 
-
         ElseIf rdoNonNegative.Checked Then
             clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
             If rdoSquareRoot.Checked Then
@@ -1001,7 +996,6 @@ Public Class dlgTransform
                 clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsPowerColsOperator, bIncludeArgumentName:=False)
             ElseIf rdoLogToBase10.Checked Then
                 clsNonNegativeDummyFunction.AddParameter("check", "log10", iPosition:=0)
-
 
                 clsLogBase10ColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLogBase10ColsFunction, bIncludeArgumentName:=False)
@@ -1134,7 +1128,6 @@ Public Class dlgTransform
         If ucrSaveNew.GetText <> "" AndAlso ucrSaveNew.IsComplete() Then
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrSaveNew.GetText & Chr(34), iPosition:=1)
             clsPasteFunction.AddParameter("col_data", Chr(34) & "_" & ucrSaveNew.GetText & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
-
         End If
     End Sub
 
@@ -1149,9 +1142,7 @@ Public Class dlgTransform
         clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRank.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsGetDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverRank.GetVariableNames, iPosition:=1)
         clsGetDataFrameFunction.SetAssignTo(ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-
         clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-
         If rdoMultiple.Checked Then
             clsDummyTransformFunction.AddParameter("col", "multiple", iPosition:=0)
             ucrSelectorForRank.SetItemType("column_selection")
@@ -1169,7 +1160,6 @@ Public Class dlgTransform
     Private Sub ucrChkMultiply_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMultiply.ControlValueChanged, ucrInputMultiply.ControlValueChanged
         If ucrChkMultiply.Checked AndAlso Not ucrInputMultiply.IsEmpty Then
             clsScaleMultiplyColsOperator.AddParameter("y", ucrInputMultiply.GetText, iPosition:=1)
-
         Else
             clsScaleMultiplyColsOperator.RemoveParameterByName("y")
         End If
@@ -1178,7 +1168,6 @@ Public Class dlgTransform
     Private Sub ucrChkAdd_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAdd.ControlValueChanged, ucrInputAdd.ControlValueChanged
         If ucrChkAdd.Checked AndAlso Not ucrInputAdd.IsEmpty Then
             clsScaleAddColsOperator.AddParameter("v", ucrInputAdd.GetText, iPosition:=1)
-
         Else
             clsScaleAddColsOperator.RemoveParameterByName("v")
         End If
@@ -1187,7 +1176,6 @@ Public Class dlgTransform
     Private Sub ucrChkSubtract_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSubtract.ControlValueChanged, ucrInputSubtract.ControlValueChanged
         If ucrChkSubtract.Checked AndAlso Not ucrInputSubtract.IsEmpty Then
             clsScaleSubtractColsOperator.AddParameter("u", ucrInputSubtract.GetText, iPosition:=1)
-
         Else
             clsScaleSubtractColsOperator.RemoveParameterByName("u")
         End If
@@ -1196,7 +1184,6 @@ Public Class dlgTransform
     Private Sub ucrChkDivide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDivide.ControlValueChanged, ucrInputDivide.ControlValueChanged
         If ucrChkDivide.Checked AndAlso Not ucrInputDivide.IsEmpty Then
             clsScaleDivideColsOperator.AddParameter("z", ucrInputDivide.GetText, iPosition:=1)
-
         Else
             clsScaleDivideColsOperator.RemoveParameterByName("z")
         End If
