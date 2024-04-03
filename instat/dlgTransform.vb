@@ -979,35 +979,28 @@ Public Class dlgTransform
                 End Select
             End If
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction)
-
         ElseIf rdoNonNegative.Checked Then
             clsDummyTransformFunction.AddParameter("check", "non-negative", iPosition:=0)
             If rdoSquareRoot.Checked Then
                 clsNonNegativeDummyFunction.AddParameter("check", "sqrt", iPosition:=0)
-
                 clsSquarerootColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsSquarerootColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoPower.Checked Then
-
                 clsNonNegativeDummyFunction.AddParameter("check", "power", iPosition:=0)
                 clsPowerColsOperator.AddParameter("y", ucrInputPower.GetText, iPosition:=1)
-
                 clsPowerColsOperator.AddParameter("x", "~.", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsPowerColsOperator, bIncludeArgumentName:=False)
             ElseIf rdoLogToBase10.Checked Then
                 clsNonNegativeDummyFunction.AddParameter("check", "log10", iPosition:=0)
-
                 clsLogBase10ColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLogBase10ColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoNaturalLog.Checked Then
                 clsNonNegativeDummyFunction.AddParameter("check", "log", iPosition:=0)
-
                 clsNaturalLogColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsNaturalLogColsFunction, bIncludeArgumentName:=False)
             End If
         ElseIf rdoScale.Checked Then
             clsDummyTransformFunction.AddParameter("check", "scale", iPosition:=0)
-
             clsScaleSubtractColsOperator.AddParameter("left", "~.x", iPosition:=0)
             clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsScaleAddColsOperator, bIncludeArgumentName:=False)
         End If
