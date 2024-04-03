@@ -1,5 +1,6 @@
 get_default_significant_figures <- function(data) {
-  if(is.numeric(data)) return(3)
+  default_digits <- getOption("digits")
+  if(is.numeric(data) || is.complex(data)) return(default_digits)
   else return(NA)  
 }
 
