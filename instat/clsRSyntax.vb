@@ -94,6 +94,8 @@ Public Class RSyntax
     ''' <summary>   The R command in the form of a string. </summary>
     Public strCommandString As String = ""
 
+    ''' <summary>   The script associated with the base R code. </summary>
+    Public strScript As String
 
     ''' <summary>   The R functions/operators/commands that should be run before the base R code. </summary>
     Private lstBeforeCodes As New List(Of RCodeStructure)
@@ -293,7 +295,6 @@ Public Class RSyntax
     '''--------------------------------------------------------------------------------------------
     Public Function GetScript() As String
         Dim strTemp As String = ""
-        Dim strScript As String = ""
 
         If bUseBaseFunction Then
             strTemp = clsBaseFunction.ToScript(strScript)
