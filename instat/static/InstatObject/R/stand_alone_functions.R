@@ -3307,7 +3307,7 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
                                           fill = sfcol, colour = "black")
   }
   wandlplot <- wandlplot + geom_hline(yintercept = c(0, 50), 
-                                      size = 0.5) +
+                                      linewidth = 0.5) +
     geom_segment(data = ticks, aes(x = x, xend = x, y = ymin, yend = ymax)) +
     scale_x_continuous(breaks = month_breaks, name = "", labels = month_labs, expand = c(0, 0)) + 
     scale_y_continuous("C", limits = c(ymin, ymax), labels = templabs, 
