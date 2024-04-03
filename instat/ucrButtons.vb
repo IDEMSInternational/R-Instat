@@ -144,9 +144,9 @@ Public Class ucrButtons
         clsRsyntax.GetAllAssignTo(lstAssignToCodes, lstAssignToStrings)
 
         'Run additional before codes
-        lstBeforeScripts = clsRsyntax.GetBeforeCodesScripts()
         lstBeforeCodes = clsRsyntax.GetBeforeCodes()
-        For i As Integer = 0 To clsRsyntax.lstBeforeCodes.Count - 1
+        lstBeforeScripts = clsRsyntax.GetScriptsFromCodeList(lstBeforeCodes)
+        For i As Integer = 0 To lstBeforeCodes.Count - 1
             If bFirstCode Then
                 strComment = strComments
                 bFirstCode = False
@@ -178,8 +178,8 @@ Public Class ucrButtons
         clsRsyntax.strScript = ""
 
         'Run additional after codes
-        lstAfterScripts = clsRsyntax.GetAfterCodesScripts()
         lstAfterCodes = clsRsyntax.GetAfterCodes()
+        lstAfterScripts = clsRsyntax.GetScriptsFromCodeList(lstAfterCodes)
         For i As Integer = 0 To lstAfterCodes.Count - 1
             If bRun Then
                 If bFirstCode Then

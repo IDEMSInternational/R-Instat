@@ -152,11 +152,11 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
+    <Reference Include="RDotNet, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R.NET.1.9.0\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RInsightF461, Version=0.0.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RInsightF461.0.0.7\lib\net461\RInsightF461.dll</HintPath>
+    <Reference Include="RInsightF461, Version=0.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RInsightF461.0.0.10\lib\net461\RInsightF461.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
@@ -227,6 +227,12 @@
     <Compile Include="dlgApsimx.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimograph.Designer.vb">
+      <DependentUpon>dlgClimograph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimograph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClusterAnalysis.Designer.vb">
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
     </Compile>
@@ -237,6 +243,18 @@
       <DependentUpon>dlgEdit.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportClimaticDefinitions.Designer.vb">
+      <DependentUpon>dlgExportClimaticDefinitions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportClimaticDefinitions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportForClimpact.Designer.vb">
+      <DependentUpon>dlgExportForClimpact.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportForClimpact.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFindInVariableOrFilter.Designer.vb">
@@ -3043,6 +3061,9 @@
     <EmbeddedResource Include="dlgClimaticNCMPVariogram.resx">
       <DependentUpon>dlgClimaticNCMPVariogram.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimograph.resx">
+      <DependentUpon>dlgClimograph.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
@@ -3067,6 +3088,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEdit.resx">
       <DependentUpon>dlgEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportClimaticDefinitions.resx">
+      <DependentUpon>dlgExportClimaticDefinitions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportForClimpact.resx">
+      <DependentUpon>dlgExportForClimpact.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToClimsoft.resx">
       <DependentUpon>dlgExportToClimsoft.vb</DependentUpon>

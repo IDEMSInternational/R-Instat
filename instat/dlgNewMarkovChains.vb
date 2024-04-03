@@ -55,6 +55,7 @@ Public Class dlgNewMarkovChains
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 490
         ucrReceiverStation.Selector = ucrSelectorMarkovChains
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
