@@ -122,8 +122,6 @@ Public Class dlgExportClimaticDefinitions
         ucrInputStationID.SetParameter(New RParameter("station_id", 18))
 
         ucrInputCountry.SetParameter(New RParameter("country", 19))
-
-
     End Sub
 
     Private Sub SetDefaults()
