@@ -280,7 +280,7 @@ Public Class ucrCalculator
         ' Complex keyboard tooltips
         ttCalculator.SetToolTip(cmdComplexPi, "pi = 3.14159")
         ttCalculator.SetToolTip(cmdComplexi, "i is defined as the square root of -1. So sqrt(as.complex(-1)) = 0 + 1i")
-        ttCalculator.SetToolTip(cmdComplex, "Generate a complex variable. For example complex(3, 2:4,1. 5) gives 2+1.5i, 3+1.5i, 4+1.5i")
+        ttCalculator.SetToolTip(cmdComplex, "Generate a complex variable. For example complex(3, 2:4,1.5) gives 2+1.5i, 3+1.5i, 4+1.5i")
         ttCalculator.SetToolTip(cmdAsComplex, "Define a variable as complex. For example as.complex(-1) gives 1 + 0i")
         ttCalculator.SetToolTip(cmdReal, "The real part of a complex number. For example Re(3 + 2i) gives 3.")
         ttCalculator.SetToolTip(cmdImaginary, "The imaginary part of a complex number or variable. For example Im(3 + 2i) gives 2.")
@@ -430,7 +430,7 @@ Public Class ucrCalculator
 
         ' Factor keyboard tooltips
         ttCalculator.SetToolTip(cmdFactor, "Make a factor from a numeric or character variable")
-        ttCalculator.SetToolTip(cmdAnon, "Anonymise factor levels, replacing them by a number. Optionally add a profix, for example fct_anon(name, ""n"")")
+        ttCalculator.SetToolTip(cmdAnon, "Anonymise factor levels, replacing them by a number. Optionally add a prefix, for example fct_anon(name, ""n"")")
         ttCalculator.SetToolTip(cmdLabelled, "Create a labelled variable")
         ttCalculator.SetToolTip(cmdCollapse, "Combine factor levels. For example fct_collapse(variety, trad=""TRAD"",improved=c(""NEW"",""OLD""))")
         ttCalculator.SetToolTip(cmdCross, "Make interaction variable. For example fct_cross(variety,fertgrp, keep_empty=TRUE)")
@@ -5244,7 +5244,7 @@ Public Class ucrCalculator
 
     Private Sub cmdComplex_Click(sender As Object, e As EventArgs) Handles cmdComplex.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex(x = )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex(length.out= 0,real= numeric(),imaginary= numeric(),modulus= 1,argument= 0)", 0)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("complex( )", 1)
         End If

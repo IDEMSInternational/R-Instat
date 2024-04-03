@@ -6109,7 +6109,7 @@ Partial Class ucrCalculator
         Me.grpSymbols.Controls.Add(Me.cmdEnd1)
         Me.grpSymbols.Controls.Add(Me.cmdbegin)
         Me.grpSymbols.Controls.Add(Me.cmdAny1)
-        Me.grpSymbols.Location = New System.Drawing.Point(542, 355)
+        Me.grpSymbols.Location = New System.Drawing.Point(542, 359)
         Me.grpSymbols.Margin = New System.Windows.Forms.Padding(2)
         Me.grpSymbols.Name = "grpSymbols"
         Me.grpSymbols.Padding = New System.Windows.Forms.Padding(2)
@@ -6322,7 +6322,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexAsin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexAsin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexAsin.Location = New System.Drawing.Point(30, 164)
+        Me.cmdComplexAsin.Location = New System.Drawing.Point(30, 128)
         Me.cmdComplexAsin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexAsin.Name = "cmdComplexAsin"
         Me.cmdComplexAsin.Size = New System.Drawing.Size(82, 38)
@@ -6334,7 +6334,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexAtan.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexAtan.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexAtan.Location = New System.Drawing.Point(198, 164)
+        Me.cmdComplexAtan.Location = New System.Drawing.Point(198, 128)
         Me.cmdComplexAtan.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexAtan.Name = "cmdComplexAtan"
         Me.cmdComplexAtan.Size = New System.Drawing.Size(82, 38)
@@ -6346,7 +6346,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexAcos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexAcos.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexAcos.Location = New System.Drawing.Point(111, 164)
+        Me.cmdComplexAcos.Location = New System.Drawing.Point(111, 128)
         Me.cmdComplexAcos.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexAcos.Name = "cmdComplexAcos"
         Me.cmdComplexAcos.Size = New System.Drawing.Size(88, 38)
@@ -6394,7 +6394,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexTanH.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexTanH.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexTanH.Location = New System.Drawing.Point(198, 128)
+        Me.cmdComplexTanH.Location = New System.Drawing.Point(198, 164)
         Me.cmdComplexTanH.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexTanH.Name = "cmdComplexTanH"
         Me.cmdComplexTanH.Size = New System.Drawing.Size(82, 38)
@@ -6418,7 +6418,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexPi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexPi.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexPi.Location = New System.Drawing.Point(279, 164)
+        Me.cmdComplexPi.Location = New System.Drawing.Point(279, 128)
         Me.cmdComplexPi.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexPi.Name = "cmdComplexPi"
         Me.cmdComplexPi.Size = New System.Drawing.Size(78, 38)
@@ -6466,7 +6466,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexCosH.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexCosH.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexCosH.Location = New System.Drawing.Point(111, 128)
+        Me.cmdComplexCosH.Location = New System.Drawing.Point(111, 164)
         Me.cmdComplexCosH.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexCosH.Name = "cmdComplexCosH"
         Me.cmdComplexCosH.Size = New System.Drawing.Size(88, 38)
@@ -6478,7 +6478,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexSinH.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexSinH.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexSinH.Location = New System.Drawing.Point(30, 128)
+        Me.cmdComplexSinH.Location = New System.Drawing.Point(30, 164)
         Me.cmdComplexSinH.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexSinH.Name = "cmdComplexSinH"
         Me.cmdComplexSinH.Size = New System.Drawing.Size(82, 38)
@@ -6514,7 +6514,7 @@ Partial Class ucrCalculator
         '
         Me.cmdComplexExp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdComplexExp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComplexExp.Location = New System.Drawing.Point(279, 128)
+        Me.cmdComplexExp.Location = New System.Drawing.Point(279, 164)
         Me.cmdComplexExp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdComplexExp.Name = "cmdComplexExp"
         Me.cmdComplexExp.Size = New System.Drawing.Size(79, 38)
@@ -7464,6 +7464,7 @@ Partial Class ucrCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.Controls.Add(Me.grpList)
         Me.Controls.Add(Me.cmdRhelpList)
         Me.Controls.Add(Me.cmdWakefieldHelp)
         Me.Controls.Add(Me.cmdStringRHelp)
@@ -7475,64 +7476,63 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
-        Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpModifier)
-        Me.Controls.Add(Me.grpDates)
-        Me.Controls.Add(Me.grpHydroGOF)
-        Me.Controls.Add(Me.grpFactor)
-        Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpList)
-        Me.Controls.Add(Me.grpCircular)
-        Me.Controls.Add(Me.grpMaths)
-        Me.Controls.Add(Me.grpProbabilty)
-        Me.Controls.Add(Me.grpInteger)
         Me.Controls.Add(Me.grpTestString)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.grpComplex)
         Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpTransform)
+        Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpDates)
+        Me.Controls.Add(Me.grpHydroGOF)
+        Me.Controls.Add(Me.grpFactor)
+        Me.Controls.Add(Me.grpWakefield)
+        Me.Controls.Add(Me.grpCircular)
+        Me.Controls.Add(Me.grpMaths)
+        Me.Controls.Add(Me.grpProbabilty)
+        Me.Controls.Add(Me.grpInteger)
         Me.Name = "ucrCalculator"
         Me.Size = New System.Drawing.Size(1123, 572)
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
-        Me.grpDates.PerformLayout
+        Me.grpDates.PerformLayout()
         Me.ContextMenuStripDate.ResumeLayout(False)
         Me.ContextMenuStripComplex.ResumeLayout(False)
         Me.grpInteger.ResumeLayout(False)
-        Me.grpInteger.PerformLayout
+        Me.grpInteger.PerformLayout()
         Me.ContextMenuStripInteger.ResumeLayout(False)
         Me.grpFactor.ResumeLayout(False)
-        Me.grpFactor.PerformLayout
+        Me.grpFactor.PerformLayout()
         Me.ContextMenuStripFactor.ResumeLayout(False)
         Me.grpHydroGOF.ResumeLayout(False)
-        Me.grpHydroGOF.PerformLayout
+        Me.grpHydroGOF.PerformLayout()
         Me.ContextMenuStripHydroGOF.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
         Me.grpMaths.ResumeLayout(False)
-        Me.grpMaths.PerformLayout
+        Me.grpMaths.PerformLayout()
         Me.ContextMenuStripMaths.ResumeLayout(False)
         Me.grpSummary.ResumeLayout(False)
-        Me.grpSummary.PerformLayout
+        Me.grpSummary.PerformLayout()
         Me.ContextMenuStripSummary.ResumeLayout(False)
         Me.grpFrequencies.ResumeLayout(False)
         Me.grpProbabilty.ResumeLayout(False)
-        Me.grpProbabilty.PerformLayout
+        Me.grpProbabilty.PerformLayout()
         Me.ContextMenuStripProbability.ResumeLayout(False)
         Me.grpRandom.ResumeLayout(False)
         Me.grpTransform.ResumeLayout(False)
-        Me.grpTransform.PerformLayout
+        Me.grpTransform.PerformLayout()
         Me.ContextMenuStripTransform.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
-        Me.grpLogical.PerformLayout
+        Me.grpLogical.PerformLayout()
         Me.ContextMenuStripLogical.ResumeLayout(False)
         Me.grpTestString.ResumeLayout(False)
         Me.grpCircular.ResumeLayout(False)
-        Me.grpCircular.PerformLayout
+        Me.grpCircular.PerformLayout()
         Me.ContextMenuStripCircular.ResumeLayout(False)
         Me.grpModifier.ResumeLayout(False)
         Me.grpSymbols.ResumeLayout(False)
         Me.grpComplex.ResumeLayout(False)
-        Me.grpComplex.PerformLayout
+        Me.grpComplex.PerformLayout()
         Me.ContextMenuStripTxtString.ResumeLayout(False)
         Me.ContextMenuStripWakefield.ResumeLayout(False)
         Me.ContextMenuStripList.ResumeLayout(False)
@@ -7540,7 +7540,7 @@ Partial Class ucrCalculator
         Me.GroupBox1.ResumeLayout(False)
         Me.grpMathBloc.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout
+        Me.PerformLayout()
 
     End Sub
 
