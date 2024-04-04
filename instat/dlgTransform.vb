@@ -46,6 +46,7 @@ Public Class dlgTransform
     Private clsLogBase10Function As New RFunction
     Private clsLogBase10ColsFunction As New RFunction
     Private clsStandardDevColsFunction As New RFunction
+    Private clsSymbolOperator As New ROperator
     Private clsMeanColsFunction As New RFunction
     Private clsReplicateColsFunction As New RFunction
     Private clsConcDiffColsFunction As New RFunction
@@ -408,6 +409,7 @@ Public Class dlgTransform
         clsConcDiffColsFunction = New RFunction
         clsReplicateColsFunction = New RFunction
         clsStandardDevColsFunction = New RFunction
+        clsSymbolOperator = New ROperator
         clsBooleanColsOperator = New ROperator
         clsAddColumnsFunction = New RFunction
         clsPasteFunction = New RFunction
@@ -543,13 +545,17 @@ Public Class dlgTransform
         clsStandardDevColsFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
 
         clsSubtractColsOperator.SetOperation("-")
-        clsSubtractColsOperator.AddParameter("left", "~.x", iPosition:=0)
+        clsSubtractColsOperator.AddParameter("left", ".x", iPosition:=0)
         clsSubtractColsOperator.AddParameter("y", clsRFunctionParameter:=clsMeanColsFunction, iPosition:=1)
 
         clsDivisionColsOperator.SetOperation("/")
         clsDivisionColsOperator.AddParameter("x", clsROperatorParameter:=clsSubtractColsOperator, iPosition:=0)
         clsDivisionColsOperator.AddParameter("y", clsRFunctionParameter:=clsStandardDevColsFunction, iPosition:=1)
-        clsDivisionColsOperator.bBrackets = False
+        'clsDivisionColsOperator.bBrackets = False
+
+        clsSymbolOperator.AddParameter("left", "~", iPosition:=0, bIncludeArgumentName:=False)
+        clsSymbolOperator.AddParameter("right", clsROperatorParameter:=clsDivisionColsOperator, iPosition:=1, bIncludeArgumentName:=False)
+        clsSymbolOperator.bBrackets = False
 
         clsSquarerootColsFunction.SetRCommand("~sqrt")
 
@@ -948,7 +954,7 @@ Public Class dlgTransform
                 clsMeanColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsStandardDevColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
 
-                clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsDivisionColsOperator, bIncludeArgumentName:=False)
+                clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsSymbolOperator, bIncludeArgumentName:=False)
             ElseIf rdoLogical.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "logical", iPosition:=0)
                 clsBooleanColsOperator.AddParameter("x", "~.x", bIncludeArgumentName:=False, iPosition:=0)
