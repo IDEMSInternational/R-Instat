@@ -935,17 +935,14 @@ Public Class dlgTransform
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsRoundColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoSignificantDigits.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "signif", iPosition:=0)
-
                 clsSignifColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsSignifColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoLag.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "lag", iPosition:=0)
-
                 clsLagColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLagColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoLead.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "lead", iPosition:=0)
-
                 clsLeadColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsLeadColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoDifference.Checked Then
@@ -954,10 +951,8 @@ Public Class dlgTransform
                 clsAcrossFunction.AddParameter("operator", clsRFunctionParameter:=clsConcDiffColsFunction, bIncludeArgumentName:=False)
             ElseIf rdoStandardize.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "standardise", iPosition:=0)
-
                 clsMeanColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
                 clsStandardDevColsFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
-
                 clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsSymbolOperator, bIncludeArgumentName:=False)
             ElseIf rdoLogical.Checked Then
                 clsNumericDummyFunction.AddParameter("check", "logical", iPosition:=0)
