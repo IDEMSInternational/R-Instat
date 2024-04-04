@@ -65,7 +65,6 @@ Public Class ucrDataView
 
         mnuInsertColsBefore.Visible = False
         mnuInsertColsAfter.Visible = False
-        mnuPaste.Visible = False
         autoTranslate(Me)
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
@@ -132,6 +131,7 @@ Public Class ucrDataView
                 End If
             End If
             RefreshWorksheet(worksheet, clsDataFrame)
+
         Next
         If strCurrWorksheet IsNot Nothing Then
             _grid.ReOrderWorksheets(strCurrWorksheet)
@@ -347,7 +347,8 @@ Public Class ucrDataView
 
         lblColDisplay.Text = GetTranslation("Columns") 'don't change this code line, the scripts that create the translation database expect this exact format
         lblColDisplay.Text &= strColLabel
-        If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied Then
+        If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied AndAlso
+           GetCurrentDataFrameFocus.clsVisibleDataFramePage.UseColumnSelectionInDataView Then
             lblColDisplay.Text &= GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iSelectedColumnCount &
                                 "/" & GetCurrentDataFrameFocus().iTotalColumnCount & ")" & " | " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strSelectionName
         Else
@@ -425,6 +426,12 @@ Public Class ucrDataView
             dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
         End If
         dlgLabelsLevels.ShowDialog()
+    End Sub
+
+    Public Sub UseColumnSelectionInDataView(bUseColumnSelecion As Boolean)
+        If GetCurrentDataFrameFocus() IsNot Nothing Then
+            GetCurrentDataFrameFocus().clsVisibleDataFramePage.UseColumnSelectionInDataView = bUseColumnSelecion
+        End If
     End Sub
 
     Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
@@ -790,24 +797,10 @@ Public Class ucrDataView
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        PasteValuesToDataFrame()
-    End Sub
-
-    '''' <summary>
-    '''' event raised on menu toolstrip click
-    '''' paste data starting from selected cells
-    '''' </summary>
-    '''' <param name="sender"></param>
-    '''' <param name="e"></param>
-    Private Sub mnuCellPasteRange_Click(sender As Object, e As EventArgs) Handles mnuCellPasteRange.Click
-        PasteValuesToDataFrame()
-    End Sub
-
     ''' <summary>
     ''' pastes data from clipboard to data view
     ''' </summary>
-    Private Sub PasteValuesToDataFrame()
+    Public Sub PasteValuesToDataFrame()
         Dim strClipBoardText As String = My.Computer.Clipboard.GetText
         If String.IsNullOrEmpty(strClipBoardText) Then
             MsgBox("No data available for pasting.", MsgBoxStyle.Information, "No Data")

@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports RScript
+Imports RInsightF461
 
 ''' <summary>
 ''' Fonts and Colours for all text within the output screen
@@ -27,8 +27,6 @@ Public Class OutputFont
     Public Shared Property RCommentFont As Font = clsInstatOptionsDefaults.DEFAULTfntComment
     Public Shared Property RConstantStringColour As Color = clsInstatOptionsDefaults.DEFAULTclrScript
     Public Shared Property RConstantStringFont As Font = clsInstatOptionsDefaults.DEFAULTfntScript
-    Public Shared Property REndScriptColour As Color = clsInstatOptionsDefaults.DEFAULTclrScript
-    Public Shared Property REndScriptFont As Font = clsInstatOptionsDefaults.DEFAULTfntScript
     Public Shared Property REndStatementColour As Color = clsInstatOptionsDefaults.DEFAULTclrScript
     Public Shared Property REndStatementFont As Font = clsInstatOptionsDefaults.DEFAULTfntScript
     Public Shared Property RFunctionNameColour As Color = clsInstatOptionsDefaults.DEFAULTclrScript
@@ -62,42 +60,38 @@ Public Class OutputFont
     ''' </summary>
     ''' <param name="scriptType"></param>
     ''' <returns></returns>
-    Public Shared Function GetColourForScriptType(scriptType As clsRToken.typToken) As Color
+    Public Shared Function GetColourForScriptType(scriptType As RToken.TokenTypes) As Color
         Select Case scriptType
-            Case clsRToken.typToken.RSyntacticName
+            Case RToken.TokenTypes.RSyntacticName
                 Return RSyntacticNameColour
-            Case clsRToken.typToken.RFunctionName
+            Case RToken.TokenTypes.RFunctionName
                 Return RFunctionNameColour
-            Case clsRToken.typToken.RKeyWord
+            Case RToken.TokenTypes.RKeyWord
                 Return RKeyWordColour
-            Case clsRToken.typToken.RConstantString
+            Case RToken.TokenTypes.RConstantString
                 Return RConstantStringColour
-            Case clsRToken.typToken.RComment
+            Case RToken.TokenTypes.RComment
                 Return RCommentColour
-            Case clsRToken.typToken.RSpace
+            Case RToken.TokenTypes.RSpace
                 Return RSpaceColour
-            Case clsRToken.typToken.RBracket
+            Case RToken.TokenTypes.RBracket
                 Return RBracketColour
-            Case clsRToken.typToken.RSeparator
+            Case RToken.TokenTypes.RSeparator
                 Return RSeparatorColour
-            Case clsRToken.typToken.REndStatement
+            Case RToken.TokenTypes.REndStatement
                 Return REndStatementColour
-            Case clsRToken.typToken.REndScript
-                Return REndScriptColour
-            Case clsRToken.typToken.RNewLine
+            Case RToken.TokenTypes.RNewLine
                 Return RNewLineColour
-            Case clsRToken.typToken.ROperatorUnaryLeft
+            Case RToken.TokenTypes.ROperatorUnaryLeft
                 Return ROperatorUnaryLeftColour
-            Case clsRToken.typToken.ROperatorUnaryRight
+            Case RToken.TokenTypes.ROperatorUnaryRight
                 Return ROperatorUnaryRightColour
-            Case clsRToken.typToken.ROperatorBinary
+            Case RToken.TokenTypes.ROperatorBinary
                 Return ROperatorBinaryColour
-            Case clsRToken.typToken.ROperatorBracket
+            Case RToken.TokenTypes.ROperatorBracket
                 Return ROperatorBracketColour
-            Case clsRToken.typToken.RPresentation
+            Case RToken.TokenTypes.RPresentation
                 Return RPresentationColour
-            Case clsRToken.typToken.RInvalid
-                Return RInvalidColour
             Case Else
                 Return Color.Black
         End Select
@@ -108,42 +102,38 @@ Public Class OutputFont
     ''' </summary>
     ''' <param name="scriptType"></param>
     ''' <returns></returns>
-    Public Shared Function GetFontForScriptType(scriptType As clsRToken.typToken) As Font
+    Public Shared Function GetFontForScriptType(scriptType As RToken.TokenTypes) As Font
         Select Case scriptType
-            Case clsRToken.typToken.RSyntacticName
+            Case RToken.TokenTypes.RSyntacticName
                 Return RSyntacticNameFont
-            Case clsRToken.typToken.RFunctionName
+            Case RToken.TokenTypes.RFunctionName
                 Return RFunctionNameFont
-            Case clsRToken.typToken.RKeyWord
+            Case RToken.TokenTypes.RKeyWord
                 Return RKeyWordFont
-            Case clsRToken.typToken.RConstantString
+            Case RToken.TokenTypes.RConstantString
                 Return RConstantStringFont
-            Case clsRToken.typToken.RComment
+            Case RToken.TokenTypes.RComment
                 Return RCommentFont
-            Case clsRToken.typToken.RSpace
+            Case RToken.TokenTypes.RSpace
                 Return RSpaceFont
-            Case clsRToken.typToken.RBracket
+            Case RToken.TokenTypes.RBracket
                 Return RBracketFont
-            Case clsRToken.typToken.RSeparator
+            Case RToken.TokenTypes.RSeparator
                 Return RSeparatorFont
-            Case clsRToken.typToken.REndStatement
+            Case RToken.TokenTypes.REndStatement
                 Return REndStatementFont
-            Case clsRToken.typToken.REndScript
-                Return REndScriptFont
-            Case clsRToken.typToken.RNewLine
+            Case RToken.TokenTypes.RNewLine
                 Return RNewLineFont
-            Case clsRToken.typToken.ROperatorUnaryLeft
+            Case RToken.TokenTypes.ROperatorUnaryLeft
                 Return ROperatorUnaryLeftFont
-            Case clsRToken.typToken.ROperatorUnaryRight
+            Case RToken.TokenTypes.ROperatorUnaryRight
                 Return ROperatorUnaryRightFont
-            Case clsRToken.typToken.ROperatorBinary
+            Case RToken.TokenTypes.ROperatorBinary
                 Return ROperatorBinaryFont
-            Case clsRToken.typToken.ROperatorBracket
+            Case RToken.TokenTypes.ROperatorBracket
                 Return ROperatorBracketFont
-            Case clsRToken.typToken.RPresentation
+            Case RToken.TokenTypes.RPresentation
                 Return RPresentationFont
-            Case clsRToken.typToken.RInvalid
-                Return RInvalidFont
             Case Else
                 Return New Font("Ariel", 12, FontStyle.Bold)
         End Select

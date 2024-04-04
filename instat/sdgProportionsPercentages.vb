@@ -49,11 +49,9 @@ Public Class sdgProportionsPercentages
 
         ucrChkProportionsPercentages.SetParameter(New RParameter("percentage_type"))
         ucrChkProportionsPercentages.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
-        ucrChkProportionsPercentages.SetRDefault(Chr(34) & "none" & Chr(34))
         ucrChkProportionsPercentages.SetText("Calculate Proportions or Percentages")
 
-        ucrPnlBY.AddToLinkedControls(ucrReceiverByFactor, objValues:={rdoByFactors}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlBY.AddToLinkedControls(ucrChkDisplayAsDecimal, objValues:={rdoByFactors}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlBY.AddToLinkedControls({ucrReceiverByFactor, ucrChkDisplayAsDecimal}, objValues:={rdoByFactors}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkProportionsPercentages.AddToLinkedControls(ucrPnlBY, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoByFactors)
         ucrChkProportionsPercentages.AddToLinkedControls(ucrSelectorProportionsPercentiles, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlBY.AddToLinkedControls(ucrReceiverColumn, objValues:={rdoByColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -71,6 +69,8 @@ Public Class sdgProportionsPercentages
             InitialiseControls()
         End If
         clsDefaultFunction = clsNewDefaultFunction
+        clsDefaultFunction.AddParameter("percentage_type", Chr(34) & "factors" & Chr(34))
+
         SetRCode(Me, clsDefaultFunction, bReset)
     End Sub
 
@@ -83,4 +83,12 @@ Public Class sdgProportionsPercentages
             ucrReceiverColumn.SetMeAsReceiver()
         End If
     End Sub
+
+    Private Sub ucrChkProportionsPercentages_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkProportionsPercentages.ControlContentsChanged
+        'temporarily fixes issue #8588
+        If ucrChkProportionsPercentages.Checked Then
+            rdoByFactors.Checked = True
+        End If
+    End Sub
+
 End Class

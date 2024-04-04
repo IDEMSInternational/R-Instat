@@ -15,7 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Runtime.InteropServices
-Imports RScript
+Imports RInsightF461
+
 ''' <summary>
 ''' Output page for R outputs
 ''' </summary>
@@ -133,7 +134,7 @@ Public Class ucrOutputPage
         'whether it's just a script output
 
         'todo. temporary fix. Output element should always have an R script
-        If outputElement.FormattedRScript IsNot Nothing Then
+        If outputElement.Script IsNot Nothing Then
             AddNewScript(outputElement)
         End If
 
@@ -164,8 +165,13 @@ Public Class ucrOutputPage
          .BorderStyle = BorderStyle.None
         }
 
+        Dim formattedRScript As List(Of clsRScriptElement) = outputElement.FormattedRScript
         'if settings are not available or both show commands and comments settings are enabled then just show the whole script
-        FillRichTextWithRScriptBasedOnSettings(richTextBox, outputElement.FormattedRScript)
+        If formattedRScript.Count > 0 Then
+            FillRichTextWithRScriptBasedOnSettings(richTextBox, formattedRScript)
+        Else
+            AddFormatedTextToRichTextBox(richTextBox, outputElement.Script, OutputFont.RPresentationFont, OutputFont.RPresentationColour)
+        End If
 
         'if no contents added just exit sub
         If richTextBox.TextLength = 0 Then
@@ -192,7 +198,7 @@ Public Class ucrOutputPage
             If frmMain.clsInstatOptions.bIncludeCommentDefault Then
                 'show comments only
                 For Each line As clsRScriptElement In formattedRScript
-                    If line.Type = clsRToken.typToken.RComment Then
+                    If line.Type = RToken.TokenTypes.RComment Then
                         AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
                     End If
                 Next
@@ -200,7 +206,7 @@ Public Class ucrOutputPage
             ElseIf frmMain.clsInstatOptions.bCommandsinOutput Then
                 'show command lines that are not comments
                 For Each line As clsRScriptElement In formattedRScript
-                    If Not (line.Type = clsRToken.typToken.RComment) Then
+                    If Not (line.Type = RToken.TokenTypes.RComment) Then
                         AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
                     End If
                 Next
@@ -418,7 +424,13 @@ Public Class ucrOutputPage
     Private Sub AddElementToRichTextBox(element As clsOutputElement, richText As RichTextBox)
         Select Case element.OutputType
             Case OutputType.Script
-                FillRichTextWithRScriptBasedOnSettings(richText, element.FormattedRScript)
+                Dim formattedRScript As List(Of clsRScriptElement) = element.FormattedRScript
+                'if settings are not available or both show commands and comments settings are enabled then just show the whole script
+                If formattedRScript.Count > 0 Then
+                    FillRichTextWithRScriptBasedOnSettings(richText, formattedRScript)
+                Else
+                    AddFormatedTextToRichTextBox(richText, element.Script, OutputFont.RPresentationFont, OutputFont.RPresentationColour)
+                End If
             Case OutputType.TextOutput
                 Dim strOutput As String = ""
                 If element.IsFile Then

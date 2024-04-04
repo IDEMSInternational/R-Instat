@@ -1,5 +1,6 @@
 get_default_significant_figures <- function(data) {
-  if(is.numeric(data)) return(3)
+  default_digits <- getOption("digits")
+  if(is.numeric(data) || is.complex(data)) return(default_digits)
   else return(NA)  
 }
 
@@ -2554,6 +2555,14 @@ is.containValueLabel <- function(x){
   return(labels_label %in% names(attributes(x)))
 }
 
+is.containPartialValueLabel <- function(x) {
+  if(is.containValueLabel(x)) {
+    levelCounts <- table(x)
+    return(!all(x[!is.na(x)] %in% attr(x, labels_label)) &&
+             sum(levelCounts == 0) == 0)
+  }
+  else{return(FALSE)}
+}
 
 read_corpora <- function(data){
   data_all <- NULL
@@ -2626,7 +2635,7 @@ view_object_data <- function(object, object_format = NULL) {
     file_name <- view_text_object(object)
   } else if (identical(object_format, "html")) {
     file_name <- view_html_object(object)
-  }else{
+  }  else{
     print(object)
   }
   return(file_name)
@@ -2722,11 +2731,28 @@ view_text_object <- function(text_object){
   
 }
 
+view_html_object <- function(html_object) {
+  # Check if html_object is a list and has more than one element
+  if (is.list(html_object) && all(sapply(html_object, class) == class(html_object[[1]]))) {
+    file_names <- vector("list", length(html_object))
+    for (i in seq_along(html_object)) {
+      # If html_object is a list with multiple elements of the same class, 
+      # use a for loop to process each element
+      file_names[[i]] <- process_html_object(html_object[[i]])
+    }
+    return(file_names)
+  }
+  
+  # Process the html_object
+  return(process_html_object(html_object))
+}
+
+#Function to process individual HTML object
 #displays the html object in the set R "viewer".
 #if the viewer is not available then 
 #it saves the object as a file in the temporary folder
 #and returns the file path.
-view_html_object <- function(html_object){
+process_html_object <- function(html_object) {
   #if there is a viewer, like in the case of RStudio then just print the object
   #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
   r_viewer <- base::getOption("viewer")
@@ -2737,14 +2763,13 @@ view_html_object <- function(html_object){
     return(html_object)
   }
   
-  
-  file_name <- ""
-  #get a vector of available class names
-  object_class_names <- class(html_object)
-  #get a unique temporary file name from the tempdir path
+  # Get a unique temporary file name from the tempdir path
   file_name <- tempfile(pattern = "viewhtml", fileext = ".html")
   
-  #save the object as a html file depending on the object type
+  # Get a vector of available class names
+  object_class_names <- class(html_object)
+  
+  # Save the object as an HTML file depending on the object type
   if ("htmlwidget" %in% object_class_names) {
     #Note. When selfcontained is set to True 
     #a "Saving a widget with selfcontained = TRUE requires pandoc" error is thrown in R-Instat
@@ -2760,12 +2785,14 @@ view_html_object <- function(html_object){
   } else if ("gt_tbl" %in% object_class_names) {
     #"gt table" objects are not compatible with "htmlwidgets" package. So they have to be saved differently.
     #"mmtable2" package produces "gt_tbl" objects 
-    gt::gtsave(html_object,filename = file_name)
+    gt::gtsave(html_object, filename = file_name)
   }
   
   message("R viewer not detected. File saved in location ", file_name)
   return(file_name)
-} 
+}
+
+
 
 #tries to recordPlot if graph_object = NULL, then returns graph object of class "recordedplot".
 #applicable to base graphs only
@@ -2959,4 +2986,84 @@ convert_to_list <- function(x) {
   } else {
     return(as.numeric(x))
   }
+}
+
+getExample <- function (topic, package = NULL, lib.loc = NULL, character.only = TRUE, give.lines = FALSE, local = FALSE, echo = TRUE, verbose = getOption("verbose"), setRNG = FALSE, ask = getOption("example.ask"), prompt.prefix = abbreviate(topic, 6), run.dontrun = FALSE, run.donttest = interactive()) {
+  if (!character.only) {
+    topic <- substitute(topic)
+    if (!is.character(topic))
+      topic <- deparse(topic)[1L]
+  }
+  pkgpaths <- find.package(package, lib.loc, verbose = verbose)
+  file <- utils:::index.search(topic, pkgpaths, firstOnly = TRUE)
+  if (!length(file)) {
+    warning(gettextf("no help found for %s", sQuote(topic)),
+            domain = NA)
+    return(character())
+  }
+  if (verbose)
+    cat("Found file =", sQuote(file), "\n")
+  packagePath <- dirname(dirname(file))
+  pkgname <- basename(packagePath)
+  lib <- dirname(packagePath)
+  tf <- tempfile("Rex")
+  tools::Rd2ex(utils:::.getHelpFile(file), tf, commentDontrun = !run.dontrun,
+               commentDonttest = !run.donttest)
+  if (!file.exists(tf)) {
+    if (give.lines)
+      return(character())
+    warning(gettextf("%s has a help file but no examples",
+                     sQuote(topic)), domain = NA)
+    return(character())
+  }
+  on.exit(unlink(tf))
+  example_text <- readLines(tf)
+  example_text <- paste(example_text, collapse = "\n")
+  if (give.lines) {
+    return(example_text)
+  }
+  if (echo) {
+    cat(example_text)
+  }
+  return(example_text)
+}
+
+WB_evaporation <- function(water_balance, frac, capacity, evaporation_value, rain){
+  if (water_balance >= frac*capacity){
+    evaporation <- evaporation_value
+  } else {
+    if (rain == 0){
+      evaporation <- evaporation_value * ((water_balance)/(frac*capacity))
+    } else {
+      if (water_balance < frac*capacity){
+        if (rain > evaporation_value){
+          evaporation <- evaporation_value
+        } else {
+          evaporation <- evaporation_value * ((water_balance)/(frac*capacity))
+          evaporation <- evaporation + ((evaporation_value - evaporation)*(rain/evaporation_value))
+        }
+      } else {
+        evaporation <- evaporation_value
+        }
+    }
+  }
+  return(evaporation)
+}
+
+write_weather_data <- function(year, month, day, rain, mn_tmp, mx_tmp, missing_code, output_file) {
+  # Create a data frame with the provided inputs
+  weather_data <- data.frame(year = year,
+                             month = month,
+                             day = day,
+                             rain = rain,
+                             mn_tmp = mn_tmp,
+                             mx_tmp = mx_tmp)
+  
+  # Replace missing values with the specified code
+  weather_data[is.na(weather_data)] <- missing_code
+  
+  # Write the data frame to a text file
+  write.table(weather_data, file = output_file, sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
+  
+  cat("Weather data has been written to", output_file, "\n")
 }
