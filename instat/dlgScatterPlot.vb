@@ -783,6 +783,10 @@ Public Class dlgScatterPlot
         SetPipeAssignTo()
     End Sub
 
+    Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
     Private Sub AddRemoveGroupAesVar()
         clsGroupAesFuction.RemoveParameterByName("group")
         clsGroupAesVarFuction.RemoveParameterByName("group")
@@ -811,9 +815,6 @@ Public Class dlgScatterPlot
         End If
     End Sub
 
-    Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorOptionalReceiver.ControlValueChanged
-        AddRemoveGroupAesVar()
-    End Sub
 
     Private Sub ucrChkSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSize.ControlValueChanged, ucrNudPointsize.ControlValueChanged
         If ucrChkSize.Checked AndAlso (Not ucrNudPointsize.IsEmpty) Then
