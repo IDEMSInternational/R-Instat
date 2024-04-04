@@ -582,19 +582,19 @@ Public Class dlgTransform
         clsScaleMultiplyColsOperator.SetOperation("*")
         clsScaleMultiplyColsOperator.AddParameter("x", clsROperatorParameter:=clsScaleSubtractColsOperator, iPosition:=0)
         clsScaleMultiplyColsOperator.AddParameter("y", "1", iPosition:=1)
-        clsScaleMultiplyColsOperator.bBrackets = False
 
         clsScaleDivideColsOperator.SetOperation("/")
-        clsScaleDivideColsOperator.AddParameter("x", clsROperatorParameter:=clsScaleMultiplyColsOperator, iPosition:=0)
+        clsScaleDivideColsOperator.AddParameter("x", clsROperatorParameter:=clsSymbolOperator2, iPosition:=0)
         clsScaleDivideColsOperator.AddParameter("z", "1", iPosition:=1)
         clsScaleDivideColsOperator.bBrackets = False
 
         clsScaleAddColsOperator.SetOperation("+")
         clsScaleAddColsOperator.AddParameter("x", clsROperatorParameter:=clsScaleDivideColsOperator, iPosition:=0)
         clsScaleAddColsOperator.AddParameter("v", "0", iPosition:=1)
+        clsScaleAddColsOperator.bBrackets = False
 
         clsSymbolOperator2.AddParameter("left", "~", iPosition:=0, bIncludeArgumentName:=False)
-        clsSymbolOperator2.AddParameter("right", clsROperatorParameter:=clsScaleAddColsOperator, iPosition:=1, bIncludeArgumentName:=False)
+        clsSymbolOperator2.AddParameter("right", clsROperatorParameter:=clsScaleMultiplyColsOperator, iPosition:=1, bIncludeArgumentName:=False)
         clsSymbolOperator2.bBrackets = False
 
         clsBooleanColsOperator.SetOperation("==")
@@ -1007,7 +1007,7 @@ Public Class dlgTransform
         ElseIf rdoScale.Checked Then
             clsDummyTransformFunction.AddParameter("check", "scale", iPosition:=0)
             clsScaleSubtractColsOperator.AddParameter("left", ".x", iPosition:=0)
-            clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsSymbolOperator2, bIncludeArgumentName:=False)
+            clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsScaleAddColsOperator, bIncludeArgumentName:=False)
         End If
 
         clsMutateFunction.AddParameter("var", clsRFunctionParameter:=clsAcrossFunction, bIncludeArgumentName:=False, iPosition:=0)
