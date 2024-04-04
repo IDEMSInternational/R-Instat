@@ -47,6 +47,7 @@ Public Class dlgTransform
     Private clsLogBase10ColsFunction As New RFunction
     Private clsStandardDevColsFunction As New RFunction
     Private clsSymbolOperator As New ROperator
+    Private clsSymbolOperator2 As New ROperator
     Private clsMeanColsFunction As New RFunction
     Private clsReplicateColsFunction As New RFunction
     Private clsConcDiffColsFunction As New RFunction
@@ -410,6 +411,7 @@ Public Class dlgTransform
         clsReplicateColsFunction = New RFunction
         clsStandardDevColsFunction = New RFunction
         clsSymbolOperator = New ROperator
+        clsSymbolOperator2 = New ROperator
         clsBooleanColsOperator = New ROperator
         clsAddColumnsFunction = New RFunction
         clsPasteFunction = New RFunction
@@ -551,7 +553,6 @@ Public Class dlgTransform
         clsDivisionColsOperator.SetOperation("/")
         clsDivisionColsOperator.AddParameter("x", clsROperatorParameter:=clsSubtractColsOperator, iPosition:=0)
         clsDivisionColsOperator.AddParameter("y", clsRFunctionParameter:=clsStandardDevColsFunction, iPosition:=1)
-        'clsDivisionColsOperator.bBrackets = False
 
         clsSymbolOperator.AddParameter("left", "~", iPosition:=0, bIncludeArgumentName:=False)
         clsSymbolOperator.AddParameter("right", clsROperatorParameter:=clsDivisionColsOperator, iPosition:=1, bIncludeArgumentName:=False)
@@ -591,7 +592,10 @@ Public Class dlgTransform
         clsScaleAddColsOperator.SetOperation("+")
         clsScaleAddColsOperator.AddParameter("x", clsROperatorParameter:=clsScaleDivideColsOperator, iPosition:=0)
         clsScaleAddColsOperator.AddParameter("v", "0", iPosition:=1)
-        clsScaleAddColsOperator.bBrackets = False
+
+        clsSymbolOperator2.AddParameter("left", "~", iPosition:=0, bIncludeArgumentName:=False)
+        clsSymbolOperator2.AddParameter("right", clsROperatorParameter:=clsScaleAddColsOperator, iPosition:=1, bIncludeArgumentName:=False)
+        clsSymbolOperator2.bBrackets = False
 
         clsBooleanColsOperator.SetOperation("==")
         clsIsNAColsFunction.SetRCommand("is.na")
@@ -1007,8 +1011,8 @@ Public Class dlgTransform
             End If
         ElseIf rdoScale.Checked Then
             clsDummyTransformFunction.AddParameter("check", "scale", iPosition:=0)
-            clsScaleSubtractColsOperator.AddParameter("left", "~.x", iPosition:=0)
-            clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsScaleAddColsOperator, bIncludeArgumentName:=False)
+            clsScaleSubtractColsOperator.AddParameter("left", ".x", iPosition:=0)
+            clsAcrossFunction.AddParameter("operator", clsROperatorParameter:=clsSymbolOperator2, bIncludeArgumentName:=False)
         End If
 
         clsMutateFunction.AddParameter("var", clsRFunctionParameter:=clsAcrossFunction, bIncludeArgumentName:=False, iPosition:=0)
