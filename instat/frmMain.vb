@@ -873,7 +873,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareTextSplit_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSplit.Click
-        dlgSplitText.enumSplittextMode = dlgSplitText.SplittextMode.Prepare
+        dlgSplitText.enumSplitMode = dlgSplitText.SplitMode.Prepare
         dlgSplitText.ShowDialog()
     End Sub
 
@@ -913,7 +913,7 @@ Public Class frmMain
     'End Sub
 
     Private Sub mnuPrepareTextTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextTransform.Click
-        dlgTransformText.enumTransformtextMode = dlgTransformText.TransformtextMode.Prepare
+        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Prepare
         dlgTransformText.ShowDialog()
     End Sub
 
@@ -1266,7 +1266,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateMakeDate.Click
-        dlgMakeDate.enumMakedateMode = dlgMakeDate.Makedate.Prepare
+        dlgMakeDate.enumMakedateMode = dlgMakeDate.MakedateMode.Prepare
         dlgMakeDate.ShowDialog()
     End Sub
 
@@ -1287,7 +1287,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateUseDate.Click
-        dlgUseDate.enumUsedateMode = dlgUseDate.Usedate.Prepare
+        dlgUseDate.enumUsedateMode = dlgUseDate.UsedateMode.Prepare
         dlgUseDate.ShowDialog()
     End Sub
 
@@ -1385,17 +1385,17 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticPrepareDatesMakeDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesMakeDate.Click
-        dlgMakeDate.enumMakedateMode = dlgMakeDate.Makedate.Climatic
+        dlgMakeDate.enumMakedateMode = dlgMakeDate.MakedateMode.Climatic
         dlgMakeDate.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPrepareDatesUseDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesUseDate.Click
-        dlgUseDate.enumUsedateMode = dlgUseDate.Usedate.Climatic
+        dlgUseDate.enumUsedateMode = dlgUseDate.UsedateMode.Climatic
         dlgUseDate.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPrepareInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesInfillMissingDates.Click
-        dlgInfill.enumFilldateMode = dlgInfill.Filldate.Climatic
+        dlgInfill.enumFilldateMode = dlgInfill.FilldateMode.Climatic
         dlgInfill.ShowDialog()
     End Sub
 
@@ -1735,7 +1735,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateInfillMissingDates.Click
-        dlgInfill.enumFilldateMode = dlgInfill.Filldate.Prepare
+        dlgInfill.enumFilldateMode = dlgInfill.FilldateMode.Prepare
         dlgInfill.ShowDialog()
     End Sub
 
@@ -1953,13 +1953,13 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateGenerateDate.Click
-        dlgRegularSequence.enumRegularsequenceMode = dlgRegularSequence.Regularsequence.Prepare
+        dlgRegularSequence.enumRegularsequenceMode = dlgRegularSequence.RegularsequenceMode.Prepare
         dlgRegularSequence.SetDateSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDatesGenerateDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesGenerateDates.Click
-        dlgRegularSequence.enumRegularsequenceMode = dlgRegularSequence.Regularsequence.Climatic
+        dlgRegularSequence.enumRegularsequenceMode = dlgRegularSequence.RegularsequenceMode.Climatic
         dlgRegularSequence.SetDateSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
     End Sub
@@ -2036,7 +2036,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticTidyandExamineReplaceValues_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineReplaceValues.Click
-        dlgReplaceValues.enumReplaceValues = dlgReplaceValues.ReplaceValues.Climatic
+        dlgReplaceValues.enumReplacevaluesMode = dlgReplaceValues.ReplacevaluesMode.Climatic
         dlgReplaceValues.ShowDialog()
     End Sub
 
@@ -2604,12 +2604,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticTidyandExamineTransformText_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineTransformText.Click
-        dlgTransformText.enumTransformtextMode = dlgTransformText.TransformtextMode.Climatic
+        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Climatic
         dlgTransformText.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticTidyandExamineSplitText_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineSplitText.Click
-        dlgSplitText.enumSplittextMode = dlgSplitText.SplittextMode.Climatic
+        dlgSplitText.enumSplitMode = dlgSplitText.SplitMode.Climatic
         dlgSplitText.ShowDialog()
     End Sub
 

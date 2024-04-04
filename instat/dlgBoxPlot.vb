@@ -15,8 +15,15 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
+Imports instat.dlgVisualizeData
 Imports instat.Translations
 Public Class dlgBoxplot
+    Public enumBoxplotMode As String = BoxplotMode.Prepare
+    Public Enum BoxplotMode
+        Prepare
+        Describe
+    End Enum
+
     Private bResetLineLayerSubdialog As Boolean = True
     Private clsRggplotFunction As New RFunction
     'clsRggplotFunction is the global ggplot function, will be used as RFunction of the first RParameter of ucrBase.clsRSyntax (which has "+" as main command). It is emphasised as a public field as it is used/editted in the sdgLayerOptions. The link is operated via SetupLayer that sets sdgLayerOptions.clsGgplotFunction = dlgBoxPlot.clsRggplotFunction.
@@ -94,6 +101,7 @@ Public Class dlgBoxplot
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
@@ -579,6 +587,15 @@ Public Class dlgBoxplot
 
     Private Sub toolStripMenuItemSummaryOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemSummaryOptions.Click
         openSdgLayerOptions(clsSummaryFunction)
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumBoxplotMode
+            Case BoxplotMode.Prepare
+                ucrBase.iHelpTopicID = 548
+            Case BoxplotMode.Describe
+                ucrBase.iHelpTopicID = 436
+        End Select
     End Sub
 
     Private Sub DialogueSize()

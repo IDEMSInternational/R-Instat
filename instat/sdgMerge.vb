@@ -18,11 +18,18 @@ Imports System.ComponentModel
 Imports instat.Translations
 
 Public Class sdgMerge
+    Public enumsdgMergeMode As String = sdgMergeMode.Prepare
+    Public Enum sdgMergeMode
+        Prepare
+        Climatic
+    End Enum
+
     Private bControlsInitialised As Boolean = False
     Private clsByList As New RFunction
     Private clsMerge As RFunction
 
     Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
@@ -91,6 +98,15 @@ Public Class sdgMerge
         lstKeyColumns.Columns(1).Width = 31
         lstKeyColumns.Columns(2).Width = 75
         cmdRemoveAll.Enabled = False
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumsdgMergeMode
+            Case sdgMergeMode.Prepare
+                ucrSubBase.iHelpTopicID = 548
+            Case sdgMergeMode.Climatic
+                ucrSubBase.iHelpTopicID = 343
+        End Select
     End Sub
 
     Private Sub cmdAddPair_Click(sender As Object, e As EventArgs) Handles cmdAddPair.Click

@@ -18,6 +18,12 @@ Imports instat
 Imports instat.Translations
 
 Public Class dlgMerge
+    Public enumMergeMode As String = MergeMode.Prepare
+    Public Enum MergeMode
+        Prepare
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private clsMergeFunction As New RFunction
     Private clsByListFunction As New RFunction
@@ -42,6 +48,7 @@ Public Class dlgMerge
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         SetMergingBy()
         TestOKEnabled()
@@ -135,10 +142,19 @@ Public Class dlgMerge
     End Sub
 
     Private Sub cmdJoinOptions_Click(sender As Object, e As EventArgs) Handles cmdJoinOptions.Click
-        sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondDataFrame.cboAvailableDataFrames.Text, clsMergeFunction, clsByListFunction, bResetSubdialog)
-        sdgMerge.ShowDialog()
-        bResetSubdialog = False
-        SetMergingBy()
+        If sdgMerge.enumsdgMergeMode = sdgMerge.sdgMergeMode.Climatic Then
+            sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondDataFrame.cboAvailableDataFrames.Text, clsMergeFunction, clsByListFunction, bResetSubdialog)
+            'sdgMerge.sdgMergeMode.Climatic.Showdialog()
+            bResetSubdialog = False
+            SetMergingBy()
+        ElseIf sdgMerge.enumsdgMergeMode = sdgMerge.sdgMergeMode.Prepare Then
+            sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondDataFrame.cboAvailableDataFrames.Text, clsMergeFunction, clsByListFunction, bResetSubdialog)
+            sdgMerge.enumsdgMergeMode = sdgMerge.sdgMergeMode.Climatic
+            ' sdgMerge.ShowDialog()
+            bResetSubdialog = False
+            SetMergingBy()
+        End If
+
     End Sub
 
     Private Sub cmdColumnOptions_Click(sender As Object, e As EventArgs) Handles cmdColumnOptions.Click
@@ -146,6 +162,15 @@ Public Class dlgMerge
         sdgMergeColumnstoInclude.ShowDialog()
         bResetSubdialog = False
         SetMergingBy()
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumMergeMode
+            Case MergeMode.Prepare
+                ucrBase.iHelpTopicID = 60
+            Case MergeMode.Climatic
+                ucrBase.iHelpTopicID = 609
+        End Select
     End Sub
 
     Private Sub ucrInputJoinType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputJoinType.ControlValueChanged
