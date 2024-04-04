@@ -749,8 +749,24 @@ Public Class RLink
                          bShowWaitDialogOverride:=Nothing)
             End If
 
-            clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
-                    bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
+             ' Split the strOutput into an array of lines, removing empty entries
+            Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+
+            ' Check if arrFilesPaths has at least one element before iterating
+            If arrFilesPaths.Length > 0 Then
+                ' Iterate through each file path
+                For Each _path In arrFilesPaths
+                    ' Add output to logger
+                    clsOutputLogger.AddOutput(clsRStatement.Text, _path, bAsFile:=True,
+                        bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
+                Next
+            Else
+                ' Add output to logger
+                clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
+                        bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
+            End If
+
+            ' Log the script
             LogScript(clsRStatement.Text.TrimEnd(vbCr, vbLf))
 
         Catch e As Exception
@@ -996,9 +1012,23 @@ Public Class RLink
                 End If
             End If
 
+            If bAsFile Then
+                ' Split the strOutput into an array of lines, removing empty entries
+                Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+                ' Iterate through each HTML files
+                For Each _path In arrFilesPaths
+                    ' Add each HTML file as an output to clsOutputLogger
+                    ' strScriptWithComment: the script with associated comments
+                    ' _path: the path to the HTML file
+                    ' bAsFile: a boolean indicating whether the output should be treated as a file
+                    ' bDisplayOutputInExternalViewer: a boolean indicating whether to display the output in an external viewer
+                    clsOutputLogger.AddOutput(strScriptWithComment, _path, bAsFile, bDisplayOutputInExternalViewer)
+                Next
+            Else
+                ' If strOutput is empty or does not contain valid HTML files, add strOutput itself as an output
+                clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
+            End If
 
-            'log script and output
-            clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
 
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
@@ -1020,7 +1050,7 @@ Public Class RLink
     ''' <param name="bShowWaitDialogOverride"></param>
     ''' <returns>file path name if file is avaialble and has contents else empty string</returns>
     Private Function GetFileOutput(strScript As String, bSilent As Boolean, bSeparateThread As Boolean, bShowWaitDialogOverride As Nullable(Of Boolean)) As String
-        Dim strFilePath As String = ""
+        Dim strFilesPath As String = ""
         Dim strTempAssignTo As String = ".temp_val"
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
@@ -1029,14 +1059,17 @@ Public Class RLink
         expTemp = GetSymbol(strTempAssignTo, bSilent:=True)
         Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
         If expTemp IsNot Nothing Then
-            'get the file path name, check if it exists and whether it has contents
-            'if not, just return empty file path
-            strFilePath = String.Join(Environment.NewLine, expTemp.AsCharacter())
-            If Not File.Exists(strFilePath) OrElse New FileInfo(strFilePath).Length = 0 Then
-                strFilePath = ""
-            End If
+            ' Convert CharacterVector to String() array
+            Dim arrFilesPath As String() = expTemp.AsCharacter().Select(Function(x) x.ToString()).ToArray()
+
+            ' Filter out invalid file paths
+            arrFilesPath = arrFilesPath.Where(Function(path) File.Exists(path) AndAlso New FileInfo(path).Length > 0).ToArray()
+
+            ' Join the valid file paths with newline characters
+            strFilesPath = String.Join(Environment.NewLine, arrFilesPath)
         End If
-        Return strFilePath
+
+        Return strFilesPath
     End Function
 
     '''--------------------------------------------------------------------------------------------
