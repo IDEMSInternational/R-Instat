@@ -113,7 +113,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.lblFacetBy.AutoSize = True
         Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFacetBy.Location = New System.Drawing.Point(260, 476)
+        Me.lblFacetBy.Location = New System.Drawing.Point(260, 444)
         Me.lblFacetBy.Name = "lblFacetBy"
         Me.lblFacetBy.Size = New System.Drawing.Size(100, 13)
         Me.lblFacetBy.TabIndex = 8
@@ -150,7 +150,7 @@ Partial Class dlgSeasonalGraph
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(119, 490)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(119, 458)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(82, 21)
         Me.ucrInputLegendPosition.TabIndex = 18
@@ -161,7 +161,7 @@ Partial Class dlgSeasonalGraph
         Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(386, 490)
+        Me.ucrInputStation.Location = New System.Drawing.Point(386, 458)
         Me.ucrInputStation.Name = "ucrInputStation"
         Me.ucrInputStation.Size = New System.Drawing.Size(82, 21)
         Me.ucrInputStation.TabIndex = 10
@@ -170,7 +170,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.ucrReceiverFacetBy.AutoSize = True
         Me.ucrReceiverFacetBy.frmParent = Me
-        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(259, 491)
+        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(259, 459)
         Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
         Me.ucrReceiverFacetBy.Selector = Nothing
@@ -239,7 +239,7 @@ Partial Class dlgSeasonalGraph
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(13, 531)
+        Me.ucrSave.Location = New System.Drawing.Point(13, 499)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(451, 24)
@@ -249,7 +249,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(13, 491)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(13, 459)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(88, 23)
         Me.ucrChkLegend.TabIndex = 17
@@ -278,7 +278,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(22, 576)
+        Me.ucrBase.Location = New System.Drawing.Point(22, 544)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 19
@@ -289,7 +289,7 @@ Partial Class dlgSeasonalGraph
         Me.ucrChkFill.Checked = False
         Me.ucrChkFill.Location = New System.Drawing.Point(14, 301)
         Me.ucrChkFill.Name = "ucrChkFill"
-        Me.ucrChkFill.Size = New System.Drawing.Size(88, 23)
+        Me.ucrChkFill.Size = New System.Drawing.Size(147, 23)
         Me.ucrChkFill.TabIndex = 21
         '
         'ucrChkColour
@@ -298,7 +298,7 @@ Partial Class dlgSeasonalGraph
         Me.ucrChkColour.Checked = False
         Me.ucrChkColour.Location = New System.Drawing.Point(14, 370)
         Me.ucrChkColour.Name = "ucrChkColour"
-        Me.ucrChkColour.Size = New System.Drawing.Size(88, 23)
+        Me.ucrChkColour.Size = New System.Drawing.Size(147, 23)
         Me.ucrChkColour.TabIndex = 22
         '
         'ucrInputFill
@@ -329,9 +329,9 @@ Partial Class dlgSeasonalGraph
         Me.lblFill.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblFill.Location = New System.Drawing.Point(14, 332)
         Me.lblFill.Name = "lblFill"
-        Me.lblFill.Size = New System.Drawing.Size(35, 13)
+        Me.lblFill.Size = New System.Drawing.Size(41, 13)
         Me.lblFill.TabIndex = 186
-        Me.lblFill.Text = "Lines:"
+        Me.lblFill.Text = "Labels:"
         '
         'lblColour
         '
@@ -347,7 +347,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(477, 638)
+        Me.ClientSize = New System.Drawing.Size(477, 604)
         Me.Controls.Add(Me.lblColour)
         Me.Controls.Add(Me.lblFill)
         Me.Controls.Add(Me.ucrInputColour)
