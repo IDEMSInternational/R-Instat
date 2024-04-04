@@ -284,7 +284,6 @@ Public Class dlgClimograph
 
     Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged
         If Not ucr1stFactorReceiver.IsEmpty Then
-            'clsGgwalterliethFunction.AddParameter("station", Chr(34) & ucr1stFactorReceiver.GetVariableNames(False) & Chr(34), iPosition:=1)
             clsGgwalterliethFunction.AddParameter("station", ucr1stFactorReceiver.GetVariableNames(), iPosition:=1)
         Else
             clsGgwalterliethFunction.RemoveParameterByName("station")
