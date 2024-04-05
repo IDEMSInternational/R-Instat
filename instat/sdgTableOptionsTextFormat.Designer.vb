@@ -238,6 +238,7 @@ Partial Class sdgTableOptionsTextFormat
         '
         Me.GroupBox3.Controls.Add(Me.lblAlignHorizontal)
         Me.GroupBox3.Controls.Add(Me.ucrCboAlignHorizontal)
+        Me.GroupBox3.Enabled = False
         Me.GroupBox3.Location = New System.Drawing.Point(7, 250)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(594, 65)
