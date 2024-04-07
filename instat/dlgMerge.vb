@@ -149,7 +149,7 @@ Public Class dlgMerge
             SetMergingBy()
         ElseIf sdgMerge.enumsdgMergeMode = sdgMerge.sdgMergeMode.Prepare Then
             sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondDataFrame.cboAvailableDataFrames.Text, clsMergeFunction, clsByListFunction, bResetSubdialog)
-            sdgMerge.enumsdgMergeMode = sdgMerge.sdgMergeMode.Climatic
+            sdgMerge.enumsdgMergeMode = sdgMerge.sdgMergeMode.Prepare
             ' sdgMerge.ShowDialog()
             bResetSubdialog = False
             SetMergingBy()
