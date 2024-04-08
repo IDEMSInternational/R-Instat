@@ -250,7 +250,7 @@ Public Class sdgTableOptions
                             If clsFooterLocationNoteRFunction.clsParameters.Count > 0 Then
                                 row.Cells(1).Value = GetStringValue(clsFooterLocationNoteRFunction.clsParameters(0).strArgumentValue, False)
                             End If
-                        ElseIf clsFooterLocationNoteRFunction.strRCommand = "cells_body" AndAlso dataGridFooterNotes Is dataGridFooterNotes Then
+                        ElseIf clsFooterLocationNoteRFunction.strRCommand = "cells_body" AndAlso dataGridFooterNotes Is dataGridCellFooterNotes Then
                             For Each clsFootNoteLocationRParam As RParameter In clsFooterLocationNoteRFunction.clsParameters
                                 If clsFootNoteLocationRParam.strArgumentName = "columns" Then
                                     row.Cells(1).Value = GetStringValue(clsFootNoteLocationRParam.strArgumentValue, False)
@@ -308,31 +308,6 @@ Public Class sdgTableOptions
         ' Always add a place holder row for new foot note
         dataGridSourceNotes.Rows.Add()
 
-    End Sub
-
-
-    Private Sub dataGridCellFooterNotes_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles dataGridCellFooterNotes.EditingControlShowing
-        ' Check if the current column is the DataGridViewComboBoxColumn
-        If dataGridCellFooterNotes.CurrentCell.ColumnIndex = 1 Then
-            Dim comboBox As ComboBox = CType(e.Control, ComboBox)
-            If comboBox IsNot Nothing Then
-                comboBox.DropDownStyle = ComboBoxStyle.DropDown
-                ' Remove any existing handler to avoid multiple assignments
-                RemoveHandler comboBox.SelectedIndexChanged, AddressOf ComboBox_SelectedIndexChanged
-
-                ' Add the new event handler
-                AddHandler comboBox.SelectedIndexChanged, AddressOf ComboBox_SelectedIndexChanged
-            End If
-        End If
-    End Sub
-
-    Private Sub ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs)
-        Dim comboBox As ComboBox = CType(sender, ComboBox)
-        If comboBox IsNot Nothing Then
-            ' Now you can access the selected item
-            Dim selectedItem As String = comboBox.SelectedItem.ToString()
-            MessageBox.Show("Selected Item: " & selectedItem)
-        End If
     End Sub
 
     Private Sub dataGridNotes_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridHeaderFooterNotes.CellEndEdit, dataGridCellFooterNotes.CellEndEdit, dataGridSourceNotes.CellEndEdit

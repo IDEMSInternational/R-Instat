@@ -37,10 +37,6 @@ Partial Class sdgTableOptions
         Me.DataGridViewButtonColumn1 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.lblHeaderFooterNotes = New System.Windows.Forms.Label()
         Me.dataGridCellFooterNotes = New System.Windows.Forms.DataGridView()
-        Me.colFooterNoteText = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFooterColExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFooterRowExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFooterFormat = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.lblFooterCellNotes = New System.Windows.Forms.Label()
         Me.tbpSourceNotes = New System.Windows.Forms.TabPage()
         Me.dataGridSourceNotes = New System.Windows.Forms.DataGridView()
@@ -54,6 +50,10 @@ Partial Class sdgTableOptions
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.ucrPnlThemesPanel = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.colFooterNoteText = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colFooterColExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colFooterRowExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colFooterFormat = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
         Me.tbpFooters.SuspendLayout()
@@ -226,36 +226,6 @@ Partial Class sdgTableOptions
         Me.dataGridCellFooterNotes.Size = New System.Drawing.Size(630, 84)
         Me.dataGridCellFooterNotes.TabIndex = 5
         '
-        'colFooterNoteText
-        '
-        Me.colFooterNoteText.HeaderText = "Note Text"
-        Me.colFooterNoteText.MinimumWidth = 8
-        Me.colFooterNoteText.Name = "colFooterNoteText"
-        Me.colFooterNoteText.Width = 220
-        '
-        'colFooterColExpression
-        '
-        Me.colFooterColExpression.HeaderText = "Column Expression"
-        Me.colFooterColExpression.MinimumWidth = 8
-        Me.colFooterColExpression.Name = "colFooterColExpression"
-        Me.colFooterColExpression.Width = 140
-        '
-        'colFooterRowExpression
-        '
-        Me.colFooterRowExpression.HeaderText = "Row Expression(s)"
-        Me.colFooterRowExpression.MinimumWidth = 8
-        Me.colFooterRowExpression.Name = "colFooterRowExpression"
-        Me.colFooterRowExpression.Width = 140
-        '
-        'colFooterFormat
-        '
-        Me.colFooterFormat.HeaderText = ""
-        Me.colFooterFormat.Name = "colFooterFormat"
-        Me.colFooterFormat.ReadOnly = True
-        Me.colFooterFormat.Text = "Format"
-        Me.colFooterFormat.UseColumnTextForButtonValue = True
-        Me.colFooterFormat.Width = 60
-        '
         'lblFooterCellNotes
         '
         Me.lblFooterCellNotes.AutoSize = True
@@ -388,6 +358,37 @@ Partial Class sdgTableOptions
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 4
         '
+        'colFooterNoteText
+        '
+        Me.colFooterNoteText.HeaderText = "Note Text"
+        Me.colFooterNoteText.MinimumWidth = 8
+        Me.colFooterNoteText.Name = "colFooterNoteText"
+        Me.colFooterNoteText.Width = 220
+        '
+        'colFooterColExpression
+        '
+        Me.colFooterColExpression.HeaderText = "Column Expression"
+        Me.colFooterColExpression.MinimumWidth = 8
+        Me.colFooterColExpression.Name = "colFooterColExpression"
+        Me.colFooterColExpression.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.colFooterColExpression.Width = 140
+        '
+        'colFooterRowExpression
+        '
+        Me.colFooterRowExpression.HeaderText = "Row Expression(s)"
+        Me.colFooterRowExpression.MinimumWidth = 8
+        Me.colFooterRowExpression.Name = "colFooterRowExpression"
+        Me.colFooterRowExpression.Width = 140
+        '
+        'colFooterFormat
+        '
+        Me.colFooterFormat.HeaderText = ""
+        Me.colFooterFormat.Name = "colFooterFormat"
+        Me.colFooterFormat.ReadOnly = True
+        Me.colFooterFormat.Text = "Format"
+        Me.colFooterFormat.UseColumnTextForButtonValue = True
+        Me.colFooterFormat.Width = 60
+        '
         'sdgTableOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -439,13 +440,13 @@ Partial Class sdgTableOptions
     Friend WithEvents lblSourceNotes As Label
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents colSourceNoteFormat As DataGridViewButtonColumn
-    Friend WithEvents colFooterNoteText As DataGridViewTextBoxColumn
-    Friend WithEvents colFooterColExpression As DataGridViewTextBoxColumn
-    Friend WithEvents colFooterRowExpression As DataGridViewTextBoxColumn
-    Friend WithEvents colFooterFormat As DataGridViewButtonColumn
     Friend WithEvents dataGridHeaderFooterNotes As DataGridView
     Friend WithEvents lblHeaderFooterNotes As Label
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewComboBoxColumn
     Friend WithEvents DataGridViewButtonColumn1 As DataGridViewButtonColumn
+    Friend WithEvents colFooterNoteText As DataGridViewTextBoxColumn
+    Friend WithEvents colFooterColExpression As DataGridViewTextBoxColumn
+    Friend WithEvents colFooterRowExpression As DataGridViewTextBoxColumn
+    Friend WithEvents colFooterFormat As DataGridViewButtonColumn
 End Class
