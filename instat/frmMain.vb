@@ -188,7 +188,7 @@ Public Class frmMain
 
         '---------------------------------------
         'execute R-Instat R set up scripts to set up R data book
-        ExecuteSetupRScriptsAndSetupRLinkAndDatabook(bOpenFromMenu:=False)
+        ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         'execute R global options used by R-Instat R data book
         clsInstatOptions.ExecuteRGlobalOptions()
         '---------------------------------------
@@ -389,12 +389,12 @@ Public Class frmMain
         End If
     End Function
 
-    Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook(Optional bOpenFromMenu = True)
+    Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strRScripts As String = ""
         Dim strDataFilePath As String = ""
 
         'could either be a file path or a script
-        PromptAndSetAutoRecoveredPrevSessionData(strRScripts, strDataFilePath, bOpenFromMenu:=bOpenFromMenu)
+        PromptAndSetAutoRecoveredPrevSessionData(strRScripts, strDataFilePath)
 
         'if no script recovered then use the default R set up script
         If String.IsNullOrEmpty(strRScripts) Then
@@ -428,7 +428,7 @@ Public Class frmMain
 
     End Sub
 
-Private Sub PromptAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, ByRef strDataFilePath As String, Optional bOpenFromMenu As Boolean = False)
+    Private Sub PromptAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, ByRef strDataFilePath As String)
 
         'if there is  another R-Instat process in the machine then no need to check for autorecovery files
         If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
@@ -456,10 +456,10 @@ Private Sub PromptAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, 
         '---------------------------------------
         'prompt user for recovery selection
         If (strAutoSavedLogFilePaths.Length > 0 OrElse
-            strAutoSavedDataFilePaths.Length > 0) AndAlso (bOpenFromMenu OrElse
+            strAutoSavedDataFilePaths.Length > 0) AndAlso
             MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
                           "Would you like to see auto recovery options?",
-                          MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes) Then
+                          MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
 
             dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
             dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
@@ -511,9 +511,101 @@ Private Sub PromptAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, 
         '---------------------------------------
 
     End Sub
-    
     Private Sub mnuToolsRestoreBackup_Click(sender As Object, e As EventArgs) Handles mnuToolsRestoreBackup.Click
-        ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
+        Dim strRScripts As String = ""
+        Dim strDataFilePath As String = ""
+        dlgRestoreBackup.ShowDialog()
+        PromptRestoreData(strRScripts, strDataFilePath)
+
+        'if no script recovered then use the default R set up script
+        If String.IsNullOrEmpty(strRScripts) Then
+            strRScripts = "# Initialising R (e.g Loading R packages)" & Environment.NewLine & clsRLink.GetRSetupScript()
+        End If
+
+        'if data file recovered then add it as part of the initial R set up script
+        If Not String.IsNullOrEmpty(strDataFilePath) Then
+            strRScripts = strRScripts & Environment.NewLine &
+                        "# Importing auto recovered data" & Environment.NewLine &
+                        clsRLink.GetImportRDSRScript(strDataFilePath, False)
+        End If
+
+
+        'execute the R-Instat set up R scripts
+        For Each strLine As String In strRScripts.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            clsRLink.RunScript(strScript:=strLine.Trim(), bSeparateThread:=True, bSilent:=True)
+        Next
+
+        'as of 16/05/2023. clsDataBook depends on clsRLink.bInstatObjectExists property
+        'to check if R object has been set up at R level.
+
+        'grids are only updated when clsRLink.bInstatObjectExists = True
+        If clsRLink.RunInternalScriptGetValue(strScript:="exists('" & clsRLink.strInstatDataObject & "')",
+                                              bSeparateThread:=True, bSilent:=True).AsCharacter(0) = "TRUE" Then
+            'set R-Instat R object as exists if it has been set up in R level and refresh the grids
+            'refreshing grids internally updates the .Net databook object as well.
+            clsRLink.bInstatObjectExists = True
+            UpdateAllGrids()
+        End If
+    End Sub
+
+    Private Sub PromptRestoreData(ByRef strScript As String, ByRef strDataFilePath As String)
+
+        'if there is  another R-Instat process in the machine then no need to check for autorecovery files
+        If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
+            Return
+        End If
+        'this is the copy of the original code used for PromptAndSetAutoRecoveredPrevSessionData function
+        Dim strAutoSavedLogFilePaths() As String = {}
+        Dim strAutoSavedInternalLogFilePaths() As String = {}
+        Dim strAutoSavedDataFilePaths() As String = {}
+
+        If (Directory.Exists(strAutoSaveLogFolderPath)) Then
+            strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
+        End If
+        If Directory.Exists(strAutoSaveDataFolderPath) Then
+            strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
+        End If
+        If (Directory.Exists(strAutoSaveInternalLogFolderPath)) Then
+            strAutoSavedInternalLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveInternalLogFolderPath).ToArray
+        End If
+
+        '---------------------------------------
+        'prompt user for recovery selection
+        If (strAutoSavedLogFilePaths.Length > 0 OrElse
+            strAutoSavedDataFilePaths.Length > 0) Then
+
+
+            dlgRestoreBackup.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
+            dlgRestoreBackup.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
+            dlgRestoreBackup.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
+
+
+            'todo. the dialog design is meant to only return just one option; script, data file path or new session.
+            'refactor the dialog to enforce the design
+
+            'get the R script from read file if selected by the user
+            strScript = dlgRestoreBackup.GetScript()
+            'get the data file path if selected by the user
+            strDataFilePath = dlgRestoreBackup.GetDataFilePath()
+        End If
+        '---------------------------------------
+
+        '---------------------------------------
+
+        If strAutoSavedInternalLogFilePaths.Length > 0 Then
+            Try
+                For Each strFilePath As String In strAutoSavedInternalLogFilePaths
+                    'debug log is created when checking r version. 
+                    'so always delete the previous session debug file only
+                    If strFilePath <> clsRLink.strAutoSaveDebugLogFilePath Then
+                        File.Delete(strFilePath)
+                    End If
+                Next
+            Catch ex As Exception
+                MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
+            End Try
+        End If
+
     End Sub
 
     ''' <summary>
