@@ -1504,7 +1504,9 @@
     <Compile Include="sdgMerge.Designer.vb">
       <DependentUpon>sdgMerge.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgMerge.vb" />
+    <Compile Include="sdgMerge.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgOneVarCompareModels.Designer.vb">
       <DependentUpon>sdgOneVarCompareModels.vb</DependentUpon>
     </Compile>

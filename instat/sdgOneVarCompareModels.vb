@@ -22,7 +22,6 @@ Public Class sdgOneVarCompareModels
     Private clsRSyntax As RSyntax
 
     Private Sub sdgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
@@ -202,17 +201,6 @@ Public Class sdgOneVarCompareModels
         Else
             clsRSyntax.RemoveFromAfterCodes(clsChisqbreaksOperator)
         End If
-    End Sub
-
-    Private Sub SetHelpOptions()
-        Select Case dlgOneVariableGraph.enumOnevariableMode
-            Case dlgOneVariableGraph.OnevariableMode.Prepare
-                ucrSubBase.iHelpTopicID = 187
-            Case dlgOneVariableGraph.OnevariableMode.Describe
-                ucrSubBase.iHelpTopicID = 170
-            Case dlgOneVariableGraph.OnevariableMode.Climatic
-                ucrSubBase.iHelpTopicID = 623
-        End Select
     End Sub
 End Class
 

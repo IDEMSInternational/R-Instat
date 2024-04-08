@@ -17,7 +17,8 @@
 Imports System.ComponentModel
 Imports instat.Translations
 
-Private bControlsInitialised As Boolean = False
+Public Class sdgMerge
+    Private bControlsInitialised As Boolean = False
     Private clsByList As New RFunction
     Private clsMerge As RFunction
 
@@ -94,11 +95,11 @@ Private bControlsInitialised As Boolean = False
     End Sub
 
     Private Sub SetHelpOptions()
-        Select Case enumsdgMergeMode
-            Case sdgMergeMode.Prepare
-                ucrSubBase.iHelpTopicID = 548
-            Case sdgMergeMode.Climatic
-                ucrSubBase.iHelpTopicID = 343
+        Select Case dlgMerge.enumMergeMode
+            Case dlgMerge.MergeMode.Prepare
+                ucrSubBase.iHelpTopicID = 51
+            Case dlgMerge.MergeMode.Climatic
+                ucrSubBase.iHelpTopicID = 624
         End Select
     End Sub
 
