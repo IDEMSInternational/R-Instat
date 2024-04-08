@@ -1148,6 +1148,7 @@ Public Class dlgEndOfRainsSeason
             clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndSeasonCombinationCalc)
             clsFirstOrLastFunction = clsFirstDoyFunction
         End If
+        Evaporation()
     End Sub
 
     Private Sub ucrChkEndofRainsDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsDoy.ControlValueChanged
