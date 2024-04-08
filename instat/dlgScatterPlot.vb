@@ -783,10 +783,6 @@ Public Class dlgScatterPlot
         SetPipeAssignTo()
     End Sub
 
-    Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore)
-
-    End Sub
-
     Private Sub AddRemoveGroupAesVar()
         clsGroupAesFuction.RemoveParameterByName("group")
         clsGroupAesVarFuction.RemoveParameterByName("group")

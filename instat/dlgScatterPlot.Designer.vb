@@ -229,27 +229,26 @@ Partial Class dlgScatterPlot
         'lblLegend
         '
         Me.lblLegend.AutoSize = True
-        Me.lblLegend.Location = New System.Drawing.Point(120, 52)
+        Me.lblLegend.Location = New System.Drawing.Point(253, 50)
         Me.lblLegend.Name = "lblLegend"
-        Me.lblLegend.Size = New System.Drawing.Size(40, 13)
+        Me.lblLegend.Size = New System.Drawing.Size(10, 13)
         Me.lblLegend.TabIndex = 36
-        Me.lblLegend.Text = "Colour:"
+        Me.lblLegend.Text = " "
         '
         'lblPointsize
         '
         Me.lblPointsize.AutoSize = True
         Me.lblPointsize.Location = New System.Drawing.Point(120, 21)
         Me.lblPointsize.Name = "lblPointsize"
-        Me.lblPointsize.Size = New System.Drawing.Size(30, 13)
+        Me.lblPointsize.Size = New System.Drawing.Size(0, 13)
         Me.lblPointsize.TabIndex = 33
-        Me.lblPointsize.Text = "Size:"
         '
         'ucrNudPointsize
         '
         Me.ucrNudPointsize.AutoSize = True
         Me.ucrNudPointsize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPointsize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPointsize.Location = New System.Drawing.Point(161, 16)
+        Me.ucrNudPointsize.Location = New System.Drawing.Point(180, 16)
         Me.ucrNudPointsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPointsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPointsize.Name = "ucrNudPointsize"
@@ -261,7 +260,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrChkColour.AutoSize = True
         Me.ucrChkColour.Checked = False
-        Me.ucrChkColour.Location = New System.Drawing.Point(63, 51)
+        Me.ucrChkColour.Location = New System.Drawing.Point(118, 48)
         Me.ucrChkColour.Name = "ucrChkColour"
         Me.ucrChkColour.Size = New System.Drawing.Size(61, 23)
         Me.ucrChkColour.TabIndex = 84
@@ -270,7 +269,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrChkPosition.AutoSize = True
         Me.ucrChkPosition.Checked = False
-        Me.ucrChkPosition.Location = New System.Drawing.Point(230, 51)
+        Me.ucrChkPosition.Location = New System.Drawing.Point(271, 48)
         Me.ucrChkPosition.Name = "ucrChkPosition"
         Me.ucrChkPosition.Size = New System.Drawing.Size(65, 23)
         Me.ucrChkPosition.TabIndex = 83
@@ -279,7 +278,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrChkSize.AutoSize = True
         Me.ucrChkSize.Checked = False
-        Me.ucrChkSize.Location = New System.Drawing.Point(63, 19)
+        Me.ucrChkSize.Location = New System.Drawing.Point(118, 16)
         Me.ucrChkSize.Name = "ucrChkSize"
         Me.ucrChkSize.Size = New System.Drawing.Size(56, 23)
         Me.ucrChkSize.TabIndex = 82
@@ -288,7 +287,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrChkShape.AutoSize = True
         Me.ucrChkShape.Checked = False
-        Me.ucrChkShape.Location = New System.Drawing.Point(230, 20)
+        Me.ucrChkShape.Location = New System.Drawing.Point(271, 16)
         Me.ucrChkShape.Name = "ucrChkShape"
         Me.ucrChkShape.Size = New System.Drawing.Size(59, 23)
         Me.ucrChkShape.TabIndex = 81
@@ -299,9 +298,9 @@ Partial Class dlgScatterPlot
         Me.ucrInputPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPosition.GetSetSelectedIndex = -1
         Me.ucrInputPosition.IsReadOnly = False
-        Me.ucrInputPosition.Location = New System.Drawing.Point(344, 50)
+        Me.ucrInputPosition.Location = New System.Drawing.Point(341, 46)
         Me.ucrInputPosition.Name = "ucrInputPosition"
-        Me.ucrInputPosition.Size = New System.Drawing.Size(95, 21)
+        Me.ucrInputPosition.Size = New System.Drawing.Size(96, 24)
         Me.ucrInputPosition.TabIndex = 39
         '
         'lblPosition
@@ -309,9 +308,9 @@ Partial Class dlgScatterPlot
         Me.lblPosition.AutoSize = True
         Me.lblPosition.Location = New System.Drawing.Point(295, 53)
         Me.lblPosition.Name = "lblPosition"
-        Me.lblPosition.Size = New System.Drawing.Size(47, 13)
+        Me.lblPosition.Size = New System.Drawing.Size(10, 13)
         Me.lblPosition.TabIndex = 38
-        Me.lblPosition.Text = "Position:"
+        Me.lblPosition.Text = " "
         '
         'ucrInputLegend
         '
@@ -319,9 +318,9 @@ Partial Class dlgScatterPlot
         Me.ucrInputLegend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegend.GetSetSelectedIndex = -1
         Me.ucrInputLegend.IsReadOnly = False
-        Me.ucrInputLegend.Location = New System.Drawing.Point(161, 50)
+        Me.ucrInputLegend.Location = New System.Drawing.Point(180, 46)
         Me.ucrInputLegend.Name = "ucrInputLegend"
-        Me.ucrInputLegend.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputLegend.Size = New System.Drawing.Size(61, 22)
         Me.ucrInputLegend.TabIndex = 37
         '
         'ucrInputShape
@@ -330,7 +329,7 @@ Partial Class dlgScatterPlot
         Me.ucrInputShape.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputShape.GetSetSelectedIndex = -1
         Me.ucrInputShape.IsReadOnly = False
-        Me.ucrInputShape.Location = New System.Drawing.Point(343, 16)
+        Me.ucrInputShape.Location = New System.Drawing.Point(341, 15)
         Me.ucrInputShape.Name = "ucrInputShape"
         Me.ucrInputShape.Size = New System.Drawing.Size(96, 21)
         Me.ucrInputShape.TabIndex = 35
@@ -340,14 +339,13 @@ Partial Class dlgScatterPlot
         Me.lblShape.AutoSize = True
         Me.lblShape.Location = New System.Drawing.Point(295, 21)
         Me.lblShape.Name = "lblShape"
-        Me.lblShape.Size = New System.Drawing.Size(41, 13)
+        Me.lblShape.Size = New System.Drawing.Size(0, 13)
         Me.lblShape.TabIndex = 31
-        Me.lblShape.Text = "Shape:"
         '
         'rdoCount
         '
         Me.rdoCount.AutoSize = True
-        Me.rdoCount.Location = New System.Drawing.Point(11, 49)
+        Me.rdoCount.Location = New System.Drawing.Point(10, 48)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(53, 17)
         Me.rdoCount.TabIndex = 30
@@ -369,7 +367,7 @@ Partial Class dlgScatterPlot
         'lblHeith
         '
         Me.lblHeith.AutoSize = True
-        Me.lblHeith.Location = New System.Drawing.Point(189, 81)
+        Me.lblHeith.Location = New System.Drawing.Point(289, 81)
         Me.lblHeith.Name = "lblHeith"
         Me.lblHeith.Size = New System.Drawing.Size(41, 13)
         Me.lblHeith.TabIndex = 27
@@ -380,7 +378,7 @@ Partial Class dlgScatterPlot
         Me.ucrNudHeigth.AutoSize = True
         Me.ucrNudHeigth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHeigth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHeigth.Location = New System.Drawing.Point(236, 77)
+        Me.ucrNudHeigth.Location = New System.Drawing.Point(343, 76)
         Me.ucrNudHeigth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudHeigth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHeigth.Name = "ucrNudHeigth"
@@ -391,7 +389,7 @@ Partial Class dlgScatterPlot
         'lblWidth
         '
         Me.lblWidth.AutoSize = True
-        Me.lblWidth.Location = New System.Drawing.Point(76, 81)
+        Me.lblWidth.Location = New System.Drawing.Point(136, 81)
         Me.lblWidth.Name = "lblWidth"
         Me.lblWidth.Size = New System.Drawing.Size(38, 13)
         Me.lblWidth.TabIndex = 25
@@ -402,7 +400,7 @@ Partial Class dlgScatterPlot
         Me.ucrNudWidth.AutoSize = True
         Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWidth.Location = New System.Drawing.Point(123, 77)
+        Me.ucrNudWidth.Location = New System.Drawing.Point(180, 76)
         Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidth.Name = "ucrNudWidth"
@@ -413,7 +411,7 @@ Partial Class dlgScatterPlot
         'rdoJitter
         '
         Me.rdoJitter.AutoSize = True
-        Me.rdoJitter.Location = New System.Drawing.Point(10, 77)
+        Me.rdoJitter.Location = New System.Drawing.Point(10, 79)
         Me.rdoJitter.Name = "rdoJitter"
         Me.rdoJitter.Size = New System.Drawing.Size(47, 17)
         Me.rdoJitter.TabIndex = 24
@@ -733,7 +731,6 @@ Partial Class dlgScatterPlot
     Friend WithEvents toolStripMenuItemCountOptions As ToolStripMenuItem
     Friend WithEvents lblPointsize As Label
     Friend WithEvents ucrNudPointsize As ucrNud
-    Friend WithEvents lblShape As Label
     Friend WithEvents ucrInputShape As ucrInputComboBox
     Friend WithEvents ucrInputPosition As ucrInputComboBox
     Friend WithEvents lblPosition As Label
@@ -750,4 +747,5 @@ Partial Class dlgScatterPlot
     Friend WithEvents ucrChkShape As ucrCheck
     Friend WithEvents ucrChkColour As ucrCheck
     Friend WithEvents ucrChkPosition As ucrCheck
+    Friend WithEvents lblShape As Label
 End Class
