@@ -177,6 +177,7 @@ pkgs <-
     # Data and Code Behind the Stories and Interactives at 'FiveThirtyEight'
     "fivethirtyeight",
     "CGPfunctions",
+    "ggside",
     "collapse"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
