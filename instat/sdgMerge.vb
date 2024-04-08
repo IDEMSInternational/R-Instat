@@ -17,14 +17,7 @@
 Imports System.ComponentModel
 Imports instat.Translations
 
-Public Class sdgMerge
-    Public enumsdgMergeMode As String = sdgMergeMode.Prepare
-    Public Enum sdgMergeMode
-        Prepare
-        Climatic
-    End Enum
-
-    Private bControlsInitialised As Boolean = False
+Private bControlsInitialised As Boolean = False
     Private clsByList As New RFunction
     Private clsMerge As RFunction
 

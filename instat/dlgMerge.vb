@@ -142,19 +142,10 @@ Public Class dlgMerge
     End Sub
 
     Private Sub cmdJoinOptions_Click(sender As Object, e As EventArgs) Handles cmdJoinOptions.Click
-        If sdgMerge.enumsdgMergeMode = sdgMerge.sdgMergeMode.Climatic Then
-            sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondDataFrame.cboAvailableDataFrames.Text, clsMergeFunction, clsByListFunction, bResetSubdialog)
-            'sdgMerge.sdgMergeMode.Climatic.Showdialog()
-            bResetSubdialog = False
-            SetMergingBy()
-        ElseIf sdgMerge.enumsdgMergeMode = sdgMerge.sdgMergeMode.Prepare Then
-            sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondDataFrame.cboAvailableDataFrames.Text, clsMergeFunction, clsByListFunction, bResetSubdialog)
-            sdgMerge.enumsdgMergeMode = sdgMerge.sdgMergeMode.Prepare
-            ' sdgMerge.ShowDialog()
-            bResetSubdialog = False
-            SetMergingBy()
-        End If
-
+        sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondDataFrame.cboAvailableDataFrames.Text, clsMergeFunction, clsByListFunction, bResetSubdialog)
+        sdgMerge.ShowDialog()
+        bResetSubdialog = False
+        SetMergingBy()
     End Sub
 
     Private Sub cmdColumnOptions_Click(sender As Object, e As EventArgs) Handles cmdColumnOptions.Click
