@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.IO
-Imports RScript
+Imports RInsightF461
 
 ''' <summary>
 ''' Output element for an R script. 
@@ -85,31 +85,30 @@ Public Class clsOutputElement
         _strOutput = strOutput
     End Sub
 
-    ''' <summary>
+    ''' <summary> 
     ''' Gets formatted R Script, split into R Script Elements
     ''' </summary>
     ''' <returns></returns>
     Public ReadOnly Property FormattedRScript As List(Of clsRScriptElement)
+
+        'todo.
+        'this function may end up being called multiple times. For long scripts initialising clsRScript And getting tokens takes  lot of time. You can test this effect by pasting new data frame that has many columns.
+        'should the operation of getting tokens be done just once then stored to be reused f need be?
         Get
             Dim _lstRScriptElements As New List(Of clsRScriptElement)
             Try
-                Dim rScript As New clsRScript(_strScript)
-                Dim lstTokens As List(Of clsRToken) = rScript.GetLstTokens(rScript.GetLstLexemes(_strScript)) 'rScript.lstTokens
+                Dim lstTokens As List(Of RToken) = New RTokenList(_strScript).TokensFlat
                 If lstTokens IsNot Nothing Then
                     For Each rToken In lstTokens
                         _lstRScriptElements.Add(New clsRScriptElement With
                     {
-                        .Text = rToken.strTxt,
-                        .Type = rToken.enuToken
+                        .Text = rToken.Lexeme.Text,
+                        .Type = rToken.TokenType
                     })
                     Next
                 End If
             Catch ex As Exception
-                MessageBox.Show("Unable to parse the following R Script: '" & _strScript & "'." &
-                            Environment.NewLine & ex.Message,
-                            "Developer Error",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error)
+                Return New List(Of clsRScriptElement)
             End Try
             Return _lstRScriptElements
         End Get

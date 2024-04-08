@@ -79,6 +79,7 @@ Public Class dlgOptions
         ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
         ucrChkAutoSave.SetText("Auto save a backup of data")
         ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
+        ucrChkReminder.SetText("Remind me later when R-Instat new version available")
         ucrChkAutoSave.AddToLinkedControls(ucrNudAutoSaveMinutes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudAutoSaveMinutes.SetLinkedDisplayControl(lblMinutes)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
@@ -121,6 +122,7 @@ Public Class dlgOptions
         ucrChkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
         ucrChkShowDataonGrid.Checked = frmMain.clsInstatOptions.bChangeDataFrame
         ucrChkShowWaitDialog.Checked = frmMain.clsInstatOptions.bShowWaitDialog
+        ucrChkReminder.Checked = frmMain.clsInstatOptions.bRemindLaterOption
         ucrNudWaitSeconds.Value = frmMain.clsInstatOptions.iWaitTimeDelaySeconds
         ucrInputDatabaseName.SetName(frmMain.clsInstatOptions.strClimsoftDatabaseName)
         ucrInputHost.SetName(frmMain.clsInstatOptions.strClimsoftHost)
@@ -184,6 +186,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetSignifStars(ucrChkShowSignifStars.Checked)
         frmMain.clsInstatOptions.SetChangeDataFrame(ucrChkShowDataonGrid.Checked)
         frmMain.clsInstatOptions.SetShowWaitDialog(ucrChkShowWaitDialog.Checked)
+        frmMain.clsInstatOptions.SetRemindLaterOption(ucrChkReminder.Checked)
         frmMain.clsInstatOptions.SetWaitTimeDelaySeconds(ucrNudWaitSeconds.Value)
         frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrInputDatabaseName.GetText())
         frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
@@ -357,7 +360,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged, ucrChkReminder.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 

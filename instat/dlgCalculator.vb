@@ -119,14 +119,20 @@ Public Class dlgCalculator
     Private Sub SaveResults()
         If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso ucrCalc.ucrSaveResultInto.IsComplete Then
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrCalc.ucrSaveResultInto.GetText() & Chr(34), iPosition:=1)
-            ucrBase.clsRsyntax.SetAssignTo(ucrCalc.ucrSaveResultInto.GetText(), strTempColumn:=ucrCalc.ucrSaveResultInto.GetText(), strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix, bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames, bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore, bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
+            ucrBase.clsRsyntax.SetAssignTo(ucrCalc.ucrSaveResultInto.GetText(), strTempColumn:=ucrCalc.ucrSaveResultInto.GetText(),
+                                           strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
+                                           bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix,
+                                           bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames,
+                                           bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
+                                           bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength,
+                                           strAdjacentColumn:=ucrCalc.ucrSaveResultInto.AdjacentColumnName)
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 1)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
             ucrBase.clsRsyntax.RemoveAssignTo()
-            ucrBase.clsRsyntax.iCallType = 1
+            ucrBase.clsRsyntax.iCallType = 5
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
 
@@ -192,10 +198,13 @@ Public Class dlgCalculator
                 ucrBase.iHelpTopicID = 598
             Case "Integer"
                 Me.Width = iBasicWidth * 1.5
+                ucrBase.iHelpTopicID = 463
             Case "Complex"
                 Me.Width = iBasicWidth * 1.5
+                ucrBase.iHelpTopicID = 455
             Case "List"
                 Me.Width = iBasicWidth * 1.5
+                ucrBase.iHelpTopicID = 439
             Case Else
                 Me.Width = iBasicWidth
         End Select

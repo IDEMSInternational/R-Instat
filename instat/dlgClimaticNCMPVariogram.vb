@@ -39,6 +39,7 @@ Public Class dlgClimaticNCMPVariogram
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID=628
         ucrSelectorVariogram.SetParameter(New RParameter("a2", 0))
         ucrSelectorVariogram.SetParameterIsrfunction()
         ucrSelectorVariogram.ucrAvailableDataFrames.lblDataFrame.Text = "Indices Data Frame:"

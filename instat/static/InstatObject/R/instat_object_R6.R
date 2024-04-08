@@ -365,15 +365,15 @@ DataBook$set("public", "get_data_frame", function(data_name, convert_to_characte
 }
 )
 
-DataBook$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) { 
+DataBook$set("public", "get_variables_metadata", function(data_name, data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE, use_column_selection = TRUE) { 
   if(missing(data_name)) {
     retlist <- list()
     for (curr_obj in private$.data_sheets) {
-      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes)
+      retlist[[curr_obj$get_metadata(data_name_label)]] = curr_obj$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes, use_column_selection = use_column_selection)
     }
     return(retlist)
   }
-  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes))
+  else return(self$get_data_objects(data_name)$get_variables_metadata(data_type = data_type, convert_to_character = convert_to_character, property = property, column = column, error_if_no_property = error_if_no_property, direct_from_attributes = direct_from_attributes, use_column_selection = use_column_selection))
 } 
 )
 
@@ -652,7 +652,7 @@ DataBook$set("public", "get_object_data", function(data_name = NULL, object_name
   }
   return(out)
 }
-)  
+) 
 
 #returns object data from the object_names character vector
 DataBook$set("public", "get_objects_data", function(data_name = NULL, object_names = NULL, as_files = FALSE) {
@@ -783,8 +783,7 @@ DataBook$set("public", "get_current_filter", function(data_name) {
 DataBook$set("public", "get_filter_row_names", function(data_name, filter_name) {
   row_names <- row.names(self$get_data_frame(data_name, convert_to_character = FALSE, stack_data = FALSE,
                                              include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = filter_name, 
-                                             use_column_selection = TRUE, column_selection_name = "", remove_attr = FALSE, retain_attr = FALSE, 
-                                             drop_unused_filter_levels = FALSE))
+                                             remove_attr = FALSE, retain_attr = FALSE, drop_unused_filter_levels = FALSE))
   
   return(row_names)
 }
@@ -851,6 +850,11 @@ DataBook$set("public", "get_column_selection", function(data_name, name) {
 
 DataBook$set("public", "get_column_selection_column_names", function(data_name, filter_name) {
   return(self$get_data_objects(data_name)$get_filter_as_logical(filter_name))
+}
+)
+
+DataBook$set("public", "get_column_selected_column_names", function(data_name, column_selection_name = "") {
+  return(self$get_data_objects(data_name)$get_column_selected_column_names(column_selection_name))
 }
 )
 
@@ -2158,14 +2162,14 @@ DataBook$set("public", "export_workspace", function(data_names, file, include_gr
   for(temp_name in data_names) {
     e[[temp_name]] <- self$get_data_frame(temp_name, use_current_filter = FALSE)
     if(include_graphs) {
-      graphs <- self$get_graphs(temp_name)
+      graphs <- self$get_objects(data_name = temp_name, object_type_label = "graph")
       graph_names <- names(graphs)
       for(i in seq_along(graphs)) {
         e[[paste(temp_name, graph_names[i], sep = "_")]] <- graphs[[i]]
       }
     }
     if(include_models) {
-      models <- self$get_models(temp_name)
+      models <- self$get_objects(data_name = temp_name, object_type_label = "model")
       model_names <- names(models)
       for(i in seq_along(models)) {
         e[[paste(temp_name, model_names[i], sep = "_")]] <- models[[i]]
@@ -2890,6 +2894,7 @@ DataBook$set("public", "save_data_entry_data", function(data_name, new_data, row
     if(!("column" %in% names(com))){
       com[["column"]] <- ""
     }
+    if(length(comments_list) > 0) cat("Comments added:", length(comments_list), "\n")
     self$add_new_comment(data_name = data_name, row = com$row, column = com$column, comment = com$comment)
   }
     }
@@ -2970,13 +2975,19 @@ DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, colum
     if (!is.null(width) && wrap) {
       column_data <- stringr::str_wrap(column_data, width = width)
     }
-    
+    curr_data <- self$get_data_frame(data_name=data_name, retain_attr = TRUE)
     # Convert back to the original data type if necessary
     if (original_type != class(column_data)) {
       if (original_type %in% c("factor", "ordered_factor")){
         column_data <- make_factor(column_data)
+      }else if(original_type == "list"){
+        result <- curr_data %>%
+          dplyr::mutate(list_column = lapply(column_data, convert_to_list))
+        column_data <- result$list_column
       }else{ column_data <- as(column_data, original_type) }
     }
+    # retain the attributes of the column after wrapping or unwrapping
+    attributes(column_data) <- attributes(curr_data[[col_name]])
     self$add_columns_to_data(data_name=data_name, col_name=col_name, col_data=column_data, before=FALSE)
   }
 }

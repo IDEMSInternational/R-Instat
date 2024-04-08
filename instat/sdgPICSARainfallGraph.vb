@@ -97,6 +97,10 @@ Public Class sdgPICSARainfallGraph
     Private clsAsNumeric As New RFunction
 
     Private clsGeomRug As New RFunction
+
+    Private bSlope As Boolean = False
+    Private bLine As Boolean = False
+
     Private Sub sdgPICSARainfallGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         OpeningMode()
         autoTranslate(Me)
@@ -466,8 +470,8 @@ Public Class sdgPICSARainfallGraph
 
         ucrInputLabelXReg.SetDropDownStyleAsNonEditable()
         ucrInputLabelXReg.SetParameter(New RParameter("label.x.npc"))
-        dctLegendXPosition.Add("Middle", Chr(34) & "middle" & Chr(34))
         dctLegendXPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendXPosition.Add("Middle", Chr(34) & "middle" & Chr(34))
         dctLegendXPosition.Add("Centre", Chr(34) & "centre" & Chr(34))
         dctLegendXPosition.Add("Center", Chr(34) & "center" & Chr(34))
         dctLegendXPosition.Add("Right", 0.7)
@@ -476,18 +480,18 @@ Public Class sdgPICSARainfallGraph
 
         ucrInputLabelYReg.SetDropDownStyleAsNonEditable()
         ucrInputLabelYReg.SetParameter(New RParameter("label.y.npc"))
+        dctLegendYPosition.Add("Top", Chr(34) & "top" & Chr(34))
         dctLegendYPosition.Add("Middle", Chr(34) & "middle" & Chr(34))
         dctLegendYPosition.Add("Centre", Chr(34) & "centre" & Chr(34))
         dctLegendYPosition.Add("Center", Chr(34) & "center" & Chr(34))
-        dctLegendYPosition.Add("Top", Chr(34) & "top" & Chr(34))
         dctLegendYPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
         ucrInputLabelYReg.SetItems(dctLegendYPosition)
         ucrInputLabelYReg.SetLinkedDisplayControl(lblLabelYReg)
 
         ucrInputLabelXCor.SetDropDownStyleAsNonEditable()
         ucrInputLabelXCor.SetParameter(New RParameter("label.x.npc"))
-        dctLegendXPositionSig.Add("Middle", Chr(34) & "middle" & Chr(34))
         dctLegendXPositionSig.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendXPositionSig.Add("Middle", Chr(34) & "middle" & Chr(34))
         dctLegendXPositionSig.Add("Centre", Chr(34) & "centre" & Chr(34))
         dctLegendXPositionSig.Add("Center", Chr(34) & "center" & Chr(34))
         dctLegendXPositionSig.Add("Right", 0.7)
@@ -496,10 +500,10 @@ Public Class sdgPICSARainfallGraph
 
         ucrInputLabelYCor.SetDropDownStyleAsNonEditable()
         ucrInputLabelYCor.SetParameter(New RParameter("label.y.npc"))
+        dctLegendYPositionSig.Add("Top", Chr(34) & "top" & Chr(34))
         dctLegendYPositionSig.Add("Middle", Chr(34) & "middle" & Chr(34))
         dctLegendYPositionSig.Add("Centre", Chr(34) & "centre" & Chr(34))
         dctLegendYPositionSig.Add("Center", Chr(34) & "center" & Chr(34))
-        dctLegendYPositionSig.Add("Top", Chr(34) & "top" & Chr(34))
         dctLegendYPositionSig.Add("Bottom", Chr(34) & "bottom" & Chr(34))
         ucrInputLabelYCor.SetItems(dctLegendYPositionSig)
         ucrInputLabelYCor.SetLinkedDisplayControl(lblLabelYCor)
@@ -1379,20 +1383,31 @@ Public Class sdgPICSARainfallGraph
     Private Sub OpeningMode()
         Dim tbPageSlope As TabPage = tbSlope
         Dim tbPageLines As TabPage = tpLines
-        tbPICSA.TabPages.Remove(tbSlope)
-        tbPICSA.TabPages.Remove(tpLines)
 
         Select Case dlgPICSARainfall.enumPICSAMode
             Case dlgPICSARainfall.PICSAMode.Temperature
-                Me.Text = "PICSA Temperature Graphs"
-                tbPICSA.TabPages.Add(tbPageSlope)
+                tbPICSA.TabPages.Remove(tpLines)
+                If Not bSlope AndAlso Not tbPICSA.TabPages.Contains(tbPageSlope) Then
+                    tbPICSA.TabPages.Add(tbPageSlope)
+                    bSlope = True
+                    bLine = False
+                End If
             Case dlgPICSARainfall.PICSAMode.Rainfall
-                Me.Text = "PICSA Rainfall Graphs"
-                tbPICSA.TabPages.Add(tbPageLines)
+                tbPICSA.TabPages.Remove(tbSlope)
+                If Not bLine AndAlso Not tbPICSA.TabPages.Contains(tbPageLines) Then
+                    tbPICSA.TabPages.Add(tbPageLines)
+                    bLine = True
+                    bSlope = False
+                End If
             Case dlgPICSARainfall.PICSAMode.General
-                Me.Text = "PICSA General Graphs"
-                tbPICSA.TabPages.Add(tbPageLines)
-                tbPICSA.TabPages.Add(tbPageSlope)
+                tbPICSA.TabPages.Remove(tpLines)
+                tbPICSA.TabPages.Remove(tbSlope)
+                If Not tbPICSA.TabPages.Contains(tbPageSlope) Then
+                    tbPICSA.TabPages.Add(tbPageLines)
+                End If
+                If Not tbPICSA.TabPages.Contains(tbPageSlope) Then
+                    tbPICSA.TabPages.Add(tbPageSlope)
+                End If
         End Select
     End Sub
 

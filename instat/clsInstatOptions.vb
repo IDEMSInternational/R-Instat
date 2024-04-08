@@ -52,11 +52,13 @@ Imports RDotNet
     Public strClimsoftPort As String
     Public strClimsoftUsername As String
     Public iMaxOutputsHeight As Nullable(Of Integer)
+    Public bRemindLaterOption As Nullable(Of Boolean)
 
     Public Sub New(Optional bSetOptions As Boolean = True)
         'TODO Is this sensible to do in constructor?
         bIncludeRDefaultParameters = clsInstatOptionsDefaults.DEFAULTbIncludeRDefaultParameters
         bCommandsinOutput = clsInstatOptionsDefaults.DEFAULTbCommandsinOutput
+        bRemindLaterOption = clsInstatOptionsDefaults.DEFAULTbRemindLaterOption
         bIncludeCommentDefault = clsInstatOptionsDefaults.DEFAULTbIncludeCommentDefault
         bShowClimaticMenu = clsInstatOptionsDefaults.DEFAULTbShowClimaticMenu
         bShowStructuredMenu = clsInstatOptionsDefaults.DEFAULTbShowStructuredMenu
@@ -146,6 +148,12 @@ Imports RDotNet
             SetCommandInOutpt(bCommandsinOutput)
         Else
             SetCommandInOutpt(clsInstatOptionsDefaults.DEFAULTbCommandsinOutput)
+        End If
+
+        If bRemindLaterOption.HasValue Then
+            SetRemindLaterOption(bRemindLaterOption)
+        Else
+            SetRemindLaterOption(clsInstatOptionsDefaults.DEFAULTbRemindLaterOption)
         End If
 
         If strComment Is Nothing Then
@@ -315,6 +323,20 @@ Imports RDotNet
             clsOptionsFunction.AddParameter("dplyr.summarise.inform", "FALSE")
         End If
 
+        'add "R.commands.displayed.in.the.output.window" as options parameter of its been changed
+        If frmMain.mnuShowRCommand.Checked Then
+            clsOptionsFunction.AddParameter("R.commands.displayed.in.the.output.window", "TRUE")
+        Else
+            clsOptionsFunction.AddParameter("R.commands.displayed.in.the.output.window", "FALSE")
+        End If
+
+        'add "Comments.from.dialogs.displayed.in.the.output.window" as options parameter of its been changed
+        If frmMain.mnuIncludeComments.Checked Then
+            clsOptionsFunction.AddParameter("Comments.from.dialogs.displayed.in.the.output.window", "TRUE")
+        Else
+            clsOptionsFunction.AddParameter("Comments.from.dialogs.displayed.in.the.output.window", "FALSE")
+        End If
+
         frmMain.clsRLink.RunScript(clsOptionsFunction.ToScript(),
                                    strComment:="Setting display options (e.g Number of significant digits)")
 
@@ -362,7 +384,6 @@ Imports RDotNet
         OutputFont.RBracketFont = fntNew
         OutputFont.RSeparatorFont = fntNew
         OutputFont.REndStatementFont = fntNew
-        OutputFont.REndScriptFont = fntNew
         OutputFont.RNewLineFont = fntNew
         OutputFont.ROperatorUnaryLeftFont = fntNew
         OutputFont.ROperatorUnaryRightFont = fntNew
@@ -379,7 +400,6 @@ Imports RDotNet
         OutputFont.RBracketColour = clrNew
         OutputFont.RSeparatorColour = clrNew
         OutputFont.REndStatementColour = clrNew
-        OutputFont.REndScriptColour = clrNew
         OutputFont.RNewLineColour = clrNew
         OutputFont.ROperatorUnaryLeftColour = clrNew
         OutputFont.ROperatorUnaryRightColour = clrNew
@@ -447,6 +467,10 @@ Imports RDotNet
         strGraphDisplayOption = strGraphOption
         'setting the string for graphs display
         frmMain.clsRLink.strGraphDisplayOption = strGraphDisplayOption
+    End Sub
+
+    Public Sub SetRemindLaterOption(bRemind As Boolean)
+        bRemindLaterOption = bRemind
     End Sub
 
     Public Sub SetCommandInOutpt(bCommand As Boolean)
