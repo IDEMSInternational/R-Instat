@@ -188,7 +188,7 @@ Public Class frmMain
 
         '---------------------------------------
         'execute R-Instat R set up scripts to set up R data book
-        ExecuteSetupRScriptsAndSetupRLinkAndDatabook(bOpenFromMenu:=False)
+        'ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         'execute R global options used by R-Instat R data book
         clsInstatOptions.ExecuteRGlobalOptions()
         '---------------------------------------
@@ -389,12 +389,12 @@ Public Class frmMain
         End If
     End Function
 
-    Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook(Optional bOpenFromMenu = True)
+    Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strRScripts As String = ""
         Dim strDataFilePath As String = ""
 
         'could either be a file path or a script
-        PromptAndSetAutoRecoveredPrevSessionData(strRScripts, strDataFilePath, bOpenFromMenu:=bOpenFromMenu)
+        PromptAndSetAutoRecoveredPrevSessionData(strRScripts, strDataFilePath)
 
         'if no script recovered then use the default R set up script
         If String.IsNullOrEmpty(strRScripts) Then
@@ -428,7 +428,7 @@ Public Class frmMain
 
     End Sub
 
-Private Sub PromptAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, ByRef strDataFilePath As String, Optional bOpenFromMenu As Boolean = False)
+Private Sub PromptAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, ByRef strDataFilePath As String)
 
         'if there is  another R-Instat process in the machine then no need to check for autorecovery files
         If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
@@ -455,11 +455,8 @@ Private Sub PromptAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, 
 
         '---------------------------------------
         'prompt user for recovery selection
-        If (strAutoSavedLogFilePaths.Length > 0 OrElse
-            strAutoSavedDataFilePaths.Length > 0) AndAlso (bOpenFromMenu OrElse
-            MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
-                          "Would you like to see auto recovery options?",
-                          MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes) Then
+        If strAutoSavedLogFilePaths.Length > 0 OrElse
+            strAutoSavedDataFilePaths.Length > 0 Then
 
             dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
             dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
