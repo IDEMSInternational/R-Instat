@@ -165,15 +165,15 @@ Public Class dlgRestoreBackup
     Private Sub cmdRunLog_Click(sender As Object, e As EventArgs) Handles cmdRunLog.Click
         SaveFiles()
         If File.Exists(strAutoSavedLogFilePaths(0)) Then
-                Try
-                    strScript = File.ReadAllText(strAutoSavedLogFilePaths(0))
-                Catch ex As Exception
-                    MsgBox("Could not read log file." & Environment.NewLine & ex.Message, "Cannot read file")
-                    strScript = ""
-                End Try
-            End If
-            bUserClose = False
-            Close()
+            Try
+                strScript = File.ReadAllText(strAutoSavedLogFilePaths(0))
+            Catch ex As Exception
+                MsgBox("Could not read log file." & Environment.NewLine & ex.Message, "Cannot read file")
+                strScript = ""
+            End Try
+        End If
+        bUserClose = False
+        Close()
 
     End Sub
 
@@ -190,23 +190,8 @@ Public Class dlgRestoreBackup
         Close()
     End Sub
 
-    Private Sub dlgRestoreBackup_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        If bUserClose Then
-            e.Cancel = True
-        End If
-        DeleteTempFiles()
+    Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles ucrBase.ClickClose
+        Close()
     End Sub
 
-    Private Sub DeleteTempFiles()
-        ' No longer needed as now done after closing
-        'If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedInternalLogFilePaths(0)) Then
-        '    File.Delete(strAutoSavedInternalLogFilePaths(0))
-        'End If
-        'If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedLogFilePaths(0)) Then
-        '    File.Delete(strAutoSavedLogFilePaths(0))
-        'End If
-        'If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedDataFilePaths(0)) Then
-        '    File.Delete(strAutoSavedDataFilePaths(0))
-        'End If
-    End Sub
 End Class
