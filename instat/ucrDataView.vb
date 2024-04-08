@@ -659,7 +659,6 @@ Public Class ucrDataView
             Dim iNonNumericValues As Integer = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
             If iNonNumericValues = 0 Then
                 GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
-                'Continue For
             Else
                 Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.CheckHasLabels(strColumn)
                 If bCheckLabels Then
@@ -675,7 +674,7 @@ Public Class ucrDataView
                         Case DialogResult.No
                             GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
                         Case DialogResult.Cancel
-                            Exit For
+                            Continue For
                     End Select
                 Else
                     GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
