@@ -108,6 +108,8 @@ Public Class dlgClimograph
         ucrReceiverAbsolute.strSelectorHeading = "Variables"
         ucrReceiverAbsolute.SetLinkedDisplayControl(lblAbsolute)
 
+        ucrPnlClimograph.
+
         ucrSave.SetPrefix("wl_graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()

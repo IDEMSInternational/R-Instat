@@ -41,6 +41,14 @@ Partial Class dlgClimograph
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.ucrSelectorClimograph = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverYvariables = New instat.ucrReceiverMultiple()
+        Me.lblYVariables = New System.Windows.Forms.Label()
+        Me.ucrChkPoints = New instat.ucrCheck()
+        Me.ucrChkLines = New instat.ucrCheck()
+        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
+        Me.UcrReceiverMultiple2 = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverXVariable = New instat.ucrReceiverSingle()
+        Me.lblXVariable = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrReceiverAbsolute
@@ -170,7 +178,6 @@ Partial Class dlgClimograph
         '
         Me.rdoClimograph.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoClimograph.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoClimograph.Enabled = False
         Me.rdoClimograph.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoClimograph.FlatAppearance.BorderSize = 2
         Me.rdoClimograph.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
@@ -217,7 +224,7 @@ Partial Class dlgClimograph
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(12, 332)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 480)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 75
@@ -225,7 +232,7 @@ Partial Class dlgClimograph
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(12, 305)
+        Me.ucrSave.Location = New System.Drawing.Point(12, 453)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(282, 24)
@@ -265,11 +272,107 @@ Partial Class dlgClimograph
         Me.ucrSelectorClimograph.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorClimograph.TabIndex = 59
         '
+        'ucrReceiverYvariables
+        '
+        Me.ucrReceiverYvariables.AutoSize = True
+        Me.ucrReceiverYvariables.frmParent = Me
+        Me.ucrReceiverYvariables.Location = New System.Drawing.Point(267, 109)
+        Me.ucrReceiverYvariables.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYvariables.Name = "ucrReceiverYvariables"
+        Me.ucrReceiverYvariables.Selector = Nothing
+        Me.ucrReceiverYvariables.Size = New System.Drawing.Size(120, 84)
+        Me.ucrReceiverYvariables.strNcFilePath = ""
+        Me.ucrReceiverYvariables.TabIndex = 78
+        Me.ucrReceiverYvariables.ucrSelector = Nothing
+        '
+        'lblYVariables
+        '
+        Me.lblYVariables.AutoSize = True
+        Me.lblYVariables.Location = New System.Drawing.Point(267, 93)
+        Me.lblYVariables.Name = "lblYVariables"
+        Me.lblYVariables.Size = New System.Drawing.Size(69, 13)
+        Me.lblYVariables.TabIndex = 79
+        Me.lblYVariables.Text = "Y Variable(s):"
+        '
+        'ucrChkPoints
+        '
+        Me.ucrChkPoints.AutoSize = True
+        Me.ucrChkPoints.Checked = False
+        Me.ucrChkPoints.Location = New System.Drawing.Point(270, 242)
+        Me.ucrChkPoints.Name = "ucrChkPoints"
+        Me.ucrChkPoints.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkPoints.TabIndex = 80
+        '
+        'ucrChkLines
+        '
+        Me.ucrChkLines.AutoSize = True
+        Me.ucrChkLines.Checked = False
+        Me.ucrChkLines.Location = New System.Drawing.Point(270, 349)
+        Me.ucrChkLines.Name = "ucrChkLines"
+        Me.ucrChkLines.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkLines.TabIndex = 81
+        '
+        'UcrReceiverMultiple1
+        '
+        Me.UcrReceiverMultiple1.AutoSize = True
+        Me.UcrReceiverMultiple1.frmParent = Me
+        Me.UcrReceiverMultiple1.Location = New System.Drawing.Point(270, 262)
+        Me.UcrReceiverMultiple1.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
+        Me.UcrReceiverMultiple1.Selector = Nothing
+        Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(120, 84)
+        Me.UcrReceiverMultiple1.strNcFilePath = ""
+        Me.UcrReceiverMultiple1.TabIndex = 82
+        Me.UcrReceiverMultiple1.ucrSelector = Nothing
+        '
+        'UcrReceiverMultiple2
+        '
+        Me.UcrReceiverMultiple2.AutoSize = True
+        Me.UcrReceiverMultiple2.frmParent = Me
+        Me.UcrReceiverMultiple2.Location = New System.Drawing.Point(270, 369)
+        Me.UcrReceiverMultiple2.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrReceiverMultiple2.Name = "UcrReceiverMultiple2"
+        Me.UcrReceiverMultiple2.Selector = Nothing
+        Me.UcrReceiverMultiple2.Size = New System.Drawing.Size(120, 84)
+        Me.UcrReceiverMultiple2.strNcFilePath = ""
+        Me.UcrReceiverMultiple2.TabIndex = 83
+        Me.UcrReceiverMultiple2.ucrSelector = Nothing
+        '
+        'ucrReceiverXVariable
+        '
+        Me.ucrReceiverXVariable.AutoSize = True
+        Me.ucrReceiverXVariable.frmParent = Me
+        Me.ucrReceiverXVariable.Location = New System.Drawing.Point(264, 216)
+        Me.ucrReceiverXVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverXVariable.Name = "ucrReceiverXVariable"
+        Me.ucrReceiverXVariable.Selector = Nothing
+        Me.ucrReceiverXVariable.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverXVariable.strNcFilePath = ""
+        Me.ucrReceiverXVariable.TabIndex = 85
+        Me.ucrReceiverXVariable.ucrSelector = Nothing
+        '
+        'lblXVariable
+        '
+        Me.lblXVariable.AutoSize = True
+        Me.lblXVariable.Location = New System.Drawing.Point(264, 200)
+        Me.lblXVariable.Name = "lblXVariable"
+        Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
+        Me.lblXVariable.TabIndex = 84
+        Me.lblXVariable.Text = "X Variable:"
+        '
         'dlgClimograph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(477, 388)
+        Me.ClientSize = New System.Drawing.Size(477, 539)
+        Me.Controls.Add(Me.ucrReceiverXVariable)
+        Me.Controls.Add(Me.lblXVariable)
+        Me.Controls.Add(Me.UcrReceiverMultiple2)
+        Me.Controls.Add(Me.UcrReceiverMultiple1)
+        Me.Controls.Add(Me.ucrChkLines)
+        Me.Controls.Add(Me.ucrChkPoints)
+        Me.Controls.Add(Me.lblYVariables)
+        Me.Controls.Add(Me.ucrReceiverYvariables)
         Me.Controls.Add(Me.ucrReceiverAbsolute)
         Me.Controls.Add(Me.lblAbsolute)
         Me.Controls.Add(Me.ucrInputStation)
@@ -319,4 +422,12 @@ Partial Class dlgClimograph
     Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
     Friend WithEvents lblMonth As Label
     Friend WithEvents ucrSelectorClimograph As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverXVariable As ucrReceiverSingle
+    Friend WithEvents lblXVariable As Label
+    Friend WithEvents UcrReceiverMultiple2 As ucrReceiverMultiple
+    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
+    Friend WithEvents ucrChkLines As ucrCheck
+    Friend WithEvents ucrChkPoints As ucrCheck
+    Friend WithEvents lblYVariables As Label
+    Friend WithEvents ucrReceiverYvariables As ucrReceiverMultiple
 End Class
