@@ -73,6 +73,7 @@ Public Class sdgThemesSub
         dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
         ucrInputLegendPosition.SetItems(dctLegendPosition)
         ucrInputLegendPosition.SetRDefault(Chr(34) & "None" & Chr(34))
+        ucrInputLegendPosition.SetLinkedDisplayControl(lblLegendPosition)
 
         ucrNudX.SetParameter(New RParameter("x", 0, False))
         ucrNudX.SetMinMax(0, 1)
@@ -105,10 +106,19 @@ Public Class sdgThemesSub
         ucrChkDirection.AddToLinkedControls(ucrPnlDirection, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkReverse.SetText("Reverse")
-         ucrChkReverse.SetParameter(New RParameter("guides", 4))
+        ucrChkReverse.SetParameter(New RParameter("guides", 4))
         ucrChkReverse.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkReverse.SetRDefault("FALSE")
         ucrChkReverse.AddToLinkedControls(ucrPnlReverse, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkAddLegend.SetText("Include Legend")
+        ucrChkAddLegend.AddParameterPresentCondition(True, "legend", True)
+        ucrChkAddLegend.AddParameterPresentCondition(False, "legend", False)
+        ucrChkAddLegend.AddToLinkedControls(ucrChkDirection, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddLegend.AddToLinkedControls(ucrChkReverse, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddLegend.AddToLinkedControls(ucrPnlOptions, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        grpLegendPosition.Hide()
 
         bControlsInitialised = True
     End Sub
@@ -182,6 +192,7 @@ Public Class sdgThemesSub
 
         If bReset Then
             ucrChkReverse.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+            ucrChkAddLegend.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
             ucrNudX.SetRCode(clsCFunction, bReset)
             ucrNudY.SetRCode(clsCFunction, bReset)
             ucrInputLegendPosition.SetRCode(clsThemesFunction, bReset, bCloneIfNeeded:=True)
@@ -232,6 +243,10 @@ Public Class sdgThemesSub
         Else
             clsThemesFunction.RemoveParameterByName("legend.direction")
         End If
+    End Sub
+
+    Private Sub ucrChkAddLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLegend.ControlValueChanged
+        grpLegendPosition.Visible = ucrChkAddLegend.Checked
     End Sub
 End Class
 
