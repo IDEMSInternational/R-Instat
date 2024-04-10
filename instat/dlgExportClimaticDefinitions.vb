@@ -19,7 +19,10 @@ Public Class dlgExportClimaticDefinitions
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetRCode As Boolean = True
-    Private clsExportRinstatToBucketFunction, clsSummariesFunction As New RFunction
+    Private bResetSubdialog As Boolean = False
+    Public clsExportRinstatToBucketFunction, clsSummariesFunction As New RFunction
+    Public clsReforMattAnnualSummariesFunction, clsReformatCropSuccessFunction, clsReformatSeasonStartFunction, clsReformatTempSummariesFunction, clsReformatMonthlyTempSummaries As New RFunction
+
 
     Private Sub dlgExportClimaticDefinitions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -127,8 +130,34 @@ Public Class dlgExportClimaticDefinitions
     Private Sub SetDefaults()
         clsExportRinstatToBucketFunction = New RFunction
         clsSummariesFunction = New RFunction
+        clsReformatCropSuccessFunction = New RFunction
+        clsReformatMonthlyTempSummaries = New RFunction
+        clsReformatSeasonStartFunction = New RFunction
+        clsReforMattAnnualSummariesFunction = New RFunction
+        clsReformatTempSummariesFunction = New RFunction
+        bResetSubdialog = True
 
         ucrSelectorExportDefinitions.Reset()
+
+        clsReformatTempSummariesFunction.SetPackageName("epicsawrap")
+        clsReformatTempSummariesFunction.SetRCommand("reformat_temperature_summaries")
+        clsReformatTempSummariesFunction.SetAssignTo("crop_prop")
+
+        clsReforMattAnnualSummariesFunction.SetPackageName("epicsawrap")
+        clsReforMattAnnualSummariesFunction.SetRCommand("reformat_annual_summaries")
+        clsReforMattAnnualSummariesFunction.SetAssignTo("annual_rain")
+
+        clsReformatSeasonStartFunction.SetPackageName("epicsawrap")
+        clsReformatSeasonStartFunction.SetRCommand("reformat_season_start")
+        clsReformatSeasonStartFunction.SetAssignTo("crop_def")
+
+        clsReformatMonthlyTempSummaries.SetPackageName("epicsawrap")
+        clsReformatMonthlyTempSummaries.SetRCommand("reformat_temperature_summaries")
+        clsReformatMonthlyTempSummaries.SetAssignTo("monthly_temp")
+
+        clsReformatCropSuccessFunction.SetPackageName("epicsawrap")
+        clsReformatCropSuccessFunction.SetRCommand("reformat_crop_success")
+        clsReformatCropSuccessFunction.SetAssignTo("crop_prop")
 
         clsSummariesFunction.SetRCommand("c")
 
@@ -176,6 +205,13 @@ Public Class dlgExportClimaticDefinitions
             ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged,
             ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub cmdDefine_Click(sender As Object, e As EventArgs) Handles cmdDefine.Click
+        sdgDefineAnnualRainfall.SetRCode(clsNewReformatCropSuccessFunction:=clsReformatCropSuccessFunction, clsNewReformatSeasonStartFunction:=clsReformatSeasonStartFunction, clsNewReformatMonthlyTempSummaries:=clsReformatMonthlyTempSummaries,
+                                      clsNewReforMattAnnualSummaries:=clsReforMattAnnualSummariesFunction, clsNewReformatTempSummariesFunction:=clsReformatTempSummariesFunction, clsNewExportRinstatToBucketFunction:=clsExportRinstatToBucketFunction, bReset:=bResetSubdialog)
+        sdgDefineAnnualRainfall.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub ucrChkAnnualRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAnnualRainfall.ControlValueChanged, ucrChkAnnualTemp.ControlValueChanged, ucrChkCropSuccessProp.ControlValueChanged,
