@@ -1210,4 +1210,8 @@ Public Class dlgEndOfRainsSeason
     Private Sub rdoValueEvaporation_CheckedChanged(sender As Object, e As EventArgs) Handles rdoValueEvaporation.CheckedChanged, rdoVariableEvaporation.CheckedChanged
         Evaporation()
     End Sub
+
+    Private Sub ucrNudWBLessThan_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWBLessThan.ControlValueChanged, ucrChkEndofSeasonOccurence.ControlValueChanged, ucrInputEndofSeasonOccurence.ControlValueChanged, ucrChkEndofSeasonDate.ControlValueChanged, ucrInputEndofSeasonDate.ControlValueChanged, ucrChkEndofSeasonDoy.ControlValueChanged, ucrInputSeasonDoy.ControlValueChanged, ucrSelectorForWaterBalance.ControlValueChanged
+        Evaporation()
+    End Sub
 End Class
