@@ -77,13 +77,22 @@ Public Class clsOutputLogger
             Exit Sub
         End If
 
-        'add the R script as an output element
-        Dim rScriptElement As New clsOutputElement
-        rScriptElement.SetContent(strScript, OutputType.Script, "")
-        _outputElements.Add(rScriptElement)
-        'raise event for output pages
-        RaiseEvent NewOutputAdded(rScriptElement, False)
+        ' Used to hold the previous script value
+        Static strCurrentScript As String = ""
 
+        ' Check if the new script is different from the previous one
+        If strScript <> strCurrentScript Then
+            'add the R script as an output element
+            Dim rScriptElement As New clsOutputElement
+            rScriptElement.SetContent(strScript, OutputType.Script, "")
+            _outputElements.Add(rScriptElement)
+
+            ' Update the previous script constant
+            strCurrentScript = strScript
+
+            'raise event for output pages
+            RaiseEvent NewOutputAdded(rScriptElement, False)
+        End If
 
         If Not String.IsNullOrEmpty(strOutput) Then
             Dim outputElement As New clsOutputElement
