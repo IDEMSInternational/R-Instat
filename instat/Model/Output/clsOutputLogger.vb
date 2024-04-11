@@ -70,25 +70,25 @@ Public Class clsOutputLogger
         End Set
     End Property
 
-    Public Sub AddOutput(strScript As String, strOutput As String, bAsFile As Boolean, bDisplayOutputInExternalViewer As Boolean)
+    Public Sub AddOutput(strNewScript As String, strOutput As String, bAsFile As Boolean, bDisplayOutputInExternalViewer As Boolean)
         'Note this always takes the last script added as corresponding script
-        If String.IsNullOrWhiteSpace(strScript) Then
+        If String.IsNullOrWhiteSpace(strNewScript) Then
             Throw New Exception("Cannot find script to attach output to.")
             Exit Sub
         End If
 
-        ' Used to hold the previous script value
+        ' Used to hold the current script value
         Static strCurrentScript As String = ""
 
-        ' Check if the new script is different from the previous one
-        If strScript <> strCurrentScript Then
+        ' Check if the new script is different from the current one
+        If strNewScript <> strCurrentScript Then
             'add the R script as an output element
             Dim rScriptElement As New clsOutputElement
-            rScriptElement.SetContent(strScript, OutputType.Script, "")
+            rScriptElement.SetContent(strNewScript, OutputType.Script, "")
             _outputElements.Add(rScriptElement)
 
-            ' Update the previous script constant
-            strCurrentScript = strScript
+            ' Update the current script
+            strCurrentScript = strNewScript
 
             'raise event for output pages
             RaiseEvent NewOutputAdded(rScriptElement, False)
