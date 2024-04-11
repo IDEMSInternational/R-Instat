@@ -124,9 +124,6 @@ Public Class clsOutputLogger
             RaiseEvent NewOutputAdded(outputElement, bDisplayOutputInExternalViewer)
 
         End If
-
-
-
     End Sub
 
     ''' <summary>
