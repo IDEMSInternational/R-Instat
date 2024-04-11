@@ -20,6 +20,7 @@ Public Class sdgOneWayFrequencies
     Public clsOneWayTableFreq, clsOneWayGraphFreq, clsOneWayGrid As New RFunction
 
     Private Sub sdgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
@@ -30,7 +31,6 @@ Public Class sdgOneWayFrequencies
         Dim dctColors As New Dictionary(Of String, String)
 
         ucrInputGraphTitle.SetParameter(New RParameter("title", 2))
-
         'Table Only
         ucrInputTitle.SetParameter(New RParameter("title", 5))
 
@@ -152,5 +152,16 @@ Public Class sdgOneWayFrequencies
             tbpOneWayFrequencies.SelectedIndex = i
         Next
         tbpOneWayFrequencies.SelectedIndex = 0
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case dlgOneWayFrequencies.enumOnewayMode
+            Case dlgOneWayFrequencies.OnewayMode.Prepare
+                ucrBaseOneWayFrequencies.iHelpTopicID = 620
+            Case dlgOneWayFrequencies.OnewayMode.Describe
+                ucrBaseOneWayFrequencies.iHelpTopicID = 96
+            Case dlgOneWayFrequencies.OnewayMode.Climatic
+                ucrBaseOneWayFrequencies.iHelpTopicID = 273
+        End Select
     End Sub
 End Class
