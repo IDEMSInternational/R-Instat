@@ -280,6 +280,7 @@ Public Class dlgEndOfRainsSeason
         ucrNudWBLessThan.SetMinMax(0, Integer.MaxValue)
         ucrNudWBLessThan.Increment = 0.5
         ucrNudWBLessThan.DecimalPlaces = 2
+        ucrNudWBLessThan.SetRDefault(0.05)
 
         ucrNudCapacity.SetParameter(New RParameter("yes", 1))
         ucrNudCapacity.SetMinMax(1, Integer.MaxValue)
@@ -495,6 +496,8 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverRainfall.SetMeAsReceiver()
         'temporary fix
         rdoEndOfRains.Checked = True
+
+        ucrNudCapacity.SetText("100")
 
         ' Group by
         clsGroupByStationYearCalc.SetRCommand("instat_calculation$new")
@@ -948,7 +951,6 @@ Public Class dlgEndOfRainsSeason
             ucrPnlEvaporation.SetRCode(clsWBMinEvapOperator, bReset)
             ucrReceiverEvaporation.SetRCode(clsWBMinTailFunction1, bReset)
         End If
-        ucrNudCapacity.SetRCode(clsIfElseRainMaxFunction, bReset)
 
         ucrChkEndofSeasonDoy.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
         ucrChkEndofSeasonDate.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
@@ -1138,8 +1140,8 @@ Public Class dlgEndOfRainsSeason
         Else
             clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndSeasonCombinationCalc)
             clsFirstOrLastFunction = clsFirstDoyFunction
+            Evaporation()
         End If
-        Evaporation()
     End Sub
 
     Private Sub ucrChkEndofRainsDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofRainsDoy.ControlValueChanged
