@@ -152,11 +152,11 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
+    <Reference Include="RDotNet, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\R.NET.1.9.0\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RScript, Version=0.1.0.10, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RScript.1.0.11\lib\net461\RScript.dll</HintPath>
+    <Reference Include="RInsightF461, Version=0.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RInsightF461.0.0.10\lib\net461\RInsightF461.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
@@ -227,6 +227,12 @@
     <Compile Include="dlgApsimx.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimograph.Designer.vb">
+      <DependentUpon>dlgClimograph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimograph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClusterAnalysis.Designer.vb">
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
     </Compile>
@@ -237,6 +243,18 @@
       <DependentUpon>dlgEdit.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportClimaticDefinitions.Designer.vb">
+      <DependentUpon>dlgExportClimaticDefinitions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportClimaticDefinitions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportForClimpact.Designer.vb">
+      <DependentUpon>dlgExportForClimpact.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportForClimpact.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFindInVariableOrFilter.Designer.vb">
@@ -289,10 +307,40 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgHSConstants.Designer.vb">
+      <DependentUpon>sdgHSConstants.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgHSConstants.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgHSMissingOptions.Designer.vb">
+      <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgHSMissingOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgLocation.Designer.vb">
+      <DependentUpon>sdgLocation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgLocation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgPairPlotOptions.Designer.vb">
       <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgPairPlotOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgPMConstants.Designer.vb">
+      <DependentUpon>sdgPMConstants.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPMConstants.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgPTConstants.Designer.vb">
+      <DependentUpon>sdgPTConstants.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPTConstants.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgSummaryThemes.Designer.vb">
@@ -3013,6 +3061,9 @@
     <EmbeddedResource Include="dlgClimaticNCMPVariogram.resx">
       <DependentUpon>dlgClimaticNCMPVariogram.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimograph.resx">
+      <DependentUpon>dlgClimograph.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
@@ -3037,6 +3088,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEdit.resx">
       <DependentUpon>dlgEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportClimaticDefinitions.resx">
+      <DependentUpon>dlgExportClimaticDefinitions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportForClimpact.resx">
+      <DependentUpon>dlgExportForClimpact.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToClimsoft.resx">
       <DependentUpon>dlgExportToClimsoft.vb</DependentUpon>
@@ -3128,8 +3185,23 @@
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgHSConstants.resx">
+      <DependentUpon>sdgHSConstants.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgHSMissingOptions.resx">
+      <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLocation.resx">
+      <DependentUpon>sdgLocation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgPairPlotOptions.resx">
       <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPMConstants.resx">
+      <DependentUpon>sdgPMConstants.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPTConstants.resx">
+      <DependentUpon>sdgPTConstants.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>

@@ -14,12 +14,12 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports RScript
+Imports RInsightF461
 
 ''' <summary>
 ''' R script element containing the text and type token of the text
 ''' </summary>
 Public Class clsRScriptElement
     Public Property Text As String
-    Public Property Type As clsRToken.typToken
+    Public Property Type As RToken.TokenTypes
 End Class

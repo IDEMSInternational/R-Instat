@@ -64,7 +64,7 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 558
+        ucrBase.iHelpTopicID = 645
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 

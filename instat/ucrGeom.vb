@@ -34,7 +34,7 @@ Public Class ucrGeom
     Public bPauseChanges As Boolean = False
     Dim strLineType As String() = {Chr(34) & "blank" & Chr(34), Chr(34) & "solid" & Chr(34), Chr(34) & "dashed" & Chr(34), Chr(34) & "dotted" & Chr(34), Chr(34) & "dotdash" & Chr(34), Chr(34) & "longdash" & Chr(34), Chr(34) & "twodash" & Chr(34)}
     Dim strShapePoint As String() = {Chr(34) & "circle" & Chr(34), Chr(34) & "circle open" & Chr(34), Chr(34) & "circle filled" & Chr(34), Chr(34) & "circle cross" & Chr(34), Chr(34) & "circle plus" & Chr(34), Chr(34) & "circle small" & Chr(34), Chr(34) & "bullet" & Chr(34), Chr(34) & "square" & Chr(34), Chr(34) & "square open" & Chr(34), Chr(34) & "square filled" & Chr(34), Chr(34) & "square cross" & Chr(34), Chr(34) & "square plus" & Chr(34), Chr(34) & "square triangle" & Chr(34), Chr(34) & "diamond" & Chr(34), Chr(34) & "diamond open" & Chr(34), Chr(34) & "diamond filled" & Chr(34), Chr(34) & "diamond plus" & Chr(34), Chr(34) & "triangle" & Chr(34), Chr(34) & "triangle open" & Chr(34), Chr(34) & "triangle filled" & Chr(34), Chr(34) & "triangle square" & Chr(34), Chr(34) & "triangle down open" & Chr(34), Chr(34) & "triangle down filled" & Chr(34), Chr(34) & "plus" & Chr(34), Chr(34) & "cross" & Chr(34), Chr(34) & "asterisk" & Chr(34)}
-    Dim strBoxShapePoint As String() = {Chr(34) & "NA" & Chr(34), Chr(34) & "circle" & Chr(34), Chr(34) & "circle open" & Chr(34), Chr(34) & "circle filled" & Chr(34), Chr(34) & "circle cross" & Chr(34), Chr(34) & "circle plus" & Chr(34), Chr(34) & "circle small" & Chr(34), Chr(34) & "bullet" & Chr(34), Chr(34) & "square" & Chr(34), Chr(34) & "square open" & Chr(34), Chr(34) & "square filled" & Chr(34), Chr(34) & "square cross" & Chr(34), Chr(34) & "square plus" & Chr(34), Chr(34) & "square triangle" & Chr(34), Chr(34) & "diamond" & Chr(34), Chr(34) & "diamond open" & Chr(34), Chr(34) & "diamond filled" & Chr(34), Chr(34) & "diamond plus" & Chr(34), Chr(34) & "triangle" & Chr(34), Chr(34) & "triangle open" & Chr(34), Chr(34) & "triangle filled" & Chr(34), Chr(34) & "triangle square" & Chr(34), Chr(34) & "triangle down open" & Chr(34), Chr(34) & "triangle down filled" & Chr(34), Chr(34) & "plus" & Chr(34), Chr(34) & "cross" & Chr(34), Chr(34) & "asterisk" & Chr(34)}
+    Dim strBoxShapePoint As String() = {"NA", Chr(34) & "circle" & Chr(34), Chr(34) & "circle open" & Chr(34), Chr(34) & "circle filled" & Chr(34), Chr(34) & "circle cross" & Chr(34), Chr(34) & "circle plus" & Chr(34), Chr(34) & "circle small" & Chr(34), Chr(34) & "bullet" & Chr(34), Chr(34) & "square" & Chr(34), Chr(34) & "square open" & Chr(34), Chr(34) & "square filled" & Chr(34), Chr(34) & "square cross" & Chr(34), Chr(34) & "square plus" & Chr(34), Chr(34) & "square triangle" & Chr(34), Chr(34) & "diamond" & Chr(34), Chr(34) & "diamond open" & Chr(34), Chr(34) & "diamond filled" & Chr(34), Chr(34) & "diamond plus" & Chr(34), Chr(34) & "triangle" & Chr(34), Chr(34) & "triangle open" & Chr(34), Chr(34) & "triangle filled" & Chr(34), Chr(34) & "triangle square" & Chr(34), Chr(34) & "triangle down open" & Chr(34), Chr(34) & "triangle down filled" & Chr(34), Chr(34) & "plus" & Chr(34), Chr(34) & "cross" & Chr(34), Chr(34) & "asterisk" & Chr(34)}
     Private bResetGlobal As Boolean = False
     Public Sub New()
 
@@ -150,6 +150,8 @@ Public Class ucrGeom
         Dim clsgeom_lollipop As New Geoms
         Dim clsgeom_map As New Geoms
         Dim clsgeom_mosaic As New Geoms
+        Dim clsgeom_mosaic_text As New Geoms
+        Dim clsgeom_mosaic_jitter As New Geoms
         Dim clsgeom_parallel_slopes As New Geoms
         Dim clsgeom_path As New Geoms
         Dim clsgeom_point As New Geoms
@@ -332,8 +334,8 @@ Public Class ucrGeom
         clsgeom_statcor.AddLayerParameter("label.sep", "editablelist", Chr(34) & ", " & Chr(34), lstParameterStrings:={Chr(34) & ", " & Chr(34)})
         clsgeom_statcor.AddLayerParameter("label.x.npc", "list", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "right" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "centre" & Chr(34), Chr(34) & "middle" & Chr(34)})
         clsgeom_statcor.AddLayerParameter("label.y.npc", "list", Chr(34) & "top" & Chr(34), lstParameterStrings:={Chr(34) & "top" & Chr(34), Chr(34) & "bottom" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "centre" & Chr(34), Chr(34) & "middle" & Chr(34)})
-        clsgeom_statcor.AddLayerParameter("label.x", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
-        clsgeom_statcor.AddLayerParameter("label.y", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statcor.AddLayerParameter("label.x", "text", 0, lstParameterStrings:={0, -1000, 1000})
+        clsgeom_statcor.AddLayerParameter("label.y", "text", 0, lstParameterStrings:={0, -1000, 1000})
         clsgeom_statcor.AddLayerParameter("output.type", "list", Chr(34) & "expression" & Chr(34), lstParameterStrings:={Chr(34) & "expression" & Chr(34), Chr(34) & "latex" & Chr(34), Chr(34) & "tex" & Chr(34), Chr(34) & "text" & Chr(34)})
         clsgeom_statcor.AddLayerParameter("digits", "numeric", "2", lstParameterStrings:={0, 1, 5})
         clsgeom_statcor.AddLayerParameter("r.digits", "numeric", "2", lstParameterStrings:={0, 1, 5})
@@ -361,8 +363,8 @@ Public Class ucrGeom
         clsgeom_statReglineEquation.AddLayerParameter("formula", "editablelist", Chr(34) & "y~x" & Chr(34), lstParameterStrings:={Chr(34) & "y~x" & Chr(34)})
         clsgeom_statReglineEquation.AddLayerParameter("label.x.npc", "list", Chr(34) & "left" & Chr(34), lstParameterStrings:={Chr(34) & "left" & Chr(34), Chr(34) & "right" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "centre" & Chr(34), Chr(34) & "middle" & Chr(34)})
         clsgeom_statReglineEquation.AddLayerParameter("label.y.npc", "list", Chr(34) & "top" & Chr(34), lstParameterStrings:={Chr(34) & "top" & Chr(34), Chr(34) & "bottom" & Chr(34), Chr(34) & "center" & Chr(34), Chr(34) & "centre" & Chr(34), Chr(34) & "middle" & Chr(34)})
-        clsgeom_statReglineEquation.AddLayerParameter("label.x", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
-        clsgeom_statReglineEquation.AddLayerParameter("label.y", "editablelist", Chr(34) & "NULL" & Chr(34), lstParameterStrings:={Chr(34) & "NULL" & Chr(34)})
+        clsgeom_statReglineEquation.AddLayerParameter("label.x", "text", "0", lstParameterStrings:={0, -1000, 1000})
+        clsgeom_statReglineEquation.AddLayerParameter("label.y", "text", "0", lstParameterStrings:={0, -1000, 1000})
         clsgeom_statReglineEquation.AddLayerParameter("output.type", "list", Chr(34) & "expression" & Chr(34), lstParameterStrings:={Chr(34) & "expression" & Chr(34), Chr(34) & "latex" & Chr(34), Chr(34) & "text" & Chr(34)})
         clsgeom_statReglineEquation.AddLayerParameter("geom", "editablelist", Chr(34) & "text" & Chr(34), lstParameterStrings:={Chr(34) & "text" & Chr(34)})
         clsgeom_statReglineEquation.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
@@ -1457,10 +1459,10 @@ Public Class ucrGeom
         clsgeom_mosaic.SetGeomPackage("ggmosaic")
         clsgeom_mosaic.strGeomName = "geom_mosaic"
         'mandatory
-        'clsgeom_mosaic.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
-        'clsgeom_mosaic.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
-        'clsgeom_mosaic.AddAesParameter("conds", strIncludedDataTypes:={"factor"})
-        'clsgeom_mosaic.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
+        clsgeom_mosaic.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic.AddAesParameter("conds", strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
 
         'adding layerParameters
         clsgeom_mosaic.AddLayerParameter("divider", "editablelist", "ggmosaic::mosaic(" & Chr(34) & "h" & Chr(34) & ")", lstParameterStrings:={Chr(34) & "vspine" & Chr(34), Chr(34) & "hspine" & Chr(34), Chr(34) & "vbar" & Chr(34), Chr(34) & "hbar" & Chr(34), "ggmosaic::mosaic(" & Chr(34) & "h" & Chr(34) & ")", "ggmosaic::mosaic(" & Chr(34) & "v" & Chr(34) & ")", "ggmosaic::ddecker()"})
@@ -1472,6 +1474,44 @@ Public Class ucrGeom
         clsgeom_mosaic.AddLayerParameter("na.rm", "boolean", "FALSE")
         clsgeom_mosaic.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         lstAllGeoms.Add(clsgeom_mosaic)
+
+        clsgeom_mosaic_jitter.SetGeomPackage("ggmosaic")
+        clsgeom_mosaic_jitter.strGeomName = "geom_mosaic_jitter"
+        'mandatory
+        clsgeom_mosaic_jitter.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic_jitter.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic_jitter.AddAesParameter("conds", strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic_jitter.AddAesParameter("color", strIncludedDataTypes:={"numeric"})
+
+        'adding layerParameters
+        clsgeom_mosaic_jitter.AddLayerParameter("divider", "editablelist", "ggmosaic::mosaic(" & Chr(34) & "h" & Chr(34) & ")", lstParameterStrings:={Chr(34) & "vspine" & Chr(34), Chr(34) & "hspine" & Chr(34), Chr(34) & "vbar" & Chr(34), Chr(34) & "hbar" & Chr(34), "ggmosaic::mosaic(" & Chr(34) & "h" & Chr(34) & ")", "ggmosaic::mosaic(" & Chr(34) & "v" & Chr(34) & ")", "ggmosaic::ddecker()"})
+        clsgeom_mosaic_jitter.AddLayerParameter("offset", "numeric", "0.01", lstParameterStrings:={2, 0, 1}) 'not sure if it goes beyond 1
+        clsgeom_mosaic_jitter.AddLayerParameter("stat", "editablelist", Chr(34) & "mosaic" & Chr(34), lstParameterStrings:={Chr(34) & "mosaic" & Chr(34)}) ' Made this editable because am not sure what other stats go here
+        clsgeom_mosaic_jitter.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)}) ' Made this editable because am not sure what other positions go here
+        clsgeom_mosaic_jitter.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_mosaic_jitter.AddLayerParameter("size", "numeric", "1", lstParameterStrings:={1, 1})
+        clsgeom_mosaic_jitter.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_mosaic_jitter.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_mosaic_jitter)
+
+        clsgeom_mosaic_text.SetGeomPackage("ggmosaic")
+        clsgeom_mosaic_text.strGeomName = "geom_mosaic_text"
+        'mandatory
+        clsgeom_mosaic_text.AddAesParameter("x", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic_text.AddAesParameter("fill", bIsMandatory:=True, strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic_text.AddAesParameter("conds", strIncludedDataTypes:={"factor"})
+        clsgeom_mosaic_text.AddAesParameter("weight", strIncludedDataTypes:={"numeric"})
+
+        'adding layerParameters
+        clsgeom_mosaic_text.AddLayerParameter("divider", "editablelist", "ggmosaic::mosaic(" & Chr(34) & "h" & Chr(34) & ")", lstParameterStrings:={Chr(34) & "vspine" & Chr(34), Chr(34) & "hspine" & Chr(34), Chr(34) & "vbar" & Chr(34), Chr(34) & "hbar" & Chr(34), "ggmosaic::mosaic(" & Chr(34) & "h" & Chr(34) & ")", "ggmosaic::mosaic(" & Chr(34) & "v" & Chr(34) & ")", "ggmosaic::ddecker()"})
+        clsgeom_mosaic_text.AddLayerParameter("offset", "numeric", "0.01", lstParameterStrings:={2, 0, 1}) 'not sure if it goes beyond 1
+        clsgeom_mosaic_text.AddLayerParameter("stat", "editablelist", Chr(34) & "mosaic" & Chr(34), lstParameterStrings:={Chr(34) & "mosaic" & Chr(34)}) ' Made this editable because am not sure what other stats go here
+        clsgeom_mosaic_text.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)}) ' Made this editable because am not sure what other positions go here
+        clsgeom_mosaic_text.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_mosaic_text.AddLayerParameter("size", "numeric", "1", lstParameterStrings:={1, 1})
+        clsgeom_mosaic_text.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_mosaic_text.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_mosaic_text)
 
         clsgeom_parallel_slopes.SetGeomPackage("moderndive")
         clsgeom_parallel_slopes.SetGeomName("geom_parallel_slopes")

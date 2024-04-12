@@ -20,6 +20,7 @@ Public Class sdgOneVarGraph
     Public clsGraphOneVariable As New RFunction
 
     Private Sub sdgOneVarGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
+        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
@@ -78,5 +79,16 @@ Public Class sdgOneVarGraph
         If bReset Then
             tbcOneVarGraph.SelectedIndex = 0
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case dlgOneVariableGraph.enumOnevariableMode
+            Case dlgOneVariableGraph.OnevariableMode.Prepare
+                ucrButtonsOneVarGraph.iHelpTopicID = 187
+            Case dlgOneVariableGraph.OnevariableMode.Describe
+                ucrButtonsOneVarGraph.iHelpTopicID = 170
+            Case dlgOneVariableGraph.OnevariableMode.Climatic
+                ucrButtonsOneVarGraph.iHelpTopicID = 623
+        End Select
     End Sub
 End Class
