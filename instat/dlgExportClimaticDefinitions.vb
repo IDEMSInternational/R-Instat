@@ -20,9 +20,9 @@ Public Class dlgExportClimaticDefinitions
     Private bReset As Boolean = True
     Private bResetRCode As Boolean = True
     Private bResetSubdialog As Boolean = False
+    Private clsDummyFunction As New RFunction
     Public clsExportRinstatToBucketFunction, clsSummariesFunction As New RFunction
     Public clsReforMattAnnualSummariesFunction, clsReformatCropSuccessFunction, clsReformatSeasonStartFunction, clsReformatTempSummariesFunction, clsReformatMonthlyTempSummaries As New RFunction
-
 
     Private Sub dlgExportClimaticDefinitions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -42,80 +42,68 @@ Public Class dlgExportClimaticDefinitions
 
         ucrReceiverData.SetParameter(New RParameter("data", 0))
         ucrReceiverData.Selector = ucrSelectorExportDefinitions
-        ucrReceiverData.SetParameterIsRFunction()
+        ucrReceiverData.SetParameterIsString()
         ucrReceiverData.SetMeAsReceiver()
         ucrReceiverData.SetItemType("dataframe")
 
         ucrReceiverDataYear.SetParameter(New RParameter("data_by_year", 1))
         ucrReceiverDataYear.Selector = ucrSelectorExportDefinitions
-        ucrReceiverDataYear.SetParameterIsRFunction()
+        ucrReceiverDataYear.SetParameterIsString()
         ucrReceiverDataYear.SetItemType("dataframe")
 
         ucrReceiverDataYearMonth.SetParameter(New RParameter("data_by_year_month", 2))
         ucrReceiverDataYearMonth.Selector = ucrSelectorExportDefinitions
-        ucrReceiverDataYearMonth.SetParameterIsRFunction()
+        ucrReceiverDataYearMonth.SetParameterIsString()
         ucrReceiverDataYearMonth.SetItemType("dataframe")
 
         ucrReceiverCropData.SetParameter(New RParameter("crop_data", 3))
         ucrReceiverCropData.Selector = ucrSelectorExportDefinitions
-        ucrReceiverCropData.SetParameterIsRFunction()
+        ucrReceiverCropData.SetParameterIsString()
         ucrReceiverCropData.SetItemType("dataframe")
 
         ucrReceiverMinTemp.SetParameter(New RParameter("tmin", 4))
         ucrReceiverMinTemp.Selector = ucrSelectorExportDefinitions
-        ucrReceiverMinTemp.SetParameterIsRFunction()
+        ucrReceiverMinTemp.SetParameterIsString()
 
         ucrReceiverMaxTemp.SetParameter(New RParameter("tmax", 5))
         ucrReceiverMaxTemp.Selector = ucrSelectorExportDefinitions
-        ucrReceiverMaxTemp.SetParameterIsRFunction()
+        ucrReceiverMaxTemp.SetParameterIsString()
 
         ucrReceiverRain.SetParameter(New RParameter("rain", 6))
         ucrReceiverRain.Selector = ucrSelectorExportDefinitions
-        ucrReceiverRain.SetParameterIsRFunction()
+        ucrReceiverRain.SetParameterIsString()
 
         ucrReceiverYear.SetParameter(New RParameter("year", 7))
         ucrReceiverYear.Selector = ucrSelectorExportDefinitions
-        ucrReceiverYear.SetParameterIsRFunction()
+        ucrReceiverYear.SetParameterIsString()
 
         ucrReceiverMonth.SetParameter(New RParameter("month", 8))
         ucrReceiverMonth.Selector = ucrSelectorExportDefinitions
-        ucrReceiverMonth.SetParameterIsRFunction()
+        ucrReceiverMonth.SetParameterIsString()
 
         ucrChkAnnualRainfall.SetText("Annual Rainfall")
-        ucrChkAnnualRainfall.SetParameter(New RParameter("annual_rainfall", 10))
-        ucrChkAnnualRainfall.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAnnualRainfall.SetRDefault("FALSE")
-
+        ucrChkAnnualRainfall.AddParameterValuesCondition(True, "rain", "True")
+        ucrChkAnnualRainfall.AddParameterValuesCondition(False, "rain", "False")
 
         ucrChkAnnualTemp.SetText("Annual Temperature")
-        ucrChkAnnualTemp.SetParameter(New RParameter("annual_temperature", 11))
-        ucrChkAnnualTemp.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAnnualTemp.SetRDefault("FALSE")
+        ucrChkAnnualTemp.AddParameterValuesCondition(True, "temp", "True")
+        ucrChkAnnualTemp.AddParameterValuesCondition(False, "temp", "False")
 
         ucrChkExtremes.SetText("Extremes")
-        ucrChkExtremes.SetParameter(New RParameter("extremes", 12))
-        ucrChkExtremes.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkExtremes.SetRDefault("FALSE")
+        ucrChkExtremes.AddParameterValuesCondition(True, "extrem", "True")
+        ucrChkExtremes.AddParameterValuesCondition(False, "extrem", "False")
 
         ucrChkMonthlyTemp.SetText("Monthly Temperature")
-        ucrChkMonthlyTemp.SetParameter(New RParameter("monthly_temperature", 13))
-        ucrChkMonthlyTemp.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkMonthlyTemp.SetRDefault("FALSE")
+        ucrChkMonthlyTemp.AddParameterValuesCondition(True, "monthly_temp", "True")
+        ucrChkMonthlyTemp.AddParameterValuesCondition(False, "monthly_temp", "False")
 
         ucrChkSeasonStartProp.SetText("Season Start Probabilities")
-        ucrChkSeasonStartProp.SetParameter(New RParameter("start_season", 14))
-        ucrChkSeasonStartProp.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkSeasonStartProp.SetRDefault("FALSE")
-
-        ucrChkSeasonStartProp.SetText("Season Start Probabilities")
-        ucrChkSeasonStartProp.SetParameter(New RParameter("start_season", 15))
-        ucrChkSeasonStartProp.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkSeasonStartProp.SetRDefault("FALSE")
+        ucrChkSeasonStartProp.AddParameterValuesCondition(True, "season", "True")
+        ucrChkSeasonStartProp.AddParameterValuesCondition(False, "season", "False")
 
         ucrChkCropSuccessProp.SetText("Crop Success Probabilities")
-        ucrChkCropSuccessProp.SetParameter(New RParameter("crop_success", 16))
-        ucrChkCropSuccessProp.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkCropSuccessProp.SetRDefault("FALSE")
+        ucrChkCropSuccessProp.AddParameterValuesCondition(True, "crop", "True")
+        ucrChkCropSuccessProp.AddParameterValuesCondition(False, "crop", "False")
 
         ucrChkIncludeSummaryData.SetText("Include Summary Data")
         ucrChkIncludeSummaryData.SetParameter(New RParameter("include_summary_data", 17))
@@ -135,9 +123,18 @@ Public Class dlgExportClimaticDefinitions
         clsReformatSeasonStartFunction = New RFunction
         clsReforMattAnnualSummariesFunction = New RFunction
         clsReformatTempSummariesFunction = New RFunction
+        clsDummyFunction = New RFunction
         bResetSubdialog = True
 
         ucrSelectorExportDefinitions.Reset()
+
+        clsDummyFunction.AddParameter("rain", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("temp", "False", iPosition:=1)
+        clsDummyFunction.AddParameter("monthly_temp", "False", iPosition:=2)
+        clsDummyFunction.AddParameter("extrem", "False", iPosition:=3)
+        clsDummyFunction.AddParameter("season", "False", iPosition:=4)
+        clsDummyFunction.AddParameter("crop", "False", iPosition:=5)
+
 
         clsReformatTempSummariesFunction.SetPackageName("epicsawrap")
         clsReformatTempSummariesFunction.SetRCommand("reformat_temperature_summaries")
@@ -159,6 +156,7 @@ Public Class dlgExportClimaticDefinitions
         clsReformatCropSuccessFunction.SetRCommand("reformat_crop_success")
         clsReformatCropSuccessFunction.SetAssignTo("crop_prop")
 
+
         clsSummariesFunction.SetRCommand("c")
 
         clsExportRinstatToBucketFunction.SetPackageName("epicsawrap")
@@ -169,7 +167,31 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverCropData.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverData.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverDataYear.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverDataYearMonth.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverMaxTemp.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverMinTemp.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverMonth.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverRain.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverYear.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrSelectorExportDefinitions.SetRCode(clsExportRinstatToBucketFunction)
+
+        ucrInputStationID.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrInputCountry.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrChkIncludeSummaryData.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        If bReset Then
+            ucrChkAnnualRainfall.SetRCode(clsDummyFunction, bReset)
+            ucrChkAnnualTemp.SetRCode(clsDummyFunction, bReset)
+            ucrChkCropSuccessProp.SetRCode(clsDummyFunction, bReset)
+            ucrChkExtremes.SetRCode(clsDummyFunction, bReset)
+            ucrChkMonthlyTemp.SetRCode(clsDummyFunction, bReset)
+            ucrChkSeasonStartProp.SetRCode(clsDummyFunction, bReset)
+        End If
+        AddRemoveSummary()
+        EnableDisableDefineButton()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -186,25 +208,23 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub AddRemoveSummary()
-        If ucrChkAnnualRainfall.Checked Then
-            clsSummariesFunction.AddParameter("rain", "annual_rainfall", iPosition:=0, bIncludeArgumentName:=False)
-        ElseIf ucrChkAnnualTemp.Checked Then
-            clsSummariesFunction.AddParameter("temp", "annual_temperature", iPosition:=1, bIncludeArgumentName:=False)
-        ElseIf ucrChkCropSuccessProp.Checked Then
-            clsSummariesFunction.AddParameter("prop", "crop_success", iPosition:=2, bIncludeArgumentName:=False)
-        ElseIf ucrChkExtremes.Checked Then
-            clsSummariesFunction.AddParameter("extreme", "extremes", iPosition:=3, bIncludeArgumentName:=False)
-        ElseIf ucrChkMonthlyTemp.Checked Then
-            clsSummariesFunction.AddParameter("month_temp", "monthly_temperature", iPosition:=4, bIncludeArgumentName:=False)
-        ElseIf ucrChkSeasonStartProp.Checked Then
-            clsSummariesFunction.AddParameter("start_prop", "start_season", iPosition:=5, bIncludeArgumentName:=False)
+        If ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked OrElse ucrChkCropSuccessProp.Checked OrElse ucrChkExtremes.Checked OrElse ucrChkMonthlyTemp.Checked OrElse ucrChkSeasonStartProp.Checked Then
+            clsExportRinstatToBucketFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesFunction, iPosition:=0)
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("summaries")
         End If
-        clsExportRinstatToBucketFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesFunction)
     End Sub
+
     Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged,
             ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged,
             ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+        EnableDisableDefineButton()
     End Sub
 
     Private Sub cmdDefine_Click(sender As Object, e As EventArgs) Handles cmdDefine.Click
@@ -214,8 +234,86 @@ Public Class dlgExportClimaticDefinitions
         bResetSubdialog = False
     End Sub
 
-    Private Sub ucrChkAnnualRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAnnualRainfall.ControlValueChanged, ucrChkAnnualTemp.ControlValueChanged, ucrChkCropSuccessProp.ControlValueChanged,
-            ucrChkExtremes.ControlValueChanged, ucrChkMonthlyTemp.ControlValueChanged, ucrChkSeasonStartProp.ControlValueChanged
+    Private Sub ucrChkAnnualRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAnnualRainfall.ControlValueChanged
+        If ucrChkAnnualRainfall.Checked Then
+            clsSummariesFunction.AddParameter("rain", Chr(34) & "annual_rainfall" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        Else
+            clsSummariesFunction.RemoveParameterByName("rain")
+        End If
         AddRemoveSummary()
+        EnableDisableDefineButton()
+    End Sub
+
+    Private Sub ucrChkAnnualTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAnnualTemp.ControlValueChanged
+        If ucrChkAnnualTemp.Checked Then
+            clsSummariesFunction.AddParameter("temp", Chr(34) & "annual_temperature" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        Else
+            clsSummariesFunction.RemoveParameterByName("temp")
+        End If
+        AddRemoveSummary()
+        EnableDisableDefineButton()
+    End Sub
+
+    Private Sub ucrChkCropSuccessProp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCropSuccessProp.ControlValueChanged
+        If ucrChkCropSuccessProp.Checked Then
+            clsSummariesFunction.AddParameter("prop", Chr(34) & "crop_success" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        Else
+            clsSummariesFunction.RemoveParameterByName("prop")
+        End If
+        AddRemoveSummary()
+        EnableDisableDefineButton()
+    End Sub
+
+    Private Sub ucrChkExtremes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExtremes.ControlValueChanged
+        If ucrChkExtremes.Checked Then
+            clsSummariesFunction.AddParameter("extreme", Chr(34) & "extremes" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
+        Else
+            clsSummariesFunction.RemoveParameterByName("extreme")
+        End If
+        AddRemoveSummary()
+        EnableDisableDefineButton()
+    End Sub
+
+    Private Sub ucrChkMonthlyTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMonthlyTemp.ControlValueChanged
+        If ucrChkMonthlyTemp.Checked Then
+            clsSummariesFunction.AddParameter("month_temp", Chr(34) & "monthly_temperature" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
+        Else
+            clsSummariesFunction.RemoveParameterByName("month_temp")
+        End If
+        AddRemoveSummary()
+        EnableDisableDefineButton()
+    End Sub
+
+    Private Sub ucrChkSeasonStartProp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSeasonStartProp.ControlValueChanged
+        If ucrChkSeasonStartProp.Checked Then
+            clsSummariesFunction.AddParameter("start_prop", Chr(34) & "start_season" & Chr(34), iPosition:=5, bIncludeArgumentName:=False)
+        Else
+            clsSummariesFunction.RemoveParameterByName("start_prop")
+        End If
+        AddRemoveSummary()
+        EnableDisableDefineButton()
+    End Sub
+
+    Private Sub ucrInputCountry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCountry.ControlValueChanged
+        If Not ucrInputCountry.IsEmpty Then
+            clsExportRinstatToBucketFunction.AddParameter("country", Chr(34) & ucrInputCountry.GetText & Chr(34), iPosition:=19)
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("country")
+        End If
+    End Sub
+
+    Private Sub ucrInputStationID_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStationID.ControlValueChanged
+        If Not ucrInputStationID.IsEmpty Then
+            clsExportRinstatToBucketFunction.AddParameter("station_id", Chr(34) & ucrInputStationID.GetText & Chr(34), iPosition:=18)
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("station_id")
+        End If
+    End Sub
+    Private Sub EnableDisableDefineButton()
+        cmdDefine.Enabled = ucrChkIncludeSummaryData.Checked AndAlso (ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked OrElse ucrChkCropSuccessProp.Checked OrElse ucrChkExtremes.Checked OrElse ucrChkMonthlyTemp.Checked OrElse ucrChkSeasonStartProp.Checked)
+    End Sub
+
+    Private Sub ucrChkIncludeSummaryData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeSummaryData.ControlValueChanged
+        EnableDisableDefineButton()
     End Sub
 End Class

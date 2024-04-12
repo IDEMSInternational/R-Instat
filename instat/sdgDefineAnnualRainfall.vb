@@ -43,165 +43,165 @@ Public Class sdgDefineAnnualRainfall
 
         ucrReceiverStation.SetParameter(New RParameter("station_col", 1))
         ucrReceiverStation.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverStation.SetParameterIsRFunction()
+        ucrReceiverStation.SetParameterIsString()
 
         ucrReceiverYear.SetParameter(New RParameter("year_col", 2))
         ucrReceiverYear.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverYear.SetParameterIsRFunction()
+        ucrReceiverYear.SetParameterIsString()
 
         ucrReceiverStartRainDOY.SetParameter(New RParameter("start_rains_doy_col", 3))
         ucrReceiverStartRainDOY.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverStartRainDOY.SetParameterIsRFunction()
+        ucrReceiverStartRainDOY.SetParameterIsString()
 
         ucrReceiverStartRainDate.SetParameter(New RParameter("start_rains_date_col", 4))
         ucrReceiverStartRainDate.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverStartRainDate.SetParameterIsRFunction()
+        ucrReceiverStartRainDate.SetParameterIsString()
 
         ucrReceiverEndRainsDOY.SetParameter(New RParameter("end_rains_doy_col", 5))
         ucrReceiverEndRainsDOY.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverEndRainsDOY.SetParameterIsRFunction()
+        ucrReceiverEndRainsDOY.SetParameterIsString()
 
         ucrReceiverEndRainsDate.SetParameter(New RParameter("end_rains_date_col", 6))
         ucrReceiverEndRainsDate.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverEndRainsDate.SetParameterIsRFunction()
+        ucrReceiverEndRainsDate.SetParameterIsString()
 
         ucrReceiverEndSeasonDOY.SetParameter(New RParameter("end_season_doy_col", 7))
         ucrReceiverEndSeasonDOY.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverEndSeasonDOY.SetParameterIsRFunction()
+        ucrReceiverEndSeasonDOY.SetParameterIsString()
 
         ucrReceiverEndSeasonDate.SetParameter(New RParameter("end_season_date_col", 8))
         ucrReceiverEndSeasonDate.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverEndSeasonDate.SetParameterIsRFunction()
+        ucrReceiverEndSeasonDate.SetParameterIsString()
 
         ucrReceiverSeasonalRain.SetParameter(New RParameter("seasonal_rain_col", 9))
         ucrReceiverSeasonalRain.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverSeasonalRain.SetParameterIsRFunction()
+        ucrReceiverSeasonalRain.SetParameterIsString()
 
         ucrReceiverRainDaysSeason.SetParameter(New RParameter("n_seasonal_rain_col", 10))
         ucrReceiverRainDaysSeason.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverRainDaysSeason.SetParameterIsRFunction()
+        ucrReceiverRainDaysSeason.SetParameterIsString()
 
         ucrReceiverRainDaysYear.SetParameter(New RParameter("n_rain_col", 11))
         ucrReceiverRainDaysYear.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverRainDaysYear.SetParameterIsRFunction()
+        ucrReceiverRainDaysYear.SetParameterIsString()
 
         ucrReceiverSeasonalLength.SetParameter(New RParameter("season_length_col", 12))
         ucrReceiverSeasonalLength.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverSeasonalLength.SetParameterIsRFunction()
+        ucrReceiverSeasonalLength.SetParameterIsString()
 
         ucrReceiverAnnualRain.SetParameter(New RParameter("annual_rain_col", 13))
         ucrReceiverAnnualRain.Selector = ucrSelectorDefineAnnualRain
-        ucrReceiverAnnualRain.SetParameterIsRFunction()
+        ucrReceiverAnnualRain.SetParameterIsString()
 
         ucrReceiverStationCrop.SetParameter(New RParameter("station_col", 1))
         ucrReceiverStationCrop.Selector = ucrSelectorCropProp
-        ucrReceiverStationCrop.SetParameterIsRFunction()
+        ucrReceiverStationCrop.SetParameterIsString()
 
         ucrReceiverTotalRain.SetParameter(New RParameter("total_rain_col", 2))
         ucrReceiverTotalRain.Selector = ucrSelectorCropProp
-        ucrReceiverTotalRain.SetParameterIsRFunction()
+        ucrReceiverTotalRain.SetParameterIsString()
 
         ucrReceiverPlantingDay.SetParameter(New RParameter("plant_day_col", 3))
         ucrReceiverPlantingDay.Selector = ucrSelectorCropProp
-        ucrReceiverPlantingDay.SetParameterIsRFunction()
+        ucrReceiverPlantingDay.SetParameterIsString()
 
         ucrReceiverPlantingLenghth.SetParameter(New RParameter("plant_length_col", 4))
         ucrReceiverPlantingLenghth.Selector = ucrSelectorCropProp
-        ucrReceiverPlantingLenghth.SetParameterIsRFunction()
+        ucrReceiverPlantingLenghth.SetParameterIsString()
 
         ucrReceiverPropSuccess.SetParameter(New RParameter("prop_success_col", 5))
         ucrReceiverPropSuccess.Selector = ucrSelectorCropProp
-        ucrReceiverPropSuccess.SetParameterIsRFunction()
+        ucrReceiverPropSuccess.SetParameterIsString()
 
         'Season start
         ucrReceiverSeasonStationProb.SetParameter(New RParameter("station_col", 1))
         ucrReceiverSeasonStationProb.Selector = ucrSelectorSeasonStartProp
-        ucrReceiverSeasonStationProb.SetParameterIsRFunction()
+        ucrReceiverSeasonStationProb.SetParameterIsString()
 
         ucrReceiverSeasonYear.SetParameter(New RParameter("year_col", 2))
         ucrReceiverSeasonYear.Selector = ucrSelectorSeasonStartProp
-        ucrReceiverSeasonYear.SetParameterIsRFunction()
+        ucrReceiverSeasonYear.SetParameterIsString()
 
 
         ucrReceiverSeasonPlantingDay.SetParameter(New RParameter("plant_day_col", 3))
         ucrReceiverSeasonPlantingDay.Selector = ucrSelectorSeasonStartProp
-        ucrReceiverSeasonPlantingDay.SetParameterIsRFunction()
+        ucrReceiverSeasonPlantingDay.SetParameterIsString()
 
 
         ucrReceiverPlantingDayCondition.SetParameter(New RParameter("plant_day_cond_col", 5))
         ucrReceiverPlantingDayCondition.Selector = ucrSelectorSeasonStartProp
-        ucrReceiverPlantingDayCondition.SetParameterIsRFunction()
+        ucrReceiverPlantingDayCondition.SetParameterIsString()
 
         'Annual Temp
         ucrReceiverAnnualTempStation.SetParameter(New RParameter("station_col", 1))
         ucrReceiverAnnualTempStation.Selector = ucrSelectorAnnualTemp
-        ucrReceiverAnnualTempStation.SetParameterIsRFunction()
+        ucrReceiverAnnualTempStation.SetParameterIsString()
 
         ucrReceiverAnnualTempYr.SetParameter(New RParameter("year_col", 2))
         ucrReceiverAnnualTempYr.Selector = ucrSelectorAnnualTemp
-        ucrReceiverAnnualTempYr.SetParameterIsRFunction()
+        ucrReceiverAnnualTempYr.SetParameterIsString()
 
         ucrReceiverMeanAnnual.SetParameter(New RParameter("mean_tmin_col", 3))
         ucrReceiverMeanAnnual.Selector = ucrSelectorAnnualTemp
-        ucrReceiverMeanAnnual.SetParameterIsRFunction()
+        ucrReceiverMeanAnnual.SetParameterIsString()
 
         ucrReceiverMinMinAnnual.SetParameter(New RParameter("min_tmin_col", 4))
         ucrReceiverMinMinAnnual.Selector = ucrSelectorAnnualTemp
-        ucrReceiverMinMinAnnual.SetParameterIsRFunction()
+        ucrReceiverMinMinAnnual.SetParameterIsString()
 
         ucrReceiverMaxMinAnnual.SetParameter(New RParameter("max_tmin_col", 5))
         ucrReceiverMaxMinAnnual.Selector = ucrSelectorAnnualTemp
-        ucrReceiverMaxMinAnnual.SetParameterIsRFunction()
+        ucrReceiverMaxMinAnnual.SetParameterIsString()
 
         ucrReceiverMeanMaxAnnual.SetParameter(New RParameter("mean_tmax_col", 6))
         ucrReceiverMeanMaxAnnual.Selector = ucrSelectorAnnualTemp
-        ucrReceiverMeanMaxAnnual.SetParameterIsRFunction()
+        ucrReceiverMeanMaxAnnual.SetParameterIsString()
 
         ucrReceiverMinMaxAnnual.SetParameter(New RParameter("min_tmax_col", 7))
         ucrReceiverMinMaxAnnual.Selector = ucrSelectorAnnualTemp
-        ucrReceiverMinMaxAnnual.SetParameterIsRFunction()
+        ucrReceiverMinMaxAnnual.SetParameterIsString()
 
         ucrReceiverMaxMaxAnnual.SetParameter(New RParameter("max_tmax_col", 8))
         ucrReceiverMaxMaxAnnual.Selector = ucrSelectorAnnualTemp
-        ucrReceiverMaxMaxAnnual.SetParameterIsRFunction()
+        ucrReceiverMaxMaxAnnual.SetParameterIsString()
 
         'Monthly Temp
         ucrReceiverMonthlyTemp.SetParameter(New RParameter("station_col", 1))
         ucrReceiverMonthlyTemp.Selector = ucrSelecetorMonthlyTemp
-        ucrReceiverMonthlyTemp.SetParameterIsRFunction()
+        ucrReceiverMonthlyTemp.SetParameterIsString()
 
         ucrReceiverYearMonthly.SetParameter(New RParameter("year_col", 2))
         ucrReceiverYearMonthly.Selector = ucrSelecetorMonthlyTemp
-        ucrReceiverYearMonthly.SetParameterIsRFunction()
+        ucrReceiverYearMonthly.SetParameterIsString()
 
         ucrReceiverMonthMonthly.SetParameter(New RParameter("month_col", 3))
         ucrReceiverMonthMonthly.Selector = ucrSelecetorMonthlyTemp
-        ucrReceiverMonthMonthly.SetParameterIsRFunction()
+        ucrReceiverMonthMonthly.SetParameterIsString()
 
 
         ucrReceiverMeanminMontly.SetParameter(New RParameter("mean_tmin_col", 4))
         ucrReceiverMeanminMontly.Selector = ucrSelecetorMonthlyTemp
-        ucrReceiverMeanminMontly.SetParameterIsRFunction()
+        ucrReceiverMeanminMontly.SetParameterIsString()
 
         ucrReceiverMinMinMonthly.SetParameter(New RParameter("min_tmin_col", 5))
         ucrReceiverMinMinMonthly.Selector = ucrSelecetorMonthlyTemp
-        ucrReceiverMinMinMonthly.SetParameterIsRFunction()
+        ucrReceiverMinMinMonthly.SetParameterIsString()
 
         ucrReceiverMaxMinMonthly.SetParameter(New RParameter("max_tmin_col", 6))
         ucrReceiverMaxMinMonthly.Selector = ucrSelecetorMonthlyTemp
-        ucrReceiverMaxMinMonthly.SetParameterIsRFunction()
+        ucrReceiverMaxMinMonthly.SetParameterIsString()
 
         ucrReceiverMeanmaxMonthly.SetParameter(New RParameter("mean_tmax_col", 7))
         ucrReceiverMeanmaxMonthly.Selector = ucrSelecetorMonthlyTemp
-        ucrReceiverMeanmaxMonthly.SetParameterIsRFunction()
+        ucrReceiverMeanmaxMonthly.SetParameterIsString()
 
         ucrReceiverMinMaxMonthly.SetParameter(New RParameter("min_tmax_col", 8))
         ucrReceiverMinMaxMonthly.Selector = ucrSelecetorMonthlyTemp
-        ucrReceiverMinMaxMonthly.SetParameterIsRFunction()
+        ucrReceiverMinMaxMonthly.SetParameterIsString()
 
         ucrReceiverMaxMaxMonthly.SetParameter(New RParameter("max_tmax_col", 9))
         ucrReceiverMaxMaxMonthly.Selector = ucrSelecetorMonthlyTemp
-        ucrReceiverMaxMaxMonthly.SetParameterIsRFunction()
+        ucrReceiverMaxMaxMonthly.SetParameterIsString()
 
     End Sub
     Public Sub SetRCode(clsNewReforMattAnnualSummaries As RFunction, clsNewExportRinstatToBucketFunction As RFunction, clsNewReformatCropSuccessFunction As RFunction, clsNewReformatMonthlyTempSummaries As RFunction, clsNewReformatSeasonStartFunction As RFunction, clsNewReformatTempSummariesFunction As RFunction, Optional bReset As Boolean = False)
@@ -315,4 +315,5 @@ Public Class sdgDefineAnnualRainfall
             clsExportRinstatToBucketFunction.RemoveParameterByName("monthly_temperature_data")
         End If
     End Sub
+
 End Class
