@@ -25,6 +25,7 @@ Public Class ucrOutputPages
     Private _outputLogger As clsOutputLogger
     Private _selectedOutputPage As ucrOutputPage
     Private _strSaveDirectory As String
+    Private checkBoxSelectAll As New CheckBox()
     Public Sub New()
 
         ' This call is required by the designer.
@@ -153,6 +154,7 @@ Public Class ucrOutputPages
             tbMoveUp.Enabled = False
         End If
         tbRename.Enabled = _selectedOutputPage.BCanRename
+        UpdateSelectAllCheckBoxText()
     End Sub
 
     Private Sub RefreshPage()
@@ -302,5 +304,38 @@ Public Class ucrOutputPages
                 tdbAddToExisting.DropDownItems.Add(toolStripButton)
             End If
         Next
+    End Sub
+
+    Private Sub SurroundingSub()
+        Dim checkBoxHost As ToolStripControlHost = New ToolStripControlHost(checkBoxSelectAll)
+        tsButtons.Items.Insert(0, checkBoxHost)
+        UpdateSelectAllCheckBoxText()
+        AddHandler checkBoxSelectAll.CheckedChanged, AddressOf selectAllCheckBox_CheckedChanged
+    End Sub
+
+    Private Sub UpdateSelectAllCheckBoxText()
+        If _outputLogger Is Nothing Then
+            Exit Sub
+        End If
+        checkBoxSelectAll.Text = ""
+        Dim iCountElements = _selectedOutputPage.SelectedElements.Count
+        If _outputLogger.OutputElements.Count > iCountElements AndAlso iCountElements > 0 Then
+            checkBoxSelectAll.Text = iCountElements & " item(s) selected"
+        End If
+    End Sub
+
+    Private Sub selectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs)
+        ' Handle CheckBox checked changed event here
+        Dim cb As CheckBox = TryCast(sender, CheckBox)
+        If cb.Checked Then
+            _selectedOutputPage.SelectAllCheckBoxes()
+        Else
+            _selectedOutputPage.ClearAllCheckBoxes()
+        End If
+        EnableDisableTopButtons()
+    End Sub
+
+    Private Sub ucrOutputPages_Load(sender As Object, e As EventArgs) Handles Me.Load
+        SurroundingSub()
     End Sub
 End Class

@@ -116,6 +116,15 @@ Public Class ucrOutputPage
     End Sub
 
     ''' <summary>
+    ''' Selects all check boxes on the page
+    ''' </summary>
+    Public Sub SelectAllCheckBoxes()
+        For Each checkbox In _checkBoxes
+            checkbox.Checked = True
+        Next
+    End Sub
+
+    ''' <summary>
     ''' Clears all outputs on the page
     ''' </summary>
     Public Sub ClearAllOutputs()
