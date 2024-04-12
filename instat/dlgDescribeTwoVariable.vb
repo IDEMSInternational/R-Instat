@@ -47,7 +47,7 @@ Public Class dlgDescribeTwoVariable
 
     Private clsGroupByPipeOperator, clsSummaryOperator, clsGroupByPipeOperator2, clsGroupByPipeOperator3, clsGroupByPipeOperator4, clsGroupByPipeOperatorData As New ROperator
 
-    Private clsGroupByPipeOperator, clsSummaryOperator, clsTildOperator, clsMapOperator, clsPivotOperator As New ROperator
+    Private clsTildOperator, clsMapOperator, clsPivotOperator As New ROperator
 
 
     Private clsgtFunction, clsMapSummaryFunction, clsMapGtFunction As New RFunction
@@ -1131,6 +1131,7 @@ Public Class dlgDescribeTwoVariable
             ChangeSumaryLabelText()
         End If
         ManageControlsVisibility()
+    End Sub
 
     Private Sub SetHelpOptions()
         Select Case enumTwovariableMode
