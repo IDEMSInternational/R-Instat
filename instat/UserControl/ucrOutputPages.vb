@@ -309,18 +309,23 @@ Public Class ucrOutputPages
     Private Sub SurroundingSub()
         Dim checkBoxHost As ToolStripControlHost = New ToolStripControlHost(checkBoxSelectAll)
         tsButtons.Items.Insert(0, checkBoxHost)
-        UpdateSelectAllCheckBoxText()
-        AddHandler checkBoxSelectAll.CheckedChanged, AddressOf selectAllCheckBox_CheckedChanged
+        AddHandler checkBoxSelectAll.Click, AddressOf selectAllCheckBox_CheckedChanged
     End Sub
 
     Private Sub UpdateSelectAllCheckBoxText()
         If _outputLogger Is Nothing Then
             Exit Sub
         End If
-        checkBoxSelectAll.Text = ""
         Dim iCountElements = _selectedOutputPage.SelectedElements.Count
-        If _outputLogger.OutputElements.Count > iCountElements AndAlso iCountElements > 0 Then
+        If iCountElements > 0 AndAlso _outputLogger.OutputElements.Count > iCountElements Then
             checkBoxSelectAll.Text = iCountElements & " item(s) selected"
+            checkBoxSelectAll.CheckState = CheckState.Indeterminate
+        ElseIf _outputLogger.OutputElements.Count = iCountElements Then
+            checkBoxSelectAll.Text = "Deselect All"
+            checkBoxSelectAll.CheckState = CheckState.Checked
+        Else
+            checkBoxSelectAll.Text = "Select All"
+            checkBoxSelectAll.CheckState = CheckState.Unchecked
         End If
     End Sub
 
