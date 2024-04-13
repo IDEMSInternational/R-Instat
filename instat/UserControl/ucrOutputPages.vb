@@ -316,17 +316,26 @@ Public Class ucrOutputPages
         If _outputLogger Is Nothing Then
             Exit Sub
         End If
-        Dim iCountElements = _selectedOutputPage.SelectedElements.Count
-        If iCountElements > 0 AndAlso _outputLogger.OutputElements.Count > iCountElements Then
-            checkBoxSelectAll.Text = iCountElements & " item(s) selected"
-            checkBoxSelectAll.CheckState = CheckState.Indeterminate
-        ElseIf _outputLogger.OutputElements.Count = iCountElements Then
-            checkBoxSelectAll.Text = "Deselect All"
-            checkBoxSelectAll.CheckState = CheckState.Checked
+
+        Dim iCountOutputElements As Integer = 0
+        If SelectedTab() = "Main" Then
+            iCountOutputElements = _outputLogger.OutputElements.Count
         Else
-            checkBoxSelectAll.Text = "Select All"
-            checkBoxSelectAll.CheckState = CheckState.Unchecked
+            iCountOutputElements = _outputLogger.GetFilteredList(SelectedTab).Output.Count
         End If
+
+        Dim iSelectedElements = _selectedOutputPage.SelectedElements.Count
+        Select Case True
+            Case iSelectedElements > 0 AndAlso iCountOutputElements > iSelectedElements
+                checkBoxSelectAll.Text = $"{iSelectedElements} item(s) selected"
+                checkBoxSelectAll.CheckState = CheckState.Indeterminate
+            Case iCountOutputElements = iSelectedElements
+                checkBoxSelectAll.Text = "Deselect All"
+                checkBoxSelectAll.CheckState = CheckState.Checked
+            Case Else
+                checkBoxSelectAll.Text = "Select All"
+                checkBoxSelectAll.CheckState = CheckState.Unchecked
+        End Select
     End Sub
 
     Private Sub selectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs)

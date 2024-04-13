@@ -110,7 +110,7 @@ Public Class clsOutputLogger
 
             'add the output with it's R script as another output element
             outputElement.SetContent("", outputType, strOutput)
-            '_outputElements.Add(outputElement)
+            _outputElements.Add(outputElement)
             'raise event for output pages
             RaiseEvent NewOutputAdded(outputElement, bDisplayOutputInExternalViewer)
 

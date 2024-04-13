@@ -225,7 +225,6 @@ Public Class ucrOutputPage
     End Sub
 
 
-
     Private Sub AddNewTextOutput(outputElement As clsOutputElement)
         Dim panel As Panel = AddElementPanel(outputElement)
 
@@ -389,7 +388,6 @@ Public Class ucrOutputPage
         AddHandler checkBox.Click, AddressOf checkButton_Click
         AddHandler checkBox.MouseLeave, AddressOf panelContents_MouseLeave
     End Sub
-
 
 
     ''' <summary>
