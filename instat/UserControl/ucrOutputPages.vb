@@ -85,6 +85,7 @@ Public Class ucrOutputPages
 
     Private Sub AddNewOutput(outputElement As clsOutputElement, bDisplayOutputInExternalViewer As Boolean)
         ucrMainOutputPage.AddNewOutput(outputElement, bDisplayOutputInExternalViewer)
+        UpdateSelectAllCheckBoxText()
     End Sub
 
     Private Sub AddNewOutputToTab(outputElement As clsOutputElement, tabName As String)
