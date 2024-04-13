@@ -310,6 +310,10 @@ Public Class ucrOutputPages
     Private Sub SurroundingSub()
         Dim checkBoxHost As ToolStripControlHost = New ToolStripControlHost(checkBoxSelectAll)
         tsButtons.Items.Insert(0, checkBoxHost)
+
+        Dim ttcheckBoxSelectAll As New ToolTip
+        ttcheckBoxSelectAll.SetToolTip(checkBoxSelectAll, "Toggle selection for all elements")
+
         AddHandler checkBoxSelectAll.Click, AddressOf selectAllCheckBox_CheckedChanged
     End Sub
 
@@ -328,7 +332,7 @@ Public Class ucrOutputPages
         Dim iSelectedElements = _selectedOutputPage.SelectedElements.Count
         Select Case True
             Case iSelectedElements > 0 AndAlso iCountOutputElements > iSelectedElements
-                checkBoxSelectAll.Text = $"{iSelectedElements} item(s) selected"
+                checkBoxSelectAll.Text = $"{iSelectedElements} element(s)"
                 checkBoxSelectAll.CheckState = CheckState.Indeterminate
             Case iCountOutputElements = iSelectedElements
                 checkBoxSelectAll.Text = "Deselect All"
@@ -341,8 +345,9 @@ Public Class ucrOutputPages
 
     Private Sub selectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs)
         ' Handle CheckBox checked changed event here
-        Dim cb As CheckBox = TryCast(sender, CheckBox)
-        If cb.Checked Then
+        Dim checkBoxSelectAll As CheckBox = TryCast(sender, CheckBox)
+
+        If checkBoxSelectAll.Checked Then
             _selectedOutputPage.SelectAllCheckBoxes()
         Else
             _selectedOutputPage.ClearAllCheckBoxes()
