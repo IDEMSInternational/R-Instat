@@ -39,6 +39,10 @@ Public Class ucrOutputPages
         EnableDisableTopButtons()
     End Sub
 
+    Private Sub ucrOutputPages_Load(sender As Object, e As EventArgs) Handles Me.Load
+        InitializeSelectAllCheckBox()
+    End Sub
+
     ''' <summary>
     ''' Holds options.
     ''' ToDo InstatOptions should be able to be accessed from anywhere
@@ -216,6 +220,7 @@ Public Class ucrOutputPages
             _outputLogger.AddOutputToFilteredList(element.Clone, strTabName)
         Next
         _selectedOutputPage.ClearAllCheckBoxes()
+        UpdateSelectAllCheckBoxText()
     End Sub
 
     Private Sub tbCopy_Click(sender As Object, e As EventArgs) Handles tbCopy.Click
@@ -307,14 +312,14 @@ Public Class ucrOutputPages
         Next
     End Sub
 
-    Private Sub SurroundingSub()
+    Private Sub InitializeSelectAllCheckBox()
         Dim checkBoxHost As ToolStripControlHost = New ToolStripControlHost(checkBoxSelectAll)
         tsButtons.Items.Insert(0, checkBoxHost)
 
         Dim ttcheckBoxSelectAll As New ToolTip
         ttcheckBoxSelectAll.SetToolTip(checkBoxSelectAll, "Toggle selection for all elements")
 
-        AddHandler checkBoxSelectAll.Click, AddressOf selectAllCheckBox_CheckedChanged
+        AddHandler checkBoxSelectAll.Click, AddressOf checkBoxSelectAll_Click
     End Sub
 
     Private Sub UpdateSelectAllCheckBoxText()
@@ -343,7 +348,7 @@ Public Class ucrOutputPages
         End Select
     End Sub
 
-    Private Sub selectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub checkBoxSelectAll_Click(sender As Object, e As EventArgs)
         ' Handle CheckBox checked changed event here
         Dim checkBoxSelectAll As CheckBox = TryCast(sender, CheckBox)
 
@@ -355,7 +360,4 @@ Public Class ucrOutputPages
         EnableDisableTopButtons()
     End Sub
 
-    Private Sub ucrOutputPages_Load(sender As Object, e As EventArgs) Handles Me.Load
-        SurroundingSub()
-    End Sub
 End Class
