@@ -16,6 +16,12 @@
 
 Imports instat.Translations
 Public Class dlgSplitText
+    Public enumSplitMode As String = SplitMode.Prepare
+    Public Enum SplitMode
+        Prepare
+        Climatic
+    End Enum
+
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsTextComponentsFixed, clsTextComponentsMaximum, clsStringCollFunction As New RFunction
@@ -33,6 +39,7 @@ Public Class dlgSplitText
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
@@ -162,6 +169,16 @@ Public Class dlgSplitText
         TestOKEnabled()
         sdgConstructRegexExpression.ucrReceiverForRegex.Clear()
     End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumSplitMode
+            Case SplitMode.Prepare
+                ucrBase.iHelpTopicID = 344
+            Case SplitMode.Climatic
+                ucrBase.iHelpTopicID = 601
+        End Select
+    End Sub
+
 
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
         sdgConstructRegexExpression.ShowDialog()

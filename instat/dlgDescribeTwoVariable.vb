@@ -16,6 +16,12 @@
 
 Imports instat.Translations
 Public Class dlgDescribeTwoVariable
+    Public enumTwovariableMode As String = TwovariableMode.Describe
+    Public Enum TwovariableMode
+        Describe
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bRcodeSet As Boolean = True
@@ -60,6 +66,7 @@ Public Class dlgDescribeTwoVariable
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
@@ -847,6 +854,15 @@ Public Class dlgDescribeTwoVariable
             lblFirstType.Text = "________"
             lblFirstType.ForeColor = SystemColors.ControlText
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumTwovariableMode
+            Case TwovariableMode.Describe
+                ucrBase.iHelpTopicID = 414
+            Case TwovariableMode.Climatic
+                ucrBase.iHelpTopicID = 408
+        End Select
     End Sub
 
     Private Sub ucrReceiverFirstVars_ControlValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged,
