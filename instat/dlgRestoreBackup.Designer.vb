@@ -23,11 +23,8 @@ Partial Class dlgRestoreBackup
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpSavingOptions = New System.Windows.Forms.GroupBox()
-        Me.lblBackupDataDetected = New System.Windows.Forms.Label()
-        Me.lblBackupLogDetected = New System.Windows.Forms.Label()
         Me.cmdSaveLog = New System.Windows.Forms.Button()
         Me.ucrInputSavedPathInternalLog = New instat.ucrInputTextBox()
-        Me.lblBackupInternalLogDetected = New System.Windows.Forms.Label()
         Me.lblInternalLogSavedTo = New System.Windows.Forms.Label()
         Me.cmdSaveInternalLog = New System.Windows.Forms.Button()
         Me.ucrInputSavedPathLog = New instat.ucrInputTextBox()
@@ -36,22 +33,25 @@ Partial Class dlgRestoreBackup
         Me.lblDataSavedTo = New System.Windows.Forms.Label()
         Me.ucrInputSavedPathData = New instat.ucrInputTextBox()
         Me.grpEndChoice = New System.Windows.Forms.GroupBox()
-        Me.cmdRunLog = New System.Windows.Forms.Button()
-        Me.cmdCloseSession = New System.Windows.Forms.Button()
-        Me.cmdLoadData = New System.Windows.Forms.Button()
         Me.ucrChkSendInternalLog = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkShowDataFile = New instat.ucrCheck()
+        Me.ucrChkShowLogFile = New instat.ucrCheck()
+        Me.ucrChkShowInternalLogFile = New instat.ucrCheck()
+        Me.rdoRunBackupLog = New System.Windows.Forms.RadioButton()
+        Me.rdoLoadBackupData = New System.Windows.Forms.RadioButton()
+        Me.rdoNeither = New System.Windows.Forms.RadioButton()
         Me.grpSavingOptions.SuspendLayout()
         Me.grpEndChoice.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpSavingOptions
         '
-        Me.grpSavingOptions.Controls.Add(Me.lblBackupDataDetected)
-        Me.grpSavingOptions.Controls.Add(Me.lblBackupLogDetected)
+        Me.grpSavingOptions.Controls.Add(Me.ucrChkShowInternalLogFile)
+        Me.grpSavingOptions.Controls.Add(Me.ucrChkShowLogFile)
+        Me.grpSavingOptions.Controls.Add(Me.ucrChkShowDataFile)
         Me.grpSavingOptions.Controls.Add(Me.cmdSaveLog)
         Me.grpSavingOptions.Controls.Add(Me.ucrInputSavedPathInternalLog)
-        Me.grpSavingOptions.Controls.Add(Me.lblBackupInternalLogDetected)
         Me.grpSavingOptions.Controls.Add(Me.lblInternalLogSavedTo)
         Me.grpSavingOptions.Controls.Add(Me.cmdSaveInternalLog)
         Me.grpSavingOptions.Controls.Add(Me.ucrInputSavedPathLog)
@@ -61,36 +61,18 @@ Partial Class dlgRestoreBackup
         Me.grpSavingOptions.Controls.Add(Me.ucrInputSavedPathData)
         Me.grpSavingOptions.Location = New System.Drawing.Point(12, 31)
         Me.grpSavingOptions.Name = "grpSavingOptions"
-        Me.grpSavingOptions.Size = New System.Drawing.Size(877, 154)
+        Me.grpSavingOptions.Size = New System.Drawing.Size(726, 154)
         Me.grpSavingOptions.TabIndex = 20
         Me.grpSavingOptions.TabStop = False
         Me.grpSavingOptions.Text = "Saving Options"
         '
-        'lblBackupDataDetected
-        '
-        Me.lblBackupDataDetected.AutoSize = True
-        Me.lblBackupDataDetected.Location = New System.Drawing.Point(11, 29)
-        Me.lblBackupDataDetected.Name = "lblBackupDataDetected"
-        Me.lblBackupDataDetected.Size = New System.Drawing.Size(136, 13)
-        Me.lblBackupDataDetected.TabIndex = 8
-        Me.lblBackupDataDetected.Text = "Backup Data File Detected"
-        '
-        'lblBackupLogDetected
-        '
-        Me.lblBackupLogDetected.AutoSize = True
-        Me.lblBackupLogDetected.Location = New System.Drawing.Point(11, 76)
-        Me.lblBackupLogDetected.Name = "lblBackupLogDetected"
-        Me.lblBackupLogDetected.Size = New System.Drawing.Size(131, 13)
-        Me.lblBackupLogDetected.TabIndex = 4
-        Me.lblBackupLogDetected.Text = "Backup Log File Detected"
-        '
         'cmdSaveLog
         '
-        Me.cmdSaveLog.Location = New System.Drawing.Point(261, 68)
+        Me.cmdSaveLog.Location = New System.Drawing.Point(228, 68)
         Me.cmdSaveLog.Name = "cmdSaveLog"
-        Me.cmdSaveLog.Size = New System.Drawing.Size(241, 29)
+        Me.cmdSaveLog.Size = New System.Drawing.Size(145, 29)
         Me.cmdSaveLog.TabIndex = 5
-        Me.cmdSaveLog.Text = "Save Backup Log..."
+        Me.cmdSaveLog.Text = "Browse"
         Me.cmdSaveLog.UseVisualStyleBackColor = True
         '
         'ucrInputSavedPathInternalLog
@@ -99,24 +81,15 @@ Partial Class dlgRestoreBackup
         Me.ucrInputSavedPathInternalLog.AutoSize = True
         Me.ucrInputSavedPathInternalLog.IsMultiline = False
         Me.ucrInputSavedPathInternalLog.IsReadOnly = False
-        Me.ucrInputSavedPathInternalLog.Location = New System.Drawing.Point(605, 123)
+        Me.ucrInputSavedPathInternalLog.Location = New System.Drawing.Point(447, 123)
         Me.ucrInputSavedPathInternalLog.Name = "ucrInputSavedPathInternalLog"
         Me.ucrInputSavedPathInternalLog.Size = New System.Drawing.Size(258, 21)
         Me.ucrInputSavedPathInternalLog.TabIndex = 16
         '
-        'lblBackupInternalLogDetected
-        '
-        Me.lblBackupInternalLogDetected.AutoSize = True
-        Me.lblBackupInternalLogDetected.Location = New System.Drawing.Point(11, 123)
-        Me.lblBackupInternalLogDetected.Name = "lblBackupInternalLogDetected"
-        Me.lblBackupInternalLogDetected.Size = New System.Drawing.Size(169, 13)
-        Me.lblBackupInternalLogDetected.TabIndex = 6
-        Me.lblBackupInternalLogDetected.Text = "Backup Internal Log File Detected"
-        '
         'lblInternalLogSavedTo
         '
         Me.lblInternalLogSavedTo.AutoSize = True
-        Me.lblInternalLogSavedTo.Location = New System.Drawing.Point(509, 125)
+        Me.lblInternalLogSavedTo.Location = New System.Drawing.Point(385, 125)
         Me.lblInternalLogSavedTo.Name = "lblInternalLogSavedTo"
         Me.lblInternalLogSavedTo.Size = New System.Drawing.Size(55, 13)
         Me.lblInternalLogSavedTo.TabIndex = 15
@@ -124,11 +97,11 @@ Partial Class dlgRestoreBackup
         '
         'cmdSaveInternalLog
         '
-        Me.cmdSaveInternalLog.Location = New System.Drawing.Point(262, 115)
+        Me.cmdSaveInternalLog.Location = New System.Drawing.Point(229, 115)
         Me.cmdSaveInternalLog.Name = "cmdSaveInternalLog"
-        Me.cmdSaveInternalLog.Size = New System.Drawing.Size(240, 29)
+        Me.cmdSaveInternalLog.Size = New System.Drawing.Size(144, 29)
         Me.cmdSaveInternalLog.TabIndex = 7
-        Me.cmdSaveInternalLog.Text = "Save Backup Internal Log..."
+        Me.cmdSaveInternalLog.Text = "Browse"
         Me.cmdSaveInternalLog.UseVisualStyleBackColor = True
         '
         'ucrInputSavedPathLog
@@ -137,24 +110,24 @@ Partial Class dlgRestoreBackup
         Me.ucrInputSavedPathLog.AutoSize = True
         Me.ucrInputSavedPathLog.IsMultiline = False
         Me.ucrInputSavedPathLog.IsReadOnly = False
-        Me.ucrInputSavedPathLog.Location = New System.Drawing.Point(604, 76)
+        Me.ucrInputSavedPathLog.Location = New System.Drawing.Point(446, 76)
         Me.ucrInputSavedPathLog.Name = "ucrInputSavedPathLog"
         Me.ucrInputSavedPathLog.Size = New System.Drawing.Size(258, 21)
         Me.ucrInputSavedPathLog.TabIndex = 14
         '
         'cmdSaveData
         '
-        Me.cmdSaveData.Location = New System.Drawing.Point(262, 21)
+        Me.cmdSaveData.Location = New System.Drawing.Point(229, 21)
         Me.cmdSaveData.Name = "cmdSaveData"
-        Me.cmdSaveData.Size = New System.Drawing.Size(240, 29)
+        Me.cmdSaveData.Size = New System.Drawing.Size(144, 29)
         Me.cmdSaveData.TabIndex = 9
-        Me.cmdSaveData.Text = "Save Backup Data..."
+        Me.cmdSaveData.Text = "Browse"
         Me.cmdSaveData.UseVisualStyleBackColor = True
         '
         'lblLogSavedTo
         '
         Me.lblLogSavedTo.AutoSize = True
-        Me.lblLogSavedTo.Location = New System.Drawing.Point(509, 78)
+        Me.lblLogSavedTo.Location = New System.Drawing.Point(385, 78)
         Me.lblLogSavedTo.Name = "lblLogSavedTo"
         Me.lblLogSavedTo.Size = New System.Drawing.Size(55, 13)
         Me.lblLogSavedTo.TabIndex = 13
@@ -163,7 +136,7 @@ Partial Class dlgRestoreBackup
         'lblDataSavedTo
         '
         Me.lblDataSavedTo.AutoSize = True
-        Me.lblDataSavedTo.Location = New System.Drawing.Point(508, 29)
+        Me.lblDataSavedTo.Location = New System.Drawing.Point(384, 29)
         Me.lblDataSavedTo.Name = "lblDataSavedTo"
         Me.lblDataSavedTo.Size = New System.Drawing.Size(55, 13)
         Me.lblDataSavedTo.TabIndex = 11
@@ -175,49 +148,22 @@ Partial Class dlgRestoreBackup
         Me.ucrInputSavedPathData.AutoSize = True
         Me.ucrInputSavedPathData.IsMultiline = False
         Me.ucrInputSavedPathData.IsReadOnly = False
-        Me.ucrInputSavedPathData.Location = New System.Drawing.Point(604, 27)
+        Me.ucrInputSavedPathData.Location = New System.Drawing.Point(446, 27)
         Me.ucrInputSavedPathData.Name = "ucrInputSavedPathData"
         Me.ucrInputSavedPathData.Size = New System.Drawing.Size(258, 21)
         Me.ucrInputSavedPathData.TabIndex = 12
         '
         'grpEndChoice
         '
-        Me.grpEndChoice.Controls.Add(Me.cmdRunLog)
-        Me.grpEndChoice.Controls.Add(Me.cmdCloseSession)
-        Me.grpEndChoice.Controls.Add(Me.cmdLoadData)
-        Me.grpEndChoice.Location = New System.Drawing.Point(131, 221)
+        Me.grpEndChoice.Controls.Add(Me.rdoNeither)
+        Me.grpEndChoice.Controls.Add(Me.rdoLoadBackupData)
+        Me.grpEndChoice.Controls.Add(Me.rdoRunBackupLog)
+        Me.grpEndChoice.Location = New System.Drawing.Point(222, 221)
         Me.grpEndChoice.Name = "grpEndChoice"
-        Me.grpEndChoice.Size = New System.Drawing.Size(602, 66)
+        Me.grpEndChoice.Size = New System.Drawing.Size(394, 66)
         Me.grpEndChoice.TabIndex = 23
         Me.grpEndChoice.TabStop = False
         Me.grpEndChoice.Text = "Choose one of the following to proceed"
-        '
-        'cmdRunLog
-        '
-        Me.cmdRunLog.Location = New System.Drawing.Point(11, 24)
-        Me.cmdRunLog.Name = "cmdRunLog"
-        Me.cmdRunLog.Size = New System.Drawing.Size(190, 29)
-        Me.cmdRunLog.TabIndex = 1
-        Me.cmdRunLog.Text = "Run Backup Log"
-        Me.cmdRunLog.UseVisualStyleBackColor = True
-        '
-        'cmdCloseSession
-        '
-        Me.cmdCloseSession.Location = New System.Drawing.Point(415, 24)
-        Me.cmdCloseSession.Name = "cmdCloseSession"
-        Me.cmdCloseSession.Size = New System.Drawing.Size(181, 29)
-        Me.cmdCloseSession.TabIndex = 2
-        Me.cmdCloseSession.Text = "Close"
-        Me.cmdCloseSession.UseVisualStyleBackColor = True
-        '
-        'cmdLoadData
-        '
-        Me.cmdLoadData.Location = New System.Drawing.Point(213, 24)
-        Me.cmdLoadData.Name = "cmdLoadData"
-        Me.cmdLoadData.Size = New System.Drawing.Size(195, 29)
-        Me.cmdLoadData.TabIndex = 3
-        Me.cmdLoadData.Text = "Load Backup Data"
-        Me.cmdLoadData.UseVisualStyleBackColor = True
         '
         'ucrChkSendInternalLog
         '
@@ -238,12 +184,72 @@ Partial Class dlgRestoreBackup
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 24
         '
+        'ucrChkShowDataFile
+        '
+        Me.ucrChkShowDataFile.AutoSize = True
+        Me.ucrChkShowDataFile.Checked = False
+        Me.ucrChkShowDataFile.Location = New System.Drawing.Point(6, 25)
+        Me.ucrChkShowDataFile.Name = "ucrChkShowDataFile"
+        Me.ucrChkShowDataFile.Size = New System.Drawing.Size(216, 23)
+        Me.ucrChkShowDataFile.TabIndex = 25
+        '
+        'ucrChkShowLogFile
+        '
+        Me.ucrChkShowLogFile.AutoSize = True
+        Me.ucrChkShowLogFile.Checked = False
+        Me.ucrChkShowLogFile.Location = New System.Drawing.Point(6, 74)
+        Me.ucrChkShowLogFile.Name = "ucrChkShowLogFile"
+        Me.ucrChkShowLogFile.Size = New System.Drawing.Size(216, 23)
+        Me.ucrChkShowLogFile.TabIndex = 26
+        '
+        'ucrChkShowInternalLogFile
+        '
+        Me.ucrChkShowInternalLogFile.AutoSize = True
+        Me.ucrChkShowInternalLogFile.Checked = False
+        Me.ucrChkShowInternalLogFile.Location = New System.Drawing.Point(6, 117)
+        Me.ucrChkShowInternalLogFile.Name = "ucrChkShowInternalLogFile"
+        Me.ucrChkShowInternalLogFile.Size = New System.Drawing.Size(216, 23)
+        Me.ucrChkShowInternalLogFile.TabIndex = 27
+        '
+        'rdoRunBackupLog
+        '
+        Me.rdoRunBackupLog.AutoSize = True
+        Me.rdoRunBackupLog.Location = New System.Drawing.Point(25, 30)
+        Me.rdoRunBackupLog.Name = "rdoRunBackupLog"
+        Me.rdoRunBackupLog.Size = New System.Drawing.Size(106, 17)
+        Me.rdoRunBackupLog.TabIndex = 42
+        Me.rdoRunBackupLog.TabStop = True
+        Me.rdoRunBackupLog.Text = "Run Backup Log"
+        Me.rdoRunBackupLog.UseVisualStyleBackColor = True
+        '
+        'rdoLoadBackupData
+        '
+        Me.rdoLoadBackupData.AutoSize = True
+        Me.rdoLoadBackupData.Location = New System.Drawing.Point(151, 30)
+        Me.rdoLoadBackupData.Name = "rdoLoadBackupData"
+        Me.rdoLoadBackupData.Size = New System.Drawing.Size(115, 17)
+        Me.rdoLoadBackupData.TabIndex = 43
+        Me.rdoLoadBackupData.TabStop = True
+        Me.rdoLoadBackupData.Text = "Load Backup Data"
+        Me.rdoLoadBackupData.UseVisualStyleBackColor = True
+        '
+        'rdoNeither
+        '
+        Me.rdoNeither.AutoSize = True
+        Me.rdoNeither.Location = New System.Drawing.Point(297, 30)
+        Me.rdoNeither.Name = "rdoNeither"
+        Me.rdoNeither.Size = New System.Drawing.Size(59, 17)
+        Me.rdoNeither.TabIndex = 44
+        Me.rdoNeither.TabStop = True
+        Me.rdoNeither.Text = "Neither"
+        Me.rdoNeither.UseVisualStyleBackColor = True
+        '
         'dlgRestoreBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(901, 359)
+        Me.ClientSize = New System.Drawing.Size(748, 359)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpEndChoice)
         Me.Controls.Add(Me.ucrChkSendInternalLog)
@@ -255,17 +261,15 @@ Partial Class dlgRestoreBackup
         Me.grpSavingOptions.ResumeLayout(False)
         Me.grpSavingOptions.PerformLayout()
         Me.grpEndChoice.ResumeLayout(False)
+        Me.grpEndChoice.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents grpSavingOptions As GroupBox
-    Friend WithEvents lblBackupDataDetected As Label
-    Friend WithEvents lblBackupLogDetected As Label
     Friend WithEvents cmdSaveLog As Button
     Friend WithEvents ucrInputSavedPathInternalLog As ucrInputTextBox
-    Friend WithEvents lblBackupInternalLogDetected As Label
     Friend WithEvents lblInternalLogSavedTo As Label
     Friend WithEvents cmdSaveInternalLog As Button
     Friend WithEvents ucrInputSavedPathLog As ucrInputTextBox
@@ -274,9 +278,12 @@ Partial Class dlgRestoreBackup
     Friend WithEvents lblDataSavedTo As Label
     Friend WithEvents ucrInputSavedPathData As ucrInputTextBox
     Friend WithEvents grpEndChoice As GroupBox
-    Friend WithEvents cmdRunLog As Button
-    Friend WithEvents cmdCloseSession As Button
-    Friend WithEvents cmdLoadData As Button
     Friend WithEvents ucrChkSendInternalLog As ucrCheck
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrChkShowDataFile As ucrCheck
+    Friend WithEvents ucrChkShowInternalLogFile As ucrCheck
+    Friend WithEvents ucrChkShowLogFile As ucrCheck
+    Friend WithEvents rdoNeither As RadioButton
+    Friend WithEvents rdoLoadBackupData As RadioButton
+    Friend WithEvents rdoRunBackupLog As RadioButton
 End Class

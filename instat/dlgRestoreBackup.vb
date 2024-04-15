@@ -45,37 +45,37 @@ Public Class dlgRestoreBackup
             strAutoSavedInternalLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveInternalLogFolderPath).ToArray
         End If
 
-        ucrBase.OKEnabled(False)
         ucrBase.contextMenuStripToScript.Enabled = False
 
         ucrChkSendInternalLog.SetText("Send Debugging Log to R-Instat Team")
+
         strScript = ""
         strLoadDateFilePath = ""
         If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 Then
-            lblBackupDataDetected.Text = "Backup Data File Detected"
+            ucrChkShowDataFile.SetText("Backup Data File Detected")
             cmdSaveData.Enabled = True
-            cmdLoadData.Enabled = True
+            rdoLoadBackupData.Enabled = True
         Else
-            lblBackupDataDetected.Text = "No Backup Data File Detected"
+            ucrChkShowDataFile.SetText("No Backup Data File Detected")
             cmdSaveData.Enabled = False
-            cmdLoadData.Enabled = False
+            rdoLoadBackupData.Enabled = False
         End If
         If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 Then
-            lblBackupLogDetected.Text = "Backup Log File Detected"
+            ucrChkShowLogFile.SetText("Backup Log File Detected")
             cmdSaveLog.Enabled = True
-            cmdRunLog.Enabled = True
+            rdoRunBackupLog.Enabled = True
         Else
-            lblBackupLogDetected.Text = "No Backup Log File Detected"
+            ucrChkShowLogFile.SetText("No Backup Log File Detected")
             cmdSaveLog.Enabled = False
-            cmdRunLog.Enabled = False
+            rdoRunBackupLog.Enabled = False
         End If
         If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 Then
-            lblBackupInternalLogDetected.Text = "Backup Debugging Log File Detected"
+            ucrChkShowInternalLogFile.SetText("Backup Debugging Log File Detected")
             cmdSaveInternalLog.Enabled = True
             ucrChkSendInternalLog.Visible = False
             ucrChkSendInternalLog.Checked = False
         Else
-            lblBackupInternalLogDetected.Text = "No Backup Debugging Log File Detected"
+            ucrChkShowInternalLogFile.SetText("No Backup Debugging Log File Detected")
             cmdSaveInternalLog.Enabled = False
             ucrChkSendInternalLog.Visible = False
             ucrChkSendInternalLog.Checked = False
@@ -84,8 +84,9 @@ Public Class dlgRestoreBackup
         ucrInputSavedPathInternalLog.IsReadOnly = True
         ucrInputSavedPathLog.IsReadOnly = True
 
-        cmdCloseSession.Enabled = True
+        rdoNeither.Enabled = True
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
     Public Function GetScript() As String
@@ -162,36 +163,50 @@ Public Class dlgRestoreBackup
         End If
     End Sub
 
-    Private Sub cmdRunLog_Click(sender As Object, e As EventArgs) Handles cmdRunLog.Click
-        SaveFiles()
-        If File.Exists(strAutoSavedLogFilePaths(0)) Then
-            Try
-                strScript = File.ReadAllText(strAutoSavedLogFilePaths(0))
-            Catch ex As Exception
-                MsgBox("Could not read log file." & Environment.NewLine & ex.Message, "Cannot read file")
-                strScript = ""
-            End Try
+    Private Sub TestOKEnabled()
+        If rdoRunBackupLog.Checked OrElse rdoLoadBackupData.Checked OrElse rdoNeither.Checked Then
+            ucrBase.OKEnabled(True)
+            bUserClose = False
+        Else
+            ucrBase.OKEnabled(False)
         End If
-        bUserClose = False
-        Close()
 
     End Sub
 
-    Private Sub cmdLoadData_Click(sender As Object, e As EventArgs) Handles cmdLoadData.Click
-        SaveFiles()
-        strLoadDateFilePath = strAutoSavedDataFilePaths(0)
-        bUserClose = False
-        Close()
+    Private Sub ucrChkSendInternalLog_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowDataFile.ControlValueChanged, ucrInputSavedPathData.ControlValueChanged,
+        ucrInputSavedPathInternalLog.ControlValueChanged, ucrInputSavedPathLog.ControlValueChanged, ucrChkShowInternalLogFile.ControlValueChanged, ucrChkShowLogFile.ControlValueChanged
+        ucrInputSavedPathData.Visible = ucrChkShowDataFile.Checked
+        ucrInputSavedPathLog.Visible = ucrChkShowLogFile.Checked
+        ucrInputSavedPathInternalLog.Visible = ucrChkShowInternalLogFile.Checked
     End Sub
 
-    Private Sub cmdCloseSession_Click(sender As Object, e As EventArgs) Handles cmdCloseSession.Click
-        SaveFiles()
-        bUserClose = False
-        Close()
+    Private Sub rdoRunBackupLog_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRunBackupLog.CheckedChanged
+        If rdoRunBackupLog.Checked Then
+            SaveFiles()
+            If File.Exists(strAutoSavedLogFilePaths(0)) Then
+                Try
+                    strScript = File.ReadAllText(strAutoSavedLogFilePaths(0))
+                Catch ex As Exception
+                    MsgBox("Could not read log file." & Environment.NewLine & ex.Message, "Cannot read file")
+                    strScript = ""
+                End Try
+            End If
+        End If
+        TestOKEnabled()
     End Sub
 
-    Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles ucrBase.ClickClose
-        Close()
+    Private Sub rdoLoadBackupData_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLoadBackupData.CheckedChanged
+        If rdoLoadBackupData.Checked Then
+            SaveFiles()
+            strLoadDateFilePath = strAutoSavedDataFilePaths(0)
+            bUserClose = False
+        End If
+        TestOKEnabled()
     End Sub
 
+    Private Sub rdoNeither_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNeither.CheckedChanged
+        If rdoNeither.Checked Then
+            Close()
+        End If
+    End Sub
 End Class
