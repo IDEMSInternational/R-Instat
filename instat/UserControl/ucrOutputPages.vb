@@ -337,7 +337,7 @@ Public Class ucrOutputPages
         Dim iSelectedElements = _selectedOutputPage.SelectedElements.Count
         Select Case True
             Case iSelectedElements > 0 AndAlso iCountOutputElements > iSelectedElements
-                checkBoxSelectAll.Text = $"{iSelectedElements} element(s)"
+                checkBoxSelectAll.Text = $"{iSelectedElements} item(s)"
                 checkBoxSelectAll.CheckState = CheckState.Indeterminate
             Case iCountOutputElements = iSelectedElements
                 checkBoxSelectAll.Text = "Deselect All"
