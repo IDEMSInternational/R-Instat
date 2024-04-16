@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsRTransform, clsOverallTransformFunction, clsTransformManipulationsFunc, clsGroupByYear, clsGroupByStation, clsReplaceNAasElement, clsRTransformCountSpellSub As New RFunction
+    Private clsRTransform, clsWBEvaporationMinFunction, clsOverallTransformFunction, clsTransformManipulationsFunc, clsGroupByYear, clsGroupByStation, clsReplaceNAasElement, clsRTransformCountSpellSub As New RFunction
     Private clsTransformCheck As New RFunction
 
     'dummy
@@ -351,6 +351,7 @@ Public Class dlgTransformClimatic
 
     Private Sub SetDefaults()
         clsRTransform = New RFunction
+        clsWBEvaporationMinFunction = New RFunction
         clsOverallTransformFunction = New RFunction
         clsTransformManipulationsFunc = New RFunction
         clsRTransformCountSpellSub = New RFunction
@@ -485,22 +486,23 @@ Public Class dlgTransformClimatic
 
         ' Water Balance
         clsRWaterBalanceFunction.bToScriptAsRString = True
-        clsRWaterBalanceFunction.SetRCommand("Reduce")
-        clsRWaterBalanceFunction.AddParameter("x", clsRFunctionParameter:=clsPMinFunctionMax, iPosition:=0, bIncludeArgumentName:=False)
-        clsPMinFunctionMax.SetRCommand("function(x, y) pmin")
+        clsRWaterBalanceFunction.SetPackageName("purrr")
+        clsRWaterBalanceFunction.SetRCommand("accumulate")
+        clsRWaterBalanceFunction.AddParameter(".f", clsRFunctionParameter:=clsPMinFunctionMax, iPosition:=0)
+        clsPMinFunctionMax.SetRCommand("~ pmin")
         clsPMinFunctionMax.AddParameter("pmax", clsRFunctionParameter:=clsPMaxFunctionMax, iPosition:=0, bIncludeArgumentName:=False)
         clsPMaxFunctionMax.SetRCommand("pmax")
         clsPMaxFunctionMax.AddParameter("calculation", clsROperatorParameter:=clsPMaxOperatorMax, iPosition:=0, bIncludeArgumentName:=False)
         clsPMaxOperatorMax.SetOperation("-")
-        clsPMaxOperatorMax.AddParameter("first", "x + y", iPosition:=0)
+        clsPMaxOperatorMax.AddParameter("first", "..1 + ..2", iPosition:=0)
         clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1)
-        clsPMaxFunctionMax.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
+        clsPMaxFunctionMax.AddParameter("0", "0", iPosition:=1, bIncludeArgumentName:=False)
         clsPMinFunctionMax.AddParameter("capacity", 60, iPosition:=1, bIncludeArgumentName:=False)
         clsRWaterBalanceFunction.AddParameter("replace_na", iPosition:=1, bIncludeArgumentName:=False)
         clsRWaterBalanceFunction.AddParameter("accumulate", "TRUE", iPosition:=2)
 
         clsWBOperator.SetOperation("-")
-        clsWBOperator.AddParameter("left", "x + y", iPosition:=0)
+        clsWBOperator.AddParameter("left", "..1 + ..2", iPosition:=0)
         clsWBOperator.AddParameter("right", clsRFunctionParameter:=clsWBEvaporation, iPosition:=1)
         clsWBOperator.bSpaceAroundOperation = True
         clsWBOperator.bBrackets = False
@@ -508,11 +510,11 @@ Public Class dlgTransformClimatic
         clsReduceOpEvapValue.SetOperation("-")
 
         clsWBEvaporation.SetRCommand("WB_evaporation")
-        clsWBEvaporation.AddParameter("water_balance", "x", iPosition:=0, bIncludeArgumentName:=False)
+        clsWBEvaporation.AddParameter("water_balance", "..1", iPosition:=0, bIncludeArgumentName:=False)
         clsWBEvaporation.AddParameter("WB_evap_value", 0.5, iPosition:=1, bIncludeArgumentName:=False)
         clsWBEvaporation.AddParameter("capacity", 60, iPosition:=2, bIncludeArgumentName:=False)
-        clsWBEvaporation.AddParameter("evaporation_value", 5, iPosition:=3, bIncludeArgumentName:=False)
-        clsWBEvaporation.AddParameter("rain", "rain", iPosition:=4, bIncludeArgumentName:=False)
+        'clsWBEvaporation.AddParameter("evaporation_value", 5, iPosition:=3, bIncludeArgumentName:=False)
+        clsWBEvaporation.AddParameter("y", "..2", iPosition:=4, bIncludeArgumentName:=False)
 
         clsTailFunction.SetPackageName("utils")
         clsTailFunction.SetRCommand("tail")
@@ -620,6 +622,15 @@ Public Class dlgTransformClimatic
         clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
         clsRTransform.AddParameter("save", 2, iPosition:=6)
         clsRTransform.SetAssignTo("transform_calculation")
+
+        'clsRTransformFunction.SetRCommand("instat_calculation$new")
+        'clsRTransformFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        'clsRTransformFunction.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1) ' changes depending on the rdo
+        'clsRTransformFunction.AddParameter("result_name", Chr(34) & "count" & Chr(34), iPosition:=2)
+        'clsRTransformFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
+        'clsRTransformFunction.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
+        'clsRTransformFunction.AddParameter("save", 2, iPosition:=6)
+        'clsRTransformFunction.SetAssignTo("transform_calculation")
 
         clsTransformCheck = clsRTransform
 
@@ -1095,28 +1106,42 @@ Public Class dlgTransformClimatic
         AddCalculate()
     End Sub
     Private Sub ReduceWaterBalance()
+        'wb_min <- instat_calculation$new(type="calculation", function_exp="purrr::accumulate(.f= ~ pmin(pmax(..1 + ..2 - WB_evaporation(..1, 0.5, 100, 5, ..2), 0)), .x=tail(x=rain_min, n=-1), .init=0)", result_name="wb_min", sub_calculations=list(rain_min))
+        '        wb_min <- instat_calculation$new(type="calculation", function_exp="Reduce(f=function(x, y) pmin(pmax(x + y, 0), 100), x=tail(x=rain_min - 5, n=-1), init=0, accumulate=TRUE)", result_name="wb_min", sub_calculations=list(rain_min))
+
+        'wb_min <- instat_calculation$new(type="calculation", function_exp="purrr::accumulate(.f= ~ pmin(pmax(..1 + ..2, 0), 100), .x=tail(x=rain_min - 5, n=-1), .init=0)", result_name="wb_min", sub_calculations=list(rain_min))
+        'transform_calculation <- instat_calculation$new(type="calculation", function_exp="Reduce(function(x, y) pmin(pmax(x + y - 5, 0), 60), rain, accumulate=TRUE)", result_name="water", manipulations=list(), save=2, before=FALSE, calculated_from=list("dodoma"="rain"), adjacent_column="rain")
+        'transform_calculation <- instat_calculation$new(type="calculation", function_exp="purrr::accumulate(.f=~ pmin(pmax(..1 + ..2 - 5, 0), 60), rain, accumulate=TRUE)", result_name="water", manipulations=list(), save=2, before=FALSE, adjacent_column="rain", calculated_from=list("dodoma"="rain"))
+        'transform_calculation <- instat_calculation$new(type="calculation", function_exp="purrr::accumulate(.f=~ pmin(pmax(..1 + ..2 - WB_evaporation(..1, 0.5, 60, ..2), , 0), 60), rain, accumulate=TRUE)", result_name="water", manipulations=list(), save=2, before=FALSE, adjacent_column="rain", calculated_from=list("dodoma"="rain"))
+
         If rdoWaterBalance.Checked Then
             If rdoEvapValue.Checked Then
                 clsRTransform.RemoveParameterByName("calculated_from")
                 ucrReceiverData.SetMeAsReceiver()
                 clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")")
                 If ucrChkWB.Checked Then
-                    clsPMaxFunctionMax.AddParameter("0", 0, iPosition:=1, bIncludeArgumentName:=False)
-                    clsPMaxOperatorMax.AddParameter("wb", clsROperatorParameter:=clsWBOperator, iPosition:=0, bIncludeArgumentName:=False)
                     clsPMaxOperatorMax.RemoveParameterByName("first")
                     clsPMaxOperatorMax.RemoveParameterByName("evaporation.value")
-                    clsRWaterBalanceFunction.AddParameter("replace_na", clsRFunctionParameter:=clsTailFunction, iPosition:=2, bIncludeArgumentName:=False)
-                    clsRWaterBalanceFunction.AddParameter("init", "0", iPosition:=3, bIncludeArgumentName:=False)
+                    clsPMaxFunctionMax.AddParameter("wb", clsROperatorParameter:=clsWBOperator, iPosition:=0, bIncludeArgumentName:=False)
                 Else
                     clsPMaxOperatorMax.AddParameter("evaporation.value", 5, iPosition:=1, bIncludeArgumentName:=False)
                     clsPMaxFunctionMax.RemoveParameterByName("wb")
                 End If
-
             ElseIf rdoEvapVariable.Checked Then
+                'wb_min <- instat_calculation$new(type="calculation", function_exp="Reduce(f=function(x, y) pmin(pmax(x + y, 0), 100), x=tail(x=rain_min - ifelse(test=is.na(x=month_abbr), yes=5, no=month_abbr), n=-1), init=0, accumulate=TRUE)", result_name="wb_min", sub_calculations=list(rain_min))
+                'wb_min <- instat_calculation$new(type="calculation", function_exp="purrr::accumulate2(.f= ~ pmin(pmax(..1 + ..2, 0), 100), .y=tail(x=tmax, n=-1), .x=tail(x=rain_min, n=-1), .init=0)", result_name="wb_min", sub_calculations=list(rain_min))
+                'wb_min <- instat_calculation$new(type="calculation", function_exp="purrr::accumulate2(.f= ~ pmin(pmax(..1 + ..2 - WB_evaporation(..1, 0.5, 100, ..3, ..2), 0)), .y=tail(x=tmax, n=-1), .x=tail(x=rain_min, n=-1), .init=0)", result_name="wb_min", sub_calculations=list(rain_min))
+
+                'transform_calculation <- instat_calculation$new(type="calculation", function_exp="Reduce(function(x, y) pmin(pmax(x + y, 0), 60), rain - tmax, accumulate=TRUE)", result_name="water", manipulations=list(), save=2, before=FALSE, calculated_from=list("dodoma"="rain", "dodoma"="tmax"), adjacent_column="rain")
+                'transform_calculation <- instat_calculation$new(type="calculation", function_exp="purrr::accumulate(.f=~ pmin(pmax(..1 + ..2, 0), 60), rain - tmax, accumulate=TRUE)", result_name="water", manipulations=list(), save=2, before=FALSE, calculated_from=list("dodoma"="rain", "dodoma"="tmax"), adjacent_column="rain")
                 ucrReceiverEvap.SetMeAsReceiver()
-                clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ", " & strCurrDataName & "=" & ucrReceiverEvap.GetVariableNames & ")")
-                clsRWaterBalanceFunction.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapValue, iPosition:=1, bIncludeArgumentName:=False)
                 clsPMaxOperatorMax.RemoveParameterByName("evaporation.value")
+                clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ", " & strCurrDataName & "=" & ucrReceiverEvap.GetVariableNames & ")")
+                If ucrChkWB.Checked Then
+
+                Else
+                    clsRWaterBalanceFunction.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapValue, iPosition:=1, bIncludeArgumentName:=False)
+                End If
             End If
         End If
     End Sub
