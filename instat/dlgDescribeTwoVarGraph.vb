@@ -81,6 +81,7 @@ Public Class dlgDescribeTwoVarGraph
         Dim dctLabelColours As New Dictionary(Of String, String)
         Dim dctLabelPositions As New Dictionary(Of String, String)
         Dim dctLabelSizes As New Dictionary(Of String, String)
+        Dim dctLegendPosition As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 416
         ucrBase.clsRsyntax.iCallType = 3
@@ -157,6 +158,19 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputLabelColour.SetLinkedDisplayControl(lblLabelColour)
         ucrInputLabelPosition.SetLinkedDisplayControl(lblLabelPosition)
         ucrInputLabelSize.SetLinkedDisplayControl(lblLabelSize)
+
+        ucrChkLegend.SetText("Legend:")
+        ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
 
         ucrInputLabelPosition.SetParameter(New RParameter("vjust", 2))
         dctLabelPositions.Add("Out", "-0.25")
@@ -550,7 +564,8 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputLabelPosition.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelColour.SetRCode(clsGeomTextFunction, bReset)
         ucrInputLabelSize.SetRCode(clsGeomTextFunction, bReset)
-
+        ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         bRCodeSet = True
         Results()
         SetFreeYAxis()
@@ -926,6 +941,18 @@ Public Class dlgDescribeTwoVarGraph
         End If
     End Sub
 
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
+        AddRemoveTheme()
+    End Sub
+
     Private Sub AddRemoveFreeScaleX(bAdd As Boolean)
         Dim clsScaleParam As RParameter
         Dim strXName As String
@@ -1042,7 +1069,18 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub ManageControlsVisibility()
+        ucrChkAddLabelsText.Visible = False
+        ucrInputLabelPosition.Visible = False
+        ucrInputLabelColour.Visible = False
+        ucrInputLabelSize.Visible = False
+        ucrInputPosition.Visible = False
+        lblPosition.Visible = False
+        lblPointJitter.Visible = False
+        lblPointTransparency.Visible = False
+        ucrNudJitter.Visible = False
+        ucrNudTransparency.Visible = False
         grpSummaries.Visible = rdoThreeVariable.Checked OrElse rdoBy.Checked
+        ucrChkLegend.Visible = rdoThreeVariable.Checked OrElse rdoBy.Checked
         grpOptions.Visible = rdoBy.Checked OrElse rdoThreeVariable.Checked
         lblThirdType.Visible = rdoThreeVariable.Checked
         lblThreeBy.Visible = rdoThreeVariable.Checked
@@ -1053,6 +1091,12 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputLabelPosition.Visible = False
         ucrInputLabelColour.Visible = False
         ucrInputLabelSize.Visible = False
+        ucrInputPosition.Visible = False
+        lblPosition.Visible = False
+        lblPointJitter.Visible = False
+        lblPointTransparency.Visible = False
+        ucrNudJitter.Visible = False
+        ucrNudTransparency.Visible = False
         If rdoBy.Checked AndAlso strFirstVariablesType = "categorical" AndAlso
             strSecondVariableType = "categorical" AndAlso bRCodeSet AndAlso
            ucrInputCategoricalByCategorical.GetText = "Bar Chart" Then

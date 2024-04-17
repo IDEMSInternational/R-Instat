@@ -111,6 +111,8 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblThreeVariable = New System.Windows.Forms.Label()
         Me.ucrReceiverThreeVariableSecond = New instat.ucrReceiverSingle()
         Me.lblThreeVariableSecond = New System.Windows.Forms.Label()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegend = New instat.ucrCheck()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpTypeOfDispaly.SuspendLayout()
@@ -452,7 +454,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkUpper)
         Me.grpTypeOfDispaly.Location = New System.Drawing.Point(11, 292)
         Me.grpTypeOfDispaly.Name = "grpTypeOfDispaly"
-        Me.grpTypeOfDispaly.Size = New System.Drawing.Size(422, 151)
+        Me.grpTypeOfDispaly.Size = New System.Drawing.Size(422, 174)
         Me.grpTypeOfDispaly.TabIndex = 22
         Me.grpTypeOfDispaly.TabStop = False
         Me.grpTypeOfDispaly.Text = "Type Of Dispaly"
@@ -938,12 +940,34 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblThreeVariableSecond.TabIndex = 71
         Me.lblThreeVariableSecond.Text = "Second Variable:"
         '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(100, 427)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
+        Me.ucrInputLegendPosition.TabIndex = 80
+        '
+        'ucrChkLegend
+        '
+        Me.ucrChkLegend.AutoSize = True
+        Me.ucrChkLegend.Checked = False
+        Me.ucrChkLegend.Location = New System.Drawing.Point(14, 428)
+        Me.ucrChkLegend.Name = "ucrChkLegend"
+        Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkLegend.TabIndex = 79
+        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(438, 554)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
+        Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.grpSummaries)
         Me.Controls.Add(Me.lblThreeVariable)
         Me.Controls.Add(Me.ucrReceiverThreeVariable)
@@ -955,7 +979,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.Controls.Add(Me.ucrChkAddLabelsText)
         Me.Controls.Add(Me.lblLabelPosition)
         Me.Controls.Add(Me.ucrInputLabelColour)
-        Me.Controls.Add(Me.grpTypeOfDispaly)
         Me.Controls.Add(Me.lblColour)
         Me.Controls.Add(Me.ucrReceiverColour)
         Me.Controls.Add(Me.rdoPairs)
@@ -973,6 +996,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.Controls.Add(Me.cmdPairOptions)
         Me.Controls.Add(Me.lblThreeVariableSecond)
         Me.Controls.Add(Me.ucrReceiverThreeVariableSecond)
+        Me.Controls.Add(Me.grpTypeOfDispaly)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -1063,4 +1087,6 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents ucrReceiverThreeVariableSecond As ucrReceiverSingle
     Friend WithEvents lblThreeVariableSecond As Label
     Friend WithEvents lblThreeBy As Label
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegend As ucrCheck
 End Class
