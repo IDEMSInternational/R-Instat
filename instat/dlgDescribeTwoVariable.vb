@@ -168,6 +168,14 @@ Public Class dlgDescribeTwoVariable
         'ucrReceiverThreeVariableSecondFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverThreeVariableSecondFactor.SetLinkedDisplayControl(lblThreeVariableSecondFactor)
 
+        ucrInputNumericByNumeric.SetItems({"Correlations", "ANOVA tables"})
+        ucrInputNumericByNumeric.SetName("Correlations")
+        ucrInputNumericByNumeric.SetDropDownStyleAsNonEditable()
+
+        ucrInputNumeriByFactor.SetItems({"Summary tables", "ANOVA tables"})
+        ucrInputNumeriByFactor.SetName("Summary tables")
+        ucrInputNumeriByFactor.SetDropDownStyleAsNonEditable()
+
         ucrSaveTable.SetDataFrameSelector(ucrSelectorDescribeTwoVar.ucrAvailableDataFrames)
         ucrSaveTable.SetIsTextBox()
 
@@ -555,7 +563,6 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ManageControlsVisibility()
         grpSummaries.Visible = rdoThreeVariable.Checked OrElse rdoTwoVariable.Checked
-        ucrReorderSummary.Visible = IsNumericByFactor()
         cmdSummaries.Visible = IsNumericByFactor()
         ucrChkDisplayMargins.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactor()
@@ -582,6 +589,9 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ChangeBaseRCode()
         ucrSaveTable.Visible = False
+        ucrInputNumericByNumeric.Visible = False
+        ucrInputNumeriByFactor.Visible = False
+        ucrReorderSummary.Visible = False
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
 
@@ -601,16 +611,38 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoTwoVariable.Checked Then
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             If IsNumericByNumeric() Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRCorrelationFunction)
+                Select Case ucrInputNumericByNumeric.GetText
+                    Case "Correlations"
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsRCorrelationFunction)
+                    Case "ANOVA tables"
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaFunction)
+
+                End Select
+
                 ucrSaveTable.Visible = False
+                ucrInputNumericByNumeric.Visible = True
+                ucrInputNumeriByFactor.Visible = False
+
             ElseIf IsFactorByNumeric() Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaFunction)
                 ucrSaveTable.Visible = False
+                ucrInputNumericByNumeric.Visible = False
+                ucrInputNumeriByFactor.Visible = False
             ElseIf IsNumericByFactor() Then
+                Select Case ucrInputNumeriByFactor.GetText
+                    Case "Summary tables"
+                        ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
+                        ucrReorderSummary.Visible = True
+                    Case "ANOVA tables"
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaFunction)
+                        ucrReorderSummary.Visible = False
+                End Select
+
+                ucrInputNumericByNumeric.Visible = False
+                ucrInputNumeriByFactor.Visible = True
                 ucrSaveTable.Visible = True
                 ucrSaveTable.Location = New Point(23, 450)
                 clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
-                ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                 ucrSaveTable.SetPrefix("summary_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
@@ -622,6 +654,8 @@ Public Class dlgDescribeTwoVariable
                                      strObjectName:="last_table")
             ElseIf IsFactorByFactor() Then
                 ucrSaveTable.Visible = True
+                ucrInputNumericByNumeric.Visible = False
+                ucrInputNumeriByFactor.Visible = False
                 ucrSaveTable.Location = New Point(23, 350)
                 clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
@@ -1007,14 +1041,27 @@ Public Class dlgDescribeTwoVariable
             strSummaryName = "Frequency tables"
         Else
             If rdoTwoVariable.Checked Then
+                ucrInputNumericByNumeric.Visible = False
+                ucrInputNumeriByFactor.Visible = False
                 If IsNumericByNumeric() Then
-                    strSummaryName = "Correlations"
+                    ucrInputNumericByNumeric.Visible = True
+                    ucrInputNumeriByFactor.Visible = False
+
+                    'strSummaryName = "Correlations"
                 ElseIf IsFactorByNumeric() Then
                     strSummaryName = "ANOVA tables"
+                    ucrInputNumericByNumeric.Visible = False
+                    ucrInputNumeriByFactor.Visible = False
                 ElseIf IsNumericByFactor() Then
-                    strSummaryName = "Summary tables"
+                    'strSummaryName = "Summary tables"
+                    ucrInputNumericByNumeric.Visible = False
+                    ucrInputNumeriByFactor.Visible = True
+
                 Else
                     strSummaryName = ""
+                    ucrInputNumericByNumeric.Visible = False
+                    ucrInputNumeriByFactor.Visible = False
+
                 End If
             End If
         End If
@@ -1075,7 +1122,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrReceiverSecondTwoVariableFactor_ValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondTwoVariableFactor.ControlValueChanged,
-        ucrReceiverSecondTwoVariableFactor.ControlContentsChanged
+        ucrReceiverSecondTwoVariableFactor.ControlContentsChanged, ucrInputNumericByNumeric.ControlValueChanged, ucrInputNumeriByFactor.ControlValueChanged
         AssignSecondVariableType()
         ChangeBaseRCode()
         UpdateSummaryTableFunction()
