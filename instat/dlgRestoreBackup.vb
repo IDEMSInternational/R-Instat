@@ -34,6 +34,10 @@ Public Class dlgRestoreBackup
         ucrBase.iHelpTopicID = 411
         'temporary - not yet implemented
         ucrChkSendInternalLog.Visible = False
+        ucrInputSavedPathData.Visible = ucrChkShowDataFile.Checked
+        ucrInputSavedPathLog.Visible = ucrChkShowLogFile.Checked
+        ucrInputSavedPathInternalLog.Visible = ucrChkShowInternalLogFile.Checked
+        rdoNeither.Checked = True
 
         If (Directory.Exists(strAutoSaveLogFolderPath)) Then
             strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
@@ -53,36 +57,27 @@ Public Class dlgRestoreBackup
         strLoadDateFilePath = ""
         If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 Then
             ucrChkShowDataFile.SetText("Backup Data File Detected")
-            cmdSaveData.Enabled = True
             rdoLoadBackupData.Enabled = True
         Else
             ucrChkShowDataFile.SetText("No Backup Data File Detected")
-            cmdSaveData.Enabled = False
             rdoLoadBackupData.Enabled = False
         End If
         If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 Then
             ucrChkShowLogFile.SetText("Backup Log File Detected")
-            cmdSaveLog.Enabled = True
             rdoRunBackupLog.Enabled = True
         Else
             ucrChkShowLogFile.SetText("No Backup Log File Detected")
-            cmdSaveLog.Enabled = False
             rdoRunBackupLog.Enabled = False
         End If
         If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 Then
             ucrChkShowInternalLogFile.SetText("Backup Debugging Log File Detected")
-            cmdSaveInternalLog.Enabled = True
             ucrChkSendInternalLog.Visible = False
             ucrChkSendInternalLog.Checked = False
         Else
             ucrChkShowInternalLogFile.SetText("No Backup Debugging Log File Detected")
-            cmdSaveInternalLog.Enabled = False
             ucrChkSendInternalLog.Visible = False
             ucrChkSendInternalLog.Checked = False
         End If
-        ucrInputSavedPathData.IsReadOnly = True
-        ucrInputSavedPathInternalLog.IsReadOnly = True
-        ucrInputSavedPathLog.IsReadOnly = True
 
         rdoNeither.Enabled = True
         autoTranslate(Me)
@@ -97,47 +92,11 @@ Public Class dlgRestoreBackup
         Return strLoadDateFilePath
     End Function
 
-    Private Sub cmdSaveData_Click(sender As Object, e As EventArgs) Handles cmdSaveData.Click
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save Data File"
-            dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                ucrInputSavedPathData.SetName(dlgSave.FileName)
-            Else
-                ucrInputSavedPathData.SetName("")
-            End If
-        End Using
-    End Sub
-
-    Private Sub cmdSaveLog_Click(sender As Object, e As EventArgs) Handles cmdSaveLog.Click
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save Log File"
-            dlgSave.Filter = "R script file (*.R)|*.R"
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                ucrInputSavedPathLog.SetName(dlgSave.FileName)
-            Else
-                ucrInputSavedPathLog.SetName("")
-            End If
-        End Using
-    End Sub
-
-    Private Sub cmdSaveDebuggingLog_Click(sender As Object, e As EventArgs) Handles cmdSaveInternalLog.Click
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save Debugging Log File"
-            dlgSave.Filter = "R script file (*.R)|*.R"
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                ucrInputSavedPathInternalLog.SetName(dlgSave.FileName)
-            Else
-                ucrInputSavedPathInternalLog.SetName("")
-            End If
-        End Using
-    End Sub
-
     Private Sub SaveFiles()
         If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedDataFilePaths(0)) Then
             Try
                 If Not ucrInputSavedPathData.IsEmpty() Then
-                    File.Copy(strAutoSavedDataFilePaths(0), ucrInputSavedPathData.GetText(), True)
+                    File.Copy(strAutoSavedDataFilePaths(0), ucrInputSavedPathData.FilePath(), True)
                 End If
             Catch ex As Exception
                 MsgBox("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
@@ -146,7 +105,7 @@ Public Class dlgRestoreBackup
         If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedLogFilePaths(0)) Then
             Try
                 If Not ucrInputSavedPathLog.IsEmpty() Then
-                    File.Copy(strAutoSavedLogFilePaths(0), ucrInputSavedPathLog.GetText(), True)
+                    File.Copy(strAutoSavedLogFilePaths(0), ucrInputSavedPathLog.FilePath(), True)
                 End If
             Catch ex As Exception
                 MsgBox("Could not copy and/or delete log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
@@ -155,7 +114,7 @@ Public Class dlgRestoreBackup
         If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedInternalLogFilePaths(0)) Then
             Try
                 If Not ucrInputSavedPathInternalLog.IsEmpty() Then
-                    File.Copy(strAutoSavedInternalLogFilePaths(0), ucrInputSavedPathInternalLog.GetText(), True)
+                    File.Copy(strAutoSavedInternalLogFilePaths(0), ucrInputSavedPathInternalLog.FilePath(), True)
                 End If
             Catch ex As Exception
                 MsgBox("Could not copy and/or delete internal log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
@@ -173,8 +132,7 @@ Public Class dlgRestoreBackup
 
     End Sub
 
-    Private Sub ucrChkSendInternalLog_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowDataFile.ControlValueChanged, ucrInputSavedPathData.ControlValueChanged,
-        ucrInputSavedPathInternalLog.ControlValueChanged, ucrInputSavedPathLog.ControlValueChanged, ucrChkShowInternalLogFile.ControlValueChanged, ucrChkShowLogFile.ControlValueChanged
+    Private Sub ucrChkShowDataFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowDataFile.ControlValueChanged, ucrChkShowInternalLogFile.ControlValueChanged, ucrChkShowLogFile.ControlValueChanged
         ucrInputSavedPathData.Visible = ucrChkShowDataFile.Checked
         ucrInputSavedPathLog.Visible = ucrChkShowLogFile.Checked
         ucrInputSavedPathInternalLog.Visible = ucrChkShowInternalLogFile.Checked
@@ -204,9 +162,4 @@ Public Class dlgRestoreBackup
         TestOKEnabled()
     End Sub
 
-    Private Sub rdoNeither_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNeither.CheckedChanged
-        If rdoNeither.Checked Then
-            Close()
-        End If
-    End Sub
 End Class
