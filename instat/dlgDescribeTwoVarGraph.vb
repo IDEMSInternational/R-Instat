@@ -159,6 +159,9 @@ Public Class dlgDescribeTwoVarGraph
         ucrInputLabelPosition.SetLinkedDisplayControl(lblLabelPosition)
         ucrInputLabelSize.SetLinkedDisplayControl(lblLabelSize)
 
+        ucrChkColour.SetText("Colour")
+        ucrChkColour.Enabled = False
+
         ucrChkLegend.SetText("Legend:")
         ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
@@ -1084,6 +1087,7 @@ Public Class dlgDescribeTwoVarGraph
         grpOptions.Visible = rdoBy.Checked OrElse rdoThreeVariable.Checked
         lblThirdType.Visible = rdoThreeVariable.Checked
         lblThreeBy.Visible = rdoThreeVariable.Checked
+        ucrChkColour.Visible = rdoBy.Checked
     End Sub
 
     Private Sub EnableVisibleLabelControls()

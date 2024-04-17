@@ -113,6 +113,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblThreeVariableSecond = New System.Windows.Forms.Label()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
+        Me.ucrChkColour = New instat.ucrCheck()
         Me.grpSummaries.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.grpTypeOfDispaly.SuspendLayout()
@@ -427,6 +428,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'grpTypeOfDispaly
         '
+        Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkColour)
         Me.grpTypeOfDispaly.Controls.Add(Me.lblDiagonalNA)
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputDiagonalNA)
         Me.grpTypeOfDispaly.Controls.Add(Me.lblDiagonalDiscrete)
@@ -960,6 +962,15 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 79
         '
+        'ucrChkColour
+        '
+        Me.ucrChkColour.AutoSize = True
+        Me.ucrChkColour.Checked = False
+        Me.ucrChkColour.Location = New System.Drawing.Point(3, 110)
+        Me.ucrChkColour.Name = "ucrChkColour"
+        Me.ucrChkColour.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkColour.TabIndex = 81
+        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1089,4 +1100,5 @@ Partial Class dlgDescribeTwoVarGraph
     Friend WithEvents lblThreeBy As Label
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
+    Friend WithEvents ucrChkColour As ucrCheck
 End Class
