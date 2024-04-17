@@ -22,6 +22,7 @@ Imports RInsightF461
 ''' </summary>
 Public Class ucrOutputPage
     Private _checkBoxes As List(Of CheckBox)
+    Private lastCheckedCheckbox As CheckBox
     Private _bCanReOrder As Boolean
     Private _bCanRename As Boolean
     Private _bCanDelete As Boolean
@@ -385,10 +386,10 @@ Public Class ucrOutputPage
         }
         panel.Controls.Add(checkBox)
         _checkBoxes.Add(checkBox)
+        AddHandler checkBox.CheckedChanged, AddressOf CheckBox_CheckedChanged
         AddHandler checkBox.Click, AddressOf checkButton_Click
         AddHandler checkBox.MouseLeave, AddressOf panelContents_MouseLeave
     End Sub
-
 
     ''' <summary>
     ''' Copies selected elements to clipboard
@@ -485,13 +486,24 @@ Public Class ucrOutputPage
         Next
     End Sub
 
-
     Private Sub SetRichTextBoxHeight(richTextBox As RichTextBox)
         richTextBox.Height = (richTextBox.GetLineFromCharIndex(richTextBox.Text.Length) + 1) * (richTextBox.Font.Height + richTextBox.Margin.Vertical) + 5
     End Sub
 
     Private Sub SetPictureBoxHeight(pictureBox As PictureBox)
         pictureBox.Height = pictureBox.Width / (pictureBox.Image.Width / pictureBox.Image.Height)
+    End Sub
+
+    Private Sub CheckBox_CheckedChanged(sender As Object, e As EventArgs)
+        Dim currentCheckbox As CheckBox = DirectCast(sender, CheckBox)
+        If Control.ModifierKeys = Keys.Shift Then
+            Dim startIndex As Integer = _checkBoxes.IndexOf(currentCheckbox)
+            Dim endIndex As Integer = _checkBoxes.Count - 1
+            For i As Integer = startIndex To endIndex
+                _checkBoxes(i).Checked = currentCheckbox.Checked
+            Next
+        End If
+        lastCheckedCheckbox = currentCheckbox
     End Sub
 
     Private Sub checkButton_Click(sender As Object, e As EventArgs)
