@@ -428,7 +428,6 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'grpTypeOfDispaly
         '
-        Me.grpTypeOfDispaly.Controls.Add(Me.ucrChkColour)
         Me.grpTypeOfDispaly.Controls.Add(Me.lblDiagonalNA)
         Me.grpTypeOfDispaly.Controls.Add(Me.ucrInputDiagonalNA)
         Me.grpTypeOfDispaly.Controls.Add(Me.lblDiagonalDiscrete)
@@ -957,7 +956,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(14, 428)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(9, 428)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 79
@@ -966,10 +965,10 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrChkColour.AutoSize = True
         Me.ucrChkColour.Checked = False
-        Me.ucrChkColour.Location = New System.Drawing.Point(3, 110)
+        Me.ucrChkColour.Location = New System.Drawing.Point(290, 250)
         Me.ucrChkColour.Name = "ucrChkColour"
-        Me.ucrChkColour.Size = New System.Drawing.Size(98, 24)
-        Me.ucrChkColour.TabIndex = 81
+        Me.ucrChkColour.Size = New System.Drawing.Size(88, 23)
+        Me.ucrChkColour.TabIndex = 63
         '
         'dlgDescribeTwoVarGraph
         '
@@ -977,6 +976,7 @@ Partial Class dlgDescribeTwoVarGraph
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(438, 554)
+        Me.Controls.Add(Me.ucrChkColour)
         Me.Controls.Add(Me.ucrInputLegendPosition)
         Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.grpSummaries)
