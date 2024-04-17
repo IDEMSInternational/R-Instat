@@ -500,9 +500,29 @@ Public Class ucrOutputPage
             Dim startIndex As Integer = _checkBoxes.IndexOf(lastCheckedBox)
             Dim endIndex As Integer = _checkBoxes.IndexOf(currentBox)
 
+            ' Toggle check state for checkboxes between startIndex and endIndex
             For i As Integer = Math.Min(startIndex, endIndex) To Math.Max(startIndex, endIndex)
-                _checkBoxes(i).Checked = True
+                _checkBoxes(i).Checked = currentBox.Checked
             Next
+        End If
+
+        lastCheckedBox = currentBox
+    End Sub
+
+    Private Sub CheckBox_MouseDown(sender As Object, e As MouseEventArgs)
+        Dim currentBox As CheckBox = DirectCast(sender, CheckBox)
+
+        If e.Button = MouseButtons.Left AndAlso Control.ModifierKeys = Keys.Shift Then
+            ' Deselect all checkboxes between lastCheckedBox and currentBox
+            Dim startIndex As Integer = _checkBoxes.IndexOf(lastCheckedBox)
+            Dim endIndex As Integer = _checkBoxes.IndexOf(currentBox)
+
+            For i As Integer = Math.Min(startIndex, endIndex) + 1 To Math.Max(startIndex, endIndex) - 1
+                _checkBoxes(i).Checked = False
+            Next
+        ElseIf currentBox.Checked AndAlso Not Control.ModifierKeys = Keys.Shift Then
+            ' Deselect the current checkbox if already checked without Shift key
+            currentBox.Checked = False
         End If
 
         lastCheckedBox = currentBox
