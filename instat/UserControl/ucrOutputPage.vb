@@ -22,7 +22,7 @@ Imports RInsightF461
 ''' </summary>
 Public Class ucrOutputPage
     Private _checkBoxes As List(Of CheckBox)
-    Private lastCheckedCheckbox As CheckBox
+    Private lastCheckedBox As CheckBox = Nothing
     Private _bCanReOrder As Boolean
     Private _bCanRename As Boolean
     Private _bCanDelete As Boolean
@@ -224,7 +224,6 @@ Public Class ucrOutputPage
 
         End If
     End Sub
-
 
     Private Sub AddNewTextOutput(outputElement As clsOutputElement)
         Dim panel As Panel = AddElementPanel(outputElement)
@@ -495,15 +494,18 @@ Public Class ucrOutputPage
     End Sub
 
     Private Sub CheckBox_CheckedChanged(sender As Object, e As EventArgs)
-        Dim currentCheckbox As CheckBox = DirectCast(sender, CheckBox)
-        If Control.ModifierKeys = Keys.Shift Then
-            Dim startIndex As Integer = _checkBoxes.IndexOf(currentCheckbox)
-            Dim endIndex As Integer = _checkBoxes.Count - 1
-            For i As Integer = startIndex To endIndex
-                _checkBoxes(i).Checked = currentCheckbox.Checked
+        Dim currentBox As CheckBox = DirectCast(sender, CheckBox)
+
+        If lastCheckedBox IsNot Nothing AndAlso Control.ModifierKeys = Keys.Shift Then
+            Dim startIndex As Integer = _checkBoxes.IndexOf(lastCheckedBox)
+            Dim endIndex As Integer = _checkBoxes.IndexOf(currentBox)
+
+            For i As Integer = Math.Min(startIndex, endIndex) To Math.Max(startIndex, endIndex)
+                _checkBoxes(i).Checked = True
             Next
         End If
-        lastCheckedCheckbox = currentCheckbox
+
+        lastCheckedBox = currentBox
     End Sub
 
     Private Sub checkButton_Click(sender As Object, e As EventArgs)
