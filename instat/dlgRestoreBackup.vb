@@ -112,6 +112,8 @@ Public Class dlgRestoreBackup
         ucrInputSavedPathData.IsEmpty()
         ucrInputSavedPathLog.IsEmpty()
         ucrInputSavedPathInternalLog.IsEmpty()
+        rdoRunBackupLog.Refresh()
+        rdoLoadBackupData.Refresh()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
