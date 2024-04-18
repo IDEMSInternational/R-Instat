@@ -563,18 +563,31 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ManageControlsVisibility()
         grpSummaries.Visible = rdoThreeVariable.Checked OrElse rdoTwoVariable.Checked
-        cmdSummaries.Visible = IsNumericByFactor()
+        cmdSummaries.Visible = False
         ucrChkDisplayMargins.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactor()
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrChkSummariesRowCol.Visible = False
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = strFirstVariablesType = "numeric"
-            ucrChkSummariesRowCol.Visible = IsNumericByFactor()
+            If IsNumericByFactor() Then
+                Select Case ucrInputNumeriByFactor.GetText
+                    Case "Summary tables"
+                        ucrChkSummariesRowCol.Visible = True
+                        cmdSummaries.Visible = True
+                    Case "ANOVA tables"
+                        ucrChkSummariesRowCol.Visible = False
+                        cmdSummaries.Visible = False
+                End Select
+            Else
+                ucrChkSummariesRowCol.Visible = False
+                cmdSummaries.Visible = False
+            End If
+
         ElseIf rdoThreeVariable.Checked Then
-            ucrChkOmitMissing.Visible = IsFactorByNumeric() OrElse IsNumericByFactor()
-        Else
-            ucrChkOmitMissing.Visible = False
+                ucrChkOmitMissing.Visible = IsFactorByNumeric() OrElse IsNumericByFactor()
+            Else
+                ucrChkOmitMissing.Visible = False
         End If
         If rdoThreeVariable.Checked Then
             If IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
@@ -788,8 +801,20 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ShowFormatTableButton()
         If rdoTwoVariable.Checked Then
-            cmdFormatTable.Visible = IsNumericByFactor() _
-            OrElse IsFactorByFactor() OrElse IsFactorByNumeric()
+            cmdFormatTable.Visible = False
+            If IsNumericByFactor() Then
+                Select Case ucrInputNumeriByFactor.GetText
+                    Case "Summary tables"
+                        cmdFormatTable.Visible = True
+                    Case "ANOVA tables"
+                        cmdFormatTable.Visible = False
+                End Select
+            ElseIf IsFactorByFactor() Then
+                cmdFormatTable.Visible = True
+            Else
+                cmdFormatTable.Visible = False
+            End If
+
         ElseIf rdoThreeVariable.Checked Then
             cmdFormatTable.Visible = IsFactorByFactorByFactor()
         Else
