@@ -23,18 +23,18 @@ Partial Class dlgRestoreBackup
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpSavingOptions = New System.Windows.Forms.GroupBox()
-        Me.grpEndChoice = New System.Windows.Forms.GroupBox()
-        Me.rdoNeither = New System.Windows.Forms.RadioButton()
-        Me.rdoLoadBackupData = New System.Windows.Forms.RadioButton()
-        Me.rdoRunBackupLog = New System.Windows.Forms.RadioButton()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkSendInternalLog = New instat.ucrCheck()
         Me.ucrInputSavedPathInternalLog = New instat.ucrFilePath()
         Me.ucrInputSavedPathLog = New instat.ucrFilePath()
         Me.ucrInputSavedPathData = New instat.ucrFilePath()
         Me.ucrChkShowInternalLogFile = New instat.ucrCheck()
         Me.ucrChkShowLogFile = New instat.ucrCheck()
         Me.ucrChkShowDataFile = New instat.ucrCheck()
+        Me.grpEndChoice = New System.Windows.Forms.GroupBox()
+        Me.rdoNeither = New System.Windows.Forms.RadioButton()
+        Me.rdoLoadBackupData = New System.Windows.Forms.RadioButton()
+        Me.rdoRunBackupLog = New System.Windows.Forms.RadioButton()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkSendInternalLog = New instat.ucrCheck()
         Me.grpSavingOptions.SuspendLayout()
         Me.grpEndChoice.SuspendLayout()
         Me.SuspendLayout()
@@ -53,6 +53,81 @@ Partial Class dlgRestoreBackup
         Me.grpSavingOptions.TabIndex = 20
         Me.grpSavingOptions.TabStop = False
         Me.grpSavingOptions.Text = "Saving Options"
+        '
+        'ucrInputSavedPathInternalLog
+        '
+        Me.ucrInputSavedPathInternalLog.AutoSize = True
+        Me.ucrInputSavedPathInternalLog.DefaultFileSuggestionName = ""
+        Me.ucrInputSavedPathInternalLog.FilePath = ""
+        Me.ucrInputSavedPathInternalLog.FilePathBrowseText = "Browse"
+        Me.ucrInputSavedPathInternalLog.FilePathDialogFilter = "R file (*.R)|*.R"
+        Me.ucrInputSavedPathInternalLog.FilePathDialogTitle = "Save R File"
+        Me.ucrInputSavedPathInternalLog.FilePathLabel = "Save As:"
+        Me.ucrInputSavedPathInternalLog.FolderBrowse = False
+        Me.ucrInputSavedPathInternalLog.Location = New System.Drawing.Point(222, 115)
+        Me.ucrInputSavedPathInternalLog.Name = "ucrInputSavedPathInternalLog"
+        Me.ucrInputSavedPathInternalLog.SelectedFileFilterIndex = 1
+        Me.ucrInputSavedPathInternalLog.Size = New System.Drawing.Size(380, 34)
+        Me.ucrInputSavedPathInternalLog.TabIndex = 29
+        '
+        'ucrInputSavedPathLog
+        '
+        Me.ucrInputSavedPathLog.AutoSize = True
+        Me.ucrInputSavedPathLog.DefaultFileSuggestionName = ""
+        Me.ucrInputSavedPathLog.FilePath = ""
+        Me.ucrInputSavedPathLog.FilePathBrowseText = "Browse"
+        Me.ucrInputSavedPathLog.FilePathDialogFilter = "R file (*.R)|*.R"
+        Me.ucrInputSavedPathLog.FilePathDialogTitle = "Save R File"
+        Me.ucrInputSavedPathLog.FilePathLabel = "Save As:"
+        Me.ucrInputSavedPathLog.FolderBrowse = False
+        Me.ucrInputSavedPathLog.Location = New System.Drawing.Point(222, 70)
+        Me.ucrInputSavedPathLog.Name = "ucrInputSavedPathLog"
+        Me.ucrInputSavedPathLog.SelectedFileFilterIndex = 1
+        Me.ucrInputSavedPathLog.Size = New System.Drawing.Size(380, 34)
+        Me.ucrInputSavedPathLog.TabIndex = 28
+        '
+        'ucrInputSavedPathData
+        '
+        Me.ucrInputSavedPathData.AutoSize = True
+        Me.ucrInputSavedPathData.DefaultFileSuggestionName = ""
+        Me.ucrInputSavedPathData.FilePath = ""
+        Me.ucrInputSavedPathData.FilePathBrowseText = "Browse"
+        Me.ucrInputSavedPathData.FilePathDialogFilter = "RDS Data file (*.RDS)|*.RDS"
+        Me.ucrInputSavedPathData.FilePathDialogTitle = "Save Data File"
+        Me.ucrInputSavedPathData.FilePathLabel = "Save As:"
+        Me.ucrInputSavedPathData.FolderBrowse = False
+        Me.ucrInputSavedPathData.Location = New System.Drawing.Point(222, 25)
+        Me.ucrInputSavedPathData.Name = "ucrInputSavedPathData"
+        Me.ucrInputSavedPathData.SelectedFileFilterIndex = 1
+        Me.ucrInputSavedPathData.Size = New System.Drawing.Size(380, 34)
+        Me.ucrInputSavedPathData.TabIndex = 25
+        '
+        'ucrChkShowInternalLogFile
+        '
+        Me.ucrChkShowInternalLogFile.AutoSize = True
+        Me.ucrChkShowInternalLogFile.Checked = False
+        Me.ucrChkShowInternalLogFile.Location = New System.Drawing.Point(6, 117)
+        Me.ucrChkShowInternalLogFile.Name = "ucrChkShowInternalLogFile"
+        Me.ucrChkShowInternalLogFile.Size = New System.Drawing.Size(216, 23)
+        Me.ucrChkShowInternalLogFile.TabIndex = 27
+        '
+        'ucrChkShowLogFile
+        '
+        Me.ucrChkShowLogFile.AutoSize = True
+        Me.ucrChkShowLogFile.Checked = False
+        Me.ucrChkShowLogFile.Location = New System.Drawing.Point(6, 74)
+        Me.ucrChkShowLogFile.Name = "ucrChkShowLogFile"
+        Me.ucrChkShowLogFile.Size = New System.Drawing.Size(216, 23)
+        Me.ucrChkShowLogFile.TabIndex = 26
+        '
+        'ucrChkShowDataFile
+        '
+        Me.ucrChkShowDataFile.AutoSize = True
+        Me.ucrChkShowDataFile.Checked = False
+        Me.ucrChkShowDataFile.Location = New System.Drawing.Point(6, 31)
+        Me.ucrChkShowDataFile.Name = "ucrChkShowDataFile"
+        Me.ucrChkShowDataFile.Size = New System.Drawing.Size(216, 23)
+        Me.ucrChkShowDataFile.TabIndex = 25
         '
         'grpEndChoice
         '
@@ -117,81 +192,6 @@ Partial Class dlgRestoreBackup
         Me.ucrChkSendInternalLog.Name = "ucrChkSendInternalLog"
         Me.ucrChkSendInternalLog.Size = New System.Drawing.Size(266, 23)
         Me.ucrChkSendInternalLog.TabIndex = 21
-        '
-        'ucrInputSavedPathInternalLog
-        '
-        Me.ucrInputSavedPathInternalLog.AutoSize = True
-        Me.ucrInputSavedPathInternalLog.DefaultFileSuggestionName = ""
-        Me.ucrInputSavedPathInternalLog.FilePath = ""
-        Me.ucrInputSavedPathInternalLog.FilePathBrowseText = "Browse"
-        Me.ucrInputSavedPathInternalLog.FilePathDialogFilter = "RDS Data file (*.RDS)|*.RDS"
-        Me.ucrInputSavedPathInternalLog.FilePathDialogTitle = "Save Data File"
-        Me.ucrInputSavedPathInternalLog.FilePathLabel = "Save As:"
-        Me.ucrInputSavedPathInternalLog.FolderBrowse = False
-        Me.ucrInputSavedPathInternalLog.Location = New System.Drawing.Point(244, 115)
-        Me.ucrInputSavedPathInternalLog.Name = "ucrInputSavedPathInternalLog"
-        Me.ucrInputSavedPathInternalLog.SelectedFileFilterIndex = 1
-        Me.ucrInputSavedPathInternalLog.Size = New System.Drawing.Size(334, 34)
-        Me.ucrInputSavedPathInternalLog.TabIndex = 29
-        '
-        'ucrInputSavedPathLog
-        '
-        Me.ucrInputSavedPathLog.AutoSize = True
-        Me.ucrInputSavedPathLog.DefaultFileSuggestionName = ""
-        Me.ucrInputSavedPathLog.FilePath = ""
-        Me.ucrInputSavedPathLog.FilePathBrowseText = "Browse"
-        Me.ucrInputSavedPathLog.FilePathDialogFilter = "RDS Data file (*.RDS)|*.RDS"
-        Me.ucrInputSavedPathLog.FilePathDialogTitle = "Save Data File"
-        Me.ucrInputSavedPathLog.FilePathLabel = "Save As:"
-        Me.ucrInputSavedPathLog.FolderBrowse = False
-        Me.ucrInputSavedPathLog.Location = New System.Drawing.Point(244, 70)
-        Me.ucrInputSavedPathLog.Name = "ucrInputSavedPathLog"
-        Me.ucrInputSavedPathLog.SelectedFileFilterIndex = 1
-        Me.ucrInputSavedPathLog.Size = New System.Drawing.Size(334, 34)
-        Me.ucrInputSavedPathLog.TabIndex = 28
-        '
-        'ucrInputSavedPathData
-        '
-        Me.ucrInputSavedPathData.AutoSize = True
-        Me.ucrInputSavedPathData.DefaultFileSuggestionName = ""
-        Me.ucrInputSavedPathData.FilePath = ""
-        Me.ucrInputSavedPathData.FilePathBrowseText = "Browse"
-        Me.ucrInputSavedPathData.FilePathDialogFilter = "RDS Data file (*.RDS)|*.RDS"
-        Me.ucrInputSavedPathData.FilePathDialogTitle = "Save Data File"
-        Me.ucrInputSavedPathData.FilePathLabel = "Save As:"
-        Me.ucrInputSavedPathData.FolderBrowse = False
-        Me.ucrInputSavedPathData.Location = New System.Drawing.Point(244, 21)
-        Me.ucrInputSavedPathData.Name = "ucrInputSavedPathData"
-        Me.ucrInputSavedPathData.SelectedFileFilterIndex = 1
-        Me.ucrInputSavedPathData.Size = New System.Drawing.Size(334, 34)
-        Me.ucrInputSavedPathData.TabIndex = 25
-        '
-        'ucrChkShowInternalLogFile
-        '
-        Me.ucrChkShowInternalLogFile.AutoSize = True
-        Me.ucrChkShowInternalLogFile.Checked = False
-        Me.ucrChkShowInternalLogFile.Location = New System.Drawing.Point(6, 117)
-        Me.ucrChkShowInternalLogFile.Name = "ucrChkShowInternalLogFile"
-        Me.ucrChkShowInternalLogFile.Size = New System.Drawing.Size(216, 23)
-        Me.ucrChkShowInternalLogFile.TabIndex = 27
-        '
-        'ucrChkShowLogFile
-        '
-        Me.ucrChkShowLogFile.AutoSize = True
-        Me.ucrChkShowLogFile.Checked = False
-        Me.ucrChkShowLogFile.Location = New System.Drawing.Point(6, 74)
-        Me.ucrChkShowLogFile.Name = "ucrChkShowLogFile"
-        Me.ucrChkShowLogFile.Size = New System.Drawing.Size(216, 23)
-        Me.ucrChkShowLogFile.TabIndex = 26
-        '
-        'ucrChkShowDataFile
-        '
-        Me.ucrChkShowDataFile.AutoSize = True
-        Me.ucrChkShowDataFile.Checked = False
-        Me.ucrChkShowDataFile.Location = New System.Drawing.Point(6, 25)
-        Me.ucrChkShowDataFile.Name = "ucrChkShowDataFile"
-        Me.ucrChkShowDataFile.Size = New System.Drawing.Size(216, 23)
-        Me.ucrChkShowDataFile.TabIndex = 25
         '
         'dlgRestoreBackup
         '
