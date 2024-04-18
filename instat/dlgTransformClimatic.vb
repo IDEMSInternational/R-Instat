@@ -643,6 +643,15 @@ Public Class dlgTransformClimatic
         clsRTransform.AddParameter("save", 2, iPosition:=6)
         clsRTransform.SetAssignTo("transform_calculation")
 
+        'clsRTransformFunction.SetRCommand("instat_calculation$new")
+        'clsRTransformFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        'clsRTransformFunction.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1) ' changes depending on the rdo
+        'clsRTransformFunction.AddParameter("result_name", Chr(34) & "count" & Chr(34), iPosition:=2)
+        'clsRTransformFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
+        'clsRTransformFunction.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
+        'clsRTransformFunction.AddParameter("save", 2, iPosition:=6)
+        'clsRTransformFunction.SetAssignTo("transform_calculation")
+
         clsTransformCheck = clsRTransform
 
         clsOverallTransformFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
@@ -829,7 +838,6 @@ Public Class dlgTransformClimatic
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
             ReduceWaterBalance()
-            AutoFill()
         ElseIf rdoDegree.Checked Then
             DegreeFunctions()
             clsRTransform.RemoveParameterByName("sub_calculations")
@@ -965,7 +973,6 @@ Public Class dlgTransformClimatic
         ReduceWaterBalance()
         ChangeFunctions()
         AddCalculate()
-        AutoFill()
     End Sub
 
     Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
@@ -975,7 +982,6 @@ Public Class dlgTransformClimatic
     Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrReceiverEvap.ControlValueChanged
         RainDays()
         ReduceWaterBalance()
-        AutoFill()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
@@ -1142,19 +1148,6 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
-    Private Sub AutoFill()
-        If rdoWaterBalance.Checked Then
-            Dim strDataFrame As String
-            Dim strRainCol As String
-
-            strDataFrame = ucrSelectorTransform.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-            strRainCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "rain_label")
-            If strRainCol <> "" Then
-                ucrReceiverData.Add(strRainCol, strDataFrame)
-            End If
-        End If
-    End Sub
-
     Private Sub ReduceWaterBalance()
         If rdoWaterBalance.Checked Then
             clsPMaxFunctionMax.RemoveParameterByName("wb")
@@ -1193,7 +1186,7 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
-    Private Sub ucrChkWB_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWB.ControlValueChanged, ucrNudWB.ControlValueChanged
+    Private Sub ucrChkWB_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWB.ControlValueChanged
         ReduceWaterBalance()
     End Sub
 
