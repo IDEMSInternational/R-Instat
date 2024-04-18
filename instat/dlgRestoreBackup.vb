@@ -108,6 +108,10 @@ Public Class dlgRestoreBackup
 
     Private Sub SetDefaults()
         ReopenDialog()
+        rdoNeither.Checked = True
+        ucrInputSavedPathData.IsEmpty()
+        ucrInputSavedPathLog.IsEmpty()
+        ucrInputSavedPathInternalLog.IsEmpty()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -210,6 +214,5 @@ Public Class dlgRestoreBackup
         ucrChkShowDataFile.Checked = False
         ucrChkShowInternalLogFile.Checked = False
         ucrChkShowLogFile.Checked = False
-        rdoNeither.Checked = True
     End Sub
 End Class
