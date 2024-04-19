@@ -351,10 +351,10 @@ Public Class dlgTransformClimatic
 
     Private Sub SetDefaults()
         clsRTransform = New RFunction
-        clsAsNumericFunction = New RFunction
         clsOverallTransformFunction = New RFunction
         clsTransformManipulationsFunc = New RFunction
         clsRTransformCountSpellSub = New RFunction
+        clsAsNumericFunction = New RFunction
 
         clsDummyFunction = New RFunction
 
@@ -537,7 +537,6 @@ Public Class dlgTransformClimatic
 
         clsTailFunction.SetRCommand("tail")
         clsTailFunction.AddParameter("n", "-1", iPosition:=1)
-
         ' Degree
         clsDiurnalRangeOperator.SetOperation("-")
         clsDiurnalRangeOperator.bToScriptAsRString = True
@@ -643,15 +642,6 @@ Public Class dlgTransformClimatic
         clsRTransform.AddParameter("save", 2, iPosition:=6)
         clsRTransform.SetAssignTo("transform_calculation")
 
-        'clsRTransformFunction.SetRCommand("instat_calculation$new")
-        'clsRTransformFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        'clsRTransformFunction.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1) ' changes depending on the rdo
-        'clsRTransformFunction.AddParameter("result_name", Chr(34) & "count" & Chr(34), iPosition:=2)
-        'clsRTransformFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
-        'clsRTransformFunction.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
-        'clsRTransformFunction.AddParameter("save", 2, iPosition:=6)
-        'clsRTransformFunction.SetAssignTo("transform_calculation")
-
         clsTransformCheck = clsRTransform
 
         clsOverallTransformFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
@@ -694,10 +684,12 @@ Public Class dlgTransformClimatic
         ucrNudMgdd.AddAdditionalCodeParameterPair(clsModifiedLogicOperator, New RParameter("baseline", ucrNudMgdd.GetText, 1), iAdditionalPairNo:=1)
         ucrReceiverTMax.AddAdditionalCodeParameterPair(clsMeanAddOperator, New RParameter("tmax", 0), iAdditionalPairNo:=2)
         ucrReceiverTMin.AddAdditionalCodeParameterPair(clsMeanAddOperator, New RParameter("tmin", 1), iAdditionalPairNo:=2)
+
         ucrReceiverEvap.AddAdditionalCodeParameterPair(clsTailFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
         ucrReceiverEvap.AddAdditionalCodeParameterPair(clsReduceOpEvapValue1, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverEvap.AddAdditionalCodeParameterPair(clsReduceOpEvapValue2, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrNudWBCapacity.AddAdditionalCodeParameterPair(clsWBEvaporation, New RParameter("capacity", 1, False), iAdditionalPairNo:=1)
+
 
         ' Moving
         ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
@@ -727,6 +719,7 @@ Public Class dlgTransformClimatic
         ucrNudGDD.SetRCode(clsGrowingDegreDiffOperator, bReset)
         ucrNudLimit.SetRCode(clsModifiedMinfunction, bReset)
         ucrNudMgdd.SetRCode(clsModifiedDiffOperator, bReset)
+        ucrPnlDegree.SetRCode(clsDummyFunction, bReset)
 
         ucrSaveColumn.SetRCode(clsRTransform, bReset)
         If bReset Then
@@ -1156,10 +1149,9 @@ Public Class dlgTransformClimatic
             clsPMaxFunctionMax.RemoveParameterByName("calculation")
             clsWBEvaporation.RemoveParameterByName("evaporation.value")
             If rdoEvapValue.Checked Then
-                'clsRTransform.RemoveParameterByName("calculated_from")
+                clsRTransform.RemoveParameterByName("calculated_from")
                 ucrReceiverData.SetMeAsReceiver()
                 clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")")
-                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction, iPosition:=1)
                 If ucrChkWB.Checked Then
                     clsWBEvaporation.AddParameter("evaporation.value", ucrInputEvaporation.GetText(), iPosition:=1, bIncludeArgumentName:=False)
                     clsPMaxFunctionMax.AddParameter("wb", clsROperatorParameter:=clsWBOperator, iPosition:=0, bIncludeArgumentName:=False)
