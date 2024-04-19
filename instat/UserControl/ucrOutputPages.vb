@@ -247,6 +247,7 @@ Public Class ucrOutputPages
         Else
             RefreshPage()
         End If
+        UpdateSelectAllCheckBoxText()
     End Sub
 
     ''' <summary>
@@ -334,18 +335,20 @@ Public Class ucrOutputPages
             iCountOutputElements = _outputLogger.GetFilteredList(SelectedTab).Output.Count
         End If
 
+        checkBoxSelectAll.Enabled = iCountOutputElements > 0
         Dim iSelectedElements = _selectedOutputPage.SelectedElements.Count
         Select Case True
             Case iSelectedElements > 0 AndAlso iCountOutputElements > iSelectedElements
                 checkBoxSelectAll.Text = $"{iSelectedElements} item(s)"
                 checkBoxSelectAll.CheckState = CheckState.Indeterminate
-            Case iCountOutputElements = iSelectedElements
+            Case iSelectedElements > 0 AndAlso iCountOutputElements = iSelectedElements
                 checkBoxSelectAll.Text = "Deselect All"
                 checkBoxSelectAll.CheckState = CheckState.Checked
             Case Else
                 checkBoxSelectAll.Text = "Select All"
                 checkBoxSelectAll.CheckState = CheckState.Unchecked
         End Select
+
     End Sub
 
     Private Sub checkBoxSelectAll_Click(sender As Object, e As EventArgs)
