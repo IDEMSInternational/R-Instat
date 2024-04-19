@@ -333,7 +333,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls(ucrChkCircular, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls(ucrNudMultSpells, {rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=21)
         ucrPnlTransform.AddToLinkedControls(ucrPnlEvap, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
         ucrPnlTransform.AddToLinkedControls(ucrChkGroupByYear, {rdoCount, rdoMoving, rdoSpell, rdoMultSpells, rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrReceiverYear, ucrReceiverData, ucrChkOptions}, {rdoCumulative, rdoCount, rdoMoving, rdoMultSpells, rdoSpell, rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrChkUseMaxMin, ucrPnlDegree}, {rdoDegree}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -409,8 +409,6 @@ Public Class dlgTransformClimatic
 
         ucrSelectorTransform.Reset()
         ucrReceiverData.SetMeAsReceiver()
-
-        ucrNudWBCapacity.SetText("60")
 
         ' Count and Spells: Rainday
         clsRRainday.SetRCommand("instat_calculation$new")
@@ -502,7 +500,7 @@ Public Class dlgTransformClimatic
         clsPMaxFunctionMax.SetRCommand("pmax")
         clsPMaxOperatorMax.SetOperation("-")
         clsPMaxFunctionMax.AddParameter("0", "0", iPosition:=1, bIncludeArgumentName:=False)
-        clsPMinFunctionMax.AddParameter("capacity", 60, iPosition:=1, bIncludeArgumentName:=False)
+        'clsPMinFunctionMax.AddParameter("capacity", 60, iPosition:=1, bIncludeArgumentName:=False)
         clsRWaterBalanceFunction.AddParameter("accumulate", "TRUE", iPosition:=2)
 
         clsRWaterBalanceFunction1.bToScriptAsRString = True
@@ -727,7 +725,7 @@ Public Class dlgTransformClimatic
             ucrInputEvaporation.SetRCode(clsPMaxOperatorMax, bReset)
             ucrPnlEvap.SetRCode(clsDummyFunction, bReset)
             ucrNudWB.SetRCode(clsWBEvaporation, bReset)
-            ucrChkWB.SetRCode(clsWBEvaporation, bReset)
+            ucrChkWB.SetRCode(clsPMinFunctionMax, bReset)
             ucrPnlTransform.SetRCode(clsDummyFunction, bReset)
             ucrPnlDegree.SetRCode(clsDummyFunction, bReset)
         End If
@@ -831,6 +829,7 @@ Public Class dlgTransformClimatic
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
             ReduceWaterBalance()
+            AutoFill()
         ElseIf rdoDegree.Checked Then
             DegreeFunctions()
             clsRTransform.RemoveParameterByName("sub_calculations")
@@ -966,6 +965,7 @@ Public Class dlgTransformClimatic
         ReduceWaterBalance()
         ChangeFunctions()
         AddCalculate()
+        AutoFill()
     End Sub
 
     Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
@@ -975,6 +975,7 @@ Public Class dlgTransformClimatic
     Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrReceiverEvap.ControlValueChanged
         RainDays()
         ReduceWaterBalance()
+        AutoFill()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
@@ -998,9 +999,9 @@ Public Class dlgTransformClimatic
         ReduceWaterBalance()
     End Sub
 
-    Private Sub ucrInputEvaporation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputEvaporation.ControlContentsChanged, ucrPnlEvap.ControlContentsChanged
-        ReduceWaterBalance()
-    End Sub
+    'Private Sub ucrInputEvaporation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputEvaporation.ControlContentsChanged, ucrPnlEvap.ControlContentsChanged
+    '    ReduceWaterBalance()
+    'End Sub
 
     Private Sub RasterFunction()
         If rdoMoving.Checked Then
@@ -1141,6 +1142,20 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
+    Private Sub AutoFill()
+        If rdoWaterBalance.Checked Then
+            Dim strDataFrame As String
+            Dim strRainCol As String
+
+            strDataFrame = ucrSelectorTransform.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+            strRainCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "rain_label")
+
+            If strRainCol <> "" Then
+                ucrReceiverData.Add(strRainCol, strDataFrame)
+            End If
+        End If
+    End Sub
+
     Private Sub ReduceWaterBalance()
         If rdoWaterBalance.Checked Then
             clsPMaxFunctionMax.RemoveParameterByName("wb")
@@ -1148,11 +1163,17 @@ Public Class dlgTransformClimatic
             clsPMaxOperatorMax.RemoveParameterByName("evaporation.value")
             clsPMaxFunctionMax.RemoveParameterByName("calculation")
             clsWBEvaporation.RemoveParameterByName("evaporation.value")
+            clsPMinFunctionMax.RemoveParameterByName("capacity")
             If rdoEvapValue.Checked Then
                 clsRTransform.RemoveParameterByName("calculated_from")
                 ucrReceiverData.SetMeAsReceiver()
                 clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")")
                 If ucrChkWB.Checked Then
+                    If Not ucrNudWB.IsEmpty Then
+                        clsWBEvaporation.AddParameter("WB_evap_value", ucrNudWB.GetText(), iPosition:=2, bIncludeArgumentName:=False)
+                    Else
+                        clsWBEvaporation.RemoveParameterByName("WB_evap_value")
+                    End If
                     clsWBEvaporation.AddParameter("evaporation.value", ucrInputEvaporation.GetText(), iPosition:=1, bIncludeArgumentName:=False)
                     clsPMaxFunctionMax.AddParameter("wb", clsROperatorParameter:=clsWBOperator, iPosition:=0, bIncludeArgumentName:=False)
                 Else
@@ -1165,10 +1186,17 @@ Public Class dlgTransformClimatic
                 clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ", " & strCurrDataName & "=" & ucrReceiverEvap.GetVariableNames & ")")
                 If ucrChkWB.Checked Then
                     clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction1, iPosition:=1)
+                    ' clsWBEvaporation.AddParameter("WB_evap_value", ucrNudWB.GetText(), iPosition:=2, bIncludeArgumentName:=False)
+                    If Not ucrNudWB.IsEmpty Then
+                        clsWBEvaporation.AddParameter("WB_evap_value", ucrNudWB.GetText(), iPosition:=2, bIncludeArgumentName:=False)
+                    Else
+                        clsWBEvaporation.RemoveParameterByName("WB_evap_value")
+                    End If
                     clsWBEvaporation.AddParameter("value", "..3", iPosition:=4, bIncludeArgumentName:=False)
                     clsPMaxFunctionMax.AddParameter("wb", clsROperatorParameter:=clsWBOperator, iPosition:=0, bIncludeArgumentName:=False)
                     clsRWaterBalanceFunction1.AddParameter("replace_na", clsROperatorParameter:=clsReduceOpEvapValue1, iPosition:=1, bIncludeArgumentName:=False)
                 Else
+                    clsPMinFunctionMax.AddParameter("capacity", ucrNudWBCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
                     clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction2, iPosition:=1)
                     clsPMaxOperatorMax.AddParameter("first", "..1 + ..2", iPosition:=0)
                     clsReduceOpEvapValue2.AddParameter("x", clsRFunctionParameter:=clsAsNumericFunction, iPosition:=1, bIncludeArgumentName:=False)
@@ -1193,5 +1221,14 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged
         ReduceWaterBalance()
+    End Sub
+
+    Private Sub ucrNudWB_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWB.ControlValueChanged
+        ReduceWaterBalance()
+    End Sub
+
+    Private Sub ucrSelectorTransform_DataFrameChanged() Handles ucrSelectorTransform.DataFrameChanged
+        AutoFill()
+        TestOkEnabled()
     End Sub
 End Class
