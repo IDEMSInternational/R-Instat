@@ -1156,9 +1156,10 @@ Public Class dlgTransformClimatic
             clsPMaxFunctionMax.RemoveParameterByName("calculation")
             clsWBEvaporation.RemoveParameterByName("evaporation.value")
             If rdoEvapValue.Checked Then
-                clsRTransform.RemoveParameterByName("calculated_from")
+                'clsRTransform.RemoveParameterByName("calculated_from")
                 ucrReceiverData.SetMeAsReceiver()
                 clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")")
+                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRWaterBalanceFunction, iPosition:=1)
                 If ucrChkWB.Checked Then
                     clsWBEvaporation.AddParameter("evaporation.value", ucrInputEvaporation.GetText(), iPosition:=1, bIncludeArgumentName:=False)
                     clsPMaxFunctionMax.AddParameter("wb", clsROperatorParameter:=clsWBOperator, iPosition:=0, bIncludeArgumentName:=False)
