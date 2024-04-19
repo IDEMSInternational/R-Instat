@@ -17,6 +17,13 @@
 Imports instat.Translations
 
 Public Class dlgOneVariableGraph
+    Public enumOnevariableMode As String = OnevariableMode.Prepare
+    Public Enum OnevariableMode
+        Prepare
+        Describe
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
@@ -34,6 +41,7 @@ Public Class dlgOneVariableGraph
         End If
         SetRCodeForControls(bReset)
         SetDefaultColumn()
+        SetHelpOptions()
         bReset = False
         ReopenDialog()
         TestOkEnabled()
@@ -141,6 +149,17 @@ Public Class dlgOneVariableGraph
         End If
         strDefaultDataFrame = ""
         strDefaultColumns = Nothing
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumOnevariableMode
+            Case OnevariableMode.Prepare
+                ucrBase.iHelpTopicID = 549
+            Case OnevariableMode.Describe
+                ucrBase.iHelpTopicID = 412
+            Case OnevariableMode.Climatic
+                ucrBase.iHelpTopicID = 616
+        End Select
     End Sub
 
     Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarGraph.ControlValueChanged

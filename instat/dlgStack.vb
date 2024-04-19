@@ -17,6 +17,13 @@
 Imports instat.Translations
 
 Public Class dlgStack
+    Public enumStackMode As String = StackMode.Prepare
+    Public Enum StackMode
+        Prepare
+        Climatic
+    End Enum
+
+
     Private clsUnnestTokensFunction As New RFunction
     Private clsPivotLongerFunction As New RFunction
     Private clsSelectFunction As New RFunction
@@ -39,6 +46,7 @@ Public Class dlgStack
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
@@ -476,6 +484,15 @@ Public Class dlgStack
             clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
         End If
         Excludevariables()
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumStackMode
+            Case StackMode.Prepare
+                ucrBase.iHelpTopicID = 57
+            Case StackMode.Climatic
+                ucrBase.iHelpTopicID = 607
+        End Select
     End Sub
 
     Private Sub Excludevariables()
