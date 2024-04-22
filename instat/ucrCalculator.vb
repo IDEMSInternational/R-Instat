@@ -120,13 +120,18 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdIn, "(%in%)is like the match function and returns a logical vector. For example (11:15 %in% c(11,13)) gives TRUE, FALSE, TRUE, FALSE, FALSE")
         ttCalculator.SetToolTip(cmdmatch, "(see also %in%)gives the positions of the matching elements. For example match(11:15, c(11,13)) gives (1,NA, 2, NA, NA). match(11:15,c(11,13),nomatch=0) gives 1, 0, 2, 0, 0)")
         ttCalculator.SetToolTip(cmdIntegerDivision, "div operator(%/%)is for integer division. For example (7 %/% 3) is 2, (13 %/% 3) is 4")
-        ttCalculator.SetToolTip(cmdwhen, "when is multiple ifelse, for example case_when(1:5>320,1:5>110) gives NA, 10, 10, 20, 20")
+        ttCalculator.SetToolTip(cmdwhen, "when is multiple ifelse, for example case_when(1:5 > 3 ~ 20, 1:5>1~10) gives (NA,10,10,20,20)")
         ttCalculator.SetToolTip(cmdIfelse, "is what it says, for example ifelse((1:5 > 3,20,10) gives 10, 10, 10, 20, 20")
         ttCalculator.SetToolTip(cmdBetween, "between two values, for example between(1:5, 3,4) is FALSE, FALSE, TRUE, TRUE, FALSE")
         ttCalculator.SetToolTip(cmdIsNa, "is.na detects missing values, for example is.na(c(1,3,NA, 5)) gives FALSE, FALSE, TRUE, FALSE")
         ttCalculator.SetToolTip(cmdNotIsNa, "!is.na detects non-missing values, for example !is.na(c(1,3,NA, 5)) gives TRUE, TRUE, FALSE, TRUE")
         ttCalculator.SetToolTip(cmdDuplicate, "duplicate detects non-unique values, for example duplicated(c(1:3,2,7)) gives FALSE, FALSE, FALSE, TRUE, FALSE")
         ttCalculator.SetToolTip(cmdNear, "near(x,y)compares 2 variables. For example sqrt(5)^2 is almost, but isn't exactly 5, however near(sqrt(5)^2,5) is TRUE")
+        ttCalculator.SetToolTip(cmdnumeric, "Define a variable as numeric.  For example as numeric(c(TRUE,TRUE,FALSE,TRUE)) gives (1, 1,0, 1) ")
+        ttCalculator.SetToolTip(cmdTilde, "This is called tilde and links the left side and right side of a formula")
+        ttCalculator.SetToolTip(cmdCalcConcantenateFunction, "Combines arguments to form a single vector, e.g. c(1:3 8) is 1, 2, 3, 8")
+        ttCalculator.SetToolTip(cmdCalcRepelicationFunction, "Repeat of a sequence, e.g. rep(c(2, 3, 4), each=2) gives 2, 2, 3, 3, 4, 4")
+        ttCalculator.SetToolTip(cmdCalcSequenceFunction, "Sequences, given either as seq(1, 5, 2) to give 1, 3, 5 or as seq(1, 5, length = 3) to give the same")
         ttCalculator.SetToolTip(cmdWhich, "which gives the indices of a logical variable. For example which(11:15>13) gives 4, 5. Note the result is usually not the same length as the original variable.")
         ttCalculator.SetToolTip(cmdAnyDup, "any Are any values TRUE in a logical variable. For example any(1:5 >3) gives TRUE")
         ttCalculator.SetToolTip(cmdPnorm, "(normal probabilities. For example; pnorm(-1.6449) = 0.05; pnorm(130,100,15) = 0.9772.")
@@ -1975,6 +1980,39 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near()", 1)
         End If
     End Sub
+
+    Private Sub cmdCalcRepelicationFunction_Click(sender As Object, e As EventArgs) Handles cmdCalcRepelicationFunction.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rep(x = , times = , length = , each = )", 32)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rep( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdCalcSequenceFunction_Click(sender As Object, e As EventArgs) Handles cmdCalcSequenceFunction.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("seq(from = , to = , by = , length =  )", 28)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("seq( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdCalcConcantenateFunction_Click(sender As Object, e As EventArgs) Handles cmdCalcConcantenateFunction.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("c( , recursive = FALSE)", 21)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("c( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdnumeric_Click(sender As Object, e As EventArgs) Handles cmdnumeric.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.numeric(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.numeric( )", 2)
+        End If
+    End Sub
+
     Private Sub cmdLogit_Click(sender As Object, e As EventArgs) Handles cmdLogit.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("car::logit(p, percents = Range.p[2] > 1, adjust)", 24)
@@ -1982,6 +2020,7 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("car::logit()", 1)
         End If
     End Sub
+
     Private Sub cmdLogistic_Click(sender As Object, e As EventArgs) Handles cmdLogistic.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stats::plogis(q, Location = 0, Scale() = 1, lower.tail = True, Log.p = False))", 50)
@@ -2143,8 +2182,8 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" %in% ")
     End Sub
 
-    Private Sub cmdDoubleSqrBrackets_Click(sender As Object, e As EventArgs) Handles cmdDoubleSqrBrackets.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[[]]", 2)
+    Private Sub cmdTilde_Click(sender As Object, e As EventArgs) Handles cmdTilde.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("~")
     End Sub
 
     Private Sub cmdTrue_Click(sender As Object, e As EventArgs) Handles cmdTrue.Click
@@ -3638,7 +3677,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAdd_na_Click(sender As Object, e As EventArgs) Handles cmdAdd_na.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_na_value_to_level(f = , na_level = ""(Missing)"")", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_na_value_to_level(f = ,level = Null)", 15)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("forcats::fct_na_value_to_level()", 1)
         End If

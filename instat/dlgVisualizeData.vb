@@ -23,6 +23,7 @@ Public Class dlgVisualizeData
         Describe
         Climatic
     End Enum
+
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsVisDatFunction As New RFunction

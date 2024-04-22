@@ -17,6 +17,12 @@
 Imports instat.Translations
 
 Public Class dlgReplaceValues
+    Public enumReplacevaluesMode As String = ReplacevaluesMode.Prepare
+    Public Enum ReplacevaluesMode
+        Prepare
+        Climatic
+    End Enum
+
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsReplace As New RFunction
@@ -31,6 +37,7 @@ Public Class dlgReplaceValues
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
@@ -256,6 +263,16 @@ Public Class dlgReplaceValues
             rdoNewMissing.Checked = True
         End If
     End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumReplacevaluesMode
+            Case ReplacevaluesMode.Prepare
+                ucrBase.iHelpTopicID = 47
+            Case ReplacevaluesMode.Climatic
+                ucrBase.iHelpTopicID = 604
+        End Select
+    End Sub
+
 
     Private Sub ucrPnlOld_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOld.ControlValueChanged, ucrPnlNew.ControlValueChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
         InputValue()
