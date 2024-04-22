@@ -6957,7 +6957,7 @@ Partial Class ucrCalculator
         Me.grpList.Controls.Add(Me.cmdListSum)
         Me.grpList.Controls.Add(Me.cmdListSumd)
         Me.grpList.Controls.Add(Me.cmdListMissing)
-        Me.grpList.Location = New System.Drawing.Point(438, 42)
+        Me.grpList.Location = New System.Drawing.Point(438, 52)
         Me.grpList.Margin = New System.Windows.Forms.Padding(2)
         Me.grpList.Name = "grpList"
         Me.grpList.Padding = New System.Windows.Forms.Padding(2)
@@ -7618,7 +7618,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRhelpList.AutoSize = True
         Me.cmdRhelpList.ContextMenuStrip = Me.ContextMenuStripList
-        Me.cmdRhelpList.Location = New System.Drawing.Point(674, 26)
+        Me.cmdRhelpList.Location = New System.Drawing.Point(678, 26)
         Me.cmdRhelpList.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRhelpList.Name = "cmdRhelpList"
         Me.cmdRhelpList.Size = New System.Drawing.Size(68, 23)
