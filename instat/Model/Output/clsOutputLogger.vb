@@ -70,7 +70,7 @@ Public Class clsOutputLogger
         End Set
     End Property
 
-    Public Sub AddOutput(strScript As String, strOutput() As String, bAsFile As Boolean, bDisplayOutputInExternalViewer As Boolean)
+    Public Sub AddOutput(strScript As String, strOutput As String, bAsFile As Boolean, bDisplayOutputInExternalViewer As Boolean)
         ' Note this always takes the last script added as corresponding script
         If String.IsNullOrWhiteSpace(strScript) Then
             Throw New Exception("Cannot find script to attach output to.")
@@ -84,7 +84,10 @@ Public Class clsOutputLogger
         ' Raise event for output pages
         RaiseEvent NewOutputAdded(rScriptElement, False)
 
-        For Each output In strOutput
+        ' Split the strOutput into an array of lines, removing empty entries
+        Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+
+        For Each output In arrFilesPaths
             If Not String.IsNullOrEmpty(output) Then
                 Dim outputElement As New clsOutputElement
                 Dim outputType As OutputType

@@ -749,11 +749,8 @@ Public Class RLink
                          bShowWaitDialogOverride:=Nothing)
             End If
 
-            ' Split the strOutput into an array of lines, removing empty entries
-            Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-
             ' Add output to logger
-            clsOutputLogger.AddOutput(clsRStatement.Text, arrFilesPaths, bAsFile:=True,
+            clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
                         bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
 
             ' Log the script
@@ -858,11 +855,9 @@ Public Class RLink
                     Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
                 End If
 
-                ' Split the strOutput into an array of lines, removing empty entries
-                Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
                 clsOutputLogger.AddOutput(If(String.IsNullOrEmpty(strRStatementComment), "",
                         strRStatementComment & Environment.NewLine) & strRStatement,
-                        arrFilesPaths, bAsFile, bDisplayOutputInExternalViewer)
+                        strOutput, bAsFile, bDisplayOutputInExternalViewer)
                 LogScript(strRStatement, strRStatementComment)
 
             Catch e As Exception
@@ -1004,11 +999,8 @@ Public Class RLink
                 End If
             End If
 
-            ' Split the strOutput into an array of lines, removing empty entries
-            Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-
             ' If strOutput is empty or does not contain valid HTML files, add strOutput itself as an output
-            clsOutputLogger.AddOutput(strScriptWithComment, arrFilesPaths, bAsFile, bDisplayOutputInExternalViewer)
+            clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
 
 
         Catch e As Exception
