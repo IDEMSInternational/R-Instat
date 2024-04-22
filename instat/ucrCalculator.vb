@@ -61,7 +61,7 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF", "List", "Complex", "Integer"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Transform", "Summary", "Probability", "Factor", "Text/Strings (Character Columns)", "Dates/Times", "Circular", "Wakefield", "Goodness of Fit", "List", "Complex", "Integer"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
 
@@ -359,7 +359,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdHair, "Sample with default of 4 hair colours, brown, black, blonde, red, and defined probabilities")
         ttCalculator.SetToolTip(cmdHeight, "Sample from normal distribution with default mean 69, and sd 3.75, min 1, and no specified max, rounded to no decimals")
         ttCalculator.SetToolTip(cmdIncome, "Sample from a gamma distribution with mean 40,000 and shape 2. (Multiply the result to change the mean)")
-        ttCalculator.SetToolTip(cmdInternet_Browser, "Sample from ""Which browser do you use?"" with Chrome, IE, Firefox, Safari, Opera, Android, being the options")
+        ttCalculator.SetToolTip(cmdid, "Generate a variable with zero-padded IDs")
         ttCalculator.SetToolTip(cmdIq, "Sample from normal distribution with default of mean 100 and sd 15 - not 10 as provided by the package")
         ttCalculator.SetToolTip(cmdLanguage, "Sample of world's languages with default being list of 99 languages, provided, together with their proportions")
         ttCalculator.SetToolTip(cmdWakefieldLower, "Sample of single letters, with default being one of a,b,c,d,e")
@@ -935,7 +935,7 @@ Public Class ucrCalculator
                 grpList.Visible = False
                 cmdRhelpList.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
-            Case "hydroGOF"
+            Case "Goodness of Fit"
                 strPackageName = "hydroGOF"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
@@ -2804,7 +2804,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldIncomeFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdInternet_Browser_Click(sender As Object, e As EventArgs) Handles cmdInternet_Browser.Click
+    Private Sub cmdid_Click(sender As Object, e As EventArgs) Handles cmdid.Click
         Dim clsWakefieldInternetBrowserFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
         Dim clsBrowserListFunction As New RFunction
@@ -5035,7 +5035,7 @@ Public Class ucrCalculator
 
     Private Sub cmdHydroHelp_Click(sender As Object, e As EventArgs) Handles cmdHydroHelp.Click, HydroGOFToolStripMenuItem.Click
         CalculationsOptions()
-        If ucrInputCalOptions.GetText = "hydroGOF" Then
+        If ucrInputCalOptions.GetText = "Goodness of Fit " Then
             strPackageName = "hydroGOF"
         End If
         OpenHelpPage()
