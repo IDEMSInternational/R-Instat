@@ -46,12 +46,27 @@ Public Class dlgDescribeTwoVarGraph
     Private clsAesStatSummaryHlineCategoricalByNumeric As New RFunction
     Private clsAesStatSummaryHlineNumericByCategorical As New RFunction
     ' Use this aes for categorical by numeric when the x axis is the numeric variable(s) e.g. boxplot, violin, point
+    Private clsFacetFunction As New RFunction
+    Private clsFacetVariablesOperator As New ROperator
+    Private clsFacetRowOp As New ROperator
+    Private clsFacetColOp As New ROperator
     Private clsAesCategoricalByNumericXNumeric As New RFunction
     Private clsLabelAesFunction As New RFunction
     Private clsGeomTextFunction As New RFunction
+    Private clsPipeOperator As New ROperator
+    Private clsGroupByFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
     Private strGeomParameterNames() As String = {"geom_jitter", "geom_violin", "geom_bar", "geom_mosaic", "geom_boxplot", "geom_point", "geom_line", "stat_summary_hline", "stat_summary_crossline", "geom_freqpoly", "geom_histogram", "geom_density"}
 
     Private strFirstVariablesType, strSecondVariableType, strThirdVariableType As String
+
+    Private ReadOnly strFacetWrap As String = "Facet Wrap"
+    Private ReadOnly strFacetRow As String = "Facet Row"
+    Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strNone As String = "None"
+
+    Private bUpdateComboOptions As Boolean = True
+    Private bUpdatingParameters As Boolean = False
 
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bFirstLoad As Boolean = True
@@ -132,6 +147,19 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverThreeVariable.SetParameterIsString()
         ucrReceiverThreeVariable.bWithQuotes = False
         ucrReceiverThreeVariable.SetLinkedDisplayControl(lblThreeVariable)
+
+        ucr1stFactorReceiver.SetParameter(New RParameter("var1"))
+        ucr1stFactorReceiver.Selector = ucrSelectorTwoVarGraph
+        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.strSelectorHeading = "Factors"
+        ucr1stFactorReceiver.bWithQuotes = False
+        ucr1stFactorReceiver.SetParameterIsString()
+        ucr1stFactorReceiver.SetValuesToIgnore({"."})
+        ucr1stFactorReceiver.SetParameterPosition(1)
+        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFacetBy)
+
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrInputNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Line plot + points"})
         ucrInputNumericByNumeric.SetName("Scatter plot")
@@ -312,6 +340,10 @@ Public Class dlgDescribeTwoVarGraph
         clsDummyFunction = New RFunction
         clsPairOperator = New ROperator
         clsRFacet = New RFunction
+        clsFacetFunction = New RFunction
+        clsFacetVariablesOperator = New ROperator
+        clsFacetRowOp = New ROperator
+        clsFacetColOp = New ROperator
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsGlobalAes = New RFunction
@@ -327,6 +359,7 @@ Public Class dlgDescribeTwoVarGraph
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
 
         clsGeomBoxplot = New RFunction
         clsGeomJitter = New RFunction
@@ -357,9 +390,12 @@ Public Class dlgDescribeTwoVarGraph
         clsGeomTextFunction = New RFunction
         clsLabelAesFunction = New RFunction
         clsBaseOperator = New ROperator
-
+        clsPipeOperator = New ROperator
+        clsGroupByFunction = New RFunction
         bResetSubdialog = True
 
+        ucrInputStation.SetName(strFacetWrap)
+        ucrInputStation.bUpdateRCodeFromControl = True
         'Reset
         ucrSaveGraph.Reset()
         ucrSelectorTwoVarGraph.Reset()
@@ -367,6 +403,11 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverFirstVars.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("checked", "pair", iPosition:=0)
+
+        clsGroupByFunction.SetPackageName("dplyr")
+        clsGroupByFunction.SetRCommand("group_by")
+
+        clsPipeOperator.SetOperation("%>%")
 
         clsGeomTextFunction.SetPackageName("ggplot2")
         clsGeomTextFunction.SetRCommand("geom_text")
@@ -411,6 +452,16 @@ Public Class dlgDescribeTwoVarGraph
         clsPairOperator.AddParameter("left", clsRFunctionParameter:=clsGGpairsFunction, iPosition:=0)
 
         clsBaseOperator.SetOperation("+")
+
+        clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetRowOp.SetOperation("+")
+        clsFacetRowOp.bBrackets = False
+        clsFacetColOp.SetOperation("+")
+        clsFacetColOp.bBrackets = False
+        clsFacetVariablesOperator.SetOperation("~")
+        clsFacetVariablesOperator.bForceIncludeOperation = True
+        clsFacetVariablesOperator.bBrackets = False
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
 
         clsRGGplotFunction.SetPackageName("ggplot2")
         clsRGGplotFunction.SetRCommand("ggplot")
@@ -1084,10 +1135,22 @@ Public Class dlgDescribeTwoVarGraph
         ucrNudTransparency.Visible = False
         grpSummaries.Visible = rdoThreeVariable.Checked OrElse rdoBy.Checked
         ucrChkLegend.Visible = rdoThreeVariable.Checked OrElse rdoBy.Checked
+        'ucrInputLegendPosition.Visible = rdoThreeVariable.Checked OrElse rdoBy.Checked
+        ucrInputStation.Visible = rdoThreeVariable.Checked OrElse rdoBy.Checked
+        ucr1stFactorReceiver.Visible = rdoThreeVariable.Checked OrElse rdoBy.Checked
+        lblFacetBy.Visible = rdoThreeVariable.Checked OrElse rdoBy.Checked
         grpOptions.Visible = rdoBy.Checked OrElse rdoThreeVariable.Checked
         lblThirdType.Visible = rdoThreeVariable.Checked
         lblThreeBy.Visible = rdoThreeVariable.Checked
         ucrChkColour.Visible = rdoBy.Checked
+        If ucrReceiverFirstVars.ucrMultipleVariables.Count > 1 Then
+            ucrInputStation.Enabled = False
+            ucr1stFactorReceiver.Enabled = False
+        Else
+            ucrInputStation.Enabled = True
+            ucr1stFactorReceiver.Enabled = True
+        End If
+
     End Sub
 
     Private Sub EnableVisibleLabelControls()
@@ -1167,6 +1230,7 @@ Public Class dlgDescribeTwoVarGraph
                     Else
                         lstFirstItemTypes.RemoveAll(Function(x) x.Contains("logical"))
                     End If
+
                     If (lstFirstItemTypes.Count > 0) Then
                         strFirstVariablesType = lstFirstItemTypes(0)
                     Else
@@ -1557,29 +1621,174 @@ Public Class dlgDescribeTwoVarGraph
                     End Select
                 ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "categorical" Then
                     ucrInputCategoricalByCategorical.Visible = True
-                        AddRemoveFreeScaleX(True)
-                        If ucrInputCategoricalByCategorical IsNot Nothing Then
-                            Select Case ucrInputCategoricalByCategorical.GetText
-                                Case "Bar Chart"
-                                    ucrInputPosition.Visible = True
-                                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalBarChart, iPosition:=0)
-                                    clsGlobalAes = clsAesCategoricalByCategoricalBarChart
-                                    clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBar, iPosition:=1)
-                                Case "Mosaic Plot"
-                                    clsRGGplotFunction.RemoveParameterByName("mapping")
-                                    clsGlobalAes = GgplotDefaults.clsAesFunction.Clone()
-                                    clsGeomMosaic.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalMosaicPlot, iPosition:=0)
-                                    clsBaseOperator.AddParameter("geom_mosaic", clsRFunctionParameter:=clsGeomMosaic, iPosition:=1)
-                            End Select
-                        End If
-                    Else
-                        lblGraphName.Visible = True
-                        lblGraphName.Text = "__________"
-                        lblGraphName.ForeColor = SystemColors.ControlText
-                        clsGlobalAes = GgplotDefaults.clsAesFunction.Clone()
+                    AddRemoveFreeScaleX(True)
+                    If ucrInputCategoricalByCategorical IsNot Nothing Then
+                        Select Case ucrInputCategoricalByCategorical.GetText
+                            Case "Bar Chart"
+                                ucrInputPosition.Visible = True
+                                clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalBarChart, iPosition:=0)
+                                clsGlobalAes = clsAesCategoricalByCategoricalBarChart
+                                clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBar, iPosition:=1)
+                            Case "Mosaic Plot"
+                                clsRGGplotFunction.RemoveParameterByName("mapping")
+                                clsGlobalAes = GgplotDefaults.clsAesFunction.Clone()
+                                clsGeomMosaic.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalMosaicPlot, iPosition:=0)
+                                clsBaseOperator.AddParameter("geom_mosaic", clsRFunctionParameter:=clsGeomMosaic, iPosition:=1)
+                        End Select
                     End If
+                Else
+                    lblGraphName.Visible = True
+                    lblGraphName.Text = "__________"
+                    lblGraphName.ForeColor = SystemColors.ControlText
+                    clsGlobalAes = GgplotDefaults.clsAesFunction.Clone()
                 End If
             End If
+        End If
         autoTranslate(Me)
+    End Sub
+
+    Private Sub AutoFacetStation()
+        Dim currentReceiver As ucrReceiver = ucrSelectorTwoVarGraph.CurrentReceiver
+
+        If currentReceiver IsNot Nothing Then
+            ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+            currentReceiver.SetMeAsReceiver()
+            AddRemoveGroupBy()
+        End If
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
+        If Not bUpdateComboOptions Then
+            Exit Sub
+        End If
+        Dim strChangedText As String = ucrChangedControl.GetText()
+        If strChangedText <> strNone Then
+            If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
+                    Not ucrInputStation.Equals(ucrChangedControl) AndAlso ucrInputStation.GetText() = strChangedText Then
+                bUpdateComboOptions = False
+                ucrInputStation.SetName(strNone)
+                bUpdateComboOptions = True
+            End If
+            If (strChangedText = strFacetWrap AndAlso ucrInputStation.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
+                    ucrInputStation.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
+                    ucrInputStation.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputStation.GetText = strFacetWrap) Then
+                ucrInputStation.SetName(strNone)
+            End If
+        End If
+        UpdateParameters()
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub UpdateParameters()
+        clsFacetVariablesOperator.RemoveParameterByName("var1")
+        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
+        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        bUpdatingParameters = True
+        ucr1stFactorReceiver.SetRCode(Nothing)
+        Select Case ucrInputStation.GetText()
+            Case strFacetWrap
+                ucr1stFactorReceiver.ChangeParameterName("var1")
+                ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator)
+            Case strFacetCol
+                ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsFacetColOp)
+            Case strFacetRow
+                ucr1stFactorReceiver.ChangeParameterName("row" & ucrInputStation.Name)
+                ucr1stFactorReceiver.SetRCode(clsFacetRowOp)
+        End Select
+        If Not clsRFacetFunction.ContainsParameter("x") Then
+            clsRFacetFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
+        bUpdatingParameters = False
+    End Sub
+
+    Private Sub AddRemoveFacets()
+        Dim bWrap As Boolean = False
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+
+        If bUpdatingParameters Then
+            Exit Sub
+        End If
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        If Not ucr1stFactorReceiver.IsEmpty Then
+            Select Case ucrInputStation.GetText()
+                Case strFacetWrap
+                    bWrap = True
+                Case strFacetCol
+                    bCol = True
+                Case strFacetRow
+                    bRow = True
+            End Select
+        End If
+
+        If bWrap OrElse bRow OrElse bCol Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+        End If
+        If bWrap Then
+            clsFacetFunction.SetRCommand("facet_wrap")
+        End If
+        If bRow OrElse bCol Then
+            clsFacetFunction.SetRCommand("facet_grid")
+        End If
+        If bRow Then
+            clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
+        ElseIf bCol AndAlso bWrap = False Then
+            clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
+        Else
+            clsFacetVariablesOperator.RemoveParameterByName("left")
+        End If
+        If bCol Then
+            clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
+        ElseIf bRow AndAlso bWrap = False Then
+            clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
+        Else
+            clsFacetVariablesOperator.RemoveParameterByName("right")
+        End If
+    End Sub
+
+    Private Sub ucr1stFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucr1stFactorReceiver.ControlValueChanged
+        AddRemoveFacets()
+        AddRemoveGroupBy()
+    End Sub
+
+    Private Sub GetParameterValue(clsOperator As ROperator)
+        Dim i As Integer = 0
+        For Each clsTempParam As RParameter In clsOperator.clsParameters
+            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                clsGroupByFunction.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                i = i + 1
+            End If
+        Next
+    End Sub
+
+    Private Sub AddRemoveGroupBy()
+        If clsPipeOperator.ContainsParameter("mutate") Then
+            clsGroupByFunction.ClearParameters()
+            If clsBaseOperator.ContainsParameter("facets") Then
+                Select Case ucrInputStation.GetText()
+                    Case strFacetWrap
+                        GetParameterValue(clsFacetVariablesOperator)
+                    Case strFacetCol
+                        GetParameterValue(clsFacetColOp)
+                    Case strFacetRow
+                        GetParameterValue(clsFacetRowOp)
+                End Select
+            End If
+
+            If clsGroupByFunction.iParameterCount > 0 Then
+                clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
+            Else
+                clsPipeOperator.RemoveParameterByName("group_by")
+            End If
+        Else
+            clsPipeOperator.RemoveParameterByName("group_by")
+        End If
+
+        'SetPipeAssignTo()
     End Sub
 End Class
