@@ -266,7 +266,7 @@ Public Class dlgTransformClimatic
         ucrNudMultSpells.SetLinkedDisplayControl(lblRowsMultSpells)
 
         ' Water Balance
-        ucrNudWBCapacity.SetParameter(New RParameter("capacity", 1), False)
+        ucrNudWBCapacity.SetParameter(New RParameter("capacity", 1, False))
         ucrNudWBCapacity.SetMinMax(1, Integer.MaxValue)
         ucrNudWBCapacity.Increment = 10
         ucrNudWBCapacity.SetLinkedDisplayControl(lblWBCapacity)
@@ -500,7 +500,6 @@ Public Class dlgTransformClimatic
         clsPMaxFunctionMax.SetRCommand("pmax")
         clsPMaxOperatorMax.SetOperation("-")
         clsPMaxFunctionMax.AddParameter("0", "0", iPosition:=1, bIncludeArgumentName:=False)
-        'clsPMinFunctionMax.AddParameter("capacity", 60, iPosition:=1, bIncludeArgumentName:=False)
         clsRWaterBalanceFunction.AddParameter("accumulate", "TRUE", iPosition:=2)
 
         clsRWaterBalanceFunction1.bToScriptAsRString = True
@@ -700,7 +699,6 @@ Public Class dlgTransformClimatic
 
         ' Water Balance
         ucrReceiverEvap.SetRCode(clsAsNumericFunction, bReset)
-        ucrNudWBCapacity.SetRCode(clsPMinFunctionMax, bReset)
 
         'Degree
         ucrReceiverTMin.SetRCode(clsDiurnalRangeOperator, bReset)
@@ -967,7 +965,6 @@ Public Class dlgTransformClimatic
     Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrReceiverEvap.ControlValueChanged
         RainDays()
         ReduceWaterBalance()
-        ' AutoFill()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
@@ -991,9 +988,9 @@ Public Class dlgTransformClimatic
         ReduceWaterBalance()
     End Sub
 
-    'Private Sub ucrInputEvaporation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputEvaporation.ControlContentsChanged, ucrPnlEvap.ControlContentsChanged
-    '    ReduceWaterBalance()
-    'End Sub
+    Private Sub ucrInputEvaporation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputEvaporation.ControlContentsChanged, ucrPnlEvap.ControlContentsChanged
+        ReduceWaterBalance()
+    End Sub
 
     Private Sub RasterFunction()
         If rdoMoving.Checked Then
@@ -1167,6 +1164,7 @@ Public Class dlgTransformClimatic
                     clsWBEvaporation.AddParameter("evaporation_value", ucrInputEvaporation.GetText(), iPosition:=1, bIncludeArgumentName:=False)
                     clsPMaxFunctionMax.AddParameter("wb", clsROperatorParameter:=clsWBOperator, iPosition:=0, bIncludeArgumentName:=False)
                 Else
+                    clsPMinFunctionMax.AddParameter("capacity", ucrNudWBCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
                     clsPMaxOperatorMax.AddParameter("first", "..1 + ..2", iPosition:=0)
                     clsPMaxOperatorMax.AddParameter("evaporation.value", ucrInputEvaporation.GetText(), iPosition:=1, bIncludeArgumentName:=False)
                     clsPMaxFunctionMax.AddParameter("calculation", clsROperatorParameter:=clsPMaxOperatorMax, iPosition:=0, bIncludeArgumentName:=False)
@@ -1222,6 +1220,10 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrPnlEvap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlValueChanged
+        ReduceWaterBalance()
+    End Sub
+
+    Private Sub ucrNudWBCapacity_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWBCapacity.ControlValueChanged
         ReduceWaterBalance()
     End Sub
 End Class
