@@ -335,6 +335,14 @@ Public Class dlgDescribeTwoVarGraph
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
     Private Sub SetDefaults()
         clsGGpairsFunction = New RFunction
         clsRGGplotFunction = New RFunction
@@ -619,6 +627,7 @@ Public Class dlgDescribeTwoVarGraph
 
         bRCodeSet = True
         Results()
+        ThreeVariableResult()
         SetFreeYAxis()
         EnableVisibleLabelControls()
     End Sub
@@ -877,6 +886,7 @@ Public Class dlgDescribeTwoVarGraph
         Dim iPosition As Integer = 0
         Dim iNumVariables As Integer = ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNamesList(bWithQuotes:=False).Count
         Results()
+        ThreeVariableResult()
         EnableVisibleLabelControls()
         clsGGpairsFunction.AddParameter("columns", ucrReceiverFirstVars.ucrMultipleVariables.GetVariableNames(), iPosition:=1)
         clsGgmosaicProduct.ClearParameters()
@@ -908,6 +918,7 @@ Public Class dlgDescribeTwoVarGraph
 
     Private Sub ucrInputCategoricalByCategorical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNumericByNumeric.ControlValueChanged, ucrInputNumericByCategorical.ControlValueChanged, ucrInputCategoricalByNumeric.ControlValueChanged, ucrInputCategoricalByCategorical.ControlValueChanged
         Results()
+        ThreeVariableResult()
         EnableVisibleLabelControls()
         AddRemoveTextParameter()
         ChangeGeomToMosaicAndFacet()
@@ -1316,5 +1327,427 @@ Public Class dlgDescribeTwoVarGraph
         End If
 
         'SetPipeAssignTo()
+    End Sub
+
+    Private Sub ThreeVariableResult()
+        Dim lstFirstItemTypes As List(Of String)
+        If bRCodeSet Then
+            If rdoThreeVariable.Checked Then
+                If Not ucrReceiverFirstVars.IsEmpty() Then
+                    lstFirstItemTypes = ucrReceiverFirstVars.ucrMultipleVariables.GetCurrentItemTypes(True, bIsCategoricalNumeric:=True)
+                    If lstFirstItemTypes.Count = 1 AndAlso lstFirstItemTypes.Contains("logical") Then
+                        lstFirstItemTypes(0) = "categorical"
+                    Else
+                        lstFirstItemTypes.RemoveAll(Function(x) x.Contains("logical"))
+                    End If
+
+                    If (lstFirstItemTypes.Count > 0) Then
+                        strFirstVariablesType = lstFirstItemTypes(0)
+                    Else
+                        strFirstVariablesType = ""
+                        lblFirstType.Text = "________"
+                        lblFirstType.ForeColor = SystemColors.ControlText
+                    End If
+                    lblFirstType.Text = strFirstVariablesType
+                    lblFirstType.ForeColor = SystemColors.Highlight
+                Else
+                    strFirstVariablesType = ""
+                    lblFirstType.Text = "________"
+                    lblFirstType.ForeColor = SystemColors.ControlText
+                End If
+                If Not ucrReceiverThreeVariableSecond.IsEmpty() Then
+                    strSecondVariableType = ucrReceiverThreeVariableSecond.strCurrDataType
+                    If strSecondVariableType.Contains("factor") OrElse strSecondVariableType.Contains("character") OrElse strSecondVariableType.Contains("logical") Then
+                        strSecondVariableType = "categorical"
+                    Else
+                        strSecondVariableType = "numeric"
+                    End If
+                    lblSecondType.Text = strSecondVariableType
+                    lblSecondType.ForeColor = SystemColors.Highlight
+                Else
+                    strSecondVariableType = ""
+                    lblSecondType.Text = "________"
+                    lblSecondType.ForeColor = SystemColors.ControlText
+                End If
+                If Not ucrReceiverThreeVariable.IsEmpty() Then
+                    strThirdVariableType = ucrReceiverThreeVariable.strCurrDataType
+                    If strThirdVariableType.Contains("factor") OrElse strThirdVariableType.Contains("character") OrElse strThirdVariableType.Contains("logical") Then
+                        strThirdVariableType = "categorical"
+                    Else
+                        strThirdVariableType = "numeric"
+                    End If
+                    lblThirdType.Text = strThirdVariableType
+                    lblThirdType.ForeColor = SystemColors.Highlight
+                Else
+                    strThirdVariableType = ""
+                    lblThirdType.Text = "________"
+                    lblThirdType.ForeColor = SystemColors.ControlText
+                End If
+                RemoveAllGeomsStats()
+                If strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric" AndAlso strThirdVariableType = "numeric" Then
+                    ucrInputNumericByNumeric.Visible = True
+                    AddRemoveFreeScaleX(False)
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByNumeric, iPosition:=0)
+                    clsGlobalAes = clsAesNumericByNumeric
+                    Select Case ucrInputNumericByNumeric.GetText
+                        Case "Scatter plot"
+                            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                        Case "Line plot"
+                            clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLine, iPosition:=1)
+                        Case "Line plot + points"
+                            ucrNudTransparency.Visible = True
+                            clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLine, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=2)
+                    End Select
+                ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric" AndAlso strThirdVariableType = "numeric" Then
+                    ucrInputCategoricalByNumeric.Visible = True
+                    ucrChkFreeScaleYAxis.Checked = False
+                    ucrChkFreeScaleYAxis.Visible = False
+                    AddRemoveFreeScaleX(True)
+                    Select Case ucrInputCategoricalByNumeric.GetText
+                        Case "Boxplot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=1)
+                        Case "Point plot"
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        Case "Jitter plot"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        Case "Violin plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                        Case "Boxplot + Jitter"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
+                        Case "Violin plot + Jitter plot"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
+                        Case "Violin plot + Boxplot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=2)
+                        Case "Summary Plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("stat_summary_crossbar", clsRFunctionParameter:=clsStatSummaryCrossbar, iPosition:=1)
+                            clsBaseOperator.AddParameter("stat_summary_hline", clsRFunctionParameter:=clsStatSummaryHline, iPosition:=2)
+                            clsStatSummaryHline.AddParameter("mapping", clsRFunctionParameter:=clsAesStatSummaryHlineCategoricalByNumeric, iPosition:=0)
+                        Case "Summary Plot + Points"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("stat_summary_crossbar", clsRFunctionParameter:=clsStatSummaryCrossbar, iPosition:=1)
+                            clsBaseOperator.AddParameter("stat_summary_hline", clsRFunctionParameter:=clsStatSummaryHline, iPosition:=2)
+                            clsStatSummaryHline.AddParameter("mapping", clsRFunctionParameter:=clsAesStatSummaryHlineCategoricalByNumeric, iPosition:=0)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=3)
+                        Case "Histogram"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericXNumeric
+                            clsBaseOperator.AddParameter("geom_histogram", clsRFunctionParameter:=clsGeomHistogram, iPosition:=1)
+                        Case "Density plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericXNumeric
+                            clsBaseOperator.AddParameter("geom_density", clsRFunctionParameter:=clsGeomDensity, iPosition:=1)
+                        Case "Frequency polygon"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericXNumeric
+                            clsBaseOperator.AddParameter("geom_freqpoly", clsRFunctionParameter:=clsGeomFreqPoly, iPosition:=1)
+                    End Select
+                ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "numeric" Then
+                    ucrInputNumericByCategorical.Visible = True
+                    AddRemoveFreeScaleX(True)
+                    Select Case ucrInputNumericByCategorical.GetText
+                        Case "Boxplot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=1)
+                        Case "Point plot"
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        Case "Jitter plot"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        Case "Violin plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                        Case "Boxplot + Jitter"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
+                        Case "Violin plot + Jitter plot"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
+                        Case "Violin plot + Boxplot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=0)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=2)
+                        Case "Summary Plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("stat_summary_crossbar", clsRFunctionParameter:=clsStatSummaryCrossbar, iPosition:=1)
+                            clsBaseOperator.AddParameter("stat_summary_hline", clsRFunctionParameter:=clsStatSummaryHline, iPosition:=2)
+                            clsStatSummaryHline.AddParameter("mapping", clsRFunctionParameter:=clsAesStatSummaryHlineNumericByCategorical, iPosition:=0)
+                        Case "Summary Plot + Points"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("stat_summary_crossbar", clsRFunctionParameter:=clsStatSummaryCrossbar, iPosition:=1)
+                            clsBaseOperator.AddParameter("stat_summary_hline", clsRFunctionParameter:=clsStatSummaryHline, iPosition:=2)
+                            clsStatSummaryHline.AddParameter("mapping", clsRFunctionParameter:=clsAesStatSummaryHlineNumericByCategorical, iPosition:=0)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=3)
+                        Case "Histogram"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalXNumeric
+                            clsBaseOperator.AddParameter("geom_histogram", clsRFunctionParameter:=clsGeomHistogram, iPosition:=1)
+                        Case "Density plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalXNumeric
+                            clsBaseOperator.AddParameter("geom_density", clsRFunctionParameter:=clsGeomDensity, iPosition:=1)
+                        Case "Frequency polygon"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalXNumeric
+                            clsBaseOperator.AddParameter("geom_freqpolygon", clsRFunctionParameter:=clsGeomFreqPoly, iPosition:=1)
+                    End Select
+                ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "numeric" Then
+                    ucrInputCategoricalByCategorical.Visible = True
+                    AddRemoveFreeScaleX(True)
+                    If ucrInputCategoricalByCategorical IsNot Nothing Then
+                        Select Case ucrInputCategoricalByCategorical.GetText
+                            Case "Bar Chart"
+                                ucrInputPosition.Visible = True
+                                clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalBarChart, iPosition:=0)
+                                clsGlobalAes = clsAesCategoricalByCategoricalBarChart
+                                clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBar, iPosition:=1)
+                            Case "Mosaic Plot"
+                                clsRGGplotFunction.RemoveParameterByName("mapping")
+                                clsGlobalAes = GgplotDefaults.clsAesFunction.Clone()
+                                clsGeomMosaic.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalMosaicPlot, iPosition:=0)
+                                clsBaseOperator.AddParameter("geom_mosaic", clsRFunctionParameter:=clsGeomMosaic, iPosition:=1)
+                        End Select
+                    End If
+                ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "numeric" AndAlso strThirdVariableType = "categorical" Then
+                    ucrInputNumericByNumeric.Visible = True
+                    AddRemoveFreeScaleX(False)
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByNumeric, iPosition:=0)
+                    clsGlobalAes = clsAesNumericByNumeric
+                    Select Case ucrInputNumericByNumeric.GetText
+                        Case "Scatter plot"
+                            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                        Case "Line plot"
+                            clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLine, iPosition:=1)
+                        Case "Line plot + points"
+                            ucrNudTransparency.Visible = True
+                            clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLine, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=2)
+                    End Select
+                ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "numeric" AndAlso strThirdVariableType = "categorical" Then
+                    ucrInputCategoricalByNumeric.Visible = True
+                    ucrChkFreeScaleYAxis.Checked = False
+                    ucrChkFreeScaleYAxis.Visible = False
+                    AddRemoveFreeScaleX(True)
+                    Select Case ucrInputCategoricalByNumeric.GetText
+                        Case "Boxplot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=1)
+                        Case "Point plot"
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        Case "Jitter plot"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        Case "Violin plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                        Case "Boxplot + Jitter"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
+                        Case "Violin plot + Jitter plot"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
+                        Case "Violin plot + Boxplot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=2)
+                        Case "Summary Plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("stat_summary_crossbar", clsRFunctionParameter:=clsStatSummaryCrossbar, iPosition:=1)
+                            clsBaseOperator.AddParameter("stat_summary_hline", clsRFunctionParameter:=clsStatSummaryHline, iPosition:=2)
+                            clsStatSummaryHline.AddParameter("mapping", clsRFunctionParameter:=clsAesStatSummaryHlineCategoricalByNumeric, iPosition:=0)
+                        Case "Summary Plot + Points"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericYNumeric
+                            clsBaseOperator.AddParameter("stat_summary_crossbar", clsRFunctionParameter:=clsStatSummaryCrossbar, iPosition:=1)
+                            clsBaseOperator.AddParameter("stat_summary_hline", clsRFunctionParameter:=clsStatSummaryHline, iPosition:=2)
+                            clsStatSummaryHline.AddParameter("mapping", clsRFunctionParameter:=clsAesStatSummaryHlineCategoricalByNumeric, iPosition:=0)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=3)
+                        Case "Histogram"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericXNumeric
+                            clsBaseOperator.AddParameter("geom_histogram", clsRFunctionParameter:=clsGeomHistogram, iPosition:=1)
+                        Case "Density plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericXNumeric
+                            clsBaseOperator.AddParameter("geom_density", clsRFunctionParameter:=clsGeomDensity, iPosition:=1)
+                        Case "Frequency polygon"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByNumericXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesCategoricalByNumericXNumeric
+                            clsBaseOperator.AddParameter("geom_freqpoly", clsRFunctionParameter:=clsGeomFreqPoly, iPosition:=1)
+                    End Select
+                ElseIf strFirstVariablesType = "numeric" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "categorical" Then
+                    ucrInputNumericByCategorical.Visible = True
+                    AddRemoveFreeScaleX(True)
+                    Select Case ucrInputNumericByCategorical.GetText
+                        Case "Boxplot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=1)
+                        Case "Point plot"
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPoint, iPosition:=1)
+                        Case "Jitter plot"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=1)
+                        Case "Violin plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                        Case "Boxplot + Jitter"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
+                        Case "Violin plot + Jitter plot"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=2)
+                        Case "Violin plot + Boxplot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=0)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("geom_violin", clsRFunctionParameter:=clsGeomViolin, iPosition:=1)
+                            clsBaseOperator.AddParameter("geom_boxplot", clsRFunctionParameter:=clsGeomBoxplot, iPosition:=2)
+                        Case "Summary Plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("stat_summary_crossbar", clsRFunctionParameter:=clsStatSummaryCrossbar, iPosition:=1)
+                            clsBaseOperator.AddParameter("stat_summary_hline", clsRFunctionParameter:=clsStatSummaryHline, iPosition:=2)
+                            clsStatSummaryHline.AddParameter("mapping", clsRFunctionParameter:=clsAesStatSummaryHlineNumericByCategorical, iPosition:=0)
+                        Case "Summary Plot + Points"
+                            ucrNudJitter.Visible = True
+                            ucrNudTransparency.Visible = True
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalYNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalYNumeric
+                            clsBaseOperator.AddParameter("stat_summary_crossbar", clsRFunctionParameter:=clsStatSummaryCrossbar, iPosition:=1)
+                            clsBaseOperator.AddParameter("stat_summary_hline", clsRFunctionParameter:=clsStatSummaryHline, iPosition:=2)
+                            clsStatSummaryHline.AddParameter("mapping", clsRFunctionParameter:=clsAesStatSummaryHlineNumericByCategorical, iPosition:=0)
+                            clsBaseOperator.AddParameter("geom_jitter", clsRFunctionParameter:=clsGeomJitter, iPosition:=3)
+                        Case "Histogram"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalXNumeric
+                            clsBaseOperator.AddParameter("geom_histogram", clsRFunctionParameter:=clsGeomHistogram, iPosition:=1)
+                        Case "Density plot"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalXNumeric
+                            clsBaseOperator.AddParameter("geom_density", clsRFunctionParameter:=clsGeomDensity, iPosition:=1)
+                        Case "Frequency polygon"
+                            clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesNumericByCategoricalXNumeric, iPosition:=1)
+                            clsGlobalAes = clsAesNumericByCategoricalXNumeric
+                            clsBaseOperator.AddParameter("geom_freqpolygon", clsRFunctionParameter:=clsGeomFreqPoly, iPosition:=1)
+                    End Select
+                ElseIf strFirstVariablesType = "categorical" AndAlso strSecondVariableType = "categorical" AndAlso strThirdVariableType = "categorical" Then
+                    ucrInputCategoricalByCategorical.Visible = True
+                    AddRemoveFreeScaleX(True)
+                    If ucrInputCategoricalByCategorical IsNot Nothing Then
+                        Select Case ucrInputCategoricalByCategorical.GetText
+                            Case "Bar Chart"
+                                ucrInputPosition.Visible = True
+                                clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalBarChart, iPosition:=0)
+                                clsGlobalAes = clsAesCategoricalByCategoricalBarChart
+                                clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBar, iPosition:=1)
+                            Case "Mosaic Plot"
+                                clsRGGplotFunction.RemoveParameterByName("mapping")
+                                clsGlobalAes = GgplotDefaults.clsAesFunction.Clone()
+                                clsGeomMosaic.AddParameter("mapping", clsRFunctionParameter:=clsAesCategoricalByCategoricalMosaicPlot, iPosition:=0)
+                                clsBaseOperator.AddParameter("geom_mosaic", clsRFunctionParameter:=clsGeomMosaic, iPosition:=1)
+                        End Select
+                    End If
+                Else
+                    lblGraphName.Visible = True
+                    lblGraphName.Text = "__________"
+                    lblGraphName.ForeColor = SystemColors.ControlText
+                    clsGlobalAes = GgplotDefaults.clsAesFunction.Clone()
+                End If
+            End If
+        End If
+
+    End Sub
+
+    Private Sub ucrReceiverThreeVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThreeVariable.ControlValueChanged, ucrReceiverThreeVariableSecond.ControlValueChanged
+        ThreeVariableResult()
     End Sub
 End Class
