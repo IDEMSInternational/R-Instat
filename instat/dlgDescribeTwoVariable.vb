@@ -149,6 +149,10 @@ Public Class dlgDescribeTwoVariable
         ucrChkSummariesRowCol.AddParameterValuesCondition(True, "row_sum", "True")
         ucrChkSummariesRowCol.AddParameterValuesCondition(False, "row_sum", "False")
 
+        ucrChkCorrelations.SetText("Correlations")
+        ucrChkCorrelations.AddParameterValuesCondition(True, "corr", "True")
+        ucrChkCorrelations.AddParameterValuesCondition(False, "corr", "False")
+
         ucrPnlDescribe.AddRadioButton(rdoTwoVariable)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
         ucrPnlDescribe.AddRadioButton(rdoThreeVariable)
@@ -247,6 +251,7 @@ Public Class dlgDescribeTwoVariable
         clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
         clsDummyFunction.AddParameter("theme", "select", iPosition:=2)
         clsDummyFunction.AddParameter("row_sum", "False", iPosition:=3)
+        clsDummyFunction.AddParameter("corr", "False", iPosition:=4)
 
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=2)
@@ -463,6 +468,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkPercentageProportion.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
         ucrChkSummariesRowCol.SetRCode(clsDummyFunction, bReset)
+        ucrChkCorrelations.SetRCode(clsDummyFunction, bReset)
         ucrReceiverThreeVariableSecondFactor.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrReceiverThreeVariableThirdVariable.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsCombineFrequencyParametersFunction, bReset)
@@ -561,9 +567,11 @@ Public Class dlgDescribeTwoVariable
         ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactor()
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrChkSummariesRowCol.Visible = False
+        ucrChkCorrelations.Visible = False
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = strFirstVariablesType = "numeric"
             ucrChkSummariesRowCol.Visible = IsNumericByFactor()
+            ucrChkCorrelations.Visible = IsNumericByNumeric()
         ElseIf rdoThreeVariable.Checked Then
             ucrChkOmitMissing.Visible = IsFactorByNumeric() OrElse IsNumericByFactor()
         Else
@@ -601,7 +609,15 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoTwoVariable.Checked Then
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             If IsNumericByNumeric() Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRCorrelationFunction)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaFunction)
+                If ucrChkCorrelations.Checked Then
+                    ucrBase.clsRsyntax.AddToAfterCodes(clsRCorrelationFunction, iPosition:=0)
+                    clsDummyFunction.AddParameter("corr", "True", iPosition:=4)
+                    clsRCorrelationFunction.iCallType = 2
+                Else
+                    clsDummyFunction.AddParameter("corr", "False", iPosition:=4)
+                    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRCorrelationFunction)
+                End If
                 ucrSaveTable.Visible = False
             ElseIf IsFactorByNumeric() Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRAnovaFunction)
@@ -1008,7 +1024,7 @@ Public Class dlgDescribeTwoVariable
         Else
             If rdoTwoVariable.Checked Then
                 If IsNumericByNumeric() Then
-                    strSummaryName = "Correlations"
+                    strSummaryName = "ANOVA tables"
                 ElseIf IsFactorByNumeric() Then
                     strSummaryName = "ANOVA tables"
                 ElseIf IsNumericByFactor() Then
@@ -1294,4 +1310,7 @@ Public Class dlgDescribeTwoVariable
         SummariesInRowsOrCols()
     End Sub
 
+    Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged
+        ChangeBaseRCode()
+    End Sub
 End Class
