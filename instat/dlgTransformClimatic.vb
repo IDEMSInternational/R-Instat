@@ -333,7 +333,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls(ucrChkCircular, {rdoMoving}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls(ucrNudMultSpells, {rdoMultSpells}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=21)
         ucrPnlTransform.AddToLinkedControls(ucrPnlEvap, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=60)
+        ucrPnlTransform.AddToLinkedControls(ucrNudWBCapacity, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
         ucrPnlTransform.AddToLinkedControls(ucrChkGroupByYear, {rdoCount, rdoMoving, rdoSpell, rdoMultSpells, rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrReceiverYear, ucrReceiverData, ucrChkOptions}, {rdoCumulative, rdoCount, rdoMoving, rdoMultSpells, rdoSpell, rdoWaterBalance}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrChkUseMaxMin, ucrPnlDegree}, {rdoDegree}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
