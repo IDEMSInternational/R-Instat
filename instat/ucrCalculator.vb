@@ -61,7 +61,7 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF", "List", "Complex", "Integer"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Transform", "Summary", "Probability", "Factor", "Text/Strings (Character Columns)", "Dates/Times", "Circular", "Wakefield", "Goodness of Fit", "List", "Complex", "Integer"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
 
@@ -128,6 +128,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdDuplicate, "duplicate detects non-unique values, for example duplicated(c(1:3,2,7)) gives FALSE, FALSE, FALSE, TRUE, FALSE")
         ttCalculator.SetToolTip(cmdNear, "near(x,y)compares 2 variables. For example sqrt(5)^2 is almost, but isn't exactly 5, however near(sqrt(5)^2,5) is TRUE")
         ttCalculator.SetToolTip(cmdnumeric, "Define a variable as numeric.  For example as numeric(c(TRUE,TRUE,FALSE,TRUE)) gives (1, 1,0, 1) ")
+        ttCalculator.SetToolTip(cmdSquareBrackets, "Extract one or more elements from a column (or data frame")
         ttCalculator.SetToolTip(cmdTilde, "This is called tilde and links the left side and right side of a formula")
         ttCalculator.SetToolTip(cmdCalcConcantenateFunction, "Combines arguments to form a single vector, e.g. c(1:3 8) is 1, 2, 3, 8")
         ttCalculator.SetToolTip(cmdCalcRepelicationFunction, "Repeat of a sequence, e.g. rep(c(2, 3, 4), each=2) gives 2, 2, 3, 3, 4, 4")
@@ -359,7 +360,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdHair, "Sample with default of 4 hair colours, brown, black, blonde, red, and defined probabilities")
         ttCalculator.SetToolTip(cmdHeight, "Sample from normal distribution with default mean 69, and sd 3.75, min 1, and no specified max, rounded to no decimals")
         ttCalculator.SetToolTip(cmdIncome, "Sample from a gamma distribution with mean 40,000 and shape 2. (Multiply the result to change the mean)")
-        ttCalculator.SetToolTip(cmdInternet_Browser, "Sample from ""Which browser do you use?"" with Chrome, IE, Firefox, Safari, Opera, Android, being the options")
+        ttCalculator.SetToolTip(cmdid, "Generate a variable with zero-padded IDs")
         ttCalculator.SetToolTip(cmdIq, "Sample from normal distribution with default of mean 100 and sd 15 - not 10 as provided by the package")
         ttCalculator.SetToolTip(cmdLanguage, "Sample of world's languages with default being list of 99 languages, provided, together with their proportions")
         ttCalculator.SetToolTip(cmdWakefieldLower, "Sample of single letters, with default being one of a,b,c,d,e")
@@ -935,7 +936,7 @@ Public Class ucrCalculator
                 grpList.Visible = False
                 cmdRhelpList.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
-            Case "hydroGOF"
+            Case "Goodness of Fit"
                 strPackageName = "hydroGOF"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
@@ -2804,39 +2805,20 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldIncomeFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdInternet_Browser_Click(sender As Object, e As EventArgs) Handles cmdInternet_Browser.Click
-        Dim clsWakefieldInternetBrowserFunction As New RFunction
+    Private Sub cmdid_Click(sender As Object, e As EventArgs) Handles cmdid.Click
+        Dim clsWakefieldIDFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
-        Dim clsBrowserListFunction As New RFunction
-        Dim clsBrowserProbFunction As New RFunction
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
 
-        clsBrowserListFunction.SetRCommand("c")
-        clsBrowserListFunction.AddParameter("chrome", Chr(34) & "Chrome" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsBrowserListFunction.AddParameter("IE", Chr(34) & "IE" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
-        clsBrowserListFunction.AddParameter("firefox", Chr(34) & "Firefox" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
-        clsBrowserListFunction.AddParameter("safari", Chr(34) & "Safari" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
-        clsBrowserListFunction.AddParameter("opera", Chr(34) & "Opera" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
-        clsBrowserListFunction.AddParameter("android", Chr(34) & "Android" & Chr(34), iPosition:=5, bIncludeArgumentName:=False)
+        clsWakefieldIDFunction.SetPackageName("wakefield")
+        clsWakefieldIDFunction.SetRCommand("id")
+        clsWakefieldIDFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldIDFunction.AddParameter("random", "FALSE", iPosition:=1)
+        clsWakefieldIDFunction.AddParameter("name", Chr(34) & "ID" & Chr(34), iPosition:=2)
 
-        clsBrowserProbFunction.SetRCommand("c")
-        clsBrowserProbFunction.AddParameter("0.5027", "0.5027", iPosition:=0, bIncludeArgumentName:=False)
-        clsBrowserProbFunction.AddParameter("0.175", "0.175", iPosition:=1, bIncludeArgumentName:=False)
-        clsBrowserProbFunction.AddParameter("0.1689", "0.1689", iPosition:=2, bIncludeArgumentName:=False)
-        clsBrowserProbFunction.AddParameter("0.0994", "0.0994", iPosition:=3, bIncludeArgumentName:=False)
-        clsBrowserProbFunction.AddParameter("0.017", "0.017", iPosition:=4, bIncludeArgumentName:=False)
-        clsBrowserProbFunction.AddParameter("0.0132", "0.0132", iPosition:=5, bIncludeArgumentName:=False)
-
-        clsWakefieldInternetBrowserFunction.SetPackageName("wakefield")
-        clsWakefieldInternetBrowserFunction.SetRCommand("internet_browser")
-        clsWakefieldInternetBrowserFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
-        clsWakefieldInternetBrowserFunction.AddParameter("x", clsRFunctionParameter:=clsBrowserListFunction, iPosition:=1)
-        clsWakefieldInternetBrowserFunction.AddParameter("prob", clsRFunctionParameter:=clsBrowserProbFunction, iPosition:=2)
-        clsWakefieldInternetBrowserFunction.AddParameter("name", Chr(34) & "Browser" & Chr(34), iPosition:=3)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldInternetBrowserFunction.ToScript, 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldIDFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdIq_Click(sender As Object, e As EventArgs) Handles cmdIq.Click
@@ -5035,7 +5017,7 @@ Public Class ucrCalculator
 
     Private Sub cmdHydroHelp_Click(sender As Object, e As EventArgs) Handles cmdHydroHelp.Click, HydroGOFToolStripMenuItem.Click
         CalculationsOptions()
-        If ucrInputCalOptions.GetText = "hydroGOF" Then
+        If ucrInputCalOptions.GetText = "Goodness of Fit " Then
             strPackageName = "hydroGOF"
         End If
         OpenHelpPage()
