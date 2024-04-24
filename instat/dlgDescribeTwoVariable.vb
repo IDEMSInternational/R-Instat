@@ -153,6 +153,10 @@ Public Class dlgDescribeTwoVariable
         ucrChkCorrelations.AddParameterValuesCondition(True, "corr", "True")
         ucrChkCorrelations.AddParameterValuesCondition(False, "corr", "False")
 
+        ucrChkSwapXYVar.SetText("Swap First and Second Variables")
+        ucrChkSwapXYVar.AddParameterValuesCondition(True, "var", "True")
+        ucrChkSwapXYVar.AddParameterValuesCondition(False, "var", "False")
+
         ucrPnlDescribe.AddRadioButton(rdoTwoVariable)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
         ucrPnlDescribe.AddRadioButton(rdoThreeVariable)
@@ -252,6 +256,7 @@ Public Class dlgDescribeTwoVariable
         clsDummyFunction.AddParameter("theme", "select", iPosition:=2)
         clsDummyFunction.AddParameter("row_sum", "False", iPosition:=3)
         clsDummyFunction.AddParameter("corr", "False", iPosition:=4)
+        clsDummyFunction.AddParameter("var", "False", iPosition:=5)
 
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=2)
@@ -469,6 +474,7 @@ Public Class dlgDescribeTwoVariable
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
         ucrChkSummariesRowCol.SetRCode(clsDummyFunction, bReset)
         ucrChkCorrelations.SetRCode(clsDummyFunction, bReset)
+        ucrChkSwapXYVar.SetRCode(clsDummyFunction, bReset)
         ucrReceiverThreeVariableSecondFactor.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrReceiverThreeVariableThirdVariable.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsCombineFrequencyParametersFunction, bReset)
@@ -568,10 +574,12 @@ Public Class dlgDescribeTwoVariable
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrChkSummariesRowCol.Visible = False
         ucrChkCorrelations.Visible = False
+        ucrChkSwapXYVar.Visible = False
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = strFirstVariablesType = "numeric"
             ucrChkSummariesRowCol.Visible = IsNumericByFactor()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
+            ucrChkSwapXYVar.Visible = IsNumericByNumeric()
         ElseIf rdoThreeVariable.Checked Then
             ucrChkOmitMissing.Visible = IsFactorByNumeric() OrElse IsNumericByFactor()
         Else
@@ -1312,5 +1320,17 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged
         ChangeBaseRCode()
+    End Sub
+
+    Private Sub ucrChkSwapXYVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSwapXYVar.ControlValueChanged
+        If ucrChkSwapXYVar.Checked Then
+            clsRAnovaFunction.AddParameter("y_col_name", ucrReceiverFirstVars.GetVariableNames, iPosition:=1)
+            clsRAnovaFunction.AddParameter("x_col_names", ucrReceiverSecondTwoVariableFactor.GetVariableNames, iPosition:=2)
+
+        Else
+            clsRAnovaFunction.AddParameter("x_col_names", ucrReceiverFirstVars.GetVariableNames, iPosition:=1)
+            clsRAnovaFunction.AddParameter("y_col_name", ucrReceiverSecondTwoVariableFactor.GetVariableNames, iPosition:=2)
+
+        End If
     End Sub
 End Class

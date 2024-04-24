@@ -80,6 +80,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSkimrGroupByFactor = New instat.ucrReceiverSingle()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkSummariesRowCol = New instat.ucrCheck()
+        Me.ucrChkSwapXYVar = New instat.ucrCheck()
         Me.grpSummaries.SuspendLayout()
         Me.grpDisplay.SuspendLayout()
         Me.SuspendLayout()
@@ -577,6 +578,16 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkSummariesRowCol.Size = New System.Drawing.Size(270, 34)
         Me.ucrChkSummariesRowCol.TabIndex = 20
         '
+        'ucrChkSwapXYVar
+        '
+        Me.ucrChkSwapXYVar.AutoSize = True
+        Me.ucrChkSwapXYVar.Checked = False
+        Me.ucrChkSwapXYVar.Location = New System.Drawing.Point(443, 340)
+        Me.ucrChkSwapXYVar.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkSwapXYVar.Name = "ucrChkSwapXYVar"
+        Me.ucrChkSwapXYVar.Size = New System.Drawing.Size(239, 34)
+        Me.ucrChkSwapXYVar.TabIndex = 36
+        '
         'dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
@@ -614,6 +625,7 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.ucrChkDisplayMargins)
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.ucrChkCorrelations)
+        Me.Controls.Add(Me.ucrChkSwapXYVar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
@@ -672,4 +684,5 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents ucrReceiverFirstVars As ucrReceiverMultiple
     Friend WithEvents ucrChkSummariesRowCol As ucrCheck
     Friend WithEvents ucrChkCorrelations As ucrCheck
+    Friend WithEvents ucrChkSwapXYVar As ucrCheck
 End Class
