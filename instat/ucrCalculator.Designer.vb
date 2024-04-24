@@ -86,6 +86,7 @@ Partial Class ucrCalculator
         Me.cmdMdy = New System.Windows.Forms.Button()
         Me.cmdYmd = New System.Windows.Forms.Button()
         Me.cmdLeap = New System.Windows.Forms.Button()
+        Me.cmdRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripDate = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DateLubridateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DateHmsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -106,7 +107,7 @@ Partial Class ucrCalculator
         Me.cmdFrugal = New System.Windows.Forms.Button()
         Me.cmdPerfect = New System.Windows.Forms.Button()
         Me.cmdAbundant = New System.Windows.Forms.Button()
-        Me.cmdFibonacci2 = New System.Windows.Forms.Button()
+        Me.cmdCatalan = New System.Windows.Forms.Button()
         Me.cmdPalindrome = New System.Windows.Forms.Button()
         Me.cmdRoman = New System.Windows.Forms.Button()
         Me.cmdHexmode = New System.Windows.Forms.Button()
@@ -123,6 +124,7 @@ Partial Class ucrCalculator
         Me.cmdGCD = New System.Windows.Forms.Button()
         Me.cmdGeneratePrimes = New System.Windows.Forms.Button()
         Me.cmdNthPrime = New System.Windows.Forms.Button()
+        Me.cmdIntegerRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripInteger = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.GmpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -145,6 +147,7 @@ Partial Class ucrCalculator
         Me.cmdIsPrime = New System.Windows.Forms.Button()
         Me.cmdBigZ = New System.Windows.Forms.Button()
         Me.grpFactor = New System.Windows.Forms.GroupBox()
+        Me.cmdTransformHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripFactor = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.FactorForcatsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdShuffle = New System.Windows.Forms.Button()
@@ -168,6 +171,7 @@ Partial Class ucrCalculator
         Me.cmdFactor = New System.Windows.Forms.Button()
         Me.cmdAnon = New System.Windows.Forms.Button()
         Me.grpHydroGOF = New System.Windows.Forms.GroupBox()
+        Me.cmdHydroHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripHydroGOF = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.HydroGOFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdVE = New System.Windows.Forms.Button()
@@ -248,6 +252,7 @@ Partial Class ucrCalculator
         Me.cmdGroup = New System.Windows.Forms.Button()
         Me.cmdGrade = New System.Windows.Forms.Button()
         Me.grpMaths = New System.Windows.Forms.GroupBox()
+        Me.cmdMathsHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripMaths = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.MathsBaseStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MathsStatsStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -281,6 +286,7 @@ Partial Class ucrCalculator
         Me.cmdwhichmax = New System.Windows.Forms.Button()
         Me.cmdwheremax = New System.Windows.Forms.Button()
         Me.cmdwhichmin = New System.Windows.Forms.Button()
+        Me.cmdSummaryRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripSummary = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.BaseToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -334,6 +340,7 @@ Partial Class ucrCalculator
         Me.cmdFreqLength = New System.Windows.Forms.Button()
         Me.grpProbabilty = New System.Windows.Forms.GroupBox()
         Me.cmdPascal = New System.Windows.Forms.Button()
+        Me.cmdProbRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripProbability = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ProbStatsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProbBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -382,6 +389,7 @@ Partial Class ucrCalculator
         Me.cmdDecimals = New System.Windows.Forms.Button()
         Me.cmdMASSFractions = New System.Windows.Forms.Button()
         Me.cmdScale = New System.Windows.Forms.Button()
+        Me.cmdTransformRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripTransform = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.BaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DplyrToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -420,6 +428,7 @@ Partial Class ucrCalculator
         Me.cmdCalcRepelicationFunction = New System.Windows.Forms.Button()
         Me.cmdCalcSequenceFunction = New System.Windows.Forms.Button()
         Me.cmdCalcConcantenateFunction = New System.Windows.Forms.Button()
+        Me.cmdLogicalHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripLogical = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.LogBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogDplyrToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -483,6 +492,7 @@ Partial Class ucrCalculator
         Me.cmdSquishb = New System.Windows.Forms.Button()
         Me.ttCalculator = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpCircular = New System.Windows.Forms.GroupBox()
+        Me.cmdCircularHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripCircular = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CircularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdCircular = New System.Windows.Forms.Button()
@@ -528,6 +538,7 @@ Partial Class ucrCalculator
         Me.cmdComplexAcos = New System.Windows.Forms.Button()
         Me.cmdAsComplex = New System.Windows.Forms.Button()
         Me.cmdComplexi = New System.Windows.Forms.Button()
+        Me.cmdComplexRHelp = New instat.ucrSplitButton()
         Me.cmdComplexTanH = New System.Windows.Forms.Button()
         Me.cmdComplexTan = New System.Windows.Forms.Button()
         Me.cmdComplexPi = New System.Windows.Forms.Button()
@@ -618,17 +629,6 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdProbRHelp = New instat.ucrSplitButton()
-        Me.cmdIntegerRHelp = New instat.ucrSplitButton()
-        Me.cmdComplexRHelp = New instat.ucrSplitButton()
-        Me.cmdSummaryRHelp = New instat.ucrSplitButton()
-        Me.cmdTransformRHelp = New instat.ucrSplitButton()
-        Me.cmdLogicalHelp = New instat.ucrSplitButton()
-        Me.cmdRHelp = New instat.ucrSplitButton()
-        Me.cmdHydroHelp = New instat.ucrSplitButton()
-        Me.cmdTransformHelp = New instat.ucrSplitButton()
-        Me.cmdCircularHelp = New instat.ucrSplitButton()
-        Me.cmdMathsHelp = New instat.ucrSplitButton()
         Me.grpBasic.SuspendLayout
         Me.grpDates.SuspendLayout
         Me.ContextMenuStripDate.SuspendLayout
@@ -1239,6 +1239,19 @@ Partial Class ucrCalculator
         Me.cmdLeap.Text = "leap"
         Me.cmdLeap.UseVisualStyleBackColor = True
         '
+        'cmdRHelp
+        '
+        Me.cmdRHelp.AutoSize = True
+        Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripDate
+        Me.cmdRHelp.Location = New System.Drawing.Point(155, 198)
+        Me.cmdRHelp.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdRHelp.Name = "cmdRHelp"
+        Me.cmdRHelp.Size = New System.Drawing.Size(90, 30)
+        Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuStripDate
+        Me.cmdRHelp.TabIndex = 212
+        Me.cmdRHelp.Text = "R Help"
+        Me.cmdRHelp.UseVisualStyleBackColor = True
+        '
         'ContextMenuStripDate
         '
         Me.ContextMenuStripDate.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -1287,7 +1300,7 @@ Partial Class ucrCalculator
         Me.grpInteger.Controls.Add(Me.cmdFrugal)
         Me.grpInteger.Controls.Add(Me.cmdPerfect)
         Me.grpInteger.Controls.Add(Me.cmdAbundant)
-        Me.grpInteger.Controls.Add(Me.cmdFibonacci2)
+        Me.grpInteger.Controls.Add(Me.cmdCatalan)
         Me.grpInteger.Controls.Add(Me.cmdPalindrome)
         Me.grpInteger.Controls.Add(Me.cmdRoman)
         Me.grpInteger.Controls.Add(Me.cmdHexmode)
@@ -1372,7 +1385,7 @@ Partial Class ucrCalculator
         'cmdSquare
         '
         Me.cmdSquare.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdSquare.Location = New System.Drawing.Point(221, 255)
+        Me.cmdSquare.Location = New System.Drawing.Point(221, 256)
         Me.cmdSquare.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdSquare.Name = "cmdSquare"
         Me.cmdSquare.Size = New System.Drawing.Size(74, 22)
@@ -1383,7 +1396,7 @@ Partial Class ucrCalculator
         'cmdTriangle
         '
         Me.cmdTriangle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdTriangle.Location = New System.Drawing.Point(148, 255)
+        Me.cmdTriangle.Location = New System.Drawing.Point(148, 256)
         Me.cmdTriangle.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdTriangle.Name = "cmdTriangle"
         Me.cmdTriangle.Size = New System.Drawing.Size(74, 22)
@@ -1394,7 +1407,7 @@ Partial Class ucrCalculator
         'cmdPadovan
         '
         Me.cmdPadovan.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPadovan.Location = New System.Drawing.Point(75, 255)
+        Me.cmdPadovan.Location = New System.Drawing.Point(75, 256)
         Me.cmdPadovan.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPadovan.Name = "cmdPadovan"
         Me.cmdPadovan.Size = New System.Drawing.Size(74, 22)
@@ -1405,7 +1418,7 @@ Partial Class ucrCalculator
         'cmdAchilles
         '
         Me.cmdAchilles.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdAchilles.Location = New System.Drawing.Point(2, 255)
+        Me.cmdAchilles.Location = New System.Drawing.Point(2, 256)
         Me.cmdAchilles.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAchilles.Name = "cmdAchilles"
         Me.cmdAchilles.Size = New System.Drawing.Size(74, 22)
@@ -1416,7 +1429,7 @@ Partial Class ucrCalculator
         'cmdHappy
         '
         Me.cmdHappy.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdHappy.Location = New System.Drawing.Point(221, 234)
+        Me.cmdHappy.Location = New System.Drawing.Point(221, 235)
         Me.cmdHappy.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdHappy.Name = "cmdHappy"
         Me.cmdHappy.Size = New System.Drawing.Size(74, 22)
@@ -1427,7 +1440,7 @@ Partial Class ucrCalculator
         'cmdUgly
         '
         Me.cmdUgly.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdUgly.Location = New System.Drawing.Point(148, 234)
+        Me.cmdUgly.Location = New System.Drawing.Point(148, 235)
         Me.cmdUgly.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdUgly.Name = "cmdUgly"
         Me.cmdUgly.Size = New System.Drawing.Size(74, 22)
@@ -1438,7 +1451,7 @@ Partial Class ucrCalculator
         'cmdPowerful
         '
         Me.cmdPowerful.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPowerful.Location = New System.Drawing.Point(75, 234)
+        Me.cmdPowerful.Location = New System.Drawing.Point(75, 235)
         Me.cmdPowerful.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPowerful.Name = "cmdPowerful"
         Me.cmdPowerful.Size = New System.Drawing.Size(74, 22)
@@ -1449,7 +1462,7 @@ Partial Class ucrCalculator
         'cmdFrugal
         '
         Me.cmdFrugal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFrugal.Location = New System.Drawing.Point(2, 234)
+        Me.cmdFrugal.Location = New System.Drawing.Point(2, 235)
         Me.cmdFrugal.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdFrugal.Name = "cmdFrugal"
         Me.cmdFrugal.Size = New System.Drawing.Size(74, 22)
@@ -1479,16 +1492,16 @@ Partial Class ucrCalculator
         Me.cmdAbundant.Text = "abundant"
         Me.cmdAbundant.UseVisualStyleBackColor = True
         '
-        'cmdFibonacci2
+        'cmdCatalan
         '
-        Me.cmdFibonacci2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFibonacci2.Location = New System.Drawing.Point(75, 214)
-        Me.cmdFibonacci2.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFibonacci2.Name = "cmdFibonacci2"
-        Me.cmdFibonacci2.Size = New System.Drawing.Size(74, 22)
-        Me.cmdFibonacci2.TabIndex = 33
-        Me.cmdFibonacci2.Text = "fibonacci2"
-        Me.cmdFibonacci2.UseVisualStyleBackColor = True
+        Me.cmdCatalan.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCatalan.Location = New System.Drawing.Point(75, 214)
+        Me.cmdCatalan.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCatalan.Name = "cmdCatalan"
+        Me.cmdCatalan.Size = New System.Drawing.Size(74, 22)
+        Me.cmdCatalan.TabIndex = 33
+        Me.cmdCatalan.Text = " catalan"
+        Me.cmdCatalan.UseVisualStyleBackColor = True
         '
         'cmdPalindrome
         '
@@ -1664,6 +1677,19 @@ Partial Class ucrCalculator
         Me.cmdNthPrime.TabIndex = 17
         Me.cmdNthPrime.Text = "nth_prime"
         Me.cmdNthPrime.UseVisualStyleBackColor = True
+        '
+        'cmdIntegerRHelp
+        '
+        Me.cmdIntegerRHelp.AutoSize = True
+        Me.cmdIntegerRHelp.ContextMenuStrip = Me.ContextMenuStripInteger
+        Me.cmdIntegerRHelp.Location = New System.Drawing.Point(210, 283)
+        Me.cmdIntegerRHelp.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdIntegerRHelp.Name = "cmdIntegerRHelp"
+        Me.cmdIntegerRHelp.Size = New System.Drawing.Size(90, 30)
+        Me.cmdIntegerRHelp.SplitMenuStrip = Me.ContextMenuStripInteger
+        Me.cmdIntegerRHelp.TabIndex = 16
+        Me.cmdIntegerRHelp.Text = "R Help"
+        Me.cmdIntegerRHelp.UseVisualStyleBackColor = True
         '
         'ContextMenuStripInteger
         '
@@ -1882,6 +1908,19 @@ Partial Class ucrCalculator
         Me.grpFactor.TabIndex = 191
         Me.grpFactor.TabStop = False
         Me.grpFactor.Text = "Factor"
+        '
+        'cmdTransformHelp
+        '
+        Me.cmdTransformHelp.AutoSize = True
+        Me.cmdTransformHelp.ContextMenuStrip = Me.ContextMenuStripFactor
+        Me.cmdTransformHelp.Location = New System.Drawing.Point(150, 174)
+        Me.cmdTransformHelp.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdTransformHelp.Name = "cmdTransformHelp"
+        Me.cmdTransformHelp.Size = New System.Drawing.Size(90, 30)
+        Me.cmdTransformHelp.SplitMenuStrip = Me.ContextMenuStripFactor
+        Me.cmdTransformHelp.TabIndex = 212
+        Me.cmdTransformHelp.Text = "R Help"
+        Me.cmdTransformHelp.UseVisualStyleBackColor = True
         '
         'ContextMenuStripFactor
         '
@@ -2148,6 +2187,19 @@ Partial Class ucrCalculator
         Me.grpHydroGOF.TabIndex = 195
         Me.grpHydroGOF.TabStop = False
         Me.grpHydroGOF.Text = "Goodness of Fit"
+        '
+        'cmdHydroHelp
+        '
+        Me.cmdHydroHelp.AutoSize = True
+        Me.cmdHydroHelp.ContextMenuStrip = Me.ContextMenuStripHydroGOF
+        Me.cmdHydroHelp.Location = New System.Drawing.Point(90, 238)
+        Me.cmdHydroHelp.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdHydroHelp.Name = "cmdHydroHelp"
+        Me.cmdHydroHelp.Size = New System.Drawing.Size(86, 30)
+        Me.cmdHydroHelp.SplitMenuStrip = Me.ContextMenuStripHydroGOF
+        Me.cmdHydroHelp.TabIndex = 212
+        Me.cmdHydroHelp.Text = "R Help"
+        Me.cmdHydroHelp.UseVisualStyleBackColor = True
         '
         'ContextMenuStripHydroGOF
         '
@@ -3154,6 +3206,19 @@ Partial Class ucrCalculator
         Me.grpMaths.TabStop = False
         Me.grpMaths.Text = "Maths"
         '
+        'cmdMathsHelp
+        '
+        Me.cmdMathsHelp.AutoSize = True
+        Me.cmdMathsHelp.ContextMenuStrip = Me.ContextMenuStripMaths
+        Me.cmdMathsHelp.Location = New System.Drawing.Point(163, 132)
+        Me.cmdMathsHelp.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdMathsHelp.Name = "cmdMathsHelp"
+        Me.cmdMathsHelp.Size = New System.Drawing.Size(86, 30)
+        Me.cmdMathsHelp.SplitMenuStrip = Me.ContextMenuStripMaths
+        Me.cmdMathsHelp.TabIndex = 211
+        Me.cmdMathsHelp.Text = "R Help"
+        Me.cmdMathsHelp.UseVisualStyleBackColor = True
+        '
         'ContextMenuStripMaths
         '
         Me.ContextMenuStripMaths.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -3534,6 +3599,19 @@ Partial Class ucrCalculator
         Me.cmdwhichmin.TabIndex = 190
         Me.cmdwhichmin.Text = "which.min"
         Me.cmdwhichmin.UseVisualStyleBackColor = True
+        '
+        'cmdSummaryRHelp
+        '
+        Me.cmdSummaryRHelp.AutoSize = True
+        Me.cmdSummaryRHelp.ContextMenuStrip = Me.ContextMenuStripSummary
+        Me.cmdSummaryRHelp.Location = New System.Drawing.Point(182, 190)
+        Me.cmdSummaryRHelp.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdSummaryRHelp.Name = "cmdSummaryRHelp"
+        Me.cmdSummaryRHelp.Size = New System.Drawing.Size(90, 30)
+        Me.cmdSummaryRHelp.SplitMenuStrip = Me.ContextMenuStripSummary
+        Me.cmdSummaryRHelp.TabIndex = 185
+        Me.cmdSummaryRHelp.Text = "R Help"
+        Me.cmdSummaryRHelp.UseVisualStyleBackColor = True
         '
         'ContextMenuStripSummary
         '
@@ -4161,6 +4239,19 @@ Partial Class ucrCalculator
         Me.cmdPascal.Text = "pascal"
         Me.cmdPascal.UseVisualStyleBackColor = True
         '
+        'cmdProbRHelp
+        '
+        Me.cmdProbRHelp.AutoSize = True
+        Me.cmdProbRHelp.ContextMenuStrip = Me.ContextMenuStripProbability
+        Me.cmdProbRHelp.Location = New System.Drawing.Point(215, 191)
+        Me.cmdProbRHelp.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdProbRHelp.Name = "cmdProbRHelp"
+        Me.cmdProbRHelp.Size = New System.Drawing.Size(86, 30)
+        Me.cmdProbRHelp.SplitMenuStrip = Me.ContextMenuStripProbability
+        Me.cmdProbRHelp.TabIndex = 212
+        Me.cmdProbRHelp.Text = "R Help"
+        Me.cmdProbRHelp.UseVisualStyleBackColor = True
+        '
         'ContextMenuStripProbability
         '
         Me.ContextMenuStripProbability.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -4758,6 +4849,19 @@ Partial Class ucrCalculator
         Me.cmdScale.Text = "scale"
         Me.cmdScale.UseVisualStyleBackColor = True
         '
+        'cmdTransformRHelp
+        '
+        Me.cmdTransformRHelp.AutoSize = True
+        Me.cmdTransformRHelp.ContextMenuStrip = Me.ContextMenuStripTransform
+        Me.cmdTransformRHelp.Location = New System.Drawing.Point(214, 196)
+        Me.cmdTransformRHelp.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdTransformRHelp.Name = "cmdTransformRHelp"
+        Me.cmdTransformRHelp.Size = New System.Drawing.Size(90, 30)
+        Me.cmdTransformRHelp.SplitMenuStrip = Me.ContextMenuStripTransform
+        Me.cmdTransformRHelp.TabIndex = 204
+        Me.cmdTransformRHelp.Text = "R Help"
+        Me.cmdTransformRHelp.UseVisualStyleBackColor = True
+        '
         'ContextMenuStripTransform
         '
         Me.ContextMenuStripTransform.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -5190,6 +5294,19 @@ Partial Class ucrCalculator
         Me.cmdCalcConcantenateFunction.TabIndex = 213
         Me.cmdCalcConcantenateFunction.Text = "c( )"
         Me.cmdCalcConcantenateFunction.UseVisualStyleBackColor = True
+        '
+        'cmdLogicalHelp
+        '
+        Me.cmdLogicalHelp.AutoSize = True
+        Me.cmdLogicalHelp.ContextMenuStrip = Me.ContextMenuStripLogical
+        Me.cmdLogicalHelp.Location = New System.Drawing.Point(166, 222)
+        Me.cmdLogicalHelp.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdLogicalHelp.Name = "cmdLogicalHelp"
+        Me.cmdLogicalHelp.Size = New System.Drawing.Size(86, 30)
+        Me.cmdLogicalHelp.SplitMenuStrip = Me.ContextMenuStripLogical
+        Me.cmdLogicalHelp.TabIndex = 212
+        Me.cmdLogicalHelp.Text = "R Help"
+        Me.cmdLogicalHelp.UseVisualStyleBackColor = True
         '
         'ContextMenuStripLogical
         '
@@ -5952,6 +6069,19 @@ Partial Class ucrCalculator
         Me.grpCircular.TabStop = False
         Me.grpCircular.Text = "Circular"
         '
+        'cmdCircularHelp
+        '
+        Me.cmdCircularHelp.AutoSize = True
+        Me.cmdCircularHelp.ContextMenuStrip = Me.ContextMenuStripCircular
+        Me.cmdCircularHelp.Location = New System.Drawing.Point(158, 142)
+        Me.cmdCircularHelp.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCircularHelp.Name = "cmdCircularHelp"
+        Me.cmdCircularHelp.Size = New System.Drawing.Size(86, 30)
+        Me.cmdCircularHelp.SplitMenuStrip = Me.ContextMenuStripCircular
+        Me.cmdCircularHelp.TabIndex = 212
+        Me.cmdCircularHelp.Text = "R Help"
+        Me.cmdCircularHelp.UseVisualStyleBackColor = True
+        '
         'ContextMenuStripCircular
         '
         Me.ContextMenuStripCircular.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -6487,6 +6617,19 @@ Partial Class ucrCalculator
         Me.cmdComplexi.TabIndex = 210
         Me.cmdComplexi.Text = "i"
         Me.cmdComplexi.UseVisualStyleBackColor = True
+        '
+        'cmdComplexRHelp
+        '
+        Me.cmdComplexRHelp.AutoSize = True
+        Me.cmdComplexRHelp.ContextMenuStrip = Me.ContextMenuStripComplex
+        Me.cmdComplexRHelp.Location = New System.Drawing.Point(190, 192)
+        Me.cmdComplexRHelp.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdComplexRHelp.Name = "cmdComplexRHelp"
+        Me.cmdComplexRHelp.Size = New System.Drawing.Size(90, 30)
+        Me.cmdComplexRHelp.SplitMenuStrip = Me.ContextMenuStripComplex
+        Me.cmdComplexRHelp.TabIndex = 209
+        Me.cmdComplexRHelp.Text = "R Help"
+        Me.cmdComplexRHelp.UseVisualStyleBackColor = True
         '
         'cmdComplexTanH
         '
@@ -7566,149 +7709,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdProbRHelp
-        '
-        Me.cmdProbRHelp.AutoSize = True
-        Me.cmdProbRHelp.ContextMenuStrip = Me.ContextMenuStripProbability
-        Me.cmdProbRHelp.Location = New System.Drawing.Point(215, 191)
-        Me.cmdProbRHelp.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdProbRHelp.Name = "cmdProbRHelp"
-        Me.cmdProbRHelp.Size = New System.Drawing.Size(86, 30)
-        Me.cmdProbRHelp.SplitMenuStrip = Me.ContextMenuStripProbability
-        Me.cmdProbRHelp.TabIndex = 212
-        Me.cmdProbRHelp.Text = "R Help"
-        Me.cmdProbRHelp.UseVisualStyleBackColor = True
-        '
-        'cmdIntegerRHelp
-        '
-        Me.cmdIntegerRHelp.AutoSize = True
-        Me.cmdIntegerRHelp.ContextMenuStrip = Me.ContextMenuStripInteger
-        Me.cmdIntegerRHelp.Location = New System.Drawing.Point(210, 283)
-        Me.cmdIntegerRHelp.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdIntegerRHelp.Name = "cmdIntegerRHelp"
-        Me.cmdIntegerRHelp.Size = New System.Drawing.Size(90, 30)
-        Me.cmdIntegerRHelp.SplitMenuStrip = Me.ContextMenuStripInteger
-        Me.cmdIntegerRHelp.TabIndex = 16
-        Me.cmdIntegerRHelp.Text = "R Help"
-        Me.cmdIntegerRHelp.UseVisualStyleBackColor = True
-        '
-        'cmdComplexRHelp
-        '
-        Me.cmdComplexRHelp.AutoSize = True
-        Me.cmdComplexRHelp.ContextMenuStrip = Me.ContextMenuStripComplex
-        Me.cmdComplexRHelp.Location = New System.Drawing.Point(190, 192)
-        Me.cmdComplexRHelp.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdComplexRHelp.Name = "cmdComplexRHelp"
-        Me.cmdComplexRHelp.Size = New System.Drawing.Size(90, 30)
-        Me.cmdComplexRHelp.SplitMenuStrip = Me.ContextMenuStripComplex
-        Me.cmdComplexRHelp.TabIndex = 209
-        Me.cmdComplexRHelp.Text = "R Help"
-        Me.cmdComplexRHelp.UseVisualStyleBackColor = True
-        '
-        'cmdSummaryRHelp
-        '
-        Me.cmdSummaryRHelp.AutoSize = True
-        Me.cmdSummaryRHelp.ContextMenuStrip = Me.ContextMenuStripSummary
-        Me.cmdSummaryRHelp.Location = New System.Drawing.Point(182, 190)
-        Me.cmdSummaryRHelp.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdSummaryRHelp.Name = "cmdSummaryRHelp"
-        Me.cmdSummaryRHelp.Size = New System.Drawing.Size(90, 30)
-        Me.cmdSummaryRHelp.SplitMenuStrip = Me.ContextMenuStripSummary
-        Me.cmdSummaryRHelp.TabIndex = 185
-        Me.cmdSummaryRHelp.Text = "R Help"
-        Me.cmdSummaryRHelp.UseVisualStyleBackColor = True
-        '
-        'cmdTransformRHelp
-        '
-        Me.cmdTransformRHelp.AutoSize = True
-        Me.cmdTransformRHelp.ContextMenuStrip = Me.ContextMenuStripTransform
-        Me.cmdTransformRHelp.Location = New System.Drawing.Point(214, 196)
-        Me.cmdTransformRHelp.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdTransformRHelp.Name = "cmdTransformRHelp"
-        Me.cmdTransformRHelp.Size = New System.Drawing.Size(90, 30)
-        Me.cmdTransformRHelp.SplitMenuStrip = Me.ContextMenuStripTransform
-        Me.cmdTransformRHelp.TabIndex = 204
-        Me.cmdTransformRHelp.Text = "R Help"
-        Me.cmdTransformRHelp.UseVisualStyleBackColor = True
-        '
-        'cmdLogicalHelp
-        '
-        Me.cmdLogicalHelp.AutoSize = True
-        Me.cmdLogicalHelp.ContextMenuStrip = Me.ContextMenuStripLogical
-        Me.cmdLogicalHelp.Location = New System.Drawing.Point(166, 222)
-        Me.cmdLogicalHelp.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdLogicalHelp.Name = "cmdLogicalHelp"
-        Me.cmdLogicalHelp.Size = New System.Drawing.Size(86, 30)
-        Me.cmdLogicalHelp.SplitMenuStrip = Me.ContextMenuStripLogical
-        Me.cmdLogicalHelp.TabIndex = 212
-        Me.cmdLogicalHelp.Text = "R Help"
-        Me.cmdLogicalHelp.UseVisualStyleBackColor = True
-        '
-        'cmdRHelp
-        '
-        Me.cmdRHelp.AutoSize = True
-        Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripDate
-        Me.cmdRHelp.Location = New System.Drawing.Point(155, 198)
-        Me.cmdRHelp.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdRHelp.Name = "cmdRHelp"
-        Me.cmdRHelp.Size = New System.Drawing.Size(90, 30)
-        Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuStripDate
-        Me.cmdRHelp.TabIndex = 212
-        Me.cmdRHelp.Text = "R Help"
-        Me.cmdRHelp.UseVisualStyleBackColor = True
-        '
-        'cmdHydroHelp
-        '
-        Me.cmdHydroHelp.AutoSize = True
-        Me.cmdHydroHelp.ContextMenuStrip = Me.ContextMenuStripHydroGOF
-        Me.cmdHydroHelp.Location = New System.Drawing.Point(90, 238)
-        Me.cmdHydroHelp.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdHydroHelp.Name = "cmdHydroHelp"
-        Me.cmdHydroHelp.Size = New System.Drawing.Size(86, 30)
-        Me.cmdHydroHelp.SplitMenuStrip = Me.ContextMenuStripHydroGOF
-        Me.cmdHydroHelp.TabIndex = 212
-        Me.cmdHydroHelp.Text = "R Help"
-        Me.cmdHydroHelp.UseVisualStyleBackColor = True
-        '
-        'cmdTransformHelp
-        '
-        Me.cmdTransformHelp.AutoSize = True
-        Me.cmdTransformHelp.ContextMenuStrip = Me.ContextMenuStripFactor
-        Me.cmdTransformHelp.Location = New System.Drawing.Point(150, 174)
-        Me.cmdTransformHelp.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdTransformHelp.Name = "cmdTransformHelp"
-        Me.cmdTransformHelp.Size = New System.Drawing.Size(90, 30)
-        Me.cmdTransformHelp.SplitMenuStrip = Me.ContextMenuStripFactor
-        Me.cmdTransformHelp.TabIndex = 212
-        Me.cmdTransformHelp.Text = "R Help"
-        Me.cmdTransformHelp.UseVisualStyleBackColor = True
-        '
-        'cmdCircularHelp
-        '
-        Me.cmdCircularHelp.AutoSize = True
-        Me.cmdCircularHelp.ContextMenuStrip = Me.ContextMenuStripCircular
-        Me.cmdCircularHelp.Location = New System.Drawing.Point(158, 142)
-        Me.cmdCircularHelp.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdCircularHelp.Name = "cmdCircularHelp"
-        Me.cmdCircularHelp.Size = New System.Drawing.Size(86, 30)
-        Me.cmdCircularHelp.SplitMenuStrip = Me.ContextMenuStripCircular
-        Me.cmdCircularHelp.TabIndex = 212
-        Me.cmdCircularHelp.Text = "R Help"
-        Me.cmdCircularHelp.UseVisualStyleBackColor = True
-        '
-        'cmdMathsHelp
-        '
-        Me.cmdMathsHelp.AutoSize = True
-        Me.cmdMathsHelp.ContextMenuStrip = Me.ContextMenuStripMaths
-        Me.cmdMathsHelp.Location = New System.Drawing.Point(163, 132)
-        Me.cmdMathsHelp.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdMathsHelp.Name = "cmdMathsHelp"
-        Me.cmdMathsHelp.Size = New System.Drawing.Size(86, 30)
-        Me.cmdMathsHelp.SplitMenuStrip = Me.ContextMenuStripMaths
-        Me.cmdMathsHelp.TabIndex = 211
-        Me.cmdMathsHelp.Text = "R Help"
-        Me.cmdMathsHelp.UseVisualStyleBackColor = True
-        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -8177,7 +8177,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdFrugal As Button
     Friend WithEvents cmdPerfect As Button
     Friend WithEvents cmdAbundant As Button
-    Friend WithEvents cmdFibonacci2 As Button
+    Friend WithEvents cmdCatalan As Button
     Friend WithEvents cmdPalindrome As Button
     Friend WithEvents cmdFactorize As Button
     Friend WithEvents GmpToolStripMenuItem As ToolStripMenuItem
