@@ -726,7 +726,7 @@ Partial Class ucrCalculator
         Me.cmdClear.Location = New System.Drawing.Point(150, 72)
         Me.cmdClear.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(50, 60)
+        Me.cmdClear.Size = New System.Drawing.Size(50, 59)
         Me.cmdClear.TabIndex = 190
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
