@@ -3844,7 +3844,7 @@ Public Class ucrCalculator
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles cmdQpois.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois(p = , lambda = , lower.tail = TRUE, log.p = FALSE)", 45)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois(p = , lambda = , lower.tail = TRUE, log.p = FALSE)", 47)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois(,)", 2)
         End If
@@ -3852,7 +3852,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQnbin_Click(sender As Object, e As EventArgs) Handles cmdQnbin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom(p = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE)", 59)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom(p = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE)", 61)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom(,,)", 3)
         End If
@@ -5448,7 +5448,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPascal_Click(sender As Object, e As EventArgs) Handles cmdPascal.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , function(x) {lapply(x, function(i) {choose(i, 0:i)})})", 55)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , function(x) {lapply(x, function(i) {choose(i, 0:i)})})", 57)
     End Sub
 
     Private Sub cmdScale_Click(sender As Object, e As EventArgs) Handles cmdScale.Click
