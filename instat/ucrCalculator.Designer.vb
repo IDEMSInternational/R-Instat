@@ -4728,7 +4728,7 @@ Partial Class ucrCalculator
         'cmdDecimals
         '
         Me.cmdDecimals.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDecimals.Location = New System.Drawing.Point(2, 190)
+        Me.cmdDecimals.Location = New System.Drawing.Point(2, 188)
         Me.cmdDecimals.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDecimals.Name = "cmdDecimals"
         Me.cmdDecimals.Size = New System.Drawing.Size(62, 30)
@@ -4739,7 +4739,7 @@ Partial Class ucrCalculator
         'cmdMASSFractions
         '
         Me.cmdMASSFractions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMASSFractions.Location = New System.Drawing.Point(2, 160)
+        Me.cmdMASSFractions.Location = New System.Drawing.Point(2, 159)
         Me.cmdMASSFractions.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMASSFractions.Name = "cmdMASSFractions"
         Me.cmdMASSFractions.Size = New System.Drawing.Size(62, 30)
@@ -4792,7 +4792,7 @@ Partial Class ucrCalculator
         'cmdRev
         '
         Me.cmdRev.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRev.Location = New System.Drawing.Point(124, 102)
+        Me.cmdRev.Location = New System.Drawing.Point(124, 101)
         Me.cmdRev.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRev.Name = "cmdRev"
         Me.cmdRev.Size = New System.Drawing.Size(62, 30)
@@ -4803,7 +4803,7 @@ Partial Class ucrCalculator
         'cmdMovProd
         '
         Me.cmdMovProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMovProd.Location = New System.Drawing.Point(124, 74)
+        Me.cmdMovProd.Location = New System.Drawing.Point(124, 72)
         Me.cmdMovProd.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMovProd.Name = "cmdMovProd"
         Me.cmdMovProd.Size = New System.Drawing.Size(62, 30)
@@ -4814,7 +4814,7 @@ Partial Class ucrCalculator
         'cmdCumProd
         '
         Me.cmdCumProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumProd.Location = New System.Drawing.Point(124, 44)
+        Me.cmdCumProd.Location = New System.Drawing.Point(124, 43)
         Me.cmdCumProd.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumProd.Name = "cmdCumProd"
         Me.cmdCumProd.Size = New System.Drawing.Size(62, 30)
@@ -4836,7 +4836,7 @@ Partial Class ucrCalculator
         'cmdNasplin
         '
         Me.cmdNasplin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNasplin.Location = New System.Drawing.Point(246, 160)
+        Me.cmdNasplin.Location = New System.Drawing.Point(246, 159)
         Me.cmdNasplin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNasplin.Name = "cmdNasplin"
         Me.cmdNasplin.Size = New System.Drawing.Size(62, 30)
@@ -4847,7 +4847,7 @@ Partial Class ucrCalculator
         'cmdNaapprox
         '
         Me.cmdNaapprox.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNaapprox.Location = New System.Drawing.Point(186, 160)
+        Me.cmdNaapprox.Location = New System.Drawing.Point(185, 159)
         Me.cmdNaapprox.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNaapprox.Name = "cmdNaapprox"
         Me.cmdNaapprox.Size = New System.Drawing.Size(62, 30)
@@ -4858,7 +4858,7 @@ Partial Class ucrCalculator
         'cmdNaest
         '
         Me.cmdNaest.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNaest.Location = New System.Drawing.Point(124, 160)
+        Me.cmdNaest.Location = New System.Drawing.Point(124, 159)
         Me.cmdNaest.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNaest.Name = "cmdNaest"
         Me.cmdNaest.Size = New System.Drawing.Size(62, 30)
@@ -4869,7 +4869,7 @@ Partial Class ucrCalculator
         'cmdNafill
         '
         Me.cmdNafill.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNafill.Location = New System.Drawing.Point(62, 160)
+        Me.cmdNafill.Location = New System.Drawing.Point(63, 159)
         Me.cmdNafill.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNafill.Name = "cmdNafill"
         Me.cmdNafill.Size = New System.Drawing.Size(62, 30)
@@ -4880,7 +4880,7 @@ Partial Class ucrCalculator
         'cmdMovmin
         '
         Me.cmdMovmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMovmin.Location = New System.Drawing.Point(246, 74)
+        Me.cmdMovmin.Location = New System.Drawing.Point(246, 72)
         Me.cmdMovmin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMovmin.Name = "cmdMovmin"
         Me.cmdMovmin.Size = New System.Drawing.Size(62, 30)
@@ -4891,7 +4891,7 @@ Partial Class ucrCalculator
         'cmdRowRank
         '
         Me.cmdRowRank.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRowRank.Location = New System.Drawing.Point(62, 130)
+        Me.cmdRowRank.Location = New System.Drawing.Point(63, 130)
         Me.cmdRowRank.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRowRank.Name = "cmdRowRank"
         Me.cmdRowRank.Size = New System.Drawing.Size(62, 30)
@@ -4902,7 +4902,7 @@ Partial Class ucrCalculator
         'cmdDiff
         '
         Me.cmdDiff.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDiff.Location = New System.Drawing.Point(62, 102)
+        Me.cmdDiff.Location = New System.Drawing.Point(63, 101)
         Me.cmdDiff.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDiff.Name = "cmdDiff"
         Me.cmdDiff.Size = New System.Drawing.Size(62, 30)
@@ -4913,7 +4913,7 @@ Partial Class ucrCalculator
         'cmdCumdist
         '
         Me.cmdCumdist.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumdist.Location = New System.Drawing.Point(246, 102)
+        Me.cmdCumdist.Location = New System.Drawing.Point(246, 101)
         Me.cmdCumdist.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumdist.Name = "cmdCumdist"
         Me.cmdCumdist.Size = New System.Drawing.Size(62, 30)
@@ -4924,7 +4924,7 @@ Partial Class ucrCalculator
         'cmdMovMean
         '
         Me.cmdMovMean.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMovMean.Location = New System.Drawing.Point(186, 74)
+        Me.cmdMovMean.Location = New System.Drawing.Point(185, 72)
         Me.cmdMovMean.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMovMean.Name = "cmdMovMean"
         Me.cmdMovMean.Size = New System.Drawing.Size(62, 30)
@@ -4935,7 +4935,7 @@ Partial Class ucrCalculator
         'cmdCumMean
         '
         Me.cmdCumMean.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumMean.Location = New System.Drawing.Point(186, 44)
+        Me.cmdCumMean.Location = New System.Drawing.Point(185, 43)
         Me.cmdCumMean.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumMean.Name = "cmdCumMean"
         Me.cmdCumMean.Size = New System.Drawing.Size(62, 30)
@@ -4946,7 +4946,7 @@ Partial Class ucrCalculator
         'cmdNtile
         '
         Me.cmdNtile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNtile.Location = New System.Drawing.Point(186, 102)
+        Me.cmdNtile.Location = New System.Drawing.Point(185, 101)
         Me.cmdNtile.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNtile.Name = "cmdNtile"
         Me.cmdNtile.Size = New System.Drawing.Size(62, 30)
@@ -4957,7 +4957,7 @@ Partial Class ucrCalculator
         'cmMovMed
         '
         Me.cmMovMed.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmMovMed.Location = New System.Drawing.Point(2, 102)
+        Me.cmMovMed.Location = New System.Drawing.Point(2, 101)
         Me.cmMovMed.Margin = New System.Windows.Forms.Padding(2)
         Me.cmMovMed.Name = "cmMovMed"
         Me.cmMovMed.Size = New System.Drawing.Size(62, 30)
@@ -4979,7 +4979,7 @@ Partial Class ucrCalculator
         'cmdDRank
         '
         Me.cmdDRank.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDRank.Location = New System.Drawing.Point(186, 130)
+        Me.cmdDRank.Location = New System.Drawing.Point(185, 130)
         Me.cmdDRank.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDRank.Name = "cmdDRank"
         Me.cmdDRank.Size = New System.Drawing.Size(62, 30)
@@ -4990,7 +4990,7 @@ Partial Class ucrCalculator
         'cmdMovMax
         '
         Me.cmdMovMax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMovMax.Location = New System.Drawing.Point(2, 74)
+        Me.cmdMovMax.Location = New System.Drawing.Point(2, 72)
         Me.cmdMovMax.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMovMax.Name = "cmdMovMax"
         Me.cmdMovMax.Size = New System.Drawing.Size(62, 30)
@@ -5001,7 +5001,7 @@ Partial Class ucrCalculator
         'cmdMovSum
         '
         Me.cmdMovSum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMovSum.Location = New System.Drawing.Point(62, 74)
+        Me.cmdMovSum.Location = New System.Drawing.Point(63, 72)
         Me.cmdMovSum.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMovSum.Name = "cmdMovSum"
         Me.cmdMovSum.Size = New System.Drawing.Size(62, 30)
@@ -5024,7 +5024,7 @@ Partial Class ucrCalculator
         'cmdCumSum
         '
         Me.cmdCumSum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumSum.Location = New System.Drawing.Point(62, 44)
+        Me.cmdCumSum.Location = New System.Drawing.Point(63, 43)
         Me.cmdCumSum.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumSum.Name = "cmdCumSum"
         Me.cmdCumSum.Size = New System.Drawing.Size(62, 30)
@@ -5035,7 +5035,7 @@ Partial Class ucrCalculator
         'cmdCumMin
         '
         Me.cmdCumMin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumMin.Location = New System.Drawing.Point(246, 44)
+        Me.cmdCumMin.Location = New System.Drawing.Point(246, 43)
         Me.cmdCumMin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumMin.Name = "cmdCumMin"
         Me.cmdCumMin.Size = New System.Drawing.Size(62, 30)
@@ -5046,7 +5046,7 @@ Partial Class ucrCalculator
         'cmdCumMax
         '
         Me.cmdCumMax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumMax.Location = New System.Drawing.Point(2, 44)
+        Me.cmdCumMax.Location = New System.Drawing.Point(2, 43)
         Me.cmdCumMax.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumMax.Name = "cmdCumMax"
         Me.cmdCumMax.Size = New System.Drawing.Size(62, 30)
@@ -5068,7 +5068,7 @@ Partial Class ucrCalculator
         'cmdPMax
         '
         Me.cmdPMax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPMax.Location = New System.Drawing.Point(186, 14)
+        Me.cmdPMax.Location = New System.Drawing.Point(185, 14)
         Me.cmdPMax.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPMax.Name = "cmdPMax"
         Me.cmdPMax.Size = New System.Drawing.Size(62, 30)
@@ -5090,7 +5090,7 @@ Partial Class ucrCalculator
         'cmdLag
         '
         Me.cmdLag.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLag.Location = New System.Drawing.Point(62, 14)
+        Me.cmdLag.Location = New System.Drawing.Point(63, 14)
         Me.cmdLag.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdLag.Name = "cmdLag"
         Me.cmdLag.Size = New System.Drawing.Size(62, 30)
@@ -7596,7 +7596,7 @@ Partial Class ucrCalculator
         '
         Me.cmdTransformRHelp.AutoSize = True
         Me.cmdTransformRHelp.ContextMenuStrip = Me.ContextMenuStripTransform
-        Me.cmdTransformRHelp.Location = New System.Drawing.Point(214, 196)
+        Me.cmdTransformRHelp.Location = New System.Drawing.Point(214, 192)
         Me.cmdTransformRHelp.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdTransformRHelp.Name = "cmdTransformRHelp"
         Me.cmdTransformRHelp.Size = New System.Drawing.Size(90, 30)
@@ -7726,7 +7726,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
         Me.Controls.Add(Me.grpSymbols)
-        Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpLogical)
@@ -7741,6 +7740,7 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpModifier)
         Me.Controls.Add(Me.grpList)
         Me.Controls.Add(Me.grpComplex)
+        Me.Controls.Add(Me.grpSummary)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "ucrCalculator"
         Me.Size = New System.Drawing.Size(898, 458)
