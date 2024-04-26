@@ -29,11 +29,11 @@ Public Class dlgDescribeTwoVariable
     Public strFirstVariablesType, strSecondVariableType, strThirdVariableType As String
 
     'SUMMARY FUNCTIoNS
-    Private clsCombineFrequencyParametersFunction, clsCombineFunction, clsCombineAnova2Function, clsSummariseFunction,
+    Private clsCombineFrequencyParametersFunction, clsCombineFunction, clsCombineSwapAnova2Table, clsCombineAnova2Function, clsSummariseFunction,
        clsDummyFunction, clsGroupByFunction, clsRAnovaFunction, clsCorrFunction, clsRAnovaTableFunction,
         clsRCorrelationFunction, clsSkimrFunction, clsSummariesListFunction, clsCombineAnovaFunction,
-        clsSummaryTableCombineFactorsFunction, clsSummaryTableFunction,
-        clsThreeVariableCombineFrequencyParametersFunction, clsPivotWiderFunction, clsMappingFunction, clsRAnovaTable2Function As New RFunction
+        clsSummaryTableCombineFactorsFunction, clsSummaryTableFunction, clsRAnovaSwapTable2Funtion,
+        clsThreeVariableCombineFrequencyParametersFunction, clsPivotWiderFunction, clsMappingFunction, clsMapping2Function, clsRAnovaTable2Function As New RFunction
 
     'FORMAT TABLE FUNCTIONS
     Private clsFootnoteCellBodyFunction, clsFootnoteCellFunction,
@@ -58,7 +58,7 @@ Public Class dlgDescribeTwoVariable
 
     'Format Operators
     Private clsPipeOperator, clsTabFootnoteOperator,
-            clsJoiningPipeOperator, clsMutableOperator, clsAnovaTable2Operator, clsYlistOperator As New ROperator
+            clsJoiningPipeOperator, clsMutableOperator, clsAnovaSwapTable2Opeator, clsAnovaTable2Operator, clsYlist2Operator, clsYlistOperator As New ROperator
     Private iUcrBaseXLocation, iDialogueXsize As Integer
 
     Private Sub dlgDescribeTwoVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -220,6 +220,7 @@ Public Class dlgDescribeTwoVariable
         clsPivotWiderFunction = New RFunction
         clsCombineAnovaFunction = New RFunction
         clsCombineAnova2Function = New RFunction
+        clsCombineSwapAnova2Table = New RFunction
         clsSummariseFunction = New RFunction
         clsCorrFunction = New RFunction
         clsRAnovaTableFunction = New RFunction
@@ -231,9 +232,13 @@ Public Class dlgDescribeTwoVariable
         clsGroupByPipeOperator4 = New ROperator
         clsGroupByPipeOperatorData = New ROperator
         clsMappingFunction = New RFunction
+        clsMapping2Function = New RFunction
         clsAnovaTable2Operator = New ROperator
+        clsAnovaSwapTable2Opeator = New ROperator
         clsYlistOperator = New ROperator
+        clsYlist2Operator = New ROperator
         clsRAnovaTable2Function = New RFunction
+        clsRAnovaSwapTable2Funtion = New RFunction
 
         clsTildOperator = New ROperator
         clsMapSummaryFunction = New RFunction
@@ -277,25 +282,51 @@ Public Class dlgDescribeTwoVariable
 
         clsCombineAnova2Function.SetRCommand("c")
 
+        clsCombineSwapAnova2Table.SetRCommand("c")
+
+
         clsMappingFunction.SetPackageName("purrr")
         clsMappingFunction.SetRCommand("map")
         clsMappingFunction.AddParameter(".x", clsROperatorParameter:=clsYlistOperator, iPosition:=0)
         clsMappingFunction.AddParameter(".f", clsROperatorParameter:=clsAnovaTable2Operator, iPosition:=1)
 
+        clsMapping2Function.SetPackageName("purrr")
+        clsMapping2Function.SetRCommand("map")
+        clsMapping2Function.AddParameter(".x", clsROperatorParameter:=clsYlist2Operator, iPosition:=0)
+        clsMapping2Function.AddParameter(".f", clsROperatorParameter:=clsAnovaSwapTable2Opeator, iPosition:=1)
+
+
         clsAnovaTable2Operator.SetOperation("~")
         clsAnovaTable2Operator.AddParameter("right", clsRFunctionParameter:=clsRAnovaTable2Function, iPosition:=1)
         clsAnovaTable2Operator.bForceIncludeOperation = True
 
+        clsAnovaSwapTable2Opeator.SetOperation("~")
+        clsAnovaSwapTable2Opeator.AddParameter("right", clsRFunctionParameter:=clsRAnovaSwapTable2Funtion, iPosition:=1)
+        clsAnovaSwapTable2Opeator.bForceIncludeOperation = True
+
+
         clsYlistOperator.SetOperation("", bBracketsTemp:=False)
         clsYlistOperator.SetAssignTo("y_col_names_list")
 
+        clsYlist2Operator.SetOperation("", bBracketsTemp:=False)
+        clsYlist2Operator.SetAssignTo("y_col_names_list")
+
         clsRAnovaTable2Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables2")
         clsRAnovaTable2Function.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-        'clsRAnovaTable2Function.AddParameter(" x_col_names", clsRFunctionParameter:=clsCombineAnova2Function, iPosition:=1)
-        'clsRAnovaTable2Function.AddParameter("y_col_name", ".x", iPosition:=2)
+        clsRAnovaTable2Function.AddParameter(" x_col_names", clsRFunctionParameter:=clsCombineAnova2Function, iPosition:=1)
+        clsRAnovaTable2Function.AddParameter("y_col_name", ".x", iPosition:=2)
         clsRAnovaTable2Function.AddParameter("signif.stars", "FALSE", iPosition:=3)
         clsRAnovaTable2Function.AddParameter("sign_level", "FALSE", iPosition:=4)
         clsRAnovaTable2Function.AddParameter("means", "FALSE", iPosition:=5)
+
+        clsRAnovaSwapTable2Funtion.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables2")
+        clsRAnovaSwapTable2Funtion.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsRAnovaSwapTable2Funtion.AddParameter(" y_col_name", clsRFunctionParameter:=clsCombineSwapAnova2Table, iPosition:=1)
+        clsRAnovaSwapTable2Funtion.AddParameter("x_col_names", ".x", iPosition:=2)
+        clsRAnovaSwapTable2Funtion.AddParameter("signif.stars", "FALSE", iPosition:=3)
+        clsRAnovaSwapTable2Funtion.AddParameter("sign_level", "FALSE", iPosition:=4)
+        clsRAnovaSwapTable2Funtion.AddParameter("means", "FALSE", iPosition:=5)
+
 
         clsGroupByPipeOperator.SetOperation("%>%")
         clsGroupByPipeOperator.AddParameter("skim", clsRFunctionParameter:=clsSkimrFunction,
@@ -340,6 +371,7 @@ Public Class dlgDescribeTwoVariable
         clsCombineFunction.SetRCommand("c")
 
         clsCombineAnovaFunction.SetRCommand("c")
+
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.bBrackets = False
 
@@ -617,7 +649,14 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoTwoVariable.Checked Then
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             If IsNumericByNumeric() Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
+                If ucrChkSwapXYVar.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsMapping2Function)
+                    clsDummyFunction.AddParameter("var", "True", iPosition:=5)
+
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
+                    clsDummyFunction.AddParameter("var", "False", iPosition:=5)
+                End If
                 If ucrChkCorrelations.Checked Then
                     ucrBase.clsRsyntax.AddToAfterCodes(clsRCorrelationFunction, iPosition:=0)
                     clsDummyFunction.AddParameter("corr", "True", iPosition:=4)
@@ -774,7 +813,7 @@ Public Class dlgDescribeTwoVariable
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
         AddRemoveFirstAnova2Param()
-        SwappingXYVar()
+        'SwappingXYVar()
     End Sub
 
     Private Sub ShowFormatTableButton()
@@ -906,12 +945,24 @@ Public Class dlgDescribeTwoVariable
             End If
         ElseIf rdoTwoVariable.Checked Then
             If IsNumericByNumeric() OrElse IsNumericByFactor() Then
-                If ucrReceiverFirstVars.IsEmpty Then
-                    clsYlistOperator.RemoveParameterByName("cols")
+                If Not ucrReceiverFirstVars.IsEmpty Then
+                    If ucrChkSwapXYVar.Checked Then
+                        clsYlist2Operator.AddParameter("cols", ucrReceiverFirstVars.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+                        clsYlistOperator.RemoveParameterByName("cols")
+
+                    Else
+                        clsYlistOperator.AddParameter("cols", ucrReceiverFirstVars.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+                        clsYlist2Operator.RemoveParameterByName("cols")
+
+                    End If
                 Else
-                    clsYlistOperator.AddParameter("cols", ucrReceiverFirstVars.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+                    clsYlist2Operator.RemoveParameterByName("cols")
+                    clsYlistOperator.RemoveParameterByName("cols")
+
                 End If
+
             End If
+
         End If
     End Sub
 
@@ -926,12 +977,22 @@ Public Class dlgDescribeTwoVariable
             End If
         ElseIf rdoTwoVariable.Checked Then
             If IsNumericByNumeric() OrElse IsNumericByNumeric() Then
-                If ucrReceiverSecondTwoVariableFactor.IsEmpty Then
-                    clsCombineAnova2Function.RemoveParameterByName("x")
+                If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
+                    If ucrChkSwapXYVar.Checked Then
+                        clsCombineSwapAnova2Table.AddParameter("x", ucrReceiverSecondTwoVariableFactor.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
+                        clsCombineAnova2Function.RemoveParameterByName("x")
+                    Else
+                        clsCombineAnova2Function.AddParameter("x", ucrReceiverSecondTwoVariableFactor.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
+                        clsCombineSwapAnova2Table.RemoveParameterByName("x")
+
+                    End If
                 Else
-                    clsCombineAnova2Function.AddParameter("x", ucrReceiverSecondTwoVariableFactor.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
+                    clsCombineSwapAnova2Table.RemoveParameterByName("x")
+                    clsCombineAnova2Function.RemoveParameterByName("x")
+
                 End If
             End If
+
         End If
     End Sub
 
@@ -1036,7 +1097,7 @@ Public Class dlgDescribeTwoVariable
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
         AddRemoveFirstAnova2Param()
-        SwappingXYVar()
+        'SwappingXYVar()
     End Sub
 
     Private Sub ChangeSumaryLabelText()
@@ -1344,32 +1405,40 @@ Public Class dlgDescribeTwoVariable
     Private Sub ucrChkCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCorrelations.ControlValueChanged
         ChangeBaseRCode()
     End Sub
-    Private Sub SwappingXYVar()
-        If rdoTwoVariable.Checked Then
-            clsRAnovaTable2Function.RemoveParameterByName("y_col_name")
-            clsRAnovaTable2Function.RemoveParameterByName("x_col_names")
-            If ucrChkSwapXYVar.Checked Then
-                clsRAnovaTable2Function.AddParameter(" y_col_name", clsRFunctionParameter:=clsCombineAnova2Function, iPosition:=1)
-                clsRAnovaTable2Function.AddParameter("x_col_names", ".x", iPosition:=2)
-                clsDummyFunction.AddParameter("var", "True", iPosition:=5)
-            Else
-                clsRAnovaTable2Function.AddParameter(" x_col_names", clsRFunctionParameter:=clsCombineAnova2Function, iPosition:=1)
-                clsRAnovaTable2Function.AddParameter("y_col_name", ".x", iPosition:=2)
-                clsDummyFunction.AddParameter("var", "False", iPosition:=5)
-            End If
+    'Private Sub SwappingXYVar()
+    '    If rdoTwoVariable.Checked Then
 
-        ElseIf rdoThreeVariable.Checked Then
-            clsRAnovaTable2Function.AddParameter(" x_col_names", clsRFunctionParameter:=clsCombineAnova2Function, iPosition:=1)
-            clsRAnovaTable2Function.AddParameter("y_col_name", ".x", iPosition:=2)
-        Else
-            clsRAnovaTable2Function.RemoveParameterByName("y_col_name")
-            clsRAnovaTable2Function.RemoveParameterByName("x_col_names")
+    '        If ucrChkSwapXYVar.Checked Then
+    '            clsRAnovaSwapTable2Funtion.AddParameter(" y_col_name", clsRFunctionParameter:=clsCombineSwapAnova2Table, iPosition:=1)
+    '            clsRAnovaSwapTable2Funtion.AddParameter("x_col_names", ".x", iPosition:=2)
+    '            clsAnovaSwapTable2Opeator.AddParameter("right", clsRFunctionParameter:=clsRAnovaSwapTable2Funtion, iPosition:=1)
 
-        End If
-    End Sub
+    '            clsDummyFunction.AddParameter("var", "True", iPosition:=5)
+    '            'clsRAnovaTable2Function.RemoveParameterByName("y_col_name")
+    '            'clsRAnovaTable2Function.RemoveParameterByName("x_col_names")
+    '        Else
+    '            clsRAnovaTable2Function.AddParameter(" x_col_names", clsRFunctionParameter:=clsCombineAnova2Function, iPosition:=1)
+    '            clsRAnovaTable2Function.AddParameter("y_col_name", ".x", iPosition:=2)
+    '            clsAnovaTable2Operator.AddParameter("right", clsRFunctionParameter:=clsRAnovaTable2Function, iPosition:=1)
+
+    '            clsDummyFunction.AddParameter("var", "False", iPosition:=5)
+    '            'clsRAnovaSwapTable2Funtion.RemoveParameterByName("y_col_name")
+    '            'clsRAnovaSwapTable2Funtion.RemoveParameterByName("x_col_names")
+    '        End If
+
+    '    ElseIf rdoThreeVariable.Checked Then
+    '        clsRAnovaTable2Function.AddParameter(" x_col_names", clsRFunctionParameter:=clsCombineAnova2Function, iPosition:=1)
+    '        clsRAnovaTable2Function.AddParameter("y_col_name", ".x", iPosition:=2)
+    '        'Else
+    '        '    clsRAnovaTable2Function.RemoveParameterByName("y_col_name")
+    '        '    clsRAnovaTable2Function.RemoveParameterByName("x_col_names")
+    '        clsAnovaTable2Operator.AddParameter("right", clsRFunctionParameter:=clsRAnovaTable2Function, iPosition:=1)
+
+    '    End If
+    'End Sub
     Private Sub ucrChkSwapXYVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSwapXYVar.ControlValueChanged
-        SwappingXYVar()
-        'AddRemoveFirstAnova2Param()
-        'AddRemoveSecondAnovaParam()
+        AddRemoveFirstAnova2Param()
+        AddRemoveSecondAnovaParam()
+        ChangeBaseRCode()
     End Sub
 End Class
