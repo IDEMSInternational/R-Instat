@@ -612,6 +612,7 @@ Public Class dlgDescribeTwoVariable
             ucrChkSummariesRowCol.Visible = IsNumericByFactor()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
             ucrChkSwapXYVar.Visible = IsNumericByNumeric()
+            ucrChkSwapXYVar.Visible = IsFactorByNumeric()
         ElseIf rdoThreeVariable.Checked Then
             ucrChkOmitMissing.Visible = IsFactorByNumeric() OrElse IsNumericByFactor()
         Else
