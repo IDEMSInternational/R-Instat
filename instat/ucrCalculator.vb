@@ -4661,7 +4661,6 @@ Public Class ucrCalculator
         clsPerfectFunction.SetRCommand("Perfect")
         clsPerfectFunction.AddParameter("n", "10", iPosition:=0)
 
-        clsDataFunction.SetRCommand("nrow")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsRepFunction.SetRCommand("rep")
@@ -4670,6 +4669,7 @@ Public Class ucrCalculator
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
     End Sub
+
 
     Private Sub cmdUgly_Click(sender As Object, e As EventArgs) Handles cmdUgly.Click
         Dim clsUglyFunction As New RFunction
