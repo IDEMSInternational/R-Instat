@@ -723,10 +723,10 @@ Partial Class ucrCalculator
         'cmdClear
         '
         Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdClear.Location = New System.Drawing.Point(150, 70)
+        Me.cmdClear.Location = New System.Drawing.Point(150, 72)
         Me.cmdClear.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(50, 60)
+        Me.cmdClear.Size = New System.Drawing.Size(50, 58)
         Me.cmdClear.TabIndex = 190
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
@@ -746,7 +746,7 @@ Partial Class ucrCalculator
         'cmdBrackets
         '
         Me.cmdBrackets.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrackets.Location = New System.Drawing.Point(78, 100)
+        Me.cmdBrackets.Location = New System.Drawing.Point(76, 100)
         Me.cmdBrackets.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdBrackets.Name = "cmdBrackets"
         Me.cmdBrackets.Size = New System.Drawing.Size(38, 30)
@@ -758,7 +758,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!)
         Me.cmdPower.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPower.Location = New System.Drawing.Point(150, 42)
+        Me.cmdPower.Location = New System.Drawing.Point(150, 43)
         Me.cmdPower.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPower.Name = "cmdPower"
         Me.cmdPower.Size = New System.Drawing.Size(50, 30)
@@ -770,7 +770,7 @@ Partial Class ucrCalculator
         '
         Me.cmdDivide.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!)
         Me.cmdDivide.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDivide.Location = New System.Drawing.Point(114, 14)
+        Me.cmdDivide.Location = New System.Drawing.Point(113, 14)
         Me.cmdDivide.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDivide.Name = "cmdDivide"
         Me.cmdDivide.Size = New System.Drawing.Size(38, 30)
@@ -782,10 +782,10 @@ Partial Class ucrCalculator
         '
         Me.cmdPlus.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!)
         Me.cmdPlus.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlus.Location = New System.Drawing.Point(114, 100)
+        Me.cmdPlus.Location = New System.Drawing.Point(113, 101)
         Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPlus.Name = "cmdPlus"
-        Me.cmdPlus.Size = New System.Drawing.Size(38, 30)
+        Me.cmdPlus.Size = New System.Drawing.Size(38, 29)
         Me.cmdPlus.TabIndex = 130
         Me.cmdPlus.Text = "+"
         Me.cmdPlus.UseVisualStyleBackColor = True
@@ -794,7 +794,7 @@ Partial Class ucrCalculator
         '
         Me.cmdMinus.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!)
         Me.cmdMinus.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMinus.Location = New System.Drawing.Point(114, 70)
+        Me.cmdMinus.Location = New System.Drawing.Point(113, 72)
         Me.cmdMinus.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMinus.Name = "cmdMinus"
         Me.cmdMinus.Size = New System.Drawing.Size(38, 30)
@@ -806,7 +806,7 @@ Partial Class ucrCalculator
         '
         Me.cmdMultiply.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!)
         Me.cmdMultiply.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMultiply.Location = New System.Drawing.Point(114, 42)
+        Me.cmdMultiply.Location = New System.Drawing.Point(113, 43)
         Me.cmdMultiply.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMultiply.Name = "cmdMultiply"
         Me.cmdMultiply.Size = New System.Drawing.Size(38, 30)
@@ -829,7 +829,7 @@ Partial Class ucrCalculator
         'cmd9
         '
         Me.cmd9.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmd9.Location = New System.Drawing.Point(78, 14)
+        Me.cmd9.Location = New System.Drawing.Point(76, 14)
         Me.cmd9.Margin = New System.Windows.Forms.Padding(2)
         Me.cmd9.Name = "cmd9"
         Me.cmd9.Size = New System.Drawing.Size(38, 30)
@@ -840,7 +840,7 @@ Partial Class ucrCalculator
         'cmd8
         '
         Me.cmd8.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmd8.Location = New System.Drawing.Point(40, 14)
+        Me.cmd8.Location = New System.Drawing.Point(39, 14)
         Me.cmd8.Margin = New System.Windows.Forms.Padding(2)
         Me.cmd8.Name = "cmd8"
         Me.cmd8.Size = New System.Drawing.Size(38, 30)
@@ -862,7 +862,7 @@ Partial Class ucrCalculator
         'cmd6
         '
         Me.cmd6.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmd6.Location = New System.Drawing.Point(78, 42)
+        Me.cmd6.Location = New System.Drawing.Point(76, 43)
         Me.cmd6.Margin = New System.Windows.Forms.Padding(2)
         Me.cmd6.Name = "cmd6"
         Me.cmd6.Size = New System.Drawing.Size(38, 30)
@@ -873,7 +873,7 @@ Partial Class ucrCalculator
         'cmd5
         '
         Me.cmd5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmd5.Location = New System.Drawing.Point(40, 42)
+        Me.cmd5.Location = New System.Drawing.Point(39, 43)
         Me.cmd5.Margin = New System.Windows.Forms.Padding(2)
         Me.cmd5.Name = "cmd5"
         Me.cmd5.Size = New System.Drawing.Size(38, 30)
@@ -884,7 +884,7 @@ Partial Class ucrCalculator
         'cmd4
         '
         Me.cmd4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmd4.Location = New System.Drawing.Point(2, 42)
+        Me.cmd4.Location = New System.Drawing.Point(2, 43)
         Me.cmd4.Margin = New System.Windows.Forms.Padding(2)
         Me.cmd4.Name = "cmd4"
         Me.cmd4.Size = New System.Drawing.Size(38, 30)
@@ -895,7 +895,7 @@ Partial Class ucrCalculator
         'cmd3
         '
         Me.cmd3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmd3.Location = New System.Drawing.Point(78, 70)
+        Me.cmd3.Location = New System.Drawing.Point(76, 72)
         Me.cmd3.Margin = New System.Windows.Forms.Padding(2)
         Me.cmd3.Name = "cmd3"
         Me.cmd3.Size = New System.Drawing.Size(38, 30)
@@ -906,7 +906,7 @@ Partial Class ucrCalculator
         'cmd2
         '
         Me.cmd2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmd2.Location = New System.Drawing.Point(40, 70)
+        Me.cmd2.Location = New System.Drawing.Point(39, 72)
         Me.cmd2.Margin = New System.Windows.Forms.Padding(2)
         Me.cmd2.Name = "cmd2"
         Me.cmd2.Size = New System.Drawing.Size(38, 30)
@@ -917,7 +917,7 @@ Partial Class ucrCalculator
         'cmd0
         '
         Me.cmd0.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmd0.Location = New System.Drawing.Point(40, 100)
+        Me.cmd0.Location = New System.Drawing.Point(39, 100)
         Me.cmd0.Margin = New System.Windows.Forms.Padding(2)
         Me.cmd0.Name = "cmd0"
         Me.cmd0.Size = New System.Drawing.Size(38, 30)
@@ -928,7 +928,7 @@ Partial Class ucrCalculator
         'cmd1
         '
         Me.cmd1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmd1.Location = New System.Drawing.Point(2, 70)
+        Me.cmd1.Location = New System.Drawing.Point(2, 72)
         Me.cmd1.Margin = New System.Windows.Forms.Padding(2)
         Me.cmd1.Name = "cmd1"
         Me.cmd1.Size = New System.Drawing.Size(38, 30)
