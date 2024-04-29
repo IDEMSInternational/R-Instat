@@ -107,7 +107,7 @@ Partial Class ucrCalculator
         Me.cmdFrugal = New System.Windows.Forms.Button()
         Me.cmdPerfect = New System.Windows.Forms.Button()
         Me.cmdAbundant = New System.Windows.Forms.Button()
-        Me.cmdFibonacci2 = New System.Windows.Forms.Button()
+        Me.cmdCatalan = New System.Windows.Forms.Button()
         Me.cmdPalindrome = New System.Windows.Forms.Button()
         Me.cmdRoman = New System.Windows.Forms.Button()
         Me.cmdHexmode = New System.Windows.Forms.Button()
@@ -1300,7 +1300,7 @@ Partial Class ucrCalculator
         Me.grpInteger.Controls.Add(Me.cmdFrugal)
         Me.grpInteger.Controls.Add(Me.cmdPerfect)
         Me.grpInteger.Controls.Add(Me.cmdAbundant)
-        Me.grpInteger.Controls.Add(Me.cmdFibonacci2)
+        Me.grpInteger.Controls.Add(Me.cmdCatalan)
         Me.grpInteger.Controls.Add(Me.cmdPalindrome)
         Me.grpInteger.Controls.Add(Me.cmdRoman)
         Me.grpInteger.Controls.Add(Me.cmdHexmode)
@@ -1343,7 +1343,7 @@ Partial Class ucrCalculator
         'cmdPrimorial
         '
         Me.cmdPrimorial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPrimorial.Location = New System.Drawing.Point(222, 182)
+        Me.cmdPrimorial.Location = New System.Drawing.Point(221, 181)
         Me.cmdPrimorial.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPrimorial.Name = "cmdPrimorial"
         Me.cmdPrimorial.Size = New System.Drawing.Size(74, 22)
@@ -1354,7 +1354,7 @@ Partial Class ucrCalculator
         'cmdFactorize2
         '
         Me.cmdFactorize2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFactorize2.Location = New System.Drawing.Point(150, 38)
+        Me.cmdFactorize2.Location = New System.Drawing.Point(148, 39)
         Me.cmdFactorize2.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdFactorize2.Name = "cmdFactorize2"
         Me.cmdFactorize2.Size = New System.Drawing.Size(74, 22)
@@ -1364,7 +1364,7 @@ Partial Class ucrCalculator
         '
         'cmdLucas
         '
-        Me.cmdLucas.Location = New System.Drawing.Point(74, 62)
+        Me.cmdLucas.Location = New System.Drawing.Point(75, 60)
         Me.cmdLucas.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdLucas.Name = "cmdLucas"
         Me.cmdLucas.Size = New System.Drawing.Size(74, 22)
@@ -1374,7 +1374,7 @@ Partial Class ucrCalculator
         '
         'cmdFactorize
         '
-        Me.cmdFactorize.Location = New System.Drawing.Point(74, 38)
+        Me.cmdFactorize.Location = New System.Drawing.Point(75, 39)
         Me.cmdFactorize.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdFactorize.Name = "cmdFactorize"
         Me.cmdFactorize.Size = New System.Drawing.Size(74, 22)
@@ -1385,7 +1385,7 @@ Partial Class ucrCalculator
         'cmdSquare
         '
         Me.cmdSquare.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdSquare.Location = New System.Drawing.Point(222, 258)
+        Me.cmdSquare.Location = New System.Drawing.Point(221, 256)
         Me.cmdSquare.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdSquare.Name = "cmdSquare"
         Me.cmdSquare.Size = New System.Drawing.Size(74, 22)
@@ -1396,7 +1396,7 @@ Partial Class ucrCalculator
         'cmdTriangle
         '
         Me.cmdTriangle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdTriangle.Location = New System.Drawing.Point(150, 258)
+        Me.cmdTriangle.Location = New System.Drawing.Point(148, 256)
         Me.cmdTriangle.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdTriangle.Name = "cmdTriangle"
         Me.cmdTriangle.Size = New System.Drawing.Size(74, 22)
@@ -1407,7 +1407,7 @@ Partial Class ucrCalculator
         'cmdPadovan
         '
         Me.cmdPadovan.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPadovan.Location = New System.Drawing.Point(74, 258)
+        Me.cmdPadovan.Location = New System.Drawing.Point(75, 256)
         Me.cmdPadovan.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPadovan.Name = "cmdPadovan"
         Me.cmdPadovan.Size = New System.Drawing.Size(74, 22)
@@ -1418,7 +1418,7 @@ Partial Class ucrCalculator
         'cmdAchilles
         '
         Me.cmdAchilles.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdAchilles.Location = New System.Drawing.Point(2, 258)
+        Me.cmdAchilles.Location = New System.Drawing.Point(2, 256)
         Me.cmdAchilles.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAchilles.Name = "cmdAchilles"
         Me.cmdAchilles.Size = New System.Drawing.Size(74, 22)
@@ -1429,7 +1429,7 @@ Partial Class ucrCalculator
         'cmdHappy
         '
         Me.cmdHappy.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdHappy.Location = New System.Drawing.Point(222, 234)
+        Me.cmdHappy.Location = New System.Drawing.Point(221, 235)
         Me.cmdHappy.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdHappy.Name = "cmdHappy"
         Me.cmdHappy.Size = New System.Drawing.Size(74, 22)
@@ -1440,7 +1440,7 @@ Partial Class ucrCalculator
         'cmdUgly
         '
         Me.cmdUgly.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdUgly.Location = New System.Drawing.Point(150, 234)
+        Me.cmdUgly.Location = New System.Drawing.Point(148, 235)
         Me.cmdUgly.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdUgly.Name = "cmdUgly"
         Me.cmdUgly.Size = New System.Drawing.Size(74, 22)
@@ -1451,7 +1451,7 @@ Partial Class ucrCalculator
         'cmdPowerful
         '
         Me.cmdPowerful.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPowerful.Location = New System.Drawing.Point(74, 234)
+        Me.cmdPowerful.Location = New System.Drawing.Point(75, 235)
         Me.cmdPowerful.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPowerful.Name = "cmdPowerful"
         Me.cmdPowerful.Size = New System.Drawing.Size(74, 22)
@@ -1462,7 +1462,7 @@ Partial Class ucrCalculator
         'cmdFrugal
         '
         Me.cmdFrugal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFrugal.Location = New System.Drawing.Point(2, 234)
+        Me.cmdFrugal.Location = New System.Drawing.Point(2, 235)
         Me.cmdFrugal.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdFrugal.Name = "cmdFrugal"
         Me.cmdFrugal.Size = New System.Drawing.Size(74, 22)
@@ -1473,7 +1473,7 @@ Partial Class ucrCalculator
         'cmdPerfect
         '
         Me.cmdPerfect.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPerfect.Location = New System.Drawing.Point(222, 214)
+        Me.cmdPerfect.Location = New System.Drawing.Point(221, 214)
         Me.cmdPerfect.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPerfect.Name = "cmdPerfect"
         Me.cmdPerfect.Size = New System.Drawing.Size(74, 22)
@@ -1484,7 +1484,7 @@ Partial Class ucrCalculator
         'cmdAbundant
         '
         Me.cmdAbundant.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdAbundant.Location = New System.Drawing.Point(150, 214)
+        Me.cmdAbundant.Location = New System.Drawing.Point(148, 214)
         Me.cmdAbundant.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAbundant.Name = "cmdAbundant"
         Me.cmdAbundant.Size = New System.Drawing.Size(74, 22)
@@ -1492,16 +1492,16 @@ Partial Class ucrCalculator
         Me.cmdAbundant.Text = "abundant"
         Me.cmdAbundant.UseVisualStyleBackColor = True
         '
-        'cmdFibonacci2
+        'cmdCatalan
         '
-        Me.cmdFibonacci2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFibonacci2.Location = New System.Drawing.Point(74, 214)
-        Me.cmdFibonacci2.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFibonacci2.Name = "cmdFibonacci2"
-        Me.cmdFibonacci2.Size = New System.Drawing.Size(74, 22)
-        Me.cmdFibonacci2.TabIndex = 33
-        Me.cmdFibonacci2.Text = "fibonacci2"
-        Me.cmdFibonacci2.UseVisualStyleBackColor = True
+        Me.cmdCatalan.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCatalan.Location = New System.Drawing.Point(75, 214)
+        Me.cmdCatalan.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCatalan.Name = "cmdCatalan"
+        Me.cmdCatalan.Size = New System.Drawing.Size(74, 22)
+        Me.cmdCatalan.TabIndex = 33
+        Me.cmdCatalan.Text = " catalan"
+        Me.cmdCatalan.UseVisualStyleBackColor = True
         '
         'cmdPalindrome
         '
@@ -1517,7 +1517,7 @@ Partial Class ucrCalculator
         'cmdRoman
         '
         Me.cmdRoman.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdRoman.Location = New System.Drawing.Point(150, 106)
+        Me.cmdRoman.Location = New System.Drawing.Point(148, 102)
         Me.cmdRoman.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRoman.Name = "cmdRoman"
         Me.cmdRoman.Size = New System.Drawing.Size(74, 22)
@@ -1528,7 +1528,7 @@ Partial Class ucrCalculator
         'cmdHexmode
         '
         Me.cmdHexmode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdHexmode.Location = New System.Drawing.Point(222, 82)
+        Me.cmdHexmode.Location = New System.Drawing.Point(221, 81)
         Me.cmdHexmode.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdHexmode.Name = "cmdHexmode"
         Me.cmdHexmode.Size = New System.Drawing.Size(74, 22)
@@ -1539,7 +1539,7 @@ Partial Class ucrCalculator
         'cmdOctmode
         '
         Me.cmdOctmode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdOctmode.Location = New System.Drawing.Point(150, 82)
+        Me.cmdOctmode.Location = New System.Drawing.Point(148, 81)
         Me.cmdOctmode.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdOctmode.Name = "cmdOctmode"
         Me.cmdOctmode.Size = New System.Drawing.Size(74, 22)
@@ -1550,7 +1550,7 @@ Partial Class ucrCalculator
         'cmdKTuple
         '
         Me.cmdKTuple.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdKTuple.Location = New System.Drawing.Point(150, 182)
+        Me.cmdKTuple.Location = New System.Drawing.Point(148, 181)
         Me.cmdKTuple.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdKTuple.Name = "cmdKTuple"
         Me.cmdKTuple.Size = New System.Drawing.Size(74, 22)
@@ -1561,7 +1561,7 @@ Partial Class ucrCalculator
         'cmdTriplets
         '
         Me.cmdTriplets.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdTriplets.Location = New System.Drawing.Point(74, 182)
+        Me.cmdTriplets.Location = New System.Drawing.Point(75, 181)
         Me.cmdTriplets.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdTriplets.Name = "cmdTriplets"
         Me.cmdTriplets.Size = New System.Drawing.Size(74, 22)
@@ -1572,7 +1572,7 @@ Partial Class ucrCalculator
         'cmdThird
         '
         Me.cmdThird.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdThird.Location = New System.Drawing.Point(2, 182)
+        Me.cmdThird.Location = New System.Drawing.Point(2, 181)
         Me.cmdThird.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdThird.Name = "cmdThird"
         Me.cmdThird.Size = New System.Drawing.Size(74, 22)
@@ -1583,7 +1583,7 @@ Partial Class ucrCalculator
         'cmdSexy
         '
         Me.cmdSexy.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdSexy.Location = New System.Drawing.Point(222, 158)
+        Me.cmdSexy.Location = New System.Drawing.Point(221, 160)
         Me.cmdSexy.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdSexy.Name = "cmdSexy"
         Me.cmdSexy.Size = New System.Drawing.Size(74, 22)
@@ -1594,7 +1594,7 @@ Partial Class ucrCalculator
         'cmdCousin
         '
         Me.cmdCousin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCousin.Location = New System.Drawing.Point(150, 158)
+        Me.cmdCousin.Location = New System.Drawing.Point(148, 160)
         Me.cmdCousin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCousin.Name = "cmdCousin"
         Me.cmdCousin.Size = New System.Drawing.Size(74, 22)
@@ -1605,7 +1605,7 @@ Partial Class ucrCalculator
         'cmdTwin
         '
         Me.cmdTwin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdTwin.Location = New System.Drawing.Point(74, 158)
+        Me.cmdTwin.Location = New System.Drawing.Point(75, 160)
         Me.cmdTwin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdTwin.Name = "cmdTwin"
         Me.cmdTwin.Size = New System.Drawing.Size(74, 22)
@@ -1616,7 +1616,7 @@ Partial Class ucrCalculator
         'cmdPhi
         '
         Me.cmdPhi.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPhi.Location = New System.Drawing.Point(74, 106)
+        Me.cmdPhi.Location = New System.Drawing.Point(75, 102)
         Me.cmdPhi.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPhi.Name = "cmdPhi"
         Me.cmdPhi.Size = New System.Drawing.Size(74, 22)
@@ -1627,7 +1627,7 @@ Partial Class ucrCalculator
         'cmdCoprime
         '
         Me.cmdCoprime.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCoprime.Location = New System.Drawing.Point(2, 158)
+        Me.cmdCoprime.Location = New System.Drawing.Point(2, 160)
         Me.cmdCoprime.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCoprime.Name = "cmdCoprime"
         Me.cmdCoprime.Size = New System.Drawing.Size(74, 22)
@@ -1638,7 +1638,7 @@ Partial Class ucrCalculator
         'cmdSCM
         '
         Me.cmdSCM.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdSCM.Location = New System.Drawing.Point(2, 106)
+        Me.cmdSCM.Location = New System.Drawing.Point(2, 102)
         Me.cmdSCM.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdSCM.Name = "cmdSCM"
         Me.cmdSCM.Size = New System.Drawing.Size(74, 22)
@@ -1649,7 +1649,7 @@ Partial Class ucrCalculator
         'cmdGCD
         '
         Me.cmdGCD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdGCD.Location = New System.Drawing.Point(222, 106)
+        Me.cmdGCD.Location = New System.Drawing.Point(221, 102)
         Me.cmdGCD.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdGCD.Name = "cmdGCD"
         Me.cmdGCD.Size = New System.Drawing.Size(74, 22)
@@ -1660,7 +1660,7 @@ Partial Class ucrCalculator
         'cmdGeneratePrimes
         '
         Me.cmdGeneratePrimes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdGeneratePrimes.Location = New System.Drawing.Point(2, 138)
+        Me.cmdGeneratePrimes.Location = New System.Drawing.Point(2, 139)
         Me.cmdGeneratePrimes.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdGeneratePrimes.Name = "cmdGeneratePrimes"
         Me.cmdGeneratePrimes.Size = New System.Drawing.Size(74, 22)
@@ -1670,7 +1670,7 @@ Partial Class ucrCalculator
         '
         'cmdNthPrime
         '
-        Me.cmdNthPrime.Location = New System.Drawing.Point(74, 138)
+        Me.cmdNthPrime.Location = New System.Drawing.Point(75, 139)
         Me.cmdNthPrime.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNthPrime.Name = "cmdNthPrime"
         Me.cmdNthPrime.Size = New System.Drawing.Size(74, 22)
@@ -1743,7 +1743,7 @@ Partial Class ucrCalculator
         'cmdHex
         '
         Me.cmdHex.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdHex.Location = New System.Drawing.Point(74, 82)
+        Me.cmdHex.Location = New System.Drawing.Point(75, 81)
         Me.cmdHex.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdHex.Name = "cmdHex"
         Me.cmdHex.Size = New System.Drawing.Size(74, 22)
@@ -1754,7 +1754,7 @@ Partial Class ucrCalculator
         'cmdOctal
         '
         Me.cmdOctal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdOctal.Location = New System.Drawing.Point(2, 82)
+        Me.cmdOctal.Location = New System.Drawing.Point(2, 81)
         Me.cmdOctal.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdOctal.Name = "cmdOctal"
         Me.cmdOctal.Size = New System.Drawing.Size(74, 22)
@@ -1765,7 +1765,7 @@ Partial Class ucrCalculator
         'cmdBinary
         '
         Me.cmdBinary.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdBinary.Location = New System.Drawing.Point(222, 62)
+        Me.cmdBinary.Location = New System.Drawing.Point(221, 60)
         Me.cmdBinary.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdBinary.Name = "cmdBinary"
         Me.cmdBinary.Size = New System.Drawing.Size(74, 22)
@@ -1776,7 +1776,7 @@ Partial Class ucrCalculator
         'cmdBigQ
         '
         Me.cmdBigQ.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdBigQ.Location = New System.Drawing.Point(74, 18)
+        Me.cmdBigQ.Location = New System.Drawing.Point(75, 18)
         Me.cmdBigQ.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdBigQ.Name = "cmdBigQ"
         Me.cmdBigQ.Size = New System.Drawing.Size(74, 22)
@@ -1786,7 +1786,7 @@ Partial Class ucrCalculator
         '
         'cmdDigitSum
         '
-        Me.cmdDigitSum.Location = New System.Drawing.Point(222, 38)
+        Me.cmdDigitSum.Location = New System.Drawing.Point(221, 39)
         Me.cmdDigitSum.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDigitSum.Name = "cmdDigitSum"
         Me.cmdDigitSum.Size = New System.Drawing.Size(74, 22)
@@ -1797,7 +1797,7 @@ Partial Class ucrCalculator
         'cmdRankPercent
         '
         Me.cmdRankPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdRankPercent.Location = New System.Drawing.Point(150, 62)
+        Me.cmdRankPercent.Location = New System.Drawing.Point(148, 60)
         Me.cmdRankPercent.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRankPercent.Name = "cmdRankPercent"
         Me.cmdRankPercent.Size = New System.Drawing.Size(74, 22)
@@ -1807,7 +1807,7 @@ Partial Class ucrCalculator
         '
         'cmdDivisors
         '
-        Me.cmdDivisors.Location = New System.Drawing.Point(2, 38)
+        Me.cmdDivisors.Location = New System.Drawing.Point(2, 39)
         Me.cmdDivisors.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDivisors.Name = "cmdDivisors"
         Me.cmdDivisors.Size = New System.Drawing.Size(74, 22)
@@ -1817,7 +1817,7 @@ Partial Class ucrCalculator
         '
         'cmdFibonacci
         '
-        Me.cmdFibonacci.Location = New System.Drawing.Point(2, 62)
+        Me.cmdFibonacci.Location = New System.Drawing.Point(2, 60)
         Me.cmdFibonacci.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdFibonacci.Name = "cmdFibonacci"
         Me.cmdFibonacci.Size = New System.Drawing.Size(74, 22)
@@ -1827,7 +1827,7 @@ Partial Class ucrCalculator
         '
         'cmdNextPrime
         '
-        Me.cmdNextPrime.Location = New System.Drawing.Point(150, 138)
+        Me.cmdNextPrime.Location = New System.Drawing.Point(148, 139)
         Me.cmdNextPrime.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNextPrime.Name = "cmdNextPrime"
         Me.cmdNextPrime.Size = New System.Drawing.Size(74, 22)
@@ -1837,7 +1837,7 @@ Partial Class ucrCalculator
         '
         'cmdChoosez
         '
-        Me.cmdChoosez.Location = New System.Drawing.Point(222, 18)
+        Me.cmdChoosez.Location = New System.Drawing.Point(221, 18)
         Me.cmdChoosez.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdChoosez.Name = "cmdChoosez"
         Me.cmdChoosez.Size = New System.Drawing.Size(74, 22)
@@ -1847,7 +1847,7 @@ Partial Class ucrCalculator
         '
         'cmdFactorial
         '
-        Me.cmdFactorial.Location = New System.Drawing.Point(150, 18)
+        Me.cmdFactorial.Location = New System.Drawing.Point(148, 18)
         Me.cmdFactorial.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdFactorial.Name = "cmdFactorial"
         Me.cmdFactorial.Size = New System.Drawing.Size(74, 22)
@@ -1858,7 +1858,7 @@ Partial Class ucrCalculator
         'cmdIsPrime
         '
         Me.cmdIsPrime.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdIsPrime.Location = New System.Drawing.Point(222, 138)
+        Me.cmdIsPrime.Location = New System.Drawing.Point(221, 139)
         Me.cmdIsPrime.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdIsPrime.Name = "cmdIsPrime"
         Me.cmdIsPrime.Size = New System.Drawing.Size(74, 22)
@@ -4231,7 +4231,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPascal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPascal.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPascal.Location = New System.Drawing.Point(2, 190)
+        Me.cmdPascal.Location = New System.Drawing.Point(2, 188)
         Me.cmdPascal.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPascal.Name = "cmdPascal"
         Me.cmdPascal.Size = New System.Drawing.Size(62, 30)
@@ -4296,7 +4296,7 @@ Partial Class ucrCalculator
         '
         Me.cmdnbinomial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdnbinomial.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdnbinomial.Location = New System.Drawing.Point(116, 42)
+        Me.cmdnbinomial.Location = New System.Drawing.Point(116, 43)
         Me.cmdnbinomial.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdnbinomial.Name = "cmdnbinomial"
         Me.cmdnbinomial.Size = New System.Drawing.Size(72, 30)
@@ -4308,7 +4308,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRan_sample.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdRan_sample.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRan_sample.Location = New System.Drawing.Point(242, 42)
+        Me.cmdRan_sample.Location = New System.Drawing.Point(244, 43)
         Me.cmdRan_sample.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRan_sample.Name = "cmdRan_sample"
         Me.cmdRan_sample.Size = New System.Drawing.Size(58, 30)
@@ -4320,7 +4320,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRan_beta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdRan_beta.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRan_beta.Location = New System.Drawing.Point(186, 42)
+        Me.cmdRan_beta.Location = New System.Drawing.Point(187, 43)
         Me.cmdRan_beta.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRan_beta.Name = "cmdRan_beta"
         Me.cmdRan_beta.Size = New System.Drawing.Size(58, 30)
@@ -4332,7 +4332,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRan_gamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdRan_gamma.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRan_gamma.Location = New System.Drawing.Point(58, 42)
+        Me.cmdRan_gamma.Location = New System.Drawing.Point(59, 43)
         Me.cmdRan_gamma.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRan_gamma.Name = "cmdRan_gamma"
         Me.cmdRan_gamma.Size = New System.Drawing.Size(58, 30)
@@ -4344,7 +4344,7 @@ Partial Class ucrCalculator
         '
         Me.cmdpoisson.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdpoisson.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdpoisson.Location = New System.Drawing.Point(2, 42)
+        Me.cmdpoisson.Location = New System.Drawing.Point(2, 43)
         Me.cmdpoisson.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdpoisson.Name = "cmdpoisson"
         Me.cmdpoisson.Size = New System.Drawing.Size(58, 30)
@@ -4356,7 +4356,7 @@ Partial Class ucrCalculator
         '
         Me.cmdbinomial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdbinomial.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdbinomial.Location = New System.Drawing.Point(242, 14)
+        Me.cmdbinomial.Location = New System.Drawing.Point(244, 14)
         Me.cmdbinomial.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdbinomial.Name = "cmdbinomial"
         Me.cmdbinomial.Size = New System.Drawing.Size(58, 30)
@@ -4368,7 +4368,7 @@ Partial Class ucrCalculator
         '
         Me.cmdbernoulli.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdbernoulli.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdbernoulli.Location = New System.Drawing.Point(186, 14)
+        Me.cmdbernoulli.Location = New System.Drawing.Point(187, 14)
         Me.cmdbernoulli.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdbernoulli.Name = "cmdbernoulli"
         Me.cmdbernoulli.Size = New System.Drawing.Size(58, 30)
@@ -4392,7 +4392,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRan_normal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdRan_normal.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRan_normal.Location = New System.Drawing.Point(58, 14)
+        Me.cmdRan_normal.Location = New System.Drawing.Point(59, 14)
         Me.cmdRan_normal.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRan_normal.Name = "cmdRan_normal"
         Me.cmdRan_normal.Size = New System.Drawing.Size(58, 30)
@@ -4416,7 +4416,7 @@ Partial Class ucrCalculator
         '
         Me.cmdQnbin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQnbin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQnbin.Location = New System.Drawing.Point(246, 102)
+        Me.cmdQnbin.Location = New System.Drawing.Point(246, 101)
         Me.cmdQnbin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdQnbin.Name = "cmdQnbin"
         Me.cmdQnbin.Size = New System.Drawing.Size(62, 30)
@@ -4428,7 +4428,7 @@ Partial Class ucrCalculator
         '
         Me.cmdQpois.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQpois.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQpois.Location = New System.Drawing.Point(186, 102)
+        Me.cmdQpois.Location = New System.Drawing.Point(185, 101)
         Me.cmdQpois.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdQpois.Name = "cmdQpois"
         Me.cmdQpois.Size = New System.Drawing.Size(62, 30)
@@ -4440,7 +4440,7 @@ Partial Class ucrCalculator
         '
         Me.cmdQbinom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQbinom.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQbinom.Location = New System.Drawing.Point(124, 102)
+        Me.cmdQbinom.Location = New System.Drawing.Point(124, 101)
         Me.cmdQbinom.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdQbinom.Name = "cmdQbinom"
         Me.cmdQbinom.Size = New System.Drawing.Size(62, 30)
@@ -4452,7 +4452,7 @@ Partial Class ucrCalculator
         '
         Me.cmdQbirth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQbirth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQbirth.Location = New System.Drawing.Point(62, 102)
+        Me.cmdQbirth.Location = New System.Drawing.Point(63, 101)
         Me.cmdQbirth.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdQbirth.Name = "cmdQbirth"
         Me.cmdQbirth.Size = New System.Drawing.Size(62, 30)
@@ -4464,7 +4464,7 @@ Partial Class ucrCalculator
         '
         Me.cmdQbeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQbeta.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQbeta.Location = New System.Drawing.Point(2, 102)
+        Me.cmdQbeta.Location = New System.Drawing.Point(2, 101)
         Me.cmdQbeta.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdQbeta.Name = "cmdQbeta"
         Me.cmdQbeta.Size = New System.Drawing.Size(62, 30)
@@ -4476,7 +4476,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPnbin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPnbin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPnbin.Location = New System.Drawing.Point(246, 74)
+        Me.cmdPnbin.Location = New System.Drawing.Point(246, 72)
         Me.cmdPnbin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPnbin.Name = "cmdPnbin"
         Me.cmdPnbin.Size = New System.Drawing.Size(62, 30)
@@ -4488,7 +4488,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPpois.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPpois.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPpois.Location = New System.Drawing.Point(186, 74)
+        Me.cmdPpois.Location = New System.Drawing.Point(185, 72)
         Me.cmdPpois.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPpois.Name = "cmdPpois"
         Me.cmdPpois.Size = New System.Drawing.Size(62, 30)
@@ -4500,7 +4500,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPbinom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPbinom.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPbinom.Location = New System.Drawing.Point(124, 74)
+        Me.cmdPbinom.Location = New System.Drawing.Point(124, 72)
         Me.cmdPbinom.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPbinom.Name = "cmdPbinom"
         Me.cmdPbinom.Size = New System.Drawing.Size(62, 30)
@@ -4512,7 +4512,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPbirth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPbirth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPbirth.Location = New System.Drawing.Point(62, 74)
+        Me.cmdPbirth.Location = New System.Drawing.Point(63, 72)
         Me.cmdPbirth.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPbirth.Name = "cmdPbirth"
         Me.cmdPbirth.Size = New System.Drawing.Size(62, 30)
@@ -4524,7 +4524,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPbeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPbeta.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPbeta.Location = New System.Drawing.Point(2, 74)
+        Me.cmdPbeta.Location = New System.Drawing.Point(2, 72)
         Me.cmdPbeta.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPbeta.Name = "cmdPbeta"
         Me.cmdPbeta.Size = New System.Drawing.Size(62, 30)
@@ -4536,7 +4536,7 @@ Partial Class ucrCalculator
         '
         Me.cmdQgamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQgamma.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQgamma.Location = New System.Drawing.Point(246, 44)
+        Me.cmdQgamma.Location = New System.Drawing.Point(246, 43)
         Me.cmdQgamma.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdQgamma.Name = "cmdQgamma"
         Me.cmdQgamma.Size = New System.Drawing.Size(62, 30)
@@ -4560,7 +4560,7 @@ Partial Class ucrCalculator
         '
         Me.cmdGamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdGamma.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdGamma.Location = New System.Drawing.Point(186, 130)
+        Me.cmdGamma.Location = New System.Drawing.Point(185, 130)
         Me.cmdGamma.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdGamma.Name = "cmdGamma"
         Me.cmdGamma.Size = New System.Drawing.Size(62, 30)
@@ -4573,7 +4573,7 @@ Partial Class ucrCalculator
         '
         Me.cmdLbeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdLbeta.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLbeta.Location = New System.Drawing.Point(124, 160)
+        Me.cmdLbeta.Location = New System.Drawing.Point(124, 159)
         Me.cmdLbeta.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdLbeta.Name = "cmdLbeta"
         Me.cmdLbeta.Size = New System.Drawing.Size(62, 30)
@@ -4585,7 +4585,7 @@ Partial Class ucrCalculator
         '
         Me.cmdqF.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdqF.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdqF.Location = New System.Drawing.Point(186, 44)
+        Me.cmdqF.Location = New System.Drawing.Point(185, 43)
         Me.cmdqF.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdqF.Name = "cmdqF"
         Me.cmdqF.Size = New System.Drawing.Size(62, 30)
@@ -4609,7 +4609,7 @@ Partial Class ucrCalculator
         '
         Me.cmdChoose.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdChoose.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChoose.Location = New System.Drawing.Point(62, 130)
+        Me.cmdChoose.Location = New System.Drawing.Point(63, 130)
         Me.cmdChoose.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdChoose.Name = "cmdChoose"
         Me.cmdChoose.Size = New System.Drawing.Size(62, 30)
@@ -4621,7 +4621,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPf.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPf.Location = New System.Drawing.Point(186, 14)
+        Me.cmdPf.Location = New System.Drawing.Point(185, 14)
         Me.cmdPf.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPf.Name = "cmdPf"
         Me.cmdPf.Size = New System.Drawing.Size(62, 30)
@@ -4645,7 +4645,7 @@ Partial Class ucrCalculator
         '
         Me.cmdLgamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdLgamma.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLgamma.Location = New System.Drawing.Point(186, 160)
+        Me.cmdLgamma.Location = New System.Drawing.Point(185, 159)
         Me.cmdLgamma.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdLgamma.Name = "cmdLgamma"
         Me.cmdLgamma.Size = New System.Drawing.Size(62, 30)
@@ -4669,7 +4669,7 @@ Partial Class ucrCalculator
         '
         Me.cmdQchisq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQchisq.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQchisq.Location = New System.Drawing.Point(124, 44)
+        Me.cmdQchisq.Location = New System.Drawing.Point(124, 43)
         Me.cmdQchisq.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdQchisq.Name = "cmdQchisq"
         Me.cmdQchisq.Size = New System.Drawing.Size(62, 30)
@@ -4681,7 +4681,7 @@ Partial Class ucrCalculator
         '
         Me.cmdQt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQt.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQt.Location = New System.Drawing.Point(62, 44)
+        Me.cmdQt.Location = New System.Drawing.Point(63, 43)
         Me.cmdQt.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdQt.Name = "cmdQt"
         Me.cmdQt.Size = New System.Drawing.Size(62, 30)
@@ -4693,7 +4693,7 @@ Partial Class ucrCalculator
         '
         Me.cmdQnorm.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQnorm.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQnorm.Location = New System.Drawing.Point(2, 44)
+        Me.cmdQnorm.Location = New System.Drawing.Point(2, 43)
         Me.cmdQnorm.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdQnorm.Name = "cmdQnorm"
         Me.cmdQnorm.Size = New System.Drawing.Size(62, 30)
@@ -4705,7 +4705,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPt.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPt.Location = New System.Drawing.Point(62, 14)
+        Me.cmdPt.Location = New System.Drawing.Point(63, 14)
         Me.cmdPt.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPt.Name = "cmdPt"
         Me.cmdPt.Size = New System.Drawing.Size(62, 30)
@@ -4717,7 +4717,7 @@ Partial Class ucrCalculator
         '
         Me.cmdLchoose.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdLchoose.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLchoose.Location = New System.Drawing.Point(62, 160)
+        Me.cmdLchoose.Location = New System.Drawing.Point(63, 159)
         Me.cmdLchoose.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdLchoose.Name = "cmdLchoose"
         Me.cmdLchoose.Size = New System.Drawing.Size(62, 30)
@@ -4729,7 +4729,7 @@ Partial Class ucrCalculator
         '
         Me.cmdLfact.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdLfact.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLfact.Location = New System.Drawing.Point(2, 160)
+        Me.cmdLfact.Location = New System.Drawing.Point(2, 159)
         Me.cmdLfact.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdLfact.Name = "cmdLfact"
         Me.cmdLfact.Size = New System.Drawing.Size(62, 30)
@@ -4741,7 +4741,7 @@ Partial Class ucrCalculator
         '
         Me.cmdTrigamma.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdTrigamma.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTrigamma.Location = New System.Drawing.Point(246, 160)
+        Me.cmdTrigamma.Location = New System.Drawing.Point(246, 159)
         Me.cmdTrigamma.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdTrigamma.Name = "cmdTrigamma"
         Me.cmdTrigamma.Size = New System.Drawing.Size(62, 30)
@@ -7726,7 +7726,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
-        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.grpInteger)
         Me.Controls.Add(Me.grpTestString)
         Me.Controls.Add(Me.grpModifier)
@@ -7741,6 +7740,7 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpMaths)
+        Me.Controls.Add(Me.grpProbabilty)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "ucrCalculator"
         Me.Size = New System.Drawing.Size(898, 458)
@@ -8177,7 +8177,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdFrugal As Button
     Friend WithEvents cmdPerfect As Button
     Friend WithEvents cmdAbundant As Button
-    Friend WithEvents cmdFibonacci2 As Button
+    Friend WithEvents cmdCatalan As Button
     Friend WithEvents cmdPalindrome As Button
     Friend WithEvents cmdFactorize As Button
     Friend WithEvents GmpToolStripMenuItem As ToolStripMenuItem
