@@ -269,8 +269,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdKTuple, "k_tuple general formula for all these keys. For example k_tuple(0, 10, c(0,2)) gives twin primes")
         ttCalculator.SetToolTip(cmdRoman, "converts a small(up to 3899) positive integer to Roman numbers. For example as.roman(14)=XIV")
         ttCalculator.SetToolTip(cmdPalindrome, "generates palindromes to the length of the dataframe. For example the 100th palindromic number is 909")
-        ttCalculator.SetToolTip(cmdFibonacci2, "generates fibonacci numbers to the length of the data frame. For example the 10th fibonacci number is just 34, but the 50th is much larger, 7778742049")
-        ttCalculator.SetToolTip(cmdAbundant, "when divisors sum to more than the number. So 12 is less than 1+2+3+4+6 = 16. Opposite is Deficient")
+        ttCalculator.SetToolTip(cmdCatalan, "generates Catalan numbers to the length of the data frame. The 5th is 10!/(5!*6!) =7 * 6 = 42")
         ttCalculator.SetToolTip(cmdPerfect, "divisors add to the number. So 6 = 1+2+3. Only 51 perfect numbers are currently known.")
         ttCalculator.SetToolTip(cmdFrugal, "125 is frugal because 125 = 5(cubed) and 5 and 3 are fewer digits (2) than 125 (3).")
         ttCalculator.SetToolTip(cmdPowerful, "36 = 2(squared)*3(squared) is powerful because for each divisor, here 2 and 3, its square is also a divisor.")
@@ -4341,12 +4340,18 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdFibonacci_Click(sender As Object, e As EventArgs) Handles cmdFibonacci.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Fibonacci(n = )", 2)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Fibonacci()", 1)
-        End If
+        Dim clsFibonacciFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+
+        clsFibonacciFunction.SetPackageName("Zseq")
+        clsFibonacciFunction.SetRCommand("Fibonacci")
+        clsFibonacciFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsFibonacciFunction.ToScript, 0)
     End Sub
+
 
     Private Sub cmdDivisors_Click(sender As Object, e As EventArgs) Handles cmdDivisors.Click
         If chkShowParameters.Checked Then
@@ -4512,7 +4517,7 @@ Public Class ucrCalculator
         clsPrimesFunction.SetPackageName("primes")
         clsPrimesFunction.SetRCommand(strRCommand)
         clsPrimesFunction.AddParameter("min", "0", iPosition:=0)
-        clsPrimesFunction.AddParameter("max", "100", iPosition:=1)
+        clsPrimesFunction.AddParameter("max", "1000000", iPosition:=1)
 
         clsDataFunction.SetRCommand("nrow")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
@@ -4555,11 +4560,12 @@ Public Class ucrCalculator
         clsTuplePatternFunction.SetRCommand("c")
         clsTuplePatternFunction.AddParameter("x", "0", iPosition:=0, bIncludeArgumentName:=False)
         clsTuplePatternFunction.AddParameter("y", "2", iPosition:=1, bIncludeArgumentName:=False)
+        clsTuplePatternFunction.AddParameter("z", "8", iPosition:=2, bIncludeArgumentName:=False)
 
         clsKTuplePrimeFunction.SetPackageName("primes")
         clsKTuplePrimeFunction.SetRCommand("k_tuple")
         clsKTuplePrimeFunction.AddParameter("min", "0", iPosition:=0)
-        clsKTuplePrimeFunction.AddParameter("max", "100", iPosition:=1)
+        clsKTuplePrimeFunction.AddParameter("max", "1000000", iPosition:=1)
         clsKTuplePrimeFunction.AddParameter("tuple", clsRFunctionParameter:=clsTuplePatternFunction, iPosition:=2)
 
         clsRepFunction.SetRCommand("rep")
@@ -4593,18 +4599,19 @@ Public Class ucrCalculator
         ZseqFunctions("Palindromic")
     End Sub
 
-    Private Sub cmdFibonnaci_Click(sender As Object, e As EventArgs) Handles cmdFibonacci2.Click
-        Dim clsFibonacciFunction As New RFunction
+    Private Sub cmdCatalan_Click(sender As Object, e As EventArgs) Handles cmdCatalan.Click
+        Dim clsCatalanFunction As New RFunction
 
         clsDataFunction.SetRCommand("nrow")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
-        clsFibonacciFunction.SetPackageName("Zseq")
-        clsFibonacciFunction.SetRCommand("Fibonacci")
-        clsFibonacciFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsCatalanFunction.SetPackageName("Zseq")
+        clsCatalanFunction.SetRCommand("Catalan")
+        clsCatalanFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsFibonacciFunction.ToScript, 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsCatalanFunction.ToScript, 0)
     End Sub
+
 
     Private Sub cmdAbundant_Click(sender As Object, e As EventArgs) Handles cmdAbundant.Click
         ZseqFunctions("Abundant")
@@ -4659,7 +4666,7 @@ Public Class ucrCalculator
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsPerfectFunction, iPosition:=0)
-        clsRepFunction.AddParameter("length", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
+        '  clsRepFunction.AddParameter("length", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
     End Sub
