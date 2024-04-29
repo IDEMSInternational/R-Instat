@@ -648,7 +648,7 @@ Public Class dlgDescribeTwoVariable
 
         ElseIf rdoTwoVariable.Checked Then
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
-            If IsNumericByNumeric() Then
+            If IsNumericByNumeric() OrElse IsFactorByNumeric() Then
                 If ucrChkSwapXYVar.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMapping2Function)
                     clsDummyFunction.AddParameter("var", "True", iPosition:=5)
@@ -665,9 +665,6 @@ Public Class dlgDescribeTwoVariable
                     clsDummyFunction.AddParameter("corr", "False", iPosition:=4)
                     ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRCorrelationFunction)
                 End If
-                ucrSaveTable.Visible = False
-            ElseIf IsFactorByNumeric() Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
                 ucrSaveTable.Visible = False
             ElseIf IsNumericByFactor() Then
                 ucrSaveTable.Visible = True
@@ -944,7 +941,7 @@ Public Class dlgDescribeTwoVariable
                 End If
             End If
         ElseIf rdoTwoVariable.Checked Then
-            If IsNumericByNumeric() OrElse IsNumericByFactor() Then
+            If IsNumericByNumeric() OrElse IsFactorByNumeric() Then
                 If Not ucrReceiverFirstVars.IsEmpty Then
                     If ucrChkSwapXYVar.Checked Then
                         clsYlist2Operator.AddParameter("cols", ucrReceiverFirstVars.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
@@ -976,7 +973,7 @@ Public Class dlgDescribeTwoVariable
                 End If
             End If
         ElseIf rdoTwoVariable.Checked Then
-            If IsNumericByNumeric() OrElse IsNumericByNumeric() Then
+            If IsNumericByNumeric() OrElse IsFactorByNumeric() Then
                 If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
                     If ucrChkSwapXYVar.Checked Then
                         clsCombineSwapAnova2Table.AddParameter("x", ucrReceiverSecondTwoVariableFactor.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
