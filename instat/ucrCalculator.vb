@@ -4666,7 +4666,7 @@ Public Class ucrCalculator
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsPerfectFunction, iPosition:=0)
-        '  clsRepFunction.AddParameter("length", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
+        clsRepFunction.AddParameter("length", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
     End Sub
