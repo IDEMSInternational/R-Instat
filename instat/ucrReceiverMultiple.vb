@@ -180,6 +180,10 @@ Public Class ucrReceiverMultiple
     End Sub
 
     Private Function ShortenString(strText As String) As String
+        If String.IsNullOrEmpty(strText) Then
+            Return ""
+        End If
+
         Dim maxLength As Integer = 10
         If strText.Length > maxLength Then
             ' Trim the string to the specified length and add ellipsis

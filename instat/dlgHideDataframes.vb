@@ -87,7 +87,7 @@ Public Class dlgHideDataframes
 
         ucrSelectorForDataFrames.Reset()
 
-        clsDummyFunction.AddParameter("checked", "rdoHide", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "rdoUnhide", iPosition:=0)
 
         clsMappingFunction.SetPackageName("purrr")
         clsMappingFunction.SetRCommand("map")
@@ -174,7 +174,6 @@ Public Class dlgHideDataframes
     End Sub
 
     Private Sub ucrReceiverMultipleUnhide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleUnhide.ControlValueChanged
-        SetHiddenColumns()
         TestOKEnabled()
         CountLevels()
         clsDataUnhideOperator.AddParameter("data", ucrReceiverMultipleUnhide.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
