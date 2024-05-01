@@ -37,11 +37,11 @@ Public Class dlgHideDataframes
         If bReset Then
             SetDefaults()
         End If
-        SetHiddenColumns()
         ReopenDialog()
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        SetHiddenColumns()
         CountLevels()
     End Sub
 
@@ -55,6 +55,7 @@ Public Class dlgHideDataframes
         ucrReceiverMultipleUnhide.SetParameter(New RParameter("data_names", 0))
         ucrReceiverMultipleUnhide.SetParameterIsString()
         ucrReceiverMultipleUnhide.Selector = ucrSelectorForDataFrames
+        ucrReceiverMultiple.strSelectorHeading = "Data Frames"
 
         ucrPnlHideUnhide.AddRadioButton(rdoHideDataFrame)
         ucrPnlHideUnhide.AddRadioButton(rdoUnhideDataFrame)
