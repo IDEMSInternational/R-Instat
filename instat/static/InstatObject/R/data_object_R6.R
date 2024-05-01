@@ -4469,8 +4469,15 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, signi
   if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
   if(sign_level || signif.stars) message("This is no longer descriptive")
   if(sign_level) end_col = 5 else end_col = 4
-  mod <- lm(formula = as.formula(paste0("as.numeric(", as.name(y_col_name), ") ~ ", as.name(x_col_names[1]), " + ", as.name(x_col_names[2]))), data = self$get_data_frame())
-    cat("ANOVA table: ", y_col_name, " ~ ", x_col_names[1], " + ", x_col_names[2], "\n", sep = "")
+
+  if (length(x_col_names) == 1) {
+    formula_str <- paste0( as.name(y_col_name), "~ ", as.name(x_col_names))
+  } else if (length(x_col_names) > 1) {
+    formula_str <- paste0(as.name(y_col_name), "~ ", as.name(paste(x_col_names, collapse = " + ")))
+  }
+
+  mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())  
+    cat("ANOVA table: ", formula_str, "\n", sep = "")
     print(anova(mod)[1:end_col], signif.stars = signif.stars)
     cat("\n")
     if(means) (print(model.tables(aov(mod), type = "means")))
