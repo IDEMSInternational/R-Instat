@@ -40,7 +40,7 @@ Public Class ucrOutputPages
     End Sub
 
     Private Sub ucrOutputPages_Load(sender As Object, e As EventArgs) Handles Me.Load
-        InitializeSelectAllCheckBox()
+        AddSelectAllCheckBoxToToolStripControl()
     End Sub
 
     ''' <summary>
@@ -313,42 +313,61 @@ Public Class ucrOutputPages
         Next
     End Sub
 
-    Private Sub InitializeSelectAllCheckBox()
+    Private Sub AddSelectAllCheckBoxToToolStripControl()
+        ' Create a ToolStripControlHost to host the CheckBox
         Dim checkBoxHost As ToolStripControlHost = New ToolStripControlHost(checkBoxSelectAll)
+
+        ' Insert the CheckBox host at the beginning of tsButtons items
         tsButtons.Items.Insert(0, checkBoxHost)
 
+        ' Create a ToolTip for the checkBoxSelectAll CheckBox
         Dim ttcheckBoxSelectAll As New ToolTip
         ttcheckBoxSelectAll.SetToolTip(checkBoxSelectAll, "Toggle selection for all elements")
 
+        ' Add a Click event handler to the checkBoxSelectAll CheckBox
         AddHandler checkBoxSelectAll.Click, AddressOf checkBoxSelectAll_Click
     End Sub
 
+    ''' <summary>
+    ''' Updates the text and state of checkBoxSelectAll based on selected elements and output count.
+    ''' </summary>
     Private Sub UpdateSelectAllCheckBoxText()
+        ' Check if _outputLogger is initialized
         If _outputLogger Is Nothing Then
-            Exit Sub
+            Exit Sub ' Exit the sub if logger is not initialized
         End If
 
+        ' Variable to hold the count of output elements
         Dim iCountOutputElements As Integer = 0
+
+        ' Determine the count of output elements based on the selected tab
         If SelectedTab() = "Main" Then
             iCountOutputElements = _outputLogger.OutputElements.Count
         Else
             iCountOutputElements = _outputLogger.GetFilteredList(SelectedTab).Output.Count
         End If
 
+        ' Enable or disable checkBoxSelectAll based on the count of output elements
         checkBoxSelectAll.Enabled = iCountOutputElements > 0
+
+        ' Get the count of selected elements
         Dim iSelectedElements = _selectedOutputPage.SelectedElements.Count
+
+        ' Determine the text and check state of checkBoxSelectAll based on selected and total elements
         Select Case True
             Case iSelectedElements > 0 AndAlso iCountOutputElements > iSelectedElements
+                ' Indeterminate state when some but not all elements are selected
                 checkBoxSelectAll.Text = $"{iSelectedElements} item(s)"
                 checkBoxSelectAll.CheckState = CheckState.Indeterminate
             Case iSelectedElements > 0 AndAlso iCountOutputElements = iSelectedElements
+                ' All elements selected
                 checkBoxSelectAll.Text = "Deselect All"
                 checkBoxSelectAll.CheckState = CheckState.Checked
             Case Else
+                ' No elements selected
                 checkBoxSelectAll.Text = "Select All"
                 checkBoxSelectAll.CheckState = CheckState.Unchecked
         End Select
-
     End Sub
 
     Private Sub checkBoxSelectAll_Click(sender As Object, e As EventArgs)

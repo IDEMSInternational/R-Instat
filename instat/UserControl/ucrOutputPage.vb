@@ -22,7 +22,10 @@ Imports RInsightF461
 ''' </summary>
 Public Class ucrOutputPage
     Private _checkBoxes As List(Of CheckBox)
+
+    ''' <summary> lastCheckedBox used to store a reference to a CheckBox control. </summary>
     Private lastCheckedBox As CheckBox = Nothing
+
     Private _bCanReOrder As Boolean
     Private _bCanRename As Boolean
     Private _bCanDelete As Boolean
