@@ -478,8 +478,6 @@ Public Class frmMain
 
         '---------------------------------------
         'delete the recovery files
-        'This was done to prevent the previous autolog file from being overwritten by the new autolog file- Derrick
-
 
         If strAutoSavedInternalLogFilePaths.Length > 0 Then
             Try
