@@ -478,7 +478,13 @@ Public Class frmMain
 
         '---------------------------------------
         'delete the recovery files
-
+        If strAutoSavedLogFilePaths.Length > 1 Then
+            Try
+                File.Delete(strAutoSavedLogFilePaths(1))
+            Catch ex As Exception
+                MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+            End Try
+        End If
         If strAutoSavedInternalLogFilePaths.Length > 0 Then
             Try
                 For Each strFilePath As String In strAutoSavedInternalLogFilePaths
