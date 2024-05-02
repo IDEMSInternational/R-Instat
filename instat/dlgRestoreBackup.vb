@@ -225,14 +225,10 @@ Public Class dlgRestoreBackup
                         frmMain.clsRLink.GetImportRDSRScript(strDataFilePath, False)
         End If
 
-
         'execute the R-Instat set up R scripts
         For Each strLine As String In strRScripts.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
             frmMain.clsRLink.RunScript(strScript:=strLine.Trim(), bSeparateThread:=True, bSilent:=True)
         Next
-
-        'as of 16/05/2023. clsDataBook depends on clsRLink.bInstatObjectExists property
-        'to check if R object has been set up at R level.
 
         'grids are only updated when clsRLink.bInstatObjectExists = True
         If frmMain.clsRLink.RunInternalScriptGetValue(strScript:="exists('" & frmMain.clsRLink.strInstatDataObject & "')",
@@ -245,7 +241,6 @@ Public Class dlgRestoreBackup
     End Sub
 
     Private Sub PromptRestoreData(ByRef strScript As String, ByRef strDataFilePath As String)
-
         'if there is  another R-Instat process in the machine then no need to check for autorecovery files
         If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
             Return
