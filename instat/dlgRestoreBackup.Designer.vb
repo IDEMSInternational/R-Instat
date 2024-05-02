@@ -35,6 +35,7 @@ Partial Class dlgRestoreBackup
         Me.rdoRunBackupLog = New System.Windows.Forms.RadioButton()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkSendInternalLog = New instat.ucrCheck()
+        Me.ucrPnlRecoveryOption = New instat.UcrPanel()
         Me.grpSavingOptions.SuspendLayout()
         Me.grpEndChoice.SuspendLayout()
         Me.SuspendLayout()
@@ -131,9 +132,10 @@ Partial Class dlgRestoreBackup
         '
         'grpEndChoice
         '
-        Me.grpEndChoice.Controls.Add(Me.rdoNeither)
-        Me.grpEndChoice.Controls.Add(Me.rdoLoadBackupData)
         Me.grpEndChoice.Controls.Add(Me.rdoRunBackupLog)
+        Me.grpEndChoice.Controls.Add(Me.rdoLoadBackupData)
+        Me.grpEndChoice.Controls.Add(Me.rdoNeither)
+        Me.grpEndChoice.Controls.Add(Me.ucrPnlRecoveryOption)
         Me.grpEndChoice.Location = New System.Drawing.Point(136, 209)
         Me.grpEndChoice.Name = "grpEndChoice"
         Me.grpEndChoice.Size = New System.Drawing.Size(358, 66)
@@ -193,14 +195,22 @@ Partial Class dlgRestoreBackup
         Me.ucrChkSendInternalLog.Size = New System.Drawing.Size(266, 23)
         Me.ucrChkSendInternalLog.TabIndex = 21
         '
+        'ucrPnlRecoveryOption
+        '
+        Me.ucrPnlRecoveryOption.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlRecoveryOption.Location = New System.Drawing.Point(17, 19)
+        Me.ucrPnlRecoveryOption.Name = "ucrPnlRecoveryOption"
+        Me.ucrPnlRecoveryOption.Size = New System.Drawing.Size(314, 36)
+        Me.ucrPnlRecoveryOption.TabIndex = 25
+        '
         'dlgRestoreBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(627, 340)
-        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpEndChoice)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrChkSendInternalLog)
         Me.Controls.Add(Me.grpSavingOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -229,4 +239,5 @@ Partial Class dlgRestoreBackup
     Friend WithEvents ucrInputSavedPathData As ucrFilePath
     Friend WithEvents ucrInputSavedPathLog As ucrFilePath
     Friend WithEvents ucrInputSavedPathInternalLog As ucrFilePath
+    Friend WithEvents ucrPnlRecoveryOption As UcrPanel
 End Class

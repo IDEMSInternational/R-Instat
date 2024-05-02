@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Imports System.IO
+Imports RDotNet
 
 Public Class dlgRestoreBackup
     Private strScript As String
@@ -92,10 +93,17 @@ Public Class dlgRestoreBackup
             ucrChkSendInternalLog.Visible = False
             ucrChkSendInternalLog.Checked = False
         End If
+        ucrPnlRecoveryOption.AddRadioButton(rdoLoadBackupData)
+        ucrPnlRecoveryOption.AddRadioButton(rdoRunBackupLog)
+        ucrPnlRecoveryOption.AddRadioButton(rdoNeither)
 
+        ucrPnlRecoveryOption.AddFunctionNamesCondition(rdoLoadBackupData, "Load_Backup")
+        ucrPnlRecoveryOption.AddFunctionNamesCondition(rdoRunBackupLog, "Run_Backup")
+        ucrPnlRecoveryOption.AddFunctionNamesCondition(rdoNeither, "Neither")
         rdoNeither.Enabled = True
         autoTranslate(Me)
         TestOKEnabled()
+
     End Sub
 
     Public Function GetScript() As String
@@ -158,16 +166,15 @@ Public Class dlgRestoreBackup
         Else
             ucrBase.OKEnabled(False)
         End If
-
     End Sub
 
-    Private Sub ucrChkShowDataFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowDataFile.ControlValueChanged, ucrChkShowInternalLogFile.ControlValueChanged, ucrChkShowLogFile.ControlValueChanged
+    Private Sub ucrChkShowDataFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowLogFile.ControlValueChanged, ucrChkShowInternalLogFile.ControlValueChanged, ucrChkShowDataFile.ControlValueChanged
         ucrInputSavedPathData.Visible = ucrChkShowDataFile.Checked
         ucrInputSavedPathLog.Visible = ucrChkShowLogFile.Checked
         ucrInputSavedPathInternalLog.Visible = ucrChkShowInternalLogFile.Checked
     End Sub
 
-    Private Sub rdoRunBackupLog_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRunBackupLog.CheckedChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlRecoveryOption.ControlContentsChanged
         If rdoRunBackupLog.Checked Then
             SaveFiles()
             If File.Exists(strAutoSavedLogFilePaths(0)) Then
@@ -178,12 +185,7 @@ Public Class dlgRestoreBackup
                     strScript = ""
                 End Try
             End If
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub rdoLoadBackupData_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLoadBackupData.CheckedChanged
-        If rdoLoadBackupData.Checked Then
+        ElseIf rdoLoadBackupData.Checked Then
             SaveFiles()
             strLoadDateFilePath = strAutoSavedDataFilePaths(0)
             bUserClose = False
@@ -191,20 +193,12 @@ Public Class dlgRestoreBackup
         TestOKEnabled()
     End Sub
 
-    Private Sub GetLogPath()
-        frmMain.clsRecentItems.addToMenu(Replace(ucrInputSavedPathLog.FilePath, "\", "/"))
-    End Sub
-
-    Private Sub GetDataPath()
+    Private Sub ucrInputSavedPathData_Leave(sender As Object, e As EventArgs) Handles ucrInputSavedPathData.Leave
         frmMain.clsRecentItems.addToMenu(Replace(ucrInputSavedPathData.FilePath, "\", "/"))
     End Sub
 
-    Private Sub ucrInputSavedPathData_Leave(sender As Object, e As EventArgs) Handles ucrInputSavedPathData.Leave
-        GetDataPath()
-    End Sub
-
     Private Sub ucrInputSavedPathLog_Leave(sender As Object, e As EventArgs) Handles ucrInputSavedPathLog.Leave
-        GetLogPath()
+        frmMain.clsRecentItems.addToMenu(Replace(ucrInputSavedPathLog.FilePath, "\", "/"))
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -216,5 +210,74 @@ Public Class dlgRestoreBackup
         ucrChkShowDataFile.Checked = False
         ucrChkShowInternalLogFile.Checked = False
         ucrChkShowLogFile.Checked = False
+    End Sub
+
+    Public Sub GetRecoveryFiles()
+        Dim strRScripts As String = ""
+        Dim strDataFilePath As String = ""
+
+        PromptRestoreData(strRScripts, strDataFilePath)
+
+        'if data file recovered then add it as part of the initial R set up script
+        If Not String.IsNullOrEmpty(strDataFilePath) Then
+            strRScripts = strRScripts & Environment.NewLine &
+                        "# Importing auto recovered data" & Environment.NewLine &
+                        frmMain.clsRLink.GetImportRDSRScript(strDataFilePath, False)
+        End If
+
+
+        'execute the R-Instat set up R scripts
+        For Each strLine As String In strRScripts.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+            frmMain.clsRLink.RunScript(strScript:=strLine.Trim(), bSeparateThread:=True, bSilent:=True)
+        Next
+
+        'as of 16/05/2023. clsDataBook depends on clsRLink.bInstatObjectExists property
+        'to check if R object has been set up at R level.
+
+        'grids are only updated when clsRLink.bInstatObjectExists = True
+        If frmMain.clsRLink.RunInternalScriptGetValue(strScript:="exists('" & frmMain.clsRLink.strInstatDataObject & "')",
+                                              bSeparateThread:=True, bSilent:=True).AsCharacter(0) = "TRUE" Then
+            'set R-Instat R object as exists if it has been set up in R level and refresh the grids
+            'refreshing grids internally updates the .Net databook object as well.
+            frmMain.clsRLink.bInstatObjectExists = True
+            frmMain.UpdateAllGrids()
+        End If
+    End Sub
+
+    Private Sub PromptRestoreData(ByRef strScript As String, ByRef strDataFilePath As String)
+
+        'if there is  another R-Instat process in the machine then no need to check for autorecovery files
+        If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
+            Return
+        End If
+        'this is the copy of the original code used for PromptAndSetAutoRecoveredPrevSessionData function
+        Dim strAutoSavedLogFilePaths() As String = {}
+        Dim strAutoSavedInternalLogFilePaths() As String = {}
+        Dim strAutoSavedDataFilePaths() As String = {}
+
+        If (Directory.Exists(strAutoSaveLogFolderPath)) Then
+            strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
+        End If
+        If Directory.Exists(strAutoSaveDataFolderPath) Then
+            strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
+        End If
+        If (Directory.Exists(strAutoSaveInternalLogFolderPath)) Then
+            strAutoSavedInternalLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveInternalLogFolderPath).ToArray
+        End If
+
+        '---------------------------------------
+        'prompt user for recovery selection
+        If (strAutoSavedLogFilePaths.Length > 0 OrElse
+            strAutoSavedDataFilePaths.Length > 0) Then
+
+
+            'todo. the dialog design is meant to only return just one option; script, data file path or new session.
+            'refactor the dialog to enforce the design
+
+            'get the R script from read file if selected by the user
+            strScript = GetScript()
+            'get the data file path if selected by the user
+            strDataFilePath = GetDataFilePath()
+        End If
     End Sub
 End Class
