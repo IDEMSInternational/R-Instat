@@ -478,14 +478,13 @@ Public Class frmMain
 
         '---------------------------------------
         'delete the recovery files
-        If strAutoSavedLogFilePaths.Length > 0 Then
+        If strAutoSavedLogFilePaths.Length > 1 Then
             Try
-                File.Delete(strAutoSavedLogFilePaths(0))
+                File.Delete(strAutoSavedLogFilePaths(1))
             Catch ex As Exception
                 MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
             End Try
         End If
-
         If strAutoSavedInternalLogFilePaths.Length > 0 Then
             Try
                 For Each strFilePath As String In strAutoSavedInternalLogFilePaths
@@ -500,15 +499,19 @@ Public Class frmMain
             End Try
         End If
 
-        If strAutoSavedDataFilePaths.Length > 0 Then
+        If strAutoSavedDataFilePaths.Length > 1 Then
             Try
-                File.Delete(strAutoSavedDataFilePaths(0))
+                File.Delete(strAutoSavedDataFilePaths(1))
             Catch ex As Exception
                 MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
             End Try
         End If
         '---------------------------------------
 
+    End Sub
+    Private Sub mnuToolsRestoreBackup_Click(sender As Object, e As EventArgs) Handles mnuToolsRestoreBackup.Click
+        dlgRestoreBackup.ShowDialog()
+        dlgRestoreBackup.GetRecoveryFiles()
     End Sub
 
     ''' <summary>
@@ -1104,6 +1107,10 @@ Public Class frmMain
                 End While
                 strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
             End If
+            Dim strBackupMessage As String = $"##########{vbCrLf}## Backing up data and log files on: {DateTime.Now}{vbCrLf}##########"
+            Me.ucrScriptWindow.LogText(strBackupMessage)
+            clsRLink.AppendToAutoSaveLog(strBackupMessage)
+            
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & strCurrentAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
