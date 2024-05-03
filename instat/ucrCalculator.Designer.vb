@@ -632,9 +632,9 @@ Partial Class ucrCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpFunctions = New System.Windows.Forms.GroupBox()
+        Me.cmdRhelpFunctions = New instat.ucrSplitButton()
         Me.cmdDecimals = New System.Windows.Forms.Button()
         Me.cmdMASSFractions = New System.Windows.Forms.Button()
-        Me.cmdRHelpFunctions = New instat.ucrSplitButton()
         Me.cmdPascal = New System.Windows.Forms.Button()
         Me.cmdDssq = New System.Windows.Forms.Button()
         Me.cmddssqSession = New System.Windows.Forms.Button()
@@ -7733,9 +7733,9 @@ Partial Class ucrCalculator
         '
         'grpFunctions
         '
+        Me.grpFunctions.Controls.Add(Me.cmdRhelpFunctions)
         Me.grpFunctions.Controls.Add(Me.cmdDecimals)
         Me.grpFunctions.Controls.Add(Me.cmdMASSFractions)
-        Me.grpFunctions.Controls.Add(Me.cmdRHelpFunctions)
         Me.grpFunctions.Controls.Add(Me.cmdPascal)
         Me.grpFunctions.Controls.Add(Me.cmdDssq)
         Me.grpFunctions.Controls.Add(Me.cmddssqSession)
@@ -7765,6 +7765,19 @@ Partial Class ucrCalculator
         Me.grpFunctions.TabStop = False
         Me.grpFunctions.Text = "Functions"
         '
+        'cmdRhelpFunctions
+        '
+        Me.cmdRhelpFunctions.AutoSize = True
+        Me.cmdRhelpFunctions.ContextMenuStrip = Me.ContextMenuStripFunctions
+        Me.cmdRhelpFunctions.Location = New System.Drawing.Point(173, 161)
+        Me.cmdRhelpFunctions.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdRhelpFunctions.Name = "cmdRhelpFunctions"
+        Me.cmdRhelpFunctions.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRhelpFunctions.SplitMenuStrip = Me.ContextMenuStripFunctions
+        Me.cmdRhelpFunctions.TabIndex = 221
+        Me.cmdRhelpFunctions.Text = "R Help"
+        Me.cmdRhelpFunctions.UseVisualStyleBackColor = True
+        '
         'cmdDecimals
         '
         Me.cmdDecimals.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -7786,19 +7799,6 @@ Partial Class ucrCalculator
         Me.cmdMASSFractions.TabIndex = 219
         Me.cmdMASSFractions.Text = "fractions"
         Me.cmdMASSFractions.UseVisualStyleBackColor = True
-        '
-        'cmdRHelpFunctions
-        '
-        Me.cmdRHelpFunctions.AutoSize = True
-        Me.cmdRHelpFunctions.ContextMenuStrip = Me.ContextMenuStripList
-        Me.cmdRHelpFunctions.Location = New System.Drawing.Point(175, 160)
-        Me.cmdRHelpFunctions.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdRHelpFunctions.Name = "cmdRHelpFunctions"
-        Me.cmdRHelpFunctions.Size = New System.Drawing.Size(68, 23)
-        Me.cmdRHelpFunctions.SplitMenuStrip = Me.ContextMenuStripList
-        Me.cmdRHelpFunctions.TabIndex = 218
-        Me.cmdRHelpFunctions.Text = "R Help"
-        Me.cmdRHelpFunctions.UseVisualStyleBackColor = True
         '
         'cmdPascal
         '
@@ -8056,12 +8056,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
-        Me.Controls.Add(Me.grpList)
-        Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.grpModifier)
-        Me.Controls.Add(Me.grpSymbols)
-        Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpFunctions)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpDates)
@@ -8073,6 +8067,12 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpInteger)
         Me.Controls.Add(Me.grpTestString)
         Me.Controls.Add(Me.grpComplex)
+        Me.Controls.Add(Me.grpList)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpTransform)
+        Me.Controls.Add(Me.grpModifier)
+        Me.Controls.Add(Me.grpSymbols)
+        Me.Controls.Add(Me.grpWakefield)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "ucrCalculator"
         Me.Size = New System.Drawing.Size(898, 458)
@@ -8730,7 +8730,6 @@ Partial Class ucrCalculator
     Friend WithEvents grpFunctions As GroupBox
     Friend WithEvents cmdDecimals As Button
     Friend WithEvents cmdMASSFractions As Button
-    Friend WithEvents cmdRHelpFunctions As ucrSplitButton
     Friend WithEvents cmdPascal As Button
     Friend WithEvents cmdDssq As Button
     Friend WithEvents cmddssqSession As Button
@@ -8751,4 +8750,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdFunctionsSsqSession As Button
     Friend WithEvents cmdFunctionsSsq As Button
     Friend WithEvents cmdAveFun As Button
+    Friend WithEvents cmdRhelpFunctions As ucrSplitButton
 End Class
