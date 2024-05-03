@@ -566,30 +566,6 @@ Partial Class ucrCalculator
         Me.ListStatsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListStatipToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpList = New System.Windows.Forms.GroupBox()
-        Me.grpFunctions = New System.Windows.Forms.GroupBox()
-        Me.cmdDecimals = New System.Windows.Forms.Button()
-        Me.cmdMASSFractions = New System.Windows.Forms.Button()
-        Me.cmdRHelpFunctions = New instat.ucrSplitButton()
-        Me.cmdPascal = New System.Windows.Forms.Button()
-        Me.cmdDssq = New System.Windows.Forms.Button()
-        Me.cmddssqSession = New System.Windows.Forms.Button()
-        Me.cmdCoeffs2 = New System.Windows.Forms.Button()
-        Me.cmdCoef = New System.Windows.Forms.Button()
-        Me.cmdCombn = New System.Windows.Forms.Button()
-        Me.cmdProd = New System.Windows.Forms.Button()
-        Me.cmdCoeffs = New System.Windows.Forms.Button()
-        Me.cmdRoots = New System.Windows.Forms.Button()
-        Me.cmdOrigin = New System.Windows.Forms.Button()
-        Me.cmdPlynomial = New System.Windows.Forms.Button()
-        Me.cmdCssqSession = New System.Windows.Forms.Button()
-        Me.cmdDsum = New System.Windows.Forms.Button()
-        Me.cmdAveBoth = New System.Windows.Forms.Button()
-        Me.cmdAveFac = New System.Windows.Forms.Button()
-        Me.cmdAve = New System.Windows.Forms.Button()
-        Me.cmdCssq = New System.Windows.Forms.Button()
-        Me.cmdFunctionsSsqSession = New System.Windows.Forms.Button()
-        Me.cmdFunctionsSsq = New System.Windows.Forms.Button()
-        Me.cmdAveFun = New System.Windows.Forms.Button()
         Me.grpMathBloc = New System.Windows.Forms.GroupBox()
         Me.cmdListSQRT = New System.Windows.Forms.Button()
         Me.cmdListPercent2 = New System.Windows.Forms.Button()
@@ -642,6 +618,11 @@ Partial Class ucrCalculator
         Me.cmdListLag = New System.Windows.Forms.Button()
         Me.cmdListRank = New System.Windows.Forms.Button()
         Me.cmdListSort = New System.Windows.Forms.Button()
+        Me.ContextMenuStripFunctions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.MASSFunctionsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PolynomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UtilsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdRhelpList = New instat.ucrSplitButton()
         Me.cmdWakefieldHelp = New instat.ucrSplitButton()
         Me.cmdStringRHelp = New instat.ucrSplitButton()
@@ -650,11 +631,30 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.ContextMenuStripFunctions = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.MASSFunctionsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PolynomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StatsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UtilsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.grpFunctions = New System.Windows.Forms.GroupBox()
+        Me.cmdDecimals = New System.Windows.Forms.Button()
+        Me.cmdMASSFractions = New System.Windows.Forms.Button()
+        Me.cmdRHelpFunctions = New instat.ucrSplitButton()
+        Me.cmdPascal = New System.Windows.Forms.Button()
+        Me.cmdDssq = New System.Windows.Forms.Button()
+        Me.cmddssqSession = New System.Windows.Forms.Button()
+        Me.cmdCoeffs2 = New System.Windows.Forms.Button()
+        Me.cmdCoef = New System.Windows.Forms.Button()
+        Me.cmdCombn = New System.Windows.Forms.Button()
+        Me.cmdProd = New System.Windows.Forms.Button()
+        Me.cmdCoeffs = New System.Windows.Forms.Button()
+        Me.cmdRoots = New System.Windows.Forms.Button()
+        Me.cmdOrigin = New System.Windows.Forms.Button()
+        Me.cmdPlynomial = New System.Windows.Forms.Button()
+        Me.cmdCssqSession = New System.Windows.Forms.Button()
+        Me.cmdDsum = New System.Windows.Forms.Button()
+        Me.cmdAveBoth = New System.Windows.Forms.Button()
+        Me.cmdAveFac = New System.Windows.Forms.Button()
+        Me.cmdAve = New System.Windows.Forms.Button()
+        Me.cmdCssq = New System.Windows.Forms.Button()
+        Me.cmdFunctionsSsqSession = New System.Windows.Forms.Button()
+        Me.cmdFunctionsSsq = New System.Windows.Forms.Button()
+        Me.cmdAveFun = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout
         Me.grpDates.SuspendLayout
         Me.ContextMenuStripDate.SuspendLayout
@@ -688,10 +688,10 @@ Partial Class ucrCalculator
         Me.ContextMenuStripWakefield.SuspendLayout
         Me.ContextMenuStripList.SuspendLayout
         Me.grpList.SuspendLayout
-        Me.grpFunctions.SuspendLayout
         Me.grpMathBloc.SuspendLayout
         Me.GroupBox1.SuspendLayout
         Me.ContextMenuStripFunctions.SuspendLayout
+        Me.grpFunctions.SuspendLayout
         Me.SuspendLayout
         '
         'lblExpression
@@ -6948,7 +6948,6 @@ Partial Class ucrCalculator
         Me.grpList.Controls.Add(Me.cmdListSumd)
         Me.grpList.Controls.Add(Me.cmdListMissing)
         Me.grpList.Controls.Add(Me.GroupBox1)
-        Me.grpList.Controls.Add(Me.grpFunctions)
         Me.grpList.Location = New System.Drawing.Point(438, 52)
         Me.grpList.Margin = New System.Windows.Forms.Padding(2)
         Me.grpList.Name = "grpList"
@@ -6957,315 +6956,6 @@ Partial Class ucrCalculator
         Me.grpList.TabIndex = 214
         Me.grpList.TabStop = False
         Me.grpList.Text = "Summary"
-        '
-        'grpFunctions
-        '
-        Me.grpFunctions.Controls.Add(Me.cmdDecimals)
-        Me.grpFunctions.Controls.Add(Me.cmdMASSFractions)
-        Me.grpFunctions.Controls.Add(Me.cmdRHelpFunctions)
-        Me.grpFunctions.Controls.Add(Me.cmdPascal)
-        Me.grpFunctions.Controls.Add(Me.cmdDssq)
-        Me.grpFunctions.Controls.Add(Me.cmddssqSession)
-        Me.grpFunctions.Controls.Add(Me.cmdCoeffs2)
-        Me.grpFunctions.Controls.Add(Me.cmdCoef)
-        Me.grpFunctions.Controls.Add(Me.cmdCombn)
-        Me.grpFunctions.Controls.Add(Me.cmdProd)
-        Me.grpFunctions.Controls.Add(Me.cmdCoeffs)
-        Me.grpFunctions.Controls.Add(Me.cmdRoots)
-        Me.grpFunctions.Controls.Add(Me.cmdOrigin)
-        Me.grpFunctions.Controls.Add(Me.cmdPlynomial)
-        Me.grpFunctions.Controls.Add(Me.cmdCssqSession)
-        Me.grpFunctions.Controls.Add(Me.cmdDsum)
-        Me.grpFunctions.Controls.Add(Me.cmdAveBoth)
-        Me.grpFunctions.Controls.Add(Me.cmdAveFac)
-        Me.grpFunctions.Controls.Add(Me.cmdAve)
-        Me.grpFunctions.Controls.Add(Me.cmdCssq)
-        Me.grpFunctions.Controls.Add(Me.cmdFunctionsSsqSession)
-        Me.grpFunctions.Controls.Add(Me.cmdFunctionsSsq)
-        Me.grpFunctions.Controls.Add(Me.cmdAveFun)
-        Me.grpFunctions.Location = New System.Drawing.Point(8, 8)
-        Me.grpFunctions.Margin = New System.Windows.Forms.Padding(2)
-        Me.grpFunctions.Name = "grpFunctions"
-        Me.grpFunctions.Padding = New System.Windows.Forms.Padding(2)
-        Me.grpFunctions.Size = New System.Drawing.Size(250, 193)
-        Me.grpFunctions.TabIndex = 215
-        Me.grpFunctions.TabStop = False
-        Me.grpFunctions.Text = "Functions"
-        '
-        'cmdDecimals
-        '
-        Me.cmdDecimals.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDecimals.Location = New System.Drawing.Point(124, 130)
-        Me.cmdDecimals.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdDecimals.Name = "cmdDecimals"
-        Me.cmdDecimals.Size = New System.Drawing.Size(62, 30)
-        Me.cmdDecimals.TabIndex = 220
-        Me.cmdDecimals.Text = "decimals"
-        Me.cmdDecimals.UseVisualStyleBackColor = True
-        '
-        'cmdMASSFractions
-        '
-        Me.cmdMASSFractions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMASSFractions.Location = New System.Drawing.Point(185, 130)
-        Me.cmdMASSFractions.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdMASSFractions.Name = "cmdMASSFractions"
-        Me.cmdMASSFractions.Size = New System.Drawing.Size(62, 30)
-        Me.cmdMASSFractions.TabIndex = 219
-        Me.cmdMASSFractions.Text = "fractions"
-        Me.cmdMASSFractions.UseVisualStyleBackColor = True
-        '
-        'cmdRHelpFunctions
-        '
-        Me.cmdRHelpFunctions.AutoSize = True
-        Me.cmdRHelpFunctions.ContextMenuStrip = Me.ContextMenuStripList
-        Me.cmdRHelpFunctions.Location = New System.Drawing.Point(175, 160)
-        Me.cmdRHelpFunctions.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdRHelpFunctions.Name = "cmdRHelpFunctions"
-        Me.cmdRHelpFunctions.Size = New System.Drawing.Size(68, 23)
-        Me.cmdRHelpFunctions.SplitMenuStrip = Me.ContextMenuStripList
-        Me.cmdRHelpFunctions.TabIndex = 218
-        Me.cmdRHelpFunctions.Text = "R Help"
-        Me.cmdRHelpFunctions.UseVisualStyleBackColor = True
-        '
-        'cmdPascal
-        '
-        Me.cmdPascal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPascal.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPascal.Location = New System.Drawing.Point(63, 130)
-        Me.cmdPascal.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdPascal.Name = "cmdPascal"
-        Me.cmdPascal.Size = New System.Drawing.Size(62, 30)
-        Me.cmdPascal.TabIndex = 217
-        Me.cmdPascal.Text = "pascal"
-        Me.cmdPascal.UseVisualStyleBackColor = True
-        '
-        'cmdDssq
-        '
-        Me.cmdDssq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdDssq.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDssq.Location = New System.Drawing.Point(2, 159)
-        Me.cmdDssq.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdDssq.Name = "cmdDssq"
-        Me.cmdDssq.Size = New System.Drawing.Size(62, 30)
-        Me.cmdDssq.TabIndex = 177
-        Me.cmdDssq.Text = "dssq"
-        Me.cmdDssq.UseVisualStyleBackColor = True
-        '
-        'cmddssqSession
-        '
-        Me.cmddssqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmddssqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmddssqSession.Location = New System.Drawing.Point(63, 159)
-        Me.cmddssqSession.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmddssqSession.Name = "cmddssqSession"
-        Me.cmddssqSession.Size = New System.Drawing.Size(62, 30)
-        Me.cmddssqSession.TabIndex = 178
-        Me.cmddssqSession.Text = "dssq*"
-        Me.cmddssqSession.UseVisualStyleBackColor = True
-        '
-        'cmdCoeffs2
-        '
-        Me.cmdCoeffs2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCoeffs2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoeffs2.Location = New System.Drawing.Point(185, 101)
-        Me.cmdCoeffs2.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdCoeffs2.Name = "cmdCoeffs2"
-        Me.cmdCoeffs2.Size = New System.Drawing.Size(62, 30)
-        Me.cmdCoeffs2.TabIndex = 175
-        Me.cmdCoeffs2.Text = "coeffs2"
-        Me.cmdCoeffs2.UseVisualStyleBackColor = True
-        '
-        'cmdCoef
-        '
-        Me.cmdCoef.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCoef.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoef.Location = New System.Drawing.Point(124, 101)
-        Me.cmdCoef.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdCoef.Name = "cmdCoef"
-        Me.cmdCoef.Size = New System.Drawing.Size(62, 30)
-        Me.cmdCoef.TabIndex = 174
-        Me.cmdCoef.Text = "coef"
-        Me.cmdCoef.UseVisualStyleBackColor = True
-        '
-        'cmdCombn
-        '
-        Me.cmdCombn.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCombn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCombn.Location = New System.Drawing.Point(63, 101)
-        Me.cmdCombn.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdCombn.Name = "cmdCombn"
-        Me.cmdCombn.Size = New System.Drawing.Size(62, 30)
-        Me.cmdCombn.TabIndex = 173
-        Me.cmdCombn.Text = "combn"
-        Me.cmdCombn.UseVisualStyleBackColor = True
-        '
-        'cmdProd
-        '
-        Me.cmdProd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdProd.Location = New System.Drawing.Point(2, 101)
-        Me.cmdProd.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdProd.Name = "cmdProd"
-        Me.cmdProd.Size = New System.Drawing.Size(62, 30)
-        Me.cmdProd.TabIndex = 172
-        Me.cmdProd.Text = "prod"
-        Me.cmdProd.UseVisualStyleBackColor = True
-        '
-        'cmdCoeffs
-        '
-        Me.cmdCoeffs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCoeffs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoeffs.Location = New System.Drawing.Point(185, 72)
-        Me.cmdCoeffs.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdCoeffs.Name = "cmdCoeffs"
-        Me.cmdCoeffs.Size = New System.Drawing.Size(62, 30)
-        Me.cmdCoeffs.TabIndex = 170
-        Me.cmdCoeffs.Text = "coeffs"
-        Me.cmdCoeffs.UseVisualStyleBackColor = True
-        '
-        'cmdRoots
-        '
-        Me.cmdRoots.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdRoots.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRoots.Location = New System.Drawing.Point(124, 72)
-        Me.cmdRoots.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdRoots.Name = "cmdRoots"
-        Me.cmdRoots.Size = New System.Drawing.Size(62, 30)
-        Me.cmdRoots.TabIndex = 169
-        Me.cmdRoots.Text = "roots"
-        Me.cmdRoots.UseVisualStyleBackColor = True
-        '
-        'cmdOrigin
-        '
-        Me.cmdOrigin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdOrigin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOrigin.Location = New System.Drawing.Point(63, 72)
-        Me.cmdOrigin.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdOrigin.Name = "cmdOrigin"
-        Me.cmdOrigin.Size = New System.Drawing.Size(62, 30)
-        Me.cmdOrigin.TabIndex = 168
-        Me.cmdOrigin.Text = "origin"
-        Me.cmdOrigin.UseVisualStyleBackColor = True
-        '
-        'cmdPlynomial
-        '
-        Me.cmdPlynomial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPlynomial.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlynomial.Location = New System.Drawing.Point(2, 72)
-        Me.cmdPlynomial.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdPlynomial.Name = "cmdPlynomial"
-        Me.cmdPlynomial.Size = New System.Drawing.Size(62, 30)
-        Me.cmdPlynomial.TabIndex = 167
-        Me.cmdPlynomial.Text = " plynomial"
-        Me.cmdPlynomial.UseVisualStyleBackColor = True
-        '
-        'cmdCssqSession
-        '
-        Me.cmdCssqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCssqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCssqSession.Location = New System.Drawing.Point(185, 43)
-        Me.cmdCssqSession.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdCssqSession.Name = "cmdCssqSession"
-        Me.cmdCssqSession.Size = New System.Drawing.Size(62, 30)
-        Me.cmdCssqSession.TabIndex = 162
-        Me.cmdCssqSession.Text = "cssq*"
-        Me.cmdCssqSession.UseVisualStyleBackColor = True
-        '
-        'cmdDsum
-        '
-        Me.cmdDsum.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdDsum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDsum.Location = New System.Drawing.Point(2, 130)
-        Me.cmdDsum.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdDsum.Name = "cmdDsum"
-        Me.cmdDsum.Size = New System.Drawing.Size(62, 30)
-        Me.cmdDsum.TabIndex = 154
-        Me.cmdDsum.Text = "dsum"
-        Me.cmdDsum.UseVisualStyleBackColor = True
-        '
-        'cmdAveBoth
-        '
-        Me.cmdAveBoth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdAveBoth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAveBoth.Location = New System.Drawing.Point(185, 14)
-        Me.cmdAveBoth.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdAveBoth.Name = "cmdAveBoth"
-        Me.cmdAveBoth.Size = New System.Drawing.Size(62, 30)
-        Me.cmdAveBoth.TabIndex = 156
-        Me.cmdAveBoth.Text = "ave_both"
-        Me.cmdAveBoth.UseVisualStyleBackColor = True
-        '
-        'cmdAveFac
-        '
-        Me.cmdAveFac.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdAveFac.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAveFac.Location = New System.Drawing.Point(124, 14)
-        Me.cmdAveFac.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdAveFac.Name = "cmdAveFac"
-        Me.cmdAveFac.Size = New System.Drawing.Size(62, 30)
-        Me.cmdAveFac.TabIndex = 155
-        Me.cmdAveFac.Text = "ave_fac"
-        Me.cmdAveFac.UseVisualStyleBackColor = True
-        '
-        'cmdAve
-        '
-        Me.cmdAve.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdAve.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAve.Location = New System.Drawing.Point(2, 14)
-        Me.cmdAve.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdAve.Name = "cmdAve"
-        Me.cmdAve.Size = New System.Drawing.Size(62, 30)
-        Me.cmdAve.TabIndex = 148
-        Me.cmdAve.Text = "ave"
-        Me.cmdAve.UseVisualStyleBackColor = True
-        '
-        'cmdCssq
-        '
-        Me.cmdCssq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCssq.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCssq.Location = New System.Drawing.Point(124, 43)
-        Me.cmdCssq.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdCssq.Name = "cmdCssq"
-        Me.cmdCssq.Size = New System.Drawing.Size(62, 30)
-        Me.cmdCssq.TabIndex = 160
-        Me.cmdCssq.Text = "cssq"
-        Me.cmdCssq.UseVisualStyleBackColor = True
-        '
-        'cmdFunctionsSsqSession
-        '
-        Me.cmdFunctionsSsqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFunctionsSsqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFunctionsSsqSession.Location = New System.Drawing.Point(63, 43)
-        Me.cmdFunctionsSsqSession.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFunctionsSsqSession.Name = "cmdFunctionsSsqSession"
-        Me.cmdFunctionsSsqSession.Size = New System.Drawing.Size(62, 30)
-        Me.cmdFunctionsSsqSession.TabIndex = 158
-        Me.cmdFunctionsSsqSession.Text = "ssq*"
-        Me.cmdFunctionsSsqSession.UseVisualStyleBackColor = True
-        '
-        'cmdFunctionsSsq
-        '
-        Me.cmdFunctionsSsq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdFunctionsSsq.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFunctionsSsq.Location = New System.Drawing.Point(2, 43)
-        Me.cmdFunctionsSsq.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFunctionsSsq.Name = "cmdFunctionsSsq"
-        Me.cmdFunctionsSsq.Size = New System.Drawing.Size(62, 30)
-        Me.cmdFunctionsSsq.TabIndex = 157
-        Me.cmdFunctionsSsq.Text = "ssq"
-        Me.cmdFunctionsSsq.UseVisualStyleBackColor = True
-        '
-        'cmdAveFun
-        '
-        Me.cmdAveFun.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdAveFun.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAveFun.Location = New System.Drawing.Point(63, 14)
-        Me.cmdAveFun.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdAveFun.Name = "cmdAveFun"
-        Me.cmdAveFun.Size = New System.Drawing.Size(62, 30)
-        Me.cmdAveFun.TabIndex = 153
-        Me.cmdAveFun.Text = "ave_fun"
-        Me.cmdAveFun.UseVisualStyleBackColor = True
         '
         'grpMathBloc
         '
@@ -7915,6 +7605,37 @@ Partial Class ucrCalculator
         Me.cmdListSort.Text = "sort"
         Me.cmdListSort.UseVisualStyleBackColor = True
         '
+        'ContextMenuStripFunctions
+        '
+        Me.ContextMenuStripFunctions.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.ContextMenuStripFunctions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MASSFunctionsToolStripMenuItem1, Me.PolynomToolStripMenuItem, Me.StatsToolStripMenuItem1, Me.UtilsToolStripMenuItem1})
+        Me.ContextMenuStripFunctions.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripFunctions.Size = New System.Drawing.Size(123, 92)
+        '
+        'MASSFunctionsToolStripMenuItem1
+        '
+        Me.MASSFunctionsToolStripMenuItem1.Name = "MASSFunctionsToolStripMenuItem1"
+        Me.MASSFunctionsToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
+        Me.MASSFunctionsToolStripMenuItem1.Text = "MASS"
+        '
+        'PolynomToolStripMenuItem
+        '
+        Me.PolynomToolStripMenuItem.Name = "PolynomToolStripMenuItem"
+        Me.PolynomToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.PolynomToolStripMenuItem.Text = "polynom"
+        '
+        'StatsToolStripMenuItem1
+        '
+        Me.StatsToolStripMenuItem1.Name = "StatsToolStripMenuItem1"
+        Me.StatsToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
+        Me.StatsToolStripMenuItem1.Text = "stats"
+        '
+        'UtilsToolStripMenuItem1
+        '
+        Me.UtilsToolStripMenuItem1.Name = "UtilsToolStripMenuItem1"
+        Me.UtilsToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
+        Me.UtilsToolStripMenuItem1.Text = "utils"
+        '
         'cmdRhelpList
         '
         Me.cmdRhelpList.AutoSize = True
@@ -8010,43 +7731,320 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'ContextMenuStripFunctions
+        'grpFunctions
         '
-        Me.ContextMenuStripFunctions.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ContextMenuStripFunctions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MASSFunctionsToolStripMenuItem1, Me.PolynomToolStripMenuItem, Me.StatsToolStripMenuItem1, Me.UtilsToolStripMenuItem1})
-        Me.ContextMenuStripFunctions.Name = "ContextMenuStrip1"
-        Me.ContextMenuStripFunctions.Size = New System.Drawing.Size(123, 92)
+        Me.grpFunctions.Controls.Add(Me.cmdDecimals)
+        Me.grpFunctions.Controls.Add(Me.cmdMASSFractions)
+        Me.grpFunctions.Controls.Add(Me.cmdRHelpFunctions)
+        Me.grpFunctions.Controls.Add(Me.cmdPascal)
+        Me.grpFunctions.Controls.Add(Me.cmdDssq)
+        Me.grpFunctions.Controls.Add(Me.cmddssqSession)
+        Me.grpFunctions.Controls.Add(Me.cmdCoeffs2)
+        Me.grpFunctions.Controls.Add(Me.cmdCoef)
+        Me.grpFunctions.Controls.Add(Me.cmdCombn)
+        Me.grpFunctions.Controls.Add(Me.cmdProd)
+        Me.grpFunctions.Controls.Add(Me.cmdCoeffs)
+        Me.grpFunctions.Controls.Add(Me.cmdRoots)
+        Me.grpFunctions.Controls.Add(Me.cmdOrigin)
+        Me.grpFunctions.Controls.Add(Me.cmdPlynomial)
+        Me.grpFunctions.Controls.Add(Me.cmdCssqSession)
+        Me.grpFunctions.Controls.Add(Me.cmdDsum)
+        Me.grpFunctions.Controls.Add(Me.cmdAveBoth)
+        Me.grpFunctions.Controls.Add(Me.cmdAveFac)
+        Me.grpFunctions.Controls.Add(Me.cmdAve)
+        Me.grpFunctions.Controls.Add(Me.cmdCssq)
+        Me.grpFunctions.Controls.Add(Me.cmdFunctionsSsqSession)
+        Me.grpFunctions.Controls.Add(Me.cmdFunctionsSsq)
+        Me.grpFunctions.Controls.Add(Me.cmdAveFun)
+        Me.grpFunctions.Location = New System.Drawing.Point(437, 60)
+        Me.grpFunctions.Margin = New System.Windows.Forms.Padding(2)
+        Me.grpFunctions.Name = "grpFunctions"
+        Me.grpFunctions.Padding = New System.Windows.Forms.Padding(2)
+        Me.grpFunctions.Size = New System.Drawing.Size(250, 193)
+        Me.grpFunctions.TabIndex = 216
+        Me.grpFunctions.TabStop = False
+        Me.grpFunctions.Text = "Functions"
         '
-        'MASSFunctionsToolStripMenuItem1
+        'cmdDecimals
         '
-        Me.MASSFunctionsToolStripMenuItem1.Name = "MASSFunctionsToolStripMenuItem1"
-        Me.MASSFunctionsToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
-        Me.MASSFunctionsToolStripMenuItem1.Text = "MASS"
+        Me.cmdDecimals.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDecimals.Location = New System.Drawing.Point(124, 130)
+        Me.cmdDecimals.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDecimals.Name = "cmdDecimals"
+        Me.cmdDecimals.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDecimals.TabIndex = 220
+        Me.cmdDecimals.Text = "decimals"
+        Me.cmdDecimals.UseVisualStyleBackColor = True
         '
-        'PolynomToolStripMenuItem
+        'cmdMASSFractions
         '
-        Me.PolynomToolStripMenuItem.Name = "PolynomToolStripMenuItem"
-        Me.PolynomToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
-        Me.PolynomToolStripMenuItem.Text = "polynom"
+        Me.cmdMASSFractions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMASSFractions.Location = New System.Drawing.Point(185, 130)
+        Me.cmdMASSFractions.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdMASSFractions.Name = "cmdMASSFractions"
+        Me.cmdMASSFractions.Size = New System.Drawing.Size(62, 30)
+        Me.cmdMASSFractions.TabIndex = 219
+        Me.cmdMASSFractions.Text = "fractions"
+        Me.cmdMASSFractions.UseVisualStyleBackColor = True
         '
-        'StatsToolStripMenuItem1
+        'cmdRHelpFunctions
         '
-        Me.StatsToolStripMenuItem1.Name = "StatsToolStripMenuItem1"
-        Me.StatsToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
-        Me.StatsToolStripMenuItem1.Text = "stats"
+        Me.cmdRHelpFunctions.AutoSize = True
+        Me.cmdRHelpFunctions.ContextMenuStrip = Me.ContextMenuStripList
+        Me.cmdRHelpFunctions.Location = New System.Drawing.Point(175, 160)
+        Me.cmdRHelpFunctions.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdRHelpFunctions.Name = "cmdRHelpFunctions"
+        Me.cmdRHelpFunctions.Size = New System.Drawing.Size(68, 23)
+        Me.cmdRHelpFunctions.SplitMenuStrip = Me.ContextMenuStripList
+        Me.cmdRHelpFunctions.TabIndex = 218
+        Me.cmdRHelpFunctions.Text = "R Help"
+        Me.cmdRHelpFunctions.UseVisualStyleBackColor = True
         '
-        'UtilsToolStripMenuItem1
+        'cmdPascal
         '
-        Me.UtilsToolStripMenuItem1.Name = "UtilsToolStripMenuItem1"
-        Me.UtilsToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
-        Me.UtilsToolStripMenuItem1.Text = "utils"
+        Me.cmdPascal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdPascal.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPascal.Location = New System.Drawing.Point(63, 130)
+        Me.cmdPascal.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPascal.Name = "cmdPascal"
+        Me.cmdPascal.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPascal.TabIndex = 217
+        Me.cmdPascal.Text = "pascal"
+        Me.cmdPascal.UseVisualStyleBackColor = True
+        '
+        'cmdDssq
+        '
+        Me.cmdDssq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdDssq.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDssq.Location = New System.Drawing.Point(2, 159)
+        Me.cmdDssq.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDssq.Name = "cmdDssq"
+        Me.cmdDssq.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDssq.TabIndex = 177
+        Me.cmdDssq.Text = "dssq"
+        Me.cmdDssq.UseVisualStyleBackColor = True
+        '
+        'cmddssqSession
+        '
+        Me.cmddssqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmddssqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmddssqSession.Location = New System.Drawing.Point(63, 159)
+        Me.cmddssqSession.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmddssqSession.Name = "cmddssqSession"
+        Me.cmddssqSession.Size = New System.Drawing.Size(62, 30)
+        Me.cmddssqSession.TabIndex = 178
+        Me.cmddssqSession.Text = "dssq*"
+        Me.cmddssqSession.UseVisualStyleBackColor = True
+        '
+        'cmdCoeffs2
+        '
+        Me.cmdCoeffs2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCoeffs2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCoeffs2.Location = New System.Drawing.Point(185, 101)
+        Me.cmdCoeffs2.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCoeffs2.Name = "cmdCoeffs2"
+        Me.cmdCoeffs2.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCoeffs2.TabIndex = 175
+        Me.cmdCoeffs2.Text = "coeffs2"
+        Me.cmdCoeffs2.UseVisualStyleBackColor = True
+        '
+        'cmdCoef
+        '
+        Me.cmdCoef.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCoef.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCoef.Location = New System.Drawing.Point(124, 101)
+        Me.cmdCoef.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCoef.Name = "cmdCoef"
+        Me.cmdCoef.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCoef.TabIndex = 174
+        Me.cmdCoef.Text = "coef"
+        Me.cmdCoef.UseVisualStyleBackColor = True
+        '
+        'cmdCombn
+        '
+        Me.cmdCombn.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCombn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCombn.Location = New System.Drawing.Point(63, 101)
+        Me.cmdCombn.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCombn.Name = "cmdCombn"
+        Me.cmdCombn.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCombn.TabIndex = 173
+        Me.cmdCombn.Text = "combn"
+        Me.cmdCombn.UseVisualStyleBackColor = True
+        '
+        'cmdProd
+        '
+        Me.cmdProd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdProd.Location = New System.Drawing.Point(2, 101)
+        Me.cmdProd.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdProd.Name = "cmdProd"
+        Me.cmdProd.Size = New System.Drawing.Size(62, 30)
+        Me.cmdProd.TabIndex = 172
+        Me.cmdProd.Text = "prod"
+        Me.cmdProd.UseVisualStyleBackColor = True
+        '
+        'cmdCoeffs
+        '
+        Me.cmdCoeffs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCoeffs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCoeffs.Location = New System.Drawing.Point(185, 72)
+        Me.cmdCoeffs.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCoeffs.Name = "cmdCoeffs"
+        Me.cmdCoeffs.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCoeffs.TabIndex = 170
+        Me.cmdCoeffs.Text = "coeffs"
+        Me.cmdCoeffs.UseVisualStyleBackColor = True
+        '
+        'cmdRoots
+        '
+        Me.cmdRoots.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdRoots.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRoots.Location = New System.Drawing.Point(124, 72)
+        Me.cmdRoots.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdRoots.Name = "cmdRoots"
+        Me.cmdRoots.Size = New System.Drawing.Size(62, 30)
+        Me.cmdRoots.TabIndex = 169
+        Me.cmdRoots.Text = "roots"
+        Me.cmdRoots.UseVisualStyleBackColor = True
+        '
+        'cmdOrigin
+        '
+        Me.cmdOrigin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdOrigin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOrigin.Location = New System.Drawing.Point(63, 72)
+        Me.cmdOrigin.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdOrigin.Name = "cmdOrigin"
+        Me.cmdOrigin.Size = New System.Drawing.Size(62, 30)
+        Me.cmdOrigin.TabIndex = 168
+        Me.cmdOrigin.Text = "origin"
+        Me.cmdOrigin.UseVisualStyleBackColor = True
+        '
+        'cmdPlynomial
+        '
+        Me.cmdPlynomial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdPlynomial.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlynomial.Location = New System.Drawing.Point(2, 72)
+        Me.cmdPlynomial.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlynomial.Name = "cmdPlynomial"
+        Me.cmdPlynomial.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPlynomial.TabIndex = 167
+        Me.cmdPlynomial.Text = " plynomial"
+        Me.cmdPlynomial.UseVisualStyleBackColor = True
+        '
+        'cmdCssqSession
+        '
+        Me.cmdCssqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCssqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCssqSession.Location = New System.Drawing.Point(185, 43)
+        Me.cmdCssqSession.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCssqSession.Name = "cmdCssqSession"
+        Me.cmdCssqSession.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCssqSession.TabIndex = 162
+        Me.cmdCssqSession.Text = "cssq*"
+        Me.cmdCssqSession.UseVisualStyleBackColor = True
+        '
+        'cmdDsum
+        '
+        Me.cmdDsum.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdDsum.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDsum.Location = New System.Drawing.Point(2, 130)
+        Me.cmdDsum.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDsum.Name = "cmdDsum"
+        Me.cmdDsum.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDsum.TabIndex = 154
+        Me.cmdDsum.Text = "dsum"
+        Me.cmdDsum.UseVisualStyleBackColor = True
+        '
+        'cmdAveBoth
+        '
+        Me.cmdAveBoth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdAveBoth.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAveBoth.Location = New System.Drawing.Point(185, 14)
+        Me.cmdAveBoth.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdAveBoth.Name = "cmdAveBoth"
+        Me.cmdAveBoth.Size = New System.Drawing.Size(62, 30)
+        Me.cmdAveBoth.TabIndex = 156
+        Me.cmdAveBoth.Text = "ave_both"
+        Me.cmdAveBoth.UseVisualStyleBackColor = True
+        '
+        'cmdAveFac
+        '
+        Me.cmdAveFac.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdAveFac.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAveFac.Location = New System.Drawing.Point(124, 14)
+        Me.cmdAveFac.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdAveFac.Name = "cmdAveFac"
+        Me.cmdAveFac.Size = New System.Drawing.Size(62, 30)
+        Me.cmdAveFac.TabIndex = 155
+        Me.cmdAveFac.Text = "ave_fac"
+        Me.cmdAveFac.UseVisualStyleBackColor = True
+        '
+        'cmdAve
+        '
+        Me.cmdAve.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdAve.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAve.Location = New System.Drawing.Point(2, 14)
+        Me.cmdAve.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdAve.Name = "cmdAve"
+        Me.cmdAve.Size = New System.Drawing.Size(62, 30)
+        Me.cmdAve.TabIndex = 148
+        Me.cmdAve.Text = "ave"
+        Me.cmdAve.UseVisualStyleBackColor = True
+        '
+        'cmdCssq
+        '
+        Me.cmdCssq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCssq.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCssq.Location = New System.Drawing.Point(124, 43)
+        Me.cmdCssq.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCssq.Name = "cmdCssq"
+        Me.cmdCssq.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCssq.TabIndex = 160
+        Me.cmdCssq.Text = "cssq"
+        Me.cmdCssq.UseVisualStyleBackColor = True
+        '
+        'cmdFunctionsSsqSession
+        '
+        Me.cmdFunctionsSsqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFunctionsSsqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFunctionsSsqSession.Location = New System.Drawing.Point(63, 43)
+        Me.cmdFunctionsSsqSession.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFunctionsSsqSession.Name = "cmdFunctionsSsqSession"
+        Me.cmdFunctionsSsqSession.Size = New System.Drawing.Size(62, 30)
+        Me.cmdFunctionsSsqSession.TabIndex = 158
+        Me.cmdFunctionsSsqSession.Text = "ssq*"
+        Me.cmdFunctionsSsqSession.UseVisualStyleBackColor = True
+        '
+        'cmdFunctionsSsq
+        '
+        Me.cmdFunctionsSsq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdFunctionsSsq.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFunctionsSsq.Location = New System.Drawing.Point(2, 43)
+        Me.cmdFunctionsSsq.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFunctionsSsq.Name = "cmdFunctionsSsq"
+        Me.cmdFunctionsSsq.Size = New System.Drawing.Size(62, 30)
+        Me.cmdFunctionsSsq.TabIndex = 157
+        Me.cmdFunctionsSsq.Text = "ssq"
+        Me.cmdFunctionsSsq.UseVisualStyleBackColor = True
+        '
+        'cmdAveFun
+        '
+        Me.cmdAveFun.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdAveFun.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAveFun.Location = New System.Drawing.Point(63, 14)
+        Me.cmdAveFun.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdAveFun.Name = "cmdAveFun"
+        Me.cmdAveFun.Size = New System.Drawing.Size(62, 30)
+        Me.cmdAveFun.TabIndex = 153
+        Me.cmdAveFun.Text = "ave_fun"
+        Me.cmdAveFun.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.Controls.Add(Me.grpList)
         Me.Controls.Add(Me.cmdRhelpList)
         Me.Controls.Add(Me.cmdWakefieldHelp)
         Me.Controls.Add(Me.cmdStringRHelp)
@@ -8058,11 +8056,13 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
+        Me.Controls.Add(Me.grpList)
         Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpModifier)
         Me.Controls.Add(Me.grpSymbols)
-        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpWakefield)
+        Me.Controls.Add(Me.grpFunctions)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpHydroGOF)
@@ -8120,11 +8120,11 @@ Partial Class ucrCalculator
         Me.ContextMenuStripWakefield.ResumeLayout(False)
         Me.ContextMenuStripList.ResumeLayout(False)
         Me.grpList.ResumeLayout(False)
-        Me.grpFunctions.ResumeLayout(False)
-        Me.grpFunctions.PerformLayout
         Me.grpMathBloc.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.ContextMenuStripFunctions.ResumeLayout(False)
+        Me.grpFunctions.ResumeLayout(False)
+        Me.grpFunctions.PerformLayout
         Me.ResumeLayout(False)
         Me.PerformLayout
 
@@ -8722,7 +8722,18 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCalcRepelicationFunction As Button
     Friend WithEvents cmdCalcSequenceFunction As Button
     Friend WithEvents cmdCalcConcantenateFunction As Button
+    Friend WithEvents ContextMenuStripFunctions As ContextMenuStrip
+    Friend WithEvents MASSFunctionsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents PolynomToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StatsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents UtilsToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents grpFunctions As GroupBox
+    Friend WithEvents cmdDecimals As Button
+    Friend WithEvents cmdMASSFractions As Button
+    Friend WithEvents cmdRHelpFunctions As ucrSplitButton
+    Friend WithEvents cmdPascal As Button
+    Friend WithEvents cmdDssq As Button
+    Friend WithEvents cmddssqSession As Button
     Friend WithEvents cmdCoeffs2 As Button
     Friend WithEvents cmdCoef As Button
     Friend WithEvents cmdCombn As Button
@@ -8740,15 +8751,4 @@ Partial Class ucrCalculator
     Friend WithEvents cmdFunctionsSsqSession As Button
     Friend WithEvents cmdFunctionsSsq As Button
     Friend WithEvents cmdAveFun As Button
-    Friend WithEvents cmdDssq As Button
-    Friend WithEvents cmddssqSession As Button
-    Friend WithEvents cmdPascal As Button
-    Friend WithEvents cmdRHelpFunctions As ucrSplitButton
-    Friend WithEvents cmdDecimals As Button
-    Friend WithEvents cmdMASSFractions As Button
-    Friend WithEvents ContextMenuStripFunctions As ContextMenuStrip
-    Friend WithEvents MASSFunctionsToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents PolynomToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents StatsToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents UtilsToolStripMenuItem1 As ToolStripMenuItem
 End Class

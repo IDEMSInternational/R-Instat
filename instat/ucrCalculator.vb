@@ -471,7 +471,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdProd, "The product of the values. So prod(c(1,2,3,4,10)) = 240")
         ttCalculator.SetToolTip(cmdCombn, "combn(c(-2,1,3,4), 2,FUN=prod) gives the products of the values 3 at a time, so (-213), (-214), (-234), (134), = -6, -12, -24, 12. (result usually put into output window)")
         ttCalculator.SetToolTip(cmdCoef, "single coefficient of a polynomial if given roots. So sum(combn(c(-2,1,3,4),3. FUN=prod) =(-6 -12-24 +12) = -26")
-        '  ttCalculator.SetToolTip(cmdCoeffs2, "Shuffle the order of the factor levels")
+        '  To add ttCalculator.SetToolTip(cmdCoeffs2, "Shuffle the order of the factor levels")
         ttCalculator.SetToolTip(cmdDsum, "Gives the sum of the digits in a numeric variable")
         ttCalculator.SetToolTip(cmdDssq, " Gives the ssq of the digits in a numeric variable. For example with c(12, 24, 86) gives (5, 20, 100)")
         ttCalculator.SetToolTip(cmddssqSession, "Gives digit sum of squares, but only if the library calculator code has been run in the current sesion")
@@ -5771,7 +5771,7 @@ Public Class ucrCalculator
     End Sub
 
     'Functions keyboard
-    Private Sub cmdAve_Click(sender As Object, e As EventArgs) Handles cmdAve.Click
+    Private Sub cmdAve_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= )", 2)
         Else
@@ -5779,7 +5779,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdAveFun_Click(sender As Object, e As EventArgs) Handles cmdAveFun.Click
+    Private Sub cmdAveFun_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= ,FUN=function(x) mean(x, na.rm=TRUE))", 12)
         Else
@@ -5787,7 +5787,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdAveFac_Click(sender As Object, e As EventArgs) Handles cmdAveFac.Click
+    Private Sub cmdAveFac_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= ,)", 6)
         Else
@@ -5795,7 +5795,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdAveBoth_Click(sender As Object, e As EventArgs) Handles cmdAveBoth.Click
+    Private Sub cmdAveBoth_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
         Else
@@ -5803,7 +5803,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdFunctionsSsq_Click(sender As Object, e As EventArgs) Handles cmdFunctionsSsq.Click
+    Private Sub cmdFunctionsSsq_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= ,FUN= function(x) sum(x*x,na.rm=TRUE))", 22)
         Else
@@ -5811,7 +5811,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdFunctionsSsqSession_Click(sender As Object, e As EventArgs) Handles cmdFunctionsSsqSession.Click
+    Private Sub cmdFunctionsSsqSession_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ssq(x= )", 2)
         Else
@@ -5819,7 +5819,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdCssq_Click(sender As Object, e As EventArgs) Handles cmdCssq.Click
+    Private Sub cmdCssq_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= ,FUN=function(x) sum((x - mean(x,na.rm=TRUE))^2,na.rm=TRUE))", 26)
         Else
@@ -5827,7 +5827,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdCssqSession_Click(sender As Object, e As EventArgs) Handles cmdCssqSession.Click
+    Private Sub cmdCssqSession_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cssq( )", 1)
         Else
@@ -5835,7 +5835,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdPlynomial_Click(sender As Object, e As EventArgs) Handles cmdPlynomial.Click
+    Private Sub cmdPlynomial_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::polynomial(coef= )", 4)
         Else
@@ -5843,7 +5843,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdOrigin_Click(sender As Object, e As EventArgs) Handles cmdOrigin.Click
+    Private Sub cmdOrigin_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(  p= ,o= )", 6)
         Else
@@ -5851,7 +5851,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdRoots_Click(sender As Object, e As EventArgs) Handles cmdRoots.Click
+    Private Sub cmdRoots_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" c(polyroot(z= ),NA) ", 6)
         Else
@@ -5859,7 +5859,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdCoeffs_Click(sender As Object, e As EventArgs) Handles cmdCoeffs.Click
+    Private Sub cmdCoeffs_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
         Else
@@ -5867,7 +5867,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdProd_Click(sender As Object, e As EventArgs) Handles cmdProd.Click
+    Private Sub cmdProd_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
         Else
@@ -5875,7 +5875,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdCombn_Click(sender As Object, e As EventArgs) Handles cmdCombn.Click
+    Private Sub cmdCombn_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
         Else
@@ -5883,7 +5883,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdCoef_Click(sender As Object, e As EventArgs) Handles cmdCoef.Click
+    Private Sub cmdCoef_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
         Else
@@ -5899,7 +5899,7 @@ Public Class ucrCalculator
     '    End If
     'End Sub
 
-    Private Sub cmdDsum_Click(sender As Object, e As EventArgs) Handles cmdDsum.Click
+    Private Sub cmdDsum_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
         Else
@@ -5907,7 +5907,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdDssqSession_Click(sender As Object, e As EventArgs) Handles cmddssqSession.Click
+    Private Sub cmdDssqSession_Click(sender As Object, e As EventArgs)
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dssq(x= )", 2)
         Else
@@ -5915,11 +5915,11 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdDssq_Click(sender As Object, e As EventArgs) Handles cmdDssq.Click
+    Private Sub cmdDssq_Click(sender As Object, e As EventArgs)
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( ,function(n){a<-as.integer(c(strsplit(as.character(n),split="")[[1]])); sum(a^2)})", 26)
     End Sub
 
-    Private Sub cmdRHelpFunctions_Click(sender As Object, e As EventArgs) Handles cmdRHelpFunctions.Click
+    Private Sub cmdRHelpFunctions_Click(sender As Object, e As EventArgs)
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Functions" Then
             strPackageName = "MASS"
