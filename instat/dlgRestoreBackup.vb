@@ -26,25 +26,39 @@ Public Class dlgRestoreBackup
     Private strScript As String
     Private strLoadDateFilePath As String
     Private bUserClose As Boolean = True
+    Private clsDummyFunction As New RFunction
     Private strAutoSaveDataFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_data_auto_save")
     Private strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
     Private strAutoSaveInternalLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_debug_log_auto_save")
     Private bReset As Boolean = True
+    Private bFirstload As Boolean = True
 
     Private Sub dlgRestoreBackup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstload Then
+            InitialiseDialog()
+            bFirstload = False
+        End If
         If bReset Then
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        ReopenDialog()
         bReset = False
+        autoTranslate(Me)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 411
+
+        ucrChkShowDataFile.Checked = False
+        ucrChkShowInternalLogFile.Checked = False
+        ucrChkShowLogFile.Checked = False
+
         'temporary - not yet implemented
         ucrChkSendInternalLog.Visible = False
-        ucrInputSavedPathData.Visible = ucrChkShowDataFile.Checked
-        ucrInputSavedPathLog.Visible = ucrChkShowLogFile.Checked
-        ucrInputSavedPathInternalLog.Visible = ucrChkShowInternalLogFile.Checked
-        rdoNeither.Checked = True
+        ucrInputSavedPathData.Visible = False
+        ucrInputSavedPathLog.Visible = False
+        ucrInputSavedPathInternalLog.Visible = False
 
         If (Directory.Exists(strAutoSaveLogFolderPath)) Then
             strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
@@ -95,35 +109,31 @@ Public Class dlgRestoreBackup
         ucrPnlRecoveryOption.AddRadioButton(rdoRunBackupLog)
         ucrPnlRecoveryOption.AddRadioButton(rdoNeither)
 
-        ucrPnlRecoveryOption.AddFunctionNamesCondition(rdoLoadBackupData, "Load_Backup")
-        ucrPnlRecoveryOption.AddFunctionNamesCondition(rdoRunBackupLog, "Run_Backup")
-        ucrPnlRecoveryOption.AddFunctionNamesCondition(rdoNeither, "Neither")
-        rdoNeither.Enabled = True
-        autoTranslate(Me)
-        TestOKEnabled()
-
+        ucrPnlRecoveryOption.AddParameterValuesCondition(rdoLoadBackupData, "backup", "data")
+        ucrPnlRecoveryOption.AddParameterValuesCondition(rdoRunBackupLog, "backup", "log")
+        ucrPnlRecoveryOption.AddParameterValuesCondition(rdoNeither, "backup", "neither")
     End Sub
 
     Private Sub SetDefaults()
-        ReopenDialog()
-        rdoNeither.Checked = True
-        ucrInputSavedPathData.IsEmpty()
-        ucrInputSavedPathLog.IsEmpty()
-        ucrInputSavedPathInternalLog.IsEmpty()
-        rdoRunBackupLog.Refresh()
-        rdoLoadBackupData.Refresh()
+        ucrInputSavedPathData.Clear()
+        ucrInputSavedPathLog.Clear()
+        ucrInputSavedPathInternalLog.Clear()
+        ucrChkShowDataFile.Checked = False
+        ucrChkShowLogFile.Checked = False
+        ucrChkSendInternalLog.Checked = False
+        clsDummyFunction.AddParameter("backup", "neither")
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputSavedPathData.SetPathControlRcode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputSavedPathLog.SetPathControlRcode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        TestOKEnabled()
+        ucrPnlRecoveryOption.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub SaveFiles()
         If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedDataFilePaths(0)) Then
             Try
-                If Not ucrInputSavedPathData.IsEmpty() Then
+                If Not ucrInputSavedPathData.IsEmpty() AndAlso ucrChkShowDataFile.Checked Then
                     File.Copy(strAutoSavedDataFilePaths(0), ucrInputSavedPathData.FilePath(), True)
                 End If
             Catch ex As Exception
@@ -132,7 +142,7 @@ Public Class dlgRestoreBackup
         End If
         If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedLogFilePaths(0)) Then
             Try
-                If Not ucrInputSavedPathLog.IsEmpty() Then
+                If Not ucrInputSavedPathLog.IsEmpty() AndAlso ucrChkShowLogFile.Checked Then
                     File.Copy(strAutoSavedLogFilePaths(0), ucrInputSavedPathLog.FilePath(), True)
                 End If
             Catch ex As Exception
@@ -141,7 +151,7 @@ Public Class dlgRestoreBackup
         End If
         If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedInternalLogFilePaths(0)) Then
             Try
-                If Not ucrInputSavedPathInternalLog.IsEmpty() Then
+                If Not ucrInputSavedPathInternalLog.IsEmpty() AndAlso ucrChkSendInternalLog.Checked Then
                     File.Copy(strAutoSavedInternalLogFilePaths(0), ucrInputSavedPathInternalLog.FilePath(), True)
                 End If
             Catch ex As Exception
@@ -151,12 +161,7 @@ Public Class dlgRestoreBackup
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoRunBackupLog.Checked OrElse rdoLoadBackupData.Checked OrElse rdoNeither.Checked Then
-            ucrBase.OKEnabled(True)
-            bUserClose = False
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(rdoRunBackupLog.Checked OrElse rdoLoadBackupData.Checked OrElse rdoNeither.Checked)
     End Sub
 
     Private Sub ucrChkShowDataFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowLogFile.ControlValueChanged, ucrChkShowInternalLogFile.ControlValueChanged, ucrChkShowDataFile.ControlValueChanged
@@ -176,9 +181,10 @@ Public Class dlgRestoreBackup
                     MsgBox("Could not read log file." & Environment.NewLine & ex.Message, "Cannot read file")
                 End Try
             End If
+            clsDummyFunction.AddParameter("backup", "log")
         ElseIf rdoLoadBackupData.Checked Then
             strLoadDateFilePath = strAutoSavedDataFilePaths(0)
-            bUserClose = False
+            clsDummyFunction.AddParameter("backup", "data")
         End If
 
         TestOKEnabled()
@@ -199,12 +205,6 @@ Public Class dlgRestoreBackup
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-    End Sub
-
-    Private Sub ReopenDialog()
-        ucrChkShowDataFile.Checked = False
-        ucrChkShowInternalLogFile.Checked = False
-        ucrChkShowLogFile.Checked = False
     End Sub
 
     Private Sub GetRecoveryFiles(strRScripts As String, strDataFilePath As String)

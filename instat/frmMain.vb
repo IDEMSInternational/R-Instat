@@ -1068,9 +1068,9 @@ Public Class frmMain
                     If clsInstatOptions IsNot Nothing Then
                         SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
                     End If
-                    DeleteAutoSaveData()
-                    DeleteAutoSaveLog()
-                    DeleteAutoSaveDebugLog()
+                    'DeleteAutoSaveData()
+                    'DeleteAutoSaveLog()
+                    'DeleteAutoSaveDebugLog()
                     clsRLink.CloseREngine()
                 End If
 
