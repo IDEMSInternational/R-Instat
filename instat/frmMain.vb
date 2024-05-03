@@ -499,13 +499,13 @@ Public Class frmMain
             End Try
         End If
 
-        If strAutoSavedDataFilePaths.Length > 1 Then
-            Try
-                File.Delete(strAutoSavedDataFilePaths(1))
-            Catch ex As Exception
-                MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
-            End Try
-        End If
+        'If strAutoSavedDataFilePaths.Length > 1 Then
+        '    Try
+        '        ' File.Delete(strAutoSavedDataFilePaths(1))
+        '    Catch ex As Exception
+        '        MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+        '    End Try
+        'End If
         '---------------------------------------
 
     End Sub
@@ -1098,14 +1098,11 @@ Public Class frmMain
             If Not Directory.Exists(strAutoSaveDataFolderPath) Then
                 Directory.CreateDirectory(strAutoSaveDataFolderPath)
             End If
-            If strCurrentAutoSaveDataFilePath = "" Then
-                strTempFile = "data.rds"
-                While File.Exists(Path.Combine(strAutoSaveDataFolderPath, strTempFile))
-                    i = i + 1
-                    strTempFile = "data" & i & ".rds"
-                End While
-                strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
-            End If
+
+            ' Generate a unique filename with timestamp
+            strTempFile = "data_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".rds"
+            strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
+
             Dim strBackupMessage As String = $"##########{vbCrLf}## Backing up data and log files on: {DateTime.Now}{vbCrLf}##########"
             Me.ucrScriptWindow.LogText(strBackupMessage)
             clsRLink.AppendToAutoSaveLog(strBackupMessage)

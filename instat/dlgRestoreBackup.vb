@@ -175,16 +175,21 @@ Public Class dlgRestoreBackup
         strLoadDateFilePath = ""
         If rdoRunBackupLog.Checked Then
             If File.Exists(strAutoSavedLogFilePaths(0)) Then
-                Try
-                    strScript = File.ReadAllText(strAutoSavedLogFilePaths(0))
-                Catch ex As Exception
-                    MsgBox("Could not read log file." & Environment.NewLine & ex.Message, "Cannot read file")
-                End Try
+                'Retrieve the latest autosaved file based on the stored timestamp
+                Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveDataFolderPath)
+                Dim strLatestLogFile As FileInfo = autoSaveDirectory.GetFiles("log_*.R").OrderByDescending(Function(f) f.LastWriteTime).FirstOrDefault()
+                strScript = strLatestLogFile.FullName
             End If
             clsDummyFunction.AddParameter("backup", "log")
         ElseIf rdoLoadBackupData.Checked Then
-            strLoadDateFilePath = strAutoSavedDataFilePaths(0)
+            'Retrieve the latest autosaved file based on the stored timestamp
+            Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveDataFolderPath)
+            Dim strLatestDataFile As FileInfo = autoSaveDirectory.GetFiles("data_*.rds").OrderByDescending(Function(f) f.LastWriteTime).FirstOrDefault()
+
+            strLoadDateFilePath = strLatestDataFile.FullName
             clsDummyFunction.AddParameter("backup", "data")
+        Else
+            clsDummyFunction.AddParameter("backup", "neither")
         End If
 
         TestOKEnabled()
@@ -215,7 +220,7 @@ Public Class dlgRestoreBackup
                         frmMain.clsRLink.GetImportRDSRScript(strDataFilePath, False)
         End If
 
-        ''execute the R-Instat set up R scripts
+        'execute the R-Instat set up R scripts
         If Not String.IsNullOrEmpty(strRScripts) Then
             For Each strLine As String In strRScripts.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
                 frmMain.clsRLink.RunScript(strScript:=strLine.Trim(), bSeparateThread:=True, bSilent:=True)
