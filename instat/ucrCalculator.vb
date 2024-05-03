@@ -61,7 +61,7 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Transform", "Summary", "Probability", "Factor", "Text/Strings (Character Columns)", "Dates/Times", "Circular", "Wakefield", "Goodness of Fit", "List", "Complex", "Integer"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Functions", "Maths", "Logical and Symbols", "Transform", "Summary", "Probability", "Factor", "Text/Strings (Character Columns)", "Dates/Times", "Circular", "Wakefield", "Goodness of Fit", "List", "Complex", "Integer"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
 
@@ -725,8 +725,33 @@ Public Class ucrCalculator
 
     Private Sub CalculationsOptions()
         Select Case ucrInputCalOptions.GetText
+            Case "Functions"
+                strPackageName = "ave"
+                grpSummary.Visible = False
+                grpMaths.Visible = False
+                grpLogical.Visible = False
+                grpFunctions.Visible = True
+                grpBasic.Visible = True
+                grpTestString.Visible = False
+                grpFactor.Visible = False
+                grpProbabilty.Visible = False
+                grpTransform.Visible = False
+                grpDates.Visible = False
+                grpCircular.Visible = False
+                cmdStringRHelp.Visible = False
+                cmdWakefieldHelp.Visible = False
+                grpWakefield.Visible = False
+                grpModifier.Visible = False
+                grpSymbols.Visible = False
+                grpHydroGOF.Visible = False
+                grpInteger.Visible = False
+                grpComplex.Visible = False
+                grpList.Visible = False
+                cmdRhelpList.Visible = False
+                Me.Size = New Size(iBasicWidth * 1.38, iBaseHeight)
             Case "Maths"
                 strPackageName = "stats"
+                grpFunctions.Visible = False
                 grpSummary.Visible = False
                 grpMaths.Visible = True
                 grpLogical.Visible = False
@@ -750,6 +775,7 @@ Public Class ucrCalculator
                 Me.Size = New Size(iBasicWidth * 1.38, iBaseHeight)
             Case "Logical and Symbols"
                 strPackageName = "base"
+                grpFunctions.Visible = False
                 grpDates.Visible = False
                 grpSummary.Visible = False
                 grpLogical.Visible = True
@@ -773,6 +799,7 @@ Public Class ucrCalculator
                 cmdRhelpList.Visible = False
             Case "Summary"
                 strPackageName = "base"
+                grpFunctions.Visible = False
                 grpDates.Visible = False
                 grpSummary.Visible = True
                 grpLogical.Visible = False
@@ -796,6 +823,7 @@ Public Class ucrCalculator
                 cmdRhelpList.Visible = False
             Case "Text/Strings (Character Columns)"
                 strPackageName = "stringr"
+                grpFunctions.Visible = False
                 grpDates.Visible = False
                 grpTestString.Visible = True
                 grpFactor.Visible = False
@@ -819,6 +847,7 @@ Public Class ucrCalculator
                 Me.Size = New Size(iBasicWidth * 1.42, iBaseHeight)
             Case "Factor"
                 strPackageName = "base"
+                grpFunctions.Visible = False
                 grpFactor.Visible = True
                 grpDates.Visible = False
                 grpSummary.Visible = False
@@ -842,6 +871,7 @@ Public Class ucrCalculator
                 cmdRhelpList.Visible = False
             Case "Probability"
                 strPackageName = "stats"
+                grpFunctions.Visible = False
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
                 grpTestString.Visible = False
@@ -865,6 +895,7 @@ Public Class ucrCalculator
                 Me.Size = New Size(iBasicWidth * 1.57, iBaseHeight)
             Case "Dates/Times"
                 strPackageName = "lubridate"
+                grpFunctions.Visible = False
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
                 grpTestString.Visible = False
@@ -888,6 +919,7 @@ Public Class ucrCalculator
                 Me.Size = New Size(iBasicWidth * 1.32, iBaseHeight)
             Case "Transform"
                 strPackageName = "dplyr"
+                grpFunctions.Visible = False
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -911,6 +943,7 @@ Public Class ucrCalculator
                 Me.Size = New Size(iBasicWidth * 1.47, iBaseHeight)
             Case "Wakefield"
                 strPackageName = "wakefield"
+                grpFunctions.Visible = False
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -934,6 +967,7 @@ Public Class ucrCalculator
                 Me.Size = New Size(iBasicWidth * 1.8, iBaseHeight)
             Case "Circular"
                 strPackageName = "circular"
+                grpFunctions.Visible = False
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -957,6 +991,7 @@ Public Class ucrCalculator
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
             Case "Goodness of Fit"
                 strPackageName = "hydroGOF"
+                grpFunctions.Visible = False
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -980,6 +1015,7 @@ Public Class ucrCalculator
                 Me.Size = New Size(iBasicWidth * 1.27, iBaseHeight)
             Case "Integer"
                 strPackageName = "gmp"
+                grpFunctions.Visible = False
                 grpSummary.Visible = False
                 grpMaths.Visible = False
                 grpLogical.Visible = False
@@ -1003,6 +1039,7 @@ Public Class ucrCalculator
                 Me.Size = New Size(iBasicWidth * 1.5, iBaseHeight)
             Case "List"
                 strPackageName = "base"
+                grpFunctions.Visible = False
                 grpSummary.Visible = False
                 grpMaths.Visible = False
                 grpLogical.Visible = False
@@ -1026,6 +1063,7 @@ Public Class ucrCalculator
                 Me.Size = New Size(iBasicWidth * 1.3, iBaseHeight)
             Case "Complex"
                 strPackageName = "base"
+                grpFunctions.Visible = False
                 grpSummary.Visible = False
                 grpMaths.Visible = False
                 grpLogical.Visible = False
@@ -1048,6 +1086,7 @@ Public Class ucrCalculator
                 cmdRhelpList.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.3, iBaseHeight)
             Case "Basic"
+                grpFunctions.Visible = False
                 grpSummary.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
@@ -1071,6 +1110,7 @@ Public Class ucrCalculator
                 cmdRhelpList.Visible = False
             Case Else
                 grpDates.Visible = False
+                grpFunctions.Visible = False
                 Me.Size = New Size(iBasicWidth, iBaseHeight)
                 grpProbabilty.Visible = False
                 grpSummary.Visible = False
@@ -5728,5 +5768,194 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max( )]", 15)
         End If
+    End Sub
+
+    'Functions keyboard
+    Private Sub cmdAve_Click(sender As Object, e As EventArgs) Handles cmdAve.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdAveFun_Click(sender As Object, e As EventArgs) Handles cmdAveFun.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= ,FUN=function(x) mean(x, na.rm=TRUE))", 12)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave( , FUN=mean)", 7)
+        End If
+    End Sub
+
+    Private Sub cmdAveFac_Click(sender As Object, e As EventArgs) Handles cmdAveFac.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= ,)", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(,)", 3)
+        End If
+    End Sub
+
+    Private Sub cmdAveBoth_Click(sender As Object, e As EventArgs) Handles cmdAveBoth.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(,,FUN=mean)", 8)
+        End If
+    End Sub
+
+    Private Sub cmdFunctionsSsq_Click(sender As Object, e As EventArgs) Handles cmdFunctionsSsq.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= ,FUN= function(x) sum(x*x,na.rm=TRUE))", 22)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave( ,FUN= function(x) sum(x*x,na.rm=TRUE))", 17)
+        End If
+    End Sub
+
+    Private Sub cmdFunctionsSsqSession_Click(sender As Object, e As EventArgs) Handles cmdFunctionsSsqSession.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ssq(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ssq( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdCssq_Click(sender As Object, e As EventArgs) Handles cmdCssq.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= ,FUN=function(x) sum((x - mean(x,na.rm=TRUE))^2,na.rm=TRUE))", 26)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave( ,FUN=function(x) sum((x - mean(x,na.rm=TRUE))^2,na.rm=TRUE))", 18)
+        End If
+    End Sub
+
+    Private Sub cmdCssqSession_Click(sender As Object, e As EventArgs) Handles cmdCssqSession.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cssq( )", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("cssq(x= )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdPlynomial_Click(sender As Object, e As EventArgs) Handles cmdPlynomial.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::polynomial(coef= )", 4)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::polynomial( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdOrigin_Click(sender As Object, e As EventArgs) Handles cmdOrigin.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(  p= ,o= )", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(,)", 2)
+        End If
+    End Sub
+
+    Private Sub cmdRoots_Click(sender As Object, e As EventArgs) Handles cmdRoots.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" c(polyroot(z= ),NA) ", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("c(polyroot( ),NA) ", 4)
+        End If
+    End Sub
+
+    Private Sub cmdCoeffs_Click(sender As Object, e As EventArgs) Handles cmdCoeffs.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(,,FUN=mean)", 8)
+        End If
+    End Sub
+
+    Private Sub cmdProd_Click(sender As Object, e As EventArgs) Handles cmdProd.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(,,FUN=mean)", 8)
+        End If
+    End Sub
+
+    Private Sub cmdCombn_Click(sender As Object, e As EventArgs) Handles cmdCombn.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(,,FUN=mean)", 8)
+        End If
+    End Sub
+
+    Private Sub cmdCoef_Click(sender As Object, e As EventArgs) Handles cmdCoef.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(,,FUN=mean)", 8)
+        End If
+    End Sub
+
+    'Private Sub cmdCoeffs2_Click(sender As Object, e As EventArgs) Handles cmdCoeffs2.Click
+    '    If chkShowParameters.Checked Then
+    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
+    '    Else
+    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(,,FUN=mean)", 8)
+    '    End If
+    'End Sub
+
+    Private Sub cmdDsum_Click(sender As Object, e As EventArgs) Handles cmdDsum.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= , , FUN=function(x) mean(x, trim=0.1))", 16)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(,,FUN=mean)", 8)
+        End If
+    End Sub
+
+    Private Sub cmdDssqSession_Click(sender As Object, e As EventArgs) Handles cmddssqSession.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dssq(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dssq( )", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDssq_Click(sender As Object, e As EventArgs) Handles cmdDssq.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( ,function(n){a<-as.integer(c(strsplit(as.character(n),split="")[[1]])); sum(a^2)})", 26)
+    End Sub
+
+    Private Sub cmdRHelpFunctions_Click(sender As Object, e As EventArgs) Handles cmdRHelpFunctions.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Functions" Then
+            strPackageName = "MASS"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub UtilsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles UtilsToolStripMenuItem1.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Functions" Then
+            strPackageName = "utils"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub MASSFunctionsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles MASSFunctionsToolStripMenuItem1.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Functions" Then
+            strPackageName = "MASS"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub PolynomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PolynomToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Functions" Then
+            strPackageName = "polynom"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub StatsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles StatsToolStripMenuItem1.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Functions" Then
+            strPackageName = "stats"
+        End If
+        OpenHelpPage()
     End Sub
 End Class

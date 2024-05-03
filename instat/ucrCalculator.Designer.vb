@@ -567,6 +567,8 @@ Partial Class ucrCalculator
         Me.ListStatipToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpList = New System.Windows.Forms.GroupBox()
         Me.grpFunctions = New System.Windows.Forms.GroupBox()
+        Me.cmdDecimals = New System.Windows.Forms.Button()
+        Me.cmdMASSFractions = New System.Windows.Forms.Button()
         Me.cmdRHelpFunctions = New instat.ucrSplitButton()
         Me.cmdPascal = New System.Windows.Forms.Button()
         Me.cmdDssq = New System.Windows.Forms.Button()
@@ -579,7 +581,6 @@ Partial Class ucrCalculator
         Me.cmdRoots = New System.Windows.Forms.Button()
         Me.cmdOrigin = New System.Windows.Forms.Button()
         Me.cmdPlynomial = New System.Windows.Forms.Button()
-        Me.Button24 = New System.Windows.Forms.Button()
         Me.cmdCssqSession = New System.Windows.Forms.Button()
         Me.cmdDsum = New System.Windows.Forms.Button()
         Me.cmdAveBoth = New System.Windows.Forms.Button()
@@ -589,7 +590,6 @@ Partial Class ucrCalculator
         Me.cmdFunctionsSsqSession = New System.Windows.Forms.Button()
         Me.cmdFunctionsSsq = New System.Windows.Forms.Button()
         Me.cmdAveFun = New System.Windows.Forms.Button()
-        Me.Button35 = New System.Windows.Forms.Button()
         Me.grpMathBloc = New System.Windows.Forms.GroupBox()
         Me.cmdListSQRT = New System.Windows.Forms.Button()
         Me.cmdListPercent2 = New System.Windows.Forms.Button()
@@ -650,6 +650,11 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.ContextMenuStripFunctions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.MASSFunctionsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PolynomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UtilsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpBasic.SuspendLayout
         Me.grpDates.SuspendLayout
         Me.ContextMenuStripDate.SuspendLayout
@@ -686,6 +691,7 @@ Partial Class ucrCalculator
         Me.grpFunctions.SuspendLayout
         Me.grpMathBloc.SuspendLayout
         Me.GroupBox1.SuspendLayout
+        Me.ContextMenuStripFunctions.SuspendLayout
         Me.SuspendLayout
         '
         'lblExpression
@@ -6915,7 +6921,6 @@ Partial Class ucrCalculator
         '
         'grpList
         '
-        Me.grpList.Controls.Add(Me.grpFunctions)
         Me.grpList.Controls.Add(Me.grpMathBloc)
         Me.grpList.Controls.Add(Me.cmdListNth)
         Me.grpList.Controls.Add(Me.cmdListLast)
@@ -6943,6 +6948,7 @@ Partial Class ucrCalculator
         Me.grpList.Controls.Add(Me.cmdListSumd)
         Me.grpList.Controls.Add(Me.cmdListMissing)
         Me.grpList.Controls.Add(Me.GroupBox1)
+        Me.grpList.Controls.Add(Me.grpFunctions)
         Me.grpList.Location = New System.Drawing.Point(438, 52)
         Me.grpList.Margin = New System.Windows.Forms.Padding(2)
         Me.grpList.Name = "grpList"
@@ -6954,6 +6960,8 @@ Partial Class ucrCalculator
         '
         'grpFunctions
         '
+        Me.grpFunctions.Controls.Add(Me.cmdDecimals)
+        Me.grpFunctions.Controls.Add(Me.cmdMASSFractions)
         Me.grpFunctions.Controls.Add(Me.cmdRHelpFunctions)
         Me.grpFunctions.Controls.Add(Me.cmdPascal)
         Me.grpFunctions.Controls.Add(Me.cmdDssq)
@@ -6966,7 +6974,6 @@ Partial Class ucrCalculator
         Me.grpFunctions.Controls.Add(Me.cmdRoots)
         Me.grpFunctions.Controls.Add(Me.cmdOrigin)
         Me.grpFunctions.Controls.Add(Me.cmdPlynomial)
-        Me.grpFunctions.Controls.Add(Me.Button24)
         Me.grpFunctions.Controls.Add(Me.cmdCssqSession)
         Me.grpFunctions.Controls.Add(Me.cmdDsum)
         Me.grpFunctions.Controls.Add(Me.cmdAveBoth)
@@ -6976,7 +6983,6 @@ Partial Class ucrCalculator
         Me.grpFunctions.Controls.Add(Me.cmdFunctionsSsqSession)
         Me.grpFunctions.Controls.Add(Me.cmdFunctionsSsq)
         Me.grpFunctions.Controls.Add(Me.cmdAveFun)
-        Me.grpFunctions.Controls.Add(Me.Button35)
         Me.grpFunctions.Location = New System.Drawing.Point(8, 8)
         Me.grpFunctions.Margin = New System.Windows.Forms.Padding(2)
         Me.grpFunctions.Name = "grpFunctions"
@@ -6985,6 +6991,28 @@ Partial Class ucrCalculator
         Me.grpFunctions.TabIndex = 215
         Me.grpFunctions.TabStop = False
         Me.grpFunctions.Text = "Functions"
+        '
+        'cmdDecimals
+        '
+        Me.cmdDecimals.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDecimals.Location = New System.Drawing.Point(124, 130)
+        Me.cmdDecimals.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDecimals.Name = "cmdDecimals"
+        Me.cmdDecimals.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDecimals.TabIndex = 220
+        Me.cmdDecimals.Text = "decimals"
+        Me.cmdDecimals.UseVisualStyleBackColor = True
+        '
+        'cmdMASSFractions
+        '
+        Me.cmdMASSFractions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMASSFractions.Location = New System.Drawing.Point(185, 130)
+        Me.cmdMASSFractions.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdMASSFractions.Name = "cmdMASSFractions"
+        Me.cmdMASSFractions.Size = New System.Drawing.Size(62, 30)
+        Me.cmdMASSFractions.TabIndex = 219
+        Me.cmdMASSFractions.Text = "fractions"
+        Me.cmdMASSFractions.UseVisualStyleBackColor = True
         '
         'cmdRHelpFunctions
         '
@@ -7131,19 +7159,6 @@ Partial Class ucrCalculator
         Me.cmdPlynomial.Text = " plynomial"
         Me.cmdPlynomial.UseVisualStyleBackColor = True
         '
-        'Button24
-        '
-        Me.Button24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.Button24.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button24.Location = New System.Drawing.Point(185, 130)
-        Me.Button24.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button24.Name = "Button24"
-        Me.Button24.Size = New System.Drawing.Size(62, 30)
-        Me.Button24.TabIndex = 163
-        Me.Button24.Tag = ""
-        Me.Button24.Text = "fivenum"
-        Me.Button24.UseVisualStyleBackColor = True
-        '
         'cmdCssqSession
         '
         Me.cmdCssqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -7251,18 +7266,6 @@ Partial Class ucrCalculator
         Me.cmdAveFun.TabIndex = 153
         Me.cmdAveFun.Text = "ave_fun"
         Me.cmdAveFun.UseVisualStyleBackColor = True
-        '
-        'Button35
-        '
-        Me.Button35.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.Button35.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button35.Location = New System.Drawing.Point(124, 130)
-        Me.Button35.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button35.Name = "Button35"
-        Me.Button35.Size = New System.Drawing.Size(62, 30)
-        Me.Button35.TabIndex = 149
-        Me.Button35.Text = "sumd"
-        Me.Button35.UseVisualStyleBackColor = True
         '
         'grpMathBloc
         '
@@ -8007,11 +8010,43 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.TabIndex = 120
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'ContextMenuStripFunctions
+        '
+        Me.ContextMenuStripFunctions.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.ContextMenuStripFunctions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MASSFunctionsToolStripMenuItem1, Me.PolynomToolStripMenuItem, Me.StatsToolStripMenuItem1, Me.UtilsToolStripMenuItem1})
+        Me.ContextMenuStripFunctions.Name = "ContextMenuStrip1"
+        Me.ContextMenuStripFunctions.Size = New System.Drawing.Size(123, 92)
+        '
+        'MASSFunctionsToolStripMenuItem1
+        '
+        Me.MASSFunctionsToolStripMenuItem1.Name = "MASSFunctionsToolStripMenuItem1"
+        Me.MASSFunctionsToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
+        Me.MASSFunctionsToolStripMenuItem1.Text = "MASS"
+        '
+        'PolynomToolStripMenuItem
+        '
+        Me.PolynomToolStripMenuItem.Name = "PolynomToolStripMenuItem"
+        Me.PolynomToolStripMenuItem.Size = New System.Drawing.Size(122, 22)
+        Me.PolynomToolStripMenuItem.Text = "polynom"
+        '
+        'StatsToolStripMenuItem1
+        '
+        Me.StatsToolStripMenuItem1.Name = "StatsToolStripMenuItem1"
+        Me.StatsToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
+        Me.StatsToolStripMenuItem1.Text = "stats"
+        '
+        'UtilsToolStripMenuItem1
+        '
+        Me.UtilsToolStripMenuItem1.Name = "UtilsToolStripMenuItem1"
+        Me.UtilsToolStripMenuItem1.Size = New System.Drawing.Size(122, 22)
+        Me.UtilsToolStripMenuItem1.Text = "utils"
+        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.Controls.Add(Me.grpList)
         Me.Controls.Add(Me.cmdRhelpList)
         Me.Controls.Add(Me.cmdWakefieldHelp)
         Me.Controls.Add(Me.cmdStringRHelp)
@@ -8023,7 +8058,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
-        Me.Controls.Add(Me.grpList)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpModifier)
         Me.Controls.Add(Me.grpSymbols)
@@ -8090,6 +8124,7 @@ Partial Class ucrCalculator
         Me.grpFunctions.PerformLayout
         Me.grpMathBloc.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
+        Me.ContextMenuStripFunctions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout
 
@@ -8696,7 +8731,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdRoots As Button
     Friend WithEvents cmdOrigin As Button
     Friend WithEvents cmdPlynomial As Button
-    Friend WithEvents Button24 As Button
     Friend WithEvents cmdCssqSession As Button
     Friend WithEvents cmdDsum As Button
     Friend WithEvents cmdAveBoth As Button
@@ -8706,9 +8740,15 @@ Partial Class ucrCalculator
     Friend WithEvents cmdFunctionsSsqSession As Button
     Friend WithEvents cmdFunctionsSsq As Button
     Friend WithEvents cmdAveFun As Button
-    Friend WithEvents Button35 As Button
     Friend WithEvents cmdDssq As Button
     Friend WithEvents cmddssqSession As Button
     Friend WithEvents cmdPascal As Button
     Friend WithEvents cmdRHelpFunctions As ucrSplitButton
+    Friend WithEvents cmdDecimals As Button
+    Friend WithEvents cmdMASSFractions As Button
+    Friend WithEvents ContextMenuStripFunctions As ContextMenuStrip
+    Friend WithEvents MASSFunctionsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents PolynomToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StatsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents UtilsToolStripMenuItem1 As ToolStripMenuItem
 End Class
