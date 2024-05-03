@@ -511,7 +511,6 @@ Public Class frmMain
     End Sub
     Private Sub mnuToolsRestoreBackup_Click(sender As Object, e As EventArgs) Handles mnuToolsRestoreBackup.Click
         dlgRestoreBackup.ShowDialog()
-        dlgRestoreBackup.GetRecoveryFiles()
     End Sub
 
     ''' <summary>
