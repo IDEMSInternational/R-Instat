@@ -210,6 +210,7 @@ Public Class dlgRestoreBackup
         Else
             ' No backup found from the last session
             strScript = ""
+            strLoadDateFilePath = ""
         End If
     End Sub
 
