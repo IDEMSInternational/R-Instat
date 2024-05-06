@@ -173,24 +173,44 @@ Public Class dlgRestoreBackup
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlRecoveryOption.ControlContentsChanged
         strScript = ""
         strLoadDateFilePath = ""
+        Dim backupType As String = ""
+
         If rdoRunBackupLog.Checked Then
-            'Retrieve the latest autosaved file based on the stored timestamp
-            Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveLogFolderPath)
-            Dim strLatestLogFile As FileInfo = autoSaveDirectory.GetFiles("log*.R").OrderByDescending(Function(f) f.LastWriteTime).FirstOrDefault()
-            strScript = strLatestLogFile.FullName
-            clsDummyFunction.AddParameter("backup", "log")
+            backupType = "log"
+            GetBackupFromLastSession(strAutoSaveLogFolderPath, "log*.R", True)
         ElseIf rdoLoadBackupData.Checked Then
-            'Retrieve the latest autosaved file based on the stored timestamp
-            Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveDataFolderPath)
-            Dim strLatestDataFile As FileInfo = autoSaveDirectory.GetFiles("data_*.rds").OrderByDescending(Function(f) f.LastWriteTime).FirstOrDefault()
-
-            strLoadDateFilePath = strLatestDataFile.FullName
-            clsDummyFunction.AddParameter("backup", "data")
+            backupType = "data"
+            GetBackupFromLastSession(strAutoSaveDataFolderPath, "data_*.rds", False)
         Else
-            clsDummyFunction.AddParameter("backup", "neither")
+            backupType = "neither"
         End If
-
+        clsDummyFunction.AddParameter("backup", backupType)
         TestOKEnabled()
+    End Sub
+
+    Private Sub GetBackupFromLastSession(autoSaveFolderPath As String, searchPattern As String, bLogFile As Boolean)
+        Dim autoSaveDirectory As New DirectoryInfo(autoSaveFolderPath)
+        Dim files As FileInfo() = autoSaveDirectory.GetFiles(searchPattern)
+
+        If files.Length > 1 Then
+            Array.Sort(files, Function(x, y) y.LastWriteTime.CompareTo(x.LastWriteTime))
+            Dim strLatestBackupFile As FileInfo = files(1) ' Get the backup from the last session
+            If bLogFile Then
+                strScript = File.ReadAllText(strLatestBackupFile.FullName)
+            Else
+                strLoadDateFilePath = strLatestBackupFile.FullName ' Pass the full path for data files
+            End If
+        ElseIf files.Length = 1 Then
+            Dim strLatestBackupFile As FileInfo = files(0)
+            If bLogFile Then
+                strScript = File.ReadAllText(strLatestBackupFile.FullName)
+            Else
+                strLoadDateFilePath = strLatestBackupFile.FullName ' Pass the full path for data files
+            End If
+        Else
+            ' No backup found from the last session
+            strScript = ""
+        End If
     End Sub
 
     Private Sub ucrInputSavedPathData_Leave(sender As Object, e As EventArgs) Handles ucrInputSavedPathData.Leave
