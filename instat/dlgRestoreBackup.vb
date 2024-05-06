@@ -184,12 +184,11 @@ Public Class dlgRestoreBackup
     End Sub
 
     Private Sub SetLogControlsDisable(bEnable As Boolean)
-        ucrChkShowLogFile.Checked = Not bEnable
-        ucrChkShowInternalLogFile.Checked = Not bEnable
-        rdoRunBackupLog.Checked = Not bEnable
         ucrChkShowLogFile.Enabled = Not bEnable
         ucrChkShowInternalLogFile.Enabled = Not bEnable
         rdoRunBackupLog.Enabled = Not bEnable
+        ucrChkShowLogFile.Checked = False
+        ucrChkShowInternalLogFile.Checked = False
     End Sub
 
     Private Sub GetBackupFromLastSession(autoSaveFolderPath As String, searchPattern As String, bLogFile As Boolean)
