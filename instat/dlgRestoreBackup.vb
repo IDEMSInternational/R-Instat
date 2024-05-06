@@ -172,8 +172,6 @@ Public Class dlgRestoreBackup
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlRecoveryOption.ControlContentsChanged
-        strScript = ""
-        strLoadDateFilePath = ""
         Dim backupType As String = ""
 
         If rdoRunBackupLog.Checked Then
@@ -189,28 +187,22 @@ Public Class dlgRestoreBackup
         TestOKEnabled()
     End Sub
 
-    Private Sub GetBackupFromLastSession(autoSaveFolderPath As String, searchPattern As String, bLogFile As Boolean)
+        Private Sub GetBackupFromLastSession(autoSaveFolderPath As String, searchPattern As String, bLogFile As Boolean)
         Dim autoSaveDirectory As New DirectoryInfo(autoSaveFolderPath)
         Dim files As FileInfo() = autoSaveDirectory.GetFiles(searchPattern)
 
-        If files.Length > 1 Then
+        If files.Length > 0 Then
             Array.Sort(files, Function(x, y) y.LastWriteTime.CompareTo(x.LastWriteTime))
-            Dim strLatestBackupFile As FileInfo = files(1) ' Get the backup from the last session
+            Dim strLatestBackupFile As FileInfo = files(0) ' Get the last written backup file
             If bLogFile Then
                 strScript = File.ReadAllText(strLatestBackupFile.FullName)
             Else
-                strLoadDateFilePath = strLatestBackupFile.FullName ' Pass the full path for data files
-            End If
-        ElseIf files.Length = 1 Then
-            Dim strLatestBackupFile As FileInfo = files(0)
-            If bLogFile Then
-                strScript = File.ReadAllText(strLatestBackupFile.FullName)
-            Else
-                strLoadDateFilePath = strLatestBackupFile.FullName ' Pass the full path for data files
+                strLoadDateFilePath = strLatestBackupFile.FullName ' Pass the full path for data file
             End If
         Else
-            ' No backup found from the last session
+            ' No backup found
             strScript = ""
+            strLoadDateFilePath = ""
         End If
     End Sub
 
