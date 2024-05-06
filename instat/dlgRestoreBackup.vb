@@ -187,7 +187,7 @@ Public Class dlgRestoreBackup
         TestOKEnabled()
     End Sub
 
-        Private Sub GetBackupFromLastSession(autoSaveFolderPath As String, searchPattern As String, bLogFile As Boolean)
+    Private Sub GetBackupFromLastSession(autoSaveFolderPath As String, searchPattern As String, bLogFile As Boolean)
         Dim autoSaveDirectory As New DirectoryInfo(autoSaveFolderPath)
         Dim files As FileInfo() = autoSaveDirectory.GetFiles(searchPattern)
 
