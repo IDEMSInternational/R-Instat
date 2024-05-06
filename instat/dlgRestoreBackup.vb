@@ -192,16 +192,9 @@ Public Class dlgRestoreBackup
         Dim autoSaveDirectory As New DirectoryInfo(autoSaveFolderPath)
         Dim files As FileInfo() = autoSaveDirectory.GetFiles(searchPattern)
 
-        If files.Length > 1 Then
+        If files.Length > 0 Then
             Array.Sort(files, Function(x, y) y.LastWriteTime.CompareTo(x.LastWriteTime))
-            Dim strLatestBackupFile As FileInfo = files(1) ' Get the backup from the last session
-            If bLogFile Then
-                strScript = File.ReadAllText(strLatestBackupFile.FullName)
-            Else
-                strLoadDateFilePath = strLatestBackupFile.FullName ' Pass the full path for data files
-            End If
-        ElseIf files.Length = 1 Then
-            Dim strLatestBackupFile As FileInfo = files(0)
+            Dim strLatestBackupFile As FileInfo = files(0) ' Get the backup from the last session
             If bLogFile Then
                 strScript = File.ReadAllText(strLatestBackupFile.FullName)
             Else
