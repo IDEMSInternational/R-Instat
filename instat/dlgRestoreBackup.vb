@@ -43,7 +43,7 @@ Public Class dlgRestoreBackup
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        SetLogControlsDisable(frmMain.GetFirstBackupDone)
+        SetLogControlsDisable(frmMain.bFirstBackupDone)
         autoTranslate(Me)
         TestOKEnabled()
     End Sub

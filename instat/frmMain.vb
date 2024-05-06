@@ -43,7 +43,7 @@ Public Class frmMain
     Private iAutoSaveDataMilliseconds As Integer
     Private clsDataBook As clsDataBook
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
-    Private Shared isFirstBackupDone As Boolean = False
+    Public bFirstBackupDone As Boolean = False
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -1086,10 +1086,6 @@ Public Class frmMain
         End If
     End Sub
 
-    Public Shared Function GetFirstBackupDone() As Boolean
-        Return isFirstBackupDone
-    End Function
-
     Public Sub AutoSaveData()
         Dim clsSaveRDS As New RFunction
         Dim strTempFile As String
@@ -1118,7 +1114,7 @@ Public Class frmMain
             clsRLink.RunInternalScript(clsSaveRDS.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
-            isFirstBackupDone = True
+            bFirstBackupDone = True
         End If
         autoTranslate(Me)
     End Sub
