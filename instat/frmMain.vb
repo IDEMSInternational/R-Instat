@@ -43,6 +43,7 @@ Public Class frmMain
     Private iAutoSaveDataMilliseconds As Integer
     Private clsDataBook As clsDataBook
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
+    Private Shared isFirstBackupDone As Boolean = False
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -655,7 +656,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnNumericRandomSamples_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericRandomSamples.Click
-        dlgRandomSample.enumRandomsampleMode = dlgRandomSample.RandomsampleMode.Prepare
+        dlgRandomSample.enumRandomSampleMode = dlgRandomSample.RandomSampleMode.Prepare
         dlgRandomSample.ShowDialog()
     End Sub
 
@@ -944,7 +945,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuModelProbabilityDistributionsRandomSamplesUseModel_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsRandomSamplesUseModel.Click
-        dlgRandomSample.enumRandomsampleMode = dlgRandomSample.RandomsampleMode.Model
+        dlgRandomSample.enumRandomSampleMode = dlgRandomSample.RandomSampleMode.Model
         dlgRandomSample.ShowDialog()
     End Sub
 
@@ -1085,6 +1086,10 @@ Public Class frmMain
         End If
     End Sub
 
+    Public Shared Function GetFirstBackupDone() As Boolean
+        Return isFirstBackupDone
+    End Function
+
     Public Sub AutoSaveData()
         Dim clsSaveRDS As New RFunction
         Dim strTempFile As String
@@ -1106,13 +1111,14 @@ Public Class frmMain
             Dim strBackupMessage As String = $"##########{vbCrLf}## Backing up data and log files on: {DateTime.Now}{vbCrLf}##########"
             Me.ucrScriptWindow.LogText(strBackupMessage)
             clsRLink.AppendToAutoSaveLog(strBackupMessage)
-            
+
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & strCurrentAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
             clsRLink.RunInternalScript(clsSaveRDS.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
+            isFirstBackupDone = True
         End If
         autoTranslate(Me)
     End Sub

@@ -43,6 +43,7 @@ Public Class dlgRestoreBackup
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        SetLogControlsDisable(frmMain.GetFirstBackupDone)
         autoTranslate(Me)
         TestOKEnabled()
     End Sub
@@ -173,19 +174,22 @@ Public Class dlgRestoreBackup
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlRecoveryOption.ControlContentsChanged
         strScript = ""
         strLoadDateFilePath = ""
-        Dim backupType As String = ""
 
         If rdoRunBackupLog.Checked Then
-            backupType = "log"
             GetBackupFromLastSession(strAutoSaveLogFolderPath, "log*.R", True)
         ElseIf rdoLoadBackupData.Checked Then
-            backupType = "data"
             GetBackupFromLastSession(strAutoSaveDataFolderPath, "data_*.rds", False)
-        Else
-            backupType = "neither"
         End If
-        clsDummyFunction.AddParameter("backup", backupType)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetLogControlsDisable(bEnable As Boolean)
+        ucrChkShowLogFile.Checked = Not bEnable
+        ucrChkShowInternalLogFile.Checked = Not bEnable
+        rdoRunBackupLog.Checked = Not bEnable
+        ucrChkShowLogFile.Enabled = Not bEnable
+        ucrChkShowInternalLogFile.Enabled = Not bEnable
+        rdoRunBackupLog.Enabled = Not bEnable
     End Sub
 
     Private Sub GetBackupFromLastSession(autoSaveFolderPath As String, searchPattern As String, bLogFile As Boolean)
