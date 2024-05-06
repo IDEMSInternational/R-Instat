@@ -174,12 +174,10 @@ Public Class dlgRestoreBackup
         strScript = ""
         strLoadDateFilePath = ""
         If rdoRunBackupLog.Checked Then
-            If File.Exists(strAutoSavedLogFilePaths(0)) Then
-                'Retrieve the latest autosaved file based on the stored timestamp
-                Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveDataFolderPath)
-                Dim strLatestLogFile As FileInfo = autoSaveDirectory.GetFiles("log_*.R").OrderByDescending(Function(f) f.LastWriteTime).FirstOrDefault()
-                strScript = strLatestLogFile.FullName
-            End If
+            'Retrieve the latest autosaved file based on the stored timestamp
+            Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveLogFolderPath)
+            Dim strLatestLogFile As FileInfo = autoSaveDirectory.GetFiles("log*.R").OrderByDescending(Function(f) f.LastWriteTime).FirstOrDefault()
+            strScript = strLatestLogFile.FullName
             clsDummyFunction.AddParameter("backup", "log")
         ElseIf rdoLoadBackupData.Checked Then
             'Retrieve the latest autosaved file based on the stored timestamp
