@@ -17,6 +17,12 @@
 Imports instat
 Imports instat.Translations
 Public Class dlgFindNonnumericValues
+    Public enumNonNumericMode As String = NonNumericMode.Prepare
+    Public Enum NonNumericMode
+        Prepare
+        Climatic
+    End Enum
+
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bUseSelectedColumn As Boolean = False
@@ -42,11 +48,11 @@ Public Class dlgFindNonnumericValues
         If bUseSelectedColumn Then
             SetSelectedColumn()
         End If
+        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 545
         ucrSelectorShowNonNumericValues.SetParameter(New RParameter("data_name", 0))
         ucrSelectorShowNonNumericValues.SetParameterIsString()
 
@@ -171,6 +177,15 @@ Public Class dlgFindNonnumericValues
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumNonNumericMode
+            Case NonNumericMode.Prepare
+                ucrBase.iHelpTopicID = 545
+            Case NonNumericMode.Climatic
+                ucrBase.iHelpTopicID = 603
+        End Select
     End Sub
 
     Private Sub ucrChkShowSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowSummary.ControlValueChanged

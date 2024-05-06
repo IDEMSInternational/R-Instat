@@ -229,6 +229,8 @@ Public Class RSyntax
             clsBaseFunction.GetAllAssignTo(lstCodes, lstValues)
         ElseIf bUseBaseOperator Then
             clsBaseOperator.GetAllAssignTo(lstCodes, lstValues)
+        ElseIf bUseCommandString Then
+            clsBaseCommandString.GetAllAssignTo(lstCodes, lstValues)
         End If
         lstBeforeCodes.Sort(AddressOf CompareCodePositions)
         For Each clsTempCode As RCodeStructure In lstBeforeCodes
@@ -299,13 +301,16 @@ Public Class RSyntax
             strTemp = clsBaseFunction.ToScript(strScript)
         ElseIf bUseBaseOperator Then
             strTemp = clsBaseOperator.ToScript(strScript)
+        ElseIf bUseCommandString Then
+            strTemp = clsBaseCommandString.ToScript(strScript, strCommandString)
         End If
 
         If bExcludeAssignedFunctionOutput Then
             'Sometimes the output of the R-command we deal with should not be part of the script...  
             'That's only the case when this output has already been assigned.
             If (bUseBaseFunction AndAlso clsBaseFunction.IsAssigned()) OrElse
-                (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) Then
+                (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) OrElse
+                (bUseCommandString AndAlso clsBaseFunction.IsAssigned()) Then
                 Return strScript
             End If
         End If
@@ -427,6 +432,7 @@ Public Class RSyntax
         clsBaseFunction = clsFunction
         bUseBaseFunction = True
         bUseBaseOperator = False
+        bUseCommandString = False
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -438,6 +444,7 @@ Public Class RSyntax
         clsBaseOperator = clsOperator
         bUseBaseFunction = False
         bUseBaseOperator = True
+        bUseCommandString = False
     End Sub
 
     '''--------------------------------------------------------------------------------------------

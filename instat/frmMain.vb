@@ -499,19 +499,18 @@ Public Class frmMain
             End Try
         End If
 
-        If strAutoSavedDataFilePaths.Length > 1 Then
-            Try
-                File.Delete(strAutoSavedDataFilePaths(1))
-            Catch ex As Exception
-                MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
-            End Try
-        End If
+        'If strAutoSavedDataFilePaths.Length > 1 Then
+        '    Try
+        '        ' File.Delete(strAutoSavedDataFilePaths(1))
+        '    Catch ex As Exception
+        '        MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+        '    End Try
+        'End If
         '---------------------------------------
 
     End Sub
     Private Sub mnuToolsRestoreBackup_Click(sender As Object, e As EventArgs) Handles mnuToolsRestoreBackup.Click
         dlgRestoreBackup.ShowDialog()
-        dlgRestoreBackup.GetRecoveryFiles()
     End Sub
 
     ''' <summary>
@@ -642,10 +641,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareReshapeStack_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeStack.Click
+        dlgStack.enumStackMode = dlgStack.StackMode.Prepare
         dlgStack.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareReshapeUnstack_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeUnstack.Click
+        dlgUnstack.enumUnstackMode = dlgUnstack.UnstackMode.Prepare
         dlgUnstack.ShowDialog()
     End Sub
 
@@ -654,6 +655,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnNumericRandomSamples_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericRandomSamples.Click
+        dlgRandomSample.enumRandomsampleMode = dlgRandomSample.RandomsampleMode.Prepare
         dlgRandomSample.ShowDialog()
     End Sub
 
@@ -714,6 +716,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareReshapeMerge_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeMerge.Click
+        dlgMerge.enumMergeMode = dlgMerge.MergeMode.Prepare
         dlgMerge.ShowDialog()
     End Sub
 
@@ -872,6 +875,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareTextSplit_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextSplit.Click
+        dlgSplitText.enumSplitMode = dlgSplitText.SplitMode.Prepare
         dlgSplitText.ShowDialog()
     End Sub
 
@@ -911,6 +915,7 @@ Public Class frmMain
     'End Sub
 
     Private Sub mnuPrepareTextTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextTransform.Click
+        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Prepare
         dlgTransformText.ShowDialog()
     End Sub
 
@@ -939,6 +944,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuModelProbabilityDistributionsRandomSamplesUseModel_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsRandomSamplesUseModel.Click
+        dlgRandomSample.enumRandomsampleMode = dlgRandomSample.RandomsampleMode.Model
         dlgRandomSample.ShowDialog()
     End Sub
 
@@ -1040,6 +1046,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableGraph.Click
+        dlgOneVariableGraph.enumOnevariableMode = dlgOneVariableGraph.OnevariableMode.Describe
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
@@ -1091,14 +1098,11 @@ Public Class frmMain
             If Not Directory.Exists(strAutoSaveDataFolderPath) Then
                 Directory.CreateDirectory(strAutoSaveDataFolderPath)
             End If
-            If strCurrentAutoSaveDataFilePath = "" Then
-                strTempFile = "data.rds"
-                While File.Exists(Path.Combine(strAutoSaveDataFolderPath, strTempFile))
-                    i = i + 1
-                    strTempFile = "data" & i & ".rds"
-                End While
-                strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
-            End If
+
+            ' Generate a unique filename with timestamp
+            strTempFile = "data_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".rds"
+            strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
+
             Dim strBackupMessage As String = $"##########{vbCrLf}## Backing up data and log files on: {DateTime.Now}{vbCrLf}##########"
             Me.ucrScriptWindow.LogText(strBackupMessage)
             clsRLink.AppendToAutoSaveLog(strBackupMessage)
@@ -1114,33 +1118,81 @@ Public Class frmMain
     End Sub
 
     Public Sub DeleteAutoSaveData()
-        If strCurrentAutoSaveDataFilePath <> "" Then
-            Try
-                File.Delete(strCurrentAutoSaveDataFilePath)
-            Catch ex As Exception
-                MsgBox("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
-            End Try
-        End If
+        Try
+            If Directory.Exists(strAutoSaveDataFolderPath) Then
+                ' Define the retention policy (keep last N autosaves)
+                Dim retentionCount As Integer = 5 ' Example: Keep the last 5 autosaves
+
+                ' Retrieve autosaved files
+                Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveDataFolderPath)
+                Dim files As FileInfo() = autoSaveDirectory.GetFiles("data_*.rds") ' Adjust pattern to match actual filenames
+
+                ' Sort files by last write time in descending order
+                Dim sortedFiles = files.OrderByDescending(Function(f) f.LastWriteTime)
+
+                ' Determine files to delete based on retention policy
+                Dim filesToDelete = sortedFiles.Skip(retentionCount)
+
+                ' Delete older autosaved files
+                For Each file In filesToDelete
+                    file.Delete()
+                Next
+            End If
+        Catch ex As Exception
+            MsgBox("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
+        End Try
     End Sub
 
     Public Sub DeleteAutoSaveLog()
-        If clsRLink.strAutoSaveLogFilePath <> "" Then
-            Try
-                File.Delete(clsRLink.strAutoSaveLogFilePath)
-            Catch ex As Exception
-                MsgBox("Could not delete auto save log file at: " & clsRLink.strAutoSaveLogFilePath & Environment.NewLine & ex.Message)
-            End Try
-        End If
+        Try
+            If Directory.Exists(strAutoSaveLogFolderPath) Then
+                ' Define the retention policy (keep last N autosaves)
+                Dim retentionCount As Integer = 5 ' Example: Keep the last 5 autosaves
+
+                ' Retrieve autosaved files
+                Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveLogFolderPath)
+                Dim files As FileInfo() = autoSaveDirectory.GetFiles("log*.R") ' Adjust pattern to match actual filenames
+
+                ' Sort files by last write time in descending order
+                Dim sortedFiles = files.OrderByDescending(Function(f) f.LastWriteTime)
+
+                ' Determine files to delete based on retention policy
+                Dim filesToDelete = sortedFiles.Skip(retentionCount)
+
+                ' Delete older autosaved files
+                For Each file In filesToDelete
+                    file.Delete()
+                Next
+            End If
+        Catch ex As Exception
+            MsgBox("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
+        End Try
     End Sub
 
     Public Sub DeleteAutoSaveDebugLog()
-        If clsRLink.strAutoSaveDebugLogFilePath <> "" Then
-            Try
-                File.Delete(clsRLink.strAutoSaveDebugLogFilePath)
-            Catch ex As Exception
-                MsgBox("Could not delete auto save debug log file at: " & clsRLink.strAutoSaveDebugLogFilePath & Environment.NewLine & ex.Message)
-            End Try
-        End If
+        Try
+            If Directory.Exists(strAutoSaveInternalLogFolderPath) Then
+                ' Define the retention policy (keep last N autosaves)
+                Dim retentionCount As Integer = 5 ' Example: Keep the last 5 autosaves
+
+                ' Retrieve autosaved files
+                Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveInternalLogFolderPath)
+                Dim files As FileInfo() = autoSaveDirectory.GetFiles("debug_log*.R") ' Adjust pattern to match actual filenames
+
+                ' Sort files by last write time in descending order
+                Dim sortedFiles = files.OrderByDescending(Function(f) f.LastWriteTime)
+
+                ' Determine files to delete based on retention policy
+                Dim filesToDelete = sortedFiles.Skip(retentionCount)
+
+                ' Delete older autosaved files
+                For Each file In filesToDelete
+                    file.Delete()
+                Next
+            End If
+        Catch ex As Exception
+            MsgBox("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
+        End Try
     End Sub
 
     Private Sub mnuOrganiseDataObjectHideDataframes_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectHideDataframes.Click
@@ -1148,14 +1200,17 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseDataFrameReplaceValues_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameReplaceValues.Click
+        dlgReplaceValues.enumReplacevaluesMode = dlgReplaceValues.ReplacevaluesMode.Prepare
         dlgReplaceValues.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeTwoVariablesSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesSummarise.Click
+        dlgDescribeTwoVariable.enumTwovariableMode = dlgDescribeTwoVariable.TwovariableMode.Describe
         dlgDescribeTwoVariable.ShowDialog()
     End Sub
 
     Private Sub mnuAppendDataFrame_Click(sender As Object, e As EventArgs) Handles mnuPrepareAppendDataFrame.Click
+        dlgAppend.enumAppendMode = dlgAppend.AppendMode.Prepare
         dlgAppend.ShowDialog()
     End Sub
 
@@ -1172,6 +1227,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeTwoVariablesGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesGraph.Click
+        dlgDescribeTwoVarGraph.enumTwovarMode = dlgDescribeTwoVarGraph.TwovarMode.Describe
         dlgDescribeTwoVarGraph.ShowDialog()
     End Sub
 
@@ -1244,6 +1300,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeSpecificBoxplot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBoxplotJitterViolinPlot.Click
+        dlgBoxplot.enumBoxplotMode = dlgBoxplot.BoxplotMode.Describe
         dlgBoxplot.ShowDialog()
     End Sub
 
@@ -1260,6 +1317,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateMakeDate.Click
+        dlgMakeDate.enumMakedateMode = dlgMakeDate.MakedateMode.Prepare
         dlgMakeDate.ShowDialog()
     End Sub
 
@@ -1280,6 +1338,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseColumnUseDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateUseDate.Click
+        dlgUseDate.enumUsedateMode = dlgUseDate.UsedateMode.Prepare
         dlgUseDate.ShowDialog()
     End Sub
 
@@ -1372,18 +1431,22 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareKeysAndLinksAddKey_Click(sender As Object, e As EventArgs) Handles mnuPrepareKeysAndLinksAddKey.Click
+        dlgAddKey.enumAddkeyMode = dlgAddKey.AddkeyMode.Prepare
         dlgAddKey.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPrepareDatesMakeDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesMakeDate.Click
+        dlgMakeDate.enumMakedateMode = dlgMakeDate.MakedateMode.Climatic
         dlgMakeDate.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPrepareDatesUseDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesUseDate.Click
+        dlgUseDate.enumUsedateMode = dlgUseDate.UsedateMode.Climatic
         dlgUseDate.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticPrepareInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesInfillMissingDates.Click
+        dlgInfill.enumFilldateMode = dlgInfill.FilldateMode.Climatic
         dlgInfill.ShowDialog()
     End Sub
 
@@ -1518,6 +1581,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableFrequencies.Click
+        dlgOneWayFrequencies.enumOnewayMode = dlgOneWayFrequencies.OnewayMode.Describe
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
@@ -1705,6 +1769,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataDuplicates.Click
+        dlgDuplicateRows.enumDuplicateMode = dlgDuplicateRows.DuplicateMode.Prepare
         dlgDuplicateRows.ShowDialog()
     End Sub
 
@@ -1721,6 +1786,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateInfillMissingDates.Click
+        dlgInfill.enumFilldateMode = dlgInfill.FilldateMode.Prepare
         dlgInfill.ShowDialog()
     End Sub
 
@@ -1782,18 +1848,22 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCheckDataBoxplot_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataBoxplot.Click
+        dlgBoxplot.enumBoxplotMode = dlgBoxplot.BoxplotMode.Prepare
         dlgBoxplot.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareCheckDataOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableGraph.Click
+        dlgOneVariableGraph.enumOnevariableMode = dlgOneVariableGraph.OnevariableMode.Prepare
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareCheckDataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneVariableSummarise.Click
+        dlgOneVariableSummarise.enumOnevariableMode = dlgOneVariableSummarise.OnevariableMode.Prepare
         dlgOneVariableSummarise.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareCheckDataOneWayFrequencies_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataOneWayFrequencies.Click
+        dlgOneWayFrequencies.enumOnewayMode = dlgOneWayFrequencies.OnewayMode.Prepare
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
@@ -1934,11 +2004,13 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnGenerateDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnDateGenerateDate.Click
+        dlgRegularSequence.enumRegularsequenceMode = dlgRegularSequence.RegularsequenceMode.Prepare
         dlgRegularSequence.SetDateSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDatesGenerateDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesGenerateDates.Click
+        dlgRegularSequence.enumRegularsequenceMode = dlgRegularSequence.RegularsequenceMode.Climatic
         dlgRegularSequence.SetDateSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
     End Sub
@@ -1948,6 +2020,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCheckDataCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataCompareColumns.Click
+        dlgCompareColumns.enumCompareMode = dlgCompareColumns.CompareMode.Prepare
         dlgCompareColumns.ShowDialog()
     End Sub
 
@@ -2004,14 +2077,17 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCheckDataNonNumericCases_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataNonNumericCases.Click
+        dlgFindNonnumericValues.enumNonNumericMode = dlgFindNonnumericValues.NonNumericMode.Prepare
         dlgFindNonnumericValues.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticTidyandExamineNonNumericCases_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineNonNumericCases.Click
+        dlgFindNonnumericValues.enumNonNumericMode = dlgFindNonnumericValues.NonNumericMode.Climatic
         dlgFindNonnumericValues.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticTidyandExamineReplaceValues_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineReplaceValues.Click
+        dlgReplaceValues.enumReplacevaluesMode = dlgReplaceValues.ReplacevaluesMode.Climatic
         dlgReplaceValues.ShowDialog()
     End Sub
 
@@ -2032,6 +2108,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticTidyandExamineMerge_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineMerge.Click
+        dlgMerge.enumMergeMode = dlgMerge.MergeMode.Climatic
         dlgMerge.ShowDialog()
     End Sub
 
@@ -2079,14 +2156,17 @@ Public Class frmMain
     End Sub
 
     Private Sub MnuClimaticTidyandExamineUnstack_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineUnstack.Click
+        dlgUnstack.enumUnstackMode = dlgUnstack.UnstackMode.Climatic
         dlgUnstack.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticTidyandExamineStack_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineStack.Click
+        dlgStack.enumStackMode = dlgStack.StackMode.Climatic
         dlgStack.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticTidyandExamineAppend_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineAppend.Click
+        dlgAppend.enumAppendMode = dlgAppend.AppendMode.Climatic
         dlgAppend.ShowDialog()
     End Sub
 
@@ -2099,6 +2179,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticTidyandExamineDuplicates_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineDuplicateRows.Click
+        dlgDuplicateRows.enumDuplicateMode = dlgDuplicateRows.DuplicateMode.Climatic
         dlgDuplicateRows.ShowDialog()
     End Sub
 
@@ -2574,22 +2655,27 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticTidyandExamineTransformText_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineTransformText.Click
+        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Climatic
         dlgTransformText.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticTidyandExamineSplitText_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineSplitText.Click
+        dlgSplitText.enumSplitMode = dlgSplitText.SplitMode.Climatic
         dlgSplitText.ShowDialog()
     End Sub
 
     Private Sub mnuExamineEditDataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataOneVariableSummarise.Click
+        dlgOneVariableSummarise.enumOnevariableMode = dlgOneVariableSummarise.OnevariableMode.Climatic
         dlgOneVariableSummarise.ShowDialog()
     End Sub
 
     Private Sub mnuExamineEditDataOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataOneVariableGraph.Click
+        dlgOneVariableGraph.enumOnevariableMode = dlgOneVariableGraph.OnevariableMode.Climatic
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
     Private Sub mnuExamineEditDataOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataOneVariableFrequencies.Click
+        dlgOneWayFrequencies.enumOnewayMode = dlgOneWayFrequencies.OnewayMode.Climatic
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
@@ -2607,6 +2693,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuExamineEditDataCompareColumns_Click(sender As Object, e As EventArgs) Handles mnuExamineEditDataCompareColumns.Click
+        dlgCompareColumns.enumCompareMode = dlgCompareColumns.CompareMode.Climatic
         dlgCompareColumns.ShowDialog()
     End Sub
 
@@ -2619,7 +2706,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCheckDataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataPivotTable.Click
-        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Describe
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Prepare
         dlgThreeVariablePivotTable.ShowDialog()
     End Sub
 
@@ -2628,14 +2715,17 @@ Public Class frmMain
     End Sub
 
     Private Sub AddToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyDataKey.Click
+        dlgAddKey.enumAddkeyMode = dlgAddKey.AddkeyMode.Climatic
         dlgAddKey.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeSummarise23Variables_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeSummarise23Variables.Click
+        dlgDescribeTwoVariable.enumTwovariableMode = dlgDescribeTwoVariable.TwovariableMode.Climatic
         dlgDescribeTwoVariable.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeGraph23Variables_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeGraph23Variables.Click
+        dlgDescribeTwoVarGraph.enumTwovarMode = dlgDescribeTwoVarGraph.TwovarMode.Climatic
         dlgDescribeTwoVarGraph.ShowDialog()
     End Sub
 
