@@ -203,12 +203,14 @@ Public Class dlgExportClimaticDefinitions
         ucrBase.OKEnabled(Not ucrReceiverData.IsEmpty _
                              AndAlso Not ucrReceiverMonth.IsEmpty _
                              AndAlso Not ucrReceiverYear.IsEmpty _
-                             AndAlso Not ucrReceiverCropData.IsEmpty _
-                             AndAlso Not ucrReceiverRain.IsEmpty _
-                             AndAlso Not ucrReceiverMinTemp.IsEmpty _
-                             AndAlso Not ucrReceiverDataYear.IsEmpty _
-                             AndAlso Not ucrReceiverDataYearMonth.IsEmpty _
-                             AndAlso Not ucrReceiverMaxTemp.IsEmpty
+                             OrElse ((ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked) AndAlso Not ucrReceiverCropData.IsEmpty) _
+                             OrElse (ucrChkAnnualRainfall.Checked AndAlso Not ucrReceiverRain.IsEmpty) _
+                             OrElse ((ucrChkAnnualTemp.Checked OrElse ucrChkMonthlyTemp.Checked) AndAlso Not ucrReceiverMinTemp.IsEmpty) _
+                             OrElse ((ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked) AndAlso Not ucrReceiverDataYear.IsEmpty) _
+                             OrElse (ucrChkMonthlyTemp.Checked AndAlso Not ucrReceiverDataYearMonth.IsEmpty) _
+                             AndAlso Not ucrInputCountry.IsEmpty _
+                             AndAlso Not ucrInputStationID.IsEmpty _
+                             OrElse ((ucrChkAnnualTemp.Checked OrElse ucrChkMonthlyTemp.Checked) AndAlso Not ucrReceiverMaxTemp.IsEmpty)
                              )
     End Sub
 
@@ -222,7 +224,8 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged,
             ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged,
-            ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged
+            ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrChkSeasonStartProp.ControlContentsChanged, ucrInputCountry.ControlContentsChanged, ucrInputStationID.ControlContentsChanged,
+            ucrChkMonthlyTemp.ControlContentsChanged, ucrChkCropSuccessProp.ControlContentsChanged, ucrChkAnnualTemp.ControlContentsChanged, ucrChkAnnualRainfall.ControlContentsChanged
         TestOkEnabled()
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

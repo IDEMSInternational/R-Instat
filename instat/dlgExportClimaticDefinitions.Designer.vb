@@ -443,7 +443,7 @@ Partial Class dlgExportClimaticDefinitions
         '
         'cmdSetToken
         '
-        Me.cmdSetToken.Location = New System.Drawing.Point(332, 11)
+        Me.cmdSetToken.Location = New System.Drawing.Point(356, 52)
         Me.cmdSetToken.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdSetToken.Name = "cmdSetToken"
         Me.cmdSetToken.Size = New System.Drawing.Size(130, 35)

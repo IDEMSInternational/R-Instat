@@ -41,16 +41,28 @@ Public Class sdgConnectGoogleBuckets
         ucrInputTokenPath.SetParameter(clsNewKeyParameter, 0)
     End Sub
 
-    Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
-        Using dlgOpen As New OpenFileDialog
-            dlgOpen.Filter = "Text Files|*.json"
-            dlgOpen.Title = "Import JSON File"
-
-            dlgOpen.InitialDirectory = Path.GetDirectoryName(Replace(ucrInputTokenPath.GetText(), "/", "\"))
-
-            If dlgOpen.ShowDialog() = DialogResult.OK AndAlso dlgOpen.FileName <> "" Then
-                ucrInputTokenPath.SetName(Replace(dlgOpen.FileName, "\", "/"))
+    Private Sub SelectFileToSave()
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Save JSON File"
+            dlgSave.Filter = "Text Files|*.json"
+            If ucrInputTokenPath.GetText() <> "" Then
+                dlgSave.InitialDirectory = ucrInputTokenPath.GetText().Replace("/", "\")
+            Else
+                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+            End If
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                ucrInputTokenPath.SetName(dlgSave.FileName.Replace("\", "/"))
             End If
         End Using
+    End Sub
+
+    Private Sub ucrInputTokenPath_Click(sender As Object, e As EventArgs) Handles ucrInputTokenPath.Click
+        If ucrInputTokenPath.IsEmpty() Then
+            SelectFileToSave()
+        End If
+    End Sub
+
+    Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
+        SelectFileToSave()
     End Sub
 End Class

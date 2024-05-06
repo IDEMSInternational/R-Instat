@@ -131,7 +131,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbSummaries.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
-        Me.tbSummaries.Size = New System.Drawing.Size(742, 662)
+        Me.tbSummaries.Size = New System.Drawing.Size(742, 618)
         Me.tbSummaries.TabIndex = 0
         '
         'tbAnnualRainfall
@@ -167,7 +167,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbAnnualRainfall.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbAnnualRainfall.Name = "tbAnnualRainfall"
         Me.tbAnnualRainfall.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.tbAnnualRainfall.Size = New System.Drawing.Size(734, 629)
+        Me.tbAnnualRainfall.Size = New System.Drawing.Size(734, 585)
         Me.tbAnnualRainfall.TabIndex = 0
         Me.tbAnnualRainfall.Text = "Annual Rainfall"
         Me.tbAnnualRainfall.UseVisualStyleBackColor = True
@@ -500,7 +500,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbCropSuccessProp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbCropSuccessProp.Name = "tbCropSuccessProp"
         Me.tbCropSuccessProp.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.tbCropSuccessProp.Size = New System.Drawing.Size(734, 629)
+        Me.tbCropSuccessProp.Size = New System.Drawing.Size(734, 585)
         Me.tbCropSuccessProp.TabIndex = 1
         Me.tbCropSuccessProp.Text = "Crop Success Prop"
         Me.tbCropSuccessProp.UseVisualStyleBackColor = True
@@ -647,7 +647,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbSeasonStartProb.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbSeasonStartProb.Name = "tbSeasonStartProb"
         Me.tbSeasonStartProb.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.tbSeasonStartProb.Size = New System.Drawing.Size(734, 629)
+        Me.tbSeasonStartProb.Size = New System.Drawing.Size(734, 585)
         Me.tbSeasonStartProb.TabIndex = 2
         Me.tbSeasonStartProb.Text = "Season Start Prob"
         Me.tbSeasonStartProb.UseVisualStyleBackColor = True
@@ -779,7 +779,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbAnnualTempSummaries.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbAnnualTempSummaries.Name = "tbAnnualTempSummaries"
         Me.tbAnnualTempSummaries.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.tbAnnualTempSummaries.Size = New System.Drawing.Size(734, 629)
+        Me.tbAnnualTempSummaries.Size = New System.Drawing.Size(734, 585)
         Me.tbAnnualTempSummaries.TabIndex = 3
         Me.tbAnnualTempSummaries.Text = "Annual Temperature"
         Me.tbAnnualTempSummaries.UseVisualStyleBackColor = True
@@ -1005,7 +1005,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbMonthlyTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbMonthlyTemp.Name = "tbMonthlyTemp"
         Me.tbMonthlyTemp.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.tbMonthlyTemp.Size = New System.Drawing.Size(734, 629)
+        Me.tbMonthlyTemp.Size = New System.Drawing.Size(734, 585)
         Me.tbMonthlyTemp.TabIndex = 4
         Me.tbMonthlyTemp.Text = "Monthly Temperature"
         Me.tbMonthlyTemp.UseVisualStyleBackColor = True
@@ -1232,8 +1232,8 @@ Partial Class sdgDefineAnnualRainfall
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(194, 680)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Location = New System.Drawing.Point(194, 646)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(336, 46)
         Me.ucrBase.TabIndex = 1
