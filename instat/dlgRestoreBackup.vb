@@ -41,6 +41,7 @@ Public Class dlgRestoreBackup
         If bReset Then
             SetDefaults()
         End If
+        ReopenDialog()
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
@@ -253,6 +254,10 @@ Public Class dlgRestoreBackup
             frmMain.clsRLink.bInstatObjectExists = True
             frmMain.UpdateAllGrids()
         End If
+    End Sub
+
+    Private Sub ReopenDialog()
+        rdoNeither.Checked = True
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
