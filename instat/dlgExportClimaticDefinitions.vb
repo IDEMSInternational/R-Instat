@@ -21,7 +21,7 @@ Public Class dlgExportClimaticDefinitions
     Private bResetRCode As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsDummyFunction As New RFunction
-    Public clsExportRinstatToBucketFunction, clsSummariesFunction As New RFunction
+    Public clsExportRinstatToBucketFunction, ClsGcsAuthFileFunction, clsSummariesFunction As New RFunction
     Public clsReforMattAnnualSummariesFunction, clsReformatCropSuccessFunction, clsReformatSeasonStartFunction, clsReformatTempSummariesFunction, clsReformatMonthlyTempSummaries As New RFunction
 
     Private Sub dlgExportClimaticDefinitions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -123,6 +123,7 @@ Public Class dlgExportClimaticDefinitions
         clsReformatSeasonStartFunction = New RFunction
         clsReforMattAnnualSummariesFunction = New RFunction
         clsReformatTempSummariesFunction = New RFunction
+        ClsGcsAuthFileFunction = New RFunction
         clsDummyFunction = New RFunction
         bResetSubdialog = True
 
@@ -162,6 +163,10 @@ Public Class dlgExportClimaticDefinitions
         clsExportRinstatToBucketFunction.SetPackageName("epicsawrap")
         clsExportRinstatToBucketFunction.SetRCommand("export_r_instat_to_bucket")
 
+        ClsGcsAuthFileFunction.SetPackageName("epicsawrap")
+        ClsGcsAuthFileFunction.SetRCommand("gcs_auth_file")
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(ClsGcsAuthFileFunction, 0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsExportRinstatToBucketFunction)
 
     End Sub
@@ -231,6 +236,12 @@ Public Class dlgExportClimaticDefinitions
         sdgDefineAnnualRainfall.SetRCode(clsNewReformatCropSuccessFunction:=clsReformatCropSuccessFunction, clsNewReformatSeasonStartFunction:=clsReformatSeasonStartFunction, clsNewReformatMonthlyTempSummaries:=clsReformatMonthlyTempSummaries,
                                       clsNewReforMattAnnualSummaries:=clsReforMattAnnualSummariesFunction, clsNewReformatTempSummariesFunction:=clsReformatTempSummariesFunction, clsNewExportRinstatToBucketFunction:=clsExportRinstatToBucketFunction, bReset:=bResetSubdialog)
         sdgDefineAnnualRainfall.ShowDialog()
+        bResetSubdialog = False
+    End Sub
+
+    Private Sub cmdSetToken_Click(sender As Object, e As EventArgs) Handles cmdSetToken.Click
+        sdgConnectGoogleBuckets.SetRCode(ClsNewGcsAuthFileFunction:=ClsGcsAuthFileFunction, bReset:=bResetSubdialog)
+        sdgConnectGoogleBuckets.ShowDialog()
         bResetSubdialog = False
     End Sub
 

@@ -56,6 +56,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.lblCountry = New System.Windows.Forms.Label()
         Me.lblStationID = New System.Windows.Forms.Label()
         Me.cmdDefine = New System.Windows.Forms.Button()
+        Me.cmdSetToken = New System.Windows.Forms.Button()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -440,12 +441,23 @@ Partial Class dlgExportClimaticDefinitions
         Me.cmdDefine.Text = "Define"
         Me.cmdDefine.UseVisualStyleBackColor = True
         '
+        'cmdSetToken
+        '
+        Me.cmdSetToken.Location = New System.Drawing.Point(332, 11)
+        Me.cmdSetToken.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmdSetToken.Name = "cmdSetToken"
+        Me.cmdSetToken.Size = New System.Drawing.Size(130, 35)
+        Me.cmdSetToken.TabIndex = 31
+        Me.cmdSetToken.Text = "Set Token"
+        Me.cmdSetToken.UseVisualStyleBackColor = True
+        '
         'dlgExportClimaticDefinitions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(682, 811)
+        Me.Controls.Add(Me.cmdSetToken)
         Me.Controls.Add(Me.cmdDefine)
         Me.Controls.Add(Me.lblStationID)
         Me.Controls.Add(Me.lblCountry)
@@ -522,4 +534,5 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents ucrInputCountry As ucrInputTextBox
     Friend WithEvents ucrInputStationID As ucrInputTextBox
     Friend WithEvents cmdDefine As Button
+    Friend WithEvents cmdSetToken As Button
 End Class
