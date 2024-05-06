@@ -15,6 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgOneWayFrequencies
+    Public enumOnewayMode As String = OnewayMode.Prepare
+    Public Enum OnewayMode
+        Prepare
+        Describe
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
@@ -42,6 +49,7 @@ Public Class dlgOneWayFrequencies
         End If
         SetRCodeForControls(bReset)
         SetDefaultColumn()
+        SetHelpOptions()
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
@@ -449,4 +457,14 @@ Public Class dlgOneWayFrequencies
         strDefaultColumns = Nothing
     End Sub
 
+    Private Sub SetHelpOptions()
+        Select Case enumOnewayMode
+            Case OnewayMode.Prepare
+                ucrBase.iHelpTopicID = 551
+            Case OnewayMode.Describe
+                ucrBase.iHelpTopicID = 518
+            Case OnewayMode.Climatic
+                ucrBase.iHelpTopicID = 617
+        End Select
+    End Sub
 End Class
