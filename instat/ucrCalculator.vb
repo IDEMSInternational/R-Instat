@@ -5968,11 +5968,11 @@ Public Class ucrCalculator
 
     End Sub
 
-    Private Sub cmdDigitssq_Click(sender As Object, e As EventArgs) Handles cmdDigitssq.Click
+    Private Sub cmdDigitssq_Click(sender As Object, e As EventArgs) Handles cmdFunctionsDigitsum.Click
 
     End Sub
 
-    Private Sub cmdDigitssqSession_Click(sender As Object, e As EventArgs) Handles cmdDigitssqSession.Click
+    Private Sub cmdDigitssqSession_Click(sender As Object, e As EventArgs) Handles cmdDigitsumSession.Click
 
     End Sub
 
