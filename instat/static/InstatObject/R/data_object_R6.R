@@ -4466,6 +4466,7 @@ DataSheet$set("public", "has_labels", function(col_names) {
 )
 
 DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+
   if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
   if(sign_level || signif.stars) message("This is no longer descriptive")
   if(sign_level) end_col = 5 else end_col = 4
@@ -4476,10 +4477,10 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, signi
     formula_str <- paste0(as.name(y_col_name), "~ ", as.name(paste(x_col_names, collapse = " + ")))
   }
 
+  return_item <- NULL
   mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())  
-    cat("ANOVA table: ", formula_str, "\n", sep = "")
-    print(anova(mod)[1:end_col], signif.stars = signif.stars)
-    cat("\n")
-    if(means) (print(model.tables(aov(mod), type = "means")))
+  return_item[[paste0("ANOVA table: ", formula_str, sep = "")]] <- anova(mod)[1:end_col]
+  if(means) return_item[[paste0("Means table of ", y_col_name)]] <- model.tables(aov(mod), type = "means")
+  return(return_item)
 }
 )
