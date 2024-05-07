@@ -177,7 +177,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblThreeBy.AutoSize = True
         Me.lblThreeBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblThreeBy.Location = New System.Drawing.Point(135, 16)
+        Me.lblThreeBy.Location = New System.Drawing.Point(138, 16)
         Me.lblThreeBy.Name = "lblThreeBy"
         Me.lblThreeBy.Size = New System.Drawing.Size(18, 13)
         Me.lblThreeBy.TabIndex = 19
@@ -240,9 +240,9 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblFirstType.ForeColor = System.Drawing.SystemColors.ControlText
         Me.lblFirstType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFirstType.Location = New System.Drawing.Point(6, 16)
+        Me.lblFirstType.Location = New System.Drawing.Point(-2, 16)
         Me.lblFirstType.Name = "lblFirstType"
-        Me.lblFirstType.Size = New System.Drawing.Size(55, 13)
+        Me.lblFirstType.Size = New System.Drawing.Size(71, 13)
         Me.lblFirstType.TabIndex = 10
         Me.lblFirstType.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
@@ -269,7 +269,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.lblBy.AutoSize = True
         Me.lblBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblBy.Location = New System.Drawing.Point(64, 16)
+        Me.lblBy.Location = New System.Drawing.Point(67, 16)
         Me.lblBy.Name = "lblBy"
         Me.lblBy.Size = New System.Drawing.Size(18, 13)
         Me.lblBy.TabIndex = 11
@@ -785,9 +785,9 @@ Partial Class dlgDescribeTwoVarGraph
         Me.lblThreeVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblThreeVariable.Location = New System.Drawing.Point(292, 240)
         Me.lblThreeVariable.Name = "lblThreeVariable"
-        Me.lblThreeVariable.Size = New System.Drawing.Size(79, 13)
+        Me.lblThreeVariable.Size = New System.Drawing.Size(75, 13)
         Me.lblThreeVariable.TabIndex = 69
-        Me.lblThreeVariable.Text = "Three Variable:"
+        Me.lblThreeVariable.Text = "Third Variable:"
         '
         'lblThreeVariableSecond
         '
