@@ -632,6 +632,13 @@ Partial Class ucrCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpFunctions = New System.Windows.Forms.GroupBox()
+        Me.cmdDigitssqSession = New System.Windows.Forms.Button()
+        Me.cmdDigitsquSession = New System.Windows.Forms.Button()
+        Me.cmdDigitssq = New System.Windows.Forms.Button()
+        Me.cmdDigitsqu = New System.Windows.Forms.Button()
+        Me.cmdDecimalsSession = New System.Windows.Forms.Button()
+        Me.cmdMASSFractionsSession = New System.Windows.Forms.Button()
+        Me.cmdPascalSession = New System.Windows.Forms.Button()
         Me.cmdRhelpFunctions = New instat.ucrSplitButton()
         Me.cmdDecimals = New System.Windows.Forms.Button()
         Me.cmdMASSFractions = New System.Windows.Forms.Button()
@@ -7733,6 +7740,13 @@ Partial Class ucrCalculator
         '
         'grpFunctions
         '
+        Me.grpFunctions.Controls.Add(Me.cmdDigitssqSession)
+        Me.grpFunctions.Controls.Add(Me.cmdDigitsquSession)
+        Me.grpFunctions.Controls.Add(Me.cmdDigitssq)
+        Me.grpFunctions.Controls.Add(Me.cmdDigitsqu)
+        Me.grpFunctions.Controls.Add(Me.cmdDecimalsSession)
+        Me.grpFunctions.Controls.Add(Me.cmdMASSFractionsSession)
+        Me.grpFunctions.Controls.Add(Me.cmdPascalSession)
         Me.grpFunctions.Controls.Add(Me.cmdRhelpFunctions)
         Me.grpFunctions.Controls.Add(Me.cmdDecimals)
         Me.grpFunctions.Controls.Add(Me.cmdMASSFractions)
@@ -7760,16 +7774,94 @@ Partial Class ucrCalculator
         Me.grpFunctions.Margin = New System.Windows.Forms.Padding(2)
         Me.grpFunctions.Name = "grpFunctions"
         Me.grpFunctions.Padding = New System.Windows.Forms.Padding(2)
-        Me.grpFunctions.Size = New System.Drawing.Size(250, 193)
+        Me.grpFunctions.Size = New System.Drawing.Size(250, 250)
         Me.grpFunctions.TabIndex = 216
         Me.grpFunctions.TabStop = False
         Me.grpFunctions.Text = "Functions"
+        '
+        'cmdDigitssqSession
+        '
+        Me.cmdDigitssqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDigitssqSession.Location = New System.Drawing.Point(185, 159)
+        Me.cmdDigitssqSession.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDigitssqSession.Name = "cmdDigitssqSession"
+        Me.cmdDigitssqSession.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDigitssqSession.TabIndex = 228
+        Me.cmdDigitssqSession.Text = "digitssq*"
+        Me.cmdDigitssqSession.UseVisualStyleBackColor = True
+        '
+        'cmdDigitsquSession
+        '
+        Me.cmdDigitsquSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDigitsquSession.Location = New System.Drawing.Point(63, 159)
+        Me.cmdDigitsquSession.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDigitsquSession.Name = "cmdDigitsquSession"
+        Me.cmdDigitsquSession.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDigitsquSession.TabIndex = 227
+        Me.cmdDigitsquSession.Text = "digitsqu*"
+        Me.cmdDigitsquSession.UseVisualStyleBackColor = True
+        '
+        'cmdDigitssq
+        '
+        Me.cmdDigitssq.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDigitssq.Location = New System.Drawing.Point(124, 159)
+        Me.cmdDigitssq.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDigitssq.Name = "cmdDigitssq"
+        Me.cmdDigitssq.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDigitssq.TabIndex = 226
+        Me.cmdDigitssq.Text = "digitssq"
+        Me.cmdDigitssq.UseVisualStyleBackColor = True
+        '
+        'cmdDigitsqu
+        '
+        Me.cmdDigitsqu.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDigitsqu.Location = New System.Drawing.Point(2, 159)
+        Me.cmdDigitsqu.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDigitsqu.Name = "cmdDigitsqu"
+        Me.cmdDigitsqu.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDigitsqu.TabIndex = 225
+        Me.cmdDigitsqu.Text = "digitsqu"
+        Me.cmdDigitsqu.UseVisualStyleBackColor = True
+        '
+        'cmdDecimalsSession
+        '
+        Me.cmdDecimalsSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDecimalsSession.Location = New System.Drawing.Point(185, 188)
+        Me.cmdDecimalsSession.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDecimalsSession.Name = "cmdDecimalsSession"
+        Me.cmdDecimalsSession.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDecimalsSession.TabIndex = 224
+        Me.cmdDecimalsSession.Text = "decimals*"
+        Me.cmdDecimalsSession.UseVisualStyleBackColor = True
+        '
+        'cmdMASSFractionsSession
+        '
+        Me.cmdMASSFractionsSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMASSFractionsSession.Location = New System.Drawing.Point(63, 188)
+        Me.cmdMASSFractionsSession.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdMASSFractionsSession.Name = "cmdMASSFractionsSession"
+        Me.cmdMASSFractionsSession.Size = New System.Drawing.Size(62, 30)
+        Me.cmdMASSFractionsSession.TabIndex = 223
+        Me.cmdMASSFractionsSession.Text = "fractions*"
+        Me.cmdMASSFractionsSession.UseVisualStyleBackColor = True
+        '
+        'cmdPascalSession
+        '
+        Me.cmdPascalSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdPascalSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPascalSession.Location = New System.Drawing.Point(185, 130)
+        Me.cmdPascalSession.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPascalSession.Name = "cmdPascalSession"
+        Me.cmdPascalSession.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPascalSession.TabIndex = 222
+        Me.cmdPascalSession.Text = "pascal*"
+        Me.cmdPascalSession.UseVisualStyleBackColor = True
         '
         'cmdRhelpFunctions
         '
         Me.cmdRhelpFunctions.AutoSize = True
         Me.cmdRhelpFunctions.ContextMenuStrip = Me.ContextMenuStripFunctions
-        Me.cmdRhelpFunctions.Location = New System.Drawing.Point(173, 161)
+        Me.cmdRhelpFunctions.Location = New System.Drawing.Point(178, 217)
         Me.cmdRhelpFunctions.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRhelpFunctions.Name = "cmdRhelpFunctions"
         Me.cmdRhelpFunctions.Size = New System.Drawing.Size(68, 23)
@@ -7781,7 +7873,7 @@ Partial Class ucrCalculator
         'cmdDecimals
         '
         Me.cmdDecimals.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDecimals.Location = New System.Drawing.Point(124, 130)
+        Me.cmdDecimals.Location = New System.Drawing.Point(124, 188)
         Me.cmdDecimals.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDecimals.Name = "cmdDecimals"
         Me.cmdDecimals.Size = New System.Drawing.Size(62, 30)
@@ -7792,7 +7884,7 @@ Partial Class ucrCalculator
         'cmdMASSFractions
         '
         Me.cmdMASSFractions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMASSFractions.Location = New System.Drawing.Point(185, 130)
+        Me.cmdMASSFractions.Location = New System.Drawing.Point(2, 188)
         Me.cmdMASSFractions.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMASSFractions.Name = "cmdMASSFractions"
         Me.cmdMASSFractions.Size = New System.Drawing.Size(62, 30)
@@ -7804,7 +7896,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPascal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPascal.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPascal.Location = New System.Drawing.Point(63, 130)
+        Me.cmdPascal.Location = New System.Drawing.Point(124, 130)
         Me.cmdPascal.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPascal.Name = "cmdPascal"
         Me.cmdPascal.Size = New System.Drawing.Size(62, 30)
@@ -7816,24 +7908,24 @@ Partial Class ucrCalculator
         '
         Me.cmdDssq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdDssq.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDssq.Location = New System.Drawing.Point(2, 159)
+        Me.cmdDssq.Location = New System.Drawing.Point(2, 130)
         Me.cmdDssq.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDssq.Name = "cmdDssq"
         Me.cmdDssq.Size = New System.Drawing.Size(62, 30)
         Me.cmdDssq.TabIndex = 177
-        Me.cmdDssq.Text = "dssq"
+        Me.cmdDssq.Text = "digitssq"
         Me.cmdDssq.UseVisualStyleBackColor = True
         '
         'cmddssqSession
         '
         Me.cmddssqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmddssqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmddssqSession.Location = New System.Drawing.Point(63, 159)
+        Me.cmddssqSession.Location = New System.Drawing.Point(63, 130)
         Me.cmddssqSession.Margin = New System.Windows.Forms.Padding(2)
         Me.cmddssqSession.Name = "cmddssqSession"
         Me.cmddssqSession.Size = New System.Drawing.Size(62, 30)
         Me.cmddssqSession.TabIndex = 178
-        Me.cmddssqSession.Text = "dssq*"
+        Me.cmddssqSession.Text = "digitssq*"
         Me.cmddssqSession.UseVisualStyleBackColor = True
         '
         'cmdCoeffs2
@@ -7948,7 +8040,7 @@ Partial Class ucrCalculator
         '
         Me.cmdDsum.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdDsum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDsum.Location = New System.Drawing.Point(2, 130)
+        Me.cmdDsum.Location = New System.Drawing.Point(1, 217)
         Me.cmdDsum.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDsum.Name = "cmdDsum"
         Me.cmdDsum.Size = New System.Drawing.Size(62, 30)
@@ -8057,7 +8149,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
-        Me.Controls.Add(Me.grpFunctions)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpHydroGOF)
@@ -8073,6 +8164,7 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpModifier)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.grpWakefield)
+        Me.Controls.Add(Me.grpFunctions)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "ucrCalculator"
         Me.Size = New System.Drawing.Size(898, 458)
@@ -8751,4 +8843,11 @@ Partial Class ucrCalculator
     Friend WithEvents cmdFunctionsSsq As Button
     Friend WithEvents cmdAveFun As Button
     Friend WithEvents cmdRhelpFunctions As ucrSplitButton
+    Friend WithEvents cmdPascalSession As Button
+    Friend WithEvents cmdDecimalsSession As Button
+    Friend WithEvents cmdMASSFractionsSession As Button
+    Friend WithEvents cmdDigitssqSession As Button
+    Friend WithEvents cmdDigitsquSession As Button
+    Friend WithEvents cmdDigitssq As Button
+    Friend WithEvents cmdDigitsqu As Button
 End Class
