@@ -937,10 +937,6 @@ Public Class frmMain
         mnuIncludeComments.Checked = dlgOptions.ucrChkIncludeCommentsbyDefault.chkCheck.Checked
     End Sub
 
-    Private Sub mnuOrganiseDataFrameHideColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameHideColumns.Click
-        dlgHideShowColumns.ShowDialog()
-    End Sub
-
     Private Sub mnuModelProbabilityDistributionsRandomSamplesUseModel_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsRandomSamplesUseModel.Click
         dlgRandomSample.enumRandomsampleMode = dlgRandomSample.RandomsampleMode.Model
         dlgRandomSample.ShowDialog()
