@@ -760,24 +760,51 @@ summary_which_min <- function (x, na.rm = TRUE, na_type = "", ...) {
   } 
 }
 
-summary_where_max <- function(x, na.rm = TRUE, na_type = "", ...) {
-  # TODO: This prevents warning and -Inf being returned. Is this desirable?
-  if(length(x) == 0 || (na.rm && length(x[!is.na(x)]) == 0)) return(NA)
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else {
-    where.max <- which.max(x)
-    return(x[where.max])
-  } 
+summary_where_max <- function(data, x, y, na.rm = TRUE, na_type = "", ...) {
+  # Check if data is a data frame
+  if (!is.data.frame(data)) {
+    stop("Input 'data' must be a data frame.")
+  }
+  
+  # Check if x and y are valid column names
+  if (!x %in% colnames(data) || !y %in% colnames(data)) {
+    stop("Invalid column name(s) provided.")
+  }
+  
+  # Subset the data excluding NA values if na.rm is TRUE
+  if (na.rm) {
+    data <- na.omit(data)
+  }
+  
+  # Find the row index of the maximum value in column x
+  max_row <- summary_which_max(data[[x]], na.rm = na.rm, na_type = na_type, ...)
+
+  
+  # Return the value of column y at the found row index
+  return(data[max_row, y])
 }
 
-summary_where_min <- function (x, na.rm = TRUE, na_type = "", ...) {
-  #TODO This prevents warning and Inf being retured. Is this desirable?
-  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-     where.min <- which.min(x)
-    return(x[where.min])
-  } 
+summary_where_min <- function(data, x, y, na.rm = TRUE, na_type = "", ...) {
+  # Check if data is a data frame
+  if (!is.data.frame(data)) {
+    stop("Input 'data' must be a data frame.")
+  }
+  
+  # Check if x and y are valid column names
+  if (!x %in% colnames(data) || !y %in% colnames(data)) {
+    stop("Invalid column name(s) provided.")
+  }
+  
+  # Subset the data excluding NA values if na.rm is TRUE
+  if (na.rm) {
+    data <- na.omit(data)
+  }
+  
+  # Find the row index of the minimum value in column x
+  min_row <- summary_which_min(data[[x]], na.rm = na.rm, na_type = na_type, ...)
+  
+  # Return the value of column y at the found row index
+  return(data[min_row, y])
 }
 
 # get the range of the data

@@ -42,7 +42,7 @@ Public Class sdgSummaries
         ucrPnlPosition.AddRadioButton(rdoUsePositions)
         ucrPnlPosition.AddParameterValuesCondition(rdoDisplay, "Check", "Display")
         ucrPnlPosition.AddParameterValuesCondition(rdoUsePositions, "Check", "Use")
-        ucrPnlPosition.AddToLinkedControls({ucrChkFirst, ucrSelectorOrderBy, ucrReceiverOrderBy, ucrChkOrderBy, ucrChkLast, ucrChknth, ucrInputN, ucrChkSample, ucrChkSetseed, ucrNudSeed}, {rdoUsePositions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPosition.AddToLinkedControls({ucrChkFirst, ucrSelectorOrderBy, ucrReceiverOrderBy, ucrChkOrderBy, ucrChkLast, ucrChknth, ucrChkSample}, {rdoUsePositions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPosition.AddToLinkedControls({ucrChkWhichmin, ucrReceiverInclude, ucrSelectorInclude, ucrChkInclude, ucrChkWhichmax}, {rdoDisplay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkNonMissing.SetParameter(New RParameter("summary_count_non_missing", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_non_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
