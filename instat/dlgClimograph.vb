@@ -40,6 +40,23 @@ Public Class dlgClimograph
     Private clsAesLine1Function As New RFunction
     Private clsFacetFunction1 As New RFunction
     Private clsGroupByFunction1 As New RFunction
+    Private bResetSubdialog As Boolean = True
+    Private clsCoordPolarFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
+    Private clsAnnotateFunction As New RFunction
+    Private clsCoordPolarStartOperator As New ROperator
+    Private clsXScaleDateFunction As New RFunction
+    Private clsYScaleDateFunction As New RFunction
+    Private clsScaleFillViridisFunction As New RFunction
+    Private clsScaleColourViridisFunction As New RFunction
+    Private clsScalecolouridentityFunction As New RFunction
+    Private clsLabsFunction As New RFunction
+    Private clsXlabFunction As New RFunction
+    Private clsYlabFunction As New RFunction
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
+    Private clsXScalecontinuousFunction As New RFunction
+    Private clsYScalecontinuousFunction As New RFunction
+    Private clsThemeFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
     Private clsFacetRowOp1 As New ROperator
     Private clsFacetColOp1 As New ROperator
@@ -52,7 +69,6 @@ Public Class dlgClimograph
     Private bUpdatingParameters As Boolean = False
     Private bUpdateComboOptions1 As Boolean = True
     Private bUpdatingParameters1 As Boolean = False
-
 
     Private Sub dlgClimograph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -69,6 +85,8 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctLegendPosition As New Dictionary(Of String, String)
+
         ucrBase.iHelpTopicID = 432
 
         ucrSelectorClimograph.SetParameter(New RParameter("data", 0, bNewIncludeArgumentName:=False))
@@ -147,7 +165,7 @@ Public Class dlgClimograph
         ucrReceiverElement2.strSelectorHeading = "Variables"
         ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
 
-        ucr1stFactorReceiver.SetParameter(New RParameter("station"))
+        ucr1stFactorReceiver.SetParameter(New RParameter("var1"))
         ucr1stFactorReceiver.Selector = ucrSelectorClimograph
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr1stFactorReceiver.strSelectorHeading = "Factors"
@@ -158,7 +176,7 @@ Public Class dlgClimograph
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
-        ucrReceiverFacet.SetParameter(New RParameter("year"))
+        ucrReceiverFacet.SetParameter(New RParameter("var1"))
         ucrReceiverFacet.Selector = ucrSelectorClimograph
         ucrReceiverFacet.SetClimaticType("year")
         ucrReceiverFacet.bAutoFill = True
@@ -176,7 +194,29 @@ Public Class dlgClimograph
         ucrReceiverAbsolute.SetLinkedDisplayControl(lblAbsolute)
 
         ucrPnlClimograph.AddToLinkedControls({ucr1stFactorReceiver, ucrReceiverAbsolute, ucrReceiverMintemp, ucrReceiverMonth, ucrReceiverMaxtem, ucrReceiverRain, ucrInputStation}, {rdoWalterLieth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlClimograph.AddToLinkedControls({ucrReceiverFacet, ucrReceiverElement2, ucrReceiverElement1, ucrReceiverMonthC, ucrReceiverRainC, ucrInputFacet}, {rdoClimograph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlClimograph.AddToLinkedControls({ucrReceiverFacet, ucrChkLegend, ucrReceiverElement2, ucrReceiverElement1, ucrReceiverMonthC, ucrReceiverRainC, ucrInputFacet, ucrChkColourIdntity}, {rdoClimograph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkColourIdntity.SetText("Colour Identity")
+        ucrChkColourIdntity.AddParameterValuesCondition(True, "checked", "True")
+        ucrChkColourIdntity.AddParameterValuesCondition(False, "checked", "False")
+        ucrChkColourIdntity.AddToLinkedControls({ucrInputName, ucrInputLabels}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputName.SetValidationTypeAsList()
+        ucrInputName.SetLinkedDisplayControl(lblName)
+        ucrInputLabels.SetValidationTypeAsList()
+        ucrInputLabels.SetLinkedDisplayControl(lblLabel)
+
+        ucrChkLegend.SetText("Legend:")
+        ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
 
         ucrSave.SetPrefix("wl_graph")
         ucrSave.SetIsComboBox()
@@ -206,6 +246,7 @@ Public Class dlgClimograph
         clsRggplotFunction = New RFunction
         clsBarAesFunction = New RFunction
         clsFacetFunction1 = New RFunction
+        clsScalecolouridentityFunction = New RFunction
         clsFacetVariablesOperator = New ROperator
         clsFacetRowOp1 = New ROperator
         clsFacetColOp1 = New ROperator
@@ -271,9 +312,11 @@ Public Class dlgClimograph
 
         clsAesLineFunction.SetRCommand("aes")
         clsAesLineFunction.AddParameter("group", "1", iPosition:=1)
+        clsAesLineFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34), iPosition:=3)
 
         clsAesLine1Function.SetRCommand("aes")
         clsAesLine1Function.AddParameter("group", "1", iPosition:=1)
+        clsAesLine1Function.AddParameter("colour", Chr(34) & "red" & Chr(34), iPosition:=3)
 
         clsGeomLineFunction.SetRCommand("geom_line")
         clsGeomLineFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesLineFunction, iPosition:=0)
@@ -281,9 +324,29 @@ Public Class dlgClimograph
         clsGeomLineFunction1.SetRCommand("geom_line")
         clsGeomLineFunction1.AddParameter("mapping", clsRFunctionParameter:=clsAesLine1Function, iPosition:=0)
 
+        clsScalecolouridentityFunction.SetRCommand("scale_colour_identity")
+        clsScalecolouridentityFunction.AddParameter("guide", Chr(34) & "legend" & Chr(34), iPosition:=1)
+
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBarFunction, iPosition:=2)
+
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
+        clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
+        clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
+        clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
+        clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
+        clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
@@ -302,8 +365,13 @@ Public Class dlgClimograph
         ucrReceiverMaxtem.SetRCode(clsGgwalterliethFunction, bReset)
         ucrReceiverAbsolute.SetRCode(clsGgwalterliethFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
+        ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         If bReset Then
             ucrPnlClimograph.SetRCode(clsDummyFunction, bReset)
+            ucrChkColourIdntity.SetRCode(clsScalecolouridentityFunction, bReset)
+            ucrInputName.SetRCode(clsScalecolouridentityFunction, bReset)
+            ucrInputLabels.SetRCode(clsScalecolouridentityFunction, bReset)
         End If
     End Sub
 
@@ -329,8 +397,9 @@ Public Class dlgClimograph
             ucrReceiverMonth.SetMeAsReceiver()
             clsBaseOperator.AddParameter("ggwalter_lieth", clsRFunctionParameter:=clsGgwalterliethFunction, iPosition:=0)
         End If
-        AutoFacetYear()
         AddGeomLine()
+        Identity()
+        AutoFacetStation()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -340,14 +409,14 @@ Public Class dlgClimograph
         TestOKEnabled()
     End Sub
 
-    Private Sub AutoFacetYear()
-        Dim currentReceiver As ucrReceiver = ucrSelectorClimograph.CurrentReceiver
-
-        If currentReceiver IsNot Nothing Then
-            ucrReceiverFacet.AddItemsWithMetadataProperty(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"year_label"})
-            currentReceiver.SetMeAsReceiver()
-            AddRemoveGroupBy1()
-        End If
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
+                                clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
+                                dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrSelectorClimograph, clsNewThemeFunction:=clsThemeFunction,
+                                clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
+                                clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetSubdialog)
+        sdgPlots.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub ucrInputFacet_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputFacet.ControlValueChanged
@@ -374,7 +443,7 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub UpdateParameters1()
-        clsFacetVariablesOperator.RemoveParameterByName("wrap" & ucrInputFacet.Name)
+        clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp1.RemoveParameterByName("col" & ucrInputFacet.Name)
         clsFacetRowOp1.RemoveParameterByName("row" & ucrInputFacet.Name)
 
@@ -383,7 +452,7 @@ Public Class dlgClimograph
         ucrReceiverFacet.SetRCode(Nothing)
         Select Case ucrInputFacet.GetText()
             Case strFacetWrap1
-                ucrReceiverFacet.ChangeParameterName("wrap")
+                ucrReceiverFacet.ChangeParameterName("var1")
                 ucrReceiverFacet.SetRCode(clsFacetVariablesOperator)
             Case strFacetCol1
                 ucrReceiverFacet.ChangeParameterName("col" & ucrInputFacet.Name)
@@ -392,6 +461,9 @@ Public Class dlgClimograph
                 ucrReceiverFacet.ChangeParameterName("row" & ucrInputFacet.Name)
                 ucrReceiverFacet.SetRCode(clsFacetRowOp1)
         End Select
+        If Not clsRFacetFunction.ContainsParameter("x") Then
+            clsRFacetFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
         bUpdatingParameters1 = False
     End Sub
 
@@ -519,7 +591,7 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub UpdateParameters()
-        clsFacetOperator.RemoveParameterByName("wrap" & ucrInputStation.Name)
+        clsFacetOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
 
@@ -528,7 +600,7 @@ Public Class dlgClimograph
         ucr1stFactorReceiver.SetRCode(Nothing)
         Select Case ucrInputStation.GetText()
             Case strFacetWrap
-                ucr1stFactorReceiver.ChangeParameterName("wrap" & ucrInputStation.Name)
+                ucr1stFactorReceiver.ChangeParameterName("var1")
                 ucr1stFactorReceiver.SetRCode(clsFacetOperator)
             Case strFacetCol
                 ucr1stFactorReceiver.ChangeParameterName("col" & ucrInputStation.Name)
@@ -598,19 +670,28 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub AutoFacetStation()
-        Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorClimograph.CurrentReceiver
+        If rdoClimograph.Checked Then
+            Dim currentReceiver As ucrReceiver = ucrSelectorClimograph.CurrentReceiver
 
-        If ucrCurrentReceiver IsNot Nothing Then
-            ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
-            ucrCurrentReceiver.SetMeAsReceiver()
-            AddRemoveGroupBy()
+            If currentReceiver IsNot Nothing Then
+                ucrReceiverFacet.AddItemsWithMetadataProperty(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"year_label"})
+                currentReceiver.SetMeAsReceiver()
+                AddRemoveGroupBy1()
+            End If
+        Else
+            Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorClimograph.CurrentReceiver
+
+            If ucrCurrentReceiver IsNot Nothing Then
+                ucr1stFactorReceiver.AddItemsWithMetadataProperty(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+                ucrCurrentReceiver.SetMeAsReceiver()
+                AddRemoveGroupBy()
+            End If
         End If
     End Sub
 
     Private Sub ucrSelectorClimograph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimograph.ControlValueChanged
         AutoFacetStation()
         SetPipeAssignTo()
-        AutoFacetYear()
         SetPipeAssignTo1()
     End Sub
 
@@ -681,21 +762,43 @@ Public Class dlgClimograph
         AddGeomLine()
     End Sub
 
-    'Private Sub RemoveFacet()
-    '    If rdoClimograph.Checked Then
-    '        If Not ucrReceiverFacet.IsEmpty Then
-    '            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction1)
-    '        Else
-    '            clsBaseOperator.RemoveParameterByName("facets")
-    '        End If
-    '    Else
-    '        If Not ucr1stFactorReceiver.IsEmpty Then
-    '            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
-    '        Else
-    '            clsBaseOperator.RemoveParameterByName("facets")
-    '        End If
-    '    End If
-    'End Sub
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
+        AddRemoveTheme()
+    End Sub
+
+    Private Sub Identity()
+        If rdoClimograph.Checked Then
+            If ucrChkColourIdntity.Checked Then
+                clsBaseOperator.AddParameter("scale_colour_identity", clsRFunctionParameter:=clsScalecolouridentityFunction, iPosition:=13)
+                If Not ucrInputLabels.IsEmpty Then
+                    clsScalecolouridentityFunction.AddParameter("labels", ucrInputLabels.clsRList.ToScript(), iPosition:=2)
+                Else
+                    clsScalecolouridentityFunction.RemoveParameterByName("labels")
+                End If
+                If Not ucrInputName.IsEmpty Then
+                    clsScalecolouridentityFunction.AddParameter("name", Chr(34) & ucrInputName.GetText() & Chr(34), iPosition:=0)
+                Else
+                    clsScalecolouridentityFunction.RemoveParameterByName("name")
+                End If
+            Else
+                clsBaseOperator.RemoveParameterByName("scale_colour_identity")
+            End If
+        Else
+            clsBaseOperator.RemoveParameterByName("scale_colour_identity")
+        End If
+    End Sub
+
+    Private Sub ucrChkColourIdntity_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkColourIdntity.ControlValueChanged, ucrInputName.ControlValueChanged, ucrInputLabels.ControlValueChanged
+        Identity()
+    End Sub
 
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlClimograph.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverAbsolute.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverMaxtem.ControlContentsChanged, ucrReceiverMintemp.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrReceiverMonthC.ControlContentsChanged, ucrReceiverRainC.ControlContentsChanged
         TestOKEnabled()

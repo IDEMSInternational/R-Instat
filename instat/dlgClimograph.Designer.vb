@@ -52,6 +52,14 @@ Partial Class dlgClimograph
         Me.lblElement2 = New System.Windows.Forms.Label()
         Me.ucrReceiverMonthC = New instat.ucrReceiverSingle()
         Me.lblMonthC = New System.Windows.Forms.Label()
+        Me.cmdOptions = New instat.ucrSplitButton()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegend = New instat.ucrCheck()
+        Me.ucrChkColourIdntity = New instat.ucrCheck()
+        Me.ucrInputName = New instat.ucrInputTextBox()
+        Me.lblName = New System.Windows.Forms.Label()
+        Me.lblLabel = New System.Windows.Forms.Label()
+        Me.ucrInputLabels = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'ucrReceiverAbsolute
@@ -227,7 +235,7 @@ Partial Class dlgClimograph
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(12, 344)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 374)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 75
@@ -235,7 +243,7 @@ Partial Class dlgClimograph
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(12, 317)
+        Me.ucrSave.Location = New System.Drawing.Point(12, 347)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(282, 24)
@@ -398,11 +406,99 @@ Partial Class dlgClimograph
         Me.lblMonthC.TabIndex = 87
         Me.lblMonthC.Text = "Month:"
         '
+        'cmdOptions
+        '
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.Location = New System.Drawing.Point(11, 234)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(148, 25)
+        Me.cmdOptions.TabIndex = 95
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(112, 318)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
+        Me.ucrInputLegendPosition.TabIndex = 97
+        '
+        'ucrChkLegend
+        '
+        Me.ucrChkLegend.AutoSize = True
+        Me.ucrChkLegend.Checked = False
+        Me.ucrChkLegend.Location = New System.Drawing.Point(12, 315)
+        Me.ucrChkLegend.Name = "ucrChkLegend"
+        Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkLegend.TabIndex = 96
+        '
+        'ucrChkColourIdntity
+        '
+        Me.ucrChkColourIdntity.AutoSize = True
+        Me.ucrChkColourIdntity.Checked = False
+        Me.ucrChkColourIdntity.Location = New System.Drawing.Point(12, 265)
+        Me.ucrChkColourIdntity.Name = "ucrChkColourIdntity"
+        Me.ucrChkColourIdntity.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkColourIdntity.TabIndex = 98
+        '
+        'ucrInputName
+        '
+        Me.ucrInputName.AddQuotesIfUnrecognised = True
+        Me.ucrInputName.AutoSize = True
+        Me.ucrInputName.IsMultiline = False
+        Me.ucrInputName.IsReadOnly = False
+        Me.ucrInputName.Location = New System.Drawing.Point(62, 288)
+        Me.ucrInputName.Name = "ucrInputName"
+        Me.ucrInputName.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputName.TabIndex = 99
+        '
+        'lblName
+        '
+        Me.lblName.AutoSize = True
+        Me.lblName.Location = New System.Drawing.Point(9, 293)
+        Me.lblName.Name = "lblName"
+        Me.lblName.Size = New System.Drawing.Size(38, 13)
+        Me.lblName.TabIndex = 100
+        Me.lblName.Text = "Name:"
+        '
+        'lblLabel
+        '
+        Me.lblLabel.AutoSize = True
+        Me.lblLabel.Location = New System.Drawing.Point(190, 293)
+        Me.lblLabel.Name = "lblLabel"
+        Me.lblLabel.Size = New System.Drawing.Size(41, 13)
+        Me.lblLabel.TabIndex = 102
+        Me.lblLabel.Text = "Labels:"
+        '
+        'ucrInputLabels
+        '
+        Me.ucrInputLabels.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabels.AutoSize = True
+        Me.ucrInputLabels.IsMultiline = False
+        Me.ucrInputLabels.IsReadOnly = False
+        Me.ucrInputLabels.Location = New System.Drawing.Point(243, 288)
+        Me.ucrInputLabels.Name = "ucrInputLabels"
+        Me.ucrInputLabels.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputLabels.TabIndex = 101
+        '
         'dlgClimograph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(477, 411)
+        Me.ClientSize = New System.Drawing.Size(472, 434)
+        Me.Controls.Add(Me.lblLabel)
+        Me.Controls.Add(Me.ucrInputLabels)
+        Me.Controls.Add(Me.lblName)
+        Me.Controls.Add(Me.ucrInputName)
+        Me.Controls.Add(Me.ucrChkColourIdntity)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
+        Me.Controls.Add(Me.ucrChkLegend)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputFacet)
         Me.Controls.Add(Me.ucrReceiverFacet)
         Me.Controls.Add(Me.lblFacet)
@@ -474,4 +570,12 @@ Partial Class dlgClimograph
     Friend WithEvents lblElement2 As Label
     Friend WithEvents ucrReceiverMonthC As ucrReceiverSingle
     Friend WithEvents lblMonthC As Label
+    Friend WithEvents cmdOptions As ucrSplitButton
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegend As ucrCheck
+    Friend WithEvents ucrChkColourIdntity As ucrCheck
+    Friend WithEvents lblName As Label
+    Friend WithEvents ucrInputName As ucrInputTextBox
+    Friend WithEvents lblLabel As Label
+    Friend WithEvents ucrInputLabels As ucrInputTextBox
 End Class
