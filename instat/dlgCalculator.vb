@@ -138,6 +138,12 @@ Public Class dlgCalculator
         If Not String.IsNullOrEmpty(ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame) Then
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 0)
+            ucrCalc.ucrSaveResultInto.Enabled = True
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachFunction)
+            ucrCalc.ucrSaveResultInto.Enabled = False
+            ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = False
         End If
         ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
         ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
@@ -148,15 +154,13 @@ Public Class dlgCalculator
         ucrCalc.SetCalculationHistory()
     End Sub
 
-    'Private Sub ucrCalc_SelectionChanged() Handles ucrCalc.SelectionChanged
-    '    If Not String.IsNullOrEmpty(ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame) Then
-    '        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
-    '        ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 0)
-    '    End If
-    '    ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
-    '    ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
-    '    TestOKEnabled()
-    'End Sub
+    Private Sub ucrCalc_SelectionChanged() Handles ucrCalc.SelectionChanged
+        SaveResults()
+        AddAttachDetachFunctions()
+        ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
+        ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
+        TestOKEnabled()
+    End Sub
 
     Private Sub ucrSelectorForCalculation_DataframeChanged() Handles ucrCalc.DataFrameChanged
         ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
