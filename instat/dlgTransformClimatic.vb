@@ -40,14 +40,23 @@ Public Class dlgTransformClimatic
     Private clsReduceWBMinFunction As New RFunction
     Private clsReduceWBMinFunction1 As New RFunction
     Private clsWBMinEvapOperator As New ROperator
-    'Private clsPMinFunctionMax, clsPMaxFunctionMax, clsRWaterBalanceFunction, clsRWaterBalanceFunction2, clsRWaterBalanceFunction1, clsTailFunction, clsWBEvaporation As New RFunction
+    Private clsWBEvaporationMinFunction As New RFunction
+
+    Private clsPMinWBMinFunction As New RFunction
+    Private clsWBMinTailFunction1 As New RFunction
     'Private clsPMaxOperatorMax, clsReduceOpEvapValue2, clsReduceOpEvapValue1, clsReduceOpEvapValue, clsWBOperator As New ROperator
 
     ' Water Balance max
     Private clsEndSeasonWBMaxCalc As New RFunction
     Private clsEndSeasonWBMaxCalcSubCalcsList As New RFunction
     Private clsReduceWBMaxFunction As New RFunction
+    Private clsPMinWBMaxFunction As New RFunction
     Private clsReduceWBMaxFunction1 As New RFunction
+    Private clsWBMaxEvapOperator As New ROperator
+    Private clsPMaxFunction As New RFunction
+    Private clsWBOperator1 As New ROperator
+    Private clsWBMaxTailFunction1 As New RFunction
+    Private clsEndSeasonWBCalcSubCalcsList As New RFunction
 
     'Degree
     Private clsDiurnalRangeOperator, clsTMeanAddOperator, clsTMeanDivideOperator As New ROperator
@@ -277,12 +286,12 @@ Public Class dlgTransformClimatic
         ucrNudMultSpells.SetLinkedDisplayControl(lblRowsMultSpells)
 
         ' Water Balance
-        ucrNudWBCapacity.SetParameter(New RParameter("capacity", 1, False))
+        ucrNudWBCapacity.SetParameter(New RParameter("yes", 1))
         ucrNudWBCapacity.SetMinMax(1, Integer.MaxValue)
         ucrNudWBCapacity.Increment = 10
         ucrNudWBCapacity.SetLinkedDisplayControl(lblWBCapacity)
 
-        ucrInputEvaporation.SetParameter(New RParameter("evaporation.value", 1, False))
+        ucrInputEvaporation.SetParameter(New RParameter("value", 1, bNewIncludeArgumentName:=False))
         ucrInputEvaporation.SetValidationTypeAsNumeric()
         ucrInputEvaporation.AddQuotesIfUnrecognised = False
         ucrInputEvaporation.SetRDefault("5")
@@ -427,12 +436,22 @@ Public Class dlgTransformClimatic
         clsReduceWBMinFunction.Clear()
         clsReduceWBMinFunction1.Clear()
         clsWBMinEvapOperator.Clear()
+        clsWBEvaporationMinFunction.Clear()
+        clsPMaxFunction.Clear()
+        clsPMinWBMinFunction.Clear()
+        clsWBMinTailFunction1.Clear()
 
         '   Water Balance max
         clsEndSeasonWBMaxCalc.Clear()
         clsEndSeasonWBMaxCalcSubCalcsList.Clear()
         clsReduceWBMaxFunction.Clear()
         clsReduceWBMaxFunction1.Clear()
+        clsWBMaxEvapOperator.Clear()
+        clsWBOperator1.Clear()
+        clsWBOperator2.Clear()
+        clsWBMaxTailFunction1.Clear()
+        clsPMinWBMaxFunction.Clear()
+        clsEndSeasonWBCalcSubCalcsList.Clear()
 
         ' Count and Spells: Rainday
         clsRRainday.SetRCommand("instat_calculation$new")
@@ -559,6 +578,23 @@ Public Class dlgTransformClimatic
         'clsTailFunction.SetRCommand("tail")
         'clsTailFunction.AddParameter("n", "-1", iPosition:=1)
 
+
+        clsWBOperator1.SetOperation("-")
+        clsWBOperator1.AddParameter("left", "..1 + ..2", iPosition:=0)
+        clsWBOperator1.AddParameter("right", clsRFunctionParameter:=clsWBEvaporationMinFunction, iPosition:=1)
+        clsWBOperator1.bSpaceAroundOperation = True
+        clsWBOperator1.bBrackets = False
+
+        clsWBEvaporationMinFunction.SetRCommand("WB_evaporation")
+        clsWBEvaporationMinFunction.AddParameter("water_balance", "..1", iPosition:=0, bIncludeArgumentName:=False)
+        clsWBEvaporationMinFunction.AddParameter("y", "..2", iPosition:=4, bIncludeArgumentName:=False)
+
+
+        clsPMaxFunction.SetRCommand("pmax")
+        clsPMaxFunction.AddParameter("0", "..1 + ..2", iPosition:=0, bIncludeArgumentName:=False)
+        clsPMaxFunction.AddParameter("1", "0", bIncludeArgumentName:=False)
+
+
         ' Water Balance min
         clsEndSeasonWBMinCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonWBMinCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
@@ -584,6 +620,10 @@ Public Class dlgTransformClimatic
         clsReduceWBMinFunction1.AddParameter(".x", clsRFunctionParameter:=clsWBMinTailFunction, iPosition:=1)
         clsReduceWBMinFunction1.AddParameter(".init", "0", iPosition:=2)
 
+        clsPMinWBMinFunction.SetRCommand(" ~ pmin")
+        clsPMinWBMinFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsPMinWBMinFunction.AddParameter("1", iCapacityDefault, iPosition:=1, bIncludeArgumentName:=False)
+
 
         clsEndSeasonWBCalcSubCalcsList.SetRCommand("list")
         clsEndSeasonWBCalcSubCalcsList.AddParameter("0", clsRFunctionParameter:=clsEndSeasonWBMinCalc, iPosition:=0, bIncludeArgumentName:=False)
@@ -595,12 +635,16 @@ Public Class dlgTransformClimatic
         clsWBMinTailFunction.AddParameter("n", "-1", iPosition:=1)
 
         clsWBMinTailFunction1.SetRCommand("tail")
-        clsWBMinTailFunction1.AddParameter("x", ucrReceiverEvaporation.GetVariableNames(False), iPosition:=0)
+        clsWBMinTailFunction1.AddParameter("x", ucrReceiverEvap.GetVariableNames(False), iPosition:=0)
         clsWBMinTailFunction1.AddParameter("n", "-1", iPosition:=1)
 
         clsWBMinEvapOperator.SetOperation("-")
         clsWBMinEvapOperator.AddParameter("0", strRainMin, iPosition:=0)
         clsWBMinEvapOperator.AddParameter("value", "5", iPosition:=1)
+
+        clsWBMinTailFunction1.SetRCommand("tail")
+        clsWBMinTailFunction1.AddParameter("x", ucrReceiverEvap.GetVariableNames(False), iPosition:=0)
+        clsWBMinTailFunction1.AddParameter("n", "-1", iPosition:=1)
 
         ' Water Balance max
         clsEndSeasonWBMaxCalc.SetRCommand("instat_calculation$new")
@@ -612,6 +656,7 @@ Public Class dlgTransformClimatic
 
         clsEndSeasonWBMaxCalcSubCalcsList.SetRCommand("list")
         clsEndSeasonWBMaxCalcSubCalcsList.AddParameter("0", clsRFunctionParameter:=clsEndSeasonRainMaxCalc, iPosition:=0, bIncludeArgumentName:=False)
+
 
         clsReduceWBMaxFunction.bToScriptAsRString = True
         clsReduceWBMaxFunction.SetPackageName("purrr")
@@ -626,6 +671,23 @@ Public Class dlgTransformClimatic
         clsReduceWBMaxFunction1.AddParameter(".f", clsRFunctionParameter:=clsPMinWBMaxFunction, iPosition:=0)
         clsReduceWBMaxFunction1.AddParameter(".x", clsRFunctionParameter:=clsWBMaxTailFunction, iPosition:=1)
         clsReduceWBMaxFunction1.AddParameter(".init", "0", iPosition:=2)
+
+        clsPMinWBMaxFunction.SetRCommand(" ~ pmin")
+        clsPMinWBMaxFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsPMinWBMaxFunction.AddParameter("1", iCapacityDefault, iPosition:=1, bIncludeArgumentName:=False)
+
+
+        clsWBMaxTailFunction.SetRCommand("tail")
+        clsWBMaxTailFunction.AddParameter("x", clsROperatorParameter:=clsWBMaxEvapOperator, iPosition:=0)
+        clsWBMaxTailFunction.AddParameter("n", "-1", iPosition:=1)
+
+        clsWBMaxTailFunction1.SetRCommand("tail")
+        clsWBMaxTailFunction1.AddParameter("x", ucrReceiverEvap.GetVariableNames(False), iPosition:=0)
+        clsWBMaxTailFunction1.AddParameter("n", "-1", iPosition:=1)
+
+        clsWBMaxEvapOperator.SetOperation("-")
+        clsWBMaxEvapOperator.AddParameter("0", strRainMax, iPosition:=0)
+        clsWBMaxEvapOperator.AddParameter("value", "5", iPosition:=1)
 
 
         clsEndSeasonWBCalcSubCalcsList.SetRCommand("list")
@@ -777,8 +839,11 @@ Public Class dlgTransformClimatic
         ucrNudMgdd.AddAdditionalCodeParameterPair(clsModifiedLogicOperator, New RParameter("baseline", ucrNudMgdd.GetText, 1), iAdditionalPairNo:=1)
         ucrReceiverTMax.AddAdditionalCodeParameterPair(clsMeanAddOperator, New RParameter("tmax", 0), iAdditionalPairNo:=2)
         ucrReceiverTMin.AddAdditionalCodeParameterPair(clsMeanAddOperator, New RParameter("tmin", 1), iAdditionalPairNo:=2)
+        ucrInputEvaporation.AddAdditionalCodeParameterPair(clsWBMaxEvapOperator, New RParameter("value", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverEvap.AddAdditionalCodeParameterPair(clsWBMaxTailFunction1, New RParameter("x", 0), iAdditionalPairNo:=1)
 
-        ucrReceiverEvap.AddAdditionalCodeParameterPair(clsTailFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
+        ucrNudWBCapacity.AddAdditionalCodeParameterPair(clsPMinWBMinFunction, New RParameter("1", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrNudWBCapacity.AddAdditionalCodeParameterPair(clsPMinWBMaxFunction, New RParameter("1", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ' Moving
         ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
@@ -797,7 +862,7 @@ Public Class dlgTransformClimatic
         ucrInputSpellUpper.SetRCode(clsRRaindayUpperOperator, bReset)
 
         ' Water Balance
-        ucrReceiverEvap.SetRCode(clsAsNumericFunction, bReset)
+        ucrReceiverEvap.SetRCode(clsWBMinTailFunction1, bReset)
 
         'Degree
         ucrReceiverTMin.SetRCode(clsDiurnalRangeOperator, bReset)
@@ -812,9 +877,9 @@ Public Class dlgTransformClimatic
         ucrSaveColumn.SetRCode(clsRTransform, bReset)
         If bReset Then
             ucrChkGroupByYear.SetRCode(clsTransformManipulationsFunc, bReset)
-            ucrInputEvaporation.SetRCode(clsPMaxOperatorMax, bReset)
+            ucrInputEvaporation.SetRCode(clsWBMinEvapOperator, bReset)
             ucrPnlEvap.SetRCode(clsDummyFunction, bReset)
-            ucrChkWB.SetRCode(clsPMinFunctionMax, bReset)
+            'ucrChkWB.SetRCode(clsPMinFunctionMax, bReset)
             ucrPnlTransform.SetRCode(clsDummyFunction, bReset)
             ucrPnlDegree.SetRCode(clsDummyFunction, bReset)
         End If
