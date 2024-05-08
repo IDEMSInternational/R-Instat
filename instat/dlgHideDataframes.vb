@@ -46,6 +46,7 @@ Public Class dlgHideDataframes
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 538
         ucrReceiverMultiple.SetParameter(New RParameter("data_names", 0))
         ucrReceiverMultiple.SetParameterIsString()
         ucrReceiverMultiple.Selector = ucrSelectorForDataFrames
