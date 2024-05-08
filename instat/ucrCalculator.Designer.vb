@@ -8123,7 +8123,6 @@ Partial Class ucrCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.Controls.Add(Me.grpList)
         Me.Controls.Add(Me.cmdRhelpList)
         Me.Controls.Add(Me.cmdWakefieldHelp)
         Me.Controls.Add(Me.cmdStringRHelp)
@@ -8151,6 +8150,7 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpModifier)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.grpWakefield)
+        Me.Controls.Add(Me.grpList)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "ucrCalculator"
         Me.Size = New System.Drawing.Size(898, 458)

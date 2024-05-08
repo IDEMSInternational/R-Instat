@@ -472,7 +472,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCombn, "combn(c(-2,1,3,4), 2,FUN=prod) gives the products of the values 3 at a time, so (-213), (-214), (-234), (134), = -6, -12, -24, 12. (result usually put into output window)")
         ttCalculator.SetToolTip(cmdCoef, "single coefficient of a polynomial if given roots. So sum(combn(c(-2,1,3,4),3. FUN=prod) =(-6 -12-24 +12) = -26")
         '  To add ttCalculator.SetToolTip(cmdCoeffs2, "Shuffle the order of the factor levels")
-        ttCalculator.SetToolTip(cmdDsum, "Gives the sum of the digits in a numeric variable")
+        'ttCalculator.SetToolTip(cmdDsum, "Gives the sum of the digits in a numeric variable")
         ttCalculator.SetToolTip(cmdDssq, " Gives the ssq of the digits in a numeric variable. For example with c(12, 24, 86) gives (5, 20, 100)")
         ttCalculator.SetToolTip(cmddssqSession, "Gives digit sum of squares, but only if the library calculator code has been run in the current sesion")
         ttCalculator.SetToolTip(cmdPascal, "Gives Pascal triangles, e.g. for c(1,2,3,4) gives 1, (1,1), (1, 2, 1), (1, 3, 3, 1)")
@@ -5870,25 +5870,25 @@ Public Class ucrCalculator
 
     Private Sub cmdProd_Click(sender As Object, e As EventArgs) Handles cmdProd.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" prod(x= , na.rm=TRUE) ", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" prod(x= , na.rm=TRUE) ", 14)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("prod( , na.rm=TRUE)", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("prod( , na.rm=TRUE)", 13)
         End If
     End Sub
 
     Private Sub cmdCombn_Click(sender As Object, e As EventArgs) Handles cmdCombn.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("combn(x- ,m- ,FUN=prod, na.rm=TRUE)", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("combn(x- ,m- ,FUN=prod, na.rm=TRUE)", 29)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("combn( , ,FUN=prod, na.rm=TRUE)", 11)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("combn( , ,FUN=prod, na.rm=TRUE)", 26)
         End If
     End Sub
 
     Private Sub cmdCoef_Click(sender As Object, e As EventArgs) Handles cmdCoef.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" coef: sum(combn( x= ,m= ,FUN=prod, na.rm=TRUE))", 10)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" coef: sum(combn( x= ,m= ,FUN=prod, na.rm=TRUE))", 29)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("coef: sum(combn( , ,FUN=prod, na.rm=TRUE))", 11)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("coef: sum(combn( , ,FUN=prod, na.rm=TRUE))", 26)
         End If
     End Sub
 
