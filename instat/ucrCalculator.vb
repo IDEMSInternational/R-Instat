@@ -471,8 +471,14 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdProd, "The product of the values. So prod(c(1,2,3,4,10)) = 240")
         ttCalculator.SetToolTip(cmdCombn, "combn(c(-2,1,3,4), 2,FUN=prod) gives the products of the values 3 at a time, so (-213), (-214), (-234), (134), = -6, -12, -24, 12. (result usually put into output window)")
         ttCalculator.SetToolTip(cmdCoef, "single coefficient of a polynomial if given roots. So sum(combn(c(-2,1,3,4),3. FUN=prod) =(-6 -12-24 +12) = -26")
-        '  To add ttCalculator.SetToolTip(cmdCoeffs2, "Shuffle the order of the factor levels")
-        'ttCalculator.SetToolTip(cmdDsum, "Gives the sum of the digits in a numeric variable")
+        ' ttCalculator.SetToolTip(cmdCoeffs2, "")
+        ttCalculator.SetToolTip(cmdDigitSum, "Gives the sum of the digits in a numeric variable")
+        ttCalculator.SetToolTip(cmdDigitsumSession, "Gives the sum of the digits, if library calculator code has been run in the current session")
+        ttCalculator.SetToolTip(cmdPascalSession, "Gives binomial coefficients, if the library calculator code has been run in the current session")
+        ttCalculator.SetToolTip(cmdDigitsqu, "Squares of digits in an integer variable")
+        ttCalculator.SetToolTip(cmdDigitsquSession, "Squares of digits if the library calculator code has been run in the current session")
+        ttCalculator.SetToolTip(cmdMASSFractionsSession, "Changes decimal dta into fractions, if the library calculator code has been run in the current session")
+        ttCalculator.SetToolTip(cmdDecimalsSession, "Changes fractions back to decimals if the library calculator code has been run in the current session")
         ttCalculator.SetToolTip(cmdDssq, " Gives the ssq of the digits in a numeric variable. For example with c(12, 24, 86) gives (5, 20, 100)")
         ttCalculator.SetToolTip(cmddssqSession, "Gives digit sum of squares, but only if the library calculator code has been run in the current sesion")
         ttCalculator.SetToolTip(cmdPascal, "Gives Pascal triangles, e.g. for c(1,2,3,4) gives 1, (1,1), (1, 2, 1), (1, 3, 3, 1)")
@@ -5848,7 +5854,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(  p= ,o= )", 6)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(,)", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(, )", 3)
         End If
     End Sub
 
@@ -5870,23 +5876,23 @@ Public Class ucrCalculator
 
     Private Sub cmdProd_Click(sender As Object, e As EventArgs) Handles cmdProd.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" prod(x= , na.rm=TRUE) ", 14)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" prod(x= , na.rm=TRUE) ", 15)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("prod( , na.rm=TRUE)", 13)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("prod( , na.rm=TRUE)", 14)
         End If
     End Sub
 
     Private Sub cmdCombn_Click(sender As Object, e As EventArgs) Handles cmdCombn.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("combn(x- ,m- ,FUN=prod, na.rm=TRUE)", 29)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("combn(x- ,m- ,FUN=prod, na.rm=TRUE)", 27)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("combn( , ,FUN=prod, na.rm=TRUE)", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("combn( , ,FUN=prod, na.rm=TRUE)", 25)
         End If
     End Sub
 
     Private Sub cmdCoef_Click(sender As Object, e As EventArgs) Handles cmdCoef.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" coef: sum(combn( x= ,m= ,FUN=prod, na.rm=TRUE))", 29)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" coef: sum(combn( x= ,m= ,FUN=prod, na.rm=TRUE))", 28)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("coef: sum(combn( , ,FUN=prod, na.rm=TRUE))", 26)
         End If
@@ -5894,10 +5900,6 @@ Public Class ucrCalculator
 
     Private Sub cmdCoeffs2_Click(sender As Object, e As EventArgs) Handles cmdCoeffs2.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.numeric(purrr::map(.x=(nrow(data_RDS)-1):0, .f = ~sum(combn(rootsx3[1:nrow(data_RDS)-1], .x , FUN=prod))))", 1)
-    End Sub
-
-    Private Sub cmdDsum_Click(sender As Object, e As EventArgs)
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dsum:m,;sapply(, Function(n) {a < -as.integer(c(strsplit(as.character(n), Split() = "")[[1]])); sum(a)})", 1)
     End Sub
 
     Private Sub cmdDssqSession_Click(sender As Object, e As EventArgs) Handles cmddssqSession.Click
@@ -5965,7 +5967,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDigitsqu_Click(sender As Object, e As EventArgs) Handles cmdDigitsqu.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" sapply(, Function(n) {a < -as.integer(c(strsplit(as.character(n), Split() = """")[[1]])); a^2})")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" sapply(, Function(n) {a < -as.integer(c(strsplit(as.character(n), Split() = """")[[1]])); a^2})", 38)
     End Sub
 
     Private Sub cmdDigitsquSession_Click(sender As Object, e As EventArgs) Handles cmdDigitsquSession.Click
@@ -5976,13 +5978,9 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    'Private Sub cmdFunctionsDigitsum_Click(sender As Object, e As EventArgs) Handles cmdFunctionsDigitsum.Click
-    '    If chkShowParameters.Checked Then
-    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( , cycles = 10, max.denominator = 2000))", 40)
-    '    Else
-    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( ))", 3)
-    '    End If
-    'End Sub
+    Private Sub cmdFunctionsDigitsum_Click(sender As Object, e As EventArgs) Handles cmdFunctionsDigitsum.Click
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dsum:sapply( , Function(n){a<-as.integer(c(strsplit(as.character(n),split="""")[[1]]));sum(a)})", 46)
+    End Sub
 
     Private Sub cmdFunctionsDigitsumSession_Click(sender As Object, e As EventArgs) Handles cmdDigitsumSession.Click
         If chkShowParameters.Checked Then
