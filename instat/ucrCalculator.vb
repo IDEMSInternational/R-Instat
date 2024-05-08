@@ -5896,8 +5896,8 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.numeric(purrr::map(.x=(nrow(data_RDS)-1):0, .f = ~sum(combn(rootsx3[1:nrow(data_RDS)-1], .x , FUN=prod))))", 1)
     End Sub
 
-    Private Sub cmdDsum_Click(sender As Object, e As EventArgs) Handles cmdDsum.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dsum:  m,;sapply(, Function(n) {a < -as.integer(c(strsplit(as.character(n), Split() = "")[[1]])); sum(a)})", 1)
+    Private Sub cmdDsum_Click(sender As Object, e As EventArgs)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dsum:m,;sapply(, Function(n) {a < -as.integer(c(strsplit(as.character(n), Split() = "")[[1]])); sum(a)})", 1)
     End Sub
 
     Private Sub cmdDssqSession_Click(sender As Object, e As EventArgs) Handles cmddssqSession.Click
@@ -5957,23 +5957,39 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPascalSession_Click(sender As Object, e As EventArgs) Handles cmdPascalSession.Click
-
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pascal(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pascal( )", 2)
+        End If
     End Sub
 
     Private Sub cmdDigitsqu_Click(sender As Object, e As EventArgs) Handles cmdDigitsqu.Click
-
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" sapply(, Function(n) {a < -as.integer(c(strsplit(as.character(n), Split() = """")[[1]])); a^2})")
     End Sub
 
     Private Sub cmdDigitsquSession_Click(sender As Object, e As EventArgs) Handles cmdDigitsquSession.Click
-
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digitsqu(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digitsqu( )", 2)
+        End If
     End Sub
 
-    Private Sub cmdDigitssq_Click(sender As Object, e As EventArgs) Handles cmdFunctionsDigitsum.Click
+    'Private Sub cmdFunctionsDigitsum_Click(sender As Object, e As EventArgs) Handles cmdFunctionsDigitsum.Click
+    '    If chkShowParameters.Checked Then
+    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( , cycles = 10, max.denominator = 2000))", 40)
+    '    Else
+    '        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(MASS::fractions( ))", 3)
+    '    End If
+    'End Sub
 
-    End Sub
-
-    Private Sub cmdDigitssqSession_Click(sender As Object, e As EventArgs) Handles cmdDigitsumSession.Click
-
+    Private Sub cmdFunctionsDigitsumSession_Click(sender As Object, e As EventArgs) Handles cmdDigitsumSession.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digitsum(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digitsum( )", 2)
+        End If
     End Sub
 
     Private Sub cmdMASSFractions_Click(sender As Object, e As EventArgs) Handles cmdMASSFractions.Click
@@ -5985,7 +6001,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdMASSFractionsSession_Click(sender As Object, e As EventArgs) Handles cmdMASSFractionsSession.Click
-
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("fractions(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("fractions( )", 2)
+        End If
     End Sub
 
     Private Sub cmdDecimals_Click(sender As Object, e As EventArgs) Handles cmdDecimals.Click
@@ -5993,6 +6013,10 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDecimalsSession_Click(sender As Object, e As EventArgs) Handles cmdDecimalsSession.Click
-
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("decimals(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("decimals( )", 2)
+        End If
     End Sub
 End Class

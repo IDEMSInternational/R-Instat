@@ -632,7 +632,9 @@ Partial Class ucrCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpFunctions = New System.Windows.Forms.GroupBox()
+        Me.cmdDigitsumSession = New System.Windows.Forms.Button()
         Me.cmdDigitsquSession = New System.Windows.Forms.Button()
+        Me.cmdFunctionsDigitsum = New System.Windows.Forms.Button()
         Me.cmdDigitsqu = New System.Windows.Forms.Button()
         Me.cmdDecimalsSession = New System.Windows.Forms.Button()
         Me.cmdMASSFractionsSession = New System.Windows.Forms.Button()
@@ -652,7 +654,6 @@ Partial Class ucrCalculator
         Me.cmdOrigin = New System.Windows.Forms.Button()
         Me.cmdPlynomial = New System.Windows.Forms.Button()
         Me.cmdCssqSession = New System.Windows.Forms.Button()
-        Me.cmdDsum = New System.Windows.Forms.Button()
         Me.cmdAveBoth = New System.Windows.Forms.Button()
         Me.cmdAveFac = New System.Windows.Forms.Button()
         Me.cmdAve = New System.Windows.Forms.Button()
@@ -660,8 +661,6 @@ Partial Class ucrCalculator
         Me.cmdFunctionsSsqSession = New System.Windows.Forms.Button()
         Me.cmdFunctionsSsq = New System.Windows.Forms.Button()
         Me.cmdAveFun = New System.Windows.Forms.Button()
-        Me.cmdFunctionsDigitsum = New System.Windows.Forms.Button()
-        Me.cmdDigitsumSession = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout
         Me.grpDates.SuspendLayout
         Me.ContextMenuStripDate.SuspendLayout
@@ -7762,7 +7761,6 @@ Partial Class ucrCalculator
         Me.grpFunctions.Controls.Add(Me.cmdOrigin)
         Me.grpFunctions.Controls.Add(Me.cmdPlynomial)
         Me.grpFunctions.Controls.Add(Me.cmdCssqSession)
-        Me.grpFunctions.Controls.Add(Me.cmdDsum)
         Me.grpFunctions.Controls.Add(Me.cmdAveBoth)
         Me.grpFunctions.Controls.Add(Me.cmdAveFac)
         Me.grpFunctions.Controls.Add(Me.cmdAve)
@@ -7774,10 +7772,21 @@ Partial Class ucrCalculator
         Me.grpFunctions.Margin = New System.Windows.Forms.Padding(2)
         Me.grpFunctions.Name = "grpFunctions"
         Me.grpFunctions.Padding = New System.Windows.Forms.Padding(2)
-        Me.grpFunctions.Size = New System.Drawing.Size(250, 250)
+        Me.grpFunctions.Size = New System.Drawing.Size(250, 244)
         Me.grpFunctions.TabIndex = 216
         Me.grpFunctions.TabStop = False
         Me.grpFunctions.Text = "Functions"
+        '
+        'cmdDigitsumSession
+        '
+        Me.cmdDigitsumSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDigitsumSession.Location = New System.Drawing.Point(63, 130)
+        Me.cmdDigitsumSession.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDigitsumSession.Name = "cmdDigitsumSession"
+        Me.cmdDigitsumSession.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDigitsumSession.TabIndex = 228
+        Me.cmdDigitsumSession.Text = "digitsum*"
+        Me.cmdDigitsumSession.UseVisualStyleBackColor = True
         '
         'cmdDigitsquSession
         '
@@ -7789,6 +7798,17 @@ Partial Class ucrCalculator
         Me.cmdDigitsquSession.TabIndex = 227
         Me.cmdDigitsquSession.Text = "digitsqu*"
         Me.cmdDigitsquSession.UseVisualStyleBackColor = True
+        '
+        'cmdFunctionsDigitsum
+        '
+        Me.cmdFunctionsDigitsum.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFunctionsDigitsum.Location = New System.Drawing.Point(2, 130)
+        Me.cmdFunctionsDigitsum.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFunctionsDigitsum.Name = "cmdFunctionsDigitsum"
+        Me.cmdFunctionsDigitsum.Size = New System.Drawing.Size(62, 30)
+        Me.cmdFunctionsDigitsum.TabIndex = 226
+        Me.cmdFunctionsDigitsum.Text = "digitsum"
+        Me.cmdFunctionsDigitsum.UseVisualStyleBackColor = True
         '
         'cmdDigitsqu
         '
@@ -8014,18 +8034,6 @@ Partial Class ucrCalculator
         Me.cmdCssqSession.Text = "cssq*"
         Me.cmdCssqSession.UseVisualStyleBackColor = True
         '
-        'cmdDsum
-        '
-        Me.cmdDsum.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdDsum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDsum.Location = New System.Drawing.Point(1, 217)
-        Me.cmdDsum.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdDsum.Name = "cmdDsum"
-        Me.cmdDsum.Size = New System.Drawing.Size(62, 30)
-        Me.cmdDsum.TabIndex = 154
-        Me.cmdDsum.Text = "dsum"
-        Me.cmdDsum.UseVisualStyleBackColor = True
-        '
         'cmdAveBoth
         '
         Me.cmdAveBoth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -8109,28 +8117,6 @@ Partial Class ucrCalculator
         Me.cmdAveFun.TabIndex = 153
         Me.cmdAveFun.Text = "ave_fun"
         Me.cmdAveFun.UseVisualStyleBackColor = True
-        '
-        'cmdFunctionsDigitsum
-        '
-        Me.cmdFunctionsDigitsum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFunctionsDigitsum.Location = New System.Drawing.Point(2, 130)
-        Me.cmdFunctionsDigitsum.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFunctionsDigitsum.Name = "cmdFunctionsDigitsum"
-        Me.cmdFunctionsDigitsum.Size = New System.Drawing.Size(62, 30)
-        Me.cmdFunctionsDigitsum.TabIndex = 226
-        Me.cmdFunctionsDigitsum.Text = "digitsum"
-        Me.cmdFunctionsDigitsum.UseVisualStyleBackColor = True
-        '
-        'cmdDigitsumSession
-        '
-        Me.cmdDigitsumSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDigitsumSession.Location = New System.Drawing.Point(63, 130)
-        Me.cmdDigitsumSession.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdDigitsumSession.Name = "cmdDigitsumSession"
-        Me.cmdDigitsumSession.Size = New System.Drawing.Size(62, 30)
-        Me.cmdDigitsumSession.TabIndex = 228
-        Me.cmdDigitsumSession.Text = "digitsum*"
-        Me.cmdDigitsumSession.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -8834,7 +8820,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdOrigin As Button
     Friend WithEvents cmdPlynomial As Button
     Friend WithEvents cmdCssqSession As Button
-    Friend WithEvents cmdDsum As Button
     Friend WithEvents cmdAveBoth As Button
     Friend WithEvents cmdAveFac As Button
     Friend WithEvents cmdAve As Button
