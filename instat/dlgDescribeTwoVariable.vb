@@ -619,14 +619,18 @@ Public Class dlgDescribeTwoVariable
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrChkCorrelations.Visible = False
         ucrChkSwapXYVar.Visible = False
+        ucrChkOmitMissing.Visible = False
+        cmdMissingOptions.Visible = False
         If rdoTwoVariable.Checked Then
-            ucrChkOmitMissing.Visible = strFirstVariablesType = "numeric"
+            ucrChkOmitMissing.Visible = IsNumericByNumeric() OrElse IsNumericByFactor()
             ucrChkSwapXYVar.Visible = IsNumericByNumeric() OrElse IsFactorByNumeric()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
+            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
         ElseIf rdoThreeVariable.Checked Then
             ucrChkOmitMissing.Visible = IsFactorByNumeric() OrElse IsNumericByFactor()
         Else
             ucrChkOmitMissing.Visible = False
+            cmdMissingOptions.Visible = False
         End If
         If rdoThreeVariable.Checked Then
             If IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
@@ -636,7 +640,6 @@ Public Class dlgDescribeTwoVariable
             ucrChkDisplayMargins.Visible = IsFactorByFactorByFactor()
             ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactorByFactor()
         End If
-        cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
     End Sub
 
     Private Sub ChangeBaseRCode()
@@ -647,6 +650,7 @@ Public Class dlgDescribeTwoVariable
         cmdFormatTable.Visible = False
         ucrChkMeans.Visible = False
         ucrChkLevSig.Visible = False
+        cmdMissingOptions.Visible = False
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
             cmdFormatTable.Visible = False
@@ -809,8 +813,8 @@ Public Class dlgDescribeTwoVariable
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged
-        If ucrChkOmitMissing.Checked Then
+    Private Sub ucrChkOmitMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMissing.ControlValueChanged, ucrChkCorrelations.ControlValueChanged
+        If ucrChkOmitMissing.Checked AndAlso ucrChkCorrelations.Checked Then
             clsRCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34), iPosition:=2)
         Else
             clsRCorrelationFunction.RemoveParameterByName("use")
@@ -825,6 +829,8 @@ Public Class dlgDescribeTwoVariable
         Else
             clsSummaryTableFunction.AddParameter("na_type", clsRFunctionParameter:=clsCombineFunction, iPosition:=9)
         End If
+        cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
+
     End Sub
 
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
@@ -952,7 +958,7 @@ Public Class dlgDescribeTwoVariable
                 clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverSecondTwoVariableFactor.GetVariableNames & "," & ".x" & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ".x")
                 clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
-            ElseIf IsFactorByNumeric Then
+            ElseIf IsFactorByNumeric() Then
                 clsSummaryTableFunction.AddParameter("factors", ucrReceiverFirstVars.GetVariableNames)
                 clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=1)
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverSecondTwoVariableFactor.GetVariableNames)
@@ -1055,7 +1061,7 @@ Public Class dlgDescribeTwoVariable
                     clsCombineAnova2Function.RemoveParameterByName("x")
 
                 End If
-            ElseIf IsFactorByNumeric Then
+            ElseIf IsFactorByNumeric() Then
                 If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
                     If ucrChkSwapXYVar.Checked Then
                         clsCombineSwapAnova2Table.AddParameter("x", ucrReceiverSecondTwoVariableFactor.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
@@ -1120,7 +1126,7 @@ Public Class dlgDescribeTwoVariable
         Next
     End Sub
 
-    Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPercentageProportion.ControlValueChanged,
+    Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPercentageProportion.ControlValueChanged, ucrReceiverPercentages.ControlValueChanged,
         ucrChkDisplayAsPercentage.ControlValueChanged, ucrChkDisplayMargins.ControlValueChanged, ucrInputMarginName.ControlValueChanged
         If rdoTwoVariable.Checked Then
             If ucrChkDisplayAsPercentage.Checked Then

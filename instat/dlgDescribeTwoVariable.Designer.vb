@@ -129,7 +129,7 @@ Partial Class dlgDescribeTwoVariable
         'cmdMissingOptions
         '
         Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(250, 444)
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(539, 439)
         Me.cmdMissingOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"
         Me.cmdMissingOptions.Size = New System.Drawing.Size(158, 34)
@@ -540,7 +540,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(26, 444)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(450, 383)
         Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(214, 34)
@@ -626,7 +626,6 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.lblMarginName)
-        Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.cmdFormatTable)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverSecondSkimrGroupByFactor)
@@ -644,12 +643,13 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.lblFirstGroupByFactor)
         Me.Controls.Add(Me.lblThreeVariableSecondFactor)
         Me.Controls.Add(Me.ucrChkSummariesRowCol)
-        Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.ucrChkMeans)
         Me.Controls.Add(Me.ucrChkDisplayMargins)
         Me.Controls.Add(Me.ucrChkSwapXYVar)
         Me.Controls.Add(Me.ucrChkCorrelations)
         Me.Controls.Add(Me.ucrChkLevSig)
+        Me.Controls.Add(Me.ucrChkOmitMissing)
+        Me.Controls.Add(Me.cmdMissingOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
