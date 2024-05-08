@@ -472,7 +472,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCombn, "combn(c(-2,1,3,4), 2,FUN=prod) gives the products of the values 3 at a time, so (-213), (-214), (-234), (134), = -6, -12, -24, 12. (result usually put into output window)")
         ttCalculator.SetToolTip(cmdCoef, "single coefficient of a polynomial if given roots. So sum(combn(c(-2,1,3,4),3. FUN=prod) =(-6 -12-24 +12) = -26")
         ' ttCalculator.SetToolTip(cmdCoeffs2, "")
-        ttCalculator.SetToolTip(cmdDigitSum, "Gives the sum of the digits in a numeric variable")
+        ttCalculator.SetToolTip(cmdFunctionsDigitsum, "Gives the sum of the digits in a numeric variable")
         ttCalculator.SetToolTip(cmdDigitsumSession, "Gives the sum of the digits, if library calculator code has been run in the current session")
         ttCalculator.SetToolTip(cmdPascalSession, "Gives binomial coefficients, if the library calculator code has been run in the current session")
         ttCalculator.SetToolTip(cmdDigitsqu, "Squares of digits in an integer variable")
@@ -5967,7 +5967,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDigitsqu_Click(sender As Object, e As EventArgs) Handles cmdDigitsqu.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" sapply(, Function(n) {a < -as.integer(c(strsplit(as.character(n), Split() = """")[[1]])); a^2})", 38)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" sapply(, Function(n) {a < -as.integer(c(strsplit(as.character(n), Split() = """")[[1]])); a^2})", 75)
     End Sub
 
     Private Sub cmdDigitsquSession_Click(sender As Object, e As EventArgs) Handles cmdDigitsquSession.Click
@@ -5979,10 +5979,10 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdFunctionsDigitsum_Click(sender As Object, e As EventArgs) Handles cmdFunctionsDigitsum.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dsum:sapply( , Function(n){a<-as.integer(c(strsplit(as.character(n),split="""")[[1]]));sum(a)})", 46)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dsum:sapply( , Function(n){a<-as.integer(c(strsplit(as.character(n),split="""")[[1]]));sum(a)})", 82)
     End Sub
 
-    Private Sub cmdFunctionsDigitsumSession_Click(sender As Object, e As EventArgs) Handles cmdDigitsumSession.Click
+    Private Sub cmdDigitsumSession_Click(sender As Object, e As EventArgs) Handles cmdDigitsumSession.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digitsum(x= )", 2)
         Else
