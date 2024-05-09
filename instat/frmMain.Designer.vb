@@ -672,11 +672,7 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
-        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
-        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.ucrScriptWindow = New instat.ucrScript()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
-        Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
         Me.mnuPlotly = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
@@ -692,14 +688,10 @@ Partial Class frmMain
         Me.splOverall.SuspendLayout()
         CType(Me.splExtraWindows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splExtraWindows.Panel1.SuspendLayout()
-        Me.splExtraWindows.Panel2.SuspendLayout()
         Me.splExtraWindows.SuspendLayout()
         CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splMetadata.Panel1.SuspendLayout()
-        Me.splMetadata.Panel2.SuspendLayout()
         Me.splMetadata.SuspendLayout()
         CType(Me.splDataOutput, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splDataOutput.Panel1.SuspendLayout()
         Me.splDataOutput.Panel2.SuspendLayout()
         Me.splDataOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -1725,6 +1717,7 @@ Partial Class frmMain
         '
         'mnuClimaticFileExportToGoogleBucketsToolStrip
         '
+        Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Enabled = False
         Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Name = "mnuClimaticFileExportToGoogleBucketsToolStrip"
         Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Size = New System.Drawing.Size(426, 34)
         Me.mnuClimaticFileExportToGoogleBucketsToolStrip.Text = "Export to Google Buckets..."
@@ -4968,7 +4961,6 @@ Partial Class frmMain
         'splExtraWindows.Panel2
         '
         Me.splExtraWindows.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splExtraWindows.Panel2.Controls.Add(Me.ucrScriptWindow)
         Me.splExtraWindows.Size = New System.Drawing.Size(1251, 252)
         Me.splExtraWindows.SplitterDistance = 379
         Me.splExtraWindows.SplitterWidth = 8
@@ -4982,54 +4974,13 @@ Partial Class frmMain
         Me.splMetadata.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.splMetadata.Name = "splMetadata"
         '
-        'splMetadata.Panel1
-        '
-        Me.splMetadata.Panel1.Controls.Add(Me.ucrColumnMeta)
-        '
         'splMetadata.Panel2
         '
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         Me.splMetadata.Size = New System.Drawing.Size(379, 252)
         Me.splMetadata.SplitterDistance = 103
         Me.splMetadata.SplitterWidth = 8
         Me.splMetadata.TabIndex = 0
-        '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.AutoSize = True
-        Me.ucrColumnMeta.BackColor = System.Drawing.SystemColors.Control
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrColumnMeta.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        Me.ucrColumnMeta.Size = New System.Drawing.Size(103, 252)
-        Me.ucrColumnMeta.TabIndex = 0
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.AutoSize = True
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrDataFrameMeta.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(268, 252)
-        Me.ucrDataFrameMeta.TabIndex = 0
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.AutoSize = True
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(864, 252)
-        Me.ucrScriptWindow.strActiveTabText = ""
-        Me.ucrScriptWindow.TabIndex = 2
-        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'splDataOutput
         '
@@ -5042,7 +4993,6 @@ Partial Class frmMain
         'splDataOutput.Panel1
         '
         Me.splDataOutput.Panel1.BackColor = System.Drawing.SystemColors.Control
-        Me.splDataOutput.Panel1.Controls.Add(Me.ucrDataViewer)
         '
         'splDataOutput.Panel2
         '
@@ -5052,19 +5002,6 @@ Partial Class frmMain
         Me.splDataOutput.SplitterDistance = 574
         Me.splDataOutput.SplitterWidth = 8
         Me.splDataOutput.TabIndex = 0
-        '
-        'ucrDataViewer
-        '
-        Me.ucrDataViewer.AutoSize = True
-        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
-        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrDataViewer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrDataViewer.Location = New System.Drawing.Point(0, 0)
-        Me.ucrDataViewer.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Size = New System.Drawing.Size(574, 359)
-        Me.ucrDataViewer.TabIndex = 0
-        Me.ucrDataViewer.Tag = "Data_View"
         '
         'ucrOutput
         '
@@ -5139,18 +5076,10 @@ Partial Class frmMain
         CType(Me.splOverall, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splOverall.ResumeLayout(False)
         Me.splExtraWindows.Panel1.ResumeLayout(False)
-        Me.splExtraWindows.Panel2.ResumeLayout(False)
-        Me.splExtraWindows.Panel2.PerformLayout()
         CType(Me.splExtraWindows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splExtraWindows.ResumeLayout(False)
-        Me.splMetadata.Panel1.ResumeLayout(False)
-        Me.splMetadata.Panel1.PerformLayout()
-        Me.splMetadata.Panel2.ResumeLayout(False)
-        Me.splMetadata.Panel2.PerformLayout()
         CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splMetadata.ResumeLayout(False)
-        Me.splDataOutput.Panel1.ResumeLayout(False)
-        Me.splDataOutput.Panel1.PerformLayout()
         Me.splDataOutput.Panel2.ResumeLayout(False)
         Me.splDataOutput.Panel2.PerformLayout()
         CType(Me.splDataOutput, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5481,13 +5410,10 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator35 As ToolStripSeparator
     Friend WithEvents splOverall As SplitContainer
     Friend WithEvents splDataOutput As SplitContainer
-    Friend WithEvents ucrDataViewer As ucrDataView
     Friend WithEvents ucrOutput As ucrOutputWindow
     Friend WithEvents splExtraWindows As SplitContainer
     Friend WithEvents splMetadata As SplitContainer
-    Friend WithEvents ucrColumnMeta As ucrColumnMetadata
     Friend WithEvents mnuViewResetToDefaultLayout As ToolStripMenuItem
-    Friend WithEvents ucrDataFrameMeta As ucrDataFrameMetadata
     Friend WithEvents mnuClimaticFileImportfromIRIDataLibrary As ToolStripMenuItem
     Friend WithEvents mnuDescribeOneVariableRatingData As ToolStripMenuItem
     Friend WithEvents mnuDescribeViewGraph As ToolStripMenuItem
@@ -5751,7 +5677,6 @@ Partial Class frmMain
     Friend WithEvents mnuHelpGlossary As ToolStripMenuItem
     Friend WithEvents mnuHelpPackagesDocumentation As ToolStripMenuItem
     Friend WithEvents mnuDescribeUseTable As ToolStripMenuItem
-    Friend WithEvents ucrScriptWindow As ucrScript
     Friend WithEvents mnuViewOutput As ToolStripMenuItem
     Friend WithEvents mnuViewLogScript As ToolStripMenuItem
     Friend WithEvents mnuTbSave As ToolStripSplitButton
