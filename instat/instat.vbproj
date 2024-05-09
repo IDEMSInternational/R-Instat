@@ -307,12 +307,6 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
-    <Compile Include="sdgConnectGoogleBuckets.Designer.vb">
-      <DependentUpon>sdgConnectGoogleBuckets.vb</DependentUpon>
-    </Compile>
-    <Compile Include="sdgConnectGoogleBuckets.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgDefineAnnualRainfall.Designer.vb">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
     </Compile>
@@ -3196,9 +3190,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="sdgConnectGoogleBuckets.resx">
-      <DependentUpon>sdgConnectGoogleBuckets.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
