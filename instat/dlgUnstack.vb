@@ -17,6 +17,12 @@
 Imports instat.Translations
 
 Public Class dlgUnstack
+    Public enumUnstackMode As String = UnstackMode.Prepare
+    Public Enum UnstackMode
+        Prepare
+        Climatic
+    End Enum
+
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsCarryColumnsOperator As New ROperator
@@ -42,6 +48,7 @@ Public Class dlgUnstack
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetHelpOptions()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
@@ -377,6 +384,15 @@ Public Class dlgUnstack
         SetFormula()
         ValuesfillParameter()
         CarryColumnsParameter()
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumUnstackMode
+            Case UnstackMode.Prepare
+                ucrBase.iHelpTopicID = 58
+            Case UnstackMode.Climatic
+                ucrBase.iHelpTopicID = 608
+        End Select
     End Sub
 
     Private Sub CarryColumnsLabelReceiverLocation()
