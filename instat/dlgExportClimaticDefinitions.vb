@@ -139,7 +139,7 @@ Public Class dlgExportClimaticDefinitions
         bResetSubdialog = True
 
         ucrSelectorExportDefinitions.Reset()
-        ucrReceiverData.SetMeAsReceiver()
+        'ucrReceiverData.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("rain", "False", iPosition:=0)
         clsDummyFunction.AddParameter("temp", "False", iPosition:=1)
@@ -147,7 +147,6 @@ Public Class dlgExportClimaticDefinitions
         clsDummyFunction.AddParameter("extrem", "False", iPosition:=3)
         clsDummyFunction.AddParameter("season", "False", iPosition:=4)
         clsDummyFunction.AddParameter("crop", "False", iPosition:=5)
-
 
         clsReformatTempSummariesFunction.SetPackageName("epicsawrap")
         clsReformatTempSummariesFunction.SetRCommand("reformat_temperature_summaries")
@@ -168,7 +167,6 @@ Public Class dlgExportClimaticDefinitions
         clsReformatCropSuccessFunction.SetPackageName("epicsawrap")
         clsReformatCropSuccessFunction.SetRCommand("reformat_crop_success")
         clsReformatCropSuccessFunction.SetAssignTo("crop_prop")
-
 
         clsSummariesFunction.SetRCommand("c")
 
@@ -381,4 +379,11 @@ Public Class dlgExportClimaticDefinitions
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
+        ucrReceiverData.SetMeAsReceiver()
+    End Sub
+
+    Private Sub ucrSelectorExportDefinitions_DataFrameChanged() Handles ucrSelectorExportDefinitions.DataFrameChanged
+        TestOkEnabled()
+    End Sub
 End Class
