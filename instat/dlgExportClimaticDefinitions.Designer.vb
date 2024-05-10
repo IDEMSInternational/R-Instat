@@ -55,6 +55,10 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverDataYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDataYearMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverCropData = New instat.ucrReceiverSingle()
+        Me.lblExport = New System.Windows.Forms.Label()
+        Me.cmdChooseFile = New System.Windows.Forms.Button()
+        Me.ucrInputTokenPath = New instat.ucrInputTextBox()
+        Me.cmdDefine = New System.Windows.Forms.Button()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -403,12 +407,58 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverCropData.TabIndex = 38
         Me.ucrReceiverCropData.ucrSelector = Nothing
         '
+        'lblExport
+        '
+        Me.lblExport.AutoSize = True
+        Me.lblExport.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblExport.Location = New System.Drawing.Point(4, 398)
+        Me.lblExport.Name = "lblExport"
+        Me.lblExport.Size = New System.Drawing.Size(59, 13)
+        Me.lblExport.TabIndex = 57
+        Me.lblExport.Text = "Export File:"
+        '
+        'cmdChooseFile
+        '
+        Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdChooseFile.Location = New System.Drawing.Point(250, 392)
+        Me.cmdChooseFile.Name = "cmdChooseFile"
+        Me.cmdChooseFile.Size = New System.Drawing.Size(80, 23)
+        Me.cmdChooseFile.TabIndex = 59
+        Me.cmdChooseFile.Text = "Browse"
+        Me.cmdChooseFile.UseVisualStyleBackColor = True
+        '
+        'ucrInputTokenPath
+        '
+        Me.ucrInputTokenPath.AddQuotesIfUnrecognised = True
+        Me.ucrInputTokenPath.AutoSize = True
+        Me.ucrInputTokenPath.IsMultiline = False
+        Me.ucrInputTokenPath.IsReadOnly = False
+        Me.ucrInputTokenPath.Location = New System.Drawing.Point(64, 394)
+        Me.ucrInputTokenPath.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputTokenPath.Name = "ucrInputTokenPath"
+        Me.ucrInputTokenPath.Size = New System.Drawing.Size(182, 21)
+        Me.ucrInputTokenPath.TabIndex = 58
+        '
+        'cmdDefine
+        '
+        Me.cmdDefine.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDefine.Location = New System.Drawing.Point(219, 329)
+        Me.cmdDefine.Name = "cmdDefine"
+        Me.cmdDefine.Size = New System.Drawing.Size(80, 23)
+        Me.cmdDefine.TabIndex = 60
+        Me.cmdDefine.Text = "Define"
+        Me.cmdDefine.UseVisualStyleBackColor = True
+        '
         'dlgExportClimaticDefinitions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(455, 527)
+        Me.Controls.Add(Me.cmdDefine)
+        Me.Controls.Add(Me.lblExport)
+        Me.Controls.Add(Me.cmdChooseFile)
+        Me.Controls.Add(Me.ucrInputTokenPath)
         Me.Controls.Add(Me.lblStationID)
         Me.Controls.Add(Me.lblCountry)
         Me.Controls.Add(Me.ucrInputCountry)
@@ -482,4 +532,8 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents ucrReceiverDataYear As ucrReceiverSingle
     Friend WithEvents ucrReceiverDataYearMonth As ucrReceiverSingle
     Friend WithEvents ucrReceiverCropData As ucrReceiverSingle
+    Friend WithEvents lblExport As Label
+    Friend WithEvents cmdChooseFile As Button
+    Friend WithEvents ucrInputTokenPath As ucrInputTextBox
+    Friend WithEvents cmdDefine As Button
 End Class
