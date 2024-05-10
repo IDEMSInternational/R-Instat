@@ -247,12 +247,12 @@ Public Class dlgExportClimaticDefinitions
         EnableDisableDefineButton()
     End Sub
 
-    'Private Sub cmdDefine_Click(sender As Object, e As EventArgs) Handles cmdDefine.Click
-    '    sdgDefineAnnualRainfall.SetRCode(clsNewReformatCropSuccessFunction:=clsReformatCropSuccessFunction, clsNewReformatSeasonStartFunction:=clsReformatSeasonStartFunction, clsNewReformatMonthlyTempSummaries:=clsReformatMonthlyTempSummaries,
-    '                                  clsNewReforMattAnnualSummaries:=clsReforMattAnnualSummariesFunction, clsNewReformatTempSummariesFunction:=clsReformatTempSummariesFunction, clsNewExportRinstatToBucketFunction:=clsExportRinstatToBucketFunction, bReset:=bResetSubdialog)
-    '    sdgDefineAnnualRainfall.ShowDialog()
-    '    bResetSubdialog = False
-    'End Sub
+    Private Sub cmdDefine_Click(sender As Object, e As EventArgs) Handles cmdDefine.Click
+        sdgDefineAnnualRainfall.SetRCode(clsNewReformatCropSuccessFunction:=clsReformatCropSuccessFunction, clsNewReformatSeasonStartFunction:=clsReformatSeasonStartFunction, clsNewReformatMonthlyTempSummaries:=clsReformatMonthlyTempSummaries,
+                                      clsNewReforMattAnnualSummaries:=clsReforMattAnnualSummariesFunction, clsNewReformatTempSummariesFunction:=clsReformatTempSummariesFunction, clsNewExportRinstatToBucketFunction:=clsExportRinstatToBucketFunction, bReset:=bResetSubdialog)
+        sdgDefineAnnualRainfall.ShowDialog()
+        bResetSubdialog = False
+    End Sub
 
     Private Sub ucrChkAnnualRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAnnualRainfall.ControlValueChanged
         If ucrChkAnnualRainfall.Checked Then
