@@ -61,6 +61,7 @@ Public Class dlgTransformClimatic
     Private clsEndSeasonConditionsFilterSubCalcsList As New RFunction
     Private clsEndSeasonWBCalc As New RFunction
     Private clsEndSeasonWBCalcSubCalcsList As New RFunction
+    Private clsRoundFunction As New RFunction
     Private clsEndSeasonWBConditionOperator As New ROperator
     Private clsIfElseWBFunction As New RFunction
     Private clsWBOperator As New ROperator
@@ -482,6 +483,7 @@ Public Class dlgTransformClimatic
         clsEndSeasonConditionsFilterSubCalcsList.Clear()
         clsEndSeasonWBConditionOperator.Clear()
         clsIfElseWBFunction.Clear()
+        clsRoundFunction.Clear()
         clsWBMinMaxOperator.Clear()
         clsEndSeasonRainMaxCalc.Clear()
         clsWBMaxTailFunction2.Clear()
@@ -630,17 +632,20 @@ Public Class dlgTransformClimatic
 
         clsEndSeasonWBCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonWBCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsEndSeasonWBCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseWBFunction, iPosition:=1)
+        clsEndSeasonWBCalc.AddParameter("function_exp", clsRFunctionParameter:=clsRoundFunction, iPosition:=1)
         clsEndSeasonWBCalc.AddParameter("save", "2", iPosition:=2)
-        clsEndSeasonWBCalc.AddParameter("result_name", Chr(34) & "water" & Chr(34), iPosition:=2)
         clsEndSeasonWBCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsEndSeasonWBCalcSubCalcsList, iPosition:=5)
         clsEndSeasonWBCalc.SetAssignTo(strWB)
 
-        clsIfElseWBFunction.bToScriptAsRString = True
         clsIfElseWBFunction.SetRCommand("ifelse")
         clsIfElseWBFunction.AddParameter("test", clsROperatorParameter:=clsWBOperator, iPosition:=0)
         clsIfElseWBFunction.AddParameter("yes", "NA", iPosition:=1)
         clsIfElseWBFunction.AddParameter("no", strWBMin, iPosition:=2)
+
+        clsRoundFunction.bToScriptAsRString = True
+        clsRoundFunction.SetRCommand("round")
+        clsRoundFunction.AddParameter("x", clsRFunctionParameter:=clsIfElseWBFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsRoundFunction.AddParameter("y", "1", iPosition:=1, bIncludeArgumentName:=False)
 
         clsWBOperator.SetOperation("|")
         clsWBOperator.AddParameter("0", clsROperatorParameter:=clsWBMinMaxOperator, iPosition:=0)
@@ -1359,6 +1364,7 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrSaveColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveColumn.ControlValueChanged
         'change the parameter values
+        clsEndSeasonWBCalc.AddParameter("result_name", Chr(34) & ucrSaveColumn.GetText() & Chr(34), iPosition:=2)
         clsRTransform.AddParameter(strParameterName:="result_name", strParameterValue:=Chr(34) & ucrSaveColumn.GetText & Chr(34), iPosition:=2)
     End Sub
 
