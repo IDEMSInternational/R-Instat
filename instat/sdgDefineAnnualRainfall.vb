@@ -229,7 +229,7 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverStartRainDOY.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrReceiverStation.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrReceiverYear.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
-        ucrSelectorAnnualTemp.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrSelectorDefineAnnualRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
 
         ucrReceiverStationCrop.SetRCode(clsReformatCropSuccessFunction, bReset)
         ucrReceiverTotalRain.SetRCode(clsReformatCropSuccessFunction, bReset)

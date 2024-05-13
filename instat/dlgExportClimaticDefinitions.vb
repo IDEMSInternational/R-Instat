@@ -139,7 +139,6 @@ Public Class dlgExportClimaticDefinitions
         bResetSubdialog = True
 
         ucrSelectorExportDefinitions.Reset()
-        'ucrReceiverData.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("rain", "False", iPosition:=0)
         clsDummyFunction.AddParameter("temp", "False", iPosition:=1)
@@ -216,7 +215,6 @@ Public Class dlgExportClimaticDefinitions
     AndAlso Not ucrReceiverYear.IsEmpty _
     AndAlso Not ucrInputCountry.IsEmpty _
     AndAlso Not ucrInputStationID.IsEmpty _
-    AndAlso ucrChkIncludeSummaryData.Checked _
     AndAlso Not ucrInputTokenPath.IsEmpty _
     AndAlso (
         ((ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked) AndAlso Not ucrReceiverCropData.IsEmpty) _

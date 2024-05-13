@@ -89,7 +89,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrInputCountry.IsMultiline = False
         Me.ucrInputCountry.IsReadOnly = False
         Me.ucrInputCountry.Location = New System.Drawing.Point(501, 274)
-        Me.ucrInputCountry.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputCountry.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputCountry.Name = "ucrInputCountry"
         Me.ucrInputCountry.Size = New System.Drawing.Size(177, 32)
         Me.ucrInputCountry.TabIndex = 10
@@ -101,7 +101,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrInputStationID.IsMultiline = False
         Me.ucrInputStationID.IsReadOnly = False
         Me.ucrInputStationID.Location = New System.Drawing.Point(501, 218)
-        Me.ucrInputStationID.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputStationID.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputStationID.Name = "ucrInputStationID"
         Me.ucrInputStationID.Size = New System.Drawing.Size(177, 32)
         Me.ucrInputStationID.TabIndex = 8
@@ -111,7 +111,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkSeasonStartProp.AutoSize = True
         Me.ucrChkSeasonStartProp.Checked = False
         Me.ucrChkSeasonStartProp.Location = New System.Drawing.Point(236, 71)
-        Me.ucrChkSeasonStartProp.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkSeasonStartProp.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkSeasonStartProp.Name = "ucrChkSeasonStartProp"
         Me.ucrChkSeasonStartProp.Size = New System.Drawing.Size(226, 52)
         Me.ucrChkSeasonStartProp.TabIndex = 3
@@ -121,7 +121,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkExtremes.AutoSize = True
         Me.ucrChkExtremes.Checked = False
         Me.ucrChkExtremes.Location = New System.Drawing.Point(236, 120)
-        Me.ucrChkExtremes.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkExtremes.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkExtremes.Name = "ucrChkExtremes"
         Me.ucrChkExtremes.Size = New System.Drawing.Size(220, 52)
         Me.ucrChkExtremes.TabIndex = 5
@@ -132,7 +132,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkCropSuccessProp.AutoSize = True
         Me.ucrChkCropSuccessProp.Checked = False
         Me.ucrChkCropSuccessProp.Location = New System.Drawing.Point(236, 28)
-        Me.ucrChkCropSuccessProp.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkCropSuccessProp.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkCropSuccessProp.Name = "ucrChkCropSuccessProp"
         Me.ucrChkCropSuccessProp.Size = New System.Drawing.Size(230, 52)
         Me.ucrChkCropSuccessProp.TabIndex = 1
@@ -142,7 +142,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkAnnualTemp.AutoSize = True
         Me.ucrChkAnnualTemp.Checked = False
         Me.ucrChkAnnualTemp.Location = New System.Drawing.Point(12, 71)
-        Me.ucrChkAnnualTemp.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkAnnualTemp.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkAnnualTemp.Name = "ucrChkAnnualTemp"
         Me.ucrChkAnnualTemp.Size = New System.Drawing.Size(224, 52)
         Me.ucrChkAnnualTemp.TabIndex = 2
@@ -152,7 +152,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkAnnualRainfall.AutoSize = True
         Me.ucrChkAnnualRainfall.Checked = False
         Me.ucrChkAnnualRainfall.Location = New System.Drawing.Point(12, 28)
-        Me.ucrChkAnnualRainfall.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkAnnualRainfall.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkAnnualRainfall.Name = "ucrChkAnnualRainfall"
         Me.ucrChkAnnualRainfall.Size = New System.Drawing.Size(224, 52)
         Me.ucrChkAnnualRainfall.TabIndex = 0
@@ -217,8 +217,8 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.ucrChkIncludeSummaryData.AutoSize = True
         Me.ucrChkIncludeSummaryData.Checked = False
-        Me.ucrChkIncludeSummaryData.Location = New System.Drawing.Point(6, 506)
-        Me.ucrChkIncludeSummaryData.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkIncludeSummaryData.Location = New System.Drawing.Point(6, 513)
+        Me.ucrChkIncludeSummaryData.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkIncludeSummaryData.Name = "ucrChkIncludeSummaryData"
         Me.ucrChkIncludeSummaryData.Size = New System.Drawing.Size(332, 48)
         Me.ucrChkIncludeSummaryData.TabIndex = 24
@@ -235,7 +235,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.grpSummaries.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.grpSummaries.Size = New System.Drawing.Size(470, 171)
+        Me.grpSummaries.Size = New System.Drawing.Size(470, 177)
         Me.grpSummaries.TabIndex = 23
         Me.grpSummaries.TabStop = False
         Me.grpSummaries.Text = "Summaries"
@@ -245,7 +245,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkMonthlyTemp.AutoSize = True
         Me.ucrChkMonthlyTemp.Checked = False
         Me.ucrChkMonthlyTemp.Location = New System.Drawing.Point(12, 120)
-        Me.ucrChkMonthlyTemp.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkMonthlyTemp.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkMonthlyTemp.Name = "ucrChkMonthlyTemp"
         Me.ucrChkMonthlyTemp.Size = New System.Drawing.Size(220, 52)
         Me.ucrChkMonthlyTemp.TabIndex = 4
@@ -388,7 +388,7 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(6, 705)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(615, 92)
         Me.ucrBase.TabIndex = 29
@@ -469,7 +469,7 @@ Partial Class dlgExportClimaticDefinitions
         'cmdDefine
         '
         Me.cmdDefine.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDefine.Location = New System.Drawing.Point(338, 505)
+        Me.cmdDefine.Location = New System.Drawing.Point(338, 512)
         Me.cmdDefine.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdDefine.Name = "cmdDefine"
         Me.cmdDefine.Size = New System.Drawing.Size(120, 45)
