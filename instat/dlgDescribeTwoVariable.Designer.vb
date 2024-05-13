@@ -600,7 +600,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrReceiverPercentages.AutoSize = True
         Me.ucrReceiverPercentages.frmParent = Me
-        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(427, 380)
+        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(429, 381)
         Me.ucrReceiverPercentages.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPercentages.Name = "ucrReceiverPercentages"
         Me.ucrReceiverPercentages.Selector = Nothing

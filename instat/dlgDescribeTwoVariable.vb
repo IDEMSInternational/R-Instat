@@ -127,19 +127,19 @@ Public Class dlgDescribeTwoVariable
 
         ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
 
-        ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 1))
-        ucrChkDisplayAsPercentage.SetText("As Percentages")
-        ucrChkDisplayAsPercentage.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
-        ucrChkDisplayAsPercentage.SetRDefault(Chr(34) & "none" & Chr(34))
-
-        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverPercentages, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         ucrReceiverPercentages.SetParameter(New RParameter("perc_total_factors", 2))
         ucrReceiverPercentages.SetParameterIsString()
         ucrReceiverPercentages.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverPercentages.SetDataType("factor")
         ucrReceiverPercentages.SetLinkedDisplayControl(lblFactorAsPercentage)
+
+        ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 1))
+        ucrChkDisplayAsPercentage.SetText("As Percentages")
+        ucrChkDisplayAsPercentage.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
+        ucrChkDisplayAsPercentage.SetRDefault(Chr(34) & "none" & Chr(34))
+
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverPercentages, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkPercentageProportion.SetParameter(New RParameter("perc_decimal", 3))
         ucrChkPercentageProportion.SetText("Display as Decimal")
@@ -294,7 +294,6 @@ Public Class dlgDescribeTwoVariable
         clsCombineAnova2Function.SetRCommand("c")
 
         clsCombineSwapAnova2Table.SetRCommand("c")
-
 
         clsMappingFunction.SetPackageName("purrr")
         clsMappingFunction.SetRCommand("map")
@@ -617,6 +616,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkDisplayMargins.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactor()
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
+        ucrReceiverPercentages.Visible = ucrChkDisplayAsPercentage.Checked AndAlso IsFactorByFactor()
         ucrChkCorrelations.Visible = False
         ucrChkSwapXYVar.Visible = False
         ucrChkOmitMissing.Visible = False
@@ -869,7 +869,6 @@ Public Class dlgDescribeTwoVariable
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
         AddRemoveFirstAnova2Param()
-        'SwappingXYVar()
     End Sub
 
     Private Sub ChangeLocations()
@@ -1356,6 +1355,7 @@ Public Class dlgDescribeTwoVariable
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
         AddRemoveFirstAnova2Param()
+        AddingColumnFactor()
     End Sub
 
     Private Sub ucrReceiverThreeVariableSecondFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThreeVariableSecondFactor.ControlValueChanged
@@ -1499,5 +1499,13 @@ Public Class dlgDescribeTwoVariable
         AddRemoveSecondAnovaParam()
         ChangeBaseRCode()
         ChangeSumaryLabelText()
+    End Sub
+
+    Private Sub AddingColumnFactor()
+        If ucrReceiverFirstVars.lstSelectedVariables.Items.Count >= 1 Then
+            Dim iIndex = ucrReceiverFirstVars.lstSelectedVariables.Items.Count - 1
+            ucrReceiverPercentages.Add(ucrReceiverFirstVars.lstSelectedVariables.Items(iIndex).Text)
+            ucrReceiverFirstVars.SetMeAsReceiver()
+        End If
     End Sub
 End Class
