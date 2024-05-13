@@ -84,7 +84,6 @@ Public Class dlgCalculator
         clsAttachFunction.SetRCommand("attach")
         clsDetachFunction.SetRCommand("detach")
         clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
-        clsDetachFunction.AddParameter("name", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetachFunction.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.SetCommandString("")
 
@@ -136,6 +135,7 @@ Public Class dlgCalculator
 
     Private Sub AddAttachDetachFunctions()
         If Not String.IsNullOrEmpty(ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame) Then
+            clsDetachFunction.AddParameter("name", ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.strCurrDataFrame)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 0)
             ucrCalc.ucrSaveResultInto.Enabled = True
