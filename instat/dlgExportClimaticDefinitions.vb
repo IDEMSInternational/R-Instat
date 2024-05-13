@@ -122,7 +122,7 @@ Public Class dlgExportClimaticDefinitions
 
         ucrInputCountry.SetParameter(New RParameter("country", 19))
 
-        ucrInputTokenPath.SetParameter(New RParameter("file", 0))
+        ucrInputTokenPath.SetParameter(New RParameter("filename", 0))
 
     End Sub
 
