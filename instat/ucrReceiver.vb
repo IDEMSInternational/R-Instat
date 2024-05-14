@@ -69,6 +69,7 @@ Public Class ucrReceiver
     ' If not attached to primary data frame, should only data frames linked to the primary data frame be shown.
     Public bOnlyLinkedToPrimaryDataFrames As Boolean = True
 
+    ' If True then this receiver can only contain hidden data frames from the selector's list
     Public bOnlyHiddenDataFrames As Boolean = False
 
     ' When calling GetVariableNames() this is the R package & function name the variables will be inside
