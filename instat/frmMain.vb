@@ -1311,10 +1311,6 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "133")
     End Sub
 
-    Private Sub mnuHelpMenus_Click(sender As Object, e As EventArgs) Handles mnuHelpMenus.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
-    End Sub
-
     Private Sub mnuHelpLicence_Click(sender As Object, e As EventArgs) Handles mnuHelpLicence.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "323")
     End Sub
@@ -2731,5 +2727,53 @@ Public Class frmMain
 
     Private Sub mnuClimaticFileExportToGoogleBucketsToolStrip_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToGoogleBucketsToolStrip.Click
         dlgExportClimaticDefinitions.ShowDialog()
+    End Sub
+
+    Private Sub MToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
+    End Sub
+
+    Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "13")
+    End Sub
+
+    Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "7")
+    End Sub
+
+    Private Sub PrepareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrepareToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "9")
+    End Sub
+
+    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "18")
+    End Sub
+
+    Private Sub ModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModelToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "17")
+    End Sub
+
+    Private Sub StructuredToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StructuredToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "454")
+    End Sub
+
+    Private Sub ClimaticToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClimaticToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "19")
+    End Sub
+
+    Private Sub ProcurementToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProcurementToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "498")
+    End Sub
+
+    Private Sub ExperimentsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExperimentsToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "570")
+    End Sub
+
+    Private Sub ToolsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolsToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "8")
+    End Sub
+
+    Private Sub ViewToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ViewToolStripMenuItem.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "21")
     End Sub
 End Class
