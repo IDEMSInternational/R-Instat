@@ -31,6 +31,7 @@ Public Class ucrSelector
     Private bShowHiddenCols As Boolean = False
     Private WithEvents ucrLinkedSelector As ucrSelector
     Public bIsStacked As Boolean = False
+
     'Does the selector have its own parameter
     'Usually False as the parameter comes from the data frame selector
     Public bHasOwnParameter As Boolean = False
@@ -158,7 +159,7 @@ Public Class ucrSelector
         'todo, for columns, the list view should be field with variables from the .Net metadata object
         frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1),
                                       strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud,
-                                      strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
+                                      strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath, bHidenDataFrames:=CurrentReceiver.bOnlyHiddenDataFrames)
         If Not CurrentReceiver.bExcludeFromSelector Then
             'TODO. Investigate why this has to be called here instead of just being called in ucrReceiver control.SetControlValue()
             'See PR #8605 for related comments added in ucrReceiver.

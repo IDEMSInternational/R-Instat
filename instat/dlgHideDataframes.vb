@@ -41,7 +41,7 @@ Public Class dlgHideDataframes
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        SetHiddenColumns()
+        'SetHiddenColumns()
         CountLevels()
     End Sub
 
@@ -57,6 +57,8 @@ Public Class dlgHideDataframes
         ucrReceiverMultipleUnhide.SetParameterIsString()
         ucrReceiverMultipleUnhide.Selector = ucrSelectorForDataFrames
         ucrReceiverMultiple.strSelectorHeading = "Data Frames"
+        ucrReceiverMultipleUnhide.SetItemType("dataframe")
+        ucrReceiverMultipleUnhide.bOnlyHiddenDataFrames = True
 
         ucrPnlHideUnhide.AddRadioButton(rdoHideDataFrame)
         ucrPnlHideUnhide.AddRadioButton(rdoUnhideDataFrame)
@@ -164,14 +166,14 @@ Public Class dlgHideDataframes
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             clsDummyFunction.AddParameter("checked", "rdoUnhide", iPosition:=0)
-            SetHiddenColumns()
+            'SetHiddenColumns()
             ucrReceiverMultipleUnhide.SetMeAsReceiver()
         End If
         TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverMultipleUnhide_Enter(sender As Object, e As EventArgs) Handles ucrReceiverMultipleUnhide.Enter
-        SetHiddenColumns()
+        'SetHiddenColumns()
         TestOKEnabled()
     End Sub
 

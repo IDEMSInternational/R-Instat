@@ -1193,11 +1193,12 @@ DataBook$set("public","set_hidden_data_frames", function(data_names = c()) {
 } 
 )
 
-DataBook$set("public","get_hidden_data_frames", function() {
+DataBook$set("public","get_hidden_data_frames", function(as_list = FALSE, ...) {
   all_data_names <- names(private$.data_sheets)
   visible_data_names <- all_data_names[sapply(all_data_names, function(x) !isTRUE(self$get_data_objects(x)$get_metadata(label = is_hidden_label)))]
   hidden_data_names <- setdiff(all_data_names, visible_data_names)
-  return(hidden_data_names)
+  if(as_list) return(list(data_names = hidden_data_names))
+  else return(hidden_data_names)
 } 
 )
 

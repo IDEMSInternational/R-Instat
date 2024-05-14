@@ -69,6 +69,8 @@ Public Class ucrReceiver
     ' If not attached to primary data frame, should only data frames linked to the primary data frame be shown.
     Public bOnlyLinkedToPrimaryDataFrames As Boolean = True
 
+    Public bOnlyHiddenDataFrames As Boolean = False
+
     ' When calling GetVariableNames() this is the R package & function name the variables will be inside
     ' Only currently used in Multiple receiver but defined here as needed in general method SetControlValue()
     ' for ExtractItemsFromRList()
