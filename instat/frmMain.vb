@@ -2776,4 +2776,20 @@ Public Class frmMain
     Private Sub ViewToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ViewToolStripMenuItem.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "21")
     End Sub
+
+    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
+
+    End Sub
+
+    Private Sub mnuHelpMenus_Click(sender As Object, e As EventArgs) Handles mnuHelpMenus.Click
+
+    End Sub
+
+    Private Sub mnuPrepare_Click(sender As Object, e As EventArgs) Handles mnuPrepare.Click
+
+    End Sub
+
+    Private Sub mnuClimaticDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDates.Click
+
+    End Sub
 End Class
