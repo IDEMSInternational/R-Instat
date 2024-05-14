@@ -46,23 +46,27 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverData.SetParameterIsString()
         ucrReceiverData.SetMeAsReceiver()
         ucrReceiverData.SetItemType("dataframe")
+        ucrReceiverData.strSelectorHeading = "Data Sets"
 
         ucrReceiverDataYear.SetParameter(New RParameter("data_by_year", 1))
         ucrReceiverDataYear.Selector = ucrSelectorExportDefinitions
         ucrReceiverDataYear.SetParameterIsString()
         ucrReceiverDataYear.SetItemType("dataframe")
+        ucrReceiverDataYear.strSelectorHeading = "Data Sets"
         ucrReceiverDataYear.SetLinkedDisplayControl(lblDataByYear)
 
         ucrReceiverDataYearMonth.SetParameter(New RParameter("data_by_year_month", 2))
         ucrReceiverDataYearMonth.Selector = ucrSelectorExportDefinitions
         ucrReceiverDataYearMonth.SetParameterIsString()
         ucrReceiverDataYearMonth.SetItemType("dataframe")
+        ucrReceiverDataYearMonth.strSelectorHeading = "Data Sets"
         ucrReceiverDataYearMonth.SetLinkedDisplayControl(lblDataByYearMonth)
 
         ucrReceiverCropData.SetParameter(New RParameter("crop_data", 3))
         ucrReceiverCropData.Selector = ucrSelectorExportDefinitions
         ucrReceiverCropData.SetParameterIsString()
         ucrReceiverCropData.SetItemType("dataframe")
+        ucrReceiverCropData.strSelectorHeading = "Data Sets"
         ucrReceiverCropData.SetLinkedDisplayControl(lblCropData)
 
         ucrReceiverMinTemp.SetParameter(New RParameter("tmin", 4))
@@ -150,7 +154,7 @@ Public Class dlgExportClimaticDefinitions
 
         clsReformatTempSummariesFunction.SetPackageName("epicsawrap")
         clsReformatTempSummariesFunction.SetRCommand("reformat_temperature_summaries")
-        clsReformatTempSummariesFunction.SetAssignTo("crop_prop")
+        clsReformatTempSummariesFunction.SetAssignTo("annual_temp")
 
         clsReforMattAnnualSummariesFunction.SetPackageName("epicsawrap")
         clsReforMattAnnualSummariesFunction.SetRCommand("reformat_annual_summaries")
