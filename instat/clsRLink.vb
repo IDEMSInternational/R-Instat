@@ -1445,9 +1445,10 @@ Public Class RLink
                                           strParameterValue:=Chr(34) & strType & Chr(34))
                     End If
                 Case "dataframe"
-                    clsGetItems.SetRCommand(strInstatDataObject & "$get_data_names")
                     If bHidenDataFrames Then
                         clsGetItems.SetRCommand(strInstatDataObject & "$get_hidden_data_frames")
+                    Else
+                        clsGetItems.SetRCommand(strInstatDataObject & "$get_data_names")
                     End If
                 Case "link"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_link_names")
