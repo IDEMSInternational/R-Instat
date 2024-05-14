@@ -5899,7 +5899,28 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdCoeffs2_Click(sender As Object, e As EventArgs) Handles cmdCoeffs2.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.numeric(purrr::map(.x=(nrow(data_RDS)-1):0, .f = ~sum(combn(rootsx3[1:nrow(data_RDS)-1], .x , FUN=prod))))", 1)
+        '  ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.numeric(purrr::map(.x=(nrow(data_RDS)-1):0, .f = ~sum(combn(rootsx3[1:nrow(data_RDS)-1], .x , FUN=prod))))", 1)
+        Dim clsCoeffs2Function As New RFunction
+
+        clsCoeffs2Function.SetRCommand("as.numeric")
+        clsCoeffs2Function.SetRCommand("(as.numeric(purrr::map(.x=)")
+        '(nrow(""x"")-1):0,
+        '.f = ~sum(combn(rootsx3[1:nrow(data_RDS)-1], .x , FUN=prod))))")
+        'clsCoeffs2Function.SetPackageName("purrr")
+        'clsCoeffs2Function.SetRCommand("map")
+        'clsCoeffs2Function.AddParameter(".x", "(nrow(x)-1):0")
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsCoeffs2Function.SetRCommand("as.numeric(purrr::map")
+        clsCoeffs2Function.AddParameter(".x", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsCoeffs2Function.AddParameter("mean", "0", iPosition:=1)
+        clsCoeffs2Function.AddParameter("sd", "1", iPosition:=2)
+
+        clsCoeffs2Function.AddParameter(".f", "~sum(combn(rootsx3[1:nrow(x)-1], .x , FUN=prod))))")
+        clsCoeffs2Function.AddParameter("Coeffs2", Chr(34), iPosition:=15)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsCoeffs2Function.ToScript, 0)
     End Sub
 
     Private Sub cmdDssqSession_Click(sender As Object, e As EventArgs) Handles cmddssqSession.Click
