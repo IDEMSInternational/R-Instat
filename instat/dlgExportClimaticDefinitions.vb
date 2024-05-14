@@ -19,7 +19,6 @@ Imports System.IO
 Public Class dlgExportClimaticDefinitions
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private bResetRCode As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsDummyFunction As New RFunction
     Public clsExportRinstatToBucketFunction, ClsGcsAuthFileFunction, clsSummariesFunction As New RFunction
