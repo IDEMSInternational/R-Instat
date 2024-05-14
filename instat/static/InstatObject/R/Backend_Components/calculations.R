@@ -124,7 +124,7 @@ DataSheet$set("public", "save_calculation", function(calc) {
 instat_calculation <- R6::R6Class("instat_calculation",
                                   public = list(
                                     initialize = function(function_exp = "", type = "", name = "", result_name = "", result_data_frame = "", manipulations = list(),
-                                                          sub_calculations = list(), calculated_from = list(), save = 0, before = FALSE, adjacent_column = "") {
+                                                          sub_calculations = list(), calculated_from = list(), save = 0, before = FALSE, adjacent_column = "", param_list = list()) {
                                       if((type == "calculation" || type == "summary") && missing(result_name)) stop("result_name must be provided for calculation and summary types")
                                       if(type == "combination" && save > 0) {
                                         warning("combination types do not have a main calculation which can be saved. save_output will be stored as FALSE")
@@ -142,6 +142,7 @@ instat_calculation <- R6::R6Class("instat_calculation",
                                       self$save <- save
                                       self$before <- before
                                       self$adjacent_column <- adjacent_column
+                                      self$param_list <- param_list
                                     },
                                     name = "",
                                     result_name = "",
@@ -153,7 +154,8 @@ instat_calculation <- R6::R6Class("instat_calculation",
                                     calculated_from = list(),
                                     save = 0,
                                     before = FALSE,
-                                    adjacent_column = ""
+                                    adjacent_column = "",
+                                    param_list = list()
                                   )
 )
 
@@ -162,7 +164,9 @@ instat_calculation$set("public", "data_clone", function(...) {
                                 name = self$name, result_name = self$result_name, 
                                 manipulations = lapply(self$manipulations, function(x) x$data_clone()), 
                                 sub_calculations = lapply(self$sub_calculations, function(x) x$data_clone()),
-                                calculated_from = self$calculated_from, save = self$save)
+                                calculated_from = self$calculated_from, save = self$save,
+                                param_list = self$param_list)
+                                # adjacent column / before to be in here?
   return(ret)
 }
 )
