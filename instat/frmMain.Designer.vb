@@ -165,11 +165,13 @@ Partial Class frmMain
         Me.mnuHelpWindows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpMenus = New System.Windows.Forms.ToolStripMenuItem()
         Me.MToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator82 = New System.Windows.Forms.ToolStripSeparator()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PrepareToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator83 = New System.Windows.Forms.ToolStripSeparator()
         Me.StructuredToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClimaticToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProcurementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -695,8 +697,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator82 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator83 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1599,6 +1599,11 @@ Partial Class frmMain
         Me.MToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
         Me.MToolStripMenuItem.Text = "Menus and Dialogs"
         '
+        'ToolStripSeparator82
+        '
+        Me.ToolStripSeparator82.Name = "ToolStripSeparator82"
+        Me.ToolStripSeparator82.Size = New System.Drawing.Size(172, 6)
+        '
         'FileToolStripMenuItem
         '
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
@@ -1628,6 +1633,11 @@ Partial Class frmMain
         Me.ModelToolStripMenuItem.Name = "ModelToolStripMenuItem"
         Me.ModelToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
         Me.ModelToolStripMenuItem.Text = "Model"
+        '
+        'ToolStripSeparator83
+        '
+        Me.ToolStripSeparator83.Name = "ToolStripSeparator83"
+        Me.ToolStripSeparator83.Size = New System.Drawing.Size(172, 6)
         '
         'StructuredToolStripMenuItem
         '
@@ -5194,16 +5204,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'ToolStripSeparator82
-        '
-        Me.ToolStripSeparator82.Name = "ToolStripSeparator82"
-        Me.ToolStripSeparator82.Size = New System.Drawing.Size(177, 6)
-        '
-        'ToolStripSeparator83
-        '
-        Me.ToolStripSeparator83.Name = "ToolStripSeparator83"
-        Me.ToolStripSeparator83.Size = New System.Drawing.Size(177, 6)
         '
         'frmMain
         '
