@@ -479,9 +479,9 @@ Public Class frmMain
 
         '---------------------------------------
         'delete the recovery files
-        If strAutoSavedLogFilePaths.Length > 1 Then
+        If strAutoSavedLogFilePaths.Length > 0 Then
             Try
-                File.Delete(strAutoSavedLogFilePaths(1))
+                File.Delete(strAutoSavedLogFilePaths(0))
             Catch ex As Exception
                 MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
             End Try
@@ -500,13 +500,13 @@ Public Class frmMain
             End Try
         End If
 
-        'If strAutoSavedDataFilePaths.Length > 1 Then
-        '    Try
-        '        ' File.Delete(strAutoSavedDataFilePaths(1))
-        '    Catch ex As Exception
-        '        MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
-        '    End Try
-        'End If
+        If strAutoSavedDataFilePaths.Length > 0 Then
+            Try
+                File.Delete(strAutoSavedDataFilePaths(0))
+            Catch ex As Exception
+                MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+            End Try
+        End If
         '---------------------------------------
 
     End Sub
