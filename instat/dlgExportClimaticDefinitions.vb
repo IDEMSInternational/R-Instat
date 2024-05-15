@@ -213,23 +213,37 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub TestOkEnabled()
-        ucrBase.OKEnabled(
-    Not ucrReceiverData.IsEmpty _
-    AndAlso Not ucrReceiverMonth.IsEmpty _
-    AndAlso Not ucrReceiverYear.IsEmpty _
-    AndAlso Not ucrInputCountry.IsEmpty _
-    AndAlso Not ucrInputStationID.IsEmpty _
-    AndAlso Not ucrInputTokenPath.IsEmpty _
-    AndAlso (
-        ((ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked) AndAlso Not ucrReceiverCropData.IsEmpty) _
-        OrElse (ucrChkAnnualRainfall.Checked AndAlso Not ucrReceiverRain.IsEmpty) _
-        OrElse ((ucrChkAnnualTemp.Checked OrElse ucrChkMonthlyTemp.Checked) AndAlso Not ucrReceiverMinTemp.IsEmpty) _
-        OrElse ((ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked) AndAlso Not ucrReceiverDataYear.IsEmpty) _
-        OrElse (ucrChkMonthlyTemp.Checked AndAlso Not ucrReceiverDataYearMonth.IsEmpty) _
-        OrElse ((ucrChkAnnualTemp.Checked OrElse ucrChkMonthlyTemp.Checked) AndAlso Not ucrReceiverMaxTemp.IsEmpty)
-    )
-)
+        If Not ucrReceiverData.IsEmpty AndAlso
+           Not ucrReceiverMonth.IsEmpty AndAlso
+           Not ucrReceiverYear.IsEmpty AndAlso
+           Not ucrInputCountry.IsEmpty AndAlso
+           Not ucrInputStationID.IsEmpty AndAlso
+           Not ucrInputTokenPath.IsEmpty Then
 
+            If (ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked) AndAlso
+               Not ucrReceiverCropData.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            ElseIf ucrChkAnnualRainfall.Checked AndAlso
+                   Not ucrReceiverRain.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            ElseIf (ucrChkAnnualTemp.Checked OrElse ucrChkMonthlyTemp.Checked) AndAlso
+                   Not ucrReceiverMinTemp.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            ElseIf (ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked) AndAlso
+                   Not ucrReceiverDataYear.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            ElseIf ucrChkMonthlyTemp.Checked AndAlso
+                   Not ucrReceiverDataYearMonth.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            ElseIf (ucrChkAnnualTemp.Checked OrElse ucrChkMonthlyTemp.Checked) AndAlso
+                   Not ucrReceiverMaxTemp.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub AddRemoveSummary()
@@ -367,15 +381,11 @@ Public Class dlgExportClimaticDefinitions
     Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged,
             ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged,
             ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrChkSeasonStartProp.ControlContentsChanged, ucrInputCountry.ControlContentsChanged, ucrInputStationID.ControlContentsChanged, ucrChkIncludeSummaryData.ControlContentsChanged,
-            ucrChkMonthlyTemp.ControlContentsChanged, ucrChkCropSuccessProp.ControlContentsChanged, ucrChkAnnualTemp.ControlContentsChanged, ucrChkAnnualRainfall.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged
+            ucrChkMonthlyTemp.ControlContentsChanged, ucrChkCropSuccessProp.ControlContentsChanged, ucrChkAnnualTemp.ControlContentsChanged, ucrChkAnnualRainfall.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged, ucrSelectorExportDefinitions.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
         ucrReceiverData.SetMeAsReceiver()
-    End Sub
-
-    Private Sub ucrSelectorExportDefinitions_DataFrameChanged() Handles ucrSelectorExportDefinitions.DataFrameChanged
-        TestOkEnabled()
     End Sub
 End Class
