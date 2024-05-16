@@ -116,7 +116,7 @@ Public Class dlgSeasonalGraph
         ucrReceiverRibbons.bWithQuotes = False
         ucrReceiverRibbons.iMaxItems = 4
 
-        ucrReceiverFacetBy.SetParameter(New RParameter(""))
+        ucrReceiverFacetBy.SetParameter(New RParameter("var1"))
         ucrReceiverFacetBy.Selector = ucrSelectorForSeasonalGraph
         ucrReceiverFacetBy.SetIncludedDataTypes({"factor"})
         ucrReceiverFacetBy.strSelectorHeading = "Factors"
@@ -353,7 +353,7 @@ Public Class dlgSeasonalGraph
     End Sub
 
     Private Sub UpdateParameters()
-        clsFacetOperator.RemoveParameterByName("wrap" & ucrInputStation.Name)
+        clsFacetOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
 
@@ -362,7 +362,7 @@ Public Class dlgSeasonalGraph
         ucrReceiverFacetBy.SetRCode(Nothing)
         Select Case ucrInputStation.GetText()
             Case strFacetWrap
-                ucrReceiverFacetBy.ChangeParameterName("wrap" & ucrInputStation.Name)
+                ucrReceiverFacetBy.ChangeParameterName("var1")
                 ucrReceiverFacetBy.SetRCode(clsFacetOperator)
             Case strFacetCol
                 ucrReceiverFacetBy.ChangeParameterName("col" & ucrInputStation.Name)
@@ -552,7 +552,7 @@ Public Class dlgSeasonalGraph
                                 clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
                                 clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorForSeasonalGraph,
  clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
-        clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
+        clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewFacetVariablesOperator:=clsFacetOperator,
                                 strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
@@ -650,13 +650,5 @@ Public Class dlgSeasonalGraph
 
     Private Sub ucrChkAddpointRibbon_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddpointRibbon.ControlValueChanged
         Ribbon()
-    End Sub
-
-    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
-
-    End Sub
-
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverRibbons.ControlContentsChanged, ucrReceiverLines.ControlContentsChanged
-
     End Sub
 End Class
