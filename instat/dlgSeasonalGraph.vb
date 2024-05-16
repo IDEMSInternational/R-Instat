@@ -31,7 +31,6 @@ Public Class dlgSeasonalGraph
     Private clsGroupByFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsThemeFunction As New RFunction
-    Private clsNumericFunction As New RFunction
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
     Private clsYlabFunction As New RFunction
@@ -58,9 +57,10 @@ Public Class dlgSeasonalGraph
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomLine"
     Private strGeompointParameterName As String = "geom_point"
+    Private strGeompointParameterName1 As String = "geom_point"
     Private strgeomRibbonParameterName As String = "geom_ribbon"
     Private strgeomRibbonParameterName0 As String = "geom_ribbon"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strgeomRibbonParameterName, strgeomRibbonParameterName0, strGeompointParameterName}
+    Private strGeomParameterNames() As String = {strFirstParameterName, strgeomRibbonParameterName, strgeomRibbonParameterName0, strGeompointParameterName, strGeompointParameterName1}
 
     Private Sub dlgSeasonalGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -140,16 +140,13 @@ Public Class dlgSeasonalGraph
         ucrChkLegend.AddParameterPresentCondition(True, "legend.position")
         ucrChkLegend.AddParameterPresentCondition(False, "legend.position", False)
 
-        ucrChkAddPoint.SetText("Add point")
+        ucrChkAddPoint.SetText("Add point on Lines")
         ucrChkAddPoint.AddParameterValuesCondition(True, "checked", "True")
         ucrChkAddPoint.AddParameterValuesCondition(False, "checked", "False")
-        ucrChkAddPoint.AddToLinkedControls(ucrReceiverAddPoint, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrReceiverAddPoint.SetParameter(New RParameter("y", 6))
-        ucrReceiverAddPoint.Selector = ucrSelectorForSeasonalGraph
-        ucrReceiverAddPoint.strSelectorHeading = "Variables"
-        ucrReceiverAddPoint.SetParameterIsString()
-        ucrReceiverAddPoint.bWithQuotes = False
+        ucrChkAddpointRibbon.SetText("Add point on Ribbon")
+        ucrChkAddpointRibbon.AddParameterValuesCondition(True, "checked", "True")
+        ucrChkAddpointRibbon.AddParameterValuesCondition(False, "checked", "False")
 
         ucrChkFill.SetText("Fill Identity:")
         ucrChkFill.AddParameterValuesCondition(True, "checked", "True")
@@ -181,7 +178,6 @@ Public Class dlgSeasonalGraph
         clsFacetFunction = New RFunction
         clsScalecolouridentityFunction = New RFunction
         clsScalefillidentityFunction = New RFunction
-        clsNumericFunction = New RFunction
         clsFacetOperator = New ROperator
         clsFacetRowOp = New ROperator
         clsFacetColOp = New ROperator
@@ -224,8 +220,6 @@ Public Class dlgSeasonalGraph
         clsFacetOperator.bBrackets = False
         clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
 
-        clsNumericFunction.SetRCommand("as.numeric")
-
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
 
@@ -256,8 +250,6 @@ Public Class dlgSeasonalGraph
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverX.AddAdditionalCodeParameterPair(clsNumericFunction, New RParameter("x", 2), iAdditionalPairNo:=1)
-
         ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
         ucrSelectorForSeasonalGraph.SetRCode(clsRggplotFunction, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
@@ -271,6 +263,7 @@ Public Class dlgSeasonalGraph
             ucrInputFill.SetRCode(clsScalefillidentityFunction, bReset)
             ucrChkRibbons.SetRCode(clsBaseOperator, bReset)
             ucrChkAddPoint.SetRCode(clsBaseOperator, bReset)
+            ucrChkAddpointRibbon.SetRCode(clsBaseOperator, bReset)
             AutoFacetStation()
             AutoFillmonth()
         End If
@@ -298,75 +291,66 @@ Public Class dlgSeasonalGraph
 
         Dim i As Integer
 
-        ' Add geom_line functions for ucrReceiverLines.lstSelectedVariables
-        For i = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
-            Dim clsRaeslineFunction As New RFunction
-            Dim ColourArguments As New List(Of String) From {"grey", "grey", "black", "grey"}
-            Dim LinewidthArguments As New List(Of String) From {"1.0", "1.0", "2.0", "1.0"}
-            Dim GroupArguments As New List(Of String) From {"grey", "grey", "grey", "grey"}
+        If Not ucrReceiverLines.IsEmpty Then
+            ' Add geom_line functions for ucrReceiverLines.lstSelectedVariables
+            For i = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
+                Dim clsRaeslineFunction As New RFunction
+                Dim ColourArguments As New List(Of String) From {"grey", "grey", "black", "grey"}
+                Dim LinewidthArguments As New List(Of String) From {"1.0", "1.0", "2.0", "1.0"}
+                Dim GroupArguments As New List(Of String) From {"grey", "grey", "grey", "grey"}
 
-            clsRaeslineFunction.SetPackageName("ggplot2")
-            clsRaeslineFunction.SetRCommand("aes")
-            clsRaeslineFunction.AddParameter("y", ucrReceiverLines.lstSelectedVariables.Items(i).Text, iPosition:=0)
-            clsRaeslineFunction.AddParameter("colour", Chr(34) & ColourArguments(i) & Chr(34), iPosition:=1)
+                clsRaeslineFunction.SetPackageName("ggplot2")
+                clsRaeslineFunction.SetRCommand("aes")
+                clsRaeslineFunction.AddParameter("y", ucrReceiverLines.lstSelectedVariables.Items(i).Text, iPosition:=0)
+                clsRaeslineFunction.AddParameter("colour", Chr(34) & ColourArguments(i) & Chr(34), iPosition:=1)
 
-            Dim clsGeomLineFunction As New RFunction
-            clsGeomLineFunction.SetPackageName("ggplot2")
-            clsGeomLineFunction.SetRCommand("geom_line")
-            clsGeomLineFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaeslineFunction, iPosition:=1)
-            clsGeomLineFunction.AddParameter("linewidth", LinewidthArguments(i), iPosition:=2)
-            clsGeomLineFunction.AddParameter("group", Chr(34) & GroupArguments(i) & Chr(34), iPosition:=3)
+                Dim clsGeomLineFunction As New RFunction
+                clsGeomLineFunction.SetPackageName("ggplot2")
+                clsGeomLineFunction.SetRCommand("geom_line")
+                clsGeomLineFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaeslineFunction, iPosition:=1)
+                clsGeomLineFunction.AddParameter("linewidth", LinewidthArguments(i), iPosition:=2)
+                clsGeomLineFunction.AddParameter("group", Chr(34) & GroupArguments(i) & Chr(34), iPosition:=3)
 
-            ' Add geom_line function to the base operator
-            clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
-            clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-            clsBaseOperator.AddParameter(strFirstParameterName & i, clsRFunctionParameter:=clsGeomLineFunction, iPosition:=3)
-        Next
+                ' Add geom_line function to the base operator
+                clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+                clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+                clsBaseOperator.AddParameter(strFirstParameterName & i, clsRFunctionParameter:=clsGeomLineFunction, iPosition:=3)
+            Next
+        Else
+            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
+        End If
+        If ucrChkRibbons.Checked AndAlso Not ucrReceiverRibbons.IsEmpty Then
+            For i = 0 To ucrReceiverRibbons.lstSelectedVariables.Items.Count - 1 Step 2
+                ' Get current variable
+                Dim var1 = ucrReceiverRibbons.lstSelectedVariables.Items(i).Text
+                ' Get the next variable in the pair if available
+                Dim var2 As String = If(i + 1 < ucrReceiverRibbons.lstSelectedVariables.Items.Count, ucrReceiverRibbons.lstSelectedVariables.Items(i + 1).Text, "")
+                Dim fillArguments As New List(Of String) From {"#3270C1", "#A3A3A3", "#4DB0F1", "#FF5733"}
 
-        ' Add geom_point functions for ucrReceiverAddPoint.lstSelectedVariables
-        For i = 0 To ucrReceiverAddPoint.lstSelectedVariables.Items.Count - 1
-            Dim clsAesGeompointFunction As New RFunction
-            clsAesGeompointFunction.SetPackageName("ggplot2")
-            clsAesGeompointFunction.SetRCommand("aes")
-            clsAesGeompointFunction.AddParameter("y", ucrReceiverAddPoint.lstSelectedVariables.Items(i).Text, iPosition:=0)
+                If Not String.IsNullOrEmpty(var2) Then
+                    Dim clsRaesRibFunction As New RFunction
+                    clsRaesRibFunction.SetPackageName("ggplot2")
+                    clsRaesRibFunction.SetRCommand("aes")
+                    clsRaesRibFunction.AddParameter("ymax", var1, iPosition:=0)
+                    clsRaesRibFunction.AddParameter("ymin", var2, iPosition:=1)
+                    clsRaesRibFunction.AddParameter("fill", Chr(34) & fillArguments(i) & Chr(34), iPosition:=2)
 
-            Dim clsGeomPointFunction As New RFunction
-            clsGeomPointFunction.SetPackageName("ggplot2")
-            clsGeomPointFunction.SetRCommand("geom_point")
-            clsGeomPointFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesGeompointFunction, iPosition:=1)
+                    Dim clsRibFunction As New RFunction
+                    clsRibFunction.SetPackageName("ggplot2")
+                    clsRibFunction.SetRCommand("geom_ribbon")
+                    clsRibFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesRibFunction, iPosition:=1)
 
-            ' Add geom_point function to the base operator
-            clsBaseOperator.AddParameter(strGeompointParameterName & i, clsRFunctionParameter:=clsGeomPointFunction, iPosition:=8)
-        Next
-
-        ' Add geom_ribbon functions for ucrReceiverRibbons.lstSelectedVariables
-        For i = 0 To ucrReceiverRibbons.lstSelectedVariables.Items.Count - 1 Step 2
-            ' Get current variable
-            Dim var1 = ucrReceiverRibbons.lstSelectedVariables.Items(i).Text
-            ' Get the next variable in the pair if available
-            Dim var2 As String = If(i + 1 < ucrReceiverRibbons.lstSelectedVariables.Items.Count, ucrReceiverRibbons.lstSelectedVariables.Items(i + 1).Text, "")
-            Dim fillArguments As New List(Of String) From {"#3270C1", "#A3A3A3", "#4DB0F1", "#FF5733"}
-
-            If Not String.IsNullOrEmpty(var2) Then
-                Dim clsRaesRibFunction As New RFunction
-                clsRaesRibFunction.SetPackageName("ggplot2")
-                clsRaesRibFunction.SetRCommand("aes")
-                clsRaesRibFunction.AddParameter("ymax", var1, iPosition:=0)
-                clsRaesRibFunction.AddParameter("ymin", var2, iPosition:=1)
-                clsRaesRibFunction.AddParameter("fill", Chr(34) & fillArguments(i) & Chr(34), iPosition:=2)
-
-                Dim clsRibFunction As New RFunction
-                clsRibFunction.SetPackageName("ggplot2")
-                clsRibFunction.SetRCommand("geom_ribbon")
-                clsRibFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesRibFunction, iPosition:=1)
-
-                clsBaseOperator.AddParameter(strgeomRibbonParameterName0 & i, clsRFunctionParameter:=clsRibFunction, iPosition:=1)
-            End If
-        Next
+                    clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+                    clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+                    clsBaseOperator.AddParameter(strgeomRibbonParameterName0 & i, clsRFunctionParameter:=clsRibFunction, iPosition:=1)
+                End If
+            Next
+        Else
+            clsBaseOperator.RemoveParameterByName(strgeomRibbonParameterName0)
+        End If
         AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
-
 
     Private Sub UpdateParameters()
         clsFacetOperator.RemoveParameterByName("wrap" & ucrInputStation.Name)
@@ -536,6 +520,7 @@ Public Class dlgSeasonalGraph
 
     Private Sub ucrReceiverLines_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLines.ControlValueChanged
         ListGeomLine()
+        Points()
     End Sub
 
     Private Sub AddRemoveTheme()
@@ -575,6 +560,7 @@ Public Class dlgSeasonalGraph
 
     Private Sub ucrChkRibbons_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRibbons.ControlValueChanged, ucrReceiverRibbons.ControlValueChanged
         ListGeomLine()
+        Ribbon()
         If ucrChkRibbons.Checked Then
             ucrReceiverRibbons.SetMeAsReceiver()
         Else
@@ -582,7 +568,7 @@ Public Class dlgSeasonalGraph
         End If
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverRibbons.ControlContentsChanged, ucrReceiverLines.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverAddPoint.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverRibbons.ControlContentsChanged, ucrReceiverLines.ControlContentsChanged, ucrSave.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -592,23 +578,59 @@ Public Class dlgSeasonalGraph
         variableNames = variableNames.Replace("'", "").Replace("""", "")
 
         If Not ucrReceiverX.IsEmpty AndAlso (ucrReceiverX.strCurrDataType.Contains("factor") OrElse ucrReceiverX.strCurrDataType = "ordered,factor") Then
-            clsNumericFunction.AddParameter("x", variableNames, iPosition:=0, bIncludeArgumentName:=False)
-            clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsNumericFunction)
             clsRaesFunction.AddParameter("group", "1", iPosition:=3)
         Else
             clsRaesFunction.RemoveParameterByName("group")
-            'clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames().Trim())
             clsRaesFunction.AddParameter("x", variableNames)
         End If
     End Sub
 
-    Private Sub ucrChkAddPoint_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddPoint.ControlValueChanged, ucrReceiverAddPoint.ControlValueChanged
+    Private Sub Ribbon()
+        If ucrChkAddpointRibbon.Checked Then
+            ' Iterate over each parameter in the list
+            For Each selectedItem As ListViewItem In ucrReceiverRibbons.lstSelectedVariables.Items
+                Dim clsAesGeompointFunction1 As New RFunction
+                clsAesGeompointFunction1.SetPackageName("ggplot2")
+                clsAesGeompointFunction1.SetRCommand("aes")
+                clsAesGeompointFunction1.AddParameter("y", selectedItem.Text, iPosition:=0)
+
+                Dim clsGeomPointFunction1 As New RFunction
+                clsGeomPointFunction1.SetPackageName("ggplot2")
+                clsGeomPointFunction1.SetRCommand("geom_point")
+                clsGeomPointFunction1.AddParameter("mapping", clsRFunctionParameter:=clsAesGeompointFunction1, iPosition:=1)
+
+                ' Add geom_point function to the base operator with a unique parameter name
+                clsBaseOperator.AddParameter(strGeompointParameterName1 & ucrReceiverRibbons.lstSelectedVariables.Items.IndexOf(selectedItem), clsRFunctionParameter:=clsGeomPointFunction1, iPosition:=11)
+            Next
+        Else
+            ' If checkbox is unchecked, remove the parameters
+            clsBaseOperator.RemoveParameterByName(strGeompointParameterName1)
+        End If
+    End Sub
+
+    Private Sub Points()
         If ucrChkAddPoint.Checked Then
-            ucrReceiverAddPoint.SetMeAsReceiver()
+            For i = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
+                Dim clsAesGeompointFunction As New RFunction
+                clsAesGeompointFunction.SetPackageName("ggplot2")
+                clsAesGeompointFunction.SetRCommand("aes")
+                clsAesGeompointFunction.AddParameter("y", ucrReceiverLines.lstSelectedVariables.Items(i).Text, iPosition:=0)
+
+                Dim clsGeomPointFunction As New RFunction
+                clsGeomPointFunction.SetPackageName("ggplot2")
+                clsGeomPointFunction.SetRCommand("geom_point")
+                clsGeomPointFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesGeompointFunction, iPosition:=1)
+
+                ' Add geom_point function to the base operator
+                clsBaseOperator.AddParameter(strGeompointParameterName & i, clsRFunctionParameter:=clsGeomPointFunction, iPosition:=8)
+            Next
         Else
             clsBaseOperator.RemoveParameterByName(strGeompointParameterName)
         End If
-        ListGeomLine()
+    End Sub
+
+    Private Sub ucrChkAddPoint_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddPoint.ControlValueChanged
+        Points()
     End Sub
 
     Private Sub ucrChkFill_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFill.ControlValueChanged, ucrChkColour.ControlValueChanged, ucrInputFill.ControlValueChanged, ucrInputColour.ControlValueChanged
@@ -624,5 +646,9 @@ Public Class dlgSeasonalGraph
         Else
             clsBaseOperator.RemoveParameterByName("scale_colour_identity")
         End If
+    End Sub
+
+    Private Sub ucrChkAddpointRibbon_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddpointRibbon.ControlValueChanged
+        Ribbon()
     End Sub
 End Class
