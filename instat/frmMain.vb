@@ -1125,10 +1125,10 @@ Public Class frmMain
                     Dim files As FileInfo() = autoSaveDirectory.GetFiles("data_*.rds") ' Adjust pattern to match actual filenames
 
                     ' Sort files by last write time in descending order
-                    Dim sortedFiles = files.OrderByDescending(Function(f) f.LastWriteTime)
+                    Dim sortedFiles As IOrderedEnumerable(Of FileInfo) = files.OrderByDescending(Function(f) f.LastWriteTime)
 
                     ' Determine files to delete based on retention policy
-                    Dim filesToDelete = sortedFiles.Skip(retentionCount)
+                    Dim filesToDelete As IEnumerable(Of FileInfo) = sortedFiles.Skip(retentionCount)
 
                     ' Delete older autosaved files
                     For Each file In filesToDelete
@@ -1139,10 +1139,10 @@ Public Class frmMain
                     Dim files As FileInfo() = autoSaveDirectory.GetFiles("log*.R") ' Adjust pattern to match actual filenames
 
                     ' Sort files by last write time in descending order
-                    Dim sortedFiles = files.OrderByDescending(Function(f) f.LastWriteTime)
+                    Dim sortedFiles As IOrderedEnumerable(Of FileInfo) = files.OrderByDescending(Function(f) f.LastWriteTime)
 
                     ' Determine files to delete based on retention policy
-                    Dim filesToDelete = sortedFiles.Skip(retentionCount)
+                    Dim filesToDelete As IEnumerable(Of FileInfo) = sortedFiles.Skip(retentionCount)
 
                     ' Delete older autosaved files
                     For Each file In filesToDelete
@@ -1153,10 +1153,10 @@ Public Class frmMain
                     Dim files As FileInfo() = autoSaveDirectory.GetFiles("debug_log*.R") ' Adjust pattern to match actual filenames
 
                     ' Sort files by last write time in descending order
-                    Dim sortedFiles = files.OrderByDescending(Function(f) f.LastWriteTime)
+                    Dim sortedFiles As IOrderedEnumerable(Of FileInfo) = files.OrderByDescending(Function(f) f.LastWriteTime)
 
                     ' Determine files to delete based on retention policy
-                    Dim filesToDelete = sortedFiles.Skip(retentionCount)
+                    Dim filesToDelete As IEnumerable(Of FileInfo) = sortedFiles.Skip(retentionCount)
 
                     ' Delete older autosaved files
                     For Each file In filesToDelete

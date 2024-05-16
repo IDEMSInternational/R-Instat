@@ -27,9 +27,9 @@ Public Class dlgRestoreBackup
     Private strLoadDateFilePath As String
     Private bUserClose As Boolean = True
     Private clsDummyFunction As New RFunction
-    Public strAutoSaveDataFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_data_auto_save")
-    Public strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
-    Public strAutoSaveInternalLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_debug_log_auto_save")
+    Public strAutoSaveDataFolderPath = frmMain.strAutoSaveDataFolderPath
+    Public strAutoSaveLogFolderPath = frmMain.strAutoSaveLogFolderPath
+    Public strAutoSaveInternalLogFolderPath = frmMain.strAutoSaveInternalLogFolderPath
     Private bReset As Boolean = True
     Private bFirstload As Boolean = True
 
