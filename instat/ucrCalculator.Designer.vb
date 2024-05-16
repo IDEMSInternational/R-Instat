@@ -652,7 +652,7 @@ Partial Class ucrCalculator
         Me.cmdCoeffs = New System.Windows.Forms.Button()
         Me.cmdRoots = New System.Windows.Forms.Button()
         Me.cmdOrigin = New System.Windows.Forms.Button()
-        Me.cmdPlynomial = New System.Windows.Forms.Button()
+        Me.cmdPolynomial = New System.Windows.Forms.Button()
         Me.cmdCssqSession = New System.Windows.Forms.Button()
         Me.cmdAveBoth = New System.Windows.Forms.Button()
         Me.cmdAveFac = New System.Windows.Forms.Button()
@@ -7759,7 +7759,7 @@ Partial Class ucrCalculator
         Me.grpFunctions.Controls.Add(Me.cmdCoeffs)
         Me.grpFunctions.Controls.Add(Me.cmdRoots)
         Me.grpFunctions.Controls.Add(Me.cmdOrigin)
-        Me.grpFunctions.Controls.Add(Me.cmdPlynomial)
+        Me.grpFunctions.Controls.Add(Me.cmdPolynomial)
         Me.grpFunctions.Controls.Add(Me.cmdCssqSession)
         Me.grpFunctions.Controls.Add(Me.cmdAveBoth)
         Me.grpFunctions.Controls.Add(Me.cmdAveFac)
@@ -7772,7 +7772,7 @@ Partial Class ucrCalculator
         Me.grpFunctions.Margin = New System.Windows.Forms.Padding(2)
         Me.grpFunctions.Name = "grpFunctions"
         Me.grpFunctions.Padding = New System.Windows.Forms.Padding(2)
-        Me.grpFunctions.Size = New System.Drawing.Size(250, 244)
+        Me.grpFunctions.Size = New System.Drawing.Size(259, 244)
         Me.grpFunctions.TabIndex = 216
         Me.grpFunctions.TabStop = False
         Me.grpFunctions.Text = "Functions"
@@ -7780,7 +7780,7 @@ Partial Class ucrCalculator
         'cmdDigitsumSession
         '
         Me.cmdDigitsumSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDigitsumSession.Location = New System.Drawing.Point(63, 130)
+        Me.cmdDigitsumSession.Location = New System.Drawing.Point(67, 130)
         Me.cmdDigitsumSession.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDigitsumSession.Name = "cmdDigitsumSession"
         Me.cmdDigitsumSession.Size = New System.Drawing.Size(62, 30)
@@ -7791,7 +7791,7 @@ Partial Class ucrCalculator
         'cmdDigitsquSession
         '
         Me.cmdDigitsquSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDigitsquSession.Location = New System.Drawing.Point(63, 159)
+        Me.cmdDigitsquSession.Location = New System.Drawing.Point(67, 159)
         Me.cmdDigitsquSession.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDigitsquSession.Name = "cmdDigitsquSession"
         Me.cmdDigitsquSession.Size = New System.Drawing.Size(62, 30)
@@ -7805,7 +7805,7 @@ Partial Class ucrCalculator
         Me.cmdFunctionsDigitsum.Location = New System.Drawing.Point(2, 130)
         Me.cmdFunctionsDigitsum.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdFunctionsDigitsum.Name = "cmdFunctionsDigitsum"
-        Me.cmdFunctionsDigitsum.Size = New System.Drawing.Size(62, 30)
+        Me.cmdFunctionsDigitsum.Size = New System.Drawing.Size(66, 30)
         Me.cmdFunctionsDigitsum.TabIndex = 226
         Me.cmdFunctionsDigitsum.Text = "digitsum"
         Me.cmdFunctionsDigitsum.UseVisualStyleBackColor = True
@@ -7816,7 +7816,7 @@ Partial Class ucrCalculator
         Me.cmdDigitsqu.Location = New System.Drawing.Point(2, 159)
         Me.cmdDigitsqu.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDigitsqu.Name = "cmdDigitsqu"
-        Me.cmdDigitsqu.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDigitsqu.Size = New System.Drawing.Size(66, 30)
         Me.cmdDigitsqu.TabIndex = 225
         Me.cmdDigitsqu.Text = "digitsqu"
         Me.cmdDigitsqu.UseVisualStyleBackColor = True
@@ -7824,7 +7824,7 @@ Partial Class ucrCalculator
         'cmdDecimalsSession
         '
         Me.cmdDecimalsSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDecimalsSession.Location = New System.Drawing.Point(185, 188)
+        Me.cmdDecimalsSession.Location = New System.Drawing.Point(189, 188)
         Me.cmdDecimalsSession.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDecimalsSession.Name = "cmdDecimalsSession"
         Me.cmdDecimalsSession.Size = New System.Drawing.Size(62, 30)
@@ -7835,7 +7835,7 @@ Partial Class ucrCalculator
         'cmdMASSFractionsSession
         '
         Me.cmdMASSFractionsSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMASSFractionsSession.Location = New System.Drawing.Point(63, 188)
+        Me.cmdMASSFractionsSession.Location = New System.Drawing.Point(67, 188)
         Me.cmdMASSFractionsSession.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMASSFractionsSession.Name = "cmdMASSFractionsSession"
         Me.cmdMASSFractionsSession.Size = New System.Drawing.Size(62, 30)
@@ -7847,7 +7847,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPascalSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPascalSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPascalSession.Location = New System.Drawing.Point(185, 130)
+        Me.cmdPascalSession.Location = New System.Drawing.Point(189, 130)
         Me.cmdPascalSession.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPascalSession.Name = "cmdPascalSession"
         Me.cmdPascalSession.Size = New System.Drawing.Size(62, 30)
@@ -7871,7 +7871,7 @@ Partial Class ucrCalculator
         'cmdDecimals
         '
         Me.cmdDecimals.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDecimals.Location = New System.Drawing.Point(124, 188)
+        Me.cmdDecimals.Location = New System.Drawing.Point(128, 188)
         Me.cmdDecimals.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDecimals.Name = "cmdDecimals"
         Me.cmdDecimals.Size = New System.Drawing.Size(62, 30)
@@ -7885,7 +7885,7 @@ Partial Class ucrCalculator
         Me.cmdMASSFractions.Location = New System.Drawing.Point(2, 188)
         Me.cmdMASSFractions.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMASSFractions.Name = "cmdMASSFractions"
-        Me.cmdMASSFractions.Size = New System.Drawing.Size(62, 30)
+        Me.cmdMASSFractions.Size = New System.Drawing.Size(66, 30)
         Me.cmdMASSFractions.TabIndex = 219
         Me.cmdMASSFractions.Text = "fractions"
         Me.cmdMASSFractions.UseVisualStyleBackColor = True
@@ -7894,7 +7894,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPascal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPascal.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPascal.Location = New System.Drawing.Point(124, 130)
+        Me.cmdPascal.Location = New System.Drawing.Point(128, 130)
         Me.cmdPascal.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPascal.Name = "cmdPascal"
         Me.cmdPascal.Size = New System.Drawing.Size(62, 30)
@@ -7906,7 +7906,7 @@ Partial Class ucrCalculator
         '
         Me.cmdDssq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdDssq.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDssq.Location = New System.Drawing.Point(124, 159)
+        Me.cmdDssq.Location = New System.Drawing.Point(128, 159)
         Me.cmdDssq.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDssq.Name = "cmdDssq"
         Me.cmdDssq.Size = New System.Drawing.Size(62, 30)
@@ -7918,7 +7918,7 @@ Partial Class ucrCalculator
         '
         Me.cmddssqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmddssqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmddssqSession.Location = New System.Drawing.Point(185, 159)
+        Me.cmddssqSession.Location = New System.Drawing.Point(189, 159)
         Me.cmddssqSession.Margin = New System.Windows.Forms.Padding(2)
         Me.cmddssqSession.Name = "cmddssqSession"
         Me.cmddssqSession.Size = New System.Drawing.Size(62, 30)
@@ -7930,7 +7930,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCoeffs2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCoeffs2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoeffs2.Location = New System.Drawing.Point(185, 101)
+        Me.cmdCoeffs2.Location = New System.Drawing.Point(189, 101)
         Me.cmdCoeffs2.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCoeffs2.Name = "cmdCoeffs2"
         Me.cmdCoeffs2.Size = New System.Drawing.Size(62, 30)
@@ -7942,7 +7942,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCoef.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCoef.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoef.Location = New System.Drawing.Point(124, 101)
+        Me.cmdCoef.Location = New System.Drawing.Point(128, 101)
         Me.cmdCoef.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCoef.Name = "cmdCoef"
         Me.cmdCoef.Size = New System.Drawing.Size(62, 30)
@@ -7954,7 +7954,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCombn.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCombn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCombn.Location = New System.Drawing.Point(63, 101)
+        Me.cmdCombn.Location = New System.Drawing.Point(67, 101)
         Me.cmdCombn.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCombn.Name = "cmdCombn"
         Me.cmdCombn.Size = New System.Drawing.Size(62, 30)
@@ -7969,7 +7969,7 @@ Partial Class ucrCalculator
         Me.cmdProd.Location = New System.Drawing.Point(2, 101)
         Me.cmdProd.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdProd.Name = "cmdProd"
-        Me.cmdProd.Size = New System.Drawing.Size(62, 30)
+        Me.cmdProd.Size = New System.Drawing.Size(66, 30)
         Me.cmdProd.TabIndex = 172
         Me.cmdProd.Text = "prod"
         Me.cmdProd.UseVisualStyleBackColor = True
@@ -7978,7 +7978,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCoeffs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCoeffs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoeffs.Location = New System.Drawing.Point(185, 72)
+        Me.cmdCoeffs.Location = New System.Drawing.Point(189, 72)
         Me.cmdCoeffs.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCoeffs.Name = "cmdCoeffs"
         Me.cmdCoeffs.Size = New System.Drawing.Size(62, 30)
@@ -7990,7 +7990,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRoots.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdRoots.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRoots.Location = New System.Drawing.Point(124, 72)
+        Me.cmdRoots.Location = New System.Drawing.Point(128, 72)
         Me.cmdRoots.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRoots.Name = "cmdRoots"
         Me.cmdRoots.Size = New System.Drawing.Size(62, 30)
@@ -8002,7 +8002,7 @@ Partial Class ucrCalculator
         '
         Me.cmdOrigin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdOrigin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOrigin.Location = New System.Drawing.Point(63, 72)
+        Me.cmdOrigin.Location = New System.Drawing.Point(67, 72)
         Me.cmdOrigin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdOrigin.Name = "cmdOrigin"
         Me.cmdOrigin.Size = New System.Drawing.Size(62, 30)
@@ -8010,23 +8010,23 @@ Partial Class ucrCalculator
         Me.cmdOrigin.Text = "origin"
         Me.cmdOrigin.UseVisualStyleBackColor = True
         '
-        'cmdPlynomial
+        'cmdPolynomial
         '
-        Me.cmdPlynomial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPlynomial.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlynomial.Location = New System.Drawing.Point(2, 72)
-        Me.cmdPlynomial.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdPlynomial.Name = "cmdPlynomial"
-        Me.cmdPlynomial.Size = New System.Drawing.Size(62, 30)
-        Me.cmdPlynomial.TabIndex = 167
-        Me.cmdPlynomial.Text = " plynomial"
-        Me.cmdPlynomial.UseVisualStyleBackColor = True
+        Me.cmdPolynomial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdPolynomial.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPolynomial.Location = New System.Drawing.Point(2, 72)
+        Me.cmdPolynomial.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPolynomial.Name = "cmdPolynomial"
+        Me.cmdPolynomial.Size = New System.Drawing.Size(66, 30)
+        Me.cmdPolynomial.TabIndex = 167
+        Me.cmdPolynomial.Text = "polynomial"
+        Me.cmdPolynomial.UseVisualStyleBackColor = True
         '
         'cmdCssqSession
         '
         Me.cmdCssqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCssqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCssqSession.Location = New System.Drawing.Point(185, 43)
+        Me.cmdCssqSession.Location = New System.Drawing.Point(189, 43)
         Me.cmdCssqSession.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCssqSession.Name = "cmdCssqSession"
         Me.cmdCssqSession.Size = New System.Drawing.Size(62, 30)
@@ -8038,7 +8038,7 @@ Partial Class ucrCalculator
         '
         Me.cmdAveBoth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdAveBoth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAveBoth.Location = New System.Drawing.Point(185, 14)
+        Me.cmdAveBoth.Location = New System.Drawing.Point(189, 14)
         Me.cmdAveBoth.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAveBoth.Name = "cmdAveBoth"
         Me.cmdAveBoth.Size = New System.Drawing.Size(62, 30)
@@ -8050,7 +8050,7 @@ Partial Class ucrCalculator
         '
         Me.cmdAveFac.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdAveFac.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAveFac.Location = New System.Drawing.Point(124, 14)
+        Me.cmdAveFac.Location = New System.Drawing.Point(128, 14)
         Me.cmdAveFac.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAveFac.Name = "cmdAveFac"
         Me.cmdAveFac.Size = New System.Drawing.Size(62, 30)
@@ -8065,7 +8065,7 @@ Partial Class ucrCalculator
         Me.cmdAve.Location = New System.Drawing.Point(2, 14)
         Me.cmdAve.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAve.Name = "cmdAve"
-        Me.cmdAve.Size = New System.Drawing.Size(62, 30)
+        Me.cmdAve.Size = New System.Drawing.Size(66, 30)
         Me.cmdAve.TabIndex = 148
         Me.cmdAve.Text = "ave"
         Me.cmdAve.UseVisualStyleBackColor = True
@@ -8074,7 +8074,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCssq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCssq.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCssq.Location = New System.Drawing.Point(124, 43)
+        Me.cmdCssq.Location = New System.Drawing.Point(128, 43)
         Me.cmdCssq.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCssq.Name = "cmdCssq"
         Me.cmdCssq.Size = New System.Drawing.Size(62, 30)
@@ -8086,7 +8086,7 @@ Partial Class ucrCalculator
         '
         Me.cmdFunctionsSsqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdFunctionsSsqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFunctionsSsqSession.Location = New System.Drawing.Point(63, 43)
+        Me.cmdFunctionsSsqSession.Location = New System.Drawing.Point(67, 43)
         Me.cmdFunctionsSsqSession.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdFunctionsSsqSession.Name = "cmdFunctionsSsqSession"
         Me.cmdFunctionsSsqSession.Size = New System.Drawing.Size(62, 30)
@@ -8101,7 +8101,7 @@ Partial Class ucrCalculator
         Me.cmdFunctionsSsq.Location = New System.Drawing.Point(2, 43)
         Me.cmdFunctionsSsq.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdFunctionsSsq.Name = "cmdFunctionsSsq"
-        Me.cmdFunctionsSsq.Size = New System.Drawing.Size(62, 30)
+        Me.cmdFunctionsSsq.Size = New System.Drawing.Size(66, 30)
         Me.cmdFunctionsSsq.TabIndex = 157
         Me.cmdFunctionsSsq.Text = "ssq"
         Me.cmdFunctionsSsq.UseVisualStyleBackColor = True
@@ -8110,7 +8110,7 @@ Partial Class ucrCalculator
         '
         Me.cmdAveFun.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdAveFun.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAveFun.Location = New System.Drawing.Point(63, 14)
+        Me.cmdAveFun.Location = New System.Drawing.Point(67, 14)
         Me.cmdAveFun.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAveFun.Name = "cmdAveFun"
         Me.cmdAveFun.Size = New System.Drawing.Size(62, 30)
@@ -8818,7 +8818,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdCoeffs As Button
     Friend WithEvents cmdRoots As Button
     Friend WithEvents cmdOrigin As Button
-    Friend WithEvents cmdPlynomial As Button
+    Friend WithEvents cmdPolynomial As Button
     Friend WithEvents cmdCssqSession As Button
     Friend WithEvents cmdAveBoth As Button
     Friend WithEvents cmdAveFac As Button

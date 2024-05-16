@@ -464,7 +464,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdFunctionsSsqSession, "Gives uncorrected sum of squares, but only if the library calculator code has been run in the current sesion")
         ttCalculator.SetToolTip(cmdCssq, "Gives corrected sum of squares through the ave function")
         ttCalculator.SetToolTip(cmdCssqSession, "Gives corrected sum of squares, but only if the library calculator code has been run in the current sesion")
-        ttCalculator.SetToolTip(cmdPlynomial, "Makes a variable into a polynomial object")
+        ttCalculator.SetToolTip(cmdPolynomial, "Makes a variable into a polynomial object")
         ttCalculator.SetToolTip(cmdOrigin, " Gives the polynomial coefficients, relative to a new origin")
         ttCalculator.SetToolTip(cmdRoots, "Gives the zeros of a polynomial")
         ttCalculator.SetToolTip(cmdCoeffs, "Gives the polynomial from the zeros")
@@ -5842,7 +5842,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdPlynomial_Click(sender As Object, e As EventArgs) Handles cmdPlynomial.Click
+    Private Sub cmdPlynomial_Click(sender As Object, e As EventArgs) Handles cmdPolynomial.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::polynomial(coef= )", 2)
         Else
