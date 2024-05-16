@@ -5842,7 +5842,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdPlynomial_Click(sender As Object, e As EventArgs) Handles cmdPolynomial.Click
+    Private Sub cmdPolynomial_Click(sender As Object, e As EventArgs) Handles cmdPolynomial.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::polynomial(coef= )", 2)
         Else
@@ -5932,7 +5932,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDssq_Click(sender As Object, e As EventArgs) Handles cmdDssq.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( ,function(n){a<-as.integer(c(strsplit(as.character(n),split="")[[1]])); sum(a^2)})", 82)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( ,function(n){a<-as.integer(c(strsplit(as.character(n),split="""")[[1]])); sum(a^2)})", 83)
     End Sub
 
     Private Sub cmdRHelpFunctions_Click(sender As Object, e As EventArgs) Handles cmdRhelpFunctions.Click, MASSFunctionsToolStripMenuItem1.Click
@@ -5988,7 +5988,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDigitsqu_Click(sender As Object, e As EventArgs) Handles cmdDigitsqu.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" sapply( , Function(n) {a < -as.integer(c(strsplit(as.character(n), Split() = """")[[1]])); a^2})", 88)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" sapply( , function(n) {a<-as.integer(c(strsplit(as.character(n), split= """")[[1]])); a^2})", 82)
     End Sub
 
     Private Sub cmdDigitsquSession_Click(sender As Object, e As EventArgs) Handles cmdDigitsquSession.Click
@@ -6000,7 +6000,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdFunctionsDigitsum_Click(sender As Object, e As EventArgs) Handles cmdFunctionsDigitsum.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dsum:sapply( , Function(n){a<-as.integer(c(strsplit(as.character(n),split="""")[[1]]));sum(a)})", 81)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , function(n){a<-as.integer(c(strsplit(as.character(n),split="""")[[1]]));sum(a)})", 81)
     End Sub
 
     Private Sub cmdDigitsumSession_Click(sender As Object, e As EventArgs) Handles cmdDigitsumSession.Click
