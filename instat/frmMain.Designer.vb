@@ -1555,26 +1555,26 @@ Partial Class frmMain
         'mnuHelpHelpIntroduction
         '
         Me.mnuHelpHelpIntroduction.Name = "mnuHelpHelpIntroduction"
-        Me.mnuHelpHelpIntroduction.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpHelpIntroduction.Text = "Introduction"
+        Me.mnuHelpHelpIntroduction.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpHelpIntroduction.Text = "Introduction..."
         '
         'mnuHelpFAQ
         '
         Me.mnuHelpFAQ.Name = "mnuHelpFAQ"
-        Me.mnuHelpFAQ.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpFAQ.Text = "FAQ"
+        Me.mnuHelpFAQ.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpFAQ.Text = "FAQ..."
         '
         'mnuHelpGetingStarted
         '
         Me.mnuHelpGetingStarted.Name = "mnuHelpGetingStarted"
-        Me.mnuHelpGetingStarted.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpGetingStarted.Text = "Getting Started"
+        Me.mnuHelpGetingStarted.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpGetingStarted.Text = "Getting Started..."
         '
         'mnuHelpData
         '
         Me.mnuHelpData.Name = "mnuHelpData"
-        Me.mnuHelpData.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpData.Text = "Data"
+        Me.mnuHelpData.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpData.Text = "Data..."
         '
         'ToolStripSeparator28
         '
@@ -1584,8 +1584,8 @@ Partial Class frmMain
         'mnuHelpWindows
         '
         Me.mnuHelpWindows.Name = "mnuHelpWindows"
-        Me.mnuHelpWindows.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpWindows.Text = "Windows"
+        Me.mnuHelpWindows.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpWindows.Text = "Windows..."
         '
         'ToolStripSeparator81
         '
@@ -1684,35 +1684,35 @@ Partial Class frmMain
         'mnuHelpAboutR
         '
         Me.mnuHelpAboutR.Name = "mnuHelpAboutR"
-        Me.mnuHelpAboutR.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpAboutR.Text = "About R"
+        Me.mnuHelpAboutR.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpAboutR.Text = "About R..."
         Me.mnuHelpAboutR.Visible = False
         '
         'mnuHelpLearningStatistics
         '
         Me.mnuHelpLearningStatistics.Name = "mnuHelpLearningStatistics"
-        Me.mnuHelpLearningStatistics.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpLearningStatistics.Text = "Learning Statistics"
+        Me.mnuHelpLearningStatistics.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpLearningStatistics.Text = "Learning Statistics..."
         Me.mnuHelpLearningStatistics.Visible = False
         '
         'mnuHelpRPackages
         '
         Me.mnuHelpRPackages.Name = "mnuHelpRPackages"
-        Me.mnuHelpRPackages.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpRPackages.Text = "R Packages"
+        Me.mnuHelpRPackages.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpRPackages.Text = "R Packages..."
         '
         'mnuHelpGlossary
         '
         Me.mnuHelpGlossary.Name = "mnuHelpGlossary"
-        Me.mnuHelpGlossary.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpGlossary.Text = "Glossary"
+        Me.mnuHelpGlossary.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpGlossary.Text = "Glossary..."
         '
         'mnuHelpLicence
         '
         Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(209, 22)
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(218, 22)
         Me.mnuHelpLicence.Tag = "Licence..."
-        Me.mnuHelpLicence.Text = "Licence"
+        Me.mnuHelpLicence.Text = "Licence..."
         '
         'ToolStripSeparator29
         '
@@ -1722,8 +1722,8 @@ Partial Class frmMain
         'mnuHelpPackagesDocumentation
         '
         Me.mnuHelpPackagesDocumentation.Name = "mnuHelpPackagesDocumentation"
-        Me.mnuHelpPackagesDocumentation.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpPackagesDocumentation.Text = "Packages Documentation"
+        Me.mnuHelpPackagesDocumentation.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpPackagesDocumentation.Text = "Packages Documentation..."
         '
         'ToolStripSeparator16
         '
