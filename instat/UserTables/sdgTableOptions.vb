@@ -57,7 +57,6 @@ Public Class sdgTableOptions
             Exit Sub
         End If
 
-
         If Not bDialogInitialised Then
             initialiseDialog()
             bDialogInitialised = True
@@ -66,7 +65,7 @@ Public Class sdgTableOptions
         Me.clsOperator = clsNewOperator
 
         SetupFooterNotesRFunctionsInOperatorOnNew(clsOperator)
-        UcrSourceNotes1.Setup(clsOperator)
+        ucrSourceNotes.Setup(clsOperator)
         SetupThemeRFunctionsInOperatorOnNew(clsOperator)
     End Sub
 

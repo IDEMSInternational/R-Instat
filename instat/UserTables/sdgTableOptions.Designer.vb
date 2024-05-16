@@ -37,7 +37,7 @@ Partial Class sdgTableOptions
         Me.colFooterFormat = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.lblFooterCellNotes = New System.Windows.Forms.Label()
         Me.tbpSourceNotes = New System.Windows.Forms.TabPage()
-        Me.UcrSourceNotes1 = New instat.ucrSourceNotes()
+        Me.ucrSourceNotes = New instat.ucrSourceNotes()
         Me.tbpThemes = New System.Windows.Forms.TabPage()
         Me.ucrCboSelectThemes = New instat.ucrInputComboBox()
         Me.btnManualTheme = New System.Windows.Forms.Button()
@@ -45,6 +45,7 @@ Partial Class sdgTableOptions
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.ucrPnlThemesPanel = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.tbpRowGroups = New System.Windows.Forms.TabPage()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
         CType(Me.dataGridHeaderFooterNotes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,6 +58,7 @@ Partial Class sdgTableOptions
         'tbpFormatOptions
         '
         Me.tbpFormatOptions.Controls.Add(Me.tbpHeader)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpRowGroups)
         Me.tbpFormatOptions.Controls.Add(Me.tbpFooters)
         Me.tbpFormatOptions.Controls.Add(Me.tbpSourceNotes)
         Me.tbpFormatOptions.Controls.Add(Me.tbpThemes)
@@ -75,7 +77,7 @@ Partial Class sdgTableOptions
         Me.tbpHeader.Padding = New System.Windows.Forms.Padding(3)
         Me.tbpHeader.Size = New System.Drawing.Size(642, 233)
         Me.tbpHeader.TabIndex = 0
-        Me.tbpHeader.Text = "Headers"
+        Me.tbpHeader.Text = "Headers Notes"
         Me.tbpHeader.UseVisualStyleBackColor = True
         '
         'dataGridHeaderFooterNotes
@@ -133,7 +135,7 @@ Partial Class sdgTableOptions
         Me.tbpFooters.Name = "tbpFooters"
         Me.tbpFooters.Size = New System.Drawing.Size(642, 233)
         Me.tbpFooters.TabIndex = 3
-        Me.tbpFooters.Text = "Footers"
+        Me.tbpFooters.Text = "Cells"
         Me.tbpFooters.UseVisualStyleBackColor = True
         '
         'dataGridCellFooterNotes
@@ -190,7 +192,7 @@ Partial Class sdgTableOptions
         '
         'tbpSourceNotes
         '
-        Me.tbpSourceNotes.Controls.Add(Me.UcrSourceNotes1)
+        Me.tbpSourceNotes.Controls.Add(Me.ucrSourceNotes)
         Me.tbpSourceNotes.Location = New System.Drawing.Point(4, 22)
         Me.tbpSourceNotes.Name = "tbpSourceNotes"
         Me.tbpSourceNotes.Size = New System.Drawing.Size(642, 233)
@@ -198,12 +200,12 @@ Partial Class sdgTableOptions
         Me.tbpSourceNotes.Text = "Source Notes"
         Me.tbpSourceNotes.UseVisualStyleBackColor = True
         '
-        'UcrSourceNotes1
+        'ucrSourceNotes
         '
-        Me.UcrSourceNotes1.Location = New System.Drawing.Point(7, 7)
-        Me.UcrSourceNotes1.Name = "UcrSourceNotes1"
-        Me.UcrSourceNotes1.Size = New System.Drawing.Size(581, 190)
-        Me.UcrSourceNotes1.TabIndex = 0
+        Me.ucrSourceNotes.Location = New System.Drawing.Point(7, 7)
+        Me.ucrSourceNotes.Name = "ucrSourceNotes"
+        Me.ucrSourceNotes.Size = New System.Drawing.Size(581, 190)
+        Me.ucrSourceNotes.TabIndex = 0
         '
         'tbpThemes
         '
@@ -280,6 +282,15 @@ Partial Class sdgTableOptions
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 4
         '
+        'tbpRowGroups
+        '
+        Me.tbpRowGroups.Location = New System.Drawing.Point(4, 22)
+        Me.tbpRowGroups.Name = "tbpRowGroups"
+        Me.tbpRowGroups.Size = New System.Drawing.Size(642, 233)
+        Me.tbpRowGroups.TabIndex = 7
+        Me.tbpRowGroups.Text = "Row Groups"
+        Me.tbpRowGroups.UseVisualStyleBackColor = True
+        '
         'sdgTableOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -328,5 +339,6 @@ Partial Class sdgTableOptions
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewComboBoxColumn
     Friend WithEvents DataGridViewButtonColumn1 As DataGridViewButtonColumn
-    Friend WithEvents UcrSourceNotes1 As ucrSourceNotes
+    Friend WithEvents ucrSourceNotes As ucrSourceNotes
+    Friend WithEvents tbpRowGroups As TabPage
 End Class

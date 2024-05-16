@@ -34,11 +34,13 @@ Partial Class dlgGeneralTable
         Me.btnMoreOptions = New System.Windows.Forms.Button()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveTable = New instat.ucrSave()
+        Me.ucrReceiverSingleGroupByCol = New instat.ucrReceiverSingle()
+        Me.lblGroupByCol = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'btnHeaderSubTitleFormat
         '
-        Me.btnHeaderSubTitleFormat.Location = New System.Drawing.Point(390, 71)
+        Me.btnHeaderSubTitleFormat.Location = New System.Drawing.Point(393, 71)
         Me.btnHeaderSubTitleFormat.Name = "btnHeaderSubTitleFormat"
         Me.btnHeaderSubTitleFormat.Size = New System.Drawing.Size(75, 23)
         Me.btnHeaderSubTitleFormat.TabIndex = 19
@@ -47,7 +49,7 @@ Partial Class dlgGeneralTable
         '
         'btnHeaderTitleFormat
         '
-        Me.btnHeaderTitleFormat.Location = New System.Drawing.Point(386, 29)
+        Me.btnHeaderTitleFormat.Location = New System.Drawing.Point(393, 29)
         Me.btnHeaderTitleFormat.Name = "btnHeaderTitleFormat"
         Me.btnHeaderTitleFormat.Size = New System.Drawing.Size(79, 23)
         Me.btnHeaderTitleFormat.TabIndex = 18
@@ -63,7 +65,7 @@ Partial Class dlgGeneralTable
         Me.ucrInputHeaderSubtitle.Location = New System.Drawing.Point(249, 73)
         Me.ucrInputHeaderSubtitle.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputHeaderSubtitle.Name = "ucrInputHeaderSubtitle"
-        Me.ucrInputHeaderSubtitle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputHeaderSubtitle.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputHeaderSubtitle.TabIndex = 17
         '
         'ucrInputHeaderTitle
@@ -72,10 +74,10 @@ Partial Class dlgGeneralTable
         Me.ucrInputHeaderTitle.AutoSize = True
         Me.ucrInputHeaderTitle.IsMultiline = False
         Me.ucrInputHeaderTitle.IsReadOnly = False
-        Me.ucrInputHeaderTitle.Location = New System.Drawing.Point(245, 31)
+        Me.ucrInputHeaderTitle.Location = New System.Drawing.Point(249, 29)
         Me.ucrInputHeaderTitle.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputHeaderTitle.Name = "ucrInputHeaderTitle"
-        Me.ucrInputHeaderTitle.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputHeaderTitle.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputHeaderTitle.TabIndex = 16
         '
         'lblHeaderSubtitle
@@ -92,7 +94,7 @@ Partial Class dlgGeneralTable
         '
         Me.lblHeaderTitle.AutoSize = True
         Me.lblHeaderTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHeaderTitle.Location = New System.Drawing.Point(242, 13)
+        Me.lblHeaderTitle.Location = New System.Drawing.Point(246, 9)
         Me.lblHeaderTitle.Name = "lblHeaderTitle"
         Me.lblHeaderTitle.Size = New System.Drawing.Size(30, 13)
         Me.lblHeaderTitle.TabIndex = 14
@@ -118,7 +120,7 @@ Partial Class dlgGeneralTable
         Me.ucrReceiverMultipleCols.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleCols.Name = "ucrReceiverMultipleCols"
         Me.ucrReceiverMultipleCols.Selector = Nothing
-        Me.ucrReceiverMultipleCols.Size = New System.Drawing.Size(137, 100)
+        Me.ucrReceiverMultipleCols.Size = New System.Drawing.Size(141, 100)
         Me.ucrReceiverMultipleCols.strNcFilePath = ""
         Me.ucrReceiverMultipleCols.TabIndex = 23
         Me.ucrReceiverMultipleCols.ucrSelector = Nothing
@@ -135,7 +137,7 @@ Partial Class dlgGeneralTable
         '
         'btnMoreOptions
         '
-        Me.btnMoreOptions.Location = New System.Drawing.Point(250, 225)
+        Me.btnMoreOptions.Location = New System.Drawing.Point(12, 233)
         Me.btnMoreOptions.Name = "btnMoreOptions"
         Me.btnMoreOptions.Size = New System.Drawing.Size(114, 23)
         Me.btnMoreOptions.TabIndex = 25
@@ -145,7 +147,7 @@ Partial Class dlgGeneralTable
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 290)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 302)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 26
@@ -153,17 +155,42 @@ Partial Class dlgGeneralTable
         'ucrSaveTable
         '
         Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 258)
+        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 272)
         Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTable.Name = "ucrSaveTable"
         Me.ucrSaveTable.Size = New System.Drawing.Size(319, 24)
         Me.ucrSaveTable.TabIndex = 27
         '
+        'ucrReceiverSingleGroupByCol
+        '
+        Me.ucrReceiverSingleGroupByCol.AutoSize = True
+        Me.ucrReceiverSingleGroupByCol.frmParent = Me
+        Me.ucrReceiverSingleGroupByCol.Location = New System.Drawing.Point(249, 236)
+        Me.ucrReceiverSingleGroupByCol.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSingleGroupByCol.Name = "ucrReceiverSingleGroupByCol"
+        Me.ucrReceiverSingleGroupByCol.Selector = Nothing
+        Me.ucrReceiverSingleGroupByCol.Size = New System.Drawing.Size(142, 20)
+        Me.ucrReceiverSingleGroupByCol.strNcFilePath = ""
+        Me.ucrReceiverSingleGroupByCol.TabIndex = 28
+        Me.ucrReceiverSingleGroupByCol.ucrSelector = Nothing
+        '
+        'lblGroupByCol
+        '
+        Me.lblGroupByCol.AutoSize = True
+        Me.lblGroupByCol.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblGroupByCol.Location = New System.Drawing.Point(247, 222)
+        Me.lblGroupByCol.Name = "lblGroupByCol"
+        Me.lblGroupByCol.Size = New System.Drawing.Size(92, 13)
+        Me.lblGroupByCol.TabIndex = 29
+        Me.lblGroupByCol.Text = "Group By Column:"
+        '
         'dlgGeneralTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(469, 351)
+        Me.ClientSize = New System.Drawing.Size(476, 362)
+        Me.Controls.Add(Me.lblGroupByCol)
+        Me.Controls.Add(Me.ucrReceiverSingleGroupByCol)
         Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.btnMoreOptions)
@@ -197,4 +224,6 @@ Partial Class dlgGeneralTable
     Friend WithEvents lblColumns As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSaveTable As ucrSave
+    Friend WithEvents lblGroupByCol As Label
+    Friend WithEvents ucrReceiverSingleGroupByCol As ucrReceiverSingle
 End Class

@@ -2,6 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
+    Dim clsGtFunction As New RFunction
     Private clsHeaderRFunction, clsTitleRFunction, clsSubtitleRFunction As New RFunction
 
     Private bFirstload As Boolean = True
@@ -75,6 +76,11 @@ Public Class dlgGeneralTable
         ucrReceiverMultipleCols.Selector = ucrSelectorCols
         ucrReceiverMultipleCols.SetLinkedDisplayControl(lblColumns)
 
+        ucrReceiverSingleGroupByCol.SetParameter(New RParameter("groupname_col", 0))
+        ucrReceiverSingleGroupByCol.SetParameterIsString()
+        ucrReceiverSingleGroupByCol.Selector = ucrSelectorCols
+        ucrReceiverSingleGroupByCol.SetLinkedDisplayControl(lblGroupByCol)
+
         ucrSaveTable.SetPrefix("table")
         ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorCols.ucrAvailableDataFrames)
@@ -86,6 +92,7 @@ Public Class dlgGeneralTable
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
+        clsGtFunction = New RFunction
 
         clsHeaderRFunction = New RFunction
         clsTitleRFunction = New RFunction
@@ -98,7 +105,7 @@ Public Class dlgGeneralTable
         clsBaseOperator.SetOperation("%>%")
         clsBaseOperator.bBrackets = False
 
-        Dim clsGtFunction As New RFunction
+
         clsGtFunction.SetPackageName("gt")
         clsGtFunction.SetRCommand("gt")
         clsBaseOperator.AddParameter(strParameterName:="gt_funct_param", clsRFunctionParameter:=clsGtFunction, iPosition:=1, bIncludeArgumentName:=False)
@@ -129,6 +136,8 @@ Public Class dlgGeneralTable
         ucrInputHeaderSubtitle.SetRCode(clsSubtitleRFunction, bReset)
         ucrReceiverMultipleCols.SetRCode(clsBaseOperator, bReset)
         ucrSaveTable.SetRCode(clsBaseOperator, bReset)
+
+        ucrReceiverSingleGroupByCol.SetRCode(clsGtFunction, bReset)
 
     End Sub
 
