@@ -29,6 +29,7 @@ Partial Class sdgTableOptions
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.DataGridViewButtonColumn1 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.lblHeaderFooterNotes = New System.Windows.Forms.Label()
+        Me.tbpRowGroups = New System.Windows.Forms.TabPage()
         Me.tbpFooters = New System.Windows.Forms.TabPage()
         Me.dataGridCellFooterNotes = New System.Windows.Forms.DataGridView()
         Me.colFooterNoteText = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,10 +46,11 @@ Partial Class sdgTableOptions
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.ucrPnlThemesPanel = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.tbpRowGroups = New System.Windows.Forms.TabPage()
+        Me.UcrRowGroup1 = New instat.ucrRowGroup()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
         CType(Me.dataGridHeaderFooterNotes, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpRowGroups.SuspendLayout()
         Me.tbpFooters.SuspendLayout()
         CType(Me.dataGridCellFooterNotes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpSourceNotes.SuspendLayout()
@@ -126,6 +128,16 @@ Partial Class sdgTableOptions
         Me.lblHeaderFooterNotes.Size = New System.Drawing.Size(109, 13)
         Me.lblHeaderFooterNotes.TabIndex = 14
         Me.lblHeaderFooterNotes.Text = "Header footers notes:"
+        '
+        'tbpRowGroups
+        '
+        Me.tbpRowGroups.Controls.Add(Me.UcrRowGroup1)
+        Me.tbpRowGroups.Location = New System.Drawing.Point(4, 22)
+        Me.tbpRowGroups.Name = "tbpRowGroups"
+        Me.tbpRowGroups.Size = New System.Drawing.Size(642, 233)
+        Me.tbpRowGroups.TabIndex = 7
+        Me.tbpRowGroups.Text = "Row Groups"
+        Me.tbpRowGroups.UseVisualStyleBackColor = True
         '
         'tbpFooters
         '
@@ -282,14 +294,12 @@ Partial Class sdgTableOptions
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 4
         '
-        'tbpRowGroups
+        'UcrRowGroup1
         '
-        Me.tbpRowGroups.Location = New System.Drawing.Point(4, 22)
-        Me.tbpRowGroups.Name = "tbpRowGroups"
-        Me.tbpRowGroups.Size = New System.Drawing.Size(642, 233)
-        Me.tbpRowGroups.TabIndex = 7
-        Me.tbpRowGroups.Text = "Row Groups"
-        Me.tbpRowGroups.UseVisualStyleBackColor = True
+        Me.UcrRowGroup1.Location = New System.Drawing.Point(8, 4)
+        Me.UcrRowGroup1.Name = "UcrRowGroup1"
+        Me.UcrRowGroup1.Size = New System.Drawing.Size(583, 225)
+        Me.UcrRowGroup1.TabIndex = 0
         '
         'sdgTableOptions
         '
@@ -306,6 +316,7 @@ Partial Class sdgTableOptions
         Me.tbpHeader.ResumeLayout(False)
         Me.tbpHeader.PerformLayout()
         CType(Me.dataGridHeaderFooterNotes, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpRowGroups.ResumeLayout(False)
         Me.tbpFooters.ResumeLayout(False)
         Me.tbpFooters.PerformLayout()
         CType(Me.dataGridCellFooterNotes, System.ComponentModel.ISupportInitialize).EndInit()
@@ -341,4 +352,5 @@ Partial Class sdgTableOptions
     Friend WithEvents DataGridViewButtonColumn1 As DataGridViewButtonColumn
     Friend WithEvents ucrSourceNotes As ucrSourceNotes
     Friend WithEvents tbpRowGroups As TabPage
+    Friend WithEvents UcrRowGroup1 As ucrRowGroup
 End Class

@@ -2,8 +2,8 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Dim clsGtFunction As New RFunction
-    Private clsHeaderRFunction, clsTitleRFunction, clsSubtitleRFunction As New RFunction
+    Private clsHeadRFunction, clsGtRFunction As New RFunction
+    Private clsGtHeaderRFunction, clsGtTitleRFunction, clsGtSubtitleRFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -26,25 +26,25 @@ Public Class dlgGeneralTable
         If ucrInputHeaderTitle.IsEmpty() Then
             clsBaseOperator.RemoveParameterByName("tab_header_func_name")
         Else
-            clsBaseOperator.AddParameter("tab_header_func_name", clsRFunctionParameter:=clsHeaderRFunction, iPosition:=2, bIncludeArgumentName:=False)
+            clsBaseOperator.AddParameter("tab_header_func_name", clsRFunctionParameter:=clsGtHeaderRFunction, iPosition:=3, bIncludeArgumentName:=False)
         End If
     End Sub
 
     Private Sub ucrInputHeaderSubtitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputHeaderSubtitle.ControlValueChanged
         ' Subtitle is optional, so remove the parameter when empty
         If ucrInputHeaderSubtitle.IsEmpty() Then
-            clsHeaderRFunction.RemoveParameterByName("subtitle")
+            clsGtHeaderRFunction.RemoveParameterByName("subtitle")
         Else
-            clsHeaderRFunction.AddParameter("subtitle", clsRFunctionParameter:=clsSubtitleRFunction, iPosition:=1)
+            clsGtHeaderRFunction.AddParameter("subtitle", clsRFunctionParameter:=clsGtSubtitleRFunction, iPosition:=1)
         End If
     End Sub
 
     Private Sub btnHeaderTitleFormat_Click(sender As Object, e As EventArgs) Handles btnHeaderTitleFormat.Click
-        clsTablesUtils.ShowTextFormatSubDialog(Me, clsTitleRFunction)
+        clsTablesUtils.ShowTextFormatSubDialog(Me, clsGtTitleRFunction)
     End Sub
 
     Private Sub btnHeaderSubtitleFormat_Click(sender As Object, e As EventArgs) Handles btnHeaderSubTitleFormat.Click
-        clsTablesUtils.ShowTextFormatSubDialog(Me, clsSubtitleRFunction)
+        clsTablesUtils.ShowTextFormatSubDialog(Me, clsGtSubtitleRFunction)
     End Sub
 
     Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
@@ -81,6 +81,15 @@ Public Class dlgGeneralTable
         ucrReceiverSingleGroupByCol.Selector = ucrSelectorCols
         ucrReceiverSingleGroupByCol.SetLinkedDisplayControl(lblGroupByCol)
 
+        ucrChkPreview.SetText("Preview")
+        ucrChkPreview.AddParameterPresentCondition(True, "head", bNewIsPositive:=True)
+        ucrChkPreview.AddParameterPresentCondition(False, "head", bNewIsPositive:=False)
+        ucrChkPreview.AddToLinkedControls(ucrNudPreview, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudPreview.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
+        ucrNudPreview.Minimum = 6
+        ucrNudPreview.SetRDefault(6)
+
         ucrSaveTable.SetPrefix("table")
         ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorCols.ucrAvailableDataFrames)
@@ -92,35 +101,40 @@ Public Class dlgGeneralTable
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
-        clsGtFunction = New RFunction
+        clsHeadRFunction = New RFunction
+        clsGtRFunction = New RFunction
 
-        clsHeaderRFunction = New RFunction
-        clsTitleRFunction = New RFunction
-        clsSubtitleRFunction = New RFunction
+        clsGtHeaderRFunction = New RFunction
+        clsGtTitleRFunction = New RFunction
+        clsGtSubtitleRFunction = New RFunction
 
         ucrSelectorCols.Reset()
         ucrReceiverMultipleCols.SetMeAsReceiver()
         ucrSaveTable.Reset()
+        ucrChkPreview.Checked = True
 
         clsBaseOperator.SetOperation("%>%")
         clsBaseOperator.bBrackets = False
 
+        clsHeadRFunction.SetPackageName("utils")
+        clsHeadRFunction.SetRCommand("head")
+        clsBaseOperator.AddParameter(strParameterName:="head", clsRFunctionParameter:=clsHeadRFunction, iPosition:=1, bIncludeArgumentName:=False)
 
-        clsGtFunction.SetPackageName("gt")
-        clsGtFunction.SetRCommand("gt")
-        clsBaseOperator.AddParameter(strParameterName:="gt_funct_param", clsRFunctionParameter:=clsGtFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsGtRFunction.SetPackageName("gt")
+        clsGtRFunction.SetRCommand("gt")
+        clsBaseOperator.AddParameter(strParameterName:="gt", clsRFunctionParameter:=clsGtRFunction, iPosition:=2, bIncludeArgumentName:=False)
 
         '-----------------------------------------
         ' HEADER  
-        clsHeaderRFunction.SetPackageName("gt")
-        clsHeaderRFunction.SetRCommand("tab_header")
+        clsGtHeaderRFunction.SetPackageName("gt")
+        clsGtHeaderRFunction.SetRCommand("tab_header")
 
         ' Title related R functions
-        clsTitleRFunction = clsTablesUtils.GetNewHtmlSpanRFunction()
-        clsHeaderRFunction.AddParameter("title", clsRFunctionParameter:=clsTitleRFunction, iPosition:=0)
+        clsGtTitleRFunction = clsTablesUtils.GetNewHtmlSpanRFunction()
+        clsGtHeaderRFunction.AddParameter("title", clsRFunctionParameter:=clsGtTitleRFunction, iPosition:=0)
 
         ' Subtitle related R functions
-        clsSubtitleRFunction = clsTablesUtils.GetNewHtmlSpanRFunction()
+        clsGtSubtitleRFunction = clsTablesUtils.GetNewHtmlSpanRFunction()
 
         '-----------------------------------------
 
@@ -132,12 +146,15 @@ Public Class dlgGeneralTable
 
     Private Sub SetRCodeForControls(bReset As Boolean)
 
-        ucrInputHeaderTitle.SetRCode(clsTitleRFunction, bReset)
-        ucrInputHeaderSubtitle.SetRCode(clsSubtitleRFunction, bReset)
+        ucrInputHeaderTitle.SetRCode(clsGtTitleRFunction, bReset)
+        ucrInputHeaderSubtitle.SetRCode(clsGtSubtitleRFunction, bReset)
         ucrReceiverMultipleCols.SetRCode(clsBaseOperator, bReset)
         ucrSaveTable.SetRCode(clsBaseOperator, bReset)
 
-        ucrReceiverSingleGroupByCol.SetRCode(clsGtFunction, bReset)
+        ucrReceiverSingleGroupByCol.SetRCode(clsGtRFunction, bReset)
+
+        ucrChkPreview.SetRCode(clsBaseOperator, bReset)
+        ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
 
     End Sub
 
@@ -150,5 +167,11 @@ Public Class dlgGeneralTable
         End If
     End Sub
 
-
+    Private Sub ucrChkPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPreview.ControlValueChanged
+        If ucrChkPreview.Checked Then
+            clsBaseOperator.AddParameter(strParameterName:="head", clsRFunctionParameter:=clsHeadRFunction, iPosition:=1, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("head")
+        End If
+    End Sub
 End Class

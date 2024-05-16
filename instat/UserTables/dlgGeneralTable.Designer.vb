@@ -36,6 +36,8 @@ Partial Class dlgGeneralTable
         Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrReceiverSingleGroupByCol = New instat.ucrReceiverSingle()
         Me.lblGroupByCol = New System.Windows.Forms.Label()
+        Me.ucrChkPreview = New instat.ucrCheck()
+        Me.ucrNudPreview = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'btnHeaderSubTitleFormat
@@ -137,7 +139,7 @@ Partial Class dlgGeneralTable
         '
         'btnMoreOptions
         '
-        Me.btnMoreOptions.Location = New System.Drawing.Point(12, 233)
+        Me.btnMoreOptions.Location = New System.Drawing.Point(9, 246)
         Me.btnMoreOptions.Name = "btnMoreOptions"
         Me.btnMoreOptions.Size = New System.Drawing.Size(114, 23)
         Me.btnMoreOptions.TabIndex = 25
@@ -147,7 +149,7 @@ Partial Class dlgGeneralTable
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 302)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 320)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 26
@@ -155,7 +157,7 @@ Partial Class dlgGeneralTable
         'ucrSaveTable
         '
         Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 272)
+        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 289)
         Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTable.Name = "ucrSaveTable"
         Me.ucrSaveTable.Size = New System.Drawing.Size(319, 24)
@@ -184,11 +186,35 @@ Partial Class dlgGeneralTable
         Me.lblGroupByCol.TabIndex = 29
         Me.lblGroupByCol.Text = "Group By Column:"
         '
+        'ucrChkPreview
+        '
+        Me.ucrChkPreview.AutoSize = True
+        Me.ucrChkPreview.Checked = False
+        Me.ucrChkPreview.Location = New System.Drawing.Point(9, 210)
+        Me.ucrChkPreview.Name = "ucrChkPreview"
+        Me.ucrChkPreview.Size = New System.Drawing.Size(144, 23)
+        Me.ucrChkPreview.TabIndex = 30
+        '
+        'ucrNudPreview
+        '
+        Me.ucrNudPreview.AutoSize = True
+        Me.ucrNudPreview.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPreview.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPreview.Location = New System.Drawing.Point(159, 210)
+        Me.ucrNudPreview.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPreview.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPreview.Name = "ucrNudPreview"
+        Me.ucrNudPreview.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPreview.TabIndex = 31
+        Me.ucrNudPreview.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgGeneralTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(476, 362)
+        Me.ClientSize = New System.Drawing.Size(476, 378)
+        Me.Controls.Add(Me.ucrNudPreview)
+        Me.Controls.Add(Me.ucrChkPreview)
         Me.Controls.Add(Me.lblGroupByCol)
         Me.Controls.Add(Me.ucrReceiverSingleGroupByCol)
         Me.Controls.Add(Me.ucrSaveTable)
@@ -226,4 +252,6 @@ Partial Class dlgGeneralTable
     Friend WithEvents ucrSaveTable As ucrSave
     Friend WithEvents lblGroupByCol As Label
     Friend WithEvents ucrReceiverSingleGroupByCol As ucrReceiverSingle
+    Friend WithEvents ucrNudPreview As ucrNud
+    Friend WithEvents ucrChkPreview As ucrCheck
 End Class
