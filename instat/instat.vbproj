@@ -349,16 +349,23 @@
     <Compile Include="sdgSummaryThemes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgTableOptionsTextFormat.Designer.vb">
-      <DependentUpon>sdgTableOptionsTextFormat.vb</DependentUpon>
+    <Compile Include="UserTables\clsTablesUtils.vb" />
+    <Compile Include="UserTables\dlgGeneralTable.Designer.vb">
+      <DependentUpon>dlgGeneralTable.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgTableOptionsTextFormat.vb">
+    <Compile Include="UserTables\dlgGeneralTable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="sdgTableOptions.Designer.vb">
+    <Compile Include="UserTables\sdgTableOptionsTextFormat.Designer.vb">
+      <DependentUpon>sdgTableOptionsTextFormat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\sdgTableOptionsTextFormat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\sdgTableOptions.Designer.vb">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="sdgTableOptions.vb">
+    <Compile Include="UserTables\sdgTableOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserControls\frmMaximiseOutput.Designer.vb">
@@ -3031,6 +3038,12 @@
     <Compile Include="UserControl\ucrOutputPages.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\ucrSourceNotes.Designer.vb">
+      <DependentUpon>ucrSourceNotes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\ucrSourceNotes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgApsimx.resx">
@@ -3218,10 +3231,13 @@
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgTableOptionsTextFormat.resx">
+    <EmbeddedResource Include="UserTables\dlgGeneralTable.resx">
+      <DependentUpon>dlgGeneralTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\sdgTableOptionsTextFormat.resx">
       <DependentUpon>sdgTableOptionsTextFormat.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="sdgTableOptions.resx">
+    <EmbeddedResource Include="UserTables\sdgTableOptions.resx">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmMaximiseOutput.resx">
@@ -5324,6 +5340,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucrOutputPages.resx">
       <DependentUpon>ucrOutputPages.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\ucrSourceNotes.resx">
+      <DependentUpon>ucrSourceNotes.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
