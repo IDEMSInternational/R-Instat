@@ -637,10 +637,6 @@ Public Class frmMain
         dlgRegularSequence.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificTables_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificTables.Click
-        dlgSummaryTables.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareReshapeStack_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeStack.Click
         dlgStack.enumStackMode = dlgStack.StackMode.Prepare
         dlgStack.ShowDialog()
@@ -2761,5 +2757,13 @@ Public Class frmMain
 
     Private Sub mnuClimaticFileExportToGoogleBucketsToolStrip_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileExportToGoogleBucketsToolStrip.Click
         dlgExportClimaticDefinitions.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeSummaries.Click
+        dlgSummaryTables.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribePresentation_Click(sender As Object, e As EventArgs) Handles mnuDescribePresentation.Click
+        dlgGeneralTable.ShowDialog()
     End Sub
 End Class
