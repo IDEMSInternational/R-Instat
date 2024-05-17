@@ -131,7 +131,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverPercentages.SetParameterIsString()
         ucrReceiverPercentages.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverPercentages.SetDataType("factor")
-        ucrReceiverPercentages.SetLinkedDisplayControl(lblFactorAsPercentage)
+        'ucrReceiverPercentages.SetLinkedDisplayControl(lblFactorAsPercentage)
 
         ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 1))
         ucrChkDisplayAsPercentage.SetText("As Percentages")
@@ -139,7 +139,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkDisplayAsPercentage.SetRDefault(Chr(34) & "none" & Chr(34))
 
         ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverPercentages, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
-        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDisplayAsPercentage.AddToLinkedControls({ucrChkPercentageProportion, ucrpnlPercent}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkPercentageProportion.SetParameter(New RParameter("perc_decimal", 3))
         ucrChkPercentageProportion.SetText("Display as Decimal")
@@ -175,6 +175,13 @@ Public Class dlgDescribeTwoVariable
         ucrPnlDescribe.AddParameterValuesCondition(rdoSkim, "checked", "skim")
         ucrPnlDescribe.AddParameterValuesCondition(rdoThreeVariable, "checked", "three_variable")
         'rdoThreeVariable.Enabled = False
+        ucrpnlPercent.AddRadioButton(rdoOCol)
+        ucrpnlPercent.AddRadioButton(rdoORow)
+        ucrpnlPercent.AddRadioButton(rdoOCell)
+        ucrpnlPercent.AddParameterValuesCondition(rdoOCol, "percent", "col")
+        ucrpnlPercent.AddParameterValuesCondition(rdoORow, "percent", "row")
+        ucrpnlPercent.AddParameterValuesCondition(rdoOCell, "percent", "cell")
+        'ucrpnlPercent.SetLinkedDisplayControl(grpDisplay)
 
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverSkimrGroupByFactor, ucrReceiverSecondSkimrGroupByFactor}, {rdoSkim}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableThirdVariable}, {rdoThreeVariable}, bNewLinkedHideIfParameterMissing:=True)
@@ -273,6 +280,7 @@ Public Class dlgDescribeTwoVariable
         clsDummyFunction.AddParameter("row_sum", "False", iPosition:=3)
         clsDummyFunction.AddParameter("corr", "False", iPosition:=4)
         clsDummyFunction.AddParameter("var", "False", iPosition:=5)
+        clsDummyFunction.AddParameter("percent", "col", iPosition:=6)
 
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=2)
@@ -516,6 +524,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverPercentages.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrChkPercentageProportion.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrPnlDescribe.SetRCode(clsDummyFunction, bReset)
+        ucrpnlPercent.SetRCode(clsDummyFunction, bReset)
         ucrChkSummariesRowCol.SetRCode(clsDummyFunction, bReset)
         ucrChkCorrelations.SetRCode(clsDummyFunction, bReset)
         ucrChkSwapXYVar.SetRCode(clsDummyFunction, bReset)
@@ -617,15 +626,18 @@ Public Class dlgDescribeTwoVariable
         ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactor()
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrReceiverPercentages.Visible = ucrChkDisplayAsPercentage.Checked AndAlso IsFactorByFactor()
+        ucrpnlPercent.Visible = ucrChkDisplayAsPercentage.Checked AndAlso IsFactorByFactor()
         ucrChkCorrelations.Visible = False
         ucrChkSwapXYVar.Visible = False
         ucrChkOmitMissing.Visible = False
         cmdMissingOptions.Visible = False
+
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = IsNumericByNumeric() OrElse IsNumericByFactor()
             ucrChkSwapXYVar.Visible = IsNumericByNumeric() OrElse IsFactorByNumeric()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
             cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
+
         ElseIf rdoThreeVariable.Checked Then
             ucrChkOmitMissing.Visible = IsFactorByNumeric() OrElse IsNumericByFactor()
         Else
@@ -1126,7 +1138,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPercentageProportion.ControlValueChanged, ucrReceiverPercentages.ControlValueChanged,
-        ucrChkDisplayAsPercentage.ControlValueChanged, ucrChkDisplayMargins.ControlValueChanged, ucrInputMarginName.ControlValueChanged
+        ucrChkDisplayAsPercentage.ControlValueChanged, ucrChkDisplayMargins.ControlValueChanged, ucrInputMarginName.ControlValueChanged, ucrpnlPercent.ControlValueChanged
         If rdoTwoVariable.Checked Then
             If ucrChkDisplayAsPercentage.Checked Then
                 ucrReceiverPercentages.SetMeAsReceiver()
@@ -1145,6 +1157,7 @@ Public Class dlgDescribeTwoVariable
         End If
         FactorColumns()
         AddRemoveFrequencyParameters()
+        AddingColumnFactor()
     End Sub
 
     Private Sub ucrSelectorDescribeTwoVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeTwoVar.ControlValueChanged
@@ -1280,6 +1293,7 @@ Public Class dlgDescribeTwoVariable
         FactorColumns()
         AddRemoveFirstAnova2Param()
         AddRemoveSecondAnovaParam()
+        AddingColumnFactor()
     End Sub
 
     Private Sub ChangeFirstTypeLabel()
@@ -1502,10 +1516,31 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub AddingColumnFactor()
-        If ucrReceiverFirstVars.lstSelectedVariables.Items.Count >= 1 Then
-            Dim iIndex = ucrReceiverFirstVars.lstSelectedVariables.Items.Count - 1
-            ucrReceiverPercentages.Add(ucrReceiverFirstVars.lstSelectedVariables.Items(iIndex).Text)
-            ucrReceiverFirstVars.SetMeAsReceiver()
+        If rdoOCol.Checked Then
+            If ucrReceiverFirstVars.lstSelectedVariables.Items.Count >= 1 Then
+                Dim iIndex = ucrReceiverFirstVars.lstSelectedVariables.Items.Count - 1
+                ucrReceiverPercentages.Add(ucrReceiverFirstVars.lstSelectedVariables.Items(iIndex).Text)
+                ucrReceiverFirstVars.SetMeAsReceiver()
+            End If
+        ElseIf rdoORow.Checked Then
+            If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
+                ucrReceiverPercentages.Add(ucrReceiverSecondTwoVariableFactor.GetVariableNames(False))
+                ucrReceiverSecondTwoVariableFactor.SetMeAsReceiver()
+            End If
+        Else
+            ucrReceiverPercentages.Clear()
+        End If
+
+    End Sub
+
+    Private Sub ucrpnlPercent_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrpnlPercent.ControlValueChanged
+        AddingColumnFactor()
+        If rdoOCol.Checked Then
+            clsDummyFunction.AddParameter("percent", "col", iPosition:=6)
+        ElseIf rdoORow.Checked Then
+            clsDummyFunction.AddParameter("percent", "row", iPosition:=6)
+        Else
+            clsDummyFunction.AddParameter("percent", "cell", iPosition:=6)
         End If
     End Sub
 End Class
