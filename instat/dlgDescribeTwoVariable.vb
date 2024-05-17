@@ -188,6 +188,8 @@ Public Class dlgDescribeTwoVariable
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverSecondTwoVariableFactor, ucrChkSummariesRowCol}, {rdoTwoVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDescribe.AddToLinkedControls({ucrReceiverThreeVariableSecondFactor}, {rdoThreeVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrpnlPercent.AddToLinkedControls({ucrReceiverPercentages}, {rdoOCol, rdoORow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrReceiverThreeVariableSecondFactor.SetParameter(New RParameter("second_three_varible_factor", 0, bNewIncludeArgumentName:=False))
         ucrReceiverThreeVariableSecondFactor.SetParameterIsString()
         ucrReceiverThreeVariableSecondFactor.Selector = ucrSelectorDescribeTwoVar
@@ -1198,7 +1200,6 @@ Public Class dlgDescribeTwoVariable
         AddRemoveSecondAnovaParam()
         AddRemoveThirdAnovaParam()
         AddRemoveFirstAnova2Param()
-        'SwappingXYVar()
     End Sub
 
     Private Sub ChangeSumaryLabelText()
@@ -1322,7 +1323,6 @@ Public Class dlgDescribeTwoVariable
             lblFirstType.ForeColor = SystemColors.ControlText
         End If
     End Sub
-
 
     Private Sub AssignThirdVariableType()
         If rdoThreeVariable.Checked Then
@@ -1530,7 +1530,6 @@ Public Class dlgDescribeTwoVariable
         Else
             ucrReceiverPercentages.Clear()
         End If
-
     End Sub
 
     Private Sub ucrpnlPercent_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrpnlPercent.ControlValueChanged
