@@ -40,6 +40,7 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 692
+
         ucrReceiverData.SetParameter(New RParameter("data", 0))
         ucrReceiverData.Selector = ucrSelectorExportDefinitions
         ucrReceiverData.SetParameterIsString()
