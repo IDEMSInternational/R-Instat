@@ -39,13 +39,14 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub InitialiseDialog()
-
-        ucrReceiverData.SetParameter(New RParameter("data", 0))
-        ucrReceiverData.Selector = ucrSelectorExportDefinitions
-        ucrReceiverData.SetParameterIsString()
-        ucrReceiverData.SetMeAsReceiver()
-        ucrReceiverData.SetItemType("dataframe")
-        ucrReceiverData.strSelectorHeading = "Data Sets"
+        ucrBase.iHelpTopicID = 692
+        ucrReceiverDate.SetParameter(New RParameter("data", 0))
+        ucrReceiverDate.Selector = ucrSelectorExportDefinitions
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Data Sets"
 
         ucrReceiverDataYear.SetParameter(New RParameter("data_by_year", 1))
         ucrReceiverDataYear.Selector = ucrSelectorExportDefinitions
@@ -70,27 +71,37 @@ Public Class dlgExportClimaticDefinitions
 
         ucrReceiverMinTemp.SetParameter(New RParameter("tmin", 4))
         ucrReceiverMinTemp.Selector = ucrSelectorExportDefinitions
-        ucrReceiverMinTemp.SetParameterIsString()
+        ucrReceiverMinTemp.SetParameterIsRFunction()
+        ucrReceiverMinTemp.SetClimaticType("temp_min")
+        ucrReceiverMinTemp.bAutoFill = True
         ucrReceiverMinTemp.SetLinkedDisplayControl(lblMinTemp)
 
         ucrReceiverMaxTemp.SetParameter(New RParameter("tmax", 5))
         ucrReceiverMaxTemp.Selector = ucrSelectorExportDefinitions
-        ucrReceiverMaxTemp.SetParameterIsString()
+        ucrReceiverMaxTemp.SetParameterIsRFunction()
+        ucrReceiverMaxTemp.SetClimaticType("temp_max")
+        ucrReceiverMaxTemp.bAutoFill = True
         ucrReceiverMaxTemp.SetLinkedDisplayControl(lblMaxTemp)
 
         ucrReceiverRain.SetParameter(New RParameter("rain", 6))
         ucrReceiverRain.Selector = ucrSelectorExportDefinitions
-        ucrReceiverRain.SetParameterIsString()
+        ucrReceiverRain.SetClimaticType("rain")
+        ucrReceiverRain.bAutoFill = True
+        ucrReceiverRain.SetParameterIsRFunction()
         ucrReceiverRain.SetLinkedDisplayControl(lblRain)
 
         ucrReceiverYear.SetParameter(New RParameter("year", 7))
         ucrReceiverYear.Selector = ucrSelectorExportDefinitions
-        ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.SetClimaticType("year")
+        ucrReceiverYear.SetParameterIsRFunction()
+        ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.SetLinkedDisplayControl(lblYear)
 
         ucrReceiverMonth.SetParameter(New RParameter("month", 8))
         ucrReceiverMonth.Selector = ucrSelectorExportDefinitions
-        ucrReceiverMonth.SetParameterIsString()
+        ucrReceiverMonth.SetClimaticType("month")
+        ucrReceiverMonth.SetParameterIsRFunction()
+        ucrReceiverMonth.bAutoFill = True
         ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
 
         ucrChkAnnualRainfall.SetText("Annual Rainfall")
@@ -123,6 +134,10 @@ Public Class dlgExportClimaticDefinitions
         ucrChkIncludeSummaryData.SetRDefault("FALSE")
 
         ucrInputStationID.SetParameter(New RParameter("station_id", 18))
+        'ucrInputStationID.SetClimaticType("station")
+        'ucrReceiverStation.bAutoFill = True
+        'ucrReceiverStation.bWithQuotes = False
+        'ucrReceiverStation.SetIncludedDataTypes({"factor"})
 
         ucrInputCountry.SetParameter(New RParameter("country", 19))
 
@@ -186,7 +201,7 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverCropData.SetRCode(clsExportRinstatToBucketFunction, bReset)
-        ucrReceiverData.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverDate.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverDataYear.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverDataYearMonth.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverMaxTemp.SetRCode(clsExportRinstatToBucketFunction, bReset)
@@ -213,7 +228,7 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverData.IsEmpty AndAlso
+        If Not ucrReceiverDate.IsEmpty AndAlso
            Not ucrReceiverMonth.IsEmpty AndAlso
            Not ucrReceiverYear.IsEmpty AndAlso
            Not ucrInputCountry.IsEmpty AndAlso
@@ -378,14 +393,14 @@ Public Class dlgExportClimaticDefinitions
 
     End Sub
 
-    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged,
+    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged,
             ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged,
             ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrChkSeasonStartProp.ControlContentsChanged, ucrInputCountry.ControlContentsChanged, ucrInputStationID.ControlContentsChanged, ucrChkIncludeSummaryData.ControlContentsChanged,
             ucrChkMonthlyTemp.ControlContentsChanged, ucrChkCropSuccessProp.ControlContentsChanged, ucrChkAnnualTemp.ControlContentsChanged, ucrChkAnnualRainfall.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged, ucrSelectorExportDefinitions.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
-        ucrReceiverData.SetMeAsReceiver()
+    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged
+        ucrReceiverDate.SetMeAsReceiver()
     End Sub
 End Class
