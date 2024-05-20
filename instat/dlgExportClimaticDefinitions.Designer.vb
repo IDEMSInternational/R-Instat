@@ -48,7 +48,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverRain = New instat.ucrReceiverSingle()
         Me.ucrReceiverMinTemp = New instat.ucrReceiverSingle()
         Me.ucrReceiverMaxTemp = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrSelectorExportDefinitions = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverDataYear = New instat.ucrReceiverSingle()
@@ -290,9 +290,9 @@ Partial Class dlgExportClimaticDefinitions
         Me.lblData.AutoSize = True
         Me.lblData.Location = New System.Drawing.Point(332, 9)
         Me.lblData.Name = "lblData"
-        Me.lblData.Size = New System.Drawing.Size(33, 13)
+        Me.lblData.Size = New System.Drawing.Size(59, 13)
         Me.lblData.TabIndex = 1
-        Me.lblData.Text = "Date:"
+        Me.lblData.Text = "Dataframe:"
         '
         'ucrReceiverRain
         '
@@ -333,18 +333,18 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverMaxTemp.TabIndex = 22
         Me.ucrReceiverMaxTemp.ucrSelector = Nothing
         '
-        'ucrReceiverDate
+        'ucrReceiverData
         '
-        Me.ucrReceiverDate.AutoSize = True
-        Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(330, 26)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 2
-        Me.ucrReceiverDate.ucrSelector = Nothing
+        Me.ucrReceiverData.AutoSize = True
+        Me.ucrReceiverData.frmParent = Me
+        Me.ucrReceiverData.Location = New System.Drawing.Point(330, 26)
+        Me.ucrReceiverData.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverData.Name = "ucrReceiverData"
+        Me.ucrReceiverData.Selector = Nothing
+        Me.ucrReceiverData.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverData.strNcFilePath = ""
+        Me.ucrReceiverData.TabIndex = 2
+        Me.ucrReceiverData.ucrSelector = Nothing
         '
         'ucrSelectorExportDefinitions
         '
@@ -491,7 +491,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.Controls.Add(Me.ucrReceiverRain)
         Me.Controls.Add(Me.ucrReceiverMinTemp)
         Me.Controls.Add(Me.ucrReceiverMaxTemp)
-        Me.Controls.Add(Me.ucrReceiverDate)
+        Me.Controls.Add(Me.ucrReceiverData)
         Me.Controls.Add(Me.ucrSelectorExportDefinitions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverDataYear)
@@ -536,7 +536,7 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents ucrReceiverRain As ucrReceiverSingle
     Friend WithEvents ucrReceiverMinTemp As ucrReceiverSingle
     Friend WithEvents ucrReceiverMaxTemp As ucrReceiverSingle
-    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
+    Friend WithEvents ucrReceiverData As ucrReceiverSingle
     Friend WithEvents ucrSelectorExportDefinitions As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverDataYear As ucrReceiverSingle

@@ -40,13 +40,12 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 692
-        ucrReceiverDate.SetParameter(New RParameter("data", 0))
-        ucrReceiverDate.Selector = ucrSelectorExportDefinitions
-        ucrReceiverDate.SetParameterIsString()
-        ucrReceiverDate.SetMeAsReceiver()
-        ucrReceiverDate.SetClimaticType("date")
-        ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.strSelectorHeading = "Data Sets"
+        ucrReceiverData.SetParameter(New RParameter("data", 0))
+        ucrReceiverData.Selector = ucrSelectorExportDefinitions
+        ucrReceiverData.SetParameterIsString()
+        ucrReceiverData.SetMeAsReceiver()
+        ucrReceiverData.SetItemType("dataframe")
+        ucrReceiverData.strSelectorHeading = "Data Sets"
 
         ucrReceiverDataYear.SetParameter(New RParameter("data_by_year", 1))
         ucrReceiverDataYear.Selector = ucrSelectorExportDefinitions
@@ -201,7 +200,7 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverCropData.SetRCode(clsExportRinstatToBucketFunction, bReset)
-        ucrReceiverDate.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverData.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverDataYear.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverDataYearMonth.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverMaxTemp.SetRCode(clsExportRinstatToBucketFunction, bReset)
@@ -228,7 +227,7 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverDate.IsEmpty AndAlso
+        If Not ucrReceiverData.IsEmpty AndAlso
            Not ucrReceiverMonth.IsEmpty AndAlso
            Not ucrReceiverYear.IsEmpty AndAlso
            Not ucrInputCountry.IsEmpty AndAlso
@@ -393,14 +392,14 @@ Public Class dlgExportClimaticDefinitions
 
     End Sub
 
-    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged,
+    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged,
             ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged,
             ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrChkSeasonStartProp.ControlContentsChanged, ucrInputCountry.ControlContentsChanged, ucrInputStationID.ControlContentsChanged, ucrChkIncludeSummaryData.ControlContentsChanged,
             ucrChkMonthlyTemp.ControlContentsChanged, ucrChkCropSuccessProp.ControlContentsChanged, ucrChkAnnualTemp.ControlContentsChanged, ucrChkAnnualRainfall.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged, ucrSelectorExportDefinitions.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged
-        ucrReceiverDate.SetMeAsReceiver()
+    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
+        ucrReceiverData.SetMeAsReceiver()
     End Sub
 End Class
