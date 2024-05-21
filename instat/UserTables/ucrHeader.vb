@@ -83,15 +83,13 @@ Public Class ucrHeader
             Next
 
             If clsFootNoteRFunction IsNot Nothing AndAlso clsLocationsRFunction IsNot Nothing AndAlso clsLocationsRFunction.clsParameters.Count > 0 Then
-
-                If clsLocationsRFunction.clsParameters(0).strArgumentValue = "title" Then
+                If clsLocationsRFunction.clsParameters(0).strArgumentValue = clsTablesUtils.GetStringValue("title", True) Then
                     clsTabTitleFootRParameter = clsTabFooterRParam
                     clsTitleFootNoteRFunction = clsFootNoteRFunction
-                ElseIf clsLocationsRFunction.clsParameters(0).strArgumentValue = "subtitle" Then
+                ElseIf clsLocationsRFunction.clsParameters(0).strArgumentValue = clsTablesUtils.GetStringValue("subtitle", True) Then
                     clsTabSubtitleFootRParameter = clsTabFooterRParam
                     clsSubtitleFootNoteRFunction = clsFootNoteRFunction
                 End If
-
             End If
 
         Next
@@ -125,7 +123,7 @@ Public Class ucrHeader
         If ucrInputHeaderTitleFooter.IsEmpty OrElse ucrInputHeaderSubtitleFooter.IsEmpty Then
             clsOperator.RemoveParameter(clsTabSubtitleFootRParameter)
         Else
-            clsOperator.AddParameter(clsTabTitleFootRParameter)
+            clsOperator.AddParameter(clsTabSubtitleFootRParameter)
         End If
     End Sub
 End Class
