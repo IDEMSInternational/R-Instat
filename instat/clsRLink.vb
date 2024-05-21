@@ -646,7 +646,7 @@ Public Class RLink
     '''
     ''' <param name="strScript">    The text to add to the save log file. </param>
     '''--------------------------------------------------------------------------------------------
-    Private Sub AppendToAutoSaveLog(strScript As String)
+    Public Sub AppendToAutoSaveLog(strScript As String)
         Dim strTempFile As String
         Dim i As Integer = 1
         Try
