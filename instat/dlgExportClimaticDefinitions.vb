@@ -24,7 +24,6 @@ Public Class dlgExportClimaticDefinitions
     Public clsExportRinstatToBucketFunction, ClsGcsAuthFileFunction, clsSummariesFunction As New RFunction
     Public clsReforMattAnnualSummariesFunction, clsReformatCropSuccessFunction, clsReformatSeasonStartFunction, clsReformatTempSummariesFunction, clsReformatMonthlyTempSummaries As New RFunction
 
-
     Private Sub dlgExportClimaticDefinitions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -106,7 +105,7 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverMonth.bAutoFill = True
         ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
 
-        ucrInputstation.SetParameter(New RParameter("station_id", 18))
+        ucrInputStationID.SetParameter(New RParameter("station_id", 18))
 
         ucrChkAnnualRainfall.SetText("Annual Rainfall")
         ucrChkAnnualRainfall.AddParameterValuesCondition(True, "rain", "True")
@@ -147,7 +146,6 @@ Public Class dlgExportClimaticDefinitions
         ucrInputCountry.SetItems(dctCountry)
         ucrInputCountry.SetRDefault(Chr(34) & "Malawi" & Chr(34))
 
-
     End Sub
 
     Private Sub SetDefaults()
@@ -163,7 +161,6 @@ Public Class dlgExportClimaticDefinitions
         bResetSubdialog = True
 
         ucrSelectorExportDefinitions.Reset()
-
 
         clsDummyFunction.AddParameter("rain", "False", iPosition:=0)
         clsDummyFunction.AddParameter("temp", "False", iPosition:=1)
@@ -218,7 +215,7 @@ Public Class dlgExportClimaticDefinitions
         ucrSelectorExportDefinitions.SetRCode(clsExportRinstatToBucketFunction)
         ucrInputTokenPath.SetRCode(ClsGcsAuthFileFunction, bReset)
 
-        ucrInputstation.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrInputStationID.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrInputCountry.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrChkIncludeSummaryData.SetRCode(clsExportRinstatToBucketFunction, bReset)
         If bReset Then
@@ -238,7 +235,7 @@ Public Class dlgExportClimaticDefinitions
            Not ucrReceiverMonth.IsEmpty AndAlso
            Not ucrReceiverYear.IsEmpty AndAlso
            Not ucrInputCountry.IsEmpty AndAlso
-           Not ucrInputstation.IsEmpty AndAlso
+           Not ucrInputStationID.IsEmpty AndAlso
            Not ucrInputTokenPath.IsEmpty Then
 
             If (ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked) AndAlso
@@ -362,9 +359,9 @@ Public Class dlgExportClimaticDefinitions
         End If
     End Sub
 
-    Private Sub ucrInputstation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputstation.ControlValueChanged
-        If Not ucrInputstation.IsEmpty Then
-            clsExportRinstatToBucketFunction.AddParameter("station_id", Chr(34) & ucrInputstation.GetText & Chr(34), iPosition:=18)
+    Private Sub ucrInputstation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStationID.ControlValueChanged
+        If Not ucrInputStationID.IsEmpty Then
+            clsExportRinstatToBucketFunction.AddParameter("station_id", Chr(34) & ucrInputStationID.GetText & Chr(34), iPosition:=18)
         Else
             clsExportRinstatToBucketFunction.RemoveParameterByName("station_id")
         End If
@@ -401,7 +398,8 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged,
             ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged,
-            ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrChkSeasonStartProp.ControlContentsChanged, ucrChkIncludeSummaryData.ControlContentsChanged,
+            ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputCountry.ControlContentsChanged, ucrInputStationID.ControlContentsChanged,
+            ucrChkSeasonStartProp.ControlContentsChanged, ucrChkIncludeSummaryData.ControlContentsChanged,
             ucrChkMonthlyTemp.ControlContentsChanged, ucrChkCropSuccessProp.ControlContentsChanged, ucrChkAnnualTemp.ControlContentsChanged, ucrChkAnnualRainfall.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged, ucrSelectorExportDefinitions.ControlContentsChanged
         TestOkEnabled()
     End Sub

@@ -57,7 +57,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.cmdChooseFile = New System.Windows.Forms.Button()
         Me.ucrInputTokenPath = New instat.ucrInputTextBox()
         Me.cmdDefine = New System.Windows.Forms.Button()
-        Me.ucrInputstation = New instat.ucrInputTextBox()
+        Me.ucrInputStationID = New instat.ucrInputTextBox()
         Me.ucrInputCountry = New instat.ucrInputComboBox()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
@@ -436,17 +436,17 @@ Partial Class dlgExportClimaticDefinitions
         Me.cmdDefine.Text = "Define"
         Me.cmdDefine.UseVisualStyleBackColor = True
         '
-        'ucrInputstation
+        'ucrInputStationID
         '
-        Me.ucrInputstation.AddQuotesIfUnrecognised = True
-        Me.ucrInputstation.AutoSize = True
-        Me.ucrInputstation.IsMultiline = False
-        Me.ucrInputstation.IsReadOnly = False
-        Me.ucrInputstation.Location = New System.Drawing.Point(334, 139)
-        Me.ucrInputstation.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputstation.Name = "ucrInputstation"
-        Me.ucrInputstation.Size = New System.Drawing.Size(118, 21)
-        Me.ucrInputstation.TabIndex = 32
+        Me.ucrInputStationID.AddQuotesIfUnrecognised = True
+        Me.ucrInputStationID.AutoSize = True
+        Me.ucrInputStationID.IsMultiline = False
+        Me.ucrInputStationID.IsReadOnly = False
+        Me.ucrInputStationID.Location = New System.Drawing.Point(334, 139)
+        Me.ucrInputStationID.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputStationID.Name = "ucrInputStationID"
+        Me.ucrInputStationID.Size = New System.Drawing.Size(118, 21)
+        Me.ucrInputStationID.TabIndex = 32
         '
         'ucrInputCountry
         '
@@ -466,7 +466,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(455, 487)
         Me.Controls.Add(Me.ucrInputCountry)
-        Me.Controls.Add(Me.ucrInputstation)
+        Me.Controls.Add(Me.ucrInputStationID)
         Me.Controls.Add(Me.cmdDefine)
         Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.cmdChooseFile)
@@ -544,6 +544,6 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents cmdChooseFile As Button
     Friend WithEvents ucrInputTokenPath As ucrInputTextBox
     Friend WithEvents cmdDefine As Button
-    Friend WithEvents ucrInputstation As ucrInputTextBox
+    Friend WithEvents ucrInputStationID As ucrInputTextBox
     Friend WithEvents ucrInputCountry As ucrInputComboBox
 End Class
