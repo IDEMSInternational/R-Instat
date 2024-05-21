@@ -37,6 +37,18 @@ Public Class clsTablesUtils
         Return lstRFunctions
     End Function
 
+    Public Shared Function FindRFunctionsParamsWithRCommand(strRCommandName As String, clsOperator As ROperator) As List(Of RParameter)
+        Dim lstRFunctionParams As New List(Of RParameter)
+        For Each clsRParam As RParameter In clsOperator.clsParameters
+            If clsRParam.bIsFunction AndAlso clsRParam.HasValue() Then
+                If DirectCast(clsRParam.clsArgumentCodeStructure, RFunction).strRCommand = strRCommandName Then
+                    lstRFunctionParams.Add(clsRParam)
+                End If
+            End If
+        Next
+        Return lstRFunctionParams
+    End Function
+
     Public Shared Sub RemoveParameterFromOperator(strParameterName As String, clsOperator As ROperator)
         ' Remove all the previous footer parameters first
         Dim lstParams As New List(Of RParameter)

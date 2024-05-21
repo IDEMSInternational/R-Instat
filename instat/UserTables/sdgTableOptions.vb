@@ -28,7 +28,7 @@ Public Class sdgTableOptions
 
     Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn
 
-        clsTablesUtils.RemoveParameterFromOperator("tab_footnote", clsOperator)
+        'clsTablesUtils.RemoveParameterFromOperator("tab_footnote", clsOperator)
         clsTablesUtils.SetGridTagsInOperator(dataGridHeaderFooterNotes, "tab_footnote", clsOperator)
         clsTablesUtils.SetGridTagsInOperator(dataGridCellFooterNotes, "tab_footnote", clsOperator)
 
@@ -62,8 +62,9 @@ Public Class sdgTableOptions
             bDialogInitialised = True
         End If
 
-        Me.clsOperator = clsNewOperator
+        clsOperator = clsNewOperator
 
+        ucrHeaderOptions.Setup(clsOperator)
         SetupFooterNotesRFunctionsInOperatorOnNew(clsOperator)
         ucrSourceNotes.Setup(clsOperator)
         SetupThemeRFunctionsInOperatorOnNew(clsOperator)
@@ -73,7 +74,7 @@ Public Class sdgTableOptions
     ' FOOTER CONTROLS
 
     Private Sub SetupFooterNotesRFunctionsInOperatorOnNew(clsOperator As ROperator)
-        SetFooterGridContents(clsOperator, dataGridHeaderFooterNotes)
+        'SetFooterGridContents(clsOperator, dataGridHeaderFooterNotes)
         SetFooterGridContents(clsOperator, dataGridCellFooterNotes)
     End Sub
 

@@ -24,12 +24,9 @@ Partial Class sdgTableOptions
     Private Sub InitializeComponent()
         Me.tbpFormatOptions = New System.Windows.Forms.TabControl()
         Me.tbpHeader = New System.Windows.Forms.TabPage()
-        Me.dataGridHeaderFooterNotes = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewButtonColumn1 = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.lblHeaderFooterNotes = New System.Windows.Forms.Label()
+        Me.ucrHeaderOptions = New instat.ucrHeader()
         Me.tbpRowGroups = New System.Windows.Forms.TabPage()
+        Me.UcrRowGroup1 = New instat.ucrRowGroup()
         Me.tbpFooters = New System.Windows.Forms.TabPage()
         Me.dataGridCellFooterNotes = New System.Windows.Forms.DataGridView()
         Me.colFooterNoteText = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -46,10 +43,8 @@ Partial Class sdgTableOptions
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.ucrPnlThemesPanel = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.UcrRowGroup1 = New instat.ucrRowGroup()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
-        CType(Me.dataGridHeaderFooterNotes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpRowGroups.SuspendLayout()
         Me.tbpFooters.SuspendLayout()
         CType(Me.dataGridCellFooterNotes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,88 +59,60 @@ Partial Class sdgTableOptions
         Me.tbpFormatOptions.Controls.Add(Me.tbpFooters)
         Me.tbpFormatOptions.Controls.Add(Me.tbpSourceNotes)
         Me.tbpFormatOptions.Controls.Add(Me.tbpThemes)
-        Me.tbpFormatOptions.Location = New System.Drawing.Point(3, 5)
+        Me.tbpFormatOptions.Location = New System.Drawing.Point(4, 8)
+        Me.tbpFormatOptions.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbpFormatOptions.Name = "tbpFormatOptions"
         Me.tbpFormatOptions.SelectedIndex = 0
-        Me.tbpFormatOptions.Size = New System.Drawing.Size(650, 259)
+        Me.tbpFormatOptions.Size = New System.Drawing.Size(975, 398)
         Me.tbpFormatOptions.TabIndex = 5
         '
         'tbpHeader
         '
-        Me.tbpHeader.Controls.Add(Me.dataGridHeaderFooterNotes)
-        Me.tbpHeader.Controls.Add(Me.lblHeaderFooterNotes)
-        Me.tbpHeader.Location = New System.Drawing.Point(4, 22)
+        Me.tbpHeader.Controls.Add(Me.ucrHeaderOptions)
+        Me.tbpHeader.Location = New System.Drawing.Point(4, 29)
+        Me.tbpHeader.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbpHeader.Name = "tbpHeader"
-        Me.tbpHeader.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpHeader.Size = New System.Drawing.Size(642, 233)
+        Me.tbpHeader.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.tbpHeader.Size = New System.Drawing.Size(967, 365)
         Me.tbpHeader.TabIndex = 0
         Me.tbpHeader.Text = "Headers Notes"
         Me.tbpHeader.UseVisualStyleBackColor = True
         '
-        'dataGridHeaderFooterNotes
+        'ucrHeaderOptions
         '
-        Me.dataGridHeaderFooterNotes.AllowUserToAddRows = False
-        Me.dataGridHeaderFooterNotes.AllowUserToDeleteRows = False
-        Me.dataGridHeaderFooterNotes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridHeaderFooterNotes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewButtonColumn1})
-        Me.dataGridHeaderFooterNotes.Location = New System.Drawing.Point(6, 26)
-        Me.dataGridHeaderFooterNotes.Name = "dataGridHeaderFooterNotes"
-        Me.dataGridHeaderFooterNotes.RowHeadersWidth = 62
-        Me.dataGridHeaderFooterNotes.Size = New System.Drawing.Size(630, 84)
-        Me.dataGridHeaderFooterNotes.TabIndex = 15
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Note Text"
-        Me.DataGridViewTextBoxColumn2.MinimumWidth = 8
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.Width = 220
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.HeaderText = "Header"
-        Me.DataGridViewTextBoxColumn3.Items.AddRange(New Object() {"title", "subtitle"})
-        Me.DataGridViewTextBoxColumn3.MinimumWidth = 8
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.DataGridViewTextBoxColumn3.Width = 140
-        '
-        'DataGridViewButtonColumn1
-        '
-        Me.DataGridViewButtonColumn1.HeaderText = ""
-        Me.DataGridViewButtonColumn1.Name = "DataGridViewButtonColumn1"
-        Me.DataGridViewButtonColumn1.ReadOnly = True
-        Me.DataGridViewButtonColumn1.Text = "Format"
-        Me.DataGridViewButtonColumn1.UseColumnTextForButtonValue = True
-        Me.DataGridViewButtonColumn1.Width = 60
-        '
-        'lblHeaderFooterNotes
-        '
-        Me.lblHeaderFooterNotes.AutoSize = True
-        Me.lblHeaderFooterNotes.Location = New System.Drawing.Point(9, 10)
-        Me.lblHeaderFooterNotes.Name = "lblHeaderFooterNotes"
-        Me.lblHeaderFooterNotes.Size = New System.Drawing.Size(109, 13)
-        Me.lblHeaderFooterNotes.TabIndex = 14
-        Me.lblHeaderFooterNotes.Text = "Header footers notes:"
+        Me.ucrHeaderOptions.Location = New System.Drawing.Point(11, 10)
+        Me.ucrHeaderOptions.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrHeaderOptions.Name = "ucrHeaderOptions"
+        Me.ucrHeaderOptions.Size = New System.Drawing.Size(454, 176)
+        Me.ucrHeaderOptions.TabIndex = 16
         '
         'tbpRowGroups
         '
         Me.tbpRowGroups.Controls.Add(Me.UcrRowGroup1)
-        Me.tbpRowGroups.Location = New System.Drawing.Point(4, 22)
+        Me.tbpRowGroups.Location = New System.Drawing.Point(4, 29)
+        Me.tbpRowGroups.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbpRowGroups.Name = "tbpRowGroups"
-        Me.tbpRowGroups.Size = New System.Drawing.Size(642, 233)
+        Me.tbpRowGroups.Size = New System.Drawing.Size(967, 365)
         Me.tbpRowGroups.TabIndex = 7
         Me.tbpRowGroups.Text = "Row Groups"
         Me.tbpRowGroups.UseVisualStyleBackColor = True
+        '
+        'UcrRowGroup1
+        '
+        Me.UcrRowGroup1.Location = New System.Drawing.Point(12, 6)
+        Me.UcrRowGroup1.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrRowGroup1.Name = "UcrRowGroup1"
+        Me.UcrRowGroup1.Size = New System.Drawing.Size(874, 346)
+        Me.UcrRowGroup1.TabIndex = 0
         '
         'tbpFooters
         '
         Me.tbpFooters.Controls.Add(Me.dataGridCellFooterNotes)
         Me.tbpFooters.Controls.Add(Me.lblFooterCellNotes)
-        Me.tbpFooters.Location = New System.Drawing.Point(4, 22)
+        Me.tbpFooters.Location = New System.Drawing.Point(4, 29)
+        Me.tbpFooters.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbpFooters.Name = "tbpFooters"
-        Me.tbpFooters.Size = New System.Drawing.Size(642, 233)
+        Me.tbpFooters.Size = New System.Drawing.Size(967, 365)
         Me.tbpFooters.TabIndex = 3
         Me.tbpFooters.Text = "Cells"
         Me.tbpFooters.UseVisualStyleBackColor = True
@@ -156,10 +123,11 @@ Partial Class sdgTableOptions
         Me.dataGridCellFooterNotes.AllowUserToDeleteRows = False
         Me.dataGridCellFooterNotes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dataGridCellFooterNotes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colFooterNoteText, Me.colFooterColExpression, Me.colFooterRowExpression, Me.colFooterFormat})
-        Me.dataGridCellFooterNotes.Location = New System.Drawing.Point(7, 31)
+        Me.dataGridCellFooterNotes.Location = New System.Drawing.Point(10, 48)
+        Me.dataGridCellFooterNotes.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.dataGridCellFooterNotes.Name = "dataGridCellFooterNotes"
         Me.dataGridCellFooterNotes.RowHeadersWidth = 62
-        Me.dataGridCellFooterNotes.Size = New System.Drawing.Size(630, 84)
+        Me.dataGridCellFooterNotes.Size = New System.Drawing.Size(945, 129)
         Me.dataGridCellFooterNotes.TabIndex = 5
         '
         'colFooterNoteText
@@ -187,6 +155,7 @@ Partial Class sdgTableOptions
         'colFooterFormat
         '
         Me.colFooterFormat.HeaderText = ""
+        Me.colFooterFormat.MinimumWidth = 8
         Me.colFooterFormat.Name = "colFooterFormat"
         Me.colFooterFormat.ReadOnly = True
         Me.colFooterFormat.Text = "Format"
@@ -196,27 +165,30 @@ Partial Class sdgTableOptions
         'lblFooterCellNotes
         '
         Me.lblFooterCellNotes.AutoSize = True
-        Me.lblFooterCellNotes.Location = New System.Drawing.Point(10, 13)
+        Me.lblFooterCellNotes.Location = New System.Drawing.Point(15, 20)
+        Me.lblFooterCellNotes.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFooterCellNotes.Name = "lblFooterCellNotes"
-        Me.lblFooterCellNotes.Size = New System.Drawing.Size(91, 13)
+        Me.lblFooterCellNotes.Size = New System.Drawing.Size(137, 20)
         Me.lblFooterCellNotes.TabIndex = 4
         Me.lblFooterCellNotes.Text = "Cell footers notes:"
         '
         'tbpSourceNotes
         '
         Me.tbpSourceNotes.Controls.Add(Me.ucrSourceNotes)
-        Me.tbpSourceNotes.Location = New System.Drawing.Point(4, 22)
+        Me.tbpSourceNotes.Location = New System.Drawing.Point(4, 29)
+        Me.tbpSourceNotes.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbpSourceNotes.Name = "tbpSourceNotes"
-        Me.tbpSourceNotes.Size = New System.Drawing.Size(642, 233)
+        Me.tbpSourceNotes.Size = New System.Drawing.Size(967, 365)
         Me.tbpSourceNotes.TabIndex = 4
         Me.tbpSourceNotes.Text = "Source Notes"
         Me.tbpSourceNotes.UseVisualStyleBackColor = True
         '
         'ucrSourceNotes
         '
-        Me.ucrSourceNotes.Location = New System.Drawing.Point(7, 7)
+        Me.ucrSourceNotes.Location = New System.Drawing.Point(10, 11)
+        Me.ucrSourceNotes.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSourceNotes.Name = "ucrSourceNotes"
-        Me.ucrSourceNotes.Size = New System.Drawing.Size(581, 190)
+        Me.ucrSourceNotes.Size = New System.Drawing.Size(872, 292)
         Me.ucrSourceNotes.TabIndex = 0
         '
         'tbpThemes
@@ -226,9 +198,10 @@ Partial Class sdgTableOptions
         Me.tbpThemes.Controls.Add(Me.rdoSelectTheme)
         Me.tbpThemes.Controls.Add(Me.rdoManualTheme)
         Me.tbpThemes.Controls.Add(Me.ucrPnlThemesPanel)
-        Me.tbpThemes.Location = New System.Drawing.Point(4, 22)
+        Me.tbpThemes.Location = New System.Drawing.Point(4, 29)
+        Me.tbpThemes.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbpThemes.Name = "tbpThemes"
-        Me.tbpThemes.Size = New System.Drawing.Size(642, 233)
+        Me.tbpThemes.Size = New System.Drawing.Size(967, 365)
         Me.tbpThemes.TabIndex = 6
         Me.tbpThemes.Text = "Themes"
         Me.tbpThemes.UseVisualStyleBackColor = True
@@ -239,17 +212,18 @@ Partial Class sdgTableOptions
         Me.ucrCboSelectThemes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboSelectThemes.GetSetSelectedIndex = -1
         Me.ucrCboSelectThemes.IsReadOnly = False
-        Me.ucrCboSelectThemes.Location = New System.Drawing.Point(157, 29)
-        Me.ucrCboSelectThemes.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrCboSelectThemes.Location = New System.Drawing.Point(236, 45)
+        Me.ucrCboSelectThemes.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrCboSelectThemes.Name = "ucrCboSelectThemes"
-        Me.ucrCboSelectThemes.Size = New System.Drawing.Size(168, 21)
+        Me.ucrCboSelectThemes.Size = New System.Drawing.Size(252, 32)
         Me.ucrCboSelectThemes.TabIndex = 3
         '
         'btnManualTheme
         '
-        Me.btnManualTheme.Location = New System.Drawing.Point(157, 59)
+        Me.btnManualTheme.Location = New System.Drawing.Point(236, 91)
+        Me.btnManualTheme.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnManualTheme.Name = "btnManualTheme"
-        Me.btnManualTheme.Size = New System.Drawing.Size(168, 21)
+        Me.btnManualTheme.Size = New System.Drawing.Size(252, 32)
         Me.btnManualTheme.TabIndex = 2
         Me.btnManualTheme.Text = "Custom Theme"
         Me.btnManualTheme.UseVisualStyleBackColor = True
@@ -258,9 +232,10 @@ Partial Class sdgTableOptions
         '
         Me.rdoSelectTheme.AutoSize = True
         Me.rdoSelectTheme.Checked = True
-        Me.rdoSelectTheme.Location = New System.Drawing.Point(22, 31)
+        Me.rdoSelectTheme.Location = New System.Drawing.Point(33, 48)
+        Me.rdoSelectTheme.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.rdoSelectTheme.Name = "rdoSelectTheme"
-        Me.rdoSelectTheme.Size = New System.Drawing.Size(91, 17)
+        Me.rdoSelectTheme.Size = New System.Drawing.Size(132, 24)
         Me.rdoSelectTheme.TabIndex = 0
         Me.rdoSelectTheme.TabStop = True
         Me.rdoSelectTheme.Text = "Select Theme"
@@ -269,9 +244,10 @@ Partial Class sdgTableOptions
         'rdoManualTheme
         '
         Me.rdoManualTheme.AutoSize = True
-        Me.rdoManualTheme.Location = New System.Drawing.Point(22, 61)
+        Me.rdoManualTheme.Location = New System.Drawing.Point(33, 94)
+        Me.rdoManualTheme.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.rdoManualTheme.Name = "rdoManualTheme"
-        Me.rdoManualTheme.Size = New System.Drawing.Size(96, 17)
+        Me.rdoManualTheme.Size = New System.Drawing.Size(139, 24)
         Me.rdoManualTheme.TabIndex = 1
         Me.rdoManualTheme.Text = "Manual Theme"
         Me.rdoManualTheme.UseVisualStyleBackColor = True
@@ -279,43 +255,35 @@ Partial Class sdgTableOptions
         'ucrPnlThemesPanel
         '
         Me.ucrPnlThemesPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlThemesPanel.Location = New System.Drawing.Point(12, 16)
-        Me.ucrPnlThemesPanel.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrPnlThemesPanel.Location = New System.Drawing.Point(18, 25)
+        Me.ucrPnlThemesPanel.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrPnlThemesPanel.Name = "ucrPnlThemesPanel"
-        Me.ucrPnlThemesPanel.Size = New System.Drawing.Size(349, 70)
+        Me.ucrPnlThemesPanel.Size = New System.Drawing.Size(524, 108)
         Me.ucrPnlThemesPanel.TabIndex = 4
         '
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(195, 273)
-        Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(292, 420)
+        Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(336, 45)
         Me.ucrBaseSubdialog.TabIndex = 4
-        '
-        'UcrRowGroup1
-        '
-        Me.UcrRowGroup1.Location = New System.Drawing.Point(8, 4)
-        Me.UcrRowGroup1.Name = "UcrRowGroup1"
-        Me.UcrRowGroup1.Size = New System.Drawing.Size(583, 225)
-        Me.UcrRowGroup1.TabIndex = 0
         '
         'sdgTableOptions
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(656, 309)
+        Me.ClientSize = New System.Drawing.Size(984, 475)
         Me.Controls.Add(Me.tbpFormatOptions)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "sdgTableOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Table Options"
         Me.tbpFormatOptions.ResumeLayout(False)
         Me.tbpHeader.ResumeLayout(False)
-        Me.tbpHeader.PerformLayout()
-        CType(Me.dataGridHeaderFooterNotes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpRowGroups.ResumeLayout(False)
         Me.tbpFooters.ResumeLayout(False)
         Me.tbpFooters.PerformLayout()
@@ -345,12 +313,8 @@ Partial Class sdgTableOptions
     Friend WithEvents colFooterColExpression As DataGridViewTextBoxColumn
     Friend WithEvents colFooterRowExpression As DataGridViewTextBoxColumn
     Friend WithEvents colFooterFormat As DataGridViewButtonColumn
-    Friend WithEvents dataGridHeaderFooterNotes As DataGridView
-    Friend WithEvents lblHeaderFooterNotes As Label
-    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewComboBoxColumn
-    Friend WithEvents DataGridViewButtonColumn1 As DataGridViewButtonColumn
     Friend WithEvents ucrSourceNotes As ucrSourceNotes
     Friend WithEvents tbpRowGroups As TabPage
     Friend WithEvents UcrRowGroup1 As ucrRowGroup
+    Friend WithEvents ucrHeaderOptions As ucrHeader
 End Class

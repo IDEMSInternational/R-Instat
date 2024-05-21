@@ -1,7 +1,7 @@
 ﻿Imports instat.Translations
 Public Class sdgTableOptionsTextFormat
 
-    Private bDialogInitised As Boolean = False
+    Private bFirstload As Boolean = True
 
     Private Sub sdgTableTextFormatOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -108,9 +108,9 @@ Public Class sdgTableOptionsTextFormat
 
     Public Sub Setup(clsNewStyleRFunction As RFunction)
 
-        If Not bDialogInitised Then
+        If bFirstload Then
             InitialiseDialog()
-            bDialogInitised = True
+            bFirstload = False
         End If
 
         ucrCboFontFamily.SetRCode(clsNewStyleRFunction, bReset:=True)
