@@ -21,7 +21,9 @@ Public Class dlgImportFromRapidPro
     Private bReset As Boolean = True
     Private clsGetUserDataFunction As New RFunction
     Private clsGetFlowDataFunction As New RFunction
+    Private clsGetFlowFunction As New RFunction
     Private clsSetTokenFunction As New RFunction
+    Private clsLinkDataFramesFunction As New RFunction
     Private clsSetSiteFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
@@ -112,6 +114,18 @@ Public Class dlgImportFromRapidPro
         ucrInputTimezone.SetRDefault(Chr(34) & "UTC" & Chr(34))
         ucrInputTimezone.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
+        ucrChkUser.SetText("User")
+        ucrChkUser.AddParameterValuesCondition(True, "user", "TRUE")
+        ucrChkUser.AddParameterValuesCondition(False, "user", "FALSE")
+
+        ucrChkFlow.SetText("Flow")
+        ucrChkFlow.AddParameterValuesCondition(True, "flow", "TRUE")
+        ucrChkFlow.AddParameterValuesCondition(False, "flow", "FALSE")
+
+        ucrChkSetStartDate.SetText("Start Date")
+        ucrChkSetStartDate.AddParameterValuesCondition(True, "checked", "TRUE")
+        ucrChkSetStartDate.AddParameterValuesCondition(False, "checked", "FALSE")
+
         ucrSaveDataframeName.SetSaveTypeAsDataFrame()
         ucrSaveDataframeName.SetIsTextBox()
         ucrSaveDataframeName.SetPrefix("data")
@@ -124,11 +138,15 @@ Public Class dlgImportFromRapidPro
         clsSetTokenFunction = New RFunction
         clsDummyFunction = New RFunction
         clsSetSiteFunction = New RFunction
+        clsGetFlowFunction = New RFunction
+        clsLinkDataFramesFunction = New RFunction
 
         ucrSaveDataframeName.Reset()
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
         clsDummyFunction.AddParameter("checked1", "FALSE", iPosition:=1)
+        clsDummyFunction.AddParameter("flow", "FALSE", iPosition:=2)
+        clsDummyFunction.AddParameter("user", "FALSE", iPosition:=3)
 
         clsSetSiteFunction.SetPackageName("rapidpror")
         clsSetSiteFunction.SetRCommand("set_rapidpro_site")
@@ -151,9 +169,18 @@ Public Class dlgImportFromRapidPro
         clsGetFlowDataFunction.AddParameter("token", "rapidpror::get_rapidpro_key()", iPosition:=1)
         clsGetFlowDataFunction.AddParameter("flatten", "TRUE", iPosition:=2)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSiteFunction)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
+        clsGetFlowFunction.SetPackageName("rapidpror")
+        clsGetFlowFunction.SetRCommand("get_flow_data")
+        clsGetFlowFunction.AddParameter("rapidpro_site", "rapidpror::get_rapidpro_site()", iPosition:=0)
+        clsGetFlowFunction.AddParameter("token", "rapidpror::get_rapidpro_key()", iPosition:=1)
+        clsGetFlowFunction.AddParameter("flatten", "TRUE", iPosition:=2)
+
+        clsLinkDataFramesFunction.SetPackageName("rapidpror")
+        clsLinkDataFramesFunction.SetRCommand("link_data_frames")
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction, 0)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSiteFunction, 1)
+        'ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -172,6 +199,10 @@ Public Class dlgImportFromRapidPro
         ucrChkSetEndDate.SetRCode(clsDummyFunction, bReset)
         ucrChkSetStartDate.SetRCode(clsDummyFunction, bReset)
         ucrSaveDataframeName.SetRCode(clsGetUserDataFunction, bReset)
+        If bReset Then
+            ucrChkUser.SetRCode(clsDummyFunction, bReset)
+            ucrChkFlow.SetRCode(clsDummyFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
@@ -183,11 +214,20 @@ Public Class dlgImportFromRapidPro
     End Sub
 
     Private Sub ucrPnlImportFromRapidPro_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlImportFromRapidPro.ControlValueChanged,
-        ucrSaveDataframeName.ControlValueChanged
+        ucrSaveDataframeName.ControlValueChanged, ucrChkFlow.ControlValueChanged, ucrChkUser.ControlValueChanged
         If rdoUserData.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
+            If ucrChkUser.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
+            ElseIf ucrChkFlow.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowFunction)
+            End If
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowDataFunction)
+        End If
+        If ucrChkFlow.Checked AndAlso ucrChkUser.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsLinkDataFramesFunction, 0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsLinkDataFramesFunction)
         End If
     End Sub
 
