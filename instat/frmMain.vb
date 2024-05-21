@@ -2761,7 +2761,7 @@ Public Class frmMain
 
     Private Sub mnuDescribePresentation_Click(sender As Object, e As EventArgs) Handles mnuDescribePresentation.Click
         dlgGeneralTable.ShowDialog()
-
+    End Sub
     Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileToolStripMenuItem.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "13")
     End Sub
