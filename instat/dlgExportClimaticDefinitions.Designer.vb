@@ -57,8 +57,8 @@ Partial Class dlgExportClimaticDefinitions
         Me.cmdChooseFile = New System.Windows.Forms.Button()
         Me.ucrInputTokenPath = New instat.ucrInputTextBox()
         Me.cmdDefine = New System.Windows.Forms.Button()
-        Me.ucrInputCountry = New instat.ucrInputTextBox()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrInputstation = New instat.ucrInputTextBox()
+        Me.ucrInputCountry = New instat.ucrInputComboBox()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -436,30 +436,28 @@ Partial Class dlgExportClimaticDefinitions
         Me.cmdDefine.Text = "Define"
         Me.cmdDefine.UseVisualStyleBackColor = True
         '
+        'ucrInputstation
+        '
+        Me.ucrInputstation.AddQuotesIfUnrecognised = True
+        Me.ucrInputstation.AutoSize = True
+        Me.ucrInputstation.IsMultiline = False
+        Me.ucrInputstation.IsReadOnly = False
+        Me.ucrInputstation.Location = New System.Drawing.Point(334, 139)
+        Me.ucrInputstation.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputstation.Name = "ucrInputstation"
+        Me.ucrInputstation.Size = New System.Drawing.Size(118, 21)
+        Me.ucrInputstation.TabIndex = 32
+        '
         'ucrInputCountry
         '
         Me.ucrInputCountry.AddQuotesIfUnrecognised = True
-        Me.ucrInputCountry.AutoSize = True
-        Me.ucrInputCountry.IsMultiline = False
+        Me.ucrInputCountry.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputCountry.GetSetSelectedIndex = -1
         Me.ucrInputCountry.IsReadOnly = False
-        Me.ucrInputCountry.Location = New System.Drawing.Point(334, 178)
-        Me.ucrInputCountry.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputCountry.Location = New System.Drawing.Point(334, 177)
         Me.ucrInputCountry.Name = "ucrInputCountry"
-        Me.ucrInputCountry.Size = New System.Drawing.Size(118, 21)
-        Me.ucrInputCountry.TabIndex = 10
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.AutoSize = True
-        Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(332, 139)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 31
-        Me.ucrReceiverStation.ucrSelector = Nothing
+        Me.ucrInputCountry.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputCountry.TabIndex = 38
         '
         'dlgExportClimaticDefinitions
         '
@@ -467,14 +465,14 @@ Partial Class dlgExportClimaticDefinitions
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(455, 487)
-        Me.Controls.Add(Me.ucrReceiverStation)
+        Me.Controls.Add(Me.ucrInputCountry)
+        Me.Controls.Add(Me.ucrInputstation)
         Me.Controls.Add(Me.cmdDefine)
         Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.cmdChooseFile)
         Me.Controls.Add(Me.ucrInputTokenPath)
         Me.Controls.Add(Me.lblStationID)
         Me.Controls.Add(Me.lblCountry)
-        Me.Controls.Add(Me.ucrInputCountry)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.ucrReceiverMonth)
@@ -546,6 +544,6 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents cmdChooseFile As Button
     Friend WithEvents ucrInputTokenPath As ucrInputTextBox
     Friend WithEvents cmdDefine As Button
-    Friend WithEvents ucrInputCountry As ucrInputTextBox
-    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents ucrInputstation As ucrInputTextBox
+    Friend WithEvents ucrInputCountry As ucrInputComboBox
 End Class
