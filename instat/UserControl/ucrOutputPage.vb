@@ -22,6 +22,10 @@ Imports RInsightF461
 ''' </summary>
 Public Class ucrOutputPage
     Private _checkBoxes As List(Of CheckBox)
+
+    ''' <summary> lastCheckedBox used to store a reference to a CheckBox control. </summary>
+    Private lastCheckedBox As CheckBox = Nothing
+
     Private _bCanReOrder As Boolean
     Private _bCanRename As Boolean
     Private _bCanDelete As Boolean
@@ -112,6 +116,15 @@ Public Class ucrOutputPage
     Public Sub ClearAllCheckBoxes()
         For Each checkbox In _checkBoxes
             checkbox.Checked = False
+        Next
+    End Sub
+
+    ''' <summary>
+    ''' Selects all check boxes on the page
+    ''' </summary>
+    Public Sub SelectAllCheckBoxes()
+        For Each checkbox In _checkBoxes
+            checkbox.Checked = True
         Next
     End Sub
 
@@ -214,8 +227,6 @@ Public Class ucrOutputPage
 
         End If
     End Sub
-
-
 
     Private Sub AddNewTextOutput(outputElement As clsOutputElement)
         Dim panel As Panel = AddElementPanel(outputElement)
@@ -377,11 +388,10 @@ Public Class ucrOutputPage
         }
         panel.Controls.Add(checkBox)
         _checkBoxes.Add(checkBox)
+        AddHandler checkBox.CheckedChanged, AddressOf CheckBox_CheckedChanged
         AddHandler checkBox.Click, AddressOf checkButton_Click
         AddHandler checkBox.MouseLeave, AddressOf panelContents_MouseLeave
     End Sub
-
-
 
     ''' <summary>
     ''' Copies selected elements to clipboard
@@ -478,13 +488,47 @@ Public Class ucrOutputPage
         Next
     End Sub
 
-
     Private Sub SetRichTextBoxHeight(richTextBox As RichTextBox)
         richTextBox.Height = (richTextBox.GetLineFromCharIndex(richTextBox.Text.Length) + 1) * (richTextBox.Font.Height + richTextBox.Margin.Vertical) + 5
     End Sub
 
     Private Sub SetPictureBoxHeight(pictureBox As PictureBox)
         pictureBox.Height = pictureBox.Width / (pictureBox.Image.Width / pictureBox.Image.Height)
+    End Sub
+
+    Private Sub CheckBox_CheckedChanged(sender As Object, e As EventArgs)
+        Dim currentBox As CheckBox = DirectCast(sender, CheckBox)
+
+        If lastCheckedBox IsNot Nothing AndAlso Control.ModifierKeys = Keys.Shift Then
+            Dim startIndex As Integer = _checkBoxes.IndexOf(lastCheckedBox)
+            Dim endIndex As Integer = _checkBoxes.IndexOf(currentBox)
+
+            ' Toggle check state for checkboxes between startIndex and endIndex
+            For i As Integer = Math.Min(startIndex, endIndex) To Math.Max(startIndex, endIndex)
+                _checkBoxes(i).Checked = currentBox.Checked
+            Next
+        End If
+
+        lastCheckedBox = currentBox
+    End Sub
+
+    Private Sub CheckBox_MouseDown(sender As Object, e As MouseEventArgs)
+        Dim currentBox As CheckBox = DirectCast(sender, CheckBox)
+
+        If e.Button = MouseButtons.Left AndAlso Control.ModifierKeys = Keys.Shift Then
+            ' Deselect all checkboxes between lastCheckedBox and currentBox
+            Dim startIndex As Integer = _checkBoxes.IndexOf(lastCheckedBox)
+            Dim endIndex As Integer = _checkBoxes.IndexOf(currentBox)
+
+            For i As Integer = Math.Min(startIndex, endIndex) + 1 To Math.Max(startIndex, endIndex) - 1
+                _checkBoxes(i).Checked = False
+            Next
+        ElseIf currentBox.Checked AndAlso Not Control.ModifierKeys = Keys.Shift Then
+            ' Deselect the current checkbox if already checked without Shift key
+            currentBox.Checked = False
+        End If
+
+        lastCheckedBox = currentBox
     End Sub
 
     Private Sub checkButton_Click(sender As Object, e As EventArgs)

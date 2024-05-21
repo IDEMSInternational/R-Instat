@@ -162,14 +162,29 @@ Partial Class frmMain
         Me.mnuHelpHelpIntroduction = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpFAQ = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpGetingStarted = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuHelpData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator28 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelpWindows = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator81 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelpMenus = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenusAndDialogsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator82 = New System.Windows.Forms.ToolStripSeparator()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrepareToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DescribeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator83 = New System.Windows.Forms.ToolStripSeparator()
+        Me.StructuredToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClimaticToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProcurementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExperimentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAboutR = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpLearningStatistics = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpRPackages = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpGlossary = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuHelpData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpLicence = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator29 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelpPackagesDocumentation = New System.Windows.Forms.ToolStripMenuItem()
@@ -1209,6 +1224,7 @@ Partial Class frmMain
         Me.mnuModelOtherOneVariable.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOtherOneVariable.Tag = "Other_(One_Variable)"
         Me.mnuModelOtherOneVariable.Text = "Other (One Variable)"
+        Me.mnuModelOtherOneVariable.Visible = False
         '
         'mnuModelOtherOneVariableExactResults
         '
@@ -1249,6 +1265,7 @@ Partial Class frmMain
         Me.mnuModelOtherTwoVariables.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOtherTwoVariables.Tag = "Other_(Two_Variables)"
         Me.mnuModelOtherTwoVariables.Text = "Other (Two Variables)"
+        Me.mnuModelOtherTwoVariables.Visible = False
         '
         'mnuModelOtherTwoVariablesTwoSamples
         '
@@ -1303,6 +1320,7 @@ Partial Class frmMain
         Me.mnuModelOtherThreeVariables.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOtherThreeVariables.Tag = "Other_(Three_Variable)"
         Me.mnuModelOtherThreeVariables.Text = "Other (Three Variable)"
+        Me.mnuModelOtherThreeVariables.Visible = False
         '
         'mnuModelOtherThreeVariablesSimpleWithGroups
         '
@@ -1334,6 +1352,7 @@ Partial Class frmMain
         Me.mnuModelOtherGeneral.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOtherGeneral.Tag = "Other_(General)"
         Me.mnuModelOtherGeneral.Text = "Other (General)"
+        Me.mnuModelOtherGeneral.Visible = False
         '
         'mnuModelOtherGeneralANOVAGeneral
         '
@@ -1542,7 +1561,7 @@ Partial Class frmMain
         '
         'mnuHelp
         '
-        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpFAQ, Me.mnuHelpGetingStarted, Me.ToolStripSeparator28, Me.mnuHelpWindows, Me.mnuHelpMenus, Me.mnuHelpAboutR, Me.mnuHelpLearningStatistics, Me.mnuHelpRPackages, Me.mnuHelpGlossary, Me.mnuHelpData, Me.mnuHelpLicence, Me.ToolStripSeparator29, Me.mnuHelpPackagesDocumentation})
+        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpFAQ, Me.mnuHelpGetingStarted, Me.mnuHelpData, Me.ToolStripSeparator28, Me.mnuHelpWindows, Me.ToolStripSeparator81, Me.mnuHelpMenus, Me.mnuHelpAboutR, Me.mnuHelpLearningStatistics, Me.mnuHelpRPackages, Me.mnuHelpGlossary, Me.mnuHelpLicence, Me.ToolStripSeparator29, Me.mnuHelpPackagesDocumentation})
         Me.mnuHelp.Name = "mnuHelp"
         Me.mnuHelp.Size = New System.Drawing.Size(44, 22)
         Me.mnuHelp.Tag = "Help"
@@ -1551,20 +1570,26 @@ Partial Class frmMain
         'mnuHelpHelpIntroduction
         '
         Me.mnuHelpHelpIntroduction.Name = "mnuHelpHelpIntroduction"
-        Me.mnuHelpHelpIntroduction.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpHelpIntroduction.Text = "Introduction"
+        Me.mnuHelpHelpIntroduction.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpHelpIntroduction.Text = "Introduction..."
         '
         'mnuHelpFAQ
         '
         Me.mnuHelpFAQ.Name = "mnuHelpFAQ"
-        Me.mnuHelpFAQ.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpFAQ.Text = "FAQ"
+        Me.mnuHelpFAQ.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpFAQ.Text = "FAQ..."
         '
         'mnuHelpGetingStarted
         '
         Me.mnuHelpGetingStarted.Name = "mnuHelpGetingStarted"
-        Me.mnuHelpGetingStarted.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpGetingStarted.Text = "Getting Started"
+        Me.mnuHelpGetingStarted.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpGetingStarted.Text = "Getting Started..."
+        '
+        'mnuHelpData
+        '
+        Me.mnuHelpData.Name = "mnuHelpData"
+        Me.mnuHelpData.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpData.Text = "Data..."
         '
         'ToolStripSeparator28
         '
@@ -1574,53 +1599,135 @@ Partial Class frmMain
         'mnuHelpWindows
         '
         Me.mnuHelpWindows.Name = "mnuHelpWindows"
-        Me.mnuHelpWindows.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpWindows.Text = "Windows"
+        Me.mnuHelpWindows.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpWindows.Text = "Windows..."
+        '
+        'ToolStripSeparator81
+        '
+        Me.ToolStripSeparator81.Name = "ToolStripSeparator81"
+        Me.ToolStripSeparator81.Size = New System.Drawing.Size(206, 6)
         '
         'mnuHelpMenus
         '
+        Me.mnuHelpMenus.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenusAndDialogsToolStripMenuItem, Me.ToolStripSeparator82, Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.PrepareToolStripMenuItem, Me.DescribeToolStripMenuItem, Me.ModelToolStripMenuItem, Me.ToolStripSeparator83, Me.StructuredToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ProcurementToolStripMenuItem, Me.ExperimentsToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ViewToolStripMenuItem})
         Me.mnuHelpMenus.Name = "mnuHelpMenus"
         Me.mnuHelpMenus.Size = New System.Drawing.Size(209, 22)
         Me.mnuHelpMenus.Text = "Menus and Dialogs"
         '
+        'MenusAndDialogsToolStripMenuItem
+        '
+        Me.MenusAndDialogsToolStripMenuItem.Name = "MenusAndDialogsToolStripMenuItem"
+        Me.MenusAndDialogsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.MenusAndDialogsToolStripMenuItem.Text = "Menus and Dialogs"
+        '
+        'ToolStripSeparator82
+        '
+        Me.ToolStripSeparator82.Name = "ToolStripSeparator82"
+        Me.ToolStripSeparator82.Size = New System.Drawing.Size(177, 6)
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'EditToolStripMenuItem
+        '
+        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.EditToolStripMenuItem.Text = "Edit"
+        '
+        'PrepareToolStripMenuItem
+        '
+        Me.PrepareToolStripMenuItem.Name = "PrepareToolStripMenuItem"
+        Me.PrepareToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PrepareToolStripMenuItem.Text = "Prepare"
+        '
+        'DescribeToolStripMenuItem
+        '
+        Me.DescribeToolStripMenuItem.Name = "DescribeToolStripMenuItem"
+        Me.DescribeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.DescribeToolStripMenuItem.Text = "Describe"
+        '
+        'ModelToolStripMenuItem
+        '
+        Me.ModelToolStripMenuItem.Name = "ModelToolStripMenuItem"
+        Me.ModelToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ModelToolStripMenuItem.Text = "Model"
+        '
+        'ToolStripSeparator83
+        '
+        Me.ToolStripSeparator83.Name = "ToolStripSeparator83"
+        Me.ToolStripSeparator83.Size = New System.Drawing.Size(177, 6)
+        '
+        'StructuredToolStripMenuItem
+        '
+        Me.StructuredToolStripMenuItem.Name = "StructuredToolStripMenuItem"
+        Me.StructuredToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.StructuredToolStripMenuItem.Text = "Structured"
+        '
+        'ClimaticToolStripMenuItem
+        '
+        Me.ClimaticToolStripMenuItem.Name = "ClimaticToolStripMenuItem"
+        Me.ClimaticToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ClimaticToolStripMenuItem.Text = "Climatic"
+        '
+        'ProcurementToolStripMenuItem
+        '
+        Me.ProcurementToolStripMenuItem.Name = "ProcurementToolStripMenuItem"
+        Me.ProcurementToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ProcurementToolStripMenuItem.Text = "Procurement"
+        '
+        'ExperimentsToolStripMenuItem
+        '
+        Me.ExperimentsToolStripMenuItem.Name = "ExperimentsToolStripMenuItem"
+        Me.ExperimentsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExperimentsToolStripMenuItem.Text = "Experiments"
+        '
+        'ToolsToolStripMenuItem
+        '
+        Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ToolsToolStripMenuItem.Text = "Tools"
+        '
+        'ViewToolStripMenuItem
+        '
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ViewToolStripMenuItem.Text = "View"
+        '
         'mnuHelpAboutR
         '
         Me.mnuHelpAboutR.Name = "mnuHelpAboutR"
-        Me.mnuHelpAboutR.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpAboutR.Text = "About R"
+        Me.mnuHelpAboutR.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpAboutR.Text = "About R..."
         Me.mnuHelpAboutR.Visible = False
         '
         'mnuHelpLearningStatistics
         '
         Me.mnuHelpLearningStatistics.Name = "mnuHelpLearningStatistics"
-        Me.mnuHelpLearningStatistics.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpLearningStatistics.Text = "Learning Statistics"
+        Me.mnuHelpLearningStatistics.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpLearningStatistics.Text = "Learning Statistics..."
         Me.mnuHelpLearningStatistics.Visible = False
         '
         'mnuHelpRPackages
         '
         Me.mnuHelpRPackages.Name = "mnuHelpRPackages"
-        Me.mnuHelpRPackages.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpRPackages.Text = "R Packages"
+        Me.mnuHelpRPackages.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpRPackages.Text = "R Packages..."
         '
         'mnuHelpGlossary
         '
         Me.mnuHelpGlossary.Name = "mnuHelpGlossary"
-        Me.mnuHelpGlossary.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpGlossary.Text = "Glossary"
-        '
-        'mnuHelpData
-        '
-        Me.mnuHelpData.Name = "mnuHelpData"
-        Me.mnuHelpData.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpData.Text = "Data"
+        Me.mnuHelpGlossary.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpGlossary.Text = "Glossary..."
         '
         'mnuHelpLicence
         '
         Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(209, 22)
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(218, 22)
         Me.mnuHelpLicence.Tag = "Licence..."
-        Me.mnuHelpLicence.Text = "Licence"
+        Me.mnuHelpLicence.Text = "Licence..."
         '
         'ToolStripSeparator29
         '
@@ -1630,8 +1737,8 @@ Partial Class frmMain
         'mnuHelpPackagesDocumentation
         '
         Me.mnuHelpPackagesDocumentation.Name = "mnuHelpPackagesDocumentation"
-        Me.mnuHelpPackagesDocumentation.Size = New System.Drawing.Size(209, 22)
-        Me.mnuHelpPackagesDocumentation.Text = "Packages Documentation"
+        Me.mnuHelpPackagesDocumentation.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpPackagesDocumentation.Text = "Packages Documentation..."
         '
         'ToolStripSeparator16
         '
@@ -5819,6 +5926,23 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticFileExportToGoogleBucketsToolStrip As ToolStripMenuItem
 
     Friend WithEvents ToolStripSeparator79 As ToolStripSeparator
+
     Friend WithEvents mnuDescribeSummaries As ToolStripMenuItem
     Friend WithEvents mnuDescribePresentation As ToolStripMenuItem
+
+    Friend WithEvents MenusAndDialogsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EditToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PrepareToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DescribeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ModelToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StructuredToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ClimaticToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator81 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator82 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator83 As ToolStripSeparator
+    Friend WithEvents ProcurementToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExperimentsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
 End Class
