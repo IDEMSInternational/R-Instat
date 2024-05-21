@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgExportClimaticDefinitions
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +20,10 @@ Partial Class dlgExportClimaticDefinitions
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblStationID = New System.Windows.Forms.Label()
         Me.lblCountry = New System.Windows.Forms.Label()
-        Me.ucrInputStationID = New instat.ucrInputTextBox()
         Me.ucrChkSeasonStartProp = New instat.ucrCheck()
         Me.ucrChkExtremes = New instat.ucrCheck()
         Me.ucrChkCropSuccessProp = New instat.ucrCheck()
@@ -59,6 +58,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrInputTokenPath = New instat.ucrInputTextBox()
         Me.cmdDefine = New System.Windows.Forms.Button()
         Me.ucrInputCountry = New instat.ucrInputTextBox()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -79,18 +79,6 @@ Partial Class dlgExportClimaticDefinitions
         Me.lblCountry.Size = New System.Drawing.Size(46, 13)
         Me.lblCountry.TabIndex = 9
         Me.lblCountry.Text = "Country:"
-        '
-        'ucrInputStationID
-        '
-        Me.ucrInputStationID.AddQuotesIfUnrecognised = True
-        Me.ucrInputStationID.AutoSize = True
-        Me.ucrInputStationID.IsMultiline = False
-        Me.ucrInputStationID.IsReadOnly = False
-        Me.ucrInputStationID.Location = New System.Drawing.Point(334, 142)
-        Me.ucrInputStationID.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputStationID.Name = "ucrInputStationID"
-        Me.ucrInputStationID.Size = New System.Drawing.Size(118, 21)
-        Me.ucrInputStationID.TabIndex = 8
         '
         'ucrChkSeasonStartProp
         '
@@ -460,12 +448,26 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrInputCountry.Size = New System.Drawing.Size(118, 21)
         Me.ucrInputCountry.TabIndex = 10
         '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.AutoSize = True
+        Me.ucrReceiverStation.frmParent = Me
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(332, 139)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 31
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
         'dlgExportClimaticDefinitions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(455, 487)
+        Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.cmdDefine)
         Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.cmdChooseFile)
@@ -473,7 +475,6 @@ Partial Class dlgExportClimaticDefinitions
         Me.Controls.Add(Me.lblStationID)
         Me.Controls.Add(Me.lblCountry)
         Me.Controls.Add(Me.ucrInputCountry)
-        Me.Controls.Add(Me.ucrInputStationID)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.ucrReceiverMonth)
@@ -512,7 +513,6 @@ Partial Class dlgExportClimaticDefinitions
 
     Friend WithEvents lblStationID As Label
     Friend WithEvents lblCountry As Label
-    Friend WithEvents ucrInputStationID As ucrInputTextBox
     Friend WithEvents ucrChkSeasonStartProp As ucrCheck
     Friend WithEvents ucrChkExtremes As ucrCheck
     Friend WithEvents ucrChkCropSuccessProp As ucrCheck
@@ -547,4 +547,5 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents ucrInputTokenPath As ucrInputTextBox
     Friend WithEvents cmdDefine As Button
     Friend WithEvents ucrInputCountry As ucrInputTextBox
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
 End Class
