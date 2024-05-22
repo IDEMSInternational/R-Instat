@@ -20,11 +20,8 @@ Public Class clsTablesUtils
         If Not clsHtmlTagRFunction.ContainsParameter("style") Then
             clsHtmlTagRFunction.AddParameter(strParameterName:="style", clsRFunctionParameter:=GetNewHtmlStyleRFunction(), iPosition:=1)
         End If
-        'Dim rclone = clsHtmlTagRFunction.GetParameter("style").clsArgumentCodeStructure.Clone()
-        'sdgTableOptionsTextFormat.Setup(rclone)
         sdgTableOptionsTextFormat.Setup(clsHtmlTagRFunction.GetParameter("style").clsArgumentCodeStructure)
         sdgTableOptionsTextFormat.ShowDialog(owner)
-        'clsHtmlTagRFunction.GetParameter("style").clsArgumentCodeStructure = rclone.Clone()
     End Sub
 
     Public Shared Function FindRFunctionsWithRCommand(strRCommandName As String, clsOperator As ROperator) As List(Of RFunction)
