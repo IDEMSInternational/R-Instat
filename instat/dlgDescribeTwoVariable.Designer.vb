@@ -60,6 +60,8 @@ Partial Class dlgDescribeTwoVariable
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.lblMarginName = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
+        Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
+        Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
         Me.rdoOCol = New System.Windows.Forms.RadioButton()
         Me.rdoOCell = New System.Windows.Forms.RadioButton()
         Me.rdoORow = New System.Windows.Forms.RadioButton()
@@ -70,7 +72,6 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverThreeVariableThirdVariable = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstVars = New instat.ucrReceiverMultiple()
         Me.ucrSaveTable = New instat.ucrSave()
-        Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
         Me.ucrInputMarginName = New instat.ucrInputTextBox()
         Me.ucrReorderSummary = New instat.ucrReorder()
         Me.ucrBase = New instat.ucrButtons()
@@ -345,20 +346,44 @@ Partial Class dlgDescribeTwoVariable
         '
         'grpDisplay
         '
+        Me.grpDisplay.Controls.Add(Me.ucrReceiverColumns)
         Me.grpDisplay.Controls.Add(Me.ucrChkDisplayAsPercentage)
-        Me.grpDisplay.Location = New System.Drawing.Point(412, 308)
+        Me.grpDisplay.Location = New System.Drawing.Point(414, 277)
         Me.grpDisplay.Margin = New System.Windows.Forms.Padding(4)
         Me.grpDisplay.Name = "grpDisplay"
         Me.grpDisplay.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpDisplay.Size = New System.Drawing.Size(291, 172)
+        Me.grpDisplay.Size = New System.Drawing.Size(291, 219)
         Me.grpDisplay.TabIndex = 15
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Percentages"
         '
+        'ucrReceiverColumns
+        '
+        Me.ucrReceiverColumns.AutoSize = True
+        Me.ucrReceiverColumns.frmParent = Me
+        Me.ucrReceiverColumns.Location = New System.Drawing.Point(19, 92)
+        Me.ucrReceiverColumns.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumns.Name = "ucrReceiverColumns"
+        Me.ucrReceiverColumns.Selector = Nothing
+        Me.ucrReceiverColumns.Size = New System.Drawing.Size(180, 121)
+        Me.ucrReceiverColumns.strNcFilePath = ""
+        Me.ucrReceiverColumns.TabIndex = 55
+        Me.ucrReceiverColumns.ucrSelector = Nothing
+        '
+        'ucrChkDisplayAsPercentage
+        '
+        Me.ucrChkDisplayAsPercentage.AutoSize = True
+        Me.ucrChkDisplayAsPercentage.Checked = False
+        Me.ucrChkDisplayAsPercentage.Location = New System.Drawing.Point(14, 22)
+        Me.ucrChkDisplayAsPercentage.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
+        Me.ucrChkDisplayAsPercentage.Size = New System.Drawing.Size(171, 34)
+        Me.ucrChkDisplayAsPercentage.TabIndex = 54
+        '
         'rdoOCol
         '
         Me.rdoOCol.AutoSize = True
-        Me.rdoOCol.Location = New System.Drawing.Point(430, 365)
+        Me.rdoOCol.Location = New System.Drawing.Point(432, 336)
         Me.rdoOCol.Name = "rdoOCol"
         Me.rdoOCol.Size = New System.Drawing.Size(81, 24)
         Me.rdoOCol.TabIndex = 40
@@ -369,7 +394,7 @@ Partial Class dlgDescribeTwoVariable
         'rdoOCell
         '
         Me.rdoOCell.AutoSize = True
-        Me.rdoOCell.Location = New System.Drawing.Point(610, 364)
+        Me.rdoOCell.Location = New System.Drawing.Point(612, 335)
         Me.rdoOCell.Name = "rdoOCell"
         Me.rdoOCell.Size = New System.Drawing.Size(84, 24)
         Me.rdoOCell.TabIndex = 41
@@ -380,7 +405,7 @@ Partial Class dlgDescribeTwoVariable
         'rdoORow
         '
         Me.rdoORow.AutoSize = True
-        Me.rdoORow.Location = New System.Drawing.Point(515, 365)
+        Me.rdoORow.Location = New System.Drawing.Point(517, 336)
         Me.rdoORow.Name = "rdoORow"
         Me.rdoORow.Size = New System.Drawing.Size(90, 24)
         Me.rdoORow.TabIndex = 42
@@ -391,17 +416,17 @@ Partial Class dlgDescribeTwoVariable
         'ucrpnlPercent
         '
         Me.ucrpnlPercent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrpnlPercent.Location = New System.Drawing.Point(422, 352)
+        Me.ucrpnlPercent.Location = New System.Drawing.Point(424, 331)
         Me.ucrpnlPercent.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrpnlPercent.Name = "ucrpnlPercent"
-        Me.ucrpnlPercent.Size = New System.Drawing.Size(270, 46)
+        Me.ucrpnlPercent.Size = New System.Drawing.Size(270, 37)
         Me.ucrpnlPercent.TabIndex = 43
         '
         'ucrReceiverPercentages
         '
         Me.ucrReceiverPercentages.AutoSize = True
         Me.ucrReceiverPercentages.frmParent = Me
-        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(429, 401)
+        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(431, 369)
         Me.ucrReceiverPercentages.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPercentages.Name = "ucrReceiverPercentages"
         Me.ucrReceiverPercentages.Selector = Nothing
@@ -468,18 +493,8 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrSaveTable.Location = New System.Drawing.Point(22, 676)
         Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveTable.Name = "ucrSaveTable"
-        Me.ucrSaveTable.Size = New System.Drawing.Size(598, 36)
+        Me.ucrSaveTable.Size = New System.Drawing.Size(623, 36)
         Me.ucrSaveTable.TabIndex = 24
-        '
-        'ucrChkDisplayAsPercentage
-        '
-        Me.ucrChkDisplayAsPercentage.AutoSize = True
-        Me.ucrChkDisplayAsPercentage.Checked = False
-        Me.ucrChkDisplayAsPercentage.Location = New System.Drawing.Point(12, 16)
-        Me.ucrChkDisplayAsPercentage.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
-        Me.ucrChkDisplayAsPercentage.Size = New System.Drawing.Size(171, 34)
-        Me.ucrChkDisplayAsPercentage.TabIndex = 54
         '
         'ucrInputMarginName
         '
@@ -636,14 +651,13 @@ Partial Class dlgDescribeTwoVariable
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(723, 748)
+        Me.Controls.Add(Me.ucrReceiverPercentages)
         Me.Controls.Add(Me.rdoORow)
         Me.Controls.Add(Me.rdoOCell)
         Me.Controls.Add(Me.rdoOCol)
         Me.Controls.Add(Me.ucrpnlPercent)
-        Me.Controls.Add(Me.ucrReceiverPercentages)
         Me.Controls.Add(Me.ucrReceiverThreeVariableSecondFactor)
         Me.Controls.Add(Me.ucrReceiverSecondTwoVariableFactor)
-        Me.Controls.Add(Me.ucrReceiverThreeVariableThirdVariable)
         Me.Controls.Add(Me.ucrReceiverFirstVars)
         Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.grpDisplay)
@@ -675,6 +689,7 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.ucrChkLevSig)
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.cmdMissingOptions)
+        Me.Controls.Add(Me.ucrReceiverThreeVariableThirdVariable)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
@@ -738,4 +753,5 @@ Partial Class dlgDescribeTwoVariable
     Friend WithEvents rdoOCell As RadioButton
     Friend WithEvents rdoOCol As RadioButton
     Friend WithEvents ucrpnlPercent As UcrPanel
+    Friend WithEvents ucrReceiverColumns As ucrReceiverMultiple
 End Class
