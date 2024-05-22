@@ -113,19 +113,19 @@ Public Class sdgTableOptionsTextFormat
             bFirstload = False
         End If
 
-        ucrCboFontFamily.SetRCode(clsNewStyleRFunction, bReset:=True)
-        ucrCboFontStyle.SetRCode(clsNewStyleRFunction, bReset:=True)
-        ucrCboFontWeight.SetRCode(clsNewStyleRFunction, bReset:=True)
-        ucrTxtFontSize.SetRCode(clsNewStyleRFunction, bReset:=True)
+        ucrCboFontFamily.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrCboFontStyle.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrCboFontWeight.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrTxtFontSize.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
 
-        ucrCboColorText.SetRCode(clsNewStyleRFunction, bReset:=True)
-        ucrCboColorBackground.SetRCode(clsNewStyleRFunction, bReset:=True)
+        ucrCboColorText.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrCboColorBackground.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
 
-        ucrCboUnderlineType.SetRCode(clsNewStyleRFunction, bReset:=True)
-        ucrCboUnderlineStyle.SetRCode(clsNewStyleRFunction, bReset:=True)
-        ucrCboUnderLineColor.SetRCode(clsNewStyleRFunction, bReset:=True)
+        ucrCboUnderlineType.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrCboUnderlineStyle.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrCboUnderLineColor.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
 
-        ucrCboAlignHorizontal.SetRCode(clsNewStyleRFunction, bReset:=True)
+        ucrCboAlignHorizontal.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
     End Sub
 
 End Class

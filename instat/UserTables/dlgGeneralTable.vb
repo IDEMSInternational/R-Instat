@@ -41,10 +41,26 @@ Public Class dlgGeneralTable
 
     Private Sub btnHeaderTitleFormat_Click(sender As Object, e As EventArgs) Handles btnHeaderTitleFormat.Click
         clsTablesUtils.ShowTextFormatSubDialog(Me, clsGtTitleRFunction)
+
+        'If Not clsGtTitleRFunction.ContainsParameter("style") Then
+        '    clsGtTitleRFunction.AddParameter(strParameterName:="style", clsRFunctionParameter:=clsTablesUtils.GetNewHtmlStyleRFunction(), iPosition:=1)
+        'End If
+        'Dim rclone = clsGtTitleRFunction.GetParameter("style").clsArgumentCodeStructure.Clone()
+        'sdgTableOptionsTextFormat.Setup(rclone)
+        'sdgTableOptionsTextFormat.ShowDialog(Me)
+        'clsGtTitleRFunction.GetParameter("style").clsArgumentCodeStructure = rclone.Clone
     End Sub
 
     Private Sub btnHeaderSubtitleFormat_Click(sender As Object, e As EventArgs) Handles btnHeaderSubTitleFormat.Click
         clsTablesUtils.ShowTextFormatSubDialog(Me, clsGtSubtitleRFunction)
+
+        'If Not clsGtSubtitleRFunction.ContainsParameter("style") Then
+        '    clsGtSubtitleRFunction.AddParameter(strParameterName:="style", clsRFunctionParameter:=clsTablesUtils.GetNewHtmlStyleRFunction(), iPosition:=1)
+        'End If
+        'Dim rclone = clsGtSubtitleRFunction.GetParameter("style").clsArgumentCodeStructure.Clone()
+        'sdgTableOptionsTextFormat.Setup(rclone)
+        'sdgTableOptionsTextFormat.ShowDialog(Me)
+        'clsGtSubtitleRFunction.GetParameter("style").clsArgumentCodeStructure = rclone.Clone
     End Sub
 
     Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
