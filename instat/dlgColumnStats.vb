@@ -80,7 +80,7 @@ Public Class dlgColumnStats
         ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 5))
         ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
         ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDropUnusedLevels.SetRDefault("FALSE")
+        ucrChkDropUnusedLevels.SetRDefault("TRUE")
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -229,16 +229,10 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub ucrReceiverSelectedVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlValueChanged
-        If Not ucrReceiverSelectedVariables.IsEmpty Then
-            If ucrReceiverSelectedVariables.GetCurrentItemTypes().All(Function(x) x = "factor") Then
-                ucrChkDropUnusedLevels.Enabled = True
-                ucrChkDropUnusedLevels.Checked = False
-            Else
-                ucrChkDropUnusedLevels.Checked = True
-                ucrChkDropUnusedLevels.Enabled = False
-            End If
-        End If
-
+        Dim bSameType As Boolean = Not ucrReceiverSelectedVariables.IsEmpty _
+                                AndAlso ucrReceiverSelectedVariables.GetCurrentItemTypes().All(Function(x) x = "factor")
+        ucrChkDropUnusedLevels.Enabled = bSameType
+        ucrChkDropUnusedLevels.Checked = Not bSameType
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
