@@ -645,22 +645,22 @@ Partial Class ucrCalculator
         Me.cmdPascal = New System.Windows.Forms.Button()
         Me.cmdDssq = New System.Windows.Forms.Button()
         Me.cmddssqSession = New System.Windows.Forms.Button()
-        Me.cmdCoeffs2 = New System.Windows.Forms.Button()
-        Me.cmdCoef = New System.Windows.Forms.Button()
-        Me.cmdCombn = New System.Windows.Forms.Button()
-        Me.cmdProd = New System.Windows.Forms.Button()
-        Me.cmdCoeffs = New System.Windows.Forms.Button()
-        Me.cmdRoots = New System.Windows.Forms.Button()
-        Me.cmdOrigin = New System.Windows.Forms.Button()
-        Me.cmdPolynomial = New System.Windows.Forms.Button()
         Me.cmdCssqSession = New System.Windows.Forms.Button()
         Me.cmdAveBoth = New System.Windows.Forms.Button()
+        Me.cmdCoef = New System.Windows.Forms.Button()
         Me.cmdAveFac = New System.Windows.Forms.Button()
+        Me.cmdProd = New System.Windows.Forms.Button()
         Me.cmdAve = New System.Windows.Forms.Button()
+        Me.cmdCombn = New System.Windows.Forms.Button()
         Me.cmdCssq = New System.Windows.Forms.Button()
+        Me.cmdCoeffs2 = New System.Windows.Forms.Button()
         Me.cmdFunctionsSsqSession = New System.Windows.Forms.Button()
         Me.cmdFunctionsSsq = New System.Windows.Forms.Button()
+        Me.cmdCoeffs = New System.Windows.Forms.Button()
         Me.cmdAveFun = New System.Windows.Forms.Button()
+        Me.cmdRoots = New System.Windows.Forms.Button()
+        Me.cmdPolynomial = New System.Windows.Forms.Button()
+        Me.cmdOrigin = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout
         Me.grpDates.SuspendLayout
         Me.ContextMenuStripDate.SuspendLayout
@@ -7926,102 +7926,6 @@ Partial Class ucrCalculator
         Me.cmddssqSession.Text = "digitssq*"
         Me.cmddssqSession.UseVisualStyleBackColor = True
         '
-        'cmdCoeffs2
-        '
-        Me.cmdCoeffs2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCoeffs2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoeffs2.Location = New System.Drawing.Point(189, 188)
-        Me.cmdCoeffs2.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdCoeffs2.Name = "cmdCoeffs2"
-        Me.cmdCoeffs2.Size = New System.Drawing.Size(62, 30)
-        Me.cmdCoeffs2.TabIndex = 175
-        Me.cmdCoeffs2.Text = "coeffs2"
-        Me.cmdCoeffs2.UseVisualStyleBackColor = True
-        '
-        'cmdCoef
-        '
-        Me.cmdCoef.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCoef.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoef.Location = New System.Drawing.Point(128, 188)
-        Me.cmdCoef.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdCoef.Name = "cmdCoef"
-        Me.cmdCoef.Size = New System.Drawing.Size(62, 30)
-        Me.cmdCoef.TabIndex = 174
-        Me.cmdCoef.Text = "coef"
-        Me.cmdCoef.UseVisualStyleBackColor = True
-        '
-        'cmdCombn
-        '
-        Me.cmdCombn.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCombn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCombn.Location = New System.Drawing.Point(67, 188)
-        Me.cmdCombn.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdCombn.Name = "cmdCombn"
-        Me.cmdCombn.Size = New System.Drawing.Size(62, 30)
-        Me.cmdCombn.TabIndex = 173
-        Me.cmdCombn.Text = "combn"
-        Me.cmdCombn.UseVisualStyleBackColor = True
-        '
-        'cmdProd
-        '
-        Me.cmdProd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdProd.Location = New System.Drawing.Point(2, 188)
-        Me.cmdProd.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdProd.Name = "cmdProd"
-        Me.cmdProd.Size = New System.Drawing.Size(66, 30)
-        Me.cmdProd.TabIndex = 172
-        Me.cmdProd.Text = "prod"
-        Me.cmdProd.UseVisualStyleBackColor = True
-        '
-        'cmdCoeffs
-        '
-        Me.cmdCoeffs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdCoeffs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoeffs.Location = New System.Drawing.Point(189, 159)
-        Me.cmdCoeffs.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdCoeffs.Name = "cmdCoeffs"
-        Me.cmdCoeffs.Size = New System.Drawing.Size(62, 30)
-        Me.cmdCoeffs.TabIndex = 170
-        Me.cmdCoeffs.Text = "coeffs"
-        Me.cmdCoeffs.UseVisualStyleBackColor = True
-        '
-        'cmdRoots
-        '
-        Me.cmdRoots.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdRoots.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRoots.Location = New System.Drawing.Point(128, 159)
-        Me.cmdRoots.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdRoots.Name = "cmdRoots"
-        Me.cmdRoots.Size = New System.Drawing.Size(62, 30)
-        Me.cmdRoots.TabIndex = 169
-        Me.cmdRoots.Text = "roots"
-        Me.cmdRoots.UseVisualStyleBackColor = True
-        '
-        'cmdOrigin
-        '
-        Me.cmdOrigin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdOrigin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOrigin.Location = New System.Drawing.Point(67, 159)
-        Me.cmdOrigin.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdOrigin.Name = "cmdOrigin"
-        Me.cmdOrigin.Size = New System.Drawing.Size(62, 30)
-        Me.cmdOrigin.TabIndex = 168
-        Me.cmdOrigin.Text = "origin"
-        Me.cmdOrigin.UseVisualStyleBackColor = True
-        '
-        'cmdPolynomial
-        '
-        Me.cmdPolynomial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdPolynomial.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPolynomial.Location = New System.Drawing.Point(2, 159)
-        Me.cmdPolynomial.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdPolynomial.Name = "cmdPolynomial"
-        Me.cmdPolynomial.Size = New System.Drawing.Size(66, 30)
-        Me.cmdPolynomial.TabIndex = 167
-        Me.cmdPolynomial.Text = "polynomial"
-        Me.cmdPolynomial.UseVisualStyleBackColor = True
-        '
         'cmdCssqSession
         '
         Me.cmdCssqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -8046,6 +7950,18 @@ Partial Class ucrCalculator
         Me.cmdAveBoth.Text = "ave_both"
         Me.cmdAveBoth.UseVisualStyleBackColor = True
         '
+        'cmdCoef
+        '
+        Me.cmdCoef.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCoef.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCoef.Location = New System.Drawing.Point(128, 188)
+        Me.cmdCoef.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCoef.Name = "cmdCoef"
+        Me.cmdCoef.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCoef.TabIndex = 174
+        Me.cmdCoef.Text = "coef"
+        Me.cmdCoef.UseVisualStyleBackColor = True
+        '
         'cmdAveFac
         '
         Me.cmdAveFac.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -8057,6 +7973,18 @@ Partial Class ucrCalculator
         Me.cmdAveFac.TabIndex = 155
         Me.cmdAveFac.Text = "ave_fac"
         Me.cmdAveFac.UseVisualStyleBackColor = True
+        '
+        'cmdProd
+        '
+        Me.cmdProd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdProd.Location = New System.Drawing.Point(2, 188)
+        Me.cmdProd.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdProd.Name = "cmdProd"
+        Me.cmdProd.Size = New System.Drawing.Size(66, 30)
+        Me.cmdProd.TabIndex = 172
+        Me.cmdProd.Text = "prod"
+        Me.cmdProd.UseVisualStyleBackColor = True
         '
         'cmdAve
         '
@@ -8070,6 +7998,18 @@ Partial Class ucrCalculator
         Me.cmdAve.Text = "ave"
         Me.cmdAve.UseVisualStyleBackColor = True
         '
+        'cmdCombn
+        '
+        Me.cmdCombn.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCombn.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCombn.Location = New System.Drawing.Point(67, 188)
+        Me.cmdCombn.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCombn.Name = "cmdCombn"
+        Me.cmdCombn.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCombn.TabIndex = 173
+        Me.cmdCombn.Text = "combn"
+        Me.cmdCombn.UseVisualStyleBackColor = True
+        '
         'cmdCssq
         '
         Me.cmdCssq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -8081,6 +8021,18 @@ Partial Class ucrCalculator
         Me.cmdCssq.TabIndex = 160
         Me.cmdCssq.Text = "cssq"
         Me.cmdCssq.UseVisualStyleBackColor = True
+        '
+        'cmdCoeffs2
+        '
+        Me.cmdCoeffs2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCoeffs2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCoeffs2.Location = New System.Drawing.Point(189, 188)
+        Me.cmdCoeffs2.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCoeffs2.Name = "cmdCoeffs2"
+        Me.cmdCoeffs2.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCoeffs2.TabIndex = 175
+        Me.cmdCoeffs2.Text = "coeffs2"
+        Me.cmdCoeffs2.UseVisualStyleBackColor = True
         '
         'cmdFunctionsSsqSession
         '
@@ -8106,6 +8058,18 @@ Partial Class ucrCalculator
         Me.cmdFunctionsSsq.Text = "ssq"
         Me.cmdFunctionsSsq.UseVisualStyleBackColor = True
         '
+        'cmdCoeffs
+        '
+        Me.cmdCoeffs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdCoeffs.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCoeffs.Location = New System.Drawing.Point(189, 159)
+        Me.cmdCoeffs.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCoeffs.Name = "cmdCoeffs"
+        Me.cmdCoeffs.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCoeffs.TabIndex = 170
+        Me.cmdCoeffs.Text = "coeffs"
+        Me.cmdCoeffs.UseVisualStyleBackColor = True
+        '
         'cmdAveFun
         '
         Me.cmdAveFun.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -8117,6 +8081,42 @@ Partial Class ucrCalculator
         Me.cmdAveFun.TabIndex = 153
         Me.cmdAveFun.Text = "ave_fun"
         Me.cmdAveFun.UseVisualStyleBackColor = True
+        '
+        'cmdRoots
+        '
+        Me.cmdRoots.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdRoots.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRoots.Location = New System.Drawing.Point(128, 159)
+        Me.cmdRoots.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdRoots.Name = "cmdRoots"
+        Me.cmdRoots.Size = New System.Drawing.Size(62, 30)
+        Me.cmdRoots.TabIndex = 169
+        Me.cmdRoots.Text = "roots"
+        Me.cmdRoots.UseVisualStyleBackColor = True
+        '
+        'cmdPolynomial
+        '
+        Me.cmdPolynomial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdPolynomial.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPolynomial.Location = New System.Drawing.Point(2, 159)
+        Me.cmdPolynomial.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPolynomial.Name = "cmdPolynomial"
+        Me.cmdPolynomial.Size = New System.Drawing.Size(66, 30)
+        Me.cmdPolynomial.TabIndex = 167
+        Me.cmdPolynomial.Text = "polynomial"
+        Me.cmdPolynomial.UseVisualStyleBackColor = True
+        '
+        'cmdOrigin
+        '
+        Me.cmdOrigin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdOrigin.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOrigin.Location = New System.Drawing.Point(67, 159)
+        Me.cmdOrigin.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdOrigin.Name = "cmdOrigin"
+        Me.cmdOrigin.Size = New System.Drawing.Size(62, 30)
+        Me.cmdOrigin.TabIndex = 168
+        Me.cmdOrigin.Text = "origin"
+        Me.cmdOrigin.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
