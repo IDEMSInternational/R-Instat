@@ -46,7 +46,7 @@ Public Class dlgColumnStats
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 64
 
-        ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
+        'ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
         cmdMissingOptions.Enabled = False
 
         ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
@@ -56,6 +56,7 @@ Public Class dlgColumnStats
         ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverSelectedVariables.SetParameterIsString()
         ucrReceiverSelectedVariables.Selector = ucrSelectorForColumnStatistics
+        'ucrReceiverSelectedVariables.SetSingleTypeStatus(True)
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
         ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
@@ -121,6 +122,8 @@ Public Class dlgColumnStats
         clsDefaultFunction.AddParameter("silent", "TRUE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
+
+        ucrChkDropUnusedLevels.Enabled = False
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -223,6 +226,19 @@ Public Class dlgColumnStats
         sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgMissingOptions.ShowDialog()
+    End Sub
+
+    Private Sub ucrReceiverSelectedVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlValueChanged
+        If Not ucrReceiverSelectedVariables.IsEmpty Then
+            If ucrReceiverSelectedVariables.GetCurrentItemTypes().All(Function(x) x = "factor") Then
+                ucrChkDropUnusedLevels.Enabled = True
+                ucrChkDropUnusedLevels.Checked = False
+            Else
+                ucrChkDropUnusedLevels.Checked = True
+                ucrChkDropUnusedLevels.Enabled = False
+            End If
+        End If
+
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
