@@ -3074,6 +3074,12 @@
     <Compile Include="UserTables\ucrRowGroup.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\ucrRows.Designer.vb">
+      <DependentUpon>ucrRows.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\ucrRows.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\ucrSourceNotes.Designer.vb">
       <DependentUpon>ucrSourceNotes.vb</DependentUpon>
     </Compile>

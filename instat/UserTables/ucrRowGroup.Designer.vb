@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrRowGroup
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,24 +20,24 @@ Partial Class ucrRowGroup
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.dataGridGroups = New System.Windows.Forms.DataGridView()
-        Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
         Me.btnClearGroups = New System.Windows.Forms.Button()
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.btnAddCondition = New System.Windows.Forms.Button()
-        Me.ucrSingleReceiverCol = New instat.ucrReceiverSingle()
         Me.lblGroups = New System.Windows.Forms.Label()
         Me.lblGroupCondition = New System.Windows.Forms.Label()
         Me.rdoGroup = New System.Windows.Forms.RadioButton()
         Me.rdoSummary = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlRow = New instat.UcrPanel()
         Me.rdoStyle = New System.Windows.Forms.RadioButton()
         Me.cboConditionOperator = New System.Windows.Forms.ComboBox()
         Me.cboConditionValue = New System.Windows.Forms.ComboBox()
         Me.txtGroupLabel = New System.Windows.Forms.TextBox()
         Me.lblCondition = New System.Windows.Forms.Label()
+        Me.ucrPnlRow = New instat.UcrPanel()
+        Me.ucrSingleReceiverCol = New instat.ucrReceiverSingle()
+        Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
         Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colFormat = New System.Windows.Forms.DataGridViewButtonColumn()
@@ -52,25 +52,13 @@ Partial Class ucrRowGroup
         Me.dataGridGroups.Location = New System.Drawing.Point(266, 175)
         Me.dataGridGroups.Name = "dataGridGroups"
         Me.dataGridGroups.RowHeadersWidth = 62
-        Me.dataGridGroups.Size = New System.Drawing.Size(361, 73)
+        Me.dataGridGroups.Size = New System.Drawing.Size(385, 73)
         Me.dataGridGroups.TabIndex = 11
-        '
-        'ucrSelectorCols
-        '
-        Me.ucrSelectorCols.AutoSize = True
-        Me.ucrSelectorCols.bDropUnusedFilterLevels = False
-        Me.ucrSelectorCols.bShowHiddenColumns = False
-        Me.ucrSelectorCols.bUseCurrentFilter = True
-        Me.ucrSelectorCols.Location = New System.Drawing.Point(10, 49)
-        Me.ucrSelectorCols.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorCols.Name = "ucrSelectorCols"
-        Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorCols.TabIndex = 23
         '
         'btnClearGroups
         '
         Me.btnClearGroups.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearGroups.Location = New System.Drawing.Point(545, 150)
+        Me.btnClearGroups.Location = New System.Drawing.Point(569, 150)
         Me.btnClearGroups.Name = "btnClearGroups"
         Me.btnClearGroups.Size = New System.Drawing.Size(79, 23)
         Me.btnClearGroups.TabIndex = 30
@@ -100,19 +88,6 @@ Partial Class ucrRowGroup
         Me.btnAddCondition.Text = "Add Group"
         Me.btnAddCondition.UseVisualStyleBackColor = True
         '
-        'ucrSingleReceiverCol
-        '
-        Me.ucrSingleReceiverCol.AutoSize = True
-        Me.ucrSingleReceiverCol.frmParent = Nothing
-        Me.ucrSingleReceiverCol.Location = New System.Drawing.Point(260, 68)
-        Me.ucrSingleReceiverCol.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSingleReceiverCol.Name = "ucrSingleReceiverCol"
-        Me.ucrSingleReceiverCol.Selector = Nothing
-        Me.ucrSingleReceiverCol.Size = New System.Drawing.Size(120, 21)
-        Me.ucrSingleReceiverCol.strNcFilePath = ""
-        Me.ucrSingleReceiverCol.TabIndex = 24
-        Me.ucrSingleReceiverCol.ucrSelector = Nothing
-        '
         'lblGroups
         '
         Me.lblGroups.AutoSize = True
@@ -127,11 +102,11 @@ Partial Class ucrRowGroup
         '
         Me.lblGroupCondition.AutoSize = True
         Me.lblGroupCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGroupCondition.Location = New System.Drawing.Point(371, 98)
+        Me.lblGroupCondition.Location = New System.Drawing.Point(370, 98)
         Me.lblGroupCondition.Name = "lblGroupCondition"
-        Me.lblGroupCondition.Size = New System.Drawing.Size(54, 13)
+        Me.lblGroupCondition.Size = New System.Drawing.Size(86, 13)
         Me.lblGroupCondition.TabIndex = 33
-        Me.lblGroupCondition.Text = "Condition:"
+        Me.lblGroupCondition.Text = "Group Condition:"
         '
         'rdoGroup
         '
@@ -173,14 +148,6 @@ Partial Class ucrRowGroup
         Me.rdoSummary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoSummary.UseVisualStyleBackColor = True
         '
-        'ucrPnlRow
-        '
-        Me.ucrPnlRow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlRow.Location = New System.Drawing.Point(174, 3)
-        Me.ucrPnlRow.Name = "ucrPnlRow"
-        Me.ucrPnlRow.Size = New System.Drawing.Size(309, 29)
-        Me.ucrPnlRow.TabIndex = 275
-        '
         'rdoStyle
         '
         Me.rdoStyle.Appearance = System.Windows.Forms.Appearance.Button
@@ -205,7 +172,7 @@ Partial Class ucrRowGroup
         '
         Me.cboConditionOperator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboConditionOperator.FormattingEnabled = True
-        Me.cboConditionOperator.Items.AddRange(New Object() {"==", "<", "<=", ">", ">=", "!=", "expression"})
+        Me.cboConditionOperator.Items.AddRange(New Object() {"==", "<", "<=", ">", ">=", "!=", "Expression"})
         Me.cboConditionOperator.Location = New System.Drawing.Point(367, 115)
         Me.cboConditionOperator.Name = "cboConditionOperator"
         Me.cboConditionOperator.Size = New System.Drawing.Size(78, 21)
@@ -236,6 +203,39 @@ Partial Class ucrRowGroup
         Me.lblCondition.TabIndex = 282
         Me.lblCondition.Text = "Group Label:"
         '
+        'ucrPnlRow
+        '
+        Me.ucrPnlRow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlRow.Location = New System.Drawing.Point(174, 3)
+        Me.ucrPnlRow.Name = "ucrPnlRow"
+        Me.ucrPnlRow.Size = New System.Drawing.Size(309, 29)
+        Me.ucrPnlRow.TabIndex = 275
+        '
+        'ucrSingleReceiverCol
+        '
+        Me.ucrSingleReceiverCol.AutoSize = True
+        Me.ucrSingleReceiverCol.frmParent = Nothing
+        Me.ucrSingleReceiverCol.Location = New System.Drawing.Point(260, 68)
+        Me.ucrSingleReceiverCol.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSingleReceiverCol.Name = "ucrSingleReceiverCol"
+        Me.ucrSingleReceiverCol.Selector = Nothing
+        Me.ucrSingleReceiverCol.Size = New System.Drawing.Size(120, 21)
+        Me.ucrSingleReceiverCol.strNcFilePath = ""
+        Me.ucrSingleReceiverCol.TabIndex = 24
+        Me.ucrSingleReceiverCol.ucrSelector = Nothing
+        '
+        'ucrSelectorCols
+        '
+        Me.ucrSelectorCols.AutoSize = True
+        Me.ucrSelectorCols.bDropUnusedFilterLevels = False
+        Me.ucrSelectorCols.bShowHiddenColumns = False
+        Me.ucrSelectorCols.bUseCurrentFilter = True
+        Me.ucrSelectorCols.Location = New System.Drawing.Point(10, 49)
+        Me.ucrSelectorCols.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorCols.Name = "ucrSelectorCols"
+        Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorCols.TabIndex = 23
+        '
         'colLabel
         '
         Me.colLabel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
@@ -257,6 +257,7 @@ Partial Class ucrRowGroup
         Me.colFormat.Name = "colFormat"
         Me.colFormat.ReadOnly = True
         Me.colFormat.Text = "Format"
+        Me.colFormat.UseColumnTextForButtonValue = True
         Me.colFormat.Width = 99
         '
         'ucrRowGroup

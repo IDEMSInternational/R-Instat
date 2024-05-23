@@ -33,9 +33,9 @@
 
             For Each clsRowGroupRParam As RParameter In clsTabRowGroupRFunction.clsParameters
                 If clsRowGroupRParam.strArgumentName = "label" Then
-                    row.Cells(0).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.clsArgumentCodeStructure.clsParameters(0).strArgumentValue, False)
+                    row.Cells(0).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.strArgumentValue, False)
                 ElseIf clsRowGroupRParam.strArgumentName = "rows" Then
-                    row.Cells(1).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.clsArgumentCodeStructure.clsParameters(0).strArgumentValue, False)
+                    row.Cells(1).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.strArgumentValue, False)
                 End If
             Next
 
@@ -50,7 +50,8 @@
     Private Sub btnAddCondition_Click(sender As Object, e As EventArgs) Handles btnAddCondition.Click
 
         Dim strGroupLabel As String = txtGroupLabel.Text
-        Dim strCondition As String = ucrSingleReceiverCol.GetVariableNames(bWithQuotes:=False) & " " & cboConditionOperator.Text & " " & cboConditionValue.Text
+        Dim strConditionValue As String = If(cboConditionOperator.Text <> "Expression" AndAlso Not IsNumeric(cboConditionValue.Text), clsTablesUtils.GetStringValue(cboConditionValue.Text, True), cboConditionValue.Text)
+        Dim strCondition As String = ucrSingleReceiverCol.GetVariableNames(bWithQuotes:=False) & " " & cboConditionOperator.Text & " " & strConditionValue
 
         Dim clsTabRowGroupRFunction As New RFunction
         clsTabRowGroupRFunction.SetPackageName("gt")
@@ -59,7 +60,8 @@
         clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=strCondition, iNewPosition:=1))
         clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="id", strParamValue:=clsTablesUtils.GetStringValue(strGroupLabel.Replace(" ", String.Empty), True), iNewPosition:=2))
 
-        Dim clsRParam As New RParameter(strParameterName:="tab_row_group_param", strParamValue:=clsTabRowGroupRFunction, bNewIncludeArgumentName:=False)
+        ' Create parameter with unique name
+        Dim clsRParam As New RParameter(strParameterName:="tab_row_group_param" & (dataGridGroups.Rows.Count + 1), strParamValue:=clsTabRowGroupRFunction, bNewIncludeArgumentName:=False)
 
         Dim row As New DataGridViewRow
         row.CreateCells(dataGridGroups)
@@ -82,7 +84,6 @@
     Private Sub btnClearGroups_Click(sender As Object, e As EventArgs) Handles btnClearGroups.Click
         For index As Integer = 0 To dataGridGroups.Rows.Count - 1
             clsOperator.RemoveParameter(dataGridGroups.Rows(index).Tag)
-
         Next
         dataGridGroups.Rows.Clear()
     End Sub
