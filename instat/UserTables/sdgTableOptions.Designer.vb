@@ -28,6 +28,7 @@ Partial Class sdgTableOptions
         Me.tbpRows = New System.Windows.Forms.TabPage()
         Me.UcrRowGroup1 = New instat.ucrRowGroup()
         Me.tbpColumns = New System.Windows.Forms.TabPage()
+        Me.UcrColumns1 = New instat.ucrColumns()
         Me.tbpCells = New System.Windows.Forms.TabPage()
         Me.dataGridCellFooterNotes = New System.Windows.Forms.DataGridView()
         Me.colFooterNoteText = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,7 +45,6 @@ Partial Class sdgTableOptions
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.ucrPnlThemesPanel = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.UcrColumns1 = New instat.ucrColumns()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
         Me.tbpRows.SuspendLayout()
@@ -66,7 +66,7 @@ Partial Class sdgTableOptions
         Me.tbpFormatOptions.Location = New System.Drawing.Point(3, 5)
         Me.tbpFormatOptions.Name = "tbpFormatOptions"
         Me.tbpFormatOptions.SelectedIndex = 0
-        Me.tbpFormatOptions.Size = New System.Drawing.Size(656, 294)
+        Me.tbpFormatOptions.Size = New System.Drawing.Size(682, 321)
         Me.tbpFormatOptions.TabIndex = 5
         '
         'tbpHeader
@@ -92,7 +92,7 @@ Partial Class sdgTableOptions
         Me.tbpRows.Controls.Add(Me.UcrRowGroup1)
         Me.tbpRows.Location = New System.Drawing.Point(4, 22)
         Me.tbpRows.Name = "tbpRows"
-        Me.tbpRows.Size = New System.Drawing.Size(648, 268)
+        Me.tbpRows.Size = New System.Drawing.Size(674, 295)
         Me.tbpRows.TabIndex = 7
         Me.tbpRows.Text = "Rows"
         Me.tbpRows.UseVisualStyleBackColor = True
@@ -102,7 +102,7 @@ Partial Class sdgTableOptions
         Me.UcrRowGroup1.Location = New System.Drawing.Point(8, 4)
         Me.UcrRowGroup1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrRowGroup1.Name = "UcrRowGroup1"
-        Me.UcrRowGroup1.Size = New System.Drawing.Size(636, 259)
+        Me.UcrRowGroup1.Size = New System.Drawing.Size(659, 286)
         Me.UcrRowGroup1.TabIndex = 0
         '
         'tbpColumns
@@ -114,6 +114,13 @@ Partial Class sdgTableOptions
         Me.tbpColumns.TabIndex = 8
         Me.tbpColumns.Text = "Columns"
         Me.tbpColumns.UseVisualStyleBackColor = True
+        '
+        'UcrColumns1
+        '
+        Me.UcrColumns1.Location = New System.Drawing.Point(5, 6)
+        Me.UcrColumns1.Name = "UcrColumns1"
+        Me.UcrColumns1.Size = New System.Drawing.Size(627, 239)
+        Me.UcrColumns1.TabIndex = 0
         '
         'tbpCells
         '
@@ -266,24 +273,17 @@ Partial Class sdgTableOptions
         'ucrBaseSubdialog
         '
         Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(195, 304)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(195, 330)
         Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 4
         '
-        'UcrColumns1
-        '
-        Me.UcrColumns1.Location = New System.Drawing.Point(5, 6)
-        Me.UcrColumns1.Name = "UcrColumns1"
-        Me.UcrColumns1.Size = New System.Drawing.Size(627, 239)
-        Me.UcrColumns1.TabIndex = 0
-        '
         'sdgTableOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(657, 335)
+        Me.ClientSize = New System.Drawing.Size(697, 367)
         Me.Controls.Add(Me.tbpFormatOptions)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow

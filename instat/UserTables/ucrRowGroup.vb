@@ -4,38 +4,90 @@
 
     Private bFirstload As Boolean = True
 
-    Public Sub Setup(clsOperator As ROperator)
+    Private Sub InitialiseDialog()
+        ucrSingleReceiverCol.Selector = ucrSelectorCols
+    End Sub
+
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
+        If bFirstload Then
+            InitialiseDialog()
+            bFirstload = False
+        End If
+
         Me.clsOperator = clsOperator
+
+        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+        ucrSingleReceiverCol.SetMeAsReceiver()
         dataGridGroups.Rows.Clear()
 
-        Dim lstsourceNotesRFunctions As List(Of RFunction) = clsTablesUtils.FindRFunctionsWithRCommand("tab_source_note", clsOperator)
 
         Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand("tab_row_group", clsOperator)
 
-
-
         For Each clsRParam As RParameter In lstRParams
 
-            Dim clsTabSourceNoteRFunction As RFunction = clsRParam.clsArgumentCodeStructure
+            Dim clsTabRowGroupRFunction As RFunction = clsRParam.clsArgumentCodeStructure
 
             ' Create a new row that represents the tab_footnote() parameters
             Dim row As New DataGridViewRow
             row.CreateCells(dataGridGroups)
 
-            For Each clsRowGroupRParam As RParameter In clsTabSourceNoteRFunction.clsParameters
+            For Each clsRowGroupRParam As RParameter In clsTabRowGroupRFunction.clsParameters
                 If clsRowGroupRParam.strArgumentName = "label" Then
                     row.Cells(0).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.clsArgumentCodeStructure.clsParameters(0).strArgumentValue, False)
+                ElseIf clsRowGroupRParam.strArgumentName = "rows" Then
+                    row.Cells(1).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.clsArgumentCodeStructure.clsParameters(0).strArgumentValue, False)
                 End If
             Next
 
-            ' Tag and add the tab_footnote() function contents as a row
-            'row.Tag = clsSourceNoteRFunct
+            ' Tag and add the  tab_row_group() parameter function contents as a row
+            row.Tag = clsRParam
             dataGridGroups.Rows.Add(row)
 
         Next
 
-        ' Always add a place holder row for new foot note
-        dataGridGroups.Rows.Add()
     End Sub
 
+    Private Sub btnAddCondition_Click(sender As Object, e As EventArgs) Handles btnAddCondition.Click
+
+        Dim strGroupLabel As String = txtGroupLabel.Text
+        Dim strCondition As String = ucrSingleReceiverCol.GetVariableNames(bWithQuotes:=False) & " " & cboConditionOperator.Text & " " & cboConditionValue.Text
+
+        Dim clsTabRowGroupRFunction As New RFunction
+        clsTabRowGroupRFunction.SetPackageName("gt")
+        clsTabRowGroupRFunction.SetRCommand("tab_row_group")
+        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="label", strParamValue:=clsTablesUtils.GetStringValue(strGroupLabel, True), iNewPosition:=0))
+        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=strCondition, iNewPosition:=1))
+        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="id", strParamValue:=clsTablesUtils.GetStringValue(strGroupLabel.Replace(" ", String.Empty), True), iNewPosition:=2))
+
+        Dim clsRParam As New RParameter(strParameterName:="tab_row_group_param", strParamValue:=clsTabRowGroupRFunction, bNewIncludeArgumentName:=False)
+
+        Dim row As New DataGridViewRow
+        row.CreateCells(dataGridGroups)
+
+        row.Cells(0).Value = strGroupLabel
+        row.Cells(1).Value = strCondition
+
+        ' Tag and add the  tab_row_group() parameter function contents as a row
+        row.Tag = clsRParam
+        dataGridGroups.Rows.Add(row)
+
+        ' Add to parameter
+        clsOperator.AddParameter(clsRParam)
+
+        txtGroupLabel.Text = ""
+        cboConditionValue.Text = ""
+
+    End Sub
+
+    Private Sub btnClearGroups_Click(sender As Object, e As EventArgs) Handles btnClearGroups.Click
+        For index As Integer = 0 To dataGridGroups.Rows.Count - 1
+            clsOperator.RemoveParameter(dataGridGroups.Rows(index).Tag)
+
+        Next
+        dataGridGroups.Rows.Clear()
+    End Sub
+
+    Private Sub cboConditionValue_TextChanged(sender As Object, e As EventArgs) Handles cboConditionValue.TextChanged, cboConditionOperator.TextChanged, txtGroupLabel.TextChanged
+        btnAddCondition.Enabled = Not String.IsNullOrWhiteSpace(txtGroupLabel.Text) AndAlso Not String.IsNullOrWhiteSpace(cboConditionValue.Text) AndAlso Not String.IsNullOrWhiteSpace(cboConditionOperator.Text)
+    End Sub
 End Class
