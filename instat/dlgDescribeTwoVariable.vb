@@ -904,7 +904,7 @@ Public Class dlgDescribeTwoVariable
             ElseIf IsFactorByFactor() Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 370)
                 Me.Size = New Point(iDialogueXsize, 465)
-                cmdFormatTable.Location = New Point(326, 331)
+                cmdFormatTable.Location = New Point(326, 330)
             Else
                 ucrBase.Location = New Point(iUcrBaseXLocation, 328)
                 Me.Size = New Point(iDialogueXsize, 425)
@@ -1199,6 +1199,7 @@ Public Class dlgDescribeTwoVariable
             End If
         Else
             clsCombineFrequencyColParametersFunction.RemoveParameterByName("margin_name")
+            clsCombineFrequencyParametersFunction.RemoveParameterByName("margin_name")
         End If
 
         FactorColumns()
