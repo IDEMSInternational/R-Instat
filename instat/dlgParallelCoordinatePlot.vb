@@ -175,7 +175,7 @@ Public Class dlgParallelCoordinatePlot
 
         clsGGParCoordFunc.SetPackageName("GGally")
         clsGGParCoordFunc.SetRCommand("ggparcoord")
-
+        clsGGParCoordFunc.AddParameter("columns", "column_numbers", iPosition:=1)
         clsGGParCoordFunc.AddParameter("missing", Chr(34) & "exclude" & Chr(34), iPosition:=6)
         clsGGParCoordFunc.AddParameter("order", clsRFunctionParameter:=clsMatchFunction, iPosition:=7)
         clsGGParCoordFunc.AddParameter("centerObsID", "1", iPosition:=8)
@@ -236,9 +236,6 @@ Public Class dlgParallelCoordinatePlot
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
-        If bReset Then
-            ucrReceiverXVariables.SetRCode(clsGGParCoordFunc, bReset)
-        End If
     End Sub
 
     Private Sub TestOkEnabled()
