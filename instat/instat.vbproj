@@ -3050,6 +3050,18 @@
     <Compile Include="UserControl\ucrOutputPages.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\ucrCells.Designer.vb">
+      <DependentUpon>ucrCells.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\ucrCells.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\ucrColumns.Designer.vb">
+      <DependentUpon>ucrColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\ucrColumns.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\ucrHeader.Designer.vb">
       <DependentUpon>ucrHeader.vb</DependentUpon>
     </Compile>
@@ -5370,6 +5382,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucrOutputPages.resx">
       <DependentUpon>ucrOutputPages.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\ucrCells.resx">
+      <DependentUpon>ucrCells.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\ucrColumns.resx">
+      <DependentUpon>ucrColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\ucrHeader.resx">
       <DependentUpon>ucrHeader.vb</DependentUpon>

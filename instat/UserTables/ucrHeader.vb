@@ -1,6 +1,4 @@
-﻿Imports Antlr.Runtime
-Imports unvell.ReoGrid.IO.OpenXML.Schema
-
+﻿
 Public Class ucrHeader
     Private clsOperator As New ROperator
     Private clsTabTitleFootRParameter, clsTabSubtitleFootRParameter As RParameter
@@ -64,9 +62,9 @@ Public Class ucrHeader
     End Sub
 
     Private Sub SetupRFunctionsFromOperator()
-        Dim clsRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand("tab_footnote", clsOperator)
+        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand("tab_footnote", clsOperator)
 
-        For Each clsTabFooterRParam As RParameter In clsRParams
+        For Each clsTabFooterRParam As RParameter In lstRParams
 
             Dim clsFootNoteRFunction As RFunction = Nothing
             Dim clsLocationsRFunction As RFunction = Nothing
