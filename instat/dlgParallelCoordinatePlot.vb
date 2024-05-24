@@ -227,6 +227,8 @@ Public Class dlgParallelCoordinatePlot
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverXVariables.AddAdditionalCodeParameterPair(clsMatchFunction, New RParameter("var", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+
         ucrSelectorParallelCoordinatePlot.SetRCode(clsGGParCoordFunc, bReset)
         ucrReceiverFactor.SetRCode(clsGGParCoordFunc, bReset)
         ucrChkBoxplots.SetRCode(clsGGParCoordFunc, bReset)
@@ -433,16 +435,11 @@ Public Class dlgParallelCoordinatePlot
         AutoFacetStation()
         SetPipeAssignTo()
         clsNamesFunction.AddParameter("names", ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
-        clsMatchFunction.AddParameter("data", clsRFunctionParameter:=clsNamesFunction, iPosition:=10, bIncludeArgumentName:=False)
-
+        clsMatchFunction.AddParameter("data", clsRFunctionParameter:=clsNamesFunction, iPosition:=1, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudTransparency.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverXVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlValueChanged
-        clsMatchFunction.AddParameter("var", ucrReceiverXVariables.GetVariableNames, bIncludeArgumentName:=False, iPosition:=0)
     End Sub
 
 End Class
