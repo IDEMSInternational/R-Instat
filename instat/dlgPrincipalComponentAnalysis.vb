@@ -19,7 +19,7 @@ Public Class dlgPrincipalComponentAnalysis
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsPCAFunction, clsWhichQuantiSupFunction, clsWhichQualiSupFunction, clsColNamesQuantFunction, clsColNamesQualiFunction, clsSummaryFunction, clsGetColumnsFunction, clsCbindUniqueFunction, clsBindFunction As New RFunction
+    Private clsPCAFunction, clsPCASummaryFuction, clsWhichQuantiSupFunction, clsWhichQualiSupFunction, clsColNamesQuantFunction, clsColNamesQualiFunction, clsSummaryFunction, clsGetColumnsFunction, clsCbindUniqueFunction, clsBindFunction As New RFunction
     Private clsREigenValues, clsREigenVectors, clsRRotation, clsRRotationCoord, clsRRotationEig, clsDummyFunction As New RFunction
     Private clsRScreePlotFunction, clsRThemeMinimal, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction As New RFunction
     Private clsRFactor, clsRMelt, clsRBarPlotGeom, clsRBarPlotAes, clsRBarPlotFacet, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue As New RFunction
@@ -96,6 +96,7 @@ Public Class dlgPrincipalComponentAnalysis
 
     Private Sub SetDefaults()
         clsPCAFunction = New RFunction
+        clsPCASummaryFuction = New RFunction
         clsREigenVectors = New RFunction
         clsREigenValues = New RFunction
         clsRRotation = New RFunction
@@ -160,8 +161,6 @@ Public Class dlgPrincipalComponentAnalysis
         clsColNamesQualiFunction.SetRCommand("colnames")
         clsColNamesQualiFunction.AddParameter("x", clsRFunctionParameter:=clsCbindUniqueFunction, iPosition:=0)
 
-        clsSummaryFunction.SetRCommand("summary")
-        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsPCAFunction, iPosition:=0)
 
         clsBinaryQuantiSupOperator.SetOperation("%in%")
         clsBinaryQuantiSupOperator.AddParameter("left", clsRFunctionParameter:=clsColNamesQuantFunction, iPosition:=0)
@@ -201,6 +200,17 @@ Public Class dlgPrincipalComponentAnalysis
         clsREigenValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsREigenValues.AddParameter("value1", Chr(34) & "eig" & Chr(34))
         clsREigenValues.iCallType = 2
+
+        clsPCASummaryFuction.SetPackageName("FactoMineR")
+        clsPCASummaryFuction.SetRCommand("PCA")
+        clsPCASummaryFuction.AddParameter("X", "col_data") ' clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=1)
+        clsPCASummaryFuction.AddParameter("ncp", 2)
+        clsPCASummaryFuction.AddParameter("graph", "FALSE")
+        clsPCASummaryFuction.iCallType = 2
+
+        clsSummaryFunction.SetRCommand("summary")
+        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsPCASummaryFuction, iPosition:=0)
+
 
         clsREigenVectors.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsREigenVectors.AddParameter("value1", Chr(34) & "ind" & Chr(34))
@@ -293,9 +303,9 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBiplotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsBaseOperator, iPosition:=4)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPCAFunction)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=0)
+        'ucrBase.clsRsyntax.AddToAfterCodes(clsBaseOperator, iPosition:=4)
         ModelName()
         bResetSubdialog = True
     End Sub
