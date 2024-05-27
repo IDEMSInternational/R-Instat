@@ -303,11 +303,11 @@ Public Class dlgPrincipalComponentAnalysis
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsREigenVectors, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=1)
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsRRotationCoord, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=2)
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsRRotationEig, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=3)
-        ucrSelectorPCA.AddAdditionalCodeParameterPair(clsGetColumnsFunction, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=4)
+        'ucrSelectorPCA.AddAdditionalCodeParameterPair(clsGetColumnsFunction, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=4)
         'ucrSelectorPCA.AddAdditionalCodeParameterPair(clsNamesFunction, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=4)
 
-        ucrSelectorPCA.SetRCode(clsREigenValues, bReset)
-        ucrReceiverMultiplePCA.SetRCode(clsGetColumnsFunction, bReset)
+        ucrSelectorPCA.SetRCode(clsGetColumnsFunction, bReset)
+        'ucrReceiverMultiplePCA.SetRCode(clsGetColumnsFunction, bReset)
         ucrReceiverSuppNumeric.SetRCode(clsMatchFunction, bReset)
         ucrReceiverSupplFactors.SetRCode(clsMatch2Function, bReset)
         ucrSaveResult.SetRCode(clsPCAFunction, bReset)
@@ -379,10 +379,12 @@ Public Class dlgPrincipalComponentAnalysis
         If ucrReceiverMultiplePCA.IsEmpty Then
             ucrReceiverSuppNumeric.Clear()
         End If
+        GetColumns()
     End Sub
 
     Private Sub ucrSelectorPCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPCA.ControlValueChanged
         clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsGetColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
         clsPCAFunction.AddParameter("X", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
         clsNamesFunction.AddParameter("names", ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
         clsMatchFunction.AddParameter("data", clsRFunctionParameter:=clsNamesFunction, iPosition:=1, bIncludeArgumentName:=False)
@@ -421,8 +423,22 @@ Public Class dlgPrincipalComponentAnalysis
             ucrReceiverMultiplePCA.SetDataType("numeric")
             ucrReceiverMultiplePCA.SetMeAsReceiver()
         End If
+        GetColumns()
     End Sub
+    Private Sub GetColumns()
+        If ucrChkExtraVariables.Checked Then
+            Dim lstVariables As List(Of String) = ucrReceiverMultiplePCA.GetVariableNamesAsList()
+            Dim strVarFrequency As String = ucrReceiverSuppNumeric.GetVariableNames(False)
+            Dim strVarQuality As String = ucrReceiverSupplFactors.GetVariableNames(False)
 
+            If Not ucrReceiverMultiplePCA.IsEmpty AndAlso Not (ucrReceiverSuppNumeric.IsEmpty OrElse ucrReceiverSupplFactors.IsEmpty) Then
+                lstVariables.Add(strVarFrequency & "," & strVarQuality)
+            End If
+            clsGetColumnsFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstVariables), iPosition:=1)
+        Else
+            clsGetColumnsFunction.AddParameter("col_names", ucrReceiverMultiplePCA.GetVariableNames)
+        End If
+    End Sub
     Private Sub UpdateSelector()
         ClearSelector()
         If bResettingDialogue Then
