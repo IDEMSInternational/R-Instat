@@ -5867,11 +5867,21 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdCoeffs_Click(sender As Object, e As EventArgs) Handles cmdCoeffs.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::poly.calc(x= )", 2)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::poly.calc( )", 2)
-        End If
+        Dim clsCoeffsFunction As New RFunction
+        Dim clsDataFunctionCoeffs As New RFunction
+        'Dim clsSumCoeffsFunction As New RFunction
+        'Dim clsCmbnCoeffsFunction As New RFunction
+
+        ' Dim clsBracketsFunction As New RFunction
+        ' Dim clsDataFunction2 As New RFunction
+
+        clsDataFunctionCoeffs.SetRCommand(" [1:nrow")
+        clsDataFunctionCoeffs.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ")-1]", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsCoeffsFunction.SetPackageName("polynom")
+        clsCoeffsFunction.SetRCommand("poly.calc")
+        clsCoeffsFunction.AddParameter("s", clsRFunctionParameter:=clsDataFunctionCoeffs, iPosition:=1, bIncludeArgumentName:=False)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsCoeffsFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdProd_Click(sender As Object, e As EventArgs) Handles cmdProd.Click
@@ -5891,42 +5901,60 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdCoef_Click(sender As Object, e As EventArgs) Handles cmdCoef.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" coef: sum(combn( x= ,m= ,FUN=prod, na.rm=TRUE))", 28)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("coef: sum(combn( , ,FUN=prod, na.rm=TRUE))", 26)
-        End If
+        ' Dim clsCoefFunction As New RFunction
+        Dim clsDataFunctionCoef As New RFunction
+        Dim clsSumCoefFunction As New RFunction
+        Dim clsCmbnCoefFunction As New RFunction
+
+        ' Dim clsBracketsFunction As New RFunction
+        ' Dim clsDataFunction2 As New RFunction
+
+        clsDataFunctionCoef.SetRCommand(" [1:nrow")
+        clsDataFunctionCoef.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem + ")-1],4 ,FUN=prod, na.rm=TRUE", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsSumCoefFunction.SetRCommand("sum")
+        clsSumCoefFunction.AddParameter("s", clsRFunctionParameter:=clsCmbnCoefFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsCmbnCoefFunction.SetRCommand("combn")
+        clsCmbnCoefFunction.AddParameter("d", clsRFunctionParameter:=clsDataFunctionCoef, iPosition:=2, bIncludeArgumentName:=False)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSumCoefFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdCoeffs2_Click(sender As Object, e As EventArgs) Handles cmdCoeffs2.Click
         '  ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.numeric(purrr::map(.x=(nrow(data_RDS)-1):0, .f = ~sum(combn(rootsx3[1:nrow(data_RDS)-1], .x , FUN=prod))))", 1)
         Dim clsCoeffs2Function As New RFunction
-        Dim clsASNumericFunction As New RFunction
+        Dim clsDataFunction1 As New RFunction
         Dim clsMapFunction As New RFunction
         Dim clsSumFunction As New RFunction
         Dim clsCmbnFunction As New RFunction
-        Dim clsRootsFunction As New RFunction
-        Dim clsBracketsFunction As New RFunction
 
+        ' Dim clsBracketsFunction As New RFunction
+        Dim clsDataFunction2 As New RFunction
+
+        clsDataFunction1.SetRCommand("(nrow")
+        clsDataFunction1.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & "(-1):0", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsDataFunction2.SetRCommand("( [1:nrow")
+        clsDataFunction2.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ")-1],.x, FUN=prod", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsCoeffs2Function.AddParameter("map", clsRFunctionParameter:=clsMapFunction, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsCoeffs2Function.SetRCommand("as.numeric")
         clsMapFunction.SetPackageName("purrr")
         clsMapFunction.SetRCommand("map")
-        clsMapFunction.AddParameter(".x", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
-
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & "-1" & ":0", iPosition:=0)
-
-        clsBracketsFunction.SetRCommand("[1:nrow")
-        clsRootsFunction.SetRCommand("roots*3")
-        clsRootsFunction.AddParameter("w", clsRFunctionParameter:=clsBracketsFunction, iPosition:=3, bIncludeArgumentName:=False)
+        clsMapFunction.AddParameter(".x", clsRFunctionParameter:=clsDataFunction1, iPosition:=2)
+        ' clsBracketsFunction.SetRCommand("[1:nrow")
+        ' clsBracketsFunction.AddParameter("BracketsFunction", clsRFunctionParameter:=clsDataFunction2, iPosition:=3, bIncludeArgumentName:=False)
+        'clsRootsFunction.SetRCommand("rootsx3")
+        'clsRootsFunction.AddParameter("w", clsRFunctionParameter:=clsDataFunction2, iPosition:=4, bIncludeArgumentName:=False)
         clsCmbnFunction.SetRCommand("combn")
-        clsCmbnFunction.AddParameter("k", clsRFunctionParameter:=clsRootsFunction, iPosition:=2, bIncludeArgumentName:=False)
+        clsCmbnFunction.AddParameter("k", clsRFunctionParameter:=clsDataFunction2, iPosition:=5, bIncludeArgumentName:=False)
         clsSumFunction.SetRCommand("~sum")
-        clsSumFunction.AddParameter("y", clsRFunctionParameter:=clsCmbnFunction, iPosition:=1, bIncludeArgumentName:=False)
-        clsMapFunction.AddParameter(".f", clsRFunctionParameter:=clsSumFunction, iPosition:=0)
-        clsMapFunction.AddParameter("var", ".x", iPosition:=4, bIncludeArgumentName:=False)
-        clsMapFunction.AddParameter("FUN", "prod", iPosition:=5)
-        clsCoeffs2Function.SetRCommand("as.numeric")
-        clsCoeffs2Function.AddParameter("map", clsRFunctionParameter:=clsMapFunction, iPosition:=6, bIncludeArgumentName:=False)
+        clsSumFunction.AddParameter("y", clsRFunctionParameter:=clsCmbnFunction, iPosition:=6, bIncludeArgumentName:=False)
+        clsMapFunction.AddParameter(".f", clsRFunctionParameter:=clsSumFunction, iPosition:=7)
+        ' clsMapFunction.AddParameter("var", ".x", iPosition:=8, bIncludeArgumentName:=False)
+        ' clsMapFunction.AddParameter("FUN", "prod", iPosition:=9)
+        'clsCoeffs2Function.SetRCommand("as.numeric")
+        'clsCoeffs2Function.AddParameter("map", clsRFunctionParameter:=clsMapFunction, iPosition:=6, bIncludeArgumentName:=False)
 
         '".f = ~sum(combn(rootsx3[1:nrow(data_RDS)-1], .x , FUN=prod))))")
         'clsCoeffs2Function.SetPackageName("purrr")
