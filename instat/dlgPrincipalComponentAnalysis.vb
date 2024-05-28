@@ -308,12 +308,15 @@ Public Class dlgPrincipalComponentAnalysis
 
         ucrSelectorPCA.SetRCode(clsGetColumnsFunction, bReset)
         'ucrReceiverMultiplePCA.SetRCode(clsGetColumnsFunction, bReset)
-        ucrReceiverSuppNumeric.SetRCode(clsMatchFunction, bReset)
-        ucrReceiverSupplFactors.SetRCode(clsMatch2Function, bReset)
+
         ucrSaveResult.SetRCode(clsPCAFunction, bReset)
         ucrChkScaleData.SetRCode(clsPCAFunction, bReset)
         ucrChkExtraVariables.SetRCode(clsDummyFunction, bReset)
         ucrNudNumberOfComp.SetRCode(clsPCAFunction, bReset)
+        If bReset Then
+            ucrReceiverSuppNumeric.SetRCode(clsMatchFunction, bReset)
+            ucrReceiverSupplFactors.SetRCode(clsMatch2Function, bReset)
+        End If
     End Sub
 
     Private Sub TestOKEnabled() ' add in if the sdg has a clear nud, etc
@@ -386,7 +389,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsGetColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
         clsPCAFunction.AddParameter("X", clsRFunctionParameter:=clsGetColumnsFunction, iPosition:=0)
-        clsNamesFunction.AddParameter("names", ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
+        clsNamesFunction.AddParameter("names", "col_data", iPosition:=0, bIncludeArgumentName:=False)
         clsMatchFunction.AddParameter("data", clsRFunctionParameter:=clsNamesFunction, iPosition:=1, bIncludeArgumentName:=False)
         clsMatch2Function.AddParameter("data1", clsRFunctionParameter:=clsNamesFunction, iPosition:=1, bIncludeArgumentName:=False)
         ModelName()
@@ -425,20 +428,25 @@ Public Class dlgPrincipalComponentAnalysis
         End If
         GetColumns()
     End Sub
+
     Private Sub GetColumns()
         If ucrChkExtraVariables.Checked Then
             Dim lstVariables As List(Of String) = ucrReceiverMultiplePCA.GetVariableNamesAsList()
-            Dim strVarFrequency As String = ucrReceiverSuppNumeric.GetVariableNames(False)
-            Dim strVarQuality As String = ucrReceiverSupplFactors.GetVariableNames(False)
+            Dim strVarFrequency As List(Of String) = ucrReceiverSuppNumeric.GetVariableNamesAsList()
+            Dim strVarQuality As List(Of String) = ucrReceiverSupplFactors.GetVariableNamesAsList()
 
-            If Not ucrReceiverMultiplePCA.IsEmpty AndAlso Not (ucrReceiverSuppNumeric.IsEmpty OrElse ucrReceiverSupplFactors.IsEmpty) Then
-                lstVariables.Add(strVarFrequency & "," & strVarQuality)
+            If Not ucrReceiverMultiplePCA.IsEmpty AndAlso (Not ucrReceiverSuppNumeric.IsEmpty OrElse Not ucrReceiverSupplFactors.IsEmpty) Then
+                lstVariables.AddRange(strVarFrequency)
+                lstVariables.AddRange(strVarQuality)
             End If
-            clsGetColumnsFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstVariables), iPosition:=1)
+
+            clsGetColumnsFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstVariables, bWithQuotes:=True), iPosition:=1)
         Else
             clsGetColumnsFunction.AddParameter("col_names", ucrReceiverMultiplePCA.GetVariableNames)
         End If
+
     End Sub
+
     Private Sub UpdateSelector()
         ClearSelector()
         If bResettingDialogue Then
