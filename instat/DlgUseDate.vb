@@ -16,6 +16,12 @@
 
 Imports instat.Translations
 Public Class dlgUseDate
+    Public enumUsedateMode As String = UsedateMode.Prepare
+    Public Enum UsedateMode
+        Prepare
+        Climatic
+    End Enum
+
     Private bReset As Boolean = True
     Public bFirstLoad As Boolean = True
     Public strDefaultDataFrame As String = ""
@@ -32,6 +38,7 @@ Public Class dlgUseDate
         End If
         SetRCodeforControls(bReset)
         SetDefaultColumn()
+        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -224,6 +231,15 @@ Public Class dlgUseDate
         Else
             lblShifted.Visible = True
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumUsedateMode
+            Case UsedateMode.Prepare
+                ucrBase.iHelpTopicID = 462
+            Case UsedateMode.Climatic
+                ucrBase.iHelpTopicID = 494
+        End Select
     End Sub
 
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkWeekName.ControlContentsChanged, ucrChkWeekdayNum.ControlContentsChanged, ucrChkWeekNum.ControlContentsChanged, ucrChkShiftPentadNum.ControlContentsChanged, ucrChkShiftPentadAbbr.ControlContentsChanged, ucrChkShiftDekadAbbr.ControlContentsChanged, ucrChkWeekAbbr.ControlContentsChanged, ucrChkShiftMonthNum.ControlContentsChanged, ucrChkLeapYearNum.ControlContentsChanged, ucrChkWeekdayName.ControlContentsChanged, ucrChkShiftMonthName.ControlContentsChanged, ucrChkShiftDekadNum.ControlContentsChanged, ucrChkDayInMonthNum.ControlContentsChanged, ucrChkDayInYearNum.ControlContentsChanged, ucrChkWeekdayAbbr.ControlContentsChanged, ucrChkShiftMonthAbbr.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftYearNum.ControlContentsChanged, ucrChkShiftYearName.ControlContentsChanged, ucrChkShiftDayInYearNum366.ControlContentsChanged, ucrChkShiftQuarterNum.ControlContentsChanged, ucrInputComboBoxStartingMonth.ControlContentsChanged, ucrChkDaysInMonthNum.ControlContentsChanged, ucrChkShiftQuarterAbbr.ControlContentsChanged

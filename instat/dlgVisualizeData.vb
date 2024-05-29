@@ -17,6 +17,13 @@
 Imports instat.Translations
 
 Public Class dlgVisualizeData
+    Public enumVisualizeMode As String = VisualizeMode.Prepare
+    Public Enum VisualizeMode
+        Prepare
+        Describe
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsVisDatFunction As New RFunction
@@ -41,6 +48,7 @@ Public Class dlgVisualizeData
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
@@ -328,6 +336,17 @@ Public Class dlgVisualizeData
         End If
     End Sub
 
+    Private Sub SetHelpOptions()
+        Select Case enumVisualizeMode
+            Case VisualizeMode.Prepare
+                ucrBase.iHelpTopicID = 54
+            Case VisualizeMode.Describe
+                ucrBase.iHelpTopicID = 600
+            Case VisualizeMode.Climatic
+                ucrBase.iHelpTopicID = 524
+        End Select
+    End Sub
+
     Private Sub ucrNudMaximumSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaximumSize.ControlValueChanged
         MaximumDataPoint()
     End Sub
@@ -407,7 +426,7 @@ Public Class dlgVisualizeData
         End If
         Dim lstvariable As List(Of String) = ucrReceiverVisualizeData.GetVariableNamesAsList
         Dim strFacetvariable As String = ucrByFactorsReceiver.GetVariableNames(False)
-        If Not ucrByFactorsReceiver.IsEmpty AndAlso (rdoVisDat.Checked OrElse rdoVisMiss.Checked) AndAlso Not Lstvariable.Contains(StrFacetvariable) Then
+        If Not ucrByFactorsReceiver.IsEmpty AndAlso (rdoVisDat.Checked OrElse rdoVisMiss.Checked) AndAlso Not lstvariable.Contains(strFacetvariable) Then
             lstvariable.Add(strFacetvariable)
         End If
         clsGetVariableFunction.AddParameter("data_name", Chr(34) & ucrSelectorVisualizeData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
