@@ -29,6 +29,7 @@ key_label="key"
 row_count_label="Rows"
 column_count_label="Columns"
 is_linkable="Is_Linkable"
+scalars= "scalars"
 
 #variables_metadata labels
 label_label="label"

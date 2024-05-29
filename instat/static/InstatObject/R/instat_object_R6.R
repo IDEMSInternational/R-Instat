@@ -405,6 +405,15 @@ DataBook$set("public", "get_combined_metadata", function(convert_to_character = 
     for (j in (1:length(templist))) {
       if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
       retlist[i, names(templist[j])] = templist[[j]]
+      
+      att_name <- names(retlist)[j]
+      if (att_name == scalars) {
+        curr_data <-
+          self$get_data_frame(data_name = retlist[[data_name_label]], use_current_filter = FALSE)
+        # Retrieve the attribute 'scalars'
+        tmp_scalars <- attr(curr_data, "scalars")
+        retlist[[att_name]] <- paste(names(tmp_scalars), tmp_scalars, sep = " = ", collapse = ", ")
+      }
     }
     if(all(c(data_name_label, label_label, row_count_label, column_count_label,
              data_type_label, is_calculated_label, is_hidden_label, is_linkable, key_label) %in% names(retlist))){

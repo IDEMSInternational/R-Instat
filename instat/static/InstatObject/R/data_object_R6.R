@@ -1117,7 +1117,16 @@ DataSheet$set("public", "append_to_metadata", function(property, new_value = "")
   
   if (!is.character(property)) stop("property must be of type: character")
   
-  attr(private$data, property) <- new_value
+  if (property == "scalars") {
+    current_scalars <- attr(private$data, "scalars")
+    if (is.null(current_scalars)) {
+      current_scalars <- new_value
+    } else {
+      current_scalars[names(new_value)] <- new_value
+    }
+    attr(private$data, property) <- current_scalars
+  }
+  else attr(private$data, property) <- new_value
   self$append_to_changes(list(Added_metadata, property, new_value))
   self$metadata_changed <- TRUE
   # Not sure this is correct way to ensure unhidden data frames appear.
