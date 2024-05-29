@@ -61,7 +61,7 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Text/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF", "List", "Complex", "Integer"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Transform", "Summary", "Probability", "Factor", "Text/Strings (Character Columns)", "Dates/Times", "Circular", "Wakefield", "Goodness of Fit", "List", "Complex", "Integer"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
 
@@ -128,6 +128,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdDuplicate, "duplicate detects non-unique values, for example duplicated(c(1:3,2,7)) gives FALSE, FALSE, FALSE, TRUE, FALSE")
         ttCalculator.SetToolTip(cmdNear, "near(x,y)compares 2 variables. For example sqrt(5)^2 is almost, but isn't exactly 5, however near(sqrt(5)^2,5) is TRUE")
         ttCalculator.SetToolTip(cmdnumeric, "Define a variable as numeric.  For example as numeric(c(TRUE,TRUE,FALSE,TRUE)) gives (1, 1,0, 1) ")
+        ttCalculator.SetToolTip(cmdSquareBrackets, "Extract one or more elements from a column (or data frame")
         ttCalculator.SetToolTip(cmdTilde, "This is called tilde and links the left side and right side of a formula")
         ttCalculator.SetToolTip(cmdCalcConcantenateFunction, "Combines arguments to form a single vector, e.g. c(1:3 8) is 1, 2, 3, 8")
         ttCalculator.SetToolTip(cmdCalcRepelicationFunction, "Repeat of a sequence, e.g. rep(c(2, 3, 4), each=2) gives 2, 2, 3, 3, 4, 4")
@@ -268,8 +269,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdKTuple, "k_tuple general formula for all these keys. For example k_tuple(0, 10, c(0,2)) gives twin primes")
         ttCalculator.SetToolTip(cmdRoman, "converts a small(up to 3899) positive integer to Roman numbers. For example as.roman(14)=XIV")
         ttCalculator.SetToolTip(cmdPalindrome, "generates palindromes to the length of the dataframe. For example the 100th palindromic number is 909")
-        ttCalculator.SetToolTip(cmdFibonacci2, "generates fibonacci numbers to the length of the data frame. For example the 10th fibonacci number is just 34, but the 50th is much larger, 7778742049")
-        ttCalculator.SetToolTip(cmdAbundant, "when divisors sum to more than the number. So 12 is less than 1+2+3+4+6 = 16. Opposite is Deficient")
+        ttCalculator.SetToolTip(cmdCatalan, "generates Catalan numbers to the length of the data frame. The 5th is 10!/(5!*6!) =7 * 6 = 42")
         ttCalculator.SetToolTip(cmdPerfect, "divisors add to the number. So 6 = 1+2+3. Only 51 perfect numbers are currently known.")
         ttCalculator.SetToolTip(cmdFrugal, "125 is frugal because 125 = 5(cubed) and 5 and 3 are fewer digits (2) than 125 (3).")
         ttCalculator.SetToolTip(cmdPowerful, "36 = 2(squared)*3(squared) is powerful because for each divisor, here 2 and 3, its square is also a divisor.")
@@ -359,7 +359,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdHair, "Sample with default of 4 hair colours, brown, black, blonde, red, and defined probabilities")
         ttCalculator.SetToolTip(cmdHeight, "Sample from normal distribution with default mean 69, and sd 3.75, min 1, and no specified max, rounded to no decimals")
         ttCalculator.SetToolTip(cmdIncome, "Sample from a gamma distribution with mean 40,000 and shape 2. (Multiply the result to change the mean)")
-        ttCalculator.SetToolTip(cmdInternet_Browser, "Sample from ""Which browser do you use?"" with Chrome, IE, Firefox, Safari, Opera, Android, being the options")
+        ttCalculator.SetToolTip(cmdid, "Generate a variable with zero-padded IDs")
         ttCalculator.SetToolTip(cmdIq, "Sample from normal distribution with default of mean 100 and sd 15 - not 10 as provided by the package")
         ttCalculator.SetToolTip(cmdLanguage, "Sample of world's languages with default being list of 99 languages, provided, together with their proportions")
         ttCalculator.SetToolTip(cmdWakefieldLower, "Sample of single letters, with default being one of a,b,c,d,e")
@@ -592,7 +592,6 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdListDuplicated, "gives TRUE for any duplicates and FALSE otherwise.")
         ttCalculator.SetToolTip(cmdListFivenum, "gives the same summaries as the boxplot, so minimum, lower and upper hinges (roughly the quartiles), median, and maximum.")
         ttCalculator.SetToolTip(cmdListSumd, "if the list contains the 2 numbers 34 and 27, then the sum of the digits (individually) is 3 + 4 = 7 and 2 + 7 = 9, so sumd will give 7 + 9 = 16.")
-
     End Sub
 
     Public Sub Reset()
@@ -935,7 +934,7 @@ Public Class ucrCalculator
                 grpList.Visible = False
                 cmdRhelpList.Visible = False
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
-            Case "hydroGOF"
+            Case "Goodness of Fit"
                 strPackageName = "hydroGOF"
                 grpDates.Visible = False
                 grpProbabilty.Visible = False
@@ -1442,7 +1441,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQnorm_Click(sender As Object, e As EventArgs) Handles cmdQnorm.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnorm(p= , mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)", 53)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnorm(p= , mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)", 54)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnorm()", 1)
         End If
@@ -1450,31 +1449,31 @@ Public Class ucrCalculator
 
     Private Sub cmdQt_Click(sender As Object, e As EventArgs) Handles cmdQt.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qt(p= , df= , lower.tail = TRUE)", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qt(p= , df= , lower.tail = TRUE)", 27)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qt()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qt(,)", 2)
         End If
     End Sub
 
     Private Sub cmdQchisq_Click(sender As Object, e As EventArgs) Handles cmdQchisq.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq(p= , df= , lower.tail = TRUE)", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq(p= , df= , lower.tail = TRUE)", 27)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qchisq(,)", 2)
         End If
     End Sub
 
     Private Sub cmdqF_Click(sender As Object, e As EventArgs) Handles cmdqF.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf(p= , df1= , df2= ,lower.tail = TRUE)", 33)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf(p= , df1= , df2= ,lower.tail = TRUE)", 34)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qf(,,)", 3)
         End If
     End Sub
 
     Private Sub cmdPnorm_Click(sender As Object, e As EventArgs) Handles cmdPnorm.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnorm(q= , mean = 0, sd = 1, lower.tail = True, Log.p = False)", 52)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnorm(q= , mean = 0, sd = 1, lower.tail = True, Log.p = False)", 54)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnorm()", 1)
         End If
@@ -1482,39 +1481,39 @@ Public Class ucrCalculator
 
     Private Sub cmdPt_Click(sender As Object, e As EventArgs) Handles cmdPt.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt(q= , df= , lower.tail = TRUE)", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt(q= , df= , lower.tail = TRUE)", 27)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt(,)", 2)
         End If
     End Sub
 
     Private Sub cmdPChisq_Click(sender As Object, e As EventArgs) Handles cmdPChisq.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q= , df= , lower.tail = TRUE)", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q= , df= , lower.tail = TRUE)", 27)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pt()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(,)", 2)
         End If
     End Sub
 
     Private Sub cmdPf_Click(sender As Object, e As EventArgs) Handles cmdPf.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq(q= , df= , lower.tail = TRUE)", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pf(q= , df1= ,df2=, lower.tail = TRUE)", 33)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pchisq()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pf(,,)", 3)
         End If
     End Sub
 
     Private Sub cmdChoose_Click(sender As Object, e As EventArgs) Handles cmdChoose.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("choose(n= , k= )", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("choose(n= , k= )", 7)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("choose()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("choose(,)", 2)
         End If
     End Sub
 
     Private Sub cmdFact_Click(sender As Object, e As EventArgs) Handles cmdFact.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("factorial(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("factorial(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("factorial()", 1)
         End If
@@ -1522,23 +1521,23 @@ Public Class ucrCalculator
 
     Private Sub cmdBeta_Click(sender As Object, e As EventArgs) Handles cmdBeta.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("beta(a= , b= )", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("beta(a= , b= )", 7)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("beta()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("beta(,)", 2)
         End If
     End Sub
 
     Private Sub cmdLchoose_Click(sender As Object, e As EventArgs) Handles cmdLchoose.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lchoose(n= , k= )", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lchoose(n= , k= )", 7)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lchoose()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lchoose(,)", 2)
         End If
     End Sub
 
     Private Sub cmdLfact_Click(sender As Object, e As EventArgs) Handles cmdLfact.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lfactorial(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lfactorial(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lfactorial()", 1)
         End If
@@ -1546,15 +1545,15 @@ Public Class ucrCalculator
 
     Private Sub cmdLbeta_Click(sender As Object, e As EventArgs) Handles cmdLbeta.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lbeta(a= , b= )", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lbeta(a= , b= )", 7)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lbeta()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lbeta(,)", 2)
         End If
     End Sub
 
     Private Sub cmdGamma_Click(sender As Object, e As EventArgs) Handles cmdGamma.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gamma(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gamma(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gamma()", 1)
         End If
@@ -1562,7 +1561,7 @@ Public Class ucrCalculator
 
     Private Sub cmdLgamma_Click(sender As Object, e As EventArgs) Handles cmdLgamma.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lgamma(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lgamma(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lgamma()", 1)
         End If
@@ -1570,7 +1569,7 @@ Public Class ucrCalculator
 
     Private Sub cmdDigamma_Click(sender As Object, e As EventArgs) Handles cmdDigamma.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digamma(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digamma(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digamma()", 1)
         End If
@@ -1578,7 +1577,7 @@ Public Class ucrCalculator
 
     Private Sub cmdTrigamma_Click(sender As Object, e As EventArgs) Handles cmdTrigamma.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("trigamma(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("trigamma(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("trigamma()", 1)
         End If
@@ -2804,39 +2803,20 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldIncomeFunction.ToScript, 0)
     End Sub
 
-    Private Sub cmdInternet_Browser_Click(sender As Object, e As EventArgs) Handles cmdInternet_Browser.Click
-        Dim clsWakefieldInternetBrowserFunction As New RFunction
+    Private Sub cmdid_Click(sender As Object, e As EventArgs) Handles cmdid.Click
+        Dim clsWakefieldIDFunction As New RFunction
         Dim clsWakefieldNrowFunction As New RFunction
-        Dim clsBrowserListFunction As New RFunction
-        Dim clsBrowserProbFunction As New RFunction
 
         clsWakefieldNrowFunction.SetRCommand("nrow")
         clsWakefieldNrowFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
 
-        clsBrowserListFunction.SetRCommand("c")
-        clsBrowserListFunction.AddParameter("chrome", Chr(34) & "Chrome" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsBrowserListFunction.AddParameter("IE", Chr(34) & "IE" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
-        clsBrowserListFunction.AddParameter("firefox", Chr(34) & "Firefox" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
-        clsBrowserListFunction.AddParameter("safari", Chr(34) & "Safari" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
-        clsBrowserListFunction.AddParameter("opera", Chr(34) & "Opera" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
-        clsBrowserListFunction.AddParameter("android", Chr(34) & "Android" & Chr(34), iPosition:=5, bIncludeArgumentName:=False)
+        clsWakefieldIDFunction.SetPackageName("wakefield")
+        clsWakefieldIDFunction.SetRCommand("id")
+        clsWakefieldIDFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
+        clsWakefieldIDFunction.AddParameter("random", "FALSE", iPosition:=1)
+        clsWakefieldIDFunction.AddParameter("name", Chr(34) & "ID" & Chr(34), iPosition:=2)
 
-        clsBrowserProbFunction.SetRCommand("c")
-        clsBrowserProbFunction.AddParameter("0.5027", "0.5027", iPosition:=0, bIncludeArgumentName:=False)
-        clsBrowserProbFunction.AddParameter("0.175", "0.175", iPosition:=1, bIncludeArgumentName:=False)
-        clsBrowserProbFunction.AddParameter("0.1689", "0.1689", iPosition:=2, bIncludeArgumentName:=False)
-        clsBrowserProbFunction.AddParameter("0.0994", "0.0994", iPosition:=3, bIncludeArgumentName:=False)
-        clsBrowserProbFunction.AddParameter("0.017", "0.017", iPosition:=4, bIncludeArgumentName:=False)
-        clsBrowserProbFunction.AddParameter("0.0132", "0.0132", iPosition:=5, bIncludeArgumentName:=False)
-
-        clsWakefieldInternetBrowserFunction.SetPackageName("wakefield")
-        clsWakefieldInternetBrowserFunction.SetRCommand("internet_browser")
-        clsWakefieldInternetBrowserFunction.AddParameter("n", clsRFunctionParameter:=clsWakefieldNrowFunction, iPosition:=0)
-        clsWakefieldInternetBrowserFunction.AddParameter("x", clsRFunctionParameter:=clsBrowserListFunction, iPosition:=1)
-        clsWakefieldInternetBrowserFunction.AddParameter("prob", clsRFunctionParameter:=clsBrowserProbFunction, iPosition:=2)
-        clsWakefieldInternetBrowserFunction.AddParameter("name", Chr(34) & "Browser" & Chr(34), iPosition:=3)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldInternetBrowserFunction.ToScript, 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsWakefieldIDFunction.ToScript, 0)
     End Sub
 
     Private Sub cmdIq_Click(sender As Object, e As EventArgs) Handles cmdIq.Click
@@ -3556,7 +3536,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25), na.rm = TRUE, names = TRUE, type = 7)", 65)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25))", 28)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::quantile.circular(x = , probs = seq(0, 1, 0.25))", 26)
         End If
     End Sub
 
@@ -3782,25 +3762,25 @@ Public Class ucrCalculator
 
     Private Sub cmdPgamma_Click(sender As Object, e As EventArgs) Handles cmdPgamma.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pgamma(q = , shape = , rate = 1, scale = 1/rate, lower.tail = TRUE,log.p = FALSE))", 73)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pgamma(q = , shape = , rate = 1, lower.tail = TRUE,log.p = FALSE)", 55)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pgamma()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pgamma(,,)", 3)
         End If
     End Sub
 
     Private Sub cmdQgamma_Click(sender As Object, e As EventArgs) Handles cmdQgamma.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qgamma(p = , shape = , rate = 1, scale = 1/rate, lower.tail = TRUE, log.p = FALSE))", 73)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qgamma(p = , shape = , rate = 1, lower.tail = TRUE, log.p = FALSE)", 56)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qgamma()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qgamma(,)", 2)
         End If
     End Sub
 
     Private Sub cmdPbeta_Click(sender As Object, e As EventArgs) Handles cmdPbeta.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbeta(q = , shape1 = , shape2 = , ncp = 0, lower.tail = TRUE, log.p = FALSE))", 68)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbeta(q = , shape1 = , shape2 = , ncp = 0, lower.tail = TRUE, log.p = FALSE)", 67)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbeta()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbeta(,,)", 3)
         End If
     End Sub
 
@@ -3814,33 +3794,33 @@ Public Class ucrCalculator
 
     Private Sub cmdPbinom_Click(sender As Object, e As EventArgs) Handles cmdPbinom.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbinom(q = , size = , prob = , lower.tail = TRUE, log.p = FALSE))", 55)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbinom(q = , size = , prob = , lower.tail = TRUE, log.p = FALSE)", 54)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbinom()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pbinom(,,)", 3)
         End If
     End Sub
 
     Private Sub cmdPpois_Click(sender As Object, e As EventArgs) Handles cmdPpois.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ppois(q = , lambda = , lower.tail = TRUE, log.p = FALSE))", 48)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ppois(q = , lambda = , lower.tail = TRUE, log.p = FALSE)", 47)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ppois()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ppois(,)", 2)
         End If
     End Sub
 
     Private Sub cmdPnbin_Click(sender As Object, e As EventArgs) Handles cmdPnbin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom(q = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE))", 62)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom(q = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE)", 61)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnbinom(,,)", 3)
         End If
     End Sub
 
     Private Sub cmdQbeta_Click(sender As Object, e As EventArgs) Handles cmdQbeta.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta(p = , shape1 = , shape2 = , ncp = 0, lower.tail = TRUE, log.p = FALSE))", 68)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta(p = , shape1 = , shape2 = , ncp = 0, lower.tail = TRUE, log.p = FALSE)", 67)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbeta(,,)", 3)
         End If
     End Sub
 
@@ -3854,25 +3834,25 @@ Public Class ucrCalculator
 
     Private Sub cmdQbinom_Click(sender As Object, e As EventArgs) Handles cmdQbinom.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbinom(p = , size = , prob = , lower.tail = TRUE, log.p = FALSE))", 55)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbinom(p = , size = , prob = , lower.tail = TRUE, log.p = FALSE)", 54)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbinom()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qbinom(,,)", 3)
         End If
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles cmdQpois.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois(p = , lambda = , lower.tail = TRUE, log.p = FALSE))", 48)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois(p = , lambda = , lower.tail = TRUE, log.p = FALSE)", 47)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qpois(,)", 2)
         End If
     End Sub
 
     Private Sub cmdQnbin_Click(sender As Object, e As EventArgs) Handles cmdQnbin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom(p = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE))", 62)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom(p = , size = , prob = , mu = , lower.tail = TRUE, log.p = FALSE)", 61)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("qnbinom(,,)", 3)
         End If
     End Sub
 
@@ -4360,12 +4340,18 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdFibonacci_Click(sender As Object, e As EventArgs) Handles cmdFibonacci.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Fibonacci(n = )", 2)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Fibonacci()", 1)
-        End If
+        Dim clsFibonacciFunction As New RFunction
+
+        clsDataFunction.SetRCommand("nrow")
+        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+
+        clsFibonacciFunction.SetPackageName("Zseq")
+        clsFibonacciFunction.SetRCommand("Fibonacci")
+        clsFibonacciFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsFibonacciFunction.ToScript, 0)
     End Sub
+
 
     Private Sub cmdDivisors_Click(sender As Object, e As EventArgs) Handles cmdDivisors.Click
         If chkShowParameters.Checked Then
@@ -4531,7 +4517,7 @@ Public Class ucrCalculator
         clsPrimesFunction.SetPackageName("primes")
         clsPrimesFunction.SetRCommand(strRCommand)
         clsPrimesFunction.AddParameter("min", "0", iPosition:=0)
-        clsPrimesFunction.AddParameter("max", "100", iPosition:=1)
+        clsPrimesFunction.AddParameter("max", "1000000", iPosition:=1)
 
         clsDataFunction.SetRCommand("nrow")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
@@ -4574,11 +4560,12 @@ Public Class ucrCalculator
         clsTuplePatternFunction.SetRCommand("c")
         clsTuplePatternFunction.AddParameter("x", "0", iPosition:=0, bIncludeArgumentName:=False)
         clsTuplePatternFunction.AddParameter("y", "2", iPosition:=1, bIncludeArgumentName:=False)
+        clsTuplePatternFunction.AddParameter("z", "8", iPosition:=2, bIncludeArgumentName:=False)
 
         clsKTuplePrimeFunction.SetPackageName("primes")
         clsKTuplePrimeFunction.SetRCommand("k_tuple")
         clsKTuplePrimeFunction.AddParameter("min", "0", iPosition:=0)
-        clsKTuplePrimeFunction.AddParameter("max", "100", iPosition:=1)
+        clsKTuplePrimeFunction.AddParameter("max", "1000000", iPosition:=1)
         clsKTuplePrimeFunction.AddParameter("tuple", clsRFunctionParameter:=clsTuplePatternFunction, iPosition:=2)
 
         clsRepFunction.SetRCommand("rep")
@@ -4612,18 +4599,19 @@ Public Class ucrCalculator
         ZseqFunctions("Palindromic")
     End Sub
 
-    Private Sub cmdFibonnaci_Click(sender As Object, e As EventArgs) Handles cmdFibonacci2.Click
-        Dim clsFibonacciFunction As New RFunction
+    Private Sub cmdCatalan_Click(sender As Object, e As EventArgs) Handles cmdCatalan.Click
+        Dim clsCatalanFunction As New RFunction
 
         clsDataFunction.SetRCommand("nrow")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
-        clsFibonacciFunction.SetPackageName("Zseq")
-        clsFibonacciFunction.SetRCommand("Fibonacci")
-        clsFibonacciFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsCatalanFunction.SetPackageName("Zseq")
+        clsCatalanFunction.SetRCommand("Catalan")
+        clsCatalanFunction.AddParameter("n", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsFibonacciFunction.ToScript, 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsCatalanFunction.ToScript, 0)
     End Sub
+
 
     Private Sub cmdAbundant_Click(sender As Object, e As EventArgs) Handles cmdAbundant.Click
         ZseqFunctions("Abundant")
@@ -4673,7 +4661,6 @@ Public Class ucrCalculator
         clsPerfectFunction.SetRCommand("Perfect")
         clsPerfectFunction.AddParameter("n", "10", iPosition:=0)
 
-        clsDataFunction.SetRCommand("nrow")
         clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsRepFunction.SetRCommand("rep")
@@ -4682,6 +4669,7 @@ Public Class ucrCalculator
 
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 0)
     End Sub
+
 
     Private Sub cmdUgly_Click(sender As Object, e As EventArgs) Handles cmdUgly.Click
         Dim clsUglyFunction As New RFunction
@@ -5035,7 +5023,7 @@ Public Class ucrCalculator
 
     Private Sub cmdHydroHelp_Click(sender As Object, e As EventArgs) Handles cmdHydroHelp.Click, HydroGOFToolStripMenuItem.Click
         CalculationsOptions()
-        If ucrInputCalOptions.GetText = "hydroGOF" Then
+        If ucrInputCalOptions.GetText = "Goodness of Fit " Then
             strPackageName = "hydroGOF"
         End If
         OpenHelpPage()
@@ -5466,7 +5454,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPascal_Click(sender As Object, e As EventArgs) Handles cmdPascal.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , function(x) {lapply(x, function(i) {choose(i, 0:i)})})", 56)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( , function(x) {lapply(x, function(i) {choose(i, 0:i)})})", 57)
     End Sub
 
     Private Sub cmdScale_Click(sender As Object, e As EventArgs) Handles cmdScale.Click
