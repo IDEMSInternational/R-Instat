@@ -862,6 +862,7 @@ Public Class dlgLinePlot
         ucrPnlStepOrPath.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrChkSlopeLegend.ControlValueChanged,
         ucrPnlLinerangeOptions.ControlValueChanged, ucrChkRibbon.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged
         SetGraphPrefixAndRcommand()
+        AddRemoveFormula()
     End Sub
 
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged,
@@ -879,12 +880,20 @@ Public Class dlgLinePlot
         End If
     End Sub
 
-    Private Sub ucrInputFormula_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFormula.ControlValueChanged, ucrChkFormula.ControlValueChanged
-        If ucrChkFormula.Checked AndAlso ucrInputFormula.GetText <> "" Then
-            clsOptionsFunction.AddParameter("formula", ucrInputFormula.GetText, iPosition:=1)
+    Private Sub AddRemoveFormula()
+        If rdoSmoothing.Checked Then
+            If ucrChkFormula.Checked AndAlso ucrInputFormula.GetText <> "" Then
+                clsOptionsFunction.AddParameter("formula", ucrInputFormula.GetText, iPosition:=1)
+            Else
+                clsOptionsFunction.RemoveParameterByName("formula")
+            End If
         Else
             clsOptionsFunction.RemoveParameterByName("formula")
         End If
+    End Sub
+
+    Private Sub ucrInputFormula_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFormula.ControlValueChanged, ucrChkFormula.ControlValueChanged
+        AddRemoveFormula()
     End Sub
 
     Private Sub AddRemoveTheme()
@@ -1113,5 +1122,9 @@ Public Class dlgLinePlot
     Private Sub ucrLinePlotSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrLinePlotSelector.ControlValueChanged
         AutoFacetStation()
         SetPipeAssignTo()
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged, ucrReceiverYMax.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
+
     End Sub
 End Class

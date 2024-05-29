@@ -1315,7 +1315,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrChkLegend)
         Me.Controls.Add(Me.rdoArea)
         Me.Controls.Add(Me.lblGroupLine)
-        Me.Controls.Add(Me.ucrReceiverGroup)
         Me.Controls.Add(Me.rdoErrorbar)
         Me.Controls.Add(Me.rdoPointrange)
         Me.Controls.Add(Me.rdoRibbon)
@@ -1393,6 +1392,7 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrPnlStepOrPath)
         Me.Controls.Add(Me.lblSlopeY)
         Me.Controls.Add(Me.ucrPnlLinerangeOptions)
+        Me.Controls.Add(Me.ucrReceiverGroup)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

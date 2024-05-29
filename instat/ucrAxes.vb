@@ -565,12 +565,8 @@ Public Class ucrAxes
             ucrPnlSecondAxisTitle.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
             ucrChkSecondaryAxis.SetRCode(clsXYSecondaryAxisFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
             ucrInputSecondaryAxis.SetRCode(clsXYSecondaryAxisFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrPnlScales.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         End If
-
-        'scales functions
-        ucrPnlScales.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrInputLowerLimit.SetRCode(clsLimitsFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrInputUpperLimit.SetRCode(clsLimitsFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         ucrInputPosition.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrChkPosition.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
@@ -782,7 +778,17 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ucrPnlScales_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlScales.ControlValueChanged, ucrInputLowerLimit.ControlValueChanged, ucrInputUpperLimit.ControlValueChanged
-        If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
+        If rdoScalesCustom.Checked AndAlso Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty Then
+            clsLimitsFunction.AddParameter("x", ucrInputLowerLimit.GetText(), iPosition:=0, bIncludeArgumentName:=False)
+            clsLimitsFunction.AddParameter("y", ucrInputUpperLimit.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+            clsXYScaleContinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsLimitsFunction)
+        ElseIf rdoScalesCustom.Checked AndAlso Not ucrInputLowerLimit.IsEmpty AndAlso ucrInputUpperLimit.IsEmpty Then
+            clsLimitsFunction.AddParameter("x", ucrInputLowerLimit.GetText(), iPosition:=0, bIncludeArgumentName:=False)
+            clsLimitsFunction.AddParameter("y", "NA", iPosition:=1, bIncludeArgumentName:=False)
+            clsXYScaleContinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsLimitsFunction)
+        ElseIf rdoScalesCustom.Checked AndAlso ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty Then
+            clsLimitsFunction.AddParameter("x", "NA", iPosition:=0, bIncludeArgumentName:=False)
+            clsLimitsFunction.AddParameter("y", ucrInputUpperLimit.GetText(), iPosition:=1, bIncludeArgumentName:=False)
             clsXYScaleContinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsLimitsFunction)
         Else
             clsXYScaleContinuousFunction.RemoveParameterByName("limits")
