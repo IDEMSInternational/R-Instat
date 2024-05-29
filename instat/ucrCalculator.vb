@@ -479,8 +479,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdDigitsquSession, "Squares of digits if the library calculator code has been run in the current session")
         ttCalculator.SetToolTip(cmdMASSFractionsSession, "Changes decimal dta into fractions, if the library calculator code has been run in the current session")
         ttCalculator.SetToolTip(cmdDecimalsSession, "Changes fractions back to decimals if the library calculator code has been run in the current session")
-        ttCalculator.SetToolTip(cmdDssq, " Gives the ssq of the digits in a numeric variable. For example with c(12, 24, 86) gives (5, 20, 100)")
-        ttCalculator.SetToolTip(cmddssqSession, "Gives digit sum of squares, but only if the library calculator code has been run in the current sesion")
+        ttCalculator.SetToolTip(cmdDigitssq, " Gives the ssq of the digits in a numeric variable. For example with c(12, 24, 86) gives (5, 20, 100)")
+        ttCalculator.SetToolTip(cmddigitssqSession, "Gives digit sum of squares, but only if the library calculator code has been run in the current sesion")
         ttCalculator.SetToolTip(cmdPascal, "Gives Pascal triangles, e.g. for c(1,2,3,4) gives 1, (1,1), (1, 2, 1), (1, 3, 3, 1)")
 
         Const strTooltipCmdLength = "number Of observations: For example length(c(1,2,3,4,NA)) = 5 "
@@ -5941,7 +5941,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsCoeffs2Function.ToScript, 39)
     End Sub
 
-    Private Sub cmdDigitssqSession_Click(sender As Object, e As EventArgs) Handles cmddigitssq.Click
+    Private Sub cmdDigitssqSession_Click(sender As Object, e As EventArgs) Handles cmdDigitssq.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digitssq(x= )", 2)
         Else
@@ -5949,7 +5949,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdDssq_Click(sender As Object, e As EventArgs) Handles cmdDssq.Click
+    Private Sub cmdDssq_Click(sender As Object, e As EventArgs) Handles cmdDigitssq.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( ,function(n){a<-as.integer(c(strsplit(as.character(n),split="""")[[1]])); sum(a^2)})", 83)
     End Sub
 

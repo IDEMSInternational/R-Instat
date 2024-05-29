@@ -643,8 +643,8 @@ Partial Class ucrCalculator
         Me.cmdDecimals = New System.Windows.Forms.Button()
         Me.cmdMASSFractions = New System.Windows.Forms.Button()
         Me.cmdPascal = New System.Windows.Forms.Button()
-        Me.cmdDssq = New System.Windows.Forms.Button()
-        Me.cmddssqSession = New System.Windows.Forms.Button()
+        Me.cmdDigitssq = New System.Windows.Forms.Button()
+        Me.cmddigitssqSession = New System.Windows.Forms.Button()
         Me.cmdCssqSession = New System.Windows.Forms.Button()
         Me.cmdAveBoth = New System.Windows.Forms.Button()
         Me.cmdCoef = New System.Windows.Forms.Button()
@@ -7750,8 +7750,8 @@ Partial Class ucrCalculator
         Me.grpFunctions.Controls.Add(Me.cmdDecimals)
         Me.grpFunctions.Controls.Add(Me.cmdMASSFractions)
         Me.grpFunctions.Controls.Add(Me.cmdPascal)
-        Me.grpFunctions.Controls.Add(Me.cmdDssq)
-        Me.grpFunctions.Controls.Add(Me.cmddssqSession)
+        Me.grpFunctions.Controls.Add(Me.cmdDigitssq)
+        Me.grpFunctions.Controls.Add(Me.cmddigitssqSession)
         Me.grpFunctions.Controls.Add(Me.cmdCssqSession)
         Me.grpFunctions.Controls.Add(Me.cmdAveBoth)
         Me.grpFunctions.Controls.Add(Me.cmdCoef)
@@ -7902,29 +7902,29 @@ Partial Class ucrCalculator
         Me.cmdPascal.Text = "pascal"
         Me.cmdPascal.UseVisualStyleBackColor = True
         '
-        'cmdDssq
+        'cmdDigitssq
         '
-        Me.cmdDssq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmdDssq.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDssq.Location = New System.Drawing.Point(128, 101)
-        Me.cmdDssq.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdDssq.Name = "cmdDssq"
-        Me.cmdDssq.Size = New System.Drawing.Size(62, 30)
-        Me.cmdDssq.TabIndex = 177
-        Me.cmdDssq.Text = "digitssq"
-        Me.cmdDssq.UseVisualStyleBackColor = True
+        Me.cmdDigitssq.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdDigitssq.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDigitssq.Location = New System.Drawing.Point(128, 101)
+        Me.cmdDigitssq.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDigitssq.Name = "cmdDigitssq"
+        Me.cmdDigitssq.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDigitssq.TabIndex = 177
+        Me.cmdDigitssq.Text = "digitssq"
+        Me.cmdDigitssq.UseVisualStyleBackColor = True
         '
-        'cmddssqSession
+        'cmddigitssqSession
         '
-        Me.cmddssqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.cmddssqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmddssqSession.Location = New System.Drawing.Point(189, 101)
-        Me.cmddssqSession.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmddssqSession.Name = "cmddssqSession"
-        Me.cmddssqSession.Size = New System.Drawing.Size(62, 30)
-        Me.cmddssqSession.TabIndex = 178
-        Me.cmddssqSession.Text = "digitssq*"
-        Me.cmddssqSession.UseVisualStyleBackColor = True
+        Me.cmddigitssqSession.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmddigitssqSession.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmddigitssqSession.Location = New System.Drawing.Point(189, 101)
+        Me.cmddigitssqSession.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmddigitssqSession.Name = "cmddigitssqSession"
+        Me.cmddigitssqSession.Size = New System.Drawing.Size(62, 30)
+        Me.cmddigitssqSession.TabIndex = 178
+        Me.cmddigitssqSession.Text = "digitssq*"
+        Me.cmddigitssqSession.UseVisualStyleBackColor = True
         '
         'cmdCssqSession
         '
@@ -8809,8 +8809,8 @@ Partial Class ucrCalculator
     Friend WithEvents cmdDecimals As Button
     Friend WithEvents cmdMASSFractions As Button
     Friend WithEvents cmdPascal As Button
-    Friend WithEvents cmdDssq As Button
-    Friend WithEvents cmddssqSession As Button
+    Friend WithEvents cmdDigitssq As Button
+    Friend WithEvents cmddigitssqSession As Button
     Friend WithEvents cmdCoeffs2 As Button
     Friend WithEvents cmdCoef As Button
     Friend WithEvents cmdCombn As Button
