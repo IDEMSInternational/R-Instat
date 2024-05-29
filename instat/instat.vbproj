@@ -3056,10 +3056,22 @@
     <Compile Include="UserTables\ucrCells.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\ucrColumnFormats.Designer.vb">
+      <DependentUpon>ucrColumnFormats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\ucrColumnFormats.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\ucrColumns.Designer.vb">
       <DependentUpon>ucrColumns.vb</DependentUpon>
     </Compile>
     <Compile Include="UserTables\ucrColumns.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\ucrColumnSpanners.Designer.vb">
+      <DependentUpon>ucrColumnSpanners.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\ucrColumnSpanners.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\ucrHeader.Designer.vb">
@@ -3078,6 +3090,12 @@
       <DependentUpon>ucrRows.vb</DependentUpon>
     </Compile>
     <Compile Include="UserTables\ucrRows.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\ucrRowSummary.Designer.vb">
+      <DependentUpon>ucrRowSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\ucrRowSummary.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\ucrSourceNotes.Designer.vb">
@@ -5392,14 +5410,26 @@
     <EmbeddedResource Include="UserTables\ucrCells.resx">
       <DependentUpon>ucrCells.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\ucrColumnFormats.resx">
+      <DependentUpon>ucrColumnFormats.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserTables\ucrColumns.resx">
       <DependentUpon>ucrColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\ucrColumnSpanners.resx">
+      <DependentUpon>ucrColumnSpanners.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\ucrHeader.resx">
       <DependentUpon>ucrHeader.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\ucrRowGroup.resx">
       <DependentUpon>ucrRowGroup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\ucrRows.resx">
+      <DependentUpon>ucrRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\ucrRowSummary.resx">
+      <DependentUpon>ucrRowSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\ucrSourceNotes.resx">
       <DependentUpon>ucrSourceNotes.vb</DependentUpon>

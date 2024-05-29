@@ -91,4 +91,5 @@
     Private Sub cboConditionValue_TextChanged(sender As Object, e As EventArgs) Handles cboConditionValue.TextChanged, cboConditionOperator.TextChanged, txtGroupLabel.TextChanged
         btnAddCondition.Enabled = Not String.IsNullOrWhiteSpace(txtGroupLabel.Text) AndAlso Not String.IsNullOrWhiteSpace(cboConditionValue.Text) AndAlso Not String.IsNullOrWhiteSpace(cboConditionOperator.Text)
     End Sub
+
 End Class
