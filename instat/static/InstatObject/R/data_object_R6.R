@@ -1118,7 +1118,7 @@ DataSheet$set("public", "append_to_metadata", function(property, new_value = "")
   if (!is.character(property)) stop("property must be of type: character")
   
   if (property == "scalars") {
-    current_scalars <- attr(private$data, "scalars")
+    current_scalars <- attr(private$data, property)
     if (is.null(current_scalars)) {
       current_scalars <- new_value
     } else {
