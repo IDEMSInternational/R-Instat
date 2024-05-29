@@ -469,10 +469,10 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdRoots, "Gives the zeros of a polynomial")
         ttCalculator.SetToolTip(cmdCoeffs, "Gives the polynomial from the zeros")
         ttCalculator.SetToolTip(cmdProd, "The product of the values. So prod(c(1,2,3,4,10)) = 240")
-        ttCalculator.SetToolTip(cmdCombn, "combn(c(-2,1,3,4), 2,FUN=prod) gives the products of the values 3 at a time, so (-213), (-214), (-234), (134), = -6, -12, -24, 12. (result usually put into output window)")
+        ttCalculator.SetToolTip(cmdCombn, "combn(c(-2,1,3,4), 2,FUN=prod) gives the products of the values 3 at a time, -2  -6  -8 , 3   4  12. (result usually put into output window)")
         ttCalculator.SetToolTip(cmdCoef, "single coefficient of a polynomial if given roots. So sum(combn(c(-2,1,3,4),3. FUN=prod) =(-6 -12-24 +12) = -26")
         ttCalculator.SetToolTip(cmdCoeffs2, " Gives the polynomial coefficients from the zeros")
-        ttCalculator.SetToolTip(cmdFunctionsDigitsum, "Gives the sum of the digits in a numeric variable")
+        ttCalculator.SetToolTip(cmdFunctionsDigitsum, "Gives the sum of the digits in a numeric variable") 
         ttCalculator.SetToolTip(cmdDigitsumSession, "Gives the sum of the digits, if library calculator code has been run in the current session")
         ttCalculator.SetToolTip(cmdPascalSession, "Gives binomial coefficients, if the library calculator code has been run in the current session")
         ttCalculator.SetToolTip(cmdDigitsqu, "Squares of digits in an integer variable")
@@ -5790,7 +5790,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= ,FUN=function(x) mean(x, na.rm=TRUE))", 38)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave( , FUN=mean)", 12)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave( ,FUN=mean)", 12)
         End If
     End Sub
 
@@ -5898,10 +5898,12 @@ Public Class ucrCalculator
     Private Sub cmdCoef_Click(sender As Object, e As EventArgs) Handles cmdCoef.Click
         Dim clsSumCoefFunction As New RFunction
         Dim clsCmbnCoefFunction As New RFunction
-
+        Dim clsReFunction As New RFunction
         Dim dataFrameName As String = ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
         Dim DataFunctionCoef As String = " [1:nrow(" & dataFrameName & ")-1]"
 
+        clsReFunction.SetRCommand("Re")
+        clsReFunction.AddParameter("c", clsRFunctionParameter:=clsSumCoefFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsSumCoefFunction.SetRCommand("sum")
         clsSumCoefFunction.AddParameter("s", clsRFunctionParameter:=clsCmbnCoefFunction, iPosition:=1, bIncludeArgumentName:=False)
         clsCmbnCoefFunction.SetRCommand("combn")
@@ -5910,7 +5912,7 @@ Public Class ucrCalculator
         clsCmbnCoefFunction.AddParameter("FUN", "prod", iPosition:=2)
         clsCmbnCoefFunction.AddParameter("na.rm", "TRUE", iPosition:=3)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsSumCoefFunction.ToScript, 48)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsReFunction.ToScript, 48)
     End Sub
 
     Private Sub cmdCoeffs2_Click(sender As Object, e As EventArgs) Handles cmdCoeffs2.Click
@@ -5939,11 +5941,11 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsCoeffs2Function.ToScript, 39)
     End Sub
 
-    Private Sub cmdDssqSession_Click(sender As Object, e As EventArgs) Handles cmddssqSession.Click
+    Private Sub cmdDigitssqSession_Click(sender As Object, e As EventArgs) Handles cmddigitssq.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dssq(x= )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digitssq(x= )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dssq( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digitssq( )", 2)
         End If
     End Sub
 
