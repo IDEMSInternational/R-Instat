@@ -46,30 +46,30 @@ Partial Class dlgCalculator
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 359)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrBase.Location = New System.Drawing.Point(15, 564)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 175
         '
         'ucrCalc
         '
         Me.ucrCalc.AutoSize = True
-        Me.ucrCalc.Location = New System.Drawing.Point(10, 5)
-        Me.ucrCalc.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrCalc.Location = New System.Drawing.Point(15, 8)
+        Me.ucrCalc.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrCalc.Name = "ucrCalc"
-        Me.ucrCalc.Size = New System.Drawing.Size(860, 358)
+        Me.ucrCalc.Size = New System.Drawing.Size(1299, 557)
         Me.ucrCalc.TabIndex = 174
         '
         'dlgCalculator
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(507, 421)
+        Me.ClientSize = New System.Drawing.Size(760, 649)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrCalc)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCalculator"

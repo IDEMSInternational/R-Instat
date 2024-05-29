@@ -5708,4 +5708,18 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition(" [which.max( )]", 15)
         End If
     End Sub
+
+    Private Sub ucrChkStoreScalar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStoreScalar.ControlValueChanged
+        If ucrChkStoreScalar.Checked AndAlso Not ucrTryCalculator.ucrInputTryMessage.IsEmpty AndAlso ucrSaveResultInto.GetText <> "" Then
+            Dim clsAppendMetadata As New RFunction
+            clsAppendMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
+            clsAppendMetadata.AddParameter("data_name", Chr(34) & ucrSelectorForCalculations.strCurrentDataFrame & Chr(34))
+            clsAppendMetadata.AddParameter("property", "scalars")
+            clsAppendMetadata.AddParameter("new_val", "c(" & ucrSaveResultInto.GetText & "=" & ucrTryCalculator.ucrInputTryMessage.GetText & ")")
+            frmMain.clsRLink.RunScript(clsAppendMetadata.ToScript(), strComment:="Added scalar")
+            ucrSaveResultInto.btnColumnPosition.Enabled = False
+        Else
+            ucrSaveResultInto.btnColumnPosition.Enabled = True
+        End If
+    End Sub
 End Class
