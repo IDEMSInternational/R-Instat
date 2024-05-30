@@ -720,7 +720,7 @@ Public Class dlgDescribeTwoVariable
                 cmdFormatTable.Visible = True
                 ucrChkMeans.Visible = False
                 ucrChkLevSig.Visible = False
-                ucrSaveTable.Location = New Point(23, 350)
+                ucrSaveTable.Location = New Point(23, 351)
                 clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                 ucrSaveTable.SetPrefix("frequency_table")
@@ -902,7 +902,7 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.Location = New Point(iUcrBaseXLocation, 319)
                 Me.Size = New Point(iDialogueXsize, 415)
             ElseIf IsFactorByFactor() Then
-                ucrBase.Location = New Point(iUcrBaseXLocation, 370)
+                ucrBase.Location = New Point(iUcrBaseXLocation, 372)
                 Me.Size = New Point(iDialogueXsize, 465)
                 cmdFormatTable.Location = New Point(326, 330)
             Else
@@ -1171,8 +1171,10 @@ Public Class dlgDescribeTwoVariable
             If ucrChkDisplayAsPercentage.Checked Then
                 If rdoORow.Checked Then
                     ucrReceiverPercentages.SetMeAsReceiver()
-                Else
+                ElseIf rdoOCol.Checked Then
                     ucrReceiverColumns.SetMeAsReceiver()
+                Else
+                    ucrReceiverFirstVars.SetMeAsReceiver()
                 End If
             Else
                 ucrReceiverFirstVars.SetMeAsReceiver()
@@ -1561,52 +1563,39 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub AddingColumnFactor()
-        If rdoOCol.Checked Then
+        If IsFactorByFactor() Then
+            If rdoOCol.Checked Then
+                If Not ucrReceiverFirstVars.IsEmpty Then
+                    ' Get the list of variable names from ucrReceiverFirstVars
+                    Dim variableNames As List(Of String) = ucrReceiverFirstVars.GetVariableNamesAsList
 
-            If Not ucrReceiverFirstVars.IsEmpty Then
-                Dim variableNames As List(Of String) = ucrReceiverFirstVars.GetVariableNamesAsList
-                For Each varName As String In variableNames
-                    ucrReceiverColumns.Add(varName)
-                Next
-                ucrReceiverFirstVars.SetMeAsReceiver()
+                    ' Get the current list of variable names in ucrReceiverColumns
+                    Dim currentColumnVars As List(Of String) = ucrReceiverColumns.GetVariableNamesAsList()
+
+                    ' Remove variables from ucrReceiverColumns that are no longer in ucrReceiverFirstVars
+                    For Each varName As String In currentColumnVars
+                        If Not variableNames.Contains(varName) Then
+                            ucrReceiverColumns.Remove(New String() {varName}) ' Remove expects an array of strings
+                        End If
+                    Next
+
+                    ' Add the remaining variables to ucrReceiverColumns
+                    For Each varName As String In variableNames
+                        If Not currentColumnVars.Contains(varName) Then
+                            ucrReceiverColumns.Add(varName)
+                        End If
+                    Next
+
+                End If
+            ElseIf rdoORow.Checked Then
+                If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
+                    ucrReceiverPercentages.Add(ucrReceiverSecondTwoVariableFactor.GetVariableNames(False))
+                End If
             End If
-        ElseIf rdoORow.Checked Then
-            If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
-                ucrReceiverPercentages.Add(ucrReceiverSecondTwoVariableFactor.GetVariableNames(False))
-                ucrReceiverSecondTwoVariableFactor.SetMeAsReceiver()
-            End If
-        ElseIf rdoOCol.Checked Then
+        Else
             ucrReceiverPercentages.Clear()
             ucrReceiverColumns.Clear()
         End If
-
-        'If rdoOCol.Checked Then
-        '    If Not ucrReceiverFirstVars.IsEmpty Then
-        '        Dim variableNames As List(Of String) = ucrReceiverFirstVars.GetVariableNamesAsList
-        '        For Each varName As String In variableNames
-        '            ucrReceiverColumns.Add(varName)
-        '            'clsCombineFrequencyParametersFunction.AddParameter("perc_total_factors", varName)
-
-        '        Next
-        '        ucrReceiverFirstVars.SetMeAsReceiver()
-        '    End If
-        '    ' Clear ucrReceiverPercentages as it's not needed in this branch
-        '    ucrReceiverPercentages.Clear()
-        'ElseIf rdoORow.Checked Then
-        '    If Not ucrReceiverSecondTwoVariableFactor.IsEmpty Then
-        '        ucrReceiverPercentages.Add(ucrReceiverSecondTwoVariableFactor.GetVariableNames(False))
-        '        ucrReceiverSecondTwoVariableFactor.SetMeAsReceiver()
-        '        'clsCombineFrequencyParametersFunction.AddParameter("perc_total_factors", varName2)
-
-        '    End If
-        '    ' Clear ucrReceiverColumns as it's not needed in this branch
-        '    ucrReceiverColumns.Clear()
-        'Else
-        '    ' Clear both ucrReceiverPercentages and ucrReceiverColumns if neither rdoOCol nor rdoORow is checked
-        '    ucrReceiverPercentages.Clear()
-        '    ucrReceiverColumns.Clear()
-        'End If
-
 
     End Sub
 

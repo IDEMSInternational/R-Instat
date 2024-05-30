@@ -493,7 +493,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrSaveTable.Location = New System.Drawing.Point(22, 676)
         Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveTable.Name = "ucrSaveTable"
-        Me.ucrSaveTable.Size = New System.Drawing.Size(623, 36)
+        Me.ucrSaveTable.Size = New System.Drawing.Size(459, 36)
         Me.ucrSaveTable.TabIndex = 24
         '
         'ucrInputMarginName
