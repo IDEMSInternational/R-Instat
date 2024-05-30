@@ -26,7 +26,7 @@ Partial Class ucrRows
         Me.rdoGroup = New System.Windows.Forms.RadioButton()
         Me.rdoSummary = New System.Windows.Forms.RadioButton()
         Me.ucrPnlRow = New instat.UcrPanel()
-        Me.UcrRowGroup1 = New instat.ucrRowGroup()
+        Me.ucrRowGroups = New instat.ucrRowGroup()
         Me.SuspendLayout()
         '
         'rdoStyle
@@ -92,29 +92,29 @@ Partial Class ucrRows
         'ucrPnlRow
         '
         Me.ucrPnlRow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlRow.Location = New System.Drawing.Point(218, 3)
+        Me.ucrPnlRow.Location = New System.Drawing.Point(93, 3)
         Me.ucrPnlRow.Name = "ucrPnlRow"
-        Me.ucrPnlRow.Size = New System.Drawing.Size(309, 29)
+        Me.ucrPnlRow.Size = New System.Drawing.Size(506, 29)
         Me.ucrPnlRow.TabIndex = 279
         '
-        'UcrRowGroup1
+        'ucrRowGroups
         '
-        Me.UcrRowGroup1.Location = New System.Drawing.Point(3, 38)
-        Me.UcrRowGroup1.Name = "UcrRowGroup1"
-        Me.UcrRowGroup1.Size = New System.Drawing.Size(749, 194)
-        Me.UcrRowGroup1.TabIndex = 283
+        Me.ucrRowGroups.Location = New System.Drawing.Point(3, 38)
+        Me.ucrRowGroups.Name = "ucrRowGroups"
+        Me.ucrRowGroups.Size = New System.Drawing.Size(749, 194)
+        Me.ucrRowGroups.TabIndex = 283
         '
         'ucrRows
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrRowGroup1)
+        Me.Controls.Add(Me.ucrRowGroups)
         Me.Controls.Add(Me.rdoStyle)
         Me.Controls.Add(Me.rdoGroup)
         Me.Controls.Add(Me.rdoSummary)
         Me.Controls.Add(Me.ucrPnlRow)
         Me.Name = "ucrRows"
-        Me.Size = New System.Drawing.Size(753, 235)
+        Me.Size = New System.Drawing.Size(753, 237)
         Me.ResumeLayout(False)
 
     End Sub
@@ -123,5 +123,5 @@ Partial Class ucrRows
     Friend WithEvents rdoGroup As RadioButton
     Friend WithEvents rdoSummary As RadioButton
     Friend WithEvents ucrPnlRow As UcrPanel
-    Friend WithEvents UcrRowGroup1 As ucrRowGroup
+    Friend WithEvents ucrRowGroups As ucrRowGroup
 End Class

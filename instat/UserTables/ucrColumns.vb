@@ -1,5 +1,7 @@
 ﻿Public Class ucrColumns
-    Private Sub ucrColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
+        ucrColumnSpanners.Setup(strDataFrameName, clsOperator)
     End Sub
+
 End Class

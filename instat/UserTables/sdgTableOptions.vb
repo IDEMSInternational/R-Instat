@@ -65,6 +65,7 @@ Public Class sdgTableOptions
 
         ucrHeaderOptions.Setup(clsOperator)
         ucrRows.Setup("survey", clsOperator)
+        ucrColumns.Setup("survey", clsOperator)
         SetupFooterNotesRFunctionsInOperatorOnNew(clsOperator)
         ucrSourceNotes.Setup(clsOperator)
         SetupThemeRFunctionsInOperatorOnNew(clsOperator)

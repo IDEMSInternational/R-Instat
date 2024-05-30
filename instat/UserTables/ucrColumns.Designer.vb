@@ -27,7 +27,7 @@ Partial Class ucrColumns
         Me.ucrPnlRow = New instat.UcrPanel()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.UcrColumnSpanners1 = New instat.ucrColumnSpanners()
+        Me.ucrColumnSpanners = New instat.ucrColumnSpanners()
         Me.SuspendLayout()
         '
         'rdoStyle
@@ -118,25 +118,25 @@ Partial Class ucrColumns
         Me.RadioButton2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.RadioButton2.UseVisualStyleBackColor = True
         '
-        'UcrColumnSpanners1
+        'ucrColumnSpanners
         '
-        Me.UcrColumnSpanners1.Location = New System.Drawing.Point(12, 40)
-        Me.UcrColumnSpanners1.Name = "UcrColumnSpanners1"
-        Me.UcrColumnSpanners1.Size = New System.Drawing.Size(615, 268)
-        Me.UcrColumnSpanners1.TabIndex = 295
+        Me.ucrColumnSpanners.Location = New System.Drawing.Point(12, 40)
+        Me.ucrColumnSpanners.Name = "ucrColumnSpanners"
+        Me.ucrColumnSpanners.Size = New System.Drawing.Size(615, 215)
+        Me.ucrColumnSpanners.TabIndex = 295
         '
         'ucrColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrColumnSpanners1)
+        Me.Controls.Add(Me.ucrColumnSpanners)
         Me.Controls.Add(Me.RadioButton2)
         Me.Controls.Add(Me.RadioButton1)
         Me.Controls.Add(Me.rdoStyle)
         Me.Controls.Add(Me.rdoSummary)
         Me.Controls.Add(Me.ucrPnlRow)
         Me.Name = "ucrColumns"
-        Me.Size = New System.Drawing.Size(633, 309)
+        Me.Size = New System.Drawing.Size(633, 260)
         Me.ResumeLayout(False)
 
     End Sub
@@ -146,5 +146,5 @@ Partial Class ucrColumns
     Friend WithEvents ucrPnlRow As UcrPanel
     Friend WithEvents RadioButton1 As RadioButton
     Friend WithEvents RadioButton2 As RadioButton
-    Friend WithEvents UcrColumnSpanners1 As ucrColumnSpanners
+    Friend WithEvents ucrColumnSpanners As ucrColumnSpanners
 End Class

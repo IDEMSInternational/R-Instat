@@ -33,10 +33,10 @@ Partial Class ucrRowGroup
         Me.lblGroupCondition = New System.Windows.Forms.Label()
         Me.cboConditionOperator = New System.Windows.Forms.ComboBox()
         Me.cboConditionValue = New System.Windows.Forms.ComboBox()
-        Me.txtGroupLabel = New System.Windows.Forms.TextBox()
         Me.lblCondition = New System.Windows.Forms.Label()
         Me.ucrSingleReceiverCol = New instat.ucrReceiverSingle()
         Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputGroupLabel = New instat.ucrInputTextBox()
         CType(Me.dataGridGroups, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -146,13 +146,6 @@ Partial Class ucrRowGroup
         Me.cboConditionValue.Size = New System.Drawing.Size(106, 21)
         Me.cboConditionValue.TabIndex = 280
         '
-        'txtGroupLabel
-        '
-        Me.txtGroupLabel.Location = New System.Drawing.Point(354, 28)
-        Me.txtGroupLabel.Name = "txtGroupLabel"
-        Me.txtGroupLabel.Size = New System.Drawing.Size(100, 20)
-        Me.txtGroupLabel.TabIndex = 281
-        '
         'lblCondition
         '
         Me.lblCondition.AutoSize = True
@@ -188,12 +181,23 @@ Partial Class ucrRowGroup
         Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorCols.TabIndex = 23
         '
+        'ucrInputGroupLabel
+        '
+        Me.ucrInputGroupLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputGroupLabel.AutoSize = True
+        Me.ucrInputGroupLabel.IsMultiline = False
+        Me.ucrInputGroupLabel.IsReadOnly = False
+        Me.ucrInputGroupLabel.Location = New System.Drawing.Point(354, 27)
+        Me.ucrInputGroupLabel.Name = "ucrInputGroupLabel"
+        Me.ucrInputGroupLabel.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputGroupLabel.TabIndex = 308
+        '
         'ucrRowGroup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputGroupLabel)
         Me.Controls.Add(Me.lblCondition)
-        Me.Controls.Add(Me.txtGroupLabel)
         Me.Controls.Add(Me.cboConditionValue)
         Me.Controls.Add(Me.cboConditionOperator)
         Me.Controls.Add(Me.lblGroupCondition)
@@ -222,9 +226,9 @@ Partial Class ucrRowGroup
     Friend WithEvents lblGroupCondition As Label
     Friend WithEvents cboConditionOperator As ComboBox
     Friend WithEvents cboConditionValue As ComboBox
-    Friend WithEvents txtGroupLabel As TextBox
     Friend WithEvents lblCondition As Label
     Friend WithEvents colLabel As DataGridViewTextBoxColumn
     Friend WithEvents colCodnition As DataGridViewTextBoxColumn
     Friend WithEvents colFormat As DataGridViewButtonColumn
+    Friend WithEvents ucrInputGroupLabel As ucrInputTextBox
 End Class

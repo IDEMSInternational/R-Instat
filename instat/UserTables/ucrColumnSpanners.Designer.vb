@@ -22,48 +22,43 @@ Partial Class ucrColumnSpanners
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblGroups = New System.Windows.Forms.Label()
-        Me.btnClearGroups = New System.Windows.Forms.Button()
+        Me.lblSpanners = New System.Windows.Forms.Label()
+        Me.btnClearSpanners = New System.Windows.Forms.Button()
         Me.lblColumns = New System.Windows.Forms.Label()
-        Me.btnAddGroupCondition = New System.Windows.Forms.Button()
+        Me.btnAddColSpanner = New System.Windows.Forms.Button()
         Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.dataGridGroups = New System.Windows.Forms.DataGridView()
-        Me.UcrReceiverMultiple1 = New instat.ucrReceiverMultiple()
-        Me.lblCondition = New System.Windows.Forms.Label()
-        Me.txtGroupLabel = New System.Windows.Forms.TextBox()
-        Me.cboConditionOperator = New System.Windows.Forms.ComboBox()
-        Me.lblGroupCondition = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.dataGridSpanners = New System.Windows.Forms.DataGridView()
         Me.colId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colFormat = New System.Windows.Forms.DataGridViewButtonColumn()
-        CType(Me.dataGridGroups, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrReceiverMultipleCols = New instat.ucrReceiverMultiple()
+        Me.lblColSpanner = New System.Windows.Forms.Label()
+        Me.ucrInputColSpanner = New instat.ucrInputTextBox()
+        CType(Me.dataGridSpanners, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'lblGroups
+        'lblSpanners
         '
-        Me.lblGroups.AutoSize = True
-        Me.lblGroups.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGroups.Location = New System.Drawing.Point(245, 169)
-        Me.lblGroups.Name = "lblGroups"
-        Me.lblGroups.Size = New System.Drawing.Size(55, 13)
-        Me.lblGroups.TabIndex = 297
-        Me.lblGroups.Text = "Spanners:"
+        Me.lblSpanners.AutoSize = True
+        Me.lblSpanners.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSpanners.Location = New System.Drawing.Point(245, 118)
+        Me.lblSpanners.Name = "lblSpanners"
+        Me.lblSpanners.Size = New System.Drawing.Size(55, 13)
+        Me.lblSpanners.TabIndex = 297
+        Me.lblSpanners.Text = "Spanners:"
         '
-        'btnClearGroups
+        'btnClearSpanners
         '
-        Me.btnClearGroups.Enabled = False
-        Me.btnClearGroups.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearGroups.Location = New System.Drawing.Point(534, 162)
-        Me.btnClearGroups.Name = "btnClearGroups"
-        Me.btnClearGroups.Size = New System.Drawing.Size(75, 23)
-        Me.btnClearGroups.TabIndex = 295
-        Me.btnClearGroups.Tag = ""
-        Me.btnClearGroups.Text = "Clear"
-        Me.btnClearGroups.UseVisualStyleBackColor = True
+        Me.btnClearSpanners.Enabled = False
+        Me.btnClearSpanners.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnClearSpanners.Location = New System.Drawing.Point(534, 111)
+        Me.btnClearSpanners.Name = "btnClearSpanners"
+        Me.btnClearSpanners.Size = New System.Drawing.Size(75, 23)
+        Me.btnClearSpanners.TabIndex = 295
+        Me.btnClearSpanners.Tag = ""
+        Me.btnClearSpanners.Text = "Clear"
+        Me.btnClearSpanners.UseVisualStyleBackColor = True
         '
         'lblColumns
         '
@@ -75,17 +70,17 @@ Partial Class ucrColumnSpanners
         Me.lblColumns.TabIndex = 294
         Me.lblColumns.Text = "Column(s):"
         '
-        'btnAddGroupCondition
+        'btnAddColSpanner
         '
-        Me.btnAddGroupCondition.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.btnAddGroupCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnAddGroupCondition.Location = New System.Drawing.Point(472, 20)
-        Me.btnAddGroupCondition.Name = "btnAddGroupCondition"
-        Me.btnAddGroupCondition.Size = New System.Drawing.Size(99, 23)
-        Me.btnAddGroupCondition.TabIndex = 292
-        Me.btnAddGroupCondition.Tag = ""
-        Me.btnAddGroupCondition.Text = "Add"
-        Me.btnAddGroupCondition.UseVisualStyleBackColor = True
+        Me.btnAddColSpanner.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.btnAddColSpanner.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnAddColSpanner.Location = New System.Drawing.Point(472, 20)
+        Me.btnAddColSpanner.Name = "btnAddColSpanner"
+        Me.btnAddColSpanner.Size = New System.Drawing.Size(99, 23)
+        Me.btnAddColSpanner.TabIndex = 292
+        Me.btnAddColSpanner.Tag = ""
+        Me.btnAddColSpanner.Text = "Add"
+        Me.btnAddColSpanner.UseVisualStyleBackColor = True
         '
         'ucrSelectorCols
         '
@@ -99,95 +94,16 @@ Partial Class ucrColumnSpanners
         Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorCols.TabIndex = 290
         '
-        'dataGridGroups
+        'dataGridSpanners
         '
-        Me.dataGridGroups.AllowUserToAddRows = False
-        Me.dataGridGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridGroups.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colId, Me.colLabel, Me.colValue, Me.colFormat})
-        Me.dataGridGroups.Location = New System.Drawing.Point(240, 189)
-        Me.dataGridGroups.Name = "dataGridGroups"
-        Me.dataGridGroups.RowHeadersWidth = 62
-        Me.dataGridGroups.Size = New System.Drawing.Size(369, 73)
-        Me.dataGridGroups.TabIndex = 289
-        '
-        'UcrReceiverMultiple1
-        '
-        Me.UcrReceiverMultiple1.AutoSize = True
-        Me.UcrReceiverMultiple1.frmParent = Nothing
-        Me.UcrReceiverMultiple1.Location = New System.Drawing.Point(240, 21)
-        Me.UcrReceiverMultiple1.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverMultiple1.Name = "UcrReceiverMultiple1"
-        Me.UcrReceiverMultiple1.Selector = Nothing
-        Me.UcrReceiverMultiple1.Size = New System.Drawing.Size(120, 78)
-        Me.UcrReceiverMultiple1.strNcFilePath = ""
-        Me.UcrReceiverMultiple1.TabIndex = 299
-        Me.UcrReceiverMultiple1.ucrSelector = Nothing
-        '
-        'lblCondition
-        '
-        Me.lblCondition.AutoSize = True
-        Me.lblCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCondition.Location = New System.Drawing.Point(370, 5)
-        Me.lblCondition.Name = "lblCondition"
-        Me.lblCondition.Size = New System.Drawing.Size(79, 13)
-        Me.lblCondition.TabIndex = 301
-        Me.lblCondition.Text = "Spanner Label:"
-        '
-        'txtGroupLabel
-        '
-        Me.txtGroupLabel.Location = New System.Drawing.Point(368, 23)
-        Me.txtGroupLabel.Name = "txtGroupLabel"
-        Me.txtGroupLabel.Size = New System.Drawing.Size(100, 20)
-        Me.txtGroupLabel.TabIndex = 300
-        '
-        'cboConditionOperator
-        '
-        Me.cboConditionOperator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboConditionOperator.FormattingEnabled = True
-        Me.cboConditionOperator.Items.AddRange(New Object() {"==", "<", "<=", ">", ">=", "!=", "Expression"})
-        Me.cboConditionOperator.Location = New System.Drawing.Point(240, 132)
-        Me.cboConditionOperator.Name = "cboConditionOperator"
-        Me.cboConditionOperator.Size = New System.Drawing.Size(120, 21)
-        Me.cboConditionOperator.TabIndex = 303
-        '
-        'lblGroupCondition
-        '
-        Me.lblGroupCondition.AutoSize = True
-        Me.lblGroupCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGroupCondition.Location = New System.Drawing.Point(245, 115)
-        Me.lblGroupCondition.Name = "lblGroupCondition"
-        Me.lblGroupCondition.Size = New System.Drawing.Size(62, 13)
-        Me.lblGroupCondition.TabIndex = 302
-        Me.lblGroupCondition.Text = "Spanner Id:"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(370, 115)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(79, 13)
-        Me.Label1.TabIndex = 305
-        Me.Label1.Text = "Spanner Label:"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(368, 133)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 304
-        '
-        'Button1
-        '
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.Button1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button1.Location = New System.Drawing.Point(474, 130)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(99, 23)
-        Me.Button1.TabIndex = 306
-        Me.Button1.Tag = ""
-        Me.Button1.Text = "Add"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.dataGridSpanners.AllowUserToAddRows = False
+        Me.dataGridSpanners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dataGridSpanners.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colId, Me.colLabel, Me.colValue, Me.colFormat})
+        Me.dataGridSpanners.Location = New System.Drawing.Point(240, 138)
+        Me.dataGridSpanners.Name = "dataGridSpanners"
+        Me.dataGridSpanners.RowHeadersWidth = 62
+        Me.dataGridSpanners.Size = New System.Drawing.Size(369, 73)
+        Me.dataGridSpanners.TabIndex = 289
         '
         'colId
         '
@@ -206,10 +122,10 @@ Partial Class ucrColumnSpanners
         'colValue
         '
         Me.colValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colValue.HeaderText = "Value"
+        Me.colValue.HeaderText = "Column(s)/Spanner(s)"
         Me.colValue.MinimumWidth = 8
         Me.colValue.Name = "colValue"
-        Me.colValue.Width = 59
+        Me.colValue.Width = 134
         '
         'colFormat
         '
@@ -219,47 +135,71 @@ Partial Class ucrColumnSpanners
         Me.colFormat.Name = "colFormat"
         Me.colFormat.Width = 8
         '
+        'ucrReceiverMultipleCols
+        '
+        Me.ucrReceiverMultipleCols.AutoSize = True
+        Me.ucrReceiverMultipleCols.frmParent = Nothing
+        Me.ucrReceiverMultipleCols.Location = New System.Drawing.Point(240, 21)
+        Me.ucrReceiverMultipleCols.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultipleCols.Name = "ucrReceiverMultipleCols"
+        Me.ucrReceiverMultipleCols.Selector = Nothing
+        Me.ucrReceiverMultipleCols.Size = New System.Drawing.Size(120, 78)
+        Me.ucrReceiverMultipleCols.strNcFilePath = ""
+        Me.ucrReceiverMultipleCols.TabIndex = 299
+        Me.ucrReceiverMultipleCols.ucrSelector = Nothing
+        '
+        'lblColSpanner
+        '
+        Me.lblColSpanner.AutoSize = True
+        Me.lblColSpanner.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColSpanner.Location = New System.Drawing.Point(370, 5)
+        Me.lblColSpanner.Name = "lblColSpanner"
+        Me.lblColSpanner.Size = New System.Drawing.Size(79, 13)
+        Me.lblColSpanner.TabIndex = 301
+        Me.lblColSpanner.Text = "Spanner Label:"
+        '
+        'ucrInputColSpanner
+        '
+        Me.ucrInputColSpanner.AddQuotesIfUnrecognised = True
+        Me.ucrInputColSpanner.AutoSize = True
+        Me.ucrInputColSpanner.IsMultiline = False
+        Me.ucrInputColSpanner.IsReadOnly = False
+        Me.ucrInputColSpanner.Location = New System.Drawing.Point(368, 22)
+        Me.ucrInputColSpanner.Name = "ucrInputColSpanner"
+        Me.ucrInputColSpanner.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputColSpanner.TabIndex = 307
+        '
         'ucrColumnSpanners
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.cboConditionOperator)
-        Me.Controls.Add(Me.lblGroupCondition)
-        Me.Controls.Add(Me.lblCondition)
-        Me.Controls.Add(Me.txtGroupLabel)
-        Me.Controls.Add(Me.UcrReceiverMultiple1)
-        Me.Controls.Add(Me.lblGroups)
-        Me.Controls.Add(Me.btnClearGroups)
+        Me.Controls.Add(Me.ucrInputColSpanner)
+        Me.Controls.Add(Me.lblColSpanner)
+        Me.Controls.Add(Me.ucrReceiverMultipleCols)
+        Me.Controls.Add(Me.lblSpanners)
+        Me.Controls.Add(Me.btnClearSpanners)
         Me.Controls.Add(Me.lblColumns)
-        Me.Controls.Add(Me.btnAddGroupCondition)
+        Me.Controls.Add(Me.btnAddColSpanner)
         Me.Controls.Add(Me.ucrSelectorCols)
-        Me.Controls.Add(Me.dataGridGroups)
+        Me.Controls.Add(Me.dataGridSpanners)
         Me.Name = "ucrColumnSpanners"
-        Me.Size = New System.Drawing.Size(615, 268)
-        CType(Me.dataGridGroups, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Size = New System.Drawing.Size(612, 216)
+        CType(Me.dataGridSpanners, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lblGroups As Label
-    Friend WithEvents btnClearGroups As Button
+    Friend WithEvents lblSpanners As Label
+    Friend WithEvents btnClearSpanners As Button
     Friend WithEvents lblColumns As Label
-    Friend WithEvents btnAddGroupCondition As Button
+    Friend WithEvents btnAddColSpanner As Button
     Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents dataGridGroups As DataGridView
-    Friend WithEvents UcrReceiverMultiple1 As ucrReceiverMultiple
-    Friend WithEvents lblCondition As Label
-    Friend WithEvents txtGroupLabel As TextBox
+    Friend WithEvents dataGridSpanners As DataGridView
+    Friend WithEvents ucrReceiverMultipleCols As ucrReceiverMultiple
+    Friend WithEvents lblColSpanner As Label
     Friend WithEvents colId As DataGridViewTextBoxColumn
     Friend WithEvents colLabel As DataGridViewTextBoxColumn
     Friend WithEvents colValue As DataGridViewTextBoxColumn
     Friend WithEvents colFormat As DataGridViewButtonColumn
-    Friend WithEvents cboConditionOperator As ComboBox
-    Friend WithEvents lblGroupCondition As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents ucrInputColSpanner As ucrInputTextBox
 End Class
