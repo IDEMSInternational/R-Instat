@@ -30,6 +30,7 @@ Partial Class ucrColumns
         Me.ucrColumnLabels = New instat.ucrColumnLabels()
         Me.ucrColumnSpanners = New instat.ucrColumnSpanners()
         Me.ucrPnlCols = New instat.UcrPanel()
+        Me.UcrColumnFormats1 = New instat.ucrColumnFormats()
         Me.SuspendLayout()
         '
         'rdoStyles
@@ -154,10 +155,18 @@ Partial Class ucrColumns
         Me.ucrPnlCols.Size = New System.Drawing.Size(570, 29)
         Me.ucrPnlCols.TabIndex = 289
         '
+        'UcrColumnFormats1
+        '
+        Me.UcrColumnFormats1.Location = New System.Drawing.Point(6, 51)
+        Me.UcrColumnFormats1.Name = "UcrColumnFormats1"
+        Me.UcrColumnFormats1.Size = New System.Drawing.Size(620, 194)
+        Me.UcrColumnFormats1.TabIndex = 298
+        '
         'ucrColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.UcrColumnFormats1)
         Me.Controls.Add(Me.ucrColumnLabels)
         Me.Controls.Add(Me.rdoColLabel)
         Me.Controls.Add(Me.ucrColumnSpanners)
@@ -180,4 +189,5 @@ Partial Class ucrColumns
     Friend WithEvents ucrColumnSpanners As ucrColumnSpanners
     Friend WithEvents rdoColLabel As RadioButton
     Friend WithEvents ucrColumnLabels As ucrColumnLabels
+    Friend WithEvents UcrColumnFormats1 As ucrColumnFormats
 End Class
