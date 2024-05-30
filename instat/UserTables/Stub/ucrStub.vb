@@ -24,16 +24,14 @@ Public Class ucrStub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
 
-        If 1 = 1 Then
-            Exit Sub
-        End If
-
         If bFirstload Then
             initialiseDialog()
             bFirstload = False
         End If
 
         Me.clsOperator = clsOperator
+
+        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
 
         Dim lstRParams As List(Of RParameter)
 
@@ -42,8 +40,8 @@ Public Class ucrStub
         ' The GT paramter should always be there. 
         If lstRParams.Count > 0 Then
             clsGtRFunction = lstRParams(0).clsArgumentCodeStructure
-            ucrReceiverSingleRowName.SetRCode(clsGtRFunction, True, bCloneIfNeeded:=True)
-            ucrReceiverSingleGroupByCol.SetRCode(clsGtRFunction, True, bCloneIfNeeded:=True)
+            ucrReceiverSingleRowName.SetRCode(clsGtRFunction, False, bCloneIfNeeded:=True)
+            ucrReceiverSingleGroupByCol.SetRCode(clsGtRFunction, False, bCloneIfNeeded:=True)
         End If
 
 
@@ -64,7 +62,7 @@ Public Class ucrStub
         If ucrInputStubHead.IsEmpty Then
             clsOperator.RemoveParameter(clsStubHeadRParameter)
         Else
-            clsStubHeadRParameter.clsArgumentCodeStructure.AddParameter("label", strParameterValue:=clsTablesUtils.GetStringValue(ucrInputStubHead.GetValue(), True)
+            clsStubHeadRParameter.clsArgumentCodeStructure.AddParameter("label", strParameterValue:=clsTablesUtils.GetStringValue(ucrInputStubHead.GetValue(), True))
             clsOperator.AddParameter(clsStubHeadRParameter)
         End If
     End Sub

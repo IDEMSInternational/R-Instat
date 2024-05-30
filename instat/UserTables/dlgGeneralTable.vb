@@ -76,16 +76,6 @@ Public Class dlgGeneralTable
         ucrReceiverMultipleCols.Selector = ucrSelectorCols
         ucrReceiverMultipleCols.SetLinkedDisplayControl(lblColumns)
 
-        ucrReceiverSingleRowName.SetParameter(New RParameter("rowname_col", 0))
-        ucrReceiverSingleRowName.SetParameterIsString()
-        ucrReceiverSingleRowName.Selector = ucrSelectorCols
-        ucrReceiverSingleRowName.SetLinkedDisplayControl(lblRowName)
-
-        ucrReceiverSingleGroupByCol.SetParameter(New RParameter("groupname_col", 1))
-        ucrReceiverSingleGroupByCol.SetParameterIsString()
-        ucrReceiverSingleGroupByCol.Selector = ucrSelectorCols
-        ucrReceiverSingleGroupByCol.SetLinkedDisplayControl(lblGroupByCol)
-
         ucrChkPreview.SetText("Preview")
         ucrChkPreview.AddParameterPresentCondition(True, "head", bNewIsPositive:=True)
         ucrChkPreview.AddParameterPresentCondition(False, "head", bNewIsPositive:=False)
@@ -155,9 +145,6 @@ Public Class dlgGeneralTable
         ucrInputHeaderSubtitle.SetRCode(clsGtSubtitleRFunction, bReset)
         ucrReceiverMultipleCols.SetRCode(clsBaseOperator, bReset)
         ucrSaveTable.SetRCode(clsBaseOperator, bReset)
-
-        ucrReceiverSingleRowName.SetRCode(clsGtRFunction, bReset)
-        ucrReceiverSingleGroupByCol.SetRCode(clsGtRFunction, bReset)
 
         ucrChkPreview.SetRCode(clsBaseOperator, bReset)
         ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
