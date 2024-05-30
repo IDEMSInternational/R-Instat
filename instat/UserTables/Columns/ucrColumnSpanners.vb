@@ -25,7 +25,6 @@
 
             Dim clsTabSpannerRFunction As RFunction = clsRParam.clsArgumentCodeStructure
 
-            ' Create a new row that represents the tab_footnote() parameters
             Dim row As New DataGridViewRow
             row.CreateCells(dataGridSpanners)
 
@@ -39,7 +38,6 @@
                 End If
             Next
 
-            ' Tag and add the  tab_row_group() parameter function contents as a row
             row.Tag = clsRParam
             dataGridSpanners.Rows.Add(row)
 
@@ -53,15 +51,15 @@
         Dim strSpannerId As String = strSpannerLabel.Replace(" ", String.Empty)
         Dim strSpannerColsRFunction As String = mdlCoreControl.GetRVector(ucrReceiverMultipleCols.GetVariableNamesList(bWithQuotes:=False), bOnlyIfMultipleElement:=False)
 
-        Dim clsTabRowGroupRFunction As New RFunction
-        clsTabRowGroupRFunction.SetPackageName("gt")
-        clsTabRowGroupRFunction.SetRCommand("tab_spanner")
-        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="label", strParamValue:=clsTablesUtils.GetStringValue(strSpannerLabel, True), iNewPosition:=0))
-        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=strSpannerColsRFunction, iNewPosition:=1))
-        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="id", strParamValue:=clsTablesUtils.GetStringValue(strSpannerId, True), iNewPosition:=2))
+        Dim clsTabSpannerRFunction As New RFunction
+        clsTabSpannerRFunction.SetPackageName("gt")
+        clsTabSpannerRFunction.SetRCommand("tab_spanner")
+        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="label", strParamValue:=clsTablesUtils.GetStringValue(strSpannerLabel, True), iNewPosition:=0))
+        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=strSpannerColsRFunction, iNewPosition:=1))
+        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="id", strParamValue:=clsTablesUtils.GetStringValue(strSpannerId, True), iNewPosition:=2))
 
         ' Create parameter with unique name
-        Dim clsRParam As New RParameter(strParameterName:="tab_spanner_param" & (dataGridSpanners.Rows.Count + 1), strParamValue:=clsTabRowGroupRFunction, bNewIncludeArgumentName:=False)
+        Dim clsRParam As New RParameter(strParameterName:="tab_spanner_param" & (dataGridSpanners.Rows.Count + 1), strParamValue:=clsTabSpannerRFunction, bNewIncludeArgumentName:=False)
 
         Dim row As New DataGridViewRow
         row.CreateCells(dataGridSpanners)
@@ -70,7 +68,6 @@
         row.Cells(1).Value = strSpannerLabel
         row.Cells(2).Value = strSpannerColsRFunction
 
-        ' Tag and add the  tab_row_group() parameter function contents as a row
         row.Tag = clsRParam
         dataGridSpanners.Rows.Add(row)
 

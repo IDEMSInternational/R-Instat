@@ -58,8 +58,8 @@ Partial Class sdgTableOptions
         'tbpFormatOptions
         '
         Me.tbpFormatOptions.Controls.Add(Me.tbpHeader)
-        Me.tbpFormatOptions.Controls.Add(Me.tbpRows)
         Me.tbpFormatOptions.Controls.Add(Me.tbpColumns)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpRows)
         Me.tbpFormatOptions.Controls.Add(Me.tbpCells)
         Me.tbpFormatOptions.Controls.Add(Me.tbpSourceNotes)
         Me.tbpFormatOptions.Controls.Add(Me.tbpThemes)

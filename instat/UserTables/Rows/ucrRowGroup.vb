@@ -4,8 +4,8 @@
     Private bFirstload As Boolean = True
 
     Private Sub InitialiseDialog()
-        ucrSingleReceiverCol.Selector = ucrSelectorCols
-        ucrSingleReceiverCol.SetMeAsReceiver()
+        ucrReceiverSingleCol.Selector = ucrSelectorCols
+        ucrReceiverSingleCol.SetMeAsReceiver()
     End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
@@ -50,7 +50,7 @@
 
         Dim strGroupLabel As String = ucrInputGroupLabel.GetValue()
         Dim strConditionValue As String = If(cboConditionOperator.Text <> "Expression" AndAlso Not IsNumeric(cboConditionValue.Text), clsTablesUtils.GetStringValue(cboConditionValue.Text, True), cboConditionValue.Text)
-        Dim strCondition As String = ucrSingleReceiverCol.GetVariableNames(bWithQuotes:=False) & " " & cboConditionOperator.Text & " " & strConditionValue
+        Dim strCondition As String = ucrReceiverSingleCol.GetVariableNames(bWithQuotes:=False) & " " & cboConditionOperator.Text & " " & strConditionValue
 
         Dim clsTabRowGroupRFunction As New RFunction
         clsTabRowGroupRFunction.SetPackageName("gt")
@@ -75,7 +75,7 @@
         ' Add to parameter
         clsOperator.AddParameter(clsRParam)
 
-        ucrSingleReceiverCol.Clear()
+        ucrReceiverSingleCol.Clear()
         ucrInputGroupLabel.SetName("")
         cboConditionValue.Text = ""
 
@@ -92,11 +92,11 @@
         EnableDisableAddConditionButton()
     End Sub
 
-    Private Sub conditionValue_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSingleReceiverCol.ControlContentsChanged, ucrInputGroupLabel.ControlContentsChanged
+    Private Sub conditionValue_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingleCol.ControlContentsChanged, ucrInputGroupLabel.ControlContentsChanged
         EnableDisableAddConditionButton()
     End Sub
 
     Private Sub EnableDisableAddConditionButton()
-        btnAddCondition.Enabled = Not ucrSingleReceiverCol.IsEmpty AndAlso Not ucrInputGroupLabel.IsEmpty AndAlso Not String.IsNullOrWhiteSpace(cboConditionValue.Text) AndAlso Not String.IsNullOrWhiteSpace(cboConditionOperator.Text)
+        btnAddCondition.Enabled = Not ucrReceiverSingleCol.IsEmpty AndAlso Not ucrInputGroupLabel.IsEmpty AndAlso Not String.IsNullOrWhiteSpace(cboConditionValue.Text) AndAlso Not String.IsNullOrWhiteSpace(cboConditionOperator.Text)
     End Sub
 End Class

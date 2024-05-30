@@ -34,7 +34,7 @@ Partial Class ucrRowGroup
         Me.cboConditionOperator = New System.Windows.Forms.ComboBox()
         Me.cboConditionValue = New System.Windows.Forms.ComboBox()
         Me.lblCondition = New System.Windows.Forms.Label()
-        Me.ucrSingleReceiverCol = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSingleCol = New instat.ucrReceiverSingle()
         Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputGroupLabel = New instat.ucrInputTextBox()
         CType(Me.dataGridGroups, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,7 +105,7 @@ Partial Class ucrRowGroup
         Me.btnAddCondition.Size = New System.Drawing.Size(96, 23)
         Me.btnAddCondition.TabIndex = 25
         Me.btnAddCondition.Tag = ""
-        Me.btnAddCondition.Text = "Add Group"
+        Me.btnAddCondition.Text = "Add"
         Me.btnAddCondition.UseVisualStyleBackColor = True
         '
         'lblGroups
@@ -156,18 +156,18 @@ Partial Class ucrRowGroup
         Me.lblCondition.TabIndex = 282
         Me.lblCondition.Text = "Group Label:"
         '
-        'ucrSingleReceiverCol
+        'ucrReceiverSingleCol
         '
-        Me.ucrSingleReceiverCol.AutoSize = True
-        Me.ucrSingleReceiverCol.frmParent = Nothing
-        Me.ucrSingleReceiverCol.Location = New System.Drawing.Point(226, 27)
-        Me.ucrSingleReceiverCol.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSingleReceiverCol.Name = "ucrSingleReceiverCol"
-        Me.ucrSingleReceiverCol.Selector = Nothing
-        Me.ucrSingleReceiverCol.Size = New System.Drawing.Size(120, 21)
-        Me.ucrSingleReceiverCol.strNcFilePath = ""
-        Me.ucrSingleReceiverCol.TabIndex = 24
-        Me.ucrSingleReceiverCol.ucrSelector = Nothing
+        Me.ucrReceiverSingleCol.AutoSize = True
+        Me.ucrReceiverSingleCol.frmParent = Nothing
+        Me.ucrReceiverSingleCol.Location = New System.Drawing.Point(226, 27)
+        Me.ucrReceiverSingleCol.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSingleCol.Name = "ucrReceiverSingleCol"
+        Me.ucrReceiverSingleCol.Selector = Nothing
+        Me.ucrReceiverSingleCol.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverSingleCol.strNcFilePath = ""
+        Me.ucrReceiverSingleCol.TabIndex = 24
+        Me.ucrReceiverSingleCol.ucrSelector = Nothing
         '
         'ucrSelectorCols
         '
@@ -205,7 +205,7 @@ Partial Class ucrRowGroup
         Me.Controls.Add(Me.btnClearGroups)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.btnAddCondition)
-        Me.Controls.Add(Me.ucrSingleReceiverCol)
+        Me.Controls.Add(Me.ucrReceiverSingleCol)
         Me.Controls.Add(Me.ucrSelectorCols)
         Me.Controls.Add(Me.dataGridGroups)
         Me.Name = "ucrRowGroup"
@@ -221,7 +221,7 @@ Partial Class ucrRowGroup
     Friend WithEvents btnClearGroups As Button
     Friend WithEvents lblColumns As Label
     Friend WithEvents btnAddCondition As Button
-    Friend WithEvents ucrSingleReceiverCol As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSingleCol As ucrReceiverSingle
     Friend WithEvents lblGroups As Label
     Friend WithEvents lblGroupCondition As Label
     Friend WithEvents cboConditionOperator As ComboBox
