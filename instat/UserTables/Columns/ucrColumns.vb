@@ -21,7 +21,7 @@
     End Sub
 
 
-    Private Sub ucrPnlRow_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCols.ControlValueChanged
+    Private Sub ucrPnlCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCols.ControlValueChanged
         ucrColumnLabels.Visible = rdoColLabel.Checked
         ucrColumnSpanners.Visible = rdoColSpanners.Checked
     End Sub

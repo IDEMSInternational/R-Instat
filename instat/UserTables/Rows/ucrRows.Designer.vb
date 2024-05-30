@@ -22,80 +22,80 @@ Partial Class ucrRows
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.rdoStyle = New System.Windows.Forms.RadioButton()
-        Me.rdoGroup = New System.Windows.Forms.RadioButton()
-        Me.rdoSummary = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlRow = New instat.UcrPanel()
+        Me.rdoRpwsStyles = New System.Windows.Forms.RadioButton()
+        Me.rdoRowsGroups = New System.Windows.Forms.RadioButton()
+        Me.rdoRowsSummaries = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlRows = New instat.UcrPanel()
         Me.ucrRowGroups = New instat.ucrRowGroup()
         Me.SuspendLayout()
         '
-        'rdoStyle
+        'rdoRpwsStyles
         '
-        Me.rdoStyle.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoStyle.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoStyle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoStyle.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoStyle.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoStyle.FlatAppearance.BorderSize = 2
-        Me.rdoStyle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoStyle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoStyle.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStyle.Location = New System.Drawing.Point(412, 3)
-        Me.rdoStyle.Name = "rdoStyle"
-        Me.rdoStyle.Size = New System.Drawing.Size(91, 29)
-        Me.rdoStyle.TabIndex = 282
-        Me.rdoStyle.Text = "Styles"
-        Me.rdoStyle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoStyle.UseVisualStyleBackColor = True
+        Me.rdoRpwsStyles.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoRpwsStyles.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoRpwsStyles.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoRpwsStyles.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoRpwsStyles.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRpwsStyles.FlatAppearance.BorderSize = 2
+        Me.rdoRpwsStyles.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRpwsStyles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoRpwsStyles.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoRpwsStyles.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoRpwsStyles.Location = New System.Drawing.Point(412, 3)
+        Me.rdoRpwsStyles.Name = "rdoRpwsStyles"
+        Me.rdoRpwsStyles.Size = New System.Drawing.Size(91, 29)
+        Me.rdoRpwsStyles.TabIndex = 282
+        Me.rdoRpwsStyles.Text = "Styles"
+        Me.rdoRpwsStyles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoRpwsStyles.UseVisualStyleBackColor = True
         '
-        'rdoGroup
+        'rdoRowsGroups
         '
-        Me.rdoGroup.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoGroup.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoGroup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoGroup.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoGroup.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGroup.FlatAppearance.BorderSize = 2
-        Me.rdoGroup.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGroup.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoGroup.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoGroup.Location = New System.Drawing.Point(235, 3)
-        Me.rdoGroup.Name = "rdoGroup"
-        Me.rdoGroup.Size = New System.Drawing.Size(91, 29)
-        Me.rdoGroup.TabIndex = 280
-        Me.rdoGroup.Text = "Groups"
-        Me.rdoGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoGroup.UseVisualStyleBackColor = True
+        Me.rdoRowsGroups.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoRowsGroups.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoRowsGroups.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoRowsGroups.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoRowsGroups.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRowsGroups.FlatAppearance.BorderSize = 2
+        Me.rdoRowsGroups.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRowsGroups.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoRowsGroups.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoRowsGroups.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoRowsGroups.Location = New System.Drawing.Point(235, 3)
+        Me.rdoRowsGroups.Name = "rdoRowsGroups"
+        Me.rdoRowsGroups.Size = New System.Drawing.Size(91, 29)
+        Me.rdoRowsGroups.TabIndex = 280
+        Me.rdoRowsGroups.Text = "Groups"
+        Me.rdoRowsGroups.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoRowsGroups.UseVisualStyleBackColor = True
         '
-        'rdoSummary
+        'rdoRowsSummaries
         '
-        Me.rdoSummary.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoSummary.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoSummary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoSummary.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoSummary.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSummary.FlatAppearance.BorderSize = 2
-        Me.rdoSummary.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoSummary.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSummary.Location = New System.Drawing.Point(324, 3)
-        Me.rdoSummary.Name = "rdoSummary"
-        Me.rdoSummary.Size = New System.Drawing.Size(91, 29)
-        Me.rdoSummary.TabIndex = 281
-        Me.rdoSummary.Text = "Summaries"
-        Me.rdoSummary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoSummary.UseVisualStyleBackColor = True
+        Me.rdoRowsSummaries.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoRowsSummaries.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoRowsSummaries.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoRowsSummaries.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoRowsSummaries.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRowsSummaries.FlatAppearance.BorderSize = 2
+        Me.rdoRowsSummaries.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRowsSummaries.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoRowsSummaries.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoRowsSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoRowsSummaries.Location = New System.Drawing.Point(324, 3)
+        Me.rdoRowsSummaries.Name = "rdoRowsSummaries"
+        Me.rdoRowsSummaries.Size = New System.Drawing.Size(91, 29)
+        Me.rdoRowsSummaries.TabIndex = 281
+        Me.rdoRowsSummaries.Text = "Summaries"
+        Me.rdoRowsSummaries.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoRowsSummaries.UseVisualStyleBackColor = True
         '
-        'ucrPnlRow
+        'ucrPnlRows
         '
-        Me.ucrPnlRow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlRow.Location = New System.Drawing.Point(93, 3)
-        Me.ucrPnlRow.Name = "ucrPnlRow"
-        Me.ucrPnlRow.Size = New System.Drawing.Size(506, 29)
-        Me.ucrPnlRow.TabIndex = 279
+        Me.ucrPnlRows.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlRows.Location = New System.Drawing.Point(93, 3)
+        Me.ucrPnlRows.Name = "ucrPnlRows"
+        Me.ucrPnlRows.Size = New System.Drawing.Size(506, 29)
+        Me.ucrPnlRows.TabIndex = 279
         '
         'ucrRowGroups
         '
@@ -109,19 +109,19 @@ Partial Class ucrRows
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrRowGroups)
-        Me.Controls.Add(Me.rdoStyle)
-        Me.Controls.Add(Me.rdoGroup)
-        Me.Controls.Add(Me.rdoSummary)
-        Me.Controls.Add(Me.ucrPnlRow)
+        Me.Controls.Add(Me.rdoRpwsStyles)
+        Me.Controls.Add(Me.rdoRowsGroups)
+        Me.Controls.Add(Me.rdoRowsSummaries)
+        Me.Controls.Add(Me.ucrPnlRows)
         Me.Name = "ucrRows"
         Me.Size = New System.Drawing.Size(753, 237)
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents rdoStyle As RadioButton
-    Friend WithEvents rdoGroup As RadioButton
-    Friend WithEvents rdoSummary As RadioButton
-    Friend WithEvents ucrPnlRow As UcrPanel
+    Friend WithEvents rdoRpwsStyles As RadioButton
+    Friend WithEvents rdoRowsGroups As RadioButton
+    Friend WithEvents rdoRowsSummaries As RadioButton
+    Friend WithEvents ucrPnlRows As UcrPanel
     Friend WithEvents ucrRowGroups As ucrRowGroup
 End Class
