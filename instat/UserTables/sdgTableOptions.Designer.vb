@@ -25,10 +25,11 @@ Partial Class sdgTableOptions
         Me.tbpFormatOptions = New System.Windows.Forms.TabControl()
         Me.tbpHeader = New System.Windows.Forms.TabPage()
         Me.ucrHeaderOptions = New instat.ucrHeader()
-        Me.tbpRows = New System.Windows.Forms.TabPage()
-        Me.ucrRows = New instat.ucrRows()
+        Me.tbpStub = New System.Windows.Forms.TabPage()
         Me.tbpColumns = New System.Windows.Forms.TabPage()
         Me.ucrColumns = New instat.ucrColumns()
+        Me.tbpRows = New System.Windows.Forms.TabPage()
+        Me.ucrRows = New instat.ucrRows()
         Me.tbpCells = New System.Windows.Forms.TabPage()
         Me.dataGridCellFooterNotes = New System.Windows.Forms.DataGridView()
         Me.colFooterNoteText = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,10 +46,12 @@ Partial Class sdgTableOptions
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.ucrPnlThemesPanel = New instat.UcrPanel()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrStub = New instat.ucrStub()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
-        Me.tbpRows.SuspendLayout()
+        Me.tbpStub.SuspendLayout()
         Me.tbpColumns.SuspendLayout()
+        Me.tbpRows.SuspendLayout()
         Me.tbpCells.SuspendLayout()
         CType(Me.dataGridCellFooterNotes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpSourceNotes.SuspendLayout()
@@ -58,6 +61,7 @@ Partial Class sdgTableOptions
         'tbpFormatOptions
         '
         Me.tbpFormatOptions.Controls.Add(Me.tbpHeader)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpStub)
         Me.tbpFormatOptions.Controls.Add(Me.tbpColumns)
         Me.tbpFormatOptions.Controls.Add(Me.tbpRows)
         Me.tbpFormatOptions.Controls.Add(Me.tbpCells)
@@ -87,22 +91,15 @@ Partial Class sdgTableOptions
         Me.ucrHeaderOptions.Size = New System.Drawing.Size(303, 114)
         Me.ucrHeaderOptions.TabIndex = 16
         '
-        'tbpRows
+        'tbpStub
         '
-        Me.tbpRows.Controls.Add(Me.ucrRows)
-        Me.tbpRows.Location = New System.Drawing.Point(4, 22)
-        Me.tbpRows.Name = "tbpRows"
-        Me.tbpRows.Size = New System.Drawing.Size(771, 324)
-        Me.tbpRows.TabIndex = 7
-        Me.tbpRows.Text = "Rows"
-        Me.tbpRows.UseVisualStyleBackColor = True
-        '
-        'ucrRows
-        '
-        Me.ucrRows.Location = New System.Drawing.Point(7, 9)
-        Me.ucrRows.Name = "ucrRows"
-        Me.ucrRows.Size = New System.Drawing.Size(750, 237)
-        Me.ucrRows.TabIndex = 0
+        Me.tbpStub.Controls.Add(Me.ucrStub)
+        Me.tbpStub.Location = New System.Drawing.Point(4, 22)
+        Me.tbpStub.Name = "tbpStub"
+        Me.tbpStub.Size = New System.Drawing.Size(771, 324)
+        Me.tbpStub.TabIndex = 9
+        Me.tbpStub.Text = "Stub"
+        Me.tbpStub.UseVisualStyleBackColor = True
         '
         'tbpColumns
         '
@@ -120,6 +117,23 @@ Partial Class sdgTableOptions
         Me.ucrColumns.Name = "ucrColumns"
         Me.ucrColumns.Size = New System.Drawing.Size(700, 270)
         Me.ucrColumns.TabIndex = 0
+        '
+        'tbpRows
+        '
+        Me.tbpRows.Controls.Add(Me.ucrRows)
+        Me.tbpRows.Location = New System.Drawing.Point(4, 22)
+        Me.tbpRows.Name = "tbpRows"
+        Me.tbpRows.Size = New System.Drawing.Size(771, 324)
+        Me.tbpRows.TabIndex = 7
+        Me.tbpRows.Text = "Rows"
+        Me.tbpRows.UseVisualStyleBackColor = True
+        '
+        'ucrRows
+        '
+        Me.ucrRows.Location = New System.Drawing.Point(7, 9)
+        Me.ucrRows.Name = "ucrRows"
+        Me.ucrRows.Size = New System.Drawing.Size(750, 237)
+        Me.ucrRows.TabIndex = 0
         '
         'tbpCells
         '
@@ -278,6 +292,13 @@ Partial Class sdgTableOptions
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(254, 29)
         Me.ucrBaseSubdialog.TabIndex = 4
         '
+        'ucrStub
+        '
+        Me.ucrStub.Location = New System.Drawing.Point(7, 7)
+        Me.ucrStub.Name = "ucrStub"
+        Me.ucrStub.Size = New System.Drawing.Size(411, 191)
+        Me.ucrStub.TabIndex = 0
+        '
         'sdgTableOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -291,8 +312,9 @@ Partial Class sdgTableOptions
         Me.Text = "Table Options"
         Me.tbpFormatOptions.ResumeLayout(False)
         Me.tbpHeader.ResumeLayout(False)
-        Me.tbpRows.ResumeLayout(False)
+        Me.tbpStub.ResumeLayout(False)
         Me.tbpColumns.ResumeLayout(False)
+        Me.tbpRows.ResumeLayout(False)
         Me.tbpCells.ResumeLayout(False)
         Me.tbpCells.PerformLayout()
         CType(Me.dataGridCellFooterNotes, System.ComponentModel.ISupportInitialize).EndInit()
@@ -327,4 +349,6 @@ Partial Class sdgTableOptions
     Friend WithEvents tbpColumns As TabPage
     Friend WithEvents ucrColumns As ucrColumns
     Friend WithEvents ucrRows As ucrRows
+    Friend WithEvents tbpStub As TabPage
+    Friend WithEvents ucrStub As ucrStub
 End Class

@@ -64,6 +64,7 @@ Public Class sdgTableOptions
         clsOperator = clsNewOperator
 
         ucrHeaderOptions.Setup(clsOperator)
+        ucrStub.Setup("survey", clsOperator)
         ucrRows.Setup("survey", clsOperator)
         ucrColumns.Setup("survey", clsOperator)
         SetupFooterNotesRFunctionsInOperatorOnNew(clsOperator)

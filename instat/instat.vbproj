@@ -3050,10 +3050,10 @@
     <Compile Include="UserControl\ucrOutputPages.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserTables\ucrCells.Designer.vb">
+    <Compile Include="UserTables\Cells\ucrCells.Designer.vb">
       <DependentUpon>ucrCells.vb</DependentUpon>
     </Compile>
-    <Compile Include="UserTables\ucrCells.vb">
+    <Compile Include="UserTables\Cells\ucrCells.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\Columns\ucrColumnFormats.Designer.vb">
@@ -3080,10 +3080,10 @@
     <Compile Include="UserTables\Columns\ucrColumnSpanners.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserTables\ucrHeader.Designer.vb">
+    <Compile Include="UserTables\Header\ucrHeader.Designer.vb">
       <DependentUpon>ucrHeader.vb</DependentUpon>
     </Compile>
-    <Compile Include="UserTables\ucrHeader.vb">
+    <Compile Include="UserTables\Header\ucrHeader.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\Rows\ucrRowGroup.Designer.vb">
@@ -3104,10 +3104,16 @@
     <Compile Include="UserTables\Rows\ucrRowSummary.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserTables\ucrSourceNotes.Designer.vb">
+    <Compile Include="UserTables\SourceNotes\ucrSourceNotes.Designer.vb">
       <DependentUpon>ucrSourceNotes.vb</DependentUpon>
     </Compile>
-    <Compile Include="UserTables\ucrSourceNotes.vb">
+    <Compile Include="UserTables\SourceNotes\ucrSourceNotes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStub.Designer.vb">
+      <DependentUpon>ucrStub.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStub.vb">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -5413,7 +5419,7 @@
     <EmbeddedResource Include="UserControl\ucrOutputPages.resx">
       <DependentUpon>ucrOutputPages.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\ucrCells.resx">
+    <EmbeddedResource Include="UserTables\Cells\ucrCells.resx">
       <DependentUpon>ucrCells.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Columns\ucrColumnFormats.resx">
@@ -5428,7 +5434,7 @@
     <EmbeddedResource Include="UserTables\Columns\ucrColumnSpanners.resx">
       <DependentUpon>ucrColumnSpanners.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\ucrHeader.resx">
+    <EmbeddedResource Include="UserTables\Header\ucrHeader.resx">
       <DependentUpon>ucrHeader.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Rows\ucrRowGroup.resx">
@@ -5440,8 +5446,11 @@
     <EmbeddedResource Include="UserTables\Rows\ucrRowSummary.resx">
       <DependentUpon>ucrRowSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\ucrSourceNotes.resx">
+    <EmbeddedResource Include="UserTables\SourceNotes\ucrSourceNotes.resx">
       <DependentUpon>ucrSourceNotes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Stub\ucrStub.resx">
+      <DependentUpon>ucrStub.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
