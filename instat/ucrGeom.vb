@@ -1389,6 +1389,7 @@ Public Class ucrGeom
         clsgeom_line.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "ecdf" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)})
         clsgeom_line.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_line.AddLayerParameter("orientation", "list", "NA", lstParameterStrings:={"NA", Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34)})
+        clsgeom_line.AddLayerParameter("arrow", "editablelist", "arrow()", lstParameterStrings:={"arrow()", " arrow(angle=15)", "arrow(ends=" & Chr(34) & "both" & Chr(34) & ")", "arrow(type=" & Chr(34) & "closed" & Chr(34) & ")", "arrow(angle=15, type = " & Chr(34) & "closed" & Chr(34) & ")"})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_line.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
         clsgeom_line.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
