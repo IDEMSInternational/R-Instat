@@ -5912,7 +5912,7 @@ Public Class ucrCalculator
         clsCmbnCoefFunction.AddParameter("FUN", "prod", iPosition:=2)
         clsCmbnCoefFunction.AddParameter("na.rm", "TRUE", iPosition:=3)
 
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsReFunction.ToScript, 48)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsReFunction.ToScript, 49)
     End Sub
 
     Private Sub cmdCoeffs2_Click(sender As Object, e As EventArgs) Handles cmdCoeffs2.Click
@@ -5949,7 +5949,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdDssq_Click(sender As Object, e As EventArgs) Handles cmdDigitssq.Click
+    Private Sub cmdDigitssq_Click(sender As Object, e As EventArgs) Handles cmdDigitssq.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sapply( ,function(n){a<-as.integer(c(strsplit(as.character(n),split="""")[[1]])); sum(a^2)})", 83)
     End Sub
 
