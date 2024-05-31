@@ -15,13 +15,36 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgSelect
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSetCurrentColumnSelection As New RFunction
     Private clsApplyAsSubset As New RFunction
     Private clsDummyFunction As New RFunction
+    Private clsRemoveFilter As New RFunction
+    Private clsSetCurrentFilter As New RFunction
+    Private clsFilterView As New RFunction
     Private clsCatFunction As New RFunction
+
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        clsApplyAsSubset = New RFunction
+        clsRemoveFilter = New RFunction
+        clsSetCurrentFilter = New RFunction
+        clsFilterView = New RFunction
+        clsCatFunction = New RFunction
+
+        bFirstLoad = True
+        clsCatFunction.SetRCommand("cat")
+        clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
+        clsSetCurrentFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_current_filter")
+        clsApplyAsSubset.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_object")
+        clsFilterView.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_string")
+    End Sub
 
     Private Sub dlgSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -184,5 +207,70 @@ Public Class dlgSelect
 
     Private Sub ucrChkDataframe_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkDataframe.ControlContentsChanged, ucrChkDialogue.ControlContentsChanged, ucrChkMetaData.ControlContentsChanged
         ApplyColumnSelectionSettings(ucrChkMetaData.Checked, ucrChkDataframe.Checked, ucrChkDialogue.Checked)
+    End Sub
+
+    Private Sub ucrSelectorFilter_DataFrameChanged() Handles ucrSelectorForSelectColumns.DataFrameChanged
+        Dim strDataFrame As String = Chr(34) & ucrSelectorForSelectColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34)
+        clsSetCurrentFilter.AddParameter("data_name", strDataFrame, iPosition:=0)
+        clsRemoveFilter.AddParameter("data_name", strDataFrame, iPosition:=0)
+        clsFilterView.AddParameter("data_name", strDataFrame, iPosition:=0)
+        clsApplyAsSubset.AddParameter("data_name", strDataFrame, iPosition:=0)
+        SetDefaultNewDataFrameName()
+    End Sub
+
+    Private Sub SetDefaultNewDataFrameName()
+        If ucrSelectorForSelectColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrInputNewDataFrameName.SetPrefix(ucrSelectorForSelectColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_subset")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverFilter_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSelect.SelectionChanged
+        SetFilterOptions()
+        SetBaseFunction()
+    End Sub
+
+    Private Sub SetFilterOptions()
+        If ucrReceiverSelect.IsEmpty Then
+            'TODO translate this
+            ucrInputSelectPreview.SetName("( )")
+            clsApplyAsSubset.RemoveParameterByName("filter_name")
+            clsFilterView.RemoveParameterByName("filter_name")
+            clsSetCurrentFilter.RemoveParameterByName("filter_name")
+        Else
+            clsFilterView.AddParameter("filter_name", ucrReceiverSelect.GetVariableNames())
+            clsApplyAsSubset.AddParameter("filter_name", ucrReceiverSelect.GetVariableNames())
+            clsSetCurrentFilter.AddParameter("filter_name", ucrReceiverSelect.GetVariableNames())
+            Try
+                ucrInputSelectPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsFilterView.ToScript(), bSilent:=True).AsCharacter(0))
+            Catch ex As Exception
+                ucrInputSelectPreview.SetName("Preview not available")
+            End Try
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub rdoApplyAs_CheckedChanged(sender As Object, e As EventArgs) Handles rdoApplyAsSelect.CheckedChanged, rdoApplyAsSubset.CheckedChanged, rdoApplySave.CheckedChanged
+        ucrInputNewDataFrameName.Visible = Not (rdoApplyAsSelect.Checked OrElse rdoApplySave.Checked)
+        SetFilterOptions()
+        SetBaseFunction()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub SetBaseFunction()
+        If rdoApplyAsSelect.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(If(ucrReceiverSelect.IsEmpty,
+                                                clsRemoveFilter, clsSetCurrentFilter))
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        ElseIf rdoApplyAsSubset.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsApplyAsSubset)
+            clsApplyAsSubset.AddParameter("new_name", Chr(34) & ucrInputNewDataFrameName.GetText() & Chr(34), iPosition:=1)
+        Else
+            clsCatFunction.AddParameter("dispay", Chr(34) & "Saved column selection" & Chr(34), bIncludeArgumentName:=False)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCatFunction)
+        End If
+    End Sub
+
+    Private Sub ucrNewDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDataFrameName.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
