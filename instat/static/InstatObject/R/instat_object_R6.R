@@ -418,35 +418,30 @@ DataBook$set("public", "get_combined_metadata", function(convert_to_character = 
     i = i + 1
   }
 
-  # for(i in (1:length(retlist))){
-  #   att_name = names(retlist)[i]
-  #   if (att_name == scalars) {
-  #     print(class(retlist))
-  #     print(strsplit(retlist[[data_name_label]], " ")[[2]])
-  #     curr_data <-
-  #       self$get_data_frame(data_name = retlist[[data_name_label]], use_current_filter = FALSE)
-  #     # Retrieve the attribute 'scalars'
-  #     tmp_scalars <- attr(curr_data, "scalars")
-  #     print(paste(names(tmp_scalars), tmp_scalars, sep = " = "))
-  #     #print(retlist[[data_name_label]])
-  #     #retlist[[att_name]] <- paste(names(tmp_scalars), tmp_scalars, sep = " = ", collapse = ", ")
-  #   }
-  # }
+  # Split the data names once
   data_names <- strsplit(retlist[[data_name_label]], " ")
-  for (i in (1:length(data_names))) {
-    # Check if 'scalars' column exists
-    if ("scalars" %in% names(retlist)) {
-      if (!is.na(retlist$scalars[i])) {
-        curr_data <-
-          self$get_data_frame(data_name = data_names[[i]], use_current_filter = FALSE)
-        # Retrieve the attribute 'scalars'
-        tmp_scalars <- attr(curr_data, "scalars")
-        max_values <- length(tmp_scalars)
-        # Update 'scalars' values that are not NA
-        retlist$scalars[i] <- paste(names(tmp_scalars)[1:max_values], tmp_scalars[1:max_values], sep = " = ", collapse = ", ")
+  
+  # Check if 'scalars' column exists and has any non-NA values
+  if ("scalars" %in% names(retlist) && any(!is.na(retlist$scalars))) {
+    
+    # Loop over non-NA scalars only
+    for (i in which(!is.na(retlist$scalars))) {
+      
+      curr_data <- self$get_data_frame(data_name = data_names[[i]], use_current_filter = FALSE)
+      
+      # Retrieve the attribute 'scalars'
+      tmp_scalars <- attr(curr_data, "scalars")
+      
+      if (!is.null(tmp_scalars)) {
+        # Create the scalars string
+        scalars_string <- paste0(names(tmp_scalars), " = ", tmp_scalars, collapse = ", ")
+        
+        # Update 'scalars' column
+        retlist$scalars[i] <- scalars_string
       }
     }
   }
+  
   if(convert_to_character) return(convert_to_character_matrix(retlist, FALSE))
   else return(retlist)
 } 
