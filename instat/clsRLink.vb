@@ -1403,6 +1403,8 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_filter_names")
                 Case "column_selection"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_column_selection_names")
+                Case "scalars"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_scalars_names")
                 Case "object",
                      RObjectTypeLabel.Graph,
                      RObjectTypeLabel.Model,

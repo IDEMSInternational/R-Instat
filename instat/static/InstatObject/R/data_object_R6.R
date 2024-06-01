@@ -556,6 +556,38 @@ DataSheet$set("public", "get_column_labels", function(columns) {
 }
 )
 
+DataSheet$set("public", "get_scalars_names",  function(use_current_filter = FALSE,
+                                                       as_list = FALSE,
+                                                       ...) {
+  if (as_list) {
+    data_frame <-
+      self$get_data_frame(use_current_filter = use_current_filter)
+    scalars_attr <- attr(data_frame, "scalars")
+    
+    if (!is.null(scalars_attr)) {
+      scalars_names <- names(scalars_attr)
+      return(list(scalars = scalars_names))
+    } else {
+      return(list(scalars = NULL))  # Handle the case where scalars attribute is NULL
+    }
+  }
+})
+
+DataSheet$set("public", "get_scalar_val", function(attr_name, use_current_filter = FALSE) {
+  data_frame <-
+    self$get_data_frame(use_current_filter = use_current_filter)
+  
+  scalars_attr <- attr(data_frame, "scalars")
+  
+  # # Check if the attribute exists and return its value
+  if (!is.null(scalars_attr) &&
+      attr_name %in% names(scalars_attr)) {
+    return(scalars_attr[[attr_name]])
+  } else {
+    return(NULL)  # Return NULL if the attribute does not exist
+  }
+})
+
 DataSheet$set("public", "get_data_frame_label", function(use_current_filter = FALSE) {
   return(attr(self$get_data_frame(use_current_filter = use_current_filter), "label"))
 }
