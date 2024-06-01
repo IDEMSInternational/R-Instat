@@ -573,7 +573,7 @@ DataSheet$set("public", "get_scalars_names",  function(use_current_filter = FALS
   }
 })
 
-DataSheet$set("public", "get_scalar_val", function(attr_name, use_current_filter = FALSE) {
+DataSheet$set("public", "get_scalar_value", function(attr_name, use_current_filter = FALSE) {
   data_frame <-
     self$get_data_frame(use_current_filter = use_current_filter)
   

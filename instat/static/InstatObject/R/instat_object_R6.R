@@ -392,8 +392,8 @@ DataBook$set("public", "get_scalars_names", function(data_name, use_current_filt
 }
 )
 
-DataBook$set("public", "get_scalar_val", function(data_name, attr_name, use_current_filter = FALSE) {
-  return(self$get_data_objects(data_name)$get_scalar_val(attr_name = attr_name, use_current_filter))
+DataBook$set("public", "get_scalar_value", function(data_name, attr_name, use_current_filter = FALSE) {
+  return(self$get_data_objects(data_name)$get_scalar_value(attr_name = attr_name, use_current_filter))
 }
 )
 
