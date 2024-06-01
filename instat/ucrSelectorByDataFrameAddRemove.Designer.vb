@@ -46,6 +46,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.toolStripAddAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparatorContext = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnScalars = New System.Windows.Forms.Button()
         Me.contextMenuStripAdd.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -60,9 +61,10 @@ Partial Class ucrSelectorByDataFrameAddRemove
         'btnDataOptions
         '
         Me.btnDataOptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
-        Me.btnDataOptions.Location = New System.Drawing.Point(153, 146)
+        Me.btnDataOptions.Location = New System.Drawing.Point(230, 219)
+        Me.btnDataOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDataOptions.Name = "btnDataOptions"
-        Me.btnDataOptions.Size = New System.Drawing.Size(57, 34)
+        Me.btnDataOptions.Size = New System.Drawing.Size(86, 51)
         Me.btnDataOptions.TabIndex = 4
         Me.btnDataOptions.Tag = "Data_Options"
         Me.btnDataOptions.Text = "Data Options"
@@ -72,9 +74,10 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         Me.btnAdd.AutoSize = True
         Me.btnAdd.ContextMenuStrip = Me.contextMenuStripAdd
-        Me.btnAdd.Location = New System.Drawing.Point(151, 45)
+        Me.btnAdd.Location = New System.Drawing.Point(226, 68)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(59, 34)
+        Me.btnAdd.Size = New System.Drawing.Size(88, 51)
         Me.btnAdd.SplitMenuStrip = Me.contextMenuStripAdd
         Me.btnAdd.TabIndex = 5
         Me.btnAdd.Text = "Add"
@@ -82,46 +85,61 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         'contextMenuStripAdd
         '
+        Me.contextMenuStripAdd.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.contextMenuStripAdd.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripAddSelected, Me.toolStripAddAll, Me.ToolStripSeparatorContext, Me.toolStripHelp})
         Me.contextMenuStripAdd.Name = "SelectionMenuStrip"
-        Me.contextMenuStripAdd.Size = New System.Drawing.Size(181, 98)
+        Me.contextMenuStripAdd.Size = New System.Drawing.Size(190, 106)
         '
         'toolStripAddSelected
         '
         Me.toolStripAddSelected.Name = "toolStripAddSelected"
-        Me.toolStripAddSelected.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripAddSelected.Size = New System.Drawing.Size(189, 32)
         Me.toolStripAddSelected.Tag = "Add_selected"
         Me.toolStripAddSelected.Text = "Add Selected"
         '
         'toolStripAddAll
         '
         Me.toolStripAddAll.Name = "toolStripAddAll"
-        Me.toolStripAddAll.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripAddAll.Size = New System.Drawing.Size(189, 32)
         Me.toolStripAddAll.Text = "Add All"
         '
         'ToolStripSeparatorContext
         '
         Me.ToolStripSeparatorContext.Name = "ToolStripSeparatorContext"
-        Me.ToolStripSeparatorContext.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparatorContext.Size = New System.Drawing.Size(186, 6)
         '
         'toolStripHelp
         '
         Me.toolStripHelp.Name = "toolStripHelp"
-        Me.toolStripHelp.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripHelp.Size = New System.Drawing.Size(189, 32)
         Me.toolStripHelp.Text = "Help"
+        '
+        'btnScalars
+        '
+        Me.btnScalars.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
+        Me.btnScalars.Location = New System.Drawing.Point(230, 144)
+        Me.btnScalars.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnScalars.Name = "btnScalars"
+        Me.btnScalars.Size = New System.Drawing.Size(86, 51)
+        Me.btnScalars.TabIndex = 86
+        Me.btnScalars.Tag = ""
+        Me.btnScalars.Text = "Scalars"
+        Me.btnScalars.UseVisualStyleBackColor = True
         '
         'ucrSelectorByDataFrameAddRemove
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.btnScalars)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDataOptions)
         Me.Name = "ucrSelectorByDataFrameAddRemove"
-        Me.Size = New System.Drawing.Size(270, 183)
+        Me.Size = New System.Drawing.Size(405, 402)
         Me.Controls.SetChildIndex(Me.btnDataOptions, 0)
         Me.Controls.SetChildIndex(Me.btnAdd, 0)
         Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
+        Me.Controls.SetChildIndex(Me.btnScalars, 0)
         Me.contextMenuStripAdd.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -134,4 +152,5 @@ Partial Class ucrSelectorByDataFrameAddRemove
     Friend WithEvents toolStripAddAll As ToolStripMenuItem
     Friend WithEvents ToolStripSeparatorContext As ToolStripSeparator
     Friend WithEvents toolStripHelp As ToolStripMenuItem
+    Friend WithEvents btnScalars As Button
 End Class

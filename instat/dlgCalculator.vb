@@ -74,6 +74,7 @@ Public Class dlgCalculator
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 14
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
+        ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Variables"
         ucrCalc.ucrTryCalculator.SetIsCommand()
         ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
 
@@ -99,6 +100,8 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
 
+        ucrCalc.ucrSelectorForCalculations.ShowScalarButton(True)
+        AddHandler ucrCalc.ucrSelectorForCalculations.ButtonClicked, AddressOf btnScalar_ButtonClicked
     End Sub
 
     Public Sub SetDefaultKeyboard(strNewDefaultKeyboard As String)
@@ -135,6 +138,11 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
 
+    End Sub
+
+    Private Sub btnScalar_ButtonClicked(sender As Object, e As EventArgs)
+        ucrCalc.ucrSelectorForCalculations.SetItemType("scalars")
+        ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Scalars"
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk

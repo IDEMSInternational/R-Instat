@@ -17,6 +17,12 @@
 Imports System.ComponentModel
 
 Public Class ucrSelectorByDataFrameAddRemove
+
+    Public Event ButtonClicked As EventHandler
+    Private Sub ucrSelectorByDataFrameAddRemove_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        btnScalars.Visible = False
+    End Sub
+
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click, toolStripAddSelected.Click
         Add()
     End Sub
@@ -38,6 +44,10 @@ Public Class ucrSelectorByDataFrameAddRemove
                 End If
             Next
         End If
+    End Sub
+
+    Public Sub ShowScalarButton(bShow As Boolean)
+        btnScalars.Visible = bShow
     End Sub
 
     Public Sub ShowColumnSelector(bShow As Boolean)
@@ -84,5 +94,9 @@ Public Class ucrSelectorByDataFrameAddRemove
             toolStripAddSelected.Enabled = lstAvailableVariable.SelectedItems.Count > 0
             toolStripAddAll.Enabled = TypeOf CurrentReceiver Is ucrReceiverMultiple
         End If
+    End Sub
+
+    Private Sub btnScalars_Click(sender As Object, e As EventArgs) Handles btnScalars.Click
+        RaiseEvent ButtonClicked(Me, e)
     End Sub
 End Class
