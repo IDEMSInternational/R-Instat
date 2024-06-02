@@ -21,6 +21,7 @@ Public Class dlgCalculator
     Private clsAttachFunction As New RFunction
     Private clsDetachFunction As New RFunction
     Private clsRemoveLabelsFunction As New RFunction
+    Private clsGetScalarValueFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public iHelpCalcID As Integer
     'holds the original width of the form
@@ -74,9 +75,13 @@ Public Class dlgCalculator
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 14
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
+        ucrCalc.ucrSelectorForCalculations.SetItemType("column")
         ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Variables"
+        ucrCalc.ucrSelectorForCalculations.bShowScalarCheck = True
         ucrCalc.ucrTryCalculator.SetIsCommand()
         ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
+
+        clsGetScalarValueFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_scalar_value")
 
         clsRemoveLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsRemoveLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
@@ -100,8 +105,28 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
 
-        ucrCalc.ucrSelectorForCalculations.ShowScalarButton(True)
-        AddHandler ucrCalc.ucrSelectorForCalculations.ButtonClicked, AddressOf btnScalar_ButtonClicked
+        AddHandler ucrCalc.ucrSelectorForCalculations.checkBoxScalar.CheckedChanged, AddressOf checkBoxScalar_CheckedChanged
+    End Sub
+
+    Private Sub checkBoxScalar_CheckedChanged()
+        SetScalarsState()
+    End Sub
+
+    Private Sub SetScalarsState()
+        If ucrCalc.ucrSelectorForCalculations.IsCheckBoxScalarChecked Then
+            ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Scalars"
+            ucrCalc.ucrSelectorForCalculations.SetItemType("scalars")
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetScalarValueFunction, 0)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachFunction)
+        Else
+            ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Variables"
+            ucrCalc.ucrSelectorForCalculations.SetItemType("column")
+            clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
+            clsDetachFunction.AddParameter("name", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 0)
+        End If
     End Sub
 
     Public Sub SetDefaultKeyboard(strNewDefaultKeyboard As String)
@@ -115,6 +140,7 @@ Public Class dlgCalculator
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
         SaveResults()
+        ucrCalc.ucrSelectorForCalculations.ResetCheckBoxScalar()
         TestOKEnabled()
     End Sub
 
@@ -126,6 +152,7 @@ Public Class dlgCalculator
     ''' Determines where the results will be saved; to a column or output window
     ''' </summary>
     Private Sub SaveResults()
+        SetScalarsState()
         If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso ucrCalc.ucrSaveResultInto.IsComplete Then
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrCalc.ucrSaveResultInto.GetText() & Chr(34), iPosition:=1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 1)
@@ -140,22 +167,20 @@ Public Class dlgCalculator
 
     End Sub
 
-    Private Sub btnScalar_ButtonClicked(sender As Object, e As EventArgs)
-        ucrCalc.ucrSelectorForCalculations.SetItemType("scalars")
-        ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Scalars"
-    End Sub
-
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ucrCalc.SetCalculationHistory()
     End Sub
 
     Private Sub ucrCalc_SelectionChanged() Handles ucrCalc.SelectionChanged
+        clsGetScalarValueFunction.SetAssignTo(ucrCalc.ucrReceiverForCalculation.GetSelectedSelectorVariables(False))
+        clsGetScalarValueFunction.AddParameter("attr_name", ucrCalc.ucrReceiverForCalculation.GetSelectedSelectorVariables(), , iPosition:=1)
         ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
         ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorForCalculation_DataframeChanged() Handles ucrCalc.DataFrameChanged
+        clsGetScalarValueFunction.AddParameter("data_name", Chr(34) & ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsRemoveLabelsFunction.AddParameter("data_name", Chr(34) & ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame & Chr(34), iPosition:=0)
     End Sub
 

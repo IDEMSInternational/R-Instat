@@ -30,6 +30,14 @@ Public Class ucrReceiverExpression
         lstDataFrames = New List(Of String)
     End Sub
 
+    Public Function GetSelectedSelectorVariables(Optional bWithQuotes As Boolean = True)
+        If Selector.lstAvailableVariable.SelectedItems.Count = 1 Then
+            Dim strSelectedVariable As String = Selector.lstAvailableVariable.SelectedItems.Item(0).Text
+            Return If(bWithQuotes, Chr(34) & strSelectedVariable & Chr(34), strSelectedVariable)
+        End If
+        Return ""
+    End Function
+
     Public Overrides Sub AddSelectedSelectorVariables()
         If Selector.lstAvailableVariable.SelectedItems.Count = 1 Then
             Add(Selector.lstAvailableVariable.SelectedItems.Item(0).Text, Selector.lstAvailableVariable.SelectedItems.Item(0).Tag)

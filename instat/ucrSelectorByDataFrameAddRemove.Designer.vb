@@ -46,7 +46,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.toolStripAddAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparatorContext = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnScalars = New System.Windows.Forms.Button()
+        Me.checkBoxScalar = New System.Windows.Forms.CheckBox()
         Me.contextMenuStripAdd.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -114,23 +114,21 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.toolStripHelp.Size = New System.Drawing.Size(189, 32)
         Me.toolStripHelp.Text = "Help"
         '
-        'btnScalars
+        'checkBoxScalar
         '
-        Me.btnScalars.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
-        Me.btnScalars.Location = New System.Drawing.Point(230, 144)
-        Me.btnScalars.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnScalars.Name = "btnScalars"
-        Me.btnScalars.Size = New System.Drawing.Size(86, 51)
-        Me.btnScalars.TabIndex = 86
-        Me.btnScalars.Tag = ""
-        Me.btnScalars.Text = "Scalars"
-        Me.btnScalars.UseVisualStyleBackColor = True
+        Me.checkBoxScalar.AutoSize = True
+        Me.checkBoxScalar.Location = New System.Drawing.Point(230, 157)
+        Me.checkBoxScalar.Name = "checkBoxScalar"
+        Me.checkBoxScalar.Size = New System.Drawing.Size(116, 24)
+        Me.checkBoxScalar.TabIndex = 86
+        Me.checkBoxScalar.Text = "CheckBox1"
+        Me.checkBoxScalar.UseVisualStyleBackColor = True
         '
         'ucrSelectorByDataFrameAddRemove
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.btnScalars)
+        Me.Controls.Add(Me.checkBoxScalar)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnDataOptions)
         Me.Name = "ucrSelectorByDataFrameAddRemove"
@@ -139,7 +137,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.Controls.SetChildIndex(Me.btnAdd, 0)
         Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
-        Me.Controls.SetChildIndex(Me.btnScalars, 0)
+        Me.Controls.SetChildIndex(Me.checkBoxScalar, 0)
         Me.contextMenuStripAdd.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -152,5 +150,5 @@ Partial Class ucrSelectorByDataFrameAddRemove
     Friend WithEvents toolStripAddAll As ToolStripMenuItem
     Friend WithEvents ToolStripSeparatorContext As ToolStripSeparator
     Friend WithEvents toolStripHelp As ToolStripMenuItem
-    Friend WithEvents btnScalars As Button
+    Friend WithEvents checkBoxScalar As CheckBox
 End Class
