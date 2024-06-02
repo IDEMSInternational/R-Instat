@@ -36,9 +36,9 @@ Public Class dlgCalculator
             iBasicWidth = Me.Width
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+
+        ReopenDialog()
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
@@ -70,6 +70,8 @@ Public Class dlgCalculator
 
     Private Sub ReopenDialog()
         SaveResults()
+        SetScalarsState()
+        ucrCalc.ucrChkStoreScalar.Checked = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -77,7 +79,9 @@ Public Class dlgCalculator
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
         ucrCalc.ucrSelectorForCalculations.SetItemType("column")
         ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Variables"
-        ucrCalc.ucrSelectorForCalculations.bShowScalarCheck = True
+
+        ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScoalar(True)
+
         ucrCalc.ucrTryCalculator.SetIsCommand()
         ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
 
@@ -124,6 +128,7 @@ Public Class dlgCalculator
             ucrCalc.ucrSelectorForCalculations.SetItemType("column")
             clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
             clsDetachFunction.AddParameter("name", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetScalarValueFunction)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 0)
         End If
@@ -240,6 +245,25 @@ Public Class dlgCalculator
             Case Else
                 Me.Width = iBasicWidth
         End Select
+    End Sub
+
+    Private Sub StoreScalar()
+        Dim clsAppendMetadata As New RFunction
+        If ucrCalc.ucrChkStoreScalar.Checked AndAlso Not ucrCalc.ucrTryCalculator.ucrInputTryMessage.IsEmpty AndAlso ucrCalc.ucrSaveResultInto.GetText <> "" Then
+            clsAppendMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
+            clsAppendMetadata.AddParameter("data_name", Chr(34) & ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame & Chr(34))
+            clsAppendMetadata.AddParameter("property", "scalars")
+            clsAppendMetadata.AddParameter("new_val", "c(" & ucrCalc.ucrSaveResultInto.GetText & "=" & ucrCalc.ucrTryCalculator.ucrInputTryMessage.GetText & ")")
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAppendMetadata, 1)
+            ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = False
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAppendMetadata)
+            ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = True
+        End If
+    End Sub
+
+    Private Sub ucrCalc_CheckBoxChanged() Handles ucrCalc.CheckBoxChanged
+        StoreScalar()
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrCalc.DataFrameChanged

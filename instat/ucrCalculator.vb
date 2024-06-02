@@ -23,6 +23,7 @@ Public Class ucrCalculator
     Public Event DataFrameChanged()
     Public Event TryCommadClick()
     Public Event ControlValueChanged()
+    Public Event CheckBoxChanged()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsHelp As New RFunction
@@ -64,6 +65,8 @@ Public Class ucrCalculator
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Transform", "Summary", "Probability", "Factor", "Text/Strings (Character Columns)", "Dates/Times", "Circular", "Wakefield", "Goodness of Fit", "List", "Complex", "Integer"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
+
+        ucrChkStoreScalar.Text = "Store Scalar"
 
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
@@ -5709,17 +5712,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub ucrChkStoreScalar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStoreScalar.ControlValueChanged
-        If ucrChkStoreScalar.Checked AndAlso Not ucrTryCalculator.ucrInputTryMessage.IsEmpty AndAlso ucrSaveResultInto.GetText <> "" Then
-            Dim clsAppendMetadata As New RFunction
-            clsAppendMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
-            clsAppendMetadata.AddParameter("data_name", Chr(34) & ucrSelectorForCalculations.strCurrentDataFrame & Chr(34))
-            clsAppendMetadata.AddParameter("property", "scalars")
-            clsAppendMetadata.AddParameter("new_val", "c(" & ucrSaveResultInto.GetText & "=" & ucrTryCalculator.ucrInputTryMessage.GetText & ")")
-            frmMain.clsRLink.RunScript(clsAppendMetadata.ToScript(), strComment:="Added scalar")
-            ucrSaveResultInto.btnColumnPosition.Enabled = False
-        Else
-            ucrSaveResultInto.btnColumnPosition.Enabled = True
-        End If
+    Private Sub ucrChkStoreScalar_CheckedChanged(sender As Object, e As EventArgs) Handles ucrChkStoreScalar.CheckedChanged
+        RaiseEvent CheckBoxChanged()
     End Sub
 End Class
