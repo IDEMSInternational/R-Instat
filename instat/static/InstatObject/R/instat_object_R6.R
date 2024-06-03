@@ -412,7 +412,7 @@ DataBook$set("public", "get_combined_metadata", function(convert_to_character = 
   i = 1
   for (curr_obj in private$.data_sheets) {
     templist = curr_obj$get_metadata()
-    
+
     for (j in (1:length(templist))) {
       if(length(templist[[j]]) > 1 || is.list(templist[[j]])){
         if("scalars" %in% names(templist[j])){

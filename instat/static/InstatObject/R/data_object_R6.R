@@ -622,15 +622,15 @@ DataSheet$set("public", "get_metadata", function(label, include_calculated = TRU
       #Must be private$data because assigning attribute to data field
       attr(curr_data, row_count_label) <- n_row
       attr(curr_data, column_count_label) <- ncol(curr_data)
-      #attr(curr_data, scalars) <- list(nrow = n_row, ncol = ncol(curr_data))
+ 
       new_value <- list(nrow = n_row, ncol = ncol(curr_data))
-      current_scalars <- attr(curr_data, scalars)
+      current_scalars <- attr(private$data, scalars)
       if (is.null(current_scalars)) {
-        current_scalars <- new_value
-      } else {
-        current_scalars[names(new_value)] <- new_value
-      }
-      attr(curr_data, scalars) <- current_scalars
+         current_scalars <- new_value
+       } else {
+         current_scalars[names(new_value)] <- new_value
+       }
+       attr(private$data, scalars) <- current_scalars
     }
     if(excluded_not_for_display) {
       ind <- which(names(attributes(curr_data)) %in% c("names", "row.names"))
