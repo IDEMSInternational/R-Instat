@@ -469,7 +469,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdRoots, "Gives the zeros of a polynomial")
         ttCalculator.SetToolTip(cmdCoeffs, "Gives the polynomial from the zeros")
         ttCalculator.SetToolTip(cmdProd, "The product of the values. So prod(c(1,2,3,4,10)) = 240")
-        ttCalculator.SetToolTip(cmdCombn, "combn(c(-2,1,3,4), 2,FUN=prod) gives the products of the values 3 at a time, -2  -6  -8 , 3   4  12. (result usually put into output window)")
+        ttCalculator.SetToolTip(cmdCombn, "combn(c(-2,1,3,4), 2,FUN=prod) gives the products of the values 2 at a time, -2  -6  -8 , 3   4  12. (result usually put into output window)")
         ttCalculator.SetToolTip(cmdCoef, "single coefficient of a polynomial if given roots. So sum(combn(c(-2,1,3,4),3. FUN=prod) =(-6 -12-24 +12) = -26")
         ttCalculator.SetToolTip(cmdCoeffs2, " Gives the polynomial coefficients from the zeros")
         ttCalculator.SetToolTip(cmdFunctionsDigitsum, "Gives the sum of the digits in a numeric variable") 
@@ -5790,7 +5790,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave(x= ,FUN=function(x) mean(x, na.rm=TRUE))", 38)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave( ,FUN=mean)", 12)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ave( ,FUN=mean)", 11)
         End If
     End Sub
 
@@ -5941,7 +5941,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsCoeffs2Function.ToScript, 39)
     End Sub
 
-    Private Sub cmdDigitssqSession_Click(sender As Object, e As EventArgs) Handles cmdDigitssq.Click
+    Private Sub cmdDigitssqSession_Click(sender As Object, e As EventArgs) Handles cmddigitssqSession.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("digitssq(x= )", 2)
         Else
