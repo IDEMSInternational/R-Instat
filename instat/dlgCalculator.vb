@@ -73,6 +73,7 @@ Public Class dlgCalculator
     Private Sub ReopenDialog()
         SaveResults()
         GetScalarValue()
+        ucrCalc.ucrChkStoreScalar.Checked = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -221,6 +222,7 @@ Public Class dlgCalculator
     Private Sub ucrCalc_SelectionChanged() Handles ucrCalc.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
         GetScalarValue()
+        ManageScalarStorageAndAttachDetach()
         SaveResults()
         TestOKEnabled()
     End Sub
