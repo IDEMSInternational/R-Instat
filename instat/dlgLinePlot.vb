@@ -62,6 +62,7 @@ Public Class dlgLinePlot
     Private clsGeomCrossbarFunction As New RFunction
     Private clsGeomErrorbarFunction As New RFunction
     Private clsGeomPointrangeFunction As New RFunction
+    Private clsDummyFunction As New RFunction
 
     Private clsFacetFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
@@ -79,7 +80,7 @@ Public Class dlgLinePlot
     Private bUpdatingParameters As Boolean = False
 
     'Parameter names for geoms
-    Private strFirstParameterName As String = "geomfunc"
+    Private strFirstParameterName As String = "geom_line"
     Private strgeomSmoothParameterName As String = "geom_smooth"
     Private strGeomParameterNames() As String = {strFirstParameterName, strgeomSmoothParameterName}
 
@@ -100,7 +101,7 @@ Public Class dlgLinePlot
     Private Sub InitialiseDialog()
         Dim clsGeomPointFunc As New RFunction
         Dim clsGeomPointParam As New RParameter
-        Dim clsGeomLineFunction As New RFunction
+        'Dim clsGeomLineFunction As New RFunction
         Dim clsGeomLineParameter As New RParameter
         Dim dctMethodOptions As New Dictionary(Of String, String)
         Dim dctFamilyOptions As New Dictionary(Of String, String)
@@ -188,13 +189,13 @@ Public Class dlgLinePlot
         ucrChkAddPoints.SetText("Add Points")
         ucrChkAddPoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        clsGeomLineFunction.SetPackageName("ggplot2")
-        clsGeomLineFunction.SetRCommand("geom_line")
-        clsGeomLineParameter.SetArgumentName("geom_line")
-        clsGeomLineParameter.SetArgument(clsGeomLineFunction)
-        clsGeomLineParameter.Position = 4
-        ucrChkAddLine.SetText("Add Line")
-        ucrChkAddLine.SetParameter(clsGeomLineParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        'clsGeomLineFunction.SetPackageName("ggplot2")
+        'clsGeomLineFunction.SetRCommand("geom_line")
+        'clsGeomLineParameter.SetArgumentName("geom_line")
+        'clsGeomLineParameter.SetArgument(clsGeomLineFunction)
+        'clsGeomLineParameter.Position = 4
+        'ucrChkAddLine.SetText("Add Line")
+        'ucrChkAddLine.SetParameter(clsGeomLineParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         clsGeomSmoothFunc.SetPackageName("ggplot2")
         clsGeomSmoothFunc.SetRCommand("geom_smooth")
@@ -255,11 +256,11 @@ Public Class dlgLinePlot
         ucrPnlOptions.AddRadioButton(rdoDumbbell)
         ucrPnlOptions.AddRadioButton(rdoSlope)
 
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoLine, strFirstParameterName, {"geom_line", "geom_area", "geom_path", "geom_step"})
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSmoothing, strFirstParameterName, {"geom_smooth"})
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoLinerange, strFirstParameterName, {"geom_linerange", "geom_ribbon", "geom_pointrange", "geom_crossbar", "geom_errorbar"})
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoDumbbell, "dumbbellplot", {"geom_dumbbell"})
-        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoSlope, "slopeplot", {"slopegraph", "slopegraph_theme"})
+        ucrPnlOptions.AddParameterValuesCondition(rdoLine, "check", "line")
+        ucrPnlOptions.AddParameterValuesCondition(rdoSmoothing, "check", "smooth")
+        ucrPnlOptions.AddParameterValuesCondition(rdoLinerange, "check", "Linerange")
+        ucrPnlOptions.AddParameterValuesCondition(rdoDumbbell, "check", "dumbbellplot")
+        ucrPnlOptions.AddParameterValuesCondition(rdoSlope, "check", "slopeplot")
 
         ucrInputMethod.SetParameter(New RParameter("method", 3))
         dctMethodOptions.Add("loess", Chr(34) & "loess" & Chr(34))
@@ -518,6 +519,7 @@ Public Class dlgLinePlot
         clsGeomPointrangeFunction = New RFunction
         clsGeomRibbonFunction = New RFunction
         clsFacetFunction = New RFunction
+        clsDummyFunction = New RFunction
         clsFacetVariablesOperator = New ROperator
         clsFacetRowOp = New ROperator
         clsFacetColOp = New ROperator
@@ -539,9 +541,11 @@ Public Class dlgLinePlot
 
         ucrInputFormula.SetText("y ~ x")
 
+        clsDummyFunction.AddParameter("check", "line", iPosition:=0)
+
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsOptionsFunction, iPosition:=2)
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsGeomLineFunction, iPosition:=1)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -550,11 +554,16 @@ Public Class dlgLinePlot
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
 
+        clsGeomLineFunction.SetPackageName("ggplot2")
+        clsGeomLineFunction.SetRCommand("geom_line")
+        clsGeomLineFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
+        clsGeomLineFunction.AddParameter("size", "0.8")
+
         clsAesLinerangeFunction.SetRCommand("aes")
 
-        clsOptionsFunction.SetPackageName("ggplot2")
-        clsOptionsFunction.SetRCommand("geom_line")
-        clsOptionsFunction.AddParameter("se", "FALSE", iPosition:=1)
+        'clsOptionsFunction.SetPackageName("ggplot2")
+        'clsOptionsFunction.SetRCommand("geom_line")
+        'clsOptionsFunction.AddParameter("se", "FALSE", iPosition:=1)
 
         clsDumbbellFunction.SetPackageName("ggalt")
         clsDumbbellFunction.SetRCommand("geom_dumbbell")
@@ -599,11 +608,6 @@ Public Class dlgLinePlot
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
         clsListFunction.SetRCommand("list")
-
-        clsGeomLineFunction.SetPackageName("ggplot2")
-        clsGeomLineFunction.SetRCommand("geom_line")
-        clsGeomLineFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
-        clsGeomLineFunction.AddParameter("size", "0.8")
 
         clsPathFunction.SetPackageName("ggplot2")
         clsPathFunction.SetRCommand("geom_path")
@@ -671,8 +675,6 @@ Public Class dlgLinePlot
         ucrChkAddSE.SetRCode(clsOptionsFunction, bReset)
         ucrReceiverYMax.SetRCode(clsAesLinerangeFunction, bReset)
         ucrReceiverYMin.SetRCode(clsAesLinerangeFunction, bReset)
-        ucrChkPathOrStep.SetRCode(clsOptionsFunction, bReset)
-        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
         ucrInputMethod.SetRCode(clsOptionsFunction, bReset)
         ucrNudSpan.SetRCode(clsOptionsFunction, bReset)
         ucrFamilyInput.SetRCode(clsListFunction, bReset)
@@ -685,7 +687,9 @@ Public Class dlgLinePlot
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         If bReset Then
-            ucrChkRibbon.SetRCode(clsOptionsFunction, bReset)
+            ucrChkRibbon.SetRCode(clsBaseOperator, bReset)
+            ucrChkPathOrStep.SetRCode(clsBaseOperator, bReset)
+            ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
         End If
     End Sub
 
@@ -776,93 +780,43 @@ Public Class dlgLinePlot
     Private Sub SetGraphPrefixAndRcommand()
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         cmdOptions.Visible = True
-        clsBaseOperator.RemoveParameterByName("slopeplot")
-        clsBaseOperator.RemoveParameterByName("slopetheme")
-        clsBaseOperator.RemoveParameterByName("dumbbellplot")
-        clsOptionsFunction.RemoveParameterByName("stat")
-        clsOptionsFunction.RemoveParameterByName("position")
-        clsOptionsFunction.RemoveParameterByName("aes")
+        'clsBaseOperator.RemoveParameterByName("slopeplot")
+        'clsBaseOperator.RemoveParameterByName("slopetheme")
+        'clsBaseOperator.RemoveParameterByName("dumbbellplot")
+        'clsOptionsFunction.RemoveParameterByName("stat")
+        'clsOptionsFunction.RemoveParameterByName("position")
+        'clsOptionsFunction.RemoveParameterByName("aes")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsOptionsFunction, iPosition:=1)
-        clsOptionsFunction.SetPackageName("ggplot2")
+        'clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsGeomLineFunction, iPosition:=1)
+        'clsOptionsFunction.SetPackageName("ggplot2")
         If rdoLine.Checked Then
-            If ucrChkPathOrStep.Checked Then
-                If rdoArea.Checked Then
-                    ucrSave.SetPrefix("area_plot")
-                    clsRaesFunction.RemoveParameterByName("colour")
-                    clsRaesFunction.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=2)
-                    clsOptionsFunction.SetRCommand("geom_area")
-                ElseIf rdoStep.Checked Then
-                    ucrSave.SetPrefix("step_plot")
-                    clsRaesFunction.RemoveParameterByName("fill")
-                    clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=2)
-                    clsOptionsFunction.SetRCommand("geom_step")
-                Else
-                    ucrSave.SetPrefix("path_plot")
-                    clsRaesFunction.RemoveParameterByName("fill")
-                    clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=2)
-                    clsOptionsFunction.SetRCommand("geom_path")
-                End If
-            Else
-                ucrSave.SetPrefix("line_plot")
-                clsRaesFunction.RemoveParameterByName("fill")
-                clsOptionsFunction.SetRCommand("geom_line")
-            End If
+            clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineFunction, iPosition:=1)
         ElseIf rdoSmoothing.Checked Then
-            clsRaesFunction.RemoveParameterByName("fill")
             ucrSave.SetPrefix("smooth")
-            clsOptionsFunction.SetRCommand("geom_smooth")
+            clsBaseOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunction, iPosition:=1)
         ElseIf rdoLinerange.Checked Then
             ucrReceiverSlopeY.SetMeAsReceiver()
-            clsRaesFunction.RemoveParameterByName("fill")
-            clsOptionsFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
-            clsOptionsFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
-            clsOptionsFunction.AddParameter("position", Chr(34) & "identity" & Chr(34), iPosition:=2)
-            If ucrChkRibbon.Checked Then
-                If rdoRibbon.Checked Then
-                    ucrSave.SetPrefix("ribbon")
-                    clsOptionsFunction.SetRCommand("geom_ribbon")
-                ElseIf rdoPointrange.Checked Then
-                    ucrSave.SetPrefix("pointrange")
-                    clsOptionsFunction.SetRCommand("geom_pointrange")
-                ElseIf rdoCrossbar.Checked Then
-                    ucrSave.SetPrefix("crossbar")
-                    clsOptionsFunction.SetRCommand("geom_crossbar")
-                Else
-                    ucrSave.SetPrefix("errorbar")
-                    clsOptionsFunction.SetRCommand("geom_errorbar")
-                End If
-            Else
-                ucrSave.SetPrefix("linerange")
-                clsOptionsFunction.SetRCommand("geom_linerange")
-            End If
         ElseIf rdoDumbbell.Checked Then
             ucrReceiverSlopeY.SetMeAsReceiver()
-            clsRaesFunction.RemoveParameterByName("fill")
             ucrSave.SetPrefix("dumbbell")
-            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
             clsBaseOperator.AddParameter("dumbbellplot", clsRFunctionParameter:=clsDumbbellFunction, iPosition:=1)
         ElseIf rdoSlope.Checked Then
             ucrReceiverSlopeY.SetMeAsReceiver()
-            clsRaesFunction.RemoveParameterByName("fill")
             cmdOptions.Visible = False
             ucrSave.SetPrefix("slope")
             clsBaseOperator.RemoveParameterByName("ggplot")
             clsBaseOperator.RemoveParameterByName(strFirstParameterName)
             clsBaseOperator.AddParameter("slopeplot", clsRFunctionParameter:=clsGgSlopeFunction, iPosition:=0)
-            If ucrChkSlopeLegend.Checked Then
-                clsBaseOperator.RemoveParameterByName("slopetheme")
-            Else
-                clsBaseOperator.AddParameter("slopetheme", clsRFunctionParameter:=clsSlopeThemeFunction, iPosition:=-1)
-            End If
         End If
     End Sub
 
-    Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged,
-        ucrPnlStepOrPath.ControlValueChanged, ucrPnlOptions.ControlValueChanged, ucrChkSlopeLegend.ControlValueChanged,
-        ucrPnlLinerangeOptions.ControlValueChanged, ucrChkRibbon.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged
         SetGraphPrefixAndRcommand()
         AddRemoveFormula()
+        AddRemoveGeomLine()
+        AddRemoveLineRange()
+        AddRemoveSlopeGraph()
+        AddRemoveMethodArgs()
     End Sub
 
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged,
@@ -872,23 +826,31 @@ Public Class dlgLinePlot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrInputMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMethod.ControlValueChanged
-        If ucrInputMethod.GetText = "glm" OrElse ucrInputMethod.GetText = "gam" Then
-            clsOptionsFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
+    Private Sub AddRemoveMethodArgs()
+        If rdoSmoothing.Checked Then
+            If ucrInputMethod.GetText = "glm" OrElse ucrInputMethod.GetText = "gam" Then
+                clsGeomSmoothFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
+            Else
+                clsGeomSmoothFunction.RemoveParameterByName("method.args")
+            End If
         Else
-            clsOptionsFunction.RemoveParameterByName("method.args")
+            clsGeomSmoothFunction.RemoveParameterByName("method.args")
         End If
+    End Sub
+
+    Private Sub ucrInputMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMethod.ControlValueChanged
+        AddRemoveMethodArgs()
     End Sub
 
     Private Sub AddRemoveFormula()
         If rdoSmoothing.Checked Then
             If ucrChkFormula.Checked AndAlso ucrInputFormula.GetText <> "" Then
-                clsOptionsFunction.AddParameter("formula", ucrInputFormula.GetText, iPosition:=1)
+                clsGeomSmoothFunction.AddParameter("formula", ucrInputFormula.GetText, iPosition:=1)
             Else
-                clsOptionsFunction.RemoveParameterByName("formula")
+                clsGeomSmoothFunction.RemoveParameterByName("formula")
             End If
         Else
-            clsOptionsFunction.RemoveParameterByName("formula")
+            clsGeomSmoothFunction.RemoveParameterByName("formula")
         End If
     End Sub
 
@@ -1124,7 +1086,130 @@ Public Class dlgLinePlot
         SetPipeAssignTo()
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged, ucrReceiverYMax.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
+    Private Sub AddRemoveGeomLine()
+        If rdoLine.Checked Then
+            ucrSave.SetPrefix("line_plot")
+            clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineFunction, iPosition:=1)
+            If ucrChkPathOrStep.Checked Then
+                clsBaseOperator.RemoveParameterByName("geom_area")
+                clsBaseOperator.RemoveParameterByName("geom_step")
+                clsBaseOperator.RemoveParameterByName("geom_path")
+                clsBaseOperator.RemoveParameterByName("geom_line")
+                clsRaesFunction.RemoveParameterByName("fill")
+                clsRaesFunction.RemoveParameterByName("colour")
+                If rdoArea.Checked Then
+                    ucrSave.SetPrefix("area_plot")
+                    clsRaesFunction.AddParameter("fill", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=2)
+                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
+                    clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom_area", clsRFunctionParameter:=clsGeomAreaFunction, iPosition:=1)
+                ElseIf rdoStep.Checked Then
+                    ucrSave.SetPrefix("step_plot")
+                    clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=2)
+                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
+                    clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom_step", clsRFunctionParameter:=clsGeomStepFunction, iPosition:=1)
+                Else
+                    ucrSave.SetPrefix("path_plot")
+                    clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False), iPosition:=2)
+                    clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
+                    clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+                    clsBaseOperator.AddParameter("geom_path", clsRFunctionParameter:=clsPathFunction, iPosition:=1)
+                End If
+            Else
+                clsBaseOperator.RemoveParameterByName("geom_area")
+                clsBaseOperator.RemoveParameterByName("geom_step")
+                clsBaseOperator.RemoveParameterByName("geom_path")
+                ucrSave.SetPrefix("line_plot")
+                clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineFunction, iPosition:=1)
+            End If
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_area")
+            clsBaseOperator.RemoveParameterByName("geom_step")
+            clsBaseOperator.RemoveParameterByName("geom_path")
+            clsBaseOperator.RemoveParameterByName("geom_line")
+        End If
+    End Sub
 
+    Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged, ucrPnlStepOrPath.ControlValueChanged
+        AddRemoveGeomLine()
+    End Sub
+
+    Private Sub AddRemoveLineRange()
+        If rdoLinerange.Checked Then
+            ucrSave.SetPrefix("linerange")
+            clsGeomLinerangeFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
+            clsGeomLinerangeFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
+            clsGeomLinerangeFunction.AddParameter("position", Chr(34) & "identity" & Chr(34), iPosition:=2)
+            clsBaseOperator.AddParameter("geom_linerange", clsRFunctionParameter:=clsGeomLinerangeFunction, iPosition:=1)
+            If ucrChkRibbon.Checked Then
+                clsBaseOperator.RemoveParameterByName("geom_linerange")
+                clsBaseOperator.RemoveParameterByName("geom_ribbon")
+                clsBaseOperator.RemoveParameterByName("geom_pointrange")
+                clsBaseOperator.RemoveParameterByName("geom_crossbar")
+                clsBaseOperator.RemoveParameterByName("geom_errorbar")
+                If rdoRibbon.Checked Then
+                    ucrSave.SetPrefix("ribbon")
+                    clsGeomRibbonFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsGeomRibbonFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
+                    clsGeomRibbonFunction.AddParameter("position", Chr(34) & "identity" & Chr(34), iPosition:=2)
+                    clsBaseOperator.AddParameter("geom_ribbon", clsRFunctionParameter:=clsGeomRibbonFunction, iPosition:=1)
+                ElseIf rdoPointrange.Checked Then
+                    ucrSave.SetPrefix("pointrange")
+                    clsGeomPointrangeFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsGeomPointrangeFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
+                    clsGeomPointrangeFunction.AddParameter("position", Chr(34) & "identity" & Chr(34), iPosition:=2)
+                    clsBaseOperator.AddParameter("geom_pointrange", clsRFunctionParameter:=clsGeomPointrangeFunction, iPosition:=1)
+                ElseIf rdoCrossbar.Checked Then
+                    ucrSave.SetPrefix("crossbar")
+                    clsGeomCrossbarFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsGeomCrossbarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
+                    clsGeomCrossbarFunction.AddParameter("position", Chr(34) & "identity" & Chr(34), iPosition:=2)
+                    clsBaseOperator.AddParameter("geom_crossbar", clsRFunctionParameter:=clsGeomCrossbarFunction, iPosition:=1)
+                Else
+                    ucrSave.SetPrefix("errorbar")
+                    clsGeomErrorbarFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
+                    clsGeomErrorbarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
+                    clsGeomErrorbarFunction.AddParameter("position", Chr(34) & "identity" & Chr(34), iPosition:=2)
+                    clsBaseOperator.AddParameter("geom_errorbar", clsRFunctionParameter:=clsGeomErrorbarFunction, iPosition:=1)
+                End If
+            Else
+                clsBaseOperator.RemoveParameterByName("geom_ribbon")
+                clsBaseOperator.RemoveParameterByName("geom_pointrange")
+                clsBaseOperator.RemoveParameterByName("geom_crossbar")
+                clsBaseOperator.RemoveParameterByName("geom_errorbar")
+                ucrSave.SetPrefix("linerange")
+                clsGeomLinerangeFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsGeomLinerangeFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
+                clsGeomLinerangeFunction.AddParameter("position", Chr(34) & "identity" & Chr(34), iPosition:=2)
+                clsBaseOperator.AddParameter("geom_linerange", clsRFunctionParameter:=clsGeomLinerangeFunction, iPosition:=1)
+            End If
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_linerange")
+            clsBaseOperator.RemoveParameterByName("geom_ribbon")
+            clsBaseOperator.RemoveParameterByName("geom_pointrange")
+            clsBaseOperator.RemoveParameterByName("geom_crossbar")
+            clsBaseOperator.RemoveParameterByName("geom_errorbar")
+        End If
+    End Sub
+
+    Private Sub ucrChkRibbon_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRibbon.ControlValueChanged, ucrPnlLinerangeOptions.ControlValueChanged
+        AddRemoveLineRange()
+    End Sub
+
+    Private Sub AddRemoveSlopeGraph()
+        If rdoSlope.Checked Then
+            If ucrChkSlopeLegend.Checked Then
+                clsBaseOperator.RemoveParameterByName("slopetheme")
+            Else
+                clsBaseOperator.AddParameter("slopetheme", clsRFunctionParameter:=clsSlopeThemeFunction, iPosition:=-1)
+            End If
+        Else
+            clsBaseOperator.RemoveParameterByName("slopetheme")
+        End If
+    End Sub
+
+    Private Sub ucrChkSlopeLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSlopeLegend.ControlValueChanged
+        AddRemoveSlopeGraph()
     End Sub
 End Class
