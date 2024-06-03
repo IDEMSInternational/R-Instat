@@ -73,7 +73,6 @@ Public Class dlgCalculator
     Private Sub ReopenDialog()
         SaveResults()
         GetScalarValue()
-        ucrCalc.ucrChkStoreScalar.Checked = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -208,12 +207,11 @@ Public Class dlgCalculator
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachFunction)
-            ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = False
+            'ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = False
         End If
 
         ' Update command string and clear input try message name
         ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
-        ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
 
         ' Test if OK button can be enabled
         TestOKEnabled()
