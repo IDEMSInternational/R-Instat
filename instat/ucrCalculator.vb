@@ -23,7 +23,7 @@ Public Class ucrCalculator
     Public Event DataFrameChanged()
     Public Event TryCommadClick()
     Public Event ControlValueChanged()
-    Public Event CheckBoxChanged()
+    Public Event CheckBoxClick()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsHelp As New RFunction
@@ -5712,7 +5712,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub ucrChkStoreScalar_CheckedChanged(sender As Object, e As EventArgs) Handles ucrChkStoreScalar.CheckedChanged
-        RaiseEvent CheckBoxChanged()
+    Private Sub ucrChkStoreScalar_Click(sender As Object, e As EventArgs) Handles ucrChkStoreScalar.Click
+        RaiseEvent CheckBoxClick()
     End Sub
 End Class

@@ -50,12 +50,6 @@ Public Class ucrSelectorByDataFrameAddRemove
         checkBoxScalar.Checked = bShowScalarCheck
     End Sub
 
-    Public ReadOnly Property IsCheckBoxScalarChecked() As Boolean
-        Get
-            Return checkBoxScalar.Checked
-        End Get
-    End Property
-
     Public Sub ResetCheckBoxScalar()
         checkBoxScalar.Checked = False
     End Sub
