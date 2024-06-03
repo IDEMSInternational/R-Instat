@@ -192,7 +192,7 @@ Public Class dlgCalculator
 
             clsAppendMetadata.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34))
             clsAppendMetadata.AddParameter("property", "scalars")
-            clsAppendMetadata.AddParameter("new_val", $"c({ucrCalc.ucrSaveResultInto.GetText}={ucrCalc.ucrTryCalculator.ucrInputTryMessage.GetText})")
+            clsAppendMetadata.AddParameter("new_val", $"list({ucrCalc.ucrSaveResultInto.GetText}={ucrCalc.ucrTryCalculator.ucrInputTryMessage.GetText})")
             ucrBase.clsRsyntax.AddToAfterCodes(clsAppendMetadata, 1)
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = False
         Else

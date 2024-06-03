@@ -603,6 +603,17 @@ DataSheet$set("public", "clear_variables_metadata", function() {
 }
 )
 
+DataSheet$set("public", "update_scalar_value", function(data, property, new_value) {
+  current_scalars <- attr(data, property)
+  if (is.null(current_scalars)) {
+    current_scalars <- new_value
+  } else {
+    current_scalars[names(new_value)] <- new_value
+  }
+  attr(data, property) <- current_scalars
+}
+)
+
 DataSheet$set("public", "get_metadata", function(label, include_calculated = TRUE, excluded_not_for_display = TRUE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   n_row <- self$get_data_frame_length(use_current_filter = TRUE) #this is to avoid an eventual bug if we consider using curr_data <- self$get_data_frame(use_current_filter = TRUE)
@@ -611,6 +622,15 @@ DataSheet$set("public", "get_metadata", function(label, include_calculated = TRU
       #Must be private$data because assigning attribute to data field
       attr(curr_data, row_count_label) <- n_row
       attr(curr_data, column_count_label) <- ncol(curr_data)
+      #attr(curr_data, scalars) <- list(nrow = n_row, ncol = ncol(curr_data))
+      new_value <- list(nrow = n_row, ncol = ncol(curr_data))
+      current_scalars <- attr(curr_data, scalars)
+      if (is.null(current_scalars)) {
+        current_scalars <- new_value
+      } else {
+        current_scalars[names(new_value)] <- new_value
+      }
+      attr(curr_data, scalars) <- current_scalars
     }
     if(excluded_not_for_display) {
       ind <- which(names(attributes(curr_data)) %in% c("names", "row.names"))
@@ -1146,17 +1166,16 @@ DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_po
 
 DataSheet$set("public", "append_to_metadata", function(property, new_value = "") {
   if(missing(property)) stop("property must be specified.")
-  
   if (!is.character(property)) stop("property must be of type: character")
   
   if (property == "scalars") {
-    current_scalars <- attr(private$data, property)
-    if (is.null(current_scalars)) {
-      current_scalars <- new_value
-    } else {
-      current_scalars[names(new_value)] <- new_value
-    }
-    attr(private$data, property) <- current_scalars
+     current_scalars <- attr(private$data, property)
+     if (is.null(current_scalars)) {
+       current_scalars <- new_value
+     } else {
+       current_scalars[names(new_value)] <- new_value
+     }
+     attr(private$data, property) <- current_scalars
   }
   else attr(private$data, property) <- new_value
   self$append_to_changes(list(Added_metadata, property, new_value))

@@ -412,8 +412,17 @@ DataBook$set("public", "get_combined_metadata", function(convert_to_character = 
   i = 1
   for (curr_obj in private$.data_sheets) {
     templist = curr_obj$get_metadata()
+    
     for (j in (1:length(templist))) {
-      if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
+      if(length(templist[[j]]) > 1 || is.list(templist[[j]])){
+        if("scalars" %in% names(templist[j])){
+          my_list <- templist[[j]]
+          # Using paste0 to create the desired string
+          result <- paste0(names(my_list), " = ", my_list, collapse = ", ")
+          templist[[j]] <- result
+        }
+        else templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
+      }
       retlist[i, names(templist[j])] = templist[[j]]
     }
 
@@ -426,30 +435,6 @@ DataBook$set("public", "get_combined_metadata", function(convert_to_character = 
     }
     else if(data_name_label %in% names(retlist)) retlist <- retlist[ ,c(data_name_label, sort(setdiff(names(retlist), data_name_label)))]
     i = i + 1
-  }
-
-  # Split the data names once
-  data_names <- strsplit(retlist[[data_name_label]], " ")
-  
-  # Check if 'scalars' column exists and has any non-NA values
-  if ("scalars" %in% names(retlist) && any(!is.na(retlist$scalars))) {
-    
-    # Loop over non-NA scalars only
-    for (i in which(!is.na(retlist$scalars))) {
-      
-      curr_data <- self$get_data_frame(data_name = data_names[[i]], use_current_filter = FALSE)
-      
-      # Retrieve the attribute 'scalars'
-      tmp_scalars <- attr(curr_data, "scalars")
-      
-      if (!is.null(tmp_scalars)) {
-        # Create the scalars string
-        scalars_string <- paste0(names(tmp_scalars), " = ", tmp_scalars, collapse = ", ")
-        
-        # Update 'scalars' column
-        retlist$scalars[i] <- scalars_string
-      }
-    }
   }
   
   if(convert_to_character) return(convert_to_character_matrix(retlist, FALSE))
