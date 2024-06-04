@@ -20,7 +20,7 @@ Public Class dlgPrincipalComponentAnalysis
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private bResettingDialogue As Boolean = False
-    Private lstEditedVariables, lstAllVariables As New List(Of String)
+    Private lstEditedVariables As New List(Of String)
     Private clsPCAFunction, clsPCASummaryFuction, clsMatchFunction, clsMatch2Function, clsNamesFunction, clsSummaryFunction, clsGetColumnsFunction As New RFunction
     Private clsREigenValues, clsREigenVectors, clsRRotation, clsRRotationCoord, clsRRotationEig, clsDummyFunction As New RFunction
     Private clsRScreePlotFunction, clsRThemeMinimal, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction As New RFunction
@@ -395,12 +395,10 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub GetColumns()
         If ucrChkExtraVariables.Checked Then
             Dim lstVariables As List(Of String) = ucrReceiverMultiplePCA.GetVariableNamesAsList()
-            Dim strVarFrequency As List(Of String) = ucrReceiverSuppNumeric.GetVariableNamesAsList()
-            Dim strVarQuality As List(Of String) = ucrReceiverSupplFactors.GetVariableNamesAsList()
 
             If Not ucrReceiverMultiplePCA.IsEmpty AndAlso (Not ucrReceiverSuppNumeric.IsEmpty OrElse Not ucrReceiverSupplFactors.IsEmpty) Then
-                lstVariables.AddRange(strVarFrequency)
-                lstVariables.AddRange(strVarQuality)
+                lstVariables.AddRange(ucrReceiverSuppNumeric.GetVariableNamesAsList())
+                lstVariables.AddRange(ucrReceiverSupplFactors.GetVariableNamesAsList())
             End If
 
             clsGetColumnsFunction.AddParameter("col_names", frmMain.clsRLink.GetListAsRString(lstVariables, bWithQuotes:=True), iPosition:=1)
@@ -413,17 +411,13 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub UpdateSelector()
         ClearSelector()
         If bResettingDialogue Then
-            For i = 0 To lstAllVariables.Count - 1
-                ucrSelectorPCA.lstAvailableVariable.Items.Add(lstAllVariables.Item(i))
-                ucrSelectorPCA.lstAvailableVariable.Items(i).Tag = ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-            Next
-        Else
             For i = 0 To lstEditedVariables.Count - 1
                 ucrSelectorPCA.lstAvailableVariable.Items.Add(lstEditedVariables.Item(i))
                 ucrSelectorPCA.lstAvailableVariable.Items(i).Tag = ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text
             Next
         End If
     End Sub
+
     Private Sub ClearSelector()
         ucrSelectorPCA.lstAvailableVariable.Clear()
         ucrSelectorPCA.lstAvailableVariable.Groups.Clear()
@@ -433,26 +427,11 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub ucrReceiverSuppNumeric_Enter(sender As Object, e As EventArgs) Handles ucrReceiverSuppNumeric.Enter
         If Not ucrReceiverMultiplePCA.IsEmpty Then
             Dim arrItems As String() = ucrReceiverMultiplePCA.GetVariableNamesList(False)
-            If arrItems.Count > 1 Then
-                ucrSelectorPCA.lstAvailableVariable.Groups.Add(New ListViewGroup(
-                                                                        key:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
-                                                                        headerText:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text))
-            End If
 
-            For j = 0 To arrItems.Count - 1
-                ucrSelectorPCA.lstAvailableVariable.Items.Add(arrItems(j))
-                ucrSelectorPCA.lstAvailableVariable.Items(j).Tag = ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-                ucrSelectorPCA.lstAvailableVariable.Items(j).ToolTipText = arrItems(j)
-            Next
-
-            ' Remove selected variables from the selector
             For Each item As ListViewItem In ucrSelectorPCA.lstAvailableVariable.Items
-                For Each selectedColumn As String In ucrReceiverMultiplePCA.GetVariableNamesAsList
-                    If item.Text = selectedColumn Then
-                        ucrSelectorPCA.lstAvailableVariable.Items.Remove(item)
-                        Exit For
-                    End If
-                Next
+                If arrItems.Contains(item.Text) Then
+                    ucrSelectorPCA.lstAvailableVariable.Items.Remove(item)
+                End If
             Next
         End If
     End Sub
@@ -461,11 +440,7 @@ Public Class dlgPrincipalComponentAnalysis
         If Not bResettingDialogue Then
             If ucrSelectorPCA.lstAvailableVariable.Items.Count > 0 Then
                 lstEditedVariables.Clear()
-                lstAllVariables.Clear()
-                For Each lstv As ListViewItem In ucrSelectorPCA.lstAvailableVariable.Items
-                    lstAllVariables.Add(lstv.Text)
-                    lstEditedVariables.Add(lstv.Text)
-                Next
+                lstEditedVariables = ucrSelectorPCA.lstAvailableVariable.Items.Cast(Of ListViewItem)().Select(Function(item) item.Text).ToList()
             End If
         End If
     End Sub
