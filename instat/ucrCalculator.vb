@@ -2041,8 +2041,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRank_Click(sender As Object, e As EventArgs) Handles cmdRank.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rank(x, na.last = TRUE,
-     ties.method = c(""average"", ""first"", ""last"", ""random"", ""max"", ""min""))", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rank( ,na.last=TRUE,ties.method=c(""average"", ""first"", ""last"", ""random"", ""max"", ""min""))", 81)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rank( )", 2)
         End If
