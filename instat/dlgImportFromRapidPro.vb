@@ -225,9 +225,15 @@ Public Class dlgImportFromRapidPro
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowDataFunction)
         End If
         If ucrChkFlow.Checked AndAlso ucrChkUser.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsLinkDataFramesFunction, 0)
+            ucrBase.clsRsyntax.ClearCodes()
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetUserDataFunction, 0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetFlowFunction, 1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsLinkDataFramesFunction, 2)
         Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetFlowFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetUserDataFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsLinkDataFramesFunction)
+
         End If
     End Sub
 
