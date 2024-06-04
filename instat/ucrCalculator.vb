@@ -1955,7 +1955,6 @@ Public Class ucrCalculator
         RaiseEvent SelectionChanged()
     End Sub
 
-
     Private Sub OpenHelpPage()
         If strPackageName <> "" Then
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
