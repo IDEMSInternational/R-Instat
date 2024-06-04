@@ -1945,7 +1945,7 @@ Public Class ucrCalculator
 
     Private Sub cmdpercentrank_Click(sender As Object, e As EventArgs) Handles cmdPercentRank.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::percent_rank(x= )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::percent_rank(x= )*100", 7)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::percent_rank( )*100", 6)
         End If
@@ -1980,14 +1980,14 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdEcdf_Click(sender As Object, e As EventArgs) Handles cmdCumdist.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::cume_dist( )", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::cume_dist( )*100", 6)
     End Sub
 
     Private Sub cmdNtile_Click(sender As Object, e As EventArgs) Handles cmdNtile.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::ntile(x= ,n=2)", 6)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::ntile()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::ntile( )", 2)
         End If
     End Sub
 
@@ -2037,6 +2037,23 @@ Public Class ucrCalculator
 
     Private Sub cmdDRank_Click(sender As Object, e As EventArgs) Handles cmdDRank.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::dense_rank( )", 2)
+    End Sub
+
+    Private Sub cmdRank_Click(sender As Object, e As EventArgs) Handles cmdRank.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rank(x, na.last = TRUE,
+     ties.method = c(""average"", ""first"", ""last"", ""random"", ""max"", ""min""))", 1)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rank( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdRescale_Click(sender As Object, e As EventArgs) Handles cmdRescale.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scales::rescale( ,to=c(0,1),narm=TRUE)", 22)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scales::rescale( ,narm=TRUE)", 12)
+        End If
     End Sub
 
     Private Sub cmdRowRank_Click(sender As Object, e As EventArgs) Handles cmdRowRank.Click
@@ -6069,23 +6086,6 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("decimals(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("decimals( )", 2)
-        End If
-    End Sub
-    '-------------------------------------------------------------------------------------------------------------------------
-
-    Private Sub cmdRank_Click(sender As Object, e As EventArgs) Handles cmdRank.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("", 2)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rank( )", 2)
-        End If
-    End Sub
-
-    Private Sub cmdRescale_Click(sender As Object, e As EventArgs) Handles cmdRescale.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scales::rescale( ,to=c(0,1),narm=TRUE)", 22)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scales::rescale( ,narm=TRUE)", 12)
         End If
     End Sub
 End Class
