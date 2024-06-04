@@ -296,11 +296,8 @@ Public Class dlgScatterPlot
         ucrNudSize.SetLinkedDisplayControl(lblSize)
         ucrNudWidth.SetLinkedDisplayControl(lblWidth)
         ucrNudHeigth.SetLinkedDisplayControl(lblHeith)
-        ucrInputShape.SetLinkedDisplayControl(lblShape)
-        ucrNudPointsize.SetLinkedDisplayControl(lblPointsize)
         ucrInputSides.SetLinkedDisplayControl(lblSides)
-        ucrInputPosition.SetLinkedDisplayControl(lblPosition)
-        ucrInputLegend.SetLinkedDisplayControl(lblLegend)
+
     End Sub
 
     Private Sub SetDefaults()
