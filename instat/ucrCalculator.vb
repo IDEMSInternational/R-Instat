@@ -1945,7 +1945,7 @@ Public Class ucrCalculator
 
     Private Sub cmdpercentrank_Click(sender As Object, e As EventArgs) Handles cmdPercentRank.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::percent_rank(x= )*100", 7)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::percent_rank(x= )*100", 6)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::percent_rank( )*100", 6)
         End If
@@ -2041,7 +2041,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRank_Click(sender As Object, e As EventArgs) Handles cmdRank.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rank( ,na.last=TRUE,ties.method=c(""average"", ""first"", ""last"", ""random"", ""max"", ""min""))", 81)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rank(x= ,na.last=TRUE,ties.method=c(""average"", ""first"", ""last"", ""random"", ""max"", ""min""))", 81)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rank( )", 2)
         End If
