@@ -811,11 +811,13 @@ Public Class dlgBoxplot
         End If
         EnableDisableWidth()
         HideShowWidth()
+        'ucrInputWidth.Visible = ucrChkWidth.Checked
     End Sub
 
     Private Sub ucrChkWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWidth.ControlValueChanged
         EnableDisableWidth()
         HideShowWidth()
+        'ucrInputWidth.Visible = ucrChkWidth.Checked
     End Sub
 
     Private Sub EnableDisableWidth()
@@ -839,17 +841,10 @@ Public Class dlgBoxplot
     Private Sub HideShowWidth()
         ucrChkWidth.Visible = False
         ucrInputWidth.Visible = False
-        If rdoBoxplotTufte.Checked OrElse rdoViolin.Checked Then
-            If ucrByFactorsReceiver.strCurrDataType = "numeric" Then
-                ucrChkWidth.Visible = True
-                ucrInputWidth.Visible = ucrChkWidth.Checked
-            Else
-                ucrChkWidth.Visible = False
-                ucrInputWidth.Visible = False
-            End If
-        Else
-            ucrChkWidth.Visible = False
-            ucrInputWidth.Visible = False
+
+        If (rdoBoxplotTufte.Checked OrElse rdoViolin.Checked) AndAlso ucrByFactorsReceiver.strCurrDataType = "numeric" Then
+            ucrChkWidth.Visible = True
+            ucrInputWidth.Visible = ucrChkWidth.Checked
         End If
     End Sub
 
