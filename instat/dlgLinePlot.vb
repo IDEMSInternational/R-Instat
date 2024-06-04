@@ -188,9 +188,10 @@ Public Class dlgLinePlot
 
         ucrChkAddLine.SetText("Add Line")
 
+        ucrChkAddLineLineRange.SetText("Add Line")
+
         ucrChkLineofBestFit.SetText("Add Line of Best Fit")
         ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
-
 
         ucrChkWithSE.SetText("Add SE")
         ucrChkWithSE.SetParameter(New RParameter("se", 1))
@@ -433,7 +434,7 @@ Public Class dlgLinePlot
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX}, {rdoLine, rdoDumbbell, rdoSmoothing, rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrVariablesAsFactorForLinePlot}, {rdoLine, rdoSmoothing}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeX, ucrReceiverSlopeColour, ucrChkSlopeLabelOptions, ucrChkSlopeTextOptions, ucrChkSlopeLineOptions, ucrChkSlopeLegend}, {rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverYMax, ucrReceiverYMin, ucrChkRibbon}, {rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverYMax, ucrChkAddLineLineRange, ucrReceiverYMin, ucrChkRibbon}, {rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellX}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Orange")
         ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellXEnd}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Blue")
         ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellLine}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
@@ -600,7 +601,6 @@ Public Class dlgLinePlot
 
         clsGeomSmoothFunction.SetPackageName("ggplot2")
         clsGeomSmoothFunction.SetRCommand("geom_smooth")
-        clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
 
         clsGeomDumbbellFunction.SetPackageName("ggplot2")
         clsGeomDumbbellFunction.SetRCommand("geom_dumbbell")
@@ -671,6 +671,7 @@ Public Class dlgLinePlot
             ucrChkPathOrStep.SetRCode(clsBaseOperator, bReset)
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
             ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
+            ucrChkAddLineLineRange.SetRCode(clsBaseOperator, bReset)
         End If
         SetGroupParam()
     End Sub
@@ -756,7 +757,6 @@ Public Class dlgLinePlot
             End If
         Else
             ucrReceiverGroup.Visible = False
-
             clsRaesFunction.RemoveParameterByName("group")
         End If
     End Sub
@@ -801,6 +801,7 @@ Public Class dlgLinePlot
         AddRemoveSE()
         AddRemoveBestFit()
         SetGroupParam()
+        AddRemoveLineOnLineRange()
     End Sub
 
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged,
@@ -880,6 +881,7 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub SmoothOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SmoothOptionsToolStripMenuItem.Click
+        clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
         clsGeomSmoothFunction.AddParameter("size", "1")
         openSdgLayerOptions(clsGeomSmoothFunction)
     End Sub
@@ -1138,6 +1140,7 @@ Public Class dlgLinePlot
                 clsBaseOperator.RemoveParameterByName("geom_errorbar")
                 If rdoRibbon.Checked Then
                     ucrSave.SetPrefix("ribbon")
+                    clsRaesFunction.AddParameter("colour", Chr(34) & "grey" & Chr(34), iPosition:=2)
                     clsGeomRibbonFunction.AddParameter("aes", clsRFunctionParameter:=clsAesLinerangeFunction, iPosition:=0, bIncludeArgumentName:=False)
                     clsGeomRibbonFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=1)
                     clsGeomRibbonFunction.AddParameter("position", Chr(34) & "identity" & Chr(34), iPosition:=2)
@@ -1211,7 +1214,18 @@ Public Class dlgLinePlot
         Else
             clsBaseOperator.RemoveParameterByName("geom_line1")
         End If
+    End Sub
 
+    Private Sub AddRemoveLineOnLineRange()
+        If rdoLinerange.Checked Then
+            If ucrChkAddLineLineRange.Checked Then
+                clsBaseOperator.AddParameter("geom_line2", clsRFunctionParameter:=clsGeomLineFunc, iPosition:=4, bIncludeArgumentName:=False)
+            Else
+                clsBaseOperator.RemoveParameterByName("geom_line2")
+            End If
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_line2")
+        End If
     End Sub
 
     Private Sub ucrChkAddLine_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLine.ControlValueChanged
@@ -1254,5 +1268,9 @@ Public Class dlgLinePlot
 
     Private Sub ucrChkLineofBestFit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineofBestFit.ControlValueChanged, ucrChkWithSE.ControlValueChanged
         AddRemoveBestFit()
+    End Sub
+
+    Private Sub ucrChkAddLineLineRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLineLineRange.ControlValueChanged
+        AddRemoveLineOnLineRange()
     End Sub
 End Class

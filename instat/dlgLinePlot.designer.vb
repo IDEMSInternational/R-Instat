@@ -147,6 +147,7 @@ Partial Class dlgLinePlot
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
+        Me.ucrChkAddLineLineRange = New instat.ucrCheck()
         Me.grpSmoothOptions.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -1303,11 +1304,21 @@ Partial Class dlgLinePlot
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 82
         '
+        'ucrChkAddLineLineRange
+        '
+        Me.ucrChkAddLineLineRange.AutoSize = True
+        Me.ucrChkAddLineLineRange.Checked = False
+        Me.ucrChkAddLineLineRange.Location = New System.Drawing.Point(133, 337)
+        Me.ucrChkAddLineLineRange.Name = "ucrChkAddLineLineRange"
+        Me.ucrChkAddLineLineRange.Size = New System.Drawing.Size(77, 24)
+        Me.ucrChkAddLineLineRange.TabIndex = 84
+        '
         'dlgLinePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(423, 563)
+        Me.Controls.Add(Me.ucrChkAddLineLineRange)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucr1stFactorReceiver)
         Me.Controls.Add(Me.lblFacetBy)
@@ -1515,4 +1526,5 @@ Partial Class dlgLinePlot
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
+    Friend WithEvents ucrChkAddLineLineRange As ucrCheck
 End Class
