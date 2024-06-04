@@ -759,14 +759,6 @@ Public Class dlgScatterPlot
         SetPipeAssignTo()
     End Sub
 
-    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrSaveScatterPlot_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
-
-    End Sub
-
     Private Sub SetPipeAssignTo()
         If ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsPipeOperator.clsParameters.Count > 1 Then
             clsPipeOperator.SetAssignTo(ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
@@ -778,10 +770,6 @@ Public Class dlgScatterPlot
     Private Sub ucrSelectorForScatter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForScatter.ControlValueChanged
         AutoFacetStation()
         SetPipeAssignTo()
-    End Sub
-
-    Private Sub ucrFactorOptionalReceiver_ControlValueChanged(ucrChangedControl As ucrCore)
-
     End Sub
 
     Private Sub AddRemoveGroupAesVar()
