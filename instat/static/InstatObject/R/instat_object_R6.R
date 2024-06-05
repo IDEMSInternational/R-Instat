@@ -402,6 +402,7 @@ DataBook$set("public", "get_combined_metadata", function(convert_to_character = 
   i = 1
   for (curr_obj in private$.data_sheets) {
     templist = curr_obj$get_metadata()
+
     for (j in (1:length(templist))) {
       if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
       retlist[i, names(templist[j])] = templist[[j]]
@@ -486,6 +487,21 @@ DataBook$set("public", "get_calculations", function(data_name) {
 DataBook$set("public", "get_calculation_names", function(data_name, as_list = FALSE, excluded_items = c()) {
   return(self$get_data_objects(data_name)$get_calculation_names(as_list = as_list, excluded_items = excluded_items))
 } 
+)
+
+DataBook$set("public", "get_scalars", function(data_name) {
+  self$get_data_objects(data_name)$get_scalars()
+}
+)
+
+DataBook$set("public", "get_scalar_names", function(data_name, as_list = FALSE, excluded_items = c()) {
+  return(self$get_data_objects(data_name)$get_scalar_names(as_list = as_list, excluded_items = excluded_items))
+} 
+)
+
+DataBook$set("public","add_scalar", function(data_name, scalar_name = "", scalar_value) {
+  self$get_data_objects(data_name)$add_scalar(scalar_name, scalar_value)
+  }
 )
 
 DataBook$set("public", "dataframe_count", function() {
@@ -738,8 +754,6 @@ DataBook$set("public", "get_from_object", function(data_name, object_name, value
   }
 }
 )
-
-
 
 
 # Filters -----------------------------------------------------------------
