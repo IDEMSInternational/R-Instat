@@ -2214,7 +2214,7 @@ DataSheet$set("public", "get_object", function(object_name) {
 )
 
 DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
-  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model","structure","summary", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column_selection or a calculation.")
+  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model","structure","summary", "column_selection", "scalar")) stop(object_type, " must be either object (graph, table or model), filter, column_selection or a calculation.")
 
   #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
   if (object_type %in% c("object", "graph", "table","model","structure","summary")){
@@ -2241,7 +2241,11 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
     if(".everything" == object_name) stop("Renaming .everything is not allowed.")
     names(private$column_selections)[names(private$column_selections) == object_name] <- new_name
     if(private$.current_column_selection$name == object_name){private$.current_column_selection$name <- new_name}
-  } 
+  } else if (object_type == "scalar") {
+    if(!object_name %in% names(private$scalars)) stop(object_name, " not found in calculations list")
+    if(new_name %in% names(private$scalars)) stop(new_name, " is already a calculation name. Cannot rename ", object_name, " to ", new_name)
+    names(private$scalars)[names(private$scalars) == object_name] <- new_name
+  }
 }
 )
 
