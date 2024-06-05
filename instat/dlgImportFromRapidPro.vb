@@ -178,8 +178,9 @@ Public Class dlgImportFromRapidPro
         clsLinkDataFramesFunction.SetPackageName("rapidpror")
         clsLinkDataFramesFunction.SetRCommand("link_data_frames")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction, 0)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSiteFunction, 1)
+        'ucrBase.clsRsyntax.ClearCodes()
+        'ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction, 0)
+        'ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSiteFunction, 1)
         'ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
     End Sub
 
@@ -215,25 +216,25 @@ Public Class dlgImportFromRapidPro
 
     Private Sub ucrPnlImportFromRapidPro_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlImportFromRapidPro.ControlValueChanged,
         ucrSaveDataframeName.ControlValueChanged, ucrChkFlow.ControlValueChanged, ucrChkUser.ControlValueChanged
-        If rdoUserData.Checked Then
-            If ucrChkUser.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
-            ElseIf ucrChkFlow.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowFunction)
-            End If
-        Else
+        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction, 0)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSiteFunction, 1)
+
+        If rdoUserData.Checked AndAlso ucrChkUser.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
+        ElseIf rdoUserData.Checked AndAlso ucrChkFlow.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowFunction)
+        ElseIf rdoFlowData.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowDataFunction)
         End If
-        If ucrChkFlow.Checked AndAlso ucrChkUser.Checked Then
-            ucrBase.clsRsyntax.ClearCodes()
-            ucrBase.clsRsyntax.AddToAfterCodes(clsGetUserDataFunction, 0)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsGetFlowFunction, 1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsLinkDataFramesFunction, 2)
+        If rdoUserData.Checked AndAlso ucrChkFlow.Checked AndAlso ucrChkUser.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetFlowFunction, 0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsLinkDataFramesFunction, 1)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetFlowFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetUserDataFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsLinkDataFramesFunction)
-
         End If
     End Sub
 
