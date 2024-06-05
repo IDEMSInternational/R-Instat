@@ -37,8 +37,8 @@ Public Class ucrReceiverExpression
 
     Public Overrides Sub AddSelectedSelectorVariables()
         If Selector.lstAvailableVariable.SelectedItems.Count = 1 Then
-            Add(Selector.lstAvailableVariable.SelectedItems.Item(0).Text, Selector.lstAvailableVariable.SelectedItems.Item(0).Tag)
-        Else
+            strSelectedVariable = Selector.lstAvailableVariable.SelectedItems.Item(0).Text
+            Add(strSelectedVariable, Selector.lstAvailableVariable.SelectedItems.Item(0).Tag)
             'Error?
         End If
     End Sub

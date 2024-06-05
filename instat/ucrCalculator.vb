@@ -1158,6 +1158,14 @@ Public Class ucrCalculator
         End Select
     End Sub
 
+    Private Sub ucrChkStoreScalar_Click(sender As Object, e As EventArgs) Handles ucrChkStoreScalar.Click
+        RaiseEvent CheckBoxClick()
+    End Sub
+
+    Private Sub ucrTryCalculator_TextChanged() Handles ucrTryCalculator.TryTextChanged
+        RaiseEvent TryCommadChanged()
+    End Sub
+
     Private Sub cmdRound_Click(sender As Object, e As EventArgs) Handles cmdRound.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("round(x= , digits=0)", 11)
