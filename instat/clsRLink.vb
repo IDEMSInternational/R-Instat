@@ -646,7 +646,7 @@ Public Class RLink
     '''
     ''' <param name="strScript">    The text to add to the save log file. </param>
     '''--------------------------------------------------------------------------------------------
-    Private Sub AppendToAutoSaveLog(strScript As String)
+    Public Sub AppendToAutoSaveLog(strScript As String)
         Dim strTempFile As String
         Dim i As Integer = 1
         Try
@@ -749,22 +749,9 @@ Public Class RLink
                          bShowWaitDialogOverride:=Nothing)
             End If
 
-             ' Split the strOutput into an array of lines, removing empty entries
-            Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-
-            ' Check if arrFilesPaths has at least one element before iterating
-            If arrFilesPaths.Length > 0 Then
-                ' Iterate through each file path
-                For Each _path In arrFilesPaths
-                    ' Add output to logger
-                    clsOutputLogger.AddOutput(clsRStatement.Text, _path, bAsFile:=True,
+            ' Add output to logger
+            clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
                         bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
-                Next
-            Else
-                ' Add output to logger
-                clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
-                        bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
-            End If
 
             ' Log the script
             LogScript(clsRStatement.Text.TrimEnd(vbCr, vbLf))
@@ -1012,22 +999,8 @@ Public Class RLink
                 End If
             End If
 
-            If bAsFile Then
-                ' Split the strOutput into an array of lines, removing empty entries
-                Dim arrFilesPaths() As String = strOutput.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-                ' Iterate through each HTML files
-                For Each _path In arrFilesPaths
-                    ' Add each HTML file as an output to clsOutputLogger
-                    ' strScriptWithComment: the script with associated comments
-                    ' _path: the path to the HTML file
-                    ' bAsFile: a boolean indicating whether the output should be treated as a file
-                    ' bDisplayOutputInExternalViewer: a boolean indicating whether to display the output in an external viewer
-                    clsOutputLogger.AddOutput(strScriptWithComment, _path, bAsFile, bDisplayOutputInExternalViewer)
-                Next
-            Else
-                ' If strOutput is empty or does not contain valid HTML files, add strOutput itself as an output
-                clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
-            End If
+            ' If strOutput is empty or does not contain valid HTML files, add strOutput itself as an output
+            clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
 
 
         Catch e As Exception

@@ -287,6 +287,12 @@
     <Compile Include="dlgRandomSplit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRestoreBackup.Designer.vb">
+      <DependentUpon>dlgRestoreBackup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRestoreBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSeasonalGraph.Designer.vb">
       <DependentUpon>dlgSeasonalGraph.vb</DependentUpon>
     </Compile>
@@ -307,6 +313,12 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgDefineAnnualRainfall.Designer.vb">
+      <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDefineAnnualRainfall.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgHSConstants.Designer.vb">
       <DependentUpon>sdgHSConstants.vb</DependentUpon>
     </Compile>
@@ -3137,6 +3149,9 @@
     <EmbeddedResource Include="dlgRandomSplit.resx">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgRestoreBackup.resx">
+      <DependentUpon>dlgRestoreBackup.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgScript.resx">
       <DependentUpon>dlgScript.vb</DependentUpon>
     </EmbeddedResource>
@@ -3184,6 +3199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
+      <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHSConstants.resx">
       <DependentUpon>sdgHSConstants.vb</DependentUpon>
