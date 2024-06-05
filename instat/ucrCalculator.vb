@@ -24,6 +24,7 @@ Public Class ucrCalculator
     Public Event TryCommadClick()
     Public Event ControlValueChanged()
     Public Event CheckBoxClick()
+    Public Event TryCommadChanged()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsHelp As New RFunction
@@ -475,7 +476,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCombn, "combn(c(-2,1,3,4), 2,FUN=prod) gives the products of the values 2 at a time, -2  -6  -8 , 3   4  12. (result usually put into output window)")
         ttCalculator.SetToolTip(cmdCoef, "single coefficient of a polynomial if given roots. So sum(combn(c(-2,1,3,4),3. FUN=prod) =(-6 -12-24 +12) = -26")
         ttCalculator.SetToolTip(cmdCoeffs2, " Gives the polynomial coefficients from the zeros")
-        ttCalculator.SetToolTip(cmdFunctionsDigitsum, "Gives the sum of the digits in a numeric variable") 
+        ttCalculator.SetToolTip(cmdFunctionsDigitsum, "Gives the sum of the digits in a numeric variable")
         ttCalculator.SetToolTip(cmdDigitsumSession, "Gives the sum of the digits, if library calculator code has been run in the current session")
         ttCalculator.SetToolTip(cmdPascalSession, "Gives binomial coefficients, if the library calculator code has been run in the current session")
         ttCalculator.SetToolTip(cmdDigitsqu, "Squares of digits in an integer variable")
@@ -5783,7 +5784,7 @@ Public Class ucrCalculator
     Private Sub ucrChkStoreScalar_Click(sender As Object, e As EventArgs) Handles ucrChkStoreScalar.Click
         RaiseEvent CheckBoxClick()
     End Sub
-End Class
+
     'Functions keyboard
     Private Sub cmdAve_Click(sender As Object, e As EventArgs) Handles cmdAve.Click
         If chkShowParameters.Checked Then
@@ -6062,6 +6063,10 @@ End Class
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("decimals( )", 2)
         End If
+    End Sub
+
+    Private Sub ucrTryCalculator_TextChanged() Handles ucrTryCalculator.TryTextChanged
+        RaiseEvent TryCommadChanged()
     End Sub
 End Class
 

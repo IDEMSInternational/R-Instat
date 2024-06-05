@@ -301,6 +301,9 @@ Public Class dlgCalculator
         ManageScalarStorageAndAttachDetach()
     End Sub
 
+    Private Sub ucrCalc_TryCommadClick() Handles ucrCalc.TryCommadChanged
+        ManageScalarStorageAndAttachDetach()
+    End Sub
 End Class
 
 
