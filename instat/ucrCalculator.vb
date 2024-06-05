@@ -23,6 +23,8 @@ Public Class ucrCalculator
     Public Event DataFrameChanged()
     Public Event TryCommadClick()
     Public Event ControlValueChanged()
+    Public Event CheckBoxClick()
+    Public Event TryCommadChanged()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsHelp As New RFunction
@@ -64,6 +66,8 @@ Public Class ucrCalculator
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Transform", "Summary", "Probability", "Factor", "Text/Strings (Character Columns)", "Dates/Times", "Circular", "Wakefield", "Goodness of Fit", "List", "Complex", "Integer", "Functions"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
+
+        ucrChkStoreScalar.Text = "Store Scalar"
 
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")

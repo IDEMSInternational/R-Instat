@@ -499,6 +499,11 @@ DataBook$set("public", "get_scalar_names", function(data_name, as_list = FALSE, 
 } 
 )
 
+DataBook$set("public", "get_scalar_value", function(data_name, scalar_name) {
+  self$get_data_objects(data_name)$get_scalar_value(scalar_name)
+}
+)
+
 DataBook$set("public","add_scalar", function(data_name, scalar_name = "", scalar_value) {
   self$get_data_objects(data_name)$add_scalar(scalar_name, scalar_value)
   }

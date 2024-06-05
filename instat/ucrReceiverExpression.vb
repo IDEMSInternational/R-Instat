@@ -20,6 +20,7 @@ Public Class ucrReceiverExpression
     Private lstItemsInExpression As List(Of KeyValuePair(Of String, String))
     Private lstDataFrames As List(Of String)
     Private iCurrentPosition As Integer = 0
+    Private strSelectedVariable As String
 
     Public Sub New()
         ' This call is required by the designer.
@@ -29,6 +30,10 @@ Public Class ucrReceiverExpression
         lstItemsInExpression = New List(Of KeyValuePair(Of String, String))
         lstDataFrames = New List(Of String)
     End Sub
+
+    Public Function GetSelectedSelectorVariables(Optional bWithQuotes As Boolean = True)
+        Return If(bWithQuotes, Chr(34) & strSelectedVariable & Chr(34), strSelectedVariable)
+    End Function
 
     Public Overrides Sub AddSelectedSelectorVariables()
         If Selector.lstAvailableVariable.SelectedItems.Count = 1 Then

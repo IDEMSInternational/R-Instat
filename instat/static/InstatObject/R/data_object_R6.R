@@ -652,6 +652,12 @@ DataSheet$set("public", "get_scalar_names", function(as_list = FALSE, excluded_i
 }
 )
 
+DataSheet$set("public", "get_scalar_value", function(scalar_name) {
+  if(missing(scalar_name)) stop(stop("scalar_name must be specified."))
+  return(private$scalars[[scalar_name]])
+}
+)
+
 DataSheet$set("public", "add_scalar", function(scalar_name = "", scalar_value) {
   if(missing(scalar_name)) scalar_name <- next_default_item("scalar", names(private$scalars))
   if(scalar_name %in% names(private$scalars)) warning("A scalar called", scalar_name, "already exists. It will be replaced.")

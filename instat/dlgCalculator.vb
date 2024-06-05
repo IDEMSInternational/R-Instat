@@ -21,6 +21,7 @@ Public Class dlgCalculator
     Private clsAttachFunction As New RFunction
     Private clsDetachFunction As New RFunction
     Private clsRemoveLabelsFunction As New RFunction
+    Private clsGetScalarValueFunction, clsAddScalarFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Public iHelpCalcID As Integer
     'holds the original width of the form
@@ -76,6 +77,13 @@ Public Class dlgCalculator
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
         ucrCalc.ucrTryCalculator.SetIsCommand()
         ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
+
+        ucrCalc.ucrSelectorForCalculations.SetItemType("column")
+        ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Variables"
+
+        clsAddScalarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_scalar")
+
+        clsGetScalarValueFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_scalar_value")
 
         clsRemoveLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsRemoveLabelsFunction.AddParameter("property", Chr(34) & "labels" & Chr(34), iPosition:=2)
@@ -148,6 +156,8 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrSelectorForCalculation_DataframeChanged() Handles ucrCalc.DataFrameChanged
+        clsGetScalarValueFunction.AddParameter("data_name", Chr(34) & ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame & Chr(34), iPosition:=0)
+        clsAddScalarFunction.AddParameter("data_name", Chr(34) & ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsRemoveLabelsFunction.AddParameter("data_name", Chr(34) & ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame & Chr(34), iPosition:=0)
     End Sub
 
