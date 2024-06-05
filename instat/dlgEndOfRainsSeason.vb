@@ -107,7 +107,6 @@ Public Class dlgEndOfRainsSeason
     Private clsMinusMinOperator As New ROperator
     Private clsMinusMaxOperator As New ROperator
 
-
     ' Water Balance max
     Private clsEndSeasonWBMaxCalc As New RFunction
     Private clsEndSeasonWBMaxCalcSubCalcsList As New RFunction
@@ -1078,14 +1077,14 @@ Public Class dlgEndOfRainsSeason
         If rdoEndOfSeasons.Checked Then
             clsPMaxFunction.RemoveParameterByName("0")
             clsPMaxFunction.RemoveParameterByName("0")
-            clsPMinWBMaxFunction.RemoveParameterByName("1")
-            clsPMinWBMinFunction.RemoveParameterByName("1")
             clsWBMinEvapOperator.RemoveParameterByName("variable")
             clsWBMaxEvapOperator.RemoveParameterByName("variable")
             clsWBMaxEvapOperator.RemoveParameterByName("value")
             clsWBMinEvapOperator.RemoveParameterByName("value")
             clsPMaxFunction.RemoveParameterByName("wb")
             clsPMaxFunction.RemoveParameterByName("wb")
+            clsPMinWBMaxFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+            clsPMinWBMinFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
             If rdoValueEvaporation.Checked Then
                 clsEndSeasonWBMinCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMinFunction, iPosition:=1)
                 clsEndSeasonWBMaxCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMaxFunction, iPosition:=1)
@@ -1100,12 +1099,8 @@ Public Class dlgEndOfRainsSeason
                     clsWBMaxEvapOperator.AddParameter("value", ucrInputEvaporation.GetText(), iPosition:=1)
                     clsWBMinEvapOperator.AddParameter("value", ucrInputEvaporation.GetText(), iPosition:=1)
                     clsPMaxFunction.AddParameter("0", "..1 + ..2", iPosition:=0, bIncludeArgumentName:=False)
-
                     clsPMinWBMinFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
                     clsPMinWBMaxFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
-
-                    clsPMinWBMaxFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
-                    clsPMinWBMinFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
                 End If
             Else
                 ucrReceiverEvaporation.SetMeAsReceiver()
@@ -1126,8 +1121,6 @@ Public Class dlgEndOfRainsSeason
                     clsPMaxFunction.AddParameter("0", "..1 + ..2", iPosition:=0, bIncludeArgumentName:=False)
                     clsPMinWBMinFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
                     clsPMinWBMaxFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
-                    clsPMinWBMaxFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
-                    clsPMinWBMinFunction.AddParameter("1", ucrNudCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
                 End If
             End If
         End If
