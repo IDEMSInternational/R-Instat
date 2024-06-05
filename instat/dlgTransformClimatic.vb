@@ -1474,8 +1474,6 @@ Public Class dlgTransformClimatic
         If rdoWaterBalance.Checked Then
             clsPMaxFunction.RemoveParameterByName("0")
             clsPMaxFunction.RemoveParameterByName("0")
-            'clsPMinWBMaxFunction.RemoveParameterByName("1")
-            'clsPMinWBMinFunction.RemoveParameterByName("1")
             clsWBMinEvapOperator.RemoveParameterByName("variable")
             clsWBMaxEvapOperator.RemoveParameterByName("variable")
             clsWBMaxEvapOperator.RemoveParameterByName("value")
