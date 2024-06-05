@@ -173,10 +173,6 @@ Public Class ucrButtons
             frmMain.AddToScriptWindow(clsRsyntax.GetScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
 
-        'This clears the script after it has been run, but leave the function and parameters in the base function
-        'so that it can be run exactly the same when reopened.
-        clsRsyntax.strScript = ""
-
         'Run additional after codes
         lstAfterCodes = clsRsyntax.GetAfterCodes()
         lstAfterScripts = clsRsyntax.GetScriptsFromCodeList(lstAfterCodes)
