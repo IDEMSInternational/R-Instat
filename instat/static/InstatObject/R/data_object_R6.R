@@ -658,13 +658,18 @@ DataSheet$set("public", "get_scalar_value", function(scalar_name) {
 }
 )
 
+DataSheet$set("public", "update_scalar_to_metadata", function() {
+  scalar_max <- length(private$scalars)
+  my_scalars <- paste(names(private$scalars)[1:scalar_max], " = ", private$scalars[1:scalar_max], collapse = ", ")
+  self$append_to_metadata(scalar, my_scalars)
+}
+)
+
 DataSheet$set("public", "add_scalar", function(scalar_name = "", scalar_value) {
   if(missing(scalar_name)) scalar_name <- next_default_item("scalar", names(private$scalars))
   if(scalar_name %in% names(private$scalars)) warning("A scalar called", scalar_name, "already exists. It will be replaced.")
   private$scalars[[scalar_name]] <- scalar_value
-  scalar_max <- length(private$scalars)
-  my_scalars <- paste(names(private$scalars)[1:scalar_max], " = ", private$scalars[1:scalar_max], collapse = ", ")
-  self$append_to_metadata(scalar, my_scalars)
+  self$update_scalar_to_metadata()
 }
 )
 
@@ -2252,6 +2257,7 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
     if(!object_name %in% names(private$scalars)) stop(object_name, " not found in calculations list")
     if(new_name %in% names(private$scalars)) stop(new_name, " is already a calculation name. Cannot rename ", object_name, " to ", new_name)
     names(private$scalars)[names(private$scalars) == object_name] <- new_name
+    self$update_scalar_to_metadata()
   }
 }
 )
