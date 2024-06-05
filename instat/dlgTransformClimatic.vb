@@ -1474,8 +1474,8 @@ Public Class dlgTransformClimatic
         If rdoWaterBalance.Checked Then
             clsPMaxFunction.RemoveParameterByName("0")
             clsPMaxFunction.RemoveParameterByName("0")
-            clsPMinWBMaxFunction.RemoveParameterByName("1")
-            clsPMinWBMinFunction.RemoveParameterByName("1")
+            'clsPMinWBMaxFunction.RemoveParameterByName("1")
+            'clsPMinWBMinFunction.RemoveParameterByName("1")
             clsWBMinEvapOperator.RemoveParameterByName("variable")
             clsWBMaxEvapOperator.RemoveParameterByName("variable")
             clsWBMaxEvapOperator.RemoveParameterByName("value")
@@ -1483,6 +1483,8 @@ Public Class dlgTransformClimatic
             clsPMaxFunction.RemoveParameterByName("wb")
             clsPMaxFunction.RemoveParameterByName("wb")
             clsEndSeasonWBCalc.AddParameter("adjacent_column", ucrReceiverData.GetVariableNames(), iPosition:=3)
+            clsPMinWBMaxFunction.AddParameter("1", ucrNudWBCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+            clsPMinWBMinFunction.AddParameter("1", ucrNudWBCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
             If rdoEvapValue.Checked Then
                 clsEndSeasonWBMinCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMinFunction, iPosition:=1)
                 clsEndSeasonWBMaxCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMaxFunction, iPosition:=1)
@@ -1497,12 +1499,8 @@ Public Class dlgTransformClimatic
                     clsWBMaxEvapOperator.AddParameter("value", ucrInputEvaporation.GetText(), iPosition:=1)
                     clsWBMinEvapOperator.AddParameter("value", ucrInputEvaporation.GetText(), iPosition:=1)
                     clsPMaxFunction.AddParameter("0", "..1 + ..2", iPosition:=0, bIncludeArgumentName:=False)
-
                     clsPMinWBMinFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
                     clsPMinWBMaxFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
-
-                    clsPMinWBMaxFunction.AddParameter("1", ucrNudWBCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
-                    clsPMinWBMinFunction.AddParameter("1", ucrNudWBCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
                 End If
             Else
                 ucrReceiverEvap.SetMeAsReceiver()
@@ -1523,8 +1521,6 @@ Public Class dlgTransformClimatic
                     clsPMaxFunction.AddParameter("0", "..1 + ..2", iPosition:=0, bIncludeArgumentName:=False)
                     clsPMinWBMinFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
                     clsPMinWBMaxFunction.AddParameter("0", clsRFunctionParameter:=clsPMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
-                    clsPMinWBMaxFunction.AddParameter("1", ucrNudWBCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
-                    clsPMinWBMinFunction.AddParameter("1", ucrNudWBCapacity.GetText(), iPosition:=1, bIncludeArgumentName:=False)
                 End If
             End If
         End If
