@@ -53,22 +53,11 @@ Partial Class dlgScatterPlot
         Me.toolStripMenuItemJitterOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemCountOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpGeom = New System.Windows.Forms.GroupBox()
-        Me.ucrNudPointsize = New instat.ucrNud()
-        Me.ucrChkColour = New instat.ucrCheck()
-        Me.ucrChkPosition = New instat.ucrCheck()
-        Me.ucrChkSize = New instat.ucrCheck()
-        Me.ucrChkShape = New instat.ucrCheck()
-        Me.ucrInputPosition = New instat.ucrInputComboBox()
-        Me.ucrInputLegend = New instat.ucrInputComboBox()
-        Me.ucrInputShape = New instat.ucrInputComboBox()
         Me.rdoCount = New System.Windows.Forms.RadioButton()
         Me.rdoPoint = New System.Windows.Forms.RadioButton()
         Me.lblHeith = New System.Windows.Forms.Label()
-        Me.ucrNudHeigth = New instat.ucrNud()
         Me.lblWidth = New System.Windows.Forms.Label()
-        Me.ucrNudWidth = New instat.ucrNud()
         Me.rdoJitter = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlGeoms = New instat.UcrPanel()
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.grpAdd = New System.Windows.Forms.GroupBox()
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
@@ -81,6 +70,17 @@ Partial Class dlgScatterPlot
         Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
+        Me.ucrNudPointsize = New instat.ucrNud()
+        Me.ucrChkColour = New instat.ucrCheck()
+        Me.ucrChkPosition = New instat.ucrCheck()
+        Me.ucrChkSize = New instat.ucrCheck()
+        Me.ucrChkShape = New instat.ucrCheck()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
+        Me.ucrInputLegend = New instat.ucrInputComboBox()
+        Me.ucrInputShape = New instat.ucrInputComboBox()
+        Me.ucrNudHeigth = New instat.ucrNud()
+        Me.ucrNudWidth = New instat.ucrNud()
+        Me.ucrPnlGeoms = New instat.UcrPanel()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
         Me.ucrSaveScatterPlot = New instat.ucrSave()
@@ -195,13 +195,13 @@ Partial Class dlgScatterPlot
         '
         'grpGeom
         '
+        Me.grpGeom.Controls.Add(Me.ucrInputLegend)
+        Me.grpGeom.Controls.Add(Me.ucrInputPosition)
         Me.grpGeom.Controls.Add(Me.ucrNudPointsize)
         Me.grpGeom.Controls.Add(Me.ucrChkColour)
         Me.grpGeom.Controls.Add(Me.ucrChkPosition)
         Me.grpGeom.Controls.Add(Me.ucrChkSize)
         Me.grpGeom.Controls.Add(Me.ucrChkShape)
-        Me.grpGeom.Controls.Add(Me.ucrInputPosition)
-        Me.grpGeom.Controls.Add(Me.ucrInputLegend)
         Me.grpGeom.Controls.Add(Me.ucrInputShape)
         Me.grpGeom.Controls.Add(Me.rdoCount)
         Me.grpGeom.Controls.Add(Me.rdoPoint)
@@ -213,92 +213,10 @@ Partial Class dlgScatterPlot
         Me.grpGeom.Controls.Add(Me.ucrPnlGeoms)
         Me.grpGeom.Location = New System.Drawing.Point(9, 337)
         Me.grpGeom.Name = "grpGeom"
-        Me.grpGeom.Size = New System.Drawing.Size(463, 109)
+        Me.grpGeom.Size = New System.Drawing.Size(449, 110)
         Me.grpGeom.TabIndex = 23
         Me.grpGeom.TabStop = False
         Me.grpGeom.Text = "Geom"
-        '
-        'ucrNudPointsize
-        '
-        Me.ucrNudPointsize.AutoSize = True
-        Me.ucrNudPointsize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPointsize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPointsize.Location = New System.Drawing.Point(174, 16)
-        Me.ucrNudPointsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPointsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPointsize.Name = "ucrNudPointsize"
-        Me.ucrNudPointsize.Size = New System.Drawing.Size(45, 20)
-        Me.ucrNudPointsize.TabIndex = 34
-        Me.ucrNudPointsize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkColour
-        '
-        Me.ucrChkColour.AutoSize = True
-        Me.ucrChkColour.Checked = False
-        Me.ucrChkColour.Location = New System.Drawing.Point(97, 48)
-        Me.ucrChkColour.Name = "ucrChkColour"
-        Me.ucrChkColour.Size = New System.Drawing.Size(76, 23)
-        Me.ucrChkColour.TabIndex = 84
-        '
-        'ucrChkPosition
-        '
-        Me.ucrChkPosition.AutoSize = True
-        Me.ucrChkPosition.Checked = False
-        Me.ucrChkPosition.Location = New System.Drawing.Point(250, 48)
-        Me.ucrChkPosition.Name = "ucrChkPosition"
-        Me.ucrChkPosition.Size = New System.Drawing.Size(79, 23)
-        Me.ucrChkPosition.TabIndex = 83
-        '
-        'ucrChkSize
-        '
-        Me.ucrChkSize.AutoSize = True
-        Me.ucrChkSize.Checked = False
-        Me.ucrChkSize.Location = New System.Drawing.Point(97, 19)
-        Me.ucrChkSize.Name = "ucrChkSize"
-        Me.ucrChkSize.Size = New System.Drawing.Size(77, 23)
-        Me.ucrChkSize.TabIndex = 82
-        '
-        'ucrChkShape
-        '
-        Me.ucrChkShape.AutoSize = True
-        Me.ucrChkShape.Checked = False
-        Me.ucrChkShape.Location = New System.Drawing.Point(250, 20)
-        Me.ucrChkShape.Name = "ucrChkShape"
-        Me.ucrChkShape.Size = New System.Drawing.Size(79, 23)
-        Me.ucrChkShape.TabIndex = 81
-        '
-        'ucrInputPosition
-        '
-        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputPosition.GetSetSelectedIndex = -1
-        Me.ucrInputPosition.IsReadOnly = False
-        Me.ucrInputPosition.Location = New System.Drawing.Point(329, 50)
-        Me.ucrInputPosition.Name = "ucrInputPosition"
-        Me.ucrInputPosition.Size = New System.Drawing.Size(95, 21)
-        Me.ucrInputPosition.TabIndex = 39
-        '
-        'ucrInputLegend
-        '
-        Me.ucrInputLegend.AddQuotesIfUnrecognised = True
-        Me.ucrInputLegend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputLegend.GetSetSelectedIndex = -1
-        Me.ucrInputLegend.IsReadOnly = False
-        Me.ucrInputLegend.Location = New System.Drawing.Point(174, 48)
-        Me.ucrInputLegend.Name = "ucrInputLegend"
-        Me.ucrInputLegend.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputLegend.TabIndex = 37
-        '
-        'ucrInputShape
-        '
-        Me.ucrInputShape.AddQuotesIfUnrecognised = True
-        Me.ucrInputShape.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputShape.GetSetSelectedIndex = -1
-        Me.ucrInputShape.IsReadOnly = False
-        Me.ucrInputShape.Location = New System.Drawing.Point(329, 19)
-        Me.ucrInputShape.Name = "ucrInputShape"
-        Me.ucrInputShape.Size = New System.Drawing.Size(96, 21)
-        Me.ucrInputShape.TabIndex = 35
         '
         'rdoCount
         '
@@ -331,19 +249,6 @@ Partial Class dlgScatterPlot
         Me.lblHeith.TabIndex = 27
         Me.lblHeith.Text = "Height:"
         '
-        'ucrNudHeigth
-        '
-        Me.ucrNudHeigth.AutoSize = True
-        Me.ucrNudHeigth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHeigth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHeigth.Location = New System.Drawing.Point(236, 77)
-        Me.ucrNudHeigth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudHeigth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHeigth.Name = "ucrNudHeigth"
-        Me.ucrNudHeigth.Size = New System.Drawing.Size(45, 20)
-        Me.ucrNudHeigth.TabIndex = 28
-        Me.ucrNudHeigth.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'lblWidth
         '
         Me.lblWidth.AutoSize = True
@@ -352,19 +257,6 @@ Partial Class dlgScatterPlot
         Me.lblWidth.Size = New System.Drawing.Size(38, 13)
         Me.lblWidth.TabIndex = 25
         Me.lblWidth.Text = "Width:"
-        '
-        'ucrNudWidth
-        '
-        Me.ucrNudWidth.AutoSize = True
-        Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWidth.Location = New System.Drawing.Point(123, 77)
-        Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidth.Name = "ucrNudWidth"
-        Me.ucrNudWidth.Size = New System.Drawing.Size(45, 20)
-        Me.ucrNudWidth.TabIndex = 26
-        Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoJitter
         '
@@ -376,14 +268,6 @@ Partial Class dlgScatterPlot
         Me.rdoJitter.TabStop = True
         Me.rdoJitter.Text = "Jitter"
         Me.rdoJitter.UseVisualStyleBackColor = True
-        '
-        'ucrPnlGeoms
-        '
-        Me.ucrPnlGeoms.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlGeoms.Location = New System.Drawing.Point(2, 14)
-        Me.ucrPnlGeoms.Name = "ucrPnlGeoms"
-        Me.ucrPnlGeoms.Size = New System.Drawing.Size(447, 89)
-        Me.ucrPnlGeoms.TabIndex = 24
         '
         'lblFacetBy
         '
@@ -516,6 +400,122 @@ Partial Class dlgScatterPlot
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 77
+        '
+        'ucrNudPointsize
+        '
+        Me.ucrNudPointsize.AutoSize = True
+        Me.ucrNudPointsize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPointsize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPointsize.Location = New System.Drawing.Point(174, 18)
+        Me.ucrNudPointsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPointsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPointsize.Name = "ucrNudPointsize"
+        Me.ucrNudPointsize.Size = New System.Drawing.Size(45, 20)
+        Me.ucrNudPointsize.TabIndex = 34
+        Me.ucrNudPointsize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkColour
+        '
+        Me.ucrChkColour.AutoSize = True
+        Me.ucrChkColour.Checked = False
+        Me.ucrChkColour.Location = New System.Drawing.Point(81, 48)
+        Me.ucrChkColour.Name = "ucrChkColour"
+        Me.ucrChkColour.Size = New System.Drawing.Size(114, 23)
+        Me.ucrChkColour.TabIndex = 84
+        '
+        'ucrChkPosition
+        '
+        Me.ucrChkPosition.AutoSize = True
+        Me.ucrChkPosition.Checked = False
+        Me.ucrChkPosition.Location = New System.Drawing.Point(257, 48)
+        Me.ucrChkPosition.Name = "ucrChkPosition"
+        Me.ucrChkPosition.Size = New System.Drawing.Size(79, 23)
+        Me.ucrChkPosition.TabIndex = 83
+        '
+        'ucrChkSize
+        '
+        Me.ucrChkSize.AutoSize = True
+        Me.ucrChkSize.Checked = False
+        Me.ucrChkSize.Location = New System.Drawing.Point(98, 19)
+        Me.ucrChkSize.Name = "ucrChkSize"
+        Me.ucrChkSize.Size = New System.Drawing.Size(77, 23)
+        Me.ucrChkSize.TabIndex = 82
+        '
+        'ucrChkShape
+        '
+        Me.ucrChkShape.AutoSize = True
+        Me.ucrChkShape.Checked = False
+        Me.ucrChkShape.Location = New System.Drawing.Point(250, 20)
+        Me.ucrChkShape.Name = "ucrChkShape"
+        Me.ucrChkShape.Size = New System.Drawing.Size(79, 23)
+        Me.ucrChkShape.TabIndex = 81
+        '
+        'ucrInputPosition
+        '
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
+        Me.ucrInputPosition.IsReadOnly = False
+        Me.ucrInputPosition.Location = New System.Drawing.Point(329, 48)
+        Me.ucrInputPosition.Name = "ucrInputPosition"
+        Me.ucrInputPosition.Size = New System.Drawing.Size(95, 21)
+        Me.ucrInputPosition.TabIndex = 39
+        '
+        'ucrInputLegend
+        '
+        Me.ucrInputLegend.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputLegend.GetSetSelectedIndex = -1
+        Me.ucrInputLegend.IsReadOnly = False
+        Me.ucrInputLegend.Location = New System.Drawing.Point(185, 48)
+        Me.ucrInputLegend.Name = "ucrInputLegend"
+        Me.ucrInputLegend.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputLegend.TabIndex = 37
+        '
+        'ucrInputShape
+        '
+        Me.ucrInputShape.AddQuotesIfUnrecognised = True
+        Me.ucrInputShape.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputShape.GetSetSelectedIndex = -1
+        Me.ucrInputShape.IsReadOnly = False
+        Me.ucrInputShape.Location = New System.Drawing.Point(329, 19)
+        Me.ucrInputShape.Name = "ucrInputShape"
+        Me.ucrInputShape.Size = New System.Drawing.Size(96, 21)
+        Me.ucrInputShape.TabIndex = 35
+        '
+        'ucrNudHeigth
+        '
+        Me.ucrNudHeigth.AutoSize = True
+        Me.ucrNudHeigth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHeigth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHeigth.Location = New System.Drawing.Point(236, 77)
+        Me.ucrNudHeigth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudHeigth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHeigth.Name = "ucrNudHeigth"
+        Me.ucrNudHeigth.Size = New System.Drawing.Size(45, 20)
+        Me.ucrNudHeigth.TabIndex = 28
+        Me.ucrNudHeigth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudWidth
+        '
+        Me.ucrNudWidth.AutoSize = True
+        Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWidth.Location = New System.Drawing.Point(123, 77)
+        Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Name = "ucrNudWidth"
+        Me.ucrNudWidth.Size = New System.Drawing.Size(45, 20)
+        Me.ucrNudWidth.TabIndex = 26
+        Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlGeoms
+        '
+        Me.ucrPnlGeoms.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlGeoms.Location = New System.Drawing.Point(2, 14)
+        Me.ucrPnlGeoms.Name = "ucrPnlGeoms"
+        Me.ucrPnlGeoms.Size = New System.Drawing.Size(433, 89)
+        Me.ucrPnlGeoms.TabIndex = 24
         '
         'cmdOptions
         '

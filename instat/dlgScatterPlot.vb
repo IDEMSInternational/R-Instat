@@ -154,7 +154,7 @@ Public Class dlgScatterPlot
         ucrChkShape.AddParameterPresentCondition(False, "geom_point", False)
         ucrChkShape.AddToLinkedControls({ucrInputShape}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkColour.SetText("Colour")
+        ucrChkColour.SetText("Colour Option")
         ucrChkColour.AddParameterPresentCondition(True, "geom_count")
         ucrChkColour.AddParameterPresentCondition(False, "geom_count", False)
         ucrChkColour.AddToLinkedControls({ucrInputLegend}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -770,6 +770,14 @@ Public Class dlgScatterPlot
     Private Sub ucrSelectorForScatter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForScatter.ControlValueChanged
         AutoFacetStation()
         SetPipeAssignTo()
+    End Sub
+
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrSaveScatterPlot_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+
     End Sub
 
     Private Sub AddRemoveGroupAesVar()
