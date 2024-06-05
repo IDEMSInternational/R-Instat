@@ -937,7 +937,6 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsCumulativeMinimum, New RParameter("x", 0, False), iAdditionalPairNo:=10)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsEndSeasonIsNaRain, New RParameter("x", 0), iAdditionalPairNo:=11)
         ucrReceiverData.AddAdditionalCodeParameterPair(clsIfElseRainMaxFunction, New RParameter("no", 2), iAdditionalPairNo:=12)
-        '  ucrReceiverData.AddAdditionalCodeParameterPair(clsEndSeasonWBCalc, New RParameter("adjacent_column", 3), iAdditionalPairNo:=13)
         ucrNudSumOver.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("n", 1), iAdditionalPairNo:=1)
         ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 2), iAdditionalPairNo:=1)
         ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("max", 1), iAdditionalPairNo:=1)
