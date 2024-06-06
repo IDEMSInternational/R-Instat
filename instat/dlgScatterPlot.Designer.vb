@@ -76,7 +76,7 @@ Partial Class dlgScatterPlot
         Me.ucrChkSize = New instat.ucrCheck()
         Me.ucrChkShape = New instat.ucrCheck()
         Me.ucrInputPosition = New instat.ucrInputComboBox()
-        Me.ucrInputLegend = New instat.ucrInputComboBox()
+        Me.ucrInputColour = New instat.ucrInputComboBox()
         Me.ucrInputShape = New instat.ucrInputComboBox()
         Me.ucrNudHeigth = New instat.ucrNud()
         Me.ucrNudWidth = New instat.ucrNud()
@@ -195,7 +195,7 @@ Partial Class dlgScatterPlot
         '
         'grpGeom
         '
-        Me.grpGeom.Controls.Add(Me.ucrInputLegend)
+        Me.grpGeom.Controls.Add(Me.ucrInputColour)
         Me.grpGeom.Controls.Add(Me.ucrInputPosition)
         Me.grpGeom.Controls.Add(Me.ucrNudPointsize)
         Me.grpGeom.Controls.Add(Me.ucrChkColour)
@@ -461,16 +461,16 @@ Partial Class dlgScatterPlot
         Me.ucrInputPosition.Size = New System.Drawing.Size(95, 21)
         Me.ucrInputPosition.TabIndex = 39
         '
-        'ucrInputLegend
+        'ucrInputColour
         '
-        Me.ucrInputLegend.AddQuotesIfUnrecognised = True
-        Me.ucrInputLegend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputLegend.GetSetSelectedIndex = -1
-        Me.ucrInputLegend.IsReadOnly = False
-        Me.ucrInputLegend.Location = New System.Drawing.Point(185, 48)
-        Me.ucrInputLegend.Name = "ucrInputLegend"
-        Me.ucrInputLegend.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputLegend.TabIndex = 37
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColour.GetSetSelectedIndex = -1
+        Me.ucrInputColour.IsReadOnly = False
+        Me.ucrInputColour.Location = New System.Drawing.Point(185, 48)
+        Me.ucrInputColour.Name = "ucrInputColour"
+        Me.ucrInputColour.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputColour.TabIndex = 37
         '
         'ucrInputShape
         '
@@ -690,7 +690,7 @@ Partial Class dlgScatterPlot
     Friend WithEvents ucrNudPointsize As ucrNud
     Friend WithEvents ucrInputShape As ucrInputComboBox
     Friend WithEvents ucrInputPosition As ucrInputComboBox
-    Friend WithEvents ucrInputLegend As ucrInputComboBox
+    Friend WithEvents ucrInputColour As ucrInputComboBox
     Friend WithEvents ucrInputStation As ucrInputComboBox
     Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label

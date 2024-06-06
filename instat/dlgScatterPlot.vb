@@ -154,10 +154,10 @@ Public Class dlgScatterPlot
         ucrChkShape.AddParameterPresentCondition(False, "geom_point", False)
         ucrChkShape.AddToLinkedControls({ucrInputShape}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkColour.SetText("Colour Option")
+        ucrChkColour.SetText("Colour")
         ucrChkColour.AddParameterPresentCondition(True, "geom_count")
         ucrChkColour.AddParameterPresentCondition(False, "geom_count", False)
-        ucrChkColour.AddToLinkedControls({ucrInputLegend}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColour.AddToLinkedControls({ucrInputColour}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkPosition.SetText("Position")
         ucrChkPosition.AddParameterPresentCondition(True, "geom_count")
@@ -174,7 +174,7 @@ Public Class dlgScatterPlot
         ucrPnlGeoms.AddToLinkedControls({ucrNudWidth, ucrNudHeigth}, {rdoJitter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.40")
         ucrPnlGeoms.AddToLinkedControls({ucrNudPointsize, ucrChkSize, ucrInputShape, ucrChkShape}, {rdoPoint}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeoms.AddToLinkedControls({ucrInputPosition}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="identity")
-        ucrPnlGeoms.AddToLinkedControls({ucrInputLegend}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
+        ucrPnlGeoms.AddToLinkedControls({ucrInputColour}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
         ucrPnlGeoms.AddToLinkedControls({ucrChkPosition, ucrChkColour}, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveScatterPlot.SetPrefix("scatter_plot")
@@ -242,10 +242,10 @@ Public Class dlgScatterPlot
         ucrInputPosition.SetItems({"identity", "stack", "dodge", "jitter", "fill", "position_dodge", "position_jitter(width=0.2,height=0.0)"})
         ucrInputPosition.SetDropDownStyleAsNonEditable()
 
-        ucrInputLegend.SetParameter(New RParameter("show.legend", 11))
-        ucrInputLegend.SetItems({"NA", "TRUE", "FALSE"})
-        ucrInputLegend.SetDropDownStyleAsNonEditable()
-        ucrInputLegend.AddQuotesIfUnrecognised = False
+        ucrInputColour.SetParameter(New RParameter("colour", 11))
+        ucrInputColour.SetItems({"NULL", "Black", "White", "Blue", "Red", "Yellow", "Purple", "Green", "Orange", "Grey", "Brown", "Pink"})
+        ucrInputColour.SetDropDownStyleAsNonEditable()
+        ucrInputColour.AddQuotesIfUnrecognised = True
 
         ucrInputSides.SetParameter(New RParameter("sides", 1))
         dctSidesOptions.Add("Bottom and left", Chr(34) & "bl" & Chr(34))
@@ -441,7 +441,7 @@ Public Class dlgScatterPlot
         ucrInputSides.SetRCode(clsGeomRugFunction, bReset)
         ucrInputShape.SetRCode(clsRScatterGeomFunction, bReset)
         ucrNudPointsize.SetRCode(clsRScatterGeomFunction, bReset)
-        ucrInputLegend.SetRCode(clsCountGeomFunction, bReset)
+        ucrInputColour.SetRCode(clsCountGeomFunction, bReset)
         ucrInputPosition.SetRCode(clsCountGeomFunction, bReset)
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
@@ -584,7 +584,7 @@ Public Class dlgScatterPlot
         toolStripMenuItemTextrepelOptions.Enabled = Not ucrReceiverLabel.IsEmpty
     End Sub
 
-    Private Sub ucrPnlGeoms_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeoms.ControlValueChanged, ucrNudHeigth.ControlValueChanged, ucrNudWidth.ControlValueChanged, ucrInputLegend.ControlValueChanged, ucrInputPosition.ControlValueChanged, ucrInputShape.ControlValueChanged, ucrNudPointsize.ControlValueChanged
+    Private Sub ucrPnlGeoms_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeoms.ControlValueChanged, ucrNudHeigth.ControlValueChanged, ucrNudWidth.ControlValueChanged, ucrInputColour.ControlValueChanged, ucrInputPosition.ControlValueChanged, ucrInputShape.ControlValueChanged, ucrNudPointsize.ControlValueChanged
         If rdoJitter.Checked Then
             clsGeomJitterFunction.AddParameter("width", ucrNudWidth.GetText, iPosition:=0)
             clsGeomJitterFunction.AddParameter("height", ucrNudHeigth.GetText, iPosition:=1)
@@ -597,6 +597,7 @@ Public Class dlgScatterPlot
             clsBaseOperator.RemoveParameterByName(strGeomCountParameterName)
         ElseIf rdoCount.Checked Then
             ChangePositionCount()
+            ChangeCountColour()
             clsBaseOperator.AddParameter(strGeomCountParameterName, clsRFunctionParameter:=clsCountGeomFunction, iPosition:=2)
             clsBaseOperator.RemoveParameterByName(strGeomJitterParameterName)
             clsBaseOperator.RemoveParameterByName(strFirstParameterName)
@@ -611,6 +612,15 @@ Public Class dlgScatterPlot
         Else
             clsCountGeomFunction.AddParameter("position", Chr(34) & ucrInputPosition.GetText & Chr(34), iPosition:=0)
         End If
+    End Sub
+
+    Private Sub ChangeCountColour()
+        If ucrChkColour.Checked Then
+            clsCountGeomFunction.AddParameter("colour", Chr(34) & ucrInputColour.GetText & Chr(34), iPosition:=11)
+        Else
+            clsCountGeomFunction.RemoveParameterByName("colour")
+        End If
+
     End Sub
 
     Private Sub AutoFacetStation()
