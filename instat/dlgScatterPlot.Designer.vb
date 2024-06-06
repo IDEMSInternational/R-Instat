@@ -418,7 +418,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrChkColour.AutoSize = True
         Me.ucrChkColour.Checked = False
-        Me.ucrChkColour.Location = New System.Drawing.Point(81, 48)
+        Me.ucrChkColour.Location = New System.Drawing.Point(98, 48)
         Me.ucrChkColour.Name = "ucrChkColour"
         Me.ucrChkColour.Size = New System.Drawing.Size(114, 23)
         Me.ucrChkColour.TabIndex = 84
@@ -467,7 +467,7 @@ Partial Class dlgScatterPlot
         Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputColour.GetSetSelectedIndex = -1
         Me.ucrInputColour.IsReadOnly = False
-        Me.ucrInputColour.Location = New System.Drawing.Point(185, 48)
+        Me.ucrInputColour.Location = New System.Drawing.Point(176, 48)
         Me.ucrInputColour.Name = "ucrInputColour"
         Me.ucrInputColour.Size = New System.Drawing.Size(61, 21)
         Me.ucrInputColour.TabIndex = 37
