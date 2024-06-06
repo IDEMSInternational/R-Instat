@@ -404,10 +404,6 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub SetDefaults()
-        'Dim strEndofSeason As String = "end_of_season_combined"
-        'Dim strDoyFilter As String = "doy_filter"
-        'Dim strConditionsFilter As String = "conditions_filter"
-
         clsRTransform = New RFunction
         clsOverallTransformFunction = New RFunction
         clsWaterBalanceFunction = New RFunction
@@ -424,11 +420,6 @@ Public Class dlgTransformClimatic
         clsRasterFuction = New RFunction
         clsReplaceNAasElement = New RFunction
         clsRCountFunction = New RFunction
-        'clsRWaterBalanceFunction = New RFunction
-        'clsRWaterBalanceFunction1 = New RFunction
-        'clsRWaterBalanceFunction2 = New RFunction
-        'clsWBEvaporation = New RFunction
-        'clsTailFunction = New RFunction
         clsRRaindayMatch = New RFunction
         clsRRaindayAndOperator = New ROperator
         clsRRaindayOrOperator = New ROperator
