@@ -90,7 +90,6 @@ Public Class dlgRenameObjects
         End If
     End Sub
 
-
     Private Sub CoreControls_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrSelectorForRenameObject.ControlContentsChanged, ucrReceiverCurrentName.ControlContentsChanged
         TestOKEnabled()
     End Sub
@@ -109,13 +108,10 @@ Public Class dlgRenameObjects
         End If
     End Sub
 
-
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
-
 
 End Class

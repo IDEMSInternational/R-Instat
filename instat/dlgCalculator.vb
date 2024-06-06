@@ -190,9 +190,20 @@ Public Class dlgCalculator
             clsAddScalarFunction.AddParameter("scalar_value", ucrCalc.ucrTryCalculator.ucrInputTryMessage.GetText, iPosition:=2)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 1)
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = False
+            ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = True
+            ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = False
+            ucrCalc.ucrSaveResultInto.ucrChkSave.Enabled = False
+            ucrCalc.ucrSaveResultInto.ucrInputComboSave.Visible = True
+            ucrCalc.ucrSaveResultInto.ucrInputComboSave.Enabled = True
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddScalarFunction)
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = True
+            ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = True
+            ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = True
+            ucrCalc.ucrSaveResultInto.ucrChkSave.Enabled = True
+            ucrCalc.ucrSaveResultInto.ucrInputComboSave.Visible = True
+            ucrCalc.ucrSaveResultInto.ucrInputComboSave.Enabled = True
+            ucrCalc.ucrChkStoreScalar.Checked = False
         End If
 
         ' Add or remove attach/detach functions

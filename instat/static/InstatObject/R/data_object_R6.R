@@ -2263,7 +2263,7 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
 )
 
 DataSheet$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
-  if(!object_type %in% c("object", "graph", "table","model","structure","summary","filter", "calculation", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column selection or a calculation.")
+  if(!object_type %in% c("object", "graph", "table","model","structure","summary","filter", "calculation", "column_selection", "scalar")) stop(object_type, " must be either object (graph, table or model), filter, column selection or a calculation.")
 
   if(any(object_type %in% c("object", "graph", "table","model","structure","summary"))){
 
@@ -2277,6 +2277,10 @@ DataSheet$set("public", "delete_objects", function(data_name, object_names, obje
     }else if(object_type == "calculation"){
       if(!object_names %in% names(private$calculations)) stop(object_names, " not found in calculations list.")
       private$calculations[names(private$calculations) %in% object_names] <- NULL
+    }else if(object_type == "scalar"){
+      if(!object_names %in% names(private$scalars)) stop(object_names, " not found in scalars list.")
+      private$scalars[names(private$scalars) %in% object_names] <- NULL
+      self$update_scalar_to_metadata()
     }else if(object_type == "column_selection"){
       if(!all(object_names %in% names(private$column_selections))) stop(object_names, " not found in column selections list.")
       if(".everything" %in% object_names) stop(".everything cannot be deleted.")
