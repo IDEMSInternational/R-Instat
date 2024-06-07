@@ -54,6 +54,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.Reset()
         ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = True
+        ucrCalc.ucrChkStoreScalar.Checked = False
         ucrCalc.chkShowParameters.Checked = False
         ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
         ucrCalc.ucrSelectorForCalculations.ResetCheckBoxScalar()
@@ -72,6 +73,7 @@ Public Class dlgCalculator
     Private Sub ReopenDialog()
         SaveResults()
         GetScalarValue()
+        ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScoalar(True)
         ucrCalc.ucrChkStoreScalar.Checked = False
     End Sub
 
@@ -203,7 +205,7 @@ Public Class dlgCalculator
             ucrCalc.ucrSaveResultInto.ucrChkSave.Enabled = True
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Visible = True
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Enabled = True
-            ucrCalc.ucrChkStoreScalar.Checked = False
+
         End If
 
         ' Add or remove attach/detach functions

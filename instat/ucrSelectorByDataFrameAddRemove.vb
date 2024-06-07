@@ -17,6 +17,10 @@
 Imports System.ComponentModel
 
 Public Class ucrSelectorByDataFrameAddRemove
+
+    Private Sub ucrSelectorByDataFrameAddRemove_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ShowCheckBoxScoalar(False)
+    End Sub
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click, toolStripAddSelected.Click
         Add()
     End Sub
@@ -42,7 +46,6 @@ Public Class ucrSelectorByDataFrameAddRemove
 
     Public Sub ShowCheckBoxScoalar(bShowScalarCheck As Boolean)
         checkBoxScalar.Visible = bShowScalarCheck
-        checkBoxScalar.Checked = bShowScalarCheck
     End Sub
 
     Public Sub ResetCheckBoxScalar()
