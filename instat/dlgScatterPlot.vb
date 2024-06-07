@@ -68,6 +68,8 @@ Public Class dlgScatterPlot
     Private strGeomJitterParameterName As String = "geom_jitter"
     Private strGeomCountParameterName As String = "geom_count"
     Private strGeomParameterNames() As String = {strFirstParameterName, strGeomJitterParameterName, strGeomCountParameterName, strGeomSmoothParameterName, strGeomTextRepelParameterName}
+    Private strPickColour As String = "Pick Colour..."
+    Private dlgColour As New ColorDialog
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -243,7 +245,7 @@ Public Class dlgScatterPlot
         ucrInputPosition.SetDropDownStyleAsNonEditable()
 
         ucrInputColour.SetParameter(New RParameter("colour", 11))
-        ucrInputColour.SetItems({"NULL", "Black", "White", "Blue", "Red", "Yellow", "Purple", "Green", "Orange", "Grey", "Brown", "Pink"})
+        ucrInputColour.SetItems({"NULL", strPickColour, "Black", "White", "Blue", "Red", "Yellow", "Purple", "Green", "Orange", "Grey", "Brown", "Pink"})
         ucrInputColour.SetDropDownStyleAsNonEditable()
         ucrInputColour.AddQuotesIfUnrecognised = True
 
@@ -782,14 +784,6 @@ Public Class dlgScatterPlot
         SetPipeAssignTo()
     End Sub
 
-    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrSaveScatterPlot_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
-
-    End Sub
-
     Private Sub AddRemoveGroupAesVar()
         clsGroupAesFuction.RemoveParameterByName("group")
         clsGroupAesVarFuction.RemoveParameterByName("group")
@@ -818,12 +812,34 @@ Public Class dlgScatterPlot
         End If
     End Sub
 
-
     Private Sub ucrChkSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSize.ControlValueChanged, ucrNudPointsize.ControlValueChanged
         If ucrChkSize.Checked AndAlso (Not ucrNudPointsize.IsEmpty) Then
             clsRScatterGeomFunction.AddParameter("size", ucrNudPointsize.GetText, iPosition:=0)
         Else
             clsRScatterGeomFunction.RemoveParameterByName("size")
+        End If
+    End Sub
+
+    Private Sub ucrInputColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputColour.ControlValueChanged
+        Dim strColourItem As String
+        Dim clrTemp As Color
+
+        If ucrInputColour.GetText() = strPickColour Then
+            Try
+                If dlgColour.ShowDialog() = DialogResult.OK Then
+                    clrTemp = dlgColour.Color
+                    'first two character from Hex are fixed as FF for VB use, not part of colour value
+                    'ggplot requires # in front of Hex colour values
+                    strColourItem = "#" & Hex(clrTemp.ToArgb).Substring(2, 6)
+                    'First item is NULL and needs to be changed before setting text otherwise value will not show in combobox
+                    ucrInputColour.cboInput.Items.Item(0) = strColourItem
+                    ucrInputColour.SetName(strColourItem)
+                Else
+                    ucrInputColour.SetName("NULL")
+                End If
+            Catch ex As Exception
+                dlgColour.Dispose()
+            End Try
         End If
     End Sub
 End Class
