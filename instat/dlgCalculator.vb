@@ -73,6 +73,7 @@ Public Class dlgCalculator
     Private Sub ReopenDialog()
         SaveResults()
         GetScalarValue()
+        ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScoalar(True)
         ucrCalc.ucrChkStoreScalar.Checked = False
     End Sub
 
@@ -84,9 +85,6 @@ Public Class dlgCalculator
 
         ucrCalc.ucrSelectorForCalculations.SetItemType("column")
         ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Variables"
-        ucrCalc.ucrSelectorForCalculations.bShowCheckBoxScalar = True
-
-        ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScoalar(True)
 
         clsAddScalarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_scalar")
 
