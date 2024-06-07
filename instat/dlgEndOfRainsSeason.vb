@@ -1197,7 +1197,7 @@ Public Class dlgEndOfRainsSeason
         Evaporation()
     End Sub
 
-    Private Sub ucrNudWBLessThan_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWBLessThan.ControlValueChanged, ucrChkEndofSeasonOccurence.ControlValueChanged, ucrInputEndofSeasonOccurence.ControlValueChanged, ucrChkEndofSeasonDate.ControlValueChanged, ucrInputEndofSeasonDate.ControlValueChanged, ucrChkEndofSeasonDoy.ControlValueChanged, ucrInputSeasonDoy.ControlValueChanged, ucrSelectorForWaterBalance.ControlValueChanged
-        Evaporation()
-    End Sub
+    'Private Sub ucrNudWBLessThan_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWBLessThan.ControlValueChanged, ucrChkEndofSeasonOccurence.ControlValueChanged, ucrInputEndofSeasonOccurence.ControlValueChanged, ucrChkEndofSeasonDate.ControlValueChanged, ucrInputEndofSeasonDate.ControlValueChanged, ucrChkEndofSeasonDoy.ControlValueChanged, ucrInputSeasonDoy.ControlValueChanged, ucrSelectorForWaterBalance.ControlValueChanged
+    '    Evaporation()
+    'End Sub
 End Class
