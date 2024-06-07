@@ -25,6 +25,7 @@ Public Class ucrCalculator
     Public Event ControlValueChanged()
     Public Event CheckBoxClick()
     Public Event TryCommadChanged()
+    Public Event ClearClick()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsHelp As New RFunction
@@ -708,6 +709,7 @@ Public Class ucrCalculator
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
         ucrReceiverForCalculation.Clear()
+        RaiseEvent ClearClick()
     End Sub
 
     Private Sub cmdLesser_Click(sender As Object, e As EventArgs) Handles cmdLesser.Click
