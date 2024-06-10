@@ -19,9 +19,11 @@ Imports instat.Translations
 Public Class dlgImportFromRapidPro
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
     Private clsGetUserDataFunction As New RFunction
     Private clsGetFlowDataFunction As New RFunction
-    Private clsGetFlowFunction As New RFunction
+    Public clsGetFlowFunction As New RFunction
+    Public clsModifyOperation As New ROperator
     Private clsSetTokenFunction As New RFunction
     Private clsLinkDataFramesFunction As New RFunction
     Private clsSetSiteFunction As New RFunction
@@ -128,7 +130,6 @@ Public Class dlgImportFromRapidPro
 
         ucrSaveDataframeName.SetSaveTypeAsDataFrame()
         ucrSaveDataframeName.SetIsTextBox()
-        ucrSaveDataframeName.SetPrefix("data")
         ucrSaveDataframeName.SetLabelText("Data Frame Name:")
     End Sub
 
@@ -140,13 +141,14 @@ Public Class dlgImportFromRapidPro
         clsSetSiteFunction = New RFunction
         clsGetFlowFunction = New RFunction
         clsLinkDataFramesFunction = New RFunction
+        clsModifyOperation = New ROperator
 
         ucrSaveDataframeName.Reset()
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
         clsDummyFunction.AddParameter("checked1", "FALSE", iPosition:=1)
         clsDummyFunction.AddParameter("flow", "FALSE", iPosition:=2)
-        clsDummyFunction.AddParameter("user", "FALSE", iPosition:=3)
+        clsDummyFunction.AddParameter("user", "TRUE", iPosition:=3)
 
         clsSetSiteFunction.SetPackageName("rapidpror")
         clsSetSiteFunction.SetRCommand("set_rapidpro_site")
@@ -178,10 +180,13 @@ Public Class dlgImportFromRapidPro
         clsLinkDataFramesFunction.SetPackageName("rapidpror")
         clsLinkDataFramesFunction.SetRCommand("link_data_frames")
 
+        clsModifyOperation.SetOperation("%in%")
+
         'ucrBase.clsRsyntax.ClearCodes()
         'ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction, 0)
         'ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSiteFunction, 1)
         'ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
+        bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -191,6 +196,7 @@ Public Class dlgImportFromRapidPro
         ucrInputTimezone.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrInputTimezone.GetParameter(), iAdditionalPairNo:=1)
 
         ucrSaveDataframeName.AddAdditionalRCode(clsGetFlowDataFunction, iAdditionalPairNo:=1)
+        ucrSaveDataframeName.AddAdditionalRCode(clsGetFlowFunction, iAdditionalPairNo:=2)
 
         ucrInputRapidProSite.SetRCode(clsSetSiteFunction, bReset)
         ucrInputEndDate.SetRCode(clsGetUserDataFunction, bReset)
@@ -207,7 +213,7 @@ Public Class dlgImportFromRapidPro
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrInputRapidProSite.IsEmpty AndAlso clsSetTokenFunction.GetParameter("key").strArgumentValue <> Chr(34) & Chr(34) AndAlso ucrSaveDataframeName.IsComplete Then
+        If Not ucrInputRapidProSite.IsEmpty AndAlso clsSetTokenFunction.GetParameter("key").strArgumentValue <> Chr(34) & Chr(34) AndAlso ucrSaveDataframeName.IsComplete AndAlso (ucrChkUser.Checked OrElse ucrChkFlow.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -215,17 +221,24 @@ Public Class dlgImportFromRapidPro
     End Sub
 
     Private Sub ucrPnlImportFromRapidPro_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlImportFromRapidPro.ControlValueChanged,
-        ucrSaveDataframeName.ControlValueChanged, ucrChkFlow.ControlValueChanged, ucrChkUser.ControlValueChanged
+       ucrChkFlow.ControlValueChanged, ucrChkUser.ControlValueChanged
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction, 0)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSiteFunction, 1)
+        grpDataToImport.Visible = False
+        ucrChkFlow.Visible = False
+        ucrChkUser.Visible = False
+        cmdSelectFlows.Visible = False
 
         If rdoUserData.Checked AndAlso ucrChkUser.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
+            ucrSaveDataframeName.SetPrefix("user_data")
         ElseIf rdoUserData.Checked AndAlso ucrChkFlow.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowFunction)
+            ucrSaveDataframeName.SetPrefix("user_flow")
         ElseIf rdoFlowData.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowDataFunction)
+            ucrSaveDataframeName.SetPrefix("user_flow")
         End If
         If rdoUserData.Checked AndAlso ucrChkFlow.Checked AndAlso ucrChkUser.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
@@ -235,6 +248,17 @@ Public Class dlgImportFromRapidPro
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetFlowFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetUserDataFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsLinkDataFramesFunction)
+        End If
+        If rdoUserData.Checked Then
+            grpDataToImport.Visible = True
+            ucrChkFlow.Visible = True
+            ucrChkUser.Visible = True
+            cmdSelectFlows.Visible = True
+        Else
+            grpDataToImport.Visible = False
+            ucrChkFlow.Visible = False
+            ucrChkUser.Visible = False
+            cmdSelectFlows.Visible = False
         End If
     End Sub
 
@@ -259,5 +283,11 @@ Public Class dlgImportFromRapidPro
     Private Sub ucrInputRapidProSite_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveDataframeName.ControlContentsChanged, ucrInputRapidProSite.ControlContentsChanged,
         ucrPnlImportFromRapidPro.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdSelectFlows_Click(sender As Object, e As EventArgs) Handles cmdSelectFlows.Click
+        sdgFlowsToImport.SetRFunction(clsNewGetFlowFunction:=clsGetFlowFunction, clsNewModifyOperation:=clsModifyOperation, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgFlowsToImport.ShowDialog()
     End Sub
 End Class
