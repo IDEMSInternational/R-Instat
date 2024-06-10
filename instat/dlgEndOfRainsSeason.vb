@@ -279,7 +279,6 @@ Public Class dlgEndOfRainsSeason
         ucrNudWBLessThan.SetMinMax(0, Integer.MaxValue)
         ucrNudWBLessThan.Increment = 0.5
         ucrNudWBLessThan.DecimalPlaces = 2
-        ucrNudWBLessThan.SetRDefault(0.05)
 
         ucrNudCapacity.SetParameter(New RParameter("yes", 1))
         ucrNudCapacity.SetMinMax(1, Integer.MaxValue)
@@ -497,6 +496,7 @@ Public Class dlgEndOfRainsSeason
         rdoEndOfRains.Checked = True
 
         ucrNudCapacity.SetText("100")
+        ucrNudWBLessThan.SetText("0.5")
 
         ' Group by
         clsGroupByStationYearCalc.SetRCommand("instat_calculation$new")
@@ -1197,7 +1197,12 @@ Public Class dlgEndOfRainsSeason
         Evaporation()
     End Sub
 
-    'Private Sub ucrNudWBLessThan_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWBLessThan.ControlValueChanged, ucrChkEndofSeasonOccurence.ControlValueChanged, ucrInputEndofSeasonOccurence.ControlValueChanged, ucrChkEndofSeasonDate.ControlValueChanged, ucrInputEndofSeasonDate.ControlValueChanged, ucrChkEndofSeasonDoy.ControlValueChanged, ucrInputSeasonDoy.ControlValueChanged, ucrSelectorForWaterBalance.ControlValueChanged
-    '    Evaporation()
-    'End Sub
+    Private Sub ucrNudWBLessThan_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWBLessThan.ControlValueChanged, ucrChkEndofSeasonOccurence.ControlValueChanged, ucrInputEndofSeasonOccurence.ControlValueChanged, ucrChkEndofSeasonDate.ControlValueChanged, ucrInputEndofSeasonDate.ControlValueChanged, ucrChkEndofSeasonDoy.ControlValueChanged, ucrInputSeasonDoy.ControlValueChanged, ucrSelectorForWaterBalance.ControlValueChanged
+        If Not ucrNudWBLessThan.IsEmpty Then
+            clsEndSeasonWBConditionOperator.AddParameter("1", ucrNudWBLessThan.GetText(), iPosition:=1)
+        Else
+            clsEndSeasonWBConditionOperator.RemoveParameterByName("1")
+        End If
+        'Evaporation()
+    End Sub
 End Class
