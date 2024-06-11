@@ -3332,3 +3332,17 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
   
   return(wandlplot)
 }
+
+# Function to check if a repo exists and is in R 
+check_github_repo <- function(owner, repo) {
+  tryCatch({
+    response <- gh::gh("/repos/:owner/:repo", owner = owner, repo = repo, verb = "GET", silent = TRUE)
+    if (response$language == "R") {
+      return(1)  # Repository exists and is in the R language
+    } else {
+      return(2)  # Repository exists, but isn't in the R language
+    }
+  }, error = function(e) {
+    return(3)  # Error occurred, repository doesn't exist
+  })
+}
