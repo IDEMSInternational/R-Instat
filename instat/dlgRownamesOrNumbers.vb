@@ -113,7 +113,7 @@ Public Class dlgRowNamesOrNumbers
 
         ucrNewColumnName.Reset()
         ucrSelectorRowNames.Reset()
-        ucrBase.clsRsyntax.lstAfterCodes.Clear()
+        ucrBase.clsRsyntax.GetAfterCodes().Clear()
 
         clsDummyFunction.AddParameter("checked_rdo", "copy_row", iPosition:=1)
         clsDummyFunction.AddParameter("add_key", "TRUE", iPosition:=2)

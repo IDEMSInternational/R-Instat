@@ -126,7 +126,7 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
         ucrFactorOptionalReceiver.strSelectorHeading = "Variables"
 
-        ucrChkLineofBestFit.SetText("Add Line of Best Fit")
+        ucrChkLineofBestFit.SetText("Line of Best Fit")
         ucrChkLineofBestFit.AddParameterPresentCondition(True, "geom_smooth")
         ucrChkLineofBestFit.AddParameterPresentCondition(False, "geom_smooth", False)
         ucrChkLineofBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -136,10 +136,13 @@ Public Class dlgScatterPlot
         ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkWithSE.SetRDefault("TRUE")
 
-        ucrChkAddRugPlot.SetText("Add Rug Plot")
+        ucrChkAddRugPlot.SetText("Rug Plot")
         ucrChkAddRugPlot.AddParameterPresentCondition(True, "geom_rug")
         ucrChkAddRugPlot.AddParameterPresentCondition(False, "geom_rug", False)
         ucrChkAddRugPlot.AddToLinkedControls({ucrNudSize, ucrInputSides}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkAddSidePlot.SetText("Side Plot")
+        ucrChkAddSidePlot.Enabled = False
 
         ucrPnlGeoms.AddRadioButton(rdoJitter)
         ucrPnlGeoms.AddRadioButton(rdoPoint)

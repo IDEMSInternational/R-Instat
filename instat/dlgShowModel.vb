@@ -268,8 +268,8 @@ Public Class dlgShowModel
             clsProbabilitiesFunction.AddParameter("return", Chr(34) & "plot" & Chr(34), iPosition:=9)
         ElseIf rdoValues.Checked Then
             cmdDistributionOptions.Enabled = False
-            ucrBase.clsRsyntax.RemoveOperatorParameter("1")
-            ucrBase.clsRsyntax.RemoveOperatorParameter("2")
+            ucrBase.clsRsyntax.clsBaseOperator.RemoveParameterByName("1")
+            ucrBase.clsRsyntax.clsBaseOperator.RemoveParameterByName("2")
             clsQuantilesFunction.AddParameter("return", Chr(34) & "values" & Chr(34), iPosition:=9)
             clsProbabilitiesFunction.AddParameter("return", Chr(34) & "values" & Chr(34), iPosition:=9)
         End If
