@@ -18,6 +18,13 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgAddKey
+    Public enumAddkeyMode As String = AddkeyMode.Prepare
+    Public Enum AddkeyMode
+        Prepare
+        Describe
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDefaultRFunction As New RFunction
@@ -34,6 +41,7 @@ Public Class dlgAddKey
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         bUniqueChecked = False
         TestOKEnabled()
@@ -125,6 +133,15 @@ Public Class dlgAddKey
         Else
             cmdCheckUnique.Enabled = True
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumAddkeyMode
+            Case AddkeyMode.Prepare
+                ucrBase.iHelpTopicID = 416
+            Case AddkeyMode.Climatic
+                ucrBase.iHelpTopicID = 424
+        End Select
     End Sub
 
     Private Sub ucrReceiverKeyColumns_ControlValueChanged() Handles ucrReceiverKeyColumns.ControlValueChanged

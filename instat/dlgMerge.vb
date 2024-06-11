@@ -18,6 +18,12 @@ Imports instat
 Imports instat.Translations
 
 Public Class dlgMerge
+    Public enumMergeMode As String = MergeMode.Prepare
+    Public Enum MergeMode
+        Prepare
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private clsMergeFunction As New RFunction
     Private clsByListFunction As New RFunction
@@ -42,6 +48,7 @@ Public Class dlgMerge
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         SetMergingBy()
         TestOKEnabled()
@@ -146,6 +153,15 @@ Public Class dlgMerge
         sdgMergeColumnstoInclude.ShowDialog()
         bResetSubdialog = False
         SetMergingBy()
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumMergeMode
+            Case MergeMode.Prepare
+                ucrBase.iHelpTopicID = 60
+            Case MergeMode.Climatic
+                ucrBase.iHelpTopicID = 609
+        End Select
     End Sub
 
     Private Sub ucrInputJoinType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputJoinType.ControlValueChanged

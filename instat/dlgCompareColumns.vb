@@ -17,6 +17,11 @@
 Imports instat.Translations
 
 Public Class dlgCompareColumns
+    Public enumCompareMode As String = CompareMode.Prepare
+    Public Enum CompareMode
+        Prepare
+        Climatic
+    End Enum
 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -39,6 +44,7 @@ Public Class dlgCompareColumns
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
@@ -46,7 +52,6 @@ Public Class dlgCompareColumns
 
     Private Sub InitialiseDialog()
         Dim dctTolerance As New Dictionary(Of String, String)
-        ucrBase.iHelpTopicID = 546
 
         ucrPnlOptions.AddRadioButton(rdoByRow)
         ucrPnlOptions.AddRadioButton(rdoByValue)
@@ -208,6 +213,15 @@ Public Class dlgCompareColumns
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumCompareMode
+            Case CompareMode.Prepare
+                ucrBase.iHelpTopicID = 546
+            Case CompareMode.Climatic
+                ucrBase.iHelpTopicID = 562
+        End Select
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged

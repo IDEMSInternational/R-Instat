@@ -226,8 +226,6 @@ Public Class dlgEvapotranspiration
         clsReadInputsFunction.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPMFunction, iPosition:=0)
         clsReadInputsFunction.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPMFunction, iPosition:=1)
         clsReadInputsFunction.AddParameter("missing_method", Chr(34) & "monthly average" & Chr(34), iPosition:=8)
-        clsReadInputsFunction.AddParameter("varnames", clsRFunctionParameter:=clsVarnamesVectorPTFunction, iPosition:=10)
-        clsReadInputsFunction.AddParameter("climatedata", clsRFunctionParameter:=clsDataFunctionPTFunction, iPosition:=11)
         clsReadInputsFunction.SetAssignTo("temp_data")
 
         clsVarnamesVectorPTFunction.SetRCommand("c")
@@ -295,6 +293,8 @@ Public Class dlgEvapotranspiration
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsListFunction, iPosition:=1)
+
+        Constants()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -316,7 +316,6 @@ Public Class dlgEvapotranspiration
         ucrReceiverTmin.SetRCode(clsDataFunctionPMFunction, bReset)
         ucrReceiverHumidityMax.SetRCode(clsDataFunctionPMFunction, bReset)
         ucrReceiverHumidityMin.SetRCode(clsDataFunctionPMFunction, bReset)
-        ucrReceiverWindSpeed.SetRCode(clsDataFunctionPMFunction, bReset)
         ucrInputTimeStep.SetRCode(clsETPenmanMonteithFunction, bReset)
         ucrInputCrop.SetRCode(clsETPenmanMonteithFunction, bReset)
         ucrChkWind.SetRCode(clsETPenmanMonteithFunction, bReset)
@@ -324,6 +323,7 @@ Public Class dlgEvapotranspiration
         ucrPnlMethod.SetRCode(clsBaseOperator, bReset)
         ucrNudAlpha.SetRCode(clsETPriestleyTaylorFunction, bReset)
         If bReset Then
+            ucrReceiverWindSpeed.SetRCode(clsDataFunctionPMFunction, bReset)
             ucrInputSolar.SetRCode(clsETPenmanMonteithFunction, bReset)
         End If
     End Sub
@@ -488,9 +488,9 @@ Public Class dlgEvapotranspiration
 
     Private Sub ucrReceiverWindSpeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindSpeed.ControlValueChanged, ucrChkWind.ControlValueChanged
         If ucrChkWind.Checked AndAlso Not ucrReceiverWindSpeed.IsEmpty Then
-            clsVarnamesVectorPMFunction.AddParameter("u2", Chr(34) & "u2" & Chr(34), bIncludeArgumentName:=False)
+            clsVarnamesVectorPMFunction.AddParameter("x", Chr(34) & "u2" & Chr(34), bIncludeArgumentName:=False)
         Else
-            clsVarnamesVectorPMFunction.RemoveParameterByName("u2")
+            clsVarnamesVectorPMFunction.RemoveParameterByName("x")
             ucrReceiverHumidityMax.SetMeAsReceiver()
         End If
     End Sub
@@ -501,7 +501,7 @@ Public Class dlgEvapotranspiration
             clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
             clsListFunction.AddParameter("z", 2, iPosition:=4)
             clsListFunction.AddParameter("G", 0, iPosition:=6)
-            clsListFunction.AddParameter("as", 0.25, iPosition:=7)
+            clsListFunction.AddParameter("as", 0.23, iPosition:=7)
             clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
             clsListFunction.AddParameter("lambda", 2.45, iPosition:=1)
             clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
@@ -522,7 +522,7 @@ Public Class dlgEvapotranspiration
             clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
             clsListFunction.AddParameter("G", 0, iPosition:=6)
-            clsListFunction.AddParameter("as", 0.25, iPosition:=7)
+            clsListFunction.AddParameter("as", 0.23, iPosition:=7)
             clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
             clsListFunction.AddParameter("alphaPT", 1.26, iPosition:=9)
             clsListFunction.RemoveParameterByName("z")
@@ -610,7 +610,7 @@ Public Class dlgEvapotranspiration
         Solar()
     End Sub
 
-    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrChkWind.ControlContentsChanged, ucrChkWind.ControlContentsChanged
+    Private Sub ucrPnlMethod_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMethod.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverHumidityMax.ControlContentsChanged, ucrReceiverHumidityMin.ControlContentsChanged, ucrReceiverRadiation.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrInputTimeStep.ControlContentsChanged, ucrChkWind.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
