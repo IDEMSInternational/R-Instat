@@ -1022,4 +1022,12 @@ Public Class ucrDataView
     Private Sub linkHelpData_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpData.LinkClicked
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "71")
     End Sub
+
+    Private Sub linkHelpPrepareMenu_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpPrepareMenu.LinkClicked
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "9")
+    End Sub
+
+    Private Sub linkHelpClimaticMenu_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpClimaticMenu.LinkClicked
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "19")
+    End Sub
 End Class
