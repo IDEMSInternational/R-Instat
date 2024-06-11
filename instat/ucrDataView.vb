@@ -1015,4 +1015,11 @@ Public Class ucrDataView
         _grid.SelectColumnInGrid(strColumn)
     End Sub
 
+    Private Sub linkHelpGettingStarted_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpGettingStarted.LinkClicked
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "3")
+    End Sub
+
+    Private Sub linkHelpData_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpData.LinkClicked
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "71")
+    End Sub
 End Class

@@ -148,6 +148,10 @@ Partial Class ucrDataView
         Me.ucrReoGrid = New instat.ucrDataViewReoGrid()
         Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
         Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
+        Me.linkHelpGettingStarted = New System.Windows.Forms.LinkLabel()
+        Me.linkHelpData = New System.Windows.Forms.LinkLabel()
+        Me.linkHelpPrepareMenu = New System.Windows.Forms.LinkLabel()
+        Me.linkHelpClimaticMenu = New System.Windows.Forms.LinkLabel()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -677,7 +681,7 @@ Partial Class ucrDataView
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.panelSectionRecent.Controls.Add(Me.lblRecent)
         Me.panelSectionRecent.Controls.Add(Me.panelRecentMenuItems)
-        Me.panelSectionRecent.Location = New System.Drawing.Point(28, 130)
+        Me.panelSectionRecent.Location = New System.Drawing.Point(28, 99)
         Me.panelSectionRecent.Name = "panelSectionRecent"
         Me.panelSectionRecent.Size = New System.Drawing.Size(179, 186)
         Me.panelSectionRecent.TabIndex = 13
@@ -705,14 +709,18 @@ Partial Class ucrDataView
         '
         'panelSectionHelp
         '
+        Me.panelSectionHelp.Controls.Add(Me.linkHelpClimaticMenu)
+        Me.panelSectionHelp.Controls.Add(Me.linkHelpPrepareMenu)
+        Me.panelSectionHelp.Controls.Add(Me.linkHelpData)
+        Me.panelSectionHelp.Controls.Add(Me.linkHelpGettingStarted)
         Me.panelSectionHelp.Controls.Add(Me.lblHelp)
         Me.panelSectionHelp.Controls.Add(Me.linkHelpIntroduction)
         Me.panelSectionHelp.Controls.Add(Me.linkHelpInstructionVideos)
         Me.panelSectionHelp.Controls.Add(Me.linkHelpRpackages)
         Me.panelSectionHelp.Controls.Add(Me.linkHelpRInstatWebsite)
-        Me.panelSectionHelp.Location = New System.Drawing.Point(28, 330)
+        Me.panelSectionHelp.Location = New System.Drawing.Point(28, 286)
         Me.panelSectionHelp.Name = "panelSectionHelp"
-        Me.panelSectionHelp.Size = New System.Drawing.Size(374, 118)
+        Me.panelSectionHelp.Size = New System.Drawing.Size(374, 169)
         Me.panelSectionHelp.TabIndex = 12
         '
         'lblHelp
@@ -720,7 +728,7 @@ Partial Class ucrDataView
         Me.lblHelp.AutoSize = True
         Me.lblHelp.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHelp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHelp.Location = New System.Drawing.Point(6, 8)
+        Me.lblHelp.Location = New System.Drawing.Point(6, 3)
         Me.lblHelp.Name = "lblHelp"
         Me.lblHelp.Size = New System.Drawing.Size(56, 25)
         Me.lblHelp.TabIndex = 2
@@ -732,7 +740,7 @@ Partial Class ucrDataView
         Me.linkHelpIntroduction.AutoSize = True
         Me.linkHelpIntroduction.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkHelpIntroduction.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkHelpIntroduction.Location = New System.Drawing.Point(8, 38)
+        Me.linkHelpIntroduction.Location = New System.Drawing.Point(8, 31)
         Me.linkHelpIntroduction.Name = "linkHelpIntroduction"
         Me.linkHelpIntroduction.Size = New System.Drawing.Size(63, 13)
         Me.linkHelpIntroduction.TabIndex = 7
@@ -746,7 +754,7 @@ Partial Class ucrDataView
         Me.linkHelpInstructionVideos.Enabled = False
         Me.linkHelpInstructionVideos.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkHelpInstructionVideos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkHelpInstructionVideos.Location = New System.Drawing.Point(8, 94)
+        Me.linkHelpInstructionVideos.Location = New System.Drawing.Point(8, 152)
         Me.linkHelpInstructionVideos.Name = "linkHelpInstructionVideos"
         Me.linkHelpInstructionVideos.Size = New System.Drawing.Size(98, 13)
         Me.linkHelpInstructionVideos.TabIndex = 10
@@ -760,7 +768,7 @@ Partial Class ucrDataView
         Me.linkHelpRpackages.AutoSize = True
         Me.linkHelpRpackages.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkHelpRpackages.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkHelpRpackages.Location = New System.Drawing.Point(8, 56)
+        Me.linkHelpRpackages.Location = New System.Drawing.Point(8, 114)
         Me.linkHelpRpackages.Name = "linkHelpRpackages"
         Me.linkHelpRpackages.Size = New System.Drawing.Size(116, 13)
         Me.linkHelpRpackages.TabIndex = 8
@@ -773,7 +781,7 @@ Partial Class ucrDataView
         Me.linkHelpRInstatWebsite.AutoSize = True
         Me.linkHelpRInstatWebsite.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkHelpRInstatWebsite.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkHelpRInstatWebsite.Location = New System.Drawing.Point(8, 75)
+        Me.linkHelpRInstatWebsite.Location = New System.Drawing.Point(8, 133)
         Me.linkHelpRInstatWebsite.Name = "linkHelpRInstatWebsite"
         Me.linkHelpRInstatWebsite.Size = New System.Drawing.Size(83, 13)
         Me.linkHelpRInstatWebsite.TabIndex = 9
@@ -786,9 +794,9 @@ Partial Class ucrDataView
         Me.panelSectionStart.Controls.Add(Me.linkStartNewDataFrame)
         Me.panelSectionStart.Controls.Add(Me.linkStartOpenFile)
         Me.panelSectionStart.Controls.Add(Me.linkStartOpenLibrary)
-        Me.panelSectionStart.Location = New System.Drawing.Point(28, 20)
+        Me.panelSectionStart.Location = New System.Drawing.Point(28, 13)
         Me.panelSectionStart.Name = "panelSectionStart"
-        Me.panelSectionStart.Size = New System.Drawing.Size(374, 96)
+        Me.panelSectionStart.Size = New System.Drawing.Size(374, 85)
         Me.panelSectionStart.TabIndex = 11
         '
         'lblStart
@@ -796,7 +804,7 @@ Partial Class ucrDataView
         Me.lblStart.AutoSize = True
         Me.lblStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStart.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStart.Location = New System.Drawing.Point(5, 6)
+        Me.lblStart.Location = New System.Drawing.Point(5, 4)
         Me.lblStart.Name = "lblStart"
         Me.lblStart.Size = New System.Drawing.Size(57, 25)
         Me.lblStart.TabIndex = 0
@@ -808,7 +816,7 @@ Partial Class ucrDataView
         Me.linkStartNewDataFrame.AutoSize = True
         Me.linkStartNewDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkStartNewDataFrame.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartNewDataFrame.Location = New System.Drawing.Point(7, 38)
+        Me.linkStartNewDataFrame.Location = New System.Drawing.Point(7, 31)
         Me.linkStartNewDataFrame.Name = "linkStartNewDataFrame"
         Me.linkStartNewDataFrame.Size = New System.Drawing.Size(96, 13)
         Me.linkStartNewDataFrame.TabIndex = 3
@@ -821,7 +829,7 @@ Partial Class ucrDataView
         Me.linkStartOpenFile.AutoSize = True
         Me.linkStartOpenFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkStartOpenFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartOpenFile.Location = New System.Drawing.Point(7, 56)
+        Me.linkStartOpenFile.Location = New System.Drawing.Point(7, 49)
         Me.linkStartOpenFile.Name = "linkStartOpenFile"
         Me.linkStartOpenFile.Size = New System.Drawing.Size(90, 13)
         Me.linkStartOpenFile.TabIndex = 4
@@ -834,7 +842,7 @@ Partial Class ucrDataView
         Me.linkStartOpenLibrary.AutoSize = True
         Me.linkStartOpenLibrary.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkStartOpenLibrary.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartOpenLibrary.Location = New System.Drawing.Point(7, 75)
+        Me.linkStartOpenLibrary.Location = New System.Drawing.Point(7, 68)
         Me.linkStartOpenLibrary.Name = "linkStartOpenLibrary"
         Me.linkStartOpenLibrary.Size = New System.Drawing.Size(105, 13)
         Me.linkStartOpenLibrary.TabIndex = 5
@@ -1007,6 +1015,58 @@ Partial Class ucrDataView
         Me.ucrLinuxGrid.Size = New System.Drawing.Size(245, 437)
         Me.ucrLinuxGrid.TabIndex = 13
         '
+        'linkHelpGettingStarted
+        '
+        Me.linkHelpGettingStarted.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkHelpGettingStarted.AutoSize = True
+        Me.linkHelpGettingStarted.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkHelpGettingStarted.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkHelpGettingStarted.Location = New System.Drawing.Point(8, 49)
+        Me.linkHelpGettingStarted.Name = "linkHelpGettingStarted"
+        Me.linkHelpGettingStarted.Size = New System.Drawing.Size(78, 13)
+        Me.linkHelpGettingStarted.TabIndex = 11
+        Me.linkHelpGettingStarted.TabStop = True
+        Me.linkHelpGettingStarted.Text = "Getting Started"
+        '
+        'linkHelpData
+        '
+        Me.linkHelpData.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkHelpData.AutoSize = True
+        Me.linkHelpData.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkHelpData.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkHelpData.Location = New System.Drawing.Point(8, 66)
+        Me.linkHelpData.Name = "linkHelpData"
+        Me.linkHelpData.Size = New System.Drawing.Size(30, 13)
+        Me.linkHelpData.TabIndex = 12
+        Me.linkHelpData.TabStop = True
+        Me.linkHelpData.Text = "Data"
+        '
+        'linkHelpPrepareMenu
+        '
+        Me.linkHelpPrepareMenu.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkHelpPrepareMenu.AutoSize = True
+        Me.linkHelpPrepareMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkHelpPrepareMenu.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkHelpPrepareMenu.Location = New System.Drawing.Point(8, 82)
+        Me.linkHelpPrepareMenu.Name = "linkHelpPrepareMenu"
+        Me.linkHelpPrepareMenu.Size = New System.Drawing.Size(74, 13)
+        Me.linkHelpPrepareMenu.TabIndex = 13
+        Me.linkHelpPrepareMenu.TabStop = True
+        Me.linkHelpPrepareMenu.Text = "Prepare Menu"
+        '
+        'linkHelpClimaticMenu
+        '
+        Me.linkHelpClimaticMenu.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkHelpClimaticMenu.AutoSize = True
+        Me.linkHelpClimaticMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkHelpClimaticMenu.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkHelpClimaticMenu.Location = New System.Drawing.Point(8, 98)
+        Me.linkHelpClimaticMenu.Name = "linkHelpClimaticMenu"
+        Me.linkHelpClimaticMenu.Size = New System.Drawing.Size(73, 13)
+        Me.linkHelpClimaticMenu.TabIndex = 14
+        Me.linkHelpClimaticMenu.TabStop = True
+        Me.linkHelpClimaticMenu.Text = "Climatic Menu"
+        '
         'ucrDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1146,4 +1206,8 @@ Partial Class ucrDataView
     Friend WithEvents mnuDeleteCol2 As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator14 As ToolStripSeparator
     Friend WithEvents mnuEditCell As ToolStripMenuItem
+    Friend WithEvents linkHelpPrepareMenu As LinkLabel
+    Friend WithEvents linkHelpData As LinkLabel
+    Friend WithEvents linkHelpGettingStarted As LinkLabel
+    Friend WithEvents linkHelpClimaticMenu As LinkLabel
 End Class
