@@ -1,8 +1,9 @@
-﻿Imports instat
+﻿Imports instat.Translations
 Imports RDotNet
 Public Class dlgInstallRPackage
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
+    Private bUniqueChecked As Boolean = False
     Private clsInstallPackage As New RFunction
     Private clsRepositoryFunction As New RFunction
     Private clsBeforeOptionsFunc As New RFunction
@@ -19,7 +20,9 @@ Public Class dlgInstallRPackage
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        bUniqueChecked = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -47,6 +50,7 @@ Public Class dlgInstallRPackage
         clsAfterOptionsFunc = New RFunction
         clsRepositoryFunction = New RFunction
         clsDummyFunction = New RFunction
+        bUniqueChecked = False
 
         clsDummyFunction.AddParameter("checked", "cran", iPosition:=1)
 
@@ -77,11 +81,12 @@ Public Class dlgInstallRPackage
         If rdoCRAN.Checked Then
             ucrBase.OKEnabled(Not ucrInputTextBoxRPackage.IsEmpty)
         ElseIf rdoRPackage.Checked Then
-            ucrBase.OKEnabled(Not ucrInputRepositoryName.IsEmpty AndAlso Not ucrInputTextBoxRPackage.IsEmpty)
+            ucrBase.OKEnabled(Not ucrInputRepositoryName.IsEmpty AndAlso Not ucrInputTextBoxRPackage.IsEmpty AndAlso bUniqueChecked)
         End If
     End Sub
 
     Private Sub ucrInputTextBoxRPackage_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputTextBoxRPackage.ControlContentsChanged
+        bUniqueChecked = False
         ucrInputMessage.SetText("")
         ucrInputMessage.txtInput.BackColor = Color.White
         CheckEnable()
@@ -102,9 +107,7 @@ Public Class dlgInstallRPackage
             clsPackageCheck.AddParameter("repo", Chr(34) & ucrInputTextBoxRPackage.GetText() & Chr(34))
             clsPackageCheck.AddParameter("owner", Chr(34) & ucrInputRepositoryName.GetText() & Chr(34))
         End If
-
         expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)
-
         If expOutput Is Nothing OrElse expOutput.Type = Internals.SymbolicExpressionType.Null Then
             ucrInputMessage.SetText("Cannot get package information.")
             Exit Sub
@@ -115,9 +118,9 @@ Public Class dlgInstallRPackage
             ucrInputMessage.SetText("Cannot get package information.")
             Exit Sub
         End If
-
         Select Case chrOutput(0)
             Case "1"
+                bUniqueChecked = True
                 If rdoCRAN.Checked Then
                     If chrOutput.Count = 4 Then
                         If chrOutput(1) = "0" Then
@@ -148,14 +151,18 @@ Public Class dlgInstallRPackage
                 ElseIf rdoRPackage.Checked Then
                     ucrInputMessage.SetText("Not a package in the given repo. Perhaps spelled wrongly?")
                     ucrInputMessage.txtInput.BackColor = Color.LightCoral
+                    bUniqueChecked = False
                 End If
             Case "4"
                 ucrInputMessage.SetText("Not a current CRAN package. Perhaps spelled wrongly, or archived?")
                 ucrInputMessage.txtInput.BackColor = Color.LightSkyBlue
+                bUniqueChecked = False
             Case "5"
                 ucrInputMessage.SetText("No internet connection.Try reconnecting")
                 ucrInputMessage.txtInput.BackColor = Color.LightCoral
+                bUniqueChecked = False
         End Select
+        TestOkEnabled()
     End Sub
 
     Private Sub CheckEnable()
@@ -188,6 +195,7 @@ Public Class dlgInstallRPackage
     Private Sub ucrInputRepositoryName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRepositoryName.ControlContentsChanged
         TestOkEnabled()
         GithubOption()
+        bUniqueChecked = False
     End Sub
 
     Private Sub GithubOption()
