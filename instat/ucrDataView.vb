@@ -1032,7 +1032,10 @@ Public Class ucrDataView
     End Sub
 
     Private Sub linkStartSwapDataScriptWindow_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartSwapDataScriptWindow.LinkClicked
-        frmMain.mnuViewSwapDataAndScript.Checked = True
+        frmMain.mnuViewSwapDataAndMetadata.Enabled = frmMain.mnuViewSwapDataAndScript.Checked
+        frmMain.mnuViewSwapDataAndScript.Checked = Not frmMain.mnuViewSwapDataAndScript.Checked
+        frmMain.UpdateSwapDataAndScript()
+        frmMain.UpdateLayout()
     End Sub
 
     Private Sub linkStartRestoreBackup_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartRestoreBackup.LinkClicked
@@ -1041,5 +1044,9 @@ Public Class ucrDataView
 
     Private Sub linkStartAddRPackage_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartAddRPackage.LinkClicked
         dlgInstallRPackage.ShowDialog()
+    End Sub
+
+    Private Sub linkStartPasteData_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartPasteData.LinkClicked
+        dlgPasteNewColumns.ShowDialog()
     End Sub
 End Class
