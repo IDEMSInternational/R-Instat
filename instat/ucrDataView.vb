@@ -1030,4 +1030,16 @@ Public Class ucrDataView
     Private Sub linkHelpClimaticMenu_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpClimaticMenu.LinkClicked
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "19")
     End Sub
+
+    Private Sub linkStartSwapDataScriptWindow_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartSwapDataScriptWindow.LinkClicked
+        frmMain.mnuViewSwapDataAndScript.Checked = True
+    End Sub
+
+    Private Sub linkStartRestoreBackup_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartRestoreBackup.LinkClicked
+        dlgRestoreBackup.ShowDialog()
+    End Sub
+
+    Private Sub linkStartAddRPackage_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartAddRPackage.LinkClicked
+        dlgInstallRPackage.ShowDialog()
+    End Sub
 End Class
