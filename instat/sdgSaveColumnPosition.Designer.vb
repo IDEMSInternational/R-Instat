@@ -175,7 +175,7 @@ Partial Class sdgSaveColumnPosition
         Me.MinimizeBox = False
         Me.Name = "sdgSaveColumnPosition"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Save Column Position"
+        Me.Text = "Column Position"
         Me.grpColumnPosition.ResumeLayout(False)
         Me.grpColumnPosition.PerformLayout()
         Me.ResumeLayout(False)
