@@ -16,6 +16,7 @@
 
 Imports System.ComponentModel
 Imports instat.Translations
+Imports RDotNet
 
 Public Class dlgCalculator
     Private clsAttachFunction As New RFunction
@@ -182,12 +183,20 @@ Public Class dlgCalculator
         Dim dataFrameName As String = ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame
 
         ' Check if scalar should be stored
-        If ucrCalc.ucrChkStoreScalar.Checked AndAlso Not ucrCalc.ucrTryCalculator.ucrInputTryMessage.IsEmpty _
+        If ucrCalc.ucrChkStoreScalar.Checked AndAlso Not ucrCalc.ucrReceiverForCalculation.IsEmpty _
         AndAlso ucrCalc.ucrSaveResultInto.GetText <> "" _
         AndAlso Not String.IsNullOrEmpty(dataFrameName) Then
 
+            Dim strScript As String = ucrCalc.ucrReceiverForCalculation.GetVariableNames(False)
+            Dim strSelectedVariable As String = ucrCalc.ucrReceiverForCalculation.GetSelectedSelectorVariables(False)
+            If ucrCalc.ucrSelectorForCalculations.checkBoxScalar.Checked AndAlso Not String.IsNullOrEmpty(strSelectedVariable) Then
+                clsGetScalarValueFunction.RemoveAssignTo()
+                strScript = strScript.Replace(strSelectedVariable, clsGetScalarValueFunction.ToScript)
+            End If
+            Dim iValue = frmMain.clsRLink.RunInternalScriptGetOutput(strScript)
+
             clsAddScalarFunction.AddParameter("scalar_name", Chr(34) & ucrCalc.ucrSaveResultInto.GetText & Chr(34), iPosition:=1)
-            clsAddScalarFunction.AddParameter("scalar_value", ucrCalc.ucrTryCalculator.ucrInputTryMessage.GetText, iPosition:=2)
+            clsAddScalarFunction.AddParameter("scalar_value", Mid(iValue(0), 5), iPosition:=2)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 1)
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = False
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = True
@@ -215,7 +224,7 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachFunction)
         End If
-
+        GetScalarValue()
         ' Update command string and clear input try message name
         ucrBase.clsRsyntax.SetCommandString(ucrCalc.ucrReceiverForCalculation.GetVariableNames(False))
 
@@ -229,7 +238,6 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrCalc_SelectionChanged() Handles ucrCalc.SelectionChanged
-        GetScalarValue()
         ManageScalarStorageAndAttachDetach()
         SaveResults()
         TestOKEnabled()
