@@ -74,7 +74,7 @@ Public Class dlgCalculator
     Private Sub ReopenDialog()
         SaveResults()
         GetScalarValue()
-        ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScalar(True)
+        ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScalar(Not String.IsNullOrEmpty(ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame))
         ucrCalc.ucrChkStoreScalar.Checked = False
     End Sub
 
@@ -247,6 +247,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrCalc_SelectionChanged() Handles ucrCalc.SelectionChanged
+        ucrCalc.ucrChkStoreScalar.Checked = False
         ManageScalarStorageAndAttachDetach()
         SaveResults()
         TestOKEnabled()
