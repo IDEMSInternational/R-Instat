@@ -660,10 +660,13 @@ DataSheet$set("public", "get_scalar_value", function(scalar_name) {
 
 DataSheet$set("public", "update_scalar_to_metadata", function() {
   scalar_max <- length(private$scalars)
-  my_scalars <- paste(names(private$scalars)[1:scalar_max], " = ", private$scalars[1:scalar_max], collapse = ", ")
+  my_scalars <- NULL
+  if (scalar_max > 0) {
+    my_scalars <-
+      paste(names(private$scalars)[1:scalar_max], " = ", private$scalars[1:scalar_max], collapse = ", ")
+  }
   self$append_to_metadata(scalar, my_scalars)
-}
-)
+})
 
 DataSheet$set("public", "add_scalar", function(scalar_name = "", scalar_value) {
   if(missing(scalar_name)) scalar_name <- next_default_item("scalar", names(private$scalars))
