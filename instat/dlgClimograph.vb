@@ -72,13 +72,13 @@ Public Class dlgClimograph
     Private clsAesGeomRibbonFunction As New RFunction
     Private clsGeomTextBarFunction As New RFunction
     Private clsGeomTextTmaxFunction As New RFunction
-    Private ClsGeomTextTminFunction As New RFunction
+    Private clsGeomTextTminFunction As New RFunction
     Private clsRoundBarFunction As New RFunction
     Private clsRoundTmaxFunction As New RFunction
-    Private ClsRoundTminFunction As New RFunction
+    Private clsRoundTminFunction As New RFunction
     Private clsAesGeomTextBarFunction As New RFunction
     Private clsAesGeomTextTmaxFunction As New RFunction
-    Private ClsAesGeomTextTminFunction As New RFunction
+    Private clsAesGeomTextTminFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private clsMaxFunction As New RFunction
     Private clsMax1Function As New RFunction
@@ -331,7 +331,7 @@ Public Class dlgClimograph
         clsVectorFunction = New RFunction
 
         ucrSelectorClimograph.Reset()
-        ucrSelectorClimograph.SetGgplotFunction(clsBaseOperator)
+        'ucrSelectorClimograph.SetGgplotFunction(clsBaseOperator)
         ucrSave.Reset()
 
         ucrInputStation.SetName(strFacetWrap)
@@ -438,28 +438,22 @@ Public Class dlgClimograph
         clsAesGeomRibbonFunction.SetRCommand("aes")
 
         clsAesGeomTextBarFunction.SetRCommand("aes")
-        clsAesGeomTextBarFunction.AddParameter("y", ucrReceiverRainC.GetVariableNames(False), iPosition:=0)
         clsAesGeomTextBarFunction.AddParameter("label", clsRFunctionParameter:=clsRoundBarFunction, iPosition:=1)
 
         clsAesGeomTextTmaxFunction.SetRCommand("aes")
-        'clsAesGeomTextTmaxFunction.AddParameter("y", ucrReceiverElement1.GetVariableNames(False), iPosition:=0)
         clsAesGeomTextTmaxFunction.AddParameter("label", clsRFunctionParameter:=clsRoundTmaxFunction, iPosition:=1)
 
-        ClsAesGeomTextTminFunction.SetRCommand("aes")
-        'ClsAesGeomTextTminFunction.AddParameter("y", ucrReceiverElement2.GetVariableNames(False), iPosition:=0)
-        ClsAesGeomTextTminFunction.AddParameter("label", clsRFunctionParameter:=ClsRoundTminFunction, iPosition:=1)
+        clsAesGeomTextTminFunction.SetRCommand("aes")
+        clsAesGeomTextTminFunction.AddParameter("label", clsRFunctionParameter:=clsRoundTminFunction, iPosition:=1)
 
         clsRoundBarFunction.SetRCommand("round")
-        clsRoundBarFunction.AddParameter("y", ucrReceiverRainC.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
         clsRoundBarFunction.AddParameter("x", "1", iPosition:=1, bIncludeArgumentName:=False)
 
         clsRoundTmaxFunction.SetRCommand("round")
-        clsRoundTmaxFunction.AddParameter("y", ucrReceiverElement1.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
         clsRoundTmaxFunction.AddParameter("x", "1", iPosition:=1, bIncludeArgumentName:=False)
 
-        ClsRoundTminFunction.SetRCommand("round")
-        ClsRoundTminFunction.AddParameter("y", ucrReceiverElement2.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-        ClsRoundTminFunction.AddParameter("x", "1", iPosition:=1, bIncludeArgumentName:=False)
+        clsRoundTminFunction.SetRCommand("round")
+        clsRoundTminFunction.AddParameter("x", "1", iPosition:=1, bIncludeArgumentName:=False)
 
         clsGeomTextBarFunction.SetRCommand("geom_text")
         clsGeomTextBarFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesGeomTextBarFunction, iPosition:=0, bIncludeArgumentName:=False)
@@ -481,38 +475,28 @@ Public Class dlgClimograph
         ClsGeomTextTminFunction.AddParameter("Show.legend", "FALSE", iPosition:=4)
 
         clsSecondaryAxis2Function.SetRCommand("sec_axis")
-        ''clsSecondaryAxis2Function.AddParameter("x", clsROperatorParameter:=clsDivide1Operator, iPosition:=0, bIncludeArgumentName:=False)
         clsSecondaryAxis2Function.AddParameter("name", Chr(34) & "Temperature (c)" & Chr(34), iPosition:=1)
 
         clsDivide1Operator.SetOperation("/")
         clsDivide1Operator.AddParameter("left", "~ .", iPosition:=0, bIncludeArgumentName:=False)
-        'clsDivide1Operator.AddParameter("rigth", strScale, iPosition:=1, bIncludeArgumentName:=False)
-        'clsDivide1Operator.AddParameter("rigth", clsROperatorParameter:=clsDivideOperator, iPosition:=1, bIncludeArgumentName:=False)
 
         clsDollar1OPerator.SetOperation("$")
         clsDollar1OPerator.bSpaceAroundOperation = False
         clsDollar1OPerator.AddParameter("left", clsRFunctionParameter:=ucrSelectorClimograph.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0, bIncludeArgumentName:=False)
-        'clsDollar1OPerator.AddParameter("right", ucrReceiverRainC.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
 
         clsDollar2OPerator.SetOperation("$")
         clsDollar2OPerator.bSpaceAroundOperation = False
         clsDollar2OPerator.AddParameter("left", clsRFunctionParameter:=ucrSelectorClimograph.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0, bIncludeArgumentName:=False)
-        'clsDollar2OPerator.AddParameter("right", ucrReceiverElement1.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
 
         clsDollar3OPerator.SetOperation("$")
         clsDollar3OPerator.bSpaceAroundOperation = False
         clsDollar3OPerator.AddParameter("left", clsRFunctionParameter:=ucrSelectorClimograph.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0, bIncludeArgumentName:=False)
-        'clsDollar3OPerator.AddParameter("right", ucrReceiverElement2.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
 
         clsMaxFunction.SetRCommand("max")
-        'clsMaxFunction.AddParameter("x", clsROperatorParameter:=clsDollar1OPerator, iPosition:=0, bIncludeArgumentName:=False)
 
         clsMax1Function.SetRCommand("max")
-        'clsMax1Function.AddParameter("x", clsRFunctionParameter:=clsVectorFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         clsDivideOperator.SetOperation("/")
-        'clsDivideOperator.AddParameter("left", clsRFunctionParameter:=clsMaxFunction, iPosition:=0, bIncludeArgumentName:=False)
-        'clsDivideOperator.AddParameter("right", clsRFunctionParameter:=clsMax1Function, iPosition:=1, bIncludeArgumentName:=False)
         clsDivideOperator.SetAssignTo(strScale)
 
         clsVectorFunction.SetRCommand("c")
@@ -551,11 +535,9 @@ Public Class dlgClimograph
 
     Private Sub SetRCodeForControls(bReset)
         ucrSelectorClimograph.AddAdditionalCodeParameterPair(clsGgwalterliethFunction, New RParameter("data", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrReceiverRainC.AddAdditionalCodeParameterPair(clsRoundBarFunction, New RParameter("y", 1), iAdditionalPairNo:=1)
-        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsAesGeomTextTmaxFunction, New RParameter("y", 0), iAdditionalPairNo:=1)
-        ucrReceiverElement2.AddAdditionalCodeParameterPair(ClsAesGeomTextTminFunction, New RParameter("y", 0), iAdditionalPairNo:=1)
-        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsRoundTmaxFunction, New RParameter("y", 0, False), iAdditionalPairNo:=2)
-        ucrReceiverElement2.AddAdditionalCodeParameterPair(ClsRoundTminFunction, New RParameter("y", 0, False), iAdditionalPairNo:=2)
+        ucrReceiverRainC.AddAdditionalCodeParameterPair(clsRoundBarFunction, New RParameter("y", 0, False), iAdditionalPairNo:=1)
+        ucrReceiverElement1.AddAdditionalCodeParameterPair(clsRoundTmaxFunction, New RParameter("y", 0, False), iAdditionalPairNo:=1)
+        ucrReceiverElement2.AddAdditionalCodeParameterPair(clsRoundTminFunction, New RParameter("y", 0, False), iAdditionalPairNo:=1)
 
         ucrReceiverRainC.SetRCode(clsAesGeomTextBarFunction, bReset)
         ucrSelectorClimograph.SetRCode(clsRggplotFunction, bReset)
@@ -577,8 +559,8 @@ Public Class dlgClimograph
             ucrInputLabels.SetRCode(clsScalecolouridentityFunction, bReset)
             ucrChkText.SetRCode(clsBaseOperator, bReset)
         End If
-        'ucrReceiverElement2.SetRCode(clsAesLine1Function, bReset)
-        '    ucrReceiverElement1.SetRCode(clsAesLineFunction, bReset)
+        ucrReceiverElement2.SetRCode(clsAesGeomTextTminFunction, bReset)
+        ucrReceiverElement1.SetRCode(clsAesGeomTextTmaxFunction, bReset)
 
     End Sub
 
@@ -938,7 +920,6 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub AddRemoveGroupBy()
-
         If clsPipeOperator.ContainsParameter("mutate") Then
             clsGroupByFunction.ClearParameters()
             If clsBaseOperator.ContainsParameter("facets") Then
@@ -951,7 +932,6 @@ Public Class dlgClimograph
                         GetParameterValue(clsFacetRowOp)
                 End Select
             End If
-
             If clsGroupByFunction.iParameterCount > 0 Then
                 clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
             Else
@@ -1001,6 +981,7 @@ Public Class dlgClimograph
         If rdoClimograph.Checked Then
             If ucrChkText.Checked Then
                 If Not ucrReceiverRainC.IsEmpty Then
+                    clsAesGeomTextBarFunction.AddParameter("y", ucrReceiverRainC.GetVariableNames(False), iPosition:=0)
                     clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextBarFunction, iPosition:=5, bIncludeArgumentName:=False)
                 Else
                     clsBaseOperator.RemoveParameterByName("geom_text")
@@ -1018,6 +999,7 @@ Public Class dlgClimograph
             If ucrChkText.Checked Then
                 If Not ucrReceiverElement1.IsEmpty Then
                     clsStarOperator.RemoveParameterByName("left")
+                    clsRoundTmaxFunction.AddParameter("y", ucrReceiverElement1.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
                     clsBaseOperator.AddParameter("geom_text1", clsRFunctionParameter:=clsGeomTextTmaxFunction, iPosition:=6, bIncludeArgumentName:=False)
                     If Not ucrReceiverRainC.IsEmpty Then
                         clsStarOperator.AddParameter("left", ucrReceiverElement1.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
@@ -1041,6 +1023,7 @@ Public Class dlgClimograph
             If ucrChkText.Checked Then
                 If Not ucrReceiverElement2.IsEmpty Then
                     clsStar1Operator.RemoveParameterByName("left")
+                    clsRoundTminFunction.AddParameter("y", ucrReceiverElement2.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
                     clsBaseOperator.AddParameter("geom_text2", clsRFunctionParameter:=ClsGeomTextTminFunction, iPosition:=7, bIncludeArgumentName:=False)
                     If Not ucrReceiverRainC.IsEmpty Then
                         clsStar1Operator.AddParameter("left", ucrReceiverElement2.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
