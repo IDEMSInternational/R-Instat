@@ -74,7 +74,7 @@ Public Class dlgCalculator
     Private Sub ReopenDialog()
         SaveResults()
         GetScalarValue()
-        ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScoalar(True)
+        ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScalar(True)
         ucrCalc.ucrChkStoreScalar.Checked = False
     End Sub
 
@@ -259,6 +259,13 @@ Public Class dlgCalculator
             clsAddScalarFunction.AddParameter("data_name", Chr(34) & ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame & Chr(34), iPosition:=0)
             clsRemoveLabelsFunction.AddParameter("data_name", Chr(34) & ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame & Chr(34), iPosition:=0)
             SaveResults()
+            ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScalar(True)
+            ucrCalc.ucrChkStoreScalar.Visible = True
+        Else
+            ucrCalc.ucrSelectorForCalculations.ResetCheckBoxScalar()
+            ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScalar(False)
+            ucrCalc.ucrChkStoreScalar.Visible = False
+            ucrCalc.ucrChkStoreScalar.Checked = False
         End If
     End Sub
 

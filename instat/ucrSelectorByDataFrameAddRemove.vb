@@ -41,7 +41,7 @@ Public Class ucrSelectorByDataFrameAddRemove
         End If
     End Sub
 
-    Public Sub ShowCheckBoxScoalar(bShowScalarCheck As Boolean)
+    Public Sub ShowCheckBoxScalar(bShowScalarCheck As Boolean)
         checkBoxScalar.Visible = bShowScalarCheck
     End Sub
 
