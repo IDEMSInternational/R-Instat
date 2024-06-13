@@ -189,9 +189,18 @@ Public Class dlgCalculator
 
             Dim strScript As String = ucrCalc.ucrReceiverForCalculation.GetVariableNames(False)
             Dim strSelectedVariable As String = ucrCalc.ucrReceiverForCalculation.GetSelectedSelectorVariables(False)
-            If ucrCalc.ucrSelectorForCalculations.checkBoxScalar.Checked AndAlso Not String.IsNullOrEmpty(strSelectedVariable) Then
-                clsGetScalarValueFunction.RemoveAssignTo()
-                strScript = strScript.Replace(strSelectedVariable, clsGetScalarValueFunction.ToScript)
+            If Not String.IsNullOrEmpty(strSelectedVariable) Then
+                Dim clsGetVariable As New RFunction
+
+                clsGetVariable.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                clsGetVariable.AddParameter("data_name", Chr(34) & ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+                clsGetVariable.AddParameter("col_names", Chr(34) & strSelectedVariable & Chr(34), iPosition:=1)
+                Dim strScriptGetVariable As String = clsGetVariable.ToScript
+                If ucrCalc.ucrSelectorForCalculations.checkBoxScalar.Checked Then
+                    clsGetScalarValueFunction.RemoveAssignTo()
+                    strScriptGetVariable = clsGetScalarValueFunction.ToScript
+                End If
+                strScript = strScript.Replace(strSelectedVariable, strScriptGetVariable)
             End If
             Dim iValue = frmMain.clsRLink.RunInternalScriptGetOutput(strScript)
 
