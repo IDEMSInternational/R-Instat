@@ -45,7 +45,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(Not ucrCalc.ucrReceiverForCalculation.IsEmpty AndAlso ucrCalc.ucrSaveResultInto.IsComplete)
+        ucrBase.OKEnabled(Not ucrCalc.ucrReceiverForCalculation.IsEmpty)
     End Sub
 
     Private Sub SetDefaults()
@@ -131,22 +131,24 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub GetScalarValue()
-        If ucrCalc.ucrSelectorForCalculations.checkBoxScalar.Checked Then
-            ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Scalars"
-            ucrCalc.ucrSelectorForCalculations.SetItemType("scalar")
-            clsGetScalarValueFunction.SetAssignTo(ucrCalc.ucrReceiverForCalculation.GetSelectedSelectorVariables(False))
-            clsGetScalarValueFunction.AddParameter("scalar_name", ucrCalc.ucrReceiverForCalculation.GetSelectedSelectorVariables(), iPosition:=1)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetScalarValueFunction, 0)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachFunction)
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachFunction)
-        Else
-            ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Variables"
-            ucrCalc.ucrSelectorForCalculations.SetItemType("column")
-            clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
-            clsDetachFunction.AddParameter("name", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetScalarValueFunction)
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 0)
+        If Not String.IsNullOrEmpty(ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame) Then
+            If ucrCalc.ucrSelectorForCalculations.checkBoxScalar.Checked Then
+                ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Scalars"
+                ucrCalc.ucrSelectorForCalculations.SetItemType("scalar")
+                clsGetScalarValueFunction.SetAssignTo(ucrCalc.ucrReceiverForCalculation.GetSelectedSelectorVariables(False))
+                clsGetScalarValueFunction.AddParameter("scalar_name", ucrCalc.ucrReceiverForCalculation.GetSelectedSelectorVariables(), iPosition:=1)
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsGetScalarValueFunction, 0)
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachFunction)
+            Else
+                ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Variables"
+                ucrCalc.ucrSelectorForCalculations.SetItemType("column")
+                clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
+                clsDetachFunction.AddParameter("name", clsRFunctionParameter:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.clsCurrDataFrame)
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetScalarValueFunction)
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 0)
+            End If
         End If
     End Sub
 
