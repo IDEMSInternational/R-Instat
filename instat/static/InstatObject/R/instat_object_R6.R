@@ -29,6 +29,7 @@ DataBook <- R6::R6Class("DataBook",
                           .data_sheets = list(),
                           .metadata = list(),
                           .objects = list(),
+                          .scalars = list(),
                           .links = list(),
                           .data_sheets_changed = FALSE,
                           .database_connection = NULL,
@@ -402,17 +403,24 @@ DataBook$set("public", "get_combined_metadata", function(convert_to_character = 
   i = 1
   for (curr_obj in private$.data_sheets) {
     templist = curr_obj$get_metadata()
+    
+    for (j in seq_along(templist)) {
+      if (is.list(templist[[j]]) || length(templist[[j]]) > 1) {
+        if (length(templist[[j]]) > 0) {
+          templist[[j]] <- paste(names(templist[[j]]), " = ", templist[[j]], collapse = ", ")
+        } else {
+          next
+        }
 
-    for (j in (1:length(templist))) {
-      if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
+      }
       retlist[i, names(templist[j])] = templist[[j]]
     }
     if(all(c(data_name_label, label_label, row_count_label, column_count_label,
              data_type_label, is_calculated_label, is_hidden_label, is_linkable, key_label) %in% names(retlist))){
       retlist <- retlist[ ,c(c(data_name_label, label_label, row_count_label, column_count_label, data_type_label,
-                           is_calculated_label, is_hidden_label, is_linkable, key_label),
-                           sort(setdiff(names(retlist), c(data_name_label,label_label, row_count_label, column_count_label,
-                           data_type_label, is_calculated_label,is_hidden_label,is_linkable, key_label))))]
+                               is_calculated_label, is_hidden_label, is_linkable, key_label),
+                             sort(setdiff(names(retlist), c(data_name_label,label_label, row_count_label, column_count_label,
+                                                            data_type_label, is_calculated_label,is_hidden_label,is_linkable, key_label))))]
     }
     else if(data_name_label %in% names(retlist)) retlist <- retlist[ ,c(data_name_label, sort(setdiff(names(retlist), data_name_label)))]
     i = i + 1
@@ -490,24 +498,54 @@ DataBook$set("public", "get_calculation_names", function(data_name, as_list = FA
 )
 
 DataBook$set("public", "get_scalars", function(data_name) {
-  self$get_data_objects(data_name)$get_scalars()
+  if(is.null(data_name) || identical(data_name, overall_label)) {
+    out <- private$.scalars[self$get_scalar_names(data_name = data_name)]
+  }else {
+    out <- self$get_data_objects(data_name)$get_scalars()
+  }
+  return(out)
+  
 }
 )
 
-DataBook$set("public", "get_scalar_names", function(data_name, as_list = FALSE, excluded_items = c()) {
-  return(self$get_data_objects(data_name)$get_scalar_names(as_list = as_list, excluded_items = excluded_items))
-} 
-)
+DataBook$set("public", "get_scalar_names", function(data_name,
+                                                    as_list = FALSE,
+                                                    excluded_items = c(),...) {
+  if (is.null(data_name) || identical(data_name, overall_label)) {
+    out <-
+      get_data_book_scalar_names(
+        scalar_list = private$.scalars,
+        as_list = as_list,
+        list_label = overall_label
+      )
+  } else{
+    out <-
+      self$get_data_objects(data_name)$get_scalar_names(as_list = as_list, excluded_items = excluded_items)
+  }
+  
+  return(out)
+})
 
 DataBook$set("public", "get_scalar_value", function(data_name, scalar_name) {
   self$get_data_objects(data_name)$get_scalar_value(scalar_name)
 }
 )
 
-DataBook$set("public","add_scalar", function(data_name, scalar_name = "", scalar_value) {
-  self$get_data_objects(data_name)$add_scalar(scalar_name, scalar_value)
+DataBook$set("public", "add_scalar", function(data_name, scalar_name = "", scalar_value) {
+  if (is.null(data_name) || identical(data_name, overall_label)) {
+    if (missing(scalar_name))
+      scalar_name <- next_default_item("scalar", names(private$.scalars))
+    if (scalar_name %in% names(private$.scalars))
+      warning("A scalar called",
+              scalar_name,
+              "already exists. It will be replaced.")
+    
+    #add the scalar
+    private$.scalars[[scalar_name]] <- scalar_value
+  } else{
+    self$get_data_objects(data_name)$add_scalar(scalar_name, scalar_value)
   }
-)
+})
 
 DataBook$set("public", "dataframe_count", function() {
   return(length(private$.data_sheets))

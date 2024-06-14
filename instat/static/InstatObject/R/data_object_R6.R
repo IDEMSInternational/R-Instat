@@ -632,23 +632,17 @@ DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, exclu
 )
 
 DataSheet$set("public", "get_scalars", function() {
-  return(private$scalars)
+  out <-
+    private$scalars[self$get_scalar_names()]
+  return(out)
 }
 )
 
-DataSheet$set("public", "get_scalar_names", function(as_list = FALSE, excluded_items = c()) {
-  out = names(private$scalars)
-  if(length(excluded_items) > 0) {
-    ex_ind = which(out %in% excluded_items)
-    if(length(ex_ind) != length(excluded_items)) warning("Some of the excluded_items were not found in the list of calculations")
-    if(length(ex_ind) > 0) out = out[-ex_ind]
-  }
-  if(!as_list) {
-    return(out)
-  }
-  lst = list()
-  lst[[self$get_metadata(data_name_label)]] <- out
-  return(lst)
+DataSheet$set("public", "get_scalar_names", function(as_list = FALSE, excluded_items = c(),...) {
+  out <- get_data_book_scalar_names(scalar_list = private$scalars, 
+                                    as_list = as_list, 
+                                    list_label= self$get_metadata(data_name_label) )
+  return(out)
 }
 )
 
@@ -658,21 +652,12 @@ DataSheet$set("public", "get_scalar_value", function(scalar_name) {
 }
 )
 
-DataSheet$set("public", "update_scalar_to_metadata", function() {
-  scalar_max <- length(private$scalars)
-  my_scalars <- NULL
-  if (scalar_max > 0) {
-    my_scalars <-
-      paste(names(private$scalars)[1:scalar_max], " = ", private$scalars[1:scalar_max], collapse = ", ")
-  }
-  self$append_to_metadata(scalar, my_scalars)
-})
-
 DataSheet$set("public", "add_scalar", function(scalar_name = "", scalar_value) {
   if(missing(scalar_name)) scalar_name <- next_default_item("scalar", names(private$scalars))
   if(scalar_name %in% names(private$scalars)) warning("A scalar called", scalar_name, "already exists. It will be replaced.")
   private$scalars[[scalar_name]] <- scalar_value
-  self$update_scalar_to_metadata()
+  self$append_to_changes(list(Added_scalar, scalar_name))
+  self$append_to_metadata(scalar, private$scalars)
 }
 )
 
@@ -2260,7 +2245,7 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
     if(!object_name %in% names(private$scalars)) stop(object_name, " not found in calculations list")
     if(new_name %in% names(private$scalars)) stop(new_name, " is already a calculation name. Cannot rename ", object_name, " to ", new_name)
     names(private$scalars)[names(private$scalars) == object_name] <- new_name
-    self$update_scalar_to_metadata()
+    self$append_to_metadata(scalar, private$scalars)
   }
 }
 )
@@ -2283,7 +2268,7 @@ DataSheet$set("public", "delete_objects", function(data_name, object_names, obje
     }else if(object_type == "scalar"){
       if(!object_names %in% names(private$scalars)) stop(object_names, " not found in scalars list.")
       private$scalars[names(private$scalars) %in% object_names] <- NULL
-      self$update_scalar_to_metadata()
+      self$append_to_metadata(scalar, private$scalars)
     }else if(object_type == "column_selection"){
       if(!all(object_names %in% names(private$column_selections))) stop(object_names, " not found in column selections list.")
       if(".everything" %in% object_names) stop(".everything cannot be deleted.")

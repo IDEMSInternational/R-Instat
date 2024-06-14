@@ -219,7 +219,6 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddScalarFunction)
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = True
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = True
-            ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = True
             ucrCalc.ucrSaveResultInto.ucrChkSave.Enabled = True
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Visible = True
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Enabled = True
