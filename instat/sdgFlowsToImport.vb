@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports System.Text.RegularExpressions
 
 Public Class sdgFlowsToImport
     Private bControlsInitialised As Boolean = False
@@ -37,7 +38,7 @@ Public Class sdgFlowsToImport
         ucrSelectorFlows.SetParameterIsrfunction()
 
         ucrReceiverName.SetParameter(New RParameter("name", 0, bNewIncludeArgumentName:=False)) ' to left of %in% operator
-        ucrReceiverName.SetParameterIsString()
+        ucrReceiverName.SetParameterIsRFunction()
         ucrReceiverName.bWithQuotes = False
         ucrReceiverName.Selector = ucrSelectorFlows
         ucrReceiverName.SetIncludedDataTypes({"factor"}, bStrict:=True)
@@ -58,7 +59,7 @@ Public Class sdgFlowsToImport
         clsModifyOperation = clsNewModifyOperation
 
         ucrReceiverName.SetRCode(clsModifyOperation, bReset)
-
+        ModifyOptions()
     End Sub
 
     Private Sub ModifyOptions()
@@ -67,7 +68,7 @@ Public Class sdgFlowsToImport
             clsModifyOperation.AddParameter("factor_value",
                                                    mdlCoreControl.GetRVector(ucrModifyEventFactor.GetSelectedCellValues(ucrFactor.DefaultColumnNames.Label, True)),
                                                    bIncludeArgumentName:=False, iPosition:=1)
-            clsGetFlowFunction.AddParameter("name", clsROperatorParameter:=clsModifyOperation, iPosition:=0)
+            clsGetFlowFunction.AddParameter("flow_name", clsROperatorParameter:=clsModifyOperation, iPosition:=0)
         Else
             ucrModifyEventFactor.Visible = False
             clsModifyOperation.RemoveParameterByName("factor_value")
@@ -77,5 +78,56 @@ Public Class sdgFlowsToImport
 
     Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged, ucrModifyEventFactor.ControlValueChanged
         ModifyOptions()
+        AutoFillReceivers()
+    End Sub
+
+    Private Sub AutoFillReceivers()
+        Dim lstRecognisedValues As List(Of String)
+        Dim ucrCurrentReceiver As ucrReceiver
+        Dim bFound As Boolean = False
+        Dim strSelectorVariable As String
+        ucrCurrentReceiver = ucrSelectorFlows.CurrentReceiver
+
+        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+            ucrTempReceiver.SetMeAsReceiver()
+            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+
+            If lstRecognisedValues.Count > 0 Then
+                For Each lviTempVariable As ListViewItem In ucrSelectorFlows.lstAvailableVariable.Items
+                    strSelectorVariable = Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|", String.Empty)
+                    For Each strValue As String In lstRecognisedValues
+                        If strSelectorVariable.Contains(strValue) Then
+                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorFlows.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                            bFound = True
+                            Exit For
+                        End If
+                    Next
+                    If bFound Then
+                        bFound = False
+                        Exit For
+                    End If
+                Next
+            End If
+        Next
+
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Function GetRecognisedValues(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
+
+    Private Sub ucrSelectorFlows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFlows.ControlValueChanged
+        AutoFillReceivers()
     End Sub
 End Class
