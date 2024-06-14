@@ -21,6 +21,8 @@ Public Class sdgFlowsToImport
     Private bControlsInitialised As Boolean = False
     Public clsGetFlowFunction As New RFunction
     Public clsModifyOperation As New ROperator
+    Public clsOpeningOperator As New ROperator
+    Public clsClosingOperator As New ROperator
     Private lstReceivers As New List(Of ucrReceiverSingle)
     Private lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
@@ -50,13 +52,17 @@ Public Class sdgFlowsToImport
                                                   hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
                                                   bIncludeNALevel:=True)
     End Sub
-    Public Sub SetRFunction(clsNewGetFlowFunction As RFunction, clsNewModifyOperation As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewGetFlowFunction As RFunction, clsNewModifyOperation As ROperator, clsNewClosingOperator As ROperator, clsNewOpeningOperator As ROperator, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
         clsGetFlowFunction = clsNewGetFlowFunction
         clsModifyOperation = clsNewModifyOperation
+        clsClosingOperator = clsNewClosingOperator
+        clsOpeningOperator = clsNewOpeningOperator
+        'ucrReceiverName.AddAdditionalCodeParameterPair(clsOpeningOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        'ucrReceiverName.AddAdditionalCodeParameterPair(clsClosingOperator, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ucrReceiverName.SetRCode(clsModifyOperation, bReset)
         ModifyOptions()
@@ -68,7 +74,15 @@ Public Class sdgFlowsToImport
             clsModifyOperation.AddParameter("factor_value",
                                                    mdlCoreControl.GetRVector(ucrModifyEventFactor.GetSelectedCellValues(ucrFactor.DefaultColumnNames.Label, True)),
                                                    bIncludeArgumentName:=False, iPosition:=1)
-            clsGetFlowFunction.AddParameter("flow_name", clsROperatorParameter:=clsModifyOperation, iPosition:=0)
+            clsOpeningOperator.AddParameter("left", "name", iPosition:=0)
+            clsOpeningOperator.AddParameter("right", clsROperatorParameter:=clsClosingOperator, iPosition:=1)
+            clsOpeningOperator.bSpaceAroundOperation = False
+
+            clsClosingOperator.AddParameter("left", clsROperatorParameter:=clsModifyOperation, iPosition:=0)
+            clsClosingOperator.AddParameter("right", "", iPosition:=1)
+            clsClosingOperator.bSpaceAroundOperation = False
+
+            clsGetFlowFunction.AddParameter("flow_name", clsROperatorParameter:=clsOpeningOperator, iPosition:=0)
         Else
             ucrModifyEventFactor.Visible = False
             clsModifyOperation.RemoveParameterByName("factor_value")

@@ -33,10 +33,10 @@ Partial Class sdgFlowsToImport
         '
         Me.ucrModifyEventFactor.AutoSize = True
         Me.ucrModifyEventFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(12, 305)
+        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(48, 305)
         Me.ucrModifyEventFactor.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrModifyEventFactor.Name = "ucrModifyEventFactor"
-        Me.ucrModifyEventFactor.Size = New System.Drawing.Size(389, 134)
+        Me.ucrModifyEventFactor.Size = New System.Drawing.Size(316, 202)
         Me.ucrModifyEventFactor.TabIndex = 19
         '
         'ucrSelectorFlows
@@ -87,11 +87,11 @@ Partial Class sdgFlowsToImport
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(595, 605)
+        Me.Controls.Add(Me.ucrModifyEventFactor)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.Controls.Add(Me.lblFlowName)
         Me.Controls.Add(Me.ucrReceiverName)
         Me.Controls.Add(Me.ucrSelectorFlows)
-        Me.Controls.Add(Me.ucrModifyEventFactor)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

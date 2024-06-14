@@ -24,6 +24,8 @@ Public Class dlgImportFromRapidPro
     Private clsGetFlowDataFunction As New RFunction
     Public clsGetFlowFunction As New RFunction
     Public clsModifyOperation As New ROperator
+    Public clsOpeningOperator As New ROperator
+    Public clsClosingOperator As New ROperator
     Private clsSetTokenFunction As New RFunction
     Private clsLinkDataFramesFunction As New RFunction
     Private clsSetSiteFunction As New RFunction
@@ -142,6 +144,8 @@ Public Class dlgImportFromRapidPro
         clsGetFlowFunction = New RFunction
         clsLinkDataFramesFunction = New RFunction
         clsModifyOperation = New ROperator
+        clsClosingOperator = New ROperator
+        clsOpeningOperator = New ROperator
 
         ucrSaveDataframeName.Reset()
 
@@ -181,6 +185,11 @@ Public Class dlgImportFromRapidPro
         clsLinkDataFramesFunction.SetRCommand("link_data_frames")
 
         clsModifyOperation.SetOperation("%in%")
+
+        clsOpeningOperator.SetOperation("[")
+
+        clsClosingOperator.SetOperation("]")
+
 
         'ucrBase.clsRsyntax.ClearCodes()
         'ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction, 0)
@@ -286,7 +295,7 @@ Public Class dlgImportFromRapidPro
     End Sub
 
     Private Sub cmdSelectFlows_Click(sender As Object, e As EventArgs) Handles cmdSelectFlows.Click
-        sdgFlowsToImport.SetRFunction(clsNewGetFlowFunction:=clsGetFlowFunction, clsNewModifyOperation:=clsModifyOperation, bReset:=bResetSubdialog)
+        sdgFlowsToImport.SetRFunction(clsNewGetFlowFunction:=clsGetFlowFunction, clsNewModifyOperation:=clsModifyOperation, clsNewClosingOperator:=clsClosingOperator, clsNewOpeningOperator:=clsOpeningOperator, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgFlowsToImport.ShowDialog()
     End Sub
