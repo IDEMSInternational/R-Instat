@@ -656,8 +656,8 @@ DataSheet$set("public", "add_scalar", function(scalar_name = "", scalar_value) {
   if(missing(scalar_name)) scalar_name <- next_default_item("scalar", names(private$scalars))
   if(scalar_name %in% names(private$scalars)) warning("A scalar called", scalar_name, "already exists. It will be replaced.")
   private$scalars[[scalar_name]] <- scalar_value
-  self$append_to_changes(list(Added_scalar, scalar_name))
   self$append_to_metadata(scalar, private$scalars)
+  self$append_to_changes(list(Added_scalar, scalar_name))
 }
 )
 

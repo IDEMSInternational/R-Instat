@@ -10,6 +10,7 @@ DataBook <- R6::R6Class("DataBook",
                           { 
                             self$set_meta(instat_obj_metadata)
                             self$set_objects(list())
+                            self$set_scalars(list())
                             
                             if (missing(data_tables) || length(data_tables) == 0) {
                               self$set_data_objects(list())
@@ -158,6 +159,7 @@ DataBook$set("public", "import_RDS", function(data_RDS,
                                               keep_existing = TRUE, 
                                               overwrite_existing = FALSE, 
                                               include_objects = TRUE,
+                                              include_scalars = TRUE,
                                               include_metadata = TRUE, 
                                               include_logs = TRUE, 
                                               include_filters = TRUE, 
@@ -168,13 +170,14 @@ DataBook$set("public", "import_RDS", function(data_RDS,
   
   # 'instat_object' is previously used class name, some files may have this name.
   if(any(c("instat_object", "DataBook") %in% class(data_RDS))) {
-    if(!keep_existing && include_objects && include_metadata && include_logs && include_filters && include_column_selections && include_calculations && include_comments) {
+    if(!keep_existing && include_objects && include_scalars && include_metadata && include_logs && include_filters && include_column_selections && include_calculations && include_comments) {
       self$replace_instat_object(new_instat_object = data_RDS)
     }else {
       if(!keep_existing) {
         self$set_data_objects(list())
         self$set_meta(list())
         self$set_objects(list())
+        self$set_scalars(list())
         self$set_links(list())
         self$set_database_connection(NULL)
       }
@@ -213,6 +216,16 @@ DataBook$set("public", "import_RDS", function(data_RDS,
           }
         }
       }
+      new_scalars_list <- data_RDS$get_scalars(data_name = overall_label)
+      new_scalars_count <- length(new_scalars_list)
+      if(include_scalars && new_scalars_count > 0) {
+        for(i in (1:new_scalars_count)) {
+          if(!(names(new_scalars_list)[i] %in% names(private$.scalars)) || overwrite_existing) {
+            self$add_scalars(scalar_name = names(new_scalars_list)[i],
+                            scalar_value = new_scalars_list[[i]]$scalar_value)
+          }
+        }
+      }
       new_metadata <- data_RDS$get_metadata()
       new_metadata_count <- length(new_metadata)
       if(include_metadata && new_metadata_count > 0) {
@@ -230,13 +243,15 @@ DataBook$set("public", "import_RDS", function(data_RDS,
 }
 )
 
-DataBook$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_column_selections = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
+DataBook$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_column_selections = TRUE, include_calculations = TRUE, include_comments = TRUE, include_scalars = TRUE, ...) {
   curr_names <- names(curr_data_object)
   if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = FALSE)
   else stop("Cannot import data. No 'get_data_frame' method.")
   if("get_metadata" %in% curr_names) new_data_name <- curr_data_object$get_metadata(data_name_label)
   if(include_objects && "get_objects" %in% curr_names) new_objects <- curr_data_object$get_objects()
   else new_objects <- list()
+  if(include_scalars && "get_scalars" %in% curr_names) new_scalars <- curr_data_object$get_scalars()
+  else new_scalars <- list()
   if(include_filters && "get_filter" %in% curr_names) {
     new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
     new_filters <- lapply(new_filters, function(x) check_filter(x))
@@ -250,7 +265,7 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
   if("get_keys" %in% curr_names) new_keys <- curr_data_object$get_keys()
   else new_keys <- list()
   
-  new_data_object <- DataSheet$new(data = new_data, data_name = new_data_name, filters = new_filters, column_selections = new_column_selections, objects = new_objects, calculations = new_calculations, keys = new_keys, comments = new_comments, keep_attributes = include_metadata)
+  new_data_object <- DataSheet$new(data = new_data, data_name = new_data_name, filters = new_filters, column_selections = new_column_selections, objects = new_objects, calculations = new_calculations, scalars = new_scalars, keys = new_keys, comments = new_comments, keep_attributes = include_metadata)
   if(include_logs && "get_changes" %in% curr_names) {
     new_changes <- curr_data_object$get_changes()
   }
@@ -304,6 +319,12 @@ DataBook$set("public", "set_meta", function(new_meta) {
   for(name in names(new_meta)) {
     self$append_to_metadata(name, new_meta[[name]])
   }
+}
+)
+
+DataBook$set("public", "set_scalars", function(new_scalars) {
+  if(!is.list(new_scalars)) stop("new_scalars must be of type: list")
+  private$.scalars <- new_scalars 
 }
 )
 
@@ -536,9 +557,9 @@ DataBook$set("public", "add_scalar", function(data_name, scalar_name = "", scala
     if (missing(scalar_name))
       scalar_name <- next_default_item("scalar", names(private$.scalars))
     if (scalar_name %in% names(private$.scalars))
-      warning("A scalar called",
+      warning("A scalar called ",
               scalar_name,
-              "already exists. It will be replaced.")
+              " already exists. It will be replaced.")
     
     #add the scalar
     private$.scalars[[scalar_name]] <- scalar_value
