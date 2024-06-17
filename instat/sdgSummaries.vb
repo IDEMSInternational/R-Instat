@@ -38,6 +38,13 @@ Public Class sdgSummaries
 
         lstCheckboxes = New List(Of ucrCheck)
 
+        ucrPnlPosition.AddRadioButton(rdoDisplay)
+        ucrPnlPosition.AddRadioButton(rdoUsePositions)
+        ucrPnlPosition.AddParameterValuesCondition(rdoDisplay, "Check", "Display")
+        ucrPnlPosition.AddParameterValuesCondition(rdoUsePositions, "Check", "Use")
+        ucrPnlPosition.AddToLinkedControls({ucrChkFirst, ucrSelectorOrderBy, ucrReceiverOrderBy, ucrChkOrderBy, ucrChkLast, ucrChknth, ucrChkSample}, {rdoUsePositions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPosition.AddToLinkedControls({ucrChkWhichmin, ucrReceiverInclude, ucrSelectorInclude, ucrChkInclude, ucrChkWhichmax}, {rdoDisplay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrChkNonMissing.SetParameter(New RParameter("summary_count_non_missing", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_non_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkNonMissing.SetText("N Non Missing")
 
@@ -142,6 +149,11 @@ Public Class sdgSummaries
 
         ucrReceiverOrderBy.Selector = ucrSelectorOrderBy
         ucrReceiverOrderBy.SetMeAsReceiver()
+        ucrReceiverOrderBy.SetLinkedDisplayControl(lblOrderBy)
+
+        ucrReceiverInclude.Selector = ucrSelectorInclude
+        ucrReceiverInclude.SetMeAsReceiver()
+        ucrReceiverInclude.SetLinkedDisplayControl(lblInclude)
 
         ucrChkFirst.SetParameter(New RParameter("summary_first", 36), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_first" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkFirst.SetText("First")
@@ -153,6 +165,10 @@ Public Class sdgSummaries
         ucrChknth.SetText("nth")
 
         ucrChkOrderBy.SetText("Order by another variable")
+        ucrChkOrderBy.AddToLinkedControls({ucrSelectorOrderBy, ucrReceiverOrderBy}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkInclude.SetText("Include Another Variable")
+        ucrChkInclude.AddToLinkedControls({ucrSelectorInclude, ucrReceiverInclude}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkn_distinct.SetParameter(New RParameter("summary_n_distinct", 39), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_n_distinct" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkn_distinct.SetText("n_distinct")
@@ -349,7 +365,13 @@ Public Class sdgSummaries
         ucrChkP80.SetParameter(New RParameter("p80", 74), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "p80" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkP90.SetParameter(New RParameter("p90", 75), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "p90" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkP10, ucrChkP20, ucrChkP25, ucrChkP30, ucrChkP33, ucrChkP40, ucrChkP60, ucrChkP67, ucrChkP70, ucrChkP75, ucrChkP80, ucrChkP90, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar, ucrChkAngDev, ucrChkrho, ucrChkCircRange, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency, ucrChkSample})
+        ucrChkWhichmin.SetParameter(New RParameter("summary_which_min", 76), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_which_min" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkWhichmin.SetText("Min")
+
+        ucrChkWhichmax.SetParameter(New RParameter("summary_which_max", 77), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_which_max" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkWhichmax.SetText("Max")
+
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkWhichmax, ucrChkWhichmin, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkP10, ucrChkP20, ucrChkP25, ucrChkP30, ucrChkP33, ucrChkP40, ucrChkP60, ucrChkP67, ucrChkP70, ucrChkP75, ucrChkP80, ucrChkP90, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar, ucrChkAngDev, ucrChkrho, ucrChkCircRange, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency, ucrChkSample})
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
@@ -358,8 +380,8 @@ Public Class sdgSummaries
         cmdOptions.Visible = False
         bControlsInitialised = True
         TwoVariablesControls()
-        PositionOptions()
         OrderByCheckEnabled()
+        IncludeControlsEnabled()
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewConcFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strNewWeightLabel As String = Nothing, Optional strDefaultTab As String = "")
@@ -401,6 +423,7 @@ Public Class sdgSummaries
         ucrChkCovariance.SetText("Covariance" & strWeightLabel)
 
         clsDummyFunction.AddParameter("percentage_type", "none")
+        clsDummyFunction.AddParameter("Check", "Use", iPosition:=1)
 
         'This is meant to force selector select the current dataframe as selected in the main dialog
         ucrBaseSelector = ucrNewBaseSelector
@@ -408,8 +431,11 @@ Public Class sdgSummaries
             strDataFrame = ucrBaseSelector.strCurrentDataFrame
             ucrSelectorSecondVariable.SetDataframe(strDataFrame, False)
             ucrSelectorOrderBy.SetDataframe(strDataFrame, False)
+            ucrSelectorInclude.SetDataframe(strDataFrame, False)
         End If
-
+        If bReset Then
+            ucrPnlPosition.SetRCode(clsDummyFunction, bReset)
+        End If
         ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPropValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputComboPropTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
@@ -432,6 +458,8 @@ Public Class sdgSummaries
         ucrChkNMissing.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMean.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMinimum.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkWhichmax.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkWhichmin.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMode.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMaximum.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMedian.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -503,7 +531,7 @@ Public Class sdgSummaries
         If bReset Then
             ucrSelectorSecondVariable.Reset()
             ucrSelectorOrderBy.Reset()
-
+            ucrSelectorInclude.Reset()
 
             If strDefaultTab <> "" Then
                 For i As Integer = 0 To tbSummaries.TabPages.Count - 1
@@ -562,24 +590,21 @@ Public Class sdgSummaries
         End If
     End Sub
 
-    Private Sub PositionOptions()
-        If ucrChkOrderBy.Checked Then
-            ucrSelectorOrderBy.Show()
-            ucrReceiverOrderBy.Show()
-            lblOrderBy.Show()
-        Else
-            ucrSelectorOrderBy.Hide()
-            ucrReceiverOrderBy.Hide()
-            lblOrderBy.Hide()
+    Private Sub OrderByCheckEnabled()
+        If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked OrElse ucrChkWhichmax.Checked OrElse ucrChkWhichmin.Checked Then
+            ucrChkOrderBy.Enabled = True
+        ElseIf Not ucrChkFirst.Checked AndAlso Not ucrChkLast.Checked AndAlso Not ucrChknth.Checked AndAlso Not ucrChkWhichmax.Checked AndAlso Not ucrChkWhichmin.Checked Then
+            ucrChkOrderBy.Checked = False
+            ucrChkOrderBy.Enabled = False
         End If
     End Sub
 
-    Private Sub OrderByCheckEnabled()
-        If ucrChkFirst.Checked OrElse ucrChkLast.Checked OrElse ucrChknth.Checked Then
-            ucrChkOrderBy.Enabled = True
-        ElseIf Not ucrChkFirst.Checked AndAlso Not ucrChkLast.Checked AndAlso Not ucrChknth.Checked Then
-            ucrChkOrderBy.Checked = False
-            ucrChkOrderBy.Enabled = False
+    Private Sub IncludeControlsEnabled()
+        If ucrChkWhichmax.Checked OrElse ucrChkWhichmin.Checked Then
+            ucrChkInclude.Enabled = True
+        ElseIf Not ucrChkWhichmax.Checked AndAlso Not ucrChkWhichmin.Checked Then
+            ucrChkInclude.Checked = False
+            ucrChkInclude.Enabled = False
         End If
     End Sub
 
@@ -592,13 +617,20 @@ Public Class sdgSummaries
         End If
     End Sub
 
-    Private Sub ucrReceiverOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderBy.ControlValueChanged
-        PositionOptions()
-        If Not ucrReceiverOrderBy.IsEmpty Then
-            clsDefaultFunction.AddParameter("order_by", ucrReceiverOrderBy.GetVariableNames, iPosition:=4)
+    Private Sub OrderBy()
+        If ucrChkOrderBy.Checked Then
+            If Not ucrReceiverOrderBy.IsEmpty Then
+                clsDefaultFunction.AddParameter("order_by", ucrReceiverOrderBy.GetVariableNames, iPosition:=4)
+            Else
+                clsDefaultFunction.RemoveParameterByName("order_by")
+            End If
         Else
             clsDefaultFunction.RemoveParameterByName("order_by")
         End If
+    End Sub
+
+    Private Sub ucrReceiverOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderBy.ControlValueChanged
+        OrderBy()
     End Sub
 
     Private Sub ucrChkFirst_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirst.ControlValueChanged, ucrChkLast.ControlValueChanged, ucrChknth.ControlValueChanged
@@ -628,8 +660,8 @@ Public Class sdgSummaries
     End Sub
 
     Private Sub ucrChkOrderBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOrderBy.ControlValueChanged
-        PositionOptions()
         OrderByCheckEnabled()
+        OrderBy()
     End Sub
 
     Private Sub ucrChkSelectAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectAll.ControlValueChanged
@@ -644,5 +676,25 @@ Public Class sdgSummaries
             Next
             ucrChkSelectAll.SetText("Select all")
         End If
+    End Sub
+
+    Private Sub ucrPnlPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPosition.ControlValueChanged
+        If rdoUsePositions.Checked Then
+            grpPosition.Show()
+            grpDisplay.Hide()
+            OrderByCheckEnabled()
+        ElseIf rdoDisplay.Checked Then
+            grpDisplay.Show()
+            grpPosition.Hide()
+            IncludeControlsEnabled()
+        End If
+    End Sub
+
+    Private Sub ucrChkInclude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkInclude.ControlValueChanged
+        IncludeControlsEnabled()
+    End Sub
+
+    Private Sub ucrChkWhichmax_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWhichmax.ControlValueChanged, ucrChkWhichmin.ControlValueChanged
+        IncludeControlsEnabled()
     End Sub
 End Class
