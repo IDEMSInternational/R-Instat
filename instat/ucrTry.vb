@@ -23,7 +23,6 @@ Public Class ucrTry
     Private bIsModel As Boolean
     Private strError As String
     Private WithEvents ucrReceiverScript As ucrReceiverExpression
-    Public Event TryTextChanged()
     Private clsRSyntax As RSyntax
     Private bstrVecOutput As Boolean
     Private arrAssociatedControls As ucrCore()
@@ -293,7 +292,4 @@ Public Class ucrTry
         ucrInputTryMessage.txtInput.Controls.Clear()
     End Sub
 
-    Private Sub ucrInputTryMessage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTryMessage.ControlValueChanged
-        RaiseEvent TryTextChanged()
-    End Sub
 End Class

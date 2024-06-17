@@ -658,6 +658,9 @@ DataSheet$set("public", "add_scalar", function(scalar_name = "", scalar_value) {
   private$scalars[[scalar_name]] <- scalar_value
   self$append_to_metadata(scalar, private$scalars)
   self$append_to_changes(list(Added_scalar, scalar_name))
+  cat(paste("Scalar name: ", scalar_name),
+      paste("Value: ", private$scalars[[scalar_name]]),
+      sep = "\n")
 }
 )
 

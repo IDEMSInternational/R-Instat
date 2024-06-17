@@ -23,9 +23,8 @@ Public Class ucrCalculator
     Public Event DataFrameChanged()
     Public Event TryCommadClick()
     Public Event ControlValueChanged()
-    Public Event CheckBoxClick()
-    Public Event TryCommadChanged()
     Public Event ClearClick()
+    Public Event CheckBoxClick()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsHelp As New RFunction
@@ -1162,10 +1161,6 @@ Public Class ucrCalculator
 
     Private Sub ucrChkStoreScalar_Click(sender As Object, e As EventArgs) Handles ucrChkStoreScalar.Click
         RaiseEvent CheckBoxClick()
-    End Sub
-
-    Private Sub ucrTryCalculator_TextChanged() Handles ucrTryCalculator.TryTextChanged
-        RaiseEvent TryCommadChanged()
     End Sub
 
     Private Sub cmdRound_Click(sender As Object, e As EventArgs) Handles cmdRound.Click
