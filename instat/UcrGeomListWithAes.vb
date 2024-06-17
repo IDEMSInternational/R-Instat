@@ -300,6 +300,14 @@ Public Class ucrGeomListWithParameters
         SetReceiverColour()
     End Sub
 
+    Private Sub AddRFunctionParameter(parentFunction As RFunction, paramName As String, paramValue As String)
+        Dim clsProductFunction As New RFunction
+        clsProductFunction.SetPackageName("ggmosaic")
+        clsProductFunction.SetRCommand("product")
+        clsProductFunction.AddParameter(paramName, paramValue, bIncludeArgumentName:=False)
+        parentFunction.AddParameter(paramName, clsRFunctionParameter:=clsProductFunction)
+    End Sub
+
     Public Sub UpdateGlobalAndLocalAesFromInter()
         Dim clsRelevantAesFunction As New RFunction 'Will be used in the partially mandatory aes filling method below.
         Dim clsCurrentAesFunction As RFunction
@@ -340,6 +348,64 @@ Public Class ucrGeomListWithParameters
                 clsGeomFunction.RemoveParameterByName("data")
             End If
             clsCurrentAesFunction = clsLocalAesFunction
+        End If
+
+        If clsGeomFunction.strRCommand = "geom_mosaic" Then
+            Dim xParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x")
+            Dim condsParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "conds")
+
+            If xParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(xParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "x", strArgNameValue)
+            End If
+
+            If condsParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(condsParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "conds", strArgNameValue)
+            End If
+
+            Dim xParameterGlobalIndex As Integer = clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x")
+            Dim condsParameterGlobalIndex As Integer = clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "conds")
+
+            If xParameterGlobalIndex >= 0 Then
+                Dim strArgNameValue = clsGlobalAesFunction.clsParameters(xParameterGlobalIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "x", strArgNameValue)
+            End If
+
+            If condsParameterGlobalIndex >= 0 Then
+                Dim strArgNameValue = clsGlobalAesFunction.clsParameters(condsParameterGlobalIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "conds", strArgNameValue)
+            End If
+        End If
+
+        If clsGeomFunction.strRCommand = "geom_mosaic_jitter" Then
+            Dim xParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x")
+            Dim condsParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "conds")
+
+            If xParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(xParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "x", strArgNameValue)
+            End If
+
+            If condsParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(condsParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "conds", strArgNameValue)
+            End If
+        End If
+
+        If clsGeomFunction.strRCommand = "geom_mosaic_text" Then
+            Dim xParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x")
+            Dim condsParameterIndex As Integer = clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "conds")
+
+            If xParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(xParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "x", strArgNameValue)
+            End If
+
+            If condsParameterIndex >= 0 Then
+                Dim strArgNameValue = clsLocalAesFunction.clsParameters(condsParameterIndex).strArgumentValue
+                AddRFunctionParameter(clsCurrentAesFunction, "conds", strArgNameValue)
+            End If
         End If
 
         'This is a temporary solution to issue which should be solved with geoms

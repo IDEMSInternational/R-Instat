@@ -2397,6 +2397,16 @@
             Gets a log of the changes made to environment variables via the NativeUtility
             </summary>
         </member>
+        <member name="P:RDotNet.NativeLibrary.NativeUtility.RPath">
+            <summary>
+            Gets the path to the folder containing R.dll that this instance found when setting environment variables
+            </summary>
+        </member>
+        <member name="P:RDotNet.NativeLibrary.NativeUtility.RHome">
+            <summary>
+            Gets the path to the R home directory that this instance found when setting environment variables
+            </summary>
+        </member>
         <member name="M:RDotNet.NativeLibrary.NativeUtility.SetEnvironmentVariables(System.String,System.String)">
             <summary>
             Sets the PATH to the R binaries and R_HOME environment variables if needed.

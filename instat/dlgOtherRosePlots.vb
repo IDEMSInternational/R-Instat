@@ -39,7 +39,7 @@ Public Class dlgOtherRosePlots
 
     Private Sub InitiliseDialog()
         Dim dctMethod As New Dictionary(Of String, String)
-
+        ucrBase.iHelpTopicID = 309
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorOtherRosePlots.SetParameter(New RParameter("data", 0))
