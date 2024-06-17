@@ -216,16 +216,6 @@ DataBook$set("public", "import_RDS", function(data_RDS,
           }
         }
       }
-      new_scalars_list <- data_RDS$get_scalars(data_name = overall_label)
-      new_scalars_count <- length(new_scalars_list)
-      if(include_scalars && new_scalars_count > 0) {
-        for(i in (1:new_scalars_count)) {
-          if(!(names(new_scalars_list)[i] %in% names(private$.scalars)) || overwrite_existing) {
-            self$add_scalars(scalar_name = names(new_scalars_list)[i],
-                            scalar_value = new_scalars_list[[i]]$scalar_value)
-          }
-        }
-      }
       new_metadata <- data_RDS$get_metadata()
       new_metadata_count <- length(new_metadata)
       if(include_metadata && new_metadata_count > 0) {
