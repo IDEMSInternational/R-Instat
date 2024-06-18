@@ -1420,6 +1420,8 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_link_names")
                 Case "key"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_key_names")
+                Case "scalar"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_scalar_names")
                 Case "database_variables"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_database_variable_names")
                     clsGetItems.AddParameter("query", Chr(34) & strDatabaseQuery & Chr(34))

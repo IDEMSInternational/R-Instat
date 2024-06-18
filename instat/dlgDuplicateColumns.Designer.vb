@@ -61,6 +61,7 @@ Partial Class dlgDuplicateColumns
         Me.ucrSelectorForDuplicateColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveColumn = New instat.ucrSave()
+        Me.ucrChkIgnoreLabels = New instat.ucrCheck()
         Me.grpConvertTo.SuspendLayout()
         Me.grpFactorToNumericOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -328,12 +329,23 @@ Partial Class dlgDuplicateColumns
         Me.ucrSaveColumn.Size = New System.Drawing.Size(327, 22)
         Me.ucrSaveColumn.TabIndex = 30
         '
+        'ucrChkIgnoreLabels
+        '
+        Me.ucrChkIgnoreLabels.AutoSize = True
+        Me.ucrChkIgnoreLabels.Checked = False
+        Me.ucrChkIgnoreLabels.Location = New System.Drawing.Point(371, 340)
+        Me.ucrChkIgnoreLabels.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkIgnoreLabels.Name = "ucrChkIgnoreLabels"
+        Me.ucrChkIgnoreLabels.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkIgnoreLabels.TabIndex = 31
+        '
         'dlgDuplicateColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(486, 432)
+        Me.Controls.Add(Me.ucrChkIgnoreLabels)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrChkChangeType)
         Me.Controls.Add(Me.ucrChkConvertCreateLabels)
@@ -385,4 +397,5 @@ Partial Class dlgDuplicateColumns
     Friend WithEvents ucrChkConvertKeepAttributes As ucrCheck
     Friend WithEvents ucrChkChangeType As ucrCheck
     Friend WithEvents ucrSaveColumn As ucrSave
+    Friend WithEvents ucrChkIgnoreLabels As ucrCheck
 End Class
