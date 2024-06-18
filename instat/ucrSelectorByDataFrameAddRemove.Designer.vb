@@ -62,7 +62,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         Me.btnDataOptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
         Me.btnDataOptions.Location = New System.Drawing.Point(226, 219)
-        Me.btnDataOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDataOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDataOptions.Name = "btnDataOptions"
         Me.btnDataOptions.Size = New System.Drawing.Size(86, 51)
         Me.btnDataOptions.TabIndex = 4
@@ -75,7 +75,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.btnAdd.AutoSize = True
         Me.btnAdd.ContextMenuStrip = Me.contextMenuStripAdd
         Me.btnAdd.Location = New System.Drawing.Point(226, 68)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(88, 51)
         Me.btnAdd.SplitMenuStrip = Me.contextMenuStripAdd
@@ -119,9 +119,9 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.checkBoxScalar.AutoSize = True
         Me.checkBoxScalar.Location = New System.Drawing.Point(226, 153)
         Me.checkBoxScalar.Name = "checkBoxScalar"
-        Me.checkBoxScalar.Size = New System.Drawing.Size(116, 24)
+        Me.checkBoxScalar.Size = New System.Drawing.Size(80, 24)
         Me.checkBoxScalar.TabIndex = 86
-        Me.checkBoxScalar.Text = "CheckBox1"
+        Me.checkBoxScalar.Text = "Scalar"
         Me.checkBoxScalar.UseVisualStyleBackColor = True
         '
         'ucrSelectorByDataFrameAddRemove
