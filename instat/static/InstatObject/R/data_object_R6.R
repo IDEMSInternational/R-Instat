@@ -2217,7 +2217,8 @@ DataSheet$set("public", "get_object", function(object_name) {
 )
 
 DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
-  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model","structure","summary", "column_selection", "scalar")) stop(object_type, " must be either object (graph, table or model), filter, column_selection or a calculation.")
+  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model","structure","summary", "column_selection", "scalar")) stop(object_type, " must be either object (graph, table or model), filter, column selection, calculation or scalar.")
+
   
   #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
   if (object_type %in% c("object", "graph", "table","model","structure","summary")){
