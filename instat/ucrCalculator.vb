@@ -23,6 +23,8 @@ Public Class ucrCalculator
     Public Event DataFrameChanged()
     Public Event TryCommadClick()
     Public Event ControlValueChanged()
+    Public Event ClearClick()
+    Public Event CheckBoxClick()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsHelp As New RFunction
@@ -64,6 +66,8 @@ Public Class ucrCalculator
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Transform", "Summary", "Probability", "Factor", "Text/Strings (Character Columns)", "Dates/Times", "Circular", "Wakefield", "Goodness of Fit", "List", "Complex", "Integer", "Functions"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
+
+        ucrChkStoreScalar.Text = "Store Scalar"
 
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
@@ -711,6 +715,11 @@ Public Class ucrCalculator
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
         ucrReceiverForCalculation.Clear()
+        RaiseEvent ClearClick()
+    End Sub
+
+    Private Sub ucrChkStoreScalar_Click(sender As Object, e As EventArgs) Handles ucrChkStoreScalar.Click
+        RaiseEvent CheckBoxClick()
     End Sub
 
     Private Sub cmdLesser_Click(sender As Object, e As EventArgs) Handles cmdLesser.Click
