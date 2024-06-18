@@ -5,7 +5,7 @@ DataSheet <- R6::R6Class("DataSheet",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), column_selections = list(), objects = list(),
-                                                 calculations = list(), keys = list(), comments = list(), keep_attributes = TRUE)
+                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE)
 {
   # Set up the data object
   self$set_data(data, messages)
@@ -28,6 +28,7 @@ DataSheet <- R6::R6Class("DataSheet",
   #self$update_variables_metadata()
   self$set_objects(objects)
   self$set_calculations(calculations)
+  self$set_scalars(scalars)
   self$set_keys(keys)
   self$set_comments(comments)
   
@@ -60,6 +61,7 @@ DataSheet <- R6::R6Class("DataSheet",
                            keys = list(),
                            comments = list(),
                            calculations = list(),
+                           scalars = list(),
                            changes = list(), 
                            .current_filter = list(),
                            .current_column_selection = list(),
@@ -229,6 +231,13 @@ DataSheet$set("public", "set_calculations", function(new_calculations) {
   if(!is.list(new_calculations)) stop("new_calculations must be of type: list")
   self$append_to_changes(list(Set_property, "calculations"))  
   private$calculations <- new_calculations
+}
+)
+
+DataSheet$set("public", "set_scalars", function(new_scalars) {
+  if(!is.list(new_scalars)) stop("scalars must be of type: list")
+  self$append_to_changes(list(Set_property, "scalars"))  
+  private$scalars <- new_scalars
 }
 )
 
@@ -619,6 +628,39 @@ DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, exclu
   lst = list()
   lst[[self$get_metadata(data_name_label)]] <- out
   return(lst)
+}
+)
+
+DataSheet$set("public", "get_scalars", function() {
+  out <-
+    private$scalars[self$get_scalar_names()]
+  return(out)
+}
+)
+
+DataSheet$set("public", "get_scalar_names", function(as_list = FALSE, excluded_items = c(),...) {
+  out <- get_data_book_scalar_names(scalar_list = private$scalars, 
+                                    as_list = as_list, 
+                                    list_label= self$get_metadata(data_name_label) )
+  return(out)
+}
+)
+
+DataSheet$set("public", "get_scalar_value", function(scalar_name) {
+  if(missing(scalar_name)) stop(stop("scalar_name must be specified."))
+  return(private$scalars[[scalar_name]])
+}
+)
+
+DataSheet$set("public", "add_scalar", function(scalar_name = "", scalar_value) {
+  if(missing(scalar_name)) scalar_name <- next_default_item("scalar", names(private$scalars))
+  if(scalar_name %in% names(private$scalars)) warning("A scalar called", scalar_name, "already exists. It will be replaced.")
+  private$scalars[[scalar_name]] <- scalar_value
+  self$append_to_metadata(scalar, private$scalars)
+  self$append_to_changes(list(Added_scalar, scalar_name))
+  cat(paste("Scalar name: ", scalar_name),
+      paste("Value: ", private$scalars[[scalar_name]]),
+      sep = "\n")
 }
 )
 

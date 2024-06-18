@@ -51,6 +51,7 @@ Public Class dlgDeleteObjects
         dctTypes.Add("Filters", Chr(34) & "filter" & Chr(34))
         dctTypes.Add("Column selections", Chr(34) & "column_selection" & Chr(34))
         dctTypes.Add("Calculations", Chr(34) & "calculation" & Chr(34))
+        dctTypes.Add("Scalars", Chr(34) & "scalar" & Chr(34))
         ucrInputComboType.SetItems(dctTypes)
         ucrInputComboType.SetDropDownStyleAsNonEditable()
 
