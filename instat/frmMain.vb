@@ -586,7 +586,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub UpdateSwapDataAndScript()
+    Public Sub UpdateSwapDataAndScript()
         If mnuViewSwapDataAndScript.Checked Then
             splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
             splExtraWindows.Panel2.Controls.Add(ucrDataViewer)

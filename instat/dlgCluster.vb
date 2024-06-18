@@ -111,7 +111,7 @@ Public Class dlgCluster
 
         ucrSaveDistance.SetSaveTypeAsDataFrame()
         ucrSaveDistance.SetDataFrameSelector(ucrSelectorPrepareData.ucrAvailableDataFrames)
-        ucrSaveDistance.SetCheckBoxText("Save Result:")
+        ucrSaveDistance.SetCheckBoxText("Store Result:")
         ucrSaveDistance.SetPrefix("distance")
         ucrSaveDistance.SetIsComboBox()
         ucrSaveDistance.SetAssignToIfUncheckedValue("last_distance")
