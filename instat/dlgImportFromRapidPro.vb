@@ -237,7 +237,6 @@ Public Class dlgImportFromRapidPro
         grpDataToImport.Visible = False
         ucrChkFlow.Visible = False
         ucrChkUser.Visible = False
-        cmdSelectFlows.Visible = False
 
         If rdoUserData.Checked AndAlso ucrChkUser.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
@@ -262,13 +261,17 @@ Public Class dlgImportFromRapidPro
             grpDataToImport.Visible = True
             ucrChkFlow.Visible = True
             ucrChkUser.Visible = True
-            cmdSelectFlows.Visible = True
         Else
             grpDataToImport.Visible = False
             ucrChkFlow.Visible = False
             ucrChkUser.Visible = False
+        End If
+        If rdoUserData.Checked AndAlso ucrChkFlow.Checked Then
+            cmdSelectFlows.Visible = True
+        Else
             cmdSelectFlows.Visible = False
         End If
+
     End Sub
 
     Private Sub cmdSetToken_Click(sender As Object, e As EventArgs) Handles cmdSetToken.Click

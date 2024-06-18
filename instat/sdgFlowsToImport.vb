@@ -90,7 +90,7 @@ Public Class sdgFlowsToImport
         End If
     End Sub
 
-    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
+    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged, ucrModifyEventFactor.ControlValueChanged
         ModifyOptions()
         AutoFillReceivers()
     End Sub
