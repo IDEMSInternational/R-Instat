@@ -159,7 +159,6 @@ DataBook$set("public", "import_RDS", function(data_RDS,
                                               keep_existing = TRUE, 
                                               overwrite_existing = FALSE, 
                                               include_objects = TRUE,
-                                              include_scalars = TRUE,
                                               include_metadata = TRUE, 
                                               include_logs = TRUE, 
                                               include_filters = TRUE, 
@@ -170,14 +169,13 @@ DataBook$set("public", "import_RDS", function(data_RDS,
   
   # 'instat_object' is previously used class name, some files may have this name.
   if(any(c("instat_object", "DataBook") %in% class(data_RDS))) {
-    if(!keep_existing && include_objects && include_scalars && include_metadata && include_logs && include_filters && include_column_selections && include_calculations && include_comments) {
+    if(!keep_existing && include_objects && include_metadata && include_logs && include_filters && include_column_selections && include_calculations && include_comments) {
       self$replace_instat_object(new_instat_object = data_RDS)
     }else {
       if(!keep_existing) {
         self$set_data_objects(list())
         self$set_meta(list())
         self$set_objects(list())
-        self$set_scalars(list())
         self$set_links(list())
         self$set_database_connection(NULL)
       }

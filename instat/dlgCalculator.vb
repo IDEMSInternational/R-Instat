@@ -110,8 +110,8 @@ Public Class dlgCalculator
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
 
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 0)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 2)
         ucrBase.clsRsyntax.SetCommandString("")
 
         ucrCalc.ucrSaveResultInto.SetPrefix("calc")
@@ -137,10 +137,10 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub checkBoxScalar_CheckedChanged()
-        GetScalarValue()
+        SetItemType()
     End Sub
 
-    Private Sub GetScalarValue()
+    Private Sub SetItemType()
         If Not String.IsNullOrEmpty(ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame) Then
             If ucrCalc.ucrSelectorForCalculations.checkBoxScalar.Checked Then
                 ucrCalc.ucrReceiverForCalculation.strSelectorHeading = "Scalars"
@@ -167,7 +167,7 @@ Public Class dlgCalculator
     Private Sub SaveResults()
         If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso ucrCalc.ucrSaveResultInto.IsComplete Then
             clsRemoveLabelsFunction.AddParameter("col_names", Chr(34) & ucrCalc.ucrSaveResultInto.GetText() & Chr(34), iPosition:=1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 3)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         Else
@@ -176,11 +176,10 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.iCallType = 5
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
-        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddScalarFunction)
-        ManageScalarStorageAndAttachDetach()
+        ManageScalarStorage()
     End Sub
 
-    Private Sub ManageScalarStorageAndAttachDetach()
+    Private Sub ManageScalarStorage()
 
         Dim dataFrameName As String = ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame
 
@@ -191,7 +190,7 @@ Public Class dlgCalculator
             Dim strResut As String = ucrCalc.ucrSaveResultInto.GetText
             clsAddScalarFunction.AddParameter("scalar_name", Chr(34) & strResut & Chr(34), iPosition:=1)
             clsAddScalarFunction.AddParameter("scalar_value", strResut, iPosition:=2)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 2)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 0)
             ucrBase.clsRsyntax.SetAssignTo(strResut)
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = False
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = True
@@ -223,7 +222,7 @@ Public Class dlgCalculator
 
     Private Sub ucrCalc_SelectionChanged() Handles ucrCalc.SelectionChanged
         ucrCalc.ucrChkStoreScalar.Checked = False
-        ManageScalarStorageAndAttachDetach()
+        ManageScalarStorage()
         SaveResults()
         TestOKEnabled()
     End Sub
@@ -253,7 +252,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrCalc_Click() Handles ucrCalc.CheckBoxClick
-        ManageScalarStorageAndAttachDetach()
+        ManageScalarStorage()
     End Sub
 
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrCalc.NameChanged
