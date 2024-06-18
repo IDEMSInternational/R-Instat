@@ -2254,7 +2254,8 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
 )
 
 DataSheet$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
-  if(!object_type %in% c("object", "graph", "table","model","structure","summary","filter", "calculation", "column_selection", "scalar")) stop(object_type, " must be either object (graph, table or model), filter, column selection or a calculation.")
+  if(!object_type %in% c("object", "graph", "table","model","structure","summary","filter", "calculation", "column_selection", "scalar")) stop(object_type, " must be either object (graph, table or model), filter, column selection,  calculation or scala.")
+
   
   if(any(object_type %in% c("object", "graph", "table","model","structure","summary"))){
     
