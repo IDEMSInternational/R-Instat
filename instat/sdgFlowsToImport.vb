@@ -46,7 +46,6 @@ Public Class sdgFlowsToImport
         ucrReceiverName.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverName.SetLinkedDisplayControl(lblFlowName)
 
-
         'ucrFactorLevels 
         ucrModifyEventFactor.SetAsMultipleSelectorGrid(ucrReceiverName,
                                                   hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
@@ -61,8 +60,6 @@ Public Class sdgFlowsToImport
         clsModifyOperation = clsNewModifyOperation
         clsClosingOperator = clsNewClosingOperator
         clsOpeningOperator = clsNewOpeningOperator
-        'ucrReceiverName.AddAdditionalCodeParameterPair(clsOpeningOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        'ucrReceiverName.AddAdditionalCodeParameterPair(clsClosingOperator, New RParameter("right", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ucrReceiverName.SetRCode(clsModifyOperation, bReset)
         ModifyOptions()
