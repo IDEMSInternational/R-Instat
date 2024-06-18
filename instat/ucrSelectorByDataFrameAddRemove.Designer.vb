@@ -123,6 +123,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.checkBoxScalar.TabIndex = 86
         Me.checkBoxScalar.Text = "Scalar"
         Me.checkBoxScalar.UseVisualStyleBackColor = True
+        Me.checkBoxScalar.Visible = False
         '
         'ucrSelectorByDataFrameAddRemove
         '

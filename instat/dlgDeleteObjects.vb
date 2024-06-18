@@ -59,9 +59,6 @@ Public Class dlgDeleteObjects
         ucrReceiverObjectsToDelete.SetParameterIsString()
         ucrReceiverObjectsToDelete.Selector = ucrSelectorDeleteObject
         ucrReceiverObjectsToDelete.SetMeAsReceiver()
-
-
-
     End Sub
 
     Private Sub SetDefaults()

@@ -73,7 +73,7 @@ Public Class dlgCalculator
 
     Private Sub ReopenDialog()
         SaveResults()
-        ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScalar(Not String.IsNullOrEmpty(ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame))
+        ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScalar(True)
         ucrCalc.ucrChkStoreScalar.Checked = False
     End Sub
 
@@ -178,7 +178,6 @@ Public Class dlgCalculator
         ManageScalarStorage()
     End Sub
 
-
     Private Sub ManageScalarStorage()
 
         Dim dataFrameName As String = ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame
@@ -242,7 +241,6 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 2)
             ucrCalc.ucrSaveResultInto.Enabled = True
-            ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScalar(True)
             ucrCalc.ucrChkStoreScalar.Visible = True
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachFunction)
@@ -250,7 +248,7 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachScalarsFunction)
             ucrCalc.ucrSelectorForCalculations.ResetCheckBoxScalar()
-            ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScalar(False)
+            ucrCalc.ucrSaveResultInto.Enabled = False
             ucrCalc.ucrChkStoreScalar.Visible = False
             ucrCalc.ucrChkStoreScalar.Checked = False
         End If
