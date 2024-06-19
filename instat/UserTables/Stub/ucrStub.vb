@@ -35,7 +35,7 @@ Public Class ucrStub
 
         Dim lstRParams As List(Of RParameter)
 
-        lstRParams = clsTablesUtils.FindRFunctionsParamsWithRCommand("gt", clsOperator)
+        lstRParams = clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt"}, clsOperator)
 
         ' The GT paramter should always be there. 
         If lstRParams.Count > 0 Then
@@ -45,7 +45,7 @@ Public Class ucrStub
         End If
 
 
-        lstRParams = clsTablesUtils.FindRFunctionsParamsWithRCommand("tab_stubhead", clsOperator)
+        lstRParams = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_stubhead"}, clsOperator)
         If lstRParams.Count > 0 Then
             clsStubHeadRParameter = lstRParams(0)
         Else

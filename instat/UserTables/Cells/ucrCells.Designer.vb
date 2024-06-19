@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrCells
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,275 +20,118 @@ Partial Class ucrCells
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.rdoStyle = New System.Windows.Forms.RadioButton()
-        Me.rdoGroup = New System.Windows.Forms.RadioButton()
-        Me.rdoSummary = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlRow = New instat.UcrPanel()
-        Me.lblGroupCondition = New System.Windows.Forms.Label()
-        Me.lblGroups = New System.Windows.Forms.Label()
-        Me.ucrLogicalCombobox = New instat.ucrInputComboBox()
-        Me.btnClearGroups = New System.Windows.Forms.Button()
-        Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
-        Me.ucrFilterOperation = New instat.ucrInputComboBox()
-        Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.colFormat = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lblColumns = New System.Windows.Forms.Label()
-        Me.btnAddGroupCondition = New System.Windows.Forms.Button()
-        Me.dataGridGroups = New System.Windows.Forms.DataGridView()
-        CType(Me.dataGridGroups, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.rdoStyles = New System.Windows.Forms.RadioButton()
+        Me.rdoFormat = New System.Windows.Forms.RadioButton()
+        Me.rdoFootNotes = New System.Windows.Forms.RadioButton()
+        Me.ucrCellsFootNotes = New instat.ucrCellsFootNotes()
+        Me.ucrCellFormats = New instat.ucrCellFormats()
+        Me.ucrPnlCells = New instat.UcrPanel()
         Me.SuspendLayout()
         '
-        'rdoStyle
+        'rdoStyles
         '
-        Me.rdoStyle.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoStyle.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoStyle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoStyle.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoStyle.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoStyle.FlatAppearance.BorderSize = 2
-        Me.rdoStyle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoStyle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoStyle.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStyle.Location = New System.Drawing.Point(362, 3)
-        Me.rdoStyle.Name = "rdoStyle"
-        Me.rdoStyle.Size = New System.Drawing.Size(91, 29)
-        Me.rdoStyle.TabIndex = 292
-        Me.rdoStyle.Text = "Styles"
-        Me.rdoStyle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoStyle.UseVisualStyleBackColor = True
+        Me.rdoStyles.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoStyles.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoStyles.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoStyles.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoStyles.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStyles.FlatAppearance.BorderSize = 2
+        Me.rdoStyles.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStyles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoStyles.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoStyles.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoStyles.Location = New System.Drawing.Point(279, 3)
+        Me.rdoStyles.Name = "rdoStyles"
+        Me.rdoStyles.Size = New System.Drawing.Size(91, 29)
+        Me.rdoStyles.TabIndex = 292
+        Me.rdoStyles.Text = "Styles"
+        Me.rdoStyles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoStyles.UseVisualStyleBackColor = True
         '
-        'rdoGroup
+        'rdoFormat
         '
-        Me.rdoGroup.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoGroup.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoGroup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoGroup.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoGroup.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGroup.FlatAppearance.BorderSize = 2
-        Me.rdoGroup.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGroup.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoGroup.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoGroup.Location = New System.Drawing.Point(185, 3)
-        Me.rdoGroup.Name = "rdoGroup"
-        Me.rdoGroup.Size = New System.Drawing.Size(91, 29)
-        Me.rdoGroup.TabIndex = 290
-        Me.rdoGroup.Text = "Groups"
-        Me.rdoGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoGroup.UseVisualStyleBackColor = True
+        Me.rdoFormat.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoFormat.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoFormat.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoFormat.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoFormat.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFormat.FlatAppearance.BorderSize = 2
+        Me.rdoFormat.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFormat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoFormat.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoFormat.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoFormat.Location = New System.Drawing.Point(102, 3)
+        Me.rdoFormat.Name = "rdoFormat"
+        Me.rdoFormat.Size = New System.Drawing.Size(91, 29)
+        Me.rdoFormat.TabIndex = 290
+        Me.rdoFormat.Text = "Formats"
+        Me.rdoFormat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoFormat.UseVisualStyleBackColor = True
         '
-        'rdoSummary
+        'rdoFootNotes
         '
-        Me.rdoSummary.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoSummary.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoSummary.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoSummary.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoSummary.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSummary.FlatAppearance.BorderSize = 2
-        Me.rdoSummary.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoSummary.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSummary.Location = New System.Drawing.Point(274, 3)
-        Me.rdoSummary.Name = "rdoSummary"
-        Me.rdoSummary.Size = New System.Drawing.Size(91, 29)
-        Me.rdoSummary.TabIndex = 291
-        Me.rdoSummary.Text = "Footers"
-        Me.rdoSummary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoSummary.UseVisualStyleBackColor = True
+        Me.rdoFootNotes.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoFootNotes.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoFootNotes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoFootNotes.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoFootNotes.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFootNotes.FlatAppearance.BorderSize = 2
+        Me.rdoFootNotes.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFootNotes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoFootNotes.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoFootNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoFootNotes.Location = New System.Drawing.Point(191, 3)
+        Me.rdoFootNotes.Name = "rdoFootNotes"
+        Me.rdoFootNotes.Size = New System.Drawing.Size(91, 29)
+        Me.rdoFootNotes.TabIndex = 291
+        Me.rdoFootNotes.Text = "Footer Notes"
+        Me.rdoFootNotes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoFootNotes.UseVisualStyleBackColor = True
         '
-        'ucrPnlRow
+        'ucrCellsFootNotes
         '
-        Me.ucrPnlRow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlRow.Location = New System.Drawing.Point(168, 3)
-        Me.ucrPnlRow.Name = "ucrPnlRow"
-        Me.ucrPnlRow.Size = New System.Drawing.Size(309, 29)
-        Me.ucrPnlRow.TabIndex = 289
+        Me.ucrCellsFootNotes.Location = New System.Drawing.Point(7, 38)
+        Me.ucrCellsFootNotes.Name = "ucrCellsFootNotes"
+        Me.ucrCellsFootNotes.Size = New System.Drawing.Size(604, 104)
+        Me.ucrCellsFootNotes.TabIndex = 294
         '
-        'lblGroupCondition
+        'ucrCellFormats
         '
-        Me.lblGroupCondition.AutoSize = True
-        Me.lblGroupCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGroupCondition.Location = New System.Drawing.Point(379, 46)
-        Me.lblGroupCondition.Name = "lblGroupCondition"
-        Me.lblGroupCondition.Size = New System.Drawing.Size(54, 13)
-        Me.lblGroupCondition.TabIndex = 288
-        Me.lblGroupCondition.Text = "Condition:"
+        Me.ucrCellFormats.Location = New System.Drawing.Point(7, 37)
+        Me.ucrCellFormats.Name = "ucrCellFormats"
+        Me.ucrCellFormats.Size = New System.Drawing.Size(604, 319)
+        Me.ucrCellFormats.TabIndex = 293
         '
-        'lblGroups
+        'ucrPnlCells
         '
-        Me.lblGroups.AutoSize = True
-        Me.lblGroups.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGroups.Location = New System.Drawing.Point(257, 136)
-        Me.lblGroups.Name = "lblGroups"
-        Me.lblGroups.Size = New System.Drawing.Size(44, 13)
-        Me.lblGroups.TabIndex = 287
-        Me.lblGroups.Text = "Groups:"
-        '
-        'ucrLogicalCombobox
-        '
-        Me.ucrLogicalCombobox.AddQuotesIfUnrecognised = True
-        Me.ucrLogicalCombobox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrLogicalCombobox.GetSetSelectedIndex = -1
-        Me.ucrLogicalCombobox.IsReadOnly = False
-        Me.ucrLogicalCombobox.Location = New System.Drawing.Point(454, 65)
-        Me.ucrLogicalCombobox.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
-        Me.ucrLogicalCombobox.Name = "ucrLogicalCombobox"
-        Me.ucrLogicalCombobox.Size = New System.Drawing.Size(89, 21)
-        Me.ucrLogicalCombobox.TabIndex = 286
-        '
-        'btnClearGroups
-        '
-        Me.btnClearGroups.Enabled = False
-        Me.btnClearGroups.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearGroups.Location = New System.Drawing.Point(536, 131)
-        Me.btnClearGroups.Name = "btnClearGroups"
-        Me.btnClearGroups.Size = New System.Drawing.Size(80, 23)
-        Me.btnClearGroups.TabIndex = 285
-        Me.btnClearGroups.Tag = ""
-        Me.btnClearGroups.Text = "Clear"
-        Me.btnClearGroups.UseVisualStyleBackColor = True
-        '
-        'ucrFilterByReceiver
-        '
-        Me.ucrFilterByReceiver.AutoSize = True
-        Me.ucrFilterByReceiver.frmParent = Nothing
-        Me.ucrFilterByReceiver.Location = New System.Drawing.Point(254, 65)
-        Me.ucrFilterByReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrFilterByReceiver.Name = "ucrFilterByReceiver"
-        Me.ucrFilterByReceiver.Selector = Nothing
-        Me.ucrFilterByReceiver.Size = New System.Drawing.Size(120, 21)
-        Me.ucrFilterByReceiver.strNcFilePath = ""
-        Me.ucrFilterByReceiver.TabIndex = 281
-        Me.ucrFilterByReceiver.ucrSelector = Nothing
-        '
-        'ucrFilterOperation
-        '
-        Me.ucrFilterOperation.AddQuotesIfUnrecognised = True
-        Me.ucrFilterOperation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrFilterOperation.GetSetSelectedIndex = -1
-        Me.ucrFilterOperation.IsReadOnly = False
-        Me.ucrFilterOperation.Location = New System.Drawing.Point(375, 65)
-        Me.ucrFilterOperation.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
-        Me.ucrFilterOperation.Name = "ucrFilterOperation"
-        Me.ucrFilterOperation.Size = New System.Drawing.Size(78, 21)
-        Me.ucrFilterOperation.TabIndex = 283
-        '
-        'ucrSelectorCols
-        '
-        Me.ucrSelectorCols.AutoSize = True
-        Me.ucrSelectorCols.bDropUnusedFilterLevels = False
-        Me.ucrSelectorCols.bShowHiddenColumns = False
-        Me.ucrSelectorCols.bUseCurrentFilter = True
-        Me.ucrSelectorCols.Location = New System.Drawing.Point(4, 49)
-        Me.ucrSelectorCols.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorCols.Name = "ucrSelectorCols"
-        Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorCols.TabIndex = 280
-        '
-        'colFormat
-        '
-        Me.colFormat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colFormat.HeaderText = ""
-        Me.colFormat.MinimumWidth = 8
-        Me.colFormat.Name = "colFormat"
-        Me.colFormat.Width = 8
-        '
-        'colCodnition
-        '
-        Me.colCodnition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colCodnition.HeaderText = "Condition"
-        Me.colCodnition.MinimumWidth = 8
-        Me.colCodnition.Name = "colCodnition"
-        Me.colCodnition.Width = 76
-        '
-        'colLabel
-        '
-        Me.colLabel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colLabel.HeaderText = "Label"
-        Me.colLabel.MinimumWidth = 8
-        Me.colLabel.Name = "colLabel"
-        Me.colLabel.Width = 58
-        '
-        'lblColumns
-        '
-        Me.lblColumns.AutoSize = True
-        Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColumns.Location = New System.Drawing.Point(257, 49)
-        Me.lblColumns.Name = "lblColumns"
-        Me.lblColumns.Size = New System.Drawing.Size(45, 13)
-        Me.lblColumns.TabIndex = 284
-        Me.lblColumns.Text = "Column:"
-        '
-        'btnAddGroupCondition
-        '
-        Me.btnAddGroupCondition.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.btnAddGroupCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnAddGroupCondition.Location = New System.Drawing.Point(254, 86)
-        Me.btnAddGroupCondition.Name = "btnAddGroupCondition"
-        Me.btnAddGroupCondition.Size = New System.Drawing.Size(120, 23)
-        Me.btnAddGroupCondition.TabIndex = 282
-        Me.btnAddGroupCondition.Tag = ""
-        Me.btnAddGroupCondition.Text = "Add"
-        Me.btnAddGroupCondition.UseVisualStyleBackColor = True
-        '
-        'dataGridGroups
-        '
-        Me.dataGridGroups.AllowUserToAddRows = False
-        Me.dataGridGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridGroups.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colLabel, Me.colCodnition, Me.colFormat})
-        Me.dataGridGroups.Location = New System.Drawing.Point(260, 156)
-        Me.dataGridGroups.Name = "dataGridGroups"
-        Me.dataGridGroups.RowHeadersWidth = 62
-        Me.dataGridGroups.Size = New System.Drawing.Size(361, 73)
-        Me.dataGridGroups.TabIndex = 279
+        Me.ucrPnlCells.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlCells.Location = New System.Drawing.Point(85, 3)
+        Me.ucrPnlCells.Name = "ucrPnlCells"
+        Me.ucrPnlCells.Size = New System.Drawing.Size(309, 29)
+        Me.ucrPnlCells.TabIndex = 289
         '
         'ucrCells
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.rdoStyle)
-        Me.Controls.Add(Me.rdoGroup)
-        Me.Controls.Add(Me.rdoSummary)
-        Me.Controls.Add(Me.ucrPnlRow)
-        Me.Controls.Add(Me.lblGroupCondition)
-        Me.Controls.Add(Me.lblGroups)
-        Me.Controls.Add(Me.ucrLogicalCombobox)
-        Me.Controls.Add(Me.btnClearGroups)
-        Me.Controls.Add(Me.ucrFilterByReceiver)
-        Me.Controls.Add(Me.ucrFilterOperation)
-        Me.Controls.Add(Me.ucrSelectorCols)
-        Me.Controls.Add(Me.lblColumns)
-        Me.Controls.Add(Me.btnAddGroupCondition)
-        Me.Controls.Add(Me.dataGridGroups)
+        Me.Controls.Add(Me.ucrCellsFootNotes)
+        Me.Controls.Add(Me.ucrCellFormats)
+        Me.Controls.Add(Me.rdoStyles)
+        Me.Controls.Add(Me.rdoFormat)
+        Me.Controls.Add(Me.rdoFootNotes)
+        Me.Controls.Add(Me.ucrPnlCells)
         Me.Name = "ucrCells"
-        Me.Size = New System.Drawing.Size(634, 241)
-        CType(Me.dataGridGroups, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Size = New System.Drawing.Size(629, 362)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents rdoStyle As RadioButton
-    Friend WithEvents rdoGroup As RadioButton
-    Friend WithEvents rdoSummary As RadioButton
-    Friend WithEvents ucrPnlRow As UcrPanel
-    Friend WithEvents lblGroupCondition As Label
-    Friend WithEvents lblGroups As Label
-    Friend WithEvents ucrLogicalCombobox As ucrInputComboBox
-    Friend WithEvents btnClearGroups As Button
-    Friend WithEvents ucrFilterByReceiver As ucrReceiverSingle
-    Friend WithEvents ucrFilterOperation As ucrInputComboBox
-    Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents colFormat As DataGridViewButtonColumn
-    Friend WithEvents colCodnition As DataGridViewTextBoxColumn
-    Friend WithEvents colLabel As DataGridViewTextBoxColumn
-    Friend WithEvents lblColumns As Label
-    Friend WithEvents btnAddGroupCondition As Button
-    Friend WithEvents dataGridGroups As DataGridView
+    Friend WithEvents rdoStyles As RadioButton
+    Friend WithEvents rdoFormat As RadioButton
+    Friend WithEvents rdoFootNotes As RadioButton
+    Friend WithEvents ucrPnlCells As UcrPanel
+    Friend WithEvents ucrCellFormats As ucrCellFormats
+    Friend WithEvents ucrCellsFootNotes As ucrCellsFootNotes
 End Class

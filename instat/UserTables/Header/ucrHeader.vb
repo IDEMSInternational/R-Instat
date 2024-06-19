@@ -62,7 +62,7 @@ Public Class ucrHeader
     End Sub
 
     Private Sub SetupRFunctionsFromOperator()
-        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand("tab_footnote", clsOperator)
+        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_footnote"}, clsOperator)
 
         For Each clsTabFooterRParam As RParameter In lstRParams
 

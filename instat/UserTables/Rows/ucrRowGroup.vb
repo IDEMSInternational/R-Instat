@@ -20,7 +20,7 @@
         dataGridGroups.Rows.Clear()
 
 
-        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand("tab_row_group", clsOperator)
+        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_row_group"}, clsOperator)
 
         For Each clsRParam As RParameter In lstRParams
 

@@ -26,17 +26,13 @@ Partial Class sdgTableOptions
         Me.tbpHeader = New System.Windows.Forms.TabPage()
         Me.ucrHeaderOptions = New instat.ucrHeader()
         Me.tbpStub = New System.Windows.Forms.TabPage()
+        Me.ucrStub = New instat.ucrStub()
         Me.tbpColumns = New System.Windows.Forms.TabPage()
         Me.ucrColumns = New instat.ucrColumns()
         Me.tbpRows = New System.Windows.Forms.TabPage()
         Me.ucrRows = New instat.ucrRows()
         Me.tbpCells = New System.Windows.Forms.TabPage()
-        Me.dataGridCellFooterNotes = New System.Windows.Forms.DataGridView()
-        Me.colFooterNoteText = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFooterColExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFooterRowExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFooterFormat = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.lblFooterCellNotes = New System.Windows.Forms.Label()
+        Me.ucrCells = New instat.ucrCells()
         Me.tbpSourceNotes = New System.Windows.Forms.TabPage()
         Me.ucrSourceNotes = New instat.ucrSourceNotes()
         Me.tbpThemes = New System.Windows.Forms.TabPage()
@@ -45,15 +41,13 @@ Partial Class sdgTableOptions
         Me.rdoSelectTheme = New System.Windows.Forms.RadioButton()
         Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
         Me.ucrPnlThemesPanel = New instat.UcrPanel()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrStub = New instat.ucrStub()
+        Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
         Me.tbpStub.SuspendLayout()
         Me.tbpColumns.SuspendLayout()
         Me.tbpRows.SuspendLayout()
         Me.tbpCells.SuspendLayout()
-        CType(Me.dataGridCellFooterNotes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpSourceNotes.SuspendLayout()
         Me.tbpThemes.SuspendLayout()
         Me.SuspendLayout()
@@ -70,7 +64,7 @@ Partial Class sdgTableOptions
         Me.tbpFormatOptions.Location = New System.Drawing.Point(3, 5)
         Me.tbpFormatOptions.Name = "tbpFormatOptions"
         Me.tbpFormatOptions.SelectedIndex = 0
-        Me.tbpFormatOptions.Size = New System.Drawing.Size(779, 350)
+        Me.tbpFormatOptions.Size = New System.Drawing.Size(784, 411)
         Me.tbpFormatOptions.TabIndex = 5
         '
         'tbpHeader
@@ -79,7 +73,7 @@ Partial Class sdgTableOptions
         Me.tbpHeader.Location = New System.Drawing.Point(4, 22)
         Me.tbpHeader.Name = "tbpHeader"
         Me.tbpHeader.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpHeader.Size = New System.Drawing.Size(771, 324)
+        Me.tbpHeader.Size = New System.Drawing.Size(813, 385)
         Me.tbpHeader.TabIndex = 0
         Me.tbpHeader.Text = "Header"
         Me.tbpHeader.UseVisualStyleBackColor = True
@@ -96,17 +90,24 @@ Partial Class sdgTableOptions
         Me.tbpStub.Controls.Add(Me.ucrStub)
         Me.tbpStub.Location = New System.Drawing.Point(4, 22)
         Me.tbpStub.Name = "tbpStub"
-        Me.tbpStub.Size = New System.Drawing.Size(771, 324)
+        Me.tbpStub.Size = New System.Drawing.Size(813, 385)
         Me.tbpStub.TabIndex = 9
         Me.tbpStub.Text = "Stub"
         Me.tbpStub.UseVisualStyleBackColor = True
+        '
+        'ucrStub
+        '
+        Me.ucrStub.Location = New System.Drawing.Point(7, 7)
+        Me.ucrStub.Name = "ucrStub"
+        Me.ucrStub.Size = New System.Drawing.Size(411, 191)
+        Me.ucrStub.TabIndex = 0
         '
         'tbpColumns
         '
         Me.tbpColumns.Controls.Add(Me.ucrColumns)
         Me.tbpColumns.Location = New System.Drawing.Point(4, 22)
         Me.tbpColumns.Name = "tbpColumns"
-        Me.tbpColumns.Size = New System.Drawing.Size(771, 324)
+        Me.tbpColumns.Size = New System.Drawing.Size(813, 385)
         Me.tbpColumns.TabIndex = 8
         Me.tbpColumns.Text = "Columns"
         Me.tbpColumns.UseVisualStyleBackColor = True
@@ -123,7 +124,7 @@ Partial Class sdgTableOptions
         Me.tbpRows.Controls.Add(Me.ucrRows)
         Me.tbpRows.Location = New System.Drawing.Point(4, 22)
         Me.tbpRows.Name = "tbpRows"
-        Me.tbpRows.Size = New System.Drawing.Size(771, 324)
+        Me.tbpRows.Size = New System.Drawing.Size(776, 385)
         Me.tbpRows.TabIndex = 7
         Me.tbpRows.Text = "Rows"
         Me.tbpRows.UseVisualStyleBackColor = True
@@ -137,74 +138,27 @@ Partial Class sdgTableOptions
         '
         'tbpCells
         '
-        Me.tbpCells.Controls.Add(Me.dataGridCellFooterNotes)
-        Me.tbpCells.Controls.Add(Me.lblFooterCellNotes)
+        Me.tbpCells.Controls.Add(Me.ucrCells)
         Me.tbpCells.Location = New System.Drawing.Point(4, 22)
         Me.tbpCells.Name = "tbpCells"
-        Me.tbpCells.Size = New System.Drawing.Size(771, 324)
+        Me.tbpCells.Size = New System.Drawing.Size(813, 385)
         Me.tbpCells.TabIndex = 3
         Me.tbpCells.Text = "Cells"
         Me.tbpCells.UseVisualStyleBackColor = True
         '
-        'dataGridCellFooterNotes
+        'ucrCells
         '
-        Me.dataGridCellFooterNotes.AllowUserToAddRows = False
-        Me.dataGridCellFooterNotes.AllowUserToDeleteRows = False
-        Me.dataGridCellFooterNotes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridCellFooterNotes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colFooterNoteText, Me.colFooterColExpression, Me.colFooterRowExpression, Me.colFooterFormat})
-        Me.dataGridCellFooterNotes.Location = New System.Drawing.Point(7, 31)
-        Me.dataGridCellFooterNotes.Name = "dataGridCellFooterNotes"
-        Me.dataGridCellFooterNotes.RowHeadersWidth = 62
-        Me.dataGridCellFooterNotes.Size = New System.Drawing.Size(630, 55)
-        Me.dataGridCellFooterNotes.TabIndex = 5
-        '
-        'colFooterNoteText
-        '
-        Me.colFooterNoteText.HeaderText = "Note Text"
-        Me.colFooterNoteText.MinimumWidth = 8
-        Me.colFooterNoteText.Name = "colFooterNoteText"
-        Me.colFooterNoteText.Width = 220
-        '
-        'colFooterColExpression
-        '
-        Me.colFooterColExpression.HeaderText = "Column Expression"
-        Me.colFooterColExpression.MinimumWidth = 8
-        Me.colFooterColExpression.Name = "colFooterColExpression"
-        Me.colFooterColExpression.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.colFooterColExpression.Width = 140
-        '
-        'colFooterRowExpression
-        '
-        Me.colFooterRowExpression.HeaderText = "Row Expression(s)"
-        Me.colFooterRowExpression.MinimumWidth = 8
-        Me.colFooterRowExpression.Name = "colFooterRowExpression"
-        Me.colFooterRowExpression.Width = 140
-        '
-        'colFooterFormat
-        '
-        Me.colFooterFormat.HeaderText = ""
-        Me.colFooterFormat.MinimumWidth = 8
-        Me.colFooterFormat.Name = "colFooterFormat"
-        Me.colFooterFormat.ReadOnly = True
-        Me.colFooterFormat.Text = "Format"
-        Me.colFooterFormat.UseColumnTextForButtonValue = True
-        Me.colFooterFormat.Width = 60
-        '
-        'lblFooterCellNotes
-        '
-        Me.lblFooterCellNotes.AutoSize = True
-        Me.lblFooterCellNotes.Location = New System.Drawing.Point(10, 13)
-        Me.lblFooterCellNotes.Name = "lblFooterCellNotes"
-        Me.lblFooterCellNotes.Size = New System.Drawing.Size(91, 13)
-        Me.lblFooterCellNotes.TabIndex = 4
-        Me.lblFooterCellNotes.Text = "Cell footers notes:"
+        Me.ucrCells.Location = New System.Drawing.Point(8, 8)
+        Me.ucrCells.Name = "ucrCells"
+        Me.ucrCells.Size = New System.Drawing.Size(644, 360)
+        Me.ucrCells.TabIndex = 6
         '
         'tbpSourceNotes
         '
         Me.tbpSourceNotes.Controls.Add(Me.ucrSourceNotes)
         Me.tbpSourceNotes.Location = New System.Drawing.Point(4, 22)
         Me.tbpSourceNotes.Name = "tbpSourceNotes"
-        Me.tbpSourceNotes.Size = New System.Drawing.Size(771, 324)
+        Me.tbpSourceNotes.Size = New System.Drawing.Size(813, 385)
         Me.tbpSourceNotes.TabIndex = 4
         Me.tbpSourceNotes.Text = "Source Notes"
         Me.tbpSourceNotes.UseVisualStyleBackColor = True
@@ -226,7 +180,7 @@ Partial Class sdgTableOptions
         Me.tbpThemes.Controls.Add(Me.ucrPnlThemesPanel)
         Me.tbpThemes.Location = New System.Drawing.Point(4, 22)
         Me.tbpThemes.Name = "tbpThemes"
-        Me.tbpThemes.Size = New System.Drawing.Size(771, 324)
+        Me.tbpThemes.Size = New System.Drawing.Size(813, 385)
         Me.tbpThemes.TabIndex = 6
         Me.tbpThemes.Text = "Themes"
         Me.tbpThemes.UseVisualStyleBackColor = True
@@ -283,29 +237,22 @@ Partial Class sdgTableOptions
         Me.ucrPnlThemesPanel.Size = New System.Drawing.Size(349, 70)
         Me.ucrPnlThemesPanel.TabIndex = 4
         '
-        'ucrBaseSubdialog
+        'ucrSdgBaseButtons
         '
-        Me.ucrBaseSubdialog.AutoSize = True
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(263, 355)
-        Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(254, 29)
-        Me.ucrBaseSubdialog.TabIndex = 4
-        '
-        'ucrStub
-        '
-        Me.ucrStub.Location = New System.Drawing.Point(7, 7)
-        Me.ucrStub.Name = "ucrStub"
-        Me.ucrStub.Size = New System.Drawing.Size(411, 191)
-        Me.ucrStub.TabIndex = 0
+        Me.ucrSdgBaseButtons.AutoSize = True
+        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(219, 419)
+        Me.ucrSdgBaseButtons.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
+        Me.ucrSdgBaseButtons.Size = New System.Drawing.Size(224, 30)
+        Me.ucrSdgBaseButtons.TabIndex = 343
         '
         'sdgTableOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(788, 389)
+        Me.ClientSize = New System.Drawing.Size(788, 452)
+        Me.Controls.Add(Me.ucrSdgBaseButtons)
         Me.Controls.Add(Me.tbpFormatOptions)
-        Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgTableOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
@@ -316,8 +263,6 @@ Partial Class sdgTableOptions
         Me.tbpColumns.ResumeLayout(False)
         Me.tbpRows.ResumeLayout(False)
         Me.tbpCells.ResumeLayout(False)
-        Me.tbpCells.PerformLayout()
-        CType(Me.dataGridCellFooterNotes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpSourceNotes.ResumeLayout(False)
         Me.tbpThemes.ResumeLayout(False)
         Me.tbpThemes.PerformLayout()
@@ -325,8 +270,6 @@ Partial Class sdgTableOptions
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
     Friend WithEvents tbpFormatOptions As TabControl
     Friend WithEvents tbpHeader As TabPage
     Friend WithEvents tbpCells As TabPage
@@ -337,12 +280,6 @@ Partial Class sdgTableOptions
     Friend WithEvents rdoSelectTheme As RadioButton
     Friend WithEvents rdoManualTheme As RadioButton
     Friend WithEvents ucrPnlThemesPanel As UcrPanel
-    Friend WithEvents lblFooterCellNotes As Label
-    Friend WithEvents dataGridCellFooterNotes As DataGridView
-    Friend WithEvents colFooterNoteText As DataGridViewTextBoxColumn
-    Friend WithEvents colFooterColExpression As DataGridViewTextBoxColumn
-    Friend WithEvents colFooterRowExpression As DataGridViewTextBoxColumn
-    Friend WithEvents colFooterFormat As DataGridViewButtonColumn
     Friend WithEvents ucrSourceNotes As ucrSourceNotes
     Friend WithEvents tbpRows As TabPage
     Friend WithEvents ucrHeaderOptions As ucrHeader
@@ -351,4 +288,6 @@ Partial Class sdgTableOptions
     Friend WithEvents ucrRows As ucrRows
     Friend WithEvents tbpStub As TabPage
     Friend WithEvents ucrStub As ucrStub
+    Friend WithEvents ucrCells As ucrCells
+    Friend WithEvents ucrSdgBaseButtons As ucrButtonsSubdialogue
 End Class

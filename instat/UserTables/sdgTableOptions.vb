@@ -26,10 +26,12 @@ Public Class sdgTableOptions
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn
+    Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
 
         'clsTablesUtils.RemoveParameterFromOperator("tab_footnote", clsOperator)
-        clsTablesUtils.SetGridTagsInOperator(dataGridCellFooterNotes, "tab_footnote", clsOperator)
+        'clsTablesUtils.SetGridTagsInOperator(dataGridCellFooterNotes, "tab_footnote", clsOperator)
+
+        ucrCells.SetValuesToOperator()
 
         SetThemesInOperatorOnReturn(clsOperator)
     End Sub
@@ -49,7 +51,7 @@ Public Class sdgTableOptions
     ''' The parameter should be an R Function that generates script "gt:gt()" as part of the last script statement.
     ''' </summary>
     ''' <param name="clsNewOperator"></param>
-    Public Sub Setup(clsNewOperator As ROperator)
+    Public Sub Setup(strDataFrameName As String, clsNewOperator As ROperator)
 
         If clsTablesUtils.FindRFunctionsWithRCommand("gt", clsNewOperator).Count = 0 Then
             MsgBox("Developer Error: Parameter with 'gt' as name MUST be set up before using this subdialog")
@@ -64,9 +66,10 @@ Public Class sdgTableOptions
         clsOperator = clsNewOperator
 
         ucrHeaderOptions.Setup(clsOperator)
-        ucrStub.Setup("survey", clsOperator)
-        ucrRows.Setup("survey", clsOperator)
-        ucrColumns.Setup("survey", clsOperator)
+        ucrStub.Setup(strDataFrameName, clsOperator)
+        ucrRows.Setup(strDataFrameName, clsOperator)
+        ucrColumns.Setup(strDataFrameName, clsOperator)
+        ucrCells.Setup(strDataFrameName, clsOperator)
         SetupFooterNotesRFunctionsInOperatorOnNew(clsOperator)
         ucrSourceNotes.Setup(clsOperator)
         SetupThemeRFunctionsInOperatorOnNew(clsOperator)
@@ -77,7 +80,7 @@ Public Class sdgTableOptions
 
     Private Sub SetupFooterNotesRFunctionsInOperatorOnNew(clsOperator As ROperator)
         'SetFooterGridContents(clsOperator, dataGridHeaderFooterNotes)
-        SetFooterGridContents(clsOperator, dataGridCellFooterNotes)
+        'SetFooterGridContents(clsOperator, dataGridCellFooterNotes)
     End Sub
 
     Private Sub SetFooterGridContents(clsOperator As ROperator, dataGridFooterNotes As DataGridView)
@@ -100,15 +103,15 @@ Public Class sdgTableOptions
                         ' todo go through the location function
                         Dim clsFooterLocationNoteRFunction As RFunction = clsFootNoteRParam.clsArgumentCodeStructure
 
-                        If clsFooterLocationNoteRFunction.strRCommand = "cells_body" AndAlso dataGridFooterNotes Is dataGridCellFooterNotes Then
-                            For Each clsFootNoteLocationRParam As RParameter In clsFooterLocationNoteRFunction.clsParameters
-                                If clsFootNoteLocationRParam.strArgumentName = "columns" Then
-                                    row.Cells(1).Value = GetStringValue(clsFootNoteLocationRParam.strArgumentValue, False)
-                                ElseIf clsFootNoteLocationRParam.strArgumentName = "rows" Then
-                                    row.Cells(2).Value = GetStringValue(clsFootNoteLocationRParam.strArgumentValue, False)
-                                End If
-                            Next
-                        End If
+                        'If clsFooterLocationNoteRFunction.strRCommand = "cells_body" AndAlso dataGridFooterNotes Is dataGridCellFooterNotes Then
+                        '    For Each clsFootNoteLocationRParam As RParameter In clsFooterLocationNoteRFunction.clsParameters
+                        '        If clsFootNoteLocationRParam.strArgumentName = "columns" Then
+                        '            row.Cells(1).Value = GetStringValue(clsFootNoteLocationRParam.strArgumentValue, False)
+                        '        ElseIf clsFootNoteLocationRParam.strArgumentName = "rows" Then
+                        '            row.Cells(2).Value = GetStringValue(clsFootNoteLocationRParam.strArgumentValue, False)
+                        '        End If
+                        '    Next
+                        'End If
                     End If
 
                     ' Tag and add the tab_footnote() function contents as a row
@@ -129,42 +132,7 @@ Public Class sdgTableOptions
 
     End Sub
 
-    Private Sub dataGridNotes_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridCellFooterNotes.CellEndEdit
-        Dim dataGrid As DataGridView = sender
-        Dim row As DataGridViewRow = dataGrid.Rows.Item(e.RowIndex)
-        Dim strNoteTextValue As String = row.Cells(0).Value
 
-        ' If no foot note typed by user then just exit the sub
-        If String.IsNullOrEmpty(strNoteTextValue) Then
-            Exit Sub
-        End If
-
-        Dim clsNoteRFunction As RFunction = Nothing
-
-        If dataGrid Is dataGridCellFooterNotes Then
-
-            clsNoteRFunction = SetupAndGetNewNoteRFunction(row.Tag, "tab_footnote", "footnote", strNoteTextValue)
-
-            ' Add column and row expressions as paramters if user has typed them
-            If Not String.IsNullOrEmpty(row.Cells(1).Value) AndAlso Not String.IsNullOrEmpty(row.Cells(2).Value) Then
-                Dim clsFooterLocationNoteRFunction As New RFunction
-                clsFooterLocationNoteRFunction.SetPackageName("gt")
-                clsFooterLocationNoteRFunction.SetRCommand("cells_body")
-                clsFooterLocationNoteRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=GetStringValue(row.Cells(1).Value, False)))
-                clsFooterLocationNoteRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=GetStringValue(row.Cells(2).Value, False)))
-                clsNoteRFunction.AddParameter(New RParameter(strParameterName:="locations", strParamValue:=clsFooterLocationNoteRFunction, iNewPosition:=1))
-            End If
-
-        End If
-
-        ' Overwrite the tag with the new foot function
-        row.Tag = clsNoteRFunction
-
-        ' If last row then add new empty row
-        If e.RowIndex = dataGrid.Rows.Count - 1 Then
-            dataGrid.Rows.Add()
-        End If
-    End Sub
 
     Private Function SetupAndGetNewNoteRFunction(clsPossibleNoteRFunction As RFunction, strNoteRCommand As String, strRNoteTextParameterName As String, strNoteTextValue As String) As RFunction
         Dim clsNewNoteRFunction As RFunction = clsPossibleNoteRFunction
@@ -191,28 +159,7 @@ Public Class sdgTableOptions
         Return clsNewNoteRFunction
     End Function
 
-    Private Sub dataGridNotes_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridCellFooterNotes.CellClick
 
-        Dim dataGrid As DataGridView = sender
-        Dim clsNoteRFunction As RFunction = dataGrid.Rows.Item(e.RowIndex).Tag
-        Dim strParameterName As String = Nothing
-
-        '---------------------------
-        ' Ignore clicks that are not from button cells. 
-        If dataGrid Is dataGridCellFooterNotes Then
-            strParameterName = "footnote"
-            If e.ColumnIndex <> 3 Then
-                Exit Sub
-            End If
-        End If
-        '---------------------------
-
-        If clsNoteRFunction IsNot Nothing AndAlso strParameterName IsNot Nothing Then
-            sdgTableOptionsTextFormat.Setup(clsNoteRFunction.GetParameter(strParameterName).clsArgumentCodeStructure.GetParameter("style").clsArgumentCodeStructure)
-            sdgTableOptionsTextFormat.Show(Me)
-        End If
-
-    End Sub
 
 
 

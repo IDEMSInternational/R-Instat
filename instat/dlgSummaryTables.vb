@@ -329,7 +329,7 @@ Public Class dlgSummaryTables
             Exit Sub
         End If
 
-        sdgTableOptions.Setup(clsROperator)
+        'sdgTableOptions.Setup(clsROperator)
         sdgTableOptions.ShowDialog(Me)
 
     End Sub

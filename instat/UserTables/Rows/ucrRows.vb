@@ -4,7 +4,6 @@
     Private Sub InitialiseDialog()
         ucrPnlRows.AddRadioButton(rdoRowsGroups)
         ucrPnlRows.AddRadioButton(rdoRowsSummaries)
-        ucrPnlRows.AddRadioButton(rdoRpwsStyles)
         rdoRowsGroups.Checked = True
     End Sub
 

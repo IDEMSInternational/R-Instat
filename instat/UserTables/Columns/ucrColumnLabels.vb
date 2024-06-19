@@ -23,7 +23,7 @@ Public Class ucrColumnLabels
         dataGridColLabels.Rows.Clear()
 
 
-        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand("cols_label", clsOperator)
+        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"cols_label"}, clsOperator)
         If lstRParams.Count > 0 Then
             clsColsLabelRParameter = lstRParams(0)
         Else

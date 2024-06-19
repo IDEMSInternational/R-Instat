@@ -4,9 +4,6 @@
     Private Sub InitialiseDialog()
         ucrPnlCols.AddRadioButton(rdoColLabel)
         ucrPnlCols.AddRadioButton(rdoColSpanners)
-        ucrPnlCols.AddRadioButton(rdoColFormats)
-        ucrPnlCols.AddRadioButton(rdoSummaries)
-        ucrPnlCols.AddRadioButton(rdoStyles)
         rdoColLabel.Checked = True
     End Sub
 
@@ -24,7 +21,7 @@
     Private Sub ucrPnlCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCols.ControlValueChanged
         ucrColumnLabels.Visible = rdoColLabel.Checked
         ucrColumnSpanners.Visible = rdoColSpanners.Checked
-        UcrColumnFormats1.Visible = rdoColFormats.Checked
     End Sub
+
 
 End Class

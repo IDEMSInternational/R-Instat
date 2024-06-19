@@ -48,7 +48,7 @@ Public Class dlgGeneralTable
     End Sub
 
     Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
-        sdgTableOptions.Setup(clsBaseOperator)
+        sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
         sdgTableOptions.ShowDialog(Me)
     End Sub
 

@@ -22,32 +22,11 @@ Partial Class ucrRows
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.rdoRpwsStyles = New System.Windows.Forms.RadioButton()
         Me.rdoRowsGroups = New System.Windows.Forms.RadioButton()
         Me.rdoRowsSummaries = New System.Windows.Forms.RadioButton()
         Me.ucrPnlRows = New instat.UcrPanel()
         Me.ucrRowGroups = New instat.ucrRowGroup()
         Me.SuspendLayout()
-        '
-        'rdoRpwsStyles
-        '
-        Me.rdoRpwsStyles.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoRpwsStyles.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoRpwsStyles.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoRpwsStyles.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoRpwsStyles.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoRpwsStyles.FlatAppearance.BorderSize = 2
-        Me.rdoRpwsStyles.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoRpwsStyles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoRpwsStyles.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoRpwsStyles.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRpwsStyles.Location = New System.Drawing.Point(412, 3)
-        Me.rdoRpwsStyles.Name = "rdoRpwsStyles"
-        Me.rdoRpwsStyles.Size = New System.Drawing.Size(91, 29)
-        Me.rdoRpwsStyles.TabIndex = 282
-        Me.rdoRpwsStyles.Text = "Styles"
-        Me.rdoRpwsStyles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoRpwsStyles.UseVisualStyleBackColor = True
         '
         'rdoRowsGroups
         '
@@ -61,7 +40,7 @@ Partial Class ucrRows
         Me.rdoRowsGroups.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRowsGroups.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoRowsGroups.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRowsGroups.Location = New System.Drawing.Point(235, 3)
+        Me.rdoRowsGroups.Location = New System.Drawing.Point(283, 3)
         Me.rdoRowsGroups.Name = "rdoRowsGroups"
         Me.rdoRowsGroups.Size = New System.Drawing.Size(91, 29)
         Me.rdoRowsGroups.TabIndex = 280
@@ -81,7 +60,7 @@ Partial Class ucrRows
         Me.rdoRowsSummaries.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRowsSummaries.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoRowsSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRowsSummaries.Location = New System.Drawing.Point(324, 3)
+        Me.rdoRowsSummaries.Location = New System.Drawing.Point(372, 3)
         Me.rdoRowsSummaries.Name = "rdoRowsSummaries"
         Me.rdoRowsSummaries.Size = New System.Drawing.Size(91, 29)
         Me.rdoRowsSummaries.TabIndex = 281
@@ -109,7 +88,6 @@ Partial Class ucrRows
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrRowGroups)
-        Me.Controls.Add(Me.rdoRpwsStyles)
         Me.Controls.Add(Me.rdoRowsGroups)
         Me.Controls.Add(Me.rdoRowsSummaries)
         Me.Controls.Add(Me.ucrPnlRows)
@@ -118,8 +96,6 @@ Partial Class ucrRows
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents rdoRpwsStyles As RadioButton
     Friend WithEvents rdoRowsGroups As RadioButton
     Friend WithEvents rdoRowsSummaries As RadioButton
     Friend WithEvents ucrPnlRows As UcrPanel

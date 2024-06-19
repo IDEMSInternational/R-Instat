@@ -361,6 +361,42 @@
     <Compile Include="sdgSummaryThemes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
+      <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Date\sdgCellFormatDateOptions.Designer.vb">
+      <DependentUpon>sdgCellFormatDateOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Date\sdgCellFormatDateOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Number\sdgCellFormatNumberOptions.Designer.vb">
+      <DependentUpon>sdgCellFormatNumberOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Number\sdgCellFormatNumberOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Text\sdgCellFormatTextOptions.Designer.vb">
+      <DependentUpon>sdgCellFormatTextOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Text\sdgCellFormatTextOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Text\ucrCellFormatEmail.Designer.vb">
+      <DependentUpon>ucrCellFormatEmail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Text\ucrCellFormatEmail.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\ucrCellFormats.Designer.vb">
+      <DependentUpon>ucrCellFormats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\ucrCellFormats.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\clsTablesUtils.vb" />
     <Compile Include="UserTables\dlgGeneralTable.Designer.vb">
       <DependentUpon>dlgGeneralTable.vb</DependentUpon>
@@ -3056,12 +3092,6 @@
     <Compile Include="UserTables\Cells\ucrCells.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserTables\Columns\ucrColumnFormats.Designer.vb">
-      <DependentUpon>ucrColumnFormats.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserTables\Columns\ucrColumnFormats.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="UserTables\Columns\ucrColumnLabels.Designer.vb">
       <DependentUpon>ucrColumnLabels.vb</DependentUpon>
     </Compile>
@@ -3308,6 +3338,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
+      <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\Date\sdgCellFormatDateOptions.resx">
+      <DependentUpon>sdgCellFormatDateOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\Number\sdgCellFormatNumberOptions.resx">
+      <DependentUpon>sdgCellFormatNumberOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\Text\sdgCellFormatTextOptions.resx">
+      <DependentUpon>sdgCellFormatTextOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\Text\ucrCellFormatEmail.resx">
+      <DependentUpon>ucrCellFormatEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\ucrCellFormats.resx">
+      <DependentUpon>ucrCellFormats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\dlgGeneralTable.resx">
       <DependentUpon>dlgGeneralTable.vb</DependentUpon>
@@ -5421,9 +5469,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\ucrCells.resx">
       <DependentUpon>ucrCells.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserTables\Columns\ucrColumnFormats.resx">
-      <DependentUpon>ucrColumnFormats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Columns\ucrColumnLabels.resx">
       <DependentUpon>ucrColumnLabels.vb</DependentUpon>

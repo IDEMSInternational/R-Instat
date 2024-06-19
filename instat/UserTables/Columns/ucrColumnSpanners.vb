@@ -19,7 +19,7 @@
         ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
         dataGridSpanners.Rows.Clear()
 
-        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand("tab_spanner", clsOperator)
+        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_spanner"}, clsOperator)
 
         For Each clsRParam As RParameter In lstRParams
 
