@@ -667,13 +667,14 @@ Public Class ucrDataView
                 frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
                 frmConvertToNumeric.ShowDialog()
                 ' Yes for "normal" convert and No for "ordinal" convert
-                If frmConvertToNumeric.DialogResult = DialogResult.Yes Then
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
-                ElseIf frmConvertToNumeric.DialogResult = DialogResult.No Then
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
-                ElseIf frmConvertToNumeric.DialogResult = DialogResult.Cancel Then
-                    Continue For
-                End If
+                Select Case frmConvertToNumeric.DialogResult
+                    Case DialogResult.Yes
+                        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                    Case DialogResult.No
+                        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
+                    Case DialogResult.Cancel
+                        Continue For
+                End Select
                 frmConvertToNumeric.Close()
             End If
         Next
