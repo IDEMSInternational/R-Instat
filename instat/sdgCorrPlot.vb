@@ -27,6 +27,7 @@ Public Class sdgCorrPlot
     Public strDataFrame As String
 
     Private Sub sdgCorrPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
@@ -165,6 +166,17 @@ Public Class sdgCorrPlot
             ucrNudMaximumSize.Visible = False
             lblMaximumSize.Visible = False
         End If
+    End Sub
+
+    Private Sub SetSelectedDefaultSequenceOption()
+        Select Case dlgCorrelation.enumDefaultSequenceOption
+            Case dlgCorrelation.DefaultSequenceOption.MultipleOption
+                ucrBaseSdgCorrPlot.iHelpTopicID = 188
+            Case dlgCorrelation.DefaultSequenceOption.TwoVariableOption
+                ucrBaseSdgCorrPlot.iHelpTopicID = 675
+            Case dlgCorrelation.DefaultSequenceOption.ClimaticOption
+                ucrBaseSdgCorrPlot.iHelpTopicID = 676
+        End Select
     End Sub
 
     Private Sub ucrInputComboGeom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboGeom.ControlValueChanged

@@ -18,6 +18,12 @@ Imports System.ComponentModel
 Imports instat.Translations
 
 Public Class dlgCalculator
+    Public enumCalculatorMode As String = CalculatorMode.Prepare
+    Public Enum CalculatorMode
+        Prepare
+        Structured
+    End Enum
+
     Private clsAttachFunction As New RFunction
     Private clsDetachFunction As New RFunction
     Private clsRemoveLabelsFunction As New RFunction
@@ -38,7 +44,7 @@ Public Class dlgCalculator
             SetDefaults()
             bFirstLoad = False
         End If
-
+        SetHelpOptions()
         ReopenDialog()
         TestOKEnabled()
         autoTranslate(Me)
@@ -252,6 +258,15 @@ Public Class dlgCalculator
             ucrCalc.ucrChkStoreScalar.Visible = False
             ucrCalc.ucrChkStoreScalar.Checked = False
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumCalculatorMode
+            Case CalculatorMode.Prepare
+                ucrBase.iHelpTopicID = 14
+            Case CalculatorMode.Structured
+                ucrBase.iHelpTopicID = 176
+        End Select
     End Sub
 
     Private Sub ucrCalc_Click() Handles ucrCalc.CheckBoxClick
