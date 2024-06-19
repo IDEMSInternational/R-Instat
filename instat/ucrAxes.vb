@@ -778,17 +778,20 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ucrPnlScales_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlScales.ControlValueChanged, ucrInputLowerLimit.ControlValueChanged, ucrInputUpperLimit.ControlValueChanged
-        If rdoScalesCustom.Checked AndAlso Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty Then
-            clsLimitsFunction.AddParameter("x", ucrInputLowerLimit.GetText(), iPosition:=0, bIncludeArgumentName:=False)
-            clsLimitsFunction.AddParameter("y", ucrInputUpperLimit.GetText(), iPosition:=1, bIncludeArgumentName:=False)
-            clsXYScaleContinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsLimitsFunction)
-        ElseIf rdoScalesCustom.Checked AndAlso Not ucrInputLowerLimit.IsEmpty AndAlso ucrInputUpperLimit.IsEmpty Then
-            clsLimitsFunction.AddParameter("x", ucrInputLowerLimit.GetText(), iPosition:=0, bIncludeArgumentName:=False)
-            clsLimitsFunction.AddParameter("y", "NA", iPosition:=1, bIncludeArgumentName:=False)
-            clsXYScaleContinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsLimitsFunction)
-        ElseIf rdoScalesCustom.Checked AndAlso ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty Then
-            clsLimitsFunction.AddParameter("x", "NA", iPosition:=0, bIncludeArgumentName:=False)
-            clsLimitsFunction.AddParameter("y", ucrInputUpperLimit.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+        If rdoScalesCustom.Checked Then
+            Dim xValue As String = "NA"
+            Dim yValue As String = "NA"
+
+            If Not ucrInputLowerLimit.IsEmpty Then
+                xValue = ucrInputLowerLimit.GetText()
+            End If
+
+            If Not ucrInputUpperLimit.IsEmpty Then
+                yValue = ucrInputUpperLimit.GetText()
+            End If
+
+            clsLimitsFunction.AddParameter("x", xValue, iPosition:=0, bIncludeArgumentName:=False)
+            clsLimitsFunction.AddParameter("y", yValue, iPosition:=1, bIncludeArgumentName:=False)
             clsXYScaleContinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsLimitsFunction)
         Else
             clsXYScaleContinuousFunction.RemoveParameterByName("limits")
