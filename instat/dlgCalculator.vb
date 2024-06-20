@@ -39,12 +39,13 @@ Public Class dlgCalculator
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            SetHelpOptions()
             InitialiseDialog()
             iBasicWidth = Me.Width
             SetDefaults()
             bFirstLoad = False
         End If
-        SetHelpOptions()
+
         ReopenDialog()
         TestOKEnabled()
         autoTranslate(Me)
@@ -75,6 +76,7 @@ Public Class dlgCalculator
                                            bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
                                            bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
         ucrBase.Visible = True
+        SetHelpOptions()
     End Sub
 
     Private Sub ReopenDialog()
@@ -129,6 +131,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
 
+        SetHelpOptions()
         AddHandler ucrCalc.ucrSelectorForCalculations.checkBoxScalar.CheckedChanged, AddressOf checkBoxScalar_CheckedChanged
 
     End Sub
@@ -156,6 +159,7 @@ Public Class dlgCalculator
         Else
             strDefaultKeyboard = strNewDefaultKeyboard
         End If
+        SetHelpOptions()
     End Sub
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
@@ -261,11 +265,17 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SetHelpOptions()
+        Dim strNewDefaultKeyboard As String
         Select Case enumCalculatorMode
             Case CalculatorMode.Prepare
                 ucrBase.iHelpTopicID = 14
             Case CalculatorMode.Structured
-                ucrBase.iHelpTopicID = 176
+                ucrCalc.ucrInputCalOptions.SetName("Circular")
+                'If strDefaultKeyboard = "Basic" Then
+                '    ucrBase.iHelpTopicID = 176
+                'ElseIf strDefaultKeyboard = "Circular" Then
+                '    ucrBase.iHelpTopicID = 677
+                'End If
         End Select
     End Sub
 
@@ -278,6 +288,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetHelpOptions()
         SetDefaults()
         TestOKEnabled()
     End Sub
@@ -285,7 +296,7 @@ Public Class dlgCalculator
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrCalc.NameChanged
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Functions"
-                Me.Width = iBasicWidth * 1.5
+                Me.Width = iBasicWidth * 1.4
                 ucrBase.iHelpTopicID = 439
             Case "Maths"
                 Me.Width = iBasicWidth * 1.38
@@ -337,7 +348,6 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth
         End Select
     End Sub
-
 End Class
 
 

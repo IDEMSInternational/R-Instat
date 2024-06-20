@@ -772,7 +772,7 @@ Public Class ucrCalculator
                 grpList.Visible = False
                 cmdRhelpList.Visible = False
                 cmdRhelpFunctions.Visible = True
-                Me.Size = New Size(iBasicWidth * 1.37, iBaseHeight)
+                Me.Size = New Size(iBasicWidth * 1.4, iBaseHeight)
             Case "Maths"
                 strPackageName = "stats"
                 grpFunctions.Visible = False

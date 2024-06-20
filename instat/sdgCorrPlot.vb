@@ -27,7 +27,7 @@ Public Class sdgCorrPlot
     Public strDataFrame As String
 
     Private Sub sdgCorrPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetHelpOptions()
+        SetSelectedDefaultSequenceOption()
         autoTranslate(Me)
     End Sub
 
