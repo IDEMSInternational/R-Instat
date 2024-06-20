@@ -28,6 +28,7 @@ Partial Class ucrCells
         Me.ucrCellsFootNotes = New instat.ucrCellsFootNotes()
         Me.ucrCellFormats = New instat.ucrCellFormats()
         Me.ucrPnlCells = New instat.UcrPanel()
+        Me.ucrCellStyles = New instat.ucrCellStyles()
         Me.SuspendLayout()
         '
         'rdoStyles
@@ -112,10 +113,18 @@ Partial Class ucrCells
         Me.ucrPnlCells.Size = New System.Drawing.Size(309, 29)
         Me.ucrPnlCells.TabIndex = 289
         '
+        'ucrCellStyles
+        '
+        Me.ucrCellStyles.Location = New System.Drawing.Point(7, 56)
+        Me.ucrCellStyles.Name = "ucrCellStyles"
+        Me.ucrCellStyles.Size = New System.Drawing.Size(609, 264)
+        Me.ucrCellStyles.TabIndex = 295
+        '
         'ucrCells
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrCellStyles)
         Me.Controls.Add(Me.ucrCellsFootNotes)
         Me.Controls.Add(Me.ucrCellFormats)
         Me.Controls.Add(Me.rdoStyles)
@@ -134,4 +143,5 @@ Partial Class ucrCells
     Friend WithEvents ucrPnlCells As UcrPanel
     Friend WithEvents ucrCellFormats As ucrCellFormats
     Friend WithEvents ucrCellsFootNotes As ucrCellsFootNotes
+    Friend WithEvents ucrCellStyles As ucrCellStyles
 End Class

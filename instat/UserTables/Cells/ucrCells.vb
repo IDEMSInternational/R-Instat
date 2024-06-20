@@ -13,13 +13,17 @@
             InitialiseDialog()
             bFirstload = False
         End If
+
         ucrCellFormats.Setup(strDataFrameName, clsOperator)
         ucrCellsFootNotes.Setup(strDataFrameName, clsOperator)
+        ucrCellStyles.Setup(strDataFrameName, clsOperator)
+
     End Sub
 
     Private Sub ucrPnlRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCells.ControlValueChanged
         ucrCellFormats.Visible = rdoFormat.Checked
         ucrCellsFootNotes.Visible = rdoFootNotes.Checked
+        ucrCellStyles.Visible = rdoStyles.Checked
     End Sub
 
     Public Sub SetValuesToOperator()

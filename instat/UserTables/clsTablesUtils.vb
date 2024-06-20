@@ -49,8 +49,7 @@ Public Class clsTablesUtils
         Return lstRFunctionParams
     End Function
 
-
-    Public Shared Sub RemoveRFunctionsFromOperator(strRCommandNames() As String, clsOperator As ROperator)
+    Public Shared Sub RemoveRFunctionsParamsWithRCommand(strRCommandNames() As String, clsOperator As ROperator)
         ' Remove all the previous footer parameters first
         Dim lstParams As New List(Of RParameter)
         For Each clsRParam As RParameter In clsOperator.clsParameters
@@ -76,6 +75,34 @@ Public Class clsTablesUtils
 
     End Sub
 
+    ''' <summary>
+    ''' E.g Finding cells_body in R Function tab_style( style = cell_fill(color = "gray85"),  locations = cells_body() ) 
+    ''' </summary>
+    ''' <param name="strRCommandName"> e.g tab_style </param>
+    ''' <param name="strParamName"> e.g locations</param>
+    ''' <param name="strParamValueRCommand">e.g cells_body</param>
+    ''' <param name="clsOperator">Operator that contains the parent strRCommandName</param>
+    ''' <returns></returns>
+    Public Shared Function FindRFunctionsParamsWithRParamValue(strRCommandName As String, strParamName As String, strParamValueRCommand As String, clsOperator As ROperator) As List(Of RParameter)
+
+        Dim lstRFunctionParams As List(Of RParameter) = FindRFunctionsParamsWithRCommand({strRCommandName}, clsOperator)
+        Dim lstRFunctionsParamsFound As New List(Of RParameter)
+
+        For Each clsRParam As RParameter In lstRFunctionParams
+            Dim rFunctionParent As RFunction = clsRParam.clsArgumentCodeStructure
+            If rFunctionParent.strRCommand = strRCommandName AndAlso rFunctionParent.ContainsParameter(strParamName) Then
+
+                Dim rFunctionchild As RFunction = rFunctionParent.GetParameter(strParamName).clsArgumentCodeStructure
+                If rFunctionchild.strRCommand = strParamValueRCommand Then
+                    lstRFunctionsParamsFound.Add(clsRParam)
+                End If
+
+            End If
+        Next
+        Return lstRFunctionsParamsFound
+    End Function
+
+
     ' TODO. Delete
     Public Shared Sub RemoveParameterFromOperator(strParameterNames() As String, clsOperator As ROperator)
         ' Remove all the previous footer parameters first
@@ -91,6 +118,7 @@ Public Class clsTablesUtils
     End Sub
 
 
+    'TODO. Delete
     Public Shared Sub SetGridTagsInOperator(dataGrid As DataGridView, strParameterName As String, clsOperator As ROperator)
 
         If dataGrid.Rows.Count = 0 Then

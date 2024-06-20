@@ -26,17 +26,16 @@ Partial Class ucrCellFormats
         Me.btnClearFormats = New System.Windows.Forms.Button()
         Me.btnEnterFormat = New System.Windows.Forms.Button()
         Me.dataGridFormats = New System.Windows.Forms.DataGridView()
-        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colRow = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFormat = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblRowExpression = New System.Windows.Forms.Label()
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.cboSelectFormat = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ucrReceiverMultipleCols = New instat.ucrReceiverMultiple()
         Me.ucrInputRows = New instat.ucrInputTextBox()
         Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colRow = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridFormats, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -77,51 +76,22 @@ Partial Class ucrCellFormats
         '
         Me.dataGridFormats.AllowUserToAddRows = False
         Me.dataGridFormats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridFormats.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colCodnition, Me.colLabel, Me.colRow, Me.colFormat})
+        Me.dataGridFormats.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colCodnition, Me.colLabel, Me.colRow})
         Me.dataGridFormats.Location = New System.Drawing.Point(234, 237)
         Me.dataGridFormats.Name = "dataGridFormats"
         Me.dataGridFormats.RowHeadersWidth = 62
         Me.dataGridFormats.Size = New System.Drawing.Size(361, 73)
         Me.dataGridFormats.TabIndex = 307
         '
-        'colCodnition
+        'lblRowExpression
         '
-        Me.colCodnition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colCodnition.HeaderText = "Format"
-        Me.colCodnition.MinimumWidth = 8
-        Me.colCodnition.Name = "colCodnition"
-        Me.colCodnition.Width = 64
-        '
-        'colLabel
-        '
-        Me.colLabel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colLabel.HeaderText = "Column(s)"
-        Me.colLabel.MinimumWidth = 8
-        Me.colLabel.Name = "colLabel"
-        Me.colLabel.Width = 78
-        '
-        'colRow
-        '
-        Me.colRow.HeaderText = "Row(s)"
-        Me.colRow.Name = "colRow"
-        '
-        'colFormat
-        '
-        Me.colFormat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colFormat.HeaderText = ""
-        Me.colFormat.MinimumWidth = 8
-        Me.colFormat.Name = "colFormat"
-        Me.colFormat.Width = 8
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(231, 140)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(134, 13)
-        Me.Label1.TabIndex = 320
-        Me.Label1.Text = "Row Expression (Optional):"
+        Me.lblRowExpression.AutoSize = True
+        Me.lblRowExpression.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRowExpression.Location = New System.Drawing.Point(231, 140)
+        Me.lblRowExpression.Name = "lblRowExpression"
+        Me.lblRowExpression.Size = New System.Drawing.Size(134, 13)
+        Me.lblRowExpression.TabIndex = 320
+        Me.lblRowExpression.Text = "Row Expression (Optional):"
         '
         'lblColumns
         '
@@ -189,13 +159,34 @@ Partial Class ucrCellFormats
         Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorCols.TabIndex = 308
         '
+        'colCodnition
+        '
+        Me.colCodnition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.colCodnition.HeaderText = "Format"
+        Me.colCodnition.MinimumWidth = 8
+        Me.colCodnition.Name = "colCodnition"
+        Me.colCodnition.Width = 64
+        '
+        'colLabel
+        '
+        Me.colLabel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.colLabel.HeaderText = "Column(s)"
+        Me.colLabel.MinimumWidth = 8
+        Me.colLabel.Name = "colLabel"
+        Me.colLabel.Width = 78
+        '
+        'colRow
+        '
+        Me.colRow.HeaderText = "Row(s)"
+        Me.colRow.Name = "colRow"
+        '
         'ucrCellFormats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.cboSelectFormat)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblRowExpression)
         Me.Controls.Add(Me.ucrReceiverMultipleCols)
         Me.Controls.Add(Me.ucrInputRows)
         Me.Controls.Add(Me.lblFormats)
@@ -216,7 +207,7 @@ Partial Class ucrCellFormats
     Friend WithEvents btnEnterFormat As Button
     Friend WithEvents dataGridFormats As DataGridView
     Friend WithEvents ucrInputRows As ucrInputTextBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblRowExpression As Label
     Friend WithEvents ucrReceiverMultipleCols As ucrReceiverMultiple
     Friend WithEvents lblColumns As Label
     Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
@@ -225,5 +216,4 @@ Partial Class ucrCellFormats
     Friend WithEvents colCodnition As DataGridViewTextBoxColumn
     Friend WithEvents colLabel As DataGridViewTextBoxColumn
     Friend WithEvents colRow As DataGridViewTextBoxColumn
-    Friend WithEvents colFormat As DataGridViewButtonColumn
 End Class

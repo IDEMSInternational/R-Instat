@@ -397,6 +397,12 @@
     <Compile Include="UserTables\Cells\Formats\ucrCellFormats.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\Cells\Styles\ucrCellStyles.Designer.vb">
+      <DependentUpon>ucrCellStyles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Styles\ucrCellStyles.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\clsTablesUtils.vb" />
     <Compile Include="UserTables\dlgGeneralTable.Designer.vb">
       <DependentUpon>dlgGeneralTable.vb</DependentUpon>
@@ -3134,6 +3140,12 @@
     <Compile Include="UserTables\Rows\ucrRowSummary.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\sdgTableStyles.Designer.vb">
+      <DependentUpon>sdgTableStyles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\sdgTableStyles.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UserTables\SourceNotes\ucrSourceNotes.Designer.vb">
       <DependentUpon>ucrSourceNotes.vb</DependentUpon>
     </Compile>
@@ -3356,6 +3368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Formats\ucrCellFormats.resx">
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Styles\ucrCellStyles.resx">
+      <DependentUpon>ucrCellStyles.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\dlgGeneralTable.resx">
       <DependentUpon>dlgGeneralTable.vb</DependentUpon>
@@ -5490,6 +5505,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Rows\ucrRowSummary.resx">
       <DependentUpon>ucrRowSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\sdgTableStyles.resx">
+      <DependentUpon>sdgTableStyles.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\SourceNotes\ucrSourceNotes.resx">
       <DependentUpon>ucrSourceNotes.vb</DependentUpon>

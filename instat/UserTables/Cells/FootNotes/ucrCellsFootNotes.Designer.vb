@@ -91,7 +91,7 @@ Partial Class ucrCellsFootNotes
         Me.Controls.Add(Me.dataGridCellFooterNotes)
         Me.Controls.Add(Me.lblFooterCellNotes)
         Me.Name = "ucrCellsFootNotes"
-        Me.Size = New System.Drawing.Size(641, 113)
+        Me.Size = New System.Drawing.Size(641, 270)
         CType(Me.dataGridCellFooterNotes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

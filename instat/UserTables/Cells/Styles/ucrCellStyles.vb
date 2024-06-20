@@ -1,14 +1,10 @@
-﻿Public Class ucrCellFormats
-
+﻿Public Class ucrCellStyles
     Private clsOperator As New ROperator
     Private bFirstload As Boolean = True
-
 
     Private Sub InitialiseControl()
         ucrReceiverMultipleCols.Selector = ucrSelectorCols
         ucrReceiverMultipleCols.SetMeAsReceiver()
-
-        cboSelectFormat.SelectedIndex = 0
     End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
@@ -24,7 +20,7 @@
 
         ' Clear and Set up the data grid with contents
         dataGridFormats.Rows.Clear()
-        SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRCommand({"fmt", "fmt_units", "fmt_number", "fmt_currency"}, clsOperator))
+        SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue("tab_style", "locations", "cells_body", clsOperator))
 
     End Sub
 
@@ -39,55 +35,42 @@
 
             Dim clsFormatRFunction As RFunction = clsRParam.clsArgumentCodeStructure
 
-            ' Create a new row that represents the tab_row_group() parameters
+            ' Create a new row that represents the tab_style() parameters
             Dim row As New DataGridViewRow
             row.CreateCells(dataGridFormats)
 
-            ' Set the function name
-            row.Cells(0).Value = clsFormatRFunction.strRCommand
-
             For Each clsRowGroupRParam As RParameter In clsFormatRFunction.clsParameters
-                If clsRowGroupRParam.strArgumentName = "columns" Then
+                If clsRowGroupRParam.strArgumentName = "style" Then
+                    row.Cells(0).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.strArgumentValue, False)
+                ElseIf clsRowGroupRParam.strArgumentName = "locations" Then
                     row.Cells(1).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.strArgumentValue, False)
-                ElseIf clsRowGroupRParam.strArgumentName = "rows" Then
-                    row.Cells(2).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.strArgumentValue, False)
                 End If
             Next
 
-            ' Tag and add the  tab_row_group() parameter function contents as a row
+            ' Tag and add the tab_style() parameter function contents as a row
             row.Tag = clsRParam
             dataGridFormats.Rows.Add(row)
 
         Next
     End Sub
 
-    Private Sub ucrReceiverMultipleCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlValueChanged
-        btnEnterFormat.Enabled = Not ucrReceiverMultipleCols.IsEmpty
+    Private Sub ucrReceiverMultipleCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlValueChanged, ucrInputRows.ControlValueChanged
+        btnEnterStyle.Enabled = Not ucrReceiverMultipleCols.IsEmpty AndAlso Not ucrInputRows.IsEmpty
     End Sub
 
-    Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnterFormat.Click
+    Private Sub btnEnterStyle_Click(sender As Object, e As EventArgs) Handles btnEnterStyle.Click
         Dim clsFormatRFunction As RFunction = Nothing
-        If cboSelectFormat.Text = "Text" Then
-            sdgCellFormatTextOptions.ShowDialog(Me.ParentForm)
-            clsFormatRFunction = sdgCellFormatTextOptions.GetNewUserInputAsRFunction()
+        sdgTableStyles.Setup()
+        sdgTableStyles.ShowDialog(Me.ParentForm)
+        'clsFormatRFunction = sdgCellFormatTextOptions.GetNewUserInputAsRFunction()
 
-        ElseIf cboSelectFormat.Text = "Number" Then
-            sdgCellFormatNumberOptions.ShowDialog(Me.ParentForm)
-            clsFormatRFunction = sdgCellFormatNumberOptions.GetNewUserInputAsRFunction()
+        'If clsFormatRFunction Is Nothing Then
+        '    Exit Sub
+        'End If
 
-        ElseIf cboSelectFormat.Text = "Date" Then
-            sdgCellFormatDateOptions.ShowDialog(Me.ParentForm)
-            clsFormatRFunction = sdgCellFormatDateOptions.GetNewUserInputAsRFunction()
-        ElseIf cboSelectFormat.Text = "Missing" Then
-        End If
-
-        If clsFormatRFunction Is Nothing Then
-            Exit Sub
-        End If
-
-        AddFormatParameterToGrid(clsFormatRFunction)
-        ucrReceiverMultipleCols.Clear()
-        ucrInputRows.SetName("")
+        'AddFormatParameterToGrid(clsFormatRFunction)
+        'ucrReceiverMultipleCols.Clear()
+        'ucrInputRows.SetName("")
 
     End Sub
 
@@ -106,7 +89,7 @@
         End If
 
         ' Create parameter with unique name
-        Dim clsRParam As New RParameter(strParameterName:="fmt_param" & (dataGridFormats.Rows.Count + 1), strParamValue:=clsFormatRFunction, bNewIncludeArgumentName:=False)
+        Dim clsRParam As New RParameter(strParameterName:="tab_style_cells_param" & (dataGridFormats.Rows.Count + 1), strParamValue:=clsFormatRFunction, bNewIncludeArgumentName:=False)
 
         ' Create row and its cells
         Dim row As New DataGridViewRow
@@ -128,19 +111,5 @@
         dataGridFormats.Rows.Clear()
     End Sub
 
-    Private Sub cboSelectFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSelectFormat.TextChanged
-        If cboSelectFormat.Text = "Text" OrElse cboSelectFormat.Text = "Missing" Then
-            'ucrReceiverMultipleCols.SetIncludedDataTypes({})
-            ucrReceiverMultipleCols.strSelectorHeading = "Select Columns"
-        ElseIf cboSelectFormat.Text = "Number" Then
-            'ucrReceiverMultipleCols.SetIncludedDataTypes({"numeric"})
-            ucrReceiverMultipleCols.strSelectorHeading = "Select Numerics"
-        ElseIf cboSelectFormat.Text = "Date" Then
-            'ucrReceiverMultipleCols.SetIncludedDataTypes({"date"})
-            ucrReceiverMultipleCols.strSelectorHeading = "Select Dates"
-        End If
-
-        ucrReceiverMultipleCols.SetMeAsReceiver()
-    End Sub
 
 End Class
