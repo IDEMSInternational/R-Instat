@@ -93,6 +93,18 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverAnnualRain.Selector = ucrSelectorDefineAnnualRain
         ucrReceiverAnnualRain.SetParameterIsString()
 
+        ucrReceiverStartRainStatus.SetParameter(New RParameter("start_rains_status_column", 14))
+        ucrReceiverStartRainStatus.Selector = ucrSelectorDefineAnnualRain
+        ucrReceiverStartRainStatus.SetParameterIsString()
+
+        ucrReceiverEndRainStatus.SetParameter(New RParameter("end_rains_status_column", 15))
+        ucrReceiverEndRainStatus.Selector = ucrSelectorDefineAnnualRain
+        ucrReceiverEndRainStatus.SetParameterIsString()
+
+        ucrReceiverEndSeasonStatus.SetParameter(New RParameter("end_season_status_column", 16))
+        ucrReceiverEndSeasonStatus.Selector = ucrSelectorDefineAnnualRain
+        ucrReceiverEndSeasonStatus.SetParameterIsString()
+
         ucrReceiverStationCrop.SetParameter(New RParameter("station_col", 1))
         ucrReceiverStationCrop.Selector = ucrSelectorCropProp
         ucrReceiverStationCrop.SetParameterIsString()
@@ -122,11 +134,9 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverSeasonYear.Selector = ucrSelectorSeasonStartProp
         ucrReceiverSeasonYear.SetParameterIsString()
 
-
         ucrReceiverSeasonPlantingDay.SetParameter(New RParameter("plant_day_col", 3))
         ucrReceiverSeasonPlantingDay.Selector = ucrSelectorSeasonStartProp
         ucrReceiverSeasonPlantingDay.SetParameterIsString()
-
 
         ucrReceiverPlantingDayCondition.SetParameter(New RParameter("plant_day_cond_col", 5))
         ucrReceiverPlantingDayCondition.Selector = ucrSelectorSeasonStartProp
@@ -177,7 +187,6 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverMonthMonthly.SetParameter(New RParameter("month_col", 3))
         ucrReceiverMonthMonthly.Selector = ucrSelecetorMonthlyTemp
         ucrReceiverMonthMonthly.SetParameterIsString()
-
 
         ucrReceiverMeanminMontly.SetParameter(New RParameter("mean_tmin_col", 4))
         ucrReceiverMeanminMontly.Selector = ucrSelecetorMonthlyTemp
@@ -231,7 +240,6 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverMinMinAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("min_tmin_col", 4), iAdditionalPairNo:=1)
         ucrReceiverMaxMinAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("max_tmin_col", 5), iAdditionalPairNo:=1)
 
-
         ucrReceiverAnnualRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrReceiverEndRainsDate.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrReceiverEndRainsDOY.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
@@ -246,6 +254,9 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverStation.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrReceiverYear.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrSelectorDefineAnnualRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverStartRainStatus.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverEndRainStatus.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        ucrReceiverEndSeasonStatus.SetRCode(clsExportRinstatToBucketFunction, bReset)
 
         ucrReceiverStationCrop.SetRCode(clsReformatCropSuccessFunction, bReset)
         ucrReceiverTotalRain.SetRCode(clsReformatCropSuccessFunction, bReset)
