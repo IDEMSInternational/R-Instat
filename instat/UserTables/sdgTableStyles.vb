@@ -192,23 +192,33 @@ Public Class sdgTableStyles
         '---------------------------------------------------
         ' Cell Border
         '-----------------
-        Dim dctBorderSpace As New Dictionary(Of String, String) From {
-         {"Default", "NULL"},
-         {"Left", Chr(34) & "left" & Chr(34)},
-         {"Right", Chr(34) & "right" & Chr(34)},
-         {"Top", Chr(34) & "top" & Chr(34)},
-         {"Bottom", Chr(34) & "bottom" & Chr(34)}
-     }
-        'ucrCboBorderSides.SetParameter(New RParameter("sides", iNewPosition:=0))
-        'ucrCboBorderSides.SetRDefault("NULL")
+        ucrChkBorderLeft.SetText("Left")
+        ucrChkBorderLeft.SetParameter(New RParameter("left", iNewPosition:=0, bNewIncludeArgumentName:=False))
+        ucrChkBorderLeft.SetValuesCheckedAndUnchecked("left", "NULL")
+        ucrChkBorderLeft.SetRDefault("NULL")
 
+        ucrChkBorderRight.SetText("Right")
+        ucrChkBorderRight.SetParameter(New RParameter("right", iNewPosition:=1, bNewIncludeArgumentName:=False))
+        ucrChkBorderRight.SetValuesCheckedAndUnchecked("right", "NULL")
+        ucrChkBorderRight.SetRDefault("NULL")
 
+        ucrChkBorderTop.SetText("Top")
+        ucrChkBorderTop.SetParameter(New RParameter("top", iNewPosition:=2, bNewIncludeArgumentName:=False))
+        ucrChkBorderTop.SetValuesCheckedAndUnchecked("top", "NULL")
+        ucrChkBorderTop.SetRDefault("NULL")
+
+        ucrChkBorderBottom.SetText("Bottom")
+        ucrChkBorderBottom.SetParameter(New RParameter("bottom", iNewPosition:=3, bNewIncludeArgumentName:=False))
+        ucrChkBorderBottom.SetValuesCheckedAndUnchecked("bottom", "NULL")
+        ucrChkBorderBottom.SetRDefault("NULL")
 
         '-----------------
-        ucrCboColorBackground.SetDropDownStyleAsNonEditable()
-        ucrCboColorBackground.SetParameter(New RParameter("color", iNewPosition:=0))
-        ucrCboColorBackground.SetColours()
-        ucrCboColorBackground.SetRDefault("NULL")
+        ucrCboBorderColor.SetDropDownStyleAsNonEditable()
+        ucrCboBorderColor.SetParameter(New RParameter("color", iNewPosition:=1))
+        ucrCboBorderColor.SetColours()
+        ucrCboBorderColor.SetRDefault("NULL")
+
+        ' Left here
 
         '-----------------
 
