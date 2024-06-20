@@ -535,7 +535,7 @@ Public Class dlgClimograph
 
         clsDivide1Operator.SetOperation("/")
         clsDivide1Operator.AddParameter("left", "~ .", iPosition:=0, bIncludeArgumentName:=False)
-        clsDivide1Operator.AddParameter("rigth", clsROperatorParameter:=clsDivideOperator, iPosition:=1, bIncludeArgumentName:=False)
+        clsDivide1Operator.AddParameter("right", clsROperatorParameter:=clsDivideOperator, iPosition:=1, bIncludeArgumentName:=False)
 
         clsStarOperator.SetOperation("*")
         clsStarOperator.AddParameter("right", strScale, iPosition:=1, bIncludeArgumentName:=False)
@@ -660,6 +660,17 @@ Public Class dlgClimograph
                                 clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
                                 clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        AutoFacetStation()
+        AddRemoveFacetClimograph()
+        AddRemoveFacetsWalterLieth()
+        AddRemoveGeomBar()
+        AddRemoveGeomLine1()
+        AddRemoveGeomLines()
+        AddRemoveSecondaryAxis()
+        AddRemoveGeomRibbon()
+        AddRemoveGeomTextBar()
+        AddRemoveGeomTextTmax()
+        AddRemoveGeomTextTmin()
         bResetSubdialog = False
     End Sub
 
@@ -1050,6 +1061,7 @@ Public Class dlgClimograph
                         clsStarOperator.AddParameter("left", ucrReceiverElement1.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
                         clsBaseOperator.AddParameter("geom_text1", clsRFunctionParameter:=clsGeomTextTmaxStarFunction, iPosition:=6, bIncludeArgumentName:=False)
                     Else
+                        clsAesGeomTextTmaxFunction.AddParameter("y", ucrReceiverElement1.GetVariableNames(False), iPosition:=0)
                         clsBaseOperator.AddParameter("geom_text1", clsRFunctionParameter:=clsGeomTextTmaxFunction, iPosition:=6, bIncludeArgumentName:=False)
                     End If
                 Else
@@ -1246,6 +1258,7 @@ Public Class dlgClimograph
                     clsBaseOperator.RemoveParameterByName("geom_tile")
                 End If
             Else
+                clsBarAesFunction.RemoveParameterByName("y")
                 clsBaseOperator.RemoveParameterByName("geom_tile")
                 clsBaseOperator.RemoveParameterByName("geom_bar")
                 clsBaseOperator.RemoveParameterByName("labs")
