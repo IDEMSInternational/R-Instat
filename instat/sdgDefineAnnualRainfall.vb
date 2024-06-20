@@ -216,6 +216,22 @@ Public Class sdgDefineAnnualRainfall
         clsReformatTempSummariesFunction = clsNewReformatTempSummariesFunction
         clsExportRinstatToBucketFunction = clsNewExportRinstatToBucketFunction
 
+        ucrReceiverSeasonalLength.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("season_length_col", 12), iAdditionalPairNo:=1)
+        ucrReceiverEndSeasonDate.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("end_season_date_col", 8), iAdditionalPairNo:=1)
+        ucrReceiverEndSeasonDOY.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("end_season_doy_col", 7), iAdditionalPairNo:=1)
+        ucrReceiverStartRainDOY.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("start_rains_doy_col", 3), iAdditionalPairNo:=1)
+        ucrReceiverStartRainDate.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("start_rains_date_col", 4), iAdditionalPairNo:=1)
+        ucrReceiverEndRainsDate.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("end_rains_date_col", 6), iAdditionalPairNo:=1)
+        ucrReceiverEndRainsDOY.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("end_rains_date_col", 6), iAdditionalPairNo:=1)
+
+        ucrReceiverMinMaxAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("min_tmax_col", 7), iAdditionalPairNo:=1)
+        ucrReceiverMaxMaxAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("max_tmax_col", 8), iAdditionalPairNo:=1)
+        ucrReceiverMeanMaxAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("mean_tmax_col", 6), iAdditionalPairNo:=1)
+        ucrReceiverMeanAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("mean_tmin_col", 3), iAdditionalPairNo:=1)
+        ucrReceiverMinMinAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("min_tmin_col", 4), iAdditionalPairNo:=1)
+        ucrReceiverMaxMinAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("max_tmin_col", 5), iAdditionalPairNo:=1)
+
+
         ucrReceiverAnnualRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrReceiverEndRainsDate.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrReceiverEndRainsDOY.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
