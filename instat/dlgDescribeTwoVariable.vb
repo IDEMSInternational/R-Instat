@@ -173,7 +173,9 @@ Public Class dlgDescribeTwoVariable
         ucrPnlDescribe.AddParameterValuesCondition(rdoTwoVariable, "checked", "customize")
         ucrPnlDescribe.AddParameterValuesCondition(rdoSkim, "checked", "skim")
         ucrPnlDescribe.AddParameterValuesCondition(rdoThreeVariable, "checked", "three_variable")
-        'rdoThreeVariable.Enabled = False
+
+        rdoThreeVariable.Enabled = False
+
         ucrpnlPercent.AddRadioButton(rdoOCol)
         ucrpnlPercent.AddRadioButton(rdoORow)
         ucrpnlPercent.AddRadioButton(rdoOCell)
@@ -192,7 +194,6 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverThreeVariableSecondFactor.SetParameter(New RParameter("second_three_varible_factor", 0, bNewIncludeArgumentName:=False))
         ucrReceiverThreeVariableSecondFactor.SetParameterIsString()
         ucrReceiverThreeVariableSecondFactor.Selector = ucrSelectorDescribeTwoVar
-        'ucrReceiverThreeVariableSecondFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverThreeVariableSecondFactor.SetLinkedDisplayControl(lblThreeVariableSecondFactor)
 
         ucrSaveTable.SetDataFrameSelector(ucrSelectorDescribeTwoVar.ucrAvailableDataFrames)
@@ -412,7 +413,6 @@ Public Class dlgDescribeTwoVariable
 
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=3)
-        'clsSummaryTableFunction.SetAssignTo("summary_table")
 
         clsTildOperator.SetOperation("~")
         clsTildOperator.AddParameter("right", clsRFunctionParameter:=clsSummaryTableFunction)
@@ -434,7 +434,6 @@ Public Class dlgDescribeTwoVariable
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=1)
-        'clsSummaryOperator.AddParameter("gttbl", clsRFunctionParameter:=clsgtFunction, iPosition:=1)
 
         clsPivotOperator.SetOperation("%>%")
         clsPivotOperator.AddParameter("left", clsRFunctionParameter:=clsPivotWiderFunction)
@@ -443,8 +442,6 @@ Public Class dlgDescribeTwoVariable
 
         clsMapOperator.SetOperation("%>%")
         clsMapOperator.AddParameter("left", clsROperatorParameter:=clsTildOperator)
-        'clsMapOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        'clsMapOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=1)
         clsMapOperator.AddParameter("right", clsROperatorParameter:=clsPivotOperator)
         clsMapOperator.bBrackets = False
 
@@ -596,10 +593,6 @@ Public Class dlgDescribeTwoVariable
             If IsFactorByNumeric() Then
                 sdgSummaries.SetRFunction(clsSummariesListFunction, clsSummaryTableFunction, clsCombineFunction, ucrSelectorDescribeTwoVar, bResetSubdialog)
             End If
-            'ElseIf rdoThreeVariable.Checked Then
-            '    'If IsFactorByNumeric() Then
-            '    '    sdgSummaries.SetRFunction(clsSummariesListFunction, clsSummaryTableFunction, clsCombineFunction, ucrSelectorDescribeTwoVar, bResetSubdialog)
-            '    'End If
         End If
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
