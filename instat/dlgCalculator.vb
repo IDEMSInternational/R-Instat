@@ -39,13 +39,12 @@ Public Class dlgCalculator
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
-            SetHelpOptions()
             InitialiseDialog()
             iBasicWidth = Me.Width
             SetDefaults()
             bFirstLoad = False
         End If
-
+        SetHelpOptions()
         ReopenDialog()
         TestOKEnabled()
         autoTranslate(Me)
@@ -80,13 +79,14 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ReopenDialog()
+        '  SetHelpOptions()
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScalar(True)
         ucrCalc.ucrChkStoreScalar.Checked = False
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 14
+        ucrBase.iHelpTopicID = 176
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
         ucrCalc.ucrTryCalculator.SetIsCommand()
         ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
@@ -131,7 +131,6 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
 
-        SetHelpOptions()
         AddHandler ucrCalc.ucrSelectorForCalculations.checkBoxScalar.CheckedChanged, AddressOf checkBoxScalar_CheckedChanged
 
     End Sub
@@ -159,7 +158,6 @@ Public Class dlgCalculator
         Else
             strDefaultKeyboard = strNewDefaultKeyboard
         End If
-        SetHelpOptions()
     End Sub
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
@@ -222,7 +220,6 @@ Public Class dlgCalculator
 
         ' Test if OK button can be enabled
         TestOKEnabled()
-
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
@@ -265,17 +262,13 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SetHelpOptions()
-        Dim strNewDefaultKeyboard As String
         Select Case enumCalculatorMode
             Case CalculatorMode.Prepare
+                ucrCalc.ucrInputCalOptions.SetName("Basic")
                 ucrBase.iHelpTopicID = 14
             Case CalculatorMode.Structured
                 ucrCalc.ucrInputCalOptions.SetName("Circular")
-                'If strDefaultKeyboard = "Basic" Then
-                '    ucrBase.iHelpTopicID = 176
-                'ElseIf strDefaultKeyboard = "Circular" Then
-                '    ucrBase.iHelpTopicID = 677
-                'End If
+                ucrBase.iHelpTopicID = 677
         End Select
     End Sub
 
@@ -288,7 +281,6 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetHelpOptions()
         SetDefaults()
         TestOKEnabled()
     End Sub
