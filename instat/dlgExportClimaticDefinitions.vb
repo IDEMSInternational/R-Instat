@@ -68,16 +68,6 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverCropData.strSelectorHeading = "Data Sets"
         ucrReceiverCropData.SetLinkedDisplayControl(lblCropData)
 
-        ucrReceiverMinTemp.SetParameter(New RParameter("tmin", 4))
-        ucrReceiverMinTemp.Selector = ucrSelectorExportDefinitions
-        ucrReceiverMinTemp.SetParameterIsString()
-        ucrReceiverMinTemp.SetLinkedDisplayControl(lblMinTemp)
-
-        ucrReceiverMaxTemp.SetParameter(New RParameter("tmax", 5))
-        ucrReceiverMaxTemp.Selector = ucrSelectorExportDefinitions
-        ucrReceiverMaxTemp.SetParameterIsString()
-        ucrReceiverMaxTemp.SetLinkedDisplayControl(lblMaxTemp)
-
         ucrReceiverRain.SetParameter(New RParameter("rain", 6))
         ucrReceiverRain.Selector = ucrSelectorExportDefinitions
         ucrReceiverRain.SetParameterIsString()
@@ -189,8 +179,6 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverData.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverDataYear.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverDataYearMonth.SetRCode(clsExportRinstatToBucketFunction, bReset)
-        ucrReceiverMaxTemp.SetRCode(clsExportRinstatToBucketFunction, bReset)
-        ucrReceiverMinTemp.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverMonth.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverRain.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverYear.SetRCode(clsExportRinstatToBucketFunction, bReset)
@@ -227,18 +215,12 @@ Public Class dlgExportClimaticDefinitions
             ElseIf ucrChkAnnualRainfall.Checked AndAlso
                    Not ucrReceiverRain.IsEmpty Then
                 ucrBase.OKEnabled(True)
-            ElseIf (ucrChkAnnualTemp.Checked OrElse ucrChkMonthlyTemp.Checked) AndAlso
-                   Not ucrReceiverMinTemp.IsEmpty Then
-                ucrBase.OKEnabled(True)
             ElseIf (ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked) AndAlso
                    Not ucrReceiverDataYear.IsEmpty Then
                 ucrBase.OKEnabled(True)
             ElseIf ucrChkMonthlyTemp.Checked AndAlso
                    Not ucrReceiverMonth.IsEmpty AndAlso
                    Not ucrReceiverDataYearMonth.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            ElseIf (ucrChkAnnualTemp.Checked OrElse ucrChkMonthlyTemp.Checked) AndAlso
-                   Not ucrReceiverMaxTemp.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -360,13 +342,10 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub EnableDisableDefineButton()
-        cmdDefine.Enabled = ucrChkIncludeSummaryData.Checked AndAlso (ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked OrElse ucrChkCropSuccessProp.Checked OrElse ucrChkExtremes.Checked OrElse ucrChkMonthlyTemp.Checked OrElse ucrChkSeasonStartProp.Checked)
         ucrReceiverDataYearMonth.Visible = ucrChkMonthlyTemp.Checked
         ucrReceiverDataYear.Visible = ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked
         ucrReceiverRain.Visible = ucrChkAnnualRainfall.Checked
         ucrReceiverCropData.Visible = ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked
-        ucrReceiverMaxTemp.Visible = ucrChkMonthlyTemp.Checked OrElse ucrChkAnnualTemp.Checked
-        ucrReceiverMinTemp.Visible = ucrChkMonthlyTemp.Checked OrElse ucrChkAnnualTemp.Checked
 
     End Sub
 
@@ -388,8 +367,7 @@ Public Class dlgExportClimaticDefinitions
 
     End Sub
 
-    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged,
-            ucrReceiverMaxTemp.ControlContentsChanged, ucrReceiverMinTemp.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged,
+    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged,
             ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrChkSeasonStartProp.ControlContentsChanged, ucrInputCountry.ControlContentsChanged, ucrInputStationID.ControlContentsChanged, ucrInputDefinitionsID.ControlContentsChanged, ucrChkIncludeSummaryData.ControlContentsChanged,
             ucrChkMonthlyTemp.ControlContentsChanged, ucrChkCropSuccessProp.ControlContentsChanged, ucrChkAnnualTemp.ControlContentsChanged, ucrChkAnnualRainfall.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged, ucrSelectorExportDefinitions.ControlContentsChanged
         TestOkEnabled()
