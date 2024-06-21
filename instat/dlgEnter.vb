@@ -17,14 +17,11 @@
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgEnter
-    Dim dataset As DataFrame
-    Dim clsAttach As New RFunction
-    Dim clsDetach As New RFunction
-    Dim clsLength As New RFunction
-    Public bFirstLoad As Boolean = True
-    Public strOutput As String
+    Private clsAttach As New RFunction
+    Private clsDetach As New RFunction
+    Private clsAttachScalarsFunction, clsDetachScalarsFunction, clsScalarsDataFuntion, clsAddScalarFunction As New RFunction
+    Private bFirstLoad As Boolean = True
     Private strPackageName As String
-    Public clsCommands As New RFunction
 
     Private Sub dlgEnter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -37,26 +34,55 @@ Public Class dlgEnter
         TestOKEnabled()
         autoTranslate(Me)
     End Sub
+
     Private Sub SetEntryHistory()
         ucrReceiverForEnterCalculation.AddtoCombobox(ucrReceiverForEnterCalculation.GetText)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 458
+
+        ucrSelectorEnter.SetItemType("scalar")
+        ucrSelectorEnter.ShowCheckBoxScalar(True)
+        ucrSelectorEnter.HideShowAddOrDataOptionsOrListView(bAddVisible:=False, bDataOptionsVisible:=False, bListVariables:=False)
+
+        ucrReceiverForEnterCalculation.strSelectorHeading = "Scalars"
+        ucrReceiverForEnterCalculation.Selector = ucrSelectorEnter
+
         ucrTryModelling.SetReceiver(ucrReceiverForEnterCalculation)
         ucrTryModelling.SetIsCommand()
         ucrTryModelling.StrvecOutputRequired()
+
+
+        clsAddScalarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_scalar")
+
+        clsScalarsDataFuntion.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_scalars")
+        clsScalarsDataFuntion.SetAssignTo("scalars")
+
+
+        clsAttachScalarsFunction.SetRCommand("attach")
+        clsDetachScalarsFunction.SetRCommand("detach")
+        clsAttachScalarsFunction.AddParameter("what", clsRFunctionParameter:=clsScalarsDataFuntion)
+        clsDetachScalarsFunction.AddParameter("name", "scalars")
+        clsDetachScalarsFunction.AddParameter("unload", "TRUE")
+
         clsAttach.SetRCommand("attach")
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorEnter.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.SetRCommand("detach")
-        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
+
         ucrBase.clsRsyntax.SetCommandString("")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach, 0)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
+
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach, 0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 1)
+
         ucrSaveEnterResultInto.SetPrefix("enter")
-        ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
-        ucrSaveEnterResultInto.SetIsComboBox()
         ucrSaveEnterResultInto.SetSaveTypeAsColumn()
+        ucrSaveEnterResultInto.SetIsComboBox()
         ucrSaveEnterResultInto.SetLabelText("Enter Result Into:")
+        ucrSaveEnterResultInto.SetDataFrameSelector(ucrSelectorEnter.ucrAvailableDataFrames)
 
         'Adding tooltips for the buttons
         ttEnter.SetToolTip(cmdColon, "A subset, e.g. letters[1:4] gives a, b, c, d.")
@@ -71,13 +97,25 @@ Public Class dlgEnter
         ttEnter.SetToolTip(cmdConcantenateFunction, "Combines arguments to form a single vector, e.g. c(1:3 8) is 1, 2, 3, 8.")
         ttEnter.SetToolTip(cmdExponential, "For scientific notation, e.g. 1.5E-1 = 0.15.")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
+
+        AddHandler ucrSelectorEnter.checkBoxScalar.CheckedChanged, AddressOf checkBoxScalar_CheckedChanged
+
     End Sub
+
+    Private Sub checkBoxScalar_CheckedChanged()
+        If ucrSelectorEnter.checkBoxScalar.Checked Then
+            ucrSelectorEnter.HideShowAddOrDataOptionsOrListView(bAddVisible:=True, bDataOptionsVisible:=False, bListVariables:=True)
+        Else
+            ucrSelectorEnter.HideShowAddOrDataOptionsOrListView(bAddVisible:=False, bDataOptionsVisible:=False, bListVariables:=False)
+        End If
+    End Sub
+
     Private Sub SetDefaults()
         chkShowEnterArguments.Checked = False
-        ucrDataFrameEnter.Reset()
+        ucrSelectorEnter.Reset()
+        ucrSelectorEnter.checkBoxScalar.Checked = False
         ucrReceiverForEnterCalculation.Clear()
+        ucrReceiverForEnterCalculation.SetMeAsReceiver()
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
         ucrSaveEnterResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
     End Sub
@@ -94,7 +132,7 @@ Public Class dlgEnter
 
     Private Sub SaveResults()
         If ucrSaveEnterResultInto.IsComplete Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveEnterResultInto.GetText(), strTempColumn:=ucrSaveEnterResultInto.GetText(), strTempDataframe:=ucrDataFrameEnter.cboAvailableDataFrames.Text, bRequireCorrectLength:=False)
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveEnterResultInto.GetText(), strTempColumn:=ucrSaveEnterResultInto.GetText(), strTempDataframe:=ucrSelectorEnter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bRequireCorrectLength:=False)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         Else
@@ -382,5 +420,12 @@ Public Class dlgEnter
         If Not String.IsNullOrEmpty(strPackageName) Then
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName), bReplace:=False)
         End If
+    End Sub
+
+    Private Sub ucrSaveEnterResultInto_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveEnterResultInto.ControlValueChanged
+        Dim strDataFrame As String = ucrSelectorEnter.ucrAvailableDataFrames.strCurrDataFrame
+
+        clsDetach.AddParameter("name", strDataFrame)
+        clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
     End Sub
 End Class
