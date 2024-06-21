@@ -53,12 +53,12 @@ Public Class dlgEnter
         ucrTryModelling.SetIsCommand()
         ucrTryModelling.StrvecOutputRequired()
 
+        ucrChkStoreScalar.SetText("Store Scalar")
 
         clsAddScalarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_scalar")
 
         clsScalarsDataFuntion.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_scalars")
         clsScalarsDataFuntion.SetAssignTo("scalars")
-
 
         clsAttachScalarsFunction.SetRCommand("attach")
         clsDetachScalarsFunction.SetRCommand("detach")
@@ -112,6 +112,7 @@ Public Class dlgEnter
 
     Private Sub SetDefaults()
         chkShowEnterArguments.Checked = False
+        ucrChkStoreScalar.Checked = False
         ucrSelectorEnter.Reset()
         ucrSelectorEnter.checkBoxScalar.Checked = False
         ucrReceiverForEnterCalculation.Clear()
@@ -119,9 +120,11 @@ Public Class dlgEnter
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
         ucrSaveEnterResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
     End Sub
+
     Private Sub ReopenDialog()
         SaveResults()
     End Sub
+
     Private Sub TestOKEnabled()
         If Not ucrReceiverForEnterCalculation.IsEmpty AndAlso ucrSaveEnterResultInto.IsComplete Then
             ucrBase.OKEnabled(True)
@@ -142,25 +145,13 @@ Public Class dlgEnter
         End If
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        'Dim strScript As String = ""
-        'Dim strFunc As String
-        'clsAttach.AddParameter("what", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
-        'strFunc = clsAttach.ToScript(strScript)
-        ' frmMain.clsRLink.RunScript(strScript & strFunc)
-    End Sub
-
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'Dim strScript As String = ""
-        ' Dim strFunc As String
-        'clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
-        'strFunc = clsDetach.ToScript(strScript)
-        'frmMain.clsRLink.RunScript(strScript & strFunc)
         SetEntryHistory()
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForEnterCalculation.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForEnterCalculation.GetVariableNames(False))
+        ucrChkStoreScalar.Checked = False
         TestOKEnabled()
     End Sub
 
@@ -231,7 +222,6 @@ Public Class dlgEnter
         End If
         TestOKEnabled()
     End Sub
-
 
     Private Sub cmdLETTERS_Click(sender As Object, e As EventArgs) Handles cmdLogical.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.logical(c( ))", 3)
@@ -427,5 +417,21 @@ Public Class dlgEnter
 
         clsDetach.AddParameter("name", strDataFrame)
         clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
+        clsAddScalarFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub ucrChkStoreScalar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStoreScalar.ControlValueChanged
+        If ucrChkStoreScalar.Checked AndAlso Not ucrReceiverForEnterCalculation.IsEmpty Then
+            ucrSaveEnterResultInto.btnColumnPosition.Enabled = False
+            ucrSaveEnterResultInto.btnColumnPosition.Visible = True
+            Dim strResut As String = ucrSaveEnterResultInto.GetText
+            clsAddScalarFunction.AddParameter("scalar_name", Chr(34) & strResut & Chr(34), iPosition:=1)
+            clsAddScalarFunction.AddParameter("scalar_value", strResut, iPosition:=2)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 2)
+        Else
+            ucrSaveEnterResultInto.btnColumnPosition.Enabled = True
+            ucrSaveEnterResultInto.btnColumnPosition.Visible = True
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddScalarFunction)
+        End If
     End Sub
 End Class

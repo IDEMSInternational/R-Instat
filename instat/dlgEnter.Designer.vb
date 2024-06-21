@@ -84,6 +84,7 @@ Partial Class dlgEnter
         Me.ContextMenuStripBase = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuBase = New System.Windows.Forms.ToolStripMenuItem()
         Me.ucrSelectorEnter = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkStoreScalar = New instat.ucrCheck()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
         Me.ContextMenuStripBase.SuspendLayout()
@@ -94,7 +95,7 @@ Partial Class dlgEnter
         Me.chkShowEnterArguments.AutoSize = True
         Me.chkShowEnterArguments.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.chkShowEnterArguments.Location = New System.Drawing.Point(460, 27)
-        Me.chkShowEnterArguments.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.chkShowEnterArguments.Margin = New System.Windows.Forms.Padding(4)
         Me.chkShowEnterArguments.Name = "chkShowEnterArguments"
         Me.chkShowEnterArguments.Size = New System.Drawing.Size(161, 24)
         Me.chkShowEnterArguments.TabIndex = 155
@@ -531,7 +532,7 @@ Partial Class dlgEnter
         'ucrSaveEnterResultInto
         '
         Me.ucrSaveEnterResultInto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveEnterResultInto.Location = New System.Drawing.Point(10, 401)
+        Me.ucrSaveEnterResultInto.Location = New System.Drawing.Point(12, 390)
         Me.ucrSaveEnterResultInto.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
         Me.ucrSaveEnterResultInto.Size = New System.Drawing.Size(420, 33)
@@ -541,7 +542,7 @@ Partial Class dlgEnter
         '
         Me.ucrTryModelling.AutoSize = True
         Me.ucrTryModelling.Location = New System.Drawing.Point(-2, 340)
-        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.RunCommandAsMultipleLines = False
         Me.ucrTryModelling.Size = New System.Drawing.Size(720, 55)
@@ -564,8 +565,8 @@ Partial Class dlgEnter
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 454)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 468)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 0
@@ -575,7 +576,7 @@ Partial Class dlgEnter
         Me.cmdRHelp.AutoSize = True
         Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripBase
         Me.cmdRHelp.Location = New System.Drawing.Point(789, 280)
-        Me.cmdRHelp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdRHelp.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdRHelp.Name = "cmdRHelp"
         Me.cmdRHelp.Size = New System.Drawing.Size(102, 34)
         Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuStripBase
@@ -608,12 +609,23 @@ Partial Class dlgEnter
         Me.ucrSelectorEnter.Size = New System.Drawing.Size(318, 274)
         Me.ucrSelectorEnter.TabIndex = 214
         '
+        'ucrChkStoreScalar
+        '
+        Me.ucrChkStoreScalar.AutoSize = True
+        Me.ucrChkStoreScalar.Checked = False
+        Me.ucrChkStoreScalar.Location = New System.Drawing.Point(13, 426)
+        Me.ucrChkStoreScalar.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkStoreScalar.Name = "ucrChkStoreScalar"
+        Me.ucrChkStoreScalar.Size = New System.Drawing.Size(199, 34)
+        Me.ucrChkStoreScalar.TabIndex = 215
+        '
         'dlgEnter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(910, 534)
+        Me.ClientSize = New System.Drawing.Size(910, 553)
+        Me.Controls.Add(Me.ucrChkStoreScalar)
         Me.Controls.Add(Me.ucrSelectorEnter)
         Me.Controls.Add(Me.cmdRHelp)
         Me.Controls.Add(Me.ucrSaveEnterResultInto)
@@ -626,7 +638,7 @@ Partial Class dlgEnter
         Me.Controls.Add(Me.ucrReceiverForEnterCalculation)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgEnter"
@@ -685,4 +697,5 @@ Partial Class dlgEnter
     Friend WithEvents ContextMenuStripBase As ContextMenuStrip
     Friend WithEvents ToolStripMenuBase As ToolStripMenuItem
     Friend WithEvents ucrSelectorEnter As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrChkStoreScalar As ucrCheck
 End Class
