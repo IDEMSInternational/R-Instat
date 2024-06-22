@@ -709,9 +709,9 @@ Partial Class ucrDataView
         Me.lblAdvanced.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblAdvanced.Location = New System.Drawing.Point(5, 4)
         Me.lblAdvanced.Name = "lblAdvanced"
-        Me.lblAdvanced.Size = New System.Drawing.Size(114, 25)
+        Me.lblAdvanced.Size = New System.Drawing.Size(108, 25)
         Me.lblAdvanced.TabIndex = 0
-        Me.lblAdvanced.Text = "Advanced:"
+        Me.lblAdvanced.Text = "Advanced"
         '
         'linkStartPasteScriptData
         '
