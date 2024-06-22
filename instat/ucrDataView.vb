@@ -661,24 +661,20 @@ Public Class ucrDataView
                 GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
             Else
                 Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.CheckHasLabels(strColumn)
-                If bCheckLabels Then
-                    frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
-                    frmConvertToNumeric.SetColumnName(strColumn)
-                    frmConvertToNumeric.CheckLabels(bCheckLabels)
-                    frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
-                    frmConvertToNumeric.ShowDialog()
-                    ' Yes for "normal" convert and No for "ordinal" convert
-                    Select Case frmConvertToNumeric.DialogResult
-                        Case DialogResult.Yes
-                            GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
-                        Case DialogResult.No
-                            GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
-                        Case DialogResult.Cancel
-                            Continue For
-                    End Select
-                Else
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
-                End If
+                frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
+                frmConvertToNumeric.SetColumnName(strColumn)
+                frmConvertToNumeric.CheckLabels(bCheckLabels)
+                frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
+                frmConvertToNumeric.ShowDialog()
+                ' Yes for "normal" convert and No for "ordinal" convert
+                Select Case frmConvertToNumeric.DialogResult
+                    Case DialogResult.Yes
+                        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                    Case DialogResult.No
+                        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
+                    Case DialogResult.Cancel
+                        Continue For
+                End Select
                 frmConvertToNumeric.Close()
             End If
         Next
