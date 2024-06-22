@@ -1027,12 +1027,12 @@ Public Class ucrDataView
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "19")
     End Sub
 
-    Private Sub linkStartSwapDataScriptWindow_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
-        frmMain.mnuViewSwapDataAndMetadata.Enabled = frmMain.mnuViewSwapDataAndScript.Checked
-        frmMain.mnuViewSwapDataAndScript.Checked = Not frmMain.mnuViewSwapDataAndScript.Checked
-        frmMain.UpdateSwapDataAndScript()
-        frmMain.UpdateLayout()
-    End Sub
+    'Private Sub linkStartSwapDataScriptWindow_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
+    '    frmMain.mnuViewSwapDataAndMetadata.Enabled = frmMain.mnuViewSwapDataAndScript.Checked
+    '    frmMain.mnuViewSwapDataAndScript.Checked = Not frmMain.mnuViewSwapDataAndScript.Checked
+    '    frmMain.UpdateSwapDataAndScript()
+    '    frmMain.UpdateLayout()
+    'End Sub
 
     Private Sub linkStartRestoreBackup_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartRestoreBackup.LinkClicked
         dlgRestoreBackup.ShowDialog()
@@ -1044,5 +1044,12 @@ Public Class ucrDataView
 
     Private Sub linkStartPasteData_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartPasteData.LinkClicked
         dlgPasteNewColumns.ShowDialog()
+    End Sub
+
+    Private Sub linkStartPasteScriptData_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartPasteScriptData.LinkClicked
+        frmMain.mnuViewSwapDataAndMetadata.Enabled = frmMain.mnuViewSwapDataAndScript.Checked
+        frmMain.mnuViewSwapDataAndScript.Checked = Not frmMain.mnuViewSwapDataAndScript.Checked
+        frmMain.UpdateSwapDataAndScript()
+        frmMain.UpdateLayout()
     End Sub
 End Class

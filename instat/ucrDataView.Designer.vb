@@ -123,7 +123,7 @@ Partial Class ucrDataView
         Me.panelSectionAdvanced = New System.Windows.Forms.Panel()
         Me.linkStartAddRPackage = New System.Windows.Forms.LinkLabel()
         Me.lblAdvanced = New System.Windows.Forms.Label()
-        Me.linkStartPasteData = New System.Windows.Forms.LinkLabel()
+        Me.linkStartPasteScriptData = New System.Windows.Forms.LinkLabel()
         Me.linkStartRestoreBackup = New System.Windows.Forms.LinkLabel()
         Me.panelSectionRecent = New System.Windows.Forms.Panel()
         Me.lblRecent = New System.Windows.Forms.Label()
@@ -134,6 +134,7 @@ Partial Class ucrDataView
         Me.lblHelp = New System.Windows.Forms.Label()
         Me.linkRInstatResourcessite = New System.Windows.Forms.LinkLabel()
         Me.panelSectionStart = New System.Windows.Forms.Panel()
+        Me.linkStartPasteData = New System.Windows.Forms.LinkLabel()
         Me.lblStart = New System.Windows.Forms.Label()
         Me.linkStartNewDataFrame = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenFile = New System.Windows.Forms.LinkLabel()
@@ -681,9 +682,9 @@ Partial Class ucrDataView
         '
         Me.panelSectionAdvanced.Controls.Add(Me.linkStartAddRPackage)
         Me.panelSectionAdvanced.Controls.Add(Me.lblAdvanced)
-        Me.panelSectionAdvanced.Controls.Add(Me.linkStartPasteData)
+        Me.panelSectionAdvanced.Controls.Add(Me.linkStartPasteScriptData)
         Me.panelSectionAdvanced.Controls.Add(Me.linkStartRestoreBackup)
-        Me.panelSectionAdvanced.Location = New System.Drawing.Point(26, 410)
+        Me.panelSectionAdvanced.Location = New System.Drawing.Point(26, 422)
         Me.panelSectionAdvanced.Name = "panelSectionAdvanced"
         Me.panelSectionAdvanced.Size = New System.Drawing.Size(374, 103)
         Me.panelSectionAdvanced.TabIndex = 12
@@ -712,18 +713,18 @@ Partial Class ucrDataView
         Me.lblAdvanced.TabIndex = 0
         Me.lblAdvanced.Text = "Advanced:"
         '
-        'linkStartPasteData
+        'linkStartPasteScriptData
         '
-        Me.linkStartPasteData.ActiveLinkColor = System.Drawing.Color.Red
-        Me.linkStartPasteData.AutoSize = True
-        Me.linkStartPasteData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartPasteData.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartPasteData.Location = New System.Drawing.Point(7, 33)
-        Me.linkStartPasteData.Name = "linkStartPasteData"
-        Me.linkStartPasteData.Size = New System.Drawing.Size(134, 13)
-        Me.linkStartPasteData.TabIndex = 3
-        Me.linkStartPasteData.TabStop = True
-        Me.linkStartPasteData.Text = "Paste Script from Clipboard"
+        Me.linkStartPasteScriptData.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkStartPasteScriptData.AutoSize = True
+        Me.linkStartPasteScriptData.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartPasteScriptData.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartPasteScriptData.Location = New System.Drawing.Point(7, 33)
+        Me.linkStartPasteScriptData.Name = "linkStartPasteScriptData"
+        Me.linkStartPasteScriptData.Size = New System.Drawing.Size(134, 13)
+        Me.linkStartPasteScriptData.TabIndex = 3
+        Me.linkStartPasteScriptData.TabStop = True
+        Me.linkStartPasteScriptData.Text = "Paste Script from Clipboard"
         '
         'linkStartRestoreBackup
         '
@@ -744,7 +745,7 @@ Partial Class ucrDataView
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.panelSectionRecent.Controls.Add(Me.lblRecent)
         Me.panelSectionRecent.Controls.Add(Me.panelRecentMenuItems)
-        Me.panelSectionRecent.Location = New System.Drawing.Point(28, 107)
+        Me.panelSectionRecent.Location = New System.Drawing.Point(28, 122)
         Me.panelSectionRecent.Name = "panelSectionRecent"
         Me.panelSectionRecent.Size = New System.Drawing.Size(179, 186)
         Me.panelSectionRecent.TabIndex = 13
@@ -775,7 +776,7 @@ Partial Class ucrDataView
         Me.panelSectionHelp.Controls.Add(Me.linkHelpGettingStarted)
         Me.panelSectionHelp.Controls.Add(Me.lblHelp)
         Me.panelSectionHelp.Controls.Add(Me.linkRInstatResourcessite)
-        Me.panelSectionHelp.Location = New System.Drawing.Point(28, 302)
+        Me.panelSectionHelp.Location = New System.Drawing.Point(28, 313)
         Me.panelSectionHelp.Name = "panelSectionHelp"
         Me.panelSectionHelp.Size = New System.Drawing.Size(374, 102)
         Me.panelSectionHelp.TabIndex = 12
@@ -832,14 +833,28 @@ Partial Class ucrDataView
         '
         'panelSectionStart
         '
+        Me.panelSectionStart.Controls.Add(Me.linkStartPasteData)
         Me.panelSectionStart.Controls.Add(Me.lblStart)
         Me.panelSectionStart.Controls.Add(Me.linkStartNewDataFrame)
         Me.panelSectionStart.Controls.Add(Me.linkStartOpenFile)
         Me.panelSectionStart.Controls.Add(Me.linkStartOpenLibrary)
         Me.panelSectionStart.Location = New System.Drawing.Point(28, 6)
         Me.panelSectionStart.Name = "panelSectionStart"
-        Me.panelSectionStart.Size = New System.Drawing.Size(374, 95)
+        Me.panelSectionStart.Size = New System.Drawing.Size(374, 110)
         Me.panelSectionStart.TabIndex = 11
+        '
+        'linkStartPasteData
+        '
+        Me.linkStartPasteData.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkStartPasteData.AutoSize = True
+        Me.linkStartPasteData.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartPasteData.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartPasteData.Location = New System.Drawing.Point(6, 92)
+        Me.linkStartPasteData.Name = "linkStartPasteData"
+        Me.linkStartPasteData.Size = New System.Drawing.Size(134, 13)
+        Me.linkStartPasteData.TabIndex = 6
+        Me.linkStartPasteData.TabStop = True
+        Me.linkStartPasteData.Text = "Paste Script from Clipboard"
         '
         'lblStart
         '
@@ -1199,7 +1214,8 @@ Partial Class ucrDataView
     Friend WithEvents linkHelpGettingStarted As LinkLabel
     Friend WithEvents panelSectionAdvanced As Panel
     Friend WithEvents lblAdvanced As Label
-    Friend WithEvents linkStartPasteData As LinkLabel
+    Friend WithEvents linkStartPasteScriptData As LinkLabel
     Friend WithEvents linkStartRestoreBackup As LinkLabel
     Friend WithEvents linkStartAddRPackage As LinkLabel
+    Friend WithEvents linkStartPasteData As LinkLabel
 End Class
