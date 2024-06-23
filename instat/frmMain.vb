@@ -1323,7 +1323,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuHelpHistFAQ_Click(sender As Object, e As EventArgs) Handles mnuHelpFAQ.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "290")
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "324")
     End Sub
 
     Private Sub mnuHelpGetingStarted_Click(sender As Object, e As EventArgs) Handles mnuHelpGetingStarted.Click

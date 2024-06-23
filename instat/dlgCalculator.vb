@@ -79,14 +79,12 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ReopenDialog()
-        '  SetHelpOptions()
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.ShowCheckBoxScalar(True)
         ucrCalc.ucrChkStoreScalar.Checked = False
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 176
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
         ucrCalc.ucrTryCalculator.SetIsCommand()
         ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
@@ -289,7 +287,7 @@ Public Class dlgCalculator
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Functions"
                 Me.Width = iBasicWidth * 1.4
-                ucrBase.iHelpTopicID = 439
+                ucrBase.iHelpTopicID = 167
             Case "Maths"
                 Me.Width = iBasicWidth * 1.38
                 ucrBase.iHelpTopicID = 126
@@ -326,7 +324,7 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth * 2.56
             Case "Goodness of Fit"
                 Me.Width = iBasicWidth * 1.27
-                ucrBase.iHelpTopicID = 598
+                ucrBase.iHelpTopicID = 717
             Case "Integer"
                 Me.Width = iBasicWidth * 1.5
                 ucrBase.iHelpTopicID = 463
