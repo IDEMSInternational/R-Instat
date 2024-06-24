@@ -27,9 +27,8 @@
     End Sub
 
     Public Sub SetValuesToOperator()
-        ' TODO. All controls to set values
         ucrCellFormats.SetValuesToOperator()
-
+        ucrCellStyles.SetValuesToOperator()
     End Sub
 
 End Class

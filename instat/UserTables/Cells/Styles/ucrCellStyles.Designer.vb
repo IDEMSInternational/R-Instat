@@ -23,7 +23,6 @@ Partial Class ucrCellStyles
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblRowExpression = New System.Windows.Forms.Label()
-        Me.ucrReceiverMultipleCols = New instat.ucrReceiverMultiple()
         Me.ucrInputRows = New instat.ucrInputTextBox()
         Me.lblFormats = New System.Windows.Forms.Label()
         Me.btnClearFormats = New System.Windows.Forms.Button()
@@ -31,8 +30,8 @@ Partial Class ucrCellStyles
         Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
         Me.dataGridFormats = New System.Windows.Forms.DataGridView()
         Me.btnEnterStyle = New System.Windows.Forms.Button()
+        Me.ucrReceiverSingleCol = New instat.ucrReceiverSingle()
         Me.colStyles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCells = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridFormats, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -40,24 +39,11 @@ Partial Class ucrCellStyles
         '
         Me.lblRowExpression.AutoSize = True
         Me.lblRowExpression.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRowExpression.Location = New System.Drawing.Point(239, 87)
+        Me.lblRowExpression.Location = New System.Drawing.Point(239, 53)
         Me.lblRowExpression.Name = "lblRowExpression"
         Me.lblRowExpression.Size = New System.Drawing.Size(86, 13)
         Me.lblRowExpression.TabIndex = 329
         Me.lblRowExpression.Text = "Row Expression:"
-        '
-        'ucrReceiverMultipleCols
-        '
-        Me.ucrReceiverMultipleCols.AutoSize = True
-        Me.ucrReceiverMultipleCols.frmParent = Nothing
-        Me.ucrReceiverMultipleCols.Location = New System.Drawing.Point(242, 23)
-        Me.ucrReceiverMultipleCols.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleCols.Name = "ucrReceiverMultipleCols"
-        Me.ucrReceiverMultipleCols.Selector = Nothing
-        Me.ucrReceiverMultipleCols.Size = New System.Drawing.Size(120, 55)
-        Me.ucrReceiverMultipleCols.strNcFilePath = ""
-        Me.ucrReceiverMultipleCols.TabIndex = 327
-        Me.ucrReceiverMultipleCols.ucrSelector = Nothing
         '
         'ucrInputRows
         '
@@ -65,7 +51,7 @@ Partial Class ucrCellStyles
         Me.ucrInputRows.AutoSize = True
         Me.ucrInputRows.IsMultiline = False
         Me.ucrInputRows.IsReadOnly = False
-        Me.ucrInputRows.Location = New System.Drawing.Point(242, 103)
+        Me.ucrInputRows.Location = New System.Drawing.Point(242, 69)
         Me.ucrInputRows.Name = "ucrInputRows"
         Me.ucrInputRows.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputRows.TabIndex = 328
@@ -74,7 +60,7 @@ Partial Class ucrCellStyles
         '
         Me.lblFormats.AutoSize = True
         Me.lblFormats.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFormats.Location = New System.Drawing.Point(239, 167)
+        Me.lblFormats.Location = New System.Drawing.Point(239, 134)
         Me.lblFormats.Name = "lblFormats"
         Me.lblFormats.Size = New System.Drawing.Size(38, 13)
         Me.lblFormats.TabIndex = 326
@@ -83,7 +69,7 @@ Partial Class ucrCellStyles
         'btnClearFormats
         '
         Me.btnClearFormats.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearFormats.Location = New System.Drawing.Point(523, 158)
+        Me.btnClearFormats.Location = New System.Drawing.Point(523, 125)
         Me.btnClearFormats.Name = "btnClearFormats"
         Me.btnClearFormats.Size = New System.Drawing.Size(75, 23)
         Me.btnClearFormats.TabIndex = 325
@@ -117,8 +103,8 @@ Partial Class ucrCellStyles
         '
         Me.dataGridFormats.AllowUserToAddRows = False
         Me.dataGridFormats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridFormats.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colStyles, Me.colCells})
-        Me.dataGridFormats.Location = New System.Drawing.Point(242, 184)
+        Me.dataGridFormats.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colStyles})
+        Me.dataGridFormats.Location = New System.Drawing.Point(242, 151)
         Me.dataGridFormats.Name = "dataGridFormats"
         Me.dataGridFormats.RowHeadersWidth = 62
         Me.dataGridFormats.Size = New System.Drawing.Size(361, 73)
@@ -128,7 +114,7 @@ Partial Class ucrCellStyles
         '
         Me.btnEnterStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnEnterStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnEnterStyle.Location = New System.Drawing.Point(242, 135)
+        Me.btnEnterStyle.Location = New System.Drawing.Point(242, 101)
         Me.btnEnterStyle.Name = "btnEnterStyle"
         Me.btnEnterStyle.Size = New System.Drawing.Size(126, 23)
         Me.btnEnterStyle.TabIndex = 323
@@ -136,28 +122,32 @@ Partial Class ucrCellStyles
         Me.btnEnterStyle.Text = "Enter Style"
         Me.btnEnterStyle.UseVisualStyleBackColor = True
         '
+        'ucrReceiverSingleCol
+        '
+        Me.ucrReceiverSingleCol.AutoSize = True
+        Me.ucrReceiverSingleCol.frmParent = Nothing
+        Me.ucrReceiverSingleCol.Location = New System.Drawing.Point(242, 20)
+        Me.ucrReceiverSingleCol.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSingleCol.Name = "ucrReceiverSingleCol"
+        Me.ucrReceiverSingleCol.Selector = Nothing
+        Me.ucrReceiverSingleCol.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSingleCol.strNcFilePath = ""
+        Me.ucrReceiverSingleCol.TabIndex = 330
+        Me.ucrReceiverSingleCol.ucrSelector = Nothing
+        '
         'colStyles
         '
-        Me.colStyles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colStyles.HeaderText = "Style"
+        Me.colStyles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.colStyles.HeaderText = "Style Expressions"
         Me.colStyles.MinimumWidth = 8
         Me.colStyles.Name = "colStyles"
-        Me.colStyles.Width = 55
-        '
-        'colCells
-        '
-        Me.colCells.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colCells.HeaderText = "Cell(s)"
-        Me.colCells.MinimumWidth = 8
-        Me.colCells.Name = "colCells"
-        Me.colCells.Width = 60
         '
         'ucrCellStyles
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverSingleCol)
         Me.Controls.Add(Me.lblRowExpression)
-        Me.Controls.Add(Me.ucrReceiverMultipleCols)
         Me.Controls.Add(Me.ucrInputRows)
         Me.Controls.Add(Me.lblFormats)
         Me.Controls.Add(Me.btnClearFormats)
@@ -166,7 +156,7 @@ Partial Class ucrCellStyles
         Me.Controls.Add(Me.ucrSelectorCols)
         Me.Controls.Add(Me.dataGridFormats)
         Me.Name = "ucrCellStyles"
-        Me.Size = New System.Drawing.Size(609, 264)
+        Me.Size = New System.Drawing.Size(609, 231)
         CType(Me.dataGridFormats, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -174,7 +164,6 @@ Partial Class ucrCellStyles
     End Sub
 
     Friend WithEvents lblRowExpression As Label
-    Friend WithEvents ucrReceiverMultipleCols As ucrReceiverMultiple
     Friend WithEvents ucrInputRows As ucrInputTextBox
     Friend WithEvents lblFormats As Label
     Friend WithEvents btnClearFormats As Button
@@ -182,6 +171,6 @@ Partial Class ucrCellStyles
     Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
     Friend WithEvents dataGridFormats As DataGridView
     Friend WithEvents btnEnterStyle As Button
+    Friend WithEvents ucrReceiverSingleCol As ucrReceiverSingle
     Friend WithEvents colStyles As DataGridViewTextBoxColumn
-    Friend WithEvents colCells As DataGridViewTextBoxColumn
 End Class

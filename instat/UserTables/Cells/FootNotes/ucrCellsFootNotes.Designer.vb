@@ -37,7 +37,7 @@ Partial Class ucrCellsFootNotes
         Me.dataGridCellFooterNotes.AllowUserToDeleteRows = False
         Me.dataGridCellFooterNotes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dataGridCellFooterNotes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colFooterNoteText, Me.colFooterColExpression, Me.colFooterRowExpression, Me.colFooterFormat})
-        Me.dataGridCellFooterNotes.Location = New System.Drawing.Point(4, 22)
+        Me.dataGridCellFooterNotes.Location = New System.Drawing.Point(0, 18)
         Me.dataGridCellFooterNotes.Name = "dataGridCellFooterNotes"
         Me.dataGridCellFooterNotes.RowHeadersWidth = 62
         Me.dataGridCellFooterNotes.Size = New System.Drawing.Size(630, 55)
@@ -78,7 +78,7 @@ Partial Class ucrCellsFootNotes
         'lblFooterCellNotes
         '
         Me.lblFooterCellNotes.AutoSize = True
-        Me.lblFooterCellNotes.Location = New System.Drawing.Point(7, 4)
+        Me.lblFooterCellNotes.Location = New System.Drawing.Point(3, 0)
         Me.lblFooterCellNotes.Name = "lblFooterCellNotes"
         Me.lblFooterCellNotes.Size = New System.Drawing.Size(91, 13)
         Me.lblFooterCellNotes.TabIndex = 6
@@ -91,7 +91,7 @@ Partial Class ucrCellsFootNotes
         Me.Controls.Add(Me.dataGridCellFooterNotes)
         Me.Controls.Add(Me.lblFooterCellNotes)
         Me.Name = "ucrCellsFootNotes"
-        Me.Size = New System.Drawing.Size(641, 270)
+        Me.Size = New System.Drawing.Size(637, 77)
         CType(Me.dataGridCellFooterNotes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

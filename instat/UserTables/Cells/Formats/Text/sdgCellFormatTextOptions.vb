@@ -1,4 +1,5 @@
-﻿Public Class sdgCellFormatTextOptions
+﻿Imports instat.Translations
+Public Class sdgCellFormatTextOptions
     Private clsUnitsFormatRFunction, clsCustomFormatRFunction As New RFunction
     Private bFirstload As Boolean = True
     Private bUserMadeChanges As Boolean = False
@@ -15,6 +16,7 @@
 
         bUserMadeChanges = False
         bUserClickedReturn = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

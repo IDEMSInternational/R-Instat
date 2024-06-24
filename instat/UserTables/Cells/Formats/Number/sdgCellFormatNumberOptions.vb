@@ -33,7 +33,7 @@
         ucrChkSignificantFigures.SetText("Change Significant Figures")
         ucrChkSignificantFigures.AddToLinkedControls(ucrNudSignificantFigures, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
 
-        ucrNudSignificantFigures.SetParameter(New RParameter(" n_sigfig", 4))
+        ucrNudSignificantFigures.SetParameter(New RParameter("n_sigfig", 4))
         '--------------
 
 
@@ -48,7 +48,7 @@
         ucrChkSeparatorMark.SetText("Change Digits Separator Mark")
         ucrChkSeparatorMark.AddToLinkedControls(ucrInputSeperatorMark, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=",")
 
-        ucrInputSeperatorMark.SetParameter(New RParameter(" sep_mark", 14))
+        ucrInputSeperatorMark.SetParameter(New RParameter("sep_mark", 14))
         '---------------
 
         '---------------

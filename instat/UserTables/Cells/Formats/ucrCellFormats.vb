@@ -61,7 +61,7 @@
         Next
     End Sub
 
-    Private Sub ucrReceiverMultipleCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlValueChanged
+    Private Sub ucrReceiverMultipleCols_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged
         btnEnterFormat.Enabled = Not ucrReceiverMultipleCols.IsEmpty
     End Sub
 
@@ -70,15 +70,14 @@
         If cboSelectFormat.Text = "Text" Then
             sdgCellFormatTextOptions.ShowDialog(Me.ParentForm)
             clsFormatRFunction = sdgCellFormatTextOptions.GetNewUserInputAsRFunction()
-
         ElseIf cboSelectFormat.Text = "Number" Then
             sdgCellFormatNumberOptions.ShowDialog(Me.ParentForm)
             clsFormatRFunction = sdgCellFormatNumberOptions.GetNewUserInputAsRFunction()
-
         ElseIf cboSelectFormat.Text = "Date" Then
             sdgCellFormatDateOptions.ShowDialog(Me.ParentForm)
             clsFormatRFunction = sdgCellFormatDateOptions.GetNewUserInputAsRFunction()
         ElseIf cboSelectFormat.Text = "Missing" Then
+            ' TODO
         End If
 
         If clsFormatRFunction Is Nothing Then

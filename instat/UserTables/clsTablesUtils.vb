@@ -24,6 +24,7 @@ Public Class clsTablesUtils
         sdgTableOptionsTextFormat.ShowDialog(owner)
     End Sub
 
+    'TODO. Delete
     Public Shared Function FindRFunctionsWithRCommand(strRCommandName As String, clsOperator As ROperator) As List(Of RFunction)
         Dim lstRFunctions As New List(Of RFunction)
         For Each clsRParam As RParameter In clsOperator.clsParameters

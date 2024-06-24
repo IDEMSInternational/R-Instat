@@ -53,7 +53,7 @@ Public Class sdgTableOptions
     ''' <param name="clsNewOperator"></param>
     Public Sub Setup(strDataFrameName As String, clsNewOperator As ROperator)
 
-        If clsTablesUtils.FindRFunctionsWithRCommand("gt", clsNewOperator).Count = 0 Then
+        If clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt"}, clsNewOperator).Count = 0 Then
             MsgBox("Developer Error: Parameter with 'gt' as name MUST be set up before using this subdialog")
             Exit Sub
         End If

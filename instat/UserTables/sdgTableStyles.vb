@@ -2,10 +2,26 @@
 
 Public Class sdgTableStyles
 
-    Private clsCellTextRFunction, clsCellFillRFunction As New RFunction
+    Private clsStyleRFunction, clsCellTextRFunction, clsCellFillRFunction, clsCellBordersRFunction, clsCellBorderSidesRFunction As New RFunction
     Private bFirstload As Boolean = True
+    Private bUserMadeChanges As Boolean = False
+    Private bUserClickedReturn As Boolean = False
+    Private bSetDefaults As Boolean = True
 
     Private Sub sdgTableTextFormatOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstload Then
+            InitialiseDialog()
+            bFirstload = False
+        End If
+
+        If bSetDefaults Then
+            SetDefaults()
+        End If
+
+        SetRCode()
+
+        bUserMadeChanges = False
+        bUserClickedReturn = False
         autoTranslate(Me)
     End Sub
 
@@ -37,6 +53,7 @@ Public Class sdgTableStyles
 
         '-----------------
         ucrTxtFontSize.SetParameter(New RParameter("size", iNewPosition:=2))
+        ucrTxtFontSize.AddQuotesIfUnrecognised = False
         ucrTxtFontSize.SetRDefault("NULL")
         '-----------------
 
@@ -98,7 +115,7 @@ Public Class sdgTableStyles
 
         '-----------------
         Dim dctUnderlineType As New Dictionary(Of String, String) From {
-            {"Default", "NULL"},
+            {"None", "NULL"},
             {"Underline", Chr(34) & "underline" & Chr(34)},
             {"Overline", Chr(34) & "overline" & Chr(34)},
             {"Line-through", Chr(34) & "line-through" & Chr(34)}
@@ -135,10 +152,10 @@ Public Class sdgTableStyles
             {"Lowercase", Chr(34) & "lowercase" & Chr(34)},
             {"Capitalize", Chr(34) & "capitalize" & Chr(34)}
         }
-        ucrInputCboTransform.SetDropDownStyleAsNonEditable()
-        ucrInputCboTransform.SetParameter(New RParameter("transform", iNewPosition:=9))
-        ucrInputCboTransform.SetItems(dctTransform)
-        ucrInputCboTransform.SetRDefault("NULL")
+        ucrCboTransform.SetDropDownStyleAsNonEditable()
+        ucrCboTransform.SetParameter(New RParameter("transform", iNewPosition:=9))
+        ucrCboTransform.SetItems(dctTransform)
+        ucrCboTransform.SetRDefault("NULL")
         '-----------------
 
         '-----------------
@@ -161,8 +178,8 @@ Public Class sdgTableStyles
         '-----------------
 
         '-----------------
-        ucrTxtIndent.SetParameter(New RParameter("indent", iNewPosition:=11))
-        ucrTxtIndent.SetRDefault("NULL")
+        ucrNudIndent.SetParameter(New RParameter("indent", iNewPosition:=11))
+        ucrNudIndent.SetRDefault(0)
         '-----------------
 
         '-----------------
@@ -175,10 +192,10 @@ Public Class sdgTableStyles
             {"Pre-line", Chr(34) & "pre-line" & Chr(34)},
             {"Break-spaces", Chr(34) & "break-spaces" & Chr(34)}
         }
-        ucrCboStretch.SetDropDownStyleAsNonEditable()
-        ucrCboStretch.SetParameter(New RParameter("transform", iNewPosition:=11))
-        ucrCboStretch.SetItems(dctWhiteSpace)
-        ucrCboStretch.SetRDefault("NULL")
+        ucrCboWhiteSpace.SetDropDownStyleAsNonEditable()
+        ucrCboWhiteSpace.SetParameter(New RParameter("transform", iNewPosition:=11))
+        ucrCboWhiteSpace.SetItems(dctWhiteSpace)
+        ucrCboWhiteSpace.SetRDefault("NULL")
         '-----------------
 
         '---------------------------------------------------
@@ -194,22 +211,22 @@ Public Class sdgTableStyles
         '-----------------
         ucrChkBorderLeft.SetText("Left")
         ucrChkBorderLeft.SetParameter(New RParameter("left", iNewPosition:=0, bNewIncludeArgumentName:=False))
-        ucrChkBorderLeft.SetValuesCheckedAndUnchecked("left", "NULL")
+        ucrChkBorderLeft.SetValuesCheckedAndUnchecked(Chr(34) & "left" & Chr(34), "NULL")
         ucrChkBorderLeft.SetRDefault("NULL")
 
         ucrChkBorderRight.SetText("Right")
         ucrChkBorderRight.SetParameter(New RParameter("right", iNewPosition:=1, bNewIncludeArgumentName:=False))
-        ucrChkBorderRight.SetValuesCheckedAndUnchecked("right", "NULL")
+        ucrChkBorderRight.SetValuesCheckedAndUnchecked(Chr(34) & "right" & Chr(34), "NULL")
         ucrChkBorderRight.SetRDefault("NULL")
 
         ucrChkBorderTop.SetText("Top")
         ucrChkBorderTop.SetParameter(New RParameter("top", iNewPosition:=2, bNewIncludeArgumentName:=False))
-        ucrChkBorderTop.SetValuesCheckedAndUnchecked("top", "NULL")
+        ucrChkBorderTop.SetValuesCheckedAndUnchecked(Chr(34) & "top" & Chr(34), "NULL")
         ucrChkBorderTop.SetRDefault("NULL")
 
         ucrChkBorderBottom.SetText("Bottom")
         ucrChkBorderBottom.SetParameter(New RParameter("bottom", iNewPosition:=3, bNewIncludeArgumentName:=False))
-        ucrChkBorderBottom.SetValuesCheckedAndUnchecked("bottom", "NULL")
+        ucrChkBorderBottom.SetValuesCheckedAndUnchecked(Chr(34) & "bottom" & Chr(34), "NULL")
         ucrChkBorderBottom.SetRDefault("NULL")
 
         '-----------------
@@ -217,31 +234,60 @@ Public Class sdgTableStyles
         ucrCboBorderColor.SetParameter(New RParameter("color", iNewPosition:=1))
         ucrCboBorderColor.SetColours()
         ucrCboBorderColor.SetRDefault("NULL")
-
-        ' Left here
+        '-----------------
 
         '-----------------
+        Dim dctBorderStyle As New Dictionary(Of String, String) From {
+          {"Default", "solid"},
+          {"Solid", Chr(34) & "solid" & Chr(34)},
+          {"Dashed", Chr(34) & "dashed" & Chr(34)},
+          {"Dotted", Chr(34) & "dotted" & Chr(34)}
+      }
+        ucrCboBorderStyle.SetDropDownStyleAsNonEditable()
+        ucrCboBorderStyle.SetParameter(New RParameter("style", iNewPosition:=2))
+        ucrCboBorderStyle.SetItems(dctBorderStyle)
+        ucrCboBorderStyle.SetRDefault("solid")
+        '-----------------
+
+        '-----------------
+        ucrNudBorderWeight.SetParameter(New RParameter("weight", iNewPosition:=3))
+        ucrNudBorderWeight.SetRDefault(1)
+        '-----------------
+
+        '---------------------------------------------------
 
 
 
     End Sub
 
-    Public Sub Setup()
+    Public Sub Setup(clsNewStyleRFunction As RFunction)
 
-        If bFirstload Then
-            InitialiseDialog()
-            bFirstload = False
-        End If
+        ' TODO
 
+        bSetDefaults = False
+    End Sub
+
+    Private Sub SetDefaults()
+
+        clsStyleRFunction = New RFunction
         clsCellTextRFunction = New RFunction
         clsCellFillRFunction = New RFunction
+        clsCellBordersRFunction = New RFunction
+        clsCellBorderSidesRFunction = New RFunction
 
-        clsCellTextRFunction.SetRCommand("cell_fill")
+        clsStyleRFunction.SetRCommand("list")
+
+        clsCellTextRFunction.SetPackageName("gt")
         clsCellTextRFunction.SetRCommand("cell_text")
 
+        clsCellFillRFunction.SetPackageName("gt")
+        clsCellFillRFunction.SetRCommand("cell_fill")
 
+        clsCellBordersRFunction.SetPackageName("gt")
+        clsCellBordersRFunction.SetRCommand("cell_borders")
 
-        SetRCode()
+        clsCellBorderSidesRFunction.SetRCommand("c")
+
 
     End Sub
 
@@ -258,10 +304,12 @@ Public Class sdgTableStyles
         'ucrCboUnderLineColor.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboAlignHorizontal.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboAlignVertical.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
-        ucrInputCboTransform.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrCboTransform.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrTxtFontSize.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboWhiteSpace.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboStretch.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
+        'ucrTxtIndent.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrNudIndent.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         '-----------------
 
         '-----------------
@@ -269,6 +317,58 @@ Public Class sdgTableStyles
         ucrCboColorBackground.SetRCode(clsCellFillRFunction, bReset:=False, bCloneIfNeeded:=True)
         '-----------------
 
+        '-----------------
+        'Cell border controls
+        ucrChkBorderLeft.SetRCode(clsCellBorderSidesRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrChkBorderRight.SetRCode(clsCellBorderSidesRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrChkBorderTop.SetRCode(clsCellBorderSidesRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrChkBorderBottom.SetRCode(clsCellBorderSidesRFunction, bReset:=False, bCloneIfNeeded:=True)
 
+        ucrCboBorderColor.SetRCode(clsCellBordersRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrCboBorderStyle.SetRCode(clsCellBordersRFunction, bReset:=False, bCloneIfNeeded:=True)
+        ucrNudBorderWeight.SetRCode(clsCellBordersRFunction, bReset:=False, bCloneIfNeeded:=True)
+        '-----------------
     End Sub
+
+    Public Function GetNewUserInputAsRFunction() As RFunction
+        If Not bUserClickedReturn OrElse Not bUserMadeChanges Then
+            Return Nothing
+        End If
+
+        If clsCellTextRFunction.clsParameters.Count > 0 Then
+            clsStyleRFunction.AddParameter(strParameterName:="cell_text_param", clsRFunctionParameter:=clsCellTextRFunction, bIncludeArgumentName:=False, iPosition:=0)
+        End If
+
+        If clsCellFillRFunction.clsParameters.Count > 0 Then
+            clsStyleRFunction.AddParameter(strParameterName:="cell_fill_param", clsRFunctionParameter:=clsCellFillRFunction, bIncludeArgumentName:=False, iPosition:=1)
+        End If
+
+        If clsCellBordersRFunction.clsParameters.Count > 0 OrElse clsCellBorderSidesRFunction.clsParameters.Count > 0 Then
+            If clsCellBorderSidesRFunction.clsParameters.Count > 0 Then
+                clsCellBordersRFunction.AddParameter(strParameterName:="sides", clsRFunctionParameter:=clsCellBorderSidesRFunction, iPosition:=0)
+            End If
+            clsStyleRFunction.AddParameter(strParameterName:="cell_borders_param", clsRFunctionParameter:=clsCellBordersRFunction, bIncludeArgumentName:=False, iPosition:=1)
+        End If
+
+        Return clsStyleRFunction
+    End Function
+
+    Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn
+        bUserClickedReturn = True
+    End Sub
+
+    Private Sub controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboAlignHorizontal.ControlValueChanged,
+            ucrCboAlignVertical.ControlValueChanged, ucrCboBorderColor.ControlValueChanged, ucrCboBorderStyle.ControlValueChanged,
+            ucrNudBorderWeight.ControlValueChanged, ucrCboColorBackground.ControlValueChanged, ucrCboColorText.ControlValueChanged,
+            ucrCboFontFamily.ControlValueChanged, ucrCboFontStyle.ControlValueChanged, ucrCboFontWeight.ControlValueChanged,
+            ucrCboStretch.ControlValueChanged,
+            ucrCboUnderlineType.ControlValueChanged, ucrCboWhiteSpace.ControlValueChanged, ucrChkBorderBottom.ControlValueChanged,
+            ucrChkBorderLeft.ControlValueChanged, ucrChkBorderRight.ControlValueChanged, ucrChkBorderTop.ControlValueChanged,
+            ucrCboTransform.ControlValueChanged, ucrTxtFontSize.ControlValueChanged, ucrNudIndent.ControlValueChanged
+
+        bUserMadeChanges = True
+    End Sub
+
+
+
 End Class
