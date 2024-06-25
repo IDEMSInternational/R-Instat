@@ -18,6 +18,12 @@ Imports System.ComponentModel
 Imports instat.Translations
 
 Public Class dlgCalculator
+    Public enumCalculatorMode As String = CalculatorMode.Prepare
+    Public Enum CalculatorMode
+        Prepare
+        Structured
+    End Enum
+
     Private clsAttachFunction As New RFunction
     Private clsDetachFunction As New RFunction
     Private clsRemoveLabelsFunction As New RFunction
@@ -38,7 +44,7 @@ Public Class dlgCalculator
             SetDefaults()
             bFirstLoad = False
         End If
-
+        SetHelpOptions()
         ReopenDialog()
         TestOKEnabled()
         autoTranslate(Me)
@@ -69,6 +75,7 @@ Public Class dlgCalculator
                                            bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
                                            bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
         ucrBase.Visible = True
+        SetHelpOptions()
     End Sub
 
     Private Sub ReopenDialog()
@@ -78,7 +85,6 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 14
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
         ucrCalc.ucrTryCalculator.SetIsCommand()
         ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
@@ -212,7 +218,6 @@ Public Class dlgCalculator
 
         ' Test if OK button can be enabled
         TestOKEnabled()
-
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
@@ -254,6 +259,17 @@ Public Class dlgCalculator
         End If
     End Sub
 
+    Private Sub SetHelpOptions()
+        Select Case enumCalculatorMode
+            Case CalculatorMode.Prepare
+                ucrCalc.ucrInputCalOptions.SetName("Basic")
+                ucrBase.iHelpTopicID = 14
+            Case CalculatorMode.Structured
+                ucrCalc.ucrInputCalOptions.SetName("Circular")
+                ucrBase.iHelpTopicID = 677
+        End Select
+    End Sub
+
     Private Sub ucrCalc_Click() Handles ucrCalc.CheckBoxClick
         ManageScalarStorage()
     End Sub
@@ -270,8 +286,8 @@ Public Class dlgCalculator
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrCalc.NameChanged
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Functions"
-                Me.Width = iBasicWidth * 1.5
-                ucrBase.iHelpTopicID = 439
+                Me.Width = iBasicWidth * 1.4
+                ucrBase.iHelpTopicID = 167
             Case "Maths"
                 Me.Width = iBasicWidth * 1.38
                 ucrBase.iHelpTopicID = 126
@@ -308,7 +324,7 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth * 2.56
             Case "Goodness of Fit"
                 Me.Width = iBasicWidth * 1.27
-                ucrBase.iHelpTopicID = 598
+                ucrBase.iHelpTopicID = 717
             Case "Integer"
                 Me.Width = iBasicWidth * 1.5
                 ucrBase.iHelpTopicID = 463
@@ -322,7 +338,6 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth
         End Select
     End Sub
-
 End Class
 
 
