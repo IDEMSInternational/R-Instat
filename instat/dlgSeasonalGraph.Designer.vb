@@ -30,8 +30,6 @@ Partial Class dlgSeasonalGraph
         Me.lblFill = New System.Windows.Forms.Label()
         Me.lblColour = New System.Windows.Forms.Label()
         Me.ucrChkAddpointRibbon = New instat.ucrCheck()
-        Me.ucrInputColour = New instat.ucrInputTextBox()
-        Me.ucrInputFill = New instat.ucrInputTextBox()
         Me.ucrChkColour = New instat.ucrCheck()
         Me.ucrChkFill = New instat.ucrCheck()
         Me.cmdOptions = New instat.ucrSplitButton()
@@ -48,6 +46,8 @@ Partial Class dlgSeasonalGraph
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrSelectorForSeasonalGraph = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputAddLegendLine = New instat.ucrInputComboBox()
+        Me.ucrInputAddLegendRibbon = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'rdoBar
@@ -124,7 +124,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.lblFill.AutoSize = True
         Me.lblFill.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFill.Location = New System.Drawing.Point(14, 332)
+        Me.lblFill.Location = New System.Drawing.Point(14, 384)
         Me.lblFill.Name = "lblFill"
         Me.lblFill.Size = New System.Drawing.Size(41, 13)
         Me.lblFill.TabIndex = 186
@@ -134,7 +134,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.lblColour.AutoSize = True
         Me.lblColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColour.Location = New System.Drawing.Point(14, 385)
+        Me.lblColour.Location = New System.Drawing.Point(14, 332)
         Me.lblColour.Name = "lblColour"
         Me.lblColour.Size = New System.Drawing.Size(41, 13)
         Me.lblColour.TabIndex = 187
@@ -149,33 +149,11 @@ Partial Class dlgSeasonalGraph
         Me.ucrChkAddpointRibbon.Size = New System.Drawing.Size(148, 23)
         Me.ucrChkAddpointRibbon.TabIndex = 188
         '
-        'ucrInputColour
-        '
-        Me.ucrInputColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputColour.AutoSize = True
-        Me.ucrInputColour.IsMultiline = False
-        Me.ucrInputColour.IsReadOnly = False
-        Me.ucrInputColour.Location = New System.Drawing.Point(64, 381)
-        Me.ucrInputColour.Name = "ucrInputColour"
-        Me.ucrInputColour.Size = New System.Drawing.Size(205, 23)
-        Me.ucrInputColour.TabIndex = 185
-        '
-        'ucrInputFill
-        '
-        Me.ucrInputFill.AddQuotesIfUnrecognised = True
-        Me.ucrInputFill.AutoSize = True
-        Me.ucrInputFill.IsMultiline = False
-        Me.ucrInputFill.IsReadOnly = False
-        Me.ucrInputFill.Location = New System.Drawing.Point(64, 326)
-        Me.ucrInputFill.Name = "ucrInputFill"
-        Me.ucrInputFill.Size = New System.Drawing.Size(205, 23)
-        Me.ucrInputFill.TabIndex = 184
-        '
         'ucrChkColour
         '
         Me.ucrChkColour.AutoSize = True
         Me.ucrChkColour.Checked = False
-        Me.ucrChkColour.Location = New System.Drawing.Point(14, 356)
+        Me.ucrChkColour.Location = New System.Drawing.Point(14, 301)
         Me.ucrChkColour.Name = "ucrChkColour"
         Me.ucrChkColour.Size = New System.Drawing.Size(147, 23)
         Me.ucrChkColour.TabIndex = 22
@@ -184,7 +162,7 @@ Partial Class dlgSeasonalGraph
         '
         Me.ucrChkFill.AutoSize = True
         Me.ucrChkFill.Checked = False
-        Me.ucrChkFill.Location = New System.Drawing.Point(14, 301)
+        Me.ucrChkFill.Location = New System.Drawing.Point(14, 356)
         Me.ucrChkFill.Name = "ucrChkFill"
         Me.ucrChkFill.Size = New System.Drawing.Size(147, 23)
         Me.ucrChkFill.TabIndex = 21
@@ -339,16 +317,38 @@ Partial Class dlgSeasonalGraph
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 19
         '
+        'ucrInputAddLegendLine
+        '
+        Me.ucrInputAddLegendLine.AddQuotesIfUnrecognised = True
+        Me.ucrInputAddLegendLine.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputAddLegendLine.GetSetSelectedIndex = -1
+        Me.ucrInputAddLegendLine.IsReadOnly = False
+        Me.ucrInputAddLegendLine.Location = New System.Drawing.Point(64, 326)
+        Me.ucrInputAddLegendLine.Name = "ucrInputAddLegendLine"
+        Me.ucrInputAddLegendLine.Size = New System.Drawing.Size(205, 23)
+        Me.ucrInputAddLegendLine.TabIndex = 219
+        '
+        'ucrInputAddLegendRibbon
+        '
+        Me.ucrInputAddLegendRibbon.AddQuotesIfUnrecognised = True
+        Me.ucrInputAddLegendRibbon.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputAddLegendRibbon.GetSetSelectedIndex = -1
+        Me.ucrInputAddLegendRibbon.IsReadOnly = False
+        Me.ucrInputAddLegendRibbon.Location = New System.Drawing.Point(64, 381)
+        Me.ucrInputAddLegendRibbon.Name = "ucrInputAddLegendRibbon"
+        Me.ucrInputAddLegendRibbon.Size = New System.Drawing.Size(205, 23)
+        Me.ucrInputAddLegendRibbon.TabIndex = 220
+        '
         'dlgSeasonalGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(477, 573)
+        Me.Controls.Add(Me.ucrInputAddLegendRibbon)
+        Me.Controls.Add(Me.ucrInputAddLegendLine)
         Me.Controls.Add(Me.ucrChkAddpointRibbon)
         Me.Controls.Add(Me.lblColour)
         Me.Controls.Add(Me.lblFill)
-        Me.Controls.Add(Me.ucrInputColour)
-        Me.Controls.Add(Me.ucrInputFill)
         Me.Controls.Add(Me.ucrChkColour)
         Me.Controls.Add(Me.ucrChkFill)
         Me.Controls.Add(Me.cmdOptions)
@@ -404,7 +404,7 @@ Partial Class dlgSeasonalGraph
     Friend WithEvents ucrChkFill As ucrCheck
     Friend WithEvents lblColour As Label
     Friend WithEvents lblFill As Label
-    Friend WithEvents ucrInputColour As ucrInputTextBox
-    Friend WithEvents ucrInputFill As ucrInputTextBox
     Friend WithEvents ucrChkAddpointRibbon As ucrCheck
+    Friend WithEvents ucrInputAddLegendRibbon As ucrInputComboBox
+    Friend WithEvents ucrInputAddLegendLine As ucrInputComboBox
 End Class
