@@ -43,7 +43,6 @@ Public Class dlgEnter
         ucrBase.iHelpTopicID = 458
 
         ucrSelectorEnter.SetItemType("scalar")
-        ucrSelectorEnter.ShowCheckBoxScalar(True)
         ucrSelectorEnter.HideShowAddOrDataOptionsOrListView(bAddVisible:=False, bDataOptionsVisible:=False, bListVariables:=False)
 
         ucrReceiverForEnterCalculation.strSelectorHeading = "Scalars"
@@ -97,13 +96,10 @@ Public Class dlgEnter
         ttEnter.SetToolTip(cmdConcantenateFunction, "Combines arguments to form a single vector, e.g. c(1:3 8) is 1, 2, 3, 8.")
         ttEnter.SetToolTip(cmdExponential, "For scientific notation, e.g. 1.5E-1 = 0.15.")
 
-
-        AddHandler ucrSelectorEnter.checkBoxScalar.CheckedChanged, AddressOf checkBoxScalar_CheckedChanged
-
     End Sub
 
-    Private Sub checkBoxScalar_CheckedChanged()
-        If ucrSelectorEnter.checkBoxScalar.Checked Then
+    Private Sub checkScalars_CheckedChanged(sender As Object, e As EventArgs) Handles checkScalars.CheckedChanged
+        If checkScalars.Checked Then
             ucrSelectorEnter.HideShowAddOrDataOptionsOrListView(bAddVisible:=True, bDataOptionsVisible:=False, bListVariables:=True)
         Else
             ucrSelectorEnter.HideShowAddOrDataOptionsOrListView(bAddVisible:=False, bDataOptionsVisible:=False, bListVariables:=False)
@@ -114,7 +110,7 @@ Public Class dlgEnter
         chkShowEnterArguments.Checked = False
         ucrChkStoreScalar.Checked = False
         ucrSelectorEnter.Reset()
-        ucrSelectorEnter.checkBoxScalar.Checked = False
+        checkScalars.Checked = False
         ucrReceiverForEnterCalculation.Clear()
         ucrReceiverForEnterCalculation.SetMeAsReceiver()
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
@@ -422,15 +418,11 @@ Public Class dlgEnter
 
     Private Sub ucrChkStoreScalar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStoreScalar.ControlValueChanged
         If ucrChkStoreScalar.Checked AndAlso Not ucrReceiverForEnterCalculation.IsEmpty Then
-            ucrSaveEnterResultInto.btnColumnPosition.Enabled = False
-            ucrSaveEnterResultInto.btnColumnPosition.Visible = True
             Dim strResut As String = ucrSaveEnterResultInto.GetText
             clsAddScalarFunction.AddParameter("scalar_name", Chr(34) & strResut & Chr(34), iPosition:=1)
             clsAddScalarFunction.AddParameter("scalar_value", strResut, iPosition:=2)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 2)
         Else
-            ucrSaveEnterResultInto.btnColumnPosition.Enabled = True
-            ucrSaveEnterResultInto.btnColumnPosition.Visible = True
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddScalarFunction)
         End If
     End Sub

@@ -85,6 +85,7 @@ Partial Class dlgEnter
         Me.ToolStripMenuBase = New System.Windows.Forms.ToolStripMenuItem()
         Me.ucrSelectorEnter = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkStoreScalar = New instat.ucrCheck()
+        Me.checkScalars = New System.Windows.Forms.CheckBox()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
         Me.ContextMenuStripBase.SuspendLayout()
@@ -619,12 +620,23 @@ Partial Class dlgEnter
         Me.ucrChkStoreScalar.Size = New System.Drawing.Size(199, 34)
         Me.ucrChkStoreScalar.TabIndex = 215
         '
+        'checkScalars
+        '
+        Me.checkScalars.AutoSize = True
+        Me.checkScalars.Location = New System.Drawing.Point(350, 289)
+        Me.checkScalars.Name = "checkScalars"
+        Me.checkScalars.Size = New System.Drawing.Size(88, 24)
+        Me.checkScalars.TabIndex = 216
+        Me.checkScalars.Text = "Scalars"
+        Me.checkScalars.UseVisualStyleBackColor = True
+        '
         'dlgEnter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(910, 553)
+        Me.Controls.Add(Me.checkScalars)
         Me.Controls.Add(Me.ucrChkStoreScalar)
         Me.Controls.Add(Me.ucrSelectorEnter)
         Me.Controls.Add(Me.cmdRHelp)
@@ -698,4 +710,5 @@ Partial Class dlgEnter
     Friend WithEvents ToolStripMenuBase As ToolStripMenuItem
     Friend WithEvents ucrSelectorEnter As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrChkStoreScalar As ucrCheck
+    Friend WithEvents checkScalars As CheckBox
 End Class
