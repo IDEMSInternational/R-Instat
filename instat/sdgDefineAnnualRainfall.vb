@@ -225,6 +225,18 @@ Public Class sdgDefineAnnualRainfall
         clsReformatTempSummariesFunction = clsNewReformatTempSummariesFunction
         clsExportRinstatToBucketFunction = clsNewExportRinstatToBucketFunction
 
+        ucrReceiverSeasonalLength.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("seasonal_length_column", 12), iAdditionalPairNo:=1)
+        ucrReceiverEndSeasonDOY.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("end_season_column", 7), iAdditionalPairNo:=1)
+        ucrReceiverStartRainDOY.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("start_rains_column", 3), iAdditionalPairNo:=1)
+        ucrReceiverEndRainsDOY.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("end_rains_column", 6), iAdditionalPairNo:=1)
+
+        ucrReceiverMinMaxAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("min_tmax_column", 7), iAdditionalPairNo:=1)
+        ucrReceiverMaxMaxAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("max_tmax_column", 8), iAdditionalPairNo:=1)
+        ucrReceiverMeanMaxAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("mean_tmax_column", 6), iAdditionalPairNo:=1)
+        ucrReceiverMeanAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("mean_tmin_column", 3), iAdditionalPairNo:=1)
+        ucrReceiverMinMinAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("min_tmin_column", 4), iAdditionalPairNo:=1)
+        ucrReceiverMaxMinAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("max_tmin_column", 5), iAdditionalPairNo:=1)
+
         ucrReceiverAnnualRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrReceiverEndRainsDate.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrReceiverEndRainsDOY.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
@@ -286,20 +298,9 @@ Public Class sdgDefineAnnualRainfall
             ucrReceiverEndSeasonDate.IsEmpty AndAlso ucrReceiverEndSeasonDOY.IsEmpty AndAlso ucrReceiverRainDaysSeason.IsEmpty AndAlso ucrReceiverRainDaysYear.IsEmpty AndAlso ucrReceiverStartRainDate.IsEmpty AndAlso
            ucrReceiverStartRainDOY.IsEmpty AndAlso ucrReceiverStation.IsEmpty AndAlso ucrReceiverYear.IsEmpty) Then
             clsExportRinstatToBucketFunction.AddParameter("annual_rainfall_data", clsRFunctionParameter:=clsReforMattAnnualSummariesFunction, iPosition:=1)
-            clsExportRinstatToBucketFunction.AddParameter("start_rains", "start_rains_doy_col", iPosition:=2, bIncludeArgumentName:=False)
-            clsExportRinstatToBucketFunction.AddParameter("end_rains", "end_rains_doy_col", iPosition:=3, bIncludeArgumentName:=False)
-            clsExportRinstatToBucketFunction.AddParameter("end_season_rains", "end_season_doy_col", iPosition:=4, bIncludeArgumentName:=False)
-            clsExportRinstatToBucketFunction.AddParameter("seasonal_rains", "season_length_col", iPosition:=5, bIncludeArgumentName:=False)
-            clsExportRinstatToBucketFunction.AddParameter("start_rains_date", "start_rains_date_col", iPosition:=6, bIncludeArgumentName:=False)
-            clsExportRinstatToBucketFunction.AddParameter("end_rains_date", "end_rains_date_col", iPosition:=7, bIncludeArgumentName:=False)
+
         Else
             clsExportRinstatToBucketFunction.RemoveParameterByName("annual_rainfall_data")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("start_rains")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("end_rains")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("end_season_rains")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("seasonal_rains")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("start_rains_date")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("end_rains_date")
         End If
     End Sub
 
@@ -326,20 +327,8 @@ Public Class sdgDefineAnnualRainfall
         If Not (ucrReceiverAnnualTempStation.IsEmpty AndAlso ucrReceiverAnnualTempYr.IsEmpty AndAlso ucrReceiverMaxMaxAnnual.IsEmpty AndAlso
                 ucrReceiverMaxMinAnnual.IsEmpty AndAlso ucrReceiverMeanAnnual.IsEmpty AndAlso ucrReceiverMeanMaxAnnual.IsEmpty AndAlso ucrReceiverMinMaxAnnual.IsEmpty AndAlso ucrReceiverMinMinAnnual.IsEmpty) Then
             clsExportRinstatToBucketFunction.AddParameter("annual_temperature_data", clsRFunctionParameter:=clsReformatTempSummariesFunction, iPosition:=11)
-            clsExportRinstatToBucketFunction.AddParameter("min_tmax", "min_tmax_col", iPosition:=12, bIncludeArgumentName:=False)
-            clsExportRinstatToBucketFunction.AddParameter("min_tmax_col", "max_tmax_col", iPosition:=13, bIncludeArgumentName:=False)
-            clsExportRinstatToBucketFunction.AddParameter("mean_tmax", "mean_tmax_col", iPosition:=14, bIncludeArgumentName:=False)
-            clsExportRinstatToBucketFunction.AddParameter("min_tmin", "min_tmin_col", iPosition:=15, bIncludeArgumentName:=False)
-            clsExportRinstatToBucketFunction.AddParameter("min_tmin_col", "max_tmin_col", iPosition:=16, bIncludeArgumentName:=False)
-            clsExportRinstatToBucketFunction.AddParameter("mean_tmin", "mean_tmin_col", iPosition:=17, bIncludeArgumentName:=False)
         Else
             clsExportRinstatToBucketFunction.RemoveParameterByName("annual_temperature_data")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("min_tmax")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("min_tmax_col")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("mean_tmax")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("min_tmin")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("min_tmin_col")
-            clsExportRinstatToBucketFunction.RemoveParameterByName("mean_tmin")
         End If
     End Sub
 
