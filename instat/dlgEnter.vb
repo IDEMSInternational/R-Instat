@@ -78,9 +78,17 @@ Public Class dlgEnter
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 1)
 
         ucrSaveEnterResultInto.SetPrefix("enter")
+        ucrSaveEnterResultInto.SetDataFrameSelector(ucrSelectorEnter.ucrAvailableDataFrames)
+        ucrSaveEnterResultInto.SetIsComboBox()
+        ucrSaveEnterResultInto.SetSaveTypeAsColumn()
+        ucrSaveEnterResultInto.SetCheckBoxText("Enter Result")
+        ucrSaveEnterResultInto.SetAssignToIfUncheckedValue("last_enter")
+
+        ucrSaveEnterResultInto.SetPrefix("enter")
         ucrSaveEnterResultInto.SetSaveTypeAsColumn()
         ucrSaveEnterResultInto.SetIsComboBox()
-        ucrSaveEnterResultInto.SetLabelText("Enter Result Into:")
+        ucrSaveEnterResultInto.SetCheckBoxText("Enter Result")
+        ucrSaveEnterResultInto.SetAssignToIfUncheckedValue("last_enter")
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrSelectorEnter.ucrAvailableDataFrames)
 
         'Adding tooltips for the buttons
@@ -111,10 +119,18 @@ Public Class dlgEnter
         ucrChkStoreScalar.Checked = False
         ucrSelectorEnter.Reset()
         checkScalars.Checked = False
+        ucrSaveEnterResultInto.ucrChkSave.Checked = True
         ucrReceiverForEnterCalculation.Clear()
         ucrReceiverForEnterCalculation.SetMeAsReceiver()
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
         ucrSaveEnterResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
+        SaveResults()
+        ucrBase.clsRsyntax.SetAssignTo(ucrSaveEnterResultInto.GetText(), strTempColumn:=ucrSaveEnterResultInto.GetText(),
+                                           strTempDataframe:=ucrSelectorEnter.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
+                                           bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix,
+                                           bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames,
+                                           bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
+                                           bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
     End Sub
 
     Private Sub ReopenDialog()
@@ -122,7 +138,8 @@ Public Class dlgEnter
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverForEnterCalculation.IsEmpty AndAlso ucrSaveEnterResultInto.IsComplete Then
+        If Not ucrReceiverForEnterCalculation.IsEmpty AndAlso ucrSaveEnterResultInto.IsComplete AndAlso
+            (ucrChkStoreScalar.Checked OrElse ucrSaveEnterResultInto.ucrChkSave.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -130,8 +147,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub SaveResults()
-        If ucrSaveEnterResultInto.IsComplete Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveEnterResultInto.GetText(), strTempColumn:=ucrSaveEnterResultInto.GetText(), strTempDataframe:=ucrSelectorEnter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bRequireCorrectLength:=False)
+        If ucrSaveEnterResultInto.IsComplete AndAlso ucrSaveEnterResultInto.ucrChkSave.Checked Then
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         Else
@@ -139,6 +155,7 @@ Public Class dlgEnter
             ucrBase.clsRsyntax.iCallType = 2
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
+        ManageScalarStorage()
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
@@ -148,6 +165,7 @@ Public Class dlgEnter
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForEnterCalculation.SelectionChanged
         ucrBase.clsRsyntax.SetCommandString(ucrReceiverForEnterCalculation.GetVariableNames(False))
         ucrChkStoreScalar.Checked = False
+        SaveResults()
         TestOKEnabled()
     End Sub
 
@@ -231,14 +249,6 @@ Public Class dlgEnter
 
     Private Sub cmdMonthMinus_Click(sender As Object, e As EventArgs) Handles cmdMonths.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("month.abb")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrSaveEnterResultInto_NameChanged()
-        SaveResults()
-    End Sub
-
-    Private Sub ucrSaveEnterResultInto_ContentsChanged()
         TestOKEnabled()
     End Sub
 
@@ -414,16 +424,38 @@ Public Class dlgEnter
         clsDetach.AddParameter("name", strDataFrame)
         clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
         clsAddScalarFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+        SaveResults()
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkStoreScalar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStoreScalar.ControlValueChanged
+    Private Sub ManageScalarStorage()
         If ucrChkStoreScalar.Checked AndAlso Not ucrReceiverForEnterCalculation.IsEmpty Then
             Dim strResut As String = ucrSaveEnterResultInto.GetText
             clsAddScalarFunction.AddParameter("scalar_name", Chr(34) & strResut & Chr(34), iPosition:=1)
             clsAddScalarFunction.AddParameter("scalar_value", strResut, iPosition:=2)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 2)
+            ucrBase.clsRsyntax.SetAssignTo(strResut)
+
+            ucrSaveEnterResultInto.btnColumnPosition.Enabled = False
+            ucrSaveEnterResultInto.ucrChkSave.Enabled = False
+            ucrSaveEnterResultInto.ucrChkSave.Checked = False
+
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddScalarFunction)
+            ucrSaveEnterResultInto.btnColumnPosition.Enabled = True
+            ucrSaveEnterResultInto.ucrChkSave.Enabled = True
         End If
+        ucrSaveEnterResultInto.btnColumnPosition.Visible = True
+        ucrSaveEnterResultInto.ucrInputComboSave.Visible = True
+        ucrSaveEnterResultInto.ucrInputComboSave.Enabled = True
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkStoreScalar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStoreScalar.ControlValueChanged
+        ManageScalarStorage()
+    End Sub
+
+    Private Sub ucrSaveEnterResultInto_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveEnterResultInto.ControlContentsChanged
+        SaveResults()
     End Sub
 End Class
