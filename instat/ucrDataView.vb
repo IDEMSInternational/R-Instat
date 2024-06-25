@@ -661,7 +661,9 @@ Public Class ucrDataView
                 GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
             Else
                 Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.CheckHasLabels(strColumn)
-                If bCheckLabels = False Then
+                If bCheckLabels Then
+                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                Else
                     frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
                     frmConvertToNumeric.SetColumnName(strColumn)
                     frmConvertToNumeric.CheckLabels(bCheckLabels)
@@ -676,8 +678,6 @@ Public Class ucrDataView
                         Case DialogResult.Cancel
                             Continue For
                     End Select
-                ElseIf bCheckLabels = True Then
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
                 End If
                 frmConvertToNumeric.Close()
             End If
