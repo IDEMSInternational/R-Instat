@@ -21,6 +21,12 @@ Imports RDotNet
 Imports System.ComponentModel
 
 Public Class dlgOpenNetCDF
+    Public enumNetCDFMode As String = NetCDFMode.File
+    Public Enum NetCDFMode
+        File
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsImportNetcdfFunction, clsNcOpenFunction, clsNcCloseFunction, clsRFileDetails As New RFunction
@@ -66,6 +72,7 @@ Public Class dlgOpenNetCDF
         Else
             OpenFile()
         End If
+        SetHelpOptions()
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
@@ -150,6 +157,15 @@ Public Class dlgOpenNetCDF
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumNetCDFMode
+            Case NetCDFMode.File
+                ucrBase.iHelpTopicID = 393
+            Case NetCDFMode.Climatic
+                ucrBase.iHelpTopicID = 381
+        End Select
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
