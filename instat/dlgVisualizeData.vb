@@ -156,7 +156,7 @@ Public Class dlgVisualizeData
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorVisualizeData.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
