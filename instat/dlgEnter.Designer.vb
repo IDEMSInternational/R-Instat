@@ -533,7 +533,7 @@ Partial Class dlgEnter
         'ucrSaveEnterResultInto
         '
         Me.ucrSaveEnterResultInto.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveEnterResultInto.Location = New System.Drawing.Point(12, 390)
+        Me.ucrSaveEnterResultInto.Location = New System.Drawing.Point(19, 390)
         Me.ucrSaveEnterResultInto.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
         Me.ucrSaveEnterResultInto.Size = New System.Drawing.Size(511, 33)
@@ -542,7 +542,7 @@ Partial Class dlgEnter
         'ucrTryModelling
         '
         Me.ucrTryModelling.AutoSize = True
-        Me.ucrTryModelling.Location = New System.Drawing.Point(-2, 340)
+        Me.ucrTryModelling.Location = New System.Drawing.Point(19, 340)
         Me.ucrTryModelling.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.RunCommandAsMultipleLines = False
@@ -566,7 +566,7 @@ Partial Class dlgEnter
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 468)
+        Me.ucrBase.Location = New System.Drawing.Point(19, 468)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -614,7 +614,7 @@ Partial Class dlgEnter
         '
         Me.ucrChkStoreScalar.AutoSize = True
         Me.ucrChkStoreScalar.Checked = False
-        Me.ucrChkStoreScalar.Location = New System.Drawing.Point(13, 426)
+        Me.ucrChkStoreScalar.Location = New System.Drawing.Point(19, 426)
         Me.ucrChkStoreScalar.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkStoreScalar.Name = "ucrChkStoreScalar"
         Me.ucrChkStoreScalar.Size = New System.Drawing.Size(199, 34)
