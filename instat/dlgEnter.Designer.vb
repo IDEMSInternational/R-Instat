@@ -536,7 +536,7 @@ Partial Class dlgEnter
         Me.ucrSaveEnterResultInto.Location = New System.Drawing.Point(12, 390)
         Me.ucrSaveEnterResultInto.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
-        Me.ucrSaveEnterResultInto.Size = New System.Drawing.Size(420, 33)
+        Me.ucrSaveEnterResultInto.Size = New System.Drawing.Size(511, 33)
         Me.ucrSaveEnterResultInto.TabIndex = 181
         '
         'ucrTryModelling
