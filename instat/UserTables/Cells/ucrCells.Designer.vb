@@ -95,7 +95,7 @@ Partial Class ucrCells
         '
         Me.ucrCellsFootNotes.Location = New System.Drawing.Point(7, 38)
         Me.ucrCellsFootNotes.Name = "ucrCellsFootNotes"
-        Me.ucrCellsFootNotes.Size = New System.Drawing.Size(604, 104)
+        Me.ucrCellsFootNotes.Size = New System.Drawing.Size(604, 318)
         Me.ucrCellsFootNotes.TabIndex = 294
         '
         'ucrCellFormats
@@ -124,8 +124,8 @@ Partial Class ucrCells
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrCellStyles)
         Me.Controls.Add(Me.ucrCellsFootNotes)
+        Me.Controls.Add(Me.ucrCellStyles)
         Me.Controls.Add(Me.ucrCellFormats)
         Me.Controls.Add(Me.rdoStyles)
         Me.Controls.Add(Me.rdoFormat)

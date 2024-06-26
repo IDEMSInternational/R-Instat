@@ -40,7 +40,7 @@ Partial Class ucrRows
         Me.rdoRowsGroups.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRowsGroups.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoRowsGroups.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRowsGroups.Location = New System.Drawing.Point(283, 3)
+        Me.rdoRowsGroups.Location = New System.Drawing.Point(203, 3)
         Me.rdoRowsGroups.Name = "rdoRowsGroups"
         Me.rdoRowsGroups.Size = New System.Drawing.Size(91, 29)
         Me.rdoRowsGroups.TabIndex = 280
@@ -60,7 +60,7 @@ Partial Class ucrRows
         Me.rdoRowsSummaries.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRowsSummaries.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoRowsSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRowsSummaries.Location = New System.Drawing.Point(372, 3)
+        Me.rdoRowsSummaries.Location = New System.Drawing.Point(292, 3)
         Me.rdoRowsSummaries.Name = "rdoRowsSummaries"
         Me.rdoRowsSummaries.Size = New System.Drawing.Size(91, 29)
         Me.rdoRowsSummaries.TabIndex = 281
@@ -71,16 +71,16 @@ Partial Class ucrRows
         'ucrPnlRows
         '
         Me.ucrPnlRows.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlRows.Location = New System.Drawing.Point(93, 3)
+        Me.ucrPnlRows.Location = New System.Drawing.Point(178, 3)
         Me.ucrPnlRows.Name = "ucrPnlRows"
-        Me.ucrPnlRows.Size = New System.Drawing.Size(506, 29)
+        Me.ucrPnlRows.Size = New System.Drawing.Size(232, 29)
         Me.ucrPnlRows.TabIndex = 279
         '
         'ucrRowGroups
         '
         Me.ucrRowGroups.Location = New System.Drawing.Point(3, 38)
         Me.ucrRowGroups.Name = "ucrRowGroups"
-        Me.ucrRowGroups.Size = New System.Drawing.Size(749, 194)
+        Me.ucrRowGroups.Size = New System.Drawing.Size(577, 306)
         Me.ucrRowGroups.TabIndex = 283
         '
         'ucrRows
@@ -92,7 +92,7 @@ Partial Class ucrRows
         Me.Controls.Add(Me.rdoRowsSummaries)
         Me.Controls.Add(Me.ucrPnlRows)
         Me.Name = "ucrRows"
-        Me.Size = New System.Drawing.Size(753, 237)
+        Me.Size = New System.Drawing.Size(583, 340)
         Me.ResumeLayout(False)
 
     End Sub
