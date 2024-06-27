@@ -661,24 +661,20 @@ Public Class ucrDataView
                 GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
             Else
                 Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.CheckHasLabels(strColumn)
-                If bCheckLabels Then
-                    frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
-                    frmConvertToNumeric.SetColumnName(strColumn)
-                    frmConvertToNumeric.CheckLabels(bCheckLabels)
-                    frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
-                    frmConvertToNumeric.ShowDialog()
-                    ' Yes for "normal" convert and No for "ordinal" convert
-                    Select Case frmConvertToNumeric.DialogResult
-                        Case DialogResult.Yes
-                            GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
-                        Case DialogResult.No
-                            GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
-                        Case DialogResult.Cancel
-                            Continue For
-                    End Select
-                Else
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
-                End If
+                frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
+                frmConvertToNumeric.SetColumnName(strColumn)
+                frmConvertToNumeric.CheckLabels(bCheckLabels)
+                frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
+                frmConvertToNumeric.ShowDialog()
+                ' Yes for "normal" convert and No for "ordinal" convert
+                Select Case frmConvertToNumeric.DialogResult
+                    Case DialogResult.Yes
+                        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                    Case DialogResult.No
+                        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
+                    Case DialogResult.Cancel
+                        Continue For
+                End Select
                 frmConvertToNumeric.Close()
             End If
         Next
@@ -1015,4 +1011,38 @@ Public Class ucrDataView
         _grid.SelectColumnInGrid(strColumn)
     End Sub
 
+    Private Sub linkHelpGettingStarted_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpGettingStarted.LinkClicked
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "3")
+    End Sub
+
+    Private Sub linkHelpData_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpData.LinkClicked
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "71")
+    End Sub
+
+    Private Sub linkHelpPrepareMenu_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpPrepareMenu.LinkClicked
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "9")
+    End Sub
+
+    Private Sub linkHelpClimaticMenu_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpClimaticMenu.LinkClicked
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "19")
+    End Sub
+
+    Private Sub linkStartSwapDataScriptWindow_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartSwapDataScriptWindow.LinkClicked
+        frmMain.mnuViewSwapDataAndMetadata.Enabled = frmMain.mnuViewSwapDataAndScript.Checked
+        frmMain.mnuViewSwapDataAndScript.Checked = Not frmMain.mnuViewSwapDataAndScript.Checked
+        frmMain.UpdateSwapDataAndScript()
+        frmMain.UpdateLayout()
+    End Sub
+
+    Private Sub linkStartRestoreBackup_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartRestoreBackup.LinkClicked
+        dlgRestoreBackup.ShowDialog()
+    End Sub
+
+    Private Sub linkStartAddRPackage_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartAddRPackage.LinkClicked
+        dlgInstallRPackage.ShowDialog()
+    End Sub
+
+    Private Sub linkStartPasteData_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartPasteData.LinkClicked
+        dlgPasteNewColumns.ShowDialog()
+    End Sub
 End Class

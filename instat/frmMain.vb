@@ -586,7 +586,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub UpdateSwapDataAndScript()
+    Public Sub UpdateSwapDataAndScript()
         If mnuViewSwapDataAndScript.Checked Then
             splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
             splExtraWindows.Panel2.Controls.Add(ucrDataViewer)
@@ -1039,6 +1039,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
+        dlgOneVariableSummarise.enumOnevariableMode = dlgOneVariableSummarise.OnevariableMode.Describe
         dlgOneVariableSummarise.ShowDialog()
     End Sub
 
@@ -1322,7 +1323,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuHelpHistFAQ_Click(sender As Object, e As EventArgs) Handles mnuHelpFAQ.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "290")
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "324")
     End Sub
 
     Private Sub mnuHelpGetingStarted_Click(sender As Object, e As EventArgs) Handles mnuHelpGetingStarted.Click
@@ -1502,6 +1503,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticFileImportandTidyNetCDF_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportandTidyNetCDF.Click
+        dlgOpenNetCDF.enumNetCDFMode = dlgOpenNetCDF.NetCDFMode.Climatic
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
@@ -1958,6 +1960,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileImportandTidyNetCDFFile_Click(sender As Object, e As EventArgs) Handles mnuFileImportandTidyNetCDFFile.Click
+        dlgOpenNetCDF.enumNetCDFMode = dlgOpenNetCDF.NetCDFMode.File
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
@@ -2192,6 +2195,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCalculateCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculator.Click
+        dlgCalculator.enumCalculatorMode = dlgCalculator.CalculatorMode.Prepare
         dlgCalculator.ShowDialog()
     End Sub
 
@@ -2357,7 +2361,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticCompareCorrelations_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareCorrelations.Click
-        dlgCorrelation.SetMultipleSequenceAsDefaultOption()
+        dlgCorrelation.SetClimaticAsDefaultOption()
         dlgCorrelation.ShowDialog()
     End Sub
 
@@ -2377,9 +2381,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuStructuredCircularCalculator_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularCalculator.Click
-        If dlgCalculator.bFirstLoad Then
-            dlgCalculator.SetDefaultKeyboard("Circular")
-        End If
+        dlgCalculator.enumCalculatorMode = dlgCalculator.CalculatorMode.Structured
         dlgCalculator.ShowDialog()
     End Sub
 

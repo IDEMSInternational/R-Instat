@@ -2869,6 +2869,24 @@ get_data_book_output_object_names <- function(output_object_list,
   
 }
 
+get_data_book_scalar_names <- function(scalar_list,
+                                       excluded_items = c(), 
+                                       as_list = FALSE, 
+                                       list_label = NULL){
+  out = names(scalar_list)
+  if(length(excluded_items) > 0) {
+    ex_ind = which(out %in% excluded_items)
+    if(length(ex_ind) != length(excluded_items)) warning("Some of the excluded_items were not found in the list of calculations")
+    if(length(ex_ind) > 0) out = out[-ex_ind]
+  }
+  if(!as_list) {
+    return(out)
+  }
+  lst = list()
+  lst[[list_label]] <- out
+  return(lst)
+}
+
 get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE) 
 {   
   oneLink <- function(s) {
