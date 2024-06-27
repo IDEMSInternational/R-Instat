@@ -28,6 +28,7 @@
 
     Public Sub SetValuesToOperator()
         ucrCellFormats.SetValuesToOperator()
+        ucrCellsFootNotes.SetValuesToOperator()
         ucrCellStyles.SetValuesToOperator()
     End Sub
 

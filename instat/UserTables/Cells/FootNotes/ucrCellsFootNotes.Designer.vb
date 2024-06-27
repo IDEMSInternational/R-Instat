@@ -25,7 +25,7 @@ Partial Class ucrCellsFootNotes
         Me.lblRowExpression = New System.Windows.Forms.Label()
         Me.ucrInputRows = New instat.ucrInputTextBox()
         Me.lblFooteNotes = New System.Windows.Forms.Label()
-        Me.btnClearFormats = New System.Windows.Forms.Button()
+        Me.btnClear = New System.Windows.Forms.Button()
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
         Me.dataGridFootNotes = New System.Windows.Forms.DataGridView()
@@ -35,7 +35,7 @@ Partial Class ucrCellsFootNotes
         Me.lblFootNote = New System.Windows.Forms.Label()
         Me.ucrTxtFootNote = New instat.ucrInputTextBox()
         Me.lblPlacement = New System.Windows.Forms.Label()
-        Me.ucrCboPlacement = New instat.ucrInputComboBox()
+        Me.cboPlacement = New System.Windows.Forms.ComboBox()
         CType(Me.dataGridFootNotes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -70,16 +70,16 @@ Partial Class ucrCellsFootNotes
         Me.lblFooteNotes.TabIndex = 336
         Me.lblFooteNotes.Text = "Foot Notes:"
         '
-        'btnClearFormats
+        'btnClear
         '
-        Me.btnClearFormats.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearFormats.Location = New System.Drawing.Point(517, 210)
-        Me.btnClearFormats.Name = "btnClearFormats"
-        Me.btnClearFormats.Size = New System.Drawing.Size(75, 23)
-        Me.btnClearFormats.TabIndex = 335
-        Me.btnClearFormats.Tag = ""
-        Me.btnClearFormats.Text = "Clear"
-        Me.btnClearFormats.UseVisualStyleBackColor = True
+        Me.btnClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnClear.Location = New System.Drawing.Point(517, 210)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 335
+        Me.btnClear.Tag = ""
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
         'lblColumns
         '
@@ -176,29 +176,28 @@ Partial Class ucrCellsFootNotes
         Me.lblPlacement.TabIndex = 343
         Me.lblPlacement.Text = "Placement:"
         '
-        'ucrCboPlacement
+        'cboPlacement
         '
-        Me.ucrCboPlacement.AddQuotesIfUnrecognised = True
-        Me.ucrCboPlacement.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrCboPlacement.GetSetSelectedIndex = -1
-        Me.ucrCboPlacement.IsReadOnly = False
-        Me.ucrCboPlacement.Location = New System.Drawing.Point(241, 152)
-        Me.ucrCboPlacement.Name = "ucrCboPlacement"
-        Me.ucrCboPlacement.Size = New System.Drawing.Size(137, 21)
-        Me.ucrCboPlacement.TabIndex = 342
+        Me.cboPlacement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPlacement.FormattingEnabled = True
+        Me.cboPlacement.Items.AddRange(New Object() {"Auto", "Left", "Right"})
+        Me.cboPlacement.Location = New System.Drawing.Point(241, 152)
+        Me.cboPlacement.Name = "cboPlacement"
+        Me.cboPlacement.Size = New System.Drawing.Size(136, 21)
+        Me.cboPlacement.TabIndex = 344
         '
         'ucrCellsFootNotes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrCboPlacement)
+        Me.Controls.Add(Me.cboPlacement)
         Me.Controls.Add(Me.lblPlacement)
         Me.Controls.Add(Me.lblFootNote)
         Me.Controls.Add(Me.ucrTxtFootNote)
         Me.Controls.Add(Me.lblRowExpression)
         Me.Controls.Add(Me.ucrInputRows)
         Me.Controls.Add(Me.lblFooteNotes)
-        Me.Controls.Add(Me.btnClearFormats)
+        Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.ucrSelectorCols)
         Me.Controls.Add(Me.dataGridFootNotes)
@@ -214,7 +213,7 @@ Partial Class ucrCellsFootNotes
     Friend WithEvents lblRowExpression As Label
     Friend WithEvents ucrInputRows As ucrInputTextBox
     Friend WithEvents lblFooteNotes As Label
-    Friend WithEvents btnClearFormats As Button
+    Friend WithEvents btnClear As Button
     Friend WithEvents lblColumns As Label
     Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
     Friend WithEvents dataGridFootNotes As DataGridView
@@ -224,5 +223,5 @@ Partial Class ucrCellsFootNotes
     Friend WithEvents lblFootNote As Label
     Friend WithEvents ucrTxtFootNote As ucrInputTextBox
     Friend WithEvents lblPlacement As Label
-    Friend WithEvents ucrCboPlacement As ucrInputComboBox
+    Friend WithEvents cboPlacement As ComboBox
 End Class
