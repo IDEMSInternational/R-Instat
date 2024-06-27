@@ -168,7 +168,7 @@ Public Class dlgSeasonalGraph
         ucrSave.SetPrefix("Seasonal_Graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
-        ucrSave.SetCheckBoxText("Save Graph")
+        ucrSave.SetCheckBoxText("Store Graph")
         ucrSave.SetDataFrameSelector(ucrSelectorForSeasonalGraph.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
     End Sub
