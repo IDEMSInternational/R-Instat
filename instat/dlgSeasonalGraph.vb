@@ -312,13 +312,11 @@ Public Class dlgSeasonalGraph
         ' Clear parameters before adding new ones
         clsBaseOperator.ClearParameters()
 
-        Dim i As Integer
-
         ' Process ucrReceiverLines if not empty
         If Not ucrReceiverLines.IsEmpty Then
             If ucrChkColour.Checked Then
                 ' Add geom_line functions for ucrReceiverLines.lstSelectedVariables
-                For i = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
+                For i As Integer = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
                     Dim clsRaeslineFunction As New RFunction
                     Dim ColourArguments As New List(Of String) From {"grey", "grey", "black", "grey"}
                     Dim LinewidthArguments As New List(Of String) From {"1.0", "1.0", "2.0", "1.0"}
@@ -348,7 +346,7 @@ Public Class dlgSeasonalGraph
                 End If
                 clsBaseOperator.AddParameter("scale_colour_identity", clsRFunctionParameter:=clsScalecolouridentityFunction, iPosition:=13)
             Else
-                For i = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
+                For i As Integer = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
                     Dim clsRaeslineFunction As New RFunction
                     Dim ColourArguments1 As New List(Of String) From {"grey", "grey", "black", "grey"}
                     Dim LinewidthArguments1 As New List(Of String) From {"1.0", "1.0", "2.0", "1.0"}
@@ -373,7 +371,7 @@ Public Class dlgSeasonalGraph
             End If
             ' Add points if ucrChkAddPoint is checked
             If ucrChkAddPoint.Checked Then
-                For i = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
+                For i As Integer = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
                     Dim clsAesGeompointFunction As New RFunction
                     clsAesGeompointFunction.SetPackageName("ggplot2")
                     clsAesGeompointFunction.SetRCommand("aes")
@@ -388,12 +386,12 @@ Public Class dlgSeasonalGraph
                     clsBaseOperator.AddParameter(strGeompointParameterName & "Line" & i, clsRFunctionParameter:=clsGeomPointFunction, iPosition:=9)
                 Next
             Else
-                For i = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
+                For i As Integer = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
                     clsBaseOperator.RemoveParameterByName(strGeompointParameterName & "Line" & i)
                 Next
             End If
         Else
-            For i = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
+            For i As Integer = 0 To ucrReceiverLines.lstSelectedVariables.Items.Count - 1
                 clsBaseOperator.RemoveParameterByName(strGeompointParameterName & "Line" & i)
                 clsBaseOperator.RemoveParameterByName(strFirstParameterName & i)
             Next
@@ -404,7 +402,7 @@ Public Class dlgSeasonalGraph
         If ucrChkRibbons.Checked AndAlso Not ucrReceiverRibbons.IsEmpty Then
             If ucrChkFill.Checked Then
                 clsBaseOperator.AddParameter("scale_fill_identity", clsRFunctionParameter:=clsScalefillidentityFunction, iPosition:=12)
-                For i = 0 To ucrReceiverRibbons.lstSelectedVariables.Items.Count - 1 Step 2
+                For i As Integer = 0 To ucrReceiverRibbons.lstSelectedVariables.Items.Count - 1 Step 2
                     ' Get current variable
                     Dim var1 = ucrReceiverRibbons.lstSelectedVariables.Items(i).Text
                     ' Get the next variable in the pair if available
@@ -435,7 +433,7 @@ Public Class dlgSeasonalGraph
                     clsScalefillidentityFunction.RemoveParameterByName("labels")
                 End If
             Else
-                For i = 0 To ucrReceiverRibbons.lstSelectedVariables.Items.Count - 1 Step 2
+                For i As Integer = 0 To ucrReceiverRibbons.lstSelectedVariables.Items.Count - 1 Step 2
                     ' Get current variable
                     Dim var1 = ucrReceiverRibbons.lstSelectedVariables.Items(i).Text
                     ' Get the next variable in the pair if available
@@ -480,12 +478,12 @@ Public Class dlgSeasonalGraph
                     clsBaseOperator.AddParameter(strGeompointParameterName1 & "Ribbon" & ucrReceiverRibbons.lstSelectedVariables.Items.IndexOf(selectedItem), clsRFunctionParameter:=clsGeomPointFunction1, iPosition:=15)
                 Next
             Else
-                For i = 0 To ucrReceiverRibbons.lstSelectedVariables.Items.Count - 1
+                For i As Integer = 0 To ucrReceiverRibbons.lstSelectedVariables.Items.Count - 1
                     clsBaseOperator.RemoveParameterByName(strGeompointParameterName1 & "Ribbon" & i)
                 Next
             End If
         Else
-            For i = 0 To ucrReceiverRibbons.lstSelectedVariables.Items.Count - 1
+            For i As Integer = 0 To ucrReceiverRibbons.lstSelectedVariables.Items.Count - 1
                 clsBaseOperator.RemoveParameterByName(strGeompointParameterName1 & "Ribbon" & i)
                 clsBaseOperator.RemoveParameterByName(strgeomRibbonParameterName0 & i)
             Next
