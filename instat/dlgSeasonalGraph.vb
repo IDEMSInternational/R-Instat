@@ -47,6 +47,7 @@ Public Class dlgSeasonalGraph
     Private clsAnnotateFunction As New RFunction
     Private clsScalefillidentityFunction As New RFunction
     Private clsScalecolouridentityFunction As New RFunction
+    Private clsGetObjectDataFunction As New RFunction
     Private bUpdatingParameters As Boolean = False
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
@@ -180,6 +181,7 @@ Public Class dlgSeasonalGraph
         clsFacetFunction = New RFunction
         clsScalecolouridentityFunction = New RFunction
         clsScalefillidentityFunction = New RFunction
+        clsGetObjectDataFunction = New RFunction
         clsFacetOperator = New ROperator
         clsFacetRowOp = New ROperator
         clsFacetColOp = New ROperator
@@ -247,8 +249,13 @@ Public Class dlgSeasonalGraph
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
+        clsGetObjectDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForSeasonalGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetObjectDataFunction.AddParameter("as_file", "TRUE", iPosition:=2)
+
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForSeasonalGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction, iPosition:=0)
     End Sub
 
     Private Sub SetCalculationHistory()
@@ -728,6 +735,18 @@ Public Class dlgSeasonalGraph
 
     Private Sub ucrChkAddpointRibbon_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddpointRibbon.ControlValueChanged
         ListGeomLine()
+    End Sub
+
+    Private Sub ucrSelectorForSeasonalGraph_DataFrameChanged() Handles ucrSelectorForSeasonalGraph.DataFrameChanged
+        clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForSeasonalGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub ucrSave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlValueChanged
+        If ucrSave.ucrChkSave.Checked Then
+            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & ucrSave.GetText & Chr(34), iPosition:=1)
+        Else
+            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        End If
     End Sub
 
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrReceiverRibbons.ControlContentsChanged, ucrReceiverLines.ControlContentsChanged, ucrSave.ControlContentsChanged
