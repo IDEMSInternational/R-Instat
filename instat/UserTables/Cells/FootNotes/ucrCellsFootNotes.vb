@@ -16,28 +16,17 @@
 
         Me.clsOperator = clsOperator
 
-        ' Set up the selector
+        ' Set up the controls
         ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+        SetupDataGrid(clsOperator)
 
-        ' Clear and Set up the data grid with contents
+    End Sub
+
+
+    Private Sub SetupDataGrid(clsOperator As ROperator)
+        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_footnote"}, "locations", "cells_body", clsOperator)
+        ' Clear grid rgen add contents from operator
         dataGrid.Rows.Clear()
-        SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue("tab_footnote", "locations", "cells_body", clsOperator))
-
-    End Sub
-
-    Public Sub SetValuesToOperator()
-        ' Remove any previous cell footers 
-        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRParamValue("tab_footnote", "locations", "cells_body", clsOperator)
-        For Each clsRParam As RParameter In lstRParams
-            clsOperator.RemoveParameter(clsRParam)
-        Next
-
-        ' Add new changes
-        clsTablesUtils.AddGridRowTagsRParamsToROperator(dataGrid, clsOperator)
-    End Sub
-
-    Private Sub SetupDataGrid(lstRParams As List(Of RParameter))
-
         For Each clsRParam As RParameter In lstRParams
 
             ' Create a new row that represents the tab_style() parameters
@@ -45,10 +34,9 @@
             row.CreateCells(dataGrid)
             row.Cells(0).Value = clsRParam.clsArgumentCodeStructure.Clone.ToScript
 
-            ' Tag and add the tab_style() parameter function contents as a row
+            ' Tag and add the parameter function contents as a row
             row.Tag = clsRParam
             dataGrid.Rows.Add(row)
-
         Next
     End Sub
 
@@ -90,6 +78,17 @@
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         dataGrid.Rows.Clear()
+    End Sub
+
+    Public Sub SetValuesToOperator()
+        ' Remove any previous cell footers 
+        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_footnote"}, "locations", "cells_body", clsOperator)
+        For Each clsRParam As RParameter In lstRParams
+            clsOperator.RemoveParameter(clsRParam)
+        Next
+
+        ' Add new changes
+        clsTablesUtils.AddGridRowTagsRParamsToROperator(dataGrid, clsOperator)
     End Sub
 
 End Class

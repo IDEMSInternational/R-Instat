@@ -20,16 +20,10 @@ Public Class sdgTableOptions
 
     Private clsOperator As ROperator
     Private clsThemeRFunction As RFunction
-    Private bDialogInitialised As Boolean = False
+    Private bFirstload As Boolean = True
 
     Private Sub sdgTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-    End Sub
-
-    Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
-        ucrCells.SetValuesToOperator()
-        ucrColumns.SetValuesToOperator()
-        SetThemesInOperatorOnReturn(clsOperator)
     End Sub
 
     Private Sub initialiseDialog()
@@ -39,7 +33,6 @@ Public Class sdgTableOptions
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
     End Sub
-
 
     ''' <summary>
     ''' An R operateor that has a parameter named "gt" set up.
@@ -53,14 +46,14 @@ Public Class sdgTableOptions
             Exit Sub
         End If
 
-        If Not bDialogInitialised Then
+        If bFirstload Then
             initialiseDialog()
-            bDialogInitialised = True
+            bFirstload = False
         End If
 
         clsOperator = clsNewOperator
 
-        ucrHeaderOptions.Setup(clsOperator)
+        ucrHeader.Setup(clsOperator)
         ucrStub.Setup(strDataFrameName, clsOperator)
         ucrRows.Setup(strDataFrameName, clsOperator)
         ucrColumns.Setup(strDataFrameName, clsOperator)
@@ -69,6 +62,18 @@ Public Class sdgTableOptions
         ucrSourceNotes.Setup(clsOperator)
         SetupThemeRFunctionsInOperatorOnNew(clsOperator)
     End Sub
+
+    Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
+        ucrHeader.SetValuesToOperator()
+        ucrColumns.SetValuesToOperator()
+        ucrCells.SetValuesToOperator()
+        SetThemesInOperatorOnReturn(clsOperator)
+    End Sub
+
+
+
+
+
 
     '-----------------------------------------
     ' FOOTER CONTROLS

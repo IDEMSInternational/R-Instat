@@ -24,7 +24,7 @@ Partial Class sdgTableOptions
     Private Sub InitializeComponent()
         Me.tbpFormatOptions = New System.Windows.Forms.TabControl()
         Me.tbpHeader = New System.Windows.Forms.TabPage()
-        Me.ucrHeaderOptions = New instat.ucrHeader()
+        Me.ucrHeader = New instat.ucrHeader()
         Me.tbpStub = New System.Windows.Forms.TabPage()
         Me.ucrStub = New instat.ucrStub()
         Me.tbpColumns = New System.Windows.Forms.TabPage()
@@ -69,28 +69,28 @@ Partial Class sdgTableOptions
         '
         'tbpHeader
         '
-        Me.tbpHeader.Controls.Add(Me.ucrHeaderOptions)
+        Me.tbpHeader.Controls.Add(Me.ucrHeader)
         Me.tbpHeader.Location = New System.Drawing.Point(4, 22)
         Me.tbpHeader.Name = "tbpHeader"
         Me.tbpHeader.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpHeader.Size = New System.Drawing.Size(648, 385)
+        Me.tbpHeader.Size = New System.Drawing.Size(648, 369)
         Me.tbpHeader.TabIndex = 0
         Me.tbpHeader.Text = "Header"
         Me.tbpHeader.UseVisualStyleBackColor = True
         '
-        'ucrHeaderOptions
+        'ucrHeader
         '
-        Me.ucrHeaderOptions.Location = New System.Drawing.Point(7, 6)
-        Me.ucrHeaderOptions.Name = "ucrHeaderOptions"
-        Me.ucrHeaderOptions.Size = New System.Drawing.Size(303, 114)
-        Me.ucrHeaderOptions.TabIndex = 16
+        Me.ucrHeader.Location = New System.Drawing.Point(7, 6)
+        Me.ucrHeader.Name = "ucrHeader"
+        Me.ucrHeader.Size = New System.Drawing.Size(303, 266)
+        Me.ucrHeader.TabIndex = 16
         '
         'tbpStub
         '
         Me.tbpStub.Controls.Add(Me.ucrStub)
         Me.tbpStub.Location = New System.Drawing.Point(4, 22)
         Me.tbpStub.Name = "tbpStub"
-        Me.tbpStub.Size = New System.Drawing.Size(648, 385)
+        Me.tbpStub.Size = New System.Drawing.Size(648, 369)
         Me.tbpStub.TabIndex = 9
         Me.tbpStub.Text = "Stub"
         Me.tbpStub.UseVisualStyleBackColor = True
@@ -107,7 +107,7 @@ Partial Class sdgTableOptions
         Me.tbpColumns.Controls.Add(Me.ucrColumns)
         Me.tbpColumns.Location = New System.Drawing.Point(4, 22)
         Me.tbpColumns.Name = "tbpColumns"
-        Me.tbpColumns.Size = New System.Drawing.Size(648, 385)
+        Me.tbpColumns.Size = New System.Drawing.Size(648, 369)
         Me.tbpColumns.TabIndex = 8
         Me.tbpColumns.Text = "Columns"
         Me.tbpColumns.UseVisualStyleBackColor = True
@@ -141,7 +141,7 @@ Partial Class sdgTableOptions
         Me.tbpCells.Controls.Add(Me.ucrCells)
         Me.tbpCells.Location = New System.Drawing.Point(4, 22)
         Me.tbpCells.Name = "tbpCells"
-        Me.tbpCells.Size = New System.Drawing.Size(648, 385)
+        Me.tbpCells.Size = New System.Drawing.Size(648, 369)
         Me.tbpCells.TabIndex = 3
         Me.tbpCells.Text = "Cells"
         Me.tbpCells.UseVisualStyleBackColor = True
@@ -158,7 +158,7 @@ Partial Class sdgTableOptions
         Me.tbpSourceNotes.Controls.Add(Me.ucrSourceNotes)
         Me.tbpSourceNotes.Location = New System.Drawing.Point(4, 22)
         Me.tbpSourceNotes.Name = "tbpSourceNotes"
-        Me.tbpSourceNotes.Size = New System.Drawing.Size(648, 385)
+        Me.tbpSourceNotes.Size = New System.Drawing.Size(648, 369)
         Me.tbpSourceNotes.TabIndex = 4
         Me.tbpSourceNotes.Text = "Source Notes"
         Me.tbpSourceNotes.UseVisualStyleBackColor = True
@@ -180,7 +180,7 @@ Partial Class sdgTableOptions
         Me.tbpThemes.Controls.Add(Me.ucrPnlThemesPanel)
         Me.tbpThemes.Location = New System.Drawing.Point(4, 22)
         Me.tbpThemes.Name = "tbpThemes"
-        Me.tbpThemes.Size = New System.Drawing.Size(648, 385)
+        Me.tbpThemes.Size = New System.Drawing.Size(648, 369)
         Me.tbpThemes.TabIndex = 6
         Me.tbpThemes.Text = "Themes"
         Me.tbpThemes.UseVisualStyleBackColor = True
@@ -282,7 +282,7 @@ Partial Class sdgTableOptions
     Friend WithEvents ucrPnlThemesPanel As UcrPanel
     Friend WithEvents ucrSourceNotes As ucrSourceNotes
     Friend WithEvents tbpRows As TabPage
-    Friend WithEvents ucrHeaderOptions As ucrHeader
+    Friend WithEvents ucrHeader As ucrHeader
     Friend WithEvents tbpColumns As TabPage
     Friend WithEvents ucrColumns As ucrColumns
     Friend WithEvents ucrRows As ucrRows

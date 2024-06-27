@@ -2,7 +2,7 @@
 
 Public Class sdgTableStyles
 
-    Private clsStyleRFunction, clsCellTextRFunction, clsCellFillRFunction, clsCellBordersRFunction, clsCellBorderSidesRFunction As New RFunction
+    Private clsStyleListRFunction, clsCellTextRFunction, clsCellFillRFunction, clsCellBordersRFunction, clsCellBorderSidesRFunction As New RFunction
     Private bFirstload As Boolean = True
     Private bUserMadeChanges As Boolean = False
     Private bUserClickedReturn As Boolean = False
@@ -260,7 +260,7 @@ Public Class sdgTableStyles
 
     End Sub
 
-    Public Sub Setup(clsNewStyleRFunction As RFunction)
+    Public Sub Setup(clsStyleListRFunction As RFunction)
 
         ' TODO
 
@@ -269,13 +269,13 @@ Public Class sdgTableStyles
 
     Private Sub SetDefaults()
 
-        clsStyleRFunction = New RFunction
+        clsStyleListRFunction = New RFunction
         clsCellTextRFunction = New RFunction
         clsCellFillRFunction = New RFunction
         clsCellBordersRFunction = New RFunction
         clsCellBorderSidesRFunction = New RFunction
 
-        clsStyleRFunction.SetRCommand("list")
+        clsStyleListRFunction.SetRCommand("list")
 
         clsCellTextRFunction.SetPackageName("gt")
         clsCellTextRFunction.SetRCommand("cell_text")
@@ -336,21 +336,21 @@ Public Class sdgTableStyles
         End If
 
         If clsCellTextRFunction.clsParameters.Count > 0 Then
-            clsStyleRFunction.AddParameter(strParameterName:="cell_text_param", clsRFunctionParameter:=clsCellTextRFunction, bIncludeArgumentName:=False, iPosition:=0)
+            clsStyleListRFunction.AddParameter(strParameterName:="cell_text_param", clsRFunctionParameter:=clsCellTextRFunction, bIncludeArgumentName:=False, iPosition:=0)
         End If
 
         If clsCellFillRFunction.clsParameters.Count > 0 Then
-            clsStyleRFunction.AddParameter(strParameterName:="cell_fill_param", clsRFunctionParameter:=clsCellFillRFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsStyleListRFunction.AddParameter(strParameterName:="cell_fill_param", clsRFunctionParameter:=clsCellFillRFunction, bIncludeArgumentName:=False, iPosition:=1)
         End If
 
         If clsCellBordersRFunction.clsParameters.Count > 0 OrElse clsCellBorderSidesRFunction.clsParameters.Count > 0 Then
             If clsCellBorderSidesRFunction.clsParameters.Count > 0 Then
                 clsCellBordersRFunction.AddParameter(strParameterName:="sides", clsRFunctionParameter:=clsCellBorderSidesRFunction, iPosition:=0)
             End If
-            clsStyleRFunction.AddParameter(strParameterName:="cell_borders_param", clsRFunctionParameter:=clsCellBordersRFunction, bIncludeArgumentName:=False, iPosition:=1)
+            clsStyleListRFunction.AddParameter(strParameterName:="cell_borders_param", clsRFunctionParameter:=clsCellBordersRFunction, bIncludeArgumentName:=False, iPosition:=1)
         End If
 
-        Return clsStyleRFunction
+        Return clsStyleListRFunction
     End Function
 
     Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn

@@ -20,13 +20,13 @@
 
         ' Clear and Set up the data grid with contents
         dataGrid.Rows.Clear()
-        SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue("tab_footnote", "locations", "cells_column_labels", clsOperator))
+        SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_footnote"}, "locations", "cells_column_labels", clsOperator))
 
     End Sub
 
     Public Sub SetValuesToOperator()
         ' Remove any previous cell footers 
-        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRParamValue("tab_footnote", "locations", "cells_column_labels", clsOperator)
+        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_footnote"}, "locations", "cells_column_labels", clsOperator)
         For Each clsRParam As RParameter In lstRParams
             clsOperator.RemoveParameter(clsRParam)
         Next

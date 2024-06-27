@@ -89,7 +89,7 @@ Public Class ucrSourceNotes
         row.Tag = clsNewNoteRFunction
 
         ' Remove all the tab source notes R Functions
-        clsTablesUtils.RemoveParameterFromOperator({"tab_source_note"}, clsOperator)
+        clsTablesUtils.RemoveRFunctionsParamsWithRCommand({"tab_source_note"}, clsOperator)
 
         ' Add all the tab source note RFunctions
         clsTablesUtils.SetGridTagsInOperator(dataGridSourceNotes, "tab_source_note", clsOperator)
