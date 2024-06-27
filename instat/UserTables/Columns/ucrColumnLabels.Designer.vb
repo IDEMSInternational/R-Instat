@@ -42,7 +42,7 @@ Partial Class ucrColumnLabels
         Me.dataGridColLabels.AllowUserToAddRows = False
         Me.dataGridColLabels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dataGridColLabels.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colLabel, Me.colCodnition, Me.colFormat})
-        Me.dataGridColLabels.Location = New System.Drawing.Point(230, 95)
+        Me.dataGridColLabels.Location = New System.Drawing.Point(230, 159)
         Me.dataGridColLabels.Name = "dataGridColLabels"
         Me.dataGridColLabels.RowHeadersWidth = 62
         Me.dataGridColLabels.Size = New System.Drawing.Size(339, 95)
@@ -78,16 +78,16 @@ Partial Class ucrColumnLabels
         Me.ucrInputColLabel.AutoSize = True
         Me.ucrInputColLabel.IsMultiline = False
         Me.ucrInputColLabel.IsReadOnly = False
-        Me.ucrInputColLabel.Location = New System.Drawing.Point(357, 27)
+        Me.ucrInputColLabel.Location = New System.Drawing.Point(230, 73)
         Me.ucrInputColLabel.Name = "ucrInputColLabel"
-        Me.ucrInputColLabel.Size = New System.Drawing.Size(100, 21)
+        Me.ucrInputColLabel.Size = New System.Drawing.Size(119, 21)
         Me.ucrInputColLabel.TabIndex = 320
         '
         'lblCondition
         '
         Me.lblCondition.AutoSize = True
         Me.lblCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCondition.Location = New System.Drawing.Point(358, 10)
+        Me.lblCondition.Location = New System.Drawing.Point(227, 57)
         Me.lblCondition.Name = "lblCondition"
         Me.lblCondition.Size = New System.Drawing.Size(36, 13)
         Me.lblCondition.TabIndex = 319
@@ -97,7 +97,7 @@ Partial Class ucrColumnLabels
         '
         Me.lblColLabels.AutoSize = True
         Me.lblColLabels.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColLabels.Location = New System.Drawing.Point(227, 76)
+        Me.lblColLabels.Location = New System.Drawing.Point(227, 140)
         Me.lblColLabels.Name = "lblColLabels"
         Me.lblColLabels.Size = New System.Drawing.Size(79, 13)
         Me.lblColLabels.TabIndex = 315
@@ -106,7 +106,7 @@ Partial Class ucrColumnLabels
         'btnClearLabels
         '
         Me.btnClearLabels.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearLabels.Location = New System.Drawing.Point(490, 71)
+        Me.btnClearLabels.Location = New System.Drawing.Point(490, 135)
         Me.btnClearLabels.Name = "btnClearLabels"
         Me.btnClearLabels.Size = New System.Drawing.Size(79, 23)
         Me.btnClearLabels.TabIndex = 314
@@ -128,7 +128,7 @@ Partial Class ucrColumnLabels
         '
         Me.btnAddLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnAddLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnAddLabel.Location = New System.Drawing.Point(462, 26)
+        Me.btnAddLabel.Location = New System.Drawing.Point(230, 100)
         Me.btnAddLabel.Name = "btnAddLabel"
         Me.btnAddLabel.Size = New System.Drawing.Size(78, 23)
         Me.btnAddLabel.TabIndex = 312
@@ -175,7 +175,7 @@ Partial Class ucrColumnLabels
         Me.Controls.Add(Me.ucrReceiverSingleCol)
         Me.Controls.Add(Me.ucrSelectorCols)
         Me.Name = "ucrColumnLabels"
-        Me.Size = New System.Drawing.Size(575, 194)
+        Me.Size = New System.Drawing.Size(575, 257)
         CType(Me.dataGridColLabels, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

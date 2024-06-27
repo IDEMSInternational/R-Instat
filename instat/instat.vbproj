@@ -404,6 +404,18 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\clsTablesUtils.vb" />
+    <Compile Include="UserTables\Columns\ucrColumnFootNote.Designer.vb">
+      <DependentUpon>ucrColumnFootNote.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnFootNote.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnWidth.Designer.vb">
+      <DependentUpon>ucrColumnWidth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnWidth.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\dlgGeneralTable.Designer.vb">
       <DependentUpon>dlgGeneralTable.vb</DependentUpon>
     </Compile>
@@ -3371,6 +3383,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Styles\ucrCellStyles.resx">
       <DependentUpon>ucrCellStyles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnFootNote.resx">
+      <DependentUpon>ucrColumnFootNote.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnWidth.resx">
+      <DependentUpon>ucrColumnWidth.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\dlgGeneralTable.resx">
       <DependentUpon>dlgGeneralTable.vb</DependentUpon>

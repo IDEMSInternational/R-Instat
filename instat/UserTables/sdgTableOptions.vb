@@ -27,12 +27,8 @@ Public Class sdgTableOptions
     End Sub
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
-
-        'clsTablesUtils.RemoveParameterFromOperator("tab_footnote", clsOperator)
-        'clsTablesUtils.SetGridTagsInOperator(dataGridCellFooterNotes, "tab_footnote", clsOperator)
-
         ucrCells.SetValuesToOperator()
-
+        ucrColumns.SetValuesToOperator()
         SetThemesInOperatorOnReturn(clsOperator)
     End Sub
 
@@ -43,7 +39,6 @@ Public Class sdgTableOptions
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
     End Sub
-
 
 
     ''' <summary>
@@ -158,10 +153,6 @@ Public Class sdgTableOptions
         clsNewNoteRFunction.AddParameter(New RParameter(strParameterName:=strRNoteTextParameterName, strParamValue:=clsNoteTextRFunction, iNewPosition:=0))
         Return clsNewNoteRFunction
     End Function
-
-
-
-
 
     '-----------------------------------------
 

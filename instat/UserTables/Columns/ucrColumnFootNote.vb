@@ -1,5 +1,4 @@
-﻿Public Class ucrCellsFootNotes
-
+﻿Public Class ucrColumnFootNote
     Private clsOperator As New ROperator
     Private bFirstload As Boolean = True
 
@@ -21,13 +20,13 @@
 
         ' Clear and Set up the data grid with contents
         dataGrid.Rows.Clear()
-        SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue("tab_footnote", "locations", "cells_body", clsOperator))
+        SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue("tab_footnote", "locations", "cells_column_labels", clsOperator))
 
     End Sub
 
     Public Sub SetValuesToOperator()
         ' Remove any previous cell footers 
-        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRParamValue("tab_footnote", "locations", "cells_body", clsOperator)
+        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRParamValue("tab_footnote", "locations", "cells_column_labels", clsOperator)
         For Each clsRParam As RParameter In lstRParams
             clsOperator.RemoveParameter(clsRParam)
         Next
@@ -52,8 +51,8 @@
         Next
     End Sub
 
-    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRows.ControlContentsChanged, ucrReceiverSingleCol.ControlContentsChanged
-        btnAdd.Enabled = Not ucrReceiverSingleCol.IsEmpty AndAlso Not ucrInputRows.IsEmpty
+    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingleCol.ControlContentsChanged
+        btnAdd.Enabled = Not ucrReceiverSingleCol.IsEmpty
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -63,9 +62,8 @@
 
 
         clsLocationsRFunction.SetPackageName("gt")
-        clsLocationsRFunction.SetRCommand("cells_body")
+        clsLocationsRFunction.SetRCommand("cells_column_labels")
         clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=ucrReceiverSingleCol.GetVariableNames(bWithQuotes:=False), iNewPosition:=0))
-        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=ucrInputRows.GetText, iNewPosition:=1))
 
         clsTabFootNoteRFunction.SetPackageName("gt")
         clsTabFootNoteRFunction.SetRCommand("tab_footnote")
@@ -73,7 +71,7 @@
         clsTabFootNoteRFunction.AddParameter(strParameterName:="locations", clsRFunctionParameter:=clsLocationsRFunction, iPosition:=1)
 
         ' Create parameter with unique name
-        Dim clsRParam As New RParameter(strParameterName:="tab_footnote_cells_param" & (dataGrid.Rows.Count + 1), strParamValue:=clsTabFootNoteRFunction, bNewIncludeArgumentName:=False)
+        Dim clsRParam As New RParameter(strParameterName:="tab_footnote_columns_param" & (dataGrid.Rows.Count + 1), strParamValue:=clsTabFootNoteRFunction, bNewIncludeArgumentName:=False)
 
         ' Create row and its cells
         Dim row As New DataGridViewRow

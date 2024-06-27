@@ -17,7 +17,7 @@
         Me.clsOperator = clsOperator
 
         ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
-        dataGridSpanners.Rows.Clear()
+        dataGrid.Rows.Clear()
 
         Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_spanner"}, clsOperator)
 
@@ -26,7 +26,7 @@
             Dim clsTabSpannerRFunction As RFunction = clsRParam.clsArgumentCodeStructure
 
             Dim row As New DataGridViewRow
-            row.CreateCells(dataGridSpanners)
+            row.CreateCells(dataGrid)
 
             For Each clsTabSpannerRParam As RParameter In clsTabSpannerRFunction.clsParameters
                 If clsTabSpannerRParam.strArgumentName = "id" Then
@@ -39,7 +39,7 @@
             Next
 
             row.Tag = clsRParam
-            dataGridSpanners.Rows.Add(row)
+            dataGrid.Rows.Add(row)
 
         Next
 
@@ -59,17 +59,17 @@
         clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="id", strParamValue:=clsTablesUtils.GetStringValue(strSpannerId, True), iNewPosition:=2))
 
         ' Create parameter with unique name
-        Dim clsRParam As New RParameter(strParameterName:="tab_spanner_param" & (dataGridSpanners.Rows.Count + 1), strParamValue:=clsTabSpannerRFunction, bNewIncludeArgumentName:=False)
+        Dim clsRParam As New RParameter(strParameterName:="tab_spanner_param" & (dataGrid.Rows.Count + 1), strParamValue:=clsTabSpannerRFunction, bNewIncludeArgumentName:=False)
 
         Dim row As New DataGridViewRow
-        row.CreateCells(dataGridSpanners)
+        row.CreateCells(dataGrid)
 
         row.Cells(0).Value = strSpannerId
         row.Cells(1).Value = strSpannerLabel
         row.Cells(2).Value = strSpannerColsRFunction
 
         row.Tag = clsRParam
-        dataGridSpanners.Rows.Add(row)
+        dataGrid.Rows.Add(row)
 
         ' Add to parameter
         clsOperator.AddParameter(clsRParam)
@@ -80,10 +80,10 @@
     End Sub
 
     Private Sub btnClearGroups_Click(sender As Object, e As EventArgs) Handles btnClearSpanners.Click
-        For index As Integer = 0 To dataGridSpanners.Rows.Count - 1
-            clsOperator.RemoveParameter(dataGridSpanners.Rows(index).Tag)
+        For index As Integer = 0 To dataGrid.Rows.Count - 1
+            clsOperator.RemoveParameter(dataGrid.Rows(index).Tag)
         Next
-        dataGridSpanners.Rows.Clear()
+        dataGrid.Rows.Clear()
     End Sub
 
 
