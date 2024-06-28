@@ -415,9 +415,11 @@ Partial Class frmMain
         Me.ToolStripSeparator75 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbLogScript = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuLogScript = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSwapDataLogScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMetadata = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuColumnMetadat = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDataFrameMetadat = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSwapDataMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator76 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -698,8 +700,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuSwapDataMetadata = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuSwapDataLogScript = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3272,6 +3272,13 @@ Partial Class frmMain
         Me.mnuLogScript.Size = New System.Drawing.Size(210, 22)
         Me.mnuLogScript.Text = "Log/Script"
         '
+        'mnuSwapDataLogScript
+        '
+        Me.mnuSwapDataLogScript.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuSwapDataLogScript.Name = "mnuSwapDataLogScript"
+        Me.mnuSwapDataLogScript.Size = New System.Drawing.Size(210, 22)
+        Me.mnuSwapDataLogScript.Text = "Swap Data and Log/Script"
+        '
         'mnuMetadata
         '
         Me.mnuMetadata.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -3297,6 +3304,13 @@ Partial Class frmMain
         Me.mnuDataFrameMetadat.Name = "mnuDataFrameMetadat"
         Me.mnuDataFrameMetadat.Size = New System.Drawing.Size(214, 22)
         Me.mnuDataFrameMetadat.Text = "  Data Frame Metadata..."
+        '
+        'mnuSwapDataMetadata
+        '
+        Me.mnuSwapDataMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuSwapDataMetadata.Name = "mnuSwapDataMetadata"
+        Me.mnuSwapDataMetadata.Size = New System.Drawing.Size(214, 22)
+        Me.mnuSwapDataMetadata.Text = "Swap Data and Metadata..."
         '
         'ToolStripSeparator76
         '
@@ -5211,18 +5225,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuSwapDataMetadata
-        '
-        Me.mnuSwapDataMetadata.Name = "mnuSwapDataMetadata"
-        Me.mnuSwapDataMetadata.Size = New System.Drawing.Size(214, 22)
-        Me.mnuSwapDataMetadata.Text = "Swap Data and Metadata..."
-        '
-        'mnuSwapDataLogScript
-        '
-        Me.mnuSwapDataLogScript.Name = "mnuSwapDataLogScript"
-        Me.mnuSwapDataLogScript.Size = New System.Drawing.Size(210, 22)
-        Me.mnuSwapDataLogScript.Text = "Swap Data and Log/Script"
         '
         'frmMain
         '

@@ -295,7 +295,8 @@ Public Class frmMain
         mnuViewSwapDataAndScript.Checked = False
         mnuColumnMetadat.Checked = False
         mnuDataFrameMetadat.Checked = False
-
+        mnuSwapDataLogScript.Checked = False
+        mnuSwapDataMetadata.Checked = False
         mnuTbDataView.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
@@ -578,11 +579,13 @@ Public Class frmMain
             splMetadata.Panel1.Controls.Add(ucrDataViewer)
             mnuViewColumnMetadata.Text = "Data View"
             mnuViewDataView.Text = "Column Metadata"
+            mnuSwapDataMetadata.Checked = True
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel1.Controls.Add(ucrColumnMeta)
             mnuViewColumnMetadata.Text = "Column Metadata"
             mnuViewDataView.Text = "Data View"
+            mnuSwapDataMetadata.Checked = False
         End If
     End Sub
 
@@ -592,11 +595,13 @@ Public Class frmMain
             splExtraWindows.Panel2.Controls.Add(ucrDataViewer)
             mnuViewLogScript.Text = "Data View"
             mnuViewDataView.Text = "Log/Script"
+            mnuSwapDataLogScript.Checked = True
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splExtraWindows.Panel2.Controls.Add(ucrScriptWindow)
             mnuViewLogScript.Text = "Log/Script"
             mnuViewDataView.Text = "Data View"
+            mnuSwapDataLogScript.Checked = False
         End If
     End Sub
 
@@ -2810,7 +2815,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
-        mnuSwapDataMetadata.Checked = mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
@@ -2818,7 +2822,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuSwapDataLogScript_Click(sender As Object, e As EventArgs) Handles mnuSwapDataLogScript.Click
-        mnuSwapDataLogScript.Checked = mnuViewSwapDataAndScript.Checked
         mnuViewSwapDataAndMetadata.Enabled = mnuViewSwapDataAndScript.Checked
         mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
         UpdateSwapDataAndScript()
