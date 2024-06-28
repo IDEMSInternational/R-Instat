@@ -98,7 +98,7 @@ Public Class dlgEvapotranspiration
         ucrReceiverHumidityMin.SetClimaticType("hum_min")
         ucrReceiverHumidityMin.bAutoFill = True
 
-        ucrReceiverWindSpeed.SetParameter(New RParameter("u2", 7))
+        ucrReceiverWindSpeed.SetParameter(New RParameter("uz", 7))
         ucrReceiverWindSpeed.SetParameterIsRFunction()
         ucrReceiverWindSpeed.SetClimaticType("wind_speed")
         ucrReceiverWindSpeed.bAutoFill = True
@@ -488,7 +488,7 @@ Public Class dlgEvapotranspiration
 
     Private Sub ucrReceiverWindSpeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindSpeed.ControlValueChanged, ucrChkWind.ControlValueChanged
         If ucrChkWind.Checked AndAlso Not ucrReceiverWindSpeed.IsEmpty Then
-            clsVarnamesVectorPMFunction.AddParameter("x", Chr(34) & "u2" & Chr(34), bIncludeArgumentName:=False)
+            clsVarnamesVectorPMFunction.AddParameter("x", Chr(34) & "uz" & Chr(34), bIncludeArgumentName:=False)
         Else
             clsVarnamesVectorPMFunction.RemoveParameterByName("x")
             ucrReceiverHumidityMax.SetMeAsReceiver()
