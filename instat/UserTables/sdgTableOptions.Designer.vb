@@ -99,7 +99,7 @@ Partial Class sdgTableOptions
         '
         Me.ucrStub.Location = New System.Drawing.Point(7, 7)
         Me.ucrStub.Name = "ucrStub"
-        Me.ucrStub.Size = New System.Drawing.Size(411, 191)
+        Me.ucrStub.Size = New System.Drawing.Size(425, 258)
         Me.ucrStub.TabIndex = 0
         '
         'tbpColumns

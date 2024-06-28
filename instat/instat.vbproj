@@ -422,6 +422,12 @@
     <Compile Include="UserTables\dlgGeneralTable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UserTables\Rows\ucrRowExpression.Designer.vb">
+      <DependentUpon>ucrRowExpression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Rows\ucrRowExpression.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\sdgTableOptionsTextFormat.Designer.vb">
       <DependentUpon>sdgTableOptionsTextFormat.vb</DependentUpon>
     </Compile>
@@ -3152,6 +3158,12 @@
     <Compile Include="UserTables\Rows\ucrRowSummary.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\sdgTableRowExpression.Designer.vb">
+      <DependentUpon>sdgTableRowExpression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\sdgTableRowExpression.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UserTables\sdgTableStyles.Designer.vb">
       <DependentUpon>sdgTableStyles.vb</DependentUpon>
     </Compile>
@@ -3168,6 +3180,18 @@
       <DependentUpon>ucrStub.vb</DependentUpon>
     </Compile>
     <Compile Include="UserTables\Stub\ucrStub.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStubOptions.Designer.vb">
+      <DependentUpon>ucrStubOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStubOptions.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStubStyle.Designer.vb">
+      <DependentUpon>ucrStubStyle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStubStyle.vb">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -3392,6 +3416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\dlgGeneralTable.resx">
       <DependentUpon>dlgGeneralTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Rows\ucrRowExpression.resx">
+      <DependentUpon>ucrRowExpression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\sdgTableOptionsTextFormat.resx">
       <DependentUpon>sdgTableOptionsTextFormat.vb</DependentUpon>
@@ -5524,6 +5551,9 @@
     <EmbeddedResource Include="UserTables\Rows\ucrRowSummary.resx">
       <DependentUpon>ucrRowSummary.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\sdgTableRowExpression.resx">
+      <DependentUpon>sdgTableRowExpression.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserTables\sdgTableStyles.resx">
       <DependentUpon>sdgTableStyles.vb</DependentUpon>
     </EmbeddedResource>
@@ -5532,6 +5562,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Stub\ucrStub.resx">
       <DependentUpon>ucrStub.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Stub\ucrStubOptions.resx">
+      <DependentUpon>ucrStubOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Stub\ucrStubStyle.resx">
+      <DependentUpon>ucrStubStyle.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

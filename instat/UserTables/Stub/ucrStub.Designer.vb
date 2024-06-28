@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrStub
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,119 +20,95 @@ Partial Class ucrStub
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblRowName = New System.Windows.Forms.Label()
-        Me.ucrReceiverSingleRowName = New instat.ucrReceiverSingle()
-        Me.lblGroupByCol = New System.Windows.Forms.Label()
-        Me.ucrReceiverSingleGroupByCol = New instat.ucrReceiverSingle()
-        Me.lblStubHeadLabel = New System.Windows.Forms.Label()
-        Me.ucrInputStubHead = New instat.ucrInputTextBox()
-        Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrStubOptions = New instat.ucrStubOptions()
+        Me.rdoVariables = New System.Windows.Forms.RadioButton()
+        Me.rdoStyles = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlStub = New instat.UcrPanel()
+        Me.ucrStubStyle = New instat.ucrStubStyle()
         Me.SuspendLayout()
         '
-        'lblRowName
+        'ucrStubOptions
         '
-        Me.lblRowName.AutoSize = True
-        Me.lblRowName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRowName.Location = New System.Drawing.Point(252, 54)
-        Me.lblRowName.Name = "lblRowName"
-        Me.lblRowName.Size = New System.Drawing.Size(63, 13)
-        Me.lblRowName.TabIndex = 37
-        Me.lblRowName.Text = "Row Name:"
+        Me.ucrStubOptions.Location = New System.Drawing.Point(3, 40)
+        Me.ucrStubOptions.Name = "ucrStubOptions"
+        Me.ucrStubOptions.Size = New System.Drawing.Size(405, 187)
+        Me.ucrStubOptions.TabIndex = 0
         '
-        'ucrReceiverSingleRowName
+        'rdoVariables
         '
-        Me.ucrReceiverSingleRowName.AutoSize = True
-        Me.ucrReceiverSingleRowName.frmParent = Nothing
-        Me.ucrReceiverSingleRowName.Location = New System.Drawing.Point(255, 67)
-        Me.ucrReceiverSingleRowName.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSingleRowName.Name = "ucrReceiverSingleRowName"
-        Me.ucrReceiverSingleRowName.Selector = Nothing
-        Me.ucrReceiverSingleRowName.Size = New System.Drawing.Size(142, 20)
-        Me.ucrReceiverSingleRowName.strNcFilePath = ""
-        Me.ucrReceiverSingleRowName.TabIndex = 36
-        Me.ucrReceiverSingleRowName.ucrSelector = Nothing
+        Me.rdoVariables.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoVariables.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoVariables.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoVariables.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoVariables.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoVariables.FlatAppearance.BorderSize = 2
+        Me.rdoVariables.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoVariables.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoVariables.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoVariables.Location = New System.Drawing.Point(106, 3)
+        Me.rdoVariables.Name = "rdoVariables"
+        Me.rdoVariables.Size = New System.Drawing.Size(91, 29)
+        Me.rdoVariables.TabIndex = 283
+        Me.rdoVariables.Text = "Contents"
+        Me.rdoVariables.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoVariables.UseVisualStyleBackColor = True
         '
-        'lblGroupByCol
+        'rdoStyles
         '
-        Me.lblGroupByCol.AutoSize = True
-        Me.lblGroupByCol.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGroupByCol.Location = New System.Drawing.Point(253, 9)
-        Me.lblGroupByCol.Name = "lblGroupByCol"
-        Me.lblGroupByCol.Size = New System.Drawing.Size(54, 13)
-        Me.lblGroupByCol.TabIndex = 35
-        Me.lblGroupByCol.Text = "Group By:"
+        Me.rdoStyles.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoStyles.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoStyles.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoStyles.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoStyles.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStyles.FlatAppearance.BorderSize = 2
+        Me.rdoStyles.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStyles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoStyles.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoStyles.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoStyles.Location = New System.Drawing.Point(195, 3)
+        Me.rdoStyles.Name = "rdoStyles"
+        Me.rdoStyles.Size = New System.Drawing.Size(91, 29)
+        Me.rdoStyles.TabIndex = 284
+        Me.rdoStyles.Text = "Styles"
+        Me.rdoStyles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoStyles.UseVisualStyleBackColor = True
         '
-        'ucrReceiverSingleGroupByCol
+        'ucrPnlStub
         '
-        Me.ucrReceiverSingleGroupByCol.AutoSize = True
-        Me.ucrReceiverSingleGroupByCol.frmParent = Nothing
-        Me.ucrReceiverSingleGroupByCol.Location = New System.Drawing.Point(255, 23)
-        Me.ucrReceiverSingleGroupByCol.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSingleGroupByCol.Name = "ucrReceiverSingleGroupByCol"
-        Me.ucrReceiverSingleGroupByCol.Selector = Nothing
-        Me.ucrReceiverSingleGroupByCol.Size = New System.Drawing.Size(142, 20)
-        Me.ucrReceiverSingleGroupByCol.strNcFilePath = ""
-        Me.ucrReceiverSingleGroupByCol.TabIndex = 34
-        Me.ucrReceiverSingleGroupByCol.ucrSelector = Nothing
+        Me.ucrPnlStub.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlStub.Location = New System.Drawing.Point(81, 3)
+        Me.ucrPnlStub.Name = "ucrPnlStub"
+        Me.ucrPnlStub.Size = New System.Drawing.Size(232, 29)
+        Me.ucrPnlStub.TabIndex = 282
         '
-        'lblStubHeadLabel
+        'ucrStubStyle
         '
-        Me.lblStubHeadLabel.AutoSize = True
-        Me.lblStubHeadLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStubHeadLabel.Location = New System.Drawing.Point(253, 100)
-        Me.lblStubHeadLabel.Name = "lblStubHeadLabel"
-        Me.lblStubHeadLabel.Size = New System.Drawing.Size(85, 13)
-        Me.lblStubHeadLabel.TabIndex = 39
-        Me.lblStubHeadLabel.Text = "Stubhead Label:"
-        '
-        'ucrInputStubHead
-        '
-        Me.ucrInputStubHead.AddQuotesIfUnrecognised = True
-        Me.ucrInputStubHead.AutoSize = True
-        Me.ucrInputStubHead.IsMultiline = False
-        Me.ucrInputStubHead.IsReadOnly = False
-        Me.ucrInputStubHead.Location = New System.Drawing.Point(255, 116)
-        Me.ucrInputStubHead.Name = "ucrInputStubHead"
-        Me.ucrInputStubHead.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputStubHead.TabIndex = 40
-        '
-        'ucrSelectorCols
-        '
-        Me.ucrSelectorCols.AutoSize = True
-        Me.ucrSelectorCols.bDropUnusedFilterLevels = False
-        Me.ucrSelectorCols.bShowHiddenColumns = False
-        Me.ucrSelectorCols.bUseCurrentFilter = True
-        Me.ucrSelectorCols.Location = New System.Drawing.Point(2, 3)
-        Me.ucrSelectorCols.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorCols.Name = "ucrSelectorCols"
-        Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorCols.TabIndex = 291
+        Me.ucrStubStyle.Location = New System.Drawing.Point(3, 43)
+        Me.ucrStubStyle.Name = "ucrStubStyle"
+        Me.ucrStubStyle.Size = New System.Drawing.Size(372, 186)
+        Me.ucrStubStyle.TabIndex = 285
         '
         'ucrStub
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrSelectorCols)
-        Me.Controls.Add(Me.ucrInputStubHead)
-        Me.Controls.Add(Me.lblStubHeadLabel)
-        Me.Controls.Add(Me.lblRowName)
-        Me.Controls.Add(Me.ucrReceiverSingleRowName)
-        Me.Controls.Add(Me.lblGroupByCol)
-        Me.Controls.Add(Me.ucrReceiverSingleGroupByCol)
+        Me.Controls.Add(Me.ucrStubStyle)
+        Me.Controls.Add(Me.rdoVariables)
+        Me.Controls.Add(Me.rdoStyles)
+        Me.Controls.Add(Me.ucrPnlStub)
+        Me.Controls.Add(Me.ucrStubOptions)
         Me.Name = "ucrStub"
-        Me.Size = New System.Drawing.Size(411, 191)
+        Me.Size = New System.Drawing.Size(420, 239)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents lblRowName As Label
-    Friend WithEvents ucrReceiverSingleRowName As ucrReceiverSingle
-    Friend WithEvents lblGroupByCol As Label
-    Friend WithEvents ucrReceiverSingleGroupByCol As ucrReceiverSingle
-    Friend WithEvents lblStubHeadLabel As Label
-    Friend WithEvents ucrInputStubHead As ucrInputTextBox
-    Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrStubOptions As ucrStubOptions
+    Friend WithEvents rdoVariables As RadioButton
+    Friend WithEvents rdoStyles As RadioButton
+    Friend WithEvents ucrPnlStub As UcrPanel
+    Friend WithEvents ucrStubStyle As ucrStubStyle
 End Class

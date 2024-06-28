@@ -65,6 +65,7 @@ Public Class sdgTableOptions
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
         ucrHeader.SetValuesToOperator()
+        ucrStub.SetValuesToOperator()
         ucrColumns.SetValuesToOperator()
         ucrCells.SetValuesToOperator()
         SetThemesInOperatorOnReturn(clsOperator)

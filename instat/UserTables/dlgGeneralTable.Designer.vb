@@ -56,7 +56,7 @@ Partial Class dlgGeneralTable
         Me.ucrNudPreview.AutoSize = True
         Me.ucrNudPreview.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPreview.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPreview.Location = New System.Drawing.Point(400, 173)
+        Me.ucrNudPreview.Location = New System.Drawing.Point(370, 174)
         Me.ucrNudPreview.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrNudPreview.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPreview.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -72,7 +72,7 @@ Partial Class dlgGeneralTable
         Me.ucrChkPreview.Location = New System.Drawing.Point(250, 175)
         Me.ucrChkPreview.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkPreview.Name = "ucrChkPreview"
-        Me.ucrChkPreview.Size = New System.Drawing.Size(144, 23)
+        Me.ucrChkPreview.Size = New System.Drawing.Size(119, 23)
         Me.ucrChkPreview.TabIndex = 30
         '
         'ucrSaveTable
