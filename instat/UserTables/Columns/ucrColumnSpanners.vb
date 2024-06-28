@@ -1,0 +1,94 @@
+﻿Public Class ucrColumnSpanners
+
+    Private clsOperator As New ROperator
+    Private bFirstload As Boolean = True
+
+    Private Sub InitialiseDialog()
+        ucrReceiverMultipleCols.Selector = ucrSelectorCols
+        ucrReceiverMultipleCols.SetMeAsReceiver()
+    End Sub
+
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
+        If bFirstload Then
+            InitialiseDialog()
+            bFirstload = False
+        End If
+
+        Me.clsOperator = clsOperator
+
+        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+        dataGrid.Rows.Clear()
+
+        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_spanner"}, clsOperator)
+
+        For Each clsRParam As RParameter In lstRParams
+
+            Dim clsTabSpannerRFunction As RFunction = clsRParam.clsArgumentCodeStructure
+
+            Dim row As New DataGridViewRow
+            row.CreateCells(dataGrid)
+
+            For Each clsTabSpannerRParam As RParameter In clsTabSpannerRFunction.clsParameters
+                If clsTabSpannerRParam.strArgumentName = "id" Then
+                    row.Cells(0).Value = clsTablesUtils.GetStringValue(clsTabSpannerRParam.strArgumentValue, False)
+                ElseIf clsTabSpannerRParam.strArgumentName = "label" Then
+                    row.Cells(1).Value = clsTablesUtils.GetStringValue(clsTabSpannerRParam.strArgumentValue, False)
+                ElseIf clsTabSpannerRParam.strArgumentName = "columns" Then
+                    row.Cells(2).Value = clsTablesUtils.GetStringValue(clsTabSpannerRParam.strArgumentValue, False)
+                End If
+            Next
+
+            row.Tag = clsRParam
+            dataGrid.Rows.Add(row)
+
+        Next
+
+    End Sub
+
+    Private Sub btnAddColSpanner_Click(sender As Object, e As EventArgs) Handles btnAddColSpanner.Click
+
+        Dim strSpannerLabel As String = ucrInputColSpanner.GetValue()
+        Dim strSpannerId As String = strSpannerLabel.Replace(" ", String.Empty)
+        Dim strSpannerColsRFunction As String = mdlCoreControl.GetRVector(ucrReceiverMultipleCols.GetVariableNamesList(bWithQuotes:=False), bOnlyIfMultipleElement:=False)
+
+        Dim clsTabSpannerRFunction As New RFunction
+        clsTabSpannerRFunction.SetPackageName("gt")
+        clsTabSpannerRFunction.SetRCommand("tab_spanner")
+        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="label", strParamValue:=clsTablesUtils.GetStringValue(strSpannerLabel, True), iNewPosition:=0))
+        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=strSpannerColsRFunction, iNewPosition:=1))
+        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="id", strParamValue:=clsTablesUtils.GetStringValue(strSpannerId, True), iNewPosition:=2))
+
+        ' Create parameter with unique name
+        Dim clsRParam As New RParameter(strParameterName:="tab_spanner_param" & (dataGrid.Rows.Count + 1), strParamValue:=clsTabSpannerRFunction, bNewIncludeArgumentName:=False)
+
+        Dim row As New DataGridViewRow
+        row.CreateCells(dataGrid)
+
+        row.Cells(0).Value = strSpannerId
+        row.Cells(1).Value = strSpannerLabel
+        row.Cells(2).Value = strSpannerColsRFunction
+
+        row.Tag = clsRParam
+        dataGrid.Rows.Add(row)
+
+        ' Add to parameter
+        clsOperator.AddParameter(clsRParam)
+
+        ucrReceiverMultipleCols.Clear()
+        ucrInputColSpanner.SetName("")
+
+    End Sub
+
+    Private Sub btnClearGroups_Click(sender As Object, e As EventArgs) Handles btnClearSpanners.Click
+        For index As Integer = 0 To dataGrid.Rows.Count - 1
+            clsOperator.RemoveParameter(dataGrid.Rows(index).Tag)
+        Next
+        dataGrid.Rows.Clear()
+    End Sub
+
+
+    Private Sub ucrColSpanner_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged, ucrInputColSpanner.ControlContentsChanged
+        btnAddColSpanner.Enabled = Not ucrReceiverMultipleCols.IsEmpty AndAlso Not ucrInputColSpanner.IsEmpty
+    End Sub
+
+End Class

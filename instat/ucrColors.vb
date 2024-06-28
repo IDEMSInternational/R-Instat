@@ -27,7 +27,7 @@ Public Class ucrColors
 
         ' Add any initialization after the InitializeComponent() call.
         If dctColours.Count = 0 Then
-            dctColours.Add("NULL", "NULL")
+            dctColours.Add("None", "NULL")
             dctColours.Add(strPickColour, strPickColour)
             dctColours.Add("Black", Chr(34) & "black" & Chr(34))
             dctColours.Add("White", Chr(34) & "white" & Chr(34))
