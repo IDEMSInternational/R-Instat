@@ -132,7 +132,7 @@ Partial Class ucrDataView
         Me.linkHelpData = New System.Windows.Forms.LinkLabel()
         Me.linkHelpGettingStarted = New System.Windows.Forms.LinkLabel()
         Me.lblHelp = New System.Windows.Forms.Label()
-        Me.linkHelpRInstatWebsite = New System.Windows.Forms.LinkLabel()
+        Me.linkHelpRInstatResourcesSite = New System.Windows.Forms.LinkLabel()
         Me.panelSectionStart = New System.Windows.Forms.Panel()
         Me.lblStart = New System.Windows.Forms.Label()
         Me.linkStartNewDataFrame = New System.Windows.Forms.LinkLabel()
@@ -776,7 +776,7 @@ Partial Class ucrDataView
         Me.panelSectionHelp.Controls.Add(Me.linkHelpData)
         Me.panelSectionHelp.Controls.Add(Me.linkHelpGettingStarted)
         Me.panelSectionHelp.Controls.Add(Me.lblHelp)
-        Me.panelSectionHelp.Controls.Add(Me.linkHelpRInstatWebsite)
+        Me.panelSectionHelp.Controls.Add(Me.linkHelpRInstatResourcesSite)
         Me.panelSectionHelp.Location = New System.Drawing.Point(28, 314)
         Me.panelSectionHelp.Name = "panelSectionHelp"
         Me.panelSectionHelp.Size = New System.Drawing.Size(374, 109)
@@ -819,18 +819,18 @@ Partial Class ucrDataView
         Me.lblHelp.TabIndex = 2
         Me.lblHelp.Text = "Help"
         '
-        'linkHelpRInstatWebsite
+        'linkHelpRInstatResourcesSite
         '
-        Me.linkHelpRInstatWebsite.ActiveLinkColor = System.Drawing.Color.Red
-        Me.linkHelpRInstatWebsite.AutoSize = True
-        Me.linkHelpRInstatWebsite.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkHelpRInstatWebsite.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkHelpRInstatWebsite.Location = New System.Drawing.Point(8, 65)
-        Me.linkHelpRInstatWebsite.Name = "linkHelpRInstatWebsite"
-        Me.linkHelpRInstatWebsite.Size = New System.Drawing.Size(119, 13)
-        Me.linkHelpRInstatWebsite.TabIndex = 9
-        Me.linkHelpRInstatWebsite.TabStop = True
-        Me.linkHelpRInstatWebsite.Text = "R-Instat Resources Site"
+        Me.linkHelpRInstatResourcesSite.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkHelpRInstatResourcesSite.AutoSize = True
+        Me.linkHelpRInstatResourcesSite.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkHelpRInstatResourcesSite.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkHelpRInstatResourcesSite.Location = New System.Drawing.Point(8, 65)
+        Me.linkHelpRInstatResourcesSite.Name = "linkHelpRInstatResourcesSite"
+        Me.linkHelpRInstatResourcesSite.Size = New System.Drawing.Size(119, 13)
+        Me.linkHelpRInstatResourcesSite.TabIndex = 9
+        Me.linkHelpRInstatResourcesSite.TabStop = True
+        Me.linkHelpRInstatResourcesSite.Text = "R-Instat Resources Site"
         '
         'panelSectionStart
         '
@@ -1176,7 +1176,7 @@ Partial Class ucrDataView
     Friend WithEvents panelRecentMenuItems As Panel
     Friend WithEvents panelSectionHelp As Panel
     Friend WithEvents lblHelp As Label
-    Friend WithEvents linkHelpRInstatWebsite As LinkLabel
+    Friend WithEvents linkHelpRInstatResourcesSite As LinkLabel
     Friend WithEvents panelSectionStart As Panel
     Friend WithEvents lblStart As Label
     Friend WithEvents linkStartNewDataFrame As LinkLabel

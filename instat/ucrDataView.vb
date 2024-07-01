@@ -773,7 +773,7 @@ Public Class ucrDataView
         dlgHelpVignettes.ShowDialog()
     End Sub
 
-    Private Sub linkHelpRInstatWebsite_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRInstatWebsite.LinkClicked
+    Private Sub linkHelpRInstatWebsite_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRInstatResourcesSite.LinkClicked
         Process.Start("https://ecampus.r-instat.org/course/view.php?id=14")
     End Sub
 
@@ -1044,5 +1044,9 @@ Public Class ucrDataView
 
     Private Sub linkStartPasteData_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         dlgPasteNewColumns.ShowDialog()
+    End Sub
+
+    Private Sub linkStartPasteData_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartPasteData.LinkClicked
+
     End Sub
 End Class
