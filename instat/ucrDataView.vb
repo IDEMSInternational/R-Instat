@@ -1027,7 +1027,7 @@ Public Class ucrDataView
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "19")
     End Sub
 
-    Private Sub linkStartSwapDataScriptWindow_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartSwapDataScriptWindow.LinkClicked
+    Private Sub linkStartPasteScriptfromClipboard_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartPasteScriptfromClipboard.LinkClicked
         frmMain.mnuViewSwapDataAndMetadata.Enabled = frmMain.mnuViewSwapDataAndScript.Checked
         frmMain.mnuViewSwapDataAndScript.Checked = Not frmMain.mnuViewSwapDataAndScript.Checked
         frmMain.UpdateSwapDataAndScript()
@@ -1042,11 +1042,8 @@ Public Class ucrDataView
         dlgInstallRPackage.ShowDialog()
     End Sub
 
-    Private Sub linkStartPasteData_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
+    Private Sub linkStartPasteData_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartPasteData.LinkClicked
         dlgPasteNewColumns.ShowDialog()
     End Sub
 
-    Private Sub linkStartPasteData_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartPasteData.LinkClicked
-
-    End Sub
 End Class

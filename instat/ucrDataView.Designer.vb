@@ -124,7 +124,7 @@ Partial Class ucrDataView
         Me.linkStartAddRPackage = New System.Windows.Forms.LinkLabel()
         Me.lblAdvanced = New System.Windows.Forms.Label()
         Me.linkStartRestoreBackup = New System.Windows.Forms.LinkLabel()
-        Me.linkStartSwapDataScriptWindow = New System.Windows.Forms.LinkLabel()
+        Me.linkStartPasteScriptfromClipboard = New System.Windows.Forms.LinkLabel()
         Me.panelSectionRecent = New System.Windows.Forms.Panel()
         Me.lblRecent = New System.Windows.Forms.Label()
         Me.panelRecentMenuItems = New System.Windows.Forms.Panel()
@@ -134,6 +134,7 @@ Partial Class ucrDataView
         Me.lblHelp = New System.Windows.Forms.Label()
         Me.linkHelpRInstatResourcesSite = New System.Windows.Forms.LinkLabel()
         Me.panelSectionStart = New System.Windows.Forms.Panel()
+        Me.linkStartPasteData = New System.Windows.Forms.LinkLabel()
         Me.lblStart = New System.Windows.Forms.Label()
         Me.linkStartNewDataFrame = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenFile = New System.Windows.Forms.LinkLabel()
@@ -152,7 +153,6 @@ Partial Class ucrDataView
         Me.ucrReoGrid = New instat.ucrDataViewReoGrid()
         Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
         Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
-        Me.linkStartPasteData = New System.Windows.Forms.LinkLabel()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -683,8 +683,8 @@ Partial Class ucrDataView
         Me.panelSectionAdvanced.Controls.Add(Me.linkStartAddRPackage)
         Me.panelSectionAdvanced.Controls.Add(Me.lblAdvanced)
         Me.panelSectionAdvanced.Controls.Add(Me.linkStartRestoreBackup)
-        Me.panelSectionAdvanced.Controls.Add(Me.linkStartSwapDataScriptWindow)
-        Me.panelSectionAdvanced.Location = New System.Drawing.Point(28, 428)
+        Me.panelSectionAdvanced.Controls.Add(Me.linkStartPasteScriptfromClipboard)
+        Me.panelSectionAdvanced.Location = New System.Drawing.Point(28, 431)
         Me.panelSectionAdvanced.Name = "panelSectionAdvanced"
         Me.panelSectionAdvanced.Size = New System.Drawing.Size(374, 105)
         Me.panelSectionAdvanced.TabIndex = 12
@@ -726,18 +726,18 @@ Partial Class ucrDataView
         Me.linkStartRestoreBackup.TabStop = True
         Me.linkStartRestoreBackup.Text = "Restore Data or Log from Backup"
         '
-        'linkStartSwapDataScriptWindow
+        'linkStartPasteScriptfromClipboard
         '
-        Me.linkStartSwapDataScriptWindow.ActiveLinkColor = System.Drawing.Color.Red
-        Me.linkStartSwapDataScriptWindow.AutoSize = True
-        Me.linkStartSwapDataScriptWindow.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartSwapDataScriptWindow.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartSwapDataScriptWindow.Location = New System.Drawing.Point(8, 30)
-        Me.linkStartSwapDataScriptWindow.Name = "linkStartSwapDataScriptWindow"
-        Me.linkStartSwapDataScriptWindow.Size = New System.Drawing.Size(134, 13)
-        Me.linkStartSwapDataScriptWindow.TabIndex = 5
-        Me.linkStartSwapDataScriptWindow.TabStop = True
-        Me.linkStartSwapDataScriptWindow.Text = "Paste Script from Clipboard"
+        Me.linkStartPasteScriptfromClipboard.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkStartPasteScriptfromClipboard.AutoSize = True
+        Me.linkStartPasteScriptfromClipboard.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartPasteScriptfromClipboard.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartPasteScriptfromClipboard.Location = New System.Drawing.Point(8, 30)
+        Me.linkStartPasteScriptfromClipboard.Name = "linkStartPasteScriptfromClipboard"
+        Me.linkStartPasteScriptfromClipboard.Size = New System.Drawing.Size(134, 13)
+        Me.linkStartPasteScriptfromClipboard.TabIndex = 5
+        Me.linkStartPasteScriptfromClipboard.TabStop = True
+        Me.linkStartPasteScriptfromClipboard.Text = "Paste Script from Clipboard"
         '
         'panelSectionRecent
         '
@@ -843,6 +843,19 @@ Partial Class ucrDataView
         Me.panelSectionStart.Name = "panelSectionStart"
         Me.panelSectionStart.Size = New System.Drawing.Size(374, 113)
         Me.panelSectionStart.TabIndex = 11
+        '
+        'linkStartPasteData
+        '
+        Me.linkStartPasteData.ActiveLinkColor = System.Drawing.Color.Red
+        Me.linkStartPasteData.AutoSize = True
+        Me.linkStartPasteData.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartPasteData.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartPasteData.Location = New System.Drawing.Point(7, 84)
+        Me.linkStartPasteData.Name = "linkStartPasteData"
+        Me.linkStartPasteData.Size = New System.Drawing.Size(136, 13)
+        Me.linkStartPasteData.TabIndex = 7
+        Me.linkStartPasteData.TabStop = True
+        Me.linkStartPasteData.Text = "Paste data from clipboard..."
         '
         'lblStart
         '
@@ -1060,19 +1073,6 @@ Partial Class ucrDataView
         Me.ucrLinuxGrid.Size = New System.Drawing.Size(245, 437)
         Me.ucrLinuxGrid.TabIndex = 13
         '
-        'linkStartPasteData
-        '
-        Me.linkStartPasteData.ActiveLinkColor = System.Drawing.Color.Red
-        Me.linkStartPasteData.AutoSize = True
-        Me.linkStartPasteData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartPasteData.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartPasteData.Location = New System.Drawing.Point(7, 84)
-        Me.linkStartPasteData.Name = "linkStartPasteData"
-        Me.linkStartPasteData.Size = New System.Drawing.Size(136, 13)
-        Me.linkStartPasteData.TabIndex = 7
-        Me.linkStartPasteData.TabStop = True
-        Me.linkStartPasteData.Text = "Paste data from clipboard..."
-        '
         'ucrDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1216,7 +1216,7 @@ Partial Class ucrDataView
     Friend WithEvents panelSectionAdvanced As Panel
     Friend WithEvents lblAdvanced As Label
     Friend WithEvents linkStartRestoreBackup As LinkLabel
-    Friend WithEvents linkStartSwapDataScriptWindow As LinkLabel
+    Friend WithEvents linkStartPasteScriptfromClipboard As LinkLabel
     Friend WithEvents linkStartAddRPackage As LinkLabel
     Friend WithEvents linkStartPasteData As LinkLabel
 End Class
