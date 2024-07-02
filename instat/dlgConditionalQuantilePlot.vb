@@ -131,7 +131,7 @@ Public Class dlgConditionalQuantilePlot
         ucrReceiverType.SetLinkedDisplayControl(lblType)
 
         ucrSavePlot.SetPrefix("cond_quantile_plot")
-        ucrSavePlot.SetCheckBoxText("Save Graph")
+        ucrSavePlot.SetCheckBoxText("Store Graph")
         ucrSavePlot.SetIsComboBox()
         ucrSavePlot.SetSaveTypeAsGraph()
         ucrSavePlot.SetDataFrameSelector(ucrConditionalQuantilePlotSelector.ucrAvailableDataFrames)
