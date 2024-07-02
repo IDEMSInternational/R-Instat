@@ -200,7 +200,7 @@ Public Class dlgClimaticBoxPlot
 
         ucrSavePlot.SetPrefix("box_plot")
         ucrSavePlot.SetIsComboBox()
-        ucrSavePlot.SetCheckBoxText("Save Graph")
+        ucrSavePlot.SetCheckBoxText("Store Graph")
         ucrSavePlot.SetSaveTypeAsGraph()
         ucrSavePlot.SetDataFrameSelector(ucrSelectorClimaticBoxPlot.ucrAvailableDataFrames)
         ucrSavePlot.SetAssignToIfUncheckedValue("last_graph")

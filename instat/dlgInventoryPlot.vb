@@ -106,7 +106,7 @@ Public Class dlgInventoryPlot
         ucrChkDay.SetRDefault("FALSE")
 
         ucrSaveDetails.SetPrefix("details")
-        ucrSaveDetails.SetCheckBoxText("Save Details")
+        ucrSaveDetails.SetCheckBoxText("Store Details")
         ucrSaveDetails.SetSaveTypeAsDataFrame()
         ucrSaveDetails.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
         ucrSaveDetails.SetIsComboBox()
@@ -160,7 +160,7 @@ Public Class dlgInventoryPlot
         ucrSaveGraph.SetPrefix("inventory")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 

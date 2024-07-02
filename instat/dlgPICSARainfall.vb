@@ -202,7 +202,7 @@ Public Class dlgPICSARainfall
         ucrSave.SetPrefix("picsa_rainfall_graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
-        ucrSave.SetCheckBoxText("Save Graph")
+        ucrSave.SetCheckBoxText("Store Graph")
         ucrSave.SetDataFrameSelector(ucrSelectorPICSARainfall.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
     End Sub

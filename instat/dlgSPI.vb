@@ -114,20 +114,20 @@ Public Class dlgSPI
 
         ucrSaveIndex.SetSaveTypeAsColumn()
         ucrSaveIndex.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
-        ucrSaveIndex.SetLabelText("Save Index into:")
+        ucrSaveIndex.SetLabelText("Store Index into:")
         ucrSaveIndex.SetIsTextBox()
         ucrSaveIndex.SetPrefix("spi")
 
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
-        ucrSaveModel.SetCheckBoxText("Save Model")
+        ucrSaveModel.SetCheckBoxText("Store Model")
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
         ucrSaveGraph.SetPrefix("SPI_plot")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 

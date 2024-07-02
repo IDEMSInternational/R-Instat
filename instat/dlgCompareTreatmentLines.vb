@@ -156,7 +156,7 @@ Public Class dlgCompareTreatmentLines
 
         ucrSavePlot.SetPrefix("two_options")
         ucrSavePlot.SetIsComboBox()
-        ucrSavePlot.SetCheckBoxText("Save Graph")
+        ucrSavePlot.SetCheckBoxText("Store Graph")
         ucrSavePlot.SetSaveTypeAsGraph()
         ucrSavePlot.SetDataFrameSelector(ucrSelectorPlot.ucrAvailableDataFrames)
         ucrSavePlot.SetAssignToIfUncheckedValue("last_graph")

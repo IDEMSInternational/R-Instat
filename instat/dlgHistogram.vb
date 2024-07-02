@@ -203,7 +203,7 @@ Public Class dlgHistogram
         ucrSaveHist.SetPrefix("histogram")
         ucrSaveHist.SetDataFrameSelector(ucrHistogramSelector.ucrAvailableDataFrames)
         ucrSaveHist.SetIsComboBox()
-        ucrSaveHist.SetCheckBoxText("Save Graph")
+        ucrSaveHist.SetCheckBoxText("Store Graph")
         ucrSaveHist.SetSaveTypeAsGraph()
         ucrSaveHist.SetAssignToIfUncheckedValue("last_graph")
         DialogueSize()

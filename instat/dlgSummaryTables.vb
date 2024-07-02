@@ -182,7 +182,7 @@ Public Class dlgSummaryTables
         ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
-        ucrSaveTable.SetCheckBoxText("Save Table")
+        ucrSaveTable.SetCheckBoxText("Store Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
         ucrReorderSummary.bDataIsSummaries = True

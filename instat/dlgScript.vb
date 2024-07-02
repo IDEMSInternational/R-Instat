@@ -72,7 +72,7 @@ Public Class dlgScript
         ucrCboSaveOutputObjectFormat.SetLinkedDisplayControl(lblSaveObjectFormat)
         ucrCboSaveOutputObjectFormat.GetSetSelectedIndex = 0
 
-        ucrSaveObject.SetLabelText("Save Graph")
+        ucrSaveObject.SetLabelText("Store Graph")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetDataFrameSelector(ucrDataFrameSaveOutputSelect)
 

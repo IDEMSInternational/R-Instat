@@ -489,7 +489,7 @@ Public Class dlgDescribeTwoVariable
             ucrSaveTable.SetPrefix("summary_table")
             ucrSaveTable.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveTable.SetAssignToIfUncheckedValue("last_summary")
-            ucrSaveTable.SetCheckBoxText("Save Summary")
+            ucrSaveTable.SetCheckBoxText("Store Summary")
             ucrBase.clsRsyntax.SetBaseROperator(clsGroupByPipeOperator)
             clsGroupByPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
@@ -513,7 +513,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetPrefix("summary_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-                ucrSaveTable.SetCheckBoxText("Save Table")
+                ucrSaveTable.SetCheckBoxText("Store Table")
                 clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                      strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                      strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -527,7 +527,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetPrefix("frequency_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-                ucrSaveTable.SetCheckBoxText("Save Table")
+                ucrSaveTable.SetCheckBoxText("Store Table")
                 clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -538,7 +538,7 @@ Public Class dlgDescribeTwoVariable
             clsDummyFunction.AddParameter("checked", "three_variable", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
             ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
-            ucrSaveTable.SetCheckBoxText("Save Table")
+            ucrSaveTable.SetCheckBoxText("Store Table")
         End If
         FactorColumns()
 

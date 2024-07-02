@@ -103,7 +103,7 @@ Public Class dlgCircularDensityPlot
         ucrSaveDensity.SetPrefix("circular_density")
         ucrSaveDensity.SetDataFrameSelector(ucrSelectorDataFrame.ucrAvailableDataFrames)
         ucrSaveDensity.SetIsComboBox()
-        ucrSaveDensity.SetCheckBoxText("Save Graph")
+        ucrSaveDensity.SetCheckBoxText("Store Graph")
         ucrSaveDensity.SetSaveTypeAsGraph()
         ucrSaveDensity.SetAssignToIfUncheckedValue("last_graph")
 
