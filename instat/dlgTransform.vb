@@ -112,7 +112,6 @@ Public Class dlgTransform
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 25
 
         Dim dctSubtractValues As New Dictionary(Of String, String)
         Dim dctMultiplyValues As New Dictionary(Of String, String)
@@ -120,6 +119,7 @@ Public Class dlgTransform
         Dim dctAddValues As New Dictionary(Of String, String)
         Dim dctPowerValues As New Dictionary(Of String, String)
 
+        ucrBase.iHelpTopicID = 42
 
         ucrPnlTransformOptions.AddRadioButton(rdoRank)
         ucrPnlTransformOptions.AddRadioButton(rdoNumeric)

@@ -53,42 +53,42 @@ Partial Class dlgScatterPlot
         Me.toolStripMenuItemJitterOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemCountOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpGeom = New System.Windows.Forms.GroupBox()
-        Me.lblPosition = New System.Windows.Forms.Label()
-        Me.lblLegend = New System.Windows.Forms.Label()
-        Me.lblPointsize = New System.Windows.Forms.Label()
-        Me.lblShape = New System.Windows.Forms.Label()
         Me.rdoCount = New System.Windows.Forms.RadioButton()
         Me.rdoPoint = New System.Windows.Forms.RadioButton()
         Me.lblHeith = New System.Windows.Forms.Label()
         Me.lblWidth = New System.Windows.Forms.Label()
         Me.rdoJitter = New System.Windows.Forms.RadioButton()
         Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.grpAdd = New System.Windows.Forms.GroupBox()
+        Me.ucrChkLineofBestFit = New instat.ucrCheck()
+        Me.ucrChkAddSidePlot = New instat.ucrCheck()
+        Me.ucrChkAddRugPlot = New instat.ucrCheck()
+        Me.ucrNudSize = New instat.ucrNud()
+        Me.ucrInputSides = New instat.ucrInputComboBox()
+        Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrInputStation = New instat.ucrInputComboBox()
         Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
-        Me.ucrInputPosition = New instat.ucrInputComboBox()
-        Me.ucrInputLegend = New instat.ucrInputComboBox()
-        Me.ucrInputShape = New instat.ucrInputComboBox()
         Me.ucrNudPointsize = New instat.ucrNud()
+        Me.ucrChkColour = New instat.ucrCheck()
+        Me.ucrChkPosition = New instat.ucrCheck()
+        Me.ucrChkSize = New instat.ucrCheck()
+        Me.ucrChkShape = New instat.ucrCheck()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
+        Me.ucrInputColour = New instat.ucrInputComboBox()
+        Me.ucrInputShape = New instat.ucrInputComboBox()
         Me.ucrNudHeigth = New instat.ucrNud()
         Me.ucrNudWidth = New instat.ucrNud()
         Me.ucrPnlGeoms = New instat.UcrPanel()
         Me.cmdOptions = New instat.ucrSplitButton()
-        Me.ucrInputSides = New instat.ucrInputComboBox()
-        Me.ucrNudSize = New instat.ucrNud()
-        Me.ucrChkAddRugPlot = New instat.ucrCheck()
         Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
-        Me.ucrChkWithSE = New instat.ucrCheck()
-        Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.ucrSaveScatterPlot = New instat.ucrSave()
         Me.ucrSelectorForScatter = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrVariablesAsFactorForScatter = New instat.ucrVariablesAsFactor()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkAddSidePlot = New instat.ucrCheck()
-        Me.grpAdd = New System.Windows.Forms.GroupBox()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.grpGeom.SuspendLayout()
         Me.grpAdd.SuspendLayout()
@@ -195,14 +195,14 @@ Partial Class dlgScatterPlot
         '
         'grpGeom
         '
+        Me.grpGeom.Controls.Add(Me.ucrInputColour)
         Me.grpGeom.Controls.Add(Me.ucrInputPosition)
-        Me.grpGeom.Controls.Add(Me.lblPosition)
-        Me.grpGeom.Controls.Add(Me.ucrInputLegend)
-        Me.grpGeom.Controls.Add(Me.lblLegend)
-        Me.grpGeom.Controls.Add(Me.ucrInputShape)
-        Me.grpGeom.Controls.Add(Me.lblPointsize)
         Me.grpGeom.Controls.Add(Me.ucrNudPointsize)
-        Me.grpGeom.Controls.Add(Me.lblShape)
+        Me.grpGeom.Controls.Add(Me.ucrChkColour)
+        Me.grpGeom.Controls.Add(Me.ucrChkPosition)
+        Me.grpGeom.Controls.Add(Me.ucrChkSize)
+        Me.grpGeom.Controls.Add(Me.ucrChkShape)
+        Me.grpGeom.Controls.Add(Me.ucrInputShape)
         Me.grpGeom.Controls.Add(Me.rdoCount)
         Me.grpGeom.Controls.Add(Me.rdoPoint)
         Me.grpGeom.Controls.Add(Me.lblHeith)
@@ -213,51 +213,15 @@ Partial Class dlgScatterPlot
         Me.grpGeom.Controls.Add(Me.ucrPnlGeoms)
         Me.grpGeom.Location = New System.Drawing.Point(9, 337)
         Me.grpGeom.Name = "grpGeom"
-        Me.grpGeom.Size = New System.Drawing.Size(457, 109)
+        Me.grpGeom.Size = New System.Drawing.Size(449, 110)
         Me.grpGeom.TabIndex = 23
         Me.grpGeom.TabStop = False
         Me.grpGeom.Text = "Geom"
         '
-        'lblPosition
-        '
-        Me.lblPosition.AutoSize = True
-        Me.lblPosition.Location = New System.Drawing.Point(195, 50)
-        Me.lblPosition.Name = "lblPosition"
-        Me.lblPosition.Size = New System.Drawing.Size(47, 13)
-        Me.lblPosition.TabIndex = 38
-        Me.lblPosition.Text = "Position:"
-        '
-        'lblLegend
-        '
-        Me.lblLegend.AutoSize = True
-        Me.lblLegend.Location = New System.Drawing.Point(59, 50)
-        Me.lblLegend.Name = "lblLegend"
-        Me.lblLegend.Size = New System.Drawing.Size(46, 13)
-        Me.lblLegend.TabIndex = 36
-        Me.lblLegend.Text = "Legend:"
-        '
-        'lblPointsize
-        '
-        Me.lblPointsize.AutoSize = True
-        Me.lblPointsize.Location = New System.Drawing.Point(59, 21)
-        Me.lblPointsize.Name = "lblPointsize"
-        Me.lblPointsize.Size = New System.Drawing.Size(30, 13)
-        Me.lblPointsize.TabIndex = 33
-        Me.lblPointsize.Text = "Size:"
-        '
-        'lblShape
-        '
-        Me.lblShape.AutoSize = True
-        Me.lblShape.Location = New System.Drawing.Point(186, 21)
-        Me.lblShape.Name = "lblShape"
-        Me.lblShape.Size = New System.Drawing.Size(41, 13)
-        Me.lblShape.TabIndex = 31
-        Me.lblShape.Text = "Shape:"
-        '
         'rdoCount
         '
         Me.rdoCount.AutoSize = True
-        Me.rdoCount.Location = New System.Drawing.Point(4, 46)
+        Me.rdoCount.Location = New System.Drawing.Point(10, 48)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(53, 17)
         Me.rdoCount.TabIndex = 30
@@ -268,7 +232,7 @@ Partial Class dlgScatterPlot
         'rdoPoint
         '
         Me.rdoPoint.AutoSize = True
-        Me.rdoPoint.Location = New System.Drawing.Point(4, 20)
+        Me.rdoPoint.Location = New System.Drawing.Point(10, 19)
         Me.rdoPoint.Name = "rdoPoint"
         Me.rdoPoint.Size = New System.Drawing.Size(49, 17)
         Me.rdoPoint.TabIndex = 29
@@ -279,7 +243,7 @@ Partial Class dlgScatterPlot
         'lblHeith
         '
         Me.lblHeith.AutoSize = True
-        Me.lblHeith.Location = New System.Drawing.Point(180, 73)
+        Me.lblHeith.Location = New System.Drawing.Point(189, 81)
         Me.lblHeith.Name = "lblHeith"
         Me.lblHeith.Size = New System.Drawing.Size(41, 13)
         Me.lblHeith.TabIndex = 27
@@ -288,7 +252,7 @@ Partial Class dlgScatterPlot
         'lblWidth
         '
         Me.lblWidth.AutoSize = True
-        Me.lblWidth.Location = New System.Drawing.Point(60, 73)
+        Me.lblWidth.Location = New System.Drawing.Point(76, 81)
         Me.lblWidth.Name = "lblWidth"
         Me.lblWidth.Size = New System.Drawing.Size(38, 13)
         Me.lblWidth.TabIndex = 25
@@ -297,7 +261,7 @@ Partial Class dlgScatterPlot
         'rdoJitter
         '
         Me.rdoJitter.AutoSize = True
-        Me.rdoJitter.Location = New System.Drawing.Point(4, 71)
+        Me.rdoJitter.Location = New System.Drawing.Point(10, 77)
         Me.rdoJitter.Name = "rdoJitter"
         Me.rdoJitter.Size = New System.Drawing.Size(47, 17)
         Me.rdoJitter.TabIndex = 24
@@ -315,6 +279,83 @@ Partial Class dlgScatterPlot
         Me.lblFacetBy.TabIndex = 74
         Me.lblFacetBy.Tag = ""
         Me.lblFacetBy.Text = "Facet By:"
+        '
+        'grpAdd
+        '
+        Me.grpAdd.Controls.Add(Me.ucrChkLineofBestFit)
+        Me.grpAdd.Controls.Add(Me.ucrChkAddSidePlot)
+        Me.grpAdd.Controls.Add(Me.ucrChkAddRugPlot)
+        Me.grpAdd.Controls.Add(Me.lblSides)
+        Me.grpAdd.Controls.Add(Me.ucrNudSize)
+        Me.grpAdd.Controls.Add(Me.lblSize)
+        Me.grpAdd.Controls.Add(Me.ucrInputSides)
+        Me.grpAdd.Controls.Add(Me.ucrChkWithSE)
+        Me.grpAdd.Location = New System.Drawing.Point(9, 227)
+        Me.grpAdd.Name = "grpAdd"
+        Me.grpAdd.Size = New System.Drawing.Size(336, 95)
+        Me.grpAdd.TabIndex = 81
+        Me.grpAdd.TabStop = False
+        Me.grpAdd.Text = "Add"
+        '
+        'ucrChkLineofBestFit
+        '
+        Me.ucrChkLineofBestFit.AutoSize = True
+        Me.ucrChkLineofBestFit.Checked = False
+        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(6, 16)
+        Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
+        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(173, 24)
+        Me.ucrChkLineofBestFit.TabIndex = 9
+        '
+        'ucrChkAddSidePlot
+        '
+        Me.ucrChkAddSidePlot.AutoSize = True
+        Me.ucrChkAddSidePlot.Checked = False
+        Me.ucrChkAddSidePlot.Location = New System.Drawing.Point(6, 59)
+        Me.ucrChkAddSidePlot.Name = "ucrChkAddSidePlot"
+        Me.ucrChkAddSidePlot.Size = New System.Drawing.Size(134, 23)
+        Me.ucrChkAddSidePlot.TabIndex = 80
+        '
+        'ucrChkAddRugPlot
+        '
+        Me.ucrChkAddRugPlot.AutoSize = True
+        Me.ucrChkAddRugPlot.Checked = False
+        Me.ucrChkAddRugPlot.Location = New System.Drawing.Point(6, 38)
+        Me.ucrChkAddRugPlot.Name = "ucrChkAddRugPlot"
+        Me.ucrChkAddRugPlot.Size = New System.Drawing.Size(108, 23)
+        Me.ucrChkAddRugPlot.TabIndex = 11
+        '
+        'ucrNudSize
+        '
+        Me.ucrNudSize.AutoSize = True
+        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSize.Location = New System.Drawing.Point(150, 41)
+        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Name = "ucrNudSize"
+        Me.ucrNudSize.Size = New System.Drawing.Size(45, 20)
+        Me.ucrNudSize.TabIndex = 13
+        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputSides
+        '
+        Me.ucrInputSides.AddQuotesIfUnrecognised = True
+        Me.ucrInputSides.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputSides.GetSetSelectedIndex = -1
+        Me.ucrInputSides.IsReadOnly = False
+        Me.ucrInputSides.Location = New System.Drawing.Point(236, 40)
+        Me.ucrInputSides.Name = "ucrInputSides"
+        Me.ucrInputSides.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputSides.TabIndex = 15
+        '
+        'ucrChkWithSE
+        '
+        Me.ucrChkWithSE.AutoSize = True
+        Me.ucrChkWithSE.Checked = False
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(186, 17)
+        Me.ucrChkWithSE.Name = "ucrChkWithSE"
+        Me.ucrChkWithSE.Size = New System.Drawing.Size(133, 23)
+        Me.ucrChkWithSE.TabIndex = 10
         '
         'ucrInputStation
         '
@@ -360,45 +401,12 @@ Partial Class dlgScatterPlot
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 77
         '
-        'ucrInputPosition
-        '
-        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputPosition.GetSetSelectedIndex = -1
-        Me.ucrInputPosition.IsReadOnly = False
-        Me.ucrInputPosition.Location = New System.Drawing.Point(240, 44)
-        Me.ucrInputPosition.Name = "ucrInputPosition"
-        Me.ucrInputPosition.Size = New System.Drawing.Size(83, 21)
-        Me.ucrInputPosition.TabIndex = 39
-        '
-        'ucrInputLegend
-        '
-        Me.ucrInputLegend.AddQuotesIfUnrecognised = True
-        Me.ucrInputLegend.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputLegend.GetSetSelectedIndex = -1
-        Me.ucrInputLegend.IsReadOnly = False
-        Me.ucrInputLegend.Location = New System.Drawing.Point(111, 44)
-        Me.ucrInputLegend.Name = "ucrInputLegend"
-        Me.ucrInputLegend.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputLegend.TabIndex = 37
-        '
-        'ucrInputShape
-        '
-        Me.ucrInputShape.AddQuotesIfUnrecognised = True
-        Me.ucrInputShape.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputShape.GetSetSelectedIndex = -1
-        Me.ucrInputShape.IsReadOnly = False
-        Me.ucrInputShape.Location = New System.Drawing.Point(227, 16)
-        Me.ucrInputShape.Name = "ucrInputShape"
-        Me.ucrInputShape.Size = New System.Drawing.Size(96, 21)
-        Me.ucrInputShape.TabIndex = 35
-        '
         'ucrNudPointsize
         '
         Me.ucrNudPointsize.AutoSize = True
         Me.ucrNudPointsize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPointsize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPointsize.Location = New System.Drawing.Point(113, 17)
+        Me.ucrNudPointsize.Location = New System.Drawing.Point(174, 18)
         Me.ucrNudPointsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPointsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPointsize.Name = "ucrNudPointsize"
@@ -406,12 +414,81 @@ Partial Class dlgScatterPlot
         Me.ucrNudPointsize.TabIndex = 34
         Me.ucrNudPointsize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrChkColour
+        '
+        Me.ucrChkColour.AutoSize = True
+        Me.ucrChkColour.Checked = False
+        Me.ucrChkColour.Location = New System.Drawing.Point(98, 48)
+        Me.ucrChkColour.Name = "ucrChkColour"
+        Me.ucrChkColour.Size = New System.Drawing.Size(114, 23)
+        Me.ucrChkColour.TabIndex = 84
+        '
+        'ucrChkPosition
+        '
+        Me.ucrChkPosition.AutoSize = True
+        Me.ucrChkPosition.Checked = False
+        Me.ucrChkPosition.Location = New System.Drawing.Point(257, 48)
+        Me.ucrChkPosition.Name = "ucrChkPosition"
+        Me.ucrChkPosition.Size = New System.Drawing.Size(79, 23)
+        Me.ucrChkPosition.TabIndex = 83
+        '
+        'ucrChkSize
+        '
+        Me.ucrChkSize.AutoSize = True
+        Me.ucrChkSize.Checked = False
+        Me.ucrChkSize.Location = New System.Drawing.Point(98, 19)
+        Me.ucrChkSize.Name = "ucrChkSize"
+        Me.ucrChkSize.Size = New System.Drawing.Size(77, 23)
+        Me.ucrChkSize.TabIndex = 82
+        '
+        'ucrChkShape
+        '
+        Me.ucrChkShape.AutoSize = True
+        Me.ucrChkShape.Checked = False
+        Me.ucrChkShape.Location = New System.Drawing.Point(250, 20)
+        Me.ucrChkShape.Name = "ucrChkShape"
+        Me.ucrChkShape.Size = New System.Drawing.Size(79, 23)
+        Me.ucrChkShape.TabIndex = 81
+        '
+        'ucrInputPosition
+        '
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
+        Me.ucrInputPosition.IsReadOnly = False
+        Me.ucrInputPosition.Location = New System.Drawing.Point(329, 48)
+        Me.ucrInputPosition.Name = "ucrInputPosition"
+        Me.ucrInputPosition.Size = New System.Drawing.Size(95, 21)
+        Me.ucrInputPosition.TabIndex = 39
+        '
+        'ucrInputColour
+        '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColour.GetSetSelectedIndex = -1
+        Me.ucrInputColour.IsReadOnly = False
+        Me.ucrInputColour.Location = New System.Drawing.Point(176, 48)
+        Me.ucrInputColour.Name = "ucrInputColour"
+        Me.ucrInputColour.Size = New System.Drawing.Size(61, 21)
+        Me.ucrInputColour.TabIndex = 37
+        '
+        'ucrInputShape
+        '
+        Me.ucrInputShape.AddQuotesIfUnrecognised = True
+        Me.ucrInputShape.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputShape.GetSetSelectedIndex = -1
+        Me.ucrInputShape.IsReadOnly = False
+        Me.ucrInputShape.Location = New System.Drawing.Point(329, 19)
+        Me.ucrInputShape.Name = "ucrInputShape"
+        Me.ucrInputShape.Size = New System.Drawing.Size(96, 21)
+        Me.ucrInputShape.TabIndex = 35
+        '
         'ucrNudHeigth
         '
         Me.ucrNudHeigth.AutoSize = True
         Me.ucrNudHeigth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHeigth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHeigth.Location = New System.Drawing.Point(227, 71)
+        Me.ucrNudHeigth.Location = New System.Drawing.Point(236, 77)
         Me.ucrNudHeigth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudHeigth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHeigth.Name = "ucrNudHeigth"
@@ -424,7 +501,7 @@ Partial Class dlgScatterPlot
         Me.ucrNudWidth.AutoSize = True
         Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWidth.Location = New System.Drawing.Point(113, 71)
+        Me.ucrNudWidth.Location = New System.Drawing.Point(123, 77)
         Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidth.Name = "ucrNudWidth"
@@ -437,7 +514,7 @@ Partial Class dlgScatterPlot
         Me.ucrPnlGeoms.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlGeoms.Location = New System.Drawing.Point(2, 14)
         Me.ucrPnlGeoms.Name = "ucrPnlGeoms"
-        Me.ucrPnlGeoms.Size = New System.Drawing.Size(321, 89)
+        Me.ucrPnlGeoms.Size = New System.Drawing.Size(433, 89)
         Me.ucrPnlGeoms.TabIndex = 24
         '
         'cmdOptions
@@ -453,39 +530,6 @@ Partial Class dlgScatterPlot
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'ucrInputSides
-        '
-        Me.ucrInputSides.AddQuotesIfUnrecognised = True
-        Me.ucrInputSides.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputSides.GetSetSelectedIndex = -1
-        Me.ucrInputSides.IsReadOnly = False
-        Me.ucrInputSides.Location = New System.Drawing.Point(236, 40)
-        Me.ucrInputSides.Name = "ucrInputSides"
-        Me.ucrInputSides.Size = New System.Drawing.Size(94, 21)
-        Me.ucrInputSides.TabIndex = 15
-        '
-        'ucrNudSize
-        '
-        Me.ucrNudSize.AutoSize = True
-        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSize.Location = New System.Drawing.Point(150, 41)
-        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Name = "ucrNudSize"
-        Me.ucrNudSize.Size = New System.Drawing.Size(45, 20)
-        Me.ucrNudSize.TabIndex = 13
-        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkAddRugPlot
-        '
-        Me.ucrChkAddRugPlot.AutoSize = True
-        Me.ucrChkAddRugPlot.Checked = False
-        Me.ucrChkAddRugPlot.Location = New System.Drawing.Point(6, 38)
-        Me.ucrChkAddRugPlot.Name = "ucrChkAddRugPlot"
-        Me.ucrChkAddRugPlot.Size = New System.Drawing.Size(108, 23)
-        Me.ucrChkAddRugPlot.TabIndex = 11
-        '
         'ucrReceiverLabel
         '
         Me.ucrReceiverLabel.AutoSize = True
@@ -498,24 +542,6 @@ Partial Class dlgScatterPlot
         Me.ucrReceiverLabel.strNcFilePath = ""
         Me.ucrReceiverLabel.TabIndex = 7
         Me.ucrReceiverLabel.ucrSelector = Nothing
-        '
-        'ucrChkWithSE
-        '
-        Me.ucrChkWithSE.AutoSize = True
-        Me.ucrChkWithSE.Checked = False
-        Me.ucrChkWithSE.Location = New System.Drawing.Point(186, 17)
-        Me.ucrChkWithSE.Name = "ucrChkWithSE"
-        Me.ucrChkWithSE.Size = New System.Drawing.Size(133, 23)
-        Me.ucrChkWithSE.TabIndex = 10
-        '
-        'ucrChkLineofBestFit
-        '
-        Me.ucrChkLineofBestFit.AutoSize = True
-        Me.ucrChkLineofBestFit.Checked = False
-        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(6, 16)
-        Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
-        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(173, 24)
-        Me.ucrChkLineofBestFit.TabIndex = 9
         '
         'ucrSaveScatterPlot
         '
@@ -585,32 +611,6 @@ Partial Class dlgScatterPlot
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
-        '
-        'ucrChkAddSidePlot
-        '
-        Me.ucrChkAddSidePlot.AutoSize = True
-        Me.ucrChkAddSidePlot.Checked = False
-        Me.ucrChkAddSidePlot.Location = New System.Drawing.Point(6, 67)
-        Me.ucrChkAddSidePlot.Name = "ucrChkAddSidePlot"
-        Me.ucrChkAddSidePlot.Size = New System.Drawing.Size(134, 23)
-        Me.ucrChkAddSidePlot.TabIndex = 80
-        '
-        'grpAdd
-        '
-        Me.grpAdd.Controls.Add(Me.ucrChkLineofBestFit)
-        Me.grpAdd.Controls.Add(Me.ucrChkAddSidePlot)
-        Me.grpAdd.Controls.Add(Me.ucrChkAddRugPlot)
-        Me.grpAdd.Controls.Add(Me.lblSides)
-        Me.grpAdd.Controls.Add(Me.ucrNudSize)
-        Me.grpAdd.Controls.Add(Me.lblSize)
-        Me.grpAdd.Controls.Add(Me.ucrInputSides)
-        Me.grpAdd.Controls.Add(Me.ucrChkWithSE)
-        Me.grpAdd.Location = New System.Drawing.Point(9, 227)
-        Me.grpAdd.Name = "grpAdd"
-        Me.grpAdd.Size = New System.Drawing.Size(336, 95)
-        Me.grpAdd.TabIndex = 81
-        Me.grpAdd.TabStop = False
-        Me.grpAdd.Text = "Add"
         '
         'dlgScatterPlot
         '
@@ -687,14 +687,10 @@ Partial Class dlgScatterPlot
     Friend WithEvents rdoCount As RadioButton
     Friend WithEvents rdoPoint As RadioButton
     Friend WithEvents toolStripMenuItemCountOptions As ToolStripMenuItem
-    Friend WithEvents lblPointsize As Label
     Friend WithEvents ucrNudPointsize As ucrNud
-    Friend WithEvents lblShape As Label
     Friend WithEvents ucrInputShape As ucrInputComboBox
     Friend WithEvents ucrInputPosition As ucrInputComboBox
-    Friend WithEvents lblPosition As Label
-    Friend WithEvents ucrInputLegend As ucrInputComboBox
-    Friend WithEvents lblLegend As Label
+    Friend WithEvents ucrInputColour As ucrInputComboBox
     Friend WithEvents ucrInputStation As ucrInputComboBox
     Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblFacetBy As Label
@@ -702,4 +698,8 @@ Partial Class dlgScatterPlot
     Friend WithEvents ucrChkLegend As ucrCheck
     Friend WithEvents ucrChkAddSidePlot As ucrCheck
     Friend WithEvents grpAdd As GroupBox
+    Friend WithEvents ucrChkSize As ucrCheck
+    Friend WithEvents ucrChkShape As ucrCheck
+    Friend WithEvents ucrChkColour As ucrCheck
+    Friend WithEvents ucrChkPosition As ucrCheck
 End Class
