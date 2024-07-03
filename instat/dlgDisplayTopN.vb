@@ -161,7 +161,7 @@ Public Class dlgDisplayTopN
         ucrInputDisplay.SetDropDownStyleAsNonEditable()
 
         ucrSaveDisplay.SetIsComboBox()
-        ucrSaveDisplay.SetCheckBoxText("Save Graph")
+        ucrSaveDisplay.SetCheckBoxText("Store Graph")
         ucrSaveDisplay.SetDataFrameSelector(ucrSelectorDisplayTopN.ucrAvailableDataFrames)
         ucrSaveDisplay.SetSaveTypeAsGraph()
         ucrSaveDisplay.SetPrefix("lollipop")
