@@ -23,9 +23,10 @@ Public Class dlgThreeVariablePivotTable
         clsRelevelPasteFunction, clsRPivotTableFunction,
         clsSelectFunction As New RFunction
     Private clsPipeOperator, clsLevelsDollarOperator As New ROperator
-    Public enumPivotMode As PivotMode = PivotMode.Describe
+    Public enumPivotMode As PivotMode = PivotMode.Prepare
 
     Public Enum PivotMode
+        Prepare
         Describe
         Climatic
     End Enum
@@ -47,7 +48,6 @@ Public Class dlgThreeVariablePivotTable
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 417
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorPivot.SetParameter(New RParameter("data", iNewPosition:=0))
@@ -118,7 +118,7 @@ Public Class dlgThreeVariablePivotTable
         ucrSavePivot.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSavePivot.SetDataFrameSelector(ucrSelectorPivot.ucrAvailableDataFrames)
         ucrSavePivot.SetIsComboBox()
-        ucrSavePivot.SetCheckBoxText("Save Table")
+        ucrSavePivot.SetCheckBoxText("Store Table")
         ucrSavePivot.SetAssignToIfUncheckedValue("last_table")
     End Sub
 
@@ -297,7 +297,21 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub AutofillMode()
         Select Case enumPivotMode
+            Case PivotMode.Prepare
+                ucrBase.iHelpTopicID = 319
+
+                ucrReceiverInitialRowFactors.bAutoFill = False
+
+                ucrReceiverInitialColumnFactor.bAutoFill = False
+
+                ucrReceiverFactorLevels.SetDataType("factor")
+                ucrReceiverFactorLevels.bAutoFill = False
+
+                ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
+                ucrReceiverAdditionalRowFactor.bAutoFill = False
             Case PivotMode.Describe
+                ucrBase.iHelpTopicID = 417
+
                 ucrReceiverInitialRowFactors.bAutoFill = False
 
                 ucrReceiverInitialColumnFactor.bAutoFill = False
@@ -319,6 +333,9 @@ Public Class dlgThreeVariablePivotTable
                 strRainCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "rain_label")
                 strYearCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "year_label")
                 strDayCol = frmMain.clsRLink.GetClimaticColumnOfType(strDataFrame, "day_label")
+
+                ucrBase.iHelpTopicID = 558
+
                 If Not String.IsNullOrEmpty(strRainCol) Then
                     ucrChkNumericVariable.Checked = True
                     ucrReceiverAdditionalRowFactor.Add(strRainCol, strDataFrame)

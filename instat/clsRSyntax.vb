@@ -309,8 +309,8 @@ Public Class RSyntax
             'Sometimes the output of the R-command we deal with should not be part of the script...  
             'That's only the case when this output has already been assigned.
             If (bUseBaseFunction AndAlso clsBaseFunction.IsAssigned()) OrElse
-                (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) OrElse
-                (bUseCommandString AndAlso clsBaseFunction.IsAssigned()) Then
+               (bUseBaseOperator AndAlso clsBaseOperator.IsAssigned()) OrElse
+               (bUseCommandString AndAlso clsBaseCommandString.IsAssigned()) Then
                 Return strScript
             End If
         End If

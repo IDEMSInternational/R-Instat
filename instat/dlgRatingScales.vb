@@ -262,17 +262,17 @@ Public Class dlgRatingScales
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpLikertFunction)
             ucrSaveGraph.SetSaveType(RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
             ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
-            ucrSaveGraph.SetCheckBoxText("Save Graph")
+            ucrSaveGraph.SetCheckBoxText("Store Graph")
         ElseIf rdoStacked.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrqFunction)
             ucrSaveGraph.SetSaveType(RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
             ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
-            ucrSaveGraph.SetCheckBoxText("Save Graph")
+            ucrSaveGraph.SetCheckBoxText("Store Graph")
         ElseIf rdoTable.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrqFunction)
             ucrSaveGraph.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveGraph.SetAssignToIfUncheckedValue("last_table")
-            ucrSaveGraph.SetCheckBoxText("Save Table")
+            ucrSaveGraph.SetCheckBoxText("Store Table")
         End If
     End Sub
 
