@@ -109,6 +109,7 @@ Partial Class dlgDescribeTwoVariable
         '
         'cmdFormatTable
         '
+        Me.cmdFormatTable.Enabled = False
         Me.cmdFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdFormatTable.Location = New System.Drawing.Point(489, 634)
         Me.cmdFormatTable.Margin = New System.Windows.Forms.Padding(4)
