@@ -91,6 +91,7 @@ Public Class dlgClimograph
     Private clsMaxFunction As New RFunction
     Private clsMax1Function As New RFunction
     Private clsVectorFunction As New RFunction
+    Private clsGetObjectDataFunction As New RFunction
     Private clsStarOperator As New ROperator
     Private clsStar1Operator As New ROperator
     Private clsDivideOperator As New ROperator
@@ -235,7 +236,7 @@ Public Class dlgClimograph
         ucrPnlClimograph.AddToLinkedControls({ucr1stFactorReceiver, ucrReceiverAbsolute, ucrReceiverMintemp, ucrReceiverMonth, ucrReceiverMaxtem, ucrReceiverRain, ucrInputStation}, {rdoWalterLieth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlClimograph.AddToLinkedControls({ucrReceiverFacet, ucrChkTile, ucrChkLegend, ucrReceiverElement2, ucrReceiverElement1, ucrReceiverMonthC, ucrReceiverRainC, ucrInputFacet, ucrChkColourIdntity, ucrChkRibbon, ucrChkText}, {rdoClimograph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkColourIdntity.SetText("Colour Identity")
+        ucrChkColourIdntity.SetText("Legend for Lines")
         ucrChkColourIdntity.AddParameterValuesCondition(True, "checked", "True")
         ucrChkColourIdntity.AddParameterValuesCondition(False, "checked", "False")
         ucrChkColourIdntity.AddToLinkedControls({ucrInputName, ucrInputLabels}, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -339,6 +340,7 @@ Public Class dlgClimograph
         clsVectorFunction = New RFunction
         clsScaleycontinuousFunction = New RFunction
         clsLabFunction = New RFunction
+        clsGetObjectDataFunction = New RFunction
 
         ucrSelectorClimograph.Reset()
         ucrSelectorClimograph.SetGgplotFunction(clsBaseOperator)
@@ -576,9 +578,14 @@ Public Class dlgClimograph
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
+        clsGetObjectDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetObjectDataFunction.AddParameter("as_file", "TRUE", iPosition:=2)
+
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction, iPosition:=0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -1320,6 +1327,7 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub ucrSelectorClimograph_DataFrameChanged() Handles ucrSelectorClimograph.DataFrameChanged
+        clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         AddRemoveGeomRibbon()
     End Sub
 
@@ -1327,6 +1335,14 @@ Public Class dlgClimograph
         AddRemoveGeomTextBar()
         AddRemoveGeomTextTmax()
         AddRemoveGeomTextTmin()
+    End Sub
+
+    Private Sub ucrSave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlValueChanged
+        If ucrSave.ucrChkSave.Checked Then
+            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & ucrSave.GetText & Chr(34), iPosition:=1)
+        Else
+            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        End If
     End Sub
 
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlClimograph.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverAbsolute.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverMaxtem.ControlContentsChanged, ucrReceiverMintemp.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrReceiverMonthC.ControlContentsChanged, ucrReceiverRainC.ControlContentsChanged
