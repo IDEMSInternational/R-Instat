@@ -5,7 +5,7 @@ DataSheet <- R6::R6Class("DataSheet",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), column_selections = list(), objects = list(),
-                                                 calculations = list(), keys = list(), comments = list(), keep_attributes = TRUE)
+                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE)
 {
   # Set up the data object
   self$set_data(data, messages)
@@ -28,6 +28,7 @@ DataSheet <- R6::R6Class("DataSheet",
   #self$update_variables_metadata()
   self$set_objects(objects)
   self$set_calculations(calculations)
+  self$set_scalars(scalars)
   self$set_keys(keys)
   self$set_comments(comments)
   
@@ -60,6 +61,7 @@ DataSheet <- R6::R6Class("DataSheet",
                            keys = list(),
                            comments = list(),
                            calculations = list(),
+                           scalars = list(),
                            changes = list(), 
                            .current_filter = list(),
                            .current_column_selection = list(),
@@ -229,6 +231,13 @@ DataSheet$set("public", "set_calculations", function(new_calculations) {
   if(!is.list(new_calculations)) stop("new_calculations must be of type: list")
   self$append_to_changes(list(Set_property, "calculations"))  
   private$calculations <- new_calculations
+}
+)
+
+DataSheet$set("public", "set_scalars", function(new_scalars) {
+  if(!is.list(new_scalars)) stop("scalars must be of type: list")
+  self$append_to_changes(list(Set_property, "scalars"))  
+  private$scalars <- new_scalars
 }
 )
 
@@ -619,6 +628,39 @@ DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, exclu
   lst = list()
   lst[[self$get_metadata(data_name_label)]] <- out
   return(lst)
+}
+)
+
+DataSheet$set("public", "get_scalars", function() {
+  out <-
+    private$scalars[self$get_scalar_names()]
+  return(out)
+}
+)
+
+DataSheet$set("public", "get_scalar_names", function(as_list = FALSE, excluded_items = c(),...) {
+  out <- get_data_book_scalar_names(scalar_list = private$scalars, 
+                                    as_list = as_list, 
+                                    list_label= self$get_metadata(data_name_label) )
+  return(out)
+}
+)
+
+DataSheet$set("public", "get_scalar_value", function(scalar_name) {
+  if(missing(scalar_name)) stop(stop("scalar_name must be specified."))
+  return(private$scalars[[scalar_name]])
+}
+)
+
+DataSheet$set("public", "add_scalar", function(scalar_name = "", scalar_value) {
+  if(missing(scalar_name)) scalar_name <- next_default_item("scalar", names(private$scalars))
+  if(scalar_name %in% names(private$scalars)) warning("A scalar called", scalar_name, "already exists. It will be replaced.")
+  private$scalars[[scalar_name]] <- scalar_value
+  self$append_to_metadata(scalar, private$scalars)
+  self$append_to_changes(list(Added_scalar, scalar_name))
+  cat(paste("Scalar name: ", scalar_name),
+      paste("Value: ", private$scalars[[scalar_name]]),
+      sep = "\n")
 }
 )
 
@@ -2175,11 +2217,12 @@ DataSheet$set("public", "get_object", function(object_name) {
 )
 
 DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
-  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model","structure","summary", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column_selection or a calculation.")
+  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model","structure","summary", "column_selection", "scalar")) stop(object_type, " must be either object (graph, table or model), filter, column selection, calculation or scalar.")
 
+  
   #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
   if (object_type %in% c("object", "graph", "table","model","structure","summary")){
-
+    
     if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
     if(new_name %in% names(private$objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
     names(private$objects)[names(private$objects) == object_name] <- new_name
@@ -2202,31 +2245,41 @@ DataSheet$set("public", "rename_object", function(object_name, new_name, object_
     if(".everything" == object_name) stop("Renaming .everything is not allowed.")
     names(private$column_selections)[names(private$column_selections) == object_name] <- new_name
     if(private$.current_column_selection$name == object_name){private$.current_column_selection$name <- new_name}
-  } 
+  } else if (object_type == "scalar") {
+    if(!object_name %in% names(private$scalars)) stop(object_name, " not found in calculations list")
+    if(new_name %in% names(private$scalars)) stop(new_name, " is already a calculation name. Cannot rename ", object_name, " to ", new_name)
+    names(private$scalars)[names(private$scalars) == object_name] <- new_name
+    self$append_to_metadata(scalar, private$scalars)
+  }
 }
 )
 
 DataSheet$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
-  if(!object_type %in% c("object", "graph", "table","model","structure","summary","filter", "calculation", "column_selection")) stop(object_type, " must be either object (graph, table or model), filter, column selection or a calculation.")
+  if(!object_type %in% c("object", "graph", "table","model","structure","summary","filter", "calculation", "column_selection", "scalar")) stop(object_type, " must be either object (graph, table or model), filter, column selection,  calculation or scala.")
 
+  
   if(any(object_type %in% c("object", "graph", "table","model","structure","summary"))){
-
-      if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in overall objects list.")
-      private$objects[names(private$objects) %in% object_names] <- NULL
-    }else if(object_type == "filter"){
-      if(!all(object_names %in% names(private$filters))) stop(object_names, " not found in filters list.")
-      if("no_filter" %in% object_names) stop("no_filter cannot be deleted.")
-      if(any(private$.current_filter$name %in% object_names))stop(private$.current_filter$name, " is currently in use and cannot be deleted.")
-      private$filters[names(private$filters) %in% object_names] <- NULL
-    }else if(object_type == "calculation"){
-      if(!object_names %in% names(private$calculations)) stop(object_names, " not found in calculations list.")
-      private$calculations[names(private$calculations) %in% object_names] <- NULL
-    }else if(object_type == "column_selection"){
-      if(!all(object_names %in% names(private$column_selections))) stop(object_names, " not found in column selections list.")
-      if(".everything" %in% object_names) stop(".everything cannot be deleted.")
-      if(any(private$.current_column_selection$name %in% object_names))stop(private$.current_column_selection$name, " is currently in use and cannot be deleted.")
-      private$column_selections[names(private$column_selections) %in% object_names] <- NULL
-    }
+    
+    if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in overall objects list.")
+    private$objects[names(private$objects) %in% object_names] <- NULL
+  }else if(object_type == "filter"){
+    if(!all(object_names %in% names(private$filters))) stop(object_names, " not found in filters list.")
+    if("no_filter" %in% object_names) stop("no_filter cannot be deleted.")
+    if(any(private$.current_filter$name %in% object_names))stop(private$.current_filter$name, " is currently in use and cannot be deleted.")
+    private$filters[names(private$filters) %in% object_names] <- NULL
+  }else if(object_type == "calculation"){
+    if(!object_names %in% names(private$calculations)) stop(object_names, " not found in calculations list.")
+    private$calculations[names(private$calculations) %in% object_names] <- NULL
+  }else if(object_type == "scalar"){
+    if(!object_names %in% names(private$scalars)) stop(object_names, " not found in scalars list.")
+    private$scalars[names(private$scalars) %in% object_names] <- NULL
+    self$append_to_metadata(scalar, private$scalars)
+  }else if(object_type == "column_selection"){
+    if(!all(object_names %in% names(private$column_selections))) stop(object_names, " not found in column selections list.")
+    if(".everything" %in% object_names) stop(".everything cannot be deleted.")
+    if(any(private$.current_column_selection$name %in% object_names))stop(private$.current_column_selection$name, " is currently in use and cannot be deleted.")
+    private$column_selections[names(private$column_selections) %in% object_names] <- NULL
+  }
   if(!is.null(private$.last_graph) && length(private$.last_graph) == 2 && private$.last_graph[1] == data_name && private$.last_graph[2] %in% object_names) {
     private$.last_graph <- NULL
   }

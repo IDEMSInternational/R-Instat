@@ -659,7 +659,7 @@ Public Class dlgDescribeTwoVariable
             ucrSaveTable.SetPrefix("summary_table")
             ucrSaveTable.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveTable.SetAssignToIfUncheckedValue("last_summary")
-            ucrSaveTable.SetCheckBoxText("Save Summary")
+            ucrSaveTable.SetCheckBoxText("Store Summary")
             ucrBase.clsRsyntax.SetBaseROperator(clsGroupByPipeOperator)
             clsGroupByPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Summary,
@@ -694,6 +694,19 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
                 ucrChkMeans.Visible = True
                 ucrChkLevSig.Visible = True
+                ucrSaveTable.Visible = True
+                ucrSaveTable.Location = New Point(23, 450)
+                clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
+                ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
+                ucrSaveTable.SetPrefix("summary_table")
+                ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
+                ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
+                ucrSaveTable.SetCheckBoxText("Store Table")
+                clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                     strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                     strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                     strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
+                                     strObjectName:="last_table")
             ElseIf IsFactorByFactor() Then
                 ucrSaveTable.Visible = True
                 cmdFormatTable.Visible = True
@@ -705,7 +718,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetPrefix("frequency_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-                ucrSaveTable.SetCheckBoxText("Save Table")
+                ucrSaveTable.SetCheckBoxText("Store Table")
                 clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -786,6 +799,7 @@ Public Class dlgDescribeTwoVariable
                 cmdFormatTable.Visible = False
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             End If
+            ucrSaveTable.SetCheckBoxText("Store Table")
         End If
         FactorColumns()
     End Sub

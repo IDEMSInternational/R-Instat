@@ -86,7 +86,7 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
 
         ucrSaveExtremes.SetPrefix("extreme")
         ucrSaveExtremes.SetIsComboBox()
-        ucrSaveExtremes.SetCheckBoxText("Save Model:")
+        ucrSaveExtremes.SetCheckBoxText("Store Model:")
         ucrSaveExtremes.SetSaveTypeAsModel()
         ucrSaveExtremes.SetDataFrameSelector(ucrSelectorExtremes.ucrAvailableDataFrames)
         ucrSaveExtremes.SetAssignToIfUncheckedValue("last_model")
