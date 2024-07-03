@@ -1120,59 +1120,29 @@ Public Class frmMain
     End Sub
 
     Public Sub DeleteAutoSaveFiles()
-        Try
-            If Directory.Exists(strAutoSaveDataFolderPath) OrElse Directory.Exists(strAutoSaveLogFolderPath) OrElse Directory.Exists(strAutoSaveInternalLogFolderPath) Then
-                ' Define the retention policy (keep last N autosaves)
-                Dim retentionCount As Integer = 5 ' Example: Keep the last 5 autosaves
+        If strCurrentAutoSaveDataFilePath <> "" Then
+            Try
+                File.Delete(strCurrentAutoSaveDataFilePath)
+            Catch ex As Exception
+                MsgBox("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
+            End Try
+        End If
 
-                ' Retrieve autosaved files
-                If Directory.Exists(strAutoSaveDataFolderPath) Then
-                    Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveDataFolderPath)
-                    Dim files As FileInfo() = autoSaveDirectory.GetFiles("data_*.rds") ' Adjust pattern to match actual filenames
+        If clsRLink.strAutoSaveLogFilePath <> "" Then
+            Try
+                File.Delete(clsRLink.strAutoSaveLogFilePath)
+            Catch ex As Exception
+                MsgBox("Could not delete auto save log file at: " & clsRLink.strAutoSaveLogFilePath & Environment.NewLine & ex.Message)
+            End Try
+        End If
 
-                    ' Sort files by last write time in descending order
-                    Dim sortedFiles As IOrderedEnumerable(Of FileInfo) = files.OrderByDescending(Function(f) f.LastWriteTime)
-
-                    ' Determine files to delete based on retention policy
-                    Dim filesToDelete As IEnumerable(Of FileInfo) = sortedFiles.Skip(retentionCount)
-
-                    ' Delete older autosaved files
-                    For Each file In filesToDelete
-                        file.Delete()
-                    Next
-                ElseIf Directory.Exists(strAutoSaveLogFolderPath) Then
-                    Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveLogFolderPath)
-                    Dim files As FileInfo() = autoSaveDirectory.GetFiles("log*.R") ' Adjust pattern to match actual filenames
-
-                    ' Sort files by last write time in descending order
-                    Dim sortedFiles As IOrderedEnumerable(Of FileInfo) = files.OrderByDescending(Function(f) f.LastWriteTime)
-
-                    ' Determine files to delete based on retention policy
-                    Dim filesToDelete As IEnumerable(Of FileInfo) = sortedFiles.Skip(retentionCount)
-
-                    ' Delete older autosaved files
-                    For Each file In filesToDelete
-                        file.Delete()
-                    Next
-                ElseIf Directory.Exists(strAutoSaveInternalLogFolderPath) Then
-                    Dim autoSaveDirectory As New DirectoryInfo(strAutoSaveInternalLogFolderPath)
-                    Dim files As FileInfo() = autoSaveDirectory.GetFiles("debug_log*.R") ' Adjust pattern to match actual filenames
-
-                    ' Sort files by last write time in descending order
-                    Dim sortedFiles As IOrderedEnumerable(Of FileInfo) = files.OrderByDescending(Function(f) f.LastWriteTime)
-
-                    ' Determine files to delete based on retention policy
-                    Dim filesToDelete As IEnumerable(Of FileInfo) = sortedFiles.Skip(retentionCount)
-
-                    ' Delete older autosaved files
-                    For Each file In filesToDelete
-                        file.Delete()
-                    Next
-                End If
-            End If
-        Catch ex As Exception
-            MsgBox("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
-        End Try
+        If clsRLink.strAutoSaveDebugLogFilePath <> "" Then
+            Try
+                File.Delete(clsRLink.strAutoSaveDebugLogFilePath)
+            Catch ex As Exception
+                MsgBox("Could not delete auto save debug log file at: " & clsRLink.strAutoSaveDebugLogFilePath & Environment.NewLine & ex.Message)
+            End Try
+        End If
     End Sub
 
 
