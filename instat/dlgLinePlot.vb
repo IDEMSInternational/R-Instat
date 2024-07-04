@@ -205,7 +205,7 @@ Public Class dlgLinePlot
         ucrSave.SetPrefix("line_plot")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
-        ucrSave.SetCheckBoxText("Save Graph")
+        ucrSave.SetCheckBoxText("Store Graph")
         ucrSave.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
 
