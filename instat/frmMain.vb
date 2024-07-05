@@ -458,15 +458,15 @@ Public Class frmMain
         '---------------------------------------
         'prompt user for recovery selection
         If (strAutoSavedLogFilePaths.Length > 0 OrElse
-            strAutoSavedDataFilePaths.Length > 0) Then
-            'MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
-            '              "Would you like to see auto recovery options?",
-            '              MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
+            strAutoSavedDataFilePaths.Length > 0) AndAlso
+            MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
+                          "Would you like to see auto recovery options?",
+                          MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
 
             dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
             dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
             dlgAutoSaveRecovery.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
-            'dlgAutoSaveRecovery.ShowDialog()
+            dlgAutoSaveRecovery.ShowDialog()
 
             'todo. the dialog design is meant to only return just one option; script, data file path or new session.
             'refactor the dialog to enforce the design
