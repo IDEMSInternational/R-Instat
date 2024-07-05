@@ -270,7 +270,7 @@ Partial Class dlgClimograph
         Me.ucrChkColourIdntity.Checked = False
         Me.ucrChkColourIdntity.Location = New System.Drawing.Point(12, 369)
         Me.ucrChkColourIdntity.Name = "ucrChkColourIdntity"
-        Me.ucrChkColourIdntity.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkColourIdntity.Size = New System.Drawing.Size(189, 24)
         Me.ucrChkColourIdntity.TabIndex = 98
         '
         'ucrInputLegendPosition
