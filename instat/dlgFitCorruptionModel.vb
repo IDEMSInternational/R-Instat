@@ -78,7 +78,7 @@ Public Class dlgCorruptionFitModel
         ucrSaveCorruptionModel.SetPrefix("Corruption_Model")
         ucrSaveCorruptionModel.SetSaveTypeAsModel()
         ucrSaveCorruptionModel.SetDataFrameSelector(ucrSelectorFitModel.ucrAvailableDataFrames)
-        ucrSaveCorruptionModel.SetCheckBoxText("Save Model")
+        ucrSaveCorruptionModel.SetCheckBoxText("Store Model")
         ucrSaveCorruptionModel.SetIsComboBox()
         ucrSaveCorruptionModel.SetAssignToIfUncheckedValue("last_model")
     End Sub

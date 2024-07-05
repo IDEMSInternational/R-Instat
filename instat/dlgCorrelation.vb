@@ -592,7 +592,7 @@ Public Class dlgCorrelation
                 If rdoAsText.Checked Then
                     clsDummyFunction.AddParameter("output", "as.table", iPosition:=2)
                     ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
-                    ucrSaveCorrelation.SetCheckBoxText("Save Table")
+                    ucrSaveCorrelation.SetCheckBoxText("Store Table")
                     ucrSaveCorrelation.SetPrefix("summary_table")
                     ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_table")
                     clsPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
@@ -604,14 +604,14 @@ Public Class dlgCorrelation
                     clsDummyFunction.AddParameter("output", "as.dataframe", iPosition:=2)
                     clsPipeOperator.RemoveAssignTo()
                     ucrSaveCorrelation.SetSaveTypeAsDataFrame()
-                    ucrSaveCorrelation.SetCheckBoxText("Save Data Frame")
+                    ucrSaveCorrelation.SetCheckBoxText("Store Data Frame")
                     ucrSaveCorrelation.SetPrefix("data_frame")
                     ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_dataframe")
                 End If
             Else
 
                 ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
-                ucrSaveCorrelation.SetCheckBoxText("Save Table")
+                ucrSaveCorrelation.SetCheckBoxText("Store Table")
                 ucrSaveCorrelation.SetPrefix("summary_table")
                 ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_table")
                 clsCorrelationFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
@@ -623,7 +623,7 @@ Public Class dlgCorrelation
         Else
 
             ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
-            ucrSaveCorrelation.SetCheckBoxText("Save Model")
+            ucrSaveCorrelation.SetCheckBoxText("Store Model")
             ucrSaveCorrelation.SetPrefix("summary_model")
             ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_model")
             clsCorrelationTestFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",

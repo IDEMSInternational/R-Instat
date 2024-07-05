@@ -183,7 +183,7 @@ Public Class dlgScatterPlot
         ucrSaveScatterPlot.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph,
                                        strRObjectFormat:=RObjectFormat.Image)
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
-        ucrSaveScatterPlot.SetCheckBoxText("Save Graph")
+        ucrSaveScatterPlot.SetCheckBoxText("Store Graph")
         ucrSaveScatterPlot.SetIsComboBox()
         ucrSaveScatterPlot.SetAssignToIfUncheckedValue("last_graph")
 
