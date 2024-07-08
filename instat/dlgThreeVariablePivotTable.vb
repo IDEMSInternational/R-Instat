@@ -118,7 +118,7 @@ Public Class dlgThreeVariablePivotTable
         ucrSavePivot.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSavePivot.SetDataFrameSelector(ucrSelectorPivot.ucrAvailableDataFrames)
         ucrSavePivot.SetIsComboBox()
-        ucrSavePivot.SetCheckBoxText("Save Table")
+        ucrSavePivot.SetCheckBoxText("Store Table")
         ucrSavePivot.SetAssignToIfUncheckedValue("last_table")
     End Sub
 

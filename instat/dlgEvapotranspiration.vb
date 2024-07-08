@@ -98,7 +98,7 @@ Public Class dlgEvapotranspiration
         ucrReceiverHumidityMin.SetClimaticType("hum_min")
         ucrReceiverHumidityMin.bAutoFill = True
 
-        ucrReceiverWindSpeed.SetParameter(New RParameter("u2", 7))
+        ucrReceiverWindSpeed.SetParameter(New RParameter("uz", 7))
         ucrReceiverWindSpeed.SetParameterIsRFunction()
         ucrReceiverWindSpeed.SetClimaticType("wind_speed")
         ucrReceiverWindSpeed.bAutoFill = True
@@ -153,7 +153,7 @@ Public Class dlgEvapotranspiration
         ucrPnlMethod.AddToLinkedControls(ucrReceiverExtraRadiation, {rdoHargreavesSamani}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethod.AddToLinkedControls(ucrNudAlpha, {rdoPriestleyTaylor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.23")
 
-        ucrReceiverExtraRadiation.SetLinkedDisplayControl(lblRa)
+        ucrReceiverExtraRadiation.SetLinkedDisplayControl(lblRA)
         ucrReceiverRadiation.SetLinkedDisplayControl(lblRadiation)
         ucrReceiverHumidityMax.SetLinkedDisplayControl(lblHumidityMax)
         ucrReceiverHumidityMin.SetLinkedDisplayControl(lblHumidityMin)
@@ -488,7 +488,7 @@ Public Class dlgEvapotranspiration
 
     Private Sub ucrReceiverWindSpeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindSpeed.ControlValueChanged, ucrChkWind.ControlValueChanged
         If ucrChkWind.Checked AndAlso Not ucrReceiverWindSpeed.IsEmpty Then
-            clsVarnamesVectorPMFunction.AddParameter("x", Chr(34) & "u2" & Chr(34), bIncludeArgumentName:=False)
+            clsVarnamesVectorPMFunction.AddParameter("x", Chr(34) & "uz" & Chr(34), bIncludeArgumentName:=False)
         Else
             clsVarnamesVectorPMFunction.RemoveParameterByName("x")
             ucrReceiverHumidityMax.SetMeAsReceiver()
@@ -501,7 +501,7 @@ Public Class dlgEvapotranspiration
             clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
             clsListFunction.AddParameter("z", 2, iPosition:=4)
             clsListFunction.AddParameter("G", 0, iPosition:=6)
-            clsListFunction.AddParameter("as", 0.25, iPosition:=7)
+            clsListFunction.AddParameter("as", 0.23, iPosition:=7)
             clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
             clsListFunction.AddParameter("lambda", 2.45, iPosition:=1)
             clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
@@ -522,7 +522,7 @@ Public Class dlgEvapotranspiration
             clsListFunction.AddParameter("Gsc", 0.082, iPosition:=3)
             clsListFunction.AddParameter("sigma", 4.903 * 10 ^ -9, iPosition:=5)
             clsListFunction.AddParameter("G", 0, iPosition:=6)
-            clsListFunction.AddParameter("as", 0.25, iPosition:=7)
+            clsListFunction.AddParameter("as", 0.23, iPosition:=7)
             clsListFunction.AddParameter("bs", 0.5, iPosition:=8)
             clsListFunction.AddParameter("alphaPT", 1.26, iPosition:=9)
             clsListFunction.RemoveParameterByName("z")

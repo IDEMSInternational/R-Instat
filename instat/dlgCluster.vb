@@ -103,7 +103,7 @@ Public Class dlgCluster
         ucrPnlPrepareData.AddToLinkedControls({ucrChkMatrix, ucrSaveDistance}, {rdoDistanceData}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPrepareData.AddToLinkedControls(ucrInputMethod, {rdoDistanceData}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrSaveNewDataFrame.SetSaveTypeAsModel()
+        ucrSaveNewDataFrame.SetSaveTypeAsDataFrame()
         ucrSaveNewDataFrame.SetDataFrameSelector(ucrSelectorPrepareData.ucrAvailableDataFrames)
         ucrSaveNewDataFrame.SetLabelText("New Data Frame Name:")
         ucrSaveNewDataFrame.SetPrefix("scale")
@@ -111,7 +111,7 @@ Public Class dlgCluster
 
         ucrSaveDistance.SetSaveTypeAsDataFrame()
         ucrSaveDistance.SetDataFrameSelector(ucrSelectorPrepareData.ucrAvailableDataFrames)
-        ucrSaveDistance.SetCheckBoxText("Save Result:")
+        ucrSaveDistance.SetCheckBoxText("Store Result:")
         ucrSaveDistance.SetPrefix("distance")
         ucrSaveDistance.SetIsComboBox()
         ucrSaveDistance.SetAssignToIfUncheckedValue("last_distance")
