@@ -18,6 +18,7 @@ Imports instat.Translations
 
 Public Class dlgPICSACrops
     Private clsCropsFunction As New RFunction
+    Private clsDummyFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private strCurrDataName As String = ""
@@ -88,27 +89,35 @@ Public Class dlgPICSACrops
         ucrReceiverEnd.bAttachedToPrimaryDataFrame = False
 
         'Planting date 
-        ucrChkRequirePlantingDays.SetText("Require start day before planting day")
-        ucrChkRequirePlantingDays.SetParameter(New RParameter("start_check", 10), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkRequirePlantingDays.SetRDefault("TRUE")
+        'ucrChkRequirePlantingDays.SetText("Require start day before planting day")
+        'ucrChkRequirePlantingDays.SetParameter(New RParameter("start_check", 10), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        'ucrChkRequirePlantingDays.SetRDefault("TRUE")
+
+        ucrPnlStartCheck.AddRadioButton(rdoYes)
+        ucrPnlStartCheck.AddRadioButton(rdoNo)
+        ucrPnlStartCheck.AddRadioButton(rdoBoth)
+        ucrPnlStartCheck.AddParameterValuesCondition(rdoYes, "check", "yes")
+        ucrPnlStartCheck.AddParameterValuesCondition(rdoNo, "check", "no")
+        ucrPnlStartCheck.AddParameterValuesCondition(rdoBoth, "check", "both")
+
 
         ucrInputPlantingDates.SetParameter(New RParameter("plant_days", 5))
         ucrInputPlantingDates.SetValidationTypeAsNumericList()
-        ucrInputPlantingDates.SetItems({"120", "80, 90, 100, 110, 120", "92, 122, 153"})
+        'ucrInputPlantingDates.SetItems({"120", "80, 90, 100, 110, 120", "92, 122, 153"})
         ucrInputPlantingDates.AddQuotesIfUnrecognised = False
         ucrInputPlantingDates.bAllowNonConditionValues = True
 
         'Planting Length 
         ucrInputCropLengths.SetParameter(New RParameter("plant_lengths", 6))
         ucrInputCropLengths.SetValidationTypeAsNumericList()
-        ucrInputCropLengths.SetItems({"120", "100, 110, 120, 130, 140", "80, 90, 100, 110", "120, 150, 180"})
+        'ucrInputCropLengths.SetItems({"120", "100, 110, 120, 130, 140", "80, 90, 100, 110", "120, 150, 180"})
         ucrInputCropLengths.AddQuotesIfUnrecognised = False
         ucrInputCropLengths.bAllowNonConditionValues = True
 
         'Water amount 
         ucrInputWaterAmounts.SetParameter(New RParameter("rain_totals", 7))
         ucrInputWaterAmounts.SetValidationTypeAsNumericList()
-        ucrInputWaterAmounts.SetItems({"600", "300, 400, 500, 600, 700", "300, 500, 700"})
+        'ucrInputWaterAmounts.SetItems({"600", "300, 400, 500, 600, 700", "300, 500, 700"})
         ucrInputWaterAmounts.AddQuotesIfUnrecognised = False
         ucrInputWaterAmounts.bAllowNonConditionValues = True
 
@@ -180,11 +189,14 @@ Public Class dlgPICSACrops
 
     Private Sub SetDefaults()
         clsCropsFunction = New RFunction
-
+        clsDummyFunction = New RFunction
         'Currently this must come before reset to ensure autofilling is done correctly
         'Once autofilling is being triggered correctly this can go after Reset.
         ucrSelectorForCrops.Reset()
         ucrReceiverRainfall.SetMeAsReceiver()
+
+        clsDummyFunction.AddParameter("check", "yes", iPosition:=0)
+
 
         'Crops Function
         clsCropsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$crops_definitions")
@@ -192,9 +204,9 @@ Public Class dlgPICSACrops
         'clsCropsFunction.AddParameter("plant_days", "120")
         'clsCropsFunction.AddParameter("plant_lengths", "120")
         'clsCropsFunction.AddParameter("rain_totals", "600")
-        ucrInputPlantingDates.SetName("120")
-        ucrInputCropLengths.SetName("120")
-        ucrInputWaterAmounts.SetName("600")
+        'ucrInputPlantingDates.SetName("120")
+        'ucrInputCropLengths.SetName("120")
+        'ucrInputWaterAmounts.SetName("600")
         clsCropsFunction.AddParameter("definition_props", "TRUE", iPosition:=11)
         clsCropsFunction.AddParameter("print_table", "TRUE", iPosition:=12)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCropsFunction)
@@ -222,8 +234,8 @@ Public Class dlgPICSACrops
         'ucrInputPlantingDates.SetRCode(clsCropsFunction, bReset)
         'ucrInputPlantingLengths.SetRCode(clsCropsFunction, bReset)
         'ucrInputWaterAmounts.SetRCode(clsCropsFunction, bReset)
-
-        ucrChkRequirePlantingDays.SetRCode(clsCropsFunction, bReset)
+        ucrPnlStartCheck.SetRCode(clsDummyFunction, bReset)
+        'ucrChkRequirePlantingDays.SetRCode(clsCropsFunction, bReset)
         ucrChkDataProp.SetRCode(clsCropsFunction, bReset)
         ucrChkPrintDataProp.SetRCode(clsCropsFunction, bReset)
     End Sub
@@ -242,12 +254,8 @@ Public Class dlgPICSACrops
         End If
     End Sub
 
-    Private Sub ucrReceiverYear_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverStart.ControlContentsChanged, ucrReceiverEnd.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged, ucrInputPlantingDates.ControlContentsChanged, ucrInputCropLengths.ControlContentsChanged, ucrInputWaterAmounts.ControlContentsChanged
+    Private Sub ucrReceiverYear_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverStart.ControlContentsChanged, ucrReceiverEnd.ControlContentsChanged, ucrReceiverDay.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrInputPlantingDates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPlantingDates.ControlValueChanged
-        PlantingDaysParam()
     End Sub
 
     Private Sub ucrSelectorForCrops_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForCrops.ControlValueChanged
@@ -266,12 +274,55 @@ Public Class dlgPICSACrops
         End If
     End Sub
 
+    Private Sub ucrPnlStartCheck_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStartCheck.ControlValueChanged
+        If rdoYes.Checked Then
+            clsCropsFunction.AddParameter("start_check", Chr(34) & "yes" & Chr(34), iPosition:=10)
+        ElseIf rdoNo.Checked Then
+            clsCropsFunction.AddParameter("start_check", Chr(34) & "no" & Chr(34), iPosition:=10)
+        Else
+            clsCropsFunction.AddParameter("start_check", Chr(34) & "both" & Chr(34), iPosition:=10)
+        End If
+    End Sub
+
+    Private Sub cmdInfillPlandingDay_Click(sender As Object, e As EventArgs) Handles cmdInfillPlandingDay.Click
+        Dim lstLevels As New List(Of String)
+
+        For i As Integer = 0 To 365 Step 5
+            lstLevels.Add(i.ToString())
+        Next
+        ucrInputPlantingDates.Text = String.Join(", ", lstLevels)
+        PlantingDaysParam()
+    End Sub
+
+    Private Sub cmdInfillWater_Click(sender As Object, e As EventArgs) Handles cmdInfillWater.Click
+        Dim lstLevels As New List(Of String)
+
+        For i As Integer = 0 To 2500 Step 25
+            lstLevels.Add(i.ToString())
+        Next
+        ucrInputWaterAmounts.Text = String.Join(", ", lstLevels)
+    End Sub
+
+    Private Sub cmdInfillCropLength_Click(sender As Object, e As EventArgs) Handles cmdInfillCropLength.Click
+        Dim lstLevels As New List(Of String)
+
+        For i As Integer = 0 To 365 Step 5
+            lstLevels.Add(i.ToString())
+        Next
+        ucrInputCropLengths.Text = String.Join(", ", lstLevels)
+    End Sub
+
     Private Sub ucrInputCropLengths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCropLengths.ControlValueChanged
         If ucrInputCropLengths.IsEmpty Then
             clsCropsFunction.RemoveParameterByName("plant_lengths")
         Else
             clsCropsFunction.AddParameter("plant_lengths", "c(" & ucrInputCropLengths.GetText() & ")", iPosition:=6)
         End If
+    End Sub
+
+    Private Sub ucrInputPlantingDates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPlantingDates.ControlValueChanged
+        PlantingDaysParam()
+
     End Sub
 
     Private Sub ucrInputWaterAmounts_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputWaterAmounts.ControlValueChanged
