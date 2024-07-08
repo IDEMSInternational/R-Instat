@@ -103,21 +103,21 @@ Public Class dlgPICSACrops
 
         ucrInputPlantingDates.SetParameter(New RParameter("plant_days", 5))
         ucrInputPlantingDates.SetValidationTypeAsNumericList()
-        'ucrInputPlantingDates.SetItems({"120", "80, 90, 100, 110, 120", "92, 122, 153"})
+        ucrInputPlantingDates.SetItems({"120", "80, 90, 100, 110, 120", "92, 122, 153", "seq(0,50,10)"})
         ucrInputPlantingDates.AddQuotesIfUnrecognised = False
         ucrInputPlantingDates.bAllowNonConditionValues = True
 
         'Planting Length 
         ucrInputCropLengths.SetParameter(New RParameter("plant_lengths", 6))
         ucrInputCropLengths.SetValidationTypeAsNumericList()
-        'ucrInputCropLengths.SetItems({"120", "100, 110, 120, 130, 140", "80, 90, 100, 110", "120, 150, 180"})
+        ucrInputCropLengths.SetItems({"120", "100, 110, 120, 130, 140", "80, 90, 100, 110", "120, 150, 180", "seq(0,50,10)"})
         ucrInputCropLengths.AddQuotesIfUnrecognised = False
         ucrInputCropLengths.bAllowNonConditionValues = True
 
         'Water amount 
         ucrInputWaterAmounts.SetParameter(New RParameter("rain_totals", 7))
         ucrInputWaterAmounts.SetValidationTypeAsNumericList()
-        'ucrInputWaterAmounts.SetItems({"600", "300, 400, 500, 600, 700", "300, 500, 700"})
+        ucrInputWaterAmounts.SetItems({"600", "300, 400, 500, 600, 700", "300, 500, 700", "seq(0,200,10)"})
         ucrInputWaterAmounts.AddQuotesIfUnrecognised = False
         ucrInputWaterAmounts.bAllowNonConditionValues = True
 
@@ -284,33 +284,6 @@ Public Class dlgPICSACrops
         End If
     End Sub
 
-    Private Sub cmdInfillPlandingDay_Click(sender As Object, e As EventArgs) Handles cmdInfillPlandingDay.Click
-        Dim lstLevels As New List(Of String)
-
-        For i As Integer = 0 To 365 Step 5
-            lstLevels.Add(i.ToString())
-        Next
-        ucrInputPlantingDates.Text = String.Join(", ", lstLevels)
-        PlantingDaysParam()
-    End Sub
-
-    Private Sub cmdInfillWater_Click(sender As Object, e As EventArgs) Handles cmdInfillWater.Click
-        Dim lstLevels As New List(Of String)
-
-        For i As Integer = 0 To 2500 Step 25
-            lstLevels.Add(i.ToString())
-        Next
-        ucrInputWaterAmounts.Text = String.Join(", ", lstLevels)
-    End Sub
-
-    Private Sub cmdInfillCropLength_Click(sender As Object, e As EventArgs) Handles cmdInfillCropLength.Click
-        Dim lstLevels As New List(Of String)
-
-        For i As Integer = 0 To 365 Step 5
-            lstLevels.Add(i.ToString())
-        Next
-        ucrInputCropLengths.Text = String.Join(", ", lstLevels)
-    End Sub
 
     Private Sub ucrInputCropLengths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCropLengths.ControlValueChanged
         If ucrInputCropLengths.IsEmpty Then
