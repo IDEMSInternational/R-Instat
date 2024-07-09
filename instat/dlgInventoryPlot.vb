@@ -348,13 +348,9 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub AddClimateMissingFunction()
-        If rdoMissing.Checked Then
-            If ucrChkSummary.Checked Then
-                ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
-                clsClimaticMissing.iCallType = 2
-            Else
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticMissing)
-            End If
+        If rdoMissing.Checked AndAlso ucrChkSummary.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
+            clsClimaticMissing.iCallType = 2
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticMissing)
         End If
