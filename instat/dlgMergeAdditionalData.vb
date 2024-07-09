@@ -52,7 +52,6 @@ Public Class dlgMergeAdditionalData
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 186
         ucrToDataFrame.SetParameter(New RParameter("x", 0))
         ucrToDataFrame.SetParameterIsRFunction()
         ucrToDataFrame.SetLabelText("To Data Frame:")

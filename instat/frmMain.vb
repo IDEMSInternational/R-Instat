@@ -2603,6 +2603,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareDataFrameAddMergeColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameAddMergeColumns.Click
+        dlgMergeAdditionalData.enumMergeMode = dlgMergeAdditionalData.MergeMode.Prepare
         dlgMergeAdditionalData.ShowDialog()
     End Sub
 
