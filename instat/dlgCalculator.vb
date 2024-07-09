@@ -264,7 +264,7 @@ Public Class dlgCalculator
     Private Sub SetHelpOptions()
         Select Case enumCalculatorMode
             Case CalculatorMode.Prepare
-               ' ucrBase.iHelpTopicID = 14
+                ucrBase.iHelpTopicID = 14
             Case CalculatorMode.Structured
                 ucrCalc.ucrInputCalOptions.SetName("Circular")
                 ucrBase.iHelpTopicID = 677
@@ -337,6 +337,7 @@ Public Class dlgCalculator
                 ucrBase.iHelpTopicID = 439
             Case Else
                 Me.Width = iBasicWidth
+                ucrBase.iHelpTopicID = 14
         End Select
     End Sub
 End Class
