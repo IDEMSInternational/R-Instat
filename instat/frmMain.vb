@@ -733,7 +733,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareReshapeMerge_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeMerge.Click
-        dlgMerge.enumMergeMode = dlgMerge.MergeMode.Prepare
         dlgMerge.ShowDialog()
     End Sub
 
@@ -2103,8 +2102,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticTidyandExamineMerge_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineMerge.Click
-        dlgMerge.enumMergeMode = dlgMerge.MergeMode.Climatic
-        dlgMerge.ShowDialog()
+        dlgMergeAdditionalData.enumMergeMode = dlgMergeAdditionalData.MergeMode.Climatic
+        dlgMergeAdditionalData.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticCMSAFExporttoCMSAFRToolbox_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFExporttoCMSAFRToolbox.Click
