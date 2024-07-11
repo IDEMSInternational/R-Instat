@@ -55,6 +55,7 @@ Public Class dlgEdit
     Private Sub InitialiseDialog()
         Dim dctLogical As New Dictionary(Of String, String)
 
+        ucrBase.iHelpTopicID = 699
         ucrSelectValues.SetParameter(New RParameter("data_name", 0))
         ucrSelectValues.SetParameterIsString()
         ucrSelectValues.ucrAvailableDataFrames.Enabled = False

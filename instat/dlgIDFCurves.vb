@@ -59,7 +59,7 @@ Public Class dlgIDFCurves
 
         ucrSave.SetPrefix("Prec_accum")
         ucrSave.SetIsComboBox()
-        ucrSave.SetCheckBoxText("Save DataFrame")
+        ucrSave.SetCheckBoxText("Store DataFrame")
         ucrSave.SetSaveTypeAsDataFrame()
         ucrSave.SetDataFrameSelector(ucrIDFCurvesSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_accum")

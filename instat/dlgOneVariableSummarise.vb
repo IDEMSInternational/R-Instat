@@ -384,19 +384,19 @@ Public Class dlgOneVariableSummarise
             ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
             ucrSaveSummary.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
             ucrSaveSummary.SetAssignToIfUncheckedValue("last_table")
-            ucrSaveSummary.SetCheckBoxText("Save Table")
+            ucrSaveSummary.SetCheckBoxText("Store Table")
         ElseIf rdoDefault.Checked Then
             clsDummyFunction.AddParameter("checked_radio", "defaults", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
             ucrSaveSummary.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveSummary.SetAssignToIfUncheckedValue("last_summary")
-            ucrSaveSummary.SetCheckBoxText("Save Summary")
+            ucrSaveSummary.SetCheckBoxText("Store Summary")
         ElseIf rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked_radio", "skim", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsSkimrFunction)
             ucrSaveSummary.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveSummary.SetAssignToIfUncheckedValue("last_summary")
-            ucrSaveSummary.SetCheckBoxText("Save Summary")
+            ucrSaveSummary.SetCheckBoxText("Store Summary")
         End If
         cmdSummaries.Visible = rdoCustomised.Checked
         cmdFormatTable.Visible = rdoCustomised.Checked

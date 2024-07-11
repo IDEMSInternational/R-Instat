@@ -74,7 +74,7 @@ Public Class dlgOneVariableGraph
         ucrSaveGraph.SetPrefix("one_var")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorOneVarGraph.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
