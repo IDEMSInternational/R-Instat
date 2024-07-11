@@ -108,6 +108,9 @@ Partial Class dlgTransform
         Me.ucrSelectorForRank = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkMissingLast = New instat.ucrCheck()
         Me.ucrChkDecreasing = New instat.ucrCheck()
+        Me.ucrPnlColumnSelectOptions = New instat.UcrPanel()
+        Me.rdoSingle = New System.Windows.Forms.RadioButton()
+        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.grpTies.SuspendLayout()
         Me.grpMissingValues.SuspendLayout()
         Me.grpNumericOptions.SuspendLayout()
@@ -894,7 +897,7 @@ Partial Class dlgTransform
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 392)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 16
         '
         'ucrSelectorForRank
@@ -927,12 +930,47 @@ Partial Class dlgTransform
         Me.ucrChkDecreasing.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkDecreasing.TabIndex = 12
         '
+        'ucrPnlColumnSelectOptions
+        '
+        Me.ucrPnlColumnSelectOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlColumnSelectOptions.Location = New System.Drawing.Point(237, 52)
+        Me.ucrPnlColumnSelectOptions.Name = "ucrPnlColumnSelectOptions"
+        Me.ucrPnlColumnSelectOptions.Size = New System.Drawing.Size(185, 29)
+        Me.ucrPnlColumnSelectOptions.TabIndex = 37
+        '
+        'rdoSingle
+        '
+        Me.rdoSingle.AutoSize = True
+        Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSingle.Location = New System.Drawing.Point(255, 59)
+        Me.rdoSingle.Name = "rdoSingle"
+        Me.rdoSingle.Size = New System.Drawing.Size(54, 17)
+        Me.rdoSingle.TabIndex = 37
+        Me.rdoSingle.TabStop = True
+        Me.rdoSingle.Text = "Single"
+        Me.rdoSingle.UseVisualStyleBackColor = True
+        '
+        'rdoMultiple
+        '
+        Me.rdoMultiple.AutoSize = True
+        Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMultiple.Location = New System.Drawing.Point(321, 60)
+        Me.rdoMultiple.Name = "rdoMultiple"
+        Me.rdoMultiple.Size = New System.Drawing.Size(61, 17)
+        Me.rdoMultiple.TabIndex = 68
+        Me.rdoMultiple.TabStop = True
+        Me.rdoMultiple.Text = "Multiple"
+        Me.rdoMultiple.UseVisualStyleBackColor = True
+        '
         'dlgTransform
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(440, 445)
+        Me.Controls.Add(Me.rdoMultiple)
+        Me.Controls.Add(Me.rdoSingle)
+        Me.Controls.Add(Me.ucrPnlColumnSelectOptions)
         Me.Controls.Add(Me.grpNumericOptions)
         Me.Controls.Add(Me.grpNonNegative)
         Me.Controls.Add(Me.grpTies)
@@ -1050,4 +1088,7 @@ Partial Class dlgTransform
     Friend WithEvents ucrInputLogicOperations As ucrInputComboBox
     Friend WithEvents rdoLogical As RadioButton
     Friend WithEvents ucrPnlNumericOptions As UcrPanel
+    Friend WithEvents rdoMultiple As RadioButton
+    Friend WithEvents rdoSingle As RadioButton
+    Friend WithEvents ucrPnlColumnSelectOptions As UcrPanel
 End Class

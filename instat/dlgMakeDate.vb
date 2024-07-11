@@ -17,6 +17,12 @@
 Imports instat.Translations
 Imports System.Text.RegularExpressions
 Public Class dlgMakeDate
+    Public enumMakedateMode As String = MakedateMode.Prepare
+    Public Enum MakedateMode
+        Prepare
+        Climatic
+    End Enum
+
     Public clsPaste As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -44,6 +50,7 @@ Public Class dlgMakeDate
             SetDefaultColumn()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -173,7 +180,7 @@ Public Class dlgMakeDate
         ucrSaveDate.SetPrefix("date")
         ucrSaveDate.SetSaveTypeAsColumn()
         ucrSaveDate.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
-        ucrSaveDate.SetLabelText("Save Date:")
+        ucrSaveDate.SetLabelText("Store Date:")
 
         ucrSaveDate.SetIsComboBox()
 
@@ -438,6 +445,15 @@ Public Class dlgMakeDate
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumMakedateMode
+            Case MakedateMode.Prepare
+                ucrBase.iHelpTopicID = 461
+            Case MakedateMode.Climatic
+                ucrBase.iHelpTopicID = 493
+        End Select
     End Sub
 
     Private Sub AutoFillReceivers()

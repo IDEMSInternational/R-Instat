@@ -15,6 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgOneWayFrequencies
+    Public enumOnewayMode As String = OnewayMode.Prepare
+    Public Enum OnewayMode
+        Prepare
+        Describe
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
@@ -42,6 +49,7 @@ Public Class dlgOneWayFrequencies
         End If
         SetRCodeForControls(bReset)
         SetDefaultColumn()
+        SetHelpOptions()
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
@@ -302,7 +310,7 @@ Public Class dlgOneWayFrequencies
             If rdoTableAsOutput.Checked Then
                 ucrSaveFreq.SetSaveType(strRObjectType:=RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
                 ucrSaveFreq.SetPrefix("freq_summary")
-                ucrSaveFreq.SetCheckBoxText("Save Summary")
+                ucrSaveFreq.SetCheckBoxText("Store Summary")
                 ucrSaveFreq.SetAssignToIfUncheckedValue("last_summary")
 
                 'restore assign to
@@ -315,7 +323,7 @@ Public Class dlgOneWayFrequencies
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTableSjMiscFrqRFunction)
             Else
                 ucrSaveFreq.SetPrefix("one_way_freq")
-                ucrSaveFreq.SetCheckBoxText("Save Data Frame")
+                ucrSaveFreq.SetCheckBoxText("Store Data Frame")
                 ucrSaveFreq.SetSaveType(strRObjectType:=RObjectTypeLabel.Dataframe)
                 ucrSaveFreq.SetAssignToIfUncheckedValue("one_way_freq")
 
@@ -326,7 +334,7 @@ Public Class dlgOneWayFrequencies
             End If
         ElseIf rdoFrqGraph.Checked Then
             ucrSaveFreq.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
-            ucrSaveFreq.SetCheckBoxText("Save Graph")
+            ucrSaveFreq.SetCheckBoxText("Store Graph")
             ucrSaveFreq.SetPrefix("freq_graph")
             ucrSaveFreq.SetAssignToIfUncheckedValue("last_graph")
 
@@ -347,7 +355,7 @@ Public Class dlgOneWayFrequencies
         ElseIf rdoFrqStemLeaf.Checked Then
             ucrSaveFreq.SetSaveType(strRObjectType:=RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Text)
             ucrSaveFreq.SetPrefix("freq_summary")
-            ucrSaveFreq.SetCheckBoxText("Save Summary")
+            ucrSaveFreq.SetCheckBoxText("Store Summary")
             ucrSaveFreq.SetAssignToIfUncheckedValue("last_summary")
 
             clsStemLeafNoQuotesRFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",
@@ -449,4 +457,14 @@ Public Class dlgOneWayFrequencies
         strDefaultColumns = Nothing
     End Sub
 
+    Private Sub SetHelpOptions()
+        Select Case enumOnewayMode
+            Case OnewayMode.Prepare
+                ucrBase.iHelpTopicID = 551
+            Case OnewayMode.Describe
+                ucrBase.iHelpTopicID = 518
+            Case OnewayMode.Climatic
+                ucrBase.iHelpTopicID = 617
+        End Select
+    End Sub
 End Class

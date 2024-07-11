@@ -565,12 +565,8 @@ Public Class ucrAxes
             ucrPnlSecondAxisTitle.SetRCode(clsDummyFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
             ucrChkSecondaryAxis.SetRCode(clsXYSecondaryAxisFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
             ucrInputSecondaryAxis.SetRCode(clsXYSecondaryAxisFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+            ucrPnlScales.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         End If
-
-        'scales functions
-        ucrPnlScales.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrInputLowerLimit.SetRCode(clsLimitsFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
-        ucrInputUpperLimit.SetRCode(clsLimitsFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         ucrInputPosition.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         ucrChkPosition.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
@@ -782,7 +778,20 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ucrPnlScales_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlScales.ControlValueChanged, ucrInputLowerLimit.ControlValueChanged, ucrInputUpperLimit.ControlValueChanged
-        If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
+        If rdoScalesCustom.Checked Then
+            Dim xValue As String = "NA"
+            Dim yValue As String = "NA"
+
+            If Not ucrInputLowerLimit.IsEmpty Then
+                xValue = ucrInputLowerLimit.GetText()
+            End If
+
+            If Not ucrInputUpperLimit.IsEmpty Then
+                yValue = ucrInputUpperLimit.GetText()
+            End If
+
+            clsLimitsFunction.AddParameter("x", xValue, iPosition:=0, bIncludeArgumentName:=False)
+            clsLimitsFunction.AddParameter("y", yValue, iPosition:=1, bIncludeArgumentName:=False)
             clsXYScaleContinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsLimitsFunction)
         Else
             clsXYScaleContinuousFunction.RemoveParameterByName("limits")

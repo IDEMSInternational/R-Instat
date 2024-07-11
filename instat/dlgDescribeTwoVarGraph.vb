@@ -17,6 +17,12 @@
 Imports instat.Translations
 
 Public Class dlgDescribeTwoVarGraph
+    Public enumTwovarMode As String = TwovarMode.Describe
+    Public Enum TwovarMode
+        Describe
+        Climatic
+    End Enum
+
     Private clsBaseOperator, clsPairOperator, clsCoordPolarStartOperator As New ROperator
     Private clsRGGplotFunction, clsMosaicGgplotFunction, clsRFacet, clsThemeFunction,
             clsGlobalAes, clsLabsFunction, clsXlabsFunction, clsYlabFunction,
@@ -68,6 +74,7 @@ Public Class dlgDescribeTwoVarGraph
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
@@ -267,7 +274,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrSaveGraph.SetPrefix("two_var")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
@@ -1055,6 +1062,15 @@ Public Class dlgDescribeTwoVarGraph
         Else
             clsBaseOperator.RemoveParameterByName("text")
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumTwovarMode
+            Case TwovarMode.Describe
+                ucrBase.iHelpTopicID = 416
+            Case TwovarMode.Climatic
+                ucrBase.iHelpTopicID = 424
+        End Select
     End Sub
 
     Private Sub LowerUpperDiagonal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLower.ControlValueChanged, ucrChkUpper.ControlValueChanged, ucrChkDiagonal.ControlValueChanged
