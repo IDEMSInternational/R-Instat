@@ -71,7 +71,7 @@ Public Class dlgTaylorDiagram
         ucrChkNormalise.SetRDefault("FALSE")
 
         ucrSavePlot.SetPrefix("taylor_diagram_plot")
-        ucrSavePlot.SetCheckBoxText("Store Graph")
+        ucrSavePlot.SetCheckBoxText("Save Graph")
         ucrSavePlot.SetIsComboBox()
         ucrSavePlot.SetSaveTypeAsGraph()
         ucrSavePlot.SetDataFrameSelector(ucrSelectorTaylorDiagram.ucrAvailableDataFrames)

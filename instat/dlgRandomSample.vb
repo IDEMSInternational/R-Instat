@@ -17,12 +17,6 @@
 Imports instat.Translations
 
 Public Class dlgRandomSample
-    Public enumRandomSampleMode As String = RandomSampleMode.Prepare
-    Public Enum RandomSampleMode
-        Prepare
-        Model
-    End Enum
-
     Private bFirstLoad As Boolean = True
     Private clsMultipleSamplesFunction As New RFunction
     Private clsDistributionFunction As New RFunction
@@ -39,7 +33,6 @@ Public Class dlgRandomSample
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
@@ -148,15 +141,6 @@ Public Class dlgRandomSample
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub SetHelpOptions()
-        Select Case enumRandomSampleMode
-            Case RandomSampleMode.Prepare
-                ucrBase.iHelpTopicID = 376
-            Case RandomSampleMode.Model
-                ucrBase.iHelpTopicID = 31
-        End Select
     End Sub
 
     Private Sub SetNewColumName()

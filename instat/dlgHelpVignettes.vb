@@ -40,7 +40,6 @@ Public Class dlgHelpVignettes
         Dim expPackageNames As SymbolicExpression
         Dim chrPackageNames As CharacterVector
 
-        ucrBase.iHelpTopicID = 695
         ucrPnlHelpVignettes.AddRadioButton(rdoHelp)
         ucrPnlHelpVignettes.AddRadioButton(rdoVignettes)
 

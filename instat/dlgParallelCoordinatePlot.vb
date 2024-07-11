@@ -36,8 +36,6 @@ Public Class dlgParallelCoordinatePlot
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
-    Private clsMatchFunction As New RFunction
-    Private clsNamesFunction As New RFunction
 
     Private clsFacetFunction As New RFunction
     Private clsFacetVariablesOperator As New ROperator
@@ -147,7 +145,7 @@ Public Class dlgParallelCoordinatePlot
         ucrSaveGraph.SetPrefix("par_coord_plot")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Store Graph")
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
@@ -161,8 +159,6 @@ Public Class dlgParallelCoordinatePlot
         clsFacetColOp = New ROperator
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
-        clsNamesFunction = New RFunction
-        clsMatchFunction = New RFunction
 
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
@@ -175,10 +171,9 @@ Public Class dlgParallelCoordinatePlot
 
         clsGGParCoordFunc.SetPackageName("GGally")
         clsGGParCoordFunc.SetRCommand("ggparcoord")
-        clsGGParCoordFunc.AddParameter("columns", "column_numbers", iPosition:=1)
+
         clsGGParCoordFunc.AddParameter("missing", Chr(34) & "exclude" & Chr(34), iPosition:=6)
-        clsGGParCoordFunc.AddParameter("order", clsRFunctionParameter:=clsMatchFunction, iPosition:=7)
-        clsGGParCoordFunc.AddParameter("centerObsID", "1", iPosition:=8)
+        clsGGParCoordFunc.AddParameter("order", Chr(34) & "skewness" & Chr(34), iPosition:=7)
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggparcord", clsRFunctionParameter:=clsGGParCoordFunc, iPosition:=0)
@@ -198,11 +193,6 @@ Public Class dlgParallelCoordinatePlot
 
         clsGroupByFunction.SetPackageName("dplyr")
         clsGroupByFunction.SetRCommand("group_by")
-
-        clsMatchFunction.SetRCommand("match")
-        clsMatchFunction.SetAssignTo("column_numbers")
-
-        clsNamesFunction.SetRCommand("names")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXLabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -227,8 +217,6 @@ Public Class dlgParallelCoordinatePlot
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverXVariables.AddAdditionalCodeParameterPair(clsMatchFunction, New RParameter("var", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-
         ucrSelectorParallelCoordinatePlot.SetRCode(clsGGParCoordFunc, bReset)
         ucrReceiverFactor.SetRCode(clsGGParCoordFunc, bReset)
         ucrChkBoxplots.SetRCode(clsGGParCoordFunc, bReset)
@@ -238,6 +226,9 @@ Public Class dlgParallelCoordinatePlot
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
+        If bReset Then
+            ucrReceiverXVariables.SetRCode(clsGGParCoordFunc, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -434,12 +425,9 @@ Public Class dlgParallelCoordinatePlot
     Private Sub ucrSelectorParallelCoordinatePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorParallelCoordinatePlot.ControlValueChanged
         AutoFacetStation()
         SetPipeAssignTo()
-        clsNamesFunction.AddParameter("names", ucrSelectorParallelCoordinatePlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
-        clsMatchFunction.AddParameter("data", clsRFunctionParameter:=clsNamesFunction, iPosition:=1, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudTransparency.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
 End Class

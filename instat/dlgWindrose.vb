@@ -80,7 +80,7 @@ Public Class dlgWindrose
         ucrSaveGraph.SetDataFrameSelector(ucrWindRoseSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetCheckBoxText("Store Graph")
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 

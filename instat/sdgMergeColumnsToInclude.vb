@@ -23,7 +23,6 @@ Public Class sdgMergeColumnstoInclude
     Private clsMerge As RFunction
 
     Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
@@ -129,14 +128,5 @@ Public Class sdgMergeColumnstoInclude
                 End If
             Next
         End If
-    End Sub
-
-    Private Sub SetHelpOptions()
-        Select Case dlgMerge.enumMergeMode
-            Case dlgMerge.MergeMode.Prepare
-                ucrSubBase.iHelpTopicID = 154
-            Case dlgMerge.MergeMode.Climatic
-                ucrSubBase.iHelpTopicID = 636
-        End Select
     End Sub
 End Class

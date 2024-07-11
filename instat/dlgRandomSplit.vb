@@ -65,16 +65,16 @@ Public Class dlgRandomSplit
         ucrChkLag.SetParameter(ucrNudLag.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkLag.AddToLinkedControls(ucrNudLag, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
-        ucrChkTest.SetText("Store Test to")
+        ucrChkTest.SetText("Save Test to")
         ucrChkTest.AddToLinkedControls(ucrSaveTestingData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrSaveTrainingData.SetLabelText("Store Train to:")
+        ucrSaveTrainingData.SetLabelText("Save Train to:")
         ucrSaveTrainingData.SetSaveTypeAsDataFrame()
         ucrSaveTrainingData.SetDataFrameSelector(ucrSelectorRandomSplit.ucrAvailableDataFrames)
         ucrSaveTrainingData.SetPrefix("training_data")
         ucrSaveTrainingData.SetIsComboBox()
 
-        ucrSaveTestingData.SetLabelText("Store Test to:")
+        ucrSaveTestingData.SetLabelText("Save Test to:")
         ucrSaveTestingData.SetSaveTypeAsDataFrame()
         ucrSaveTestingData.SetDataFrameSelector(ucrSelectorRandomSplit.ucrAvailableDataFrames)
         ucrSaveTestingData.SetPrefix("testing_data")
@@ -132,7 +132,8 @@ Public Class dlgRandomSplit
         clsTesting.SetPackageName("rsample")
         clsTesting.SetRCommand("testing")
         ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
-
+        ucrBase.clsRsyntax.AddToAfterCodes(clsTesting, 0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsTraining, 1)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -152,7 +153,7 @@ Public Class dlgRandomSplit
         ucrChkStratifyingFactor.SetRCode(clsInitialSplit, bReset)
 
         If bReset Then
-            ucrChkTest.SetRCode(clsTesting, bReset)
+            ucrChkTest.SetRCode(clsInitialSplit, bReset)
         End If
     End Sub
 
@@ -189,35 +190,24 @@ Public Class dlgRandomSplit
     Private Sub SetBaseFunction()
         ucrBase.clsRsyntax.ClearCodes()
         If rdoSample.Checked Then
-            If ucrChkTest.Checked AndAlso ucrSaveTestingData.IsComplete Then
-                clsTesting.AddParameter("x", "rsample")
-                ucrBase.clsRsyntax.AddToAfterCodes(clsTesting, 0)
-            Else
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsTesting)
+            If ucrSaveTestingData.IsComplete Then
+                clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialSplit)
             End If
             If ucrSaveTrainingData.IsComplete Then
-                clsTraining.AddParameter("x", "rsample")
-                ucrBase.clsRsyntax.AddToAfterCodes(clsTraining, 1)
-            Else
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsTraining)
+                clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialSplit)
             End If
             ucrBase.clsRsyntax.SetBaseRFunction(clsInitialSplit)
         Else
-            If ucrChkTest.Checked AndAlso ucrSaveTestingData.IsComplete Then
-                clsTesting.AddParameter("x", "rsample")
-                ucrBase.clsRsyntax.AddToAfterCodes(clsTesting, 0)
-            Else
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsTesting)
+            If ucrSaveTestingData.IsComplete Then
+                clsTesting.AddParameter("x", clsRFunctionParameter:=clsInitialTimeSplit)
             End If
             If ucrSaveTrainingData.IsComplete Then
-                clsTraining.AddParameter("x", "rsample")
-                ucrBase.clsRsyntax.AddToAfterCodes(clsTraining, 1)
-            Else
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsTraining)
+                clsTraining.AddParameter("x", clsRFunctionParameter:=clsInitialTimeSplit)
             End If
             ucrBase.clsRsyntax.SetBaseRFunction(clsInitialTimeSplit)
         End If
-
+        ucrBase.clsRsyntax.AddToAfterCodes(clsTesting, 0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsTraining, 1)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -243,7 +233,4 @@ Public Class dlgRandomSplit
         SetBaseFunction()
     End Sub
 
-    Private Sub ucrChkTest_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTest.ControlValueChanged
-        SetBaseFunction()
-    End Sub
 End Class

@@ -88,7 +88,7 @@ Public Class dlgOneVarFitModel
 
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
         ucrSaveModel.SetSaveTypeAsModel()
-        ucrSaveModel.SetCheckBoxText("Store Model")
+        ucrSaveModel.SetCheckBoxText("Save Model")
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
@@ -651,13 +651,13 @@ Public Class dlgOneVarFitModel
 
     Private Sub SetSaveLabelTextAndPrefix()
         If rdoGeneralCase.Checked Then
-            ucrSaveModel.SetCheckBoxText("Store Model")
+            ucrSaveModel.SetCheckBoxText("Save Model")
             ucrSaveModel.SetPrefix("dist")
         ElseIf rdoTest.Checked Then
-            ucrSaveModel.SetCheckBoxText("Store Test")
+            ucrSaveModel.SetCheckBoxText("Save Test")
             ucrSaveModel.SetPrefix("test")
         ElseIf rdoEstimate.Checked Then
-            ucrSaveModel.SetCheckBoxText("Store Estimate")
+            ucrSaveModel.SetCheckBoxText("Save Estimate")
             ucrSaveModel.SetPrefix("ci")
         Else
             MsgBox("Developer error: the Radio Button has not been added to the Panel.")

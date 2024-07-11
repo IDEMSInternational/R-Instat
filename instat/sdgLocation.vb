@@ -49,7 +49,6 @@ Public Class sdgLocation
         ucrInputLatitude.SetParameter(New RParameter("lat_rad", 2))
         ucrInputLatitude.AddQuotesIfUnrecognised = False
         ucrInputLatitude.SetLinkedDisplayControl(lblLatitude)
-        ucrInputLatitude.SetValidationTypeAsNumeric()
         ucrInputLatitude.SetRDefault("0")
 
         ucrReceiverLongitude.SetParameter(New RParameter("lon", 3))
@@ -61,8 +60,7 @@ Public Class sdgLocation
         ucrInputLongitude.SetParameter(New RParameter("lon", 3))
         ucrInputLongitude.AddQuotesIfUnrecognised = False
         ucrInputLongitude.SetLinkedDisplayControl(lblLongitude)
-        ucrInputLongitude.SetValidationTypeAsNumeric()
-        ucrInputLongitude.SetRDefault("0")
+        ucrInputLongitude.SetRDefault(0)
 
         ucrReceiverAltitude.SetParameter(New RParameter("Elev", 4))
         ucrReceiverAltitude.SetParameterIsRFunction()
@@ -73,7 +71,6 @@ Public Class sdgLocation
         ucrInputElevation.SetParameter(New RParameter("Elev", 4))
         ucrInputElevation.AddQuotesIfUnrecognised = False
         ucrInputElevation.SetLinkedDisplayControl(lblLatitude)
-        ucrInputElevation.SetValidationTypeAsNumeric()
         ucrInputElevation.SetRDefault("0")
 
         bControlsInitialised = True
@@ -120,11 +117,6 @@ Public Class sdgLocation
 
     Private Sub ucrInputElevation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputElevation.ControlValueChanged
         EnableDesableSelector()
-        If Not ucrInputElevation.IsEmpty Then
-            clsListFunction.AddParameter("Elev", ucrInputElevation.GetText(), iPosition:=4)
-        Else
-            clsListFunction.RemoveParameterByName("Elev")
-        End If
     End Sub
 
     Private Sub ucrSelectorLocation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLocation.ControlValueChanged
@@ -133,14 +125,9 @@ Public Class sdgLocation
 
     Private Sub ucrInputLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLatitude.ControlValueChanged
         EnableDesableSelector()
-        If Not ucrInputLatitude.IsEmpty Then
-            clsListFunction.AddParameter("lat_rad", ucrInputLatitude.GetText(), iPosition:=1)
-        Else
-            clsListFunction.RemoveParameterByName("lat_rad")
-        End If
     End Sub
 
-    Private Sub ucrReceiverLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlValueChanged
+    Private Sub ucrInputLongitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLongitude.ControlValueChanged
         EnableDesableSelector()
     End Sub
 End Class

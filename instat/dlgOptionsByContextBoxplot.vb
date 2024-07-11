@@ -190,7 +190,7 @@ Public Class dlgOptionsByContextBoxplot
 
         ucrSavePlot.SetPrefix("boxplot")
         ucrSavePlot.SetIsComboBox()
-        ucrSavePlot.SetCheckBoxText("Store Graph")
+        ucrSavePlot.SetCheckBoxText("Save Graph")
         ucrSavePlot.SetSaveTypeAsGraph()
         ucrSavePlot.SetDataFrameSelector(ucrSelectorPlot.ucrAvailableDataFrames)
         ucrSavePlot.SetAssignToIfUncheckedValue("last_graph")

@@ -130,7 +130,7 @@ Public Class dlgOptionsByContextFitModel
         ucrSaveModel.SetPrefix("reg")
         ucrSaveModel.SetDataFrameSelector(ucrSelectorFitModel.ucrAvailableDataFrames)
         ucrSaveModel.SetSaveTypeAsModel()
-        ucrSaveModel.SetCheckBoxText("Store Model")
+        ucrSaveModel.SetCheckBoxText("Save Model")
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 

@@ -90,7 +90,7 @@ Public Class sdgPlots
     Private clsXElementTitle As New RFunction
     Private clsYElemetText As New RFunction
     Private clsYElemetTitle As New RFunction
-    Private clsGuideLegendFunction1, clsGuideFunction1, clsGuideLegendFunction, clsGuideFunction As New RFunction
+
     'Polar Coordinates
     Private clsCoordPolarFunc As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
@@ -2322,26 +2322,11 @@ Public Class sdgPlots
         clsScaleColourViridisFunction = clsNewScaleColourViridisFunction
         clsAnnotateFunction = clsNewAnnotateFunction
 
-        clsGuideLegendFunction = New RFunction
-        clsGuideFunction = New RFunction
-        clsGuideLegendFunction1 = New RFunction
-        clsGuideFunction1 = New RFunction
         clsDummyFunction = New RFunction
 
         clsDummyFunction.AddParameter("palette", "sequential", iPosition:=0)
         clsDummyFunction.AddParameter("Check", "fill", iPosition:=1)
 
-        clsGuideLegendFunction.SetRCommand("guide_legend")
-        clsGuideLegendFunction.AddParameter("reverse", "TRUE", iPosition:=0)
-
-        clsGuideFunction.SetRCommand("guides")
-        clsGuideFunction.AddParameter("fill", clsRFunctionParameter:=clsGuideLegendFunction, iPosition:=0)
-
-        clsGuideLegendFunction1.SetRCommand("guide_legend")
-        clsGuideLegendFunction1.AddParameter("reverse", "TRUE", iPosition:=0)
-
-        clsGuideFunction1.SetRCommand("guides")
-        clsGuideFunction1.AddParameter("colour", clsRFunctionParameter:=clsGuideLegendFunction1, iPosition:=1)
 
         strAxisType = strNewAxisType
         ucrInputAxisType.SetName(strAxisType)
@@ -3421,6 +3406,7 @@ Public Class sdgPlots
 
     Private Sub SetRcodeForCommonThemesControls(bReset As Boolean)
         ucrChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkXaxisAngle.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
         ucrNudXAngle.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
@@ -3439,12 +3425,10 @@ Public Class sdgPlots
     End Sub
 
     Private Sub cmdSimpleOptions_Click(sender As Object, e As EventArgs) Handles cmdSimpleOptions.Click
-        sdgThemesSub.SetRCode(clsBaseOperator, clsNewGuideFunction:=clsGuideFunction, clsNewGuideLegendFunction:=clsGuideLegendFunction, clsNewGuideFunction1:=clsGuideFunction1, clsNewGuideLegendFunction1:=clsGuideLegendFunction1, clsNewThemesFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
+        sdgThemesSub.SetRCode(clsBaseOperator, clsNewThemesFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
         Me.SendToBack()
         sdgThemesSub.ShowDialog()
-        bResetThemes = False
         SetRcodeForCommonThemesControls(False)
-        ucrChkLegendPosition.Checked = False
     End Sub
 
     Private Sub ucrChkUsePolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUsePolarCoordinates.ControlValueChanged
@@ -6203,13 +6187,5 @@ Public Class sdgPlots
     Private Sub ucrInputFillFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFillFunction.ControlValueChanged
         HideShowCanvaFill()
         GroupeColorScale()
-    End Sub
-
-    Private Sub ucrInputLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLegendPosition.ControlValueChanged
-        If Not ucrInputLegendPosition.IsEmpty Then
-            clsThemeFunction.AddParameter("legend.position", Chr(34) & ucrInputLegendPosition.GetText().ToLower() & Chr(34), iPosition:=0)
-        Else
-            clsThemeFunction.RemoveParameterByName("legend.position")
-        End If
     End Sub
 End Class

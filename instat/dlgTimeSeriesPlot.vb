@@ -258,7 +258,7 @@ Public Class dlgTimeSeriesPlot
 
         ucrSavePlot.SetPrefix("line")
         ucrSavePlot.SetIsComboBox()
-        ucrSavePlot.SetCheckBoxText("Store Graph")
+        ucrSavePlot.SetCheckBoxText("Save Graph")
         ucrSavePlot.SetSaveTypeAsGraph()
         ucrSavePlot.SetDataFrameSelector(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames)
         ucrSavePlot.SetAssignToIfUncheckedValue("last_graph")

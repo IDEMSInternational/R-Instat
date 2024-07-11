@@ -137,7 +137,7 @@ Public Class dlgTreemap
         ucrColourText.SetColours()
 
         ucrSaveTreemap.SetIsComboBox()
-        ucrSaveTreemap.SetCheckBoxText("Store Treemap")
+        ucrSaveTreemap.SetCheckBoxText("Save Treemap")
         ucrSaveTreemap.SetDataFrameSelector(ucrSelectorTreemap.ucrAvailableDataFrames)
         ucrSaveTreemap.SetSaveTypeAsGraph()
         ucrSaveTreemap.SetPrefix("tree_map")

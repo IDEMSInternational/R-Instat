@@ -183,7 +183,7 @@ Public Class dlgSeasonalPlot
         ucrSaveGraph.SetPrefix("seasonality_plot")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetCheckBoxText("Store Graph")
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorSeasonalityComparisons.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 

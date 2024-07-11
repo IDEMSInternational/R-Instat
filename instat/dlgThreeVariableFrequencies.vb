@@ -291,12 +291,12 @@ Public Class dlgThreeVariableFrequencies
             ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
             ucrSaveGraph.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
             ucrSaveGraph.SetAssignToIfUncheckedValue("last_summary")
-            ucrSaveGraph.SetCheckBoxText("Store Summary")
+            ucrSaveGraph.SetCheckBoxText("Save Summary")
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGridArrangeFunction)
             ucrSaveGraph.SetSaveType(RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
             ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
-            ucrSaveGraph.SetCheckBoxText("Store Graph")
+            ucrSaveGraph.SetCheckBoxText("Save Graph")
         End If
     End Sub
 

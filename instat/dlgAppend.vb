@@ -16,12 +16,6 @@
 
 Imports instat.Translations
 Public Class dlgAppend
-    Public enumAppendMode As String = AppendMode.Prepare
-    Public Enum AppendMode
-        Prepare
-        Climatic
-    End Enum
-
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsBindRows As New RFunction
@@ -35,7 +29,6 @@ Public Class dlgAppend
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -104,15 +97,6 @@ Public Class dlgAppend
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub SetHelpOptions()
-        Select Case enumAppendMode
-            Case AppendMode.Prepare
-                ucrBase.iHelpTopicID = 465
-            Case AppendMode.Climatic
-                ucrBase.iHelpTopicID = 610
-        End Select
     End Sub
 
     Private Sub ucrReceiverAppendDataframe_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAppendDataframe.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrChkIncludeIDColumn.ControlContentsChanged, ucrInputIDColName.ControlContentsChanged

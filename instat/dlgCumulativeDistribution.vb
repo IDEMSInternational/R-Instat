@@ -164,7 +164,7 @@ Public Class dlgCumulativeDistribution
 
         ucrSaveCumDist.SetSaveTypeAsGraph()
         ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)
-        ucrSaveCumDist.SetCheckBoxText("Store Graph")
+        ucrSaveCumDist.SetCheckBoxText("Save Graph")
         ucrSaveCumDist.SetIsComboBox()
         ucrSaveCumDist.SetPrefix("cumulative_dist")
         ucrSaveCumDist.SetAssignToIfUncheckedValue("last_graph")

@@ -159,7 +159,7 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.SetPrefix("two_var")
         ucrSaveModels.SetSaveTypeAsModel()
         ucrSaveModels.SetDataFrameSelector(ucrSelectorSimpleReg.ucrAvailableDataFrames)
-        ucrSaveModels.SetCheckBoxText("Store Model")
+        ucrSaveModels.SetCheckBoxText("Save Model")
         ucrSaveModels.SetIsComboBox()
         ucrSaveModels.SetAssignToIfUncheckedValue("last_model")
 

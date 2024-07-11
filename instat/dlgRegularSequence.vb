@@ -18,12 +18,6 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgRegularSequence
-    Public enumRegularsequenceMode As String = RegularsequenceMode.Prepare
-    Public Enum RegularsequenceMode
-        Prepare
-        Climatic
-    End Enum
-
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsRepFunction, clsSeqFunction, clsSeqDateFunction As New RFunction
@@ -54,7 +48,6 @@ Public Class dlgRegularSequence
             bDefaultOptionChanged = False
         End If
 
-        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -343,16 +336,6 @@ Public Class dlgRegularSequence
 
         PreviewSequence()
     End Sub
-
-    Private Sub SetHelpOptions()
-        Select Case enumRegularsequenceMode
-            Case RegularsequenceMode.Prepare
-                ucrBase.iHelpTopicID = 460
-            Case RegularsequenceMode.Climatic
-                ucrBase.iHelpTopicID = 492
-        End Select
-    End Sub
-
 
     Private Sub ucrInputInStepsOf_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputInStepsOf.ControlValueChanged
         PreviewSequence()

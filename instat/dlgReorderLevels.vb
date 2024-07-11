@@ -144,7 +144,7 @@ Public Class dlgReorderLevels
         ucrSaveResults.SetPrefix("new_column")
         ucrSaveResults.SetSaveTypeAsColumn()
         ucrSaveResults.SetDataFrameSelector(ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames)
-        ucrSaveResults.SetLabelText("Store As:")
+        ucrSaveResults.SetLabelText("Save As:")
         ucrSaveResults.SetIsComboBox()
     End Sub
 

@@ -111,7 +111,7 @@ Public Class dlgDotPlot
         ucrSaveDotPlot.SetPrefix("dot_plot")
         ucrSaveDotPlot.SetSaveTypeAsGraph()
         ucrSaveDotPlot.SetIsComboBox()
-        ucrSaveDotPlot.SetCheckBoxText("Store Graph")
+        ucrSaveDotPlot.SetCheckBoxText("Save Graph")
         ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
         ucrSaveDotPlot.SetAssignToIfUncheckedValue("last_graph")
     End Sub

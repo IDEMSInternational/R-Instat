@@ -100,7 +100,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrReceiverSecondFactor.SetParameterIsString()
 
         ucrSaveSummaryBar.SetIsComboBox()
-        ucrSaveSummaryBar.SetCheckBoxText("Store Graph")
+        ucrSaveSummaryBar.SetCheckBoxText("Save Graph")
         ucrSaveSummaryBar.SetDataFrameSelector(ucrSummaryBarSelector.ucrAvailableDataFrames)
         ucrSaveSummaryBar.SetSaveTypeAsGraph()
         ucrSaveSummaryBar.SetPrefix("bar")

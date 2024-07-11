@@ -41,7 +41,7 @@ Public Class dlgUseModel
         ucrSaveResult.SetPrefix("object")
         ucrSaveResult.SetIsComboBox()
         ucrSaveResult.SetSaveTypeAsModel()
-        ucrSaveResult.SetCheckBoxText("Store Output")
+        ucrSaveResult.SetCheckBoxText("Save Output")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_object")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
 

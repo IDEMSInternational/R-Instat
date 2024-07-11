@@ -16,12 +16,6 @@
 
 Imports instat.Translations
 Public Class dlgInfill
-    Public enumFilldateMode As String = FilldateMode.Prepare
-    Public Enum FilldateMode
-        Prepare
-        Climatic
-    End Enum
-
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
@@ -34,7 +28,6 @@ Public Class dlgInfill
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
-        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -138,15 +131,6 @@ Public Class dlgInfill
                 clsDefaultFunction.AddParameter("start_date", clsRFunctionParameter:=ucrDtpStartDate.ValueAsRDate, iPosition:=3)
             Case "Fixed Limits", "Fixed End Limit"
                 clsDefaultFunction.AddParameter("end_date", clsRFunctionParameter:=ucrDtpEndDate.ValueAsRDate, iPosition:=4)
-        End Select
-    End Sub
-
-    Private Sub SetHelpOptions()
-        Select Case enumFilldateMode
-            Case FilldateMode.Prepare
-                ucrBase.iHelpTopicID = 497
-            Case FilldateMode.Climatic
-                ucrBase.iHelpTopicID = 357
         End Select
     End Sub
 

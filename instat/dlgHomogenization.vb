@@ -206,7 +206,7 @@ Public Class dlgHomogenization
         ucrInputPenValue.SetValidationTypeAsNumeric()
         ttOptions.SetToolTip(ucrInputPenValue.txtInput, "The theoretical type I error e.g.0.05 when using the Asymptotic penalty. A vector of length 2 (min,max) if using the CROPS penalty")
 
-        ucrSaveResult.SetCheckBoxText("Store Test Object:")
+        ucrSaveResult.SetCheckBoxText("Save Test Object:")
 
         ucrPnlOptions.AddToLinkedControls({ucrSelectorHomogenization, ucrSaveResult, ucrReceiverNeighbour, ucrReceiverStation, ucrReceiverElement}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrInputClimateVariables}, {rdoPrepare, rdoQualityControl, rdoHomogenization, rdoMonthlyTotals}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)

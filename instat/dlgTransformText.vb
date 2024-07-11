@@ -17,13 +17,6 @@
 Imports instat.Translations
 
 Public Class dlgTransformText
-    Public enumTransformMode As String = TransformMode.Prepare
-    Public Enum TransformMode
-        Prepare
-        Describe
-        Climatic
-    End Enum
-
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsConvertFunction, clsLengthFunction, clsPadFunction, clsWordsFunction, clsSubstringFunction As New RFunction
@@ -47,7 +40,6 @@ Public Class dlgTransformText
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        SetHelpOptions()
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
@@ -480,15 +472,6 @@ Public Class dlgTransformText
                     ucrBase.clsRsyntax.SetFunction("str_to_sentence")
             End Select
         End If
-    End Sub
-
-    Private Sub SetHelpOptions()
-        Select Case enumTransformMode
-            Case TransformMode.Prepare
-                ucrBase.iHelpTopicID = 343
-            Case TransformMode.Climatic
-                ucrBase.iHelpTopicID = 606
-        End Select
     End Sub
 
     Private Sub AddRemoveStartAndEndParameters()

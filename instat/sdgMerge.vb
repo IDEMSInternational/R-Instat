@@ -23,7 +23,6 @@ Public Class sdgMerge
     Private clsMerge As RFunction
 
     Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
@@ -92,15 +91,6 @@ Public Class sdgMerge
         lstKeyColumns.Columns(1).Width = 31
         lstKeyColumns.Columns(2).Width = 75
         cmdRemoveAll.Enabled = False
-    End Sub
-
-    Private Sub SetHelpOptions()
-        Select Case dlgMerge.enumMergeMode
-            Case dlgMerge.MergeMode.Prepare
-                ucrSubBase.iHelpTopicID = 51
-            Case dlgMerge.MergeMode.Climatic
-                ucrSubBase.iHelpTopicID = 624
-        End Select
     End Sub
 
     Private Sub cmdAddPair_Click(sender As Object, e As EventArgs) Handles cmdAddPair.Click

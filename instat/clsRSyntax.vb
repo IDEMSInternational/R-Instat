@@ -94,6 +94,8 @@ Public Class RSyntax
     ''' <summary>   The R command in the form of a string. </summary>
     Public strCommandString As String = ""
 
+    ''' <summary>   The script associated with the base R code. </summary>
+    Public strScript As String
 
     ''' <summary>   The R functions/operators/commands that should be run before the base R code. </summary>
     Private lstBeforeCodes As New List(Of RCodeStructure)
@@ -229,8 +231,6 @@ Public Class RSyntax
             clsBaseFunction.GetAllAssignTo(lstCodes, lstValues)
         ElseIf bUseBaseOperator Then
             clsBaseOperator.GetAllAssignTo(lstCodes, lstValues)
-        ElseIf bUseCommandString Then
-            clsBaseCommandString.GetAllAssignTo(lstCodes, lstValues)
         End If
         lstBeforeCodes.Sort(AddressOf CompareCodePositions)
         For Each clsTempCode As RCodeStructure In lstBeforeCodes
@@ -295,7 +295,6 @@ Public Class RSyntax
     '''--------------------------------------------------------------------------------------------
     Public Function GetScript() As String
         Dim strTemp As String = ""
-        Dim strScript As String = ""
 
         If bUseBaseFunction Then
             strTemp = clsBaseFunction.ToScript(strScript)
@@ -309,8 +308,8 @@ Public Class RSyntax
             'Sometimes the output of the R-command we deal with should not be part of the script...  
             'That's only the case when this output has already been assigned.
             If (bUseBaseFunction AndAlso clsBaseFunction.IsAssigned()) OrElse
-               (bUseBaseOperator AndAlso clsBaseOperator.IsAssigned()) OrElse
-               (bUseCommandString AndAlso clsBaseCommandString.IsAssigned()) Then
+                (bUseBaseOperator AndAlso clsBaseFunction.IsAssigned()) OrElse
+                (bUseCommandString AndAlso clsBaseFunction.IsAssigned()) Then
                 Return strScript
             End If
         End If
@@ -432,7 +431,6 @@ Public Class RSyntax
         clsBaseFunction = clsFunction
         bUseBaseFunction = True
         bUseBaseOperator = False
-        bUseCommandString = False
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -444,7 +442,6 @@ Public Class RSyntax
         clsBaseOperator = clsOperator
         bUseBaseFunction = False
         bUseBaseOperator = True
-        bUseCommandString = False
     End Sub
 
     '''--------------------------------------------------------------------------------------------

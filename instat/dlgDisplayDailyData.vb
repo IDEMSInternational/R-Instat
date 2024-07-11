@@ -214,7 +214,7 @@ Public Class dlgDisplayDailyData
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames)
         ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetCheckBoxText("Store Graph")
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)

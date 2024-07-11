@@ -101,7 +101,7 @@ Public Class dlgView
         ucrNudNumberRows.Minimum = 1
         ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
 
-        ucrSaveData.SetCheckBoxText("Store Data")
+        ucrSaveData.SetCheckBoxText("Save Data")
         ucrSaveData.SetPrefix("last_table")
         ucrSaveData.SetDataFrameSelector(ucrSelectorForView.ucrAvailableDataFrames)
         ucrSaveData.setLinkedReceiver(ucrReceiverView)

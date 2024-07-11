@@ -73,7 +73,7 @@ Public Class dlgUseTable
         ucrSaveTable.SetPrefix("use_table")
         ucrSaveTable.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrTablesSelector.ucrAvailableDataFrames)
-        ucrSaveTable.SetCheckBoxText("Store New Table")
+        ucrSaveTable.SetCheckBoxText("Save New Table")
         ucrSaveTable.SetIsComboBox()
         ucrSaveTable.SetAssignToIfUncheckedValue("table")
     End Sub

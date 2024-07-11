@@ -224,7 +224,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverWordcloudAngle.Selector = ucrBarChartSelector
 
         ucrSaveBar.SetIsComboBox()
-        ucrSaveBar.SetCheckBoxText("Store Graph")
+        ucrSaveBar.SetCheckBoxText("Save Graph")
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
         ucrSaveBar.SetSaveTypeAsGraph()
         ucrSaveBar.SetPrefix("bar_plot")

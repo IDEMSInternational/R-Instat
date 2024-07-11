@@ -23,7 +23,6 @@ Public Class dlgVisualizeData
         Describe
         Climatic
     End Enum
-
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsVisDatFunction As New RFunction
@@ -156,7 +155,7 @@ Public Class dlgVisualizeData
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetCheckBoxText("Store Graph")
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorVisualizeData.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")

@@ -101,7 +101,7 @@ Public Class dlgClimdexIndices
         ucrPnlAnnualMonthly.SetRDefault(Chr(34) & "annual" & Chr(34))
         ucrPnlAnnualMonthly.AddToLinkedControls({ucrReceiverMonth}, {rdoMonthly}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkSave.SetText("Store Indices")
+        ucrChkSave.SetText("Save Indices")
         ucrChkSave.bChangeParameterValue = False
     End Sub
 

@@ -40,14 +40,6 @@ Public Class ucrSelectorByDataFrameAddRemove
         End If
     End Sub
 
-    Public Sub ShowCheckBoxScalar(bShowScalarCheck As Boolean)
-        checkBoxScalar.Visible = bShowScalarCheck
-    End Sub
-
-    Public Sub ResetCheckBoxScalar()
-        checkBoxScalar.Checked = False
-    End Sub
-
     Public Sub ShowColumnSelector(bShow As Boolean)
         btnAdd.Visible = bShow
         btnDataOptions.Visible = bShow

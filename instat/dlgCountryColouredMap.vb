@@ -92,7 +92,7 @@ Public Class dlgCountryColouredMap
         ucrSaveMap.SetPrefix("Map")
         ucrSaveMap.SetSaveTypeAsGraph()
         ucrSaveMap.SetIsComboBox()
-        ucrSaveMap.SetCheckBoxText("Store Graph")
+        ucrSaveMap.SetCheckBoxText("Save Graph")
         ucrSaveMap.SetAssignToIfUncheckedValue("last_graph")
         ucrSaveMap.SetDataFrameSelector(ucrSelectorCountryColouredMap.ucrAvailableDataFrames)
     End Sub

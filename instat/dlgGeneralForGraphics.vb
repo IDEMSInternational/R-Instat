@@ -172,7 +172,7 @@ Public Class dlgGeneralForGraphics
         ucrSave.SetPrefix("graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
-        ucrSave.SetCheckBoxText("Store")
+        ucrSave.SetCheckBoxText("Save")
         ucrSave.SetDataFrameSelector(ucrGraphicsSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
         VariableXType()

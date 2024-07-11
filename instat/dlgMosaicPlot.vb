@@ -174,7 +174,7 @@ Public Class dlgMosaicPlot
 
         ucrSaveMosaicPlot.SetPrefix("mosaic")
         ucrSaveMosaicPlot.SetIsComboBox()
-        ucrSaveMosaicPlot.SetCheckBoxText("Store Graph")
+        ucrSaveMosaicPlot.SetCheckBoxText("Save Graph")
         ucrSaveMosaicPlot.SetSaveTypeAsGraph()
         ucrSaveMosaicPlot.SetDataFrameSelector(ucrSelectorMosaicPlot.ucrAvailableDataFrames)
         ucrSaveMosaicPlot.SetAssignToIfUncheckedValue("last_graph")

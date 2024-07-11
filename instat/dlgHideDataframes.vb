@@ -87,7 +87,7 @@ Public Class dlgHideDataframes
 
         ucrSelectorForDataFrames.Reset()
 
-        clsDummyFunction.AddParameter("checked", "rdoUnhide", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "rdoHide", iPosition:=0)
 
         clsMappingFunction.SetPackageName("purrr")
         clsMappingFunction.SetRCommand("map")
@@ -143,11 +143,8 @@ Public Class dlgHideDataframes
 
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
             chrHiddenColumns = expTemp.AsCharacter
-            For i As Integer = 0 To chrHiddenColumns.Length - 1
-                Dim strDataFrame As String = chrHiddenColumns(i)
-                Dim listItem As New ListViewItem(strDataFrame)
-                listItem.Tag = "data_names"
-                ucrSelectorForDataFrames.lstAvailableVariable.Items.Add(listItem)
+            For Each strDataFrame As String In chrHiddenColumns
+                ucrSelectorForDataFrames.lstAvailableVariable.Items.Add(strDataFrame)
             Next
         End If
     End Sub
