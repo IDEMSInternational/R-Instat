@@ -23,7 +23,7 @@ Partial Class ucrRowExpression
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.btnSet = New System.Windows.Forms.Button()
-        Me.UcrInputRowExpression = New instat.ucrInputTextBox()
+        Me.ucrInputExpression = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'btnSet
@@ -37,23 +37,23 @@ Partial Class ucrRowExpression
         Me.btnSet.Text = "Set"
         Me.btnSet.UseVisualStyleBackColor = True
         '
-        'UcrInputRowExpression
+        'ucrInputExpression
         '
-        Me.UcrInputRowExpression.AddQuotesIfUnrecognised = True
-        Me.UcrInputRowExpression.AutoSize = True
-        Me.UcrInputRowExpression.IsMultiline = False
-        Me.UcrInputRowExpression.IsReadOnly = False
-        Me.UcrInputRowExpression.Location = New System.Drawing.Point(6, 4)
-        Me.UcrInputRowExpression.Name = "UcrInputRowExpression"
-        Me.UcrInputRowExpression.Size = New System.Drawing.Size(142, 21)
-        Me.UcrInputRowExpression.TabIndex = 340
+        Me.ucrInputExpression.AddQuotesIfUnrecognised = True
+        Me.ucrInputExpression.AutoSize = True
+        Me.ucrInputExpression.IsMultiline = False
+        Me.ucrInputExpression.IsReadOnly = False
+        Me.ucrInputExpression.Location = New System.Drawing.Point(6, 4)
+        Me.ucrInputExpression.Name = "ucrInputExpression"
+        Me.ucrInputExpression.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputExpression.TabIndex = 340
         '
         'ucrRowExpression
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.btnSet)
-        Me.Controls.Add(Me.UcrInputRowExpression)
+        Me.Controls.Add(Me.ucrInputExpression)
         Me.Name = "ucrRowExpression"
         Me.Size = New System.Drawing.Size(193, 26)
         Me.ResumeLayout(False)
@@ -62,5 +62,5 @@ Partial Class ucrRowExpression
     End Sub
 
     Friend WithEvents btnSet As Button
-    Friend WithEvents UcrInputRowExpression As ucrInputTextBox
+    Friend WithEvents ucrInputExpression As ucrInputTextBox
 End Class

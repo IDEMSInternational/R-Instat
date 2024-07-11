@@ -28,7 +28,7 @@
         Me.clsOperator = clsOperator
 
         ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
-        ucrReceiverSingleGroupByCol.SetMeAsReceiver()
+        ucrReceiverSingleRowName.SetMeAsReceiver()
 
         ' The GT paramter should always be there.
         clsGtRFunction = clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt"}, clsOperator).FirstOrDefault()?.clsArgumentCodeStructure
@@ -40,7 +40,7 @@
             clsStubHeadRFunction.SetRCommand("tab_stubhead")
         End If
 
-        Dim lstTabStyleForRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_stub", clsOperator)
+
 
         SetRCode()
     End Sub

@@ -24,7 +24,7 @@ Partial Class ucrStubStyle
     Private Sub InitializeComponent()
         Me.btnEnterStyle = New System.Windows.Forms.Button()
         Me.lblFormats = New System.Windows.Forms.Label()
-        Me.btnClearFormats = New System.Windows.Forms.Button()
+        Me.btnClearStyle = New System.Windows.Forms.Button()
         Me.dataGridFormats = New System.Windows.Forms.DataGridView()
         Me.colStyles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -54,16 +54,16 @@ Partial Class ucrStubStyle
         Me.lblFormats.TabIndex = 338
         Me.lblFormats.Text = "Styles:"
         '
-        'btnClearFormats
+        'btnClearStyle
         '
-        Me.btnClearFormats.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearFormats.Location = New System.Drawing.Point(290, 81)
-        Me.btnClearFormats.Name = "btnClearFormats"
-        Me.btnClearFormats.Size = New System.Drawing.Size(75, 23)
-        Me.btnClearFormats.TabIndex = 337
-        Me.btnClearFormats.Tag = ""
-        Me.btnClearFormats.Text = "Clear"
-        Me.btnClearFormats.UseVisualStyleBackColor = True
+        Me.btnClearStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnClearStyle.Location = New System.Drawing.Point(290, 81)
+        Me.btnClearStyle.Name = "btnClearStyle"
+        Me.btnClearStyle.Size = New System.Drawing.Size(75, 23)
+        Me.btnClearStyle.TabIndex = 337
+        Me.btnClearStyle.Tag = ""
+        Me.btnClearStyle.Text = "Clear"
+        Me.btnClearStyle.UseVisualStyleBackColor = True
         '
         'dataGridFormats
         '
@@ -106,7 +106,7 @@ Partial Class ucrStubStyle
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrRowExpression)
         Me.Controls.Add(Me.lblFormats)
-        Me.Controls.Add(Me.btnClearFormats)
+        Me.Controls.Add(Me.btnClearStyle)
         Me.Controls.Add(Me.dataGridFormats)
         Me.Controls.Add(Me.btnEnterStyle)
         Me.Controls.Add(Me.Label1)
@@ -120,7 +120,7 @@ Partial Class ucrStubStyle
 
     Friend WithEvents btnEnterStyle As Button
     Friend WithEvents lblFormats As Label
-    Friend WithEvents btnClearFormats As Button
+    Friend WithEvents btnClearStyle As Button
     Friend WithEvents dataGridFormats As DataGridView
     Friend WithEvents colStyles As DataGridViewTextBoxColumn
     Friend WithEvents Label1 As Label
