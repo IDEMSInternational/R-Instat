@@ -18,6 +18,12 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgMergeAdditionalData
+    Public enumMergeMode As String = MergeMode.Prepare
+    Public Enum MergeMode
+        Prepare
+        Climatic
+    End Enum
+
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsInsertColumnFunction, clsGetColumnsFromData, clsListFunction, clsImportDataFunction As New RFunction
@@ -39,13 +45,13 @@ Public Class dlgMergeAdditionalData
         End If
         SetRCodeforControls(bReset)
         bReset = False
+        SetHelpOptions()
         SetMergingBy()
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 186
         ucrToDataFrame.SetParameter(New RParameter("x", 0))
         ucrToDataFrame.SetParameterIsRFunction()
         ucrToDataFrame.SetLabelText("To Data Frame:")
@@ -109,6 +115,15 @@ Public Class dlgMergeAdditionalData
         ucrFromDataFrame.SetRCode(clsGetVariablesFunction, bResetControls)
         ucrToDataFrame.SetRCode(clsLeftJoinFunction, bResetControls)
         ucrChkSaveDataFrame.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumMergeMode
+            Case MergeMode.Prepare
+                ucrBase.iHelpTopicID = 186
+            Case MergeMode.Climatic
+                ucrBase.iHelpTopicID = 609
+        End Select
     End Sub
 
     Private Sub TestOkEnabled()
