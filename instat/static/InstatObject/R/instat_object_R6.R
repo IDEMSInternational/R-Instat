@@ -2054,8 +2054,8 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   is_station <- !missing(station)
   
   if(missing(year)) stop("Year column must be specified.")
-  by <- ifelse(!is_station, year, c(year, station))
-  
+  if(!is_station) by <- year
+  else by <- c(year, station)
   if(missing(season_data_name)) season_data_name <- data_name
   if(season_data_name != data_name) {
     season_by <- self$get_equivalent_columns(from_data_name = data_name, columns = by, to_data_name = season_data_name)
