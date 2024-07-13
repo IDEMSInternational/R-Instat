@@ -125,9 +125,6 @@ Partial Class ucrDataView
         Me.lblAdvanced = New System.Windows.Forms.Label()
         Me.linkStartRestoreBackup = New System.Windows.Forms.LinkLabel()
         Me.linkStartPasteScriptfromClipboard = New System.Windows.Forms.LinkLabel()
-        Me.panelSectionRecent = New System.Windows.Forms.Panel()
-        Me.lblRecent = New System.Windows.Forms.Label()
-        Me.panelRecentMenuItems = New System.Windows.Forms.Panel()
         Me.panelSectionHelp = New System.Windows.Forms.Panel()
         Me.linkHelpData = New System.Windows.Forms.LinkLabel()
         Me.linkHelpGettingStarted = New System.Windows.Forms.LinkLabel()
@@ -139,6 +136,9 @@ Partial Class ucrDataView
         Me.linkStartNewDataFrame = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenFile = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenLibrary = New System.Windows.Forms.LinkLabel()
+        Me.panelSectionRecent = New System.Windows.Forms.Panel()
+        Me.lblRecent = New System.Windows.Forms.Label()
+        Me.panelRecentMenuItems = New System.Windows.Forms.Panel()
         Me.TblPanPageDisplay = New System.Windows.Forms.TableLayoutPanel()
         Me.lblColFirst = New System.Windows.Forms.Label()
         Me.lblColDisplay = New System.Windows.Forms.Label()
@@ -150,9 +150,9 @@ Partial Class ucrDataView
         Me.lblRowNext = New System.Windows.Forms.Label()
         Me.lblColLast = New System.Windows.Forms.Label()
         Me.lblRowBack = New System.Windows.Forms.Label()
-        Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrReoGrid = New instat.ucrDataViewReoGrid()
         Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
+        Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -160,9 +160,9 @@ Partial Class ucrDataView
         Me.tlpTableContainer.SuspendLayout()
         Me.panelSectionsAll.SuspendLayout()
         Me.panelSectionAdvanced.SuspendLayout()
-        Me.panelSectionRecent.SuspendLayout()
         Me.panelSectionHelp.SuspendLayout()
         Me.panelSectionStart.SuspendLayout()
+        Me.panelSectionRecent.SuspendLayout()
         Me.TblPanPageDisplay.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -721,10 +721,10 @@ Partial Class ucrDataView
         Me.linkStartRestoreBackup.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartRestoreBackup.Location = New System.Drawing.Point(5, 47)
         Me.linkStartRestoreBackup.Name = "linkStartRestoreBackup"
-        Me.linkStartRestoreBackup.Size = New System.Drawing.Size(166, 13)
+        Me.linkStartRestoreBackup.Size = New System.Drawing.Size(142, 13)
         Me.linkStartRestoreBackup.TabIndex = 4
         Me.linkStartRestoreBackup.TabStop = True
-        Me.linkStartRestoreBackup.Text = "Restore Data or Log from Backup"
+        Me.linkStartRestoreBackup.Text = "Restore Data from Backup..."
         '
         'linkStartPasteScriptfromClipboard
         '
@@ -738,38 +738,6 @@ Partial Class ucrDataView
         Me.linkStartPasteScriptfromClipboard.TabIndex = 5
         Me.linkStartPasteScriptfromClipboard.TabStop = True
         Me.linkStartPasteScriptfromClipboard.Text = "Paste Script from Clipboard"
-        '
-        'panelSectionRecent
-        '
-        Me.panelSectionRecent.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.panelSectionRecent.Controls.Add(Me.lblRecent)
-        Me.panelSectionRecent.Controls.Add(Me.panelRecentMenuItems)
-        Me.panelSectionRecent.Location = New System.Drawing.Point(28, 124)
-        Me.panelSectionRecent.Name = "panelSectionRecent"
-        Me.panelSectionRecent.Size = New System.Drawing.Size(179, 186)
-        Me.panelSectionRecent.TabIndex = 13
-        '
-        'lblRecent
-        '
-        Me.lblRecent.AutoSize = True
-        Me.lblRecent.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRecent.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRecent.Location = New System.Drawing.Point(3, 4)
-        Me.lblRecent.Name = "lblRecent"
-        Me.lblRecent.Size = New System.Drawing.Size(80, 25)
-        Me.lblRecent.TabIndex = 1
-        Me.lblRecent.Text = "Recent"
-        '
-        'panelRecentMenuItems
-        '
-        Me.panelRecentMenuItems.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.panelRecentMenuItems.AutoScroll = True
-        Me.panelRecentMenuItems.Location = New System.Drawing.Point(5, 30)
-        Me.panelRecentMenuItems.Name = "panelRecentMenuItems"
-        Me.panelRecentMenuItems.Size = New System.Drawing.Size(159, 138)
-        Me.panelRecentMenuItems.TabIndex = 6
         '
         'panelSectionHelp
         '
@@ -906,6 +874,38 @@ Partial Class ucrDataView
         Me.linkStartOpenLibrary.TabIndex = 5
         Me.linkStartOpenLibrary.TabStop = True
         Me.linkStartOpenLibrary.Text = "Import From Library..."
+        '
+        'panelSectionRecent
+        '
+        Me.panelSectionRecent.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.panelSectionRecent.Controls.Add(Me.lblRecent)
+        Me.panelSectionRecent.Controls.Add(Me.panelRecentMenuItems)
+        Me.panelSectionRecent.Location = New System.Drawing.Point(28, 124)
+        Me.panelSectionRecent.Name = "panelSectionRecent"
+        Me.panelSectionRecent.Size = New System.Drawing.Size(179, 186)
+        Me.panelSectionRecent.TabIndex = 13
+        '
+        'lblRecent
+        '
+        Me.lblRecent.AutoSize = True
+        Me.lblRecent.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRecent.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRecent.Location = New System.Drawing.Point(3, 4)
+        Me.lblRecent.Name = "lblRecent"
+        Me.lblRecent.Size = New System.Drawing.Size(80, 25)
+        Me.lblRecent.TabIndex = 1
+        Me.lblRecent.Text = "Recent"
+        '
+        'panelRecentMenuItems
+        '
+        Me.panelRecentMenuItems.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.panelRecentMenuItems.AutoScroll = True
+        Me.panelRecentMenuItems.Location = New System.Drawing.Point(5, 30)
+        Me.panelRecentMenuItems.Name = "panelRecentMenuItems"
+        Me.panelRecentMenuItems.Size = New System.Drawing.Size(159, 138)
+        Me.panelRecentMenuItems.TabIndex = 6
         '
         'TblPanPageDisplay
         '
@@ -1091,12 +1091,12 @@ Partial Class ucrDataView
         Me.panelSectionsAll.ResumeLayout(False)
         Me.panelSectionAdvanced.ResumeLayout(False)
         Me.panelSectionAdvanced.PerformLayout()
-        Me.panelSectionRecent.ResumeLayout(False)
-        Me.panelSectionRecent.PerformLayout()
         Me.panelSectionHelp.ResumeLayout(False)
         Me.panelSectionHelp.PerformLayout()
         Me.panelSectionStart.ResumeLayout(False)
         Me.panelSectionStart.PerformLayout()
+        Me.panelSectionRecent.ResumeLayout(False)
+        Me.panelSectionRecent.PerformLayout()
         Me.TblPanPageDisplay.ResumeLayout(False)
         Me.TblPanPageDisplay.PerformLayout()
         Me.ResumeLayout(False)
