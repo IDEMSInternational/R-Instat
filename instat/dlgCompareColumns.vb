@@ -114,7 +114,7 @@ Public Class dlgCompareColumns
 
         ucrSaveLogical.SetLabelText("New Column Name:")
 
-        ucrSaveLogical.SetLabelText("Save result for second column:")
+        ucrSaveLogical.SetLabelText("Store result for second column:")
         ucrSaveLogical.setLinkedReceiver(ucrReceiverSecond)
 
         ucrBase.clsRsyntax.iCallType = 2
