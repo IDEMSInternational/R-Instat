@@ -22,6 +22,7 @@ Partial Class dlgClimograph
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblAbsolute = New System.Windows.Forms.Label()
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.lblRain = New System.Windows.Forms.Label()
@@ -35,16 +36,25 @@ Partial Class dlgClimograph
         Me.lblElement1 = New System.Windows.Forms.Label()
         Me.lblElement2 = New System.Windows.Forms.Label()
         Me.lblMonthC = New System.Windows.Forms.Label()
-        Me.lblName = New System.Windows.Forms.Label()
-        Me.lblLabel = New System.Windows.Forms.Label()
+        Me.rdoViridis = New System.Windows.Forms.RadioButton()
+        Me.rdoPalette = New System.Windows.Forms.RadioButton()
+        Me.rdoSinglecolour = New System.Windows.Forms.RadioButton()
+        Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemBarchartOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemTmaxLineOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemTminLineOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemLayersOptionsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdOptions = New instat.ucrSplitButton()
+        Me.ucrInputPalette = New instat.ucrInputComboBox()
+        Me.ucrPnlColour = New instat.UcrPanel()
+        Me.ucrInputColourPalette = New instat.ucrInputComboBox()
+        Me.ucrChkColour = New instat.ucrCheck()
+        Me.ucrChkTile = New instat.ucrCheck()
         Me.ucrChkText = New instat.ucrCheck()
         Me.ucrChkRibbon = New instat.ucrCheck()
-        Me.ucrInputLabels = New instat.ucrInputTextBox()
-        Me.ucrInputName = New instat.ucrInputTextBox()
-        Me.ucrChkColourIdntity = New instat.ucrCheck()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
-        Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrInputFacet = New instat.ucrInputComboBox()
         Me.ucrReceiverFacet = New instat.ucrReceiverSingle()
         Me.ucrReceiverRainC = New instat.ucrReceiverSingle()
@@ -62,7 +72,7 @@ Partial Class dlgClimograph
         Me.ucrSave = New instat.ucrSave()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrSelectorClimograph = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkTile = New instat.ucrCheck()
+        Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblAbsolute
@@ -206,29 +216,144 @@ Partial Class dlgClimograph
         Me.lblMonthC.TabIndex = 87
         Me.lblMonthC.Text = "Month:"
         '
-        'lblName
+        'rdoViridis
         '
-        Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(9, 399)
-        Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(38, 13)
-        Me.lblName.TabIndex = 100
-        Me.lblName.Text = "Name:"
+        Me.rdoViridis.AutoSize = True
+        Me.rdoViridis.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoViridis.Location = New System.Drawing.Point(14, 379)
+        Me.rdoViridis.Name = "rdoViridis"
+        Me.rdoViridis.Size = New System.Drawing.Size(52, 17)
+        Me.rdoViridis.TabIndex = 123
+        Me.rdoViridis.TabStop = True
+        Me.rdoViridis.Text = "Viridis"
+        Me.rdoViridis.UseVisualStyleBackColor = True
         '
-        'lblLabel
+        'rdoPalette
         '
-        Me.lblLabel.AutoSize = True
-        Me.lblLabel.Location = New System.Drawing.Point(190, 399)
-        Me.lblLabel.Name = "lblLabel"
-        Me.lblLabel.Size = New System.Drawing.Size(41, 13)
-        Me.lblLabel.TabIndex = 102
-        Me.lblLabel.Text = "Labels:"
+        Me.rdoPalette.AutoSize = True
+        Me.rdoPalette.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoPalette.Location = New System.Drawing.Point(14, 405)
+        Me.rdoPalette.Name = "rdoPalette"
+        Me.rdoPalette.Size = New System.Drawing.Size(58, 17)
+        Me.rdoPalette.TabIndex = 121
+        Me.rdoPalette.TabStop = True
+        Me.rdoPalette.Text = "Palette"
+        Me.rdoPalette.UseVisualStyleBackColor = True
+        '
+        'rdoSinglecolour
+        '
+        Me.rdoSinglecolour.AutoSize = True
+        Me.rdoSinglecolour.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSinglecolour.Location = New System.Drawing.Point(14, 430)
+        Me.rdoSinglecolour.Name = "rdoSinglecolour"
+        Me.rdoSinglecolour.Size = New System.Drawing.Size(87, 17)
+        Me.rdoSinglecolour.TabIndex = 124
+        Me.rdoSinglecolour.TabStop = True
+        Me.rdoSinglecolour.Text = "Single Colour"
+        Me.rdoSinglecolour.UseVisualStyleBackColor = True
+        '
+        'contextMenuStripOptions
+        '
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBarchartOptions, Me.toolStripMenuItemTmaxLineOptions, Me.toolStripMenuItemTminLineOptions, Me.toolStripMenuItemLayersOptionsOptions})
+        Me.contextMenuStripOptions.Name = "contextMenuStripOk"
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 136)
+        '
+        'toolStripMenuItemPlotOptions
+        '
+        Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
+        '
+        'toolStripMenuItemBarchartOptions
+        '
+        Me.toolStripMenuItemBarchartOptions.Name = "toolStripMenuItemBarchartOptions"
+        Me.toolStripMenuItemBarchartOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemBarchartOptions.Text = "BarChart Options"
+        '
+        'toolStripMenuItemTmaxLineOptions
+        '
+        Me.toolStripMenuItemTmaxLineOptions.Name = "toolStripMenuItemTmaxLineOptions"
+        Me.toolStripMenuItemTmaxLineOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemTmaxLineOptions.Text = "Line Options (Tmax)"
+        '
+        'toolStripMenuItemTminLineOptions
+        '
+        Me.toolStripMenuItemTminLineOptions.Name = "toolStripMenuItemTminLineOptions"
+        Me.toolStripMenuItemTminLineOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemTminLineOptions.Text = "Line Options (Tmin)"
+        '
+        'toolStripMenuItemLayersOptionsOptions
+        '
+        Me.toolStripMenuItemLayersOptionsOptions.Name = "toolStripMenuItemLayersOptionsOptions"
+        Me.toolStripMenuItemLayersOptionsOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemLayersOptionsOptions.Text = "Layers Options"
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.AutoSize = True
+        Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.Location = New System.Drawing.Point(11, 234)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(148, 25)
+        Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
+        Me.cmdOptions.TabIndex = 126
+        Me.cmdOptions.Tag = "Plot Options"
+        Me.cmdOptions.Text = "Plot Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'ucrInputPalette
+        '
+        Me.ucrInputPalette.AddQuotesIfUnrecognised = True
+        Me.ucrInputPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPalette.GetSetSelectedIndex = -1
+        Me.ucrInputPalette.IsReadOnly = False
+        Me.ucrInputPalette.Location = New System.Drawing.Point(136, 404)
+        Me.ucrInputPalette.Name = "ucrInputPalette"
+        Me.ucrInputPalette.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputPalette.TabIndex = 122
+        '
+        'ucrPnlColour
+        '
+        Me.ucrPnlColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlColour.Location = New System.Drawing.Point(11, 376)
+        Me.ucrPnlColour.Name = "ucrPnlColour"
+        Me.ucrPnlColour.Size = New System.Drawing.Size(92, 77)
+        Me.ucrPnlColour.TabIndex = 120
+        '
+        'ucrInputColourPalette
+        '
+        Me.ucrInputColourPalette.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputColourPalette.GetSetSelectedIndex = -1
+        Me.ucrInputColourPalette.IsReadOnly = False
+        Me.ucrInputColourPalette.Location = New System.Drawing.Point(136, 377)
+        Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
+        Me.ucrInputColourPalette.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputColourPalette.TabIndex = 119
+        '
+        'ucrChkColour
+        '
+        Me.ucrChkColour.AutoSize = True
+        Me.ucrChkColour.Checked = False
+        Me.ucrChkColour.Location = New System.Drawing.Point(14, 355)
+        Me.ucrChkColour.Name = "ucrChkColour"
+        Me.ucrChkColour.Size = New System.Drawing.Size(198, 24)
+        Me.ucrChkColour.TabIndex = 107
+        '
+        'ucrChkTile
+        '
+        Me.ucrChkTile.AutoSize = True
+        Me.ucrChkTile.Checked = False
+        Me.ucrChkTile.Location = New System.Drawing.Point(14, 297)
+        Me.ucrChkTile.Name = "ucrChkTile"
+        Me.ucrChkTile.Size = New System.Drawing.Size(147, 24)
+        Me.ucrChkTile.TabIndex = 105
         '
         'ucrChkText
         '
         Me.ucrChkText.AutoSize = True
         Me.ucrChkText.Checked = False
-        Me.ucrChkText.Location = New System.Drawing.Point(12, 335)
+        Me.ucrChkText.Location = New System.Drawing.Point(14, 327)
         Me.ucrChkText.Name = "ucrChkText"
         Me.ucrChkText.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkText.TabIndex = 104
@@ -237,41 +362,10 @@ Partial Class dlgClimograph
         '
         Me.ucrChkRibbon.AutoSize = True
         Me.ucrChkRibbon.Checked = False
-        Me.ucrChkRibbon.Location = New System.Drawing.Point(12, 269)
+        Me.ucrChkRibbon.Location = New System.Drawing.Point(14, 269)
         Me.ucrChkRibbon.Name = "ucrChkRibbon"
         Me.ucrChkRibbon.Size = New System.Drawing.Size(147, 24)
         Me.ucrChkRibbon.TabIndex = 103
-        '
-        'ucrInputLabels
-        '
-        Me.ucrInputLabels.AddQuotesIfUnrecognised = True
-        Me.ucrInputLabels.AutoSize = True
-        Me.ucrInputLabels.IsMultiline = False
-        Me.ucrInputLabels.IsReadOnly = False
-        Me.ucrInputLabels.Location = New System.Drawing.Point(243, 394)
-        Me.ucrInputLabels.Name = "ucrInputLabels"
-        Me.ucrInputLabels.Size = New System.Drawing.Size(117, 21)
-        Me.ucrInputLabels.TabIndex = 101
-        '
-        'ucrInputName
-        '
-        Me.ucrInputName.AddQuotesIfUnrecognised = True
-        Me.ucrInputName.AutoSize = True
-        Me.ucrInputName.IsMultiline = False
-        Me.ucrInputName.IsReadOnly = False
-        Me.ucrInputName.Location = New System.Drawing.Point(62, 394)
-        Me.ucrInputName.Name = "ucrInputName"
-        Me.ucrInputName.Size = New System.Drawing.Size(117, 21)
-        Me.ucrInputName.TabIndex = 99
-        '
-        'ucrChkColourIdntity
-        '
-        Me.ucrChkColourIdntity.AutoSize = True
-        Me.ucrChkColourIdntity.Checked = False
-        Me.ucrChkColourIdntity.Location = New System.Drawing.Point(12, 369)
-        Me.ucrChkColourIdntity.Name = "ucrChkColourIdntity"
-        Me.ucrChkColourIdntity.Size = New System.Drawing.Size(189, 24)
-        Me.ucrChkColourIdntity.TabIndex = 98
         '
         'ucrInputLegendPosition
         '
@@ -279,7 +373,7 @@ Partial Class dlgClimograph
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(112, 424)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(115, 458)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
         Me.ucrInputLegendPosition.TabIndex = 97
@@ -288,21 +382,10 @@ Partial Class dlgClimograph
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(12, 421)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(14, 459)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 96
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.AutoSize = True
-        Me.cmdOptions.Location = New System.Drawing.Point(11, 234)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(148, 25)
-        Me.cmdOptions.TabIndex = 95
-        Me.cmdOptions.Tag = "Plot Options"
-        Me.cmdOptions.Text = "Plot Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrInputFacet
         '
@@ -468,7 +551,7 @@ Partial Class dlgClimograph
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(12, 480)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 517)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 75
@@ -476,7 +559,7 @@ Partial Class dlgClimograph
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(12, 453)
+        Me.ucrSave.Location = New System.Drawing.Point(14, 490)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(282, 24)
@@ -507,31 +590,24 @@ Partial Class dlgClimograph
         Me.ucrSelectorClimograph.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorClimograph.TabIndex = 59
         '
-        'ucrChkTile
-        '
-        Me.ucrChkTile.AutoSize = True
-        Me.ucrChkTile.Checked = False
-        Me.ucrChkTile.Location = New System.Drawing.Point(11, 299)
-        Me.ucrChkTile.Name = "ucrChkTile"
-        Me.ucrChkTile.Size = New System.Drawing.Size(147, 24)
-        Me.ucrChkTile.TabIndex = 105
-        '
         'dlgClimograph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(472, 543)
+        Me.ClientSize = New System.Drawing.Size(472, 568)
+        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.rdoSinglecolour)
+        Me.Controls.Add(Me.rdoViridis)
+        Me.Controls.Add(Me.ucrInputPalette)
+        Me.Controls.Add(Me.rdoPalette)
+        Me.Controls.Add(Me.ucrPnlColour)
+        Me.Controls.Add(Me.ucrInputColourPalette)
+        Me.Controls.Add(Me.ucrChkColour)
         Me.Controls.Add(Me.ucrChkTile)
         Me.Controls.Add(Me.ucrChkText)
         Me.Controls.Add(Me.ucrChkRibbon)
-        Me.Controls.Add(Me.lblLabel)
-        Me.Controls.Add(Me.ucrInputLabels)
-        Me.Controls.Add(Me.lblName)
-        Me.Controls.Add(Me.ucrInputName)
-        Me.Controls.Add(Me.ucrChkColourIdntity)
         Me.Controls.Add(Me.ucrInputLegendPosition)
         Me.Controls.Add(Me.ucrChkLegend)
-        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputFacet)
         Me.Controls.Add(Me.ucrReceiverFacet)
         Me.Controls.Add(Me.lblFacet)
@@ -568,6 +644,7 @@ Partial Class dlgClimograph
         Me.Name = "dlgClimograph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Climograph"
+        Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -603,15 +680,23 @@ Partial Class dlgClimograph
     Friend WithEvents lblElement2 As Label
     Friend WithEvents ucrReceiverMonthC As ucrReceiverSingle
     Friend WithEvents lblMonthC As Label
-    Friend WithEvents cmdOptions As ucrSplitButton
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
-    Friend WithEvents ucrChkLegend As ucrCheck
-    Friend WithEvents ucrChkColourIdntity As ucrCheck
-    Friend WithEvents lblName As Label
-    Friend WithEvents ucrInputName As ucrInputTextBox
-    Friend WithEvents lblLabel As Label
-    Friend WithEvents ucrInputLabels As ucrInputTextBox
     Friend WithEvents ucrChkRibbon As ucrCheck
     Friend WithEvents ucrChkText As ucrCheck
     Friend WithEvents ucrChkTile As ucrCheck
+    Friend WithEvents ucrChkLegend As ucrCheck
+    Friend WithEvents rdoViridis As RadioButton
+    Friend WithEvents ucrInputPalette As ucrInputComboBox
+    Friend WithEvents rdoPalette As RadioButton
+    Friend WithEvents ucrPnlColour As UcrPanel
+    Friend WithEvents ucrInputColourPalette As ucrInputComboBox
+    Friend WithEvents ucrChkColour As ucrCheck
+    Friend WithEvents rdoSinglecolour As RadioButton
+    Friend WithEvents contextMenuStripOptions As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemPlotOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemBarchartOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemTmaxLineOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemTminLineOptions As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemLayersOptionsOptions As ToolStripMenuItem
+    Friend WithEvents cmdOptions As ucrSplitButton
 End Class
