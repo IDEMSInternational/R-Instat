@@ -117,7 +117,7 @@ Public Class dlgFindInVariableOrFilter
         clsGetRowHeadersFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
         clsGetRowHeadersFunction.AddParameter("ignore_case", "TRUE", iPosition:=3)
         clsGetRowHeadersFunction.AddParameter("use_regex", "FALSE", iPosition:=4)
-        clsGetRowHeadersFunction.AddParameter("match_entire_cell", "TRUE", iPosition:=5)
+        clsGetRowHeadersFunction.AddParameter("match_entire_cell", "FALSE", iPosition:=5)
 
         ucrReceiverVariable.SetMeAsReceiver()
         cmdFindNext.Enabled = False
