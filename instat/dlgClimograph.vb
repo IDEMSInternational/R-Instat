@@ -653,7 +653,7 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        ucrSelectorClimograph.AddAdditionalCodeParameterPair(clsGgwalterliethFunction, New RParameter("data", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ' ucrSelectorClimograph.AddAdditionalCodeParameterPair(clsGgwalterliethFunction, New RParameter("data", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
         ucrReceiverRainC.SetRCode(clsMaxFunction, bReset)
         ucrSelectorClimograph.SetRCode(clsRggplotFunction, bReset)
@@ -676,7 +676,6 @@ Public Class dlgClimograph
             ucrPnlColour.SetRCode(clsDummyFunction, bReset)
             ucrChkColour.SetRCode(clsBaseOperator, bReset)
         End If
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -699,6 +698,7 @@ Public Class dlgClimograph
             clsBaseOperator.RemoveParameterByName("ggplot")
             clsBaseOperator.RemoveParameterByName("geom_bar")
             ucrReceiverMonth.SetMeAsReceiver()
+            clsGgwalterliethFunction.AddParameter("data", ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
             clsBaseOperator.AddParameter("ggwalter_lieth", clsRFunctionParameter:=clsGgwalterliethFunction, iPosition:=0)
         End If
         AutoFacetStation()
@@ -725,7 +725,7 @@ Public Class dlgClimograph
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, toolStripMenuItemPlotOptions.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
                                 clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction,
-                                dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrSelectorClimograph, clsNewThemeFunction:=clsThemeFunction,
+                                dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrSelectorClimograph, clsNewThemeFunction:=clsThemeFunction, clsNewGlobalAesFunction:=clsBarAesFunction,
                                 clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction,
                                 clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
@@ -743,9 +743,9 @@ Public Class dlgClimograph
         bResetSubdialog = False
     End Sub
 
-    Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction, clsNewAesFunction As RFunction)
+    Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
-                                   clsNewGlobalAesFunc:=clsNewAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                                   clsNewGlobalAesFunc:=clsBarAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
                                    bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimograph,
                                    bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
         sdgLayerOptions.ShowDialog()
@@ -754,7 +754,7 @@ Public Class dlgClimograph
         '  One then needs to display these modifications on the dlgScatteredPlot.
 
         'The aesthetics parameters on the main dialog are repopulated as required.
-        For Each clsParam In clsNewAesFunction.clsParameters
+        For Each clsParam In clsBarAesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
                 If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
                     ucrReceiverMonthC.Clear()
@@ -1073,6 +1073,7 @@ Public Class dlgClimograph
         SetPipeAssignTo()
         SetPipeAssignTo1()
         AddRemoveGeomRibbon()
+        Dataframechange()
     End Sub
 
     Private Sub GetParameterValue(clsOperator As ROperator)
@@ -1403,8 +1404,17 @@ Public Class dlgClimograph
     Private Sub ucrSelectorClimograph_DataFrameChanged() Handles ucrSelectorClimograph.DataFrameChanged
         clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         AddRemoveGeomRibbon()
+        Dataframechange()
     End Sub
 
+    Private Sub Dataframechange()
+        If rdoWalterLieth.Checked Then
+            clsGgwalterliethFunction.AddParameter("data", ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
+        Else
+            clsBaseOperator.RemoveParameterByName("ggwalter_lieth")
+        End If
+
+    End Sub
 
     Private Sub toolStripMenuItemLayersOptionsOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLayersOptionsOptions.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
@@ -1417,12 +1427,10 @@ Public Class dlgClimograph
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
         sdgPlots.EnableLayersTab()
         bResetSubdialog = False
-        AddRemoveGeomLines()
-        AddRemoveGeomLine1()
     End Sub
 
     Private Sub toolStripMenuItemBarchartOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBarchartOptions.Click
-        openSdgLayerOptions(clsGeomBarFunction, clsBarAesFunction)
+        openSdgLayerOptions(clsGeomBarFunction)
     End Sub
 
     Private Sub ucrChkText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkText.ControlValueChanged
