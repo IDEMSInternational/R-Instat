@@ -503,6 +503,7 @@ Public Class dlgDescribeTwoVariable
 
         ucrSelectorDescribeTwoVar.AddAdditionalCodeParameterPair(clsSummaryTableFunction, ucrSelectorDescribeTwoVar.GetParameter(), iAdditionalPairNo:=1)
         ucrSaveTable.AddAdditionalRCode(clsJoiningPipeOperator, iAdditionalPairNo:=1)
+        ucrSaveTable.AddAdditionalRCode(clsGroupByPipeOperator4, iAdditionalPairNo:=2)
 
         ucrChkOmitMissing.SetRCode(clsSummaryTableFunction, bReset)
         ucrReceiverFirstVars.SetRCode(clsDummyFunction, bReset)
@@ -794,7 +795,12 @@ Public Class dlgDescribeTwoVariable
                                                     strObjectName:="last_table")
             ElseIf IsFactorByNumericByNumeric() Then
                 cmdFormatTable.Visible = False
-                ucrSaveTable.Visible = False
+                ucrSaveTable.Visible = True
+                ucrSaveTable.Location = New Point(23, 300)
+                ucrSaveTable.SetPrefix("cor_table")
+                ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
+                ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
+                ucrSaveTable.SetCheckBoxText("Store Cor")
                 ucrBase.clsRsyntax.SetBaseROperator(clsGroupByPipeOperator4)
                 clsGroupByPipeOperator4.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
@@ -967,6 +973,7 @@ Public Class dlgDescribeTwoVariable
             Else
                 ucrBase.Location = New Point(iUcrBaseXLocation, 328)
                 Me.Size = New Point(iDialogueXsize, 425)
+
             End If
         Else
             ucrBase.Location = New Point(iUcrBaseXLocation, 328)
