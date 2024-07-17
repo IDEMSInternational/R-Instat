@@ -779,6 +779,8 @@ Public Class dlgDescribeTwoVariable
 
             If IsFactorByFactorByFactor() Then
                 cmdFormatTable.Visible = True
+                ucrSaveTable.Location = New Point(23, 341)
+                ucrSaveTable.Visible = True
                 ucrSaveTable.SetPrefix("frequency_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
@@ -791,23 +793,23 @@ Public Class dlgDescribeTwoVariable
                                                     strObjectName:="last_table")
             ElseIf IsFactorByNumericByNumeric() Then
                 cmdFormatTable.Visible = False
+                ucrSaveTable.Visible = False
                 ucrBase.clsRsyntax.SetBaseROperator(clsGroupByPipeOperator4)
-                clsGroupByPipeOperator4.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
-                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
-                                                    strObjectName:="last_table")
             ElseIf IsNumericByNumericByFactor() Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
                 cmdFormatTable.Visible = False
+                ucrSaveTable.Visible = False
             ElseIf IsNumericByNumericByNumeric() Then
                 cmdFormatTable.Visible = False
+                ucrSaveTable.Visible = False
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             ElseIf IsNumericByFactorByFactor() Then
                 cmdFormatTable.Visible = False
+                ucrSaveTable.Visible = False
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             ElseIf IsNumericByFactorByNumeric() Then
                 cmdFormatTable.Visible = False
+                ucrSaveTable.Visible = False
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             ElseIf IsFactorByNumericByFactor Then
                 ucrSaveTable.SetPrefix("summary_table")
@@ -824,13 +826,13 @@ Public Class dlgDescribeTwoVariable
                 cmdSummaries.Visible = True
                 ucrSaveTable.Visible = True
                 ucrChkSummariesRowCol.Visible = True
-                ucrSaveTable.Location = New Point(23, 450)
+                ucrSaveTable.Location = New Point(23, 440)
             ElseIf IsFactorByFactorByNumeric Then
                 ucrReorderSummary.Visible = True
                 cmdSummaries.Visible = True
                 ucrSaveTable.Visible = True
                 ucrChkSummariesRowCol.Visible = True
-                ucrSaveTable.Location = New Point(23, 450)
+                ucrSaveTable.Location = New Point(23, 440)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                 ucrSaveTable.SetPrefix("summary_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
@@ -842,7 +844,6 @@ Public Class dlgDescribeTwoVariable
                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
                                                     strObjectName:="last_table")
             End If
-            ucrSaveTable.SetCheckBoxText("Store Table")
         End If
         FactorColumns()
     End Sub
@@ -954,9 +955,12 @@ Public Class dlgDescribeTwoVariable
                 Me.Size = New Point(iDialogueXsize, 465)
                 cmdFormatTable.Visible = True
                 cmdFormatTable.Location = New Point(326, 350)
-            Else
+            ElseIf IsFactorByFactorByNumeric OrElse IsFactorByNumericByFactor Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 470)
                 Me.Size = New Point(iDialogueXsize, 570)
+            Else
+                ucrBase.Location = New Point(iUcrBaseXLocation, 328)
+                Me.Size = New Point(iDialogueXsize, 425)
             End If
         Else
             ucrBase.Location = New Point(iUcrBaseXLocation, 328)
@@ -1331,8 +1335,12 @@ Public Class dlgDescribeTwoVariable
                 strSummaryName = "ANOVA tables"
             ElseIf IsFactorByFactorByFactor() Then
                 strSummaryName = "Frequency tables"
-            Else
+            ElseIf IsFactorByNumericByFactor Then
                 strSummaryName = "Summary tables"
+            ElseIf IsFactorByFactorByNumeric Then
+                strSummaryName = "Summary tables"
+            Else
+                strSummaryName = ""
             End If
         End If
         If strSummaryName <> "" Then
@@ -1473,6 +1481,8 @@ Public Class dlgDescribeTwoVariable
         AddRemoveSecondAnovaParam()
         AddRemoveFirstAnova2Param()
         FactorColumns()
+        ChangeLocations()
+        ChangeSumaryLabelText()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlContentsChanged,
