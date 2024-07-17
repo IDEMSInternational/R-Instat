@@ -351,19 +351,20 @@ Public Class dlgDescribeTwoVariable
         clsGroupByFunction.SetPackageName("dplyr")
         clsGroupByFunction.SetRCommand("group_by")
 
-        clsGroupByPipeOperator2.SetOperation("%>%")
+        clsGroupByPipeOperator2.SetOperation("%>%", bBracketsTemp:=False)
         clsGroupByPipeOperator2.AddParameter("left", clsROperatorParameter:=clsGroupByPipeOperatorData, iPosition:=0)
         clsGroupByPipeOperator2.AddParameter("right", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
 
-        clsGroupByPipeOperator3.SetOperation("%>%")
+        clsGroupByPipeOperator3.SetOperation("%>%", bBracketsTemp:=False)
         clsGroupByPipeOperator3.AddParameter("left", clsROperatorParameter:=clsGroupByPipeOperator2, iPosition:=0)
         clsGroupByPipeOperator3.AddParameter("right", clsRFunctionParameter:=clsSummariseFunction, iPosition:=1)
 
-        clsGroupByPipeOperator4.SetOperation("%>%")
+        clsGroupByPipeOperator4.SetOperation("%>%", bBracketsTemp:=False)
         clsGroupByPipeOperator4.AddParameter("left", clsROperatorParameter:=clsGroupByPipeOperator3, iPosition:=0)
         clsGroupByPipeOperator4.AddParameter("right", clsRFunctionParameter:=clsgtFunction, iPosition:=1)
 
         clsGroupByPipeOperatorData.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsGroupByPipeOperatorData.bBrackets = False
 
         clsSummariseFunction.SetRCommand("summarise")
         clsSummariseFunction.AddParameter("cor", clsRFunctionParameter:=clsCorrFunction, bIncludeArgumentName:=False, iPosition:=0)
@@ -795,6 +796,11 @@ Public Class dlgDescribeTwoVariable
                 cmdFormatTable.Visible = False
                 ucrSaveTable.Visible = False
                 ucrBase.clsRsyntax.SetBaseROperator(clsGroupByPipeOperator4)
+                clsGroupByPipeOperator4.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                             strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                 strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                 strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
+                                                   strObjectName:="last_table")
             ElseIf IsNumericByNumericByFactor() Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
                 cmdFormatTable.Visible = False
@@ -982,7 +988,11 @@ Public Class dlgDescribeTwoVariable
                 If ucrReceiverFirstVars.IsEmpty Then
                     clsGroupByFunction.RemoveParameterByName("var")
                 Else
-                    clsGroupByFunction.AddParameter("var", ucrReceiverFirstVars.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
+                    Dim lstControlVars As List(Of String) = ucrReceiverFirstVars.GetVariableNamesAsList()
+                    Dim strControlVar As String = String.Join(",", lstControlVars)
+
+                    clsGroupByFunction.AddParameter("var", strControlVar, iPosition:=1, bIncludeArgumentName:=False)
+
                 End If
             End If
         End If
