@@ -811,7 +811,7 @@ Public Class dlgDescribeTwoVariable
                 cmdFormatTable.Visible = False
                 ucrSaveTable.Visible = False
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
-            ElseIf IsFactorByNumericByFactor Then
+            ElseIf IsFactorByNumericByFactor OrElse IsFactorByFactorByNumeric Then
                 ucrSaveTable.SetPrefix("summary_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
@@ -827,22 +827,22 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.Visible = True
                 ucrChkSummariesRowCol.Visible = True
                 ucrSaveTable.Location = New Point(23, 440)
-            ElseIf IsFactorByFactorByNumeric Then
-                ucrReorderSummary.Visible = True
-                cmdSummaries.Visible = True
-                ucrSaveTable.Visible = True
-                ucrChkSummariesRowCol.Visible = True
-                ucrSaveTable.Location = New Point(23, 440)
-                ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
-                ucrSaveTable.SetPrefix("summary_table")
-                ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
-                ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-                ucrSaveTable.SetCheckBoxText("Save Table")
-                clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
-                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
-                                                    strObjectName:="last_table")
+                'ElseIf IsFactorByFactorByNumeric Then
+                '    ucrReorderSummary.Visible = True
+                '    cmdSummaries.Visible = True
+                '    ucrSaveTable.Visible = True
+                '    ucrChkSummariesRowCol.Visible = True
+                '    ucrSaveTable.Location = New Point(23, 440)
+                '    ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
+                '    ucrSaveTable.SetPrefix("summary_table")
+                '    ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
+                '    ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
+                '    ucrSaveTable.SetCheckBoxText("Save Table")
+                '    clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                '                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                '                                      strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                '                                      strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
+                '                                        strObjectName:="last_table")
             End If
         End If
         FactorColumns()
@@ -1256,6 +1256,7 @@ Public Class dlgDescribeTwoVariable
         FactorColumns()
         AddRemoveFrequencyParameters()
         AddingColumnFactor()
+        ChangeBaseRCode()
     End Sub
 
     Private Sub ucrSelectorDescribeTwoVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeTwoVar.ControlValueChanged
@@ -1275,7 +1276,7 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoThreeVariable.Checked Then
             If IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
                 clsSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesListFunction, iPosition:=4)
-            ElseIf IsFactorByFactor() Then
+            ElseIf IsFactorByFactorByFactor Then
                 clsSummaryTableFunction.AddParameter("summaries", "count_label", iPosition:=4)
             End If
         End If
@@ -1483,6 +1484,7 @@ Public Class dlgDescribeTwoVariable
         FactorColumns()
         ChangeLocations()
         ChangeSumaryLabelText()
+        ChangeBaseRCode()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlContentsChanged,
