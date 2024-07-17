@@ -86,7 +86,7 @@ Public Class dlgFindInVariableOrFilter
         ucrPnlSelect.SetLinkedDisplayControl(grpSelect)
 
         ucrBase.OKEnabled(False)
-        ucrBase.cmdReset.Enabled = False
+        ucrBase.cmdReset.Enabled = True
     End Sub
 
     Private Sub SetDefaults()
@@ -160,6 +160,14 @@ Public Class dlgFindInVariableOrFilter
             Return strName
         End If
     End Function
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        ucrSelectorFind.Reset()
+        rdoVariable.Checked = True
+        rdoCell.Checked = True
+        ucrReceiverVariable.Clear()
+        ucrInputPattern.cboInput.ResetText()
+    End Sub
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
         Try
