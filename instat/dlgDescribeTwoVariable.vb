@@ -1051,16 +1051,16 @@ Public Class dlgDescribeTwoVariable
         If rdoThreeVariable.Checked Then
             clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
             If IsFactorByFactorByFactor() Then
-                clsSummaryTableFunction.AddParameter("factors", "c(" & Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34) & "," & ucrReceiverThreeVariableSecondFactor.GetVariableNames & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames & ")")
-                clsSummaryTableFunction.AddParameter("columns_to_summarise", Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34))
-                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text, iPosition:=0)
+                clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverThreeVariableSecondFactor.GetVariableNames & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames & "," & ".x" & ")")
+                clsSummaryTableFunction.AddParameter("columns_to_summarise", ".x")
+                clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
             ElseIf IsFactorByFactorByNumeric Then
-                clsMapSummaryFunction.AddParameter(".x", "c(" & Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34) & "," & ucrReceiverThreeVariableSecondFactor.GetVariableNames & ")")
+                clsMapSummaryFunction.AddParameter(".x", "c(" & ucrReceiverFirstVars.GetVariableNames.Replace("c(", "").Replace(")", "") & "," & ucrReceiverThreeVariableSecondFactor.GetVariableNames.Replace("c(", "").Replace(")", "") & ")")
                 clsSummaryTableFunction.AddParameter("factors", ".x")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverThreeVariableThirdVariable.GetVariableNames)
                 SummariesInRowsOrCols()
             ElseIf IsFactorByNumericByFactor() Then
-                clsMapSummaryFunction.AddParameter(".x", "c(" & Chr(34) & ucrReceiverFirstVars.lstSelectedVariables.Items(0).Text & Chr(34) & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames & ")")
+                clsMapSummaryFunction.AddParameter(".x", "c(" & ucrReceiverFirstVars.GetVariableNames.Replace("c(", "").Replace(")", "") & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames.Replace("c(", "").Replace(")", "") & ")")
                 clsSummaryTableFunction.AddParameter("factors", ".x")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverThreeVariableSecondFactor.GetVariableNames)
                 SummariesInRowsOrCols()
