@@ -10,6 +10,7 @@ DataBook <- R6::R6Class("DataBook",
                           { 
                             self$set_meta(instat_obj_metadata)
                             self$set_objects(list())
+                            self$set_scalars(list())
                             
                             if (missing(data_tables) || length(data_tables) == 0) {
                               self$set_data_objects(list())
@@ -29,6 +30,7 @@ DataBook <- R6::R6Class("DataBook",
                           .data_sheets = list(),
                           .metadata = list(),
                           .objects = list(),
+                          .scalars = list(),
                           .links = list(),
                           .data_sheets_changed = FALSE,
                           .database_connection = NULL,
@@ -229,13 +231,15 @@ DataBook$set("public", "import_RDS", function(data_RDS,
 }
 )
 
-DataBook$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_column_selections = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
+DataBook$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_column_selections = TRUE, include_calculations = TRUE, include_comments = TRUE, include_scalars = TRUE, ...) {
   curr_names <- names(curr_data_object)
   if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = FALSE)
   else stop("Cannot import data. No 'get_data_frame' method.")
   if("get_metadata" %in% curr_names) new_data_name <- curr_data_object$get_metadata(data_name_label)
   if(include_objects && "get_objects" %in% curr_names) new_objects <- curr_data_object$get_objects()
   else new_objects <- list()
+  if(include_scalars && "get_scalars" %in% curr_names) new_scalars <- curr_data_object$get_scalars()
+  else new_scalars <- list()
   if(include_filters && "get_filter" %in% curr_names) {
     new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
     new_filters <- lapply(new_filters, function(x) check_filter(x))
@@ -249,7 +253,7 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
   if("get_keys" %in% curr_names) new_keys <- curr_data_object$get_keys()
   else new_keys <- list()
   
-  new_data_object <- DataSheet$new(data = new_data, data_name = new_data_name, filters = new_filters, column_selections = new_column_selections, objects = new_objects, calculations = new_calculations, keys = new_keys, comments = new_comments, keep_attributes = include_metadata)
+  new_data_object <- DataSheet$new(data = new_data, data_name = new_data_name, filters = new_filters, column_selections = new_column_selections, objects = new_objects, calculations = new_calculations, scalars = new_scalars, keys = new_keys, comments = new_comments, keep_attributes = include_metadata)
   if(include_logs && "get_changes" %in% curr_names) {
     new_changes <- curr_data_object$get_changes()
   }
@@ -309,6 +313,12 @@ DataBook$set("public", "set_meta", function(new_meta) {
 DataBook$set("public", "set_objects", function(new_objects) {
   if(!is.list(new_objects)) stop("new_objects must be of type: list")
   private$.objects <- new_objects 
+}
+)
+
+DataBook$set("public", "set_scalars", function(new_scalars) {
+  if(!is.list(new_scalars)) stop("new_scalars must be of type: list")
+  private$.scalars <- new_scalars 
 }
 )
 
@@ -402,8 +412,15 @@ DataBook$set("public", "get_combined_metadata", function(convert_to_character = 
   i = 1
   for (curr_obj in private$.data_sheets) {
     templist = curr_obj$get_metadata()
-    for (j in (1:length(templist))) {
-      if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
+    for (j in seq_along(templist)) {
+      if (is.list(templist[[j]]) || length(templist[[j]]) > 1) {
+        if (length(templist[[j]]) > 0) {
+          templist[[j]] <-
+            paste(names(templist[[j]]), " = ", templist[[j]], collapse = ", ")
+        } else {
+          next
+        }
+      }
       retlist[i, names(templist[j])] = templist[[j]]
     }
     if(all(c(data_name_label, label_label, row_count_label, column_count_label,
@@ -487,6 +504,57 @@ DataBook$set("public", "get_calculation_names", function(data_name, as_list = FA
   return(self$get_data_objects(data_name)$get_calculation_names(as_list = as_list, excluded_items = excluded_items))
 } 
 )
+
+
+DataBook$set("public", "get_scalars", function(data_name) {
+  if(is.null(data_name) || identical(data_name, overall_label)) {
+    out <- private$.scalars[self$get_scalar_names(data_name = data_name)]
+  }else {
+    out <- self$get_data_objects(data_name)$get_scalars()
+  }
+  return(out)
+  
+}
+)
+
+DataBook$set("public", "get_scalar_names", function(data_name,
+                                                    as_list = FALSE,
+                                                    excluded_items = c(),...) {
+  if (is.null(data_name) || identical(data_name, overall_label)) {
+    out <-
+      get_data_book_scalar_names(
+        scalar_list = private$.scalars,
+        as_list = as_list,
+        list_label = overall_label
+      )
+  } else{
+    out <-
+      self$get_data_objects(data_name)$get_scalar_names(as_list = as_list, excluded_items = excluded_items)
+  }
+  
+  return(out)
+})
+
+DataBook$set("public", "get_scalar_value", function(data_name, scalar_name) {
+  self$get_data_objects(data_name)$get_scalar_value(scalar_name)
+}
+)
+
+DataBook$set("public", "add_scalar", function(data_name, scalar_name = "", scalar_value) {
+  if (is.null(data_name) || identical(data_name, overall_label)) {
+    if (missing(scalar_name))
+      scalar_name <- next_default_item("scalar", names(private$.scalars))
+    if (scalar_name %in% names(private$.scalars))
+      warning("A scalar called ",
+              scalar_name,
+              " already exists. It will be replaced.")
+    
+    #add the scalar
+    private$.scalars[[scalar_name]] <- scalar_value
+  } else{
+    self$get_data_objects(data_name)$add_scalar(scalar_name, scalar_value)
+  }
+})
 
 DataBook$set("public", "dataframe_count", function() {
   return(length(private$.data_sheets))
@@ -652,7 +720,7 @@ DataBook$set("public", "get_object_data", function(data_name = NULL, object_name
   }
   return(out)
 }
-)  
+) 
 
 #returns object data from the object_names character vector
 DataBook$set("public", "get_objects_data", function(data_name = NULL, object_names = NULL, as_files = FALSE) {
@@ -2750,4 +2818,9 @@ DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, colum
     self$add_columns_to_data(data_name=data_name, col_name=col_name, col_data=column_data, before=FALSE)
   }
 }
+)
+
+DataBook$set("public", "anova_tables2", function(data_name, x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+  self$get_data_objects(data_name)$anova_tables2(x_col_names = x_col_names, y_col_name = y_col_name, signif.stars = signif.stars, sign_level = sign_level, means = means)
+} 
 )

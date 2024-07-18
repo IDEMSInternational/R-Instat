@@ -85,7 +85,7 @@ Public Class dlgUseGraph
         ucrSaveGraph.SetSaveType(strRObjectType:=RObjectTypeLabel.Graph,
                                  strRObjectFormat:=RObjectFormat.Image)
         ucrSaveGraph.SetDataFrameSelector(ucrGraphsSelector.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save New Graph")
+        ucrSaveGraph.SetCheckBoxText("Store New Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub

@@ -646,7 +646,7 @@ Public Class RLink
     '''
     ''' <param name="strScript">    The text to add to the save log file. </param>
     '''--------------------------------------------------------------------------------------------
-    Private Sub AppendToAutoSaveLog(strScript As String)
+    Public Sub AppendToAutoSaveLog(strScript As String)
         Dim strTempFile As String
         Dim i As Integer = 1
         Try
@@ -749,8 +749,11 @@ Public Class RLink
                          bShowWaitDialogOverride:=Nothing)
             End If
 
+            ' Add output to logger
             clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
-                    bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
+                        bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
+
+            ' Log the script
             LogScript(clsRStatement.Text.TrimEnd(vbCr, vbLf))
 
         Catch e As Exception
@@ -996,9 +999,9 @@ Public Class RLink
                 End If
             End If
 
-
-            'log script and output
+            ' If strOutput is empty or does not contain valid HTML files, add strOutput itself as an output
             clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
+
 
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
@@ -1020,7 +1023,7 @@ Public Class RLink
     ''' <param name="bShowWaitDialogOverride"></param>
     ''' <returns>file path name if file is avaialble and has contents else empty string</returns>
     Private Function GetFileOutput(strScript As String, bSilent As Boolean, bSeparateThread As Boolean, bShowWaitDialogOverride As Nullable(Of Boolean)) As String
-        Dim strFilePath As String = ""
+        Dim strFilesPath As String = ""
         Dim strTempAssignTo As String = ".temp_val"
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
@@ -1029,14 +1032,17 @@ Public Class RLink
         expTemp = GetSymbol(strTempAssignTo, bSilent:=True)
         Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
         If expTemp IsNot Nothing Then
-            'get the file path name, check if it exists and whether it has contents
-            'if not, just return empty file path
-            strFilePath = String.Join(Environment.NewLine, expTemp.AsCharacter())
-            If Not File.Exists(strFilePath) OrElse New FileInfo(strFilePath).Length = 0 Then
-                strFilePath = ""
-            End If
+            ' Convert CharacterVector to String() array
+            Dim arrFilesPath As String() = expTemp.AsCharacter().Select(Function(x) x.ToString()).ToArray()
+
+            ' Filter out invalid file paths
+            arrFilesPath = arrFilesPath.Where(Function(path) File.Exists(path) AndAlso New FileInfo(path).Length > 0).ToArray()
+
+            ' Join the valid file paths with newline characters
+            strFilesPath = String.Join(Environment.NewLine, arrFilesPath)
         End If
-        Return strFilePath
+
+        Return strFilesPath
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -1414,6 +1420,8 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_link_names")
                 Case "key"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_key_names")
+                Case "scalar"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_scalar_names")
                 Case "database_variables"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_database_variable_names")
                     clsGetItems.AddParameter("query", Chr(34) & strDatabaseQuery & Chr(34))

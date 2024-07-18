@@ -1,5 +1,6 @@
 get_default_significant_figures <- function(data) {
-  if(is.numeric(data)) return(3)
+  default_digits <- getOption("digits")
+  if(is.numeric(data) || is.complex(data)) return(default_digits)
   else return(NA)  
 }
 
@@ -2634,7 +2635,7 @@ view_object_data <- function(object, object_format = NULL) {
     file_name <- view_text_object(object)
   } else if (identical(object_format, "html")) {
     file_name <- view_html_object(object)
-  }else{
+  }  else{
     print(object)
   }
   return(file_name)
@@ -2730,11 +2731,28 @@ view_text_object <- function(text_object){
   
 }
 
+view_html_object <- function(html_object) {
+  # Check if html_object is a list and has more than one element
+  if (is.list(html_object) && all(sapply(html_object, class) == class(html_object[[1]]))) {
+    file_names <- vector("list", length(html_object))
+    for (i in seq_along(html_object)) {
+      # If html_object is a list with multiple elements of the same class, 
+      # use a for loop to process each element
+      file_names[[i]] <- process_html_object(html_object[[i]])
+    }
+    return(file_names)
+  }
+  
+  # Process the html_object
+  return(process_html_object(html_object))
+}
+
+#Function to process individual HTML object
 #displays the html object in the set R "viewer".
 #if the viewer is not available then 
 #it saves the object as a file in the temporary folder
 #and returns the file path.
-view_html_object <- function(html_object){
+process_html_object <- function(html_object) {
   #if there is a viewer, like in the case of RStudio then just print the object
   #this check is primarily meant to make this function work in a similar manner when run outside R-Instat
   r_viewer <- base::getOption("viewer")
@@ -2745,14 +2763,13 @@ view_html_object <- function(html_object){
     return(html_object)
   }
   
-  
-  file_name <- ""
-  #get a vector of available class names
-  object_class_names <- class(html_object)
-  #get a unique temporary file name from the tempdir path
+  # Get a unique temporary file name from the tempdir path
   file_name <- tempfile(pattern = "viewhtml", fileext = ".html")
   
-  #save the object as a html file depending on the object type
+  # Get a vector of available class names
+  object_class_names <- class(html_object)
+  
+  # Save the object as an HTML file depending on the object type
   if ("htmlwidget" %in% object_class_names) {
     #Note. When selfcontained is set to True 
     #a "Saving a widget with selfcontained = TRUE requires pandoc" error is thrown in R-Instat
@@ -2768,12 +2785,14 @@ view_html_object <- function(html_object){
   } else if ("gt_tbl" %in% object_class_names) {
     #"gt table" objects are not compatible with "htmlwidgets" package. So they have to be saved differently.
     #"mmtable2" package produces "gt_tbl" objects 
-    gt::gtsave(html_object,filename = file_name)
+    gt::gtsave(html_object, filename = file_name)
   }
   
   message("R viewer not detected. File saved in location ", file_name)
   return(file_name)
-} 
+}
+
+
 
 #tries to recordPlot if graph_object = NULL, then returns graph object of class "recordedplot".
 #applicable to base graphs only
@@ -2848,6 +2867,24 @@ get_data_book_output_object_names <- function(output_object_list,
     return(out)
   }
   
+}
+
+get_data_book_scalar_names <- function(scalar_list,
+                                       excluded_items = c(), 
+                                       as_list = FALSE, 
+                                       list_label = NULL){
+  out = names(scalar_list)
+  if(length(excluded_items) > 0) {
+    ex_ind = which(out %in% excluded_items)
+    if(length(ex_ind) != length(excluded_items)) warning("Some of the excluded_items were not found in the list of calculations")
+    if(length(ex_ind) > 0) out = out[-ex_ind]
+  }
+  if(!as_list) {
+    return(out)
+  }
+  lst = list()
+  lst[[list_label]] <- out
+  return(lst)
 }
 
 get_vignette <- function (package = NULL, lib.loc = NULL, all = TRUE) 
@@ -2940,14 +2977,23 @@ cumulative_inventory <- function(data, station = NULL, from, to){
     return(data)
 }
 
-getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_regex) {
-  if(use_regex){
+getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_regex, match_entire_cell) {
+  if (use_regex) {
+    # Adjust the search text to match the entire cell if required
+    if (match_entire_cell) {
+      searchText <- paste0("^", searchText, "$")
+    }
     # Find the rows that match the search text using regex
     matchingRows <- stringr::str_detect(data[[column]], stringr::regex(searchText, ignore_case = ignore_case))
-  }else if (is.na(searchText)){
+  } else if (is.na(searchText)) {
     matchingRows <- apply(data[, column, drop = FALSE], 1, function(row) any(is.na(row)))
-  }else{
-    matchingRows <- grepl(searchText, data[[column]], ignore.case = ignore_case)
+  } else {
+    # Adjust the search text to match the entire cell if required
+    if (match_entire_cell) {
+      searchText <- paste0("^", searchText, "$")
+    }
+    # Find the rows that match the search text
+    matchingRows <- grepl(searchText, data[[column]], ignore.case = ignore_case, perl = TRUE)
   }
   # Get the row headers where the search text is found
   rowHeaders <- rownames(data)[matchingRows]
@@ -3047,4 +3093,269 @@ write_weather_data <- function(year, month, day, rain, mn_tmp, mx_tmp, missing_c
   write.table(weather_data, file = output_file, sep = "\t", row.names = FALSE, col.names = TRUE, quote = FALSE)
   
   cat("Weather data has been written to", output_file, "\n")
+}
+
+prepare_walter_lieth <- function(data, month, tm_min, ta_min){
+  dat_long_int <- NULL
+  for (j in seq(nrow(data) - 1)) {
+    intres <- NULL
+     for (i in seq_len(ncol(data))) {
+      if (is.character(data[j, i]) | is.factor(data[j, i])) {
+        val <- as.data.frame(data[j, i])
+      }
+      else {
+        interpol <- approx(x = data[c(j, j + 1), "indrow"],
+                           y = data[c(j, j + 1), i],
+                           n = 50)
+        val <- as.data.frame(interpol$y)
+      }
+      names(val) <- names(data)[i]
+      intres <- dplyr::bind_cols(intres, val)
+    }
+    dat_long_int <- dplyr::bind_rows(dat_long_int, intres)
+  }
+  dat_long_int$interpolate <- TRUE
+  dat_long_int[[month]] <- ""
+  data$interpolate <- FALSE
+  dat_long_int <- dat_long_int[!dat_long_int$indrow %in% data$indrow, ]
+  dat_long_end <- dplyr::bind_rows(data, dat_long_int)
+  dat_long_end <- dat_long_end[order(dat_long_end$indrow), ]
+  dat_long_end <- dat_long_end[dat_long_end$indrow >= 0 & dat_long_end$indrow <= 12, ]
+  dat_long_end <- tibble::as_tibble(dat_long_end)
+  
+  getpolymax <- function(x, y, y_lim) {
+    initpoly <- FALSE
+    yres <- NULL
+     xres <- NULL
+    for (i in seq_len(length(y))) {
+      lastobs <- i == length(x)
+      if (y[i] > y_lim[i]) {
+        if (isFALSE(initpoly)) {
+          xres <- c(xres, x[i])
+          yres <- c(yres, y_lim[i])
+          initpoly <- TRUE
+        }
+        xres <- c(xres, x[i])
+        yres <- c(yres, y[i])
+        if (lastobs) {
+          xres <- c(xres, x[i], NA)
+          yres <- c(yres, y_lim[i], NA)
+        }
+      }
+      else {
+        if (initpoly) {
+          xres <- c(xres, x[i - 1], NA)
+          yres <- c(yres, y_lim[i - 1], NA)
+          initpoly <- FALSE
+        }
+      }
+    }
+    poly <- tibble::tibble(x = xres, y = yres)
+    return(poly)
+  }
+  getlines <- function(x, y, y_lim) {
+    yres <- NULL
+    xres <- NULL
+    ylim_res <- NULL
+    for (i in seq_len(length(y))) {
+      if (y[i] > y_lim[i]) {
+        xres <- c(xres, x[i])
+        yres <- c(yres, y[i])
+        ylim_res <- c(ylim_res, y_lim[i])
+      }
+    }
+    line <- tibble::tibble(x = xres, y = yres, ylim_res = ylim_res)
+    return(line)
+  }
+  prep_max_poly <- getpolymax(x = dat_long_end$indrow, y = pmax(dat_long_end$pm_reesc, 
+                                                                50), y_lim = rep(50, length(dat_long_end$indrow)))
+  tm_max_line <- getlines(x = dat_long_end$indrow, y = dat_long_end$tm, 
+                          y_lim = dat_long_end$pm_reesc)
+  pm_max_line <- getlines(x = dat_long_end$indrow, y = pmin(dat_long_end$pm_reesc, 
+                                                            50), y_lim = dat_long_end$tm)
+  dat_real <- dat_long_end[dat_long_end$interpolate == FALSE, 
+                           c("indrow", ta_min)]
+  x <- NULL
+  y <- NULL
+  for (i in seq_len(nrow(dat_real))) {
+    if (dat_real[i, ][[ta_min]] < 0) {
+      x <- c(x, NA, rep(dat_real[i, ]$indrow - 0.5, 2), 
+             rep(dat_real[i, ]$indrow + 0.5, 2), NA)
+      y <- c(y, NA, -3, 0, 0, -3, NA)
+       }
+    else {
+      x <- c(x, NA)
+      y <- c(y, NA)
+    }
+  }
+  probfreeze <- tibble::tibble(x = x, y = y)
+  rm(dat_real)
+  dat_real <- dat_long_end[dat_long_end$interpolate == FALSE, 
+                           c("indrow", tm_min)]
+  x <- NULL
+  y <- NULL
+  for (i in seq_len(nrow(dat_real))) {
+    if (dat_real[i, ][[tm_min]] < 0) {
+      x <- c(x, NA, rep(dat_real[i, ]$indrow - 0.5, 2), 
+             rep(dat_real[i, ]$indrow + 0.5, 2), NA)
+      y <- c(y, NA, -3, 0, 0, -3, NA)
+    }
+    else {
+      x <- c(x, NA)
+      y <- c(y, NA)
+    }
+  }
+  surefreeze <- tibble::tibble(x = x, y = y)
+  return_list <- list(dat_long_end,
+                      tm_max_line,
+                      pm_max_line,
+                      prep_max_poly,
+                      probfreeze,
+                      surefreeze)
+  names(return_list) <- c("dat_long_end", "tm_max_line", "pm_max_line",
+                          "prep_max_poly", "prob_freeze", "surefreeze")
+  return(return_list)
+}
+ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, ta_min, station_name = "", 
+                            alt = NA, per = NA, pcol = "#002F70", 
+                            tcol = "#ff0000", pfcol = "#9BAEE2", sfcol = "#3C6FC4", 
+                            shem = FALSE, p3line = FALSE, ...) 
+                            {
+
+  # Preprocess data with vectorised operations
+  data <- data %>%
+    dplyr::mutate(tm = (.data[[tm_max]] + .data[[tm_min]]) / 2,
+                  pm_reesc = dplyr::if_else(.data[[p_mes]] < 100, .data[[p_mes]] * 0.5, .data[[p_mes]] * 0.05 + 45),
+                  p3line = .data[[p_mes]] / 3) %>%
+    dplyr::mutate(across(.data[[month]], ~ forcats::fct_expand(.data[[month]], ""))) %>%
+    dplyr::arrange(.data[[month]])
+    # do this for each station, if we have a station
+  if (!is.null(station)){
+    data <- data %>% group_by(!!sym(station))
+  }
+  data <- data %>%
+    group_modify(~{
+      # Add dummy rows at the beginning and end for each group
+      .x <- bind_rows(.x[nrow(.x), , drop = FALSE], .x, .x[1, , drop = FALSE])
+      # Clear month value for the dummy rows
+      .x[c(1, nrow(.x)), which(names(.x) == data[[month]])] <- ""
+      # Add an index column for plotting or further transformations
+      .x <- cbind(indrow = seq(-0.5, 12.5, 1), .x)
+      .x
+    })
+  
+  if (!is.null(station)){
+    data <- data %>% ungroup()
+  }
+  data <- data.frame(data)
+
+   # split by station
+  if (is.null(station)){
+    data_list <- prepare_walter_lieth(data, month, tm_min, ta_min)
+    # data things
+    dat_long_end <- data_list$dat_long_end
+    tm_max_line <- data_list$tm_max_line
+    pm_max_line <- data_list$pm_max_line
+    prep_max_poly <- data_list$prep_max_poly
+    probfreeze <- data_list$prob_freeze
+    surefreeze <- data_list$surefreeze
+  } else {
+    results <-
+      map(.x = unique(data[[station]]),
+          .f = ~{filtered_data <- data %>% filter(!!sym(station) == .x)
+          prepare_walter_lieth(filtered_data, month, tm_min, ta_min)})
+    # Function to bind rows for a specific sub-element across all main elements
+    n <- length(results)
+    m <- length(results[[1]])
+     station_name <- unique(data[[station]])
+    binds <- NULL
+    combined <- NULL
+    for (j in 1:m){
+      for (i in 1:n) { # for each station data set
+        binds[[i]] <- results[[i]][[j]] %>% mutate(!!sym(station) := station_name[i])
+      }
+      combined[[j]] <- do.call(rbind, binds) # Combine all the sub-elements row-wise
+    }
+    # data things
+    dat_long_end <- combined[[1]]
+    tm_max_line <- combined[[2]]
+    pm_max_line <- combined[[3]]
+    prep_max_poly <- combined[[4]]
+    probfreeze <- combined[[5]]
+    surefreeze <- combined[[6]]
+  }
+  
+  # data frame pretty things ------------------------------------------------------
+  ticks <- data.frame(x = seq(0, 12), ymin = -3, ymax = 0)
+  month_breaks <- dat_long_end[dat_long_end[[month]] != "", ]$indrow
+  month_labs <- dat_long_end[dat_long_end[[month]] != "", ][[month]]
+  
+  ymax <- max(60, 10 * floor(max(dat_long_end$pm_reesc)/10) + 10)
+  ymin <- min(-3, min(dat_long_end$tm))
+  range_tm <- seq(0, ymax, 10)
+  if (ymin < -3) {
+    ymin <- floor(ymin/10) * 10
+    range_tm <- seq(ymin, ymax, 10)
+  }
+  templabs <- paste0(range_tm)
+  templabs[range_tm > 50] <- ""
+  range_prec <- range_tm * 2
+  range_prec[range_tm > 50] <- range_tm[range_tm > 50] * 20 - 900
+  preclabs <- paste0(range_prec)
+  preclabs[range_tm < 0] <- ""
+  
+  wandlplot <- ggplot2::ggplot() + ggplot2::geom_line(data = dat_long_end, 
+                                                      aes(x = .data$indrow, y = .data$pm_reesc), color = pcol) + 
+    ggplot2::geom_line(data = dat_long_end, aes(x = .data$indrow, 
+                                                y = .data$tm), color = tcol)
+  if (nrow(tm_max_line > 0)) {
+    wandlplot <- wandlplot + ggplot2::geom_segment(aes(x = .data$x, 
+                                                       y = .data$ylim_res, xend = .data$x, yend = .data$y), 
+                                                   data = tm_max_line, color = tcol, alpha = 0.2)
+  }
+  if (nrow(pm_max_line > 0)) {
+    wandlplot <- wandlplot + ggplot2::geom_segment(aes(x = .data$x, 
+                                                       y = .data$ylim_res, xend = .data$x, yend = .data$y), 
+                                                   data = pm_max_line, color = pcol, alpha = 0.2)
+  }
+  if (p3line) {
+    wandlplot <- wandlplot + ggplot2::geom_line(data = dat_long_end, 
+                                                aes(x = .data$indrow, y = .data$p3line), color = pcol)
+  }
+  if (max(dat_long_end$pm_reesc) > 50) {
+    wandlplot <- wandlplot + ggplot2::geom_polygon(data = prep_max_poly, aes(x, y),
+                                                   fill = pcol)
+  }
+  if (min(dat_long_end[[ta_min]]) < 0) {
+    wandlplot <- wandlplot + ggplot2::geom_polygon(data = probfreeze, aes(x = x, y = y),
+                                                   fill = pfcol, colour = "black")
+  }
+   if (min(dat_long_end[[tm_min]]) < 0) {
+    wandlplot <- wandlplot + geom_polygon(data = surefreeze, aes(x = x, y = y),
+                                          fill = sfcol, colour = "black")
+  }
+  wandlplot <- wandlplot + geom_hline(yintercept = c(0, 50), 
+                                      linewidth = 0.5) +
+    geom_segment(data = ticks, aes(x = x, xend = x, y = ymin, yend = ymax)) +
+    scale_x_continuous(breaks = month_breaks, name = "", labels = month_labs, expand = c(0, 0)) + 
+    scale_y_continuous("C", limits = c(ymin, ymax), labels = templabs, 
+     breaks = range_tm, sec.axis = dup_axis(name = "mm", labels = preclabs))
+  wandlplot <- wandlplot +
+    ggplot2::theme_classic() +
+    ggplot2::theme(axis.line.x.bottom = element_blank(), 
+                   axis.title.y.left = element_text(angle = 0, 
+                                                    vjust = 0.9, size = 10, colour = tcol,
+                                                    margin = unit(rep(10, 4), "pt")),
+                   axis.text.x.bottom = element_text(size = 10), 
+                   axis.text.y.left = element_text(colour = tcol, size = 10), 
+                   axis.title.y.right = element_text(angle = 0, vjust = 0.9, 
+                                                     size = 10, colour = pcol,
+                                                     margin = unit(rep(10, 4), "pt")),
+                   axis.text.y.right = element_text(colour = pcol, size = 10))
+  
+  if (!is.null(station)){
+    wandlplot <- wandlplot + facet_wrap(station)
+  }
+  
+  return(wandlplot)
 }

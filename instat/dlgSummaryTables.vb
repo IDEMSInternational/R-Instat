@@ -182,7 +182,7 @@ Public Class dlgSummaryTables
         ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
-        ucrSaveTable.SetCheckBoxText("Save Table")
+        ucrSaveTable.SetCheckBoxText("Store Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
         ucrReorderSummary.bDataIsSummaries = True
@@ -221,7 +221,7 @@ Public Class dlgSummaryTables
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
 
-        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+        ucrBase.clsRsyntax.GetBeforeCodes().Clear()
 
         clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
         clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
