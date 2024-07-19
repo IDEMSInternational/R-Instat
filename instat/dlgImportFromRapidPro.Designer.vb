@@ -52,13 +52,12 @@ Partial Class dlgImportFromRapidPro
         Me.rdoUserData.FlatAppearance.BorderSize = 2
         Me.rdoUserData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoUserData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoUserData.Location = New System.Drawing.Point(135, 22)
-        Me.rdoUserData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.rdoUserData.Location = New System.Drawing.Point(90, 14)
         Me.rdoUserData.Name = "rdoUserData"
-        Me.rdoUserData.Size = New System.Drawing.Size(168, 43)
+        Me.rdoUserData.Size = New System.Drawing.Size(112, 28)
         Me.rdoUserData.TabIndex = 1
         Me.rdoUserData.TabStop = True
-        Me.rdoUserData.Text = " Data"
+        Me.rdoUserData.Text = "Data"
         Me.rdoUserData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoUserData.UseVisualStyleBackColor = True
         '
@@ -69,32 +68,29 @@ Partial Class dlgImportFromRapidPro
         Me.rdoFlowData.FlatAppearance.BorderSize = 2
         Me.rdoFlowData.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoFlowData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoFlowData.Location = New System.Drawing.Point(300, 22)
-        Me.rdoFlowData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.rdoFlowData.Location = New System.Drawing.Point(200, 14)
         Me.rdoFlowData.Name = "rdoFlowData"
-        Me.rdoFlowData.Size = New System.Drawing.Size(168, 43)
+        Me.rdoFlowData.Size = New System.Drawing.Size(112, 28)
         Me.rdoFlowData.TabIndex = 2
         Me.rdoFlowData.TabStop = True
-        Me.rdoFlowData.Text = "Flow Names"
+        Me.rdoFlowData.Text = "Flow Metadata"
         Me.rdoFlowData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoFlowData.UseVisualStyleBackColor = True
         '
         'lblRapidProSite
         '
         Me.lblRapidProSite.AutoSize = True
-        Me.lblRapidProSite.Location = New System.Drawing.Point(6, 97)
-        Me.lblRapidProSite.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblRapidProSite.Location = New System.Drawing.Point(4, 63)
         Me.lblRapidProSite.Name = "lblRapidProSite"
-        Me.lblRapidProSite.Size = New System.Drawing.Size(41, 20)
+        Me.lblRapidProSite.Size = New System.Drawing.Size(28, 13)
         Me.lblRapidProSite.TabIndex = 3
         Me.lblRapidProSite.Text = "Site:"
         '
         'cmdSetToken
         '
-        Me.cmdSetToken.Location = New System.Drawing.Point(72, 134)
-        Me.cmdSetToken.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmdSetToken.Location = New System.Drawing.Point(48, 87)
         Me.cmdSetToken.Name = "cmdSetToken"
-        Me.cmdSetToken.Size = New System.Drawing.Size(202, 35)
+        Me.cmdSetToken.Size = New System.Drawing.Size(135, 23)
         Me.cmdSetToken.TabIndex = 5
         Me.cmdSetToken.Text = "Set Token"
         Me.cmdSetToken.UseVisualStyleBackColor = True
@@ -102,30 +98,28 @@ Partial Class dlgImportFromRapidPro
         'lblDateFormat
         '
         Me.lblDateFormat.AutoSize = True
-        Me.lblDateFormat.Location = New System.Drawing.Point(6, 386)
-        Me.lblDateFormat.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDateFormat.Location = New System.Drawing.Point(4, 251)
         Me.lblDateFormat.Name = "lblDateFormat"
-        Me.lblDateFormat.Size = New System.Drawing.Size(103, 20)
+        Me.lblDateFormat.Size = New System.Drawing.Size(68, 13)
         Me.lblDateFormat.TabIndex = 11
         Me.lblDateFormat.Text = "Date Format:"
         '
         'lblTimezone
         '
         Me.lblTimezone.AutoSize = True
-        Me.lblTimezone.Location = New System.Drawing.Point(6, 426)
-        Me.lblTimezone.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTimezone.Location = New System.Drawing.Point(4, 277)
         Me.lblTimezone.Name = "lblTimezone"
-        Me.lblTimezone.Size = New System.Drawing.Size(82, 20)
+        Me.lblTimezone.Size = New System.Drawing.Size(56, 13)
         Me.lblTimezone.TabIndex = 13
         Me.lblTimezone.Text = "Timezone:"
         '
         'ucrSaveDataframeName
         '
         Me.ucrSaveDataframeName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveDataframeName.Location = New System.Drawing.Point(10, 469)
-        Me.ucrSaveDataframeName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrSaveDataframeName.Location = New System.Drawing.Point(7, 305)
+        Me.ucrSaveDataframeName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDataframeName.Name = "ucrSaveDataframeName"
-        Me.ucrSaveDataframeName.Size = New System.Drawing.Size(513, 35)
+        Me.ucrSaveDataframeName.Size = New System.Drawing.Size(342, 23)
         Me.ucrSaveDataframeName.TabIndex = 15
         '
         'ucrInputEndDate
@@ -134,10 +128,10 @@ Partial Class dlgImportFromRapidPro
         Me.ucrInputEndDate.AutoSize = True
         Me.ucrInputEndDate.IsMultiline = False
         Me.ucrInputEndDate.IsReadOnly = False
-        Me.ucrInputEndDate.Location = New System.Drawing.Point(172, 341)
-        Me.ucrInputEndDate.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputEndDate.Location = New System.Drawing.Point(115, 222)
+        Me.ucrInputEndDate.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputEndDate.Name = "ucrInputEndDate"
-        Me.ucrInputEndDate.Size = New System.Drawing.Size(206, 32)
+        Me.ucrInputEndDate.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputEndDate.TabIndex = 10
         '
         'ucrInputStartDate
@@ -146,10 +140,10 @@ Partial Class dlgImportFromRapidPro
         Me.ucrInputStartDate.AutoSize = True
         Me.ucrInputStartDate.IsMultiline = False
         Me.ucrInputStartDate.IsReadOnly = False
-        Me.ucrInputStartDate.Location = New System.Drawing.Point(172, 300)
-        Me.ucrInputStartDate.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputStartDate.Location = New System.Drawing.Point(115, 195)
+        Me.ucrInputStartDate.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputStartDate.Name = "ucrInputStartDate"
-        Me.ucrInputStartDate.Size = New System.Drawing.Size(206, 32)
+        Me.ucrInputStartDate.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputStartDate.TabIndex = 8
         '
         'ucrInputTimezone
@@ -158,10 +152,10 @@ Partial Class dlgImportFromRapidPro
         Me.ucrInputTimezone.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputTimezone.GetSetSelectedIndex = -1
         Me.ucrInputTimezone.IsReadOnly = False
-        Me.ucrInputTimezone.Location = New System.Drawing.Point(172, 426)
-        Me.ucrInputTimezone.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputTimezone.Location = New System.Drawing.Point(115, 277)
+        Me.ucrInputTimezone.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputTimezone.Name = "ucrInputTimezone"
-        Me.ucrInputTimezone.Size = New System.Drawing.Size(206, 32)
+        Me.ucrInputTimezone.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputTimezone.TabIndex = 14
         '
         'ucrInputDateFormat
@@ -170,49 +164,49 @@ Partial Class dlgImportFromRapidPro
         Me.ucrInputDateFormat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputDateFormat.GetSetSelectedIndex = -1
         Me.ucrInputDateFormat.IsReadOnly = False
-        Me.ucrInputDateFormat.Location = New System.Drawing.Point(172, 384)
-        Me.ucrInputDateFormat.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputDateFormat.Location = New System.Drawing.Point(115, 250)
+        Me.ucrInputDateFormat.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputDateFormat.Name = "ucrInputDateFormat"
-        Me.ucrInputDateFormat.Size = New System.Drawing.Size(206, 32)
+        Me.ucrInputDateFormat.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputDateFormat.TabIndex = 12
         '
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 510)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 332)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(614, 80)
+        Me.ucrBase.Size = New System.Drawing.Size(409, 52)
         Me.ucrBase.TabIndex = 16
         '
         'ucrChkSetEndDate
         '
         Me.ucrChkSetEndDate.AutoSize = True
         Me.ucrChkSetEndDate.Checked = False
-        Me.ucrChkSetEndDate.Location = New System.Drawing.Point(10, 341)
-        Me.ucrChkSetEndDate.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkSetEndDate.Location = New System.Drawing.Point(7, 222)
+        Me.ucrChkSetEndDate.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkSetEndDate.Name = "ucrChkSetEndDate"
-        Me.ucrChkSetEndDate.Size = New System.Drawing.Size(152, 35)
+        Me.ucrChkSetEndDate.Size = New System.Drawing.Size(101, 34)
         Me.ucrChkSetEndDate.TabIndex = 9
         '
         'ucrChkSetStartDate
         '
         Me.ucrChkSetStartDate.AutoSize = True
         Me.ucrChkSetStartDate.Checked = False
-        Me.ucrChkSetStartDate.Location = New System.Drawing.Point(10, 300)
-        Me.ucrChkSetStartDate.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkSetStartDate.Location = New System.Drawing.Point(7, 195)
+        Me.ucrChkSetStartDate.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkSetStartDate.Name = "ucrChkSetStartDate"
-        Me.ucrChkSetStartDate.Size = New System.Drawing.Size(152, 35)
+        Me.ucrChkSetStartDate.Size = New System.Drawing.Size(101, 34)
         Me.ucrChkSetStartDate.TabIndex = 7
         '
         'ucrChkFlattenData
         '
         Me.ucrChkFlattenData.AutoSize = True
         Me.ucrChkFlattenData.Checked = False
-        Me.ucrChkFlattenData.Location = New System.Drawing.Point(10, 258)
-        Me.ucrChkFlattenData.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkFlattenData.Location = New System.Drawing.Point(7, 168)
+        Me.ucrChkFlattenData.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkFlattenData.Name = "ucrChkFlattenData"
-        Me.ucrChkFlattenData.Size = New System.Drawing.Size(152, 35)
+        Me.ucrChkFlattenData.Size = New System.Drawing.Size(101, 34)
         Me.ucrChkFlattenData.TabIndex = 6
         '
         'ucrInputRapidProSite
@@ -221,64 +215,67 @@ Partial Class dlgImportFromRapidPro
         Me.ucrInputRapidProSite.AutoSize = True
         Me.ucrInputRapidProSite.IsMultiline = False
         Me.ucrInputRapidProSite.IsReadOnly = False
-        Me.ucrInputRapidProSite.Location = New System.Drawing.Point(72, 95)
-        Me.ucrInputRapidProSite.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputRapidProSite.Location = New System.Drawing.Point(48, 62)
+        Me.ucrInputRapidProSite.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputRapidProSite.Name = "ucrInputRapidProSite"
-        Me.ucrInputRapidProSite.Size = New System.Drawing.Size(452, 32)
+        Me.ucrInputRapidProSite.Size = New System.Drawing.Size(301, 21)
         Me.ucrInputRapidProSite.TabIndex = 4
         '
         'ucrPnlImportFromRapidPro
         '
         Me.ucrPnlImportFromRapidPro.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlImportFromRapidPro.Location = New System.Drawing.Point(70, 18)
-        Me.ucrPnlImportFromRapidPro.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlImportFromRapidPro.Location = New System.Drawing.Point(47, 12)
+        Me.ucrPnlImportFromRapidPro.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlImportFromRapidPro.Name = "ucrPnlImportFromRapidPro"
-        Me.ucrPnlImportFromRapidPro.Size = New System.Drawing.Size(448, 46)
+        Me.ucrPnlImportFromRapidPro.Size = New System.Drawing.Size(299, 30)
         Me.ucrPnlImportFromRapidPro.TabIndex = 0
         '
         'ucrChkUser
         '
         Me.ucrChkUser.AutoSize = True
         Me.ucrChkUser.Checked = False
-        Me.ucrChkUser.Location = New System.Drawing.Point(221, 194)
-        Me.ucrChkUser.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkUser.Location = New System.Drawing.Point(147, 126)
+        Me.ucrChkUser.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkUser.Name = "ucrChkUser"
-        Me.ucrChkUser.Size = New System.Drawing.Size(150, 34)
+        Me.ucrChkUser.Size = New System.Drawing.Size(100, 34)
         Me.ucrChkUser.TabIndex = 17
         '
         'ucrChkFlow
         '
         Me.ucrChkFlow.AutoSize = True
         Me.ucrChkFlow.Checked = False
-        Me.ucrChkFlow.Location = New System.Drawing.Point(220, 230)
-        Me.ucrChkFlow.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkFlow.Location = New System.Drawing.Point(147, 150)
+        Me.ucrChkFlow.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkFlow.Name = "ucrChkFlow"
-        Me.ucrChkFlow.Size = New System.Drawing.Size(150, 34)
+        Me.ucrChkFlow.Size = New System.Drawing.Size(100, 34)
         Me.ucrChkFlow.TabIndex = 18
         '
         'cmdSelectFlows
         '
-        Me.cmdSelectFlows.Location = New System.Drawing.Point(384, 234)
+        Me.cmdSelectFlows.Location = New System.Drawing.Point(256, 152)
+        Me.cmdSelectFlows.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdSelectFlows.Name = "cmdSelectFlows"
-        Me.cmdSelectFlows.Size = New System.Drawing.Size(110, 29)
+        Me.cmdSelectFlows.Size = New System.Drawing.Size(73, 19)
         Me.cmdSelectFlows.TabIndex = 19
         Me.cmdSelectFlows.Text = "Select Flows"
         Me.cmdSelectFlows.UseVisualStyleBackColor = True
         '
         'grpDataToImport
         '
-        Me.grpDataToImport.Location = New System.Drawing.Point(214, 175)
+        Me.grpDataToImport.Location = New System.Drawing.Point(143, 114)
+        Me.grpDataToImport.Margin = New System.Windows.Forms.Padding(2)
         Me.grpDataToImport.Name = "grpDataToImport"
-        Me.grpDataToImport.Size = New System.Drawing.Size(292, 105)
+        Me.grpDataToImport.Padding = New System.Windows.Forms.Padding(2)
+        Me.grpDataToImport.Size = New System.Drawing.Size(195, 68)
         Me.grpDataToImport.TabIndex = 20
         Me.grpDataToImport.TabStop = False
         Me.grpDataToImport.Text = "Data To Import"
         '
         'dlgImportFromRapidPro
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(626, 591)
+        Me.ClientSize = New System.Drawing.Size(417, 384)
         Me.Controls.Add(Me.ucrChkFlow)
         Me.Controls.Add(Me.ucrChkUser)
         Me.Controls.Add(Me.cmdSelectFlows)
@@ -301,7 +298,6 @@ Partial Class dlgImportFromRapidPro
         Me.Controls.Add(Me.ucrPnlImportFromRapidPro)
         Me.Controls.Add(Me.grpDataToImport)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportFromRapidPro"

@@ -35,7 +35,7 @@ Public Class sdgFlowsToImport
         lstRecognisedTypes.AddRange({kvpName})
         lstReceivers.AddRange({ucrReceiverName})
 
-        ucrReceiverName.Tag = "name"
+        ucrReceiverName.Tag = "Flow Metadata"
 
         ucrSelectorFlows.SetParameterIsrfunction()
 

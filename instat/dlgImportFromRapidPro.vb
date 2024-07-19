@@ -14,7 +14,9 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Runtime.InteropServices
 Imports instat.Translations
+Imports RDotNet
 
 Public Class dlgImportFromRapidPro
     Private bFirstLoad As Boolean = True
@@ -30,6 +32,7 @@ Public Class dlgImportFromRapidPro
     Private clsLinkDataFramesFunction As New RFunction
     Private clsSetSiteFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private clsConvertToFactor As New RFunction
 
     Private Sub dlgImportFromRapidPro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -140,6 +143,7 @@ Public Class dlgImportFromRapidPro
         clsGetUserDataFunction = New RFunction
         clsSetTokenFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsConvertToFactor = New RFunction
         clsSetSiteFunction = New RFunction
         clsGetFlowFunction = New RFunction
         clsLinkDataFramesFunction = New RFunction
@@ -180,6 +184,11 @@ Public Class dlgImportFromRapidPro
         clsGetFlowFunction.AddParameter("rapidpro_site", "rapidpror::get_rapidpro_site()", iPosition:=0)
         clsGetFlowFunction.AddParameter("token", "rapidpror::get_rapidpro_key()", iPosition:=1)
         clsGetFlowFunction.AddParameter("flatten", "TRUE", iPosition:=2)
+
+        clsConvertToFactor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertToFactor.AddParameter("data_name", Chr(34) & "flow_metadata" & Chr(34)) 'TODO: this to be the name in the ucrSave
+        clsConvertToFactor.AddParameter("col_names", Chr(34) & "name" & Chr(34), iPosition:=1)
+        clsConvertToFactor.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=3)
 
         clsLinkDataFramesFunction.SetPackageName("rapidpror")
         clsLinkDataFramesFunction.SetRCommand("link_data_frames")
@@ -243,10 +252,10 @@ Public Class dlgImportFromRapidPro
             ucrSaveDataframeName.SetPrefix("user_data")
         ElseIf rdoUserData.Checked AndAlso ucrChkFlow.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowFunction)
-            ucrSaveDataframeName.SetPrefix("user_flow")
+            ucrSaveDataframeName.SetPrefix("user_flow_data")
         ElseIf rdoFlowData.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowDataFunction)
-            ucrSaveDataframeName.SetPrefix("user_flow")
+            ucrSaveDataframeName.SetPrefix("flow_metadata")
         End If
         If rdoUserData.Checked AndAlso ucrChkFlow.Checked AndAlso ucrChkUser.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
@@ -256,6 +265,9 @@ Public Class dlgImportFromRapidPro
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetFlowFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetUserDataFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsLinkDataFramesFunction)
+        End If
+        If rdoFlowData.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsConvertToFactor, 0)
         End If
         If rdoUserData.Checked Then
             grpDataToImport.Visible = True
@@ -292,7 +304,7 @@ Public Class dlgImportFromRapidPro
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputRapidProSite_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveDataframeName.ControlContentsChanged, ucrInputRapidProSite.ControlContentsChanged,
+    Private Sub ucrInputRapidProSite_ControlContentsChanged(ucrChangedControl As ucrCore) Handles  ucrInputRapidProSite.ControlContentsChanged,
         ucrPnlImportFromRapidPro.ControlContentsChanged
         TestOKEnabled()
     End Sub
