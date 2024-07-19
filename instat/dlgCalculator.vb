@@ -85,6 +85,8 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 14
+
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
         ucrCalc.ucrTryCalculator.SetIsCommand()
         ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
@@ -335,6 +337,7 @@ Public Class dlgCalculator
                 ucrBase.iHelpTopicID = 439
             Case Else
                 Me.Width = iBasicWidth
+                ucrBase.iHelpTopicID = 14
         End Select
     End Sub
 End Class
