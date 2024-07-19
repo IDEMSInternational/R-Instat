@@ -881,7 +881,11 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub LineOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LineOptionsToolStripMenuItem.Click
-        openSdgLayerOptions(clsGeomLineFunction)
+        If rdoLine.Checked Then
+            openSdgLayerOptions(clsGeomLineFunction)
+        Else
+            openSdgLayerOptions(clsGeomLineFunc)
+        End If
     End Sub
 
     Private Sub SmoothOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SmoothOptionsToolStripMenuItem.Click
