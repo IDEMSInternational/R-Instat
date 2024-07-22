@@ -120,7 +120,7 @@ Public Class dlgClimaticStationMaps
         ucrSaveMap.SetPrefix("map")
         ucrSaveMap.SetSaveTypeAsGraph()
         ucrSaveMap.SetIsComboBox()
-        ucrSaveMap.SetCheckBoxText("Save Map")
+        ucrSaveMap.SetCheckBoxText("Store Map")
         ucrSaveMap.SetAssignToIfUncheckedValue("last_map")
         ucrSaveMap.SetDataFrameSelector(ucrSelectorOutline.ucrAvailableDataFrames)
 

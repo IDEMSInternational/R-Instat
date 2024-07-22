@@ -85,6 +85,8 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 14
+
         ucrCalc.ucrReceiverForCalculation.SetMeAsReceiver()
         ucrCalc.ucrTryCalculator.SetIsCommand()
         ucrCalc.ucrTryCalculator.SetReceiver(ucrCalc.ucrReceiverForCalculation)
@@ -262,7 +264,6 @@ Public Class dlgCalculator
     Private Sub SetHelpOptions()
         Select Case enumCalculatorMode
             Case CalculatorMode.Prepare
-                ucrCalc.ucrInputCalOptions.SetName("Basic")
                 ucrBase.iHelpTopicID = 14
             Case CalculatorMode.Structured
                 ucrCalc.ucrInputCalOptions.SetName("Circular")
@@ -336,6 +337,7 @@ Public Class dlgCalculator
                 ucrBase.iHelpTopicID = 439
             Case Else
                 Me.Width = iBasicWidth
+                ucrBase.iHelpTopicID = 14
         End Select
     End Sub
 End Class

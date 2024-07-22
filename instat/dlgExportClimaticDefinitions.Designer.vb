@@ -38,16 +38,12 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkIncludeSummaryData = New instat.ucrCheck()
         Me.grpSummaries = New System.Windows.Forms.GroupBox()
         Me.ucrChkMonthlyTemp = New instat.ucrCheck()
-        Me.lblMaxTemp = New System.Windows.Forms.Label()
         Me.lblCropData = New System.Windows.Forms.Label()
         Me.lblDataByYearMonth = New System.Windows.Forms.Label()
         Me.lblDataByYear = New System.Windows.Forms.Label()
         Me.lblRain = New System.Windows.Forms.Label()
-        Me.lblMinTemp = New System.Windows.Forms.Label()
         Me.lblData = New System.Windows.Forms.Label()
         Me.ucrReceiverRain = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMinTemp = New instat.ucrReceiverSingle()
-        Me.ucrReceiverMaxTemp = New instat.ucrReceiverSingle()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrSelectorExportDefinitions = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -241,16 +237,6 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrChkMonthlyTemp.Size = New System.Drawing.Size(220, 52)
         Me.ucrChkMonthlyTemp.TabIndex = 4
         '
-        'lblMaxTemp
-        '
-        Me.lblMaxTemp.AutoSize = True
-        Me.lblMaxTemp.Location = New System.Drawing.Point(498, 688)
-        Me.lblMaxTemp.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblMaxTemp.Name = "lblMaxTemp"
-        Me.lblMaxTemp.Size = New System.Drawing.Size(86, 20)
-        Me.lblMaxTemp.TabIndex = 23
-        Me.lblMaxTemp.Text = "Max Temp:"
-        '
         'lblCropData
         '
         Me.lblCropData.AutoSize = True
@@ -291,16 +277,6 @@ Partial Class dlgExportClimaticDefinitions
         Me.lblRain.TabIndex = 19
         Me.lblRain.Text = "Rain:"
         '
-        'lblMinTemp
-        '
-        Me.lblMinTemp.AutoSize = True
-        Me.lblMinTemp.Location = New System.Drawing.Point(498, 627)
-        Me.lblMinTemp.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblMinTemp.Name = "lblMinTemp"
-        Me.lblMinTemp.Size = New System.Drawing.Size(82, 20)
-        Me.lblMinTemp.TabIndex = 21
-        Me.lblMinTemp.Text = "Min Temp:"
-        '
         'lblData
         '
         Me.lblData.AutoSize = True
@@ -323,32 +299,6 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrReceiverRain.strNcFilePath = ""
         Me.ucrReceiverRain.TabIndex = 20
         Me.ucrReceiverRain.ucrSelector = Nothing
-        '
-        'ucrReceiverMinTemp
-        '
-        Me.ucrReceiverMinTemp.AutoSize = True
-        Me.ucrReceiverMinTemp.frmParent = Me
-        Me.ucrReceiverMinTemp.Location = New System.Drawing.Point(498, 652)
-        Me.ucrReceiverMinTemp.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMinTemp.Name = "ucrReceiverMinTemp"
-        Me.ucrReceiverMinTemp.Selector = Nothing
-        Me.ucrReceiverMinTemp.Size = New System.Drawing.Size(180, 31)
-        Me.ucrReceiverMinTemp.strNcFilePath = ""
-        Me.ucrReceiverMinTemp.TabIndex = 22
-        Me.ucrReceiverMinTemp.ucrSelector = Nothing
-        '
-        'ucrReceiverMaxTemp
-        '
-        Me.ucrReceiverMaxTemp.AutoSize = True
-        Me.ucrReceiverMaxTemp.frmParent = Me
-        Me.ucrReceiverMaxTemp.Location = New System.Drawing.Point(498, 713)
-        Me.ucrReceiverMaxTemp.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMaxTemp.Name = "ucrReceiverMaxTemp"
-        Me.ucrReceiverMaxTemp.Selector = Nothing
-        Me.ucrReceiverMaxTemp.Size = New System.Drawing.Size(180, 31)
-        Me.ucrReceiverMaxTemp.strNcFilePath = ""
-        Me.ucrReceiverMaxTemp.TabIndex = 24
-        Me.ucrReceiverMaxTemp.ucrSelector = Nothing
         '
         'ucrReceiverData
         '
@@ -378,7 +328,7 @@ Partial Class dlgExportClimaticDefinitions
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(6, 801)
+        Me.ucrBase.Location = New System.Drawing.Point(6, 684)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(615, 92)
@@ -427,7 +377,7 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.lblExport.AutoSize = True
         Me.lblExport.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExport.Location = New System.Drawing.Point(14, 762)
+        Me.lblExport.Location = New System.Drawing.Point(14, 645)
         Me.lblExport.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblExport.Name = "lblExport"
         Me.lblExport.Size = New System.Drawing.Size(57, 20)
@@ -437,7 +387,7 @@ Partial Class dlgExportClimaticDefinitions
         'cmdChooseFile
         '
         Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChooseFile.Location = New System.Drawing.Point(384, 755)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(384, 638)
         Me.cmdChooseFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.Size = New System.Drawing.Size(120, 35)
@@ -451,7 +401,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrInputTokenPath.AutoSize = True
         Me.ucrInputTokenPath.IsMultiline = False
         Me.ucrInputTokenPath.IsReadOnly = False
-        Me.ucrInputTokenPath.Location = New System.Drawing.Point(84, 758)
+        Me.ucrInputTokenPath.Location = New System.Drawing.Point(84, 641)
         Me.ucrInputTokenPath.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputTokenPath.Name = "ucrInputTokenPath"
         Me.ucrInputTokenPath.Size = New System.Drawing.Size(287, 32)
@@ -471,7 +421,7 @@ Partial Class dlgExportClimaticDefinitions
         'lblDefinitionsID
         '
         Me.lblDefinitionsID.AutoSize = True
-        Me.lblDefinitionsID.Location = New System.Drawing.Point(498, 197)
+        Me.lblDefinitionsID.Location = New System.Drawing.Point(503, 198)
         Me.lblDefinitionsID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDefinitionsID.Name = "lblDefinitionsID"
         Me.lblDefinitionsID.Size = New System.Drawing.Size(109, 20)
@@ -495,7 +445,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(688, 885)
+        Me.ClientSize = New System.Drawing.Size(688, 772)
         Me.Controls.Add(Me.lblDefinitionsID)
         Me.Controls.Add(Me.ucrInputDefinitionsID)
         Me.Controls.Add(Me.cmdDefine)
@@ -512,16 +462,12 @@ Partial Class dlgExportClimaticDefinitions
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.ucrChkIncludeSummaryData)
         Me.Controls.Add(Me.grpSummaries)
-        Me.Controls.Add(Me.lblMaxTemp)
         Me.Controls.Add(Me.lblCropData)
         Me.Controls.Add(Me.lblDataByYearMonth)
         Me.Controls.Add(Me.lblDataByYear)
         Me.Controls.Add(Me.lblRain)
-        Me.Controls.Add(Me.lblMinTemp)
         Me.Controls.Add(Me.lblData)
         Me.Controls.Add(Me.ucrReceiverRain)
-        Me.Controls.Add(Me.ucrReceiverMinTemp)
-        Me.Controls.Add(Me.ucrReceiverMaxTemp)
         Me.Controls.Add(Me.ucrReceiverData)
         Me.Controls.Add(Me.ucrSelectorExportDefinitions)
         Me.Controls.Add(Me.ucrBase)
@@ -558,16 +504,12 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents ucrChkIncludeSummaryData As ucrCheck
     Friend WithEvents grpSummaries As GroupBox
     Friend WithEvents ucrChkMonthlyTemp As ucrCheck
-    Friend WithEvents lblMaxTemp As Label
     Friend WithEvents lblCropData As Label
     Friend WithEvents lblDataByYearMonth As Label
     Friend WithEvents lblDataByYear As Label
     Friend WithEvents lblRain As Label
-    Friend WithEvents lblMinTemp As Label
     Friend WithEvents lblData As Label
     Friend WithEvents ucrReceiverRain As ucrReceiverSingle
-    Friend WithEvents ucrReceiverMinTemp As ucrReceiverSingle
-    Friend WithEvents ucrReceiverMaxTemp As ucrReceiverSingle
     Friend WithEvents ucrReceiverData As ucrReceiverSingle
     Friend WithEvents ucrSelectorExportDefinitions As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons

@@ -520,7 +520,6 @@ Public Class dlgTransformClimatic
         clsRRaindayUpperOperator.SetOperation("<=")
         clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=1)
         clsRRaindayLowerOperator.SetOperation(">=")
-        clsRRaindayLowerOperator.AddParameter("min", 0.85, iPosition:=1)
 
         clsRRaindayOrOperator.SetOperation("|")
         clsRRaindayOrOperator.AddParameter("upper", clsROperatorParameter:=clsGreaterThanOperator, iPosition:=0)
@@ -894,11 +893,9 @@ Public Class dlgTransformClimatic
         clsRTransformCountSpellSub.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False, iPosition:=0)
 
         clsTransformManipulationsFunc.SetRCommand("list")
-        clsTransformManipulationsFunc.AddParameter("group_by_year", clsRFunctionParameter:=clsGroupByYear, bIncludeArgumentName:=False, iPosition:=0)
 
         clsRTransform.SetRCommand("instat_calculation$new")
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1) ' changes depending on the rdo
         clsRTransform.AddParameter("result_name", Chr(34) & "count" & Chr(34), iPosition:=2)
         clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
         clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc, iPosition:=5)
@@ -930,8 +927,6 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddAdditionalCodeParameterPair(clsIfElseRainMaxFunction, New RParameter("no", 2), iAdditionalPairNo:=12)
         ucrNudSumOver.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("n", 1), iAdditionalPairNo:=1)
         ucrInputSum.AddAdditionalCodeParameterPair(clsRasterFuction, New RParameter("fun", 2), iAdditionalPairNo:=1)
-        ucrInputSpellUpper.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("max", 1), iAdditionalPairNo:=1)
-        ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("min", 1), iAdditionalPairNo:=1)
         ucrReceiverTMin.AddAdditionalCodeParameterPair(clsTMeanAddOperator, New RParameter("tmin", 1), iAdditionalPairNo:=1)
         ucrReceiverTMax.AddAdditionalCodeParameterPair(clsTMeanAddOperator, New RParameter("tmax", 0), iAdditionalPairNo:=1)
         ucrReceiverTMean.AddAdditionalCodeParameterPair(clsGrowingDegreDiffOperator, New RParameter("tmean", 0), iAdditionalPairNo:=1)
@@ -947,6 +942,7 @@ Public Class dlgTransformClimatic
         ucrInputEvaporation.AddAdditionalCodeParameterPair(clsWBMaxEvapOperator, New RParameter("value", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverEvap.AddAdditionalCodeParameterPair(clsWBMaxTailFunction1, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverEvap.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrSaveColumn.AddAdditionalCodeParameterPair(clsEndSeasonWBCalc, New RParameter("result_name", 2), iAdditionalPairNo:=1)
 
         ' Moving
         ucrNudSumOver.SetRCode(clsRMovingFunction, bReset)
@@ -961,7 +957,7 @@ Public Class dlgTransformClimatic
 
         ' Count
         ucrNudCountOver.SetRCode(clsRCountFunction, bReset)
-        ucrInputSpellLower.SetRCode(clsRRaindayLowerOperator, bReset)
+        ucrInputSpellLower.SetRCode(clsLessThanOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsRRaindayUpperOperator, bReset)
 
         ' Water Balance
@@ -1106,6 +1102,7 @@ Public Class dlgTransformClimatic
         ChangeFunctions()
         AddRemoveMeanOperator()
         ShowGroups()
+        InputConditionOptions()
     End Sub
 
     Private Sub DegreeFunctions()
@@ -1217,7 +1214,6 @@ Public Class dlgTransformClimatic
 
     Private Sub RainDays()
         clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")", iPosition:=3)
-        clsRTransform.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames & ")", iPosition:=3)
     End Sub
 
     Private Sub ucrSelectorTransform_ControlValueChanged(ucrchangedControl As ucrCore) Handles ucrSelectorTransform.ControlValueChanged
@@ -1232,7 +1228,7 @@ Public Class dlgTransformClimatic
         RainfallChange()
     End Sub
 
-    Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
+    Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellLower.ControlValueChanged, ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
         InputConditionOptions()
     End Sub
 
@@ -1282,25 +1278,33 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub CumulativeFunctions()
-        Select Case ucrInputCumulative.GetText
-            Case "Sum"
-                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsCumulativeSum, iPosition:=1)
-            Case "Maximum"
-                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsCumulativeMaximum, iPosition:=1)
-            Case "Minimum"
-                clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsCumulativeMinimum, iPosition:=1)
-        End Select
+        If rdoCumulative.Checked Then
+            Select Case ucrInputCumulative.GetText
+                Case "Sum"
+                    clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsCumulativeSum, iPosition:=1)
+                Case "Maximum"
+                    clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsCumulativeMaximum, iPosition:=1)
+                Case "Minimum"
+                    clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsCumulativeMinimum, iPosition:=1)
+            End Select
+        ElseIf rdoCount.Checked Then
+            clsRTransform.AddParameter("function_exp", clsRFunctionParameter:=clsRCountFunction, iPosition:=1) ' changes depending on the rdo
+        End If
     End Sub
 
     Private Sub CumulativeColNames()
-        Select Case ucrInputCumulative.GetText
-            Case "Sum"
-                ucrSaveColumn.SetName("cumsum")
-            Case "Maximum"
-                ucrSaveColumn.SetName("cummax")
-            Case "Minimum"
-                ucrSaveColumn.SetName("cummin")
-        End Select
+        If rdoCumulative.Checked Then
+            Select Case ucrInputCumulative.GetText
+                Case "Sum"
+                    ucrSaveColumn.SetName("cumsum")
+                Case "Maximum"
+                    ucrSaveColumn.SetName("cummax")
+                Case "Minimum"
+                    ucrSaveColumn.SetName("cummin")
+            End Select
+        ElseIf rdoCount.Checked Then
+            ucrSaveColumn.SetName("count")
+        End If
     End Sub
 
     Private Sub ucrInputCumulative_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCumulative.ControlValueChanged
