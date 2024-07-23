@@ -662,6 +662,8 @@ Public Class ucrDataView
             Else
                 Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.CheckHasLabels(strColumn)
                 If bCheckLabels Then
+                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                Else
                     frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
                     frmConvertToNumeric.SetColumnName(strColumn)
                     frmConvertToNumeric.CheckLabels(bCheckLabels)
@@ -676,8 +678,6 @@ Public Class ucrDataView
                         Case DialogResult.Cancel
                             Continue For
                     End Select
-                Else
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
                 End If
                 frmConvertToNumeric.Close()
             End If
@@ -769,16 +769,16 @@ Public Class ucrDataView
         panelSectionRecent.Visible = panelRecentMenuItems.Controls.Count > 0
     End Sub
 
-    Private Sub linkHelpIntroduction_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpIntroduction.LinkClicked
+    Private Sub linkHelpIntroduction_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "0")
     End Sub
 
-    Private Sub linkHelpRpackages_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRpackages.LinkClicked
+    Private Sub linkHelpRpackages_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         dlgHelpVignettes.ShowDialog()
     End Sub
 
-    Private Sub linkHelpRInstatWebsite_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRInstatWebsite.LinkClicked
-        Process.Start("http://r-instat.org/")
+    Private Sub linkHelpRInstatWebsite_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRInstatResourcesSite.LinkClicked
+        Process.Start("https://ecampus.r-instat.org/course/view.php?id=14")
     End Sub
 
     Private Sub rowContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles rowContextMenuStrip.Opening
@@ -1023,15 +1023,15 @@ Public Class ucrDataView
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "71")
     End Sub
 
-    Private Sub linkHelpPrepareMenu_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpPrepareMenu.LinkClicked
+    Private Sub linkHelpPrepareMenu_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "9")
     End Sub
 
-    Private Sub linkHelpClimaticMenu_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpClimaticMenu.LinkClicked
+    Private Sub linkHelpClimaticMenu_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "19")
     End Sub
 
-    Private Sub linkStartSwapDataScriptWindow_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartSwapDataScriptWindow.LinkClicked
+    Private Sub linkStartPasteScriptfromClipboard_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartPasteScriptfromClipboard.LinkClicked
         frmMain.mnuViewSwapDataAndMetadata.Enabled = frmMain.mnuViewSwapDataAndScript.Checked
         frmMain.mnuViewSwapDataAndScript.Checked = Not frmMain.mnuViewSwapDataAndScript.Checked
         frmMain.UpdateSwapDataAndScript()
@@ -1049,4 +1049,5 @@ Public Class ucrDataView
     Private Sub linkStartPasteData_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartPasteData.LinkClicked
         dlgPasteNewColumns.ShowDialog()
     End Sub
+
 End Class

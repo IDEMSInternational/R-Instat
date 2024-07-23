@@ -23,6 +23,8 @@ Public Class ucrCalculator
     Public Event DataFrameChanged()
     Public Event TryCommadClick()
     Public Event ControlValueChanged()
+    Public Event ClearClick()
+    Public Event CheckBoxClick()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsHelp As New RFunction
@@ -64,6 +66,8 @@ Public Class ucrCalculator
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Transform", "Summary", "Probability", "Factor", "Text/Strings (Character Columns)", "Dates/Times", "Circular", "Wakefield", "Goodness of Fit", "List", "Complex", "Integer", "Functions"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
+
+        ucrChkStoreScalar.Text = "Store Scalar"
 
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
@@ -711,6 +715,11 @@ Public Class ucrCalculator
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
         ucrReceiverForCalculation.Clear()
+        RaiseEvent ClearClick()
+    End Sub
+
+    Private Sub ucrChkStoreScalar_Click(sender As Object, e As EventArgs) Handles ucrChkStoreScalar.Click
+        RaiseEvent CheckBoxClick()
     End Sub
 
     Private Sub cmdLesser_Click(sender As Object, e As EventArgs) Handles cmdLesser.Click
@@ -763,7 +772,7 @@ Public Class ucrCalculator
                 grpList.Visible = False
                 cmdRhelpList.Visible = False
                 cmdRhelpFunctions.Visible = True
-                Me.Size = New Size(iBasicWidth * 1.37, iBaseHeight)
+                Me.Size = New Size(iBasicWidth * 1.4, iBaseHeight)
             Case "Maths"
                 strPackageName = "stats"
                 grpFunctions.Visible = False
@@ -1335,7 +1344,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMiss_Click(sender As Object, e As EventArgs) Handles cmdMiss.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(is.na(x= ))", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(is.na(x= ))", 3)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(is.na( ))", 3)
         End If
@@ -1469,7 +1478,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_pad(string = , width = , side = c('left', 'right', 'both') , pad = )", 56)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_pad()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_pad( )", 2)
         End If
     End Sub
 
@@ -2015,7 +2024,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdMRank_Click(sender As Object, e As EventArgs) Handles cmdMRank.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::min_rank()", 1)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::min_rank( )", 2)
     End Sub
 
     Private Sub cmdmovemean_Click(sender As Object, e As EventArgs) Handles cmdMovMean.Click
@@ -2028,9 +2037,9 @@ Public Class ucrCalculator
 
     Private Sub cmdCumMean_Click(sender As Object, e As EventArgs) Handles cmdCumMean.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::cummean(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::cummean(x= )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::cummean()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::cummean( )", 2)
         End If
     End Sub
 
@@ -2198,11 +2207,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDistinct_Click(sender As Object, e As EventArgs) Handles cmdDistinct.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::n_distinct()", 1)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::n_distinct( )", 2)
     End Sub
 
     Private Sub cmdAnyDup_Click(sender As Object, e As EventArgs) Handles cmdAnyDup.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("anyDuplicated()", 1)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("anyDuplicated( )", 2)
     End Sub
 
     Private Sub cmdCor_Click(sender As Object, e As EventArgs) Handles cmdCor.Click
@@ -3650,7 +3659,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rho.circular(x = , na.rm = TRUE)", 16)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rho.circular()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("circular::rho.circular( )", 2)
         End If
     End Sub
 
@@ -4438,7 +4447,7 @@ Public Class ucrCalculator
 
     Private Sub cmdNextPrime_Click(sender As Object, e As EventArgs) Handles cmdNextPrime.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::nextprime(n = )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::nextprime(n= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("gmp::nextprime( )", 2)
         End If
@@ -4510,7 +4519,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("R.utils::intToHex(x= )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("R.utils::intToHex()", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("R.utils::intToHex( )", 2)
         End If
     End Sub
 
@@ -4682,7 +4691,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRoman_Click(sender As Object, e As EventArgs) Handles cmdRoman.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("utils::as.roman(x= )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("utils::as.roman(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("utils::as.roman( )", 2)
         End If
@@ -5433,7 +5442,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMod_Click(sender As Object, e As EventArgs) Handles cmdMod.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod(z = )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod(z= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("Mod( )", 2)
         End If
@@ -5461,7 +5470,7 @@ Public Class ucrCalculator
 
     Private Sub cmdAsComplex_Click(sender As Object, e As EventArgs) Handles cmdAsComplex.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x = )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.complex( )", 2)
         End If

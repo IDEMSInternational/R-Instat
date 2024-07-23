@@ -96,7 +96,7 @@ Public Class dlgFourVariableModelling
         ucrSaveModel.SetPrefix("reg")
         ucrSaveModel.SetDataFrameSelector(ucrSelectorFourVariableModelling.ucrAvailableDataFrames)
         ucrSaveModel.SetSaveTypeAsModel()
-        ucrSaveModel.SetCheckBoxText("Save Model")
+        ucrSaveModel.SetCheckBoxText("Store Model")
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 

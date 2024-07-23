@@ -60,7 +60,7 @@ Public Class dlgModelling
         ucrSaveResult.SetPrefix("model")
         ucrSaveResult.SetIsComboBox()
         ucrSaveResult.SetSaveTypeAsModel()
-        ucrSaveResult.SetCheckBoxText("Save Model")
+        ucrSaveResult.SetCheckBoxText("Store Model")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorModelling.ucrAvailableDataFrames)
 

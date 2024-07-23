@@ -89,7 +89,7 @@ Public Class dlgPrincipalComponentAnalysis
         ucrSaveResult.SetPrefix("pca")
         ucrSaveResult.SetSaveTypeAsModel()
         ucrSaveResult.SetDataFrameSelector(ucrSelectorPCA.ucrAvailableDataFrames)
-        ucrSaveResult.SetCheckBoxText("Save Result")
+        ucrSaveResult.SetCheckBoxText("Store Result")
         ucrSaveResult.SetIsComboBox()
         ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
 
