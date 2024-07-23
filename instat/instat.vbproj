@@ -3206,6 +3206,9 @@
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimsoft.resx">
+      <DependentUpon>sdgClimsoft.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
     </EmbeddedResource>

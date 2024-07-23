@@ -109,9 +109,16 @@ Public Class dlgClimSoft
         ucrCboQCStatus.SetLinkedDisplayControl(lblSelectQCStatus)
         '---------------------------------------
 
+        'Unstack data
+        '---------------------------------------
+        ucrChKUnstackData.SetText("Unstack Data")
+        ucrChKUnstackData.SetParameter(New RParameter("unstack_data", 13))
+        ucrChKUnstackData.SetRDefault("FALSE")
+        '---------------------------------------
+
         'date range
         '---------------------------------------
-        ucrChkDataDate.SetText("Select Data Date")
+        ucrChkDataDate.SetText("Select Dates")
 
         ucrDtpStartDataDate.SetParameter(New RParameter("start_date", 6))
         ucrDtpStartDataDate.SetParameterIsRDate()
@@ -147,7 +154,7 @@ Public Class dlgClimSoft
         ucrPnlOptions.AddFunctionNamesCondition(rdoMetadata, frmMain.clsRLink.strInstatDataObject & "$import_climsoft_metadata")
 
 
-        ucrPnlOptions.AddToLinkedControls({ucrCboTable, ucrCboQCStatus, ucrSelectorForClimSoft, ucrReceiverMultipleStations, ucrReceiverMultipleElements, ucrCboStations, ucrCboElements, ucrChkDataDate},
+        ucrPnlOptions.AddToLinkedControls({ucrCboTable, ucrCboQCStatus, ucrSelectorForClimSoft, ucrReceiverMultipleStations, ucrReceiverMultipleElements, ucrCboStations, ucrCboElements, ucrChkDataDate, ucrChKUnstackData},
                                           {rdoData}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkImportStationsMetadata, ucrChkImportElementsMetadata, ucrChkImportFlagsMetadata},
                                         {rdoMetadata}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
@@ -163,7 +170,7 @@ Public Class dlgClimSoft
         'data command
         '---------------------------------------
         clsRImportClimsoftData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_climsoft_data")
-        clsRImportClimsoftData.AddParameter(strParameterName:="table", strParameterValue:=Chr(34) & "observationinitial" & Chr(34), iPosition:=0)
+        clsRImportClimsoftData.AddParameter(strParameterName:="table", strParameterValue:=Chr(34) & "observationfinal" & Chr(34), iPosition:=0)
         clsRImportClimsoftData.AddParameter(strParameterName:="station_filter_column", strParameterValue:=Chr(34) & "stationId" & Chr(34), iPosition:=1)
         clsRImportClimsoftData.AddParameter(strParameterName:="element_filter_column", strParameterValue:=Chr(34) & "elementId" & Chr(34), iPosition:=3)
         '---------------------------------------
@@ -192,6 +199,8 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.SetRCode(clsRImportClimsoftData, bReset)
 
         ucrCboTable.SetRCode(clsRImportClimsoftData, bReset)
+
+        ucrChKUnstackData.SetRCode(clsRImportClimsoftData, bReset)
 
         ucrCboQCStatus.SetRCode(clsRImportClimsoftData, bReset)
 

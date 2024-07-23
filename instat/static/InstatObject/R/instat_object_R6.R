@@ -1867,7 +1867,7 @@ DataBook$set("public", "get_db_table_row_count", function(tableName, query_condi
 #Imports Climsoft metadata.
 DataBook$set("public", "import_climsoft_metadata", function(import_stations = FALSE, import_elements = FALSE, import_flags = FALSE) {
   
-  if(!import_stations || !import_elements){
+  if(!import_stations && !import_elements){
     stop("No metadata selected for import")
   }
   
@@ -1918,17 +1918,16 @@ DataBook$set("public", "import_climsoft_metadata", function(import_stations = FA
   
 })
 
-
-#imports data from climsoft observation tables; initial or final.
+#imports data from Climsoft observation tables; initial or final.
 #imports selected stations and elements metadata
 DataBook$set("public", "import_climsoft_data", function(tableName,
                                                         station_filter_column, stations = c(), 
                                                         element_filter_column, elements = c(),
-                                                        qc_status = -1, start_date = NULL, end_date = NULL,
-                                                        include_station_name = TRUE, include_element_abbreviation = TRUE, include_qc_status = TRUE,
-                                                        include_acquisition_type = TRUE, include_flag = TRUE, include_entry_form = TRUE, 
-                                                        include_qc_log = TRUE, include_captured_by = TRUE, include_level = TRUE,
-                                                        import_selected_stations_metadata = TRUE, import_selected_elements_metadata = TRUE) {
+                                                        qc_status = -1, start_date = NULL, end_date = NULL, unstack_data = FALSE,
+                                                        include_station_id = FALSE, include_element_id = FALSE, include_element_name = FALSE, 
+                                                        include_acquisition_type = FALSE, include_level = FALSE, include_entry_form = FALSE, include_captured_by = FALSE, 
+                                                        include_qc_status = FALSE, include_qc_log = FALSE, include_flag = FALSE, 
+                                                        import_selected_stations_metadata = FALSE, import_selected_elements_metadata = FALSE) {
   #connection and parameter checks
   #--------------------------------
   con <- self$get_database_connection()
@@ -1951,16 +1950,24 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   
   #selects
   #--------------------------------
-  sql_select <- paste0(tableName,".recordedFrom AS station_id") 
+
+  sql_select<- ""
   
-  if(include_station_name){
+  if(include_station_id){
+    sql_select <- paste0(tableName,".recordedFrom AS station_id") 
     sql_select <-paste0(sql_select,", station.stationName AS station_name") 
+  }else{
+    sql_select <-"station.stationName AS station_name"
   }
   
-  sql_select <-paste0(sql_select, ", ", tableName,".describedBy AS element_id") 
+  if(include_element_id){
+    sql_select <-paste0(sql_select, ", ", tableName,".describedBy AS element_id") 
+  }
   
-  if(include_element_abbreviation){
-    sql_select <-paste0(sql_select,", obselement.abbreviation AS element_abbrv") 
+  sql_select <-paste0(sql_select,", obselement.abbreviation AS element_abbrv")
+  
+  if(include_element_name){
+    sql_select <-paste0(sql_select,", obselement.elementName AS element_name")
   }
   
   if(include_acquisition_type){
@@ -2045,20 +2052,29 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   observations_data_name <- next_default_item("observations_data", self$get_data_names(), include_index = FALSE)
   data_list[[observations_data_name]] <- DBI::dbGetQuery(con,paste0(sql_select, sql_filter, sql_order_by))
   
+  if(unstack_data){
+    observations_unstacked_data_name <- next_default_item("observations_unstacked_data", self$get_data_names(), include_index = FALSE)
+    data_list[[observations_unstacked_data_name]] <- reshape2::dcast(data = data_list[[observations_data_name]], formula = station_name + date_time ~ element_abbrv, value.var = "value")
+  }
+  
   
   self$import_data(data_tables = data_list)
   #--------------------------------
   
   #transform imported data
   #--------------------------------
-  self$convert_column_to_type(data_name = observations_data_name, col_names = c("station_id","element_id"), to_type = "factor")
+  self$convert_column_to_type(data_name = observations_data_name, col_names = c("station_name","element_abbrv"), to_type = "factor")
   
-  if(include_station_name){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "station_name", to_type = "factor")
+  if(include_station_id){
+    self$convert_column_to_type(data_name = observations_data_name, col_names = "station_id", to_type = "factor")
   }
   
-  if(include_element_abbreviation){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "element_abbrv", to_type = "factor")
+  if(include_element_id){
+    self$convert_column_to_type(data_name = observations_data_name, col_names = "element_id", to_type = "factor")
+  }
+  
+  if(include_element_name){
+    self$convert_column_to_type(data_name = observations_data_name, col_names = "element_name", to_type = "factor")
   }
   
   if(include_qc_status){
@@ -2083,13 +2099,13 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   
   #todo. should this be done at this point?? Keeping in mind that we may have hourly data
   #create a plain date column from the observation data datetime column values
-  obsdate <- self$get_columns_from_data(data_name = observations_data_name, col_names = "date_time", use_current_filter = FALSE)
-  self$add_columns_to_data(data_name = observations_data_name, col_name = "date", col_data = as.Date(x = obsdate), before = FALSE, adjacent_column = "date_time")
+  #obsdate <- self$get_columns_from_data(data_name = observations_data_name, col_names = "date_time", use_current_filter = FALSE)
+  #self$add_columns_to_data(data_name = observations_data_name, col_name = "date", col_data = as.Date(x = obsdate), before = FALSE, adjacent_column = "date_time")
   #--------------------------------
   
 })
 
-#TODO. Deprecated. Delete this after after deleting the import from climsoft wizard dialog
+#TODO. Deprecated. Delete this after after deleting the import from Climsoft wizard dialog
 DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "stationId", stations = c(), elementfiltercolumn = "elementId", elements = c(), include_observation_data = FALSE, include_observation_flags = FALSE, unstack_data = FALSE, include_elements_info = FALSE, start_date = NULL, end_date = NULL) {
   #need to perform checks here
   con <- self$get_database_connection()
