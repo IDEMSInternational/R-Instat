@@ -186,7 +186,6 @@ Public Class dlgImportFromRapidPro
         clsGetFlowFunction.AddParameter("flatten", "TRUE", iPosition:=2)
 
         clsConvertToFactor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
-        clsConvertToFactor.AddParameter("data_name", Chr(34) & "flow_metadata" & Chr(34)) 'TODO: this to be the name in the ucrSave
         clsConvertToFactor.AddParameter("col_names", Chr(34) & "name" & Chr(34), iPosition:=1)
         clsConvertToFactor.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=3)
 
@@ -313,5 +312,9 @@ Public Class dlgImportFromRapidPro
         sdgFlowsToImport.SetRFunction(clsNewGetFlowFunction:=clsGetFlowFunction, clsNewModifyOperation:=clsModifyOperation, clsNewClosingOperator:=clsClosingOperator, clsNewOpeningOperator:=clsOpeningOperator, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgFlowsToImport.ShowDialog()
+    End Sub
+
+    Private Sub ucrSaveDataframeName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveDataframeName.ControlValueChanged
+        clsConvertToFactor.AddParameter("data_name", Chr(34) & ucrSaveDataframeName.GetText & Chr(34)) 'TODO: this to be the name in the ucrSave
     End Sub
 End Class
