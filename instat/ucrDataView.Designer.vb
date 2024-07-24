@@ -758,10 +758,10 @@ Partial Class ucrDataView
         Me.linkHelpData.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkHelpData.Location = New System.Drawing.Point(5, 47)
         Me.linkHelpData.Name = "linkHelpData"
-        Me.linkHelpData.Size = New System.Drawing.Size(30, 13)
+        Me.linkHelpData.Size = New System.Drawing.Size(39, 13)
         Me.linkHelpData.TabIndex = 12
         Me.linkHelpData.TabStop = True
-        Me.linkHelpData.Text = "Data"
+        Me.linkHelpData.Text = "Data..."
         '
         'linkHelpGettingStarted
         '
@@ -771,10 +771,10 @@ Partial Class ucrDataView
         Me.linkHelpGettingStarted.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkHelpGettingStarted.Location = New System.Drawing.Point(5, 30)
         Me.linkHelpGettingStarted.Name = "linkHelpGettingStarted"
-        Me.linkHelpGettingStarted.Size = New System.Drawing.Size(78, 13)
+        Me.linkHelpGettingStarted.Size = New System.Drawing.Size(87, 13)
         Me.linkHelpGettingStarted.TabIndex = 11
         Me.linkHelpGettingStarted.TabStop = True
-        Me.linkHelpGettingStarted.Text = "Getting Started"
+        Me.linkHelpGettingStarted.Text = "Getting Started..."
         '
         'lblHelp
         '
