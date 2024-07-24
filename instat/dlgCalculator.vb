@@ -262,7 +262,6 @@ Public Class dlgCalculator
     Private Sub SetHelpOptions()
         Select Case enumCalculatorMode
             Case CalculatorMode.Prepare
-                ucrCalc.ucrInputCalOptions.SetName("Basic")
                 ucrBase.iHelpTopicID = 14
             Case CalculatorMode.Structured
                 ucrCalc.ucrInputCalOptions.SetName("Circular")
