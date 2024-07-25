@@ -684,7 +684,7 @@ Partial Class ucrDataView
         Me.panelSectionAdvanced.Controls.Add(Me.lblAdvanced)
         Me.panelSectionAdvanced.Controls.Add(Me.linkStartRestoreBackup)
         Me.panelSectionAdvanced.Controls.Add(Me.linkStartPasteScriptfromClipboard)
-        Me.panelSectionAdvanced.Location = New System.Drawing.Point(27, 410)
+        Me.panelSectionAdvanced.Location = New System.Drawing.Point(27, 412)
         Me.panelSectionAdvanced.Name = "panelSectionAdvanced"
         Me.panelSectionAdvanced.Size = New System.Drawing.Size(374, 83)
         Me.panelSectionAdvanced.TabIndex = 12
@@ -758,10 +758,10 @@ Partial Class ucrDataView
         Me.linkHelpData.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkHelpData.Location = New System.Drawing.Point(5, 47)
         Me.linkHelpData.Name = "linkHelpData"
-        Me.linkHelpData.Size = New System.Drawing.Size(30, 13)
+        Me.linkHelpData.Size = New System.Drawing.Size(39, 13)
         Me.linkHelpData.TabIndex = 12
         Me.linkHelpData.TabStop = True
-        Me.linkHelpData.Text = "Data"
+        Me.linkHelpData.Text = "Data..."
         '
         'linkHelpGettingStarted
         '
@@ -771,10 +771,10 @@ Partial Class ucrDataView
         Me.linkHelpGettingStarted.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkHelpGettingStarted.Location = New System.Drawing.Point(5, 30)
         Me.linkHelpGettingStarted.Name = "linkHelpGettingStarted"
-        Me.linkHelpGettingStarted.Size = New System.Drawing.Size(78, 13)
+        Me.linkHelpGettingStarted.Size = New System.Drawing.Size(87, 13)
         Me.linkHelpGettingStarted.TabIndex = 11
         Me.linkHelpGettingStarted.TabStop = True
-        Me.linkHelpGettingStarted.Text = "Getting Started"
+        Me.linkHelpGettingStarted.Text = "Getting Started..."
         '
         'lblHelp
         '
@@ -842,7 +842,7 @@ Partial Class ucrDataView
         Me.linkStartNewDataFrame.AutoSize = True
         Me.linkStartNewDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkStartNewDataFrame.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartNewDataFrame.Location = New System.Drawing.Point(5, 47)
+        Me.linkStartNewDataFrame.Location = New System.Drawing.Point(5, 30)
         Me.linkStartNewDataFrame.Name = "linkStartNewDataFrame"
         Me.linkStartNewDataFrame.Size = New System.Drawing.Size(96, 13)
         Me.linkStartNewDataFrame.TabIndex = 3
@@ -855,7 +855,7 @@ Partial Class ucrDataView
         Me.linkStartOpenFile.AutoSize = True
         Me.linkStartOpenFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkStartOpenFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartOpenFile.Location = New System.Drawing.Point(5, 30)
+        Me.linkStartOpenFile.Location = New System.Drawing.Point(5, 47)
         Me.linkStartOpenFile.Name = "linkStartOpenFile"
         Me.linkStartOpenFile.Size = New System.Drawing.Size(90, 13)
         Me.linkStartOpenFile.TabIndex = 4
