@@ -12,8 +12,6 @@
 
         ucrRowExpression.setup(strDataFrameName)
 
-        Dim lstTabStyleForRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_stub", clsOperator)
-
         ' Clear and Set up the data grid with contents
         dataGridFormats.Rows.Clear()
         SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_stub", clsOperator))
@@ -34,13 +32,7 @@
             dataGridFormats.Rows.Add(row)
 
         Next
-
-        'ucrRowExpression.ucrInputExpression.con
     End Sub
-
-    'Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowExpression.ucrInputExpression.ControlContentsChanged
-    '    btnEnterStyle.Enabled = Not ucrReceiverSingleCol.IsEmpty AndAlso Not ucrInputRows.IsEmpty
-    'End Sub
 
     Private Sub btnEnterStyle_Click(sender As Object, e As EventArgs) Handles btnEnterStyle.Click
 
@@ -51,14 +43,16 @@
 
         Dim clsLocationsRFunction As New RFunction
         clsLocationsRFunction.SetPackageName("gt")
-        clsLocationsRFunction.SetRCommand("cells_body")
-        'clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=ucrReceiverSingleCol.GetVariableNames(bWithQuotes:=False), iNewPosition:=0))
-        'clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=ucrInputRows.GetText, iNewPosition:=1))
+        clsLocationsRFunction.SetRCommand("cells_stub")
+
+        If Not ucrRowExpression.IsEmpty Then
+            clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=ucrRowExpression.GetValue(), iNewPosition:=1))
+        End If
 
         Dim clsTabStyleRFunction As RFunction = clsTablesUtils.GetNewStyleRFunction(clsListStyleRFunction, clsLocationsRFunction)
 
         ' Create parameter with unique name
-        Dim clsRParam As New RParameter(strParameterName:="tab_style_cells_param" & (dataGridFormats.Rows.Count + 1), strParamValue:=clsTabStyleRFunction, bNewIncludeArgumentName:=False)
+        Dim clsRParam As New RParameter(strParameterName:="tab_style_stub_param" & (dataGridFormats.Rows.Count + 1), strParamValue:=clsTabStyleRFunction, bNewIncludeArgumentName:=False)
 
         ' Create row and its cells
         Dim row As New DataGridViewRow
@@ -78,8 +72,9 @@
     End Sub
 
     Public Sub SetValuesToOperator()
-        clsTablesUtils.RemoveRParams(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_body", clsOperator), clsOperator)
+        clsTablesUtils.RemoveRParams(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_stub", clsOperator), clsOperator)
         clsTablesUtils.AddGridRowTagsRParamsToROperator(dataGridFormats, clsOperator)
     End Sub
+
 
 End Class

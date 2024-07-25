@@ -41,7 +41,7 @@ Partial Class ucrStubOptions
         Me.ucrSelectorCols.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCols.Name = "ucrSelectorCols"
         Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorCols.TabIndex = 298
+        Me.ucrSelectorCols.TabIndex = 1
         '
         'ucrInputStubHead
         '
@@ -52,7 +52,7 @@ Partial Class ucrStubOptions
         Me.ucrInputStubHead.Location = New System.Drawing.Point(256, 122)
         Me.ucrInputStubHead.Name = "ucrInputStubHead"
         Me.ucrInputStubHead.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputStubHead.TabIndex = 297
+        Me.ucrInputStubHead.TabIndex = 4
         '
         'lblStubHeadLabel
         '
@@ -84,7 +84,7 @@ Partial Class ucrStubOptions
         Me.ucrReceiverSingleRowName.Selector = Nothing
         Me.ucrReceiverSingleRowName.Size = New System.Drawing.Size(142, 20)
         Me.ucrReceiverSingleRowName.strNcFilePath = ""
-        Me.ucrReceiverSingleRowName.TabIndex = 294
+        Me.ucrReceiverSingleRowName.TabIndex = 2
         Me.ucrReceiverSingleRowName.ucrSelector = Nothing
         '
         'lblGroupByCol
@@ -107,7 +107,7 @@ Partial Class ucrStubOptions
         Me.ucrReceiverSingleGroupByCol.Selector = Nothing
         Me.ucrReceiverSingleGroupByCol.Size = New System.Drawing.Size(142, 20)
         Me.ucrReceiverSingleGroupByCol.strNcFilePath = ""
-        Me.ucrReceiverSingleGroupByCol.TabIndex = 292
+        Me.ucrReceiverSingleGroupByCol.TabIndex = 3
         Me.ucrReceiverSingleGroupByCol.ucrSelector = Nothing
         '
         'ucrStubOptions

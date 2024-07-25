@@ -4,6 +4,8 @@
     Private bFirstload As Boolean = True
 
     Private Sub initialiseDialog()
+
+
         ucrReceiverSingleRowName.SetParameter(New RParameter("rowname_col", 0))
         ucrReceiverSingleRowName.SetParameterIsString()
         ucrReceiverSingleRowName.Selector = ucrSelectorCols
@@ -40,23 +42,15 @@
             clsStubHeadRFunction.SetRCommand("tab_stubhead")
         End If
 
-
-
         SetRCode()
     End Sub
 
     Private Sub SetRCode()
-        ucrReceiverSingleGroupByCol.SetRCode(clsGtRFunction, True, bCloneIfNeeded:=True)
         ucrReceiverSingleRowName.SetRCode(clsGtRFunction, True, bCloneIfNeeded:=True)
+        ucrReceiverSingleGroupByCol.SetRCode(clsGtRFunction, True, bCloneIfNeeded:=True)
         ucrInputStubHead.SetRCode(clsStubHeadRFunction, True, bCloneIfNeeded:=True)
     End Sub
 
-
-    Private Sub ucrInputStubHead_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStubHead.ControlValueChanged
-        'clsStubHeadRFunction.AddParameter("label", strParameterValue:=clsTablesUtils.GetStringValue(ucrInputStubHead.GetValue(), True))
-
-
-    End Sub
 
     Private Sub btnStyle_Click(sender As Object, e As EventArgs)
         Dim clsListStyleRFunction As RFunction = clsTablesUtils.ShowStyleSubDialog(Me.ParentForm, clsStubStyleRFunction)

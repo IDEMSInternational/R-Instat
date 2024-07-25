@@ -21,6 +21,7 @@ Public Class ucrStub
         End If
 
         ucrStubOptions.Setup(strDataFrameName, clsOperator)
+        ucrStubStyle.Setup(strDataFrameName, clsOperator)
 
     End Sub
 
@@ -34,7 +35,7 @@ Public Class ucrStub
     Public Sub SetValuesToOperator()
 
         ucrStubOptions.SetValuesToOperator()
-
+        ucrStubStyle.SetValuesToOperator()
 
 
     End Sub

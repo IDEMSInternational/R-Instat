@@ -27,8 +27,8 @@ Partial Class sdgTableRowExpression
         Me.lblExpression = New System.Windows.Forms.Label()
         Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputExpression = New instat.ucrInputTextBox()
         Me.btnAddCondition = New System.Windows.Forms.Button()
+        Me.ucrReceiverExpression = New instat.ucrReceiverExpression()
         Me.SuspendLayout()
         '
         'cboCondition
@@ -36,7 +36,7 @@ Partial Class sdgTableRowExpression
         Me.cboCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboCondition.FormattingEnabled = True
         Me.cboCondition.Items.AddRange(New Object() {"==", "<", "<=", ">", ">=", "!=", "Expression"})
-        Me.cboCondition.Location = New System.Drawing.Point(5, 221)
+        Me.cboCondition.Location = New System.Drawing.Point(240, 25)
         Me.cboCondition.Name = "cboCondition"
         Me.cboCondition.Size = New System.Drawing.Size(148, 21)
         Me.cboCondition.TabIndex = 285
@@ -45,7 +45,7 @@ Partial Class sdgTableRowExpression
         '
         Me.lblCondition.AutoSize = True
         Me.lblCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCondition.Location = New System.Drawing.Point(12, 204)
+        Me.lblCondition.Location = New System.Drawing.Point(237, 9)
         Me.lblCondition.Name = "lblCondition"
         Me.lblCondition.Size = New System.Drawing.Size(54, 13)
         Me.lblCondition.TabIndex = 284
@@ -55,7 +55,7 @@ Partial Class sdgTableRowExpression
         '
         Me.lblExpression.AutoSize = True
         Me.lblExpression.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExpression.Location = New System.Drawing.Point(237, 95)
+        Me.lblExpression.Location = New System.Drawing.Point(237, 102)
         Me.lblExpression.Name = "lblExpression"
         Me.lblExpression.Size = New System.Drawing.Size(61, 13)
         Me.lblExpression.TabIndex = 283
@@ -76,39 +76,40 @@ Partial Class sdgTableRowExpression
         'ucrSdgBaseButtons
         '
         Me.ucrSdgBaseButtons.AutoSize = True
-        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(103, 271)
+        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(106, 220)
         Me.ucrSdgBaseButtons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
         Me.ucrSdgBaseButtons.Size = New System.Drawing.Size(224, 30)
         Me.ucrSdgBaseButtons.TabIndex = 344
         '
-        'ucrInputExpression
-        '
-        Me.ucrInputExpression.AddQuotesIfUnrecognised = True
-        Me.ucrInputExpression.AutoSize = True
-        Me.ucrInputExpression.IsMultiline = False
-        Me.ucrInputExpression.IsReadOnly = False
-        Me.ucrInputExpression.Location = New System.Drawing.Point(240, 111)
-        Me.ucrInputExpression.Name = "ucrInputExpression"
-        Me.ucrInputExpression.Size = New System.Drawing.Size(177, 23)
-        Me.ucrInputExpression.TabIndex = 345
-        '
         'btnAddCondition
         '
-        Me.btnAddCondition.Location = New System.Drawing.Point(158, 219)
+        Me.btnAddCondition.Location = New System.Drawing.Point(387, 23)
         Me.btnAddCondition.Name = "btnAddCondition"
-        Me.btnAddCondition.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddCondition.Size = New System.Drawing.Size(65, 23)
         Me.btnAddCondition.TabIndex = 346
         Me.btnAddCondition.Text = "Add"
         Me.btnAddCondition.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverExpression
+        '
+        Me.ucrReceiverExpression.AutoSize = True
+        Me.ucrReceiverExpression.frmParent = Me
+        Me.ucrReceiverExpression.Location = New System.Drawing.Point(240, 118)
+        Me.ucrReceiverExpression.Name = "ucrReceiverExpression"
+        Me.ucrReceiverExpression.Selector = Nothing
+        Me.ucrReceiverExpression.Size = New System.Drawing.Size(177, 29)
+        Me.ucrReceiverExpression.strNcFilePath = ""
+        Me.ucrReceiverExpression.TabIndex = 347
+        Me.ucrReceiverExpression.ucrSelector = Nothing
         '
         'sdgTableRowExpression
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 304)
+        Me.ClientSize = New System.Drawing.Size(456, 258)
+        Me.Controls.Add(Me.ucrReceiverExpression)
         Me.Controls.Add(Me.btnAddCondition)
-        Me.Controls.Add(Me.ucrInputExpression)
         Me.Controls.Add(Me.ucrSdgBaseButtons)
         Me.Controls.Add(Me.cboCondition)
         Me.Controls.Add(Me.lblCondition)
@@ -127,6 +128,6 @@ Partial Class sdgTableRowExpression
     Friend WithEvents lblExpression As Label
     Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSdgBaseButtons As ucrButtonsSubdialogue
-    Friend WithEvents ucrInputExpression As ucrInputTextBox
     Friend WithEvents btnAddCondition As Button
+    Friend WithEvents ucrReceiverExpression As ucrReceiverExpression
 End Class
