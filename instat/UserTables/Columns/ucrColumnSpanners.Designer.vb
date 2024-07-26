@@ -27,15 +27,15 @@ Partial Class ucrColumnSpanners
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.btnAddColSpanner = New System.Windows.Forms.Button()
         Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.dataGrid = New System.Windows.Forms.DataGridView()
-        Me.colId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colSpanners = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFormat = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.dataGridColSpanners = New System.Windows.Forms.DataGridView()
         Me.ucrReceiverMultipleCols = New instat.ucrReceiverMultiple()
         Me.lblColSpanner = New System.Windows.Forms.Label()
         Me.ucrInputColSpanner = New instat.ucrInputTextBox()
-        CType(Me.dataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.btnStyle = New System.Windows.Forms.Button()
+        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colSpanners = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colStyleExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.dataGridColSpanners, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblSpanners
@@ -52,7 +52,7 @@ Partial Class ucrColumnSpanners
         '
         Me.btnClearSpanners.Enabled = False
         Me.btnClearSpanners.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearSpanners.Location = New System.Drawing.Point(534, 162)
+        Me.btnClearSpanners.Location = New System.Drawing.Point(476, 162)
         Me.btnClearSpanners.Name = "btnClearSpanners"
         Me.btnClearSpanners.Size = New System.Drawing.Size(75, 23)
         Me.btnClearSpanners.TabIndex = 295
@@ -94,46 +94,17 @@ Partial Class ucrColumnSpanners
         Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorCols.TabIndex = 290
         '
-        'dataGrid
+        'dataGridColSpanners
         '
-        Me.dataGrid.AllowUserToAddRows = False
-        Me.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colId, Me.colLabel, Me.colSpanners, Me.colFormat})
-        Me.dataGrid.Location = New System.Drawing.Point(240, 188)
-        Me.dataGrid.Name = "dataGrid"
-        Me.dataGrid.RowHeadersWidth = 62
-        Me.dataGrid.Size = New System.Drawing.Size(369, 73)
-        Me.dataGrid.TabIndex = 289
-        '
-        'colId
-        '
-        Me.colId.HeaderText = "ID"
-        Me.colId.Name = "colId"
-        Me.colId.ReadOnly = True
-        '
-        'colLabel
-        '
-        Me.colLabel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colLabel.HeaderText = "Label"
-        Me.colLabel.MinimumWidth = 8
-        Me.colLabel.Name = "colLabel"
-        Me.colLabel.Width = 58
-        '
-        'colSpanners
-        '
-        Me.colSpanners.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colSpanners.HeaderText = "Column(s)"
-        Me.colSpanners.MinimumWidth = 8
-        Me.colSpanners.Name = "colSpanners"
-        Me.colSpanners.Width = 78
-        '
-        'colFormat
-        '
-        Me.colFormat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-        Me.colFormat.HeaderText = ""
-        Me.colFormat.MinimumWidth = 8
-        Me.colFormat.Name = "colFormat"
-        Me.colFormat.Width = 8
+        Me.dataGridColSpanners.AllowUserToAddRows = False
+        Me.dataGridColSpanners.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dataGridColSpanners.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colLabel, Me.colSpanners, Me.colStyleExpression})
+        Me.dataGridColSpanners.Location = New System.Drawing.Point(240, 188)
+        Me.dataGridColSpanners.Name = "dataGridColSpanners"
+        Me.dataGridColSpanners.ReadOnly = True
+        Me.dataGridColSpanners.RowHeadersWidth = 62
+        Me.dataGridColSpanners.Size = New System.Drawing.Size(311, 73)
+        Me.dataGridColSpanners.TabIndex = 289
         '
         'ucrReceiverMultipleCols
         '
@@ -169,10 +140,46 @@ Partial Class ucrColumnSpanners
         Me.ucrInputColSpanner.Size = New System.Drawing.Size(117, 21)
         Me.ucrInputColSpanner.TabIndex = 307
         '
+        'btnStyle
+        '
+        Me.btnStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.btnStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnStyle.Location = New System.Drawing.Point(366, 109)
+        Me.btnStyle.Name = "btnStyle"
+        Me.btnStyle.Size = New System.Drawing.Size(49, 23)
+        Me.btnStyle.TabIndex = 308
+        Me.btnStyle.Tag = ""
+        Me.btnStyle.Text = "Style"
+        Me.btnStyle.UseVisualStyleBackColor = True
+        '
+        'colLabel
+        '
+        Me.colLabel.HeaderText = "Label"
+        Me.colLabel.MinimumWidth = 8
+        Me.colLabel.Name = "colLabel"
+        Me.colLabel.ReadOnly = True
+        Me.colLabel.Width = 60
+        '
+        'colSpanners
+        '
+        Me.colSpanners.HeaderText = "Column(s)"
+        Me.colSpanners.MinimumWidth = 8
+        Me.colSpanners.Name = "colSpanners"
+        Me.colSpanners.ReadOnly = True
+        Me.colSpanners.Width = 90
+        '
+        'colStyleExpression
+        '
+        Me.colStyleExpression.HeaderText = "Style"
+        Me.colStyleExpression.Name = "colStyleExpression"
+        Me.colStyleExpression.ReadOnly = True
+        Me.colStyleExpression.Width = 90
+        '
         'ucrColumnSpanners
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnStyle)
         Me.Controls.Add(Me.ucrInputColSpanner)
         Me.Controls.Add(Me.lblColSpanner)
         Me.Controls.Add(Me.ucrReceiverMultipleCols)
@@ -181,10 +188,10 @@ Partial Class ucrColumnSpanners
         Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.btnAddColSpanner)
         Me.Controls.Add(Me.ucrSelectorCols)
-        Me.Controls.Add(Me.dataGrid)
+        Me.Controls.Add(Me.dataGridColSpanners)
         Me.Name = "ucrColumnSpanners"
-        Me.Size = New System.Drawing.Size(612, 265)
-        CType(Me.dataGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Size = New System.Drawing.Size(554, 265)
+        CType(Me.dataGridColSpanners, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -194,12 +201,12 @@ Partial Class ucrColumnSpanners
     Friend WithEvents lblColumns As Label
     Friend WithEvents btnAddColSpanner As Button
     Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents dataGrid As DataGridView
+    Friend WithEvents dataGridColSpanners As DataGridView
     Friend WithEvents ucrReceiverMultipleCols As ucrReceiverMultiple
     Friend WithEvents lblColSpanner As Label
     Friend WithEvents ucrInputColSpanner As ucrInputTextBox
-    Friend WithEvents colId As DataGridViewTextBoxColumn
+    Friend WithEvents btnStyle As Button
     Friend WithEvents colLabel As DataGridViewTextBoxColumn
     Friend WithEvents colSpanners As DataGridViewTextBoxColumn
-    Friend WithEvents colFormat As DataGridViewButtonColumn
+    Friend WithEvents colStyleExpression As DataGridViewTextBoxColumn
 End Class

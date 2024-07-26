@@ -29,11 +29,6 @@
 
     End Sub
 
-    Public Sub SetValuesToOperator()
-        clsTablesUtils.RemoveRFunctionsParamsWithRCommand({"fmt", "fmt_units", "fmt_number", "fmt_currency"}, clsOperator)
-        clsTablesUtils.AddGridRowTagsRParamsToROperator(dataGridFormats, clsOperator)
-    End Sub
-
     Private Sub SetupDataGrid(lstRParams As List(Of RParameter))
 
         For Each clsRParam As RParameter In lstRParams
@@ -87,7 +82,7 @@
 
         AddFormatParameterToGrid(clsFormatRFunction)
         ucrReceiverMultipleCols.Clear()
-        ucrInputRows.SetName("")
+        ucrRowExpression.Clear()
 
     End Sub
 
@@ -95,13 +90,13 @@
     Private Sub AddFormatParameterToGrid(clsFormatRFunction As RFunction)
 
         Dim strColumnsExpression As String = ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False)
-        Dim strRowsExpression As String = ucrInputRows.GetText
+        Dim strRowsExpression As String = ucrRowExpression.GetText
 
         ' Add columns parameter
         clsFormatRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=strColumnsExpression, iNewPosition:=0))
 
         ' Add rows as paramater if present
-        If Not ucrInputRows.IsEmpty Then
+        If Not ucrRowExpression.IsEmpty Then
             clsFormatRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=strRowsExpression, iNewPosition:=1))
         End If
 
@@ -141,6 +136,11 @@
         End If
 
         ucrReceiverMultipleCols.SetMeAsReceiver()
+    End Sub
+
+    Public Sub SetValuesToOperator()
+        clsTablesUtils.RemoveRFunctionsParamsWithRCommand({"fmt", "fmt_units", "fmt_number", "fmt_currency"}, clsOperator)
+        clsTablesUtils.AddGridRowTagsRParamsToROperator(dataGridFormats, clsOperator)
     End Sub
 
 End Class

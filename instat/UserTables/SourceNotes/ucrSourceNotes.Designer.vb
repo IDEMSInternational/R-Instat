@@ -24,20 +24,18 @@ Partial Class ucrSourceNotes
     Private Sub InitializeComponent()
         Me.dataGridSourceNotes = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colSourceNoteFormat = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.lblSourceNotes = New System.Windows.Forms.Label()
+        Me.btnClearNotes = New System.Windows.Forms.Button()
         CType(Me.dataGridSourceNotes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dataGridSourceNotes
         '
-        Me.dataGridSourceNotes.AllowUserToAddRows = False
-        Me.dataGridSourceNotes.AllowUserToDeleteRows = False
         Me.dataGridSourceNotes.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dataGridSourceNotes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridSourceNotes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.colSourceNoteFormat})
+        Me.dataGridSourceNotes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1})
         Me.dataGridSourceNotes.Location = New System.Drawing.Point(3, 23)
         Me.dataGridSourceNotes.Name = "dataGridSourceNotes"
         Me.dataGridSourceNotes.RowHeadersWidth = 62
@@ -51,15 +49,6 @@ Partial Class ucrSourceNotes
         Me.DataGridViewTextBoxColumn1.MinimumWidth = 8
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         '
-        'colSourceNoteFormat
-        '
-        Me.colSourceNoteFormat.HeaderText = ""
-        Me.colSourceNoteFormat.Name = "colSourceNoteFormat"
-        Me.colSourceNoteFormat.ReadOnly = True
-        Me.colSourceNoteFormat.Text = "Format"
-        Me.colSourceNoteFormat.UseColumnTextForButtonValue = True
-        Me.colSourceNoteFormat.Width = 55
-        '
         'lblSourceNotes
         '
         Me.lblSourceNotes.AutoSize = True
@@ -69,10 +58,23 @@ Partial Class ucrSourceNotes
         Me.lblSourceNotes.TabIndex = 8
         Me.lblSourceNotes.Text = "Source notes:"
         '
+        'btnClearNotes
+        '
+        Me.btnClearNotes.Enabled = False
+        Me.btnClearNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnClearNotes.Location = New System.Drawing.Point(392, 0)
+        Me.btnClearNotes.Name = "btnClearNotes"
+        Me.btnClearNotes.Size = New System.Drawing.Size(75, 23)
+        Me.btnClearNotes.TabIndex = 296
+        Me.btnClearNotes.Tag = ""
+        Me.btnClearNotes.Text = "Clear"
+        Me.btnClearNotes.UseVisualStyleBackColor = True
+        '
         'ucrSourceNotes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnClearNotes)
         Me.Controls.Add(Me.dataGridSourceNotes)
         Me.Controls.Add(Me.lblSourceNotes)
         Me.Name = "ucrSourceNotes"
@@ -84,7 +86,7 @@ Partial Class ucrSourceNotes
     End Sub
 
     Friend WithEvents dataGridSourceNotes As DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents colSourceNoteFormat As DataGridViewButtonColumn
     Friend WithEvents lblSourceNotes As Label
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents btnClearNotes As Button
 End Class

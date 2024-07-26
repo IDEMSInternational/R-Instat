@@ -410,6 +410,18 @@
     <Compile Include="UserTables\Columns\ucrColumnFootNote.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnNanoPlots.Designer.vb">
+      <DependentUpon>ucrColumnNanoPlots.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnNanoPlots.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnStyles.Designer.vb">
+      <DependentUpon>ucrColumnStyles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnStyles.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\Columns\ucrColumnWidth.Designer.vb">
       <DependentUpon>ucrColumnWidth.vb</DependentUpon>
     </Compile>
@@ -421,6 +433,12 @@
     </Compile>
     <Compile Include="UserTables\dlgGeneralTable.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\Others\ucrOtherStyles.Designer.vb">
+      <DependentUpon>ucrOtherStyles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Others\ucrOtherStyles.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\Rows\ucrRowExpression.Designer.vb">
       <DependentUpon>ucrRowExpression.vb</DependentUpon>
@@ -3411,11 +3429,17 @@
     <EmbeddedResource Include="UserTables\Columns\ucrColumnFootNote.resx">
       <DependentUpon>ucrColumnFootNote.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnStyles.resx">
+      <DependentUpon>ucrColumnStyles.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Columns\ucrColumnWidth.resx">
       <DependentUpon>ucrColumnWidth.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\dlgGeneralTable.resx">
       <DependentUpon>dlgGeneralTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Others\ucrOtherStyles.resx">
+      <DependentUpon>ucrOtherStyles.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Rows\ucrRowExpression.resx">
       <DependentUpon>ucrRowExpression.vb</DependentUpon>

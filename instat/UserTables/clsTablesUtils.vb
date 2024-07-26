@@ -91,14 +91,12 @@ Public Class clsTablesUtils
     End Sub
 
     Public Shared Sub AddGridRowTagsRParamsToROperator(dataGrid As DataGridView, clsOperator As ROperator)
-
         For index As Integer = 0 To dataGrid.Rows.Count - 1
             If dataGrid.Rows.Item(index).Tag IsNot Nothing Then
                 Dim clsRParam As RParameter = dataGrid.Rows.Item(index).Tag
                 clsOperator.AddParameter(clsRParam)
             End If
         Next
-
     End Sub
 
     ''' <summary>

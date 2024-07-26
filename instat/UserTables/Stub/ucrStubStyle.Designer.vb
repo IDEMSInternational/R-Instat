@@ -36,7 +36,7 @@ Partial Class ucrStubStyle
         '
         Me.btnEnterStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnEnterStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnEnterStyle.Location = New System.Drawing.Point(8, 59)
+        Me.btnEnterStyle.Location = New System.Drawing.Point(8, 54)
         Me.btnEnterStyle.Name = "btnEnterStyle"
         Me.btnEnterStyle.Size = New System.Drawing.Size(126, 23)
         Me.btnEnterStyle.TabIndex = 335
@@ -48,7 +48,7 @@ Partial Class ucrStubStyle
         '
         Me.lblFormats.AutoSize = True
         Me.lblFormats.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFormats.Location = New System.Drawing.Point(6, 90)
+        Me.lblFormats.Location = New System.Drawing.Point(6, 85)
         Me.lblFormats.Name = "lblFormats"
         Me.lblFormats.Size = New System.Drawing.Size(38, 13)
         Me.lblFormats.TabIndex = 338
@@ -57,7 +57,7 @@ Partial Class ucrStubStyle
         'btnClearStyle
         '
         Me.btnClearStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearStyle.Location = New System.Drawing.Point(290, 81)
+        Me.btnClearStyle.Location = New System.Drawing.Point(290, 76)
         Me.btnClearStyle.Name = "btnClearStyle"
         Me.btnClearStyle.Size = New System.Drawing.Size(75, 23)
         Me.btnClearStyle.TabIndex = 337
@@ -70,7 +70,7 @@ Partial Class ucrStubStyle
         Me.dataGridFormats.AllowUserToAddRows = False
         Me.dataGridFormats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dataGridFormats.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colStyles})
-        Me.dataGridFormats.Location = New System.Drawing.Point(8, 107)
+        Me.dataGridFormats.Location = New System.Drawing.Point(8, 102)
         Me.dataGridFormats.Name = "dataGridFormats"
         Me.dataGridFormats.RowHeadersWidth = 62
         Me.dataGridFormats.Size = New System.Drawing.Size(361, 73)
@@ -95,9 +95,9 @@ Partial Class ucrStubStyle
         '
         'ucrRowExpression
         '
-        Me.ucrRowExpression.Location = New System.Drawing.Point(8, 20)
+        Me.ucrRowExpression.Location = New System.Drawing.Point(3, 20)
         Me.ucrRowExpression.Name = "ucrRowExpression"
-        Me.ucrRowExpression.Size = New System.Drawing.Size(193, 26)
+        Me.ucrRowExpression.Size = New System.Drawing.Size(134, 26)
         Me.ucrRowExpression.TabIndex = 339
         '
         'ucrStubStyle
@@ -111,7 +111,7 @@ Partial Class ucrStubStyle
         Me.Controls.Add(Me.btnEnterStyle)
         Me.Controls.Add(Me.Label1)
         Me.Name = "ucrStubStyle"
-        Me.Size = New System.Drawing.Size(372, 186)
+        Me.Size = New System.Drawing.Size(372, 177)
         CType(Me.dataGridFormats, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

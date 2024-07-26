@@ -15,13 +15,10 @@
         ' Clear and Set up the data grid with contents
         dataGridFormats.Rows.Clear()
         SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_stub", clsOperator))
-
     End Sub
 
     Private Sub SetupDataGrid(lstRParams As List(Of RParameter))
-
         For Each clsRParam As RParameter In lstRParams
-
             ' Create a new row that represents the tab_style() parameters
             Dim row As New DataGridViewRow
             row.CreateCells(dataGridFormats)
@@ -30,7 +27,6 @@
             ' Tag and add the tab_style() parameter function contents as a row
             row.Tag = clsRParam
             dataGridFormats.Rows.Add(row)
-
         Next
     End Sub
 
@@ -46,7 +42,7 @@
         clsLocationsRFunction.SetRCommand("cells_stub")
 
         If Not ucrRowExpression.IsEmpty Then
-            clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=ucrRowExpression.GetValue(), iNewPosition:=1))
+            clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=ucrRowExpression.GetText(), iNewPosition:=1))
         End If
 
         Dim clsTabStyleRFunction As RFunction = clsTablesUtils.GetNewStyleRFunction(clsListStyleRFunction, clsLocationsRFunction)
@@ -64,7 +60,6 @@
 
         ' Add it to grid
         dataGridFormats.Rows.Add(row)
-
     End Sub
 
     Private Sub btnClearStyle_Click(sender As Object, e As EventArgs) Handles btnClearStyle.Click
@@ -75,6 +70,4 @@
         clsTablesUtils.RemoveRParams(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_stub", clsOperator), clsOperator)
         clsTablesUtils.AddGridRowTagsRParamsToROperator(dataGridFormats, clsOperator)
     End Sub
-
-
 End Class

@@ -22,45 +22,31 @@ Partial Class ucrRowExpression
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnSet = New System.Windows.Forms.Button()
         Me.ucrInputExpression = New instat.ucrInputTextBox()
         Me.SuspendLayout()
-        '
-        'btnSet
-        '
-        Me.btnSet.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnSet.Location = New System.Drawing.Point(148, 2)
-        Me.btnSet.Name = "btnSet"
-        Me.btnSet.Size = New System.Drawing.Size(44, 23)
-        Me.btnSet.TabIndex = 341
-        Me.btnSet.Tag = ""
-        Me.btnSet.Text = "Set"
-        Me.btnSet.UseVisualStyleBackColor = True
         '
         'ucrInputExpression
         '
         Me.ucrInputExpression.AddQuotesIfUnrecognised = True
         Me.ucrInputExpression.AutoSize = True
+        Me.ucrInputExpression.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrInputExpression.IsMultiline = False
         Me.ucrInputExpression.IsReadOnly = False
-        Me.ucrInputExpression.Location = New System.Drawing.Point(6, 4)
+        Me.ucrInputExpression.Location = New System.Drawing.Point(0, 0)
         Me.ucrInputExpression.Name = "ucrInputExpression"
-        Me.ucrInputExpression.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputExpression.Size = New System.Drawing.Size(146, 21)
         Me.ucrInputExpression.TabIndex = 340
         '
         'ucrRowExpression
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.btnSet)
         Me.Controls.Add(Me.ucrInputExpression)
         Me.Name = "ucrRowExpression"
-        Me.Size = New System.Drawing.Size(193, 26)
+        Me.Size = New System.Drawing.Size(146, 21)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents btnSet As Button
     Friend WithEvents ucrInputExpression As ucrInputTextBox
 End Class

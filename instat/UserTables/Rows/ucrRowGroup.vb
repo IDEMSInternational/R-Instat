@@ -81,13 +81,6 @@
 
     End Sub
 
-    Private Sub btnClearGroups_Click(sender As Object, e As EventArgs) Handles btnClearGroups.Click
-        For index As Integer = 0 To dataGridGroups.Rows.Count - 1
-            clsOperator.RemoveParameter(dataGridGroups.Rows(index).Tag)
-        Next
-        dataGridGroups.Rows.Clear()
-    End Sub
-
     Private Sub conditionValue_TextChanged(sender As Object, e As EventArgs) Handles cboConditionValue.TextChanged, cboConditionOperator.TextChanged
         EnableDisableAddConditionButton()
     End Sub
@@ -99,4 +92,25 @@
     Private Sub EnableDisableAddConditionButton()
         btnAddCondition.Enabled = Not ucrReceiverSingleCol.IsEmpty AndAlso Not ucrInputGroupLabel.IsEmpty AndAlso Not String.IsNullOrWhiteSpace(cboConditionValue.Text) AndAlso Not String.IsNullOrWhiteSpace(cboConditionOperator.Text)
     End Sub
+
+    Private Sub btnClearGroups_Click(sender As Object, e As EventArgs) Handles btnClearGroups.Click
+        For index As Integer = 0 To dataGridGroups.Rows.Count - 1
+            clsOperator.RemoveParameter(dataGridGroups.Rows(index).Tag)
+        Next
+        dataGridGroups.Rows.Clear()
+    End Sub
+
+    Private Sub dataGridGroups_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridGroups.CellClick
+        If 1 = 1 Then
+            Exit Sub
+        End If
+
+        ' Ignore clicks that are not from button cells. 
+        If e.ColumnIndex <> 1 Then
+            Exit Sub
+        End If
+
+
+    End Sub
+
 End Class

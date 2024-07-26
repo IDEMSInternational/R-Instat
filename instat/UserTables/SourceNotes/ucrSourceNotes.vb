@@ -1,51 +1,33 @@
 ﻿
 Public Class ucrSourceNotes
 
-    Private clsOperator As New ROperator
+    Private clsOperator As ROperator
 
     Public Sub Setup(clsOperator As ROperator)
-
         Me.clsOperator = clsOperator
         dataGridSourceNotes.Rows.Clear()
 
-        Dim lstsourceNotesRFunctions As List(Of RFunction) = clsTablesUtils.FindRFunctionsWithRCommand("tab_source_note", clsOperator)
-
-        For Each clsSourceNoteRFunct As RFunction In lstsourceNotesRFunctions
-
-            ' Create a new row that represents the tab_footnote() parameters
+        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_source_note"}, clsOperator)
+        For Each clsRParam As RParameter In lstRParams
+            Dim clsTabSourceNotesRFunction As RFunction = clsRParam.clsArgumentCodeStructure
             Dim row As New DataGridViewRow
             row.CreateCells(dataGridSourceNotes)
-
-            For Each clsFootNoteRParam As RParameter In clsSourceNoteRFunct.clsParameters
-                If clsFootNoteRParam.strArgumentName = "source_note" Then
-                    ' Set the foot note text
-                    row.Cells(0).Value = clsTablesUtils.GetStringValue(clsFootNoteRParam.clsArgumentCodeStructure.clsParameters(0).strArgumentValue, False)
+            For Each clsTabSourceNoteRParam As RParameter In clsTabSourceNotesRFunction.clsParameters
+                If clsTabSourceNoteRParam.strArgumentName = "source_note" Then
+                    row.Cells(0).Value = clsTablesUtils.GetStringValue(clsTabSourceNoteRParam.strArgumentValue, False)
                 End If
             Next
-
-            ' Tag and add the tab_footnote() function contents as a row
-            row.Tag = clsSourceNoteRFunct
+            row.Tag = clsRParam
             dataGridSourceNotes.Rows.Add(row)
-
         Next
 
         ' Always add a place holder row for new foot note
         dataGridSourceNotes.Rows.Add()
-
     End Sub
 
-    Private Sub dataGridNotes_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridSourceNotes.CellClick
-
-        ' Ignore clicks that are not from button cells. 
-        If e.ColumnIndex <> 1 Then
-            Exit Sub
-        End If
-
-        Dim clsNoteRFunction As RFunction = dataGridSourceNotes.Rows.Item(e.RowIndex).Tag
-        If clsNoteRFunction IsNot Nothing Then
-            clsTablesUtils.ShowTextFormatSubDialog(Me.ParentForm, clsNoteRFunction.GetParameter("source_note").clsArgumentCodeStructure)
-        End If
-
+    Private Sub btnClearNotes_Click(sender As Object, e As EventArgs) Handles btnClearNotes.Click
+        dataGridSourceNotes.Rows.Clear()
+        dataGridSourceNotes.Rows.Add()
     End Sub
 
     Private Sub dataGridNotes_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridSourceNotes.CellEndEdit
@@ -58,41 +40,13 @@ Public Class ucrSourceNotes
             Exit Sub
         End If
 
-        ' Get existing note function if it exists
-        Dim clsNoteRFunction As RFunction = row.Tag
+        Dim clsTabSourceNoteRParam As New RFunction
+        clsTabSourceNoteRParam.SetPackageName("gt")
+        clsTabSourceNoteRParam.SetRCommand("tab_source_note")
+        clsTabSourceNoteRParam.AddParameter(New RParameter(strParameterName:="source_note", strParamValue:=clsTablesUtils.GetStringValue(strNoteTextValue, True), iNewPosition:=0))
 
-        ' Get the prevous style parameter to retain any format options previously done
-        Dim clsStyleParam As RParameter = Nothing
-        If clsNoteRFunction IsNot Nothing Then
-            clsStyleParam = clsNoteRFunction.GetParameter("source_note").clsArgumentCodeStructure.GetParameter("style")
-        End If
-
-        '--------------------------------------
-        ' Recreate the footer function
-        Dim clsNewNoteRFunction As New RFunction
-        clsNewNoteRFunction.SetPackageName("gt")
-        clsNewNoteRFunction.SetRCommand("tab_source_note")
-
-        Dim clsNoteTextRFunction As RFunction = clsTablesUtils.GetNewHtmlSpanRFunction()
-        clsNoteTextRFunction.AddParameter(New RParameter(strParameterName:="", strParamValue:=clsTablesUtils.GetStringValue(strNoteTextValue, True), iNewPosition:=0, bNewIncludeArgumentName:=False))
-
-        ' Add the previous style if it exists 
-        If clsStyleParam IsNot Nothing Then
-            clsNoteTextRFunction.AddParameter(clsStyleParam)
-        End If
-
-        ' Add the foot note text parameter to the footer R function
-        clsNewNoteRFunction.AddParameter(New RParameter(strParameterName:="source_note", strParamValue:=clsNoteTextRFunction, iNewPosition:=0))
-        '--------------------------------------
-
-        ' Overwrite the tag with the new foot function
-        row.Tag = clsNewNoteRFunction
-
-        ' Remove all the tab source notes R Functions
-        clsTablesUtils.RemoveRFunctionsParamsWithRCommand({"tab_source_note"}, clsOperator)
-
-        ' Add all the tab source note RFunctions
-        clsTablesUtils.SetGridTagsInOperator(dataGridSourceNotes, "tab_source_note", clsOperator)
+        ' Overwrite the tag with the new unique parameter
+        row.Tag = New RParameter(strParameterName:="tab_source_note_param" & (dataGridSourceNotes.Rows.Count + 1), strParamValue:=clsTabSourceNoteRParam, bNewIncludeArgumentName:=False)
 
         ' If last row then add new empty row
         If e.RowIndex = dataGridSourceNotes.Rows.Count - 1 Then
@@ -100,4 +54,8 @@ Public Class ucrSourceNotes
         End If
     End Sub
 
+    Public Sub SetValuesToOperator()
+        clsTablesUtils.RemoveRParams(clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_source_note"}, clsOperator), clsOperator)
+        clsTablesUtils.AddGridRowTagsRParamsToROperator(dataGridSourceNotes, clsOperator)
+    End Sub
 End Class

@@ -23,9 +23,6 @@ Partial Class ucrColumnLabels
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.dataGridColLabels = New System.Windows.Forms.DataGridView()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFormat = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.ucrInputColLabel = New instat.ucrInputTextBox()
         Me.lblCondition = New System.Windows.Forms.Label()
         Me.lblColLabels = New System.Windows.Forms.Label()
@@ -34,6 +31,8 @@ Partial Class ucrColumnLabels
         Me.btnAddLabel = New System.Windows.Forms.Button()
         Me.ucrReceiverSingleCol = New instat.ucrReceiverSingle()
         Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridColLabels, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -41,36 +40,12 @@ Partial Class ucrColumnLabels
         '
         Me.dataGridColLabels.AllowUserToAddRows = False
         Me.dataGridColLabels.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridColLabels.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colLabel, Me.colCodnition, Me.colFormat})
+        Me.dataGridColLabels.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colLabel, Me.colCodnition})
         Me.dataGridColLabels.Location = New System.Drawing.Point(230, 159)
         Me.dataGridColLabels.Name = "dataGridColLabels"
         Me.dataGridColLabels.RowHeadersWidth = 62
-        Me.dataGridColLabels.Size = New System.Drawing.Size(339, 95)
+        Me.dataGridColLabels.Size = New System.Drawing.Size(266, 95)
         Me.dataGridColLabels.TabIndex = 309
-        '
-        'colLabel
-        '
-        Me.colLabel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.colLabel.HeaderText = "Column"
-        Me.colLabel.MinimumWidth = 8
-        Me.colLabel.Name = "colLabel"
-        '
-        'colCodnition
-        '
-        Me.colCodnition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.colCodnition.HeaderText = "Label"
-        Me.colCodnition.MinimumWidth = 8
-        Me.colCodnition.Name = "colCodnition"
-        '
-        'colFormat
-        '
-        Me.colFormat.HeaderText = ""
-        Me.colFormat.MinimumWidth = 8
-        Me.colFormat.Name = "colFormat"
-        Me.colFormat.ReadOnly = True
-        Me.colFormat.Text = "Format"
-        Me.colFormat.UseColumnTextForButtonValue = True
-        Me.colFormat.Width = 99
         '
         'ucrInputColLabel
         '
@@ -106,7 +81,7 @@ Partial Class ucrColumnLabels
         'btnClearLabels
         '
         Me.btnClearLabels.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearLabels.Location = New System.Drawing.Point(490, 135)
+        Me.btnClearLabels.Location = New System.Drawing.Point(414, 135)
         Me.btnClearLabels.Name = "btnClearLabels"
         Me.btnClearLabels.Size = New System.Drawing.Size(79, 23)
         Me.btnClearLabels.TabIndex = 314
@@ -161,6 +136,20 @@ Partial Class ucrColumnLabels
         Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorCols.TabIndex = 310
         '
+        'colLabel
+        '
+        Me.colLabel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.colLabel.HeaderText = "Column"
+        Me.colLabel.MinimumWidth = 8
+        Me.colLabel.Name = "colLabel"
+        '
+        'colCodnition
+        '
+        Me.colCodnition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.colCodnition.HeaderText = "Label"
+        Me.colCodnition.MinimumWidth = 8
+        Me.colCodnition.Name = "colCodnition"
+        '
         'ucrColumnLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -175,7 +164,7 @@ Partial Class ucrColumnLabels
         Me.Controls.Add(Me.ucrReceiverSingleCol)
         Me.Controls.Add(Me.ucrSelectorCols)
         Me.Name = "ucrColumnLabels"
-        Me.Size = New System.Drawing.Size(575, 257)
+        Me.Size = New System.Drawing.Size(499, 257)
         CType(Me.dataGridColLabels, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -193,5 +182,4 @@ Partial Class ucrColumnLabels
     Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
     Friend WithEvents colLabel As DataGridViewTextBoxColumn
     Friend WithEvents colCodnition As DataGridViewTextBoxColumn
-    Friend WithEvents colFormat As DataGridViewButtonColumn
 End Class

@@ -23,9 +23,6 @@ Partial Class ucrRowGroup
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.dataGridGroups = New System.Windows.Forms.DataGridView()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFormat = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.btnClearGroups = New System.Windows.Forms.Button()
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.btnAddCondition = New System.Windows.Forms.Button()
@@ -37,6 +34,9 @@ Partial Class ucrRowGroup
         Me.ucrReceiverSingleCol = New instat.ucrReceiverSingle()
         Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputGroupLabel = New instat.ucrInputTextBox()
+        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colFormat = New System.Windows.Forms.DataGridViewButtonColumn()
         CType(Me.dataGridGroups, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -47,33 +47,10 @@ Partial Class ucrRowGroup
         Me.dataGridGroups.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colLabel, Me.colCodnition, Me.colFormat})
         Me.dataGridGroups.Location = New System.Drawing.Point(229, 204)
         Me.dataGridGroups.Name = "dataGridGroups"
+        Me.dataGridGroups.ReadOnly = True
         Me.dataGridGroups.RowHeadersWidth = 62
         Me.dataGridGroups.Size = New System.Drawing.Size(323, 95)
         Me.dataGridGroups.TabIndex = 11
-        '
-        'colLabel
-        '
-        Me.colLabel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.colLabel.HeaderText = "Label"
-        Me.colLabel.MinimumWidth = 8
-        Me.colLabel.Name = "colLabel"
-        '
-        'colCodnition
-        '
-        Me.colCodnition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.colCodnition.HeaderText = "Condition"
-        Me.colCodnition.MinimumWidth = 8
-        Me.colCodnition.Name = "colCodnition"
-        '
-        'colFormat
-        '
-        Me.colFormat.HeaderText = ""
-        Me.colFormat.MinimumWidth = 8
-        Me.colFormat.Name = "colFormat"
-        Me.colFormat.ReadOnly = True
-        Me.colFormat.Text = "Format"
-        Me.colFormat.UseColumnTextForButtonValue = True
-        Me.colFormat.Width = 99
         '
         'btnClearGroups
         '
@@ -192,6 +169,32 @@ Partial Class ucrRowGroup
         Me.ucrInputGroupLabel.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputGroupLabel.TabIndex = 308
         '
+        'colLabel
+        '
+        Me.colLabel.HeaderText = "Label"
+        Me.colLabel.MinimumWidth = 8
+        Me.colLabel.Name = "colLabel"
+        Me.colLabel.ReadOnly = True
+        Me.colLabel.Width = 80
+        '
+        'colCodnition
+        '
+        Me.colCodnition.HeaderText = "Condition"
+        Me.colCodnition.MinimumWidth = 8
+        Me.colCodnition.Name = "colCodnition"
+        Me.colCodnition.ReadOnly = True
+        Me.colCodnition.Width = 90
+        '
+        'colFormat
+        '
+        Me.colFormat.HeaderText = ""
+        Me.colFormat.MinimumWidth = 8
+        Me.colFormat.Name = "colFormat"
+        Me.colFormat.ReadOnly = True
+        Me.colFormat.Text = "Style"
+        Me.colFormat.UseColumnTextForButtonValue = True
+        Me.colFormat.Width = 55
+        '
         'ucrRowGroup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -227,8 +230,8 @@ Partial Class ucrRowGroup
     Friend WithEvents cboConditionOperator As ComboBox
     Friend WithEvents cboConditionValue As ComboBox
     Friend WithEvents lblCondition As Label
+    Friend WithEvents ucrInputGroupLabel As ucrInputTextBox
     Friend WithEvents colLabel As DataGridViewTextBoxColumn
     Friend WithEvents colCodnition As DataGridViewTextBoxColumn
     Friend WithEvents colFormat As DataGridViewButtonColumn
-    Friend WithEvents ucrInputGroupLabel As ucrInputTextBox
 End Class

@@ -23,10 +23,14 @@ Public Class sdgTableOptions
     Private bFirstload As Boolean = True
 
     Private Sub sdgTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstload Then
+            InitialiseDialog()
+            bFirstload = False
+        End If
         autoTranslate(Me)
     End Sub
 
-    Private Sub initialiseDialog()
+    Private Sub InitialiseDialog()
         ucrPnlThemesPanel.AddRadioButton(rdoSelectTheme)
         ucrPnlThemesPanel.AddRadioButton(rdoManualTheme)
 
@@ -46,10 +50,6 @@ Public Class sdgTableOptions
             Exit Sub
         End If
 
-        If bFirstload Then
-            initialiseDialog()
-            bFirstload = False
-        End If
 
         clsOperator = clsNewOperator
 
@@ -58,9 +58,10 @@ Public Class sdgTableOptions
         ucrRows.Setup(strDataFrameName, clsOperator)
         ucrColumns.Setup(strDataFrameName, clsOperator)
         ucrCells.Setup(strDataFrameName, clsOperator)
-        SetupFooterNotesRFunctionsInOperatorOnNew(clsOperator)
         ucrSourceNotes.Setup(clsOperator)
-        SetupThemeRFunctionsInOperatorOnNew(clsOperator)
+        ucrOtherStyles.Setup(clsOperator)
+
+        SetupTheme(clsOperator)
     End Sub
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
@@ -68,107 +69,19 @@ Public Class sdgTableOptions
         ucrStub.SetValuesToOperator()
         ucrColumns.SetValuesToOperator()
         ucrCells.SetValuesToOperator()
-        SetThemesInOperatorOnReturn(clsOperator)
+        ucrSourceNotes.SetValuesToOperator()
+        ucrOtherStyles.SetValuesToOperator()
+        SetThemeValuesOnReturn(clsOperator)
     End Sub
 
-
-
-
-
-
-    '-----------------------------------------
-    ' FOOTER CONTROLS
-
-    Private Sub SetupFooterNotesRFunctionsInOperatorOnNew(clsOperator As ROperator)
-        'SetFooterGridContents(clsOperator, dataGridHeaderFooterNotes)
-        'SetFooterGridContents(clsOperator, dataGridCellFooterNotes)
-    End Sub
-
-    Private Sub SetFooterGridContents(clsOperator As ROperator, dataGridFooterNotes As DataGridView)
-        dataGridFooterNotes.Rows.Clear()
-
-        For Each clsFootNoteFunctRParam As RParameter In clsOperator.clsParameters
-            If clsFootNoteFunctRParam.strArgumentName.Contains("tab_footnote") Then
-                ' Create a new row that represents the tab_footnote() parameters 
-                Dim row As New DataGridViewRow
-                row.CreateCells(dataGridFooterNotes)
-
-                Dim clsFooterRFunction As RFunction = clsFootNoteFunctRParam.clsArgumentCodeStructure
-
-                For Each clsFootNoteRParam As RParameter In clsFooterRFunction.clsParameters
-
-                    If clsFootNoteRParam.strArgumentName = "footnote" Then
-                        ' Set the foot note text
-                        row.Cells(0).Value = GetStringValue(clsFootNoteRParam.clsArgumentCodeStructure.clsParameters(0).strArgumentValue, False)
-                    ElseIf clsFootNoteRParam.strArgumentName = "locations" Then
-                        ' todo go through the location function
-                        Dim clsFooterLocationNoteRFunction As RFunction = clsFootNoteRParam.clsArgumentCodeStructure
-
-                        'If clsFooterLocationNoteRFunction.strRCommand = "cells_body" AndAlso dataGridFooterNotes Is dataGridCellFooterNotes Then
-                        '    For Each clsFootNoteLocationRParam As RParameter In clsFooterLocationNoteRFunction.clsParameters
-                        '        If clsFootNoteLocationRParam.strArgumentName = "columns" Then
-                        '            row.Cells(1).Value = GetStringValue(clsFootNoteLocationRParam.strArgumentValue, False)
-                        '        ElseIf clsFootNoteLocationRParam.strArgumentName = "rows" Then
-                        '            row.Cells(2).Value = GetStringValue(clsFootNoteLocationRParam.strArgumentValue, False)
-                        '        End If
-                        '    Next
-                        'End If
-                    End If
-
-                    ' Tag and add the tab_footnote() function contents as a row
-                    ' Check if second cell has a value
-                    If row.Cells(1).Value IsNot Nothing Then
-                        row.Tag = clsFooterRFunction
-                        dataGridFooterNotes.Rows.Add(row)
-                    End If
-
-
-                Next
-
-            End If
-        Next
-
-        ' Always add a place holder row for new foot note
-        dataGridFooterNotes.Rows.Add()
-
-    End Sub
-
-
-
-    Private Function SetupAndGetNewNoteRFunction(clsPossibleNoteRFunction As RFunction, strNoteRCommand As String, strRNoteTextParameterName As String, strNoteTextValue As String) As RFunction
-        Dim clsNewNoteRFunction As RFunction = clsPossibleNoteRFunction
-        ' Get the prevous style parameter to retain any format options previously done
-        Dim clsStyleParam As RParameter
-        If clsNewNoteRFunction IsNot Nothing Then
-            clsStyleParam = clsNewNoteRFunction.GetParameter(strRNoteTextParameterName).clsArgumentCodeStructure.GetParameter("style")
-        Else
-            clsStyleParam = New RParameter(strParameterName:="style", strParamValue:=clsTablesUtils.GetNewHtmlStyleRFunction(), iNewPosition:=1)
-        End If
-
-
-        ' Recreate the footer function
-        clsNewNoteRFunction = New RFunction
-        clsNewNoteRFunction.SetPackageName("gt")
-        clsNewNoteRFunction.SetRCommand(strNoteRCommand)
-
-        Dim clsNoteTextRFunction As RFunction = clsTablesUtils.GetNewHtmlSpanRFunction()
-        clsNoteTextRFunction.AddParameter(New RParameter(strParameterName:="", strParamValue:=GetStringValue(strNoteTextValue, True), iNewPosition:=0, bNewIncludeArgumentName:=False))
-        clsNoteTextRFunction.AddParameter(clsStyleParam) ' Add the style parameter for formating
-
-        ' Add the foot note text parameter to the footer R function
-        clsNewNoteRFunction.AddParameter(New RParameter(strParameterName:=strRNoteTextParameterName, strParamValue:=clsNoteTextRFunction, iNewPosition:=0))
-        Return clsNewNoteRFunction
-    End Function
-
-    '-----------------------------------------
 
     '-----------------------------------------
     ' Themes
 
-    Private Sub SetupThemeRFunctionsInOperatorOnNew(clsOperator As ROperator)
+    Private Sub SetupTheme(clsOperator As ROperator)
         clsThemeRFunction = New RFunction
 
-        ' Uncheck then the select radio button to orces the panel to raise it ControlValueChanged event
+        ' Uncheck then the check radio button to forces the panel to raise its ControlValueChanged event
         rdoSelectTheme.Checked = False
         rdoSelectTheme.Checked = True
 
@@ -185,15 +98,6 @@ Public Class sdgTableOptions
             ucrCboSelectThemes.SetName(clsThemeRFunction.strRCommand)
         End If
 
-    End Sub
-
-    Private Sub SetThemesInOperatorOnReturn(clsOperator As ROperator)
-        ' Set the themes parameter if there was a theme selected
-        If clsThemeRFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsThemeRFunction.strRCommand) Then
-            clsOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
-        Else
-            clsOperator.RemoveParameterByName("theme_format")
-        End If
     End Sub
 
     Private Sub ucrPnlThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlThemesPanel.ControlValueChanged
@@ -245,15 +149,16 @@ Public Class sdgTableOptions
         sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
         sdgSummaryThemes.ShowDialog(Me)
     End Sub
-    '-----------------------------------------
 
-    '-----------------------------------------
-    Private Function GetStringValue(str As String, bwithQuotes As Boolean) As String
-        If String.IsNullOrEmpty(str) Then
-            str = ""
+    Private Sub SetThemeValuesOnReturn(clsOperator As ROperator)
+        ' Set the themes parameter if there was a theme selected
+        If clsThemeRFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsThemeRFunction.strRCommand) Then
+            clsOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
+        Else
+            clsOperator.RemoveParameterByName("theme_format")
         End If
-        Return If(bwithQuotes, """" & str & """", str.Replace("""", ""))
-    End Function
+    End Sub
+    '-----------------------------------------
 
 
 End Class
