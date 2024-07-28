@@ -138,9 +138,9 @@ Public Class dlgAddKey
     Private Sub SetHelpOptions()
         Select Case enumAddkeyMode
             Case AddkeyMode.Prepare
-                ucrBase.iHelpTopicID = 416
+                ucrBase.iHelpTopicID = 504
             Case AddkeyMode.Climatic
-                ucrBase.iHelpTopicID = 424
+                ucrBase.iHelpTopicID = 611
         End Select
     End Sub
 

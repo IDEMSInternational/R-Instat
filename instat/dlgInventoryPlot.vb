@@ -106,7 +106,7 @@ Public Class dlgInventoryPlot
         ucrChkDay.SetRDefault("FALSE")
 
         ucrSaveDetails.SetPrefix("details")
-        ucrSaveDetails.SetCheckBoxText("Save Details")
+        ucrSaveDetails.SetCheckBoxText("Store Details")
         ucrSaveDetails.SetSaveTypeAsDataFrame()
         ucrSaveDetails.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
         ucrSaveDetails.SetIsComboBox()
@@ -160,7 +160,7 @@ Public Class dlgInventoryPlot
         ucrSaveGraph.SetPrefix("inventory")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrInventoryPlotSelector.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
@@ -317,7 +317,6 @@ Public Class dlgInventoryPlot
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
-
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
@@ -335,6 +334,7 @@ Public Class dlgInventoryPlot
             clsInventoryPlot.iCallType = 3
             clsInventoryPlot.bExcludeAssignedFunctionOutput = False
         End If
+        AddClimateMissingFunction()
     End Sub
 
     Private Sub AddOrRemoveKeyFunctions()
@@ -347,13 +347,17 @@ Public Class dlgInventoryPlot
         End If
     End Sub
 
-    Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged
-        If ucrChkSummary.Checked Then
+    Private Sub AddClimateMissingFunction()
+        If rdoMissing.Checked AndAlso ucrChkSummary.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
             clsClimaticMissing.iCallType = 2
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticMissing)
-            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged, ucrChkOmitEnd.ControlValueChanged, ucrChkOmitStart.ControlValueChanged
+        AddClimateMissingFunction()
         AddOrRemoveKeyFunctions()
     End Sub
 
