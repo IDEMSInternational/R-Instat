@@ -39,7 +39,7 @@ Partial Class ucrCellStyles
         '
         Me.lblRowExpression.AutoSize = True
         Me.lblRowExpression.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRowExpression.Location = New System.Drawing.Point(237, 86)
+        Me.lblRowExpression.Location = New System.Drawing.Point(245, 86)
         Me.lblRowExpression.Name = "lblRowExpression"
         Me.lblRowExpression.Size = New System.Drawing.Size(134, 13)
         Me.lblRowExpression.TabIndex = 329
@@ -88,7 +88,7 @@ Partial Class ucrCellStyles
         '
         Me.btnEnterStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnEnterStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnEnterStyle.Location = New System.Drawing.Point(239, 133)
+        Me.btnEnterStyle.Location = New System.Drawing.Point(244, 136)
         Me.btnEnterStyle.Name = "btnEnterStyle"
         Me.btnEnterStyle.Size = New System.Drawing.Size(126, 23)
         Me.btnEnterStyle.TabIndex = 4
@@ -100,7 +100,7 @@ Partial Class ucrCellStyles
         '
         Me.Label1.AutoSize = True
         Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(239, 7)
+        Me.Label1.Location = New System.Drawing.Point(246, 7)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(56, 13)
         Me.Label1.TabIndex = 331
@@ -108,7 +108,7 @@ Partial Class ucrCellStyles
         '
         'ucrRowExpression
         '
-        Me.ucrRowExpression.Location = New System.Drawing.Point(234, 104)
+        Me.ucrRowExpression.Location = New System.Drawing.Point(246, 103)
         Me.ucrRowExpression.Name = "ucrRowExpression"
         Me.ucrRowExpression.Size = New System.Drawing.Size(124, 26)
         Me.ucrRowExpression.TabIndex = 332
@@ -117,7 +117,7 @@ Partial Class ucrCellStyles
         '
         Me.ucrReceiverMultipleCols.AutoSize = True
         Me.ucrReceiverMultipleCols.frmParent = Nothing
-        Me.ucrReceiverMultipleCols.Location = New System.Drawing.Point(236, 23)
+        Me.ucrReceiverMultipleCols.Location = New System.Drawing.Point(244, 23)
         Me.ucrReceiverMultipleCols.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleCols.Name = "ucrReceiverMultipleCols"
         Me.ucrReceiverMultipleCols.Selector = Nothing

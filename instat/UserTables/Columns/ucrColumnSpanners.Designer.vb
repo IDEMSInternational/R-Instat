@@ -170,7 +170,7 @@ Partial Class ucrColumnSpanners
         '
         'colStyleExpression
         '
-        Me.colStyleExpression.HeaderText = "Style"
+        Me.colStyleExpression.HeaderText = "Style Expression"
         Me.colStyleExpression.Name = "colStyleExpression"
         Me.colStyleExpression.ReadOnly = True
         Me.colStyleExpression.Width = 90
