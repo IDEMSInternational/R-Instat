@@ -161,4 +161,4 @@ devtools::install_github("ianmoran11/mmtable2")
 devtools::install_github("michael-franke/aida-package")
 devtools::install_github("rijaf-iri/CDT")
 devtools::install_github("IDEMSInternational/rapidpror")
-
+devtools::install_github("IDEMSInternational/epicsawrap")
