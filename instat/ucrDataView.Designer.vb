@@ -684,7 +684,7 @@ Partial Class ucrDataView
         Me.panelSectionAdvanced.Controls.Add(Me.lblAdvanced)
         Me.panelSectionAdvanced.Controls.Add(Me.linkStartRestoreBackup)
         Me.panelSectionAdvanced.Controls.Add(Me.linkStartPasteScriptfromClipboard)
-        Me.panelSectionAdvanced.Location = New System.Drawing.Point(27, 410)
+        Me.panelSectionAdvanced.Location = New System.Drawing.Point(27, 412)
         Me.panelSectionAdvanced.Name = "panelSectionAdvanced"
         Me.panelSectionAdvanced.Size = New System.Drawing.Size(374, 83)
         Me.panelSectionAdvanced.TabIndex = 12
@@ -697,10 +697,10 @@ Partial Class ucrDataView
         Me.linkStartAddRPackage.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartAddRPackage.Location = New System.Drawing.Point(5, 64)
         Me.linkStartAddRPackage.Name = "linkStartAddRPackage"
-        Me.linkStartAddRPackage.Size = New System.Drawing.Size(182, 13)
+        Me.linkStartAddRPackage.Size = New System.Drawing.Size(187, 13)
         Me.linkStartAddRPackage.TabIndex = 6
         Me.linkStartAddRPackage.TabStop = True
-        Me.linkStartAddRPackage.Text = "Add R package to R-Instat... (Online)"
+        Me.linkStartAddRPackage.Text = "Add R Package To R-Instat... (Online)"
         '
         'lblAdvanced
         '
@@ -721,10 +721,10 @@ Partial Class ucrDataView
         Me.linkStartRestoreBackup.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartRestoreBackup.Location = New System.Drawing.Point(5, 47)
         Me.linkStartRestoreBackup.Name = "linkStartRestoreBackup"
-        Me.linkStartRestoreBackup.Size = New System.Drawing.Size(142, 13)
+        Me.linkStartRestoreBackup.Size = New System.Drawing.Size(145, 13)
         Me.linkStartRestoreBackup.TabIndex = 4
         Me.linkStartRestoreBackup.TabStop = True
-        Me.linkStartRestoreBackup.Text = "Restore Data from Backup..."
+        Me.linkStartRestoreBackup.Text = "Restore Data From Backup..."
         '
         'linkStartPasteScriptfromClipboard
         '
@@ -734,10 +734,10 @@ Partial Class ucrDataView
         Me.linkStartPasteScriptfromClipboard.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartPasteScriptfromClipboard.Location = New System.Drawing.Point(5, 30)
         Me.linkStartPasteScriptfromClipboard.Name = "linkStartPasteScriptfromClipboard"
-        Me.linkStartPasteScriptfromClipboard.Size = New System.Drawing.Size(134, 13)
+        Me.linkStartPasteScriptfromClipboard.Size = New System.Drawing.Size(137, 13)
         Me.linkStartPasteScriptfromClipboard.TabIndex = 5
         Me.linkStartPasteScriptfromClipboard.TabStop = True
-        Me.linkStartPasteScriptfromClipboard.Text = "Paste Script from Clipboard"
+        Me.linkStartPasteScriptfromClipboard.Text = "Paste Script From Clipboard"
         '
         'panelSectionHelp
         '
@@ -758,10 +758,10 @@ Partial Class ucrDataView
         Me.linkHelpData.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkHelpData.Location = New System.Drawing.Point(5, 47)
         Me.linkHelpData.Name = "linkHelpData"
-        Me.linkHelpData.Size = New System.Drawing.Size(30, 13)
+        Me.linkHelpData.Size = New System.Drawing.Size(39, 13)
         Me.linkHelpData.TabIndex = 12
         Me.linkHelpData.TabStop = True
-        Me.linkHelpData.Text = "Data"
+        Me.linkHelpData.Text = "Data..."
         '
         'linkHelpGettingStarted
         '
@@ -771,10 +771,10 @@ Partial Class ucrDataView
         Me.linkHelpGettingStarted.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkHelpGettingStarted.Location = New System.Drawing.Point(5, 30)
         Me.linkHelpGettingStarted.Name = "linkHelpGettingStarted"
-        Me.linkHelpGettingStarted.Size = New System.Drawing.Size(78, 13)
+        Me.linkHelpGettingStarted.Size = New System.Drawing.Size(87, 13)
         Me.linkHelpGettingStarted.TabIndex = 11
         Me.linkHelpGettingStarted.TabStop = True
-        Me.linkHelpGettingStarted.Text = "Getting Started"
+        Me.linkHelpGettingStarted.Text = "Getting Started..."
         '
         'lblHelp
         '
@@ -820,10 +820,10 @@ Partial Class ucrDataView
         Me.linkStartPasteData.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartPasteData.Location = New System.Drawing.Point(5, 81)
         Me.linkStartPasteData.Name = "linkStartPasteData"
-        Me.linkStartPasteData.Size = New System.Drawing.Size(136, 13)
+        Me.linkStartPasteData.Size = New System.Drawing.Size(142, 13)
         Me.linkStartPasteData.TabIndex = 7
         Me.linkStartPasteData.TabStop = True
-        Me.linkStartPasteData.Text = "Paste data from clipboard..."
+        Me.linkStartPasteData.Text = "Paste Data From Clipboard..."
         '
         'lblStart
         '
@@ -842,7 +842,7 @@ Partial Class ucrDataView
         Me.linkStartNewDataFrame.AutoSize = True
         Me.linkStartNewDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkStartNewDataFrame.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartNewDataFrame.Location = New System.Drawing.Point(5, 47)
+        Me.linkStartNewDataFrame.Location = New System.Drawing.Point(5, 30)
         Me.linkStartNewDataFrame.Name = "linkStartNewDataFrame"
         Me.linkStartNewDataFrame.Size = New System.Drawing.Size(96, 13)
         Me.linkStartNewDataFrame.TabIndex = 3
@@ -855,7 +855,7 @@ Partial Class ucrDataView
         Me.linkStartOpenFile.AutoSize = True
         Me.linkStartOpenFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkStartOpenFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartOpenFile.Location = New System.Drawing.Point(5, 30)
+        Me.linkStartOpenFile.Location = New System.Drawing.Point(5, 47)
         Me.linkStartOpenFile.Name = "linkStartOpenFile"
         Me.linkStartOpenFile.Size = New System.Drawing.Size(90, 13)
         Me.linkStartOpenFile.TabIndex = 4
