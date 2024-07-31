@@ -44,10 +44,14 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverStation.SetParameter(New RParameter("station_col", 1))
         ucrReceiverStation.Selector = ucrSelectorDefineAnnualRain
         ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bAutoFill = True
 
         ucrReceiverYear.SetParameter(New RParameter("year_col", 2))
         ucrReceiverYear.Selector = ucrSelectorDefineAnnualRain
         ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.SetClimaticType("year")
+        ucrReceiverYear.bAutoFill = True
 
         ucrReceiverStartRainDOY.SetParameter(New RParameter("start_rains_doy_col", 3))
         ucrReceiverStartRainDOY.Selector = ucrSelectorDefineAnnualRain
@@ -108,6 +112,8 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverStationCrop.SetParameter(New RParameter("station_col", 1))
         ucrReceiverStationCrop.Selector = ucrSelectorCropProp
         ucrReceiverStationCrop.SetParameterIsString()
+        ucrReceiverStationCrop.SetClimaticType("station")
+        ucrReceiverStationCrop.bAutoFill = True
 
         ucrReceiverTotalRain.SetParameter(New RParameter("total_rain_col", 2))
         ucrReceiverTotalRain.Selector = ucrSelectorCropProp
@@ -129,10 +135,14 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverSeasonStationProb.SetParameter(New RParameter("station_col", 1))
         ucrReceiverSeasonStationProb.Selector = ucrSelectorSeasonStartProp
         ucrReceiverSeasonStationProb.SetParameterIsString()
+        ucrReceiverSeasonStationProb.SetClimaticType("station")
+        ucrReceiverSeasonStationProb.bAutoFill = True
 
         ucrReceiverSeasonYear.SetParameter(New RParameter("year_col", 2))
         ucrReceiverSeasonYear.Selector = ucrSelectorSeasonStartProp
         ucrReceiverSeasonYear.SetParameterIsString()
+        ucrReceiverSeasonYear.SetClimaticType("year")
+        ucrReceiverSeasonYear.bAutoFill = True
 
         ucrReceiverSeasonPlantingDay.SetParameter(New RParameter("plant_day_col", 3))
         ucrReceiverSeasonPlantingDay.Selector = ucrSelectorSeasonStartProp
@@ -146,10 +156,14 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverAnnualTempStation.SetParameter(New RParameter("station_col", 1))
         ucrReceiverAnnualTempStation.Selector = ucrSelectorAnnualTemp
         ucrReceiverAnnualTempStation.SetParameterIsString()
+        ucrReceiverAnnualTempStation.SetClimaticType("station")
+        ucrReceiverAnnualTempStation.bAutoFill = True
 
         ucrReceiverAnnualTempYr.SetParameter(New RParameter("year_col", 2))
         ucrReceiverAnnualTempYr.Selector = ucrSelectorAnnualTemp
         ucrReceiverAnnualTempYr.SetParameterIsString()
+        ucrReceiverAnnualTempYr.SetClimaticType("year")
+        ucrReceiverAnnualTempYr.bAutoFill = True
 
         ucrReceiverMeanAnnual.SetParameter(New RParameter("mean_tmin_col", 3))
         ucrReceiverMeanAnnual.Selector = ucrSelectorAnnualTemp
@@ -179,14 +193,20 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverMonthlyTemp.SetParameter(New RParameter("station_col", 1))
         ucrReceiverMonthlyTemp.Selector = ucrSelecetorMonthlyTemp
         ucrReceiverMonthlyTemp.SetParameterIsString()
+        ucrReceiverMonthlyTemp.SetClimaticType("station")
+        ucrReceiverMonthlyTemp.bAutoFill = True
 
         ucrReceiverYearMonthly.SetParameter(New RParameter("year_col", 2))
         ucrReceiverYearMonthly.Selector = ucrSelecetorMonthlyTemp
         ucrReceiverYearMonthly.SetParameterIsString()
+        ucrReceiverYearMonthly.SetClimaticType("year")
+        ucrReceiverYearMonthly.bAutoFill = True
 
         ucrReceiverMonthMonthly.SetParameter(New RParameter("month_col", 3))
         ucrReceiverMonthMonthly.Selector = ucrSelecetorMonthlyTemp
         ucrReceiverMonthMonthly.SetParameterIsString()
+        ucrReceiverMonthMonthly.SetClimaticType("month")
+        ucrReceiverMonthMonthly.bAutoFill = True
 
         ucrReceiverMeanminMontly.SetParameter(New RParameter("mean_tmin_col", 4))
         ucrReceiverMeanminMontly.Selector = ucrSelecetorMonthlyTemp
