@@ -1086,7 +1086,7 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub AddRemoveFirstAnova2Param()
         If rdoThreeVariable.Checked Then
-            If ucrReceiverFirstVars.IsEmpty Then
+            If Not ucrReceiverFirstVars.IsEmpty Then
                 If IsNumericByNumericByFactor() Then
                     If ucrChkSwapXYVar.Checked Then
                         clsYlist2Operator.AddParameter("cols", ucrReceiverFirstVars.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
@@ -1096,8 +1096,6 @@ Public Class dlgDescribeTwoVariable
                         clsYlist2Operator.RemoveParameterByName("cols")
                     End If
                 ElseIf IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
-                    clsYlistOperator.RemoveParameterByName("cols")
-                Else
                     clsYlistOperator.AddParameter("cols", ucrReceiverFirstVars.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
                 End If
             Else
@@ -1148,14 +1146,17 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub AddRemoveSecondAnovaParam()
         If rdoThreeVariable.Checked Then
-            If ucrReceiverThreeVariableSecondFactor.IsEmpty Then
+            If Not ucrReceiverThreeVariableSecondFactor.IsEmpty Then
                 If IsNumericByNumericByFactor() Then
                     If ucrChkSwapXYVar.Checked Then
-                        clsCombineSwapAnova2Table.AddParameter("x", ucrReceiverThreeVariableSecondFactor.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
+                        clsCombineSwapAnova2Table.AddParameter("x", ".x", bIncludeArgumentName:=False)
+                        clsRAnovaSwapTable2Funtion.AddParameter("x_col_names", "c(" & ucrReceiverThreeVariableSecondFactor.GetVariableNames & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames & ")", iPosition:=2)
+
                         clsCombineAnova2Function.RemoveParameterByName("x")
                     Else
                         clsCombineAnova2Function.AddParameter("x", ucrReceiverThreeVariableSecondFactor.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
                         clsCombineSwapAnova2Table.RemoveParameterByName("x")
+                        clsRAnovaSwapTable2Funtion.AddParameter("x_col_names", ".x", iPosition:=2)
 
                     End If
                 ElseIf IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
@@ -1215,12 +1216,22 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub AddRemoveThirdAnovaParam()
         If rdoThreeVariable.Checked Then
-            If IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
-                If ucrReceiverThreeVariableThirdVariable.IsEmpty Then
-                    clsCombineAnova2Function.RemoveParameterByName("y")
-                Else
+            If Not ucrReceiverThreeVariableThirdVariable.IsEmpty Then
+                'If IsNumericByNumericByFactor() Then
+                '    '    If ucrChkSwapXYVar.Checked Then
+                '    '        clsCombineSwapAnova2Table.AddParameter("y", ucrReceiverThreeVariableThirdVariable.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
+                '    '    Else
+                '    '        clsCombineAnova2Function.AddParameter("y", ucrReceiverThreeVariableThirdVariable.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
+
+                '    '    End If
+                If IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
                     clsCombineAnova2Function.AddParameter("y", ucrReceiverThreeVariableThirdVariable.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
+                Else
+                    clsCombineAnova2Function.RemoveParameterByName("y")
+
                 End If
+            Else
+                clsCombineAnova2Function.RemoveParameterByName("y")
             End If
         End If
     End Sub
@@ -1543,6 +1554,7 @@ Public Class dlgDescribeTwoVariable
         ChangeSumaryLabelText()
         ChangeBaseRCode()
         ManageControlsVisibility()
+        AddRemoveThirdAnovaParam()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlContentsChanged,
@@ -1680,6 +1692,7 @@ Public Class dlgDescribeTwoVariable
         ChangeSumaryLabelText()
         ManageControlsVisibility()
         ChangeLocations()
+        AddRemoveThirdAnovaParam()
     End Sub
 
     Private Sub AddingColumnFactor()
