@@ -39,11 +39,11 @@ Partial Class sdgMetadataGoogleBuckets
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(90, 501)
+        Me.ucrBase.Location = New System.Drawing.Point(90, 441)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(335, 42)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 11
         '
         'ucrSelectorMetadata
         '
@@ -55,17 +55,17 @@ Partial Class sdgMetadataGoogleBuckets
         Me.ucrSelectorMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorMetadata.Name = "ucrSelectorMetadata"
         Me.ucrSelectorMetadata.Size = New System.Drawing.Size(318, 274)
-        Me.ucrSelectorMetadata.TabIndex = 1
+        Me.ucrSelectorMetadata.TabIndex = 0
         '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(436, 62)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(436, 57)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(180, 41)
         Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.TabIndex = 2
         Me.ucrReceiverStation.ucrSelector = Nothing
@@ -74,37 +74,37 @@ Partial Class sdgMetadataGoogleBuckets
         '
         Me.ucrReceiverDistrict.AutoSize = True
         Me.ucrReceiverDistrict.frmParent = Me
-        Me.ucrReceiverDistrict.Location = New System.Drawing.Point(459, 320)
+        Me.ucrReceiverDistrict.Location = New System.Drawing.Point(436, 358)
         Me.ucrReceiverDistrict.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDistrict.Name = "ucrReceiverDistrict"
         Me.ucrReceiverDistrict.Selector = Nothing
-        Me.ucrReceiverDistrict.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverDistrict.Size = New System.Drawing.Size(180, 43)
         Me.ucrReceiverDistrict.strNcFilePath = ""
-        Me.ucrReceiverDistrict.TabIndex = 4
+        Me.ucrReceiverDistrict.TabIndex = 10
         Me.ucrReceiverDistrict.ucrSelector = Nothing
         '
         'ucrReceiverElavation
         '
         Me.ucrReceiverElavation.AutoSize = True
         Me.ucrReceiverElavation.frmParent = Me
-        Me.ucrReceiverElavation.Location = New System.Drawing.Point(458, 258)
+        Me.ucrReceiverElavation.Location = New System.Drawing.Point(436, 284)
         Me.ucrReceiverElavation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElavation.Name = "ucrReceiverElavation"
         Me.ucrReceiverElavation.Selector = Nothing
-        Me.ucrReceiverElavation.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverElavation.Size = New System.Drawing.Size(180, 36)
         Me.ucrReceiverElavation.strNcFilePath = ""
-        Me.ucrReceiverElavation.TabIndex = 5
+        Me.ucrReceiverElavation.TabIndex = 8
         Me.ucrReceiverElavation.ucrSelector = Nothing
         '
         'ucrReceiverLatitude
         '
         Me.ucrReceiverLatitude.AutoSize = True
         Me.ucrReceiverLatitude.frmParent = Me
-        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(452, 198)
+        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(436, 209)
         Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
         Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(180, 38)
         Me.ucrReceiverLatitude.strNcFilePath = ""
         Me.ucrReceiverLatitude.TabIndex = 6
         Me.ucrReceiverLatitude.ucrSelector = Nothing
@@ -113,13 +113,13 @@ Partial Class sdgMetadataGoogleBuckets
         '
         Me.ucrReceiverLongititude.AutoSize = True
         Me.ucrReceiverLongititude.frmParent = Me
-        Me.ucrReceiverLongititude.Location = New System.Drawing.Point(439, 129)
+        Me.ucrReceiverLongititude.Location = New System.Drawing.Point(436, 130)
         Me.ucrReceiverLongititude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLongititude.Name = "ucrReceiverLongititude"
         Me.ucrReceiverLongititude.Selector = Nothing
-        Me.ucrReceiverLongititude.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverLongititude.Size = New System.Drawing.Size(180, 36)
         Me.ucrReceiverLongititude.strNcFilePath = ""
-        Me.ucrReceiverLongititude.TabIndex = 7
+        Me.ucrReceiverLongititude.TabIndex = 4
         Me.ucrReceiverLongititude.ucrSelector = Nothing
         '
         'lblStation
@@ -128,50 +128,50 @@ Partial Class sdgMetadataGoogleBuckets
         Me.lblStation.Location = New System.Drawing.Point(439, 34)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(106, 20)
-        Me.lblStation.TabIndex = 8
+        Me.lblStation.TabIndex = 1
         Me.lblStation.Text = "Station Name"
         '
         'lblLongitude
         '
         Me.lblLongitude.AutoSize = True
-        Me.lblLongitude.Location = New System.Drawing.Point(445, 103)
+        Me.lblLongitude.Location = New System.Drawing.Point(439, 103)
         Me.lblLongitude.Name = "lblLongitude"
         Me.lblLongitude.Size = New System.Drawing.Size(84, 20)
-        Me.lblLongitude.TabIndex = 9
+        Me.lblLongitude.TabIndex = 3
         Me.lblLongitude.Text = "Longitude "
         '
         'lblLatitude
         '
         Me.lblLatitude.AutoSize = True
-        Me.lblLatitude.Location = New System.Drawing.Point(448, 165)
+        Me.lblLatitude.Location = New System.Drawing.Point(440, 180)
         Me.lblLatitude.Name = "lblLatitude"
         Me.lblLatitude.Size = New System.Drawing.Size(67, 20)
-        Me.lblLatitude.TabIndex = 10
+        Me.lblLatitude.TabIndex = 5
         Me.lblLatitude.Text = "Latitude"
         '
         'lblElavation
         '
         Me.lblElavation.AutoSize = True
-        Me.lblElavation.Location = New System.Drawing.Point(462, 231)
+        Me.lblElavation.Location = New System.Drawing.Point(442, 255)
         Me.lblElavation.Name = "lblElavation"
         Me.lblElavation.Size = New System.Drawing.Size(74, 20)
-        Me.lblElavation.TabIndex = 11
-        Me.lblElavation.Text = "Elavation"
+        Me.lblElavation.TabIndex = 7
+        Me.lblElavation.Text = "Elevation"
         '
         'lblDistrict
         '
         Me.lblDistrict.AutoSize = True
-        Me.lblDistrict.Location = New System.Drawing.Point(457, 292)
+        Me.lblDistrict.Location = New System.Drawing.Point(443, 329)
         Me.lblDistrict.Name = "lblDistrict"
         Me.lblDistrict.Size = New System.Drawing.Size(58, 20)
-        Me.lblDistrict.TabIndex = 12
+        Me.lblDistrict.TabIndex = 9
         Me.lblDistrict.Text = "District"
         '
         'sdgMetadataGoogleBuckets
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(671, 560)
+        Me.ClientSize = New System.Drawing.Size(637, 511)
         Me.Controls.Add(Me.lblDistrict)
         Me.Controls.Add(Me.lblElavation)
         Me.Controls.Add(Me.lblLatitude)

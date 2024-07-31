@@ -21,7 +21,7 @@ Public Class dlgExportClimaticDefinitions
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsDummyFunction As New RFunction
-    Public clsExportRinstatToBucketFunction, ClsGcsAuthFileFunction, clsSummariesFunction As New RFunction
+    Public clsExportRinstatToBucketFunction, clsUpdateMetadataInfoFunction, ClsGcsAuthFileFunction, clsSummariesFunction As New RFunction
     Public clsReforMattAnnualSummariesFunction, clsReformatCropSuccessFunction, clsReformatSeasonStartFunction, clsReformatTempSummariesFunction, clsReformatMonthlyTempSummaries As New RFunction
 
     Private Sub dlgExportClimaticDefinitions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -133,6 +133,7 @@ Public Class dlgExportClimaticDefinitions
         clsReforMattAnnualSummariesFunction = New RFunction
         clsReformatTempSummariesFunction = New RFunction
         ClsGcsAuthFileFunction = New RFunction
+        clsUpdateMetadataInfoFunction = New RFunction
         clsDummyFunction = New RFunction
         bResetSubdialog = True
 
@@ -172,6 +173,8 @@ Public Class dlgExportClimaticDefinitions
 
         ClsGcsAuthFileFunction.SetPackageName("epicsawrap")
         ClsGcsAuthFileFunction.SetRCommand("gcs_auth_file")
+
+        clsUpdateMetadataInfoFunction.SetRCommand("update_metadata_info")
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(ClsGcsAuthFileFunction, 0)
@@ -317,6 +320,12 @@ Public Class dlgExportClimaticDefinitions
         AddRemoveSummary()
         EnableDisableDefineButton()
         TestOkEnabled()
+    End Sub
+
+    Private Sub cmdUpdateMetedata_Click(sender As Object, e As EventArgs) Handles cmdUpdateMetedata.Click
+        sdgMetadataGoogleBuckets.SetRCode(clsNewUpdateMetadataInfoFunction:=clsUpdateMetadataInfoFunction, bReset:=bResetSubdialog)
+        sdgMetadataGoogleBuckets.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub ucrInputCountry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCountry.ControlValueChanged
