@@ -712,7 +712,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
       if(require_correct_length) stop("Length of new column must be divisible by the length of the data frame")
       else curr_col <- rep(curr_col, length.out = self$get_data_frame_length())
     }
-    if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name[i])
+    if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
     curr_col_name <- make.names(iconv(curr_col_name, to = "ASCII//TRANSLIT", sub = "."))
     new_col_names <- c(new_col_names, curr_col_name)
