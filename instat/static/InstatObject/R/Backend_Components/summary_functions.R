@@ -760,53 +760,46 @@ summary_which_min <- function (x, na.rm = TRUE, na_type = "", ...) {
   } 
 }
 
-summary_where_max <- function(data, x, y, na.rm = TRUE, na_type = "", ...) {
-  # Check if data is a data frame
-  if (!is.data.frame(data)) {
-    stop("Input 'data' must be a data frame.")
+summary_where_max <- function(x, summary_where_y, na.rm = TRUE, na_type = "", ...) {  
+  # Check if vectors are empty
+  if (length(x) == 0 || length(summary_where_y) == 0) {
+    return(NA)
   }
   
-  # Check if x and y are valid column names
-  if (!x %in% colnames(data) || !y %in% colnames(data)) {
-    stop("Invalid column name(s) provided.")
-  }
-  
-  # Subset the data excluding NA values if na.rm is TRUE
+  # Handle NA values
   if (na.rm) {
-    data <- na.omit(data)
+    valid_indices <- !is.na(x) & !is.na(summary_where_y)
+    x <- x[valid_indices]
+    summary_where_y <- summary_where_y[valid_indices]
   }
   
-  # Find the row index of the maximum value in column x
-  max_row <- summary_which_max(data[[x]], na.rm = na.rm, na_type = na_type, ...)
-
+  # Find the index of the maximum value in x
+  max_index <- which.max(x)
   
-  # Return the value of column y at the found row index
-  return(data[max_row, y])
+  # Return the corresponding value in summary_where_y
+  return(summary_where_y[max_index])
 }
 
-summary_where_min <- function(data, x, y, na.rm = TRUE, na_type = "", ...) {
-  # Check if data is a data frame
-  if (!is.data.frame(data)) {
-    stop("Input 'data' must be a data frame.")
+summary_where_min <- function(x, summary_where_y, na.rm = TRUE, na_type = "", ...) {
+  # Check if vectors are empty
+  if (length(x) == 0 || length(summary_where_y) == 0) {
+    return(NA)
   }
   
-  # Check if x and y are valid column names
-  if (!x %in% colnames(data) || !y %in% colnames(data)) {
-    stop("Invalid column name(s) provided.")
-  }
-  
-  # Subset the data excluding NA values if na.rm is TRUE
+  # Handle NA values
   if (na.rm) {
-    data <- na.omit(data)
+    valid_indices <- !is.na(x) & !is.na(summary_where_y)
+    x <- x[valid_indices]
+    summary_where_y <- summary_where_y[valid_indices]
   }
   
-  # Find the row index of the minimum value in column x
-  min_row <- summary_which_min(data[[x]], na.rm = na.rm, na_type = na_type, ...)
+  # Find the index of the minimum value in x
+  min_index <- summary_which_min(x, na.rm = na.rm, na_type = na_type, ...)
   
-  # Return the value of column y at the found row index
-  return(data[min_row, y])
+  # Return the corresponding value in summary_where_y
+  return(summary_where_y[min_index])
 }
-
+    
 # get the range of the data
 summary_range <- function(x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
