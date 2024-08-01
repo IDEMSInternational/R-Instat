@@ -23,9 +23,6 @@ Partial Class ucrRowSummary
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.dataGridSummaries = New System.Windows.Forms.DataGridView()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colStyleExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnStyle = New System.Windows.Forms.Button()
         Me.lblSummaryTypes = New System.Windows.Forms.Label()
         Me.lblSummaries = New System.Windows.Forms.Label()
@@ -33,10 +30,20 @@ Partial Class ucrRowSummary
         Me.btnAddSummaries = New System.Windows.Forms.Button()
         Me.lblSummaryLabel = New System.Windows.Forms.Label()
         Me.lblReplaceWith = New System.Windows.Forms.Label()
-        Me.UcrInputTextBox2 = New instat.ucrInputTextBox()
-        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
-        Me.UcrInputTextBox1 = New instat.ucrInputTextBox()
         Me.btnFormat = New System.Windows.Forms.Button()
+        Me.lblColumns = New System.Windows.Forms.Label()
+        Me.lblGroupId = New System.Windows.Forms.Label()
+        Me.lblSide = New System.Windows.Forms.Label()
+        Me.colType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ucrCboSide = New instat.ucrInputComboBox()
+        Me.ucrTxtGroupId = New instat.ucrInputTextBox()
+        Me.ucrReceiverMultipleCols = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrTxtReplaceNa = New instat.ucrInputTextBox()
+        Me.ucrCboSummaryType = New instat.ucrInputComboBox()
+        Me.ucrTxtSummaryLabel = New instat.ucrInputTextBox()
         CType(Me.dataGridSummaries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -44,44 +51,20 @@ Partial Class ucrRowSummary
         '
         Me.dataGridSummaries.AllowUserToAddRows = False
         Me.dataGridSummaries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridSummaries.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colLabel, Me.colCodnition, Me.colStyleExpression})
-        Me.dataGridSummaries.Location = New System.Drawing.Point(4, 320)
+        Me.dataGridSummaries.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colType, Me.colLabel, Me.colExpression})
+        Me.dataGridSummaries.Location = New System.Drawing.Point(360, 451)
         Me.dataGridSummaries.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.dataGridSummaries.Name = "dataGridSummaries"
         Me.dataGridSummaries.ReadOnly = True
         Me.dataGridSummaries.RowHeadersWidth = 62
-        Me.dataGridSummaries.Size = New System.Drawing.Size(484, 146)
+        Me.dataGridSummaries.Size = New System.Drawing.Size(522, 120)
         Me.dataGridSummaries.TabIndex = 335
-        '
-        'colLabel
-        '
-        Me.colLabel.HeaderText = "Label"
-        Me.colLabel.MinimumWidth = 8
-        Me.colLabel.Name = "colLabel"
-        Me.colLabel.ReadOnly = True
-        Me.colLabel.Width = 70
-        '
-        'colCodnition
-        '
-        Me.colCodnition.HeaderText = "Condition"
-        Me.colCodnition.MinimumWidth = 8
-        Me.colCodnition.Name = "colCodnition"
-        Me.colCodnition.ReadOnly = True
-        Me.colCodnition.Width = 90
-        '
-        'colStyleExpression
-        '
-        Me.colStyleExpression.HeaderText = "Style Expression"
-        Me.colStyleExpression.MinimumWidth = 8
-        Me.colStyleExpression.Name = "colStyleExpression"
-        Me.colStyleExpression.ReadOnly = True
-        Me.colStyleExpression.Width = 90
         '
         'btnStyle
         '
         Me.btnStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnStyle.Location = New System.Drawing.Point(154, 158)
+        Me.btnStyle.Location = New System.Drawing.Point(738, 301)
         Me.btnStyle.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnStyle.Name = "btnStyle"
         Me.btnStyle.Size = New System.Drawing.Size(126, 35)
@@ -94,7 +77,7 @@ Partial Class ucrRowSummary
         '
         Me.lblSummaryTypes.AutoSize = True
         Me.lblSummaryTypes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSummaryTypes.Location = New System.Drawing.Point(11, 9)
+        Me.lblSummaryTypes.Location = New System.Drawing.Point(356, 144)
         Me.lblSummaryTypes.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSummaryTypes.Name = "lblSummaryTypes"
         Me.lblSummaryTypes.Size = New System.Drawing.Size(118, 20)
@@ -105,7 +88,7 @@ Partial Class ucrRowSummary
         '
         Me.lblSummaries.AutoSize = True
         Me.lblSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSummaries.Location = New System.Drawing.Point(6, 295)
+        Me.lblSummaries.Location = New System.Drawing.Point(362, 426)
         Me.lblSummaries.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSummaries.Name = "lblSummaries"
         Me.lblSummaries.Size = New System.Drawing.Size(93, 20)
@@ -115,7 +98,7 @@ Partial Class ucrRowSummary
         'btnClearSummaries
         '
         Me.btnClearSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearSummaries.Location = New System.Drawing.Point(366, 271)
+        Me.btnClearSummaries.Location = New System.Drawing.Point(758, 410)
         Me.btnClearSummaries.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClearSummaries.Name = "btnClearSummaries"
         Me.btnClearSummaries.Size = New System.Drawing.Size(118, 35)
@@ -128,7 +111,7 @@ Partial Class ucrRowSummary
         '
         Me.btnAddSummaries.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnAddSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnAddSummaries.Location = New System.Drawing.Point(10, 246)
+        Me.btnAddSummaries.Location = New System.Drawing.Point(363, 377)
         Me.btnAddSummaries.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnAddSummaries.Name = "btnAddSummaries"
         Me.btnAddSummaries.Size = New System.Drawing.Size(144, 35)
@@ -141,7 +124,7 @@ Partial Class ucrRowSummary
         '
         Me.lblSummaryLabel.AutoSize = True
         Me.lblSummaryLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSummaryLabel.Location = New System.Drawing.Point(11, 81)
+        Me.lblSummaryLabel.Location = New System.Drawing.Point(362, 216)
         Me.lblSummaryLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSummaryLabel.Name = "lblSummaryLabel"
         Me.lblSummaryLabel.Size = New System.Drawing.Size(123, 20)
@@ -152,54 +135,18 @@ Partial Class ucrRowSummary
         '
         Me.lblReplaceWith.AutoSize = True
         Me.lblReplaceWith.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReplaceWith.Location = New System.Drawing.Point(255, 9)
+        Me.lblReplaceWith.Location = New System.Drawing.Point(590, 144)
         Me.lblReplaceWith.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblReplaceWith.Name = "lblReplaceWith"
-        Me.lblReplaceWith.Size = New System.Drawing.Size(130, 20)
+        Me.lblReplaceWith.Size = New System.Drawing.Size(203, 20)
         Me.lblReplaceWith.TabIndex = 346
-        Me.lblReplaceWith.Text = "Replace NA with:"
-        '
-        'UcrInputTextBox2
-        '
-        Me.UcrInputTextBox2.AddQuotesIfUnrecognised = True
-        Me.UcrInputTextBox2.AutoSize = True
-        Me.UcrInputTextBox2.IsMultiline = False
-        Me.UcrInputTextBox2.IsReadOnly = False
-        Me.UcrInputTextBox2.Location = New System.Drawing.Point(254, 35)
-        Me.UcrInputTextBox2.Margin = New System.Windows.Forms.Padding(14)
-        Me.UcrInputTextBox2.Name = "UcrInputTextBox2"
-        Me.UcrInputTextBox2.Size = New System.Drawing.Size(180, 32)
-        Me.UcrInputTextBox2.TabIndex = 347
-        '
-        'UcrInputComboBox1
-        '
-        Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.UcrInputComboBox1.GetSetSelectedIndex = -1
-        Me.UcrInputComboBox1.IsReadOnly = False
-        Me.UcrInputComboBox1.Location = New System.Drawing.Point(14, 32)
-        Me.UcrInputComboBox1.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
-        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
-        Me.UcrInputComboBox1.Size = New System.Drawing.Size(176, 40)
-        Me.UcrInputComboBox1.TabIndex = 345
-        '
-        'UcrInputTextBox1
-        '
-        Me.UcrInputTextBox1.AddQuotesIfUnrecognised = True
-        Me.UcrInputTextBox1.AutoSize = True
-        Me.UcrInputTextBox1.IsMultiline = False
-        Me.UcrInputTextBox1.IsReadOnly = False
-        Me.UcrInputTextBox1.Location = New System.Drawing.Point(10, 107)
-        Me.UcrInputTextBox1.Margin = New System.Windows.Forms.Padding(14)
-        Me.UcrInputTextBox1.Name = "UcrInputTextBox1"
-        Me.UcrInputTextBox1.Size = New System.Drawing.Size(180, 32)
-        Me.UcrInputTextBox1.TabIndex = 343
+        Me.lblReplaceWith.Text = "Replace NA with (Optional):"
         '
         'btnFormat
         '
         Me.btnFormat.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnFormat.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnFormat.Location = New System.Drawing.Point(10, 158)
+        Me.btnFormat.Location = New System.Drawing.Point(594, 301)
         Me.btnFormat.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnFormat.Name = "btnFormat"
         Me.btnFormat.Size = New System.Drawing.Size(136, 35)
@@ -208,15 +155,164 @@ Partial Class ucrRowSummary
         Me.btnFormat.Text = "Format"
         Me.btnFormat.UseVisualStyleBackColor = True
         '
+        'lblColumns
+        '
+        Me.lblColumns.AutoSize = True
+        Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColumns.Location = New System.Drawing.Point(362, 13)
+        Me.lblColumns.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblColumns.Name = "lblColumns"
+        Me.lblColumns.Size = New System.Drawing.Size(85, 20)
+        Me.lblColumns.TabIndex = 350
+        Me.lblColumns.Text = "Column(s):"
+        '
+        'lblGroupId
+        '
+        Me.lblGroupId.AutoSize = True
+        Me.lblGroupId.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblGroupId.Location = New System.Drawing.Point(590, 216)
+        Me.lblGroupId.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblGroupId.Name = "lblGroupId"
+        Me.lblGroupId.Size = New System.Drawing.Size(152, 20)
+        Me.lblGroupId.TabIndex = 352
+        Me.lblGroupId.Text = "Group ID (Optional):"
+        '
+        'lblSide
+        '
+        Me.lblSide.AutoSize = True
+        Me.lblSide.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSide.Location = New System.Drawing.Point(362, 288)
+        Me.lblSide.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSide.Name = "lblSide"
+        Me.lblSide.Size = New System.Drawing.Size(45, 20)
+        Me.lblSide.TabIndex = 354
+        Me.lblSide.Text = "Side:"
+        '
+        'colType
+        '
+        Me.colType.HeaderText = "Type"
+        Me.colType.MinimumWidth = 8
+        Me.colType.Name = "colType"
+        Me.colType.ReadOnly = True
+        Me.colType.Width = 70
+        '
+        'colLabel
+        '
+        Me.colLabel.HeaderText = "Label"
+        Me.colLabel.MinimumWidth = 8
+        Me.colLabel.Name = "colLabel"
+        Me.colLabel.ReadOnly = True
+        Me.colLabel.Width = 70
+        '
+        'colExpression
+        '
+        Me.colExpression.HeaderText = "Expression"
+        Me.colExpression.MinimumWidth = 8
+        Me.colExpression.Name = "colExpression"
+        Me.colExpression.ReadOnly = True
+        Me.colExpression.Width = 90
+        '
+        'ucrCboSide
+        '
+        Me.ucrCboSide.AddQuotesIfUnrecognised = True
+        Me.ucrCboSide.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboSide.GetSetSelectedIndex = -1
+        Me.ucrCboSide.IsReadOnly = False
+        Me.ucrCboSide.Location = New System.Drawing.Point(359, 309)
+        Me.ucrCboSide.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrCboSide.Name = "ucrCboSide"
+        Me.ucrCboSide.Size = New System.Drawing.Size(176, 40)
+        Me.ucrCboSide.TabIndex = 355
+        '
+        'ucrTxtGroupId
+        '
+        Me.ucrTxtGroupId.AddQuotesIfUnrecognised = True
+        Me.ucrTxtGroupId.AutoSize = True
+        Me.ucrTxtGroupId.IsMultiline = False
+        Me.ucrTxtGroupId.IsReadOnly = False
+        Me.ucrTxtGroupId.Location = New System.Drawing.Point(594, 242)
+        Me.ucrTxtGroupId.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrTxtGroupId.Name = "ucrTxtGroupId"
+        Me.ucrTxtGroupId.Size = New System.Drawing.Size(180, 32)
+        Me.ucrTxtGroupId.TabIndex = 353
+        '
+        'ucrReceiverMultipleCols
+        '
+        Me.ucrReceiverMultipleCols.AutoSize = True
+        Me.ucrReceiverMultipleCols.frmParent = Nothing
+        Me.ucrReceiverMultipleCols.Location = New System.Drawing.Point(359, 38)
+        Me.ucrReceiverMultipleCols.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultipleCols.Name = "ucrReceiverMultipleCols"
+        Me.ucrReceiverMultipleCols.Selector = Nothing
+        Me.ucrReceiverMultipleCols.Size = New System.Drawing.Size(198, 85)
+        Me.ucrReceiverMultipleCols.strNcFilePath = ""
+        Me.ucrReceiverMultipleCols.TabIndex = 351
+        Me.ucrReceiverMultipleCols.ucrSelector = Nothing
+        '
+        'ucrSelectorCols
+        '
+        Me.ucrSelectorCols.AutoSize = True
+        Me.ucrSelectorCols.bDropUnusedFilterLevels = False
+        Me.ucrSelectorCols.bShowHiddenColumns = False
+        Me.ucrSelectorCols.bUseCurrentFilter = True
+        Me.ucrSelectorCols.Location = New System.Drawing.Point(9, 7)
+        Me.ucrSelectorCols.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorCols.Name = "ucrSelectorCols"
+        Me.ucrSelectorCols.Size = New System.Drawing.Size(320, 282)
+        Me.ucrSelectorCols.TabIndex = 349
+        '
+        'ucrTxtReplaceNa
+        '
+        Me.ucrTxtReplaceNa.AddQuotesIfUnrecognised = True
+        Me.ucrTxtReplaceNa.AutoSize = True
+        Me.ucrTxtReplaceNa.IsMultiline = False
+        Me.ucrTxtReplaceNa.IsReadOnly = False
+        Me.ucrTxtReplaceNa.Location = New System.Drawing.Point(594, 167)
+        Me.ucrTxtReplaceNa.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrTxtReplaceNa.Name = "ucrTxtReplaceNa"
+        Me.ucrTxtReplaceNa.Size = New System.Drawing.Size(180, 32)
+        Me.ucrTxtReplaceNa.TabIndex = 347
+        '
+        'ucrCboSummaryType
+        '
+        Me.ucrCboSummaryType.AddQuotesIfUnrecognised = True
+        Me.ucrCboSummaryType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboSummaryType.GetSetSelectedIndex = -1
+        Me.ucrCboSummaryType.IsReadOnly = False
+        Me.ucrCboSummaryType.Location = New System.Drawing.Point(359, 167)
+        Me.ucrCboSummaryType.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrCboSummaryType.Name = "ucrCboSummaryType"
+        Me.ucrCboSummaryType.Size = New System.Drawing.Size(176, 40)
+        Me.ucrCboSummaryType.TabIndex = 345
+        '
+        'ucrTxtSummaryLabel
+        '
+        Me.ucrTxtSummaryLabel.AddQuotesIfUnrecognised = True
+        Me.ucrTxtSummaryLabel.AutoSize = True
+        Me.ucrTxtSummaryLabel.IsMultiline = False
+        Me.ucrTxtSummaryLabel.IsReadOnly = False
+        Me.ucrTxtSummaryLabel.Location = New System.Drawing.Point(360, 242)
+        Me.ucrTxtSummaryLabel.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrTxtSummaryLabel.Name = "ucrTxtSummaryLabel"
+        Me.ucrTxtSummaryLabel.Size = New System.Drawing.Size(180, 32)
+        Me.ucrTxtSummaryLabel.TabIndex = 343
+        '
         'ucrRowSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrCboSide)
+        Me.Controls.Add(Me.lblSide)
+        Me.Controls.Add(Me.ucrTxtGroupId)
+        Me.Controls.Add(Me.lblGroupId)
+        Me.Controls.Add(Me.ucrReceiverMultipleCols)
+        Me.Controls.Add(Me.lblColumns)
+        Me.Controls.Add(Me.ucrSelectorCols)
         Me.Controls.Add(Me.btnFormat)
-        Me.Controls.Add(Me.UcrInputTextBox2)
+        Me.Controls.Add(Me.ucrTxtReplaceNa)
         Me.Controls.Add(Me.lblReplaceWith)
-        Me.Controls.Add(Me.UcrInputComboBox1)
-        Me.Controls.Add(Me.UcrInputTextBox1)
+        Me.Controls.Add(Me.ucrCboSummaryType)
+        Me.Controls.Add(Me.ucrTxtSummaryLabel)
         Me.Controls.Add(Me.lblSummaryLabel)
         Me.Controls.Add(Me.dataGridSummaries)
         Me.Controls.Add(Me.btnStyle)
@@ -226,7 +322,7 @@ Partial Class ucrRowSummary
         Me.Controls.Add(Me.btnAddSummaries)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrRowSummary"
-        Me.Size = New System.Drawing.Size(530, 471)
+        Me.Size = New System.Drawing.Size(890, 576)
         CType(Me.dataGridSummaries, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -234,18 +330,25 @@ Partial Class ucrRowSummary
     End Sub
 
     Friend WithEvents dataGridSummaries As DataGridView
-    Friend WithEvents colLabel As DataGridViewTextBoxColumn
-    Friend WithEvents colCodnition As DataGridViewTextBoxColumn
-    Friend WithEvents colStyleExpression As DataGridViewTextBoxColumn
     Friend WithEvents btnStyle As Button
     Friend WithEvents lblSummaryTypes As Label
     Friend WithEvents lblSummaries As Label
     Friend WithEvents btnClearSummaries As Button
     Friend WithEvents btnAddSummaries As Button
-    Friend WithEvents UcrInputTextBox1 As ucrInputTextBox
+    Friend WithEvents ucrTxtSummaryLabel As ucrInputTextBox
     Friend WithEvents lblSummaryLabel As Label
-    Friend WithEvents UcrInputComboBox1 As ucrInputComboBox
-    Friend WithEvents UcrInputTextBox2 As ucrInputTextBox
+    Friend WithEvents ucrCboSummaryType As ucrInputComboBox
+    Friend WithEvents ucrTxtReplaceNa As ucrInputTextBox
     Friend WithEvents lblReplaceWith As Label
     Friend WithEvents btnFormat As Button
+    Friend WithEvents ucrReceiverMultipleCols As ucrReceiverMultiple
+    Friend WithEvents lblColumns As Label
+    Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrTxtGroupId As ucrInputTextBox
+    Friend WithEvents lblGroupId As Label
+    Friend WithEvents lblSide As Label
+    Friend WithEvents ucrCboSide As ucrInputComboBox
+    Friend WithEvents colType As DataGridViewTextBoxColumn
+    Friend WithEvents colLabel As DataGridViewTextBoxColumn
+    Friend WithEvents colExpression As DataGridViewTextBoxColumn
 End Class
