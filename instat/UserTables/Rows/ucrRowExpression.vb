@@ -4,7 +4,6 @@
     Private strDataFrameName As String
     Private bFirstload As Boolean = True
 
-
     Private Sub UcrInputRowExpression_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseControl()
@@ -38,13 +37,11 @@
                                              ucrInputExpression.SetName(sdgTableRowExpression.GetUserInputRowExpression())
                                          End If
                                      End Sub
-
     End Sub
 
     Public Sub Setup(strDataFrameName As String)
         Me.strDataFrameName = strDataFrameName
     End Sub
-
 
     Public Function IsEmpty() As Boolean
         Return ucrInputExpression.IsEmpty()

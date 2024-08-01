@@ -175,7 +175,7 @@ Partial Class ucrColumnSpanners
         '
         Me.btnStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnStyle.Location = New System.Drawing.Point(549, 165)
+        Me.btnStyle.Location = New System.Drawing.Point(549, 166)
         Me.btnStyle.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnStyle.Name = "btnStyle"
         Me.btnStyle.Size = New System.Drawing.Size(74, 35)

@@ -1,19 +1,8 @@
 ﻿Public Class ucrRowGroup
 
     Private clsOperator As New ROperator
-    Private bFirstload As Boolean = True
-
-    'Private Sub InitialiseDialog()
-    '    ucrReceiverSingleCol.Selector = ucrSelectorCols
-    '    ucrReceiverSingleCol.SetMeAsReceiver()
-    'End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
-        'If bFirstload Then
-        '    InitialiseDialog()
-        '    bFirstload = False
-        'End If
-
         Me.clsOperator = clsOperator
 
         ucrRowExpression.Setup(strDataFrameName)
@@ -22,30 +11,6 @@
         ' Note, the sequence of these 2 functions matters
         SetupTabRowGroupInDataGrid(clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_row_group"}, clsOperator))
         SetupTabRowGroupStylesInDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_row_groups", clsOperator))
-
-
-        'Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_row_group"}, clsOperator)
-
-        'For Each clsRParam As RParameter In lstRParams
-
-        '    Dim clsTabRowGroupRFunction As RFunction = clsRParam.clsArgumentCodeStructure
-
-        '    ' Create a new row that represents the tab_footnote() parameters
-        '    Dim row As New DataGridViewRow
-        '    row.CreateCells(dataGridGroups)
-
-        '    For Each clsRowGroupRParam As RParameter In clsTabRowGroupRFunction.clsParameters
-        '        If clsRowGroupRParam.strArgumentName = "label" Then
-        '            row.Cells(0).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.strArgumentValue, False)
-        '        ElseIf clsRowGroupRParam.strArgumentName = "rows" Then
-        '            row.Cells(1).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.strArgumentValue, False)
-        '        End If
-        '    Next
-
-        '    ' Tag and add the  tab_row_group() parameter function contents as a row
-        '    row.Tag = clsRParam
-        '    dataGridGroups.Rows.Add(row)
-        'Next
     End Sub
 
     Private Sub SetupTabRowGroupInDataGrid(lstRParams As List(Of RParameter))
