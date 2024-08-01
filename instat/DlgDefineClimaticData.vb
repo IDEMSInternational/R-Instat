@@ -50,7 +50,7 @@ Public Class DlgDefineClimaticData
         Dim kvpRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("rain", {"rain", "prec", "rr", "prcp"}.ToList())
         Dim kvpDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("date", {"date", "record"}.ToList())
         Dim kvpStation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("station", {"station", "id", "name"}.ToList())
-        Dim kvpDiscrit As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("discrit", {"discrit"}.ToList())
+        Dim kvpDiscrit As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("district", {"district"}.ToList())
         Dim kvpAltitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("alt", {"alt", "altitude", "elevation", "elev"}.ToList())
         Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"lon", "lont", "longitude"}.ToList())
         Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"lat", "latitude"}.ToList())
@@ -87,8 +87,8 @@ Public Class DlgDefineClimaticData
         ucrReceiverLongitude.Tag = "lon"
         ucrReceiverLatitude.Tag = "lat"
         ucrReceiverStationMeta.Tag = "station"
-        ucrReceiverDiscritMeta.Tag = "discrit"
-        ucrReceiverDiscrit.Tag = "discrit"
+        ucrReceiverDiscritMeta.Tag = "district"
+        ucrReceiverDiscrit.Tag = "district"
         ucrReceiverAltMeta.Tag = "alt"
         ucrReceiverLonMeta.Tag = "lon"
         ucrReceiverLatMeta.Tag = "lat"

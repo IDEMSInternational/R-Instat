@@ -45,6 +45,8 @@ Partial Class DlgDefineClimaticData
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.lblAltitude = New System.Windows.Forms.Label()
         Me.grpStation = New System.Windows.Forms.GroupBox()
+        Me.lblDiscrit = New System.Windows.Forms.Label()
+        Me.ucrReceiverDiscrit = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
@@ -96,8 +98,6 @@ Partial Class DlgDefineClimaticData
         Me.ucrInputCheckInput = New instat.ucrInputTextBox()
         Me.ucrSelectorDefineClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblDiscrit = New System.Windows.Forms.Label()
-        Me.ucrReceiverDiscrit = New instat.ucrReceiverSingle()
         Me.grpStation.SuspendLayout()
         Me.grpDateTime.SuspendLayout()
         Me.grpMeta.SuspendLayout()
@@ -183,6 +183,29 @@ Partial Class DlgDefineClimaticData
         Me.grpStation.TabStop = False
         Me.grpStation.Tag = ""
         Me.grpStation.Text = "Station"
+        '
+        'lblDiscrit
+        '
+        Me.lblDiscrit.AutoSize = True
+        Me.lblDiscrit.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDiscrit.Location = New System.Drawing.Point(10, 57)
+        Me.lblDiscrit.Name = "lblDiscrit"
+        Me.lblDiscrit.Size = New System.Drawing.Size(40, 13)
+        Me.lblDiscrit.TabIndex = 10
+        Me.lblDiscrit.Text = "district:"
+        '
+        'ucrReceiverDiscrit
+        '
+        Me.ucrReceiverDiscrit.AutoSize = True
+        Me.ucrReceiverDiscrit.frmParent = Me
+        Me.ucrReceiverDiscrit.Location = New System.Drawing.Point(10, 72)
+        Me.ucrReceiverDiscrit.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDiscrit.Name = "ucrReceiverDiscrit"
+        Me.ucrReceiverDiscrit.Selector = Nothing
+        Me.ucrReceiverDiscrit.Size = New System.Drawing.Size(100, 20)
+        Me.ucrReceiverDiscrit.strNcFilePath = ""
+        Me.ucrReceiverDiscrit.TabIndex = 11
+        Me.ucrReceiverDiscrit.ucrSelector = Nothing
         '
         'ucrReceiverStation
         '
@@ -427,9 +450,9 @@ Partial Class DlgDefineClimaticData
         Me.lblDiscritMeta.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblDiscritMeta.Location = New System.Drawing.Point(9, 58)
         Me.lblDiscritMeta.Name = "lblDiscritMeta"
-        Me.lblDiscritMeta.Size = New System.Drawing.Size(39, 13)
+        Me.lblDiscritMeta.Size = New System.Drawing.Size(40, 13)
         Me.lblDiscritMeta.TabIndex = 12
-        Me.lblDiscritMeta.Text = "Discrit:"
+        Me.lblDiscritMeta.Text = "district:"
         '
         'ucrReceiverDiscritMeta
         '
@@ -810,29 +833,6 @@ Partial Class DlgDefineClimaticData
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 19
-        '
-        'lblDiscrit
-        '
-        Me.lblDiscrit.AutoSize = True
-        Me.lblDiscrit.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDiscrit.Location = New System.Drawing.Point(10, 57)
-        Me.lblDiscrit.Name = "lblDiscrit"
-        Me.lblDiscrit.Size = New System.Drawing.Size(39, 13)
-        Me.lblDiscrit.TabIndex = 10
-        Me.lblDiscrit.Text = "Discrit:"
-        '
-        'ucrReceiverDiscrit
-        '
-        Me.ucrReceiverDiscrit.AutoSize = True
-        Me.ucrReceiverDiscrit.frmParent = Me
-        Me.ucrReceiverDiscrit.Location = New System.Drawing.Point(10, 72)
-        Me.ucrReceiverDiscrit.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDiscrit.Name = "ucrReceiverDiscrit"
-        Me.ucrReceiverDiscrit.Selector = Nothing
-        Me.ucrReceiverDiscrit.Size = New System.Drawing.Size(100, 20)
-        Me.ucrReceiverDiscrit.strNcFilePath = ""
-        Me.ucrReceiverDiscrit.TabIndex = 11
-        Me.ucrReceiverDiscrit.ucrSelector = Nothing
         '
         'DlgDefineClimaticData
         '
