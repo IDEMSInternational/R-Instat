@@ -21,6 +21,7 @@ Public Class dlgExportClimaticDefinitions
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsDummyFunction As New RFunction
+    Public clsRsyntax As New RSyntax
     Public clsExportRinstatToBucketFunction, clsUpdateMetadataInfoFunction, ClsGcsAuthFileFunction, clsSummariesFunction As New RFunction
     Public clsReforMattAnnualSummariesFunction, clsReformatCropSuccessFunction, clsReformatSeasonStartFunction, clsReformatTempSummariesFunction, clsReformatMonthlyTempSummaries As New RFunction
 
@@ -174,6 +175,7 @@ Public Class dlgExportClimaticDefinitions
         ClsGcsAuthFileFunction.SetPackageName("epicsawrap")
         ClsGcsAuthFileFunction.SetRCommand("gcs_auth_file")
 
+        clsUpdateMetadataInfoFunction.SetPackageName("epicsawrap")
         clsUpdateMetadataInfoFunction.SetRCommand("update_metadata_info")
 
         ucrBase.clsRsyntax.ClearCodes()
@@ -323,7 +325,7 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub cmdUpdateMetedata_Click(sender As Object, e As EventArgs) Handles cmdUpdateMetedata.Click
-        sdgMetadataGoogleBuckets.SetRCode(clsNewUpdateMetadataInfoFunction:=clsUpdateMetadataInfoFunction, bReset:=bResetSubdialog)
+        sdgMetadataGoogleBuckets.SetRCode(clsNewUpdateMetadataInfoFunction:=clsUpdateMetadataInfoFunction, clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubdialog)
         sdgMetadataGoogleBuckets.ShowDialog()
         bResetSubdialog = False
     End Sub

@@ -54,22 +54,29 @@ Public Class sdgMetadataGoogleBuckets
         ucrReceiverDistrict.SetParameter(New RParameter("district_var", 5))
         ucrReceiverDistrict.Selector = ucrSelectorMetadata
         ucrReceiverDistrict.SetParameterIsString()
-        'ucrReceiverElavation.SetClimaticType("alt")
-        'ucrReceiverElavation.bAutoFill = True
-
+        ucrReceiverDistrict.SetClimaticType("district")
+        ucrReceiverDistrict.bAutoFill = True
     End Sub
-    Public Sub SetRCode(clsNewUpdateMetadataInfoFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewUpdateMetadataInfoFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-
+        clsRsyntax = clsNewRSyntax
         clsUpdateMetadataInfoFunction = clsNewUpdateMetadataInfoFunction
 
-        ucrReceiverDistrict.SetRCode(clsUpdateMetadataInfoFunction, bReset)
-        ucrReceiverElavation.SetRCode(clsUpdateMetadataInfoFunction, bReset)
-        ucrReceiverLatitude.SetRCode(clsUpdateMetadataInfoFunction, bReset)
-        ucrReceiverLongititude.SetRCode(clsUpdateMetadataInfoFunction, bReset)
-        ucrReceiverStation.SetRCode(clsUpdateMetadataInfoFunction, bReset)
-        ucrSelectorMetadata.SetRCode(clsUpdateMetadataInfoFunction, bReset)
+        ucrReceiverDistrict.SetRCode(clsUpdateMetadataInfoFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverElavation.SetRCode(clsUpdateMetadataInfoFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverLatitude.SetRCode(clsUpdateMetadataInfoFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverLongititude.SetRCode(clsUpdateMetadataInfoFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverStation.SetRCode(clsUpdateMetadataInfoFunction, bReset, bCloneIfNeeded:=True)
+        ucrSelectorMetadata.SetRCode(clsUpdateMetadataInfoFunction, bReset, bCloneIfNeeded:=True)
+    End Sub
+
+    Private Sub ucrReceiverLongititude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLongititude.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverLatitude.ControlValueChanged, ucrReceiverElavation.ControlValueChanged, ucrReceiverDistrict.ControlValueChanged, ucrSelectorMetadata.ControlValueChanged
+        If Not (ucrReceiverElavation.IsEmpty OrElse ucrReceiverDistrict.IsEmpty OrElse ucrReceiverLatitude.IsEmpty OrElse ucrReceiverLongititude.IsEmpty OrElse ucrReceiverStation.IsEmpty) Then
+            clsRsyntax.AddToBeforeCodes(clsUpdateMetadataInfoFunction, 1)
+        Else
+            clsRsyntax.RemoveFromBeforeCodes(clsUpdateMetadataInfoFunction)
+        End If
     End Sub
 End Class
