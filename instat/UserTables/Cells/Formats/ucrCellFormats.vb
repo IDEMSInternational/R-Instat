@@ -22,6 +22,7 @@
         ' Set up the selector
         ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
         ucrReceiverMultipleCols.SetMeAsReceiver()
+        ucrRowExpression.Setup(strDataFrameName)
 
         ' Clear and Set up the data grid with contents
         dataGridFormats.Rows.Clear()

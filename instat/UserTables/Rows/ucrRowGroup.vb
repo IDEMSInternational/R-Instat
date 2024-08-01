@@ -3,114 +3,160 @@
     Private clsOperator As New ROperator
     Private bFirstload As Boolean = True
 
-    Private Sub InitialiseDialog()
-        ucrReceiverSingleCol.Selector = ucrSelectorCols
-        ucrReceiverSingleCol.SetMeAsReceiver()
-    End Sub
+    'Private Sub InitialiseDialog()
+    '    ucrReceiverSingleCol.Selector = ucrSelectorCols
+    '    ucrReceiverSingleCol.SetMeAsReceiver()
+    'End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
-        If bFirstload Then
-            InitialiseDialog()
-            bFirstload = False
-        End If
+        'If bFirstload Then
+        '    InitialiseDialog()
+        '    bFirstload = False
+        'End If
 
         Me.clsOperator = clsOperator
 
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+        ucrRowExpression.Setup(strDataFrameName)
         dataGridGroups.Rows.Clear()
 
+        ' Note, the sequence of these 2 functions matters
+        SetupTabRowGroupInDataGrid(clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_row_group"}, clsOperator))
+        SetupTabRowGroupStylesInDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_row_groups", clsOperator))
 
-        Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_row_group"}, clsOperator)
 
+        'Dim lstRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_row_group"}, clsOperator)
+
+        'For Each clsRParam As RParameter In lstRParams
+
+        '    Dim clsTabRowGroupRFunction As RFunction = clsRParam.clsArgumentCodeStructure
+
+        '    ' Create a new row that represents the tab_footnote() parameters
+        '    Dim row As New DataGridViewRow
+        '    row.CreateCells(dataGridGroups)
+
+        '    For Each clsRowGroupRParam As RParameter In clsTabRowGroupRFunction.clsParameters
+        '        If clsRowGroupRParam.strArgumentName = "label" Then
+        '            row.Cells(0).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.strArgumentValue, False)
+        '        ElseIf clsRowGroupRParam.strArgumentName = "rows" Then
+        '            row.Cells(1).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.strArgumentValue, False)
+        '        End If
+        '    Next
+
+        '    ' Tag and add the  tab_row_group() parameter function contents as a row
+        '    row.Tag = clsRParam
+        '    dataGridGroups.Rows.Add(row)
+        'Next
+    End Sub
+
+    Private Sub SetupTabRowGroupInDataGrid(lstRParams As List(Of RParameter))
         For Each clsRParam As RParameter In lstRParams
-
             Dim clsTabRowGroupRFunction As RFunction = clsRParam.clsArgumentCodeStructure
-
-            ' Create a new row that represents the tab_footnote() parameters
             Dim row As New DataGridViewRow
             row.CreateCells(dataGridGroups)
-
-            For Each clsRowGroupRParam As RParameter In clsTabRowGroupRFunction.clsParameters
-                If clsRowGroupRParam.strArgumentName = "label" Then
-                    row.Cells(0).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.strArgumentValue, False)
-                ElseIf clsRowGroupRParam.strArgumentName = "rows" Then
-                    row.Cells(1).Value = clsTablesUtils.GetStringValue(clsRowGroupRParam.strArgumentValue, False)
+            For Each clsTabRowGroupRParam As RParameter In clsTabRowGroupRFunction.clsParameters
+                If clsTabRowGroupRParam.strArgumentName = "label" Then
+                    row.Cells(0).Value = clsTablesUtils.GetStringValue(clsTabRowGroupRParam.strArgumentValue, False)
+                ElseIf clsTabRowGroupRParam.strArgumentName = "rows" Then
+                    row.Cells(1).Value = clsTablesUtils.GetStringValue(clsTabRowGroupRParam.strArgumentValue, False)
                 End If
             Next
-
-            ' Tag and add the  tab_row_group() parameter function contents as a row
-            row.Tag = clsRParam
+            Dim arrParams(2) As RParameter
+            arrParams(0) = clsRParam
+            row.Tag = arrParams
             dataGridGroups.Rows.Add(row)
-
         Next
+    End Sub
 
+    Private Sub SetupTabRowGroupStylesInDataGrid(lstRParams As List(Of RParameter))
+        For Each clsRParam As RParameter In lstRParams
+            Dim clsTabStyleRFunction As RFunction = clsRParam.clsArgumentCodeStructure
+            ' Get spanner Id
+            Dim strArgumentValueSpannerId As String = clsTabStyleRFunction.GetParameter("locations").clsArgumentCodeStructure.GetParameter("groups").strArgumentValue
+            For index As Integer = 0 To dataGridGroups.Rows.Count - 1
+                Dim row As DataGridViewRow = dataGridGroups.Rows(index)
+                Dim lstParams() As RParameter = row.Tag
+                If strArgumentValueSpannerId = lstParams(0).clsArgumentCodeStructure.GetParameter("id").strArgumentValue Then
+                    row.Cells(2).Value = clsTabStyleRFunction.Clone().ToScript
+                    lstParams(1) = clsRParam
+                    row.Tag = lstParams
+                    Exit For
+                End If
+            Next
+        Next
+    End Sub
+
+    Private Sub btnStyle_Click(sender As Object, e As EventArgs) Handles btnStyle.Click
+        Dim clsListStyleRFunction As RFunction = clsTablesUtils.ShowStyleSubDialog(Me.ParentForm)
+        If clsListStyleRFunction Is Nothing Then
+            Exit Sub
+        End If
+        ucrRowExpression.Tag = clsListStyleRFunction
     End Sub
 
     Private Sub btnAddCondition_Click(sender As Object, e As EventArgs) Handles btnAddCondition.Click
-
-        Dim strGroupLabel As String = ucrInputGroupLabel.GetValue()
-        Dim strConditionValue As String = If(cboConditionOperator.Text <> "Expression" AndAlso Not IsNumeric(cboConditionValue.Text), clsTablesUtils.GetStringValue(cboConditionValue.Text, True), cboConditionValue.Text)
-        Dim strCondition As String = ucrReceiverSingleCol.GetVariableNames(bWithQuotes:=False) & " " & cboConditionOperator.Text & " " & strConditionValue
+        Dim strGroupId As String = ucrInputGroupLabel.GetText().Replace(" ", String.Empty)
+        Dim strGroupStyleExpression As String = ""
 
         Dim clsTabRowGroupRFunction As New RFunction
         clsTabRowGroupRFunction.SetPackageName("gt")
         clsTabRowGroupRFunction.SetRCommand("tab_row_group")
-        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="label", strParamValue:=clsTablesUtils.GetStringValue(strGroupLabel, True), iNewPosition:=0))
-        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=strCondition, iNewPosition:=1))
-        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="id", strParamValue:=clsTablesUtils.GetStringValue(strGroupLabel.Replace(" ", String.Empty), True), iNewPosition:=2))
+        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="label", strParamValue:=clsTablesUtils.GetStringValue(ucrInputGroupLabel.GetText(), True), iNewPosition:=0))
+        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="rows", strParamValue:=ucrRowExpression.GetText(), iNewPosition:=1))
+        clsTabRowGroupRFunction.AddParameter(New RParameter(strParameterName:="id", strParamValue:=clsTablesUtils.GetStringValue(strGroupId, True), iNewPosition:=2))
 
-        ' Create parameter with unique name
-        Dim clsRParam As New RParameter(strParameterName:="tab_row_group_param" & (dataGridGroups.Rows.Count + 1), strParamValue:=clsTabRowGroupRFunction, bNewIncludeArgumentName:=False)
+        Dim arrParams(2) As RParameter
+
+        ' Add add the group parameter as the first element
+        arrParams(0) = New RParameter(strParameterName:="tab_row_group_param" & (dataGridGroups.Rows.Count + 1), strParamValue:=clsTabRowGroupRFunction, bNewIncludeArgumentName:=False)
+
+        ' Add the group style as the second element
+        If ucrRowExpression.Tag IsNot Nothing Then
+            Dim clsLocationsRFunction As New RFunction
+            clsLocationsRFunction.SetPackageName("gt")
+            clsLocationsRFunction.SetRCommand("cells_row_groups")
+            clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="groups", strParamValue:=clsTablesUtils.GetStringValue(strGroupId, True), iNewPosition:=0))
+
+            Dim clsListStyleRFunction As RFunction = ucrRowExpression.Tag
+            Dim clsTabStyleRFunction As RFunction = clsTablesUtils.GetNewStyleRFunction(clsListStyleRFunction, clsLocationsRFunction)
+
+            strGroupStyleExpression = clsTabStyleRFunction.Clone.ToScript
+
+            arrParams(1) = New RParameter(strParameterName:="tab_style_cells_row_groups_param" & (dataGridGroups.Rows.Count + 1), strParamValue:=clsTabStyleRFunction, bNewIncludeArgumentName:=False)
+        End If
 
         Dim row As New DataGridViewRow
         row.CreateCells(dataGridGroups)
 
-        row.Cells(0).Value = strGroupLabel
-        row.Cells(1).Value = strCondition
-
-        ' Tag and add the  tab_row_group() parameter function contents as a row
-        row.Tag = clsRParam
+        row.Cells(0).Value = ucrInputGroupLabel.GetText()
+        row.Cells(1).Value = ucrRowExpression.GetText()
+        row.Cells(2).Value = strGroupStyleExpression
+        ' Tag the array of parameters
+        row.Tag = arrParams
         dataGridGroups.Rows.Add(row)
 
-        ' Add to parameter
-        clsOperator.AddParameter(clsRParam)
-
-        ucrReceiverSingleCol.Clear()
         ucrInputGroupLabel.SetName("")
-        cboConditionValue.Text = ""
-
+        ucrRowExpression.Clear()
+        ucrRowExpression.Tag = Nothing
     End Sub
 
-    Private Sub conditionValue_TextChanged(sender As Object, e As EventArgs) Handles cboConditionValue.TextChanged, cboConditionOperator.TextChanged
-        EnableDisableAddConditionButton()
-    End Sub
-
-    Private Sub conditionValue_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingleCol.ControlContentsChanged, ucrInputGroupLabel.ControlContentsChanged
-        EnableDisableAddConditionButton()
-    End Sub
-
-    Private Sub EnableDisableAddConditionButton()
-        btnAddCondition.Enabled = Not ucrReceiverSingleCol.IsEmpty AndAlso Not ucrInputGroupLabel.IsEmpty AndAlso Not String.IsNullOrWhiteSpace(cboConditionValue.Text) AndAlso Not String.IsNullOrWhiteSpace(cboConditionOperator.Text)
+    Private Sub conditionValue_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowExpression.ControlContentsChanged, ucrInputGroupLabel.ControlContentsChanged
+        btnAddCondition.Enabled = Not ucrRowExpression.IsEmpty AndAlso Not ucrInputGroupLabel.IsEmpty
     End Sub
 
     Private Sub btnClearGroups_Click(sender As Object, e As EventArgs) Handles btnClearGroups.Click
-        For index As Integer = 0 To dataGridGroups.Rows.Count - 1
-            clsOperator.RemoveParameter(dataGridGroups.Rows(index).Tag)
-        Next
         dataGridGroups.Rows.Clear()
     End Sub
 
-    Private Sub dataGridGroups_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridGroups.CellClick
-        If 1 = 1 Then
-            Exit Sub
-        End If
+    Public Sub SetValuesToOperator()
+        clsTablesUtils.RemoveRParams(clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_row_group"}, clsOperator), clsOperator)
+        clsTablesUtils.RemoveRParams(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_row_groups", clsOperator), clsOperator)
 
-        ' Ignore clicks that are not from button cells. 
-        If e.ColumnIndex <> 1 Then
-            Exit Sub
-        End If
-
-
+        For index As Integer = 0 To dataGridGroups.Rows.Count - 1
+            Dim lstParams() As RParameter = dataGridGroups.Rows(index).Tag
+            clsOperator.AddParameter(lstParams(0))
+            If lstParams(1) IsNot Nothing Then
+                clsOperator.AddParameter(lstParams(1))
+            End If
+        Next
     End Sub
-
 End Class

@@ -1,5 +1,6 @@
 ﻿Public Class ucrRowExpression
 
+    Public Event ControlContentsChanged(ucrChangedControl As ucrCore)
     Private strDataFrameName As String
     Private bFirstload As Boolean = True
 
@@ -40,15 +41,10 @@
 
     End Sub
 
-    Public Sub setup(strDataFrameName As String)
+    Public Sub Setup(strDataFrameName As String)
         Me.strDataFrameName = strDataFrameName
     End Sub
 
-    Private Sub btnSet_Click(sender As Object, e As EventArgs)
-        sdgTableRowExpression.Setup(strDataFrameName)
-        sdgTableRowExpression.ShowDialog(Me.ParentForm)
-        ucrInputExpression.SetName(sdgTableRowExpression.GetUserInputRowExpression())
-    End Sub
 
     Public Function IsEmpty() As Boolean
         Return ucrInputExpression.IsEmpty()
@@ -62,5 +58,7 @@
         ucrInputExpression.SetName("")
     End Sub
 
-
+    Private Sub ucrInputExpression_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputExpression.ControlContentsChanged
+        RaiseEvent ControlContentsChanged(ucrChangedControl)
+    End Sub
 End Class

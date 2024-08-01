@@ -52,12 +52,14 @@ Public Class dlgGeneralTable
         ucrNudPreview.Minimum = 6
         ucrNudPreview.SetRDefault(6)
 
-        ucrSaveTable.SetPrefix("table")
+        ucrSaveTable.SetPrefix("presentation_table")
         ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorCols.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
-        ucrSaveTable.SetCheckBoxText("Save Table")
+        ucrSaveTable.SetCheckBoxText("Store Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
+
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
     End Sub
 
 
@@ -81,6 +83,12 @@ Public Class dlgGeneralTable
         clsGtRFunction.SetPackageName("gt")
         clsGtRFunction.SetRCommand("gt")
         clsBaseOperator.AddParameter(strParameterName:="gt", clsRFunctionParameter:=clsGtRFunction, iPosition:=2, bIncludeArgumentName:=False)
+
+        clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorCols.strCurrentDataFrame,
+                                                  strObjectName:="last_table")
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 

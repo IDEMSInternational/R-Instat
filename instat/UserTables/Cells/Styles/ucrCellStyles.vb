@@ -24,6 +24,7 @@
 
         ' Set up the selector
         ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+        ucrRowExpression.Setup(strDataFrameName)
 
         ' Clear and Set up the data grid with contents
         dataGridFormats.Rows.Clear()

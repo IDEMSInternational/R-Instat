@@ -39,9 +39,10 @@ Partial Class ucrCellStyles
         '
         Me.lblRowExpression.AutoSize = True
         Me.lblRowExpression.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRowExpression.Location = New System.Drawing.Point(245, 86)
+        Me.lblRowExpression.Location = New System.Drawing.Point(368, 132)
+        Me.lblRowExpression.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblRowExpression.Name = "lblRowExpression"
-        Me.lblRowExpression.Size = New System.Drawing.Size(134, 13)
+        Me.lblRowExpression.Size = New System.Drawing.Size(200, 20)
         Me.lblRowExpression.TabIndex = 329
         Me.lblRowExpression.Text = "Row Expression (Optional):"
         '
@@ -49,18 +50,20 @@ Partial Class ucrCellStyles
         '
         Me.lblFormats.AutoSize = True
         Me.lblFormats.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFormats.Location = New System.Drawing.Point(236, 166)
+        Me.lblFormats.Location = New System.Drawing.Point(354, 255)
+        Me.lblFormats.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFormats.Name = "lblFormats"
-        Me.lblFormats.Size = New System.Drawing.Size(38, 13)
+        Me.lblFormats.Size = New System.Drawing.Size(56, 20)
         Me.lblFormats.TabIndex = 326
         Me.lblFormats.Text = "Styles:"
         '
         'btnClearFormats
         '
         Me.btnClearFormats.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearFormats.Location = New System.Drawing.Point(475, 157)
+        Me.btnClearFormats.Location = New System.Drawing.Point(712, 242)
+        Me.btnClearFormats.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClearFormats.Name = "btnClearFormats"
-        Me.btnClearFormats.Size = New System.Drawing.Size(75, 23)
+        Me.btnClearFormats.Size = New System.Drawing.Size(112, 35)
         Me.btnClearFormats.TabIndex = 5
         Me.btnClearFormats.Tag = ""
         Me.btnClearFormats.Text = "Clear"
@@ -71,10 +74,11 @@ Partial Class ucrCellStyles
         Me.dataGridFormats.AllowUserToAddRows = False
         Me.dataGridFormats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dataGridFormats.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colStyles})
-        Me.dataGridFormats.Location = New System.Drawing.Point(239, 183)
+        Me.dataGridFormats.Location = New System.Drawing.Point(358, 282)
+        Me.dataGridFormats.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.dataGridFormats.Name = "dataGridFormats"
         Me.dataGridFormats.RowHeadersWidth = 62
-        Me.dataGridFormats.Size = New System.Drawing.Size(315, 73)
+        Me.dataGridFormats.Size = New System.Drawing.Size(472, 112)
         Me.dataGridFormats.TabIndex = 6
         '
         'colStyles
@@ -88,9 +92,10 @@ Partial Class ucrCellStyles
         '
         Me.btnEnterStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnEnterStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnEnterStyle.Location = New System.Drawing.Point(244, 136)
+        Me.btnEnterStyle.Location = New System.Drawing.Point(366, 209)
+        Me.btnEnterStyle.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnEnterStyle.Name = "btnEnterStyle"
-        Me.btnEnterStyle.Size = New System.Drawing.Size(126, 23)
+        Me.btnEnterStyle.Size = New System.Drawing.Size(189, 35)
         Me.btnEnterStyle.TabIndex = 4
         Me.btnEnterStyle.Tag = ""
         Me.btnEnterStyle.Text = "Enter Style"
@@ -100,28 +105,30 @@ Partial Class ucrCellStyles
         '
         Me.Label1.AutoSize = True
         Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(246, 7)
+        Me.Label1.Location = New System.Drawing.Point(369, 11)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 13)
+        Me.Label1.Size = New System.Drawing.Size(85, 20)
         Me.Label1.TabIndex = 331
         Me.Label1.Text = "Column(s):"
         '
         'ucrRowExpression
         '
-        Me.ucrRowExpression.Location = New System.Drawing.Point(246, 103)
+        Me.ucrRowExpression.Location = New System.Drawing.Point(366, 158)
+        Me.ucrRowExpression.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrRowExpression.Name = "ucrRowExpression"
-        Me.ucrRowExpression.Size = New System.Drawing.Size(124, 26)
+        Me.ucrRowExpression.Size = New System.Drawing.Size(186, 38)
         Me.ucrRowExpression.TabIndex = 332
         '
         'ucrReceiverMultipleCols
         '
         Me.ucrReceiverMultipleCols.AutoSize = True
         Me.ucrReceiverMultipleCols.frmParent = Nothing
-        Me.ucrReceiverMultipleCols.Location = New System.Drawing.Point(244, 23)
+        Me.ucrReceiverMultipleCols.Location = New System.Drawing.Point(366, 35)
         Me.ucrReceiverMultipleCols.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleCols.Name = "ucrReceiverMultipleCols"
         Me.ucrReceiverMultipleCols.Selector = Nothing
-        Me.ucrReceiverMultipleCols.Size = New System.Drawing.Size(120, 55)
+        Me.ucrReceiverMultipleCols.Size = New System.Drawing.Size(180, 85)
         Me.ucrReceiverMultipleCols.strNcFilePath = ""
         Me.ucrReceiverMultipleCols.TabIndex = 2
         Me.ucrReceiverMultipleCols.ucrSelector = Nothing
@@ -132,15 +139,15 @@ Partial Class ucrCellStyles
         Me.ucrSelectorCols.bDropUnusedFilterLevels = False
         Me.ucrSelectorCols.bShowHiddenColumns = False
         Me.ucrSelectorCols.bUseCurrentFilter = True
-        Me.ucrSelectorCols.Location = New System.Drawing.Point(7, 7)
+        Me.ucrSelectorCols.Location = New System.Drawing.Point(10, 11)
         Me.ucrSelectorCols.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorCols.Name = "ucrSelectorCols"
-        Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorCols.Size = New System.Drawing.Size(320, 282)
         Me.ucrSelectorCols.TabIndex = 1
         '
         'ucrCellStyles
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrRowExpression)
         Me.Controls.Add(Me.ucrReceiverMultipleCols)
@@ -151,8 +158,9 @@ Partial Class ucrCellStyles
         Me.Controls.Add(Me.btnEnterStyle)
         Me.Controls.Add(Me.ucrSelectorCols)
         Me.Controls.Add(Me.dataGridFormats)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrCellStyles"
-        Me.Size = New System.Drawing.Size(557, 259)
+        Me.Size = New System.Drawing.Size(836, 398)
         CType(Me.dataGridFormats, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

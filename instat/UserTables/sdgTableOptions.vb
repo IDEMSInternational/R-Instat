@@ -68,6 +68,7 @@ Public Class sdgTableOptions
         ucrHeader.SetValuesToOperator()
         ucrStub.SetValuesToOperator()
         ucrColumns.SetValuesToOperator()
+        ucrRows.SetValuesToOperator()
         ucrCells.SetValuesToOperator()
         ucrSourceNotes.SetValuesToOperator()
         ucrOtherStyles.SetValuesToOperator()

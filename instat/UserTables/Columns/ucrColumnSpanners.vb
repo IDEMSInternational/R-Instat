@@ -127,7 +127,6 @@ Public Class ucrColumnSpanners
         dataGridColSpanners.Rows.Clear()
     End Sub
 
-
     Public Sub SetValuesToOperator()
         clsTablesUtils.RemoveRParams(clsTablesUtils.FindRFunctionsParamsWithRCommand({"tab_spanner"}, clsOperator), clsOperator)
         clsTablesUtils.RemoveRParams(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_column_spanners", clsOperator), clsOperator)

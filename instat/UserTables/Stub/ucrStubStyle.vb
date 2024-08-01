@@ -10,7 +10,7 @@
 
         Me.clsOperator = clsOperator
 
-        ucrRowExpression.setup(strDataFrameName)
+        ucrRowExpression.Setup(strDataFrameName)
 
         ' Clear and Set up the data grid with contents
         dataGridFormats.Rows.Clear()

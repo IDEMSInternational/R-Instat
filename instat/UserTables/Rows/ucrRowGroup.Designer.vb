@@ -24,19 +24,16 @@ Partial Class ucrRowGroup
     Private Sub InitializeComponent()
         Me.dataGridGroups = New System.Windows.Forms.DataGridView()
         Me.btnClearGroups = New System.Windows.Forms.Button()
-        Me.lblColumns = New System.Windows.Forms.Label()
         Me.btnAddCondition = New System.Windows.Forms.Button()
         Me.lblGroups = New System.Windows.Forms.Label()
-        Me.lblGroupCondition = New System.Windows.Forms.Label()
-        Me.cboConditionOperator = New System.Windows.Forms.ComboBox()
-        Me.cboConditionValue = New System.Windows.Forms.ComboBox()
         Me.lblCondition = New System.Windows.Forms.Label()
-        Me.ucrReceiverSingleCol = New instat.ucrReceiverSingle()
-        Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputGroupLabel = New instat.ucrInputTextBox()
+        Me.btnStyle = New System.Windows.Forms.Button()
+        Me.ucrRowExpression = New instat.ucrRowExpression()
+        Me.lblGroupExpression = New System.Windows.Forms.Label()
         Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colFormat = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.colStyleExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridGroups, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -44,42 +41,35 @@ Partial Class ucrRowGroup
         '
         Me.dataGridGroups.AllowUserToAddRows = False
         Me.dataGridGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridGroups.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colLabel, Me.colCodnition, Me.colFormat})
-        Me.dataGridGroups.Location = New System.Drawing.Point(229, 204)
+        Me.dataGridGroups.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colLabel, Me.colCodnition, Me.colStyleExpression})
+        Me.dataGridGroups.Location = New System.Drawing.Point(12, 249)
+        Me.dataGridGroups.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.dataGridGroups.Name = "dataGridGroups"
         Me.dataGridGroups.ReadOnly = True
         Me.dataGridGroups.RowHeadersWidth = 62
-        Me.dataGridGroups.Size = New System.Drawing.Size(323, 95)
+        Me.dataGridGroups.Size = New System.Drawing.Size(484, 146)
         Me.dataGridGroups.TabIndex = 11
         '
         'btnClearGroups
         '
         Me.btnClearGroups.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnClearGroups.Location = New System.Drawing.Point(467, 175)
+        Me.btnClearGroups.Location = New System.Drawing.Point(368, 204)
+        Me.btnClearGroups.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClearGroups.Name = "btnClearGroups"
-        Me.btnClearGroups.Size = New System.Drawing.Size(79, 23)
+        Me.btnClearGroups.Size = New System.Drawing.Size(118, 35)
         Me.btnClearGroups.TabIndex = 30
         Me.btnClearGroups.Tag = ""
         Me.btnClearGroups.Text = "Clear"
         Me.btnClearGroups.UseVisualStyleBackColor = True
         '
-        'lblColumns
-        '
-        Me.lblColumns.AutoSize = True
-        Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColumns.Location = New System.Drawing.Point(224, 11)
-        Me.lblColumns.Name = "lblColumns"
-        Me.lblColumns.Size = New System.Drawing.Size(45, 13)
-        Me.lblColumns.TabIndex = 28
-        Me.lblColumns.Text = "Column:"
-        '
         'btnAddCondition
         '
         Me.btnAddCondition.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnAddCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnAddCondition.Location = New System.Drawing.Point(230, 153)
+        Me.btnAddCondition.Location = New System.Drawing.Point(13, 170)
+        Me.btnAddCondition.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnAddCondition.Name = "btnAddCondition"
-        Me.btnAddCondition.Size = New System.Drawing.Size(96, 23)
+        Me.btnAddCondition.Size = New System.Drawing.Size(144, 35)
         Me.btnAddCondition.TabIndex = 25
         Me.btnAddCondition.Tag = ""
         Me.btnAddCondition.Text = "Add"
@@ -89,74 +79,23 @@ Partial Class ucrRowGroup
         '
         Me.lblGroups.AutoSize = True
         Me.lblGroups.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGroups.Location = New System.Drawing.Point(226, 185)
+        Me.lblGroups.Location = New System.Drawing.Point(7, 220)
+        Me.lblGroups.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblGroups.Name = "lblGroups"
-        Me.lblGroups.Size = New System.Drawing.Size(44, 13)
+        Me.lblGroups.Size = New System.Drawing.Size(66, 20)
         Me.lblGroups.TabIndex = 32
         Me.lblGroups.Text = "Groups:"
-        '
-        'lblGroupCondition
-        '
-        Me.lblGroupCondition.AutoSize = True
-        Me.lblGroupCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGroupCondition.Location = New System.Drawing.Point(227, 109)
-        Me.lblGroupCondition.Name = "lblGroupCondition"
-        Me.lblGroupCondition.Size = New System.Drawing.Size(86, 13)
-        Me.lblGroupCondition.TabIndex = 33
-        Me.lblGroupCondition.Text = "Group Condition:"
-        '
-        'cboConditionOperator
-        '
-        Me.cboConditionOperator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboConditionOperator.FormattingEnabled = True
-        Me.cboConditionOperator.Items.AddRange(New Object() {"==", "<", "<=", ">", ">=", "!=", "Expression"})
-        Me.cboConditionOperator.Location = New System.Drawing.Point(229, 126)
-        Me.cboConditionOperator.Name = "cboConditionOperator"
-        Me.cboConditionOperator.Size = New System.Drawing.Size(78, 21)
-        Me.cboConditionOperator.TabIndex = 279
-        '
-        'cboConditionValue
-        '
-        Me.cboConditionValue.FormattingEnabled = True
-        Me.cboConditionValue.Location = New System.Drawing.Point(313, 126)
-        Me.cboConditionValue.Name = "cboConditionValue"
-        Me.cboConditionValue.Size = New System.Drawing.Size(106, 21)
-        Me.cboConditionValue.TabIndex = 280
         '
         'lblCondition
         '
         Me.lblCondition.AutoSize = True
         Me.lblCondition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblCondition.Location = New System.Drawing.Point(227, 58)
+        Me.lblCondition.Location = New System.Drawing.Point(9, 8)
+        Me.lblCondition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblCondition.Name = "lblCondition"
-        Me.lblCondition.Size = New System.Drawing.Size(68, 13)
+        Me.lblCondition.Size = New System.Drawing.Size(101, 20)
         Me.lblCondition.TabIndex = 282
         Me.lblCondition.Text = "Group Label:"
-        '
-        'ucrReceiverSingleCol
-        '
-        Me.ucrReceiverSingleCol.AutoSize = True
-        Me.ucrReceiverSingleCol.frmParent = Nothing
-        Me.ucrReceiverSingleCol.Location = New System.Drawing.Point(226, 27)
-        Me.ucrReceiverSingleCol.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSingleCol.Name = "ucrReceiverSingleCol"
-        Me.ucrReceiverSingleCol.Selector = Nothing
-        Me.ucrReceiverSingleCol.Size = New System.Drawing.Size(120, 21)
-        Me.ucrReceiverSingleCol.strNcFilePath = ""
-        Me.ucrReceiverSingleCol.TabIndex = 24
-        Me.ucrReceiverSingleCol.ucrSelector = Nothing
-        '
-        'ucrSelectorCols
-        '
-        Me.ucrSelectorCols.AutoSize = True
-        Me.ucrSelectorCols.bDropUnusedFilterLevels = False
-        Me.ucrSelectorCols.bShowHiddenColumns = False
-        Me.ucrSelectorCols.bUseCurrentFilter = True
-        Me.ucrSelectorCols.Location = New System.Drawing.Point(3, 5)
-        Me.ucrSelectorCols.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorCols.Name = "ucrSelectorCols"
-        Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorCols.TabIndex = 23
         '
         'ucrInputGroupLabel
         '
@@ -164,10 +103,43 @@ Partial Class ucrRowGroup
         Me.ucrInputGroupLabel.AutoSize = True
         Me.ucrInputGroupLabel.IsMultiline = False
         Me.ucrInputGroupLabel.IsReadOnly = False
-        Me.ucrInputGroupLabel.Location = New System.Drawing.Point(226, 75)
+        Me.ucrInputGroupLabel.Location = New System.Drawing.Point(8, 34)
+        Me.ucrInputGroupLabel.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputGroupLabel.Name = "ucrInputGroupLabel"
-        Me.ucrInputGroupLabel.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputGroupLabel.Size = New System.Drawing.Size(180, 32)
         Me.ucrInputGroupLabel.TabIndex = 308
+        '
+        'btnStyle
+        '
+        Me.btnStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.btnStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnStyle.Location = New System.Drawing.Point(210, 99)
+        Me.btnStyle.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnStyle.Name = "btnStyle"
+        Me.btnStyle.Size = New System.Drawing.Size(74, 35)
+        Me.btnStyle.TabIndex = 309
+        Me.btnStyle.Tag = ""
+        Me.btnStyle.Text = "Style"
+        Me.btnStyle.UseVisualStyleBackColor = True
+        '
+        'ucrRowExpression
+        '
+        Me.ucrRowExpression.Location = New System.Drawing.Point(13, 108)
+        Me.ucrRowExpression.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrRowExpression.Name = "ucrRowExpression"
+        Me.ucrRowExpression.Size = New System.Drawing.Size(186, 38)
+        Me.ucrRowExpression.TabIndex = 333
+        '
+        'lblGroupExpression
+        '
+        Me.lblGroupExpression.AutoSize = True
+        Me.lblGroupExpression.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblGroupExpression.Location = New System.Drawing.Point(9, 80)
+        Me.lblGroupExpression.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblGroupExpression.Name = "lblGroupExpression"
+        Me.lblGroupExpression.Size = New System.Drawing.Size(129, 20)
+        Me.lblGroupExpression.TabIndex = 334
+        Me.lblGroupExpression.Text = "Group Condition:"
         '
         'colLabel
         '
@@ -175,7 +147,7 @@ Partial Class ucrRowGroup
         Me.colLabel.MinimumWidth = 8
         Me.colLabel.Name = "colLabel"
         Me.colLabel.ReadOnly = True
-        Me.colLabel.Width = 80
+        Me.colLabel.Width = 70
         '
         'colCodnition
         '
@@ -185,34 +157,30 @@ Partial Class ucrRowGroup
         Me.colCodnition.ReadOnly = True
         Me.colCodnition.Width = 90
         '
-        'colFormat
+        'colStyleExpression
         '
-        Me.colFormat.HeaderText = ""
-        Me.colFormat.MinimumWidth = 8
-        Me.colFormat.Name = "colFormat"
-        Me.colFormat.ReadOnly = True
-        Me.colFormat.Text = "Style"
-        Me.colFormat.UseColumnTextForButtonValue = True
-        Me.colFormat.Width = 55
+        Me.colStyleExpression.HeaderText = "Style Expression"
+        Me.colStyleExpression.MinimumWidth = 8
+        Me.colStyleExpression.Name = "colStyleExpression"
+        Me.colStyleExpression.ReadOnly = True
+        Me.colStyleExpression.Width = 90
         '
         'ucrRowGroup
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblGroupExpression)
+        Me.Controls.Add(Me.ucrRowExpression)
+        Me.Controls.Add(Me.btnStyle)
         Me.Controls.Add(Me.ucrInputGroupLabel)
         Me.Controls.Add(Me.lblCondition)
-        Me.Controls.Add(Me.cboConditionValue)
-        Me.Controls.Add(Me.cboConditionOperator)
-        Me.Controls.Add(Me.lblGroupCondition)
         Me.Controls.Add(Me.lblGroups)
         Me.Controls.Add(Me.btnClearGroups)
-        Me.Controls.Add(Me.lblColumns)
         Me.Controls.Add(Me.btnAddCondition)
-        Me.Controls.Add(Me.ucrReceiverSingleCol)
-        Me.Controls.Add(Me.ucrSelectorCols)
         Me.Controls.Add(Me.dataGridGroups)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrRowGroup"
-        Me.Size = New System.Drawing.Size(557, 301)
+        Me.Size = New System.Drawing.Size(507, 403)
         CType(Me.dataGridGroups, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -220,18 +188,15 @@ Partial Class ucrRowGroup
     End Sub
 
     Friend WithEvents dataGridGroups As DataGridView
-    Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
     Friend WithEvents btnClearGroups As Button
-    Friend WithEvents lblColumns As Label
     Friend WithEvents btnAddCondition As Button
-    Friend WithEvents ucrReceiverSingleCol As ucrReceiverSingle
     Friend WithEvents lblGroups As Label
-    Friend WithEvents lblGroupCondition As Label
-    Friend WithEvents cboConditionOperator As ComboBox
-    Friend WithEvents cboConditionValue As ComboBox
     Friend WithEvents lblCondition As Label
     Friend WithEvents ucrInputGroupLabel As ucrInputTextBox
+    Friend WithEvents btnStyle As Button
+    Friend WithEvents ucrRowExpression As ucrRowExpression
+    Friend WithEvents lblGroupExpression As Label
     Friend WithEvents colLabel As DataGridViewTextBoxColumn
     Friend WithEvents colCodnition As DataGridViewTextBoxColumn
-    Friend WithEvents colFormat As DataGridViewButtonColumn
+    Friend WithEvents colStyleExpression As DataGridViewTextBoxColumn
 End Class

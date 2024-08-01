@@ -29,7 +29,7 @@
 
     End Sub
 
-    ' TODO. In future this can be refactored to return an RFUnction
+    ' TODO. In future this can be refactored to return an RFunction
     Public Function GetUserInputRowExpression() As String
         Return ucrReceiverExpression.GetText()
     End Function
@@ -41,6 +41,4 @@
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
         bUserClickedReturn = True
     End Sub
-
-
 End Class

@@ -19,4 +19,8 @@
         ucrRowGroups.Visible = rdoRowsGroups.Checked
     End Sub
 
+    Public Sub SetValuesToOperator()
+        ucrRowGroups.SetValuesToOperator()
+    End Sub
+
 End Class
