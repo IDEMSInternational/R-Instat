@@ -13,14 +13,17 @@
             bFirstload = False
         End If
         ucrRowGroups.Setup(strDataFrameName, clsOperator)
+        ucrRowSummary.Setup(strDataFrameName, clsOperator)
     End Sub
 
     Private Sub ucrPnlRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRows.ControlValueChanged
         ucrRowGroups.Visible = rdoRowsGroups.Checked
+        ucrRowSummary.Visible = rdoRowsSummaries.Checked
     End Sub
 
     Public Sub SetValuesToOperator()
         ucrRowGroups.SetValuesToOperator()
+        ucrRowSummary.SetValuesToOperator()
     End Sub
 
 End Class

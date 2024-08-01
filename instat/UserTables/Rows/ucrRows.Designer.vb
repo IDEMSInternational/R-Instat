@@ -24,8 +24,9 @@ Partial Class ucrRows
     Private Sub InitializeComponent()
         Me.rdoRowsGroups = New System.Windows.Forms.RadioButton()
         Me.rdoRowsSummaries = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlRows = New instat.UcrPanel()
         Me.ucrRowGroups = New instat.ucrRowGroup()
+        Me.ucrPnlRows = New instat.UcrPanel()
+        Me.ucrRowSummary = New instat.ucrRowSummary()
         Me.SuspendLayout()
         '
         'rdoRowsGroups
@@ -40,9 +41,10 @@ Partial Class ucrRows
         Me.rdoRowsGroups.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRowsGroups.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoRowsGroups.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRowsGroups.Location = New System.Drawing.Point(203, 3)
+        Me.rdoRowsGroups.Location = New System.Drawing.Point(159, 5)
+        Me.rdoRowsGroups.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.rdoRowsGroups.Name = "rdoRowsGroups"
-        Me.rdoRowsGroups.Size = New System.Drawing.Size(91, 29)
+        Me.rdoRowsGroups.Size = New System.Drawing.Size(136, 45)
         Me.rdoRowsGroups.TabIndex = 280
         Me.rdoRowsGroups.Text = "Groups"
         Me.rdoRowsGroups.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -60,39 +62,52 @@ Partial Class ucrRows
         Me.rdoRowsSummaries.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRowsSummaries.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.rdoRowsSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRowsSummaries.Location = New System.Drawing.Point(292, 3)
+        Me.rdoRowsSummaries.Location = New System.Drawing.Point(293, 5)
+        Me.rdoRowsSummaries.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.rdoRowsSummaries.Name = "rdoRowsSummaries"
-        Me.rdoRowsSummaries.Size = New System.Drawing.Size(91, 29)
+        Me.rdoRowsSummaries.Size = New System.Drawing.Size(136, 45)
         Me.rdoRowsSummaries.TabIndex = 281
         Me.rdoRowsSummaries.Text = "Summaries"
         Me.rdoRowsSummaries.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoRowsSummaries.UseVisualStyleBackColor = True
         '
+        'ucrRowGroups
+        '
+        Me.ucrRowGroups.Location = New System.Drawing.Point(4, 58)
+        Me.ucrRowGroups.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrRowGroups.Name = "ucrRowGroups"
+        Me.ucrRowGroups.Size = New System.Drawing.Size(789, 428)
+        Me.ucrRowGroups.TabIndex = 283
+        '
         'ucrPnlRows
         '
         Me.ucrPnlRows.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlRows.Location = New System.Drawing.Point(178, 3)
+        Me.ucrPnlRows.Location = New System.Drawing.Point(24, 5)
+        Me.ucrPnlRows.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrPnlRows.Name = "ucrPnlRows"
-        Me.ucrPnlRows.Size = New System.Drawing.Size(232, 29)
+        Me.ucrPnlRows.Size = New System.Drawing.Size(591, 45)
         Me.ucrPnlRows.TabIndex = 279
         '
-        'ucrRowGroups
+        'ucrRowSummary
         '
-        Me.ucrRowGroups.Location = New System.Drawing.Point(3, 38)
-        Me.ucrRowGroups.Name = "ucrRowGroups"
-        Me.ucrRowGroups.Size = New System.Drawing.Size(577, 306)
-        Me.ucrRowGroups.TabIndex = 283
+        Me.ucrRowSummary.Location = New System.Drawing.Point(4, 64)
+        Me.ucrRowSummary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrRowSummary.Name = "ucrRowSummary"
+        Me.ucrRowSummary.Size = New System.Drawing.Size(789, 484)
+        Me.ucrRowSummary.TabIndex = 284
         '
         'ucrRows
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrRowGroups)
+        Me.Controls.Add(Me.ucrRowSummary)
         Me.Controls.Add(Me.rdoRowsGroups)
         Me.Controls.Add(Me.rdoRowsSummaries)
         Me.Controls.Add(Me.ucrPnlRows)
+        Me.Controls.Add(Me.ucrRowGroups)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrRows"
-        Me.Size = New System.Drawing.Size(583, 340)
+        Me.Size = New System.Drawing.Size(843, 567)
         Me.ResumeLayout(False)
 
     End Sub
@@ -100,4 +115,5 @@ Partial Class ucrRows
     Friend WithEvents rdoRowsSummaries As RadioButton
     Friend WithEvents ucrPnlRows As UcrPanel
     Friend WithEvents ucrRowGroups As ucrRowGroup
+    Friend WithEvents ucrRowSummary As ucrRowSummary
 End Class
