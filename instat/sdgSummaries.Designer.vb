@@ -176,6 +176,8 @@ Partial Class sdgSummaries
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.ttVerificationSummaries = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkWhereMax = New instat.ucrCheck()
+        Me.ucrChkWhereMin = New instat.ucrCheck()
         Me.tbCircular.SuspendLayout()
         Me.grpCircScale.SuspendLayout()
         Me.grpCircLocation.SuspendLayout()
@@ -210,7 +212,7 @@ Partial Class sdgSummaries
         Me.tbCircular.Margin = New System.Windows.Forms.Padding(2)
         Me.tbCircular.Name = "tbCircular"
         Me.tbCircular.Padding = New System.Windows.Forms.Padding(2)
-        Me.tbCircular.Size = New System.Drawing.Size(771, 397)
+        Me.tbCircular.Size = New System.Drawing.Size(409, 397)
         Me.tbCircular.TabIndex = 8
         Me.tbCircular.Text = "Circular"
         Me.tbCircular.UseVisualStyleBackColor = True
@@ -386,7 +388,7 @@ Partial Class sdgSummaries
         Me.tbModel.Location = New System.Drawing.Point(4, 22)
         Me.tbModel.Name = "tbModel"
         Me.tbModel.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbModel.Size = New System.Drawing.Size(771, 397)
+        Me.tbModel.Size = New System.Drawing.Size(409, 397)
         Me.tbModel.TabIndex = 6
         Me.tbModel.Text = "Model"
         Me.tbModel.UseVisualStyleBackColor = True
@@ -426,11 +428,13 @@ Partial Class sdgSummaries
         '
         'grpDisplay
         '
+        Me.grpDisplay.Controls.Add(Me.ucrChkWhereMax)
+        Me.grpDisplay.Controls.Add(Me.ucrChkWhereMin)
         Me.grpDisplay.Controls.Add(Me.ucrChkWhichmax)
         Me.grpDisplay.Controls.Add(Me.ucrChkWhichmin)
         Me.grpDisplay.Location = New System.Drawing.Point(10, 41)
         Me.grpDisplay.Name = "grpDisplay"
-        Me.grpDisplay.Size = New System.Drawing.Size(269, 80)
+        Me.grpDisplay.Size = New System.Drawing.Size(270, 101)
         Me.grpDisplay.TabIndex = 8
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Position"
@@ -688,7 +692,7 @@ Partial Class sdgSummaries
         Me.tbTwoVariables.Location = New System.Drawing.Point(4, 22)
         Me.tbTwoVariables.Name = "tbTwoVariables"
         Me.tbTwoVariables.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbTwoVariables.Size = New System.Drawing.Size(771, 397)
+        Me.tbTwoVariables.Size = New System.Drawing.Size(409, 397)
         Me.tbTwoVariables.TabIndex = 5
         Me.tbTwoVariables.Text = " Two-Variables"
         Me.tbTwoVariables.UseVisualStyleBackColor = True
@@ -1034,7 +1038,7 @@ Partial Class sdgSummaries
         Me.tbMore.Location = New System.Drawing.Point(4, 22)
         Me.tbMore.Name = "tbMore"
         Me.tbMore.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbMore.Size = New System.Drawing.Size(771, 397)
+        Me.tbMore.Size = New System.Drawing.Size(409, 397)
         Me.tbMore.TabIndex = 1
         Me.tbMore.Text = "More"
         Me.tbMore.UseVisualStyleBackColor = True
@@ -1375,7 +1379,7 @@ Partial Class sdgSummaries
         Me.tbsum.Location = New System.Drawing.Point(4, 22)
         Me.tbsum.Name = "tbsum"
         Me.tbsum.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbsum.Size = New System.Drawing.Size(771, 397)
+        Me.tbsum.Size = New System.Drawing.Size(409, 397)
         Me.tbsum.TabIndex = 0
         Me.tbsum.Text = "Summaries"
         Me.tbsum.UseVisualStyleBackColor = True
@@ -1728,6 +1732,26 @@ Partial Class sdgSummaries
         Me.ucrButtonsSummaries.Size = New System.Drawing.Size(224, 31)
         Me.ucrButtonsSummaries.TabIndex = 1
         '
+        'ucrChkWhereMax
+        '
+        Me.ucrChkWhereMax.AutoSize = True
+        Me.ucrChkWhereMax.Checked = False
+        Me.ucrChkWhereMax.Location = New System.Drawing.Point(5, 60)
+        Me.ucrChkWhereMax.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrChkWhereMax.Name = "ucrChkWhereMax"
+        Me.ucrChkWhereMax.Size = New System.Drawing.Size(101, 34)
+        Me.ucrChkWhereMax.TabIndex = 14
+        '
+        'ucrChkWhereMin
+        '
+        Me.ucrChkWhereMin.AutoSize = True
+        Me.ucrChkWhereMin.Checked = False
+        Me.ucrChkWhereMin.Location = New System.Drawing.Point(164, 60)
+        Me.ucrChkWhereMin.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrChkWhereMin.Name = "ucrChkWhereMin"
+        Me.ucrChkWhereMin.Size = New System.Drawing.Size(101, 34)
+        Me.ucrChkWhereMin.TabIndex = 13
+        '
         'sdgSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1929,4 +1953,6 @@ Partial Class sdgSummaries
     Friend WithEvents rdoUsePositions As RadioButton
     Friend WithEvents rdoDisplay As RadioButton
     Friend WithEvents ucrPnlPosition As UcrPanel
+    Friend WithEvents ucrChkWhereMax As ucrCheck
+    Friend WithEvents ucrChkWhereMin As ucrCheck
 End Class
