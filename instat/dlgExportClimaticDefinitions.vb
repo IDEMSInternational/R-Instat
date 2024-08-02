@@ -22,6 +22,7 @@ Public Class dlgExportClimaticDefinitions
     Private bResetSubdialog As Boolean = False
     Private clsDummyFunction As New RFunction
     Public clsRsyntax As New RSyntax
+    Private iUcrBaseXLocation, iDialogueXsize As Integer
     Public clsExportRinstatToBucketFunction, clsUpdateMetadataInfoFunction, ClsGcsAuthFileFunction, clsSummariesFunction As New RFunction
     Public clsReforMattAnnualSummariesFunction, clsReformatCropSuccessFunction, clsReformatSeasonStartFunction, clsReformatTempSummariesFunction, clsReformatMonthlyTempSummaries As New RFunction
 
@@ -37,9 +38,12 @@ Public Class dlgExportClimaticDefinitions
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
+        DialogSize()
     End Sub
 
     Private Sub InitialiseDialog()
+        iUcrBaseXLocation = ucrBase.Location.X
+        iDialogueXsize = Me.Size.Width
 
         ucrPnlExportGoogle.AddRadioButton(rdoUpdateMetadata)
         ucrPnlExportGoogle.AddRadioButton(rdoUploadSummaries)
@@ -171,8 +175,7 @@ Public Class dlgExportClimaticDefinitions
         ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverMonth, ucrReceiverYear, ucrReceiverStation}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverDistrict, ucrReceiverElavation, ucrReceiverLatitude, ucrReceiverLongititude, ucrReceiverStationName}, {rdoUpdateMetadata}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExportGoogle.AddToLinkedControls({ucrInputCountry, ucrChkIncludeSummaryData, ucrInputDefinitionsID, ucrInputTokenPath}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'EnableDisableDefineButton()
-
+        DialogSize()
     End Sub
 
     Private Sub SetDefaults()
@@ -228,9 +231,7 @@ Public Class dlgExportClimaticDefinitions
 
         clsUpdateMetadataInfoFunction.SetPackageName("epicsawrap")
         clsUpdateMetadataInfoFunction.SetRCommand("update_metadata_info")
-
         ucrBase.clsRsyntax.ClearCodes()
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -252,7 +253,7 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverElavation.SetRCode(clsUpdateMetadataInfoFunction, bReset)
         ucrReceiverLatitude.SetRCode(clsUpdateMetadataInfoFunction, bReset)
         ucrReceiverLongititude.SetRCode(clsUpdateMetadataInfoFunction, bReset)
-        ucrReceiverStation.SetRCode(clsUpdateMetadataInfoFunction, bReset)
+        ucrReceiverStationName.SetRCode(clsUpdateMetadataInfoFunction, bReset)
 
         If bReset Then
             ucrChkAnnualRainfall.SetRCode(clsDummyFunction, bReset)
@@ -295,50 +296,12 @@ Public Class dlgExportClimaticDefinitions
                 ucrBase.OKEnabled(False)
             End If
         Else
-            If Not (ucrReceiverStationName.IsEmpty OrElse ucrReceiverLatitude.IsEmpty OrElse ucrReceiverElavation.IsEmpty OrElse ucrReceiverDistrict.IsEmpty OrElse ucrReceiverLongititude.IsEmpty) Then
+            If Not ucrReceiverStationName.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
         End If
-        'If rdoUploadSummaries.Checked Then
-        '    If Not ucrReceiverStation.IsEmpty AndAlso
-        '     Not ucrReceiverYear.IsEmpty AndAlso
-        '     Not ucrInputCountry.IsEmpty AndAlso
-        '     Not ucrInputDefinitionsID.IsEmpty AndAlso
-        '     Not ucrInputTokenPath.IsEmpty Then
-
-        '        If (ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked) AndAlso
-        '        Not ucrReceiverCropData.IsEmpty Then
-        '            ucrBase.OKEnabled(True)
-        '        ElseIf ucrChkAnnualRainfall.Checked AndAlso
-        '       Not ucrReceiverRain.IsEmpty Then
-        '            ucrBase.OKEnabled(True)
-        '        ElseIf (ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked) AndAlso
-        '       Not ucrReceiverDataYear.IsEmpty Then
-        '            ucrBase.OKEnabled(True)
-        '        ElseIf ucrChkMonthlyTemp.Checked AndAlso
-        '       Not ucrReceiverMonth.IsEmpty AndAlso
-        '       Not ucrReceiverDataYearMonth.IsEmpty Then
-        '            ucrBase.OKEnabled(True)
-        '        Else
-        '            ucrBase.OKEnabled(False)
-        '        End If
-        '    Else
-        '        ucrBase.OKEnabled(False)
-        '    End If
-        'Else
-        '    If Not (ucrReceiverStationName.IsEmpty OrElse
-        '    ucrReceiverLatitude.IsEmpty OrElse
-        '    ucrReceiverElavation.IsEmpty OrElse
-        '    ucrReceiverDistrict.IsEmpty OrElse
-        '    ucrReceiverLongititude.IsEmpty) Then
-        '        ucrBase.OKEnabled(True)
-        '    Else
-        '        ucrBase.OKEnabled(False)
-        '    End If
-        'End If
-
 
     End Sub
 
@@ -451,7 +414,6 @@ Public Class dlgExportClimaticDefinitions
             ucrReceiverDataYear.Visible = ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked
             ucrReceiverRain.Visible = ucrChkAnnualRainfall.Checked
             ucrReceiverCropData.Visible = ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked
-
         Else
             ucrReceiverDataYearMonth.Visible = False
             ucrReceiverDataYear.Visible = False
@@ -479,12 +441,11 @@ Public Class dlgExportClimaticDefinitions
 
     End Sub
 
+    Private Sub ucrSelectorExportDefinitions_DataFrameChanged() Handles ucrSelectorExportDefinitions.DataFrameChanged
+        TestOkEnabled()
+    End Sub
 
-    'Private Sub ucrSelectorExportDefinitions_DataFrameChanged() Handles ucrSelectorExportDefinitions.DataFrameChanged
-    '    TestOkEnabled()
-    'End Sub
-
-    Private Sub ucrPnlExportGoogle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExportGoogle.ControlValueChanged
+    Private Sub ucrPnlExportGoogle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExportGoogle.ControlValueChanged, ucrInputTokenPath.ControlValueChanged
         If rdoUpdateMetadata.Checked Then
             grpSummaries.Visible = False
             cmdDefine.Visible = False
@@ -500,8 +461,20 @@ Public Class dlgExportClimaticDefinitions
             ucrBase.clsRsyntax.SetBaseRFunction(clsExportRinstatToBucketFunction)
             ucrReceiverStation.SetMeAsReceiver()
         End If
-        TestOkEnabled()
         EnableDisableDefineButton()
+        DialogSize()
+    End Sub
+
+    Private Sub DialogSize()
+        'If rdoUpdateMetadata.Checked Then
+        '    Me.Size = New Size(710, 711)
+        '    Me.ucrBase.Location = New Point(6, 568)
+
+        'Else
+        '    Me.Size = New Size(710, 811)
+        '    Me.ucrBase.Location = New Point(6, 668)
+
+        'End If
 
     End Sub
 
