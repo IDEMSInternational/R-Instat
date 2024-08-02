@@ -466,16 +466,13 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub DialogSize()
-        'If rdoUpdateMetadata.Checked Then
-        '    Me.Size = New Size(710, 711)
-        '    Me.ucrBase.Location = New Point(6, 568)
-
-        'Else
-        '    Me.Size = New Size(710, 811)
-        '    Me.ucrBase.Location = New Point(6, 668)
-
-        'End If
-
+        If rdoUpdateMetadata.Checked Then
+            Me.Size = New Size(475, 439)
+            Me.ucrBase.Location = New Point(4, 334)
+        Else
+            Me.Size = New Size(475, 539)
+            Me.ucrBase.Location = New Point(4, 434)
+        End If
     End Sub
 
     Private Sub ucrSelectorExportDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorExportDefinitions.ControlValueChanged
