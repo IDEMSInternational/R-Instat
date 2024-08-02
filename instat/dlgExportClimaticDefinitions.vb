@@ -22,7 +22,6 @@ Public Class dlgExportClimaticDefinitions
     Private bResetSubdialog As Boolean = False
     Private clsDummyFunction As New RFunction
     Public clsRsyntax As New RSyntax
-    Private iUcrBaseXLocation, iDialogueXsize As Integer
     Public clsExportRinstatToBucketFunction, clsUpdateMetadataInfoFunction, ClsGcsAuthFileFunction, clsSummariesFunction As New RFunction
     Public clsReforMattAnnualSummariesFunction, clsReformatCropSuccessFunction, clsReformatSeasonStartFunction, clsReformatTempSummariesFunction, clsReformatMonthlyTempSummaries As New RFunction
 
@@ -42,9 +41,6 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub InitialiseDialog()
-        iUcrBaseXLocation = ucrBase.Location.X
-        iDialogueXsize = Me.Size.Width
-
         ucrPnlExportGoogle.AddRadioButton(rdoUpdateMetadata)
         ucrPnlExportGoogle.AddRadioButton(rdoUploadSummaries)
         ucrPnlExportGoogle.AddParameterValuesCondition(rdoUpdateMetadata, "checked", "metadata")
@@ -174,7 +170,7 @@ Public Class dlgExportClimaticDefinitions
 
         ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverMonth, ucrReceiverYear, ucrReceiverStation}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverDistrict, ucrReceiverElavation, ucrReceiverLatitude, ucrReceiverLongititude, ucrReceiverStationName}, {rdoUpdateMetadata}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlExportGoogle.AddToLinkedControls({ucrInputCountry, ucrChkIncludeSummaryData, ucrInputDefinitionsID, ucrInputTokenPath}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExportGoogle.AddToLinkedControls({ucrInputCountry, ucrChkIncludeSummaryData, ucrInputDefinitionsID}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         DialogSize()
     End Sub
 
@@ -296,13 +292,12 @@ Public Class dlgExportClimaticDefinitions
                 ucrBase.OKEnabled(False)
             End If
         Else
-            If Not ucrReceiverStationName.IsEmpty Then
+            If Not ucrReceiverStationName.IsEmpty AndAlso Not ucrInputTokenPath.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
         End If
-
     End Sub
 
     Private Sub AddRemoveSummary()
@@ -423,11 +418,7 @@ Public Class dlgExportClimaticDefinitions
 
     End Sub
 
-    Private Sub ucrChkIncludeSummaryData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeSummaryData.ControlValueChanged
-        EnableDisableDefineButton()
-    End Sub
-
-    Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
+    Private Sub cmdChooseFile_Click_1(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
         Using dlgOpen As New OpenFileDialog
             dlgOpen.Filter = "JSON Files|*.json"
             dlgOpen.Title = "Import JSON File"
@@ -438,7 +429,10 @@ Public Class dlgExportClimaticDefinitions
                 ucrInputTokenPath.SetName(Replace(dlgOpen.FileName, "\", "/"))
             End If
         End Using
+    End Sub
 
+    Private Sub ucrChkIncludeSummaryData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeSummaryData.ControlValueChanged
+        EnableDisableDefineButton()
     End Sub
 
     Private Sub ucrSelectorExportDefinitions_DataFrameChanged() Handles ucrSelectorExportDefinitions.DataFrameChanged
@@ -446,23 +440,21 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub ucrPnlExportGoogle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExportGoogle.ControlValueChanged, ucrInputTokenPath.ControlValueChanged
+        ucrBase.clsRsyntax.AddToBeforeCodes(ClsGcsAuthFileFunction, 0)
         If rdoUpdateMetadata.Checked Then
             grpSummaries.Visible = False
             cmdDefine.Visible = False
-            cmdChooseFile.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsUpdateMetadataInfoFunction)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(ClsGcsAuthFileFunction)
             ucrReceiverStationName.SetMeAsReceiver()
         Else
             grpSummaries.Visible = True
             cmdDefine.Visible = True
-            cmdChooseFile.Visible = True
-            ucrBase.clsRsyntax.AddToBeforeCodes(ClsGcsAuthFileFunction, 0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsExportRinstatToBucketFunction)
             ucrReceiverStation.SetMeAsReceiver()
         End If
         EnableDisableDefineButton()
         DialogSize()
+        TestOkEnabled()
     End Sub
 
     Private Sub DialogSize()
@@ -479,9 +471,9 @@ Public Class dlgExportClimaticDefinitions
         clsUpdateMetadataInfoFunction.AddParameter("metadata_data", ucrSelectorExportDefinitions.ucrAvailableDataFrames.strCurrDataFrame, iPosition:=0)
     End Sub
 
-    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRain.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged,
+    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRain.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged,
             ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrChkSeasonStartProp.ControlContentsChanged, ucrInputCountry.ControlContentsChanged, ucrInputDefinitionsID.ControlContentsChanged, ucrChkIncludeSummaryData.ControlContentsChanged, ucrReceiverLongititude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged,
-            ucrChkMonthlyTemp.ControlContentsChanged, ucrChkCropSuccessProp.ControlContentsChanged, ucrChkAnnualTemp.ControlContentsChanged, ucrChkAnnualRainfall.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged, ucrSelectorExportDefinitions.ControlContentsChanged, ucrReceiverElavation.ControlContentsChanged, ucrReceiverDistrict.ControlContentsChanged, ucrReceiverStationName.ControlContentsChanged
+            ucrChkMonthlyTemp.ControlContentsChanged, ucrChkCropSuccessProp.ControlContentsChanged, ucrChkAnnualTemp.ControlContentsChanged, ucrChkAnnualRainfall.ControlContentsChanged, ucrSelectorExportDefinitions.ControlContentsChanged, ucrReceiverElavation.ControlContentsChanged, ucrReceiverDistrict.ControlContentsChanged, ucrReceiverStationName.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
