@@ -1991,6 +1991,7 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   }
   
   sql_select <-paste0(sql_select,", ", tableName,".obsDatetime AS date_time") 
+  sql_select <-paste0(sql_select,", DATE(", tableName,".obsDatetime) AS date") 
   
   if(include_qc_log){
     sql_select <-paste0(sql_select,", ", tableName,".qcTypeLog"," AS qc_log") 
@@ -2052,56 +2053,61 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   observations_data_name <- next_default_item("observations_data", self$get_data_names(), include_index = FALSE)
   data_list[[observations_data_name]] <- DBI::dbGetQuery(con,paste0(sql_select, sql_filter, sql_order_by))
   
-  if(unstack_data){
-    observations_unstacked_data_name <- next_default_item("observations_unstacked_data", self$get_data_names(), include_index = FALSE)
-    data_list[[observations_unstacked_data_name]] <- reshape2::dcast(data = data_list[[observations_data_name]], formula = station_name + date_time ~ element_abbrv, value.var = "value")
-  }
+   #--------------------------------
   
+  # transform imported data
+  # --------------------------------
   
-  self$import_data(data_tables = data_list)
-  #--------------------------------
+  observations_df <- data_list[[observations_data_name]]
   
-  #transform imported data
-  #--------------------------------
-  self$convert_column_to_type(data_name = observations_data_name, col_names = c("station_name","element_abbrv"), to_type = "factor")
+  # Convert station name and abbreviation columns to factor
+  mandatory_columns_to_convert <- c("station_name", "element_abbrv")
+  observations_df[mandatory_columns_to_convert] <- lapply(observations_df[mandatory_columns_to_convert], as.factor)
+  
+  # convert the date column to date format
+  observations_df$date <- as.Date(x = observations_df$date)
+  
+  # Convert the date_time column to POSIXct (date-time) format
+  observations_df$date_time <- as.POSIXct(observations_df$date_time, format = "%Y-%m-%d %H:%M:%S")
   
   if(include_station_id){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "station_id", to_type = "factor")
+    observations_df$station_id <- as.factor(observations_df$station_id)
   }
   
   if(include_element_id){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "element_id", to_type = "factor")
+    observations_df$element_id <- as.factor(observations_df$element_id)
   }
   
   if(include_element_name){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "element_name", to_type = "factor")
+    observations_df$element_name <- as.factor(observations_df$element_name)
   }
   
   if(include_qc_status){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "qc_status", to_type = "factor")
+    observations_df$qc_status <- as.factor(observations_df$qc_status)
   }
   
   if(include_acquisition_type){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "acquisition_type", to_type = "factor")
+    observations_df$acquisition_type <- as.factor(observations_df$acquisition_type)
   }
   
   if(include_level){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "level", to_type = "factor")
+    observations_df$level <- as.factor(observations_df$level)
   }
   
   if(include_flag){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "flag", to_type = "factor")
+    observations_df$flag <- as.factor(observations_df$flag)
   }
   
   if(include_entry_form){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "entry_form", to_type = "factor")
+    observations_df$entry_form <- as.factor(observations_df$entry_form)
   }
   
-  #todo. should this be done at this point?? Keeping in mind that we may have hourly data
-  #create a plain date column from the observation data datetime column values
-  #obsdate <- self$get_columns_from_data(data_name = observations_data_name, col_names = "date_time", use_current_filter = FALSE)
-  #self$add_columns_to_data(data_name = observations_data_name, col_name = "date", col_data = as.Date(x = obsdate), before = FALSE, adjacent_column = "date_time")
-  #--------------------------------
+  if(unstack_data){
+    observations_unstacked_data_name <- next_default_item("observations_unstacked_data", self$get_data_names(), include_index = FALSE)
+    data_list[[observations_unstacked_data_name]] <- tidyr::pivot_wider(data = observations_df, names_from=element_abbrv, values_from=value)
+  }
+  
+  self$import_data(data_tables = data_list)
   
 })
 
