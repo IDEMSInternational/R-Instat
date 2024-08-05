@@ -111,7 +111,7 @@ Partial Class ucrRowSummary
         '
         Me.btnAddSummaries.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnAddSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnAddSummaries.Location = New System.Drawing.Point(363, 377)
+        Me.btnAddSummaries.Location = New System.Drawing.Point(359, 373)
         Me.btnAddSummaries.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnAddSummaries.Name = "btnAddSummaries"
         Me.btnAddSummaries.Size = New System.Drawing.Size(144, 35)
@@ -267,7 +267,7 @@ Partial Class ucrRowSummary
         Me.ucrTxtReplaceNa.AutoSize = True
         Me.ucrTxtReplaceNa.IsMultiline = False
         Me.ucrTxtReplaceNa.IsReadOnly = False
-        Me.ucrTxtReplaceNa.Location = New System.Drawing.Point(594, 167)
+        Me.ucrTxtReplaceNa.Location = New System.Drawing.Point(594, 170)
         Me.ucrTxtReplaceNa.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrTxtReplaceNa.Name = "ucrTxtReplaceNa"
         Me.ucrTxtReplaceNa.Size = New System.Drawing.Size(180, 32)

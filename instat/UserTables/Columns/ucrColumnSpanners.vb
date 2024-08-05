@@ -73,7 +73,7 @@ Public Class ucrColumnSpanners
     End Sub
 
     Private Sub btnAddColSpanner_Click(sender As Object, e As EventArgs) Handles btnAddColSpanner.Click
-        Dim strSpannerLabel As String = ucrInputColSpanner.GetValue()
+        Dim strSpannerLabel As String = ucrInputColSpanner.GetText()
         Dim strSpannerId As String = strSpannerLabel.Replace(" ", String.Empty)
         Dim strSpannerColsRFunction As String = mdlCoreControl.GetRVector(ucrReceiverMultipleCols.GetVariableNamesList(bWithQuotes:=False), bOnlyIfMultipleElement:=False)
         Dim strSpannerStyleExpression As String = ""
