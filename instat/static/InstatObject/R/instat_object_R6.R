@@ -1922,7 +1922,7 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
                                                         station_filter_column, stations = c(), 
                                                         element_filter_column, elements = c(),
                                                         qc_status = -1, start_date = NULL, end_date = NULL, unstack_data = FALSE,
-                                                        include_station_id = FALSE, include_element_id = FALSE, include_element_name = FALSE, 
+                                                        include_element_id = FALSE, include_element_name = FALSE, 
                                                         include_acquisition_type = FALSE, include_level = FALSE, include_entry_form = FALSE, include_captured_by = FALSE, 
                                                         include_qc_status = FALSE, include_qc_log = FALSE, include_flag = FALSE, 
                                                         import_selected_stations_metadata = FALSE, import_selected_elements_metadata = FALSE) {
@@ -1949,14 +1949,7 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   #selects
   #--------------------------------
 
-  sql_select<- ""
-  
-  if(include_station_id){
-    sql_select <- paste0(tableName,".recordedFrom AS station_id") 
-    sql_select <-paste0(sql_select,", station.stationName AS station_name") 
-  }else{
-    sql_select <-"station.stationName AS station_name"
-  }
+  sql_select<- paste0(tableName,".recordedFrom AS station_id",", station.stationName AS station_name") 
   
   if(include_element_id){
     sql_select <-paste0(sql_select, ", ", tableName,".describedBy AS element_id") 
@@ -2059,7 +2052,7 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   observations_df <- DBI::dbGetQuery(con, paste0(sql_select, sql_filter, sql_order_by))
   
   # Convert station name and abbreviation columns to factor
-  columns_to_convert <- c("station_name", "element_abbrv")
+  columns_to_convert <- c("station_id", "station_name", "element_abbrv")
   observations_df[columns_to_convert] <- lapply(observations_df[columns_to_convert], as.factor)
   
   # Convert the date_time column to POSIXct (date-time) format
@@ -2067,11 +2060,6 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   
   # convert the date column to date format
   observations_df$date <- as.Date(x = observations_df$date)
-  #observations_df$date <- as.Date(x = observations_df$date_time)
-  
-  if(include_station_id){
-    observations_df$station_id <- as.factor(observations_df$station_id)
-  }
   
   if(include_element_id){
     observations_df$element_id <- as.factor(observations_df$element_id)
