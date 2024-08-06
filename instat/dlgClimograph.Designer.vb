@@ -45,7 +45,15 @@ Partial Class dlgClimograph
         Me.toolStripMenuItemTmaxLineOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTminLineOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemLayersOptionsOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ucrChkBar = New instat.ucrCheck()
+        Me.rdoClimateBars = New System.Windows.Forms.RadioButton()
+        Me.lblRainBar = New System.Windows.Forms.Label()
+        Me.lblElement1Bar = New System.Windows.Forms.Label()
+        Me.lblElement2Bar = New System.Windows.Forms.Label()
+        Me.lblMonthBar = New System.Windows.Forms.Label()
+        Me.ucrReceiverRainBar = New instat.ucrReceiverSingle()
+        Me.ucrReceiverElement1Bar = New instat.ucrReceiverSingle()
+        Me.ucrReceiverElement2Bar = New instat.ucrReceiverSingle()
+        Me.ucrReceiverMonthBar = New instat.ucrReceiverSingle()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrInputPalette = New instat.ucrInputComboBox()
         Me.ucrPnlColour = New instat.UcrPanel()
@@ -132,7 +140,7 @@ Partial Class dlgClimograph
         Me.rdoClimograph.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoClimograph.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoClimograph.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoClimograph.Location = New System.Drawing.Point(149, 10)
+        Me.rdoClimograph.Location = New System.Drawing.Point(107, 10)
         Me.rdoClimograph.Name = "rdoClimograph"
         Me.rdoClimograph.Size = New System.Drawing.Size(79, 28)
         Me.rdoClimograph.TabIndex = 62
@@ -151,7 +159,7 @@ Partial Class dlgClimograph
         Me.rdoWalterLieth.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWalterLieth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWalterLieth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoWalterLieth.Location = New System.Drawing.Point(227, 10)
+        Me.rdoWalterLieth.Location = New System.Drawing.Point(185, 10)
         Me.rdoWalterLieth.Name = "rdoWalterLieth"
         Me.rdoWalterLieth.Size = New System.Drawing.Size(80, 28)
         Me.rdoWalterLieth.TabIndex = 61
@@ -221,7 +229,7 @@ Partial Class dlgClimograph
         '
         Me.rdoViridis.AutoSize = True
         Me.rdoViridis.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoViridis.Location = New System.Drawing.Point(14, 410)
+        Me.rdoViridis.Location = New System.Drawing.Point(14, 382)
         Me.rdoViridis.Name = "rdoViridis"
         Me.rdoViridis.Size = New System.Drawing.Size(52, 17)
         Me.rdoViridis.TabIndex = 123
@@ -233,7 +241,7 @@ Partial Class dlgClimograph
         '
         Me.rdoPalette.AutoSize = True
         Me.rdoPalette.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPalette.Location = New System.Drawing.Point(14, 436)
+        Me.rdoPalette.Location = New System.Drawing.Point(14, 408)
         Me.rdoPalette.Name = "rdoPalette"
         Me.rdoPalette.Size = New System.Drawing.Size(58, 17)
         Me.rdoPalette.TabIndex = 121
@@ -245,7 +253,7 @@ Partial Class dlgClimograph
         '
         Me.rdoSinglecolour.AutoSize = True
         Me.rdoSinglecolour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSinglecolour.Location = New System.Drawing.Point(14, 461)
+        Me.rdoSinglecolour.Location = New System.Drawing.Point(14, 433)
         Me.rdoSinglecolour.Name = "rdoSinglecolour"
         Me.rdoSinglecolour.Size = New System.Drawing.Size(87, 17)
         Me.rdoSinglecolour.TabIndex = 124
@@ -289,14 +297,112 @@ Partial Class dlgClimograph
         Me.toolStripMenuItemLayersOptionsOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemLayersOptionsOptions.Text = "Layers Options"
         '
-        'ucrChkBar
+        'rdoClimateBars
         '
-        Me.ucrChkBar.AutoSize = True
-        Me.ucrChkBar.Checked = False
-        Me.ucrChkBar.Location = New System.Drawing.Point(14, 353)
-        Me.ucrChkBar.Name = "ucrChkBar"
-        Me.ucrChkBar.Size = New System.Drawing.Size(214, 24)
-        Me.ucrChkBar.TabIndex = 127
+        Me.rdoClimateBars.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoClimateBars.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoClimateBars.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoClimateBars.FlatAppearance.BorderSize = 2
+        Me.rdoClimateBars.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoClimateBars.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoClimateBars.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoClimateBars.Location = New System.Drawing.Point(263, 10)
+        Me.rdoClimateBars.Name = "rdoClimateBars"
+        Me.rdoClimateBars.Size = New System.Drawing.Size(91, 28)
+        Me.rdoClimateBars.TabIndex = 128
+        Me.rdoClimateBars.TabStop = True
+        Me.rdoClimateBars.Tag = ""
+        Me.rdoClimateBars.Text = "Climate Charts"
+        Me.rdoClimateBars.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoClimateBars.UseVisualStyleBackColor = False
+        '
+        'lblRainBar
+        '
+        Me.lblRainBar.AutoSize = True
+        Me.lblRainBar.Location = New System.Drawing.Point(267, 134)
+        Me.lblRainBar.Name = "lblRainBar"
+        Me.lblRainBar.Size = New System.Drawing.Size(48, 13)
+        Me.lblRainBar.TabIndex = 134
+        Me.lblRainBar.Text = "RainFall:"
+        '
+        'lblElement1Bar
+        '
+        Me.lblElement1Bar.AutoSize = True
+        Me.lblElement1Bar.Location = New System.Drawing.Point(267, 177)
+        Me.lblElement1Bar.Name = "lblElement1Bar"
+        Me.lblElement1Bar.Size = New System.Drawing.Size(90, 13)
+        Me.lblElement1Bar.TabIndex = 136
+        Me.lblElement1Bar.Text = "Element1 (TMax):"
+        '
+        'lblElement2Bar
+        '
+        Me.lblElement2Bar.AutoSize = True
+        Me.lblElement2Bar.Location = New System.Drawing.Point(267, 218)
+        Me.lblElement2Bar.Name = "lblElement2Bar"
+        Me.lblElement2Bar.Size = New System.Drawing.Size(87, 13)
+        Me.lblElement2Bar.TabIndex = 138
+        Me.lblElement2Bar.Text = "Element2 (TMin):"
+        '
+        'lblMonthBar
+        '
+        Me.lblMonthBar.AutoSize = True
+        Me.lblMonthBar.Location = New System.Drawing.Point(267, 93)
+        Me.lblMonthBar.Name = "lblMonthBar"
+        Me.lblMonthBar.Size = New System.Drawing.Size(40, 13)
+        Me.lblMonthBar.TabIndex = 132
+        Me.lblMonthBar.Text = "Month:"
+        '
+        'ucrReceiverRainBar
+        '
+        Me.ucrReceiverRainBar.AutoSize = True
+        Me.ucrReceiverRainBar.frmParent = Me
+        Me.ucrReceiverRainBar.Location = New System.Drawing.Point(267, 150)
+        Me.ucrReceiverRainBar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverRainBar.Name = "ucrReceiverRainBar"
+        Me.ucrReceiverRainBar.Selector = Nothing
+        Me.ucrReceiverRainBar.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverRainBar.strNcFilePath = ""
+        Me.ucrReceiverRainBar.TabIndex = 135
+        Me.ucrReceiverRainBar.ucrSelector = Nothing
+        '
+        'ucrReceiverElement1Bar
+        '
+        Me.ucrReceiverElement1Bar.AutoSize = True
+        Me.ucrReceiverElement1Bar.frmParent = Me
+        Me.ucrReceiverElement1Bar.Location = New System.Drawing.Point(267, 193)
+        Me.ucrReceiverElement1Bar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverElement1Bar.Name = "ucrReceiverElement1Bar"
+        Me.ucrReceiverElement1Bar.Selector = Nothing
+        Me.ucrReceiverElement1Bar.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverElement1Bar.strNcFilePath = ""
+        Me.ucrReceiverElement1Bar.TabIndex = 137
+        Me.ucrReceiverElement1Bar.ucrSelector = Nothing
+        '
+        'ucrReceiverElement2Bar
+        '
+        Me.ucrReceiverElement2Bar.AutoSize = True
+        Me.ucrReceiverElement2Bar.frmParent = Me
+        Me.ucrReceiverElement2Bar.Location = New System.Drawing.Point(267, 234)
+        Me.ucrReceiverElement2Bar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverElement2Bar.Name = "ucrReceiverElement2Bar"
+        Me.ucrReceiverElement2Bar.Selector = Nothing
+        Me.ucrReceiverElement2Bar.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverElement2Bar.strNcFilePath = ""
+        Me.ucrReceiverElement2Bar.TabIndex = 139
+        Me.ucrReceiverElement2Bar.ucrSelector = Nothing
+        '
+        'ucrReceiverMonthBar
+        '
+        Me.ucrReceiverMonthBar.AutoSize = True
+        Me.ucrReceiverMonthBar.frmParent = Me
+        Me.ucrReceiverMonthBar.Location = New System.Drawing.Point(267, 109)
+        Me.ucrReceiverMonthBar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMonthBar.Name = "ucrReceiverMonthBar"
+        Me.ucrReceiverMonthBar.Selector = Nothing
+        Me.ucrReceiverMonthBar.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMonthBar.strNcFilePath = ""
+        Me.ucrReceiverMonthBar.TabIndex = 133
+        Me.ucrReceiverMonthBar.ucrSelector = Nothing
         '
         'cmdOptions
         '
@@ -317,7 +423,7 @@ Partial Class dlgClimograph
         Me.ucrInputPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPalette.GetSetSelectedIndex = -1
         Me.ucrInputPalette.IsReadOnly = False
-        Me.ucrInputPalette.Location = New System.Drawing.Point(136, 435)
+        Me.ucrInputPalette.Location = New System.Drawing.Point(136, 407)
         Me.ucrInputPalette.Name = "ucrInputPalette"
         Me.ucrInputPalette.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputPalette.TabIndex = 122
@@ -325,7 +431,7 @@ Partial Class dlgClimograph
         'ucrPnlColour
         '
         Me.ucrPnlColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColour.Location = New System.Drawing.Point(11, 407)
+        Me.ucrPnlColour.Location = New System.Drawing.Point(11, 379)
         Me.ucrPnlColour.Name = "ucrPnlColour"
         Me.ucrPnlColour.Size = New System.Drawing.Size(92, 77)
         Me.ucrPnlColour.TabIndex = 120
@@ -336,7 +442,7 @@ Partial Class dlgClimograph
         Me.ucrInputColourPalette.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputColourPalette.GetSetSelectedIndex = -1
         Me.ucrInputColourPalette.IsReadOnly = False
-        Me.ucrInputColourPalette.Location = New System.Drawing.Point(136, 408)
+        Me.ucrInputColourPalette.Location = New System.Drawing.Point(136, 380)
         Me.ucrInputColourPalette.Name = "ucrInputColourPalette"
         Me.ucrInputColourPalette.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputColourPalette.TabIndex = 119
@@ -345,7 +451,7 @@ Partial Class dlgClimograph
         '
         Me.ucrChkColour.AutoSize = True
         Me.ucrChkColour.Checked = False
-        Me.ucrChkColour.Location = New System.Drawing.Point(14, 386)
+        Me.ucrChkColour.Location = New System.Drawing.Point(14, 358)
         Me.ucrChkColour.Name = "ucrChkColour"
         Me.ucrChkColour.Size = New System.Drawing.Size(198, 24)
         Me.ucrChkColour.TabIndex = 107
@@ -383,7 +489,7 @@ Partial Class dlgClimograph
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(115, 489)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(115, 461)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
         Me.ucrInputLegendPosition.TabIndex = 97
@@ -392,7 +498,7 @@ Partial Class dlgClimograph
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(14, 490)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(14, 462)
         Me.ucrChkLegend.Name = "ucrChkLegend"
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 96
@@ -552,16 +658,16 @@ Partial Class dlgClimograph
         'ucrPnlClimograph
         '
         Me.ucrPnlClimograph.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlClimograph.Location = New System.Drawing.Point(107, 5)
+        Me.ucrPnlClimograph.Location = New System.Drawing.Point(92, 5)
         Me.ucrPnlClimograph.Name = "ucrPnlClimograph"
-        Me.ucrPnlClimograph.Size = New System.Drawing.Size(236, 41)
+        Me.ucrPnlClimograph.Size = New System.Drawing.Size(295, 41)
         Me.ucrPnlClimograph.TabIndex = 60
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(12, 548)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 520)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 75
@@ -569,7 +675,7 @@ Partial Class dlgClimograph
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(14, 521)
+        Me.ucrSave.Location = New System.Drawing.Point(14, 493)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(282, 24)
@@ -604,8 +710,16 @@ Partial Class dlgClimograph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(472, 608)
-        Me.Controls.Add(Me.ucrChkBar)
+        Me.ClientSize = New System.Drawing.Size(472, 578)
+        Me.Controls.Add(Me.ucrReceiverRainBar)
+        Me.Controls.Add(Me.lblRainBar)
+        Me.Controls.Add(Me.ucrReceiverElement1Bar)
+        Me.Controls.Add(Me.lblElement1Bar)
+        Me.Controls.Add(Me.ucrReceiverElement2Bar)
+        Me.Controls.Add(Me.lblElement2Bar)
+        Me.Controls.Add(Me.ucrReceiverMonthBar)
+        Me.Controls.Add(Me.lblMonthBar)
+        Me.Controls.Add(Me.rdoClimateBars)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.rdoSinglecolour)
         Me.Controls.Add(Me.rdoViridis)
@@ -710,5 +824,13 @@ Partial Class dlgClimograph
     Friend WithEvents toolStripMenuItemTminLineOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemLayersOptionsOptions As ToolStripMenuItem
     Friend WithEvents cmdOptions As ucrSplitButton
-    Friend WithEvents ucrChkBar As ucrCheck
+    Friend WithEvents rdoClimateBars As RadioButton
+    Friend WithEvents ucrReceiverRainBar As ucrReceiverSingle
+    Friend WithEvents lblRainBar As Label
+    Friend WithEvents ucrReceiverElement1Bar As ucrReceiverSingle
+    Friend WithEvents lblElement1Bar As Label
+    Friend WithEvents ucrReceiverElement2Bar As ucrReceiverSingle
+    Friend WithEvents lblElement2Bar As Label
+    Friend WithEvents ucrReceiverMonthBar As ucrReceiverSingle
+    Friend WithEvents lblMonthBar As Label
 End Class
