@@ -2036,9 +2036,11 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   sql_order_by <- paste0(" ORDER BY ",tableName,".recordedFrom, ",tableName, ".describedBy, ",tableName, ".obsDatetime",";")
   #--------------------------------
   
-  #import data
-  #--------------------------------
+  # Data list to store all the imported data frames
   data_list <- list()
+  
+  #import metadata
+  #--------------------------------
   
   if(import_selected_stations_metadata){
     stations_metadata_name <- next_default_item("stations_metadata", self$get_data_names(), include_index = FALSE)
@@ -2050,25 +2052,24 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
     data_list[[elements_metadata_name]] <- DBI::dbGetQuery(con, paste0("SELECT * FROM obselement WHERE", sql_elements_filter))
   }
   
-  observations_data_name <- next_default_item("observations_data", self$get_data_names(), include_index = FALSE)
-  data_list[[observations_data_name]] <- DBI::dbGetQuery(con,paste0(sql_select, sql_filter, sql_order_by))
+  #--------------------------------
   
-   #--------------------------------
-  
-  # transform imported data
+  # import and transform observations data data
   # --------------------------------
   
-  observations_df <- data_list[[observations_data_name]]
+  # Get observations data from database
+  observations_df <- DBI::dbGetQuery(con, paste0(sql_select, sql_filter, sql_order_by))
   
   # Convert station name and abbreviation columns to factor
   mandatory_columns_to_convert <- c("station_name", "element_abbrv")
   observations_df[mandatory_columns_to_convert] <- lapply(observations_df[mandatory_columns_to_convert], as.factor)
   
-  # convert the date column to date format
-  observations_df$date <- as.Date(x = observations_df$date)
-  
   # Convert the date_time column to POSIXct (date-time) format
   observations_df$date_time <- as.POSIXct(observations_df$date_time, format = "%Y-%m-%d %H:%M:%S")
+  
+  # convert the date column to date format
+  observations_df$date <- as.Date(x = observations_df$date)
+  #observations_df$date <- as.Date(x = observations_df$date_time)
   
   if(include_station_id){
     observations_df$station_id <- as.factor(observations_df$station_id)
@@ -2102,11 +2103,19 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
     observations_df$entry_form <- as.factor(observations_df$entry_form)
   }
   
+  #--------------------------------
+  
+  # Add observations data to list of data to be imported
+  # --------------------------------
+  observations_data_name <- next_default_item("observations_data", self$get_data_names(), include_index = FALSE)
+  data_list[[observations_data_name]] <- observations_df
+  
   if(unstack_data){
     observations_unstacked_data_name <- next_default_item("observations_unstacked_data", self$get_data_names(), include_index = FALSE)
     data_list[[observations_unstacked_data_name]] <- tidyr::pivot_wider(data = observations_df, names_from=element_abbrv, values_from=value)
   }
   
+  # Import list of data frames to data book
   self$import_data(data_tables = data_list)
   
 })
