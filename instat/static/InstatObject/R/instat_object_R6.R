@@ -1881,40 +1881,38 @@ DataBook$set("public", "import_climsoft_metadata", function(import_stations = FA
   data_list <- list()
   
   if(import_stations){
-    stations_metadata_name <- next_default_item("stations_metadata", self$get_data_names(), include_index = FALSE)
-    #todo.(22/03/2023) 2 fields have been intentionally left out because they are yet to be released to Climsoft users. Namely; wsi and gtsWSI
-    #include them once the new Climsoft release has been supplied to users
-    data_list[[stations_metadata_name]] <- DBI::dbGetQuery(con, "SELECT stationId AS station_id, stationName AS station_name, wmoid, icaoid, latitude, longitude, elevation, qualifier, geoLocationMethod AS geo_location_method, geoLocationAccuracy AS geo_location_accuracy, openingDatetime AS opening_date_time, closingDatetime AS closing_date_time, authority, adminRegion AS admin_region, drainageBasin AS drainage_basin, wacaSelection AS waca_selection, cptSelection AS cpt_selection, stationOperational AS station_Operational, country AS country FROM station;")
-  }
-  
-  if(import_elements){
-    elements_metadata_name <- next_default_item("elements_metadata", self$get_data_names(), include_index = FALSE)
-    data_list[[elements_metadata_name]] <- DBI::dbGetQuery(con, "SELECT elementId AS element_id, elementName AS element_name, abbreviation, description, elementtype AS element_type, upperLimit AS upper_limit , lowerLimit AS lower_limit, units FROM obselement;")
-  }
-  
-  if(import_flags){
-    flags_metadata_name <- next_default_item("flags_metadata", self$get_data_names(), include_index = FALSE)
-    data_list[[flags_metadata_name]] <- DBI::dbGetQuery(con, "SELECT characterSymbol AS flag_name, description FROM flags;")
+    # TODO.(22/03/2023) 2 fields have been intentionally left out because they are yet to be released to Climsoft users. Namely; wsi and gtsWSI
+    # include them once the new Climsoft release has been supplied to users
+    stations_df <- DBI::dbGetQuery(con, "SELECT stationId AS station_id, stationName AS station_name, wmoid, icaoid, latitude, longitude, elevation, qualifier, geoLocationMethod AS geo_location_method, geoLocationAccuracy AS geo_location_accuracy, openingDatetime AS opening_date_time, closingDatetime AS closing_date_time, wacaSelection AS waca_selection, cptSelection AS cpt_selection, stationOperational AS station_operational, drainageBasin AS drainage_basin, country AS country, authority, adminRegion AS admin_region_1, adminRegion2 AS admin_region_2, adminRegion3 AS admin_region_3, adminRegion4 AS admin_region_4 FROM station;")
+   
+    columns_to_convert <- c("station_id","station_name","qualifier", "station_operational", "drainage_basin", "country", "authority", "admin_region_1", "admin_region_2", "admin_region_3", "admin_region_4")
+    stations_df[columns_to_convert] <- lapply(stations_df[columns_to_convert], as.factor)
     
-  }
-  
-  self$import_data(data_tables = data_list)
-  #--------------------------------
-  
-  #transform imported metadata
-  #--------------------------------
-  if(import_stations){
-    self$convert_column_to_type(data_name = stations_metadata_name, col_names = c("station_id","station_name","qualifier","authority","admin_region","drainage_basin","station_Operational","country"), to_type = "factor")
+    stations_df_name <- next_default_item("stations_metadata", self$get_data_names(), include_index = FALSE)
+    data_list[[stations_df_name]] <- stations_df
   }
   
   if(import_elements){
-    self$convert_column_to_type(data_name = elements_metadata_name, col_names = c("element_id","element_name","abbreviation","element_type"), to_type = "factor")
+    elements_df <- DBI::dbGetQuery(con, "SELECT elementId AS element_id, elementName AS element_name, abbreviation, description, elementtype AS element_type, upperLimit AS upper_limit , lowerLimit AS lower_limit, units FROM obselement;")
+    
+    columns_to_convert <- c("element_id","element_name","abbreviation","element_type")
+    elements_df[columns_to_convert] <- lapply(elements_df[columns_to_convert], as.factor)
+    
+    elements_df_name <- next_default_item("elements_metadata", self$get_data_names(), include_index = FALSE)
+    data_list[[elements_df_name]] <- elements_df
   }
   
   if(import_flags){
-    self$convert_column_to_type(data_name = flags_metadata_name, col_names = c("flag_name"), to_type = "factor")
+    flags_df <- DBI::dbGetQuery(con, "SELECT characterSymbol AS flag_name, description FROM flags;")
+   
+    flags_df$flag_name <- as.factor(flags_df$flag_name) 
+    
+    flags_df_name <- next_default_item("flags_metadata", self$get_data_names(), include_index = FALSE)
+    data_list[[flags_df_name]] <- flags_df
   }
-  #--------------------------------
+  
+  # Import the data frames into the data book
+  self$import_data(data_tables = data_list)
   
 })
 
@@ -2061,8 +2059,8 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   observations_df <- DBI::dbGetQuery(con, paste0(sql_select, sql_filter, sql_order_by))
   
   # Convert station name and abbreviation columns to factor
-  mandatory_columns_to_convert <- c("station_name", "element_abbrv")
-  observations_df[mandatory_columns_to_convert] <- lapply(observations_df[mandatory_columns_to_convert], as.factor)
+  columns_to_convert <- c("station_name", "element_abbrv")
+  observations_df[columns_to_convert] <- lapply(observations_df[columns_to_convert], as.factor)
   
   # Convert the date_time column to POSIXct (date-time) format
   observations_df$date_time <- as.POSIXct(observations_df$date_time, format = "%Y-%m-%d %H:%M:%S")
