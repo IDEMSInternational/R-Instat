@@ -21,6 +21,7 @@ Public Class dlgExportClimaticDefinitions
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsDummyFunction As New RFunction
+    Private clsGetDataFrameFunction As New RFunction
     Public clsRsyntax As New RSyntax
     Public clsExportRinstatToBucketFunction, clsUpdateMetadataInfoFunction, ClsGcsAuthFileFunction, clsSummariesFunction As New RFunction
     Public clsReforMattAnnualSummariesFunction, clsReformatCropSuccessFunction, clsReformatSeasonStartFunction, clsReformatTempSummariesFunction, clsReformatMonthlyTempSummaries As New RFunction
@@ -188,6 +189,7 @@ Public Class dlgExportClimaticDefinitions
         ClsGcsAuthFileFunction = New RFunction
         clsUpdateMetadataInfoFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsGetDataFrameFunction = New RFunction
         bResetSubdialog = True
 
         ucrSelectorExportDefinitions.Reset()
@@ -199,6 +201,8 @@ Public Class dlgExportClimaticDefinitions
         clsDummyFunction.AddParameter("season", "False", iPosition:=4)
         clsDummyFunction.AddParameter("crop", "False", iPosition:=5)
         clsDummyFunction.AddParameter("checked", "metadata", iPosition:=6)
+
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
         clsReformatTempSummariesFunction.SetPackageName("epicsawrap")
         clsReformatTempSummariesFunction.SetRCommand("reformat_temperature_summaries")
@@ -472,7 +476,9 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub ucrSelectorExportDefinitions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorExportDefinitions.ControlValueChanged
-        clsUpdateMetadataInfoFunction.AddParameter("metadata_data", ucrSelectorExportDefinitions.ucrAvailableDataFrames.strCurrDataFrame, iPosition:=0)
+        clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorExportDefinitions.strCurrentDataFrame & Chr(34), iPosition:=0)
+        clsGetDataFrameFunction.SetAssignTo(ucrSelectorExportDefinitions.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsUpdateMetadataInfoFunction.AddParameter("metadata_data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
     End Sub
 
     Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRain.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged, ucrInputCountryMetadata.ControlContentsChanged,
