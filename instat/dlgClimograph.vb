@@ -92,7 +92,7 @@ Public Class dlgClimograph
     Private clsMaxFunction As New RFunction
     Private clsMax1Function As New RFunction
     Private clsVectorFunction As New RFunction
-    Private clsGetObjectDataFunction, clsColourPaletteFunction, clsLocalRaesFunction, clsFillBrewerFunction, clsScalefillDistillerFunction As New RFunction
+    Private clsGetObjectDataFunction, clsGetDataFrameFunction, clsColourPaletteFunction, clsLocalRaesFunction, clsFillBrewerFunction, clsScalefillDistillerFunction As New RFunction
     Private clsStarOperator As New ROperator
     Private clsStar1Operator As New ROperator
     Private clsDivideOperator As New ROperator
@@ -481,6 +481,7 @@ Public Class dlgClimograph
         clsTmaxRoundFunction = New RFunction
         clsTminRoundFunction = New RFunction
         clsPlotGridFunction = New RFunction
+        clsGetDataFrameFunction = New RFunction
 
         ucrSelectorClimograph.Reset()
         ucrSelectorClimograph.SetGgplotFunction(clsBaseOperator)
@@ -838,6 +839,10 @@ Public Class dlgClimograph
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        'clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorClimograph.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        'clsGetDataFrameFunction.SetAssignTo(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+
         clsGetObjectDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
         clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsGetObjectDataFunction.AddParameter("as_file", "TRUE", iPosition:=2)
@@ -846,8 +851,7 @@ Public Class dlgClimograph
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction, iPosition:=0)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsPlus1Operator, iPosition:=1)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsPlus5Operator, iPosition:=2)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction, iPosition:=0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -856,7 +860,7 @@ Public Class dlgClimograph
         'ucrSelectorClimograph.AddAdditionalCodeParameterPair(clsGgwalterliethFunction, New RParameter("data", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
 
         ucrReceiverRainC.SetRCode(clsMaxFunction, bReset)
-        ucrSelectorClimograph.SetRCode(clsRggplotFunction, bReset)
+        'ucrSelectorClimograph.SetRCode(clsRggplotFunction, bReset)
         ucrReceiverMonth.SetRCode(clsGgwalterliethFunction, bReset)
         ucrReceiverRain.SetRCode(clsGgwalterliethFunction, bReset)
         ucrReceiverMintemp.SetRCode(clsGgwalterliethFunction, bReset)
@@ -892,11 +896,15 @@ Public Class dlgClimograph
 
     Private Sub ucrPnlClimograph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlClimograph.ControlValueChanged
         If rdoClimograph.Checked Then
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPlus1Operator)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPlus5Operator)
             clsBaseOperator.RemoveParameterByName("ggwalter_lieth")
             ucrReceiverMonthC.SetMeAsReceiver()
             clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBarFunction, iPosition:=2)
         ElseIf rdoWalterLieth.Checked Then
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPlus1Operator)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPlus5Operator)
             clsBaseOperator.RemoveParameterByName("ggplot")
             clsBaseOperator.RemoveParameterByName("geom_bar")
             ucrReceiverMonth.SetMeAsReceiver()
@@ -907,8 +915,8 @@ Public Class dlgClimograph
             clsBaseOperator.RemoveParameterByName("ggplot")
             clsBaseOperator.RemoveParameterByName("geom_bar")
             clsBaseOperator.AddParameter("plot_grid", clsRFunctionParameter:=clsPlotGridFunction, iPosition:=0)
-            'ucrBase.clsRsyntax.AddToBeforeCodes(clsPlus1Operator, iPosition:=1)
-            'ucrBase.clsRsyntax.AddToBeforeCodes(clsPlus5Operator, iPosition:=2)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsPlus1Operator, iPosition:=1)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsPlus5Operator, iPosition:=2)
         End If
         AutoFacetStation()
         AddRemoveFacetClimograph()
@@ -1279,6 +1287,9 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub ucrSelectorClimograph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimograph.ControlValueChanged
+        clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorClimograph.strCurrentDataFrame & Chr(34), iPosition:=0)
+        clsGetDataFrameFunction.SetAssignTo(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsRggplotFunction.AddParameter("data", ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
         AutoFacetStation()
         SetPipeAssignTo()
         SetPipeAssignTo1()
