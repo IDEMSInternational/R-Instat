@@ -67,6 +67,8 @@ Partial Class dlgExportClimaticDefinitions
         Me.lblExport = New System.Windows.Forms.Label()
         Me.cmdChooseFile = New System.Windows.Forms.Button()
         Me.ucrInputTokenPath = New instat.ucrInputTextBox()
+        Me.ucrInputCountryMetadata = New instat.ucrInputTextBox()
+        Me.lblCountryMetada = New System.Windows.Forms.Label()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -571,6 +573,27 @@ Partial Class dlgExportClimaticDefinitions
         Me.ucrInputTokenPath.Size = New System.Drawing.Size(191, 21)
         Me.ucrInputTokenPath.TabIndex = 41
         '
+        'ucrInputCountryMetadata
+        '
+        Me.ucrInputCountryMetadata.AddQuotesIfUnrecognised = True
+        Me.ucrInputCountryMetadata.AutoSize = True
+        Me.ucrInputCountryMetadata.IsMultiline = False
+        Me.ucrInputCountryMetadata.IsReadOnly = False
+        Me.ucrInputCountryMetadata.Location = New System.Drawing.Point(321, 330)
+        Me.ucrInputCountryMetadata.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputCountryMetadata.Name = "ucrInputCountryMetadata"
+        Me.ucrInputCountryMetadata.Size = New System.Drawing.Size(118, 21)
+        Me.ucrInputCountryMetadata.TabIndex = 43
+        '
+        'lblCountryMetada
+        '
+        Me.lblCountryMetada.AutoSize = True
+        Me.lblCountryMetada.Location = New System.Drawing.Point(325, 312)
+        Me.lblCountryMetada.Name = "lblCountryMetada"
+        Me.lblCountryMetada.Size = New System.Drawing.Size(46, 13)
+        Me.lblCountryMetada.TabIndex = 44
+        Me.lblCountryMetada.Text = "Country:"
+        '
         'dlgExportClimaticDefinitions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -616,6 +639,8 @@ Partial Class dlgExportClimaticDefinitions
         Me.Controls.Add(Me.ucrReceiverDistrict)
         Me.Controls.Add(Me.ucrReceiverStationName)
         Me.Controls.Add(Me.lblStationName)
+        Me.Controls.Add(Me.lblCountryMetada)
+        Me.Controls.Add(Me.ucrInputCountryMetadata)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -674,4 +699,6 @@ Partial Class dlgExportClimaticDefinitions
     Friend WithEvents lblExport As Label
     Friend WithEvents cmdChooseFile As Button
     Friend WithEvents ucrInputTokenPath As ucrInputTextBox
+    Friend WithEvents lblCountryMetada As Label
+    Friend WithEvents ucrInputCountryMetadata As ucrInputTextBox
 End Class

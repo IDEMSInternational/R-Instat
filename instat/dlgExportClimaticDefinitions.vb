@@ -168,8 +168,11 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverDistrict.bAutoFill = True
         ucrReceiverDistrict.SetLinkedDisplayControl(lblDistrict)
 
+        ucrInputCountryMetadata.SetParameter(New RParameter("country", 6))
+        ucrInputCountryMetadata.SetLinkedDisplayControl(lblCountryMetada)
+
         ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverMonth, ucrReceiverYear, ucrReceiverStation}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverDistrict, ucrReceiverElavation, ucrReceiverLatitude, ucrReceiverLongititude, ucrReceiverStationName}, {rdoUpdateMetadata}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExportGoogle.AddToLinkedControls({ucrReceiverDistrict, ucrReceiverElavation, ucrReceiverLatitude, ucrInputCountryMetadata, ucrReceiverLongititude, ucrReceiverStationName}, {rdoUpdateMetadata}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExportGoogle.AddToLinkedControls({ucrInputCountry, ucrChkIncludeSummaryData, ucrInputDefinitionsID}, {rdoUploadSummaries}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         DialogSize()
     End Sub
@@ -250,6 +253,7 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverLatitude.SetRCode(clsUpdateMetadataInfoFunction, bReset)
         ucrReceiverLongititude.SetRCode(clsUpdateMetadataInfoFunction, bReset)
         ucrReceiverStationName.SetRCode(clsUpdateMetadataInfoFunction, bReset)
+        ucrInputCountryMetadata.SetRCode(clsUpdateMetadataInfoFunction, bReset)
 
         If bReset Then
             ucrChkAnnualRainfall.SetRCode(clsDummyFunction, bReset)
@@ -292,7 +296,7 @@ Public Class dlgExportClimaticDefinitions
                 ucrBase.OKEnabled(False)
             End If
         Else
-            If Not ucrReceiverStationName.IsEmpty AndAlso Not ucrInputTokenPath.IsEmpty Then
+            If Not ucrReceiverStationName.IsEmpty AndAlso Not ucrInputTokenPath.IsEmpty AndAlso Not ucrInputCountryMetadata.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -459,8 +463,8 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub DialogSize()
         If rdoUpdateMetadata.Checked Then
-            Me.Size = New Size(475, 439)
-            Me.ucrBase.Location = New Point(4, 334)
+            Me.Size = New Size(475, 455)
+            Me.ucrBase.Location = New Point(4, 355)
         Else
             Me.Size = New Size(475, 539)
             Me.ucrBase.Location = New Point(4, 434)
@@ -471,10 +475,17 @@ Public Class dlgExportClimaticDefinitions
         clsUpdateMetadataInfoFunction.AddParameter("metadata_data", ucrSelectorExportDefinitions.ucrAvailableDataFrames.strCurrDataFrame, iPosition:=0)
     End Sub
 
-    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRain.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged,
+    Private Sub ucrReceiverData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRain.ControlContentsChanged, ucrReceiverCropData.ControlContentsChanged, ucrReceiverDataYearMonth.ControlContentsChanged, ucrReceiverDataYear.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrInputTokenPath.ControlContentsChanged, ucrInputCountryMetadata.ControlContentsChanged,
             ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrChkSeasonStartProp.ControlContentsChanged, ucrInputCountry.ControlContentsChanged, ucrInputDefinitionsID.ControlContentsChanged, ucrChkIncludeSummaryData.ControlContentsChanged, ucrReceiverLongititude.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged,
             ucrChkMonthlyTemp.ControlContentsChanged, ucrChkCropSuccessProp.ControlContentsChanged, ucrChkAnnualTemp.ControlContentsChanged, ucrChkAnnualRainfall.ControlContentsChanged, ucrSelectorExportDefinitions.ControlContentsChanged, ucrReceiverElavation.ControlContentsChanged, ucrReceiverDistrict.ControlContentsChanged, ucrReceiverStationName.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrInputCountryMetadata_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCountryMetadata.ControlValueChanged
+        If Not ucrInputCountryMetadata.IsEmpty Then
+            clsUpdateMetadataInfoFunction.AddParameter("country", Chr(34) & ucrInputCountryMetadata.GetText & Chr(34), iPosition:=6)
+        Else
+            clsUpdateMetadataInfoFunction.RemoveParameterByName("country")
+        End If
+    End Sub
 End Class
