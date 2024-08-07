@@ -3,6 +3,13 @@
     Private clsOperator As New ROperator
     Private bFirstload As Boolean = True
 
+    Private Sub ucrColumnWidth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstload Then
+            InitialiseControl()
+            bFirstload = False
+        End If
+    End Sub
+
     Private Sub InitialiseControl()
         ucrReceiverMultipleCols.Selector = ucrSelectorCols
         ucrReceiverMultipleCols.SetMeAsReceiver()
@@ -12,11 +19,6 @@
     End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
-        If bFirstload Then
-            InitialiseControl()
-            bFirstload = False
-        End If
-
         Me.clsOperator = clsOperator
 
         ' Set up the selector
@@ -25,21 +27,10 @@
         ' Clear and Set up the data grid with contents
         dataGrid.Rows.Clear()
         SetupDataGrid(clsTablesUtils.FindRFunctionsParamsWithRCommand({"cols_width"}, clsOperator))
-
-    End Sub
-
-    Public Sub SetValuesToOperator()
-        ' Remove any previous col widths
-        clsTablesUtils.RemoveRFunctionsParamsWithRCommand({"cols_width"}, clsOperator)
-
-        ' Add new changes
-        clsTablesUtils.AddGridRowTagsRParamsToROperator(dataGrid, clsOperator)
     End Sub
 
     Private Sub SetupDataGrid(lstRParams As List(Of RParameter))
-
         For Each clsRParam As RParameter In lstRParams
-
             ' Create a new row that represents the tab_style() parameters
             Dim row As New DataGridViewRow
             row.CreateCells(dataGrid)
@@ -48,7 +39,6 @@
             ' Tag and add the tab_style() parameter function contents as a row
             row.Tag = clsRParam
             dataGrid.Rows.Add(row)
-
         Next
     End Sub
 
@@ -83,5 +73,11 @@
         dataGrid.Rows.Clear()
     End Sub
 
+    Public Sub SetValuesToOperator()
+        ' Remove any previous col widths
+        clsTablesUtils.RemoveRFunctionsParamsWithRCommand({"cols_width"}, clsOperator)
 
+        ' Add new changes
+        clsTablesUtils.AddGridRowTagsRParamsToROperator(dataGrid, clsOperator)
+    End Sub
 End Class

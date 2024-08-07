@@ -23,6 +23,9 @@ Partial Class ucrRowGroup
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.dataGridGroups = New System.Windows.Forms.DataGridView()
+        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colStyleExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnClearGroups = New System.Windows.Forms.Button()
         Me.btnAddCondition = New System.Windows.Forms.Button()
         Me.lblGroups = New System.Windows.Forms.Label()
@@ -31,9 +34,6 @@ Partial Class ucrRowGroup
         Me.btnStyle = New System.Windows.Forms.Button()
         Me.ucrRowExpression = New instat.ucrRowExpression()
         Me.lblGroupExpression = New System.Windows.Forms.Label()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colStyleExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridGroups, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -49,6 +49,30 @@ Partial Class ucrRowGroup
         Me.dataGridGroups.RowHeadersWidth = 62
         Me.dataGridGroups.Size = New System.Drawing.Size(484, 146)
         Me.dataGridGroups.TabIndex = 11
+        '
+        'colLabel
+        '
+        Me.colLabel.HeaderText = "Label"
+        Me.colLabel.MinimumWidth = 8
+        Me.colLabel.Name = "colLabel"
+        Me.colLabel.ReadOnly = True
+        Me.colLabel.Width = 70
+        '
+        'colCodnition
+        '
+        Me.colCodnition.HeaderText = "Condition"
+        Me.colCodnition.MinimumWidth = 8
+        Me.colCodnition.Name = "colCodnition"
+        Me.colCodnition.ReadOnly = True
+        Me.colCodnition.Width = 90
+        '
+        'colStyleExpression
+        '
+        Me.colStyleExpression.HeaderText = "Style Expression"
+        Me.colStyleExpression.MinimumWidth = 8
+        Me.colStyleExpression.Name = "colStyleExpression"
+        Me.colStyleExpression.ReadOnly = True
+        Me.colStyleExpression.Width = 90
         '
         'btnClearGroups
         '
@@ -140,30 +164,6 @@ Partial Class ucrRowGroup
         Me.lblGroupExpression.Size = New System.Drawing.Size(129, 20)
         Me.lblGroupExpression.TabIndex = 334
         Me.lblGroupExpression.Text = "Group Condition:"
-        '
-        'colLabel
-        '
-        Me.colLabel.HeaderText = "Label"
-        Me.colLabel.MinimumWidth = 8
-        Me.colLabel.Name = "colLabel"
-        Me.colLabel.ReadOnly = True
-        Me.colLabel.Width = 70
-        '
-        'colCodnition
-        '
-        Me.colCodnition.HeaderText = "Condition"
-        Me.colCodnition.MinimumWidth = 8
-        Me.colCodnition.Name = "colCodnition"
-        Me.colCodnition.ReadOnly = True
-        Me.colCodnition.Width = 90
-        '
-        'colStyleExpression
-        '
-        Me.colStyleExpression.HeaderText = "Style Expression"
-        Me.colStyleExpression.MinimumWidth = 8
-        Me.colStyleExpression.Name = "colStyleExpression"
-        Me.colStyleExpression.ReadOnly = True
-        Me.colStyleExpression.Width = 90
         '
         'ucrRowGroup
         '

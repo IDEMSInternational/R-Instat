@@ -1,6 +1,18 @@
 ﻿Public Class ucrRowGroup
 
+    Private bFirstLoad As Boolean = True
     Private clsOperator As New ROperator
+
+    Private Sub ucrRowGroup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub InitialiseDialog()
+        btnStyle.Tag = Nothing
+    End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
         Me.clsOperator = clsOperator
@@ -55,7 +67,7 @@
         If clsListStyleRFunction Is Nothing Then
             Exit Sub
         End If
-        ucrRowExpression.Tag = clsListStyleRFunction
+        btnStyle.Tag = clsListStyleRFunction
     End Sub
 
     Private Sub btnAddCondition_Click(sender As Object, e As EventArgs) Handles btnAddCondition.Click
@@ -75,13 +87,13 @@
         arrParams(0) = New RParameter(strParameterName:="tab_row_group_param" & (dataGridGroups.Rows.Count + 1), strParamValue:=clsTabRowGroupRFunction, bNewIncludeArgumentName:=False)
 
         ' Add the group style as the second element
-        If ucrRowExpression.Tag IsNot Nothing Then
+        If btnStyle.Tag IsNot Nothing Then
             Dim clsLocationsRFunction As New RFunction
             clsLocationsRFunction.SetPackageName("gt")
             clsLocationsRFunction.SetRCommand("cells_row_groups")
             clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="groups", strParamValue:=clsTablesUtils.GetStringValue(strGroupId, True), iNewPosition:=0))
 
-            Dim clsListStyleRFunction As RFunction = ucrRowExpression.Tag
+            Dim clsListStyleRFunction As RFunction = btnStyle.Tag
             Dim clsTabStyleRFunction As RFunction = clsTablesUtils.GetNewStyleRFunction(clsListStyleRFunction, clsLocationsRFunction)
 
             strGroupStyleExpression = clsTabStyleRFunction.Clone.ToScript
@@ -101,11 +113,12 @@
 
         ucrInputGroupLabel.SetName("")
         ucrRowExpression.Clear()
-        ucrRowExpression.Tag = Nothing
+        btnStyle.Tag = Nothing
     End Sub
 
     Private Sub conditionValue_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowExpression.ControlContentsChanged, ucrInputGroupLabel.ControlContentsChanged
         btnAddCondition.Enabled = Not ucrRowExpression.IsEmpty AndAlso Not ucrInputGroupLabel.IsEmpty
+        btnStyle.Enabled = btnAddCondition.Enabled
     End Sub
 
     Private Sub btnClearGroups_Click(sender As Object, e As EventArgs) Handles btnClearGroups.Click

@@ -23,6 +23,8 @@ Partial Class ucrRowSummary
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.dataGridSummaries = New System.Windows.Forms.DataGridView()
+        Me.colType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnStyle = New System.Windows.Forms.Button()
         Me.lblSummaryTypes = New System.Windows.Forms.Label()
         Me.lblSummaries = New System.Windows.Forms.Label()
@@ -34,9 +36,6 @@ Partial Class ucrRowSummary
         Me.lblColumns = New System.Windows.Forms.Label()
         Me.lblGroupId = New System.Windows.Forms.Label()
         Me.lblSide = New System.Windows.Forms.Label()
-        Me.colType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ucrCboSide = New instat.ucrInputComboBox()
         Me.ucrTxtGroupId = New instat.ucrInputTextBox()
         Me.ucrReceiverMultipleCols = New instat.ucrReceiverMultiple()
@@ -51,7 +50,7 @@ Partial Class ucrRowSummary
         '
         Me.dataGridSummaries.AllowUserToAddRows = False
         Me.dataGridSummaries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridSummaries.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colType, Me.colLabel, Me.colExpression})
+        Me.dataGridSummaries.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colType, Me.colExpression})
         Me.dataGridSummaries.Location = New System.Drawing.Point(360, 451)
         Me.dataGridSummaries.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.dataGridSummaries.Name = "dataGridSummaries"
@@ -60,11 +59,27 @@ Partial Class ucrRowSummary
         Me.dataGridSummaries.Size = New System.Drawing.Size(522, 120)
         Me.dataGridSummaries.TabIndex = 335
         '
+        'colType
+        '
+        Me.colType.HeaderText = "Summary Expression"
+        Me.colType.MinimumWidth = 8
+        Me.colType.Name = "colType"
+        Me.colType.ReadOnly = True
+        Me.colType.Width = 90
+        '
+        'colExpression
+        '
+        Me.colExpression.HeaderText = "Style Expression"
+        Me.colExpression.MinimumWidth = 8
+        Me.colExpression.Name = "colExpression"
+        Me.colExpression.ReadOnly = True
+        Me.colExpression.Width = 90
+        '
         'btnStyle
         '
         Me.btnStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnStyle.Location = New System.Drawing.Point(738, 301)
+        Me.btnStyle.Location = New System.Drawing.Point(740, 303)
         Me.btnStyle.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnStyle.Name = "btnStyle"
         Me.btnStyle.Size = New System.Drawing.Size(126, 35)
@@ -124,12 +139,12 @@ Partial Class ucrRowSummary
         '
         Me.lblSummaryLabel.AutoSize = True
         Me.lblSummaryLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSummaryLabel.Location = New System.Drawing.Point(362, 216)
+        Me.lblSummaryLabel.Location = New System.Drawing.Point(355, 286)
         Me.lblSummaryLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSummaryLabel.Name = "lblSummaryLabel"
-        Me.lblSummaryLabel.Size = New System.Drawing.Size(123, 20)
+        Me.lblSummaryLabel.Size = New System.Drawing.Size(196, 20)
         Me.lblSummaryLabel.TabIndex = 342
-        Me.lblSummaryLabel.Text = "Summary Label:"
+        Me.lblSummaryLabel.Text = "Summary Label (Optional):"
         '
         'lblReplaceWith
         '
@@ -146,7 +161,7 @@ Partial Class ucrRowSummary
         '
         Me.btnFormat.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnFormat.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnFormat.Location = New System.Drawing.Point(594, 301)
+        Me.btnFormat.Location = New System.Drawing.Point(594, 304)
         Me.btnFormat.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnFormat.Name = "btnFormat"
         Me.btnFormat.Size = New System.Drawing.Size(136, 35)
@@ -181,36 +196,12 @@ Partial Class ucrRowSummary
         '
         Me.lblSide.AutoSize = True
         Me.lblSide.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSide.Location = New System.Drawing.Point(362, 288)
+        Me.lblSide.Location = New System.Drawing.Point(361, 216)
         Me.lblSide.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSide.Name = "lblSide"
         Me.lblSide.Size = New System.Drawing.Size(45, 20)
         Me.lblSide.TabIndex = 354
         Me.lblSide.Text = "Side:"
-        '
-        'colType
-        '
-        Me.colType.HeaderText = "Type"
-        Me.colType.MinimumWidth = 8
-        Me.colType.Name = "colType"
-        Me.colType.ReadOnly = True
-        Me.colType.Width = 70
-        '
-        'colLabel
-        '
-        Me.colLabel.HeaderText = "Label"
-        Me.colLabel.MinimumWidth = 8
-        Me.colLabel.Name = "colLabel"
-        Me.colLabel.ReadOnly = True
-        Me.colLabel.Width = 70
-        '
-        'colExpression
-        '
-        Me.colExpression.HeaderText = "Expression"
-        Me.colExpression.MinimumWidth = 8
-        Me.colExpression.Name = "colExpression"
-        Me.colExpression.ReadOnly = True
-        Me.colExpression.Width = 90
         '
         'ucrCboSide
         '
@@ -218,7 +209,7 @@ Partial Class ucrRowSummary
         Me.ucrCboSide.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboSide.GetSetSelectedIndex = -1
         Me.ucrCboSide.IsReadOnly = False
-        Me.ucrCboSide.Location = New System.Drawing.Point(359, 309)
+        Me.ucrCboSide.Location = New System.Drawing.Point(359, 237)
         Me.ucrCboSide.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrCboSide.Name = "ucrCboSide"
         Me.ucrCboSide.Size = New System.Drawing.Size(176, 40)
@@ -230,7 +221,7 @@ Partial Class ucrRowSummary
         Me.ucrTxtGroupId.AutoSize = True
         Me.ucrTxtGroupId.IsMultiline = False
         Me.ucrTxtGroupId.IsReadOnly = False
-        Me.ucrTxtGroupId.Location = New System.Drawing.Point(594, 242)
+        Me.ucrTxtGroupId.Location = New System.Drawing.Point(594, 240)
         Me.ucrTxtGroupId.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrTxtGroupId.Name = "ucrTxtGroupId"
         Me.ucrTxtGroupId.Size = New System.Drawing.Size(180, 32)
@@ -267,7 +258,7 @@ Partial Class ucrRowSummary
         Me.ucrTxtReplaceNa.AutoSize = True
         Me.ucrTxtReplaceNa.IsMultiline = False
         Me.ucrTxtReplaceNa.IsReadOnly = False
-        Me.ucrTxtReplaceNa.Location = New System.Drawing.Point(594, 170)
+        Me.ucrTxtReplaceNa.Location = New System.Drawing.Point(594, 166)
         Me.ucrTxtReplaceNa.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrTxtReplaceNa.Name = "ucrTxtReplaceNa"
         Me.ucrTxtReplaceNa.Size = New System.Drawing.Size(180, 32)
@@ -291,7 +282,7 @@ Partial Class ucrRowSummary
         Me.ucrTxtSummaryLabel.AutoSize = True
         Me.ucrTxtSummaryLabel.IsMultiline = False
         Me.ucrTxtSummaryLabel.IsReadOnly = False
-        Me.ucrTxtSummaryLabel.Location = New System.Drawing.Point(360, 242)
+        Me.ucrTxtSummaryLabel.Location = New System.Drawing.Point(360, 312)
         Me.ucrTxtSummaryLabel.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrTxtSummaryLabel.Name = "ucrTxtSummaryLabel"
         Me.ucrTxtSummaryLabel.Size = New System.Drawing.Size(180, 32)
@@ -349,6 +340,5 @@ Partial Class ucrRowSummary
     Friend WithEvents lblSide As Label
     Friend WithEvents ucrCboSide As ucrInputComboBox
     Friend WithEvents colType As DataGridViewTextBoxColumn
-    Friend WithEvents colLabel As DataGridViewTextBoxColumn
     Friend WithEvents colExpression As DataGridViewTextBoxColumn
 End Class
