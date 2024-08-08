@@ -112,7 +112,7 @@ Public Class dlgClimograph
     Private strTemBar As String = "Tem"
     Private strRainBar As String = "Rain"
     Private clsPlus1Operator, clsPlus2Operator, clsPlus3Operator, clsPlus5Operator As New ROperator
-    Private clsPlus6Operator, clsPlus7Operator, clsPlus8Operator, clsPlus9Operator As New ROperator
+    Private clsPlus6Operator, clsPlus7Operator, clsPlus8Operator, clsPlus9Operator, clsPlus10Operator, clsPlus11Operator As New ROperator
     Private clsRainBarFunction, clsTmaxBarFunction, clsTminBarFunction, clsLabsRainFunction, clsLabsTempFunction As New RFunction
     Private clsRainBarTextFunction, clsTmaxBarTextFunction, clsTminBarTextFunction, clsRainGgplotFunction, clsTemGgplotFunction As New RFunction
     Private clsAesTmaxBarFunction1, clsAesTminBarFunction1, clsAesTemGgplotFunction, clsAesRainGgplotFunction, clsSecAxisRainFunction, clsSecAxisTemFunction As New RFunction
@@ -131,6 +131,7 @@ Public Class dlgClimograph
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
+        DialogueSize()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -382,6 +383,7 @@ Public Class dlgClimograph
         ucrSave.SetCheckBoxText("Store Graph")
         ucrSave.SetDataFrameSelector(ucrSelectorClimograph.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
+        DialogueSize()
     End Sub
 
     Private Sub SetDefaults()
@@ -482,6 +484,8 @@ Public Class dlgClimograph
         clsTminRoundFunction = New RFunction
         clsPlotGridFunction = New RFunction
         clsGetDataFrameFunction = New RFunction
+        clsPlus10Operator = New ROperator
+        clsPlus11Operator = New ROperator
 
         ucrSelectorClimograph.Reset()
         ucrSelectorClimograph.SetGgplotFunction(clsBaseOperator)
@@ -733,12 +737,8 @@ Public Class dlgClimograph
         clsPlus3Operator.AddParameter("right", clsRFunctionParameter:=clsLabsRainFunction, iPosition:=1, bIncludeArgumentName:=False)
 
         clsRainGgplotFunction.SetRCommand("ggplot")
-        'clsRainGgplotFunction.AddParameter("data", ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
-        'clsRainGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesRainGgplotFunction, iPosition:=1, bIncludeArgumentName:=False)
 
         clsAesRainGgplotFunction.SetRCommand("aes")
-        'clsAesRainGgplotFunction.AddParameter("x", ucrReceiverMonthC.GetVariableNames(False), iPosition:=0)
-        'clsAesRainGgplotFunction.AddParameter("y", ucrReceiverRainC.GetVariableNames(False), iPosition:=1)
 
         clsRainBarFunction.SetRCommand("geom_bar")
         clsRainBarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=0)
@@ -746,12 +746,9 @@ Public Class dlgClimograph
         clsRainBarFunction.AddParameter("fill", Chr(34) & "purple" & Chr(34), iPosition:=2)
 
         clsRainBarTextFunction.SetRCommand("geom_text")
-        'clsRainBarTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesRainBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
-        'clsRainBarTextFunction.AddParameter("label", clsRFunctionParameter:=clsRainRoundFunction, iPosition:=0)
         clsRainBarTextFunction.AddParameter("size", "3", iPosition:=2)
 
         clsRainRoundFunction.SetRCommand("round")
-        'clsRainRoundFunction.AddParameter("x", ucrReceiverRainC.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
         clsRainRoundFunction.AddParameter("y", "1", bIncludeArgumentName:=False)
 
         clsAesRainBarTextFunction.SetRCommand("aes")
@@ -774,6 +771,10 @@ Public Class dlgClimograph
         clsPlus8Operator.SetOperation("+")
 
         clsPlus9Operator.SetOperation("+")
+
+        clsPlus10Operator.SetOperation("+")
+
+        clsPlus11Operator.SetOperation("+")
 
         clsTemGgplotFunction.SetRCommand("ggplot")
 
@@ -840,8 +841,6 @@ Public Class dlgClimograph
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        'clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorClimograph.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        'clsGetDataFrameFunction.SetAssignTo(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         clsGetObjectDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
         clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
@@ -855,12 +854,7 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        'ucrSelectorClimograph.AddAdditionalCodeParameterPair(clsGgwalterliethFunction, New RParameter("data", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        'ucrSelectorClimograph.AddAdditionalCodeParameterPair(clsGgwalterliethFunction, New RParameter("data", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        'ucrSelectorClimograph.AddAdditionalCodeParameterPair(clsGgwalterliethFunction, New RParameter("data", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
-
         ucrReceiverRainC.SetRCode(clsMaxFunction, bReset)
-        'ucrSelectorClimograph.SetRCode(clsRggplotFunction, bReset)
         ucrReceiverMonth.SetRCode(clsGgwalterliethFunction, bReset)
         ucrReceiverRain.SetRCode(clsGgwalterliethFunction, bReset)
         ucrReceiverMintemp.SetRCode(clsGgwalterliethFunction, bReset)
@@ -872,7 +866,6 @@ Public Class dlgClimograph
         If bReset Then
             ucrReceiverElement2.SetRCode(clsVectorFunction, bReset)
             ucrReceiverElement1.SetRCode(clsVectorFunction, bReset)
-            'ucrReceiverMonthC.SetRCode(clsBarAesFunction, bReset)
             ucrPnlClimograph.SetRCode(clsDummyFunction, bReset)
             ucrChkRibbon.SetRCode(clsGeomRibbonFunction, bReset)
             ucrChkTile.SetRCode(clsGeomTileFunction, bReset)
@@ -895,7 +888,9 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub ucrPnlClimograph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlClimograph.ControlValueChanged
+        DialogueSize()
         If rdoClimograph.Checked Then
+            cmdOptions.Visible = True
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPlus1Operator)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPlus5Operator)
             clsBaseOperator.RemoveParameterByName("ggwalter_lieth")
@@ -903,6 +898,7 @@ Public Class dlgClimograph
             clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomBarFunction, iPosition:=2)
         ElseIf rdoWalterLieth.Checked Then
+            cmdOptions.Visible = False
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPlus1Operator)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPlus5Operator)
             clsBaseOperator.RemoveParameterByName("ggplot")
@@ -911,9 +907,12 @@ Public Class dlgClimograph
             clsGgwalterliethFunction.AddParameter("data", ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
             clsBaseOperator.AddParameter("ggwalter_lieth", clsRFunctionParameter:=clsGgwalterliethFunction, iPosition:=0)
         Else
+            cmdOptions.Visible = False
             clsBaseOperator.RemoveParameterByName("ggwalter_lieth")
             clsBaseOperator.RemoveParameterByName("ggplot")
             clsBaseOperator.RemoveParameterByName("geom_bar")
+            clsBaseOperator.RemoveParameterByName("facets")
+            clsBaseOperator.RemoveParameterByName("facets1")
             clsBaseOperator.AddParameter("plot_grid", clsRFunctionParameter:=clsPlotGridFunction, iPosition:=0)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsPlus1Operator, iPosition:=1)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsPlus5Operator, iPosition:=2)
@@ -976,8 +975,6 @@ Public Class dlgClimograph
             If clsParam.strArgumentName = "x" Then
                 If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
                     ucrReceiverMonthC.Clear()
-                Else
-                    'ucrReceiverMonthC.Add(clsParam.strArgumentValue)
                 End If
                 'In the y case, the value stored in the clsReasFunction in the multiple variables 
                 '  case is "value", however that one shouldn't be written in the multiple 
@@ -994,8 +991,6 @@ Public Class dlgClimograph
                 Else
                     ucrReceiverRainC.Add(clsParam.strArgumentValue)
                 End If
-                'ElseIf clsParam.strArgumentName = "fill" Then
-                '    ucrReceiverMonthC.Add(clsParam.strArgumentValue)
             End If
         Next
         TestOKEnabled()
@@ -1102,6 +1097,8 @@ Public Class dlgClimograph
             Else
                 clsBaseOperator.RemoveParameterByName("facets")
             End If
+        ElseIf rdoClimateBars.Checked Then
+            AddRemoveTemBars()
         Else
             clsBaseOperator.RemoveParameterByName("facets")
         End If
@@ -1110,6 +1107,7 @@ Public Class dlgClimograph
         AddRemoveFacetClimograph()
         AddRemoveFacets1()
         AddRemoveGroupBy1()
+        'AddRemoveTemBars()
     End Sub
 
     Private Sub GetParameterValue1(clsOperator As ROperator)
@@ -1355,7 +1353,6 @@ Public Class dlgClimograph
         AddRemoveGeomRibbon()
         AddRemoveGeomTextTmax()
         EnableTileAndRibbon()
-        AddRemoveTemBars()
     End Sub
 
     Private Sub AddRemoveTheme()
@@ -1620,7 +1617,6 @@ Public Class dlgClimograph
         AddRemoveGeomRibbon()
         AddRemoveGeomTextTmin()
         AddRemoveGeomTextTmax()
-        AddRemoveTemBars()
     End Sub
 
     Private Sub ucrReceiverMonthC_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMonthC.ControlValueChanged
@@ -1631,7 +1627,6 @@ Public Class dlgClimograph
         End If
         AddRemoveGeomRibbon()
         AddRemoveGeomBar()
-        AddRemoveTemBars()
     End Sub
 
     Private Sub ucrSelectorClimograph_DataFrameChanged() Handles ucrSelectorClimograph.DataFrameChanged
@@ -1688,19 +1683,67 @@ Public Class dlgClimograph
             clsBaseOperator.RemoveParameterByName("geom_ribbon")
             clsBaseOperator.RemoveParameterByName("scale_x_discrete")
             clsBaseOperator.RemoveParameterByName("scale_y_continuous")
-            If ucrReceiverRainC.IsEmpty Then
-                clsAesTmaxBarFunction.AddParameter("y", ucrReceiverElement1.GetVariableNames(False), iPosition:=0)
-                clsAesTminBarFunction.AddParameter("y", "-" & ucrReceiverElement2.GetVariableNames(False), iPosition:=0)
-                clsGeomBarTmaxFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTmaxBarFunction, iPosition:=0)
-                clsGeomBarTminFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTminBarFunction, iPosition:=0)
-                clsBaseOperator.AddParameter("geom_bar1", clsRFunctionParameter:=clsGeomBarTmaxFunction, iPosition:=1)
-                clsBaseOperator.AddParameter("geom_bar2", clsRFunctionParameter:=clsGeomBarTminFunction, iPosition:=2)
-            Else
-                clsAesRainGgplotFunction.AddParameter("x", ucrReceiverMonthC.GetVariableNames(False), iPosition:=0)
-                clsAesRainGgplotFunction.AddParameter("y", ucrReceiverRainC.GetVariableNames(False), iPosition:=1)
+            clsBaseOperator.RemoveParameterByName("facets")
+            clsBaseOperator.RemoveParameterByName("facets1")
+            If Not ucrReceiverFacet.IsEmpty Then
+                clsAesRainGgplotFunction.AddParameter("x", ucrReceiverMonthBar.GetVariableNames(False), iPosition:=0)
+                clsAesRainGgplotFunction.AddParameter("y", ucrReceiverRainBar.GetVariableNames(False), iPosition:=1)
                 clsRainGgplotFunction.AddParameter("data", ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
                 clsRainGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesRainGgplotFunction, iPosition:=1, bIncludeArgumentName:=False)
-                clsRainRoundFunction.AddParameter("x", ucrReceiverRainC.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+
+                clsRainRoundFunction.AddParameter("x", ucrReceiverRainBar.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                clsAesRainBarTextFunction.AddParameter("label", clsRFunctionParameter:=clsRainRoundFunction, iPosition:=0)
+                clsRainBarTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesRainBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+                clsPlus10Operator.AddParameter("left", clsRFunctionParameter:=clsLabsRainFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsPlus10Operator.AddParameter("right", clsRFunctionParameter:=clsFacetFunction1, iPosition:=1, bIncludeArgumentName:=False)
+                clsPlus3Operator.AddParameter("left", clsRFunctionParameter:=clsRainBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsPlus3Operator.AddParameter("right", clsROperatorParameter:=clsPlus10Operator, iPosition:=1, bIncludeArgumentName:=False)
+                clsPlus2Operator.AddParameter("left", clsRFunctionParameter:=clsRainBarFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsPlus2Operator.AddParameter("right", clsROperatorParameter:=clsPlus3Operator, iPosition:=1, bIncludeArgumentName:=False)
+                clsPlus1Operator.AddParameter("left", clsRFunctionParameter:=clsRainGgplotFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsPlus1Operator.AddParameter("right", clsROperatorParameter:=clsPlus2Operator, iPosition:=1, bIncludeArgumentName:=False)
+
+                clsAesTemGgplotFunction.AddParameter("x", ucrReceiverMonthBar.GetVariableNames(False), iPosition:=0)
+                clsTemGgplotFunction.AddParameter("data", ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
+                clsTemGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTemGgplotFunction, iPosition:=1, bIncludeArgumentName:=False)
+
+                clsAesTmaxBarFunction1.AddParameter("y", ucrReceiverElement1Bar.GetVariableNames(False), iPosition:=0)
+                clsTmaxBarFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTmaxBarFunction1, iPosition:=0, bIncludeArgumentName:=False)
+
+                clsAesTminBarFunction1.AddParameter("y", "-" & ucrReceiverElement2Bar.GetVariableNames(False), iPosition:=0)
+                clsTminBarFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTminBarFunction1, iPosition:=0, bIncludeArgumentName:=False)
+
+                clsTmaxRoundFunction.AddParameter("x", ucrReceiverElement1Bar.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                clsAesTmaxBarTextFunction.AddParameter("y", ucrReceiverElement1Bar.GetVariableNames(False), iPosition:=0)
+                clsAesTmaxBarTextFunction.AddParameter("label", clsRFunctionParameter:=clsTmaxRoundFunction, iPosition:=1)
+                clsTmaxBarTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTmaxBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+                clsTminRoundFunction.AddParameter("x", ucrReceiverElement2Bar.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                clsAesTminBarTextFunction.AddParameter("y", "-" & ucrReceiverElement2Bar.GetVariableNames(False), iPosition:=0)
+                clsAesTminBarTextFunction.AddParameter("label", clsRFunctionParameter:=clsTminRoundFunction, iPosition:=1)
+                clsTminBarTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTminBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+                clsPlus11Operator.AddParameter("left", clsRFunctionParameter:=clsLabsTempFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsPlus11Operator.AddParameter("right", clsRFunctionParameter:=clsFacetFunction1, iPosition:=1, bIncludeArgumentName:=False)
+                clsPlus9Operator.AddParameter("left", clsRFunctionParameter:=clsTminBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsPlus9Operator.AddParameter("right", clsROperatorParameter:=clsPlus11Operator, iPosition:=1, bIncludeArgumentName:=False)
+                clsPlus8Operator.AddParameter("left", clsRFunctionParameter:=clsTmaxBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsPlus8Operator.AddParameter("right", clsROperatorParameter:=clsPlus9Operator, iPosition:=1, bIncludeArgumentName:=False)
+                clsPlus7Operator.AddParameter("left", clsRFunctionParameter:=clsTminBarFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsPlus7Operator.AddParameter("right", clsROperatorParameter:=clsPlus8Operator, iPosition:=1, bIncludeArgumentName:=False)
+                clsPlus6Operator.AddParameter("left", clsRFunctionParameter:=clsTmaxBarFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsPlus6Operator.AddParameter("right", clsROperatorParameter:=clsPlus7Operator, iPosition:=1, bIncludeArgumentName:=False)
+                clsPlus5Operator.AddParameter("left", clsRFunctionParameter:=clsTemGgplotFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsPlus5Operator.AddParameter("right", clsROperatorParameter:=clsPlus6Operator, iPosition:=1, bIncludeArgumentName:=False)
+                clsBaseOperator.AddParameter("plot_grid", clsRFunctionParameter:=clsPlotGridFunction, iPosition:=0)
+
+            Else
+                clsAesRainGgplotFunction.AddParameter("x", ucrReceiverMonthBar.GetVariableNames(False), iPosition:=0)
+                clsAesRainGgplotFunction.AddParameter("y", ucrReceiverRainBar.GetVariableNames(False), iPosition:=1)
+                clsRainGgplotFunction.AddParameter("data", ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
+                clsRainGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesRainGgplotFunction, iPosition:=1, bIncludeArgumentName:=False)
+                clsRainRoundFunction.AddParameter("x", ucrReceiverRainBar.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
                 clsAesRainBarTextFunction.AddParameter("label", clsRFunctionParameter:=clsRainRoundFunction, iPosition:=0)
                 clsRainBarTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesRainBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
                 clsPlus3Operator.AddParameter("left", clsRFunctionParameter:=clsRainBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
@@ -1710,23 +1753,23 @@ Public Class dlgClimograph
                 clsPlus1Operator.AddParameter("left", clsRFunctionParameter:=clsRainGgplotFunction, iPosition:=0, bIncludeArgumentName:=False)
                 clsPlus1Operator.AddParameter("right", clsROperatorParameter:=clsPlus2Operator, iPosition:=1, bIncludeArgumentName:=False)
 
-                clsAesTemGgplotFunction.AddParameter("x", ucrReceiverMonthC.GetVariableNames(False), iPosition:=0)
+                clsAesTemGgplotFunction.AddParameter("x", ucrReceiverMonthBar.GetVariableNames(False), iPosition:=0)
                 clsTemGgplotFunction.AddParameter("data", ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
                 clsTemGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTemGgplotFunction, iPosition:=1, bIncludeArgumentName:=False)
 
-                clsAesTmaxBarFunction1.AddParameter("y", ucrReceiverElement1.GetVariableNames(False), iPosition:=0)
+                clsAesTmaxBarFunction1.AddParameter("y", ucrReceiverElement1Bar.GetVariableNames(False), iPosition:=0)
                 clsTmaxBarFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTmaxBarFunction1, iPosition:=0, bIncludeArgumentName:=False)
 
-                clsAesTminBarFunction1.AddParameter("y", "-" & ucrReceiverElement2.GetVariableNames(False), iPosition:=0)
+                clsAesTminBarFunction1.AddParameter("y", "-" & ucrReceiverElement2Bar.GetVariableNames(False), iPosition:=0)
                 clsTminBarFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTminBarFunction1, iPosition:=0, bIncludeArgumentName:=False)
 
-                clsTmaxRoundFunction.AddParameter("x", ucrReceiverElement1.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-                clsAesTmaxBarTextFunction.AddParameter("y", ucrReceiverElement1.GetVariableNames(False), iPosition:=0)
+                clsTmaxRoundFunction.AddParameter("x", ucrReceiverElement1Bar.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                clsAesTmaxBarTextFunction.AddParameter("y", ucrReceiverElement1Bar.GetVariableNames(False), iPosition:=0)
                 clsAesTmaxBarTextFunction.AddParameter("label", clsRFunctionParameter:=clsTmaxRoundFunction, iPosition:=1)
                 clsTmaxBarTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTmaxBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
 
-                clsTminRoundFunction.AddParameter("x", ucrReceiverElement2.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-                clsAesTminBarTextFunction.AddParameter("y", "-" & ucrReceiverElement2.GetVariableNames(False), iPosition:=0)
+                clsTminRoundFunction.AddParameter("x", ucrReceiverElement2Bar.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                clsAesTminBarTextFunction.AddParameter("y", "-" & ucrReceiverElement2Bar.GetVariableNames(False), iPosition:=0)
                 clsAesTminBarTextFunction.AddParameter("label", clsRFunctionParameter:=clsTminRoundFunction, iPosition:=1)
                 clsTminBarTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTminBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
                 clsPlus9Operator.AddParameter("left", clsRFunctionParameter:=clsTminBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
@@ -1739,30 +1782,12 @@ Public Class dlgClimograph
                 clsPlus6Operator.AddParameter("right", clsROperatorParameter:=clsPlus7Operator, iPosition:=1, bIncludeArgumentName:=False)
                 clsPlus5Operator.AddParameter("left", clsRFunctionParameter:=clsTemGgplotFunction, iPosition:=0, bIncludeArgumentName:=False)
                 clsPlus5Operator.AddParameter("right", clsROperatorParameter:=clsPlus6Operator, iPosition:=1, bIncludeArgumentName:=False)
+                clsBaseOperator.AddParameter("plot_grid", clsRFunctionParameter:=clsPlotGridFunction, iPosition:=0)
             End If
         Else
-            clsBaseOperator.RemoveParameterByName("geom_bar1")
-            clsBaseOperator.RemoveParameterByName("geom_bar2")
             clsBaseOperator.RemoveParameterByName("plot_grid")
         End If
     End Sub
-
-    'Private Sub ChangeBaseOperator()
-    '    If rdoClimograph.Checked Then
-    '        clsBaseOperator.RemoveParameterByName("ggplot")
-    '        clsBaseOperator.RemoveParameterByName("geom_bar")
-    '        clsBaseOperator.RemoveParameterByName("plot_grid")
-    '        clsBaseOperator.RemoveParameterByName("ggwalter_lieth")
-    '            clsBaseOperator.AddParameter("plot_grid", clsRFunctionParameter:=clsPlotGridFunction, iPosition:=0)
-    '            ucrBase.clsRsyntax.AddToBeforeCodes(clsPlus1Operator, iPosition:=1)
-    '            ucrBase.clsRsyntax.AddToBeforeCodes(clsPlus5Operator, iPosition:=2)
-    '    Else
-    '        clsBaseOperator.AddParameter("ggwalter_lieth", clsRFunctionParameter:=clsGgwalterliethFunction, iPosition:=0)
-    '        clsBaseOperator.RemoveParameterByName("ggplot")
-    '        clsBaseOperator.RemoveParameterByName("geom_bar")
-    '        clsBaseOperator.RemoveParameterByName("plot_grid")
-    '    End If
-    'End Sub
 
     Private Sub ucrSave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSave.ControlValueChanged
         If ucrSave.ucrChkSave.Checked Then
@@ -1776,7 +1801,23 @@ Public Class dlgClimograph
         AddRemoveGeomBar()
     End Sub
 
+    Private Sub DialogueSize()
+        If rdoClimograph.Checked Then
+            Me.Size = New Size(488, 617)
+            Me.ucrSave.Location = New Point(14, 493)
+            Me.ucrBase.Location = New Point(12, 520)
+        Else
+            Me.Size = New Size(488, 417)
+            Me.ucrSave.Location = New Point(14, 293)
+            Me.ucrBase.Location = New Point(12, 320)
+        End If
+    End Sub
+
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlClimograph.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverAbsolute.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverMaxtem.ControlContentsChanged, ucrReceiverMintemp.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrReceiverMonthC.ControlContentsChanged, ucrReceiverRainC.ControlContentsChanged, ucrReceiverElement1Bar.ControlContentsChanged, ucrReceiverElement2Bar.ControlContentsChanged, ucrReceiverMonthBar.ControlContentsChanged, ucrReceiverRainBar.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverElement1Bar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1Bar.ControlValueChanged, ucrReceiverMonthBar.ControlValueChanged, ucrReceiverRainBar.ControlValueChanged, ucrReceiverElement2Bar.ControlValueChanged
+        AddRemoveTemBars()
     End Sub
 End Class
