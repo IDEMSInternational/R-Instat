@@ -764,7 +764,7 @@ summary_which_min <- function(x, na.rm = TRUE, na_type = "", ...) {
   }
 }
 
-summary_where_max <- function(x, summary_where_y, na.rm = TRUE, na_type = "", ...) {  
+summary_where_max <- function(x, summary_where_y=NULL, na.rm = TRUE, na_type = "", ...) {  
   # Check if vectors are empty
   if (length(x) == 0 || length(summary_where_y) == 0) {
     return(NA)
@@ -784,7 +784,7 @@ summary_where_max <- function(x, summary_where_y, na.rm = TRUE, na_type = "", ..
   return(summary_where_y[max_index])
 }
 
-summary_where_min <- function(x, summary_where_y, na.rm = TRUE, na_type = "", ...) {
+summary_where_min <- function(x, summary_where_y=NULL, na.rm = TRUE, na_type = "", ...) {
   # Check if vectors are empty
   if (length(x) == 0 || length(summary_where_y) == 0) {
     return(NA)

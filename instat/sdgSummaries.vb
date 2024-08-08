@@ -614,7 +614,7 @@ Public Class sdgSummaries
     Private Sub IncludeControlsEnabled()
         If ucrChkWhereMax.Checked OrElse ucrChkWhereMin.Checked Then
             ucrChkInclude.Enabled = True
-        ElseIf Not ucrChkWhereMax.Checked AndAlso Not ucrChkWhereMin.Checked Then
+        Else
             ucrChkInclude.Checked = False
             ucrChkInclude.Enabled = False
         End If
@@ -630,12 +630,8 @@ Public Class sdgSummaries
     End Sub
 
     Private Sub OrderBy()
-        If ucrChkOrderBy.Checked Then
-            If Not ucrReceiverOrderBy.IsEmpty Then
-                clsDefaultFunction.AddParameter("order_by", ucrReceiverOrderBy.GetVariableNames, iPosition:=4)
-            Else
-                clsDefaultFunction.RemoveParameterByName("order_by")
-            End If
+        If ucrChkOrderBy.Checked AndAlso Not ucrReceiverOrderBy.IsEmpty Then
+            clsDefaultFunction.AddParameter("order_by", ucrReceiverOrderBy.GetVariableNames, iPosition:=4)
         Else
             clsDefaultFunction.RemoveParameterByName("order_by")
         End If
@@ -716,7 +712,7 @@ Public Class sdgSummaries
                 clsDefaultFunction.RemoveParameterByName("summary_where_y")
             End If
         Else
-            clsDefaultFunction.RemoveParameterByName("-summary_where_y")
+            clsDefaultFunction.RemoveParameterByName("summary_where_y")
         End If
     End Sub
 
