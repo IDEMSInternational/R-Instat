@@ -13,6 +13,7 @@
 
     Private Sub InitialiseDialog()
         ucrReceiverMultipleCols.Selector = ucrSelectorCols
+        ucrReceiverMultipleCols.SetDataType("numeric", bStrict:=True)
         ucrReceiverMultipleCols.SetMeAsReceiver()
 
         dctSummaryTypes.Add("Minimum", "min")
@@ -34,6 +35,15 @@
         btnFormat.Tag = Nothing
         btnStyle.Tag = Nothing
 
+        ' TODO. Disabled due to error thrwon when using data book. See comments inside GetFnParameters()
+        lblSummaryLabel.Enabled = False
+        ucrTxtSummaryLabel.Enabled = False
+
+        ' TODO. Disabled until R is upgraded
+        lblSide.Enabled = False
+        ucrCboSide.Enabled = False
+        btnFormat.Enabled = False
+        btnStyle.Enabled = False
     End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
@@ -115,7 +125,12 @@
         Dim clsLocationsRFunction As New RFunction
         clsLocationsRFunction.SetPackageName("gt")
         clsLocationsRFunction.SetRCommand("cells_summary")
-        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False), iNewPosition:=0))
+
+        If Not ucrTxtGroupId.IsEmpty Then
+            clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="groups", strParamValue:=Chr(34) & ucrTxtGroupId.GetText & Chr(34), iNewPosition:=0))
+        End If
+        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False), iNewPosition:=1))
+        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="row", strParamValue:=dataGridSummaries.Rows.Count + 1, iNewPosition:=2))
 
         Dim clsTabStyleRFunction As RFunction = clsTablesUtils.GetNewStyleRFunction(clsListStyleRFunction, clsLocationsRFunction)
 
@@ -149,7 +164,8 @@
             clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="fmt", strParamValue:=clsFormatRFunction, iNewPosition:=3))
         End If
 
-        clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="side", strParamValue:=Chr(34) & dctSides.Item(ucrCboSide.GetText) & Chr(34), iNewPosition:=4))
+        'TODO. Commented out until R-Instat R is upgraded 
+        'clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="side", strParamValue:=Chr(34) & dctSides.Item(ucrCboSide.GetText) & Chr(34), iNewPosition:=4))
 
         If Not ucrTxtReplaceNa.IsEmpty Then
             clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="missing_text", strParamValue:=Chr(34) & ucrTxtReplaceNa.GetText & Chr(34), iNewPosition:=0))
@@ -183,12 +199,17 @@
     End Sub
 
     Private Function GetFnParameters() As String
+        ' TODO. As of 08/08/2024, GT example like list(fn = "min", label = "Minimum", id = "min") throws an error when exeuted in R-Instat
+        ' TODO. Investigate why the error why is thrown when using the databook 
+
         Dim strFnType As String = dctSummaryTypes.Item(ucrCboSummaryType.GetText)
         Dim strFnParams As String = "id = " & Chr(34) & strFnType & Chr(34) & ", fn = " & Chr(34) & strFnType & Chr(34)
         If Not ucrTxtSummaryLabel.IsEmpty Then
             strFnParams = strFnParams & ", label = " & Chr(34) & ucrCboSummaryType.GetText & Chr(34)
         End If
-        Return "list(" & strFnParams & ")"
+        ' TODO. Commented out due to error thrown
+        'Return "list(" & strFnParams & ")"
+        Return Chr(34) & strFnType & Chr(34)
     End Function
 
     Private Sub btnClearSummaries_Click(sender As Object, e As EventArgs) Handles btnClearSummaries.Click

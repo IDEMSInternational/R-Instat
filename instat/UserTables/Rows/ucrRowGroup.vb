@@ -31,10 +31,12 @@
             Dim row As New DataGridViewRow
             row.CreateCells(dataGridGroups)
             For Each clsTabRowGroupRParam As RParameter In clsTabRowGroupRFunction.clsParameters
-                If clsTabRowGroupRParam.strArgumentName = "label" Then
+                If clsTabRowGroupRParam.strArgumentName = "id" Then
                     row.Cells(0).Value = clsTablesUtils.GetStringValue(clsTabRowGroupRParam.strArgumentValue, False)
-                ElseIf clsTabRowGroupRParam.strArgumentName = "rows" Then
+                ElseIf clsTabRowGroupRParam.strArgumentName = "label" Then
                     row.Cells(1).Value = clsTablesUtils.GetStringValue(clsTabRowGroupRParam.strArgumentValue, False)
+                ElseIf clsTabRowGroupRParam.strArgumentName = "rows" Then
+                    row.Cells(2).Value = clsTablesUtils.GetStringValue(clsTabRowGroupRParam.strArgumentValue, False)
                 End If
             Next
             Dim arrParams(2) As RParameter
@@ -103,10 +105,10 @@
 
         Dim row As New DataGridViewRow
         row.CreateCells(dataGridGroups)
-
-        row.Cells(0).Value = ucrInputGroupLabel.GetText()
-        row.Cells(1).Value = ucrRowExpression.GetText()
-        row.Cells(2).Value = strGroupStyleExpression
+        row.Cells(0).Value = strGroupId
+        row.Cells(1).Value = ucrInputGroupLabel.GetText()
+        row.Cells(2).Value = ucrRowExpression.GetText()
+        row.Cells(3).Value = strGroupStyleExpression
         ' Tag the array of parameters
         row.Tag = arrParams
         dataGridGroups.Rows.Add(row)

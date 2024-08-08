@@ -23,8 +23,6 @@ Partial Class ucrRowSummary
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.dataGridSummaries = New System.Windows.Forms.DataGridView()
-        Me.colType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnStyle = New System.Windows.Forms.Button()
         Me.lblSummaryTypes = New System.Windows.Forms.Label()
         Me.lblSummaries = New System.Windows.Forms.Label()
@@ -43,6 +41,8 @@ Partial Class ucrRowSummary
         Me.ucrTxtReplaceNa = New instat.ucrInputTextBox()
         Me.ucrCboSummaryType = New instat.ucrInputComboBox()
         Me.ucrTxtSummaryLabel = New instat.ucrInputTextBox()
+        Me.colType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridSummaries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -58,22 +58,6 @@ Partial Class ucrRowSummary
         Me.dataGridSummaries.RowHeadersWidth = 62
         Me.dataGridSummaries.Size = New System.Drawing.Size(522, 120)
         Me.dataGridSummaries.TabIndex = 335
-        '
-        'colType
-        '
-        Me.colType.HeaderText = "Summary Expression"
-        Me.colType.MinimumWidth = 8
-        Me.colType.Name = "colType"
-        Me.colType.ReadOnly = True
-        Me.colType.Width = 90
-        '
-        'colExpression
-        '
-        Me.colExpression.HeaderText = "Style Expression"
-        Me.colExpression.MinimumWidth = 8
-        Me.colExpression.Name = "colExpression"
-        Me.colExpression.ReadOnly = True
-        Me.colExpression.Width = 90
         '
         'btnStyle
         '
@@ -287,6 +271,22 @@ Partial Class ucrRowSummary
         Me.ucrTxtSummaryLabel.Name = "ucrTxtSummaryLabel"
         Me.ucrTxtSummaryLabel.Size = New System.Drawing.Size(180, 32)
         Me.ucrTxtSummaryLabel.TabIndex = 343
+        '
+        'colType
+        '
+        Me.colType.HeaderText = "Summary Expression"
+        Me.colType.MinimumWidth = 8
+        Me.colType.Name = "colType"
+        Me.colType.ReadOnly = True
+        Me.colType.Width = 150
+        '
+        'colExpression
+        '
+        Me.colExpression.HeaderText = "Style Expression"
+        Me.colExpression.MinimumWidth = 8
+        Me.colExpression.Name = "colExpression"
+        Me.colExpression.ReadOnly = True
+        Me.colExpression.Width = 150
         '
         'ucrRowSummary
         '

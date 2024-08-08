@@ -23,9 +23,6 @@ Partial Class ucrRowGroup
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.dataGridGroups = New System.Windows.Forms.DataGridView()
-        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colStyleExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnClearGroups = New System.Windows.Forms.Button()
         Me.btnAddCondition = New System.Windows.Forms.Button()
         Me.lblGroups = New System.Windows.Forms.Label()
@@ -34,6 +31,10 @@ Partial Class ucrRowGroup
         Me.btnStyle = New System.Windows.Forms.Button()
         Me.ucrRowExpression = New instat.ucrRowExpression()
         Me.lblGroupExpression = New System.Windows.Forms.Label()
+        Me.colId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colLabel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCodnition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colStyleExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridGroups, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -41,7 +42,7 @@ Partial Class ucrRowGroup
         '
         Me.dataGridGroups.AllowUserToAddRows = False
         Me.dataGridGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridGroups.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colLabel, Me.colCodnition, Me.colStyleExpression})
+        Me.dataGridGroups.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colId, Me.colLabel, Me.colCodnition, Me.colStyleExpression})
         Me.dataGridGroups.Location = New System.Drawing.Point(12, 249)
         Me.dataGridGroups.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.dataGridGroups.Name = "dataGridGroups"
@@ -49,30 +50,6 @@ Partial Class ucrRowGroup
         Me.dataGridGroups.RowHeadersWidth = 62
         Me.dataGridGroups.Size = New System.Drawing.Size(484, 146)
         Me.dataGridGroups.TabIndex = 11
-        '
-        'colLabel
-        '
-        Me.colLabel.HeaderText = "Label"
-        Me.colLabel.MinimumWidth = 8
-        Me.colLabel.Name = "colLabel"
-        Me.colLabel.ReadOnly = True
-        Me.colLabel.Width = 70
-        '
-        'colCodnition
-        '
-        Me.colCodnition.HeaderText = "Condition"
-        Me.colCodnition.MinimumWidth = 8
-        Me.colCodnition.Name = "colCodnition"
-        Me.colCodnition.ReadOnly = True
-        Me.colCodnition.Width = 90
-        '
-        'colStyleExpression
-        '
-        Me.colStyleExpression.HeaderText = "Style Expression"
-        Me.colStyleExpression.MinimumWidth = 8
-        Me.colStyleExpression.Name = "colStyleExpression"
-        Me.colStyleExpression.ReadOnly = True
-        Me.colStyleExpression.Width = 90
         '
         'btnClearGroups
         '
@@ -137,7 +114,7 @@ Partial Class ucrRowGroup
         '
         Me.btnStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnStyle.Location = New System.Drawing.Point(210, 99)
+        Me.btnStyle.Location = New System.Drawing.Point(210, 101)
         Me.btnStyle.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnStyle.Name = "btnStyle"
         Me.btnStyle.Size = New System.Drawing.Size(74, 35)
@@ -164,6 +141,38 @@ Partial Class ucrRowGroup
         Me.lblGroupExpression.Size = New System.Drawing.Size(129, 20)
         Me.lblGroupExpression.TabIndex = 334
         Me.lblGroupExpression.Text = "Group Condition:"
+        '
+        'colId
+        '
+        Me.colId.HeaderText = "Id"
+        Me.colId.MinimumWidth = 8
+        Me.colId.Name = "colId"
+        Me.colId.ReadOnly = True
+        Me.colId.Width = 70
+        '
+        'colLabel
+        '
+        Me.colLabel.HeaderText = "Label"
+        Me.colLabel.MinimumWidth = 8
+        Me.colLabel.Name = "colLabel"
+        Me.colLabel.ReadOnly = True
+        Me.colLabel.Width = 70
+        '
+        'colCodnition
+        '
+        Me.colCodnition.HeaderText = "Condition"
+        Me.colCodnition.MinimumWidth = 8
+        Me.colCodnition.Name = "colCodnition"
+        Me.colCodnition.ReadOnly = True
+        Me.colCodnition.Width = 90
+        '
+        'colStyleExpression
+        '
+        Me.colStyleExpression.HeaderText = "Style Expression"
+        Me.colStyleExpression.MinimumWidth = 8
+        Me.colStyleExpression.Name = "colStyleExpression"
+        Me.colStyleExpression.ReadOnly = True
+        Me.colStyleExpression.Width = 90
         '
         'ucrRowGroup
         '
@@ -196,6 +205,7 @@ Partial Class ucrRowGroup
     Friend WithEvents btnStyle As Button
     Friend WithEvents ucrRowExpression As ucrRowExpression
     Friend WithEvents lblGroupExpression As Label
+    Friend WithEvents colId As DataGridViewTextBoxColumn
     Friend WithEvents colLabel As DataGridViewTextBoxColumn
     Friend WithEvents colCodnition As DataGridViewTextBoxColumn
     Friend WithEvents colStyleExpression As DataGridViewTextBoxColumn
