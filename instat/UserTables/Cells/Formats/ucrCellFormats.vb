@@ -143,5 +143,4 @@
         clsTablesUtils.RemoveRFunctionsParamsWithRCommand({"fmt", "fmt_units", "fmt_number", "fmt_currency"}, clsOperator)
         clsTablesUtils.AddGridRowTagsRParamsToROperator(dataGridFormats, clsOperator)
     End Sub
-
 End Class

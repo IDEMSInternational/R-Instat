@@ -3429,6 +3429,9 @@
     <EmbeddedResource Include="UserTables\Columns\ucrColumnFootNote.resx">
       <DependentUpon>ucrColumnFootNote.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnNanoPlots.resx">
+      <DependentUpon>ucrColumnNanoPlots.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Columns\ucrColumnStyles.resx">
       <DependentUpon>ucrColumnStyles.vb</DependentUpon>
     </EmbeddedResource>

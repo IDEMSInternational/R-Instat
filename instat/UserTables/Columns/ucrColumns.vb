@@ -17,7 +17,11 @@
         ucrPnlCols.AddRadioButton(rdoColWidth)
         ucrPnlCols.AddRadioButton(rdoColFootNotes)
         ucrPnlCols.AddRadioButton(rdoColSpanners)
-        ucrPnlCols.AddRadioButton(rdoColNanoPlot)
+
+        ' TODO. Nonplots disabled until R is upgraded
+        'ucrPnlCols.AddRadioButton(rdoColNanoPlot)
+        rdoColNanoPlot.Enabled = False
+
         rdoColLabel.Checked = True
     End Sub
 
