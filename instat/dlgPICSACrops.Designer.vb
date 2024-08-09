@@ -207,7 +207,7 @@ Partial Class dlgPICSACrops
         Me.ucrInputCropLengths.GetSetSelectedIndex = -1
         Me.ucrInputCropLengths.IsReadOnly = False
         Me.ucrInputCropLengths.Location = New System.Drawing.Point(120, 129)
-        Me.ucrInputCropLengths.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrInputCropLengths.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrInputCropLengths.Name = "ucrInputCropLengths"
         Me.ucrInputCropLengths.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputCropLengths.TabIndex = 55
@@ -219,7 +219,7 @@ Partial Class dlgPICSACrops
         Me.ucrInputWaterAmounts.GetSetSelectedIndex = -1
         Me.ucrInputWaterAmounts.IsReadOnly = False
         Me.ucrInputWaterAmounts.Location = New System.Drawing.Point(121, 92)
-        Me.ucrInputWaterAmounts.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputWaterAmounts.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputWaterAmounts.Name = "ucrInputWaterAmounts"
         Me.ucrInputWaterAmounts.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputWaterAmounts.TabIndex = 40
@@ -231,7 +231,7 @@ Partial Class dlgPICSACrops
         Me.ucrInputPlantingDates.GetSetSelectedIndex = -1
         Me.ucrInputPlantingDates.IsReadOnly = False
         Me.ucrInputPlantingDates.Location = New System.Drawing.Point(121, 58)
-        Me.ucrInputPlantingDates.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputPlantingDates.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputPlantingDates.Name = "ucrInputPlantingDates"
         Me.ucrInputPlantingDates.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPlantingDates.TabIndex = 53
@@ -239,37 +239,37 @@ Partial Class dlgPICSACrops
         'rdoBoth
         '
         Me.rdoBoth.AutoSize = True
-        Me.rdoBoth.Location = New System.Drawing.Point(165, 25)
-        Me.rdoBoth.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.rdoBoth.Location = New System.Drawing.Point(195, 25)
+        Me.rdoBoth.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoBoth.Name = "rdoBoth"
-        Me.rdoBoth.Size = New System.Drawing.Size(47, 17)
+        Me.rdoBoth.Size = New System.Drawing.Size(58, 17)
         Me.rdoBoth.TabIndex = 44
         Me.rdoBoth.TabStop = True
-        Me.rdoBoth.Text = "Both"
+        Me.rdoBoth.Text = "O Both"
         Me.rdoBoth.UseVisualStyleBackColor = True
         '
         'rdoNo
         '
         Me.rdoNo.AutoSize = True
-        Me.rdoNo.Location = New System.Drawing.Point(117, 25)
-        Me.rdoNo.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.rdoNo.Location = New System.Drawing.Point(137, 25)
+        Me.rdoNo.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoNo.Name = "rdoNo"
-        Me.rdoNo.Size = New System.Drawing.Size(39, 17)
+        Me.rdoNo.Size = New System.Drawing.Size(50, 17)
         Me.rdoNo.TabIndex = 45
         Me.rdoNo.TabStop = True
-        Me.rdoNo.Text = "No"
+        Me.rdoNo.Text = "O No"
         Me.rdoNo.UseVisualStyleBackColor = True
         '
         'rdoYes
         '
         Me.rdoYes.AutoSize = True
         Me.rdoYes.Location = New System.Drawing.Point(13, 25)
-        Me.rdoYes.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.rdoYes.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoYes.Name = "rdoYes"
-        Me.rdoYes.Size = New System.Drawing.Size(102, 17)
+        Me.rdoYes.Size = New System.Drawing.Size(120, 17)
         Me.rdoYes.TabIndex = 43
         Me.rdoYes.TabStop = True
-        Me.rdoYes.Text = "Start Check:Yes"
+        Me.rdoYes.Text = "Include Start: O Yes"
         Me.rdoYes.UseVisualStyleBackColor = True
         '
         'lblPlantingDays
@@ -303,9 +303,9 @@ Partial Class dlgPICSACrops
         '
         Me.ucrPnlStartCheck.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlStartCheck.Location = New System.Drawing.Point(9, 17)
-        Me.ucrPnlStartCheck.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrPnlStartCheck.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlStartCheck.Name = "ucrPnlStartCheck"
-        Me.ucrPnlStartCheck.Size = New System.Drawing.Size(236, 37)
+        Me.ucrPnlStartCheck.Size = New System.Drawing.Size(248, 37)
         Me.ucrPnlStartCheck.TabIndex = 46
         '
         'ucrChkDataProp
@@ -313,7 +313,7 @@ Partial Class dlgPICSACrops
         Me.ucrChkDataProp.AutoSize = True
         Me.ucrChkDataProp.Checked = False
         Me.ucrChkDataProp.Location = New System.Drawing.Point(10, 358)
-        Me.ucrChkDataProp.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDataProp.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkDataProp.Name = "ucrChkDataProp"
         Me.ucrChkDataProp.Size = New System.Drawing.Size(172, 23)
         Me.ucrChkDataProp.TabIndex = 37
@@ -323,7 +323,7 @@ Partial Class dlgPICSACrops
         Me.ucrChkPrintDataProp.AutoSize = True
         Me.ucrChkPrintDataProp.Checked = False
         Me.ucrChkPrintDataProp.Location = New System.Drawing.Point(188, 358)
-        Me.ucrChkPrintDataProp.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkPrintDataProp.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkPrintDataProp.Name = "ucrChkPrintDataProp"
         Me.ucrChkPrintDataProp.Size = New System.Drawing.Size(255, 23)
         Me.ucrChkPrintDataProp.TabIndex = 36
@@ -397,7 +397,7 @@ Partial Class dlgPICSACrops
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 392)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 0
