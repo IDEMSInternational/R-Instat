@@ -269,12 +269,36 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub PlantingDaysParam()
+        'If ucrInputPlantingDates.IsEmpty Then
+        '    clsSequencePlantingFunction.RemoveParameterByName("plant")
+        '    clsCropsFunction.RemoveParameterByName("plant_days")
+        'Else
+        '    clsSequencePlantingFunction.AddParameter("plant", ucrInputPlantingDates.GetText(), iPosition:=5, bIncludeArgumentName:=False)
+        '    clsCropsFunction.AddParameter("plant_days", clsRFunctionParameter:=clsSequencePlantingFunction)
+        'End If
         If ucrInputPlantingDates.IsEmpty Then
             clsSequencePlantingFunction.RemoveParameterByName("plant")
             clsCropsFunction.RemoveParameterByName("plant_days")
         Else
-            clsSequencePlantingFunction.AddParameter("plant", ucrInputPlantingDates.GetText(), iPosition:=5, bIncludeArgumentName:=False)
-            clsCropsFunction.AddParameter("plant_days", clsRFunctionParameter:=clsSequencePlantingFunction)
+            Dim plantingDates As String() = ucrInputPlantingDates.GetText().Split(","c)
+
+            If plantingDates.Length = 3 Then
+                Dim first As Integer = Integer.Parse(plantingDates(0).Trim())
+                Dim second As Integer = Integer.Parse(plantingDates(1).Trim())
+                Dim third As Integer = Integer.Parse(plantingDates(2).Trim())
+
+                If third < second Then
+                    ' Assume a sequence and run the sequence function
+                    clsSequencePlantingFunction.AddParameter("plant", ucrInputPlantingDates.GetText(), iPosition:=5, bIncludeArgumentName:=False)
+                    clsCropsFunction.AddParameter("plant_days", clsRFunctionParameter:=clsSequencePlantingFunction)
+                Else
+                    ' List the values as provided
+                    clsCropsFunction.AddParameter("plant_days", ucrInputPlantingDates.GetText(), iPosition:=5)
+                End If
+            Else
+                ' List the values as provided
+                clsCropsFunction.AddParameter("plant_days", ucrInputPlantingDates.GetText(), iPosition:=5)
+            End If
         End If
     End Sub
 
@@ -292,12 +316,37 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub ucrInputCropLengths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCropLengths.ControlValueChanged
+        'If ucrInputCropLengths.IsEmpty Then
+        '    clsCropsFunction.RemoveParameterByName("plant_lengths")
+        '    clsSequenceFunction.RemoveParameterByName("lengths")
+        'Else
+        '    clsSequenceFunction.AddParameter("lengths", ucrInputCropLengths.GetText(), iPosition:=6, bIncludeArgumentName:=False)
+        '    clsCropsFunction.AddParameter("plant_lengths", clsRFunctionParameter:=clsSequenceFunction, iPosition:=6)
+        'End If
+
         If ucrInputCropLengths.IsEmpty Then
-            clsCropsFunction.RemoveParameterByName("plant_lengths")
-            clsSequenceFunction.RemoveParameterByName("lengths")
+            clsSequencePlantingFunction.RemoveParameterByName("plant")
+            clsCropsFunction.RemoveParameterByName("plant_days")
         Else
-            clsSequenceFunction.AddParameter("lengths", ucrInputCropLengths.GetText(), iPosition:=6, bIncludeArgumentName:=False)
-            clsCropsFunction.AddParameter("plant_lengths", clsRFunctionParameter:=clsSequenceFunction, iPosition:=6)
+            Dim plantingDates As String() = ucrInputCropLengths.GetText().Split(","c)
+
+            If plantingDates.Length = 3 Then
+                Dim first As Integer = Integer.Parse(plantingDates(0).Trim())
+                Dim second As Integer = Integer.Parse(plantingDates(1).Trim())
+                Dim third As Integer = Integer.Parse(plantingDates(2).Trim())
+
+                If third < second Then
+                    ' Assume a sequence and run the sequence function
+                    clsSequencePlantingFunction.AddParameter("plant", ucrInputCropLengths.GetText(), iPosition:=5, bIncludeArgumentName:=False)
+                    clsCropsFunction.AddParameter("plant_days", clsRFunctionParameter:=clsSequencePlantingFunction)
+                Else
+                    ' List the values as provided
+                    clsCropsFunction.AddParameter("plant_days", ucrInputCropLengths.GetText(), iPosition:=5)
+                End If
+            Else
+                ' List the values as provided
+                clsCropsFunction.AddParameter("plant_days", ucrInputCropLengths.GetText(), iPosition:=5)
+            End If
         End If
     End Sub
 
@@ -306,12 +355,37 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub ucrInputWaterAmounts_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputWaterAmounts.ControlValueChanged
+        'If ucrInputWaterAmounts.IsEmpty Then
+        '    clsCropsFunction.RemoveParameterByName("rain_totals")
+        '    clsSequencewaterFunction.RemoveParameterByName("totals")
+        'Else
+        '    clsSequencewaterFunction.AddParameter("totals", ucrInputWaterAmounts.GetText(), iPosition:=7, bIncludeArgumentName:=False)
+        '    clsCropsFunction.AddParameter("rain_totals", clsRFunctionParameter:=clsSequencewaterFunction, iPosition:=7)
+        'End If
+
         If ucrInputWaterAmounts.IsEmpty Then
-            clsCropsFunction.RemoveParameterByName("rain_totals")
-            clsSequencewaterFunction.RemoveParameterByName("totals")
+            clsSequencePlantingFunction.RemoveParameterByName("plant")
+            clsCropsFunction.RemoveParameterByName("plant_days")
         Else
-            clsSequencewaterFunction.AddParameter("totals", ucrInputWaterAmounts.GetText(), iPosition:=7, bIncludeArgumentName:=False)
-            clsCropsFunction.AddParameter("rain_totals", clsRFunctionParameter:=clsSequencewaterFunction, iPosition:=7)
+            Dim plantingDates As String() = ucrInputWaterAmounts.GetText().Split(","c)
+
+            If plantingDates.Length = 3 Then
+                Dim first As Integer = Integer.Parse(plantingDates(0).Trim())
+                Dim second As Integer = Integer.Parse(plantingDates(1).Trim())
+                Dim third As Integer = Integer.Parse(plantingDates(2).Trim())
+
+                If third < second Then
+                    ' Assume a sequence and run the sequence function
+                    clsSequencePlantingFunction.AddParameter("plant", ucrInputWaterAmounts.GetText(), iPosition:=5, bIncludeArgumentName:=False)
+                    clsCropsFunction.AddParameter("plant_days", clsRFunctionParameter:=clsSequencePlantingFunction)
+                Else
+                    ' List the values as provided
+                    clsCropsFunction.AddParameter("plant_days", ucrInputWaterAmounts.GetText(), iPosition:=5)
+                End If
+            Else
+                ' List the values as provided
+                clsCropsFunction.AddParameter("plant_days", ucrInputWaterAmounts.GetText(), iPosition:=5)
+            End If
         End If
     End Sub
 End Class
