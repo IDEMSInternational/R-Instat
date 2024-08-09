@@ -88,11 +88,6 @@ Public Class dlgPICSACrops
         ucrReceiverEnd.SetDataType("numeric")
         ucrReceiverEnd.bAttachedToPrimaryDataFrame = False
 
-        'Planting date 
-        'ucrChkRequirePlantingDays.SetText("Require start day before planting day")
-        'ucrChkRequirePlantingDays.SetParameter(New RParameter("start_check", 10), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        'ucrChkRequirePlantingDays.SetRDefault("TRUE")
-
         ucrPnlStartCheck.AddRadioButton(rdoYes)
         ucrPnlStartCheck.AddRadioButton(rdoNo)
         ucrPnlStartCheck.AddRadioButton(rdoBoth)
