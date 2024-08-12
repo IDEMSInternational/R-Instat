@@ -242,10 +242,10 @@ Partial Class dlgPICSACrops
         Me.rdoBoth.Location = New System.Drawing.Point(195, 25)
         Me.rdoBoth.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoBoth.Name = "rdoBoth"
-        Me.rdoBoth.Size = New System.Drawing.Size(58, 17)
+        Me.rdoBoth.Size = New System.Drawing.Size(47, 17)
         Me.rdoBoth.TabIndex = 44
         Me.rdoBoth.TabStop = True
-        Me.rdoBoth.Text = "O Both"
+        Me.rdoBoth.Text = "Both"
         Me.rdoBoth.UseVisualStyleBackColor = True
         '
         'rdoNo
@@ -254,10 +254,10 @@ Partial Class dlgPICSACrops
         Me.rdoNo.Location = New System.Drawing.Point(137, 25)
         Me.rdoNo.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoNo.Name = "rdoNo"
-        Me.rdoNo.Size = New System.Drawing.Size(50, 17)
+        Me.rdoNo.Size = New System.Drawing.Size(39, 17)
         Me.rdoNo.TabIndex = 45
         Me.rdoNo.TabStop = True
-        Me.rdoNo.Text = "O No"
+        Me.rdoNo.Text = "No"
         Me.rdoNo.UseVisualStyleBackColor = True
         '
         'rdoYes
@@ -266,10 +266,10 @@ Partial Class dlgPICSACrops
         Me.rdoYes.Location = New System.Drawing.Point(13, 25)
         Me.rdoYes.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoYes.Name = "rdoYes"
-        Me.rdoYes.Size = New System.Drawing.Size(120, 17)
+        Me.rdoYes.Size = New System.Drawing.Size(109, 17)
         Me.rdoYes.TabIndex = 43
         Me.rdoYes.TabStop = True
-        Me.rdoYes.Text = "Include Start: O Yes"
+        Me.rdoYes.Text = "Include Start: Yes"
         Me.rdoYes.UseVisualStyleBackColor = True
         '
         'lblPlantingDays
