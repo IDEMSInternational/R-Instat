@@ -313,6 +313,12 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgClimsoft.Designer.vb">
+      <DependentUpon>sdgClimsoft.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimsoft.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgDefineAnnualRainfall.Designer.vb">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
     </Compile>
@@ -3374,6 +3380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimsoft.resx">
+      <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
