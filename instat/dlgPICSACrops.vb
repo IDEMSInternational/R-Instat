@@ -211,6 +211,7 @@ Public Class dlgPICSACrops
         ucrBase.clsRsyntax.SetBaseRFunction(clsCropsFunction)
         ucrBase.clsRsyntax.iCallType = 2
         TestOkEnabled()
+        AddingStartCheckParm()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -230,10 +231,13 @@ Public Class dlgPICSACrops
         ucrReceiverEnd.SetRCode(clsCropsFunction, bReset)
 
         ' Disabled as list validation not working correctly with reading/writing controls
-        ucrPnlStartCheck.SetRCode(clsDummyFunction, bReset)
         'ucrChkRequirePlantingDays.SetRCode(clsCropsFunction, bReset)
         ucrChkDataProp.SetRCode(clsCropsFunction, bReset)
         ucrChkPrintDataProp.SetRCode(clsCropsFunction, bReset)
+        If bReset Then
+            ucrPnlStartCheck.SetRCode(clsDummyFunction, bReset)
+        End If
+        AddingStartCheckParm()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -291,15 +295,16 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub ucrPnlStartCheck_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStartCheck.ControlValueChanged
+        AddingStartCheckParm()
+    End Sub
+
+    Private Sub AddingStartCheckParm()
         If rdoYes.Checked Then
             clsCropsFunction.AddParameter("start_check", Chr(34) & "yes" & Chr(34), iPosition:=10)
-            clsDummyFunction.AddParameter("check", "yes", iPosition:=0)
         ElseIf rdoNo.Checked Then
             clsCropsFunction.AddParameter("start_check", Chr(34) & "no" & Chr(34), iPosition:=10)
-            clsDummyFunction.AddParameter("check", "no", iPosition:=0)
         Else
             clsCropsFunction.AddParameter("start_check", Chr(34) & "both" & Chr(34), iPosition:=10)
-            clsDummyFunction.AddParameter("check", "both", iPosition:=0)
         End If
     End Sub
 
