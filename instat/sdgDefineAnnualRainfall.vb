@@ -55,6 +55,7 @@ Public Class sdgDefineAnnualRainfall
         Dim kvpMaxMaxTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("max_tmax_col", {"max_tmax", "max_tx", "max_tempmax", "max_tmp_max", "max_tmpmax"}.ToList())
 
 
+
         Dim kvpTotalRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("total_rain_col", {"rain_total"}.ToList())
         Dim kvpPlantDay As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_day_col", {"plant_day"}.ToList())
         Dim kvpPlantLength As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_length_col", {"plant_length"}.ToList())
@@ -69,6 +70,7 @@ Public Class sdgDefineAnnualRainfall
                                     kvpStartRainDOY, kvpStartRainStatus, kvpTotalRain})
 
         lstReceivers.AddRange({ucrReceiverAnnualRain, ucrReceiverEndRainsDate, ucrReceiverEndRainsDOY, ucrReceiverEndRainStatus, ucrReceiverEndSeasonDate, ucrReceiverEndSeasonDOY, ucrReceiverEndSeasonStatus, ucrReceiverMaxMaxAnnual, ucrReceiverMaxMaxMonthly, ucrReceiverMaxMinAnnual, ucrReceiverMaxMinMonthly, ucrReceiverMeanAnnual, ucrReceiverMeanMaxAnnual, ucrReceiverMeanmaxMonthly, ucrReceiverMeanminMontly, ucrReceiverMinMaxAnnual, ucrReceiverMinMaxMonthly, ucrReceiverMinMinAnnual, ucrReceiverMinMinMonthly, ucrReceiverPlantingDay, ucrReceiverPlantingDayCondition, ucrReceiverPlantingLenghth, ucrReceiverPropSuccess, ucrReceiverRainDaysSeason, ucrReceiverRainDaysYear, ucrReceiverSeasonalLength, ucrReceiverSeasonalRain, ucrReceiverSeasonPlantingDay, ucrReceiverStartRainDate, ucrReceiverStartRainDOY, ucrReceiverStartRainStatus, ucrReceiverTotalRain})
+
 
         ucrSelectorDefineAnnualRain.SetParameter(New RParameter("data", 0))
         ucrSelectorDefineAnnualRain.SetParameterIsrfunction()
@@ -455,7 +457,7 @@ Public Class sdgDefineAnnualRainfall
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorDefineAnnualRain.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Contains(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorDefineAnnualRain.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
@@ -488,7 +490,7 @@ Public Class sdgDefineAnnualRainfall
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorCropProp.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Contains(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorCropProp.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
