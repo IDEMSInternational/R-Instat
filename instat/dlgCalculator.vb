@@ -44,7 +44,7 @@ Public Class dlgCalculator
             SetDefaults()
             bFirstLoad = False
         End If
-        SetHelpOptions()
+        SetStructuredMenu()
         ReopenDialog()
         TestOKEnabled()
         autoTranslate(Me)
@@ -75,7 +75,7 @@ Public Class dlgCalculator
                                            bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
                                            bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
         ucrBase.Visible = True
-        SetHelpOptions()
+        SetStructuredMenu()
     End Sub
 
     Private Sub ReopenDialog()
@@ -261,10 +261,8 @@ Public Class dlgCalculator
         End If
     End Sub
 
-    Private Sub SetHelpOptions()
+    Private Sub SetStructuredMenu()
         Select Case enumCalculatorMode
-            Case CalculatorMode.Prepare
-                ucrBase.iHelpTopicID = 14
             Case CalculatorMode.Structured
                 ucrCalc.ucrInputCalOptions.SetName("Circular")
                 ucrBase.iHelpTopicID = 677
@@ -324,7 +322,7 @@ Public Class dlgCalculator
             Case "Symbols"
                 Me.Width = iBasicWidth * 2.56
             Case "Goodness of Fit"
-                Me.Width = iBasicWidth * 1.27
+                Me.Width = iBasicWidth * 1.25
                 ucrBase.iHelpTopicID = 717
             Case "Integer"
                 Me.Width = iBasicWidth * 1.5
