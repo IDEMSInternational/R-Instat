@@ -60,12 +60,12 @@ Public Class sdgDefineAnnualRainfall
         Dim kvpEndRainStatus As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("end_rains_status_column", {"end_rains_status"}.ToList())
         Dim kvpEndSeasonStatus As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("end_season_status_column", {"end_season_status"}.ToList())
 
-        Dim kvpMeanMinTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("mean_tmin_col", {"mean_tmin", "mean_tn", "mean_tempmin", "mean_tmp_min", "mean_tmpmin"}.ToList())
-        Dim kvpMinMinTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("min_tmin_col", {"min_tmin", "min_tn", "min_tempmin", "min_tmp_min", "min_tmpmin"}.ToList())
-        Dim kvpMaxMinTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("max_tmin_col", {"max_tmin", "max_tn", "max_tempmin", "max_tmp_min", "max_tmpmin"}.ToList())
-        Dim kvpMeanMaxTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("mean_tmax_col", {"mean_tmax", "mean_tx", "mean_tempmax", "mean_tmp_max", "mean_tmpmax"}.ToList())
-        Dim kvpMinMaxTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("min_tmax_col", {"min_tmax", "min_tx", "min_tempmax", "min_tmp_max", "min_tmpmax"}.ToList())
-        Dim kvpMaxMaxTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("max_tmax_col", {"max_tmax", "max_tx", "max_tempmax", "max_tmp_max", "max_tmpmax"}.ToList())
+        Dim kvpMeanMinTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("mean_tmin_col", {"mean_tmin", "mean_tn", "mean_tempmin", "mean_tmp_min", "mean_tmpmin", "mean_temperature_min", "mean_min_temperature"}.ToList())
+        Dim kvpMinMinTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("min_tmin_col", {"min_tmin", "min_tn", "min_tempmin", "min_tmp_min", "min_tmpmin", "min_temperature_min", "min_min_temperature"}.ToList())
+        Dim kvpMaxMinTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("max_tmin_col", {"max_tmin", "max_tn", "max_tempmin", "max_tmp_min", "max_tmpmin", "max_temperature_min", "max_min_temperature"}.ToList())
+        Dim kvpMeanMaxTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("mean_tmax_col", {"mean_tmax", "mean_tx", "mean_tempmax", "mean_tmp_max", "mean_tmpmax", "mean_temperature_max", "mean_max_temperature"}.ToList())
+        Dim kvpMinMaxTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("min_tmax_col", {"min_tmax", "min_tx", "min_tempmax", "min_tmp_max", "min_tmpmax", "min_temperature_max", "min_max_temperature"}.ToList())
+        Dim kvpMaxMaxTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("max_tmax_col", {"max_tmax", "max_tx", "max_tempmax", "max_tmp_max", "max_tmpmax", "max_temperature_max", "max_max_temperature"}.ToList())
 
 
         Dim kvpTotalRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("total_rain_col", {"rain_total"}.ToList())
