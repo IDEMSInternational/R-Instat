@@ -187,12 +187,16 @@ c_has_filter_label <- "has_filter"
 
 # This method is called recursively, and it would not be called by a user, another function would always handle the output and display
 # results to the user (usually only the $data part of the list)
-DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list, previous_manipulations = list()) {
-  
+DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list, previous_manipulations = list(), param_list = list()) {
+
+  # for our by calculation, read our drop parameter which is stored in param_list. This is read in
+  drop_value <- ifelse("drop" %in% names(param_list), param_list$drop, FALSE)
+  preserve_value <- ifelse("preserve" %in% names(param_list), param_list$preserve, FALSE)
+
   # apply each manipulation first, and recursively store the output and pass to the next manipulation
   # because of this, manipulations are dependant on each other
   for(manipulation in calc$manipulations) {
-    curr_data_list <- self$apply_instat_calculation(manipulation, curr_data_list, previous_manipulations)
+    curr_data_list <- self$apply_instat_calculation(manipulation, curr_data_list, previous_manipulations, param_list = param_list)
     previous_manipulations[[length(previous_manipulations) + 1]] <- manipulation
   }
   # If curr_data_list is not empty, (either an argument or from manipulations)
@@ -206,7 +210,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   first_sub_calc <- TRUE
   
   for(sub_calc in calc$sub_calculations) {
-    curr_sub_calc <- self$apply_instat_calculation(sub_calc, curr_data_list, previous_manipulations)
+    curr_sub_calc <- self$apply_instat_calculation(sub_calc, curr_data_list, previous_manipulations, param_list = param_list)
     if(first_sub_calc) {
       sub_calc_results <- curr_sub_calc
       first_sub_calc <- FALSE
@@ -366,11 +370,11 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   
   #TODO investigate better way to do this
   #     Any case where we don't want this?
+  # we want param_list to read into them all, not just "by", otherwise we lose our parameters here.
   for(var in curr_groups) {
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by(dplyr::across({{ var }}), .add = TRUE, .drop = FALSE)
-  }
-  
-  
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by(dplyr::across({{ var }}), .add = TRUE, .drop = drop_value)
+  }  
+
   # Names of the data frames required for the calculation
   data_names <- unique(as.vector(names(calc$calculated_from)))
   # If argument was missing and there were no manipulations or sub_calculations then it should be created.
@@ -452,7 +456,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   #TODO investigate better way to do this
   #     Any case where we don't want this?
   for(var in curr_groups) {
-   curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(dplyr::across({{ var }}), .add = TRUE, .drop = FALSE)
+   curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(dplyr::across({{ var }}), .add = TRUE, .drop = drop_value)
   }
         # The overall data is joined into the current sub calc, so the curr_data_list is "reset" to default values
         curr_data_list[[c_link_label]] <- list(from_data_frame = data_frame_name, link_cols = c())
@@ -530,10 +534,10 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   # This type is grouping the data
   # The data remains unchanged so link and require merge remain unchanged
   else if(calc$type == "by") {
-    # link unchanged
-       curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(dplyr::across({{ col_names_exp_2 }}), .add = TRUE, .drop = FALSE)
-    #curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by_(.dots = col_names_exp, add = TRUE, .drop = FALSE)
-  }
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(dplyr::across({{ col_names_exp_2 }}), .add = TRUE, .drop = drop_value)
+
+   #curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by_(.dots = col_names_exp, add = TRUE, .drop = FALSE)
+}
   # This type is sorting the data
    # The rows are now in a different order so a merge is required
   else if(calc$type == "sort") {
@@ -545,7 +549,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   # The data is at the same "level" so the link is unchanged
   # The rows are now different so a merge is required
   else if(calc$type == "filter") {
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::filter(!!rlang::parse_expr(calc$function_exp), .preserve = TRUE)
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::filter(!!rlang::parse_expr(calc$function_exp), .preserve = preserve_value)
     #curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::filter_(.dots = as.formula(paste0("~", calc$function_exp)))
     curr_data_list[[c_has_filter_label]] <- TRUE
   }
