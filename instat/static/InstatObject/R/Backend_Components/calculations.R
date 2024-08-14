@@ -188,7 +188,6 @@ c_has_filter_label <- "has_filter"
 # This method is called recursively, and it would not be called by a user, another function would always handle the output and display
 # results to the user (usually only the $data part of the list)
 DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list, previous_manipulations = list(), param_list = list()) {
-
   # for our by calculation, read our drop parameter which is stored in param_list. This is read in
   drop_value <- ifelse("drop" %in% names(param_list), param_list$drop, FALSE)
   preserve_value <- ifelse("preserve" %in% names(param_list), param_list$preserve, FALSE)
@@ -578,8 +577,9 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
 )
 
 # Call this to run a calculation and display the data
-DataBook$set("public", "run_instat_calculation", function(calc, display = TRUE) {
-  out <- self$apply_instat_calculation(calc)
+DataBook$set("public", "run_instat_calculation", function(calc, display = TRUE, param_list = list()) {
+    # param list has to be read in separately because of recursive nature of apply_instat_function. We want to ensure our param_list are in all calc()'s.
+  out <- self$apply_instat_calculation(calc, param_list = param_list)
   if(display) return(out$data)
 }
 )
