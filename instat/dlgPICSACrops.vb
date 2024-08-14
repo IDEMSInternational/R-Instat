@@ -231,7 +231,6 @@ Public Class dlgPICSACrops
         ucrReceiverEnd.SetRCode(clsCropsFunction, bReset)
 
         ' Disabled as list validation not working correctly with reading/writing controls
-        'ucrChkRequirePlantingDays.SetRCode(clsCropsFunction, bReset)
         ucrChkDataProp.SetRCode(clsCropsFunction, bReset)
         ucrChkPrintDataProp.SetRCode(clsCropsFunction, bReset)
         If bReset Then
@@ -268,6 +267,8 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub PlantingDaysParam()
+        Dim strPlantingDates As String = ucrInputPlantingDates.GetText
+
         If ucrInputPlantingDates.IsEmpty Then
             clsSequencePlantingFunction.RemoveParameterByName("plant")
             clsCropsFunction.RemoveParameterByName("plant_days")
@@ -281,15 +282,15 @@ Public Class dlgPICSACrops
 
                 If third < second Then
                     ' Assume a sequence and run the sequence function
-                    clsSequencePlantingFunction.AddParameter("plant", ucrInputPlantingDates.GetText(), iPosition:=5, bIncludeArgumentName:=False)
+                    clsSequencePlantingFunction.AddParameter("plant", strPlantingDates, iPosition:=5, bIncludeArgumentName:=False)
                     clsCropsFunction.AddParameter("plant_days", clsRFunctionParameter:=clsSequencePlantingFunction)
                 Else
                     ' List the values as provided
-                    clsCropsFunction.AddParameter("plant_days", "c(" & ucrInputPlantingDates.GetText() & ")", iPosition:=5)
+                    clsCropsFunction.AddParameter("plant_days", "c(" & strPlantingDates & ")", iPosition:=5)
                 End If
             Else
                 ' List the values as provided
-                clsCropsFunction.AddParameter("plant_days", "c(" & ucrInputPlantingDates.GetText() & ")", iPosition:=5)
+                clsCropsFunction.AddParameter("plant_days", "c(" & strPlantingDates & ")", iPosition:=5)
             End If
         End If
     End Sub
@@ -309,6 +310,7 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub ucrInputCropLengths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCropLengths.ControlValueChanged
+        Dim strCropLengths As String = ucrInputCropLengths.GetText
 
         If ucrInputCropLengths.IsEmpty Then
             clsSequenceFunction.RemoveParameterByName("plant")
@@ -323,15 +325,15 @@ Public Class dlgPICSACrops
 
                 If third < second Then
                     ' Assume a sequence and run the sequence function
-                    clsSequenceFunction.AddParameter("plant", ucrInputCropLengths.GetText(), iPosition:=5, bIncludeArgumentName:=False)
+                    clsSequenceFunction.AddParameter("plant", strCropLengths, iPosition:=5, bIncludeArgumentName:=False)
                     clsCropsFunction.AddParameter("plant_lengths", clsRFunctionParameter:=clsSequenceFunction)
                 Else
                     ' List the values as provided
-                    clsCropsFunction.AddParameter("plant_lengths", "c(" & ucrInputCropLengths.GetText() & ")", iPosition:=6)
+                    clsCropsFunction.AddParameter("plant_lengths", "c(" & strCropLengths & ")", iPosition:=6)
                 End If
             Else
                 ' List the values as provided
-                clsCropsFunction.AddParameter("plant_lengths", "c(" & ucrInputCropLengths.GetText() & ")", iPosition:=6)
+                clsCropsFunction.AddParameter("plant_lengths", "c(" & strCropLengths & ")", iPosition:=6)
             End If
         End If
     End Sub
@@ -341,6 +343,7 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub ucrInputWaterAmounts_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputWaterAmounts.ControlValueChanged
+        Dim strWaterAmounts As String = ucrInputWaterAmounts.GetText
 
         If ucrInputWaterAmounts.IsEmpty Then
             clsCropsFunction.RemoveParameterByName("rain_totals")
@@ -355,15 +358,15 @@ Public Class dlgPICSACrops
 
                 If third < second Then
                     ' Assume a sequence and run the sequence function
-                    clsSequencewaterFunction.AddParameter("totals", ucrInputWaterAmounts.GetText(), iPosition:=5, bIncludeArgumentName:=False)
+                    clsSequencewaterFunction.AddParameter("totals", strWaterAmounts, iPosition:=5, bIncludeArgumentName:=False)
                     clsCropsFunction.AddParameter("rain_totals", clsRFunctionParameter:=clsSequencewaterFunction)
                 Else
                     ' List the values as provided
-                    clsCropsFunction.AddParameter("rain_totals", "c(" & ucrInputWaterAmounts.GetText() & ")", iPosition:=7)
+                    clsCropsFunction.AddParameter("rain_totals", "c(" & strWaterAmounts & ")", iPosition:=7)
                 End If
             Else
                 ' List the values as provided
-                clsCropsFunction.AddParameter("rain_totals", "c(" & ucrInputWaterAmounts.GetText() & ")", iPosition:=7)
+                clsCropsFunction.AddParameter("rain_totals", "c(" & strWaterAmounts & ")", iPosition:=7)
             End If
         End If
     End Sub
