@@ -23,12 +23,25 @@ Public Class sdgDefineAnnualRainfall
     Public clsRsyntax As New RSyntax
     Public bControlsInitialised As Boolean = False
     Dim lstReceivers As New List(Of ucrReceiverSingle)
+    Dim lstReceiversCrop As New List(Of ucrReceiverSingle)
+    Dim lstReceiversMonthTemp As New List(Of ucrReceiverSingle)
+    Dim lstReceiversAnnualTemp As New List(Of ucrReceiverSingle)
+    Dim lstReceiversProp As New List(Of ucrReceiverSingle)
+
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Dim lstRecognisedCropTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Dim lstRecognisedPropTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Dim lstRecognisedAnnTempTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Dim lstRecognisedMonthTempTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
     Private Sub sdgDefineAnnualRainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         AutoFillReceivers()
         AutoFillReceiversCrop()
+        AutoFillReceiversForAnnualTemp()
+        AutoFillReceiversForMonthlyTemp()
+        AutoFillReceiversForSeasonsStart()
+
     End Sub
 
     Public Sub InitialiseControls()
@@ -55,22 +68,29 @@ Public Class sdgDefineAnnualRainfall
         Dim kvpMaxMaxTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("max_tmax_col", {"max_tmax", "max_tx", "max_tempmax", "max_tmp_max", "max_tmpmax"}.ToList())
 
 
-
         Dim kvpTotalRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("total_rain_col", {"rain_total"}.ToList())
         Dim kvpPlantDay As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_day_col", {"plant_day"}.ToList())
         Dim kvpPlantLength As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_length_col", {"plant_length"}.ToList())
         Dim kvpPropSuccess As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("prop_success_col", {"prop_success"}.ToList())
+        Dim kvpStationCrop As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("station", {"station", "id", "name"}.ToList())
 
         Dim kvpPlantingDay As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_day_col", {"plant_day"}.ToList())
         Dim kvpPlantDayCond As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_day_cond_col", {"plant_day_cond"}.ToList())
+        Dim kvpStationProb As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("station", {"station", "id", "name"}.ToList())
 
         lstRecognisedTypes.AddRange({kvpAnnualRain, kvpEndRainDate, kvpEndRainDOY, kvpEndRainStatus, kvpEndSeasonDate, kvpEndSeasonDOY, kvpEndSeasonStatus,
-                                    kvpMaxMaxTemp, kvpMaxMinTemp, kvpMeanMaxTemp, kvpMeanMinTemp, kvpMinMaxTemp, kvpMinMinTemp, kvpPlantDay, kvpPlantDayCond,
-                                    kvpPlantingDay, kvpPlantLength, kvpPropSuccess, kvpRainDaysSeason, kvpRainDaysYear, kvpSeasonalLength, kvpSeasonalRain, kvpStartRainDate,
-                                    kvpStartRainDOY, kvpStartRainStatus, kvpTotalRain})
+                                     kvpRainDaysSeason, kvpRainDaysYear, kvpSeasonalLength, kvpSeasonalRain, kvpStartRainDate,
+                                    kvpStartRainDOY, kvpStartRainStatus})
+        lstRecognisedCropTypes.AddRange({kvpTotalRain, kvpStationCrop, kvpPlantDay, kvpPlantLength, kvpPropSuccess})
+        lstRecognisedPropTypes.AddRange({kvpPlantingDay, kvpStationProb, kvpPlantDayCond})
+        lstRecognisedMonthTempTypes.AddRange({kvpMeanMinTemp, kvpMinMinTemp, kvpMaxMinTemp, kvpMeanMaxTemp, kvpMinMaxTemp, kvpMaxMaxTemp})
+        lstRecognisedAnnTempTypes.AddRange({kvpMeanMinTemp, kvpMinMinTemp, kvpMaxMinTemp, kvpMeanMaxTemp, kvpMinMaxTemp, kvpMaxMaxTemp})
 
-        lstReceivers.AddRange({ucrReceiverAnnualRain, ucrReceiverEndRainsDate, ucrReceiverEndRainsDOY, ucrReceiverEndRainStatus, ucrReceiverEndSeasonDate, ucrReceiverEndSeasonDOY, ucrReceiverEndSeasonStatus, ucrReceiverMaxMaxAnnual, ucrReceiverMaxMaxMonthly, ucrReceiverMaxMinAnnual, ucrReceiverMaxMinMonthly, ucrReceiverMeanAnnual, ucrReceiverMeanMaxAnnual, ucrReceiverMeanmaxMonthly, ucrReceiverMeanminMontly, ucrReceiverMinMaxAnnual, ucrReceiverMinMaxMonthly, ucrReceiverMinMinAnnual, ucrReceiverMinMinMonthly, ucrReceiverPlantingDay, ucrReceiverPlantingDayCondition, ucrReceiverPlantingLenghth, ucrReceiverPropSuccess, ucrReceiverRainDaysSeason, ucrReceiverRainDaysYear, ucrReceiverSeasonalLength, ucrReceiverSeasonalRain, ucrReceiverSeasonPlantingDay, ucrReceiverStartRainDate, ucrReceiverStartRainDOY, ucrReceiverStartRainStatus, ucrReceiverTotalRain})
-
+        lstReceivers.AddRange({ucrReceiverAnnualRain, ucrReceiverEndRainsDate, ucrReceiverEndRainsDOY, ucrReceiverEndRainStatus, ucrReceiverEndSeasonDate, ucrReceiverEndSeasonDOY, ucrReceiverEndSeasonStatus, ucrReceiverRainDaysSeason, ucrReceiverRainDaysYear, ucrReceiverSeasonalLength, ucrReceiverSeasonalRain, ucrReceiverStartRainDate, ucrReceiverStartRainDOY, ucrReceiverStartRainStatus})
+        lstReceiversAnnualTemp.AddRange({ucrReceiverMaxMaxAnnual, ucrReceiverMaxMaxMonthly, ucrReceiverMaxMinAnnual, ucrReceiverMaxMinMonthly, ucrReceiverMeanAnnual, ucrReceiverMeanMaxAnnual, ucrReceiverMeanmaxMonthly, ucrReceiverMeanminMontly, ucrReceiverMinMaxAnnual, ucrReceiverMinMaxMonthly, ucrReceiverMinMinAnnual, ucrReceiverMinMinMonthly})
+        lstReceiversMonthTemp.AddRange({ucrReceiverMaxMaxAnnual, ucrReceiverMaxMaxMonthly, ucrReceiverMaxMinAnnual, ucrReceiverMaxMinMonthly, ucrReceiverMeanAnnual, ucrReceiverMeanMaxAnnual, ucrReceiverMeanmaxMonthly, ucrReceiverMeanminMontly, ucrReceiverMinMaxAnnual, ucrReceiverMinMaxMonthly, ucrReceiverMinMinAnnual, ucrReceiverMinMinMonthly})
+        lstReceiversCrop.AddRange({ucrReceiverPlantingDay, ucrReceiverStationCrop, ucrReceiverPlantingLenghth, ucrReceiverPropSuccess, ucrReceiverTotalRain})
+        lstReceiversProp.AddRange({ucrReceiverPlantingDayCondition, ucrReceiverSeasonStationProb, ucrReceiverSeasonPlantingDay})
 
         ucrSelectorDefineAnnualRain.SetParameter(New RParameter("data", 0))
         ucrSelectorDefineAnnualRain.SetParameterIsrfunction()
@@ -188,8 +208,9 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverStationCrop.SetParameter(New RParameter("station_col", 1))
         ucrReceiverStationCrop.Selector = ucrSelectorCropProp
         ucrReceiverStationCrop.SetParameterIsString()
-        ucrReceiverStationCrop.SetClimaticType("station")
-        ucrReceiverStationCrop.bAutoFill = True
+        ucrReceiverStationCrop.Tag = "station"
+        'ucrReceiverStationCrop.SetClimaticType("station")
+        'ucrReceiverStationCrop.bAutoFill = True
         ucrReceiverStationCrop.bExcludeFromSelector = True
 
         ucrReceiverTotalRain.SetParameter(New RParameter("total_rain_col", 2))
@@ -220,8 +241,9 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverSeasonStationProb.SetParameter(New RParameter("station_col", 1))
         ucrReceiverSeasonStationProb.Selector = ucrSelectorSeasonStartProp
         ucrReceiverSeasonStationProb.SetParameterIsString()
-        ucrReceiverSeasonStationProb.SetClimaticType("station")
-        ucrReceiverSeasonStationProb.bAutoFill = True
+        ucrReceiverSeasonStationProb.Tag = "station"
+        'ucrReceiverSeasonStationProb.SetClimaticType("station")
+        'ucrReceiverSeasonStationProb.bAutoFill = True
         ucrReceiverSeasonStationProb.bExcludeFromSelector = True
 
         ucrReceiverSeasonYear.SetParameter(New RParameter("year_col", 2))
@@ -229,7 +251,6 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverSeasonYear.SetParameterIsString()
         ucrReceiverSeasonYear.SetClimaticType("year")
         ucrReceiverSeasonYear.bAutoFill = True
-        ucrReceiverSeasonYear.bExcludeFromSelector = True
 
         ucrReceiverSeasonPlantingDay.SetParameter(New RParameter("plant_day_col", 3))
         ucrReceiverSeasonPlantingDay.Selector = ucrSelectorSeasonStartProp
@@ -431,6 +452,9 @@ Public Class sdgDefineAnnualRainfall
         ucrSelecetorMonthlyTemp.SetRCode(clsReformatMonthlyTempSummaries, bReset)
         AutoFillReceivers()
         AutoFillReceiversCrop()
+        AutoFillReceiversForAnnualTemp()
+        AutoFillReceiversForMonthlyTemp()
+        AutoFillReceiversForSeasonsStart()
     End Sub
 
     Private Sub ucrReceiverAnnualRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRain.ControlValueChanged, ucrReceiverEndRainsDate.ControlValueChanged, ucrReceiverEndRainsDOY.ControlValueChanged, ucrReceiverEndSeasonDate.ControlValueChanged,
@@ -484,7 +508,6 @@ Public Class sdgDefineAnnualRainfall
         End If
     End Sub
 
-
     Private Sub AutoFillReceivers()
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver
@@ -525,9 +548,9 @@ Public Class sdgDefineAnnualRainfall
 
         ucrCurrentReceiver = ucrSelectorCropProp.CurrentReceiver
 
-        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+        For Each ucrTempReceiver As ucrReceiver In lstReceiversCrop
             ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+            lstRecognisedValues = GetRecognisedValuesCrop(ucrTempReceiver.Tag)
 
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorCropProp.lstAvailableVariable.Items
@@ -558,9 +581,9 @@ Public Class sdgDefineAnnualRainfall
 
         ucrCurrentReceiver = ucrSelectorSeasonStartProp.CurrentReceiver
 
-        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+        For Each ucrTempReceiver As ucrReceiver In lstReceiversProp
             ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+            lstRecognisedValues = GetRecognisedValuesProp(ucrTempReceiver.Tag)
 
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorSeasonStartProp.lstAvailableVariable.Items
@@ -591,9 +614,9 @@ Public Class sdgDefineAnnualRainfall
 
         ucrCurrentReceiver = ucrSelectorAnnualTemp.CurrentReceiver
 
-        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+        For Each ucrTempReceiver As ucrReceiver In lstReceiversAnnualTemp
             ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+            lstRecognisedValues = GetRecognisedValuesAnnTemp(ucrTempReceiver.Tag)
 
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorAnnualTemp.lstAvailableVariable.Items
@@ -624,9 +647,9 @@ Public Class sdgDefineAnnualRainfall
 
         ucrCurrentReceiver = ucrSelecetorMonthlyTemp.CurrentReceiver
 
-        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+        For Each ucrTempReceiver As ucrReceiver In lstReceiversMonthTemp
             ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+            lstRecognisedValues = GetRecognisedValuesMothTemp(ucrTempReceiver.Tag)
 
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelecetorMonthlyTemp.lstAvailableVariable.Items
@@ -662,11 +685,98 @@ Public Class sdgDefineAnnualRainfall
         Return lstValues
     End Function
 
-    Private Sub ucrSelecetorMonthlyTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelecetorMonthlyTemp.ControlValueChanged, ucrSelectorAnnualTemp.ControlValueChanged, ucrSelectorCropProp.ControlValueChanged, ucrSelectorDefineAnnualRain.ControlValueChanged, ucrSelectorSeasonStartProp.ControlValueChanged
-        AutoFillReceivers()
-        AutoFillReceiversCrop()
-        AutoFillReceiversForAnnualTemp()
+    Private Function GetRecognisedValuesCrop(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedCropTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
+
+    Private Function GetRecognisedValuesProp(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedPropTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
+
+    Private Function GetRecognisedValuesAnnTemp(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedAnnTempTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
+
+    Private Function GetRecognisedValuesMothTemp(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedMonthTempTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
+    Private Sub ucrSelecetorMonthlyTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelecetorMonthlyTemp.ControlValueChanged
         AutoFillReceiversForMonthlyTemp()
+    End Sub
+
+    Private Sub ucrSelectorAnnualTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorAnnualTemp.ControlValueChanged
+        AutoFillReceiversForAnnualTemp()
+    End Sub
+
+    Private Sub ucrSelectorCropProp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCropProp.ControlValueChanged
+        AutoFillReceiversCrop()
+    End Sub
+
+    Private Sub ucrSelectorDefineAnnualRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineAnnualRain.ControlValueChanged
+        AutoFillReceivers()
+    End Sub
+
+    Private Sub ucrSelectorSeasonStartProp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSeasonStartProp.ControlValueChanged
         AutoFillReceiversForSeasonsStart()
     End Sub
+
+    'Private Sub ucrSelectorAnnualTemp_DataFrameChanged() Handles ucrSelectorAnnualTemp.DataFrameChanged
+    '    AutoFillReceiversForAnnualTemp()
+    'End Sub
+
+    'Private Sub ucrSelectorCropProp_DataFrameChanged() Handles ucrSelectorCropProp.DataFrameChanged
+    '    AutoFillReceiversCrop()
+    'End Sub
+
+    'Private Sub ucrSelecetorMonthlyTemp_DataFrameChanged() Handles ucrSelecetorMonthlyTemp.DataFrameChanged
+    '    AutoFillReceiversForMonthlyTemp()
+    'End Sub
+
+    ''Private Sub ucrSelectorDefineAnnualRain_DataFrameChanged() Handles ucrSelectorDefineAnnualRain.DataFrameChanged
+    ''    AutoFillReceivers()
+    ''End Sub
+
+    'Private Sub ucrSelectorSeasonStartProp_DataFrameChanged() Handles ucrSelectorSeasonStartProp.DataFrameChanged
+    '    AutoFillReceiversForSeasonsStart()
+    'End Sub
+
+    'Private Sub ucrSelecetorMonthlyTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelecetorMonthlyTemp.ControlValueChanged, ucrSelectorAnnualTemp.ControlValueChanged, ucrSelectorCropProp.ControlValueChanged, ucrSelectorDefineAnnualRain.ControlValueChanged, ucrSelectorSeasonStartProp.ControlValueChanged
+    '    AutoFillReceivers()
+    '    AutoFillReceiversCrop()
+    '    AutoFillReceiversForAnnualTemp()
+    '    AutoFillReceiversForMonthlyTemp()
+    '    AutoFillReceiversForSeasonsStart()
+    'End Sub
 End Class

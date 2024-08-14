@@ -39,6 +39,7 @@ Public Class dlgExportClimaticDefinitions
         TestOkEnabled()
         autoTranslate(Me)
         DialogSize()
+        EnablingSubdialog()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -339,6 +340,7 @@ Public Class dlgExportClimaticDefinitions
         AddRemoveSummary()
         EnableDisableDefineButton()
         TestOkEnabled()
+        EnablingSubdialog()
     End Sub
 
     Private Sub ucrChkAnnualTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAnnualTemp.ControlValueChanged
@@ -350,6 +352,7 @@ Public Class dlgExportClimaticDefinitions
         AddRemoveSummary()
         EnableDisableDefineButton()
         TestOkEnabled()
+        EnablingSubdialog()
     End Sub
 
     Private Sub ucrChkCropSuccessProp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCropSuccessProp.ControlValueChanged
@@ -361,6 +364,7 @@ Public Class dlgExportClimaticDefinitions
         AddRemoveSummary()
         EnableDisableDefineButton()
         TestOkEnabled()
+        EnablingSubdialog()
     End Sub
 
     Private Sub ucrChkExtremes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExtremes.ControlValueChanged
@@ -371,6 +375,7 @@ Public Class dlgExportClimaticDefinitions
         End If
         AddRemoveSummary()
         EnableDisableDefineButton()
+        EnablingSubdialog()
     End Sub
 
     Private Sub ucrChkMonthlyTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMonthlyTemp.ControlValueChanged
@@ -382,6 +387,7 @@ Public Class dlgExportClimaticDefinitions
         AddRemoveSummary()
         EnableDisableDefineButton()
         TestOkEnabled()
+        EnablingSubdialog()
     End Sub
 
     Private Sub ucrChkSeasonStartProp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSeasonStartProp.ControlValueChanged
@@ -393,6 +399,7 @@ Public Class dlgExportClimaticDefinitions
         AddRemoveSummary()
         EnableDisableDefineButton()
         TestOkEnabled()
+        EnablingSubdialog()
     End Sub
 
     Private Sub ucrInputCountry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCountry.ControlValueChanged
@@ -463,6 +470,7 @@ Public Class dlgExportClimaticDefinitions
         EnableDisableDefineButton()
         DialogSize()
         TestOkEnabled()
+        EnablingSubdialog()
     End Sub
 
     Private Sub DialogSize()
@@ -493,5 +501,13 @@ Public Class dlgExportClimaticDefinitions
         Else
             clsUpdateMetadataInfoFunction.RemoveParameterByName("country")
         End If
+    End Sub
+
+    Private Sub EnablingSubdialog()
+        sdgDefineAnnualRainfall.tbAnnualRainfall.Enabled = ucrChkAnnualRainfall.Checked
+        sdgDefineAnnualRainfall.tbAnnualTempSummaries.Enabled = ucrChkAnnualTemp.Checked
+        sdgDefineAnnualRainfall.tbCropSuccessProp.Enabled = ucrChkCropSuccessProp.Checked
+        sdgDefineAnnualRainfall.tbMonthlyTemp.Enabled = ucrChkMonthlyTemp.Checked
+        sdgDefineAnnualRainfall.tbSeasonStartProb.Enabled = ucrChkSeasonStartProp.Checked
     End Sub
 End Class
