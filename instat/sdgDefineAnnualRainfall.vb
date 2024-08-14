@@ -18,7 +18,7 @@ Imports instat.Translations
 Imports System.Text.RegularExpressions
 Imports RDotNet
 Public Class sdgDefineAnnualRainfall
-
+    Private isFilling As Boolean = False
     Public clsReforMattAnnualSummariesFunction, clsExportRinstatToBucketFunction, clsReformatCropSuccessFunction, clsReformatSeasonStartFunction, clsReformatTempSummariesFunction, clsReformatMonthlyTempSummaries As New RFunction
     Public clsRsyntax As New RSyntax
     Public bControlsInitialised As Boolean = False
@@ -509,6 +509,14 @@ Public Class sdgDefineAnnualRainfall
     End Sub
 
     Private Sub AutoFillReceivers()
+        If isFilling Then
+            Exit Sub
+        End If
+        isFilling = True
+
+        ' Temporarily remove the event handler
+        RemoveHandler ucrSelectorDefineAnnualRain.ControlValueChanged, AddressOf AutoFillReceivers
+
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver
         Dim bFound As Boolean = False
@@ -539,9 +547,22 @@ Public Class sdgDefineAnnualRainfall
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
+
+        ' Re-enable the event handler
+        AddHandler ucrSelectorDefineAnnualRain.ControlValueChanged, AddressOf AutoFillReceivers
+
+        isFilling = False
     End Sub
 
     Private Sub AutoFillReceiversCrop()
+        If isFilling Then
+            Exit Sub
+        End If
+        isFilling = True
+
+        ' Temporarily remove the event handler
+        RemoveHandler ucrSelectorCropProp.ControlValueChanged, AddressOf AutoFillReceiversCrop
+
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver
         Dim bFound As Boolean = False
@@ -572,9 +593,22 @@ Public Class sdgDefineAnnualRainfall
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
+
+        ' Re-enable the event handler
+        AddHandler ucrSelectorCropProp.ControlValueChanged, AddressOf AutoFillReceiversCrop
+
+        isFilling = False
     End Sub
 
     Private Sub AutoFillReceiversForSeasonsStart()
+        If isFilling Then
+            Exit Sub
+        End If
+        isFilling = True
+
+        ' Temporarily remove the event handler
+        RemoveHandler ucrSelectorSeasonStartProp.ControlValueChanged, AddressOf AutoFillReceiversForSeasonsStart
+
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver
         Dim bFound As Boolean = False
@@ -605,9 +639,22 @@ Public Class sdgDefineAnnualRainfall
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
+
+        ' Re-enable the event handler
+        AddHandler ucrSelectorSeasonStartProp.ControlValueChanged, AddressOf AutoFillReceiversForSeasonsStart
+
+        isFilling = False
     End Sub
 
     Private Sub AutoFillReceiversForAnnualTemp()
+        If isFilling Then
+            Exit Sub
+        End If
+        isFilling = True
+
+        ' Temporarily remove the event handler
+        RemoveHandler ucrSelectorAnnualTemp.ControlValueChanged, AddressOf AutoFillReceiversForAnnualTemp
+
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver
         Dim bFound As Boolean = False
@@ -638,9 +685,23 @@ Public Class sdgDefineAnnualRainfall
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
+
+        ' Re-enable the event handler
+        AddHandler ucrSelectorAnnualTemp.ControlValueChanged, AddressOf AutoFillReceiversForAnnualTemp
+
+        isFilling = False
     End Sub
 
     Private Sub AutoFillReceiversForMonthlyTemp()
+        If isFilling Then
+            Exit Sub
+        End If
+        isFilling = True
+
+        Me.SuspendLayout()
+        ' Temporarily remove the event handler
+        RemoveHandler ucrSelecetorMonthlyTemp.ControlValueChanged, AddressOf AutoFillReceiversForMonthlyTemp
+
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver
         Dim bFound As Boolean = False
@@ -671,6 +732,13 @@ Public Class sdgDefineAnnualRainfall
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
+
+        ' Re-enable the event handler
+        AddHandler ucrSelecetorMonthlyTemp.ControlValueChanged, AddressOf AutoFillReceiversForMonthlyTemp
+
+        Me.ResumeLayout()
+
+        isFilling = False
     End Sub
 
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
@@ -752,31 +820,5 @@ Public Class sdgDefineAnnualRainfall
         AutoFillReceiversForSeasonsStart()
     End Sub
 
-    'Private Sub ucrSelectorAnnualTemp_DataFrameChanged() Handles ucrSelectorAnnualTemp.DataFrameChanged
-    '    AutoFillReceiversForAnnualTemp()
-    'End Sub
 
-    'Private Sub ucrSelectorCropProp_DataFrameChanged() Handles ucrSelectorCropProp.DataFrameChanged
-    '    AutoFillReceiversCrop()
-    'End Sub
-
-    'Private Sub ucrSelecetorMonthlyTemp_DataFrameChanged() Handles ucrSelecetorMonthlyTemp.DataFrameChanged
-    '    AutoFillReceiversForMonthlyTemp()
-    'End Sub
-
-    ''Private Sub ucrSelectorDefineAnnualRain_DataFrameChanged() Handles ucrSelectorDefineAnnualRain.DataFrameChanged
-    ''    AutoFillReceivers()
-    ''End Sub
-
-    'Private Sub ucrSelectorSeasonStartProp_DataFrameChanged() Handles ucrSelectorSeasonStartProp.DataFrameChanged
-    '    AutoFillReceiversForSeasonsStart()
-    'End Sub
-
-    'Private Sub ucrSelecetorMonthlyTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelecetorMonthlyTemp.ControlValueChanged, ucrSelectorAnnualTemp.ControlValueChanged, ucrSelectorCropProp.ControlValueChanged, ucrSelectorDefineAnnualRain.ControlValueChanged, ucrSelectorSeasonStartProp.ControlValueChanged
-    '    AutoFillReceivers()
-    '    AutoFillReceiversCrop()
-    '    AutoFillReceiversForAnnualTemp()
-    '    AutoFillReceiversForMonthlyTemp()
-    '    AutoFillReceiversForSeasonsStart()
-    'End Sub
 End Class
