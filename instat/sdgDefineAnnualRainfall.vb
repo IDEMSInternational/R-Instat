@@ -67,7 +67,6 @@ Public Class sdgDefineAnnualRainfall
         Dim kvpMinMaxTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("min_tmax_col", {"min_tmax", "min_tx", "min_tempmax", "min_tmp_max", "min_tmpmax", "min_temperature_max", "min_max_temperature"}.ToList())
         Dim kvpMaxMaxTemp As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("max_tmax_col", {"max_tmax", "max_tx", "max_tempmax", "max_tmp_max", "max_tmpmax", "max_temperature_max", "max_max_temperature"}.ToList())
 
-
         Dim kvpTotalRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("total_rain_col", {"rain_total"}.ToList())
         Dim kvpPlantDay As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_day_col", {"plant_day"}.ToList())
         Dim kvpPlantLength As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_length_col", {"plant_length"}.ToList())
@@ -819,6 +818,5 @@ Public Class sdgDefineAnnualRainfall
     Private Sub ucrSelectorSeasonStartProp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSeasonStartProp.ControlValueChanged
         AutoFillReceiversForSeasonsStart()
     End Sub
-
 
 End Class
