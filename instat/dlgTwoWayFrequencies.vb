@@ -48,7 +48,7 @@ Public Class dlgTwoWayFrequencies
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 415
+        ucrBase.iHelpTopicID = 289
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
