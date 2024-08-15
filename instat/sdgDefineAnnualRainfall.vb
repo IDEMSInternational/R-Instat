@@ -314,11 +314,16 @@ Public Class sdgDefineAnnualRainfall
             ucrReceiverEndSeasonDOY.ControlValueChanged, ucrReceiverRainDaysSeason.ControlValueChanged, ucrReceiverRainDaysYear.ControlValueChanged, ucrReceiverSeasonalLength.ControlValueChanged, ucrReceiverSeasonalRain.ControlValueChanged,
             ucrReceiverStartRainDate.ControlValueChanged, ucrReceiverStartRainDOY.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverYear.ControlValueChanged
 
-        If Not (ucrReceiverAnnualRain.IsEmpty AndAlso ucrReceiverEndRainsDate.IsEmpty AndAlso ucrReceiverEndRainsDOY.IsEmpty AndAlso ucrReceiverSeasonalLength.IsEmpty AndAlso ucrReceiverSeasonalRain.IsEmpty AndAlso
-            ucrReceiverEndSeasonDate.IsEmpty AndAlso ucrReceiverEndSeasonDOY.IsEmpty AndAlso ucrReceiverRainDaysSeason.IsEmpty AndAlso ucrReceiverRainDaysYear.IsEmpty AndAlso ucrReceiverStartRainDate.IsEmpty AndAlso
-           ucrReceiverStartRainDOY.IsEmpty AndAlso ucrReceiverStation.IsEmpty AndAlso ucrReceiverYear.IsEmpty) Then
-            clsExportRinstatToBucketFunction.AddParameter("annual_rainfall_data", clsRFunctionParameter:=clsReforMattAnnualSummariesFunction, iPosition:=1)
+        If dlgExportClimaticDefinitions.ucrChkAnnualRainfall.Checked Then
+            If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (Not ucrReceiverAnnualRain.IsEmpty OrElse Not ucrReceiverEndRainsDate.IsEmpty OrElse Not ucrReceiverEndRainsDOY.IsEmpty OrElse ucrReceiverSeasonalLength.IsEmpty OrElse Not ucrReceiverSeasonalRain.IsEmpty OrElse
+             Not ucrReceiverEndSeasonDate.IsEmpty OrElse Not ucrReceiverEndSeasonDOY.IsEmpty OrElse Not ucrReceiverRainDaysSeason.IsEmpty OrElse Not ucrReceiverRainDaysYear.IsEmpty OrElse Not ucrReceiverStartRainDate.IsEmpty OrElse
+             Not ucrReceiverStartRainDOY.IsEmpty) Then
 
+                clsExportRinstatToBucketFunction.AddParameter("annual_rainfall_data", clsRFunctionParameter:=clsReforMattAnnualSummariesFunction, iPosition:=1)
+
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("annual_rainfall_data")
+            End If
         Else
             clsExportRinstatToBucketFunction.RemoveParameterByName("annual_rainfall_data")
         End If
@@ -327,34 +332,51 @@ Public Class sdgDefineAnnualRainfall
     Private Sub ucrReceiverStationCrop_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStationCrop.ControlValueChanged, ucrReceiverTotalRain.ControlValueChanged, ucrReceiverPlantingDay.ControlValueChanged, ucrReceiverPlantingLenghth.ControlValueChanged,
             ucrReceiverPropSuccess.ControlValueChanged
 
-        If Not (ucrReceiverStationCrop.IsEmpty AndAlso ucrReceiverTotalRain.IsEmpty AndAlso ucrReceiverPlantingDay.IsEmpty AndAlso ucrReceiverPlantingLenghth.IsEmpty AndAlso ucrReceiverPropSuccess.IsEmpty) Then
-            clsExportRinstatToBucketFunction.AddParameter("crop_success_data", clsRFunctionParameter:=clsReformatCropSuccessFunction, iPosition:=9)
+        If dlgExportClimaticDefinitions.ucrChkCropSuccessProp.Checked Then
+
+            If Not ucrReceiverStationCrop.IsEmpty AndAlso (Not ucrReceiverTotalRain.IsEmpty OrElse Not ucrReceiverPlantingDay.IsEmpty OrElse Not ucrReceiverPlantingLenghth.IsEmpty OrElse Not ucrReceiverPropSuccess.IsEmpty) Then
+                clsExportRinstatToBucketFunction.AddParameter("crop_success_data", clsRFunctionParameter:=clsReformatCropSuccessFunction, iPosition:=9)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("crop_success_data")
+            End If
         Else
             clsExportRinstatToBucketFunction.RemoveParameterByName("crop_success_data")
         End If
     End Sub
 
     Private Sub ucrReceiverSeasonStationProb_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSeasonStationProb.ControlValueChanged, ucrReceiverSeasonPlantingDay.ControlValueChanged, ucrReceiverPlantingDayCondition.ControlValueChanged, ucrReceiverSeasonYear.ControlValueChanged
-
-        If Not (ucrReceiverSeasonStationProb.IsEmpty AndAlso ucrReceiverSeasonPlantingDay.IsEmpty AndAlso ucrReceiverPlantingDayCondition.IsEmpty AndAlso ucrReceiverSeasonYear.IsEmpty) Then
-            clsExportRinstatToBucketFunction.AddParameter("season_start_data", clsRFunctionParameter:=clsReformatSeasonStartFunction, iPosition:=10)
+        If dlgExportClimaticDefinitions.ucrChkSeasonStartProp.Checked Then
+            If Not ucrReceiverSeasonStationProb.IsEmpty AndAlso Not ucrReceiverSeasonYear.IsEmpty AndAlso (Not ucrReceiverSeasonPlantingDay.IsEmpty OrElse Not ucrReceiverPlantingDayCondition.IsEmpty) Then
+                clsExportRinstatToBucketFunction.AddParameter("season_start_data", clsRFunctionParameter:=clsReformatSeasonStartFunction, iPosition:=10)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("season_start_data")
+            End If
         Else
             clsExportRinstatToBucketFunction.RemoveParameterByName("season_start_data")
         End If
     End Sub
 
     Private Sub ucrReceiverAnnualTempStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualTempStation.ControlValueChanged, ucrReceiverAnnualTempYr.ControlValueChanged, ucrReceiverMaxMaxAnnual.ControlValueChanged, ucrReceiverMaxMinAnnual.ControlValueChanged, ucrReceiverMeanAnnual.ControlValueChanged, ucrReceiverMeanMaxAnnual.ControlValueChanged, ucrReceiverMinMaxAnnual.ControlValueChanged, ucrReceiverMinMinAnnual.ControlValueChanged
-        If Not (ucrReceiverAnnualTempStation.IsEmpty AndAlso ucrReceiverAnnualTempYr.IsEmpty AndAlso ucrReceiverMaxMaxAnnual.IsEmpty AndAlso
-                ucrReceiverMaxMinAnnual.IsEmpty AndAlso ucrReceiverMeanAnnual.IsEmpty AndAlso ucrReceiverMeanMaxAnnual.IsEmpty AndAlso ucrReceiverMinMaxAnnual.IsEmpty AndAlso ucrReceiverMinMinAnnual.IsEmpty) Then
-            clsExportRinstatToBucketFunction.AddParameter("annual_temperature_data", clsRFunctionParameter:=clsReformatTempSummariesFunction, iPosition:=11)
+
+        If dlgExportClimaticDefinitions.ucrChkAnnualTemp.Checked Then
+            If Not ucrReceiverAnnualTempStation.IsEmpty AndAlso Not ucrReceiverAnnualTempYr.IsEmpty AndAlso (Not ucrReceiverMaxMaxAnnual.IsEmpty OrElse
+                            Not ucrReceiverMaxMinAnnual.IsEmpty OrElse Not ucrReceiverMeanAnnual.IsEmpty OrElse Not ucrReceiverMeanMaxAnnual.IsEmpty OrElse Not ucrReceiverMinMaxAnnual.IsEmpty OrElse Not ucrReceiverMinMinAnnual.IsEmpty) Then
+                clsExportRinstatToBucketFunction.AddParameter("annual_temperature_data", clsRFunctionParameter:=clsReformatTempSummariesFunction, iPosition:=11)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("annual_temperature_data")
+            End If
         Else
             clsExportRinstatToBucketFunction.RemoveParameterByName("annual_temperature_data")
         End If
     End Sub
 
     Private Sub ucrReceiverMonthlyTemp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMonthlyTemp.ControlValueChanged, ucrReceiverYearMonthly.ControlValueChanged, ucrReceiverMonthMonthly.ControlValueChanged, ucrReceiverMeanmaxMonthly.ControlValueChanged, ucrReceiverMeanminMontly.ControlValueChanged, ucrReceiverMinMaxMonthly.ControlValueChanged, ucrReceiverMinMinMonthly.ControlValueChanged, ucrReceiverMaxMinMonthly.ControlValueChanged, ucrReceiverMaxMaxMonthly.ControlValueChanged
-        If Not (ucrReceiverMonthlyTemp.IsEmpty AndAlso ucrReceiverYearMonthly.IsEmpty AndAlso ucrReceiverMonthMonthly.IsEmpty AndAlso ucrReceiverMeanmaxMonthly.IsEmpty AndAlso ucrReceiverMeanminMontly.IsEmpty AndAlso ucrReceiverMinMaxMonthly.IsEmpty AndAlso ucrReceiverMinMinMonthly.IsEmpty AndAlso ucrReceiverMaxMinMonthly.IsEmpty AndAlso ucrReceiverMaxMaxMonthly.IsEmpty) Then
-            clsExportRinstatToBucketFunction.AddParameter("monthly_temperature_data", clsRFunctionParameter:=clsReformatMonthlyTempSummaries, iPosition:=18)
+        If dlgExportClimaticDefinitions.ucrChkMonthlyTemp.Checked Then
+            If Not ucrReceiverMonthlyTemp.IsEmpty AndAlso Not ucrReceiverYearMonthly.IsEmpty AndAlso Not ucrReceiverMonthMonthly.IsEmpty AndAlso (Not ucrReceiverMeanmaxMonthly.IsEmpty OrElse Not ucrReceiverMeanminMontly.IsEmpty OrElse Not ucrReceiverMinMaxMonthly.IsEmpty OrElse Not ucrReceiverMinMinMonthly.IsEmpty OrElse Not ucrReceiverMaxMinMonthly.IsEmpty OrElse Not ucrReceiverMaxMaxMonthly.IsEmpty) Then
+                clsExportRinstatToBucketFunction.AddParameter("monthly_temperature_data", clsRFunctionParameter:=clsReformatMonthlyTempSummaries, iPosition:=18)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("monthly_temperature_data")
+            End If
         Else
             clsExportRinstatToBucketFunction.RemoveParameterByName("monthly_temperature_data")
         End If
