@@ -265,7 +265,7 @@ Partial Class dlgClimograph
         '
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBarchartOptions, Me.toolStripMenuItemTmaxLineOptions, Me.toolStripMenuItemTminLineOptions, Me.toolStripMenuItemLayersOptionsOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 114)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 136)
         '
         'toolStripMenuItemPlotOptions
         '

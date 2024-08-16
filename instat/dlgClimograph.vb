@@ -583,15 +583,15 @@ Public Class dlgClimograph
         clsAesLineFunction.AddParameter("group", "1", iPosition:=1)
 
         clsAesLineStarFunction.SetRCommand("aes")
-        clsAesLineStarFunction.AddParameter("y", clsROperatorParameter:=clsStarOperator, iPosition:=0)
-        clsAesLineStarFunction.AddParameter("group", "1", iPosition:=1)
+        'clsAesLineStarFunction.AddParameter("y", clsROperatorParameter:=clsStarOperator, iPosition:=1)
+        clsAesLineStarFunction.AddParameter("group", "1", iPosition:=2)
 
         clsAesLine1Function.SetRCommand("aes")
         clsAesLine1Function.AddParameter("group", "1", iPosition:=1)
 
         clsAesLineStar1Function.SetRCommand("aes")
-        clsAesLineStar1Function.AddParameter("group", "1", iPosition:=1)
-        clsAesLineStar1Function.AddParameter("y", clsROperatorParameter:=clsStar1Operator, iPosition:=0)
+        clsAesLineStar1Function.AddParameter("group", "1", iPosition:=2)
+        clsAesLineStar1Function.AddParameter("y", clsROperatorParameter:=clsStar1Operator, iPosition:=1)
 
         clsSecondaryAxisFunction.SetRCommand("sec_axis")
         clsSecondaryAxisFunction.AddParameter("x", "~.*0.0393701", iPosition:=0, bIncludeArgumentName:=False)
@@ -848,6 +848,8 @@ Public Class dlgClimograph
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
+        ucrBase.clsRsyntax.ClearCodes()
+
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction, iPosition:=0)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction, iPosition:=0)
@@ -994,6 +996,46 @@ Public Class dlgClimograph
             End If
         Next
         TestOKEnabled()
+        AddRemoveGeomBar()
+    End Sub
+
+    Private Sub openSdgLayerOptionstmax(clsNewGeomFunc As RFunction, clsNewAesFunction As RFunction)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
+                                   clsNewGlobalAesFunc:=clsNewAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimograph,
+                                   bApplyAesGlobally:=False, bReset:=bResetLineLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetLineLayerSubdialog = False
+        'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
+        '  One then needs to display these modifications on the dlgScatteredPlot.
+
+        'The aesthetics parameters on the main dialog are repopulated as required.
+        For Each clsParam In clsNewAesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    ucrReceiverMonthC.Clear()
+                End If
+                'In the y case, the value stored in the clsReasFunction in the multiple variables 
+                '  case is "value", however that one shouldn't be written in the multiple 
+                '  variables receiver (otherwise it would stack all variables and the stack 
+                '  ("value") itself!).
+                'Warning: what if someone used the name value for one of it's variables 
+                '  independently from the multiple variables method? Here if the receiver is 
+                '  actually in single mode, the variable "value" will still be given back, which 
+                '  throws the problem back to the creation of "value" in the multiple receiver case.
+            ElseIf clsParam.strArgumentName = "y" AndAlso clsParam.strArgumentValue <> "value" Then
+                'Still might be in the case of bSingleVariable with mapping y="".
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    '    ucrReceiverElement1.Clear()
+                    'Else
+                    ucrReceiverElement1.Add(clsParam.strArgumentValue)
+                End If
+            End If
+        Next
+        TestOKEnabled()
+        'AddRemoveGeomLines()
+        'AddRemoveGeomBar()
+        'AddRemoveSecondaryAxis()
     End Sub
 
     Private Sub ucrInputFacet_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputFacet.ControlValueChanged
@@ -1296,10 +1338,6 @@ Public Class dlgClimograph
         AddRemoveTemBars()
     End Sub
 
-    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStation.ControlValueChanged
-
-    End Sub
-
     Private Sub GetParameterValue(clsOperator As ROperator)
         Dim i As Integer = 0
         For Each clsTempParam As RParameter In clsOperator.clsParameters
@@ -1475,10 +1513,13 @@ Public Class dlgClimograph
             If Not ucrReceiverElement1.IsEmpty Then
                 If Not ucrReceiverRainC.IsEmpty Then
                     clsStarOperator.AddParameter("left", ucrReceiverElement1.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                    clsAesLineStarFunction.AddParameter("x", ucrReceiverMonthC.GetVariableNames(False), iPosition:=0)
+                    clsAesLineStarFunction.AddParameter("y", clsROperatorParameter:=clsStarOperator, iPosition:=1)
                     clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineStarFunction, iPosition:=4)
                 Else
-                    clsAesLineFunction.AddParameter("y", ucrReceiverElement1.GetVariableNames(False), iPosition:=0)
-                    clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineFunction, iPosition:=4)
+                    clsAesLineStarFunction.AddParameter("x", ucrReceiverMonthC.GetVariableNames(False), iPosition:=0)
+                    clsAesLineStarFunction.AddParameter("y", ucrReceiverElement1.GetVariableNames(False), iPosition:=0)
+                    clsBaseOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineStarFunction, iPosition:=4)
                 End If
             Else
                 clsBaseOperator.RemoveParameterByName("geom_line")
@@ -1492,6 +1533,7 @@ Public Class dlgClimograph
         If rdoClimograph.Checked Then
             If Not ucrReceiverElement2.IsEmpty Then
                 If Not ucrReceiverRainC.IsEmpty Then
+                    clsAesLineStar1Function.AddParameter("x", ucrReceiverMonthC.GetVariableNames(False), iPosition:=0)
                     clsStar1Operator.AddParameter("left", ucrReceiverElement2.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
                     clsBaseOperator.AddParameter("geom_line1", clsRFunctionParameter:=clsGeomLineStar1Function, iPosition:=4)
                 Else
@@ -1627,6 +1669,8 @@ Public Class dlgClimograph
         End If
         AddRemoveGeomRibbon()
         AddRemoveGeomBar()
+        AddRemoveGeomLines()
+        AddRemoveGeomLine1()
     End Sub
 
     Private Sub ucrSelectorClimograph_DataFrameChanged() Handles ucrSelectorClimograph.DataFrameChanged
@@ -1655,10 +1699,29 @@ Public Class dlgClimograph
         sdgPlots.EnableLayersTab()
         bResetSubdialog = False
         AddRemoveSecondaryAxis()
+        'AddRemoveGeomLines()
+        'AddRemoveGeomBar()
     End Sub
 
     Private Sub toolStripMenuItemBarchartOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBarchartOptions.Click
         openSdgLayerOptions(clsGeomBarFunction)
+    End Sub
+
+    'Private Sub toolStripMenuItemTminLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTminLineOptions.Click
+    '    If Not ucrReceiverRainC.IsEmpty Then
+    '        openSdgLayerOptions(clsGeomLineStar1Function, clsAesLineStar1Function)
+    '    Else
+    '        openSdgLayerOptions(clsGeomLineFunction1, clsAesLine1Function)
+    '    End If
+    'End Sub
+
+    Private Sub toolStripMenuItemTmaxLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTmaxLineOptions.Click
+        openSdgLayerOptionstmax(clsGeomLineStarFunction, clsAesLineStarFunction)
+        'If Not ucrReceiverRainC.IsEmpty Then
+        'clsStarOperator.AddParameter("left", ucrReceiverElement1.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+        'clsAesLineStarFunction.AddParameter("y", clsROperatorParameter:=clsStarOperator, iPosition:=1)
+
+        AddRemoveGeomLines()
     End Sub
 
     Private Sub ucrChkText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkText.ControlValueChanged
