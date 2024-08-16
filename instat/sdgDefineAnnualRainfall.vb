@@ -129,7 +129,7 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverStartRainDate.SetParameter(New RParameter("start_rains_date_col", 4))
         ucrReceiverStartRainDate.Selector = ucrSelectorDefineAnnualRain
         ucrReceiverStartRainDate.SetParameterIsString()
-        ucrReceiverStartRainDate.Tag = "end_rains_doy_col"
+        ucrReceiverStartRainDate.Tag = "start_rains_date_col"
         ucrReceiverStartRainDate.bExcludeFromSelector = True
 
         ucrReceiverEndRainsDOY.SetParameter(New RParameter("end_rains_doy_col", 5))
