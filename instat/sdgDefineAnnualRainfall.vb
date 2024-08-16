@@ -76,12 +76,13 @@ Public Class sdgDefineAnnualRainfall
         Dim kvpPlantingDay As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_day_col", {"plant_day"}.ToList())
         Dim kvpPlantDayCond As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_day_cond_col", {"plant_day_cond"}.ToList())
         Dim kvpStationProb As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("station", {"station", "id", "name"}.ToList())
+        Dim kvpYear As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("year", {"year", "s_year"}.ToList())
 
         lstRecognisedTypes.AddRange({kvpAnnualRain, kvpEndRainDate, kvpEndRainDOY, kvpEndRainStatus, kvpEndSeasonDate, kvpEndSeasonDOY, kvpEndSeasonStatus,
                                      kvpRainDaysSeason, kvpRainDaysYear, kvpSeasonalLength, kvpSeasonalRain, kvpStartRainDate,
                                     kvpStartRainDOY, kvpStartRainStatus})
         lstRecognisedCropTypes.AddRange({kvpTotalRain, kvpStationCrop, kvpPlantDay, kvpPlantLength, kvpPropSuccess})
-        lstRecognisedPropTypes.AddRange({kvpPlantingDay, kvpStationProb, kvpPlantDayCond})
+        lstRecognisedPropTypes.AddRange({kvpPlantingDay, kvpYear, kvpStationProb, kvpPlantDayCond})
         lstRecognisedMonthTempTypes.AddRange({kvpMeanMinTemp, kvpMinMinTemp, kvpMaxMinTemp, kvpMeanMaxTemp, kvpMinMaxTemp, kvpMaxMaxTemp})
         lstRecognisedAnnTempTypes.AddRange({kvpMeanMinTemp, kvpMinMinTemp, kvpMaxMinTemp, kvpMeanMaxTemp, kvpMinMaxTemp, kvpMaxMaxTemp})
 
@@ -89,7 +90,7 @@ Public Class sdgDefineAnnualRainfall
         lstReceiversAnnualTemp.AddRange({ucrReceiverMaxMaxAnnual, ucrReceiverMaxMaxMonthly, ucrReceiverMaxMinAnnual, ucrReceiverMaxMinMonthly, ucrReceiverMeanAnnual, ucrReceiverMeanMaxAnnual, ucrReceiverMeanmaxMonthly, ucrReceiverMeanminMontly, ucrReceiverMinMaxAnnual, ucrReceiverMinMaxMonthly, ucrReceiverMinMinAnnual, ucrReceiverMinMinMonthly})
         lstReceiversMonthTemp.AddRange({ucrReceiverMaxMaxAnnual, ucrReceiverMaxMaxMonthly, ucrReceiverMaxMinAnnual, ucrReceiverMaxMinMonthly, ucrReceiverMeanAnnual, ucrReceiverMeanMaxAnnual, ucrReceiverMeanmaxMonthly, ucrReceiverMeanminMontly, ucrReceiverMinMaxAnnual, ucrReceiverMinMaxMonthly, ucrReceiverMinMinAnnual, ucrReceiverMinMinMonthly})
         lstReceiversCrop.AddRange({ucrReceiverPlantingDay, ucrReceiverStationCrop, ucrReceiverPlantingLenghth, ucrReceiverPropSuccess, ucrReceiverTotalRain})
-        lstReceiversProp.AddRange({ucrReceiverPlantingDayCondition, ucrReceiverSeasonStationProb, ucrReceiverSeasonPlantingDay})
+        lstReceiversProp.AddRange({ucrReceiverPlantingDayCondition, ucrReceiverSeasonYear, ucrReceiverSeasonStationProb, ucrReceiverSeasonPlantingDay})
 
         ucrSelectorDefineAnnualRain.SetParameter(New RParameter("data", 0))
         ucrSelectorDefineAnnualRain.SetParameterIsrfunction()
@@ -244,8 +245,7 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverSeasonYear.SetParameter(New RParameter("year_col", 2))
         ucrReceiverSeasonYear.Selector = ucrSelectorSeasonStartProp
         ucrReceiverSeasonYear.SetParameterIsString()
-        ucrReceiverSeasonYear.SetClimaticType("year")
-        ucrReceiverSeasonYear.bAutoFill = True
+        ucrReceiverSeasonYear.Tag = "year"
         ucrReceiverSeasonYear.bExcludeFromSelector = True
 
         ucrReceiverSeasonPlantingDay.SetParameter(New RParameter("plant_day_col", 3))
