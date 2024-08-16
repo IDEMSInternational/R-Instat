@@ -646,7 +646,7 @@ Partial Class dlgExportClimaticDefinitions
         Me.MinimizeBox = False
         Me.Name = "dlgExportClimaticDefinitions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Export Climatic Definitions"
+        Me.Text = "Export to Google Buckets"
         Me.grpSummaries.ResumeLayout(False)
         Me.grpSummaries.PerformLayout()
         Me.ResumeLayout(False)
