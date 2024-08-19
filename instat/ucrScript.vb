@@ -144,6 +144,120 @@ Public Class ucrScript
         End If
     End Sub
 
+    Public Sub ReformatText()
+        Dim fullText As String
+        Dim selectedText As String
+        Dim formattedText As String
+        Dim startPos As Long
+        Dim endPos As Long
+
+
+        If clsScriptActive.SelectedText.Length > 0 Then
+            selectedText = clsScriptActive.SelectedText
+
+            formattedText = FormatCode(selectedText)
+
+            startPos = clsScriptActive.SelectionStart
+            endPos = startPos + Len(selectedText)
+
+            fullText = clsScriptActive.Text
+
+            ' Replace the selected text with the formatted text
+            clsScriptActive.Text = GetTextBefore(fullText, startPos) & formattedText & GetTextAfter(fullText, endPos)
+
+            ' Optionally, you can call the Copy function if needed
+            clsScriptActive.Copy()
+
+            EnableDisableButtons()
+        End If
+    End Sub
+
+    Private Function FormatCode(ByVal code As String) As String
+        ' This function will format the input code string
+        Dim lines() As String
+        Dim formattedLines() As String
+        Dim i As Integer
+        Dim indentLevel As Integer
+        Dim formattedLine As String
+        Dim inAssignment As Boolean
+        Dim assignmentPos As Long
+
+        ' Split the code into lines
+        lines = Split(code, vbCrLf)
+        ReDim formattedLines(0 To UBound(lines))
+
+        ' Initialize the indentation level
+        indentLevel = 0
+        inAssignment = False
+
+        ' Loop through each line and apply formatting rules
+        For i = LBound(lines) To UBound(lines)
+            ' Trim whitespace from the line
+            formattedLine = Trim(lines(i))
+
+            ' Check for assignment lines
+            assignmentPos = InStr(formattedLine, "<-")
+            If assignmentPos > 0 Then
+                ' For R-style assignments
+                formattedLine = Trim(Mid(formattedLine, 1, assignmentPos - 1)) & " <- " & Trim(Mid(formattedLine, assignmentPos + 2))
+                formattedLines(i) = Space(indentLevel * 4) & formattedLine
+                inAssignment = True
+            ElseIf InStr(formattedLine, "=") > 0 Then
+                ' For equals assignments
+                assignmentPos = InStr(formattedLine, "=")
+                formattedLine = Trim(Mid(formattedLine, 1, assignmentPos - 1)) & " = " & Trim(Mid(formattedLine, assignmentPos + 1))
+                formattedLines(i) = Space(indentLevel * 4) & formattedLine
+            ElseIf inAssignment Then
+                ' If we are in an assignment, indent the next lines further
+                formattedLines(i) = Space((indentLevel + 1) * 4) & formattedLine
+
+                ' Check if the line ends with a comma to continue the assignment
+                If Len(formattedLine) > 0 And Len(formattedLine) >= 1 Then
+                    If Mid(formattedLine, Len(formattedLine), 1) <> "," Then
+                        inAssignment = False
+                    End If
+                End If
+
+            Else
+                ' Regular lines, format spaces around the assignment operator and commas
+                formattedLine = Replace(formattedLine, "=", " = ")
+                formattedLine = Replace(formattedLine, "<-", " <- ")
+                formattedLine = Replace(formattedLine, ",", " , ")
+                formattedLines(i) = Space(indentLevel * 4) & formattedLine
+            End If
+
+            ' Align the assignment operators for nested function calls
+            If InStr(formattedLine, "data.frame") > 0 Then
+                formattedLines(i) = Space(indentLevel * 4) & formattedLine
+                indentLevel = indentLevel + 1
+            End If
+        Next i
+
+        ' Join the formatted lines back into a single string
+        FormatCode = Join(formattedLines, vbCrLf)
+    End Function
+
+
+
+    Private Function GetTextBefore(ByVal text As String, ByVal position As Long) As String
+        ' Returns the text before the specified position
+        If position > 0 Then
+            GetTextBefore = Mid(text, 1, position)
+        Else
+            GetTextBefore = ""
+        End If
+    End Function
+
+    Private Function GetTextAfter(ByVal text As String, ByVal position As Long) As String
+        ' Returns the text after the specified position
+        If position < Len(text) Then
+            GetTextAfter = Mid(text, position + 1)
+        Else
+            GetTextAfter = ""
+        End If
+    End Function
+
+
     ''' <summary>
     ''' If script tab is already selected, then returns True.
     ''' If log tab is selected and there is only one script tab, then selects script tab and 
@@ -854,6 +968,10 @@ Public Class ucrScript
 
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
         CopyText()
+    End Sub
+
+    Private Sub mnuReformat_Click(sender As Object, e As EventArgs) Handles mnuReformat.Click
+        ReformatText()
     End Sub
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
