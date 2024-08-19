@@ -547,7 +547,7 @@ Public Class sdgDefineAnnualRainfall
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorDefineAnnualRain.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Contains(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorDefineAnnualRain.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
@@ -593,7 +593,7 @@ Public Class sdgDefineAnnualRainfall
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorCropProp.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Contains(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorCropProp.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
@@ -639,7 +639,7 @@ Public Class sdgDefineAnnualRainfall
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorSeasonStartProp.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Contains(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorSeasonStartProp.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
@@ -685,7 +685,7 @@ Public Class sdgDefineAnnualRainfall
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorAnnualTemp.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Contains(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorAnnualTemp.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
@@ -732,7 +732,7 @@ Public Class sdgDefineAnnualRainfall
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelecetorMonthlyTemp.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Contains(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelecetorMonthlyTemp.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
