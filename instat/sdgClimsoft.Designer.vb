@@ -28,6 +28,10 @@ Partial Class sdgClimsoft
         Me.ucrChkImportStationsMetadata = New instat.ucrCheck()
         Me.tbColumns = New System.Windows.Forms.TabPage()
         Me.grpColumnsToInclude = New System.Windows.Forms.GroupBox()
+        Me.ucrChkIncludeElementName = New instat.ucrCheck()
+        Me.ucrChkIncludeDateTime = New instat.ucrCheck()
+        Me.ucrChkIncludeElementId = New instat.ucrCheck()
+        Me.ucrChkIncludeStationId = New instat.ucrCheck()
         Me.ucrChkIncludeQCLog = New instat.ucrCheck()
         Me.ucrChkIncludeCapturedBy = New instat.ucrCheck()
         Me.ucrChkIncludeQCStatus = New instat.ucrCheck()
@@ -39,10 +43,6 @@ Partial Class sdgClimsoft
         Me.ucrChkIncludeFlag = New instat.ucrCheck()
         Me.tbpMoreOptions = New System.Windows.Forms.TabControl()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkIncludeElementId = New instat.ucrCheck()
-        Me.ucrChkIncludeStationId = New instat.ucrCheck()
-        Me.ucrChkIncludeDateTime = New instat.ucrCheck()
-        Me.ucrChkIncludeElementName = New instat.ucrCheck()
         Me.tbpTitles.SuspendLayout()
         Me.grpMetadataToImport.SuspendLayout()
         Me.tbColumns.SuspendLayout()
@@ -56,7 +56,7 @@ Partial Class sdgClimsoft
         Me.tbpTitles.Location = New System.Drawing.Point(4, 22)
         Me.tbpTitles.Name = "tbpTitles"
         Me.tbpTitles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTitles.Size = New System.Drawing.Size(409, 303)
+        Me.tbpTitles.Size = New System.Drawing.Size(409, 367)
         Me.tbpTitles.TabIndex = 2
         Me.tbpTitles.Tag = ""
         Me.tbpTitles.Text = "Metadata"
@@ -125,6 +125,42 @@ Partial Class sdgClimsoft
         Me.grpColumnsToInclude.TabStop = False
         Me.grpColumnsToInclude.Text = "Columns to Include"
         '
+        'ucrChkIncludeElementName
+        '
+        Me.ucrChkIncludeElementName.AutoSize = True
+        Me.ucrChkIncludeElementName.Checked = False
+        Me.ucrChkIncludeElementName.Location = New System.Drawing.Point(7, 141)
+        Me.ucrChkIncludeElementName.Name = "ucrChkIncludeElementName"
+        Me.ucrChkIncludeElementName.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeElementName.TabIndex = 25
+        '
+        'ucrChkIncludeDateTime
+        '
+        Me.ucrChkIncludeDateTime.AutoSize = True
+        Me.ucrChkIncludeDateTime.Checked = True
+        Me.ucrChkIncludeDateTime.Location = New System.Drawing.Point(7, 89)
+        Me.ucrChkIncludeDateTime.Name = "ucrChkIncludeDateTime"
+        Me.ucrChkIncludeDateTime.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeDateTime.TabIndex = 24
+        '
+        'ucrChkIncludeElementId
+        '
+        Me.ucrChkIncludeElementId.AutoSize = True
+        Me.ucrChkIncludeElementId.Checked = False
+        Me.ucrChkIncludeElementId.Location = New System.Drawing.Point(7, 116)
+        Me.ucrChkIncludeElementId.Name = "ucrChkIncludeElementId"
+        Me.ucrChkIncludeElementId.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeElementId.TabIndex = 23
+        '
+        'ucrChkIncludeStationId
+        '
+        Me.ucrChkIncludeStationId.AutoSize = True
+        Me.ucrChkIncludeStationId.Checked = True
+        Me.ucrChkIncludeStationId.Location = New System.Drawing.Point(7, 19)
+        Me.ucrChkIncludeStationId.Name = "ucrChkIncludeStationId"
+        Me.ucrChkIncludeStationId.Size = New System.Drawing.Size(295, 23)
+        Me.ucrChkIncludeStationId.TabIndex = 22
+        '
         'ucrChkIncludeQCLog
         '
         Me.ucrChkIncludeQCLog.AutoSize = True
@@ -165,7 +201,7 @@ Partial Class sdgClimsoft
         '
         Me.ucrChkIncludeElementAbbrv.AutoSize = True
         Me.ucrChkIncludeElementAbbrv.Checked = True
-        Me.ucrChkIncludeElementAbbrv.Location = New System.Drawing.Point(6, 42)
+        Me.ucrChkIncludeElementAbbrv.Location = New System.Drawing.Point(6, 65)
         Me.ucrChkIncludeElementAbbrv.Name = "ucrChkIncludeElementAbbrv"
         Me.ucrChkIncludeElementAbbrv.Size = New System.Drawing.Size(295, 23)
         Me.ucrChkIncludeElementAbbrv.TabIndex = 18
@@ -174,7 +210,7 @@ Partial Class sdgClimsoft
         '
         Me.ucrChkIncludeStationName.AutoSize = True
         Me.ucrChkIncludeStationName.Checked = True
-        Me.ucrChkIncludeStationName.Location = New System.Drawing.Point(6, 20)
+        Me.ucrChkIncludeStationName.Location = New System.Drawing.Point(6, 43)
         Me.ucrChkIncludeStationName.Name = "ucrChkIncludeStationName"
         Me.ucrChkIncludeStationName.Size = New System.Drawing.Size(295, 23)
         Me.ucrChkIncludeStationName.TabIndex = 17
@@ -223,42 +259,6 @@ Partial Class sdgClimsoft
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(224, 29)
         Me.ucrBaseSubdialog.TabIndex = 3
-        '
-        'ucrChkIncludeElementId
-        '
-        Me.ucrChkIncludeElementId.AutoSize = True
-        Me.ucrChkIncludeElementId.Checked = False
-        Me.ucrChkIncludeElementId.Location = New System.Drawing.Point(7, 116)
-        Me.ucrChkIncludeElementId.Name = "ucrChkIncludeElementId"
-        Me.ucrChkIncludeElementId.Size = New System.Drawing.Size(295, 23)
-        Me.ucrChkIncludeElementId.TabIndex = 23
-        '
-        'ucrChkIncludeStationId
-        '
-        Me.ucrChkIncludeStationId.AutoSize = True
-        Me.ucrChkIncludeStationId.Checked = False
-        Me.ucrChkIncludeStationId.Location = New System.Drawing.Point(7, 92)
-        Me.ucrChkIncludeStationId.Name = "ucrChkIncludeStationId"
-        Me.ucrChkIncludeStationId.Size = New System.Drawing.Size(295, 23)
-        Me.ucrChkIncludeStationId.TabIndex = 22
-        '
-        'ucrChkIncludeDateTime
-        '
-        Me.ucrChkIncludeDateTime.AutoSize = True
-        Me.ucrChkIncludeDateTime.Checked = True
-        Me.ucrChkIncludeDateTime.Location = New System.Drawing.Point(7, 66)
-        Me.ucrChkIncludeDateTime.Name = "ucrChkIncludeDateTime"
-        Me.ucrChkIncludeDateTime.Size = New System.Drawing.Size(295, 23)
-        Me.ucrChkIncludeDateTime.TabIndex = 24
-        '
-        'ucrChkIncludeElementName
-        '
-        Me.ucrChkIncludeElementName.AutoSize = True
-        Me.ucrChkIncludeElementName.Checked = False
-        Me.ucrChkIncludeElementName.Location = New System.Drawing.Point(7, 141)
-        Me.ucrChkIncludeElementName.Name = "ucrChkIncludeElementName"
-        Me.ucrChkIncludeElementName.Size = New System.Drawing.Size(295, 23)
-        Me.ucrChkIncludeElementName.TabIndex = 25
         '
         'sdgClimsoft
         '

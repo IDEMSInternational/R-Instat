@@ -30,6 +30,9 @@ Public Class sdgClimsoft
 
         'Columns to include
         '---------------------------------------
+        ucrChkIncludeStationId.SetText("Station Id")
+        ucrChkIncludeStationId.Enabled = False
+
         ucrChkIncludeStationName.SetText("Station Name")
         ucrChkIncludeStationName.Enabled = False
 
@@ -38,10 +41,6 @@ Public Class sdgClimsoft
 
         ucrChkIncludeDateTime.SetText("Date Time")
         ucrChkIncludeDateTime.Enabled = False
-
-        ucrChkIncludeStationId.SetText("Station Id")
-        ucrChkIncludeStationId.SetParameter(New RParameter("include_station_id", 13))
-        ucrChkIncludeStationId.SetRDefault("FALSE")
 
         ucrChkIncludeElementId.SetText("Element Id")
         ucrChkIncludeElementId.SetParameter(New RParameter("include_element_id", 14))
@@ -102,7 +101,6 @@ Public Class sdgClimsoft
 
         'Columns
         '---------------------------------------
-        ucrChkIncludeStationId.SetRCode(clsRFunction, bReset)
         ucrChkIncludeElementId.SetRCode(clsRFunction, bReset)
         ucrChkIncludeElementName.SetRCode(clsRFunction, bReset)
         ucrChkIncludeAquistion.SetRCode(clsRFunction, bReset)

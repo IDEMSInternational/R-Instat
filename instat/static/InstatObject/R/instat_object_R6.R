@@ -1881,40 +1881,38 @@ DataBook$set("public", "import_climsoft_metadata", function(import_stations = FA
   data_list <- list()
   
   if(import_stations){
-    stations_metadata_name <- next_default_item("stations_metadata", self$get_data_names(), include_index = FALSE)
-    #todo.(22/03/2023) 2 fields have been intentionally left out because they are yet to be released to Climsoft users. Namely; wsi and gtsWSI
-    #include them once the new Climsoft release has been supplied to users
-    data_list[[stations_metadata_name]] <- DBI::dbGetQuery(con, "SELECT stationId AS station_id, stationName AS station_name, wmoid, icaoid, latitude, longitude, elevation, qualifier, geoLocationMethod AS geo_location_method, geoLocationAccuracy AS geo_location_accuracy, openingDatetime AS opening_date_time, closingDatetime AS closing_date_time, authority, adminRegion AS admin_region, drainageBasin AS drainage_basin, wacaSelection AS waca_selection, cptSelection AS cpt_selection, stationOperational AS station_Operational, country AS country FROM station;")
-  }
-  
-  if(import_elements){
-    elements_metadata_name <- next_default_item("elements_metadata", self$get_data_names(), include_index = FALSE)
-    data_list[[elements_metadata_name]] <- DBI::dbGetQuery(con, "SELECT elementId AS element_id, elementName AS element_name, abbreviation, description, elementtype AS element_type, upperLimit AS upper_limit , lowerLimit AS lower_limit, units FROM obselement;")
-  }
-  
-  if(import_flags){
-    flags_metadata_name <- next_default_item("flags_metadata", self$get_data_names(), include_index = FALSE)
-    data_list[[flags_metadata_name]] <- DBI::dbGetQuery(con, "SELECT characterSymbol AS flag_name, description FROM flags;")
+    # TODO.(22/03/2023) 2 fields have been intentionally left out because they are yet to be released to Climsoft users. Namely; wsi and gtsWSI
+    # include them once the new Climsoft release has been supplied to users
+    stations_df <- DBI::dbGetQuery(con, "SELECT stationId AS station_id, stationName AS station_name, wmoid, icaoid, latitude, longitude, elevation, qualifier, geoLocationMethod AS geo_location_method, geoLocationAccuracy AS geo_location_accuracy, openingDatetime AS opening_date_time, closingDatetime AS closing_date_time, wacaSelection AS waca_selection, cptSelection AS cpt_selection, stationOperational AS station_operational, drainageBasin AS drainage_basin, country AS country, authority, adminRegion AS admin_region_1, adminRegion2 AS admin_region_2, adminRegion3 AS admin_region_3, adminRegion4 AS admin_region_4 FROM station;")
+   
+    columns_to_convert <- c("station_id","station_name","qualifier", "station_operational", "drainage_basin", "country", "authority", "admin_region_1", "admin_region_2", "admin_region_3", "admin_region_4")
+    stations_df[columns_to_convert] <- lapply(stations_df[columns_to_convert], as.factor)
     
-  }
-  
-  self$import_data(data_tables = data_list)
-  #--------------------------------
-  
-  #transform imported metadata
-  #--------------------------------
-  if(import_stations){
-    self$convert_column_to_type(data_name = stations_metadata_name, col_names = c("station_id","station_name","qualifier","authority","admin_region","drainage_basin","station_Operational","country"), to_type = "factor")
+    stations_df_name <- next_default_item("stations_metadata", self$get_data_names(), include_index = FALSE)
+    data_list[[stations_df_name]] <- stations_df
   }
   
   if(import_elements){
-    self$convert_column_to_type(data_name = elements_metadata_name, col_names = c("element_id","element_name","abbreviation","element_type"), to_type = "factor")
+    elements_df <- DBI::dbGetQuery(con, "SELECT elementId AS element_id, elementName AS element_name, abbreviation, description, elementtype AS element_type, upperLimit AS upper_limit , lowerLimit AS lower_limit, units FROM obselement;")
+    
+    columns_to_convert <- c("element_id","element_name","abbreviation","element_type")
+    elements_df[columns_to_convert] <- lapply(elements_df[columns_to_convert], as.factor)
+    
+    elements_df_name <- next_default_item("elements_metadata", self$get_data_names(), include_index = FALSE)
+    data_list[[elements_df_name]] <- elements_df
   }
   
   if(import_flags){
-    self$convert_column_to_type(data_name = flags_metadata_name, col_names = c("flag_name"), to_type = "factor")
+    flags_df <- DBI::dbGetQuery(con, "SELECT characterSymbol AS flag_name, description FROM flags;")
+   
+    flags_df$flag_name <- as.factor(flags_df$flag_name) 
+    
+    flags_df_name <- next_default_item("flags_metadata", self$get_data_names(), include_index = FALSE)
+    data_list[[flags_df_name]] <- flags_df
   }
-  #--------------------------------
+  
+  # Import the data frames into the data book
+  self$import_data(data_tables = data_list)
   
 })
 
@@ -1924,7 +1922,7 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
                                                         station_filter_column, stations = c(), 
                                                         element_filter_column, elements = c(),
                                                         qc_status = -1, start_date = NULL, end_date = NULL, unstack_data = FALSE,
-                                                        include_station_id = FALSE, include_element_id = FALSE, include_element_name = FALSE, 
+                                                        include_element_id = FALSE, include_element_name = FALSE, 
                                                         include_acquisition_type = FALSE, include_level = FALSE, include_entry_form = FALSE, include_captured_by = FALSE, 
                                                         include_qc_status = FALSE, include_qc_log = FALSE, include_flag = FALSE, 
                                                         import_selected_stations_metadata = FALSE, import_selected_elements_metadata = FALSE) {
@@ -1951,14 +1949,7 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   #selects
   #--------------------------------
 
-  sql_select<- ""
-  
-  if(include_station_id){
-    sql_select <- paste0(tableName,".recordedFrom AS station_id") 
-    sql_select <-paste0(sql_select,", station.stationName AS station_name") 
-  }else{
-    sql_select <-"station.stationName AS station_name"
-  }
+  sql_select<- paste0(tableName,".recordedFrom AS station_id",", station.stationName AS station_name") 
   
   if(include_element_id){
     sql_select <-paste0(sql_select, ", ", tableName,".describedBy AS element_id") 
@@ -1991,6 +1982,7 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   }
   
   sql_select <-paste0(sql_select,", ", tableName,".obsDatetime AS date_time") 
+  sql_select <-paste0(sql_select,", DATE(", tableName,".obsDatetime) AS date") 
   
   if(include_qc_log){
     sql_select <-paste0(sql_select,", ", tableName,".qcTypeLog"," AS qc_log") 
@@ -2035,9 +2027,11 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   sql_order_by <- paste0(" ORDER BY ",tableName,".recordedFrom, ",tableName, ".describedBy, ",tableName, ".obsDatetime",";")
   #--------------------------------
   
-  #import data
-  #--------------------------------
+  # Data list to store all the imported data frames
   data_list <- list()
+  
+  #import metadata
+  #--------------------------------
   
   if(import_selected_stations_metadata){
     stations_metadata_name <- next_default_item("stations_metadata", self$get_data_names(), include_index = FALSE)
@@ -2049,59 +2043,66 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
     data_list[[elements_metadata_name]] <- DBI::dbGetQuery(con, paste0("SELECT * FROM obselement WHERE", sql_elements_filter))
   }
   
-  observations_data_name <- next_default_item("observations_data", self$get_data_names(), include_index = FALSE)
-  data_list[[observations_data_name]] <- DBI::dbGetQuery(con,paste0(sql_select, sql_filter, sql_order_by))
-  
-  if(unstack_data){
-    observations_unstacked_data_name <- next_default_item("observations_unstacked_data", self$get_data_names(), include_index = FALSE)
-    data_list[[observations_unstacked_data_name]] <- reshape2::dcast(data = data_list[[observations_data_name]], formula = station_name + date_time ~ element_abbrv, value.var = "value")
-  }
-  
-  
-  self$import_data(data_tables = data_list)
   #--------------------------------
   
-  #transform imported data
-  #--------------------------------
-  self$convert_column_to_type(data_name = observations_data_name, col_names = c("station_name","element_abbrv"), to_type = "factor")
+  # import and transform observations data data
+  # --------------------------------
   
-  if(include_station_id){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "station_id", to_type = "factor")
-  }
+  # Get observations data from database
+  observations_df <- DBI::dbGetQuery(con, paste0(sql_select, sql_filter, sql_order_by))
+  
+  # Convert station name and abbreviation columns to factor
+  columns_to_convert <- c("station_id", "station_name", "element_abbrv")
+  observations_df[columns_to_convert] <- lapply(observations_df[columns_to_convert], as.factor)
+  
+  # Convert the date_time column to POSIXct (date-time) format
+  observations_df$date_time <- as.POSIXct(observations_df$date_time, format = "%Y-%m-%d %H:%M:%S")
+  
+  # convert the date column to date format
+  observations_df$date <- as.Date(x = observations_df$date)
   
   if(include_element_id){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "element_id", to_type = "factor")
+    observations_df$element_id <- as.factor(observations_df$element_id)
   }
   
   if(include_element_name){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "element_name", to_type = "factor")
+    observations_df$element_name <- as.factor(observations_df$element_name)
   }
   
   if(include_qc_status){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "qc_status", to_type = "factor")
+    observations_df$qc_status <- as.factor(observations_df$qc_status)
   }
   
   if(include_acquisition_type){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "acquisition_type", to_type = "factor")
+    observations_df$acquisition_type <- as.factor(observations_df$acquisition_type)
   }
   
   if(include_level){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "level", to_type = "factor")
+    observations_df$level <- as.factor(observations_df$level)
   }
   
   if(include_flag){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "flag", to_type = "factor")
+    observations_df$flag <- as.factor(observations_df$flag)
   }
   
   if(include_entry_form){
-    self$convert_column_to_type(data_name = observations_data_name, col_names = "entry_form", to_type = "factor")
+    observations_df$entry_form <- as.factor(observations_df$entry_form)
   }
   
-  #todo. should this be done at this point?? Keeping in mind that we may have hourly data
-  #create a plain date column from the observation data datetime column values
-  #obsdate <- self$get_columns_from_data(data_name = observations_data_name, col_names = "date_time", use_current_filter = FALSE)
-  #self$add_columns_to_data(data_name = observations_data_name, col_name = "date", col_data = as.Date(x = obsdate), before = FALSE, adjacent_column = "date_time")
   #--------------------------------
+  
+  # Add observations data to list of data to be imported
+  # --------------------------------
+  observations_data_name <- next_default_item("observations_data", self$get_data_names(), include_index = FALSE)
+  data_list[[observations_data_name]] <- observations_df
+  
+  if(unstack_data){
+    observations_unstacked_data_name <- next_default_item("observations_unstacked_data", self$get_data_names(), include_index = FALSE)
+    data_list[[observations_unstacked_data_name]] <- tidyr::pivot_wider(data = observations_df, names_from=element_abbrv, values_from=value)
+  }
+  
+  # Import list of data frames to data book
+  self$import_data(data_tables = data_list)
   
 })
 

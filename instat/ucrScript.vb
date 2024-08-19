@@ -214,12 +214,10 @@ Public Class ucrScript
 
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save " & If(bIsLog, "Log", "Script") & " To File"
-            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt|JSON File (*.json)|*.json"
             dlgSave.FileName = Path.GetFileName(TabControl.SelectedTab.Text)
 
-            'Ensure that dialog opens in correct folder.
-            'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
-            'not work (I think a bug in WinForms).So we need to use static variables instead.
+            ' Ensure that dialog opens in the correct folder.
             Static strInitialDirectory As String = frmMain.clsInstatOptions.strWorkingDirectory
             Static strInitialDirectoryLog As String = frmMain.clsInstatOptions.strWorkingDirectory
             dlgSave.InitialDirectory = If(bIsLog, strInitialDirectoryLog, strInitialDirectory)
@@ -232,6 +230,7 @@ Public Class ucrScript
                     TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgSave.FileName)
                     frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(strInitialDirectory), System.IO.Path.GetFileName(dlgSave.FileName)), "\", "/"))
                     frmMain.bDataSaved = True
+
                     If bIsLog Then
                         strInitialDirectoryLog = Path.GetDirectoryName(dlgSave.FileName)
                     Else
@@ -239,8 +238,8 @@ Public Class ucrScript
                     End If
                 Catch
                     MsgBox("Could not save the " & If(bIsLog, "Log", "Script") & " file." & Environment.NewLine &
-                           "The file may be in use by another program or you may not have access to write to the specified location.",
-                           vbExclamation, "Save " & If(bIsLog, "Log", "Script"))
+                   "The file may be in use by another program or you may not have access to write to the specified location.",
+                   vbExclamation, "Save " & If(bIsLog, "Log", "Script"))
                 End Try
             End If
         End Using
@@ -530,9 +529,9 @@ Public Class ucrScript
 
         Using dlgLoad As New OpenFileDialog
             dlgLoad.Title = "Load Script From Text File"
-            dlgLoad.Filter = "Text & R Script Files (*.txt,*.R)|*.txt;*.R|R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgLoad.Filter = "Text & R Script Files (*.txt, *.R, *.json)|*.txt;*.R;*.json|R Script File (*.R)|*.R|Text File (*.txt)|*.txt|JSON File (*.json)|*.json"
 
-            'Ensure that dialog opens in correct folder.
+            ' Ensure that dialog opens in the correct folder.
             'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
             'not work (I think a bug in WinForms).So we need to use a static variable instead.
             Static strInitialDirectory As String = frmMain.clsInstatOptions.strWorkingDirectory

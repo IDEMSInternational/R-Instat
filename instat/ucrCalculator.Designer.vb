@@ -764,7 +764,7 @@ Partial Class ucrCalculator
         Me.cmdClear.Location = New System.Drawing.Point(150, 72)
         Me.cmdClear.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(50, 58)
+        Me.cmdClear.Size = New System.Drawing.Size(50, 59)
         Me.cmdClear.TabIndex = 190
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
@@ -823,7 +823,7 @@ Partial Class ucrCalculator
         Me.cmdPlus.Location = New System.Drawing.Point(113, 101)
         Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPlus.Name = "cmdPlus"
-        Me.cmdPlus.Size = New System.Drawing.Size(38, 29)
+        Me.cmdPlus.Size = New System.Drawing.Size(38, 30)
         Me.cmdPlus.TabIndex = 130
         Me.cmdPlus.Text = "+"
         Me.cmdPlus.UseVisualStyleBackColor = True
