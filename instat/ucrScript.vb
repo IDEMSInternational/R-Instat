@@ -237,8 +237,6 @@ Public Class ucrScript
         FormatCode = Join(formattedLines, vbCrLf)
     End Function
 
-
-
     Private Function GetTextBefore(ByVal text As String, ByVal position As Long) As String
         ' Returns the text before the specified position
         If position > 0 Then
