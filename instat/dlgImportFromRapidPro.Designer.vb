@@ -22,12 +22,19 @@ Partial Class dlgImportFromRapidPro
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.rdoUserData = New System.Windows.Forms.RadioButton()
         Me.rdoFlowData = New System.Windows.Forms.RadioButton()
         Me.lblRapidProSite = New System.Windows.Forms.Label()
         Me.cmdSetToken = New System.Windows.Forms.Button()
         Me.lblDateFormat = New System.Windows.Forms.Label()
         Me.lblTimezone = New System.Windows.Forms.Label()
+        Me.cmdSelectFlows = New System.Windows.Forms.Button()
+        Me.grpDataToImport = New System.Windows.Forms.GroupBox()
+        Me.ttFlow = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrSaveFlow = New instat.ucrSave()
+        Me.ucrChkFlow = New instat.ucrCheck()
+        Me.ucrChkUser = New instat.ucrCheck()
         Me.ucrSaveDataframeName = New instat.ucrSave()
         Me.ucrInputEndDate = New instat.ucrInputTextBox()
         Me.ucrInputStartDate = New instat.ucrInputTextBox()
@@ -39,13 +46,8 @@ Partial Class dlgImportFromRapidPro
         Me.ucrChkFlattenData = New instat.ucrCheck()
         Me.ucrInputRapidProSite = New instat.ucrInputTextBox()
         Me.ucrPnlImportFromRapidPro = New instat.UcrPanel()
-        Me.ucrChkUser = New instat.ucrCheck()
-        Me.ucrChkFlow = New instat.ucrCheck()
-        Me.cmdSelectFlows = New System.Windows.Forms.Button()
-        Me.grpDataToImport = New System.Windows.Forms.GroupBox()
         Me.ucrInputFilterToGroups = New instat.ucrInputTextBox()
         Me.ucrChkFilter = New instat.ucrCheck()
-        Me.ucrSaveFlow = New instat.ucrSave()
         Me.grpDataToImport.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -116,6 +118,58 @@ Partial Class dlgImportFromRapidPro
         Me.lblTimezone.Size = New System.Drawing.Size(56, 13)
         Me.lblTimezone.TabIndex = 13
         Me.lblTimezone.Text = "Timezone:"
+        '
+        'cmdSelectFlows
+        '
+        Me.cmdSelectFlows.Location = New System.Drawing.Point(308, 161)
+        Me.cmdSelectFlows.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdSelectFlows.Name = "cmdSelectFlows"
+        Me.cmdSelectFlows.Size = New System.Drawing.Size(98, 19)
+        Me.cmdSelectFlows.TabIndex = 19
+        Me.cmdSelectFlows.Text = "Select Flows"
+        Me.cmdSelectFlows.UseVisualStyleBackColor = True
+        '
+        'grpDataToImport
+        '
+        Me.grpDataToImport.Controls.Add(Me.ucrInputFilterToGroups)
+        Me.grpDataToImport.Controls.Add(Me.ucrChkFilter)
+        Me.grpDataToImport.Location = New System.Drawing.Point(170, 87)
+        Me.grpDataToImport.Margin = New System.Windows.Forms.Padding(2)
+        Me.grpDataToImport.Name = "grpDataToImport"
+        Me.grpDataToImport.Padding = New System.Windows.Forms.Padding(2)
+        Me.grpDataToImport.Size = New System.Drawing.Size(242, 102)
+        Me.grpDataToImport.TabIndex = 20
+        Me.grpDataToImport.TabStop = False
+        Me.grpDataToImport.Text = "Data To Import"
+        '
+        'ucrSaveFlow
+        '
+        Me.ucrSaveFlow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveFlow.Location = New System.Drawing.Point(9, 307)
+        Me.ucrSaveFlow.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveFlow.Name = "ucrSaveFlow"
+        Me.ucrSaveFlow.Size = New System.Drawing.Size(342, 23)
+        Me.ucrSaveFlow.TabIndex = 21
+        '
+        'ucrChkFlow
+        '
+        Me.ucrChkFlow.AutoSize = True
+        Me.ucrChkFlow.Checked = False
+        Me.ucrChkFlow.Location = New System.Drawing.Point(175, 161)
+        Me.ucrChkFlow.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkFlow.Name = "ucrChkFlow"
+        Me.ucrChkFlow.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkFlow.TabIndex = 18
+        '
+        'ucrChkUser
+        '
+        Me.ucrChkUser.AutoSize = True
+        Me.ucrChkUser.Checked = False
+        Me.ucrChkUser.Location = New System.Drawing.Point(175, 103)
+        Me.ucrChkUser.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkUser.Name = "ucrChkUser"
+        Me.ucrChkUser.Size = New System.Drawing.Size(120, 23)
+        Me.ucrChkUser.TabIndex = 17
         '
         'ucrSaveDataframeName
         '
@@ -234,79 +288,27 @@ Partial Class dlgImportFromRapidPro
         Me.ucrPnlImportFromRapidPro.Size = New System.Drawing.Size(299, 30)
         Me.ucrPnlImportFromRapidPro.TabIndex = 0
         '
-        'ucrChkUser
-        '
-        Me.ucrChkUser.AutoSize = True
-        Me.ucrChkUser.Checked = False
-        Me.ucrChkUser.Location = New System.Drawing.Point(175, 103)
-        Me.ucrChkUser.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrChkUser.Name = "ucrChkUser"
-        Me.ucrChkUser.Size = New System.Drawing.Size(120, 23)
-        Me.ucrChkUser.TabIndex = 17
-        '
-        'ucrChkFlow
-        '
-        Me.ucrChkFlow.AutoSize = True
-        Me.ucrChkFlow.Checked = False
-        Me.ucrChkFlow.Location = New System.Drawing.Point(175, 130)
-        Me.ucrChkFlow.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrChkFlow.Name = "ucrChkFlow"
-        Me.ucrChkFlow.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkFlow.TabIndex = 18
-        '
-        'cmdSelectFlows
-        '
-        Me.cmdSelectFlows.Location = New System.Drawing.Point(308, 130)
-        Me.cmdSelectFlows.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdSelectFlows.Name = "cmdSelectFlows"
-        Me.cmdSelectFlows.Size = New System.Drawing.Size(98, 19)
-        Me.cmdSelectFlows.TabIndex = 19
-        Me.cmdSelectFlows.Text = "Select Flows"
-        Me.cmdSelectFlows.UseVisualStyleBackColor = True
-        '
-        'grpDataToImport
-        '
-        Me.grpDataToImport.Controls.Add(Me.ucrInputFilterToGroups)
-        Me.grpDataToImport.Controls.Add(Me.ucrChkFilter)
-        Me.grpDataToImport.Location = New System.Drawing.Point(170, 87)
-        Me.grpDataToImport.Margin = New System.Windows.Forms.Padding(2)
-        Me.grpDataToImport.Name = "grpDataToImport"
-        Me.grpDataToImport.Padding = New System.Windows.Forms.Padding(2)
-        Me.grpDataToImport.Size = New System.Drawing.Size(242, 102)
-        Me.grpDataToImport.TabIndex = 20
-        Me.grpDataToImport.TabStop = False
-        Me.grpDataToImport.Text = "Data To Import"
-        '
         'ucrInputFilterToGroups
         '
         Me.ucrInputFilterToGroups.AddQuotesIfUnrecognised = True
         Me.ucrInputFilterToGroups.AutoSize = True
         Me.ucrInputFilterToGroups.IsMultiline = False
         Me.ucrInputFilterToGroups.IsReadOnly = False
-        Me.ucrInputFilterToGroups.Location = New System.Drawing.Point(109, 72)
+        Me.ucrInputFilterToGroups.Location = New System.Drawing.Point(111, 44)
         Me.ucrInputFilterToGroups.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputFilterToGroups.Name = "ucrInputFilterToGroups"
         Me.ucrInputFilterToGroups.Size = New System.Drawing.Size(129, 21)
-        Me.ucrInputFilterToGroups.TabIndex = 20
+        Me.ucrInputFilterToGroups.TabIndex = 22
         '
         'ucrChkFilter
         '
         Me.ucrChkFilter.AutoSize = True
         Me.ucrChkFilter.Checked = False
-        Me.ucrChkFilter.Location = New System.Drawing.Point(5, 71)
+        Me.ucrChkFilter.Location = New System.Drawing.Point(6, 43)
         Me.ucrChkFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkFilter.Name = "ucrChkFilter"
         Me.ucrChkFilter.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkFilter.TabIndex = 19
-        '
-        'ucrSaveFlow
-        '
-        Me.ucrSaveFlow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveFlow.Location = New System.Drawing.Point(9, 307)
-        Me.ucrSaveFlow.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveFlow.Name = "ucrSaveFlow"
-        Me.ucrSaveFlow.Size = New System.Drawing.Size(342, 23)
-        Me.ucrSaveFlow.TabIndex = 21
+        Me.ucrChkFilter.TabIndex = 21
         '
         'dlgImportFromRapidPro
         '
@@ -372,4 +374,5 @@ Partial Class dlgImportFromRapidPro
     Friend WithEvents ucrSaveFlow As ucrSave
     Friend WithEvents ucrInputFilterToGroups As ucrInputTextBox
     Friend WithEvents ucrChkFilter As ucrCheck
+    Friend WithEvents ttFlow As ToolTip
 End Class

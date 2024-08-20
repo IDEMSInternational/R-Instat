@@ -140,6 +140,8 @@ Public Class dlgImportFromRapidPro
 
         ucrInputFilterToGroups.SetParameter(New RParameter("filter_variable_value", 7))
 
+        ttFlow.SetToolTip(ucrChkFlow.chkCheck, " To import by flow, you need to first import the flow metadata from the ""Flow Data"" button at the top. After pressing OK, you can then select which flows to import by clicking on 'Select Flows' button ")
+
         ucrSaveDataframeName.SetSaveTypeAsDataFrame()
         ucrSaveDataframeName.SetIsTextBox()
         ucrSaveDataframeName.SetLabelText("Data Frame Name:")
@@ -303,7 +305,7 @@ Public Class dlgImportFromRapidPro
         Else
             cmdSelectFlows.Visible = False
         End If
-
+        ucrChkFilter.Visible = ucrChkUser.Checked
     End Sub
 
     Private Sub cmdSetToken_Click(sender As Object, e As EventArgs) Handles cmdSetToken.Click
