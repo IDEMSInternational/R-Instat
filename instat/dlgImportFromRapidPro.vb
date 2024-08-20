@@ -133,9 +133,20 @@ Public Class dlgImportFromRapidPro
         ucrChkSetStartDate.AddParameterValuesCondition(True, "checked", "TRUE")
         ucrChkSetStartDate.AddParameterValuesCondition(False, "checked", "FALSE")
 
+        ucrChkFilter.SetText("Filter to groups")
+        ucrChkFilter.AddParameterValuesCondition(True, "filter", "TRUE")
+        ucrChkFilter.AddParameterValuesCondition(False, "filter", "FALSE")
+        ucrChkFilter.AddToLinkedControls(ucrInputFilterToGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="joined")
+
+        ucrInputFilterToGroups.SetParameter(New RParameter("filter_variable_value", 7))
+
         ucrSaveDataframeName.SetSaveTypeAsDataFrame()
         ucrSaveDataframeName.SetIsTextBox()
         ucrSaveDataframeName.SetLabelText("Data Frame Name:")
+
+        ucrSaveFlow.SetSaveTypeAsDataFrame()
+        ucrSaveFlow.SetIsTextBox()
+        ucrSaveFlow.SetLabelText("Flow Data Name:")
     End Sub
 
     Private Sub SetDefaults()
@@ -157,6 +168,7 @@ Public Class dlgImportFromRapidPro
         clsDummyFunction.AddParameter("checked1", "FALSE", iPosition:=1)
         clsDummyFunction.AddParameter("flow", "FALSE", iPosition:=2)
         clsDummyFunction.AddParameter("user", "TRUE", iPosition:=3)
+        clsDummyFunction.AddParameter("filter", "FALSE", iPosition:=4)
 
         clsSetSiteFunction.SetPackageName("rapidpror")
         clsSetSiteFunction.SetRCommand("set_rapidpro_site")
@@ -213,7 +225,6 @@ Public Class dlgImportFromRapidPro
         ucrInputTimezone.AddAdditionalCodeParameterPair(clsGetFlowDataFunction, ucrInputTimezone.GetParameter(), iAdditionalPairNo:=1)
 
         ucrSaveDataframeName.AddAdditionalRCode(clsGetFlowDataFunction, iAdditionalPairNo:=1)
-        ucrSaveDataframeName.AddAdditionalRCode(clsGetFlowFunction, iAdditionalPairNo:=2)
 
         ucrInputRapidProSite.SetRCode(clsSetSiteFunction, bReset)
         ucrInputEndDate.SetRCode(clsGetUserDataFunction, bReset)
@@ -223,9 +234,12 @@ Public Class dlgImportFromRapidPro
         ucrChkSetEndDate.SetRCode(clsDummyFunction, bReset)
         ucrChkSetStartDate.SetRCode(clsDummyFunction, bReset)
         ucrSaveDataframeName.SetRCode(clsGetUserDataFunction, bReset)
+        ucrSaveFlow.SetRCode(clsGetFlowFunction, bReset)
+        ucrInputFilterToGroups.SetRCode(clsGetUserDataFunction, bReset)
         If bReset Then
             ucrChkUser.SetRCode(clsDummyFunction, bReset)
             ucrChkFlow.SetRCode(clsDummyFunction, bReset)
+            ucrChkFilter.SetRCode(clsDummyFunction, bReset)
         End If
     End Sub
 
@@ -245,13 +259,16 @@ Public Class dlgImportFromRapidPro
         grpDataToImport.Visible = False
         ucrChkFlow.Visible = False
         ucrChkUser.Visible = False
+        ucrSaveFlow.Visible = False
 
         If rdoUserData.Checked AndAlso ucrChkUser.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
             ucrSaveDataframeName.SetPrefix("user_data")
+            ucrSaveFlow.Visible = False
         ElseIf rdoUserData.Checked AndAlso ucrChkFlow.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowFunction)
-            ucrSaveDataframeName.SetPrefix("user_flow_data")
+            ucrSaveFlow.SetPrefix("flow_data")
+            ucrSaveFlow.Visible = True
         ElseIf rdoFlowData.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowDataFunction)
             ucrSaveDataframeName.SetPrefix("flow_metadata")
@@ -260,10 +277,14 @@ Public Class dlgImportFromRapidPro
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetFlowFunction, 0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsLinkDataFramesFunction, 1)
+            ucrSaveFlow.SetPrefix("flow_data")
+            ucrSaveDataframeName.SetPrefix("user_data")
+            ucrSaveFlow.Visible = True
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetFlowFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetUserDataFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsLinkDataFramesFunction)
+            ucrSaveFlow.Visible = False
         End If
         If rdoFlowData.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsConvertToFactor, 0)
@@ -317,4 +338,15 @@ Public Class dlgImportFromRapidPro
     Private Sub ucrSaveDataframeName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveDataframeName.ControlValueChanged
         clsConvertToFactor.AddParameter("data_name", Chr(34) & ucrSaveDataframeName.GetText & Chr(34)) 'TODO: this to be the name in the ucrSave
     End Sub
+
+    Private Sub ucrChkFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFilter.ControlValueChanged, ucrInputFilterToGroups.ControlValueChanged
+        If ucrChkFilter.Checked AndAlso Not ucrInputFilterToGroups.IsEmpty Then
+            clsGetUserDataFunction.AddParameter("filter_variable", Chr(34) & "group" & Chr(34))
+        Else
+            clsGetUserDataFunction.RemoveParameterByName("filter_variable")
+            clsGetUserDataFunction.RemoveParameterByName("filter_variable_value")
+        End If
+        ucrInputFilterToGroups.Visible = ucrChkFilter.Checked
+    End Sub
+
 End Class
