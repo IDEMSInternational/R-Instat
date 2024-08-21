@@ -440,6 +440,7 @@ Partial Class frmMain
         Me.mnuFileImportFromPostgres = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromRapidPro = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportandTidyNetCDFFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuImportFromOpenAppBuilder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileExport = New System.Windows.Forms.ToolStripMenuItem()
@@ -701,7 +702,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportFromOpenAppBuilderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3388,7 +3388,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileImportFromFile, Me.mnuFileImportFromLibrary, Me.ToolStripSeparator35, Me.mnuFileImportFromODK, Me.mnuFileImportFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportFromPostgres, Me.mnuFileImportFromRapidPro, Me.mnuFileImportandTidyNetCDFFile, Me.ImportFromOpenAppBuilderToolStripMenuItem, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileImportFromFile, Me.mnuFileImportFromLibrary, Me.ToolStripSeparator35, Me.mnuFileImportFromODK, Me.mnuFileImportFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportFromPostgres, Me.mnuFileImportFromRapidPro, Me.mnuFileImportandTidyNetCDFFile, Me.mnuImportFromOpenAppBuilder, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 22)
         Me.mnuFile.Tag = "File"
@@ -3463,6 +3463,12 @@ Partial Class frmMain
         Me.mnuFileImportandTidyNetCDFFile.Name = "mnuFileImportandTidyNetCDFFile"
         Me.mnuFileImportandTidyNetCDFFile.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileImportandTidyNetCDFFile.Text = "Import and Tidy NetCDF File..."
+        '
+        'mnuImportFromOpenAppBuilder
+        '
+        Me.mnuImportFromOpenAppBuilder.Name = "mnuImportFromOpenAppBuilder"
+        Me.mnuImportFromOpenAppBuilder.Size = New System.Drawing.Size(241, 22)
+        Me.mnuImportFromOpenAppBuilder.Text = "Import From OpenAppBuilder..."
         '
         'mnuFileConvert
         '
@@ -5233,12 +5239,6 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'ImportFromOpenAppBuilderToolStripMenuItem
-        '
-        Me.ImportFromOpenAppBuilderToolStripMenuItem.Name = "ImportFromOpenAppBuilderToolStripMenuItem"
-        Me.ImportFromOpenAppBuilderToolStripMenuItem.Size = New System.Drawing.Size(241, 22)
-        Me.ImportFromOpenAppBuilderToolStripMenuItem.Text = "Import From OpenAppBuilder..."
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5959,5 +5959,5 @@ Partial Class frmMain
     Friend WithEvents mnuSwapDataLogScript As ToolStripMenuItem
     Friend WithEvents mnuSwapDataMetadata As ToolStripMenuItem
     Friend WithEvents RInstatResourcesSiteToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ImportFromOpenAppBuilderToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuImportFromOpenAppBuilder As ToolStripMenuItem
 End Class
