@@ -43,6 +43,7 @@ Partial Class dlgImportOpenAppBuilder
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportOpenAppBuilder"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Import From OpenAppBuilder"
         Me.ResumeLayout(False)
 
