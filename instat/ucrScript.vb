@@ -182,23 +182,16 @@ Public Class ucrScript
         Dim inAssignment As Boolean
         Dim assignmentPos As Long
 
-        ' Split the code into lines
         lines = Split(code, vbCrLf)
         ReDim formattedLines(0 To UBound(lines))
-
-        ' Initialize the indentation level
         indentLevel = 0
         inAssignment = False
 
-        ' Loop through each line and apply formatting rules
         For i = LBound(lines) To UBound(lines)
-            ' Trim whitespace from the line
             formattedLine = Trim(lines(i))
-
-            ' Check for assignment lines
             assignmentPos = InStr(formattedLine, "<-")
             If assignmentPos > 0 Then
-                ' For R-style assignments
+                ' R-style assignments
                 formattedLine = Trim(Mid(formattedLine, 1, assignmentPos - 1)) & " <- " & Trim(Mid(formattedLine, assignmentPos + 2))
                 formattedLines(i) = Space(indentLevel * 4) & formattedLine
                 inAssignment = True
@@ -225,11 +218,12 @@ Public Class ucrScript
                 formattedLine = Replace(formattedLine, ",", " , ")
                 formattedLines(i) = Space(indentLevel * 4) & formattedLine
             End If
-
-            ' Align the assignment operators for nested function calls
-            If InStr(formattedLine, "data.frame") > 0 Then
-                formattedLines(i) = Space(indentLevel * 4) & formattedLine
+            If InStr(formattedLine, "(") > 0 Then
                 indentLevel = indentLevel + 1
+            End If
+            If InStr(formattedLine, ")") > 0 Then
+                indentLevel = indentLevel - 1
+                If indentLevel < 0 Then indentLevel = 0 ' Prevent negative indentation
             End If
         Next i
 
