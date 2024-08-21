@@ -440,6 +440,7 @@ Partial Class frmMain
         Me.mnuFileImportFromPostgres = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromRapidPro = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportandTidyNetCDFFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromOpenAppBuilder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileExport = New System.Windows.Forms.ToolStripMenuItem()
@@ -701,7 +702,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileImportFromOpenAppBuilder = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3464,6 +3464,13 @@ Partial Class frmMain
         Me.mnuFileImportandTidyNetCDFFile.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileImportandTidyNetCDFFile.Text = "Import and Tidy NetCDF File..."
         '
+        'mnuFileImportFromOpenAppBuilder
+        '
+        Me.mnuFileImportFromOpenAppBuilder.Enabled = False
+        Me.mnuFileImportFromOpenAppBuilder.Name = "mnuFileImportFromOpenAppBuilder"
+        Me.mnuFileImportFromOpenAppBuilder.Size = New System.Drawing.Size(241, 22)
+        Me.mnuFileImportFromOpenAppBuilder.Text = "Import From OpenAppBuilder..."
+        '
         'mnuFileConvert
         '
         Me.mnuFileConvert.Enabled = False
@@ -5232,12 +5239,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuFileImportFromOpenAppBuilder
-        '
-        Me.mnuFileImportFromOpenAppBuilder.Name = "mnuFileImportFromOpenAppBuilder"
-        Me.mnuFileImportFromOpenAppBuilder.Size = New System.Drawing.Size(241, 22)
-        Me.mnuFileImportFromOpenAppBuilder.Text = "Import From OpenAppBuilder..."
         '
         'frmMain
         '
