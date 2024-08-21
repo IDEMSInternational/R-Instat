@@ -281,12 +281,6 @@
     <Compile Include="dlgImportFromRapidPro.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgImportOpenAppBuilder.Designer.vb">
-      <DependentUpon>dlgImportOpenAppBuilder.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgImportOpenAppBuilder.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgRandomSplit.Designer.vb">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
@@ -3142,9 +3136,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromRapidPro.resx">
       <DependentUpon>dlgImportFromRapidPro.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgImportOpenAppBuilder.resx">
-      <DependentUpon>dlgImportOpenAppBuilder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
