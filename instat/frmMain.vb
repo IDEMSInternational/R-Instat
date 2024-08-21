@@ -2848,4 +2848,7 @@ Public Class frmMain
         Process.Start("https://ecampus.r-instat.org/course/view.php?id=14")
     End Sub
 
+    Private Sub ImportFromOpenAppBuilderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFromOpenAppBuilderToolStripMenuItem.Click
+        dlgImportOpenAppBuilder.ShowDialog()
+    End Sub
 End Class
