@@ -3466,6 +3466,7 @@ Partial Class frmMain
         '
         'mnuImportFromOpenAppBuilder
         '
+        Me.mnuImportFromOpenAppBuilder.Enabled = False
         Me.mnuImportFromOpenAppBuilder.Name = "mnuImportFromOpenAppBuilder"
         Me.mnuImportFromOpenAppBuilder.Size = New System.Drawing.Size(241, 22)
         Me.mnuImportFromOpenAppBuilder.Text = "Import From OpenAppBuilder..."
