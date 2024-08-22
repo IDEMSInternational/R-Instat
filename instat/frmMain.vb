@@ -2847,4 +2847,8 @@ Public Class frmMain
     Private Sub RInstatResourcesSiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RInstatResourcesSiteToolStripMenuItem.Click
         Process.Start("https://ecampus.r-instat.org/course/view.php?id=14")
     End Sub
+
+    Private Sub mnuImportFromOpenAppBuilder_Click(sender As Object, e As EventArgs) Handles mnuImportFromOpenAppBuilder.Click
+        dlgImportOpenAppBuilder.ShowDialog()
+    End Sub
 End Class
