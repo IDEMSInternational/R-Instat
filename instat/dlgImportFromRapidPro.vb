@@ -212,11 +212,6 @@ Public Class dlgImportFromRapidPro
 
         clsClosingOperator.SetOperation("]")
 
-
-        'ucrBase.clsRsyntax.ClearCodes()
-        'ucrBase.clsRsyntax.AddToBeforeCodes(clsSetTokenFunction, 0)
-        'ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSiteFunction, 1)
-        'ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
         bResetSubdialog = True
     End Sub
 
@@ -267,14 +262,17 @@ Public Class dlgImportFromRapidPro
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
             ucrSaveDataframeName.SetPrefix("user_data")
             ucrSaveFlow.Visible = False
+
         ElseIf rdoUserData.Checked AndAlso ucrChkFlow.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowFunction)
             ucrSaveFlow.SetPrefix("flow_data")
             ucrSaveFlow.Visible = True
+
         ElseIf rdoFlowData.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetFlowDataFunction)
             ucrSaveDataframeName.SetPrefix("flow_metadata")
         End If
+
         If rdoUserData.Checked AndAlso ucrChkFlow.Checked AndAlso ucrChkUser.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
             ucrBase.clsRsyntax.AddToAfterCodes(clsGetFlowFunction, 0)
@@ -288,9 +286,11 @@ Public Class dlgImportFromRapidPro
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsLinkDataFramesFunction)
             ucrSaveFlow.Visible = False
         End If
+
         If rdoFlowData.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsConvertToFactor, 0)
         End If
+
         If rdoUserData.Checked Then
             grpDataToImport.Visible = True
             ucrChkFlow.Visible = True
@@ -300,6 +300,7 @@ Public Class dlgImportFromRapidPro
             ucrChkFlow.Visible = False
             ucrChkUser.Visible = False
         End If
+
         If rdoUserData.Checked AndAlso ucrChkFlow.Checked Then
             cmdSelectFlows.Visible = True
         Else
