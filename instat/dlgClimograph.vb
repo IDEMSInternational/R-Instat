@@ -32,15 +32,11 @@ Public Class dlgClimograph
     Private clsFacetFunction As New RFunction
     Private clsGroupByFunction As New RFunction
     Private clsGeomBarFunction As New RFunction
-    Private clsGeomLineFunction As New RFunction
     Private clsGeomLineStarFunction As New RFunction
     Private clsGeomLineStar1Function As New RFunction
-    Private clsGeomLineFunction1 As New RFunction
     Private clsRggplotFunction As New RFunction
     Private clsBarAesFunction As New RFunction
-    Private clsAesLineFunction As New RFunction
     Private clsAesLineStarFunction As New RFunction
-    Private clsAesLine1Function As New RFunction
     Private clsAesLineStar1Function As New RFunction
     Private clsFacetFunction1 As New RFunction
     Private clsGroupByFunction1 As New RFunction
@@ -401,13 +397,9 @@ Public Class dlgClimograph
         clsAesGeomRibbonFunction = New RFunction
         clsAesGeomRibbon1Function = New RFunction
         clsGeomBarFunction = New RFunction
-        clsGeomLineFunction = New RFunction
-        clsGeomLineFunction1 = New RFunction
         clsGeomLineStarFunction = New RFunction
         clsGeomLineStar1Function = New RFunction
-        clsAesLineFunction = New RFunction
         clsAesLineStarFunction = New RFunction
-        clsAesLine1Function = New RFunction
         clsAesLineStar1Function = New RFunction
         clsRggplotFunction = New RFunction
         clsBarAesFunction = New RFunction
@@ -493,7 +485,6 @@ Public Class dlgClimograph
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
 
-
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
 
@@ -563,14 +554,6 @@ Public Class dlgClimograph
 
         clsAesTminBarFunction.SetRCommand("aes")
 
-        clsGeomLineFunction.SetRCommand("geom_line")
-        clsGeomLineFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesLineFunction, iPosition:=0)
-        clsGeomLineFunction.AddParameter("colour", Chr(34) & "red" & Chr(34), iPosition:=1)
-
-        clsGeomLineFunction1.SetRCommand("geom_line")
-        clsGeomLineFunction1.AddParameter("mapping", clsRFunctionParameter:=clsAesLine1Function, iPosition:=0)
-        clsGeomLineFunction1.AddParameter("colour", Chr(34) & "blue" & Chr(34), iPosition:=1)
-
         clsGeomLineStarFunction.SetRCommand("geom_line")
         clsGeomLineStarFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesLineStarFunction, iPosition:=0)
         clsGeomLineStarFunction.AddParameter("colour", Chr(34) & "red" & Chr(34), iPosition:=1)
@@ -579,19 +562,11 @@ Public Class dlgClimograph
         clsGeomLineStar1Function.AddParameter("mapping", clsRFunctionParameter:=clsAesLineStar1Function, iPosition:=0)
         clsGeomLineStar1Function.AddParameter("colour", Chr(34) & "blue" & Chr(34), iPosition:=1)
 
-        clsAesLineFunction.SetRCommand("aes")
-        clsAesLineFunction.AddParameter("group", "1", iPosition:=1)
-
         clsAesLineStarFunction.SetRCommand("aes")
-        'clsAesLineStarFunction.AddParameter("y", clsROperatorParameter:=clsStarOperator, iPosition:=1)
         clsAesLineStarFunction.AddParameter("group", "1", iPosition:=2)
-
-        clsAesLine1Function.SetRCommand("aes")
-        clsAesLine1Function.AddParameter("group", "1", iPosition:=1)
 
         clsAesLineStar1Function.SetRCommand("aes")
         clsAesLineStar1Function.AddParameter("group", "1", iPosition:=2)
-        clsAesLineStar1Function.AddParameter("y", clsROperatorParameter:=clsStar1Operator, iPosition:=1)
 
         clsSecondaryAxisFunction.SetRCommand("sec_axis")
         clsSecondaryAxisFunction.AddParameter("x", "~.*0.0393701", iPosition:=0, bIncludeArgumentName:=False)
@@ -1001,7 +976,7 @@ Public Class dlgClimograph
 
     Private Sub openSdgLayerOptionstmax(clsNewGeomFunc As RFunction, clsNewAesFunction As RFunction)
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
-                                   clsNewGlobalAesFunc:=clsNewAesFunction, clsNewLocalAes:=clsLocalRaesFunction,
+                                   clsNewGlobalAesFunc:=clsLocalRaesFunction, clsNewLocalAes:=clsNewAesFunction,
                                    bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimograph,
                                    bApplyAesGlobally:=False, bReset:=bResetLineLayerSubdialog)
         sdgLayerOptions.ShowDialog()
@@ -1015,27 +990,30 @@ Public Class dlgClimograph
                 If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
                     ucrReceiverMonthC.Clear()
                 End If
-                'In the y case, the value stored in the clsReasFunction in the multiple variables 
-                '  case is "value", however that one shouldn't be written in the multiple 
-                '  variables receiver (otherwise it would stack all variables and the stack 
-                '  ("value") itself!).
-                'Warning: what if someone used the name value for one of it's variables 
-                '  independently from the multiple variables method? Here if the receiver is 
-                '  actually in single mode, the variable "value" will still be given back, which 
-                '  throws the problem back to the creation of "value" in the multiple receiver case.
             ElseIf clsParam.strArgumentName = "y" AndAlso clsParam.strArgumentValue <> "value" Then
-                'Still might be in the case of bSingleVariable with mapping y="".
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    '    ucrReceiverElement1.Clear()
-                    'Else
-                    ucrReceiverElement1.Add(clsParam.strArgumentValue)
-                End If
+                ucrReceiverElement1.Add(clsParam.strArgumentValue)
             End If
         Next
         TestOKEnabled()
-        'AddRemoveGeomLines()
-        'AddRemoveGeomBar()
-        'AddRemoveSecondaryAxis()
+    End Sub
+
+    Private Sub openSdgLayerOptionstmin(clsNewGeomFunc As RFunction, clsNewAesFunction As RFunction)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
+                                   clsNewGlobalAesFunc:=clsLocalRaesFunction, clsNewLocalAes:=clsNewAesFunction,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorClimograph,
+                                   bApplyAesGlobally:=False, bReset:=bResetLineLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetLineLayerSubdialog = False
+        For Each clsParam In clsNewAesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    ucrReceiverMonthC.Clear()
+                End If
+            ElseIf clsParam.strArgumentName = "y" AndAlso clsParam.strArgumentValue <> "value" Then
+                ucrReceiverElement2.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputFacet_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputFacet.ControlValueChanged
@@ -1149,7 +1127,6 @@ Public Class dlgClimograph
         AddRemoveFacetClimograph()
         AddRemoveFacets1()
         AddRemoveGroupBy1()
-        'AddRemoveTemBars()
     End Sub
 
     Private Sub GetParameterValue1(clsOperator As ROperator)
@@ -1533,12 +1510,14 @@ Public Class dlgClimograph
         If rdoClimograph.Checked Then
             If Not ucrReceiverElement2.IsEmpty Then
                 If Not ucrReceiverRainC.IsEmpty Then
-                    clsAesLineStar1Function.AddParameter("x", ucrReceiverMonthC.GetVariableNames(False), iPosition:=0)
                     clsStar1Operator.AddParameter("left", ucrReceiverElement2.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+                    clsAesLineStar1Function.AddParameter("y", clsROperatorParameter:=clsStar1Operator, iPosition:=1)
+                    clsAesLineStar1Function.AddParameter("x", ucrReceiverMonthC.GetVariableNames(False), iPosition:=0)
                     clsBaseOperator.AddParameter("geom_line1", clsRFunctionParameter:=clsGeomLineStar1Function, iPosition:=4)
                 Else
-                    clsAesLine1Function.AddParameter("y", ucrReceiverElement2.GetVariableNames(False), iPosition:=0)
-                    clsBaseOperator.AddParameter("geom_line1", clsRFunctionParameter:=clsGeomLineFunction1, iPosition:=4)
+                    clsAesLineStar1Function.AddParameter("x", ucrReceiverMonthC.GetVariableNames(False), iPosition:=0)
+                    clsAesLineStar1Function.AddParameter("y", ucrReceiverElement2.GetVariableNames(False), iPosition:=0)
+                    clsBaseOperator.AddParameter("geom_line1", clsRFunctionParameter:=clsGeomLineStar1Function, iPosition:=4)
                 End If
             Else
                 clsBaseOperator.RemoveParameterByName("geom_line1")
@@ -1685,42 +1664,21 @@ Public Class dlgClimograph
         Else
             clsBaseOperator.RemoveParameterByName("ggwalter_lieth")
         End If
-
-    End Sub
-
-    Private Sub toolStripMenuItemLayersOptionsOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemLayersOptionsOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
-                        clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction,
-                        clsNewFacetFunction:=clsRFacetFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewGlobalAesFunction:=clsBarAesFunction,
-                        clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
-                        clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewFacetVariablesOperator:=clsFacetVariablesOperator, bReset:=bResetSubdialog)
-        sdgPlots.tbpPlotsOptions.SelectedIndex = 1
-        sdgPlots.ShowDialog()
-        sdgPlots.EnableLayersTab()
-        bResetSubdialog = False
-        AddRemoveSecondaryAxis()
-        'AddRemoveGeomLines()
-        'AddRemoveGeomBar()
     End Sub
 
     Private Sub toolStripMenuItemBarchartOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemBarchartOptions.Click
         openSdgLayerOptions(clsGeomBarFunction)
     End Sub
 
-    'Private Sub toolStripMenuItemTminLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTminLineOptions.Click
-    '    If Not ucrReceiverRainC.IsEmpty Then
-    '        openSdgLayerOptions(clsGeomLineStar1Function, clsAesLineStar1Function)
-    '    Else
-    '        openSdgLayerOptions(clsGeomLineFunction1, clsAesLine1Function)
-    '    End If
-    'End Sub
+    Private Sub toolStripMenuItemTminLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTminLineOptions.Click
+        openSdgLayerOptionstmin(clsGeomLineStar1Function, clsAesLineStar1Function)
+        clsAesLineStar1Function.AddParameter("group", "1", iPosition:=2)
+        AddRemoveGeomLine1()
+    End Sub
 
     Private Sub toolStripMenuItemTmaxLineOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTmaxLineOptions.Click
         openSdgLayerOptionstmax(clsGeomLineStarFunction, clsAesLineStarFunction)
-        'If Not ucrReceiverRainC.IsEmpty Then
-        'clsStarOperator.AddParameter("left", ucrReceiverElement1.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-        'clsAesLineStarFunction.AddParameter("y", clsROperatorParameter:=clsStarOperator, iPosition:=1)
-
+        clsAesLineStarFunction.AddParameter("group", "1", iPosition:=2)
         AddRemoveGeomLines()
     End Sub
 

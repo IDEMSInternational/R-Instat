@@ -44,7 +44,6 @@ Partial Class dlgClimograph
         Me.toolStripMenuItemBarchartOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTmaxLineOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemTminLineOptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItemLayersOptionsOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.rdoClimateBars = New System.Windows.Forms.RadioButton()
         Me.lblRainBar = New System.Windows.Forms.Label()
         Me.lblElement1Bar = New System.Windows.Forms.Label()
@@ -263,9 +262,9 @@ Partial Class dlgClimograph
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBarchartOptions, Me.toolStripMenuItemTmaxLineOptions, Me.toolStripMenuItemTminLineOptions, Me.toolStripMenuItemLayersOptionsOptions})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBarchartOptions, Me.toolStripMenuItemTmaxLineOptions, Me.toolStripMenuItemTminLineOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 136)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 114)
         '
         'toolStripMenuItemPlotOptions
         '
@@ -290,12 +289,6 @@ Partial Class dlgClimograph
         Me.toolStripMenuItemTminLineOptions.Name = "toolStripMenuItemTminLineOptions"
         Me.toolStripMenuItemTminLineOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemTminLineOptions.Text = "Line Options (Tmin)"
-        '
-        'toolStripMenuItemLayersOptionsOptions
-        '
-        Me.toolStripMenuItemLayersOptionsOptions.Name = "toolStripMenuItemLayersOptionsOptions"
-        Me.toolStripMenuItemLayersOptionsOptions.Size = New System.Drawing.Size(180, 22)
-        Me.toolStripMenuItemLayersOptionsOptions.Text = "Layers Options"
         '
         'rdoClimateBars
         '
@@ -822,7 +815,6 @@ Partial Class dlgClimograph
     Friend WithEvents toolStripMenuItemBarchartOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemTmaxLineOptions As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemTminLineOptions As ToolStripMenuItem
-    Friend WithEvents toolStripMenuItemLayersOptionsOptions As ToolStripMenuItem
     Friend WithEvents cmdOptions As ucrSplitButton
     Friend WithEvents rdoClimateBars As RadioButton
     Friend WithEvents ucrReceiverRainBar As ucrReceiverSingle
