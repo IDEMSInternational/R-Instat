@@ -132,7 +132,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
     calculated_from <- as.list(manip_factors)
     names(calculated_from) <- rep(data_name, length(manip_factors))
     calculated_from <- as.list(calculated_from)
-    factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
+    factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from, param_list = list(drop = drop))
     manipulations <- list(factor_by)
   }
   else manipulations <- list()
@@ -142,7 +142,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
       calculated_from <- as.list(value_factors)
       names(calculated_from) <- rep(data_name, length(value_factors))
       calculated_from <- as.list(calculated_from)
-      factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
+      factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from, param_list = list(drop = drop))
       value_manipulations <- list(factor_by)
     }
     else value_manipulations <- list()
@@ -223,7 +223,15 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
     manipulations <- c(additional_filter, manipulations)
   }
   combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
-  out <- self$apply_instat_calculation(combined_calc_sum)
+
+  # setting up param_list. Here we read in .drop and .preserve
+  param_list <- list()
+  for (i in 1:length(combined_calc_sum$manipulations)){
+    if (combined_calc_sum$manipulations[[i]]$type %in% c("by", "filter")){
+        param_list <- c(param_list, combined_calc_sum$manipulations[[i]]$param_list)
+    }
+  }
+  out <- self$apply_instat_calculation(combined_calc_sum, param_list = param_list)
   # relocate so that the factors are first still for consistency	
   if (percentage_type != "none"){	
     out$data <- (out$data %>% dplyr::select(c(tidyselect::all_of(factors), tidyselect::all_of(manip_factors)), tidyselect::everything()))	
