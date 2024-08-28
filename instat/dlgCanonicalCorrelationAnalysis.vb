@@ -66,7 +66,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrSaveResult.SetSaveType(RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
         ucrSaveResult.SetDataFrameSelector(ucrSelectorCCA.ucrAvailableDataFrames)
         ucrSaveResult.SetIsComboBox()
-        ucrSaveResult.SetCheckBoxText("Save Model")
+        ucrSaveResult.SetCheckBoxText("Store Model")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
 
     End Sub

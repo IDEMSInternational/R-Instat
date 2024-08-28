@@ -54,6 +54,8 @@ Public Class frmMain
     Public strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
     Public strAutoSaveInternalLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_debug_log_auto_save")
 
+    Private strMarkerFilePath As String = Path.Combine(strAutoSaveLogFolderPath, "app_marker.log")
+
     Public strCurrentAutoSaveDataFilePath As String = ""
 
     Private strLatestVersion As String = ""
@@ -295,7 +297,8 @@ Public Class frmMain
         mnuViewSwapDataAndScript.Checked = False
         mnuColumnMetadat.Checked = False
         mnuDataFrameMetadat.Checked = False
-
+        mnuSwapDataLogScript.Checked = False
+        mnuSwapDataMetadata.Checked = False
         mnuTbDataView.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
@@ -456,32 +459,41 @@ Public Class frmMain
 
         '---------------------------------------
         'prompt user for recovery selection
-        If (strAutoSavedLogFilePaths.Length > 0 OrElse
-            strAutoSavedDataFilePaths.Length > 0) AndAlso
-            MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
-                          "Would you like to see auto recovery options?",
-                          MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
+        'Check if the marker file exists
+        If File.Exists(strMarkerFilePath) Then
+            Dim lastExitStatus As String = File.ReadAllText(strMarkerFilePath).Trim()
+            If lastExitStatus <> "CleanExit" AndAlso
+                MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
+                              "Would you like to see auto recovery options?",
+                              MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
 
-            dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
-            dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
-            dlgAutoSaveRecovery.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
-            dlgAutoSaveRecovery.ShowDialog()
+                dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
+                dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
+                dlgAutoSaveRecovery.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
+                dlgAutoSaveRecovery.ShowDialog()
 
-            'todo. the dialog design is meant to only return just one option; script, data file path or new session.
-            'refactor the dialog to enforce the design
+                'todo. the dialog design is meant to only return just one option; script, data file path or new session.
+                'refactor the dialog to enforce the design
 
-            'get the R script from read file if selected by the user
-            strScript = dlgAutoSaveRecovery.GetScript()
-            'get the data file path if selected by the user
-            strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
+                'get the R script from read file if selected by the user
+                strScript = dlgAutoSaveRecovery.GetScript()
+                'get the data file path if selected by the user
+                strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
+            End If
         End If
+
+        Using writer As StreamWriter = New StreamWriter(strMarkerFilePath, False)
+            writer.WriteLine("Running")
+        End Using
+
         '---------------------------------------
+
 
         '---------------------------------------
         'delete the recovery files
         If strAutoSavedLogFilePaths.Length > 0 Then
             Try
-                File.Delete(strAutoSavedLogFilePaths(0))
+                File.Delete(strAutoSavedLogFilePaths(1)) '1 to avoid deleting app_marker file
             Catch ex As Exception
                 MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
             End Try
@@ -578,25 +590,29 @@ Public Class frmMain
             splMetadata.Panel1.Controls.Add(ucrDataViewer)
             mnuViewColumnMetadata.Text = "Data View"
             mnuViewDataView.Text = "Column Metadata"
+            mnuSwapDataMetadata.Checked = True
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel1.Controls.Add(ucrColumnMeta)
             mnuViewColumnMetadata.Text = "Column Metadata"
             mnuViewDataView.Text = "Data View"
+            mnuSwapDataMetadata.Checked = False
         End If
     End Sub
 
-    Private Sub UpdateSwapDataAndScript()
+    Public Sub UpdateSwapDataAndScript()
         If mnuViewSwapDataAndScript.Checked Then
             splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
             splExtraWindows.Panel2.Controls.Add(ucrDataViewer)
             mnuViewLogScript.Text = "Data View"
             mnuViewDataView.Text = "Log/Script"
+            mnuSwapDataLogScript.Checked = True
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splExtraWindows.Panel2.Controls.Add(ucrScriptWindow)
             mnuViewLogScript.Text = "Log/Script"
             mnuViewDataView.Text = "Data View"
+            mnuSwapDataLogScript.Checked = False
         End If
     End Sub
 
@@ -717,7 +733,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareReshapeMerge_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeMerge.Click
-        dlgMerge.enumMergeMode = dlgMerge.MergeMode.Prepare
         dlgMerge.ShowDialog()
     End Sub
 
@@ -1039,6 +1054,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
+        dlgOneVariableSummarise.enumOnevariableMode = dlgOneVariableSummarise.OnevariableMode.Describe
         dlgOneVariableSummarise.ShowDialog()
     End Sub
 
@@ -1072,6 +1088,11 @@ Public Class frmMain
                 If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
                     CefRuntimeWrapper.ShutDownCef()
                 End If
+
+                Using writer As StreamWriter = New StreamWriter(strMarkerFilePath, False)
+                    writer.WriteLine("CleanExit")
+                End Using
+
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try
@@ -1322,7 +1343,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuHelpHistFAQ_Click(sender As Object, e As EventArgs) Handles mnuHelpFAQ.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "290")
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "324")
     End Sub
 
     Private Sub mnuHelpGetingStarted_Click(sender As Object, e As EventArgs) Handles mnuHelpGetingStarted.Click
@@ -1502,6 +1523,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticFileImportandTidyNetCDF_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportandTidyNetCDF.Click
+        dlgOpenNetCDF.enumNetCDFMode = dlgOpenNetCDF.NetCDFMode.Climatic
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
@@ -1958,6 +1980,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileImportandTidyNetCDFFile_Click(sender As Object, e As EventArgs) Handles mnuFileImportandTidyNetCDFFile.Click
+        dlgOpenNetCDF.enumNetCDFMode = dlgOpenNetCDF.NetCDFMode.File
         dlgOpenNetCDF.ShowDialog()
     End Sub
 
@@ -2079,8 +2102,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticTidyandExamineMerge_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineMerge.Click
-        dlgMerge.enumMergeMode = dlgMerge.MergeMode.Climatic
-        dlgMerge.ShowDialog()
+        dlgMergeAdditionalData.enumMergeMode = dlgMergeAdditionalData.MergeMode.Climatic
+        dlgMergeAdditionalData.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticCMSAFExporttoCMSAFRToolbox_Click(sender As Object, e As EventArgs) Handles mnuClimaticCMSAFExporttoCMSAFRToolbox.Click
@@ -2192,6 +2215,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCalculateCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculator.Click
+        dlgCalculator.enumCalculatorMode = dlgCalculator.CalculatorMode.Prepare
         dlgCalculator.ShowDialog()
     End Sub
 
@@ -2357,7 +2381,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuClimaticCompareCorrelations_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareCorrelations.Click
-        dlgCorrelation.SetMultipleSequenceAsDefaultOption()
+        dlgCorrelation.SetClimaticAsDefaultOption()
         dlgCorrelation.ShowDialog()
     End Sub
 
@@ -2377,9 +2401,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuStructuredCircularCalculator_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularCalculator.Click
-        If dlgCalculator.bFirstLoad Then
-            dlgCalculator.SetDefaultKeyboard("Circular")
-        End If
+        dlgCalculator.enumCalculatorMode = dlgCalculator.CalculatorMode.Structured
         dlgCalculator.ShowDialog()
     End Sub
 
@@ -2581,6 +2603,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareDataFrameAddMergeColumns_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameAddMergeColumns.Click
+        dlgMergeAdditionalData.enumMergeMode = dlgMergeAdditionalData.MergeMode.Prepare
         dlgMergeAdditionalData.ShowDialog()
     End Sub
 
@@ -2805,5 +2828,27 @@ Public Class frmMain
 
     Private Sub MenusAndDialogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MenusAndDialogsToolStripMenuItem.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
+    End Sub
+
+    Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
+        mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
+        mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
+        UpdateSwapDataAndMetadata()
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuSwapDataLogScript_Click(sender As Object, e As EventArgs) Handles mnuSwapDataLogScript.Click
+        mnuViewSwapDataAndMetadata.Enabled = mnuViewSwapDataAndScript.Checked
+        mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
+        UpdateSwapDataAndScript()
+        UpdateLayout()
+    End Sub
+
+    Private Sub RInstatResourcesSiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RInstatResourcesSiteToolStripMenuItem.Click
+        Process.Start("https://ecampus.r-instat.org/course/view.php?id=14")
+    End Sub
+
+    Private Sub mnuImportFromOpenAppBuilder_Click(sender As Object, e As EventArgs) Handles mnuImportFromOpenAppBuilder.Click
+        dlgImportOpenAppBuilder.ShowDialog()
     End Sub
 End Class

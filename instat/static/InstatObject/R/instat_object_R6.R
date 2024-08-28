@@ -10,6 +10,7 @@ DataBook <- R6::R6Class("DataBook",
                           { 
                             self$set_meta(instat_obj_metadata)
                             self$set_objects(list())
+                            self$set_scalars(list())
                             
                             if (missing(data_tables) || length(data_tables) == 0) {
                               self$set_data_objects(list())
@@ -29,6 +30,7 @@ DataBook <- R6::R6Class("DataBook",
                           .data_sheets = list(),
                           .metadata = list(),
                           .objects = list(),
+                          .scalars = list(),
                           .links = list(),
                           .data_sheets_changed = FALSE,
                           .database_connection = NULL,
@@ -229,13 +231,15 @@ DataBook$set("public", "import_RDS", function(data_RDS,
 }
 )
 
-DataBook$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_column_selections = TRUE, include_calculations = TRUE, include_comments = TRUE, ...) {
+DataBook$set("public", "clone_data_object", function(curr_data_object, include_objects = TRUE, include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_column_selections = TRUE, include_calculations = TRUE, include_comments = TRUE, include_scalars = TRUE, ...) {
   curr_names <- names(curr_data_object)
   if("get_data_frame" %in% curr_names) new_data <- curr_data_object$get_data_frame(use_current_filter = FALSE)
   else stop("Cannot import data. No 'get_data_frame' method.")
   if("get_metadata" %in% curr_names) new_data_name <- curr_data_object$get_metadata(data_name_label)
   if(include_objects && "get_objects" %in% curr_names) new_objects <- curr_data_object$get_objects()
   else new_objects <- list()
+  if(include_scalars && "get_scalars" %in% curr_names) new_scalars <- curr_data_object$get_scalars()
+  else new_scalars <- list()
   if(include_filters && "get_filter" %in% curr_names) {
     new_filters <- lapply(curr_data_object$get_filter(), function(x) x$data_clone())
     new_filters <- lapply(new_filters, function(x) check_filter(x))
@@ -249,7 +253,7 @@ DataBook$set("public", "clone_data_object", function(curr_data_object, include_o
   if("get_keys" %in% curr_names) new_keys <- curr_data_object$get_keys()
   else new_keys <- list()
   
-  new_data_object <- DataSheet$new(data = new_data, data_name = new_data_name, filters = new_filters, column_selections = new_column_selections, objects = new_objects, calculations = new_calculations, keys = new_keys, comments = new_comments, keep_attributes = include_metadata)
+  new_data_object <- DataSheet$new(data = new_data, data_name = new_data_name, filters = new_filters, column_selections = new_column_selections, objects = new_objects, calculations = new_calculations, scalars = new_scalars, keys = new_keys, comments = new_comments, keep_attributes = include_metadata)
   if(include_logs && "get_changes" %in% curr_names) {
     new_changes <- curr_data_object$get_changes()
   }
@@ -309,6 +313,12 @@ DataBook$set("public", "set_meta", function(new_meta) {
 DataBook$set("public", "set_objects", function(new_objects) {
   if(!is.list(new_objects)) stop("new_objects must be of type: list")
   private$.objects <- new_objects 
+}
+)
+
+DataBook$set("public", "set_scalars", function(new_scalars) {
+  if(!is.list(new_scalars)) stop("new_scalars must be of type: list")
+  private$.scalars <- new_scalars 
 }
 )
 
@@ -402,8 +412,15 @@ DataBook$set("public", "get_combined_metadata", function(convert_to_character = 
   i = 1
   for (curr_obj in private$.data_sheets) {
     templist = curr_obj$get_metadata()
-    for (j in (1:length(templist))) {
-      if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
+    for (j in seq_along(templist)) {
+      if (is.list(templist[[j]]) || length(templist[[j]]) > 1) {
+        if (length(templist[[j]]) > 0) {
+          templist[[j]] <-
+            paste(names(templist[[j]]), " = ", templist[[j]], collapse = ", ")
+        } else {
+          next
+        }
+      }
       retlist[i, names(templist[j])] = templist[[j]]
     }
     if(all(c(data_name_label, label_label, row_count_label, column_count_label,
@@ -487,6 +504,57 @@ DataBook$set("public", "get_calculation_names", function(data_name, as_list = FA
   return(self$get_data_objects(data_name)$get_calculation_names(as_list = as_list, excluded_items = excluded_items))
 } 
 )
+
+
+DataBook$set("public", "get_scalars", function(data_name) {
+  if(is.null(data_name) || identical(data_name, overall_label)) {
+    out <- private$.scalars[self$get_scalar_names(data_name = data_name)]
+  }else {
+    out <- self$get_data_objects(data_name)$get_scalars()
+  }
+  return(out)
+  
+}
+)
+
+DataBook$set("public", "get_scalar_names", function(data_name,
+                                                    as_list = FALSE,
+                                                    excluded_items = c(),...) {
+  if (is.null(data_name) || identical(data_name, overall_label)) {
+    out <-
+      get_data_book_scalar_names(
+        scalar_list = private$.scalars,
+        as_list = as_list,
+        list_label = overall_label
+      )
+  } else{
+    out <-
+      self$get_data_objects(data_name)$get_scalar_names(as_list = as_list, excluded_items = excluded_items)
+  }
+  
+  return(out)
+})
+
+DataBook$set("public", "get_scalar_value", function(data_name, scalar_name) {
+  self$get_data_objects(data_name)$get_scalar_value(scalar_name)
+}
+)
+
+DataBook$set("public", "add_scalar", function(data_name, scalar_name = "", scalar_value) {
+  if (is.null(data_name) || identical(data_name, overall_label)) {
+    if (missing(scalar_name))
+      scalar_name <- next_default_item("scalar", names(private$.scalars))
+    if (scalar_name %in% names(private$.scalars))
+      warning("A scalar called ",
+              scalar_name,
+              " already exists. It will be replaced.")
+    
+    #add the scalar
+    private$.scalars[[scalar_name]] <- scalar_value
+  } else{
+    self$get_data_objects(data_name)$add_scalar(scalar_name, scalar_value)
+  }
+})
 
 DataBook$set("public", "dataframe_count", function() {
   return(length(private$.data_sheets))
@@ -1780,6 +1848,265 @@ DataBook$set("public", "database_disconnect", function() {
 }
 )
 
+#Gets the row count of the table.
+DataBook$set("public", "get_db_table_row_count", function(tableName, query_condition = NULL) {
+  con <- self$get_database_connection()
+  if(is.null(con)){
+    stop("No database connection")
+  }
+  
+  if(is.null(query_condition)){
+    query_condition <- ""
+  }
+  
+  out <- DBI::dbGetQuery(con, paste0("SELECT COUNT(*) as result FROM ",tableName," ", query_condition, ";" ))
+  return(out$result) 
+  
+})
+
+#Imports Climsoft metadata.
+DataBook$set("public", "import_climsoft_metadata", function(import_stations = FALSE, import_elements = FALSE, import_flags = FALSE) {
+  
+  if(!import_stations && !import_elements){
+    stop("No metadata selected for import")
+  }
+  
+  con <- self$get_database_connection()
+  if(is.null(con)){
+    stop("No database connection")
+  }
+  
+  #imports metadata
+  #--------------------------------
+  data_list <- list()
+  
+  if(import_stations){
+    # TODO.(22/03/2023) 2 fields have been intentionally left out because they are yet to be released to Climsoft users. Namely; wsi and gtsWSI
+    # include them once the new Climsoft release has been supplied to users
+    stations_df <- DBI::dbGetQuery(con, "SELECT stationId AS station_id, stationName AS station_name, wmoid, icaoid, latitude, longitude, elevation, qualifier, geoLocationMethod AS geo_location_method, geoLocationAccuracy AS geo_location_accuracy, openingDatetime AS opening_date_time, closingDatetime AS closing_date_time, wacaSelection AS waca_selection, cptSelection AS cpt_selection, stationOperational AS station_operational, drainageBasin AS drainage_basin, country AS country, authority, adminRegion AS admin_region_1, adminRegion2 AS admin_region_2, adminRegion3 AS admin_region_3, adminRegion4 AS admin_region_4 FROM station;")
+   
+    columns_to_convert <- c("station_id","station_name","qualifier", "station_operational", "drainage_basin", "country", "authority", "admin_region_1", "admin_region_2", "admin_region_3", "admin_region_4")
+    stations_df[columns_to_convert] <- lapply(stations_df[columns_to_convert], as.factor)
+    
+    stations_df_name <- next_default_item("stations_metadata", self$get_data_names(), include_index = FALSE)
+    data_list[[stations_df_name]] <- stations_df
+  }
+  
+  if(import_elements){
+    elements_df <- DBI::dbGetQuery(con, "SELECT elementId AS element_id, elementName AS element_name, abbreviation, description, elementtype AS element_type, upperLimit AS upper_limit , lowerLimit AS lower_limit, units FROM obselement;")
+    
+    columns_to_convert <- c("element_id","element_name","abbreviation","element_type")
+    elements_df[columns_to_convert] <- lapply(elements_df[columns_to_convert], as.factor)
+    
+    elements_df_name <- next_default_item("elements_metadata", self$get_data_names(), include_index = FALSE)
+    data_list[[elements_df_name]] <- elements_df
+  }
+  
+  if(import_flags){
+    flags_df <- DBI::dbGetQuery(con, "SELECT characterSymbol AS flag_name, description FROM flags;")
+   
+    flags_df$flag_name <- as.factor(flags_df$flag_name) 
+    
+    flags_df_name <- next_default_item("flags_metadata", self$get_data_names(), include_index = FALSE)
+    data_list[[flags_df_name]] <- flags_df
+  }
+  
+  # Import the data frames into the data book
+  self$import_data(data_tables = data_list)
+  
+})
+
+#imports data from Climsoft observation tables; initial or final.
+#imports selected stations and elements metadata
+DataBook$set("public", "import_climsoft_data", function(tableName,
+                                                        station_filter_column, stations = c(), 
+                                                        element_filter_column, elements = c(),
+                                                        qc_status = -1, start_date = NULL, end_date = NULL, unstack_data = FALSE,
+                                                        include_element_id = FALSE, include_element_name = FALSE, 
+                                                        include_acquisition_type = FALSE, include_level = FALSE, include_entry_form = FALSE, include_captured_by = FALSE, 
+                                                        include_qc_status = FALSE, include_qc_log = FALSE, include_flag = FALSE, 
+                                                        import_selected_stations_metadata = FALSE, import_selected_elements_metadata = FALSE) {
+  #connection and parameter checks
+  #--------------------------------
+  con <- self$get_database_connection()
+  if(is.null(con)){
+    stop("No database connection")
+  }
+  
+  if(missing(tableName) || missing(station_filter_column) || missing(element_filter_column) || length(stations) == 0  || length(elements) == 0){
+    stop("Missing parameters. tableName, station_filter_column, element_filter_column, stations and elements must be supplied")
+  }
+  
+  if (!is.null(start_date) && !lubridate::is.Date(start_date) ) {
+    stop("start_date must be of type Date.")
+  }
+  
+  if (!is.null(end_date) && !lubridate::is.Date(end_date) ) {
+    stop("start_date must be of type Date.")
+  }
+  #--------------------------------
+  
+  #selects
+  #--------------------------------
+
+  sql_select<- paste0(tableName,".recordedFrom AS station_id",", station.stationName AS station_name") 
+  
+  if(include_element_id){
+    sql_select <-paste0(sql_select, ", ", tableName,".describedBy AS element_id") 
+  }
+  
+  sql_select <-paste0(sql_select,", obselement.abbreviation AS element_abbrv")
+  
+  if(include_element_name){
+    sql_select <-paste0(sql_select,", obselement.elementName AS element_name")
+  }
+  
+  if(include_acquisition_type){
+    sql_select <-paste0(sql_select,", ", tableName,".acquisitionType"," AS acquisition_type") 
+  }
+  
+  if(include_level){
+    sql_select <-paste0(sql_select,", ", tableName,".obsLevel"," AS level") 
+  }
+  
+  if(include_entry_form){
+    sql_select <-paste0(sql_select,", ", tableName,".dataForm"," AS entry_form") 
+  }
+  
+  if(include_captured_by){
+    sql_select <-paste0(sql_select,", ", tableName,".capturedBy"," AS captured_by") 
+  }
+  
+  if(include_qc_status){
+    sql_select <-paste0(sql_select,", ", tableName,".qcStatus"," AS qc_status") 
+  }
+  
+  sql_select <-paste0(sql_select,", ", tableName,".obsDatetime AS date_time") 
+  sql_select <-paste0(sql_select,", DATE(", tableName,".obsDatetime) AS date") 
+  
+  if(include_qc_log){
+    sql_select <-paste0(sql_select,", ", tableName,".qcTypeLog"," AS qc_log") 
+  }
+  
+  if(include_flag){
+    sql_select <-paste0(sql_select,", ", tableName,".flag"," AS flag") 
+  }
+  
+  sql_select <-paste0(sql_select,", ", tableName,".obsValue AS value") 
+  
+  sql_select<- paste0("SELECT ", sql_select, " FROM ", tableName,
+                      " INNER JOIN station ON ", tableName, ".recordedFrom = station.stationId",
+                      " INNER JOIN obselement ON ",tableName,".describedBy = obselement.elementId")
+  #--------------------------------
+  
+  #filters
+  #--------------------------------
+  sql_stations_filter <- paste0(" station.", station_filter_column, " IN ", paste0("(", paste0("'", stations, "'", collapse =  ", "), ")"))
+  sql_elements_filter <- paste0(" obselement.", element_filter_column, " IN ", paste0("(", paste0("'", elements, "'", collapse =  ", "), ")"))
+  
+  sql_filter <- sql_stations_filter
+  sql_filter <- paste0(sql_filter," AND ",sql_elements_filter)
+  
+  if(qc_status>-1){
+    sql_filter <- paste0(sql_filter," AND qcStatus = ", qc_status)
+  }
+  
+  if (!is.null(start_date)) {
+    sql_filter = paste0(sql_filter," AND obsDatetime >= ", sQuote(format(start_date, format = "%Y-%m-%d")))
+  }
+  
+  if (!is.null(end_date)) {
+    sql_filter <- paste0(sql_filter," AND obsDatetime <=", sQuote(format(end_date, format = "%Y-%m-%d")))
+  }
+  
+  sql_filter<- paste0(" WHERE ",sql_filter)
+  #--------------------------------
+  
+  #order by
+  #--------------------------------
+  sql_order_by <- paste0(" ORDER BY ",tableName,".recordedFrom, ",tableName, ".describedBy, ",tableName, ".obsDatetime",";")
+  #--------------------------------
+  
+  # Data list to store all the imported data frames
+  data_list <- list()
+  
+  #import metadata
+  #--------------------------------
+  
+  if(import_selected_stations_metadata){
+    stations_metadata_name <- next_default_item("stations_metadata", self$get_data_names(), include_index = FALSE)
+    data_list[[stations_metadata_name]] <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE", sql_stations_filter))
+  }
+  
+  if(import_selected_elements_metadata){
+    elements_metadata_name <- next_default_item("elements_metadata", self$get_data_names(), include_index = FALSE)
+    data_list[[elements_metadata_name]] <- DBI::dbGetQuery(con, paste0("SELECT * FROM obselement WHERE", sql_elements_filter))
+  }
+  
+  #--------------------------------
+  
+  # import and transform observations data data
+  # --------------------------------
+  
+  # Get observations data from database
+  observations_df <- DBI::dbGetQuery(con, paste0(sql_select, sql_filter, sql_order_by))
+  
+  # Convert station name and abbreviation columns to factor
+  columns_to_convert <- c("station_id", "station_name", "element_abbrv")
+  observations_df[columns_to_convert] <- lapply(observations_df[columns_to_convert], as.factor)
+  
+  # Convert the date_time column to POSIXct (date-time) format
+  observations_df$date_time <- as.POSIXct(observations_df$date_time, format = "%Y-%m-%d %H:%M:%S")
+  
+  # convert the date column to date format
+  observations_df$date <- as.Date(x = observations_df$date)
+  
+  if(include_element_id){
+    observations_df$element_id <- as.factor(observations_df$element_id)
+  }
+  
+  if(include_element_name){
+    observations_df$element_name <- as.factor(observations_df$element_name)
+  }
+  
+  if(include_qc_status){
+    observations_df$qc_status <- as.factor(observations_df$qc_status)
+  }
+  
+  if(include_acquisition_type){
+    observations_df$acquisition_type <- as.factor(observations_df$acquisition_type)
+  }
+  
+  if(include_level){
+    observations_df$level <- as.factor(observations_df$level)
+  }
+  
+  if(include_flag){
+    observations_df$flag <- as.factor(observations_df$flag)
+  }
+  
+  if(include_entry_form){
+    observations_df$entry_form <- as.factor(observations_df$entry_form)
+  }
+  
+  #--------------------------------
+  
+  # Add observations data to list of data to be imported
+  # --------------------------------
+  observations_data_name <- next_default_item("observations_data", self$get_data_names(), include_index = FALSE)
+  data_list[[observations_data_name]] <- observations_df
+  
+  if(unstack_data){
+    observations_unstacked_data_name <- next_default_item("observations_unstacked_data", self$get_data_names(), include_index = FALSE)
+    data_list[[observations_unstacked_data_name]] <- tidyr::pivot_wider(data = observations_df, names_from=element_abbrv, values_from=value)
+  }
+  
+  # Import list of data frames to data book
+  self$import_data(data_tables = data_list)
+  
+})
+
+#TODO. Deprecated. Delete this after after deleting the import from Climsoft wizard dialog
 DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "stationId", stations = c(), elementfiltercolumn = "elementId", elements = c(), include_observation_data = FALSE, include_observation_flags = FALSE, unstack_data = FALSE, include_elements_info = FALSE, start_date = NULL, end_date = NULL) {
   #need to perform checks here
   con <- self$get_database_connection()
@@ -2750,4 +3077,9 @@ DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, colum
     self$add_columns_to_data(data_name=data_name, col_name=col_name, col_data=column_data, before=FALSE)
   }
 }
+)
+
+DataBook$set("public", "anova_tables2", function(data_name, x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+  self$get_data_objects(data_name)$anova_tables2(x_col_names = x_col_names, y_col_name = y_col_name, signif.stars = signif.stars, sign_level = sign_level, means = means)
+} 
 )

@@ -28,6 +28,8 @@ Public Class sdgMerge
     End Sub
 
     Public Sub InitiatiseControls()
+        ucrSubBase.iHelpTopicID = 51
+
         ucrSelectorFirstDF.SetLabelText("First Data Frame")
         ucrSelectorSecondDF.SetLabelText("Second Data Frame")
 
@@ -95,10 +97,10 @@ Public Class sdgMerge
     End Sub
 
     Private Sub SetHelpOptions()
-        Select Case dlgMerge.enumMergeMode
-            Case dlgMerge.MergeMode.Prepare
+        Select Case dlgMergeAdditionalData.enumMergeMode
+            Case dlgMergeAdditionalData.MergeMode.Prepare
                 ucrSubBase.iHelpTopicID = 51
-            Case dlgMerge.MergeMode.Climatic
+            Case dlgMergeAdditionalData.MergeMode.Climatic
                 ucrSubBase.iHelpTopicID = 624
         End Select
     End Sub
