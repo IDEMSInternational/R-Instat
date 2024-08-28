@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class dlgExportToClimsoft
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDataFrameFunction, clsCurrentNewColumnFunction, clsDummyFunction, clsMutateFunction, clsExportClimsoftFunction As New RFunction
+    Private clsDataFrameFunction, clsCurrentNewColumnFunction, clsDummyFunction, clsMutateFunction, clsExportClimsoftFunction, clsPasteFunction, clsSprintfFunction, clsFormatFunction, clsPosixctFunction As New RFunction
     Private clsPipeOperator As New ROperator
 
     Private Sub dlgExportToClimsoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -52,11 +52,18 @@ Public Class dlgExportToClimsoft
         ucrReceiverDate.Selector = ucrSelectorImportToClimsoft
         ucrReceiverDate.bAutoFill = True
 
+        ucrPnlDailyHourly.AddRadioButton(rdoDaily)
+        ucrPnlDailyHourly.AddRadioButton(rdoHourly)
+        ucrPnlDailyHourly.AddParameterValuesCondition(rdoDaily, "checked", "daily")
+        ucrPnlDailyHourly.AddParameterValuesCondition(rdoHourly, "checked", "hourly")
+
         ucrInputHour.SetParameter(New RParameter("hour", 3))
         ucrInputHour.SetLinkedDisplayControl(lblHour)
 
-        ucrInputLevel.SetParameter(New RParameter("level", 4))
-        ucrInputLevel.SetLinkedDisplayControl(lblLevel)
+        ucrReceiverStationID.SetParameter(New RParameter("station_id", 4))
+        ucrReceiverStationID.SetParameterIsRFunction()
+        ucrReceiverStationID.SetLinkedDisplayControl(lblStationID)
+        ucrReceiverStationID.Selector = ucrSelectorImportToClimsoft
 
         ucrReceiverElements.SetParameter(New RParameter("element", 5, bNewIncludeArgumentName:=False))
         ucrReceiverElements.SetParameterIsRFunction()
@@ -89,6 +96,8 @@ Public Class dlgExportToClimsoft
         clsCurrentNewColumnFunction = New RFunction
         clsMutateFunction = New RFunction
         clsExportClimsoftFunction = New RFunction
+        clsPasteFunction = New RFunction
+        clsSprintfFunction = New RFunction
         clsPipeOperator = New ROperator
 
         ucrSelectorImportToClimsoft.Reset()
@@ -97,10 +106,18 @@ Public Class dlgExportToClimsoft
 
         clsDummyFunction.AddParameter("dataframe", "True", iPosition:=0)
         clsDummyFunction.AddParameter("export", "False", iPosition:=1)
+        clsDummyFunction.AddParameter("checked", "daily", iPosition:=2)
+
+        clsPosixctFunction.SetRCommand("as.POSIXct")
+        clsPosixctFunction.AddParameter("x", clsRFunctionParameter:=clsPasteFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsPosixctFunction.AddParameter("format", Chr(34) & "%Y-%m-%d %H:%M:%S" & Chr(34), iPosition:=1)
+
+        clsFormatFunction.SetRCommand("format")
+        clsFormatFunction.AddParameter("posix", clsRFunctionParameter:=clsPosixctFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsFormatFunction.AddParameter("yhs", Chr(34) & "%Y-%m-%d %H:%M:%S" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
 
         clsDataFrameFunction.SetRCommand("data.frame")
-        clsDataFrameFunction.AddParameter("hour", 6, iPosition:=3)
-        clsDataFrameFunction.AddParameter("level", "surface", iPosition:=4)
+        clsDataFrameFunction.AddParameter("date_time", clsRFunctionParameter:=clsFormatFunction, iPosition:=0)
         clsDataFrameFunction.AddParameter("x", "columns", iPosition:=5, bIncludeArgumentName:=False)
 
         clsPipeOperator.SetOperation("%>%")
@@ -114,18 +131,27 @@ Public Class dlgExportToClimsoft
         clsExportClimsoftFunction.SetRCommand("export")
         clsExportClimsoftFunction.AddParameter("x", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
 
+        clsPasteFunction.SetRCommand("paste")
+        clsPasteFunction.SetAssignTo("date1")
+
+        clsSprintfFunction.SetRCommand("sprintf")
+        clsSprintfFunction.AddParameter("hour", 6, iPosition:=1)
+
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsCurrentNewColumnFunction, iPosition:=0)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsPasteFunction, iPosition:=1)
 
         DataFrameAssignTo()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverDate.SetRCode(clsDataFrameFunction, bReset)
-        ucrInputHour.SetRCode(clsDataFrameFunction, bReset)
-        ucrInputLevel.SetRCode(clsDataFrameFunction, bReset)
+        ucrReceiverDate.SetRCode(clsPasteFunction, bReset)
+        ucrInputHour.SetRCode(clsSprintfFunction, bReset)
+        ucrReceiverStationID.SetRCode(clsDataFrameFunction, bReset)
         ucrSaveNewDataFrame.SetRCode(clsPipeOperator, bReset)
         ucrInputExportFile.SetRCode(clsExportClimsoftFunction, bReset)
+        ucrPnlDailyHourly.SetRCode(clsDummyFunction, bReset)
         If bReset Then
             ucrChkExportDataFrame.SetRCode(clsDummyFunction, bReset)
             ucrChkNewDataFrame.SetRCode(clsDummyFunction, bReset)
@@ -135,7 +161,7 @@ Public Class dlgExportToClimsoft
     Private Sub TestOkEnabled()
         ucrBase.OKEnabled(Not ucrReceiverDate.IsEmpty _
                               AndAlso Not ucrReceiverElements.IsEmpty _
-                              AndAlso Not ucrReceiverStation.IsEmpty
+                              AndAlso (Not ucrReceiverStation.IsEmpty OrElse Not ucrReceiverStationID.IsEmpty)
                               )
         If ucrChkNewDataFrame.Checked And Not ucrSaveNewDataFrame.IsComplete Then
             ucrBase.OKEnabled(False)
@@ -245,8 +271,8 @@ Public Class dlgExportToClimsoft
     End Sub
 
     Private Sub ucrReceiverElements_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElements.ControlContentsChanged,
-        ucrReceiverDate.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged, ucrInputLevel.ControlContentsChanged,
-        ucrInputLevel.ControlContentsChanged, ucrInputExportFile.ControlContentsChanged, ucrChkExportDataFrame.ControlContentsChanged
+        ucrReceiverDate.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrSaveNewDataFrame.ControlContentsChanged,
+        ucrReceiverStationID.ControlContentsChanged, ucrInputExportFile.ControlContentsChanged, ucrChkExportDataFrame.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -255,5 +281,25 @@ Public Class dlgExportToClimsoft
             SelectFileToSave()
         End If
         SettingBaseFunction()
+    End Sub
+
+    Private Sub ucrInputHour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputHour.ControlValueChanged
+        If Not ucrInputHour.IsEmpty Then
+            clsSprintfFunction.AddParameter("format", Chr(34) & "%02d:00:00" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+            clsSprintfFunction.AddParameter("hour", ucrInputHour.GetText, bIncludeArgumentName:=False, iPosition:=1)
+
+        Else
+            clsSprintfFunction.RemoveParameterByName("format")
+            clsSprintfFunction.RemoveParameterByName("hour")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged
+        If Not ucrReceiverDate.IsEmpty Then
+            clsPasteFunction.AddParameter("date_time", clsRFunctionParameter:=clsSprintfFunction, iPosition:=3, bIncludeArgumentName:=False)
+        Else
+            clsPasteFunction.RemoveParameterByName("date")
+            clsPasteFunction.RemoveParameterByName("date_time")
+        End If
     End Sub
 End Class
