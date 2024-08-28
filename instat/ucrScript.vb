@@ -164,10 +164,6 @@ Public Class ucrScript
 
             ' Replace the selected text with the formatted text
             clsScriptActive.Text = GetTextBefore(fullText, startPos) & formattedText & GetTextAfter(fullText, endPos)
-
-            ' Optionally, you can call the Copy function if needed
-            clsScriptActive.Copy()
-
             EnableDisableButtons()
         End If
     End Sub
