@@ -185,6 +185,7 @@ Partial Class frmMain
         Me.mnuHelpGlossary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpLicence = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator29 = New System.Windows.Forms.ToolStripSeparator()
+        Me.RInstatResourcesSiteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpPackagesDocumentation = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFile = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
@@ -439,6 +440,7 @@ Partial Class frmMain
         Me.mnuFileImportFromPostgres = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromRapidPro = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportandTidyNetCDFFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuImportFromOpenAppBuilder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileExport = New System.Windows.Forms.ToolStripMenuItem()
@@ -700,7 +702,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RInstatResourcesSiteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1559,42 +1560,42 @@ Partial Class frmMain
         'mnuHelpHelpIntroduction
         '
         Me.mnuHelpHelpIntroduction.Name = "mnuHelpHelpIntroduction"
-        Me.mnuHelpHelpIntroduction.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpHelpIntroduction.Size = New System.Drawing.Size(230, 22)
         Me.mnuHelpHelpIntroduction.Text = "Introduction..."
         '
         'mnuHelpFAQ
         '
         Me.mnuHelpFAQ.Name = "mnuHelpFAQ"
-        Me.mnuHelpFAQ.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpFAQ.Size = New System.Drawing.Size(230, 22)
         Me.mnuHelpFAQ.Text = "FAQ..."
         '
         'mnuHelpGetingStarted
         '
         Me.mnuHelpGetingStarted.Name = "mnuHelpGetingStarted"
-        Me.mnuHelpGetingStarted.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpGetingStarted.Size = New System.Drawing.Size(230, 22)
         Me.mnuHelpGetingStarted.Text = "Getting Started..."
         '
         'mnuHelpData
         '
         Me.mnuHelpData.Name = "mnuHelpData"
-        Me.mnuHelpData.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpData.Size = New System.Drawing.Size(230, 22)
         Me.mnuHelpData.Text = "Data..."
         '
         'ToolStripSeparator28
         '
         Me.ToolStripSeparator28.Name = "ToolStripSeparator28"
-        Me.ToolStripSeparator28.Size = New System.Drawing.Size(215, 6)
+        Me.ToolStripSeparator28.Size = New System.Drawing.Size(227, 6)
         '
         'mnuHelpWindows
         '
         Me.mnuHelpWindows.Name = "mnuHelpWindows"
-        Me.mnuHelpWindows.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpWindows.Size = New System.Drawing.Size(230, 22)
         Me.mnuHelpWindows.Text = "Windows..."
         '
         'ToolStripSeparator81
         '
         Me.ToolStripSeparator81.Name = "ToolStripSeparator81"
-        Me.ToolStripSeparator81.Size = New System.Drawing.Size(215, 6)
+        Me.ToolStripSeparator81.Size = New System.Drawing.Size(227, 6)
         '
         'mnuHelpMenus
         '
@@ -1688,40 +1689,46 @@ Partial Class frmMain
         'mnuHelpAboutR
         '
         Me.mnuHelpAboutR.Name = "mnuHelpAboutR"
-        Me.mnuHelpAboutR.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpAboutR.Size = New System.Drawing.Size(230, 22)
         Me.mnuHelpAboutR.Text = "About R..."
         Me.mnuHelpAboutR.Visible = False
         '
         'mnuHelpLearningStatistics
         '
         Me.mnuHelpLearningStatistics.Name = "mnuHelpLearningStatistics"
-        Me.mnuHelpLearningStatistics.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpLearningStatistics.Size = New System.Drawing.Size(230, 22)
         Me.mnuHelpLearningStatistics.Text = "Learning Statistics..."
         Me.mnuHelpLearningStatistics.Visible = False
         '
         'mnuHelpRPackages
         '
         Me.mnuHelpRPackages.Name = "mnuHelpRPackages"
-        Me.mnuHelpRPackages.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpRPackages.Size = New System.Drawing.Size(230, 22)
         Me.mnuHelpRPackages.Text = "R Packages..."
         '
         'mnuHelpGlossary
         '
         Me.mnuHelpGlossary.Name = "mnuHelpGlossary"
-        Me.mnuHelpGlossary.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpGlossary.Size = New System.Drawing.Size(230, 22)
         Me.mnuHelpGlossary.Text = "Glossary..."
         '
         'mnuHelpLicence
         '
         Me.mnuHelpLicence.Name = "mnuHelpLicence"
-        Me.mnuHelpLicence.Size = New System.Drawing.Size(218, 22)
+        Me.mnuHelpLicence.Size = New System.Drawing.Size(230, 22)
         Me.mnuHelpLicence.Tag = "Licence..."
         Me.mnuHelpLicence.Text = "Licence..."
         '
         'ToolStripSeparator29
         '
         Me.ToolStripSeparator29.Name = "ToolStripSeparator29"
-        Me.ToolStripSeparator29.Size = New System.Drawing.Size(215, 6)
+        Me.ToolStripSeparator29.Size = New System.Drawing.Size(227, 6)
+        '
+        'RInstatResourcesSiteToolStripMenuItem
+        '
+        Me.RInstatResourcesSiteToolStripMenuItem.Name = "RInstatResourcesSiteToolStripMenuItem"
+        Me.RInstatResourcesSiteToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
+        Me.RInstatResourcesSiteToolStripMenuItem.Text = "R-Instat Resources Site"
         '
         'mnuHelpPackagesDocumentation
         '
@@ -2936,7 +2943,7 @@ Partial Class frmMain
         '
         Me.mnuFileSave.Name = "mnuFileSave"
         Me.mnuFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mnuFileSave.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileSave.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileSave.Tag = "Save"
         Me.mnuFileSave.Text = "Save..."
         '
@@ -2944,7 +2951,7 @@ Partial Class frmMain
         '
         Me.mnuFileSaveAs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileSaveAsDataAs, Me.mnuFileSaveAsOutputAs, Me.mnuFileSaveAsLogAs, Me.mnuFileSaveAsScriptAs})
         Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
-        Me.mnuFileSaveAs.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileSaveAs.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileSaveAs.Tag = "Save_As"
         Me.mnuFileSaveAs.Text = "Save As"
         '
@@ -2977,7 +2984,7 @@ Partial Class frmMain
         Me.mnuFilePrint.Enabled = False
         Me.mnuFilePrint.Name = "mnuFilePrint"
         Me.mnuFilePrint.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.mnuFilePrint.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFilePrint.Size = New System.Drawing.Size(241, 22)
         Me.mnuFilePrint.Tag = "Print"
         Me.mnuFilePrint.Text = "Print..."
         Me.mnuFilePrint.Visible = False
@@ -2986,7 +2993,7 @@ Partial Class frmMain
         '
         Me.mnuFilePrintPreview.Enabled = False
         Me.mnuFilePrintPreview.Name = "mnuFilePrintPreview"
-        Me.mnuFilePrintPreview.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFilePrintPreview.Size = New System.Drawing.Size(241, 22)
         Me.mnuFilePrintPreview.Tag = "Print_Preview"
         Me.mnuFilePrintPreview.Text = "Print Preview..."
         Me.mnuFilePrintPreview.Visible = False
@@ -2994,12 +3001,12 @@ Partial Class frmMain
         'tlSeparatorFile3
         '
         Me.tlSeparatorFile3.Name = "tlSeparatorFile3"
-        Me.tlSeparatorFile3.Size = New System.Drawing.Size(229, 6)
+        Me.tlSeparatorFile3.Size = New System.Drawing.Size(238, 6)
         '
         'mnuFIleExit
         '
         Me.mnuFIleExit.Name = "mnuFIleExit"
-        Me.mnuFIleExit.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFIleExit.Size = New System.Drawing.Size(241, 22)
         Me.mnuFIleExit.Tag = "Exit"
         Me.mnuFIleExit.Text = "Exit"
         '
@@ -3381,7 +3388,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileImportFromFile, Me.mnuFileImportFromLibrary, Me.ToolStripSeparator35, Me.mnuFileImportFromODK, Me.mnuFileImportFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportFromPostgres, Me.mnuFileImportFromRapidPro, Me.mnuFileImportandTidyNetCDFFile, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileImportFromFile, Me.mnuFileImportFromLibrary, Me.ToolStripSeparator35, Me.mnuFileImportFromODK, Me.mnuFileImportFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportFromPostgres, Me.mnuFileImportFromRapidPro, Me.mnuFileImportandTidyNetCDFFile, Me.mnuImportFromOpenAppBuilder, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 22)
         Me.mnuFile.Tag = "File"
@@ -3391,7 +3398,7 @@ Partial Class frmMain
         '
         Me.mnuFileNewDataFrame.Name = "mnuFileNewDataFrame"
         Me.mnuFileNewDataFrame.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.mnuFileNewDataFrame.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileNewDataFrame.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileNewDataFrame.Tag = "New_Data_Frame"
         Me.mnuFileNewDataFrame.Text = "New Data Frame..."
         '
@@ -3399,33 +3406,33 @@ Partial Class frmMain
         '
         Me.mnuFileImportFromFile.Name = "mnuFileImportFromFile"
         Me.mnuFileImportFromFile.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.mnuFileImportFromFile.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromFile.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileImportFromFile.Tag = "Import_From_File"
         Me.mnuFileImportFromFile.Text = "Import From File..."
         '
         'mnuFileImportFromLibrary
         '
         Me.mnuFileImportFromLibrary.Name = "mnuFileImportFromLibrary"
-        Me.mnuFileImportFromLibrary.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromLibrary.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileImportFromLibrary.Tag = "Open_From_Library"
         Me.mnuFileImportFromLibrary.Text = "Import From Library..."
         '
         'ToolStripSeparator35
         '
         Me.ToolStripSeparator35.Name = "ToolStripSeparator35"
-        Me.ToolStripSeparator35.Size = New System.Drawing.Size(229, 6)
+        Me.ToolStripSeparator35.Size = New System.Drawing.Size(238, 6)
         '
         'mnuFileImportFromODK
         '
         Me.mnuFileImportFromODK.Name = "mnuFileImportFromODK"
-        Me.mnuFileImportFromODK.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromODK.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileImportFromODK.Text = "Import From ODK..."
         '
         'mnuFileImportFromCSPRO
         '
         Me.mnuFileImportFromCSPRO.Enabled = False
         Me.mnuFileImportFromCSPRO.Name = "mnuFileImportFromCSPRO"
-        Me.mnuFileImportFromCSPRO.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromCSPRO.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileImportFromCSPRO.Text = "Import From CSPRO..."
         Me.mnuFileImportFromCSPRO.Visible = False
         '
@@ -3433,7 +3440,7 @@ Partial Class frmMain
         '
         Me.mnuFileImportFromDatabases.Enabled = False
         Me.mnuFileImportFromDatabases.Name = "mnuFileImportFromDatabases"
-        Me.mnuFileImportFromDatabases.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromDatabases.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileImportFromDatabases.Text = "Import From Databases..."
         Me.mnuFileImportFromDatabases.Visible = False
         '
@@ -3441,40 +3448,47 @@ Partial Class frmMain
         '
         Me.mnuFileImportFromPostgres.Enabled = False
         Me.mnuFileImportFromPostgres.Name = "mnuFileImportFromPostgres"
-        Me.mnuFileImportFromPostgres.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromPostgres.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileImportFromPostgres.Text = "Import From Postgres"
         Me.mnuFileImportFromPostgres.Visible = False
         '
         'mnuFileImportFromRapidPro
         '
         Me.mnuFileImportFromRapidPro.Name = "mnuFileImportFromRapidPro"
-        Me.mnuFileImportFromRapidPro.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportFromRapidPro.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileImportFromRapidPro.Text = "Import From RapidPro"
         '
         'mnuFileImportandTidyNetCDFFile
         '
         Me.mnuFileImportandTidyNetCDFFile.Name = "mnuFileImportandTidyNetCDFFile"
-        Me.mnuFileImportandTidyNetCDFFile.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileImportandTidyNetCDFFile.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileImportandTidyNetCDFFile.Text = "Import and Tidy NetCDF File..."
+        '
+        'mnuImportFromOpenAppBuilder
+        '
+        Me.mnuImportFromOpenAppBuilder.Enabled = False
+        Me.mnuImportFromOpenAppBuilder.Name = "mnuImportFromOpenAppBuilder"
+        Me.mnuImportFromOpenAppBuilder.Size = New System.Drawing.Size(241, 22)
+        Me.mnuImportFromOpenAppBuilder.Text = "Import From OpenAppBuilder..."
         '
         'mnuFileConvert
         '
         Me.mnuFileConvert.Enabled = False
         Me.mnuFileConvert.Name = "mnuFileConvert"
-        Me.mnuFileConvert.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileConvert.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileConvert.Text = "Convert..."
         Me.mnuFileConvert.Visible = False
         '
         'tlSeparatorFile
         '
         Me.tlSeparatorFile.Name = "tlSeparatorFile"
-        Me.tlSeparatorFile.Size = New System.Drawing.Size(229, 6)
+        Me.tlSeparatorFile.Size = New System.Drawing.Size(238, 6)
         '
         'mnuFileExport
         '
         Me.mnuFileExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileExportExportDataSet, Me.mnuFileExportExportRObjectsToolStripMenuItem, Me.mnuFileExportExportRWorkspace, Me.mnuFileExportExportGraphAsImage})
         Me.mnuFileExport.Name = "mnuFileExport"
-        Me.mnuFileExport.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileExport.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileExport.Text = "Export"
         '
         'mnuFileExportExportDataSet
@@ -3504,13 +3518,13 @@ Partial Class frmMain
         'mnuFileCloseData
         '
         Me.mnuFileCloseData.Name = "mnuFileCloseData"
-        Me.mnuFileCloseData.Size = New System.Drawing.Size(232, 22)
+        Me.mnuFileCloseData.Size = New System.Drawing.Size(241, 22)
         Me.mnuFileCloseData.Text = "Close Data Book"
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(229, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(238, 6)
         '
         'mnuPrepare
         '
@@ -5226,12 +5240,6 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'RInstatResourcesSiteToolStripMenuItem
-        '
-        Me.RInstatResourcesSiteToolStripMenuItem.Name = "RInstatResourcesSiteToolStripMenuItem"
-        Me.RInstatResourcesSiteToolStripMenuItem.Size = New System.Drawing.Size(230, 22)
-        Me.RInstatResourcesSiteToolStripMenuItem.Text = "R-Instat Resources Site"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5245,9 +5253,7 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat " + My.Application.Info.Version.Major.ToString + "." +
-                My.Application.Info.Version.Minor.ToString + "." +
-                My.Application.Info.Version.Build.ToString
+        Me.Text = "R-Instat .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
@@ -5954,4 +5960,5 @@ Partial Class frmMain
     Friend WithEvents mnuSwapDataLogScript As ToolStripMenuItem
     Friend WithEvents mnuSwapDataMetadata As ToolStripMenuItem
     Friend WithEvents RInstatResourcesSiteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuImportFromOpenAppBuilder As ToolStripMenuItem
 End Class
