@@ -4691,9 +4691,9 @@ Public Class ucrCalculator
 
     Private Sub cmdRoman_Click(sender As Object, e As EventArgs) Handles cmdRoman.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("utils::as.roman(x= )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(utils::as.roman(x= ))", 3)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("utils::as.roman( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("as.character(utils::as.roman( ))", 3)
         End If
     End Sub
 
