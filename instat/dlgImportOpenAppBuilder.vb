@@ -21,7 +21,8 @@ Imports RDotNet
 Public Class dlgImportOpenAppBuilder
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGetUserDataFunction As New RFunction
+    Private clsGetUserDataFunction, clsGetDataBaseConnection As New RFunction
+
     Private Sub dlgImportOpenAppBuilder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -74,9 +75,17 @@ Public Class dlgImportOpenAppBuilder
     End Sub
     Private Sub SetDefaults()
         clsGetUserDataFunction = New RFunction
+        clsGetDataBaseConnection = New RFunction
+
+        clsGetDataBaseConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_database_connection")
+        clsGetDataBaseConnection.SetAssignTo("plh_con")
 
         clsGetUserDataFunction.SetPackageName("openappr")
         clsGetUserDataFunction.SetRCommand("get_user_data")
+        clsGetUserDataFunction.AddParameter("site", clsRFunctionParameter:=clsGetDataBaseConnection, iPosition:=0)
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataBaseConnection)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)
 
     End Sub
 
@@ -108,5 +117,19 @@ Public Class dlgImportOpenAppBuilder
     Private Sub btnConnection_Click(sender As Object, e As EventArgs) Handles btnConnection.Click
         sdgImportFromClimSoft.ShowDialog()
         CheckAndUpdateConnectionStatus()
+    End Sub
+
+    Private Sub ucrChkFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFilter.ControlValueChanged, ucrInputVariable.ControlValueChanged, ucrInputValue.ControlValueChanged
+        If ucrChkFilter.Checked AndAlso Not ucrInputValue.IsEmpty Then
+            clsGetUserDataFunction.AddParameter("filter_variable", Chr(34) & ucrInputValue.GetText & Chr(34))
+        Else
+            clsGetUserDataFunction.RemoveParameterByName("filter_variable")
+        End If
+
+        If ucrChkFilter.Checked AndAlso Not ucrInputVariable.IsEmpty Then
+            clsGetUserDataFunction.AddParameter("filter_variable_value", Chr(34) & ucrInputVariable.GetText & Chr(34))
+        Else
+            clsGetUserDataFunction.RemoveParameterByName("filter_variable_value")
+        End If
     End Sub
 End Class

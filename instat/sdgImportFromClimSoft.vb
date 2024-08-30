@@ -40,6 +40,8 @@ Public Class sdgImportFromClimSoft
     Private Sub InitialiseDialog()
         Dim dctDatabaseNames As New Dictionary(Of String, String)
         Dim dctPorts As New Dictionary(Of String, String)
+        Dim dctDrv As New Dictionary(Of String, String)
+
 
         'database names
         dctDatabaseNames.Add("mariadb_climsoft_db_v4", Chr(34) & "mariadb_climsoft_db_v4" & Chr(34))
@@ -62,6 +64,14 @@ Public Class sdgImportFromClimSoft
 
         'user name
         ucrTxtUserName.SetParameter(New RParameter("user", 3))
+
+        ucrInputDrv.SetParameter(New RParameter("drv", 4))
+        dctPorts.Add("RMySQL::MySQL()", "RMySQL::MySQL()")
+        dctPorts.Add("RPostgres::Postgres()", "RPostgres::Postgres()")
+        ucrInputDrv.SetItems(dctDrv)
+        ucrInputDrv.bAllowNonConditionValues = True
+        ucrInputDrv.SetRDefault("RMySQL::MySQL()")
+
     End Sub
 
     Private Sub SetDefaults()
@@ -87,6 +97,7 @@ Public Class sdgImportFromClimSoft
         ucrTxtHost.SetRCode(clsRDatabaseConnect, bReset)
         ucrComboBoxPort.SetRCode(clsRDatabaseConnect, bReset)
         ucrTxtUserName.SetRCode(clsRDatabaseConnect, bReset)
+        ucrInputDrv.SetRCode(clsRDatabaseConnect, bReset)
     End Sub
 
     Private Sub UpdateConnectionAndControlsState()
@@ -111,6 +122,8 @@ Public Class sdgImportFromClimSoft
         ucrTxtHost.Enabled = bEnableControls
         ucrTxtUserName.Enabled = bEnableControls
         chkRememberCredentials.Enabled = bEnableControls
+        ucrInputDrv.Enabled = bEnableControls
+
     End Sub
 
     ''' <summary>
@@ -172,7 +185,15 @@ Public Class sdgImportFromClimSoft
         If bConnected Then
             btnConnect.Enabled = True
         Else
-            btnConnect.Enabled = Not ucrTxtHost.IsEmpty AndAlso Not ucrTxtUserName.IsEmpty AndAlso Not ucrComboBoxPort.IsEmpty AndAlso Not ucrComboBoxDatabaseName.IsEmpty
+            btnConnect.Enabled = Not ucrTxtHost.IsEmpty AndAlso Not ucrTxtUserName.IsEmpty AndAlso Not ucrComboBoxPort.IsEmpty AndAlso Not ucrComboBoxDatabaseName.IsEmpty AndAlso Not ucrInputDrv.IsEmpty
+        End If
+    End Sub
+
+    Private Sub ucrInputDrv_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDrv.ControlValueChanged
+        If Not ucrInputDrv.IsEmpty Then
+            clsRDatabaseConnect.AddParameter("drv", ucrInputDrv.GetText, iPosition:=4)
+        Else
+            clsRDatabaseConnect.RemoveParameterByName("drv")
         End If
     End Sub
 End Class
