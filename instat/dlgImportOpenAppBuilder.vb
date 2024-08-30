@@ -42,7 +42,7 @@ Public Class dlgImportOpenAppBuilder
         Dim dctValue As New Dictionary(Of String, String)
 
         ucrChkFilter.SetText("Filter")
-        ucrChkFilter.SetParameter(New RParameter("to_lower ", 1))
+        ucrChkFilter.SetParameter(New RParameter("filter ", 1))
         ucrChkFilter.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
         ucrChkFilter.SetRDefault("TRUE")
         ucrChkFilter.AddToLinkedControls({ucrInputVariable}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="app_deployment_name")
@@ -77,12 +77,12 @@ Public Class dlgImportOpenAppBuilder
         clsGetUserDataFunction = New RFunction
         clsGetDataBaseConnection = New RFunction
 
-        clsGetDataBaseConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_database_connection")
+        clsGetDataBaseConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_database_connection")
         clsGetDataBaseConnection.SetAssignTo("plh_con")
 
         clsGetUserDataFunction.SetPackageName("openappr")
         clsGetUserDataFunction.SetRCommand("get_user_data")
-        clsGetUserDataFunction.AddParameter("site", clsRFunctionParameter:=clsGetDataBaseConnection, iPosition:=0)
+        clsGetUserDataFunction.AddParameter("site", "plh_con", iPosition:=0)
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataBaseConnection)
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetUserDataFunction)

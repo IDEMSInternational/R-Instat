@@ -66,11 +66,12 @@ Public Class sdgImportFromClimSoft
         ucrTxtUserName.SetParameter(New RParameter("user", 3))
 
         ucrInputDrv.SetParameter(New RParameter("drv", 4))
-        dctPorts.Add("RMySQL::MySQL()", "RMySQL::MySQL()")
-        dctPorts.Add("RPostgres::Postgres()", "RPostgres::Postgres()")
+        dctDrv.Add("RMySQL::MySQL()", "RMySQL::MySQL()")
+        dctDrv.Add("RPostgres::Postgres()", "RPostgres::Postgres()")
         ucrInputDrv.SetItems(dctDrv)
         ucrInputDrv.bAllowNonConditionValues = True
         ucrInputDrv.SetRDefault("RMySQL::MySQL()")
+        ucrInputDrv.AddQuotesIfUnrecognised = False
 
     End Sub
 
@@ -84,6 +85,7 @@ Public Class sdgImportFromClimSoft
         clsRDatabaseConnect.AddParameter("host", frmMain.clsInstatOptions.strClimsoftHost, iPosition:=1)
         clsRDatabaseConnect.AddParameter("port", frmMain.clsInstatOptions.strClimsoftPort, iPosition:=2)
         clsRDatabaseConnect.AddParameter("user", frmMain.clsInstatOptions.strClimsoftUsername, iPosition:=3)
+        clsRDatabaseConnect.AddParameter("drv", "RMySQL::MySQL()", iPosition:=4)
 
         'set database disconnect R command
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
@@ -177,10 +179,11 @@ Public Class sdgImportFromClimSoft
             frmMain.clsInstatOptions.SetClimsoftHost(ucrTxtHost.GetText())
             frmMain.clsInstatOptions.SetClimsoftPort(ucrComboBoxPort.GetText())
             frmMain.clsInstatOptions.SetClimsoftUsername(ucrTxtUserName.GetText())
+            clsRDatabaseConnect.AddParameter("drv", ucrInputDrv.GetText, iPosition:=4)
         End If
     End Sub
 
-    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxDatabaseName.ControlContentsChanged, ucrTxtHost.ControlContentsChanged, ucrComboBoxPort.ControlContentsChanged, ucrTxtUserName.ControlContentsChanged
+    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxDatabaseName.ControlContentsChanged, ucrTxtHost.ControlContentsChanged, ucrComboBoxPort.ControlContentsChanged, ucrTxtUserName.ControlContentsChanged, ucrInputDrv.ControlContentsChanged
         'if not already connected, check if it's valid to attempt connecting to database
         If bConnected Then
             btnConnect.Enabled = True
@@ -189,11 +192,11 @@ Public Class sdgImportFromClimSoft
         End If
     End Sub
 
-    Private Sub ucrInputDrv_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDrv.ControlValueChanged
-        If Not ucrInputDrv.IsEmpty Then
-            clsRDatabaseConnect.AddParameter("drv", ucrInputDrv.GetText, iPosition:=4)
-        Else
-            clsRDatabaseConnect.RemoveParameterByName("drv")
-        End If
-    End Sub
+    'Private Sub ucrInputDrv_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDrv.ControlValueChanged
+    '    If Not ucrInputDrv.IsEmpty Then
+    '        clsRDatabaseConnect.AddParameter("drv", ucrInputDrv.GetText, iPosition:=4)
+    '    Else
+    '        clsRDatabaseConnect.RemoveParameterByName("drv")
+    '    End If
+    'End Sub
 End Class
