@@ -560,7 +560,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
 )
 
 # Call this to run a calculation and display the data
-DataBook$set("public", "run_instat_calculation", function(calc, display = TRUE) {
+DataBook$set("public", "run_instat_calculation", function(calc, display = TRUE, param_list = list(drop = TRUE)) {
   out <- self$apply_instat_calculation(calc)
   if(display) return(out$data)
 }
