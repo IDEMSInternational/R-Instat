@@ -36,7 +36,7 @@ Partial Class dlgImportOpenAppBuilder
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(7, 290)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 230)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -45,7 +45,7 @@ Partial Class dlgImportOpenAppBuilder
         '
         Me.ucrChkFilter.AutoSize = True
         Me.ucrChkFilter.Checked = False
-        Me.ucrChkFilter.Location = New System.Drawing.Point(12, 67)
+        Me.ucrChkFilter.Location = New System.Drawing.Point(9, 67)
         Me.ucrChkFilter.Name = "ucrChkFilter"
         Me.ucrChkFilter.Size = New System.Drawing.Size(100, 23)
         Me.ucrChkFilter.TabIndex = 1
@@ -56,7 +56,7 @@ Partial Class dlgImportOpenAppBuilder
         Me.ucrInputVariable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputVariable.GetSetSelectedIndex = -1
         Me.ucrInputVariable.IsReadOnly = False
-        Me.ucrInputVariable.Location = New System.Drawing.Point(153, 103)
+        Me.ucrInputVariable.Location = New System.Drawing.Point(153, 100)
         Me.ucrInputVariable.Name = "ucrInputVariable"
         Me.ucrInputVariable.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputVariable.TabIndex = 2
@@ -75,7 +75,7 @@ Partial Class dlgImportOpenAppBuilder
         'lblVariable
         '
         Me.lblVariable.AutoSize = True
-        Me.lblVariable.Location = New System.Drawing.Point(33, 111)
+        Me.lblVariable.Location = New System.Drawing.Point(37, 103)
         Me.lblVariable.Name = "lblVariable"
         Me.lblVariable.Size = New System.Drawing.Size(97, 13)
         Me.lblVariable.TabIndex = 4
@@ -84,7 +84,7 @@ Partial Class dlgImportOpenAppBuilder
         'lblValue
         '
         Me.lblValue.AutoSize = True
-        Me.lblValue.Location = New System.Drawing.Point(3, 143)
+        Me.lblValue.Location = New System.Drawing.Point(7, 143)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(127, 13)
         Me.lblValue.TabIndex = 5
@@ -93,7 +93,7 @@ Partial Class dlgImportOpenAppBuilder
         'ucrSave
         '
         Me.ucrSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSave.Location = New System.Drawing.Point(8, 238)
+        Me.ucrSave.Location = New System.Drawing.Point(9, 187)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(403, 34)
@@ -124,7 +124,7 @@ Partial Class dlgImportOpenAppBuilder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 355)
+        Me.ClientSize = New System.Drawing.Size(423, 284)
         Me.Controls.Add(Me.lblConnection)
         Me.Controls.Add(Me.btnConnection)
         Me.Controls.Add(Me.ucrSave)

@@ -73,6 +73,7 @@ Public Class dlgImportOpenAppBuilder
         ucrSave.SetLabelText("Data Frame Name:")
 
     End Sub
+
     Private Sub SetDefaults()
         clsGetUserDataFunction = New RFunction
         clsGetDataBaseConnection = New RFunction
@@ -95,7 +96,6 @@ Public Class dlgImportOpenAppBuilder
         ucrChkFilter.SetRCode(clsGetUserDataFunction, bReset)
         ucrSave.SetRCode(clsGetUserDataFunction, bReset)
     End Sub
-
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
