@@ -249,7 +249,7 @@ Partial Class dlgOneVariableSummarise
         Me.ucrNudMaxSum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxSum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxSum.Name = "ucrNudMaxSum"
-        Me.ucrNudMaxSum.Size = New System.Drawing.Size(72, 20)
+        Me.ucrNudMaxSum.Size = New System.Drawing.Size(57, 20)
         Me.ucrNudMaxSum.TabIndex = 8
         Me.ucrNudMaxSum.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
