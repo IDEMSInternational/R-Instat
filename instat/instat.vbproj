@@ -281,6 +281,12 @@
     <Compile Include="dlgImportFromRapidPro.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportOpenAppBuilder.Designer.vb">
+      <DependentUpon>dlgImportOpenAppBuilder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportOpenAppBuilder.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRandomSplit.Designer.vb">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
@@ -313,6 +319,12 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgClimsoft.Designer.vb">
+      <DependentUpon>sdgClimsoft.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimsoft.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgDefineAnnualRainfall.Designer.vb">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
     </Compile>
@@ -3131,6 +3143,9 @@
     <EmbeddedResource Include="dlgImportFromRapidPro.resx">
       <DependentUpon>dlgImportFromRapidPro.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportOpenAppBuilder.resx">
+      <DependentUpon>dlgImportOpenAppBuilder.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
     </EmbeddedResource>
@@ -3199,6 +3214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimsoft.resx">
+      <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
