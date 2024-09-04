@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgStartofRains
-    Private clsCalcRainDay, clsCalcStartDOY, clsCalcStartDate, clsCombinationCalc, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
+    Private clsCalcRainDay, clsCalcStartDOY, clsDummyFunction, clsCalcStartDate, clsCombinationCalc, clsListCalFunction, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
     Private clsDayFromAndTo, clsGroupByStation, clsGroupByYear, clsListToTalRain, clsApplyInstatFunction, clsFirstDOY, clsFirstDate As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsRainDayOperator, clsRainDayConditionOperator, clsConditionsAndOperator, clsTRCombineOperator, clsRollingSumRainDayOperator, clsDSCombineOperator, clsDPCombineOperator As New ROperator
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
@@ -244,8 +244,8 @@ Public Class dlgStartofRains
         ucrChkAsDoy.AddParameterPresentCondition(False, "sub1", False)
         ucrChkAsDoy.SetText("Day of Year")
 
-        ucrChkAsDate.AddParameterPresentCondition(True, "sub2", True)
-        ucrChkAsDate.AddParameterPresentCondition(False, "sub2", False)
+        ucrChkAsDate.AddParameterValuesCondition(True, "sub2", "True")
+        ucrChkAsDate.AddParameterValuesCondition(False, "sub2", "False")
         ucrChkAsDate.SetText("Date")
 
         ucrChkStatus.AddParameterPresentCondition(True, "sub3", True)
@@ -279,6 +279,7 @@ Public Class dlgStartofRains
         clsCombinedList.Clear()
         clsCombinationCalc.Clear()
         clsListSubCalc.Clear()
+        clsListCalFunction.Clear()
         clsCombinationSubCalcList.Clear()
 
         clsSpellsFunction.Clear()
@@ -353,6 +354,9 @@ Public Class dlgStartofRains
         clsDayFilterCalcFromList = New RFunction
         clsDayFilterCalcFromList.SetRCommand("list")
         clsDayFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDayFilterCalcFromList, iPosition:=0)
+
+        clsDummyFunction = New RFunction
+        clsDummyFunction.AddParameter("sub2", "True", iPosition:=0)
 
         'Day From and To
         clsDayFromAndTo.SetRCommand("instat_calculation$new")
@@ -708,9 +712,13 @@ Public Class dlgStartofRains
         clsListSubCalc.AddParameter("sub1", iPosition:=0, clsRFunctionParameter:=clsCalcStartDOY, bIncludeArgumentName:=False)
 
         'Run Calculations
+        clsListCalFunction.SetRCommand("list")
+        clsListCalFunction.AddParameter("drop", "FALSE", iPosition:=0)
+
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsCombinationCalc, iPosition:=0)
+        clsApplyInstatFunction.AddParameter("param_list", clsRFunctionParameter:=clsListCalFunction, iPosition:=2)
 
         'Base Function
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
@@ -736,7 +744,7 @@ Public Class dlgStartofRains
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrChkAsDoy.SetRCode(clsCombinationSubCalcList, bReset)
         ucrChkStatus.SetRCode(clsCombinationSubCalcList, bReset)
-        ucrChkAsDate.SetRCode(clsCombinationSubCalcList, bReset)
+        ucrChkAsDate.SetRCode(clsDummyFunction, bReset)
         ucrInputThreshold.SetRCode(clsRainDayOperator, bReset)
 
         ucrReceiverDate.SetRCode(clsFirstDate, bReset)

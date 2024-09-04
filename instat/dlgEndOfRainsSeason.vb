@@ -29,7 +29,7 @@ Public Class dlgEndOfRainsSeason
 
 #Region "general_code_structures"
     ' General
-    Private clsRunCalculation As New RFunction
+    Private clsRunCalculation, clsListCalFunction, clsDummyFunction As New RFunction
     Private clsFirstOrLastFunction As New RFunction
 
     ' Group by
@@ -243,8 +243,8 @@ Public Class dlgEndOfRainsSeason
         ucrInputEndRainDoy.SetValidationTypeAsRVariable()
         ucrInputEndRainDoy.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
 
-        ucrChkEndofRainsDate.AddParameterPresentCondition(True, "sub2")
-        ucrChkEndofRainsDate.AddParameterPresentCondition(False, "sub2", False)
+        ucrChkEndofRainsDate.AddParameterValuesCondition(True, "sub2", "True")
+        ucrChkEndofRainsDate.AddParameterValuesCondition(False, "sub2", "False")
         ucrChkEndofRainsDate.SetText("Date")
 
         ucrInputEndofRainsDate.SetParameter(New RParameter("result_name", 2))
@@ -363,6 +363,7 @@ Public Class dlgEndOfRainsSeason
 #Region "clear_code_structures"
         ' General
         clsRunCalculation.Clear()
+        clsListCalFunction.Clear()
         clsFirstOrLastFunction.Clear()
 
         '   Group by
@@ -497,6 +498,9 @@ Public Class dlgEndOfRainsSeason
 
         ucrNudCapacity.SetText("100")
         ucrNudWBLessThan.SetText("0.5")
+
+        clsDummyFunction = New RFunction
+        clsDummyFunction.AddParameter("sub2", "True", iPosition:=0)
 
         ' Group by
         clsGroupByStationYearCalc.SetRCommand("instat_calculation$new")
@@ -644,9 +648,13 @@ Public Class dlgEndOfRainsSeason
         clsEndRainsCombinationSubCalcList.SetRCommand("list")
         clsEndRainsCombinationSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsEndRainsLastDoySummaryCalc, bIncludeArgumentName:=False, iPosition:=0)
 
+        clsListCalFunction.SetRCommand("list")
+        clsListCalFunction.AddParameter("drop", "FALSE", iPosition:=0)
+
         clsRunCalculation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRunCalculation.AddParameter("display", "FALSE")
         clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndRainsCombinationCalc)
+        clsRunCalculation.AddParameter("param_list", clsRFunctionParameter:=clsListCalFunction, iPosition:=2)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalculation)
 #End Region
@@ -958,7 +966,7 @@ Public Class dlgEndOfRainsSeason
         ucrNudAmount.SetRCode(clsEndRainsRollSumRainConditionOperator, bReset)
         ucrNudTotalOverDays.SetRCode(clsRollSumRainFunction, bReset)
         ucrChkEndofRainsDoy.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
-        ucrChkEndofRainsDate.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
+        ucrChkEndofRainsDate.SetRCode(clsDummyFunction, bReset)
         ucrChkEndofRainsOccurence.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
         ucrPnlEndOfRainsAndSeasons.SetRCode(clsFirstOrLastFunction, bReset)
     End Sub
