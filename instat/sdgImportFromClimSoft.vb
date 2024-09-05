@@ -192,11 +192,4 @@ Public Class sdgImportFromClimSoft
         End If
     End Sub
 
-    'Private Sub ucrInputDrv_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDrv.ControlValueChanged
-    '    If Not ucrInputDrv.IsEmpty Then
-    '        clsRDatabaseConnect.AddParameter("drv", ucrInputDrv.GetText, iPosition:=4)
-    '    Else
-    '        clsRDatabaseConnect.RemoveParameterByName("drv")
-    '    End If
-    'End Sub
 End Class
