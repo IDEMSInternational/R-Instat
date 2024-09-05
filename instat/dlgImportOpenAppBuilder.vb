@@ -43,8 +43,8 @@ Public Class dlgImportOpenAppBuilder
 
         ucrChkFilter.SetText("Filter")
         ucrChkFilter.SetParameter(New RParameter("filter ", 1))
-        ucrChkFilter.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
-        ucrChkFilter.SetRDefault("TRUE")
+        ucrChkFilter.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkFilter.SetRDefault("FALSE")
         ucrChkFilter.AddToLinkedControls({ucrInputVariable}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="app_deployment_name")
         ucrChkFilter.AddToLinkedControls({ucrInputValue}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="virtual_maths_camp")
 
@@ -120,14 +120,14 @@ Public Class dlgImportOpenAppBuilder
     End Sub
 
     Private Sub ucrChkFilter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFilter.ControlValueChanged, ucrInputVariable.ControlValueChanged, ucrInputValue.ControlValueChanged
-        If ucrChkFilter.Checked AndAlso Not ucrInputValue.IsEmpty Then
-            clsGetUserDataFunction.AddParameter("filter_variable", Chr(34) & ucrInputValue.GetText & Chr(34))
+        If ucrChkFilter.Checked AndAlso Not ucrInputVariable.IsEmpty Then
+            clsGetUserDataFunction.AddParameter("filter_variable", Chr(34) & ucrInputVariable.GetText & Chr(34))
         Else
             clsGetUserDataFunction.RemoveParameterByName("filter_variable")
         End If
 
-        If ucrChkFilter.Checked AndAlso Not ucrInputVariable.IsEmpty Then
-            clsGetUserDataFunction.AddParameter("filter_variable_value", Chr(34) & ucrInputVariable.GetText & Chr(34))
+        If ucrChkFilter.Checked AndAlso Not ucrInputValue.IsEmpty Then
+            clsGetUserDataFunction.AddParameter("filter_variable_value", Chr(34) & ucrInputValue.GetText & Chr(34))
         Else
             clsGetUserDataFunction.RemoveParameterByName("filter_variable_value")
         End If
