@@ -43,7 +43,7 @@ Public Class sdgSummaries
         ucrPnlPosition.AddParameterValuesCondition(rdoDisplay, "Check", "Display")
         ucrPnlPosition.AddParameterValuesCondition(rdoUsePositions, "Check", "Use")
         ucrPnlPosition.AddToLinkedControls({ucrChkFirst, ucrSelectorOrderBy, ucrReceiverOrderBy, ucrChkOrderBy, ucrChkLast, ucrChknth, ucrChkSample}, {rdoUsePositions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlPosition.AddToLinkedControls({ucrChkWhichmin, ucrChkWhereMax, ucrChkWhereMin, ucrReceiverInclude, ucrSelectorInclude, ucrChkInclude, ucrChkWhichmax}, {rdoDisplay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPosition.AddToLinkedControls({ucrChkWhichmin, ucrChkWhereMax, ucrChkWhereMin, ucrReceiverInclude, ucrSelectorInclude, ucrChkWhichmax}, {rdoDisplay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkNonMissing.SetParameter(New RParameter("summary_count_non_missing", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_non_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkNonMissing.SetText("N Non Missing")
@@ -166,9 +166,6 @@ Public Class sdgSummaries
 
         ucrChkOrderBy.SetText("Order by another variable")
         ucrChkOrderBy.AddToLinkedControls({ucrSelectorOrderBy, ucrReceiverOrderBy}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrChkInclude.SetText("Include Another Variable")
-        ucrChkInclude.AddToLinkedControls({ucrSelectorInclude, ucrReceiverInclude}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkn_distinct.SetParameter(New RParameter("summary_n_distinct", 39), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_n_distinct" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkn_distinct.SetText("n_distinct")
@@ -470,7 +467,6 @@ Public Class sdgSummaries
             ucrChkWhichmin.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
             ucrChkWhereMax.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
             ucrChkWhereMin.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
-            ucrChkInclude.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         End If
         ucrChkMode.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkMaximum.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -613,10 +609,11 @@ Public Class sdgSummaries
 
     Private Sub IncludeControlsEnabled()
         If ucrChkWhereMax.Checked OrElse ucrChkWhereMin.Checked Then
-            ucrChkInclude.Enabled = True
+            ucrSelectorInclude.Visible = True
+            ucrReceiverInclude.Visible = True
         Else
-            ucrChkInclude.Checked = False
-            ucrChkInclude.Enabled = False
+            ucrSelectorInclude.Visible = False
+            ucrReceiverInclude.Visible = False
         End If
     End Sub
 
@@ -699,18 +696,9 @@ Public Class sdgSummaries
         End If
     End Sub
 
-    Private Sub ucrChkInclude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkInclude.ControlValueChanged
-        IncludeControlsEnabled()
-        AddRemoveSummaryWhereY()
-    End Sub
-
     Private Sub AddRemoveSummaryWhereY()
-        If ucrChkInclude.Checked Then
-            If ucrChkWhereMax.Checked OrElse ucrChkWhereMin.Checked AndAlso Not ucrReceiverInclude.IsEmpty Then
-                clsDefaultFunction.AddParameter("summary_where_y", ucrReceiverInclude.GetVariableNames, iPosition:=2)
-            Else
-                clsDefaultFunction.RemoveParameterByName("summary_where_y")
-            End If
+        If ucrChkWhereMax.Checked OrElse ucrChkWhereMin.Checked AndAlso Not ucrReceiverInclude.IsEmpty Then
+            clsDefaultFunction.AddParameter("summary_where_y", ucrReceiverInclude.GetVariableNames, iPosition:=2)
         Else
             clsDefaultFunction.RemoveParameterByName("summary_where_y")
         End If
