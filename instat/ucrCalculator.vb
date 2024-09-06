@@ -1573,7 +1573,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPnorm_Click(sender As Object, e As EventArgs) Handles cmdPnorm.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnorm(q= , mean = 0, sd = 1, lower.tail = True, Log.p = False)", 54)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnorm(q= , mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)", 54)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnorm( )", 2)
         End If
