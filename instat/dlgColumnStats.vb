@@ -123,7 +123,6 @@ Public Class dlgColumnStats
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
 
-        ucrChkDropUnusedLevels.Enabled = False
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -228,12 +227,12 @@ Public Class dlgColumnStats
         sdgMissingOptions.ShowDialog()
     End Sub
 
-    Private Sub ucrReceiverSelectedVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlValueChanged
-        Dim bSameType As Boolean = Not ucrReceiverSelectedVariables.IsEmpty _
-                                AndAlso ucrReceiverSelectedVariables.GetCurrentItemTypes().All(Function(x) x = "factor")
-        ucrChkDropUnusedLevels.Enabled = bSameType
-        ucrChkDropUnusedLevels.Checked = Not bSameType
-    End Sub
+    'Private Sub ucrReceiverSelectedVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlValueChanged
+    '    Dim bSameType As Boolean = Not ucrReceiverSelectedVariables.IsEmpty _
+    '                            AndAlso ucrReceiverSelectedVariables.GetCurrentItemTypes().All(Function(x) x = "factor")
+    '    ucrChkDropUnusedLevels.Enabled = bSameType
+    '    ucrChkDropUnusedLevels.Checked = Not bSameType
+    'End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
         TestOKEnabled()
