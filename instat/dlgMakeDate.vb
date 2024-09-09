@@ -180,7 +180,7 @@ Public Class dlgMakeDate
         ucrSaveDate.SetPrefix("date")
         ucrSaveDate.SetSaveTypeAsColumn()
         ucrSaveDate.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
-        ucrSaveDate.SetLabelText("Save Date:")
+        ucrSaveDate.SetLabelText("Store Date:")
 
         ucrSaveDate.SetIsComboBox()
 

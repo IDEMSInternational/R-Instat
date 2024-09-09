@@ -16,6 +16,12 @@
 
 Imports instat.Translations
 Public Class dlgCorrelation
+    Public Enum DefaultSequenceOption
+        MultipleOption
+        TwoVariableOption
+        ClimaticOption
+    End Enum
+
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private bRcodeSet As Boolean = True
@@ -30,17 +36,13 @@ Public Class dlgCorrelation
     Private clsNotOperator As New ROperator
     Private clsRGGscatMatricReverseOperator As New ROperator
     Private strColFunction As String
-    Private enumDefaultSequenceOption As DefaultSequenceOption = DefaultSequenceOption.MultipleOption
+    Public enumDefaultSequenceOption As DefaultSequenceOption = DefaultSequenceOption.MultipleOption
     Private bDefaultOptionChanged As Boolean = False
     Private bResetSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
     Public mnuCurrent As ToolStripMenuItem
 
-    Private Enum DefaultSequenceOption
-        MultipleOption
-        TwoVariableOption
-    End Enum
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -67,6 +69,8 @@ Public Class dlgCorrelation
                 rdoMultipleColumns.Checked = True
             Case DefaultSequenceOption.TwoVariableOption
                 rdoTwoColumns.Checked = True
+            Case DefaultSequenceOption.ClimaticOption
+                rdoMultipleColumns.Checked = True
         End Select
     End Sub
 
@@ -76,6 +80,7 @@ Public Class dlgCorrelation
     Public Sub SetMultipleSequenceAsDefaultOption()
         enumDefaultSequenceOption = DefaultSequenceOption.MultipleOption
         bDefaultOptionChanged = True
+        ucrBase.iHelpTopicID = 421
     End Sub
 
     ''' <summary>
@@ -84,7 +89,15 @@ Public Class dlgCorrelation
     Public Sub SetTwoVariableSequenceAsDefaultOption()
         enumDefaultSequenceOption = DefaultSequenceOption.TwoVariableOption
         bDefaultOptionChanged = True
+        ucrBase.iHelpTopicID = 153
     End Sub
+
+    Public Sub SetClimaticAsDefaultOption()
+        enumDefaultSequenceOption = DefaultSequenceOption.ClimaticOption
+        bDefaultOptionChanged = True
+        ucrBase.iHelpTopicID = 637
+    End Sub
+
     Private Sub InitialiseDialog()
         Dim dctNaPrint As New Dictionary(Of String, String)
         Dim dctDiagonal As New Dictionary(Of String, String)
@@ -579,7 +592,7 @@ Public Class dlgCorrelation
                 If rdoAsText.Checked Then
                     clsDummyFunction.AddParameter("output", "as.table", iPosition:=2)
                     ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
-                    ucrSaveCorrelation.SetCheckBoxText("Save Table")
+                    ucrSaveCorrelation.SetCheckBoxText("Store Table")
                     ucrSaveCorrelation.SetPrefix("summary_table")
                     ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_table")
                     clsPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
@@ -591,14 +604,14 @@ Public Class dlgCorrelation
                     clsDummyFunction.AddParameter("output", "as.dataframe", iPosition:=2)
                     clsPipeOperator.RemoveAssignTo()
                     ucrSaveCorrelation.SetSaveTypeAsDataFrame()
-                    ucrSaveCorrelation.SetCheckBoxText("Save Data Frame")
+                    ucrSaveCorrelation.SetCheckBoxText("Store Data Frame")
                     ucrSaveCorrelation.SetPrefix("data_frame")
                     ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_dataframe")
                 End If
             Else
 
                 ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
-                ucrSaveCorrelation.SetCheckBoxText("Save Table")
+                ucrSaveCorrelation.SetCheckBoxText("Store Table")
                 ucrSaveCorrelation.SetPrefix("summary_table")
                 ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_table")
                 clsCorrelationFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
@@ -610,7 +623,7 @@ Public Class dlgCorrelation
         Else
 
             ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Model, strRObjectFormat:=RObjectFormat.Text)
-            ucrSaveCorrelation.SetCheckBoxText("Save Model")
+            ucrSaveCorrelation.SetCheckBoxText("Store Model")
             ucrSaveCorrelation.SetPrefix("summary_model")
             ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_model")
             clsCorrelationTestFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_model",

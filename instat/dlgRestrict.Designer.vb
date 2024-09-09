@@ -57,10 +57,9 @@ Partial Class dlgRestrict
         '
         'cmdDefineNewFilter
         '
-        Me.cmdDefineNewFilter.Location = New System.Drawing.Point(311, 110)
-        Me.cmdDefineNewFilter.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdDefineNewFilter.Location = New System.Drawing.Point(249, 88)
         Me.cmdDefineNewFilter.Name = "cmdDefineNewFilter"
-        Me.cmdDefineNewFilter.Size = New System.Drawing.Size(161, 38)
+        Me.cmdDefineNewFilter.Size = New System.Drawing.Size(129, 30)
         Me.cmdDefineNewFilter.TabIndex = 3
         Me.cmdDefineNewFilter.Tag = "Define_New_Filter"
         Me.cmdDefineNewFilter.Text = "Define New Filter"
@@ -69,19 +68,17 @@ Partial Class dlgRestrict
         'lblFilter
         '
         Me.lblFilter.AutoSize = True
-        Me.lblFilter.Location = New System.Drawing.Point(311, 56)
-        Me.lblFilter.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFilter.Location = New System.Drawing.Point(249, 45)
         Me.lblFilter.Name = "lblFilter"
-        Me.lblFilter.Size = New System.Drawing.Size(70, 16)
+        Me.lblFilter.Size = New System.Drawing.Size(57, 13)
         Me.lblFilter.TabIndex = 1
         Me.lblFilter.Text = "Filter rows:"
         '
         'lblFilterPreview
         '
-        Me.lblFilterPreview.Location = New System.Drawing.Point(12, 356)
-        Me.lblFilterPreview.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFilterPreview.Location = New System.Drawing.Point(10, 285)
         Me.lblFilterPreview.Name = "lblFilterPreview"
-        Me.lblFilterPreview.Size = New System.Drawing.Size(148, 28)
+        Me.lblFilterPreview.Size = New System.Drawing.Size(118, 22)
         Me.lblFilterPreview.TabIndex = 6
         Me.lblFilterPreview.Text = "Filter Preview:"
         '
@@ -90,11 +87,9 @@ Partial Class dlgRestrict
         Me.grpApplyOptions.Controls.Add(Me.rdoSavefilter)
         Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsSubset)
         Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsFilter)
-        Me.grpApplyOptions.Location = New System.Drawing.Point(12, 246)
-        Me.grpApplyOptions.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpApplyOptions.Location = New System.Drawing.Point(10, 197)
         Me.grpApplyOptions.Name = "grpApplyOptions"
-        Me.grpApplyOptions.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpApplyOptions.Size = New System.Drawing.Size(495, 66)
+        Me.grpApplyOptions.Size = New System.Drawing.Size(396, 53)
         Me.grpApplyOptions.TabIndex = 4
         Me.grpApplyOptions.TabStop = False
         Me.grpApplyOptions.Text = "Apply"
@@ -102,21 +97,20 @@ Partial Class dlgRestrict
         'rdoSavefilter
         '
         Me.rdoSavefilter.AutoSize = True
-        Me.rdoSavefilter.Location = New System.Drawing.Point(377, 24)
+        Me.rdoSavefilter.Location = New System.Drawing.Point(302, 19)
         Me.rdoSavefilter.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoSavefilter.Name = "rdoSavefilter"
-        Me.rdoSavefilter.Size = New System.Drawing.Size(92, 20)
+        Me.rdoSavefilter.Size = New System.Drawing.Size(75, 17)
         Me.rdoSavefilter.TabIndex = 4
         Me.rdoSavefilter.TabStop = True
-        Me.rdoSavefilter.Text = "Save Filter"
+        Me.rdoSavefilter.Text = "Store Filter"
         Me.rdoSavefilter.UseVisualStyleBackColor = True
         '
         'rdoApplyAsSubset
         '
-        Me.rdoApplyAsSubset.Location = New System.Drawing.Point(200, 24)
-        Me.rdoApplyAsSubset.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoApplyAsSubset.Location = New System.Drawing.Point(160, 19)
         Me.rdoApplyAsSubset.Name = "rdoApplyAsSubset"
-        Me.rdoApplyAsSubset.Size = New System.Drawing.Size(153, 21)
+        Me.rdoApplyAsSubset.Size = New System.Drawing.Size(122, 17)
         Me.rdoApplyAsSubset.TabIndex = 1
         Me.rdoApplyAsSubset.TabStop = True
         Me.rdoApplyAsSubset.Text = "As Subset"
@@ -124,10 +118,9 @@ Partial Class dlgRestrict
         '
         'rdoApplyAsFilter
         '
-        Me.rdoApplyAsFilter.Location = New System.Drawing.Point(8, 26)
-        Me.rdoApplyAsFilter.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoApplyAsFilter.Location = New System.Drawing.Point(6, 21)
         Me.rdoApplyAsFilter.Name = "rdoApplyAsFilter"
-        Me.rdoApplyAsFilter.Size = New System.Drawing.Size(164, 21)
+        Me.rdoApplyAsFilter.Size = New System.Drawing.Size(131, 17)
         Me.rdoApplyAsFilter.TabIndex = 0
         Me.rdoApplyAsFilter.TabStop = True
         Me.rdoApplyAsFilter.Text = "As Filter"
@@ -137,10 +130,9 @@ Partial Class dlgRestrict
         '
         Me.cmdEditFilter.Enabled = False
         Me.cmdEditFilter.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdEditFilter.Location = New System.Drawing.Point(311, 209)
-        Me.cmdEditFilter.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdEditFilter.Location = New System.Drawing.Point(249, 167)
         Me.cmdEditFilter.Name = "cmdEditFilter"
-        Me.cmdEditFilter.Size = New System.Drawing.Size(161, 29)
+        Me.cmdEditFilter.Size = New System.Drawing.Size(129, 23)
         Me.cmdEditFilter.TabIndex = 9
         Me.cmdEditFilter.Tag = "Define_New_Filter"
         Me.cmdEditFilter.Text = "Edit Filter"
@@ -149,10 +141,9 @@ Partial Class dlgRestrict
         'cmdFilterFromFactors
         '
         Me.cmdFilterFromFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFilterFromFactors.Location = New System.Drawing.Point(311, 154)
-        Me.cmdFilterFromFactors.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdFilterFromFactors.Location = New System.Drawing.Point(249, 123)
         Me.cmdFilterFromFactors.Name = "cmdFilterFromFactors"
-        Me.cmdFilterFromFactors.Size = New System.Drawing.Size(161, 48)
+        Me.cmdFilterFromFactors.Size = New System.Drawing.Size(129, 38)
         Me.cmdFilterFromFactors.TabIndex = 10
         Me.cmdFilterFromFactors.Tag = "Define_New_Filter"
         Me.cmdFilterFromFactors.Text = "Filter From Factors"
@@ -164,21 +155,21 @@ Partial Class dlgRestrict
         Me.ucrInputFilterPreview.AutoSize = True
         Me.ucrInputFilterPreview.IsMultiline = True
         Me.ucrInputFilterPreview.IsReadOnly = False
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(161, 355)
-        Me.ucrInputFilterPreview.Margin = New System.Windows.Forms.Padding(8)
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(129, 284)
+        Me.ucrInputFilterPreview.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(346, 54)
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(277, 43)
         Me.ucrInputFilterPreview.TabIndex = 7
         '
         'ucrReceiverFilter
         '
         Me.ucrReceiverFilter.AutoSize = True
         Me.ucrReceiverFilter.frmParent = Me
-        Me.ucrReceiverFilter.Location = New System.Drawing.Point(312, 75)
+        Me.ucrReceiverFilter.Location = New System.Drawing.Point(250, 60)
         Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
         Me.ucrReceiverFilter.Selector = Nothing
-        Me.ucrReceiverFilter.Size = New System.Drawing.Size(161, 25)
+        Me.ucrReceiverFilter.Size = New System.Drawing.Size(129, 20)
         Me.ucrReceiverFilter.strNcFilePath = ""
         Me.ucrReceiverFilter.TabIndex = 2
         Me.ucrReceiverFilter.ucrSelector = Nothing
@@ -189,37 +180,37 @@ Partial Class dlgRestrict
         Me.ucrSelectorFilter.bDropUnusedFilterLevels = False
         Me.ucrSelectorFilter.bShowHiddenColumns = False
         Me.ucrSelectorFilter.bUseCurrentFilter = True
-        Me.ucrSelectorFilter.Location = New System.Drawing.Point(12, 12)
+        Me.ucrSelectorFilter.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorFilter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFilter.Name = "ucrSelectorFilter"
-        Me.ucrSelectorFilter.Size = New System.Drawing.Size(267, 229)
+        Me.ucrSelectorFilter.Size = New System.Drawing.Size(214, 183)
         Me.ucrSelectorFilter.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(12, 416)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 333)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(511, 65)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 8
         '
         'ucrNewDataFrameName
         '
         Me.ucrNewDataFrameName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(12, 318)
-        Me.ucrNewDataFrameName.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
+        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(10, 254)
+        Me.ucrNewDataFrameName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(460, 30)
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(368, 24)
         Me.ucrNewDataFrameName.TabIndex = 5
         '
         'dlgRestrict
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(522, 485)
+        Me.ClientSize = New System.Drawing.Size(418, 388)
         Me.Controls.Add(Me.cmdFilterFromFactors)
         Me.Controls.Add(Me.cmdEditFilter)
         Me.Controls.Add(Me.grpApplyOptions)
@@ -232,7 +223,6 @@ Partial Class dlgRestrict
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRestrict"
