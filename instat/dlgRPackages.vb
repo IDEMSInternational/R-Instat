@@ -26,20 +26,35 @@ Public Class dlgInstallRPackage
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctPackages As New Dictionary(Of String, String)
+
         ucrBase.iHelpTopicID = 592
         ucrBase.clsRsyntax.iCallType = 2
         ucrInputTextBoxRPackage.SetParameter(New RParameter("pkgs", 1))
         ucrPnlRPackages.AddRadioButton(rdoCRAN)
         ucrPnlRPackages.AddRadioButton(rdoRPackage)
 
-        ucrInputRepositoryName.SetLinkedDisplayControl(lblRepository)
+        ucrInputPackage.SetParameter(New RParameter("pkgs", 1))
+        dctPackages.Add(" ", Chr(34) & " " & Chr(34))
+        dctPackages.Add("rpicsa", Chr(34) & "rpicsa" & Chr(34))
+        dctPackages.Add("epicsawrap", Chr(34) & "epicsawrap" & Chr(34))
+        dctPackages.Add("cdms.products", Chr(34) & "cdms.products" & Chr(34))
+        dctPackages.Add("carbonr", Chr(34) & "carbonr" & Chr(34))
+        dctPackages.Add("rapidpror", Chr(34) & "rapidpror" & Chr(34))
+        dctPackages.Add("openappr", Chr(34) & "openappr" & Chr(34))
+        dctPackages.Add("networkGraphsR", Chr(34) & "networkGraphsR" & Chr(34))
+        ucrInputPackage.SetItems(dctPackages)
 
         ucrPnlRPackages.AddParameterValuesCondition(rdoCRAN, "checked", "cran")
         ucrPnlRPackages.AddParameterValuesCondition(rdoRPackage, "checked", "rpackage")
 
         ucrInputMessage.SetLinkedDisplayControl(cmdCheck)
 
-        ucrPnlRPackages.AddToLinkedControls(ucrInputRepositoryName, {rdoRPackage}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputRepositoryName.SetLinkedDisplayControl(lblRepository)
+
+        ucrPnlRPackages.AddToLinkedControls(ucrInputRepositoryName, {rdoRPackage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="IDEMSInternational")
+        ucrPnlRPackages.AddToLinkedControls({ucrInputTextBoxRPackage}, {rdoCRAN}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlRPackages.AddToLinkedControls(ucrInputPackage, {rdoRPackage}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=" ")
 
         CheckEnable()
     End Sub
@@ -71,6 +86,7 @@ Public Class dlgInstallRPackage
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputTextBoxRPackage.SetRCode(clsInstallPackage, bReset)
+        ucrInputPackage.SetRCode(clsInstallPackage, bReset)
         If bReset Then
             ucrPnlRPackages.SetRCode(clsDummyFunction, bReset)
             ucrInputRepositoryName.SetRCode(clsRepositoryFunction, bReset)
@@ -81,11 +97,11 @@ Public Class dlgInstallRPackage
         If rdoCRAN.Checked Then
             ucrBase.OKEnabled(Not ucrInputTextBoxRPackage.IsEmpty)
         ElseIf rdoRPackage.Checked Then
-            ucrBase.OKEnabled(Not ucrInputRepositoryName.IsEmpty AndAlso Not ucrInputTextBoxRPackage.IsEmpty AndAlso bUniqueChecked)
+            ucrBase.OKEnabled(Not ucrInputRepositoryName.IsEmpty AndAlso Not ucrInputPackage.IsEmpty AndAlso bUniqueChecked)
         End If
     End Sub
 
-    Private Sub ucrInputTextBoxRPackage_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputTextBoxRPackage.ControlContentsChanged
+    Private Sub ucrInputTextBoxRPackage_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputTextBoxRPackage.ControlContentsChanged, ucrInputPackage.ControlContentsChanged
         bUniqueChecked = False
         ucrInputMessage.SetText("")
         ucrInputMessage.txtInput.BackColor = Color.White
@@ -104,7 +120,7 @@ Public Class dlgInstallRPackage
             clsPackageCheck.AddParameter("package", Chr(34) & ucrInputTextBoxRPackage.GetText() & Chr(34))
         ElseIf rdoRPackage.Checked Then
             clsPackageCheck.SetRCommand("check_github_repo")
-            clsPackageCheck.AddParameter("repo", Chr(34) & ucrInputTextBoxRPackage.GetText() & Chr(34))
+            clsPackageCheck.AddParameter("repo", Chr(34) & ucrInputPackage.GetText() & Chr(34))
             clsPackageCheck.AddParameter("owner", Chr(34) & ucrInputRepositoryName.GetText() & Chr(34))
         End If
         expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)
@@ -173,6 +189,13 @@ Public Class dlgInstallRPackage
             cmdCheck.Enabled = False
             ucrInputMessage.Enabled = False
         End If
+        If Not ucrInputPackage.IsEmpty Then
+            cmdCheck.Enabled = True
+            ucrInputMessage.Enabled = True
+        Else
+            cmdCheck.Enabled = False
+            ucrInputMessage.Enabled = False
+        End If
     End Sub
 
     Private Sub cmdCheck_Click(sender As Object, e As EventArgs) Handles cmdCheck.Click
@@ -192,15 +215,15 @@ Public Class dlgInstallRPackage
         ucrInputTextBoxRPackage.txtInput.Clear()
     End Sub
 
-    Private Sub ucrInputRepositoryName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRepositoryName.ControlContentsChanged
+    Private Sub ucrInputRepositoryName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRepositoryName.ControlValueChanged
         TestOkEnabled()
         GithubOption()
         bUniqueChecked = False
     End Sub
 
     Private Sub GithubOption()
-        If Not (ucrInputTextBoxRPackage.IsEmpty AndAlso ucrInputRepositoryName.IsEmpty) Then
-            clsRepositoryFunction.AddParameter("paste", Chr(34) & ucrInputRepositoryName.GetText & "/" & ucrInputTextBoxRPackage.GetText & Chr(34), bIncludeArgumentName:=False)
+        If Not (ucrInputPackage.IsEmpty AndAlso ucrInputRepositoryName.IsEmpty) Then
+            clsRepositoryFunction.AddParameter("paste", Chr(34) & ucrInputRepositoryName.GetText & "/" & ucrInputPackage.GetText() & Chr(34), bIncludeArgumentName:=False)
         Else
             clsRepositoryFunction.RemoveParameterByName("paste")
         End If

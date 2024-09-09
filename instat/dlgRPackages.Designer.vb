@@ -32,13 +32,14 @@ Partial Class dlgInstallRPackage
         Me.ucrPnlRPackages = New instat.UcrPanel()
         Me.ucrInputMessage = New instat.ucrInputTextBox()
         Me.ucrInputRepositoryName = New instat.ucrInputTextBox()
+        Me.ucrInputPackage = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'cmdCheck
         '
         Me.cmdCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdCheck.Location = New System.Drawing.Point(18, 150)
-        Me.cmdCheck.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdCheck.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdCheck.Name = "cmdCheck"
         Me.cmdCheck.Size = New System.Drawing.Size(112, 33)
         Me.cmdCheck.TabIndex = 7
@@ -66,7 +67,7 @@ Partial Class dlgInstallRPackage
         Me.rdoCRAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCRAN.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoCRAN.Location = New System.Drawing.Point(206, 9)
-        Me.rdoCRAN.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoCRAN.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoCRAN.Name = "rdoCRAN"
         Me.rdoCRAN.Size = New System.Drawing.Size(136, 42)
         Me.rdoCRAN.TabIndex = 1
@@ -86,7 +87,7 @@ Partial Class dlgInstallRPackage
         Me.rdoRPackage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRPackage.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoRPackage.Location = New System.Drawing.Point(338, 9)
-        Me.rdoRPackage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoRPackage.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoRPackage.Name = "rdoRPackage"
         Me.rdoRPackage.Size = New System.Drawing.Size(136, 42)
         Me.rdoRPackage.TabIndex = 2
@@ -112,7 +113,7 @@ Partial Class dlgInstallRPackage
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(15, 199)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 9
@@ -124,7 +125,7 @@ Partial Class dlgInstallRPackage
         Me.ucrInputTextBoxRPackage.IsMultiline = False
         Me.ucrInputTextBoxRPackage.IsReadOnly = False
         Me.ucrInputTextBoxRPackage.Location = New System.Drawing.Point(151, 66)
-        Me.ucrInputTextBoxRPackage.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputTextBoxRPackage.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputTextBoxRPackage.Name = "ucrInputTextBoxRPackage"
         Me.ucrInputTextBoxRPackage.Size = New System.Drawing.Size(296, 33)
         Me.ucrInputTextBoxRPackage.TabIndex = 4
@@ -133,7 +134,7 @@ Partial Class dlgInstallRPackage
         '
         Me.ucrPnlRPackages.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlRPackages.Location = New System.Drawing.Point(174, 8)
-        Me.ucrPnlRPackages.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrPnlRPackages.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrPnlRPackages.Name = "ucrPnlRPackages"
         Me.ucrPnlRPackages.Size = New System.Drawing.Size(339, 51)
         Me.ucrPnlRPackages.TabIndex = 0
@@ -145,7 +146,7 @@ Partial Class dlgInstallRPackage
         Me.ucrInputMessage.IsMultiline = False
         Me.ucrInputMessage.IsReadOnly = True
         Me.ucrInputMessage.Location = New System.Drawing.Point(151, 150)
-        Me.ucrInputMessage.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputMessage.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputMessage.Name = "ucrInputMessage"
         Me.ucrInputMessage.Size = New System.Drawing.Size(475, 33)
         Me.ucrInputMessage.TabIndex = 8
@@ -157,10 +158,22 @@ Partial Class dlgInstallRPackage
         Me.ucrInputRepositoryName.IsMultiline = False
         Me.ucrInputRepositoryName.IsReadOnly = False
         Me.ucrInputRepositoryName.Location = New System.Drawing.Point(151, 105)
-        Me.ucrInputRepositoryName.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputRepositoryName.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputRepositoryName.Name = "ucrInputRepositoryName"
-        Me.ucrInputRepositoryName.Size = New System.Drawing.Size(296, 33)
+        Me.ucrInputRepositoryName.Size = New System.Drawing.Size(346, 33)
         Me.ucrInputRepositoryName.TabIndex = 6
+        '
+        'ucrInputPackage
+        '
+        Me.ucrInputPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputPackage.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputPackage.GetSetSelectedIndex = -1
+        Me.ucrInputPackage.IsReadOnly = False
+        Me.ucrInputPackage.Location = New System.Drawing.Point(151, 61)
+        Me.ucrInputPackage.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputPackage.Name = "ucrInputPackage"
+        Me.ucrInputPackage.Size = New System.Drawing.Size(323, 32)
+        Me.ucrInputPackage.TabIndex = 10
         '
         'dlgInstallRPackage
         '
@@ -178,8 +191,9 @@ Partial Class dlgInstallRPackage
         Me.Controls.Add(Me.lblRepository)
         Me.Controls.Add(Me.cmdCheck)
         Me.Controls.Add(Me.ucrInputMessage)
+        Me.Controls.Add(Me.ucrInputPackage)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgInstallRPackage"
@@ -199,4 +213,5 @@ Partial Class dlgInstallRPackage
     Friend WithEvents rdoRPackage As RadioButton
     Friend WithEvents lblRepository As Label
     Friend WithEvents ucrInputRepositoryName As ucrInputTextBox
+    Friend WithEvents ucrInputPackage As ucrInputComboBox
 End Class
