@@ -160,7 +160,7 @@ Partial Class dlgInstallRPackage
         Me.ucrInputRepositoryName.Location = New System.Drawing.Point(151, 105)
         Me.ucrInputRepositoryName.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputRepositoryName.Name = "ucrInputRepositoryName"
-        Me.ucrInputRepositoryName.Size = New System.Drawing.Size(346, 33)
+        Me.ucrInputRepositoryName.Size = New System.Drawing.Size(471, 33)
         Me.ucrInputRepositoryName.TabIndex = 6
         '
         'ucrInputPackage
