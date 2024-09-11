@@ -252,8 +252,8 @@ Public Class dlgEndOfRainsSeason
         ucrInputEndofRainsDate.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
 
         ucrChkEndofRainsOccurence.SetText("Occurrence")
-        ucrChkEndofRainsOccurence.AddParameterPresentCondition(True, "sub3")
-        ucrChkEndofRainsOccurence.AddParameterPresentCondition(False, "sub3", False)
+        ucrChkEndofRainsOccurence.AddParameterValuesCondition(True, "sub3", "True")
+        ucrChkEndofRainsOccurence.AddParameterValuesCondition(False, "sub3", "False")
 
         ucrInputEndofRainsOccurence.SetParameter(New RParameter("result_name", 2))
         ucrInputEndofRainsOccurence.SetValidationTypeAsRVariable()
@@ -289,15 +289,15 @@ Public Class dlgEndOfRainsSeason
         ucrInputSeasonDoy.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
 
         ucrChkEndofSeasonDate.SetText("Date")
-        ucrChkEndofSeasonDate.AddParameterPresentCondition(True, "sub2")
-        ucrChkEndofSeasonDate.AddParameterPresentCondition(False, "sub2", False)
+        ucrChkEndofSeasonDate.AddParameterValuesCondition(True, "sub2", "True")
+        ucrChkEndofSeasonDate.AddParameterValuesCondition(False, "sub2", "False")
 
         ucrInputEndofSeasonDate.SetParameter(New RParameter("result_name", 3))
         ucrInputEndofSeasonDate.SetValidationTypeAsRVariable()
         ucrInputEndofSeasonDate.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
 
-        ucrChkEndofSeasonOccurence.AddParameterPresentCondition(True, "sub3")
-        ucrChkEndofSeasonOccurence.AddParameterPresentCondition(False, "sub3", False)
+        ucrChkEndofSeasonOccurence.AddParameterValuesCondition(True, "sub3", "True")
+        ucrChkEndofSeasonOccurence.AddParameterValuesCondition(False, "sub3", "False")
         ucrChkEndofSeasonOccurence.SetText("Occurrence")
 
         ucrInputEndofSeasonOccurence.SetParameter(New RParameter("result_name", 2))
@@ -501,6 +501,7 @@ Public Class dlgEndOfRainsSeason
 
         clsDummyFunction = New RFunction
         clsDummyFunction.AddParameter("sub2", "True", iPosition:=0)
+        clsDummyFunction.AddParameter("sub3", "True", iPosition:=1)
 
         ' Group by
         clsGroupByStationYearCalc.SetRCommand("instat_calculation$new")
@@ -960,14 +961,14 @@ Public Class dlgEndOfRainsSeason
         End If
 
         ucrChkEndofSeasonDoy.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
-        ucrChkEndofSeasonDate.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
-        ucrChkEndofSeasonOccurence.SetRCode(clsEndSeasonCombinationSubCalcList, bReset)
+        ucrChkEndofSeasonDate.SetRCode(clsDummyFunction, bReset)
+        ucrChkEndofSeasonOccurence.SetRCode(clsDummyFunction, bReset)
 
         ucrNudAmount.SetRCode(clsEndRainsRollSumRainConditionOperator, bReset)
         ucrNudTotalOverDays.SetRCode(clsRollSumRainFunction, bReset)
         ucrChkEndofRainsDoy.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
         ucrChkEndofRainsDate.SetRCode(clsDummyFunction, bReset)
-        ucrChkEndofRainsOccurence.SetRCode(clsEndRainsCombinationSubCalcList, bReset)
+        ucrChkEndofRainsOccurence.SetRCode(clsDummyFunction, bReset)
         ucrPnlEndOfRainsAndSeasons.SetRCode(clsFirstOrLastFunction, bReset)
     End Sub
 

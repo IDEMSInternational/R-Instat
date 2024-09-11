@@ -248,8 +248,8 @@ Public Class dlgStartofRains
         ucrChkAsDate.AddParameterValuesCondition(False, "sub2", "False")
         ucrChkAsDate.SetText("Date")
 
-        ucrChkStatus.AddParameterPresentCondition(True, "sub3", True)
-        ucrChkStatus.AddParameterPresentCondition(False, "sub3", False)
+        ucrChkStatus.AddParameterValuesCondition(True, "sub3", "True")
+        ucrChkStatus.AddParameterValuesCondition(False, "sub3", "False")
         ucrChkStatus.SetText("Occurrence")
     End Sub
 
@@ -357,6 +357,7 @@ Public Class dlgStartofRains
 
         clsDummyFunction = New RFunction
         clsDummyFunction.AddParameter("sub2", "True", iPosition:=0)
+        clsDummyFunction.AddParameter("sub3", "True", iPosition:=1)
 
         'Day From and To
         clsDayFromAndTo.SetRCommand("instat_calculation$new")
@@ -743,7 +744,7 @@ Public Class dlgStartofRains
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrChkAsDoy.SetRCode(clsCombinationSubCalcList, bReset)
-        ucrChkStatus.SetRCode(clsCombinationSubCalcList, bReset)
+        ucrChkStatus.SetRCode(clsDummyFunction, bReset)
         ucrChkAsDate.SetRCode(clsDummyFunction, bReset)
         ucrInputThreshold.SetRCode(clsRainDayOperator, bReset)
 
