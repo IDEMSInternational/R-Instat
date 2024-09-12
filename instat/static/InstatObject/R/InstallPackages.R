@@ -156,9 +156,12 @@ packs <- c("abind", "agricolae", "agridat",
 
 install.packages(packs, dependencies = FALSE, repos='https://cloud.r-project.org', type="win.binary")
 
+# Only use internal library
+if (length(.libPaths()) == 2) .libPaths(.libPaths()[2])
+
 #install development packages not on CRAN
 devtools::install_github("ianmoran11/mmtable2")
 devtools::install_github("michael-franke/aida-package")
 devtools::install_github("rijaf-iri/CDT")
 devtools::install_github("IDEMSInternational/rapidpror")
-
+devtools::install_github("IDEMSInternational/epicsawrap")
