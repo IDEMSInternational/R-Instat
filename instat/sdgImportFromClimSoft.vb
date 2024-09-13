@@ -40,6 +40,8 @@ Public Class sdgImportFromClimSoft
     Private Sub InitialiseDialog()
         Dim dctDatabaseNames As New Dictionary(Of String, String)
         Dim dctPorts As New Dictionary(Of String, String)
+        Dim dctDrv As New Dictionary(Of String, String)
+
 
         'database names
         dctDatabaseNames.Add("mariadb_climsoft_db_v4", Chr(34) & "mariadb_climsoft_db_v4" & Chr(34))
@@ -62,6 +64,15 @@ Public Class sdgImportFromClimSoft
 
         'user name
         ucrTxtUserName.SetParameter(New RParameter("user", 3))
+
+        ucrInputDrv.SetParameter(New RParameter("drv", 4))
+        dctDrv.Add("RMySQL::MySQL()", "RMySQL::MySQL()")
+        dctDrv.Add("RPostgres::Postgres()", "RPostgres::Postgres()")
+        ucrInputDrv.SetItems(dctDrv)
+        ucrInputDrv.bAllowNonConditionValues = True
+        ucrInputDrv.SetRDefault("RMySQL::MySQL()")
+        ucrInputDrv.AddQuotesIfUnrecognised = False
+
     End Sub
 
     Private Sub SetDefaults()
@@ -74,6 +85,7 @@ Public Class sdgImportFromClimSoft
         clsRDatabaseConnect.AddParameter("host", frmMain.clsInstatOptions.strClimsoftHost, iPosition:=1)
         clsRDatabaseConnect.AddParameter("port", frmMain.clsInstatOptions.strClimsoftPort, iPosition:=2)
         clsRDatabaseConnect.AddParameter("user", frmMain.clsInstatOptions.strClimsoftUsername, iPosition:=3)
+        clsRDatabaseConnect.AddParameter("drv", "RMySQL::MySQL()", iPosition:=4)
 
         'set database disconnect R command
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
@@ -87,6 +99,7 @@ Public Class sdgImportFromClimSoft
         ucrTxtHost.SetRCode(clsRDatabaseConnect, bReset)
         ucrComboBoxPort.SetRCode(clsRDatabaseConnect, bReset)
         ucrTxtUserName.SetRCode(clsRDatabaseConnect, bReset)
+        ucrInputDrv.SetRCode(clsRDatabaseConnect, bReset)
     End Sub
 
     Private Sub UpdateConnectionAndControlsState()
@@ -111,6 +124,8 @@ Public Class sdgImportFromClimSoft
         ucrTxtHost.Enabled = bEnableControls
         ucrTxtUserName.Enabled = bEnableControls
         chkRememberCredentials.Enabled = bEnableControls
+        ucrInputDrv.Enabled = bEnableControls
+
     End Sub
 
     ''' <summary>
@@ -164,15 +179,17 @@ Public Class sdgImportFromClimSoft
             frmMain.clsInstatOptions.SetClimsoftHost(ucrTxtHost.GetText())
             frmMain.clsInstatOptions.SetClimsoftPort(ucrComboBoxPort.GetText())
             frmMain.clsInstatOptions.SetClimsoftUsername(ucrTxtUserName.GetText())
+            clsRDatabaseConnect.AddParameter("drv", ucrInputDrv.GetText, iPosition:=4)
         End If
     End Sub
 
-    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxDatabaseName.ControlContentsChanged, ucrTxtHost.ControlContentsChanged, ucrComboBoxPort.ControlContentsChanged, ucrTxtUserName.ControlContentsChanged
+    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxDatabaseName.ControlContentsChanged, ucrTxtHost.ControlContentsChanged, ucrComboBoxPort.ControlContentsChanged, ucrTxtUserName.ControlContentsChanged, ucrInputDrv.ControlContentsChanged
         'if not already connected, check if it's valid to attempt connecting to database
         If bConnected Then
             btnConnect.Enabled = True
         Else
-            btnConnect.Enabled = Not ucrTxtHost.IsEmpty AndAlso Not ucrTxtUserName.IsEmpty AndAlso Not ucrComboBoxPort.IsEmpty AndAlso Not ucrComboBoxDatabaseName.IsEmpty
+            btnConnect.Enabled = Not ucrTxtHost.IsEmpty AndAlso Not ucrTxtUserName.IsEmpty AndAlso Not ucrComboBoxPort.IsEmpty AndAlso Not ucrComboBoxDatabaseName.IsEmpty AndAlso Not ucrInputDrv.IsEmpty
         End If
     End Sub
+
 End Class
