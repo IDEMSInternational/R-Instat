@@ -281,6 +281,12 @@
     <Compile Include="dlgImportFromRapidPro.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportOpenAppBuilder.Designer.vb">
+      <DependentUpon>dlgImportOpenAppBuilder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportOpenAppBuilder.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRandomSplit.Designer.vb">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
@@ -323,6 +329,12 @@
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDefineAnnualRainfall.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgFlowsToImport.Designer.vb">
+      <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFlowsToImport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgHSConstants.Designer.vb">
@@ -3312,6 +3324,9 @@
     <EmbeddedResource Include="dlgImportFromRapidPro.resx">
       <DependentUpon>dlgImportFromRapidPro.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportOpenAppBuilder.resx">
+      <DependentUpon>dlgImportOpenAppBuilder.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
     </EmbeddedResource>
@@ -3386,6 +3401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFlowsToImport.resx">
+      <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHSConstants.resx">
       <DependentUpon>sdgHSConstants.vb</DependentUpon>
