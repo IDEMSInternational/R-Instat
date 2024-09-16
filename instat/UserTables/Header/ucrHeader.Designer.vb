@@ -47,7 +47,7 @@ Partial Class ucrHeader
         Me.ucrInputSubtitleFooter.Location = New System.Drawing.Point(9, 88)
         Me.ucrInputSubtitleFooter.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputSubtitleFooter.Name = "ucrInputSubtitleFooter"
-        Me.ucrInputSubtitleFooter.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputSubtitleFooter.Size = New System.Drawing.Size(361, 21)
         Me.ucrInputSubtitleFooter.TabIndex = 23
         '
         'ucrInputTitleFooter
@@ -59,7 +59,7 @@ Partial Class ucrHeader
         Me.ucrInputTitleFooter.Location = New System.Drawing.Point(11, 89)
         Me.ucrInputTitleFooter.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputTitleFooter.Name = "ucrInputTitleFooter"
-        Me.ucrInputTitleFooter.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputTitleFooter.Size = New System.Drawing.Size(359, 21)
         Me.ucrInputTitleFooter.TabIndex = 22
         '
         'lblHeaderSubtitle
@@ -84,7 +84,7 @@ Partial Class ucrHeader
         '
         'btnSubTitleFormat
         '
-        Me.btnSubTitleFormat.Location = New System.Drawing.Point(153, 40)
+        Me.btnSubTitleFormat.Location = New System.Drawing.Point(372, 40)
         Me.btnSubTitleFormat.Name = "btnSubTitleFormat"
         Me.btnSubTitleFormat.Size = New System.Drawing.Size(75, 23)
         Me.btnSubTitleFormat.TabIndex = 31
@@ -93,7 +93,7 @@ Partial Class ucrHeader
         '
         'btnTitleFormat
         '
-        Me.btnTitleFormat.Location = New System.Drawing.Point(155, 42)
+        Me.btnTitleFormat.Location = New System.Drawing.Point(374, 42)
         Me.btnTitleFormat.Name = "btnTitleFormat"
         Me.btnTitleFormat.Size = New System.Drawing.Size(79, 23)
         Me.btnTitleFormat.TabIndex = 30
@@ -109,7 +109,7 @@ Partial Class ucrHeader
         Me.ucrInputSubtitle.Location = New System.Drawing.Point(9, 42)
         Me.ucrInputSubtitle.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputSubtitle.Name = "ucrInputSubtitle"
-        Me.ucrInputSubtitle.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputSubtitle.Size = New System.Drawing.Size(361, 21)
         Me.ucrInputSubtitle.TabIndex = 29
         '
         'ucrInputTitle
@@ -121,7 +121,7 @@ Partial Class ucrHeader
         Me.ucrInputTitle.Location = New System.Drawing.Point(11, 42)
         Me.ucrInputTitle.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputTitle.Name = "ucrInputTitle"
-        Me.ucrInputTitle.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputTitle.Size = New System.Drawing.Size(359, 21)
         Me.ucrInputTitle.TabIndex = 28
         '
         'lblSubtitle
@@ -153,7 +153,7 @@ Partial Class ucrHeader
         Me.grpBoxTitle.Controls.Add(Me.ucrInputTitleFooter)
         Me.grpBoxTitle.Location = New System.Drawing.Point(4, 5)
         Me.grpBoxTitle.Name = "grpBoxTitle"
-        Me.grpBoxTitle.Size = New System.Drawing.Size(248, 115)
+        Me.grpBoxTitle.Size = New System.Drawing.Size(463, 115)
         Me.grpBoxTitle.TabIndex = 32
         Me.grpBoxTitle.TabStop = False
         Me.grpBoxTitle.Text = "Title"
@@ -167,7 +167,7 @@ Partial Class ucrHeader
         Me.grpBoxSubtitle.Controls.Add(Me.lblSubtitle)
         Me.grpBoxSubtitle.Location = New System.Drawing.Point(4, 125)
         Me.grpBoxSubtitle.Name = "grpBoxSubtitle"
-        Me.grpBoxSubtitle.Size = New System.Drawing.Size(248, 116)
+        Me.grpBoxSubtitle.Size = New System.Drawing.Size(463, 116)
         Me.grpBoxSubtitle.TabIndex = 33
         Me.grpBoxSubtitle.TabStop = False
         Me.grpBoxSubtitle.Text = "Subtitle"
@@ -179,7 +179,7 @@ Partial Class ucrHeader
         Me.Controls.Add(Me.grpBoxSubtitle)
         Me.Controls.Add(Me.grpBoxTitle)
         Me.Name = "ucrHeader"
-        Me.Size = New System.Drawing.Size(259, 246)
+        Me.Size = New System.Drawing.Size(470, 246)
         Me.grpBoxTitle.ResumeLayout(False)
         Me.grpBoxTitle.PerformLayout()
         Me.grpBoxSubtitle.ResumeLayout(False)

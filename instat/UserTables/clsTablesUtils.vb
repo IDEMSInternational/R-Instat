@@ -5,6 +5,8 @@ Public Class clsTablesUtils
     Public Shared Function ShowStyleSubDialog(owner As Form, Optional clsListStyleRFunction As RFunction = Nothing) As RFunction
         If clsListStyleRFunction IsNot Nothing AndAlso clsListStyleRFunction.ContainsParameter("style") Then
             sdgTableStyles.Setup(clsListStyleRFunction.GetParameter("style").clsArgumentCodeStructure)
+        Else
+            sdgTableStyles.Setup()
         End If
 
         sdgTableStyles.ShowDialog(owner)

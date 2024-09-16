@@ -22,6 +22,7 @@
         dctSummaryTypes.Add("Median", "median")
         dctSummaryTypes.Add("Standard Deviation", "sd")
         dctSummaryTypes.Add("Sum", "sum")
+        dctSummaryTypes.Add("Length", "length")
         ucrCboSummaryType.SetItems(dctSummaryTypes, bSetConditions:=False)
         ucrCboSummaryType.SetDropDownStyleAsNonEditable()
         ucrCboSummaryType.GetSetSelectedIndex = 0

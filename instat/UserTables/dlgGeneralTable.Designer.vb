@@ -44,11 +44,11 @@ Partial Class dlgGeneralTable
         '
         'btnMoreOptions
         '
-        Me.btnMoreOptions.Location = New System.Drawing.Point(250, 209)
+        Me.btnMoreOptions.Location = New System.Drawing.Point(9, 204)
         Me.btnMoreOptions.Name = "btnMoreOptions"
         Me.btnMoreOptions.Size = New System.Drawing.Size(141, 23)
         Me.btnMoreOptions.TabIndex = 25
-        Me.btnMoreOptions.Text = "More Options"
+        Me.btnMoreOptions.Text = "Table Options"
         Me.btnMoreOptions.UseVisualStyleBackColor = True
         '
         'ucrNudPreview

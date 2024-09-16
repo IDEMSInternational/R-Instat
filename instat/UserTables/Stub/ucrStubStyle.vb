@@ -31,7 +31,6 @@
     End Sub
 
     Private Sub btnEnterStyle_Click(sender As Object, e As EventArgs) Handles btnEnterStyle.Click
-
         Dim clsListStyleRFunction As RFunction = clsTablesUtils.ShowStyleSubDialog(Me.ParentForm)
         If clsListStyleRFunction Is Nothing Then
             Exit Sub

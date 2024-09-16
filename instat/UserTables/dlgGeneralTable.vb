@@ -18,6 +18,7 @@ Public Class dlgGeneralTable
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
     Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
@@ -35,9 +36,7 @@ Public Class dlgGeneralTable
         TestOKEnabled()
     End Sub
 
-
     Private Sub initialiseDialog()
-
         ucrReceiverMultipleCols.SetParameter(New RParameter("df_columns_to_use_param", 0, bNewIncludeArgumentName:=False))
         ucrReceiverMultipleCols.SetParameterIsRFunction()
         ucrReceiverMultipleCols.Selector = ucrSelectorCols
@@ -50,6 +49,7 @@ Public Class dlgGeneralTable
 
         ucrNudPreview.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrNudPreview.Minimum = 6
+        ucrNudPreview.Maximum = Decimal.MaxValue
         ucrNudPreview.SetRDefault(6)
 
         ucrSaveTable.SetPrefix("presentation_table")
@@ -78,6 +78,7 @@ Public Class dlgGeneralTable
 
         clsHeadRFunction.SetPackageName("utils")
         clsHeadRFunction.SetRCommand("head")
+        clsHeadRFunction.AddParameter(strParameterName:="x", strParameterValue:=100, iPosition:=0, bIncludeArgumentName:=False)
         clsBaseOperator.AddParameter(strParameterName:="head", clsRFunctionParameter:=clsHeadRFunction, iPosition:=1, bIncludeArgumentName:=False)
 
         clsGtRFunction.SetPackageName("gt")
@@ -91,18 +92,15 @@ Public Class dlgGeneralTable
                                                   strObjectName:="last_table")
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-
     End Sub
 
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-
         ucrReceiverMultipleCols.SetRCode(clsBaseOperator, bReset)
         ucrSaveTable.SetRCode(clsBaseOperator, bReset)
 
         ucrChkPreview.SetRCode(clsBaseOperator, bReset)
         ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
-
     End Sub
 
     Private Sub TestOKEnabled()

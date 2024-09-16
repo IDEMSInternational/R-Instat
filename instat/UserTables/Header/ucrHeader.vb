@@ -54,15 +54,15 @@ Public Class ucrHeader
         '--------------
         ' Set up the title and subtitle styles R function
         Dim lstTabStyleForRParams As List(Of RParameter) = clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_title", clsOperator)
-        For Each clsTabFootNoteRParam As RParameter In lstTabStyleForRParams
-            For Each clsFooterParam As RParameter In clsTabFootNoteRParam.clsArgumentCodeStructure.clsParameters
-                If clsFooterParam.strArgumentName = "locations" AndAlso clsFooterParam.clsArgumentCodeStructure.ContainsParameter("groups") Then
-                    If clsTablesUtils.GetStringValue(clsFooterParam.clsArgumentCodeStructure.GetParameter("groups").strArgumentValue, False) = "title" Then
-                        clsTitleStyleRFunction = clsTabFootNoteRParam.clsArgumentCodeStructure
-                        clsTitleLocationRFunction = clsFooterParam.clsArgumentCodeStructure
-                    ElseIf clsTablesUtils.GetStringValue(clsFooterParam.clsArgumentCodeStructure.GetParameter("groups").strArgumentValue, False) = "subtitle" Then
-                        clsSubtitleStyleRFunction = clsTabFootNoteRParam.clsArgumentCodeStructure
-                        clsSubtitleLocationRFunction = clsFooterParam.clsArgumentCodeStructure
+        For Each clsTabStyleRParam As RParameter In lstTabStyleForRParams
+            For Each clsStyleLocationParam As RParameter In clsTabStyleRParam.clsArgumentCodeStructure.clsParameters
+                If clsStyleLocationParam.strArgumentName = "locations" AndAlso clsStyleLocationParam.clsArgumentCodeStructure.ContainsParameter("groups") Then
+                    If clsTablesUtils.GetStringValue(clsStyleLocationParam.clsArgumentCodeStructure.GetParameter("groups").strArgumentValue, False) = "title" Then
+                        clsTitleStyleRFunction = clsTabStyleRParam.clsArgumentCodeStructure
+                        clsTitleLocationRFunction = clsStyleLocationParam.clsArgumentCodeStructure
+                    ElseIf clsTablesUtils.GetStringValue(clsStyleLocationParam.clsArgumentCodeStructure.GetParameter("groups").strArgumentValue, False) = "subtitle" Then
+                        clsSubtitleStyleRFunction = clsTabStyleRParam.clsArgumentCodeStructure
+                        clsSubtitleLocationRFunction = clsStyleLocationParam.clsArgumentCodeStructure
                     End If
                 End If
             Next

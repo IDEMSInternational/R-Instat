@@ -1,12 +1,9 @@
 ﻿Imports instat.Translations
 
 Public Class sdgTableStyles
-
     Private clsStyleListRFunction, clsCellTextRFunction, clsCellFillRFunction, clsCellBordersRFunction, clsCellBorderSidesRFunction As New RFunction
     Private bFirstload As Boolean = True
-    Private bUserMadeChanges As Boolean = False
     Private bUserClickedReturn As Boolean = False
-    Private bSetDefaults As Boolean = True
 
     Private Sub sdgTableTextFormatOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -14,13 +11,8 @@ Public Class sdgTableStyles
             bFirstload = False
         End If
 
-        If bSetDefaults Then
-            SetDefaults()
-        End If
-
         SetRCode()
 
-        bUserMadeChanges = False
         bUserClickedReturn = False
         autoTranslate(Me)
     End Sub
@@ -49,12 +41,6 @@ Public Class sdgTableStyles
         ucrCboFontFamily.SetParameter(New RParameter("font", iNewPosition:=1))
         ucrCboFontFamily.SetItems(dctFontFamily)
         ucrCboFontFamily.SetRDefault("NULL")
-        '-----------------
-
-        '-----------------
-        ucrTxtFontSize.SetParameter(New RParameter("size", iNewPosition:=2))
-        ucrTxtFontSize.AddQuotesIfUnrecognised = False
-        ucrTxtFontSize.SetRDefault("NULL")
         '-----------------
 
         '-----------------
@@ -256,19 +242,9 @@ Public Class sdgTableStyles
 
         '---------------------------------------------------
 
-
-
     End Sub
 
-    Public Sub Setup(clsStyleListRFunction As RFunction)
-
-        ' TODO
-
-        bSetDefaults = False
-    End Sub
-
-    Private Sub SetDefaults()
-
+    Public Sub Setup(Optional clsNewStyleListRFunction As RFunction = Nothing)
         clsStyleListRFunction = New RFunction
         clsCellTextRFunction = New RFunction
         clsCellFillRFunction = New RFunction
@@ -288,8 +264,54 @@ Public Class sdgTableStyles
 
         clsCellBorderSidesRFunction.SetRCommand("c")
 
+        ucrTxtFontSize.SetName("")
 
+        If clsNewStyleListRFunction IsNot Nothing Then
+            clsStyleListRFunction = clsNewStyleListRFunction
+
+            If clsStyleListRFunction.ContainsParameter("cell_text_param") Then
+                clsCellTextRFunction = clsStyleListRFunction.GetParameter("cell_text_param").clsArgumentCodeStructure
+                Dim sizeValue As String = clsCellTextRFunction.GetParameter("size")?.clsArgumentCodeStructure.GetParameter("x")?.strArgumentValue
+                ucrTxtFontSize.SetName(If(sizeValue IsNot Nothing, sizeValue, ""))
+            End If
+
+            If clsStyleListRFunction.ContainsParameter("cell_fill_param") Then
+                clsCellFillRFunction = clsStyleListRFunction.GetParameter("cell_fill_param").clsArgumentCodeStructure
+            End If
+
+            If clsStyleListRFunction.ContainsParameter("cell_borders_param") Then
+                clsCellBordersRFunction = clsStyleListRFunction.GetParameter("cell_borders_param").clsArgumentCodeStructure
+                If clsCellBordersRFunction.ContainsParameter("sides") Then
+                    clsCellBordersRFunction = clsCellBordersRFunction.GetParameter("sides").clsArgumentCodeStructure
+                End If
+            End If
+
+        End If
     End Sub
+
+    Public Function GetNewUserInputAsRFunction() As RFunction
+        If Not bUserClickedReturn OrElse clsStyleListRFunction.clsParameters.Count = 0 Then
+            Return Nothing
+        End If
+
+        If clsCellTextRFunction.clsParameters.Count > 0 Then
+            clsStyleListRFunction.AddParameter(strParameterName:="cell_text_param", clsRFunctionParameter:=clsCellTextRFunction, bIncludeArgumentName:=False, iPosition:=0)
+        End If
+
+        If clsCellFillRFunction.clsParameters.Count > 0 Then
+            clsStyleListRFunction.AddParameter(strParameterName:="cell_fill_param", clsRFunctionParameter:=clsCellFillRFunction, bIncludeArgumentName:=False, iPosition:=1)
+        End If
+
+        If clsCellBordersRFunction.clsParameters.Count > 0 OrElse clsCellBorderSidesRFunction.clsParameters.Count > 0 Then
+            If clsCellBorderSidesRFunction.clsParameters.Count > 0 Then
+                clsCellBordersRFunction.AddParameter(strParameterName:="sides", clsRFunctionParameter:=clsCellBorderSidesRFunction, iPosition:=0)
+            End If
+            clsStyleListRFunction.AddParameter(strParameterName:="cell_borders_param", clsRFunctionParameter:=clsCellBordersRFunction, bIncludeArgumentName:=False, iPosition:=1)
+        End If
+
+        Return clsStyleListRFunction
+    End Function
+
 
     Private Sub SetRCode()
         '-----------------
@@ -297,7 +319,6 @@ Public Class sdgTableStyles
         ucrCboFontFamily.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboFontStyle.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboFontWeight.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
-        ucrTxtFontSize.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboColorText.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboUnderlineType.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         'ucrCboUnderlineStyle.SetRCode(clsNewStyleRFunction, bReset:=False, bCloneIfNeeded:=True)
@@ -305,7 +326,6 @@ Public Class sdgTableStyles
         ucrCboAlignHorizontal.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboAlignVertical.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboTransform.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
-        ucrTxtFontSize.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboWhiteSpace.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         ucrCboStretch.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
         'ucrTxtIndent.SetRCode(clsCellTextRFunction, bReset:=False, bCloneIfNeeded:=True)
@@ -330,43 +350,21 @@ Public Class sdgTableStyles
         '-----------------
     End Sub
 
-    Public Function GetNewUserInputAsRFunction() As RFunction
-        If Not bUserClickedReturn OrElse Not bUserMadeChanges Then
-            Return Nothing
-        End If
-
-        If clsCellTextRFunction.clsParameters.Count > 0 Then
-            clsStyleListRFunction.AddParameter(strParameterName:="cell_text_param", clsRFunctionParameter:=clsCellTextRFunction, bIncludeArgumentName:=False, iPosition:=0)
-        End If
-
-        If clsCellFillRFunction.clsParameters.Count > 0 Then
-            clsStyleListRFunction.AddParameter(strParameterName:="cell_fill_param", clsRFunctionParameter:=clsCellFillRFunction, bIncludeArgumentName:=False, iPosition:=1)
-        End If
-
-        If clsCellBordersRFunction.clsParameters.Count > 0 OrElse clsCellBorderSidesRFunction.clsParameters.Count > 0 Then
-            If clsCellBorderSidesRFunction.clsParameters.Count > 0 Then
-                clsCellBordersRFunction.AddParameter(strParameterName:="sides", clsRFunctionParameter:=clsCellBorderSidesRFunction, iPosition:=0)
-            End If
-            clsStyleListRFunction.AddParameter(strParameterName:="cell_borders_param", clsRFunctionParameter:=clsCellBordersRFunction, bIncludeArgumentName:=False, iPosition:=1)
-        End If
-
-        Return clsStyleListRFunction
-    End Function
 
     Private Sub ucrBaseSubdialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubdialog.ClickReturn
         bUserClickedReturn = True
     End Sub
 
-    Private Sub controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboAlignHorizontal.ControlValueChanged,
-            ucrCboAlignVertical.ControlValueChanged, ucrCboBorderColor.ControlValueChanged, ucrCboBorderStyle.ControlValueChanged,
-            ucrNudBorderWeight.ControlValueChanged, ucrCboColorBackground.ControlValueChanged, ucrCboColorText.ControlValueChanged,
-            ucrCboFontFamily.ControlValueChanged, ucrCboFontStyle.ControlValueChanged, ucrCboFontWeight.ControlValueChanged,
-            ucrCboStretch.ControlValueChanged,
-            ucrCboUnderlineType.ControlValueChanged, ucrCboWhiteSpace.ControlValueChanged, ucrChkBorderBottom.ControlValueChanged,
-            ucrChkBorderLeft.ControlValueChanged, ucrChkBorderRight.ControlValueChanged, ucrChkBorderTop.ControlValueChanged,
-            ucrCboTransform.ControlValueChanged, ucrTxtFontSize.ControlValueChanged, ucrNudIndent.ControlValueChanged
-
-        bUserMadeChanges = True
+    Private Sub ucrTxtFontSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTxtFontSize.ControlValueChanged
+        If ucrTxtFontSize.IsEmpty Then
+            clsCellTextRFunction.RemoveParameterByName("size")
+        Else
+            Dim pxRFunction As New RFunction
+            pxRFunction.SetPackageName("gt")
+            pxRFunction.SetRCommand("px")
+            pxRFunction.AddParameter(strParameterName:="x", strParameterValue:=ucrTxtFontSize.GetText(), bIncludeArgumentName:=False, iPosition:=2)
+            clsCellTextRFunction.AddParameter(strParameterName:="size", clsRFunctionParameter:=pxRFunction)
+        End If
     End Sub
 
 

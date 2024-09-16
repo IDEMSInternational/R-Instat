@@ -127,7 +127,7 @@ Partial Class ucrCellsFootNotes
         Me.ucrReceiverSingleCol.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSingleCol.Name = "ucrReceiverSingleCol"
         Me.ucrReceiverSingleCol.Selector = Nothing
-        Me.ucrReceiverSingleCol.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSingleCol.Size = New System.Drawing.Size(142, 20)
         Me.ucrReceiverSingleCol.strNcFilePath = ""
         Me.ucrReceiverSingleCol.TabIndex = 339
         Me.ucrReceiverSingleCol.ucrSelector = Nothing
@@ -152,7 +152,7 @@ Partial Class ucrCellsFootNotes
         Me.ucrTxtFootNote.IsReadOnly = False
         Me.ucrTxtFootNote.Location = New System.Drawing.Point(241, 107)
         Me.ucrTxtFootNote.Name = "ucrTxtFootNote"
-        Me.ucrTxtFootNote.Size = New System.Drawing.Size(136, 21)
+        Me.ucrTxtFootNote.Size = New System.Drawing.Size(299, 21)
         Me.ucrTxtFootNote.TabIndex = 340
         '
         'lblFootNote

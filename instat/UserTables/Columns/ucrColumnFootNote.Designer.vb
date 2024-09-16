@@ -104,7 +104,7 @@ Partial Class ucrColumnFootNote
         Me.ucrTxtFootNote.IsReadOnly = False
         Me.ucrTxtFootNote.Location = New System.Drawing.Point(239, 134)
         Me.ucrTxtFootNote.Name = "ucrTxtFootNote"
-        Me.ucrTxtFootNote.Size = New System.Drawing.Size(136, 21)
+        Me.ucrTxtFootNote.Size = New System.Drawing.Size(305, 21)
         Me.ucrTxtFootNote.TabIndex = 351
         '
         'btnAdd

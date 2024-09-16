@@ -4,8 +4,6 @@
     Private bFirstload As Boolean = True
 
     Private Sub initialiseDialog()
-
-
         ucrReceiverSingleRowName.SetParameter(New RParameter("rowname_col", 0))
         ucrReceiverSingleRowName.SetParameterIsString()
         ucrReceiverSingleRowName.Selector = ucrSelectorCols
@@ -17,7 +15,6 @@
         ucrReceiverSingleGroupByCol.SetLinkedDisplayControl(lblGroupByCol)
 
         ucrInputStubHead.SetParameter(New RParameter("label", 0))
-
     End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
