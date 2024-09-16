@@ -65,8 +65,8 @@ Public Class sdgTableStyles
             {"Bottom", Chr(34) & "bottom" & Chr(34)}
         }
         ucrCboAlignVertical.SetDropDownStyleAsNonEditable()
-        ucrCboAlignVertical.SetParameter(New RParameter("align", iNewPosition:=4))
-        ucrCboAlignVertical.SetItems(dctAlignHorizontal)
+        ucrCboAlignVertical.SetParameter(New RParameter("v_align", iNewPosition:=4))
+        ucrCboAlignVertical.SetItems(dctAlignVertical)
         ucrCboAlignVertical.SetRDefault("NULL")
         '-----------------
 
@@ -290,7 +290,7 @@ Public Class sdgTableStyles
     End Sub
 
     Public Function GetNewUserInputAsRFunction() As RFunction
-        If Not bUserClickedReturn OrElse clsStyleListRFunction.clsParameters.Count = 0 Then
+        If Not bUserClickedReturn Then
             Return Nothing
         End If
 
@@ -309,7 +309,7 @@ Public Class sdgTableStyles
             clsStyleListRFunction.AddParameter(strParameterName:="cell_borders_param", clsRFunctionParameter:=clsCellBordersRFunction, bIncludeArgumentName:=False, iPosition:=1)
         End If
 
-        Return clsStyleListRFunction
+        Return If(clsStyleListRFunction.clsParameters.Count > 0, clsStyleListRFunction, Nothing)
     End Function
 
 
