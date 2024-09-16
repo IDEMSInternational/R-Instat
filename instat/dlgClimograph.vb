@@ -114,6 +114,10 @@ Public Class dlgClimograph
     Private clsAesTmaxBarFunction1, clsAesTminBarFunction1, clsAesTemGgplotFunction, clsAesRainGgplotFunction, clsSecAxisRainFunction, clsSecAxisTemFunction As New RFunction
     Private clsAesRainBarTextFunction, clsPlotGridFunction, clsAesTmaxBarTextFunction, clsAesTminBarTextFunction, clsRainRoundFunction, clsTmaxRoundFunction, clsTminRoundFunction As New RFunction
     Private strScale As String = "scale_Factor"
+    Dim lstRecognisedRain As New List(Of KeyValuePair(Of String, List(Of String)))
+    Dim lstRecognisedTmax As New List(Of KeyValuePair(Of String, List(Of String)))
+    Dim lstRecognisedTmin As New List(Of KeyValuePair(Of String, List(Of String)))
+    Dim lstRecognisedMinTmin As New List(Of KeyValuePair(Of String, List(Of String)))
 
     Private Sub dlgClimograph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -131,9 +135,17 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim kvpRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("rain", {"sum_rainfall", "sum_rain", "sum_prec", "sum_precip", "sum_precipitation", "sum_rr", "mean_sum_prcp", "mean_sum_rainfall", "mean_sum_rain", "mean_sum_prec", "mean_sum_precip", "mean_sum_precipitation", "mean_sum_rr", "mean_sum_prcp", "median_sum_rainfall", "median_sum_rain", "median_sum_prec", "median_sum_precip", "median_sum_precipitation", "median_sum_rr", "median_sum_prcp", "max_sum_rainfall", "max_sum_rain", "max_sum_prec", "max_sum_precip", "max_sum_precipitation", "max_sum_rr", "max_sum_prcp", "min_sum_rainfall", "min_sum_rain", "min_sum_prec", "min_sum_precip", "min_sum_precipitation", "min_sum_rr", "min_sum_prcp", "mean_rainfall", "mean_rain", "mean_prec", "mean_precip", "mean_precipitation", "mean_rr", "mean_prcp", "max_rainfall", "max_rain", "max_prec", "max_precip", "max_precipitation", "max_rr", "max_prcp", "min_rainfall", "min_rain", "min_prec", "min_precip", "min_precipitation", "min_rr", "min_prcp", "mean_max_rainfall", "mean_max_rain", "mean_max_prec", "mean_max_precip", "mean_max_precipitation", "mean_max_rr", "mean_max_prcp", "mean_min_rainfall", "mean_min_rain", "mean_min_prec", "mean_min_precip", "mean_min_precipitation", "mean_min_rr", "mean_min_prcp", "max_max_rainfall", "max_max_rain", "max_max_prec", "max_max_precip", "max_max_precipitation", "max_max_rr", "max_max_prcp", "max_min_rainfall", "max_min_rain", "max_min_prec", "max_min_precip", "max_min_precipitation", "max_min_rr", "max_min_prcp", "min_max_rainfall", "min_max_rain", "min_max_prec", "min_max_precip", "min_max_precipitation", "min_max_rr", "min_max_prcp", "min_min_rainfall", "min_min_rain", "min_min_prec", "min_min_precip", "min_min_precipitation", "min_min_rr", "min_min_prcp"}.ToList())
+        Dim kvpTmax As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_max", {"mean_tmax", "mean_tx", "mean_tempmax", "mean_tmp_max", "mean_tmpmax", "mean_max_temperature", "max_tmax", "max_max_temperature", "max_tx", "max_tempmax", "max_tmp_max", "max_tmpmax", "min_tmax", "min_max_temperature", "min_tx", "min_tempmax", "min_tmp_max", "min_tmpmax", "tmax", "max_temperature", "tx", "tempmax", "tmp_max", "tmpmax"}.ToList())
+        Dim kvpTmin As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_min", {"mean_tmin", "mean_tn", "mean_tempmin", "mean_tmp_min", "mean_tmpmin", "mean_min_temperature", "max_tmin", "max_min_temperature", "max_tn", "max_tempmin", "max_tmp_min", "max_tmpmin", "min_tmin", "min_min_temperature", "min_tn", "min_tempmin", "min_tmp_min", "min_tmpmin", "tmin", "min_temperature", "tn", "tempmin", "tmp_min", "tmpmin"}.ToList())
+        Dim kvpMinTmin As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("min_temp_min", {"min_tmin", "min_tn", "min_tempmin", "min_tmp_min", "min_tmpmin", "min_min_temperature"}.ToList())
         Dim dctLegendPosition As New Dictionary(Of String, String)
         Dim dctColourPallette As New Dictionary(Of String, String)
         Dim dctPalette As New Dictionary(Of String, String)
+
+        lstRecognisedTypes.AddRange({kvpAnnualRain, kvpEndRainDate, kvpEndRainDOY, kvpEndRainStatus, kvpEndSeasonDate, kvpEndSeasonDOY, kvpEndSeasonStatus,
+                                     kvpRainDaysSeason, kvpRainDaysYear, kvpSeasonalLength, kvpSeasonalRain, kvpStartRainDate,
+                                    kvpStartRainDOY, kvpStartRainStatus})
 
         ucrBase.iHelpTopicID = 432
 
