@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class dlgExportToClimsoft
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDataFrameFunction, clsCurrentNewColumnFunction, clsDummyFunction, clsMutateFunction, clsExportClimsoftFunction, clsPasteFunction, clsSprintfFunction, clsFormatFunction, clsPosixctFunction As New RFunction
+    Private clsDataFrameFunction, clsCurrentNewColumnFunction, clsDummyFunction, clsMutateFunction, clsExportClimsoftFunction, clsPasteFunction, clsSprintfFunction, clsPosixctFunction As New RFunction
     Private clsPipeOperator As New ROperator
 
     Private Sub dlgExportToClimsoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -112,12 +112,8 @@ Public Class dlgExportToClimsoft
         clsPosixctFunction.AddParameter("x", clsRFunctionParameter:=clsPasteFunction, bIncludeArgumentName:=False, iPosition:=0)
         clsPosixctFunction.AddParameter("format", Chr(34) & "%Y-%m-%d %H:%M:%S" & Chr(34), iPosition:=1)
 
-        clsFormatFunction.SetRCommand("format")
-        clsFormatFunction.AddParameter("posix", clsRFunctionParameter:=clsPosixctFunction, bIncludeArgumentName:=False, iPosition:=0)
-        clsFormatFunction.AddParameter("yhs", Chr(34) & "%Y-%m-%d %H:%M:%S" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-
         clsDataFrameFunction.SetRCommand("data.frame")
-        clsDataFrameFunction.AddParameter("date_time", clsRFunctionParameter:=clsFormatFunction, iPosition:=0)
+        clsDataFrameFunction.AddParameter("date_time", clsRFunctionParameter:=clsPosixctFunction, iPosition:=0)
         clsDataFrameFunction.AddParameter("x", "columns", iPosition:=5, bIncludeArgumentName:=False)
 
         clsPipeOperator.SetOperation("%>%")
