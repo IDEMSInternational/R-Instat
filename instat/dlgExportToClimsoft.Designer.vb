@@ -25,12 +25,10 @@ Partial Class dlgExportToClimsoft
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblHour = New System.Windows.Forms.Label()
-        Me.lblStation = New System.Windows.Forms.Label()
         Me.lblExport = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.ucrChkExportDataFrame = New instat.ucrCheck()
         Me.ucrInputExportFile = New instat.ucrInputTextBox()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
         Me.ucrChkNewDataFrame = New instat.ucrCheck()
         Me.ucrInputHour = New instat.ucrInputTextBox()
@@ -48,42 +46,32 @@ Partial Class dlgExportToClimsoft
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(417, 325)
+        Me.lblElement.Location = New System.Drawing.Point(417, 268)
         Me.lblElement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(80, 20)
-        Me.lblElement.TabIndex = 12
+        Me.lblElement.TabIndex = 10
         Me.lblElement.Text = "Elements:"
         '
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(417, 197)
+        Me.lblDate.Location = New System.Drawing.Point(417, 140)
         Me.lblDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(48, 20)
-        Me.lblDate.TabIndex = 8
+        Me.lblDate.TabIndex = 6
         Me.lblDate.Text = "Date:"
         '
         'lblHour
         '
         Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(417, 261)
+        Me.lblHour.Location = New System.Drawing.Point(417, 204)
         Me.lblHour.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHour.Name = "lblHour"
         Me.lblHour.Size = New System.Drawing.Size(48, 20)
-        Me.lblHour.TabIndex = 10
+        Me.lblHour.TabIndex = 8
         Me.lblHour.Text = "Hour:"
-        '
-        'lblStation
-        '
-        Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(417, 73)
-        Me.lblStation.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(64, 20)
-        Me.lblStation.TabIndex = 4
-        Me.lblStation.Text = "Station:"
         '
         'lblExport
         '
@@ -93,7 +81,7 @@ Partial Class dlgExportToClimsoft
         Me.lblExport.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblExport.Name = "lblExport"
         Me.lblExport.Size = New System.Drawing.Size(88, 20)
-        Me.lblExport.TabIndex = 17
+        Me.lblExport.TabIndex = 15
         Me.lblExport.Text = "Export File:"
         '
         'cmdBrowse
@@ -103,7 +91,7 @@ Partial Class dlgExportToClimsoft
         Me.cmdBrowse.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(120, 34)
-        Me.cmdBrowse.TabIndex = 19
+        Me.cmdBrowse.TabIndex = 17
         Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
@@ -115,7 +103,7 @@ Partial Class dlgExportToClimsoft
         Me.ucrChkExportDataFrame.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkExportDataFrame.Name = "ucrChkExportDataFrame"
         Me.ucrChkExportDataFrame.Size = New System.Drawing.Size(399, 34)
-        Me.ucrChkExportDataFrame.TabIndex = 15
+        Me.ucrChkExportDataFrame.TabIndex = 13
         '
         'ucrInputExportFile
         '
@@ -127,20 +115,7 @@ Partial Class dlgExportToClimsoft
         Me.ucrInputExportFile.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
         Me.ucrInputExportFile.Size = New System.Drawing.Size(273, 32)
-        Me.ucrInputExportFile.TabIndex = 18
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.AutoSize = True
-        Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(417, 101)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 5
-        Me.ucrReceiverStation.ucrSelector = Nothing
+        Me.ucrInputExportFile.TabIndex = 16
         '
         'ucrSaveNewDataFrame
         '
@@ -149,7 +124,7 @@ Partial Class dlgExportToClimsoft
         Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
         Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(522, 36)
-        Me.ucrSaveNewDataFrame.TabIndex = 16
+        Me.ucrSaveNewDataFrame.TabIndex = 14
         '
         'ucrChkNewDataFrame
         '
@@ -159,7 +134,7 @@ Partial Class dlgExportToClimsoft
         Me.ucrChkNewDataFrame.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkNewDataFrame.Name = "ucrChkNewDataFrame"
         Me.ucrChkNewDataFrame.Size = New System.Drawing.Size(399, 34)
-        Me.ucrChkNewDataFrame.TabIndex = 14
+        Me.ucrChkNewDataFrame.TabIndex = 12
         '
         'ucrInputHour
         '
@@ -167,11 +142,11 @@ Partial Class dlgExportToClimsoft
         Me.ucrInputHour.AutoSize = True
         Me.ucrInputHour.IsMultiline = False
         Me.ucrInputHour.IsReadOnly = False
-        Me.ucrInputHour.Location = New System.Drawing.Point(417, 287)
+        Me.ucrInputHour.Location = New System.Drawing.Point(417, 230)
         Me.ucrInputHour.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputHour.Name = "ucrInputHour"
         Me.ucrInputHour.Size = New System.Drawing.Size(178, 32)
-        Me.ucrInputHour.TabIndex = 11
+        Me.ucrInputHour.TabIndex = 9
         '
         'ucrBase
         '
@@ -181,32 +156,32 @@ Partial Class dlgExportToClimsoft
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
-        Me.ucrBase.TabIndex = 20
+        Me.ucrBase.TabIndex = 18
         '
         'ucrReceiverElements
         '
         Me.ucrReceiverElements.AutoSize = True
         Me.ucrReceiverElements.frmParent = Me
-        Me.ucrReceiverElements.Location = New System.Drawing.Point(417, 355)
+        Me.ucrReceiverElements.Location = New System.Drawing.Point(417, 298)
         Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElements.Name = "ucrReceiverElements"
         Me.ucrReceiverElements.Selector = Nothing
         Me.ucrReceiverElements.Size = New System.Drawing.Size(180, 150)
         Me.ucrReceiverElements.strNcFilePath = ""
-        Me.ucrReceiverElements.TabIndex = 13
+        Me.ucrReceiverElements.TabIndex = 11
         Me.ucrReceiverElements.ucrSelector = Nothing
         '
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(417, 222)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(417, 165)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 9
+        Me.ucrReceiverDate.TabIndex = 7
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrSelectorImportToClimsoft
@@ -275,23 +250,23 @@ Partial Class dlgExportToClimsoft
         '
         Me.ucrReceiverStationID.AutoSize = True
         Me.ucrReceiverStationID.frmParent = Me
-        Me.ucrReceiverStationID.Location = New System.Drawing.Point(414, 167)
+        Me.ucrReceiverStationID.Location = New System.Drawing.Point(414, 110)
         Me.ucrReceiverStationID.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStationID.Name = "ucrReceiverStationID"
         Me.ucrReceiverStationID.Selector = Nothing
         Me.ucrReceiverStationID.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverStationID.strNcFilePath = ""
-        Me.ucrReceiverStationID.TabIndex = 7
+        Me.ucrReceiverStationID.TabIndex = 5
         Me.ucrReceiverStationID.ucrSelector = Nothing
         '
         'lblStationID
         '
         Me.lblStationID.AutoSize = True
-        Me.lblStationID.Location = New System.Drawing.Point(419, 141)
+        Me.lblStationID.Location = New System.Drawing.Point(419, 84)
         Me.lblStationID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStationID.Name = "lblStationID"
         Me.lblStationID.Size = New System.Drawing.Size(85, 20)
-        Me.lblStationID.TabIndex = 6
+        Me.lblStationID.TabIndex = 4
         Me.lblStationID.Text = "Station ID:"
         '
         'dlgExportToClimsoft
@@ -308,8 +283,6 @@ Partial Class dlgExportToClimsoft
         Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.ucrInputExportFile)
-        Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrSaveNewDataFrame)
         Me.Controls.Add(Me.ucrChkNewDataFrame)
         Me.Controls.Add(Me.lblHour)
@@ -341,8 +314,6 @@ Partial Class dlgExportToClimsoft
     Friend WithEvents ucrInputHour As ucrInputTextBox
     Friend WithEvents ucrChkNewDataFrame As ucrCheck
     Friend WithEvents ucrSaveNewDataFrame As ucrSave
-    Friend WithEvents lblStation As Label
-    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents lblExport As Label
     Friend WithEvents cmdBrowse As Button
     Friend WithEvents ucrInputExportFile As ucrInputTextBox
