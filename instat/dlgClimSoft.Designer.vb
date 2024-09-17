@@ -435,7 +435,7 @@ Partial Class dlgClimSoft
         Me.MinimizeBox = False
         Me.Name = "dlgClimSoft"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Import From Climsoft (version 4.2.2)"
+        Me.Text = "Import From Climsoft"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
