@@ -474,9 +474,9 @@ Public Class frmMain
                 'refactor the dialog to enforce the design
 
                 'get the R script from read file if selected by the user
-                strScript = dlgAutoSaveRecovery.GetScript()
+                strScript = dlgRestoreBackup.GetScript()
                 'get the data file path if selected by the user
-                strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
+                strDataFilePath = dlgRestoreBackup.GetDataFilePath()
             End If
         End If
 
