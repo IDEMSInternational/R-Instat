@@ -117,15 +117,14 @@ Public Class dlgExportToClimsoft
         clsMutateFunction.SetPackageName("dplyr")
         clsMutateFunction.SetRCommand("mutate")
 
-        clsExportClimsoftFunction.SetPackageName("rio")
-        clsExportClimsoftFunction.SetRCommand("export")
-        clsExportClimsoftFunction.AddParameter("x", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+        clsExportClimsoftFunction.SetRCommand("write.csv")
+        clsExportClimsoftFunction.AddParameter("x", clsROperatorParameter:=clsPipeOperator, iPosition:=0, bIncludeArgumentName:=False)
 
         clsPasteFunction.SetRCommand("paste")
         clsPasteFunction.SetAssignTo("date1")
 
         clsSprintfFunction.SetRCommand("sprintf")
-        clsSprintfFunction.AddParameter("hour", 6, iPosition:=1)
+        clsSprintfFunction.AddParameter("hour", 6, iPosition:=1, bIncludeArgumentName:=False)
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
@@ -251,7 +250,7 @@ Public Class dlgExportToClimsoft
 
     Private Sub ucrInputHour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputHour.ControlValueChanged
         If Not ucrInputHour.IsEmpty Then
-            clsSprintfFunction.AddParameter("format", Chr(34) & "%02d:00:00" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+            clsSprintfFunction.AddParameter("fmt", Chr(34) & "%02d:00:00" & Chr(34), iPosition:=0)
             clsSprintfFunction.AddParameter("hour", ucrInputHour.GetText, bIncludeArgumentName:=False, iPosition:=1)
 
         Else
