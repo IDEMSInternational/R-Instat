@@ -135,13 +135,17 @@ Public Class dlgInstallRPackage
             Exit Sub
         End If
         Select Case chrOutput(0)
+            Case "0"
+                bUniqueChecked = False
+                ucrInputMessage.SetText("Package is up to date.")
+                ucrInputMessage.txtInput.BackColor = Color.LightGreen
             Case "1"
                 bUniqueChecked = True
                 If rdoCRAN.Checked Then
                     If chrOutput.Count = 4 Then
                         If chrOutput(1) = "0" Then
                             ucrInputMessage.SetText("Package is installed and up to date.")
-                            ucrInputMessage.txtInput.BackColor = Color.Yellow
+                            ucrInputMessage.txtInput.BackColor = Color.LightBlue
                         ElseIf chrOutput(1) = "-1" Then
                             ucrInputMessage.SetText("Package is installed. Newer version available: " & chrOutput(3) & " (current: " & chrOutput(2) & ").")
                         End If
@@ -157,24 +161,40 @@ Public Class dlgInstallRPackage
                     ucrInputMessage.SetText("Package exists and not currently installed.")
                     ucrInputMessage.txtInput.BackColor = Color.LightGreen
                 ElseIf rdoRPackage.Checked Then
-                    ucrInputMessage.SetText("Package exists in the repo but is not in the R language")
-                    ucrInputMessage.txtInput.BackColor = Color.LightGreen
+                    ucrInputMessage.SetText("Unable to retrieve from GitHub. Check internet connection?")
+                    ucrInputMessage.txtInput.BackColor = Color.LightCoral
                 End If
             Case "3"
                 If rdoCRAN.Checked Then
                     ucrInputMessage.SetText("Package is installed but not a current CRAN package")
                     ucrInputMessage.txtInput.BackColor = Color.LightBlue
                 ElseIf rdoRPackage.Checked Then
-                    ucrInputMessage.SetText("Not a package in the given repo. Perhaps spelled wrongly?")
-                    ucrInputMessage.txtInput.BackColor = Color.LightCoral
-                    bUniqueChecked = False
+                    ucrInputMessage.SetText("Package exists in the repo and is ready for installation")
+                    ucrInputMessage.txtInput.BackColor = Color.LightGreen
+                    bUniqueChecked = True
                 End If
             Case "4"
-                ucrInputMessage.SetText("Not a current CRAN package. Perhaps spelled wrongly, or archived?")
-                ucrInputMessage.txtInput.BackColor = Color.LightSkyBlue
-                bUniqueChecked = False
+                If rdoCRAN.Checked Then
+                    ucrInputMessage.SetText("Not a current CRAN package. Perhaps spelled wrongly, or archived?")
+                    ucrInputMessage.txtInput.BackColor = Color.LightSkyBlue
+                    bUniqueChecked = False
+                ElseIf rdoRPackage.Checked Then
+                    ucrInputMessage.SetText("Package exists in the repo and is ready for installation")
+                    ucrInputMessage.txtInput.BackColor = Color.LightGreen
+                    bUniqueChecked = True
+                End If 
             Case "5"
-                ucrInputMessage.SetText("No internet connection.Try reconnecting")
+                If rdoCRAN.Checked Then
+                   ucrInputMessage.SetText("No internet connection.Try reconnecting")
+                   ucrInputMessage.txtInput.BackColor = Color.LightCoral
+                   bUniqueChecked = False
+                ElseIf rdoRPackage.Checked Then
+                    ucrInputMessage.SetText("Package exists but is not in the R language")
+                    ucrInputMessage.txtInput.BackColor = Color.LightCoral
+                    bUniqueChecked = False
+                End If 
+            Case "6"
+                ucrInputMessage.SetText("Not a package in the given repo. Check spelling?")
                 ucrInputMessage.txtInput.BackColor = Color.LightCoral
                 bUniqueChecked = False
         End Select
