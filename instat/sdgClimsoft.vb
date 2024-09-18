@@ -28,6 +28,8 @@ Public Class sdgClimsoft
             Exit Sub
         End If
 
+        ucrBaseSubdialog.iHelpTopicID = 352
+
         'Columns to include
         '---------------------------------------
         ucrChkIncludeStationId.SetText("Station Id")
