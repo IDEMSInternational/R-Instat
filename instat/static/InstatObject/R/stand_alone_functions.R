@@ -3360,16 +3360,56 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
   return(wandlplot)
 }
 
-# Function to check if a repo exists and is in R 
-check_github_repo <- function(owner, repo) {
-  tryCatch({
-    response <- gh::gh("/repos/:owner/:repo", owner = owner, repo = repo, verb = "GET", silent = TRUE)
-    if (response$language == "R") {
-      return(1)  # Repository exists and is in the R language
+# Function to check if a repo exists and is in R. Can give either owner and repo, or give url
+check_github_repo <- function(owner = NULL, repo = NULL, url = NULL) {
+  if (!is.null(url)){
+    # Extract the part after 'github.com'
+    url <- sub(".*github.com/", "", url)
+    
+    # Extract the correct parts
+    owner <- dirname(url)
+    repo <- basename(url)
+  }
+  # Check if the package is already installed
+  if (requireNamespace(repo, quietly = TRUE)) {
+    
+    # Get the installed package's remote SHA (if installed via GitHub)
+    local_sha <- packageDescription(repo)$GithubSHA1
+    
+    if (!is.null(local_sha)) {
+      # Get the latest commit SHA from the GitHub repository
+      latest_commit <- tryCatch({
+        response <- gh::gh("/repos/:owner/:repo/commits", owner = owner, repo = repo, .limit = 1)
+        response[[1]]$sha
+      }, error = function(e) {
+	# Handle error if GitHub API call fails
+        return(NULL)
+      })
+      
+      if (!is.null(latest_commit)) {
+        if (local_sha == latest_commit) {
+          return(0)  # Package is installed and up-to-date
+        } else {
+          return(1)  # Package is installed but not the latest version
+        }
+      } else {
+        return(2)  # Unable to retrieve the latest commit from GitHub
+      }
     } else {
-      return(2)  # Repository exists, but isn't in the R language
+      return(3)  # Package is installed but not from GitHub
     }
-  }, error = function(e) {
-    return(3)  # Error occurred, repository doesn't exist
-  })
+  
+  # If not installed, check if the repository exists on GitHub
+  } else {
+    tryCatch({
+      response <- gh::gh("/repos/:owner/:repo", owner = owner, repo = repo, verb = "GET", silent = TRUE)
+      if (response$language == "R") {
+        return(4)  # Repository exists and is in the R language
+      } else {
+        return(5)  # Repository exists, but isn't in the R language
+      }
+    }, error = function(e) {
+      return(6)  # Error occurred, repository doesn't exist
+    }) 
+  }
 }
