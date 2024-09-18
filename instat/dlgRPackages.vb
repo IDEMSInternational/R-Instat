@@ -138,7 +138,7 @@ Public Class dlgInstallRPackage
             Case "0"
                 bUniqueChecked = False
                 ucrInputMessage.SetText("Package is up to date.")
-                ucrInputMessage.txtInput.BackColor = Color.LightGreen
+                ucrInputMessage.txtInput.BackColor = Color.LightSkyBlue
             Case "1"
                 bUniqueChecked = True
                 If rdoCRAN.Checked Then
