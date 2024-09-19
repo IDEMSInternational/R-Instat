@@ -77,6 +77,7 @@ Public Class dlgInstallRPackage
 
         clsRepositoryFunction.SetRCommand("install_github")
         clsRepositoryFunction.SetPackageName("devtools")
+        clsRepositoryFunction.AddParameter("upgrade", Chr(34) & "never" & Chr(34), iPosition:=1)
 
         clsAfterOptionsFunc.SetRCommand("options")
         clsAfterOptionsFunc.AddParameter(strParameterName:="warn", strParameterValue:="0")
