@@ -137,8 +137,14 @@ Public Class dlgInstallRPackage
         Select Case chrOutput(0)
             Case "0"
                 bUniqueChecked = False
-                ucrInputMessage.SetText("Package is up to date.")
-                ucrInputMessage.txtInput.BackColor = Color.LightSkyBlue
+                If rdoCRAN.Checked Then
+                    ucrInputMessage.SetText("Package is up to date.")
+                    ucrInputMessage.txtInput.BackColor = Color.LightSkyBlue
+                ElseIf rdoRPackage.Checked Then
+                    ucrInputMessage.SetText("Package is up to date.")
+                    ucrInputMessage.txtInput.BackColor = Color.Orange
+                End If
+
             Case "1"
                 bUniqueChecked = True
                 If rdoCRAN.Checked Then
@@ -154,7 +160,7 @@ Public Class dlgInstallRPackage
                     End If
                 ElseIf rdoRPackage.Checked Then
                     ucrInputMessage.SetText("Package exists in the repo and is ready for installation")
-                    ucrInputMessage.txtInput.BackColor = Color.LightGreen
+                    ucrInputMessage.txtInput.BackColor = Color.Green
                 End If
             Case "2"
                 If rdoCRAN.Checked Then
@@ -162,16 +168,17 @@ Public Class dlgInstallRPackage
                     ucrInputMessage.txtInput.BackColor = Color.LightGreen
                 ElseIf rdoRPackage.Checked Then
                     ucrInputMessage.SetText("Unable to retrieve from GitHub. Check internet connection?")
-                    ucrInputMessage.txtInput.BackColor = Color.LightCoral
+                    ucrInputMessage.txtInput.BackColor = Color.Red
+                    bUniqueChecked = False
                 End If
             Case "3"
                 If rdoCRAN.Checked Then
                     ucrInputMessage.SetText("Package is installed but not a current CRAN package")
                     ucrInputMessage.txtInput.BackColor = Color.LightBlue
                 ElseIf rdoRPackage.Checked Then
-                    ucrInputMessage.SetText("Package exists in the repo and is ready for installation")
-                    ucrInputMessage.txtInput.BackColor = Color.LightGreen
-                    bUniqueChecked = True
+                    ucrInputMessage.SetText("Package is installed but not from GitHub")
+                    ucrInputMessage.txtInput.BackColor = Color.Green
+                    bUniqueChecked = False
                 End If
             Case "4"
                 If rdoCRAN.Checked Then
@@ -180,7 +187,7 @@ Public Class dlgInstallRPackage
                     bUniqueChecked = False
                 ElseIf rdoRPackage.Checked Then
                     ucrInputMessage.SetText("Package exists in the repo and is ready for installation")
-                    ucrInputMessage.txtInput.BackColor = Color.LightGreen
+                    ucrInputMessage.txtInput.BackColor = Color.Green
                     bUniqueChecked = True
                 End If 
             Case "5"
@@ -190,12 +197,12 @@ Public Class dlgInstallRPackage
                    bUniqueChecked = False
                 ElseIf rdoRPackage.Checked Then
                     ucrInputMessage.SetText("Package exists but is not in the R language")
-                    ucrInputMessage.txtInput.BackColor = Color.LightCoral
+                    ucrInputMessage.txtInput.BackColor = Color.Red
                     bUniqueChecked = False
                 End If 
             Case "6"
-                ucrInputMessage.SetText("Not a package in the given repo. Check spelling?")
-                ucrInputMessage.txtInput.BackColor = Color.LightCoral
+                ucrInputMessage.SetText("Error occurred, repository doesn't exist")
+                ucrInputMessage.txtInput.BackColor = Color.Red
                 bUniqueChecked = False
         End Select
         TestOkEnabled()
