@@ -553,7 +553,7 @@ Public Class dlgClimaticCheckDataRain
 
         clsDayFilterCalcFunction.SetRCommand("instat_calculation$new")
         clsDayFilterCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsDayFilterCalcFunction.AddParameter("function_exp", Chr(34) & "day==1" & Chr(34), iPosition:=1)
+        clsDayFilterCalcFunction.AddParameter("function_exp", clsROperatorParameter:=clsDayEqualOperator, iPosition:=1)
         clsDayFilterCalcFunction.AddParameter("manipulations", clsRFunctionParameter:=clsManuplationDayListFunction, iPosition:=3)
         clsDayFilterCalcFunction.AddParameter("result_name", Chr(34) & "day" & Chr(34), iPosition:=4)
         clsDayFilterCalcFunction.SetAssignTo("day_calculation")
@@ -566,8 +566,8 @@ Public Class dlgClimaticCheckDataRain
         clsDryMonthEqualOperator.AddParameter("zero", 0, iPosition:=1)
 
         clsDayEqualOperator.SetOperation("==")
-        clsDayEqualOperator.AddParameter("doy", "day", iPosition:=0, bIncludeArgumentName:=False)
         clsDayEqualOperator.AddParameter("one", "1", iPosition:=1, bIncludeArgumentName:=False)
+        clsDayEqualOperator.bToScriptAsRString = True
 
         clsSumFuction.SetRCommand("sum")
 
@@ -656,7 +656,7 @@ Public Class dlgClimaticCheckDataRain
 
         ucrChkLogicalColumns.SetRCode(clsLargeTestCalcFunc, bReset)
         ucrChkCalculatedColumns.SetRCode(clsCumulativeCalcFunc, bReset)
-        AddRemoveDayFilter()
+        'AddRemoveDayFilter()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -716,7 +716,7 @@ Public Class dlgClimaticCheckDataRain
         GroupByMonth()
     End Sub
 
-    Private Sub ucrSelectorRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRain.ControlValueChanged, ucrReceiverElement.ControlValueChanged
+    Private Sub ucrSelectorRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRain.ControlValueChanged, ucrReceiverElement.ControlValueChanged, ucrReceiverDay.ControlValueChanged, ucrReceiverMonth.ControlValueChanged, ucrReceiverYear.ControlValueChanged
         strCurrDataName = Chr(34) & ucrSelectorRain.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34)
         clsRainyDaysFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
         clsDryMonthCalculationFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
@@ -731,10 +731,14 @@ Public Class dlgClimaticCheckDataRain
 
         GroupByOptions()
         GroupByMonth()
+        AddRemoveDayFilter()
+        AddDoy()
     End Sub
 
     Private Sub ucrSelectorRain_DataFrameChanged() Handles ucrSelectorRain.DataFrameChanged
         AutoFillRainColumn()
+        AddRemoveDayFilter()
+        AddDoy()
     End Sub
 
     Private Sub AutoFillRainColumn()
@@ -767,6 +771,16 @@ Public Class dlgClimaticCheckDataRain
             clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc, iPosition:=0)
             clsRainFilterFunc.AddParameter("save", 2, iPosition:=5)
             clsDayFilterFunc.RemoveParameterByName("save")
+        End If
+        AddDoy()
+    End Sub
+
+    Private Sub AddDoy()
+        If Not ucrReceiverDay.IsEmpty Then
+            clsDayEqualOperator.AddParameter("doy", ucrReceiverDay.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+
+        Else
+            clsDayEqualOperator.RemoveParameterByName("doy")
         End If
     End Sub
 End Class
