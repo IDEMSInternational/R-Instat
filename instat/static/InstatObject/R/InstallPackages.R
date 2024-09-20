@@ -166,7 +166,7 @@ install.packages(packs, dependencies = FALSE, repos='https://cloud.r-project.org
 # Only use internal library
 if (length(.libPaths()) >= 2){
   current_paths <- .libPaths()
-  current_paths[c(1, 2) <= length(current_paths)]
+  .libPaths(current_paths[c(1, 3)[c(1, 3) <= length(current_paths)]])
 }
 
 #install development packages not on CRAN
