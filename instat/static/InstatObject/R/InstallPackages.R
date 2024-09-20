@@ -1,13 +1,6 @@
 Sys.setenv(TZ='GMT')
 Sys.setlocale("LC_TIME", "C")
 
-# Define the custom package library path (in AppData, no admin rights needed)
-app_data_lib <- file.path(Sys.getenv("APPDATA"), "R-Instat", "library")
-dir.create(app_data_lib, recursive = TRUE, showWarnings = FALSE)
-
-# Add the custom library path to .libPaths() for installing user-level packages
-.libPaths(c(app_data_lib, .libPaths()))
-
 #Install packages from CRAN archive
 install.packages("http://cran.r-project.org/src/contrib/Archive/signmedian.test/signmedian.test_1.5.1.tar.gz", repos=NULL, type="source")
 
@@ -162,6 +155,13 @@ packs <- c("abind", "agricolae", "agridat",
            "zyp")
 
 install.packages(packs, dependencies = FALSE, repos='https://cloud.r-project.org', type="win.binary")
+
+# Define the custom package library path (in AppData, no admin rights needed)
+app_data_lib <- file.path(Sys.getenv("APPDATA"), "R-Instat", "library")
+dir.create(app_data_lib, recursive = TRUE, showWarnings = FALSE)
+
+# Add the custom library path to .libPaths() for installing user-level packages
+.libPaths(c(app_data_lib, .libPaths()))
 
 # Only use internal library
 if (length(.libPaths()) >= 2){
