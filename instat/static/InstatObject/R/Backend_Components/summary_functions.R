@@ -10,6 +10,17 @@ DataSheet$set("public", "merge_data", function(new_data, by = NULL, type = "left
       by_col_attributes[[names(by)[[i]]]] <- get_column_attributes(curr_data[[names(by)[[i]]]])
     }
   }
+  # if the class is different, set to be the same or throw a useful warning
+  if (class(curr_data[[by]]) != class(new_data[[by]])){
+    warning(paste0("Type is different for ", by, " in the two data frames. Setting as numeric in both data frames."))
+    if (class(curr_data[[by]]) == "factor"){
+      curr_data[[by]] <- as.numeric(as.character(curr_data[[by]]))
+    } else if (class(curr_data[[by]]) == "numeric"){
+      new_data[[by]] <- as.numeric(as.character(new_data[[by]]))
+    } else {
+      stop(paste0("Type is different for ", by, " in the two data frames."))
+    }
+  }
   if(type == "left") {
     new_data <- dplyr::left_join(curr_data, new_data, by)
   }
@@ -495,7 +506,10 @@ ratio_of_standard_deviations_label <- "rSD"
 ratio_of_RMSE_label <- "rsr"
 sum_of_squared_residuals_label <- "ssq"
 volumetric_efficiency_label <- "VE"
-
+which_min_label <- "summary_which_min"
+which_max_label <- "summary_which_max"
+where_min_label <- "summary_where_min"
+where_max_label <- "summary_where_max"
 
 
 # list of all summary function names
@@ -505,8 +519,8 @@ all_summaries <- c(
   min_label, p10_label, p20_label, p25_label, p30_label, p33_label, p40_label, p60_label, p67_label, p70_label, p75_label, p80_label, p90_label, quartile_label, median_label,
   summary_median_absolute_deviation_label, summary_coef_var_label,
   summary_Qn_label, summary_Sn_label,
-  mode_label, mean_label,
-  trimmed_mean_label, max_label, sum_label,
+  mode_label, mean_label, which_min_label, which_max_label,where_max_label,
+  trimmed_mean_label, max_label, sum_label, where_min_label,
   sd_label, var_label, range_label, standard_error_mean_label,
   skewness_label, summary_skewness_mc_label, kurtosis_label,
   summary_outlier_limit_label,
@@ -529,8 +543,8 @@ all_summaries <- c(
 # which of the summaries should return a Date value when x is a Date?
 date_summaries <- c(
   min_label, p10_label, p20_label, p25_label, p30_label, p33_label, p40_label, p60_label, p67_label, p70_label, p75_label, p80_label, p90_label, quartile_label, median_label,
-  mode_label, mean_label, trimmed_mean_label,
-  max_label, first_label, last_label, nth_label,
+  mode_label, mean_label, trimmed_mean_label, which_min_label, which_max_label, where_min_label,
+  max_label, first_label, last_label, nth_label, where_max_label,
   circular_min_label, circular_Q1_label, circular_quantile_label,
   circular_median_label, circular_medianHL_label, circular_mean_label,
   circular_Q3_label, circular_max_label
@@ -746,6 +760,69 @@ summary_min <- function (x, na.rm = FALSE, na_type = "", ...) {
     return(min(x, na.rm = na.rm))
   } 
 }
+
+summary_which_max <- function (x, na.rm = TRUE, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    # Get the minimum value
+    max_value <- max(x, na.rm = na.rm)
+    # Return all indices where x is equal to the minimum value
+    return(which(x == max_value))
+  } 
+}
+
+summary_which_min <- function(x, na.rm = TRUE, na_type = "", ...) {
+  if(length(x) == 0 || (na.rm && length(x[!is.na(x)]) == 0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    # Get the minimum value
+    min_value <- min(x, na.rm = na.rm)
+    # Return all indices where x is equal to the minimum value
+    return(which(x == min_value))
+  }
+}
+
+summary_where_max <- function(x, summary_where_y=NULL, na.rm = TRUE, na_type = "", ...) {  
+  # Check if vectors are empty
+  if (length(x) == 0 || length(summary_where_y) == 0) {
+    return(NA)
+  }
+  
+  # Handle NA values
+  if (na.rm) {
+    valid_indices <- !is.na(x) & !is.na(summary_where_y)
+    x <- x[valid_indices]
+    summary_where_y <- summary_where_y[valid_indices]
+  }
+  
+  # Find the index of the maximum value in x
+  max_index <- which.max(x)
+  
+  # Return the corresponding value in summary_where_y
+  return(summary_where_y[max_index])
+}
+
+summary_where_min <- function(x, summary_where_y=NULL, na.rm = TRUE, na_type = "", ...) {
+  # Check if vectors are empty
+  if (length(x) == 0 || length(summary_where_y) == 0) {
+    return(NA)
+  }
+  
+  # Handle NA values
+  if (na.rm) {
+    valid_indices <- !is.na(x) & !is.na(summary_where_y)
+    x <- x[valid_indices]
+    summary_where_y <- summary_where_y[valid_indices]
+  }
+  
+  # Find the index of the minimum value in x
+  min_index <- summary_which_min(x, na.rm = na.rm, na_type = na_type, ...)
+  
+  # Return the corresponding value in summary_where_y
+  return(summary_where_y[min_index])
+}
+    
 # get the range of the data
 summary_range <- function(x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)

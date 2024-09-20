@@ -491,7 +491,7 @@ Public Class frmMain
 
         '---------------------------------------
         'delete the recovery files
-        If strAutoSavedLogFilePaths.Length > 0 Then
+        If strAutoSavedLogFilePaths.Length > 1 Then
             Try
                 File.Delete(strAutoSavedLogFilePaths(1)) '1 to avoid deleting app_marker file
             Catch ex As Exception
@@ -1412,10 +1412,6 @@ Public Class frmMain
 
     Private Sub mnuClimateFileImportfromClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportfromClimSoft.Click
         dlgClimSoft.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateFileImportfromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportfromClimSoftWizard.Click
-        dlgClimsoftWizard.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticFileImportFromCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportfromCliData.Click

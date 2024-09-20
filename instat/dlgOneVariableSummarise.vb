@@ -75,7 +75,7 @@ Public Class dlgOneVariableSummarise
         ucrReceiverOneVarSummarise.SetMeAsReceiver()
 
         ucrNudMaxSum.SetParameter(New RParameter("maxsum", 2))
-        ucrNudMaxSum.SetMinMax(1, 12)
+        ucrNudMaxSum.SetMinMax(1, 100)
         ucrNudMaxSum.SetLinkedDisplayControl(lblMaxSum)
 
         ucrPnlSummaries.AddRadioButton(rdoDefault)

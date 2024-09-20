@@ -197,11 +197,8 @@ Partial Class frmMain
         Me.mnuClimaticFileImportfromClimateDataStore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportandTidyNetCDF = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportandTidyShapefile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimateFileImportfromClimSoft = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimateFileImportfromClimSoftWizard = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportfromCliData = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticFileExportToClimsoft = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuExportToWWRToolStrip = New System.Windows.Forms.ToolStripMenuItem()
@@ -702,6 +699,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1751,7 +1749,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileImportSST, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportfromClimSoft, Me.mnuClimateFileImportfromClimSoftWizard, Me.mnuClimaticFileImportfromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToClimsoft, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip, Me.mnuClimaticFileExportToClimpact, Me.mnuClimaticFileExportToGoogleBucketsToolStrip})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileImportSST, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.mnuClimateFileImportfromClimSoft, Me.mnuClimaticFileImportfromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToClimsoft, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip, Me.mnuClimaticFileExportToClimpact, Me.mnuClimaticFileExportToGoogleBucketsToolStrip})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         Me.mnuClimaticFile.Size = New System.Drawing.Size(212, 22)
         Me.mnuClimaticFile.Text = "File"
@@ -1786,22 +1784,11 @@ Partial Class frmMain
         Me.mnuClimaticFileImportandTidyShapefile.Size = New System.Drawing.Size(282, 22)
         Me.mnuClimaticFileImportandTidyShapefile.Text = "Import and Tidy Shapefile..."
         '
-        'ToolStripSeparator20
-        '
-        Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
-        Me.ToolStripSeparator20.Size = New System.Drawing.Size(279, 6)
-        '
         'mnuClimateFileImportfromClimSoft
         '
         Me.mnuClimateFileImportfromClimSoft.Name = "mnuClimateFileImportfromClimSoft"
         Me.mnuClimateFileImportfromClimSoft.Size = New System.Drawing.Size(282, 22)
         Me.mnuClimateFileImportfromClimSoft.Text = "Import from Climsoft..."
-        '
-        'mnuClimateFileImportfromClimSoftWizard
-        '
-        Me.mnuClimateFileImportfromClimSoftWizard.Name = "mnuClimateFileImportfromClimSoftWizard"
-        Me.mnuClimateFileImportfromClimSoftWizard.Size = New System.Drawing.Size(282, 22)
-        Me.mnuClimateFileImportfromClimSoftWizard.Text = "Import from Climsoft Wizard..."
         '
         'mnuClimaticFileImportfromCliData
         '
@@ -1810,11 +1797,6 @@ Partial Class frmMain
         Me.mnuClimaticFileImportfromCliData.Size = New System.Drawing.Size(282, 22)
         Me.mnuClimaticFileImportfromCliData.Text = "Import from CLIDATA..."
         Me.mnuClimaticFileImportfromCliData.Visible = False
-        '
-        'ToolStripSeparator15
-        '
-        Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
-        Me.ToolStripSeparator15.Size = New System.Drawing.Size(279, 6)
         '
         'mnuClimaticFileExportToClimsoft
         '
@@ -3466,7 +3448,6 @@ Partial Class frmMain
         '
         'mnuImportFromOpenAppBuilder
         '
-        Me.mnuImportFromOpenAppBuilder.Enabled = False
         Me.mnuImportFromOpenAppBuilder.Name = "mnuImportFromOpenAppBuilder"
         Me.mnuImportFromOpenAppBuilder.Size = New System.Drawing.Size(241, 22)
         Me.mnuImportFromOpenAppBuilder.Text = "Import From OpenAppBuilder..."
@@ -5079,7 +5060,7 @@ Partial Class frmMain
         Me.splOverall.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splOverall.Panel2.Controls.Add(Me.splDataOutput)
         Me.splOverall.Size = New System.Drawing.Size(834, 399)
-        Me.splOverall.SplitterDistance = 162
+        Me.splOverall.SplitterDistance = 161
         Me.splOverall.SplitterWidth = 5
         Me.splOverall.TabIndex = 10
         '
@@ -5099,7 +5080,7 @@ Partial Class frmMain
         '
         Me.splExtraWindows.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splExtraWindows.Panel2.Controls.Add(Me.ucrScriptWindow)
-        Me.splExtraWindows.Size = New System.Drawing.Size(834, 162)
+        Me.splExtraWindows.Size = New System.Drawing.Size(834, 161)
         Me.splExtraWindows.SplitterDistance = 252
         Me.splExtraWindows.SplitterWidth = 5
         Me.splExtraWindows.TabIndex = 0
@@ -5119,7 +5100,7 @@ Partial Class frmMain
         '
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
-        Me.splMetadata.Size = New System.Drawing.Size(252, 162)
+        Me.splMetadata.Size = New System.Drawing.Size(252, 161)
         Me.splMetadata.SplitterDistance = 68
         Me.splMetadata.SplitterWidth = 5
         Me.splMetadata.TabIndex = 0
@@ -5133,7 +5114,7 @@ Partial Class frmMain
         Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
         Me.ucrColumnMeta.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        Me.ucrColumnMeta.Size = New System.Drawing.Size(68, 162)
+        Me.ucrColumnMeta.Size = New System.Drawing.Size(68, 161)
         Me.ucrColumnMeta.TabIndex = 0
         '
         'ucrDataFrameMeta
@@ -5144,7 +5125,7 @@ Partial Class frmMain
         Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataFrameMeta.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(179, 162)
+        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(179, 161)
         Me.ucrDataFrameMeta.TabIndex = 0
         '
         'ucrScriptWindow
@@ -5155,7 +5136,7 @@ Partial Class frmMain
         Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
         Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(577, 162)
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(577, 161)
         Me.ucrScriptWindow.strActiveTabText = ""
         Me.ucrScriptWindow.TabIndex = 2
         Me.ucrScriptWindow.Tag = "Script_Window"
@@ -5176,7 +5157,7 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
-        Me.splDataOutput.Size = New System.Drawing.Size(834, 232)
+        Me.splDataOutput.Size = New System.Drawing.Size(834, 233)
         Me.splDataOutput.SplitterDistance = 382
         Me.splDataOutput.SplitterWidth = 5
         Me.splDataOutput.TabIndex = 0
@@ -5190,7 +5171,7 @@ Partial Class frmMain
         Me.ucrDataViewer.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataViewer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Size = New System.Drawing.Size(382, 232)
+        Me.ucrDataViewer.Size = New System.Drawing.Size(382, 233)
         Me.ucrDataViewer.TabIndex = 0
         Me.ucrDataViewer.Tag = "Data_View"
         '
@@ -5202,7 +5183,7 @@ Partial Class frmMain
         Me.ucrOutput.Location = New System.Drawing.Point(0, 0)
         Me.ucrOutput.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrOutput.Name = "ucrOutput"
-        Me.ucrOutput.Size = New System.Drawing.Size(447, 232)
+        Me.ucrOutput.Size = New System.Drawing.Size(447, 233)
         Me.ucrOutput.TabIndex = 0
         '
         'mnuPlotly
@@ -5240,6 +5221,11 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'ToolStripSeparator15
+        '
+        Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
+        Me.ToolStripSeparator15.Size = New System.Drawing.Size(279, 6)
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5253,7 +5239,7 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Text = "R-Instat .."
+        Me.Text = "R-Instat " + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString + "." + My.Application.Info.Version.Build.ToString
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
@@ -5579,7 +5565,6 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareKeysAndLinksAddComment As ToolStripMenuItem
     Friend WithEvents mnuClimaticModelsExtremes As ToolStripMenuItem
     Friend WithEvents mnuClimaticModelCircular As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
     Friend WithEvents mnuClimaticPrepareClimaticSummaries As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataInventory As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataDisplayDaily As ToolStripMenuItem
@@ -5820,8 +5805,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator67 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator68 As ToolStripSeparator
     Friend WithEvents mnuStructuredCircularCirclize As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
-    Friend WithEvents mnuClimateFileImportfromClimSoftWizard As ToolStripMenuItem
     Friend WithEvents mnuExportToWWRToolStrip As ToolStripMenuItem
     Friend WithEvents mnuViewStructuredMenu As ToolStripMenuItem
     Friend WithEvents mnuClimaticNCMP As ToolStripMenuItem
@@ -5961,4 +5944,5 @@ Partial Class frmMain
     Friend WithEvents mnuSwapDataMetadata As ToolStripMenuItem
     Friend WithEvents RInstatResourcesSiteToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuImportFromOpenAppBuilder As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
 End Class
