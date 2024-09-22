@@ -10,6 +10,17 @@ DataSheet$set("public", "merge_data", function(new_data, by = NULL, type = "left
       by_col_attributes[[names(by)[[i]]]] <- get_column_attributes(curr_data[[names(by)[[i]]]])
     }
   }
+  # if the class is different, set to be the same or throw a useful warning
+  if (class(curr_data[[by]]) != class(new_data[[by]])){
+    warning(paste0("Type is different for ", by, " in the two data frames. Setting as numeric in both data frames."))
+    if (class(curr_data[[by]]) == "factor"){
+      curr_data[[by]] <- as.numeric(as.character(curr_data[[by]]))
+    } else if (class(curr_data[[by]]) == "numeric"){
+      new_data[[by]] <- as.numeric(as.character(new_data[[by]]))
+    } else {
+      stop(paste0("Type is different for ", by, " in the two data frames."))
+    }
+  }
   if(type == "left") {
     new_data <- dplyr::left_join(curr_data, new_data, by)
   }
