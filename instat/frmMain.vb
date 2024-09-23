@@ -222,6 +222,10 @@ Public Class frmMain
         AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
         '---------------------------------------
 
+        '--------------------------------------
+        CreateAdditionalLibraryDirectory()
+        '-------------------------------------
+
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
@@ -392,6 +396,15 @@ Public Class frmMain
             Return True
         End If
     End Function
+
+    Private Sub CreateAdditionalLibraryDirectory()
+        Dim strLibraryPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "R-Instat", "library")
+
+        If Not Directory.Exists(strLibraryPath) Then
+            Directory.CreateDirectory(strLibraryPath)
+        End If
+    End Sub
+
 
     Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strRScripts As String = ""

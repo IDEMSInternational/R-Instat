@@ -158,7 +158,6 @@ install.packages(packs, dependencies = FALSE, repos='https://cloud.r-project.org
 
 # Define the custom package library path (in AppData, no admin rights needed)
 app_data_lib <- file.path(Sys.getenv("APPDATA"), "R-Instat", "library")
-dir.create(app_data_lib, recursive = TRUE, showWarnings = FALSE)
 
 # Add the custom library path to .libPaths() for installing user-level packages
 .libPaths(c(app_data_lib, .libPaths()))
