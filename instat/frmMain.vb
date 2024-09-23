@@ -398,13 +398,24 @@ Public Class frmMain
     End Function
 
     Private Sub CreateAdditionalLibraryDirectory()
+        ' Define the custom library path in the ApplicationData folder
         Dim strLibraryPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "R-Instat", "library")
 
-        If Not Directory.Exists(strLibraryPath) Then
-            Directory.CreateDirectory(strLibraryPath)
-        End If
-    End Sub
+        Try
+            ' Check if the directory exists, if not, create it
+            If Not Directory.Exists(strLibraryPath) Then
+                Directory.CreateDirectory(strLibraryPath)
+            End If
+            ' Add the custom library path to R's .libPaths for user-level package installation
+            Dim strScript As String = $".libPaths(c('{strLibraryPath.Replace("\", "/")}', .libPaths()))"
 
+            ' Execute the R script to update the library paths
+            clsRLink.RunScript(strScript:=strScript, bSeparateThread:=False, bSilent:=False)
+        Catch ex As Exception
+            ' Handle potential errors (e.g., directory creation failure)
+            MessageBox.Show($"Failed to create or update library directory: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
     Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strRScripts As String = ""

@@ -156,12 +156,6 @@ packs <- c("abind", "agricolae", "agridat",
 
 install.packages(packs, dependencies = FALSE, repos='https://cloud.r-project.org', type="win.binary")
 
-# Define the custom package library path (in AppData, no admin rights needed)
-app_data_lib <- file.path(Sys.getenv("APPDATA"), "R-Instat", "library")
-
-# Add the custom library path to .libPaths() for installing user-level packages
-.libPaths(c(app_data_lib, .libPaths()))
-
 # Only use internal library
 if (length(.libPaths()) >= 2){
   current_paths <- .libPaths()
