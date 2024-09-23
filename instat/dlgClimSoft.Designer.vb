@@ -49,6 +49,7 @@ Partial Class dlgClimSoft
         Me.ucrDtpEndDataDate = New instat.ucrDateTimePicker()
         Me.ucrDtpStartDataDate = New instat.ucrDateTimePicker()
         Me.ucrChkImportFlagsMetadata = New instat.ucrCheck()
+        Me.ucrChKUnstackData = New instat.ucrCheck()
         Me.lblConnection = New System.Windows.Forms.Label()
         Me.lblToDataDate = New System.Windows.Forms.Label()
         Me.lblSelectTable = New System.Windows.Forms.Label()
@@ -67,7 +68,6 @@ Partial Class dlgClimSoft
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChKUnstackData = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'btnConnection
@@ -87,7 +87,7 @@ Partial Class dlgClimSoft
         Me.lblSelectElements.Location = New System.Drawing.Point(285, 226)
         Me.lblSelectElements.Name = "lblSelectElements"
         Me.lblSelectElements.Size = New System.Drawing.Size(86, 13)
-        Me.lblSelectElements.TabIndex = 4
+        Me.lblSelectElements.TabIndex = 5
         Me.lblSelectElements.Text = "Select Elements:"
         '
         'lblSelectStations
@@ -172,6 +172,17 @@ Partial Class dlgClimSoft
         Me.ucrChkImportFlagsMetadata.Size = New System.Drawing.Size(213, 23)
         Me.ucrChkImportFlagsMetadata.TabIndex = 37
         Me.ttClimsoft.SetToolTip(Me.ucrChkImportFlagsMetadata, "Unstack elements")
+        '
+        'ucrChKUnstackData
+        '
+        Me.ucrChKUnstackData.AutoSize = True
+        Me.ucrChKUnstackData.Checked = False
+        Me.ucrChKUnstackData.Location = New System.Drawing.Point(8, 289)
+        Me.ucrChKUnstackData.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChKUnstackData.Name = "ucrChKUnstackData"
+        Me.ucrChKUnstackData.Size = New System.Drawing.Size(169, 23)
+        Me.ucrChKUnstackData.TabIndex = 38
+        Me.ttClimsoft.SetToolTip(Me.ucrChKUnstackData, "Select Observation Data Date Range")
         '
         'lblConnection
         '
@@ -325,7 +336,7 @@ Partial Class dlgClimSoft
         Me.ucrCboElements.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrCboElements.Name = "ucrCboElements"
         Me.ucrCboElements.Size = New System.Drawing.Size(137, 21)
-        Me.ucrCboElements.TabIndex = 5
+        Me.ucrCboElements.TabIndex = 6
         '
         'ucrCboStations
         '
@@ -359,7 +370,7 @@ Partial Class dlgClimSoft
         Me.ucrReceiverMultipleElements.Selector = Nothing
         Me.ucrReceiverMultipleElements.Size = New System.Drawing.Size(137, 100)
         Me.ucrReceiverMultipleElements.strNcFilePath = ""
-        Me.ucrReceiverMultipleElements.TabIndex = 6
+        Me.ucrReceiverMultipleElements.TabIndex = 7
         Me.ucrReceiverMultipleElements.ucrSelector = Nothing
         '
         'ucrReceiverMultipleStations
@@ -384,17 +395,6 @@ Partial Class dlgClimSoft
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
-        '
-        'ucrChKUnstackData
-        '
-        Me.ucrChKUnstackData.AutoSize = True
-        Me.ucrChKUnstackData.Checked = False
-        Me.ucrChKUnstackData.Location = New System.Drawing.Point(8, 289)
-        Me.ucrChKUnstackData.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrChKUnstackData.Name = "ucrChKUnstackData"
-        Me.ucrChKUnstackData.Size = New System.Drawing.Size(169, 23)
-        Me.ucrChKUnstackData.TabIndex = 38
-        Me.ttClimsoft.SetToolTip(Me.ucrChKUnstackData, "Select Observation Data Date Range")
         '
         'dlgClimSoft
         '

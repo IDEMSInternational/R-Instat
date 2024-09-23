@@ -38,6 +38,8 @@ Public Class sdgImportFromClimSoft
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBaseSdgClimSoft.iHelpTopicID = 354
+
         Dim dctDatabaseNames As New Dictionary(Of String, String)
         Dim dctPorts As New Dictionary(Of String, String)
         Dim dctDrv As New Dictionary(Of String, String)

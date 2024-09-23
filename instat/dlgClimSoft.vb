@@ -275,8 +275,8 @@ Public Class dlgClimSoft
             Dim strTableName As String = dctTables.Item(ucrCboTable.GetText).Trim("""")
             Dim strStationColumn As String = dctStationCols.Item(ucrCboStations.GetText).Trim("""")
             Dim strElementsColumn As String = dctElementsCols.Item(ucrCboElements.GetText).Trim("""")
-            Dim strStationsValues As String = String.Join(",", ucrReceiverMultipleStations.GetVariableNamesList(bWithQuotes:=True, strQuotes:="'"))
-            Dim strElementsValues As String = String.Join(",", ucrReceiverMultipleElements.GetVariableNamesList(bWithQuotes:=True, strQuotes:="'"))
+            Dim strStationsValues As String = GetSQLArrayFilter(ucrReceiverMultipleStations.GetVariableNamesList(bWithQuotes:=False))
+            Dim strElementsValues As String = GetSQLArrayFilter(ucrReceiverMultipleElements.GetVariableNamesList(bWithQuotes:=False))
             Dim strQueryCondition As String = " INNER JOIN station ON " & strTableName & ".recordedFrom = station.stationId" &
                 " INNER JOIN obselement ON " & strTableName & ".describedBy = obselement.elementId WHERE" &
                 " station." & strStationColumn & " IN (" & strStationsValues & ")" &
@@ -307,6 +307,18 @@ Public Class dlgClimSoft
             MessageBox.Show(Me, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+    Private Function GetSQLArrayFilter(values() As String) As String
+        Dim strSQL As String = ""
+        For index As Integer = 0 To values.Length - 1
+            If index = 0 Then
+                strSQL = "'" & values(index).Replace("'", "''") & "'"
+            Else
+                strSQL = strSQL & "," & "'" & values(index).Replace("'", "''") & "'"
+            End If
+        Next
+        Return strSQL
+    End Function
 
     Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrCboTable.ControlContentsChanged, ucrCboQCStatus.ControlContentsChanged, ucrDtpStartDataDate.ControlContentsChanged, ucrDtpEndDataDate.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkImportStationsMetadata.ControlContentsChanged, ucrChkImportElementsMetadata.ControlContentsChanged, ucrChkImportFlagsMetadata.ControlContentsChanged
         Dim bValid As Boolean = False
