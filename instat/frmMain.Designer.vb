@@ -2118,6 +2118,7 @@ Partial Class frmMain
         '
         'mnuClimaticCheckDataDistances
         '
+        Me.mnuClimaticCheckDataDistances.Enabled = False
         Me.mnuClimaticCheckDataDistances.Name = "mnuClimaticCheckDataDistances"
         Me.mnuClimaticCheckDataDistances.Size = New System.Drawing.Size(210, 22)
         Me.mnuClimaticCheckDataDistances.Text = "Distances..."
@@ -5246,8 +5247,7 @@ Partial Class frmMain
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
         Me.Name = "frmMain"
-        Me.Name = "frmMain"
-        Me.Text = "R-Instat " + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString + "." + My.Application.Info.Version.Build.ToString
+        Me.Text = "R-Instat .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
