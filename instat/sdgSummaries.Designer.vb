@@ -175,6 +175,10 @@ Partial Class sdgSummaries
         Me.ucrChkSum = New instat.ucrCheck()
         Me.ucrChkMean = New instat.ucrCheck()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
+        Me.tbRename = New System.Windows.Forms.TabPage()
+        Me.ucrChkIncludeVariable = New instat.ucrCheck()
+        Me.grdRenameColumns = New unvell.ReoGrid.ReoGridControl()
+        Me.ucrSelectVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ttVerificationSummaries = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
         Me.tbCircular.SuspendLayout()
@@ -201,6 +205,7 @@ Partial Class sdgSummaries
         Me.grpNotOrderedFactor.SuspendLayout()
         Me.grpNumeric.SuspendLayout()
         Me.tbSummaries.SuspendLayout()
+        Me.tbRename.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbCircular
@@ -1725,11 +1730,64 @@ Partial Class sdgSummaries
         Me.tbSummaries.Controls.Add(Me.tbPosition)
         Me.tbSummaries.Controls.Add(Me.tbModel)
         Me.tbSummaries.Controls.Add(Me.tbCircular)
+        Me.tbSummaries.Controls.Add(Me.tbRename)
         Me.tbSummaries.Location = New System.Drawing.Point(6, 7)
         Me.tbSummaries.Name = "tbSummaries"
         Me.tbSummaries.SelectedIndex = 0
         Me.tbSummaries.Size = New System.Drawing.Size(417, 423)
         Me.tbSummaries.TabIndex = 0
+        '
+        'tbRename
+        '
+        Me.tbRename.Controls.Add(Me.ucrChkIncludeVariable)
+        Me.tbRename.Controls.Add(Me.grdRenameColumns)
+        Me.tbRename.Controls.Add(Me.ucrSelectVariables)
+        Me.tbRename.Location = New System.Drawing.Point(4, 22)
+        Me.tbRename.Name = "tbRename"
+        Me.tbRename.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbRename.Size = New System.Drawing.Size(409, 397)
+        Me.tbRename.TabIndex = 9
+        Me.tbRename.Text = "Rename"
+        Me.tbRename.UseVisualStyleBackColor = True
+        '
+        'ucrChkIncludeVariable
+        '
+        Me.ucrChkIncludeVariable.AutoSize = True
+        Me.ucrChkIncludeVariable.Checked = False
+        Me.ucrChkIncludeVariable.Location = New System.Drawing.Point(92, 22)
+        Me.ucrChkIncludeVariable.Name = "ucrChkIncludeVariable"
+        Me.ucrChkIncludeVariable.Size = New System.Drawing.Size(225, 23)
+        Me.ucrChkIncludeVariable.TabIndex = 21
+        '
+        'grdRenameColumns
+        '
+        Me.grdRenameColumns.BackColor = System.Drawing.Color.White
+        Me.grdRenameColumns.ColumnHeaderContextMenuStrip = Nothing
+        Me.grdRenameColumns.LeadHeaderContextMenuStrip = Nothing
+        Me.grdRenameColumns.Location = New System.Drawing.Point(12, 94)
+        Me.grdRenameColumns.Name = "grdRenameColumns"
+        Me.grdRenameColumns.RowHeaderContextMenuStrip = Nothing
+        Me.grdRenameColumns.Script = Nothing
+        Me.grdRenameColumns.SheetTabContextMenuStrip = Nothing
+        Me.grdRenameColumns.SheetTabNewButtonVisible = True
+        Me.grdRenameColumns.SheetTabVisible = True
+        Me.grdRenameColumns.SheetTabWidth = 154
+        Me.grdRenameColumns.ShowScrollEndSpacing = True
+        Me.grdRenameColumns.Size = New System.Drawing.Size(378, 256)
+        Me.grdRenameColumns.TabIndex = 19
+        Me.grdRenameColumns.Text = "Variables"
+        '
+        'ucrSelectVariables
+        '
+        Me.ucrSelectVariables.AutoSize = True
+        Me.ucrSelectVariables.bDropUnusedFilterLevels = False
+        Me.ucrSelectVariables.bShowHiddenColumns = False
+        Me.ucrSelectVariables.bUseCurrentFilter = True
+        Me.ucrSelectVariables.Location = New System.Drawing.Point(12, 48)
+        Me.ucrSelectVariables.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectVariables.Name = "ucrSelectVariables"
+        Me.ucrSelectVariables.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectVariables.TabIndex = 20
         '
         'ucrButtonsSummaries
         '
@@ -1799,6 +1857,8 @@ Partial Class sdgSummaries
         Me.grpNumeric.ResumeLayout(False)
         Me.grpNumeric.PerformLayout()
         Me.tbSummaries.ResumeLayout(False)
+        Me.tbRename.ResumeLayout(False)
+        Me.tbRename.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1942,4 +2002,8 @@ Partial Class sdgSummaries
     Friend WithEvents ucrPnlPosition As UcrPanel
     Friend WithEvents ucrChkWhereMax As ucrCheck
     Friend WithEvents ucrChkWhereMin As ucrCheck
+    Friend WithEvents tbRename As TabPage
+    Friend WithEvents grdRenameColumns As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents ucrSelectVariables As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrChkIncludeVariable As ucrCheck
 End Class

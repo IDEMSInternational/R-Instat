@@ -15,6 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
+Imports unvell.ReoGrid
+Imports unvell.ReoGrid.Events
+
 Public Class sdgSummaries
     Public clsListFunction, clsDefaultFunction, clsConcFunction, clsDummyFunction As New RFunction
     Public bControlsInitialised As Boolean = False
@@ -26,6 +30,15 @@ Public Class sdgSummaries
     Public bEnable2VariableTab As Boolean = True
     Public bOkEnabled As Boolean = True
     Private bResetSubdialog As Boolean = False
+    Private clsNewLabelDataframeFunction As New RFunction
+    Private clsNewColNameDataframeFunction As New RFunction
+    Private clsDefaultRFunction As New RFunction
+    Private strEmpty As String = " "
+    Private WithEvents grdCurrentWorkSheet As Worksheet
+    Private dctRowsNewNameChanged As New Dictionary(Of Integer, String)
+    Private dctRowsNewLabelChanged As New Dictionary(Of Integer, String)
+    Private dctNameRowsValues As New Dictionary(Of Integer, String)
+    Private bCurrentCell As Boolean = False
 
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -44,6 +57,13 @@ Public Class sdgSummaries
         ucrPnlPosition.AddParameterValuesCondition(rdoUsePositions, "Check", "Use")
         ucrPnlPosition.AddToLinkedControls({ucrChkFirst, ucrSelectorOrderBy, ucrReceiverOrderBy, ucrChkOrderBy, ucrChkLast, ucrChknth, ucrChkSample}, {rdoUsePositions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPosition.AddToLinkedControls({ucrChkWhichmin, ucrChkWhereMax, ucrChkWhereMin, ucrReceiverInclude, ucrSelectorInclude, ucrChkWhichmax}, {rdoDisplay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkIncludeVariable.SetText("Include Variable Labels")
+        ucrChkIncludeVariable.AddParameterValuesCondition(True, "checked", "True")
+        ucrChkIncludeVariable.AddParameterValuesCondition(False, "checked", "False")
+
+        ucrChkIncludeVariable.AddParameterValuesCondition(True, "check", "True")
+        ucrChkIncludeVariable.AddParameterValuesCondition(False, "check", "False")
 
         ucrChkNonMissing.SetParameter(New RParameter("summary_count_non_missing", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_non_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkNonMissing.SetText("N Non Missing")
@@ -399,6 +419,14 @@ Public Class sdgSummaries
         clsConcFunction = clsNewConcFunction
 
         strWeightLabel = strNewWeightLabel
+        clsNewColNameDataframeFunction.SetRCommand("data.frame")
+
+        clsNewLabelDataframeFunction.SetRCommand("data.frame")
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
+        clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
+        clsDefaultRFunction.AddParameter(".fn", "janitor::make_clean_names", iPosition:=5)
+        clsDefaultRFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=7)
+        clsDefaultRFunction.AddParameter("minlength", "8", iPosition:=10)
 
         'updating labels of weighted summaries
         ucrChkSum.SetText("Sum" & strWeightLabel)
@@ -694,6 +722,8 @@ Public Class sdgSummaries
             IncludeControlsEnabled()
             AddRemoveSummaryWhereY()
         End If
+        UpdateGrid()
+        RemoveParameters()
     End Sub
 
     Private Sub AddRemoveSummaryWhereY()
@@ -707,5 +737,282 @@ Public Class sdgSummaries
     Private Sub ucrChkWheremax_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWhereMax.ControlValueChanged, ucrChkWhereMin.ControlValueChanged, ucrReceiverInclude.ControlValueChanged, ucrSelectorInclude.ControlValueChanged
         AddRemoveSummaryWhereY()
         IncludeControlsEnabled()
+    End Sub
+
+    Private Sub grdCurrentWorkSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterPaste
+        Dim iStartRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row
+        Dim iColIndex As Integer = grdCurrentWorkSheet.SelectionRange.Col
+
+        If e.Range.Rows > 1 Then
+            For iRow As Integer = iStartRowIndex To grdCurrentWorkSheet.SelectionRange.EndRow
+                Dim strNewData As String = ValidateRVariable(grdCurrentWorkSheet.GetCellData(row:=iRow, col:=iColIndex), iColIndex)
+                RenameColumns(strNewData, iRow, iColIndex)
+            Next
+        Else
+            Dim strNewData As String = ValidateRVariable(grdCurrentWorkSheet.GetCellData(row:=e.Range.Row, col:=iColIndex), iColIndex)
+            RenameColumns(strNewData, iStartRowIndex, iColIndex)
+        End If
+        ValidateNamesFromDictionary(iColIndex)
+    End Sub
+
+    Private Sub GetSelectedRows()
+        For i As Integer = grdCurrentWorkSheet.SelectionRange.Row To grdCurrentWorkSheet.SelectionRange.Row + grdCurrentWorkSheet.SelectionRange.Rows - 1
+            Dim iRow As Integer = grdCurrentWorkSheet.RowHeaders.Item(i).Index + 1
+            AddChangedNewLabelRows(iRow, strEmpty)
+        Next
+    End Sub
+
+    Private Sub Worksheet_AfterCellKeyDown(sender As Object, e As AfterCellKeyDownEventArgs) Handles grdCurrentWorkSheet.AfterCellKeyDown
+        If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) Then
+            GetSelectedRows()
+            clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
+            clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
+            clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=9)
+        End If
+    End Sub
+
+    Private Function containsFrench(ByVal strData As String) As Boolean
+        Dim bFind As Boolean = False
+        Dim lstFrench As String = "ç,é,ê,î,ô,œ,û"
+        Dim words As String() = lstFrench.Split(New Char() {","c})
+        For Each word In words
+            If strData.Contains(word) Then
+                bFind = True
+                Exit For
+            End If
+        Next
+        Return bFind
+    End Function
+
+    Private Sub RenameColumns(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
+        GetVariables(strNewData, iRowIndex + 1, iColIndex)
+        bOkEnabled = True
+    End Sub
+
+    Private Sub Worksheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
+        If (e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back) AndAlso e.Cell.Column = 1 Then
+            MsgBox("The column name must not be an empty string.", MsgBoxStyle.Information)
+            e.IsCancelled = True
+        End If
+    End Sub
+
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
+        Dim iCol As Integer = e.Cell.Column
+        Dim strNewData As String = ValidateRVariable(e.NewData, iCol)
+        RenameColumns(strNewData, e.Cell.Row, iCol)
+        ValidateNamesFromDictionary(iCol)
+    End Sub
+
+    Private Sub GetVariables(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
+        If iColIndex = 1 Then
+            If strNewData <> "" Then
+                AddChangedNewNameRows(iRowIndex, strNewData)
+
+                clsNewColNameDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewNameChanged), iPosition:=0)
+                clsNewColNameDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewNameChanged.Keys.ToArray) & ")", iPosition:=1)
+                clsDefaultRFunction.AddParameter("new_column_names_df", clsRFunctionParameter:=clsNewColNameDataframeFunction, iPosition:=8)
+            Else
+                clsNewColNameDataframeFunction.RemoveParameterByName("cols")
+                clsNewColNameDataframeFunction.RemoveParameterByName("index")
+                clsDefaultRFunction.RemoveParameterByName("new_column_names_df")
+            End If
+        End If
+
+        If ucrChkIncludeVariable.Checked Then
+            If iColIndex = 2 Then
+                If strNewData <> "" Then
+                    AddChangedNewLabelRows(iRowIndex, strNewData)
+                Else
+                    AddChangedNewLabelRows(iRowIndex, strEmpty)
+                End If
+
+                clsNewLabelDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewLabelChanged), iPosition:=0)
+                clsNewLabelDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewLabelChanged.Keys.ToArray) & ")", iPosition:=1)
+                clsDefaultRFunction.AddParameter("new_labels_df", clsRFunctionParameter:=clsNewLabelDataframeFunction, iPosition:=9)
+            End If
+        Else
+            clsDefaultRFunction.RemoveParameterByName("new_labels_df")
+        End If
+    End Sub
+
+    Private Sub RemoveLabelsParams()
+        clsDefaultRFunction.RemoveParameterByName("new_column_names_df")
+        clsDefaultRFunction.RemoveParameterByName("new_labels_df")
+    End Sub
+
+    Private Sub RemoveParameters()
+        clsDefaultRFunction.RemoveParameterByName(".fn")
+        RemoveLabelsParams()
+    End Sub
+
+    Private Sub UpdateGrid()
+        Dim vecColumns As GenericVector = Nothing
+        Dim chrCurrColumns As CharacterVector
+        Dim clsGetItems As New RFunction
+        Dim clsGetColumnLabels As New RFunction
+        Dim strCurrColumnLables() As String
+        Dim expItems As SymbolicExpression
+
+        ucrSelectVariables.lstAvailableVariable.Visible = False
+        ucrSelectVariables.btnAdd.Visible = False
+        ucrSelectVariables.btnDataOptions.Visible = False
+
+        grdRenameColumns.Worksheets.Clear()
+        dctRowsNewNameChanged.Clear()
+        dctNameRowsValues.Clear()
+        dctRowsNewLabelChanged.Clear()
+
+        grdCurrentWorkSheet = grdRenameColumns.CreateWorksheet(ucrSelectVariables.strCurrentDataFrame)
+        grdCurrentWorkSheet.ColumnCount = 3
+
+        grdCurrentWorkSheet.ColumnHeaders(0).Text = "Name"
+        grdCurrentWorkSheet.ColumnHeaders(1).Text = "New Name"
+        grdCurrentWorkSheet.ColumnHeaders(2).Text = "Label"
+        grdCurrentWorkSheet.SetColumnsWidth(2, 1, 150)
+
+
+        If ucrSelectVariables IsNot Nothing Then
+            clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+            clsGetItems.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=0)
+            clsGetItems.AddParameter("as_list", "TRUE")
+            expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
+            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                vecColumns = expItems.AsList
+                For i As Integer = 0 To vecColumns.Count - 1
+                    chrCurrColumns = vecColumns(i).AsCharacter
+                    Dim strText As String = vecColumns.Names(i)
+
+                    If chrCurrColumns IsNot Nothing Then
+                        grdCurrentWorkSheet.RowCount = chrCurrColumns.Count
+                        For j As Integer = 0 To chrCurrColumns.Count - 1
+                            grdCurrentWorkSheet.Item(row:=j, col:=0) = chrCurrColumns(j)
+                            grdCurrentWorkSheet.GetCell(row:=j, col:=0).IsReadOnly = True
+                            grdCurrentWorkSheet.Item(row:=j, col:=1) = chrCurrColumns(j)
+                        Next
+                        clsGetColumnLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_labels")
+                        clsGetColumnLabels.AddParameter("data_name", Chr(34) & vecColumns.Names(i) & Chr(34))
+                        clsGetColumnLabels.AddParameter("columns", frmMain.clsRLink.GetListAsRString(chrCurrColumns.ToList))
+                        expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnLabels.ToScript())
+                        If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                            strCurrColumnLables = expItems.AsCharacter.ToArray
+                        Else
+                            strCurrColumnLables = New String(chrCurrColumns.Count - 1) {}
+                        End If
+                        For j = 0 To chrCurrColumns.Count - 1
+                            grdCurrentWorkSheet.Item(row:=j, col:=2) = strCurrColumnLables(j)
+                        Next
+                    End If
+                Next
+            End If
+
+            For iRow As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
+                AddRowNameValue(iRow, grdCurrentWorkSheet.Item(iRow, 0))
+            Next
+        End If
+
+
+        grdCurrentWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdCurrentWorkSheet.Rows, grdCurrentWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
+        grdCurrentWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
+        grdCurrentWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
+
+        grdRenameColumns.AddWorksheet(grdCurrentWorkSheet)
+        grdRenameColumns.SheetTabNewButtonVisible = False
+        grdRenameColumns.SheetTabWidth = 450
+
+        MakeLabelColumnVisible()
+    End Sub
+
+    Private Sub AddChangedNewNameRows(iRow As Integer, strNewData As String)
+        If Not dctRowsNewNameChanged.ContainsKey(iRow) Then
+            dctRowsNewNameChanged.Add(iRow, strNewData)
+        Else
+            dctRowsNewNameChanged(iRow) = strNewData
+        End If
+    End Sub
+
+    Private Sub AddChangedNewLabelRows(iRow As Integer, strNewData As String)
+        'TODO this need to be implemented in the appropriare ucrControl
+        If Not dctRowsNewLabelChanged.ContainsKey(iRow) Then
+            dctRowsNewLabelChanged.Add(iRow, strNewData)
+        Else
+            dctRowsNewLabelChanged(iRow) = strNewData
+        End If
+    End Sub
+
+    Private Sub AddRowNameValue(iRow As Integer, strNewData As String)
+        'TODO this need to be implemented in the appropriare ucrControl
+        If Not dctNameRowsValues.ContainsKey(iRow) Then
+            dctNameRowsValues.Add(iRow, strNewData)
+        End If
+    End Sub
+
+    Private Function GetValuesAsVector(dctValues As Dictionary(Of Integer, String)) As String
+        'TODO this need to be implemented in the appropriare ucrControl
+        Dim strValue As String = ""
+        Dim i As Integer
+        strValue = strValue & "c("
+        For Each iRow As Integer In dctValues.Keys
+            If i > 0 Then
+                strValue = strValue & ","
+            End If
+            strValue = strValue & Chr(34) & dctValues(iRow) & Chr(34)
+            i = i + 1
+        Next
+        strValue = strValue & ")"
+        Return strValue
+    End Function
+
+    Private Sub ValidateNamesFromDictionary(iColIndex As Integer)
+        'TODO this needs to be implemented in the appropriate ucrControl
+        Select Case iColIndex
+            Case 1
+                For Each strValue In dctRowsNewNameChanged.Values
+                    Dim parsedValue As Boolean
+                    If String.IsNullOrEmpty(strValue) _
+                            OrElse containsFrench(strValue) _
+                            OrElse Boolean.TryParse(strValue, parsedValue) _
+                            OrElse strValue.ToLower.Equals("t") OrElse strValue.ToLower.Equals("f") _
+                            OrElse IsNumeric(strValue) Then
+                        MsgBox("The column name must not be a numeric or French accent or be a boolean e.g TRUE, FALSE, T, F.")
+                        bCurrentCell = False
+                        Exit For
+                    End If
+                    bCurrentCell = True
+                Next
+            Case 2
+                bCurrentCell = True
+        End Select
+    End Sub
+
+    Private Function ValidateRVariable(strText As String, iCol As Integer) As String
+        'TODO this need to be implemented in the appropriare ucrControl
+        Dim strNewDataText As String = strText
+        If iCol = 1 Then
+            For Each chrCurr In strNewDataText
+                If Not Char.IsLetterOrDigit(chrCurr) AndAlso Not chrCurr = "." AndAlso Not chrCurr = "_" Then
+                    strNewDataText = strNewDataText.Replace(chrCurr, ".")
+                End If
+            Next
+        End If
+        Return strNewDataText
+    End Function
+
+    Private Sub ucrSelectVariables_DataFrameChanged() Handles ucrSelectVariables.DataFrameChanged
+        RemoveLabelsParams()
+        UpdateGrid()
+    End Sub
+
+    Private Sub MakeLabelColumnVisible()
+        If ucrChkIncludeVariable.Checked Then
+            grdCurrentWorkSheet.ShowColumns(2, 1)
+        Else
+            grdCurrentWorkSheet.HideColumns(2, 1)
+        End If
+    End Sub
+
+    Private Sub ucrChkIncludeVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeVariable.ControlValueChanged
+        MakeLabelColumnVisible()
     End Sub
 End Class
