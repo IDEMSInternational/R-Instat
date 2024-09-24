@@ -4,54 +4,63 @@ DataSheet$set("public", "merge_data", function(new_data, by = NULL, type = "left
   old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   by_col_attributes <- list()
+  
   if(!is.null(by)) {
     for(i in seq_along(by)) {
-      # TODO also check that !is.null(names(by)) ?
-      by_col_attributes[[names(by)[[i]]]] <- get_column_attributes(curr_data[[names(by)[[i]]]])
+      # Collect column attributes
+      by_col_attributes[[by[[i]]]] <- get_column_attributes(curr_data[[by[[i]]]])
+      
+      # Check and align the data types for each "by" column
+      if (class(curr_data[[by[[i]]]]) != class(new_data[[by[[i]]]])) {
+        warning(paste0("Type is different for ", by[[i]], " in the two data frames. Setting as numeric in both data frames."))
+        
+        # Convert factors to numeric if necessary
+        if (class(curr_data[[by[[i]]]]) == "factor") {
+          curr_data[[by[[i]]]] <- as.numeric(as.character(curr_data[[by[[i]]]]))
+        } else if (class(new_data[[by[[i]]]]) == "factor") {
+          new_data[[by[[i]]]] <- as.numeric(as.character(new_data[[by[[i]]]]))
+        } else {
+          stop(paste0("Type is different for ", by[[i]], " in the two data frames and cannot be coerced."))
+        }
+      }
     }
   }
-  # if the class is different, set to be the same or throw a useful warning
-  if (class(curr_data[[by]]) != class(new_data[[by]])){
-    warning(paste0("Type is different for ", by, " in the two data frames. Setting as numeric in both data frames."))
-    if (class(curr_data[[by]]) == "factor"){
-      curr_data[[by]] <- as.numeric(as.character(curr_data[[by]]))
-    } else if (class(curr_data[[by]]) == "numeric"){
-      new_data[[by]] <- as.numeric(as.character(new_data[[by]]))
-    } else {
-      stop(paste0("Type is different for ", by, " in the two data frames."))
-    }
+  
+  # Perform the appropriate join based on the "type" argument
+  if (type == "left") {
+    new_data <- dplyr::left_join(curr_data, new_data, by = by)
+  } else if (type == "right") {
+    new_data <- dplyr::right_join(curr_data, new_data, by = by)
+  } else if (type == "full") {
+    new_data <- dplyr::full_join(curr_data, new_data, by = by)
+  } else if (type == "inner") {
+    new_data <- dplyr::inner_join(curr_data, new_data, by = by)
+  } else {
+    stop("type must be one of left, right, inner, or full")
   }
-  if(type == "left") {
-    new_data <- dplyr::left_join(curr_data, new_data, by)
-  }
-  else if(type == "right") {
-    new_data <- dplyr::right_join(curr_data, new_data, by)
-  }
-  else if(type == "full") {
-    new_data <- dplyr::full_join(curr_data, new_data, by)
-  }
-  else if(type == "inner") {
-    new_data <- dplyr::inner_join(curr_data, new_data, by)
-  }
-  else stop("type must be one of left, right, inner or full")
+  
+  # Update the data in the object
   self$set_data(new_data)
-  self$append_to_changes(Merged_data)
-  #TODO will column/row count be correct here?
-  for(name in names(old_metadata)) {
-    if(!name %in% c("names", "class", "row.names")) {
+  self$append_to_changes("Merged_data")
+  
+  # Restore the old metadata
+  for (name in names(old_metadata)) {
+    if (!name %in% c("names", "class", "row.names")) {
       self$append_to_metadata(name, old_metadata[[name]])
     }
   }
-  self$append_to_metadata(is_calculated_label, TRUE)
+  
+  self$append_to_metadata("is_calculated_label", TRUE)
   self$add_defaults_meta()
   self$add_defaults_variables_metadata(setdiff(names(new_data), names(curr_data)))
-  if(!is.null(by)) {
-    for(i in seq_along(by_col_attributes)) {
-      self$append_column_attributes(col_name = names(by_col_attributes)[i], new_attr = by_col_attributes[[i]])
+  
+  # Add back column attributes for the "by" columns
+  if (!is.null(by)) {
+    for (i in seq_along(by_col_attributes)) {
+      self$append_column_attributes(col_name = by[[i]], new_attr = by_col_attributes[[i]])
     }
   }
-}
-)
+})
 
 DataBook$set("public", "append_summaries_to_data_object", function(out, data_name, columns_to_summarise, summaries, factors = c(), summary_name, calc, calc_name = "") {
   if(!is.character(data_name)) stop("data_name must be of type character")
