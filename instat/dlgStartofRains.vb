@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgStartofRains
-    Private clsCalcRainDay, clsCalcStartDOY, clsConvertColumnTypeFunction, clsGetColumnDataTypeFunction, clsDummyFunction, clsIfelseStatusFunction, clsIfelseStatus1Function, clsAllStatusFunction, clsIsNAStatusFunction, clsCalcStartDate, clsCombinationCalc, clsListCalFunction, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
+    Private clsCalcRainDay, clsCalcStartDOY, clsConvertColumnType1Function, clsConvertColumnType2Function, clsConvertColumnTypeFunction, clsGetColumnDataTypeFunction, clsDummyFunction, clsIfelseStatusFunction, clsIfelseStatus1Function, clsAllStatusFunction, clsIsNAStatusFunction, clsCalcStartDate, clsCombinationCalc, clsListCalFunction, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
     Private clsDayFromAndTo, clsGroupByStation, clsGroupByYear, clsListToTalRain, clsApplyInstatFunction, clsFirstDOY, clsFirstDate As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsRainDayOperator, clsRainDayConditionOperator, clsConditionsAndOperator, clsTRCombineOperator, clsRollingSumRainDayOperator, clsDSCombineOperator, clsDPCombineOperator As New ROperator
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
@@ -288,6 +288,8 @@ Public Class dlgStartofRains
         clsIsNAStatusFunction.Clear()
         clsGetColumnDataTypeFunction.Clear()
         clsConvertColumnTypeFunction.Clear()
+        clsConvertColumnType2Function.Clear()
+        clsConvertColumnType1Function.Clear()
 
         clsSpellsFunction.Clear()
         clsRainDaySpellsOperator.Clear()
@@ -402,6 +404,13 @@ Public Class dlgStartofRains
         clsConvertColumnTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsConvertColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsConvertColumnTypeFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
+
+        clsConvertColumnType1Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertColumnType1Function.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertColumnType1Function.AddParameter("to_type", "year_type", iPosition:=2)
+
+        clsConvertColumnType2Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertColumnType2Function.AddParameter("to_type", "year_type", iPosition:=2)
 
         'TOTAL RAIN: associated with ucrChkTotalRainfall
         clsCalcRainRollingSum.SetRCommand("instat_calculation$new")
@@ -757,6 +766,8 @@ Public Class dlgStartofRains
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnDataTypeFunction, iPosition:=0)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertColumnTypeFunction, iPosition:=1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType1Function, iPosition:=0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType2Function, iPosition:=1)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -910,11 +921,15 @@ Public Class dlgStartofRains
         If Not ucrReceiverYear.IsEmpty Then
             clsGetColumnDataTypeFunction.AddParameter("columns", ucrReceiverYear.GetVariableNames(), iPosition:=1)
             clsConvertColumnTypeFunction.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+            clsConvertColumnType1Function.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+            clsConvertColumnType2Function.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
             clsGroupByYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
         Else
             clsGroupByYear.RemoveParameterByName("calculated_from")
             clsGetColumnDataTypeFunction.RemoveParameterByName("columns")
             clsConvertColumnTypeFunction.RemoveParameterByName("col_names")
+            clsConvertColumnType1Function.RemoveParameterByName("col_names")
+            clsConvertColumnType2Function.RemoveParameterByName("col_names")
         End If
     End Sub
 
@@ -989,6 +1004,8 @@ Public Class dlgStartofRains
     Private Sub ucrSelectorForStartofRains_DataFrameChanged() Handles ucrSelectorForStartofRains.DataFrameChanged
         clsGetColumnDataTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsConvertColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertColumnType1Function.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertColumnType2Function.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_by_year" & Chr(34), iPosition:=0)
         clsDayFilterCalcFromList.ClearParameters()
     End Sub
 
