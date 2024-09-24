@@ -267,7 +267,8 @@ Public Class dlgView
     End Sub
 
     Private Sub cmdViewFormatTable_Click(sender As Object, e As EventArgs) Handles cmdViewFormatTable.Click
-        sdgFormatSummaryTables.ShowDialog()
+        ' sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
+        sdgTableOptions.ShowDialog(Me)
     End Sub
 
     Private Sub ucrPnlViewData_ControlValueChanged(ucrChangedControl As ucrCore)
