@@ -197,7 +197,9 @@ Public Class dlgView
 
     Private Sub TestOKEnabled()
         ' If rdoViewSelectedColumnsRows.Checked Then
-        If Not ucrReceiverView.IsEmpty Then
+        If Not ucrSelectorForView.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        ElseIf Not ucrReceiverView.IsEmpty Then
             If rdoDispSepOutputWindow.Checked Then
                 ucrBase.OKEnabled(True)
             ElseIf rdoDispOutputWindow.Checked Then
@@ -219,11 +221,11 @@ Public Class dlgView
             ucrBase.OKEnabled(False)
         End If
         'Else
-        'If ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-        '    ucrBase.OKEnabled(True)
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
+        If ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
         ' End If
     End Sub
 
