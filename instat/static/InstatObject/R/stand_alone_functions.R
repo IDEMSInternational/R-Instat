@@ -24,11 +24,7 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
         #which are recognised oddly by the R.Net
         out[, i] <- as.character(data[[i]])
       } else {
-        temp_data <- c()
-        for(val in data[[i]]){
-          temp_data <- append(temp_data, format(val, digits = decimal_places[i], scientific = is_scientific[i]))
-        }
-        out[, i] <- temp_data
+        out[,i] <- format(data[[i]], digits = decimal_places[i], scientific = is_scientific[i])
       }
       if (!is.null(na_display)) {
         out[is.na(data[[i]]), i] <- na_display
@@ -2977,14 +2973,23 @@ cumulative_inventory <- function(data, station = NULL, from, to){
     return(data)
 }
 
-getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_regex) {
-  if(use_regex){
+getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_regex, match_entire_cell) {
+  if (use_regex) {
+    # Adjust the search text to match the entire cell if required
+    if (match_entire_cell) {
+      searchText <- paste0("^", searchText, "$")
+    }
     # Find the rows that match the search text using regex
     matchingRows <- stringr::str_detect(data[[column]], stringr::regex(searchText, ignore_case = ignore_case))
-  }else if (is.na(searchText)){
+  } else if (is.na(searchText)) {
     matchingRows <- apply(data[, column, drop = FALSE], 1, function(row) any(is.na(row)))
-  }else{
-    matchingRows <- grepl(searchText, data[[column]], ignore.case = ignore_case)
+  } else {
+    # Adjust the search text to match the entire cell if required
+    if (match_entire_cell) {
+      searchText <- paste0("^", searchText, "$")
+    }
+    # Find the rows that match the search text
+    matchingRows <- grepl(searchText, data[[column]], ignore.case = ignore_case, perl = TRUE)
   }
   # Get the row headers where the search text is found
   rowHeaders <- rownames(data)[matchingRows]
@@ -3349,4 +3354,58 @@ ggwalter_lieth <- function (data, month, station = NULL, p_mes, tm_max, tm_min, 
   }
   
   return(wandlplot)
+}
+
+# Function to check if a repo exists and is in R. Can give either owner and repo, or give url
+check_github_repo <- function(owner = NULL, repo = NULL, url = NULL) {
+  if (!is.null(url)){
+    # Extract the part after 'github.com'
+    url <- sub(".*github.com/", "", url)
+    
+    # Extract the correct parts
+    owner <- dirname(url)
+    repo <- basename(url)
+  }
+  # Check if the package is already installed
+  if (requireNamespace(repo, quietly = TRUE)) {
+    
+    # Get the installed package's remote SHA (if installed via GitHub)
+    local_sha <- packageDescription(repo)$GithubSHA1
+    
+    if (!is.null(local_sha)) {
+      # Get the latest commit SHA from the GitHub repository
+      latest_commit <- tryCatch({
+        response <- gh::gh("/repos/:owner/:repo/commits", owner = owner, repo = repo, .limit = 1)
+        response[[1]]$sha
+      }, error = function(e) {
+	# Handle error if GitHub API call fails
+        return(NULL)
+      })
+      
+      if (!is.null(latest_commit)) {
+        if (local_sha == latest_commit) {
+          return(0)  # Package is installed and up-to-date
+        } else {
+          return(1)  # Package is installed but not the latest version
+        }
+      } else {
+        return(2)  # Unable to retrieve the latest commit from GitHub
+      }
+    } else {
+      return(3)  # Package is installed but not from GitHub
+    }
+  
+  # If not installed, check if the repository exists on GitHub
+  } else {
+    tryCatch({
+      response <- gh::gh("/repos/:owner/:repo", owner = owner, repo = repo, verb = "GET", silent = TRUE)
+      if (response$language == "R") {
+        return(4)  # Repository exists and is in the R language
+      } else {
+        return(5)  # Repository exists, but isn't in the R language
+      }
+    }, error = function(e) {
+      return(6)  # Error occurred, repository doesn't exist
+    }) 
+  }
 }
