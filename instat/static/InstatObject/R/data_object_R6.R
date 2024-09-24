@@ -4525,7 +4525,6 @@ DataSheet$set("public", "has_labels", function(col_names) {
 )
 
 DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
-
   if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
   if(sign_level || signif.stars) message("This is no longer descriptive")
   if(sign_level) end_col = 5 else end_col = 4
@@ -4538,8 +4537,18 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, signi
 
   return_item <- NULL
   mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())  
-  return_item[[paste0("ANOVA table: ", formula_str, sep = "")]] <- anova(mod)[1:end_col]
-  if(means) return_item[[paste0("Means table of ", y_col_name)]] <- model.tables(aov(mod), type = "means")
+  anova_mod <- anova(mod)[1:end_col] %>%
+    tibble::as_tibble(rownames = " ") %>%
+    tibble::add_row(` ` = "Total",
+                    dplyr::summarise(., across(where(is.numeric), sum)))
+  return_item[[paste0("ANOVA table: ", formula_str, sep = "")]] <- anova_mod
+  if(means){
+      if (class(mod$model[[x_col_names]]) == "numeric"){
+          return_item[[paste0("Means table of ", y_col_name)]] <- mod$coefficients
+      } else {
+          return_item[[paste0("Means table of ", y_col_name)]] <- model.tables(aov(mod), type = "means")
+      }
+  }
   return(return_item)
 }
 )
