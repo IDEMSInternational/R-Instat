@@ -65,6 +65,9 @@ Public Class sdgSummaries
         ucrChkIncludeVariable.AddParameterValuesCondition(True, "check", "True")
         ucrChkIncludeVariable.AddParameterValuesCondition(False, "check", "False")
 
+        ucrSelectVariables.SetParameter(New RParameter("data_name", 0))
+        ucrSelectVariables.SetParameterIsString()
+
         ucrChkNonMissing.SetParameter(New RParameter("summary_count_non_missing", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_non_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkNonMissing.SetText("N Non Missing")
 
@@ -423,10 +426,8 @@ Public Class sdgSummaries
 
         clsNewLabelDataframeFunction.SetRCommand("data.frame")
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
-        clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
-        clsDefaultRFunction.AddParameter(".fn", "janitor::make_clean_names", iPosition:=5)
-        clsDefaultRFunction.AddParameter("case", Chr(34) & "snake" & Chr(34), iPosition:=7)
-        clsDefaultRFunction.AddParameter("minlength", "8", iPosition:=10)
+
+        clsDefaultRFunction.AddParameter("type", Chr(34) & "multiple" & Chr(34), iPosition:=2)
 
         'updating labels of weighted summaries
         ucrChkSum.SetText("Sum" & strWeightLabel)
@@ -611,6 +612,9 @@ Public Class sdgSummaries
             bOkEnabled = False
         Else
             bOkEnabled = True
+        End If
+        If clsDefaultRFunction.clsParameters.Count > 0 Then
+            frmMain.clsRLink.RunInternalScript(strScript:=clsDefaultRFunction.ToScript, bSilent:=False)
         End If
     End Sub
 
@@ -1014,5 +1018,9 @@ Public Class sdgSummaries
 
     Private Sub ucrChkIncludeVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeVariable.ControlValueChanged
         MakeLabelColumnVisible()
+    End Sub
+
+    Private Sub ucrSelectVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectVariables.ControlValueChanged
+        clsDefaultRFunction.AddParameter("data_name", Chr(34) & ucrSelectVariables.strCurrentDataFrame & Chr(34), iPosition:=1)
     End Sub
 End Class
