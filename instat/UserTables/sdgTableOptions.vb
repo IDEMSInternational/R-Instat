@@ -31,6 +31,8 @@ Public Class sdgTableOptions
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrSdgBaseButtons.iHelpTopicID = 146
+
         ucrPnlThemesPanel.AddRadioButton(rdoSelectTheme)
         ucrPnlThemesPanel.AddRadioButton(rdoManualTheme)
 

@@ -26,8 +26,8 @@ Partial Class ucrHeader
         Me.ucrInputTitleFooter = New instat.ucrInputTextBox()
         Me.lblHeaderSubtitle = New System.Windows.Forms.Label()
         Me.lblHeaderTitle = New System.Windows.Forms.Label()
-        Me.btnSubTitleFormat = New System.Windows.Forms.Button()
-        Me.btnTitleFormat = New System.Windows.Forms.Button()
+        Me.btnSubTitleStyle = New System.Windows.Forms.Button()
+        Me.btnTitleStyle = New System.Windows.Forms.Button()
         Me.ucrInputSubtitle = New instat.ucrInputTextBox()
         Me.ucrInputTitle = New instat.ucrInputTextBox()
         Me.lblSubtitle = New System.Windows.Forms.Label()
@@ -82,23 +82,23 @@ Partial Class ucrHeader
         Me.lblHeaderTitle.TabIndex = 20
         Me.lblHeaderTitle.Text = "Title Footer:"
         '
-        'btnSubTitleFormat
+        'btnSubTitleStyle
         '
-        Me.btnSubTitleFormat.Location = New System.Drawing.Point(372, 40)
-        Me.btnSubTitleFormat.Name = "btnSubTitleFormat"
-        Me.btnSubTitleFormat.Size = New System.Drawing.Size(75, 23)
-        Me.btnSubTitleFormat.TabIndex = 31
-        Me.btnSubTitleFormat.Text = "Format"
-        Me.btnSubTitleFormat.UseVisualStyleBackColor = True
+        Me.btnSubTitleStyle.Location = New System.Drawing.Point(372, 40)
+        Me.btnSubTitleStyle.Name = "btnSubTitleStyle"
+        Me.btnSubTitleStyle.Size = New System.Drawing.Size(75, 23)
+        Me.btnSubTitleStyle.TabIndex = 31
+        Me.btnSubTitleStyle.Text = "Style"
+        Me.btnSubTitleStyle.UseVisualStyleBackColor = True
         '
-        'btnTitleFormat
+        'btnTitleStyle
         '
-        Me.btnTitleFormat.Location = New System.Drawing.Point(374, 42)
-        Me.btnTitleFormat.Name = "btnTitleFormat"
-        Me.btnTitleFormat.Size = New System.Drawing.Size(79, 23)
-        Me.btnTitleFormat.TabIndex = 30
-        Me.btnTitleFormat.Text = "Format"
-        Me.btnTitleFormat.UseVisualStyleBackColor = True
+        Me.btnTitleStyle.Location = New System.Drawing.Point(374, 42)
+        Me.btnTitleStyle.Name = "btnTitleStyle"
+        Me.btnTitleStyle.Size = New System.Drawing.Size(79, 23)
+        Me.btnTitleStyle.TabIndex = 30
+        Me.btnTitleStyle.Text = "Style"
+        Me.btnTitleStyle.UseVisualStyleBackColor = True
         '
         'ucrInputSubtitle
         '
@@ -148,7 +148,7 @@ Partial Class ucrHeader
         '
         Me.grpBoxTitle.Controls.Add(Me.lblTitle)
         Me.grpBoxTitle.Controls.Add(Me.ucrInputTitle)
-        Me.grpBoxTitle.Controls.Add(Me.btnTitleFormat)
+        Me.grpBoxTitle.Controls.Add(Me.btnTitleStyle)
         Me.grpBoxTitle.Controls.Add(Me.lblHeaderTitle)
         Me.grpBoxTitle.Controls.Add(Me.ucrInputTitleFooter)
         Me.grpBoxTitle.Location = New System.Drawing.Point(4, 5)
@@ -162,7 +162,7 @@ Partial Class ucrHeader
         '
         Me.grpBoxSubtitle.Controls.Add(Me.lblHeaderSubtitle)
         Me.grpBoxSubtitle.Controls.Add(Me.ucrInputSubtitleFooter)
-        Me.grpBoxSubtitle.Controls.Add(Me.btnSubTitleFormat)
+        Me.grpBoxSubtitle.Controls.Add(Me.btnSubTitleStyle)
         Me.grpBoxSubtitle.Controls.Add(Me.ucrInputSubtitle)
         Me.grpBoxSubtitle.Controls.Add(Me.lblSubtitle)
         Me.grpBoxSubtitle.Location = New System.Drawing.Point(4, 125)
@@ -191,8 +191,8 @@ Partial Class ucrHeader
     Friend WithEvents ucrInputTitleFooter As ucrInputTextBox
     Friend WithEvents lblHeaderSubtitle As Label
     Friend WithEvents lblHeaderTitle As Label
-    Friend WithEvents btnSubTitleFormat As Button
-    Friend WithEvents btnTitleFormat As Button
+    Friend WithEvents btnSubTitleStyle As Button
+    Friend WithEvents btnTitleStyle As Button
     Friend WithEvents ucrInputSubtitle As ucrInputTextBox
     Friend WithEvents ucrInputTitle As ucrInputTextBox
     Friend WithEvents lblSubtitle As Label

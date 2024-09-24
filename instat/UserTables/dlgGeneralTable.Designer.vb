@@ -134,7 +134,7 @@ Partial Class dlgGeneralTable
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgGeneralTable"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Table"
+        Me.Text = "Presentation Table"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

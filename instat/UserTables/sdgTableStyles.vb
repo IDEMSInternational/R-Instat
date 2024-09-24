@@ -18,6 +18,7 @@ Public Class sdgTableStyles
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBaseSubdialog.iHelpTopicID = 150
 
         '-----------------
         ucrCboColorText.SetDropDownStyleAsNonEditable()

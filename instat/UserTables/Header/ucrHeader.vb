@@ -126,7 +126,7 @@ Public Class ucrHeader
 
     End Sub
 
-    Private Sub btnTitleFormat_Click(sender As Object, e As EventArgs) Handles btnTitleFormat.Click
+    Private Sub btnTitleFormat_Click(sender As Object, e As EventArgs) Handles btnTitleStyle.Click
         Dim clsListStyleRFunction As RFunction = clsTablesUtils.ShowStyleSubDialog(Me.ParentForm, clsTitleStyleRFunction)
         If clsListStyleRFunction Is Nothing Then
             Exit Sub
@@ -136,7 +136,7 @@ Public Class ucrHeader
     End Sub
 
 
-    Private Sub btnSubtitleFormat_Click(sender As Object, e As EventArgs) Handles btnSubTitleFormat.Click
+    Private Sub btnSubtitleFormat_Click(sender As Object, e As EventArgs) Handles btnSubTitleStyle.Click
         Dim clsListStyleRFunction As RFunction = clsTablesUtils.ShowStyleSubDialog(Me.ParentForm, clsSubtitleStyleRFunction)
         If clsListStyleRFunction Is Nothing Then
             Exit Sub

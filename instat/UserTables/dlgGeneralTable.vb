@@ -37,6 +37,8 @@ Public Class dlgGeneralTable
     End Sub
 
     Private Sub initialiseDialog()
+        ucrBase.iHelpTopicID = 419
+
         ucrReceiverMultipleCols.SetParameter(New RParameter("df_columns_to_use_param", 0, bNewIncludeArgumentName:=False))
         ucrReceiverMultipleCols.SetParameterIsRFunction()
         ucrReceiverMultipleCols.Selector = ucrSelectorCols
