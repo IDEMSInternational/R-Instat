@@ -153,7 +153,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkCorrelations.AddParameterValuesCondition(True, "corr", "True")
         ucrChkCorrelations.AddParameterValuesCondition(False, "corr", "False")
 
-        ucrChkMeans.SetText("Means")
+        ucrChkMeans.SetText("Means/Model")
         ucrChkMeans.SetParameter(New RParameter("means", 5))
         ucrChkMeans.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMeans.SetRDefault("FALSE")
@@ -375,7 +375,6 @@ Public Class dlgDescribeTwoVariable
         clsSkimrFunction.SetRCommand("skim_without_charts")
 
         clsRAnovaTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$anova_tables")
-        clsRAnovaTableFunction.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsRAnovaTableFunction.AddParameter("x_col_names", clsRFunctionParameter:=clsCombineAnovaFunction, iPosition:=1)
         clsRAnovaTableFunction.AddParameter("y_col_name", clsRFunctionParameter:=clsCombineFunction, iPosition:=2)
         clsRAnovaTableFunction.AddParameter("signif.stars", "FALSE", iPosition:=3)
@@ -1329,6 +1328,7 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ucrSelectorDescribeTwoVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeTwoVar.ControlValueChanged
         clsGroupByPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsRAnovaTableFunction.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub
 
     Private Sub UpdateSummaryTableFunction()
