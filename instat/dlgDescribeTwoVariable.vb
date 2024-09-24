@@ -196,7 +196,7 @@ Public Class dlgDescribeTwoVariable
 
         ucrSaveTable.SetDataFrameSelector(ucrSelectorDescribeTwoVar.ucrAvailableDataFrames)
         ucrSaveTable.SetIsTextBox()
-
+        rdoThreeVariable.Enabled = False
         ucrReorderSummary.bDataIsSummaries = True
     End Sub
 
@@ -636,7 +636,7 @@ Public Class dlgDescribeTwoVariable
             ucrChkSwapXYVar.Visible = IsNumericByNumeric() OrElse IsFactorByNumeric()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
             cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
-
+            ucrChkOmitMissing.Visible = ucrChkSwapXYVar.Checked
             'ElseIf rdoThreeVariable.Checked Then
             '    ucrChkOmitMissing.Visible = IsFactorByNumericByNumeric() OrElse IsNumericByNumericByFactor()
             'Else
@@ -714,16 +714,11 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.Visible = True
                 ucrSaveTable.Location = New Point(23, 450)
                 clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
-                'ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                 ucrSaveTable.SetPrefix("summary_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
                 ucrSaveTable.SetCheckBoxText("Store Table")
-                'clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                '                     strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                '                     strRObjectFormatToAssignTo:=RObjectFormat.Html,
-                '                     strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
-                '                     strObjectName:="last_table")
+
             ElseIf IsFactorByFactor() Then
                 ucrSaveTable.Visible = True
                 cmdFormatTable.Visible = True
