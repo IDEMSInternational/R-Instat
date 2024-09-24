@@ -464,21 +464,19 @@ Public Class frmMain
             Dim lastExitStatus As String = File.ReadAllText(strMarkerFilePath).Trim()
             If lastExitStatus <> "CleanExit" AndAlso
                 MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
-                              "Would you like to see auto recovery options?",
+                              "The Tools > Restore Backup dialog allows you to restore backed-up data, or save the corresponding log file." & Environment.NewLine &
+                              "To proceed, click Yes.",
                               MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
 
-                dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
-                dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
-                dlgAutoSaveRecovery.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
-                dlgAutoSaveRecovery.ShowDialog()
+                dlgRestoreBackup.ShowDialog()
 
                 'todo. the dialog design is meant to only return just one option; script, data file path or new session.
                 'refactor the dialog to enforce the design
 
                 'get the R script from read file if selected by the user
-                strScript = dlgAutoSaveRecovery.GetScript()
+                strScript = dlgRestoreBackup.GetScript()
                 'get the data file path if selected by the user
-                strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
+                strDataFilePath = dlgRestoreBackup.GetDataFilePath()
             End If
         End If
 
@@ -1408,10 +1406,6 @@ Public Class frmMain
 
     Private Sub mnuClimateFileImportfromClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportfromClimSoft.Click
         dlgClimSoft.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimateFileImportfromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportfromClimSoftWizard.Click
-        dlgClimsoftWizard.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticFileImportFromCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportfromCliData.Click
