@@ -41,19 +41,19 @@ Partial Class dlgView
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.rdoDispSepOutputWindow = New System.Windows.Forms.RadioButton()
         Me.rdoDispOutputWindow = New System.Windows.Forms.RadioButton()
-        Me.lblDisplayFrom = New System.Windows.Forms.Label()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.rdoHTMLOutputWindow = New System.Windows.Forms.RadioButton()
+        Me.cmdViewFormatTable = New System.Windows.Forms.Button()
+        Me.ucrChkDisplayPosition = New instat.ucrCheck()
         Me.ucrSaveData = New instat.ucrSave()
         Me.ucrReceiverSortCol = New instat.ucrReceiverSingle()
         Me.ucrChkSortColumn = New instat.ucrCheck()
         Me.ucrNudNumberRows = New instat.ucrNud()
-        Me.ucrChkSpecifyRows = New instat.ucrCheck()
         Me.ucrPnlDisplayWindow = New instat.UcrPanel()
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkDisplayPosition = New instat.ucrCheck()
+        Me.ucrChkSpecifyRows = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -72,7 +72,7 @@ Partial Class dlgView
         Me.rdoDispSepOutputWindow.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoDispSepOutputWindow.Location = New System.Drawing.Point(10, 240)
         Me.rdoDispSepOutputWindow.Name = "rdoDispSepOutputWindow"
-        Me.rdoDispSepOutputWindow.Size = New System.Drawing.Size(210, 17)
+        Me.rdoDispSepOutputWindow.Size = New System.Drawing.Size(166, 17)
         Me.rdoDispSepOutputWindow.TabIndex = 6
         Me.rdoDispSepOutputWindow.TabStop = True
         Me.rdoDispSepOutputWindow.Text = "Display in R Viewer"
@@ -83,22 +83,11 @@ Partial Class dlgView
         Me.rdoDispOutputWindow.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoDispOutputWindow.Location = New System.Drawing.Point(10, 217)
         Me.rdoDispOutputWindow.Name = "rdoDispOutputWindow"
-        Me.rdoDispOutputWindow.Size = New System.Drawing.Size(210, 17)
+        Me.rdoDispOutputWindow.Size = New System.Drawing.Size(177, 17)
         Me.rdoDispOutputWindow.TabIndex = 7
         Me.rdoDispOutputWindow.TabStop = True
         Me.rdoDispOutputWindow.Text = "Display in Output Window"
         Me.rdoDispOutputWindow.UseVisualStyleBackColor = True
-        '
-        'lblDisplayFrom
-        '
-        Me.lblDisplayFrom.AutoSize = True
-        Me.lblDisplayFrom.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDisplayFrom.Location = New System.Drawing.Point(248, 235)
-        Me.lblDisplayFrom.Name = "lblDisplayFrom"
-        Me.lblDisplayFrom.Size = New System.Drawing.Size(70, 13)
-        Me.lblDisplayFrom.TabIndex = 14
-        Me.lblDisplayFrom.Tag = ""
-        Me.lblDisplayFrom.Text = "Display From:"
         '
         'lblNumberofRows
         '
@@ -116,11 +105,30 @@ Partial Class dlgView
         Me.rdoHTMLOutputWindow.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoHTMLOutputWindow.Location = New System.Drawing.Point(10, 194)
         Me.rdoHTMLOutputWindow.Name = "rdoHTMLOutputWindow"
-        Me.rdoHTMLOutputWindow.Size = New System.Drawing.Size(210, 17)
+        Me.rdoHTMLOutputWindow.Size = New System.Drawing.Size(198, 17)
         Me.rdoHTMLOutputWindow.TabIndex = 8
         Me.rdoHTMLOutputWindow.TabStop = True
         Me.rdoHTMLOutputWindow.Text = "Display HTML in Output Window"
         Me.rdoHTMLOutputWindow.UseVisualStyleBackColor = True
+        '
+        'cmdViewFormatTable
+        '
+        Me.cmdViewFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdViewFormatTable.Location = New System.Drawing.Point(241, 194)
+        Me.cmdViewFormatTable.Name = "cmdViewFormatTable"
+        Me.cmdViewFormatTable.Size = New System.Drawing.Size(104, 23)
+        Me.cmdViewFormatTable.TabIndex = 20
+        Me.cmdViewFormatTable.Text = "Format Table..."
+        Me.cmdViewFormatTable.UseVisualStyleBackColor = True
+        '
+        'ucrChkDisplayPosition
+        '
+        Me.ucrChkDisplayPosition.AutoSize = True
+        Me.ucrChkDisplayPosition.Checked = True
+        Me.ucrChkDisplayPosition.Location = New System.Drawing.Point(233, 235)
+        Me.ucrChkDisplayPosition.Name = "ucrChkDisplayPosition"
+        Me.ucrChkDisplayPosition.Size = New System.Drawing.Size(135, 23)
+        Me.ucrChkDisplayPosition.TabIndex = 19
         '
         'ucrSaveData
         '
@@ -166,21 +174,12 @@ Partial Class dlgView
         Me.ucrNudNumberRows.TabIndex = 13
         Me.ucrNudNumberRows.Value = New Decimal(New Integer() {6, 0, 0, 0})
         '
-        'ucrChkSpecifyRows
-        '
-        Me.ucrChkSpecifyRows.AutoSize = True
-        Me.ucrChkSpecifyRows.Checked = False
-        Me.ucrChkSpecifyRows.Location = New System.Drawing.Point(248, 235)
-        Me.ucrChkSpecifyRows.Name = "ucrChkSpecifyRows"
-        Me.ucrChkSpecifyRows.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkSpecifyRows.TabIndex = 5
-        '
         'ucrPnlDisplayWindow
         '
         Me.ucrPnlDisplayWindow.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlDisplayWindow.Location = New System.Drawing.Point(10, 191)
         Me.ucrPnlDisplayWindow.Name = "ucrPnlDisplayWindow"
-        Me.ucrPnlDisplayWindow.Size = New System.Drawing.Size(221, 83)
+        Me.ucrPnlDisplayWindow.Size = New System.Drawing.Size(213, 83)
         Me.ucrPnlDisplayWindow.TabIndex = 7
         '
         'ucrReceiverView
@@ -217,29 +216,28 @@ Partial Class dlgView
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
         '
-        'ucrChkDisplayPosition
+        'ucrChkSpecifyRows
         '
-        Me.ucrChkDisplayPosition.AutoSize = True
-        Me.ucrChkDisplayPosition.Checked = True
-        Me.ucrChkDisplayPosition.Location = New System.Drawing.Point(273, 261)
-        Me.ucrChkDisplayPosition.Name = "ucrChkDisplayPosition"
-        Me.ucrChkDisplayPosition.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkDisplayPosition.TabIndex = 19
+        Me.ucrChkSpecifyRows.AutoSize = True
+        Me.ucrChkSpecifyRows.Checked = True
+        Me.ucrChkSpecifyRows.Location = New System.Drawing.Point(233, 212)
+        Me.ucrChkSpecifyRows.Name = "ucrChkSpecifyRows"
+        Me.ucrChkSpecifyRows.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkSpecifyRows.TabIndex = 5
         '
         'dlgView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(416, 393)
+        Me.ClientSize = New System.Drawing.Size(416, 350)
+        Me.Controls.Add(Me.cmdViewFormatTable)
         Me.Controls.Add(Me.ucrChkDisplayPosition)
         Me.Controls.Add(Me.ucrSaveData)
         Me.Controls.Add(Me.ucrReceiverSortCol)
         Me.Controls.Add(Me.ucrChkSortColumn)
         Me.Controls.Add(Me.rdoHTMLOutputWindow)
         Me.Controls.Add(Me.ucrNudNumberRows)
-        Me.Controls.Add(Me.ucrChkSpecifyRows)
-        Me.Controls.Add(Me.lblDisplayFrom)
         Me.Controls.Add(Me.lblNumberofRows)
         Me.Controls.Add(Me.rdoDispOutputWindow)
         Me.Controls.Add(Me.rdoDispSepOutputWindow)
@@ -248,6 +246,7 @@ Partial Class dlgView
         Me.Controls.Add(Me.ucrReceiverView)
         Me.Controls.Add(Me.ucrSelectorForView)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrChkSpecifyRows)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -267,12 +266,12 @@ Partial Class dlgView
     Friend WithEvents rdoDispOutputWindow As RadioButton
     Friend WithEvents ucrPnlDisplayWindow As UcrPanel
     Friend WithEvents ucrNudNumberRows As ucrNud
-    Friend WithEvents ucrChkSpecifyRows As ucrCheck
-    Friend WithEvents lblDisplayFrom As Label
     Friend WithEvents lblNumberofRows As Label
     Friend WithEvents ucrChkSortColumn As ucrCheck
     Friend WithEvents rdoHTMLOutputWindow As RadioButton
     Friend WithEvents ucrReceiverSortCol As ucrReceiverSingle
     Friend WithEvents ucrSaveData As ucrSave
     Friend WithEvents ucrChkDisplayPosition As ucrCheck
+    Friend WithEvents cmdViewFormatTable As Button
+    Friend WithEvents ucrChkSpecifyRows As ucrCheck
 End Class
