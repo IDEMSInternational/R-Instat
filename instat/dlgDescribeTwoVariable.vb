@@ -163,6 +163,11 @@ Public Class dlgDescribeTwoVariable
         ucrChkLevSig.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkLevSig.SetRDefault("FALSE")
 
+        ucrChkTotal.SetText("Total")
+        ucrChkTotal.SetParameter(New RParameter("total", 5))
+        ucrChkTotal.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkTotal.SetRDefault("FALSE")
+
         ucrChkSwapXYVar.SetText("Swap First/Second Variables")
         ucrChkSwapXYVar.AddParameterValuesCondition(True, "var", "True")
         ucrChkSwapXYVar.AddParameterValuesCondition(False, "var", "False")
@@ -497,6 +502,7 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsMapSummaryFunction, New RParameter(".x", 1), iAdditionalPairNo:=3)
         ucrChkMeans.AddAdditionalCodeParameterPair(clsRAnovaSwapTable2Funtion, New RParameter("means", iNewPosition:=5), iAdditionalPairNo:=1)
         ucrChkLevSig.AddAdditionalCodeParameterPair(clsRAnovaSwapTable2Funtion, New RParameter("sign_level", iNewPosition:=4), iAdditionalPairNo:=1)
+        ucrChkTotal.AddAdditionalCodeParameterPair(clsRAnovaSwapTable2Funtion, New RParameter("total", iNewPosition:=4), iAdditionalPairNo:=1)
         ucrChkDisplayMargins.AddAdditionalCodeParameterPair(clsCombineFrequencyColParametersFunction, New RParameter("include_margins", iNewPosition:=5), iAdditionalPairNo:=1)
         ucrChkDisplayAsPercentage.AddAdditionalCodeParameterPair(clsCombineFrequencyColParametersFunction, New RParameter("percentage_type", iNewPosition:=1), iAdditionalPairNo:=1)
 
@@ -520,6 +526,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkSwapXYVar.SetRCode(clsDummyFunction, bReset)
         ucrChkMeans.SetRCode(clsRAnovaTable2Function, bReset)
         ucrChkLevSig.SetRCode(clsRAnovaTable2Function, bReset)
+        ucrChkTotal.SetRCode(clsRAnovaTable2Function, bReset)
         ucrReceiverThreeVariableSecondFactor.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrReceiverThreeVariableThirdVariable.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsCombineFrequencyParametersFunction, bReset)
@@ -636,7 +643,6 @@ Public Class dlgDescribeTwoVariable
             ucrChkSwapXYVar.Visible = IsNumericByNumeric() OrElse IsFactorByNumeric()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
             cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
-            ucrChkOmitMissing.Visible = ucrChkSwapXYVar.Checked
             'ElseIf rdoThreeVariable.Checked Then
             '    ucrChkOmitMissing.Visible = IsFactorByNumericByNumeric() OrElse IsNumericByNumericByFactor()
             'Else
@@ -667,6 +673,7 @@ Public Class dlgDescribeTwoVariable
         cmdFormatTable.Visible = False
         ucrChkMeans.Visible = False
         ucrChkLevSig.Visible = False
+        ucrChkTotal.Visible = False
         cmdMissingOptions.Visible = False
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
@@ -707,10 +714,12 @@ Public Class dlgDescribeTwoVariable
                 cmdFormatTable.Visible = False
                 ucrChkMeans.Visible = True
                 ucrChkLevSig.Visible = True
+                ucrChkTotal.Visible = True
             ElseIf IsNumericByFactor() Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
                 ucrChkMeans.Visible = True
                 ucrChkLevSig.Visible = True
+                ucrChkTotal.Visible = True
                 ucrSaveTable.Visible = True
                 ucrSaveTable.Location = New Point(23, 450)
                 clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
@@ -724,6 +733,7 @@ Public Class dlgDescribeTwoVariable
                 cmdFormatTable.Visible = True
                 ucrChkMeans.Visible = False
                 ucrChkLevSig.Visible = False
+                ucrChkTotal.Visible = False
                 ucrSaveTable.Location = New Point(23, 351)
                 clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
@@ -748,6 +758,7 @@ Public Class dlgDescribeTwoVariable
                     cmdFormatTable.Visible = False
                     ucrChkMeans.Visible = True
                     ucrChkLevSig.Visible = True
+                    ucrChkTotal.Visible = True
                 Else
                     clsDummyFunction.AddParameter("var", "False", iPosition:=5)
                     ucrSaveTable.Visible = True
@@ -757,6 +768,7 @@ Public Class dlgDescribeTwoVariable
                     cmdFormatTable.Visible = True
                     ucrChkMeans.Visible = False
                     ucrChkLevSig.Visible = False
+                    ucrChkTotal.Visible = False
                     ucrSaveTable.Location = New Point(23, 450)
                     clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
                     ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
@@ -808,6 +820,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.Visible = False
                 ucrChkMeans.Visible = True
                 ucrChkLevSig.Visible = True
+                ucrChkTotal.Visible = True
                 If ucrChkSwapXYVar.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMapping2Function)
                     clsDummyFunction.AddParameter("var", "True", iPosition:=5)

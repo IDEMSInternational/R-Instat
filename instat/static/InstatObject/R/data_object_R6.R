@@ -4524,7 +4524,7 @@ DataSheet$set("public", "has_labels", function(col_names) {
 }
 )
 
-DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = TRUE, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
   if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
   if(sign_level || signif.stars) message("This is no longer descriptive")
   if(sign_level) end_col = 5 else end_col = 4
