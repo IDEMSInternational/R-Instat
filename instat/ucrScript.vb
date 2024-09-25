@@ -19,6 +19,7 @@ Imports System.IO
 Imports System.Windows.Controls
 Imports RInsightF461
 Imports ScintillaNET
+Imports RDotNet
 
 Public Class ucrScript
 
@@ -118,6 +119,48 @@ Public Class ucrScript
 
         EnableDisableButtons()
     End Sub
+
+    Function EscapeDoubleQuotes(ByVal input As String) As String
+        ' Replace each double quote with an escaped double quote
+        Return input.Replace("""", "\""")
+    End Function
+
+    Public Sub FormatRCode()
+
+        Try
+            ' Your R script text from Scintilla
+            Dim scriptText As String = EscapeDoubleQuotes(clsScriptActive.SelectedText)
+            Dim clsStylerFunction As New RFunction
+
+            clsStylerFunction.SetPackageName("styler")
+            clsStylerFunction.SetRCommand("style_text")
+            clsStylerFunction.AddParameter("text", Chr(34) & scriptText & Chr(34), bIncludeArgumentName:=False)
+
+            Dim expTemp As SymbolicExpression
+            Dim formattedCode As String() = Nothing
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsStylerFunction.ToScript(), bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                formattedCode = expTemp.AsCharacter().ToArray
+            End If
+
+            ' Join the formattedCode array into a single string
+            Dim formattedText As String = String.Join(Environment.NewLine, formattedCode)
+
+            ' Check if there is any selected text
+            If clsScriptActive.SelectionStart <> clsScriptActive.SelectionEnd Then
+                ' Replace the selected text with the formatted text
+                clsScriptActive.ReplaceSelection(formattedText)
+            Else
+                ' If no text is selected, you could decide what to do (e.g., insert the text at the current caret position)
+                Dim currentPos As Integer = clsScriptActive.CurrentPosition
+                clsScriptActive.InsertText(currentPos, formattedText)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+
 
     ''' <summary>
     ''' Removes the selected text from the active tab, and copies the removed text to the clipboard.

@@ -2848,4 +2848,8 @@ Public Class frmMain
     Private Sub mnuImportFromOpenAppBuilder_Click(sender As Object, e As EventArgs) Handles mnuImportFromOpenAppBuilder.Click
         dlgImportOpenAppBuilder.ShowDialog()
     End Sub
+
+    Private Sub FormatCodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormatCodeToolStripMenuItem.Click
+        ucrScriptWindow.FormatRCode()
+    End Sub
 End Class
