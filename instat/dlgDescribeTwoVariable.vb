@@ -631,7 +631,7 @@ Public Class dlgDescribeTwoVariable
         ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactor()
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrReceiverPercentages.Visible = ucrChkDisplayAsPercentage.Checked AndAlso rdoORow.Checked AndAlso IsFactorByFactor()
-        ucrpnlPercent.Visible = ucrChkDisplayAsPercentage.Checked AndAlso IsFactorByFactor()
+        ucrpnlPercent.Visible = IsFactorByFactor() AndAlso ucrChkDisplayAsPercentage.Checked
         ucrReceiverColumns.Visible = ucrChkDisplayAsPercentage.Checked AndAlso IsFactorByFactor() AndAlso rdoOCol.Checked
         ucrChkCorrelations.Visible = False
         ucrChkSwapXYVar.Visible = False
@@ -840,7 +840,7 @@ Public Class dlgDescribeTwoVariable
                 cmdFormatTable.Visible = False
                 ucrSaveTable.Visible = False
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
-            ElseIf IsFactorByNumericByFactor OrElse IsFactorByFactorByNumeric Then
+            ElseIf IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric() Then
                 ucrSaveTable.SetPrefix("summary_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
@@ -961,9 +961,15 @@ Public Class dlgDescribeTwoVariable
     Private Sub ChangeLocations()
         If rdoTwoVariable.Checked Then
             If IsFactorByNumeric() Then
-                ucrBase.Location = New Point(iUcrBaseXLocation, 487)
-                Me.Size = New Point(iDialogueXsize, 580)
-                cmdFormatTable.Location = New Point(326, 423)
+                If ucrChkSwapXYVar.Checked Then
+                    ucrBase.Location = New Point(iUcrBaseXLocation, 400)
+                    Me.Size = New Point(iDialogueXsize, 500)
+                    cmdFormatTable.Location = New Point(326, 350)
+                Else
+                    ucrBase.Location = New Point(iUcrBaseXLocation, 487)
+                    Me.Size = New Point(iDialogueXsize, 580)
+                    cmdFormatTable.Location = New Point(326, 423)
+                End If
             ElseIf IsNumericByFactor() Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 319)
                 Me.Size = New Point(iDialogueXsize, 415)
