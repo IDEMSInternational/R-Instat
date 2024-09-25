@@ -1068,4 +1068,7 @@ Public Class ucrScript
         sender.Dispose()
     End Sub
 
+    Private Sub mnuReformatCode_Click(sender As Object, e As EventArgs) Handles mnuReformatCode.Click
+        FormatRCode()
+    End Sub
 End Class
