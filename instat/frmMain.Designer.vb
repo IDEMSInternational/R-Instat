@@ -254,6 +254,7 @@ Partial Class frmMain
         Me.ToolStripSeparator70 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticCheckDataHomogenization = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCheckDataCheckStationLocations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCheckDataDistances = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCimaticPrepareTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareConversions = New System.Windows.Forms.ToolStripMenuItem()
@@ -1818,6 +1819,7 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
         Me.ToolStripSeparator15.Size = New System.Drawing.Size(423, 6)
+        Me.ToolStripSeparator15.Size = New System.Drawing.Size(279, 6)
         '
         'mnuClimaticFileExportToClimsoft
         '
@@ -2068,7 +2070,7 @@ Partial Class frmMain
         '
         'mnuClimaticCheckData
         '
-        Me.mnuClimaticCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCheckDataInventory, Me.mnuClimaticCheckDataDisplayDaily, Me.ToolStripSeparator65, Me.mnuClimaticCheckDataFillMissingValues, Me.mnuClimaticCheckDataBoxplot, Me.mnuClimaticCheckDataQCTemperatures, Me.mnuClimaticCheckDataQCRainfall, Me.ToolStripSeparator70, Me.mnuClimaticCheckDataHomogenization, Me.mnuClimaticCheckDataCheckStationLocations})
+        Me.mnuClimaticCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCheckDataInventory, Me.mnuClimaticCheckDataDisplayDaily, Me.ToolStripSeparator65, Me.mnuClimaticCheckDataFillMissingValues, Me.mnuClimaticCheckDataBoxplot, Me.mnuClimaticCheckDataQCTemperatures, Me.mnuClimaticCheckDataQCRainfall, Me.ToolStripSeparator70, Me.mnuClimaticCheckDataHomogenization, Me.mnuClimaticCheckDataCheckStationLocations, Me.mnuClimaticCheckDataDistances})
         Me.mnuClimaticCheckData.Name = "mnuClimaticCheckData"
         Me.mnuClimaticCheckData.Size = New System.Drawing.Size(325, 34)
         Me.mnuClimaticCheckData.Text = "Check Data"
@@ -2130,6 +2132,13 @@ Partial Class frmMain
         Me.mnuClimaticCheckDataCheckStationLocations.Name = "mnuClimaticCheckDataCheckStationLocations"
         Me.mnuClimaticCheckDataCheckStationLocations.Size = New System.Drawing.Size(313, 34)
         Me.mnuClimaticCheckDataCheckStationLocations.Text = "Check Station Locations..."
+        '
+        'mnuClimaticCheckDataDistances
+        '
+        Me.mnuClimaticCheckDataDistances.Enabled = False
+        Me.mnuClimaticCheckDataDistances.Name = "mnuClimaticCheckDataDistances"
+        Me.mnuClimaticCheckDataDistances.Size = New System.Drawing.Size(210, 22)
+        Me.mnuClimaticCheckDataDistances.Text = "Distances..."
         '
         'mnuClimaticPrepare
         '
@@ -5268,7 +5277,7 @@ Partial Class frmMain
         Me.MainMenuStrip = Me.mnuBar
         Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "frmMain"
-        Me.Text = "R-Instat " + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString + "." + My.Application.Info.Version.Build.ToString
+        Me.Text = "R-Instat .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.stsStrip.ResumeLayout(False)
         Me.stsStrip.PerformLayout()
@@ -5979,4 +5988,5 @@ Partial Class frmMain
     Friend WithEvents mnuImportFromOpenAppBuilder As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
     Friend WithEvents FormatCodeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuClimaticCheckDataDistances As ToolStripMenuItem
 End Class

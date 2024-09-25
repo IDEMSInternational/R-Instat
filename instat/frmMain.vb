@@ -2851,5 +2851,7 @@ Public Class frmMain
 
     Private Sub FormatCodeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormatCodeToolStripMenuItem.Click
         ucrScriptWindow.FormatRCode()
+    Private Sub mnuClimaticCheckDataDistances_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDistances.Click
+        dlgDistances.ShowDialog()
     End Sub
 End Class
