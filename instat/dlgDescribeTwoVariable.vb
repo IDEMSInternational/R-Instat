@@ -203,6 +203,7 @@ Public Class dlgDescribeTwoVariable
         ucrSaveTable.SetIsTextBox()
         rdoThreeVariable.Enabled = False
         ucrReorderSummary.bDataIsSummaries = True
+        AddRemoveTotalParm()
     End Sub
 
     Private Sub SetDefaults()
@@ -502,7 +503,6 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverFirstVars.AddAdditionalCodeParameterPair(clsMapSummaryFunction, New RParameter(".x", 1), iAdditionalPairNo:=3)
         ucrChkMeans.AddAdditionalCodeParameterPair(clsRAnovaSwapTable2Funtion, New RParameter("means", iNewPosition:=5), iAdditionalPairNo:=1)
         ucrChkLevSig.AddAdditionalCodeParameterPair(clsRAnovaSwapTable2Funtion, New RParameter("sign_level", iNewPosition:=4), iAdditionalPairNo:=1)
-        ucrChkTotal.AddAdditionalCodeParameterPair(clsRAnovaSwapTable2Funtion, New RParameter("total", iNewPosition:=4), iAdditionalPairNo:=1)
         ucrChkDisplayMargins.AddAdditionalCodeParameterPair(clsCombineFrequencyColParametersFunction, New RParameter("include_margins", iNewPosition:=5), iAdditionalPairNo:=1)
         ucrChkDisplayAsPercentage.AddAdditionalCodeParameterPair(clsCombineFrequencyColParametersFunction, New RParameter("percentage_type", iNewPosition:=1), iAdditionalPairNo:=1)
 
@@ -526,7 +526,6 @@ Public Class dlgDescribeTwoVariable
         ucrChkSwapXYVar.SetRCode(clsDummyFunction, bReset)
         ucrChkMeans.SetRCode(clsRAnovaTable2Function, bReset)
         ucrChkLevSig.SetRCode(clsRAnovaTable2Function, bReset)
-        ucrChkTotal.SetRCode(clsRAnovaTable2Function, bReset)
         ucrReceiverThreeVariableSecondFactor.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrReceiverThreeVariableThirdVariable.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsCombineFrequencyParametersFunction, bReset)
@@ -534,6 +533,7 @@ Public Class dlgDescribeTwoVariable
         bRcodeSet = True
 
         FillListView()
+        AddRemoveTotalParm()
     End Sub
 
     Public Sub TestOKEnabled()
@@ -1079,7 +1079,7 @@ Public Class dlgDescribeTwoVariable
                 clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverThreeVariableSecondFactor.GetVariableNames & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames & "," & ".x" & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ".x")
                 clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
-            ElseIf IsFactorByFactorByNumeric Then
+            ElseIf IsFactorByFactorByNumeric() Then
                 clsMapSummaryFunction.AddParameter(".x", "c(" & ucrReceiverFirstVars.GetVariableNames.Replace("c(", "").Replace(")", "") & "," & ucrReceiverThreeVariableSecondFactor.GetVariableNames.Replace("c(", "").Replace(")", "") & ")")
                 clsSummaryTableFunction.AddParameter("factors", ".x")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverThreeVariableThirdVariable.GetVariableNames)
@@ -1358,7 +1358,7 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoThreeVariable.Checked Then
             If IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
                 clsSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesListFunction, iPosition:=4)
-            ElseIf IsFactorByFactorByFactor Then
+            ElseIf IsFactorByFactorByFactor() Then
                 clsSummaryTableFunction.AddParameter("summaries", "count_label", iPosition:=4)
             End If
         End If
@@ -1418,9 +1418,9 @@ Public Class dlgDescribeTwoVariable
                 strSummaryName = "ANOVA tables"
             ElseIf IsFactorByFactorByFactor() Then
                 strSummaryName = "Frequency tables"
-            ElseIf IsFactorByNumericByFactor Then
+            ElseIf IsFactorByNumericByFactor() Then
                 strSummaryName = "Summary tables"
-            ElseIf IsFactorByFactorByNumeric Then
+            ElseIf IsFactorByFactorByNumeric() Then
                 strSummaryName = "Summary tables"
             Else
                 strSummaryName = ""
@@ -1755,5 +1755,15 @@ Public Class dlgDescribeTwoVariable
         Else
             clsDummyFunction.AddParameter("percent", "cell", iPosition:=6)
         End If
+    End Sub
+
+    Private Sub ucrChkTotal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTotal.ControlValueChanged
+        AddRemoveTotalParm()
+    End Sub
+
+    Private Sub AddRemoveTotalParm()
+        clsRAnovaTable2Function.AddParameter("total", If(ucrChkTotal.Checked, "TRUE", "FALSE"), iPosition:=6)
+        clsRAnovaSwapTable2Funtion.AddParameter("total", If(ucrChkTotal.Checked AndAlso ucrChkSwapXYVar.Checked, "TRUE", "FALSE"), iPosition:=6)
+
     End Sub
 End Class

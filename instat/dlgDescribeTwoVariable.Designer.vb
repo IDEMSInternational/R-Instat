@@ -601,7 +601,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.ucrChkLevSig.AutoSize = True
         Me.ucrChkLevSig.Checked = False
-        Me.ucrChkLevSig.Location = New System.Drawing.Point(596, 308)
+        Me.ucrChkLevSig.Location = New System.Drawing.Point(596, 279)
         Me.ucrChkLevSig.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrChkLevSig.Name = "ucrChkLevSig"
         Me.ucrChkLevSig.Size = New System.Drawing.Size(129, 34)
@@ -696,12 +696,12 @@ Partial Class dlgDescribeTwoVariable
         Me.Controls.Add(Me.ucrChkDisplayMargins)
         Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.ucrChkSummariesRowCol)
-        Me.Controls.Add(Me.ucrChkLevSig)
         Me.Controls.Add(Me.ucrChkSwapXYVar)
         Me.Controls.Add(Me.ucrChkCorrelations)
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.lblThirdVariable)
         Me.Controls.Add(Me.ucrChkMeans)
+        Me.Controls.Add(Me.ucrChkLevSig)
         Me.Controls.Add(Me.ucrChkTotal)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
