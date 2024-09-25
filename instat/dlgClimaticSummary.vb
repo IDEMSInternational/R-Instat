@@ -55,7 +55,7 @@ Public Class dlgClimaticSummary
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 510
-        ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
+        'ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
         cmdMissingOptions.Enabled = False
 
         ucrSelectorVariable.SetParameter(New RParameter("data_name", 0))
@@ -129,7 +129,7 @@ Public Class dlgClimaticSummary
         ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 5))
         ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
         ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDropUnusedLevels.SetRDefault("FALSE")
+        ucrChkDropUnusedLevels.SetRDefault("TRUE")
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -228,6 +228,7 @@ Public Class dlgClimaticSummary
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
         ucrChkPrintOutput.SetRCode(clsDefaultFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsDefaultFunction, bReset)
+        ucrChkDropUnusedLevels.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverDate.SetRCode(clsAddDateFunction, bReset)
 
         ucrPnlAnnualWithin.SetRCode(clsDummyFunction, bReset)
