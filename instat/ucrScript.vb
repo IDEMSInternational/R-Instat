@@ -1025,9 +1025,13 @@ Public Class ucrScript
         TabControl.SelectedTab.Text = sender.text
         sender.Dispose()
     End Sub
-
     Private Sub mnuReformatCode_Click(sender As Object, e As EventArgs) Handles mnuReformatCode.Click
         Try
+            ' Exit early if no text is selected
+            If clsScriptActive.SelectionStart = clsScriptActive.SelectionEnd Then
+                Exit Sub
+            End If
+
             ' Your R script text from Scintilla
             Dim scriptText As String = clsScriptActive.SelectedText.Replace("""", "\""")
             Dim clsStylerFunction As New RFunction
@@ -1046,17 +1050,12 @@ Public Class ucrScript
             ' Join the formattedCode array into a single string
             Dim formattedText As String = String.Join(Environment.NewLine, formattedCode)
 
-            ' Check if there is any selected text
-            If clsScriptActive.SelectionStart <> clsScriptActive.SelectionEnd Then
-                ' Replace the selected text with the formatted text
-                clsScriptActive.ReplaceSelection(formattedText)
-            Else
-                ' If no text is selected, you could decide what to do (e.g., insert the text at the current caret position)
-                Dim currentPos As Integer = clsScriptActive.CurrentPosition
-                clsScriptActive.InsertText(currentPos, formattedText)
-            End If
+            ' Replace the selected text with the formatted text
+            clsScriptActive.ReplaceSelection(formattedText)
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
+
 End Class
