@@ -124,7 +124,7 @@ Partial Class dlgGeneralForGraphics
         Me.grpAethetics.Size = New System.Drawing.Size(174, 257)
         Me.grpAethetics.TabIndex = 23
         Me.grpAethetics.TabStop = False
-        Me.grpAethetics.Text = "Aethetics:"
+        Me.grpAethetics.Text = "Aesthetics"
         '
         'ucrChkUseasNumeric
         '
@@ -645,7 +645,7 @@ Partial Class dlgGeneralForGraphics
         Me.Name = "dlgGeneralForGraphics"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "General "
-        Me.Text = "General Graphics"
+        Me.Text = "General"
         Me.grpAethetics.ResumeLayout(False)
         Me.grpAethetics.PerformLayout()
         Me.ContextMenuPackagesList.ResumeLayout(False)
