@@ -1026,36 +1026,28 @@ Public Class ucrScript
         sender.Dispose()
     End Sub
     Private Sub mnuReformatCode_Click(sender As Object, e As EventArgs) Handles mnuReformatCode.Click
-        Try
-            ' Exit early if no text is selected
-            If clsScriptActive.SelectionStart = clsScriptActive.SelectionEnd Then
-                Exit Sub
-            End If
+        ' Exit early if no text is selected
+        If clsScriptActive.SelectionStart = clsScriptActive.SelectionEnd Then
+            Exit Sub
+        End If
 
-            ' Your R script text from Scintilla
-            Dim scriptText As String = clsScriptActive.SelectedText.Replace("""", "\""")
-            Dim clsStylerFunction As New RFunction
+        ' Your R script text from Scintilla
+        Dim scriptText As String = clsScriptActive.SelectedText.Replace("""", "\""")
+        Dim clsStylerFunction As New RFunction
 
-            clsStylerFunction.SetPackageName("styler")
-            clsStylerFunction.SetRCommand("style_text")
-            clsStylerFunction.AddParameter("text", Chr(34) & scriptText & Chr(34), bIncludeArgumentName:=False)
+        clsStylerFunction.SetPackageName("styler")
+        clsStylerFunction.SetRCommand("style_text")
+        clsStylerFunction.AddParameter("text", Chr(34) & scriptText & Chr(34), bIncludeArgumentName:=False)
 
-            Dim expTemp As SymbolicExpression
-            Dim formattedCode As String() = Nothing
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsStylerFunction.ToScript(), bSilent:=True)
-            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                formattedCode = expTemp.AsCharacter().ToArray
-            End If
+        Dim expTemp As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsStylerFunction.ToScript(), bSilent:=True)
 
-            ' Join the formattedCode array into a single string
+        ' Check if the result from R is valid
+        If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+            ' If valid, format and replace the selected text
+            Dim formattedCode As String() = expTemp.AsCharacter().ToArray
             Dim formattedText As String = String.Join(Environment.NewLine, formattedCode)
-
-            ' Replace the selected text with the formatted text
             clsScriptActive.ReplaceSelection(formattedText)
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+        End If
     End Sub
 
 End Class
