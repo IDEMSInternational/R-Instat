@@ -245,11 +245,11 @@ Partial Class dlgOneVariableSummarise
         Me.ucrNudMaxSum.AutoSize = True
         Me.ucrNudMaxSum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxSum.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxSum.Location = New System.Drawing.Point(246, 249)
+        Me.ucrNudMaxSum.Location = New System.Drawing.Point(224, 249)
         Me.ucrNudMaxSum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxSum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxSum.Name = "ucrNudMaxSum"
-        Me.ucrNudMaxSum.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxSum.Size = New System.Drawing.Size(57, 20)
         Me.ucrNudMaxSum.TabIndex = 8
         Me.ucrNudMaxSum.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '

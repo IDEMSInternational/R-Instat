@@ -278,6 +278,7 @@ Partial Class dlgSummaryTables
         Me.cmdFormatTable.TabIndex = 19
         Me.cmdFormatTable.Text = "Format Table..."
         Me.cmdFormatTable.UseVisualStyleBackColor = True
+        Me.cmdFormatTable.Visible = False
         '
         'rdoFrequencyTable
         '
