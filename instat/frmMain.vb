@@ -222,6 +222,10 @@ Public Class frmMain
         AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
         '---------------------------------------
 
+        '--------------------------------------
+        CreateAdditionalLibraryDirectory()
+        '-------------------------------------
+
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
@@ -392,6 +396,35 @@ Public Class frmMain
             Return True
         End If
     End Function
+
+    Private Sub CreateAdditionalLibraryDirectory()
+        ' Define the custom library path in the ApplicationData folder
+        Dim strLibraryPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "R-Instat", "library")
+
+        Try
+            ' Check if the directory exists, if not, create it
+            If Not Directory.Exists(strLibraryPath) Then
+                Directory.CreateDirectory(strLibraryPath)
+            End If
+
+            'To ensure this part of the code only runs when the application Is Not in the Debug mode (i.e., in Release mode)
+#If Not DEBUG Then
+            ' Add the custom library path to R's .libPaths for user-level package installation
+            Dim strScript As String = $".libPaths(c('{strLibraryPath.Replace("\", "/")}', .libPaths()))" & Environment.NewLine &
+                   "if (length(.libPaths()) > 2) {
+                         current_paths <- .libPaths()
+                         valid_indices <- c(1, 3)[c(1, 3) <= length(current_paths)]
+                         .libPaths(current_paths[valid_indices])
+                   }"
+
+            ' Execute the R script to update the library paths
+            clsRLink.RunScript(strScript:=strScript, bSeparateThread:=False, bSilent:=False)
+#End If
+        Catch ex As Exception
+            ' Handle potential errors (e.g., directory creation failure)
+            MessageBox.Show($"Failed to create or update library directory: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
     Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strRScripts As String = ""
@@ -649,10 +682,6 @@ Public Class frmMain
     Private Sub mnuPrepareColumnNumericRegularSequence_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericRegularSequence.Click
         dlgRegularSequence.SetNumericSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeSpecificTables_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificTables.Click
-        dlgSummaryTables.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareReshapeStack_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeStack.Click
@@ -2776,6 +2805,13 @@ Public Class frmMain
         dlgExportClimaticDefinitions.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeSummaries.Click
+        dlgSummaryTables.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribePresentation_Click(sender As Object, e As EventArgs) Handles mnuDescribePresentation.Click
+        dlgGeneralTable.ShowDialog()
+    End Sub
     Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileToolStripMenuItem.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "13")
     End Sub
@@ -2844,5 +2880,9 @@ Public Class frmMain
 
     Private Sub mnuImportFromOpenAppBuilder_Click(sender As Object, e As EventArgs) Handles mnuImportFromOpenAppBuilder.Click
         dlgImportOpenAppBuilder.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataDistances_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDistances.Click
+        dlgDistances.ShowDialog()
     End Sub
 End Class
