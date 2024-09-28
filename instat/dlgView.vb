@@ -54,6 +54,8 @@ Public Class dlgView
         ucrPnlDisplayWindow.AddParameterValuesCondition(rdoDispSepOutputWindow, "checked", "viewer")
 
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
+        ucrPnlDisplayWindow.AddToLinkedControls(ucrChkRowNumbers, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
+
 
         ucrPnlDisplayFrom.AddRadioButton(rdoBottom)
         ucrPnlDisplayFrom.AddRadioButton(rdoTop)
@@ -64,8 +66,11 @@ Public Class dlgView
         ' This linking only applies if rdoDispOutputWindow is checked
         ucrChkSpecifyRows.SetText("Specify Rows")
         ucrChkSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoTop)
-        ucrChkSpecifyRows.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=6)
-        ucrChkSpecifyRows.AddFunctionNamesCondition(True, {"head", "tail"})
+        '  ucrChkSpecifyRows.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=6)
+        ucrChkRowNumbers.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=6)
+
+
+        ucrChkRowNumbers.AddFunctionNamesCondition(True, {"head", "tail"})
         ucrChkSpecifyRows.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
         '   ucrChkSpecifyRows.bAllowNonConditionValues = True
 
@@ -97,9 +102,9 @@ Public Class dlgView
         ucrSelectorForView.SetParameter(New RParameter("title", 1))
         ucrSelectorForView.SetParameterIsString()
 
-        ucrNudNumberRows.SetParameter(New RParameter("n", 1))
+
         ucrNudNumberRows.Minimum = 1
-        ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
+        ' ucrNudNumberRows.SetLinkedDisplayControl(ucrChkNumbersRows)
 
         ucrSaveData.SetCheckBoxText("Store Data")
         ucrSaveData.SetPrefix("last_table")
@@ -298,6 +303,17 @@ Public Class dlgView
     Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
         DataFrameLength()
         SetSelectorParameterType()
+    End Sub
+
+    Private Sub ucrChkRowNumbers_Load(sender As Object, e As EventArgs) Handles ucrChkRowNumbers.Load
+        If ucrChkRowNumbers.Checked Then
+            ucrNudNumberRows.SetParameter(New RParameter("n", 1))
+            ucrNudNumberRows.Visible = True
+        Else
+            'ucrNudNumberRows.Remove("n")
+            'ucrNudNumberRows.UnSetParameter(New RParameter("n", 1))
+            ucrNudNumberRows.Visible = False
+        End If
     End Sub
 
     Private Sub VariablesVisible()

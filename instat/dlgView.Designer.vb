@@ -44,7 +44,6 @@ Partial Class dlgView
         Me.rdoBottom = New System.Windows.Forms.RadioButton()
         Me.rdoTop = New System.Windows.Forms.RadioButton()
         Me.lblDisplayFrom = New System.Windows.Forms.Label()
-        Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.rdoHTMLOutputWindow = New System.Windows.Forms.RadioButton()
         Me.rdoViewAll = New System.Windows.Forms.RadioButton()
         Me.rdoViewSelectedColumnsRows = New System.Windows.Forms.RadioButton()
@@ -59,6 +58,7 @@ Partial Class dlgView
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkRowNumbers = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -128,17 +128,6 @@ Partial Class dlgView
         Me.lblDisplayFrom.TabIndex = 14
         Me.lblDisplayFrom.Tag = ""
         Me.lblDisplayFrom.Text = "Display From:"
-        '
-        'lblNumberofRows
-        '
-        Me.lblNumberofRows.AutoSize = True
-        Me.lblNumberofRows.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNumberofRows.Location = New System.Drawing.Point(248, 258)
-        Me.lblNumberofRows.Name = "lblNumberofRows"
-        Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
-        Me.lblNumberofRows.TabIndex = 10
-        Me.lblNumberofRows.Tag = "Number_of_rows"
-        Me.lblNumberofRows.Text = "Number of Rows:"
         '
         'rdoHTMLOutputWindow
         '
@@ -227,7 +216,7 @@ Partial Class dlgView
         Me.ucrNudNumberRows.AutoSize = True
         Me.ucrNudNumberRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberRows.Location = New System.Drawing.Point(343, 256)
+        Me.ucrNudNumberRows.Location = New System.Drawing.Point(343, 208)
         Me.ucrNudNumberRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberRows.Name = "ucrNudNumberRows"
@@ -294,12 +283,22 @@ Partial Class dlgView
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
         '
+        'ucrChkRowNumbers
+        '
+        Me.ucrChkRowNumbers.AutoSize = True
+        Me.ucrChkRowNumbers.Checked = False
+        Me.ucrChkRowNumbers.Location = New System.Drawing.Point(248, 206)
+        Me.ucrChkRowNumbers.Name = "ucrChkRowNumbers"
+        Me.ucrChkRowNumbers.Size = New System.Drawing.Size(89, 23)
+        Me.ucrChkRowNumbers.TabIndex = 19
+        '
         'dlgView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 393)
+        Me.Controls.Add(Me.ucrChkRowNumbers)
         Me.Controls.Add(Me.ucrSaveData)
         Me.Controls.Add(Me.rdoViewAll)
         Me.Controls.Add(Me.rdoViewSelectedColumnsRows)
@@ -313,7 +312,6 @@ Partial Class dlgView
         Me.Controls.Add(Me.ucrPnlDisplayFrom)
         Me.Controls.Add(Me.ucrChkSpecifyRows)
         Me.Controls.Add(Me.lblDisplayFrom)
-        Me.Controls.Add(Me.lblNumberofRows)
         Me.Controls.Add(Me.rdoDispOutputWindow)
         Me.Controls.Add(Me.rdoDispSepOutputWindow)
         Me.Controls.Add(Me.ucrPnlDisplayWindow)
@@ -345,7 +343,6 @@ Partial Class dlgView
     Friend WithEvents ucrPnlDisplayFrom As UcrPanel
     Friend WithEvents ucrChkSpecifyRows As ucrCheck
     Friend WithEvents lblDisplayFrom As Label
-    Friend WithEvents lblNumberofRows As Label
     Friend WithEvents ucrChkSortColumn As ucrCheck
     Friend WithEvents rdoHTMLOutputWindow As RadioButton
     Friend WithEvents ucrReceiverSortCol As ucrReceiverSingle
@@ -353,4 +350,5 @@ Partial Class dlgView
     Friend WithEvents rdoViewSelectedColumnsRows As RadioButton
     Friend WithEvents ucrPnlViewData As UcrPanel
     Friend WithEvents ucrSaveData As ucrSave
+    Friend WithEvents ucrChkRowNumbers As ucrCheck
 End Class
