@@ -1372,7 +1372,7 @@ Public Class ucrGeom
 
         clsgeom_line.SetGeomName("geom_line")
         'x and y are mandatory, but these are autofilled by "" when no variable is mapped. "Partially mandatory"
-        clsgeom_line.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_line.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric", "Date"})
         clsgeom_line.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"})
         'Optional
         clsgeom_line.AddAesParameter("alpha", strIncludedDataTypes:={"numeric", "factor"})

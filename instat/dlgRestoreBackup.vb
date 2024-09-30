@@ -198,6 +198,14 @@ Public Class dlgRestoreBackup
         End If
     End Sub
 
+    Public Function GetScript() As String
+        Return strScript
+    End Function
+
+    Public Function GetDataFilePath() As String
+        Return strLoadDateFilePath
+    End Function
+
     Private Sub ucrInputSavedPathData_Leave(sender As Object, e As EventArgs) Handles ucrInputSavedPathData.Leave
         If Not String.IsNullOrEmpty(ucrInputSavedPathData.IsEmpty) Then
             frmMain.clsRecentItems.addToMenu(Replace(ucrInputSavedPathData.FilePath, "\", "/"))

@@ -239,6 +239,12 @@
     <Compile Include="dlgClusterAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDistances.Designer.vb">
+      <DependentUpon>dlgDistances.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDistances.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgEdit.Designer.vb">
       <DependentUpon>dlgEdit.vb</DependentUpon>
     </Compile>
@@ -279,6 +285,12 @@
       <DependentUpon>dlgImportFromRapidPro.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgImportFromRapidPro.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgImportOpenAppBuilder.Designer.vb">
+      <DependentUpon>dlgImportOpenAppBuilder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportOpenAppBuilder.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRandomSplit.Designer.vb">
@@ -325,6 +337,12 @@
     <Compile Include="sdgDefineAnnualRainfall.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgFlowsToImport.Designer.vb">
+      <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFlowsToImport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgHSConstants.Designer.vb">
       <DependentUpon>sdgHSConstants.vb</DependentUpon>
     </Compile>
@@ -365,6 +383,97 @@
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgSummaryThemes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
+      <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Date\sdgCellFormatDateOptions.Designer.vb">
+      <DependentUpon>sdgCellFormatDateOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Date\sdgCellFormatDateOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Number\sdgCellFormatNumberOptions.Designer.vb">
+      <DependentUpon>sdgCellFormatNumberOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Number\sdgCellFormatNumberOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Text\sdgCellFormatTextOptions.Designer.vb">
+      <DependentUpon>sdgCellFormatTextOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Text\sdgCellFormatTextOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Text\ucrCellFormatEmail.Designer.vb">
+      <DependentUpon>ucrCellFormatEmail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\Text\ucrCellFormatEmail.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\ucrCellFormats.Designer.vb">
+      <DependentUpon>ucrCellFormats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\ucrCellFormats.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Cells\Styles\ucrCellStyles.Designer.vb">
+      <DependentUpon>ucrCellStyles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Styles\ucrCellStyles.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\clsTablesUtils.vb" />
+    <Compile Include="UserTables\Columns\ucrColumnFootNote.Designer.vb">
+      <DependentUpon>ucrColumnFootNote.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnFootNote.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnNanoPlots.Designer.vb">
+      <DependentUpon>ucrColumnNanoPlots.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnNanoPlots.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnStyles.Designer.vb">
+      <DependentUpon>ucrColumnStyles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnStyles.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnWidth.Designer.vb">
+      <DependentUpon>ucrColumnWidth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnWidth.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\dlgGeneralTable.Designer.vb">
+      <DependentUpon>dlgGeneralTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\dlgGeneralTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\Others\ucrOtherStyles.Designer.vb">
+      <DependentUpon>ucrOtherStyles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Others\ucrOtherStyles.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Rows\ucrRowExpression.Designer.vb">
+      <DependentUpon>ucrRowExpression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Rows\ucrRowExpression.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\sdgTableOptions.Designer.vb">
+      <DependentUpon>sdgTableOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\sdgTableOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserControls\frmMaximiseOutput.Designer.vb">
@@ -3037,6 +3146,90 @@
     <Compile Include="UserControl\ucrOutputPages.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\Cells\ucrCells.Designer.vb">
+      <DependentUpon>ucrCells.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\ucrCells.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnLabels.Designer.vb">
+      <DependentUpon>ucrColumnLabels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnLabels.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumns.Designer.vb">
+      <DependentUpon>ucrColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumns.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnSpanners.Designer.vb">
+      <DependentUpon>ucrColumnSpanners.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnSpanners.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Header\ucrHeader.Designer.vb">
+      <DependentUpon>ucrHeader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Header\ucrHeader.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Rows\ucrRowGroup.Designer.vb">
+      <DependentUpon>ucrRowGroup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Rows\ucrRowGroup.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Rows\ucrRows.Designer.vb">
+      <DependentUpon>ucrRows.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Rows\ucrRows.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Rows\ucrRowSummary.Designer.vb">
+      <DependentUpon>ucrRowSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Rows\ucrRowSummary.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\sdgTableRowExpression.Designer.vb">
+      <DependentUpon>sdgTableRowExpression.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\sdgTableRowExpression.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\sdgTableStyles.Designer.vb">
+      <DependentUpon>sdgTableStyles.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\sdgTableStyles.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTables\SourceNotes\ucrSourceNotes.Designer.vb">
+      <DependentUpon>ucrSourceNotes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\SourceNotes\ucrSourceNotes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStub.Designer.vb">
+      <DependentUpon>ucrStub.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStub.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStubOptions.Designer.vb">
+      <DependentUpon>ucrStubOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStubOptions.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStubStyle.Designer.vb">
+      <DependentUpon>ucrStubStyle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Stub\ucrStubStyle.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgApsimx.resx">
@@ -3104,6 +3297,9 @@
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDistances.resx">
+      <DependentUpon>dlgDistances.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgEdit.resx">
       <DependentUpon>dlgEdit.vb</DependentUpon>
     </EmbeddedResource>
@@ -3136,6 +3332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromRapidPro.resx">
       <DependentUpon>dlgImportFromRapidPro.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportOpenAppBuilder.resx">
+      <DependentUpon>dlgImportOpenAppBuilder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
@@ -3212,6 +3411,9 @@
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgFlowsToImport.resx">
+      <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgHSConstants.resx">
       <DependentUpon>sdgHSConstants.vb</DependentUpon>
     </EmbeddedResource>
@@ -3232,6 +3434,51 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
+      <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\Date\sdgCellFormatDateOptions.resx">
+      <DependentUpon>sdgCellFormatDateOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\Number\sdgCellFormatNumberOptions.resx">
+      <DependentUpon>sdgCellFormatNumberOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\Text\sdgCellFormatTextOptions.resx">
+      <DependentUpon>sdgCellFormatTextOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\Text\ucrCellFormatEmail.resx">
+      <DependentUpon>ucrCellFormatEmail.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\ucrCellFormats.resx">
+      <DependentUpon>ucrCellFormats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Styles\ucrCellStyles.resx">
+      <DependentUpon>ucrCellStyles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnFootNote.resx">
+      <DependentUpon>ucrColumnFootNote.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnNanoPlots.resx">
+      <DependentUpon>ucrColumnNanoPlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnStyles.resx">
+      <DependentUpon>ucrColumnStyles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnWidth.resx">
+      <DependentUpon>ucrColumnWidth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\dlgGeneralTable.resx">
+      <DependentUpon>dlgGeneralTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Others\ucrOtherStyles.resx">
+      <DependentUpon>ucrOtherStyles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Rows\ucrRowExpression.resx">
+      <DependentUpon>ucrRowExpression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\sdgTableOptions.resx">
+      <DependentUpon>sdgTableOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\frmMaximiseOutput.resx">
       <DependentUpon>frmMaximiseOutput.vb</DependentUpon>
@@ -5333,6 +5580,48 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl\ucrOutputPages.resx">
       <DependentUpon>ucrOutputPages.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\ucrCells.resx">
+      <DependentUpon>ucrCells.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnLabels.resx">
+      <DependentUpon>ucrColumnLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumns.resx">
+      <DependentUpon>ucrColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnSpanners.resx">
+      <DependentUpon>ucrColumnSpanners.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Header\ucrHeader.resx">
+      <DependentUpon>ucrHeader.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Rows\ucrRowGroup.resx">
+      <DependentUpon>ucrRowGroup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Rows\ucrRows.resx">
+      <DependentUpon>ucrRows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Rows\ucrRowSummary.resx">
+      <DependentUpon>ucrRowSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\sdgTableRowExpression.resx">
+      <DependentUpon>sdgTableRowExpression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\sdgTableStyles.resx">
+      <DependentUpon>sdgTableStyles.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\SourceNotes\ucrSourceNotes.resx">
+      <DependentUpon>ucrSourceNotes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Stub\ucrStub.resx">
+      <DependentUpon>ucrStub.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Stub\ucrStubOptions.resx">
+      <DependentUpon>ucrStubOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Stub\ucrStubStyle.resx">
+      <DependentUpon>ucrStubStyle.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
