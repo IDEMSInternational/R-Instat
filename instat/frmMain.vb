@@ -585,7 +585,7 @@ Public Class frmMain
         mnuTbLan.Visible = bVisible
     End Sub
 
-    Public Sub VersionNumber()
+    Public Sub SetAppVersionNumber()
         Me.Text = "R-Instat " & My.Application.Info.Version.Major.ToString() & "." &
                 My.Application.Info.Version.Minor.ToString() & "." &
                 My.Application.Info.Version.Build.ToString()
