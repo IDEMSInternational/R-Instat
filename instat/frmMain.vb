@@ -225,7 +225,7 @@ Public Class frmMain
         '--------------------------------------
         CreateAdditionalLibraryDirectory()
         '-------------------------------------
-        VersionNumber()
+        SetAppVersionNumber()
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
