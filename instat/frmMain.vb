@@ -225,7 +225,7 @@ Public Class frmMain
         '--------------------------------------
         CreateAdditionalLibraryDirectory()
         '-------------------------------------
-
+        VersionNumber()
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
@@ -583,6 +583,12 @@ Public Class frmMain
 
     Public Sub SetLanButtonVisibility(bVisible As Boolean)
         mnuTbLan.Visible = bVisible
+    End Sub
+
+    Public Sub VersionNumber()
+        Me.Text = "R-Instat " & My.Application.Info.Version.Major.ToString() & "." &
+                My.Application.Info.Version.Minor.ToString() & "." &
+                My.Application.Info.Version.Build.ToString()
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
