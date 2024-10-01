@@ -19,6 +19,7 @@ Imports System.IO
 Imports System.Windows.Controls
 Imports RInsightF461
 Imports ScintillaNET
+Imports RDotNet
 
 Public Class ucrScript
 
@@ -1023,6 +1024,30 @@ Public Class ucrScript
     Private Sub RenameTextboxLeave(sender As Object, e As EventArgs)
         TabControl.SelectedTab.Text = sender.text
         sender.Dispose()
+    End Sub
+    Private Sub mnuReformatCode_Click(sender As Object, e As EventArgs) Handles mnuReformatCode.Click
+        ' Exit early if no text is selected
+        If clsScriptActive.SelectionStart = clsScriptActive.SelectionEnd Then
+            Exit Sub
+        End If
+
+        ' Your R script text from Scintilla
+        Dim scriptText As String = clsScriptActive.SelectedText.Replace("""", "\""")
+        Dim clsStylerFunction As New RFunction
+
+        clsStylerFunction.SetPackageName("styler")
+        clsStylerFunction.SetRCommand("style_text")
+        clsStylerFunction.AddParameter("text", Chr(34) & scriptText & Chr(34), bIncludeArgumentName:=False)
+
+        Dim expTemp As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsStylerFunction.ToScript(), bSilent:=True)
+
+        ' Check if the result from R is valid
+        If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+            ' If valid, format and replace the selected text
+            Dim formattedCode As String() = expTemp.AsCharacter().ToArray
+            Dim formattedText As String = String.Join(Environment.NewLine, formattedCode)
+            clsScriptActive.ReplaceSelection(formattedText)
+        End If
     End Sub
 
 End Class
