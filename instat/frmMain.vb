@@ -511,11 +511,15 @@ Public Class frmMain
                 'get the data file path if selected by the user
                 strDataFilePath = dlgRestoreBackup.GetDataFilePath()
             End If
-
-            Using writer As StreamWriter = New StreamWriter(strMarkerFilePath, False)
-                writer.WriteLine("Running")
-            End Using
         End If
+
+        If Not Directory.Exists(strAutoSaveLogFolderPath) Then
+            Directory.CreateDirectory(strAutoSaveLogFolderPath)
+        End If
+
+        Using writer As StreamWriter = New StreamWriter(strMarkerFilePath, False)
+            writer.WriteLine("Running")
+        End Using
 
         '---------------------------------------
 
