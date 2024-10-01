@@ -108,9 +108,24 @@ Public Class dlgDistances
         ucrNudLat.SetRCode(clsConcFunction, bReset)
         ucrNudLon.SetRCode(clsConcFunction, bReset)
 
+        ucrSelectorDistance.SetRCode(clsDistFunction, bReset)
+
     End Sub
 
     Private Sub ucrSelectorDistance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDistance.ControlValueChanged
         clsOpeningOperator.AddParameter("left", clsRFunctionParameter:=ucrSelectorDistance.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+    End Sub
+
+    Private Sub ucrReceiverLat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLat.ControlValueChanged, ucrReceiverLong.ControlValueChanged
+        If Not ucrReceiverLong.IsEmpty Then
+            clsConc2Function.AddParameter("lon", ucrReceiverLong.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
+        Else
+            clsConc2Function.RemoveParameterByName("lon")
+        End If
+        If ucrReceiverLat.IsEmpty Then
+            clsConc2Function.AddParameter("lat", ucrReceiverLat.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
+        Else
+            clsConc2Function.RemoveParameterByName("lat")
+        End If
     End Sub
 End Class
