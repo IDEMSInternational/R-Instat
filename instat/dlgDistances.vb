@@ -20,7 +20,8 @@ Imports instat.Translations
 Public Class dlgDistances
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsConcFunction, clsDistFunction As New RFunction
+    Private clsConcFunction, clsConc2Function, clsDummyFunction, clsDistFunction As New RFunction
+    Private clsOpeningOperator, clsClosingOperator As New ROperator
     Private Sub dlgDistances_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -76,12 +77,40 @@ Public Class dlgDistances
 
     End Sub
     Private Sub SetDefaults()
+        clsConc2Function = New RFunction
+        clsConcFunction = New RFunction
+        clsDistFunction = New RFunction
+        clsDummyFunction = New RFunction
+        clsOpeningOperator = New ROperator
+        clsClosingOperator = New ROperator
+
+        ucrSelectorDistance.Reset()
+
+        clsDummyFunction.AddParameter("value", "checked", iPosition:=0)
+
+        clsConcFunction.SetRCommand("c")
+        clsConcFunction.SetAssignTo("citycenter")
+        clsConc2Function.SetRCommand("c")
+
+        clsDistFunction.SetPackageName("geosphere")
+        clsDistFunction.SetRCommand("distGeo")
+        clsDistFunction.AddParameter("city", clsRFunctionParameter:=clsConcFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsOpeningOperator.SetOperation("[,")
+        clsOpeningOperator.AddParameter("right", clsROperatorParameter:=clsClosingOperator, iPosition:=1)
+
+        clsClosingOperator.SetOperation("]")
+        clsClosingOperator.AddParameter("left", clsRFunctionParameter:=clsConc2Function, iPosition:=0)
 
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrNudLat.SetRCode(clsConcFunction, bReset)
+        ucrNudLon.SetRCode(clsConcFunction, bReset)
 
     End Sub
 
-
+    Private Sub ucrSelectorDistance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDistance.ControlValueChanged
+        clsOpeningOperator.AddParameter("left", clsRFunctionParameter:=ucrSelectorDistance.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+    End Sub
 End Class
