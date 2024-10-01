@@ -32,7 +32,7 @@ Public Class dlgDistances
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        'TestOkEnabled()
+        TestOKEnabled()
         autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
@@ -40,14 +40,14 @@ Public Class dlgDistances
         ucrSelectorDistance.SetParameter(New RParameter("df", 0))
         ucrSelectorDistance.SetParameterIsrfunction()
 
-        ucrReceiverLong.SetParameter(New RParameter("long", 1))
+        ucrReceiverLong.SetParameter(New RParameter("long", 1, bNewIncludeArgumentName:=False))
         ucrReceiverLong.Selector = ucrSelectorDistance
         ucrReceiverLong.SetParameterIsRFunction()
         ucrReceiverLong.SetClimaticType("lon")
         ucrReceiverLong.bAutoFill = True
         ucrReceiverLong.SetLinkedDisplayControl(lblLon)
 
-        ucrReceiverLat.SetParameter(New RParameter("lat", 2))
+        ucrReceiverLat.SetParameter(New RParameter("lat", 2, bNewIncludeArgumentName:=False))
         ucrReceiverLat.Selector = ucrSelectorDistance
         ucrReceiverLat.SetParameterIsRFunction()
         ucrReceiverLat.SetClimaticType("lat")
@@ -59,22 +59,29 @@ Public Class dlgDistances
         ucrPnlFrom.AddParameterValuesCondition(rdoValue, "checked", "value")
         ucrPnlFrom.AddParameterValuesCondition(rdoVariable, "checked", "variable")
 
-        ucrNudLon.SetParameter(New RParameter("lon", 0))
+        ucrNudLon.SetParameter(New RParameter("lon", 0, bNewIncludeArgumentName:=False))
         ucrNudLon.SetMinMax(-180, 180)
-        'ucrNudLon.DecimalPlaces = 2
-        ucrNudLon.Increment = 1
+        ucrNudLon.DecimalPlaces = 2
+        ucrNudLon.Increment = 0.05
         ucrNudLon.SetLinkedDisplayControl(lblLongFrom)
 
-        ucrNudLat.SetParameter(New RParameter("lat", 1))
+        ucrNudLat.SetParameter(New RParameter("lat", 1, bNewIncludeArgumentName:=False))
         ucrNudLat.SetMinMax(-90, 90)
-        'ucrNudLat.DecimalPlaces = 2
-        ucrNudLat.Increment = 1
+        ucrNudLat.Increment = 0.05
+        ucrNudLat.DecimalPlaces = 2
         ucrNudLat.SetLinkedDisplayControl(lblLatFrom)
 
-        ucrPnlFrom.AddToLinkedControls(ucrNudLon, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.23")
-        ucrPnlFrom.AddToLinkedControls(ucrNudLat, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.23")
-        ucrPnlFrom.AddToLinkedControls({ucrReceiverVariable, ucrInputVariable}, {rdoVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.23")
+        ucrPnlFrom.AddToLinkedControls(ucrNudLon, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.00)
+        ucrPnlFrom.AddToLinkedControls(ucrNudLat, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.00)
+        ucrPnlFrom.AddToLinkedControls({ucrReceiverVariable, ucrInputVariable}, {rdoVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrSaveDistance.SetLabelText("New Column Name:")
+        ucrSaveDistance.SetDataFrameSelector(ucrSelectorDistance.ucrAvailableDataFrames)
+        ucrSaveDistance.SetIsComboBox()
+        ucrSaveDistance.SetSaveTypeAsColumn()
+        ucrSaveDistance.SetPrefix("distances")
+
+        rdoVariable.Enabled = False
     End Sub
     Private Sub SetDefaults()
         clsConc2Function = New RFunction
@@ -85,47 +92,80 @@ Public Class dlgDistances
         clsClosingOperator = New ROperator
 
         ucrSelectorDistance.Reset()
+        ucrSaveDistance.Reset()
+        ucrReceiverLong.SetMeAsReceiver()
 
-        clsDummyFunction.AddParameter("value", "checked", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "value", iPosition:=0)
 
         clsConcFunction.SetRCommand("c")
         clsConcFunction.SetAssignTo("citycenter")
         clsConc2Function.SetRCommand("c")
 
-        clsDistFunction.SetPackageName("geosphere")
-        clsDistFunction.SetRCommand("distGeo")
-        clsDistFunction.AddParameter("city", clsRFunctionParameter:=clsConcFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsClosingOperator.SetOperation("]")
+        clsClosingOperator.AddParameter("left", clsRFunctionParameter:=clsConc2Function, iPosition:=0)
+        clsClosingOperator.AddParameter("right", "", iPosition:=1)
 
         clsOpeningOperator.SetOperation("[,")
         clsOpeningOperator.AddParameter("right", clsROperatorParameter:=clsClosingOperator, iPosition:=1)
 
-        clsClosingOperator.SetOperation("]")
-        clsClosingOperator.AddParameter("left", clsRFunctionParameter:=clsConc2Function, iPosition:=0)
+        clsDistFunction.SetPackageName("geosphere")
+        clsDistFunction.SetRCommand("distGeo")
+        clsDistFunction.AddParameter("city", clsRFunctionParameter:=clsConcFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsDistFunction.AddParameter("para", clsROperatorParameter:=clsOpeningOperator, iPosition:=2, bIncludeArgumentName:=False)
+
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveDistance.GetText, strTempDataframe:=ucrSelectorDistance.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveDistance.GetText)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDistFunction)
 
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudLat.SetRCode(clsConcFunction, bReset)
         ucrNudLon.SetRCode(clsConcFunction, bReset)
+        ucrPnlFrom.SetRCode(clsDummyFunction, bReset)
+        ucrSaveDistance.SetRCode(clsDistFunction, bReset)
+        If bReset Then
+            ucrReceiverLong.SetRCode(clsConc2Function, bReset)
+            ucrReceiverLat.SetRCode(clsConc2Function, bReset)
+        End If
+    End Sub
 
-        ucrSelectorDistance.SetRCode(clsDistFunction, bReset)
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverLong.IsEmpty AndAlso Not ucrReceiverLat.IsEmpty AndAlso ucrSaveDistance.IsComplete AndAlso Not ucrNudLat.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrSelectorDistance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDistance.ControlValueChanged
         clsOpeningOperator.AddParameter("left", clsRFunctionParameter:=ucrSelectorDistance.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
     End Sub
 
-    Private Sub ucrReceiverLat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLat.ControlValueChanged, ucrReceiverLong.ControlValueChanged
-        If Not ucrReceiverLong.IsEmpty Then
-            clsConc2Function.AddParameter("lon", ucrReceiverLong.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
-        Else
-            clsConc2Function.RemoveParameterByName("lon")
-        End If
-        If ucrReceiverLat.IsEmpty Then
-            clsConc2Function.AddParameter("lat", ucrReceiverLat.GetVariableNames(False), iPosition:=1, bIncludeArgumentName:=False)
+    Private Sub ucrReceiverLat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLat.ControlValueChanged
+
+        If Not ucrReceiverLat.IsEmpty Then
+            clsConc2Function.AddParameter("lat", ucrReceiverLat.GetVariableNames, iPosition:=1, bIncludeArgumentName:=False)
         Else
             clsConc2Function.RemoveParameterByName("lat")
         End If
+    End Sub
+
+    Private Sub ucrReceiverLong_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLong.ControlValueChanged
+        If Not ucrReceiverLong.IsEmpty Then
+            clsConc2Function.AddParameter("long", ucrReceiverLong.GetVariableNames, iPosition:=0, bIncludeArgumentName:=False)
+        Else
+            clsConc2Function.RemoveParameterByName("long")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverLat_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLat.ControlContentsChanged, ucrReceiverLong.ControlContentsChanged, ucrSaveDistance.ControlContentsChanged, ucrNudLat.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

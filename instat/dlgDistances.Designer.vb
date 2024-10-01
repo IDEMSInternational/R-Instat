@@ -22,71 +22,25 @@ Partial Class dlgDistances
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorDistance = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverLong = New instat.ucrReceiverSingle()
-        Me.ucrReceiverLat = New instat.ucrReceiverSingle()
         Me.lblLon = New System.Windows.Forms.Label()
         Me.lblLat = New System.Windows.Forms.Label()
         Me.rdoValue = New System.Windows.Forms.RadioButton()
         Me.rdoVariable = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlFrom = New instat.UcrPanel()
         Me.grpFrom = New System.Windows.Forms.GroupBox()
-        Me.ucrNudLon = New instat.ucrNud()
-        Me.ucrNudLat = New instat.ucrNud()
-        Me.lblLongFrom = New System.Windows.Forms.Label()
         Me.lblLatFrom = New System.Windows.Forms.Label()
-        Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
+        Me.lblLongFrom = New System.Windows.Forms.Label()
+        Me.ucrReceiverLat = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLong = New instat.ucrReceiverSingle()
+        Me.ucrSelectorDistance = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlFrom = New instat.UcrPanel()
         Me.ucrInputVariable = New instat.ucrInputComboBox()
+        Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
+        Me.ucrNudLat = New instat.ucrNud()
+        Me.ucrNudLon = New instat.ucrNud()
+        Me.ucrSaveDistance = New instat.ucrSave()
         Me.grpFrom.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 372)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(615, 78)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrSelectorDistance
-        '
-        Me.ucrSelectorDistance.AutoSize = True
-        Me.ucrSelectorDistance.bDropUnusedFilterLevels = False
-        Me.ucrSelectorDistance.bShowHiddenColumns = False
-        Me.ucrSelectorDistance.bUseCurrentFilter = True
-        Me.ucrSelectorDistance.Location = New System.Drawing.Point(5, 22)
-        Me.ucrSelectorDistance.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorDistance.Name = "ucrSelectorDistance"
-        Me.ucrSelectorDistance.Size = New System.Drawing.Size(318, 274)
-        Me.ucrSelectorDistance.TabIndex = 1
-        '
-        'ucrReceiverLong
-        '
-        Me.ucrReceiverLong.AutoSize = True
-        Me.ucrReceiverLong.frmParent = Me
-        Me.ucrReceiverLong.Location = New System.Drawing.Point(430, 73)
-        Me.ucrReceiverLong.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLong.Name = "ucrReceiverLong"
-        Me.ucrReceiverLong.Selector = Nothing
-        Me.ucrReceiverLong.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverLong.strNcFilePath = ""
-        Me.ucrReceiverLong.TabIndex = 2
-        Me.ucrReceiverLong.ucrSelector = Nothing
-        '
-        'ucrReceiverLat
-        '
-        Me.ucrReceiverLat.AutoSize = True
-        Me.ucrReceiverLat.frmParent = Me
-        Me.ucrReceiverLat.Location = New System.Drawing.Point(432, 142)
-        Me.ucrReceiverLat.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverLat.Name = "ucrReceiverLat"
-        Me.ucrReceiverLat.Selector = Nothing
-        Me.ucrReceiverLat.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverLat.strNcFilePath = ""
-        Me.ucrReceiverLat.TabIndex = 3
-        Me.ucrReceiverLat.ucrSelector = Nothing
         '
         'lblLon
         '
@@ -94,7 +48,7 @@ Partial Class dlgDistances
         Me.lblLon.Location = New System.Drawing.Point(433, 45)
         Me.lblLon.Name = "lblLon"
         Me.lblLon.Size = New System.Drawing.Size(49, 20)
-        Me.lblLon.TabIndex = 4
+        Me.lblLon.TabIndex = 1
         Me.lblLon.Text = "Long:"
         '
         'lblLat
@@ -103,7 +57,7 @@ Partial Class dlgDistances
         Me.lblLat.Location = New System.Drawing.Point(432, 119)
         Me.lblLat.Name = "lblLat"
         Me.lblLat.Size = New System.Drawing.Size(36, 20)
-        Me.lblLat.TabIndex = 5
+        Me.lblLat.TabIndex = 3
         Me.lblLat.Text = "Lat:"
         '
         'rdoValue
@@ -128,15 +82,6 @@ Partial Class dlgDistances
         Me.rdoVariable.Text = "Variable"
         Me.rdoVariable.UseVisualStyleBackColor = True
         '
-        'ucrPnlFrom
-        '
-        Me.ucrPnlFrom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlFrom.Location = New System.Drawing.Point(356, 207)
-        Me.ucrPnlFrom.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrPnlFrom.Name = "ucrPnlFrom"
-        Me.ucrPnlFrom.Size = New System.Drawing.Size(263, 31)
-        Me.ucrPnlFrom.TabIndex = 8
-        '
         'grpFrom
         '
         Me.grpFrom.Controls.Add(Me.ucrInputVariable)
@@ -148,23 +93,108 @@ Partial Class dlgDistances
         Me.grpFrom.Location = New System.Drawing.Point(347, 186)
         Me.grpFrom.Name = "grpFrom"
         Me.grpFrom.Size = New System.Drawing.Size(275, 135)
-        Me.grpFrom.TabIndex = 9
+        Me.grpFrom.TabIndex = 5
         Me.grpFrom.TabStop = False
         Me.grpFrom.Text = "From:"
         '
-        'ucrNudLon
+        'lblLatFrom
         '
-        Me.ucrNudLon.AutoSize = True
-        Me.ucrNudLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLon.Location = New System.Drawing.Point(56, 57)
-        Me.ucrNudLon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrNudLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLon.Name = "ucrNudLon"
-        Me.ucrNudLon.Size = New System.Drawing.Size(75, 30)
-        Me.ucrNudLon.TabIndex = 0
-        Me.ucrNudLon.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.lblLatFrom.AutoSize = True
+        Me.lblLatFrom.Location = New System.Drawing.Point(7, 101)
+        Me.lblLatFrom.Name = "lblLatFrom"
+        Me.lblLatFrom.Size = New System.Drawing.Size(36, 20)
+        Me.lblLatFrom.TabIndex = 10
+        Me.lblLatFrom.Text = "Lat:"
+        '
+        'lblLongFrom
+        '
+        Me.lblLongFrom.AutoSize = True
+        Me.lblLongFrom.Location = New System.Drawing.Point(5, 58)
+        Me.lblLongFrom.Name = "lblLongFrom"
+        Me.lblLongFrom.Size = New System.Drawing.Size(49, 20)
+        Me.lblLongFrom.TabIndex = 8
+        Me.lblLongFrom.Text = "Long:"
+        '
+        'ucrReceiverLat
+        '
+        Me.ucrReceiverLat.AutoSize = True
+        Me.ucrReceiverLat.frmParent = Me
+        Me.ucrReceiverLat.Location = New System.Drawing.Point(432, 142)
+        Me.ucrReceiverLat.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLat.Name = "ucrReceiverLat"
+        Me.ucrReceiverLat.Selector = Nothing
+        Me.ucrReceiverLat.Size = New System.Drawing.Size(180, 41)
+        Me.ucrReceiverLat.strNcFilePath = ""
+        Me.ucrReceiverLat.TabIndex = 4
+        Me.ucrReceiverLat.ucrSelector = Nothing
+        '
+        'ucrReceiverLong
+        '
+        Me.ucrReceiverLong.AutoSize = True
+        Me.ucrReceiverLong.frmParent = Me
+        Me.ucrReceiverLong.Location = New System.Drawing.Point(430, 73)
+        Me.ucrReceiverLong.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLong.Name = "ucrReceiverLong"
+        Me.ucrReceiverLong.Selector = Nothing
+        Me.ucrReceiverLong.Size = New System.Drawing.Size(180, 46)
+        Me.ucrReceiverLong.strNcFilePath = ""
+        Me.ucrReceiverLong.TabIndex = 2
+        Me.ucrReceiverLong.ucrSelector = Nothing
+        '
+        'ucrSelectorDistance
+        '
+        Me.ucrSelectorDistance.AutoSize = True
+        Me.ucrSelectorDistance.bDropUnusedFilterLevels = False
+        Me.ucrSelectorDistance.bShowHiddenColumns = False
+        Me.ucrSelectorDistance.bUseCurrentFilter = True
+        Me.ucrSelectorDistance.Location = New System.Drawing.Point(5, 22)
+        Me.ucrSelectorDistance.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorDistance.Name = "ucrSelectorDistance"
+        Me.ucrSelectorDistance.Size = New System.Drawing.Size(318, 274)
+        Me.ucrSelectorDistance.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(9, 408)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(615, 78)
+        Me.ucrBase.TabIndex = 15
+        '
+        'ucrPnlFrom
+        '
+        Me.ucrPnlFrom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlFrom.Location = New System.Drawing.Point(356, 207)
+        Me.ucrPnlFrom.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrPnlFrom.Name = "ucrPnlFrom"
+        Me.ucrPnlFrom.Size = New System.Drawing.Size(263, 31)
+        Me.ucrPnlFrom.TabIndex = 8
+        '
+        'ucrInputVariable
+        '
+        Me.ucrInputVariable.AddQuotesIfUnrecognised = True
+        Me.ucrInputVariable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputVariable.GetSetSelectedIndex = -1
+        Me.ucrInputVariable.IsReadOnly = False
+        Me.ucrInputVariable.Location = New System.Drawing.Point(135, 94)
+        Me.ucrInputVariable.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputVariable.Name = "ucrInputVariable"
+        Me.ucrInputVariable.Size = New System.Drawing.Size(135, 32)
+        Me.ucrInputVariable.TabIndex = 13
+        '
+        'ucrReceiverVariable
+        '
+        Me.ucrReceiverVariable.AutoSize = True
+        Me.ucrReceiverVariable.frmParent = Nothing
+        Me.ucrReceiverVariable.Location = New System.Drawing.Point(137, 55)
+        Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
+        Me.ucrReceiverVariable.Selector = Nothing
+        Me.ucrReceiverVariable.Size = New System.Drawing.Size(135, 30)
+        Me.ucrReceiverVariable.strNcFilePath = ""
+        Me.ucrReceiverVariable.TabIndex = 12
+        Me.ucrReceiverVariable.ucrSelector = Nothing
         '
         'ucrNudLat
         '
@@ -177,57 +207,38 @@ Partial Class dlgDistances
         Me.ucrNudLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLat.Name = "ucrNudLat"
         Me.ucrNudLat.Size = New System.Drawing.Size(75, 30)
-        Me.ucrNudLat.TabIndex = 1
+        Me.ucrNudLat.TabIndex = 11
         Me.ucrNudLat.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblLongFrom
+        'ucrNudLon
         '
-        Me.lblLongFrom.AutoSize = True
-        Me.lblLongFrom.Location = New System.Drawing.Point(5, 58)
-        Me.lblLongFrom.Name = "lblLongFrom"
-        Me.lblLongFrom.Size = New System.Drawing.Size(49, 20)
-        Me.lblLongFrom.TabIndex = 5
-        Me.lblLongFrom.Text = "Long:"
+        Me.ucrNudLon.AutoSize = True
+        Me.ucrNudLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLon.Location = New System.Drawing.Point(56, 57)
+        Me.ucrNudLon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLon.Name = "ucrNudLon"
+        Me.ucrNudLon.Size = New System.Drawing.Size(75, 30)
+        Me.ucrNudLon.TabIndex = 9
+        Me.ucrNudLon.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblLatFrom
+        'ucrSaveDistance
         '
-        Me.lblLatFrom.AutoSize = True
-        Me.lblLatFrom.Location = New System.Drawing.Point(7, 101)
-        Me.lblLatFrom.Name = "lblLatFrom"
-        Me.lblLatFrom.Size = New System.Drawing.Size(36, 20)
-        Me.lblLatFrom.TabIndex = 6
-        Me.lblLatFrom.Text = "Lat:"
-        '
-        'ucrReceiverVariable
-        '
-        Me.ucrReceiverVariable.AutoSize = True
-        Me.ucrReceiverVariable.frmParent = Me
-        Me.ucrReceiverVariable.Location = New System.Drawing.Point(137, 55)
-        Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
-        Me.ucrReceiverVariable.Selector = Nothing
-        Me.ucrReceiverVariable.Size = New System.Drawing.Size(135, 30)
-        Me.ucrReceiverVariable.strNcFilePath = ""
-        Me.ucrReceiverVariable.TabIndex = 7
-        Me.ucrReceiverVariable.ucrSelector = Nothing
-        '
-        'ucrInputVariable
-        '
-        Me.ucrInputVariable.AddQuotesIfUnrecognised = True
-        Me.ucrInputVariable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputVariable.GetSetSelectedIndex = -1
-        Me.ucrInputVariable.IsReadOnly = False
-        Me.ucrInputVariable.Location = New System.Drawing.Point(135, 94)
-        Me.ucrInputVariable.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
-        Me.ucrInputVariable.Name = "ucrInputVariable"
-        Me.ucrInputVariable.Size = New System.Drawing.Size(135, 32)
-        Me.ucrInputVariable.TabIndex = 8
+        Me.ucrSaveDistance.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveDistance.Location = New System.Drawing.Point(8, 348)
+        Me.ucrSaveDistance.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrSaveDistance.Name = "ucrSaveDistance"
+        Me.ucrSaveDistance.Size = New System.Drawing.Size(548, 33)
+        Me.ucrSaveDistance.TabIndex = 14
         '
         'dlgDistances
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(634, 469)
+        Me.ClientSize = New System.Drawing.Size(634, 496)
+        Me.Controls.Add(Me.ucrSaveDistance)
         Me.Controls.Add(Me.rdoVariable)
         Me.Controls.Add(Me.rdoValue)
         Me.Controls.Add(Me.lblLat)
@@ -267,4 +278,5 @@ Partial Class dlgDistances
     Friend WithEvents lblLongFrom As Label
     Friend WithEvents ucrInputVariable As ucrInputComboBox
     Friend WithEvents ucrReceiverVariable As ucrReceiverSingle
+    Friend WithEvents ucrSaveDistance As ucrSave
 End Class
