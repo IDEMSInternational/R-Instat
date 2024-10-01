@@ -53,36 +53,35 @@ Public Class dlgView
         ucrPnlDisplayWindow.AddParameterValuesCondition(rdoDispOutputWindow, "checked", "window")
         ucrPnlDisplayWindow.AddParameterValuesCondition(rdoDispSepOutputWindow, "checked", "viewer")
 
-        ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
-        ucrPnlDisplayWindow.AddToLinkedControls(ucrChkRowNumbers, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
-
-
-        ucrPnlDisplayFrom.AddRadioButton(rdoBottom)
-        ucrPnlDisplayFrom.AddRadioButton(rdoTop)
-        ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
-        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
-        ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
+        ucrPnlDisplayWindow.AddToLinkedControls(ucrChkDisplayFromTop, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
+        ucrPnlDisplayWindow.AddToLinkedControls(ucrChkRowNumbers, {rdoDispOutputWindow, rdoHTMLOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
+        'ucrPnlDisplayFrom.AddRadioButton(rdoBottom)
+        'ucrPnlDisplayFrom.AddRadioButton(rdoTop)
+        'ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
+        'ucrChkDisplayFromTop.AddFunctionNamesCondition("head")
+        'ucrChkDisplayFromTop.AddFunctionNamesCondition(rdoBottom, "tail")
 
         ' This linking only applies if rdoDispOutputWindow is checked
-        ucrChkSpecifyRows.SetText("Specify Rows")
-        ucrChkSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoTop)
+
+        ' ucrChkSpecifyRows.AddToLinkedControls(ucrChkDisplayFromTop, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True)
         '  ucrChkSpecifyRows.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=6)
+        ucrChkRowNumbers.SetText("Rows")
         ucrChkRowNumbers.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=6)
 
-
-        ucrChkRowNumbers.AddFunctionNamesCondition(True, {"head", "tail"})
-        ucrChkSpecifyRows.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
+        ucrChkDisplayFromTop.SetText("Display From Top")
+        ucrChkDisplayFromTop.AddFunctionNamesCondition(True, {"head", "tail"})
+        ucrChkDisplayFromTop.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
         '   ucrChkSpecifyRows.bAllowNonConditionValues = True
 
-        ucrPnlViewData.AddRadioButton(rdoViewAll)
-        ucrPnlViewData.AddRadioButton(rdoViewSelectedColumnsRows)
+        '  ucrPnlViewData.AddRadioButton(rdoViewAll)
+        '  ucrPnlViewData.AddRadioButton(rdoViewSelectedColumnsRows)
 
-        ucrPnlViewData.AddParameterValueFunctionNamesCondition(rdoViewAll, "x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        ucrPnlViewData.AddParameterValueFunctionNamesCondition(rdoViewSelectedColumnsRows, "x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame", bNewIsPositive:=False)
+        '  ucrPnlViewData.AddParameterValueFunctionNamesCondition(rdoViewAll, "x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        '  ucrPnlViewData.AddParameterValueFunctionNamesCondition(rdoViewSelectedColumnsRows, "x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame", bNewIsPositive:=False)
 
-        ucrPnlViewData.AddToLinkedControls(ucrReceiverView, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ' ucrPnlViewData.AddToLinkedControls(ucrReceiverView, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverView.SetLinkedDisplayControl(lblSelected)
-        ucrPnlViewData.AddToLinkedControls(ucrPnlDisplayWindow, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        '   ucrPnlViewData.AddToLinkedControls(ucrPnlDisplayWindow, {rdoViewSelectedColumnsRows}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrChkSortColumn.Visible = False
         'ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSortColumn, {rdoHTMLOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
@@ -112,7 +111,6 @@ Public Class dlgView
         ucrSaveData.setLinkedReceiver(ucrReceiverView)
         ucrSaveData.SetIsComboBox()
         ucrSaveData.SetAssignToIfUncheckedValue("last_table")
-
 
     End Sub
 
@@ -184,11 +182,11 @@ Public Class dlgView
         ucrReceiverView.SetRCode(clsViewColumnsFunction, bReset)
         ucrPnlDisplayWindow.SetRCode(clsDummyFunction, bReset)
 
-        ucrPnlDisplayFrom.SetRCode(clsOutputWindowFunction, bReset)
+        ucrChkDisplayFromTop.SetRCode(clsOutputWindowFunction, bReset)
         ucrNudNumberRows.SetRCode(clsOutputWindowFunction, bReset)
-        ucrChkSpecifyRows.SetRCode(clsOutputWindowFunction, bReset)
+        '        ucrChkSpecifyRows.SetRCode(clsOutputWindowFunction, bReset)
         ucrSelectorForView.SetRCode(clsViewAllFunction, bReset)
-        ucrPnlViewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        '   ucrPnlViewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveData.SetRCode(clsAsHtmlWidgetFunction, bReset)
 
         DataFrameLength()
@@ -201,16 +199,16 @@ Public Class dlgView
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoViewSelectedColumnsRows.Checked Then
-            If Not ucrReceiverView.IsEmpty Then
+        ' If rdoViewSelectedColumnsRows.Checked Then
+        If Not ucrReceiverView.IsEmpty Then
                 If rdoDispSepOutputWindow.Checked Then
                     ucrBase.OKEnabled(True)
                 ElseIf rdoDispOutputWindow.Checked Then
-                    If ucrChkSpecifyRows.Checked Then
-                        If ucrNudNumberRows.GetText <> "" AndAlso (rdoTop.Checked OrElse rdoBottom.Checked) Then
-                            ucrBase.OKEnabled(True)
-                        Else
-                            ucrBase.OKEnabled(False)
+                ' If ucrChkSpecifyRows.Checked Then
+                If ucrNudNumberRows.GetText <> "" OrElse ucrChkDisplayFromTop.Checked Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
                         End If
                     Else
                         ucrBase.OKEnabled(True)
@@ -220,16 +218,16 @@ Public Class dlgView
                 Else
                     ucrBase.OKEnabled(False)
                 End If
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        Else
-            If ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        End If
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
+        'Else
+        '    If ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+        '        ucrBase.OKEnabled(True)
+        '    Else
+        '        ucrBase.OKEnabled(False)
+        '    End If
+        'End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -239,24 +237,24 @@ Public Class dlgView
     End Sub
 
     Private Sub ChangeFunctionParameters()
-        If rdoViewSelectedColumnsRows.Checked Then
-            If rdoDispOutputWindow.Checked Then
+        'If rdoViewSelectedColumnsRows.Checked Then
+        If rdoDispOutputWindow.Checked Then
                 clsDummyFunction.AddParameter("checked", "window", iPosition:=0)
 
                 ucrSaveData.Visible = True
                 ucrBase.clsRsyntax.iCallType = 2
-                If ucrChkSpecifyRows.Checked Then
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsOutputWindowFunction)
-                    ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
-                    ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
+            If ucrChkRowNumbers.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsOutputWindowFunction)
+                ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
 
-                    If rdoTop.Checked Then
-                        clsOutputWindowFunction.SetRCommand("head")
-                    Else
-                        clsOutputWindowFunction.SetRCommand("tail")
-                    End If
+                If ucrChkDisplayFromTop.Checked Then
+                    clsOutputWindowFunction.SetRCommand("head")
                 Else
-                    ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables(True))
+                    clsOutputWindowFunction.SetRCommand("tail")
+                End If
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables(True))
                 End If
             ElseIf rdoDispSepOutputWindow.Checked Then
                 clsDummyFunction.AddParameter("checked", "viewer", iPosition:=0)
@@ -273,18 +271,18 @@ Public Class dlgView
                 ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
 
             End If
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsViewAllFunction)
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectDataFunction)
-            ucrSaveData.Visible = False
-        End If
+        'Else
+        '    ucrBase.clsRsyntax.SetBaseRFunction(clsViewAllFunction)
+        '    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectDataFunction)
+        '    ucrSaveData.Visible = False
+        'End If
     End Sub
 
     Private Sub DataFrameLength()
         ucrNudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
-    Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged, ucrReceiverView.ControlValueChanged
+    Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayFromTop.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged, ucrReceiverView.ControlValueChanged
         If bControlsUpdated Then
             ChangeFunctionParameters()
         End If
@@ -305,6 +303,11 @@ Public Class dlgView
         SetSelectorParameterType()
     End Sub
 
+    Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
+        'sdgTableOptions.Setup(ucrSelectorForView.strCurrentDataFrame, )
+        sdgTableOptions.ShowDialog(Me)
+    End Sub
+
     Private Sub ucrChkRowNumbers_Load(sender As Object, e As EventArgs) Handles ucrChkRowNumbers.Load
         If ucrChkRowNumbers.Checked Then
             ucrNudNumberRows.SetParameter(New RParameter("n", 1))
@@ -316,24 +319,18 @@ Public Class dlgView
         End If
     End Sub
 
-    Private Sub VariablesVisible()
-        If rdoViewAll.Checked Then
-            ucrSelectorForView.SetVariablesVisible(False)
-        Else
-            ucrSelectorForView.SetVariablesVisible(True)
-        End If
-    End Sub
-
-    Private Sub ucrPnlViewData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlViewData.ControlValueChanged
+    Private Sub ucrPnlViewData_ControlValueChanged(ucrChangedControl As ucrCore)
+        TableOptions()
         ChangeFunctionParameters()
-        VariablesVisible()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrChkSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrPnlDisplayFrom.ControlContentsChanged, ucrChkSortColumn.ControlContentsChanged, ucrReceiverSortCol.ControlContentsChanged, ucrPnlViewData.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrChkSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrChkDisplayFromTop.ControlContentsChanged, ucrChkSortColumn.ControlContentsChanged, ucrReceiverSortCol.ControlContentsChanged
+        TableOptions()
         TestOKEnabled()
     End Sub
 
     Private Sub ucrSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveData.ControlValueChanged
+        TableOptions()
         GetObjectName()
     End Sub
 
@@ -344,6 +341,14 @@ Public Class dlgView
         ElseIf rdoHTMLOutputWindow.Checked Then
             Dim strPrefix As String = clsAsHtmlWidgetFunction.GetRObjectToAssignTo
             clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub TableOptions()
+        If rdoHTMLOutputWindow.Checked Then
+            cmdTableOptions.Visible = True
+        Else
+            cmdTableOptions.Visible = False
         End If
     End Sub
 

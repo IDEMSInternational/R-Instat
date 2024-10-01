@@ -41,24 +41,19 @@ Partial Class dlgView
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.rdoDispSepOutputWindow = New System.Windows.Forms.RadioButton()
         Me.rdoDispOutputWindow = New System.Windows.Forms.RadioButton()
-        Me.rdoBottom = New System.Windows.Forms.RadioButton()
-        Me.rdoTop = New System.Windows.Forms.RadioButton()
-        Me.lblDisplayFrom = New System.Windows.Forms.Label()
         Me.rdoHTMLOutputWindow = New System.Windows.Forms.RadioButton()
-        Me.rdoViewAll = New System.Windows.Forms.RadioButton()
-        Me.rdoViewSelectedColumnsRows = New System.Windows.Forms.RadioButton()
         Me.ucrSaveData = New instat.ucrSave()
-        Me.ucrPnlViewData = New instat.UcrPanel()
         Me.ucrReceiverSortCol = New instat.ucrReceiverSingle()
         Me.ucrChkSortColumn = New instat.ucrCheck()
         Me.ucrNudNumberRows = New instat.ucrNud()
-        Me.ucrPnlDisplayFrom = New instat.UcrPanel()
         Me.ucrChkSpecifyRows = New instat.ucrCheck()
         Me.ucrPnlDisplayWindow = New instat.UcrPanel()
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkRowNumbers = New instat.ucrCheck()
+        Me.ucrChkDisplayFromTop = New instat.ucrCheck()
+        Me.cmdTableOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -94,41 +89,6 @@ Partial Class dlgView
         Me.rdoDispOutputWindow.Text = "Display in Output Window"
         Me.rdoDispOutputWindow.UseVisualStyleBackColor = True
         '
-        'rdoBottom
-        '
-        Me.rdoBottom.AutoSize = True
-        Me.rdoBottom.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoBottom.Location = New System.Drawing.Point(325, 301)
-        Me.rdoBottom.Name = "rdoBottom"
-        Me.rdoBottom.Size = New System.Drawing.Size(58, 17)
-        Me.rdoBottom.TabIndex = 16
-        Me.rdoBottom.TabStop = True
-        Me.rdoBottom.Text = "Bottom"
-        Me.rdoBottom.UseVisualStyleBackColor = True
-        '
-        'rdoTop
-        '
-        Me.rdoTop.AutoSize = True
-        Me.rdoTop.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoTop.Location = New System.Drawing.Point(325, 278)
-        Me.rdoTop.Name = "rdoTop"
-        Me.rdoTop.Size = New System.Drawing.Size(44, 17)
-        Me.rdoTop.TabIndex = 15
-        Me.rdoTop.TabStop = True
-        Me.rdoTop.Text = "Top"
-        Me.rdoTop.UseVisualStyleBackColor = True
-        '
-        'lblDisplayFrom
-        '
-        Me.lblDisplayFrom.AutoSize = True
-        Me.lblDisplayFrom.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDisplayFrom.Location = New System.Drawing.Point(248, 279)
-        Me.lblDisplayFrom.Name = "lblDisplayFrom"
-        Me.lblDisplayFrom.Size = New System.Drawing.Size(70, 13)
-        Me.lblDisplayFrom.TabIndex = 14
-        Me.lblDisplayFrom.Tag = ""
-        Me.lblDisplayFrom.Text = "Display From:"
-        '
         'rdoHTMLOutputWindow
         '
         Me.rdoHTMLOutputWindow.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -140,38 +100,6 @@ Partial Class dlgView
         Me.rdoHTMLOutputWindow.Text = "Display HTML in Output Window"
         Me.rdoHTMLOutputWindow.UseVisualStyleBackColor = True
         '
-        'rdoViewAll
-        '
-        Me.rdoViewAll.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoViewAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViewAll.FlatAppearance.BorderSize = 2
-        Me.rdoViewAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViewAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoViewAll.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoViewAll.Location = New System.Drawing.Point(67, 6)
-        Me.rdoViewAll.Name = "rdoViewAll"
-        Me.rdoViewAll.Size = New System.Drawing.Size(140, 34)
-        Me.rdoViewAll.TabIndex = 1
-        Me.rdoViewAll.Text = "All Columns"
-        Me.rdoViewAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoViewAll.UseVisualStyleBackColor = True
-        '
-        'rdoViewSelectedColumnsRows
-        '
-        Me.rdoViewSelectedColumnsRows.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoViewSelectedColumnsRows.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViewSelectedColumnsRows.FlatAppearance.BorderSize = 2
-        Me.rdoViewSelectedColumnsRows.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoViewSelectedColumnsRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoViewSelectedColumnsRows.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoViewSelectedColumnsRows.Location = New System.Drawing.Point(207, 6)
-        Me.rdoViewSelectedColumnsRows.Name = "rdoViewSelectedColumnsRows"
-        Me.rdoViewSelectedColumnsRows.Size = New System.Drawing.Size(143, 34)
-        Me.rdoViewSelectedColumnsRows.TabIndex = 2
-        Me.rdoViewSelectedColumnsRows.Text = "Choose Columns"
-        Me.rdoViewSelectedColumnsRows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoViewSelectedColumnsRows.UseVisualStyleBackColor = True
-        '
         'ucrSaveData
         '
         Me.ucrSaveData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -180,14 +108,6 @@ Partial Class dlgView
         Me.ucrSaveData.Name = "ucrSaveData"
         Me.ucrSaveData.Size = New System.Drawing.Size(308, 27)
         Me.ucrSaveData.TabIndex = 18
-        '
-        'ucrPnlViewData
-        '
-        Me.ucrPnlViewData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlViewData.Location = New System.Drawing.Point(56, 5)
-        Me.ucrPnlViewData.Name = "ucrPnlViewData"
-        Me.ucrPnlViewData.Size = New System.Drawing.Size(298, 35)
-        Me.ucrPnlViewData.TabIndex = 0
         '
         'ucrReceiverSortCol
         '
@@ -216,21 +136,13 @@ Partial Class dlgView
         Me.ucrNudNumberRows.AutoSize = True
         Me.ucrNudNumberRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberRows.Location = New System.Drawing.Point(343, 208)
+        Me.ucrNudNumberRows.Location = New System.Drawing.Point(343, 206)
         Me.ucrNudNumberRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberRows.Name = "ucrNudNumberRows"
         Me.ucrNudNumberRows.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudNumberRows.TabIndex = 13
         Me.ucrNudNumberRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrPnlDisplayFrom
-        '
-        Me.ucrPnlDisplayFrom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlDisplayFrom.Location = New System.Drawing.Point(325, 278)
-        Me.ucrPnlDisplayFrom.Name = "ucrPnlDisplayFrom"
-        Me.ucrPnlDisplayFrom.Size = New System.Drawing.Size(66, 40)
-        Me.ucrPnlDisplayFrom.TabIndex = 14
         '
         'ucrChkSpecifyRows
         '
@@ -292,26 +204,39 @@ Partial Class dlgView
         Me.ucrChkRowNumbers.Size = New System.Drawing.Size(89, 23)
         Me.ucrChkRowNumbers.TabIndex = 19
         '
+        'ucrChkDisplayFromTop
+        '
+        Me.ucrChkDisplayFromTop.AutoSize = True
+        Me.ucrChkDisplayFromTop.Checked = False
+        Me.ucrChkDisplayFromTop.Location = New System.Drawing.Point(248, 261)
+        Me.ucrChkDisplayFromTop.Name = "ucrChkDisplayFromTop"
+        Me.ucrChkDisplayFromTop.Size = New System.Drawing.Size(130, 23)
+        Me.ucrChkDisplayFromTop.TabIndex = 20
+        '
+        'cmdTableOptions
+        '
+        Me.cmdTableOptions.Location = New System.Drawing.Point(248, 238)
+        Me.cmdTableOptions.Name = "cmdTableOptions"
+        Me.cmdTableOptions.Size = New System.Drawing.Size(141, 23)
+        Me.cmdTableOptions.TabIndex = 26
+        Me.cmdTableOptions.Text = "Table Options"
+        Me.cmdTableOptions.UseVisualStyleBackColor = True
+        '
         'dlgView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 393)
+        Me.Controls.Add(Me.cmdTableOptions)
+        Me.Controls.Add(Me.ucrChkDisplayFromTop)
         Me.Controls.Add(Me.ucrChkRowNumbers)
         Me.Controls.Add(Me.ucrSaveData)
-        Me.Controls.Add(Me.rdoViewAll)
-        Me.Controls.Add(Me.rdoViewSelectedColumnsRows)
-        Me.Controls.Add(Me.ucrPnlViewData)
         Me.Controls.Add(Me.ucrReceiverSortCol)
         Me.Controls.Add(Me.ucrChkSortColumn)
         Me.Controls.Add(Me.rdoHTMLOutputWindow)
         Me.Controls.Add(Me.ucrNudNumberRows)
-        Me.Controls.Add(Me.rdoBottom)
-        Me.Controls.Add(Me.rdoTop)
-        Me.Controls.Add(Me.ucrPnlDisplayFrom)
         Me.Controls.Add(Me.ucrChkSpecifyRows)
-        Me.Controls.Add(Me.lblDisplayFrom)
         Me.Controls.Add(Me.rdoDispOutputWindow)
         Me.Controls.Add(Me.rdoDispSepOutputWindow)
         Me.Controls.Add(Me.ucrPnlDisplayWindow)
@@ -338,17 +263,12 @@ Partial Class dlgView
     Friend WithEvents rdoDispOutputWindow As RadioButton
     Friend WithEvents ucrPnlDisplayWindow As UcrPanel
     Friend WithEvents ucrNudNumberRows As ucrNud
-    Friend WithEvents rdoBottom As RadioButton
-    Friend WithEvents rdoTop As RadioButton
-    Friend WithEvents ucrPnlDisplayFrom As UcrPanel
     Friend WithEvents ucrChkSpecifyRows As ucrCheck
-    Friend WithEvents lblDisplayFrom As Label
     Friend WithEvents ucrChkSortColumn As ucrCheck
     Friend WithEvents rdoHTMLOutputWindow As RadioButton
     Friend WithEvents ucrReceiverSortCol As ucrReceiverSingle
-    Friend WithEvents rdoViewAll As RadioButton
-    Friend WithEvents rdoViewSelectedColumnsRows As RadioButton
-    Friend WithEvents ucrPnlViewData As UcrPanel
     Friend WithEvents ucrSaveData As ucrSave
     Friend WithEvents ucrChkRowNumbers As ucrCheck
+    Friend WithEvents ucrChkDisplayFromTop As ucrCheck
+    Friend WithEvents cmdTableOptions As Button
 End Class
