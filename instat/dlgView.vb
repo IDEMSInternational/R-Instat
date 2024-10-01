@@ -201,23 +201,23 @@ Public Class dlgView
     Private Sub TestOKEnabled()
         ' If rdoViewSelectedColumnsRows.Checked Then
         If Not ucrReceiverView.IsEmpty Then
-                If rdoDispSepOutputWindow.Checked Then
-                    ucrBase.OKEnabled(True)
-                ElseIf rdoDispOutputWindow.Checked Then
+            If rdoDispSepOutputWindow.Checked Then
+                ucrBase.OKEnabled(True)
+            ElseIf rdoDispOutputWindow.Checked Then
                 ' If ucrChkSpecifyRows.Checked Then
                 If ucrNudNumberRows.GetText <> "" OrElse ucrChkDisplayFromTop.Checked Then
-                        ucrBase.OKEnabled(True)
-                    Else
-                        ucrBase.OKEnabled(False)
-                        End If
-                    Else
-                        ucrBase.OKEnabled(True)
-                    End If
-                ElseIf rdoHTMLOutputWindow.Checked AndAlso ((ucrChkSortColumn.Checked AndAlso Not ucrReceiverSortCol.IsEmpty) OrElse Not ucrChkSortColumn.Checked) Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
                 End If
+            Else
+                ucrBase.OKEnabled(True)
+            End If
+        ElseIf rdoHTMLOutputWindow.Checked AndAlso ((ucrChkSortColumn.Checked AndAlso Not ucrReceiverSortCol.IsEmpty) OrElse Not ucrChkSortColumn.Checked) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
         'Else
         '    ucrBase.OKEnabled(False)
         'End If
@@ -239,11 +239,13 @@ Public Class dlgView
     Private Sub ChangeFunctionParameters()
         'If rdoViewSelectedColumnsRows.Checked Then
         If rdoDispOutputWindow.Checked Then
-                clsDummyFunction.AddParameter("checked", "window", iPosition:=0)
+            clsDummyFunction.AddParameter("checked", "window", iPosition:=0)
 
-                ucrSaveData.Visible = True
-                ucrBase.clsRsyntax.iCallType = 2
-            If ucrChkRowNumbers.Checked Then
+            ucrSaveData.Visible = True
+            ucrBase.clsRsyntax.iCallType = 2
+
+            '  If ucrNudNumberRows.GetText <> "" Then
+            If ucrChkRowNumbers.Checked AndAlso ucrNudNumberRows.GetText <> "" OrElse ucrChkDisplayFromTop.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsOutputWindowFunction)
                 ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
@@ -254,23 +256,25 @@ Public Class dlgView
                     clsOutputWindowFunction.SetRCommand("tail")
                 End If
             Else
-                ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables(True))
-                End If
-            ElseIf rdoDispSepOutputWindow.Checked Then
-                clsDummyFunction.AddParameter("checked", "viewer", iPosition:=0)
-
-                ucrBase.clsRsyntax.iCallType = 0
-                ucrBase.clsRsyntax.SetBaseRFunction(clsViewColumnsFunction)
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectDataFunction)
-                ucrSaveData.Visible = False
-            Else
-                clsDummyFunction.AddParameter("checked", "html", iPosition:=0)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsAsHtmlWidgetFunction)
-                ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
-                ucrSaveData.Visible = True
-                ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
-
+                ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables(True))
             End If
+        ElseIf rdoDispSepOutputWindow.Checked Then
+            clsDummyFunction.AddParameter("checked", "viewer", iPosition:=0)
+
+            ucrBase.clsRsyntax.iCallType = 0
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewColumnsFunction)
+            '   ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectDataFunction)
+            ucrSaveData.Visible = False
+        Else
+            clsDummyFunction.AddParameter("checked", "html", iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsAsHtmlWidgetFunction)
+            ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
+            ucrSaveData.Visible = True
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
+
+        End If
         'Else
         '    ucrBase.clsRsyntax.SetBaseRFunction(clsViewAllFunction)
         '    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectDataFunction)
