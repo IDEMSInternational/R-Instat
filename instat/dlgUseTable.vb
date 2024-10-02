@@ -212,7 +212,7 @@ Public Class dlgUseTable
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdFormatOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
+    Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
         sdgTableOptions.Setup(ucrTablesSelector.strCurrentDataFrame, clsPipeOperator)
         sdgTableOptions.ShowDialog(Me)
     End Sub
