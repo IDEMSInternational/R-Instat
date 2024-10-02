@@ -70,6 +70,8 @@ Public Class dlgUseTable
         'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsWord, "as_word")
         'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsLaTex, "as_word")
 
+        cmdTableOptions.Enabled = False
+
         ucrSaveTable.SetPrefix("use_table")
         ucrSaveTable.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrTablesSelector.ucrAvailableDataFrames)
@@ -185,6 +187,7 @@ Public Class dlgUseTable
         clsUseTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
         clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.bBrackets = False
 
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
     End Sub
@@ -209,15 +212,9 @@ Public Class dlgUseTable
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdFormatOptions_Click(sender As Object, e As EventArgs) Handles cmdFormatOptions.Click
-        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
-                                        clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
-                                        clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
-                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                        clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
-                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction,
-                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction, bReset:=bReset)
-        sdgFormatSummaryTables.ShowDialog()
+    Private Sub cmdFormatOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
+        sdgTableOptions.Setup(ucrTablesSelector.strCurrentDataFrame, clsPipeOperator)
+        sdgTableOptions.ShowDialog(Me)
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTablesReceiver.ControlContentsChanged, ucrSaveTable.ControlContentsChanged
