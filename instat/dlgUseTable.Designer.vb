@@ -27,13 +27,13 @@ Partial Class dlgUseTable
         Me.rdoAsWord = New System.Windows.Forms.RadioButton()
         Me.rdoAsLaTex = New System.Windows.Forms.RadioButton()
         Me.cmdTableOptions = New System.Windows.Forms.Button()
+        Me.lblTable = New System.Windows.Forms.Label()
+        Me.lblExportTables = New System.Windows.Forms.Label()
         Me.ucrPnlExportOptions = New instat.UcrPanel()
         Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrTablesReceiver = New instat.ucrReceiverSingle()
         Me.ucrTablesSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblTable = New System.Windows.Forms.Label()
-        Me.lblExportTables = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoAsHTML
@@ -89,6 +89,26 @@ Partial Class dlgUseTable
         Me.cmdTableOptions.Text = "Table Options"
         Me.cmdTableOptions.UseVisualStyleBackColor = True
         '
+        'lblTable
+        '
+        Me.lblTable.AutoSize = True
+        Me.lblTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTable.Location = New System.Drawing.Point(258, 43)
+        Me.lblTable.Name = "lblTable"
+        Me.lblTable.Size = New System.Drawing.Size(37, 13)
+        Me.lblTable.TabIndex = 25
+        Me.lblTable.Text = "Table:"
+        '
+        'lblExportTables
+        '
+        Me.lblExportTables.AutoSize = True
+        Me.lblExportTables.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblExportTables.Location = New System.Drawing.Point(12, 248)
+        Me.lblExportTables.Name = "lblExportTables"
+        Me.lblExportTables.Size = New System.Drawing.Size(84, 13)
+        Me.lblExportTables.TabIndex = 26
+        Me.lblExportTables.Text = "Export Table as:"
+        '
         'ucrPnlExportOptions
         '
         Me.ucrPnlExportOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -139,26 +159,6 @@ Partial Class dlgUseTable
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(407, 52)
         Me.ucrBase.TabIndex = 0
-        '
-        'lblTable
-        '
-        Me.lblTable.AutoSize = True
-        Me.lblTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTable.Location = New System.Drawing.Point(258, 43)
-        Me.lblTable.Name = "lblTable"
-        Me.lblTable.Size = New System.Drawing.Size(37, 13)
-        Me.lblTable.TabIndex = 25
-        Me.lblTable.Text = "Table:"
-        '
-        'lblExportTables
-        '
-        Me.lblExportTables.AutoSize = True
-        Me.lblExportTables.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExportTables.Location = New System.Drawing.Point(12, 248)
-        Me.lblExportTables.Name = "lblExportTables"
-        Me.lblExportTables.Size = New System.Drawing.Size(118, 13)
-        Me.lblExportTables.TabIndex = 26
-        Me.lblExportTables.Text = "Export Table Object as:"
         '
         'dlgUseTable
         '
