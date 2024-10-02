@@ -245,7 +245,7 @@ Public Class dlgView
             ucrBase.clsRsyntax.iCallType = 2
 
             '  If ucrNudNumberRows.GetText <> "" Then
-            If ucrChkRowNumbers.Checked AndAlso ucrNudNumberRows.GetText <> "" OrElse ucrChkDisplayFromTop.Checked Then
+            If ucrNudNumberRows.GetText <> "" OrElse ucrChkDisplayFromTop.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsOutputWindowFunction)
                 ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
@@ -256,7 +256,7 @@ Public Class dlgView
                     clsOutputWindowFunction.SetRCommand("tail")
                 End If
             Else
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectDataFunction)
+                ' ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectDataFunction)
                 ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables(True))
             End If
         ElseIf rdoDispSepOutputWindow.Checked Then
