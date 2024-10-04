@@ -17,6 +17,7 @@
 Imports instat.Translations
 
 Public Class dlgStartofRains
+    Private bResetSubdialog As Boolean = True
     Private clsCalcRainDay, clsCalcStartDOY, clsListevapFunction, clsRollEvaporationFunction, clsFractionEvapFunction, clsSumEvapFunction, clsConvertColumnType1Function, clsConvertColumnType2Function, clsConvertColumnTypeFunction, clsGetColumnDataTypeFunction, clsDummyFunction, clsIfelseStatusFunction, clsIfelseStatus1Function, clsFirstStatusFunction, clsIsNAStatusFunction, clsCalcStartDate, clsCombinationCalc, clsListCalFunction, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
     Private clsDayFromAndTo, clsGroupByStation, clsGroupByYear, clsListToTalRain, clsApplyInstatFunction, clsFirstDOY, clsFirstDate As New RFunction
     Private clsDayFromAndToOperator, clsEvapOperator, clsDayFromOperator, clsDayToOperator, clsRainDayOperator, clsRainDayConditionOperator, clsConditionsAndOperator, clsTRCombineOperator, clsRollingSumRainDayOperator, clsDSCombineOperator, clsDPCombineOperator As New ROperator
@@ -709,7 +710,7 @@ Public Class dlgStartofRains
         ' run if chkDS is checked
         clsDSCombineOperator.SetOperation("<=")
         clsDSCombineOperator.AddParameter("ds_left", strRollMaxDrySpell, iPosition:=0)
-        clsDSCombineOperator.AddParameter("ds_max", 9, iPosition:=1)
+        clsDSCombineOperator.AddParameter("right", 9, iPosition:=1)
 
         ' run if chkDP is checked
         clsDPCombineOperator.SetOperation("==")
@@ -1185,7 +1186,8 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub cmdAdditionnal_Click(sender As Object, e As EventArgs) Handles cmdAdditionnal.Click
-        sdgAdditionalCondition.SetRFunction(clsCombinedList, clsCalcDrySpellRollMax, clsIsNaFirstDryPeriod, clsIsNaFirstDrySpell, clsIsNaDryPeriod, clsIsNaDrySpell, clsRainDayRollingSumFunction, clsIsNaRollSumRainDay, clsIsNaFirstRollSumRainDay, clsDrySpellPeriodRollMaxFunction, clsRollingSumRainDryPeriodFunction, clsCalcRainDayRollingSum, clsCalcRollSumNumberDryPeriod, clsConditionsAndOperator, clsIsNaOperatorStartDOY, clsConditionsOrOverallOperator, clsRollingSumRainDayOperator, clsDSCombineOperator, clsSumRainDryPeriodIntervalMinusOperator, clsSumRainDryPeriodOperator, clsDPCombineOperator, clsSumRainDryPeriodIntervalPlusOperator)
+        sdgAdditionalCondition.SetRFunction(clsCombinedList, clsCalcDrySpellRollMax, clsIsNaFirstDryPeriod, clsIsNaFirstDrySpell, clsIsNaDryPeriod, clsIsNaDrySpell, clsRainDayRollingSumFunction, clsIsNaRollSumRainDay, clsIsNaFirstRollSumRainDay, clsDrySpellPeriodRollMaxFunction, clsRollingSumRainDryPeriodFunction, clsCalcRainDayRollingSum, clsCalcRollSumNumberDryPeriod, clsConditionsAndOperator, clsIsNaOperatorStartDOY, clsConditionsOrOverallOperator, clsRollingSumRainDayOperator, clsDSCombineOperator, clsSumRainDryPeriodIntervalMinusOperator, clsSumRainDryPeriodOperator, clsDPCombineOperator, clsSumRainDryPeriodIntervalPlusOperator, bResetSubdialog)
         sdgAdditionalCondition.ShowDialog()
+        bResetSubdialog = False
     End Sub
 End Class
