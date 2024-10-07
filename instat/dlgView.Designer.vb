@@ -43,6 +43,8 @@ Partial Class dlgView
         Me.rdoDispOutputWindow = New System.Windows.Forms.RadioButton()
         Me.rdoHTMLOutputWindow = New System.Windows.Forms.RadioButton()
         Me.cmdTableOptions = New System.Windows.Forms.Button()
+        Me.ucrViewNudPreview = New instat.ucrNud()
+        Me.ucrViewChkPreview = New instat.ucrCheck()
         Me.ucrChkDisplayFromTop = New instat.ucrCheck()
         Me.ucrChkRowNumbers = New instat.ucrCheck()
         Me.ucrSaveData = New instat.ucrSave()
@@ -107,6 +109,30 @@ Partial Class dlgView
         Me.cmdTableOptions.TabIndex = 26
         Me.cmdTableOptions.Text = "Table Options"
         Me.cmdTableOptions.UseVisualStyleBackColor = True
+        '
+        'ucrViewNudPreview
+        '
+        Me.ucrViewNudPreview.AutoSize = True
+        Me.ucrViewNudPreview.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrViewNudPreview.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrViewNudPreview.Location = New System.Drawing.Point(343, 167)
+        Me.ucrViewNudPreview.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrViewNudPreview.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrViewNudPreview.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrViewNudPreview.Name = "ucrViewNudPreview"
+        Me.ucrViewNudPreview.Size = New System.Drawing.Size(50, 20)
+        Me.ucrViewNudPreview.TabIndex = 33
+        Me.ucrViewNudPreview.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrViewChkPreview
+        '
+        Me.ucrViewChkPreview.AutoSize = True
+        Me.ucrViewChkPreview.Checked = False
+        Me.ucrViewChkPreview.Location = New System.Drawing.Point(248, 167)
+        Me.ucrViewChkPreview.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrViewChkPreview.Name = "ucrViewChkPreview"
+        Me.ucrViewChkPreview.Size = New System.Drawing.Size(89, 23)
+        Me.ucrViewChkPreview.TabIndex = 32
         '
         'ucrChkDisplayFromTop
         '
@@ -218,9 +244,9 @@ Partial Class dlgView
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 357)
+        Me.Controls.Add(Me.ucrViewNudPreview)
         Me.Controls.Add(Me.cmdTableOptions)
         Me.Controls.Add(Me.ucrChkDisplayFromTop)
-        Me.Controls.Add(Me.ucrChkRowNumbers)
         Me.Controls.Add(Me.ucrSaveData)
         Me.Controls.Add(Me.ucrReceiverSortCol)
         Me.Controls.Add(Me.ucrChkSortColumn)
@@ -233,6 +259,8 @@ Partial Class dlgView
         Me.Controls.Add(Me.ucrReceiverView)
         Me.Controls.Add(Me.ucrSelectorForView)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrViewChkPreview)
+        Me.Controls.Add(Me.ucrChkRowNumbers)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -259,4 +287,6 @@ Partial Class dlgView
     Friend WithEvents ucrChkRowNumbers As ucrCheck
     Friend WithEvents ucrChkDisplayFromTop As ucrCheck
     Friend WithEvents cmdTableOptions As Button
+    Friend WithEvents ucrViewNudPreview As ucrNud
+    Friend WithEvents ucrViewChkPreview As ucrCheck
 End Class
