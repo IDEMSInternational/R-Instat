@@ -57,18 +57,18 @@ Public Class dlgUseTable
         ucrTablesReceiver.SetItemType(RObjectTypeLabel.Table)
 
         ''To Be enabled later when the formats are supported.
-        rdoAsHTML.Enabled = False
-        rdoAsLaTex.Enabled = False
-        rdoAsRTF.Enabled = False
-        rdoAsWord.Enabled = False
-        'ucrPnlExportOptions.AddRadioButton(rdoAsHTML)
-        'ucrPnlExportOptions.AddRadioButton(rdoAsRTF)
-        'ucrPnlExportOptions.AddRadioButton(rdoAsWord)
-        'ucrPnlExportOptions.AddRadioButton(rdoAsLaTex)
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsHTML, "as_raw_html")
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsRTF, "as_rtf")
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsWord, "as_word")
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsLaTex, "as_word")
+        'rdoAsHTML.Enabled = False
+        'rdoAsLaTex.Enabled = False
+        'rdoAsRTF.Enabled = False
+        'rdoAsWord.Enabled = False
+        ucrPnlExportOptions.AddRadioButton(rdoAsHTML)
+        ucrPnlExportOptions.AddRadioButton(rdoAsRTF)
+        ucrPnlExportOptions.AddRadioButton(rdoAsWord)
+        ucrPnlExportOptions.AddRadioButton(rdoAsLaTex)
+        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsHTML, "fmt_markdown")
+        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsRTF, "as_rtf")
+        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsWord, "as_word")
+        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsLaTex, "as_word")
 
         cmdTableOptions.Enabled = False
 
@@ -108,7 +108,7 @@ Public Class dlgUseTable
         clsJoiningPipeOperator = New ROperator
         clsgtExtraThemesFunction = New RFunction
 
-        'rdoAsHTML.Checked = True
+        rdoAsHTML.Checked = True
         ucrTablesReceiver.SetMeAsReceiver()
         ucrTablesSelector.Reset()
         ucrSaveTable.Reset()
@@ -173,7 +173,7 @@ Public Class dlgUseTable
         clsThemesTabOptionsFunction.SetRCommand("tab_options")
 
         clsRFunctionAsHTML.SetPackageName("gt")
-        clsRFunctionAsHTML.SetRCommand("as_raw_html")
+        clsRFunctionAsHTML.SetRCommand("fmt_markdown")
 
         clsRFunctionAsRTF.SetPackageName("gt")
         clsRFunctionAsRTF.SetRCommand("as_rtf")
