@@ -168,3 +168,6 @@ devtools::install_github("michael-franke/aida-package")
 devtools::install_github("rijaf-iri/CDT")
 devtools::install_github("IDEMSInternational/rapidpror")
 devtools::install_github("IDEMSInternational/epicsawrap")
+devtools::install_version("ggplot2", version = "0.9.1", repos = "http://cran.us.r-project.org")
+devtools::install_github("larmarange/ggstats")
+
