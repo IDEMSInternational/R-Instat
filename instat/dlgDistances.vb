@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class dlgDistances
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsConcFunction, clsConc2Function, clsDummyFunction, clsDistFunction As New RFunction
+    Private clsConcFunction, clsRoundOffFunction, clsConc2Function, clsDummyFunction, clsDistFunction As New RFunction
     Private clsOpeningOperator, clsClosingOperator, clsConversionOperator As New ROperator
 
     Private Sub dlgDistances_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -85,6 +85,7 @@ Public Class dlgDistances
         clsConcFunction = New RFunction
         clsDistFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsRoundOffFunction = New RFunction
         clsOpeningOperator = New ROperator
         clsClosingOperator = New ROperator
         clsConversionOperator = New ROperator
@@ -118,9 +119,13 @@ Public Class dlgDistances
         clsConversionOperator.AddParameter("left", clsRFunctionParameter:=clsDistFunction, iPosition:=0)
         clsConversionOperator.AddParameter("right", "1000", iPosition:=1)
 
+        clsRoundOffFunction.SetRCommand("round")
+        clsRoundOffFunction.AddParameter("dec", clsROperatorParameter:=clsConversionOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsRoundOffFunction.AddParameter("two", 2, iPosition:=1, bIncludeArgumentName:=False)
+
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveDistance.GetText, strTempDataframe:=ucrSelectorDistance.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveDistance.GetText)
 
-        ucrBase.clsRsyntax.SetBaseROperator(clsConversionOperator)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRoundOffFunction)
 
     End Sub
 
@@ -128,7 +133,7 @@ Public Class dlgDistances
         ucrInputLat.SetRCode(clsConcFunction, bReset)
         ucrInputLon.SetRCode(clsConcFunction, bReset)
         ucrPnlFrom.SetRCode(clsDummyFunction, bReset)
-        ucrSaveDistance.SetRCode(clsConversionOperator, bReset)
+        ucrSaveDistance.SetRCode(clsRoundOffFunction, bReset)
         If bReset Then
             ucrReceiverLong.SetRCode(clsConc2Function, bReset)
             ucrReceiverLat.SetRCode(clsConc2Function, bReset)
