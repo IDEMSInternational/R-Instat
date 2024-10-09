@@ -311,12 +311,12 @@ Public Class dlgDescribeTwoVariable
         clsCombineSwapAnova2Table.SetRCommand("c")
 
         clsMappingFunction.SetPackageName("purrr")
-        clsMappingFunction.SetRCommand("map")
+        clsMappingFunction.SetRCommand("walk")
         clsMappingFunction.AddParameter(".x", clsROperatorParameter:=clsYlistOperator, iPosition:=0)
         clsMappingFunction.AddParameter(".f", clsROperatorParameter:=clsAnovaTable2Operator, iPosition:=1)
 
         clsMapping2Function.SetPackageName("purrr")
-        clsMapping2Function.SetRCommand("map")
+        clsMapping2Function.SetRCommand("walk")
         clsMapping2Function.AddParameter(".x", clsROperatorParameter:=clsYlist2Operator, iPosition:=0)
         clsMapping2Function.AddParameter(".f", clsROperatorParameter:=clsAnovaSwapTable2Opeator, iPosition:=1)
 
