@@ -4544,17 +4544,20 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total
   if (total) anova_mod <- anova_mod %>% tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum)))
   anova_mod$`F value` <- round(anova_mod$`F value`, 4)
   if (sign_level) anova_mod$`Pr(>F)` <- format.pval(anova_mod$`Pr(>F)`, digits = 4, eps = 0.001)
-
+  cat(paste0("ANOVA of ", formula_str, ":\n"))
+  print(anova_mod)
+  cat("\n")
   # Optionally print means
   if (means) {
-    if (class(mod$model[[x_col_names]]) == "numeric"){
+    if (class(mod$model[[x_col_names]]) %in% c("numeric", "integer")){
       cat("Model coefficients:\n")
       print(mod$coefficients)
+      cat("\n")
     } else {
       cat(paste0("Means table of ", y_col_name, ":\n"))
       print(model.tables(aov(mod), type = "means"))
+      cat("\n")
     }
   }
-  return(anova_mod)
 }
 )
