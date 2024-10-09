@@ -27,10 +27,8 @@ Partial Class dlgExportToClimsoft
         Me.lblHour = New System.Windows.Forms.Label()
         Me.lblExport = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
-        Me.ucrChkExportDataFrame = New instat.ucrCheck()
         Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.ucrSaveNewDataFrame = New instat.ucrSave()
-        Me.ucrChkNewDataFrame = New instat.ucrCheck()
         Me.ucrInputHour = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
@@ -41,6 +39,14 @@ Partial Class dlgExportToClimsoft
         Me.ucrPnlDailyHourly = New instat.UcrPanel()
         Me.ucrReceiverStationID = New instat.ucrReceiverSingle()
         Me.lblStationID = New System.Windows.Forms.Label()
+        Me.rdoExportData = New System.Windows.Forms.RadioButton()
+        Me.rdoNewDataFrame = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverComments = New instat.ucrReceiverSingle()
+        Me.ucrChkAddReport = New instat.ucrCheck()
+        Me.lblcomments = New System.Windows.Forms.Label()
+        Me.ucrDataFrameSheets = New instat.ucrDataFrame()
+        Me.ucrPnlOutput = New instat.UcrPanel()
+        Me.grpSave = New System.Windows.Forms.GroupBox()
         Me.SuspendLayout()
         '
         'lblElement
@@ -77,7 +83,7 @@ Partial Class dlgExportToClimsoft
         '
         Me.lblExport.AutoSize = True
         Me.lblExport.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblExport.Location = New System.Drawing.Point(14, 566)
+        Me.lblExport.Location = New System.Drawing.Point(14, 654)
         Me.lblExport.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblExport.Name = "lblExport"
         Me.lblExport.Size = New System.Drawing.Size(88, 20)
@@ -87,7 +93,7 @@ Partial Class dlgExportToClimsoft
         'cmdBrowse
         '
         Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrowse.Location = New System.Drawing.Point(489, 558)
+        Me.cmdBrowse.Location = New System.Drawing.Point(489, 646)
         Me.cmdBrowse.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(120, 34)
@@ -95,23 +101,13 @@ Partial Class dlgExportToClimsoft
         Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
-        'ucrChkExportDataFrame
-        '
-        Me.ucrChkExportDataFrame.AutoSize = True
-        Me.ucrChkExportDataFrame.Checked = False
-        Me.ucrChkExportDataFrame.Location = New System.Drawing.Point(14, 459)
-        Me.ucrChkExportDataFrame.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkExportDataFrame.Name = "ucrChkExportDataFrame"
-        Me.ucrChkExportDataFrame.Size = New System.Drawing.Size(399, 34)
-        Me.ucrChkExportDataFrame.TabIndex = 13
-        '
         'ucrInputExportFile
         '
         Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
         Me.ucrInputExportFile.AutoSize = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(213, 560)
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(213, 648)
         Me.ucrInputExportFile.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
         Me.ucrInputExportFile.Size = New System.Drawing.Size(273, 32)
@@ -120,21 +116,11 @@ Partial Class dlgExportToClimsoft
         'ucrSaveNewDataFrame
         '
         Me.ucrSaveNewDataFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(14, 513)
+        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(14, 604)
         Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
         Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(522, 36)
         Me.ucrSaveNewDataFrame.TabIndex = 14
-        '
-        'ucrChkNewDataFrame
-        '
-        Me.ucrChkNewDataFrame.AutoSize = True
-        Me.ucrChkNewDataFrame.Checked = False
-        Me.ucrChkNewDataFrame.Location = New System.Drawing.Point(14, 416)
-        Me.ucrChkNewDataFrame.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkNewDataFrame.Name = "ucrChkNewDataFrame"
-        Me.ucrChkNewDataFrame.Size = New System.Drawing.Size(399, 34)
-        Me.ucrChkNewDataFrame.TabIndex = 12
         '
         'ucrInputHour
         '
@@ -152,7 +138,7 @@ Partial Class dlgExportToClimsoft
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 604)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 688)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -269,22 +255,118 @@ Partial Class dlgExportToClimsoft
         Me.lblStationID.TabIndex = 4
         Me.lblStationID.Text = "Station ID:"
         '
+        'rdoExportData
+        '
+        Me.rdoExportData.AutoSize = True
+        Me.rdoExportData.Location = New System.Drawing.Point(22, 421)
+        Me.rdoExportData.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoExportData.Name = "rdoExportData"
+        Me.rdoExportData.Size = New System.Drawing.Size(156, 24)
+        Me.rdoExportData.TabIndex = 94
+        Me.rdoExportData.TabStop = True
+        Me.rdoExportData.Text = "Export Data (csv)"
+        Me.rdoExportData.UseVisualStyleBackColor = True
+        '
+        'rdoNewDataFrame
+        '
+        Me.rdoNewDataFrame.AutoSize = True
+        Me.rdoNewDataFrame.Location = New System.Drawing.Point(22, 378)
+        Me.rdoNewDataFrame.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoNewDataFrame.Name = "rdoNewDataFrame"
+        Me.rdoNewDataFrame.Size = New System.Drawing.Size(154, 24)
+        Me.rdoNewDataFrame.TabIndex = 93
+        Me.rdoNewDataFrame.TabStop = True
+        Me.rdoNewDataFrame.Text = "New Data Frame"
+        Me.rdoNewDataFrame.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverComments
+        '
+        Me.ucrReceiverComments.AutoSize = True
+        Me.ucrReceiverComments.frmParent = Me
+        Me.ucrReceiverComments.Location = New System.Drawing.Point(427, 557)
+        Me.ucrReceiverComments.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverComments.Name = "ucrReceiverComments"
+        Me.ucrReceiverComments.Selector = Nothing
+        Me.ucrReceiverComments.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverComments.strNcFilePath = ""
+        Me.ucrReceiverComments.TabIndex = 92
+        Me.ucrReceiverComments.ucrSelector = Nothing
+        '
+        'ucrChkAddReport
+        '
+        Me.ucrChkAddReport.AutoSize = True
+        Me.ucrChkAddReport.Checked = False
+        Me.ucrChkAddReport.Location = New System.Drawing.Point(8, 483)
+        Me.ucrChkAddReport.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkAddReport.Name = "ucrChkAddReport"
+        Me.ucrChkAddReport.Size = New System.Drawing.Size(315, 34)
+        Me.ucrChkAddReport.TabIndex = 91
+        '
+        'lblcomments
+        '
+        Me.lblcomments.AutoSize = True
+        Me.lblcomments.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblcomments.Location = New System.Drawing.Point(427, 531)
+        Me.lblcomments.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblcomments.Name = "lblcomments"
+        Me.lblcomments.Size = New System.Drawing.Size(90, 20)
+        Me.lblcomments.TabIndex = 90
+        Me.lblcomments.Tag = "New_Name"
+        Me.lblcomments.Text = "Comments:"
+        '
+        'ucrDataFrameSheets
+        '
+        Me.ucrDataFrameSheets.AutoSize = True
+        Me.ucrDataFrameSheets.bDropUnusedFilterLevels = False
+        Me.ucrDataFrameSheets.bUseCurrentFilter = True
+        Me.ucrDataFrameSheets.Location = New System.Drawing.Point(17, 524)
+        Me.ucrDataFrameSheets.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrameSheets.Name = "ucrDataFrameSheets"
+        Me.ucrDataFrameSheets.Size = New System.Drawing.Size(226, 75)
+        Me.ucrDataFrameSheets.TabIndex = 89
+        '
+        'ucrPnlOutput
+        '
+        Me.ucrPnlOutput.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOutput.Location = New System.Drawing.Point(18, 377)
+        Me.ucrPnlOutput.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlOutput.Name = "ucrPnlOutput"
+        Me.ucrPnlOutput.Size = New System.Drawing.Size(226, 90)
+        Me.ucrPnlOutput.TabIndex = 95
+        '
+        'grpSave
+        '
+        Me.grpSave.Location = New System.Drawing.Point(12, 356)
+        Me.grpSave.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpSave.Name = "grpSave"
+        Me.grpSave.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpSave.Size = New System.Drawing.Size(248, 110)
+        Me.grpSave.TabIndex = 96
+        Me.grpSave.TabStop = False
+        Me.grpSave.Text = "Save"
+        '
         'dlgExportToClimsoft
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(626, 690)
+        Me.ClientSize = New System.Drawing.Size(626, 775)
+        Me.Controls.Add(Me.rdoExportData)
+        Me.Controls.Add(Me.rdoNewDataFrame)
+        Me.Controls.Add(Me.ucrReceiverComments)
+        Me.Controls.Add(Me.ucrChkAddReport)
+        Me.Controls.Add(Me.lblcomments)
+        Me.Controls.Add(Me.ucrDataFrameSheets)
+        Me.Controls.Add(Me.ucrPnlOutput)
+        Me.Controls.Add(Me.grpSave)
         Me.Controls.Add(Me.lblStationID)
         Me.Controls.Add(Me.ucrReceiverStationID)
         Me.Controls.Add(Me.rdoDaily)
         Me.Controls.Add(Me.rdoHourly)
-        Me.Controls.Add(Me.ucrChkExportDataFrame)
         Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.ucrInputExportFile)
         Me.Controls.Add(Me.ucrSaveNewDataFrame)
-        Me.Controls.Add(Me.ucrChkNewDataFrame)
         Me.Controls.Add(Me.lblHour)
         Me.Controls.Add(Me.ucrInputHour)
         Me.Controls.Add(Me.ucrBase)
@@ -312,15 +394,21 @@ Partial Class dlgExportToClimsoft
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblHour As Label
     Friend WithEvents ucrInputHour As ucrInputTextBox
-    Friend WithEvents ucrChkNewDataFrame As ucrCheck
     Friend WithEvents ucrSaveNewDataFrame As ucrSave
     Friend WithEvents lblExport As Label
     Friend WithEvents cmdBrowse As Button
     Friend WithEvents ucrInputExportFile As ucrInputTextBox
-    Friend WithEvents ucrChkExportDataFrame As ucrCheck
     Friend WithEvents rdoDaily As RadioButton
     Friend WithEvents rdoHourly As RadioButton
     Friend WithEvents ucrPnlDailyHourly As UcrPanel
     Friend WithEvents lblStationID As Label
     Friend WithEvents ucrReceiverStationID As ucrReceiverSingle
+    Friend WithEvents rdoExportData As RadioButton
+    Friend WithEvents rdoNewDataFrame As RadioButton
+    Friend WithEvents ucrReceiverComments As ucrReceiverSingle
+    Friend WithEvents ucrChkAddReport As ucrCheck
+    Friend WithEvents lblcomments As Label
+    Friend WithEvents ucrDataFrameSheets As ucrDataFrame
+    Friend WithEvents ucrPnlOutput As UcrPanel
+    Friend WithEvents grpSave As GroupBox
 End Class
