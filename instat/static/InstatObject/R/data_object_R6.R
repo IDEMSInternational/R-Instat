@@ -4555,5 +4555,6 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total
       print(model.tables(aov(mod), type = "means"))
     }
   }
+  return(anova_mod)
 }
 )
