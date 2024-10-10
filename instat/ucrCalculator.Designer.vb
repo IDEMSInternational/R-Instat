@@ -665,6 +665,10 @@ Partial Class ucrCalculator
         Me.cmdPolynomial = New System.Windows.Forms.Button()
         Me.cmdOrigin = New System.Windows.Forms.Button()
         Me.ucrChkStoreScalar = New System.Windows.Forms.CheckBox()
+        Me.cmdFracDen = New System.Windows.Forms.Button()
+        Me.cmdFrac20 = New System.Windows.Forms.Button()
+        Me.cmdFrac100 = New System.Windows.Forms.Button()
+        Me.cmdFrac10 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout
         Me.grpDates.SuspendLayout
         Me.ContextMenuStripDate.SuspendLayout
@@ -7773,6 +7777,10 @@ Partial Class ucrCalculator
         '
         'grpFunctions
         '
+        Me.grpFunctions.Controls.Add(Me.cmdFracDen)
+        Me.grpFunctions.Controls.Add(Me.cmdFrac20)
+        Me.grpFunctions.Controls.Add(Me.cmdFrac100)
+        Me.grpFunctions.Controls.Add(Me.cmdFrac10)
         Me.grpFunctions.Controls.Add(Me.cmdDigitsumSession)
         Me.grpFunctions.Controls.Add(Me.cmdDigitsquSession)
         Me.grpFunctions.Controls.Add(Me.cmdFunctionsDigitsum)
@@ -7806,7 +7814,7 @@ Partial Class ucrCalculator
         Me.grpFunctions.Margin = New System.Windows.Forms.Padding(2)
         Me.grpFunctions.Name = "grpFunctions"
         Me.grpFunctions.Padding = New System.Windows.Forms.Padding(2)
-        Me.grpFunctions.Size = New System.Drawing.Size(259, 254)
+        Me.grpFunctions.Size = New System.Drawing.Size(259, 278)
         Me.grpFunctions.TabIndex = 216
         Me.grpFunctions.TabStop = False
         Me.grpFunctions.Text = "Functions"
@@ -7893,7 +7901,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRhelpFunctions.AutoSize = True
         Me.cmdRhelpFunctions.ContextMenuStrip = Me.ContextMenuStripFunctions
-        Me.cmdRhelpFunctions.Location = New System.Drawing.Point(165, 217)
+        Me.cmdRhelpFunctions.Location = New System.Drawing.Point(165, 251)
         Me.cmdRhelpFunctions.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRhelpFunctions.Name = "cmdRhelpFunctions"
         Me.cmdRhelpFunctions.Size = New System.Drawing.Size(86, 30)
@@ -7988,7 +7996,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCoef.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCoef.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoef.Location = New System.Drawing.Point(128, 188)
+        Me.cmdCoef.Location = New System.Drawing.Point(128, 217)
         Me.cmdCoef.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCoef.Name = "cmdCoef"
         Me.cmdCoef.Size = New System.Drawing.Size(62, 30)
@@ -8012,7 +8020,7 @@ Partial Class ucrCalculator
         '
         Me.cmdProd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdProd.Location = New System.Drawing.Point(2, 188)
+        Me.cmdProd.Location = New System.Drawing.Point(2, 217)
         Me.cmdProd.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdProd.Name = "cmdProd"
         Me.cmdProd.Size = New System.Drawing.Size(66, 30)
@@ -8036,7 +8044,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCombn.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCombn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCombn.Location = New System.Drawing.Point(67, 188)
+        Me.cmdCombn.Location = New System.Drawing.Point(67, 217)
         Me.cmdCombn.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCombn.Name = "cmdCombn"
         Me.cmdCombn.Size = New System.Drawing.Size(62, 30)
@@ -8060,7 +8068,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCoeffs2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCoeffs2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoeffs2.Location = New System.Drawing.Point(189, 188)
+        Me.cmdCoeffs2.Location = New System.Drawing.Point(189, 217)
         Me.cmdCoeffs2.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCoeffs2.Name = "cmdCoeffs2"
         Me.cmdCoeffs2.Size = New System.Drawing.Size(62, 30)
@@ -8096,7 +8104,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCoeffs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCoeffs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoeffs.Location = New System.Drawing.Point(189, 159)
+        Me.cmdCoeffs.Location = New System.Drawing.Point(189, 188)
         Me.cmdCoeffs.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCoeffs.Name = "cmdCoeffs"
         Me.cmdCoeffs.Size = New System.Drawing.Size(62, 30)
@@ -8120,7 +8128,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRoots.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdRoots.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRoots.Location = New System.Drawing.Point(128, 159)
+        Me.cmdRoots.Location = New System.Drawing.Point(128, 188)
         Me.cmdRoots.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRoots.Name = "cmdRoots"
         Me.cmdRoots.Size = New System.Drawing.Size(62, 30)
@@ -8132,7 +8140,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPolynomial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPolynomial.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPolynomial.Location = New System.Drawing.Point(2, 159)
+        Me.cmdPolynomial.Location = New System.Drawing.Point(2, 188)
         Me.cmdPolynomial.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPolynomial.Name = "cmdPolynomial"
         Me.cmdPolynomial.Size = New System.Drawing.Size(66, 30)
@@ -8144,7 +8152,7 @@ Partial Class ucrCalculator
         '
         Me.cmdOrigin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdOrigin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOrigin.Location = New System.Drawing.Point(67, 159)
+        Me.cmdOrigin.Location = New System.Drawing.Point(67, 188)
         Me.cmdOrigin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdOrigin.Name = "cmdOrigin"
         Me.cmdOrigin.Size = New System.Drawing.Size(62, 30)
@@ -8163,11 +8171,56 @@ Partial Class ucrCalculator
         Me.ucrChkStoreScalar.Text = "CheckBox1"
         Me.ucrChkStoreScalar.UseVisualStyleBackColor = True
         '
+        'cmdFracDen
+        '
+        Me.cmdFracDen.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFracDen.Location = New System.Drawing.Point(189, 159)
+        Me.cmdFracDen.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFracDen.Name = "cmdFracDen"
+        Me.cmdFracDen.Size = New System.Drawing.Size(62, 30)
+        Me.cmdFracDen.TabIndex = 232
+        Me.cmdFracDen.Text = "frac_den"
+        Me.cmdFracDen.UseVisualStyleBackColor = True
+        '
+        'cmdFrac20
+        '
+        Me.cmdFrac20.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFrac20.Location = New System.Drawing.Point(67, 159)
+        Me.cmdFrac20.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFrac20.Name = "cmdFrac20"
+        Me.cmdFrac20.Size = New System.Drawing.Size(62, 30)
+        Me.cmdFrac20.TabIndex = 231
+        Me.cmdFrac20.Text = "frac20"
+        Me.cmdFrac20.UseVisualStyleBackColor = True
+        '
+        'cmdFrac100
+        '
+        Me.cmdFrac100.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFrac100.Location = New System.Drawing.Point(128, 159)
+        Me.cmdFrac100.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFrac100.Name = "cmdFrac100"
+        Me.cmdFrac100.Size = New System.Drawing.Size(62, 30)
+        Me.cmdFrac100.TabIndex = 230
+        Me.cmdFrac100.Text = "frac100"
+        Me.cmdFrac100.UseVisualStyleBackColor = True
+        '
+        'cmdFrac10
+        '
+        Me.cmdFrac10.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFrac10.Location = New System.Drawing.Point(2, 159)
+        Me.cmdFrac10.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFrac10.Name = "cmdFrac10"
+        Me.cmdFrac10.Size = New System.Drawing.Size(66, 30)
+        Me.cmdFrac10.TabIndex = 229
+        Me.cmdFrac10.Text = "frac10"
+        Me.cmdFrac10.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.Controls.Add(Me.grpList)
         Me.Controls.Add(Me.ucrChkStoreScalar)
         Me.Controls.Add(Me.cmdRhelpList)
         Me.Controls.Add(Me.cmdWakefieldHelp)
@@ -8180,7 +8233,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
-        Me.Controls.Add(Me.grpList)
         Me.Controls.Add(Me.grpFunctions)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpDates)
@@ -8885,4 +8937,8 @@ Partial Class ucrCalculator
     Friend WithEvents cmdRescale As Button
     Friend WithEvents ScalesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ucrChkStoreScalar As CheckBox
+    Friend WithEvents cmdFracDen As Button
+    Friend WithEvents cmdFrac20 As Button
+    Friend WithEvents cmdFrac100 As Button
+    Friend WithEvents cmdFrac10 As Button
 End Class

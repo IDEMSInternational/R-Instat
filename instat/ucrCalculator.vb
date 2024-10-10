@@ -494,6 +494,10 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPascal, "Gives Pascal triangles, e.g. for c(1,2,3,4) gives 1, (1,1), (1, 2, 1), (1, 3, 3, 1)")
         ttCalculator.SetToolTip(cmdMASSFractions, "changes decimal data into a character variable with fractions. So 1.5 becomes 3/2, 0.25 becomes 1/4 etc.")
         ttCalculator.SetToolTip(cmdDecimals, "the inverse of the fractions key. So 3/2 becomes 1.5, 1/4 becomes 0.25 etc.")
+        ttCalculator.SetToolTip(cmdFrac10, "Give fraction our of 10 for a decimal value. For example for 0.36 the value is 4/10")
+        ttCalculator.SetToolTip(cmdFrac20, "Give fraction our of 20 for a decimal value. For example for 0.36 the value is 7/20")
+        ttCalculator.SetToolTip(cmdFrac100, "Give fraction our of 100 for a decimal value. For example for 0.36 the value is 36/100")
+        ttCalculator.SetToolTip(cmdFracDen, "Give fraction for a given denominator. For example for frac_den(0.36, 50) gives 18/50")
         '---------------------------------------------------------------------------------------------------------------------
 
         Const strTooltipCmdLength = "number Of observations: For example length(c(1,2,3,4,NA)) = 5 "
@@ -6095,6 +6099,38 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("decimals(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("decimals( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdFrac10_Click(sender As Object, e As EventArgs) Handles cmdFrac10.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac10(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac10( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdFrac20_Click(sender As Object, e As EventArgs) Handles cmdFrac20.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac20(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac20( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdFrac100_Click(sender As Object, e As EventArgs) Handles cmdFrac100.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac100(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac100( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdFracDen_Click(sender As Object, e As EventArgs) Handles cmdFracDen.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den(x= , denominator= )", 17)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den( , )", 4)
         End If
     End Sub
 End Class
