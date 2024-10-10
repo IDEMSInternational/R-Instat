@@ -65,10 +65,10 @@ Public Class dlgUseTable
         ucrPnlOptions.AddRadioButton(rdoAsRTF)
         ucrPnlOptions.AddRadioButton(rdoAsWord)
         ucrPnlOptions.AddRadioButton(rdoAsLaTex)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoAsHTML, "gtsave")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoAsRTF, "gtsave")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoAsWord, "gtsave")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoAsLaTex, "gtsave")
+        ucrPnlOptions.AddParameterValuesCondition(rdoAsHTML, "gtsave", "html")
+        ucrPnlOptions.AddParameterValuesCondition(rdoAsRTF, "gtsave", "rtf")
+        ucrPnlOptions.AddParameterValuesCondition(rdoAsWord, "gtsave", "docx")
+        ucrPnlOptions.AddParameterValuesCondition(rdoAsLaTex, "gtsave", "tex")
 
         cmdTableOptions.Enabled = False
 
@@ -113,7 +113,8 @@ Public Class dlgUseTable
         ucrTablesSelector.Reset()
         ucrSaveTable.Reset()
 
-        clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
+        clsDummyFunction.AddParameter("theme", "select", iPosition:=0)
+        clsDummyFunction.AddParameter("gtsave", "html", iPosition:=1)
 
         clsgtExtraThemesFunction.SetPackageName("gtExtras")
 
@@ -196,6 +197,9 @@ Public Class dlgUseTable
         ucrTablesSelector.SetRCode(clsUseTableFunction, bReset)
         ucrTablesReceiver.SetRCode(clsUseTableFunction, bReset)
         ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
+        If bReset Then
+            ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
