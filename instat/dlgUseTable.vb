@@ -176,13 +176,13 @@ Public Class dlgUseTable
         clsRFunctionAsHTML.SetRCommand("gtsave")
 
         clsRFunctionAsRTF.SetPackageName("gt")
-        clsRFunctionAsRTF.SetRCommand("as_rtf")
+        clsRFunctionAsRTF.SetRCommand("gtsave")
 
         clsRFunctionAsWord.SetPackageName("gt")
-        clsRFunctionAsWord.SetRCommand("as_word")
+        clsRFunctionAsWord.SetRCommand("gtsave")
 
         clsRFunctionAsLaTex.SetPackageName("gt")
-        clsRFunctionAsLaTex.SetRCommand("as_word")
+        clsRFunctionAsLaTex.SetRCommand("gtsave")
 
         clsUseTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
@@ -225,19 +225,19 @@ Public Class dlgUseTable
         If rdoAsHTML.Checked Then
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsHTML)
             clsRFunctionAsHTML.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".html" & Chr(34), iPosition:=1)
-            clsRFunctionAsHTML.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments & Chr(34), iPosition:=2)
+            clsRFunctionAsHTML.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments.Replace("\", "/") & Chr(34), iPosition:=2)
         ElseIf rdoAsRTF.Checked Then
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsRTF)
             clsRFunctionAsRTF.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".rtf" & Chr(34), iPosition:=1)
-            clsRFunctionAsRTF.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments & Chr(34), iPosition:=2)
+            clsRFunctionAsRTF.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments.Replace("\", "/") & Chr(34), iPosition:=2)
         ElseIf rdoAsWord.Checked Then
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsWord)
             clsRFunctionAsWord.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".docx" & Chr(34), iPosition:=1)
-            clsRFunctionAsWord.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments & Chr(34), iPosition:=2)
+            clsRFunctionAsWord.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments.Replace("\", "/") & Chr(34), iPosition:=2)
         Else
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsLaTex)
             clsRFunctionAsLaTex.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".tex" & Chr(34), iPosition:=1)
-            clsRFunctionAsLaTex.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments & Chr(34), iPosition:=2)
+            clsRFunctionAsLaTex.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments.Replace("\", "/") & Chr(34), iPosition:=2)
 
         End If
     End Sub
