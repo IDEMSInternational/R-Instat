@@ -29,11 +29,11 @@ Partial Class dlgUseTable
         Me.cmdTableOptions = New System.Windows.Forms.Button()
         Me.lblTable = New System.Windows.Forms.Label()
         Me.lblExportTables = New System.Windows.Forms.Label()
-        Me.ucrPnlExportOptions = New instat.UcrPanel()
         Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrTablesReceiver = New instat.ucrReceiverSingle()
         Me.ucrTablesSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'rdoAsHTML
@@ -109,15 +109,6 @@ Partial Class dlgUseTable
         Me.lblExportTables.TabIndex = 26
         Me.lblExportTables.Text = "Export Table as:"
         '
-        'ucrPnlExportOptions
-        '
-        Me.ucrPnlExportOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlExportOptions.Enabled = False
-        Me.ucrPnlExportOptions.Location = New System.Drawing.Point(8, 264)
-        Me.ucrPnlExportOptions.Name = "ucrPnlExportOptions"
-        Me.ucrPnlExportOptions.Size = New System.Drawing.Size(105, 110)
-        Me.ucrPnlExportOptions.TabIndex = 5
-        '
         'ucrSaveTable
         '
         Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -160,6 +151,15 @@ Partial Class dlgUseTable
         Me.ucrBase.Size = New System.Drawing.Size(407, 52)
         Me.ucrBase.TabIndex = 0
         '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(8, 263)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(158, 106)
+        Me.ucrPnlOptions.TabIndex = 27
+        '
         'dlgUseTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -172,11 +172,11 @@ Partial Class dlgUseTable
         Me.Controls.Add(Me.rdoAsWord)
         Me.Controls.Add(Me.rdoAsRTF)
         Me.Controls.Add(Me.rdoAsHTML)
-        Me.Controls.Add(Me.ucrPnlExportOptions)
         Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.ucrTablesReceiver)
         Me.Controls.Add(Me.ucrTablesSelector)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -191,7 +191,6 @@ Partial Class dlgUseTable
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrTablesSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrTablesReceiver As ucrReceiverSingle
-    Friend WithEvents ucrPnlExportOptions As UcrPanel
     Friend WithEvents ucrSaveTable As ucrSave
     Friend WithEvents rdoAsWord As RadioButton
     Friend WithEvents rdoAsRTF As RadioButton
@@ -200,4 +199,5 @@ Partial Class dlgUseTable
     Friend WithEvents rdoAsLaTex As RadioButton
     Friend WithEvents lblTable As Label
     Friend WithEvents lblExportTables As Label
+    Friend WithEvents ucrPnlOptions As UcrPanel
 End Class

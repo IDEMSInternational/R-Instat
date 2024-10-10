@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports System.IO
 Imports instat.Translations
 Public Class dlgUseTable
     Private bFirstLoad As Boolean = True
@@ -61,14 +61,14 @@ Public Class dlgUseTable
         'rdoAsLaTex.Enabled = False
         'rdoAsRTF.Enabled = False
         'rdoAsWord.Enabled = False
-        ucrPnlExportOptions.AddRadioButton(rdoAsHTML)
-        ucrPnlExportOptions.AddRadioButton(rdoAsRTF)
-        ucrPnlExportOptions.AddRadioButton(rdoAsWord)
-        ucrPnlExportOptions.AddRadioButton(rdoAsLaTex)
-        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsHTML, "fmt_markdown")
-        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsRTF, "as_rtf")
-        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsWord, "as_word")
-        ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsLaTex, "as_word")
+        ucrPnlOptions.AddRadioButton(rdoAsHTML)
+        ucrPnlOptions.AddRadioButton(rdoAsRTF)
+        ucrPnlOptions.AddRadioButton(rdoAsWord)
+        ucrPnlOptions.AddRadioButton(rdoAsLaTex)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoAsHTML, "gtsave")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoAsRTF, "gtsave")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoAsWord, "gtsave")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoAsLaTex, "gtsave")
 
         cmdTableOptions.Enabled = False
 
@@ -108,7 +108,7 @@ Public Class dlgUseTable
         clsJoiningPipeOperator = New ROperator
         clsgtExtraThemesFunction = New RFunction
 
-        rdoAsHTML.Checked = True
+        'rdoAsHTML.Checked = True
         ucrTablesReceiver.SetMeAsReceiver()
         ucrTablesSelector.Reset()
         ucrSaveTable.Reset()
@@ -173,7 +173,7 @@ Public Class dlgUseTable
         clsThemesTabOptionsFunction.SetRCommand("tab_options")
 
         clsRFunctionAsHTML.SetPackageName("gt")
-        clsRFunctionAsHTML.SetRCommand("fmt_markdown")
+        clsRFunctionAsHTML.SetRCommand("gtsave")
 
         clsRFunctionAsRTF.SetPackageName("gt")
         clsRFunctionAsRTF.SetRCommand("as_rtf")
@@ -221,15 +221,25 @@ Public Class dlgUseTable
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlExportOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExportOptions.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoAsHTML.Checked Then
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsHTML)
+            clsRFunctionAsHTML.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".html" & Chr(34), iPosition:=1)
+            clsRFunctionAsHTML.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments & Chr(34), iPosition:=2)
         ElseIf rdoAsRTF.Checked Then
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsRTF)
+            clsRFunctionAsRTF.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".rtf" & Chr(34), iPosition:=1)
+            clsRFunctionAsRTF.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments & Chr(34), iPosition:=2)
         ElseIf rdoAsWord.Checked Then
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsWord)
+            clsRFunctionAsWord.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".docx" & Chr(34), iPosition:=1)
+            clsRFunctionAsWord.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments & Chr(34), iPosition:=2)
         Else
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsLaTex)
+            clsRFunctionAsLaTex.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".tex" & Chr(34), iPosition:=1)
+            clsRFunctionAsLaTex.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments & Chr(34), iPosition:=2)
+
         End If
     End Sub
+
 End Class
