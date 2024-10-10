@@ -170,4 +170,6 @@ devtools::install_github("IDEMSInternational/rapidpror")
 devtools::install_github("IDEMSInternational/epicsawrap")
 devtools::install_version("ggplot2", version = "0.9.1", repos = "http://cran.us.r-project.org")
 devtools::install_github("larmarange/ggstats")
+devtools::install_github("larmarange/broom.helpers")
+devtools::install_github("ddsjoberg/gtsummary")
 
