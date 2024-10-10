@@ -238,7 +238,6 @@ Public Class dlgUseTable
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsLaTex)
             clsRFunctionAsLaTex.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".tex" & Chr(34), iPosition:=1)
             clsRFunctionAsLaTex.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments.Replace("\", "/") & Chr(34), iPosition:=2)
-
         End If
     End Sub
 
