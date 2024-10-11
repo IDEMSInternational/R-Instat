@@ -135,13 +135,13 @@ jobs:
     - name: Update Rprofile.site
       run: |
         $R_HOME=$(Rscript -e 'cat(R.home())')
-        ROBOCOPY installer\Rprofile.site "$R_HOME\etc" /COPY:DAT
+        ROBOCOPY installer/Rprofile.site "$R_HOME\etc" /COPY:DAT
       continue-on-error: true
 
     - name: Copy R 64 bit
       run: |
         $R_HOME=$(Rscript -e 'cat(R.home())')
-        ROBOCOPY "$R_HOME\bin\x64" "instat\bin\x64\Release\static" /E
+        ROBOCOPY "$R_HOME" "instat\bin\x64\Release\static" /E
       continue-on-error: true  
      
     - name: Set R-tools
