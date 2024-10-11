@@ -139,7 +139,7 @@ jobs:
     - name: Copy R 64 bit
       run: |
         $R_HOME=$(Rscript -e 'cat(R.home())')
-        ROBOCOPY "$R_HOME" "${{ github.workspace }}\instat\bin\x64\Release\static" /E
+        ROBOCOPY "$R_HOME" "${{ github.workspace }}\instat\bin\x64\Release\static\R" /E
       continue-on-error: true  
      
     - name: Set R-tools
