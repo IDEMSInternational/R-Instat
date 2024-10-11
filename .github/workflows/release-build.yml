@@ -130,7 +130,7 @@ jobs:
 
     - name: Update Rprofile.site
       run: |
-        ROBOCOPY R-Instat\Installer\Rprofile.site R\etc\ /E
+        ROBOCOPY installer\Rprofile.site R\etc\ /E
       continue-on-error: true   
 
     - name: Copy R 64 bit
