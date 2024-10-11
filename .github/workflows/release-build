@@ -132,10 +132,15 @@ jobs:
         fetch-depth: 0
         path: 'R-RInstat'
 
+    - name: Update Rprofile.site
+      run: |
+        ROBOCOPY R-Instat\Installer\Rprofile.site R\etc\ /E
+      continue-on-error: true   
+
     - name: Copy R 64 bit
       run: |
         ROBOCOPY R\ instat\bin\x64\Release\static\ /E
-      continue-on-error: true      
+      continue-on-error: true         
      
     - name: Set R-tools
       uses: r-windows/install-rtools@master 
