@@ -15,6 +15,10 @@ on:
       revision_no:
         description: 'Revision'
         required: true
+      r-version:
+        description: 'Specify the R version to install'
+        required: true
+        default: '4.4.1'  # Default version if the user does not specify
 
 jobs:
 
@@ -113,7 +117,13 @@ jobs:
       run: |
         ROBOCOPY InstatData\data\ instat\bin\x64\Release\static\Library\ /E
       continue-on-error: true
-      
+
+      # Install R
+    - name: Set up R
+      uses: r-lib/actions/setup-r@v2
+      with:
+        r-version: ${{ inputs-version }}
+
       # check out R for R-Instat
     - name: Checkout R for R-Instat
       uses: actions/checkout@v3
@@ -124,7 +134,7 @@ jobs:
 
     - name: Copy R 64 bit
       run: |
-        ROBOCOPY R-RInstat\64Bit\ instat\bin\x64\Release\static\ /E
+        ROBOCOPY R\ instat\bin\x64\Release\static\ /E
       continue-on-error: true      
      
     - name: Set R-tools
