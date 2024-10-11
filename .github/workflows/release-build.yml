@@ -124,13 +124,9 @@ jobs:
       with:
         r-version: ${{ inputs.r-version }}
 
-      # check out R for R-Instat
-    - name: Checkout R for R-Instat
-      uses: actions/checkout@v3
-      with:
-        repository: 'ChrisMarsh82/R-RInstat'
-        fetch-depth: 0
-        path: 'R-RInstat'
+    - name: Print R Home directory
+      run: |
+        Rscript -e 'cat(R.home())'
 
     - name: Update Rprofile.site
       run: |
