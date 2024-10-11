@@ -158,6 +158,20 @@ jobs:
     - name: List contents of InstatObject\R directory
       run: |
         Get-ChildItem "D:\a\R-Instat\R-Instat\instat\static\InstatObject\R"
+
+    # Check if the directory exists
+    - name: Verify script directory
+      run: |
+        if (Test-Path "D:\a\R-Instat\R-Instat\instat\bin\x64\Release\static\R\bin") {
+            Write-Host "Directory exists."
+        } else {
+            Write-Host "Directory does not exist."
+        }
+    
+    # List the contents of the directory to check for the script
+    - name: List contents of R\bin directory
+      run: |
+        Get-ChildItem "D:\a\R-Instat\R-Instat\instat\bin\x64\Release\static\R\bin"
      
     - name: Install R packages (64 bit)
       run: |
