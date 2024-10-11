@@ -144,6 +144,20 @@ jobs:
      
     - name: Set R-tools
       uses: r-windows/install-rtools@master 
+
+    # Check if the directory exists
+    - name: Verify InstallPackages.R directory
+      run: |
+        if (Test-Path "D:\a\R-Instat\R-Instat\instat\static\InstatObject\R") {
+            Write-Host "Directory exists."
+        } else {
+            Write-Host "Directory does not exist."
+        }
+    
+    # List the contents of the directory to check for the script
+    - name: List contents of InstatObject\R directory
+      run: |
+        Get-ChildItem "D:\a\R-Instat\R-Instat\instat\static\InstatObject\R"
      
     - name: Install R packages (64 bit)
       run: |
