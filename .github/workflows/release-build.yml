@@ -35,13 +35,7 @@ jobs:
       
     # check out r-instat
     steps: 
-        
-      # Install R
-    - name: Set up R
-      uses: r-lib/actions/setup-r@v2
-      with:
-        r-version: ${{ inputs.r-version }}
-    
+           
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -124,7 +118,11 @@ jobs:
         ROBOCOPY InstatData\data\ instat\bin\x64\Release\static\Library\ /E
       continue-on-error: true
 
-
+    # Install R
+    - name: Set up R
+      uses: r-lib/actions/setup-r@v2
+      with:
+        r-version: ${{ inputs.r-version }}
 
     - name: Debug paths
       run: |
@@ -135,13 +133,13 @@ jobs:
     - name: Update Rprofile.site
       run: |
         $R_HOME=$(Rscript -e 'cat(R.home())')
-        ROBOCOPY installer/Rprofile.site "$R_HOME\etc" /COPY:DAT
+        ROBOCOPY "${{ github.workspace }}\installer" "$R_HOME\etc" "Rprofile.site" /COPY:DAT
       continue-on-error: true
 
     - name: Copy R 64 bit
       run: |
         $R_HOME=$(Rscript -e 'cat(R.home())')
-        ROBOCOPY "$R_HOME" "instat\bin\x64\Release\static" /E
+        ROBOCOPY "$R_HOME" "${{ github.workspace }}\instat\bin\x64\Release\static" /E
       continue-on-error: true  
      
     - name: Set R-tools
@@ -149,12 +147,12 @@ jobs:
      
     - name: Install R packages (64 bit)
       run: |
-        "instat\bin\x64\Release\static\R\bin\Rscript.exe" "instat\static\InstatObject\R\InstallPackages.R"
+        "${{ github.workspace }}\instat\bin\x64\Release\static\R\bin\Rscript.exe" "${{ github.workspace }}\instat\static\InstatObject\R\InstallPackages.R"
       shell: cmd     
       
     - name: Building the installer 64bit - With R
       run: |
-        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "inno_install_script_64bit.iss"
+        "%programfiles(x86)%\Inno Setup 6\iscc.exe" "${{ github.workspace }}\inno_install_script_64bit.iss"
       shell: cmd
       
     - name: Upload the 64 bit installer with R as an artifact
@@ -163,8 +161,5 @@ jobs:
       with:
         path: "Output/"
         name: rinstat64WithR-innosetup    
-    
-    - name: Remove 64 bit release files to free up space
-      run: |
-        Remove-Item "instat\bin\x64\Release\" -Recurse
+  
             
