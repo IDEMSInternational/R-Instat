@@ -126,9 +126,11 @@ jobs:
 
 
 
-    - name: Print R Home directory
+    - name: Debug paths
       run: |
-        Rscript -e 'cat(R.home())'
+        $R_HOME=$(Rscript -e 'cat(R.home())')
+        echo "R_HOME path: $R_HOME"
+        echo "Source path: $(pwd)\installer\Rprofile.site"
 
     - name: Update Rprofile.site
       run: |
