@@ -1428,36 +1428,35 @@ DataSheet$set("public", "get_column_factor_levels", function(col_name = "") {
 
 DataSheet$set("public", "sort_dataframe", function(col_names = c(), decreasing = FALSE, na.last = TRUE, by_row_names = FALSE, row_names_as_numeric = TRUE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  string <- list()
-  if(missing(col_names) || length(col_names) == 0) {
-    if(by_row_names) {
-      if(row_names_as_numeric) row_names_sort <- as.numeric(row.names(curr_data))
-      else row_names_sort <- row.names(curr_data)
-      if(decreasing) self$set_data(arrange(curr_data, desc(row_names_sort)))
+  
+  # Check for missing or empty column names
+  if (missing(col_names) || length(col_names) == 0) {
+    if (by_row_names) {
+      row_names_sort <- if (row_names_as_numeric) as.numeric(row.names(curr_data)) else row.names(curr_data)
+      if (decreasing) self$set_data(arrange(curr_data, desc(row_names_sort)))
       else self$set_data(arrange(curr_data, row_names_sort))
+    } else {
+      message("No sorting to be done.")
     }
-    else message("No sorting to be done.")
-  }
-  else {
-    col_names_exp = c()
-    i = 1
-    for(col_name in col_names){
-      if(!(col_name %in% names(curr_data))) {
-        stop(col_name, " is not a column in ", get_metadata(data_name_label))
+  } else {
+    # Build the expressions using rlang for sorting columns
+    col_names_exp <- purrr::map(col_names, function(col_name) {
+      if (!(col_name %in% names(curr_data))) {
+        stop(col_name, " is not a column in the data.")
       }
-      if(decreasing) col_names_exp[[i]] <- lazyeval::interp(~ desc(var), var = as.name(col_name))
-      else col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
-      i = i + 1
-    }
-    if(by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
-    #self$set_data(dplyr::arrange_(curr_data, .dots = col_names_exp))
-    self$set_data(dplyr::arrange(curr_data, dplyr::across(dplyr::all_of(col_names_exp))))
+      if (decreasing) dplyr::desc(rlang::sym(col_name)) else rlang::sym(col_name)
+    })
 
+    # Handle the case where sorting by row names and column names at the same time
+    if (by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
+
+    # Sort the data based on the expressions
+    self$set_data(dplyr::arrange(curr_data, !!!col_names_exp))
   }
   self$data_changed <- TRUE
 }
 )
-
+	  
 DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE, keep.labels = TRUE) {
   if(!all(col_names %in% self$get_column_names())) stop("Some column names not found in the data")
   
