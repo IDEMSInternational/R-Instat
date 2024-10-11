@@ -643,11 +643,6 @@ Public Class dlgDescribeTwoVariable
             ucrChkSwapXYVar.Visible = IsNumericByNumeric() OrElse IsFactorByNumeric()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
             cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
-            'ElseIf rdoThreeVariable.Checked Then
-            '    ucrChkOmitMissing.Visible = IsFactorByNumericByNumeric() OrElse IsNumericByNumericByFactor()
-            'Else
-            '    ucrChkOmitMissing.Visible = False
-            '    cmdMissingOptions.Visible = False
         End If
         If rdoThreeVariable.Checked Then
             If IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
@@ -658,8 +653,6 @@ Public Class dlgDescribeTwoVariable
                 cmdSummaries.Visible = False
             End If
             ucrChkSwapXYVar.Visible = IsNumericByNumericByNumeric() OrElse IsNumericByNumericByFactor()
-            'ucrChkDisplayMargins.Visible = IsFactorByFactorByFactor()
-            'ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactorByFactor()
             ucrChkSummariesRowCol.Visible = IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor()
             ucrChkOmitMissing.Visible = IsFactorByNumericByNumeric() OrElse IsNumericByNumericByFactor()
         End If
@@ -856,22 +849,6 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.Visible = True
                 ucrChkSummariesRowCol.Visible = True
                 ucrSaveTable.Location = New Point(23, 440)
-                'ElseIf IsFactorByFactorByNumeric Then
-                '    ucrReorderSummary.Visible = True
-                '    cmdSummaries.Visible = True
-                '    ucrSaveTable.Visible = True
-                '    ucrChkSummariesRowCol.Visible = True
-                '    ucrSaveTable.Location = New Point(23, 440)
-                '    ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
-                '    ucrSaveTable.SetPrefix("summary_table")
-                '    ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
-                '    ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-                '    ucrSaveTable.SetCheckBoxText("Save Table")
-                '    clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                '                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                '                                      strRObjectFormatToAssignTo:=RObjectFormat.Html,
-                '                                      strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
-                '                                        strObjectName:="last_table")
             End If
         End If
         FactorColumns()
@@ -1230,13 +1207,6 @@ Public Class dlgDescribeTwoVariable
     Private Sub AddRemoveThirdAnovaParam()
         If rdoThreeVariable.Checked Then
             If Not ucrReceiverThreeVariableThirdVariable.IsEmpty Then
-                'If IsNumericByNumericByFactor() Then
-                '    '    If ucrChkSwapXYVar.Checked Then
-                '    '        clsCombineSwapAnova2Table.AddParameter("y", ucrReceiverThreeVariableThirdVariable.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
-                '    '    Else
-                '    '        clsCombineAnova2Function.AddParameter("y", ucrReceiverThreeVariableThirdVariable.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
-
-                '    '    End If
                 If IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
                     clsCombineAnova2Function.AddParameter("y", ucrReceiverThreeVariableThirdVariable.GetVariableNames(True), iPosition:=2, bIncludeArgumentName:=False)
                 Else
