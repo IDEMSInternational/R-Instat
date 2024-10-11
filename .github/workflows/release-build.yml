@@ -134,8 +134,9 @@ jobs:
 
     - name: Update Rprofile.site
       run: |
-        ROBOCOPY installer\Rprofile.site R\etc\ /E
-      continue-on-error: true   
+        $R_HOME=$(Rscript -e 'cat(R.home())')
+        ROBOCOPY installer\Rprofile.site "$R_HOME\etc" /E
+      continue-on-error: true
 
     - name: Copy R 64 bit
       run: |
