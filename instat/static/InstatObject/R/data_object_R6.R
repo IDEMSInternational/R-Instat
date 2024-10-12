@@ -945,6 +945,9 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
 
 
 DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delete_all = FALSE) {
+  # Save the current state to history before making modifications
+  self$save_state_to_history()
+  
   if(length(cols) == self$get_column_count()) {
     if(allow_delete_all) {
       warning("You are deleting all columns in the data frame.")
