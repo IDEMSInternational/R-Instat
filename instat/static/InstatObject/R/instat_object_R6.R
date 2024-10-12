@@ -1352,6 +1352,11 @@ DataBook$set("public","has_key", function(data_name) {
 }
 )
 
+DataBook$set("public","undo_last_action", function(data_name) {
+  self$get_data_objects(data_name)$undo_last_action()
+}
+)
+
 DataBook$set("public","get_keys", function(data_name, key_name) {
   self$get_data_objects(data_name)$get_keys(key_name)
 }

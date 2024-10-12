@@ -205,6 +205,14 @@ Public Class clsDataFramePage
         Return Math.Ceiling(_iTotalColumnCount / iColumnIncrements)
     End Function
 
+    Public Sub Undo()
+        Dim clsUndoRFunction As New RFunction
+        clsUndoRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$undo_last_action")
+        clsUndoRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+        _clsRLink.RunScript(clsUndoRFunction.ToScript)
+
+    End Sub
+
     Private Function GetDataFrameFromRCommand() As DataFrame
         Dim clsGetDataFrameRFunction As New RFunction
         Dim expTemp As SymbolicExpression

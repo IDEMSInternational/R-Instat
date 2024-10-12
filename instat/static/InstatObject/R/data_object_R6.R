@@ -5,7 +5,7 @@ DataSheet <- R6::R6Class("DataSheet",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), column_selections = list(), objects = list(),
-                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE)
+                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE, history = list())
 {
   # Set up the data object
   self$set_data(data, messages)
@@ -31,6 +31,9 @@ DataSheet <- R6::R6Class("DataSheet",
   self$set_scalars(scalars)
   self$set_keys(keys)
   self$set_comments(comments)
+  self$set_history(history)
+  
+  self$save_state_to_history()
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
@@ -59,6 +62,7 @@ DataSheet <- R6::R6Class("DataSheet",
                            column_selections = list(),
                            objects = list(),
                            keys = list(),
+                           history = list(),
                            comments = list(),
                            calculations = list(),
                            scalars = list(),
@@ -161,6 +165,12 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
 }
 )
 
+DataSheet$set("public", "save_state_to_history", function() {
+  #shallow_copy <- list(data = private$data, variables_metadata = self$get_metadata(data_name_label), changes = self$changes)
+  self$set_history(append(private$history, list(private$data)))
+  self$set_history(list(private$data))
+})
+
 DataSheet$set("public", "set_meta", function(new_meta) {
   meta_data_copy <- new_meta
   self$clear_metadata()
@@ -181,6 +191,23 @@ DataSheet$set("public", "clear_metadata", function() {
   self$add_defaults_meta()
   self$metadata_changed <- TRUE
   self$append_to_changes(list(Set_property, "meta data"))
+}
+)
+
+DataSheet$set("public", "has_history", function() {
+  return(length(private$history) > 0)
+}
+)
+
+DataSheet$set("public", "undo_last_action", function() {
+  if (length(private$history) > 1) {
+    # Revert to the last saved state
+    previous_state <- private$history[[length(private$history) - 1]]
+    self$set_data(as.data.frame(previous_state))  # Restore the previous state
+    self$set_history(private$history[-length(private$history)])  # Remove the latest state from history
+  } else {
+    message("No more actions to undo.")
+  }
 }
 )
 
@@ -238,6 +265,13 @@ DataSheet$set("public", "set_scalars", function(new_scalars) {
   if(!is.list(new_scalars)) stop("scalars must be of type: list")
   self$append_to_changes(list(Set_property, "scalars"))  
   private$scalars <- new_scalars
+}
+)
+
+DataSheet$set("public", "set_history", function(history) {
+  if(!is.list(history)) stop("history must be of type: list")
+  self$append_to_changes(list(Set_property, "history"))  
+  private$history <- append(private$history, history)
 }
 )
 
@@ -665,6 +699,9 @@ DataSheet$set("public", "add_scalar", function(scalar_name = "", scalar_value) {
 )
 
 DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column = "", num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
+  # Save the current state to history before making modifications
+  self$save_state_to_history()
+  
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -814,6 +851,10 @@ DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everythi
 
 DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE, use_column_selection = FALSE)
+  
+  # Save the current state to history before making modifications
+  self$save_state_to_history()
+  
   # Column name must be character
   if (type == "single") {
     if (new_col_name != curr_col_name) {
@@ -938,6 +979,7 @@ DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delet
 
 DataSheet$set("public", "replace_value_in_data", function(col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE, locf = FALSE, from_last = FALSE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  self$save_state_to_history()
   # Column name must be character
   if(!all(is.character(col_names))) stop("Column name must be of type: character")
   if (!all(col_names %in% names(curr_data))) stop("Cannot find all columns in the data.")

@@ -276,6 +276,14 @@ Public Class ucrDataViewReoGrid
         ElseIf (e.KeyCode And Not Keys.Modifiers) = Keys.F AndAlso e.Modifiers = Keys.Control Then
             RaiseEvent FindRow()
         End If
+
+        ' Detect Ctrl+Z for Undo operation
+        If e.Control AndAlso e.KeyCode = Keys.Z Then
+            ' Perform Undo
+            GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
+            e.Handled = True
+            e.SuppressKeyPress = True
+        End If
     End Sub
 
     Private Function GetColumnIndex(strColName As String) As Integer
