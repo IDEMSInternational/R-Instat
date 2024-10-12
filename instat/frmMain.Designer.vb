@@ -3031,7 +3031,11 @@ Partial Class frmMain
         '
         Me.mnuEditFind.Name = "mnuEditFind"
         Me.mnuEditFind.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
+
+        Me.mnuEditFind.Size = New System.Drawing.Size(270, 34)
+
         Me.mnuEditFind.Size = New System.Drawing.Size(253, 34)
+
         Me.mnuEditFind.Tag = "Find"
         Me.mnuEditFind.Text = "Find"
         '
@@ -3039,7 +3043,11 @@ Partial Class frmMain
         '
         Me.mnuEditCopy.Name = "mnuEditCopy"
         Me.mnuEditCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
+
+        Me.mnuEditCopy.Size = New System.Drawing.Size(270, 34)
+
         Me.mnuEditCopy.Size = New System.Drawing.Size(253, 34)
+
         Me.mnuEditCopy.Tag = "Copy"
         Me.mnuEditCopy.Text = "Copy"
         '
@@ -3047,27 +3055,43 @@ Partial Class frmMain
         '
         Me.mnuEditPaste.Name = "mnuEditPaste"
         Me.mnuEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
+
+        Me.mnuEditPaste.Size = New System.Drawing.Size(270, 34)
+
         Me.mnuEditPaste.Size = New System.Drawing.Size(253, 34)
+
         Me.mnuEditPaste.Tag = "Paste"
         Me.mnuEditPaste.Text = "Paste"
         '
         'mnuEditPasteNew
         '
         Me.mnuEditPasteNew.Name = "mnuEditPasteNew"
+
+        Me.mnuEditPasteNew.Size = New System.Drawing.Size(270, 34)
+
         Me.mnuEditPasteNew.Size = New System.Drawing.Size(253, 34)
+
         Me.mnuEditPasteNew.Text = "Paste New"
         '
         'mnuEditWordwrap
         '
         Me.mnuEditWordwrap.Name = "mnuEditWordwrap"
+
+        Me.mnuEditWordwrap.Size = New System.Drawing.Size(270, 34)
+
         Me.mnuEditWordwrap.Size = New System.Drawing.Size(253, 34)
+
         Me.mnuEditWordwrap.Text = "Wordwrap"
         '
         'mnuEditSelectAll
         '
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
         Me.mnuEditSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
+
+        Me.mnuEditSelectAll.Size = New System.Drawing.Size(270, 34)
+
         Me.mnuEditSelectAll.Size = New System.Drawing.Size(253, 34)
+
         Me.mnuEditSelectAll.Tag = "Select_All"
         Me.mnuEditSelectAll.Text = "Select All "
         '
@@ -3095,7 +3119,11 @@ Partial Class frmMain
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
         Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbLast10Dialogs, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.ToolStripSeparator74, Me.mnuLastGraph, Me.ToolStripSeparator75, Me.mnuTbLogScript, Me.mnuMetadata, Me.ToolStripSeparator76, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.ToolStripSeparator77, Me.mnuTbLan, Me.separator1})
+
+        Me.Tool_strip.Location = New System.Drawing.Point(0, 33)
+
         Me.Tool_strip.Location = New System.Drawing.Point(0, 36)
+
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.Padding = New System.Windows.Forms.Padding(0, 0, 3, 0)
         Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -3392,7 +3420,11 @@ Partial Class frmMain
         Me.mnuBar.Name = "mnuBar"
         Me.mnuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.mnuBar.ShowItemToolTips = True
+
+        Me.mnuBar.Size = New System.Drawing.Size(1251, 33)
+
         Me.mnuBar.Size = New System.Drawing.Size(1251, 36)
+
         Me.mnuBar.TabIndex = 6
         Me.mnuBar.Text = "Menu_strip"
         '
@@ -5074,7 +5106,11 @@ Partial Class frmMain
         '
         Me.splOverall.BackColor = System.Drawing.Color.LightGray
         Me.splOverall.Dock = System.Windows.Forms.DockStyle.Fill
+
+        Me.splOverall.Location = New System.Drawing.Point(0, 72)
+
         Me.splOverall.Location = New System.Drawing.Point(0, 75)
+
         Me.splOverall.Margin = New System.Windows.Forms.Padding(4)
         Me.splOverall.Name = "splOverall"
         Me.splOverall.Orientation = System.Windows.Forms.Orientation.Horizontal
@@ -5088,8 +5124,13 @@ Partial Class frmMain
         '
         Me.splOverall.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splOverall.Panel2.Controls.Add(Me.splDataOutput)
+
+        Me.splOverall.Size = New System.Drawing.Size(1251, 619)
+        Me.splOverall.SplitterDistance = 249
+
         Me.splOverall.Size = New System.Drawing.Size(1251, 616)
         Me.splOverall.SplitterDistance = 248
+
         Me.splOverall.SplitterWidth = 8
         Me.splOverall.TabIndex = 10
         '
@@ -5110,7 +5151,11 @@ Partial Class frmMain
         '
         Me.splExtraWindows.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splExtraWindows.Panel2.Controls.Add(Me.ucrScriptWindow)
+
+        Me.splExtraWindows.Size = New System.Drawing.Size(1251, 249)
+
         Me.splExtraWindows.Size = New System.Drawing.Size(1251, 248)
+
         Me.splExtraWindows.SplitterDistance = 378
         Me.splExtraWindows.SplitterWidth = 8
         Me.splExtraWindows.TabIndex = 0
@@ -5131,7 +5176,11 @@ Partial Class frmMain
         '
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
+
+        Me.splMetadata.Size = New System.Drawing.Size(378, 249)
+
         Me.splMetadata.Size = New System.Drawing.Size(378, 248)
+
         Me.splMetadata.SplitterDistance = 102
         Me.splMetadata.SplitterWidth = 8
         Me.splMetadata.TabIndex = 0
@@ -5145,7 +5194,11 @@ Partial Class frmMain
         Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
         Me.ucrColumnMeta.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrColumnMeta.Name = "ucrColumnMeta"
+
+        Me.ucrColumnMeta.Size = New System.Drawing.Size(102, 249)
+
         Me.ucrColumnMeta.Size = New System.Drawing.Size(102, 248)
+
         Me.ucrColumnMeta.TabIndex = 0
         '
         'ucrDataFrameMeta
@@ -5156,7 +5209,11 @@ Partial Class frmMain
         Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataFrameMeta.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+
+        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(268, 249)
+
         Me.ucrDataFrameMeta.Size = New System.Drawing.Size(268, 248)
+
         Me.ucrDataFrameMeta.TabIndex = 0
         '
         'ucrScriptWindow
@@ -5167,7 +5224,10 @@ Partial Class frmMain
         Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
         Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(865, 249)
+
         Me.ucrScriptWindow.Size = New System.Drawing.Size(865, 248)
+
         Me.ucrScriptWindow.strActiveTabText = ""
         Me.ucrScriptWindow.TabIndex = 2
         Me.ucrScriptWindow.Tag = "Script_Window"
@@ -5189,7 +5249,11 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
+
+        Me.splDataOutput.Size = New System.Drawing.Size(1251, 362)
+
         Me.splDataOutput.Size = New System.Drawing.Size(1251, 360)
+
         Me.splDataOutput.SplitterDistance = 573
         Me.splDataOutput.SplitterWidth = 8
         Me.splDataOutput.TabIndex = 0
@@ -5203,7 +5267,11 @@ Partial Class frmMain
         Me.ucrDataViewer.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataViewer.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrDataViewer.Name = "ucrDataViewer"
+
+        Me.ucrDataViewer.Size = New System.Drawing.Size(573, 362)
+
         Me.ucrDataViewer.Size = New System.Drawing.Size(573, 360)
+
         Me.ucrDataViewer.TabIndex = 0
         Me.ucrDataViewer.Tag = "Data_View"
         '
@@ -5215,7 +5283,11 @@ Partial Class frmMain
         Me.ucrOutput.Location = New System.Drawing.Point(0, 0)
         Me.ucrOutput.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrOutput.Name = "ucrOutput"
+
+        Me.ucrOutput.Size = New System.Drawing.Size(670, 362)
+
         Me.ucrOutput.Size = New System.Drawing.Size(670, 360)
+
         Me.ucrOutput.TabIndex = 0
         '
         'mnuPlotly
