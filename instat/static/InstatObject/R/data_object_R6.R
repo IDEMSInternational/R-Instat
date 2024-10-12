@@ -201,15 +201,13 @@ DataSheet$set("public", "has_history", function() {
 
 DataSheet$set("public", "undo_last_action", function() {
   if (length(private$history) > 1) {
-    # Revert to the last saved state
     previous_state <- private$history[[length(private$history) - 1]]
     self$set_data(as.data.frame(previous_state))  # Restore the previous state
-    self$set_history(private$history[-length(private$history)])  # Remove the latest state from history
+    # Here, do not remove the latest state
   } else {
     message("No more actions to undo.")
   }
-}
-)
+})
 
 #Removed until can be fixed with attributes
 # DataSheet$set("public", "set_variables_metadata", function(new_meta) {
@@ -270,10 +268,13 @@ DataSheet$set("public", "set_scalars", function(new_scalars) {
 
 DataSheet$set("public", "set_history", function(history) {
   if(!is.list(history)) stop("history must be of type: list")
-  self$append_to_changes(list(Set_property, "history"))  
+  MAX_HISTORY_SIZE <- 10
+  # Limit history size
+  if (length(private$history) >= MAX_HISTORY_SIZE) {
+    private$history <- private$history[-1]  # Remove the oldest entry
+  }
   private$history <- append(private$history, history)
-}
-)
+})
 
 DataSheet$set("public", "set_keys", function(new_keys) {
   if(!is.list(new_keys)) stop("new_keys must be of type: list")
