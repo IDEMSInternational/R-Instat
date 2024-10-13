@@ -261,6 +261,11 @@ Public Class dlgView
             cmdTableOptions.Visible = False
             ucrSaveData.Visible = False
         Else
+            If ucrViewChkPreview.Checked Then
+                clsBaseOperator.AddParameter(strParameterName:="head", clsRFunctionParameter:=clsHeadRFunction, iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                clsBaseOperator.RemoveParameterByName("head")
+            End If
             clsDummyFunction.AddParameter("checked", "html", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsAsHtmlWidgetFunction)
             ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
@@ -281,13 +286,13 @@ Public Class dlgView
         GetObjectName()
     End Sub
 
-    Private Sub ucrViewChkPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrViewChkPreview.ControlValueChanged
-        If ucrViewChkPreview.Checked Then
-            clsBaseOperator.AddParameter(strParameterName:="head", clsRFunctionParameter:=clsHeadRFunction, iPosition:=1, bIncludeArgumentName:=False)
-        Else
-            clsBaseOperator.RemoveParameterByName("head")
-        End If
-    End Sub
+    'Private Sub ucrViewChkPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrViewChkPreview.ControlValueChanged
+    '    If ucrViewChkPreview.Checked Then
+    '        clsBaseOperator.AddParameter(strParameterName:="head", clsRFunctionParameter:=clsHeadRFunction, iPosition:=1, bIncludeArgumentName:=False)
+    '    Else
+    '        clsBaseOperator.RemoveParameterByName("head")
+    '    End If
+    'End Sub
 
 
     Private Sub ucrChkSortColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSortColumn.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged
