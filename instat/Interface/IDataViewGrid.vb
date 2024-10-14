@@ -44,6 +44,8 @@ Public Interface IDataViewGrid
 
     Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False)
 
+    Sub Focus()
+
     Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
 
     Function GetFirstRowHeader() As String

@@ -155,6 +155,8 @@ Public Class ucrDataView
                 RefreshDisplayInformation()
             End If
         End If
+
+        _grid.Focus()
     End Sub
 
     ''' <summary>
@@ -190,6 +192,7 @@ Public Class ucrDataView
                 StartWait()
                 GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteColumn(GetSelectedColumnNames())
                 EndWait()
+                _grid.Focus()
             End If
         End If
     End Sub

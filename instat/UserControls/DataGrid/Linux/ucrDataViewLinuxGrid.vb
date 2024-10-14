@@ -69,6 +69,10 @@ Public Class ucrDataViewLinuxGrid
         Next
     End Sub
 
+    Public Sub FocusGrid() Implements IDataViewGrid.Focus
+        Me.Focus()
+    End Sub
+
     Public Function SelectedTab() As String
         If tcTabs.SelectedTab Is Nothing Then
             Return ""
