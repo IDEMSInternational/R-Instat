@@ -5,7 +5,7 @@ DataSheet <- R6::R6Class("DataSheet",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), column_selections = list(), objects = list(),
-                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE, history = list())
+                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE, history = list(), redo_history = list())
 {
   # Set up the data object
   self$set_data(data, messages)
@@ -63,6 +63,7 @@ DataSheet <- R6::R6Class("DataSheet",
                            objects = list(),
                            keys = list(),
                            history = list(),
+                           redo_history = list(),
                            comments = list(),
                            calculations = list(),
                            scalars = list(),
@@ -204,6 +205,25 @@ DataSheet$set("public", "undo_last_action", function() {
     private$history <- private$history[-length(private$history)]  # Remove the latest state
   } else {
     message("No more actions to undo.")
+  }
+})
+
+# Redo function
+DataSheet$set("public", "redo_last_action", function() {
+  if (length(private$redo_history) > 0) {
+    # Get the last undone state from redo history
+    next_state <- private$redo_history[[length(private$redo_history)]]
+    
+    # Restore the next state
+    self$set_data(as.data.frame(next_state))
+    
+    # Move the state back to the history
+    private$history <- append(private$history, list(next_state))
+    
+    # Remove the state from redo history
+    private$redo_history <- private$redo_history[-length(private$redo_history)]
+  } else {
+    message("No more actions to redo.")
   }
 })
 
