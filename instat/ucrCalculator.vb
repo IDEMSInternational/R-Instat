@@ -497,7 +497,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdFrac10, "Give fraction our of 10 for a decimal value. For example for 0.36 the value is 4/10")
         ttCalculator.SetToolTip(cmdFrac20, "Give fraction our of 20 for a decimal value. For example for 0.36 the value is 7/20")
         ttCalculator.SetToolTip(cmdFrac100, "Give fraction our of 100 for a decimal value. For example for 0.36 the value is 36/100")
-        ttCalculator.SetToolTip(cmdFracDen, "Give fraction for a given denominator. For example for frac_den(0.36, 50) gives 18/50")
+        ttCalculator.SetToolTip(cmdFracDen, "Give fraction for a given denominator. For example frac_den(0.36, 50) gives 18/50")
         '---------------------------------------------------------------------------------------------------------------------
 
         Const strTooltipCmdLength = "number Of observations: For example length(c(1,2,3,4,NA)) = 5 "
@@ -5897,7 +5897,7 @@ Public Class ucrCalculator
 
     Private Sub cmdOrigin_Click(sender As Object, e As EventArgs) Handles cmdOrigin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(  p= ,o= )", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(p= ,o= )", 6)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(, )", 3)
         End If
