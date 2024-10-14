@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class dlgExportToClimsoft
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDataFrameFunction, clsCurrentNewColumnFunction, clsDummyFunction, clsMutateFunction, clsExportClimsoftFunction, clsPasteFunction, clsSprintfFunction, clsPosixctFunction, clsExportCommentsFunction As New RFunction
+    Private clsDataFrameFunction, clsGetDataFrameFunction, clsCurrentNewColumnFunction, clsDummyFunction, clsMutateFunction, clsExportClimsoftFunction, clsPasteFunction, clsSprintfFunction, clsPosixctFunction, clsExportCommentsFunction As New RFunction
     Private clsPipeOperator As New ROperator
 
     Private Sub dlgExportToClimsoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -85,7 +85,6 @@ Public Class dlgExportToClimsoft
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
         ucrInputExportFile.IsReadOnly = True
         ucrInputExportFile.SetLinkedDisplayControl(lblExport)
-
     End Sub
 
     Private Sub SetDefaults()
@@ -133,8 +132,12 @@ Public Class dlgExportToClimsoft
         clsSprintfFunction.SetRCommand("sprintf")
         clsSprintfFunction.AddParameter("hour", 6, iPosition:=1, bIncludeArgumentName:=False)
 
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetDataFrameFunction.SetAssignTo(ucrDataFrameSheets.cboAvailableDataFrames.Text)
+
         clsExportCommentsFunction.SetPackageName("rio")
         clsExportCommentsFunction.SetRCommand("export")
+        clsExportCommentsFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=1)
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
@@ -153,7 +156,6 @@ Public Class dlgExportToClimsoft
         ucrSaveNewDataFrame.SetRCode(clsPipeOperator, bReset)
         ucrInputExportFile.SetRCode(clsExportClimsoftFunction, bReset)
         ucrPnlDailyHourly.SetRCode(clsDummyFunction, bReset)
-        ucrDataFrameSheets.SetRCode(clsExportCommentsFunction, bReset)
         If bReset Then
             ucrPnlOutput.SetRCode(clsDummyFunction, bReset)
             ucrChkAddReport.SetRCode(clsDummyFunction, bReset)
@@ -169,7 +171,6 @@ Public Class dlgExportToClimsoft
                 ucrBase.OKEnabled(False)
             End If
         Else
-
             If Not ucrChkAddReport.Checked Then
                 If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso Not ucrInputExportFile.IsEmpty Then
                     ucrBase.OKEnabled(True)
@@ -201,7 +202,6 @@ Public Class dlgExportToClimsoft
         End If
 
         ucrSaveNewDataFrame.SetPrefix(strDataframeName & "__climsoft")
-
     End Sub
 
     Private Sub ucrSelectorImportToClimsoft_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorImportToClimsoft.ControlValueChanged
@@ -246,17 +246,6 @@ Public Class dlgExportToClimsoft
         End If
     End Sub
 
-    Private Sub AddingComments()
-        ' Check if .comment is in the list and set it as the default selection
-        If ucrDataFrameSheets.cboAvailableDataFrames.Items.Contains(".comment") Then
-            ucrDataFrameSheets.cboAvailableDataFrames.Text = ".comment"
-        Else
-            ' Optionally, set the first item as the default if .comment is not present
-            ucrDataFrameSheets.cboAvailableDataFrames.SelectedIndex = 0
-        End If
-
-    End Sub
-
     Private Sub SelectFileToSave()
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save CPT File"
@@ -298,15 +287,14 @@ Public Class dlgExportToClimsoft
     End Sub
 
     Private Sub ucrDataFrameSheets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameSheets.ControlValueChanged
-        AddingComments()
-        clsExportCommentsFunction.AddParameter("x", clsRFunctionParameter:=ucrDataFrameSheets.clsCurrDataFrame, iPosition:=1)
         SettingBaseFunction()
+
+        clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrDataFrameSheets.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetDataFrameFunction.SetAssignTo(ucrDataFrameSheets.cboAvailableDataFrames.Text)
 
     End Sub
 
-
     Private Sub ucrChkAddReport_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddReport.ControlValueChanged
-        AddingComments()
         If ucrChkAddReport.Checked Then
             ucrInputExportFile.SetName("")
         End If
