@@ -513,6 +513,10 @@ Public Class frmMain
             End If
         End If
 
+        If Not Directory.Exists(strAutoSaveLogFolderPath) Then
+            Directory.CreateDirectory(strAutoSaveLogFolderPath)
+        End If
+
         Using writer As StreamWriter = New StreamWriter(strMarkerFilePath, False)
             writer.WriteLine("Running")
         End Using
@@ -2881,7 +2885,6 @@ Public Class frmMain
     Private Sub mnuImportFromOpenAppBuilder_Click(sender As Object, e As EventArgs) Handles mnuImportFromOpenAppBuilder.Click
         dlgImportOpenAppBuilder.ShowDialog()
     End Sub
-
     Private Sub mnuClimaticCheckDataDistances_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDistances.Click
         dlgDistances.ShowDialog()
     End Sub

@@ -1428,36 +1428,35 @@ DataSheet$set("public", "get_column_factor_levels", function(col_name = "") {
 
 DataSheet$set("public", "sort_dataframe", function(col_names = c(), decreasing = FALSE, na.last = TRUE, by_row_names = FALSE, row_names_as_numeric = TRUE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  string <- list()
-  if(missing(col_names) || length(col_names) == 0) {
-    if(by_row_names) {
-      if(row_names_as_numeric) row_names_sort <- as.numeric(row.names(curr_data))
-      else row_names_sort <- row.names(curr_data)
-      if(decreasing) self$set_data(arrange(curr_data, desc(row_names_sort)))
+  
+  # Check for missing or empty column names
+  if (missing(col_names) || length(col_names) == 0) {
+    if (by_row_names) {
+      row_names_sort <- if (row_names_as_numeric) as.numeric(row.names(curr_data)) else row.names(curr_data)
+      if (decreasing) self$set_data(arrange(curr_data, desc(row_names_sort)))
       else self$set_data(arrange(curr_data, row_names_sort))
+    } else {
+      message("No sorting to be done.")
     }
-    else message("No sorting to be done.")
-  }
-  else {
-    col_names_exp = c()
-    i = 1
-    for(col_name in col_names){
-      if(!(col_name %in% names(curr_data))) {
-        stop(col_name, " is not a column in ", get_metadata(data_name_label))
+  } else {
+    # Build the expressions using rlang for sorting columns
+    col_names_exp <- purrr::map(col_names, function(col_name) {
+      if (!(col_name %in% names(curr_data))) {
+        stop(col_name, " is not a column in the data.")
       }
-      if(decreasing) col_names_exp[[i]] <- lazyeval::interp(~ desc(var), var = as.name(col_name))
-      else col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
-      i = i + 1
-    }
-    if(by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
-    #self$set_data(dplyr::arrange_(curr_data, .dots = col_names_exp))
-    self$set_data(dplyr::arrange(curr_data, dplyr::across(dplyr::all_of(col_names_exp))))
+      if (decreasing) dplyr::desc(rlang::sym(col_name)) else rlang::sym(col_name)
+    })
 
+    # Handle the case where sorting by row names and column names at the same time
+    if (by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
+
+    # Sort the data based on the expressions
+    self$set_data(dplyr::arrange(curr_data, !!!col_names_exp))
   }
   self$data_changed <- TRUE
 }
 )
-
+	  
 DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE, keep.labels = TRUE) {
   if(!all(col_names %in% self$get_column_names())) stop("Some column names not found in the data")
   
@@ -4524,22 +4523,40 @@ DataSheet$set("public", "has_labels", function(col_names) {
 }
 )
 
-DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
-
-  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
-  if(sign_level || signif.stars) message("This is no longer descriptive")
-  if(sign_level) end_col = 5 else end_col = 4
-
+DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+  if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+  if (sign_level || signif.stars) message("This is no longer descriptive")
+  if (sign_level) end_col = 5 else end_col = 4
+  
+  # Construct the formula
   if (length(x_col_names) == 1) {
-    formula_str <- paste0( as.name(y_col_name), "~ ", as.name(x_col_names))
+    formula_str <- paste0(as.name(y_col_name), "~ ", as.name(x_col_names))
   } else if (length(x_col_names) > 1) {
     formula_str <- paste0(as.name(y_col_name), "~ ", as.name(paste(x_col_names, collapse = " + ")))
   }
 
-  return_item <- NULL
-  mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())  
-  return_item[[paste0("ANOVA table: ", formula_str, sep = "")]] <- anova(mod)[1:end_col]
-  if(means) return_item[[paste0("Means table of ", y_col_name)]] <- model.tables(aov(mod), type = "means")
-  return(return_item)
+  # Fit the model
+  mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())
+  anova_mod <- anova(mod)[1:end_col] %>% tibble::as_tibble(rownames = " ")
+
+  # Add the total row if requested
+  if (total) anova_mod <- anova_mod %>% tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum)))
+  anova_mod$`F value` <- round(anova_mod$`F value`, 4)
+  if (sign_level) anova_mod$`Pr(>F)` <- format.pval(anova_mod$`Pr(>F)`, digits = 4, eps = 0.001)
+  cat(paste0("ANOVA of ", formula_str, ":\n"))
+  print(anova_mod)
+  cat("\n")
+  # Optionally print means
+  if (means) {
+    if (class(mod$model[[x_col_names]]) %in% c("numeric", "integer")){
+      cat("Model coefficients:\n")
+      print(mod$coefficients)
+      cat("\n")
+    } else {
+      cat(paste0("Means table of ", y_col_name, ":\n"))
+      print(model.tables(aov(mod), type = "means"))
+      cat("\n")
+    }
+  }
 }
 )
