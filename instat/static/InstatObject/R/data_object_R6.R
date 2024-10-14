@@ -166,8 +166,6 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
 )
 
 DataSheet$set("public", "save_state_to_history", function() {
-  #shallow_copy <- list(data = private$data, variables_metadata = self$get_metadata(data_name_label), changes = self$changes)
-  self$set_history(append(private$history, list(private$data)))
   self$set_history(list(private$data))
 })
 
@@ -195,15 +193,15 @@ DataSheet$set("public", "clear_metadata", function() {
 )
 
 DataSheet$set("public", "has_history", function() {
-  return(length(private$history) > 0)
+  return(length(private$history))
 }
 )
 
 DataSheet$set("public", "undo_last_action", function() {
   if (length(private$history) > 1) {
-    previous_state <- private$history[[length(private$history) - 1]]
+    previous_state <- private$history[[length(private$history)]]
     self$set_data(as.data.frame(previous_state))  # Restore the previous state
-    # Here, do not remove the latest state
+    private$history <- private$history[-length(private$history)]  # Remove the latest state
   } else {
     message("No more actions to undo.")
   }
