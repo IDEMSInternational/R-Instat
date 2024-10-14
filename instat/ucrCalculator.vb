@@ -6128,9 +6128,9 @@ Public Class ucrCalculator
 
     Private Sub cmdFracDen_Click(sender As Object, e As EventArgs) Handles cmdFracDen.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den(x= , denominator= )", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den(x= ,den= )", 8)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den( , )", 4)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den(, )", 3)
         End If
     End Sub
 End Class

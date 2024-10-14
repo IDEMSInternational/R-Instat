@@ -635,6 +635,10 @@ Partial Class ucrCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpFunctions = New System.Windows.Forms.GroupBox()
+        Me.cmdFracDen = New System.Windows.Forms.Button()
+        Me.cmdFrac20 = New System.Windows.Forms.Button()
+        Me.cmdFrac100 = New System.Windows.Forms.Button()
+        Me.cmdFrac10 = New System.Windows.Forms.Button()
         Me.cmdDigitsumSession = New System.Windows.Forms.Button()
         Me.cmdDigitsquSession = New System.Windows.Forms.Button()
         Me.cmdFunctionsDigitsum = New System.Windows.Forms.Button()
@@ -665,10 +669,6 @@ Partial Class ucrCalculator
         Me.cmdPolynomial = New System.Windows.Forms.Button()
         Me.cmdOrigin = New System.Windows.Forms.Button()
         Me.ucrChkStoreScalar = New System.Windows.Forms.CheckBox()
-        Me.cmdFracDen = New System.Windows.Forms.Button()
-        Me.cmdFrac20 = New System.Windows.Forms.Button()
-        Me.cmdFrac100 = New System.Windows.Forms.Button()
-        Me.cmdFrac10 = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout
         Me.grpDates.SuspendLayout
         Me.ContextMenuStripDate.SuspendLayout
@@ -7814,10 +7814,54 @@ Partial Class ucrCalculator
         Me.grpFunctions.Margin = New System.Windows.Forms.Padding(2)
         Me.grpFunctions.Name = "grpFunctions"
         Me.grpFunctions.Padding = New System.Windows.Forms.Padding(2)
-        Me.grpFunctions.Size = New System.Drawing.Size(259, 278)
+        Me.grpFunctions.Size = New System.Drawing.Size(259, 280)
         Me.grpFunctions.TabIndex = 216
         Me.grpFunctions.TabStop = False
         Me.grpFunctions.Text = "Functions"
+        '
+        'cmdFracDen
+        '
+        Me.cmdFracDen.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFracDen.Location = New System.Drawing.Point(189, 159)
+        Me.cmdFracDen.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFracDen.Name = "cmdFracDen"
+        Me.cmdFracDen.Size = New System.Drawing.Size(62, 30)
+        Me.cmdFracDen.TabIndex = 232
+        Me.cmdFracDen.Text = "frac_den"
+        Me.cmdFracDen.UseVisualStyleBackColor = True
+        '
+        'cmdFrac20
+        '
+        Me.cmdFrac20.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFrac20.Location = New System.Drawing.Point(67, 159)
+        Me.cmdFrac20.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFrac20.Name = "cmdFrac20"
+        Me.cmdFrac20.Size = New System.Drawing.Size(62, 30)
+        Me.cmdFrac20.TabIndex = 231
+        Me.cmdFrac20.Text = "frac20"
+        Me.cmdFrac20.UseVisualStyleBackColor = True
+        '
+        'cmdFrac100
+        '
+        Me.cmdFrac100.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFrac100.Location = New System.Drawing.Point(128, 159)
+        Me.cmdFrac100.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFrac100.Name = "cmdFrac100"
+        Me.cmdFrac100.Size = New System.Drawing.Size(62, 30)
+        Me.cmdFrac100.TabIndex = 230
+        Me.cmdFrac100.Text = "frac100"
+        Me.cmdFrac100.UseVisualStyleBackColor = True
+        '
+        'cmdFrac10
+        '
+        Me.cmdFrac10.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFrac10.Location = New System.Drawing.Point(2, 159)
+        Me.cmdFrac10.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFrac10.Name = "cmdFrac10"
+        Me.cmdFrac10.Size = New System.Drawing.Size(66, 30)
+        Me.cmdFrac10.TabIndex = 229
+        Me.cmdFrac10.Text = "frac10"
+        Me.cmdFrac10.UseVisualStyleBackColor = True
         '
         'cmdDigitsumSession
         '
@@ -7901,7 +7945,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRhelpFunctions.AutoSize = True
         Me.cmdRhelpFunctions.ContextMenuStrip = Me.ContextMenuStripFunctions
-        Me.cmdRhelpFunctions.Location = New System.Drawing.Point(165, 251)
+        Me.cmdRhelpFunctions.Location = New System.Drawing.Point(165, 246)
         Me.cmdRhelpFunctions.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRhelpFunctions.Name = "cmdRhelpFunctions"
         Me.cmdRhelpFunctions.Size = New System.Drawing.Size(86, 30)
@@ -8170,50 +8214,6 @@ Partial Class ucrCalculator
         Me.ucrChkStoreScalar.TabIndex = 217
         Me.ucrChkStoreScalar.Text = "CheckBox1"
         Me.ucrChkStoreScalar.UseVisualStyleBackColor = True
-        '
-        'cmdFracDen
-        '
-        Me.cmdFracDen.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFracDen.Location = New System.Drawing.Point(189, 159)
-        Me.cmdFracDen.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFracDen.Name = "cmdFracDen"
-        Me.cmdFracDen.Size = New System.Drawing.Size(62, 30)
-        Me.cmdFracDen.TabIndex = 232
-        Me.cmdFracDen.Text = "frac_den"
-        Me.cmdFracDen.UseVisualStyleBackColor = True
-        '
-        'cmdFrac20
-        '
-        Me.cmdFrac20.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFrac20.Location = New System.Drawing.Point(67, 159)
-        Me.cmdFrac20.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFrac20.Name = "cmdFrac20"
-        Me.cmdFrac20.Size = New System.Drawing.Size(62, 30)
-        Me.cmdFrac20.TabIndex = 231
-        Me.cmdFrac20.Text = "frac20"
-        Me.cmdFrac20.UseVisualStyleBackColor = True
-        '
-        'cmdFrac100
-        '
-        Me.cmdFrac100.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFrac100.Location = New System.Drawing.Point(128, 159)
-        Me.cmdFrac100.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFrac100.Name = "cmdFrac100"
-        Me.cmdFrac100.Size = New System.Drawing.Size(62, 30)
-        Me.cmdFrac100.TabIndex = 230
-        Me.cmdFrac100.Text = "frac100"
-        Me.cmdFrac100.UseVisualStyleBackColor = True
-        '
-        'cmdFrac10
-        '
-        Me.cmdFrac10.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFrac10.Location = New System.Drawing.Point(2, 159)
-        Me.cmdFrac10.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFrac10.Name = "cmdFrac10"
-        Me.cmdFrac10.Size = New System.Drawing.Size(66, 30)
-        Me.cmdFrac10.TabIndex = 229
-        Me.cmdFrac10.Text = "frac10"
-        Me.cmdFrac10.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
