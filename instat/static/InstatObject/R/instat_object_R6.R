@@ -3010,7 +3010,7 @@ DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, colum
 }
 )
 
-DataBook$set("public", "anova_tables2", function(data_name, x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
-  self$get_data_objects(data_name)$anova_tables2(x_col_names = x_col_names, y_col_name = y_col_name, signif.stars = signif.stars, sign_level = sign_level, means = means)
+DataBook$set("public", "anova_tables2", function(data_name, x_col_names, y_col_name, total = TRUE, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+  self$get_data_objects(data_name)$anova_tables2(x_col_names = x_col_names, y_col_name = y_col_name, total = total, signif.stars = signif.stars, sign_level = sign_level, means = means)
 } 
 )

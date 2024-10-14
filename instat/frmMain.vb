@@ -2885,7 +2885,6 @@ Public Class frmMain
     Private Sub mnuImportFromOpenAppBuilder_Click(sender As Object, e As EventArgs) Handles mnuImportFromOpenAppBuilder.Click
         dlgImportOpenAppBuilder.ShowDialog()
     End Sub
-
     Private Sub mnuClimaticCheckDataDistances_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDistances.Click
         dlgDistances.ShowDialog()
     End Sub
