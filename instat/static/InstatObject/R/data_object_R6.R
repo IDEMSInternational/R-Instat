@@ -1346,6 +1346,8 @@ DataSheet$set("public", "add_defaults_variables_metadata", function(column_names
 
 DataSheet$set("public", "remove_rows_in_data", function(row_names) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  self$save_state_to_history()
+  
   if(!all(row_names %in% rownames(curr_data))) stop("Some of the row_names not found in data")
   rows_to_remove <- which(rownames(curr_data) %in% row_names)
   #Prefer not to use dplyr::slice as it produces a tibble
@@ -1392,6 +1394,7 @@ DataSheet$set("public", "reorder_columns_in_data", function(col_order) {
 
 DataSheet$set("public", "insert_row_in_data", function(start_row, row_data = c(), number_rows = 1, before = FALSE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  self$save_state_to_history()
   curr_row_names <- rownames(curr_data)
   if (!start_row %in% curr_row_names) {
     stop(paste(start_row, " not found in rows"))
@@ -4574,6 +4577,8 @@ DataSheet$set("public", "remove_empty", function(which = c("rows", "cols")) {
 
 DataSheet$set("public", "replace_values_with_NA", function(row_index, column_index) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  self$save_state_to_history()
+  
   if(!all(row_index %in% seq_len(nrow(curr_data)))) stop("All row indexes must be within the dataframe")
   if(!all(column_index %in% seq_len(ncol(curr_data)))) stop("All column indexes must be within the dataframe")
   curr_data[row_index, column_index] <- NA
