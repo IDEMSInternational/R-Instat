@@ -225,7 +225,7 @@ Public Class frmMain
         '--------------------------------------
         CreateAdditionalLibraryDirectory()
         '-------------------------------------
-
+        SetAppVersionNumber()
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
@@ -587,6 +587,12 @@ Public Class frmMain
 
     Public Sub SetLanButtonVisibility(bVisible As Boolean)
         mnuTbLan.Visible = bVisible
+    End Sub
+
+    Public Sub SetAppVersionNumber()
+        Me.Text = "R-Instat " & My.Application.Info.Version.Major.ToString() & "." &
+                My.Application.Info.Version.Minor.ToString() & "." &
+                My.Application.Info.Version.Build.ToString()
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -2885,7 +2891,6 @@ Public Class frmMain
     Private Sub mnuImportFromOpenAppBuilder_Click(sender As Object, e As EventArgs) Handles mnuImportFromOpenAppBuilder.Click
         dlgImportOpenAppBuilder.ShowDialog()
     End Sub
-
     Private Sub mnuClimaticCheckDataDistances_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDistances.Click
         dlgDistances.ShowDialog()
     End Sub
