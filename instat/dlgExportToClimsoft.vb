@@ -214,8 +214,22 @@ Public Class dlgExportToClimsoft
         SettingBaseFunction()
     End Sub
 
-    Private Sub ucrInputExportFile_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrDataFrameSheets_Load(sender As Object, e As EventArgs) Handles ucrDataFrameSheets.Load
+        If ucrDataFrameSheets.cboAvailableDataFrames.Items.Count > 0 Then
+            ' Check if the .comment dataframe exists
+            Dim commentExists As Boolean = False
+            For Each dataframe As String In ucrDataFrameSheets.cboAvailableDataFrames.Items
+                If dataframe = ".comment" Then
+                    commentExists = True
+                    Exit For
+                End If
+            Next
 
+            ' Set .comment as the default selection if it exists
+            If commentExists Then
+                ucrDataFrameSheets.cboAvailableDataFrames.SelectedItem = ".comment"
+            End If
+        End If
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -306,10 +320,6 @@ Public Class dlgExportToClimsoft
             clsPasteFunction.RemoveParameterByName("date_time")
         End If
     End Sub
-
-    'Private Sub ucrInputExportFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputExportFile.ControlValueChanged
-    '    EnableDisableComments()
-    'End Sub
 
     Private Sub ucrPnlOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOutput.ControlValueChanged
         SettingBaseFunction()
