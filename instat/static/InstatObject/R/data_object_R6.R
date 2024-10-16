@@ -4592,22 +4592,40 @@ DataSheet$set("public", "has_labels", function(col_names) {
 }
 )
 
-DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
-
-  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
-  if(sign_level || signif.stars) message("This is no longer descriptive")
-  if(sign_level) end_col = 5 else end_col = 4
-
+DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+  if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+  if (sign_level || signif.stars) message("This is no longer descriptive")
+  if (sign_level) end_col = 5 else end_col = 4
+  
+  # Construct the formula
   if (length(x_col_names) == 1) {
-    formula_str <- paste0( as.name(y_col_name), "~ ", as.name(x_col_names))
+    formula_str <- paste0(as.name(y_col_name), "~ ", as.name(x_col_names))
   } else if (length(x_col_names) > 1) {
     formula_str <- paste0(as.name(y_col_name), "~ ", as.name(paste(x_col_names, collapse = " + ")))
   }
 
-  return_item <- NULL
-  mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())  
-  return_item[[paste0("ANOVA table: ", formula_str, sep = "")]] <- anova(mod)[1:end_col]
-  if(means) return_item[[paste0("Means table of ", y_col_name)]] <- model.tables(aov(mod), type = "means")
-  return(return_item)
+  # Fit the model
+  mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())
+  anova_mod <- anova(mod)[1:end_col] %>% tibble::as_tibble(rownames = " ")
+
+  # Add the total row if requested
+  if (total) anova_mod <- anova_mod %>% tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum)))
+  anova_mod$`F value` <- round(anova_mod$`F value`, 4)
+  if (sign_level) anova_mod$`Pr(>F)` <- format.pval(anova_mod$`Pr(>F)`, digits = 4, eps = 0.001)
+  cat(paste0("ANOVA of ", formula_str, ":\n"))
+  print(anova_mod)
+  cat("\n")
+  # Optionally print means
+  if (means) {
+    if (class(mod$model[[x_col_names]]) %in% c("numeric", "integer")){
+      cat("Model coefficients:\n")
+      print(mod$coefficients)
+      cat("\n")
+    } else {
+      cat(paste0("Means table of ", y_col_name, ":\n"))
+      print(model.tables(aov(mod), type = "means"))
+      cat("\n")
+    }
+  }
 }
 )
