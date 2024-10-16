@@ -33,6 +33,8 @@ Public Class ucrDataViewReoGrid
 
     Public Event FindRow() Implements IDataViewGrid.FindRow
 
+    Public Event Undo() Implements IDataViewGrid.Undo
+
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
@@ -284,8 +286,7 @@ Public Class ucrDataViewReoGrid
 
         ' Detect Ctrl+Z for Undo operation
         If e.Control AndAlso e.KeyCode = Keys.Z Then
-            ' Perform Undo
-            GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
+            RaiseEvent Undo()
             e.Handled = True
             e.SuppressKeyPress = True
         End If

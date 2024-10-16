@@ -286,7 +286,7 @@ DataSheet$set("public", "set_scalars", function(new_scalars) {
 
 DataSheet$set("public", "set_history", function(history) {
   if(!is.list(history)) stop("history must be of type: list")
-  MAX_HISTORY_SIZE <- 10
+  MAX_HISTORY_SIZE <- 5
   # Limit history size
   if (length(private$history) >= MAX_HISTORY_SIZE) {
     private$history <- private$history[-1]  # Remove the oldest entry

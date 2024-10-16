@@ -89,6 +89,7 @@ Public Class ucrDataView
         AddHandler _grid.DeleteValuesToDataframe, AddressOf DeleteCell_Click
         AddHandler _grid.EditCell, AddressOf EditCell
         AddHandler _grid.FindRow, AddressOf FindRow
+        AddHandler _grid.Undo, AddressOf Undo
     End Sub
 
     Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As clsDataFrame)
@@ -1011,6 +1012,25 @@ Public Class ucrDataView
 
     Private Sub FindRow()
         dlgFindInVariableOrFilter.ShowDialog()
+    End Sub
+
+    Private Sub Undo()
+        If frmMain.clsInstatOptions.bUndoSwitchAction Then
+            Dim bUndo As Boolean = True
+            If GetCurrentDataFrameFocus.iTotalRowCount > 1000 Then
+                Dim result As DialogResult = MessageBox.Show(Me, "The dataset you are working with has more than 1000 rows, which may cause the undo operation to be slow. Do you want to proceed?",
+                                                 "Large Data Set Detected", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                ' Check if the user clicked No
+                If result = DialogResult.No Then
+                    bUndo = False
+                End If
+            End If
+
+
+            If bUndo Then
+                GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
+            End If
+        End If
     End Sub
 
     Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,

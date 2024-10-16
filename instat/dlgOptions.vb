@@ -78,6 +78,7 @@ Public Class dlgOptions
         ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
         ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
         ucrChkAutoSave.SetText("Auto save a backup of data")
+        ucrChkSwitchUndo.SetText("Switch off undo")
         ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
         ucrChkReminder.SetText("Remind me later when R-Instat new version available")
         ucrChkAutoSave.AddToLinkedControls(ucrNudAutoSaveMinutes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -102,6 +103,7 @@ Public Class dlgOptions
     Private Sub LoadInstatOptions()
         ucrChkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
         ucrChkAutoSave.Checked = frmMain.clsInstatOptions.bAutoSaveData
+        ucrChkSwitchUndo.Checked = frmMain.clsInstatOptions.bUndoSwitchAction
         SetOutputFont(frmMain.clsInstatOptions.fntOutput, frmMain.clsInstatOptions.clrOutput)
         SetCommandFont(frmMain.clsInstatOptions.fntScript, frmMain.clsInstatOptions.clrScript)
         SetCommentFont(frmMain.clsInstatOptions.fntComment, frmMain.clsInstatOptions.clrComment)
@@ -172,6 +174,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetMaxRows(ucrNudMaxRows.Value)
         frmMain.clsInstatOptions.SetMaxCols(ucrNudMaxCols.Value)
         frmMain.clsInstatOptions.SetAutoSaveData(ucrChkAutoSave.Checked)
+        frmMain.clsInstatOptions.SetUndoSwitchAction(ucrChkSwitchUndo.Checked)
         frmMain.clsInstatOptions.SetAutoSaveDataMinutes(ucrNudAutoSaveMinutes.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
@@ -360,7 +363,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged, ucrChkReminder.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged, ucrChkReminder.ControlValueChanged, ucrChkSwitchUndo.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 
