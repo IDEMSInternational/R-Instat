@@ -89,7 +89,6 @@ Public Class ucrDataView
         AddHandler _grid.DeleteValuesToDataframe, AddressOf DeleteCell_Click
         AddHandler _grid.EditCell, AddressOf EditCell
         AddHandler _grid.FindRow, AddressOf FindRow
-        AddHandler _grid.Undo, AddressOf Undo
     End Sub
 
     Private Sub RefreshWorksheet(fillWorkSheet As clsWorksheetAdapter, dataFrame As clsDataFrame)

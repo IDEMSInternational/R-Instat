@@ -33,8 +33,6 @@ Public Class ucrDataViewLinuxGrid
 
     Public Event FindRow() Implements IDataViewGrid.FindRow
 
-    Public Event Undo() Implements IDataViewGrid.Undo
-
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved

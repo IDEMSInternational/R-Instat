@@ -3031,8 +3031,7 @@ Partial Class frmMain
         'mnuUndo
         '
         Me.mnuUndo.Name = "mnuUndo"
-        Me.mnuUndo.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
-            Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
+        Me.mnuUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
         Me.mnuUndo.Size = New System.Drawing.Size(270, 34)
         Me.mnuUndo.Text = "Undo"
         '

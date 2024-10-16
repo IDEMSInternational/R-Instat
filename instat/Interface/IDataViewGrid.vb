@@ -33,8 +33,6 @@ Public Interface IDataViewGrid
 
     Event FindRow()
 
-    Event Undo()
-
     Sub AddColumns(visiblePage As clsDataFramePage)
 
     Sub AddRowData(dataFrame As clsDataFrame)
