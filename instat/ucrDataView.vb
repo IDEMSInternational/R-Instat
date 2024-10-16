@@ -101,6 +101,7 @@ Public Class ucrDataView
         _grid.AddRowData(dataFrame)
         _grid.UpdateWorksheetStyle(fillWorkSheet)
         dataFrame.clsVisibleDataFramePage.HasChanged = False
+        frmMain.mnuUndo.Enabled = dataFrame.clsVisibleDataFramePage.HasHistory
         RefreshDisplayInformation()
     End Sub
 
@@ -275,6 +276,7 @@ Public Class ucrDataView
             SetDisplayLabels()
             UpdateNavigationButtons()
             SetGridVisibility(True)
+            frmMain.mnuUndo.Enabled = GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasHistory
         Else
             frmMain.tstatus.Text = GetTranslation("No data loaded")
             SetGridVisibility(False)
@@ -1010,27 +1012,22 @@ Public Class ucrDataView
         EditCell()
     End Sub
 
-    Private Sub FindRow()
+    Public Sub FindRow()
         dlgFindInVariableOrFilter.ShowDialog()
     End Sub
 
-    Private Sub Undo()
-        If frmMain.clsInstatOptions.bUndoSwitchAction Then
-            Dim bUndo As Boolean = True
-            If GetCurrentDataFrameFocus.iTotalRowCount > 1000 Then
-                Dim result As DialogResult = MessageBox.Show(Me, "The dataset you are working with has more than 1000 rows, which may cause the undo operation to be slow. Do you want to proceed?",
-                                                 "Large Data Set Detected", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
-                ' Check if the user clicked No
-                If result = DialogResult.No Then
-                    bUndo = False
-                End If
-            End If
-
-
-            If bUndo Then
-                GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
-            End If
+    Public Sub Undo()
+        If (GetCurrentDataFrameFocus().iTotalColumnCount >= frmMain.clsInstatOptions.iUndoColLimit) OrElse
+            (GetCurrentDataFrameFocus().iTotalRowCount >= frmMain.clsInstatOptions.iUndoRowLimit) Then
+            frmMain.mnuUndo.Enabled = False
+            Exit Sub
         End If
+
+        If GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasHistory Then
+            frmMain.mnuUndo.Enabled = True
+            GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
+        End If
+
     End Sub
 
     Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,

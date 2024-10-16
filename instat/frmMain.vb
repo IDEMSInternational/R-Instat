@@ -2894,4 +2894,8 @@ Public Class frmMain
     Private Sub mnuClimaticCheckDataDistances_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDistances.Click
         dlgDistances.ShowDialog()
     End Sub
+
+    Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
+        ucrDataViewer.Undo()
+    End Sub
 End Class

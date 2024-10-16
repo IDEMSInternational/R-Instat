@@ -31,6 +31,8 @@ Imports RDotNet
     Public iPreviewRows As Nullable(Of Integer)
     Public iMaxRows As Nullable(Of Integer)
     Public iMaxCols As Nullable(Of Integer)
+    Public iUndoColLimit As Nullable(Of Integer)
+    Public iUndoRowLimit As Nullable(Of Integer)
     Public lstColourPalette As List(Of Color)
     Public strGraphDisplayOption As String
     Public bCommandsinOutput As Nullable(Of Boolean)
@@ -76,6 +78,8 @@ Imports RDotNet
         iPreviewRows = clsInstatOptionsDefaults.DEFAULTiPreviewRows
         iMaxRows = clsInstatOptionsDefaults.DEFAULTiMaxRows
         iMaxCols = clsInstatOptionsDefaults.DEFAULTiMaxCols
+        iUndoColLimit = clsInstatOptionsDefaults.DEFAULTiUndoColLimit
+        iUndoRowLimit = clsInstatOptionsDefaults.DEFAULTiUndoRowLimit
         strComment = Translations.GetTranslation(clsInstatOptionsDefaults.DEFAULTstrComment)
         strGraphDisplayOption = clsInstatOptionsDefaults.DEFAULTstrGraphDisplayOption
         strLanguageCultureCode = clsInstatOptionsDefaults.DEFAULTstrLanguageCultureCode
@@ -85,7 +89,6 @@ Imports RDotNet
         bShowSignifStars = clsInstatOptionsDefaults.DEFAULTbShowSignifStars
         bChangeDataFrame = clsInstatOptionsDefaults.DEFAULTbChangeDataFrame
         bAutoSaveData = clsInstatOptionsDefaults.DEFAULTbAutoSaveData
-        bUndoSwitchAction = clsInstatOptionsDefaults.DEFAULTbUndoSwitchAction
         iAutoSaveDataMinutes = clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes
         bShowWaitDialog = clsInstatOptionsDefaults.DEFAULTbShowWaitDialog
         iWaitTimeDelaySeconds = clsInstatOptionsDefaults.DEFAULTiWaitTimeDelaySeconds
@@ -144,6 +147,18 @@ Imports RDotNet
             SetMaxCols(iMaxCols)
         Else
             SetMaxCols(clsInstatOptionsDefaults.DEFAULTiMaxCols)
+        End If
+
+        If iUndoColLimit.HasValue Then
+            SetUndoColLimit(iUndoColLimit)
+        Else
+            SetUndoColLimit(clsInstatOptionsDefaults.DEFAULTiUndoColLimit)
+        End If
+
+        If iUndoRowLimit.HasValue Then
+            SetUndoRowLimit(iUndoRowLimit)
+        Else
+            SetUndoRowLimit(clsInstatOptionsDefaults.DEFAULTiUndoRowLimit)
         End If
 
         If bCommandsinOutput.HasValue Then
@@ -244,12 +259,6 @@ Imports RDotNet
             SetAutoSaveData(bAutoSaveData)
         Else
             SetAutoSaveData(clsInstatOptionsDefaults.DEFAULTbAutoSaveData)
-        End If
-
-        If bUndoSwitchAction.HasValue Then
-            SetUndoSwitchAction(bUndoSwitchAction)
-        Else
-            SetUndoSwitchAction(clsInstatOptionsDefaults.DEFAULTbUndoSwitchAction)
         End If
 
         If iAutoSaveDataMinutes.HasValue Then
@@ -363,6 +372,14 @@ Imports RDotNet
         expression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetOptionFunction.ToScript(), bSilent:=True)
         Return If(expression Is Nothing OrElse expression.Type = Internals.SymbolicExpressionType.Null, Nothing, expression.AsCharacter(0))
     End Function
+
+    Public Sub SetUndoColLimit(iNewUndoColLimit As Integer)
+        iUndoColLimit = iNewUndoColLimit
+    End Sub
+
+    Public Sub SetUndoRowLimit(iNewUndoRowLimit As Integer)
+        iUndoRowLimit = iNewUndoRowLimit
+    End Sub
 
     Public Sub SetMaxRows(iRows As Integer)
         iMaxRows = iRows
@@ -536,10 +553,6 @@ Imports RDotNet
 
     Public Sub SetAutoSaveData(bNewAutoSave As Boolean)
         bAutoSaveData = bNewAutoSave
-    End Sub
-
-    Public Sub SetUndoSwitchAction(bNewUndoSwitchAction As Boolean)
-        bUndoSwitchAction = bNewUndoSwitchAction
     End Sub
 
     Public Sub SetAutoSaveDataMinutes(iNewMinutes As Integer)

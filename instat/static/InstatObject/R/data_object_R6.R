@@ -194,7 +194,7 @@ DataSheet$set("public", "clear_metadata", function() {
 )
 
 DataSheet$set("public", "has_history", function() {
-  return(length(private$history))
+  return(length(private$history) > 1)
 }
 )
 
