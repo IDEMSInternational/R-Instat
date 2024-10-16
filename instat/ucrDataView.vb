@@ -1017,13 +1017,35 @@ Public Class ucrDataView
 
     Public Sub Undo()
         If (GetCurrentDataFrameFocus().iTotalColumnCount >= frmMain.clsInstatOptions.iUndoColLimit) OrElse
-            (GetCurrentDataFrameFocus().iTotalRowCount >= frmMain.clsInstatOptions.iUndoRowLimit) Then
-            frmMain.mnuUndo.Enabled = False
+   (GetCurrentDataFrameFocus().iTotalRowCount >= frmMain.clsInstatOptions.iUndoRowLimit) Then
+
+            ' Retrieve the default limits for rows and columns
+            Dim colLimit As Integer = frmMain.clsInstatOptions.iUndoColLimit
+            Dim rowLimit As Integer = frmMain.clsInstatOptions.iUndoRowLimit
+
+            ' Construct the concise message
+            Dim msg As String = "The current data frame exceeds the undo limit (Columns: " & colLimit & ", Rows: " & rowLimit & ")."
+
+            ' Append information on whether it's the rows, columns, or both
+            If GetCurrentDataFrameFocus().iTotalColumnCount >= colLimit AndAlso
+       GetCurrentDataFrameFocus().iTotalRowCount >= rowLimit Then
+                msg &= " Both columns and rows exceed the limit."
+            ElseIf GetCurrentDataFrameFocus().iTotalColumnCount >= colLimit Then
+                msg &= " Columns exceed the limit."
+            ElseIf GetCurrentDataFrameFocus().iTotalRowCount >= rowLimit Then
+                msg &= " Rows exceed the limit."
+            End If
+
+            msg &= " Please go to Tools > Options to adjust the limits."
+
+            ' Display the message box
+            MsgBox(msg, vbExclamation, "Undo Limit Exceeded")
+
             Exit Sub
         End If
 
+
         If GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasHistory Then
-            frmMain.mnuUndo.Enabled = True
             GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
         End If
 

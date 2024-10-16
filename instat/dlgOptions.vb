@@ -62,10 +62,10 @@ Public Class dlgOptions
         ucrNudWaitSeconds.Increment = 0.5
 
         ucrNudColUndoLimit.Maximum = 1000
-        ucrNudColUndoLimit.Minimum = 200
+        ucrNudColUndoLimit.Minimum = 0
         ucrNudColUndoLimit.Increment = 100
         ucrNudRowUndoLimit.Maximum = Integer.MaxValue
-        ucrNudRowUndoLimit.Minimum = 200000
+        ucrNudRowUndoLimit.Minimum = 100000
         ucrNudRowUndoLimit.Increment = 100000
 
         strPreviewText = "R-Instat 2017"

@@ -38,12 +38,12 @@ Partial Class dlgOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
-        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
-        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
-        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
-        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
-        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
@@ -94,6 +94,7 @@ Partial Class dlgOptions
         Me.ucrNudWaitSeconds = New instat.ucrNud()
         Me.ucrChkIncludeDefaultParams = New instat.ucrCheck()
         Me.tbpDataView = New System.Windows.Forms.TabPage()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ucrNudRowUndoLimit = New instat.ucrNud()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -133,7 +134,6 @@ Partial Class dlgOptions
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
         Me.tbpWebsite = New System.Windows.Forms.TabPage()
         Me.ucrChkReminder = New instat.ucrCheck()
-        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -249,29 +249,29 @@ Partial Class dlgOptions
         Me.trOptions.Location = New System.Drawing.Point(0, 0)
         Me.trOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.trOptions.Name = "trOptions"
-        TreeNode1.Name = "ndLanguages"
-        TreeNode1.Tag = "1"
-        TreeNode1.Text = "Languages"
-        TreeNode1.ToolTipText = "Choose different languages"
-        TreeNode2.Name = "ndComments"
-        TreeNode2.Tag = "2"
-        TreeNode2.Text = "Comments"
-        TreeNode2.ToolTipText = "Comments for the dialogs"
-        TreeNode3.Name = "ndImport"
-        TreeNode3.Tag = "3"
-        TreeNode3.Text = "Import"
-        TreeNode3.ToolTipText = "Import Data Settings"
-        TreeNode4.Name = "ndOutputWindow"
-        TreeNode4.Tag = "4"
-        TreeNode4.Text = "Output Window"
-        TreeNode4.ToolTipText = "Output Window Formatting Options"
-        TreeNode5.Name = "ndCommands"
-        TreeNode5.Tag = "8"
-        TreeNode5.Text = "Commands"
-        TreeNode5.ToolTipText = "Commands Options"
-        TreeNode6.Name = "ndDataView"
-        TreeNode6.Text = "Data View"
-        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+        TreeNode7.Name = "ndLanguages"
+        TreeNode7.Tag = "1"
+        TreeNode7.Text = "Languages"
+        TreeNode7.ToolTipText = "Choose different languages"
+        TreeNode8.Name = "ndComments"
+        TreeNode8.Tag = "2"
+        TreeNode8.Text = "Comments"
+        TreeNode8.ToolTipText = "Comments for the dialogs"
+        TreeNode9.Name = "ndImport"
+        TreeNode9.Tag = "3"
+        TreeNode9.Text = "Import"
+        TreeNode9.ToolTipText = "Import Data Settings"
+        TreeNode10.Name = "ndOutputWindow"
+        TreeNode10.Tag = "4"
+        TreeNode10.Text = "Output Window"
+        TreeNode10.ToolTipText = "Output Window Formatting Options"
+        TreeNode11.Name = "ndCommands"
+        TreeNode11.Tag = "8"
+        TreeNode11.Text = "Commands"
+        TreeNode11.ToolTipText = "Commands Options"
+        TreeNode12.Name = "ndDataView"
+        TreeNode12.Text = "Data View"
+        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12})
         Me.trOptions.Size = New System.Drawing.Size(276, 476)
         Me.trOptions.TabIndex = 0
         '
@@ -786,10 +786,20 @@ Partial Class dlgOptions
         Me.tbpDataView.Text = "Data View"
         Me.tbpDataView.UseVisualStyleBackColor = True
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(25, 297)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(541, 20)
+        Me.Label4.TabIndex = 11
+        Me.Label4.Text = "(Any changes from the default only apply to the current session of R-Instat.)"
+        '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(781, 230)
+        Me.Label3.Location = New System.Drawing.Point(669, 262)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(46, 20)
@@ -801,19 +811,19 @@ Partial Class dlgOptions
         Me.ucrNudRowUndoLimit.AutoSize = True
         Me.ucrNudRowUndoLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowUndoLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowUndoLimit.Location = New System.Drawing.Point(692, 227)
+        Me.ucrNudRowUndoLimit.Location = New System.Drawing.Point(529, 259)
         Me.ucrNudRowUndoLimit.Margin = New System.Windows.Forms.Padding(8)
         Me.ucrNudRowUndoLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRowUndoLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowUndoLimit.Name = "ucrNudRowUndoLimit"
-        Me.ucrNudRowUndoLimit.Size = New System.Drawing.Size(77, 30)
+        Me.ucrNudRowUndoLimit.Size = New System.Drawing.Size(91, 30)
         Me.ucrNudRowUndoLimit.TabIndex = 9
         Me.ucrNudRowUndoLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(595, 230)
+        Me.Label2.Location = New System.Drawing.Point(629, 230)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(86, 20)
@@ -835,12 +845,12 @@ Partial Class dlgOptions
         Me.ucrNudColUndoLimit.AutoSize = True
         Me.ucrNudColUndoLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColUndoLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudColUndoLimit.Location = New System.Drawing.Point(506, 227)
+        Me.ucrNudColUndoLimit.Location = New System.Drawing.Point(529, 227)
         Me.ucrNudColUndoLimit.Margin = New System.Windows.Forms.Padding(8)
         Me.ucrNudColUndoLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudColUndoLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColUndoLimit.Name = "ucrNudColUndoLimit"
-        Me.ucrNudColUndoLimit.Size = New System.Drawing.Size(81, 30)
+        Me.ucrNudColUndoLimit.Size = New System.Drawing.Size(91, 30)
         Me.ucrNudColUndoLimit.TabIndex = 6
         Me.ucrNudColUndoLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -1237,16 +1247,6 @@ Partial Class dlgOptions
         Me.ucrChkReminder.Name = "ucrChkReminder"
         Me.ucrChkReminder.Size = New System.Drawing.Size(620, 51)
         Me.ucrChkReminder.TabIndex = 2
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(25, 262)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(541, 20)
-        Me.Label4.TabIndex = 11
-        Me.Label4.Text = "(Any changes from the default only apply to the current session of R-Instat.)"
         '
         'dlgOptions
         '
