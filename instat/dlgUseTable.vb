@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports System.IO
 Imports instat.Translations
 Public Class dlgUseTable
     Private bFirstLoad As Boolean = True
@@ -57,18 +57,20 @@ Public Class dlgUseTable
         ucrTablesReceiver.SetItemType(RObjectTypeLabel.Table)
 
         ''To Be enabled later when the formats are supported.
-        rdoAsHTML.Enabled = False
-        rdoAsLaTex.Enabled = False
-        rdoAsRTF.Enabled = False
-        rdoAsWord.Enabled = False
-        'ucrPnlExportOptions.AddRadioButton(rdoAsHTML)
-        'ucrPnlExportOptions.AddRadioButton(rdoAsRTF)
-        'ucrPnlExportOptions.AddRadioButton(rdoAsWord)
-        'ucrPnlExportOptions.AddRadioButton(rdoAsLaTex)
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsHTML, "as_raw_html")
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsRTF, "as_rtf")
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsWord, "as_word")
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsLaTex, "as_word")
+        'rdoAsHTML.Enabled = False
+        'rdoAsLaTex.Enabled = False
+        'rdoAsRTF.Enabled = False
+        'rdoAsWord.Enabled = False
+        ucrPnlOptions.AddRadioButton(rdoAsHTML)
+        ucrPnlOptions.AddRadioButton(rdoAsRTF)
+        ucrPnlOptions.AddRadioButton(rdoAsWord)
+        ucrPnlOptions.AddRadioButton(rdoAsLaTex)
+        ucrPnlOptions.AddParameterValuesCondition(rdoAsHTML, "gtsave", "html")
+        ucrPnlOptions.AddParameterValuesCondition(rdoAsRTF, "gtsave", "rtf")
+        ucrPnlOptions.AddParameterValuesCondition(rdoAsWord, "gtsave", "docx")
+        ucrPnlOptions.AddParameterValuesCondition(rdoAsLaTex, "gtsave", "tex")
+
+        cmdTableOptions.Enabled = False
 
         ucrSaveTable.SetPrefix("use_table")
         ucrSaveTable.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
@@ -111,7 +113,8 @@ Public Class dlgUseTable
         ucrTablesSelector.Reset()
         ucrSaveTable.Reset()
 
-        clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
+        clsDummyFunction.AddParameter("theme", "select", iPosition:=0)
+        clsDummyFunction.AddParameter("gtsave", "html", iPosition:=1)
 
         clsgtExtraThemesFunction.SetPackageName("gtExtras")
 
@@ -171,20 +174,21 @@ Public Class dlgUseTable
         clsThemesTabOptionsFunction.SetRCommand("tab_options")
 
         clsRFunctionAsHTML.SetPackageName("gt")
-        clsRFunctionAsHTML.SetRCommand("as_raw_html")
+        clsRFunctionAsHTML.SetRCommand("gtsave")
 
         clsRFunctionAsRTF.SetPackageName("gt")
-        clsRFunctionAsRTF.SetRCommand("as_rtf")
+        clsRFunctionAsRTF.SetRCommand("gtsave")
 
         clsRFunctionAsWord.SetPackageName("gt")
-        clsRFunctionAsWord.SetRCommand("as_word")
+        clsRFunctionAsWord.SetRCommand("gtsave")
 
         clsRFunctionAsLaTex.SetPackageName("gt")
-        clsRFunctionAsLaTex.SetRCommand("as_word")
+        clsRFunctionAsLaTex.SetRCommand("gtsave")
 
         clsUseTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
         clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.bBrackets = False
 
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
     End Sub
@@ -193,6 +197,9 @@ Public Class dlgUseTable
         ucrTablesSelector.SetRCode(clsUseTableFunction, bReset)
         ucrTablesReceiver.SetRCode(clsUseTableFunction, bReset)
         ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
+        If bReset Then
+            ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
@@ -209,30 +216,33 @@ Public Class dlgUseTable
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdFormatOptions_Click(sender As Object, e As EventArgs) Handles cmdFormatOptions.Click
-        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
-                                        clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
-                                        clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
-                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                        clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
-                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction,
-                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction, bReset:=bReset)
-        sdgFormatSummaryTables.ShowDialog()
+    Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
+        sdgTableOptions.Setup(ucrTablesSelector.strCurrentDataFrame, clsPipeOperator)
+        sdgTableOptions.ShowDialog(Me)
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTablesReceiver.ControlContentsChanged, ucrSaveTable.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlExportOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExportOptions.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoAsHTML.Checked Then
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsHTML)
+            clsRFunctionAsHTML.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".html" & Chr(34), iPosition:=1)
+            clsRFunctionAsHTML.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments.Replace("\", "/") & Chr(34), iPosition:=2)
         ElseIf rdoAsRTF.Checked Then
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsRTF)
+            clsRFunctionAsRTF.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".rtf" & Chr(34), iPosition:=1)
+            clsRFunctionAsRTF.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments.Replace("\", "/") & Chr(34), iPosition:=2)
         ElseIf rdoAsWord.Checked Then
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsWord)
+            clsRFunctionAsWord.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".docx" & Chr(34), iPosition:=1)
+            clsRFunctionAsWord.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments.Replace("\", "/") & Chr(34), iPosition:=2)
         Else
             clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsLaTex)
+            clsRFunctionAsLaTex.AddParameter("filename", Chr(34) & ucrTablesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & ".tex" & Chr(34), iPosition:=1)
+            clsRFunctionAsLaTex.AddParameter("path", Chr(34) & FileIO.SpecialDirectories.MyDocuments.Replace("\", "/") & Chr(34), iPosition:=2)
         End If
     End Sub
+
 End Class
