@@ -100,6 +100,7 @@ Public Class ucrDataView
         _grid.AddRowData(dataFrame)
         _grid.UpdateWorksheetStyle(fillWorkSheet)
         dataFrame.clsVisibleDataFramePage.HasChanged = False
+        frmMain.mnuUndo.Enabled = dataFrame.clsVisibleDataFramePage.HasHistory
         RefreshDisplayInformation()
     End Sub
 
@@ -155,6 +156,8 @@ Public Class ucrDataView
                 RefreshDisplayInformation()
             End If
         End If
+
+        _grid.Focus()
     End Sub
 
     ''' <summary>
@@ -185,11 +188,12 @@ Public Class ucrDataView
         If GetSelectedColumns.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
             MsgBox("Cannot delete all visible columns." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
         Else
-            Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
+            Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?", MessageBoxButtons.YesNo, "Delete Column")
             If deleteCol = DialogResult.Yes Then
                 StartWait()
                 GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteColumn(GetSelectedColumnNames())
                 EndWait()
+                _grid.Focus()
             End If
         End If
     End Sub
@@ -198,12 +202,14 @@ Public Class ucrDataView
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.InsertRows(GetSelectedRows.Count, GetLastSelectedRow(), False)
         EndWait()
+        _grid.Focus()
     End Sub
 
     Private Sub mnuInsertRowsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertRowsBefore.Click
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.InsertRows(GetSelectedRows.Count, GetFirstSelectedRow, True)
         EndWait()
+        _grid.Focus()
     End Sub
 
     Private Sub mnuDeleteRows_Click(sender As Object, e As EventArgs) Handles mnuDeleteRows.Click
@@ -212,6 +218,7 @@ Public Class ucrDataView
             StartWait()
             GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteRows(GetSelectedRows())
             EndWait()
+            _grid.Focus()
         End If
     End Sub
 
@@ -268,6 +275,7 @@ Public Class ucrDataView
             SetDisplayLabels()
             UpdateNavigationButtons()
             SetGridVisibility(True)
+            frmMain.mnuUndo.Enabled = GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasHistory
         Else
             frmMain.tstatus.Text = GetTranslation("No data loaded")
             SetGridVisibility(False)
@@ -908,6 +916,7 @@ Public Class ucrDataView
             StartWait()
             GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteCells(GetSelectedRows(), GetSelectedColumnIndexes())
             EndWait()
+            _grid.Focus()
         End If
     End Sub
 
@@ -1002,8 +1011,44 @@ Public Class ucrDataView
         EditCell()
     End Sub
 
-    Private Sub FindRow()
+    Public Sub FindRow()
         dlgFindInVariableOrFilter.ShowDialog()
+    End Sub
+
+    Public Sub Undo()
+        If (GetCurrentDataFrameFocus().iTotalColumnCount >= frmMain.clsInstatOptions.iUndoColLimit) OrElse
+   (GetCurrentDataFrameFocus().iTotalRowCount >= frmMain.clsInstatOptions.iUndoRowLimit) Then
+
+            ' Retrieve the default limits for rows and columns
+            Dim colLimit As Integer = frmMain.clsInstatOptions.iUndoColLimit
+            Dim rowLimit As Integer = frmMain.clsInstatOptions.iUndoRowLimit
+
+            ' Construct the concise message
+            Dim msg As String = "The current data frame exceeds the undo limit (Columns: " & colLimit & ", Rows: " & rowLimit & ")."
+
+            ' Append information on whether it's the rows, columns, or both
+            If GetCurrentDataFrameFocus().iTotalColumnCount >= colLimit AndAlso
+       GetCurrentDataFrameFocus().iTotalRowCount >= rowLimit Then
+                msg &= " Both columns and rows exceed the limit."
+            ElseIf GetCurrentDataFrameFocus().iTotalColumnCount >= colLimit Then
+                msg &= " Columns exceed the limit."
+            ElseIf GetCurrentDataFrameFocus().iTotalRowCount >= rowLimit Then
+                msg &= " Rows exceed the limit."
+            End If
+
+            msg &= " Please go to Tools > Options to adjust the limits."
+
+            ' Display the message box
+            MsgBox(msg, vbExclamation, "Undo Limit Exceeded")
+
+            Exit Sub
+        End If
+
+
+        If GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasHistory Then
+            GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
+        End If
+
     End Sub
 
     Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
