@@ -50,8 +50,6 @@ Public Class dlgExportToClimsoft
         ucrPnlOutput.AddRadioButton(rdoNewDataFrame)
         ucrPnlOutput.AddRadioButton(rdoExportData)
         ucrPnlOutput.AddRadioButton(rdoExportComments)
-
-
         ucrPnlOutput.AddParameterValuesCondition(rdoNewDataFrame, "check", "dataframe")
         ucrPnlOutput.AddParameterValuesCondition(rdoExportData, "check", "export")
         ucrPnlOutput.AddParameterValuesCondition(rdoExportComments, "check", "comments")
@@ -217,16 +215,16 @@ Public Class dlgExportToClimsoft
     Private Sub ucrDataFrameSheets_Load(sender As Object, e As EventArgs) Handles ucrDataFrameSheets.Load
         If ucrDataFrameSheets.cboAvailableDataFrames.Items.Count > 0 Then
             ' Check if the .comment dataframe exists
-            Dim commentExists As Boolean = False
+            Dim bcommentExists As Boolean = False
             For Each dataframe As String In ucrDataFrameSheets.cboAvailableDataFrames.Items
                 If dataframe = ".comment" Then
-                    commentExists = True
+                    bcommentExists = True
                     Exit For
                 End If
             Next
 
             ' Set .comment as the default selection if it exists
-            If commentExists Then
+            If bcommentExists Then
                 ucrDataFrameSheets.cboAvailableDataFrames.SelectedItem = ".comment"
             End If
         End If
