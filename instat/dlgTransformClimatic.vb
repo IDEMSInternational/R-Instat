@@ -1236,6 +1236,7 @@ Public Class dlgTransformClimatic
         RainDays()
         ReduceWaterBalance()
         RainfallChange()
+        AddCalculate()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
