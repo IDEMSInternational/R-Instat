@@ -1414,6 +1414,9 @@ DataSheet$set("public", "get_next_default_column_name", function(prefix) {
 DataSheet$set("public", "reorder_columns_in_data", function(col_order) {
   if (ncol(self$get_data_frame(use_current_filter = FALSE, use_column_selection = FALSE)) != length(col_order)) stop("Columns to order should be same as columns in the data.")
   
+  # Save the current state to history before making modifications
+  self$save_state_to_history()
+  
   if(is.numeric(col_order)) {
     if(!(identical(sort(col_order), sort(as.numeric(1:ncol(data)))))) {
       stop("Invalid column order")
