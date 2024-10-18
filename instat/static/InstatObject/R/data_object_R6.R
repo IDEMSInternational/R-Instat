@@ -203,6 +203,9 @@ DataSheet$set("public", "undo_last_action", function() {
     previous_state <- private$history[[length(private$history)]]
     self$set_data(as.data.frame(previous_state))  # Restore the previous state
     private$history <- private$history[-length(private$history)]  # Remove the latest state
+    
+    # Release memory by triggering garbage collection
+    gc()
   } else {
     message("No more actions to undo.")
   }
@@ -284,14 +287,33 @@ DataSheet$set("public", "set_scalars", function(new_scalars) {
 }
 )
 
+# Set history with memory management
 DataSheet$set("public", "set_history", function(history) {
-  if(!is.list(history)) stop("history must be of type: list")
-  MAX_HISTORY_SIZE <- 5
+  if (!is.list(history)) stop("history must be of type: list")
+  
+  # Define memory and history limits
+  MAX_HISTORY_SIZE <- 5  # Limit to last 5 history states
+  MAX_MEMORY_LIMIT_MB <- 1024  # Limit the memory usage for undo history
+  
+  # Check current memory usage
+  current_memory <- monitor_memory()
+  
+  # If memory exceeds limit, remove the oldest entry
+  if (current_memory > MAX_MEMORY_LIMIT_MB) {
+    message(paste("Memory limit exceeded:", round(current_memory, 2), "MB. Removing oldest entry."))
+    private$history <- private$history[-1]  # Remove the oldest entry
+    gc()  # Trigger garbage collection to free memory
+  }
+  
   # Limit history size
   if (length(private$history) >= MAX_HISTORY_SIZE) {
     private$history <- private$history[-1]  # Remove the oldest entry
   }
-  private$history <- append(private$history, history)
+  
+  private$history <- append(private$history, list(history))
+  
+  # Explicitly call garbage collection to release memory
+  gc()
 })
 
 DataSheet$set("public", "set_keys", function(new_keys) {
