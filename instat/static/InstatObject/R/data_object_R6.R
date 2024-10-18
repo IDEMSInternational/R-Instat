@@ -199,6 +199,7 @@ DataSheet$set("public", "has_history", function() {
 )
 
 DataSheet$set("public", "undo_last_action", function() {
+  time_operation({
   if (length(private$history) > 1) {
     previous_state <- private$history[[length(private$history)]]
     self$set_data(as.data.frame(previous_state))  # Restore the previous state
@@ -209,6 +210,7 @@ DataSheet$set("public", "undo_last_action", function() {
   } else {
     message("No more actions to undo.")
   }
+  })
 })
 
 # Redo function

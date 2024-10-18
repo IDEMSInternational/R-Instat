@@ -3425,3 +3425,8 @@ monitor_memory <- function() {
   # }
   return(mem_used)
 }
+
+time_operation <- function(expr) {
+  timing <- system.time(expr)
+  print(timing)
+}
