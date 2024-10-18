@@ -811,7 +811,7 @@ Partial Class dlgOptions
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(669, 262)
+        Me.Label3.Location = New System.Drawing.Point(684, 262)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(46, 20)
@@ -828,14 +828,14 @@ Partial Class dlgOptions
         Me.ucrNudRowUndoLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRowUndoLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRowUndoLimit.Name = "ucrNudRowUndoLimit"
-        Me.ucrNudRowUndoLimit.Size = New System.Drawing.Size(91, 30)
+        Me.ucrNudRowUndoLimit.Size = New System.Drawing.Size(106, 30)
         Me.ucrNudRowUndoLimit.TabIndex = 9
         Me.ucrNudRowUndoLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(629, 230)
+        Me.Label2.Location = New System.Drawing.Point(644, 230)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(86, 20)
@@ -862,7 +862,7 @@ Partial Class dlgOptions
         Me.ucrNudColUndoLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudColUndoLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColUndoLimit.Name = "ucrNudColUndoLimit"
-        Me.ucrNudColUndoLimit.Size = New System.Drawing.Size(91, 30)
+        Me.ucrNudColUndoLimit.Size = New System.Drawing.Size(106, 30)
         Me.ucrNudColUndoLimit.TabIndex = 6
         Me.ucrNudColUndoLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
