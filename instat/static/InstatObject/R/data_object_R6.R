@@ -33,8 +33,6 @@ DataSheet <- R6::R6Class("DataSheet",
   self$set_comments(comments)
   self$set_history(history)
   
-  self$save_state_to_history()
-  
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
   if ( !(is.null(data_name) || data_name == "" || missing(data_name))) {
@@ -294,7 +292,7 @@ DataSheet$set("public", "set_history", function(history) {
   if (!is.list(history)) stop("history must be of type: list")
   
   # Define memory and history limits
-  MAX_HISTORY_SIZE <- 5  # Limit to last 5 history states
+  MAX_HISTORY_SIZE <- 10  # Limit to last 10 history states
   MAX_MEMORY_LIMIT_MB <- 1024  # Limit the memory usage for undo history
   
   # Check current memory usage

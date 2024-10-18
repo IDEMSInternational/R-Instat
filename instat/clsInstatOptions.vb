@@ -45,6 +45,7 @@ Imports RDotNet
     Public bShowSignifStars As Nullable(Of Boolean)
     Public bChangeDataFrame As Nullable(Of Boolean)
     Public bAutoSaveData As Nullable(Of Boolean)
+    Public bSwitchOffUndo As Nullable(Of Boolean)
     Public bUndoSwitchAction As Nullable(Of Boolean)
     Public iAutoSaveDataMinutes As Nullable(Of Integer)
     Public bShowWaitDialog As Nullable(Of Boolean)
@@ -89,6 +90,7 @@ Imports RDotNet
         bShowSignifStars = clsInstatOptionsDefaults.DEFAULTbShowSignifStars
         bChangeDataFrame = clsInstatOptionsDefaults.DEFAULTbChangeDataFrame
         bAutoSaveData = clsInstatOptionsDefaults.DEFAULTbAutoSaveData
+        bSwitchOffUndo = clsInstatOptionsDefaults.DEFAULTbSwitchOffUndo
         iAutoSaveDataMinutes = clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes
         bShowWaitDialog = clsInstatOptionsDefaults.DEFAULTbShowWaitDialog
         iWaitTimeDelaySeconds = clsInstatOptionsDefaults.DEFAULTiWaitTimeDelaySeconds
@@ -259,6 +261,12 @@ Imports RDotNet
             SetAutoSaveData(bAutoSaveData)
         Else
             SetAutoSaveData(clsInstatOptionsDefaults.DEFAULTbAutoSaveData)
+        End If
+
+        If bSwitchOffUndo.HasValue Then
+            SetOffUndo(bSwitchOffUndo)
+        Else
+            SetOffUndo(clsInstatOptionsDefaults.DEFAULTbSwitchOffUndo)
         End If
 
         If iAutoSaveDataMinutes.HasValue Then
@@ -553,6 +561,10 @@ Imports RDotNet
 
     Public Sub SetAutoSaveData(bNewAutoSave As Boolean)
         bAutoSaveData = bNewAutoSave
+    End Sub
+
+    Public Sub SetOffUndo(bNewSwitchOffUndo As Boolean)
+        bSwitchOffUndo = bNewSwitchOffUndo
     End Sub
 
     Public Sub SetAutoSaveDataMinutes(iNewMinutes As Integer)
