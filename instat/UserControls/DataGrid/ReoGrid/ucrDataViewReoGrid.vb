@@ -57,6 +57,11 @@ Public Class ucrDataViewReoGrid
         Next
     End Sub
 
+    Public Sub FocusGrid() Implements IDataViewGrid.Focus
+        grdData.Focus()
+        grdData.CurrentWorksheet.FocusPos = grdData.CurrentWorksheet.FocusPos
+    End Sub
+
     Public Sub AddRowData(dataFrame As clsDataFrame) Implements IDataViewGrid.AddRowData
         Dim textColour As Color
         Dim strRowNames As String()
