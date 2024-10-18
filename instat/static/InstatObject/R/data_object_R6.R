@@ -197,19 +197,39 @@ DataSheet$set("public", "has_history", function() {
 )
 
 DataSheet$set("public", "undo_last_action", function() {
-  time_operation({
+  # Track the start time
+  start_time <- Sys.time()
+  
+  # Perform the undo action
   if (length(private$history) > 1) {
     previous_state <- private$history[[length(private$history)]]
     self$set_data(as.data.frame(previous_state))  # Restore the previous state
-    private$history <- private$history[-length(private$history)]  # Remove the latest state
     
-    # Release memory by triggering garbage collection
-    gc()
+    private$history <- private$history[-length(private$history)]  # Remove the latest state
   } else {
     message("No more actions to undo.")
   }
-  })
+  
+  # Trigger garbage collection to free memory
+  gc()
+  
+  # Track the end time
+  end_time <- Sys.time()
+  
+  # Calculate elapsed time
+  elapsed_time <- as.numeric(difftime(end_time, start_time, units = "secs"))
+  
+  # Define a threshold for acceptable timing (in seconds)
+  acceptable_time_threshold <- 1.0  # Set this to your desired threshold
+  
+  # Check if the operation took longer than the acceptable threshold
+  if (elapsed_time > acceptable_time_threshold) {
+    warning(sprintf("undo operation took too long: %f seconds.", elapsed_time))
+  } else {
+    message(sprintf("undo operation completed successfully in %f seconds.", elapsed_time))
+  }
 })
+
 
 # Redo function
 DataSheet$set("public", "redo_last_action", function() {
