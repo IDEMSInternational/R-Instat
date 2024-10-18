@@ -1022,7 +1022,8 @@ Public Class ucrDataView
             Exit Sub
         End If
 
-        If (GetCurrentDataFrameFocus().iTotalColumnCount >= frmMain.clsInstatOptions.iUndoColLimit) OrElse
+        If _clsDataBook.DataFrames.Count > 0 Then
+            If (GetCurrentDataFrameFocus().iTotalColumnCount >= frmMain.clsInstatOptions.iUndoColLimit) OrElse
    (GetCurrentDataFrameFocus().iTotalRowCount >= frmMain.clsInstatOptions.iUndoRowLimit) Then
 
                 ' Retrieve the default limits for rows and columns
@@ -1051,8 +1052,9 @@ Public Class ucrDataView
             End If
 
 
-        If GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasHistory Then
-            GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
+            If GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasHistory Then
+                GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
+            End If
         End If
     End Sub
 
