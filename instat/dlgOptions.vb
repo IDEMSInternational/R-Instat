@@ -85,7 +85,7 @@ Public Class dlgOptions
         ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
         ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
         ucrChkAutoSave.SetText("Auto save a backup of data")
-        ucrChkTurnOffUndo.SetText("Switch off Spreadsheet-Style Undo")
+        ucrChkTurnOffUndo.SetText("Switch on Spreadsheet-Style Undo")
         ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
         ucrChkReminder.SetText("Remind me later when R-Instat new version available")
         ucrChkAutoSave.AddToLinkedControls(ucrNudAutoSaveMinutes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)

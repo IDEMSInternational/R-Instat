@@ -1016,8 +1016,13 @@ Public Class ucrDataView
     End Sub
 
     Public Sub Undo()
-        If frmMain.clsInstatOptions.bSwitchOffUndo Then
-            If (GetCurrentDataFrameFocus().iTotalColumnCount >= frmMain.clsInstatOptions.iUndoColLimit) OrElse
+        If Not frmMain.clsInstatOptions.bSwitchOffUndo Then
+            ' Show a message box indicating that undo is turned off
+            MsgBox("Undo is turned off, go to Tools > Options to turn it on.", vbInformation, "Undo Disabled")
+            Exit Sub
+        End If
+
+        If (GetCurrentDataFrameFocus().iTotalColumnCount >= frmMain.clsInstatOptions.iUndoColLimit) OrElse
    (GetCurrentDataFrameFocus().iTotalRowCount >= frmMain.clsInstatOptions.iUndoRowLimit) Then
 
                 ' Retrieve the default limits for rows and columns
@@ -1046,9 +1051,8 @@ Public Class ucrDataView
             End If
 
 
-            If GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasHistory Then
-                GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
-            End If
+        If GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasHistory Then
+            GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
         End If
     End Sub
 
