@@ -201,7 +201,6 @@ Public Class dlgDescribeTwoVariable
 
         ucrSaveTable.SetDataFrameSelector(ucrSelectorDescribeTwoVar.ucrAvailableDataFrames)
         ucrSaveTable.SetIsTextBox()
-        rdoThreeVariable.Enabled = False
         ucrReorderSummary.bDataIsSummaries = True
         AddRemoveTotalParm()
     End Sub
@@ -652,7 +651,7 @@ Public Class dlgDescribeTwoVariable
                 ucrReorderSummary.Visible = False
                 cmdSummaries.Visible = False
             End If
-            ucrChkSwapXYVar.Visible = IsNumericByNumericByNumeric() OrElse IsNumericByNumericByFactor()
+            'ucrChkSwapXYVar.Visible = IsNumericByNumericByNumeric() OrElse IsNumericByNumericByFactor()
             ucrChkSummariesRowCol.Visible = IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor()
             ucrChkOmitMissing.Visible = IsFactorByNumericByNumeric() OrElse IsNumericByNumericByFactor()
         End If
@@ -708,6 +707,10 @@ Public Class dlgDescribeTwoVariable
                 ucrChkMeans.Visible = True
                 ucrChkLevSig.Visible = True
                 ucrChkTotal.Visible = True
+                ucrChkTotal.Location = New Point(310, 189)
+                ucrChkLevSig.Location = New Point(397, 186)
+                ucrChkMeans.Location = New Point(310, 208)
+
             ElseIf IsNumericByFactor() Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
                 ucrChkMeans.Visible = True
@@ -715,6 +718,8 @@ Public Class dlgDescribeTwoVariable
                 ucrChkTotal.Visible = True
                 ucrSaveTable.Visible = True
                 ucrSaveTable.Location = New Point(23, 450)
+                ucrChkTotal.Location = New Point(310, 189)
+                ucrChkMeans.Location = New Point(310, 208)
                 clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
                 ucrSaveTable.SetPrefix("summary_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
@@ -752,6 +757,10 @@ Public Class dlgDescribeTwoVariable
                     ucrChkMeans.Visible = True
                     ucrChkLevSig.Visible = True
                     ucrChkTotal.Visible = True
+                    ucrChkTotal.Location = New Point(310, 189)
+                    ucrChkLevSig.Location = New Point(397, 186)
+                    ucrChkMeans.Location = New Point(310, 208)
+
                 Else
                     clsDummyFunction.AddParameter("var", "False", iPosition:=5)
                     ucrSaveTable.Visible = True
@@ -814,6 +823,10 @@ Public Class dlgDescribeTwoVariable
                 ucrChkMeans.Visible = True
                 ucrChkLevSig.Visible = True
                 ucrChkTotal.Visible = True
+                ucrChkTotal.Location = New Point(310, 230)
+                ucrChkLevSig.Location = New Point(397, 230)
+                ucrChkMeans.Location = New Point(310, 245)
+
                 If ucrChkSwapXYVar.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMapping2Function)
                     clsDummyFunction.AddParameter("var", "True", iPosition:=5)
@@ -824,14 +837,32 @@ Public Class dlgDescribeTwoVariable
             ElseIf IsNumericByNumericByNumeric() Then
                 cmdFormatTable.Visible = False
                 ucrSaveTable.Visible = False
+                ucrChkMeans.Visible = True
+                ucrChkLevSig.Visible = True
+                ucrChkTotal.Visible = True
+                ucrChkTotal.Location = New Point(310, 230)
+                ucrChkLevSig.Location = New Point(397, 230)
+                ucrChkMeans.Location = New Point(310, 300)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             ElseIf IsNumericByFactorByFactor() Then
                 cmdFormatTable.Visible = False
                 ucrSaveTable.Visible = False
+                ucrChkMeans.Visible = True
+                ucrChkLevSig.Visible = True
+                ucrChkTotal.Visible = True
+                ucrChkTotal.Location = New Point(310, 229)
+                ucrChkLevSig.Location = New Point(397, 229)
+                ucrChkMeans.Location = New Point(310, 234)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             ElseIf IsNumericByFactorByNumeric() Then
                 cmdFormatTable.Visible = False
                 ucrSaveTable.Visible = False
+                ucrChkMeans.Visible = True
+                ucrChkLevSig.Visible = True
+                ucrChkTotal.Visible = True
+                ucrChkTotal.Location = New Point(310, 230)
+                ucrChkLevSig.Location = New Point(397, 230)
+                ucrChkMeans.Location = New Point(310, 234)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             ElseIf IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric() Then
                 ucrSaveTable.SetPrefix("summary_table")
@@ -962,7 +993,7 @@ Public Class dlgDescribeTwoVariable
 
             If IsNumericByNumericByFactor() OrElse IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 353)
-                ucrChkSwapXYVar.Location = New Point(300, 320)
+                'ucrChkSwapXYVar.Location = New Point(300, 320)
                 Me.Size = New Point(iDialogueXsize, 450)
             ElseIf IsFactorByFactorByFactor() Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 370)
