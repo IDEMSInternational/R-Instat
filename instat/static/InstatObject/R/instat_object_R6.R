@@ -11,6 +11,7 @@ DataBook <- R6::R6Class("DataBook",
                             self$set_meta(instat_obj_metadata)
                             self$set_objects(list())
                             self$set_scalars(list())
+                            self$set_history(list())
                             
                             if (missing(data_tables) || length(data_tables) == 0) {
                               self$set_data_objects(list())
@@ -31,6 +32,7 @@ DataBook <- R6::R6Class("DataBook",
                           .metadata = list(),
                           .objects = list(),
                           .scalars = list(),
+                          .history = list(),
                           .links = list(),
                           .data_sheets_changed = FALSE,
                           .database_connection = NULL,
@@ -313,6 +315,12 @@ DataBook$set("public", "set_meta", function(new_meta) {
 DataBook$set("public", "set_objects", function(new_objects) {
   if(!is.list(new_objects)) stop("new_objects must be of type: list")
   private$.objects <- new_objects 
+}
+)
+
+DataBook$set("public", "set_history", function(new_history) {
+  if (!is.list(new_history)) stop("history must be of type: list")
+  private$.history <- new_history 
 }
 )
 
