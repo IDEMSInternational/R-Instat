@@ -1016,7 +1016,7 @@ Public Class ucrDataView
     End Sub
 
     Public Sub Undo()
-        If Not frmMain.clsInstatOptions.bSwitchOffUndo Then
+        If frmMain.clsInstatOptions.bSwitchOffUndo Then
             ' Show a message box indicating that undo is turned off
             MsgBox("Undo is turned off, go to Tools > Options to turn it on.", vbInformation, "Undo Disabled")
             Exit Sub
