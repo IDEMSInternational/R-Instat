@@ -39,7 +39,7 @@ Partial Class dlgGeneralForGraphics
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.grpAethetics = New System.Windows.Forms.GroupBox()
+        Me.grpAesthetics = New System.Windows.Forms.GroupBox()
         Me.ucrChkUseasNumeric = New instat.ucrCheck()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.lblYVariable = New System.Windows.Forms.Label()
@@ -101,30 +101,30 @@ Partial Class dlgGeneralForGraphics
         Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpAethetics.SuspendLayout()
+        Me.grpAesthetics.SuspendLayout()
         Me.ContextMenuPackagesList.SuspendLayout()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
-        'grpAethetics
+        'grpAesthetics
         '
-        Me.grpAethetics.Controls.Add(Me.ucrChkUseasNumeric)
-        Me.grpAethetics.Controls.Add(Me.ucrReceiverY)
-        Me.grpAethetics.Controls.Add(Me.lblYVariable)
-        Me.grpAethetics.Controls.Add(Me.lblXVariable)
-        Me.grpAethetics.Controls.Add(Me.ucrReceiverX)
-        Me.grpAethetics.Controls.Add(Me.lblLabel)
-        Me.grpAethetics.Controls.Add(Me.ucrLabelReceiver)
-        Me.grpAethetics.Controls.Add(Me.lblColour)
-        Me.grpAethetics.Controls.Add(Me.ucrColourReceiver)
-        Me.grpAethetics.Controls.Add(Me.lblFill)
-        Me.grpAethetics.Controls.Add(Me.ucrFillReceiver)
-        Me.grpAethetics.Location = New System.Drawing.Point(277, 31)
-        Me.grpAethetics.Name = "grpAethetics"
-        Me.grpAethetics.Size = New System.Drawing.Size(174, 257)
-        Me.grpAethetics.TabIndex = 23
-        Me.grpAethetics.TabStop = False
-        Me.grpAethetics.Text = "Aethetics:"
+        Me.grpAesthetics.Controls.Add(Me.ucrChkUseasNumeric)
+        Me.grpAesthetics.Controls.Add(Me.ucrReceiverY)
+        Me.grpAesthetics.Controls.Add(Me.lblYVariable)
+        Me.grpAesthetics.Controls.Add(Me.lblXVariable)
+        Me.grpAesthetics.Controls.Add(Me.ucrReceiverX)
+        Me.grpAesthetics.Controls.Add(Me.lblLabel)
+        Me.grpAesthetics.Controls.Add(Me.ucrLabelReceiver)
+        Me.grpAesthetics.Controls.Add(Me.lblColour)
+        Me.grpAesthetics.Controls.Add(Me.ucrColourReceiver)
+        Me.grpAesthetics.Controls.Add(Me.lblFill)
+        Me.grpAesthetics.Controls.Add(Me.ucrFillReceiver)
+        Me.grpAesthetics.Location = New System.Drawing.Point(277, 31)
+        Me.grpAesthetics.Name = "grpAesthetics"
+        Me.grpAesthetics.Size = New System.Drawing.Size(174, 257)
+        Me.grpAesthetics.TabIndex = 23
+        Me.grpAesthetics.TabStop = False
+        Me.grpAesthetics.Text = "Aesthetics:"
         '
         'ucrChkUseasNumeric
         '
@@ -631,7 +631,7 @@ Partial Class dlgGeneralForGraphics
         Me.Controls.Add(Me.lblFacetBy)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdRHelp)
-        Me.Controls.Add(Me.grpAethetics)
+        Me.Controls.Add(Me.grpAesthetics)
         Me.Controls.Add(Me.ucrInputLegendPosition)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.ucrChkLegend)
@@ -645,9 +645,9 @@ Partial Class dlgGeneralForGraphics
         Me.Name = "dlgGeneralForGraphics"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "General "
-        Me.Text = "General Graphics"
-        Me.grpAethetics.ResumeLayout(False)
-        Me.grpAethetics.PerformLayout()
+        Me.Text = "General"
+        Me.grpAesthetics.ResumeLayout(False)
+        Me.grpAesthetics.PerformLayout()
         Me.ContextMenuPackagesList.ResumeLayout(False)
         Me.contextMenuStripOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -661,7 +661,7 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents ucrChkLegend As ucrCheck
     Friend WithEvents ucrChkFlipCoordinates As ucrCheck
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
-    Friend WithEvents grpAethetics As GroupBox
+    Friend WithEvents grpAesthetics As GroupBox
     Friend WithEvents lblColour As Label
     Friend WithEvents ucrColourReceiver As ucrReceiverSingle
     Friend WithEvents lblFill As Label
