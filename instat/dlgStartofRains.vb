@@ -18,7 +18,7 @@ Imports instat.Translations
 
 Public Class dlgStartofRains
     Private bResetSubdialog As Boolean = True
-    Private clsCalcRainDay, clsCalcStartDOY, clsTailFunction, clsGetDataFrameFunction, clsListevapFunction, clsRollEvaporationFunction, clsFractionEvapFunction, clsSumEvapFunction, clsConvertColumnType1Function, clsConvertColumnType2Function, clsConvertColumnTypeFunction, clsGetColumnDataTypeFunction, clsDummyFunction, clsIfelseStatusFunction, clsIfelseStatus1Function, clsFirstStatusFunction, clsIsNAStatusFunction, clsCalcStartDate, clsCombinationCalc, clsListCalFunction, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
+    Private clsCalcRainDay, clsCalcStartDOY, clsPaste0Function, clsGetDataFrameFunction, clsListevapFunction, clsRollEvaporationFunction, clsFractionEvapFunction, clsSumEvapFunction, clsConvertColumnType1Function, clsConvertColumnType2Function, clsConvertColumnTypeFunction, clsGetColumnDataTypeFunction, clsDummyFunction, clsIfelseStatusFunction, clsIfelseStatus1Function, clsFirstStatusFunction, clsIsNAStatusFunction, clsCalcStartDate, clsCombinationCalc, clsListCalFunction, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
     Private clsDayFromAndTo, clsGroupByStation, clsGroupByYear, clsListToTalRain, clsApplyInstatFunction, clsFirstDOY, clsFirstDate As New RFunction
     Private clsDayFromAndToOperator, clsEvapOperator, clsDayFromOperator, clsDayToOperator, clsRainDayOperator, clsRainDayConditionOperator, clsConditionsAndOperator, clsTRCombineOperator, clsRollingSumRainDayOperator, clsDSCombineOperator, clsDPCombineOperator As New ROperator
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
@@ -60,7 +60,7 @@ Public Class dlgStartofRains
     Private clsIsNaDryPeriod As New RFunction
 
     'Rainy Day classes
-    Private clsCalcRainDayRollingSum, clsRainDayRollingSumFunction, clsRDRollingRainDaysSub As New RFunction
+    Public clsCalcRainDayRollingSum, clsRainDayRollingSumFunction, clsRDRollingRainDaysSub As New RFunction
     'Dry Spell classes
     Private clsCalcDrySpellRollMax, clsCalcDrySpell, clsDrySpellPeriodLeadFunction, clsDrySpellPeriodRollMaxFunction, clsDrySpellPeriodSubCalcList, clsDrySpellSubCalcList As New RFunction
 
@@ -297,7 +297,7 @@ Public Class dlgStartofRains
 
         clsCalcRainRollingSum.Clear()
         clsRainRollingSumFunction = New RFunction
-        clsTailFunction = New RFunction
+        clsPaste0Function = New RFunction
         clsGetDataFrameFunction = New RFunction
         clsTRWetSpellList.Clear()
         clsTRWetSpell.Clear()
@@ -559,7 +559,7 @@ Public Class dlgStartofRains
         clsRollEvaporationFunction.SetPackageName("RcppRoll")
         clsRollEvaporationFunction.SetRCommand("roll_sumr")
         clsRollEvaporationFunction.AddParameter("x", strFactionEvap, iPosition:=0)
-        clsRollEvaporationFunction.AddParameter("n", "2", iPosition:=1)
+        ' clsRollEvaporationFunction.AddParameter("n", "2", iPosition:=1)
         clsRollEvaporationFunction.AddParameter("fill", "NA", iPosition:=2)
         clsRollEvaporationFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
         clsRollEvaporationFunction.bToScriptAsRString = True
@@ -760,10 +760,13 @@ Public Class dlgStartofRains
 
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
 
-        clsTailFunction.SetRCommand("tail")
-        clsTailFunction.AddParameter("x", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsTailFunction.AddParameter("n", "1", iPosition:=1)
-        clsTailFunction.SetAssignTo("last_data_name")
+        clsPaste0Function.SetRCommand("paste0")
+        'clsPaste0Function.AddParameter("x", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsPaste0Function.AddParameter("n", Chr(34) & "_by_" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        ' clsPaste0Function.AddParameter("z", "_", iPosition:=3, bIncludeArgumentName:=False)
+        clsPaste0Function.SetAssignTo("last_data_name")
+
+        ' last_data_name <- paste0("dodoma", "_by_", "s_year", "_", "station")
 
         clsConvertColumnType2Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsConvertColumnType2Function.AddParameter("data_name", "last_data_name", iPosition:=0)
@@ -783,7 +786,7 @@ Public Class dlgStartofRains
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnDataTypeFunction, iPosition:=0)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertColumnTypeFunction, iPosition:=1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsTailFunction, iPosition:=0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsPaste0Function, iPosition:=0)
         ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType1Function, iPosition:=1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType2Function, iPosition:=2)
         SetReceiver()
@@ -802,6 +805,7 @@ Public Class dlgStartofRains
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsIsNaRain, New RParameter("x", 0), iAdditionalPairNo:=5)
         ucrInputThreshold.AddAdditionalCodeParameterPair(clsRainDayConditionOperator, New RParameter("threshold", 1), iAdditionalPairNo:=1)
         ucrInputNewDoyColumnName.AddAdditionalCodeParameterPair(clsCalcStartDOY, New RParameter("result_name", 3), iAdditionalPairNo:=1)
+        ucrNudTROverDays.AddAdditionalCodeParameterPair(clsRollEvaporationFunction, New RParameter("n", 1), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrChkAsDoy.SetRCode(clsCombinationSubCalcList, bReset)
@@ -1008,16 +1012,19 @@ Public Class dlgStartofRains
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         GroupByStationOptions()
+        StationVariable()
     End Sub
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
         GroupByYearOptions()
+        YearVariable()
     End Sub
 
     Private Sub ucrSelectorForStartofRains_DataFrameChanged() Handles ucrSelectorForStartofRains.DataFrameChanged
         clsGetColumnDataTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsConvertColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsConvertColumnType1Function.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsPaste0Function.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsDayFilterCalcFromList.ClearParameters()
     End Sub
 
@@ -1082,6 +1089,7 @@ Public Class dlgStartofRains
 
     Private Sub ucrChkAdditional_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAdditional.ControlValueChanged
         AdditionalCondition()
+        ChangeDSValue()
     End Sub
 
     Private Sub cmdAdditionnal_Click(sender As Object, e As EventArgs) Handles cmdAdditionnal.Click
@@ -1089,45 +1097,110 @@ Public Class dlgStartofRains
         sdgAdditionalCondition.ShowDialog()
         bResetSubdialog = False
         ChangeDSValue()
+        AdditionalCondition()
     End Sub
 
     Private Sub ChangeDSValue()
-        If Not sdgAdditionalCondition.ucrNudDSMaximumDays.IsEmpty Then
-            clsDSCombineOperator.AddParameter("ds_max", sdgAdditionalCondition.ucrNudDSMaximumDays.GetText(), iPosition:=1)
+        If ucrChkAdditional.Checked Then
+            If sdgAdditionalCondition.ucrChkNumberOfRainyDays.Checked Then
+                clsIsNaOperatorStartDOY.AddParameter("2", clsRFunctionParameter:=clsIsNaFirstRollSumRainDay, iPosition:=2)
+                clsConditionsOrOverallOperator.AddParameter("is.na_roll_sum_rain_day", clsRFunctionParameter:=clsIsNaRollSumRainDay, iPosition:=3)
+            Else
+                clsIsNaOperatorStartDOY.RemoveParameterByName("2")
+                clsConditionsOrOverallOperator.RemoveParameterByName("is.na_roll_sum_rain_day")
+            End If
+            If sdgAdditionalCondition.ucrChkDrySpell.Checked Then
+                clsIsNaOperatorStartDOY.AddParameter("3", clsRFunctionParameter:=clsIsNaFirstDrySpell, iPosition:=3)
+                clsConditionsOrOverallOperator.AddParameter("is.na_dry_spell", clsRFunctionParameter:=clsIsNaDrySpell, iPosition:=4)
+            Else
+                clsIsNaOperatorStartDOY.RemoveParameterByName("3")
+                clsConditionsOrOverallOperator.RemoveParameterByName("is.na_dry_spell")
+            End If
+            If sdgAdditionalCondition.ucrChkDryPeriod.Checked Then
+                clsIsNaOperatorStartDOY.AddParameter("4", clsRFunctionParameter:=clsIsNaFirstDryPeriod, iPosition:=4)
+                clsConditionsOrOverallOperator.AddParameter("is.na_dry_period", clsRFunctionParameter:=clsIsNaDryPeriod, iPosition:=5)
+            Else
+                clsIsNaOperatorStartDOY.RemoveParameterByName("4")
+                clsConditionsOrOverallOperator.RemoveParameterByName("is.na_dry_period")
+            End If
+            If Not sdgAdditionalCondition.ucrNudDSMaximumDays.IsEmpty Then
+                clsDSCombineOperator.AddParameter("ds_max", sdgAdditionalCondition.ucrNudDSMaximumDays.GetText(), iPosition:=1)
+            Else
+                clsDSCombineOperator.RemoveParameterByName("ds_max")
+            End If
+            If Not sdgAdditionalCondition.ucrNudRDMinimumDays.IsEmpty Then
+                clsRollingSumRainDayOperator.AddParameter("1", sdgAdditionalCondition.ucrNudRDMinimumDays.GetText(), iPosition:=1)
+            Else
+                clsRollingSumRainDayOperator.RemoveParameterByName("1")
+            End If
+            If Not sdgAdditionalCondition.ucrNudDPMaxRain.IsEmpty Then
+                clsSumRainDryPeriodOperator.AddParameter("right", sdgAdditionalCondition.ucrNudDPMaxRain.GetText(), iPosition:=1)
+            Else
+                clsSumRainDryPeriodOperator.RemoveParameterByName("right")
+            End If
+            If Not sdgAdditionalCondition.ucrNudDPRainPeriod.IsEmpty Then
+                clsRollingSumRainDryPeriodFunction.AddParameter("n", sdgAdditionalCondition.ucrNudDPRainPeriod.GetText(), iPosition:=1)
+                clsSumRainDryPeriodIntervalPlusOperator.AddParameter("n", sdgAdditionalCondition.ucrNudDPRainPeriod.GetText(), iPosition:=0)
+            Else
+                clsSumRainDryPeriodIntervalPlusOperator.RemoveParameterByName("n")
+                clsRollingSumRainDryPeriodFunction.RemoveParameterByName("n")
+            End If
+            If Not sdgAdditionalCondition.ucrNudDPOverallInterval.IsEmpty Then
+                clsSumRainDryPeriodIntervalMinusOperator.AddParameter("0", sdgAdditionalCondition.ucrNudDPOverallInterval.GetText(), iPosition:=0)
+            Else
+                clsSumRainDryPeriodIntervalMinusOperator.RemoveParameterByName("0")
+            End If
+            If Not sdgAdditionalCondition.ucrNudDSLengthOfTime.IsEmpty Then
+                clsDrySpellPeriodRollMaxFunction.AddParameter("n", sdgAdditionalCondition.ucrNudDSLengthOfTime.GetText(), iPosition:=0)
+            Else
+                clsDrySpellPeriodRollMaxFunction.RemoveParameterByName("n")
+            End If
+            If Not sdgAdditionalCondition.ucrNudRDOutOfDays.IsEmpty Then
+                clsRainDayRollingSumFunction.AddParameter("n", sdgAdditionalCondition.ucrNudRDOutOfDays.GetText(), iPosition:=1)
+            Else
+                clsRainDayRollingSumFunction.RemoveParameterByName("n")
+            End If
         Else
-            clsDSCombineOperator.RemoveParameterByName("ds_max")
-        End If
-        If Not sdgAdditionalCondition.ucrNudRDMinimumDays.IsEmpty Then
-            clsRollingSumRainDayOperator.AddParameter("1", sdgAdditionalCondition.ucrNudRDMinimumDays.GetText(), iPosition:=1)
-        Else
-            clsRollingSumRainDayOperator.RemoveParameterByName("1")
-        End If
-        If Not sdgAdditionalCondition.ucrNudDPMaxRain.IsEmpty Then
-            clsSumRainDryPeriodOperator.AddParameter("right", sdgAdditionalCondition.ucrNudDPMaxRain.GetText(), iPosition:=1)
-        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCalcRainDay)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCalcRainDayRollingSum)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCalcRainRollingSumDryPeriod)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCalcRollSumNumberDryPeriod)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCalcDrySpell)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCalcDrySpellRollMax)
+
+            clsIsNaOperatorStartDOY.RemoveParameterByName("4")
+            clsConditionsOrOverallOperator.RemoveParameterByName("is.na_dry_period")
+            clsIsNaOperatorStartDOY.RemoveParameterByName("3")
+            clsConditionsOrOverallOperator.RemoveParameterByName("is.na_dry_spell")
+            clsIsNaOperatorStartDOY.RemoveParameterByName("2")
+            clsConditionsOrOverallOperator.RemoveParameterByName("is.na_roll_sum_rain_day")
+
+            clsRainDayRollingSumFunction.RemoveParameterByName("n")
+            clsDrySpellPeriodRollMaxFunction.RemoveParameterByName("n")
             clsSumRainDryPeriodOperator.RemoveParameterByName("right")
-        End If
-        If Not sdgAdditionalCondition.ucrNudDPRainPeriod.IsEmpty Then
-            clsRollingSumRainDryPeriodFunction.AddParameter("n", sdgAdditionalCondition.ucrNudDPRainPeriod.GetText(), iPosition:=1)
-            clsSumRainDryPeriodIntervalPlusOperator.AddParameter("n", sdgAdditionalCondition.ucrNudDPRainPeriod.GetText(), iPosition:=0)
-        Else
+            clsRollingSumRainDayOperator.RemoveParameterByName("1")
+            clsDSCombineOperator.RemoveParameterByName("ds_max")
             clsSumRainDryPeriodIntervalPlusOperator.RemoveParameterByName("n")
             clsRollingSumRainDryPeriodFunction.RemoveParameterByName("n")
-        End If
-        If Not sdgAdditionalCondition.ucrNudDPOverallInterval.IsEmpty Then
-            clsSumRainDryPeriodIntervalMinusOperator.AddParameter("0", sdgAdditionalCondition.ucrNudDPOverallInterval.GetText(), iPosition:=0)
-        Else
             clsSumRainDryPeriodIntervalMinusOperator.RemoveParameterByName("0")
         End If
-        If Not sdgAdditionalCondition.ucrNudDSLengthOfTime.IsEmpty Then
-            clsDrySpellPeriodRollMaxFunction.AddParameter("n", sdgAdditionalCondition.ucrNudDSLengthOfTime.GetText(), iPosition:=0)
+    End Sub
+
+    Private Sub StationVariable()
+        If Not ucrReceiverStation.IsEmpty Then
+            clsPaste0Function.AddParameter("z", Chr(34) & "_" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
+            clsPaste0Function.AddParameter("x", ucrReceiverStation.GetVariableNames(), iPosition:=2, bIncludeArgumentName:=False)
         Else
-            clsDrySpellPeriodRollMaxFunction.RemoveParameterByName("n")
+            clsPaste0Function.RemoveParameterByName("x")
+            clsPaste0Function.RemoveParameterByName("z")
         End If
-        If Not sdgAdditionalCondition.ucrNudRDOutOfDays.IsEmpty Then
-            clsRainDayRollingSumFunction.AddParameter("n", sdgAdditionalCondition.ucrNudRDOutOfDays.GetText(), iPosition:=1)
+    End Sub
+
+    Private Sub YearVariable()
+        If Not ucrReceiverYear.IsEmpty Then
+            clsPaste0Function.AddParameter("y", ucrReceiverYear.GetVariableNames(), iPosition:=4, bIncludeArgumentName:=False)
         Else
-            clsRainDayRollingSumFunction.RemoveParameterByName("n")
+            clsPaste0Function.RemoveParameterByName("y")
         End If
     End Sub
 End Class

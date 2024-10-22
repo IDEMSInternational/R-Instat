@@ -115,35 +115,35 @@ Public Class sdgAdditionalCondition
         ucrChkDrySpell.SetRCode(clsCombinedList, bReset, bCloneIfNeeded:=True)
     End Sub
 
-    Private Sub ucrChkNumberOfRainyDays_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNumberOfRainyDays.ControlValueChanged
-        If ucrChkNumberOfRainyDays.Checked Then
-            clsIsNaOperatorStartDOY.AddParameter("2", clsRFunctionParameter:=clsIsNaFirstRollSumRainDay, iPosition:=2)
-            clsConditionsOrOverallOperator.AddParameter("is.na_roll_sum_rain_day", clsRFunctionParameter:=clsIsNaRollSumRainDay, iPosition:=3)
-        Else
-            clsIsNaOperatorStartDOY.RemoveParameterByName("2")
-            clsConditionsOrOverallOperator.RemoveParameterByName("is.na_roll_sum_rain_day")
-        End If
-    End Sub
+    'Private Sub ucrChkNumberOfRainyDays_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNumberOfRainyDays.ControlValueChanged
+    '    If ucrChkNumberOfRainyDays.Checked Then
+    '        clsIsNaOperatorStartDOY.AddParameter("2", clsRFunctionParameter:=clsIsNaFirstRollSumRainDay, iPosition:=2)
+    '        clsConditionsOrOverallOperator.AddParameter("is.na_roll_sum_rain_day", clsRFunctionParameter:=clsIsNaRollSumRainDay, iPosition:=3)
+    '    Else
+    '        clsIsNaOperatorStartDOY.RemoveParameterByName("2")
+    '        clsConditionsOrOverallOperator.RemoveParameterByName("is.na_roll_sum_rain_day")
+    '    End If
+    'End Sub
 
-    Private Sub ucrChkDrySpell_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDrySpell.ControlValueChanged
-        If ucrChkDrySpell.Checked Then
-            clsIsNaOperatorStartDOY.AddParameter("3", clsRFunctionParameter:=clsIsNaFirstDrySpell, iPosition:=3)
-            clsConditionsOrOverallOperator.AddParameter("is.na_dry_spell", clsRFunctionParameter:=clsIsNaDrySpell, iPosition:=4)
-        Else
-            clsIsNaOperatorStartDOY.RemoveParameterByName("3")
-            clsConditionsOrOverallOperator.RemoveParameterByName("is.na_dry_spell")
-        End If
-    End Sub
+    'Private Sub ucrChkDrySpell_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDrySpell.ControlValueChanged
+    '    If ucrChkDrySpell.Checked Then
+    '        clsIsNaOperatorStartDOY.AddParameter("3", clsRFunctionParameter:=clsIsNaFirstDrySpell, iPosition:=3)
+    '        clsConditionsOrOverallOperator.AddParameter("is.na_dry_spell", clsRFunctionParameter:=clsIsNaDrySpell, iPosition:=4)
+    '    Else
+    '        clsIsNaOperatorStartDOY.RemoveParameterByName("3")
+    '        clsConditionsOrOverallOperator.RemoveParameterByName("is.na_dry_spell")
+    '    End If
+    'End Sub
 
-    Private Sub ucrChkDryPeriod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDryPeriod.ControlValueChanged
-        If ucrChkDryPeriod.Checked Then
-            clsIsNaOperatorStartDOY.AddParameter("4", clsRFunctionParameter:=clsIsNaFirstDryPeriod, iPosition:=4)
-            clsConditionsOrOverallOperator.AddParameter("is.na_dry_period", clsRFunctionParameter:=clsIsNaDryPeriod, iPosition:=5)
-        Else
-            clsIsNaOperatorStartDOY.RemoveParameterByName("4")
-            clsConditionsOrOverallOperator.RemoveParameterByName("is.na_dry_period")
-        End If
-    End Sub
+    'Private Sub ucrChkDryPeriod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDryPeriod.ControlValueChanged
+    '    If ucrChkDryPeriod.Checked Then
+    '        clsIsNaOperatorStartDOY.AddParameter("4", clsRFunctionParameter:=clsIsNaFirstDryPeriod, iPosition:=4)
+    '        clsConditionsOrOverallOperator.AddParameter("is.na_dry_period", clsRFunctionParameter:=clsIsNaDryPeriod, iPosition:=5)
+    '    Else
+    '        clsIsNaOperatorStartDOY.RemoveParameterByName("4")
+    '        clsConditionsOrOverallOperator.RemoveParameterByName("is.na_dry_period")
+    '    End If
+    'End Sub
 
     Private Sub MaximumValuesControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkDryPeriod.ControlContentsChanged, ucrNudDPRainPeriod.ControlContentsChanged, ucrNudDPOverallInterval.ControlContentsChanged
         If ucrChkDryPeriod.Checked Then
