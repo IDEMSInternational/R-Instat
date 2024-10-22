@@ -4548,7 +4548,7 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total
   cat("\n")
   # Optionally print means
   if (means) {
-    if (class(mod$model[[x_col_names]]) %in% c("numeric", "integer")){
+    if (class(mod$model[[x_col_names[[1]]]]) %in% c("numeric", "integer")){
       cat("Model coefficients:\n")
       print(mod$coefficients)
       cat("\n")
