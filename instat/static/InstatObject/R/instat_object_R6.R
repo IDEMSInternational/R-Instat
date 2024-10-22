@@ -11,7 +11,7 @@ DataBook <- R6::R6Class("DataBook",
                             self$set_meta(instat_obj_metadata)
                             self$set_objects(list())
                             self$set_scalars(list())
-                            self$set_history(list())
+                            self$set_undo_history(list())
                             
                             if (missing(data_tables) || length(data_tables) == 0) {
                               self$set_data_objects(list())
@@ -32,7 +32,7 @@ DataBook <- R6::R6Class("DataBook",
                           .metadata = list(),
                           .objects = list(),
                           .scalars = list(),
-                          .history = list(),
+                          .undo_history = list(),
                           .links = list(),
                           .data_sheets_changed = FALSE,
                           .database_connection = NULL,
@@ -318,11 +318,17 @@ DataBook$set("public", "set_objects", function(new_objects) {
 }
 )
 
-DataBook$set("public", "set_history", function(new_history) {
-  if (!is.list(new_history)) stop("history must be of type: list")
-  private$.history <- new_history 
+DataBook$set("public", "set_undo_history", function(new_undo_history) {
+  if (!is.list(new_undo_history)) stop("undo_history must be of type: list")
+  
+  private$.undo_history <- new_undo_history 
 }
 )
+
+DataSheet$set("public", "disable_undo", function() {
+  private$.undo_history <- list()  # Clear history
+  self$undo_enabled <- FALSE  # Disable undo functionality
+})
 
 DataBook$set("public", "set_scalars", function(new_scalars) {
   if(!is.list(new_scalars)) stop("new_scalars must be of type: list")
@@ -1360,8 +1366,8 @@ DataBook$set("public","has_key", function(data_name) {
 }
 )
 
-DataBook$set("public","has_history", function(data_name) {
-  self$get_data_objects(data_name)$has_history()
+DataBook$set("public","has_undo_history", function(data_name) {
+  self$get_data_objects(data_name)$has_undo_history()
 }
 )
 

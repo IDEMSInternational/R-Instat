@@ -5,7 +5,7 @@ DataSheet <- R6::R6Class("DataSheet",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), column_selections = list(), objects = list(),
-                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE, history = list(), redo_history = list())
+                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE, undo_history = list(), redo_undo_history = list())
 {
   # Set up the data object
   self$set_data(data, messages)
@@ -31,7 +31,7 @@ DataSheet <- R6::R6Class("DataSheet",
   self$set_scalars(scalars)
   self$set_keys(keys)
   self$set_comments(comments)
-  self$set_history(history)
+  self$set_undo_history(undo_history)
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
@@ -60,8 +60,8 @@ DataSheet <- R6::R6Class("DataSheet",
                            column_selections = list(),
                            objects = list(),
                            keys = list(),
-                           history = list(),
-                           redo_history = list(),
+                           undo_history = list(),
+                           redo_undo_history = list(),
                            comments = list(),
                            calculations = list(),
                            scalars = list(),
@@ -164,8 +164,8 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
 }
 )
 
-DataSheet$set("public", "save_state_to_history", function() {
-  self$set_history(list(private$data))
+DataSheet$set("public", "save_state_to_undo_history", function() {
+  self$set_undo_history(list(private$data))
 })
 
 DataSheet$set("public", "set_meta", function(new_meta) {
@@ -191,19 +191,19 @@ DataSheet$set("public", "clear_metadata", function() {
 }
 )
 
-DataSheet$set("public", "has_history", function() {
-  return(length(private$history) > 1)
+DataSheet$set("public", "has_undo_history", function() {
+  return(length(private$undo_history) > 1)
 }
 )
 
 DataSheet$set("public", "undo_last_action", function() {
   
   # Perform the undo action
-  if (length(private$history) > 1) {
-    previous_state <- private$history[[length(private$history)]]
+  if (length(private$undo_history) > 1) {
+    previous_state <- private$undo_history[[length(private$undo_history)]]
     self$set_data(as.data.frame(previous_state))  # Restore the previous state
     
-    private$history <- private$history[-length(private$history)]  # Remove the latest state
+    private$undo_history <- private$undo_history[-length(private$undo_history)]  # Remove the latest state
   } else {
     message("No more actions to undo.")
   }
@@ -216,18 +216,18 @@ DataSheet$set("public", "undo_last_action", function() {
 
 # Redo function
 DataSheet$set("public", "redo_last_action", function() {
-  if (length(private$redo_history) > 0) {
-    # Get the last undone state from redo history
-    next_state <- private$redo_history[[length(private$redo_history)]]
+  if (length(private$redo_undo_history) > 0) {
+    # Get the last undone state from redo undo_history
+    next_state <- private$redo_undo_history[[length(private$redo_undo_history)]]
     
     # Restore the next state
     self$set_data(as.data.frame(next_state))
     
-    # Move the state back to the history
-    private$history <- append(private$history, list(next_state))
+    # Move the state back to the undo_history
+    private$undo_history <- append(private$undo_history, list(next_state))
     
-    # Remove the state from redo history
-    private$redo_history <- private$redo_history[-length(private$redo_history)]
+    # Remove the state from redo undo_history
+    private$redo_undo_history <- private$redo_undo_history[-length(private$redo_undo_history)]
   } else {
     message("No more actions to redo.")
   }
@@ -290,13 +290,13 @@ DataSheet$set("public", "set_scalars", function(new_scalars) {
 }
 )
 
-# Set history with memory management
-DataSheet$set("public", "set_history", function(history) {
-  if (!is.list(history)) stop("history must be of type: list")
+# Set undo_history with memory management
+DataSheet$set("public", "set_undo_history", function(new_undo_history) {
+  if (!is.list(new_undo_history)) stop("undo_history must be of type: list")
   
-  # Define memory and history limits
-  MAX_HISTORY_SIZE <- 10  # Limit to last 10 history states
-  MAX_MEMORY_LIMIT_MB <- 1024  # Limit the memory usage for undo history
+  # Define memory and undo_history limits
+  MAX_undo_history_SIZE <- 10  # Limit to last 10 undo_history states
+  MAX_MEMORY_LIMIT_MB <- 1024  # Limit the memory usage for undo undo_history
   
   # Check current memory usage
   current_memory <- monitor_memory()
@@ -304,16 +304,16 @@ DataSheet$set("public", "set_history", function(history) {
   # If memory exceeds limit, remove the oldest entry
   if (current_memory > MAX_MEMORY_LIMIT_MB) {
     message(paste("Memory limit exceeded:", round(current_memory, 2), "MB. Removing oldest entry."))
-    private$history <- private$history[-1]  # Remove the oldest entry
+    private$undo_history <- private$undo_history[-1]  # Remove the oldest entry
     gc()  # Trigger garbage collection to free memory
   }
   
-  # Limit history size
-  if (length(private$history) >= MAX_HISTORY_SIZE) {
-    private$history <- private$history[-1]  # Remove the oldest entry
+  # Limit undo_history size
+  if (length(private$undo_history) >= MAX_undo_history_SIZE) {
+    private$undo_history <- private$undo_history[-1]  # Remove the oldest entry
   }
   
-  private$history <- append(private$history, list(history))
+  private$undo_history <- append(private$undo_history, list(new_undo_history))
   
   # Explicitly call garbage collection to release memory
   gc()
@@ -743,8 +743,8 @@ DataSheet$set("public", "add_scalar", function(scalar_name = "", scalar_value) {
 )
 
 DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column = "", num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
-  # Save the current state to history before making modifications
-  self$save_state_to_history()
+  # Save the current state to undo_history before making modifications
+  self$save_state_to_undo_history()
   
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
@@ -896,8 +896,8 @@ DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everythi
 DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE, use_column_selection = FALSE)
   
-  # Save the current state to history before making modifications
-  self$save_state_to_history()
+  # Save the current state to undo_history before making modifications
+  self$save_state_to_undo_history()
   
   # Column name must be character
   if (type == "single") {
@@ -989,8 +989,8 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
 
 
 DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delete_all = FALSE) {
-  # Save the current state to history before making modifications
-  self$save_state_to_history()
+  # Save the current state to undo_history before making modifications
+  self$save_state_to_undo_history()
   
   if(length(cols) == self$get_column_count()) {
     if(allow_delete_all) {
@@ -1026,7 +1026,7 @@ DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delet
 
 DataSheet$set("public", "replace_value_in_data", function(col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE, locf = FALSE, from_last = FALSE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  self$save_state_to_history()
+  self$save_state_to_undo_history()
   # Column name must be character
   if(!all(is.character(col_names))) stop("Column name must be of type: character")
   if (!all(col_names %in% names(curr_data))) stop("Cannot find all columns in the data.")
@@ -1371,7 +1371,7 @@ DataSheet$set("public", "add_defaults_variables_metadata", function(column_names
 
 DataSheet$set("public", "remove_rows_in_data", function(row_names) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  self$save_state_to_history()
+  self$save_state_to_undo_history()
   
   if(!all(row_names %in% rownames(curr_data))) stop("Some of the row_names not found in data")
   rows_to_remove <- which(rownames(curr_data) %in% row_names)
@@ -1397,8 +1397,8 @@ DataSheet$set("public", "get_next_default_column_name", function(prefix) {
 DataSheet$set("public", "reorder_columns_in_data", function(col_order) {
   if (ncol(self$get_data_frame(use_current_filter = FALSE, use_column_selection = FALSE)) != length(col_order)) stop("Columns to order should be same as columns in the data.")
   
-  # Save the current state to history before making modifications
-  self$save_state_to_history()
+  # Save the current state to undo_history before making modifications
+  self$save_state_to_undo_history()
   
   if(is.numeric(col_order)) {
     if(!(identical(sort(col_order), sort(as.numeric(1:ncol(data)))))) {
@@ -1422,7 +1422,7 @@ DataSheet$set("public", "reorder_columns_in_data", function(col_order) {
 
 DataSheet$set("public", "insert_row_in_data", function(start_row, row_data = c(), number_rows = 1, before = FALSE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  self$save_state_to_history()
+  self$save_state_to_undo_history()
   curr_row_names <- rownames(curr_data)
   if (!start_row %in% curr_row_names) {
     stop(paste(start_row, " not found in rows"))
@@ -4605,7 +4605,7 @@ DataSheet$set("public", "remove_empty", function(which = c("rows", "cols")) {
 
 DataSheet$set("public", "replace_values_with_NA", function(row_index, column_index) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  self$save_state_to_history()
+  self$save_state_to_undo_history()
   
   if(!all(row_index %in% seq_len(nrow(curr_data)))) stop("All row indexes must be within the dataframe")
   if(!all(column_index %in% seq_len(ncol(curr_data)))) stop("All column indexes must be within the dataframe")

@@ -213,12 +213,12 @@ Public Class clsDataFramePage
 
     End Sub
 
-    Public Function HasHistory()
+    Public Function HasUndoHistory()
         Dim expTemp As SymbolicExpression
         Dim bHasHistory As Boolean = False
         Dim clsHasHistoryFunction As New RFunction
 
-        clsHasHistoryFunction.SetRCommand(_clsRLink.strInstatDataObject & "$has_history")
+        clsHasHistoryFunction.SetRCommand(_clsRLink.strInstatDataObject & "$has_undo_history")
         clsHasHistoryFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
         If clsHasHistoryFunction IsNot Nothing Then
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsHasHistoryFunction.ToScript(), bSilent:=True)

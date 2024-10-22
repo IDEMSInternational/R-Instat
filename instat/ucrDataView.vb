@@ -100,7 +100,7 @@ Public Class ucrDataView
         _grid.AddRowData(dataFrame)
         _grid.UpdateWorksheetStyle(fillWorkSheet)
         dataFrame.clsVisibleDataFramePage.HasChanged = False
-        frmMain.mnuUndo.Enabled = dataFrame.clsVisibleDataFramePage.HasHistory
+        frmMain.mnuUndo.Enabled = dataFrame.clsVisibleDataFramePage.HasUndoHistory
         RefreshDisplayInformation()
     End Sub
 
@@ -275,7 +275,7 @@ Public Class ucrDataView
             SetDisplayLabels()
             UpdateNavigationButtons()
             SetGridVisibility(True)
-            frmMain.mnuUndo.Enabled = GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasHistory
+            frmMain.mnuUndo.Enabled = GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasUndoHistory
         Else
             frmMain.tstatus.Text = GetTranslation("No data loaded")
             SetGridVisibility(False)
@@ -1052,7 +1052,7 @@ Public Class ucrDataView
             End If
 
 
-            If GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasHistory Then
+            If GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasUndoHistory Then
                 GetCurrentDataFrameFocus.clsVisibleDataFramePage.Undo()
             End If
         End If
