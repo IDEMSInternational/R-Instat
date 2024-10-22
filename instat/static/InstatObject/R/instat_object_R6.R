@@ -1361,6 +1361,15 @@ DataBook$set("public","has_key", function(data_name) {
 }
 )
 
+DataBook$set("public","set_enable_disable_undo", function(data_name, disable_undo) {
+  self$get_data_objects(data_name)$set_enable_disable_undo(disable_undo)
+}
+)
+
+DataBook$set("public", "is_undo", function(data_name) {
+  self$get_data_objects(data_name)$is_undo()
+})
+
 DataBook$set("public","has_undo_history", function(data_name) {
   self$get_data_objects(data_name)$has_undo_history()
 }

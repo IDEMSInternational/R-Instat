@@ -209,6 +209,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetMaximumOutputsHeight(If(ucrChkMaxOutputsHeight.Checked, ucrNudMaxOutputsHeight.Value, -1))
 
         frmMain.clsInstatOptions.ExecuteRGlobalOptions()
+        frmMain.DisableEnableUndo(ucrChkTurnOffUndo.Checked)
     End Sub
 
     Private Sub SetView()

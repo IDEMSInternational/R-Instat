@@ -82,6 +82,7 @@ Public Class ucrDataView
 
     Private Sub AttachEventsToGrid()
         AddHandler _grid.WorksheetChanged, AddressOf CurrentWorksheetChanged
+        AddHandler _grid.WorksheetInserted, AddressOf WorksheetInserted
         AddHandler _grid.WorksheetRemoved, AddressOf WorksheetRemoved
         AddHandler _grid.ReplaceValueInData, AddressOf ReplaceValueInData
         AddHandler _grid.PasteValuesToDataframe, AddressOf PasteValuesToDataFrame
@@ -101,6 +102,7 @@ Public Class ucrDataView
         _grid.UpdateWorksheetStyle(fillWorkSheet)
         dataFrame.clsVisibleDataFramePage.HasChanged = False
         frmMain.mnuUndo.Enabled = dataFrame.clsVisibleDataFramePage.HasUndoHistory
+
         RefreshDisplayInformation()
     End Sub
 
@@ -248,9 +250,14 @@ Public Class ucrDataView
         dlgName.ShowDialog()
     End Sub
 
+    Public Sub WorksheetInserted()
+        DisableEnableUndo(frmMain.clsInstatOptions.bSwitchOffUndo)
+    End Sub
+
     Public Sub CurrentWorksheetChanged()
         frmMain.ucrColumnMeta.SetCurrentDataFrame(GetCurrentDataFrameNameFocus())
         RefreshDisplayInformation()
+        IsUndo()
     End Sub
 
     Public Function GetFirstRowHeader() As String
@@ -269,6 +276,12 @@ Public Class ucrDataView
         _grid.AdjustColumnWidthAfterWrapping(strColumn, bApplyWrap)
     End Sub
 
+    Public Sub IsUndo()
+        If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
+            frmMain.clsInstatOptions.SetOffUndo(GetCurrentDataFrameFocus.clsVisibleDataFramePage.IsUndo(GetCurrentDataFrameNameFocus))
+        End If
+    End Sub
+
     Private Sub RefreshDisplayInformation()
         If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
             frmMain.tstatus.Text = _grid.CurrentWorksheet.Name
@@ -279,6 +292,12 @@ Public Class ucrDataView
         Else
             frmMain.tstatus.Text = GetTranslation("No data loaded")
             SetGridVisibility(False)
+        End If
+    End Sub
+
+    Public Sub DisableEnableUndo(bDisable As Boolean)
+        If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
+            GetCurrentDataFrameFocus.clsVisibleDataFramePage.DisableEnableUndo(bDisable, GetCurrentDataFrameNameFocus)
         End If
     End Sub
 

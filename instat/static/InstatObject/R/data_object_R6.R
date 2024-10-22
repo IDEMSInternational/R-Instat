@@ -5,7 +5,7 @@ DataSheet <- R6::R6Class("DataSheet",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), column_selections = list(), objects = list(),
-                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE, undo_history = list(), redo_undo_history = list())
+                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE, undo_history = list(), redo_undo_history = list(), disable_undo = FALSE)
 {
   # Set up the data object
   self$set_data(data, messages)
@@ -31,7 +31,6 @@ DataSheet <- R6::R6Class("DataSheet",
   self$set_scalars(scalars)
   self$set_keys(keys)
   self$set_comments(comments)
-  self$set_undo_history(undo_history)
   
   # If no name for the data.frame has been given in the list we create a default one.
   # Decide how to choose default name index
@@ -65,7 +64,8 @@ DataSheet <- R6::R6Class("DataSheet",
                            comments = list(),
                            calculations = list(),
                            scalars = list(),
-                           changes = list(), 
+                           changes = list(),
+                           disable_undo = FALSE,
                            .current_filter = list(),
                            .current_column_selection = list(),
                            .data_changed = FALSE,
@@ -163,9 +163,17 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
   }
 }
 )
+DataSheet$set("public", "set_enable_disable_undo", function(disable_undo) {
+  private$disable_undo <- disable_undo
+  if(disable_undo) {private$undo_history <- list()}
+})
 
 DataSheet$set("public", "save_state_to_undo_history", function() {
   self$set_undo_history(list(private$data))
+})
+
+DataSheet$set("public", "is_undo", function() {
+  return(private$disable_undo)
 })
 
 DataSheet$set("public", "set_meta", function(new_meta) {
@@ -192,14 +200,14 @@ DataSheet$set("public", "clear_metadata", function() {
 )
 
 DataSheet$set("public", "has_undo_history", function() {
-  return(length(private$undo_history) > 1)
+  return(length(private$undo_history) > 0)
 }
 )
 
 DataSheet$set("public", "undo_last_action", function() {
   
   # Perform the undo action
-  if (length(private$undo_history) > 1) {
+  if (length(private$undo_history) > 0) {
     previous_state <- private$undo_history[[length(private$undo_history)]]
     self$set_data(as.data.frame(previous_state))  # Restore the previous state
     
@@ -293,7 +301,7 @@ DataSheet$set("public", "set_scalars", function(new_scalars) {
 # Set undo_history with memory management
 DataSheet$set("public", "set_undo_history", function(new_undo_history) {
   if (!is.list(new_undo_history)) stop("undo_history must be of type: list")
-  
+  if(!private$disable_undo){
   # Define memory and undo_history limits
   MAX_undo_history_SIZE <- 10  # Limit to last 10 undo_history states
   MAX_MEMORY_LIMIT_MB <- 1024  # Limit the memory usage for undo undo_history
@@ -314,9 +322,9 @@ DataSheet$set("public", "set_undo_history", function(new_undo_history) {
   }
   
   private$undo_history <- append(private$undo_history, list(new_undo_history))
-  
   # Explicitly call garbage collection to release memory
-  gc()
+  #gc()
+  }
 })
 
 DataSheet$set("public", "set_keys", function(new_keys) {

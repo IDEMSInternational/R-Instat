@@ -213,6 +213,33 @@ Public Class clsDataFramePage
 
     End Sub
 
+    Public Function IsUndo(strCurrentDataFrame As String)
+        Dim clsIsUndoFunction As New RFunction
+        Dim expTemp As SymbolicExpression
+        clsIsUndoFunction.SetRCommand(_clsRLink.strInstatDataObject & "$is_undo")
+        clsIsUndoFunction.AddParameter("data_name", Chr(34) & strCurrentDataFrame & Chr(34))
+
+        If clsIsUndoFunction IsNot Nothing Then
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsIsUndoFunction.ToScript(), bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.AsCharacter(0) = "TRUE" Then
+                Return True
+            End If
+        End If
+
+        Return False
+    End Function
+
+    Public Sub DisableEnableUndo(bDisable As Boolean, strCurrentDataFrame As String)
+        Dim clsEnableDisableUndoRFunction As New RFunction
+        clsEnableDisableUndoRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$set_enable_disable_undo")
+        clsEnableDisableUndoRFunction.AddParameter("data_name", Chr(34) & strCurrentDataFrame & Chr(34))
+
+        Dim strDisable As String = If(bDisable, "TRUE", "FALSE")
+        clsEnableDisableUndoRFunction.AddParameter("disable_undo", strDisable)
+        _clsRLink.RunScript(clsEnableDisableUndoRFunction.ToScript)
+
+    End Sub
+
     Public Function HasUndoHistory()
         Dim expTemp As SymbolicExpression
         Dim bHasHistory As Boolean = False

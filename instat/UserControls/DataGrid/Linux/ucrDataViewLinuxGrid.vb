@@ -35,6 +35,8 @@ Public Class ucrDataViewLinuxGrid
 
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
+    Public Event WorksheetInserted() Implements IDataViewGrid.WorksheetInserted
+
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
 
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns

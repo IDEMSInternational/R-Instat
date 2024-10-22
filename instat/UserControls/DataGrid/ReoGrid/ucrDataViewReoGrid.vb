@@ -35,6 +35,8 @@ Public Class ucrDataViewReoGrid
 
     Public Event WorksheetChanged() Implements IDataViewGrid.WorksheetChanged
 
+    Public Event WorksheetInserted() Implements IDataViewGrid.WorksheetInserted
+
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
 
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
@@ -221,6 +223,11 @@ Public Class ucrDataViewReoGrid
     Private Sub grdData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdData.CurrentWorksheetChanged, grdData.WorksheetInserted
         RaiseEvent WorksheetChanged()
     End Sub
+
+    Private Sub grdData_WorksheetInserted(sender As Object, e As EventArgs) Handles grdData.WorksheetInserted
+        RaiseEvent WorksheetInserted()
+    End Sub
+
 
     Private Sub grdData_WorksheetRemoved(sender As Object, e As WorksheetRemovedEventArgs) Handles grdData.WorksheetRemoved
         RaiseEvent WorksheetRemoved(New clsWorksheetAdapter(e.Worksheet))

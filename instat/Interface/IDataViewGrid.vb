@@ -29,6 +29,8 @@ Public Interface IDataViewGrid
 
     Event WorksheetChanged()
 
+    Event WorksheetInserted()
+
     Event WorksheetRemoved(worksheet As clsWorksheetAdapter)
 
     Event FindRow()
