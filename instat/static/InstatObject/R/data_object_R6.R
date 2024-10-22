@@ -165,7 +165,10 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
 )
 DataSheet$set("public", "set_enable_disable_undo", function(disable_undo) {
   private$disable_undo <- disable_undo
-  if(disable_undo) {private$undo_history <- list()}
+  if(disable_undo) {
+    private$undo_history <- list()
+    gc()
+    }
 })
 
 DataSheet$set("public", "save_state_to_undo_history", function() {
