@@ -325,11 +325,6 @@ DataBook$set("public", "set_undo_history", function(new_undo_history) {
 }
 )
 
-DataSheet$set("public", "disable_undo", function() {
-  private$.undo_history <- list()  # Clear history
-  self$undo_enabled <- FALSE  # Disable undo functionality
-})
-
 DataBook$set("public", "set_scalars", function(new_scalars) {
   if(!is.list(new_scalars)) stop("new_scalars must be of type: list")
   private$.scalars <- new_scalars 
