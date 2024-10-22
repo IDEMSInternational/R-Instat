@@ -4523,16 +4523,20 @@ DataSheet$set("public", "has_labels", function(col_names) {
 }
 )
 
-DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE, interaction = FALSE) {
   if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
   if (sign_level || signif.stars) message("This is no longer descriptive")
   if (sign_level) end_col = 5 else end_col = 4
   
-  # Construct the formula
+  # Construct the formula with interaction if required
   if (length(x_col_names) == 1) {
     formula_str <- paste0(as.name(y_col_name), "~ ", as.name(x_col_names))
   } else if (length(x_col_names) > 1) {
-    formula_str <- paste0(as.name(y_col_name), "~ ", as.name(paste(x_col_names, collapse = " + ")))
+    if (interaction) {
+      formula_str <- paste0(as.name(y_col_name), "~ (", as.name(paste(x_col_names, collapse = " * ")), ")")
+    } else {
+      formula_str <- paste0(as.name(y_col_name), "~ ", as.name(paste(x_col_names, collapse = " + ")))
+    }
   }
 
   # Fit the model
@@ -4543,9 +4547,11 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total
   if (total) anova_mod <- anova_mod %>% tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum)))
   anova_mod$`F value` <- round(anova_mod$`F value`, 4)
   if (sign_level) anova_mod$`Pr(>F)` <- format.pval(anova_mod$`Pr(>F)`, digits = 4, eps = 0.001)
+  
   cat(paste0("ANOVA of ", formula_str, ":\n"))
   print(anova_mod)
   cat("\n")
+  
   # Optionally print means
   if (means) {
     if (class(mod$model[[x_col_names[[1]]]]) %in% c("numeric", "integer")){
