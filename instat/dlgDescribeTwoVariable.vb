@@ -73,6 +73,7 @@ Public Class dlgDescribeTwoVariable
         SetHelpOptions()
         bReset = False
         TestOKEnabled()
+        ManageControlsVisibility()
         autoTranslate(Me)
     End Sub
 
@@ -209,6 +210,7 @@ Public Class dlgDescribeTwoVariable
         ucrReorderSummary.bDataIsSummaries = True
         AddRemoveTotalParm()
         AddInteraction()
+        ManageControlsVisibility()
     End Sub
 
     Private Sub SetDefaults()
@@ -650,10 +652,11 @@ Public Class dlgDescribeTwoVariable
         cmdMissingOptions.Visible = False
 
         If rdoTwoVariable.Checked Then
-            ucrChkOmitMissing.Visible = IsNumericByNumeric() OrElse IsNumericByFactor()
+            ucrChkOmitMissing.Visible = False
+            ucrChkOmitMissing.Visible = Not ucrChkSwapXYVar.Checked AndAlso IsFactorByNumeric()
             ucrChkSwapXYVar.Visible = IsNumericByNumeric() OrElse IsFactorByNumeric()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
-            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
+            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked AndAlso ucrChkOmitMissing.Visible
         End If
         If rdoThreeVariable.Checked Then
             If IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
@@ -663,9 +666,9 @@ Public Class dlgDescribeTwoVariable
                 ucrReorderSummary.Visible = False
                 cmdSummaries.Visible = False
             End If
-            'ucrChkSwapXYVar.Visible = IsNumericByNumericByNumeric() OrElse IsNumericByNumericByFactor()
             ucrChkSummariesRowCol.Visible = IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor()
-            ucrChkOmitMissing.Visible = IsFactorByNumericByNumeric()
+            ucrChkOmitMissing.Visible = IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric()
+            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
         End If
     End Sub
 
@@ -680,6 +683,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkTotal.Visible = False
         ucrChkInteraction.Visible = False
         cmdMissingOptions.Visible = False
+        ucrChkOmitMissing.Visible = False
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
             cmdFormatTable.Visible = False
@@ -697,6 +701,7 @@ Public Class dlgDescribeTwoVariable
                                                      strObjectName:="last_summary")
 
         ElseIf rdoTwoVariable.Checked Then
+            ucrChkOmitMissing.Visible = False
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             If IsNumericByNumeric() Then
                 If ucrChkSwapXYVar.Checked Then
@@ -748,7 +753,7 @@ Public Class dlgDescribeTwoVariable
                 ucrChkLevSig.Visible = False
                 ucrChkTotal.Visible = False
                 ucrChkInteraction.Visible = False
-                ucrSaveTable.Location = New Point(23, 351)
+                ucrSaveTable.Location = New Point(23, 385)
                 clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                 ucrSaveTable.SetPrefix("frequency_table")
@@ -771,6 +776,8 @@ Public Class dlgDescribeTwoVariable
                     ucrChkSummariesRowCol.Visible = False
                     cmdFormatTable.Visible = False
                     ucrChkInteraction.Visible = False
+                    ucrChkOmitMissing.Visible = False
+                    cmdMissingOptions.Visible = False
                     ucrChkMeans.Visible = True
                     ucrChkLevSig.Visible = True
                     ucrChkTotal.Visible = True
@@ -784,11 +791,14 @@ Public Class dlgDescribeTwoVariable
                     cmdSummaries.Visible = True
                     ucrChkSummariesRowCol.Visible = True
                     cmdFormatTable.Visible = True
+                    ucrChkOmitMissing.Visible = True
                     ucrChkMeans.Visible = False
                     ucrChkLevSig.Visible = False
                     ucrChkTotal.Visible = False
                     ucrChkInteraction.Visible = False
                     ucrSaveTable.Location = New Point(23, 450)
+                    ucrChkOmitMissing.Location = New Point(15, 365)
+                    cmdMissingOptions.Location = New Point(17, 385)
                     clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
                     ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                     ucrSaveTable.SetPrefix("summary_table")
@@ -898,8 +908,11 @@ Public Class dlgDescribeTwoVariable
                 ucrReorderSummary.Visible = True
                 cmdSummaries.Visible = True
                 ucrSaveTable.Visible = True
+                ucrChkOmitMissing.Visible = True
                 ucrChkSummariesRowCol.Visible = True
                 ucrSaveTable.Location = New Point(23, 440)
+                ucrChkOmitMissing.Location = New Point(15, 360)
+                cmdMissingOptions.Location = New Point(17, 380)
             End If
         End If
         FactorColumns()
@@ -917,11 +930,11 @@ Public Class dlgDescribeTwoVariable
         clsSummaryTableFunction.RemoveParameterByName("na.rm")
         If ucrChkOmitMissing.Checked Then
             If rdoTwoVariable.Checked Then
-                If IsNumericByFactor() Then
+                If Not ucrChkSwapXYVar.Checked AndAlso IsFactorByNumeric() Then
                     clsSummaryTableFunction.AddParameter("na.rm", "TRUE", iPosition:=5)
                 End If
             ElseIf rdoThreeVariable.Checked Then
-                If IsNumericByFactor() OrElse IsFactorByNumeric() Then
+                If IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
                     clsSummaryTableFunction.AddParameter("na.rm", "TRUE", iPosition:=5)
                 End If
             End If
@@ -947,7 +960,8 @@ Public Class dlgDescribeTwoVariable
             clsSummaryTableFunction.AddParameter("na_type", clsRFunctionParameter:=clsCombineFunction, iPosition:=9)
         End If
         cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
-
+        ManageControlsVisibility()
+        ChangeBaseRCode()
     End Sub
 
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
@@ -1007,8 +1021,8 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.Location = New Point(iUcrBaseXLocation, 319)
                 Me.Size = New Point(iDialogueXsize, 415)
             ElseIf IsFactorByFactor() Then
-                ucrBase.Location = New Point(iUcrBaseXLocation, 372)
-                Me.Size = New Point(iDialogueXsize, 465)
+                ucrBase.Location = New Point(iUcrBaseXLocation, 392)
+                Me.Size = New Point(iDialogueXsize, 485)
                 cmdFormatTable.Location = New Point(326, 330)
             Else
                 ucrBase.Location = New Point(iUcrBaseXLocation, 328)
