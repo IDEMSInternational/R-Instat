@@ -215,12 +215,12 @@ DataSheet$set("public", "undo_last_action", function() {
     self$set_data(as.data.frame(previous_state))  # Restore the previous state
     
     private$undo_history <- private$undo_history[-length(private$undo_history)]  # Remove the latest state
+    
+    # Trigger garbage collection to free memory
+    gc()
   } else {
     message("No more actions to undo.")
   }
-  
-  # Trigger garbage collection to free memory
-  gc()
   
 })
 
@@ -322,11 +322,10 @@ DataSheet$set("public", "set_undo_history", function(new_undo_history) {
   # Limit undo_history size
   if (length(private$undo_history) >= MAX_undo_history_SIZE) {
     private$undo_history <- private$undo_history[-1]  # Remove the oldest entry
+    gc()  # Trigger garbage collection to free memory
   }
   
   private$undo_history <- append(private$undo_history, list(new_undo_history))
-  # Explicitly call garbage collection to release memory
-  #gc()
   }
 })
 
