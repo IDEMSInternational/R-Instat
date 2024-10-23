@@ -1,7 +1,7 @@
 ﻿Imports instat.Translations
 
 Public Class dlgGeneralTable
-    Private clsBaseOperator As New ROperator
+    Public clsBaseOperator As New ROperator
     Private clsHeadRFunction, clsGtRFunction As New RFunction
 
     Private bFirstload As Boolean = True
