@@ -172,7 +172,7 @@ DataSheet$set("public", "set_enable_disable_undo", function(disable_undo) {
 })
 
 DataSheet$set("public", "save_state_to_undo_history", function() {
-  self$set_undo_history(list(private$data))
+  self$set_undo_history(private$data, attributes(private$data))
 })
 
 DataSheet$set("public", "is_undo", function() {
@@ -209,19 +209,31 @@ DataSheet$set("public", "has_undo_history", function() {
 
 DataSheet$set("public", "undo_last_action", function() {
   
-  # Perform the undo action
+  # Check if there's any action to undo
   if (length(private$undo_history) > 0) {
+    # Get the last state from the undo history
     previous_state <- private$undo_history[[length(private$undo_history)]]
-    self$set_data(as.data.frame(previous_state))  # Restore the previous state
     
-    private$undo_history <- private$undo_history[-length(private$undo_history)]  # Remove the latest state
+    # Restore the data and its attributes
+    restored_data <- previous_state$data  # Extract the dataframe
+    restored_attributes <- previous_state$attributes  # Extract the attributes
+    
+    # Set the dataframe in the DataSheet
+    self$set_data(as.data.frame(restored_data))
+    
+    # Restore attributes
+    restored_attributes <- previous_state$attributes  # Extract the attributes
+    for (property in names(restored_attributes)) {
+      self$append_to_metadata(property, restored_attributes[[property]])
+    }  
+    # Remove the latest state from the undo history
+    private$undo_history <- private$undo_history[-length(private$undo_history)]
     
     # Trigger garbage collection to free memory
     gc()
   } else {
     message("No more actions to undo.")
   }
-  
 })
 
 
@@ -302,32 +314,38 @@ DataSheet$set("public", "set_scalars", function(new_scalars) {
 )
 
 # Set undo_history with memory management
-DataSheet$set("public", "set_undo_history", function(new_undo_history) {
-  if (!is.list(new_undo_history)) stop("undo_history must be of type: list")
-  if(!private$disable_undo){
-  # Define memory and undo_history limits
-  MAX_undo_history_SIZE <- 10  # Limit to last 10 undo_history states
-  MAX_MEMORY_LIMIT_MB <- 1024  # Limit the memory usage for undo undo_history
+DataSheet$set("public", "set_undo_history", function(new_data, attributes = list()) {
+  if (!is.data.frame(new_data)) stop("new_data must be of type: data.frame")
   
-  # Check current memory usage
-  current_memory <- monitor_memory()
-  
-  # If memory exceeds limit, remove the oldest entry
-  if (current_memory > MAX_MEMORY_LIMIT_MB) {
-    message(paste("Memory limit exceeded:", round(current_memory, 2), "MB. Removing oldest entry."))
-    private$undo_history <- private$undo_history[-1]  # Remove the oldest entry
-    gc()  # Trigger garbage collection to free memory
-  }
-  
-  # Limit undo_history size
-  if (length(private$undo_history) >= MAX_undo_history_SIZE) {
-    private$undo_history <- private$undo_history[-1]  # Remove the oldest entry
-    gc()  # Trigger garbage collection to free memory
-  }
-  
-  private$undo_history <- append(private$undo_history, list(new_undo_history))
+  if (!private$disable_undo) {
+    # Define memory and undo_history limits
+    MAX_undo_history_SIZE <- 10  # Limit to last 10 undo_history states
+    MAX_MEMORY_LIMIT_MB <- 1024   # Limit the memory usage for undo_history
+    
+    # Check current memory usage
+    current_memory <- monitor_memory()
+    
+    # If memory exceeds limit, remove the oldest entry
+    if (current_memory > MAX_MEMORY_LIMIT_MB) {
+      message(paste("Memory limit exceeded:", round(current_memory, 2), "MB. Removing oldest entry."))
+      private$undo_history <- private$undo_history[-1]  # Remove the oldest entry
+      gc()  # Trigger garbage collection to free memory
+    }
+    
+    # Limit undo_history size
+    if (length(private$undo_history) >= MAX_undo_history_SIZE) {
+      private$undo_history <- private$undo_history[-1]  # Remove the oldest entry
+      gc()  # Trigger garbage collection to free memory
+    }
+    
+    # Package the new data and attributes into a list
+    new_undo_entry <- list(data = new_data, attributes = attributes)
+    
+    # Append the new entry to the undo history
+    private$undo_history <- append(private$undo_history, list(new_undo_entry))
   }
 })
+
 
 DataSheet$set("public", "set_keys", function(new_keys) {
   if(!is.list(new_keys)) stop("new_keys must be of type: list")
