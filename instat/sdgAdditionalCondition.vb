@@ -86,7 +86,7 @@ Public Class sdgAdditionalCondition
         End If
         clsCombinedList = clsNewCombinedList
         clsCalcDrySpellRollMax = clsNewCalcDrySpellRollMax
-            clsCalcRainDayRollingSum = clsNewCalcRainDayRollingSum
+        clsCalcRainDayRollingSum = clsNewCalcRainDayRollingSum
         clsCalcRollSumNumberDryPeriod = clsNewCalcRollSumNumberDryPeriod
         clsConditionsAndOperator = clsNewConditionsAndOperator
         clsRollingSumRainDayOperator = clsNewRollingSumRainDayOperator
