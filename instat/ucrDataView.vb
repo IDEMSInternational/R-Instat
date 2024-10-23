@@ -101,7 +101,7 @@ Public Class ucrDataView
         _grid.AddRowData(dataFrame)
         _grid.UpdateWorksheetStyle(fillWorkSheet)
         dataFrame.clsVisibleDataFramePage.HasChanged = False
-        frmMain.mnuUndo.Enabled = dataFrame.clsVisibleDataFramePage.HasUndoHistory
+        'frmMain.mnuUndo.Enabled = dataFrame.clsVisibleDataFramePage.HasUndoHistory
 
         RefreshDisplayInformation()
     End Sub
@@ -158,6 +158,7 @@ Public Class ucrDataView
                 RefreshDisplayInformation()
             End If
         End If
+        frmMain.mnuUndo.Enabled = GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasUndoHistory
 
         _grid.Focus()
     End Sub
