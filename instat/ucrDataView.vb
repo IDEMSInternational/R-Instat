@@ -101,7 +101,6 @@ Public Class ucrDataView
         _grid.AddRowData(dataFrame)
         _grid.UpdateWorksheetStyle(fillWorkSheet)
         dataFrame.clsVisibleDataFramePage.HasChanged = False
-        'frmMain.mnuUndo.Enabled = dataFrame.clsVisibleDataFramePage.HasUndoHistory
 
         RefreshDisplayInformation()
     End Sub
@@ -158,8 +157,7 @@ Public Class ucrDataView
                 RefreshDisplayInformation()
             End If
         End If
-        frmMain.mnuUndo.Enabled = GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasUndoHistory
-
+        EnableDisableUndoMenu()
         _grid.Focus()
     End Sub
 
@@ -237,6 +235,12 @@ Public Class ucrDataView
         _grid.SelectAll()
     End Sub
 
+    Private Sub EnableDisableUndoMenu()
+        If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
+            frmMain.mnuUndo.Enabled = GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasUndoHistory
+        End If
+    End Sub
+
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
         dlgDeleteDataFrames.SetDataFrameToAdd(_grid.CurrentWorksheet.Name)
         dlgDeleteDataFrames.ShowDialog()
@@ -289,7 +293,7 @@ Public Class ucrDataView
             SetDisplayLabels()
             UpdateNavigationButtons()
             SetGridVisibility(True)
-            frmMain.mnuUndo.Enabled = GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasUndoHistory
+            EnableDisableUndoMenu()
         Else
             frmMain.tstatus.Text = GetTranslation("No data loaded")
             SetGridVisibility(False)
