@@ -4552,16 +4552,27 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total
   print(anova_mod)
   cat("\n")
   
-  # Optionally print means
+  # Optionally print means or model coefficients
   if (means) {
-    if (class(mod$model[[x_col_names[[1]]]]) %in% c("numeric", "integer")){
+    has_numeric <- any(sapply(x_col_names, function(x) class(mod$model[[x]]) %in% c("numeric", "integer")))
+    has_factor <- any(sapply(x_col_names, function(x) class(mod$model[[x]]) == "factor"))
+
+    # If both numeric and factor are present, print the model coefficients
+    if (has_numeric && has_factor) {
       cat("Model coefficients:\n")
       print(mod$coefficients)
       cat("\n")
     } else {
-      cat(paste0("Means table of ", y_col_name, ":\n"))
-      print(model.tables(aov(mod), type = "means"))
-      cat("\n")
+      # Handle the original case when only numeric or factor is present
+      if (class(mod$model[[x_col_names[[1]]]]) %in% c("numeric", "integer")) {
+        cat("Model coefficients:\n")
+        print(mod$coefficients)
+        cat("\n")
+      } else {
+        cat(paste0("Means table of ", y_col_name, ":\n"))
+        print(model.tables(aov(mod), type = "means"))
+        cat("\n")
+      }
     }
   }
 }
