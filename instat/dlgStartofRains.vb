@@ -73,7 +73,6 @@ Public Class dlgStartofRains
     Private strWetSpell As String = "wet_spell"
     Private strFactionEvap As String = "fraction_evap"
     Private strSumFractionEvap As String = "roll_sum_evap"
-    'Private strRollSumRainDryPeriod As String = "roll_sum_rain_dry_period"
 
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -240,6 +239,14 @@ Public Class dlgStartofRains
         Dim strRollSumRainDryPeriod As String = "roll_sum_rain_dry_period"
         Dim strYearType As String = "year_type"
 
+        clsRainRollingSumFunction = New RFunction
+        clsGetlinkeddataFunction = New RFunction
+        clsVectorFunction = New RFunction
+        clsGetDataFrameFunction = New RFunction
+        clsDayFilterCalcFromConvert = New RFunction
+        clsDayFilterCalcFromList = New RFunction
+        clsDummyFunction = New RFunction
+
         clsDayFromAndTo.Clear()
         clsDayFromAndToOperator.Clear()
         clsGroupByStation.Clear()
@@ -297,10 +304,6 @@ Public Class dlgStartofRains
         clsIsNaFirstDryPeriod.Clear()
 
         clsCalcRainRollingSum.Clear()
-        clsRainRollingSumFunction = New RFunction
-        clsGetlinkeddataFunction = New RFunction
-        clsVectorFunction = New RFunction
-        clsGetDataFrameFunction = New RFunction
         clsTRWetSpellList.Clear()
         clsTRWetSpell.Clear()
         clsTRWetSpellFunction.Clear()
@@ -339,13 +342,11 @@ Public Class dlgStartofRains
         bResetSubdialog = True
         ucrSelectorForStartofRains.Reset()
 
-        clsDayFilterCalcFromConvert = New RFunction
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
-        clsDayFilterCalcFromList = New RFunction
+
         clsDayFilterCalcFromList.SetRCommand("list")
         clsDayFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDayFilterCalcFromList, iPosition:=0)
 
-        clsDummyFunction = New RFunction
         clsDummyFunction.AddParameter("sub2", "True", iPosition:=0)
         clsDummyFunction.AddParameter("sub3", "True", iPosition:=1)
         clsDummyFunction.AddParameter("additional", "False", iPosition:=2)
@@ -1078,11 +1079,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub AdditionalCondition()
-        If ucrChkAdditional.Checked Then
-            cmdAdditionnal.Visible = True
-        Else
-            cmdAdditionnal.Visible = False
-        End If
+        cmdAdditionnal.Visible = ucrChkAdditional.Checked
     End Sub
 
     Private Sub ucrChkAdditional_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAdditional.ControlValueChanged
