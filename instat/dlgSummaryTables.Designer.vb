@@ -96,10 +96,9 @@ Partial Class dlgSummaryTables
         '
         Me.lblFactors.AutoSize = True
         Me.lblFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactors.Location = New System.Drawing.Point(429, 64)
-        Me.lblFactors.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFactors.Location = New System.Drawing.Point(286, 43)
         Me.lblFactors.Name = "lblFactors"
-        Me.lblFactors.Size = New System.Drawing.Size(71, 20)
+        Me.lblFactors.Size = New System.Drawing.Size(48, 13)
         Me.lblFactors.TabIndex = 1
         Me.lblFactors.Tag = "Factors:"
         Me.lblFactors.Text = "Factors :"
@@ -107,10 +106,9 @@ Partial Class dlgSummaryTables
         'cmdSummaries
         '
         Me.cmdSummaries.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSummaries.Location = New System.Drawing.Point(429, 420)
-        Me.cmdSummaries.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdSummaries.Location = New System.Drawing.Point(286, 280)
         Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(156, 34)
+        Me.cmdSummaries.Size = New System.Drawing.Size(104, 23)
         Me.cmdSummaries.TabIndex = 13
         Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
@@ -123,11 +121,9 @@ Partial Class dlgSummaryTables
         Me.grpDisplay.Controls.Add(Me.rdoFactorVariable)
         Me.grpDisplay.Controls.Add(Me.rdoNoColumnFactor)
         Me.grpDisplay.Controls.Add(Me.ucrPnlColumnFactor)
-        Me.grpDisplay.Location = New System.Drawing.Point(15, 568)
-        Me.grpDisplay.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpDisplay.Location = New System.Drawing.Point(10, 379)
         Me.grpDisplay.Name = "grpDisplay"
-        Me.grpDisplay.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpDisplay.Size = New System.Drawing.Size(405, 154)
+        Me.grpDisplay.Size = New System.Drawing.Size(270, 103)
         Me.grpDisplay.TabIndex = 11
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Display Column Factors"
@@ -136,11 +132,11 @@ Partial Class dlgSummaryTables
         '
         Me.ucrReceiverColumnFactor.AutoSize = True
         Me.ucrReceiverColumnFactor.frmParent = Me
-        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(210, 52)
+        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(140, 35)
         Me.ucrReceiverColumnFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumnFactor.Name = "ucrReceiverColumnFactor"
         Me.ucrReceiverColumnFactor.Selector = Nothing
-        Me.ucrReceiverColumnFactor.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverColumnFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverColumnFactor.strNcFilePath = ""
         Me.ucrReceiverColumnFactor.TabIndex = 34
         Me.ucrReceiverColumnFactor.ucrSelector = Nothing
@@ -148,10 +144,9 @@ Partial Class dlgSummaryTables
         'rdoVariable
         '
         Me.rdoVariable.AutoSize = True
-        Me.rdoVariable.Location = New System.Drawing.Point(21, 111)
-        Me.rdoVariable.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoVariable.Location = New System.Drawing.Point(14, 74)
         Me.rdoVariable.Name = "rdoVariable"
-        Me.rdoVariable.Size = New System.Drawing.Size(92, 24)
+        Me.rdoVariable.Size = New System.Drawing.Size(63, 17)
         Me.rdoVariable.TabIndex = 32
         Me.rdoVariable.TabStop = True
         Me.rdoVariable.Text = "Variable"
@@ -160,10 +155,9 @@ Partial Class dlgSummaryTables
         'rdoSummaryVariable
         '
         Me.rdoSummaryVariable.AutoSize = True
-        Me.rdoSummaryVariable.Location = New System.Drawing.Point(21, 82)
-        Me.rdoSummaryVariable.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSummaryVariable.Location = New System.Drawing.Point(14, 55)
         Me.rdoSummaryVariable.Name = "rdoSummaryVariable"
-        Me.rdoSummaryVariable.Size = New System.Drawing.Size(164, 24)
+        Me.rdoSummaryVariable.Size = New System.Drawing.Size(109, 17)
         Me.rdoSummaryVariable.TabIndex = 31
         Me.rdoSummaryVariable.TabStop = True
         Me.rdoSummaryVariable.Text = "Summary-Variable"
@@ -173,10 +167,9 @@ Partial Class dlgSummaryTables
         '
         Me.rdoFactorVariable.AutoSize = True
         Me.rdoFactorVariable.Checked = True
-        Me.rdoFactorVariable.Location = New System.Drawing.Point(21, 54)
-        Me.rdoFactorVariable.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoFactorVariable.Location = New System.Drawing.Point(14, 36)
         Me.rdoFactorVariable.Name = "rdoFactorVariable"
-        Me.rdoFactorVariable.Size = New System.Drawing.Size(142, 24)
+        Me.rdoFactorVariable.Size = New System.Drawing.Size(96, 17)
         Me.rdoFactorVariable.TabIndex = 30
         Me.rdoFactorVariable.TabStop = True
         Me.rdoFactorVariable.Text = "Factor Variable"
@@ -185,10 +178,9 @@ Partial Class dlgSummaryTables
         'rdoNoColumnFactor
         '
         Me.rdoNoColumnFactor.AutoSize = True
-        Me.rdoNoColumnFactor.Location = New System.Drawing.Point(21, 26)
-        Me.rdoNoColumnFactor.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoNoColumnFactor.Location = New System.Drawing.Point(14, 17)
         Me.rdoNoColumnFactor.Name = "rdoNoColumnFactor"
-        Me.rdoNoColumnFactor.Size = New System.Drawing.Size(162, 24)
+        Me.rdoNoColumnFactor.Size = New System.Drawing.Size(110, 17)
         Me.rdoNoColumnFactor.TabIndex = 29
         Me.rdoNoColumnFactor.Text = "No Column Factor"
         Me.rdoNoColumnFactor.UseVisualStyleBackColor = True
@@ -196,10 +188,10 @@ Partial Class dlgSummaryTables
         'ucrPnlColumnFactor
         '
         Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(16, 26)
-        Me.ucrPnlColumnFactor.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(11, 17)
+        Me.ucrPnlColumnFactor.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
-        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(186, 120)
+        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(124, 80)
         Me.ucrPnlColumnFactor.TabIndex = 29
         '
         'grpMargin
@@ -208,11 +200,9 @@ Partial Class dlgSummaryTables
         Me.grpMargin.Controls.Add(Me.rdoSummary)
         Me.grpMargin.Controls.Add(Me.rdoOuter)
         Me.grpMargin.Controls.Add(Me.ucrPnlMargin)
-        Me.grpMargin.Location = New System.Drawing.Point(15, 470)
-        Me.grpMargin.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpMargin.Location = New System.Drawing.Point(10, 313)
         Me.grpMargin.Name = "grpMargin"
-        Me.grpMargin.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpMargin.Size = New System.Drawing.Size(320, 60)
+        Me.grpMargin.Size = New System.Drawing.Size(213, 40)
         Me.grpMargin.TabIndex = 13
         Me.grpMargin.TabStop = False
         '
@@ -220,10 +210,9 @@ Partial Class dlgSummaryTables
         '
         Me.rdoBoth.AutoSize = True
         Me.rdoBoth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoBoth.Location = New System.Drawing.Point(210, 26)
-        Me.rdoBoth.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoBoth.Location = New System.Drawing.Point(140, 17)
         Me.rdoBoth.Name = "rdoBoth"
-        Me.rdoBoth.Size = New System.Drawing.Size(68, 24)
+        Me.rdoBoth.Size = New System.Drawing.Size(47, 17)
         Me.rdoBoth.TabIndex = 16
         Me.rdoBoth.TabStop = True
         Me.rdoBoth.Text = "Both"
@@ -233,10 +222,9 @@ Partial Class dlgSummaryTables
         '
         Me.rdoSummary.AutoSize = True
         Me.rdoSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSummary.Location = New System.Drawing.Point(100, 26)
-        Me.rdoSummary.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSummary.Location = New System.Drawing.Point(67, 17)
         Me.rdoSummary.Name = "rdoSummary"
-        Me.rdoSummary.Size = New System.Drawing.Size(101, 24)
+        Me.rdoSummary.Size = New System.Drawing.Size(68, 17)
         Me.rdoSummary.TabIndex = 16
         Me.rdoSummary.TabStop = True
         Me.rdoSummary.Text = "Summary"
@@ -246,10 +234,9 @@ Partial Class dlgSummaryTables
         '
         Me.rdoOuter.AutoSize = True
         Me.rdoOuter.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoOuter.Location = New System.Drawing.Point(15, 26)
-        Me.rdoOuter.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoOuter.Location = New System.Drawing.Point(10, 17)
         Me.rdoOuter.Name = "rdoOuter"
-        Me.rdoOuter.Size = New System.Drawing.Size(74, 24)
+        Me.rdoOuter.Size = New System.Drawing.Size(51, 17)
         Me.rdoOuter.TabIndex = 15
         Me.rdoOuter.TabStop = True
         Me.rdoOuter.Text = "Outer"
@@ -259,8 +246,8 @@ Partial Class dlgSummaryTables
         '
         Me.ucrPnlMargin.AutoSize = True
         Me.ucrPnlMargin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlMargin.Location = New System.Drawing.Point(9, 21)
-        Me.ucrPnlMargin.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlMargin.Location = New System.Drawing.Point(6, 14)
+        Me.ucrPnlMargin.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlMargin.Name = "ucrPnlMargin"
         Me.ucrPnlMargin.Size = New System.Drawing.Size(0, 0)
         Me.ucrPnlMargin.TabIndex = 13
@@ -269,10 +256,9 @@ Partial Class dlgSummaryTables
         '
         Me.lblMarginName.AutoSize = True
         Me.lblMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMarginName.Location = New System.Drawing.Point(238, 432)
-        Me.lblMarginName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblMarginName.Location = New System.Drawing.Point(159, 288)
         Me.lblMarginName.Name = "lblMarginName"
-        Me.lblMarginName.Size = New System.Drawing.Size(59, 20)
+        Me.lblMarginName.Size = New System.Drawing.Size(41, 13)
         Me.lblMarginName.TabIndex = 15
         Me.lblMarginName.Text = "Name :"
         '
@@ -280,10 +266,9 @@ Partial Class dlgSummaryTables
         '
         Me.lblVariables.AutoSize = True
         Me.lblVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVariables.Location = New System.Drawing.Point(428, 243)
-        Me.lblVariables.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblVariables.Location = New System.Drawing.Point(285, 162)
         Me.lblVariables.Name = "lblVariables"
-        Me.lblVariables.Size = New System.Drawing.Size(83, 20)
+        Me.lblVariables.Size = New System.Drawing.Size(56, 13)
         Me.lblVariables.TabIndex = 17
         Me.lblVariables.Tag = ""
         Me.lblVariables.Text = "Variables :"
@@ -291,10 +276,9 @@ Partial Class dlgSummaryTables
         'cmdFormatTable
         '
         Me.cmdFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFormatTable.Location = New System.Drawing.Point(429, 696)
-        Me.cmdFormatTable.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdFormatTable.Location = New System.Drawing.Point(286, 464)
         Me.cmdFormatTable.Name = "cmdFormatTable"
-        Me.cmdFormatTable.Size = New System.Drawing.Size(156, 34)
+        Me.cmdFormatTable.Size = New System.Drawing.Size(104, 23)
         Me.cmdFormatTable.TabIndex = 19
         Me.cmdFormatTable.Text = "Format Table..."
         Me.cmdFormatTable.UseVisualStyleBackColor = True
@@ -308,10 +292,9 @@ Partial Class dlgSummaryTables
         Me.rdoFrequencyTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoFrequencyTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoFrequencyTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoFrequencyTable.Location = New System.Drawing.Point(76, 10)
-        Me.rdoFrequencyTable.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoFrequencyTable.Location = New System.Drawing.Point(51, 7)
         Me.rdoFrequencyTable.Name = "rdoFrequencyTable"
-        Me.rdoFrequencyTable.Size = New System.Drawing.Size(194, 40)
+        Me.rdoFrequencyTable.Size = New System.Drawing.Size(129, 27)
         Me.rdoFrequencyTable.TabIndex = 22
         Me.rdoFrequencyTable.TabStop = True
         Me.rdoFrequencyTable.Text = "Frequency"
@@ -326,10 +309,9 @@ Partial Class dlgSummaryTables
         Me.rdoSummaryTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSummaryTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSummaryTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSummaryTable.Location = New System.Drawing.Point(267, 10)
-        Me.rdoSummaryTable.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSummaryTable.Location = New System.Drawing.Point(178, 7)
         Me.rdoSummaryTable.Name = "rdoSummaryTable"
-        Me.rdoSummaryTable.Size = New System.Drawing.Size(200, 40)
+        Me.rdoSummaryTable.Size = New System.Drawing.Size(133, 27)
         Me.rdoSummaryTable.TabIndex = 21
         Me.rdoSummaryTable.TabStop = True
         Me.rdoSummaryTable.Text = "Summary"
@@ -342,11 +324,9 @@ Partial Class dlgSummaryTables
         Me.grpPercentages.Controls.Add(Me.lblFactorsAsPercentage)
         Me.grpPercentages.Controls.Add(Me.ucrChkPercentageProportion)
         Me.grpPercentages.Controls.Add(Me.ucrChkDisplayAsPercentage)
-        Me.grpPercentages.Location = New System.Drawing.Point(429, 267)
-        Me.grpPercentages.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpPercentages.Location = New System.Drawing.Point(286, 178)
         Me.grpPercentages.Name = "grpPercentages"
-        Me.grpPercentages.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpPercentages.Size = New System.Drawing.Size(261, 134)
+        Me.grpPercentages.Size = New System.Drawing.Size(174, 89)
         Me.grpPercentages.TabIndex = 23
         Me.grpPercentages.TabStop = False
         Me.grpPercentages.Text = "Percentages"
@@ -355,11 +335,11 @@ Partial Class dlgSummaryTables
         '
         Me.ucrReceiverPercentages.AutoSize = True
         Me.ucrReceiverPercentages.frmParent = Me
-        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(24, 90)
+        Me.ucrReceiverPercentages.Location = New System.Drawing.Point(16, 60)
         Me.ucrReceiverPercentages.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPercentages.Name = "ucrReceiverPercentages"
         Me.ucrReceiverPercentages.Selector = Nothing
-        Me.ucrReceiverPercentages.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverPercentages.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverPercentages.strNcFilePath = ""
         Me.ucrReceiverPercentages.TabIndex = 4
         Me.ucrReceiverPercentages.ucrSelector = Nothing
@@ -368,10 +348,9 @@ Partial Class dlgSummaryTables
         '
         Me.lblFactorsAsPercentage.AutoSize = True
         Me.lblFactorsAsPercentage.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactorsAsPercentage.Location = New System.Drawing.Point(27, 66)
-        Me.lblFactorsAsPercentage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFactorsAsPercentage.Location = New System.Drawing.Point(18, 44)
         Me.lblFactorsAsPercentage.Name = "lblFactorsAsPercentage"
-        Me.lblFactorsAsPercentage.Size = New System.Drawing.Size(150, 20)
+        Me.lblFactorsAsPercentage.Size = New System.Drawing.Size(100, 13)
         Me.lblFactorsAsPercentage.TabIndex = 1
         Me.lblFactorsAsPercentage.Tag = "Factors as Percentage:"
         Me.lblFactorsAsPercentage.Text = "of Factor (Optional):"
@@ -380,40 +359,38 @@ Partial Class dlgSummaryTables
         '
         Me.ucrChkPercentageProportion.AutoSize = True
         Me.ucrChkPercentageProportion.Checked = False
-        Me.ucrChkPercentageProportion.Location = New System.Drawing.Point(8, 256)
-        Me.ucrChkPercentageProportion.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkPercentageProportion.Location = New System.Drawing.Point(5, 171)
+        Me.ucrChkPercentageProportion.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkPercentageProportion.Name = "ucrChkPercentageProportion"
-        Me.ucrChkPercentageProportion.Size = New System.Drawing.Size(240, 51)
+        Me.ucrChkPercentageProportion.Size = New System.Drawing.Size(160, 34)
         Me.ucrChkPercentageProportion.TabIndex = 3
         '
         'ucrChkDisplayAsPercentage
         '
         Me.ucrChkDisplayAsPercentage.AutoSize = True
         Me.ucrChkDisplayAsPercentage.Checked = False
-        Me.ucrChkDisplayAsPercentage.Location = New System.Drawing.Point(21, 28)
-        Me.ucrChkDisplayAsPercentage.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkDisplayAsPercentage.Location = New System.Drawing.Point(14, 19)
+        Me.ucrChkDisplayAsPercentage.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
-        Me.ucrChkDisplayAsPercentage.Size = New System.Drawing.Size(202, 51)
+        Me.ucrChkDisplayAsPercentage.Size = New System.Drawing.Size(135, 34)
         Me.ucrChkDisplayAsPercentage.TabIndex = 0
         '
         'lblFrequencyMarginName
         '
         Me.lblFrequencyMarginName.AutoSize = True
         Me.lblFrequencyMarginName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFrequencyMarginName.Location = New System.Drawing.Point(10, 412)
-        Me.lblFrequencyMarginName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFrequencyMarginName.Location = New System.Drawing.Point(7, 275)
         Me.lblFrequencyMarginName.Name = "lblFrequencyMarginName"
-        Me.lblFrequencyMarginName.Size = New System.Drawing.Size(111, 20)
+        Me.lblFrequencyMarginName.Size = New System.Drawing.Size(76, 13)
         Me.lblFrequencyMarginName.TabIndex = 25
         Me.lblFrequencyMarginName.Text = "Margin Name :"
         '
         'cmdMissingOptions
         '
         Me.cmdMissingOptions.Enabled = False
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(308, 392)
-        Me.cmdMissingOptions.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(205, 261)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"
-        Me.cmdMissingOptions.Size = New System.Drawing.Size(112, 34)
+        Me.cmdMissingOptions.Size = New System.Drawing.Size(75, 23)
         Me.cmdMissingOptions.TabIndex = 27
         Me.cmdMissingOptions.Text = "Options"
         Me.cmdMissingOptions.UseVisualStyleBackColor = True
@@ -422,19 +399,19 @@ Partial Class dlgSummaryTables
         '
         Me.ucrChkFrequencyDisplayMargins.AutoSize = True
         Me.ucrChkFrequencyDisplayMargins.Checked = False
-        Me.ucrChkFrequencyDisplayMargins.Location = New System.Drawing.Point(15, 368)
-        Me.ucrChkFrequencyDisplayMargins.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkFrequencyDisplayMargins.Location = New System.Drawing.Point(10, 245)
+        Me.ucrChkFrequencyDisplayMargins.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkFrequencyDisplayMargins.Name = "ucrChkFrequencyDisplayMargins"
-        Me.ucrChkFrequencyDisplayMargins.Size = New System.Drawing.Size(320, 34)
+        Me.ucrChkFrequencyDisplayMargins.Size = New System.Drawing.Size(213, 23)
         Me.ucrChkFrequencyDisplayMargins.TabIndex = 24
         '
         'ucrPnlSummaryFrequencyTables
         '
         Me.ucrPnlSummaryFrequencyTables.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlSummaryFrequencyTables.Location = New System.Drawing.Point(66, 4)
-        Me.ucrPnlSummaryFrequencyTables.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlSummaryFrequencyTables.Location = New System.Drawing.Point(44, 3)
+        Me.ucrPnlSummaryFrequencyTables.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlSummaryFrequencyTables.Name = "ucrPnlSummaryFrequencyTables"
-        Me.ucrPnlSummaryFrequencyTables.Size = New System.Drawing.Size(610, 50)
+        Me.ucrPnlSummaryFrequencyTables.Size = New System.Drawing.Size(407, 33)
         Me.ucrPnlSummaryFrequencyTables.TabIndex = 20
         '
         'ucrInputMarginName
@@ -443,80 +420,80 @@ Partial Class dlgSummaryTables
         Me.ucrInputMarginName.AutoSize = True
         Me.ucrInputMarginName.IsMultiline = False
         Me.ucrInputMarginName.IsReadOnly = False
-        Me.ucrInputMarginName.Location = New System.Drawing.Point(309, 428)
-        Me.ucrInputMarginName.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputMarginName.Location = New System.Drawing.Point(206, 285)
+        Me.ucrInputMarginName.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputMarginName.Name = "ucrInputMarginName"
-        Me.ucrInputMarginName.Size = New System.Drawing.Size(111, 32)
+        Me.ucrInputMarginName.Size = New System.Drawing.Size(74, 21)
         Me.ucrInputMarginName.TabIndex = 16
         '
         'ucrSaveTable
         '
         Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTable.Location = New System.Drawing.Point(15, 735)
-        Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrSaveTable.Location = New System.Drawing.Point(10, 490)
+        Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTable.Name = "ucrSaveTable"
-        Me.ucrSaveTable.Size = New System.Drawing.Size(478, 36)
+        Me.ucrSaveTable.Size = New System.Drawing.Size(319, 24)
         Me.ucrSaveTable.TabIndex = 12
         '
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(15, 399)
-        Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 266)
+        Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(228, 34)
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(152, 23)
         Me.ucrChkOmitMissing.TabIndex = 9
         '
         'ucrChkStoreResults
         '
         Me.ucrChkStoreResults.AutoSize = True
         Me.ucrChkStoreResults.Checked = False
-        Me.ucrChkStoreResults.Location = New System.Drawing.Point(15, 328)
-        Me.ucrChkStoreResults.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkStoreResults.Location = New System.Drawing.Point(10, 219)
+        Me.ucrChkStoreResults.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(345, 34)
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(230, 23)
         Me.ucrChkStoreResults.TabIndex = 8
         '
         'ucrChkDisplayMargins
         '
         Me.ucrChkDisplayMargins.AutoSize = True
         Me.ucrChkDisplayMargins.Checked = False
-        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(15, 430)
-        Me.ucrChkDisplayMargins.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(10, 287)
+        Me.ucrChkDisplayMargins.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
-        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(225, 34)
+        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(150, 23)
         Me.ucrChkDisplayMargins.TabIndex = 10
         '
         'ucrChkSummaries
         '
         Me.ucrChkSummaries.AutoSize = True
         Me.ucrChkSummaries.Checked = False
-        Me.ucrChkSummaries.Location = New System.Drawing.Point(15, 366)
-        Me.ucrChkSummaries.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkSummaries.Location = New System.Drawing.Point(10, 244)
+        Me.ucrChkSummaries.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkSummaries.Name = "ucrChkSummaries"
-        Me.ucrChkSummaries.Size = New System.Drawing.Size(363, 34)
+        Me.ucrChkSummaries.Size = New System.Drawing.Size(242, 23)
         Me.ucrChkSummaries.TabIndex = 7
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(15, 776)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 517)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
         '
         'ucrReceiverSummaryCols
         '
         Me.ucrReceiverSummaryCols.AutoSize = True
         Me.ucrReceiverSummaryCols.frmParent = Me
-        Me.ucrReceiverSummaryCols.Location = New System.Drawing.Point(429, 267)
+        Me.ucrReceiverSummaryCols.Location = New System.Drawing.Point(286, 178)
         Me.ucrReceiverSummaryCols.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSummaryCols.Name = "ucrReceiverSummaryCols"
         Me.ucrReceiverSummaryCols.Selector = Nothing
-        Me.ucrReceiverSummaryCols.Size = New System.Drawing.Size(180, 150)
+        Me.ucrReceiverSummaryCols.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverSummaryCols.strNcFilePath = ""
         Me.ucrReceiverSummaryCols.TabIndex = 4
         Me.ucrReceiverSummaryCols.ucrSelector = Nothing
@@ -525,11 +502,11 @@ Partial Class dlgSummaryTables
         '
         Me.ucrReceiverFactors.AutoSize = True
         Me.ucrReceiverFactors.frmParent = Me
-        Me.ucrReceiverFactors.Location = New System.Drawing.Point(429, 88)
+        Me.ucrReceiverFactors.Location = New System.Drawing.Point(286, 59)
         Me.ucrReceiverFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactors.Name = "ucrReceiverFactors"
         Me.ucrReceiverFactors.Selector = Nothing
-        Me.ucrReceiverFactors.Size = New System.Drawing.Size(180, 150)
+        Me.ucrReceiverFactors.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverFactors.strNcFilePath = ""
         Me.ucrReceiverFactors.TabIndex = 2
         Me.ucrReceiverFactors.ucrSelector = Nothing
@@ -538,11 +515,11 @@ Partial Class dlgSummaryTables
         '
         Me.ucrReceiverWeights.AutoSize = True
         Me.ucrReceiverWeights.frmParent = Me
-        Me.ucrReceiverWeights.Location = New System.Drawing.Point(164, 333)
+        Me.ucrReceiverWeights.Location = New System.Drawing.Point(109, 222)
         Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
-        Me.ucrReceiverWeights.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWeights.strNcFilePath = ""
         Me.ucrReceiverWeights.TabIndex = 6
         Me.ucrReceiverWeights.ucrSelector = Nothing
@@ -551,10 +528,10 @@ Partial Class dlgSummaryTables
         '
         Me.ucrChkWeight.AutoSize = True
         Me.ucrChkWeight.Checked = False
-        Me.ucrChkWeight.Location = New System.Drawing.Point(15, 333)
-        Me.ucrChkWeight.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkWeight.Location = New System.Drawing.Point(10, 222)
+        Me.ucrChkWeight.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkWeight.Name = "ucrChkWeight"
-        Me.ucrChkWeight.Size = New System.Drawing.Size(126, 34)
+        Me.ucrChkWeight.Size = New System.Drawing.Size(84, 23)
         Me.ucrChkWeight.TabIndex = 5
         '
         'ucrInputFrequencyMarginName
@@ -563,10 +540,10 @@ Partial Class dlgSummaryTables
         Me.ucrInputFrequencyMarginName.AutoSize = True
         Me.ucrInputFrequencyMarginName.IsMultiline = False
         Me.ucrInputFrequencyMarginName.IsReadOnly = False
-        Me.ucrInputFrequencyMarginName.Location = New System.Drawing.Point(138, 406)
-        Me.ucrInputFrequencyMarginName.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputFrequencyMarginName.Location = New System.Drawing.Point(92, 271)
+        Me.ucrInputFrequencyMarginName.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputFrequencyMarginName.Name = "ucrInputFrequencyMarginName"
-        Me.ucrInputFrequencyMarginName.Size = New System.Drawing.Size(105, 32)
+        Me.ucrInputFrequencyMarginName.Size = New System.Drawing.Size(70, 21)
         Me.ucrInputFrequencyMarginName.TabIndex = 26
         '
         'rdoMultipleResponse
@@ -578,10 +555,9 @@ Partial Class dlgSummaryTables
         Me.rdoMultipleResponse.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMultipleResponse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMultipleResponse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultipleResponse.Location = New System.Drawing.Point(464, 10)
-        Me.rdoMultipleResponse.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoMultipleResponse.Location = New System.Drawing.Point(309, 7)
         Me.rdoMultipleResponse.Name = "rdoMultipleResponse"
-        Me.rdoMultipleResponse.Size = New System.Drawing.Size(200, 40)
+        Me.rdoMultipleResponse.Size = New System.Drawing.Size(133, 27)
         Me.rdoMultipleResponse.TabIndex = 28
         Me.rdoMultipleResponse.TabStop = True
         Me.rdoMultipleResponse.Text = "Multiple Response"
@@ -592,10 +568,10 @@ Partial Class dlgSummaryTables
         'ucrReorderSummary
         '
         Me.ucrReorderSummary.AutoSize = True
-        Me.ucrReorderSummary.Location = New System.Drawing.Point(429, 458)
-        Me.ucrReorderSummary.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrReorderSummary.Location = New System.Drawing.Point(286, 305)
+        Me.ucrReorderSummary.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrReorderSummary.Name = "ucrReorderSummary"
-        Me.ucrReorderSummary.Size = New System.Drawing.Size(300, 234)
+        Me.ucrReorderSummary.Size = New System.Drawing.Size(200, 156)
         Me.ucrReorderSummary.TabIndex = 18
         Me.ucrReorderSummary.ucrDataFrameList = Nothing
         Me.ucrReorderSummary.ucrReceiver = Nothing
@@ -606,10 +582,10 @@ Partial Class dlgSummaryTables
         Me.ucrSelectorSummaryTables.bDropUnusedFilterLevels = False
         Me.ucrSelectorSummaryTables.bShowHiddenColumns = False
         Me.ucrSelectorSummaryTables.bUseCurrentFilter = True
-        Me.ucrSelectorSummaryTables.Location = New System.Drawing.Point(15, 45)
+        Me.ucrSelectorSummaryTables.Location = New System.Drawing.Point(10, 30)
         Me.ucrSelectorSummaryTables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSummaryTables.Name = "ucrSelectorSummaryTables"
-        Me.ucrSelectorSummaryTables.Size = New System.Drawing.Size(320, 274)
+        Me.ucrSelectorSummaryTables.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorSummaryTables.TabIndex = 0
         '
         'ucrNudSigFigs
@@ -617,12 +593,12 @@ Partial Class dlgSummaryTables
         Me.ucrNudSigFigs.AutoSize = True
         Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSigFigs.Location = New System.Drawing.Point(177, 534)
-        Me.ucrNudSigFigs.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrNudSigFigs.Location = New System.Drawing.Point(118, 356)
+        Me.ucrNudSigFigs.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
-        Me.ucrNudSigFigs.Size = New System.Drawing.Size(75, 30)
+        Me.ucrNudSigFigs.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudSigFigs.TabIndex = 30
         Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -630,10 +606,9 @@ Partial Class dlgSummaryTables
         '
         Me.lblSigFigs.AutoSize = True
         Me.lblSigFigs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSigFigs.Location = New System.Drawing.Point(22, 538)
-        Me.lblSigFigs.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSigFigs.Location = New System.Drawing.Point(15, 359)
         Me.lblSigFigs.Name = "lblSigFigs"
-        Me.lblSigFigs.Size = New System.Drawing.Size(144, 20)
+        Me.lblSigFigs.Size = New System.Drawing.Size(96, 13)
         Me.lblSigFigs.TabIndex = 29
         Me.lblSigFigs.Tag = "Significant_Figures:"
         Me.lblSigFigs.Text = "Significant Figures:"
@@ -643,12 +618,12 @@ Partial Class dlgSummaryTables
         Me.ucrNudColFactors.AutoSize = True
         Me.ucrNudColFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudColFactors.Location = New System.Drawing.Point(178, 570)
-        Me.ucrNudColFactors.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrNudColFactors.Location = New System.Drawing.Point(119, 304)
+        Me.ucrNudColFactors.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudColFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudColFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColFactors.Name = "ucrNudColFactors"
-        Me.ucrNudColFactors.Size = New System.Drawing.Size(75, 30)
+        Me.ucrNudColFactors.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudColFactors.TabIndex = 31
         Me.ucrNudColFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -656,20 +631,19 @@ Partial Class dlgSummaryTables
         '
         Me.lblColumnFactors.AutoSize = True
         Me.lblColumnFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColumnFactors.Location = New System.Drawing.Point(35, 570)
-        Me.lblColumnFactors.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblColumnFactors.Location = New System.Drawing.Point(23, 307)
         Me.lblColumnFactors.Name = "lblColumnFactors"
-        Me.lblColumnFactors.Size = New System.Drawing.Size(125, 20)
+        Me.lblColumnFactors.Size = New System.Drawing.Size(83, 13)
         Me.lblColumnFactors.TabIndex = 32
         Me.lblColumnFactors.Tag = "Significant_Figures:"
         Me.lblColumnFactors.Text = "Column Factors:"
         '
         'dlgSummaryTables
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(734, 856)
+        Me.ClientSize = New System.Drawing.Size(489, 467)
         Me.Controls.Add(Me.lblColumnFactors)
         Me.Controls.Add(Me.ucrNudColFactors)
         Me.Controls.Add(Me.ucrNudSigFigs)
@@ -704,7 +678,6 @@ Partial Class dlgSummaryTables
         Me.Controls.Add(Me.lblFrequencyMarginName)
         Me.Controls.Add(Me.ucrInputFrequencyMarginName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSummaryTables"
