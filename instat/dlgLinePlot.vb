@@ -105,6 +105,7 @@ Public Class dlgLinePlot
         Dim dctColourOptions As New Dictionary(Of String, String)
         Dim dctSlopeLineColourOptions As New Dictionary(Of String, String)
         Dim dctLegendPosition As New Dictionary(Of String, String)
+        Dim dctSlopePosition As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -394,8 +395,17 @@ Public Class dlgLinePlot
         ucrChkSlopeLineOptions.AddParameterPresentCondition(False, "line_colour", False)
 
         ucrChkSlopeLegend.SetText("Legend")
-        ucrChkSlopeLegend.AddParameterPresentCondition(True, "slopetheme")
-        ucrChkSlopeLegend.AddParameterPresentCondition(False, "slopetheme", False)
+        ucrChkSlopeLegend.AddToLinkedControls({ucrInputSlopeLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrInputSlopeLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputSlopeLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctSlopePosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctSlopePosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctSlopePosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctSlopePosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctSlopePosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputSlopeLegendPosition.SetItems(dctSlopePosition)
+        ucrChkSlopeLegend.AddParameterPresentCondition(True, "legend.position")
+        ucrChkSlopeLegend.AddParameterPresentCondition(False, "legend.position", False)
 
         ucrChkLegend.SetText("Legend:")
         ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
@@ -669,6 +679,7 @@ Public Class dlgLinePlot
         ucrChkSlopeLineOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputSlopeLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         If bReset Then
             ucrInputMethod.SetRCode(clsGeomSmoothFunction, bReset)
             ucrChkRibbon.SetRCode(clsBaseOperator, bReset)
@@ -860,6 +871,7 @@ Public Class dlgLinePlot
     Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
         AddRemoveTheme()
     End Sub
+
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click, PlotOptionsToolStripMenuItem.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
@@ -1195,6 +1207,8 @@ Public Class dlgLinePlot
 
     Private Sub AddRemoveSlopeGraph()
         If rdoSlope.Checked Then
+            ucrChkLegend.Enabled = False
+            ucrInputLegendPosition.Enabled = False
             If ucrChkSlopeLegend.Checked Then
                 clsBaseOperator.RemoveParameterByName("slopetheme")
             Else
@@ -1277,5 +1291,9 @@ Public Class dlgLinePlot
 
     Private Sub ucrChkAddLineLineRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLineLineRange.ControlValueChanged
         AddRemoveLineOnLineRange()
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged, ucrReceiverYMax.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
+
     End Sub
 End Class
