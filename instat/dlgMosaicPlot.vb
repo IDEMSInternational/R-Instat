@@ -390,6 +390,8 @@ Public Class dlgMosaicPlot
 
         If bWrap OrElse bRow OrElse bCol Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("facets")
         End If
         If bWrap Then
             clsFacetFunction.SetRCommand("facet_wrap")
