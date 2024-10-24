@@ -394,7 +394,6 @@ Public Class dlgLinePlot
         ucrChkSlopeLineOptions.AddParameterPresentCondition(True, "line_colour")
         ucrChkSlopeLineOptions.AddParameterPresentCondition(False, "line_colour", False)
 
-
         ucrChkLegend.SetText("Legend:")
         ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
@@ -667,7 +666,6 @@ Public Class dlgLinePlot
         ucrChkSlopeLineOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
-        'ucrInputSlopeLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         If bReset Then
             ucrInputMethod.SetRCode(clsGeomSmoothFunction, bReset)
             ucrChkRibbon.SetRCode(clsBaseOperator, bReset)
