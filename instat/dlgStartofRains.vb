@@ -1010,11 +1010,12 @@ Public Class dlgStartofRains
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         GroupByStationOptions()
+        YearStationVariable()
     End Sub
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
         GroupByYearOptions()
-        YearVariable()
+        YearStationVariable()
     End Sub
 
     Private Sub ucrSelectorForStartofRains_DataFrameChanged() Handles ucrSelectorForStartofRains.DataFrameChanged
@@ -1196,9 +1197,14 @@ Public Class dlgStartofRains
         End If
     End Sub
 
-    Private Sub YearVariable()
+    Private Sub YearStationVariable()
         If Not ucrReceiverYear.IsEmpty Then
             clsVectorFunction.AddParameter("x", ucrReceiverYear.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
+            If Not ucrReceiverStation.IsEmpty Then
+                clsVectorFunction.AddParameter("y", ucrReceiverStation.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                clsVectorFunction.RemoveParameterByName("y")
+            End If
             clsGetlinkeddataFunction.AddParameter("link_cols", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
         Else
             clsGetlinkeddataFunction.RemoveParameterByName("link_cols")
