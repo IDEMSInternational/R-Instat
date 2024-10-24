@@ -394,18 +394,6 @@ Public Class dlgLinePlot
         ucrChkSlopeLineOptions.AddParameterPresentCondition(True, "line_colour")
         ucrChkSlopeLineOptions.AddParameterPresentCondition(False, "line_colour", False)
 
-        ucrChkSlopeLegend.SetText("Legend")
-        ucrChkSlopeLegend.AddToLinkedControls({ucrInputSlopeLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
-        ucrInputSlopeLegendPosition.SetDropDownStyleAsNonEditable()
-        ucrInputSlopeLegendPosition.SetParameter(New RParameter("legend.position"))
-        dctSlopePosition.Add("None", Chr(34) & "none" & Chr(34))
-        dctSlopePosition.Add("Left", Chr(34) & "left" & Chr(34))
-        dctSlopePosition.Add("Right", Chr(34) & "right" & Chr(34))
-        dctSlopePosition.Add("Top", Chr(34) & "top" & Chr(34))
-        dctSlopePosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
-        ucrInputSlopeLegendPosition.SetItems(dctSlopePosition)
-        ucrChkSlopeLegend.AddParameterPresentCondition(True, "legend.position")
-        ucrChkSlopeLegend.AddParameterPresentCondition(False, "legend.position", False)
 
         ucrChkLegend.SetText("Legend:")
         ucrChkLegend.AddToLinkedControls({ucrInputLegendPosition}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
@@ -443,7 +431,7 @@ Public Class dlgLinePlot
         ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeY}, {rdoDumbbell, rdoSlope, rdoLinerange}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX}, {rdoLine, rdoDumbbell, rdoSmoothing, rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrVariablesAsFactorForLinePlot}, {rdoLine, rdoSmoothing}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeX, ucrReceiverSlopeColour, ucrChkSlopeLabelOptions, ucrChkSlopeTextOptions, ucrChkSlopeLineOptions, ucrChkSlopeLegend}, {rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverSlopeX, ucrReceiverSlopeColour, ucrChkSlopeLabelOptions, ucrChkSlopeTextOptions, ucrChkSlopeLineOptions}, {rdoSlope}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverYMax, ucrChkAddLineLineRange, ucrReceiverYMin, ucrChkRibbon}, {rdoLinerange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellX}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Orange")
         ucrChkDumbbellColour.AddToLinkedControls({ucrInputDumbbellXEnd}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Blue")
@@ -679,7 +667,7 @@ Public Class dlgLinePlot
         ucrChkSlopeLineOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputSlopeLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        'ucrInputSlopeLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         If bReset Then
             ucrInputMethod.SetRCode(clsGeomSmoothFunction, bReset)
             ucrChkRibbon.SetRCode(clsBaseOperator, bReset)
@@ -812,7 +800,6 @@ Public Class dlgLinePlot
         AddRemoveFormula()
         AddRemoveGeomLine()
         AddRemoveLineRange()
-        AddRemoveSlopeGraph()
         AddRemoveMethodArgs()
         AddRemoveLine()
         AddRemoveSE()
@@ -869,7 +856,14 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
-        AddRemoveTheme()
+        If rdoSlope.Checked Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=-1)
+            clsThemeFunction.AddParameter("legend.position", Chr(34) & ucrInputLegendPosition.GetValueToSet & Chr(34), iPosition:=1)
+            clsBaseOperator.RemoveParameterByName("c")
+        Else
+            AddRemoveTheme()
+            clsBaseOperator.RemoveParameterByName("slopetheme")
+        End If
     End Sub
 
 
@@ -1203,24 +1197,6 @@ Public Class dlgLinePlot
 
     Private Sub ucrChkRibbon_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRibbon.ControlValueChanged, ucrPnlLinerangeOptions.ControlValueChanged
         AddRemoveLineRange()
-    End Sub
-
-    Private Sub AddRemoveSlopeGraph()
-        If rdoSlope.Checked Then
-            ucrChkLegend.Enabled = False
-            ucrInputLegendPosition.Enabled = False
-            If ucrChkSlopeLegend.Checked Then
-                clsBaseOperator.RemoveParameterByName("slopetheme")
-            Else
-                clsBaseOperator.AddParameter("slopetheme", clsRFunctionParameter:=clsSlopeThemeFunction, iPosition:=-1)
-            End If
-        Else
-            clsBaseOperator.RemoveParameterByName("slopetheme")
-        End If
-    End Sub
-
-    Private Sub ucrChkSlopeLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSlopeLegend.ControlValueChanged
-        AddRemoveSlopeGraph()
     End Sub
 
     Private Sub AddRemoveLine()
