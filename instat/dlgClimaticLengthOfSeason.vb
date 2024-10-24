@@ -70,7 +70,6 @@ Public Class dlgClimaticLengthOfSeason
         ucrInputLengthofSeason.SetDataFrameSelector(ucrSelectorLengthofSeason.ucrAvailableDataFrames)
         ucrInputLengthofSeason.SetName("Length")
 
-
         ucrChkType.AddParameterPresentCondition(True, "sub2", True)
         ucrChkType.AddParameterPresentCondition(False, "sub2", False)
         ucrChkType.AddToLinkedControls(ucrInputTextType, {True}, bNewLinkedHideIfParameterMissing:=True)
@@ -216,6 +215,7 @@ Public Class dlgClimaticLengthOfSeason
         clsApplyInstatCalcFunction.AddParameter("display", "FALSE", iPosition:=1)
 
         'Base Function
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatCalcFunction)
     End Sub
 
