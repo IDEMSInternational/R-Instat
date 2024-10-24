@@ -357,7 +357,7 @@ Partial Class dlgStartofRains
         '
         Me.ucrReceiverEvap.AutoSize = True
         Me.ucrReceiverEvap.frmParent = Me
-        Me.ucrReceiverEvap.Location = New System.Drawing.Point(210, 81)
+        Me.ucrReceiverEvap.Location = New System.Drawing.Point(289, 81)
         Me.ucrReceiverEvap.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEvap.Name = "ucrReceiverEvap"
         Me.ucrReceiverEvap.Selector = Nothing
@@ -369,7 +369,7 @@ Partial Class dlgStartofRains
         'lblFraction
         '
         Me.lblFraction.AutoSize = True
-        Me.lblFraction.Location = New System.Drawing.Point(349, 83)
+        Me.lblFraction.Location = New System.Drawing.Point(428, 83)
         Me.lblFraction.Name = "lblFraction"
         Me.lblFraction.Size = New System.Drawing.Size(48, 13)
         Me.lblFraction.TabIndex = 25
@@ -380,7 +380,7 @@ Partial Class dlgStartofRains
         Me.ucrNudEvapo.AutoSize = True
         Me.ucrNudEvapo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudEvapo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudEvapo.Location = New System.Drawing.Point(414, 78)
+        Me.ucrNudEvapo.Location = New System.Drawing.Point(493, 78)
         Me.ucrNudEvapo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudEvapo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudEvapo.Name = "ucrNudEvapo"
@@ -391,7 +391,7 @@ Partial Class dlgStartofRains
         'rdoEvapo
         '
         Me.rdoEvapo.AutoSize = True
-        Me.rdoEvapo.Location = New System.Drawing.Point(120, 83)
+        Me.rdoEvapo.Location = New System.Drawing.Point(199, 83)
         Me.rdoEvapo.Name = "rdoEvapo"
         Me.rdoEvapo.Size = New System.Drawing.Size(82, 17)
         Me.rdoEvapo.TabIndex = 23
@@ -427,7 +427,7 @@ Partial Class dlgStartofRains
         Me.ucrNudTRAmount.AutoSize = True
         Me.ucrNudTRAmount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTRAmount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTRAmount.Location = New System.Drawing.Point(210, 58)
+        Me.ucrNudTRAmount.Location = New System.Drawing.Point(289, 58)
         Me.ucrNudTRAmount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTRAmount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTRAmount.Name = "ucrNudTRAmount"
@@ -458,7 +458,7 @@ Partial Class dlgStartofRains
         Me.ucrNudTRPercentile.AutoSize = True
         Me.ucrNudTRPercentile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTRPercentile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTRPercentile.Location = New System.Drawing.Point(210, 109)
+        Me.ucrNudTRPercentile.Location = New System.Drawing.Point(289, 109)
         Me.ucrNudTRPercentile.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTRPercentile.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTRPercentile.Name = "ucrNudTRPercentile"
@@ -469,7 +469,7 @@ Partial Class dlgStartofRains
         'rdoTRAmount
         '
         Me.rdoTRAmount.AutoSize = True
-        Me.rdoTRAmount.Location = New System.Drawing.Point(120, 60)
+        Me.rdoTRAmount.Location = New System.Drawing.Point(199, 60)
         Me.rdoTRAmount.Name = "rdoTRAmount"
         Me.rdoTRAmount.Size = New System.Drawing.Size(61, 17)
         Me.rdoTRAmount.TabIndex = 21
@@ -480,7 +480,7 @@ Partial Class dlgStartofRains
         'rdoTRPercentile
         '
         Me.rdoTRPercentile.AutoSize = True
-        Me.rdoTRPercentile.Location = New System.Drawing.Point(120, 109)
+        Me.rdoTRPercentile.Location = New System.Drawing.Point(199, 109)
         Me.rdoTRPercentile.Name = "rdoTRPercentile"
         Me.rdoTRPercentile.Size = New System.Drawing.Size(72, 17)
         Me.rdoTRPercentile.TabIndex = 27
@@ -491,7 +491,7 @@ Partial Class dlgStartofRains
         'ucrPnlTRCalculateBy
         '
         Me.ucrPnlTRCalculateBy.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlTRCalculateBy.Location = New System.Drawing.Point(51, 55)
+        Me.ucrPnlTRCalculateBy.Location = New System.Drawing.Point(130, 55)
         Me.ucrPnlTRCalculateBy.Name = "ucrPnlTRCalculateBy"
         Me.ucrPnlTRCalculateBy.Size = New System.Drawing.Size(165, 75)
         Me.ucrPnlTRCalculateBy.TabIndex = 4
