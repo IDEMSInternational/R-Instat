@@ -48,6 +48,8 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub InitialiseDialog()
+        'Dim Maxval As Integer = ucrReceiverFactors.GetVariableNames().Count()
+
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -127,8 +129,6 @@ Public Class dlgSummaryTables
         ucrNudSigFigs.SetRDefault(2)
 
         ucrNudColFactors.SetLinkedDisplayControl(lblColumnFactors)
-        ucrNudColFactors.SetMinMax(iNewMin:=0)
-        ucrNudColFactors.Increment = 1
 
         ucrChkWeight.SetText("Weights")
         ucrChkWeight.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
@@ -205,7 +205,7 @@ Public Class dlgSummaryTables
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
-        ucrNudColFactors.SetText(1)
+        'ucrNudColFactors.SetText(1)
 
         ucrBase.clsRsyntax.GetBeforeCodes().Clear()
 
@@ -258,6 +258,7 @@ Public Class dlgSummaryTables
         clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
+
         clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -275,7 +276,6 @@ Public Class dlgSummaryTables
         ucrChkStoreResults.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrChkStoreResults.GetParameter, iAdditionalPairNo:=1)
         ucrNudSigFigs.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrNudSigFigs.GetParameter, iAdditionalPairNo:=1)
         ucrReceiverFactors.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrReceiverFactors.GetParameter, iAdditionalPairNo:=1)
-        ucrNudColFactors.AddAdditionalCodeParameterPair(clsFrequencyDefaultFunction, ucrNudColFactors.GetParameter, iAdditionalPairNo:=1)
 
         ucrSelectorSummaryTables.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryDefaultFunction, bReset)
@@ -293,6 +293,7 @@ Public Class dlgSummaryTables
         If bReset Then
             ucrReceiverSummaryCols.SetRCode(clsSummaryDefaultFunction, bReset)
             ucrReceiverFactors.SetRCode(clsSummaryDefaultFunction, bReset)
+            ucrNudColFactors.SetRCode(clsFrequencyDefaultFunction, bReset)
         End If
         bRCodeSet = True
         FillListView()
@@ -316,7 +317,11 @@ Public Class dlgSummaryTables
         End If
 
     End Sub
+    Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
+        sdgTableOptions.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsJoiningPipeOperator)
+        sdgTableOptions.ShowDialog(Me)
 
+    End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -403,28 +408,28 @@ Public Class dlgSummaryTables
                 clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=2)
             Else
                 clsFrequencyOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
-                    clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
-                    If rdoFactorVariable.Checked Then
-                        ucrReceiverColumnFactor.SetMeAsReceiver()
-                        clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=2)
-                        clsPivotWiderFunction.AddParameter("names_from", ucrReceiverColumnFactor.GetVariableNames(False), iPosition:=0)
-                    ElseIf rdoSummaryVariable.Checked Then
-                        clsDummyFunction.AddParameter("factor_cols", "SumVar", iPosition:=2)
+                clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+                If rdoFactorVariable.Checked Then
+                    ucrReceiverColumnFactor.SetMeAsReceiver()
+                    clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=2)
+                    clsPivotWiderFunction.AddParameter("names_from", ucrReceiverColumnFactor.GetVariableNames(False), iPosition:=0)
+                ElseIf rdoSummaryVariable.Checked Then
+                    clsDummyFunction.AddParameter("factor_cols", "SumVar", iPosition:=2)
                     If rdoFrequencyTable.Checked Then
                         varsString()
                     Else
                         If ucrChkSummaries.Checked Then
-                                clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
-                            Else
-                                clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
-                            End If
+                            clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
+                        Else
+                            clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
                         End If
-                    ElseIf rdoVariable.Checked Then
-                        clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=2)
-                        clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
                     End If
+                ElseIf rdoVariable.Checked Then
+                    clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=2)
+                    clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
                 End If
             End If
+        End If
 
         If rdoVariable.Checked Then
             If Not ucrChkSummaries.Checked Then
@@ -479,17 +484,17 @@ Public Class dlgSummaryTables
 
     Private Sub DialogueSize()
         If rdoFrequencyTable.Checked Then
-            Me.Size = New Size(505, iDialogueXsize * 0.75)
-            Me.ucrNudSigFigs.Location = New Point(119, 274)
-            Me.lblSigFigs.Location = New Point(7, 277)
-            Me.ucrSaveTable.Location = New Point(10, 340)
-            Me.ucrBase.Location = New Point(iUcrBaseXLocation, 370)
+            Me.Size = New Size(505, iDialogueXsize * 0.6)
+            Me.ucrNudSigFigs.Location = New Point(119, 309)
+            Me.lblSigFigs.Location = New Point(7, 312)
+            Me.ucrSaveTable.Location = New Point(10, 360)
+            Me.ucrBase.Location = New Point(iUcrBaseXLocation, 390)
         Else
             Me.Size = New Size(505, iDialogueXsize)
-            Me.ucrNudSigFigs.Location = New Point(119, 356)
-            Me.lblSigFigs.Location = New Point(7, 359)
-            Me.ucrSaveTable.Location = New Point(10, 495)
-            Me.ucrBase.Location = New Point(iUcrBaseXLocation, 524)
+            Me.ucrNudSigFigs.Location = New Point(119, 376)
+            Me.lblSigFigs.Location = New Point(7, 379)
+            Me.ucrSaveTable.Location = New Point(10, 520)
+            Me.ucrBase.Location = New Point(iUcrBaseXLocation, 544)
         End If
     End Sub
 
@@ -514,6 +519,31 @@ Public Class dlgSummaryTables
 
             ' Pass the selected variables to the clsPivotWiderFunction's names_from parameter
             clsPivotWiderFunction.AddParameter("names_from", varsString, iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverFactors_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactors.SelectionChanged
+        ' Get the total count of selected variables in the ucrReceiverFactors
+        Dim selectedVariables As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList ' Example, adjust based on your control
+        Dim selectedCount As Integer = selectedVariables.Count
+        ' Ensure ucrNudColFactors.Maximum does not exceed the number of selected variables
+        If selectedCount > 0 Then
+            ' Set Maximum based on the number of variables in the receiver
+            ucrNudColFactors.Maximum = selectedCount
+
+            ' Ensure the current Value does not exceed the Maximum
+            If ucrNudColFactors.Value > selectedCount Then
+                ucrNudColFactors.Value = selectedCount ' Adjust value to the max if it exceeds
+            End If
+
+            ' Set Minimum (if applicable)
+            ucrNudColFactors.Minimum = 1
+
+        Else
+            ' If no variables are selected, set Minimum, Maximum, and Value to 1
+            ucrNudColFactors.Minimum = 1
+            ucrNudColFactors.Maximum = 1
+            ucrNudColFactors.Value = 1
         End If
     End Sub
 
@@ -543,5 +573,4 @@ Public Class dlgSummaryTables
             End If
         End If
     End Sub
-
 End Class
