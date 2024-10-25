@@ -78,7 +78,7 @@ Partial Class dlgClimaticLengthOfSeason
         '
         Me.ucrChkType.AutoSize = True
         Me.ucrChkType.Checked = False
-        Me.ucrChkType.Location = New System.Drawing.Point(5, 285)
+        Me.ucrChkType.Location = New System.Drawing.Point(5, 279)
         Me.ucrChkType.Name = "ucrChkType"
         Me.ucrChkType.Size = New System.Drawing.Size(87, 23)
         Me.ucrChkType.TabIndex = 11
@@ -98,7 +98,7 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrInputTextType.AutoSize = True
         Me.ucrInputTextType.IsMultiline = False
         Me.ucrInputTextType.IsReadOnly = False
-        Me.ucrInputTextType.Location = New System.Drawing.Point(97, 284)
+        Me.ucrInputTextType.Location = New System.Drawing.Point(149, 278)
         Me.ucrInputTextType.Name = "ucrInputTextType"
         Me.ucrInputTextType.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputTextType.TabIndex = 12
@@ -184,7 +184,7 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(5, 311)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 13
         '
         'dlgClimaticLengthOfSeason
