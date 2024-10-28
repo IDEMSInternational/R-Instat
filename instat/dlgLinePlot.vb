@@ -664,8 +664,7 @@ Public Class dlgLinePlot
         ucrChkSlopeLabelOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkSlopeTextOptions.SetRCode(clsGgSlopeFunction, bReset)
         ucrChkSlopeLineOptions.SetRCode(clsGgSlopeFunction, bReset)
-        ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+
         If bReset Then
             ucrInputMethod.SetRCode(clsGeomSmoothFunction, bReset)
             ucrChkRibbon.SetRCode(clsBaseOperator, bReset)
@@ -675,6 +674,8 @@ Public Class dlgLinePlot
             ucrChkAddLineLineRange.SetRCode(clsBaseOperator, bReset)
             ucrChkAddLine.SetRCode(clsBaseOperator, bReset)
             ucrChkSpan.SetRCode(clsGeomSmoothFunction, bReset)
+            ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         End If
         SetGroupParam()
     End Sub
@@ -855,12 +856,17 @@ Public Class dlgLinePlot
 
     Private Sub ucrChkLegend_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegend.ControlValueChanged, ucrInputLegendPosition.ControlValueChanged
         If rdoSlope.Checked Then
-            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=-1)
-            clsThemeFunction.AddParameter("legend.position", Chr(34) & ucrInputLegendPosition.GetValueToSet & Chr(34), iPosition:=1)
-            clsBaseOperator.RemoveParameterByName("c")
-        Else
+            If ucrChkLegend.Checked Then
+                clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=-1)
+                clsThemeFunction.AddParameter("legend.position", Chr(34) & ucrInputLegendPosition.GetValueToSet & Chr(34), iPosition:=1)
+                clsBaseOperator.RemoveParameterByName("c")
+            Else
+                clsBaseOperator.RemoveParameterByName("theme")
+                clsBaseOperator.RemoveParameterByName("slopetheme")
+            End If
+        End If
+        If rdoLine.Checked AndAlso rdoLinerange.Checked AndAlso rdoSmoothing.Checked AndAlso rdoDumbbell.Checked Then
             AddRemoveTheme()
-            clsBaseOperator.RemoveParameterByName("slopetheme")
         End If
     End Sub
 
