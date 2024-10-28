@@ -281,7 +281,6 @@ Public Class dlgSummaryTables
         ucrChkWeight.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkStoreResults.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkDisplayAsPercentage.SetRCode(clsFrequencyDefaultFunction, bReset)
-        UcrNudColumnSumFactors.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrNudPositionSum.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrNudPositionVar.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
@@ -290,6 +289,7 @@ Public Class dlgSummaryTables
             ucrReceiverFactors.SetRCode(clsSummaryDefaultFunction, bReset)
             ucrNudColFactors.SetRCode(clsFrequencyDefaultFunction, bReset)
             ucrPnlSummaryFrequencyTables.SetRCode(clsDummyFunction, bReset)
+            UcrNudColumnSumFactors.SetRCode(clsSummaryDefaultFunction, bReset)
         End If
         bRCodeSet = True
         FillListView()
@@ -508,11 +508,11 @@ Public Class dlgSummaryTables
             End If
 
             ' Set Minimum (if applicable)
-            ucrNudColFactors.Minimum = 1
+            ucrNudColFactors.Minimum = 0
 
         Else
             ' If no variables are selected, set Minimum, Maximum, and Value to 1
-            ucrNudColFactors.Minimum = 1
+            ucrNudColFactors.Minimum = 0
             ucrNudColFactors.Maximum = 1
             ucrNudColFactors.Value = 1
         End If
@@ -536,7 +536,7 @@ Public Class dlgSummaryTables
         Dim defaultSummaries As Integer = selectedSummaries.Count
 
         If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
-            ucrNudPositionSum.Value = defaultSummaries + 1
+            ucrNudPositionSum.Value = defaultSummaries + 2
         Else
             ucrNudPositionSum.Value = 0
         End If
