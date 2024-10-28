@@ -26,10 +26,11 @@ Public Class dlgEndOfRainsSeason
     Private strEvapReplaceNA As String = "evap_NA_as_value"
     Private strCurrDataName As String = ""
     Private iCapacityDefault As Integer = 60
+    Private strYearType As String = "year_type"
 
 #Region "general_code_structures"
     ' General
-    Private clsRunCalculation, clsListCalFunction, clsDummyFunction As New RFunction
+    Private clsVectorFunction, clsGetlinkeddataFunction, clsConvertColumnType1Function, clsConvertColumnType2Function, clsGetColumnDataTypeFunction, clsConvertColumnTypeFunction, clsRunCalculation, clsListCalFunction, clsDummyFunction As New RFunction
     Private clsFirstOrLastFunction As New RFunction
 
     ' Group by
@@ -139,7 +140,9 @@ Public Class dlgEndOfRainsSeason
 
     ' Doy summary
     Private clsEndSeasonFirstDoySummaryCalc As New RFunction
+    Private clsEndSeasonFirstDoySummaryCalcFilledFunction As New RFunction
     Private clsIfElseFirstDoyFunction As New RFunction
+    Public clsIfElseFirstDoyFilledFunction As New RFunction
     Private clsIsNaFirstWB As New RFunction
     Private clsFirstDoyFunction As New RFunction
     Private clsFirstWBFunction As New RFunction
@@ -354,18 +357,25 @@ Public Class dlgEndOfRainsSeason
         Dim strEndRainsStatus As String = "end_rains_status"
         Dim strEndRainsDate As String = "end_rains_date"
         Dim strEndSeason As String = "end_season"
+        Dim strEndSeasonFilled As String = "end_season_filled"
         Dim strEndSeasonStatus As String = "end_season_status"
         Dim strEndSeasonDate As String = "end_season_date"
         Dim strDoyFilter As String = "doy_filter"
         Dim strEndofRains As String = "end_of_rains_combined"
         Dim strEndofSeason As String = "end_of_season_combined"
 
+        clsGetlinkeddataFunction = New RFunction
+        clsVectorFunction = New RFunction
+
 #Region "clear_code_structures"
         ' General
         clsRunCalculation.Clear()
         clsListCalFunction.Clear()
         clsFirstOrLastFunction.Clear()
-
+        clsConvertColumnTypeFunction.Clear()
+        clsConvertColumnType2Function.Clear()
+        clsGetColumnDataTypeFunction.Clear()
+        clsConvertColumnType1Function.Clear()
         '   Group by
         clsGroupByStationYearCalc.Clear()
         clsGroupByStationCalc.Clear()
@@ -471,7 +481,9 @@ Public Class dlgEndOfRainsSeason
 
         '   Doy summary
         clsEndSeasonFirstDoySummaryCalc.Clear()
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.Clear()
         clsIfElseFirstDoyFunction.Clear()
+        clsIfElseFirstDoyFilledFunction.Clear()
         clsIsNaFirstWB.Clear()
         clsFirstDoyFunction.Clear()
         clsFirstWBFunction.Clear()
@@ -653,8 +665,8 @@ Public Class dlgEndOfRainsSeason
         clsListCalFunction.AddParameter("drop", "FALSE", iPosition:=0)
 
         clsRunCalculation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsRunCalculation.AddParameter("display", "FALSE")
-        clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndRainsCombinationCalc)
+        clsRunCalculation.AddParameter("display", "FALSE", iPosition:=0)
+        clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndRainsCombinationCalc, iPosition:=1)
         clsRunCalculation.AddParameter("param_list", clsRFunctionParameter:=clsListCalFunction, iPosition:=2)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalculation)
@@ -865,11 +877,24 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonFirstDoySummaryCalc.AddParameter("save", "2", iPosition:=6)
         clsEndSeasonFirstDoySummaryCalc.SetAssignTo(strEndSeason)
 
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.SetRCommand("instat_calculation$new")
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseFirstDoyFilledFunction, iPosition:=1)
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("result_name", Chr(34) & strEndSeasonFilled & Chr(34), iPosition:=2)
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("save", "2", iPosition:=6)
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.SetAssignTo(strEndSeasonFilled)
+
         clsIfElseFirstDoyFunction.bToScriptAsRString = True
         clsIfElseFirstDoyFunction.SetRCommand("ifelse")
         clsIfElseFirstDoyFunction.AddParameter("test", clsRFunctionParameter:=clsIsNaFirstWB, iPosition:=0)
         clsIfElseFirstDoyFunction.AddParameter("yes", "NA", iPosition:=1)
         clsIfElseFirstDoyFunction.AddParameter("no", clsRFunctionParameter:=clsFirstDoyFunction, iPosition:=2)
+
+        clsIfElseFirstDoyFilledFunction.bToScriptAsRString = True
+        clsIfElseFirstDoyFilledFunction.SetRCommand("ifelse")
+        clsIfElseFirstDoyFilledFunction.AddParameter("test", clsRFunctionParameter:=clsIsNaFirstWB, iPosition:=0)
+        clsIfElseFirstDoyFilledFunction.AddParameter("yes", "366", iPosition:=1)
+        clsIfElseFirstDoyFilledFunction.AddParameter("no", clsRFunctionParameter:=clsFirstDoyFunction, iPosition:=2)
 
         clsIsNaFirstWB.SetRCommand("is.na")
         clsIsNaFirstWB.AddParameter("x", clsRFunctionParameter:=clsFirstWBFunction, iPosition:=0)
@@ -921,7 +946,31 @@ Public Class dlgEndOfRainsSeason
 
         clsEndSeasonCombinationSubCalcList.SetRCommand("list")
         clsEndSeasonCombinationSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsEndSeasonFirstDoySummaryCalc, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsGetColumnDataTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
+        clsGetColumnDataTypeFunction.SetAssignTo(strYearType)
+
+        clsConvertColumnTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertColumnTypeFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
+
+        clsGetlinkeddataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_linked_to_data_name")
+        clsGetlinkeddataFunction.SetAssignTo("linked_data_name")
+
+        clsVectorFunction.SetRCommand("c")
+
+        clsConvertColumnType2Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertColumnType2Function.AddParameter("data_name", "linked_data_name", iPosition:=0)
+        clsConvertColumnType2Function.AddParameter("to_type", "year_type", iPosition:=2)
+
+        clsConvertColumnType1Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertColumnType1Function.AddParameter("to_type", "year_type", iPosition:=2)
+
 #End Region
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnDataTypeFunction, iPosition:=0)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertColumnTypeFunction, iPosition:=1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsGetlinkeddataFunction, iPosition:=0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType1Function, iPosition:=1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType2Function, iPosition:=2)
 
         clsFirstOrLastFunction = clsLastDoyFunction
     End Sub
@@ -1011,7 +1060,7 @@ Public Class dlgEndOfRainsSeason
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
-        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDoyFilterCalc, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDoyFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
+        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDoyFilterCalc, clsNewDayFromOperator:=clsDayFromOperator, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDoyFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
         sdgDoyRange.ShowDialog()
         UpdateDayFilterPreview()
     End Sub
@@ -1046,6 +1095,7 @@ Public Class dlgEndOfRainsSeason
         clsEndRainsLastDoySummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
         clsEndSeasonFirstDoySummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
         clsEndRainsLastDateSummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDate.GetVariableNames() & ")", iPosition:=3)
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
     End Sub
 
     Private Sub RainfallChange()
@@ -1054,8 +1104,35 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonRainMaxCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=3)
     End Sub
 
+    Private Sub YearStationVariable()
+        If Not ucrReceiverYear.IsEmpty Then
+            clsVectorFunction.AddParameter("x", ucrReceiverYear.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
+            If Not ucrReceiverStation.IsEmpty Then
+                clsVectorFunction.AddParameter("y", ucrReceiverStation.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                clsVectorFunction.RemoveParameterByName("y")
+            End If
+            clsGetlinkeddataFunction.AddParameter("link_cols", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
+        Else
+            clsGetlinkeddataFunction.RemoveParameterByName("link_cols")
+            clsVectorFunction.RemoveParameterByName("x")
+        End If
+    End Sub
+
     Private Sub ucrReceiverStationYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged
         GroupingBy()
+        YearStationVariable()
+        If Not ucrReceiverYear.IsEmpty Then
+            clsGetColumnDataTypeFunction.AddParameter("columns", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+            clsConvertColumnTypeFunction.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+            clsConvertColumnType1Function.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+            clsConvertColumnType2Function.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+        Else
+            clsConvertColumnType1Function.RemoveParameterByName("col_names")
+            clsConvertColumnType2Function.RemoveParameterByName("col_names")
+            clsGetColumnDataTypeFunction.RemoveParameterByName("columns")
+            clsConvertColumnTypeFunction.RemoveParameterByName("col_names")
+        End If
     End Sub
 
     Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorForWaterBalance.ControlValueChanged
@@ -1076,6 +1153,10 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub ucrSelectorForWaterBalance_DataFrameChanged() Handles ucrSelectorForWaterBalance.DataFrameChanged
         clsDoyFilterCalcFromList.ClearParameters()
+        clsGetColumnDataTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertColumnType1Function.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetlinkeddataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub ucrPnlEvaporation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvaporation.ControlValueChanged, ucrReceiverEvaporation.ControlValueChanged, ucrInputEvaporation.ControlValueChanged
@@ -1173,8 +1254,10 @@ Public Class dlgEndOfRainsSeason
     Private Sub ucrChkEndofSeasonDoy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndofSeasonDoy.ControlValueChanged
         If ucrChkEndofSeasonDoy.Checked Then
             clsEndSeasonCombinationSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsEndSeasonFirstDoySummaryCalc, bIncludeArgumentName:=False, iPosition:=0)
+            clsEndSeasonCombinationSubCalcList.AddParameter("sub4", clsRFunctionParameter:=clsEndSeasonFirstDoySummaryCalcFilledFunction, bIncludeArgumentName:=False, iPosition:=3)
         Else
             clsEndSeasonCombinationSubCalcList.RemoveParameterByName("sub1")
+            clsEndSeasonCombinationSubCalcList.RemoveParameterByName("sub4")
         End If
     End Sub
 
