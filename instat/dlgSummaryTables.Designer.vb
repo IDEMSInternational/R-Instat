@@ -127,7 +127,7 @@ Partial Class dlgSummaryTables
         Me.grpDisplay.Size = New System.Drawing.Size(270, 103)
         Me.grpDisplay.TabIndex = 11
         Me.grpDisplay.TabStop = False
-        Me.grpDisplay.Text = "Display Column Factors"
+        Me.grpDisplay.Text = "Layout"
         '
         'ucrReceiverColumnFactor
         '

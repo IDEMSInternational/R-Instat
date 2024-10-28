@@ -83,7 +83,7 @@ Public Class dlgSummaryTables
         ucrReceiverPercentages.SetDataType("factor") ' TODO data this accepts must be in the other receiver too
         ucrReceiverPercentages.SetLinkedDisplayControl(lblFactorsAsPercentage)
 
-        ucrChkStoreResults.SetText("Store Output")
+        ucrChkStoreResults.SetText("Store Summaries")
         ucrChkStoreResults.SetParameter(New RParameter("store_table", 4))
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkStoreResults.SetRDefault("FALSE")
@@ -122,7 +122,8 @@ Public Class dlgSummaryTables
 
         ucrChkSummaries.SetParameter(New RParameter("treat_columns_as_factor", 8))
         ucrChkSummaries.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkSummaries.SetText("Treat Summaries as a Further Factor")
+        ucrChkSummaries.SetText("Drop Unused Levels")
+        ucrChkSummaries.Enabled = False
 
         ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 9))
         ucrNudSigFigs.SetMinMax(0, 22)
