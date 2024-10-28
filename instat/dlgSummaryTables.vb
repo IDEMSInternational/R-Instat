@@ -168,11 +168,11 @@ Public Class dlgSummaryTables
 
         ucrPnlColumnFactor.AddRadioButton(rdoNoColumnFactor)
         ucrPnlColumnFactor.AddRadioButton(rdoFactorVariable)
-        ucrPnlColumnFactor.AddRadioButton(rdoSummaryVariable)
+        ucrPnlColumnFactor.AddRadioButton(rdoColumnFactors)
         ucrPnlColumnFactor.AddRadioButton(rdoVariable)
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoNoColumnFactor, "factor_cols", "NoColFactor")
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoFactorVariable, "factor_cols", "FactorVar")
-        ucrPnlColumnFactor.AddParameterValuesCondition(rdoSummaryVariable, "factor_cols", "SumVar")
+        ucrPnlColumnFactor.AddParameterValuesCondition(rdoColumnFactors, "factor_cols", "SumVar")
         ucrPnlColumnFactor.AddParameterValuesCondition(rdoVariable, "factor_cols", "Var")
         ucrPnlColumnFactor.AddToLinkedControls(ucrReceiverColumnFactor, {rdoFactorVariable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -373,12 +373,12 @@ Public Class dlgSummaryTables
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged,
         ucrChkWeight.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrReceiverSummaryCols.ControlContentsChanged,
-        ucrPnlSummaryFrequencyTables.ControlContentsChanged, ucrPnlColumnFactor.ControlContentsChanged, ucrReceiverColumnFactor.ControlContentsChanged
+        ucrPnlSummaryFrequencyTables.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged, ucrNudColFactors.ControlValueChanged,
-        ucrChkSummaries.ControlValueChanged, ucrPnlSummaryFrequencyTables.ControlValueChanged, ucrReceiverColumnFactor.ControlValueChanged,
+    Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudColFactors.ControlValueChanged,
+        ucrChkSummaries.ControlValueChanged, ucrPnlSummaryFrequencyTables.ControlValueChanged,
         ucrReceiverFactors.ControlValueChanged
         cmdSummaries.Visible = rdoSummaryTable.Checked
         cmdFormatTable.Location = New Point(286, If(rdoSummaryTable.Checked, 464, 273))
@@ -388,17 +388,17 @@ Public Class dlgSummaryTables
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
             clsDummyFunction.AddParameter("rdo_checked", "rdoFrequency", iPosition:=1)
             ucrSaveTable.SetPrefix("frequency_table")
-            rdoSummaryVariable.Text = "Summary-Variable"
+            rdoColumnFactors.Text = "Summary-Variable"
         Else
             grpDisplay.Visible = True
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
             clsDummyFunction.AddParameter("rdo_checked", "rdoSummary", iPosition:=1)
             ucrSaveTable.SetPrefix("summary_table")
             If ucrChkSummaries.Checked Then
-                rdoSummaryVariable.Text = "Summary"
+                rdoColumnFactors.Text = "Summary"
                 rdoVariable.Visible = True
             Else
-                rdoSummaryVariable.Text = "Summary-Variable"
+                rdoColumnFactors.Text = "Summary-Variable"
                 rdoVariable.Visible = False
             End If
         End If
@@ -414,7 +414,7 @@ Public Class dlgSummaryTables
                     ucrReceiverColumnFactor.SetMeAsReceiver()
                     clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=2)
                     clsPivotWiderFunction.AddParameter("names_from", ucrReceiverColumnFactor.GetVariableNames(False), iPosition:=0)
-                ElseIf rdoSummaryVariable.Checked Then
+                ElseIf rdoColumnFactors.Checked Then
                     clsDummyFunction.AddParameter("factor_cols", "SumVar", iPosition:=2)
                     If rdoFrequencyTable.Checked Then
                         varsString()
@@ -434,7 +434,7 @@ Public Class dlgSummaryTables
 
         If rdoVariable.Checked Then
             If Not ucrChkSummaries.Checked Then
-                rdoSummaryVariable.Checked = True
+                rdoColumnFactors.Checked = True
             Else
                 rdoVariable.Checked = True
             End If
