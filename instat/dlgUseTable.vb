@@ -26,7 +26,7 @@ Public Class dlgUseTable
                                        clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
                                         clsSecondFootnoteCellFunction, clsTabStyleCellTitleFunction,
                                        clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction,
-                                       clsgtExtraThemesFunction As New RFunction
+                                       clsgtExtraThemesFunction, clsGtRFunction As New RFunction
 
     Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator As ROperator
 
@@ -60,7 +60,7 @@ Public Class dlgUseTable
         'rdoAsHTML.Enabled = False
         'rdoAsLaTex.Enabled = False
         'rdoAsRTF.Enabled = False
-        'rdoAsWord.Enabled = False
+        rdoAsWord.Enabled = False
         ucrPnlOptions.AddRadioButton(rdoAsHTML)
         ucrPnlOptions.AddRadioButton(rdoAsRTF)
         ucrPnlOptions.AddRadioButton(rdoAsWord)
@@ -70,7 +70,7 @@ Public Class dlgUseTable
         ucrPnlOptions.AddParameterValuesCondition(rdoAsWord, "gtsave", "docx")
         ucrPnlOptions.AddParameterValuesCondition(rdoAsLaTex, "gtsave", "tex")
 
-        cmdTableOptions.Enabled = False
+        cmdTableOptions.Enabled = True
 
         ucrSaveTable.SetPrefix("use_table")
         ucrSaveTable.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
@@ -107,6 +107,7 @@ Public Class dlgUseTable
         clsSummaryOperator = New ROperator
         clsJoiningPipeOperator = New ROperator
         clsgtExtraThemesFunction = New RFunction
+        clsGtRFunction = New RFunction
 
         'rdoAsHTML.Checked = True
         ucrTablesReceiver.SetMeAsReceiver()
@@ -189,6 +190,11 @@ Public Class dlgUseTable
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.bBrackets = False
+
+        clsGtRFunction.SetPackageName("gt")
+        clsGtRFunction.SetRCommand("gt")
+        clsPipeOperator.AddParameter(strParameterName:="gt", clsRFunctionParameter:=clsGtRFunction, iPosition:=2, bIncludeArgumentName:=False)
+
 
         ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
     End Sub
