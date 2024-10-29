@@ -11,6 +11,7 @@ DataBook <- R6::R6Class("DataBook",
                             self$set_meta(instat_obj_metadata)
                             self$set_objects(list())
                             self$set_scalars(list())
+                            self$set_undo_history(list())
                             
                             if (missing(data_tables) || length(data_tables) == 0) {
                               self$set_data_objects(list())
@@ -31,6 +32,7 @@ DataBook <- R6::R6Class("DataBook",
                           .metadata = list(),
                           .objects = list(),
                           .scalars = list(),
+                          .undo_history = list(),
                           .links = list(),
                           .data_sheets_changed = FALSE,
                           .database_connection = NULL,
@@ -313,6 +315,13 @@ DataBook$set("public", "set_meta", function(new_meta) {
 DataBook$set("public", "set_objects", function(new_objects) {
   if(!is.list(new_objects)) stop("new_objects must be of type: list")
   private$.objects <- new_objects 
+}
+)
+
+DataBook$set("public", "set_undo_history", function(new_undo_history) {
+  if (!is.list(new_undo_history)) stop("undo_history must be of type: list")
+  
+  private$.undo_history <- new_undo_history 
 }
 )
 
@@ -1352,6 +1361,30 @@ DataBook$set("public","has_key", function(data_name) {
 }
 )
 
+DataBook$set("public","set_enable_disable_undo", function(data_name, disable_undo) {
+  self$get_data_objects(data_name)$set_enable_disable_undo(disable_undo)
+}
+)
+
+DataBook$set("public", "is_undo", function(data_name) {
+  self$get_data_objects(data_name)$is_undo()
+})
+
+DataBook$set("public","has_undo_history", function(data_name) {
+  self$get_data_objects(data_name)$has_undo_history()
+}
+)
+
+DataBook$set("public","undo_last_action", function(data_name) {
+  self$get_data_objects(data_name)$undo_last_action()
+}
+)
+
+DataBook$set("public","redo_last_action", function(data_name) {
+  self$get_data_objects(data_name)$redo_last_action()
+}
+)
+
 DataBook$set("public","get_keys", function(data_name, key_name) {
   self$get_data_objects(data_name)$get_keys(key_name)
 }
@@ -1930,7 +1963,7 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   #--------------------------------
   con <- self$get_database_connection()
   if(is.null(con)){
-    stop("No database connection")
+      stop("No database connection")
   }
   
   if(missing(tableName) || missing(station_filter_column) || missing(element_filter_column) || length(stations) == 0  || length(elements) == 0){
@@ -2001,6 +2034,8 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   
   #filters
   #--------------------------------
+  stations <- gsub("'", "''", stations) # Escape any apostrophes
+  elements <- gsub("'", "''", elements) # Escape any apostrophes
   sql_stations_filter <- paste0(" station.", station_filter_column, " IN ", paste0("(", paste0("'", stations, "'", collapse =  ", "), ")"))
   sql_elements_filter <- paste0(" obselement.", element_filter_column, " IN ", paste0("(", paste0("'", elements, "'", collapse =  ", "), ")"))
   
@@ -2035,12 +2070,12 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   
   if(import_selected_stations_metadata){
     stations_metadata_name <- next_default_item("stations_metadata", self$get_data_names(), include_index = FALSE)
-    data_list[[stations_metadata_name]] <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE", sql_stations_filter))
+    data_list[[stations_metadata_name]] <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE ", sql_stations_filter))
   }
   
   if(import_selected_elements_metadata){
     elements_metadata_name <- next_default_item("elements_metadata", self$get_data_names(), include_index = FALSE)
-    data_list[[elements_metadata_name]] <- DBI::dbGetQuery(con, paste0("SELECT * FROM obselement WHERE", sql_elements_filter))
+    data_list[[elements_metadata_name]] <- DBI::dbGetQuery(con, paste0("SELECT * FROM obselement WHERE ", sql_elements_filter))
   }
   
   #--------------------------------
@@ -2104,131 +2139,6 @@ DataBook$set("public", "import_climsoft_data", function(tableName,
   # Import list of data frames to data book
   self$import_data(data_tables = data_list)
   
-})
-
-#TODO. Deprecated. Delete this after after deleting the import from Climsoft wizard dialog
-DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "stationId", stations = c(), elementfiltercolumn = "elementId", elements = c(), include_observation_data = FALSE, include_observation_flags = FALSE, unstack_data = FALSE, include_elements_info = FALSE, start_date = NULL, end_date = NULL) {
-  #need to perform checks here
-  con <- self$get_database_connection()
-  
-  #get stations database data and station ids values
-  if (length(stations) > 0) {
-    #construct a string of station values from the passed station vector eg of result ('191','122')
-    passed_station_values <- paste0("(", paste0("'", stations, "'", collapse =  ", "), ")")
-    
-    #get the station info of the passed station values
-    db_station_info <- DBI::dbGetQuery(con, paste0( "SELECT * FROM station WHERE ", stationfiltercolumn, " IN ", passed_station_values,  ";"))
-    
-    #set values of station ids only
-    if (stationfiltercolumn == "stationId") {
-      station_ids_values <- passed_station_values
-    } else{
-      station_ids_values <- paste0("(", paste0("'", db_station_info$stationId, "'", collapse = ", "),")")
-    }
-  }
-  
-  #if true get observation data
-  if (include_observation_data) {
-    #if there are no elements passed then stop and throw error
-    if (length(elements) < 1) stop("start_date must be of type Date.")
-    
-    #set values of element ids only
-    if (elementfiltercolumn == "elementId") {
-      #get element id values directly from passed data
-      element_ids_values <- paste0("(", paste0(elements, collapse = ", "), ")")
-    } else{
-      #get element id values from the database
-      passed_element_values <- paste0("(", paste0("'", elements, "'", collapse = ", "), ")")
-      db_elements_ids <- DBI::dbGetQuery( con, paste0("SELECT elementId FROM obselement WHERE ", elementfiltercolumn,  " IN ",  passed_element_values, ";" ))
-      element_ids_values <- paste0("(", paste0(sprintf("%d", db_elements_ids$elementId), collapse = ", "), ")")
-    }
-    
-    if(include_elements_info) {
-      db_elements_info <- DBI::dbGetQuery(con, paste0("SELECT elementId, elementName, abbreviation, description, elementtype, upperLimit, lowerLimit, units FROM obselement WHERE elementId ", " IN ", element_ids_values, ";" ))
-    }
-    
-    flags_column_col_sql <- " "
-    if (include_observation_flags) {
-      flags_column_col_sql <- ", observationfinal.flag AS flag"
-    }
-    
-    #get databounds filter query if dates have been passed
-    date_bounds_filter <- ""
-    if (!is.null(start_date)) {
-      if (!lubridate::is.Date(start_date))
-        stop("start_date must be of type Date.")
-      start_date <- format(start_date, format = "%Y-%m-%d")
-      date_bounds_filter = paste0(date_bounds_filter, " AND obsDatetime >= ", sQuote(start_date))
-    }
-    if (!is.null(end_date)) {
-      if (!lubridate::is.Date(end_date))
-        stop("end_date must be of type Date.")
-      end_date <- format(end_date, format = "%Y-%m-%d")
-      date_bounds_filter <- paste0(date_bounds_filter," AND obsDatetime <=", sQuote(end_date))
-    }
-    
-    #construct observation data sql query and get data from database
-    if (length(stations) > 0) {
-      #if stations passed get observation data of selected elements of passed stations
-      db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom As station, obselement.abbreviation AS element, observationfinal.obsDatetime AS datetime, observationfinal.obsValue AS obsvalue", flags_column_col_sql, " FROM observationfinal INNER JOIN obselement ON observationfinal.describedBy = obselement.elementId WHERE observationfinal.recordedFrom IN ", station_ids_values, " AND observationfinal.describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
-    } else{
-      #if stations have not been passed get observation data of passed elements of all stations
-      db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom As station, obselement.abbreviation AS element, observationfinal.obsDatetime AS datetime, observationfinal.obsValue AS obsvalue", flags_column_col_sql, " FROM observationfinal INNER JOIN obselement ON observationfinal.describedBy = obselement.elementId WHERE observationfinal.describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
-      
-      #then get the stations ids (uniquely) from the observation data and use the ids to get station info
-      station_ids_values <- paste0("(", paste0("'", as.character(unique(db_observation_data$station) ), "'", collapse = ", "), ")")
-      db_station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationId IN ", station_ids_values, ";" ))
-    }
-    
-    station_data_name <- next_default_item("stations_info", self$get_data_names(), include_index = FALSE)
-    elements_data_name <- next_default_item("elements_info", self$get_data_names(), include_index = FALSE)
-    observation_data_name <- next_default_item("observation_data", self$get_data_names(), include_index = FALSE)
-    
-    #elements info could be optional
-    if (include_elements_info) {
-      data_list <- list(db_station_info, db_elements_info, db_observation_data)
-      names(data_list) <- c(station_data_name, elements_data_name, observation_data_name)
-    } else{
-      data_list <- list(db_station_info, db_observation_data)
-      names(data_list) <- c(station_data_name, observation_data_name)
-    }
-    
-  } else{
-    if (length(stations) > 0) {
-      data_list <- list(db_station_info)
-      names(data_list) <- next_default_item("stations_info", self$get_data_names())
-    }
-  }
-  
-  #import the data as separate data frames
-  self$import_data(data_tables = data_list)
-  
-  #if observation data was included, and key links, convert columns and optionally unstack data
-  if (include_observation_data) {
-    #add relationship key between the observation data and station data 
-    #linked by stationId and recordedFrom columns
-    self$add_key(station_data_name, c("stationId"))
-    self$add_link(from_data_frame = observation_data_name, to_data_frame = station_data_name, link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label)
-    
-    #convert stations in observation data to factors
-    self$convert_column_to_type(data_name = observation_data_name, col_names = "station", to_type = "factor")
-    #convert elements in observation data to factors
-    self$convert_column_to_type(data_name = observation_data_name, col_names = "element", to_type = "factor")
-    #convert flags to factors if included
-    if(include_observation_flags){
-      self$convert_column_to_type(data_name = observation_data_name, col_names = "flag", to_type = "factor")
-    }
-    #create a plain date column from the observation data datetime column values
-    obsdate <- self$get_columns_from_data(data_name = observation_data_name, col_names = "datetime", use_current_filter = FALSE)
-    self$add_columns_to_data(data_name = observation_data_name, col_name = "date", col_data = as.Date(x = obsdate), before = FALSE, adjacent_column = "datetime")
-    
-    if(unstack_data){
-      observation_data <- self$get_data_frame(data_name = observation_data_name)
-      observation_data_unstacked <- reshape2::dcast(data = observation_data, formula = station + datetime + date ~ element, value.var = "obsvalue")
-      self$import_data(data_tables = list(observation_data_unstacked = observation_data_unstacked))
-    }
-  }
-
 })
 
 DataBook$set("public", "import_from_iri", function(download_from, data_file, data_frame_name, location_data_name, path, X1, X2 = NA, Y1, Y2 = NA, get_area_point = "area"){
@@ -2323,20 +2233,8 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   year_col <- self$get_columns_from_data(data_name, year)
   unique_year <- na.omit(unique(year_col))
   
-  expand_list <- list()
-  names_list <- c()
-  
-  expand_list[[length(expand_list) + 1]] <- rain_totals
-  names_list[length(names_list) + 1] <- rain_total_name
-  
-  expand_list[[length(expand_list) + 1]] <- plant_lengths
-  names_list[length(names_list) + 1] <- plant_length_name
-  
-  expand_list[[length(expand_list) + 1]] <- plant_days
-  names_list[length(names_list) + 1] <- plant_day_name
-  
-  expand_list[[length(expand_list) + 1]] <- unique_year
-  names_list[length(names_list) + 1] <- year
+  expand_list <- list(rain_totals, plant_lengths, plant_days, unique_year)
+  names_list <- c(rain_total_name, plant_length_name, plant_day_name, year)
   
   if(is_station) {
     station_col <- self$get_columns_from_data(data_name, station)
@@ -2344,8 +2242,10 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     expand_list[[length(expand_list) + 1]] <- unique_station
     names_list[length(names_list) + 1] <- station
   }
+  
   df <- setNames(expand.grid(expand_list), names_list)
   daily_data <- self$get_data_frame(data_name)
+  
   if(season_data_name != data_name) {
     join_by <- by
     names(join_by) <- season_by
@@ -2365,7 +2265,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   }
   
   # Plant day condition
-  if(start_check) {
+  if(start_check %in% c("yes", "both")) {
     df$plant_day_cond <- (df[[start_day]] <= df[[plant_day_name]])
   }
   
@@ -2373,34 +2273,57 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   df$length_cond <- (df[[plant_day_name]] + df[[plant_length_name]] <= df[[end_day]])
   
   # Rain total condition
-  df[["rain_total_actual"]] <- sapply(1:nrow(df), 
-                                      function(x) {
-                                        ind <- daily_data[[year]] == df[[year]][x] & daily_data[[day]] >= df[[plant_day_name]][x] & 
-                                          daily_data[[day]] < (df[[plant_day_name]][x] + df[[plant_length_name]][x])
-                                        if(is_station) ind <- ind & (daily_data[[station]] == df[[station]][x])
-                                        rain_values <- daily_data[[rain]][ind]
-                                        sum_rain <- sum(rain_values, na.rm = TRUE)
-                                        # TODO + 1 is needed because of non leap years
-                                        # if period include 29 Feb then period is 1 less than required length
-                                        if(length(rain_values) + 1 < df[[plant_length_name]][x] || (anyNA(rain_values) && sum_rain < df[[rain_total_name]][x])) sum_rain <- NA
-                                        sum_rain
-                                      }
-  )
+  # Create a column for the rain total actuals initialised with NA
+  df[["rain_total_actual"]] <- NA
+  
+  # Vectorise the conditions for each 
+  for (i in 1:nrow(df)) {
+    # Create a condition to filter the daily data based on the year, day, and plant day/length
+    ind <- daily_data[[year]] == df[[year]][i] &
+      daily_data[[day]] >= df[[plant_day_name]][i] &
+      daily_data[[day]] < (df[[plant_day_name]][i] + df[[plant_length_name]][i])
+    
+    if (is_station) {
+      ind <- ind & (daily_data[[station]] == df[[station]][i])
+    }
+    
+    # Filter the daily data based on the condition
+    rain_values <- daily_data[[rain]][ind]
+    
+    # Calculate the sum of rain values and check conditions
+    sum_rain <- sum(rain_values, na.rm = TRUE)
+    
+    if (length(rain_values) + 1 < df[[plant_length_name]][i] || (anyNA(rain_values) && sum_rain < df[[rain_total_name]][i])) {
+      sum_rain <- NA
+    }
+    
+    # Assign the calculated sum to the respective row in the result dataframe
+    df[["rain_total_actual"]][i] <- sum_rain
+  }
   df$rain_cond <- df[[rain_total_name]] <= df[["rain_total_actual"]]
   
   # All three conditions met
-  df$overall_cond <- ((if(start_check) df$plant_day_cond else TRUE) & df$length_cond & df$rain_cond)
+  if (start_check == "yes"){
+    df$overall_cond <- df$plant_day_cond & df$length_cond & df$rain_cond
+  } else if (start_check == "no"){
+    df$overall_cond <- TRUE & df$length_cond & df$rain_cond
+  } else {
+    df$overall_cond_with_start <- df$plant_day_cond & df$length_cond & df$rain_cond
+    df$overall_cond_no_start <- TRUE & df$length_cond & df$rain_cond
+  }
   
   crops_name <- "crop_def"
   crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
   data_tables <- list(df)
   names(data_tables) <- crops_name
   self$import_data(data_tables = data_tables)
+  
   if(season_data_name != data_name) {
     crops_by <- season_by
     names(crops_by) <- by
     self$add_link(crops_name, season_data_name, crops_by, keyed_link_label)
   }
+  
   if(definition_props) {
     calc_from <- list()
     if(!missing(station)) calc_from[[length(calc_from) + 1]] <- station
@@ -2409,24 +2332,65 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     calc_from[[length(calc_from) + 1]] <- rain_total_name
     names(calc_from) <- rep(crops_name, length(calc_from))
     grouping <- instat_calculation$new(type = "by", calculated_from = calc_from)
-    prop_calc_from <- list("overall_cond")
-    names(prop_calc_from) <- crops_name
-    propor_table <- instat_calculation$new(function_exp="sum(overall_cond, na.rm = TRUE)/length(na.omit(overall_cond))",
-                                           save = 2, calculated_from = prop_calc_from,
-                                           manipulations = list(grouping),
-                                           type="summary", result_name = "prop_success", result_data_frame = "crop_prop")
-    prop_data_frame <- self$run_instat_calculation(propor_table, display = TRUE)
-    if(print_table) {
-      prop_data_frame$prop_success <- round(prop_data_frame$prop_success, 2)
-      prop_table_unstacked <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame, value.var = "prop_success")
-      if(!missing(station)) f <- interaction(prop_table_unstacked[[station]], prop_table_unstacked[[plant_length_name]], lex.order = TRUE)
-      else f <- prop_table_unstacked[[plant_length_name]]
-      prop_table_split <- split(prop_table_unstacked, f)
-      return(prop_table_split)
+    
+    if (start_check %in% c("yes", "no")){
+      prop_calc_from <- list("overall_cond")
+      names(prop_calc_from) <- crops_name
+      propor_table <- instat_calculation$new(function_exp="sum(overall_cond, na.rm = TRUE)/length(na.omit(overall_cond))",
+                                             save = 2, calculated_from = prop_calc_from,
+                                             manipulations = list(grouping),
+                                             type="summary", result_name = "prop_success", result_data_frame = "crop_prop")
+      prop_data_frame <- self$run_instat_calculation(propor_table, display = TRUE)
+      if(print_table) {
+        prop_data_frame$prop_success <- round(prop_data_frame$prop_success, 2)
+        prop_table_unstacked <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame, value.var = "prop_success")
+        if(!missing(station)) f <- interaction(prop_table_unstacked[[station]], prop_table_unstacked[[plant_length_name]], lex.order = TRUE)
+        else f <- prop_table_unstacked[[plant_length_name]]
+        prop_table_split <- split(prop_table_unstacked, f)
+        return(prop_table_split)
+      }
+    } else {
+      prop_calc_from_with_start <- list("overall_cond_with_start")
+      names(prop_calc_from_with_start) <- crops_name
+      propor_table_with_start <- instat_calculation$new(function_exp="sum(overall_cond_with_start, na.rm = TRUE)/length(na.omit(overall_cond_with_start))",
+                                                        save = 2, calculated_from = prop_calc_from_with_start,
+                                                        manipulations = list(grouping),
+                                                        type="summary", result_name = "prop_success", result_data_frame = "crop_prop_with_start")
+      prop_data_frame_with_start <- self$run_instat_calculation(propor_table_with_start, display = TRUE)
+      
+      prop_calc_from_no_start <- list("overall_cond_no_start")
+      names(prop_calc_from_no_start) <- crops_name
+      propor_table_no_start <- instat_calculation$new(function_exp="sum(overall_cond_no_start, na.rm = TRUE)/length(na.omit(overall_cond_no_start))",
+                                                      save = 2, calculated_from = prop_calc_from_no_start,
+                                                      manipulations = list(grouping),
+                                                      type="summary", result_name = "prop_success", result_data_frame = "crop_prop_no_start")
+      prop_data_frame_no_start <- self$run_instat_calculation(propor_table_no_start, display = TRUE)
+      
+      if(print_table) {
+        prop_data_frame_with_start$prop_success <- round(prop_data_frame_with_start$prop_success, 2)
+        prop_table_unstacked_with_start <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame_with_start, value.var = "prop_success")
+        if(!missing(station)) f <- interaction(prop_table_unstacked_with_start[[station]], prop_table_unstacked_with_start[[plant_length_name]], lex.order = TRUE)
+        else f <- prop_table_unstacked_with_start[[plant_length_name]]
+        prop_table_split_with_start <- split(prop_table_unstacked_with_start, f)
+        
+        prop_data_frame_no_start$prop_success <- round(prop_data_frame_no_start$prop_success, 2)
+        prop_table_unstacked_no_start <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame_no_start, value.var = "prop_success")
+        if(!missing(station)) f <- interaction(prop_table_unstacked_no_start[[station]], prop_table_unstacked_no_start[[plant_length_name]], lex.order = TRUE)
+        else f <- prop_table_unstacked_no_start[[plant_length_name]]
+        prop_table_split_no_start <- split(prop_table_unstacked_no_start, f)
+        
+        # Create an empty list to store the merged data
+        merged_list <- list()
+        
+        # Vectorize the addition of source indicators and merging of data frames
+        prop_table_split_with_start <- lapply(prop_table_split_with_start, function(df) {
+          df$source <- 'with start'
+          return(df)
+        })
+      }
     }
   }
-}
-)
+})
 
 #' Converting grid (wide) format daily climatic data into tidy (long format) data
 #' @param x Input data frame
@@ -3079,7 +3043,7 @@ DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, colum
 }
 )
 
-DataBook$set("public", "anova_tables2", function(data_name, x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
-  self$get_data_objects(data_name)$anova_tables2(x_col_names = x_col_names, y_col_name = y_col_name, signif.stars = signif.stars, sign_level = sign_level, means = means)
+DataBook$set("public", "anova_tables2", function(data_name, x_col_names, y_col_name, total = TRUE, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+  self$get_data_objects(data_name)$anova_tables2(x_col_names = x_col_names, y_col_name = y_col_name, total = total, signif.stars = signif.stars, sign_level = sign_level, means = means)
 } 
 )
