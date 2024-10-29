@@ -152,7 +152,6 @@ Public Class dlgSummaryTables
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkDisplayMargins}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkFrequencyDisplayMargins, ucrNudColFactors}, {rdoFrequencyTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkOmitMissing}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrPnlColumnFactor}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 2))
         ucrChkDisplayAsPercentage.SetText("As Percentages")
@@ -196,7 +195,6 @@ Public Class dlgSummaryTables
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
-        'ucrNudColFactors.SetText(1)
 
         ucrBase.clsRsyntax.GetBeforeCodes().Clear()
 
@@ -378,10 +376,29 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudColFactors.ControlValueChanged,
-        ucrChkSummaries.ControlValueChanged, ucrPnlSummaryFrequencyTables.ControlValueChanged, UcrNudColumnSumFactors.ControlValueChanged,
+        ucrChkSummaries.ControlValueChanged, UcrNudColumnSumFactors.ControlValueChanged,
         ucrReceiverFactors.ControlValueChanged, ucrNudPositionSum.ControlValueChanged, ucrNudPositionVar.ControlValueChanged
+
+        SetDefaultValues()
+        SetVariableDefaults()
+        SetSummariesDefaults()
+        SetColFactorDefaults()
+        SettingParameters()
+    End Sub
+
+    Private Sub ucrPnlSummaryFrequencyTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaryFrequencyTables.ControlValueChanged
         cmdSummaries.Visible = rdoSummaryTable.Checked
         cmdFormatTable.Location = New Point(286, If(rdoSummaryTable.Checked, 464, 273))
+
+        DialogueSize()
+        SettingParameters()
+        SetDefaultValues()
+        SetVariableDefaults()
+        SetSummariesDefaults()
+        SetColFactorDefaults()
+    End Sub
+
+    Private Sub SettingParameters()
         If rdoFrequencyTable.Checked Then
             grpDisplay.Visible = False
             clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsFrequencyOperator, iPosition:=0)
@@ -397,13 +414,8 @@ Public Class dlgSummaryTables
                 AddPivotWiderVariables()
                 clsFrequencyOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
             End If
-
         End If
-        DialogueSize()
-        SetDefaultValues()
-        SetVariableDefaults()
-        SetSummariesDefaults()
-        SetColFactorDefaults()
+
     End Sub
 
     Private Sub FillListView()
@@ -557,5 +569,4 @@ Public Class dlgSummaryTables
         End If
         UcrNudColumnSumFactors.Minimum = 0
     End Sub
-
 End Class
