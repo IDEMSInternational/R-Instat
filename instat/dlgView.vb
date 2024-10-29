@@ -160,6 +160,8 @@ Public Class dlgView
 
         clsViewColumnsFunction.SetPackageName("utils")
         clsViewColumnsFunction.SetRCommand("View")
+
+        '   ChangeFunctionParameters()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -178,8 +180,18 @@ Public Class dlgView
         ucrChkDisplayFromTop.SetRCode(clsOutputWindowFunction, bReset)
         ucrNudNumberRows.SetRCode(clsOutputWindowFunction, bReset)
         ucrViewNudPreview.SetRCode(clsHeadRFunction, bReset)
-        ucrSelectorForView.SetRCode(clsBaseOperator, bReset)
+        ucrSelectorForView.SetRCode(clsViewColumnsFunction, bReset)
         ucrSaveData.SetRCode(clsBaseOperator, bReset)
+
+        'ucrReceiverView.SetRCode(clsViewColumnsFunction, bReset)
+        'ucrPnlDisplayWindow.SetRCode(clsDummyFunction, bReset)
+
+        'ucrPnlDisplayFrom.SetRCode(clsOutputWindowFunction, bReset)
+        'ucrNudNumberRows.SetRCode(clsOutputWindowFunction, bReset)
+        ''  ucrChkSpecifyRows.SetRCode(clsOutputWindowFunction, bReset)
+        '  ucrSelectorForView.SetRCode(clsViewAllFunction, bReset)
+        ' ucrPnlViewData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        '  ucrSaveData.SetRCode(clsAsHtmlWidgetFunction, bReset)
 
         DataFrameLength()
         ChangeFunctionParameters()
@@ -230,19 +242,18 @@ Public Class dlgView
         ElseIf rdoDispSepOutputWindow.Checked Then
             clsDummyFunction.AddParameter("checked", "viewer", iPosition:=0)
             ucrBase.clsRsyntax.iCallType = 0
+            ucrReceiverView.SetRCode(clsViewColumnsFunction, bReset)
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewColumnsFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectDataFunction)
             cmdTableOptions.Visible = False
             ucrSaveData.Visible = False
         Else
             clsDummyFunction.AddParameter("checked", "html", iPosition:=0)
-
             ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-
             cmdTableOptions.Visible = True
             ucrSaveData.Visible = True
             If ucrViewChkPreview.Checked Then
-                clsBaseOperator.AddParameter(strParameterName:="head", clsRFunctionParameter:=clsHeadRFunction, iPosition:=1, bIncludeArgumentName:=False)
+                clsBaseOperator.AddParameter(strParameterName:="head", clsRFunctionParameter:=clsHeadRFunction, iPosition:=2, bIncludeArgumentName:=False)
             Else
                 clsBaseOperator.RemoveParameterByName("head")
             End If
@@ -270,7 +281,6 @@ Public Class dlgView
         'End If
     End Sub
 
-
     Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
         DataFrameLength()
     End Sub
@@ -295,10 +305,10 @@ Public Class dlgView
     Private Sub GetObjectName()
         If rdoDispOutputWindow.Checked Then
             Dim strPrefix As String = clsOutputWindowFunction.GetRObjectToAssignTo 'If(ucrSaveData.GetText <> "", ucrSaveData.GetText, "last_table")
-            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
+            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=0)
         ElseIf rdoHTMLOutputWindow.Checked Then
             Dim strPrefix As String = clsBaseOperator.GetRObjectToAssignTo
-            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
+            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=0)
         End If
     End Sub
 
