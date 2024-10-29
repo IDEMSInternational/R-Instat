@@ -205,6 +205,58 @@ Public Class clsDataFramePage
         Return Math.Ceiling(_iTotalColumnCount / iColumnIncrements)
     End Function
 
+    Public Sub Undo()
+        Dim clsUndoRFunction As New RFunction
+        clsUndoRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$undo_last_action")
+        clsUndoRFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+        _clsRLink.RunScript(clsUndoRFunction.ToScript)
+
+    End Sub
+
+    Public Function IsUndo(strCurrentDataFrame As String)
+        Dim clsIsUndoFunction As New RFunction
+        Dim expTemp As SymbolicExpression
+        clsIsUndoFunction.SetRCommand(_clsRLink.strInstatDataObject & "$is_undo")
+        clsIsUndoFunction.AddParameter("data_name", Chr(34) & strCurrentDataFrame & Chr(34))
+
+        If clsIsUndoFunction IsNot Nothing Then
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsIsUndoFunction.ToScript(), bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.AsCharacter(0) = "TRUE" Then
+                Return True
+            End If
+        End If
+
+        Return False
+    End Function
+
+    Public Sub DisableEnableUndo(bDisable As Boolean, strCurrentDataFrame As String)
+        Dim clsEnableDisableUndoRFunction As New RFunction
+        clsEnableDisableUndoRFunction.SetRCommand(_clsRLink.strInstatDataObject & "$set_enable_disable_undo")
+        clsEnableDisableUndoRFunction.AddParameter("data_name", Chr(34) & strCurrentDataFrame & Chr(34))
+
+        Dim strDisable As String = If(bDisable, "TRUE", "FALSE")
+        clsEnableDisableUndoRFunction.AddParameter("disable_undo", strDisable)
+        _clsRLink.RunScript(clsEnableDisableUndoRFunction.ToScript)
+
+    End Sub
+
+    Public Function HasUndoHistory()
+        Dim expTemp As SymbolicExpression
+        Dim bHasHistory As Boolean = False
+        Dim clsHasHistoryFunction As New RFunction
+
+        clsHasHistoryFunction.SetRCommand(_clsRLink.strInstatDataObject & "$has_undo_history")
+        clsHasHistoryFunction.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
+        If clsHasHistoryFunction IsNot Nothing Then
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsHasHistoryFunction.ToScript(), bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.AsCharacter(0) = "TRUE" Then
+                bHasHistory = True
+            End If
+        End If
+
+        Return bHasHistory
+    End Function
+
     Private Function GetDataFrameFromRCommand() As DataFrame
         Dim clsGetDataFrameRFunction As New RFunction
         Dim expTemp As SymbolicExpression
