@@ -3409,3 +3409,24 @@ check_github_repo <- function(owner = NULL, repo = NULL, url = NULL) {
     }) 
   }
 }
+#Convert Decimal to Fractions 
+frac10 <- function(x)  {paste0(round(x * 10), "/", 10)} #Give fraction our of 10 for a decimal value
+frac20 <- function(x)  {paste0(round(x * 20), "/", 20)} #Give fraction our of 20 for a decimal value
+frac100 <- function(x)  {paste0(round(x * 100), "/", 100)} # Give fraction our of 100 for a decimal value
+
+frac_den <- function(x, den) {paste0(round(x * den), "/", den)} # Give fraction for a given denominator
+
+# Monitor memory usage function
+monitor_memory <- function() {
+  if (.Platform$OS.type == "windows") {
+    mem_used <- memory.size()
+  } #else {
+  #   mem_used <- sum(gc()[, "used"]) / 1024  # Convert KB to MB on non-Windows systems
+  # }
+  return(mem_used)
+}
+
+time_operation <- function(expr) {
+  timing <- system.time(expr)
+  print(timing)
+}

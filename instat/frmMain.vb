@@ -225,7 +225,7 @@ Public Class frmMain
         '--------------------------------------
         CreateAdditionalLibraryDirectory()
         '-------------------------------------
-
+        SetAppVersionNumber()
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
@@ -589,6 +589,12 @@ Public Class frmMain
         mnuTbLan.Visible = bVisible
     End Sub
 
+    Public Sub SetAppVersionNumber()
+        Me.Text = "R-Instat " & My.Application.Info.Version.Major.ToString() & "." &
+                My.Application.Info.Version.Minor.ToString() & "." &
+                My.Application.Info.Version.Build.ToString()
+    End Sub
+
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
         mnuFile.Enabled = bEnabled
         mnuEdit.Enabled = bEnabled
@@ -677,6 +683,10 @@ Public Class frmMain
             mnuViewLogScript.Checked = True
             UpdateLayout()
         End If
+    End Sub
+
+    Public Sub DisableEnableUndo(bDisable As Boolean)
+        ucrDataViewer.DisableEnableUndo(bDisable)
     End Sub
 
     Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
@@ -2887,5 +2897,9 @@ Public Class frmMain
     End Sub
     Private Sub mnuClimaticCheckDataDistances_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDistances.Click
         dlgDistances.ShowDialog()
+    End Sub
+
+    Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
+        ucrDataViewer.Undo()
     End Sub
 End Class

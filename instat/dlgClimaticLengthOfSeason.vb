@@ -20,8 +20,8 @@ Public Class dlgClimaticLengthOfSeason
     Private bReset As Boolean = True
     Private strCurrDataName As String = ""
 
-    Private clsLengthOfSeasonFunction, clsApplyInstatCalcFunction, clsCombinationCalcFunction, clsStartEndStatusFunction, clsIfElseFunction, clsIsNAFunction, clsCombinationListFunction As New RFunction
-    Private clsMinusOpertor, clsAndOperator, clsOROperator As New ROperator
+    Private clsLengthOfSeasonFunction, clsConvertColumnTypeFunction, clsApplyInstatCalcFunction, clsAsCharacterFunction, clsCombinationCalcFunction, clsStartEndStatusFunction, clsCaseWhenFunction, clsIsNAFunction, clsIsNA1Function, clsCombinationListFunction As New RFunction
+    Private clsMinusOpertor, clsAndOperator, clsOROperator, clsCaseWhenOperator, clsCaseWhen1Operator, clsCaseWhen2Operator, clsCaseWhen3Operator, clsAssignOperator, clsAssign1Operator, clsAssign2Operator, clsAssign3Operator, clsAssign4Operator, clsAnd1Operator, clsAnd2Operator As New ROperator
 
     Private Sub dlgClimaticLengthOfSeason_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -50,7 +50,6 @@ Public Class dlgClimaticLengthOfSeason
         ucrReceiverStartofRainsLogical.bWithQuotes = False
         ucrReceiverStartofRainsLogical.Selector = ucrSelectorLengthofSeason
 
-
         ucrReceiverEndofRains.SetParameter(New RParameter("end_rain", 0, bNewIncludeArgumentName:=False))
         ucrReceiverEndofRains.SetParameterIsString()
         ucrReceiverEndofRains.bWithQuotes = False
@@ -69,7 +68,6 @@ Public Class dlgClimaticLengthOfSeason
         ucrInputLengthofSeason.SetParameter(New RParameter("result_name", 2))
         ucrInputLengthofSeason.SetDataFrameSelector(ucrSelectorLengthofSeason.ucrAvailableDataFrames)
         ucrInputLengthofSeason.SetName("Length")
-
 
         ucrChkType.AddParameterPresentCondition(True, "sub2", True)
         ucrChkType.AddParameterPresentCondition(False, "sub2", False)
@@ -91,12 +89,24 @@ Public Class dlgClimaticLengthOfSeason
         clsStartEndStatusFunction.Clear()
         clsCombinationListFunction.Clear()
         clsIsNAFunction.Clear()
-
+        clsIsNA1Function.Clear()
+        clsAsCharacterFunction.Clear()
 
         clsMinusOpertor.Clear()
         clsAndOperator.Clear()
         clsOROperator.Clear()
-
+        clsCaseWhenOperator.Clear()
+        clsCaseWhen1Operator.Clear()
+        clsCaseWhen2Operator.Clear()
+        clsCaseWhen3Operator.Clear()
+        clsAssignOperator.Clear()
+        clsAssign1Operator.Clear()
+        clsAssign2Operator.Clear()
+        clsAssign3Operator.Clear()
+        clsAssign4Operator.Clear()
+        clsAnd1Operator.Clear()
+        clsAnd2Operator.Clear()
+        clsConvertColumnTypeFunction.Clear()
 
         ucrSelectorLengthofSeason.Reset()
         ucrReceiverStartofRains.SetMeAsReceiver()
@@ -115,24 +125,80 @@ Public Class dlgClimaticLengthOfSeason
         'start status calculation
         clsStartEndStatusFunction.SetRCommand("instat_calculation$new")
         clsStartEndStatusFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsStartEndStatusFunction.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseFunction, iPosition:=1)
+        clsStartEndStatusFunction.AddParameter("function_exp", clsRFunctionParameter:=clsCaseWhenFunction, iPosition:=1)
         clsStartEndStatusFunction.AddParameter("result_name", Chr(34) & strTypeName & Chr(34), iPosition:=2)
         clsStartEndStatusFunction.AddParameter("save", 2, iPosition:=6)
         clsStartEndStatusFunction.SetAssignTo("start_end_status")
 
-        clsIfElseFunction.SetPackageName("dplyr")
-        clsIfElseFunction.SetRCommand("if_else")
-        clsIfElseFunction.AddParameter("is.na", clsRFunctionParameter:=clsIsNAFunction, bIncludeArgumentName:=False, iPosition:=0)
-        clsIfElseFunction.AddParameter("NA", "NA", bIncludeArgumentName:=False, iPosition:=1)
-        clsIfElseFunction.AddParameter("and", clsROperatorParameter:=clsAndOperator, bIncludeArgumentName:=False, iPosition:=2)
-        clsIfElseFunction.bToScriptAsRString = True
+        clsCaseWhenFunction.SetPackageName("dplyr")
+        clsCaseWhenFunction.SetRCommand("case_when")
+        clsCaseWhenFunction.AddParameter("is.na", clsROperatorParameter:=clsCaseWhenOperator, bIncludeArgumentName:=False, iPosition:=0)
+        clsCaseWhenFunction.AddParameter("NA", clsROperatorParameter:=clsCaseWhen1Operator, bIncludeArgumentName:=False, iPosition:=1)
+        clsCaseWhenFunction.AddParameter("and", clsROperatorParameter:=clsCaseWhen2Operator, bIncludeArgumentName:=False, iPosition:=2)
+        clsCaseWhenFunction.AddParameter("test", clsROperatorParameter:=clsCaseWhen3Operator, bIncludeArgumentName:=False, iPosition:=3)
+        clsCaseWhenFunction.bToScriptAsRString = True
 
         clsAndOperator.SetOperation("&")
 
         clsIsNAFunction.SetRCommand("is.na")
-        clsIsNAFunction.AddParameter("or", clsROperatorParameter:=clsOROperator, bIncludeArgumentName:=False)
+
+        clsIsNA1Function.SetRCommand("is.na")
+
+        clsCaseWhenOperator.SetOperation("~")
+        clsCaseWhenOperator.AddParameter("left", clsROperatorParameter:=clsOROperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsCaseWhenOperator.AddParameter("right", "NA_character_", iPosition:=1, bIncludeArgumentName:=False)
+        clsCaseWhenOperator.bBrackets = False
+
+        clsCaseWhen1Operator.SetOperation("~")
+        clsCaseWhen1Operator.AddParameter("left", clsROperatorParameter:=clsAssignOperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsCaseWhen1Operator.AddParameter("right", clsRFunctionParameter:=clsAsCharacterFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsCaseWhen1Operator.bBrackets = False
+
+        clsCaseWhen2Operator.SetOperation("~")
+        clsCaseWhen2Operator.AddParameter("left", clsROperatorParameter:=clsAssign2Operator, iPosition:=0, bIncludeArgumentName:=False)
+        clsCaseWhen2Operator.AddParameter("right", "'NONE'", iPosition:=1, bIncludeArgumentName:=False)
+        clsCaseWhen2Operator.bBrackets = False
+
+        clsCaseWhen3Operator.SetOperation("~")
+        clsCaseWhen3Operator.AddParameter("left", clsROperatorParameter:=clsAssign4Operator, iPosition:=0, bIncludeArgumentName:=False)
+        clsCaseWhen3Operator.AddParameter("right", "'MORE'", iPosition:=1, bIncludeArgumentName:=False)
+        clsCaseWhen3Operator.bBrackets = False
+
+        clsAsCharacterFunction.SetRCommand("as.character")
+
+        clsAssignOperator.SetOperation("==")
+        clsAssignOperator.bBrackets = False
+
+        clsAssign2Operator.SetOperation("==")
+        clsAssign2Operator.AddParameter("left", clsROperatorParameter:=clsAnd1Operator, iPosition:=0, bIncludeArgumentName:=False)
+        clsAssign2Operator.AddParameter("right", "TRUE", iPosition:=1, bIncludeArgumentName:=False)
+        clsAssign2Operator.bBrackets = False
+
+        clsAnd1Operator.SetOperation("&")
+        clsAnd1Operator.AddParameter("left", clsROperatorParameter:=clsAssign1Operator, iPosition:=0, bIncludeArgumentName:=False)
+        clsAnd1Operator.bBrackets = False
+
+        clsAssign1Operator.SetOperation("==")
+        clsAssign1Operator.AddParameter("right", "FALSE", iPosition:=1, bIncludeArgumentName:=False)
+        clsAssign1Operator.bBrackets = False
+
+        clsAssign4Operator.SetOperation("==")
+        clsAssign4Operator.AddParameter("left", clsROperatorParameter:=clsAnd2Operator, iPosition:=0, bIncludeArgumentName:=False)
+        clsAssign4Operator.AddParameter("right", "FALSE", iPosition:=1, bIncludeArgumentName:=False)
+        clsAssign4Operator.bBrackets = False
+
+        clsAnd2Operator.SetOperation("&")
+        clsAnd2Operator.AddParameter("left", clsROperatorParameter:=clsAssign3Operator, iPosition:=0, bIncludeArgumentName:=False)
+        clsAnd2Operator.bBrackets = False
+
+        clsAssign3Operator.SetOperation("==")
+        clsAssign3Operator.AddParameter("right", "TRUE", iPosition:=1, bIncludeArgumentName:=False)
+        clsAssign3Operator.bBrackets = False
 
         clsOROperator.SetOperation("|")
+        clsOROperator.AddParameter("left", clsRFunctionParameter:=clsIsNAFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsOROperator.AddParameter("right", clsRFunctionParameter:=clsIsNA1Function, iPosition:=1, bIncludeArgumentName:=False)
+        clsOROperator.bBrackets = False
 
         'combination calculation
         clsCombinationCalcFunction.SetRCommand("instat_calculation$new")
@@ -148,13 +214,25 @@ Public Class dlgClimaticLengthOfSeason
         clsApplyInstatCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsCombinationCalcFunction, iPosition:=0)
         clsApplyInstatCalcFunction.AddParameter("display", "FALSE", iPosition:=1)
 
+        clsConvertColumnTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertColumnTypeFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
+
         'Base Function
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatCalcFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverStartofRainsLogical.AddAdditionalCodeParameterPair(clsOROperator, New RParameter("start_status", 0), iAdditionalPairNo:=1)
-        ucrReceiverEndofRainsLogical.AddAdditionalCodeParameterPair(clsOROperator, New RParameter("end_status", 1), iAdditionalPairNo:=1)
+        ucrReceiverStartofRainsLogical.AddAdditionalCodeParameterPair(clsIsNAFunction, New RParameter("start_status", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverEndofRainsLogical.AddAdditionalCodeParameterPair(clsIsNA1Function, New RParameter("end_status", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverStartofRainsLogical.AddAdditionalCodeParameterPair(clsAsCharacterFunction, New RParameter("start_status", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverStartofRainsLogical.AddAdditionalCodeParameterPair(clsAssignOperator, New RParameter("start_status", 0), iAdditionalPairNo:=3)
+        ucrReceiverEndofRainsLogical.AddAdditionalCodeParameterPair(clsAssignOperator, New RParameter("end_status", 1), iAdditionalPairNo:=2)
+        ucrReceiverEndofRainsLogical.AddAdditionalCodeParameterPair(clsAnd1Operator, New RParameter("end_status", 1), iAdditionalPairNo:=3)
+        ucrReceiverStartofRainsLogical.AddAdditionalCodeParameterPair(clsAssign1Operator, New RParameter("start_status", 0), iAdditionalPairNo:=4)
+        ucrReceiverEndofRainsLogical.AddAdditionalCodeParameterPair(clsAnd2Operator, New RParameter("end_status", 1), iAdditionalPairNo:=4)
+        ucrReceiverStartofRainsLogical.AddAdditionalCodeParameterPair(clsAssign3Operator, New RParameter("start_status", 0), iAdditionalPairNo:=5)
+        ucrInputTextType.AddAdditionalCodeParameterPair(clsConvertColumnTypeFunction, New RParameter("col_names", 1), iAdditionalPairNo:=1)
 
         ucrReceiverStartofRains.SetRCode(clsMinusOpertor, bReset)
         ucrReceiverEndofRains.SetRCode(clsMinusOpertor, bReset)
@@ -212,12 +290,19 @@ Public Class dlgClimaticLengthOfSeason
     Private Sub ucrChkType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkType.ControlValueChanged
         If ucrChkType.Checked Then
             clsCombinationListFunction.AddParameter("sub2", clsRFunctionParameter:=clsStartEndStatusFunction, bIncludeArgumentName:=False, iPosition:=1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnTypeFunction, iPosition:=0)
         Else
             clsCombinationListFunction.RemoveParameterByName("sub2")
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsConvertColumnTypeFunction)
+
         End If
     End Sub
 
     Private Sub ucrChkLengthofSeason_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkLengthofSeason.ControlContentsChanged, ucrChkType.ControlContentsChanged, ucrInputLengthofSeason.ControlContentsChanged, ucrInputTextType.ControlContentsChanged, ucrReceiverStartofRains.ControlContentsChanged, ucrReceiverEndofRains.ControlContentsChanged, ucrReceiverStartofRainsLogical.ControlContentsChanged, ucrReceiverEndofRainsLogical.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorLengthofSeason_DataFrameChanged() Handles ucrSelectorLengthofSeason.DataFrameChanged
+        clsConvertColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorLengthofSeason.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub
 End Class
