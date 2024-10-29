@@ -273,7 +273,7 @@ Public Class dlgView
         If bControlsUpdated Then
             ChangeFunctionParameters()
         End If
-        ' GetObjectName()
+        GetObjectName()
     End Sub
 
     Private Sub ucrChkSortColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSortColumn.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged
@@ -303,18 +303,18 @@ Public Class dlgView
     End Sub
 
     Private Sub ucrSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveData.ControlValueChanged
-        'GetObjectName()
+        GetObjectName()
     End Sub
 
-    'Private Sub GetObjectName()
-    '    If rdoDispOutputWindow.Checked Then
-    '        Dim strPrefix As String = clsOutputWindowFunction.GetRObjectToAssignTo 'If(ucrSaveData.GetText <> "", ucrSaveData.GetText, "last_table")
-    '        clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=0)
-    '    ElseIf rdoHTMLOutputWindow.Checked Then
-    '        Dim strPrefix As String = clsBaseOperator.GetRObjectToAssignTo
-    '        clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=0)
-    '    End If
-    'End Sub
+    Private Sub GetObjectName()
+        If rdoDispOutputWindow.Checked Then
+            Dim strPrefix As String = clsOutputWindowFunction.GetRObjectToAssignTo 'If(ucrSaveData.GetText <> "", ucrSaveData.GetText, "last_table")
+            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=0)
+        ElseIf rdoHTMLOutputWindow.Checked Then
+            Dim strPrefix As String = clsBaseOperator.GetRObjectToAssignTo
+            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=0)
+        End If
+    End Sub
 
     Private Sub ucrSelectorForView_DataFrameChanged() Handles ucrSelectorForView.DataFrameChanged
         clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
