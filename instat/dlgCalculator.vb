@@ -36,8 +36,11 @@ Public Class dlgCalculator
     Private strDefaultKeyboard As String
     ' Note: This list needs to be updated when a new keyboard is added.
     Private strKeyboards() As String = {"Basic", "Maths", "Logical and Symbols", "Transform", "Summary", "Probability", "Factor", "Text/Strings (Character Columns)", "Dates/Times", "Circular", "Wakefield", "Goodness of Fit", "List", "Complex", "Integer", "Functions"}
+    Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
+
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim start = DateTime.Now
         If bFirstLoad Then
             InitialiseDialog()
             iBasicWidth = Me.Width
@@ -48,6 +51,10 @@ Public Class dlgCalculator
         ReopenDialog()
         TestOKEnabled()
         autoTranslate(Me)
+
+        Logger.Debug("This is in the load")
+        Logger.Debug(Process.GetCurrentProcess().WorkingSet64)
+        Logger.Debug("Time", DateTime.Now - start)
     End Sub
 
     Private Sub TestOKEnabled()

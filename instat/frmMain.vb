@@ -685,6 +685,10 @@ Public Class frmMain
         End If
     End Sub
 
+    Public Sub DisableEnableUndo(bDisable As Boolean)
+        ucrDataViewer.DisableEnableUndo(bDisable)
+    End Sub
+
     Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
         dlgNewDataFrame.ShowDialog()
     End Sub
@@ -2893,5 +2897,9 @@ Public Class frmMain
     End Sub
     Private Sub mnuClimaticCheckDataDistances_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDistances.Click
         dlgDistances.ShowDialog()
+    End Sub
+
+    Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
+        ucrDataViewer.Undo()
     End Sub
 End Class

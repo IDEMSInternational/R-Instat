@@ -11,6 +11,7 @@ DataBook <- R6::R6Class("DataBook",
                             self$set_meta(instat_obj_metadata)
                             self$set_objects(list())
                             self$set_scalars(list())
+                            self$set_undo_history(list())
                             
                             if (missing(data_tables) || length(data_tables) == 0) {
                               self$set_data_objects(list())
@@ -31,6 +32,7 @@ DataBook <- R6::R6Class("DataBook",
                           .metadata = list(),
                           .objects = list(),
                           .scalars = list(),
+                          .undo_history = list(),
                           .links = list(),
                           .data_sheets_changed = FALSE,
                           .database_connection = NULL,
@@ -313,6 +315,13 @@ DataBook$set("public", "set_meta", function(new_meta) {
 DataBook$set("public", "set_objects", function(new_objects) {
   if(!is.list(new_objects)) stop("new_objects must be of type: list")
   private$.objects <- new_objects 
+}
+)
+
+DataBook$set("public", "set_undo_history", function(new_undo_history) {
+  if (!is.list(new_undo_history)) stop("undo_history must be of type: list")
+  
+  private$.undo_history <- new_undo_history 
 }
 )
 
@@ -1349,6 +1358,30 @@ DataBook$set("public","is_key", function(data_name, col_names) {
 
 DataBook$set("public","has_key", function(data_name) {
   self$get_data_objects(data_name)$has_key()
+}
+)
+
+DataBook$set("public","set_enable_disable_undo", function(data_name, disable_undo) {
+  self$get_data_objects(data_name)$set_enable_disable_undo(disable_undo)
+}
+)
+
+DataBook$set("public", "is_undo", function(data_name) {
+  self$get_data_objects(data_name)$is_undo()
+})
+
+DataBook$set("public","has_undo_history", function(data_name) {
+  self$get_data_objects(data_name)$has_undo_history()
+}
+)
+
+DataBook$set("public","undo_last_action", function(data_name) {
+  self$get_data_objects(data_name)$undo_last_action()
+}
+)
+
+DataBook$set("public","redo_last_action", function(data_name) {
+  self$get_data_objects(data_name)$redo_last_action()
 }
 )
 
