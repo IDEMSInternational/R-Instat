@@ -325,6 +325,12 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
+    <Compile Include="sdgAdditionalCondition.Designer.vb">
+      <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgAdditionalCondition.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgClimsoft.Designer.vb">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </Compile>
@@ -3404,6 +3410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariablePivotTable.resx">
       <DependentUpon>dlgThreeVariablePivotTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgAdditionalCondition.resx">
+      <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimsoft.resx">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>

@@ -33,6 +33,8 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTiPreviewRows As Integer = 10
     Public Shared ReadOnly DEFAULTiMaxRows As Integer = 1000
     Public Shared ReadOnly DEFAULTiMaxCols As Integer = 50
+    Public Shared ReadOnly DEFAULTiUndoColLimit As Integer = 200
+    Public Shared ReadOnly DEFAULTiUndoRowLimit As Integer = 200000
     Public Shared ReadOnly DEFAULTstrComment As String = "Dialog:"
     Public Shared ReadOnly DEFAULTstrGraphDisplayOption As String = "view_output_window"
     Public Shared ReadOnly DEFAULTbChangeDataFrame As Boolean = False
@@ -45,6 +47,7 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTiDigits As Integer = 4
     Public Shared ReadOnly DEFAULTbShowSignifStars As Boolean = False
     Public Shared ReadOnly DEFAULTbAutoSaveData As Boolean = True
+    Public Shared ReadOnly DEFAULTbSwitchOffUndo As Boolean = False
     Public Shared ReadOnly DEFAULTiAutoSaveDataMinutes As Integer = 10
     Public Shared ReadOnly DEFAULTbShowWaitDialog As Boolean = True
     Public Shared ReadOnly DEFAULTiWaitTimeDelaySeconds As Integer = 2
