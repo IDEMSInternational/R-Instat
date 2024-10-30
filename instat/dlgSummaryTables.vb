@@ -209,7 +209,7 @@ Public Class dlgSummaryTables
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
 
         clsSummaryDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsSummaryDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=8)
+        clsSummaryDefaultFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=8)
         clsSummaryDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=12)
         clsSummaryDefaultFunction.SetAssignToObject("summary_table")
 
@@ -232,7 +232,7 @@ Public Class dlgSummaryTables
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.bBrackets = False
         clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
-        clsSummaryOperator.AddParameter("gt", clsRFunctionParameter:=clsGtFunction.Clone, iPosition:=2)
+        clsSummaryOperator.AddParameter("right", clsROperatorParameter:=clsSpannerOperator, iPosition:=2)
 
         clsSpannerOperator.SetOperation("%>%")
         clsSpannerOperator.AddParameter("gt", clsRFunctionParameter:=clsGtFunction.Clone, iPosition:=0)
@@ -384,6 +384,7 @@ Public Class dlgSummaryTables
         SetSummariesDefaults()
         SetColFactorDefaults()
         SettingParameters()
+        AddPivotWiderVariables()
     End Sub
 
     Private Sub ucrPnlSummaryFrequencyTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaryFrequencyTables.ControlValueChanged
@@ -396,6 +397,7 @@ Public Class dlgSummaryTables
         SetVariableDefaults()
         SetSummariesDefaults()
         SetColFactorDefaults()
+        AddPivotWiderVariables()
     End Sub
 
     Private Sub SettingParameters()
@@ -411,11 +413,12 @@ Public Class dlgSummaryTables
         End If
         If bRCodeSet Then
             If rdoFrequencyTable.Checked Then
-                AddPivotWiderVariables()
                 clsFrequencyOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+            Else
+                clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
             End If
         End If
-
+        AddPivotWiderVariables()
     End Sub
 
     Private Sub FillListView()
@@ -496,8 +499,42 @@ Public Class dlgSummaryTables
 
             ' Pass the selected variables to the clsPivotWiderFunction's names_from parameter
             clsPivotWiderFunction.AddParameter("names_from", varsString, iPosition:=0)
+        Else
+            Dim numSumm As Integer = UcrNudColumnSumFactors.Value
+
+            ' Get the list of selected variable names from ucrReceiverFactors
+            Dim varNames As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList()
+
+            ' Create a new list to store the selected summary variables
+            Dim selectedSumm As New List(Of String)
+
+            ' Loop through the ucrReceiverFactors and get only the first numSumm items
+            For i As Integer = 0 To Math.Min(numSumm, varNames.Count) - 1
+                selectedSumm.Add(varNames(i))
+            Next
+
+            ' Start creating the names_from argument
+            Dim namesFromList As New List(Of String) From {String.Join(",", selectedSumm)}
+
+            ' Add "variable" if ucrReceiverSummaryCols has more than one item and numSumm exceeds varNames.Count
+            If ucrReceiverSummaryCols.Count > 1 AndAlso numSumm > varNames.Count Then
+                namesFromList.Add("variable")
+            End If
+
+            ' Add "summary" if both ucrReceiverSummaryCols and ucrReorderSummary have more than one item and numSumm exceeds the total count
+            If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 AndAlso numSumm > varNames.Count + 1 Then
+                namesFromList.Add("summary")
+            End If
+
+            ' Join names_from components with commas and wrap in c()
+            Dim varsSummary As String = "c(" & String.Join(",", namesFromList) & ")"
+
+            ' Pass the constructed names_from argument to clsPivotWiderFunction
+            clsPivotWiderFunction.AddParameter("names_from", varsSummary, iPosition:=0)
         End If
     End Sub
+
+
 
     Private Sub ucrReceiverFactors_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactors.SelectionChanged, ucrReceiverSummaryCols.SelectionChanged, ucrReorderSummary.SelectedIndexChanged
         SetDefaultValues()
