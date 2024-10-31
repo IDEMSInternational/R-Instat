@@ -573,7 +573,10 @@ Public Class dlgSummaryTables
         Dim defaultVariables As Integer = selectedColumns.Count
 
         If ucrReceiverSummaryCols.Count > 1 Then
-            ucrNudPositionVar.Value = defaultVariables + 1
+            'ucrNudPositionVar.Value = defaultVariables + 1
+            ucrNudPositionVar.Maximum = defaultVariables + 1
+            ucrNudPositionVar.Minimum = 0
+
         Else
             ucrNudPositionVar.Value = 0
         End If
@@ -585,7 +588,9 @@ Public Class dlgSummaryTables
         Dim defaultSummaries As Integer = selectedSummaries.Count
 
         If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
-            ucrNudPositionSum.Value = defaultSummaries + 2
+            'ucrNudPositionSum.Value = defaultSummaries + 2
+            ucrNudPositionSum.Maximum = defaultSummaries + 2
+            ucrNudPositionSum.Minimum = 0
         Else
             ucrNudPositionSum.Value = 0
         End If
