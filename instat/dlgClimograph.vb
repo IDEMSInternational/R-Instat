@@ -15,8 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports System.Text.RegularExpressions
 
 Public Class dlgClimograph
+    Private isFilling As Boolean = False
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsGgwalterliethFunction, clsDummyFunction As RFunction
@@ -114,6 +116,12 @@ Public Class dlgClimograph
     Private clsAesTmaxBarFunction1, clsAesTminBarFunction1, clsAesTemGgplotFunction, clsAesRainGgplotFunction, clsSecAxisRainFunction, clsSecAxisTemFunction As New RFunction
     Private clsAesRainBarTextFunction, clsPlotGridFunction, clsAesTmaxBarTextFunction, clsAesTminBarTextFunction, clsRainRoundFunction, clsTmaxRoundFunction, clsTminRoundFunction As New RFunction
     Private strScale As String = "scale_Factor"
+    Private lstRainReceivers As New List(Of ucrReceiverSingle)
+    Private lstTmaxReceivers As New List(Of ucrReceiverSingle)
+    Private lstTminReceivers As New List(Of ucrReceiverSingle)
+    Private lstTminminReceivers As New List(Of ucrReceiverSingle)
+
+    Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
     Private Sub dlgClimograph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -128,9 +136,29 @@ Public Class dlgClimograph
         TestOKEnabled()
         autoTranslate(Me)
         ResizeDialogue()
+
+        AutoFillReceivers(lstRainReceivers)
+        AutoFillReceivers(lstTmaxReceivers)
+        AutoFillReceivers(lstTminReceivers)
+        AutoFillReceivers(lstTminminReceivers)
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim kvpRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("rain", {"sumrainfall", "rain", "rainfall", "prec", "rr", "prcp", "sum_rainfall", "sum_rain", "sum_precip", "sum_precipitation", "sum_rr", "sum_pre", "sum_prcp", "mean_rainfall", "mean_rain", "mean_precip", "mean_precipitation", "mean_rr", "mean_pre", "mean_prcp", "max_rainfall", "max_rain", "max_precip", "max_precipitation", "max_rr", "max_pre", "max_prcp", "min_rainfall", "min_rain", "min_precip", "min_precipitation", "min_rr", "min_pre", "min_prcp", "mean_sum_rain", "mean_sum_precip", "mean_sum_precipitation", "mean_sum_rr", "mean_sum_pre", "mean_sum_prcp", "mean_sum_rainfall", "max_sum_rain", "max_sum_precip", "max_sum_precipitation", "max_sum_rr", "max_sum_pre", "max_sum_prcp", "max_sum_rainfall", "min_sum_rain", "min_sum_precip", "min_sum_precipitation", "min_sum_rr", "min_sum_pre", "min_sum_prcp", "min_sum_rainfall"}.ToList())
+        Dim kvpTMax As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_max", {"tmax", "tx", "tempmax", "tmp_max", "tmpmax", "max_temperature", "temperature_max", "mean_tmax", "mean_tx", "mean_tempmax", "mean_tmp_max", "mean_tmpmax", "mean_temperature_max", "mean_max_temperature", "max_tmax", "max_tx", "max_tempmax", "max_tmp_max", "max_tmpmax", "max_temperature_max", "max_max_temperature", "min_tmax", "min_tx", "min_tempmax", "min_tmp_max", "min_tmpmax", "min_temperature_max", "min_max_temperature"}.ToList())
+        Dim kvpTMin As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_min", {"tmin", "tn", "tempmin", "tmp_min", "tmpmin", "min_temperature", "temperature_min", "mean_tmin", "mean_tn", "mean_tempmin", "mean_tmp_min", "mean_tmpmin", "mean_temperature_min", "mean_min_temperature", "max_tmin", "max_tn", "max_tempmin", "max_tmp_min", "max_tmpmin", "max_temperature_min", "max_min_temperature"}.ToList())
+        Dim kvpTMinmin As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("tem_min_min", {"min_tmin", "min_tn", "min_tempmin", "min_tmp_min", "min_tmpmin", "min_temperature_min", "min_min_temperature"}.ToList())
+
+        lstRecognisedTypes.AddRange({kvpRain, kvpTMax, kvpTMin, kvpTMinmin})
+
+        lstRainReceivers.AddRange({ucrReceiverRainBar, ucrReceiverRain, ucrReceiverRainC})
+
+        lstTmaxReceivers.AddRange({ucrReceiverElement1, ucrReceiverElement1Bar, ucrReceiverMaxtem})
+
+        lstTminReceivers.AddRange({ucrReceiverElement2, ucrReceiverElement2Bar, ucrReceiverMintemp})
+
+        lstTminminReceivers.AddRange({ucrReceiverAbsolute})
+
         Dim dctLegendPosition As New Dictionary(Of String, String)
         Dim dctColourPallette As New Dictionary(Of String, String)
         Dim dctPalette As New Dictionary(Of String, String)
@@ -176,42 +204,34 @@ Public Class dlgClimograph
         ucrReceiverRain.SetParameter(New RParameter("p_mes", 3))
         ucrReceiverRain.SetParameterIsString()
         ucrReceiverRain.Selector = ucrSelectorClimograph
-        ucrReceiverRain.SetClimaticType("rain")
-        ucrReceiverRain.bAutoFill = True
-        ucrReceiverRain.strSelectorHeading = "Rain Variables"
+        ucrReceiverRain.Tag = "rain"
         ucrReceiverRain.SetLinkedDisplayControl(lblRain)
 
         ucrReceiverRainC.SetParameter(New RParameter("y", 1))
         ucrReceiverRainC.SetParameterIsRFunction()
         ucrReceiverRainC.Selector = ucrSelectorClimograph
         ucrReceiverRainC.bWithQuotes = False
-        ucrReceiverRainC.SetClimaticType("rain")
-        ucrReceiverRainC.bAutoFill = True
-        ucrReceiverRainC.strSelectorHeading = "Rain Variables"
+        ucrReceiverRainC.Tag = "rain"
         ucrReceiverRainC.SetLinkedDisplayControl(lblRainC)
 
         ucrReceiverRainBar.SetParameter(New RParameter("y", 1))
         ucrReceiverRainBar.SetParameterIsRFunction()
         ucrReceiverRainBar.Selector = ucrSelectorClimograph
         ucrReceiverRainBar.bWithQuotes = False
-        ucrReceiverRainBar.SetClimaticType("rain")
-        ucrReceiverRainBar.bAutoFill = True
-        ucrReceiverRainBar.strSelectorHeading = "Rain Variables"
+        ucrReceiverRainBar.Tag = "rain"
         ucrReceiverRainBar.SetLinkedDisplayControl(lblRainBar)
 
         ucrReceiverMaxtem.SetParameter(New RParameter("tm_max", 4))
         ucrReceiverMaxtem.SetParameterIsString()
         ucrReceiverMaxtem.Selector = ucrSelectorClimograph
-        ucrReceiverMaxtem.SetClimaticType("temp_max")
-        ucrReceiverMaxtem.bAutoFill = True
+        ucrReceiverMaxtem.Tag = "temp_max"
         ucrReceiverMaxtem.strSelectorHeading = "Variables"
         ucrReceiverMaxtem.SetLinkedDisplayControl(lblMaxtem)
 
         ucrReceiverMintemp.SetParameter(New RParameter("tm_min", 5))
         ucrReceiverMintemp.SetParameterIsString()
         ucrReceiverMintemp.Selector = ucrSelectorClimograph
-        ucrReceiverMintemp.SetClimaticType("temp_min")
-        ucrReceiverMintemp.bAutoFill = True
+        ucrReceiverMintemp.Tag = "temp_min"
         ucrReceiverMintemp.strSelectorHeading = "Variables"
         ucrReceiverMintemp.SetLinkedDisplayControl(lblMintem)
 
@@ -219,8 +239,7 @@ Public Class dlgClimograph
         ucrReceiverElement1.SetParameterIsRFunction()
         ucrReceiverElement1.Selector = ucrSelectorClimograph
         ucrReceiverElement1.bWithQuotes = False
-        ucrReceiverElement1.SetClimaticType("temp_max")
-        ucrReceiverElement1.bAutoFill = True
+        ucrReceiverElement1.Tag = "temp_max"
         ucrReceiverElement1.strSelectorHeading = "Variables"
         ucrReceiverElement1.SetLinkedDisplayControl(lblElement1)
 
@@ -228,8 +247,7 @@ Public Class dlgClimograph
         ucrReceiverElement1Bar.SetParameterIsRFunction()
         ucrReceiverElement1Bar.Selector = ucrSelectorClimograph
         ucrReceiverElement1Bar.bWithQuotes = False
-        ucrReceiverElement1Bar.SetClimaticType("temp_max")
-        ucrReceiverElement1Bar.bAutoFill = True
+        ucrReceiverElement1Bar.Tag = "temp_max"
         ucrReceiverElement1Bar.strSelectorHeading = "Variables"
         ucrReceiverElement1Bar.SetLinkedDisplayControl(lblElement1Bar)
 
@@ -237,8 +255,7 @@ Public Class dlgClimograph
         ucrReceiverElement2.SetParameterIsRFunction()
         ucrReceiverElement2.Selector = ucrSelectorClimograph
         ucrReceiverElement2.bWithQuotes = False
-        ucrReceiverElement2.SetClimaticType("temp_min")
-        ucrReceiverElement2.bAutoFill = True
+        ucrReceiverElement2.Tag = "temp_min"
         ucrReceiverElement2.strSelectorHeading = "Variables"
         ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
 
@@ -246,8 +263,7 @@ Public Class dlgClimograph
         ucrReceiverElement2Bar.SetParameterIsRFunction()
         ucrReceiverElement2Bar.Selector = ucrSelectorClimograph
         ucrReceiverElement2Bar.bWithQuotes = False
-        ucrReceiverElement2Bar.SetClimaticType("temp_min")
-        ucrReceiverElement2Bar.bAutoFill = True
+        ucrReceiverElement2Bar.Tag = "temp_min"
         ucrReceiverElement2Bar.strSelectorHeading = "Variables"
         ucrReceiverElement2Bar.SetLinkedDisplayControl(lblElement2Bar)
 
@@ -276,6 +292,7 @@ Public Class dlgClimograph
         ucrReceiverAbsolute.SetParameter(New RParameter("ta_min", 6))
         ucrReceiverAbsolute.SetParameterIsString()
         ucrReceiverAbsolute.Selector = ucrSelectorClimograph
+        ucrReceiverAbsolute.Tag = "tem_min_min"
         ucrReceiverAbsolute.strSelectorHeading = "Variables"
         ucrReceiverAbsolute.SetLinkedDisplayControl(lblAbsolute)
 
@@ -850,6 +867,11 @@ Public Class dlgClimograph
             ucrPnlColour.SetRCode(clsDummyFunction, bReset)
             ucrChkColour.SetRCode(clsBaseOperator, bReset)
         End If
+
+        AutoFillReceivers(lstRainReceivers)
+        AutoFillReceivers(lstTmaxReceivers)
+        AutoFillReceivers(lstTminReceivers)
+        AutoFillReceivers(lstTminminReceivers)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -1313,7 +1335,62 @@ Public Class dlgClimograph
         AddRemoveGeomRibbon()
         Dataframechange()
         AddRemoveTemBars()
+
+
+        AutoFillReceivers(lstRainReceivers)
+        AutoFillReceivers(lstTmaxReceivers)
+        AutoFillReceivers(lstTminReceivers)
+        AutoFillReceivers(lstTminminReceivers)
     End Sub
+
+
+    Private Sub AutoFillRainReceivers()
+        If isFilling Then
+            Exit Sub
+        End If
+        isFilling = True
+
+        ' Temporarily remove the event handler
+        RemoveHandler ucrSelectorClimograph.ControlValueChanged, AddressOf AutoFillRainReceivers
+
+        Dim lstRecognisedValues As List(Of String)
+        Dim ucrCurrentReceiver As ucrReceiver
+        Dim bFound As Boolean = False
+
+        ucrCurrentReceiver = ucrSelectorClimograph.CurrentReceiver
+
+        For Each ucrTempReceiver As ucrReceiver In lstRainReceivers
+            ucrTempReceiver.SetMeAsReceiver()
+            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+
+            If lstRecognisedValues.Count > 0 Then
+                For Each lviTempVariable As ListViewItem In ucrSelectorClimograph.lstAvailableVariable.Items
+                    For Each strValue As String In lstRecognisedValues
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
+                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                            bFound = True
+                            Exit For
+                        End If
+                    Next
+                    If bFound Then
+                        bFound = False
+                        Exit For
+                    End If
+                Next
+            End If
+        Next
+
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+
+        ' Re-enable the event handler
+        AddHandler ucrSelectorClimograph.ControlValueChanged, AddressOf AutoFillRainReceivers
+
+        isFilling = False
+    End Sub
+
+
 
     Private Sub GetParameterValue(clsOperator As ROperator)
         Dim i As Integer = 0
@@ -1807,4 +1884,64 @@ Public Class dlgClimograph
     Private Sub ucrReceiverElement1Bar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1Bar.ControlValueChanged, ucrReceiverMonthBar.ControlValueChanged, ucrReceiverRainBar.ControlValueChanged, ucrReceiverElement2Bar.ControlValueChanged
         AddRemoveTemBars()
     End Sub
+
+    Private Sub AutoFillReceivers(lstReceivers As List(Of ucrReceiverSingle))
+
+        If isFilling OrElse lstReceivers Is Nothing Then
+            Exit Sub
+        End If
+
+        isFilling = True
+
+        ' Change the event handler to the new method
+        'RemoveHandler ucrSelectorClimograph.ControlValueChanged, AddressOf OnControlValueChanged
+
+        Dim lstRecognisedValues As List(Of String)
+        Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorClimograph.CurrentReceiver
+        Dim bFound As Boolean = False
+
+        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+            ucrTempReceiver.SetMeAsReceiver()
+            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+
+            If lstRecognisedValues.Count > 0 Then
+                For Each lviTempVariable As ListViewItem In ucrSelectorClimograph.lstAvailableVariable.Items
+                    For Each strValue As String In lstRecognisedValues
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
+                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                            bFound = True
+                            Exit For
+                        End If
+                    Next
+                    If bFound Then
+                        bFound = False
+                        Exit For
+                    End If
+                Next
+            End If
+        Next
+
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+
+        ' Re-enable the event handler
+        'AddHandler ucrSelectorClimograph.ControlValueChanged, AddressOf OnControlValueChanged
+
+        isFilling = False
+    End Sub
+
+
+
+    Private Function GetRecognisedValues(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
 End Class
