@@ -1336,13 +1336,11 @@ Public Class dlgClimograph
         Dataframechange()
         AddRemoveTemBars()
 
-
         AutoFillReceivers(lstRainReceivers)
         AutoFillReceivers(lstTmaxReceivers)
         AutoFillReceivers(lstTminReceivers)
         AutoFillReceivers(lstTminminReceivers)
     End Sub
-
 
     Private Sub AutoFillRainReceivers()
         If isFilling Then
@@ -1389,8 +1387,6 @@ Public Class dlgClimograph
 
         isFilling = False
     End Sub
-
-
 
     Private Sub GetParameterValue(clsOperator As ROperator)
         Dim i As Integer = 0
@@ -1930,8 +1926,6 @@ Public Class dlgClimograph
 
         isFilling = False
     End Sub
-
-
 
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
         Dim lstValues As New List(Of String)
