@@ -136,10 +136,11 @@ Public Class dlgClimograph
         TestOKEnabled()
         autoTranslate(Me)
         ResizeDialogue()
-        'AutoFillRainReceivers()
-        'AutoFillTmaxReceivers()
-        'AutoFillTminReceivers()
-        'AutoFillTminminReceivers()
+
+        AutoFillReceivers(lstRainReceivers)
+        AutoFillReceivers(lstTmaxReceivers)
+        AutoFillReceivers(lstTminReceivers)
+        AutoFillReceivers(lstTminminReceivers)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -866,10 +867,11 @@ Public Class dlgClimograph
             ucrPnlColour.SetRCode(clsDummyFunction, bReset)
             ucrChkColour.SetRCode(clsBaseOperator, bReset)
         End If
-        'AutoFillRainReceivers()
-        'AutoFillTmaxReceivers()
-        'AutoFillTminReceivers()
-        'AutoFillTminminReceivers()
+
+        AutoFillReceivers(lstRainReceivers)
+        AutoFillReceivers(lstTmaxReceivers)
+        AutoFillReceivers(lstTminReceivers)
+        AutoFillReceivers(lstTminminReceivers)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -1333,35 +1335,62 @@ Public Class dlgClimograph
         AddRemoveGeomRibbon()
         Dataframechange()
         AddRemoveTemBars()
-        'AutoFillRainReceivers()
-        'AutoFillTmaxReceivers()
-        'AutoFillTminReceivers()
-        'AutoFillTminminReceivers()
+
+
+        AutoFillReceivers(lstRainReceivers)
+        AutoFillReceivers(lstTmaxReceivers)
+        AutoFillReceivers(lstTminReceivers)
+        AutoFillReceivers(lstTminminReceivers)
+    End Sub
+
+
+    Private Sub AutoFillRainReceivers()
         If isFilling Then
             Exit Sub
         End If
         isFilling = True
 
-        Dim lstReceivers As List(Of ucrReceiverSingle) = Nothing
-        If ucrSelectorClimograph.CurrentReceiver IsNot Nothing Then
-            Select Case ucrSelectorClimograph.CurrentReceiver.Tag ' Or any property that differentiates the lists
-                Case "Rain"
-                    lstReceivers = lstRainReceivers
-                Case "Tmax"
-                    lstReceivers = lstTmaxReceivers
-                Case "Tmin"
-                    lstReceivers = lstTminReceivers
-                Case "Tminmin"
-                    lstReceivers = lstTminminReceivers
-                    ' Add additional cases as necessary
-            End Select
+        ' Temporarily remove the event handler
+        RemoveHandler ucrSelectorClimograph.ControlValueChanged, AddressOf AutoFillRainReceivers
+
+        Dim lstRecognisedValues As List(Of String)
+        Dim ucrCurrentReceiver As ucrReceiver
+        Dim bFound As Boolean = False
+
+        ucrCurrentReceiver = ucrSelectorClimograph.CurrentReceiver
+
+        For Each ucrTempReceiver As ucrReceiver In lstRainReceivers
+            ucrTempReceiver.SetMeAsReceiver()
+            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+
+            If lstRecognisedValues.Count > 0 Then
+                For Each lviTempVariable As ListViewItem In ucrSelectorClimograph.lstAvailableVariable.Items
+                    For Each strValue As String In lstRecognisedValues
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
+                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                            bFound = True
+                            Exit For
+                        End If
+                    Next
+                    If bFound Then
+                        bFound = False
+                        Exit For
+                    End If
+                Next
+            End If
+        Next
+
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
         End If
-        If lstReceivers IsNot Nothing Then
-            AutoFillReceivers(lstReceivers)
-        End If
+
+        ' Re-enable the event handler
+        AddHandler ucrSelectorClimograph.ControlValueChanged, AddressOf AutoFillRainReceivers
 
         isFilling = False
     End Sub
+
+
 
     Private Sub GetParameterValue(clsOperator As ROperator)
         Dim i As Integer = 0
@@ -1857,6 +1886,16 @@ Public Class dlgClimograph
     End Sub
 
     Private Sub AutoFillReceivers(lstReceivers As List(Of ucrReceiverSingle))
+
+        If isFilling OrElse lstReceivers Is Nothing Then
+            Exit Sub
+        End If
+
+        isFilling = True
+
+        ' Change the event handler to the new method
+        'RemoveHandler ucrSelectorClimograph.ControlValueChanged, AddressOf OnControlValueChanged
+
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorClimograph.CurrentReceiver
         Dim bFound As Boolean = False
@@ -1885,7 +1924,14 @@ Public Class dlgClimograph
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
+
+        ' Re-enable the event handler
+        'AddHandler ucrSelectorClimograph.ControlValueChanged, AddressOf OnControlValueChanged
+
+        isFilling = False
     End Sub
+
+
 
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
         Dim lstValues As New List(Of String)

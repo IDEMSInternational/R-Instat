@@ -5,26 +5,27 @@ DataSheet$set("public", "merge_data", function(new_data, by = NULL, type = "left
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   by_col_attributes <- list()
   
-  if(!is.null(by)) {
-    for(i in seq_along(by)) {
-      # Collect column attributes
-      by_col_attributes[[by[[i]]]] <- get_column_attributes(curr_data[[by[[i]]]])
-      
-      # Check and align the data types for each "by" column
-      if (class(curr_data[[by[[i]]]]) != class(new_data[[by[[i]]]])) {
-        warning(paste0("Type is different for ", by[[i]], " in the two data frames. Setting as numeric in both data frames."))
-        
-        # Convert factors to numeric if necessary
-        if (class(curr_data[[by[[i]]]]) == "factor") {
-          curr_data[[by[[i]]]] <- as.numeric(as.character(curr_data[[by[[i]]]]))
-        } else if (class(new_data[[by[[i]]]]) == "factor") {
-          new_data[[by[[i]]]] <- as.numeric(as.character(new_data[[by[[i]]]]))
-        } else {
-          stop(paste0("Type is different for ", by[[i]], " in the two data frames and cannot be coerced."))
-        }
+  if (!is.null(by)) {
+  for (i in seq_along(by)) {
+    # Collect column attributes
+    by_col_attributes[[by[[i]]]] <- get_column_attributes(curr_data[[by[[i]]]])
+
+    # Check and align the data types for each "by" column
+    if (!inherits(curr_data[[by[[i]]]], class(new_data[[by[[i]]]]))) {
+      warning(paste0("Type is different for ", by[[i]], " in the two data frames. Setting as numeric in both data frames."))
+
+      # Convert factors to numeric if necessary
+      if (inherits(curr_data[[by[[i]]]], "factor")) {
+        curr_data[[by[[i]]]] <- as.numeric(as.character(curr_data[[by[[i]]]]))
+      } else if (inherits(new_data[[by[[i]]]], "factor")) {
+        new_data[[by[[i]]]] <- as.numeric(as.character(new_data[[by[[i]]]]))
+      } else {
+        stop(paste0("Type is different for ", by[[i]], " in the two data frames and cannot be coerced."))
       }
     }
   }
+}
+
   
   # Perform the appropriate join based on the "type" argument
   if (type == "left") {
