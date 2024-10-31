@@ -153,7 +153,7 @@ Public Class dlgEndOfRainsSeason
     Private clsFirstDateFunction As New RFunction
 
     ' Status summary
-    Private clsEndSeasonStatusSummaryCalc As New RFunction
+    Private clsEndSeasonStatusSummaryCalc, clsIsNAStatusFunction, clsFirstStatusFunction, clsIfelseStatusFunction, clsIfelseStatus1Function As New RFunction
 
     ' Combination
     Private clsEndSeasonCombinationCalc As New RFunction
@@ -414,6 +414,10 @@ Public Class dlgEndOfRainsSeason
 
         '   Status summary
         clsEndRainsStatusSummaryCalc.Clear()
+        clsIfelseStatusFunction.Clear()
+        clsIfelseStatus1Function.Clear()
+        clsFirstStatusFunction.Clear()
+        clsIsNAStatusFunction.Clear()
 
         '   Combination
         clsEndRainsCombinationCalc.Clear()
@@ -669,7 +673,6 @@ Public Class dlgEndOfRainsSeason
         clsRunCalculation.AddParameter("calc", clsRFunctionParameter:=clsEndRainsCombinationCalc, iPosition:=1)
         clsRunCalculation.AddParameter("param_list", clsRFunctionParameter:=clsListCalFunction, iPosition:=2)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalculation)
 #End Region
 
 #Region "end_of_season"
@@ -927,10 +930,29 @@ Public Class dlgEndOfRainsSeason
         ' Status summary
         clsEndSeasonStatusSummaryCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonStatusSummaryCalc.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
-        clsEndSeasonStatusSummaryCalc.AddParameter("function_exp", Chr(34) & "n() > 0" & Chr(34), iPosition:=1)
+        clsEndSeasonStatusSummaryCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfelseStatusFunction, iPosition:=1)
         clsEndSeasonStatusSummaryCalc.AddParameter("result_name", Chr(34) & strEndSeasonStatus & Chr(34), iPosition:=3)
         clsEndSeasonStatusSummaryCalc.AddParameter("save", 2, iPosition:=4)
         clsEndSeasonStatusSummaryCalc.SetAssignTo(strEndSeasonStatus)
+
+
+        clsIfelseStatusFunction.SetRCommand("ifelse")
+        clsIfelseStatusFunction.bToScriptAsRString = True
+        clsIfelseStatusFunction.AddParameter("x", "n() > 0", iPosition:=0, bIncludeArgumentName:=False)
+        clsIfelseStatusFunction.AddParameter("y", clsRFunctionParameter:=clsIfelseStatus1Function, iPosition:=1, bIncludeArgumentName:=False)
+        clsIfelseStatusFunction.AddParameter("z", "FALSE", iPosition:=2, bIncludeArgumentName:=False)
+
+        clsIfelseStatus1Function.SetRCommand("ifelse")
+        clsIfelseStatus1Function.AddParameter("yes", clsRFunctionParameter:=clsFirstStatusFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsIfelseStatus1Function.AddParameter("test", "NA", iPosition:=1, bIncludeArgumentName:=False)
+        clsIfelseStatus1Function.AddParameter("no", "TRUE", iPosition:=2, bIncludeArgumentName:=False)
+
+        clsFirstStatusFunction.SetPackageName("dplyr")
+        clsFirstStatusFunction.SetRCommand("first")
+        clsFirstStatusFunction.AddParameter("x", clsRFunctionParameter:=clsIsNAStatusFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsIsNAStatusFunction.SetRCommand("is.na")
+        clsIsNAStatusFunction.AddParameter("x", strWB, iPosition:=0, bIncludeArgumentName:=False)
 
         ' Combined
         clsEndSeasonCombinationCalc.SetRCommand("instat_calculation$new")
@@ -946,6 +968,9 @@ Public Class dlgEndOfRainsSeason
 
         clsEndSeasonCombinationSubCalcList.SetRCommand("list")
         clsEndSeasonCombinationSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsEndSeasonFirstDoySummaryCalc, bIncludeArgumentName:=False, iPosition:=0)
+        clsEndSeasonCombinationSubCalcList.AddParameter("sub2", clsRFunctionParameter:=clsEndSeasonFirstDateSummaryCalc, bIncludeArgumentName:=False, iPosition:=1)
+        clsEndSeasonCombinationSubCalcList.AddParameter("sub3", clsRFunctionParameter:=clsEndRainsStatusSummaryCalc, bIncludeArgumentName:=False, iPosition:=2)
+        clsEndSeasonCombinationSubCalcList.AddParameter("sub4", clsRFunctionParameter:=clsEndSeasonFirstDoySummaryCalcFilledFunction, bIncludeArgumentName:=False, iPosition:=3)
 
         clsGetColumnDataTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
         clsGetColumnDataTypeFunction.SetAssignTo(strYearType)
@@ -966,11 +991,14 @@ Public Class dlgEndOfRainsSeason
         clsConvertColumnType1Function.AddParameter("to_type", "year_type", iPosition:=2)
 
 #End Region
+        ucrBase.clsRsyntax.ClearCodes()
+
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnDataTypeFunction, iPosition:=0)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertColumnTypeFunction, iPosition:=1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsGetlinkeddataFunction, iPosition:=0)
         ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType1Function, iPosition:=1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType2Function, iPosition:=2)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalculation)
 
         clsFirstOrLastFunction = clsLastDoyFunction
     End Sub
