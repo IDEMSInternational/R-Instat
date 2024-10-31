@@ -865,7 +865,7 @@ Public Class dlgLinePlot
                 clsBaseOperator.RemoveParameterByName("slopetheme")
             End If
         End If
-        If rdoLine.Checked AndAlso rdoLinerange.Checked AndAlso rdoSmoothing.Checked AndAlso rdoDumbbell.Checked Then
+        If rdoLine.Checked OrElse rdoLinerange.Checked OrElse rdoSmoothing.Checked OrElse rdoDumbbell.Checked Then
             AddRemoveTheme()
         End If
     End Sub
@@ -1273,7 +1273,4 @@ Public Class dlgLinePlot
         AddRemoveLineOnLineRange()
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverYMin.ControlContentsChanged, ucrReceiverYMax.ControlContentsChanged, ucrReceiverXEnd.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrReceiverSlopeY.ControlContentsChanged, ucrReceiverSlopeX.ControlContentsChanged, ucrReceiverSlopeColour.ControlContentsChanged, ucrFactorOptionalReceiver.ControlContentsChanged
-
-    End Sub
 End Class
