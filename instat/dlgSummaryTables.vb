@@ -279,8 +279,6 @@ Public Class dlgSummaryTables
         ucrChkWeight.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkStoreResults.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrChkDisplayAsPercentage.SetRCode(clsFrequencyDefaultFunction, bReset)
-        ucrNudPositionSum.SetRCode(clsSummaryDefaultFunction, bReset)
-        ucrNudPositionVar.SetRCode(clsSummaryDefaultFunction, bReset)
         ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
         If bReset Then
             ucrReceiverSummaryCols.SetRCode(clsSummaryDefaultFunction, bReset)
@@ -288,6 +286,8 @@ Public Class dlgSummaryTables
             ucrNudColFactors.SetRCode(clsFrequencyDefaultFunction, bReset)
             ucrPnlSummaryFrequencyTables.SetRCode(clsDummyFunction, bReset)
             UcrNudColumnSumFactors.SetRCode(clsSummaryDefaultFunction, bReset)
+            ucrNudPositionSum.SetRCode(clsSummaryDefaultFunction, bReset)
+            ucrNudPositionVar.SetRCode(clsSummaryDefaultFunction, bReset)
         End If
         bRCodeSet = True
         FillListView()
@@ -415,7 +415,11 @@ Public Class dlgSummaryTables
             If rdoFrequencyTable.Checked Then
                 clsFrequencyOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
             Else
-                clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+                If UcrNudColumnSumFactors.Value = 0 Then
+                    clsSummaryOperator.RemoveParameterByName("col_factor")
+                Else
+                    clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+                End If
             End If
         End If
         AddPivotWiderVariables()
@@ -513,17 +517,33 @@ Public Class dlgSummaryTables
                 selectedSumm.Add(varNames(i))
             Next
 
-            ' Start creating the names_from argument
-            Dim namesFromList As New List(Of String) From {String.Join(",", selectedSumm)}
+            ' Initialize namesFromList with the selected summary variables
+            Dim namesFromList As New List(Of String)(selectedSumm)
 
             ' Add "variable" if ucrReceiverSummaryCols has more than one item and numSumm exceeds varNames.Count
             If ucrReceiverSummaryCols.Count > 1 AndAlso numSumm > varNames.Count Then
                 namesFromList.Add("variable")
             End If
 
-            ' Add "summary" if both ucrReceiverSummaryCols and ucrReorderSummary have more than one item and numSumm exceeds the total count
+            ' Add "summary" if there is more than one item in ucrReceiverSummaryCols, ucrReorderSummary has more than one item, 
+            ' and numSumm exceeds the total count of varNames
             If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 AndAlso numSumm > varNames.Count + 1 Then
                 namesFromList.Add("summary")
+            End If
+
+            ' Reorder only if "variable" and/or "summary" are already present in namesFromList
+            If namesFromList.Contains("variable") Then
+                ' Get the desired position for "variable" and move it to that position
+                Dim variableIndex As Integer = Math.Min(ucrNudPositionVar.Value, namesFromList.Count)
+                namesFromList.Remove("variable")
+                namesFromList.Insert(variableIndex, "variable")
+            End If
+
+            If namesFromList.Contains("summary") Then
+                ' Get the desired position for "summary" and move it to that position
+                Dim summaryIndex As Integer = Math.Min(ucrNudPositionSum.Value, namesFromList.Count)
+                namesFromList.Remove("summary")
+                namesFromList.Insert(summaryIndex, "summary")
             End If
 
             ' Join names_from components with commas and wrap in c()
@@ -531,6 +551,7 @@ Public Class dlgSummaryTables
 
             ' Pass the constructed names_from argument to clsPivotWiderFunction
             clsPivotWiderFunction.AddParameter("names_from", varsSummary, iPosition:=0)
+
         End If
     End Sub
 
@@ -576,9 +597,10 @@ Public Class dlgSummaryTables
             'ucrNudPositionVar.Value = defaultVariables + 1
             ucrNudPositionVar.Maximum = defaultVariables + 1
             ucrNudPositionVar.Minimum = 0
-
+            ucrNudPositionVar.Enabled = True
         Else
             ucrNudPositionVar.Value = 0
+            ucrNudPositionVar.Enabled = False
         End If
 
     End Sub
@@ -591,8 +613,10 @@ Public Class dlgSummaryTables
             'ucrNudPositionSum.Value = defaultSummaries + 2
             ucrNudPositionSum.Maximum = defaultSummaries + 2
             ucrNudPositionSum.Minimum = 0
+            ucrNudPositionSum.Enabled = True
         Else
             ucrNudPositionSum.Value = 0
+            ucrNudPositionSum.Enabled = False
         End If
     End Sub
 
