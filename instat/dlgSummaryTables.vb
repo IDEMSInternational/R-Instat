@@ -258,8 +258,8 @@ Public Class dlgSummaryTables
         bResetFormatSubdialog = True
         TestOKEnabled()
         SetDefaultValues()
-        SetSummariesDefaults()
-        SetVariableDefaults()
+        'SetSummariesDefaults()
+        'SetVariableDefaults()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -292,8 +292,8 @@ Public Class dlgSummaryTables
         bRCodeSet = True
         FillListView()
         SetDefaultValues()
-        SetSummariesDefaults()
-        SetVariableDefaults()
+        'SetSummariesDefaults()
+        'SetVariableDefaults()
         SetColFactorDefaults()
     End Sub
 
@@ -380,8 +380,8 @@ Public Class dlgSummaryTables
         ucrReceiverFactors.ControlValueChanged, ucrNudPositionSum.ControlValueChanged, ucrNudPositionVar.ControlValueChanged
 
         SetDefaultValues()
-        SetVariableDefaults()
-        SetSummariesDefaults()
+        'SetVariableDefaults()
+        'SetSummariesDefaults()
         SetColFactorDefaults()
         SettingParameters()
         AddPivotWiderVariables()
@@ -494,7 +494,7 @@ Public Class dlgSummaryTables
             Dim selectedVars As New List(Of String)
 
             ' Loop through the ucrReceiverFactors and get only the first numVars items
-            For i As Integer = 0 To Math.Min(numVars, varNames.Count) - 1
+            For i As Integer = varNames.Count - 1 To Math.Max(varNames.Count - numVars, 0) Step -1
                 selectedVars.Add(varNames(i))  ' Add the variable name to selectedVars
             Next
 
@@ -534,14 +534,14 @@ Public Class dlgSummaryTables
             ' Reorder only if "variable" and/or "summary" are already present in namesFromList
             If namesFromList.Contains("variable") Then
                 ' Get the desired position for "variable" and move it to that position
-                Dim variableIndex As Integer = Math.Min(ucrNudPositionVar.Value, namesFromList.Count)
+                Dim variableIndex As Integer = Math.Min(ucrNudPositionVar.Value, namesFromList.Count - 1)
                 namesFromList.Remove("variable")
                 namesFromList.Insert(variableIndex, "variable")
             End If
 
             If namesFromList.Contains("summary") Then
                 ' Get the desired position for "summary" and move it to that position
-                Dim summaryIndex As Integer = Math.Min(ucrNudPositionSum.Value, namesFromList.Count)
+                Dim summaryIndex As Integer = Math.Min(ucrNudPositionSum.Value, namesFromList.Count - 1)
                 namesFromList.Remove("summary")
                 namesFromList.Insert(summaryIndex, "summary")
             End If
@@ -594,9 +594,9 @@ Public Class dlgSummaryTables
         Dim defaultVariables As Integer = selectedColumns.Count
 
         If ucrReceiverSummaryCols.Count > 1 Then
-            'ucrNudPositionVar.Value = defaultVariables + 1
+            ucrNudPositionVar.Value = defaultVariables + 1
             ucrNudPositionVar.Maximum = defaultVariables + 1
-            ucrNudPositionVar.Minimum = 0
+            ucrNudPositionVar.Minimum = 1
             ucrNudPositionVar.Enabled = True
         Else
             ucrNudPositionVar.Value = 0
@@ -610,9 +610,9 @@ Public Class dlgSummaryTables
         Dim defaultSummaries As Integer = selectedSummaries.Count
 
         If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
-            'ucrNudPositionSum.Value = defaultSummaries + 2
+            ucrNudPositionSum.Value = defaultSummaries + 2
             ucrNudPositionSum.Maximum = defaultSummaries + 2
-            ucrNudPositionSum.Minimum = 0
+            ucrNudPositionSum.Minimum = 1
             ucrNudPositionSum.Enabled = True
         Else
             ucrNudPositionSum.Value = 0
