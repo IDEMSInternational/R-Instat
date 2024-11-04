@@ -1296,7 +1296,7 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     for (curr_col in col_names) {
       #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
       #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
-      if (((property == labels_label && new_val == "") || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
+      if (((property == labels_label && any(new_val == "")) || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
         #reset the column labels or colour property 
         attr(private$data[[curr_col]], property) <- NULL
       } else {
@@ -1308,7 +1308,7 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     for (col_name in self$get_column_names()) {
       #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
       #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
-      if (((property == labels_label && new_val == "") || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
+      if (((property == labels_label && any(new_val == "")) || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
         #reset the column labels or colour property 
         attr(private$data[[col_name]], property) <- NULL
       } else {
@@ -3089,8 +3089,9 @@ date_station_label="date_station"
 sunshine_hours_label="sunshine_hours"
 radiation_label="radiation"
 cloud_cover_label="cloud_cover"
+district_label = "district"
 
-all_climatic_column_types <- c(rain_label, rain_day_label, rain_day_lag_label, date_label, doy_label, s_doy_label, year_label, year_month_label, date_time_label, dos_label, season_label, month_label, day_label, dm_label, time_label, station_label, date_asstring_label, temp_min_label, temp_max_label, hum_min_label, hum_max_label, temp_air_label, temp_range_label, wet_buld_label, dry_bulb_label, evaporation_label, element_factor_label, identifier_label, capacity_label, wind_speed_label, wind_direction_label, lat_label, lon_label, alt_label, season_station_label, date_station_label, sunshine_hours_label, radiation_label, cloud_cover_label)
+all_climatic_column_types <- c(rain_label,district_label, rain_day_label, rain_day_lag_label, date_label, doy_label, s_doy_label, year_label, year_month_label, date_time_label, dos_label, season_label, month_label, day_label, dm_label, time_label, station_label, date_asstring_label, temp_min_label, temp_max_label, hum_min_label, hum_max_label, temp_air_label, temp_range_label, wet_buld_label, dry_bulb_label, evaporation_label, element_factor_label, identifier_label, capacity_label, wind_speed_label, wind_direction_label, lat_label, lon_label, alt_label, season_station_label, date_station_label, sunshine_hours_label, radiation_label, cloud_cover_label)
 
 # Column metadata
 climatic_type_label <- "Climatic_Type"
