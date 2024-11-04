@@ -79,7 +79,6 @@ Partial Class dlgSummaryTables
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkDisplayMargins = New instat.ucrCheck()
-        Me.ucrChkSummaries = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverSummaryCols = New instat.ucrReceiverMultiple()
         Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
@@ -88,6 +87,7 @@ Partial Class dlgSummaryTables
         Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputFrequencyMarginName = New instat.ucrInputTextBox()
         Me.ucrChkFrequencyDisplayMargins = New instat.ucrCheck()
+        Me.ucrChkDropLevels = New instat.ucrCheck()
         Me.grpDisplay.SuspendLayout()
         Me.grpMargin.SuspendLayout()
         Me.grpPercentages.SuspendLayout()
@@ -580,16 +580,6 @@ Partial Class dlgSummaryTables
         Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(225, 34)
         Me.ucrChkDisplayMargins.TabIndex = 10
         '
-        'ucrChkSummaries
-        '
-        Me.ucrChkSummaries.AutoSize = True
-        Me.ucrChkSummaries.Checked = False
-        Me.ucrChkSummaries.Location = New System.Drawing.Point(15, 381)
-        Me.ucrChkSummaries.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkSummaries.Name = "ucrChkSummaries"
-        Me.ucrChkSummaries.Size = New System.Drawing.Size(363, 34)
-        Me.ucrChkSummaries.TabIndex = 7
-        '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
@@ -683,12 +673,23 @@ Partial Class dlgSummaryTables
         Me.ucrChkFrequencyDisplayMargins.Size = New System.Drawing.Size(320, 34)
         Me.ucrChkFrequencyDisplayMargins.TabIndex = 24
         '
+        'ucrChkDropLevels
+        '
+        Me.ucrChkDropLevels.AutoSize = True
+        Me.ucrChkDropLevels.Checked = False
+        Me.ucrChkDropLevels.Location = New System.Drawing.Point(15, 381)
+        Me.ucrChkDropLevels.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDropLevels.Name = "ucrChkDropLevels"
+        Me.ucrChkDropLevels.Size = New System.Drawing.Size(225, 34)
+        Me.ucrChkDropLevels.TabIndex = 34
+        '
         'dlgSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(734, 860)
+        Me.Controls.Add(Me.ucrChkDropLevels)
         Me.Controls.Add(Me.btnMoreOptions)
         Me.Controls.Add(Me.lblColumnFactors)
         Me.Controls.Add(Me.ucrNudColFactors)
@@ -711,7 +712,6 @@ Partial Class dlgSummaryTables
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.ucrChkDisplayMargins)
         Me.Controls.Add(Me.grpDisplay)
-        Me.Controls.Add(Me.ucrChkSummaries)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverSummaryCols)
         Me.Controls.Add(Me.ucrReceiverFactors)
@@ -748,7 +748,6 @@ Partial Class dlgSummaryTables
     Friend WithEvents ucrReceiverFactors As ucrReceiverMultiple
     Friend WithEvents ucrReceiverSummaryCols As ucrReceiverMultiple
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrChkSummaries As ucrCheck
     Friend WithEvents cmdSummaries As Button
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
     Friend WithEvents ucrChkOmitMissing As ucrCheck
@@ -790,4 +789,5 @@ Partial Class dlgSummaryTables
     Friend WithEvents ucrNudPositionSum As ucrNud
     Friend WithEvents lblColumnSummariesFactors As Label
     Friend WithEvents UcrNudColumnSumFactors As ucrNud
+    Friend WithEvents ucrChkDropLevels As ucrCheck
 End Class
