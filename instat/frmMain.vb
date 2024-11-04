@@ -205,9 +205,10 @@ Public Class frmMain
         '---------------------------------------
         Try
             If (Environment.GetCommandLineArgs.Length > 1) Then
-                dlgImportDataset.strFileToOpenOn = Environment.GetCommandLineArgs(1)
-                dlgImportDataset.bStartOpenDialog = False
-                dlgImportDataset.ShowDialog()
+                'dlgImportDataset.strFileToOpenOn = Environment.GetCommandLineArgs(1)
+                'dlgImportDataset.bStartOpenDialog = False
+                'dlgImportDataset.ShowDialog()
+                ImportRDS(Environment.GetCommandLineArgs(1))
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -227,6 +228,26 @@ Public Class frmMain
         '-------------------------------------
         SetAppVersionNumber()
         isMaximised = True 'Need to get the windowstate when the application is loaded
+    End Sub
+
+    Public Sub ImportRDS(strFilePath As String)
+        If Path.GetExtension(strFilePath).ToLower <> ".rds" Then
+            Exit Sub
+        End If
+        Try
+            Dim clsImportRDS As New RFunction
+            Dim clsReadRDS As New RFunction
+
+            clsImportRDS.SetRCommand(clsRLink.strInstatDataObject & "$import_RDS")
+            clsReadRDS.SetRCommand("readRDS")
+
+            clsReadRDS.AddParameter("file", Chr(34) & Replace(strFilePath, "\", "/") & Chr(34))
+            clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
+
+            clsRLink.RunScript(clsImportRDS.ToScript, strComment:="Import .RDS file")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub CheckForUpdates()
