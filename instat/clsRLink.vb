@@ -132,13 +132,13 @@ Public Class RLink
     Private strRVersionMajorRequired As String = "4"
 
     ''' <summary>   The R version minor required. </summary>
-    Private strRVersionMinorRequired As String = "1"
+    Private strRVersionMinorRequired As String = "4"
 
     ''' <summary>   The R version required. </summary>
-    Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
+    Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".1"
 
     ''' <summary>   The R bundled version. </summary>
-    Private strRBundledVersion As String = "4.1.3"
+    Private strRBundledVersion As String = "4.4.1"
 
     Private clsOutputLogger As clsOutputLogger
 
@@ -200,7 +200,7 @@ Public Class RLink
         Catch ex As Exception
             MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & Environment.NewLine &
                    "R-Instat requires version " & strRVersionRequired & " of R." & Environment.NewLine &
-                   "Note that R-Instat does not work with R below 3.5.0. We recommend using R " & strRBundledVersion &
+                   "Note that R-Instat does not work with R below 4.4.1. We recommend using R " & strRBundledVersion &
                    ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " &
                    strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat.",
                    MsgBoxStyle.Critical, "Cannot initialise R connection.")
