@@ -209,14 +209,14 @@ Public Class dlgSummaryTables
 
         clsSummaryDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsSummaryDefaultFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=8)
-        clsSummaryDefaultFunction.AddParameter("drop", "FALSE", iPosition:=9)
+        clsSummaryDefaultFunction.AddParameter("drop", "TRUE", iPosition:=9)
         clsSummaryDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=12)
         clsSummaryDefaultFunction.SetAssignToObject("summary_table")
 
         clsFrequencyDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsFrequencyDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=8)
         clsFrequencyDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=10)
-        clsFrequencyDefaultFunction.AddParameter("drop", "FALSE", iPosition:=9)
+        clsFrequencyDefaultFunction.AddParameter("drop", "TRUE", iPosition:=9)
         clsFrequencyDefaultFunction.AddParameter("summaries", "count_label", iPosition:=11)
         clsFrequencyDefaultFunction.SetAssignToObject("frequency_table")
 
@@ -408,7 +408,11 @@ Public Class dlgSummaryTables
         End If
         If bRCodeSet Then
             If rdoFrequencyTable.Checked Then
-                clsFrequencyOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+                If ucrNudColFactors.Value = 0 Then
+                    clsFrequencyOperator.RemoveParameterByName("col_factor")
+                Else
+                    clsFrequencyOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+                End If
             Else
                 If UcrNudColumnSumFactors.Value = 0 Then
                     clsSummaryOperator.RemoveParameterByName("col_factor")
