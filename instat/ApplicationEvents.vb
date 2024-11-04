@@ -9,7 +9,8 @@
     Partial Friend Class MyApplication
         ''' <summary>   Handles the event raised when launching a single-instance application. 
         '''             If the event was triggered by double-clicking on a data file, then the sub 
-        '''             opens R-Instat (if not already running), and load the data in the Grid.</summary>
+        '''             opens R-Instat (if not already running), and load the data in the Grid
+        '''             with the double-clicked file's path.</summary>
         '''
         ''' <param name="sender">   Source of the event. </param>
         ''' <param name="e">        Startup next instance event information. </param>
