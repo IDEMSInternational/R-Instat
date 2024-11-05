@@ -239,7 +239,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
     curr_filter_name <- curr_filter[["name"]]
     curr_filter_calc <- self$get_filter_as_instat_calculation(data_name, curr_filter_name)
     manipulations <- c(curr_filter_calc, manipulations)
-  }
+  } 
   if(!missing(additional_filter)) {
     manipulations <- c(additional_filter, manipulations)
   }
@@ -247,10 +247,12 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
 
   # setting up param_list. Here we read in .drop and .preserve
   param_list <- list()
-  for (i in 1:length(combined_calc_sum$manipulations)){
-    if (combined_calc_sum$manipulations[[i]]$type %in% c("by", "filter")){
-        param_list <- c(param_list, combined_calc_sum$manipulations[[i]]$param_list)
-    }
+  if (length(combined_calc_sum$manipulations) > 0){
+      for (i in 1:length(combined_calc_sum$manipulations)){
+          if (combined_calc_sum$manipulations[[i]]$type %in% c("by", "filter")){
+              param_list <- c(param_list, combined_calc_sum$manipulations[[i]]$param_list)
+          }
+      }
   }
   out <- self$apply_instat_calculation(combined_calc_sum, param_list = param_list)
   # relocate so that the factors are first still for consistency	
