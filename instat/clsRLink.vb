@@ -201,8 +201,8 @@ Public Class RLink
             MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & Environment.NewLine &
                    "R-Instat requires version " & strRVersionRequired & " of R." & Environment.NewLine &
                    "Note that R-Instat does not work with R below 4.4.1. We recommend using R " & strRBundledVersion &
-                   ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " &
-                   strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat.",
+                   ".  Try rerunning the installation to install R " & strRBundledVersion & " or download R " &
+                   strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/  and restart R-Instat.",
                    MsgBoxStyle.Critical, "Cannot initialise R connection.")
         End Try
 
