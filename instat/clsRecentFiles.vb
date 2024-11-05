@@ -188,8 +188,13 @@ Public Class clsRecentFiles
 
         Dim strFilePathTmp As String = strFilePath.Replace("MRU:", "")
         If File.Exists(strFilePathTmp) Then
-            dlgImportDataset.strFileToOpenOn = strFilePathTmp
-            dlgImportDataset.ShowDialog()
+            If Path.GetExtension(strFilePathTmp).ToLower.Equals(".rds") Then
+                frmMain.ImportRDS(strFilePathTmp)
+            Else
+                dlgImportDataset.strFileToOpenOn = strFilePathTmp
+                dlgImportDataset.ShowDialog()
+            End If
+
         ElseIf DialogResult.Yes = MessageBox.Show(    'else allow the user to remove file from list
                     frmMain, "File not accessible. It may have been renamed, moved or deleted." &
                     Environment.NewLine & Environment.NewLine &
