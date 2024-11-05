@@ -48,6 +48,8 @@ Partial Class dlgMosaicPlot
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
+        Me.ToolStripMenuItemMosaicJitter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemMosaicText = New System.Windows.Forms.ToolStripMenuItem()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -227,20 +229,20 @@ Partial Class dlgMosaicPlot
         '
         'contextMenuStripOptions
         '
-        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemMosaicOptions})
+        Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemMosaicOptions, Me.ToolStripMenuItemMosaicJitter, Me.ToolStripMenuItemMosaicText})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(158, 48)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 114)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(157, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemMosaicOptions
         '
         Me.toolStripMenuItemMosaicOptions.Name = "toolStripMenuItemMosaicOptions"
-        Me.toolStripMenuItemMosaicOptions.Size = New System.Drawing.Size(157, 22)
+        Me.toolStripMenuItemMosaicOptions.Size = New System.Drawing.Size(180, 22)
         Me.toolStripMenuItemMosaicOptions.Text = "Mosaic Options"
         '
         'cmdOptions
@@ -312,6 +314,18 @@ Partial Class dlgMosaicPlot
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 97
         '
+        'ToolStripMenuItemMosaicJitter
+        '
+        Me.ToolStripMenuItemMosaicJitter.Name = "ToolStripMenuItemMosaicJitter"
+        Me.ToolStripMenuItemMosaicJitter.Size = New System.Drawing.Size(180, 22)
+        Me.ToolStripMenuItemMosaicJitter.Text = "Mosaic Jitter"
+        '
+        'ToolStripMenuItemMosaicText
+        '
+        Me.ToolStripMenuItemMosaicText.Name = "ToolStripMenuItemMosaicText"
+        Me.ToolStripMenuItemMosaicText.Size = New System.Drawing.Size(180, 22)
+        Me.ToolStripMenuItemMosaicText.Text = "Mosaic Text"
+        '
         'dlgMosaicPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -378,4 +392,6 @@ Partial Class dlgMosaicPlot
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
+    Friend WithEvents ToolStripMenuItemMosaicJitter As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItemMosaicText As ToolStripMenuItem
 End Class

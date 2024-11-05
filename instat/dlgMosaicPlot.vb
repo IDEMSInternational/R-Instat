@@ -19,7 +19,7 @@ Imports instat.Translations
 
 Public Class dlgMosaicPlot
     Private clsGgplotFunction As New RFunction
-    Private clsMosaicGeomFunction As New RFunction
+    Private clsMosaicGeomFunction, clsMosaicJitterFunction, clsMosaicTextFunction As New RFunction
     Private clsAesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsLocalAesFunction As New RFunction
@@ -184,6 +184,8 @@ Public Class dlgMosaicPlot
         clsBaseOperator = New ROperator
         clsGgplotFunction = New RFunction
         clsMosaicGeomFunction = New RFunction
+        clsMosaicJitterFunction = New RFunction
+        clsMosaicTextFunction = New RFunction
         clsAesFunction = New RFunction
         clsLocalAesFunction = New RFunction
 
@@ -212,6 +214,14 @@ Public Class dlgMosaicPlot
         clsMosaicGeomFunction.SetPackageName("ggmosaic")
         clsMosaicGeomFunction.SetRCommand("geom_mosaic")
         clsMosaicGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesFunction, iPosition:=1)
+
+        clsMosaicJitterFunction.SetPackageName("ggmosaic")
+        clsMosaicJitterFunction.SetRCommand("geom_mosaic_jitter")
+        'clsMosaicJitterFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesFunction, iPosition:=1)
+
+        clsMosaicTextFunction.SetPackageName("ggmosaic")
+        clsMosaicTextFunction.SetRCommand("geom_mosaic_text")
+        clsMosaicTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesFunction, iPosition:=1)
 
         clsLocalAesFunction.SetPackageName("ggplot2")
         clsLocalAesFunction.SetRCommand("aes")
@@ -552,5 +562,60 @@ Public Class dlgMosaicPlot
         sdgLayerOptions.tbpAesthetics.Enabled = True
         bResetBoxLayerSubdialog = False
         SetRCodeForControls(False)
+    End Sub
+
+    'Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
+    '    sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicJitterFunction,
+    '                               clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesFunction,
+    '                               bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot,
+    '                               bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
+    '    sdgLayerOptions.ShowDialog()
+    '    bResetBoxLayerSubdialog = False
+    '    'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
+    '    '  One then needs to display these modifications on the dlgScatteredPlot.
+
+    '    'The aesthetics parameters on the main dialog are repopulated as required.
+    '    For Each clsParam In clsAesFunction.clsParameters
+    '        If clsParam.strArgumentName = "x" Then
+    '            If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+    '                ' ucrReceiverX.Clear()
+    '            Else
+    '                ucrReceiverX.Add(clsParam.strArgumentValue)
+    '            End If
+    '            'In the y case, the value stored in the clsReasFunction in the multiple variables 
+    '            '  case is "value", however that one shouldn't be written in the multiple 
+    '            '  variables receiver (otherwise it would stack all variables and the stack 
+    '            '  ("value") itself!).
+    '            'Warning: what if someone used the name value for one of it's variables 
+    '            '  independently from the multiple variables method? Here if the receiver is 
+    '            '  actually in single mode, the variable "value" will still be given back, which 
+    '            '  throws the problem back to the creation of "value" in the multiple receiver case.
+    '        ElseIf clsParam.strArgumentName = "conds" AndAlso (clsParam.strArgumentValue <> "value") Then
+    '            'Still might be in the case of bSingleVariable with mapping y="".
+    '            If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+    '                'ucrReceiverConditions.Clear()
+    '            Else
+    '                ucrReceiverConditions.Add(clsParam.strArgumentValue)
+    '            End If
+    '        ElseIf clsParam.strArgumentName = "fill" Then
+    '            ucrReceiverFill.Add(clsParam.strArgumentValue)
+    '        End If
+    '    Next
+    '    TestOkEnabled()
+    'End Sub
+
+    Private Sub ToolStripMenuItemMosaicJitter_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMosaicJitter.Click
+        'openSdgLayerOptions(clsMosaicJitterFunction)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicJitterFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
+        'sdgLayerOptions.tbcLayers.SelectedTab = sdgLayerOptions.tbpGeomParameters
+        'sdgLayerOptions.tbpAesthetics.Enabled = False
+        sdgLayerOptions.ShowDialog()
+        ' sdgLayerOptions.tbpAesthetics.Enabled = True
+        bResetBoxLayerSubdialog = False
+        'SetRCodeForControls(False)
+    End Sub
+
+    Private Sub ToolStripMenuItemMosaicText_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMosaicText.Click
+
     End Sub
 End Class
