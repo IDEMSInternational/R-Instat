@@ -374,7 +374,7 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudColFactors.ControlValueChanged, UcrNudColumnSumFactors.ControlValueChanged,
-        ucrReceiverFactors.ControlValueChanged, ucrNudPositionSum.ControlValueChanged, ucrNudPositionVar.ControlValueChanged
+        ucrReceiverFactors.ControlValueChanged, ucrNudPositionSum.ControlValueChanged, ucrNudPositionVar.ControlValueChanged, ucrReceiverSummaryCols.ControlValueChanged
 
         SetDefaultValues()
         SetColFactorDefaults()
@@ -512,7 +512,7 @@ Public Class dlgSummaryTables
             Dim selectedSumm As New List(Of String)
 
             ' Loop through the ucrReceiverFactors and get only the first numSumm items
-            For i As Integer = 0 To Math.Min(numSumm, varNames.Count) - 1
+            For i As Integer = varNames.Count - 1 To Math.Max(varNames.Count - numSumm, 0) Step -1
                 selectedSumm.Add(varNames(i))
             Next
 
@@ -581,8 +581,8 @@ Public Class dlgSummaryTables
         Else
             ' If no variables are selected, set Minimum, Maximum, and Value to 1
             ucrNudColFactors.Minimum = 0
-            ucrNudColFactors.Maximum = 1
-            ucrNudColFactors.Value = 1
+            'ucrNudColFactors.Maximum = 1
+            'ucrNudColFactors.Value = 1
         End If
 
     End Sub
@@ -593,8 +593,8 @@ Public Class dlgSummaryTables
 
         If ucrReceiverSummaryCols.Count > 1 Then
             ucrNudPositionVar.Value = defaultVariables + 1
-            ucrNudPositionVar.Maximum = defaultVariables + 1
-            ucrNudPositionVar.Minimum = 1
+            ucrNudPositionVar.Maximum = defaultVariables + 2
+            ucrNudPositionVar.Minimum = 0
             ucrNudPositionVar.Enabled = True
         Else
             ucrNudPositionVar.Value = 0
@@ -610,7 +610,7 @@ Public Class dlgSummaryTables
         If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
             ucrNudPositionSum.Value = defaultSummaries + 2
             ucrNudPositionSum.Maximum = defaultSummaries + 2
-            ucrNudPositionSum.Minimum = 1
+            ucrNudPositionSum.Minimum = 0
             ucrNudPositionSum.Enabled = True
         Else
             ucrNudPositionSum.Value = 0
