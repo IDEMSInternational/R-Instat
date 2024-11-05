@@ -1127,13 +1127,13 @@ Public Class dlgDescribeTwoVariable
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ".x")
                 clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
             ElseIf IsFactorByFactorByNumeric() Then
-                clsMapSummaryFunction.AddParameter(".x", "c(" & ucrReceiverFirstVars.GetVariableNames.Replace("c(", "").Replace(")", "") & "," & ucrReceiverThreeVariableSecondFactor.GetVariableNames.Replace("c(", "").Replace(")", "") & ")")
-                clsSummaryTableFunction.AddParameter("factors", ".x")
+                clsMapSummaryFunction.AddParameter(".x", ucrReceiverFirstVars.GetVariableNames)
+                clsSummaryTableFunction.AddParameter("factors", "c(" & ".x" & "," & ucrReceiverThreeVariableSecondFactor.GetVariableNames & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverThreeVariableThirdVariable.GetVariableNames)
                 SummariesInRowsOrCols()
             ElseIf IsFactorByNumericByFactor() Then
-                clsMapSummaryFunction.AddParameter(".x", "c(" & ucrReceiverFirstVars.GetVariableNames.Replace("c(", "").Replace(")", "") & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames.Replace("c(", "").Replace(")", "") & ")")
-                clsSummaryTableFunction.AddParameter("factors", ".x")
+                clsMapSummaryFunction.AddParameter(".x", ucrReceiverFirstVars.GetVariableNames)
+                clsSummaryTableFunction.AddParameter("factors", "c(" & ".x" & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverThreeVariableSecondFactor.GetVariableNames)
                 SummariesInRowsOrCols()
             Else
