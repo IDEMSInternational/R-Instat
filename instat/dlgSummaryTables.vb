@@ -520,7 +520,7 @@ Public Class dlgSummaryTables
             End If
 
             ' Step 4: Add "summary" if condition is met and place it at ucrNudPositionSum
-            If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 AndAlso numSumm > 1 Then
+            If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 AndAlso numSumm >= 1 Then
                 Dim summaryIndex As Integer = Math.Max(0, Math.Min(ucrNudPositionSum.Value - 1, varNames.Count))
                 If summaryIndex < varNames.Count Then
                     varNames.Insert(summaryIndex, "summary")
@@ -536,17 +536,13 @@ Public Class dlgSummaryTables
                 namesFromList.Add(varNames(i))
             Next
 
-            ' Step 6: Reverse the list to maintain descending order from highest position
-            'namesFromList.Reverse()
 
-            ' Step 7: Join names_from components with commas and wrap in c()
+
+            ' Step 6: Join names_from components with commas and wrap in c()
             Dim varsSummary As String = "c(" & String.Join(",", namesFromList) & ")"
 
-            ' Step 8: Pass the constructed names_from argument to clsPivotWiderFunction
+            ' Step 7: Pass the constructed names_from argument to clsPivotWiderFunction
             clsPivotWiderFunction.AddParameter("names_from", varsSummary, iPosition:=0)
-
-
-
         End If
     End Sub
 
