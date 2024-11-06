@@ -1065,11 +1065,12 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
 }
 
 # cor function
-summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = NULL, method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = NULL, method = c("pearson", "kendall", "spearman"), cor_use = c("everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+  cor_use <- match.arg(cor_use)
   if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else {
     if (missing(weights) || is.null(weights)) {
-      return(cor(x = x, y = y, use = use, method = method))
+      return(cor(x = x, y = y, use = cor_use, method = method))
     }
     else {
       weights::wtd.cor(x = x, y = y, weight = weights)[1]
