@@ -22,7 +22,7 @@ Public Class dlgView
 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsHeadRFunction, clsGtRFunction, clsOutputWindowFunction, clsHTMLFunction, clsAsHtmlWidgetFunction, clsViewColumnsFunction, clsDummyFunction, clsGetObjectDataFunction As New RFunction
+    Private clsHeadRFunction, clsGtRFunction, clsOutputWindowFunction, clsViewColumnsFunction, clsDummyFunction, clsGetObjectDataFunction As New RFunction
     Private bControlsUpdated As Boolean = False
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -117,7 +117,6 @@ Public Class dlgView
         clsHeadRFunction = New RFunction
         clsGtRFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsAsHtmlWidgetFunction = New RFunction
 
         ucrViewChkPreview.Checked = True
         ucrSelectorForView.Reset()
