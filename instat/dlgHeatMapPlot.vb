@@ -81,7 +81,7 @@ Public Class dlgHeatMapPlot
         Dim dctLegendPosition As New Dictionary(Of String, String)
         Dim dctPalette As New Dictionary(Of String, String)
 
-        ucrBase.iHelpTopicID = 476
+        ucrBase.iHelpTopicID = 437
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
