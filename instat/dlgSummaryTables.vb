@@ -509,9 +509,24 @@ Public Class dlgSummaryTables
             ' Step 2: Get the list of variables in ucrReceiverFactors
             Dim varNames As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList()
 
-            ' Step 3: Add "variable" if condition is met and place it at ucrNudPositionVar
+            ' Step 3: Set up local variables to represent the adjusted positions without changing control values
+            Dim positionVar As Integer = ucrNudPositionVar.Value
+            Dim positionSum As Integer = ucrNudPositionSum.Value
+
+            ' Step 4: Adjust positions if ucrNudPositionVar equals ucrNudPositionSum
+            If positionVar = positionSum Then
+                ' If both are at their maximum values, position "variable" one step lower than positionVar
+                If positionVar = ucrNudPositionVar.Maximum Then
+                    positionVar = Math.Max(1, positionVar - 1)
+                Else
+                    ' If not at maximum, position "summary" one step higher than positionSum
+                    positionSum = Math.Min(ucrNudPositionSum.Maximum, positionSum + 1)
+                End If
+            End If
+
+            ' Step 5: Add "variable" if condition is met and place it at adjusted positionVar
             If ucrReceiverSummaryCols.Count > 1 AndAlso numSumm > 0 Then
-                Dim variableIndex As Integer = Math.Max(0, Math.Min(ucrNudPositionVar.Value - 1, varNames.Count))
+                Dim variableIndex As Integer = Math.Max(0, Math.Min(positionVar - 1, varNames.Count))
                 If variableIndex < varNames.Count Then
                     varNames.Insert(variableIndex, "variable")
                 Else
@@ -519,9 +534,9 @@ Public Class dlgSummaryTables
                 End If
             End If
 
-            ' Step 4: Add "summary" if condition is met and place it at ucrNudPositionSum
+            ' Step 6: Add "summary" if condition is met and place it at adjusted positionSum
             If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 AndAlso numSumm >= 1 Then
-                Dim summaryIndex As Integer = Math.Max(0, Math.Min(ucrNudPositionSum.Value - 1, varNames.Count))
+                Dim summaryIndex As Integer = Math.Max(0, Math.Min(positionSum - 1, varNames.Count))
                 If summaryIndex < varNames.Count Then
                     varNames.Insert(summaryIndex, "summary")
                 Else
@@ -529,20 +544,18 @@ Public Class dlgSummaryTables
                 End If
             End If
 
-            ' Step 5: Trim the list to include only the highest-positioned items, up to numSumm
-            ' Start from the end to get the highest-positioned elements
+            ' Step 7: Trim the list to include only the highest-positioned items, up to numSumm
             Dim namesFromList As New List(Of String)
             For i As Integer = varNames.Count - 1 To Math.Max(varNames.Count - numSumm, 0) Step -1
                 namesFromList.Add(varNames(i))
             Next
 
-
-
-            ' Step 6: Join names_from components with commas and wrap in c()
+            ' Step 8: Join names_from components with commas and wrap in c()
             Dim varsSummary As String = "c(" & String.Join(",", namesFromList) & ")"
 
-            ' Step 7: Pass the constructed names_from argument to clsPivotWiderFunction
+            ' Step 9: Pass the constructed names_from argument to clsPivotWiderFunction
             clsPivotWiderFunction.AddParameter("names_from", varsSummary, iPosition:=0)
+
         End If
     End Sub
 
