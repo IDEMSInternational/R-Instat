@@ -550,10 +550,8 @@ Public Class dlgSummaryTables
                 namesFromList.Add(varNames(i))
             Next
 
-            ' Step 8: Join names_from components with commas and wrap in c()
             Dim varsSummary As String = "c(" & String.Join(",", namesFromList) & ")"
 
-            ' Step 9: Pass the constructed names_from argument to clsPivotWiderFunction
             clsPivotWiderFunction.AddParameter("names_from", varsSummary, iPosition:=0)
 
         End If
@@ -574,19 +572,14 @@ Public Class dlgSummaryTables
             ' Set Maximum based on the number of variables in the receiver
             ucrNudColFactors.Maximum = selectedCount
 
-            ' Ensure the current Value does not exceed the Maximum
             If ucrNudColFactors.Value > selectedCount Then
-                ucrNudColFactors.Value = selectedCount ' Adjust value to the max if it exceeds
+                ucrNudColFactors.Value = selectedCount
             End If
 
-            ' Set Minimum (if applicable)
             ucrNudColFactors.Minimum = 0
 
         Else
-            ' If no variables are selected, set Minimum, Maximum, and Value to 1
             ucrNudColFactors.Minimum = 0
-            'ucrNudColFactors.Maximum = 1
-            'ucrNudColFactors.Value = 1
         End If
 
     End Sub
