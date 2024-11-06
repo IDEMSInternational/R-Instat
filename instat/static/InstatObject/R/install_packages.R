@@ -1,5 +1,5 @@
 require("miniCRAN")
-r_version <- "4.1"
+r_version <- "4.4.1"
 # Specify list of packages to download
 pkgs <-
   c(
