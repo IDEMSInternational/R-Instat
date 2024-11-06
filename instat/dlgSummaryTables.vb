@@ -503,54 +503,49 @@ Public Class dlgSummaryTables
             ' Pass the selected variables to the clsPivotWiderFunction's names_from parameter
             clsPivotWiderFunction.AddParameter("names_from", varsString, iPosition:=0)
         Else
+            ' Step 1: Define the number of items to add based on UcrNudColumnSumFactors
             Dim numSumm As Integer = UcrNudColumnSumFactors.Value
 
-            ' Get the list of selected variable names from ucrReceiverFactors
+            ' Step 2: Get the list of variables in ucrReceiverFactors
             Dim varNames As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList()
 
-            ' Create a new list to store the selected summary variables
-            Dim selectedSumm As New List(Of String)
+            ' Step 3: Add "variable" if condition is met and place it at ucrNudPositionVar
+            If ucrReceiverSummaryCols.Count > 1 AndAlso numSumm > 0 Then
+                Dim variableIndex As Integer = Math.Max(0, Math.Min(ucrNudPositionVar.Value - 1, varNames.Count))
+                If variableIndex < varNames.Count Then
+                    varNames.Insert(variableIndex, "variable")
+                Else
+                    varNames.Add("variable")
+                End If
+            End If
 
-            ' Loop through the ucrReceiverFactors and get only the first numSumm items
+            ' Step 4: Add "summary" if condition is met and place it at ucrNudPositionSum
+            If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 AndAlso numSumm > 1 Then
+                Dim summaryIndex As Integer = Math.Max(0, Math.Min(ucrNudPositionSum.Value - 1, varNames.Count))
+                If summaryIndex < varNames.Count Then
+                    varNames.Insert(summaryIndex, "summary")
+                Else
+                    varNames.Add("summary")
+                End If
+            End If
+
+            ' Step 5: Trim the list to include only the highest-positioned items, up to numSumm
+            ' Start from the end to get the highest-positioned elements
+            Dim namesFromList As New List(Of String)
             For i As Integer = varNames.Count - 1 To Math.Max(varNames.Count - numSumm, 0) Step -1
-                selectedSumm.Add(varNames(i))
+                namesFromList.Add(varNames(i))
             Next
 
-            ' Initialize namesFromList with the selected summary variables
-            Dim namesFromList As New List(Of String)(selectedSumm)
+            ' Step 6: Reverse the list to maintain descending order from highest position
+            'namesFromList.Reverse()
 
-            ' Add "variable" if ucrReceiverSummaryCols has more than one item and numSumm exceeds varNames.Count
-            If ucrReceiverSummaryCols.Count > 1 AndAlso numSumm > varNames.Count Then
-                namesFromList.Add("variable")
-            End If
-
-            ' Add "summary" if there is more than one item in ucrReceiverSummaryCols, ucrReorderSummary has more than one item, 
-            ' and numSumm exceeds the total count of varNames
-            If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 AndAlso numSumm > varNames.Count + 1 Then
-                namesFromList.Add("summary")
-            End If
-
-            ' Reorder only if "variable" and/or "summary" are already present in namesFromList
-            ' Reorder only if "variable" and/or "summary" are already present in namesFromList
-            If namesFromList.Contains("variable") Then
-                ' Adjust for 1-based indexing by subtracting 1
-                Dim variableIndex As Integer = Math.Max(0, Math.Min(ucrNudPositionVar.Value - 1, namesFromList.Count - 1))
-                namesFromList.Remove("variable")
-                namesFromList.Insert(variableIndex, "variable")
-            End If
-
-            If namesFromList.Contains("summary") Then
-                ' Adjust for 1-based indexing by subtracting 1
-                Dim summaryIndex As Integer = Math.Max(0, Math.Min(ucrNudPositionSum.Value - 1, namesFromList.Count - 1))
-                namesFromList.Remove("summary")
-                namesFromList.Insert(summaryIndex, "summary")
-            End If
-
-            ' Join names_from components with commas and wrap in c()
+            ' Step 7: Join names_from components with commas and wrap in c()
             Dim varsSummary As String = "c(" & String.Join(",", namesFromList) & ")"
 
-            ' Pass the constructed names_from argument to clsPivotWiderFunction
+            ' Step 8: Pass the constructed names_from argument to clsPivotWiderFunction
             clsPivotWiderFunction.AddParameter("names_from", varsSummary, iPosition:=0)
+
+
 
         End If
     End Sub
