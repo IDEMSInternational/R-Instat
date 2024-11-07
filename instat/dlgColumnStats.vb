@@ -157,11 +157,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub TestOKEnabled()
-        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) AndAlso sdgSummaries.bOkEnabled Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not clsSummariesList.clsParameters.Count = 0 AndAlso sdgSummaries.bOkEnabled AndAlso Not ucrReceiverSelectedVariables.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -226,14 +222,20 @@ Public Class dlgColumnStats
         sdgMissingOptions.ShowDialog()
     End Sub
 
-    'Private Sub ucrReceiverSelectedVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlValueChanged
-    '    Dim bSameType As Boolean = Not ucrReceiverSelectedVariables.IsEmpty _
-    '                            AndAlso ucrReceiverSelectedVariables.GetCurrentItemTypes().All(Function(x) x = "factor")
-    '    ucrChkDropUnusedLevels.Enabled = bSameType
-    '    ucrChkDropUnusedLevels.Checked = Not bSameType
-    'End Sub
+    Private Sub ucrReceiverSelectedVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlValueChanged, ucrChkStoreResults.ControlValueChanged, ucrChkPrintOutput.ControlValueChanged
+        If Not ucrReceiverSelectedVariables.IsEmpty _
+                                AndAlso Not ucrReceiverSelectedVariables.GetCurrentItemTypes().Any(Function(x) x = "factor") Then
+            clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=3)
+            clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
+            ucrBase.clsRsyntax.iCallType = 2
+        Else
+            If ucrChkStoreResults.Checked Then
+                clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
+            End If
+        End If
+    End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
