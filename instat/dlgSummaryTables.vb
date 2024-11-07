@@ -514,7 +514,7 @@ Public Class dlgSummaryTables
             If positionVar = positionSum Then
                 ' If both are at their maximum values, position "variable" one step lower than positionVar
                 If positionVar = ucrNudPositionVar.Maximum Then
-                    positionVar = Math.Max(0, positionVar - 1)
+                    positionVar = Math.Max(1, positionVar - 1)
                 Else
                     ' If not at maximum, position "summary" one step higher than positionSum
                     positionSum = Math.Min(ucrNudPositionSum.Maximum, positionSum + 1)
@@ -523,7 +523,7 @@ Public Class dlgSummaryTables
 
             ' Step 5: Add "variable" if condition is met and place it at adjusted positionVar
             If ucrReceiverSummaryCols.Count > 1 AndAlso numSumm > 0 Then
-                Dim variableIndex As Integer = Math.Max(0, Math.Min(positionVar, varNames.Count))
+                Dim variableIndex As Integer = Math.Max(0, Math.Min(positionVar - 1, varNames.Count))
                 If variableIndex < varNames.Count Then
                     varNames.Insert(variableIndex, "variable")
                 Else
@@ -533,7 +533,7 @@ Public Class dlgSummaryTables
 
             ' Step 6: Add "summary" if condition is met and place it at adjusted positionSum
             If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 AndAlso numSumm >= 1 Then
-                Dim summaryIndex As Integer = Math.Max(0, Math.Min(positionSum, varNames.Count))
+                Dim summaryIndex As Integer = Math.Max(0, Math.Min(positionSum - 1, varNames.Count))
                 If summaryIndex < varNames.Count Then
                     varNames.Insert(summaryIndex, "summary")
                 Else
@@ -587,10 +587,10 @@ Public Class dlgSummaryTables
         If ucrReceiverSummaryCols.Count > 1 Then
             ucrNudPositionVar.Value = defaultVariables + 1
             ucrNudPositionVar.Maximum = defaultVariables + 2
-            ucrNudPositionVar.Minimum = 0
+            ucrNudPositionVar.Minimum = 1
             ucrNudPositionVar.Enabled = True
         Else
-            ucrNudPositionVar.Value = 0
+            ucrNudPositionVar.Value = 1
             ucrNudPositionVar.Enabled = False
         End If
 
@@ -603,10 +603,10 @@ Public Class dlgSummaryTables
         If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
             ucrNudPositionSum.Value = defaultSummaries + 2
             ucrNudPositionSum.Maximum = defaultSummaries + 2
-            ucrNudPositionSum.Minimum = 0
+            ucrNudPositionSum.Minimum = 1
             ucrNudPositionSum.Enabled = True
         Else
-            ucrNudPositionSum.Value = 0
+            ucrNudPositionSum.Value = 1
             ucrNudPositionSum.Enabled = False
         End If
     End Sub
