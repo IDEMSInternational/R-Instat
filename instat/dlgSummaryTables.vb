@@ -48,8 +48,6 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub InitialiseDialog()
-        'Dim Maxval As Integer = ucrReceiverFactors.GetVariableNames().Count()
-
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -147,7 +145,6 @@ Public Class dlgSummaryTables
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrReceiverSummaryCols}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrReorderSummary}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkDisplayAsPercentage}, {rdoFrequencyTable}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkSummaries}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkDisplayMargins}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkFrequencyDisplayMargins, ucrNudColFactors}, {rdoFrequencyTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSummaryFrequencyTables.AddToLinkedControls({ucrChkOmitMissing}, {rdoSummaryTable}, bNewLinkedHideIfParameterMissing:=True)
@@ -220,7 +217,6 @@ Public Class dlgSummaryTables
         clsFrequencyDefaultFunction.AddParameter("drop", "TRUE", iPosition:=9)
         clsFrequencyDefaultFunction.AddParameter("summaries", "count_label", iPosition:=11)
         clsFrequencyDefaultFunction.SetAssignToObject("frequency_table")
-
 
         ' Gt function
         Dim clsGtFunction As New RFunction
@@ -518,7 +514,7 @@ Public Class dlgSummaryTables
             If positionVar = positionSum Then
                 ' If both are at their maximum values, position "variable" one step lower than positionVar
                 If positionVar = ucrNudPositionVar.Maximum Then
-                    positionVar = Math.Max(1, positionVar - 1)
+                    positionVar = Math.Max(0, positionVar - 1)
                 Else
                     ' If not at maximum, position "summary" one step higher than positionSum
                     positionSum = Math.Min(ucrNudPositionSum.Maximum, positionSum + 1)
@@ -527,7 +523,7 @@ Public Class dlgSummaryTables
 
             ' Step 5: Add "variable" if condition is met and place it at adjusted positionVar
             If ucrReceiverSummaryCols.Count > 1 AndAlso numSumm > 0 Then
-                Dim variableIndex As Integer = Math.Max(0, Math.Min(positionVar - 1, varNames.Count))
+                Dim variableIndex As Integer = Math.Max(0, Math.Min(positionVar, varNames.Count))
                 If variableIndex < varNames.Count Then
                     varNames.Insert(variableIndex, "variable")
                 Else
@@ -537,7 +533,7 @@ Public Class dlgSummaryTables
 
             ' Step 6: Add "summary" if condition is met and place it at adjusted positionSum
             If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 AndAlso numSumm >= 1 Then
-                Dim summaryIndex As Integer = Math.Max(0, Math.Min(positionSum - 1, varNames.Count))
+                Dim summaryIndex As Integer = Math.Max(0, Math.Min(positionSum, varNames.Count))
                 If summaryIndex < varNames.Count Then
                     varNames.Insert(summaryIndex, "summary")
                 Else
@@ -570,7 +566,6 @@ Public Class dlgSummaryTables
         Dim selectedCount As Integer = selectedVariables.Count
         ' Ensure ucrNudColFactors.Maximum does not exceed the number of selected variables
         If selectedCount > 0 Then
-            ' Set Maximum based on the number of variables in the receiver
             ucrNudColFactors.Maximum = selectedCount
 
             If ucrNudColFactors.Value > selectedCount Then
@@ -617,11 +612,9 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub SetColFactorDefaults()
-        ' Retrieve the list of selected column factors from ucrReceiverFactors
         Dim selectedColFactors As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList()
-        Dim defaultColFactors As Integer = selectedColFactors.Count  ' Initialize with minimum of 0
+        Dim defaultColFactors As Integer = selectedColFactors.Count
 
-        ' Adjust defaultColFactors based on conditions involving ucrReceiverSummaryCols and ucrReorderSummary
         If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
             UcrNudColumnSumFactors.Maximum = defaultColFactors + 2
         ElseIf ucrReceiverSummaryCols.Count > 1 OrElse ucrReorderSummary.Count > 1 Then
@@ -631,4 +624,5 @@ Public Class dlgSummaryTables
         End If
         UcrNudColumnSumFactors.Minimum = 0
     End Sub
+
 End Class
