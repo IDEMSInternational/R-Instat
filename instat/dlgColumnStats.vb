@@ -222,9 +222,9 @@ Public Class dlgColumnStats
         sdgMissingOptions.ShowDialog()
     End Sub
 
-    Private Sub ucrReceiverSelectedVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlValueChanged, ucrChkStoreResults.ControlValueChanged, ucrChkPrintOutput.ControlValueChanged
-        If Not ucrReceiverSelectedVariables.IsEmpty _
-                                AndAlso Not ucrReceiverSelectedVariables.GetCurrentItemTypes().Any(Function(x) x = "factor") Then
+    Private Sub ucrReceiverByFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlValueChanged, ucrChkStoreResults.ControlValueChanged, ucrChkPrintOutput.ControlValueChanged
+        If ucrReceiverByFactor.IsEmpty _
+                                OrElse Not ucrReceiverByFactor.GetCurrentItemTypes().Any(Function(x) x = "factor") Then
             clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=3)
             clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
             ucrBase.clsRsyntax.iCallType = 2
