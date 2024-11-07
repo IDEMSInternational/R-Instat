@@ -232,6 +232,9 @@ Public Class dlgColumnStats
             If ucrChkStoreResults.Checked Then
                 clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
             End If
+            If ucrChkPrintOutput.Checked Then
+                clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
+            End If
         End If
     End Sub
 
