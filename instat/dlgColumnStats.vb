@@ -72,10 +72,7 @@ Public Class dlgColumnStats
         ucrChkOriginalLevel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOriginalLevel.SetRDefault("FALSE")
 
-        ucrChkPrintOutput.SetParameter(New RParameter("return_output", 4))
         ucrChkPrintOutput.SetText("Print Results to Output Window")
-        ucrChkPrintOutput.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkPrintOutput.SetRDefault("FALSE")
 
         ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 5))
         ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
@@ -117,6 +114,7 @@ Public Class dlgColumnStats
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
+        clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
         'Prevents an error if user chooses non count summaries with no columns to summarise
         clsDefaultFunction.AddParameter("silent", "TRUE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
