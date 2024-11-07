@@ -229,6 +229,7 @@ Public Class dlgColumnStats
             clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
             ucrBase.clsRsyntax.iCallType = 2
         Else
+            clsDefaultFunction.RemoveParameterByName("return_output")
             If ucrChkStoreResults.Checked Then
                 clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
             End If
