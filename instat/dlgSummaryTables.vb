@@ -22,7 +22,7 @@ Public Class dlgSummaryTables
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
     Private bResetFormatSubdialog As Boolean = False
-    Private clsSummaryDefaultFunction, clsFrequencyDefaultFunction As New RFunction
+    Private clsSummaryDefaultFunction, clsArrangeFunction, clsFrequencyDefaultFunction As New RFunction
     Private bRCodeSet As Boolean = True
     Private clsPivotWiderFunction As New RFunction
     Private ClsTabSpannerDelimFunction As New RFunction
@@ -182,6 +182,7 @@ Public Class dlgSummaryTables
         clsDummyFunction = New RFunction
         clsPivotWiderFunction = New RFunction
         ClsTabSpannerDelimFunction = New RFunction
+        clsArrangeFunction = New RFunction
 
         clsJoiningPipeOperator = New ROperator
         clsSummaryOperator = New ROperator
@@ -227,9 +228,12 @@ Public Class dlgSummaryTables
         ClsTabSpannerDelimFunction.SetRCommand("tab_spanner_delim")
         ClsTabSpannerDelimFunction.AddParameter("delim", Chr(34) & "_" & Chr(34))
 
+        clsArrangeFunction.SetRCommand("arrange")
+
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.bBrackets = False
         clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
+        clsSummaryOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=1)
         clsSummaryOperator.AddParameter("right", clsROperatorParameter:=clsSpannerOperator, iPosition:=2)
 
         clsSpannerOperator.SetOperation("%>%")
@@ -239,6 +243,7 @@ Public Class dlgSummaryTables
         clsFrequencyOperator.SetOperation("%>%")
         clsFrequencyOperator.bBrackets = False
         clsFrequencyOperator.AddParameter("tableFun", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
+        clsFrequencyOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=1)
         clsFrequencyOperator.AddParameter("right", clsROperatorParameter:=clsSpannerOperator, iPosition:=2)
 
         clsJoiningPipeOperator.SetOperation("%>%")
@@ -486,7 +491,7 @@ Public Class dlgSummaryTables
             ' Get the list of selected variable names from ucrReceiverFactors
             Dim varNames As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList()
 
-            ' Create a new list to store the selected variables
+            ' Create a new list to store the selected variables for names_from
             Dim selectedVars As New List(Of String)
 
             ' Loop through the ucrReceiverFactors and get only the first numVars items
@@ -494,11 +499,25 @@ Public Class dlgSummaryTables
                 selectedVars.Add(varNames(i))  ' Add the variable name to selectedVars
             Next
 
-            ' Create a comma-separated string from the selected variables
+            ' Create a comma-separated string from the selected variables for names_from
             Dim varsString As String = "c(" & String.Join(",", selectedVars) & ")"
 
             ' Pass the selected variables to the clsPivotWiderFunction's names_from parameter
             clsPivotWiderFunction.AddParameter("names_from", varsString, iPosition:=0)
+
+            ' Get the remaining variables that were not added to names_from
+            Dim remainingVars As New List(Of String)
+
+            For i As Integer = 0 To varNames.Count - numVars - 1
+                remainingVars.Add(varNames(i))  ' Add the remaining variables to arrange
+            Next
+
+            ' Create a comma-separated string for the remaining variables
+            Dim arrangeString As String = String.Join(",", remainingVars)
+
+            ' Pass the remaining variables to the arrange parameter in clsArrangeFunction
+            clsArrangeFunction.AddParameter("arrange", arrangeString, iPosition:=0, bIncludeArgumentName:=False)
+
         Else
             ' Step 1: Define the number of items to add based on UcrNudColumnSumFactors
             Dim numSumm As Integer = UcrNudColumnSumFactors.Value
@@ -547,9 +566,16 @@ Public Class dlgSummaryTables
                 namesFromList.Add(varNames(i))
             Next
 
+            ' Convert namesFromList to a comma-separated string for names_from parameter
             Dim varsSummary As String = "c(" & String.Join(",", namesFromList) & ")"
-
             clsPivotWiderFunction.AddParameter("names_from", varsSummary, iPosition:=0)
+
+            ' Step 8: Identify remaining variables that were not added to names_from
+            Dim remainingVars As List(Of String) = varNames.Except(namesFromList).ToList()
+
+            ' Convert remaining variables to a comma-separated string for arrange parameter
+            Dim arrangeVars As String = String.Join(",", remainingVars)
+            clsArrangeFunction.AddParameter("arrange", arrangeVars, iPosition:=0)
 
         End If
     End Sub
