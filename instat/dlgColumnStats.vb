@@ -223,8 +223,7 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub ucrReceiverByFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlValueChanged, ucrChkStoreResults.ControlValueChanged, ucrChkPrintOutput.ControlValueChanged
-        If ucrReceiverByFactor.IsEmpty _
-                                OrElse Not ucrReceiverByFactor.GetCurrentItemTypes().Any(Function(x) x = "factor") Then
+        If ucrReceiverByFactor.IsEmpty Then
             clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=3)
             clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
             ucrBase.clsRsyntax.iCallType = 2
