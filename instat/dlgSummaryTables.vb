@@ -336,6 +336,7 @@ Public Class dlgSummaryTables
         sdgSummaries.bEnable2VariableTab = True
         FillListView()
         SetSummariesDefaults()
+        SetVariableDefaults()
         TestOKEnabled()
     End Sub
 
@@ -456,6 +457,7 @@ Public Class dlgSummaryTables
         Next
         SetSummariesDefaults()
         SetColFactorDefaults()
+        SetVariableDefaults()
     End Sub
 
     Private Sub ucrChkDisplayAsPercentage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsPercentage.ControlValueChanged
@@ -551,7 +553,7 @@ Public Class dlgSummaryTables
             End If
 
             ' Step 6: Add "summary" if condition is met and place it at adjusted positionSum
-            If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 AndAlso numSumm >= 1 Then
+            If  ucrReorderSummary.Count > 1 AndAlso numSumm >= 1 Then
                 Dim summaryIndex As Integer = Math.Max(0, Math.Min(positionSum - 1, varNames.Count))
                 If summaryIndex < varNames.Count Then
                     varNames.Insert(summaryIndex, "summary")
@@ -610,10 +612,15 @@ Public Class dlgSummaryTables
         Dim selectedColumns As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList() ' Example, adjust based on your control
         Dim defaultVariables As Integer = selectedColumns.Count
 
-        If ucrReceiverSummaryCols.Count > 1 Then
+        If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count = 1 Then
+            ucrNudPositionVar.Maximum = defaultVariables + 1
+            ucrNudPositionVar.Minimum = 1
             ucrNudPositionVar.Value = defaultVariables + 1
+            ucrNudPositionVar.Enabled = True
+        ElseIf ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
             ucrNudPositionVar.Maximum = defaultVariables + 2
             ucrNudPositionVar.Minimum = 1
+            ucrNudPositionVar.Value = defaultVariables + 1
             ucrNudPositionVar.Enabled = True
         Else
             ucrNudPositionVar.Value = 1
@@ -627,14 +634,22 @@ Public Class dlgSummaryTables
         Dim defaultSummaries As Integer = selectedSummaries.Count
 
         If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
-            ucrNudPositionSum.Value = defaultSummaries + 2
             ucrNudPositionSum.Maximum = defaultSummaries + 2
             ucrNudPositionSum.Minimum = 1
+            ucrNudPositionSum.Value = defaultSummaries + 2
+            ucrNudPositionSum.Enabled = True
+        ElseIf ucrReceiverSummaryCols.Count = 1 AndAlso ucrReorderSummary.Count > 1 Then
+            ucrNudPositionSum.Maximum = defaultSummaries + 1
+            ucrNudPositionSum.Minimum = 1
+            ucrNudPositionSum.Value = defaultSummaries + 1
             ucrNudPositionSum.Enabled = True
         Else
+            ucrNudPositionSum.Maximum = 1
+            ucrNudPositionSum.Minimum = 1
             ucrNudPositionSum.Value = 1
             ucrNudPositionSum.Enabled = False
         End If
+
     End Sub
 
     Private Sub SetColFactorDefaults()
