@@ -283,8 +283,10 @@ Public Class dlgMosaicPlot
         bRCodeSet = False
 
         ucrSelectorMosaicPlot.SetRCode(clsGgplotFunction, bReset)
-        ucrReceiverX.SetRCode(clsLocalAesFunction, bReset)
-        ucrReceiverFill.SetRCode(clsLocalAesFunction, bReset)
+        If bReset Then
+            ucrReceiverX.SetRCode(clsLocalAesFunction, bReset)
+            ucrReceiverFill.SetRCode(clsLocalAesFunction, bReset)
+        End If
         ucrReceiverConditions.SetRCode(clsLocalAesFunction, bReset)
         ucrReceiverWeights.SetRCode(clsLocalAesFunction, bReset)
 
@@ -556,10 +558,10 @@ Public Class dlgMosaicPlot
 
     Private Sub toolStripMenuItemMosaicOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemMosaicOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicGeomFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
-        sdgLayerOptions.tbcLayers.SelectedTab = sdgLayerOptions.tbpGeomParameters
-        sdgLayerOptions.tbpAesthetics.Enabled = False
+        ' sdgLayerOptions.tbcLayers.SelectedTab = sdgLayerOptions.tbpGeomParameters
+        'sdgLayerOptions.tbpAesthetics.Enabled = False
         sdgLayerOptions.ShowDialog()
-        sdgLayerOptions.tbpAesthetics.Enabled = True
+        'sdgLayerOptions.tbpAesthetics.Enabled = True
         bResetBoxLayerSubdialog = False
         SetRCodeForControls(False)
     End Sub
