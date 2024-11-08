@@ -233,8 +233,7 @@ Public Class dlgSummaryTables
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.bBrackets = False
         clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryDefaultFunction, iPosition:=0)
-        clsSummaryOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=1)
-        clsSummaryOperator.AddParameter("right", clsROperatorParameter:=clsSpannerOperator, iPosition:=2)
+        clsSummaryOperator.AddParameter("right", clsROperatorParameter:=clsSpannerOperator, iPosition:=3)
 
         clsSpannerOperator.SetOperation("%>%")
         clsSpannerOperator.AddParameter("gt", clsRFunctionParameter:=clsGtFunction.Clone, iPosition:=0)
@@ -243,8 +242,7 @@ Public Class dlgSummaryTables
         clsFrequencyOperator.SetOperation("%>%")
         clsFrequencyOperator.bBrackets = False
         clsFrequencyOperator.AddParameter("tableFun", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
-        clsFrequencyOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=1)
-        clsFrequencyOperator.AddParameter("right", clsROperatorParameter:=clsSpannerOperator, iPosition:=2)
+        clsFrequencyOperator.AddParameter("right", clsROperatorParameter:=clsSpannerOperator, iPosition:=3)
 
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
@@ -507,6 +505,14 @@ Public Class dlgSummaryTables
             ' Pass the selected variables to the clsPivotWiderFunction's names_from parameter
             clsPivotWiderFunction.AddParameter("names_from", varsString, iPosition:=0)
 
+            ' Check if all variables are added to names_from
+            If selectedVars.Count = varNames.Count Then
+                ' If all variables are added to names_from, remove the arrange parameter
+                clsFrequencyOperator.RemoveParameterByName("arrange")
+            Else
+                clsFrequencyOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=2)
+            End If
+
             ' Get the remaining variables that were not added to names_from
             Dim remainingVars As New List(Of String)
 
@@ -519,6 +525,7 @@ Public Class dlgSummaryTables
 
             ' Pass the remaining variables to the arrange parameter in clsArrangeFunction
             clsArrangeFunction.AddParameter("arrange", arrangeString, iPosition:=0, bIncludeArgumentName:=False)
+
 
         Else
             ' Step 1: Define the number of items to add based on UcrNudColumnSumFactors
@@ -553,7 +560,7 @@ Public Class dlgSummaryTables
             End If
 
             ' Step 6: Add "summary" if condition is met and place it at adjusted positionSum
-            If  ucrReorderSummary.Count > 1 AndAlso numSumm >= 1 Then
+            If ucrReorderSummary.Count > 1 AndAlso numSumm >= 1 Then
                 Dim summaryIndex As Integer = Math.Max(0, Math.Min(positionSum - 1, varNames.Count))
                 If summaryIndex < varNames.Count Then
                     varNames.Insert(summaryIndex, "summary")
@@ -575,9 +582,16 @@ Public Class dlgSummaryTables
             ' Step 8: Identify remaining variables that were not added to names_from
             Dim remainingVars As List(Of String) = varNames.Except(namesFromList).ToList()
 
-            ' Convert remaining variables to a comma-separated string for arrange parameter
-            Dim arrangeVars As String = String.Join(",", remainingVars)
-            clsArrangeFunction.AddParameter("arrange", arrangeVars, iPosition:=0)
+            ' Check if all variables are added to names_from
+            If remainingVars.Count = 0 Then
+                ' If all variables are added to names_from, remove the arrange parameter
+                clsSummaryOperator.RemoveParameterByName("arrange")
+            Else
+                ' Convert remaining variables to a comma-separated string for arrange parameter
+                Dim arrangeVars As String = String.Join(",", remainingVars)
+                clsArrangeFunction.AddParameter("arrange", arrangeVars, iPosition:=0)
+                clsSummaryOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=2)
+            End If
 
         End If
     End Sub
