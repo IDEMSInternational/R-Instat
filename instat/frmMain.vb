@@ -852,11 +852,23 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuHelpHelp_Click(sender As Object, e As EventArgs)
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TableOfContents, "")
+        Help.ShowHelp(Me, Me.strStaticPath & "/" & Me.strHelpFilePath, HelpNavigator.TopicId, "135")
     End Sub
 
-    Private Sub mnuTbHelp_Click(sender As Object, e As EventArgs) Handles mnuTbHelp.Click
+    Private Sub mnuTbHelp_Click(sender As Object, e As EventArgs) Handles mnuTbHelp.ButtonClick, mnuToolBarHelp.Click
         mnuHelpHelp_Click(sender, e)
+    End Sub
+
+    Private Sub mnuDataWindowHelp_Click(sender As Object, e As EventArgs) Handles mnuDataWindowHelp.Click
+        Help.ShowHelp(Me, Me.strStaticPath & "/" & Me.strHelpFilePath, HelpNavigator.TopicId, "134")
+    End Sub
+
+    Private Sub mnuOutputHelp_Click(sender As Object, e As EventArgs) Handles mnuOutputHelp.Click
+        Help.ShowHelp(Me, Me.strStaticPath & "/" & Me.strHelpFilePath, HelpNavigator.TopicId, "540")
+    End Sub
+
+    Private Sub mnuLogScriptHelp_Click(sender As Object, e As EventArgs) Handles mnuLogScriptHelp.Click
+        Help.ShowHelp(Me, Me.strStaticPath & "/" & Me.strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
 
     Private Sub mnuPrepareFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click

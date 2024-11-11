@@ -426,7 +426,6 @@ Partial Class frmMain
         Me.ToolStripSeparator76 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuTbHelp = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator77 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbLan = New System.Windows.Forms.ToolStripButton()
         Me.separator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -704,6 +703,11 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTbHelp = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuToolBarHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDataWindowHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOutputHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLogScriptHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3032,14 +3036,14 @@ Partial Class frmMain
         '
         Me.mnuUndo.Name = "mnuUndo"
         Me.mnuUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.mnuUndo.Size = New System.Drawing.Size(180, 22)
+        Me.mnuUndo.Size = New System.Drawing.Size(167, 22)
         Me.mnuUndo.Text = "Undo"
         '
         'mnuEditFind
         '
         Me.mnuEditFind.Name = "mnuEditFind"
         Me.mnuEditFind.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
-        Me.mnuEditFind.Size = New System.Drawing.Size(180, 22)
+        Me.mnuEditFind.Size = New System.Drawing.Size(167, 22)
         Me.mnuEditFind.Tag = "Find"
         Me.mnuEditFind.Text = "Find"
         '
@@ -3047,7 +3051,7 @@ Partial Class frmMain
         '
         Me.mnuEditCopy.Name = "mnuEditCopy"
         Me.mnuEditCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.mnuEditCopy.Size = New System.Drawing.Size(180, 22)
+        Me.mnuEditCopy.Size = New System.Drawing.Size(167, 22)
         Me.mnuEditCopy.Tag = "Copy"
         Me.mnuEditCopy.Text = "Copy"
         '
@@ -3055,27 +3059,27 @@ Partial Class frmMain
         '
         Me.mnuEditPaste.Name = "mnuEditPaste"
         Me.mnuEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.mnuEditPaste.Size = New System.Drawing.Size(180, 22)
+        Me.mnuEditPaste.Size = New System.Drawing.Size(167, 22)
         Me.mnuEditPaste.Tag = "Paste"
         Me.mnuEditPaste.Text = "Paste"
         '
         'mnuEditPasteNew
         '
         Me.mnuEditPasteNew.Name = "mnuEditPasteNew"
-        Me.mnuEditPasteNew.Size = New System.Drawing.Size(180, 22)
+        Me.mnuEditPasteNew.Size = New System.Drawing.Size(167, 22)
         Me.mnuEditPasteNew.Text = "Paste New..."
         '
         'mnuEditWordwrap
         '
         Me.mnuEditWordwrap.Name = "mnuEditWordwrap"
-        Me.mnuEditWordwrap.Size = New System.Drawing.Size(180, 22)
+        Me.mnuEditWordwrap.Size = New System.Drawing.Size(167, 22)
         Me.mnuEditWordwrap.Text = "Wordwrap..."
         '
         'mnuEditSelectAll
         '
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
         Me.mnuEditSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.mnuEditSelectAll.Size = New System.Drawing.Size(180, 22)
+        Me.mnuEditSelectAll.Size = New System.Drawing.Size(167, 22)
         Me.mnuEditSelectAll.Tag = "Select_All"
         Me.mnuEditSelectAll.Text = "Select All "
         '
@@ -3355,16 +3359,6 @@ Partial Class frmMain
         '
         Me.separator3.Name = "separator3"
         Me.separator3.Size = New System.Drawing.Size(6, 37)
-        '
-        'mnuTbHelp
-        '
-        Me.mnuTbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbHelp.Image = Global.instat.My.Resources.Resources.help2
-        Me.mnuTbHelp.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbHelp.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
-        Me.mnuTbHelp.Name = "mnuTbHelp"
-        Me.mnuTbHelp.Size = New System.Drawing.Size(34, 34)
-        Me.mnuTbHelp.Text = "He&lp"
         '
         'ToolStripSeparator77
         '
@@ -5256,6 +5250,44 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuTbHelp
+        '
+        Me.mnuTbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbHelp.DropDownButtonWidth = 18
+        Me.mnuTbHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolBarHelp, Me.mnuDataWindowHelp, Me.mnuOutputHelp, Me.mnuLogScriptHelp})
+        Me.mnuTbHelp.Image = Global.instat.My.Resources.Resources.help2
+        Me.mnuTbHelp.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbHelp.Name = "mnuTbHelp"
+        Me.mnuTbHelp.Size = New System.Drawing.Size(53, 34)
+        Me.mnuTbHelp.Text = "LogScript"
+        Me.mnuTbHelp.ToolTipText = "Help Window"
+        '
+        'mnuToolBarHelp
+        '
+        Me.mnuToolBarHelp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuToolBarHelp.Name = "mnuToolBarHelp"
+        Me.mnuToolBarHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuToolBarHelp.Text = "Toolbar Help"
+        '
+        'mnuDataWindowHelp
+        '
+        Me.mnuDataWindowHelp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuDataWindowHelp.Name = "mnuDataWindowHelp"
+        Me.mnuDataWindowHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDataWindowHelp.Text = "Data Window Help"
+        '
+        'mnuOutputHelp
+        '
+        Me.mnuOutputHelp.Name = "mnuOutputHelp"
+        Me.mnuOutputHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOutputHelp.Text = "Output Help"
+        '
+        'mnuLogScriptHelp
+        '
+        Me.mnuLogScriptHelp.Name = "mnuLogScriptHelp"
+        Me.mnuLogScriptHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuLogScriptHelp.Text = "Log Script Help"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5343,7 +5375,6 @@ Partial Class frmMain
     Friend WithEvents toolStripSeparator As ToolStripSeparator
     Friend WithEvents separator1 As ToolStripSeparator
     Friend WithEvents separator2 As ToolStripSeparator
-    Friend WithEvents mnuTbHelp As ToolStripButton
     Private WithEvents mnuBar As MenuStrip
     Friend WithEvents mnuFile As ToolStripMenuItem
     Friend WithEvents mnuFileNewDataFrame As ToolStripMenuItem
@@ -5981,4 +6012,9 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
     Friend WithEvents mnuClimaticCheckDataDistances As ToolStripMenuItem
     Friend WithEvents mnuUndo As ToolStripMenuItem
+    Friend WithEvents mnuTbHelp As ToolStripSplitButton
+    Friend WithEvents mnuToolBarHelp As ToolStripMenuItem
+    Friend WithEvents mnuDataWindowHelp As ToolStripMenuItem
+    Friend WithEvents mnuOutputHelp As ToolStripMenuItem
+    Friend WithEvents mnuLogScriptHelp As ToolStripMenuItem
 End Class
