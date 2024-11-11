@@ -201,8 +201,8 @@ Public Class RLink
             MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & Environment.NewLine &
                    "R-Instat requires version " & strRVersionRequired & " of R." & Environment.NewLine &
                    "Note that R-Instat does not work with R below 4.4.1. We recommend using R " & strRBundledVersion &
-                   ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " &
-                   strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat.",
+                   ".  Try rerunning the installation to install R " & strRBundledVersion & " or download R " &
+                   strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/  and restart R-Instat.",
                    MsgBoxStyle.Critical, "Cannot initialise R connection.")
         End Try
 
@@ -228,7 +228,7 @@ Public Class RLink
                 MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionRequired & vbNewLine &
                                        "Try uninstalling any versions of R and rerun the installation to install R " & strRVersionRequired & " or download R " &
                                        strRVersionRequired & "From https://cran.r-project.org/bin/windows/base/old/" & strRVersionRequired &
-                                       "And restart R-Instat.",
+                                       " and restart R-Instat.",
                                        MsgBoxStyle.Critical, "R Version error.")
             ElseIf strMajor <> strRVersionMajorRequired OrElse strMinor.Substring(0, 1) < strRVersionMinorRequired Then
                 MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & Environment.NewLine &
