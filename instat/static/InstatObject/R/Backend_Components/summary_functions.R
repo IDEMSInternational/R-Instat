@@ -239,7 +239,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
     curr_filter_name <- curr_filter[["name"]]
     curr_filter_calc <- self$get_filter_as_instat_calculation(data_name, curr_filter_name)
     manipulations <- c(curr_filter_calc, manipulations)
-  }
+  } 
   if(!missing(additional_filter)) {
     manipulations <- c(additional_filter, manipulations)
   }
@@ -247,10 +247,12 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
 
   # setting up param_list. Here we read in .drop and .preserve
   param_list <- list()
-  for (i in 1:length(combined_calc_sum$manipulations)){
-    if (combined_calc_sum$manipulations[[i]]$type %in% c("by", "filter")){
-        param_list <- c(param_list, combined_calc_sum$manipulations[[i]]$param_list)
-    }
+  if (length(combined_calc_sum$manipulations) > 0){
+      for (i in 1:length(combined_calc_sum$manipulations)){
+          if (combined_calc_sum$manipulations[[i]]$type %in% c("by", "filter")){
+              param_list <- c(param_list, combined_calc_sum$manipulations[[i]]$param_list)
+          }
+      }
   }
   out <- self$apply_instat_calculation(combined_calc_sum, param_list = param_list)
   # relocate so that the factors are first still for consistency	
@@ -1063,11 +1065,12 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
 }
 
 # cor function
-summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = NULL, method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = NULL, method = c("pearson", "kendall", "spearman"), cor_use = c("everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+  cor_use <- match.arg(cor_use)
   if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else {
     if (missing(weights) || is.null(weights)) {
-      return(cor(x = x, y = y, use = use, method = method))
+      return(cor(x = x, y = y, use = cor_use, method = method))
     }
     else {
       weights::wtd.cor(x = x, y = y, weight = weights)[1]
