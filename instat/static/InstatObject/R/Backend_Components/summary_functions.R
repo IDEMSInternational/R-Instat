@@ -192,7 +192,10 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
       # function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
       if(is.null(result_names)) {
         result_name = summaries_display[j]
-        if(include_columns_to_summarise) result_name = paste0(result_name, sep, column_names)
+        if(include_columns_to_summarise){
+          if (!is.null(extra_args$y)) result_name <- paste0(result_name, sep, extra_args$y, sep, column_names)
+          else result_name <- paste0(result_name, sep, column_names)
+        }
       }
       #TODO result_names could be horizontal/vertical vector, matrix or single value
       else result_name <- result_names[i,j]
