@@ -72,14 +72,11 @@ Public Class dlgUseTable
         cboFileType.SelectedIndex = 0
         ucrFilePath.ResetPathControl()
 
-
-
         clsGetGtTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
         clsGtTableROperator.SetOperation("%>%")
         clsGtTableROperator.bBrackets = False
         clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsGetGtTableFunction, iPosition:=0, bIncludeArgumentName:=False)
-
 
         ' Set base operator
         clsBaseOperator.SetOperation("%>%")
@@ -96,8 +93,7 @@ Public Class dlgUseTable
         ' For export operations which is an after code
         clsSaveGtRFunction.SetPackageName("gt")
         clsSaveGtRFunction.SetRCommand("gtsave")
-        clsSaveGtRFunction.AddParameter(strParameterName:="data", clsROperatorParameter:=clsGtTableROperator, iPosition:=1)
-
+        clsSaveGtRFunction.AddParameter(strParameterName:="data", clsROperatorParameter:=clsGtTableROperator, iPosition:=0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
