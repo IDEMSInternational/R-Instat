@@ -230,9 +230,13 @@ Public Class dlgColumnStats
                 clsDefaultFunction.RemoveParameterByName("return_output")
                 If ucrChkStoreResults.Checked Then
                     clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
+                Else
+                    clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=3)
                 End If
                 If ucrChkPrintOutput.Checked Then
                     clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
+                Else
+                    clsDefaultFunction.AddParameter("return_output", "FALSE", iPosition:=4)
                 End If
             End If
         Else
@@ -241,6 +245,7 @@ Public Class dlgColumnStats
             Else
                 clsDefaultFunction.RemoveParameterByName("return_output")
             End If
+            clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
         End If
     End Sub
 
