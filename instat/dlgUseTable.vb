@@ -18,8 +18,8 @@ Imports instat.Translations
 Public Class dlgUseTable
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsUseTableFunction, clsGtSaveRFunction As New RFunction
-    Private clsBaseOperator, clsGtTableROperator, clsExportGtROperator As New ROperator
+    Private clsGetGtTableFunction, clsSaveGtRFunction As New RFunction
+    Private clsGtTableROperator, clsBaseOperator As New ROperator
 
     Private Sub dlgUseTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -55,15 +55,15 @@ Public Class dlgUseTable
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
         ucrChkExport.SetText("Export Table")
+        ucrChkExport.Checked = True ' Forces the controls to be hidden
         cboFileType.Items.AddRange({"HTML (*.html)", "PDF (*.pdf)", "PNG (*.png)", "LaTeX (*.tex)", "RTF (*.rtf)", "Word (*.docx)"})
     End Sub
 
     Private Sub SetDefaults()
-        clsBaseOperator = New ROperator
         clsGtTableROperator = New ROperator
-        clsExportGtROperator = New ROperator
-        clsUseTableFunction = New RFunction
-        clsGtSaveRFunction = New RFunction
+        clsBaseOperator = New ROperator
+        clsGetGtTableFunction = New RFunction
+        clsSaveGtRFunction = New RFunction
 
         ucrTablesSelector.Reset()
         ucrTablesReceiver.SetMeAsReceiver()
@@ -72,29 +72,19 @@ Public Class dlgUseTable
         cboFileType.SelectedIndex = 0
         ucrFilePath.ResetPathControl()
 
-        clsGtSaveRFunction.SetPackageName("gt")
-        clsGtSaveRFunction.SetRCommand("gtsave")
 
-        clsUseTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+
+        clsGetGtTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
         clsGtTableROperator.SetOperation("%>%")
         clsGtTableROperator.bBrackets = False
-        clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsUseTableFunction, iPosition:=0, bIncludeArgumentName:=False)
-
-
-
-        ' For export operations which is an after code
-        clsExportGtROperator.SetOperation("%>%")
-        clsExportGtROperator.bBrackets = False
-        ' Operator needed instead of the RFUnction because of the formatting which has to be done on a 'gt' operator
-        clsExportGtROperator.AddParameter(strParameterName:="gt_export_tbl_operator", clsROperatorParameter:=clsGtTableROperator, iPosition:=0, bIncludeArgumentName:=False)
-        clsExportGtROperator.AddParameter(strParameterName:="gt_export_r_function", clsRFunctionParameter:=clsGtSaveRFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsGetGtTableFunction, iPosition:=0, bIncludeArgumentName:=False)
 
 
         ' Set base operator
         clsBaseOperator.SetOperation("%>%")
         clsBaseOperator.bBrackets = False
-        clsBaseOperator.AddParameter(strParameterName:="gt_view_tbl_operator", clsROperatorParameter:=clsGtTableROperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsBaseOperator.AddParameter(strParameterName:="gt_tbl_operator", clsROperatorParameter:=clsGtTableROperator, iPosition:=0, bIncludeArgumentName:=False)
         clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -102,11 +92,17 @@ Public Class dlgUseTable
                                                   strObjectName:="last_table")
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+
+        ' For export operations which is an after code
+        clsSaveGtRFunction.SetPackageName("gt")
+        clsSaveGtRFunction.SetRCommand("gtsave")
+        clsSaveGtRFunction.AddParameter(strParameterName:="data", clsROperatorParameter:=clsGtTableROperator, iPosition:=1)
+
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrTablesSelector.SetRCode(clsUseTableFunction, bReset)
-        ucrTablesReceiver.SetRCode(clsUseTableFunction, bReset)
+        ucrTablesSelector.SetRCode(clsGetGtTableFunction, bReset)
+        ucrTablesReceiver.SetRCode(clsGetGtTableFunction, bReset)
 
         ucrSaveTable.SetRCode(clsBaseOperator, bReset)
     End Sub
@@ -114,16 +110,14 @@ Public Class dlgUseTable
     Private Sub TestOKEnabled()
         ucrBase.OKEnabled(False)
 
-        If ucrTablesReceiver.IsEmpty Then
-            Exit Sub
-        End If
+        If Not ucrTablesReceiver.IsEmpty Then
+            If ucrSaveTable.IsComplete Then
+                ucrBase.OKEnabled(True)
+            End If
 
-        If ucrSaveTable.IsComplete Then
-            ucrBase.OKEnabled(True)
-        End If
-
-        If ucrChkExport.Checked Then
-            ucrBase.OKEnabled(Not ucrFilePath.IsEmpty)
+            If ucrChkExport.Checked AndAlso Not ucrFilePath.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            End If
         End If
     End Sub
 
@@ -154,7 +148,7 @@ Public Class dlgUseTable
             cboFileType.Visible = True
             ucrFilePath.Visible = True
 
-            ucrBase.clsRsyntax.AddToAfterCodes(clsExportGtROperator)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSaveGtRFunction)
         End If
 
         TestOKEnabled()
@@ -170,8 +164,8 @@ Public Class dlgUseTable
             Dim strFileName As String = Path.GetFileName(ucrFilePath.FilePath)
             Dim strFilePath As String = Path.GetDirectoryName(ucrFilePath.FilePath).Replace("\", "/")
 
-            clsGtSaveRFunction.AddParameter("filename", Chr(34) & strFileName & Chr(34), iPosition:=1)
-            clsGtSaveRFunction.AddParameter("path", Chr(34) & strFilePath & Chr(34), iPosition:=2)
+            clsSaveGtRFunction.AddParameter("filename", Chr(34) & strFileName & Chr(34), iPosition:=1)
+            clsSaveGtRFunction.AddParameter("path", Chr(34) & strFilePath & Chr(34), iPosition:=2)
         End If
         TestOKEnabled()
     End Sub
@@ -191,5 +185,4 @@ Public Class dlgUseTable
         Dim arrStr() As String = strText.Split({"(", ")"}, StringSplitOptions.RemoveEmptyEntries)
         Return arrStr(0) & "|" & arrStr(1)
     End Function
-
 End Class
