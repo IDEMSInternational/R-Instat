@@ -1263,8 +1263,13 @@ DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_po
     #set the row positions and the values
     rows_to_replace <- c(start_row_pos : (start_row_pos + nrow(clip_tbl) - 1 ))
     new_values <- clip_tbl[,index]
-    #replace the old values with new values
-    self$replace_value_in_data(col_names = col_names[index], rows = rows_to_replace, new_value = new_values)
+    
+    # Replace the old values with new values
+    for (i in seq_along(new_values)) {
+      # Replace each value one by one
+      self$replace_value_in_data(col_names = col_names[index], rows = rows_to_replace[i], new_value = new_values[i])
+    }
+    
     #rename header if first row of clip data is header. 
     if(first_clip_row_is_header){
       self$rename_column_in_data(curr_col_name = col_names[index], new_col_name = colnames(clip_tbl)[index]) 
