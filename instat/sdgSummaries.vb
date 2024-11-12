@@ -45,7 +45,7 @@ Public Class sdgSummaries
         ucrPnlPosition.AddToLinkedControls({ucrChkFirst, ucrSelectorOrderBy, ucrReceiverOrderBy, ucrChkOrderBy, ucrChkLast, ucrChknth, ucrChkSample}, {rdoUsePositions}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPosition.AddToLinkedControls({ucrChkWhichmin, ucrChkWhereMax, ucrChkWhereMin, ucrReceiverInclude, ucrSelectorInclude, ucrChkWhichmax}, {rdoDisplay}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkNonMissing.SetParameter(New RParameter("summary_count_name", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_name" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkNonMissing.SetParameter(New RParameter("summary_count", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkNonMissing.SetText("N Non Missing")
 
         ucrChkNMissing.SetParameter(New RParameter("summary_count_miss", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_miss" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))

@@ -194,7 +194,7 @@ Public Class dlgClimaticSummary
 
         'TODO: what defaults do we want?
         clsSummariesList.SetRCommand("c")
-        clsSummariesList.AddParameter("summary_count_name", Chr(34) & "summary_count_name" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False, iPosition:=11)
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")

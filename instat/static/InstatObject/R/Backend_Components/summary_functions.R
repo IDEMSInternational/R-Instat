@@ -446,7 +446,7 @@ sum_label <- "summary_sum"
 mode_label <- "summary_mode"
 count_label <- "summary_count_all"
 count_missing_label <- "summary_count_miss"
-count_non_missing_label <- "summary_count_name"
+count_non_missing_label <- "summary_count"
 sd_label <- "summary_sd"
 var_label <- "summary_var"
 median_label <- "summary_median"
@@ -581,7 +581,7 @@ na_check <- function(x, na_type = c(), na_consecutive_n = NULL, na_max_n = NULL,
       res[i] <- (summary_count_miss(x) / summary_count(x)) <= na_max_prop / 100
     }
     else if (type %in% c("n_non_miss","'n_non_miss'")) {
-      res[i] <- summary_count_name(x) >= na_min_n
+      res[i] <- summary_count(x) >= na_min_n
     }
     else if (type %in% c("FUN","'FUN'")) {
       res[i] <- na_FUN(x, ...)
@@ -728,7 +728,7 @@ summary_count_miss <- function(x, ...) {
   return(sum(is.na(x)))
 }
 
-summary_count_name <- function(x, ...) {
+summary_count <- function(x, ...) {
   return(sum(!is.na(x)))
 }
 
