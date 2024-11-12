@@ -4458,8 +4458,8 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
   }
   if (length(col) == dim(curr_data)[[1]]) {
     self$add_columns_to_data(col_name = column_name, col_data = col)
-    gaps_remaining <- summary_count_missing(col)
-    gaps_filled <- (summary_count_missing(curr_data[, var]) - gaps_remaining)
+    gaps_remaining <- summary_count_miss(col)
+    gaps_filled <- (summary_count_miss(curr_data[, var]) - gaps_remaining)
     cat(gaps_filled, " gaps filled", gaps_remaining, " remaining.", "\n")
   } else if (gaps != 0) {
     cat(gaps, " rows for date gaps are missing, fill date gaps before proceeding.", "\n")
