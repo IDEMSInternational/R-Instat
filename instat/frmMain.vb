@@ -1169,12 +1169,7 @@ Public Class frmMain
             clsSaveRDS.AddParameter("file", Chr(34) & strCurrentAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
             clsRLink.RunInternalScript(clsSaveRDS.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
 
-            If strCurrentStatus.Equals("No data loaded") Then
-                tstatus.Text = GetTranslation(strCurrentStatus)
-            Else
-                tstatus.Text = strCurrentStatus
-            End If
-
+            tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
             bFirstBackupDone = True
         End If
