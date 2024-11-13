@@ -659,8 +659,9 @@ Public Class dlgDescribeTwoVariable
     Private Sub ManageControlsVisibility()
         grpSummaries.Visible = rdoThreeVariable.Checked OrElse rdoTwoVariable.Checked
         ucrChkDisplayMargins.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
-        ucrChkDisplayMargins.Visible = rdoThreeVariable.Checked AndAlso IsFactorByFactorByFactor() OrElse IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor()
-        ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactor()
+        ucrChkDisplayMargins.Visible = rdoThreeVariable.Checked AndAlso IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor()
+        ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso (IsFactorByFactor() OrElse IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor())
+        ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor()
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrReceiverPercentages.Visible = ucrChkDisplayAsPercentage.Checked AndAlso rdoORow.Checked AndAlso IsFactorByFactor()
         ucrpnlPercent.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor() AndAlso ucrChkDisplayAsPercentage.Checked
@@ -1165,18 +1166,21 @@ Public Class dlgDescribeTwoVariable
             If IsFactorByFactorByFactor() Then
                 clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverThreeVariableSecondFactor.GetVariableNames & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames & "," & ".x" & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ".x")
-                clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
+                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverThreeVariableThirdVariable.GetVariableNames(False), iPosition:=0)
                 clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
             ElseIf IsFactorByFactorByNumeric() Then
                 clsSummaryTableFunction.AddParameter("factors", "c(" & ".x" & "," & ucrReceiverThreeVariableSecondFactor.GetVariableNames & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverThreeVariableThirdVariable.GetVariableNames)
                 clsSummaryTableFunction.AddParameter("summaries", ".y", iPosition:=0)
+                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverThreeVariableSecondFactor.GetVariableNames(False), iPosition:=0)
                 clsSummaryOperator.RemoveParameterByName("col_factor")
             ElseIf IsFactorByNumericByFactor() Then
                 clsSummaryTableFunction.AddParameter("factors", "c(" & ".x" & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ucrReceiverThreeVariableSecondFactor.GetVariableNames)
                 clsSummaryTableFunction.AddParameter("summaries", ".y", iPosition:=0)
                 clsSummaryOperator.RemoveParameterByName("col_factor")
+                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverThreeVariableThirdVariable.GetVariableNames(False), iPosition:=0)
+
             ElseIf IsFactorByNumericByNumeric() Then
                 clsMapSummaryFunction.AddParameter(".x", ucrReceiverFirstVars.GetVariableNames)
                 clsPivotWiderFunction.AddParameter("names_from", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
