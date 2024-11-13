@@ -22,27 +22,47 @@ Partial Class dlgUseTable
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrTablesReceiver = New instat.ucrReceiverSingle()
-        Me.lblTablesToUse = New System.Windows.Forms.Label()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgUseTable))
+        Me.btnTableOptions = New System.Windows.Forms.Button()
+        Me.lblTable = New System.Windows.Forms.Label()
         Me.ucrSaveTable = New instat.ucrSave()
-        Me.ucrPnlExportOptions = New instat.UcrPanel()
-        Me.rdoAsHTML = New System.Windows.Forms.RadioButton()
-        Me.rdoAsRTF = New System.Windows.Forms.RadioButton()
-        Me.rdoAsWord = New System.Windows.Forms.RadioButton()
-        Me.rdoAsLaTex = New System.Windows.Forms.RadioButton()
-        Me.cmdFormatOptions = New System.Windows.Forms.Button()
-        Me.lblExportTable = New System.Windows.Forms.Label()
+        Me.ucrTablesReceiver = New instat.ucrReceiverSingle()
         Me.ucrTablesSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrFilePath = New instat.ucrFilePath()
+        Me.lblFileType = New System.Windows.Forms.Label()
+        Me.ucrChkExport = New instat.ucrCheck()
+        Me.cboFileType = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'btnTableOptions
         '
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(2, 397)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(407, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.btnTableOptions.Location = New System.Drawing.Point(8, 214)
+        Me.btnTableOptions.Name = "btnTableOptions"
+        Me.btnTableOptions.Size = New System.Drawing.Size(135, 23)
+        Me.btnTableOptions.TabIndex = 11
+        Me.btnTableOptions.Text = "Table Options"
+        Me.btnTableOptions.UseVisualStyleBackColor = True
+        '
+        'lblTable
+        '
+        Me.lblTable.AutoSize = True
+        Me.lblTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTable.Location = New System.Drawing.Point(258, 43)
+        Me.lblTable.Name = "lblTable"
+        Me.lblTable.Size = New System.Drawing.Size(37, 13)
+        Me.lblTable.TabIndex = 25
+        Me.lblTable.Text = "Table:"
+        '
+        'ucrSaveTable
+        '
+        Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveTable.Location = New System.Drawing.Point(11, 251)
+        Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveTable.Name = "ucrSaveTable"
+        Me.ucrSaveTable.Size = New System.Drawing.Size(390, 34)
+        Me.ucrSaveTable.TabIndex = 4
         '
         'ucrTablesReceiver
         '
@@ -57,96 +77,6 @@ Partial Class dlgUseTable
         Me.ucrTablesReceiver.TabIndex = 2
         Me.ucrTablesReceiver.ucrSelector = Nothing
         '
-        'lblTablesToUse
-        '
-        Me.lblTablesToUse.AutoSize = True
-        Me.lblTablesToUse.Location = New System.Drawing.Point(255, 43)
-        Me.lblTablesToUse.Name = "lblTablesToUse"
-        Me.lblTablesToUse.Size = New System.Drawing.Size(75, 13)
-        Me.lblTablesToUse.TabIndex = 3
-        Me.lblTablesToUse.Text = "Table To Use:"
-        '
-        'ucrSaveTable
-        '
-        Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTable.Location = New System.Drawing.Point(10, 360)
-        Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveTable.Name = "ucrSaveTable"
-        Me.ucrSaveTable.Size = New System.Drawing.Size(390, 34)
-        Me.ucrSaveTable.TabIndex = 4
-        '
-        'ucrPnlExportOptions
-        '
-        Me.ucrPnlExportOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlExportOptions.Enabled = False
-        Me.ucrPnlExportOptions.Location = New System.Drawing.Point(8, 243)
-        Me.ucrPnlExportOptions.Name = "ucrPnlExportOptions"
-        Me.ucrPnlExportOptions.Size = New System.Drawing.Size(105, 110)
-        Me.ucrPnlExportOptions.TabIndex = 5
-        '
-        'rdoAsHTML
-        '
-        Me.rdoAsHTML.AutoSize = True
-        Me.rdoAsHTML.Location = New System.Drawing.Point(14, 250)
-        Me.rdoAsHTML.Name = "rdoAsHTML"
-        Me.rdoAsHTML.Size = New System.Drawing.Size(55, 17)
-        Me.rdoAsHTML.TabIndex = 6
-        Me.rdoAsHTML.TabStop = True
-        Me.rdoAsHTML.Text = "HTML"
-        Me.rdoAsHTML.UseVisualStyleBackColor = True
-        '
-        'rdoAsRTF
-        '
-        Me.rdoAsRTF.AutoSize = True
-        Me.rdoAsRTF.Location = New System.Drawing.Point(14, 275)
-        Me.rdoAsRTF.Name = "rdoAsRTF"
-        Me.rdoAsRTF.Size = New System.Drawing.Size(46, 17)
-        Me.rdoAsRTF.TabIndex = 7
-        Me.rdoAsRTF.TabStop = True
-        Me.rdoAsRTF.Text = "RTF"
-        Me.rdoAsRTF.UseVisualStyleBackColor = True
-        '
-        'rdoAsWord
-        '
-        Me.rdoAsWord.AutoSize = True
-        Me.rdoAsWord.Location = New System.Drawing.Point(14, 300)
-        Me.rdoAsWord.Name = "rdoAsWord"
-        Me.rdoAsWord.Size = New System.Drawing.Size(51, 17)
-        Me.rdoAsWord.TabIndex = 8
-        Me.rdoAsWord.TabStop = True
-        Me.rdoAsWord.Text = "Word"
-        Me.rdoAsWord.UseVisualStyleBackColor = True
-        '
-        'rdoAsLaTex
-        '
-        Me.rdoAsLaTex.AutoSize = True
-        Me.rdoAsLaTex.Location = New System.Drawing.Point(14, 325)
-        Me.rdoAsLaTex.Name = "rdoAsLaTex"
-        Me.rdoAsLaTex.Size = New System.Drawing.Size(55, 17)
-        Me.rdoAsLaTex.TabIndex = 9
-        Me.rdoAsLaTex.TabStop = True
-        Me.rdoAsLaTex.Text = "LaTex"
-        Me.rdoAsLaTex.UseVisualStyleBackColor = True
-        '
-        'cmdFormatOptions
-        '
-        Me.cmdFormatOptions.Location = New System.Drawing.Point(256, 183)
-        Me.cmdFormatOptions.Name = "cmdFormatOptions"
-        Me.cmdFormatOptions.Size = New System.Drawing.Size(135, 23)
-        Me.cmdFormatOptions.TabIndex = 11
-        Me.cmdFormatOptions.Text = "Format Options"
-        Me.cmdFormatOptions.UseVisualStyleBackColor = True
-        '
-        'lblExportTable
-        '
-        Me.lblExportTable.AutoSize = True
-        Me.lblExportTable.Enabled = False
-        Me.lblExportTable.Location = New System.Drawing.Point(5, 227)
-        Me.lblExportTable.Name = "lblExportTable"
-        Me.lblExportTable.Size = New System.Drawing.Size(119, 13)
-        Me.lblExportTable.TabIndex = 12
-        Me.lblExportTable.Text = "Export Table Object As:"
-        '
         'ucrTablesSelector
         '
         Me.ucrTablesSelector.AutoSize = True
@@ -159,23 +89,84 @@ Partial Class dlgUseTable
         Me.ucrTablesSelector.Size = New System.Drawing.Size(213, 183)
         Me.ucrTablesSelector.TabIndex = 1
         '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(2, 397)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(407, 52)
+        Me.ucrBase.TabIndex = 0
+        '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(8, 263)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(158, 106)
+        Me.ucrPnlOptions.TabIndex = 27
+        '
+        'ucrFilePath
+        '
+        Me.ucrFilePath.AutoSize = True
+        Me.ucrFilePath.DefaultFileSuggestionName = ""
+        Me.ucrFilePath.FilePath = ""
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
+        Me.ucrFilePath.FilePathDialogFilter = resources.GetString("ucrFilePath.FilePathDialogFilter")
+        Me.ucrFilePath.FilePathDialogTitle = "Export Data File"
+        Me.ucrFilePath.FilePathLabel = "Save As:"
+        Me.ucrFilePath.FolderBrowse = False
+        Me.ucrFilePath.Location = New System.Drawing.Point(30, 346)
+        Me.ucrFilePath.Name = "ucrFilePath"
+        Me.ucrFilePath.SelectedFileFilterIndex = 1
+        Me.ucrFilePath.Size = New System.Drawing.Size(365, 34)
+        Me.ucrFilePath.TabIndex = 28
+        '
+        'lblFileType
+        '
+        Me.lblFileType.AutoSize = True
+        Me.lblFileType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFileType.Location = New System.Drawing.Point(31, 320)
+        Me.lblFileType.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblFileType.Name = "lblFileType"
+        Me.lblFileType.Size = New System.Drawing.Size(86, 13)
+        Me.lblFileType.TabIndex = 30
+        Me.lblFileType.Text = "Select File Type:"
+        '
+        'ucrChkExport
+        '
+        Me.ucrChkExport.AutoSize = True
+        Me.ucrChkExport.Checked = False
+        Me.ucrChkExport.Location = New System.Drawing.Point(12, 290)
+        Me.ucrChkExport.Name = "ucrChkExport"
+        Me.ucrChkExport.Size = New System.Drawing.Size(253, 23)
+        Me.ucrChkExport.TabIndex = 31
+        '
+        'cboFileType
+        '
+        Me.cboFileType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboFileType.FormattingEnabled = True
+        Me.cboFileType.Location = New System.Drawing.Point(164, 313)
+        Me.cboFileType.Name = "cboFileType"
+        Me.cboFileType.Size = New System.Drawing.Size(170, 21)
+        Me.cboFileType.TabIndex = 32
+        '
         'dlgUseTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(411, 450)
-        Me.Controls.Add(Me.lblExportTable)
-        Me.Controls.Add(Me.cmdFormatOptions)
-        Me.Controls.Add(Me.rdoAsLaTex)
-        Me.Controls.Add(Me.rdoAsWord)
-        Me.Controls.Add(Me.rdoAsRTF)
-        Me.Controls.Add(Me.rdoAsHTML)
-        Me.Controls.Add(Me.ucrPnlExportOptions)
+        Me.ClientSize = New System.Drawing.Size(411, 452)
+        Me.Controls.Add(Me.cboFileType)
+        Me.Controls.Add(Me.ucrChkExport)
+        Me.Controls.Add(Me.lblFileType)
+        Me.Controls.Add(Me.ucrFilePath)
+        Me.Controls.Add(Me.lblTable)
+        Me.Controls.Add(Me.btnTableOptions)
         Me.Controls.Add(Me.ucrSaveTable)
-        Me.Controls.Add(Me.lblTablesToUse)
         Me.Controls.Add(Me.ucrTablesReceiver)
         Me.Controls.Add(Me.ucrTablesSelector)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -190,13 +181,12 @@ Partial Class dlgUseTable
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrTablesSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrTablesReceiver As ucrReceiverSingle
-    Friend WithEvents lblTablesToUse As Label
-    Friend WithEvents ucrPnlExportOptions As UcrPanel
     Friend WithEvents ucrSaveTable As ucrSave
-    Friend WithEvents rdoAsWord As RadioButton
-    Friend WithEvents rdoAsRTF As RadioButton
-    Friend WithEvents rdoAsHTML As RadioButton
-    Friend WithEvents cmdFormatOptions As Button
-    Friend WithEvents rdoAsLaTex As RadioButton
-    Friend WithEvents lblExportTable As Label
+    Friend WithEvents btnTableOptions As Button
+    Friend WithEvents lblTable As Label
+    Friend WithEvents ucrPnlOptions As UcrPanel
+    Friend WithEvents ucrFilePath As ucrFilePath
+    Friend WithEvents lblFileType As Label
+    Friend WithEvents ucrChkExport As ucrCheck
+    Friend WithEvents cboFileType As ComboBox
 End Class
