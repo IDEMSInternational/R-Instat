@@ -303,7 +303,7 @@ Public Class frmMain
         mnuDataFrameMetadat.Checked = False
         mnuSwapDataLogScript.Checked = False
         mnuSwapDataMetadata.Checked = False
-        mnuTbDataView.Checked = True
+        mnuDataViewWindow.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
         UpdateLayout()
@@ -364,7 +364,7 @@ Public Class frmMain
             MsgBox(ex.Message)
         End Try
 
-        mnuTbDataView.Checked = mnuViewDataView.Checked
+        mnuDataViewWindow.Checked = mnuViewDataView.Checked
         mnuOutputWindow.Checked = mnuViewOutput.Checked
         mnuLogScript.Checked = mnuViewLogScript.Checked
     End Sub
@@ -1832,8 +1832,9 @@ Public Class frmMain
         dlgInfill.ShowDialog()
     End Sub
 
-    Private Sub mnuDataView_Click(sender As Object, e As EventArgs) Handles mnuTbDataView.Click
+    Private Sub mnuDataView_Click(sender As Object, e As EventArgs) Handles mnuTbDataView.ButtonClick, mnuDataViewWindow.Click
         mnuViewDataView.Checked = Not mnuViewDataView.Checked
+        mnuDataViewWindow.Checked = mnuViewDataView.Checked
         UpdateLayout()
     End Sub
 

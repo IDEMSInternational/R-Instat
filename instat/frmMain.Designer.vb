@@ -405,7 +405,9 @@ Partial Class frmMain
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbLast10Dialogs = New System.Windows.Forms.ToolStripSplitButton()
         Me.separator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuTbDataView = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbDataView = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuDataViewWindow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRDataViewerWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTbOutput = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuOutputWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuShowRCommand = New System.Windows.Forms.ToolStripMenuItem()
@@ -426,6 +428,11 @@ Partial Class frmMain
         Me.ToolStripSeparator76 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuTbHelp = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuToolBarHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDataWindowHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOutputHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLogScriptHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator77 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbLan = New System.Windows.Forms.ToolStripButton()
         Me.separator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -703,11 +710,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTbHelp = New System.Windows.Forms.ToolStripSplitButton()
-        Me.mnuToolBarHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDataWindowHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOutputHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuLogScriptHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3199,14 +3201,30 @@ Partial Class frmMain
         '
         'mnuTbDataView
         '
-        Me.mnuTbDataView.CheckOnClick = True
         Me.mnuTbDataView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbDataView.DropDownButtonWidth = 18
+        Me.mnuTbDataView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDataViewWindow, Me.mnuRDataViewerWindow})
         Me.mnuTbDataView.Image = Global.instat.My.Resources.Resources.dataframe2
         Me.mnuTbDataView.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbDataView.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbDataView.Name = "mnuTbDataView"
-        Me.mnuTbDataView.Size = New System.Drawing.Size(34, 34)
+        Me.mnuTbDataView.Size = New System.Drawing.Size(53, 34)
         Me.mnuTbDataView.ToolTipText = "Toggle Data view open and closed"
+        '
+        'mnuDataViewWindow
+        '
+        Me.mnuDataViewWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuDataViewWindow.Name = "mnuDataViewWindow"
+        Me.mnuDataViewWindow.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDataViewWindow.Text = "Data View"
+        '
+        'mnuRDataViewerWindow
+        '
+        Me.mnuRDataViewerWindow.Enabled = False
+        Me.mnuRDataViewerWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuRDataViewerWindow.Name = "mnuRDataViewerWindow"
+        Me.mnuRDataViewerWindow.Size = New System.Drawing.Size(180, 22)
+        Me.mnuRDataViewerWindow.Text = "R-Data Viewer"
         '
         'mnuTbOutput
         '
@@ -3359,6 +3377,44 @@ Partial Class frmMain
         '
         Me.separator3.Name = "separator3"
         Me.separator3.Size = New System.Drawing.Size(6, 37)
+        '
+        'mnuTbHelp
+        '
+        Me.mnuTbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbHelp.DropDownButtonWidth = 18
+        Me.mnuTbHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolBarHelp, Me.mnuDataWindowHelp, Me.mnuOutputHelp, Me.mnuLogScriptHelp})
+        Me.mnuTbHelp.Image = Global.instat.My.Resources.Resources.help2
+        Me.mnuTbHelp.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mnuTbHelp.Name = "mnuTbHelp"
+        Me.mnuTbHelp.Size = New System.Drawing.Size(53, 34)
+        Me.mnuTbHelp.Text = "LogScript"
+        Me.mnuTbHelp.ToolTipText = "Help Window"
+        '
+        'mnuToolBarHelp
+        '
+        Me.mnuToolBarHelp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuToolBarHelp.Name = "mnuToolBarHelp"
+        Me.mnuToolBarHelp.Size = New System.Drawing.Size(173, 22)
+        Me.mnuToolBarHelp.Text = "Toolbar Help"
+        '
+        'mnuDataWindowHelp
+        '
+        Me.mnuDataWindowHelp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuDataWindowHelp.Name = "mnuDataWindowHelp"
+        Me.mnuDataWindowHelp.Size = New System.Drawing.Size(173, 22)
+        Me.mnuDataWindowHelp.Text = "Data Window Help"
+        '
+        'mnuOutputHelp
+        '
+        Me.mnuOutputHelp.Name = "mnuOutputHelp"
+        Me.mnuOutputHelp.Size = New System.Drawing.Size(173, 22)
+        Me.mnuOutputHelp.Text = "Output Help"
+        '
+        'mnuLogScriptHelp
+        '
+        Me.mnuLogScriptHelp.Name = "mnuLogScriptHelp"
+        Me.mnuLogScriptHelp.Size = New System.Drawing.Size(173, 22)
+        Me.mnuLogScriptHelp.Text = "Log Script Help"
         '
         'ToolStripSeparator77
         '
@@ -5250,44 +5306,6 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'mnuTbHelp
-        '
-        Me.mnuTbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mnuTbHelp.DropDownButtonWidth = 18
-        Me.mnuTbHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolBarHelp, Me.mnuDataWindowHelp, Me.mnuOutputHelp, Me.mnuLogScriptHelp})
-        Me.mnuTbHelp.Image = Global.instat.My.Resources.Resources.help2
-        Me.mnuTbHelp.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.mnuTbHelp.Name = "mnuTbHelp"
-        Me.mnuTbHelp.Size = New System.Drawing.Size(53, 34)
-        Me.mnuTbHelp.Text = "LogScript"
-        Me.mnuTbHelp.ToolTipText = "Help Window"
-        '
-        'mnuToolBarHelp
-        '
-        Me.mnuToolBarHelp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.mnuToolBarHelp.Name = "mnuToolBarHelp"
-        Me.mnuToolBarHelp.Size = New System.Drawing.Size(180, 22)
-        Me.mnuToolBarHelp.Text = "Toolbar Help"
-        '
-        'mnuDataWindowHelp
-        '
-        Me.mnuDataWindowHelp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.mnuDataWindowHelp.Name = "mnuDataWindowHelp"
-        Me.mnuDataWindowHelp.Size = New System.Drawing.Size(180, 22)
-        Me.mnuDataWindowHelp.Text = "Data Window Help"
-        '
-        'mnuOutputHelp
-        '
-        Me.mnuOutputHelp.Name = "mnuOutputHelp"
-        Me.mnuOutputHelp.Size = New System.Drawing.Size(180, 22)
-        Me.mnuOutputHelp.Text = "Output Help"
-        '
-        'mnuLogScriptHelp
-        '
-        Me.mnuLogScriptHelp.Name = "mnuLogScriptHelp"
-        Me.mnuLogScriptHelp.Size = New System.Drawing.Size(180, 22)
-        Me.mnuLogScriptHelp.Text = "Log Script Help"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5687,7 +5705,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticCMSAFPlotRegion As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateInfillMissingDates As ToolStripMenuItem
     Friend WithEvents mnuTbOpenFromLibrary As ToolStripButton
-    Friend WithEvents mnuTbDataView As ToolStripButton
     Friend WithEvents separator3 As ToolStripSeparator
     Friend WithEvents mnuTbResetLayout As ToolStripButton
     Friend WithEvents mnuTbOpen As ToolStripSplitButton
@@ -6017,4 +6034,7 @@ Partial Class frmMain
     Friend WithEvents mnuDataWindowHelp As ToolStripMenuItem
     Friend WithEvents mnuOutputHelp As ToolStripMenuItem
     Friend WithEvents mnuLogScriptHelp As ToolStripMenuItem
+    Friend WithEvents mnuTbDataView As ToolStripSplitButton
+    Friend WithEvents mnuDataViewWindow As ToolStripMenuItem
+    Friend WithEvents mnuRDataViewerWindow As ToolStripMenuItem
 End Class
