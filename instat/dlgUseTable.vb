@@ -134,20 +134,17 @@ Public Class dlgUseTable
     End Sub
 
     Private Sub ucrChkExport_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkExport.ControlContentsChanged
-        lblFileType.Visible = False
-        cboFileType.Visible = False
-        ucrFilePath.Visible = False
-
-        ucrBase.clsRsyntax.GetAfterCodes().Clear()
-
         If ucrChkExport.Checked Then
             lblFileType.Visible = True
             cboFileType.Visible = True
             ucrFilePath.Visible = True
-
             ucrBase.clsRsyntax.AddToAfterCodes(clsSaveGtRFunction)
+        Else
+            lblFileType.Visible = False
+            cboFileType.Visible = False
+            ucrFilePath.Visible = False
+            ucrBase.clsRsyntax.GetAfterCodes().Clear()
         End If
-
         TestOKEnabled()
     End Sub
 
