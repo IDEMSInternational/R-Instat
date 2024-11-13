@@ -55,6 +55,7 @@ Partial Class dlgView
         Me.ucrViewChkPreview = New instat.ucrCheck()
         Me.ucrViewNudPreview = New instat.ucrNud()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
+        Me.ucrChkRowNumbers = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -240,6 +241,16 @@ Partial Class dlgView
         Me.lblNumberofRows.Tag = "Number_of_rows"
         Me.lblNumberofRows.Text = "Number of Rows:"
         '
+        'ucrChkRowNumbers
+        '
+        Me.ucrChkRowNumbers.AutoSize = True
+        Me.ucrChkRowNumbers.Checked = True
+        Me.ucrChkRowNumbers.Location = New System.Drawing.Point(249, 165)
+        Me.ucrChkRowNumbers.Name = "ucrChkRowNumbers"
+        Me.ucrChkRowNumbers.Size = New System.Drawing.Size(130, 23)
+        Me.ucrChkRowNumbers.TabIndex = 35
+        Me.ucrChkRowNumbers.Visible = False
+        '
         'dlgView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -263,6 +274,7 @@ Partial Class dlgView
         Me.Controls.Add(Me.ucrNudNumberRows)
         Me.Controls.Add(Me.ucrViewChkPreview)
         Me.Controls.Add(Me.ucrViewNudPreview)
+        Me.Controls.Add(Me.ucrChkRowNumbers)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -291,4 +303,5 @@ Partial Class dlgView
     Friend WithEvents ucrViewNudPreview As ucrNud
     Friend WithEvents ucrViewChkPreview As ucrCheck
     Friend WithEvents lblNumberofRows As Label
+    Friend WithEvents ucrChkRowNumbers As ucrCheck
 End Class
