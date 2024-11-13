@@ -124,9 +124,9 @@ Public Class dlgView
 
         clsDummyFunction.AddParameter("checked", "window", iPosition:=0)
 
-        clsGetObjectDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-        clsGetObjectDataFunction.AddParameter("as_file", "TRUE", iPosition:=2)
+        'clsGetObjectDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        'clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        'clsGetObjectDataFunction.AddParameter("as_file", "TRUE", iPosition:=2)
 
 
         clsOutputWindowFunction.SetPackageName("utils")
@@ -211,8 +211,9 @@ Public Class dlgView
             cmdTableOptions.Visible = False
             ucrSaveData.Visible = True
             ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectDataFunction)
             ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
+            'ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
             If ucrNudNumberRows.GetText <> "" OrElse ucrChkDisplayFromTop.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsOutputWindowFunction)
 
@@ -233,7 +234,8 @@ Public Class dlgView
             cmdTableOptions.Visible = False
             ucrSaveData.Visible = False
         Else
-            ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
+            'ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectDataFunction)
+            ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
             clsDummyFunction.AddParameter("checked", "html", iPosition:=0)
             ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
             cmdTableOptions.Visible = True
@@ -255,7 +257,7 @@ Public Class dlgView
         If bControlsUpdated Then
             ChangeFunctionParameters()
         End If
-        GetObjectName()
+        '  GetObjectName()
     End Sub
 
     Private Sub ucrChkSortColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSortColumn.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged
@@ -284,21 +286,21 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveData.ControlValueChanged
-        GetObjectName()
-    End Sub
+    'Private Sub ucrSaveData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveData.ControlValueChanged
+    '    GetObjectName()
+    'End Sub
 
-    Private Sub GetObjectName()
-        If rdoDispOutputWindow.Checked Then
-            Dim strPrefix As String = clsOutputWindowFunction.GetRObjectToAssignTo 'If(ucrSaveData.GetText <> "", ucrSaveData.GetText, "last_table")
-            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
-        ElseIf rdoHTMLOutputWindow.Checked Then
-            Dim strPrefix As String = clsBaseOperator.GetRObjectToAssignTo
-            clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
-        End If
-    End Sub
+    'Private Sub GetObjectName()
+    '    If rdoDispOutputWindow.Checked Then
+    '        Dim strPrefix As String = clsOutputWindowFunction.GetRObjectToAssignTo 'If(ucrSaveData.GetText <> "", ucrSaveData.GetText, "last_table")
+    '        clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
+    '    ElseIf rdoHTMLOutputWindow.Checked Then
+    '        Dim strPrefix As String = clsBaseOperator.GetRObjectToAssignTo
+    '        clsGetObjectDataFunction.AddParameter("object_name", Chr(34) & strPrefix & Chr(34), iPosition:=1)
+    '    End If
+    'End Sub
 
-    Private Sub ucrSelectorForView_DataFrameChanged() Handles ucrSelectorForView.DataFrameChanged
-        clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-    End Sub
+    'Private Sub ucrSelectorForView_DataFrameChanged() Handles ucrSelectorForView.DataFrameChanged
+    '    clsGetObjectDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+    'End Sub
 End Class
