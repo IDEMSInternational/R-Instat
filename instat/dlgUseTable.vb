@@ -56,7 +56,8 @@ Public Class dlgUseTable
 
         ucrChkExport.SetText("Export Table")
         ucrChkExport.Checked = True ' Forces the controls to be hidden
-        cboFileType.Items.AddRange({"HTML (*.html)", "PDF (*.pdf)", "PNG (*.png)", "LaTeX (*.tex)", "RTF (*.rtf)", "Word (*.docx)"})
+        'cboFileType.Items.AddRange({"HTML (*.html)", "PDF (*.pdf)", "PNG (*.png)", "LaTeX (*.tex)", "RTF (*.rtf)", "Word (*.docx)"})
+        cboFileType.Items.AddRange({"HTML (*.html)", "LaTeX (*.tex)", "RTF (*.rtf)"})
     End Sub
 
     Private Sub SetDefaults()
