@@ -3430,15 +3430,3 @@ time_operation <- function(expr) {
   timing <- system.time(expr)
   print(timing)
 }
-
-# preliminary function, but needs testing -- e.g., looping through multiple variables
-convert_linked_variable <- function(data, variables){
-linked_data_name <- data_book$get_linked_to_data_name(data, link_cols=c(variables))
-if (!is.null(linked_data_name)){
-linked_variable_name <- data_book$get_link_between(data, linked_data_name )$link_columns
-
-# TODO: loop through all columns given in variable argument
-variable_type <- data_book$get_column_data_types(data_name = data, columns=variables)
-data_book$convert_column_to_type(data_name=linked_data_name, col_names=linked_variable_name, to_type="factor")
-}
-}
