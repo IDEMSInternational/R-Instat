@@ -53,8 +53,8 @@ Partial Class dlgView
         Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrViewChkPreview = New instat.ucrCheck()
-        Me.ucrChkRowNumbers = New instat.ucrCheck()
         Me.ucrViewNudPreview = New instat.ucrNud()
+        Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -215,15 +215,6 @@ Partial Class dlgView
         Me.ucrViewChkPreview.Size = New System.Drawing.Size(89, 23)
         Me.ucrViewChkPreview.TabIndex = 32
         '
-        'ucrChkRowNumbers
-        '
-        Me.ucrChkRowNumbers.AutoSize = True
-        Me.ucrChkRowNumbers.Checked = False
-        Me.ucrChkRowNumbers.Location = New System.Drawing.Point(248, 167)
-        Me.ucrChkRowNumbers.Name = "ucrChkRowNumbers"
-        Me.ucrChkRowNumbers.Size = New System.Drawing.Size(89, 23)
-        Me.ucrChkRowNumbers.TabIndex = 19
-        '
         'ucrViewNudPreview
         '
         Me.ucrViewNudPreview.AutoSize = True
@@ -238,12 +229,24 @@ Partial Class dlgView
         Me.ucrViewNudPreview.TabIndex = 33
         Me.ucrViewNudPreview.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
+        'lblNumberofRows
+        '
+        Me.lblNumberofRows.AutoSize = True
+        Me.lblNumberofRows.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblNumberofRows.Location = New System.Drawing.Point(248, 167)
+        Me.lblNumberofRows.Name = "lblNumberofRows"
+        Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
+        Me.lblNumberofRows.TabIndex = 34
+        Me.lblNumberofRows.Tag = "Number_of_rows"
+        Me.lblNumberofRows.Text = "Number of Rows:"
+        '
         'dlgView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 357)
+        Me.Controls.Add(Me.lblNumberofRows)
         Me.Controls.Add(Me.cmdTableOptions)
         Me.Controls.Add(Me.ucrChkDisplayFromTop)
         Me.Controls.Add(Me.ucrSaveData)
@@ -257,10 +260,9 @@ Partial Class dlgView
         Me.Controls.Add(Me.ucrReceiverView)
         Me.Controls.Add(Me.ucrSelectorForView)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrViewChkPreview)
-        Me.Controls.Add(Me.ucrChkRowNumbers)
-        Me.Controls.Add(Me.ucrViewNudPreview)
         Me.Controls.Add(Me.ucrNudNumberRows)
+        Me.Controls.Add(Me.ucrViewChkPreview)
+        Me.Controls.Add(Me.ucrViewNudPreview)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -284,9 +286,9 @@ Partial Class dlgView
     Friend WithEvents rdoHTMLOutputWindow As RadioButton
     Friend WithEvents ucrReceiverSortCol As ucrReceiverSingle
     Friend WithEvents ucrSaveData As ucrSave
-    Friend WithEvents ucrChkRowNumbers As ucrCheck
     Friend WithEvents ucrChkDisplayFromTop As ucrCheck
     Friend WithEvents cmdTableOptions As Button
     Friend WithEvents ucrViewNudPreview As ucrNud
     Friend WithEvents ucrViewChkPreview As ucrCheck
+    Friend WithEvents lblNumberofRows As Label
 End Class
