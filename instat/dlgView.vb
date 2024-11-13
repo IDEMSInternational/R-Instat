@@ -56,11 +56,14 @@ Public Class dlgView
         ucrPnlDisplayWindow.AddParameterValuesCondition(rdoDispSepOutputWindow, "checked", "viewer")
 
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkDisplayFromTop, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
-        ucrPnlDisplayWindow.AddToLinkedControls(ucrNudNumberRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
+        '  ucrPnlDisplayWindow.AddToLinkedControls(lblNumberofRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
         ucrPnlDisplayWindow.AddToLinkedControls(ucrViewChkPreview, {rdoHTMLOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
 
-        ucrNudNumberRows.SetParameter(New RParameter("n", 1))
+        ucrNudNumberRows.Visible = rdoDispOutputWindow.Checked
         ucrReceiverView.SetParameter(New RParameter("x", 1, bNewIncludeArgumentName:=False))
+
+        ucrNudNumberRows.SetParameter(New RParameter("n", 1))
+        'ucrNudNumberRows.Minimum = 1
         ucrNudNumberRows.SetRDefault(6)
         ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
 
