@@ -1113,7 +1113,7 @@ summary_nth <- function(x, nth_value, order_by = NULL, ...) {
 
 # n_distinct function
 summary_n_distinct<- function(x, na.rm = FALSE, ...) {
-  return(dplyr::n_distinct(x = x, na.rm = na.rm))
+  return(dplyr::n_distinct(x, na.rm = na.rm))
 }
 
 # sample function
