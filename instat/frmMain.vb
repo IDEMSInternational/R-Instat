@@ -1150,7 +1150,7 @@ Public Class frmMain
 
         strCurrentStatus = tstatus.Text
         If clsRLink.bInstatObjectExists Then
-            tstatus.Text = "Auto saving data..."
+            tstatus.Text = GetTranslation("Auto saving data...")
             Cursor = Cursors.WaitCursor
             If Not Directory.Exists(strAutoSaveDataFolderPath) Then
                 Directory.CreateDirectory(strAutoSaveDataFolderPath)
@@ -1168,11 +1168,11 @@ Public Class frmMain
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & strCurrentAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
             clsRLink.RunInternalScript(clsSaveRDS.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
+
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
             bFirstBackupDone = True
         End If
-        autoTranslate(Me)
     End Sub
 
     Public Sub DeleteAutoSaveFiles()
