@@ -313,8 +313,18 @@ Public Class dlgSummaryTables
         End If
 
     End Sub
+
     Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
-        sdgTableOptions.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsJoiningPipeOperator)
+        Dim clsROperator As ROperator
+        If rdoFrequencyTable.Checked Then
+            clsROperator = clsFrequencyOperator
+        ElseIf rdoSummaryTable.Checked Then
+            clsROperator = clsSummaryOperator
+        Else
+            Exit Sub
+        End If
+
+        sdgTableOptions.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsROperator)
         sdgTableOptions.ShowDialog(Me)
 
     End Sub
@@ -338,7 +348,7 @@ Public Class dlgSummaryTables
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
+    Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs)
 
         Dim clsROperator As ROperator
         If rdoFrequencyTable.Checked Then
@@ -385,7 +395,6 @@ Public Class dlgSummaryTables
 
     Private Sub ucrPnlSummaryFrequencyTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaryFrequencyTables.ControlValueChanged
         cmdSummaries.Visible = rdoSummaryTable.Checked
-        cmdFormatTable.Location = New Point(286, If(rdoSummaryTable.Checked, 464, 273))
 
         DialogueSize()
         SettingParameters()

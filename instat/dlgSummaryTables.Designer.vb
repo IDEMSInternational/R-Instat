@@ -55,7 +55,6 @@ Partial Class dlgSummaryTables
         Me.ucrPnlMargin = New instat.UcrPanel()
         Me.lblMarginName = New System.Windows.Forms.Label()
         Me.lblVariables = New System.Windows.Forms.Label()
-        Me.cmdFormatTable = New System.Windows.Forms.Button()
         Me.rdoFrequencyTable = New System.Windows.Forms.RadioButton()
         Me.rdoSummaryTable = New System.Windows.Forms.RadioButton()
         Me.grpPercentages = New System.Windows.Forms.GroupBox()
@@ -296,18 +295,6 @@ Partial Class dlgSummaryTables
         Me.lblVariables.TabIndex = 17
         Me.lblVariables.Tag = ""
         Me.lblVariables.Text = "Variables :"
-        '
-        'cmdFormatTable
-        '
-        Me.cmdFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFormatTable.Location = New System.Drawing.Point(429, 696)
-        Me.cmdFormatTable.Margin = New System.Windows.Forms.Padding(4)
-        Me.cmdFormatTable.Name = "cmdFormatTable"
-        Me.cmdFormatTable.Size = New System.Drawing.Size(156, 34)
-        Me.cmdFormatTable.TabIndex = 19
-        Me.cmdFormatTable.Text = "Format Table..."
-        Me.cmdFormatTable.UseVisualStyleBackColor = True
-        Me.cmdFormatTable.Visible = False
         '
         'rdoFrequencyTable
         '
@@ -701,7 +688,6 @@ Partial Class dlgSummaryTables
         Me.Controls.Add(Me.rdoFrequencyTable)
         Me.Controls.Add(Me.rdoSummaryTable)
         Me.Controls.Add(Me.ucrPnlSummaryFrequencyTables)
-        Me.Controls.Add(Me.cmdFormatTable)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.lblVariables)
         Me.Controls.Add(Me.ucrInputMarginName)
@@ -763,7 +749,6 @@ Partial Class dlgSummaryTables
     Friend WithEvents ucrInputMarginName As ucrInputTextBox
     Friend WithEvents lblVariables As Label
     Friend WithEvents ucrReorderSummary As ucrReorder
-    Friend WithEvents cmdFormatTable As Button
     Friend WithEvents ucrPnlSummaryFrequencyTables As UcrPanel
     Friend WithEvents rdoFrequencyTable As RadioButton
     Friend WithEvents rdoSummaryTable As RadioButton
