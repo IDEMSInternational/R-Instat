@@ -41,16 +41,12 @@ Public Class sdgTableOptions
     End Sub
 
     ''' <summary>
-    ''' An R operateor that has a parameter named "gt" set up.
-    ''' The parameter should be an R Function that generates script "gt:gt()" as part of the last script statement.
+    ''' Sets up the sub dialog.
+    ''' Expected to be called before showing the dialog. 
     ''' </summary>
-    ''' <param name="clsNewOperator"></param>
+    ''' <param name="strDataFrameName">Name of the data frame contained in the data book</param>
+    ''' <param name="clsNewOperator">R operator that has a 'gt' parameter that produces a 'gt' object.</param>
     Public Sub Setup(strDataFrameName As String, clsNewOperator As ROperator)
-        If clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt"}, clsNewOperator).Count = 0 Then
-            MsgBox("Developer Error: Parameter with 'gt' as name MUST be set up before using this subdialog")
-            Exit Sub
-        End If
-
         clsOperator = clsNewOperator
 
         ucrHeader.Setup(clsOperator)

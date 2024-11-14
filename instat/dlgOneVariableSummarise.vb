@@ -248,8 +248,8 @@ Public Class dlgOneVariableSummarise
                                                strObjectName:="last_table")
 
         clsSummariesList.SetRCommand("c")
-        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_count_all", Chr(34) & "summary_count_all" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
 
         clsSummaryFunction.SetRCommand("summary")
