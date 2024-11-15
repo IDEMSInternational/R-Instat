@@ -142,6 +142,7 @@ Public Class dlgEndOfRainsSeason
     Private clsEndSeasonFirstDoySummaryCalcFilledFunction As New RFunction
     Private clsIfElseFirstDoyFunction As New RFunction
     Public clsIfElseFirstDoyFilledFunction As New RFunction
+    Private clsIfElseFirstDoyFilled1Function, clsFirstFilledFunction, clsFirstFilled1Function, clsIsNafilledFunction As New RFunction
     Private clsIsNaFirstWB As New RFunction
     Private clsFirstDoyFunction As New RFunction
     Private clsFirstWBFunction As New RFunction
@@ -376,6 +377,10 @@ Public Class dlgEndOfRainsSeason
         clsVectorFunction = New RFunction
         clsConvertlinkedvariableFunction = New RFunction
         clsConvertlinkedvariable1Function = New RFunction
+        clsIfElseFirstDoyFilled1Function = New RFunction
+        clsFirstFilledFunction = New RFunction
+        clsIsNafilledFunction = New RFunction
+        clsFirstFilled1Function = New RFunction
 
 #Region "clear_code_structures"
         ' General
@@ -906,9 +911,25 @@ Public Class dlgEndOfRainsSeason
 
         clsIfElseFirstDoyFilledFunction.bToScriptAsRString = True
         clsIfElseFirstDoyFilledFunction.SetRCommand("ifelse")
-        clsIfElseFirstDoyFilledFunction.AddParameter("test", clsRFunctionParameter:=clsIsNaFirstWB, iPosition:=0)
-        clsIfElseFirstDoyFilledFunction.AddParameter("yes", "366", iPosition:=1)
-        clsIfElseFirstDoyFilledFunction.AddParameter("no", clsRFunctionParameter:=clsFirstDoyFunction, iPosition:=2)
+        clsIfElseFirstDoyFilledFunction.AddParameter("x", "n() > 0", iPosition:=0, bIncludeArgumentName:=False)
+        clsIfElseFirstDoyFilledFunction.AddParameter("y", clsRFunctionParameter:=clsIfElseFirstDoyFilled1Function, iPosition:=1, bIncludeArgumentName:=False)
+        clsIfElseFirstDoyFilledFunction.AddParameter("yes", "366", iPosition:=2, bIncludeArgumentName:=False)
+
+        clsIfElseFirstDoyFilled1Function.SetRCommand("ifelse")
+        clsIfElseFirstDoyFilled1Function.AddParameter("x", clsRFunctionParameter:=clsFirstFilledFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsIfElseFirstDoyFilled1Function.AddParameter("y", "NA", iPosition:=1, bIncludeArgumentName:=False)
+        clsIfElseFirstDoyFilled1Function.AddParameter("z", clsRFunctionParameter:=clsFirstFilled1Function, iPosition:=2, bIncludeArgumentName:=False)
+
+        clsFirstFilled1Function.SetPackageName("dplyr")
+        clsFirstFilled1Function.SetRCommand("first")
+        clsFirstFilled1Function.AddParameter("x", clsRFunctionParameter:=clsIsNafilledFunction, iPosition:=0)
+
+        clsFirstFilledFunction.SetPackageName("dplyr")
+        clsFirstFilledFunction.SetRCommand("first")
+        clsFirstFilledFunction.AddParameter("x", clsRFunctionParameter:=clsIsNafilledFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsIsNafilledFunction.SetRCommand("is.na")
+        clsIsNafilledFunction.AddParameter("x", strWB, iPosition:=0, bIncludeArgumentName:=False)
 
         clsIsNaFirstWB.SetRCommand("is.na")
         clsIsNaFirstWB.AddParameter("x", clsRFunctionParameter:=clsFirstWBFunction, iPosition:=0)
@@ -995,6 +1016,7 @@ Public Class dlgEndOfRainsSeason
         clsConvertlinkedvariableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_linked_variable")
 
         clsConvertlinkedvariable1Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_linked_variable")
+
 #End Region
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -1012,6 +1034,7 @@ Public Class dlgEndOfRainsSeason
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsLastDoyFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsFirstDoyFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
+        ucrReceiverDOY.AddAdditionalCodeParameterPair(clsFirstFilled1Function, New RParameter("x", 0), iAdditionalPairNo:=4)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsEndSeasonIsNaRain, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsIfElseRainMinFunction, New RParameter("no", 2), iAdditionalPairNo:=2)
         ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsIfElseRainMaxFunction, New RParameter("no", 2), iAdditionalPairNo:=3)
