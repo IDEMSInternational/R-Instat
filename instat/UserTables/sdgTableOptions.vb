@@ -77,10 +77,11 @@ Public Class sdgTableOptions
 
     Private Sub SetupTheme(clsOperator As ROperator)
         clsThemeRFunction = New RFunction
+        clsThemeRFunction.SetPackageName("gtExtras")
 
         ' Uncheck then the check radio button to forces the panel to raise its ControlValueChanged event
-        rdoSelectTheme.Checked = False
-        rdoSelectTheme.Checked = True
+        'rdoSelectTheme.Checked = False
+        'rdoSelectTheme.Checked = True
 
         If Not clsOperator.ContainsParameter("theme_format") Then
             Exit Sub
