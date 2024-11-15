@@ -389,7 +389,7 @@ DataBook$set("public", "convert_linked_variable", function(from_data_frame, link
     
     # loop through all columns given in variable argument
     for (i in seq_along(linked_variable_name)){
-      variable_type <- self$get_column_data_types(data_name = from_data_frame, columns = link_cols[i])
+      variable_type <- self$get_column_data_types(data_name = from_data_frame, columns = names(linked_variable_name[i]))
       linked_variable_type <- self$get_column_data_types(data_name = to_data_name, columns=linked_variable_name[i])
       
       if (variable_type != linked_variable_type){
