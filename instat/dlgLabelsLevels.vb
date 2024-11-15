@@ -80,7 +80,7 @@ Public Class dlgLabelsLevels
         ucrSelectorForLabels.Focus()
 
 
-        clsSumCountMissingFunction.SetRCommand("summary_count_missing")
+        clsSumCountMissingFunction.SetRCommand("summary_count_miss")
 
         clsViewLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabelsFunction)
