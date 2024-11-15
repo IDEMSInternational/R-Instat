@@ -76,25 +76,12 @@ Public Class sdgTableOptions
     ' Themes
 
     Private Sub SetupTheme(clsOperator As ROperator)
-        clsThemeRFunction = New RFunction
-
-        ' Uncheck then the check radio button to forces the panel to raise its ControlValueChanged event
-        rdoSelectTheme.Checked = False
-        rdoSelectTheme.Checked = True
-
-        If Not clsOperator.ContainsParameter("theme_format") Then
-            Exit Sub
-        End If
-
-        clsThemeRFunction = clsOperator.GetParameter("theme_format").clsArgumentCodeStructure
-
-        If clsThemeRFunction.strRCommand = "tab_options" Then
-            rdoManualTheme.Checked = True
+        If clsOperator.ContainsParameter("theme_format") Then
+            clsThemeRFunction = clsOperator.GetParameter("theme_format").clsArgumentCodeStructure
         Else
-            rdoSelectTheme.Checked = True
-            ucrCboSelectThemes.SetName(clsThemeRFunction.strRCommand)
+            clsThemeRFunction = New RFunction
+            clsThemeRFunction.SetPackageName("gtExtras")
         End If
-
     End Sub
 
     Private Sub ucrPnlThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlThemesPanel.ControlValueChanged
