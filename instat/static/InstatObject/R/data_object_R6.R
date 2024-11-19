@@ -4655,108 +4655,83 @@ DataSheet$set("public", "has_labels", function(col_names) {
 )
 
 DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE, interaction = FALSE) {
-              # Check if required columns are provided
-              if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
-              if (sign_level || signif.stars) message("This is no longer descriptive")
-              
-              # Determine the column to end the ANOVA table at
-              if (sign_level) end_col = 5 else end_col = 4
-              
-              # Construct the formula for ANOVA and choosing whether you want an interaction or not
-              if (length(x_col_names) == 1) {
-                formula_str <- paste0(as.name(y_col_name), "~ ", as.name(x_col_names))
-              } else if (interaction && length(x_col_names) > 1) {
-                formula_str <- paste0(as.name(y_col_name), " ~ ", as.name(paste(x_col_names, collapse = " * ")))
-              } else {
-                formula_str <- paste0(as.name(y_col_name), " ~ ", as.name(paste(x_col_names, collapse = " + ")))
-              }
-              
-              # Fit the model
-              mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())
-              
-              # Start ANOVA table generation
-              anova_mod <- anova(mod)[1:end_col]
-              
-              # Rounding values in the ANOVA table
-              anova_mod1 <- anova_mod %>%
-                dplyr::mutate(
-                  `Sum Sq` = signif(`Sum Sq`, 3),
-                  `Mean Sq` = signif(`Mean Sq`, 3),
-                  `F value` = ifelse(`F value` < 100, round(`F value`, 1), round(`F value`))
-                )
-              
-              
-              # Convert `F value` and ` then replace NA with "--"
-              anova_mod1 <- anova_mod1 %>%
-                dplyr::mutate(`F value` = as.character(`F value`)) %>%   # Convert columns, `F value` & `Pr(>F)`  to character
-                dplyr::mutate(across(`F value`, ~ tidyr::replace_na(., "--"))) %>%  # Replace NAs with "--"
-                tibble::as_tibble(rownames = " ")                             # Convert to tibble with rownames
-              anova_mod2 <- anova_mod1 %>%
-                knitr::kable(format = "simple") %>%                                  # Pipe format for viewer display. You can make format = "Simple" for it to appear in the console rather than the viewer.
-                kableExtra::kable_styling(full_width = FALSE)                      # Apply kable styling
-              #print(anova_mod1)
-              
-              # Add the total row if requested
-              if (total) {
-                anova_mod2 <- anova_mod1 %>%
-                  tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum))) %>%
-                  dplyr::mutate(`F value` = as.character(`F value`)) %>%   # Convert columns, `F value` & `Pr(>F)`  to character
-                  dplyr::mutate(across(`F value`, ~ tidyr::replace_na(., "--"))) %>%  # Replace NAs with "--"
-                  knitr::kable(format = "simple")%>% # make format = "simple" for it to appear in the console rather than the viewer.
-                  kableExtra::kable_styling(full_width = FALSE)
-              }
-              
-              print(anova_mod2)
-              
-              
-              # Display the ANOVA table with Pr(>F) column
-              if (sign_level) {
-                cat(paste0("ANOVA of ", formula_str, ":\n"))
-                anova_mod <- anova_mod %>%
-                  dplyr::mutate(
-                    `Sum Sq` = signif(`Sum Sq`, 3),
-                    `Mean Sq` = signif(`Mean Sq`, 3),
-                    `F value` = ifelse(`F value` < 100, round(`F value`, 1), round(`F value`)),
-                    `Pr(>F)` = ifelse(
-                      is.na(`Pr(>F)`) | !is.numeric(`Pr(>F)`), "--",  # Handle NA or non-numeric cases
-                      ifelse(`Pr(>F)` < 0.001, "<0.001", formatC(`Pr(>F)`, format = "f", digits = 3))
-                    )
-                  )
-                anova_mod3 <- anova_mod %>%
-                  dplyr::mutate(
-                    `F value` = as.character(`F value`),
-                    `Pr(>F)` = as.character(`Pr(>F)`)
-                  ) %>%
-                  dplyr::mutate(across(c(`F value`, `Pr(>F)`), ~ tidyr::replace_na(., "--"))) %>%
-                  tibble::as_tibble(rownames = " ") %>%
-                  knitr::kable(format = "simple")%>% # make format = "simple" for it to appear in the console rather than the viewer.
-                  kableExtra::kable_styling(full_width = FALSE)   
-                #print(anova_mod3)
-                cat("\n")
-              }
-              
-              # Optionally print means or model coefficients
-              if (means) {
-                has_numeric <- any(sapply(x_col_names, function(x) class(mod$model[[x]]) %in% c("numeric", "integer")))
-                has_factor <- any(sapply(x_col_names, function(x) class(mod$model[[x]]) == "factor"))
-                
-                # If both numeric and factor are present, print the model coefficients
-                if (has_numeric && has_factor) {
-                  cat("Model coefficients:\n")
-                  print(mod$coefficients)
-                  cat("\n")
-                } else {
-                  # Handle the original case when only numeric or factor is present
-                  if (class(mod$model[[x_col_names[[1]]]]) %in% c("numeric", "integer")) {
-                    cat("Model coefficients:\n")
-                    print(mod$coefficients)
-                    cat("\n")
-                  } else {
-                    cat(paste0("Means table of ", y_col_name, ":\n"))
-                    print(model.tables(aov(mod), type = "means"))
-                    cat("\n")
-                  }
-                }
-              }
-            }
+  if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+  if (sign_level || signif.stars) message("This is no longer descriptive")
+  
+  end_col <- if (sign_level) 5 else 4
+
+  # Construct the formula
+  if (length(x_col_names) == 1) {
+    formula_str <- paste0(as.name(y_col_name), " ~ ", as.name(x_col_names))
+  } else if (interaction && length(x_col_names) > 1) {
+    formula_str <- paste0(as.name(y_col_name), " ~ ", as.name(paste(x_col_names, collapse = " * ")))
+  } else {
+    formula_str <- paste0(as.name(y_col_name), " ~ ", as.name(paste(x_col_names, collapse = " + ")))
+  }
+  
+  mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())
+  anova_mod <- anova(mod)[1:end_col]
+  
+  # Process ANOVA table
+  anova_mod <- anova_mod %>%
+    dplyr::mutate(
+      `Sum Sq` = signif(`Sum Sq`, 3),
+      `Mean Sq` = signif(`Mean Sq`, 3),
+      `F value` = ifelse(`F value` < 100, round(`F value`, 1), round(`F value`))
+    ) %>%
+    dplyr::mutate(`F value` = as.character(`F value`)) %>%
+    dplyr::mutate(across(`F value`, ~ tidyr::replace_na(., "--"))) %>%
+    tibble::as_tibble(rownames = " ")
+
+  # Add the total row if requested
+  if (total) {
+    anova_mod <- anova_mod %>%
+      tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum)))
+  }
+  
+  # Handle significance levels
+  if (sign_level) {
+    anova_mod <- anova_mod %>%
+      dplyr::mutate(
+        `Pr(>F)` = ifelse(
+          is.na(`Pr(>F)`) | !is.numeric(`Pr(>F)`), "--",
+          ifelse(`Pr(>F)` < 0.001, "<0.001", formatC(`Pr(>F)`, format = "f", digits = 3))
+        )
+      )
+  }
+
+  # Generate the table with a title
+  title <- paste0("ANOVA of ", formula_str)
+  formatted_table <- anova_mod %>%
+    knitr::kable(format = "simple", caption = title) %>%
+    kableExtra::kable_styling(full_width = FALSE)
+  
+  print(formatted_table)
+  
+  # Optionally print means or model coefficients
+  if (means) {
+    has_numeric <- any(sapply(x_col_names, function(x) class(mod$model[[x]]) %in% c("numeric", "integer")))
+    has_factor <- any(sapply(x_col_names, function(x) class(mod$model[[x]]) == "factor"))
+    
+    if (has_numeric && has_factor) {
+        cat("Model coefficients:\n")
+        print(mod$coefficients)
+    } else if (class(mod$model[[x_col_names[[1]]]]) %in% c("numeric", "integer")) {
+        cat("Model coefficients:\n")
+        print(mod$coefficients)
+    } else {
+        # Custom title instead of "Tables of Means"
+        cat(paste0("Means tables of ", y_col_name, ":\n"))
+        
+        # Extract the means table but avoid its default print title
+        means_table <- capture.output(model.tables(aov(mod), type = "means"))
+        
+        # Remove the "Tables of Means" line from the output
+        means_table <- means_table[-1]  # Remove the first line, which is "Tables of Means"
+        
+        # Print the remaining content of the means table
+        cat(paste(means_table, collapse = "\n"))
+    }
+}
+}
 )
