@@ -29,6 +29,8 @@ Public Interface IDataViewGrid
 
     Event WorksheetChanged()
 
+    Event WorksheetInserted()
+
     Event WorksheetRemoved(worksheet As clsWorksheetAdapter)
 
     Event FindRow()
@@ -43,6 +45,8 @@ Public Interface IDataViewGrid
     Sub SelectColumnInGrid(strColumn As String)
 
     Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False)
+
+    Sub Focus()
 
     Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
 

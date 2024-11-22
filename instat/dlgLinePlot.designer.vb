@@ -104,7 +104,6 @@ Partial Class dlgLinePlot
         Me.ucrReceiverYMin = New instat.ucrReceiverSingle()
         Me.ucrReceiverYMax = New instat.ucrReceiverSingle()
         Me.cmdOptions = New instat.ucrSplitButton()
-        Me.ucrChkSlopeLegend = New instat.ucrCheck()
         Me.ucrInputSlopeLineColour = New instat.ucrInputComboBox()
         Me.ucrInputSlopeTextColour = New instat.ucrInputComboBox()
         Me.ucrNudSlopeTextSize = New instat.ucrNud()
@@ -835,15 +834,6 @@ Partial Class dlgLinePlot
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'ucrChkSlopeLegend
-        '
-        Me.ucrChkSlopeLegend.AutoSize = True
-        Me.ucrChkSlopeLegend.Checked = False
-        Me.ucrChkSlopeLegend.Location = New System.Drawing.Point(9, 292)
-        Me.ucrChkSlopeLegend.Name = "ucrChkSlopeLegend"
-        Me.ucrChkSlopeLegend.Size = New System.Drawing.Size(80, 24)
-        Me.ucrChkSlopeLegend.TabIndex = 21
-        '
         'ucrInputSlopeLineColour
         '
         Me.ucrInputSlopeLineColour.AddQuotesIfUnrecognised = True
@@ -1337,7 +1327,6 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrReceiverYMax)
         Me.Controls.Add(Me.rdoLinerange)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.ucrChkSlopeLegend)
         Me.Controls.Add(Me.lblSlopeLineColour)
         Me.Controls.Add(Me.lblSlopeLabelSize)
         Me.Controls.Add(Me.lblSlopeLabelPadding)
@@ -1471,7 +1460,6 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrNudDumbbellX As ucrNud
     Friend WithEvents ucrChkDumbbellColour As ucrCheck
     Friend WithEvents ucrChkDumbbellSize As ucrCheck
-    Friend WithEvents ucrChkSlopeLegend As ucrCheck
     Friend WithEvents ucrNudSlopeLabelPadding As ucrNud
     Friend WithEvents lblSlopeLineTicknes As Label
     Friend WithEvents ucrNudSlopeLineThickness As ucrNud

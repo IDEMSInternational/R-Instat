@@ -5,7 +5,7 @@ DataSheet <- R6::R6Class("DataSheet",
                                                  imported_from = "", 
                                                  messages = TRUE, convert=TRUE, create = TRUE, 
                                                  start_point=1, filters = list(), column_selections = list(), objects = list(),
-                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE)
+                                                 calculations = list(), scalars = list(), keys = list(), comments = list(), keep_attributes = TRUE, undo_history = list(), redo_undo_history = list(), disable_undo = FALSE)
 {
   # Set up the data object
   self$set_data(data, messages)
@@ -59,10 +59,13 @@ DataSheet <- R6::R6Class("DataSheet",
                            column_selections = list(),
                            objects = list(),
                            keys = list(),
+                           undo_history = list(),
+                           redo_undo_history = list(),
                            comments = list(),
                            calculations = list(),
                            scalars = list(),
-                           changes = list(), 
+                           changes = list(),
+                           disable_undo = FALSE,
                            .current_filter = list(),
                            .current_column_selection = list(),
                            .data_changed = FALSE,
@@ -160,6 +163,21 @@ DataSheet$set("public", "set_data", function(new_data, messages=TRUE, check_name
   }
 }
 )
+DataSheet$set("public", "set_enable_disable_undo", function(disable_undo) {
+  private$disable_undo <- disable_undo
+  if(disable_undo) {
+    private$undo_history <- list()
+    gc()
+    }
+})
+
+DataSheet$set("public", "save_state_to_undo_history", function() {
+  self$set_undo_history(private$data, attributes(private$data))
+})
+
+DataSheet$set("public", "is_undo", function() {
+  return(private$disable_undo)
+})
 
 DataSheet$set("public", "set_meta", function(new_meta) {
   meta_data_copy <- new_meta
@@ -183,6 +201,60 @@ DataSheet$set("public", "clear_metadata", function() {
   self$append_to_changes(list(Set_property, "meta data"))
 }
 )
+
+DataSheet$set("public", "has_undo_history", function() {
+  return(length(private$undo_history) > 0)
+}
+)
+
+DataSheet$set("public", "undo_last_action", function() {
+  
+  # Check if there's any action to undo
+  if (length(private$undo_history) > 0) {
+    # Get the last state from the undo history
+    previous_state <- private$undo_history[[length(private$undo_history)]]
+    
+    # Restore the data and its attributes
+    restored_data <- previous_state$data  # Extract the dataframe
+    restored_attributes <- previous_state$attributes  # Extract the attributes
+    
+    # Set the dataframe in the DataSheet
+    self$set_data(as.data.frame(restored_data))
+    
+    # Restore attributes
+    restored_attributes <- previous_state$attributes  # Extract the attributes
+    for (property in names(restored_attributes)) {
+      self$append_to_metadata(property, restored_attributes[[property]])
+    }  
+    # Remove the latest state from the undo history
+    private$undo_history <- private$undo_history[-length(private$undo_history)]
+    
+    # Trigger garbage collection to free memory
+    gc()
+  } else {
+    message("No more actions to undo.")
+  }
+})
+
+
+# Redo function
+DataSheet$set("public", "redo_last_action", function() {
+  if (length(private$redo_undo_history) > 0) {
+    # Get the last undone state from redo undo_history
+    next_state <- private$redo_undo_history[[length(private$redo_undo_history)]]
+    
+    # Restore the next state
+    self$set_data(as.data.frame(next_state))
+    
+    # Move the state back to the undo_history
+    private$undo_history <- append(private$undo_history, list(next_state))
+    
+    # Remove the state from redo undo_history
+    private$redo_undo_history <- private$redo_undo_history[-length(private$redo_undo_history)]
+  } else {
+    message("No more actions to redo.")
+  }
+})
 
 #Removed until can be fixed with attributes
 # DataSheet$set("public", "set_variables_metadata", function(new_meta) {
@@ -240,6 +312,40 @@ DataSheet$set("public", "set_scalars", function(new_scalars) {
   private$scalars <- new_scalars
 }
 )
+
+# Set undo_history with memory management
+DataSheet$set("public", "set_undo_history", function(new_data, attributes = list()) {
+  if (!is.data.frame(new_data)) stop("new_data must be of type: data.frame")
+  
+  if (!private$disable_undo) {
+    # Define memory and undo_history limits
+    MAX_undo_history_SIZE <- 10  # Limit to last 10 undo_history states
+    MAX_MEMORY_LIMIT_MB <- 1024   # Limit the memory usage for undo_history
+    
+    # Check current memory usage
+    current_memory <- monitor_memory()
+    
+    # If memory exceeds limit, remove the oldest entry
+    if (current_memory > MAX_MEMORY_LIMIT_MB) {
+      message(paste("Memory limit exceeded:", round(current_memory, 2), "MB. Removing oldest entry."))
+      private$undo_history <- private$undo_history[-1]  # Remove the oldest entry
+      gc()  # Trigger garbage collection to free memory
+    }
+    
+    # Limit undo_history size
+    if (length(private$undo_history) >= MAX_undo_history_SIZE) {
+      private$undo_history <- private$undo_history[-1]  # Remove the oldest entry
+      gc()  # Trigger garbage collection to free memory
+    }
+    
+    # Package the new data and attributes into a list
+    new_undo_entry <- list(data = new_data, attributes = attributes)
+    
+    # Append the new entry to the undo history
+    private$undo_history <- append(private$undo_history, list(new_undo_entry))
+  }
+})
+
 
 DataSheet$set("public", "set_keys", function(new_keys) {
   if(!is.list(new_keys)) stop("new_keys must be of type: list")
@@ -665,6 +771,9 @@ DataSheet$set("public", "add_scalar", function(scalar_name = "", scalar_value) {
 )
 
 DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column = "", num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
+  # Save the current state to undo_history before making modifications
+  self$save_state_to_undo_history()
+  
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -814,6 +923,10 @@ DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everythi
 
 DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE, use_column_selection = FALSE)
+  
+  # Save the current state to undo_history before making modifications
+  self$save_state_to_undo_history()
+  
   # Column name must be character
   if (type == "single") {
     if (new_col_name != curr_col_name) {
@@ -904,6 +1017,9 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
 
 
 DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delete_all = FALSE) {
+  # Save the current state to undo_history before making modifications
+  self$save_state_to_undo_history()
+  
   if(length(cols) == self$get_column_count()) {
     if(allow_delete_all) {
       warning("You are deleting all columns in the data frame.")
@@ -938,6 +1054,7 @@ DataSheet$set("public", "remove_columns_in_data", function(cols=c(), allow_delet
 
 DataSheet$set("public", "replace_value_in_data", function(col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE, locf = FALSE, from_last = FALSE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  self$save_state_to_undo_history()
   # Column name must be character
   if(!all(is.character(col_names))) stop("Column name must be of type: character")
   if (!all(col_names %in% names(curr_data))) stop("Cannot find all columns in the data.")
@@ -1146,8 +1263,13 @@ DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_po
     #set the row positions and the values
     rows_to_replace <- c(start_row_pos : (start_row_pos + nrow(clip_tbl) - 1 ))
     new_values <- clip_tbl[,index]
-    #replace the old values with new values
-    self$replace_value_in_data(col_names = col_names[index], rows = rows_to_replace, new_value = new_values)
+    
+    # Replace the old values with new values
+    for (i in seq_along(new_values)) {
+      # Replace each value one by one
+      self$replace_value_in_data(col_names = col_names[index], rows = rows_to_replace[i], new_value = new_values[i])
+    }
+    
     #rename header if first row of clip data is header. 
     if(first_clip_row_is_header){
       self$rename_column_in_data(curr_col_name = col_names[index], new_col_name = colnames(clip_tbl)[index]) 
@@ -1179,7 +1301,7 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     for (curr_col in col_names) {
       #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
       #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
-      if (((property == labels_label && new_val == "") || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
+      if (((property == labels_label && any(new_val == "")) || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
         #reset the column labels or colour property 
         attr(private$data[[curr_col]], property) <- NULL
       } else {
@@ -1191,7 +1313,7 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     for (col_name in self$get_column_names()) {
       #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
       #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
-      if (((property == labels_label && new_val == "") || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
+      if (((property == labels_label && any(new_val == "")) || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
         #reset the column labels or colour property 
         attr(private$data[[col_name]], property) <- NULL
       } else {
@@ -1282,6 +1404,8 @@ DataSheet$set("public", "add_defaults_variables_metadata", function(column_names
 
 DataSheet$set("public", "remove_rows_in_data", function(row_names) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  self$save_state_to_undo_history()
+  
   if(!all(row_names %in% rownames(curr_data))) stop("Some of the row_names not found in data")
   rows_to_remove <- which(rownames(curr_data) %in% row_names)
   #Prefer not to use dplyr::slice as it produces a tibble
@@ -1306,6 +1430,9 @@ DataSheet$set("public", "get_next_default_column_name", function(prefix) {
 DataSheet$set("public", "reorder_columns_in_data", function(col_order) {
   if (ncol(self$get_data_frame(use_current_filter = FALSE, use_column_selection = FALSE)) != length(col_order)) stop("Columns to order should be same as columns in the data.")
   
+  # Save the current state to undo_history before making modifications
+  self$save_state_to_undo_history()
+  
   if(is.numeric(col_order)) {
     if(!(identical(sort(col_order), sort(as.numeric(1:ncol(data)))))) {
       stop("Invalid column order")
@@ -1328,6 +1455,7 @@ DataSheet$set("public", "reorder_columns_in_data", function(col_order) {
 
 DataSheet$set("public", "insert_row_in_data", function(start_row, row_data = c(), number_rows = 1, before = FALSE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  self$save_state_to_undo_history()
   curr_row_names <- rownames(curr_data)
   if (!start_row %in% curr_row_names) {
     stop(paste(start_row, " not found in rows"))
@@ -1439,19 +1567,10 @@ DataSheet$set("public", "sort_dataframe", function(col_names = c(), decreasing =
       message("No sorting to be done.")
     }
   } else {
-    # Build the expressions using rlang for sorting columns
-    col_names_exp <- purrr::map(col_names, function(col_name) {
-      if (!(col_name %in% names(curr_data))) {
-        stop(col_name, " is not a column in the data.")
-      }
-      if (decreasing) dplyr::desc(rlang::sym(col_name)) else rlang::sym(col_name)
-    })
-
-    # Handle the case where sorting by row names and column names at the same time
     if (by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
-
-    # Sort the data based on the expressions
-    self$set_data(dplyr::arrange(curr_data, !!!col_names_exp))
+    
+    if (decreasing) self$set_data(dplyr::arrange(curr_data, dplyr::across(dplyr::all_of(col_names), desc)))
+    else self$set_data(dplyr::arrange(curr_data, dplyr::across(dplyr::all_of(col_names))))
   }
   self$data_changed <- TRUE
 }
@@ -2966,8 +3085,9 @@ date_station_label="date_station"
 sunshine_hours_label="sunshine_hours"
 radiation_label="radiation"
 cloud_cover_label="cloud_cover"
+district_label = "district"
 
-all_climatic_column_types <- c(rain_label, rain_day_label, rain_day_lag_label, date_label, doy_label, s_doy_label, year_label, year_month_label, date_time_label, dos_label, season_label, month_label, day_label, dm_label, time_label, station_label, date_asstring_label, temp_min_label, temp_max_label, hum_min_label, hum_max_label, temp_air_label, temp_range_label, wet_buld_label, dry_bulb_label, evaporation_label, element_factor_label, identifier_label, capacity_label, wind_speed_label, wind_direction_label, lat_label, lon_label, alt_label, season_station_label, date_station_label, sunshine_hours_label, radiation_label, cloud_cover_label)
+all_climatic_column_types <- c(rain_label,district_label, rain_day_label, rain_day_lag_label, date_label, doy_label, s_doy_label, year_label, year_month_label, date_time_label, dos_label, season_label, month_label, day_label, dm_label, time_label, station_label, date_asstring_label, temp_min_label, temp_max_label, hum_min_label, hum_max_label, temp_air_label, temp_range_label, wet_buld_label, dry_bulb_label, evaporation_label, element_factor_label, identifier_label, capacity_label, wind_speed_label, wind_direction_label, lat_label, lon_label, alt_label, season_station_label, date_station_label, sunshine_hours_label, radiation_label, cloud_cover_label)
 
 # Column metadata
 climatic_type_label <- "Climatic_Type"
@@ -4329,8 +4449,8 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
   }
   if (length(col) == dim(curr_data)[[1]]) {
     self$add_columns_to_data(col_name = column_name, col_data = col)
-    gaps_remaining <- summary_count_missing(col)
-    gaps_filled <- (summary_count_missing(curr_data[, var]) - gaps_remaining)
+    gaps_remaining <- summary_count_miss(col)
+    gaps_filled <- (summary_count_miss(curr_data[, var]) - gaps_remaining)
     cat(gaps_filled, " gaps filled", gaps_remaining, " remaining.", "\n")
   } else if (gaps != 0) {
     cat(gaps, " rows for date gaps are missing, fill date gaps before proceeding.", "\n")
@@ -4510,6 +4630,8 @@ DataSheet$set("public", "remove_empty", function(which = c("rows", "cols")) {
 
 DataSheet$set("public", "replace_values_with_NA", function(row_index, column_index) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  self$save_state_to_undo_history()
+  
   if(!all(row_index %in% seq_len(nrow(curr_data)))) stop("All row indexes must be within the dataframe")
   if(!all(column_index %in% seq_len(ncol(curr_data)))) stop("All column indexes must be within the dataframe")
   curr_data[row_index, column_index] <- NA
@@ -4523,22 +4645,40 @@ DataSheet$set("public", "has_labels", function(col_names) {
 }
 )
 
-DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
-
-  if(missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
-  if(sign_level || signif.stars) message("This is no longer descriptive")
-  if(sign_level) end_col = 5 else end_col = 4
-
+DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
+  if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+  if (sign_level || signif.stars) message("This is no longer descriptive")
+  if (sign_level) end_col = 5 else end_col = 4
+  
+  # Construct the formula
   if (length(x_col_names) == 1) {
-    formula_str <- paste0( as.name(y_col_name), "~ ", as.name(x_col_names))
+    formula_str <- paste0(as.name(y_col_name), "~ ", as.name(x_col_names))
   } else if (length(x_col_names) > 1) {
     formula_str <- paste0(as.name(y_col_name), "~ ", as.name(paste(x_col_names, collapse = " + ")))
   }
 
-  return_item <- NULL
-  mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())  
-  return_item[[paste0("ANOVA table: ", formula_str, sep = "")]] <- anova(mod)[1:end_col]
-  if(means) return_item[[paste0("Means table of ", y_col_name)]] <- model.tables(aov(mod), type = "means")
-  return(return_item)
+  # Fit the model
+  mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())
+  anova_mod <- anova(mod)[1:end_col] %>% tibble::as_tibble(rownames = " ")
+
+  # Add the total row if requested
+  if (total) anova_mod <- anova_mod %>% tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum)))
+  anova_mod$`F value` <- round(anova_mod$`F value`, 4)
+  if (sign_level) anova_mod$`Pr(>F)` <- format.pval(anova_mod$`Pr(>F)`, digits = 4, eps = 0.001)
+  cat(paste0("ANOVA of ", formula_str, ":\n"))
+  print(anova_mod)
+  cat("\n")
+  # Optionally print means
+  if (means) {
+    if (class(mod$model[[x_col_names]]) %in% c("numeric", "integer")){
+      cat("Model coefficients:\n")
+      print(mod$coefficients)
+      cat("\n")
+    } else {
+      cat(paste0("Means table of ", y_col_name, ":\n"))
+      print(model.tables(aov(mod), type = "means"))
+      cat("\n")
+    }
+  }
 }
 )
