@@ -1567,19 +1567,10 @@ DataSheet$set("public", "sort_dataframe", function(col_names = c(), decreasing =
       message("No sorting to be done.")
     }
   } else {
-    # Build the expressions using rlang for sorting columns
-    col_names_exp <- purrr::map(col_names, function(col_name) {
-      if (!(col_name %in% names(curr_data))) {
-        stop(col_name, " is not a column in the data.")
-      }
-      if (decreasing) dplyr::desc(rlang::sym(col_name)) else rlang::sym(col_name)
-    })
-
-    # Handle the case where sorting by row names and column names at the same time
     if (by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
-
-    # Sort the data based on the expressions
-    self$set_data(dplyr::arrange(curr_data, !!!col_names_exp))
+    
+    if (decreasing) self$set_data(dplyr::arrange(curr_data, dplyr::across(dplyr::all_of(col_names), desc)))
+    else self$set_data(dplyr::arrange(curr_data, dplyr::across(dplyr::all_of(col_names))))
   }
   self$data_changed <- TRUE
 }
@@ -4458,8 +4449,8 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
   }
   if (length(col) == dim(curr_data)[[1]]) {
     self$add_columns_to_data(col_name = column_name, col_data = col)
-    gaps_remaining <- summary_count_missing(col)
-    gaps_filled <- (summary_count_missing(curr_data[, var]) - gaps_remaining)
+    gaps_remaining <- summary_count_miss(col)
+    gaps_filled <- (summary_count_miss(curr_data[, var]) - gaps_remaining)
     cat(gaps_filled, " gaps filled", gaps_remaining, " remaining.", "\n")
   } else if (gaps != 0) {
     cat(gaps, " rows for date gaps are missing, fill date gaps before proceeding.", "\n")
