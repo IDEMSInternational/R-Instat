@@ -4704,10 +4704,7 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total
   # Generate the table with a title
   title <- paste0("ANOVA of ", formula_str)
  formatted_table <- anova_mod %>%
-  knitr::kable(format = "simple", caption = title) %>%  # Use "html" for better control over styling
-  kableExtra::kable_styling(full_width = FALSE, position = "center") %>%
-  kableExtra::row_spec(nrow(anova_mod) - 2, hline_after = TRUE) %>%  # Add underline after Residuals row
-  kableExtra::row_spec(nrow(anova_mod), extra_css = "border-top: double;") # Add double border before Total row
+  knitr::kable(format = "simple", caption = title)
 
   print(formatted_table)
   
