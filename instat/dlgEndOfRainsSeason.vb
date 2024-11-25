@@ -48,7 +48,7 @@ Public Class dlgEndOfRainsSeason
 
 #Region "end_of_rains_code_structures"
     ' Rolling sum rain
-    Private clsEndRainsRollingSumCalc, clsWBEvaporationMinFunction, clsWBEvaporationMaxFunction As New RFunction
+    Private clsEndRainsRollingSumCalc, clsElseIfENdRainStatusFunction, clsWBEvaporationMinFunction, clsWBEvaporationMaxFunction As New RFunction
     Private clsRollSumRainFunction As New RFunction
     Private clsWBOperator1, clsWBOperator2 As New ROperator
     ' Conditions filter
@@ -81,7 +81,7 @@ Public Class dlgEndOfRainsSeason
 
 #Region "end_of_season_code_structures"
 
-    Private clsEndSeasonIsNaRain As New RFunction
+    Private clsEndSeasonIsNaRain, clsLastFunction, clsnaIsRainFunction, clsElseIfRainFunction As New RFunction
     ' Rain min
     Private clsEndSeasonRainMinCalc As New RFunction
     Private clsIfElseRainMinFunction As New RFunction
@@ -406,6 +406,10 @@ Public Class dlgEndOfRainsSeason
         '   Rolling sum rain
         clsEndRainsRollingSumCalc.Clear()
         clsRollSumRainFunction.Clear()
+        clsElseIfENdRainStatusFunction.Clear()
+        clsElseIfRainFunction.Clear()
+        clsnaIsRainFunction.Clear()
+        clsLastFunction.Clear()
 
         '   Conditions filter
         clsEndRainsConditionsFilterCalc.Clear()
@@ -649,10 +653,28 @@ Public Class dlgEndOfRainsSeason
         ' Status summary
         clsEndRainsStatusSummaryCalc.SetRCommand("instat_calculation$new")
         clsEndRainsStatusSummaryCalc.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
-        clsEndRainsStatusSummaryCalc.AddParameter("function_exp", Chr(34) & "n() > 0" & Chr(34), iPosition:=1)
+        clsEndRainsStatusSummaryCalc.AddParameter("function_exp", clsRFunctionParameter:=clsElseIfENdRainStatusFunction, iPosition:=1)
         clsEndRainsStatusSummaryCalc.AddParameter("result_name", Chr(34) & strEndRainsStatus & Chr(34), iPosition:=3)
         clsEndRainsStatusSummaryCalc.AddParameter("save", 2, iPosition:=4)
         clsEndRainsStatusSummaryCalc.SetAssignTo(strEndRainsStatus)
+
+        clsElseIfENdRainStatusFunction.SetRCommand("ifelse")
+        clsElseIfENdRainStatusFunction.bToScriptAsRString = True
+        clsElseIfENdRainStatusFunction.AddParameter("x", "n() > 0", iPosition:=0, bIncludeArgumentName:=False)
+        clsElseIfENdRainStatusFunction.AddParameter("yes", clsRFunctionParameter:=clsElseIfRainFunction, iPosition:=1)
+        clsElseIfENdRainStatusFunction.AddParameter("no", "FALSE", iPosition:=2)
+
+        clsElseIfRainFunction.SetRCommand("ifelse")
+        clsElseIfRainFunction.AddParameter("y", clsRFunctionParameter:=clsnaIsRainFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsElseIfRainFunction.AddParameter("yes", "NA", iPosition:=1)
+        clsElseIfRainFunction.AddParameter("no", "TRUE", iPosition:=2)
+
+        clsnaIsRainFunction.SetRCommand("is.na")
+        clsnaIsRainFunction.AddParameter("x", clsRFunctionParameter:=clsLastFunction, iPosition:=1)
+
+        clsLastFunction.SetPackageName("dplyr")
+        clsLastFunction.SetRCommand("last")
+        clsLastFunction.AddParameter("x", strRollSumRain, iPosition:=0)
 
         ' Combined
         clsEndRainsCombinationCalc.SetRCommand("instat_calculation$new")
@@ -912,8 +934,8 @@ Public Class dlgEndOfRainsSeason
         clsIfElseFirstDoyFilledFunction.bToScriptAsRString = True
         clsIfElseFirstDoyFilledFunction.SetRCommand("ifelse")
         clsIfElseFirstDoyFilledFunction.AddParameter("x", "n() > 0", iPosition:=0, bIncludeArgumentName:=False)
-        clsIfElseFirstDoyFilledFunction.AddParameter("y", clsRFunctionParameter:=clsIfElseFirstDoyFilled1Function, iPosition:=1, bIncludeArgumentName:=False)
-        clsIfElseFirstDoyFilledFunction.AddParameter("yes", "366", iPosition:=2, bIncludeArgumentName:=False)
+        clsIfElseFirstDoyFilledFunction.AddParameter("yes", clsRFunctionParameter:=clsIfElseFirstDoyFilled1Function, iPosition:=1)
+        clsIfElseFirstDoyFilledFunction.AddParameter("no", "366", iPosition:=3)
 
         clsIfElseFirstDoyFilled1Function.SetRCommand("ifelse")
         clsIfElseFirstDoyFilled1Function.AddParameter("x", clsRFunctionParameter:=clsFirstFilledFunction, iPosition:=0, bIncludeArgumentName:=False)
