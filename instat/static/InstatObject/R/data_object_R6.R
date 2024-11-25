@@ -4655,7 +4655,7 @@ DataSheet$set("public", "has_labels", function(col_names) {
 )
 
 DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE, interaction = FALSE) {
-  if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+  if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_name are required")
   if (sign_level || signif.stars) message("This is no longer descriptive")
   
   end_col <- if (sign_level) 5 else 4
@@ -4686,7 +4686,8 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total
   # Add the total row if requested
   if (total) {
     anova_mod <- anova_mod %>%
-      tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum)))
+      tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum))) %>%
+      dplyr::mutate(`F value` = ifelse(` ` == "Total", "--", `F value`)) # Replace NA with "--" for Total row
   }
   
   # Handle significance levels
@@ -4702,12 +4703,17 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total
 
   # Generate the table with a title
   title <- paste0("ANOVA of ", formula_str)
-  formatted_table <- anova_mod %>%
-    knitr::kable(format = "simple", caption = title) %>%
-    kableExtra::kable_styling(full_width = FALSE)
-  
+ formatted_table <- anova_mod %>%
+  knitr::kable(format = "simple", caption = title) %>%  # Use "html" for better control over styling
+  kableExtra::kable_styling(full_width = FALSE, position = "center") %>%
+  kableExtra::row_spec(nrow(anova_mod) - 2, hline_after = TRUE) %>%  # Add underline after Residuals row
+  kableExtra::row_spec(nrow(anova_mod), extra_css = "border-top: double;") # Add double border before Total row
+
   print(formatted_table)
   
+  # Add line break before means section
+  cat("\n")
+
   # Optionally print means or model coefficients
   if (means) {
     has_numeric <- any(sapply(x_col_names, function(x) class(mod$model[[x]]) %in% c("numeric", "integer")))
@@ -4720,18 +4726,11 @@ DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total
         cat("Model coefficients:\n")
         print(mod$coefficients)
     } else {
-        # Custom title instead of "Tables of Means"
         cat(paste0("Means tables of ", y_col_name, ":\n"))
-        
-        # Extract the means table but avoid its default print title
         means_table <- capture.output(model.tables(aov(mod), type = "means"))
-        
-        # Remove the "Tables of Means" line from the output
-        means_table <- means_table[-1]  # Remove the first line, which is "Tables of Means"
-        
-        # Print the remaining content of the means table
+        means_table <- means_table[-1]
         cat(paste(means_table, collapse = "\n"))
     }
-}
+  }
 }
 )
