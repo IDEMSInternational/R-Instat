@@ -1,7 +1,7 @@
 # summary function labels
 sum_label="summary_sum"
 mode_label="summary_mode"
-count_label="summary_count"
+count_label="summary_count_all"
 count_over_threshold_label="summary_count_over_threshold"
 sd_label = "summary_sd"
 median_label = "summary_median"

@@ -37,6 +37,7 @@ Public Class dlgDistances
         autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 145
 
         ucrSelectorDistance.SetParameter(New RParameter("df", 0))
         ucrSelectorDistance.SetParameterIsrfunction()
