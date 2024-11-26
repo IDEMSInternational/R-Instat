@@ -876,7 +876,8 @@ Public Class dlgDescribeTwoVariable
                 ucrChkInteraction.Visible = True
                 ucrChkTotal.Location = New Point(310, 250)
                 ucrChkLevSig.Location = New Point(397, 250)
-                ucrChkMeans.Location = New Point(310, 275)
+                ucrChkInteraction.Location = New Point(310, 275)
+                ucrChkMeans.Location = New Point(310, 300)
                 If ucrChkSwapXYVar.Checked Then
                     ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
                     ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
@@ -899,7 +900,8 @@ Public Class dlgDescribeTwoVariable
                 ucrChkInteraction.Visible = True
                 ucrChkTotal.Location = New Point(310, 250)
                 ucrChkLevSig.Location = New Point(397, 250)
-                ucrChkMeans.Location = New Point(310, 275)
+                ucrChkInteraction.Location = New Point(310, 275)
+                ucrChkMeans.Location = New Point(310, 300)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
@@ -913,7 +915,8 @@ Public Class dlgDescribeTwoVariable
                 ucrChkInteraction.Visible = True
                 ucrChkTotal.Location = New Point(310, 250)
                 ucrChkLevSig.Location = New Point(397, 250)
-                ucrChkMeans.Location = New Point(310, 275)
+                ucrChkInteraction.Location = New Point(310, 275)
+                ucrChkMeans.Location = New Point(310, 300)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
@@ -927,7 +930,8 @@ Public Class dlgDescribeTwoVariable
                 ucrChkInteraction.Visible = True
                 ucrChkTotal.Location = New Point(310, 250)
                 ucrChkLevSig.Location = New Point(397, 250)
-                ucrChkMeans.Location = New Point(310, 275)
+                ucrChkInteraction.Location = New Point(310, 275)
+                ucrChkMeans.Location = New Point(310, 300)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
