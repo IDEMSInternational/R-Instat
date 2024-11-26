@@ -2990,6 +2990,10 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
   if (is_win) close(pb)
 })
 
+DataBook$set("public", "get_column_climatic_type", function(data_name, col_name, attr_name){
+  self$get_data_objects(data_name)$get_column_climatic_type(col_name = col_name, attr_name =attr_name)
+})
+
 DataBook$set("public", "add_flag_fields", function(data_name, col_names, key_column_names) {
   if (!self$has_key(data_name)) {
     self$add_key(data_name, key_column_names)
