@@ -447,7 +447,7 @@ Public Class dlgExtremesClimatic
         clsNSummary.AddParameter("save", "2", iPosition:=4)
         clsNSummary.SetAssignTo("n_dates_summary")
 
-        clsNFunction.SetRCommand("summary_count")
+        clsNFunction.SetRCommand("summary_count_all")
         clsNFunction.bToScriptAsRString = True
 
         clsFilterExtremeCalc.SetRCommand("instat_calculation$new")

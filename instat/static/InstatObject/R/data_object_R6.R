@@ -1263,8 +1263,13 @@ DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_po
     #set the row positions and the values
     rows_to_replace <- c(start_row_pos : (start_row_pos + nrow(clip_tbl) - 1 ))
     new_values <- clip_tbl[,index]
-    #replace the old values with new values
-    self$replace_value_in_data(col_names = col_names[index], rows = rows_to_replace, new_value = new_values)
+    
+    # Replace the old values with new values
+    for (i in seq_along(new_values)) {
+      # Replace each value one by one
+      self$replace_value_in_data(col_names = col_names[index], rows = rows_to_replace[i], new_value = new_values[i])
+    }
+    
     #rename header if first row of clip data is header. 
     if(first_clip_row_is_header){
       self$rename_column_in_data(curr_col_name = col_names[index], new_col_name = colnames(clip_tbl)[index]) 
@@ -1296,7 +1301,7 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     for (curr_col in col_names) {
       #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
       #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
-      if (((property == labels_label && new_val == "") || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
+      if (((property == labels_label && any(new_val == "")) || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
         #reset the column labels or colour property 
         attr(private$data[[curr_col]], property) <- NULL
       } else {
@@ -1308,7 +1313,7 @@ DataSheet$set("public", "append_to_variables_metadata", function(col_names, prop
     for (col_name in self$get_column_names()) {
       #see comments in  PR #7247 to understand why ' property == labels_label && new_val == "" ' check was added
       #see comments in issue #7337 to understand why the !is.null(new_val) check was added. 
-      if (((property == labels_label && new_val == "") || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
+      if (((property == labels_label && any(new_val == "")) || (property == colour_label && new_val == -1)) && !is.null(new_val)) {
         #reset the column labels or colour property 
         attr(private$data[[col_name]], property) <- NULL
       } else {
@@ -1562,19 +1567,10 @@ DataSheet$set("public", "sort_dataframe", function(col_names = c(), decreasing =
       message("No sorting to be done.")
     }
   } else {
-    # Build the expressions using rlang for sorting columns
-    col_names_exp <- purrr::map(col_names, function(col_name) {
-      if (!(col_name %in% names(curr_data))) {
-        stop(col_name, " is not a column in the data.")
-      }
-      if (decreasing) dplyr::desc(rlang::sym(col_name)) else rlang::sym(col_name)
-    })
-
-    # Handle the case where sorting by row names and column names at the same time
     if (by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
-
-    # Sort the data based on the expressions
-    self$set_data(dplyr::arrange(curr_data, !!!col_names_exp))
+    
+    if (decreasing) self$set_data(dplyr::arrange(curr_data, dplyr::across(dplyr::all_of(col_names), desc)))
+    else self$set_data(dplyr::arrange(curr_data, dplyr::across(dplyr::all_of(col_names))))
   }
   self$data_changed <- TRUE
 }
@@ -4453,8 +4449,8 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
   }
   if (length(col) == dim(curr_data)[[1]]) {
     self$add_columns_to_data(col_name = column_name, col_data = col)
-    gaps_remaining <- summary_count_missing(col)
-    gaps_filled <- (summary_count_missing(curr_data[, var]) - gaps_remaining)
+    gaps_remaining <- summary_count_miss(col)
+    gaps_filled <- (summary_count_miss(curr_data[, var]) - gaps_remaining)
     cat(gaps_filled, " gaps filled", gaps_remaining, " remaining.", "\n")
   } else if (gaps != 0) {
     cat(gaps, " rows for date gaps are missing, fill date gaps before proceeding.", "\n")
