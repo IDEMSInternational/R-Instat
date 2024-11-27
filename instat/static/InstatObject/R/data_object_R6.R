@@ -956,7 +956,7 @@ DataSheet$set("public", "update_selection", function(new_values, column_selectio
 
 
 DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
-  curr_data <- self$get_data_frame(use_current_filter = TRUE, use_column_selection = TRUE)
+  curr_data <- self$get_data_frame(use_current_filter = TRUE, use_column_selection = FALSE)
   
   # Save the current state to undo_history before making modifications
   self$save_state_to_undo_history()
