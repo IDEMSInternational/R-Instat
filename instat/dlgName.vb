@@ -660,27 +660,23 @@ Public Class dlgName
 
     Private Sub RemovePattern()
         If rdoWholeDataFrame.Checked Then
-            If rdoRenameWith.Checked Then
-                If rdoReplace.Checked Then
-                    clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
-                    clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
-                    clsDefaultRFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText() & Chr(34), iPosition:=4)
-                    clsDefaultRFunction.RemoveParameterByName("label")
-                    clsDefaultRFunction.AddParameter("replacement", Chr(34) & ucrInputBy.GetText() & Chr(34), iPosition:=5)
-                    If ucrInputEdit.GetText = "Starts With" Then
+            If rdoRenameWith.Checked AndAlso rdoReplace.Checked Then
+                clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
+                clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
+                clsDefaultRFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText() & Chr(34), iPosition:=4)
+                clsDefaultRFunction.RemoveParameterByName("label")
+                clsDefaultRFunction.AddParameter("replacement", Chr(34) & ucrInputBy.GetText() & Chr(34), iPosition:=5)
+
+                Select Case ucrInputEdit.GetText
+                    Case "Starts With"
                         clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsStartwithFunction, iPosition:=3)
-                    ElseIf ucrInputEdit.GetText = "Ends With" Then
+                    Case "Ends With"
                         clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsEndswithFunction, iPosition:=3)
-                    ElseIf ucrInputEdit.GetText = "Matches" Then
+                    Case "Matches"
                         clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsMatchesFunction, iPosition:=3)
-                    ElseIf ucrInputEdit.GetText = "Contains" Then
+                    Case "Contains"
                         clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
-                    End If
-                Else
-                    clsDefaultRFunction.RemoveParameterByName("pattern")
-                    clsDefaultRFunction.RemoveParameterByName("replacement")
-                    clsDefaultRFunction.RemoveParameterByName(".cols")
-                End If
+                End Select
             Else
                 clsDefaultRFunction.RemoveParameterByName("pattern")
                 clsDefaultRFunction.RemoveParameterByName("replacement")
