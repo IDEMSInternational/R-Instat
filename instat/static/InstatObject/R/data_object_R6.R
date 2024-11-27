@@ -956,7 +956,7 @@ DataSheet$set("public", "update_selection", function(new_values, column_selectio
 
 
 DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "", type = "single", .fn, .cols = everything(), new_column_names_df, new_labels_df, ...) {
-  curr_data <- self$get_data_frame(use_current_filter = TRUE, use_column_selection = FALSE)
+  curr_data <- self$get_data_frame(use_current_filter = FALSE, use_column_selection = FALSE)
   
   # Save the current state to undo_history before making modifications
   self$save_state_to_undo_history()
@@ -994,8 +994,12 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
         
         column_names <- self$get_column_names()
         
-        # Replace NAs in column names (if any)
-        column_names[is.na(column_names)] <- new_col_name
+        if (any(is.na(column_names))) {
+          column_names[is.na(column_names)] <- new_col_name
+        } else {
+          column_names <- new_col_name
+        }
+        
         self$update_selection(column_names, private$.current_column_selection$name)
         
         self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
@@ -1012,7 +1016,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
   } else if (type == "multiple") {
     if (!missing(new_column_names_df)) {
       new_col_names <- new_column_names_df[, 1]
-      cols_changed_index <- new_column_names_df[, 2]
+      cols_changed_index <- which(names(private$data) %in% new_column_names_df[, 2])
       curr_col_names <- names(private$data)
       curr_col_names[cols_changed_index] <- new_col_names
       if(any(duplicated(curr_col_names))) stop("Cannot rename columns. Column names must be unique.")
@@ -1021,11 +1025,12 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       
       column_names <- self$get_column_names()
       
-      # Replace NAs in column names (if any)
-     # column_names[is.na(column_names)] <- new_col_names
-      print(column_names)
-      print(new_col_names)
-      print(names(private$data))
+      if (any(is.na(column_names))) {
+        column_names[is.na(column_names)] <- new_col_names
+      } else {
+        column_names <- new_col_names
+      }
+
       self$update_selection(column_names, private$.current_column_selection$name)
       
       for (i in seq_along(cols_changed_index)) {
