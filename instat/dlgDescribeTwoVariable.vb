@@ -831,7 +831,9 @@ Public Class dlgDescribeTwoVariable
             End If
         ElseIf rdoThreeVariable.Checked Then
             clsDummyFunction.AddParameter("checked", "three_variable", iPosition:=0)
-
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
             If IsFactorByFactorByFactor() Then
                 cmdFormatTable.Visible = True
                 ucrSaveTable.Location = New Point(23, 341)
@@ -840,9 +842,6 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
                 ucrSaveTable.SetCheckBoxText("Store Table")
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                 clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                               strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
@@ -857,9 +856,6 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
                 ucrSaveTable.SetCheckBoxText("Store Cor")
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                 clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                              strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
@@ -879,16 +875,10 @@ Public Class dlgDescribeTwoVariable
                 ucrChkInteraction.Location = New Point(310, 275)
                 ucrChkMeans.Location = New Point(310, 300)
                 If ucrChkSwapXYVar.Checked Then
-                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
-                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
-                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMapping2Function)
                     clsDummyFunction.AddParameter("var", "True", iPosition:=5)
                 Else
                     clsDummyFunction.AddParameter("var", "False", iPosition:=5)
-                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
-                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
-                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
                 End If
             ElseIf IsNumericByNumericByNumeric() Then
@@ -902,9 +892,6 @@ Public Class dlgDescribeTwoVariable
                 ucrChkLevSig.Location = New Point(397, 250)
                 ucrChkInteraction.Location = New Point(310, 275)
                 ucrChkMeans.Location = New Point(310, 300)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             ElseIf IsNumericByFactorByFactor() Then
                 cmdFormatTable.Visible = False
@@ -917,9 +904,6 @@ Public Class dlgDescribeTwoVariable
                 ucrChkLevSig.Location = New Point(397, 250)
                 ucrChkInteraction.Location = New Point(310, 275)
                 ucrChkMeans.Location = New Point(310, 300)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             ElseIf IsNumericByFactorByNumeric() Then
                 cmdFormatTable.Visible = False
@@ -932,9 +916,6 @@ Public Class dlgDescribeTwoVariable
                 ucrChkLevSig.Location = New Point(397, 250)
                 ucrChkInteraction.Location = New Point(310, 275)
                 ucrChkMeans.Location = New Point(310, 300)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             ElseIf IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric() Then
                 ucrSaveTable.SetPrefix("summary_table")
