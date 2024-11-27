@@ -344,6 +344,11 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverColumns.Name = "ucrReceiverColumns"
         Me.ucrReceiverColumns.Selector = Nothing
         Me.ucrReceiverColumns.Size = New System.Drawing.Size(120, 81)
+        Me.ucrReceiverColumns.Location = New System.Drawing.Point(20, 92)
+        Me.ucrReceiverColumns.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumns.Name = "ucrReceiverColumns"
+        Me.ucrReceiverColumns.Selector = Nothing
+        Me.ucrReceiverColumns.Size = New System.Drawing.Size(180, 122)
         Me.ucrReceiverColumns.strNcFilePath = ""
         Me.ucrReceiverColumns.TabIndex = 55
         Me.ucrReceiverColumns.ucrSelector = Nothing
@@ -356,6 +361,10 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrChkDisplayAsPercentage.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
         Me.ucrChkDisplayAsPercentage.Size = New System.Drawing.Size(114, 34)
+        Me.ucrChkDisplayAsPercentage.Location = New System.Drawing.Point(14, 22)
+        Me.ucrChkDisplayAsPercentage.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
+        Me.ucrChkDisplayAsPercentage.Size = New System.Drawing.Size(171, 51)
         Me.ucrChkDisplayAsPercentage.TabIndex = 54
         '
         'rdoOCol
@@ -688,7 +697,7 @@ Partial Class dlgDescribeTwoVariable
         Me.Name = "dlgDescribeTwoVariable"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Describe_Two_Variable"
-        Me.Text = "Describe Two Variables"
+        Me.Text = "Summarise Two/Three Variables"
         Me.grpSummaries.ResumeLayout(False)
         Me.grpSummaries.PerformLayout()
         Me.grpDisplay.ResumeLayout(False)
