@@ -1051,19 +1051,31 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
   } else if (type == "rename_with") {
     if (missing(.fn)) stop(.fn, "is missing with no default.")
     curr_col_names <- names(curr_data)
+    column_names <- self$get_column_names()
     private$data <- curr_data |>
       
       dplyr::rename_with(
         .fn = .fn,
         .cols = {{ .cols }}, ...
       )
-    if(self$column_selection_applied()) self$remove_current_column_selection()
     new_col_names <- names(private$data)
     if (!all(new_col_names %in% curr_col_names)) {
       new_col_names <- new_col_names[!(new_col_names %in% curr_col_names)]
+      
+      print(new_col_names)
       for (i in seq_along(new_col_names)) {
         self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
       }
+      
+      column_names <- self$get_column_names()
+      if (any(is.na(column_names))) {
+        column_names[is.na(column_names)] <- new_col_names
+      } else {
+        column_names <- new_col_names
+      }
+
+      self$update_selection(column_names, private$.current_column_selection$name)
+      
       self$data_changed <- TRUE
       self$variables_metadata_changed <- TRUE
     }
