@@ -95,11 +95,9 @@ Public Class dlgName
         ucrPnlCase.AddRadioButton(rdoAbbreviate, "abbreviate")
         ucrPnlCase.AddRadioButton(rdoReplace, "stringr::str_replace")
 
-        ucrPnlSelectData.SetParameter(New RParameter("data", 0))
-        ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
-        ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
-        ucrPnlSelectData.AddParameterValuesCondition(rdoWholeDataFrame, "checked", "whole")
-        ucrPnlSelectData.AddParameterValuesCondition(rdoSelectedColumn, "checked", "selected")
+        ucrPnlSelectData.SetParameter(New RParameter("checked", 1))
+        ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame, "whole")
+        ucrPnlSelectData.AddRadioButton(rdoSelectedColumn, "selected")
 
         ucrReceiverColumns.SetParameter(New RParameter(".cols", 6))
         ucrReceiverColumns.Selector = ucrSelectVariables
@@ -697,6 +695,7 @@ Public Class dlgName
                     Case "Contains"
                         clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
                 End Select
+
             Else
                 clsDefaultRFunction.RemoveParameterByName("pattern")
                 clsDefaultRFunction.RemoveParameterByName("replacement")
