@@ -115,6 +115,8 @@ Partial Class dlgBarAndPieChart
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
+        Me.ucrInputWidth = New instat.ucrInputTextBox()
+        Me.ucrChkBinWidth = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -122,9 +124,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblByFactor.AutoSize = True
         Me.lblByFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblByFactor.Location = New System.Drawing.Point(256, 286)
+        Me.lblByFactor.Location = New System.Drawing.Point(384, 429)
+        Me.lblByFactor.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblByFactor.Name = "lblByFactor"
-        Me.lblByFactor.Size = New System.Drawing.Size(76, 13)
+        Me.lblByFactor.Size = New System.Drawing.Size(114, 20)
         Me.lblByFactor.TabIndex = 24
         Me.lblByFactor.Tag = "By_Factor:"
         Me.lblByFactor.Text = "By Factor (Fill):"
@@ -138,9 +141,10 @@ Partial Class dlgBarAndPieChart
         Me.rdoValue.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoValue.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoValue.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoValue.Location = New System.Drawing.Point(116, 10)
+        Me.rdoValue.Location = New System.Drawing.Point(174, 15)
+        Me.rdoValue.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoValue.Name = "rdoValue"
-        Me.rdoValue.Size = New System.Drawing.Size(91, 28)
+        Me.rdoValue.Size = New System.Drawing.Size(136, 42)
         Me.rdoValue.TabIndex = 2
         Me.rdoValue.TabStop = True
         Me.rdoValue.Tag = "Value"
@@ -152,9 +156,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblPosition.AutoSize = True
         Me.lblPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPosition.Location = New System.Drawing.Point(256, 364)
+        Me.lblPosition.Location = New System.Drawing.Point(384, 546)
+        Me.lblPosition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPosition.Name = "lblPosition"
-        Me.lblPosition.Size = New System.Drawing.Size(47, 13)
+        Me.lblPosition.Size = New System.Drawing.Size(69, 20)
         Me.lblPosition.TabIndex = 39
         Me.lblPosition.Text = "Position:"
         '
@@ -167,9 +172,10 @@ Partial Class dlgBarAndPieChart
         Me.rdoFrequency.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoFrequency.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoFrequency.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoFrequency.Location = New System.Drawing.Point(27, 10)
+        Me.rdoFrequency.Location = New System.Drawing.Point(40, 15)
+        Me.rdoFrequency.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoFrequency.Name = "rdoFrequency"
-        Me.rdoFrequency.Size = New System.Drawing.Size(91, 28)
+        Me.rdoFrequency.Size = New System.Drawing.Size(136, 42)
         Me.rdoFrequency.TabIndex = 1
         Me.rdoFrequency.TabStop = True
         Me.rdoFrequency.Tag = "Frequency"
@@ -181,9 +187,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblXvariable.AutoSize = True
         Me.lblXvariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblXvariable.Location = New System.Drawing.Point(256, 196)
+        Me.lblXvariable.Location = New System.Drawing.Point(384, 294)
+        Me.lblXvariable.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblXvariable.Name = "lblXvariable"
-        Me.lblXvariable.Size = New System.Drawing.Size(58, 13)
+        Me.lblXvariable.Size = New System.Drawing.Size(86, 20)
         Me.lblXvariable.TabIndex = 5
         Me.lblXvariable.Text = "X Variable:"
         '
@@ -191,9 +198,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.rdoPie.AutoSize = True
         Me.rdoPie.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPie.Location = New System.Drawing.Point(115, 343)
+        Me.rdoPie.Location = New System.Drawing.Point(172, 514)
+        Me.rdoPie.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoPie.Name = "rdoPie"
-        Me.rdoPie.Size = New System.Drawing.Size(133, 17)
+        Me.rdoPie.Size = New System.Drawing.Size(180, 24)
         Me.rdoPie.TabIndex = 34
         Me.rdoPie.TabStop = True
         Me.rdoPie.Text = "Pie                               "
@@ -203,9 +211,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.rdoDonut.AutoSize = True
         Me.rdoDonut.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDonut.Location = New System.Drawing.Point(115, 365)
+        Me.rdoDonut.Location = New System.Drawing.Point(172, 548)
+        Me.rdoDonut.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoDonut.Name = "rdoDonut"
-        Me.rdoDonut.Size = New System.Drawing.Size(126, 17)
+        Me.rdoDonut.Size = New System.Drawing.Size(174, 24)
         Me.rdoDonut.TabIndex = 32
         Me.rdoDonut.TabStop = True
         Me.rdoDonut.Text = "Donut                        "
@@ -215,9 +224,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLabelPosition.AutoSize = True
         Me.lblLabelPosition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelPosition.Location = New System.Drawing.Point(26, 439)
+        Me.lblLabelPosition.Location = New System.Drawing.Point(39, 658)
+        Me.lblLabelPosition.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLabelPosition.Name = "lblLabelPosition"
-        Me.lblLabelPosition.Size = New System.Drawing.Size(47, 13)
+        Me.lblLabelPosition.Size = New System.Drawing.Size(69, 20)
         Me.lblLabelPosition.TabIndex = 24
         Me.lblLabelPosition.Text = "Position:"
         '
@@ -225,9 +235,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLabelColour.AutoSize = True
         Me.lblLabelColour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelColour.Location = New System.Drawing.Point(176, 440)
+        Me.lblLabelColour.Location = New System.Drawing.Point(264, 660)
+        Me.lblLabelColour.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLabelColour.Name = "lblLabelColour"
-        Me.lblLabelColour.Size = New System.Drawing.Size(40, 13)
+        Me.lblLabelColour.Size = New System.Drawing.Size(59, 20)
         Me.lblLabelColour.TabIndex = 26
         Me.lblLabelColour.Text = "Colour:"
         '
@@ -235,9 +246,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLabelSize.AutoSize = True
         Me.lblLabelSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabelSize.Location = New System.Drawing.Point(280, 440)
+        Me.lblLabelSize.Location = New System.Drawing.Point(420, 660)
+        Me.lblLabelSize.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLabelSize.Name = "lblLabelSize"
-        Me.lblLabelSize.Size = New System.Drawing.Size(30, 13)
+        Me.lblLabelSize.Size = New System.Drawing.Size(44, 20)
         Me.lblLabelSize.TabIndex = 56
         Me.lblLabelSize.Text = "Size:"
         '
@@ -245,9 +257,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLollipopSize.AutoSize = True
         Me.lblLollipopSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLollipopSize.Location = New System.Drawing.Point(123, 390)
+        Me.lblLollipopSize.Location = New System.Drawing.Point(184, 585)
+        Me.lblLollipopSize.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLollipopSize.Name = "lblLollipopSize"
-        Me.lblLollipopSize.Size = New System.Drawing.Size(30, 13)
+        Me.lblLollipopSize.Size = New System.Drawing.Size(44, 20)
         Me.lblLollipopSize.TabIndex = 42
         Me.lblLollipopSize.Text = "Size:"
         '
@@ -255,9 +268,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblReorder.AutoSize = True
         Me.lblReorder.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReorder.Location = New System.Drawing.Point(256, 323)
+        Me.lblReorder.Location = New System.Drawing.Point(384, 484)
+        Me.lblReorder.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblReorder.Name = "lblReorder"
-        Me.lblReorder.Size = New System.Drawing.Size(48, 13)
+        Me.lblReorder.Size = New System.Drawing.Size(71, 20)
         Me.lblReorder.TabIndex = 36
         Me.lblReorder.Text = "Reorder:"
         '
@@ -270,9 +284,10 @@ Partial Class dlgBarAndPieChart
         Me.rdoTreeMap.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTreeMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoTreeMap.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoTreeMap.Location = New System.Drawing.Point(205, 10)
+        Me.rdoTreeMap.Location = New System.Drawing.Point(308, 15)
+        Me.rdoTreeMap.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoTreeMap.Name = "rdoTreeMap"
-        Me.rdoTreeMap.Size = New System.Drawing.Size(91, 28)
+        Me.rdoTreeMap.Size = New System.Drawing.Size(136, 42)
         Me.rdoTreeMap.TabIndex = 3
         Me.rdoTreeMap.TabStop = True
         Me.rdoTreeMap.Tag = "Value"
@@ -284,9 +299,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblFill.AutoSize = True
         Me.lblFill.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFill.Location = New System.Drawing.Point(260, 94)
+        Me.lblFill.Location = New System.Drawing.Point(390, 141)
+        Me.lblFill.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFill.Name = "lblFill"
-        Me.lblFill.Size = New System.Drawing.Size(22, 13)
+        Me.lblFill.Size = New System.Drawing.Size(32, 20)
         Me.lblFill.TabIndex = 40
         Me.lblFill.Text = "Fill:"
         '
@@ -294,9 +310,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblArea.AutoSize = True
         Me.lblArea.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblArea.Location = New System.Drawing.Point(260, 55)
+        Me.lblArea.Location = New System.Drawing.Point(390, 82)
+        Me.lblArea.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblArea.Name = "lblArea"
-        Me.lblArea.Size = New System.Drawing.Size(32, 13)
+        Me.lblArea.Size = New System.Drawing.Size(47, 20)
         Me.lblArea.TabIndex = 10
         Me.lblArea.Text = "Area:"
         '
@@ -304,9 +321,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblPlace.AutoSize = True
         Me.lblPlace.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPlace.Location = New System.Drawing.Point(123, 368)
+        Me.lblPlace.Location = New System.Drawing.Point(184, 552)
+        Me.lblPlace.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPlace.Name = "lblPlace"
-        Me.lblPlace.Size = New System.Drawing.Size(37, 13)
+        Me.lblPlace.Size = New System.Drawing.Size(52, 20)
         Me.lblPlace.TabIndex = 47
         Me.lblPlace.Text = "Place:"
         '
@@ -314,9 +332,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblLabel.AutoSize = True
         Me.lblLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLabel.Location = New System.Drawing.Point(211, 388)
+        Me.lblLabel.Location = New System.Drawing.Point(316, 582)
+        Me.lblLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLabel.Name = "lblLabel"
-        Me.lblLabel.Size = New System.Drawing.Size(36, 13)
+        Me.lblLabel.Size = New System.Drawing.Size(52, 20)
         Me.lblLabel.TabIndex = 52
         Me.lblLabel.Text = "Label:"
         '
@@ -329,9 +348,10 @@ Partial Class dlgBarAndPieChart
         Me.rdoWordCloud.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWordCloud.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWordCloud.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoWordCloud.Location = New System.Drawing.Point(294, 10)
+        Me.rdoWordCloud.Location = New System.Drawing.Point(441, 15)
+        Me.rdoWordCloud.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoWordCloud.Name = "rdoWordCloud"
-        Me.rdoWordCloud.Size = New System.Drawing.Size(91, 28)
+        Me.rdoWordCloud.Size = New System.Drawing.Size(136, 42)
         Me.rdoWordCloud.TabIndex = 4
         Me.rdoWordCloud.TabStop = True
         Me.rdoWordCloud.Tag = "Value"
@@ -343,9 +363,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblWordcloudLabel.AutoSize = True
         Me.lblWordcloudLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblWordcloudLabel.Location = New System.Drawing.Point(260, 56)
+        Me.lblWordcloudLabel.Location = New System.Drawing.Point(390, 84)
+        Me.lblWordcloudLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblWordcloudLabel.Name = "lblWordcloudLabel"
-        Me.lblWordcloudLabel.Size = New System.Drawing.Size(36, 13)
+        Me.lblWordcloudLabel.Size = New System.Drawing.Size(52, 20)
         Me.lblWordcloudLabel.TabIndex = 9
         Me.lblWordcloudLabel.Text = "Label:"
         '
@@ -353,9 +374,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblWordcloudSize.AutoSize = True
         Me.lblWordcloudSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblWordcloudSize.Location = New System.Drawing.Point(256, 95)
+        Me.lblWordcloudSize.Location = New System.Drawing.Point(384, 142)
+        Me.lblWordcloudSize.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblWordcloudSize.Name = "lblWordcloudSize"
-        Me.lblWordcloudSize.Size = New System.Drawing.Size(30, 13)
+        Me.lblWordcloudSize.Size = New System.Drawing.Size(44, 20)
         Me.lblWordcloudSize.TabIndex = 13
         Me.lblWordcloudSize.Text = "Size:"
         '
@@ -363,9 +385,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblWordcloudColor.AutoSize = True
         Me.lblWordcloudColor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblWordcloudColor.Location = New System.Drawing.Point(256, 135)
+        Me.lblWordcloudColor.Location = New System.Drawing.Point(384, 202)
+        Me.lblWordcloudColor.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblWordcloudColor.Name = "lblWordcloudColor"
-        Me.lblWordcloudColor.Size = New System.Drawing.Size(34, 13)
+        Me.lblWordcloudColor.Size = New System.Drawing.Size(50, 20)
         Me.lblWordcloudColor.TabIndex = 17
         Me.lblWordcloudColor.Text = "Color:"
         '
@@ -373,67 +396,70 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblWordcloudAngle.AutoSize = True
         Me.lblWordcloudAngle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblWordcloudAngle.Location = New System.Drawing.Point(256, 175)
+        Me.lblWordcloudAngle.Location = New System.Drawing.Point(384, 262)
+        Me.lblWordcloudAngle.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblWordcloudAngle.Name = "lblWordcloudAngle"
-        Me.lblWordcloudAngle.Size = New System.Drawing.Size(37, 13)
+        Me.lblWordcloudAngle.Size = New System.Drawing.Size(54, 20)
         Me.lblWordcloudAngle.TabIndex = 21
         Me.lblWordcloudAngle.Text = "Angle:"
         '
         'contextMenuStripOptions
         '
+        Me.contextMenuStripOptions.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBarchartOptions, Me.toolStripMenuItemTextOptions, Me.toolStripMenuItemLollipopOptions, Me.toolStripMenuItemTreemapOptions, Me.toolStripMenuItemTreemapTextOptionsOptions, Me.toolStripMenuItemWordcloudOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(189, 158)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(256, 228)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(188, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(255, 32)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemBarchartOptions
         '
         Me.toolStripMenuItemBarchartOptions.Name = "toolStripMenuItemBarchartOptions"
-        Me.toolStripMenuItemBarchartOptions.Size = New System.Drawing.Size(188, 22)
+        Me.toolStripMenuItemBarchartOptions.Size = New System.Drawing.Size(255, 32)
         Me.toolStripMenuItemBarchartOptions.Text = "BarChart Options"
         '
         'toolStripMenuItemTextOptions
         '
         Me.toolStripMenuItemTextOptions.Name = "toolStripMenuItemTextOptions"
-        Me.toolStripMenuItemTextOptions.Size = New System.Drawing.Size(188, 22)
+        Me.toolStripMenuItemTextOptions.Size = New System.Drawing.Size(255, 32)
         Me.toolStripMenuItemTextOptions.Text = "Text Options"
         '
         'toolStripMenuItemLollipopOptions
         '
         Me.toolStripMenuItemLollipopOptions.Name = "toolStripMenuItemLollipopOptions"
-        Me.toolStripMenuItemLollipopOptions.Size = New System.Drawing.Size(188, 22)
+        Me.toolStripMenuItemLollipopOptions.Size = New System.Drawing.Size(255, 32)
         Me.toolStripMenuItemLollipopOptions.Text = "Lollipop Options"
         '
         'toolStripMenuItemTreemapOptions
         '
         Me.toolStripMenuItemTreemapOptions.Name = "toolStripMenuItemTreemapOptions"
-        Me.toolStripMenuItemTreemapOptions.Size = New System.Drawing.Size(188, 22)
+        Me.toolStripMenuItemTreemapOptions.Size = New System.Drawing.Size(255, 32)
         Me.toolStripMenuItemTreemapOptions.Text = "Treemap Options"
         '
         'toolStripMenuItemTreemapTextOptionsOptions
         '
         Me.toolStripMenuItemTreemapTextOptionsOptions.Name = "toolStripMenuItemTreemapTextOptionsOptions"
-        Me.toolStripMenuItemTreemapTextOptionsOptions.Size = New System.Drawing.Size(188, 22)
+        Me.toolStripMenuItemTreemapTextOptionsOptions.Size = New System.Drawing.Size(255, 32)
         Me.toolStripMenuItemTreemapTextOptionsOptions.Text = "Treemap Text Options"
         '
         'toolStripMenuItemWordcloudOptions
         '
         Me.toolStripMenuItemWordcloudOptions.Name = "toolStripMenuItemWordcloudOptions"
-        Me.toolStripMenuItemWordcloudOptions.Size = New System.Drawing.Size(188, 22)
+        Me.toolStripMenuItemWordcloudOptions.Size = New System.Drawing.Size(255, 32)
         Me.toolStripMenuItemWordcloudOptions.Text = "Wordcloud Options"
         '
         'cmdOptions
         '
         Me.cmdOptions.AutoSize = True
         Me.cmdOptions.ContextMenuStrip = Me.contextMenuStripOptions
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 238)
+        Me.cmdOptions.Location = New System.Drawing.Point(15, 357)
+        Me.cmdOptions.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(148, 25)
+        Me.cmdOptions.Size = New System.Drawing.Size(222, 38)
         Me.cmdOptions.SplitMenuStrip = Me.contextMenuStripOptions
         Me.cmdOptions.TabIndex = 68
         Me.cmdOptions.Tag = "Plot Options"
@@ -444,18 +470,20 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkReorderValue.AutoSize = True
         Me.ucrChkReorderValue.Checked = False
-        Me.ucrChkReorderValue.Location = New System.Drawing.Point(258, 236)
+        Me.ucrChkReorderValue.Location = New System.Drawing.Point(387, 354)
+        Me.ucrChkReorderValue.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkReorderValue.Name = "ucrChkReorderValue"
-        Me.ucrChkReorderValue.Size = New System.Drawing.Size(119, 23)
+        Me.ucrChkReorderValue.Size = New System.Drawing.Size(178, 34)
         Me.ucrChkReorderValue.TabIndex = 65
         '
         'ucrChkReorderFrequency
         '
         Me.ucrChkReorderFrequency.AutoSize = True
         Me.ucrChkReorderFrequency.Checked = False
-        Me.ucrChkReorderFrequency.Location = New System.Drawing.Point(257, 189)
+        Me.ucrChkReorderFrequency.Location = New System.Drawing.Point(386, 284)
+        Me.ucrChkReorderFrequency.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkReorderFrequency.Name = "ucrChkReorderFrequency"
-        Me.ucrChkReorderFrequency.Size = New System.Drawing.Size(158, 23)
+        Me.ucrChkReorderFrequency.Size = New System.Drawing.Size(237, 34)
         Me.ucrChkReorderFrequency.TabIndex = 66
         '
         'ucrInputPlace
@@ -464,9 +492,10 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputPlace.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPlace.GetSetSelectedIndex = -1
         Me.ucrInputPlace.IsReadOnly = False
-        Me.ucrInputPlace.Location = New System.Drawing.Point(166, 364)
+        Me.ucrInputPlace.Location = New System.Drawing.Point(249, 546)
+        Me.ucrInputPlace.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputPlace.Name = "ucrInputPlace"
-        Me.ucrInputPlace.Size = New System.Drawing.Size(88, 21)
+        Me.ucrInputPlace.Size = New System.Drawing.Size(132, 32)
         Me.ucrInputPlace.TabIndex = 53
         '
         'ucrInputLayout
@@ -475,20 +504,21 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLayout.GetSetSelectedIndex = -1
         Me.ucrInputLayout.IsReadOnly = False
-        Me.ucrInputLayout.Location = New System.Drawing.Point(79, 339)
+        Me.ucrInputLayout.Location = New System.Drawing.Point(118, 508)
+        Me.ucrInputLayout.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputLayout.Name = "ucrInputLayout"
-        Me.ucrInputLayout.Size = New System.Drawing.Size(99, 21)
+        Me.ucrInputLayout.Size = New System.Drawing.Size(148, 32)
         Me.ucrInputLayout.TabIndex = 38
         '
         'ucrReceiverLabel
         '
         Me.ucrReceiverLabel.AutoSize = True
         Me.ucrReceiverLabel.frmParent = Me
-        Me.ucrReceiverLabel.Location = New System.Drawing.Point(266, 383)
+        Me.ucrReceiverLabel.Location = New System.Drawing.Point(399, 574)
         Me.ucrReceiverLabel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLabel.Name = "ucrReceiverLabel"
         Me.ucrReceiverLabel.Selector = Nothing
-        Me.ucrReceiverLabel.Size = New System.Drawing.Size(113, 21)
+        Me.ucrReceiverLabel.Size = New System.Drawing.Size(170, 32)
         Me.ucrReceiverLabel.strNcFilePath = ""
         Me.ucrReceiverLabel.TabIndex = 57
         Me.ucrReceiverLabel.ucrSelector = Nothing
@@ -499,9 +529,10 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLabelSize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLabelSize.GetSetSelectedIndex = -1
         Me.ucrInputLabelSize.IsReadOnly = False
-        Me.ucrInputLabelSize.Location = New System.Drawing.Point(330, 437)
+        Me.ucrInputLabelSize.Location = New System.Drawing.Point(495, 656)
+        Me.ucrInputLabelSize.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputLabelSize.Name = "ucrInputLabelSize"
-        Me.ucrInputLabelSize.Size = New System.Drawing.Size(57, 21)
+        Me.ucrInputLabelSize.Size = New System.Drawing.Size(86, 32)
         Me.ucrInputLabelSize.TabIndex = 58
         '
         'ucrNudLollipopSize
@@ -509,11 +540,12 @@ Partial Class dlgBarAndPieChart
         Me.ucrNudLollipopSize.AutoSize = True
         Me.ucrNudLollipopSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLollipopSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLollipopSize.Location = New System.Drawing.Point(170, 387)
+        Me.ucrNudLollipopSize.Location = New System.Drawing.Point(255, 580)
+        Me.ucrNudLollipopSize.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrNudLollipopSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLollipopSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLollipopSize.Name = "ucrNudLollipopSize"
-        Me.ucrNudLollipopSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLollipopSize.Size = New System.Drawing.Size(75, 30)
         Me.ucrNudLollipopSize.TabIndex = 43
         Me.ucrNudLollipopSize.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
@@ -522,11 +554,12 @@ Partial Class dlgBarAndPieChart
         Me.ucrNudMaxSize.AutoSize = True
         Me.ucrNudMaxSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxSize.Location = New System.Drawing.Point(104, 317)
+        Me.ucrNudMaxSize.Location = New System.Drawing.Point(156, 476)
+        Me.ucrNudMaxSize.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrNudMaxSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxSize.Name = "ucrNudMaxSize"
-        Me.ucrNudMaxSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxSize.Size = New System.Drawing.Size(75, 30)
         Me.ucrNudMaxSize.TabIndex = 64
         Me.ucrNudMaxSize.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
@@ -534,9 +567,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkLollipop.AutoSize = True
         Me.ucrChkLollipop.Checked = False
-        Me.ucrChkLollipop.Location = New System.Drawing.Point(10, 384)
+        Me.ucrChkLollipop.Location = New System.Drawing.Point(15, 576)
+        Me.ucrChkLollipop.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkLollipop.Name = "ucrChkLollipop"
-        Me.ucrChkLollipop.Size = New System.Drawing.Size(93, 23)
+        Me.ucrChkLollipop.Size = New System.Drawing.Size(140, 34)
         Me.ucrChkLollipop.TabIndex = 41
         '
         'ucrInputLabelPosition
@@ -545,9 +579,10 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLabelPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLabelPosition.GetSetSelectedIndex = -1
         Me.ucrInputLabelPosition.IsReadOnly = False
-        Me.ucrInputLabelPosition.Location = New System.Drawing.Point(100, 436)
+        Me.ucrInputLabelPosition.Location = New System.Drawing.Point(150, 654)
+        Me.ucrInputLabelPosition.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputLabelPosition.Name = "ucrInputLabelPosition"
-        Me.ucrInputLabelPosition.Size = New System.Drawing.Size(57, 21)
+        Me.ucrInputLabelPosition.Size = New System.Drawing.Size(86, 32)
         Me.ucrInputLabelPosition.TabIndex = 25
         '
         'ucrInputBarChartPositions
@@ -556,29 +591,30 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputBarChartPositions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputBarChartPositions.GetSetSelectedIndex = -1
         Me.ucrInputBarChartPositions.IsReadOnly = False
-        Me.ucrInputBarChartPositions.Location = New System.Drawing.Point(257, 379)
+        Me.ucrInputBarChartPositions.Location = New System.Drawing.Point(386, 568)
+        Me.ucrInputBarChartPositions.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputBarChartPositions.Name = "ucrInputBarChartPositions"
-        Me.ucrInputBarChartPositions.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputBarChartPositions.Size = New System.Drawing.Size(180, 32)
         Me.ucrInputBarChartPositions.TabIndex = 40
         '
         'ucrSaveBar
         '
         Me.ucrSaveBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveBar.Location = New System.Drawing.Point(10, 512)
-        Me.ucrSaveBar.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveBar.Location = New System.Drawing.Point(15, 768)
+        Me.ucrSaveBar.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveBar.Name = "ucrSaveBar"
-        Me.ucrSaveBar.Size = New System.Drawing.Size(372, 24)
+        Me.ucrSaveBar.Size = New System.Drawing.Size(558, 36)
         Me.ucrSaveBar.TabIndex = 59
         '
         'ucrReceiverByFactor
         '
         Me.ucrReceiverByFactor.AutoSize = True
         Me.ucrReceiverByFactor.frmParent = Me
-        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(257, 301)
+        Me.ucrReceiverByFactor.Location = New System.Drawing.Point(386, 452)
         Me.ucrReceiverByFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
         Me.ucrReceiverByFactor.Selector = Nothing
-        Me.ucrReceiverByFactor.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverByFactor.Size = New System.Drawing.Size(180, 32)
         Me.ucrReceiverByFactor.strNcFilePath = ""
         Me.ucrReceiverByFactor.TabIndex = 23
         Me.ucrReceiverByFactor.ucrSelector = Nothing
@@ -589,38 +625,40 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector.bDropUnusedFilterLevels = False
         Me.ucrBarChartSelector.bShowHiddenColumns = False
         Me.ucrBarChartSelector.bUseCurrentFilter = True
-        Me.ucrBarChartSelector.Location = New System.Drawing.Point(10, 52)
+        Me.ucrBarChartSelector.Location = New System.Drawing.Point(15, 78)
         Me.ucrBarChartSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrBarChartSelector.Name = "ucrBarChartSelector"
-        Me.ucrBarChartSelector.Size = New System.Drawing.Size(213, 183)
+        Me.ucrBarChartSelector.Size = New System.Drawing.Size(320, 274)
         Me.ucrBarChartSelector.TabIndex = 5
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(7, 542)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 813)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 60
         '
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(19, 6)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(28, 9)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(372, 36)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(558, 54)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrReceiverArea
         '
         Me.ucrReceiverArea.AutoSize = True
         Me.ucrReceiverArea.frmParent = Me
-        Me.ucrReceiverArea.Location = New System.Drawing.Point(257, 71)
+        Me.ucrReceiverArea.Location = New System.Drawing.Point(386, 106)
         Me.ucrReceiverArea.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverArea.Name = "ucrReceiverArea"
         Me.ucrReceiverArea.Selector = Nothing
-        Me.ucrReceiverArea.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverArea.Size = New System.Drawing.Size(180, 32)
         Me.ucrReceiverArea.strNcFilePath = ""
         Me.ucrReceiverArea.TabIndex = 8
         Me.ucrReceiverArea.ucrSelector = Nothing
@@ -629,11 +667,11 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrReceiverWordcloudLabel.AutoSize = True
         Me.ucrReceiverWordcloudLabel.frmParent = Me
-        Me.ucrReceiverWordcloudLabel.Location = New System.Drawing.Point(257, 71)
+        Me.ucrReceiverWordcloudLabel.Location = New System.Drawing.Point(386, 106)
         Me.ucrReceiverWordcloudLabel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWordcloudLabel.Name = "ucrReceiverWordcloudLabel"
         Me.ucrReceiverWordcloudLabel.Selector = Nothing
-        Me.ucrReceiverWordcloudLabel.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverWordcloudLabel.Size = New System.Drawing.Size(180, 32)
         Me.ucrReceiverWordcloudLabel.strNcFilePath = ""
         Me.ucrReceiverWordcloudLabel.TabIndex = 7
         Me.ucrReceiverWordcloudLabel.ucrSelector = Nothing
@@ -644,20 +682,21 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputReorderValue.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputReorderValue.GetSetSelectedIndex = -1
         Me.ucrInputReorderValue.IsReadOnly = False
-        Me.ucrInputReorderValue.Location = New System.Drawing.Point(257, 261)
+        Me.ucrInputReorderValue.Location = New System.Drawing.Point(386, 392)
+        Me.ucrInputReorderValue.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputReorderValue.Name = "ucrInputReorderValue"
-        Me.ucrInputReorderValue.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputReorderValue.Size = New System.Drawing.Size(180, 32)
         Me.ucrInputReorderValue.TabIndex = 22
         '
         'ucrReceiverWordcloudSize
         '
         Me.ucrReceiverWordcloudSize.AutoSize = True
         Me.ucrReceiverWordcloudSize.frmParent = Me
-        Me.ucrReceiverWordcloudSize.Location = New System.Drawing.Point(257, 111)
+        Me.ucrReceiverWordcloudSize.Location = New System.Drawing.Point(386, 166)
         Me.ucrReceiverWordcloudSize.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWordcloudSize.Name = "ucrReceiverWordcloudSize"
         Me.ucrReceiverWordcloudSize.Selector = Nothing
-        Me.ucrReceiverWordcloudSize.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverWordcloudSize.Size = New System.Drawing.Size(180, 32)
         Me.ucrReceiverWordcloudSize.strNcFilePath = ""
         Me.ucrReceiverWordcloudSize.TabIndex = 14
         Me.ucrReceiverWordcloudSize.ucrSelector = Nothing
@@ -666,11 +705,11 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrReceiverFill.AutoSize = True
         Me.ucrReceiverFill.frmParent = Me
-        Me.ucrReceiverFill.Location = New System.Drawing.Point(257, 111)
+        Me.ucrReceiverFill.Location = New System.Drawing.Point(386, 166)
         Me.ucrReceiverFill.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFill.Name = "ucrReceiverFill"
         Me.ucrReceiverFill.Selector = Nothing
-        Me.ucrReceiverFill.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverFill.Size = New System.Drawing.Size(180, 32)
         Me.ucrReceiverFill.strNcFilePath = ""
         Me.ucrReceiverFill.TabIndex = 15
         Me.ucrReceiverFill.ucrSelector = Nothing
@@ -679,11 +718,11 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrReceiverWordcloudColor.AutoSize = True
         Me.ucrReceiverWordcloudColor.frmParent = Me
-        Me.ucrReceiverWordcloudColor.Location = New System.Drawing.Point(257, 151)
+        Me.ucrReceiverWordcloudColor.Location = New System.Drawing.Point(386, 226)
         Me.ucrReceiverWordcloudColor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWordcloudColor.Name = "ucrReceiverWordcloudColor"
         Me.ucrReceiverWordcloudColor.Selector = Nothing
-        Me.ucrReceiverWordcloudColor.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverWordcloudColor.Size = New System.Drawing.Size(180, 32)
         Me.ucrReceiverWordcloudColor.strNcFilePath = ""
         Me.ucrReceiverWordcloudColor.TabIndex = 16
         Me.ucrReceiverWordcloudColor.ucrSelector = Nothing
@@ -692,11 +731,11 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrReceiverX.AutoSize = True
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(257, 212)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(386, 318)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
-        Me.ucrReceiverX.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverX.Size = New System.Drawing.Size(180, 32)
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.TabIndex = 19
         Me.ucrReceiverX.ucrSelector = Nothing
@@ -707,9 +746,10 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputReorderX.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputReorderX.GetSetSelectedIndex = -1
         Me.ucrInputReorderX.IsReadOnly = False
-        Me.ucrInputReorderX.Location = New System.Drawing.Point(257, 212)
+        Me.ucrInputReorderX.Location = New System.Drawing.Point(386, 318)
+        Me.ucrInputReorderX.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputReorderX.Name = "ucrInputReorderX"
-        Me.ucrInputReorderX.Size = New System.Drawing.Size(93, 21)
+        Me.ucrInputReorderX.Size = New System.Drawing.Size(140, 32)
         Me.ucrInputReorderX.TabIndex = 12
         '
         'ucrInputAddReorder
@@ -718,17 +758,19 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputAddReorder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputAddReorder.GetSetSelectedIndex = -1
         Me.ucrInputAddReorder.IsReadOnly = False
-        Me.ucrInputAddReorder.Location = New System.Drawing.Point(257, 339)
+        Me.ucrInputAddReorder.Location = New System.Drawing.Point(386, 508)
+        Me.ucrInputAddReorder.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputAddReorder.Name = "ucrInputAddReorder"
-        Me.ucrInputAddReorder.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputAddReorder.Size = New System.Drawing.Size(180, 32)
         Me.ucrInputAddReorder.TabIndex = 37
         '
         'ucrPnlPolar
         '
         Me.ucrPnlPolar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlPolar.Location = New System.Drawing.Point(106, 341)
+        Me.ucrPnlPolar.Location = New System.Drawing.Point(159, 512)
+        Me.ucrPnlPolar.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrPnlPolar.Name = "ucrPnlPolar"
-        Me.ucrPnlPolar.Size = New System.Drawing.Size(72, 45)
+        Me.ucrPnlPolar.Size = New System.Drawing.Size(108, 68)
         Me.ucrPnlPolar.TabIndex = 33
         '
         'ucrInputLabelColour
@@ -737,18 +779,20 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLabelColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLabelColour.GetSetSelectedIndex = -1
         Me.ucrInputLabelColour.IsReadOnly = False
-        Me.ucrInputLabelColour.Location = New System.Drawing.Point(220, 437)
+        Me.ucrInputLabelColour.Location = New System.Drawing.Point(330, 656)
+        Me.ucrInputLabelColour.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputLabelColour.Name = "ucrInputLabelColour"
-        Me.ucrInputLabelColour.Size = New System.Drawing.Size(57, 21)
+        Me.ucrInputLabelColour.Size = New System.Drawing.Size(86, 32)
         Me.ucrInputLabelColour.TabIndex = 54
         '
         'ucrChkStart
         '
         Me.ucrChkStart.AutoSize = True
         Me.ucrChkStart.Checked = False
-        Me.ucrChkStart.Location = New System.Drawing.Point(10, 316)
+        Me.ucrChkStart.Location = New System.Drawing.Point(15, 474)
+        Me.ucrChkStart.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkStart.Name = "ucrChkStart"
-        Me.ucrChkStart.Size = New System.Drawing.Size(83, 23)
+        Me.ucrChkStart.Size = New System.Drawing.Size(124, 34)
         Me.ucrChkStart.TabIndex = 28
         '
         'ucrInputStart
@@ -757,46 +801,51 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStart.GetSetSelectedIndex = -1
         Me.ucrInputStart.IsReadOnly = False
-        Me.ucrInputStart.Location = New System.Drawing.Point(104, 315)
+        Me.ucrInputStart.Location = New System.Drawing.Point(156, 472)
+        Me.ucrInputStart.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputStart.Name = "ucrInputStart"
-        Me.ucrInputStart.Size = New System.Drawing.Size(93, 21)
+        Me.ucrInputStart.Size = New System.Drawing.Size(140, 32)
         Me.ucrInputStart.TabIndex = 30
         '
         'ucrChkLayout
         '
         Me.ucrChkLayout.AutoSize = True
         Me.ucrChkLayout.Checked = False
-        Me.ucrChkLayout.Location = New System.Drawing.Point(10, 341)
+        Me.ucrChkLayout.Location = New System.Drawing.Point(15, 512)
+        Me.ucrChkLayout.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkLayout.Name = "ucrChkLayout"
-        Me.ucrChkLayout.Size = New System.Drawing.Size(108, 24)
+        Me.ucrChkLayout.Size = New System.Drawing.Size(162, 36)
         Me.ucrChkLayout.TabIndex = 35
         '
         'ucrChkFlipCoordinates
         '
         Me.ucrChkFlipCoordinates.AutoSize = True
         Me.ucrChkFlipCoordinates.Checked = False
-        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(10, 317)
+        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(15, 476)
+        Me.ucrChkFlipCoordinates.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(166, 23)
+        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(249, 34)
         Me.ucrChkFlipCoordinates.TabIndex = 29
         '
         'ucrChkPolarCoordinates
         '
         Me.ucrChkPolarCoordinates.AutoSize = True
         Me.ucrChkPolarCoordinates.Checked = False
-        Me.ucrChkPolarCoordinates.Location = New System.Drawing.Point(10, 341)
+        Me.ucrChkPolarCoordinates.Location = New System.Drawing.Point(15, 512)
+        Me.ucrChkPolarCoordinates.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkPolarCoordinates.Name = "ucrChkPolarCoordinates"
-        Me.ucrChkPolarCoordinates.Size = New System.Drawing.Size(83, 23)
+        Me.ucrChkPolarCoordinates.Size = New System.Drawing.Size(124, 34)
         Me.ucrChkPolarCoordinates.TabIndex = 31
         '
         'ucrVariablesAsFactorForBarChart
         '
         Me.ucrVariablesAsFactorForBarChart.AutoSize = True
         Me.ucrVariablesAsFactorForBarChart.frmParent = Me
-        Me.ucrVariablesAsFactorForBarChart.Location = New System.Drawing.Point(257, 52)
+        Me.ucrVariablesAsFactorForBarChart.Location = New System.Drawing.Point(386, 78)
+        Me.ucrVariablesAsFactorForBarChart.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrVariablesAsFactorForBarChart.Name = "ucrVariablesAsFactorForBarChart"
         Me.ucrVariablesAsFactorForBarChart.Selector = Nothing
-        Me.ucrVariablesAsFactorForBarChart.Size = New System.Drawing.Size(125, 141)
+        Me.ucrVariablesAsFactorForBarChart.Size = New System.Drawing.Size(188, 212)
         Me.ucrVariablesAsFactorForBarChart.strNcFilePath = ""
         Me.ucrVariablesAsFactorForBarChart.TabIndex = 6
         Me.ucrVariablesAsFactorForBarChart.ucrSelector = Nothing
@@ -806,11 +855,11 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrReceiverWordcloudAngle.AutoSize = True
         Me.ucrReceiverWordcloudAngle.frmParent = Me
-        Me.ucrReceiverWordcloudAngle.Location = New System.Drawing.Point(257, 191)
+        Me.ucrReceiverWordcloudAngle.Location = New System.Drawing.Point(386, 286)
         Me.ucrReceiverWordcloudAngle.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWordcloudAngle.Name = "ucrReceiverWordcloudAngle"
         Me.ucrReceiverWordcloudAngle.Selector = Nothing
-        Me.ucrReceiverWordcloudAngle.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverWordcloudAngle.Size = New System.Drawing.Size(180, 32)
         Me.ucrReceiverWordcloudAngle.strNcFilePath = ""
         Me.ucrReceiverWordcloudAngle.TabIndex = 20
         Me.ucrReceiverWordcloudAngle.ucrSelector = Nothing
@@ -819,36 +868,40 @@ Partial Class dlgBarAndPieChart
         '
         Me.ucrChkAddLabelsText.AutoSize = True
         Me.ucrChkAddLabelsText.Checked = False
-        Me.ucrChkAddLabelsText.Location = New System.Drawing.Point(10, 405)
+        Me.ucrChkAddLabelsText.Location = New System.Drawing.Point(15, 608)
+        Me.ucrChkAddLabelsText.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkAddLabelsText.Name = "ucrChkAddLabelsText"
-        Me.ucrChkAddLabelsText.Size = New System.Drawing.Size(135, 23)
+        Me.ucrChkAddLabelsText.Size = New System.Drawing.Size(202, 34)
         Me.ucrChkAddLabelsText.TabIndex = 46
         '
         'ucrChkAddLabelsTreemap
         '
         Me.ucrChkAddLabelsTreemap.AutoSize = True
         Me.ucrChkAddLabelsTreemap.Checked = False
-        Me.ucrChkAddLabelsTreemap.Location = New System.Drawing.Point(10, 365)
+        Me.ucrChkAddLabelsTreemap.Location = New System.Drawing.Point(15, 548)
+        Me.ucrChkAddLabelsTreemap.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkAddLabelsTreemap.Name = "ucrChkAddLabelsTreemap"
-        Me.ucrChkAddLabelsTreemap.Size = New System.Drawing.Size(129, 24)
+        Me.ucrChkAddLabelsTreemap.Size = New System.Drawing.Size(194, 36)
         Me.ucrChkAddLabelsTreemap.TabIndex = 61
         '
         'ucrChkBacktoback
         '
         Me.ucrChkBacktoback.AutoSize = True
         Me.ucrChkBacktoback.Checked = False
-        Me.ucrChkBacktoback.Location = New System.Drawing.Point(10, 293)
+        Me.ucrChkBacktoback.Location = New System.Drawing.Point(15, 440)
+        Me.ucrChkBacktoback.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkBacktoback.Name = "ucrChkBacktoback"
-        Me.ucrChkBacktoback.Size = New System.Drawing.Size(93, 23)
+        Me.ucrChkBacktoback.Size = New System.Drawing.Size(140, 34)
         Me.ucrChkBacktoback.TabIndex = 27
         '
         'ucrChkIncreaseSize
         '
         Me.ucrChkIncreaseSize.AutoSize = True
         Me.ucrChkIncreaseSize.Checked = False
-        Me.ucrChkIncreaseSize.Location = New System.Drawing.Point(10, 317)
+        Me.ucrChkIncreaseSize.Location = New System.Drawing.Point(15, 476)
+        Me.ucrChkIncreaseSize.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkIncreaseSize.Name = "ucrChkIncreaseSize"
-        Me.ucrChkIncreaseSize.Size = New System.Drawing.Size(88, 23)
+        Me.ucrChkIncreaseSize.Size = New System.Drawing.Size(132, 34)
         Me.ucrChkIncreaseSize.TabIndex = 63
         '
         'ucrInputStation
@@ -857,20 +910,21 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputStation.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputStation.GetSetSelectedIndex = -1
         Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(327, 478)
+        Me.ucrInputStation.Location = New System.Drawing.Point(490, 717)
+        Me.ucrInputStation.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputStation.Name = "ucrInputStation"
-        Me.ucrInputStation.Size = New System.Drawing.Size(86, 21)
+        Me.ucrInputStation.Size = New System.Drawing.Size(129, 32)
         Me.ucrInputStation.TabIndex = 71
         '
         'ucr1stFactorReceiver
         '
         Me.ucr1stFactorReceiver.AutoSize = True
         Me.ucr1stFactorReceiver.frmParent = Me
-        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(214, 479)
+        Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(321, 718)
         Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
         Me.ucr1stFactorReceiver.Selector = Nothing
-        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(109, 26)
+        Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(164, 39)
         Me.ucr1stFactorReceiver.strNcFilePath = ""
         Me.ucr1stFactorReceiver.TabIndex = 70
         Me.ucr1stFactorReceiver.ucrSelector = Nothing
@@ -879,9 +933,10 @@ Partial Class dlgBarAndPieChart
         '
         Me.lblFacetBy.AutoSize = True
         Me.lblFacetBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFacetBy.Location = New System.Drawing.Point(214, 464)
+        Me.lblFacetBy.Location = New System.Drawing.Point(321, 696)
+        Me.lblFacetBy.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFacetBy.Name = "lblFacetBy"
-        Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
+        Me.lblFacetBy.Size = New System.Drawing.Size(76, 20)
         Me.lblFacetBy.TabIndex = 69
         Me.lblFacetBy.Tag = ""
         Me.lblFacetBy.Text = "Facet By:"
@@ -892,26 +947,52 @@ Partial Class dlgBarAndPieChart
         Me.ucrInputLegendPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(97, 478)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(146, 717)
+        Me.ucrInputLegendPosition.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
-        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(112, 21)
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(168, 32)
         Me.ucrInputLegendPosition.TabIndex = 73
         '
         'ucrChkLegend
         '
         Me.ucrChkLegend.AutoSize = True
         Me.ucrChkLegend.Checked = False
-        Me.ucrChkLegend.Location = New System.Drawing.Point(10, 479)
+        Me.ucrChkLegend.Location = New System.Drawing.Point(15, 718)
+        Me.ucrChkLegend.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrChkLegend.Name = "ucrChkLegend"
-        Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkLegend.Size = New System.Drawing.Size(147, 36)
         Me.ucrChkLegend.TabIndex = 72
+        '
+        'ucrInputWidth
+        '
+        Me.ucrInputWidth.AddQuotesIfUnrecognised = True
+        Me.ucrInputWidth.AutoSize = True
+        Me.ucrInputWidth.IsMultiline = False
+        Me.ucrInputWidth.IsReadOnly = False
+        Me.ucrInputWidth.Location = New System.Drawing.Point(210, 400)
+        Me.ucrInputWidth.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputWidth.Name = "ucrInputWidth"
+        Me.ucrInputWidth.Size = New System.Drawing.Size(104, 32)
+        Me.ucrInputWidth.TabIndex = 91
+        '
+        'ucrChkBinWidth
+        '
+        Me.ucrChkBinWidth.AutoSize = True
+        Me.ucrChkBinWidth.Checked = False
+        Me.ucrChkBinWidth.Location = New System.Drawing.Point(16, 400)
+        Me.ucrChkBinWidth.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkBinWidth.Name = "ucrChkBinWidth"
+        Me.ucrChkBinWidth.Size = New System.Drawing.Size(216, 34)
+        Me.ucrChkBinWidth.TabIndex = 90
         '
         'dlgBarAndPieChart
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(415, 596)
+        Me.ClientSize = New System.Drawing.Size(622, 894)
+        Me.Controls.Add(Me.ucrInputWidth)
+        Me.Controls.Add(Me.ucrChkBinWidth)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucr1stFactorReceiver)
         Me.Controls.Add(Me.lblFacetBy)
@@ -979,6 +1060,7 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrChkBacktoback)
         Me.Controls.Add(Me.ucrChkIncreaseSize)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgBarAndPieChart"
@@ -1067,4 +1149,6 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
+    Friend WithEvents ucrInputWidth As ucrInputTextBox
+    Friend WithEvents ucrChkBinWidth As ucrCheck
 End Class

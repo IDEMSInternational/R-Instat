@@ -134,14 +134,10 @@ Public Class dlgHistogram
         ucrChkOmitYAxis.SetText("Omit Y Axis")
 
         ucrChkBinWidth.SetText("Binwidth")
-        ucrChkBinWidth.AddToLinkedControls({ucrNudBinwidth}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkBinWidth.AddToLinkedControls({ucrInputWidth}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
 
-        ucrNudBinwidth.SetParameter(New RParameter("binwidth", 3))
-        ucrNudBinwidth.SetMinMax(0.00, 10.0)
-        ucrNudBinwidth.DecimalPlaces = 2
-        ucrNudBinwidth.Increment = 0.01
-        ucrNudBinwidth.SetRDefault(1.5)
-
+        ucrInputWidth.SetParameter(New RParameter("binwidth", 3))
+        ucrInputWidth.SetValidationTypeAsNumeric()
 
         ucrChkRidges.SetText("Density Ridges")
         ucrChkRidges.AddFunctionNamesCondition(True, "geom_density_ridges")
@@ -327,7 +323,7 @@ Public Class dlgHistogram
 
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudBinwidth.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrInputWidth.SetRCode(clsRgeomPlotFunction, bReset)
         ucrNudMinHeight.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkOmitYAxis.SetRCode(clsBaseOperator, bReset)
         If bReset Then
@@ -493,7 +489,7 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrChkOmitYAxis.ControlValueChanged, ucrNudBinwidth.ControlValueChanged
+    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkDisplayAsDotPlot.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlValueChanged, ucrVariablesAsFactorforHist.ControlValueChanged, ucrInputAddReorder.ControlValueChanged, ucrChkOmitYAxis.ControlValueChanged, ucrInputWidth.ControlValueChanged
         toolStripMenuItemHistogramOptions.Enabled = rdoHistogram.Checked AndAlso Not ucrChkDisplayAsDotPlot.Checked
         toolStripMenuItemDotOptions.Enabled = rdoHistogram.Checked AndAlso ucrChkDisplayAsDotPlot.Checked
         toolStripMenuItemDensityOptions.Enabled = rdoDensity_ridges.Checked AndAlso Not ucrChkRidges.Checked
@@ -604,7 +600,7 @@ Public Class dlgHistogram
             Me.ucrChkLegend.Location = New Point(11, 329)
             Me.ucrChkBinWidth.Location = New Point(10, 262)
             Me.ucrChkOmitYAxis.Location = New Point(10, 287)
-            Me.ucrNudBinwidth.Location = New Point(139, 262)
+            Me.ucrInputWidth.Location = New Point(139, 262)
             Me.ucrInputStation.Location = New Point(318, 328)
             Me.ucrInputLegendPosition.Location = New Point(87, 328)
             Me.ucr1stFactorReceiver.Location = New Point(205, 329)
@@ -630,7 +626,7 @@ Public Class dlgHistogram
             Me.ucrSaveHist.Location = New Point(10, 330)
             Me.ucrChkBinWidth.Location = New Point(10, 262)
             Me.ucrChkLegend.Location = New Point(11, 296)
-            Me.ucrNudBinwidth.Location = New Point(139, 262)
+            Me.ucrInputWidth.Location = New Point(139, 262)
             Me.ucrInputStation.Location = New Point(318, 294)
             Me.ucrInputLegendPosition.Location = New Point(87, 294)
             Me.ucr1stFactorReceiver.Location = New Point(205, 296)
@@ -760,9 +756,9 @@ Public Class dlgHistogram
 
     End Sub
 
-    Private Sub ucrChkBinWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBinWidth.ControlValueChanged, ucrNudBinwidth.ControlValueChanged
+    Private Sub ucrChkBinWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBinWidth.ControlValueChanged, ucrInputWidth.ControlValueChanged
         If ucrChkBinWidth.Checked Then
-            clsRgeomPlotFunction.AddParameter("binwidth", ucrNudBinwidth.GetText, iPosition:=4)
+            clsRgeomPlotFunction.AddParameter("binwidth", ucrInputWidth.GetText, iPosition:=4)
         Else
             clsRgeomPlotFunction.RemoveParameterByName("binwidth")
         End If
@@ -822,7 +818,8 @@ Public Class dlgHistogram
         SetPipeAssignTo()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged, ucrChkBinWidth.ControlContentsChanged, ucrNudBinwidth.ControlContentsChanged, ucrNudMinHeight.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrChkRidges.ControlContentsChanged, ucrInputAddReorder.ControlContentsChanged, ucrChkBinWidth.ControlContentsChanged, ucrInputWidth.ControlContentsChanged, ucrNudMinHeight.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class
