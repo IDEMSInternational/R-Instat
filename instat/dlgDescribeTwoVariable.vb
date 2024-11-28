@@ -771,7 +771,7 @@ Public Class dlgDescribeTwoVariable
                 ucrChkLevSig.Visible = False
                 ucrChkTotal.Visible = False
                 ucrChkInteraction.Visible = False
-                ucrSaveTable.Location = New Point(23, 385)
+                ucrSaveTable.Location = New Point(23, 370)
                 clsDummyFunction.AddParameter("factor_cols", "FactorVar", iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                 ucrSaveTable.SetPrefix("frequency_table")
@@ -1422,7 +1422,7 @@ Public Class dlgDescribeTwoVariable
         End If
     End Sub
 
-    Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPercentages.ControlValueChanged, ucrReceiverColumns.ControlValueChanged,
+    Private Sub Frequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPercentages.ControlValueChanged,
         ucrChkDisplayAsPercentage.ControlValueChanged, ucrChkDisplayMargins.ControlValueChanged, ucrInputMarginName.ControlValueChanged, ucrpnlPercent.ControlValueChanged
         If rdoTwoVariable.Checked Then
             If ucrChkDisplayAsPercentage.Checked Then
