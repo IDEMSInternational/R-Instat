@@ -80,6 +80,9 @@ Partial Class dlgClimograph
         Me.ucrSave = New instat.ucrSave()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrSelectorClimograph = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputFacetBar = New instat.ucrInputComboBox()
+        Me.ucrReceiverFacetBar = New instat.ucrReceiverSingle()
+        Me.lblFacetBar = New System.Windows.Forms.Label()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -264,7 +267,7 @@ Partial Class dlgClimograph
         '
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemBarchartOptions, Me.toolStripMenuItemTmaxLineOptions, Me.toolStripMenuItemTminLineOptions})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 114)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 92)
         '
         'toolStripMenuItemPlotOptions
         '
@@ -699,11 +702,49 @@ Partial Class dlgClimograph
         Me.ucrSelectorClimograph.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorClimograph.TabIndex = 59
         '
+        'ucrInputFacetBar
+        '
+        Me.ucrInputFacetBar.AddQuotesIfUnrecognised = True
+        Me.ucrInputFacetBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputFacetBar.GetSetSelectedIndex = -1
+        Me.ucrInputFacetBar.IsReadOnly = False
+        Me.ucrInputFacetBar.Location = New System.Drawing.Point(379, 68)
+        Me.ucrInputFacetBar.Name = "ucrInputFacetBar"
+        Me.ucrInputFacetBar.Size = New System.Drawing.Size(86, 21)
+        Me.ucrInputFacetBar.TabIndex = 142
+        '
+        'ucrReceiverFacetBar
+        '
+        Me.ucrReceiverFacetBar.AutoSize = True
+        Me.ucrReceiverFacetBar.frmParent = Me
+        Me.ucrReceiverFacetBar.Location = New System.Drawing.Point(267, 68)
+        Me.ucrReceiverFacetBar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacetBar.Name = "ucrReceiverFacetBar"
+        Me.ucrReceiverFacetBar.Selector = Nothing
+        Me.ucrReceiverFacetBar.Size = New System.Drawing.Size(109, 26)
+        Me.ucrReceiverFacetBar.strNcFilePath = ""
+        Me.ucrReceiverFacetBar.TabIndex = 141
+        Me.ucrReceiverFacetBar.ucrSelector = Nothing
+        '
+        'lblFacetBar
+        '
+        Me.lblFacetBar.AutoSize = True
+        Me.lblFacetBar.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFacetBar.Location = New System.Drawing.Point(267, 53)
+        Me.lblFacetBar.Name = "lblFacetBar"
+        Me.lblFacetBar.Size = New System.Drawing.Size(52, 13)
+        Me.lblFacetBar.TabIndex = 140
+        Me.lblFacetBar.Tag = ""
+        Me.lblFacetBar.Text = "Facet By:"
+        '
         'dlgClimograph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(472, 578)
+        Me.Controls.Add(Me.ucrInputFacetBar)
+        Me.Controls.Add(Me.ucrReceiverFacetBar)
+        Me.Controls.Add(Me.lblFacetBar)
         Me.Controls.Add(Me.ucrReceiverRainBar)
         Me.Controls.Add(Me.lblRainBar)
         Me.Controls.Add(Me.ucrReceiverElement1Bar)
@@ -825,4 +866,7 @@ Partial Class dlgClimograph
     Friend WithEvents lblElement2Bar As Label
     Friend WithEvents ucrReceiverMonthBar As ucrReceiverSingle
     Friend WithEvents lblMonthBar As Label
+    Friend WithEvents ucrInputFacetBar As ucrInputComboBox
+    Friend WithEvents ucrReceiverFacetBar As ucrReceiverSingle
+    Friend WithEvents lblFacetBar As Label
 End Class
