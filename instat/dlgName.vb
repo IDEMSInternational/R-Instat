@@ -176,6 +176,7 @@ Public Class dlgName
         ucrSelectVariables.Reset()
         dctRowsNewNameChanged.Clear()
         dctRowsNewLabelChanged.Clear()
+        dctRowsCurrentName.Clear()
         bCurrentCell = False
         clsNewColNameDataframeFunction.SetRCommand("data.frame")
 
