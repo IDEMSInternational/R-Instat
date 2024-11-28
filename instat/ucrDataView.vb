@@ -159,6 +159,7 @@ Public Class ucrDataView
         End If
         EnableDisableUndoMenu()
         _grid.Focus()
+        frmMain.AutoSaveData()
     End Sub
 
     ''' <summary>

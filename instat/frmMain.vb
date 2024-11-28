@@ -217,9 +217,9 @@ Public Class frmMain
         '---------------------------------------
         'Do this after loading options because interval depends on options
         'Interval is in milliseconds and option is in minutes
-        timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
-        timer.Start()
-        AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
+        'timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
+        'timer.Start()
+        'AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
         '---------------------------------------
 
         '--------------------------------------
@@ -1163,6 +1163,9 @@ Public Class frmMain
         strCurrentStatus = tstatus.Text
         If clsRLink.bInstatObjectExists Then
             tstatus.Text = GetTranslation("Auto saving data...")
+
+            Application.DoEvents() ' Ensures the message is displayed immediately
+
             Cursor = Cursors.WaitCursor
             If Not Directory.Exists(strAutoSaveDataFolderPath) Then
                 Directory.CreateDirectory(strAutoSaveDataFolderPath)
