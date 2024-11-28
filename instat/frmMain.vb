@@ -1176,8 +1176,8 @@ Public Class frmMain
             strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
 
             Dim strBackupMessage As String = $"##########{vbCrLf}## Backing up data and log files on: {DateTime.Now}{vbCrLf}##########"
-            Me.ucrScriptWindow.LogText(strBackupMessage)
-            clsRLink.AppendToAutoSaveLog(strBackupMessage)
+            'Me.ucrScriptWindow.LogText(strBackupMessage)
+            'clsRLink.AppendToAutoSaveLog(strBackupMessage)
 
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)

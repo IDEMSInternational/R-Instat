@@ -159,7 +159,9 @@ Public Class ucrDataView
         End If
         EnableDisableUndoMenu()
         _grid.Focus()
-        frmMain.AutoSaveData()
+        If GetWorkSheetCount() <> 0 AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
+            frmMain.AutoSaveData()
+        End If
     End Sub
 
     ''' <summary>
