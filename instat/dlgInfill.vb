@@ -42,7 +42,6 @@ Public Class dlgInfill
         SetHelpOptions()
         bReset = False
         autoTranslate(Me)
-        AutoFillStation()
     End Sub
 
     Private Sub InitialiseDialog()
