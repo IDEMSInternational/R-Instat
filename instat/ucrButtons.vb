@@ -209,7 +209,7 @@ Public Class ucrButtons
 
         If clsRemoveFunc.clsParameters.Count > 0 Then
             If bRun Then
-                frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
+                frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0, bUpdateGrids:=False)
             Else
                 frmMain.AddToScriptWindow(clsRemoveFunc.ToScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If

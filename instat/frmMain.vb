@@ -217,9 +217,9 @@ Public Class frmMain
         '---------------------------------------
         'Do this after loading options because interval depends on options
         'Interval is in milliseconds and option is in minutes
-        timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
-        timer.Start()
-        AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
+        'timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
+        'timer.Start()
+        'AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
         '---------------------------------------
 
         '--------------------------------------
@@ -846,7 +846,7 @@ Public Class frmMain
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & Replace(strSaveFilePath, "\", "/") & Chr(34))
-            clsRLink.RunScript(clsSaveRDS.ToScript(), strComment:="File > Save: save file")
+            clsRLink.RunScript(clsSaveRDS.ToScript(), strComment:="File > Save: save file", bUpdateGrids:=False)
             bDataSaved = True
         End If
     End Sub
@@ -1163,6 +1163,9 @@ Public Class frmMain
         strCurrentStatus = tstatus.Text
         If clsRLink.bInstatObjectExists Then
             tstatus.Text = GetTranslation("Auto saving data...")
+
+            Application.DoEvents() ' Ensures the message is displayed immediately
+
             Cursor = Cursors.WaitCursor
             If Not Directory.Exists(strAutoSaveDataFolderPath) Then
                 Directory.CreateDirectory(strAutoSaveDataFolderPath)
@@ -2302,7 +2305,7 @@ Public Class frmMain
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsLastObjectRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
 
-        clsRLink.RunScript(clsViewObjectRFunction.ToScript(), strComment:="View last graph", bSeparateThread:=False)
+        clsRLink.RunScript(clsViewObjectRFunction.ToScript(), strComment:="View last graph", bSeparateThread:=False, bUpdateGrids:=False)
 
     End Sub
 
@@ -2323,7 +2326,7 @@ Public Class frmMain
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsPlotlyRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
 
-        clsRLink.RunScript(clsViewObjectRFunction.ToScript(), strComment:="View last graph as plotly", bSeparateThread:=False)
+        clsRLink.RunScript(clsViewObjectRFunction.ToScript(), strComment:="View last graph as plotly", bSeparateThread:=False, bUpdateGrids:=False)
 
     End Sub
 
@@ -2337,7 +2340,7 @@ Public Class frmMain
         clsPrintRFunction.SetRCommand("print")
         clsPrintRFunction.AddParameter("x", clsRFunctionParameter:=clsLastObjectRFunction, iPosition:=0)
 
-        clsRLink.RunScript(clsPrintRFunction.ToScript(), strComment:="View last graph in R viewer", bSeparateThread:=False)
+        clsRLink.RunScript(clsPrintRFunction.ToScript(), strComment:="View last graph in R viewer", bSeparateThread:=False, bUpdateGrids:=False)
 
     End Sub
 
