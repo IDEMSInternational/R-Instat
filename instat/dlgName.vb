@@ -95,9 +95,11 @@ Public Class dlgName
         ucrPnlCase.AddRadioButton(rdoAbbreviate, "abbreviate")
         ucrPnlCase.AddRadioButton(rdoReplace, "stringr::str_replace")
 
-        ucrPnlSelectData.SetParameter(New RParameter("checked", 1))
-        ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame, "whole")
-        ucrPnlSelectData.AddRadioButton(rdoSelectedColumn, "selected")
+
+        ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
+        ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
+        ucrPnlSelectData.AddParameterValuesCondition(rdoWholeDataFrame, "checked", "whole")
+        ucrPnlSelectData.AddParameterValuesCondition(rdoSelectedColumn, "checked", "selected")
 
         ucrReceiverColumns.SetParameter(New RParameter(".cols", 6))
         ucrReceiverColumns.Selector = ucrSelectVariables
@@ -592,7 +594,9 @@ Public Class dlgName
             rdoReplace.Visible = rdoWholeDataFrame.Checked
             If rdoWholeDataFrame.Checked Then
                 ucrReceiverColumns.Visible = False
+                clsDummyFunction.AddParameter("checked", "whole", iPosition:=1)
             Else
+                clsDummyFunction.AddParameter("checked", "selected", iPosition:=1)
                 ucrReceiverColumns.SetMeAsReceiver()
                 If rdoReplace.Checked Then
                     rdoMakeCleanNames.Checked = True
