@@ -180,7 +180,7 @@ Public Class dlgParallelCoordinatePlot
         clsGGParCoordFunc.SetRCommand("ggparcoord")
         clsGGParCoordFunc.AddParameter("columns", clsRFunctionParameter:=clsMatchFunction, iPosition:=1)
         clsGGParCoordFunc.AddParameter("missing", Chr(34) & "exclude" & Chr(34), iPosition:=6)
-        clsGGParCoordFunc.AddParameter("order", Chr(34) & "anyClass" & Chr(34), iPosition:=7)
+        'clsGGParCoordFunc.AddParameter("order", Chr(34) & "anyClass" & Chr(34), iPosition:=7)
         clsGGParCoordFunc.AddParameter("centerObsID", "1", iPosition:=8)
 
         clsBaseOperator.SetOperation("+")
@@ -444,4 +444,11 @@ Public Class dlgParallelCoordinatePlot
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
+        If Not ucrReceiverFactor.IsEmpty Then
+            clsGGParCoordFunc.AddParameter("order", Chr(34) & "anyClass" & Chr(34), iPosition:=7)
+        Else
+            clsGGParCoordFunc.RemoveParameterByName("order")
+        End If
+    End Sub
 End Class
