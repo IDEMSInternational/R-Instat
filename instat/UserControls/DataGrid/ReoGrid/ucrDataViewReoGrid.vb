@@ -87,8 +87,12 @@ Public Class ucrDataViewReoGrid
                 Dim strData As String = dataFrame.DisplayedData(i, j)
                 If strData IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
                     strData = GetTransformedLTColumnContents(strData)
+                ElseIf strData IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(G)") Then
+                    strData = "MULTIPOLYGON"
+                    grdData.CurrentWorksheet.GetCell(row:=i, col:=j).IsReadOnly = True
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
+
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = strRowNames(i)
             grdData.CurrentWorksheet.RowHeaders(i).TextColor = textColour
