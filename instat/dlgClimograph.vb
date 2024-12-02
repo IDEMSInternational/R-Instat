@@ -291,7 +291,7 @@ Public Class dlgClimograph
 
         ucrReceiverFacet.SetParameter(New RParameter("var1"))
         ucrReceiverFacet.Selector = ucrSelectorClimograph
-        ucrReceiverFacet.SetClimaticType("year")
+        ucrReceiverFacet.SetClimaticType("station")
         ucrReceiverFacet.bAutoFill = True
         ucrReceiverFacet.bWithQuotes = False
         ucrReceiverFacet.SetParameterIsString()
@@ -1500,7 +1500,7 @@ Public Class dlgClimograph
             Dim currentReceiver As ucrReceiver = ucrSelectorClimograph.CurrentReceiver
 
             If currentReceiver IsNot Nothing Then
-                ucrReceiverFacet.AddItemsWithMetadataProperty(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"year_label"})
+                ucrReceiverFacet.AddItemsWithMetadataProperty(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
                 currentReceiver.SetMeAsReceiver()
                 AddRemoveGroupBy1()
             End If
