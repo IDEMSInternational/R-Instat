@@ -109,7 +109,7 @@ Public Class dlgColumnStats
         clsConcFunction.SetRCommand("c")
 
         clsSummariesList.SetRCommand("c")
-        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False, iPosition:=11)
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
@@ -220,19 +220,32 @@ Public Class dlgColumnStats
         sdgMissingOptions.ShowDialog()
     End Sub
 
-    Private Sub ucrReceiverByFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlValueChanged, ucrChkStoreResults.ControlValueChanged, ucrChkPrintOutput.ControlValueChanged
-        If ucrReceiverByFactor.IsEmpty Then
-            clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=3)
-            clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
-            ucrBase.clsRsyntax.iCallType = 2
-        Else
-            clsDefaultFunction.RemoveParameterByName("return_output")
-            If ucrChkStoreResults.Checked Then
-                clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
+    Private Sub ucrReceiverByFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlValueChanged, ucrChkStoreResults.ControlValueChanged, ucrChkPrintOutput.ControlValueChanged, ucrReceiverSelectedVariables.ControlValueChanged, ucrChkOriginalLevel.ControlValueChanged
+        If Not ucrChkOriginalLevel.Checked Then
+            If ucrReceiverByFactor.IsEmpty AndAlso Not ucrReceiverSelectedVariables.IsEmpty Then
+                clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=3)
+                clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
+                ucrBase.clsRsyntax.iCallType = 2
+            Else
+                clsDefaultFunction.RemoveParameterByName("return_output")
+                If ucrChkStoreResults.Checked Then
+                    clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
+                Else
+                    clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=3)
+                End If
+                If ucrChkPrintOutput.Checked Then
+                    clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
+                Else
+                    clsDefaultFunction.AddParameter("return_output", "FALSE", iPosition:=4)
+                End If
             End If
+        Else
             If ucrChkPrintOutput.Checked Then
                 clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
+            Else
+                clsDefaultFunction.RemoveParameterByName("return_output")
             End If
+            clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
         End If
     End Sub
 
