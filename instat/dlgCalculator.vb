@@ -184,10 +184,12 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.AddToAfterCodes(clsRemoveLabelsFunction, 3)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
+            ucrBase.bUpdateGrids = True
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRemoveLabelsFunction)
             ucrBase.clsRsyntax.RemoveAssignTo()
             ucrBase.clsRsyntax.iCallType = 5
+            ucrBase.bUpdateGrids = False
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
         ManageScalarStorage()

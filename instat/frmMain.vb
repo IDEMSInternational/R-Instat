@@ -846,7 +846,7 @@ Public Class frmMain
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & Replace(strSaveFilePath, "\", "/") & Chr(34))
-            clsRLink.RunScript(clsSaveRDS.ToScript(), strComment:="File > Save: save file")
+            clsRLink.RunScript(clsSaveRDS.ToScript(), strComment:="File > Save: save file", bUpdateGrids:=False)
             bDataSaved = True
         End If
     End Sub
@@ -1176,8 +1176,8 @@ Public Class frmMain
             strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
 
             Dim strBackupMessage As String = $"##########{vbCrLf}## Backing up data and log files on: {DateTime.Now}{vbCrLf}##########"
-            'Me.ucrScriptWindow.LogText(strBackupMessage)
-            'clsRLink.AppendToAutoSaveLog(strBackupMessage)
+            Me.ucrScriptWindow.LogText(strBackupMessage)
+            clsRLink.AppendToAutoSaveLog(strBackupMessage)
 
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
@@ -2305,7 +2305,7 @@ Public Class frmMain
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsLastObjectRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
 
-        clsRLink.RunScript(clsViewObjectRFunction.ToScript(), strComment:="View last graph", bSeparateThread:=False)
+        clsRLink.RunScript(clsViewObjectRFunction.ToScript(), strComment:="View last graph", bSeparateThread:=False, bUpdateGrids:=False)
 
     End Sub
 
@@ -2326,7 +2326,7 @@ Public Class frmMain
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsPlotlyRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
 
-        clsRLink.RunScript(clsViewObjectRFunction.ToScript(), strComment:="View last graph as plotly", bSeparateThread:=False)
+        clsRLink.RunScript(clsViewObjectRFunction.ToScript(), strComment:="View last graph as plotly", bSeparateThread:=False, bUpdateGrids:=False)
 
     End Sub
 
@@ -2340,7 +2340,7 @@ Public Class frmMain
         clsPrintRFunction.SetRCommand("print")
         clsPrintRFunction.AddParameter("x", clsRFunctionParameter:=clsLastObjectRFunction, iPosition:=0)
 
-        clsRLink.RunScript(clsPrintRFunction.ToScript(), strComment:="View last graph in R viewer", bSeparateThread:=False)
+        clsRLink.RunScript(clsPrintRFunction.ToScript(), strComment:="View last graph in R viewer", bSeparateThread:=False, bUpdateGrids:=False)
 
     End Sub
 

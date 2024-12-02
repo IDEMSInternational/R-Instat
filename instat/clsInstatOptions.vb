@@ -363,7 +363,7 @@ Imports RDotNet
         End If
 
         frmMain.clsRLink.RunScript(clsOptionsFunction.ToScript(),
-                                   strComment:="Setting display options (e.g Number of significant digits)")
+                                   strComment:="Setting display options (e.g Number of significant digits)", bUpdateGrids:=False)
 
     End Sub
 

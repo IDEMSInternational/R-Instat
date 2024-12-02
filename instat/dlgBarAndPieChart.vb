@@ -135,6 +135,7 @@ Public Class dlgBarAndPieChart
         Dim dctLegendPosition As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.bUpdateGrids = False
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 438
 

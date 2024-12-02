@@ -20,6 +20,7 @@ Public Class ucrButtons
     Public clsRsyntax As RSyntax
     Public iHelpTopicID As Integer
     Public bFirstLoad As Boolean
+    Public bUpdateGrids As Boolean = True
 
     ''' <summary>
     ''' When set to true, scripts will be appended at the current cursor position of the script window
@@ -154,7 +155,7 @@ Public Class ucrButtons
                 strComment = ""
             End If
             If bRun Then
-                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
+                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bUpdateGrids:=bUpdateGrids)
             Else
                 frmMain.AddToScriptWindow(lstBeforeScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
@@ -168,7 +169,7 @@ Public Class ucrButtons
             Else
                 strComment = ""
             End If
-            frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
+            frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bUpdateGrids:=bUpdateGrids)
         Else
             frmMain.AddToScriptWindow(clsRsyntax.GetScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
@@ -209,7 +210,7 @@ Public Class ucrButtons
 
         If clsRemoveFunc.clsParameters.Count > 0 Then
             If bRun Then
-                frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
+                frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0, bUpdateGrids:=False)
             Else
                 frmMain.AddToScriptWindow(clsRemoveFunc.ToScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
