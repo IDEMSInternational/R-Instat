@@ -957,7 +957,6 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
         if(self$column_selection_applied()) self$remove_current_column_selection()
         # Need to use private$data here because changing names of data field
         names(private$data)[names(private$data) == curr_col_name] <- new_col_name
-        
         if(any(c("sfc", "sfc_MULTIPOLYGON") %in% class(private$data[[curr_col_name]]))){
           # Update the geometry column reference
           sf::st_geometry(private$data) <- new_col_name
