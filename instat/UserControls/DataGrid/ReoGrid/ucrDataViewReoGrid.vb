@@ -90,13 +90,10 @@ Public Class ucrDataViewReoGrid
                 If strData IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
                     strData = GetTransformedLTColumnContents(strData)
                 ElseIf strData IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(G)") Then
-                    strData = "MULTIPOLYGON"
+                    strData = ShortenString(strData)
                     grdData.CurrentWorksheet.GetCell(row:=i, col:=j).IsReadOnly = True
-
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
-
-
             Next
             grdData.CurrentWorksheet.RowHeaders.Item(i).Text = strRowNames(i)
             grdData.CurrentWorksheet.RowHeaders(i).TextColor = textColour
@@ -107,12 +104,6 @@ Public Class ucrDataViewReoGrid
             End If
         Next
 
-
-        AddHandler grdData.CurrentWorksheet.CellMouseDown, Sub(sender As Object, e As unvell.ReoGrid.Events.CellMouseEventArgs)
-                                                               If e.Cell IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(e.Cell.Column).Text.Contains("(G)") Then
-                                                                   toolTip1.SetToolTip(grdData, ShortenString(dataFrame.DisplayedData(e.Cell.Row, e.Cell.Column)))
-                                                               End If
-                                                           End Sub
 
         If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
@@ -127,7 +118,7 @@ Public Class ucrDataViewReoGrid
     End Sub
 
     Private Function ShortenString(strText As String) As String
-        Dim maxLength As Integer = 50
+        Dim maxLength As Integer = 30
         If strText.Length > maxLength Then
             ' Trim the string to the specified length and add ellipsis
             Return strText.Substring(0, maxLength) & "..."
