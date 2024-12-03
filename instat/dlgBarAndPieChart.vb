@@ -178,12 +178,6 @@ Public Class dlgBarAndPieChart
         ucrReceiverX.bWithQuotes = False
         ucrReceiverX.SetParameterIsString()
 
-        ucrChkBinWidth.SetText("Binwidth")
-        ucrChkBinWidth.AddToLinkedControls({ucrInputWidth}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
-
-        ucrInputWidth.SetParameter(New RParameter("binwidth", 3))
-        ucrInputWidth.SetValidationTypeAsNumeric()
-
         ucrReceiverByFactor.Selector = ucrBarChartSelector
         ucrReceiverByFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverByFactor.strSelectorHeading = "Factors"
@@ -307,6 +301,12 @@ Public Class dlgBarAndPieChart
         ucrNudLollipopSize.Minimum = 1
         ucrNudLollipopSize.Maximum = 15
 
+        ucrChkBinWidth.SetText("Binwidth")
+        ucrChkBinWidth.AddToLinkedControls({ucrInputWidth}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
+
+        ucrInputWidth.SetParameter(New RParameter("binwidth", 3))
+        ucrInputWidth.SetValidationTypeAsNumeric()
+
         ucrChkLollipop.SetText("Lollipop")
         ucrChkLollipop.AddParameterPresentCondition(True, "geom_lollipop")
         ucrChkLollipop.AddParameterPresentCondition(False, "geom_lollipop", False)
@@ -395,7 +395,6 @@ Public Class dlgBarAndPieChart
         ucrChkIncreaseSize.AddToLinkedControls(ucrNudMaxSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=20)
         ucrChkIncreaseSize.AddParameterPresentCondition(True, "max_size")
         ucrChkIncreaseSize.AddParameterPresentCondition(False, "max_size", False)
-        HideShowWidth()
     End Sub
 
     Private Sub SetDefaults()
@@ -687,6 +686,7 @@ Public Class dlgBarAndPieChart
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputWidth.SetRCode(clsRgeomBarFunction, bReset)
+
         If bReset Then
             ucrChkStart.SetRCode(clsGeomTreemapFunction, bReset)
             ucrChkLayout.SetRCode(clsGeomTreemapFunction, bReset)
@@ -1276,6 +1276,7 @@ Public Class dlgBarAndPieChart
         ChangeParameterName()
         AddStatsParm()
         HideShowWidth()
+
         If rdoTreeMap.Checked Then
             ucrReceiverArea.SetMeAsReceiver()
         ElseIf rdoWordCloud.Checked Then
@@ -1411,112 +1412,29 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrChkBinWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBinWidth.ControlValueChanged, ucrInputWidth.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged
-        Dim isNumeric As Boolean = False
-
-        ' Check for ucrSingleVariable
-        If Not ucrVariablesAsFactorForBarChart.IsEmpty AndAlso
-       ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric" Then
-            isNumeric = True
-        End If
-
-        ' Check for ucrMultipleVariables if ucrSingleVariable is not numeric
-        If Not isNumeric AndAlso Not ucrVariablesAsFactorForBarChart.ucrMultipleVariables.IsEmpty Then
-            Dim itemTypes As List(Of String) = ucrVariablesAsFactorForBarChart.ucrMultipleVariables.GetCurrentItemTypes()
-            If itemTypes.Count > 0 AndAlso itemTypes(0).ToLower() = "numeric" Then
-                isNumeric = True
-            End If
-        End If
-
-        ' Adjust the binwidth parameter based on the numeric check
-        If ucrChkBinWidth.Checked AndAlso isNumeric Then
+        If ucrChkBinWidth.Checked AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric" Then
             clsRgeomBarFunction.AddParameter("binwidth", ucrInputWidth.GetText, iPosition:=4)
         Else
             clsRgeomBarFunction.RemoveParameterByName("binwidth")
         End If
-
-        ' Call the auxiliary methods
         AddStatsParm()
         HideShowWidth()
     End Sub
 
     Private Sub HideShowWidth()
-        ' Always reset visibility first before checking conditions
-        'ucrChkBinWidth.Visible = False
-        'ucrInputWidth.Visible = False
-
-        ' Initialize visibility flags for single and multiple variables
-        Dim singleVariableVisible As Boolean = False
-        Dim multipleVariablesVisible As Boolean = False
-
-        ' Handle Single Variable mode
-        If Not ucrVariablesAsFactorForBarChart.IsEmpty AndAlso
-       Not ucrVariablesAsFactorForBarChart.ucrSingleVariable.IsEmpty Then
-            ' Check if the single variable's data type is numeric
-            If ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric" Then
-                singleVariableVisible = True
-            End If
-        End If
-
-        ' Handle Multiple Variables mode
-        If Not ucrVariablesAsFactorForBarChart.IsEmpty AndAlso
-       Not ucrVariablesAsFactorForBarChart.ucrMultipleVariables.IsEmpty Then
-            ' Get the types of variables from the multiple selector
-            Dim itemTypes As List(Of String) = ucrVariablesAsFactorForBarChart.ucrMultipleVariables.GetCurrentItemTypes()
-
-            ' If the first variable is numeric, show the controls
-            If itemTypes.Count > 0 AndAlso itemTypes(0).ToLower() = "numeric" Then
-                multipleVariablesVisible = True
-            End If
-        End If
-
-        ' Handle visibility independently for single and multiple variable modes
-
-        ' Single Variable Mode Visibility
-        If singleVariableVisible Then
+        ucrChkBinWidth.Visible = False
+        ucrInputWidth.Visible = False
+        If rdoFrequency.Checked AndAlso (Not ucrVariablesAsFactorForBarChart.IsEmpty AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric") Then
             ucrChkBinWidth.Visible = True
             ucrInputWidth.Visible = ucrChkBinWidth.Checked
         Else
             ucrChkBinWidth.Visible = False
-
-        End If
-
-        ' Multiple Variables Mode Visibility
-        If multipleVariablesVisible Then
-            ucrChkBinWidth.Visible = True
-            ucrInputWidth.Visible = ucrChkBinWidth.Checked
-        Else
-            ucrChkBinWidth.Visible = False
+            ucrInputWidth.Visible = False
         End If
     End Sub
 
-
-    'Private Sub AddStatsParm()
-    '    If rdoFrequency.Checked AndAlso ucrChkBinWidth.Checked AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric" Then
-    '        clsRgeomBarFunction.AddParameter("stat", Chr(34) & "bin" & Chr(34), iPosition:=1)
-    '    Else
-    '        clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
-    '    End If
-    'End Sub
-
     Private Sub AddStatsParm()
-        ' Variable to track whether to use "bin" or "count"
-        Dim isNumeric As Boolean = False
-
-        ' Check for ucrSingleVariable case
-        If Not ucrVariablesAsFactorForBarChart.IsEmpty AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric" Then
-            isNumeric = True
-        End If
-
-        ' Check for ucrMultipleVariables case if ucrSingleVariable is not applicable
-        If Not isNumeric AndAlso Not ucrVariablesAsFactorForBarChart.ucrMultipleVariables.IsEmpty Then
-            Dim itemTypes As List(Of String) = ucrVariablesAsFactorForBarChart.ucrMultipleVariables.GetCurrentItemTypes()
-            If itemTypes.Count > 0 AndAlso itemTypes(0).ToLower() = "numeric" Then
-                isNumeric = True
-            End If
-        End If
-
-        ' Set the "stat" parameter based on the numeric check
-        If rdoFrequency.Checked AndAlso ucrChkBinWidth.Checked AndAlso isNumeric Then
+        If rdoFrequency.Checked AndAlso ucrChkBinWidth.Checked AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric" Then
             clsRgeomBarFunction.AddParameter("stat", Chr(34) & "bin" & Chr(34), iPosition:=1)
         Else
             clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
