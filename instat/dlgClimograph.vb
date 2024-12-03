@@ -978,7 +978,7 @@ Public Class dlgClimograph
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        UpdateParameters()
+        UpdateParametersForStation()
         TestOKEnabled()
     End Sub
 
@@ -1100,12 +1100,12 @@ Public Class dlgClimograph
                 ucrInputFacet.SetName(strNone1)
             End If
         End If
-        UpdateParameters1()
+        UpdateParametersForStationClimograph()
         AddRemoveFacets1()
         AddRemoveGroupBy1()
     End Sub
 
-    Private Sub UpdateParameters1()
+    Private Sub UpdateParametersForStationClimograph()
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp1.RemoveParameterByName("col" & ucrInputFacet.Name)
         clsFacetRowOp1.RemoveParameterByName("row" & ucrInputFacet.Name)
@@ -1148,13 +1148,13 @@ Public Class dlgClimograph
                 ucrInputFacetBar.SetName(strNone2)
             End If
         End If
-        UpdateParameters2()
+        UpdateParametersForFacetBar()
         AddRemoveFacets2()
         AddRemoveGroupBy2()
         AddRemoveTemBars()
     End Sub
 
-    Private Sub UpdateParameters2()
+    Private Sub UpdateParametersForFacetBar()
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp2.RemoveParameterByName("col" & ucrInputFacetBar.Name)
         clsFacetRowOp2.RemoveParameterByName("row" & ucrInputFacetBar.Name)
@@ -1403,12 +1403,12 @@ Public Class dlgClimograph
                 ucrInputStation.SetName(strNone)
             End If
         End If
-        UpdateParameters()
+        UpdateParametersForStation()
         AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
 
-    Private Sub UpdateParameters()
+    Private Sub UpdateParametersForStation()
         clsFacetOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
@@ -1530,52 +1530,6 @@ Public Class dlgClimograph
         AutoFillReceivers(lstTmaxReceivers)
         AutoFillReceivers(lstTminReceivers)
         AutoFillReceivers(lstTminminReceivers)
-    End Sub
-
-    Private Sub AutoFillRainReceivers()
-        If isFilling Then
-            Exit Sub
-        End If
-        isFilling = True
-
-        ' Temporarily remove the event handler
-        RemoveHandler ucrSelectorClimograph.ControlValueChanged, AddressOf AutoFillRainReceivers
-
-        Dim lstRecognisedValues As List(Of String)
-        Dim ucrCurrentReceiver As ucrReceiver
-        Dim bFound As Boolean = False
-
-        ucrCurrentReceiver = ucrSelectorClimograph.CurrentReceiver
-
-        For Each ucrTempReceiver As ucrReceiver In lstRainReceivers
-            ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
-
-            If lstRecognisedValues.Count > 0 Then
-                For Each lviTempVariable As ListViewItem In ucrSelectorClimograph.lstAvailableVariable.Items
-                    For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
-                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                            bFound = True
-                            Exit For
-                        End If
-                    Next
-                    If bFound Then
-                        bFound = False
-                        Exit For
-                    End If
-                Next
-            End If
-        Next
-
-        If ucrCurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver.SetMeAsReceiver()
-        End If
-
-        ' Re-enable the event handler
-        AddHandler ucrSelectorClimograph.ControlValueChanged, AddressOf AutoFillRainReceivers
-
-        isFilling = False
     End Sub
 
     Private Sub GetParameterValue(clsOperator As ROperator)
