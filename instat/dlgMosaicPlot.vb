@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class dlgMosaicPlot
     Private clsGgplotFunction As New RFunction
     Private clsMosaicGeomFunction, clsMosaicJitterFunction, clsMosaicTextFunction As New RFunction
-    Private clsAesFunction As New RFunction
+    Private clsAesFunction, clsLocalAesjitterFunction, clsProductFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsLocalAesFunction As New RFunction
 
@@ -188,6 +188,8 @@ Public Class dlgMosaicPlot
         clsMosaicTextFunction = New RFunction
         clsAesFunction = New RFunction
         clsLocalAesFunction = New RFunction
+        clsLocalAesjitterFunction = New RFunction
+        clsProductFunction = New RFunction
 
         clsXElementLabels = New RFunction
 
@@ -217,7 +219,11 @@ Public Class dlgMosaicPlot
 
         clsMosaicJitterFunction.SetPackageName("ggmosaic")
         clsMosaicJitterFunction.SetRCommand("geom_mosaic_jitter")
-        'clsMosaicJitterFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesFunction, iPosition:=1)
+        clsMosaicJitterFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesjitterFunction, iPosition:=1)
+
+        clsLocalAesjitterFunction.SetRCommand("aes")
+        clsLocalAesjitterFunction.AddParameter("x", clsRFunctionParameter:=clsProductFunction, iPosition:=1)
+        clsLocalAesjitterFunction.AddParameter("conds", clsRFunctionParameter:=clsProductFunction, iPosition:=2)
 
         clsMosaicTextFunction.SetPackageName("ggmosaic")
         clsMosaicTextFunction.SetRCommand("geom_mosaic_text")
@@ -281,6 +287,10 @@ Public Class dlgMosaicPlot
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
+
+        ucrReceiverFill.AddAdditionalCodeParameterPair(clsProductFunction, New RParameter("fill", iNewPosition:=0), iAdditionalPairNo:=1)
+        ucrReceiverX.AddAdditionalCodeParameterPair(clsProductFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
+        ucrReceiverConditions.AddAdditionalCodeParameterPair(clsProductFunction, New RParameter("conds", iNewPosition:=0), iAdditionalPairNo:=1)
 
         ucrSelectorMosaicPlot.SetRCode(clsGgplotFunction, bReset)
         If bReset Then
@@ -557,7 +567,7 @@ Public Class dlgMosaicPlot
     End Sub
 
     Private Sub toolStripMenuItemMosaicOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemMosaicOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicGeomFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicGeomFunction, clsNewGlobalAesFunc:=clsLocalAesFunction, clsNewLocalAes:=clsAesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
         ' sdgLayerOptions.tbcLayers.SelectedTab = sdgLayerOptions.tbpGeomParameters
         'sdgLayerOptions.tbpAesthetics.Enabled = False
         sdgLayerOptions.ShowDialog()
@@ -580,7 +590,7 @@ Public Class dlgMosaicPlot
     '    For Each clsParam In clsAesFunction.clsParameters
     '        If clsParam.strArgumentName = "x" Then
     '            If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-    '                ' ucrReceiverX.Clear()
+    '                ucrReceiverX.Clear()
     '            Else
     '                ucrReceiverX.Add(clsParam.strArgumentValue)
     '            End If
@@ -608,7 +618,7 @@ Public Class dlgMosaicPlot
 
     Private Sub ToolStripMenuItemMosaicJitter_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMosaicJitter.Click
         'openSdgLayerOptions(clsMosaicJitterFunction)
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicJitterFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicJitterFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesjitterFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
         'sdgLayerOptions.tbcLayers.SelectedTab = sdgLayerOptions.tbpGeomParameters
         'sdgLayerOptions.tbpAesthetics.Enabled = False
         sdgLayerOptions.ShowDialog()
