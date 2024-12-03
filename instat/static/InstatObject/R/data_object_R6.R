@@ -956,11 +956,12 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
         }
         if(self$column_selection_applied()) self$remove_current_column_selection()
         # Need to use private$data here because changing names of data field
-        names(private$data)[names(private$data) == curr_col_name] <- new_col_name
         if(any(c("sfc", "sfc_MULTIPOLYGON") %in% class(private$data[[curr_col_name]]))){
           # Update the geometry column reference
           sf::st_geometry(private$data) <- new_col_name
         } 
+        names(private$data)[names(private$data) == curr_col_name] <- new_col_name
+        
         self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
         # TODO decide if we need to do these 2 lines
         self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
@@ -980,11 +981,12 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       curr_col_names[cols_changed_index] <- new_col_names
       if(any(duplicated(curr_col_names))) stop("Cannot rename columns. Column names must be unique.")
       if(self$column_selection_applied()) self$remove_current_column_selection()
-      names(private$data)[cols_changed_index] <- new_col_names
       if(any(c("sfc", "sfc_MULTIPOLYGON") %in% class(private$dataprivate$data)[cols_changed_index])){
         # Update the geometry column reference
         sf::st_geometry(private$data) <- new_col_names
       } 
+      names(private$data)[cols_changed_index] <- new_col_names
+      
       for (i in seq_along(cols_changed_index)) {
         self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
       }
@@ -1015,10 +1017,6 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
     new_col_names <- names(private$data)
     if (!all(new_col_names %in% curr_col_names)) {
       new_col_names <- new_col_names[!(new_col_names %in% curr_col_names)]
-      if(any(c("sfc", "sfc_MULTIPOLYGON") %in% class(private$data[[current_geom_col]]))){
-        # Update the geometry column reference
-        sf::st_geometry(private$data) <- new_col_names
-      }
       for (i in seq_along(new_col_names)) {
         self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
       }
