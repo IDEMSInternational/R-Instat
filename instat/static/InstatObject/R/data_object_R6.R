@@ -1019,7 +1019,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
     new_metadata <- curr_metadata |>
     dplyr::mutate(
         dplyr::across(
-            {{ .cols }},
+            Name,
             ~ .fn(., ...)
         )
     )
