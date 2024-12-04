@@ -539,7 +539,6 @@ Public Class dlgDescribeTwoVariable
         ucrSaveTable.AddAdditionalRCode(clsGroupByPipeOperator4, iAdditionalPairNo:=2)
 
         ucrChkOmitMissing.SetRCode(clsSummaryTableFunction, bReset)
-        ucrReceiverFirstVars.SetRCode(clsDummyFunction, bReset)
         ucrReceiverSecondTwoVariableFactor.SetRCode(clsDummyFunction, bReset)
         ucrSelectorDescribeTwoVar.SetRCode(clsRCorrelationFunction, bReset)
         ucrReceiverSkimrGroupByFactor.SetRCode(clsGroupByFunction, bReset)
@@ -558,6 +557,9 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverThreeVariableThirdVariable.SetRCode(clsSummaryTableCombineFactorsFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsCombineFrequencyParametersFunction, bReset)
         ucrSaveTable.SetRCode(clsGroupByPipeOperator, bReset)
+        If bReset Then
+            ucrReceiverFirstVars.SetRCode(clsDummyFunction, bReset)
+        End If
         bRcodeSet = True
 
         FillListView()
@@ -1436,8 +1438,11 @@ Public Class dlgDescribeTwoVariable
             Else
                 ucrReceiverFirstVars.SetMeAsReceiver()
             End If
+        ElseIf rdoSkim.Checked Then
+            ucrReceiverFirstVars.SetMeAsReceiver()
         Else
             ucrReceiverFirstVars.SetMeAsReceiver()
+
         End If
         If rdoORow.Checked OrElse rdoOCell.Checked Then
             If ucrChkDisplayMargins.Checked Then

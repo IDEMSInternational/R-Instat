@@ -574,7 +574,7 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSkimrGroupByFactor.Selector = Nothing
         Me.ucrReceiverSkimrGroupByFactor.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverSkimrGroupByFactor.strNcFilePath = ""
-        Me.ucrReceiverSkimrGroupByFactor.TabIndex = 2
+        Me.ucrReceiverSkimrGroupByFactor.TabIndex = 8
         Me.ucrReceiverSkimrGroupByFactor.ucrSelector = Nothing
         '
         'ucrChkDisplayMargins
