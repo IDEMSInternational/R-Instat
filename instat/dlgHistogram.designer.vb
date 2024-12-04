@@ -56,7 +56,6 @@ Partial Class dlgHistogram
         Me.ucrNudMinHeight = New instat.ucrNud()
         Me.ucrChkMinHeight = New instat.ucrCheck()
         Me.ucrChkOmitYAxis = New instat.ucrCheck()
-        Me.ucrNudBinwidth = New instat.ucrNud()
         Me.ucrChkBinWidth = New instat.ucrCheck()
         Me.ucrInputStation = New instat.ucrInputComboBox()
         Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
@@ -74,6 +73,7 @@ Partial Class dlgHistogram
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrInputWidth = New instat.ucrInputTextBox()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -240,19 +240,6 @@ Partial Class dlgHistogram
         Me.ucrChkOmitYAxis.Name = "ucrChkOmitYAxis"
         Me.ucrChkOmitYAxis.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkOmitYAxis.TabIndex = 42
-        '
-        'ucrNudBinwidth
-        '
-        Me.ucrNudBinwidth.AutoSize = True
-        Me.ucrNudBinwidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudBinwidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBinwidth.Location = New System.Drawing.Point(139, 262)
-        Me.ucrNudBinwidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudBinwidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudBinwidth.Name = "ucrNudBinwidth"
-        Me.ucrNudBinwidth.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudBinwidth.TabIndex = 41
-        Me.ucrNudBinwidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkBinWidth
         '
@@ -439,14 +426,26 @@ Partial Class dlgHistogram
         Me.ucrPnlOptions.Size = New System.Drawing.Size(433, 30)
         Me.ucrPnlOptions.TabIndex = 0
         '
+        'ucrInputWidth
+        '
+        Me.ucrInputWidth.AddQuotesIfUnrecognised = True
+        Me.ucrInputWidth.AutoSize = True
+        Me.ucrInputWidth.IsMultiline = False
+        Me.ucrInputWidth.IsReadOnly = False
+        Me.ucrInputWidth.Location = New System.Drawing.Point(139, 262)
+        Me.ucrInputWidth.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputWidth.Name = "ucrInputWidth"
+        Me.ucrInputWidth.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputWidth.TabIndex = 92
+        '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(448, 461)
+        Me.Controls.Add(Me.ucrInputWidth)
         Me.Controls.Add(Me.ucrNudMinHeight)
-        Me.Controls.Add(Me.ucrNudBinwidth)
         Me.Controls.Add(Me.ucrChkOmitYAxis)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucr1stFactorReceiver)
@@ -512,7 +511,6 @@ Partial Class dlgHistogram
     Friend WithEvents ucrInputAddReorder As ucrInputComboBox
 
     Friend WithEvents ucrChkBinWidth As ucrCheck
-    Friend WithEvents ucrNudBinwidth As ucrNud
     Friend WithEvents ucrChkOmitYAxis As ucrCheck
     Friend WithEvents ucrNudMinHeight As ucrNud
     Friend WithEvents ucrChkMinHeight As ucrCheck
@@ -522,5 +520,5 @@ Partial Class dlgHistogram
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
-
+    Friend WithEvents ucrInputWidth As ucrInputTextBox
 End Class
