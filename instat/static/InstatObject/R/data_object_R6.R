@@ -1011,6 +1011,25 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       self$data_changed <- TRUE
       self$variables_metadata_changed <- TRUE
     }
+  } else if (type == "rename_labels"){
+    # to rename column labels. Here, instead of renaming a column name, we're giving new values in a column.
+    curr_metadata <- self$get_variables_metadata()
+    curr_col_names <- names(curr_data)
+    
+    new_metadata <- curr_metadata |>
+    dplyr::mutate(
+        dplyr::across(
+            {{ .cols }},
+            ~ .fn(., ...)
+        )
+    )
+    if(self$column_selection_applied()) self$remove_current_column_selection()
+    new_label_names <- new_metadata[!("Name" %in% curr_col_names)]$label
+    for (i in seq_along(new_label_names)) {
+        self$append_to_variables_metadata(curr_col_names[i], property = "label", new_val = new_label_names[i])
+    }
+    self$data_changed <- TRUE
+    self$variables_metadata_changed <- TRUE
   }
 })
 
