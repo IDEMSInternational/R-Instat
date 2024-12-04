@@ -80,11 +80,17 @@ Public Class dlgName
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
 
         ucrPnlOptions.SetParameter(New RParameter("type", 4))
-        ucrPnlOptions.AddRadioButton(rdoSingle, Chr(34) & "single" & Chr(34))
-        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
-        ucrPnlOptions.AddRadioButton(rdoRenameWith, Chr(34) & "rename_with" & Chr(34))
-        ucrPnlOptions.AddRadioButton(rdoLabels, Chr(34) & "labels_with" & Chr(34))
-        ucrPnlOptions.SetRDefault(Chr(34) & "single" & Chr(34))
+        ucrPnlOptions.AddRadioButton(rdoSingle)
+        ucrPnlOptions.AddRadioButton(rdoMultiple)
+        ucrPnlOptions.AddRadioButton(rdoRenameWith)
+        ucrPnlOptions.AddRadioButton(rdoLabels)
+        ucrPnlOptions.AddParameterValuesCondition(rdoSingle, "name", "single")
+        ucrPnlOptions.AddParameterValuesCondition(rdoMultiple, "name", "multiple")
+        ucrPnlOptions.AddParameterValuesCondition(rdoRenameWith, "name", "rename")
+        ucrPnlOptions.AddParameterValuesCondition(rdoLabels, "name", "labels")
+
+
+        'ucrPnlOptions.SetRDefault(Chr(34) & "single" & Chr(34))
 
         ucrNudAbbreviate.SetParameter(New RParameter("minlength", 10))
         ucrNudAbbreviate.SetMinMax(Integer.MinValue, Integer.MaxValue)
@@ -183,6 +189,7 @@ Public Class dlgName
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
         clsDummyFunction.AddParameter("checked", "whole", iPosition:=1)
+        clsDummyFunction.AddParameter("name", "single", iPosition:=2)
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
@@ -223,12 +230,12 @@ Public Class dlgName
             ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
             ucrInputReplace.SetRCode(clsDefaultRFunction, bReset)
             ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
+            ucrPnlSelectData.SetRCode(clsDummyFunction, bReset)
+            ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
         End If
         ucrInputCase.SetRCode(clsDefaultRFunction, bReset)
         ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
-        ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
         ucrInputBy.SetRCode(clsDefaultRFunction, bReset)
-        ucrPnlSelectData.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -584,8 +591,13 @@ Public Class dlgName
                 End If
             End If
         End If
-        ucrSelectVariables.lstAvailableVariable.Visible = rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked)
-        ucrSelectVariables.lstAvailableVariable.Visible = rdoSingle.Checked OrElse (rdoLabels.Checked AndAlso rdoSelectedColumn.Checked)
+
+        ucrSelectVariables.lstAvailableVariable.Visible = rdoSingle.Checked OrElse
+    (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked) OrElse
+    (rdoLabels.Checked AndAlso rdoSelectedColumn.Checked)
+
+        'ucrSelectVariables.lstAvailableVariable.Visible = rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked)
+        'ucrSelectVariables.lstAvailableVariable.Visible = rdoSingle.Checked OrElse (rdoLabels.Checked AndAlso rdoSelectedColumn.Checked)
         ucrSelectVariables.btnAdd.Visible = ucrSelectVariables.lstAvailableVariable.Visible
         ucrSelectVariables.btnDataOptions.Visible = ucrSelectVariables.lstAvailableVariable.Visible
         UpdateGrid()
