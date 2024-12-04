@@ -39,6 +39,8 @@ Public Class ucrDataViewReoGrid
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
 
+    Private toolTip1 As New ToolTip()
+
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
         Dim workSheetColumnHeader As ColumnHeader
         Dim variableTextColour As Color
@@ -87,6 +89,9 @@ Public Class ucrDataViewReoGrid
                 Dim strData As String = dataFrame.DisplayedData(i, j)
                 If strData IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(LT)") Then
                     strData = GetTransformedLTColumnContents(strData)
+                ElseIf strData IsNot Nothing AndAlso grdData.CurrentWorksheet.ColumnHeaders.Item(j).Text.Contains("(G)") Then
+                    strData = ShortenString(strData)
+                    grdData.CurrentWorksheet.GetCell(row:=i, col:=j).IsReadOnly = True
                 End If
                 grdData.CurrentWorksheet(row:=i, col:=j) = strData
             Next
@@ -99,6 +104,7 @@ Public Class ucrDataViewReoGrid
             End If
         Next
 
+
         If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
         End If
@@ -110,6 +116,15 @@ Public Class ucrDataViewReoGrid
         'TODO. Note , the text length may not always reflect the correct pixel to use. See comments in issue #7221 
         grdData.CurrentWorksheet.RowHeaderWidth = TextRenderer.MeasureText(strLongestRowHeaderText, Me.Font).Width
     End Sub
+
+    Private Function ShortenString(strText As String) As String
+        Dim maxLength As Integer = 30
+        If strText.Length > maxLength Then
+            ' Trim the string to the specified length and add ellipsis
+            Return strText.Substring(0, maxLength) & "..."
+        End If
+        Return strText
+    End Function
 
     ''' <summary>
     ''' Transforms contents of LT column(s) that have structured R-like data into a more readable and user-friendly format that is consistent with R Viewer.
