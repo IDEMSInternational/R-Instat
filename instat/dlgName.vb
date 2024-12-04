@@ -189,7 +189,8 @@ Public Class dlgName
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
         clsDummyFunction.AddParameter("checked", "whole", iPosition:=1)
-        clsDummyFunction.AddParameter("name", "single", iPosition:=2)
+        clsDummyFunction.AddParameter("name", "single", iPosition:=1)
+
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
