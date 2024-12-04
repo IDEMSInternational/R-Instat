@@ -1014,16 +1014,20 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
   } else if (type == "rename_labels"){
     # to rename column labels. Here, instead of renaming a column name, we're giving new values in a column.
     curr_metadata <- self$get_variables_metadata()
-    curr_col_names <- names(curr_data)
-    
+    curr_col_names <- names(curr_data %>% dplyr::select(.cols))
+
+    # create a new data frame containing the changes - but only apply to those that we actually plan to change for efficiency.
     new_metadata <- curr_metadata |>
+    dplyr::filter(Name %in% curr_col_names) %>%
     dplyr::mutate(
         dplyr::across(
-            {{ .cols }},
+            label,
             ~ .fn(., ...)
         )
     )
+
     if(self$column_selection_applied()) self$remove_current_column_selection()
+    # apply the changes
     new_label_names <- new_metadata[!("Name" %in% curr_col_names)]$label
     for (i in seq_along(new_label_names)) {
         self$append_to_variables_metadata(curr_col_names[i], property = "label", new_val = new_label_names[i])
