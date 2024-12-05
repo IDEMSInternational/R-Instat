@@ -241,31 +241,31 @@ Partial Class dlgMosaicPlot
         '
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemMosaicOptions, Me.ToolStripMenuItemMosaicJitter, Me.ToolStripMenuItemMosaicText})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(158, 92)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(186, 92)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(157, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(185, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemMosaicOptions
         '
         Me.toolStripMenuItemMosaicOptions.Name = "toolStripMenuItemMosaicOptions"
-        Me.toolStripMenuItemMosaicOptions.Size = New System.Drawing.Size(157, 22)
+        Me.toolStripMenuItemMosaicOptions.Size = New System.Drawing.Size(185, 22)
         Me.toolStripMenuItemMosaicOptions.Text = "Mosaic Options"
         '
         'ToolStripMenuItemMosaicJitter
         '
         Me.ToolStripMenuItemMosaicJitter.Name = "ToolStripMenuItemMosaicJitter"
-        Me.ToolStripMenuItemMosaicJitter.Size = New System.Drawing.Size(157, 22)
-        Me.ToolStripMenuItemMosaicJitter.Text = "Mosaic Jitter"
+        Me.ToolStripMenuItemMosaicJitter.Size = New System.Drawing.Size(185, 22)
+        Me.ToolStripMenuItemMosaicJitter.Text = "Mosaic Jitter Options"
         '
         'ToolStripMenuItemMosaicText
         '
         Me.ToolStripMenuItemMosaicText.Name = "ToolStripMenuItemMosaicText"
-        Me.ToolStripMenuItemMosaicText.Size = New System.Drawing.Size(157, 22)
-        Me.ToolStripMenuItemMosaicText.Text = "Mosaic Text"
+        Me.ToolStripMenuItemMosaicText.Size = New System.Drawing.Size(185, 22)
+        Me.ToolStripMenuItemMosaicText.Text = "Mosaic Text Options"
         '
         'cmdOptions
         '
