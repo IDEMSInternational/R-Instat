@@ -32,7 +32,7 @@ Public Class dlgMosaicPlot
     Private clsAnnotateFunction As New RFunction
     Private clsXElementLabels As New RFunction
     Private clsRFacetFunction As New RFunction
-    Private clsThemeFunction, clsDummyFunction As New RFunction
+    Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
@@ -230,7 +230,6 @@ Public Class dlgMosaicPlot
         clsFacetColOp = New ROperator
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
-        clsDummyFunction = New RFunction
 
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
