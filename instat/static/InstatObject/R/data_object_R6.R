@@ -4575,6 +4575,12 @@ DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed,
   }
 })
 
+DataSheet$set("public", "get_column_climatic_type", function(col_name, attr_name) {
+  if (!is.null(private$data[[col_name]]) && !is.null(attr(private$data[[col_name]], attr_name))) {
+    return(attr(private$data[[col_name]], attr_name))
+  }
+})
+
 DataSheet$set("public", "add_flag_fields", function(col_names) {
   curr_data <- self$get_columns_from_data(col_names, force_as_data_frame = TRUE)
   for (i in colnames(curr_data)) {
