@@ -42,14 +42,24 @@ Partial Class dlgMosaicPlot
         Me.contextMenuStripOptions = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.toolStripMenuItemPlotOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItemMosaicOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemMosaicJitter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemMosaicText = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdOptions = New instat.ucrSplitButton()
         Me.ucrInputStation = New instat.ucrInputComboBox()
         Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
-        Me.ToolStripMenuItemMosaicJitter = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemMosaicText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ucrChkJitter = New instat.ucrCheck()
+        Me.lblSizeJitter = New System.Windows.Forms.Label()
+        Me.ucrNudJitter = New instat.ucrNud()
+        Me.lblColourJitter = New System.Windows.Forms.Label()
+        Me.ucrColors = New instat.ucrColors()
+        Me.ucrColorsLabel = New instat.ucrColors()
+        Me.lblColourLabel = New System.Windows.Forms.Label()
+        Me.ucrNudSizeLabel = New instat.ucrNud()
+        Me.lblSizeLabel = New System.Windows.Forms.Label()
+        Me.ucrChkLabel = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -108,7 +118,7 @@ Partial Class dlgMosaicPlot
         Me.ucrNudXAxisLabelsAngle.AutoSize = True
         Me.ucrNudXAxisLabelsAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXAxisLabelsAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudXAxisLabelsAngle.Location = New System.Drawing.Point(183, 326)
+        Me.ucrNudXAxisLabelsAngle.Location = New System.Drawing.Point(140, 326)
         Me.ucrNudXAxisLabelsAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudXAxisLabelsAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudXAxisLabelsAngle.Name = "ucrNudXAxisLabelsAngle"
@@ -191,7 +201,7 @@ Partial Class dlgMosaicPlot
         'ucrSaveMosaicPlot
         '
         Me.ucrSaveMosaicPlot.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveMosaicPlot.Location = New System.Drawing.Point(9, 422)
+        Me.ucrSaveMosaicPlot.Location = New System.Drawing.Point(9, 513)
         Me.ucrSaveMosaicPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveMosaicPlot.Name = "ucrSaveMosaicPlot"
         Me.ucrSaveMosaicPlot.Size = New System.Drawing.Size(317, 24)
@@ -222,7 +232,7 @@ Partial Class dlgMosaicPlot
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(12, 455)
+        Me.ucrBase.Location = New System.Drawing.Point(14, 544)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 17
@@ -231,19 +241,31 @@ Partial Class dlgMosaicPlot
         '
         Me.contextMenuStripOptions.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemPlotOptions, Me.toolStripMenuItemMosaicOptions, Me.ToolStripMenuItemMosaicJitter, Me.ToolStripMenuItemMosaicText})
         Me.contextMenuStripOptions.Name = "contextMenuStripOk"
-        Me.contextMenuStripOptions.Size = New System.Drawing.Size(181, 114)
+        Me.contextMenuStripOptions.Size = New System.Drawing.Size(158, 92)
         '
         'toolStripMenuItemPlotOptions
         '
         Me.toolStripMenuItemPlotOptions.Name = "toolStripMenuItemPlotOptions"
-        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemPlotOptions.Size = New System.Drawing.Size(157, 22)
         Me.toolStripMenuItemPlotOptions.Text = "Plot Options"
         '
         'toolStripMenuItemMosaicOptions
         '
         Me.toolStripMenuItemMosaicOptions.Name = "toolStripMenuItemMosaicOptions"
-        Me.toolStripMenuItemMosaicOptions.Size = New System.Drawing.Size(180, 22)
+        Me.toolStripMenuItemMosaicOptions.Size = New System.Drawing.Size(157, 22)
         Me.toolStripMenuItemMosaicOptions.Text = "Mosaic Options"
+        '
+        'ToolStripMenuItemMosaicJitter
+        '
+        Me.ToolStripMenuItemMosaicJitter.Name = "ToolStripMenuItemMosaicJitter"
+        Me.ToolStripMenuItemMosaicJitter.Size = New System.Drawing.Size(157, 22)
+        Me.ToolStripMenuItemMosaicJitter.Text = "Mosaic Jitter"
+        '
+        'ToolStripMenuItemMosaicText
+        '
+        Me.ToolStripMenuItemMosaicText.Name = "ToolStripMenuItemMosaicText"
+        Me.ToolStripMenuItemMosaicText.Size = New System.Drawing.Size(157, 22)
+        Me.ToolStripMenuItemMosaicText.Text = "Mosaic Text"
         '
         'cmdOptions
         '
@@ -314,24 +336,132 @@ Partial Class dlgMosaicPlot
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 97
         '
-        'ToolStripMenuItemMosaicJitter
+        'ucrChkJitter
         '
-        Me.ToolStripMenuItemMosaicJitter.Name = "ToolStripMenuItemMosaicJitter"
-        Me.ToolStripMenuItemMosaicJitter.Size = New System.Drawing.Size(180, 22)
-        Me.ToolStripMenuItemMosaicJitter.Text = "Mosaic Jitter"
+        Me.ucrChkJitter.AutoSize = True
+        Me.ucrChkJitter.Checked = False
+        Me.ucrChkJitter.Location = New System.Drawing.Point(9, 429)
+        Me.ucrChkJitter.Name = "ucrChkJitter"
+        Me.ucrChkJitter.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkJitter.TabIndex = 99
         '
-        'ToolStripMenuItemMosaicText
+        'lblSizeJitter
         '
-        Me.ToolStripMenuItemMosaicText.Name = "ToolStripMenuItemMosaicText"
-        Me.ToolStripMenuItemMosaicText.Size = New System.Drawing.Size(180, 22)
-        Me.ToolStripMenuItemMosaicText.Text = "Mosaic Text"
+        Me.lblSizeJitter.AutoSize = True
+        Me.lblSizeJitter.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSizeJitter.Location = New System.Drawing.Point(104, 431)
+        Me.lblSizeJitter.Name = "lblSizeJitter"
+        Me.lblSizeJitter.Size = New System.Drawing.Size(30, 13)
+        Me.lblSizeJitter.TabIndex = 100
+        Me.lblSizeJitter.Tag = ""
+        Me.lblSizeJitter.Text = "Size:"
+        '
+        'ucrNudJitter
+        '
+        Me.ucrNudJitter.AutoSize = True
+        Me.ucrNudJitter.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudJitter.Location = New System.Drawing.Point(140, 430)
+        Me.ucrNudJitter.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudJitter.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudJitter.Name = "ucrNudJitter"
+        Me.ucrNudJitter.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudJitter.TabIndex = 101
+        Me.ucrNudJitter.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblColourJitter
+        '
+        Me.lblColourJitter.AutoSize = True
+        Me.lblColourJitter.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColourJitter.Location = New System.Drawing.Point(224, 431)
+        Me.lblColourJitter.Name = "lblColourJitter"
+        Me.lblColourJitter.Size = New System.Drawing.Size(40, 13)
+        Me.lblColourJitter.TabIndex = 102
+        Me.lblColourJitter.Tag = ""
+        Me.lblColourJitter.Text = "Colour:"
+        '
+        'ucrColors
+        '
+        Me.ucrColors.AddQuotesIfUnrecognised = True
+        Me.ucrColors.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrColors.GetSetSelectedIndex = -1
+        Me.ucrColors.IsReadOnly = False
+        Me.ucrColors.Location = New System.Drawing.Point(272, 428)
+        Me.ucrColors.Name = "ucrColors"
+        Me.ucrColors.Size = New System.Drawing.Size(70, 22)
+        Me.ucrColors.TabIndex = 202
+        '
+        'ucrColorsLabel
+        '
+        Me.ucrColorsLabel.AddQuotesIfUnrecognised = True
+        Me.ucrColorsLabel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrColorsLabel.GetSetSelectedIndex = -1
+        Me.ucrColorsLabel.IsReadOnly = False
+        Me.ucrColorsLabel.Location = New System.Drawing.Point(272, 473)
+        Me.ucrColorsLabel.Name = "ucrColorsLabel"
+        Me.ucrColorsLabel.Size = New System.Drawing.Size(70, 22)
+        Me.ucrColorsLabel.TabIndex = 207
+        '
+        'lblColourLabel
+        '
+        Me.lblColourLabel.AutoSize = True
+        Me.lblColourLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblColourLabel.Location = New System.Drawing.Point(224, 475)
+        Me.lblColourLabel.Name = "lblColourLabel"
+        Me.lblColourLabel.Size = New System.Drawing.Size(40, 13)
+        Me.lblColourLabel.TabIndex = 206
+        Me.lblColourLabel.Tag = ""
+        Me.lblColourLabel.Text = "Colour:"
+        '
+        'ucrNudSizeLabel
+        '
+        Me.ucrNudSizeLabel.AutoSize = True
+        Me.ucrNudSizeLabel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeLabel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeLabel.Location = New System.Drawing.Point(140, 475)
+        Me.ucrNudSizeLabel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSizeLabel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeLabel.Name = "ucrNudSizeLabel"
+        Me.ucrNudSizeLabel.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSizeLabel.TabIndex = 205
+        Me.ucrNudSizeLabel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSizeLabel
+        '
+        Me.lblSizeLabel.AutoSize = True
+        Me.lblSizeLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSizeLabel.Location = New System.Drawing.Point(104, 475)
+        Me.lblSizeLabel.Name = "lblSizeLabel"
+        Me.lblSizeLabel.Size = New System.Drawing.Size(30, 13)
+        Me.lblSizeLabel.TabIndex = 204
+        Me.lblSizeLabel.Tag = ""
+        Me.lblSizeLabel.Text = "Size:"
+        '
+        'ucrChkLabel
+        '
+        Me.ucrChkLabel.AutoSize = True
+        Me.ucrChkLabel.Checked = False
+        Me.ucrChkLabel.Location = New System.Drawing.Point(9, 471)
+        Me.ucrChkLabel.Name = "ucrChkLabel"
+        Me.ucrChkLabel.Size = New System.Drawing.Size(98, 24)
+        Me.ucrChkLabel.TabIndex = 203
         '
         'dlgMosaicPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(441, 510)
+        Me.ClientSize = New System.Drawing.Size(441, 605)
+        Me.Controls.Add(Me.ucrColorsLabel)
+        Me.Controls.Add(Me.lblColourLabel)
+        Me.Controls.Add(Me.ucrNudSizeLabel)
+        Me.Controls.Add(Me.lblSizeLabel)
+        Me.Controls.Add(Me.ucrChkLabel)
+        Me.Controls.Add(Me.ucrColors)
+        Me.Controls.Add(Me.lblColourJitter)
+        Me.Controls.Add(Me.ucrNudJitter)
+        Me.Controls.Add(Me.lblSizeJitter)
+        Me.Controls.Add(Me.ucrChkJitter)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucr1stFactorReceiver)
         Me.Controls.Add(Me.lblFacetBy)
@@ -394,4 +524,14 @@ Partial Class dlgMosaicPlot
     Friend WithEvents ucrChkLegend As ucrCheck
     Friend WithEvents ToolStripMenuItemMosaicJitter As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItemMosaicText As ToolStripMenuItem
+    Friend WithEvents lblColourJitter As Label
+    Friend WithEvents ucrNudJitter As ucrNud
+    Friend WithEvents lblSizeJitter As Label
+    Friend WithEvents ucrChkJitter As ucrCheck
+    Friend WithEvents ucrColors As ucrColors
+    Friend WithEvents ucrColorsLabel As ucrColors
+    Friend WithEvents lblColourLabel As Label
+    Friend WithEvents ucrNudSizeLabel As ucrNud
+    Friend WithEvents lblSizeLabel As Label
+    Friend WithEvents ucrChkLabel As ucrCheck
 End Class

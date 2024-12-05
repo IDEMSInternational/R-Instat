@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class dlgMosaicPlot
     Private clsGgplotFunction As New RFunction
     Private clsMosaicGeomFunction, clsMosaicJitterFunction, clsMosaicTextFunction As New RFunction
-    Private clsAesFunction, clsLocalAesjitterFunction, clsProductFunction As New RFunction
+    Private clsAesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsLocalAesFunction As New RFunction
 
@@ -32,7 +32,7 @@ Public Class dlgMosaicPlot
     Private clsAnnotateFunction As New RFunction
     Private clsXElementLabels As New RFunction
     Private clsRFacetFunction As New RFunction
-    Private clsThemeFunction As New RFunction
+    Private clsThemeFunction, clsDummyFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
@@ -82,6 +82,7 @@ Public Class dlgMosaicPlot
     Private Sub InitialiseDialog()
         Dim dctPartitionOptions As New Dictionary(Of String, String)
         Dim dctLegendPosition As New Dictionary(Of String, String)
+        Dim dctLabelColours As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 594
@@ -172,6 +173,38 @@ Public Class dlgMosaicPlot
         ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
+        ucrChkJitter.SetText("Jitter")
+        ucrChkJitter.AddParameterPresentCondition(True, "geom_mosaic_jitter")
+        ucrChkJitter.AddParameterPresentCondition(False, "geom_mosaic_jitter", False)
+        ucrChkJitter.AddToLinkedControls(ucrNudJitter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkJitter.AddToLinkedControls(ucrColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="black")
+        ucrColors.SetParameter(New RParameter("colour", 1))
+        ucrColors.SetColours()
+        ucrColors.SetLinkedDisplayControl(lblColourJitter)
+
+        ucrNudJitter.SetParameter(New RParameter("size", 0))
+        ucrNudJitter.SetMinMax(0, 100)
+        ucrNudJitter.Increment = 0.1
+        ucrNudJitter.DecimalPlaces = 1
+        ucrNudJitter.SetLinkedDisplayControl(lblSizeJitter)
+        ucrNudJitter.SetRDefault(1.0)
+
+        ucrChkLabel.SetText("Label")
+        ucrChkLabel.AddParameterPresentCondition(True, "geom_mosaic_text")
+        ucrChkLabel.AddParameterPresentCondition(False, "geom_mosaic_text", False)
+        ucrChkLabel.AddToLinkedControls(ucrNudSizeLabel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLabel.AddToLinkedControls(ucrColorsLabel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="black")
+        ucrColorsLabel.SetParameter(New RParameter("colour", 1))
+        ucrColorsLabel.SetColours()
+        ucrColorsLabel.SetLinkedDisplayControl(lblColourLabel)
+
+        ucrNudSizeLabel.SetParameter(New RParameter("size", 0))
+        ucrNudSizeLabel.SetMinMax(0, 100)
+        ucrNudSizeLabel.Increment = 0.1
+        ucrNudSizeLabel.DecimalPlaces = 1
+        ucrNudSizeLabel.SetLinkedDisplayControl(lblSizeLabel)
+        ucrNudSizeLabel.SetRDefault(1.0)
+
         ucrSaveMosaicPlot.SetPrefix("mosaic")
         ucrSaveMosaicPlot.SetIsComboBox()
         ucrSaveMosaicPlot.SetCheckBoxText("Store Graph")
@@ -188,8 +221,6 @@ Public Class dlgMosaicPlot
         clsMosaicTextFunction = New RFunction
         clsAesFunction = New RFunction
         clsLocalAesFunction = New RFunction
-        clsLocalAesjitterFunction = New RFunction
-        clsProductFunction = New RFunction
 
         clsXElementLabels = New RFunction
 
@@ -199,10 +230,10 @@ Public Class dlgMosaicPlot
         clsFacetColOp = New ROperator
         clsPipeOperator = New ROperator
         clsGroupByFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrInputStation.SetName(strFacetWrap)
         ucrInputStation.bUpdateRCodeFromControl = True
-
 
         ucrSelectorMosaicPlot.Reset()
         ucrSelectorMosaicPlot.SetGgplotFunction(clsBaseOperator)
@@ -219,11 +250,7 @@ Public Class dlgMosaicPlot
 
         clsMosaicJitterFunction.SetPackageName("ggmosaic")
         clsMosaicJitterFunction.SetRCommand("geom_mosaic_jitter")
-        clsMosaicJitterFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesjitterFunction, iPosition:=1)
-
-        clsLocalAesjitterFunction.SetRCommand("aes")
-        clsLocalAesjitterFunction.AddParameter("x", clsRFunctionParameter:=clsProductFunction, iPosition:=1)
-        clsLocalAesjitterFunction.AddParameter("conds", clsRFunctionParameter:=clsProductFunction, iPosition:=2)
+        clsMosaicJitterFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesFunction, iPosition:=1)
 
         clsMosaicTextFunction.SetPackageName("ggmosaic")
         clsMosaicTextFunction.SetRCommand("geom_mosaic_text")
@@ -288,14 +315,16 @@ Public Class dlgMosaicPlot
     Public Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
 
-        ucrReceiverFill.AddAdditionalCodeParameterPair(clsProductFunction, New RParameter("fill", iNewPosition:=0), iAdditionalPairNo:=1)
-        ucrReceiverX.AddAdditionalCodeParameterPair(clsProductFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
-        ucrReceiverConditions.AddAdditionalCodeParameterPair(clsProductFunction, New RParameter("conds", iNewPosition:=0), iAdditionalPairNo:=1)
-
         ucrSelectorMosaicPlot.SetRCode(clsGgplotFunction, bReset)
         If bReset Then
             ucrReceiverX.SetRCode(clsLocalAesFunction, bReset)
             ucrReceiverFill.SetRCode(clsLocalAesFunction, bReset)
+            ucrColors.SetRCode(clsMosaicJitterFunction, bReset)
+            ucrNudJitter.SetRCode(clsMosaicJitterFunction, bReset)
+            ucrChkJitter.SetRCode(clsMosaicJitterFunction, bReset)
+            ucrColorsLabel.SetRCode(clsMosaicTextFunction, bReset)
+            ucrNudSizeLabel.SetRCode(clsMosaicTextFunction, bReset)
+            ucrChkLabel.SetRCode(clsMosaicTextFunction, bReset)
         End If
         ucrReceiverConditions.SetRCode(clsLocalAesFunction, bReset)
         ucrReceiverWeights.SetRCode(clsLocalAesFunction, bReset)
@@ -494,7 +523,6 @@ Public Class dlgMosaicPlot
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
         Dim iXVarCount As Integer
 
-
         iXVarCount = lstPreviousXVars.Count
         If bRCodeSet Then
             If lstPreviousXVars.Contains(ucrReceiverFill.GetVariableNames(False)) AndAlso Not ucrReceiverX.GetVariableNamesAsList().Contains(ucrReceiverFill.GetVariableNames(False)) Then
@@ -568,66 +596,97 @@ Public Class dlgMosaicPlot
 
     Private Sub toolStripMenuItemMosaicOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemMosaicOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicGeomFunction, clsNewGlobalAesFunc:=clsLocalAesFunction, clsNewLocalAes:=clsAesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
-        ' sdgLayerOptions.tbcLayers.SelectedTab = sdgLayerOptions.tbpGeomParameters
-        'sdgLayerOptions.tbpAesthetics.Enabled = False
+        sdgLayerOptions.tbcLayers.SelectedTab = sdgLayerOptions.tbpGeomParameters
+        sdgLayerOptions.tbpAesthetics.Enabled = False
         sdgLayerOptions.ShowDialog()
-        'sdgLayerOptions.tbpAesthetics.Enabled = True
+        sdgLayerOptions.tbpAesthetics.Enabled = True
         bResetBoxLayerSubdialog = False
         SetRCodeForControls(False)
     End Sub
 
-    'Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
-    '    sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicJitterFunction,
-    '                               clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesFunction,
-    '                               bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot,
-    '                               bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
-    '    sdgLayerOptions.ShowDialog()
-    '    bResetBoxLayerSubdialog = False
-    '    'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
-    '    '  One then needs to display these modifications on the dlgScatteredPlot.
+    Private Sub openSdgLayerOptions(clsNewGeomFunc As RFunction)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsNewGeomFunc,
+                                   clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesFunction,
+                                   bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot,
+                                   bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
+        sdgLayerOptions.ShowDialog()
+        bResetBoxLayerSubdialog = False
+        'Coming from the sdgLayerOptions, clsRaesFunction and others have been modified. 
+        '  One then needs to display these modifications on the dlgScatteredPlot.
 
-    '    'The aesthetics parameters on the main dialog are repopulated as required.
-    '    For Each clsParam In clsAesFunction.clsParameters
-    '        If clsParam.strArgumentName = "x" Then
-    '            If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-    '                ucrReceiverX.Clear()
-    '            Else
-    '                ucrReceiverX.Add(clsParam.strArgumentValue)
-    '            End If
-    '            'In the y case, the value stored in the clsReasFunction in the multiple variables 
-    '            '  case is "value", however that one shouldn't be written in the multiple 
-    '            '  variables receiver (otherwise it would stack all variables and the stack 
-    '            '  ("value") itself!).
-    '            'Warning: what if someone used the name value for one of it's variables 
-    '            '  independently from the multiple variables method? Here if the receiver is 
-    '            '  actually in single mode, the variable "value" will still be given back, which 
-    '            '  throws the problem back to the creation of "value" in the multiple receiver case.
-    '        ElseIf clsParam.strArgumentName = "conds" AndAlso (clsParam.strArgumentValue <> "value") Then
-    '            'Still might be in the case of bSingleVariable with mapping y="".
-    '            If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-    '                'ucrReceiverConditions.Clear()
-    '            Else
-    '                ucrReceiverConditions.Add(clsParam.strArgumentValue)
-    '            End If
-    '        ElseIf clsParam.strArgumentName = "fill" Then
-    '            ucrReceiverFill.Add(clsParam.strArgumentValue)
-    '        End If
-    '    Next
-    '    TestOkEnabled()
-    'End Sub
+        'The aesthetics parameters on the main dialog are repopulated as required.
+        For Each clsParam In clsLocalAesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    ucrReceiverX.Clear()
+                Else
+                    ucrReceiverX.Add(clsParam.strArgumentValue)
+                End If
+                'In the y case, the value stored in the clsReasFunction in the multiple variables 
+                '  case is "value", however that one shouldn't be written in the multiple 
+                '  variables receiver (otherwise it would stack all variables and the stack 
+                '  ("value") itself!).
+                'Warning: what if someone used the name value for one of it's variables 
+                '  independently from the multiple variables method? Here if the receiver is 
+                '  actually in single mode, the variable "value" will still be given back, which 
+                '  throws the problem back to the creation of "value" in the multiple receiver case.
+            ElseIf clsParam.strArgumentName = "conds" AndAlso (clsParam.strArgumentValue <> "value") Then
+                'Still might be in the case of bSingleVariable with mapping y="".
+                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
+                    'ucrReceiverConditions.Clear()
+                Else
+                    ucrReceiverConditions.Add(clsParam.strArgumentValue)
+                End If
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrReceiverFill.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
+    End Sub
 
     Private Sub ToolStripMenuItemMosaicJitter_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMosaicJitter.Click
-        'openSdgLayerOptions(clsMosaicJitterFunction)
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsMosaicJitterFunction, clsNewGlobalAesFunc:=clsAesFunction, clsNewLocalAes:=clsLocalAesjitterFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorMosaicPlot, bApplyAesGlobally:=False, bReset:=bResetBoxLayerSubdialog)
-        'sdgLayerOptions.tbcLayers.SelectedTab = sdgLayerOptions.tbpGeomParameters
-        'sdgLayerOptions.tbpAesthetics.Enabled = False
-        sdgLayerOptions.ShowDialog()
-        ' sdgLayerOptions.tbpAesthetics.Enabled = True
-        bResetBoxLayerSubdialog = False
-        'SetRCodeForControls(False)
+        openSdgLayerOptions(clsMosaicJitterFunction)
     End Sub
 
     Private Sub ToolStripMenuItemMosaicText_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemMosaicText.Click
+        openSdgLayerOptions(clsMosaicTextFunction)
+    End Sub
 
+    Private Sub ucrChkJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkJitter.ControlValueChanged, ucrColors.ControlValueChanged, ucrNudJitter.ControlValueChanged
+        If ucrChkJitter.Checked Then
+            clsBaseOperator.AddParameter("geom_mosaic_jitter", clsRFunctionParameter:=clsMosaicJitterFunction)
+            If Not ucrColors.IsEmpty Then
+                clsMosaicJitterFunction.AddParameter("colour", Chr(34) & ucrColors.GetText & Chr(34), iPosition:=1)
+            Else
+                clsMosaicJitterFunction.RemoveParameterByName("colour")
+            End If
+            If Not ucrNudJitter.IsEmpty Then
+                clsMosaicJitterFunction.AddParameter("size", ucrNudJitter.GetText(), iPosition:=0)
+            Else
+                clsMosaicJitterFunction.RemoveParameterByName("size")
+            End If
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_mosaic_jitter")
+        End If
+        ToolStripMenuItemMosaicJitter.Enabled = ucrChkJitter.Checked
+    End Sub
+
+    Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged, ucrColorsLabel.ControlValueChanged, ucrNudSizeLabel.ControlValueChanged
+        If ucrChkLabel.Checked Then
+            clsBaseOperator.AddParameter("geom_mosaic_text", clsRFunctionParameter:=clsMosaicTextFunction)
+            If Not ucrColorsLabel.IsEmpty Then
+                clsMosaicTextFunction.AddParameter("colour", Chr(34) & ucrColorsLabel.GetText & Chr(34), iPosition:=1)
+            Else
+                clsMosaicTextFunction.RemoveParameterByName("colour")
+            End If
+            If Not ucrNudSizeLabel.IsEmpty Then
+                clsMosaicTextFunction.AddParameter("size", ucrNudSizeLabel.GetText(), iPosition:=0)
+            Else
+                clsMosaicTextFunction.RemoveParameterByName("size")
+            End If
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_mosaic_text")
+        End If
+        ToolStripMenuItemMosaicText.Enabled = ucrChkLabel.Checked
     End Sub
 End Class
