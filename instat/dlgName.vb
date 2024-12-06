@@ -597,8 +597,6 @@ Public Class dlgName
     (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked) OrElse
     (rdoLabels.Checked AndAlso rdoSelectedColumn.Checked)
 
-        'ucrSelectVariables.lstAvailableVariable.Visible = rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked)
-        'ucrSelectVariables.lstAvailableVariable.Visible = rdoSingle.Checked OrElse (rdoLabels.Checked AndAlso rdoSelectedColumn.Checked)
         ucrSelectVariables.btnAdd.Visible = ucrSelectVariables.lstAvailableVariable.Visible
         ucrSelectVariables.btnDataOptions.Visible = ucrSelectVariables.lstAvailableVariable.Visible
         UpdateGrid()
@@ -708,8 +706,13 @@ Public Class dlgName
 
         ElseIf rdoRenameWith.Checked Then
             clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
-        Else
 
+        ElseIf rdoMultiple.Checked Then
+            clsDefaultRFunction.AddParameter("type", Chr(34) & "multiple" & Chr(34), iPosition:=1)
+
+        ElseIf rdoSingle.Checked Then
+
+            clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=1)
         End If
     End Sub
 
