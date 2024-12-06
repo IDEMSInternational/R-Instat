@@ -71,6 +71,7 @@ Partial Class dlgName
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
         Me.ucrPnlSelectData = New instat.UcrPanel()
+        Me.rdoLabels = New System.Windows.Forms.RadioButton()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -109,7 +110,7 @@ Partial Class dlgName
         Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMultiple.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultiple.Location = New System.Drawing.Point(218, 10)
+        Me.rdoMultiple.Location = New System.Drawing.Point(178, 10)
         Me.rdoMultiple.Name = "rdoMultiple"
         Me.rdoMultiple.Size = New System.Drawing.Size(110, 28)
         Me.rdoMultiple.TabIndex = 2
@@ -128,7 +129,7 @@ Partial Class dlgName
         Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(108, 10)
+        Me.rdoSingle.Location = New System.Drawing.Point(70, 10)
         Me.rdoSingle.Name = "rdoSingle"
         Me.rdoSingle.Size = New System.Drawing.Size(110, 28)
         Me.rdoSingle.TabIndex = 1
@@ -312,7 +313,7 @@ Partial Class dlgName
         Me.rdoRenameWith.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRenameWith.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRenameWith.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRenameWith.Location = New System.Drawing.Point(328, 10)
+        Me.rdoRenameWith.Location = New System.Drawing.Point(286, 10)
         Me.rdoRenameWith.Name = "rdoRenameWith"
         Me.rdoRenameWith.Size = New System.Drawing.Size(110, 28)
         Me.rdoRenameWith.TabIndex = 13
@@ -429,9 +430,9 @@ Partial Class dlgName
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(97, 2)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(62, 2)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(355, 44)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(448, 44)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrReceiverColumns
@@ -455,12 +456,32 @@ Partial Class dlgName
         Me.ucrPnlSelectData.Size = New System.Drawing.Size(315, 51)
         Me.ucrPnlSelectData.TabIndex = 19
         '
+        'rdoLabels
+        '
+        Me.rdoLabels.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoLabels.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoLabels.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLabels.FlatAppearance.BorderSize = 2
+        Me.rdoLabels.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLabels.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoLabels.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoLabels.Location = New System.Drawing.Point(394, 10)
+        Me.rdoLabels.Name = "rdoLabels"
+        Me.rdoLabels.Size = New System.Drawing.Size(110, 28)
+        Me.rdoLabels.TabIndex = 22
+        Me.rdoLabels.TabStop = True
+        Me.rdoLabels.Tag = ""
+        Me.rdoLabels.Text = "Labels With"
+        Me.rdoLabels.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoLabels.UseVisualStyleBackColor = False
+        '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(545, 540)
+        Me.Controls.Add(Me.rdoLabels)
         Me.Controls.Add(Me.grdRenameColumns)
         Me.Controls.Add(Me.ucrChkIncludeVariable)
         Me.Controls.Add(Me.rdoRenameWith)
@@ -527,4 +548,5 @@ Partial Class dlgName
     Friend WithEvents rdoSelectedColumn As RadioButton
     Friend WithEvents rdoWholeDataFrame As RadioButton
     Friend WithEvents ucrPnlSelectData As UcrPanel
+    Friend WithEvents rdoLabels As RadioButton
 End Class

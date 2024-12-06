@@ -80,10 +80,17 @@ Public Class dlgName
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
 
         ucrPnlOptions.SetParameter(New RParameter("type", 4))
-        ucrPnlOptions.AddRadioButton(rdoSingle, Chr(34) & "single" & Chr(34))
-        ucrPnlOptions.AddRadioButton(rdoMultiple, Chr(34) & "multiple" & Chr(34))
-        ucrPnlOptions.AddRadioButton(rdoRenameWith, Chr(34) & "rename_with" & Chr(34))
-        ucrPnlOptions.SetRDefault(Chr(34) & "single" & Chr(34))
+        ucrPnlOptions.AddRadioButton(rdoSingle)
+        ucrPnlOptions.AddRadioButton(rdoMultiple)
+        ucrPnlOptions.AddRadioButton(rdoRenameWith)
+        ucrPnlOptions.AddRadioButton(rdoLabels)
+        ucrPnlOptions.AddParameterValuesCondition(rdoSingle, "name", "single")
+        ucrPnlOptions.AddParameterValuesCondition(rdoMultiple, "name", "multiple")
+        ucrPnlOptions.AddParameterValuesCondition(rdoRenameWith, "name", "rename")
+        ucrPnlOptions.AddParameterValuesCondition(rdoLabels, "name", "labels")
+
+
+        'ucrPnlOptions.SetRDefault(Chr(34) & "single" & Chr(34))
 
         ucrNudAbbreviate.SetParameter(New RParameter("minlength", 10))
         ucrNudAbbreviate.SetMinMax(Integer.MinValue, Integer.MaxValue)
@@ -142,7 +149,7 @@ Public Class dlgName
 
         ucrPnlOptions.AddToLinkedControls({ucrReceiverName, ucrInputNewName, ucrInputVariableLabel}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrChkIncludeVariable, {rdoMultiple}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrPnlCase, ucrPnlSelectData}, {rdoRenameWith}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrPnlCase, ucrPnlSelectData}, {rdoRenameWith, rdoLabels}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCase.AddToLinkedControls(ucrInputCase, {rdoMakeCleanNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Snake")
         ucrPnlCase.AddToLinkedControls(ucrNudAbbreviate, {rdoAbbreviate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="8")
         ucrPnlCase.AddToLinkedControls(ucrInputReplace, {rdoReplace}, bNewLinkedHideIfParameterMissing:=True)
@@ -182,6 +189,8 @@ Public Class dlgName
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
         clsDummyFunction.AddParameter("checked", "whole", iPosition:=1)
+        clsDummyFunction.AddParameter("name", "single", iPosition:=1)
+
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=4)
@@ -222,12 +231,12 @@ Public Class dlgName
             ucrPnlCase.SetRCode(clsDefaultRFunction, bReset)
             ucrInputReplace.SetRCode(clsDefaultRFunction, bReset)
             ucrChkIncludeVariable.SetRCode(clsDummyFunction, bReset)
+            ucrPnlSelectData.SetRCode(clsDummyFunction, bReset)
+            ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
         End If
         ucrInputCase.SetRCode(clsDefaultRFunction, bReset)
         ucrNudAbbreviate.SetRCode(clsDefaultRFunction, bReset)
-        ucrPnlOptions.SetRCode(clsDefaultRFunction, bReset)
         ucrInputBy.SetRCode(clsDefaultRFunction, bReset)
-        ucrPnlSelectData.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -569,7 +578,7 @@ Public Class dlgName
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlCase.ControlValueChanged, ucrPnlSelectData.ControlValueChanged, ucrInputCase.ControlValueChanged, ucrNudAbbreviate.ControlValueChanged, ucrReceiverColumns.ControlValueChanged
         If rdoSingle.Checked Then
             ucrReceiverName.SetMeAsReceiver()
-        ElseIf rdoRenameWith.Checked Then
+        ElseIf rdoRenameWith.Checked OrElse rdoLabels.Checked Then
             ucrInputBy.Visible = rdoWholeDataFrame.Checked AndAlso rdoReplace.Checked
             ucrInputEdit.Visible = ucrInputBy.Visible
             ucrInputReplace.Visible = ucrInputBy.Visible
@@ -583,13 +592,18 @@ Public Class dlgName
                 End If
             End If
         End If
-        ucrSelectVariables.lstAvailableVariable.Visible = rdoSingle.Checked OrElse (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked)
+
+        ucrSelectVariables.lstAvailableVariable.Visible = rdoSingle.Checked OrElse
+    (rdoRenameWith.Checked AndAlso rdoSelectedColumn.Checked) OrElse
+    (rdoLabels.Checked AndAlso rdoSelectedColumn.Checked)
+
         ucrSelectVariables.btnAdd.Visible = ucrSelectVariables.lstAvailableVariable.Visible
         ucrSelectVariables.btnDataOptions.Visible = ucrSelectVariables.lstAvailableVariable.Visible
         UpdateGrid()
         RemoveParameters()
         DialogueSize()
         RemovePattern()
+        AddTypeParm()
     End Sub
 
     Private Sub DialogueSize()
@@ -660,8 +674,7 @@ Public Class dlgName
 
     Private Sub RemovePattern()
         If rdoWholeDataFrame.Checked Then
-            If rdoRenameWith.Checked AndAlso rdoReplace.Checked Then
-                clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
+            If (rdoRenameWith.Checked OrElse rdoLabels.Checked) AndAlso rdoReplace.Checked Then
                 clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
                 clsDefaultRFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText() & Chr(34), iPosition:=4)
                 clsDefaultRFunction.RemoveParameterByName("label")
@@ -687,7 +700,24 @@ Public Class dlgName
         End If
     End Sub
 
+    Private Sub AddTypeParm()
+        If rdoLabels.Checked Then
+            clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_labels" & Chr(34), iPosition:=1)
+
+        ElseIf rdoRenameWith.Checked Then
+            clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_with" & Chr(34), iPosition:=1)
+
+        ElseIf rdoMultiple.Checked Then
+            clsDefaultRFunction.AddParameter("type", Chr(34) & "multiple" & Chr(34), iPosition:=1)
+
+        ElseIf rdoSingle.Checked Then
+
+            clsDefaultRFunction.AddParameter("type", Chr(34) & "single" & Chr(34), iPosition:=1)
+        End If
+    End Sub
+
     Private Sub ucrInputEdit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEdit.ControlValueChanged, ucrInputBy.ControlValueChanged, ucrInputReplace.ControlValueChanged
         RemovePattern()
+        AddTypeParm()
     End Sub
 End Class
