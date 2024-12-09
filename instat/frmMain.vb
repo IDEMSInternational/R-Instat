@@ -1863,11 +1863,13 @@ Public Class frmMain
     Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
         mnuProcurement.Visible = bNewShowProcurementMenu
         mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
+        mnuProcurement.Visible = False
     End Sub
 
     Public Sub SetShowStructuredMenu(bNewShowStructuredMenu As Boolean)
         mnuStructured.Visible = bNewShowStructuredMenu
         mnuViewStructuredMenu.Checked = bNewShowStructuredMenu
+        mnuStructured.Visible = False
     End Sub
     Public Sub SetShowClimaticMenu(bNewShowClimaticMenu As Boolean)
         mnuClimatic.Visible = bNewShowClimaticMenu
@@ -1877,6 +1879,7 @@ Public Class frmMain
     Public Sub SetShowOptionsByContextMenu(bNewShowOptionsByContextMenu As Boolean)
         mnuOptionsByContext.Visible = bNewShowOptionsByContextMenu
         mnuViewOptionsByContextMenu.Checked = bNewShowOptionsByContextMenu
+        mnuOptionsByContext.Visible = False
     End Sub
 
     Private Sub mnuViewStructuredMenu_Click(sender As Object, e As EventArgs) Handles mnuViewStructuredMenu.Click
