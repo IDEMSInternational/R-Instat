@@ -303,7 +303,7 @@ Public Class frmMain
         mnuDataFrameMetadat.Checked = False
         mnuSwapDataLogScript.Checked = False
         mnuSwapDataMetadata.Checked = False
-        mnuTbDataView.Checked = True
+        mnuDataViewWindow.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
         UpdateLayout()
@@ -364,7 +364,7 @@ Public Class frmMain
             MsgBox(ex.Message)
         End Try
 
-        mnuTbDataView.Checked = mnuViewDataView.Checked
+        mnuDataViewWindow.Checked = mnuViewDataView.Checked
         mnuOutputWindow.Checked = mnuViewOutput.Checked
         mnuLogScript.Checked = mnuViewLogScript.Checked
     End Sub
@@ -852,11 +852,23 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuHelpHelp_Click(sender As Object, e As EventArgs)
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TableOfContents, "")
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "135")
     End Sub
 
-    Private Sub mnuTbHelp_Click(sender As Object, e As EventArgs) Handles mnuTbHelp.Click
+    Private Sub mnuTbHelp_Click(sender As Object, e As EventArgs) Handles mnuTbHelp.ButtonClick, mnuToolBarHelp.Click
         mnuHelpHelp_Click(sender, e)
+    End Sub
+
+    Private Sub mnuDataWindowHelp_Click(sender As Object, e As EventArgs) Handles mnuDataWindowHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "134")
+    End Sub
+
+    Private Sub mnuOutputHelp_Click(sender As Object, e As EventArgs) Handles mnuOutputHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "540")
+    End Sub
+
+    Private Sub mnuLogScriptHelp_Click(sender As Object, e As EventArgs) Handles mnuLogScriptHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
 
     Private Sub mnuPrepareFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click
@@ -1150,7 +1162,7 @@ Public Class frmMain
 
         strCurrentStatus = tstatus.Text
         If clsRLink.bInstatObjectExists Then
-            tstatus.Text = "Auto saving data..."
+            tstatus.Text = GetTranslation("Auto saving data...")
             Cursor = Cursors.WaitCursor
             If Not Directory.Exists(strAutoSaveDataFolderPath) Then
                 Directory.CreateDirectory(strAutoSaveDataFolderPath)
@@ -1168,11 +1180,11 @@ Public Class frmMain
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & strCurrentAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
             clsRLink.RunInternalScript(clsSaveRDS.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
+
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
             bFirstBackupDone = True
         End If
-        autoTranslate(Me)
     End Sub
 
     Public Sub DeleteAutoSaveFiles()
@@ -1820,8 +1832,9 @@ Public Class frmMain
         dlgInfill.ShowDialog()
     End Sub
 
-    Private Sub mnuDataView_Click(sender As Object, e As EventArgs) Handles mnuTbDataView.Click
+    Private Sub mnuDataView_Click(sender As Object, e As EventArgs) Handles mnuTbDataView.ButtonClick, mnuDataViewWindow.Click
         mnuViewDataView.Checked = Not mnuViewDataView.Checked
+        mnuDataViewWindow.Checked = mnuViewDataView.Checked
         UpdateLayout()
     End Sub
 

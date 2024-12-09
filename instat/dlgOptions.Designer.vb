@@ -135,6 +135,8 @@ Partial Class dlgOptions
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
         Me.tbpWebsite = New System.Windows.Forms.TabPage()
         Me.ucrChkReminder = New instat.ucrCheck()
+        Me.ucrNudWidth = New instat.ucrNud()
+        Me.lblWidth = New System.Windows.Forms.Label()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -440,6 +442,8 @@ Partial Class dlgOptions
         '
         'tbpOutputWindow
         '
+        Me.tbpOutputWindow.Controls.Add(Me.lblWidth)
+        Me.tbpOutputWindow.Controls.Add(Me.ucrNudWidth)
         Me.tbpOutputWindow.Controls.Add(Me.ucrNudMaxOutputsHeight)
         Me.tbpOutputWindow.Controls.Add(Me.ucrChkMaxOutputsHeight)
         Me.tbpOutputWindow.Controls.Add(Me.ucrChkShowRCommandsinOutputWindow)
@@ -1260,6 +1264,29 @@ Partial Class dlgOptions
         Me.ucrChkReminder.Size = New System.Drawing.Size(620, 51)
         Me.ucrChkReminder.TabIndex = 2
         '
+        'ucrNudWidth
+        '
+        Me.ucrNudWidth.AutoSize = True
+        Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWidth.Location = New System.Drawing.Point(759, 277)
+        Me.ucrNudWidth.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Name = "ucrNudWidth"
+        Me.ucrNudWidth.Size = New System.Drawing.Size(75, 30)
+        Me.ucrNudWidth.TabIndex = 30
+        Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblWidth
+        '
+        Me.lblWidth.AutoSize = True
+        Me.lblWidth.Location = New System.Drawing.Point(543, 281)
+        Me.lblWidth.Name = "lblWidth"
+        Me.lblWidth.Size = New System.Drawing.Size(127, 20)
+        Me.lblWidth.TabIndex = 31
+        Me.lblWidth.Text = "Width to Display:"
+        '
         'dlgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
@@ -1410,4 +1437,6 @@ Partial Class dlgOptions
     Friend WithEvents ucrNudRowUndoLimit As ucrNud
     Friend WithEvents Label4 As Label
     Friend WithEvents ucrChkTurnOffUndo As ucrCheck
+    Friend WithEvents lblWidth As Label
+    Friend WithEvents ucrNudWidth As ucrNud
 End Class

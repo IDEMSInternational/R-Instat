@@ -192,7 +192,10 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
       # function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
       if(is.null(result_names)) {
         result_name = summaries_display[j]
-        if(include_columns_to_summarise) result_name = paste0(result_name, sep, column_names)
+        if(include_columns_to_summarise){
+          if (!is.null(extra_args$y)) result_name <- paste0(result_name, sep, extra_args$y, sep, column_names)
+          else result_name <- paste0(result_name, sep, column_names)
+        }
       }
       #TODO result_names could be horizontal/vertical vector, matrix or single value
       else result_name <- result_names[i,j]
@@ -239,7 +242,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
     curr_filter_name <- curr_filter[["name"]]
     curr_filter_calc <- self$get_filter_as_instat_calculation(data_name, curr_filter_name)
     manipulations <- c(curr_filter_calc, manipulations)
-  }
+  } 
   if(!missing(additional_filter)) {
     manipulations <- c(additional_filter, manipulations)
   }
@@ -247,10 +250,12 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
 
   # setting up param_list. Here we read in .drop and .preserve
   param_list <- list()
-  for (i in 1:length(combined_calc_sum$manipulations)){
-    if (combined_calc_sum$manipulations[[i]]$type %in% c("by", "filter")){
-        param_list <- c(param_list, combined_calc_sum$manipulations[[i]]$param_list)
-    }
+  if (length(combined_calc_sum$manipulations) > 0){
+      for (i in 1:length(combined_calc_sum$manipulations)){
+          if (combined_calc_sum$manipulations[[i]]$type %in% c("by", "filter")){
+              param_list <- c(param_list, combined_calc_sum$manipulations[[i]]$param_list)
+          }
+      }
   }
   out <- self$apply_instat_calculation(combined_calc_sum, param_list = param_list)
   # relocate so that the factors are first still for consistency	
@@ -279,7 +284,7 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   summaries <- unique(summaries)
   summaries <- summaries[order(match(summaries, all_summaries))]
-  summaries_count <- summaries[startsWith(summaries, "summary_count")]
+  summaries_count <- summaries[startsWith(summaries, "summary_count_all")]
   summaries_other <- setdiff(summaries, summaries_count)
   summaries <- c(summaries_count, summaries_other)
   count_summaries_max <- length(summaries_count)
@@ -442,9 +447,9 @@ missing_values_check <- function(x) {
 # summary function labels
 sum_label <- "summary_sum"
 mode_label <- "summary_mode"
-count_label <- "summary_count"
-count_missing_label <- "summary_count_missing"
-count_non_missing_label <- "summary_count_non_missing"
+count_label <- "summary_count_all"
+count_missing_label <- "summary_count_miss"
+count_non_missing_label <- "summary_count"
 sd_label <- "summary_sd"
 var_label <- "summary_var"
 median_label <- "summary_median"
@@ -573,13 +578,13 @@ na_check <- function(x, na_type = c(), na_consecutive_n = NULL, na_max_n = NULL,
   for (i in seq_along(na_type)) {
     type <- na_type[i]
     if (type %in% c("n","'n'")) {
-      res[i] <- summary_count_missing(x) <= na_max_n
+      res[i] <- summary_count_miss(x) <= na_max_n
     }
     else if (type %in% c("prop","'prop'")) {
-      res[i] <- (summary_count_missing(x) / summary_count(x)) <= na_max_prop / 100
+      res[i] <- (summary_count_miss(x) / summary_count(x)) <= na_max_prop / 100
     }
     else if (type %in% c("n_non_miss","'n_non_miss'")) {
-      res[i] <- summary_count_non_missing(x) >= na_min_n
+      res[i] <- summary_count(x) >= na_min_n
     }
     else if (type %in% c("FUN","'FUN'")) {
       res[i] <- na_FUN(x, ...)
@@ -717,16 +722,16 @@ summary_sum <- function (x, weights = NULL, na.rm = FALSE, na_type = "", ...) {
 }
 
 
-summary_count <- function(x, ...) {
+summary_count_all <- function(x, ...) {
   return(length(x))
 }
 
 
-summary_count_missing <- function(x, ...) {
+summary_count_miss <- function(x, ...) {
   return(sum(is.na(x)))
 }
 
-summary_count_non_missing <- function(x, ...) {
+summary_count <- function(x, ...) {
   return(sum(!is.na(x)))
 }
 
@@ -1063,11 +1068,12 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
 }
 
 # cor function
-summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = NULL, method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = NULL, method = c("pearson", "kendall", "spearman"), cor_use = c("everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+  cor_use <- match.arg(cor_use)
   if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else {
     if (missing(weights) || is.null(weights)) {
-      return(cor(x = x, y = y, use = use, method = method))
+      return(cor(x = x, y = y, use = cor_use, method = method))
     }
     else {
       weights::wtd.cor(x = x, y = y, weight = weights)[1]
@@ -1110,7 +1116,7 @@ summary_nth <- function(x, nth_value, order_by = NULL, ...) {
 
 # n_distinct function
 summary_n_distinct<- function(x, na.rm = FALSE, ...) {
-  return(dplyr::n_distinct(x = x, na.rm = na.rm))
+  return(dplyr::n_distinct(x, na.rm = na.rm))
 }
 
 # sample function

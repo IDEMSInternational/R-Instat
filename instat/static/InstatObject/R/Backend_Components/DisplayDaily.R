@@ -221,9 +221,9 @@ DisplayDaily <- function(Datain,Stations,Variables,option=1,Years,Misscode,Trace
               outstats[st,(m+1)] <- gsub("\\s+","",outstats[st,(m+1)]) 
             }
           }
-          # If all the data is NA, set the stats to NA (except summary_count_missing)
+          # If all the data is NA, set the stats to NA (except summary_count_miss)
           if(length(dat[,loc])==length(which(is.na(dat[,loc]==TRUE)))){
-            outstats[which(monstats != "summary_count_missing"),(m+1)] <- "NA"
+            outstats[which(monstats != "summary_count_miss"),(m+1)] <- "NA"
           }
 		  # If there's no data, set all the stats to NA
           if(length(dat[,loc]) == 0) outstats[,(m+1)] <- "NA"
@@ -278,7 +278,7 @@ DisplayDaily <- function(Datain,Stations,Variables,option=1,Years,Misscode,Trace
         out[dim(out)[1]+1,] <- "____"
         out[dim(out)[1],1] <- "STATS"
         # temp fix to shorten display name of summary function
-        outstats[,1][outstats[,1] == "summary_count_missing"] <- "n_miss"
+        outstats[,1][outstats[,1] == "summary_count_miss"] <- "n_miss"
         out <- rbind(out,outstats)
         
         #----------------------------------------------------------#
