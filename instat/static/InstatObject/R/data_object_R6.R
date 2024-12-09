@@ -1005,9 +1005,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
   } else if (type == "rename_with") {
     if (missing(.fn)) stop(.fn, "is missing with no default.")
     curr_col_names <- names(curr_data)
-    current_geom_col <- attr(private$data, "sf_column")
     private$data <- curr_data |>
-      
       dplyr::rename_with(
         .fn = .fn,
         .cols = {{ .cols }}, ...

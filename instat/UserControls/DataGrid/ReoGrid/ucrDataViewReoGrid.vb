@@ -39,8 +39,6 @@ Public Class ucrDataViewReoGrid
 
     Public Event WorksheetRemoved(worksheet As clsWorksheetAdapter) Implements IDataViewGrid.WorksheetRemoved
 
-    Private toolTip1 As New ToolTip()
-
     Public Sub AddColumns(visiblePage As clsDataFramePage) Implements IDataViewGrid.AddColumns
         Dim workSheetColumnHeader As ColumnHeader
         Dim variableTextColour As Color
@@ -103,7 +101,6 @@ Public Class ucrDataViewReoGrid
                 strLongestRowHeaderText = strRowNames(i)
             End If
         Next
-
 
         If dataFrame.clsFilterOrColumnSelection.bFilterApplied Then
             grdData.CurrentWorksheet.ScrollToCell("A1") ' will always set the scrollbar at the top.
