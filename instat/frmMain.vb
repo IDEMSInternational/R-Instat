@@ -1724,6 +1724,10 @@ Public Class frmMain
         ucrDataViewer.UseColumnSelectionInDataView(bUseColumnSelecion)
     End Sub
 
+    Public Function IsColumnSelectionApplied() As Boolean
+        Return ucrDataViewer.IsColumnSelectionApplied
+    End Function
+
     Public Sub SetCurrentDataFrame(strDataName As String)
         ucrDataViewer.SetCurrentDataFrame(strDataName)
         ucrColumnMeta.SetCurrentDataFrame(strDataName)
