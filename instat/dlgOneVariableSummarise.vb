@@ -234,6 +234,7 @@ Public Class dlgOneVariableSummarise
 
         clsGtFunction.SetPackageName("gt")
         clsGtFunction.SetRCommand("gt")
+        clsPipeOperator.AddParameter(strParameterName:="gt", clsRFunctionParameter:=clsGtFunction, iPosition:=2, bIncludeArgumentName:=False)
 
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryTableFunction, iPosition:=0)
@@ -399,7 +400,7 @@ Public Class dlgOneVariableSummarise
             ucrSaveSummary.SetCheckBoxText("Store Summary")
         End If
         cmdSummaries.Visible = rdoCustomised.Checked
-        cmdFormatTable.Visible = rdoCustomised.Checked
+        cmdTableOptions.Visible = rdoCustomised.Checked
     End Sub
 
     Private Sub FillListView()
@@ -432,16 +433,9 @@ Public Class dlgOneVariableSummarise
         Next
     End Sub
 
-    Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
-        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
-                                     clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
-                                   clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
-                                   clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                   clsNewMutableOperator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
-                                   clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction,
-                                   clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, bReset:=bResetFormatSubdialog)
-
-        sdgFormatSummaryTables.ShowDialog()
+    Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
+        sdgTableOptions.Setup(ucrSelectorOneVarSummarise.strCurrentDataFrame, clsPipeOperator)
+        sdgTableOptions.ShowDialog(Me)
         bResetFormatSubdialog = False
     End Sub
 
