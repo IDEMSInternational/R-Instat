@@ -1057,6 +1057,7 @@ Partial Class frmMain
         Me.mnuModel.Size = New System.Drawing.Size(53, 22)
         Me.mnuModel.Tag = "Model"
         Me.mnuModel.Text = "Model"
+        Me.mnuModel.Visible = False
         '
         'mnuModelProbabilityDistributions
         '
@@ -3215,7 +3216,7 @@ Partial Class frmMain
         '
         Me.mnuDataViewWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuDataViewWindow.Name = "mnuDataViewWindow"
-        Me.mnuDataViewWindow.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDataViewWindow.Size = New System.Drawing.Size(148, 22)
         Me.mnuDataViewWindow.Text = "Data View"
         '
         'mnuRDataViewerWindow
@@ -3223,7 +3224,7 @@ Partial Class frmMain
         Me.mnuRDataViewerWindow.Enabled = False
         Me.mnuRDataViewerWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuRDataViewerWindow.Name = "mnuRDataViewerWindow"
-        Me.mnuRDataViewerWindow.Size = New System.Drawing.Size(180, 22)
+        Me.mnuRDataViewerWindow.Size = New System.Drawing.Size(148, 22)
         Me.mnuRDataViewerWindow.Text = "R-Data Viewer"
         '
         'mnuTbOutput
