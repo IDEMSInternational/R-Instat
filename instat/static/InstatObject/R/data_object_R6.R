@@ -4575,6 +4575,12 @@ DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed,
   }
 })
 
+DataSheet$set("public", "get_column_climatic_type", function(col_name, attr_name) {
+  if (!is.null(private$data[[col_name]]) && !is.null(attr(private$data[[col_name]], attr_name))) {
+    return(attr(private$data[[col_name]], attr_name))
+  }
+})
+
 DataSheet$set("public", "add_flag_fields", function(col_names) {
   curr_data <- self$get_columns_from_data(col_names, force_as_data_frame = TRUE)
   for (i in colnames(curr_data)) {
@@ -4645,39 +4651,79 @@ DataSheet$set("public", "has_labels", function(col_names) {
 }
 )
 
-DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
-  if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE, interaction = FALSE) {
+  if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_name are required")
   if (sign_level || signif.stars) message("This is no longer descriptive")
-  if (sign_level) end_col = 5 else end_col = 4
   
+  end_col <- if (sign_level) 5 else 4
+
   # Construct the formula
   if (length(x_col_names) == 1) {
-    formula_str <- paste0(as.name(y_col_name), "~ ", as.name(x_col_names))
-  } else if (length(x_col_names) > 1) {
-    formula_str <- paste0(as.name(y_col_name), "~ ", as.name(paste(x_col_names, collapse = " + ")))
+    formula_str <- paste0(as.name(y_col_name), " ~ ", as.name(x_col_names))
+  } else if (interaction && length(x_col_names) > 1) {
+    formula_str <- paste0(as.name(y_col_name), " ~ ", as.name(paste(x_col_names, collapse = " * ")))
+  } else {
+    formula_str <- paste0(as.name(y_col_name), " ~ ", as.name(paste(x_col_names, collapse = " + ")))
   }
-
-  # Fit the model
+  
   mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())
-  anova_mod <- anova(mod)[1:end_col] %>% tibble::as_tibble(rownames = " ")
+  anova_mod <- anova(mod)[1:end_col]
+  
+  # Process ANOVA table
+  anova_mod <- anova_mod %>%
+    dplyr::mutate(
+      `Sum Sq` = signif(`Sum Sq`, 3),
+      `Mean Sq` = signif(`Mean Sq`, 3),
+      `F value` = ifelse(`F value` < 100, round(`F value`, 1), round(`F value`))
+    ) %>%
+    dplyr::mutate(`F value` = as.character(`F value`)) %>%
+    dplyr::mutate(across(`F value`, ~ tidyr::replace_na(., "--"))) %>%
+    tibble::as_tibble(rownames = " ")
 
   # Add the total row if requested
-  if (total) anova_mod <- anova_mod %>% tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum)))
-  anova_mod$`F value` <- round(anova_mod$`F value`, 4)
-  if (sign_level) anova_mod$`Pr(>F)` <- format.pval(anova_mod$`Pr(>F)`, digits = 4, eps = 0.001)
-  cat(paste0("ANOVA of ", formula_str, ":\n"))
-  print(anova_mod)
+  if (total) {
+    anova_mod <- anova_mod %>%
+      tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum))) %>%
+      dplyr::mutate(`F value` = ifelse(` ` == "Total", "--", `F value`)) # Replace NA with "--" for Total row
+  }
+  
+  # Handle significance levels
+  if (sign_level) {
+    anova_mod <- anova_mod %>%
+      dplyr::mutate(
+        `Pr(>F)` = ifelse(
+          is.na(`Pr(>F)`) | !is.numeric(`Pr(>F)`), "--",
+          ifelse(`Pr(>F)` < 0.001, "<0.001", formatC(`Pr(>F)`, format = "f", digits = 3))
+        )
+      )
+  }
+
+  # Generate the table with a title
+  title <- paste0("ANOVA of ", formula_str)
+ formatted_table <- anova_mod %>%
+  knitr::kable(format = "simple", caption = title)
+
+  print(formatted_table)
+  
+  # Add line break before means section
   cat("\n")
-  # Optionally print means
+
+  # Optionally print means or model coefficients
   if (means) {
-    if (class(mod$model[[x_col_names]]) %in% c("numeric", "integer")){
-      cat("Model coefficients:\n")
-      print(mod$coefficients)
-      cat("\n")
+    has_numeric <- any(sapply(x_col_names, function(x) class(mod$model[[x]]) %in% c("numeric", "integer")))
+    has_factor <- any(sapply(x_col_names, function(x) class(mod$model[[x]]) == "factor"))
+    
+    if (has_numeric && has_factor) {
+        cat("Model coefficients:\n")
+        print(mod$coefficients)
+    } else if (class(mod$model[[x_col_names[[1]]]]) %in% c("numeric", "integer")) {
+        cat("Model coefficients:\n")
+        print(mod$coefficients)
     } else {
-      cat(paste0("Means table of ", y_col_name, ":\n"))
-      print(model.tables(aov(mod), type = "means"))
-      cat("\n")
+        cat(paste0("Means tables of ", y_col_name, ":\n"))
+        means_table <- capture.output(model.tables(aov(mod), type = "means"))
+        means_table <- means_table[-1]
+        cat(paste(means_table, collapse = "\n"))
     }
   }
 }
