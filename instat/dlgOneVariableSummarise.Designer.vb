@@ -48,7 +48,7 @@ Partial Class dlgOneVariableSummarise
         Me.rdoVariable = New System.Windows.Forms.RadioButton()
         Me.rdoSummary = New System.Windows.Forms.RadioButton()
         Me.grpColumns = New System.Windows.Forms.GroupBox()
-        Me.cmdFormatTable = New System.Windows.Forms.Button()
+        Me.ucrPnlColumnFactor = New instat.UcrPanel()
         Me.ucrReorderSummary = New instat.ucrReorder()
         Me.ucrSaveSummary = New instat.ucrSave()
         Me.ucrPnlSummaries = New instat.UcrPanel()
@@ -57,9 +57,9 @@ Partial Class dlgOneVariableSummarise
         Me.ucrSelectorOneVarSummarise = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverOneVarSummarise = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlColumnFactor = New instat.UcrPanel()
         Me.ucrChkDisplayMissing = New instat.ucrCheck()
         Me.ucrInputDisplayMissing = New instat.ucrInputComboBox()
+        Me.cmdTableOptions = New System.Windows.Forms.Button()
         Me.grpColumns.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -203,15 +203,13 @@ Partial Class dlgOneVariableSummarise
         Me.grpColumns.TabStop = False
         Me.grpColumns.Text = "Columns:"
         '
-        'cmdFormatTable
+        'ucrPnlColumnFactor
         '
-        Me.cmdFormatTable.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFormatTable.Location = New System.Drawing.Point(317, 393)
-        Me.cmdFormatTable.Name = "cmdFormatTable"
-        Me.cmdFormatTable.Size = New System.Drawing.Size(104, 23)
-        Me.cmdFormatTable.TabIndex = 37
-        Me.cmdFormatTable.Text = "Format Table..."
-        Me.cmdFormatTable.UseVisualStyleBackColor = True
+        Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(6, 12)
+        Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
+        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(137, 65)
+        Me.ucrPnlColumnFactor.TabIndex = 29
         '
         'ucrReorderSummary
         '
@@ -296,14 +294,6 @@ Partial Class dlgOneVariableSummarise
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 11
         '
-        'ucrPnlColumnFactor
-        '
-        Me.ucrPnlColumnFactor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColumnFactor.Location = New System.Drawing.Point(6, 12)
-        Me.ucrPnlColumnFactor.Name = "ucrPnlColumnFactor"
-        Me.ucrPnlColumnFactor.Size = New System.Drawing.Size(137, 65)
-        Me.ucrPnlColumnFactor.TabIndex = 29
-        '
         'ucrChkDisplayMissing
         '
         Me.ucrChkDisplayMissing.AutoSize = True
@@ -325,13 +315,25 @@ Partial Class dlgOneVariableSummarise
         Me.ucrInputDisplayMissing.Size = New System.Drawing.Size(74, 21)
         Me.ucrInputDisplayMissing.TabIndex = 35
         '
+        'cmdTableOptions
+        '
+        Me.cmdTableOptions.AutoSize = True
+        Me.cmdTableOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTableOptions.Location = New System.Drawing.Point(302, 393)
+        Me.cmdTableOptions.Name = "cmdTableOptions"
+        Me.cmdTableOptions.Size = New System.Drawing.Size(114, 23)
+        Me.cmdTableOptions.TabIndex = 38
+        Me.cmdTableOptions.Tag = "Format Table"
+        Me.cmdTableOptions.Text = "Table Options..."
+        Me.cmdTableOptions.UseVisualStyleBackColor = True
+        '
         'dlgOneVariableSummarise
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(470, 495)
-        Me.Controls.Add(Me.cmdFormatTable)
+        Me.Controls.Add(Me.cmdTableOptions)
         Me.Controls.Add(Me.ucrReorderSummary)
         Me.Controls.Add(Me.ucrSaveSummary)
         Me.Controls.Add(Me.cmdMissingOptions)
@@ -386,5 +388,5 @@ Partial Class dlgOneVariableSummarise
     Friend WithEvents ucrChkDisplayMissing As ucrCheck
     Friend WithEvents grpColumns As GroupBox
     Friend WithEvents ucrReorderSummary As ucrReorder
-    Friend WithEvents cmdFormatTable As Button
+    Friend WithEvents cmdTableOptions As Button
 End Class
