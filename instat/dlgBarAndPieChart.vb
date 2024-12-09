@@ -148,7 +148,7 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddFunctionNamesCondition(rdoTreeMap, {"geom_treemap", "geom_treemap_text"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoWordCloud, {"geom_text_wordcloud", "scale_size_area"})
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrReceiverByFactor, ucrInputBarChartPositions, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart, ucrChkBacktoback}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrReceiverByFactor, ucrInputBarChartPositions, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart, ucrChkBacktoback}, {rdoFrequency, rdoValue}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX, ucrChkReorderValue, ucrInputAddReorder, ucrChkLollipop}, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkReorderFrequency, ucrInputAddReorder}, {rdoFrequency}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverArea, ucrReceiverFill, ucrChkLayout, ucrChkStart, ucrChkAddLabelsTreemap}, {rdoTreeMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -1284,18 +1284,18 @@ Public Class dlgBarAndPieChart
 
     Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged,
         ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+        clsBaseOperator.RemoveParameterByName("geom_bar1")
+        clsBaseOperator.RemoveParameterByName("geom_bar2")
+        clsBaseOperator.RemoveParameterByName("scale_y_symmetric")
+        clsAesFunction1.RemoveParameterByName("y")
+        clsAesFunction2.RemoveParameterByName("y")
+        clsRgeomBarFunction2.RemoveParameterByName("aes")
+        clsRgeomBarFunction1.RemoveParameterByName("aes")
+        clsRggplotFunction.RemoveParameterByName("aes")
         If rdoFrequency.Checked OrElse rdoValue.Checked Then
-            clsBaseOperator.RemoveParameterByName("geom_bar1")
-            clsBaseOperator.RemoveParameterByName("geom_bar2")
-            clsBaseOperator.RemoveParameterByName("scale_y_symmetric")
-            clsAesFunction1.RemoveParameterByName("y")
-            clsAesFunction2.RemoveParameterByName("y")
-            clsRgeomBarFunction2.RemoveParameterByName("aes")
-            clsRgeomBarFunction1.RemoveParameterByName("aes")
             ucrChkPolarCoordinates.Enabled = True
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
-            clsRggplotFunction.RemoveParameterByName("aes")
             If ucrChkBacktoback.Checked Then
                 ucrChkPolarCoordinates.Enabled = False
                 ucrChkPolarCoordinates.Checked = Not ucrChkBacktoback.Checked
@@ -1317,6 +1317,9 @@ Public Class dlgBarAndPieChart
                     clsRgeomBarFunction1.AddParameter("aes", clsRFunctionParameter:=clsAesFunction1, iPosition:=1, bIncludeArgumentName:=False)
                 End If
             End If
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_bar")
+            clsRggplotFunction.RemoveParameterByName("mapping")
         End If
         ChangeParameterName()
         SetGeomTextOptions()
