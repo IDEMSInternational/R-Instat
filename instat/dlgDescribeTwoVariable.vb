@@ -898,7 +898,6 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
-        ucrReceiverFirstVars.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
 
         If rdoSkim.Checked Then
