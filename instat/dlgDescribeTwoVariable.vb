@@ -44,18 +44,13 @@ Public Class dlgDescribeTwoVariable
         clsTabStyleCellTextFunction, clsTabStyleCellTitleFunction, clsTabStyleFunction,
         clsTabStylePxFunction, clsgtExtrasThemesFuction As New RFunction
 
-
     Private clsGroupByPipeOperator, clsSummaryOperator, clsGroupByPipeOperator2, clsGroupByPipeOperator3, clsGroupByPipeOperator4, clsGroupByPipeOperatorData As New ROperator
-
     Private clsTildOperator, clsMapOperator, clsPivotOperator As New ROperator
-
-
     Private clsgtFunction, clsMapSummaryFunction, clsMapGtFunction As New RFunction
     'Frequency Parameters
     Private lstFrequencyParameters As New List(Of String)({"percentage_type", "margin_name",
                                                           "perc_total_factors", "perc_decimal",
                                                           "signif_fig", "include_margins"})
-
     'Format Operators
     Private clsPipeOperator, clsTabFootnoteOperator,
             clsJoiningPipeOperator, clsMutableOperator, clsAnovaSwapTable2Opeator, clsAnovaTable2Operator, clsYlist2Operator, clsYlistOperator As New ROperator
@@ -511,7 +506,6 @@ Public Class dlgDescribeTwoVariable
         ucrSaveTable.AddAdditionalRCode(clsGroupByPipeOperator4, iAdditionalPairNo:=2)
 
         ucrChkOmitMissing.SetRCode(clsSummaryTableFunction, bReset)
-        ucrReceiverFirstVars.SetRCode(clsDummyFunction, bReset)
         ucrReceiverSecondTwoVariableFactor.SetRCode(clsDummyFunction, bReset)
         ucrSelectorDescribeTwoVar.SetRCode(clsRCorrelationFunction, bReset)
         ucrReceiverSkimrGroupByFactor.SetRCode(clsGroupByFunction, bReset)
@@ -894,12 +888,10 @@ Public Class dlgDescribeTwoVariable
             clsSummaryTableFunction.AddParameter("na_type", clsRFunctionParameter:=clsCombineFunction, iPosition:=9)
         End If
         cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
-
     End Sub
 
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
         ucrReceiverFirstVars.SetMeAsReceiver()
-
         If rdoSkim.Checked Then
             ucrReceiverFirstVars.SetSingleTypeStatus(False)
         ElseIf rdoThreeVariable.Checked Then
@@ -1140,13 +1132,11 @@ Public Class dlgDescribeTwoVariable
                     If ucrChkSwapXYVar.Checked Then
                         clsCombineSwapAnova2Table.AddParameter("x", ".x", bIncludeArgumentName:=False)
                         clsRAnovaSwapTable2Funtion.AddParameter("x_col_names", "c(" & ucrReceiverThreeVariableSecondFactor.GetVariableNames & "," & ucrReceiverThreeVariableThirdVariable.GetVariableNames & ")", iPosition:=2)
-
                         clsCombineAnova2Function.RemoveParameterByName("x")
                     Else
                         clsCombineAnova2Function.AddParameter("x", ucrReceiverThreeVariableSecondFactor.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
                         clsCombineSwapAnova2Table.RemoveParameterByName("x")
                         clsRAnovaSwapTable2Funtion.AddParameter("x_col_names", ".x", iPosition:=2)
-
                     End If
                 ElseIf IsNumericByNumericByNumeric() OrElse IsNumericByFactorByFactor() OrElse IsNumericByFactorByNumeric() Then
                     clsCombineAnova2Function.AddParameter("x", ucrReceiverThreeVariableSecondFactor.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
@@ -1200,7 +1190,6 @@ Public Class dlgDescribeTwoVariable
                 clsCombineAnova2Function.RemoveParameterByName("x")
             End If
         End If
-
     End Sub
 
     Private Sub AddRemoveThirdAnovaParam()
@@ -1503,7 +1492,6 @@ Public Class dlgDescribeTwoVariable
             Case TwovariableMode.Climatic
                 ucrBase.iHelpTopicID = 408
         End Select
-
     End Sub
 
     Private Sub ucrReceiverFirstVars_ControlValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged,
@@ -1580,7 +1568,6 @@ Public Class dlgDescribeTwoVariable
                     lstMultipleVariables.Contains(ucrReceiverThreeVariableThirdVariable.GetVariableNames))
             End If
         End If
-
 
         If sender Is ucrReceiverSecondTwoVariableFactor Then
             If bContainedInMultipleReceiver And strFirstVariablesType = "categorical" Then
@@ -1733,6 +1720,5 @@ Public Class dlgDescribeTwoVariable
     Private Sub AddRemoveTotalParm()
         clsRAnovaTable2Function.AddParameter("total", If(ucrChkTotal.Checked, "TRUE", "FALSE"), iPosition:=6)
         clsRAnovaSwapTable2Funtion.AddParameter("total", If(ucrChkTotal.Checked AndAlso ucrChkSwapXYVar.Checked, "TRUE", "FALSE"), iPosition:=6)
-
     End Sub
 End Class
