@@ -227,6 +227,7 @@ Public Class frmMain
         '-------------------------------------
         SetAppVersionNumber()
         isMaximised = True 'Need to get the windowstate when the application is loaded
+        SetHideMenus()
     End Sub
 
     Private Sub CheckForUpdates()
@@ -593,6 +594,13 @@ Public Class frmMain
         Me.Text = "R-Instat " & My.Application.Info.Version.Major.ToString() & "." &
                 My.Application.Info.Version.Minor.ToString() & "." &
                 My.Application.Info.Version.Build.ToString()
+    End Sub
+
+    Public Sub SetHideMenus()
+        mnuViewProcurementMenu.Checked = False
+        mnuProcurement.Visible = False
+        mnuViewOptionsByContextMenu.Checked = False
+        mnuOptionsByContext.Visible = False
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
