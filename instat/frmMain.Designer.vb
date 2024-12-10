@@ -1057,7 +1057,6 @@ Partial Class frmMain
         Me.mnuModel.Size = New System.Drawing.Size(53, 22)
         Me.mnuModel.Tag = "Model"
         Me.mnuModel.Text = "Model"
-        Me.mnuModel.Visible = False
         '
         'mnuModelProbabilityDistributions
         '

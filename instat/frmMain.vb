@@ -227,6 +227,7 @@ Public Class frmMain
         '-------------------------------------
         SetAppVersionNumber()
         isMaximised = True 'Need to get the windowstate when the application is loaded
+        SetHideMenus()
     End Sub
 
     Private Sub CheckForUpdates()
@@ -593,6 +594,13 @@ Public Class frmMain
         Me.Text = "R-Instat " & My.Application.Info.Version.Major.ToString() & "." &
                 My.Application.Info.Version.Minor.ToString() & "." &
                 My.Application.Info.Version.Build.ToString()
+    End Sub
+
+    Public Sub SetHideMenus()
+        mnuViewProcurementMenu.Checked = False
+        mnuProcurement.Visible = False
+        mnuViewOptionsByContextMenu.Checked = False
+        mnuOptionsByContext.Visible = False
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -1863,13 +1871,11 @@ Public Class frmMain
     Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
         mnuProcurement.Visible = bNewShowProcurementMenu
         mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
-        mnuProcurement.Visible = False
     End Sub
 
     Public Sub SetShowStructuredMenu(bNewShowStructuredMenu As Boolean)
         mnuStructured.Visible = bNewShowStructuredMenu
         mnuViewStructuredMenu.Checked = bNewShowStructuredMenu
-        mnuStructured.Visible = False
     End Sub
     Public Sub SetShowClimaticMenu(bNewShowClimaticMenu As Boolean)
         mnuClimatic.Visible = bNewShowClimaticMenu
@@ -1879,7 +1885,6 @@ Public Class frmMain
     Public Sub SetShowOptionsByContextMenu(bNewShowOptionsByContextMenu As Boolean)
         mnuOptionsByContext.Visible = bNewShowOptionsByContextMenu
         mnuViewOptionsByContextMenu.Checked = bNewShowOptionsByContextMenu
-        mnuOptionsByContext.Visible = False
     End Sub
 
     Private Sub mnuViewStructuredMenu_Click(sender As Object, e As EventArgs) Handles mnuViewStructuredMenu.Click
