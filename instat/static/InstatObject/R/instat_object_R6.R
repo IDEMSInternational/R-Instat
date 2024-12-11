@@ -2990,6 +2990,10 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
   if (is_win) close(pb)
 })
 
+DataBook$set("public", "get_column_climatic_type", function(data_name, col_name, attr_name){
+  self$get_data_objects(data_name)$get_column_climatic_type(col_name = col_name, attr_name =attr_name)
+})
+
 DataBook$set("public", "add_flag_fields", function(data_name, col_names, key_column_names) {
   if (!self$has_key(data_name)) {
     self$add_key(data_name, key_column_names)
@@ -3043,7 +3047,7 @@ DataBook$set("public","wrap_or_unwrap_data", function(data_name, col_name, colum
 }
 )
 
-DataBook$set("public", "anova_tables2", function(data_name, x_col_names, y_col_name, total = TRUE, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
-  self$get_data_objects(data_name)$anova_tables2(x_col_names = x_col_names, y_col_name = y_col_name, total = total, signif.stars = signif.stars, sign_level = sign_level, means = means)
+DataBook$set("public", "anova_tables2", function(data_name, x_col_names, y_col_name, total = TRUE, signif.stars = FALSE, sign_level = FALSE, means = FALSE, interaction=FALSE) {
+  self$get_data_objects(data_name)$anova_tables2(x_col_names = x_col_names, y_col_name = y_col_name, total = total, signif.stars = signif.stars, sign_level = sign_level, means = means, interaction=interaction)
 } 
 )

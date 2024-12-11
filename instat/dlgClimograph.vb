@@ -15,8 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports System.Text.RegularExpressions
 
 Public Class dlgClimograph
+    Private isFilling As Boolean = False
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsGgwalterliethFunction, clsDummyFunction As RFunction
@@ -29,6 +31,10 @@ Public Class dlgClimograph
     Private ReadOnly strFacetRow1 As String = "Facet Row"
     Private ReadOnly strFacetCol1 As String = "Facet Column"
     Private ReadOnly strNone1 As String = "None"
+    Private ReadOnly strFacetWrap2 As String = "Facet Wrap"
+    Private ReadOnly strFacetRow2 As String = "Facet Row"
+    Private ReadOnly strFacetCol2 As String = "Facet Column"
+    Private ReadOnly strNone2 As String = "None"
     Private clsFacetFunction As New RFunction
     Private clsGroupByFunction As New RFunction
     Private clsGeomBarFunction As New RFunction
@@ -40,6 +46,8 @@ Public Class dlgClimograph
     Private clsAesLineStar1Function As New RFunction
     Private clsFacetFunction1 As New RFunction
     Private clsGroupByFunction1 As New RFunction
+    Private clsFacetFunction2 As New RFunction
+    Private clsGroupByFunction2 As New RFunction
     Private bResetSubdialog As Boolean = True
     Private bResetLineLayerSubdialog As Boolean = True
     Private clsCoordPolarFunction As New RFunction
@@ -97,6 +105,9 @@ Public Class dlgClimograph
     Private clsFacetRowOp1 As New ROperator
     Private clsFacetColOp1 As New ROperator
     Private clsPipeOperator1 As New ROperator
+    Private clsFacetRowOp2 As New ROperator
+    Private clsFacetColOp2 As New ROperator
+    Private clsPipeOperator2 As New ROperator
     Private clsFacetOperator As New ROperator
     Private clsFacetRowOp As New ROperator
     Private clsFacetColOp As New ROperator
@@ -104,7 +115,9 @@ Public Class dlgClimograph
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
     Private bUpdateComboOptions1 As Boolean = True
+    Private bUpdateComboOptions2 As Boolean = True
     Private bUpdatingParameters1 As Boolean = False
+    Private bUpdatingParameters2 As Boolean = False
     Private strTemBar As String = "Tem"
     Private strRainBar As String = "Rain"
     Private clsPlus1Operator, clsPlus2Operator, clsPlus3Operator, clsPlus5Operator As New ROperator
@@ -114,6 +127,12 @@ Public Class dlgClimograph
     Private clsAesTmaxBarFunction1, clsAesTminBarFunction1, clsAesTemGgplotFunction, clsAesRainGgplotFunction, clsSecAxisRainFunction, clsSecAxisTemFunction As New RFunction
     Private clsAesRainBarTextFunction, clsPlotGridFunction, clsAesTmaxBarTextFunction, clsAesTminBarTextFunction, clsRainRoundFunction, clsTmaxRoundFunction, clsTminRoundFunction As New RFunction
     Private strScale As String = "scale_Factor"
+    Private lstRainReceivers As New List(Of ucrReceiverSingle)
+    Private lstTmaxReceivers As New List(Of ucrReceiverSingle)
+    Private lstTminReceivers As New List(Of ucrReceiverSingle)
+    Private lstTminminReceivers As New List(Of ucrReceiverSingle)
+
+    Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
     Private Sub dlgClimograph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -128,9 +147,29 @@ Public Class dlgClimograph
         TestOKEnabled()
         autoTranslate(Me)
         ResizeDialogue()
+
+        AutoFillReceivers(lstRainReceivers)
+        AutoFillReceivers(lstTmaxReceivers)
+        AutoFillReceivers(lstTminReceivers)
+        AutoFillReceivers(lstTminminReceivers)
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim kvpRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("rain", {"sumrainfall", "rain", "rainfall", "prec", "rr", "prcp", "sum_rainfall", "sum_rain", "sum_precip", "sum_precipitation", "sum_rr", "sum_pre", "sum_prcp", "mean_rainfall", "mean_rain", "mean_precip", "mean_precipitation", "mean_rr", "mean_pre", "mean_prcp", "max_rainfall", "max_rain", "max_precip", "max_precipitation", "max_rr", "max_pre", "max_prcp", "min_rainfall", "min_rain", "min_precip", "min_precipitation", "min_rr", "min_pre", "min_prcp", "mean_sum_rain", "mean_sum_precip", "mean_sum_precipitation", "mean_sum_rr", "mean_sum_pre", "mean_sum_prcp", "mean_sum_rainfall", "max_sum_rain", "max_sum_precip", "max_sum_precipitation", "max_sum_rr", "max_sum_pre", "max_sum_prcp", "max_sum_rainfall", "min_sum_rain", "min_sum_precip", "min_sum_precipitation", "min_sum_rr", "min_sum_pre", "min_sum_prcp", "min_sum_rainfall"}.ToList())
+        Dim kvpTMax As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_max", {"tmax", "tx", "tempmax", "tmp_max", "tmpmax", "max_temperature", "temperature_max", "mean_tmax", "mean_tx", "mean_tempmax", "mean_tmp_max", "mean_tmpmax", "mean_temperature_max", "mean_max_temperature", "max_tmax", "max_tx", "max_tempmax", "max_tmp_max", "max_tmpmax", "max_temperature_max", "max_max_temperature", "min_tmax", "min_tx", "min_tempmax", "min_tmp_max", "min_tmpmax", "min_temperature_max", "min_max_temperature"}.ToList())
+        Dim kvpTMin As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_min", {"tmin", "tn", "tempmin", "tmp_min", "tmpmin", "min_temperature", "temperature_min", "mean_tmin", "mean_tn", "mean_tempmin", "mean_tmp_min", "mean_tmpmin", "mean_temperature_min", "mean_min_temperature", "max_tmin", "max_tn", "max_tempmin", "max_tmp_min", "max_tmpmin", "max_temperature_min", "max_min_temperature"}.ToList())
+        Dim kvpTMinmin As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("tem_min_min", {"min_tmin", "min_tn", "min_tempmin", "min_tmp_min", "min_tmpmin", "min_temperature_min", "min_min_temperature"}.ToList())
+
+        lstRecognisedTypes.AddRange({kvpRain, kvpTMax, kvpTMin, kvpTMinmin})
+
+        lstRainReceivers.AddRange({ucrReceiverRainBar, ucrReceiverRain, ucrReceiverRainC})
+
+        lstTmaxReceivers.AddRange({ucrReceiverElement1, ucrReceiverElement1Bar, ucrReceiverMaxtem})
+
+        lstTminReceivers.AddRange({ucrReceiverElement2, ucrReceiverElement2Bar, ucrReceiverMintemp})
+
+        lstTminminReceivers.AddRange({ucrReceiverAbsolute})
+
         Dim dctLegendPosition As New Dictionary(Of String, String)
         Dim dctColourPallette As New Dictionary(Of String, String)
         Dim dctPalette As New Dictionary(Of String, String)
@@ -176,42 +215,34 @@ Public Class dlgClimograph
         ucrReceiverRain.SetParameter(New RParameter("p_mes", 3))
         ucrReceiverRain.SetParameterIsString()
         ucrReceiverRain.Selector = ucrSelectorClimograph
-        ucrReceiverRain.SetClimaticType("rain")
-        ucrReceiverRain.bAutoFill = True
-        ucrReceiverRain.strSelectorHeading = "Rain Variables"
+        ucrReceiverRain.Tag = "rain"
         ucrReceiverRain.SetLinkedDisplayControl(lblRain)
 
         ucrReceiverRainC.SetParameter(New RParameter("y", 1))
         ucrReceiverRainC.SetParameterIsRFunction()
         ucrReceiverRainC.Selector = ucrSelectorClimograph
         ucrReceiverRainC.bWithQuotes = False
-        ucrReceiverRainC.SetClimaticType("rain")
-        ucrReceiverRainC.bAutoFill = True
-        ucrReceiverRainC.strSelectorHeading = "Rain Variables"
+        ucrReceiverRainC.Tag = "rain"
         ucrReceiverRainC.SetLinkedDisplayControl(lblRainC)
 
         ucrReceiverRainBar.SetParameter(New RParameter("y", 1))
         ucrReceiverRainBar.SetParameterIsRFunction()
         ucrReceiverRainBar.Selector = ucrSelectorClimograph
         ucrReceiverRainBar.bWithQuotes = False
-        ucrReceiverRainBar.SetClimaticType("rain")
-        ucrReceiverRainBar.bAutoFill = True
-        ucrReceiverRainBar.strSelectorHeading = "Rain Variables"
+        ucrReceiverRainBar.Tag = "rain"
         ucrReceiverRainBar.SetLinkedDisplayControl(lblRainBar)
 
         ucrReceiverMaxtem.SetParameter(New RParameter("tm_max", 4))
         ucrReceiverMaxtem.SetParameterIsString()
         ucrReceiverMaxtem.Selector = ucrSelectorClimograph
-        ucrReceiverMaxtem.SetClimaticType("temp_max")
-        ucrReceiverMaxtem.bAutoFill = True
+        ucrReceiverMaxtem.Tag = "temp_max"
         ucrReceiverMaxtem.strSelectorHeading = "Variables"
         ucrReceiverMaxtem.SetLinkedDisplayControl(lblMaxtem)
 
         ucrReceiverMintemp.SetParameter(New RParameter("tm_min", 5))
         ucrReceiverMintemp.SetParameterIsString()
         ucrReceiverMintemp.Selector = ucrSelectorClimograph
-        ucrReceiverMintemp.SetClimaticType("temp_min")
-        ucrReceiverMintemp.bAutoFill = True
+        ucrReceiverMintemp.Tag = "temp_min"
         ucrReceiverMintemp.strSelectorHeading = "Variables"
         ucrReceiverMintemp.SetLinkedDisplayControl(lblMintem)
 
@@ -219,8 +250,7 @@ Public Class dlgClimograph
         ucrReceiverElement1.SetParameterIsRFunction()
         ucrReceiverElement1.Selector = ucrSelectorClimograph
         ucrReceiverElement1.bWithQuotes = False
-        ucrReceiverElement1.SetClimaticType("temp_max")
-        ucrReceiverElement1.bAutoFill = True
+        ucrReceiverElement1.Tag = "temp_max"
         ucrReceiverElement1.strSelectorHeading = "Variables"
         ucrReceiverElement1.SetLinkedDisplayControl(lblElement1)
 
@@ -228,8 +258,7 @@ Public Class dlgClimograph
         ucrReceiverElement1Bar.SetParameterIsRFunction()
         ucrReceiverElement1Bar.Selector = ucrSelectorClimograph
         ucrReceiverElement1Bar.bWithQuotes = False
-        ucrReceiverElement1Bar.SetClimaticType("temp_max")
-        ucrReceiverElement1Bar.bAutoFill = True
+        ucrReceiverElement1Bar.Tag = "temp_max"
         ucrReceiverElement1Bar.strSelectorHeading = "Variables"
         ucrReceiverElement1Bar.SetLinkedDisplayControl(lblElement1Bar)
 
@@ -237,8 +266,7 @@ Public Class dlgClimograph
         ucrReceiverElement2.SetParameterIsRFunction()
         ucrReceiverElement2.Selector = ucrSelectorClimograph
         ucrReceiverElement2.bWithQuotes = False
-        ucrReceiverElement2.SetClimaticType("temp_min")
-        ucrReceiverElement2.bAutoFill = True
+        ucrReceiverElement2.Tag = "temp_min"
         ucrReceiverElement2.strSelectorHeading = "Variables"
         ucrReceiverElement2.SetLinkedDisplayControl(lblElement2)
 
@@ -246,8 +274,7 @@ Public Class dlgClimograph
         ucrReceiverElement2Bar.SetParameterIsRFunction()
         ucrReceiverElement2Bar.Selector = ucrSelectorClimograph
         ucrReceiverElement2Bar.bWithQuotes = False
-        ucrReceiverElement2Bar.SetClimaticType("temp_min")
-        ucrReceiverElement2Bar.bAutoFill = True
+        ucrReceiverElement2Bar.Tag = "temp_min"
         ucrReceiverElement2Bar.strSelectorHeading = "Variables"
         ucrReceiverElement2Bar.SetLinkedDisplayControl(lblElement2Bar)
 
@@ -264,25 +291,38 @@ Public Class dlgClimograph
 
         ucrReceiverFacet.SetParameter(New RParameter("var1"))
         ucrReceiverFacet.Selector = ucrSelectorClimograph
-        ucrReceiverFacet.SetClimaticType("year")
+        ucrReceiverFacet.SetClimaticType("station")
         ucrReceiverFacet.bAutoFill = True
         ucrReceiverFacet.bWithQuotes = False
         ucrReceiverFacet.SetParameterIsString()
         ucrReceiverFacet.SetValuesToIgnore({"."})
 
+        ucrReceiverFacetBar.SetParameter(New RParameter("var1"))
+        ucrReceiverFacetBar.Selector = ucrSelectorClimograph
+        ucrReceiverFacetBar.SetClimaticType("station")
+        ucrReceiverFacetBar.bAutoFill = True
+        ucrReceiverFacetBar.bWithQuotes = False
+        ucrReceiverFacetBar.SetParameterIsString()
+        ucrReceiverFacetBar.SetValuesToIgnore({"."})
+
         ucrInputFacet.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputFacet.SetDropDownStyleAsNonEditable()
+
+        ucrInputFacetBar.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputFacetBar.SetDropDownStyleAsNonEditable()
 
         ucrReceiverAbsolute.SetParameter(New RParameter("ta_min", 6))
         ucrReceiverAbsolute.SetParameterIsString()
         ucrReceiverAbsolute.Selector = ucrSelectorClimograph
+        ucrReceiverAbsolute.Tag = "tem_min_min"
         ucrReceiverAbsolute.strSelectorHeading = "Variables"
         ucrReceiverAbsolute.SetLinkedDisplayControl(lblAbsolute)
 
         ucrPnlClimograph.AddToLinkedControls({ucr1stFactorReceiver, ucrReceiverAbsolute, ucrReceiverMintemp, ucrReceiverMonth, ucrReceiverMaxtem, ucrReceiverRain, ucrInputStation}, {rdoWalterLieth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlClimograph.AddToLinkedControls({ucrChkColour, ucrChkTile, ucrChkLegend, ucrReceiverElement2, ucrReceiverElement1, ucrReceiverMonthC, ucrReceiverRainC, ucrChkRibbon, ucrChkText}, {rdoClimograph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlClimograph.AddToLinkedControls({ucrReceiverElement2Bar, ucrReceiverElement1Bar, ucrReceiverMonthBar, ucrReceiverRainBar}, {rdoClimateBars}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlClimograph.AddToLinkedControls({ucrReceiverFacet, ucrInputFacet}, {rdoClimograph, rdoClimateBars}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlClimograph.AddToLinkedControls({ucrReceiverFacet, ucrInputFacet}, {rdoClimograph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlClimograph.AddToLinkedControls({ucrReceiverFacetBar, ucrInputFacetBar}, {rdoClimateBars}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlColour.AddRadioButton(rdoViridis)
         ucrPnlColour.AddRadioButton(rdoPalette)
@@ -404,6 +444,7 @@ Public Class dlgClimograph
         clsRggplotFunction = New RFunction
         clsBarAesFunction = New RFunction
         clsFacetFunction1 = New RFunction
+        clsFacetFunction2 = New RFunction
         clsSecondaryAxisFunction = New RFunction
         clsSecondaryAxis1Function = New RFunction
         clsSecondaryAxis2Function = New RFunction
@@ -431,6 +472,7 @@ Public Class dlgClimograph
         clsFacetColOp1 = New ROperator
         clsPipeOperator1 = New ROperator
         clsGroupByFunction1 = New RFunction
+        clsGroupByFunction2 = New RFunction
         clsMaxFunction = New RFunction
         clsMax1Function = New RFunction
         clsVectorFunction = New RFunction
@@ -491,6 +533,9 @@ Public Class dlgClimograph
         ucrInputFacet.SetName(strFacetWrap)
         ucrInputFacet.bUpdateRCodeFromControl = True
 
+        ucrInputFacetBar.SetName(strFacetWrap)
+        ucrInputFacetBar.bUpdateRCodeFromControl = True
+
         clsDummyFunction.AddParameter("checked", "Climograph", iPosition:=0)
         clsDummyFunction.AddParameter("Check", "viridis", iPosition:=1)
 
@@ -513,6 +558,22 @@ Public Class dlgClimograph
 
         clsGroupByFunction1.SetPackageName("dplyr")
         clsGroupByFunction1.SetRCommand("group_by")
+
+        clsFacetFunction2.SetPackageName("ggplot2")
+        clsFacetRowOp2.SetOperation("+")
+        clsFacetRowOp2.bBrackets = False
+        clsFacetColOp2.SetOperation("+")
+        clsFacetColOp2.bBrackets = False
+        clsFacetVariablesOperator.SetOperation("~")
+        clsFacetVariablesOperator.bForceIncludeOperation = True
+        clsFacetVariablesOperator.bBrackets = False
+        clsFacetFunction2.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator, iPosition:=0)
+
+        clsPipeOperator2.SetOperation("%>%")
+        SetPipeAssignTo2()
+
+        clsGroupByFunction2.SetPackageName("dplyr")
+        clsGroupByFunction2.SetRCommand("group_by")
 
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
@@ -850,6 +911,11 @@ Public Class dlgClimograph
             ucrPnlColour.SetRCode(clsDummyFunction, bReset)
             ucrChkColour.SetRCode(clsBaseOperator, bReset)
         End If
+
+        AutoFillReceivers(lstRainReceivers)
+        AutoFillReceivers(lstTmaxReceivers)
+        AutoFillReceivers(lstTminReceivers)
+        AutoFillReceivers(lstTminminReceivers)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -912,7 +978,7 @@ Public Class dlgClimograph
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        UpdateParameters()
+        UpdateParametersForStation()
         TestOKEnabled()
     End Sub
 
@@ -1034,12 +1100,12 @@ Public Class dlgClimograph
                 ucrInputFacet.SetName(strNone1)
             End If
         End If
-        UpdateParameters1()
+        UpdateParametersForStationClimograph()
         AddRemoveFacets1()
         AddRemoveGroupBy1()
     End Sub
 
-    Private Sub UpdateParameters1()
+    Private Sub UpdateParametersForStationClimograph()
         clsFacetVariablesOperator.RemoveParameterByName("var1")
         clsFacetColOp1.RemoveParameterByName("col" & ucrInputFacet.Name)
         clsFacetRowOp1.RemoveParameterByName("row" & ucrInputFacet.Name)
@@ -1062,6 +1128,55 @@ Public Class dlgClimograph
             clsRFacetFunction.AddParameter("x", Chr(34) & Chr(34))
         End If
         bUpdatingParameters1 = False
+    End Sub
+
+    Private Sub ucrInputFacetBar_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputFacetBar.ControlValueChanged
+        If Not bUpdateComboOptions2 Then
+            Exit Sub
+        End If
+        Dim strChangedText As String = ucrChangedControl.GetText()
+        If strChangedText <> strNone Then
+            If Not strChangedText = strFacetCol2 AndAlso Not strChangedText = strFacetRow2 AndAlso
+                    Not ucrInputFacetBar.Equals(ucrChangedControl) AndAlso ucrInputFacetBar.GetText() = strChangedText Then
+                bUpdateComboOptions2 = False
+                ucrInputFacetBar.SetName(strNone2)
+                bUpdateComboOptions2 = True
+            End If
+            If (strChangedText = strFacetWrap2 AndAlso ucrInputFacetBar.GetText = strFacetRow2) OrElse (strChangedText = strFacetRow2 AndAlso
+                    ucrInputFacetBar.GetText = strFacetWrap2) OrElse (strChangedText = strFacetWrap2 AndAlso
+                    ucrInputFacetBar.GetText = strFacetCol2) OrElse (strChangedText = strFacetCol2 AndAlso ucrInputFacetBar.GetText = strFacetWrap2) Then
+                ucrInputFacetBar.SetName(strNone2)
+            End If
+        End If
+        UpdateParametersForFacetBar()
+        AddRemoveFacets2()
+        AddRemoveGroupBy2()
+        AddRemoveTemBars()
+    End Sub
+
+    Private Sub UpdateParametersForFacetBar()
+        clsFacetVariablesOperator.RemoveParameterByName("var1")
+        clsFacetColOp2.RemoveParameterByName("col" & ucrInputFacetBar.Name)
+        clsFacetRowOp2.RemoveParameterByName("row" & ucrInputFacetBar.Name)
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        bUpdatingParameters2 = True
+        ucrReceiverFacetBar.SetRCode(Nothing)
+        Select Case ucrInputFacetBar.GetText()
+            Case strFacetWrap2
+                ucrReceiverFacetBar.ChangeParameterName("var1")
+                ucrReceiverFacetBar.SetRCode(clsFacetVariablesOperator)
+            Case strFacetCol2
+                ucrReceiverFacetBar.ChangeParameterName("col" & ucrInputFacetBar.Name)
+                ucrReceiverFacetBar.SetRCode(clsFacetColOp2)
+            Case strFacetRow2
+                ucrReceiverFacetBar.ChangeParameterName("row" & ucrInputFacetBar.Name)
+                ucrReceiverFacetBar.SetRCode(clsFacetRowOp2)
+        End Select
+        If Not clsRFacetFunction.ContainsParameter("x") Then
+            clsRFacetFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
+        bUpdatingParameters2 = False
     End Sub
 
     Private Sub AddRemoveFacets1()
@@ -1110,6 +1225,52 @@ Public Class dlgClimograph
         End If
     End Sub
 
+    Private Sub AddRemoveFacets2()
+        Dim bWrap As Boolean = False
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+
+        If bUpdatingParameters2 Then
+            Exit Sub
+        End If
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        If Not ucrReceiverFacetBar.IsEmpty Then
+            Select Case ucrInputFacetBar.GetText()
+                Case strFacetWrap2
+                    bWrap = True
+                Case strFacetCol2
+                    bCol = True
+                Case strFacetRow2
+                    bRow = True
+            End Select
+        End If
+
+        If bWrap OrElse bRow OrElse bCol Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction2)
+        End If
+        If bWrap Then
+            clsFacetFunction2.SetRCommand("facet_wrap")
+        End If
+        If bRow OrElse bCol Then
+            clsFacetFunction2.SetRCommand("facet_grid")
+        End If
+        If bRow Then
+            clsFacetVariablesOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp2, iPosition:=0)
+        ElseIf bCol AndAlso bWrap = False Then
+            clsFacetVariablesOperator.AddParameter("left", ".", iPosition:=0)
+        Else
+            clsFacetVariablesOperator.RemoveParameterByName("left")
+        End If
+        If bCol Then
+            clsFacetVariablesOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp2, iPosition:=1)
+        ElseIf bRow AndAlso bWrap = False Then
+            clsFacetVariablesOperator.AddParameter("right", ".", iPosition:=1)
+        Else
+            clsFacetVariablesOperator.RemoveParameterByName("right")
+        End If
+    End Sub
+
     Private Sub AddRemoveFacetClimograph()
         If rdoClimograph.Checked Then
             If Not ucrReceiverFacet.IsEmpty Then
@@ -1123,10 +1284,17 @@ Public Class dlgClimograph
             clsBaseOperator.RemoveParameterByName("facets")
         End If
     End Sub
+
     Private Sub ucrReceiverFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacet.ControlValueChanged
         AddRemoveFacetClimograph()
         AddRemoveFacets1()
         AddRemoveGroupBy1()
+    End Sub
+
+    Private Sub ucrReceiverFacetBar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBar.ControlValueChanged
+        AddRemoveFacetClimograph()
+        AddRemoveFacets2()
+        AddRemoveGroupBy2()
     End Sub
 
     Private Sub GetParameterValue1(clsOperator As ROperator)
@@ -1173,6 +1341,50 @@ Public Class dlgClimograph
         End If
     End Sub
 
+    Private Sub GetParameterValue2(clsOperator As ROperator)
+        Dim i As Integer = 0
+        For Each clsTempParam As RParameter In clsOperator.clsParameters
+            If clsTempParam.strArgumentValue <> "" AndAlso clsTempParam.strArgumentValue <> "." Then
+                clsGroupByFunction2.AddParameter(i, clsTempParam.strArgumentValue, bIncludeArgumentName:=False, iPosition:=i)
+                i = i + 1
+            End If
+        Next
+    End Sub
+
+    Private Sub AddRemoveGroupBy2()
+        If clsPipeOperator2.ContainsParameter("mutate") Then
+            clsGroupByFunction2.ClearParameters()
+            If clsBaseOperator.ContainsParameter("facets") Then
+                Select Case ucrInputFacetBar.GetText()
+                    Case strFacetWrap2
+                        GetParameterValue2(clsFacetVariablesOperator)
+                    Case strFacetCol2
+                        GetParameterValue2(clsFacetColOp2)
+                    Case strFacetRow2
+                        GetParameterValue2(clsFacetRowOp2)
+                End Select
+            End If
+
+            If clsGroupByFunction2.iParameterCount > 0 Then
+                clsPipeOperator2.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction2, iPosition:=1)
+            Else
+                clsPipeOperator2.RemoveParameterByName("group_by")
+            End If
+        Else
+            clsPipeOperator2.RemoveParameterByName("group_by")
+        End If
+
+        SetPipeAssignTo2()
+    End Sub
+
+    Private Sub SetPipeAssignTo2()
+        If ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsPipeOperator2.clsParameters.Count > 1 Then
+            clsPipeOperator2.SetAssignTo(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        Else
+            clsPipeOperator2.RemoveAssignTo()
+        End If
+    End Sub
+
     Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
         If Not bUpdateComboOptions Then
             Exit Sub
@@ -1191,12 +1403,12 @@ Public Class dlgClimograph
                 ucrInputStation.SetName(strNone)
             End If
         End If
-        UpdateParameters()
+        UpdateParametersForStation()
         AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
 
-    Private Sub UpdateParameters()
+    Private Sub UpdateParametersForStation()
         clsFacetOperator.RemoveParameterByName("var1")
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
@@ -1288,7 +1500,7 @@ Public Class dlgClimograph
             Dim currentReceiver As ucrReceiver = ucrSelectorClimograph.CurrentReceiver
 
             If currentReceiver IsNot Nothing Then
-                ucrReceiverFacet.AddItemsWithMetadataProperty(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"year_label"})
+                ucrReceiverFacet.AddItemsWithMetadataProperty(ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
                 currentReceiver.SetMeAsReceiver()
                 AddRemoveGroupBy1()
             End If
@@ -1313,6 +1525,11 @@ Public Class dlgClimograph
         AddRemoveGeomRibbon()
         Dataframechange()
         AddRemoveTemBars()
+
+        AutoFillReceivers(lstRainReceivers)
+        AutoFillReceivers(lstTmaxReceivers)
+        AutoFillReceivers(lstTminReceivers)
+        AutoFillReceivers(lstTminminReceivers)
     End Sub
 
     Private Sub GetParameterValue(clsOperator As ROperator)
@@ -1348,10 +1565,6 @@ Public Class dlgClimograph
         End If
 
         SetPipeAssignTo()
-    End Sub
-
-    Private Sub ucrInputFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFacet.ControlValueChanged
-
     End Sub
 
     Private Sub SetPipeAssignTo()
@@ -1672,7 +1885,8 @@ Public Class dlgClimograph
             clsBaseOperator.RemoveParameterByName("scale_y_continuous")
             clsBaseOperator.RemoveParameterByName("facets")
             clsBaseOperator.RemoveParameterByName("facets1")
-            If Not ucrReceiverFacet.IsEmpty Then
+            If Not ucrReceiverFacetBar.IsEmpty Then
+                'Tem Functions
                 clsAesRainGgplotFunction.AddParameter("x", ucrReceiverMonthBar.GetVariableNames(False), iPosition:=0)
                 clsAesRainGgplotFunction.AddParameter("y", ucrReceiverRainBar.GetVariableNames(False), iPosition:=1)
                 clsRainGgplotFunction.AddParameter("data", ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
@@ -1683,7 +1897,7 @@ Public Class dlgClimograph
                 clsRainBarTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesRainBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
 
                 clsPlus10Operator.AddParameter("left", clsRFunctionParameter:=clsLabsRainFunction, iPosition:=0, bIncludeArgumentName:=False)
-                clsPlus10Operator.AddParameter("right", clsRFunctionParameter:=clsFacetFunction1, iPosition:=1, bIncludeArgumentName:=False)
+                clsPlus10Operator.AddParameter("right", clsRFunctionParameter:=clsFacetFunction2, iPosition:=1, bIncludeArgumentName:=False)
                 clsPlus3Operator.AddParameter("left", clsRFunctionParameter:=clsRainBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
                 clsPlus3Operator.AddParameter("right", clsROperatorParameter:=clsPlus10Operator, iPosition:=1, bIncludeArgumentName:=False)
                 clsPlus2Operator.AddParameter("left", clsRFunctionParameter:=clsRainBarFunction, iPosition:=0, bIncludeArgumentName:=False)
@@ -1691,6 +1905,7 @@ Public Class dlgClimograph
                 clsPlus1Operator.AddParameter("left", clsRFunctionParameter:=clsRainGgplotFunction, iPosition:=0, bIncludeArgumentName:=False)
                 clsPlus1Operator.AddParameter("right", clsROperatorParameter:=clsPlus2Operator, iPosition:=1, bIncludeArgumentName:=False)
 
+                'Tem Functions
                 clsAesTemGgplotFunction.AddParameter("x", ucrReceiverMonthBar.GetVariableNames(False), iPosition:=0)
                 clsTemGgplotFunction.AddParameter("data", ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
                 clsTemGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTemGgplotFunction, iPosition:=1, bIncludeArgumentName:=False)
@@ -1712,7 +1927,7 @@ Public Class dlgClimograph
                 clsTminBarTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesTminBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
 
                 clsPlus11Operator.AddParameter("left", clsRFunctionParameter:=clsLabsTempFunction, iPosition:=0, bIncludeArgumentName:=False)
-                clsPlus11Operator.AddParameter("right", clsRFunctionParameter:=clsFacetFunction1, iPosition:=1, bIncludeArgumentName:=False)
+                clsPlus11Operator.AddParameter("right", clsRFunctionParameter:=clsFacetFunction2, iPosition:=1, bIncludeArgumentName:=False)
                 clsPlus9Operator.AddParameter("left", clsRFunctionParameter:=clsTminBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
                 clsPlus9Operator.AddParameter("right", clsROperatorParameter:=clsPlus11Operator, iPosition:=1, bIncludeArgumentName:=False)
                 clsPlus8Operator.AddParameter("left", clsRFunctionParameter:=clsTmaxBarTextFunction, iPosition:=0, bIncludeArgumentName:=False)
@@ -1807,4 +2022,62 @@ Public Class dlgClimograph
     Private Sub ucrReceiverElement1Bar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1Bar.ControlValueChanged, ucrReceiverMonthBar.ControlValueChanged, ucrReceiverRainBar.ControlValueChanged, ucrReceiverElement2Bar.ControlValueChanged
         AddRemoveTemBars()
     End Sub
+
+    Private Sub AutoFillReceivers(lstReceivers As List(Of ucrReceiverSingle))
+
+        If isFilling OrElse lstReceivers Is Nothing Then
+            Exit Sub
+        End If
+
+        isFilling = True
+
+        ' Change the event handler to the new method
+        'RemoveHandler ucrSelectorClimograph.ControlValueChanged, AddressOf OnControlValueChanged
+
+        Dim lstRecognisedValues As List(Of String)
+        Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorClimograph.CurrentReceiver
+        Dim bFound As Boolean = False
+
+        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+            ucrTempReceiver.SetMeAsReceiver()
+            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+
+            If lstRecognisedValues.Count > 0 Then
+                For Each lviTempVariable As ListViewItem In ucrSelectorClimograph.lstAvailableVariable.Items
+                    For Each strValue As String In lstRecognisedValues
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
+                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorClimograph.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                            bFound = True
+                            Exit For
+                        End If
+                    Next
+                    If bFound Then
+                        bFound = False
+                        Exit For
+                    End If
+                Next
+            End If
+        Next
+
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+
+        ' Re-enable the event handler
+        'AddHandler ucrSelectorClimograph.ControlValueChanged, AddressOf OnControlValueChanged
+
+        isFilling = False
+    End Sub
+
+    Private Function GetRecognisedValues(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
 End Class

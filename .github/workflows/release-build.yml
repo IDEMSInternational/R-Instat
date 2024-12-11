@@ -104,7 +104,7 @@ jobs:
     - name: Checkout Instat Data
       uses: actions/checkout@v3
       with:
-        repository: ' africanmathsinitiative/R-Instat-Data'
+        repository: ' IDEMSInternational/R-Instat-Data'
         fetch-depth: 0
         path: 'InstatData'
     

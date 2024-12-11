@@ -41,16 +41,12 @@ Public Class sdgTableOptions
     End Sub
 
     ''' <summary>
-    ''' An R operateor that has a parameter named "gt" set up.
-    ''' The parameter should be an R Function that generates script "gt:gt()" as part of the last script statement.
+    ''' Sets up the sub dialog.
+    ''' Expected to be called before showing the dialog. 
     ''' </summary>
-    ''' <param name="clsNewOperator"></param>
+    ''' <param name="strDataFrameName">Name of the data frame contained in the data book</param>
+    ''' <param name="clsNewOperator">R operator that has a 'gt' parameter that produces a 'gt' object.</param>
     Public Sub Setup(strDataFrameName As String, clsNewOperator As ROperator)
-        If clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt"}, clsNewOperator).Count = 0 Then
-            MsgBox("Developer Error: Parameter with 'gt' as name MUST be set up before using this subdialog")
-            Exit Sub
-        End If
-
         clsOperator = clsNewOperator
 
         ucrHeader.Setup(clsOperator)
@@ -80,25 +76,12 @@ Public Class sdgTableOptions
     ' Themes
 
     Private Sub SetupTheme(clsOperator As ROperator)
-        clsThemeRFunction = New RFunction
-
-        ' Uncheck then the check radio button to forces the panel to raise its ControlValueChanged event
-        rdoSelectTheme.Checked = False
-        rdoSelectTheme.Checked = True
-
-        If Not clsOperator.ContainsParameter("theme_format") Then
-            Exit Sub
-        End If
-
-        clsThemeRFunction = clsOperator.GetParameter("theme_format").clsArgumentCodeStructure
-
-        If clsThemeRFunction.strRCommand = "tab_options" Then
-            rdoManualTheme.Checked = True
+        If clsOperator.ContainsParameter("theme_format") Then
+            clsThemeRFunction = clsOperator.GetParameter("theme_format").clsArgumentCodeStructure
         Else
-            rdoSelectTheme.Checked = True
-            ucrCboSelectThemes.SetName(clsThemeRFunction.strRCommand)
+            clsThemeRFunction = New RFunction
+            clsThemeRFunction.SetPackageName("gtExtras")
         End If
-
     End Sub
 
     Private Sub ucrPnlThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlThemesPanel.ControlValueChanged
