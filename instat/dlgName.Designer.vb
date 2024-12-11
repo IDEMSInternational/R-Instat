@@ -72,6 +72,8 @@ Partial Class dlgName
         Me.ucrReceiverColumns = New instat.ucrReceiverMultiple()
         Me.ucrPnlSelectData = New instat.UcrPanel()
         Me.rdoLabels = New System.Windows.Forms.RadioButton()
+        Me.cmdAddkeyboard = New System.Windows.Forms.Button()
+        Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -475,6 +477,24 @@ Partial Class dlgName
         Me.rdoLabels.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoLabels.UseVisualStyleBackColor = False
         '
+        'cmdAddkeyboard
+        '
+        Me.cmdAddkeyboard.Location = New System.Drawing.Point(315, 315)
+        Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
+        Me.cmdAddkeyboard.Size = New System.Drawing.Size(100, 23)
+        Me.cmdAddkeyboard.TabIndex = 35
+        Me.cmdAddkeyboard.Text = "Add Keyboard"
+        Me.cmdAddkeyboard.UseVisualStyleBackColor = True
+        '
+        'ucrChkIncludeRegularExpressions
+        '
+        Me.ucrChkIncludeRegularExpressions.AutoSize = True
+        Me.ucrChkIncludeRegularExpressions.Checked = False
+        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(71, 316)
+        Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
+        Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(239, 23)
+        Me.ucrChkIncludeRegularExpressions.TabIndex = 34
+        '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -502,6 +522,8 @@ Partial Class dlgName
         Me.Controls.Add(Me.rdoSelectedColumn)
         Me.Controls.Add(Me.rdoWholeDataFrame)
         Me.Controls.Add(Me.ucrPnlSelectData)
+        Me.Controls.Add(Me.cmdAddkeyboard)
+        Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -549,4 +571,6 @@ Partial Class dlgName
     Friend WithEvents rdoWholeDataFrame As RadioButton
     Friend WithEvents ucrPnlSelectData As UcrPanel
     Friend WithEvents rdoLabels As RadioButton
+    Friend WithEvents cmdAddkeyboard As Button
+    Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
 End Class
