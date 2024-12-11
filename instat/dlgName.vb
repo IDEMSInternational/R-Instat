@@ -89,9 +89,6 @@ Public Class dlgName
         ucrPnlOptions.AddParameterValuesCondition(rdoRenameWith, "name", "rename")
         ucrPnlOptions.AddParameterValuesCondition(rdoLabels, "name", "labels")
 
-
-        'ucrPnlOptions.SetRDefault(Chr(34) & "single" & Chr(34))
-
         ucrNudAbbreviate.SetParameter(New RParameter("minlength", 10))
         ucrNudAbbreviate.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
