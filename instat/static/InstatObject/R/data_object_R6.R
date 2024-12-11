@@ -1451,6 +1451,9 @@ DataSheet$set("public", "reorder_columns_in_data", function(col_order) {
 DataSheet$set("public", "insert_row_in_data", function(start_row, row_data = c(), number_rows = 1, before = FALSE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   self$save_state_to_undo_history()
+  if (tibble::has_rownames(curr_data)) {
+      stop ("We are sorry , but thare aresome operations we don't allow when your data includes rownames. We explain in details in the help")
+  }
   curr_row_names <- rownames(curr_data)
   if (!start_row %in% curr_row_names) {
     stop(paste(start_row, " not found in rows"))
