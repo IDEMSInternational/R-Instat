@@ -705,6 +705,7 @@ Public Class dlgDescribeTwoVariable
         cmdMissingOptions.Visible = False
         ucrChkOmitMissing.Visible = False
         If rdoSkim.Checked Then
+            ucrReceiverFirstVars.strSelectorHeading = "Variables"
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
             cmdFormatTable.Visible = False
             ucrSaveTable.Visible = True
@@ -721,6 +722,7 @@ Public Class dlgDescribeTwoVariable
                                                      strObjectName:="last_summary")
 
         ElseIf rdoTwoVariable.Checked Then
+            ucrReceiverFirstVars.strSelectorHeading = "Numerics"
             ucrChkOmitMissing.Visible = False
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
             If IsNumericByNumeric() Then
@@ -836,6 +838,7 @@ Public Class dlgDescribeTwoVariable
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSummariesOperator)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFactorOperator)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsCrossDfFunction)
+            ucrReceiverFirstVars.strSelectorHeading = "Numerics"
             If IsFactorByFactorByFactor() Then
                 cmdFormatTable.Visible = True
                 ucrSaveTable.Location = New Point(23, 341)
@@ -994,7 +997,6 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
-        ucrReceiverFirstVars.Clear()
         ucrReceiverThreeVariableSecondFactor.Clear()
         ucrReceiverThreeVariableThirdVariable.Clear()
         ucrReceiverSecondTwoVariableFactor.Clear()
