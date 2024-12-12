@@ -32,8 +32,8 @@ Public Class dlgOneVariableSummarise
         clsSkimrFunction, clsPivotWiderFunction As New RFunction
 
     Private clsPipeOperator, clsJoiningPipeOperator As New ROperator
-    Private clsGetGtTableFunction, clsSaveGtRFunction As New RFunction
-    Private clsGtTableROperator, clsBaseOperator As New ROperator
+    Private clsGetGtTableFunction As New RFunction
+    Private clsGtTableROperator As New ROperator
     Private clsSummaryOperator As New ROperator
     Private bResetSubdialog As Boolean = False
     Private bResetFormatSubdialog As Boolean = False
@@ -138,9 +138,7 @@ Public Class dlgOneVariableSummarise
         clsPipeOperator = New ROperator
 
         clsGtTableROperator = New ROperator
-        clsBaseOperator = New ROperator
         clsGetGtTableFunction = New RFunction
-        clsSaveGtRFunction = New RFunction
 
         ucrSelectorOneVarSummarise.Reset()
 
@@ -149,20 +147,6 @@ Public Class dlgOneVariableSummarise
 
         clsGetGtTableFunction.SetPackageName("gt")
         clsGetGtTableFunction.SetRCommand("gt")
-
-
-        clsBaseOperator.SetOperation("%>%")
-        clsBaseOperator.bBrackets = False
-        clsBaseOperator.AddParameter(strParameterName:="gt_tbl_operator", clsROperatorParameter:=clsGtTableROperator, iPosition:=0, bIncludeArgumentName:=False)
-        clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
-                                                  strRDataFrameNameToAddObjectTo:=ucrSelectorOneVarSummarise.strCurrentDataFrame,
-                                                  strObjectName:="last_table")
-
-        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-
-
 
         clsSkimrFunction.SetPackageName("skimr")
         clsSkimrFunction.SetRCommand("skim_without_charts")
