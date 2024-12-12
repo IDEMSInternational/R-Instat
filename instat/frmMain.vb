@@ -596,7 +596,7 @@ Public Class frmMain
                 My.Application.Info.Version.Build.ToString()
     End Sub
 
-    Public Sub SetHideMenus()
+    Private Sub SetHideMenus()
         mnuViewProcurementMenu.Checked = False
         mnuProcurement.Visible = False
         mnuViewOptionsByContextMenu.Checked = False
