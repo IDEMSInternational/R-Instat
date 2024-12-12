@@ -161,8 +161,6 @@ Public Class dlgName
         ucrPnlCase.AddToLinkedControls(ucrInputEdit, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Starts With")
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverColumns, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrInputReplace.AddToLinkedControls(ucrChkIncludeRegularExpressions, {"Matches All", "Matches"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         ucrReceiverName.SetLinkedDisplayControl(lblCurrentName)
         ucrInputNewName.SetLinkedDisplayControl(lblName)
         ucrInputVariableLabel.SetLinkedDisplayControl(lblVariableLabel)
@@ -618,6 +616,8 @@ Public Class dlgName
         DialogueSize()
         RemovePattern()
         AddTypeParm()
+        AddRegexPar()
+        SetRegexControlVisibility()
     End Sub
 
     Private Sub DialogueSize()
@@ -683,69 +683,64 @@ Public Class dlgName
     End Sub
 
     Private Sub RemovePattern()
-        cmdAddkeyboard.Visible = False
-
         If rdoWholeDataFrame.Checked Then
             If (rdoRenameWith.Checked OrElse rdoLabels.Checked) AndAlso rdoReplace.Checked Then
                 clsDefaultRFunction.RemoveParameterByName("label")
                 clsDefaultRFunction.AddParameter("replacement", Chr(34) & ucrInputBy.GetText() & Chr(34), iPosition:=5)
 
-                If ucrChkIncludeRegularExpressions.Checked Then
-                    cmdAddkeyboard.Visible = True
-                    clsDefaultRFunction.RemoveParameterByName(".cols")
-                    clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace_all", iPosition:=2)
-                    clsRegexFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-                    clsDefaultRFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=4)
-                Else
-                    clsDefaultRFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText() & Chr(34), iPosition:=4)
-                    cmdAddkeyboard.Visible = False
-                    Select Case ucrInputEdit.GetText
-                        Case "Starts With"
-                            clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsStartwithFunction, iPosition:=3)
-                            clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
-                        Case "Ends With"
-                            clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsEndswithFunction, iPosition:=3)
-                            clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
-                        Case "Matches"
-                            clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsMatchesFunction, iPosition:=3)
-                            clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
-                        Case "Contains"
-                            clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
-                            clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
-                        Case "Matches All"
-                            clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsMatchesFunction, iPosition:=3)
-                            clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace_all", iPosition:=2)
-                        Case "Contains All"
-                            clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
-                            clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace_all", iPosition:=2)
-                    End Select
-                End If
+                Select Case ucrInputEdit.GetText
+                    Case "Starts With"
+                        clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsStartwithFunction, iPosition:=3)
+                        clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
+                    Case "Ends With"
+                        clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsEndswithFunction, iPosition:=3)
+                        clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
+                    Case "Matches"
+                        clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsMatchesFunction, iPosition:=3)
+                        clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
+                    Case "Contains"
+                        clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
+                        clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace", iPosition:=2)
+                    Case "Matches All"
+                        clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsMatchesFunction, iPosition:=3)
+                        clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace_all", iPosition:=2)
+                    Case "Contains All"
+                        clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
+                        clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace_all", iPosition:=2)
+                End Select
             Else
-                clsDefaultRFunction.RemoveParameterByName("pattern")
                 clsDefaultRFunction.RemoveParameterByName("replacement")
                 clsDefaultRFunction.RemoveParameterByName(".cols")
             End If
         Else
             clsDefaultRFunction.AddParameter(".cols", ucrReceiverColumns.GetVariableNames, iPosition:=3)
-            clsDefaultRFunction.RemoveParameterByName("pattern")
         End If
-
     End Sub
 
     Private Sub AddRegexPar()
-
-        If ucrChkIncludeRegularExpressions.Checked Then
-            Select Case ucrInputEdit.GetText
-                Case "Contains All"
-
-                Case "Contains"
-
-                Case Else
-            End Select
+        If rdoWholeDataFrame.Checked Then
+            If (rdoRenameWith.Checked OrElse rdoLabels.Checked) AndAlso rdoReplace.Checked Then
+                If ucrChkIncludeRegularExpressions.Checked Then
+                    Select Case ucrInputEdit.GetText
+                        Case "Matches All"
+                            clsRegexFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+                            clsDefaultRFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=4)
+                        Case "Matches"
+                            cmdAddkeyboard.Visible = True
+                            clsRegexFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+                            clsDefaultRFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=4)
+                        Case Else
+                            clsDefaultRFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText() & Chr(34), iPosition:=4)
+                    End Select
+                Else
+                    clsDefaultRFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText() & Chr(34), iPosition:=4)
+                End If
+            Else
+                clsDefaultRFunction.RemoveParameterByName("pattern")
+            End If
         Else
-
+            clsDefaultRFunction.RemoveParameterByName("pattern")
         End If
-
     End Sub
 
     Private Sub AddTypeParm()
@@ -767,6 +762,8 @@ Public Class dlgName
     Private Sub ucrInputEdit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEdit.ControlValueChanged, ucrInputBy.ControlValueChanged, ucrInputReplace.ControlValueChanged
         RemovePattern()
         AddTypeParm()
+        AddRegexPar()
+        SetRegexControlVisibility()
     End Sub
 
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
@@ -776,6 +773,23 @@ Public Class dlgName
 
     Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged
         RemovePattern()
-        cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
+        AddRegexPar()
+        SetRegexControlVisibility()
     End Sub
+
+    Private Sub SetRegexControlVisibility()
+        ucrChkIncludeRegularExpressions.Visible = False
+        cmdAddkeyboard.Visible = False
+
+        If rdoWholeDataFrame.Checked Then
+            If (rdoRenameWith.Checked OrElse rdoLabels.Checked) AndAlso rdoReplace.Checked Then
+                Select Case ucrInputEdit.GetText
+                    Case "Matches All", "Matches"
+                        cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
+                        ucrChkIncludeRegularExpressions.Visible = True
+                End Select
+            End If
+        End If
+    End Sub
+
 End Class
