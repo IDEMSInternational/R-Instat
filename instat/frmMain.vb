@@ -596,11 +596,13 @@ Public Class frmMain
                 My.Application.Info.Version.Build.ToString()
     End Sub
 
-    Private Sub SetHideMenus()
+    Public Sub SetHideMenus()
         mnuViewProcurementMenu.Checked = False
         mnuProcurement.Visible = False
         mnuViewOptionsByContextMenu.Checked = False
         mnuOptionsByContext.Visible = False
+        mnuViewStructuredMenu.Checked = False
+        mnuStructured.Visible = False
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
