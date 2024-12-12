@@ -383,10 +383,10 @@ Public Class dlgOneVariableSummarise
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged
         'If bRCodeSet Then
         If rdoNoColumnFactor.Checked Then
-            clsSummaryOperator.RemoveParameterByName("col_factor")
+            clsGtTableROperator.RemoveParameterByName("col_factor")
             clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
         Else
-            clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+            clsGtTableROperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
             If rdoSummary.Checked Then
                 clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
                 clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
