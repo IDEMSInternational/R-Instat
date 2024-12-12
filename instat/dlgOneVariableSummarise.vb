@@ -34,7 +34,6 @@ Public Class dlgOneVariableSummarise
     Private clsPipeOperator, clsJoiningPipeOperator As New ROperator
     Private clsGetGtTableFunction As New RFunction
     Private clsGtTableROperator As New ROperator
-    Private clsSummaryOperator As New ROperator
     Private bResetSubdialog As Boolean = False
     Private bResetFormatSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
@@ -131,9 +130,7 @@ Public Class dlgOneVariableSummarise
         clsGtFunction = New RFunction
         clsDummyFunction = New RFunction
         clsSkimrFunction = New RFunction
-        clsSummaryOperator = New ROperator
         clsPivotWiderFunction = New RFunction
-
 
         clsPipeOperator = New ROperator
 
@@ -174,10 +171,6 @@ Public Class dlgOneVariableSummarise
         clsGtTableROperator.bBrackets = False
         clsGtTableROperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryTableFunction, iPosition:=0)
         clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsGtFunction, iPosition:=1, bIncludeArgumentName:=False)
-
-        clsSummaryOperator.SetOperation("%>%")
-        clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryTableFunction, iPosition:=0)
-        clsSummaryOperator.AddParameter("gttbl", clsRFunctionParameter:=clsGtFunction, iPosition:=2)
 
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsGtTableROperator, iPosition:=0)
