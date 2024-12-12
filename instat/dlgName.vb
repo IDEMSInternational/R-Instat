@@ -30,6 +30,7 @@ Public Class dlgName
     Private clsNewColNameDataframeFunction As New RFunction
     Private clsNewLabelDataframeFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private clsFixedFunction As New RFunction
     Private clsStartwithFunction, clsRegexFunction, clsEndswithFunction, clsMatchesFunction, clsContainsFunction As New RFunction
     Private WithEvents grdCurrentWorkSheet As Worksheet
     Private dctRowsNewNameChanged As New Dictionary(Of Integer, String)
@@ -183,6 +184,7 @@ Public Class dlgName
         clsMatchesFunction = New RFunction
         clsContainsFunction = New RFunction
         clsRegexFunction = New RFunction
+        clsFixedFunction = New RFunction
 
         ucrSelectVariables.Reset()
         dctRowsNewNameChanged.Clear()
@@ -218,6 +220,9 @@ Public Class dlgName
         clsStartwithFunction.SetPackageName("tidyselect")
         clsStartwithFunction.SetRCommand("starts_with")
         clsStartwithFunction.AddParameter("match", Chr(34) & ucrInputReplace.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+
+        clsFixedFunction.SetPackageName("stringr")
+        clsFixedFunction.SetRCommand("fixed")
 
         clsRegexFunction.SetPackageName("stringr")
         clsRegexFunction.SetRCommand("regex")
@@ -682,6 +687,10 @@ Public Class dlgName
         End If
     End Sub
 
+    Private Function IsRegexApplicable() As Boolean
+        Return (ucrInputEdit.GetText = "Matches All" OrElse ucrInputEdit.GetText = "Matches")
+    End Function
+
     Private Sub RemovePattern()
         If rdoWholeDataFrame.Checked Then
             If (rdoRenameWith.Checked OrElse rdoLabels.Checked) AndAlso rdoReplace.Checked Then
@@ -718,25 +727,19 @@ Public Class dlgName
     End Sub
 
     Private Sub AddRegexPar()
-        If rdoWholeDataFrame.Checked Then
-            If (rdoRenameWith.Checked OrElse rdoLabels.Checked) AndAlso rdoReplace.Checked Then
-                If ucrChkIncludeRegularExpressions.Checked Then
-                    Select Case ucrInputEdit.GetText
-                        Case "Matches All"
-                            clsRegexFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-                            clsDefaultRFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=4)
-                        Case "Matches"
-                            cmdAddkeyboard.Visible = True
-                            clsRegexFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-                            clsDefaultRFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=4)
-                        Case Else
-                            clsDefaultRFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText() & Chr(34), iPosition:=4)
-                    End Select
-                Else
-                    clsDefaultRFunction.AddParameter("pattern", Chr(34) & ucrInputReplace.GetText() & Chr(34), iPosition:=4)
-                End If
+        If rdoWholeDataFrame.Checked AndAlso (rdoRenameWith.Checked OrElse rdoLabels.Checked) AndAlso rdoReplace.Checked Then
+            Dim patternValue As String = Chr(34) & ucrInputReplace.GetText & Chr(34)
+            If ucrChkIncludeRegularExpressions.Checked AndAlso IsRegexApplicable() Then
+                clsRegexFunction.AddParameter("pattern", patternValue, bIncludeArgumentName:=False, iPosition:=1)
+                clsDefaultRFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=4)
             Else
-                clsDefaultRFunction.RemoveParameterByName("pattern")
+                Select Case ucrInputEdit.GetText
+                    Case "Contains", "Contains All"
+                        clsFixedFunction.AddParameter("pattern", patternValue, bIncludeArgumentName:=False, iPosition:=1)
+                        clsDefaultRFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction, bIncludeArgumentName:=False, iPosition:=4)
+                    Case Else
+                        clsDefaultRFunction.AddParameter("pattern", patternValue, iPosition:=4)
+                End Select
             End If
         Else
             clsDefaultRFunction.RemoveParameterByName("pattern")
