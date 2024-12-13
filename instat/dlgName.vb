@@ -620,8 +620,8 @@ Public Class dlgName
         RemoveParameters()
         DialogueSize()
         RemovePattern()
-        AddTypeParm()
-        AddRegexPar()
+        ConfigureTypeParameter()
+        ConfigurePatternParameter()
         SetRegexControlVisibility()
     End Sub
 
@@ -687,10 +687,6 @@ Public Class dlgName
         End If
     End Sub
 
-    Private Function IsRegexApplicable() As Boolean
-        Return (ucrInputEdit.GetText = "Matches All" OrElse ucrInputEdit.GetText = "Matches")
-    End Function
-
     Private Sub RemovePattern()
         If rdoWholeDataFrame.Checked Then
             If (rdoRenameWith.Checked OrElse rdoLabels.Checked) AndAlso rdoReplace.Checked Then
@@ -726,10 +722,11 @@ Public Class dlgName
         End If
     End Sub
 
-    Private Sub AddRegexPar()
+    Private Sub ConfigurePatternParameter()
         If rdoWholeDataFrame.Checked AndAlso (rdoRenameWith.Checked OrElse rdoLabels.Checked) AndAlso rdoReplace.Checked Then
             Dim patternValue As String = Chr(34) & ucrInputReplace.GetText & Chr(34)
-            If ucrChkIncludeRegularExpressions.Checked AndAlso IsRegexApplicable() Then
+            If ucrChkIncludeRegularExpressions.Checked AndAlso (ucrInputEdit.GetText = "Matches All" OrElse ucrInputEdit.GetText = "Matches") Then
+
                 clsRegexFunction.AddParameter("pattern", patternValue, bIncludeArgumentName:=False, iPosition:=1)
                 clsDefaultRFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=4)
             Else
@@ -746,7 +743,7 @@ Public Class dlgName
         End If
     End Sub
 
-    Private Sub AddTypeParm()
+    Private Sub ConfigureTypeParameter()
         If rdoLabels.Checked Then
             clsDefaultRFunction.AddParameter("type", Chr(34) & "rename_labels" & Chr(34), iPosition:=1)
 
@@ -764,8 +761,8 @@ Public Class dlgName
 
     Private Sub ucrInputEdit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEdit.ControlValueChanged, ucrInputBy.ControlValueChanged, ucrInputReplace.ControlValueChanged
         RemovePattern()
-        AddTypeParm()
-        AddRegexPar()
+        ConfigureTypeParameter()
+        ConfigurePatternParameter()
         SetRegexControlVisibility()
     End Sub
 
@@ -776,7 +773,7 @@ Public Class dlgName
 
     Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged
         RemovePattern()
-        AddRegexPar()
+        ConfigurePatternParameter()
         SetRegexControlVisibility()
     End Sub
 
@@ -784,15 +781,13 @@ Public Class dlgName
         ucrChkIncludeRegularExpressions.Visible = False
         cmdAddkeyboard.Visible = False
 
-        If rdoWholeDataFrame.Checked Then
-            If (rdoRenameWith.Checked OrElse rdoLabels.Checked) AndAlso rdoReplace.Checked Then
-                Select Case ucrInputEdit.GetText
-                    Case "Matches All", "Matches"
-                        cmdAddkeyboard.Visible = If(ucrChkIncludeRegularExpressions.Checked, True, False)
-                        ucrChkIncludeRegularExpressions.Visible = True
-                End Select
-            End If
+        If rdoWholeDataFrame.Checked AndAlso
+           (rdoRenameWith.Checked OrElse rdoLabels.Checked) AndAlso
+           rdoReplace.Checked AndAlso
+           (ucrInputEdit.GetText = "Matches All" OrElse ucrInputEdit.GetText = "Matches") Then
+
+            ucrChkIncludeRegularExpressions.Visible = True
+            cmdAddkeyboard.Visible = ucrChkIncludeRegularExpressions.Checked
         End If
     End Sub
-
 End Class
