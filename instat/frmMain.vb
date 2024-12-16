@@ -247,6 +247,10 @@ Public Class frmMain
                     myProcess.StartInfo.FileName = "https://r-instat.org/"
                     myProcess.Start()
                 End If
+            Else
+                ' Current version is up to date, show a message
+                MessageBox.Show("You are using the latest version of R-Instat (" & strCurrVersion & ").", "R-Instat is Up to Date",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         Catch ex As Exception
             MsgBox("Network issues or website not accessible")
