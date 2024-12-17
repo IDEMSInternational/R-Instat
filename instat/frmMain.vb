@@ -252,8 +252,17 @@ Public Class frmMain
                 MessageBox.Show("You are using the latest version of R-Instat (" & strCurrVersion & ").", "R-Instat is Up to Date",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
+        Catch ex As WebException
+            ' Handle specific network-related exceptions
+            MessageBox.Show("It seems you are not connected to the internet or the website is unreachable. Please check your connection and try again.", "Network Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            MsgBox("Network issues or website not accessible")
+            ' Handle other exceptions
+            MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            ' Dispose of the web client to release resources
+            webClient.Dispose()
         End Try
     End Sub
 
