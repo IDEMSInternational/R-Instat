@@ -1011,6 +1011,29 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       self$data_changed <- TRUE
       self$variables_metadata_changed <- TRUE
     }
+  } else if (type == "rename_labels"){
+    # to rename column labels. Here, instead of renaming a column name, we're giving new values in a column.
+    curr_metadata <- self$get_variables_metadata()
+    curr_col_names <- names(curr_data %>% dplyr::select(.cols))
+
+    # create a new data frame containing the changes - but only apply to those that we actually plan to change for efficiency.
+    new_metadata <- curr_metadata |>
+    dplyr::filter(Name %in% curr_col_names) %>%
+    dplyr::mutate(
+        dplyr::across(
+            label,
+            ~ .fn(., ...)
+        )
+    )
+
+    if(self$column_selection_applied()) self$remove_current_column_selection()
+    # apply the changes
+    new_label_names <- new_metadata[!("Name" %in% curr_col_names)]$label
+    for (i in seq_along(new_label_names)) {
+        self$append_to_variables_metadata(curr_col_names[i], property = "label", new_val = new_label_names[i])
+    }
+    self$data_changed <- TRUE
+    self$variables_metadata_changed <- TRUE
   }
 })
 
@@ -4572,6 +4595,12 @@ DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed,
     # This affects factor columns only  - we need to find out why and how to solve it best
     self$add_defaults_variables_metadata(self$get_column_names())
     self$data_changed <- TRUE
+  }
+})
+
+DataSheet$set("public", "get_column_climatic_type", function(col_name, attr_name) {
+  if (!is.null(private$data[[col_name]]) && !is.null(attr(private$data[[col_name]], attr_name))) {
+    return(attr(private$data[[col_name]], attr_name))
   }
 })
 
