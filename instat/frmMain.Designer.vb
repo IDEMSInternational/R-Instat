@@ -1465,7 +1465,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutput, Me.mnuViewLogScript, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.mnuViewStructuredMenu, Me.ToolStripSeparator22, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata, Me.mnuViewSwapDataAndScript})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutput, Me.mnuViewLogScript, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata, Me.mnuViewSwapDataAndScript})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(44, 22)
         Me.mnuView.Tag = "View"
