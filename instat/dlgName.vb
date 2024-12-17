@@ -34,6 +34,7 @@ Public Class dlgName
     Private clsStartwithFunction, clsRegexFunction, clsEndswithFunction, clsMatchesFunction, clsContainsFunction As New RFunction
     Private WithEvents grdCurrentWorkSheet As Worksheet
     Private dctRowsNewNameChanged As New Dictionary(Of Integer, String)
+    Private dctRowsCurrentName As New Dictionary(Of Integer, String)
     Private dctRowsNewLabelChanged As New Dictionary(Of Integer, String)
     Private dctNameRowsValues As New Dictionary(Of Integer, String)
     Private dctCaseOptions As New Dictionary(Of String, String)
@@ -99,7 +100,7 @@ Public Class dlgName
         ucrPnlCase.AddRadioButton(rdoAbbreviate, "abbreviate")
         ucrPnlCase.AddRadioButton(rdoReplace, "stringr::str_replace")
 
-        ucrPnlSelectData.SetParameter(New RParameter("data", 0))
+
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
         ucrPnlSelectData.AddParameterValuesCondition(rdoWholeDataFrame, "checked", "whole")
@@ -189,6 +190,7 @@ Public Class dlgName
         ucrSelectVariables.Reset()
         dctRowsNewNameChanged.Clear()
         dctRowsNewLabelChanged.Clear()
+        dctRowsCurrentName.Clear()
         bCurrentCell = False
         clsNewColNameDataframeFunction.SetRCommand("data.frame")
 
@@ -353,10 +355,14 @@ Public Class dlgName
         If e.Range.Rows > 1 Then
             For iRow As Integer = iStartRowIndex To grdCurrentWorkSheet.SelectionRange.EndRow
                 Dim strNewData As String = ValidateRVariable(grdCurrentWorkSheet.GetCellData(row:=iRow, col:=iColIndex), iColIndex)
+                Dim strOldData As String = grdCurrentWorkSheet.GetCellData(row:=iRow, col:=0)
+                GetOldNames(iRow, strOldData)
                 RenameColumns(strNewData, iRow, iColIndex)
             Next
         Else
             Dim strNewData As String = ValidateRVariable(grdCurrentWorkSheet.GetCellData(row:=e.Range.Row, col:=iColIndex), iColIndex)
+            Dim strOldData As String = grdCurrentWorkSheet.GetCellData(row:=e.Range.Row, col:=0)
+            GetOldNames(e.Range.Row, strOldData)
             RenameColumns(strNewData, iStartRowIndex, iColIndex)
         End If
         ValidateNamesFromDictionary(iColIndex)
@@ -406,8 +412,20 @@ Public Class dlgName
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
         Dim iCol As Integer = e.Cell.Column
         Dim strNewData As String = ValidateRVariable(e.NewData, iCol)
+
+        Dim strFirstColumnData As String = grdCurrentWorkSheet(e.Cell.Row, 0).ToString()
+
+        GetOldNames(e.Cell.Row, strFirstColumnData)
         RenameColumns(strNewData, e.Cell.Row, iCol)
         ValidateNamesFromDictionary(iCol)
+    End Sub
+
+    Private Sub GetOldNames(iRow As Integer, strOldName As String)
+        If Not dctRowsCurrentName.ContainsKey(iRow) Then
+            dctRowsCurrentName.Add(iRow, strOldName)
+        Else
+            dctRowsCurrentName(iRow) = strOldName
+        End If
     End Sub
 
     Private Sub GetVariables(strNewData As String, iRowIndex As Integer, iColIndex As Integer)
@@ -417,7 +435,7 @@ Public Class dlgName
                     AddChangedNewNameRows(iRowIndex, strNewData)
 
                     clsNewColNameDataframeFunction.AddParameter("cols", GetValuesAsVector(dctRowsNewNameChanged), iPosition:=0)
-                    clsNewColNameDataframeFunction.AddParameter("index", "c(" & String.Join(",", dctRowsNewNameChanged.Keys.ToArray) & ")", iPosition:=1)
+                    clsNewColNameDataframeFunction.AddParameter("old_names", GetValuesAsVector(dctRowsCurrentName), iPosition:=1)
                     clsDefaultRFunction.AddParameter("new_column_names_df", clsRFunctionParameter:=clsNewColNameDataframeFunction, iPosition:=8)
                 Else
                     clsNewColNameDataframeFunction.RemoveParameterByName("cols")
@@ -602,7 +620,9 @@ Public Class dlgName
             rdoReplace.Visible = rdoWholeDataFrame.Checked
             If rdoWholeDataFrame.Checked Then
                 ucrReceiverColumns.Visible = False
+                clsDummyFunction.AddParameter("checked", "whole", iPosition:=1)
             Else
+                clsDummyFunction.AddParameter("checked", "selected", iPosition:=1)
                 ucrReceiverColumns.SetMeAsReceiver()
                 If rdoReplace.Checked Then
                     rdoMakeCleanNames.Checked = True
@@ -681,6 +701,8 @@ Public Class dlgName
             Dim parsedValue As Boolean
             Dim strNewData As String = ValidateRVariable(e.Text, iCol)
             If Not strNewData.ToLower.Equals("t") AndAlso Not strNewData.ToLower.Equals("f") AndAlso Not IsNumeric(strNewData) AndAlso Not Boolean.TryParse(strNewData, parsedValue) Then
+                Dim strFirstColumnData As String = grdCurrentWorkSheet(e.Cell.Row, 0).ToString()
+                GetOldNames(e.Cell.Row, strFirstColumnData)
                 RenameColumns(strNewData, e.Cell.Row, iCol)
                 ValidateNamesFromDictionary(iCol)
             End If
@@ -713,6 +735,7 @@ Public Class dlgName
                         clsDefaultRFunction.AddParameter(".cols", clsRFunctionParameter:=clsContainsFunction, iPosition:=3)
                         clsDefaultRFunction.AddParameter(".fn", "stringr::str_replace_all", iPosition:=2)
                 End Select
+
             Else
                 clsDefaultRFunction.RemoveParameterByName("replacement")
                 clsDefaultRFunction.RemoveParameterByName(".cols")

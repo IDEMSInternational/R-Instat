@@ -137,6 +137,12 @@ Public Class dlgSelect
     End Sub
 
     Private Sub cmdDefineNewSelect_Click(sender As Object, e As EventArgs) Handles cmdDefineNewSelect.Click
+        If frmMain.IsColumnSelectionApplied Then
+            Dim clsRemoveCurrentSelection As New RFunction
+            clsRemoveCurrentSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_column_selection")
+            clsRemoveCurrentSelection.AddParameter("data_name", Chr(34) & ucrSelectorForSelectColumns.strCurrentDataFrame & Chr(34))
+            frmMain.clsRLink.RunScript(clsRemoveCurrentSelection.ToScript, strComment:="Remove current selection")
+        End If
         dlgSelectColumns.SetDefaultDataFrame(ucrSelectorForSelectColumns.ucrAvailableDataFrames.strCurrDataFrame)
         dlgSelectColumns.ShowDialog()
         ucrSelectorForSelectColumns.LoadList()
