@@ -380,3 +380,22 @@ DataBook$set("public", "view_link", function(link_name) {
   }
 }
 )
+
+# A function to convert the variables in the linked "to data frame"" to be the same class as that of the "from data frame"".
+DataBook$set("public", "convert_linked_variable", function(from_data_frame, link_cols) {
+  to_data_name <- self$get_linked_to_data_name(from_data_frame, link_cols=c(link_cols))
+  if (!is.null(to_data_name)){
+    linked_variable_name <- self$get_link_between(from_data_frame, to_data_name)$link_columns[[1]]
+    
+    # loop through all columns given in variable argument
+    for (i in seq_along(linked_variable_name)){
+      variable_type <- self$get_column_data_types(data_name = from_data_frame, columns = names(linked_variable_name[i]))
+      linked_variable_type <- self$get_column_data_types(data_name = to_data_name, columns=linked_variable_name[i])
+      
+      if (variable_type != linked_variable_type){
+        self$convert_column_to_type(data_name=to_data_name, col_names=linked_variable_name[i], to_type=variable_type)
+      }
+    }
+  }
+}
+)
