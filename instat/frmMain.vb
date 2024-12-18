@@ -223,9 +223,15 @@ Public Class frmMain
         '---------------------------------------
 
         '--------------------------------------
-        CreateAdditionalLibraryDirectory()
+        Dim strVersion As String = My.Application.Info.Version.Major.ToString() & "." &
+                My.Application.Info.Version.Minor.ToString() & "." &
+                My.Application.Info.Version.Build.ToString()
+
+        Me.Text = "R-Instat " & strVersion
+
+        CreateAdditionalLibraryDirectory(strVersion)
         '-------------------------------------
-        SetAppVersionNumber()
+
         isMaximised = True 'Need to get the windowstate when the application is loaded
         SetHideMenus()
     End Sub
@@ -398,9 +404,9 @@ Public Class frmMain
         End If
     End Function
 
-    Private Sub CreateAdditionalLibraryDirectory()
+    Private Sub CreateAdditionalLibraryDirectory(strVersion As String)
         ' Define the custom library path in the ApplicationData folder
-        Dim strLibraryPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "R-Instat", "library")
+        Dim strLibraryPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "R-Instat", strVersion, "library")
 
         Try
             ' Check if the directory exists, if not, create it
@@ -590,10 +596,8 @@ Public Class frmMain
         mnuTbLan.Visible = bVisible
     End Sub
 
-    Public Sub SetAppVersionNumber()
-        Me.Text = "R-Instat " & My.Application.Info.Version.Major.ToString() & "." &
-                My.Application.Info.Version.Minor.ToString() & "." &
-                My.Application.Info.Version.Build.ToString()
+    Public Sub SetAppVersionNumber(strVersionNumber As String)
+
     End Sub
 
     Private Sub SetHideMenus()
