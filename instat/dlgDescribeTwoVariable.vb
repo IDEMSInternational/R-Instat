@@ -47,7 +47,7 @@ Public Class dlgDescribeTwoVariable
 
     Private clsGroupByPipeOperator, clsSummaryOperator, clsGroupByPipeOperator2, clsGroupByPipeOperator3, clsGroupByPipeOperator4, clsGroupByPipeOperatorData As New ROperator
 
-    Private clsTildOperator, clsMapOperator, clsPivotOperator As New ROperator
+    Private clsTildOperator, clsMapOperator, clsGtTableROperator, clsPivotOperator As New ROperator
 
 
     Private clsgtFunction, clsMapSummaryFunction, clsMap2SummaryFunction, clsMapGtFunction As New RFunction
@@ -277,6 +277,7 @@ Public Class dlgDescribeTwoVariable
         clsPivotOperator = New ROperator
         clsFactorOperator = New ROperator
         clsSummariesOperator = New ROperator
+        clsGtTableROperator = New ROperator
 
         ucrSelectorDescribeTwoVar.Reset()
         ucrReceiverFirstVars.SetMeAsReceiver()
@@ -461,12 +462,17 @@ Public Class dlgDescribeTwoVariable
         clsgtFunction.SetPackageName("gt")
         clsgtFunction.SetRCommand("gt")
 
+        clsGtTableROperator.SetOperation("%>%")
+        clsGtTableROperator.bBrackets = False
+        clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsgtFunction, iPosition:=0, bIncludeArgumentName:=False)
+
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         clsPivotOperator.SetOperation("%>%")
         clsPivotOperator.AddParameter("left", clsRFunctionParameter:=clsPivotWiderFunction)
         clsPivotOperator.AddParameter("right", clsRFunctionParameter:=clsgtFunction)
+        clsPivotOperator.AddParameter("right", clsROperatorParameter:=clsGtTableROperator)
         clsPivotOperator.bBrackets = False
 
         clsMapOperator.SetOperation("%>%")
@@ -660,10 +666,13 @@ Public Class dlgDescribeTwoVariable
 
     Private Sub ManageControlsVisibility()
         grpSummaries.Visible = rdoThreeVariable.Checked OrElse rdoTwoVariable.Checked
-        ucrChkDisplayMargins.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
-        ucrChkDisplayMargins.Visible = rdoThreeVariable.Checked AndAlso IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() OrElse IsFactorByFactorByFactor()
-        ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso (IsFactorByFactor() OrElse IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor())
-        ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() OrElse IsFactorByFactorByFactor()
+        ucrChkDisplayMargins.Visible = (rdoTwoVariable.Checked AndAlso (IsFactorByFactor() OrElse IsFactorByNumeric())) OrElse
+    (rdoThreeVariable.Checked AndAlso (IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() OrElse IsFactorByFactorByFactor()))
+
+        ucrInputMarginName.Visible = ucrChkDisplayMargins.Checked AndAlso
+    (IsFactorByFactor() OrElse IsFactorByFactorByNumeric() OrElse
+    IsFactorByNumericByFactor() OrElse IsFactorByFactorByFactor())
+
         grpDisplay.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor()
         ucrReceiverPercentages.Visible = ucrChkDisplayAsPercentage.Checked AndAlso rdoORow.Checked AndAlso IsFactorByFactor()
         ucrpnlPercent.Visible = rdoTwoVariable.Checked AndAlso IsFactorByFactor() AndAlso ucrChkDisplayAsPercentage.Checked
@@ -764,7 +773,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetPrefix("summary_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-                ucrSaveTable.SetCheckBoxText("Store Table")
+                ucrSaveTable.SetCheckBoxText("Save Table")
 
             ElseIf IsFactorByFactor() Then
                 ucrSaveTable.Visible = True
@@ -779,7 +788,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.SetPrefix("frequency_table")
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
-                ucrSaveTable.SetCheckBoxText("Store Table")
+                ucrSaveTable.SetCheckBoxText("Save Table")
                 clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -1041,19 +1050,18 @@ Public Class dlgDescribeTwoVariable
                 If ucrChkSwapXYVar.Checked Then
                     ucrBase.Location = New Point(iUcrBaseXLocation, 400)
                     Me.Size = New Point(iDialogueXsize, 500)
-                    cmdFormatTable.Location = New Point(326, 350)
                 Else
                     ucrBase.Location = New Point(iUcrBaseXLocation, 487)
                     Me.Size = New Point(iDialogueXsize, 580)
-                    cmdFormatTable.Location = New Point(326, 423)
+                    cmdFormatTable.Location = New Point(330, 450)
                 End If
             ElseIf IsNumericByFactor() Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 319)
                 Me.Size = New Point(iDialogueXsize, 415)
             ElseIf IsFactorByFactor() Then
-                ucrBase.Location = New Point(iUcrBaseXLocation, 392)
+                ucrBase.Location = New Point(iUcrBaseXLocation, 395)
                 Me.Size = New Point(iDialogueXsize, 485)
-                cmdFormatTable.Location = New Point(326, 330)
+                cmdFormatTable.Location = New Point(330, 370)
             Else
                 ucrBase.Location = New Point(iUcrBaseXLocation, 328)
                 Me.Size = New Point(iDialogueXsize, 425)
@@ -1067,7 +1075,7 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.Location = New Point(iUcrBaseXLocation, 370)
                 Me.Size = New Point(iDialogueXsize, 465)
                 cmdFormatTable.Visible = True
-                cmdFormatTable.Location = New Point(326, 350)
+                cmdFormatTable.Location = New Point(330, 350)
             ElseIf IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 470)
                 Me.Size = New Point(iDialogueXsize, 570)
@@ -1778,14 +1786,10 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
-        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
-                                        clsNewThemesTabOptionFunction:=clsThemesTabOptionFunction, clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
-                                       clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
-                                       clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                       clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction, clsNewgtExtraThemesFunction:=clsgtExtrasThemesFuction, clsNewMutableOperator:=clsMutableOperator,
-                                       clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction, bReset:=bReset)
-        sdgFormatSummaryTables.ShowDialog()
+        sdgTableOptions.Setup(ucrSelectorDescribeTwoVar.strCurrentDataFrame, clsGtTableROperator)
+        sdgTableOptions.ShowDialog(Me)
     End Sub
+
     Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
         sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsSummaryTableFunction, clsNewConcFunction:=clsCombineFunction, bReset:=bResetSubdialog)
         bResetSubdialog = False
