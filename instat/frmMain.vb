@@ -414,18 +414,15 @@ Public Class frmMain
                 Directory.CreateDirectory(strLibraryPath)
             End If
 
+
             'To ensure this part of the code only runs when the application Is Not in the Debug mode (i.e., in Release mode)
 #If Not DEBUG Then
-            ' Add the custom library path to R's .libPaths for user-level package installation
-            Dim strScript As String = $".libPaths(c('{strLibraryPath.Replace("\", "/")}', .libPaths()))" & Environment.NewLine &
-                   "if (length(.libPaths()) > 2) {
-                         current_paths <- .libPaths()
-                         valid_indices <- c(1, 3)[c(1, 3) <= length(current_paths)]
-                         .libPaths(current_paths[valid_indices])
-                   }"
+                     Dim clsSetLibPathsFunction As New RFunction
+            clsSetLibPathsFunction.SetRCommand("set_library_paths")
+            clsSetLibPathsFunction.AddParameter("library_path", Chr(34) & strLibraryPath.Replace("\", "/") & Chr(34))
 
             ' Execute the R script to update the library paths
-            clsRLink.RunScript(strScript:=strScript, bSeparateThread:=False, bSilent:=False)
+            clsRLink.RunScript(strScript:=clsSetLibPathsFunction.ToScript, bSeparateThread:=False, bSilent:=False)
 #End If
         Catch ex As Exception
             ' Handle potential errors (e.g., directory creation failure)
