@@ -2938,4 +2938,25 @@ Public Class frmMain
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         ucrDataViewer.Undo()
     End Sub
+
+    Private Sub mnuToolsRestartR_Click(sender As Object, e As EventArgs) Handles mnuToolsRestartR.Click
+        If clsRLink.RestartREngine Then
+
+            'clsDataBook = New clsDataBook(clsRLink)
+
+            '' Reassign to the UI components
+            'ucrDataViewer.DataBook = clsDataBook
+            'ucrColumnMeta.DataBook = clsDataBook
+            'ucrDataFrameMeta.DataBook = clsDataBook
+
+            clsRLink.bInstatObjectExists = True
+            '---------------------------------------
+            'execute R-Instat R set up scripts to set up R data book
+            ExecuteSetupRScriptsAndSetupRLinkAndDatabook(bRefreshGrid:=False)
+            'execute R global options used by R-Instat R data book
+            clsInstatOptions.ExecuteRGlobalOptions()
+            '---------------------------------------
+        End If
+    End Sub
+
 End Class
