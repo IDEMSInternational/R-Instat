@@ -956,7 +956,12 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
         }
         if(self$column_selection_applied()) self$remove_current_column_selection()
         # Need to use private$data here because changing names of data field
-        names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
+        if(any(c("sfc", "sfc_MULTIPOLYGON") %in% class(private$data[[curr_col_name]]))){
+          # Update the geometry column reference
+          sf::st_geometry(private$data) <- new_col_name
+        } 
+        names(private$data)[names(private$data) == curr_col_name] <- new_col_name
+        
         self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
         # TODO decide if we need to do these 2 lines
         self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
@@ -976,7 +981,12 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       curr_col_names[cols_changed_index] <- new_col_names
       if(any(duplicated(curr_col_names))) stop("Cannot rename columns. Column names must be unique.")
       if(self$column_selection_applied()) self$remove_current_column_selection()
+      if(any(c("sfc", "sfc_MULTIPOLYGON") %in% class(private$dataprivate$data)[cols_changed_index])){
+        # Update the geometry column reference
+        sf::st_geometry(private$data) <- new_col_names
+      } 
       names(private$data)[cols_changed_index] <- new_col_names
+      
       for (i in seq_along(cols_changed_index)) {
         self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
       }
@@ -996,11 +1006,11 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
     if (missing(.fn)) stop(.fn, "is missing with no default.")
     curr_col_names <- names(curr_data)
     private$data <- curr_data |>
-      
       dplyr::rename_with(
         .fn = .fn,
         .cols = {{ .cols }}, ...
       )
+    
     if(self$column_selection_applied()) self$remove_current_column_selection()
     new_col_names <- names(private$data)
     if (!all(new_col_names %in% curr_col_names)) {
@@ -1011,6 +1021,29 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       self$data_changed <- TRUE
       self$variables_metadata_changed <- TRUE
     }
+  } else if (type == "rename_labels"){
+    # to rename column labels. Here, instead of renaming a column name, we're giving new values in a column.
+    curr_metadata <- self$get_variables_metadata()
+    curr_col_names <- names(curr_data %>% dplyr::select(.cols))
+
+    # create a new data frame containing the changes - but only apply to those that we actually plan to change for efficiency.
+    new_metadata <- curr_metadata |>
+    dplyr::filter(Name %in% curr_col_names) %>%
+    dplyr::mutate(
+        dplyr::across(
+            label,
+            ~ .fn(., ...)
+        )
+    )
+
+    if(self$column_selection_applied()) self$remove_current_column_selection()
+    # apply the changes
+    new_label_names <- new_metadata[!("Name" %in% curr_col_names)]$label
+    for (i in seq_along(new_label_names)) {
+        self$append_to_variables_metadata(curr_col_names[i], property = "label", new_val = new_label_names[i])
+    }
+    self$data_changed <- TRUE
+    self$variables_metadata_changed <- TRUE
   }
 })
 
@@ -4572,6 +4605,12 @@ DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed,
     # This affects factor columns only  - we need to find out why and how to solve it best
     self$add_defaults_variables_metadata(self$get_column_names())
     self$data_changed <- TRUE
+  }
+})
+
+DataSheet$set("public", "get_column_climatic_type", function(col_name, attr_name) {
+  if (!is.null(private$data[[col_name]]) && !is.null(attr(private$data[[col_name]], attr_name))) {
+    return(attr(private$data[[col_name]], attr_name))
   }
 })
 

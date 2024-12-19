@@ -169,4 +169,9 @@ Public Class dlgOneVariableGraph
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlContentsChanged, ucrReceiverOneVarGraph.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrSelectorOneVarGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorOneVarGraph.ControlValueChanged
+        Dim clsGetDataFrameFunction As RFunction = ucrSelectorOneVarGraph.ucrAvailableDataFrames.clsCurrDataFrame.Clone
+        clsOneVarGraph.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+    End Sub
 End Class
