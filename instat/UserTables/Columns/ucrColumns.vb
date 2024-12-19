@@ -1,8 +1,5 @@
 ﻿Public Class ucrColumns
-
     Private bFirstload As Boolean = True
-
-
 
     Private Sub ucrColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -17,10 +14,9 @@
         ucrPnlCols.AddRadioButton(rdoColWidth)
         ucrPnlCols.AddRadioButton(rdoColFootNotes)
         ucrPnlCols.AddRadioButton(rdoColSpanners)
-
-        ' TODO. Nonplots disabled until R is upgraded
-        'ucrPnlCols.AddRadioButton(rdoColNanoPlot)
-        rdoColNanoPlot.Enabled = False
+        ucrPnlCols.AddRadioButton(rdoColHide)
+        ucrPnlCols.AddRadioButton(rdoColMissing)
+        ucrPnlCols.AddRadioButton(rdoColNanoPlot)
 
         rdoColLabel.Checked = True
     End Sub
@@ -31,6 +27,8 @@
         ucrColumnWidth.Setup(strDataFrameName, clsOperator)
         ucrColumnFootNote.Setup(strDataFrameName, clsOperator)
         ucrColumnSpanners.Setup(strDataFrameName, clsOperator)
+        ucrColumnHide.Setup(strDataFrameName, clsOperator)
+        ucrColumnMissingTexts.Setup(strDataFrameName, clsOperator)
         ucrColumnNanoPlots.Setup(strDataFrameName, clsOperator)
     End Sub
 
@@ -40,6 +38,8 @@
         ucrColumnWidth.Visible = rdoColWidth.Checked
         ucrColumnFootNote.Visible = rdoColFootNotes.Checked
         ucrColumnSpanners.Visible = rdoColSpanners.Checked
+        ucrColumnHide.Visible = rdoColHide.Checked
+        ucrColumnMissingTexts.Visible = rdoColMissing.Checked
         ucrColumnNanoPlots.Visible = rdoColNanoPlot.Checked
     End Sub
 
@@ -49,6 +49,8 @@
         ucrColumnWidth.SetValuesToOperator()
         ucrColumnFootNote.SetValuesToOperator()
         ucrColumnSpanners.SetValuesToOperator()
+        ucrColumnHide.SetValuesToOperator()
+        ucrColumnMissingTexts.SetValuesToOperator()
         ucrColumnNanoPlots.SetValuesToOperator()
     End Sub
 

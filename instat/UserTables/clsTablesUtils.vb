@@ -13,20 +13,6 @@ Public Class clsTablesUtils
         Return sdgTableStyles.GetNewUserInputAsRFunction()
     End Function
 
-    'TODO. Delete
-    Public Shared Function FindRFunctionsWithRCommand(strRCommandName As String, clsOperator As ROperator) As List(Of RFunction)
-        Dim lstRFunctions As New List(Of RFunction)
-        For Each clsRParam As RParameter In clsOperator.clsParameters
-            If clsRParam.bIsFunction AndAlso clsRParam.HasValue() Then
-                Dim rFunction As RFunction = clsRParam.clsArgumentCodeStructure
-                If rFunction.strRCommand = strRCommandName Then
-                    lstRFunctions.Add(rFunction)
-                End If
-            End If
-        Next
-        Return lstRFunctions
-    End Function
-
     Public Shared Function GetNewStyleRFunction(clsListStyleRFunction As RFunction, clsLocationsRFunction As RFunction) As RFunction
         Dim clsTabStyleRFunction As New RFunction
         clsTabStyleRFunction.SetPackageName("gt")
@@ -109,6 +95,18 @@ Public Class clsTablesUtils
             str = ""
         End If
         Return If(bwithQuotes, """" & str & """", str.Replace("""", ""))
+    End Function
+
+    Public Shared Function SplitRText(input As String) As String()
+        If input.StartsWith("c(") AndAlso input.EndsWith(")") Then
+            ' Remove "c(" and ")"
+            Dim trimmed As String = input.Substring(2, input.Length - 3)
+            ' Split by comma and trim spaces
+            Dim parts As String() = trimmed.Split(","c)
+            Return parts
+        Else
+            Return {input}
+        End If
     End Function
 
 End Class

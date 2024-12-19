@@ -1,4 +1,6 @@
-﻿Public Class ucrRowSummary
+﻿Imports CefSharp.DevTools.Overlay
+
+Public Class ucrRowsGrandSummary
     Private bFirstLoad As Boolean = True
     Private clsOperator As New ROperator
     Private dctSummaryTypes, dctSides As New Dictionary(Of String, String)
@@ -33,7 +35,6 @@
         ucrCboSide.GetSetSelectedIndex = 0
 
         btnFormat.Tag = Nothing
-        btnStyle.Tag = Nothing
     End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
@@ -44,9 +45,7 @@
         dataGridSummaries.Rows.Clear()
         btnAddSummaries.Enabled = False
 
-        ' Note, the sequence of these 2 functions matters
-        SetupSummaryRowInDataGrid(clsTablesUtils.FindRFunctionsParamsWithRCommand({"summary_rows"}, clsOperator))
-        SetupSummaryRowStylesInDataGrid(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_summary", clsOperator))
+        SetupSummaryRowInDataGrid(clsTablesUtils.FindRFunctionsParamsWithRCommand({"grand_summary_rows"}, clsOperator))
     End Sub
 
     Private Sub SetupSummaryRowInDataGrid(lstRParams As List(Of RParameter))
@@ -55,36 +54,8 @@
             Dim row As New DataGridViewRow
             row.CreateCells(dataGridSummaries)
             row.Cells(0).Value = clsTabSummaryRowRFunction.Clone.ToScript
-            Dim arrParams(2) As RParameter
-            arrParams(0) = clsRParam
-            row.Tag = arrParams
+            row.Tag = clsRParam
             dataGridSummaries.Rows.Add(row)
-        Next
-    End Sub
-
-    Private Sub SetupSummaryRowStylesInDataGrid(lstRParams As List(Of RParameter))
-        For Each clsRParam As RParameter In lstRParams
-            Dim clsTabStyleRFunction As RFunction = clsRParam.clsArgumentCodeStructure
-            ' Get spanner Id
-            Dim iRowId As Integer
-            If Not Integer.TryParse(clsTabStyleRFunction.GetParameter("locations").clsArgumentCodeStructure.GetParameter("row").strArgumentValue, iRowId) Then
-                Continue For
-            End If
-
-
-            For index As Integer = 0 To dataGridSummaries.Rows.Count - 1
-                Dim row As DataGridViewRow = dataGridSummaries.Rows(index)
-                Dim lstParams() As RParameter = row.Tag
-
-                ' As of 2024/08/07 the gt summary_rows R function doesn't have a unique identifier like row groups.
-                ' So just use the data gridview index to show the style expressions
-                If index + 1 = iRowId Then
-                    row.Cells(1).Value = clsTabStyleRFunction.Clone().ToScript
-                    lstParams(1) = clsRParam
-                    row.Tag = lstParams
-                    Exit For
-                End If
-            Next
         Next
     End Sub
 
@@ -95,28 +66,6 @@
         If clsFormatRFunction IsNot Nothing Then
             btnFormat.Tag = clsFormatRFunction
         End If
-
-    End Sub
-
-    Private Sub btnStyle_Click(sender As Object, e As EventArgs) Handles btnStyle.Click
-        Dim clsListStyleRFunction As RFunction = clsTablesUtils.ShowStyleSubDialog(Me.ParentForm)
-        If clsListStyleRFunction Is Nothing Then
-            Exit Sub
-        End If
-
-        Dim clsLocationsRFunction As New RFunction
-        clsLocationsRFunction.SetPackageName("gt")
-        clsLocationsRFunction.SetRCommand("cells_summary")
-
-        If Not ucrTxtGroupId.IsEmpty Then
-            clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="groups", strParamValue:=Chr(34) & ucrTxtGroupId.GetText & Chr(34), iNewPosition:=0))
-        End If
-        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False), iNewPosition:=1))
-        clsLocationsRFunction.AddParameter(New RParameter(strParameterName:="row", strParamValue:=dataGridSummaries.Rows.Count + 1, iNewPosition:=2))
-
-        Dim clsTabStyleRFunction As RFunction = clsTablesUtils.GetNewStyleRFunction(clsListStyleRFunction, clsLocationsRFunction)
-
-        btnStyle.Tag = clsTabStyleRFunction
     End Sub
 
     Private Sub conditionValue_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged
@@ -124,16 +73,9 @@
     End Sub
 
     Private Sub btnAddSummaries_Click(sender As Object, e As EventArgs) Handles btnAddSummaries.Click
-        Dim strGroupStyleExpression As String = ""
-
         Dim clsSummaryRowsRFunction As New RFunction
         clsSummaryRowsRFunction.SetPackageName("gt")
-        clsSummaryRowsRFunction.SetRCommand("summary_rows")
-
-
-        If Not ucrTxtGroupId.IsEmpty Then
-            clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="groups", strParamValue:=Chr(34) & ucrTxtGroupId.GetText & Chr(34), iNewPosition:=0))
-        End If
+        clsSummaryRowsRFunction.SetRCommand("grand_summary_rows")
 
         clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="fns", strParamValue:=GetFnParameters(), iNewPosition:=1))
         clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=mdlCoreControl.GetRVector(ucrReceiverMultipleCols.GetVariableNamesList(bWithQuotes:=False), bOnlyIfMultipleElement:=False), iNewPosition:=2))
@@ -149,31 +91,18 @@
             clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="missing_text", strParamValue:=Chr(34) & ucrTxtReplaceNa.GetText & Chr(34), iNewPosition:=0))
         End If
 
-        Dim arrParams(2) As RParameter
-
-        ' Add add the summary row parameter as the first item
-        arrParams(0) = New RParameter(strParameterName:="summary_rows_param" & (dataGridSummaries.Rows.Count + 1), strParamValue:=clsSummaryRowsRFunction, bNewIncludeArgumentName:=False)
-
-        ' Add the spanner style as the second element
-        If btnStyle.Tag IsNot Nothing Then
-            Dim clsTabStyleRFunction As RFunction = btnStyle.Tag
-            strGroupStyleExpression = clsTabStyleRFunction.Clone.ToScript
-            arrParams(1) = New RParameter(strParameterName:="tab_style_cells_summary_param" & (dataGridSummaries.Rows.Count + 1), strParamValue:=clsTabStyleRFunction, bNewIncludeArgumentName:=False)
-        End If
+        Dim clsParam As RParameter = New RParameter(strParameterName:="grand_summary_rows_param" & (dataGridSummaries.Rows.Count + 1), strParamValue:=clsSummaryRowsRFunction, bNewIncludeArgumentName:=False)
 
         Dim row As New DataGridViewRow
         row.CreateCells(dataGridSummaries)
         row.Cells(0).Value = clsSummaryRowsRFunction.Clone.ToScript
-        row.Cells(1).Value = strGroupStyleExpression
         ' Tag the array of parameters
-        row.Tag = arrParams
+        row.Tag = clsParam
         dataGridSummaries.Rows.Add(row)
 
         ucrReceiverMultipleCols.Clear()
-        ucrTxtGroupId.SetName("")
         ucrTxtSummaryLabel.SetName("")
         btnFormat.Tag = Nothing
-        btnStyle.Tag = Nothing
     End Sub
 
     Private Function GetFnParameters() As String
@@ -189,15 +118,10 @@
     End Sub
 
     Public Sub SetValuesToOperator()
-        clsTablesUtils.RemoveRParams(clsTablesUtils.FindRFunctionsParamsWithRCommand({"summary_rows"}, clsOperator), clsOperator)
-        clsTablesUtils.RemoveRParams(clsTablesUtils.FindRFunctionsParamsWithRParamValue({"tab_style"}, "locations", "cells_summary", clsOperator), clsOperator)
+        clsTablesUtils.RemoveRParams(clsTablesUtils.FindRFunctionsParamsWithRCommand({"grand_summary_rows"}, clsOperator), clsOperator)
 
         For index As Integer = 0 To dataGridSummaries.Rows.Count - 1
-            Dim lstParams() As RParameter = dataGridSummaries.Rows(index).Tag
-            clsOperator.AddParameter(lstParams(0))
-            If lstParams(1) IsNot Nothing Then
-                clsOperator.AddParameter(lstParams(1))
-            End If
+            clsOperator.AddParameter(dataGridSummaries.Rows(index).Tag)
         Next
     End Sub
 End Class
