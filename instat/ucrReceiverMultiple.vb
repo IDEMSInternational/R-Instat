@@ -47,11 +47,18 @@ Public Class ucrReceiverMultiple
         'first eliminate all items that already exist
         'this improves perfomance significantly for wide data sets
         For Each kvpTempItem As KeyValuePair(Of String, String) In lstItems
-            Dim item As ListViewItem = lstSelectedVariables.FindItemWithText(kvpTempItem.Value)
-            If item Is Nothing OrElse Not item.Text.Equals(kvpTempItem.Value, StringComparison.Ordinal) Then
+            Dim isMatchFound As Boolean = False
+            For Each item As ListViewItem In lstSelectedVariables.Items
+                If item.Text.Equals(kvpTempItem.Value, StringComparison.Ordinal) Then
+                    isMatchFound = True
+                    Exit For
+                End If
+            Next
+            If Not isMatchFound Then
                 lstActualItemsToAdd.Add(kvpTempItem)
             End If
         Next
+
 
         If lstActualItemsToAdd.Count = 0 Then
             Exit Sub
