@@ -860,7 +860,7 @@ Public Class dlgDescribeTwoVariable
                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
                                                     strObjectName:="last_table")
             ElseIf IsFactorByNumericByNumeric() Then
-                cmdFormatTable.Visible = False
+                cmdFormatTable.Visible = True
                 ucrSaveTable.Visible = True
                 ucrSaveTable.Location = New Point(23, 300)
                 ucrSaveTable.SetPrefix("cor_table")
@@ -930,6 +930,7 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMappingFunction)
             ElseIf IsFactorByNumericByFactor() OrElse IsFactorByFactorByNumeric() Then
                 ucrSaveTable.SetPrefix("summary_table")
+                cmdFormatTable.Visible = True
                 ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
                 ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
                 ucrSaveTable.SetCheckBoxText("Save Table")
@@ -1075,14 +1076,15 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.Location = New Point(iUcrBaseXLocation, 370)
                 Me.Size = New Point(iDialogueXsize, 465)
                 cmdFormatTable.Visible = True
-                cmdFormatTable.Location = New Point(330, 350)
+                cmdFormatTable.Location = New Point(330, 340)
             ElseIf IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
                 ucrBase.Location = New Point(iUcrBaseXLocation, 470)
                 Me.Size = New Point(iDialogueXsize, 570)
+                cmdFormatTable.Location = New Point(330, 440)
             Else
                 ucrBase.Location = New Point(iUcrBaseXLocation, 328)
                 Me.Size = New Point(iDialogueXsize, 425)
-
+                cmdFormatTable.Location = New Point(330, 300)
             End If
         Else
             ucrBase.Location = New Point(iUcrBaseXLocation, 333)
