@@ -209,6 +209,42 @@ Public Class RLink
         Return bREngineInitialised
     End Function
 
+    Public Function RestartREngine() As Boolean
+        Try
+            If clsEngine IsNot Nothing Then
+                Dim clsSaveFunction As New RFunction
+
+
+                clsSaveFunction.SetRCommand("saveRDS")
+                clsSaveFunction.AddParameter("file", Chr(34) & "my_data" & Chr(34))
+                clsSaveFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
+
+                RunScript(clsSaveFunction.ToScript, strComment:="Saving data...")
+                clsEngine.ClearGlobalEnvironment()
+                Logger.Info("R engine reset.")
+            End If
+
+            ' Reset initialization flag
+            bREngineInitialised = False
+
+            ' Attempt to start a new R engine instance
+            If StartREngine() Then
+                MsgBox("R engine restarted successfully.", MsgBoxStyle.Information, "Restart Successful")
+                Return True
+            Else
+                MsgBox("Failed to restart the R engine. Please check the configuration or reinstall R-Instat.",
+                   MsgBoxStyle.Critical, "Restart Failed")
+                Return False
+            End If
+
+        Catch ex As Exception
+            ' Handle any unexpected errors during the restart process
+            MsgBox(ex.Message & Environment.NewLine & "Could not restart the connection to R.",
+               MsgBoxStyle.Critical, "Restart R Engine Failed")
+            Return False
+        End Try
+    End Function
+
     Private Function CheckIfRVersionIsSupported() As Boolean
         Dim bSupported As Boolean = False
         Try
