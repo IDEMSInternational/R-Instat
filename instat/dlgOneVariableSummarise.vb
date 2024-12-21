@@ -32,7 +32,6 @@ Public Class dlgOneVariableSummarise
         clsSkimrFunction, clsPivotWiderFunction As New RFunction
 
     Private clsPipeOperator, clsJoiningPipeOperator As New ROperator
-    Private clsGetGtTableFunction As New RFunction
     Private clsSummaryOperator As New ROperator
     Private bResetSubdialog As Boolean = False
     Private bResetFormatSubdialog As Boolean = False
@@ -135,15 +134,11 @@ Public Class dlgOneVariableSummarise
         clsPipeOperator = New ROperator
 
         clsSummaryOperator = New ROperator
-        clsGetGtTableFunction = New RFunction
 
         ucrSelectorOneVarSummarise.Reset()
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.bBrackets = False
-
-        clsGetGtTableFunction.SetPackageName("gt")
-        clsGetGtTableFunction.SetRCommand("gt")
 
         clsSkimrFunction.SetPackageName("skimr")
         clsSkimrFunction.SetRCommand("skim_without_charts")
