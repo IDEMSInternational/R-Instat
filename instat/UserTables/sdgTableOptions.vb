@@ -152,14 +152,6 @@ Public Class sdgTableOptions
             clsOperator.RemoveParameterByName("theme_format")
         End If
     End Sub
-
-    Private Sub ucrPnlThemes_ControlValueChanged(ucrChangedControl As ucrCore)
-
-    End Sub
-
-    Private Sub ucrChkSelectTheme_Load(sender As Object, e As EventArgs)
-
-    End Sub
     '-----------------------------------------
 
 
