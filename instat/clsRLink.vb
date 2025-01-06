@@ -213,14 +213,21 @@ Public Class RLink
         Try
             If clsEngine IsNot Nothing Then
                 Dim clsSaveFunction As New RFunction
-
-
                 clsSaveFunction.SetRCommand("saveRDS")
                 clsSaveFunction.AddParameter("file", Chr(34) & "my_data" & Chr(34))
                 clsSaveFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
 
-                RunScript(clsSaveFunction.ToScript, strComment:="Saving data...")
+                RunScript(clsSaveFunction.ToScript, strComment:="Saving data")
+
+                Dim clsUnloadRPackages As New RFunction
+                clsUnloadRPackages.SetRCommand("unload_R_Instat_packages")
+                RunScript(clsUnloadRPackages.ToScript, strComment:="Saving data")
+
+                clsEngine.Evaluate("rm(list = ls(all.names = TRUE))") ' Remove hidden objects as well
+                clsEngine.Evaluate("gc()") ' Trigger garbage collection
                 clsEngine.ClearGlobalEnvironment()
+                GC.Collect()
+                GC.WaitForPendingFinalizers()
                 Logger.Info("R engine reset.")
             End If
 

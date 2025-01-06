@@ -2942,16 +2942,14 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuToolsRestartR_Click(sender As Object, e As EventArgs) Handles mnuToolsRestartR.Click
+        Dim memUsageAfterBytes As Long = clsRLink.clsEngine.Evaluate("pryr::mem_used()").AsNumeric(0)
+        Dim memUsageAfterMB As Double = memUsageAfterBytes / (1024 * 1024)
+        Logger.Info("Memory Usage After Restart1: " & memUsageAfterMB.ToString("F2") & " MB")
         If clsRLink.RestartREngine Then
 
-            clsDataBook = New clsDataBook(clsRLink)
-
-            '' Reassign to the UI components
-            ucrDataViewer.DataBook = clsDataBook
-            ucrColumnMeta.DataBook = clsDataBook
-            ucrDataFrameMeta.DataBook = clsDataBook
-
-            clsRLink.bInstatObjectExists = True
+            Dim memUsageAfterBytes2 As Long = clsRLink.clsEngine.Evaluate("pryr::mem_used()").AsNumeric(0)
+            Dim memUsageAfterMB2 As Double = memUsageAfterBytes2 / (1024 * 1024)
+            Logger.Info("Memory Usage After Restart: " & memUsageAfterMB2.ToString("F2") & " MB")
 
             'execute R-Instat R set up scripts to set up R data book
             ExecuteSetupRScriptsAndSetupRLinkAndDatabook(bRefreshGrid:=False)
@@ -2966,6 +2964,13 @@ Public Class frmMain
             clsImportRDS.SetRCommand(clsRLink.strInstatDataObject & "$import_RDS")
             clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
             clsRLink.RunScript(clsImportRDS.ToScript, strComment:="Import data")
+
+            Dim memUsageAfterBytes1 As Long = clsRLink.clsEngine.Evaluate("pryr::mem_used()").AsNumeric(0)
+            Dim memUsageAfterMB1 As Double = memUsageAfterBytes1 / (1024 * 1024)
+            Logger.Info("Memory Usage After Restart: " & memUsageAfterMB1.ToString("F2") & " MB")
+        Else
+            MsgBox("Failed to restart the R engine. Please check the configuration or reinstall R-Instat.",
+                       MsgBoxStyle.Critical, "Restart Failed")
         End If
     End Sub
 
