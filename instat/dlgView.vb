@@ -158,6 +158,11 @@ Public Class dlgView
 
         clsViewColumnsFunction.SetPackageName("utils")
         clsViewColumnsFunction.SetRCommand("View")
+        clsViewColumnsFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                      strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                      strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                      strRDataFrameNameToAddObjectTo:=ucrSelectorForView.strCurrentDataFrame,
+                                      strObjectName:="last_table")
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -271,6 +276,9 @@ Public Class dlgView
 
     Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
         DataFrameLength()
+        clsOutputWindowFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForView.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsHeadRFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForView.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        'clsViewColumnsFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForView.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=1)
     End Sub
 
     Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
