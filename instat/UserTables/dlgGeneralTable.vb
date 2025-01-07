@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsHeadRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
+    Private clsHeadRFunction, clsHeaderRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -97,6 +97,11 @@ Public Class dlgGeneralTable
         clsThemeRFunction.SetPackageName("gtExtras")
         clsThemeRFunction.SetRCommand(strCommand)
         clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
+
+        clsHeaderRFunction.SetPackageName("gt")
+        clsHeaderRFunction.SetRCommand("tab_header")
+        clsBaseOperator.AddParameter("title", clsRFunctionParameter:=clsHeaderRFunction)
+
 
 
         clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
