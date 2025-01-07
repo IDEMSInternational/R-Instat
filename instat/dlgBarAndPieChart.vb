@@ -641,6 +641,7 @@ Public Class dlgBarAndPieChart
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        EnableDisablesOptions()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -814,6 +815,15 @@ Public Class dlgBarAndPieChart
 
     Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTextOptions.Click
         openSdgLayerOptions(clsGeomTextFunction, clsTextAesFunction)
+    End Sub
+
+    Private Sub EnableDisablesOptions()
+        toolStripMenuItemBarchartOptions.Enabled = rdoFrequency.Checked OrElse rdoValue.Checked
+        toolStripMenuItemTextOptions.Enabled = ucrChkAddLabelsText.Checked AndAlso (rdoValue.Checked OrElse rdoFrequency.Checked)
+        toolStripMenuItemTreemapTextOptionsOptions.Enabled = ucrChkAddLabelsTreemap.Checked AndAlso rdoTreeMap.Checked
+        toolStripMenuItemWordcloudOptions.Enabled = rdoWordCloud.Checked AndAlso rdoWordCloud.Checked
+        toolStripMenuItemTreemapOptions.Enabled = rdoTreeMap.Checked
+        toolStripMenuItemLollipopOptions.Enabled = ucrChkLollipop.Checked AndAlso rdoValue.Checked
     End Sub
 
     Private Sub SetDialogOptions()
@@ -1264,6 +1274,7 @@ Public Class dlgBarAndPieChart
         ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged,
         ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged
         SetDialogOptions()
+        EnableDisablesOptions()
         ChangeParameterName()
         If rdoTreeMap.Checked Then
             ucrReceiverArea.SetMeAsReceiver()
@@ -1390,6 +1401,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrChkAddLabelsTreemap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsTreemap.ControlValueChanged
+        EnableDisablesOptions()
         If ucrChkAddLabelsTreemap.Checked Then
             clsBaseOperator.AddParameter("geom_treemap_text", clsRFunctionParameter:=clsGeomTreemapTextFunction, iPosition:=3)
         Else
