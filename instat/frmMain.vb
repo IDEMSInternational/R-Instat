@@ -2938,4 +2938,8 @@ Public Class frmMain
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         ucrDataViewer.Undo()
     End Sub
+
+    Private Sub mnuCommentUncommentLinesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuCommentUncommentLinesToolStripMenuItem.Click
+        ucrScriptWindow.ToggleComments()
+    End Sub
 End Class
