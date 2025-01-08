@@ -246,6 +246,43 @@ Public Class ucrScript
         End Using
     End Sub
 
+    ' Toggle comments on selected lines
+    Public Sub ToggleComments()
+        ' Get the start and end positions of the selected text
+        Dim selectionStart As Integer = clsScriptActive.SelectionStart
+        Dim selectionEnd As Integer = clsScriptActive.SelectionEnd
+
+        ' Get the start and end lines of the selection
+        Dim startLine As Integer = clsScriptActive.LineFromPosition(selectionStart)
+        Dim endLine As Integer = clsScriptActive.LineFromPosition(selectionEnd)
+
+        ' Check if all lines are commented or not
+        Dim allCommented As Boolean = True
+        For lineIndex As Integer = startLine To endLine
+            Dim lineText As String = clsScriptActive.Lines(lineIndex).Text.TrimStart()
+            If Not lineText.StartsWith("#") Then
+                allCommented = False
+                Exit For
+            End If
+        Next
+
+        ' Toggle comment status for each line
+        For lineIndex As Integer = startLine To endLine
+            Dim line As Line = clsScriptActive.Lines(lineIndex)
+            Dim lineText As String = line.Text
+
+            If allCommented Then
+                ' Uncomment: Remove leading `#`
+                If lineText.TrimStart().StartsWith("#") Then
+                    lineText = lineText.Remove(lineText.IndexOf("#"), 1)
+                End If
+            Else
+                ' Comment: Add `#` at the start
+                lineText = "#" & lineText
+            End If
+        Next
+    End Sub
+
     ''' <summary>
     ''' Selects all the text in the active tab.
     ''' </summary>
