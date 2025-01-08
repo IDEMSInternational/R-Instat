@@ -51,6 +51,8 @@ Partial Class ucrScript
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuRunCurrentStatementSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRunAllText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuReformatCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuOpenScriptasFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertScript = New System.Windows.Forms.ToolStripMenuItem()
@@ -61,7 +63,10 @@ Partial Class ucrScript
         Me.lblHeaderScript = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel = New System.Windows.Forms.Panel()
-        Me.cmdInsertScript = New System.Windows.Forms.Button()
+        Me.cmdInsert = New instat.ucrSplitButton()
+        Me.contextMenuStriptInsert = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.toolStripMenuItemInsertStatement = New System.Windows.Forms.ToolStripMenuItem()
+        Me.toolStripMenuItemInsertCommentUncomment = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdSave = New System.Windows.Forms.Button()
         Me.cmdLoadScript = New System.Windows.Forms.Button()
         Me.cmdRemoveTab = New System.Windows.Forms.Button()
@@ -72,11 +77,10 @@ Partial Class ucrScript
         Me.cmdRunStatementSelection = New System.Windows.Forms.Button()
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.toolTipScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
-        Me.mnuReformatCode = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel.SuspendLayout()
+        Me.contextMenuStriptInsert.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuContextScript
@@ -84,7 +88,7 @@ Partial Class ucrScript
         Me.mnuContextScript.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuRedo, Me.ToolStripSeparator1, Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuSelectAll, Me.mnuClear, Me.ToolStripSeparator2, Me.mnuRunCurrentStatementSelection, Me.mnuRunAllText, Me.ToolStripSeparator5, Me.mnuReformatCode, Me.ToolStripSeparator3, Me.mnuOpenScriptasFile, Me.mnuInsertScript, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.ToolStripSeparator4, Me.mnuHelp})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(426, 547)
+        Me.mnuContextScript.Size = New System.Drawing.Size(426, 514)
         '
         'mnuUndo
         '
@@ -158,6 +162,17 @@ Partial Class ucrScript
             Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
         Me.mnuRunAllText.Size = New System.Drawing.Size(425, 32)
         Me.mnuRunAllText.Text = "Run All Text"
+        '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(422, 6)
+        '
+        'mnuReformatCode
+        '
+        Me.mnuReformatCode.Name = "mnuReformatCode"
+        Me.mnuReformatCode.Size = New System.Drawing.Size(425, 32)
+        Me.mnuReformatCode.Text = "Reformat Code"
         '
         'ToolStripSeparator3
         '
@@ -236,7 +251,7 @@ Partial Class ucrScript
         '
         'Panel
         '
-        Me.Panel.Controls.Add(Me.cmdInsertScript)
+        Me.Panel.Controls.Add(Me.cmdInsert)
         Me.Panel.Controls.Add(Me.cmdSave)
         Me.Panel.Controls.Add(Me.cmdLoadScript)
         Me.Panel.Controls.Add(Me.cmdRemoveTab)
@@ -252,15 +267,38 @@ Partial Class ucrScript
         Me.Panel.Size = New System.Drawing.Size(997, 42)
         Me.Panel.TabIndex = 10
         '
-        'cmdInsertScript
+        'cmdInsert
         '
-        Me.cmdInsertScript.Location = New System.Drawing.Point(503, 2)
-        Me.cmdInsertScript.Margin = New System.Windows.Forms.Padding(4)
-        Me.cmdInsertScript.Name = "cmdInsertScript"
-        Me.cmdInsertScript.Size = New System.Drawing.Size(112, 34)
-        Me.cmdInsertScript.TabIndex = 8
-        Me.cmdInsertScript.Text = "Insert"
-        Me.cmdInsertScript.UseVisualStyleBackColor = True
+        Me.cmdInsert.AutoSize = True
+        Me.cmdInsert.ContextMenuStrip = Me.contextMenuStriptInsert
+        Me.cmdInsert.Location = New System.Drawing.Point(506, 2)
+        Me.cmdInsert.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmdInsert.Name = "cmdInsert"
+        Me.cmdInsert.Size = New System.Drawing.Size(106, 34)
+        Me.cmdInsert.SplitMenuStrip = Me.contextMenuStriptInsert
+        Me.cmdInsert.TabIndex = 11
+        Me.cmdInsert.Tag = "Insert"
+        Me.cmdInsert.Text = "Insert"
+        Me.cmdInsert.UseVisualStyleBackColor = True
+        '
+        'contextMenuStriptInsert
+        '
+        Me.contextMenuStriptInsert.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.contextMenuStriptInsert.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemInsertStatement, Me.toolStripMenuItemInsertCommentUncomment})
+        Me.contextMenuStriptInsert.Name = "contextMenuStripToScript"
+        Me.contextMenuStriptInsert.Size = New System.Drawing.Size(285, 101)
+        '
+        'toolStripMenuItemInsertStatement
+        '
+        Me.toolStripMenuItemInsertStatement.Name = "toolStripMenuItemInsertStatement"
+        Me.toolStripMenuItemInsertStatement.Size = New System.Drawing.Size(284, 32)
+        Me.toolStripMenuItemInsertStatement.Text = "Statements"
+        '
+        'toolStripMenuItemInsertCommentUncomment
+        '
+        Me.toolStripMenuItemInsertCommentUncomment.Name = "toolStripMenuItemInsertCommentUncomment"
+        Me.toolStripMenuItemInsertCommentUncomment.Size = New System.Drawing.Size(284, 32)
+        Me.toolStripMenuItemInsertCommentUncomment.Text = "Comments/Uncomments"
         '
         'cmdSave
         '
@@ -352,17 +390,6 @@ Partial Class ucrScript
         Me.TabControl.Size = New System.Drawing.Size(997, 662)
         Me.TabControl.TabIndex = 1
         '
-        'mnuReformatCode
-        '
-        Me.mnuReformatCode.Name = "mnuReformatCode"
-        Me.mnuReformatCode.Size = New System.Drawing.Size(425, 32)
-        Me.mnuReformatCode.Text = "Reformat Code"
-        '
-        'ToolStripSeparator5
-        '
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(422, 6)
-        '
         'ucrScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
@@ -376,6 +403,8 @@ Partial Class ucrScript
         Me.mnuContextScript.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.Panel.ResumeLayout(False)
+        Me.Panel.PerformLayout()
+        Me.contextMenuStriptInsert.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -410,8 +439,11 @@ Partial Class ucrScript
     Friend WithEvents cmdRemoveTab As Button
     Friend WithEvents cmdSave As Button
     Friend WithEvents cmdLoadScript As Button
-    Friend WithEvents cmdInsertScript As Button
     Friend WithEvents mnuInsertScript As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
     Friend WithEvents mnuReformatCode As ToolStripMenuItem
+    Friend WithEvents cmdInsert As ucrSplitButton
+    Friend WithEvents contextMenuStriptInsert As ContextMenuStrip
+    Friend WithEvents toolStripMenuItemInsertStatement As ToolStripMenuItem
+    Friend WithEvents toolStripMenuItemInsertCommentUncomment As ToolStripMenuItem
 End Class

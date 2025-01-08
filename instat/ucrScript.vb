@@ -246,8 +246,12 @@ Public Class ucrScript
         End Using
     End Sub
 
-    ' Toggle comments on selected lines
-    Public Sub ToggleComments()
+    ''' <summary>
+    ''' Toggle comments on selected lines.
+    ''' </summary>
+    Private Sub ToggleComments()
+        Dim originalCaretPosition As Integer = clsScriptActive.CurrentPosition
+
         ' Get the start and end positions of the selected text
         Dim selectionStart As Integer = clsScriptActive.SelectionStart
         Dim selectionEnd As Integer = clsScriptActive.SelectionEnd
@@ -281,7 +285,7 @@ Public Class ucrScript
                     Dim lineText As String = line.Text
                     If lineText.TrimStart().StartsWith("#") Then
                         Dim firstHashIndex As Integer = lineText.IndexOf("#")
-                        clsScriptActive.DeleteRange(lineStartPos + firstHashIndex, 1)
+                        clsScriptActive.DeleteRange(lineStartPos + firstHashIndex, 2)
                     End If
                 Else
                     ' Comment: Add `#` at the start
@@ -291,6 +295,9 @@ Public Class ucrScript
         Finally
             clsScriptActive.EndUndoAction()
         End Try
+
+        clsScriptActive.Focus()
+        clsScriptActive.GotoPosition(originalCaretPosition)
     End Sub
 
     ''' <summary>
@@ -834,10 +841,6 @@ Public Class ucrScript
         LoadScript()
     End Sub
 
-    Private Sub mnuInsertScript_Click(sender As Object, e As EventArgs) Handles mnuInsertScript.Click, cmdInsertScript.Click
-        dlgScript.ShowDialog()
-    End Sub
-
     Private Sub cmdRemoveTab_Click(sender As Object, e As EventArgs) Handles cmdRemoveTab.Click
         'never remove last script tab
         If TabControl.TabCount < 2 Then
@@ -1097,4 +1100,11 @@ Public Class ucrScript
         End If
     End Sub
 
+    Private Sub cmdInsert_Click(sender As Object, e As EventArgs) Handles cmdInsert.Click, toolStripMenuItemInsertStatement.Click
+        dlgScript.ShowDialog()
+    End Sub
+
+    Private Sub toolStripMenuItemInsertCommentUncomment_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemInsertCommentUncomment.Click
+        ToggleComments()
+    End Sub
 End Class

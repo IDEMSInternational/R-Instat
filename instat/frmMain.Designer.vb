@@ -710,7 +710,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuCommentUncommentLinesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3029,7 +3028,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuEditFind, Me.mnuEditCopy, Me.mnuEditPaste, Me.mnuEditPasteNew, Me.mnuEditWordwrap, Me.mnuEditSelectAll, Me.mnuCommentUncommentLinesToolStripMenuItem})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuEditFind, Me.mnuEditCopy, Me.mnuEditPaste, Me.mnuEditPasteNew, Me.mnuEditWordwrap, Me.mnuEditSelectAll})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(58, 29)
         Me.mnuEdit.Tag = "Edit"
@@ -3039,14 +3038,14 @@ Partial Class frmMain
         '
         Me.mnuUndo.Name = "mnuUndo"
         Me.mnuUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.mnuUndo.Size = New System.Drawing.Size(342, 34)
+        Me.mnuUndo.Size = New System.Drawing.Size(270, 34)
         Me.mnuUndo.Text = "Undo"
         '
         'mnuEditFind
         '
         Me.mnuEditFind.Name = "mnuEditFind"
         Me.mnuEditFind.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
-        Me.mnuEditFind.Size = New System.Drawing.Size(342, 34)
+        Me.mnuEditFind.Size = New System.Drawing.Size(270, 34)
         Me.mnuEditFind.Tag = "Find"
         Me.mnuEditFind.Text = "Find"
         '
@@ -3054,7 +3053,7 @@ Partial Class frmMain
         '
         Me.mnuEditCopy.Name = "mnuEditCopy"
         Me.mnuEditCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.mnuEditCopy.Size = New System.Drawing.Size(342, 34)
+        Me.mnuEditCopy.Size = New System.Drawing.Size(270, 34)
         Me.mnuEditCopy.Tag = "Copy"
         Me.mnuEditCopy.Text = "Copy"
         '
@@ -3062,27 +3061,27 @@ Partial Class frmMain
         '
         Me.mnuEditPaste.Name = "mnuEditPaste"
         Me.mnuEditPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.mnuEditPaste.Size = New System.Drawing.Size(342, 34)
+        Me.mnuEditPaste.Size = New System.Drawing.Size(270, 34)
         Me.mnuEditPaste.Tag = "Paste"
         Me.mnuEditPaste.Text = "Paste"
         '
         'mnuEditPasteNew
         '
         Me.mnuEditPasteNew.Name = "mnuEditPasteNew"
-        Me.mnuEditPasteNew.Size = New System.Drawing.Size(342, 34)
+        Me.mnuEditPasteNew.Size = New System.Drawing.Size(270, 34)
         Me.mnuEditPasteNew.Text = "Paste New..."
         '
         'mnuEditWordwrap
         '
         Me.mnuEditWordwrap.Name = "mnuEditWordwrap"
-        Me.mnuEditWordwrap.Size = New System.Drawing.Size(342, 34)
+        Me.mnuEditWordwrap.Size = New System.Drawing.Size(270, 34)
         Me.mnuEditWordwrap.Text = "Wordwrap..."
         '
         'mnuEditSelectAll
         '
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
         Me.mnuEditSelectAll.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.mnuEditSelectAll.Size = New System.Drawing.Size(342, 34)
+        Me.mnuEditSelectAll.Size = New System.Drawing.Size(270, 34)
         Me.mnuEditSelectAll.Tag = "Select_All"
         Me.mnuEditSelectAll.Text = "Select All "
         '
@@ -3442,7 +3441,6 @@ Partial Class frmMain
         '
         Me.mnuBar.AllowMerge = False
         Me.mnuBar.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.mnuBar.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.mnuBar.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.mnuBar.ImeMode = System.Windows.Forms.ImeMode.[On]
         Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuPrepare, Me.mnuDescribe, Me.mnuModel, Me.mnuStructured, Me.mnuClimatic, Me.mnuProcurement, Me.mnuOptionsByContext, Me.mnuTools, Me.mnuView, Me.mnuHelp})
@@ -5312,12 +5310,6 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'mnuCommentUncommentLinesToolStripMenuItem
-        '
-        Me.mnuCommentUncommentLinesToolStripMenuItem.Name = "mnuCommentUncommentLinesToolStripMenuItem"
-        Me.mnuCommentUncommentLinesToolStripMenuItem.Size = New System.Drawing.Size(342, 34)
-        Me.mnuCommentUncommentLinesToolStripMenuItem.Text = "Comment/Uncomment Lines"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
@@ -6050,5 +6042,4 @@ Partial Class frmMain
     Friend WithEvents mnuTbDataView As ToolStripSplitButton
     Friend WithEvents mnuDataViewWindow As ToolStripMenuItem
     Friend WithEvents mnuRDataViewerWindow As ToolStripMenuItem
-    Friend WithEvents mnuCommentUncommentLinesToolStripMenuItem As ToolStripMenuItem
 End Class
