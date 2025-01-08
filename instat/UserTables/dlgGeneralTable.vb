@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsHeadRFunction, clsHeaderRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
+    Private clsHeadRFunction, clsTitleLocationRFunction, clsTitleFooterRFunction, clsHeaderRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -89,6 +89,30 @@ Public Class dlgGeneralTable
         clsHeadRFunction.AddParameter(strParameterName:="x", strParameterValue:=100, iPosition:=0, bIncludeArgumentName:=False)
         clsBaseOperator.AddParameter(strParameterName:="head", clsRFunctionParameter:=clsHeadRFunction, iPosition:=1, bIncludeArgumentName:=False)
 
+
+        ' If clsTitleFooterRFunction Is Nothing Then
+        '   clsTitleLocationRFunction = GetNewCellsTitleRFunction("title")
+        '  clsTitleFooterRFunction = New RFunction
+
+        'clsTitleFooterRFunction.SetPackageName("gt")
+        '    clsTitleFooterRFunction.SetRCommand("tab_footnote")
+        '    clsTitleFooterRFunction.AddParameter(strParameterName:="locations", clsRFunctionParameter:=clsTitleLocationRFunction, iPosition:=1)
+        '    clsBaseOperator.AddParameter(strParameterName:="locations", clsRFunctionParameter:=clsTitleFooterRFunction, bIncludeArgumentName:=False, iPosition:=1)
+
+
+        '  End If
+
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        '  End Sub
+
+        'Private Function GetNewCellsTitleRFunction(strGroupParamValue As String)
+        '    Dim clsCellsTitleRFunction As New RFunction
+        '    clsCellsTitleRFunction.SetPackageName("gt")
+        '    clsCellsTitleRFunction.SetRCommand("cells_title")
+        '    clsCellsTitleRFunction.AddParameter(strParameterName:="groups", strParameterValue:=Chr(34) & strGroupParamValue & Chr(34), iPosition:=0)
+        '    Return clsCellsTitleRFunction
+        'End Function
+
         clsGtRFunction.SetPackageName("gt")
         clsGtRFunction.SetRCommand("gt")
         clsBaseOperator.AddParameter(strParameterName:="gt", clsRFunctionParameter:=clsGtRFunction, iPosition:=2, bIncludeArgumentName:=False)
@@ -102,6 +126,11 @@ Public Class dlgGeneralTable
         clsHeaderRFunction.SetRCommand("tab_header")
         clsBaseOperator.AddParameter("title", clsRFunctionParameter:=clsHeaderRFunction)
 
+
+        clsTitleFooterRFunction.SetPackageName("gt")
+        clsTitleFooterRFunction.SetRCommand("tab_footnote")
+        clsTitleFooterRFunction.AddParameter(strParameterName:="locations", clsRFunctionParameter:=clsTitleLocationRFunction, iPosition:=1)
+        clsBaseOperator.AddParameter(strParameterName:="locations", clsRFunctionParameter:=clsTitleFooterRFunction, bIncludeArgumentName:=False, iPosition:=1)
 
 
         clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
