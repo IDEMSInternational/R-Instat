@@ -279,14 +279,16 @@ Public Class ucrScript
                 Dim line As Line = clsScriptActive.Lines(lineIndex)
                 Dim lineStartPos As Integer = line.Position
                 Dim lineEndPos As Integer = lineStartPos + line.Length
+                Dim lineText As String = line.Text
+                Dim iCountSpace As Integer = System.Text.RegularExpressions.Regex.Matches(lineText, "#\s#").Count
+                If iCountSpace > 0 Then iCountSpace += 1
 
                 If allCommented Then
-                    ' Uncomment: Remove leading `#`
-                    Dim lineText As String = line.Text
-                    If lineText.TrimStart().StartsWith("#") Then
-                        Dim firstHashIndex As Integer = lineText.IndexOf("#")
-                        clsScriptActive.DeleteRange(lineStartPos + firstHashIndex, 2)
-                    End If
+                    ' Set the target range to the matched text
+                    clsScriptActive.TargetStart = lineStartPos
+                    clsScriptActive.TargetEnd = lineStartPos + lineText.Count(Function(c) c = "#"c) + iCountSpace
+                    ' Replace the target range with an empty string to remove the `#`
+                    clsScriptActive.ReplaceTarget("")
                 Else
                     ' Comment: Add `#` at the start
                     clsScriptActive.InsertText(lineStartPos, "# ")
