@@ -286,19 +286,19 @@ Partial Class ucrScript
         Me.contextMenuStriptInsert.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.contextMenuStriptInsert.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripMenuItemInsertStatement, Me.toolStripMenuItemInsertCommentUncomment})
         Me.contextMenuStriptInsert.Name = "contextMenuStripToScript"
-        Me.contextMenuStriptInsert.Size = New System.Drawing.Size(285, 101)
+        Me.contextMenuStriptInsert.Size = New System.Drawing.Size(269, 101)
         '
         'toolStripMenuItemInsertStatement
         '
         Me.toolStripMenuItemInsertStatement.Name = "toolStripMenuItemInsertStatement"
-        Me.toolStripMenuItemInsertStatement.Size = New System.Drawing.Size(284, 32)
+        Me.toolStripMenuItemInsertStatement.Size = New System.Drawing.Size(268, 32)
         Me.toolStripMenuItemInsertStatement.Text = "Statements"
         '
         'toolStripMenuItemInsertCommentUncomment
         '
         Me.toolStripMenuItemInsertCommentUncomment.Name = "toolStripMenuItemInsertCommentUncomment"
-        Me.toolStripMenuItemInsertCommentUncomment.Size = New System.Drawing.Size(284, 32)
-        Me.toolStripMenuItemInsertCommentUncomment.Text = "Comments/Uncomments"
+        Me.toolStripMenuItemInsertCommentUncomment.Size = New System.Drawing.Size(268, 32)
+        Me.toolStripMenuItemInsertCommentUncomment.Text = "Comment/Uncomment"
         '
         'cmdSave
         '
