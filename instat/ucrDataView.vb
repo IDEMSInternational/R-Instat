@@ -699,7 +699,7 @@ Public Class ucrDataView
                     frmConvertToNumeric.CheckLabels(bCheckLabels)
                     frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
                     frmConvertToNumeric.ShowDialog()
-                    ' Yes for "normal" convert and No for "ordinal" convert
+                    ' Yes for "normal" convert and No for "labelled" convert
                     Select Case frmConvertToNumeric.DialogResult
                         Case DialogResult.Yes
                             GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
