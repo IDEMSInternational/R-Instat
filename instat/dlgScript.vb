@@ -689,7 +689,7 @@ Public Class dlgScript
             arrCommentParts = strScript.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
             For Each strPart As String In arrCommentParts
                 If strReconstructedstrScript = "" Then
-                    strReconstructedstrScript = "" & strPart
+                    strReconstructedstrScript = strPart
                 Else
                     strReconstructedstrScript = strReconstructedstrScript & Environment.NewLine & strPart
                 End If
