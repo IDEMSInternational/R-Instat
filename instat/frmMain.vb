@@ -155,9 +155,7 @@ Public Class frmMain
 
         '---------------------------------------
         'toggle the optional form menu items based on set opyions
-        ' mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
-        '  mnuViewProcurementMenu.Checked = False
         mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
         mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
@@ -616,12 +614,6 @@ Public Class frmMain
         mnuOptionsByContext.Visible = mnuViewStructuredMenu.Checked
         mnuViewOptionsByContextMenu.Checked = My.Settings.ViewOptionsByContextMenuChecked
         mnuStructured.Visible = mnuViewOptionsByContextMenu.Checked
-        'mnuViewProcurementMenu.Checked = False
-        'mnuProcurement.Visible = False
-        'mnuViewOptionsByContextMenu.Checked = False
-        'mnuOptionsByContext.Visible = False
-        'mnuViewStructuredMenu.Checked = False
-        'mnuStructured.Visible = False
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
