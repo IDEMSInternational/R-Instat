@@ -506,12 +506,12 @@ Public Class ucrDataView
         Return GetSelectedRows.LastOrDefault()
     End Function
 
-    Private Sub StartWait()
+    Public Sub StartWait()
         Cursor = Cursors.WaitCursor
         _grid.bEnabled = False
     End Sub
 
-    Private Sub EndWait()
+    Public Sub EndWait()
         _grid.bEnabled = True
         Cursor = Cursors.Default
     End Sub
