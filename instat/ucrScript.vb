@@ -247,62 +247,6 @@ Public Class ucrScript
     End Sub
 
     ''' <summary>
-    ''' Toggle comments on selected lines.
-    ''' </summary>
-    Private Sub ToggleComments()
-        Dim originalCaretPosition As Integer = clsScriptActive.CurrentPosition
-
-        ' Get the start and end positions of the selected text
-        Dim selectionStart As Integer = clsScriptActive.SelectionStart
-        Dim selectionEnd As Integer = clsScriptActive.SelectionEnd
-
-        ' Get the start and end lines of the selection
-        Dim startLine As Integer = clsScriptActive.LineFromPosition(selectionStart)
-        Dim endLine As Integer = clsScriptActive.LineFromPosition(selectionEnd)
-
-        ' Begin updating text
-        clsScriptActive.BeginUndoAction()
-
-        Try
-            ' Check if all lines are commented or not
-            Dim allCommented As Boolean = True
-            For lineIndex As Integer = startLine To endLine
-                Dim lineText As String = clsScriptActive.Lines(lineIndex).Text.TrimStart()
-                If Not lineText.StartsWith("#") Then
-                    allCommented = False
-                    Exit For
-                End If
-            Next
-
-            ' Toggle comment status for each line
-            For lineIndex As Integer = startLine To endLine
-                Dim line As Line = clsScriptActive.Lines(lineIndex)
-                Dim lineStartPos As Integer = line.Position
-                Dim lineEndPos As Integer = lineStartPos + line.Length
-                Dim lineText As String = line.Text
-                Dim iCountSpace As Integer = System.Text.RegularExpressions.Regex.Matches(lineText, "#\s#").Count
-                If iCountSpace > 0 Then iCountSpace += 1
-
-                If allCommented Then
-                    ' Set the target range to the matched text
-                    clsScriptActive.TargetStart = lineStartPos
-                    clsScriptActive.TargetEnd = lineStartPos + lineText.Count(Function(c) c = "#"c) + iCountSpace
-                    ' Replace the target range with an empty string to remove the `#`
-                    clsScriptActive.ReplaceTarget("")
-                Else
-                    ' Comment: Add `#` at the start
-                    clsScriptActive.InsertText(lineStartPos, "# ")
-                End If
-            Next
-        Finally
-            clsScriptActive.EndUndoAction()
-        End Try
-
-        clsScriptActive.Focus()
-        clsScriptActive.GotoPosition(originalCaretPosition)
-    End Sub
-
-    ''' <summary>
     ''' Selects all the text in the active tab.
     ''' </summary>
     Public Sub SelectAllText()
@@ -1107,6 +1051,56 @@ Public Class ucrScript
     End Sub
 
     Private Sub toolStripMenuItemInsertCommentUncomment_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemInsertCommentUncomment.Click
-        ToggleComments()
+        Dim originalCaretPosition As Integer = clsScriptActive.CurrentPosition
+
+        ' Get the start and end positions of the selected text
+        Dim selectionStart As Integer = clsScriptActive.SelectionStart
+        Dim selectionEnd As Integer = clsScriptActive.SelectionEnd
+
+        ' Get the start and end lines of the selection
+        Dim startLine As Integer = clsScriptActive.LineFromPosition(selectionStart)
+        Dim endLine As Integer = clsScriptActive.LineFromPosition(selectionEnd)
+
+        ' Begin updating text
+        clsScriptActive.BeginUndoAction()
+
+        Try
+            ' Check if all lines are commented or not
+            Dim allCommented As Boolean = True
+            For lineIndex As Integer = startLine To endLine
+                Dim lineText As String = clsScriptActive.Lines(lineIndex).Text.TrimStart()
+                If Not lineText.StartsWith("#") Then
+                    allCommented = False
+                    Exit For
+                End If
+            Next
+
+            ' Toggle comment status for each line
+            For lineIndex As Integer = startLine To endLine
+                Dim line As Line = clsScriptActive.Lines(lineIndex)
+                Dim lineStartPos As Integer = line.Position
+                Dim lineEndPos As Integer = lineStartPos + line.Length
+                Dim lineText As String = line.Text
+                Dim iCountSpace As Integer = System.Text.RegularExpressions.Regex.Matches(lineText, "#\s#").Count
+                If iCountSpace > 0 Then iCountSpace += 1
+
+                If allCommented Then
+                    ' Set the target range to the matched text
+                    clsScriptActive.TargetStart = lineStartPos
+                    clsScriptActive.TargetEnd = lineStartPos + lineText.Count(Function(c) c = "#"c) + iCountSpace
+                    ' Replace the target range with an empty string to remove the `#`
+                    clsScriptActive.ReplaceTarget("")
+                Else
+                    ' Comment: Add `#` at the start
+                    clsScriptActive.InsertText(lineStartPos, "# ")
+                End If
+            Next
+        Finally
+            clsScriptActive.EndUndoAction()
+        End Try
+
+        clsScriptActive.Focus()
+        clsScriptActive.GotoPosition(originalCaretPosition)
     End Sub
+
 End Class
