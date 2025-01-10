@@ -155,9 +155,9 @@ Public Class frmMain
 
         '---------------------------------------
         'toggle the optional form menu items based on set opyions
-        mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
+        ' mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
-        mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+        '  mnuViewProcurementMenu.Checked = False
         mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
         mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
@@ -610,12 +610,18 @@ Public Class frmMain
     End Sub
 
     Private Sub SetHideMenus()
-        mnuViewProcurementMenu.Checked = False
-        mnuProcurement.Visible = False
-        mnuViewOptionsByContextMenu.Checked = False
-        mnuOptionsByContext.Visible = False
-        mnuViewStructuredMenu.Checked = False
-        mnuStructured.Visible = False
+        mnuViewProcurementMenu.Checked = My.Settings.ViewProcurementMenuChecked
+        mnuProcurement.Visible = mnuViewProcurementMenu.Checked
+        mnuViewProcurementMenu.Checked = My.Settings.ViewStructuredMenuChecked
+        mnuOptionsByContext.Visible = mnuViewStructuredMenu.Checked
+        mnuViewOptionsByContextMenu.Checked = My.Settings.ViewOptionsByContextMenuChecked
+        mnuStructured.Visible = mnuViewOptionsByContextMenu.Checked
+        'mnuViewProcurementMenu.Checked = False
+        'mnuProcurement.Visible = False
+        'mnuViewOptionsByContextMenu.Checked = False
+        'mnuOptionsByContext.Visible = False
+        'mnuViewStructuredMenu.Checked = False
+        'mnuStructured.Visible = False
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -1141,6 +1147,11 @@ Public Class frmMain
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Dim bClose As DialogResult = DialogResult.Yes
+
+        My.Settings.ViewProcurementMenuChecked = mnuViewProcurementMenu.Checked
+        My.Settings.ViewStructuredMenuChecked = mnuViewStructuredMenu.Checked
+        My.Settings.ViewOptionsByContextMenuChecked = mnuViewOptionsByContextMenu.Checked
+        My.Settings.Save()
 
         If e.CloseReason = CloseReason.UserClosing Then
             bClose = MsgBox("Are you sure you want to exit R-Instat?" & Environment.NewLine & "Any unsaved changes will be lost.", MessageBoxButtons.YesNo, "Exit")
