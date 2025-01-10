@@ -30,6 +30,7 @@ Imports RDotNet
     Public bIncludeRDefaultParameters As Nullable(Of Boolean)
     Public iPreviewRows As Nullable(Of Integer)
     Public iMaxRows As Nullable(Of Integer)
+    Public iMaxWidth As Nullable(Of Integer)
     Public iMaxCols As Nullable(Of Integer)
     Public iUndoColLimit As Nullable(Of Integer)
     Public iUndoRowLimit As Nullable(Of Integer)
@@ -78,6 +79,7 @@ Imports RDotNet
         clrEditor = clsInstatOptionsDefaults.DEFAULTclrEditor
         iPreviewRows = clsInstatOptionsDefaults.DEFAULTiPreviewRows
         iMaxRows = clsInstatOptionsDefaults.DEFAULTiMaxRows
+        iMaxWidth = clsInstatOptionsDefaults.DEFAULTiMaxWidth
         iMaxCols = clsInstatOptionsDefaults.DEFAULTiMaxCols
         iUndoColLimit = clsInstatOptionsDefaults.DEFAULTiUndoColLimit
         iUndoRowLimit = clsInstatOptionsDefaults.DEFAULTiUndoRowLimit
@@ -143,6 +145,12 @@ Imports RDotNet
             SetMaxRows(iMaxRows)
         Else
             SetMaxRows(clsInstatOptionsDefaults.DEFAULTiMaxRows)
+        End If
+
+        If iMaxWidth.HasValue Then
+            SetMaxWidth(iMaxWidth)
+        Else
+            SetMaxWidth(clsInstatOptionsDefaults.DEFAULTiMaxWidth)
         End If
 
         If iMaxCols.HasValue Then
@@ -348,6 +356,11 @@ Imports RDotNet
             clsOptionsFunction.AddParameter("dplyr.summarise.inform", "FALSE")
         End If
 
+        strROption = GetROption("width")
+        If strROption Is Nothing OrElse strROption <> iMaxWidth.ToString Then
+            clsOptionsFunction.AddParameter("width", iMaxWidth)
+        End If
+
         'add "R.commands.displayed.in.the.output.window" as options parameter of its been changed
         If frmMain.mnuShowRCommand.Checked Then
             clsOptionsFunction.AddParameter("R.commands.displayed.in.the.output.window", "TRUE")
@@ -394,6 +407,10 @@ Imports RDotNet
         frmMain.UpdateAllGrids()
     End Sub
 
+    Public Sub SetMaxWidth(iNewMaxWidth As Integer)
+        iMaxWidth = iNewMaxWidth
+        'frmMain.UpdateAllGrids()
+    End Sub
     Public Sub SetMaxCols(iCols As Integer)
         iMaxCols = iCols
         frmMain.UpdateAllGrids()

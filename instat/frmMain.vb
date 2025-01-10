@@ -227,6 +227,7 @@ Public Class frmMain
         '-------------------------------------
         SetAppVersionNumber()
         isMaximised = True 'Need to get the windowstate when the application is loaded
+        SetHideMenus()
     End Sub
 
     Private Sub CheckForUpdates()
@@ -247,9 +248,22 @@ Public Class frmMain
                     myProcess.StartInfo.FileName = "https://r-instat.org/"
                     myProcess.Start()
                 End If
+            Else
+                ' Current version is up to date, show a message
+                MessageBox.Show("You are using the latest version of R-Instat (" & strCurrVersion & ").", "R-Instat is Up to Date",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
+        Catch ex As WebException
+            ' Handle specific network-related exceptions
+            MessageBox.Show("It seems you are not connected to the internet or the website is unreachable. Please check your connection and try again.", "Network Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            MsgBox("Network issues or website not accessible")
+            ' Handle other exceptions
+            MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            ' Dispose of the web client to release resources
+            webClient.Dispose()
         End Try
     End Sub
 
@@ -593,6 +607,15 @@ Public Class frmMain
         Me.Text = "R-Instat " & My.Application.Info.Version.Major.ToString() & "." &
                 My.Application.Info.Version.Minor.ToString() & "." &
                 My.Application.Info.Version.Build.ToString()
+    End Sub
+
+    Private Sub SetHideMenus()
+        mnuViewProcurementMenu.Checked = False
+        mnuProcurement.Visible = False
+        mnuViewOptionsByContextMenu.Checked = False
+        mnuOptionsByContext.Visible = False
+        mnuViewStructuredMenu.Checked = False
+        mnuStructured.Visible = False
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -2905,7 +2928,7 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub RInstatResourcesSiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RInstatResourcesSiteToolStripMenuItem.Click
+    Private Sub RInstatResourcesSiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuHelpResourcesSite.Click
         Process.Start("https://ecampus.r-instat.org/course/view.php?id=14")
     End Sub
 
