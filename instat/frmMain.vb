@@ -159,9 +159,7 @@ Public Class frmMain
 
         '---------------------------------------
         'toggle the optional form menu items based on set opyions
-        'mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
-        'mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
         mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
