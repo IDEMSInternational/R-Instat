@@ -211,7 +211,7 @@ Public Class dlgOneVariableSummarise
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("na.rm", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsSummaryFunction, iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsJoiningPipeOperator, iAdditionalPairNo:=2)
-        ucrReceiverOneVarSummarise.SetRCode(clsSummaryFunction, bReset)
+        ucrReceiverOneVarSummarise.AddAdditionalCodeParameterPair(clsSummaryFunction, New RParameter("object", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
 
         ucrPnlSummaries.SetRCode(clsDummyFunction, bReset)
