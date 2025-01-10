@@ -44,6 +44,10 @@ Public Class frmMain
     Private clsDataBook As clsDataBook
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public bFirstBackupDone As Boolean = False
+    Private ReadOnly stateFilePathProcument As String = "procurementmenuState.txt"
+    Private ReadOnly stateFilePathStructured As String = "struturedmenuState.txt"
+    Private ReadOnly stateFilePathExperiments As String = "experimentsmenuState.txt"
+
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -155,9 +159,9 @@ Public Class frmMain
 
         '---------------------------------------
         'toggle the optional form menu items based on set opyions
-        mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
+        'mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
-        mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+        'mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
         mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
@@ -610,12 +614,29 @@ Public Class frmMain
     End Sub
 
     Private Sub SetHideMenus()
-        mnuViewProcurementMenu.Checked = False
-        mnuProcurement.Visible = False
-        mnuViewOptionsByContextMenu.Checked = False
-        mnuOptionsByContext.Visible = False
-        mnuViewStructuredMenu.Checked = False
-        mnuStructured.Visible = False
+        If IO.File.Exists(stateFilePathProcument) Then
+            Dim state As String = IO.File.ReadAllText(stateFilePathProcument).Trim()
+            mnuViewProcurementMenu.Checked = (state = "Checked")
+        Else
+            mnuViewProcurementMenu.Checked = False ' Default state
+        End If
+        If IO.File.Exists(stateFilePathStructured) Then
+            Dim state As String = IO.File.ReadAllText(stateFilePathStructured).Trim()
+            mnuViewStructuredMenu.Checked = (state = "Checked")
+        Else
+            mnuViewStructuredMenu.Checked = False ' Default state
+        End If
+        If IO.File.Exists(stateFilePathExperiments) Then
+            Dim state As String = IO.File.ReadAllText(stateFilePathExperiments).Trim()
+            mnuViewOptionsByContextMenu.Checked = (state = "Checked")
+        Else
+            mnuViewOptionsByContextMenu.Checked = False ' Default state
+        End If
+
+        ' Update visibility
+        mnuProcurement.Visible = mnuViewProcurementMenu.Checked
+        mnuOptionsByContext.Visible = mnuViewOptionsByContextMenu.Checked
+        mnuStructured.Visible = mnuViewStructuredMenu.Checked
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -1911,6 +1932,33 @@ Public Class frmMain
 
     Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
         clsInstatOptions.SetShowProcurementMenu(Not mnuViewProcurementMenu.Checked)
+    End Sub
+
+    Private Sub mnuViewProcurementMenu_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.CheckStateChanged
+        ' Update visibility
+        mnuProcurement.Visible = mnuViewProcurementMenu.Checked
+
+        ' Save the current state to the file
+        Dim state As String = If(mnuViewProcurementMenu.Checked, "Checked", "Unchecked")
+        IO.File.WriteAllText(stateFilePathProcument, state)
+    End Sub
+
+    Private Sub mnuViewStructuredMenu_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewStructuredMenu.CheckStateChanged
+        ' Update visibility
+        mnuStructured.Visible = mnuViewStructuredMenu.Checked
+
+        ' Save the current state to the file
+        Dim state As String = If(mnuViewStructuredMenu.Checked, "Checked", "Unchecked")
+        IO.File.WriteAllText(stateFilePathStructured, state)
+    End Sub
+
+    Private Sub mnuViewOptionsByContextMenu_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewOptionsByContextMenu.CheckStateChanged
+        ' Update visibility
+        mnuOptionsByContext.Visible = mnuViewOptionsByContextMenu.Checked
+
+        ' Save the current state to the file
+        Dim state As String = If(mnuViewOptionsByContextMenu.Checked, "Checked", "Unchecked")
+        IO.File.WriteAllText(stateFilePathExperiments, state)
     End Sub
 
     Private Sub mnuPrepareCheckDataBoxplot_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataBoxplot.Click
