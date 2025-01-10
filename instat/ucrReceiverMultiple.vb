@@ -409,6 +409,7 @@ Public Class ucrReceiverMultiple
                     strDataTypes = {"factor"}.ToList
                 End If
                 If bIsCategoricalNumeric Then
+                    ' logical can be considered as both categorical or numeric so should be dealt with on individual dialogs
                     For i As Integer = 0 To strDataTypes.Count - 1
                         If strDataTypes(i).Contains("factor") OrElse strDataTypes(i).Contains("character") Then
                             strDataTypes(i) = "categorical"
