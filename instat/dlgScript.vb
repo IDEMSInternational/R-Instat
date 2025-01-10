@@ -675,8 +675,7 @@ Public Class dlgScript
     End Sub
 
     Private Sub PreviewScript(strNewScript As String)
-        Dim strScript As String = strNewScript & Environment.NewLine
-        txtScript.Text = GetFormattedScript(strScript)
+        txtScript.Text = GetFormattedScript(strNewScript & Environment.NewLine)
         txtScript.SelectionStart = txtScript.Text.Length
         txtScript.ScrollToCaret()
         txtScript.Refresh()
