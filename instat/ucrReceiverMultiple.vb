@@ -411,7 +411,7 @@ Public Class ucrReceiverMultiple
                 If bIsCategoricalNumeric Then
                     ' logical can be considered as both categorical or numeric so should be dealt with on individual dialogs
                     For i As Integer = 0 To strDataTypes.Count - 1
-                        If strDataTypes(i).Contains("factor") OrElse strDataTypes(i).Contains("character") Then
+                        If strDataTypes(i).Contains("factor") OrElse strDataTypes(i).Contains("character") OrElse strDataTypes(i).Contains("ordered") Then
                             strDataTypes(i) = "categorical"
                         ElseIf Not strDataTypes(i).Contains("logical") Then
                             strDataTypes(i) = "numeric"
