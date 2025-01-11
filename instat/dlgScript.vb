@@ -675,11 +675,27 @@ Public Class dlgScript
     End Sub
 
     Private Sub PreviewScript(strNewScript As String)
-        txtScript.Text = strNewScript & Environment.NewLine
+        txtScript.Text = GetFormattedScript(strNewScript & Environment.NewLine)
         txtScript.SelectionStart = txtScript.Text.Length
         txtScript.ScrollToCaret()
         txtScript.Refresh()
     End Sub
+
+    Private Function GetFormattedScript(strScript As String) As String
+        Dim strReconstructedstrScript As String = ""
+        Dim arrCommentParts As String()
+        If strScript.Length > 0 Then
+            arrCommentParts = strScript.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            For Each strPart As String In arrCommentParts
+                If strReconstructedstrScript = "" Then
+                    strReconstructedstrScript = strPart
+                Else
+                    strReconstructedstrScript = strReconstructedstrScript & Environment.NewLine & strPart
+                End If
+            Next
+        End If
+        Return strReconstructedstrScript
+    End Function
 
     Private Sub ucrInputChooseFile_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputChooseFile.ControlContentsChanged, ucrChkOpenRFile.ControlContentsChanged
         UpdateScript()
