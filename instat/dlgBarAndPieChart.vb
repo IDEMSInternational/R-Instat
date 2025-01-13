@@ -1422,8 +1422,6 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub HideShowWidth()
-        ucrChkBinWidth.Visible = False
-        ucrInputWidth.Visible = False
         If rdoFrequency.Checked AndAlso (Not ucrVariablesAsFactorForBarChart.IsEmpty AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric") Then
             ucrChkBinWidth.Visible = True
             ucrInputWidth.Visible = ucrChkBinWidth.Checked
