@@ -2938,4 +2938,10 @@ Public Class frmMain
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         ucrDataViewer.Undo()
     End Sub
+
+    Private Sub mnuRDataViewerWindow_Click(sender As Object, e As EventArgs) Handles mnuRDataViewerWindow.Click
+        ucrDataViewer.StartWait()
+        ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        ucrDataViewer.EndWait()
+    End Sub
 End Class
