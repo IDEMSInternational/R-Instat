@@ -192,7 +192,6 @@ Public Class dlgOneVariableSummarise
                                                    strObjectName:="last_summary")
 
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsSummaryTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=1)
         clsSummaryTableFunction.AddParameter("margins", Chr(34) & "summary" & Chr(34), iPosition:=2)
         clsSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=5)
@@ -329,6 +328,7 @@ Public Class dlgOneVariableSummarise
         End If
         cmdSummaries.Visible = rdoCustomised.Checked
         cmdTableOptions.Visible = rdoCustomised.Checked
+        ConfigureColumnFactorsAndNames()
     End Sub
 
     Private Sub FillListView()
@@ -368,22 +368,30 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged
-        'If bRCodeSet Then
-        If rdoNoColumnFactor.Checked Then
-            clsSummaryOperator.RemoveParameterByName("col_factor")
-            clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
-        Else
-            clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
-            If rdoSummary.Checked Then
-                clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
-                clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
-            ElseIf rdoVariable.Checked Then
-                clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=1)
-                clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
-            End If
-        End If
-        'End If
+        ConfigureColumnFactorsAndNames()
     End Sub
+
+    Private Sub ConfigureColumnFactorsAndNames()
+        If rdoCustomised.Checked Then
+            If rdoNoColumnFactor.Checked Then
+                clsSummaryOperator.RemoveParameterByName("col_factor")
+                clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
+            Else
+                clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+                If rdoSummary.Checked Then
+                    clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
+                    clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
+                ElseIf rdoVariable.Checked Then
+                    clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=1)
+                    clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
+                End If
+            End If
+        Else
+            clsSummaryOperator.RemoveParameterByName("col_factor")
+            clsPivotWiderFunction.RemoveParameterByName("names_from")
+        End If
+    End Sub
+
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlContentsChanged, ucrNudMaxSum.ControlContentsChanged, ucrSaveSummary.ControlContentsChanged
         TestOKEnabled()
     End Sub
