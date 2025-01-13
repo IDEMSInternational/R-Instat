@@ -1592,7 +1592,7 @@ Public Class dlgDescribeTwoVariable
             Dim ucrCurrentReceiver As ucrReceiverSingle = If(rdoTwoVariable.Checked,
                 ucrReceiverSecondTwoVariableFactor, ucrReceiverThreeVariableSecondFactor)
             If Not ucrCurrentReceiver.IsEmpty Then
-                strSecondVariableType = If({"factor", "character", "logical"}.Contains(ucrCurrentReceiver.strCurrDataType),
+                strSecondVariableType = If({"factor", "ordered,factor", "character", "logical"}.Contains(ucrCurrentReceiver.strCurrDataType),
                                   "categorical", "numeric")
                 lblSecondType.Text = strSecondVariableType
                 lblSecondType.ForeColor = SystemColors.Highlight
@@ -1653,7 +1653,7 @@ Public Class dlgDescribeTwoVariable
         If rdoThreeVariable.Checked Then
             Dim ucrCurrentReceiver As ucrReceiverSingle = ucrReceiverThreeVariableThirdVariable
             If Not ucrCurrentReceiver.IsEmpty Then
-                strThirdVariableType = If({"factor", "character", "logical"}.Contains(ucrCurrentReceiver.strCurrDataType),
+                strThirdVariableType = If({"factor", "ordered,factor", "character", "logical"}.Contains(ucrCurrentReceiver.strCurrDataType),
                                   "categorical", "numeric")
                 lblThreeVariableCategorical.Text = strThirdVariableType
                 lblThreeVariableCategorical.ForeColor = SystemColors.Highlight
