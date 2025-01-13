@@ -536,7 +536,6 @@ Public Class dlgLinePlot
 
         clsGeomLineFunction.SetPackageName("ggplot2")
         clsGeomLineFunction.SetRCommand("geom_line")
-        clsGeomLineFunction.AddParameter("colour", Chr(34) & "blue" & Chr(34))
         clsGeomLineFunction.AddParameter("size", "0.8")
 
         clsAesLinerangeFunction.SetRCommand("aes")

@@ -75,6 +75,7 @@ Public Class dlgOptions
         SetView()
 
         ucrNudDigits.SetMinMax(0, 22)
+        ucrNudWidth.SetMinMax(0, Integer.MaxValue)
         ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
         ucrChkViewStructuredMenu.SetText("Show Structured Menu")
         ucrChkViewClimaticMenu.SetText("Show Climatic Menu")
@@ -130,6 +131,7 @@ Public Class dlgOptions
         ucrChkViewClimaticMenu.Checked = frmMain.clsInstatOptions.bShowClimaticMenu
         ucrChkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
         ucrNudDigits.Value = frmMain.clsInstatOptions.iDigits
+        ucrNudWidth.Value = frmMain.clsInstatOptions.iMaxWidth
         ucrChkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
         ucrChkShowDataonGrid.Checked = frmMain.clsInstatOptions.bChangeDataFrame
         ucrChkShowWaitDialog.Checked = frmMain.clsInstatOptions.bShowWaitDialog
@@ -197,6 +199,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetShowClimaticMenu(ucrChkViewClimaticMenu.Checked)
         frmMain.clsInstatOptions.SetCommandInOutpt(ucrChkShowRCommandsinOutputWindow.Checked)
         frmMain.clsInstatOptions.SetDigits(ucrNudDigits.Value)
+        frmMain.clsInstatOptions.SetMaxWidth(ucrNudWidth.Value)
         frmMain.clsInstatOptions.SetSignifStars(ucrChkShowSignifStars.Checked)
         frmMain.clsInstatOptions.SetChangeDataFrame(ucrChkShowDataonGrid.Checked)
         frmMain.clsInstatOptions.SetShowWaitDialog(ucrChkShowWaitDialog.Checked)
@@ -375,7 +378,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkTurnOffUndo.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged, ucrChkReminder.ControlValueChanged, ucrNudColUndoLimit.ControlValueChanged, ucrNudRowUndoLimit.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudWidth.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkTurnOffUndo.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged, ucrChkReminder.ControlValueChanged, ucrNudColUndoLimit.ControlValueChanged, ucrNudRowUndoLimit.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 
@@ -443,7 +446,7 @@ Public Class dlgOptions
         ApplyEnabled(True)
     End Sub
 
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrChkReminder.ControlValueChanged, ucrNudColUndoLimit.ControlValueChanged, ucrNudRowUndoLimit.ControlValueChanged, ucrChkTurnOffUndo.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudWidth.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrChkReminder.ControlValueChanged, ucrNudColUndoLimit.ControlValueChanged, ucrNudRowUndoLimit.ControlValueChanged, ucrChkTurnOffUndo.ControlValueChanged
 
     End Sub
 
