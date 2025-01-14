@@ -187,7 +187,7 @@ Public Class ucrOutputPage
         End If
 
         'if no contents added just exit sub
-        If richTextBox.TextLength = 0 Then
+        If String.IsNullOrWhiteSpace(richTextBox.Text) Then
             Exit Sub
         End If
 
@@ -211,11 +211,10 @@ Public Class ucrOutputPage
             If frmMain.clsInstatOptions.bIncludeCommentDefault Then
                 'show comments only
                 For Each line As clsRScriptElement In formattedRScript
-                    If line.Type = RToken.TokenTypes.RComment Then
+                    If line.Type = RToken.TokenTypes.RComment OrElse line.Type = RToken.TokenTypes.RNewLine Then
                         AddFormatedTextToRichTextBox(richTextBox, line.Text, OutputFont.GetFontForScriptType(line.Type), OutputFont.GetColourForScriptType(line.Type))
                     End If
                 Next
-
             ElseIf frmMain.clsInstatOptions.bCommandsinOutput Then
                 'show command lines that are not comments
                 For Each line As clsRScriptElement In formattedRScript
