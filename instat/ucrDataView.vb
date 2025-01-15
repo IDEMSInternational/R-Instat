@@ -23,6 +23,7 @@ Public Class ucrDataView
     Private _clsDataBook As clsDataBook
     Private _grid As IDataViewGrid
     Private bOnlyUpdateOneCell As Boolean = False
+    Private _hasChanged As Boolean
 
     Public WriteOnly Property DataBook() As clsDataBook
         Set(value As clsDataBook)
@@ -157,6 +158,7 @@ Public Class ucrDataView
                 RefreshDisplayInformation()
             End If
         End If
+        _hasChanged = True
         EnableDisableUndoMenu()
         _grid.Focus()
     End Sub
@@ -184,6 +186,14 @@ Public Class ucrDataView
     Public Function GetCurrentDataFrameNameFocus() As String
         Return If(_grid.CurrentWorksheet Is Nothing, Nothing, _grid.CurrentWorksheet.Name)
     End Function
+
+    Public Function HasDataChanged() As Boolean
+        Return GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasDataChangedForAutoSave
+    End Function
+
+    Public Sub HasDataChanged(bChange As Boolean)
+        GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasDataChangedForAutoSave = bChange
+    End Sub
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
         If GetSelectedColumns.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then

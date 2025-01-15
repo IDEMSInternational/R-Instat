@@ -1185,7 +1185,7 @@ Public Class frmMain
         Dim strCurrentStatus As String
 
         strCurrentStatus = tstatus.Text
-        If clsRLink.bInstatObjectExists Then
+        If clsRLink.bInstatObjectExists AndAlso ucrDataViewer.HasDataChanged Then
             tstatus.Text = GetTranslation("Auto saving data...")
             Cursor = Cursors.WaitCursor
             If Not Directory.Exists(strAutoSaveDataFolderPath) Then
@@ -1208,6 +1208,7 @@ Public Class frmMain
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
             bFirstBackupDone = True
+            ucrDataViewer.HasDataChanged(False)
         End If
     End Sub
 
