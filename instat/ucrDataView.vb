@@ -506,12 +506,12 @@ Public Class ucrDataView
         Return GetSelectedRows.LastOrDefault()
     End Function
 
-    Private Sub StartWait()
+    Public Sub StartWait()
         Cursor = Cursors.WaitCursor
         _grid.bEnabled = False
     End Sub
 
-    Private Sub EndWait()
+    Public Sub EndWait()
         _grid.bEnabled = True
         Cursor = Cursors.Default
     End Sub
@@ -576,12 +576,6 @@ Public Class ucrDataView
     Private Sub mnuUnfreeze_Click(sender As Object, e As EventArgs)
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.UnFreezeColumns()
-        EndWait()
-    End Sub
-
-    Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
         EndWait()
     End Sub
 
