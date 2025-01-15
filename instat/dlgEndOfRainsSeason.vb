@@ -31,7 +31,7 @@ Public Class dlgEndOfRainsSeason
 
 #Region "general_code_structures"
     ' General
-    Private clsVectorFunction, clsStationtypeFunction, clsConvertColumnTypeStationFunction, clsConvertlinkedvariable1Function, clsConvertlinkedvariableFunction, clsConvertColumnType1Function, clsGetColumnDataTypeFunction, clsConvertColumnTypeFunction, clsRunCalculation, clsListCalFunction, clsDummyFunction As New RFunction
+    Private clsVectorFunction, clsDeleteunusedrowFunction, clsStationtypeFunction, clsConvertColumnTypeStationFunction, clsConvertlinkedvariable1Function, clsConvertlinkedvariableFunction, clsConvertColumnType1Function, clsGetColumnDataTypeFunction, clsConvertColumnTypeFunction, clsRunCalculation, clsListCalFunction, clsDummyFunction As New RFunction
     Private clsFirstOrLastFunction As New RFunction
 
     ' Group by
@@ -408,6 +408,7 @@ Public Class dlgEndOfRainsSeason
         clsGetColumnDataTypeFunction.Clear()
         clsConvertColumnType1Function.Clear()
         clsStationtypeFunction.Clear()
+        clsDeleteunusedrowFunction = New RFunction
         clsConvertColumnTypeStationFunction.Clear()
 
         '   Group by
@@ -1193,6 +1194,8 @@ Public Class dlgEndOfRainsSeason
         clsConvertColumnTypeStationFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsConvertColumnTypeStationFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
 
+        clsDeleteunusedrowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_unused_station_year_combinations")
+
 #End Region
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -1205,6 +1208,7 @@ Public Class dlgEndOfRainsSeason
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalculation)
 
         clsFirstOrLastFunction = clsLastDoyFunction
+        RemoveUnusedRow()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -1343,6 +1347,18 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonRainMaxCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=3)
     End Sub
 
+    Private Sub RemoveUnusedRow()
+        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
+            clsDeleteunusedrowFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(), iPosition:=2)
+            clsDeleteunusedrowFunction.AddParameter("year", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDeleteunusedrowFunction, iPosition:=11)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDeleteunusedrowFunction)
+            clsDeleteunusedrowFunction.RemoveParameterByName("station")
+            clsDeleteunusedrowFunction.RemoveParameterByName("year")
+        End If
+    End Sub
+
     Private Sub YearStationVariable()
         If Not ucrReceiverYear.IsEmpty Then
             clsVectorFunction.AddParameter("x", ucrReceiverYear.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
@@ -1358,7 +1374,6 @@ Public Class dlgEndOfRainsSeason
                 clsVectorFunction.RemoveParameterByName("y")
                 clsConvertColumnTypeStationFunction.RemoveParameterByName("col_names")
                 clsStationtypeFunction.RemoveParameterByName("columns")
-
             End If
             clsConvertlinkedvariableFunction.AddParameter("link_cols", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
             clsConvertlinkedvariable1Function.AddParameter("link_cols", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
@@ -1374,6 +1389,7 @@ Public Class dlgEndOfRainsSeason
     Private Sub ucrReceiverStationYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged
         GroupingBy()
         YearStationVariable()
+        RemoveUnusedRow()
         If Not ucrReceiverYear.IsEmpty Then
             clsGetColumnDataTypeFunction.AddParameter("columns", ucrReceiverYear.GetVariableNames(), iPosition:=1)
             clsConvertColumnTypeFunction.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
@@ -1414,6 +1430,7 @@ Public Class dlgEndOfRainsSeason
         clsStationtypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsConvertColumnTypeStationFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsLinkeddataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsDeleteunusedrowFunction.AddParameter("data_name", Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub
 
     Private Sub ucrPnlEvaporation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvaporation.ControlValueChanged, ucrReceiverEvaporation.ControlValueChanged, ucrInputEvaporation.ControlValueChanged

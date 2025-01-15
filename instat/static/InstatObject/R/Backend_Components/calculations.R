@@ -868,3 +868,27 @@ find_df_from_calc_from <- function(x, column) {
   }
   return("")
 }
+
+DataBook$set("public", "remove_unused_station_year_combinations", function(data_name, year, station){
+  # Create linked data name
+  linked_data_name <- self$get_linked_to_data_name(data_name, link_cols=c(year, station))
+  
+  # Column Summaries
+  self$calculate_summary(data_name = data_name,
+                              store_results=TRUE,
+                              factors=c(year, station), 
+                              summaries=c("summary_count"),
+                              silent=TRUE)
+  
+  self$rename_column_in_data(data_name = linked_data_name, column_name="count", new_val="count_year_station_combination_for_linking", label="")
+  
+  # Create Filter subdialog: Created new filter
+  self$add_filter(filter=list(C0=list(column="count_year_station_combination_for_linking", operation="! is.na")), data_name = linked_data_name, filter_name = "removing_additional_years")
+  
+  # Dialog: Filter
+  self$copy_data_object(data_name = linked_data_name, new_name = linked_data_name, filter_name="removing_additional_years")
+  
+  # Right click menu: Delete Column(s)
+  self$remove_columns_in_data(data_name=linked_data_name, cols="count_year_station_combination_for_linking")
+}
+)
