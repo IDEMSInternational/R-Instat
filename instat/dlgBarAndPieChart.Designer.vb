@@ -115,6 +115,8 @@ Partial Class dlgBarAndPieChart
         Me.lblFacetBy = New System.Windows.Forms.Label()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegend = New instat.ucrCheck()
+        Me.ucrInputWidth = New instat.ucrInputTextBox()
+        Me.ucrChkBinWidth = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -906,12 +908,36 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkLegend.Size = New System.Drawing.Size(98, 24)
         Me.ucrChkLegend.TabIndex = 72
         '
+        'ucrInputWidth
+        '
+        Me.ucrInputWidth.AddQuotesIfUnrecognised = True
+        Me.ucrInputWidth.AutoSize = True
+        Me.ucrInputWidth.IsMultiline = False
+        Me.ucrInputWidth.IsReadOnly = False
+        Me.ucrInputWidth.Location = New System.Drawing.Point(141, 270)
+        Me.ucrInputWidth.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputWidth.Name = "ucrInputWidth"
+        Me.ucrInputWidth.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputWidth.TabIndex = 91
+        '
+        'ucrChkBinWidth
+        '
+        Me.ucrChkBinWidth.AutoSize = True
+        Me.ucrChkBinWidth.Checked = False
+        Me.ucrChkBinWidth.Location = New System.Drawing.Point(12, 270)
+        Me.ucrChkBinWidth.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrChkBinWidth.Name = "ucrChkBinWidth"
+        Me.ucrChkBinWidth.Size = New System.Drawing.Size(144, 23)
+        Me.ucrChkBinWidth.TabIndex = 90
+        '
         'dlgBarAndPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(415, 596)
+        Me.Controls.Add(Me.ucrInputWidth)
+        Me.Controls.Add(Me.ucrChkBinWidth)
         Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.ucr1stFactorReceiver)
         Me.Controls.Add(Me.lblFacetBy)
@@ -1067,4 +1093,6 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents lblFacetBy As Label
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegend As ucrCheck
+    Friend WithEvents ucrInputWidth As ucrInputTextBox
+    Friend WithEvents ucrChkBinWidth As ucrCheck
 End Class
