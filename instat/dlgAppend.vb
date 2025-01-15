@@ -36,6 +36,7 @@ Public Class dlgAppend
         End If
         SetRCodeForControls(bReset)
         SetHelpOptions()
+        ReopenDialog()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -98,6 +99,7 @@ Public Class dlgAppend
     End Sub
 
     Private Sub ReopenDialog()
+        ucrReceiverAppendDataframe.Clear()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
