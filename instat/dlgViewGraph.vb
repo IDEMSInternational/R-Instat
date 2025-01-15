@@ -63,7 +63,6 @@ Public Class dlgViewGraph
 
         'todo. Calling print() from this dialog doesn't work. investigate why
         'temporarily disabled
-        rdoRViewer.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -125,8 +124,9 @@ Public Class dlgViewGraph
             clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=2)
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
         ElseIf rdoRViewer.Checked Then
-            'clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
-            'clsViewObjectRFunction.RemoveParameterByName("object_format")
+            clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=2)
+            clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
+            clsViewObjectRFunction.RemoveParameterByName("object_format")
             ucrBase.clsRsyntax.SetBaseRFunction(clsPrintRFunction)
         End If
     End Sub
