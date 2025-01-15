@@ -280,7 +280,7 @@ DataBook$set("public", "clone_instat_calculation", function(curr_instat_calculat
   
   new_manips <- lapply(curr_instat_calculation$manipulations, function(x) self$clone_instat_calculation(x))
   new_subs <- lapply(curr_instat_calculation$sub_calculations, function(x) self$clone_instat_calculation(x))
-  new_instat_calculation <- instat_calculation$new(function_exp = curr_instat_calculation$function_exp, 
+  new_instat_calculation <- instatCalculations::instat_calculation$new(function_exp = curr_instat_calculation$function_exp, 
                                                    type = curr_instat_calculation$type,
                                                    name = curr_instat_calculation$name, 
                                                    result_name = curr_instat_calculation$result_name, 
@@ -2331,12 +2331,12 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     calc_from[[length(calc_from) + 1]] <- plant_length_name
     calc_from[[length(calc_from) + 1]] <- rain_total_name
     names(calc_from) <- rep(crops_name, length(calc_from))
-    grouping <- instat_calculation$new(type = "by", calculated_from = calc_from)
+    grouping <- instatCalculations::instat_calculation$new(type = "by", calculated_from = calc_from)
     
     if (start_check %in% c("yes", "no")){
       prop_calc_from <- list("overall_cond")
       names(prop_calc_from) <- crops_name
-      propor_table <- instat_calculation$new(function_exp="sum(overall_cond, na.rm = TRUE)/length(na.omit(overall_cond))",
+      propor_table <- instatCalculations::instat_calculation$new(function_exp="sum(overall_cond, na.rm = TRUE)/length(na.omit(overall_cond))",
                                              save = 2, calculated_from = prop_calc_from,
                                              manipulations = list(grouping),
                                              type="summary", result_name = "prop_success", result_data_frame = "crop_prop")
@@ -2352,7 +2352,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     } else {
       prop_calc_from_with_start <- list("overall_cond_with_start")
       names(prop_calc_from_with_start) <- crops_name
-      propor_table_with_start <- instat_calculation$new(function_exp="sum(overall_cond_with_start, na.rm = TRUE)/length(na.omit(overall_cond_with_start))",
+      propor_table_with_start <- instatCalculations::instat_calculation$new(function_exp="sum(overall_cond_with_start, na.rm = TRUE)/length(na.omit(overall_cond_with_start))",
                                                         save = 2, calculated_from = prop_calc_from_with_start,
                                                         manipulations = list(grouping),
                                                         type="summary", result_name = "prop_success", result_data_frame = "crop_prop_with_start")
@@ -2360,7 +2360,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
       
       prop_calc_from_no_start <- list("overall_cond_no_start")
       names(prop_calc_from_no_start) <- crops_name
-      propor_table_no_start <- instat_calculation$new(function_exp="sum(overall_cond_no_start, na.rm = TRUE)/length(na.omit(overall_cond_no_start))",
+      propor_table_no_start <- instatCalculations::instat_calculation$new(function_exp="sum(overall_cond_no_start, na.rm = TRUE)/length(na.omit(overall_cond_no_start))",
                                                       save = 2, calculated_from = prop_calc_from_no_start,
                                                       manipulations = list(grouping),
                                                       type="summary", result_name = "prop_success", result_data_frame = "crop_prop_no_start")

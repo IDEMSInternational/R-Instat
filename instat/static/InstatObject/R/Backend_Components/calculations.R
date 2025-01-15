@@ -1,57 +1,4 @@
-calculation <- R6::R6Class("calculation",
-                           public = list(
-                             initialize = function(function_name = "", parameters = list(), 
-                                                   calculated_from = c(), is_recalculable = TRUE,
-                                                   sub_calculations = list(), type = "", filter_conditions = list(),
-                                                   filters = list(), name = "") {
-                               self$function_name = function_name
-                               self$parameters = parameters
-                               self$calculated_from = c()
-                               self$is_recalculable = is_recalculable
-                               self$sub_calculations = sub_calculations
-                               self$type = type
-                               self$name = name
-                               self$filter_conditions = filter_conditions
-                               self$filters = filters
-                             },
-                             function_name = "",
-                             parameters = list(), 
-                             calculated_from = c(),
-                             is_recalculable = TRUE,
-                             sub_calculations = list(),
-                             filter_conditions = list(),
-                             filters = list(),
-                             name = "",
-                             type = ""
-                           )
-                           # ,
-                           # Removed because filter_conditions can be public
-                           # private = list(
-                           #   .filter_conditions = list()
-                           # )
-                           # ,
-                           # active = list(
-                           #   filter_conditions = function(new_filter_conditions) {
-                           #     if(missing(new_filter_conditions)) return(private$.filter_conditions)
-                           #     else private$.filter_conditions <- new_filter_conditions
-                           #   }
-                           # )
-)
-
-calculation$set("public", "add_sub_calculation", function(sub_calculation, name) {
-  sub_calculations[[name]] <- sub_calculation
-}
-)
-
-calculation$set("public", "data_clone", function() {
-  ret <- calculation$new(function_name = self$function_name, parameters = self$parameters, 
-                         calculated_from = self$calculated_from, is_recalculable = self$is_recalculable,
-                         sub_calculations = self$sub_calculations, type = self$type, 
-                         filter_conditions = self$filter_conditions, filters = self$filters,
-                         name = self$name)
-  return(ret)
-}
-)
+library(instatCalculations)
 
 # This ensures cloned filter objects from older saved data_books have the expected parameters
 check_filter <- function(filter_obj) {
@@ -87,87 +34,6 @@ DataSheet$set("public", "save_calculation", function(calc) {
   if(calc$name %in% names(private$calculations)) warning("There is already a calculation called ", calc$name, ". It will be replaced.")
   private$calculations[[calc$name]] <- calc
   return(calc$name)
-}
-)
-
-# class to store calculations
-# Fields:
-# function_exp     : string - passed directly to one of dplyr functions e.g. "Yield > 50" for a filter or "Yield * Size" for a calculation
-# type             : string - one of "by", "calculation", "filter", "summary", "combination" to determine the type of calculation to do
-#                             each corresponds directly to one of dplyr's functions (except combination).
-#                             "by" - for dplyr's "group_by", to group the data by column(s) (usually factors) in preparation for doing summaries, for example.
-#                             "sort" - for dplyr's "arrange", to sort the data by column(s)
-#                             "calculation" - for dplyr's "mutate", a simple calculation to produce a column within the same data frame
-#                             "filter" - for dplyr's "filter", to filter the rows of a data frame by any logical expression
-#                             "summary" - for dplyr's "summarise", to produce summaries. Produces a singple value unless the data is already grouped, 
-#                                         and then one value for each "group" is produced.
-#                             "combination" - for calculations which contain sub calculations (and possibly mutations) but no main calculation is needed.
-# name             : string - a name for the calculation. If save_calc = FALSE then name is not used anywhere.
-# result_name      : string - a name for the output (usually a column) produced by the calculation e.g. "YieldDouble"
-# result_data_frame : string - a name for the data frame that the output should go to. This could be an existing data frame on a new one
-#                             the default, "", means the linking system will be used to determine the data frame the output should below to
-# manipulations    : list   - a list of calculations to be performed before any sub_calculations and the main calculation is performed.
-#                             the order of these is important, as the output from each manipulation is the input to the next manipulation
-#                             the output of the final manipulation is the input for all sub_calculations
-#                             these are typically "by" and "filter" calculations, but could be any
-# sub_calculations : list   - a list of calculations to be performed after manipulations, but before the main calculation
-#                             typically these are calculations which must be calculated before the main calculation can be done.
-#                             the output of the final manipulation is the input for all sub_calculations
-#                             the order is not important, as the output from each sub_calculation is not passed as the input to the next sub_calculation
-#                             If the order is important, then manipulations should be used instead.
-# calculated_from  : list   - a list with values as the names of the columns the calculation depends on, 
-#                             and names as the names of the data frames corresponding the columns e.g. list(survey = "Yield", survey = "Size")
-# save             : integer- either, 0: nothing is saved, 1: calculation is saved but not the result or 2: calculation and result is saved
-#                             (saving the result without saving the calculation was decided not to be a sensible option - prevents recalculating etc.
-#                              saving calculation only is useful to reproduce results in output window without needing to save in a data frame e.g. single value summaries)  
-
-instat_calculation <- R6::R6Class("instat_calculation",
-                                  public = list(
-                                    initialize = function(function_exp = "", type = "", name = "", result_name = "", result_data_frame = "", manipulations = list(),
-                                                          sub_calculations = list(), calculated_from = list(), save = 0, before = FALSE, adjacent_column = "", param_list = list()) {
-                                      if((type == "calculation" || type == "summary") && missing(result_name)) stop("result_name must be provided for calculation and summary types")
-                                      if(type == "combination" && save > 0) {
-                                        warning("combination types do not have a main calculation which can be saved. save_output will be stored as FALSE")
-                                        save <- 0
-                                        #TODO Should this do something else like set save_output = TRUE for all sub_calculations?
-                                      }
-                                      self$function_exp <- function_exp
-                                      self$type <- type
-                                      self$name <- name
-                                      self$result_name <- result_name
-                                      self$result_data_frame <- result_data_frame
-                                      self$manipulations <- manipulations
-                                      self$sub_calculations <- sub_calculations
-                                      self$calculated_from <- calculated_from
-                                      self$save <- save
-                                      self$before <- before
-                                      self$adjacent_column <- adjacent_column
-                                      self$param_list <- param_list
-                                    },
-                                    name = "",
-                                    result_name = "",
-                                    result_data_frame = "",
-                                    type = "",
-                                    manipulations = list(),
-                                    sub_calculations = list(),
-                                    function_exp = "",
-                                    calculated_from = list(),
-                                    save = 0,
-                                    before = FALSE,
-                                    adjacent_column = "",
-                                    param_list = list()
-                                  )
-)
-
-instat_calculation$set("public", "data_clone", function(...) {
-  ret <- instat_calculation$new(function_exp = self$function_exp, type = self$type,
-                                name = self$name, result_name = self$result_name, 
-                                manipulations = lapply(self$manipulations, function(x) x$data_clone()), 
-                                sub_calculations = lapply(self$sub_calculations, function(x) x$data_clone()),
-                                calculated_from = self$calculated_from, save = self$save,
-                                param_list = self$param_list)
-                                # adjacent column / before to be in here?
-  return(ret)
 }
 )
 
@@ -808,29 +674,6 @@ DataBook$set("public", "save_calc_output", function(calc, curr_data_list, previo
     self$append_to_variables_metadata(to_data_name, calc$result_name, calculated_by_label, calc$name)
   }
   self$save_calculation(to_data_name, calc)
-}
-)
-
-# Could be a standalone method? Method of calculation?
-instat_calculation$set("public", "get_dependencies", function(depens = c()) {
-  for(manip in self$manipulations) {
-    for(i in seq_along(manip$calculated_from)) {
-      ind <- which(depens == manip$calculated_from[[i]])
-      if(length(ind) == 0 || names(depens)[ind] != names(manip$calculated_from)[i]) {
-        depens <- c(depens, manip$calculated_from[i])
-      }
-    }
-  }
-  for(sub_calc in self$sub_calculations) {
-    depens <- sub_calc$get_dependencies(depens)
-  }
-  for(j in seq_along(self$calculated_from)) {
-    ind <- which(depens == self$calculated_from[[j]])
-    if(length(ind) == 0 || names(depens)[ind] != names(self$calculated_from)[j]) {
-      depens <- c(depens, self$calculated_from[j])
-    }
-  }
-  return(depens)
 }
 )
 

@@ -153,7 +153,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
     calculated_from <- as.list(manip_factors)
     names(calculated_from) <- rep(data_name, length(manip_factors))
     calculated_from <- as.list(calculated_from)
-    factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from, param_list = list(drop = drop))
+    factor_by <- instatCalculations::instat_calculation$new(type = "by", calculated_from = calculated_from, param_list = list(drop = drop))
     manipulations <- list(factor_by)
   }
   else manipulations <- list()
@@ -163,7 +163,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
       calculated_from <- as.list(value_factors)
       names(calculated_from) <- rep(data_name, length(value_factors))
       calculated_from <- as.list(calculated_from)
-      factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from, param_list = list(drop = drop))
+      factor_by <- instatCalculations::instat_calculation$new(type = "by", calculated_from = calculated_from, param_list = list(drop = drop))
       value_manipulations <- list(factor_by)
     }
     else value_manipulations <- list()
@@ -201,18 +201,18 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
       else result_name <- result_names[i,j]
       if(percentage_type == "none") {
         summary_function_exp <- paste0(summary_type, "(x = ", column_names, function_exp)
-        summary_calculation <- instat_calculation$new(type = type, result_name = result_name,
+        summary_calculation <- instatCalculations::instat_calculation$new(type = type, result_name = result_name,
                                                       function_exp = summary_function_exp,
                                                       calculated_from = calculated_from, save = save)
       }
       else {
-        values_calculation <- instat_calculation$new(type = type, result_name = result_name,
+        values_calculation <- instatCalculations::instat_calculation$new(type = type, result_name = result_name,
                                                      function_exp = paste0(summary_type, "(x = ", column_names, function_exp),
                                                      calculated_from = calculated_from, save = save)
         if(percentage_type == "columns") {
           if(length(perc_total_columns) == 1) perc_col_name <- perc_total_columns
           else perc_col_name <- perc_total_columns[i]
-          totals_calculation <- instat_calculation$new(type = type, result_name = paste0(summaries_display[j], sep, perc_total_columns, "_totals"),
+          totals_calculation <- instatCalculations::instat_calculation$new(type = type, result_name = paste0(summaries_display[j], sep, perc_total_columns, "_totals"),
                                                        function_exp = paste0(summary_type, "(x = ", perc_col_name, function_exp),
                                                        calculated_from = calculated_from, save = save)
         }
@@ -221,7 +221,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
         }
         else if(percentage_type == "factors") {
           values_calculation$manipulations <- value_manipulations
-          totals_calculation <- instat_calculation$new(type = "summary", result_name = paste0(result_name, "_totals"),
+          totals_calculation <- instatCalculations::instat_calculation$new(type = "summary", result_name = paste0(result_name, "_totals"),
                                                        function_exp = paste0(summary_type, "(x = ", column_names, function_exp),
                                                        calculated_from = calculated_from, save = save)
         }
@@ -230,7 +230,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
           function_exp <- paste0("(", function_exp, ") * 100")
         }
         perc_result_name <- paste0("perc_", result_name)
-        summary_calculation <- instat_calculation$new(type = "calculation", result_name = perc_result_name,
+        summary_calculation <- instatCalculations::instat_calculation$new(type = "calculation", result_name = perc_result_name,
                                                       function_exp = function_exp,
                                                       calculated_from = list(), save = save, sub_calculations = list(totals_calculation, values_calculation))
       }
@@ -246,7 +246,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
   if(!missing(additional_filter)) {
     manipulations <- c(additional_filter, manipulations)
   }
-  combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
+  combined_calc_sum <- instatCalculations::instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
 
   # setting up param_list. Here we read in .drop and .preserve
   param_list <- list()

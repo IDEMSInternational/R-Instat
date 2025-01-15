@@ -2158,7 +2158,7 @@ DataSheet$set("public", "get_filter_as_instat_calculation", function(filter_name
     calc_from[[length(calc_from) + 1]] <- condition[["column"]]
   }
   names(calc_from) <- rep(self$get_metadata(data_name_label), length(calc_from))
-  calc <- instat_calculation$new(type="filter", function_exp = filter_string, calculated_from = calc_from)
+  calc <- instatCalculations::instat_calculation$new(type="filter", function_exp = filter_string, calculated_from = calc_from)
   return(calc)
 }
 )
