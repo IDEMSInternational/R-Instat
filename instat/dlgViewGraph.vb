@@ -40,6 +40,7 @@ Public Class dlgViewGraph
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 525
+        ucrBase.clsRsyntax.bSeparateThread = False
 
         'Selector
         ucrGraphsSelector.SetParameter(New RParameter("data_name", 0))
@@ -125,8 +126,8 @@ Public Class dlgViewGraph
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
         ElseIf rdoRViewer.Checked Then
             clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=2)
-            clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
-            clsViewObjectRFunction.RemoveParameterByName("object_format")
+            'clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
+            'clsViewObjectRFunction.RemoveParameterByName("object_format")
             ucrBase.clsRsyntax.SetBaseRFunction(clsPrintRFunction)
         End If
     End Sub
