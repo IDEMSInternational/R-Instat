@@ -956,7 +956,12 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
         }
         if(self$column_selection_applied()) self$remove_current_column_selection()
         # Need to use private$data here because changing names of data field
-        names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
+        if(any(c("sfc", "sfc_MULTIPOLYGON") %in% class(private$data[[curr_col_name]]))){
+          # Update the geometry column reference
+          sf::st_geometry(private$data) <- new_col_name
+        } 
+        names(private$data)[names(private$data) == curr_col_name] <- new_col_name
+        
         self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
         # TODO decide if we need to do these 2 lines
         self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
@@ -976,7 +981,12 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       curr_col_names[cols_changed_index] <- new_col_names
       if(any(duplicated(curr_col_names))) stop("Cannot rename columns. Column names must be unique.")
       if(self$column_selection_applied()) self$remove_current_column_selection()
+      if(any(c("sfc", "sfc_MULTIPOLYGON") %in% class(private$dataprivate$data)[cols_changed_index])){
+        # Update the geometry column reference
+        sf::st_geometry(private$data) <- new_col_names
+      } 
       names(private$data)[cols_changed_index] <- new_col_names
+      
       for (i in seq_along(cols_changed_index)) {
         self$append_to_variables_metadata(new_col_names[i], name_label, new_col_names[i])
       }
@@ -996,11 +1006,11 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
     if (missing(.fn)) stop(.fn, "is missing with no default.")
     curr_col_names <- names(curr_data)
     private$data <- curr_data |>
-      
       dplyr::rename_with(
         .fn = .fn,
         .cols = {{ .cols }}, ...
       )
+    
     if(self$column_selection_applied()) self$remove_current_column_selection()
     new_col_names <- names(private$data)
     if (!all(new_col_names %in% curr_col_names)) {
@@ -1011,6 +1021,29 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       self$data_changed <- TRUE
       self$variables_metadata_changed <- TRUE
     }
+  } else if (type == "rename_labels"){
+    # to rename column labels. Here, instead of renaming a column name, we're giving new values in a column.
+    curr_metadata <- self$get_variables_metadata()
+    curr_col_names <- names(curr_data %>% dplyr::select(.cols))
+
+    # create a new data frame containing the changes - but only apply to those that we actually plan to change for efficiency.
+    new_metadata <- curr_metadata |>
+    dplyr::filter(Name %in% curr_col_names) %>%
+    dplyr::mutate(
+        dplyr::across(
+            label,
+            ~ .fn(., ...)
+        )
+    )
+
+    if(self$column_selection_applied()) self$remove_current_column_selection()
+    # apply the changes
+    new_label_names <- new_metadata[!("Name" %in% curr_col_names)]$label
+    for (i in seq_along(new_label_names)) {
+        self$append_to_variables_metadata(curr_col_names[i], property = "label", new_val = new_label_names[i])
+    }
+    self$data_changed <- TRUE
+    self$variables_metadata_changed <- TRUE
   }
 })
 
@@ -1567,19 +1600,10 @@ DataSheet$set("public", "sort_dataframe", function(col_names = c(), decreasing =
       message("No sorting to be done.")
     }
   } else {
-    # Build the expressions using rlang for sorting columns
-    col_names_exp <- purrr::map(col_names, function(col_name) {
-      if (!(col_name %in% names(curr_data))) {
-        stop(col_name, " is not a column in the data.")
-      }
-      if (decreasing) dplyr::desc(rlang::sym(col_name)) else rlang::sym(col_name)
-    })
-
-    # Handle the case where sorting by row names and column names at the same time
     if (by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
-
-    # Sort the data based on the expressions
-    self$set_data(dplyr::arrange(curr_data, !!!col_names_exp))
+    
+    if (decreasing) self$set_data(dplyr::arrange(curr_data, dplyr::across(dplyr::all_of(col_names), desc)))
+    else self$set_data(dplyr::arrange(curr_data, dplyr::across(dplyr::all_of(col_names))))
   }
   self$data_changed <- TRUE
 }
@@ -4458,8 +4482,8 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
   }
   if (length(col) == dim(curr_data)[[1]]) {
     self$add_columns_to_data(col_name = column_name, col_data = col)
-    gaps_remaining <- summary_count_missing(col)
-    gaps_filled <- (summary_count_missing(curr_data[, var]) - gaps_remaining)
+    gaps_remaining <- summary_count_miss(col)
+    gaps_filled <- (summary_count_miss(curr_data[, var]) - gaps_remaining)
     cat(gaps_filled, " gaps filled", gaps_remaining, " remaining.", "\n")
   } else if (gaps != 0) {
     cat(gaps, " rows for date gaps are missing, fill date gaps before proceeding.", "\n")
@@ -4584,6 +4608,12 @@ DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed,
   }
 })
 
+DataSheet$set("public", "get_column_climatic_type", function(col_name, attr_name) {
+  if (!is.null(private$data[[col_name]]) && !is.null(attr(private$data[[col_name]], attr_name))) {
+    return(attr(private$data[[col_name]], attr_name))
+  }
+})
+
 DataSheet$set("public", "add_flag_fields", function(col_names) {
   curr_data <- self$get_columns_from_data(col_names, force_as_data_frame = TRUE)
   for (i in colnames(curr_data)) {
@@ -4654,39 +4684,79 @@ DataSheet$set("public", "has_labels", function(col_names) {
 }
 )
 
-DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
-  if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_names are required")
+DataSheet$set("public", "anova_tables2", function(x_col_names, y_col_name, total = FALSE, signif.stars = FALSE, sign_level = FALSE, means = FALSE, interaction = FALSE) {
+  if (missing(x_col_names) || missing(y_col_name)) stop("Both x_col_names and y_col_name are required")
   if (sign_level || signif.stars) message("This is no longer descriptive")
-  if (sign_level) end_col = 5 else end_col = 4
   
+  end_col <- if (sign_level) 5 else 4
+
   # Construct the formula
   if (length(x_col_names) == 1) {
-    formula_str <- paste0(as.name(y_col_name), "~ ", as.name(x_col_names))
-  } else if (length(x_col_names) > 1) {
-    formula_str <- paste0(as.name(y_col_name), "~ ", as.name(paste(x_col_names, collapse = " + ")))
+    formula_str <- paste0(as.name(y_col_name), " ~ ", as.name(x_col_names))
+  } else if (interaction && length(x_col_names) > 1) {
+    formula_str <- paste0(as.name(y_col_name), " ~ ", as.name(paste(x_col_names, collapse = " * ")))
+  } else {
+    formula_str <- paste0(as.name(y_col_name), " ~ ", as.name(paste(x_col_names, collapse = " + ")))
   }
-
-  # Fit the model
+  
   mod <- lm(formula = as.formula(formula_str), data = self$get_data_frame())
-  anova_mod <- anova(mod)[1:end_col] %>% tibble::as_tibble(rownames = " ")
+  anova_mod <- anova(mod)[1:end_col]
+  
+  # Process ANOVA table
+  anova_mod <- anova_mod %>%
+    dplyr::mutate(
+      `Sum Sq` = signif(`Sum Sq`, 3),
+      `Mean Sq` = signif(`Mean Sq`, 3),
+      `F value` = ifelse(`F value` < 100, round(`F value`, 1), round(`F value`))
+    ) %>%
+    dplyr::mutate(`F value` = as.character(`F value`)) %>%
+    dplyr::mutate(across(`F value`, ~ tidyr::replace_na(., "--"))) %>%
+    tibble::as_tibble(rownames = " ")
 
   # Add the total row if requested
-  if (total) anova_mod <- anova_mod %>% tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum)))
-  anova_mod$`F value` <- round(anova_mod$`F value`, 4)
-  if (sign_level) anova_mod$`Pr(>F)` <- format.pval(anova_mod$`Pr(>F)`, digits = 4, eps = 0.001)
-  cat(paste0("ANOVA of ", formula_str, ":\n"))
-  print(anova_mod)
+  if (total) {
+    anova_mod <- anova_mod %>%
+      tibble::add_row(` ` = "Total", dplyr::summarise(., across(where(is.numeric), sum))) %>%
+      dplyr::mutate(`F value` = ifelse(` ` == "Total", "--", `F value`)) # Replace NA with "--" for Total row
+  }
+  
+  # Handle significance levels
+  if (sign_level) {
+    anova_mod <- anova_mod %>%
+      dplyr::mutate(
+        `Pr(>F)` = ifelse(
+          is.na(`Pr(>F)`) | !is.numeric(`Pr(>F)`), "--",
+          ifelse(`Pr(>F)` < 0.001, "<0.001", formatC(`Pr(>F)`, format = "f", digits = 3))
+        )
+      )
+  }
+
+  # Generate the table with a title
+  title <- paste0("ANOVA of ", formula_str)
+ formatted_table <- anova_mod %>%
+  knitr::kable(format = "simple", caption = title)
+
+  print(formatted_table)
+  
+  # Add line break before means section
   cat("\n")
-  # Optionally print means
+
+  # Optionally print means or model coefficients
   if (means) {
-    if (class(mod$model[[x_col_names]]) %in% c("numeric", "integer")){
-      cat("Model coefficients:\n")
-      print(mod$coefficients)
-      cat("\n")
+    has_numeric <- any(sapply(x_col_names, function(x) class(mod$model[[x]]) %in% c("numeric", "integer")))
+    has_factor <- any(sapply(x_col_names, function(x) class(mod$model[[x]]) == "factor"))
+    
+    if (has_numeric && has_factor) {
+        cat("Model coefficients:\n")
+        print(mod$coefficients)
+    } else if (class(mod$model[[x_col_names[[1]]]]) %in% c("numeric", "integer")) {
+        cat("Model coefficients:\n")
+        print(mod$coefficients)
     } else {
-      cat(paste0("Means table of ", y_col_name, ":\n"))
-      print(model.tables(aov(mod), type = "means"))
-      cat("\n")
+        cat(paste0("Means tables of ", y_col_name, ":\n"))
+        means_table <- capture.output(model.tables(aov(mod), type = "means"))
+        means_table <- means_table[-1]
+        cat(paste(means_table, collapse = "\n"))
     }
   }
 }

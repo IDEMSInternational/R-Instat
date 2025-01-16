@@ -506,12 +506,12 @@ Public Class ucrDataView
         Return GetSelectedRows.LastOrDefault()
     End Function
 
-    Private Sub StartWait()
+    Public Sub StartWait()
         Cursor = Cursors.WaitCursor
         _grid.bEnabled = False
     End Sub
 
-    Private Sub EndWait()
+    Public Sub EndWait()
         _grid.bEnabled = True
         Cursor = Cursors.Default
     End Sub
@@ -576,12 +576,6 @@ Public Class ucrDataView
     Private Sub mnuUnfreeze_Click(sender As Object, e As EventArgs)
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.UnFreezeColumns()
-        EndWait()
-    End Sub
-
-    Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
         EndWait()
     End Sub
 
@@ -694,7 +688,20 @@ Public Class ucrDataView
             Else
                 Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.CheckHasLabels(strColumn)
                 If bCheckLabels Then
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                    frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
+                    frmConvertToNumeric.SetColumnName(strColumn)
+                    frmConvertToNumeric.CheckLabels(bCheckLabels)
+                    frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
+                    frmConvertToNumeric.ShowDialog()
+                    ' Yes for "normal" convert and No for "labelled" convert
+                    Select Case frmConvertToNumeric.DialogResult
+                        Case DialogResult.Yes
+                            GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                        Case DialogResult.No
+                            GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
+                        Case DialogResult.Cancel
+                            Continue For
+                    End Select
                 Else
                     frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
                     frmConvertToNumeric.SetColumnName(strColumn)
