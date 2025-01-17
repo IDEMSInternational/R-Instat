@@ -189,10 +189,18 @@ Public Class ucrDataView
 
     Public Property HasDataChanged() As Boolean
         Get
-            Return GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasDataChangedForAutoSave
+            Dim currentDataFrame = GetCurrentDataFrameFocus()
+            If currentDataFrame IsNot Nothing AndAlso currentDataFrame.clsVisibleDataFramePage IsNot Nothing Then
+                Return currentDataFrame.clsVisibleDataFramePage.HasDataChangedForAutoSave
+            End If
+            Return False ' Or a default value
         End Get
         Set(ByVal value As Boolean)
-            GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasDataChangedForAutoSave = value
+            Dim currentDataFrame = GetCurrentDataFrameFocus()
+            If currentDataFrame IsNot Nothing AndAlso currentDataFrame.clsVisibleDataFramePage IsNot Nothing Then
+                currentDataFrame.clsVisibleDataFramePage.HasDataChangedForAutoSave = value
+            End If
+            ' Optionally handle the case where currentDataFrame is Nothing
         End Set
     End Property
 
