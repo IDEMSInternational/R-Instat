@@ -187,13 +187,14 @@ Public Class ucrDataView
         Return If(_grid.CurrentWorksheet Is Nothing, Nothing, _grid.CurrentWorksheet.Name)
     End Function
 
-    Public Function HasDataChanged() As Boolean
-        Return GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasDataChangedForAutoSave
-    End Function
-
-    Public Sub HasDataChanged(bChange As Boolean)
-        GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasDataChangedForAutoSave = bChange
-    End Sub
+    Public Property HasDataChanged() As Boolean
+        Get
+            Return GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasDataChangedForAutoSave
+        End Get
+        Set(ByVal value As Boolean)
+            GetCurrentDataFrameFocus.clsVisibleDataFramePage.HasDataChangedForAutoSave = value
+        End Set
+    End Property
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
         If GetSelectedColumns.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then

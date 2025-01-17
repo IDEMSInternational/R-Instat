@@ -1208,7 +1208,7 @@ Public Class frmMain
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
             bFirstBackupDone = True
-            ucrDataViewer.HasDataChanged(False)
+            ucrDataViewer.HasDataChanged = False
         End If
     End Sub
 
