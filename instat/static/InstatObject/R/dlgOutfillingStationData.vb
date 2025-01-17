@@ -149,7 +149,21 @@ Public Class dlgOutfillingStationData
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If Not ucrReceiverStation.IsEmpty AndAlso
+          Not ucrReceiverEstimates.IsEmpty AndAlso
+          Not ucrReceiverDate.IsEmpty AndAlso
+          Not ucrReceiverLatitude.IsEmpty AndAlso
+          Not ucrReceiverLongitude.IsEmpty AndAlso
+          Not ucrReceiverRain.IsEmpty AndAlso
+          Not ucrNudCount.IsEmpty AndAlso
+          Not ucrNudDays.IsEmpty AndAlso
+          Not ucrInputBins.IsEmpty AndAlso
+          Not ucrInputDist.IsEmpty AndAlso
+          Not ucrInputMarkov.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrChkOmitMonths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMonths.ControlValueChanged
@@ -203,4 +217,17 @@ Public Class dlgOutfillingStationData
             clsDoFillingFunction.RemoveParameterByName("rfe")
         End If
     End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverEstimates_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimates.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged,
+            ucrReceiverLongitude.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrInputBins.ControlContentsChanged,
+            ucrInputDist.ControlContentsChanged, ucrInputMarkov.ControlContentsChanged, ucrNudCount.ControlContentsChanged, ucrNudDays.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+
 End Class
