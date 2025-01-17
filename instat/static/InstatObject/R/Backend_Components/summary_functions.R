@@ -313,7 +313,7 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
     results_temp_count <- list()
     results_temp_other <- list()
     for(j in seq_along(summaries)) {
-      calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = col_new, summaries = summaries[j], factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
+      calc <- instatCalculations::calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = col_new, summaries = summaries[j], factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
       calc_apply <- tryCatch(self$apply_calculation(calc), 
                              error = function(c) {
                                if(length(factors) == 0) {

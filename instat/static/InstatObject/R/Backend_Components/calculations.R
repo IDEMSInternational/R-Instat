@@ -9,7 +9,7 @@ check_filter <- function(filter_obj) {
 }
 
 # calculation$set("public", "data_clone", function() {
-#   ret = calculation$new(function_name = private$function_name, parameters = private$parameters, calculated_from = private$calculated_from, is_recalculable = private$is_recalculable, sub_calculations = private$sub_calculations, type = private$type, filter_conditions = private$.filter_conditions)
+#   ret = instatCalculations::calculation$new(function_name = private$function_name, parameters = private$parameters, calculated_from = private$calculated_from, is_recalculable = private$is_recalculable, sub_calculations = private$sub_calculations, type = private$type, filter_conditions = private$.filter_conditions)
 #   sub_calculations[[name]] <- sub_calculation
 # }
 # )
