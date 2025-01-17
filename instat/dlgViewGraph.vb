@@ -126,8 +126,6 @@ Public Class dlgViewGraph
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
         ElseIf rdoRViewer.Checked Then
             clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=2)
-            'clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
-            'clsViewObjectRFunction.RemoveParameterByName("object_format")
             ucrBase.clsRsyntax.SetBaseRFunction(clsPrintRFunction)
         End If
     End Sub
