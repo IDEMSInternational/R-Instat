@@ -2330,10 +2330,10 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
 
         if (!missing(station)){
             filtered_data <- filtered_data %>%
-                dplyr::group_by(station, year)
+                dplyr::group_by(.data[[station]], .data[[year]])
         } else {
             filtered_data <- filtered_data %>%
-                dplyr::group_by(year)
+                dplyr::group_by(.data[[year]])
         }
 
         filtered_data <- filtered_data %>%
