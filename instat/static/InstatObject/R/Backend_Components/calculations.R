@@ -886,7 +886,7 @@ DataBook$set("public", "remove_unused_station_year_combinations", function(data_
                               summaries=c("summary_count"),
                               silent=TRUE)
   
-  self$rename_column_in_data(data_name = linked_data_name, column_name="count", new_val="count_year_station_combination_for_linking", label="")
+  self$rename_column_in_data(data_name = linked_data_name, column_name="count_all", new_val="count_year_station_combination_for_linking", label="")
   
   # Create Filter subdialog: Created new filter
   self$add_filter(filter=list(C0=list(column="count_year_station_combination_for_linking", operation="! is.na")), data_name = linked_data_name, filter_name = "removing_additional_years")
