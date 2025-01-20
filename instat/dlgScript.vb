@@ -833,7 +833,7 @@ Public Class dlgScript
                     clsImportRFunction.AddParameter(strParameterName:="data_tables", strParameterValue:=strDataFrameName)
                 End If
 
-                strScript = "# Save variables " & """" & strColumneName & """" & "into data frame " & """" & strDataFrameName & """" & Environment.NewLine & strAssignedScript & clsImportRFunction.ToScript()
+                strScript = "# Save variables " & """" & strColumneName & """" & " into data frame " & """" & strDataFrameName & """" & Environment.NewLine & strAssignedScript & clsImportRFunction.ToScript()
 
             End If
         End If

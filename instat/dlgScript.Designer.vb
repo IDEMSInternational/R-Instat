@@ -24,8 +24,14 @@ Partial Class dlgScript
     Private Sub InitializeComponent()
         Me.tbFeatures = New System.Windows.Forms.TabControl()
         Me.tbPageSaveData = New System.Windows.Forms.TabPage()
-        Me.ucrInputSaveRFile = New instat.ucrInputTextBox()
         Me.rdoFromRFile = New System.Windows.Forms.RadioButton()
+        Me.ucrInputSaveRFile = New instat.ucrInputTextBox()
+        Me.lblSaveText = New System.Windows.Forms.Label()
+        Me.lblSaveDataFrame = New System.Windows.Forms.Label()
+        Me.lblSaveColumn = New System.Windows.Forms.Label()
+        Me.ucrInputDataframeColumn = New instat.ucrInputTextBox()
+        Me.ucrInputSaveColumn = New instat.ucrInputTextBox()
+        Me.rdoVariable = New System.Windows.Forms.RadioButton()
         Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
         Me.ucrChkDisplayGraph = New instat.ucrCheck()
         Me.ucrChkSaveDataFrameSingle = New instat.ucrCheck()
@@ -89,12 +95,6 @@ Partial Class dlgScript
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.txtScript = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoVariable = New System.Windows.Forms.RadioButton()
-        Me.ucrInputSaveColumn = New instat.ucrInputTextBox()
-        Me.ucrInputDataframeColumn = New instat.ucrInputTextBox()
-        Me.lblSaveColumn = New System.Windows.Forms.Label()
-        Me.lblSaveDataFrame = New System.Windows.Forms.Label()
-        Me.lblSaveText = New System.Windows.Forms.Label()
         Me.tbFeatures.SuspendLayout()
         Me.tbPageSaveData.SuspendLayout()
         Me.tbPageGetData.SuspendLayout()
@@ -111,19 +111,19 @@ Partial Class dlgScript
         Me.tbFeatures.Location = New System.Drawing.Point(8, 7)
         Me.tbFeatures.Name = "tbFeatures"
         Me.tbFeatures.SelectedIndex = 0
-        Me.tbFeatures.Size = New System.Drawing.Size(446, 271)
+        Me.tbFeatures.Size = New System.Drawing.Size(446, 304)
         Me.tbFeatures.TabIndex = 31
         '
         'tbPageSaveData
         '
+        Me.tbPageSaveData.Controls.Add(Me.rdoFromRFile)
+        Me.tbPageSaveData.Controls.Add(Me.ucrInputSaveRFile)
         Me.tbPageSaveData.Controls.Add(Me.lblSaveText)
         Me.tbPageSaveData.Controls.Add(Me.lblSaveDataFrame)
         Me.tbPageSaveData.Controls.Add(Me.lblSaveColumn)
         Me.tbPageSaveData.Controls.Add(Me.ucrInputDataframeColumn)
         Me.tbPageSaveData.Controls.Add(Me.ucrInputSaveColumn)
         Me.tbPageSaveData.Controls.Add(Me.rdoVariable)
-        Me.tbPageSaveData.Controls.Add(Me.ucrInputSaveRFile)
-        Me.tbPageSaveData.Controls.Add(Me.rdoFromRFile)
         Me.tbPageSaveData.Controls.Add(Me.rdoDataFrame)
         Me.tbPageSaveData.Controls.Add(Me.ucrChkDisplayGraph)
         Me.tbPageSaveData.Controls.Add(Me.ucrChkSaveDataFrameSingle)
@@ -141,27 +141,15 @@ Partial Class dlgScript
         Me.tbPageSaveData.Controls.Add(Me.ucrPnlSaveDataFrame)
         Me.tbPageSaveData.Location = New System.Drawing.Point(4, 22)
         Me.tbPageSaveData.Name = "tbPageSaveData"
-        Me.tbPageSaveData.Size = New System.Drawing.Size(438, 245)
+        Me.tbPageSaveData.Size = New System.Drawing.Size(438, 278)
         Me.tbPageSaveData.TabIndex = 2
         Me.tbPageSaveData.Text = "Save Data"
         Me.tbPageSaveData.UseVisualStyleBackColor = True
         '
-        'ucrInputSaveRFile
-        '
-        Me.ucrInputSaveRFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputSaveRFile.AutoSize = True
-        Me.ucrInputSaveRFile.IsMultiline = False
-        Me.ucrInputSaveRFile.IsReadOnly = False
-        Me.ucrInputSaveRFile.Location = New System.Drawing.Point(247, 137)
-        Me.ucrInputSaveRFile.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputSaveRFile.Name = "ucrInputSaveRFile"
-        Me.ucrInputSaveRFile.Size = New System.Drawing.Size(145, 21)
-        Me.ucrInputSaveRFile.TabIndex = 64
-        '
         'rdoFromRFile
         '
         Me.rdoFromRFile.AutoSize = True
-        Me.rdoFromRFile.Location = New System.Drawing.Point(238, 114)
+        Me.rdoFromRFile.Location = New System.Drawing.Point(49, 202)
         Me.rdoFromRFile.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoFromRFile.Name = "rdoFromRFile"
         Me.rdoFromRFile.Size = New System.Drawing.Size(81, 17)
@@ -170,10 +158,85 @@ Partial Class dlgScript
         Me.rdoFromRFile.Text = "From R File:"
         Me.rdoFromRFile.UseVisualStyleBackColor = True
         '
+        'ucrInputSaveRFile
+        '
+        Me.ucrInputSaveRFile.AddQuotesIfUnrecognised = True
+        Me.ucrInputSaveRFile.AutoSize = True
+        Me.ucrInputSaveRFile.IsMultiline = False
+        Me.ucrInputSaveRFile.IsReadOnly = False
+        Me.ucrInputSaveRFile.Location = New System.Drawing.Point(67, 228)
+        Me.ucrInputSaveRFile.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputSaveRFile.Name = "ucrInputSaveRFile"
+        Me.ucrInputSaveRFile.Size = New System.Drawing.Size(145, 21)
+        Me.ucrInputSaveRFile.TabIndex = 64
+        '
+        'lblSaveText
+        '
+        Me.lblSaveText.AutoSize = True
+        Me.lblSaveText.Location = New System.Drawing.Point(299, 72)
+        Me.lblSaveText.Name = "lblSaveText"
+        Me.lblSaveText.Size = New System.Drawing.Size(116, 13)
+        Me.lblSaveText.TabIndex = 71
+        Me.lblSaveText.Text = "(separated by commas)"
+        '
+        'lblSaveDataFrame
+        '
+        Me.lblSaveDataFrame.AutoSize = True
+        Me.lblSaveDataFrame.Location = New System.Drawing.Point(64, 103)
+        Me.lblSaveDataFrame.Name = "lblSaveDataFrame"
+        Me.lblSaveDataFrame.Size = New System.Drawing.Size(65, 13)
+        Me.lblSaveDataFrame.TabIndex = 70
+        Me.lblSaveDataFrame.Text = "Data Frame:"
+        '
+        'lblSaveColumn
+        '
+        Me.lblSaveColumn.AutoSize = True
+        Me.lblSaveColumn.Location = New System.Drawing.Point(64, 72)
+        Me.lblSaveColumn.Name = "lblSaveColumn"
+        Me.lblSaveColumn.Size = New System.Drawing.Size(49, 13)
+        Me.lblSaveColumn.TabIndex = 69
+        Me.lblSaveColumn.Text = "Name(s):"
+        '
+        'ucrInputDataframeColumn
+        '
+        Me.ucrInputDataframeColumn.AddQuotesIfUnrecognised = True
+        Me.ucrInputDataframeColumn.AutoSize = True
+        Me.ucrInputDataframeColumn.IsMultiline = False
+        Me.ucrInputDataframeColumn.IsReadOnly = False
+        Me.ucrInputDataframeColumn.Location = New System.Drawing.Point(131, 103)
+        Me.ucrInputDataframeColumn.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputDataframeColumn.Name = "ucrInputDataframeColumn"
+        Me.ucrInputDataframeColumn.Size = New System.Drawing.Size(155, 21)
+        Me.ucrInputDataframeColumn.TabIndex = 68
+        '
+        'ucrInputSaveColumn
+        '
+        Me.ucrInputSaveColumn.AddQuotesIfUnrecognised = True
+        Me.ucrInputSaveColumn.AutoSize = True
+        Me.ucrInputSaveColumn.IsMultiline = False
+        Me.ucrInputSaveColumn.IsReadOnly = False
+        Me.ucrInputSaveColumn.Location = New System.Drawing.Point(132, 72)
+        Me.ucrInputSaveColumn.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputSaveColumn.Name = "ucrInputSaveColumn"
+        Me.ucrInputSaveColumn.Size = New System.Drawing.Size(154, 21)
+        Me.ucrInputSaveColumn.TabIndex = 67
+        '
+        'rdoVariable
+        '
+        Me.rdoVariable.AutoSize = True
+        Me.rdoVariable.Location = New System.Drawing.Point(49, 48)
+        Me.rdoVariable.Margin = New System.Windows.Forms.Padding(2)
+        Me.rdoVariable.Name = "rdoVariable"
+        Me.rdoVariable.Size = New System.Drawing.Size(92, 17)
+        Me.rdoVariable.TabIndex = 66
+        Me.rdoVariable.TabStop = True
+        Me.rdoVariable.Text = "From Variable:"
+        Me.rdoVariable.UseVisualStyleBackColor = True
+        '
         'rdoDataFrame
         '
         Me.rdoDataFrame.AutoSize = True
-        Me.rdoDataFrame.Location = New System.Drawing.Point(48, 114)
+        Me.rdoDataFrame.Location = New System.Drawing.Point(48, 126)
         Me.rdoDataFrame.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoDataFrame.Name = "rdoDataFrame"
         Me.rdoDataFrame.Size = New System.Drawing.Size(104, 17)
@@ -195,7 +258,7 @@ Partial Class dlgScript
         '
         Me.ucrChkSaveDataFrameSingle.AutoSize = True
         Me.ucrChkSaveDataFrameSingle.Checked = False
-        Me.ucrChkSaveDataFrameSingle.Location = New System.Drawing.Point(56, 167)
+        Me.ucrChkSaveDataFrameSingle.Location = New System.Drawing.Point(55, 174)
         Me.ucrChkSaveDataFrameSingle.Name = "ucrChkSaveDataFrameSingle"
         Me.ucrChkSaveDataFrameSingle.Size = New System.Drawing.Size(146, 23)
         Me.ucrChkSaveDataFrameSingle.TabIndex = 59
@@ -206,7 +269,7 @@ Partial Class dlgScript
         Me.ucrInputSaveDataFrame.AutoSize = True
         Me.ucrInputSaveDataFrame.IsMultiline = False
         Me.ucrInputSaveDataFrame.IsReadOnly = False
-        Me.ucrInputSaveDataFrame.Location = New System.Drawing.Point(57, 136)
+        Me.ucrInputSaveDataFrame.Location = New System.Drawing.Point(67, 147)
         Me.ucrInputSaveDataFrame.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputSaveDataFrame.Name = "ucrInputSaveDataFrame"
         Me.ucrInputSaveDataFrame.Size = New System.Drawing.Size(145, 21)
@@ -340,7 +403,7 @@ Partial Class dlgScript
         Me.ucrPnlSaveDataFrame.Location = New System.Drawing.Point(5, 48)
         Me.ucrPnlSaveDataFrame.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlSaveDataFrame.Name = "ucrPnlSaveDataFrame"
-        Me.ucrPnlSaveDataFrame.Size = New System.Drawing.Size(429, 134)
+        Me.ucrPnlSaveDataFrame.Size = New System.Drawing.Size(429, 208)
         Me.ucrPnlSaveDataFrame.TabIndex = 65
         '
         'tbPageGetData
@@ -360,7 +423,7 @@ Partial Class dlgScript
         Me.tbPageGetData.Location = New System.Drawing.Point(4, 22)
         Me.tbPageGetData.Name = "tbPageGetData"
         Me.tbPageGetData.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbPageGetData.Size = New System.Drawing.Size(438, 245)
+        Me.tbPageGetData.Size = New System.Drawing.Size(438, 278)
         Me.tbPageGetData.TabIndex = 1
         Me.tbPageGetData.Text = "Get Data"
         Me.tbPageGetData.UseVisualStyleBackColor = True
@@ -540,7 +603,7 @@ Partial Class dlgScript
         Me.tbPageCommand.Controls.Add(Me.ucrPnlCommands)
         Me.tbPageCommand.Location = New System.Drawing.Point(4, 22)
         Me.tbPageCommand.Name = "tbPageCommand"
-        Me.tbPageCommand.Size = New System.Drawing.Size(438, 245)
+        Me.tbPageCommand.Size = New System.Drawing.Size(438, 278)
         Me.tbPageCommand.TabIndex = 3
         Me.tbPageCommand.Text = "Commands"
         Me.tbPageCommand.UseVisualStyleBackColor = True
@@ -790,7 +853,7 @@ Partial Class dlgScript
         Me.tbPageExamples.Controls.Add(Me.ucrCboExamplePackages)
         Me.tbPageExamples.Location = New System.Drawing.Point(4, 22)
         Me.tbPageExamples.Name = "tbPageExamples"
-        Me.tbPageExamples.Size = New System.Drawing.Size(438, 245)
+        Me.tbPageExamples.Size = New System.Drawing.Size(438, 278)
         Me.tbPageExamples.TabIndex = 4
         Me.tbPageExamples.Text = "Library"
         Me.tbPageExamples.UseVisualStyleBackColor = True
@@ -899,7 +962,7 @@ Partial Class dlgScript
         '
         Me.lblPreview.AutoSize = True
         Me.lblPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPreview.Location = New System.Drawing.Point(9, 281)
+        Me.lblPreview.Location = New System.Drawing.Point(9, 314)
         Me.lblPreview.Name = "lblPreview"
         Me.lblPreview.Size = New System.Drawing.Size(48, 13)
         Me.lblPreview.TabIndex = 30
@@ -907,7 +970,7 @@ Partial Class dlgScript
         '
         'txtScript
         '
-        Me.txtScript.Location = New System.Drawing.Point(5, 299)
+        Me.txtScript.Location = New System.Drawing.Point(5, 332)
         Me.txtScript.Multiline = True
         Me.txtScript.Name = "txtScript"
         Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Both
@@ -918,81 +981,18 @@ Partial Class dlgScript
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(6, 399)
+        Me.ucrBase.Location = New System.Drawing.Point(6, 431)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 16
-        '
-        'rdoVariable
-        '
-        Me.rdoVariable.AutoSize = True
-        Me.rdoVariable.Location = New System.Drawing.Point(49, 54)
-        Me.rdoVariable.Margin = New System.Windows.Forms.Padding(2)
-        Me.rdoVariable.Name = "rdoVariable"
-        Me.rdoVariable.Size = New System.Drawing.Size(92, 17)
-        Me.rdoVariable.TabIndex = 66
-        Me.rdoVariable.TabStop = True
-        Me.rdoVariable.Text = "From Variable:"
-        Me.rdoVariable.UseVisualStyleBackColor = True
-        '
-        'ucrInputSaveColumn
-        '
-        Me.ucrInputSaveColumn.AddQuotesIfUnrecognised = True
-        Me.ucrInputSaveColumn.AutoSize = True
-        Me.ucrInputSaveColumn.IsMultiline = False
-        Me.ucrInputSaveColumn.IsReadOnly = False
-        Me.ucrInputSaveColumn.Location = New System.Drawing.Point(207, 57)
-        Me.ucrInputSaveColumn.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputSaveColumn.Name = "ucrInputSaveColumn"
-        Me.ucrInputSaveColumn.Size = New System.Drawing.Size(105, 21)
-        Me.ucrInputSaveColumn.TabIndex = 67
-        '
-        'ucrInputDataframeColumn
-        '
-        Me.ucrInputDataframeColumn.AddQuotesIfUnrecognised = True
-        Me.ucrInputDataframeColumn.AutoSize = True
-        Me.ucrInputDataframeColumn.IsMultiline = False
-        Me.ucrInputDataframeColumn.IsReadOnly = False
-        Me.ucrInputDataframeColumn.Location = New System.Drawing.Point(206, 83)
-        Me.ucrInputDataframeColumn.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputDataframeColumn.Name = "ucrInputDataframeColumn"
-        Me.ucrInputDataframeColumn.Size = New System.Drawing.Size(106, 21)
-        Me.ucrInputDataframeColumn.TabIndex = 68
-        '
-        'lblSaveColumn
-        '
-        Me.lblSaveColumn.AutoSize = True
-        Me.lblSaveColumn.Location = New System.Drawing.Point(139, 57)
-        Me.lblSaveColumn.Name = "lblSaveColumn"
-        Me.lblSaveColumn.Size = New System.Drawing.Size(49, 13)
-        Me.lblSaveColumn.TabIndex = 69
-        Me.lblSaveColumn.Text = "Name(s):"
-        '
-        'lblSaveDataFrame
-        '
-        Me.lblSaveDataFrame.AutoSize = True
-        Me.lblSaveDataFrame.Location = New System.Drawing.Point(139, 83)
-        Me.lblSaveDataFrame.Name = "lblSaveDataFrame"
-        Me.lblSaveDataFrame.Size = New System.Drawing.Size(65, 13)
-        Me.lblSaveDataFrame.TabIndex = 70
-        Me.lblSaveDataFrame.Text = "Data Frame:"
-        '
-        'lblSaveText
-        '
-        Me.lblSaveText.AutoSize = True
-        Me.lblSaveText.Location = New System.Drawing.Point(317, 61)
-        Me.lblSaveText.Name = "lblSaveText"
-        Me.lblSaveText.Size = New System.Drawing.Size(116, 13)
-        Me.lblSaveText.TabIndex = 71
-        Me.lblSaveText.Text = "(separated by commas)"
         '
         'dlgScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(458, 458)
+        Me.ClientSize = New System.Drawing.Size(458, 489)
         Me.Controls.Add(Me.txtScript)
         Me.Controls.Add(Me.lblPreview)
         Me.Controls.Add(Me.tbFeatures)
