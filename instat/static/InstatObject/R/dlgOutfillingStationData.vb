@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports System.IO
 
 Public Class dlgOutfillingStationData
     Private bFirstLoad As Boolean = True
@@ -23,6 +22,8 @@ Public Class dlgOutfillingStationData
     Private bResetSubdialog As Boolean = False
     Private clsDoFillingFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private clsBaseFunction, clsDataListFunction As New RFunction
+
     Private Sub dlgOutfillingStationData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -70,14 +71,14 @@ Public Class dlgOutfillingStationData
         ucrReceiverEstimates.SetParameterIsString()
         ucrReceiverEstimates.SetLinkedDisplayControl(lblEstimates)
 
-        ucrReceiverLongitude.SetParameter(New RParameter("longitude", 5))
+        ucrReceiverLongitude.SetParameter(New RParameter("lon", 5))
         ucrReceiverLongitude.Selector = ucrSelectorOutfilling
         ucrReceiverLongitude.SetParameterIsString()
         ucrReceiverLongitude.SetClimaticType("lon")
         ucrReceiverLongitude.bAutoFill = True
         ucrReceiverLongitude.SetLinkedDisplayControl(lblLong)
 
-        ucrReceiverLatitude.SetParameter(New RParameter("latitude", 6))
+        ucrReceiverLatitude.SetParameter(New RParameter("lat", 6))
         ucrReceiverLatitude.Selector = ucrSelectorOutfilling
         ucrReceiverLatitude.SetParameterIsString()
         ucrReceiverLatitude.SetClimaticType("lat")
@@ -86,7 +87,7 @@ Public Class dlgOutfillingStationData
 
         ucrInputBins.SetParameter(New RParameter("custom_bins", 5))
         ucrInputBins.SetValidationTypeAsNumericList()
-        ucrInputBins.SetItems({"160", "1, 3, 5, 10, 15, 20", "92, 122, 153", "124, 184, 10", "92, 152, 15"})
+        ucrInputBins.SetItems({"1, 3, 5, 10, 15, 20", "1.5, 4, 8, 16, 32"})
         ucrInputBins.AddQuotesIfUnrecognised = False
         ucrInputBins.bAllowNonConditionValues = True
 
@@ -101,7 +102,7 @@ Public Class dlgOutfillingStationData
         dctDist.Add("Gamma", Chr(34) & "gamma" & Chr(34))
         dctDist.Add("Lognormal", Chr(34) & "lognormal" & Chr(34))
         ucrInputDist.SetItems(dctDist)
-        ucrInputDist.SetRDefault("Gamma")
+        ucrInputDist.SetRDefault(Chr(34) & "gamma" & Chr(34))
         ucrInputDist.SetDropDownStyleAsNonEditable()
 
         ucrNudCount.SetParameter(New RParameter("count_filter", 8))
@@ -118,18 +119,36 @@ Public Class dlgOutfillingStationData
         ucrChkOmitMonths.AddParameterValuesCondition(True, "omit", "False")
         ucrChkOmitMonths.AddParameterValuesCondition(False, "omit", "True")
 
+        ucrInputSelectStation.SetParameter(New RParameter("station_to_exclude", 10))
+        ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
+        ucrInputSelectStation.strQuotes = ""
     End Sub
 
     Private Sub SetDefaults()
         clsDoFillingFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsBaseFunction = New RFunction
+        clsDataListFunction = New RFunction
 
         ucrSelectorOutfilling.Reset()
+        ucrInputSelectStation.bFirstLevelDefault = True
+
+
+        ucrInputBins.SetName("1, 3, 5, 10, 15, 20")
 
         clsDummyFunction.AddParameter("omit", "False", iPosition:=0)
 
         clsDoFillingFunction.SetPackageName("outfillingR")
         clsDoFillingFunction.SetRCommand("do_infilling")
+        clsDoFillingFunction.SetAssignTo("infill_data")
+
+        clsDataListFunction.SetRCommand("list")
+        clsDataListFunction.AddParameter("infilled_data", clsRFunctionParameter:=clsDoFillingFunction, iPosition:=0)
+
+        clsBaseFunction.SetRCommand("data_book$import_data")
+        clsBaseFunction.AddParameter("data_tables", clsRFunctionParameter:=clsDataListFunction, iPosition:=0)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
 
     End Sub
 
@@ -146,6 +165,8 @@ Public Class dlgOutfillingStationData
         ucrInputDist.SetRCode(clsDoFillingFunction, bReset)
         ucrInputMarkov.SetRCode(clsDoFillingFunction, bReset)
         ucrInputBins.SetRCode(clsDoFillingFunction, bReset)
+        ucrReceiverStation.SetRCode(clsDoFillingFunction, bReset)
+        ucrInputSelectStation.SetRCode(clsDoFillingFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -230,4 +251,13 @@ Public Class dlgOutfillingStationData
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrInputSelectStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSelectStation.ControlValueChanged, ucrReceiverStation.ControlValueChanged
+        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty Then
+            clsDoFillingFunction.AddParameter("station_to_exclude ", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=10)
+
+        Else
+            clsDoFillingFunction.RemoveParameterByName("station_to_exclude")
+        End If
+
+    End Sub
 End Class
