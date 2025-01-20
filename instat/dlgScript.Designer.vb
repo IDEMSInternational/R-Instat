@@ -227,10 +227,10 @@ Partial Class dlgScript
         Me.rdoVariable.Location = New System.Drawing.Point(49, 48)
         Me.rdoVariable.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoVariable.Name = "rdoVariable"
-        Me.rdoVariable.Size = New System.Drawing.Size(92, 17)
+        Me.rdoVariable.Size = New System.Drawing.Size(97, 17)
         Me.rdoVariable.TabIndex = 66
         Me.rdoVariable.TabStop = True
-        Me.rdoVariable.Text = "From Variable:"
+        Me.rdoVariable.Text = "From Variables:"
         Me.rdoVariable.UseVisualStyleBackColor = True
         '
         'rdoDataFrame
