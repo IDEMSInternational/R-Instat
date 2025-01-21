@@ -2320,7 +2320,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
       # we do this here to avoid calculating it multiple times.
       for (rain_i in rain_totals){
         filtered_data <- filtered_data_1 %>% dplyr::mutate(rain_total = rain_i) %>%
-          dplyr::select(c(rain_total_name, plant_length_name, plant_day_name, everything()))
+          dplyr::select(c(rain_total_name, plant_length_name, plant_day_name, dplyr::everything()))
 
         # take the rows < 0 and run a check. We want to check 
         # if (anyNA(rain_values) && sum_rain < data[[rain_total_name]][i]) { sum_rain <- NA 
@@ -2338,8 +2338,8 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
 
         filtered_data <- filtered_data %>%
           # first add a column (T/F) that states that it is in the rainfall period or not. 
-          dplyr::mutate(plant_day_cond = start_rain <= plant_day,
-                           length_cond = plant_day + plant_length <= end_rains,
+          dplyr::mutate(plant_day_cond = start_day <= plant_day,
+                           length_cond = plant_day + plant_length <= end_day,
                            rain_cond = rain_i <= rain_total_actual) %>%
           dplyr::ungroup()
 
@@ -2349,6 +2349,9 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
             dplyr::mutate(
               overall_cond_with_start = plant_day_cond & length_cond & rain_cond,
               overall_cond_no_start = length_cond & rain_cond)
+          
+          if (!missing(station)) filtered_data <- filtered_data %>% dplyr::group_by(.data[[station]])
+          
           proportion_data <- filtered_data %>%
             dplyr::summarise(prop_success_with_start = sum(overall_cond_with_start, na.rm = TRUE)/length(na.omit(overall_cond_with_start)),
                              prop_success_no_start = sum(overall_cond_no_start, na.rm = TRUE)/length(na.omit(overall_cond_no_start)))
@@ -2359,6 +2362,8 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
                 start_check == "yes" ~ plant_day_cond & length_cond & rain_cond,
                 start_check == "no" ~ TRUE & length_cond & rain_cond)
             )
+          
+          if (!missing(station)) filtered_data <- filtered_data %>% dplyr::group_by(.data[[station]])
 
             proportion_data <- filtered_data %>%
               dplyr::summarise(prop_success = sum(overall_cond, na.rm = TRUE)/length(na.omit(overall_cond)))
@@ -2394,8 +2399,8 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     self$import_data(data_tables = data_tables)
   } 
   if (definition_props){
-    prop_data_frame <- dplyr::bind_rows(proportion_df)   %>%
-      dplyr::select(c(rain_total_name, plant_length_name, plant_day_name, everything()))
+    if (!missing(station)) prop_data_frame <- dplyr::bind_rows(proportion_df) %>% dplyr::select(c(station, rain_total_name, plant_length_name, plant_day_name, everything()))
+    else prop_data_frame <- dplyr::bind_rows(proportion_df) %>% dplyr::select(c(rain_total_name, plant_length_name, plant_day_name, everything()))
 
     prop_name <- "crop_prop"
     prop_name <- next_default_item(prefix = prop_name, existing_names = self$get_data_names(), include_index = FALSE)
@@ -2404,7 +2409,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     self$import_data(data_tables = data_tables)
 
     # Add Link
-    if (return_crops_table) data_book$add_link(from_data_frame = crops_name, to_data_frame = prop_name, link_pairs=c(rain_total = rain_total_name, plant_length = plant_length_name, plant_day = plant_day_name), type="keyed_link")
+    #if (return_crops_table) data_book$add_link(from_data_frame = crops_name, to_data_frame = prop_name, link_pairs=c(rain_total = rain_total_name, plant_length = plant_length_name, plant_day = plant_day_name), type="keyed_link")
     
     if(print_table) {
       if (start_check %in% c("yes", "no")){
@@ -2430,9 +2435,9 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
          prop_table_split_no_start <- split(prop_data_frame_no_start, f)
         
          # Create an empty list to store the merged data
-         print("Proportion with start check")
+         cat("Proportion with start check")
          print(prop_table_split_with_start)
-         print("Proportion without start check")
+         cat("Proportion without start check")
          print(prop_table_split_no_start)
       }
     }
