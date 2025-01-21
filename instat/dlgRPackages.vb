@@ -43,6 +43,7 @@ Public Class dlgInstallRPackage
         dctPackages.Add("rapidpror", Chr(34) & "rapidpror" & Chr(34))
         dctPackages.Add("openappr", Chr(34) & "openappr" & Chr(34))
         dctPackages.Add("networkGraphsR", Chr(34) & "networkGraphsR" & Chr(34))
+        dctPackages.Add("climdex.pcic", Chr(34) & "climdex.pcic" & Chr(34))
         ucrInputPackage.SetItems(dctPackages)
 
         ucrPnlRPackages.AddParameterValuesCondition(rdoCRAN, "checked", "cran")
@@ -246,7 +247,17 @@ Public Class dlgInstallRPackage
     Private Sub ucrInputRepositoryName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRepositoryName.ControlValueChanged
         TestOkEnabled()
         GithubOption()
+        UseclimdexPackage()
         bUniqueChecked = False
+    End Sub
+
+    Private Sub UseclimdexPackage()
+        If ucrInputPackage.GetText = "climdex.pcic" Then
+            ucrInputRepositoryName.SetText("pacificclimate")
+        Else
+            ucrInputRepositoryName.SetText("IDEMSInternational")
+        End If
+
     End Sub
 
     Private Sub GithubOption()
@@ -261,5 +272,9 @@ Public Class dlgInstallRPackage
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPackage.ControlValueChanged
+        UseclimdexPackage()
     End Sub
 End Class
