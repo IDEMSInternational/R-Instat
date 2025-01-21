@@ -2414,27 +2414,28 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
          if(!missing(station)) f <- interaction(prop_table_unstacked[[station]], prop_table_unstacked[[plant_length_name]], lex.order = TRUE)
          else f <- prop_table_unstacked[[plant_length_name]]
          prop_table_split <- split(prop_table_unstacked, f)
-         print(prop_table_split)
+         return(prop_table_split)
       } else {
-          prop_data_frame_with_start <- prop_data_frame %>%
-           dplyr::select(-c("prop_success_no_start"))
+          prop_data_frame_with_start <- prop_data_frame %>% dplyr::select(-c("prop_success_no_start")) %>% dplyr::mutate(prop_success_with_start = round(prop_success_with_start, 2))
           prop_data_frame_with_start <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame_with_start, value.var = "prop_success_with_start")
          if(!missing(station)) f <- interaction(prop_data_frame_with_start[[station]], prop_data_frame_with_start[[plant_length_name]], lex.order = TRUE)
          else f <- prop_data_frame_with_start[[plant_length_name]]
          prop_table_split_with_start <- split(prop_data_frame_with_start, f)
         
-         prop_data_frame_no_start <- prop_data_frame %>%
-           dplyr::select(-c("prop_success_with_start"))
+         prop_data_frame_no_start <- prop_data_frame %>% dplyr::select(-c("prop_success_with_start")) %>% dplyr::mutate(prop_success_no_start = round(prop_success_no_start, 2))
          prop_data_frame_no_start <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame_no_start, value.var = "prop_success_no_start")  
          if(!missing(station)) f <- interaction(prop_data_frame_no_start[[station]], prop_data_frame_no_start[[plant_length_name]], lex.order = TRUE)
          else f <- prop_data_frame_no_start[[plant_length_name]]
          prop_table_split_no_start <- split(prop_data_frame_no_start, f)
-        
+
          # Create an empty list to store the merged data
-         cat("Proportion with start check")
-         print(prop_table_split_with_start)
-         cat("Proportion without start check")
-         print(prop_table_split_no_start)
+         merged_list <- list()
+         
+         # Vectorize the addition of source indicators and merging of data frames
+         prop_table_split_with_start <- lapply(prop_table_split_with_start, function(df) {
+           df$source <- 'with start'
+           return(df)
+         })
       }
     }
   }
