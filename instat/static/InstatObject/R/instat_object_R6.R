@@ -2349,9 +2349,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
             dplyr::mutate(
               overall_cond_with_start = plant_day_cond & length_cond & rain_cond,
               overall_cond_no_start = length_cond & rain_cond)
-          
           if (!missing(station)) filtered_data <- filtered_data %>% dplyr::group_by(.data[[station]])
-          
           proportion_data <- filtered_data %>%
             dplyr::summarise(prop_success_with_start = sum(overall_cond_with_start, na.rm = TRUE)/length(na.omit(overall_cond_with_start)),
                              prop_success_no_start = sum(overall_cond_no_start, na.rm = TRUE)/length(na.omit(overall_cond_no_start)))
@@ -2362,9 +2360,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
                 start_check == "yes" ~ plant_day_cond & length_cond & rain_cond,
                 start_check == "no" ~ TRUE & length_cond & rain_cond)
             )
-          
           if (!missing(station)) filtered_data <- filtered_data %>% dplyr::group_by(.data[[station]])
-
             proportion_data <- filtered_data %>%
               dplyr::summarise(prop_success = sum(overall_cond, na.rm = TRUE)/length(na.omit(overall_cond)))
         }
