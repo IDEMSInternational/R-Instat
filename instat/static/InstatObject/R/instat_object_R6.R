@@ -2327,8 +2327,6 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
 
         if (!missing(station)) filtered_data <- filtered_data %>% dplyr::group_by(.data[[station]], .data[[year]])
         else filtered_data <- filtered_data %>% dplyr::group_by(.data[[year]])
-
-        #return(filtered_data)
         
         filtered_data <- filtered_data %>%
           # first add a column (T/F) that states that it is in the rainfall period or not. 
