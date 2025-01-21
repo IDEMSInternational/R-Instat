@@ -1545,7 +1545,7 @@ DataSheet$set("public", "get_data_frame_length", function(use_current_filter = F
 
 DataSheet$set("public", "get_factor_data_frame", function(col_name = "", include_levels = TRUE, include_NA_level = FALSE) {
   if(!(col_name %in% self$get_column_names())) stop(col_name, " is not a column name,")
-  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  col_data <- self$get_columns_from_data(col_name, use_current_filter = TRUE)
   if(!(is.factor(col_data))) stop(col_name, " is not a factor column")
   
   counts <- data.frame(table(col_data))
