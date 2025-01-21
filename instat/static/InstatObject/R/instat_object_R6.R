@@ -2216,6 +2216,7 @@ DataBook$set("public","get_variable_sets", function(data_name, set_names, force_
 )
 
 DataBook$set("public", "crops_definitions", function(data_name, year, station, rain, day, rain_totals, plant_days, plant_lengths, start_check = TRUE, season_data_name, start_day, end_day, return_crops_table = TRUE, definition_props = TRUE, print_table = TRUE){
+  # Note "print_table" option is now deprecated and not in use.
   # Run checks
   is_station <- !missing(station)
   
