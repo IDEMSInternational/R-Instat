@@ -2271,9 +2271,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   i <- 1
   
   calculate_rain_condition <- function(data){
-    data <- data %>%
-      dplyr::select(-rain_total_name) %>%
-      unique()
+    data <- data %>% dplyr::select(-rain_total_name) %>% unique()
   
     for (i in 1:nrow(data)) {
       # Create a condition to filter the daily data based on the year, day, and plant day/length
@@ -2319,8 +2317,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
       # we now split by our different rain_total_actual conditions.
       # we do this here to avoid calculating it multiple times.
       for (rain_i in rain_totals){
-        filtered_data <- filtered_data_1 %>% dplyr::mutate(rain_total = rain_i) %>%
-          dplyr::select(c(rain_total_name, plant_length_name, plant_day_name, dplyr::everything()))
+        filtered_data <- filtered_data_1 %>% dplyr::mutate(rain_total = rain_i)
 
         # take the rows < 0 and run a check. We want to check 
         # if (anyNA(rain_values) && sum_rain < data[[rain_total_name]][i]) { sum_rain <- NA 
@@ -2328,19 +2325,16 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
         filtered_data <- filtered_data %>%
           dplyr::mutate(rain_total_actual = ifelse(rain_total_actual < 0, ifelse(-1*rain_total_actual < rain_total, NA, -1*rain_total_actual), rain_total_actual))
 
-        if (!missing(station)){
-            filtered_data <- filtered_data %>%
-                dplyr::group_by(.data[[station]], .data[[year]])
-        } else {
-            filtered_data <- filtered_data %>%
-                dplyr::group_by(.data[[year]])
-        }
+        if (!missing(station)) filtered_data <- filtered_data %>% dplyr::group_by(.data[[station]], .data[[year]])
+        else filtered_data <- filtered_data %>% dplyr::group_by(.data[[year]])
 
+        #return(filtered_data)
+        
         filtered_data <- filtered_data %>%
           # first add a column (T/F) that states that it is in the rainfall period or not. 
-          dplyr::mutate(plant_day_cond = start_day <= plant_day,
-                           length_cond = plant_day + plant_length <= end_day,
-                           rain_cond = rain_i <= rain_total_actual) %>%
+          dplyr::mutate(plant_day_cond = .data[[start_day]] <= plant_day,
+                        length_cond = plant_day + plant_length <= .data[[end_day]],
+                        rain_cond = rain_i <= rain_total_actual) %>%
           dplyr::ungroup()
 
         if (start_check == "both"){
@@ -2380,9 +2374,12 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     }
   }
   
+  if (!missing(station)) column_order <- c(station, plant_day_name, plant_length_name, rain_total_name)
+  else column_order <- c(plant_day_name, plant_length_name, rain_total_name)
+
   if (return_crops_table){
     # here we get crop_def and import it as a new DF
-    crops_def_table <- dplyr::bind_rows(crops_def_table)
+    crops_def_table <- dplyr::bind_rows(crops_def_table) %>% dplyr::select(c(all_of(column_order), everything())) %>% dplyr::arrange(dplyr::across(dplyr::all_of(column_order)))
     crops_name <- "crop_def"
     crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
     data_tables <- list(crops_def_table) 
@@ -2395,9 +2392,8 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     self$import_data(data_tables = data_tables)
   } 
   if (definition_props){
-    if (!missing(station)) prop_data_frame <- dplyr::bind_rows(proportion_df) %>% dplyr::select(c(station, rain_total_name, plant_length_name, plant_day_name, everything()))
-    else prop_data_frame <- dplyr::bind_rows(proportion_df) %>% dplyr::select(c(rain_total_name, plant_length_name, plant_day_name, everything()))
-
+    prop_data_frame <- dplyr::bind_rows(proportion_df) %>% dplyr::select(c(all_of(column_order), everything())) %>% dplyr::arrange(dplyr::across(dplyr::all_of(column_order)))
+    
     prop_name <- "crop_prop"
     prop_name <- next_default_item(prefix = prop_name, existing_names = self$get_data_names(), include_index = FALSE)
     data_tables <- list(prop_data_frame) 
