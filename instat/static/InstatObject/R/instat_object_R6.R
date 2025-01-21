@@ -2405,37 +2405,11 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     self$import_data(data_tables = data_tables)
 
     # Add Link
-    #if (return_crops_table) data_book$add_link(from_data_frame = crops_name, to_data_frame = prop_name, link_pairs=c(rain_total = rain_total_name, plant_length = plant_length_name, plant_day = plant_day_name), type="keyed_link")
-    
-    if(print_table) {
-      if (start_check %in% c("yes", "no")){
-        prop_data_frame$prop_success <- round(prop_data_frame$prop_success, 2)
-         prop_table_unstacked <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame, value.var = "prop_success")
-         if(!missing(station)) f <- interaction(prop_table_unstacked[[station]], prop_table_unstacked[[plant_length_name]], lex.order = TRUE)
-         else f <- prop_table_unstacked[[plant_length_name]]
-         prop_table_split <- split(prop_table_unstacked, f)
-         return(prop_table_split)
+    if (return_crops_table){
+      if (!missing(station)){
+        self$add_link(from_data_frame = crops_name, to_data_frame = prop_name, link_pairs=c(station = station, rain_total = rain_total_name, plant_length = plant_length_name, plant_day = plant_day_name), type="keyed_link")
       } else {
-          prop_data_frame_with_start <- prop_data_frame %>% dplyr::select(-c("prop_success_no_start")) %>% dplyr::mutate(prop_success_with_start = round(prop_success_with_start, 2))
-          prop_data_frame_with_start <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame_with_start, value.var = "prop_success_with_start")
-         if(!missing(station)) f <- interaction(prop_data_frame_with_start[[station]], prop_data_frame_with_start[[plant_length_name]], lex.order = TRUE)
-         else f <- prop_data_frame_with_start[[plant_length_name]]
-         prop_table_split_with_start <- split(prop_data_frame_with_start, f)
-        
-         prop_data_frame_no_start <- prop_data_frame %>% dplyr::select(-c("prop_success_with_start")) %>% dplyr::mutate(prop_success_no_start = round(prop_success_no_start, 2))
-         prop_data_frame_no_start <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame_no_start, value.var = "prop_success_no_start")  
-         if(!missing(station)) f <- interaction(prop_data_frame_no_start[[station]], prop_data_frame_no_start[[plant_length_name]], lex.order = TRUE)
-         else f <- prop_data_frame_no_start[[plant_length_name]]
-         prop_table_split_no_start <- split(prop_data_frame_no_start, f)
-
-         # Create an empty list to store the merged data
-         merged_list <- list()
-         
-         # Vectorize the addition of source indicators and merging of data frames
-         prop_table_split_with_start <- lapply(prop_table_split_with_start, function(df) {
-           df$source <- 'with start'
-           return(df)
-         })
+        self$add_link(from_data_frame = crops_name, to_data_frame = prop_name, link_pairs=c(rain_total = rain_total_name, plant_length = plant_length_name, plant_day = plant_day_name), type="keyed_link")
       }
     }
   }
