@@ -394,6 +394,7 @@ Public Class dlgEndOfRainsSeason
         clsFirstFilledFunction = New RFunction
         clsIsNafilledFunction = New RFunction
         clsFirstFilled1Function = New RFunction
+        clsDeleteunusedrowFunction = New RFunction
         clsConditionCheckOperator = New ROperator
         clsConditionChecksecondOperator = New ROperator
         clsCheckConditionFilterOperator = New ROperator
@@ -408,7 +409,6 @@ Public Class dlgEndOfRainsSeason
         clsGetColumnDataTypeFunction.Clear()
         clsConvertColumnType1Function.Clear()
         clsStationtypeFunction.Clear()
-        clsDeleteunusedrowFunction = New RFunction
         clsConvertColumnTypeStationFunction.Clear()
 
         '   Group by
@@ -582,15 +582,16 @@ Public Class dlgEndOfRainsSeason
         clsGroupByStationCalc.SetAssignTo("grouping_by_station")
 
         ' Doy Filter
+        clsDoyFilterCalc.SetRCommand("instat_calculation$new")
+        clsDoyFilterCalc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        clsDoyFilterCalc.AddParameter("function_exp", clsROperatorParameter:=clsDoyFilterOperator, iPosition:=1)
+        clsDoyFilterCalc.AddParameter("calculated_from", clsRFunctionParameter:=clsDoyFilterCalcFromConvert, iPosition:=2)
+        clsDoyFilterCalc.SetAssignTo(strDoyFilter)
+
         clsDoyFilterCalcFromConvert.SetRCommand("calc_from_convert")
         clsDoyFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDoyFilterCalcFromList, iPosition:=0)
 
         clsDoyFilterCalcFromList.SetRCommand("list")
-
-        clsDoyFilterCalc.SetRCommand("instat_calculation$new")
-        clsDoyFilterCalc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
-        clsDoyFilterCalc.AddParameter("function_exp", clsROperatorParameter:=clsDoyFilterOperator, iPosition:=1)
-        clsDoyFilterCalc.SetAssignTo(strDoyFilter)
 
         clsDoyFilterOperator.SetOperation("&")
         clsDoyFilterOperator.AddParameter("from_operator", clsROperatorParameter:=clsDayFromOperator, iPosition:=0)
@@ -1333,7 +1334,6 @@ Public Class dlgEndOfRainsSeason
     End Sub
 
     Private Sub DayChange()
-        clsDoyFilterCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
         clsEndSeasonStatusSummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
         clsEndRainsLastDoySummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
         clsEndSeasonFirstDoySummaryCalc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=3)
