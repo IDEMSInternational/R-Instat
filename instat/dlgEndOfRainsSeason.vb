@@ -1020,7 +1020,8 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonStatusSummaryCalc.SetRCommand("instat_calculation$new")
         clsEndSeasonStatusSummaryCalc.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsEndSeasonStatusSummaryCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfelseStatusFunction, iPosition:=1)
-        clsEndSeasonStatusSummaryCalc.AddParameter("result_name", Chr(34) & strEndSeasonStatus & Chr(34), iPosition:=4)
+        clsEndSeasonStatusSummaryCalc.AddParameter("result_name", Chr(34) & strEndSeasonStatus & Chr(34), iPosition:=3)
+        clsEndSeasonStatusSummaryCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListCondCheckFilterFunction, iPosition:=4)
         clsEndSeasonStatusSummaryCalc.AddParameter("save", 2, iPosition:=5)
         clsEndSeasonStatusSummaryCalc.SetAssignTo(strEndSeasonStatus)
 
@@ -1210,6 +1211,7 @@ Public Class dlgEndOfRainsSeason
 
         clsFirstOrLastFunction = clsLastDoyFunction
         RemoveUnusedRow()
+        StationType()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -1359,22 +1361,25 @@ Public Class dlgEndOfRainsSeason
         End If
     End Sub
 
+    Private Sub StationType()
+        If Not ucrReceiverStation.IsEmpty Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertColumnTypeStationFunction, iPosition:=3)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsStationtypeFunction, iPosition:=2)
+            clsVectorFunction.AddParameter("y", ucrReceiverStation.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
+            clsStationtypeFunction.AddParameter("columns", ucrReceiverStation.GetVariableNames(), iPosition:=1)
+            clsConvertColumnTypeStationFunction.AddParameter("col_names", ucrReceiverStation.GetVariableNames(), iPosition:=1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsConvertColumnTypeStationFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsStationtypeFunction)
+            clsVectorFunction.RemoveParameterByName("y")
+            clsConvertColumnTypeStationFunction.RemoveParameterByName("col_names")
+            clsStationtypeFunction.RemoveParameterByName("columns")
+        End If
+    End Sub
+
     Private Sub YearStationVariable()
         If Not ucrReceiverYear.IsEmpty Then
             clsVectorFunction.AddParameter("x", ucrReceiverYear.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
-            If Not ucrReceiverStation.IsEmpty Then
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertColumnTypeStationFunction, iPosition:=3)
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsStationtypeFunction, iPosition:=2)
-                clsVectorFunction.AddParameter("y", ucrReceiverStation.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
-                clsStationtypeFunction.AddParameter("columns", ucrReceiverStation.GetVariableNames(), iPosition:=1)
-                clsConvertColumnTypeStationFunction.AddParameter("col_names", ucrReceiverStation.GetVariableNames(), iPosition:=1)
-            Else
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsConvertColumnTypeStationFunction)
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsStationtypeFunction)
-                clsVectorFunction.RemoveParameterByName("y")
-                clsConvertColumnTypeStationFunction.RemoveParameterByName("col_names")
-                clsStationtypeFunction.RemoveParameterByName("columns")
-            End If
             clsConvertlinkedvariableFunction.AddParameter("link_cols", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
             clsConvertlinkedvariable1Function.AddParameter("link_cols", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
             clsLinkeddataFunction.AddParameter("link_cols", clsRFunctionParameter:=clsVectorFunction, iPosition:=1)
@@ -1390,6 +1395,7 @@ Public Class dlgEndOfRainsSeason
         GroupingBy()
         YearStationVariable()
         RemoveUnusedRow()
+        StationType()
         If Not ucrReceiverYear.IsEmpty Then
             clsGetColumnDataTypeFunction.AddParameter("columns", ucrReceiverYear.GetVariableNames(), iPosition:=1)
             clsConvertColumnTypeFunction.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
