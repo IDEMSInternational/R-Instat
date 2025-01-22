@@ -2231,22 +2231,26 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   year_col <- self$get_columns_from_data(data_name, year)
   unique_year <- na.omit(unique(year_col))
   
+  # creating our combinations
+  # if there's a station, we only want to consider the year-station combinations that actually exist
+  if(is_station) {
+    expanded_df <- unique(self$get_data_frame(data_name) %>% dplyr::select(year, station))
+  } else {
+    expanded_df <- unique(self$get_data_frame(data_name) %>% dplyr::select(year))  
+  }
+  
   # Set names
   plant_day_name <- "plant_day"
   plant_length_name <- "plant_length"
   rain_total_name <- "rain_total"
   
-  expand_list <- list(rain_totals, plant_lengths, plant_days, unique_year)
-  names_list <- c(rain_total_name, plant_length_name, plant_day_name, year)
+  # Create all combinations of X and Y
+  condition_combinations <- expand.grid(rain_totals, plant_lengths, plant_days)
+  names_list <- c(rain_total_name, plant_length_name, plant_day_name)
+  condition_combinations <- setNames(condition_combinations, names_list)
   
-  if(is_station) {
-    station_col <- self$get_columns_from_data(data_name, station)
-    unique_station <- na.omit(unique(station_col))
-    expand_list[[length(expand_list) + 1]] <- unique_station
-    names_list[length(names_list) + 1] <- station
-  }
-  
-  df <- setNames(expand.grid(expand_list), names_list)
+  # Expand the df with xy_combinations
+  df <- merge(expanded_df, condition_combinations, by = NULL)
   daily_data <- self$get_data_frame(data_name)
   
   if(season_data_name != data_name) {
@@ -2290,13 +2294,11 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
       # Calculate the sum of rain values and check conditions
       sum_rain <- sum(rain_values, na.rm = TRUE)
     
-      if (anyNA(rain_values)){ #&& sum_rain < data[[rain_total_name]][i]){
-        sum_rain <- -1 * sum_rain # as a way to tag the sum_rain value for later, we set as -ve value. 
-      }
-
-      if (length(rain_values) + 1 < data[[plant_length_name]][i]) {
-        sum_rain <- NA
-      }
+      # Set as NA for certain cases: This anyNA is fixed later when we have the total_rainfall value of interest
+      if (anyNA(rain_values))  sum_rain <- -1 * sum_rain # as a way to tag the sum_rain value for later, we set as -ve value. 
+      #&& sum_rain < data[[rain_total_name]][i]){
+      if (length(rain_values) + 1 < data[[plant_length_name]][i]) sum_rain <- NA
+      if (all(is.na(rain_values))) sum_rain <- NA
     
       # Assign the calculated sum to the respective row in the result dataframe
       data[["rain_total_actual"]][i] <- sum_rain
