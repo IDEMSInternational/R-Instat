@@ -2570,7 +2570,6 @@ Partial Class frmMain
         '
         'mnuClimaticModelOutfilling
         '
-        Me.mnuClimaticModelOutfilling.Enabled = False
         Me.mnuClimaticModelOutfilling.Name = "mnuClimaticModelOutfilling"
         Me.mnuClimaticModelOutfilling.Size = New System.Drawing.Size(271, 34)
         Me.mnuClimaticModelOutfilling.Text = "Outfilling..."

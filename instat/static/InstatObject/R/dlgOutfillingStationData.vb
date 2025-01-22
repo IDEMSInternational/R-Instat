@@ -89,18 +89,16 @@ Public Class dlgOutfillingStationData
         ucrInputBins.SetValidationTypeAsNumericList()
         ucrInputBins.SetItems({"1, 3, 5, 10, 15, 20", "1.5, 4, 8, 16, 32"})
         ucrInputBins.AddQuotesIfUnrecognised = False
-        ucrInputBins.bAllowNonConditionValues = True
 
         ucrInputMarkov.SetParameter(New RParameter("markovflag", 6))
         dctLogical.Add("TRUE", "TRUE")
         dctLogical.Add("FALSE", "FALSE")
         ucrInputMarkov.SetItems(dctLogical)
-        ucrInputMarkov.SetRDefault("TRUE")
         ucrInputMarkov.SetDropDownStyleAsNonEditable()
 
         ucrInputDist.SetParameter(New RParameter("distribution_flag", 7))
-        dctDist.Add("Gamma", Chr(34) & "gamma" & Chr(34))
-        dctDist.Add("Lognormal", Chr(34) & "lognormal" & Chr(34))
+        dctDist.Add("gamma", Chr(34) & "gamma" & Chr(34))
+        dctDist.Add("lognormal", Chr(34) & "lognormal" & Chr(34))
         ucrInputDist.SetItems(dctDist)
         ucrInputDist.SetRDefault(Chr(34) & "gamma" & Chr(34))
         ucrInputDist.SetDropDownStyleAsNonEditable()
@@ -116,10 +114,9 @@ Public Class dlgOutfillingStationData
         ucrNudDays.SetRDefault(50)
 
         ucrChkOmitMonths.SetText("Dry Month(s)")
-        ucrChkOmitMonths.AddParameterValuesCondition(True, "omit", "False")
-        ucrChkOmitMonths.AddParameterValuesCondition(False, "omit", "True")
+        ucrChkOmitMonths.AddParameterValuesCondition(True, "omit", "True")
+        ucrChkOmitMonths.AddParameterValuesCondition(False, "omit", "False")
 
-        ucrInputSelectStation.SetParameter(New RParameter("station_to_exclude", 10))
         ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
         ucrInputSelectStation.strQuotes = ""
     End Sub
@@ -132,7 +129,8 @@ Public Class dlgOutfillingStationData
 
         ucrSelectorOutfilling.Reset()
         ucrInputSelectStation.bFirstLevelDefault = True
-
+        ucrInputBins.Reset()
+        ucrReceiverStation.SetMeAsReceiver()
 
         ucrInputBins.SetName("1, 3, 5, 10, 15, 20")
 
@@ -141,6 +139,7 @@ Public Class dlgOutfillingStationData
         clsDoFillingFunction.SetPackageName("outfillingR")
         clsDoFillingFunction.SetRCommand("do_infilling")
         clsDoFillingFunction.SetAssignTo("infill_data")
+        clsDoFillingFunction.AddParameter("markovflag", "TRUE", iPosition:=6)
 
         clsDataListFunction.SetRCommand("list")
         clsDataListFunction.AddParameter("infilled_data", clsRFunctionParameter:=clsDoFillingFunction, iPosition:=0)
@@ -164,9 +163,9 @@ Public Class dlgOutfillingStationData
         ucrNudDays.SetRCode(clsDoFillingFunction, bReset)
         ucrInputDist.SetRCode(clsDoFillingFunction, bReset)
         ucrInputMarkov.SetRCode(clsDoFillingFunction, bReset)
-        ucrInputBins.SetRCode(clsDoFillingFunction, bReset)
         ucrReceiverStation.SetRCode(clsDoFillingFunction, bReset)
         ucrInputSelectStation.SetRCode(clsDoFillingFunction, bReset)
+        UpdateVisibility()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -188,6 +187,10 @@ Public Class dlgOutfillingStationData
     End Sub
 
     Private Sub ucrChkOmitMonths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitMonths.ControlValueChanged
+        UpdateVisibility()
+    End Sub
+
+    Private Sub UpdateVisibility()
         cmdOmitMonths.Visible = ucrChkOmitMonths.Checked
     End Sub
 
@@ -225,7 +228,7 @@ Public Class dlgOutfillingStationData
 
     Private Sub ucrInputMarkov_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMarkov.ControlValueChanged
         If Not ucrInputMarkov.IsEmpty Then
-            clsDoFillingFunction.AddParameter("markovflag", "c(" & ucrInputMarkov.GetText & ")", iPosition:=5)
+            clsDoFillingFunction.AddParameter("markovflag", ucrInputMarkov.GetText, iPosition:=6)
         Else
             clsDoFillingFunction.RemoveParameterByName("markovflag")
         End If
@@ -251,6 +254,11 @@ Public Class dlgOutfillingStationData
         TestOkEnabled()
     End Sub
 
+    'Private Sub cmdOmitMonths_Click(sender As Object, e As EventArgs) Handles cmdOmitMonths.Click
+    '    sdgSelectMonth.ShowDialog()
+    '    bResetSubdialog = True
+    'End Sub
+
     Private Sub ucrInputSelectStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSelectStation.ControlValueChanged, ucrReceiverStation.ControlValueChanged
         If Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty Then
             clsDoFillingFunction.AddParameter("station_to_exclude ", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=10)
@@ -258,6 +266,5 @@ Public Class dlgOutfillingStationData
         Else
             clsDoFillingFunction.RemoveParameterByName("station_to_exclude")
         End If
-
     End Sub
 End Class
