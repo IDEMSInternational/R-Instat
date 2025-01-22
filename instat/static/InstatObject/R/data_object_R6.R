@@ -922,12 +922,8 @@ DataSheet$set("public", "cor", function(x_col_names, y_col_name, use = "everythi
 )
 
 DataSheet$set("public", "update_selection", function(new_values, column_selection_name = NULL) {
-  if(missing(new_values)) stop("new_values is required")
-  
-  # Find the column selection to update
-  if (is.null(column_selection_name)) {
-    stop("A column selection name must be provided to update the selection.")
-  }
+  if (missing(new_values)) stop("new_values is required")
+  if (missing(column_selection_name)) stop("column_selection_name is required")
   
   column_selection_obj <- private$column_selections[[column_selection_name]]
   
@@ -993,7 +989,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
         
         column_names <- self$get_column_names()
         
-        if (any(is.na(column_names))) {
+        if (anyNA(column_names)) {
           column_names[is.na(column_names)] <- new_col_name
         } else {
           column_names <- new_col_name
@@ -1028,7 +1024,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       
       column_names <- self$get_column_names()
       
-      if (any(is.na(column_names))) {
+      if (anyNA(column_names)) {
         column_names[is.na(column_names)] <- new_col_names
       } else {
         column_names <- new_col_names
@@ -1036,7 +1032,6 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
 
       self$update_selection(column_names, private$.current_column_selection$name)
       
-      if(self$column_selection_applied()) self$remove_current_column_selection()
       if(any(c("sfc", "sfc_MULTIPOLYGON") %in% class(private$dataprivate$data)[cols_changed_index])){
         # Update the geometry column reference
         sf::st_geometry(private$data) <- new_col_names
@@ -1068,7 +1063,6 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
         .cols = {{ .cols }}, ...
       )
     
-    if(self$column_selection_applied()) self$remove_current_column_selection()
     new_col_names <- names(private$data)
     if (!all(new_col_names %in% curr_col_names)) {
       new_col_names <- new_col_names[!(new_col_names %in% curr_col_names)]
@@ -1077,7 +1071,7 @@ DataSheet$set("public", "rename_column_in_data", function(curr_col_name = "", ne
       }
       
       column_names <- self$get_column_names()
-      if (any(is.na(column_names))) {
+      if (anyNA(column_names)) {
         column_names[is.na(column_names)] <- new_col_names
       } else {
         column_names <- new_col_names
