@@ -122,10 +122,8 @@ Public Class dlgCalculator
         clsDetachScalarsFunction.AddParameter("unload", "TRUE")
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
-        'ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
 
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 1)
-        'ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 2)
 
         ucrBase.clsRsyntax.SetCommandString("")
 
