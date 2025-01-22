@@ -2911,13 +2911,6 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
     End Sub
 
-    Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
-        mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
-        mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
-        UpdateSwapDataAndMetadata()
-        UpdateLayout()
-    End Sub
-
     Private Sub mnuSwapDataLogScript_Click(sender As Object, e As EventArgs) Handles mnuSwapDataLogScript.Click
         mnuViewSwapDataAndMetadata.Enabled = mnuViewSwapDataAndScript.Checked
         mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
@@ -2949,4 +2942,12 @@ Public Class frmMain
     Private Sub mnuClimaticModelOutfilling_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelOutfilling.Click
         dlgOutfillingStationData.ShowDialog()
     End Sub
+
+    Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
+        mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
+        mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
+        UpdateSwapDataAndMetadata()
+        UpdateLayout()
+    End Sub
+
 End Class
