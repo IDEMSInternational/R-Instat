@@ -247,17 +247,7 @@ Public Class dlgInstallRPackage
     Private Sub ucrInputRepositoryName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRepositoryName.ControlValueChanged
         TestOkEnabled()
         GithubOption()
-        UseclimdexPackage()
         bUniqueChecked = False
-    End Sub
-
-    Private Sub UseclimdexPackage()
-        If ucrInputPackage.GetText = "climdex.pcic" Then
-            ucrInputRepositoryName.SetText("pacificclimate")
-        Else
-            ucrInputRepositoryName.SetText("IDEMSInternational")
-        End If
-
     End Sub
 
     Private Sub GithubOption()
@@ -272,9 +262,5 @@ Public Class dlgInstallRPackage
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrInputPackage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPackage.ControlValueChanged
-        UseclimdexPackage()
     End Sub
 End Class
