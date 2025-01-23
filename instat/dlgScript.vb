@@ -78,6 +78,7 @@ Public Class dlgScript
 
         ucrPnlSaveDataFrame.AddRadioButton(rdoDataFrame)
         ucrPnlSaveDataFrame.AddRadioButton(rdoFromRFile)
+        ucrPnlSaveDataFrame.AddRadioButton(rdoVariable)
 
         ucrChkSaveDataFrameSingle.SetText("Single")
 
@@ -777,6 +778,11 @@ Public Class dlgScript
     Private Sub HideShowSaveDataFrameControls()
         ucrInputSaveRFile.SetVisible(False)
         ucrInputSaveDataFrame.SetVisible(False)
+        ucrInputSaveColumn.SetVisible(False)
+        ucrInputDataframeColumn.SetVisible(False)
+        lblSaveColumn.Visible = False
+        lblSaveDataFrame.Visible = False
+        lblSaveText.Visible = False
         ucrChkSaveDataFrameSingle.SetVisible(False)
         If rdoDataFrame.Checked Then
             ucrInputSaveDataFrame.SetVisible(True)
@@ -786,7 +792,52 @@ Public Class dlgScript
         ElseIf rdoFromRFile.Checked Then
             ucrInputSaveRFile.SetVisible(True)
             ucrInputSaveRFile.OnControlValueChanged()
+        ElseIf rdoVariable.Checked Then
+            ucrInputSaveColumn.SetVisible(True)
+            ucrInputDataframeColumn.SetVisible(True)
+            lblSaveText.Visible = True
+            lblSaveColumn.Visible = True
+            lblSaveDataFrame.Visible = True
+            ucrChkSaveDataFrameSingle.SetVisible(True)
+            ucrInputSaveDataFrame.OnControlValueChanged()
         End If
+    End Sub
+
+    Private Sub ucrInputDataframeColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDataframeColumn.ControlContentsChanged, ucrInputSaveColumn.ControlContentsChanged,
+    ucrChkSaveDataFrameSingle.ControlContentsChanged
+        Dim strScript As String = ""
+
+        If rdoVariable.Checked Then
+            If Not ucrInputDataframeColumn.IsEmpty() AndAlso Not ucrInputSaveColumn.IsEmpty Then
+                Dim clsDataFrameFunction As New RFunction
+                Dim clsImportRFunction As New RFunction
+                Dim strColumneName As String = ucrInputSaveColumn.GetText()
+                Dim strDataFrameName As String = ucrInputDataframeColumn.GetText()
+
+                clsImportRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+                clsDataFrameFunction.SetRCommand("data.frame")
+
+                Dim strAssignedScript As String = ""
+                clsDataFrameFunction.AddParameter("dataframe", ucrInputSaveColumn.GetText(), bIncludeArgumentName:=False)
+                clsDataFrameFunction.SetAssignTo(ucrInputDataframeColumn.GetText)
+                clsDataFrameFunction.ToScript(strScript:=strAssignedScript)
+
+                If ucrChkSaveDataFrameSingle.Checked Then
+                    ' If it's a single data frame then wrap it into a list
+                    Dim clsDataListRFunction As New RFunction
+                    clsDataListRFunction.SetRCommand("list")
+                    clsDataListRFunction.AddParameter(strParameterName:=strDataFrameName, strParameterValue:=strDataFrameName)
+                    clsImportRFunction.AddParameter(strParameterName:="data_tables", clsRFunctionParameter:=clsDataListRFunction)
+                Else
+                    ' If it's already a list of data frames, then add the name directly
+                    clsImportRFunction.AddParameter(strParameterName:="data_tables", strParameterValue:=strDataFrameName)
+                End If
+
+                strScript = "# Save variables " & """" & strColumneName & """" & " into data frame " & """" & strDataFrameName & """" & Environment.NewLine & strAssignedScript & clsImportRFunction.ToScript()
+
+            End If
+        End If
+        PreviewScript(strScript)
     End Sub
 
 End Class

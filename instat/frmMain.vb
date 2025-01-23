@@ -2945,4 +2945,8 @@ Public Class frmMain
         ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
         ucrDataViewer.EndWait()
     End Sub
+
+    Private Sub mnuClimaticModelOutfilling_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelOutfilling.Click
+        dlgOutfillingStationData.ShowDialog()
+    End Sub
 End Class
