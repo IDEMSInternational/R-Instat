@@ -214,6 +214,15 @@ Public Class dlgCalculator
             ucrCalc.ucrSaveResultInto.ucrChkSave.Enabled = False
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Visible = True
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Enabled = True
+        ElseIf ucrCalc.ucrSelectorForCalculations.checkBoxScalar.Checked Then
+            Dim strResut As String = ucrCalc.ucrSaveResultInto.GetText
+            clsAddScalarFunction.AddParameter("scalar_name", Chr(34) & strResut & Chr(34), iPosition:=1)
+            clsAddScalarFunction.AddParameter("scalar_value", strResut, iPosition:=2)
+            clsAddScalarFunction.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
+            clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 2)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddScalarFunction)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachScalarsFunction)
@@ -247,18 +256,22 @@ Public Class dlgCalculator
         If Not String.IsNullOrEmpty(ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame) Then
             Dim strDataFrame As String = ucrCalc.ucrSelectorForCalculations.strCurrentDataFrame
             ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
+            clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
             clsDetachFunction.AddParameter("name", strDataFrame)
+            clsAddScalarFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             clsRemoveLabelsFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
             SaveResults()
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
 
             ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 1)
-
             ucrCalc.ucrSaveResultInto.Enabled = True
             ucrCalc.ucrChkStoreScalar.Visible = True
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachScalarsFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachScalarsFunction)
             ucrCalc.ucrSelectorForCalculations.ResetCheckBoxScalar()
             ucrCalc.ucrSaveResultInto.Enabled = False
             ucrCalc.ucrChkStoreScalar.Visible = False
