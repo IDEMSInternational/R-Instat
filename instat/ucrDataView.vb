@@ -1115,7 +1115,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub linkStartPasteScriptfromClipboard_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartPasteScriptfromClipboard.LinkClicked
-        frmMain.mnuViewSwapDataAndMetadata.Enabled = frmMain.mnuViewSwapDataAndScript.Checked
+        frmMain.mnuViewSwapDataAndMetadata.Enabled = Not frmMain.mnuViewSwapDataAndScript.Checked
         frmMain.mnuViewSwapDataAndScript.Checked = Not frmMain.mnuViewSwapDataAndScript.Checked
         frmMain.UpdateSwapDataAndScript()
         frmMain.UpdateLayout()
