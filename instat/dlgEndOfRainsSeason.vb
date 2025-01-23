@@ -1403,7 +1403,7 @@ Public Class dlgEndOfRainsSeason
             clsConvertColumnlinkeddataFunction.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
         Else
             clsConvertColumnlinkeddataFunction.RemoveParameterByName("col_names")
-             clsConvertColumnType1Function.RemoveParameterByName("col_names")
+            clsConvertColumnType1Function.RemoveParameterByName("col_names")
             clsGetColumnDataTypeFunction.RemoveParameterByName("columns")
             clsConvertColumnTypeFunction.RemoveParameterByName("col_names")
         End If
