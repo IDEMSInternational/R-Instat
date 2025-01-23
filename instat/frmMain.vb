@@ -668,6 +668,22 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub UpdateSwapDataFrameAndMetadata()
+        If mnuViewSwapDataAndMetadata.Checked Then
+            splDataOutput.Panel1.Controls.Add(ucrDataFrameMeta)
+            splMetadata.Panel1.Controls.Add(ucrDataViewer)
+            mnuViewColumnMetadata.Text = "Data View"
+            mnuViewDataView.Text = "Dataframe Metadata"
+            mnuSwapDataMetadata.Checked = True
+        Else
+            splDataOutput.Panel1.Controls.Add(ucrDataViewer)
+            splMetadata.Panel1.Controls.Add(ucrDataFrameMeta)
+            mnuViewColumnMetadata.Text = "Dataframe Metadata"
+            mnuViewDataView.Text = "Data View"
+            mnuSwapDataMetadata.Checked = False
+        End If
+    End Sub
+
     Public Sub UpdateSwapDataAndScript()
         If mnuViewSwapDataAndScript.Checked Then
             splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
@@ -1676,6 +1692,7 @@ Public Class frmMain
         SetToDefaultLayout()
         UpdateSwapDataAndScript()
         UpdateSwapDataAndMetadata()
+        UpdateSwapDataFrameAndMetadata()
     End Sub
 
     Private Sub ucrDataViewer_Enter(sender As Object, e As EventArgs) Handles ucrDataViewer.Enter
@@ -1876,6 +1893,7 @@ Public Class frmMain
         SetToDefaultLayout()
         UpdateSwapDataAndScript()
         UpdateSwapDataAndMetadata()
+        UpdateSwapDataFrameAndMetadata()
     End Sub
 
     Public Sub SetToolbarHeight(iHeight As Integer)
