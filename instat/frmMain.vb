@@ -323,6 +323,8 @@ Public Class frmMain
         mnuDataFrameMetadat.Checked = False
         mnuSwapDataLogScript.Checked = False
         mnuSwapDataMetadata.Checked = False
+        mnuSwapDataAndDataframeMetadata.Checked = False
+        mnuViewSwapDataAndDataframeMetadata.Checked = False
         mnuDataViewWindow.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
@@ -656,31 +658,30 @@ Public Class frmMain
             mnuViewColumnMetadata.Text = "Data View"
             mnuViewDataView.Text = "Column Metadata"
             mnuSwapDataMetadata.Checked = True
-            mnuViewSwapDataAndMetadata.Checked = True
+
         Else
-            SetToDefaultLayout()
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel1.Controls.Add(ucrColumnMeta)
             mnuViewColumnMetadata.Text = "Column Metadata"
             mnuViewDataView.Text = "Data View"
             mnuSwapDataMetadata.Checked = False
-            mnuViewSwapDataAndMetadata.Checked = False
+
         End If
     End Sub
 
     Private Sub UpdateSwapDataFrameAndMetadata()
-        If mnuViewSwapDataAndMetadata.Checked Then
+        If mnuViewSwapDataAndDataframeMetadata.Checked Then
             splDataOutput.Panel1.Controls.Add(ucrDataFrameMeta)
             splMetadata.Panel1.Controls.Add(ucrDataViewer)
             mnuViewColumnMetadata.Text = "Data View"
             mnuViewDataView.Text = "Dataframe Metadata"
-            mnuSwapDataMetadata.Checked = True
+            mnuSwapDataAndDataframeMetadata.Checked = True
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel1.Controls.Add(ucrDataFrameMeta)
             mnuViewColumnMetadata.Text = "Dataframe Metadata"
             mnuViewDataView.Text = "Data View"
-            mnuSwapDataMetadata.Checked = False
+            mnuSwapDataAndDataframeMetadata.Checked = False
         End If
     End Sub
 
@@ -2554,7 +2555,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuViewSwapDataAndScript_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndScript.Click
-        mnuViewSwapDataAndMetadata.Enabled = Not mnuViewSwapDataAndScript.Checked
         mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
         UpdateSwapDataAndScript()
         UpdateLayout()
@@ -2569,15 +2569,28 @@ Public Class frmMain
 
     Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
         If Not ValidateCurrentDataFrame() Then Return
-        mnuViewSwapDataAndScript.Enabled = Not mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuViewSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndDataframeMetadata.Click
+        If Not ValidateCurrentDataFrame() Then Return
+        mnuViewSwapDataAndDataframeMetadata.Checked = Not mnuViewSwapDataAndDataframeMetadata.Checked
+        UpdateSwapDataFrameAndMetadata()
         UpdateLayout()
     End Sub
 
     Private Sub mnuViewSwapDataAndMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.CheckStateChanged
         If Not mnuViewSwapDataAndMetadata.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
             mnuViewColumnMetadata.Checked = False
+            mnuViewDataView.Checked = True
+        End If
+    End Sub
+
+    Private Sub mnuViewSwapDataAndDataframeMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndDataframeMetadata.CheckStateChanged
+        If Not mnuViewSwapDataAndDataframeMetadata.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewDataFrameMetadata.Checked Then
+            mnuViewDataFrameMetadata.Checked = False
             mnuViewDataView.Checked = True
         End If
     End Sub
@@ -2944,14 +2957,19 @@ Public Class frmMain
 
     Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
         If Not ValidateCurrentDataFrame() Then Return
-        mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
     End Sub
 
+    Private Sub mnuSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataAndDataframeMetadata.Click
+        If Not ValidateCurrentDataFrame() Then Return
+        mnuViewSwapDataAndDataframeMetadata.Checked = Not mnuViewSwapDataAndDataframeMetadata.Checked
+        UpdateSwapDataFrameAndMetadata()
+        UpdateLayout()
+    End Sub
+
     Private Sub mnuSwapDataLogScript_Click(sender As Object, e As EventArgs) Handles mnuSwapDataLogScript.Click
-        mnuViewSwapDataAndMetadata.Enabled = mnuViewSwapDataAndScript.Checked
         mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
         UpdateSwapDataAndScript()
         UpdateLayout()
