@@ -42,7 +42,6 @@ Partial Class dlgOutfillingStationData
         Me.ucrNudDays = New instat.ucrNud()
         Me.lblDays = New System.Windows.Forms.Label()
         Me.lblCount = New System.Windows.Forms.Label()
-        Me.cmdOmitMonths = New System.Windows.Forms.Button()
         Me.ucrInputDist = New instat.ucrInputComboBox()
         Me.ucrInputMarkov = New instat.ucrInputComboBox()
         Me.lblDist = New System.Windows.Forms.Label()
@@ -50,6 +49,7 @@ Partial Class dlgOutfillingStationData
         Me.ucrChkOmitMonths = New instat.ucrCheck()
         Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.ucrInputOmitMonths = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -272,17 +272,6 @@ Partial Class dlgOutfillingStationData
         Me.lblCount.TabIndex = 17
         Me.lblCount.Text = "Count:"
         '
-        'cmdOmitMonths
-        '
-        Me.cmdOmitMonths.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOmitMonths.Location = New System.Drawing.Point(564, 493)
-        Me.cmdOmitMonths.Margin = New System.Windows.Forms.Padding(4)
-        Me.cmdOmitMonths.Name = "cmdOmitMonths"
-        Me.cmdOmitMonths.Size = New System.Drawing.Size(104, 66)
-        Me.cmdOmitMonths.TabIndex = 26
-        Me.cmdOmitMonths.Text = "Omit Months"
-        Me.cmdOmitMonths.UseVisualStyleBackColor = True
-        '
         'ucrInputDist
         '
         Me.ucrInputDist.AddQuotesIfUnrecognised = True
@@ -329,7 +318,7 @@ Partial Class dlgOutfillingStationData
         '
         Me.ucrChkOmitMonths.AutoSize = True
         Me.ucrChkOmitMonths.Checked = False
-        Me.ucrChkOmitMonths.Location = New System.Drawing.Point(394, 509)
+        Me.ucrChkOmitMonths.Location = New System.Drawing.Point(379, 506)
         Me.ucrChkOmitMonths.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkOmitMonths.Name = "ucrChkOmitMonths"
         Me.ucrChkOmitMonths.Size = New System.Drawing.Size(150, 34)
@@ -358,11 +347,24 @@ Partial Class dlgOutfillingStationData
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Station To Exclude:"
         '
+        'ucrInputOmitMonths
+        '
+        Me.ucrInputOmitMonths.AddQuotesIfUnrecognised = True
+        Me.ucrInputOmitMonths.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrInputOmitMonths.GetSetSelectedIndex = -1
+        Me.ucrInputOmitMonths.IsReadOnly = False
+        Me.ucrInputOmitMonths.Location = New System.Drawing.Point(516, 510)
+        Me.ucrInputOmitMonths.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputOmitMonths.Name = "ucrInputOmitMonths"
+        Me.ucrInputOmitMonths.Size = New System.Drawing.Size(171, 32)
+        Me.ucrInputOmitMonths.TabIndex = 28
+        '
         'dlgOutfillingStationData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(694, 655)
+        Me.Controls.Add(Me.ucrInputOmitMonths)
         Me.Controls.Add(Me.ucrInputSelectStation)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrChkOmitMonths)
@@ -370,7 +372,6 @@ Partial Class dlgOutfillingStationData
         Me.Controls.Add(Me.lblDist)
         Me.Controls.Add(Me.ucrInputMarkov)
         Me.Controls.Add(Me.ucrInputDist)
-        Me.Controls.Add(Me.cmdOmitMonths)
         Me.Controls.Add(Me.lblCount)
         Me.Controls.Add(Me.lblDays)
         Me.Controls.Add(Me.ucrNudDays)
@@ -426,8 +427,8 @@ Partial Class dlgOutfillingStationData
     Friend WithEvents lblDist As Label
     Friend WithEvents ucrInputMarkov As ucrInputComboBox
     Friend WithEvents ucrInputDist As ucrInputComboBox
-    Friend WithEvents cmdOmitMonths As Button
     Friend WithEvents ucrChkOmitMonths As ucrCheck
     Friend WithEvents ucrInputSelectStation As ucrInputFactorLevels
     Friend WithEvents Label1 As Label
+    Friend WithEvents ucrInputOmitMonths As ucrInputComboBox
 End Class
