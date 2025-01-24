@@ -2215,12 +2215,10 @@ DataBook$set("public","get_variable_sets", function(data_name, set_names, force_
 }
 )
 
-DataBook$set("public", "crops_definitions", function(data_name, year, station, rain, day, rain_totals, plant_days, plant_lengths, start_check = TRUE, season_data_name, start_day, end_day, definition_props = TRUE, print_table = TRUE) {
-  plant_day_name <- "plant_day"
-  plant_length_name <- "plant_length"
-  rain_total_name <- "rain_total"
-  
+DataBook$set("public", "crops_definitions", function(data_name, year, station, rain, day, rain_totals, plant_days, plant_lengths, start_check = c("both", "yes", "no"), season_data_name, start_day, end_day, return_crops_table = TRUE, definition_props = TRUE){
+  # Run checks
   is_station <- !missing(station)
+  start_check <- match.arg(start_check)
   
   if(missing(year)) stop("Year column must be specified.")
   if(!is_station) by <- year
@@ -2233,17 +2231,26 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   year_col <- self$get_columns_from_data(data_name, year)
   unique_year <- na.omit(unique(year_col))
   
-  expand_list <- list(rain_totals, plant_lengths, plant_days, unique_year)
-  names_list <- c(rain_total_name, plant_length_name, plant_day_name, year)
-  
+  # creating our combinations
+  # if there's a station, we only want to consider the year-station combinations that actually exist
   if(is_station) {
-    station_col <- self$get_columns_from_data(data_name, station)
-    unique_station <- na.omit(unique(station_col))
-    expand_list[[length(expand_list) + 1]] <- unique_station
-    names_list[length(names_list) + 1] <- station
+    expanded_df <- unique(self$get_data_frame(data_name) %>% dplyr::select(year, station))
+  } else {
+    expanded_df <- unique(self$get_data_frame(data_name) %>% dplyr::select(year))  
   }
   
-  df <- setNames(expand.grid(expand_list), names_list)
+  # Set names
+  plant_day_name <- "plant_day"
+  plant_length_name <- "plant_length"
+  rain_total_name <- "rain_total"
+  
+  # Create all combinations of X and Y
+  condition_combinations <- expand.grid(rain_totals, plant_lengths, plant_days)
+  names_list <- c(rain_total_name, plant_length_name, plant_day_name)
+  condition_combinations <- setNames(condition_combinations, names_list)
+  
+  # Expand the df with xy_combinations
+  df <- merge(expanded_df, condition_combinations, by = NULL)
   daily_data <- self$get_data_frame(data_name)
   
   if(season_data_name != data_name) {
@@ -2253,8 +2260,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     vars <- c(season_by, start_day, end_day)
     season_data <- season_data %>% dplyr::select(!!! rlang::syms(vars))
     df <- dplyr::left_join(df, season_data, by = join_by)
-  }
-  else {
+  } else {
     col_names <- c(by, start_day, end_day)
     season_data <- daily_data %>% 
       dplyr::select(!!! rlang::syms(col_names)) %>%
@@ -2264,133 +2270,148 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
     df <- dplyr::left_join(df, season_data, by = by)
   }
   
-  # Plant day condition
-  if(start_check %in% c("yes", "both")) {
-    df$plant_day_cond <- (df[[start_day]] <= df[[plant_day_name]])
-  }
+  ## Onto the calculation
+  proportion_df <- NULL
+  crops_def_table <- NULL
+  i <- 1
   
-  # Plant length condition
-  df$length_cond <- (df[[plant_day_name]] + df[[plant_length_name]] <= df[[end_day]])
+  calculate_rain_condition <- function(data){
+    data <- data %>% dplyr::select(-rain_total_name) %>% unique()
   
-  # Rain total condition
-  # Create a column for the rain total actuals initialised with NA
-  df[["rain_total_actual"]] <- NA
-  
-  # Vectorise the conditions for each 
-  for (i in 1:nrow(df)) {
-    # Create a condition to filter the daily data based on the year, day, and plant day/length
-    ind <- daily_data[[year]] == df[[year]][i] &
-      daily_data[[day]] >= df[[plant_day_name]][i] &
-      daily_data[[day]] < (df[[plant_day_name]][i] + df[[plant_length_name]][i])
+    for (i in 1:nrow(data)) {
+      # Create a condition to filter the daily data based on the year, day, and plant day/length
+      ind <- daily_data[[year]] == data[[year]][i] &
+        daily_data[[day]] >= data[[plant_day_name]][i] &
+        daily_data[[day]] < (data[[plant_day_name]][i] + data[[plant_length_name]][i])
     
-    if (is_station) {
-      ind <- ind & (daily_data[[station]] == df[[station]][i])
-    }
-    
-    # Filter the daily data based on the condition
-    rain_values <- daily_data[[rain]][ind]
-    
-    # Calculate the sum of rain values and check conditions
-    sum_rain <- sum(rain_values, na.rm = TRUE)
-    
-    if (length(rain_values) + 1 < df[[plant_length_name]][i] || (anyNA(rain_values) && sum_rain < df[[rain_total_name]][i])) {
-      sum_rain <- NA
-    }
-    
-    # Assign the calculated sum to the respective row in the result dataframe
-    df[["rain_total_actual"]][i] <- sum_rain
-  }
-  df$rain_cond <- df[[rain_total_name]] <= df[["rain_total_actual"]]
-  
-  # All three conditions met
-  if (start_check == "yes"){
-    df$overall_cond <- df$plant_day_cond & df$length_cond & df$rain_cond
-  } else if (start_check == "no"){
-    df$overall_cond <- TRUE & df$length_cond & df$rain_cond
-  } else {
-    df$overall_cond_with_start <- df$plant_day_cond & df$length_cond & df$rain_cond
-    df$overall_cond_no_start <- TRUE & df$length_cond & df$rain_cond
-  }
-  
-  crops_name <- "crop_def"
-  crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
-  data_tables <- list(df)
-  names(data_tables) <- crops_name
-  self$import_data(data_tables = data_tables)
-  
-  if(season_data_name != data_name) {
-    crops_by <- season_by
-    names(crops_by) <- by
-    self$add_link(crops_name, season_data_name, crops_by, keyed_link_label)
-  }
-  
-  if(definition_props) {
-    calc_from <- list()
-    if(!missing(station)) calc_from[[length(calc_from) + 1]] <- station
-    calc_from[[length(calc_from) + 1]] <- plant_day_name
-    calc_from[[length(calc_from) + 1]] <- plant_length_name
-    calc_from[[length(calc_from) + 1]] <- rain_total_name
-    names(calc_from) <- rep(crops_name, length(calc_from))
-    grouping <- instat_calculation$new(type = "by", calculated_from = calc_from)
-    
-    if (start_check %in% c("yes", "no")){
-      prop_calc_from <- list("overall_cond")
-      names(prop_calc_from) <- crops_name
-      propor_table <- instat_calculation$new(function_exp="sum(overall_cond, na.rm = TRUE)/length(na.omit(overall_cond))",
-                                             save = 2, calculated_from = prop_calc_from,
-                                             manipulations = list(grouping),
-                                             type="summary", result_name = "prop_success", result_data_frame = "crop_prop")
-      prop_data_frame <- self$run_instat_calculation(propor_table, display = TRUE)
-      if(print_table) {
-        prop_data_frame$prop_success <- round(prop_data_frame$prop_success, 2)
-        prop_table_unstacked <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame, value.var = "prop_success")
-        if(!missing(station)) f <- interaction(prop_table_unstacked[[station]], prop_table_unstacked[[plant_length_name]], lex.order = TRUE)
-        else f <- prop_table_unstacked[[plant_length_name]]
-        prop_table_split <- split(prop_table_unstacked, f)
-        return(prop_table_split)
+      if (is_station) {
+        ind <- ind & (daily_data[[station]] == data[[station]][i])
       }
-    } else {
-      prop_calc_from_with_start <- list("overall_cond_with_start")
-      names(prop_calc_from_with_start) <- crops_name
-      propor_table_with_start <- instat_calculation$new(function_exp="sum(overall_cond_with_start, na.rm = TRUE)/length(na.omit(overall_cond_with_start))",
-                                                        save = 2, calculated_from = prop_calc_from_with_start,
-                                                        manipulations = list(grouping),
-                                                        type="summary", result_name = "prop_success", result_data_frame = "crop_prop_with_start")
-      prop_data_frame_with_start <- self$run_instat_calculation(propor_table_with_start, display = TRUE)
+    
+      # Filter the daily data based on the condition
+      rain_values <- daily_data[[rain]][ind]
+    
+      # Calculate the sum of rain values and check conditions
+      sum_rain <- sum(rain_values, na.rm = TRUE)
+    
+      # Set as NA for certain cases: This anyNA is fixed later when we have the total_rainfall value of interest
+      if (anyNA(rain_values))  sum_rain <- -1 * sum_rain # as a way to tag the sum_rain value for later, we set as -ve value. 
+      #&& sum_rain < data[[rain_total_name]][i]){
+      if (length(rain_values) + 1 < data[[plant_length_name]][i]) sum_rain <- NA
+      if (all(is.na(rain_values))) sum_rain <- NA
+    
+      # Assign the calculated sum to the respective row in the result dataframe
+      data[["rain_total_actual"]][i] <- sum_rain
+    }
+    return(data)
+}
+  
+  # run by plant day and plant_length
+  for (day_i in plant_days){
+    for (length_i in plant_lengths){
       
-      prop_calc_from_no_start <- list("overall_cond_no_start")
-      names(prop_calc_from_no_start) <- crops_name
-      propor_table_no_start <- instat_calculation$new(function_exp="sum(overall_cond_no_start, na.rm = TRUE)/length(na.omit(overall_cond_no_start))",
-                                                      save = 2, calculated_from = prop_calc_from_no_start,
-                                                      manipulations = list(grouping),
-                                                      type="summary", result_name = "prop_success", result_data_frame = "crop_prop_no_start")
-      prop_data_frame_no_start <- self$run_instat_calculation(propor_table_no_start, display = TRUE)
+      # for each plant length and plant day combination, calculate the total rainfall in that period.
+      filtered_data_1 <- df %>% filter(plant_day == day_i) %>% filter(plant_length == length_i)
       
-      if(print_table) {
-        prop_data_frame_with_start$prop_success <- round(prop_data_frame_with_start$prop_success, 2)
-        prop_table_unstacked_with_start <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame_with_start, value.var = "prop_success")
-        if(!missing(station)) f <- interaction(prop_table_unstacked_with_start[[station]], prop_table_unstacked_with_start[[plant_length_name]], lex.order = TRUE)
-        else f <- prop_table_unstacked_with_start[[plant_length_name]]
-        prop_table_split_with_start <- split(prop_table_unstacked_with_start, f)
+      # Now run to get the rain conditions
+      filtered_data_1 <- calculate_rain_condition(data = filtered_data_1)
+      
+      # so: filtered_data_1 contains the total rainfall that occurred in that period for all the plant_day and plant_length combinations
+      # we now split by our different rain_total_actual conditions.
+      # we do this here to avoid calculating it multiple times.
+      for (rain_i in rain_totals){
+        filtered_data <- filtered_data_1 %>% dplyr::mutate(rain_total = rain_i)
+
+        # take the rows < 0 and run a check. We want to check 
+        # if (anyNA(rain_values) && sum_rain < data[[rain_total_name]][i]) { sum_rain <- NA 
+        # we do this here because we want to avoid running rain_total in calculate_rain_condition for efficiency purposes.
+        filtered_data <- filtered_data %>%
+          dplyr::mutate(rain_total_actual = ifelse(rain_total_actual < 0, ifelse(-1*rain_total_actual < rain_total, NA, -1*rain_total_actual), rain_total_actual))
+
+        if (!missing(station)) filtered_data <- filtered_data %>% dplyr::group_by(.data[[station]], .data[[year]])
+        else filtered_data <- filtered_data %>% dplyr::group_by(.data[[year]])
         
-        prop_data_frame_no_start$prop_success <- round(prop_data_frame_no_start$prop_success, 2)
-        prop_table_unstacked_no_start <- reshape2::dcast(formula = as.formula(paste(if(!missing(station)) paste(station, "+"), plant_length_name, "+", rain_total_name, "~", plant_day_name)), data = prop_data_frame_no_start, value.var = "prop_success")
-        if(!missing(station)) f <- interaction(prop_table_unstacked_no_start[[station]], prop_table_unstacked_no_start[[plant_length_name]], lex.order = TRUE)
-        else f <- prop_table_unstacked_no_start[[plant_length_name]]
-        prop_table_split_no_start <- split(prop_table_unstacked_no_start, f)
+        filtered_data <- filtered_data %>%
+          # first add a column (T/F) that states that it is in the rainfall period or not. 
+          dplyr::mutate(plant_day_cond = .data[[start_day]] <= plant_day,
+                        length_cond = plant_day + plant_length <= .data[[end_day]],
+                        rain_cond = rain_i <= rain_total_actual) %>%
+          dplyr::ungroup()
+
+        if (start_check == "both"){
+          
+          filtered_data <- filtered_data %>%
+            dplyr::mutate(
+              overall_cond_with_start = plant_day_cond & length_cond & rain_cond,
+              overall_cond_no_start = length_cond & rain_cond)
+          if (!missing(station)) filtered_data <- filtered_data %>% dplyr::group_by(.data[[station]])
+          proportion_data <- filtered_data %>%
+            dplyr::summarise(prop_success_with_start = sum(overall_cond_with_start, na.rm = TRUE)/length(na.omit(overall_cond_with_start)),
+                             prop_success_no_start = sum(overall_cond_no_start, na.rm = TRUE)/length(na.omit(overall_cond_no_start)))
+        } else {
+          filtered_data <- filtered_data %>%
+            dplyr::mutate(
+              overall_cond = case_when(
+                start_check == "yes" ~ plant_day_cond & length_cond & rain_cond,
+                start_check == "no" ~ TRUE & length_cond & rain_cond)
+            )
+          if (!missing(station)) filtered_data <- filtered_data %>% dplyr::group_by(.data[[station]])
+            proportion_data <- filtered_data %>%
+              dplyr::summarise(prop_success = sum(overall_cond, na.rm = TRUE)/length(na.omit(overall_cond)))
+        }
         
-        # Create an empty list to store the merged data
-        merged_list <- list()
-        
-        # Vectorize the addition of source indicators and merging of data frames
-        prop_table_split_with_start <- lapply(prop_table_split_with_start, function(df) {
-          df$source <- 'with start'
-          return(df)
-        })
+        if (return_crops_table){
+          crops_def_table[[i]] <- filtered_data %>% dplyr::mutate(rain_total = rain_i,
+                                                         plant_length = length_i,
+                                                         plant_day = day_i)
+        }
+        if (definition_props){
+          proportion_df[[i]] <- proportion_data %>% dplyr::mutate(rain_total = rain_i,
+                                                                  plant_length = length_i,
+                                                                  plant_day = day_i)
+        }
+        i <- i + 1
       }
     }
   }
-})
+  
+  if (!missing(station)) column_order <- c(station, plant_day_name, plant_length_name, rain_total_name)
+  else column_order <- c(plant_day_name, plant_length_name, rain_total_name)
+
+  if (return_crops_table){
+    # here we get crop_def and import it as a new DF
+    crops_def_table <- dplyr::bind_rows(crops_def_table) %>% dplyr::select(c(all_of(column_order), everything())) %>% dplyr::arrange(dplyr::across(dplyr::all_of(column_order)))
+    crops_name <- "crop_def"
+    crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
+    data_tables <- list(crops_def_table) 
+    names(data_tables) <- crops_name
+    if(season_data_name != data_name) {
+     crops_by <- season_by
+     names(crops_by) <- by
+     self$add_link(crops_name, season_data_name, crops_by, keyed_link_label)
+  }
+    self$import_data(data_tables = data_tables)
+  } 
+  if (definition_props){
+    prop_data_frame <- dplyr::bind_rows(proportion_df) %>% dplyr::select(c(all_of(column_order), everything())) %>% dplyr::arrange(dplyr::across(dplyr::all_of(column_order)))
+    
+    prop_name <- "crop_prop"
+    prop_name <- next_default_item(prefix = prop_name, existing_names = self$get_data_names(), include_index = FALSE)
+    data_tables <- list(prop_data_frame) 
+    names(data_tables) <- prop_name
+    self$import_data(data_tables = data_tables)
+
+    # Add Link
+    if (return_crops_table){
+      if (!missing(station)){
+        self$add_link(from_data_frame = crops_name, to_data_frame = prop_name, link_pairs=c(station = station, rain_total = rain_total_name, plant_length = plant_length_name, plant_day = plant_day_name), type="keyed_link")
+      } else {
+        self$add_link(from_data_frame = crops_name, to_data_frame = prop_name, link_pairs=c(rain_total = rain_total_name, plant_length = plant_length_name, plant_day = plant_day_name), type="keyed_link")
+      }
+    }
+  }
+}
+)
 
 #' Converting grid (wide) format daily climatic data into tidy (long format) data
 #' @param x Input data frame
