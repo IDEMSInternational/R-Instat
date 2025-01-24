@@ -32,6 +32,8 @@ Public Class DlgDefineClimaticData
     Private bIsUnique As Boolean = True
 
     Private Sub DlgDefineClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim stopwatch As New Stopwatch()
+        stopwatch.Start()
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -43,6 +45,9 @@ Public Class DlgDefineClimaticData
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        stopwatch.Stop()
+        Dim Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
+        Logger.Info("DlgDefineClimaticData " & stopwatch.Elapsed.TotalSeconds & " seconds")
     End Sub
 
     Private Sub InitialiseDialog()
@@ -127,8 +132,8 @@ Public Class DlgDefineClimaticData
         clsDummyFunction = New RFunction
         clsNewDefautFunction = New RFunction
 
-        ucrSelectorDefineClimaticData.Reset()
-        ucrSelectorLinkedDataFrame.Reset()
+        'ucrSelectorDefineClimaticData.Reset()
+        'ucrSelectorLinkedDataFrame.Reset()
         ucrInputCheckInput.Reset()
         ucrReceiverDate.SetMeAsReceiver()
 
@@ -402,13 +407,11 @@ Public Class DlgDefineClimaticData
         strCurrentDataframeName = ucrSelectorDefineClimaticData.strCurrentDataFrame
         clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
         AutoFillReceivers()
-        SetRSelector()
     End Sub
 
     Private Sub ucrSelectorLinkedDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLinkedDataFrame.ControlValueChanged
         clsGetColFunction.AddParameter("data_name", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34), iPosition:=1)
         NewAutoFillReceivers()
-        NewSetRSelector()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
