@@ -216,8 +216,6 @@ Public Class dlgCalculator
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Enabled = True
         ElseIf ucrCalc.ucrSelectorForCalculations.checkBoxScalar.Checked Then
             Dim strResut As String = ucrCalc.ucrSaveResultInto.GetText
-            clsAddScalarFunction.AddParameter("scalar_name", Chr(34) & strResut & Chr(34), iPosition:=1)
-            clsAddScalarFunction.AddParameter("scalar_value", strResut, iPosition:=2)
             clsAddScalarFunction.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
             clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 0)
