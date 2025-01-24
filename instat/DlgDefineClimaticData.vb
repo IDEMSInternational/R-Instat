@@ -32,8 +32,6 @@ Public Class DlgDefineClimaticData
     Private bIsUnique As Boolean = True
 
     Private Sub DlgDefineClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim stopwatch As New Stopwatch()
-        stopwatch.Start()
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -45,9 +43,6 @@ Public Class DlgDefineClimaticData
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
-        stopwatch.Stop()
-        Dim Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
-        Logger.Info("DlgDefineClimaticData " & stopwatch.Elapsed.TotalSeconds & " seconds")
     End Sub
 
     Private Sub InitialiseDialog()
@@ -132,8 +127,6 @@ Public Class DlgDefineClimaticData
         clsDummyFunction = New RFunction
         clsNewDefautFunction = New RFunction
 
-        'ucrSelectorDefineClimaticData.Reset()
-        'ucrSelectorLinkedDataFrame.Reset()
         ucrInputCheckInput.Reset()
         ucrReceiverDate.SetMeAsReceiver()
 
@@ -235,17 +228,17 @@ Public Class DlgDefineClimaticData
         Dim bFound As Boolean = False
 
         ucrCurrentReceiver = ucrSelectorDefineClimaticData.CurrentReceiver
-
+        Dim strData As String = ucrSelectorDefineClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text
         For Each ucrTempReceiver As ucrReceiver In lstReceivers
             ucrTempReceiver.SetMeAsReceiver()
             lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
 
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorDefineClimaticData.lstAvailableVariable.Items
-                    Dim strClimaticType As String = GetClimaticTypeFromRCommand(lviTempVariable.Text)
+                    Dim strClimaticType As String = GetClimaticTypeFromRCommand(lviTempVariable.Text, strData)
                     For Each strValue As String In lstRecognisedValues
                         If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) OrElse (strClimaticType IsNot Nothing AndAlso strClimaticType.Contains(strValue)) Then
-                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorDefineClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                            ucrTempReceiver.Add(lviTempVariable.Text, strData)
                             bFound = True
                             Exit For
                         End If
@@ -268,43 +261,46 @@ Public Class DlgDefineClimaticData
         Dim ucrCurrentReceiver As ucrReceiver
         Dim bFound As Boolean = False
 
-        ucrCurrentReceiver = ucrSelectorLinkedDataFrame.CurrentReceiver
+        If ucrChkLinkedMetaData.Checked Then
+            ucrCurrentReceiver = ucrSelectorLinkedDataFrame.CurrentReceiver
+            Dim strData As String = ucrSelectorLinkedDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text
 
-        For Each ucrTempReceiver As ucrReceiver In lstNewReceivers
-            ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetNewRecognisedValues(ucrTempReceiver.Tag)
+            For Each ucrTempReceiver As ucrReceiver In lstNewReceivers
+                ucrTempReceiver.SetMeAsReceiver()
+                lstRecognisedValues = GetNewRecognisedValues(ucrTempReceiver.Tag)
 
-            If lstRecognisedValues.Count > 0 Then
-                For Each lviTempVariable As ListViewItem In ucrSelectorLinkedDataFrame.lstAvailableVariable.Items
-                    Dim strClimaticType As String = GetClimaticTypeFromRCommand(lviTempVariable.Text)
-                    For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) OrElse (strClimaticType IsNot Nothing AndAlso strClimaticType.Contains(strValue)) Then
-                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorLinkedDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                            bFound = True
+                If lstRecognisedValues.Count > 0 Then
+                    For Each lviTempVariable As ListViewItem In ucrSelectorLinkedDataFrame.lstAvailableVariable.Items
+                        Dim strClimaticType As String = GetClimaticTypeFromRCommand(lviTempVariable.Text, strData)
+                        For Each strValue As String In lstRecognisedValues
+                            If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) OrElse (strClimaticType IsNot Nothing AndAlso strClimaticType.Contains(strValue)) Then
+                                ucrTempReceiver.Add(lviTempVariable.Text, strData)
+                                bFound = True
+                                Exit For
+                            End If
+                        Next
+                        If bFound Then
+                            bFound = False
                             Exit For
                         End If
                     Next
-                    If bFound Then
-                        bFound = False
-                        Exit For
-                    End If
-                Next
-            End If
-        Next
+                End If
+            Next
 
-        If ucrCurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver.SetMeAsReceiver()
+            If ucrCurrentReceiver IsNot Nothing Then
+                ucrCurrentReceiver.SetMeAsReceiver()
+            End If
         End If
     End Sub
 
-    Private Function GetClimaticTypeFromRCommand(strName As String) As String
+    Private Function GetClimaticTypeFromRCommand(strName As String, strDataName As String) As String
         Try
             Dim clsGetClimaticTypeFunction As New RFunction
 
             clsGetClimaticTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_climatic_type")
             clsGetClimaticTypeFunction.AddParameter("attr_name", Chr(34) & "Climatic_Type" & Chr(34))
             clsGetClimaticTypeFunction.AddParameter("col_name", Chr(34) & strName & Chr(34))
-            clsGetClimaticTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34))
+            clsGetClimaticTypeFunction.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
 
             Dim result As SymbolicExpression
             result = frmMain.clsRLink.RunInternalScriptGetValue(clsGetClimaticTypeFunction.ToScript())
@@ -409,7 +405,7 @@ Public Class DlgDefineClimaticData
         AutoFillReceivers()
     End Sub
 
-    Private Sub ucrSelectorLinkedDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLinkedDataFrame.ControlValueChanged
+    Private Sub ucrSelectorLinkedDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLinkedDataFrame.ControlValueChanged, ucrChkLinkedMetaData.ControlValueChanged
         clsGetColFunction.AddParameter("data_name", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34), iPosition:=1)
         NewAutoFillReceivers()
     End Sub
