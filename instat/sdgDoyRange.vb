@@ -219,10 +219,10 @@ Public Class sdgDoyRange
         If bUpdate Then
             If rdoToFixed.Checked Then
                 clsDayToOperator.AddParameter("to", strParameterValue:=ucrDoyTo.GetValue(), iPosition:=1)
-                clsIfElseFirstDoyFilledFunction.AddParameter("no", strParameterValue:=ucrDoyTo.GetValue(), iPosition:=3)
+                clsIfElseFirstDoyFilledFunction.AddParameter("yes", strParameterValue:=ucrDoyTo.GetValue(), iPosition:=1)
             ElseIf rdoToVariable.Checked Then
                 clsDayToOperator.AddParameter("to", strParameterValue:=ucrReceiverTo.GetVariableNames(False), iPosition:=1)
-                clsIfElseFirstDoyFilledFunction.AddParameter("no", strParameterValue:=ucrReceiverTo.GetVariableNames(False), iPosition:=3)
+                clsIfElseFirstDoyFilledFunction.AddParameter("yes", strParameterValue:=ucrReceiverTo.GetVariableNames(False), iPosition:=1)
             ElseIf rdoLength.Checked Then
                 clsFixedDiffOp.SetOperation("+")
                 If clsDayFromOperator.ContainsParameter("from") Then
@@ -230,7 +230,7 @@ Public Class sdgDoyRange
                     clsFixedDiffOp.AddParameter("diff", strParameterValue:=ucrNudToDiff.Value, iPosition:=1)
                     clsFixedDiffOp.bBrackets = True
                     clsDayToOperator.AddParameter("to", clsROperatorParameter:=clsFixedDiffOp, iPosition:=1)
-                    clsIfElseFirstDoyFilledFunction.AddParameter("no", clsROperatorParameter:=clsFixedDiffOp, iPosition:=3)
+                    clsIfElseFirstDoyFilledFunction.AddParameter("yes", clsROperatorParameter:=clsFixedDiffOp, iPosition:=1)
                 End If
             End If
             UpdateCalculatedFrom()
