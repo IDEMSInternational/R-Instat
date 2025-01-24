@@ -121,10 +121,30 @@ Public Class dlgOutfillingStationData
         ucrChkOmitMonths.SetText("Dry Month(s)")
         ucrChkOmitMonths.AddParameterValuesCondition(True, "omit", "True")
         ucrChkOmitMonths.AddParameterValuesCondition(False, "omit", "False")
-        ucrChkOmitMonths.AddToLinkedControls({ucrInputOmitMonths}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True) ', bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
+        ucrChkOmitMonths.AddToLinkedControls({ucrInputOmitMonths}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkStationToExclude.SetText("Station(s) to Exclude")
+        ucrChkStationToExclude.AddParameterValuesCondition(True, "exclude", "True")
+        ucrChkStationToExclude.AddParameterValuesCondition(False, "exclude", "False")
+        ucrChkStationToExclude.AddToLinkedControls({ucrInputSelectStation}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrNudRandomSeed.SetParameter(New RParameter("set_seed", 10))
+        ucrNudRandomSeed.SetMinMax(1, Integer.MaxValue)
+
+        ucrChkRandomSeed.SetText("Random Seed")
+        ucrChkRandomSeed.AddParameterValuesCondition(True, "seed", "True")
+        ucrChkRandomSeed.AddParameterValuesCondition(False, "seed", "False")
+        ucrChkRandomSeed.AddToLinkedControls({ucrNudRandomSeed}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=999)
 
         ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
         ucrInputSelectStation.strQuotes = ""
+
+        ucrSaveResultInto.SetPrefix("outfilled")
+        ucrSaveResultInto.SetSaveTypeAsColumn()
+        ucrSaveResultInto.SetIsComboBox()
+        ucrSaveResultInto.SetCheckBoxText("Store Result")
+        ucrSaveResultInto.SetAssignToIfUncheckedValue("last_outfilled")
+        ucrSaveResultInto.SetDataFrameSelector(ucrSelectorOutfilling.ucrAvailableDataFrames)
     End Sub
 
     Private Sub SetDefaults()
@@ -139,16 +159,20 @@ Public Class dlgOutfillingStationData
         ucrInputSelectStation.Reset()
         ucrReceiverStation.SetMeAsReceiver()
 
+        ucrSaveResultInto.Reset()
+        ucrSaveResultInto.ucrChkSave.Checked = True
+
         ucrInputBins.SetName("1, 3, 5, 10, 15, 20")
         ucrInputOmitMonths.SetName("5,6,7,8,9")
 
         clsDummyFunction.AddParameter("omit", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("exclude", "False", iPosition:=1)
+        clsDummyFunction.AddParameter("seed", "False", iPosition:=2)
 
         clsDoFillingFunction.SetPackageName("outfillingR")
         clsDoFillingFunction.SetRCommand("do_infilling")
         clsDoFillingFunction.SetAssignTo("infill_data")
         clsDoFillingFunction.AddParameter("markovflag", "TRUE", iPosition:=6)
-        clsDoFillingFunction.AddParameter("station_to_exclude ", Chr(34) & "" & Chr(34), iPosition:=10)
 
         clsDataListFunction.SetRCommand("list")
         clsDataListFunction.AddParameter("infilled_data", clsRFunctionParameter:=clsDoFillingFunction, iPosition:=0)
@@ -156,12 +180,20 @@ Public Class dlgOutfillingStationData
         clsBaseFunction.SetRCommand("data_book$import_data")
         clsBaseFunction.AddParameter("data_tables", clsRFunctionParameter:=clsDataListFunction, iPosition:=0)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDoFillingFunction)
+        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(),
+                                          strTempDataframe:=ucrSelectorOutfilling.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
+                                          bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix,
+                                          bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames,
+                                          bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
+                                          bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
 
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkOmitMonths.SetRCode(clsDummyFunction, bReset)
+        ucrChkStationToExclude.SetRCode(clsDummyFunction, bReset)
+        ucrChkRandomSeed.SetRCode(clsDummyFunction, bReset)
         ucrSelectorOutfilling.SetRCode(clsDoFillingFunction, bReset)
         ucrReceiverDate.SetRCode(clsDoFillingFunction, bReset)
         ucrReceiverEstimates.SetRCode(clsDoFillingFunction, bReset)
@@ -170,10 +202,15 @@ Public Class dlgOutfillingStationData
         ucrReceiverRain.SetRCode(clsDoFillingFunction, bReset)
         ucrNudCount.SetRCode(clsDoFillingFunction, bReset)
         ucrNudDays.SetRCode(clsDoFillingFunction, bReset)
+        ucrNudRandomSeed.SetRCode(clsDoFillingFunction, bReset)
         ucrInputDist.SetRCode(clsDoFillingFunction, bReset)
         ucrInputMarkov.SetRCode(clsDoFillingFunction, bReset)
         ucrReceiverStation.SetRCode(clsDoFillingFunction, bReset)
         ucrInputSelectStation.SetRCode(clsDoFillingFunction, bReset)
+        ucrSaveResultInto.SetRCode(clsDoFillingFunction, bReset)
+        If bReset Then
+
+        End If
         AddTargetMonthsVar()
     End Sub
 
@@ -269,15 +306,28 @@ Public Class dlgOutfillingStationData
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrInputSelectStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSelectStation.ControlValueChanged, ucrReceiverStation.ControlValueChanged
-        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty Then
+    Private Sub ucrInputSelectStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSelectStation.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrChkStationToExclude.ControlValueChanged
+        If ucrChkStationToExclude.Checked AndAlso Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty Then
             clsDoFillingFunction.AddParameter("station_to_exclude ", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=10)
+            clsDummyFunction.AddParameter("exclude", "True", iPosition:=1)
         Else
             clsDoFillingFunction.RemoveParameterByName("station_to_exclude")
+            clsDummyFunction.AddParameter("exclude", "False", iPosition:=1)
         End If
     End Sub
 
     Private Sub ucrInputOmitMonths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputOmitMonths.ControlValueChanged
         AddTargetMonthsVar()
     End Sub
+
+    Private Sub ucrNudRandomSeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRandomSeed.ControlValueChanged, ucrChkRandomSeed.ControlValueChanged
+        If ucrChkRandomSeed.Checked AndAlso Not ucrNudRandomSeed.IsEmpty Then
+            clsDoFillingFunction.AddParameter("set_seed", ucrNudRandomSeed.GetText, iPosition:=10)
+            clsDummyFunction.AddParameter("seed", "True", iPosition:=2)
+        Else
+            clsDoFillingFunction.RemoveParameterByName("set_seed")
+            clsDummyFunction.AddParameter("seed", "False", iPosition:=2)
+        End If
+    End Sub
+
 End Class
