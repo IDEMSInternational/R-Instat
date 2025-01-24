@@ -19,10 +19,8 @@ Imports instat.Translations
 Public Class dlgOutfillingStationData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private bResetSubdialog As Boolean = False
     Private clsDoFillingFunction As New RFunction
     Private clsDummyFunction As New RFunction
-    Private clsBaseFunction, clsDataListFunction As New RFunction
 
     Private Sub dlgOutfillingStationData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -150,8 +148,6 @@ Public Class dlgOutfillingStationData
     Private Sub SetDefaults()
         clsDoFillingFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsBaseFunction = New RFunction
-        clsDataListFunction = New RFunction
 
         ucrSelectorOutfilling.Reset()
         ucrInputSelectStation.SetName("")
@@ -173,12 +169,6 @@ Public Class dlgOutfillingStationData
         clsDoFillingFunction.SetRCommand("do_infilling")
         clsDoFillingFunction.SetAssignTo("infill_data")
         clsDoFillingFunction.AddParameter("markovflag", "TRUE", iPosition:=6)
-
-        clsDataListFunction.SetRCommand("list")
-        clsDataListFunction.AddParameter("infilled_data", clsRFunctionParameter:=clsDoFillingFunction, iPosition:=0)
-
-        clsBaseFunction.SetRCommand("data_book$import_data")
-        clsBaseFunction.AddParameter("data_tables", clsRFunctionParameter:=clsDataListFunction, iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDoFillingFunction)
         ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(),
@@ -208,9 +198,6 @@ Public Class dlgOutfillingStationData
         ucrReceiverStation.SetRCode(clsDoFillingFunction, bReset)
         ucrInputSelectStation.SetRCode(clsDoFillingFunction, bReset)
         ucrSaveResultInto.SetRCode(clsDoFillingFunction, bReset)
-        If bReset Then
-
-        End If
         AddTargetMonthsVar()
     End Sub
 
