@@ -152,6 +152,15 @@ Public Class dlgScript
         ucrBase.bAddScriptToScriptWindowOnClickOk = False
         ucrBase.bMakeVisibleScriptWindow = False
 
+        ucrReceiverRank.SetParameter(New RParameter("x", 0))
+        ucrReceiverRank.Selector = ucrSelectorForRank
+        ucrReceiverRank.SetMeAsReceiver()
+        ucrReceiverRank.bUseFilteredData = False
+        ucrReceiverRank.SetParameterIsRFunction()
+
+        ucrSelectorForRank.SetItemType("column_selection")
+        ucrReceiverRank.strSelectorHeading = "Column selections"
+
     End Sub
 
     'todo. this function should eventually be removed once we have a control that displays packages
@@ -387,6 +396,51 @@ Public Class dlgScript
         End If
 
         PreviewScript(strScript)
+    End Sub
+
+    Private Sub ucrReceiverRank_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlValueChanged, ucrSelectorForRank.ControlValueChanged
+        Dim strScript As String = ""
+        Dim strScriptOperator As String = ""
+
+        Dim clsGetDataFrameFunction As New RFunction
+        Dim clsPipeOperator As New ROperator
+        Dim clsEverythingFunction As New RFunction
+        Dim clsCrossFunction As New RFunction
+        Dim clsMutateFunction As New RFunction
+
+        If Not ucrReceiverRank.IsEmpty Then
+            Dim strAssignedScript As String = ""
+
+            clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+            clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRank.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+            clsGetDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverRank.GetVariableNames, iPosition:=1)
+            clsGetDataFrameFunction.SetAssignTo(ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            clsGetDataFrameFunction.ToScript(strScript:=strAssignedScript)
+
+            clsEverythingFunction.SetRCommand("everything")
+            clsEverythingFunction.AddParameter("", ".", bIncludeArgumentName:=False, iPosition:=0)
+
+            clsCrossFunction.SetPackageName("dplyr")
+            clsCrossFunction.SetRCommand("across")
+            clsCrossFunction.AddParameter("across", clsRFunctionParameter:=clsEverythingFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+            clsMutateFunction.SetPackageName("dplyr")
+            clsMutateFunction.SetRCommand("mutate")
+            clsMutateFunction.AddParameter("mutate", clsRFunctionParameter:=clsCrossFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+            Dim strAssignedOperarorScript As String = ""
+
+            clsPipeOperator.SetOperation("%>%")
+            clsPipeOperator.AddParameter("left", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+            clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
+            clsPipeOperator.SetAssignTo("cols")
+            strScriptOperator = "# Save data frame """ & Environment.NewLine & clsPipeOperator.ToScript()
+
+        End If
+        Dim combinedScript As String = strScript & Environment.NewLine & strScriptOperator
+
+        PreviewScript(combinedScript)
+
     End Sub
 
     Private Sub ucrInputGetObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboGetOutputObjectType.ControlValueChanged

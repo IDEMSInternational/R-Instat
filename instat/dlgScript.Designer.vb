@@ -95,11 +95,16 @@ Partial Class dlgScript
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.txtScript = New System.Windows.Forms.TextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.tbPageRepeat = New System.Windows.Forms.TabPage()
+        Me.lblSelectColumns = New System.Windows.Forms.Label()
+        Me.ucrReceiverRank = New instat.ucrReceiverSingle()
+        Me.ucrSelectorForRank = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbFeatures.SuspendLayout()
         Me.tbPageSaveData.SuspendLayout()
         Me.tbPageGetData.SuspendLayout()
         Me.tbPageCommand.SuspendLayout()
         Me.tbPageExamples.SuspendLayout()
+        Me.tbPageRepeat.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbFeatures
@@ -108,6 +113,7 @@ Partial Class dlgScript
         Me.tbFeatures.Controls.Add(Me.tbPageGetData)
         Me.tbFeatures.Controls.Add(Me.tbPageCommand)
         Me.tbFeatures.Controls.Add(Me.tbPageExamples)
+        Me.tbFeatures.Controls.Add(Me.tbPageRepeat)
         Me.tbFeatures.Location = New System.Drawing.Point(8, 7)
         Me.tbFeatures.Name = "tbFeatures"
         Me.tbFeatures.SelectedIndex = 0
@@ -987,6 +993,55 @@ Partial Class dlgScript
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 16
         '
+        'tbPageRepeat
+        '
+        Me.tbPageRepeat.Controls.Add(Me.lblSelectColumns)
+        Me.tbPageRepeat.Controls.Add(Me.ucrReceiverRank)
+        Me.tbPageRepeat.Controls.Add(Me.ucrSelectorForRank)
+        Me.tbPageRepeat.Location = New System.Drawing.Point(4, 22)
+        Me.tbPageRepeat.Name = "tbPageRepeat"
+        Me.tbPageRepeat.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbPageRepeat.Size = New System.Drawing.Size(438, 278)
+        Me.tbPageRepeat.TabIndex = 5
+        Me.tbPageRepeat.Text = "Repeat"
+        Me.tbPageRepeat.UseVisualStyleBackColor = True
+        '
+        'lblSelectColumns
+        '
+        Me.lblSelectColumns.AutoSize = True
+        Me.lblSelectColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelectColumns.Location = New System.Drawing.Point(248, 32)
+        Me.lblSelectColumns.Name = "lblSelectColumns"
+        Me.lblSelectColumns.Size = New System.Drawing.Size(40, 13)
+        Me.lblSelectColumns.TabIndex = 10
+        Me.lblSelectColumns.Tag = ""
+        Me.lblSelectColumns.Text = "Select:"
+        '
+        'ucrReceiverRank
+        '
+        Me.ucrReceiverRank.AutoSize = True
+        Me.ucrReceiverRank.frmParent = Me
+        Me.ucrReceiverRank.Location = New System.Drawing.Point(246, 48)
+        Me.ucrReceiverRank.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverRank.Name = "ucrReceiverRank"
+        Me.ucrReceiverRank.Selector = Nothing
+        Me.ucrReceiverRank.Size = New System.Drawing.Size(145, 20)
+        Me.ucrReceiverRank.strNcFilePath = ""
+        Me.ucrReceiverRank.TabIndex = 11
+        Me.ucrReceiverRank.ucrSelector = Nothing
+        '
+        'ucrSelectorForRank
+        '
+        Me.ucrSelectorForRank.AutoSize = True
+        Me.ucrSelectorForRank.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForRank.bShowHiddenColumns = False
+        Me.ucrSelectorForRank.bUseCurrentFilter = True
+        Me.ucrSelectorForRank.Location = New System.Drawing.Point(12, 16)
+        Me.ucrSelectorForRank.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForRank.Name = "ucrSelectorForRank"
+        Me.ucrSelectorForRank.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForRank.TabIndex = 9
+        '
         'dlgScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1012,6 +1067,8 @@ Partial Class dlgScript
         Me.tbPageCommand.PerformLayout()
         Me.tbPageExamples.ResumeLayout(False)
         Me.tbPageExamples.PerformLayout()
+        Me.tbPageRepeat.ResumeLayout(False)
+        Me.tbPageRepeat.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1090,4 +1147,8 @@ Partial Class dlgScript
     Friend WithEvents ucrInputDataframeColumn As ucrInputTextBox
     Friend WithEvents ucrInputSaveColumn As ucrInputTextBox
     Friend WithEvents rdoVariable As RadioButton
+    Friend WithEvents tbPageRepeat As TabPage
+    Friend WithEvents lblSelectColumns As Label
+    Friend WithEvents ucrReceiverRank As ucrReceiverSingle
+    Friend WithEvents ucrSelectorForRank As ucrSelectorByDataFrameAddRemove
 End Class
