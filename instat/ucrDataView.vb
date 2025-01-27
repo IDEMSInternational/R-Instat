@@ -466,6 +466,10 @@ Public Class ucrDataView
         End If
     End Sub
 
+    Public Function IsColumnSelectionApplied() As Boolean
+        Return GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
+    End Function
+
     Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
         Return _grid.GetSelectedColumns()
     End Function
