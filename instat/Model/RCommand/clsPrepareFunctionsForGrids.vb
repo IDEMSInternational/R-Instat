@@ -184,7 +184,7 @@ Public Class clsPrepareFunctionsForGrids
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
         clsGetDataFrame.SetAssignTo(_strDataFrame)
         strTemp = clsViewDataFrame.ToScript(strScript)
-        _RLink.RunScript(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
+        _RLink.RunScript(strScript & strTemp, strComment:="Toolbar Option: View R Data Frame", bSeparateThread:=False)
     End Sub
     ''' <summary>
     ''' insert new rows
