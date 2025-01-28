@@ -326,6 +326,8 @@ Public Class frmMain
         mnuDataViewWindow.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
+        mnuViewSwapDataAndScript.Enabled = True
+        mnuViewSwapDataAndMetadata.Enabled = True
         UpdateSwapDataAndScript()
         UpdateSwapDataAndMetadata
         UpdateLayout()
