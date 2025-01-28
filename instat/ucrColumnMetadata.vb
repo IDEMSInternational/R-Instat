@@ -473,12 +473,6 @@ Public Class ucrColumnMetadata
         dlgCopyDataFrame.ShowDialog()
     End Sub
 
-    Private Sub viewSheet_Click(sender As Object, e As EventArgs) Handles viewSheet.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
-        EndWait()
-    End Sub
-
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
         dlgReorderDataFrame.ShowDialog()
     End Sub
