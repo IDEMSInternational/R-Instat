@@ -324,7 +324,7 @@ Public Class frmMain
         mnuSwapDataLogScript.Checked = False
         mnuSwapDataMetadata.Checked = False
         mnuSwapDataAndDataframeMetadata.Checked = False
-        mnuViewSwapDataAndDataframeMetadata.Checked = False
+        '  mnuViewSwapDataAndDataframeMetadata.Checked = False
         mnuDataViewWindow.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
@@ -653,29 +653,29 @@ Public Class frmMain
 
     Private Sub UpdateSwapDataAndMetadata()
         If mnuViewSwapDataAndMetadata.Checked Then
+            ClearAllPanels()
             splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
             splMetadata.Panel1.Controls.Add(ucrDataViewer)
             mnuViewColumnMetadata.Text = "Data View"
             mnuViewDataView.Text = "Column Metadata"
-            mnuSwapDataMetadata.Checked = True
-
+            UpdateMenuStates(mnuViewSwapDataAndMetadata)
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel1.Controls.Add(ucrColumnMeta)
             mnuViewColumnMetadata.Text = "Column Metadata"
             mnuViewDataView.Text = "Data View"
             mnuSwapDataMetadata.Checked = False
-
         End If
     End Sub
 
     Private Sub UpdateSwapDataFrameAndMetadata()
         If mnuViewSwapDataAndDataframeMetadata.Checked Then
+            ClearAllPanels()
             splDataOutput.Panel1.Controls.Add(ucrDataFrameMeta)
             splMetadata.Panel1.Controls.Add(ucrDataViewer)
             mnuViewColumnMetadata.Text = "Data View"
             mnuViewDataView.Text = "Dataframe Metadata"
-            mnuSwapDataAndDataframeMetadata.Checked = True
+            UpdateMenuStates(mnuViewSwapDataAndDataframeMetadata)
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel1.Controls.Add(ucrDataFrameMeta)
@@ -687,11 +687,12 @@ Public Class frmMain
 
     Public Sub UpdateSwapDataAndScript()
         If mnuViewSwapDataAndScript.Checked Then
+            ClearAllPanels()
             splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
             splExtraWindows.Panel2.Controls.Add(ucrDataViewer)
             mnuViewLogScript.Text = "Data View"
             mnuViewDataView.Text = "Log/Script"
-            mnuSwapDataLogScript.Checked = True
+            UpdateMenuStates(mnuViewSwapDataAndScript)
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splExtraWindows.Panel2.Controls.Add(ucrScriptWindow)
@@ -700,6 +701,21 @@ Public Class frmMain
             mnuSwapDataLogScript.Checked = False
         End If
     End Sub
+
+    ' Helper method to clear all panels
+    Private Sub ClearAllPanels()
+        splDataOutput.Panel1.Controls.Clear()
+        splMetadata.Panel1.Controls.Clear()
+        splExtraWindows.Panel2.Controls.Clear()
+    End Sub
+
+    ' Helper method to update menu item states
+    Private Sub UpdateMenuStates(selectedMenuItem As ToolStripMenuItem)
+        mnuViewSwapDataAndMetadata.Checked = (selectedMenuItem Is mnuViewSwapDataAndMetadata)
+        mnuViewSwapDataAndDataframeMetadata.Checked = (selectedMenuItem Is mnuViewSwapDataAndDataframeMetadata)
+        mnuViewSwapDataAndScript.Checked = (selectedMenuItem Is mnuViewSwapDataAndScript)
+    End Sub
+
 
     Public Sub SaveInstatOptions(strFilePath As String)
         Dim serializer As New BinaryFormatter()
