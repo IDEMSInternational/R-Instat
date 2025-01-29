@@ -407,6 +407,13 @@ Public Class dlgScript
         Dim clsEverythingFunction As New RFunction
         Dim clsCrossFunction As New RFunction
         Dim clsMutateFunction As New RFunction
+        Dim clsMapFunction As New RFunction
+        Dim clsNamesFunction As New RFunction
+        Dim clsRescaleFunction As New RFunction
+        Dim clsBindColsFunction As New RFunction
+        Dim clsPipeOperator2 As New ROperator
+        Dim clsOpeningOperator As New ROperator
+        Dim clsAddColumnsFunction As New RFunction
 
         If Not ucrReceiverRank.IsEmpty Then
             Dim strAssignedScript As String = ""
@@ -428,19 +435,61 @@ Public Class dlgScript
             clsMutateFunction.SetRCommand("mutate")
             clsMutateFunction.AddParameter("mutate", clsRFunctionParameter:=clsCrossFunction, bIncludeArgumentName:=False, iPosition:=0)
 
-            Dim strAssignedOperarorScript As String = ""
 
+            Dim strAssignedOperarorScript As String = ""
             clsPipeOperator.SetOperation("%>%")
             clsPipeOperator.AddParameter("left", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
             clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
             clsPipeOperator.SetAssignTo("cols")
-            strScriptOperator = "# Save data frame """ & Environment.NewLine & clsPipeOperator.ToScript()
+
+            clsPipeOperator.ToScript(strScript:=strAssignedOperarorScript)
+
+            Dim strAssignedMapScript As String = ""
+
+            clsNamesFunction.SetRCommand("names")
+            clsNamesFunction.AddParameter("name", clsROperatorParameter:=clsPipeOperator, bIncludeArgumentName:=False, iPosition:=0)
+
+            clsOpeningOperator.SetOperation("[[.x]]")
+            clsOpeningOperator.AddParameter("left", ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
+            clsOpeningOperator.bForceIncludeOperation = True
+            clsOpeningOperator.bBrackets = False
+
+            clsRescaleFunction.SetPackageName("~scales")
+            clsRescaleFunction.SetRCommand("rescale")
+            clsRescaleFunction.AddParameter("scales", clsROperatorParameter:=clsOpeningOperator, bIncludeArgumentName:=False, iPosition:=0)
+            clsRescaleFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+
+            clsMapFunction.SetPackageName("purrr")
+            clsMapFunction.SetRCommand("map")
+            clsMapFunction.AddParameter(".x", clsRFunctionParameter:=clsNamesFunction, iPosition:=0)
+            clsMapFunction.AddParameter(".f", clsRFunctionParameter:=clsRescaleFunction, iPosition:=1)
+
+            clsBindColsFunction.SetPackageName("dplyr")
+            clsBindColsFunction.SetRCommand("bind_cols")
+            clsBindColsFunction.AddParameter("", ".", bIncludeArgumentName:=False, iPosition:=0)
+
+            clsPipeOperator2.SetOperation("%>%")
+            clsPipeOperator2.AddParameter("left", clsRFunctionParameter:=clsMapFunction, iPosition:=0)
+            clsPipeOperator2.AddParameter("right", clsRFunctionParameter:=clsBindColsFunction, iPosition:=1)
+            clsPipeOperator2.SetAssignTo("calc")
+
+            clsPipeOperator2.ToScript(strScript:=strAssignedMapScript)
+
+
+            Dim strAssignedAddColsScripts As String = ""
+
+            clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+            clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+            clsAddColumnsFunction.AddParameter("col_name", Chr(34) & "calc" & Chr(34), iPosition:=1)
+            clsAddColumnsFunction.AddParameter("col_data", clsROperatorParameter:=clsPipeOperator2, iPosition:=2)
+            clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=3)
+            clsAddColumnsFunction.ToScript(strScript:=strAssignedAddColsScripts)
+
+            strScript = Environment.NewLine & strAssignedMapScript & clsAddColumnsFunction.ToScript()
 
         End If
-        Dim combinedScript As String = strScript & Environment.NewLine & strScriptOperator
 
-        PreviewScript(combinedScript)
-
+        PreviewScript(strScript)
     End Sub
 
     Private Sub ucrInputGetObjectType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboGetOutputObjectType.ControlValueChanged
