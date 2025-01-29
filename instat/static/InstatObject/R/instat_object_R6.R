@@ -280,7 +280,7 @@ DataBook$set("public", "clone_instat_calculation", function(curr_instat_calculat
   
   new_manips <- lapply(curr_instat_calculation$manipulations, function(x) self$clone_instat_calculation(x))
   new_subs <- lapply(curr_instat_calculation$sub_calculations, function(x) self$clone_instat_calculation(x))
-  new_instat_calculation <- instat_calculation$new(function_exp = curr_instat_calculation$function_exp, 
+  new_instat_calculation <- instatCalculations::instat_calculation$new(function_exp = curr_instat_calculation$function_exp, 
                                                    type = curr_instat_calculation$type,
                                                    name = curr_instat_calculation$name, 
                                                    result_name = curr_instat_calculation$result_name, 

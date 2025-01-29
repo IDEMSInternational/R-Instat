@@ -2038,7 +2038,7 @@ DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace
   }
   else {
     if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
-    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm, is_no_filter = is_no_filter, and_or = and_or, inner_not = inner_not, outer_not = outer_not))
+    filter_calc = instatCalculations::calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm, is_no_filter = is_no_filter, and_or = and_or, inner_not = inner_not, outer_not = outer_not))
     private$filters[[filter_name]] <- filter_calc
     self$append_to_changes(list(Added_filter, filter_name))
     if(set_as_current) {
@@ -2219,7 +2219,7 @@ DataSheet$set("public", "get_filter_as_instat_calculation", function(filter_name
     calc_from[[length(calc_from) + 1]] <- condition[["column"]]
   }
   names(calc_from) <- rep(self$get_metadata(data_name_label), length(calc_from))
-  calc <- instat_calculation$new(type="filter", function_exp = filter_string, calculated_from = calc_from)
+  calc <- instatCalculations::instat_calculation$new(type="filter", function_exp = filter_string, calculated_from = calc_from)
   return(calc)
 }
 )

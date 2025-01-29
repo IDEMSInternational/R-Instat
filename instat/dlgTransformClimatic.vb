@@ -176,10 +176,10 @@ Public Class dlgTransformClimatic
         ttRdoGdd.SetToolTip(rdoGrowingDegreeDays, "Growing (or Cooling) Degree Days. If the baseline = 15 degrees, then GDD = (tmean - 15), or 0 if tmean is less than 15")
         ttRdoMgdd.SetToolTip(rdoModifiedGDD, "Modified GDD is just GDD if tmean is less than the upper limit. If baseline = 15 degrees and limit = 30 degrees, then Modified GDD = 30 - 15 if tmean is more than 30 degrees.")
 
-        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "sub1", "instat_calculation$new", False) ' clsRRainday
-        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "sub1", "instat_calculation$new")
-        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoSpell, "sub1", "instat_calculation$new")
-        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "sub1", "instat_calculation$new", False)
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoMoving, "sub1", "instatCalculations::instat_calculation$new", False) ' clsRRainday
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoCount, "sub1", "instatCalculations::instat_calculation$new")
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoSpell, "sub1", "instatCalculations::instat_calculation$new")
+        'ucrPnlTransform.AddParameterValueFunctionNamesCondition(rdoWaterBalance, "sub1", "instatCalculations::instat_calculation$new", False)
 
         ' Setting receivers
         ucrReceiverStation.Selector = ucrSelectorTransform
@@ -502,7 +502,7 @@ Public Class dlgTransformClimatic
         clsDoyFilterCalcFromList.Clear()
 
         ' Count and Spells: Rainday
-        clsRRainday.SetRCommand("instat_calculation$new")
+        clsRRainday.SetRCommand("instatCalculations::instat_calculation$new")
         clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsRRainday.AddParameter("function_exp", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=1)
         clsRRainday.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
@@ -578,11 +578,11 @@ Public Class dlgTransformClimatic
         clsRasterFuction.AddParameter("na.rm", "TRUE", iPosition:=5)
         clsRasterFuction.bToScriptAsRString = True
 
-        clsGroupByStationCalc.SetRCommand("instat_calculation$new")
+        clsGroupByStationCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByStationCalc.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByStationCalc.SetAssignTo("grouping_by_station")
 
-        clsGroupByStationYearCalc.SetRCommand("instat_calculation$new")
+        clsGroupByStationYearCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByStationYearCalc.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByStationYearCalc.SetAssignTo("grouping_by_station_year")
 
@@ -620,7 +620,7 @@ Public Class dlgTransformClimatic
         clsEndSeasonWBConditionOperator.AddParameter("0", strWB, iPosition:=0)
         clsEndSeasonWBConditionOperator.AddParameter("1", "0.5", iPosition:=1)
 
-        clsEndSeasonWBCalc.SetRCommand("instat_calculation$new")
+        clsEndSeasonWBCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsEndSeasonWBCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonWBCalc.AddParameter("function_exp", clsRFunctionParameter:=clsRoundFunction, iPosition:=1)
         clsEndSeasonWBCalc.AddParameter("save", "2", iPosition:=2)
@@ -665,14 +665,14 @@ Public Class dlgTransformClimatic
         clsIfElseRainMaxFunction.AddParameter("yes", 100, iPosition:=0)
 
         ' Water Balance min
-        clsEndSeasonWBMinCalc.SetRCommand("instat_calculation$new")
+        clsEndSeasonWBMinCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsEndSeasonWBMinCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonWBMinCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMinFunction, iPosition:=1)
         clsEndSeasonWBMinCalc.AddParameter("result_name", Chr(34) & strWBMin & Chr(34), iPosition:=2)
         clsEndSeasonWBMinCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsEndSeasonWBMinCalcSubCalcsList, iPosition:=3)
         clsEndSeasonWBMinCalc.SetAssignTo(strWBMin)
 
-        clsEndSeasonRainMinCalc.SetRCommand("instat_calculation$new")
+        clsEndSeasonRainMinCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsEndSeasonRainMinCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonRainMinCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseRainMinFunction, iPosition:=1)
         clsEndSeasonRainMinCalc.AddParameter("result_name", Chr(34) & strRainMin & Chr(34), iPosition:=2)
@@ -739,14 +739,14 @@ Public Class dlgTransformClimatic
         clsWBMinEvapOperator.AddParameter("value", "5", iPosition:=1)
 
         ' Water Balance max
-        clsEndSeasonWBMaxCalc.SetRCommand("instat_calculation$new")
+        clsEndSeasonWBMaxCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsEndSeasonWBMaxCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonWBMaxCalc.AddParameter("function_exp", clsRFunctionParameter:=clsReduceWBMaxFunction, iPosition:=1)
         clsEndSeasonWBMaxCalc.AddParameter("result_name", Chr(34) & strWBMax & Chr(34), iPosition:=2)
         clsEndSeasonWBMaxCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsEndSeasonWBMaxCalcSubCalcsList, iPosition:=3)
         clsEndSeasonWBMaxCalc.SetAssignTo(strWBMax)
 
-        clsEndSeasonRainMaxCalc.SetRCommand("instat_calculation$new")
+        clsEndSeasonRainMaxCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsEndSeasonRainMaxCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonRainMaxCalc.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseRainMaxFunction, iPosition:=1)
         clsEndSeasonRainMaxCalc.AddParameter("result_name", Chr(34) & strRainMax & Chr(34), iPosition:=2)
@@ -879,12 +879,12 @@ Public Class dlgTransformClimatic
         clsDummyFunction.AddParameter("checked", "rollapply", iPosition:=2)
 
         ' Group options 
-        clsGroupByYear.SetRCommand("instat_calculation$new")
+        clsGroupByYear.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByYear.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByYear.AddParameter("result_name", Chr(34) & "group_by_year" & Chr(34), iPosition:=2)
         clsGroupByYear.SetAssignTo("group_by_year")
 
-        clsGroupByStation.SetRCommand("instat_calculation$new")
+        clsGroupByStation.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByStation.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByStation.SetAssignTo("group_by_station")
 
@@ -894,7 +894,7 @@ Public Class dlgTransformClimatic
 
         clsTransformManipulationsFunc.SetRCommand("list")
 
-        clsRTransform.SetRCommand("instat_calculation$new")
+        clsRTransform.SetRCommand("instatCalculations::instat_calculation$new")
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsRTransform.AddParameter("result_name", Chr(34) & "count" & Chr(34), iPosition:=2)
         clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)

@@ -113,7 +113,7 @@ Public Class dlgCorruptionDefineCRI
         ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsDefineFunction)
         ucrBase.clsRsyntax.AddParameter("display", "FALSE")
 
-        clsDefineFunction.SetRCommand("instat_calculation$new")
+        clsDefineFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsDefineFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsDefineFunction.AddParameter("save", 2)
         clsDefineFunction.AddParameter("result_name", Chr(34) & ucrSaveCRI.GetText() & Chr(34))
