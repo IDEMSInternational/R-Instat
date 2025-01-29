@@ -236,7 +236,7 @@ Public Class clsDataFramePage
 
         Dim strDisable As String = If(bDisable, "TRUE", "FALSE")
         clsEnableDisableUndoRFunction.AddParameter("disable_undo", strDisable)
-        _clsRLink.RunScript(clsEnableDisableUndoRFunction.ToScript)
+        _clsRLink.RunScript(clsEnableDisableUndoRFunction.ToScript, bSkipScriptAndOutput:=True)
 
     End Sub
 
