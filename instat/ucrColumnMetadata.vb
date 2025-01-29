@@ -156,8 +156,8 @@ Public Class ucrColumnMetadata
         'displaying more than a 1000 rows takes a lot of time
         'in the long term, this window should have 'paging' feature similar to the data viewer to display 11000 rows only.
         If _clsDataBook IsNot Nothing And Visible Then
-            _grid.RemoveOldWorksheets()
             AddAndUpdateWorksheets()
+            _grid.RemoveOldWorksheets()
             _grid.bVisible = _clsDataBook.DataFrames.Count > 0
         End If
     End Sub
