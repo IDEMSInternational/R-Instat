@@ -444,48 +444,53 @@ Public Class dlgScript
 
             clsPipeOperator.ToScript(strScript:=strAssignedOperarorScript)
 
-            Dim strAssignedMapScript As String = ""
+            'Dim strAssignedMapScript As String = ""
 
-            clsNamesFunction.SetRCommand("names")
-            clsNamesFunction.AddParameter("name", clsROperatorParameter:=clsPipeOperator, bIncludeArgumentName:=False, iPosition:=0)
+            'clsNamesFunction.SetRCommand("names")
+            'clsNamesFunction.AddParameter("name", clsROperatorParameter:=clsPipeOperator, bIncludeArgumentName:=False, iPosition:=0)
 
-            clsOpeningOperator.SetOperation("[[.x]]")
-            clsOpeningOperator.AddParameter("left", ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
-            clsOpeningOperator.bForceIncludeOperation = True
-            clsOpeningOperator.bBrackets = False
+            'clsOpeningOperator.SetOperation("[[.x]]")
+            'clsOpeningOperator.AddParameter("left", ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
+            'clsOpeningOperator.bForceIncludeOperation = True
+            'clsOpeningOperator.bBrackets = False
 
-            clsRescaleFunction.SetPackageName("~scales")
-            clsRescaleFunction.SetRCommand("rescale")
-            clsRescaleFunction.AddParameter("scales", clsROperatorParameter:=clsOpeningOperator, bIncludeArgumentName:=False, iPosition:=0)
-            clsRescaleFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+            'clsRescaleFunction.SetPackageName("~scales")
+            'clsRescaleFunction.SetRCommand("rescale")
+            'clsRescaleFunction.AddParameter("scales", clsROperatorParameter:=clsOpeningOperator, bIncludeArgumentName:=False, iPosition:=0)
+            'clsRescaleFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
 
-            clsMapFunction.SetPackageName("purrr")
-            clsMapFunction.SetRCommand("map")
-            clsMapFunction.AddParameter(".x", clsRFunctionParameter:=clsNamesFunction, iPosition:=0)
-            clsMapFunction.AddParameter(".f", clsRFunctionParameter:=clsRescaleFunction, iPosition:=1)
+            'clsMapFunction.SetPackageName("purrr")
+            'clsMapFunction.SetRCommand("map")
+            'clsMapFunction.AddParameter(".x", clsRFunctionParameter:=clsNamesFunction, iPosition:=0)
+            'clsMapFunction.AddParameter(".f", clsRFunctionParameter:=clsRescaleFunction, iPosition:=1)
 
-            clsBindColsFunction.SetPackageName("dplyr")
-            clsBindColsFunction.SetRCommand("bind_cols")
-            clsBindColsFunction.AddParameter("", ".", bIncludeArgumentName:=False, iPosition:=0)
+            'clsBindColsFunction.SetPackageName("dplyr")
+            'clsBindColsFunction.SetRCommand("bind_cols")
+            'clsBindColsFunction.AddParameter("", ".", bIncludeArgumentName:=False, iPosition:=0)
 
-            clsPipeOperator2.SetOperation("%>%")
-            clsPipeOperator2.AddParameter("left", clsRFunctionParameter:=clsMapFunction, iPosition:=0)
-            clsPipeOperator2.AddParameter("right", clsRFunctionParameter:=clsBindColsFunction, iPosition:=1)
-            clsPipeOperator2.SetAssignTo("calc")
+            'clsPipeOperator2.SetOperation("%>%")
+            'clsPipeOperator2.AddParameter("left", clsRFunctionParameter:=clsMapFunction, iPosition:=0)
+            'clsPipeOperator2.AddParameter("right", clsRFunctionParameter:=clsBindColsFunction, iPosition:=1)
+            'clsPipeOperator2.SetAssignTo("calc")
 
-            clsPipeOperator2.ToScript(strScript:=strAssignedMapScript)
+            'clsPipeOperator2.ToScript(strScript:=strAssignedMapScript)
 
+            'strScript = Environment.NewLine & strAssignedOperarorScript & clsPipeOperator2.ToScript()
 
-            Dim strAssignedAddColsScripts As String = ""
+            'Dim strAssignedAddColsScripts As String = ""
 
-            clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-            clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-            clsAddColumnsFunction.AddParameter("col_name", Chr(34) & "calc" & Chr(34), iPosition:=1)
-            clsAddColumnsFunction.AddParameter("col_data", clsROperatorParameter:=clsPipeOperator2, iPosition:=2)
-            clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=3)
-            clsAddColumnsFunction.ToScript(strScript:=strAssignedAddColsScripts)
+            'clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+            'clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRank.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+            'clsAddColumnsFunction.AddParameter("col_name", Chr(34) & "calc" & Chr(34), iPosition:=1)
+            'clsAddColumnsFunction.AddParameter("col_data", clsROperatorParameter:=clsPipeOperator2, iPosition:=2)
+            'clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=3)
+            'clsAddColumnsFunction.ToScript(strScript:=strAssignedAddColsScripts)
 
-            strScript = Environment.NewLine & strAssignedMapScript & clsAddColumnsFunction.ToScript()
+            'strScript = Environment.NewLine & strAssignedMapScript & clsAddColumnsFunction.ToScript()
+            Dim strRdScript As String = strAssignedOperarorScript
+
+            ' Combine scripts if applicable
+            strScript &= strRdScript
 
         End If
 
