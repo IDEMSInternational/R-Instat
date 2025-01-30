@@ -96,6 +96,8 @@ Public Class dlgScript
         ucrReceiverGetColumns.Selector = ucrSelectorGetObject
         ucrReceiverGetColumns.SetLinkedDisplayControl(lblGetColumn)
 
+        ucrReceiverColumns.Selector = ucrSelectorForRank
+
         ucrCboGetOutputObjectType.SetItems(dctOutputObjectTypes, bSetConditions:=False)
         ucrCboGetOutputObjectType.SetDropDownStyleAsNonEditable()
         ucrCboGetOutputObjectType.SetLinkedDisplayControl(lblGetObjectType)
