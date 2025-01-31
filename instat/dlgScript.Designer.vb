@@ -1021,10 +1021,10 @@ Partial Class dlgScript
         Me.lblExpression.Location = New System.Drawing.Point(12, 213)
         Me.lblExpression.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblExpression.Name = "lblExpression"
-        Me.lblExpression.Size = New System.Drawing.Size(54, 13)
+        Me.lblExpression.Size = New System.Drawing.Size(58, 13)
         Me.lblExpression.TabIndex = 122
         Me.lblExpression.Tag = "Expression"
-        Me.lblExpression.Text = "Selection:"
+        Me.lblExpression.Text = "Statement:"
         '
         'ucrReceiverForCalculation
         '

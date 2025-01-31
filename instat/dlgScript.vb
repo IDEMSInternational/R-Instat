@@ -947,31 +947,36 @@ Public Class dlgScript
 
     Private Function ConstructScript(strSelectedScript As String, strVariable As String, strDataFrame As String) As String
 
-        Dim match As System.Text.RegularExpressions.Match = System.Text.RegularExpressions.Regex.Match(strSelectedScript, "<-\s*(.*)")
+        ' Extract the LHS variable
+        Dim match As System.Text.RegularExpressions.Match = System.Text.RegularExpressions.Regex.Match(strSelectedScript, "(\S+)\s*<-\s*(.*)")
+        Dim lhsVariable As String = If(match.Success, match.Groups(1).Value, "calc") ' Default to "calc" if no match
+        Dim rhs As String = If(match.Success, match.Groups(2).Value, strSelectedScript)
 
-        Dim rhs As String = If(match.Success, match.Groups(1).Value, strSelectedScript)
+        ' Modify RHS with the selected variable
         Dim modifiedRhs As String = If(Not String.IsNullOrEmpty(strVariable), rhs.Replace(strVariable, $"{strDataFrame}[[.x]]"), rhs)
+
         ' Construct the main script using string interpolation
         Dim strConstructedScript As String = $"
-        calc <- purrr::map(.x = {"names(cols)"},
-                           .f = ~{modifiedRhs}) %>%
-               dplyr::bind_cols(.)"
-
+    {lhsVariable} <- purrr::map(.x = {"names(" & lhsVariable & ")"},
+                               .f = ~{modifiedRhs}) %>%
+                   dplyr::bind_cols(.)"
         Dim strAssignedScript As String = ""
 
+        ' Get the selected data frame columns
         Dim clsGetSelectedDataFrameFunction As New RFunction
         clsGetSelectedDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
         clsGetSelectedDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorForRank.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsGetSelectedDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverRank.GetVariableNames, iPosition:=1)
-        clsGetSelectedDataFrameFunction.SetAssignTo("cols")
+        clsGetSelectedDataFrameFunction.SetAssignTo(lhsVariable)
         clsGetSelectedDataFrameFunction.ToScript(strScript:=strAssignedScript)
+
         ' Prepend the dataframe selection script
         strConstructedScript = strAssignedScript & Environment.NewLine & strConstructedScript.Trim()
 
         Return strConstructedScript
     End Function
 
-    Private Sub ucrReceiverColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumns.ControlValueChanged
+    Private Sub ucrReceiverForCalculation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForCalculation.ControlValueChanged
         PreviewScript(ConstructScript(ucrReceiverForCalculation.GetVariableNames(False), ucrReceiverColumns.GetVariableNames(False), ucrSelectorForRank.strCurrentDataFrame))
     End Sub
 
@@ -982,4 +987,5 @@ Public Class dlgScript
     Private Sub ucrReceiverRank_Enter(sender As Object, e As EventArgs) Handles ucrReceiverRank.Enter
         ucrSelectorForRank.SetItemType("column_selection")
     End Sub
+
 End Class
