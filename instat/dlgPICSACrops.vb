@@ -169,16 +169,16 @@ Public Class dlgPICSACrops
         'ucrNudWaterSeqStep.SetParameter(New RParameter("step", clsSeqRainfall))
         'ucrNudWaterSeqTo.SetParameter(New RParameter("to", clsSeqRainfall))
 
+        ucrChkDataCrops.SetText("Return Crops Data")
+        ucrChkDataCrops.SetParameter(New RParameter("return_crops_table", 11), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkDataCrops.SetRDefault("TRUE")
+
         ucrChkDataProp.SetText("Calculate Proportions")
-        ucrChkDataProp.SetParameter(New RParameter("definition_props", 8), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkDataProp.SetParameter(New RParameter("definition_props", 12), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkDataProp.SetRDefault("TRUE")
 
-        ucrChkPrintDataProp.SetText("Print Proportions Table(s)")
-        ucrChkPrintDataProp.SetParameter(New RParameter("print_table", 9), bNewChangeParameterValue:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkPrintDataProp.SetRDefault("TRUE")
-
         'Linking of controls
-        ucrChkDataProp.AddToLinkedControls(ucrChkPrintDataProp, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkDataProp.AddToLinkedControls(ucrChkDataCrops, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -206,8 +206,8 @@ Public Class dlgPICSACrops
         ucrInputPlantingDates.SetName("160")
         ucrInputCropLengths.SetName("120")
         ucrInputWaterAmounts.SetName("600")
-        clsCropsFunction.AddParameter("definition_props", "TRUE", iPosition:=11)
-        clsCropsFunction.AddParameter("print_table", "TRUE", iPosition:=12)
+        clsCropsFunction.AddParameter("return_crops_table", "TRUE", iPosition:=11)
+        clsCropsFunction.AddParameter("definition_props", "TRUE", iPosition:=12)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCropsFunction)
         ucrBase.clsRsyntax.iCallType = 2
         TestOkEnabled()
@@ -232,7 +232,7 @@ Public Class dlgPICSACrops
 
         ' Disabled as list validation not working correctly with reading/writing controls
         ucrChkDataProp.SetRCode(clsCropsFunction, bReset)
-        ucrChkPrintDataProp.SetRCode(clsCropsFunction, bReset)
+        ucrChkDataCrops.SetRCode(clsCropsFunction, bReset)
         If bReset Then
             ucrPnlStartCheck.SetRCode(clsDummyFunction, bReset)
         End If
@@ -246,7 +246,7 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverStart.IsEmpty AndAlso Not ucrReceiverDay.IsEmpty AndAlso Not ucrReceiverEnd.IsEmpty AndAlso Not ucrInputPlantingDates.IsEmpty AndAlso Not ucrInputCropLengths.IsEmpty AndAlso Not ucrInputWaterAmounts.IsEmpty Then
+        If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverStart.IsEmpty AndAlso Not ucrReceiverDay.IsEmpty AndAlso Not ucrReceiverEnd.IsEmpty AndAlso Not ucrInputPlantingDates.IsEmpty AndAlso Not ucrInputCropLengths.IsEmpty AndAlso Not ucrInputWaterAmounts.IsEmpty AndAlso (ucrChkDataCrops.Checked OrElse ucrChkDataProp.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
