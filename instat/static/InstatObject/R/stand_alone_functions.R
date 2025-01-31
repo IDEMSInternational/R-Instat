@@ -3430,3 +3430,20 @@ time_operation <- function(expr) {
   timing <- system.time(expr)
   print(timing)
 }
+
+set_library_paths <- function(library_path) {
+  # Update the library paths
+  .libPaths(c(library_path, .libPaths()))
+  
+  # Check if there are more than 2 library paths
+  if (length(.libPaths()) > 2) {
+    # Get the current library paths
+    current_paths <- .libPaths()
+    
+    # Select valid indices (1 and 3) only if they exist
+    valid_indices <- c(1, 3)[c(1, 3) <= length(current_paths)]
+    
+    # Set the library paths to the valid ones
+    .libPaths(current_paths[valid_indices])
+  }
+}

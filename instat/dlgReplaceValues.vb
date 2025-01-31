@@ -54,7 +54,7 @@ Public Class dlgReplaceValues
         ucrReceiverReplace.SetParameter(New RParameter("col_names", 1))
         ucrReceiverReplace.Selector = ucrSelectorReplace
         ucrReceiverReplace.SetMeAsReceiver()
-        ucrReceiverReplace.SetSingleTypeStatus(True)
+        ucrReceiverReplace.SetSingleTypeStatus(True, bIsCategoricalNumeric:=True)
         ucrReceiverReplace.SetParameterIsString()
 
         'Old Values
