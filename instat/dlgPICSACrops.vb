@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports System.Text.RegularExpressions
+
 
 Public Class dlgPICSACrops
     Private clsCropsFunction As New RFunction
@@ -23,6 +25,11 @@ Public Class dlgPICSACrops
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private strCurrDataName As String = ""
+    Private lstEndReceivers As New List(Of ucrReceiverSingle)
+    Private lstStartReceivers As New List(Of ucrReceiverSingle)
+    Private isFilling As Boolean = False
+
+    Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
     Private Sub dlgPICSACrops_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -36,6 +43,8 @@ Public Class dlgPICSACrops
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
+        AutoFillReceivers(lstEndReceivers)
+        AutoFillReceivers(lstStartReceivers)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -43,8 +52,22 @@ Public Class dlgPICSACrops
         ' Sub dialog not yet created.
         cmdOptions.Visible = False
 
+        Dim kvpEnd As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("end_rains", {"end_rains", "end_season", "end_rain_filled", "end_season_filled"}.ToList())
+        Dim kvpStart As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("start_rain", {"start_rain"}.ToList())
+
+        lstRecognisedTypes.AddRange({kvpEnd, kvpStart})
+
+        lstEndReceivers.AddRange({ucrReceiverEnd})
+
+        lstStartReceivers.AddRange({ucrReceiverStart})
+
+        ucrSelectorForCrops.SetLabelText("Data Frame (Daily):")
         ucrSelectorForCrops.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForCrops.SetParameterIsString()
+
+        ucrSelectorSummary.SetLabelText("Data Frame (Summary):")
+        ucrSelectorSummary.SetParameter(New RParameter("season_data_name", 8))
+        ucrSelectorSummary.SetParameterIsString()
 
         'Year Receiver
         ucrReceiverYear.Selector = ucrSelectorForCrops
@@ -78,15 +101,15 @@ Public Class dlgPICSACrops
         ucrReceiverStart.SetParameter(New RParameter("start_day", 8))
         ucrReceiverStart.SetParameterIsString()
         ucrReceiverStart.SetDataType("numeric")
-        ucrReceiverStart.Selector = ucrSelectorForCrops
-        ucrReceiverStart.bAttachedToPrimaryDataFrame = False
+        ucrReceiverStart.Selector = ucrSelectorSummary
+        ucrReceiverStart.Tag = "start_rain"
 
         'End Receiver
-        ucrReceiverEnd.Selector = ucrSelectorForCrops
+        ucrReceiverEnd.Selector = ucrSelectorSummary
         ucrReceiverEnd.SetParameter(New RParameter("end_day", 9))
         ucrReceiverEnd.SetParameterIsString()
         ucrReceiverEnd.SetDataType("numeric")
-        ucrReceiverEnd.bAttachedToPrimaryDataFrame = False
+        ucrReceiverEnd.Tag = "end_rains"
 
         ucrPnlStartCheck.AddRadioButton(rdoYes)
         ucrPnlStartCheck.AddRadioButton(rdoNo)
@@ -190,7 +213,9 @@ Public Class dlgPICSACrops
         'Currently this must come before reset to ensure autofilling is done correctly
         'Once autofilling is being triggered correctly this can go after Reset.
         ucrSelectorForCrops.Reset()
+        ucrSelectorSummary.Reset()
         ucrReceiverRainfall.SetMeAsReceiver()
+        ucrReceiverStart.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("check", "both", iPosition:=0)
 
@@ -218,15 +243,16 @@ Public Class dlgPICSACrops
         'TODO This should be done further done.
         ' This ensures the correct data frame is set before attempting to fill the receiver
         'ucrReceiverYear.SetMeAsReceiver()
-        ucrSelectorForCrops.SetDataframe(ucrReceiverYear.GetDataName())
+        'ucrSelectorForCrops.SetDataframe(ucrReceiverYear.GetDataName())
         'Disabled as selector cannot yet auto set when multiple data frame are selected.
-        'ucrSelectorForCrops.SetRCode(clsCropsFunction, bReset)
+        ucrSelectorForCrops.SetRCode(clsCropsFunction, bReset)
+        ucrSelectorSummary.SetRCode(clsCropsFunction, bReset)
         ucrReceiverYear.SetRCode(clsCropsFunction, bReset)
         ucrReceiverStation.SetRCode(clsCropsFunction, bReset)
         ucrReceiverRainfall.SetRCode(clsCropsFunction, bReset)
         ucrReceiverDay.SetRCode(clsCropsFunction, bReset)
         'ucrReceiverStart.SetMeAsReceiver()
-        ucrSelectorForCrops.SetDataframe(ucrReceiverStart.GetDataName())
+        ' ucrSelectorForCrops.SetDataframe(ucrReceiverStart.GetDataName())
         ucrReceiverStart.SetRCode(clsCropsFunction, bReset)
         ucrReceiverEnd.SetRCode(clsCropsFunction, bReset)
 
@@ -258,11 +284,11 @@ Public Class dlgPICSACrops
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSelectorForCrops_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForCrops.ControlValueChanged
+    Private Sub ucrSelectorForCrops_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForCrops.ControlValueChanged, ucrSelectorSummary.ControlValueChanged
         If ucrSelectorForCrops.CurrentReceiver Is Nothing OrElse ucrSelectorForCrops.CurrentReceiver.bAttachedToPrimaryDataFrame Then
             clsCropsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForCrops.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         Else
-            clsCropsFunction.AddParameter("season_data_name", Chr(34) & ucrSelectorForCrops.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=8)
+            clsCropsFunction.AddParameter("season_data_name", Chr(34) & ucrSelectorSummary.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=8)
         End If
     End Sub
 
@@ -371,4 +397,61 @@ Public Class dlgPICSACrops
         End If
     End Sub
 
+    Private Sub AutoFillReceivers(lstReceivers As List(Of ucrReceiverSingle))
+
+        If isFilling OrElse lstReceivers Is Nothing Then
+            Exit Sub
+        End If
+
+        isFilling = True
+
+        ' Change the event handler to the new method
+        'RemoveHandler ucrSelectorClimograph.ControlValueChanged, AddressOf OnControlValueChanged
+
+        Dim lstRecognisedValues As List(Of String)
+        Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorSummary.CurrentReceiver
+        Dim bFound As Boolean = False
+
+        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+            ucrTempReceiver.SetMeAsReceiver()
+            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+
+            If lstRecognisedValues.Count > 0 Then
+                For Each lviTempVariable As ListViewItem In ucrSelectorSummary.lstAvailableVariable.Items
+                    For Each strValue As String In lstRecognisedValues
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
+                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorSummary.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                            bFound = True
+                            Exit For
+                        End If
+                    Next
+                    If bFound Then
+                        bFound = False
+                        Exit For
+                    End If
+                Next
+            End If
+        Next
+
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+
+        ' Re-enable the event handler
+        'AddHandler ucrSelectorClimograph.ControlValueChanged, AddressOf OnControlValueChanged
+
+        isFilling = False
+    End Sub
+
+    Private Function GetRecognisedValues(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
 End Class
