@@ -18,7 +18,7 @@ Imports instat.Translations
 
 Public Class sdgTableOptions
 
-    Private clsOperator As ROperator
+    Public clsOperator As ROperator
     Private clsThemeRFunction As RFunction
     Private bFirstload As Boolean = True
 
@@ -26,14 +26,17 @@ Public Class sdgTableOptions
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
+            ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText)
         End If
         autoTranslate(Me)
+
     End Sub
 
     Private Sub InitialiseDialog()
         ucrSdgBaseButtons.iHelpTopicID = 146
-        ucrChkSelectTheme.Checked = True
-        ucrChkManualTheme.Checked = False
+        'ucrChkSelectTheme.Checked = True
+        'ucrChkManualTheme.Checked = False
+        '  ucrChkSelectTheme.Checked = dlgGeneralTable.ucrChkSelectTheme.Checked
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
 
@@ -76,6 +79,23 @@ Public Class sdgTableOptions
     '-----------------------------------------
     ' Themes
 
+    Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
+        If ucrChkSelectTheme.Checked Then
+            dlgGeneralTable.ucrChkSelectTheme.Checked = True
+            ucrChkManualTheme.Checked = Not ucrChkSelectTheme.Checked
+            btnManualTheme.Visible = Not ucrChkSelectTheme.Checked
+            ucrCboSelectThemes.Visible = True
+        Else
+            dlgGeneralTable.ucrChkSelectTheme.Checked = False
+            ucrCboSelectThemes.Visible = False
+        End If
+    End Sub
+
+    Public Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
+        ' Notify the main dialog of the selected theme
+        UpdateThemeRCommand(ucrCboSelectThemes.GetText)
+    End Sub
+
     Private Sub SetupTheme(clsOperator As ROperator)
         If clsOperator.ContainsParameter("theme_format") Then
             clsThemeRFunction = clsOperator.GetParameter("theme_format").clsArgumentCodeStructure
@@ -85,59 +105,56 @@ Public Class sdgTableOptions
         End If
     End Sub
 
-    Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
-        ucrChkManualTheme.Checked = Not ucrChkSelectTheme.Checked
+    Public Sub UpdateThemeRCommand(selectedTheme As String)
+        If clsThemeRFunction Is Nothing Then Exit Sub
 
-        If ucrChkSelectTheme.Checked Then
-            btnManualTheme.Visible = False
-            ucrCboSelectThemes.Visible = True
-            clsThemeRFunction.SetPackageName("gtExtras")
-            clsThemeRFunction.ClearParameters()
-        Else
-            ucrCboSelectThemes.Visible = False
+        Dim strCommand As String = GetThemeRCommand(selectedTheme)
+        If strCommand <> "" Then
+            clsThemeRFunction.SetRCommand(strCommand)
         End If
+
+        ' Sync selected theme with sub-dialog
+        dlgGeneralTable.UpdateSelectedTheme(selectedTheme)
+    End Sub
+
+    Public Sub UpdateSelectedTheme(selectedTheme As String)
+        ucrCboSelectThemes.SetText(selectedTheme)
+    End Sub
+
+    Private Function GetThemeRCommand(themeName As String) As String
+        Select Case themeName
+            Case "Dark Theme" : Return "gt_theme_dark"
+            Case "538 Theme" : Return "gt_theme_538"
+            Case "Dot Matrix Theme" : Return "gt_theme_dot_matrix"
+            Case "Espn Theme" : Return "gt_theme_espn"
+            Case "Excel Theme" : Return "gt_theme_excel"
+            Case "Guardian Theme" : Return "gt_theme_guardian"
+            Case "NY Times Theme" : Return "gt_theme_nytimes"
+            Case "PFF Theme" : Return "gt_theme_pff"
+            Case Else : Return ""
+        End Select
+    End Function
+
+    ' Method to sync the state from the main dialog
+    Public Sub UpdateThemeSelectionState(isChecked As Boolean)
+        ucrChkSelectTheme.Checked = isChecked
+        ucrCboSelectThemes.Visible = isChecked
+
     End Sub
 
     Private Sub ucrChkManualTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkManualTheme.ControlValueChanged
-        ucrChkSelectTheme.Checked = Not ucrChkManualTheme.Checked
+        '  ucrChkSelectTheme.Checked = Not ucrChkManualTheme.Checked
 
         If ucrChkManualTheme.Checked Then
             btnManualTheme.Visible = True
             clsThemeRFunction.SetPackageName("gt")
             clsThemeRFunction.SetRCommand("tab_options")
+            ucrChkSelectTheme.Checked = Not ucrChkManualTheme.Checked
         Else
             btnManualTheme.Visible = False
         End If
     End Sub
 
-    Private Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
-
-        If clsThemeRFunction Is Nothing Then
-            Exit Sub
-        End If
-
-        Dim strCommand As String = ""
-        Select Case ucrCboSelectThemes.GetText
-            Case "Dark Theme"
-                strCommand = "gt_theme_dark"
-            Case "538 Theme"
-                strCommand = "gt_theme_538"
-            Case "Dot Matrix Theme"
-                strCommand = "gt_theme_dot_matrix"
-            Case "Espn Theme"
-                strCommand = "gt_theme_espn"
-            Case "Excel Theme"
-                strCommand = "gt_theme_excel"
-            Case "Guardian Theme"
-                strCommand = "gt_theme_guardian"
-            Case "NY Times Theme"
-                strCommand = "gt_theme_nytimes"
-            Case "PFF Theme"
-                strCommand = "gt_theme_pff"
-        End Select
-
-        clsThemeRFunction.SetRCommand(strCommand)
-    End Sub
 
     Private Sub btnManualTheme_Click(sender As Object, e As EventArgs) Handles btnManualTheme.Click
         sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
@@ -153,6 +170,5 @@ Public Class sdgTableOptions
         End If
     End Sub
     '-----------------------------------------
-
 
 End Class

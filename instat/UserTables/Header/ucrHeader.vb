@@ -1,8 +1,9 @@
 ﻿
 Public Class ucrHeader
+    'Public Event HeaderUpdated()
+
     Private clsOperator As New ROperator
     Private clsHeaderRFunction, clsTitleFooterRFunction, clsSubtitleFooterRFunction, clsTitleLocationRFunction, clsSubtitleLocationRFunction, clsTitleStyleRFunction, clsSubtitleStyleRFunction As New RFunction
-
 
     Private bFirstload As Boolean = True
 
@@ -25,11 +26,64 @@ Public Class ucrHeader
         End If
 
         Me.clsOperator = clsOperator
-
         SetRFunctions(clsOperator)
         SetRCode()
-
+        'UpdateHeader()
+        'Setup()
     End Sub
+
+
+    'Public Sub Setup()
+    '    AddHandler dlgGeneralTable.HeaderUpdated, AddressOf UpdateHeader
+    'End Sub
+
+    'Public Function GetTitle() As String
+    '    Return ucrInputTitle.GetText()
+    'End Function
+
+    'Public Function GetSubtitle() As String
+    '    Return ucrInputSubtitle.GetText()
+    'End Function
+
+    'Public Function GetTitleFooter() As String
+    '    Return ucrInputTitleFooter.GetText()
+    'End Function
+
+    'Public Function GetSubtitleFooter() As String
+    '    Return ucrInputSubtitleFooter.GetText()
+    'End Function
+
+
+
+    ' ... (Rest of existing code)
+
+    'This is important to keep to update the R code
+
+    'Public Sub UpdateHeader()
+    '    Dim strTitle As String = dlgGeneralTable.GeneralGetTitle()
+    '    Dim strTitleFooter As String = dlgGeneralTable.GeneralGetTitleFooter()
+    '    ' Update dlgGeneralTable UI or properties accordingly
+    '    ucrInputTitle.SetName(strTitle)
+    '    ucrInputTitleFooter.SetName(strTitleFooter)
+
+    '    ' Now send the updated information to ucrHeader (if applicable)
+
+    'End Sub
+
+    'Public Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputTitle.ControlContentsChanged, ucrInputTitleFooter.ControlContentsChanged, ucrInputSubtitle.ControlContentsChanged, ucrInputSubtitleFooter.ControlContentsChanged
+    '    ucrInputTitleFooter.Enabled = Not ucrInputTitle.IsEmpty()
+    '    ucrInputSubtitle.Enabled = Not ucrInputTitle.IsEmpty()
+    '    ucrInputSubtitleFooter.Enabled = ucrInputSubtitle.Enabled AndAlso Not ucrInputSubtitle.IsEmpty()
+
+    '    ' Raise specific events with the new values
+    '    'RaiseEvent TitleChanged(ucrInputTitle.GetText())
+    '    'RaiseEvent TitleFooterChanged(ucrInputTitleFooter.GetText())
+
+    '    RaiseEvent HeaderUpdated() ' Notify dlgGeneralTable when values change
+    'End Sub
+
+
+
 
     Private Sub SetRFunctions(clsOperator As ROperator)
 
@@ -145,11 +199,13 @@ Public Class ucrHeader
         clsSubtitleStyleRFunction = clsTablesUtils.GetNewStyleRFunction(clsListStyleRFunction, clsSubtitleLocationRFunction)
     End Sub
 
-    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputTitle.ControlContentsChanged, ucrInputTitleFooter.ControlContentsChanged, ucrInputSubtitle.ControlContentsChanged, ucrInputSubtitleFooter.ControlContentsChanged
-        ucrInputTitleFooter.Enabled = Not ucrInputTitle.IsEmpty()
-        ucrInputSubtitle.Enabled = Not ucrInputTitle.IsEmpty()
-        ucrInputSubtitleFooter.Enabled = ucrInputSubtitle.Enabled AndAlso Not ucrInputSubtitle.IsEmpty()
-    End Sub
+    'Public Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputTitle.ControlContentsChanged, ucrInputTitleFooter.ControlContentsChanged, ucrInputSubtitle.ControlContentsChanged, ucrInputSubtitleFooter.ControlContentsChanged
+    '    ucrInputTitleFooter.Enabled = Not ucrInputTitle.IsEmpty()
+    '    ucrInputSubtitle.Enabled = Not ucrInputTitle.IsEmpty()
+    '    ucrInputSubtitleFooter.Enabled = ucrInputSubtitle.Enabled AndAlso Not ucrInputSubtitle.IsEmpty()
+    '    '  dlgGeneralTable.HeaderUpdated()
+    '    RaiseEvent HeaderUpdated() ' Notify dlgGeneralTable when values change
+    'End Sub
 
     Public Sub SetValuesToOperator()
         ' Remove any previous header parameters 
