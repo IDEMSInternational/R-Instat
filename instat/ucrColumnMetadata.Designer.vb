@@ -49,7 +49,6 @@ Partial Class ucrColumnMetadata
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.copySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.viewSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.propertiesContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -82,6 +81,7 @@ Partial Class ucrColumnMetadata
         Me.columnContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.statusColumnMenu.SuspendLayout()
         Me.propertiesContextMenuStrip.SuspendLayout()
@@ -105,9 +105,9 @@ Partial Class ucrColumnMetadata
         'statusColumnMenu
         '
         Me.statusColumnMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuBottomAddComment, Me.hideSheet, Me.unhideSheet, Me.copySheet, Me.reorderSheet, Me.viewSheet, Me.ToolStripSeparator4, Me.mnuHelp2})
+        Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.renameSheet, Me.reorderSheet, Me.copySheet, Me.deleteDataFrame, Me.hideSheet, Me.unhideSheet, Me.ToolStripSeparator5, Me.mnuBottomAddComment, Me.ToolStripSeparator4, Me.mnuHelp2})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(181, 230)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(181, 214)
         '
         'deleteDataFrame
         '
@@ -150,12 +150,6 @@ Partial Class ucrColumnMetadata
         Me.reorderSheet.Name = "reorderSheet"
         Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
         Me.reorderSheet.Text = "Reorder..."
-        '
-        'viewSheet
-        '
-        Me.viewSheet.Name = "viewSheet"
-        Me.viewSheet.Size = New System.Drawing.Size(180, 22)
-        Me.viewSheet.Text = "View Data Frame"
         '
         'ToolStripSeparator4
         '
@@ -373,6 +367,11 @@ Partial Class ucrColumnMetadata
         Me.mnuHelp1.Size = New System.Drawing.Size(214, 22)
         Me.mnuHelp1.Text = "Help"
         '
+        'ToolStripSeparator5
+        '
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(177, 6)
+        '
         'ucrColumnMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -403,7 +402,6 @@ Partial Class ucrColumnMetadata
     Friend WithEvents unhideSheet As ToolStripMenuItem
     Friend WithEvents copySheet As ToolStripMenuItem
     Friend WithEvents reorderSheet As ToolStripMenuItem
-    Friend WithEvents viewSheet As ToolStripMenuItem
     Friend WithEvents mnuBottomAddComment As ToolStripMenuItem
     Friend WithEvents ucrLinuxGrid As ucrColumnMetadataLinuxGrid
     Friend WithEvents ucrReoGrid As ucrColumnMetadataReoGrid
@@ -433,4 +431,5 @@ Partial Class ucrColumnMetadata
     Friend WithEvents mnuHelp1 As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents mnuHelp2 As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
 End Class
