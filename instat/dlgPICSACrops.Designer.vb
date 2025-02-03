@@ -38,6 +38,7 @@ Partial Class dlgPICSACrops
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.ucrSelectorSummary = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkDataProp = New instat.ucrCheck()
         Me.ucrChkDataCrops = New instat.ucrCheck()
@@ -69,6 +70,7 @@ Partial Class dlgPICSACrops
         Me.Label6 = New System.Windows.Forms.Label()
         Me.ucrReceiverEnd = New instat.ucrReceiverSingle()
         Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.ttPlanting = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpCropDefinitions.SuspendLayout()
         Me.grpSeasonReceivers.SuspendLayout()
         Me.SuspendLayout()
@@ -491,4 +493,5 @@ Partial Class dlgPICSACrops
     Friend WithEvents Label6 As Label
     Friend WithEvents ucrReceiverEnd As ucrReceiverSingle
     Friend WithEvents cmdOptions As Button
+    Friend WithEvents ttPlanting As ToolTip
 End Class
