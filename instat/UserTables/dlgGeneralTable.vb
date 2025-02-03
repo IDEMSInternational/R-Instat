@@ -120,12 +120,6 @@ Public Class dlgGeneralTable
                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorCols.strCurrentDataFrame,
                                                   strObjectName:="last_table")
 
-        'clsOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
-        '                                          strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-        '                                          strRObjectFormatToAssignTo:=RObjectFormat.Html,
-        '                                          strRDataFrameNameToAddObjectTo:=ucrSelectorCols.strCurrentDataFrame,
-        '                                          strObjectName:="last_table")
-
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
@@ -137,15 +131,6 @@ Public Class dlgGeneralTable
         ucrInputTitleFooter.SetRCode(clsTitleFooterRFunction, True, bCloneIfNeeded:=True)
         ucrChkPreview.SetRCode(clsBaseOperator, bReset)
         ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
-    End Sub
-
-    Private Sub SetupTheme() '(clsOperator As ROperator)
-        If clsBaseOperator.ContainsParameter("theme_format") Then
-            clsThemeRFunction = clsBaseOperator.GetParameter("theme_format").clsArgumentCodeStructure
-        Else
-            clsThemeRFunction = New RFunction
-            clsThemeRFunction.SetPackageName("gtExtras")
-        End If
     End Sub
 
     Private Sub TestOKEnabled()
@@ -203,13 +188,5 @@ Public Class dlgGeneralTable
         clsThemeRFunction.SetRCommand(strCommand)
     End Sub
 
-    Private Sub SetThemeValuesOnReturn() '(clsOperator As ROperator)
-        ' Set the themes parameter if there was a theme selected
-        If clsThemeRFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsThemeRFunction.strRCommand) Then
-            clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
-        Else
-            clsBaseOperator.RemoveParameterByName("theme_format")
-        End If
-    End Sub
 
 End Class
