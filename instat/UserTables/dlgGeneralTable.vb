@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsHeadRFunction, clsGtRFunction As New RFunction
+    Private clsHeadRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -61,12 +61,18 @@ Public Class dlgGeneralTable
         ucrSaveTable.SetCheckBoxText("Store Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
+        ucrChkSelectTheme.Checked = True
+        ucrChkSelectTheme.SetText("Select Theme")
+        ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
+        ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
     End Sub
 
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
+        ' clsOperator = New ROperator
         clsHeadRFunction = New RFunction
         clsGtRFunction = New RFunction
 
@@ -87,11 +93,23 @@ Public Class dlgGeneralTable
         clsGtRFunction.SetRCommand("gt")
         clsBaseOperator.AddParameter(strParameterName:="gt", clsRFunctionParameter:=clsGtRFunction, iPosition:=2, bIncludeArgumentName:=False)
 
+        Dim strCommand As String = ""
+        clsThemeRFunction.SetPackageName("gtExtras")
+        clsThemeRFunction.SetRCommand(strCommand)
+        clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
+
+
         clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                   strRObjectFormatToAssignTo:=RObjectFormat.Html,
                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorCols.strCurrentDataFrame,
                                                   strObjectName:="last_table")
+
+        'clsOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+        '                                          strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+        '                                          strRObjectFormatToAssignTo:=RObjectFormat.Html,
+        '                                          strRDataFrameNameToAddObjectTo:=ucrSelectorCols.strCurrentDataFrame,
+        '                                          strObjectName:="last_table")
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
@@ -105,6 +123,15 @@ Public Class dlgGeneralTable
         ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
     End Sub
 
+    Private Sub SetupTheme() '(clsOperator As ROperator)
+        If clsBaseOperator.ContainsParameter("theme_format") Then
+            clsThemeRFunction = clsBaseOperator.GetParameter("theme_format").clsArgumentCodeStructure
+        Else
+            clsThemeRFunction = New RFunction
+            clsThemeRFunction.SetPackageName("gtExtras")
+        End If
+    End Sub
+
     Private Sub TestOKEnabled()
         ucrBase.OKEnabled(Not ucrReceiverMultipleCols.IsEmpty AndAlso ucrSaveTable.IsComplete)
     End Sub
@@ -116,4 +143,57 @@ Public Class dlgGeneralTable
             clsBaseOperator.RemoveParameterByName("head")
         End If
     End Sub
+
+    Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
+        If ucrChkSelectTheme.Checked Then
+            ucrCboSelectThemes.Visible = True
+            clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
+            'clsThemeRFunction.SetPackageName("gtExtras")
+            'clsThemeRFunction.ClearParameters()
+        Else
+            clsBaseOperator.RemoveParameterByName("theme_format")
+
+            ucrCboSelectThemes.Visible = False
+            clsThemeRFunction.ClearParameters()
+        End If
+    End Sub
+
+    Private Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
+
+        If clsThemeRFunction Is Nothing Then
+            Exit Sub
+        End If
+
+        Dim strCommand As String = ""
+        Select Case ucrCboSelectThemes.GetText
+            Case "Dark Theme"
+                strCommand = "gt_theme_dark"
+            Case "538 Theme"
+                strCommand = "gt_theme_538"
+            Case "Dot Matrix Theme"
+                strCommand = "gt_theme_dot_matrix"
+            Case "Espn Theme"
+                strCommand = "gt_theme_espn"
+            Case "Excel Theme"
+                strCommand = "gt_theme_excel"
+            Case "Guardian Theme"
+                strCommand = "gt_theme_guardian"
+            Case "NY Times Theme"
+                strCommand = "gt_theme_nytimes"
+            Case "PFF Theme"
+                strCommand = "gt_theme_pff"
+        End Select
+
+        clsThemeRFunction.SetRCommand(strCommand)
+    End Sub
+
+    Private Sub SetThemeValuesOnReturn() '(clsOperator As ROperator)
+        ' Set the themes parameter if there was a theme selected
+        If clsThemeRFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsThemeRFunction.strRCommand) Then
+            clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme_format")
+        End If
+    End Sub
+
 End Class
