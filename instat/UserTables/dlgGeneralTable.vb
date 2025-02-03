@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsHeadRFunction, clsHeaderRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
+    Private clsHeadRFunction, clsHeaderRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -28,7 +28,6 @@ Public Class dlgGeneralTable
 
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged
         TestOKEnabled()
-        'Header()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -80,6 +79,7 @@ Public Class dlgGeneralTable
         clsHeadRFunction = New RFunction
         clsGtRFunction = New RFunction
         clsHeaderRFunction = New RFunction
+        clsTitleFooterRFunction = New RFunction
         ucrSelectorCols.Reset()
         ucrReceiverMultipleCols.SetMeAsReceiver()
         ucrSaveTable.Reset()
@@ -107,9 +107,12 @@ Public Class dlgGeneralTable
         clsHeaderRFunction.SetPackageName("gt")
         clsHeaderRFunction.SetRCommand("tab_header")
         clsHeaderRFunction.AddParameter("title", ucrInputTitle.GetText, iPosition:=1)
-        'clsHeaderRFunction.AddParameter("subtitle", "", iPosition:=2)
         clsBaseOperator.AddParameter("theme_Header", clsRFunctionParameter:=clsHeaderRFunction)
 
+        clsTitleFooterRFunction.SetPackageName("gt")
+        clsTitleFooterRFunction.SetRCommand("tab_footnote")
+        clsTitleFooterRFunction.AddParameter("footnote", ucrInputTitleFooter.GetText, iPosition:=1)
+        clsBaseOperator.AddParameter("theme_footer", clsRFunctionParameter:=clsTitleFooterRFunction)
 
         clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
@@ -131,6 +134,7 @@ Public Class dlgGeneralTable
         ucrReceiverMultipleCols.SetRCode(clsBaseOperator, bReset)
         ucrSaveTable.SetRCode(clsBaseOperator, bReset)
         ucrInputTitle.SetRCode(clsHeaderRFunction, True, bCloneIfNeeded:=True)
+        ucrInputTitleFooter.SetRCode(clsTitleFooterRFunction, True, bCloneIfNeeded:=True)
         ucrChkPreview.SetRCode(clsBaseOperator, bReset)
         ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
     End Sub
@@ -168,7 +172,6 @@ Public Class dlgGeneralTable
             ucrCboSelectThemes.Visible = False
             clsThemeRFunction.ClearParameters()
         End If
-        'Header()
     End Sub
 
     Private Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
@@ -208,13 +211,5 @@ Public Class dlgGeneralTable
             clsBaseOperator.RemoveParameterByName("theme_format")
         End If
     End Sub
-
-    'Private Sub Header()
-    '    If Not ucrInputTitle.IsEmpty Then
-    '        clsHeaderRFunction.AddParameter("title", ucrInputTitle.GetText)
-    '    Else
-    '        clsHeaderRFunction.RemoveParameterByName("title")
-    '    End If
-    'End Sub
 
 End Class
