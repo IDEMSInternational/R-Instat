@@ -32,8 +32,7 @@ Public Class dlgOneVariableSummarise
         clsSkimrFunction, clsPivotWiderFunction As New RFunction
 
     Private clsPipeOperator, clsJoiningPipeOperator As New ROperator
-    Private clsGetGtTableFunction As New RFunction
-    Private clsGtTableROperator As New ROperator
+    Private clsSummaryOperator As New ROperator
     Private bResetSubdialog As Boolean = False
     Private bResetFormatSubdialog As Boolean = False
     Public strDefaultDataFrame As String = ""
@@ -134,16 +133,12 @@ Public Class dlgOneVariableSummarise
 
         clsPipeOperator = New ROperator
 
-        clsGtTableROperator = New ROperator
-        clsGetGtTableFunction = New RFunction
+        clsSummaryOperator = New ROperator
 
         ucrSelectorOneVarSummarise.Reset()
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.bBrackets = False
-
-        clsGetGtTableFunction.SetPackageName("gt")
-        clsGetGtTableFunction.SetRCommand("gt")
 
         clsSkimrFunction.SetPackageName("skimr")
         clsSkimrFunction.SetRCommand("skim_without_charts")
@@ -167,13 +162,14 @@ Public Class dlgOneVariableSummarise
 
         clsGtFunction.SetPackageName("gt")
         clsGtFunction.SetRCommand("gt")
-        clsGtTableROperator.SetOperation("%>%")
-        clsGtTableROperator.bBrackets = False
-        clsGtTableROperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryTableFunction, iPosition:=0)
-        clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsGtFunction, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsSummaryOperator.SetOperation("%>%")
+        clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsSummaryTableFunction, iPosition:=0)
+        clsSummaryOperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsGtFunction, iPosition:=2, bIncludeArgumentName:=False)
+
 
         clsJoiningPipeOperator.SetOperation("%>%")
-        clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsGtTableROperator, iPosition:=0)
+        clsJoiningPipeOperator.AddParameter("mutable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
         clsJoiningPipeOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -196,7 +192,6 @@ Public Class dlgOneVariableSummarise
                                                    strObjectName:="last_summary")
 
         clsSummaryTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsSummaryTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorOneVarSummarise.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsSummaryTableFunction.AddParameter("treat_columns_as_factor", "TRUE", iPosition:=1)
         clsSummaryTableFunction.AddParameter("margins", Chr(34) & "summary" & Chr(34), iPosition:=2)
         clsSummaryTableFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=5)
@@ -211,15 +206,13 @@ Public Class dlgOneVariableSummarise
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSummaryTableFunction, New RParameter("na.rm", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsSummaryFunction, iAdditionalPairNo:=1)
         ucrSaveSummary.AddAdditionalRCode(clsJoiningPipeOperator, iAdditionalPairNo:=2)
-        ucrReceiverOneVarSummarise.SetRCode(clsSummaryFunction, bReset)
+        ucrReceiverOneVarSummarise.AddAdditionalCodeParameterPair(clsSummaryFunction, New RParameter("object", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
 
         ucrPnlSummaries.SetRCode(clsDummyFunction, bReset)
         ucrSelectorOneVarSummarise.SetRCode(clsSummaryTableFunction, bReset)
         ucrInputDisplayMissing.SetRCode(clsSummaryTableFunction, bReset)
         ucrSaveSummary.SetRCode(clsSkimrFunction, bReset)
-        ucrSelectorOneVarSummarise.SetRCode(clsGetGtTableFunction, bReset)
-        ucrReceiverOneVarSummarise.SetRCode(clsGetGtTableFunction, bReset)
 
         If bReset Then
             ucrChkDisplayMissing.SetRCode(clsDummyFunction, bReset)
@@ -335,6 +328,7 @@ Public Class dlgOneVariableSummarise
         End If
         cmdSummaries.Visible = rdoCustomised.Checked
         cmdTableOptions.Visible = rdoCustomised.Checked
+        ConfigureColumnFactorsAndNames()
     End Sub
 
     Private Sub FillListView()
@@ -368,28 +362,36 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
-        sdgTableOptions.Setup(ucrSelectorOneVarSummarise.strCurrentDataFrame, clsGtTableROperator)
+        sdgTableOptions.Setup(ucrSelectorOneVarSummarise.strCurrentDataFrame, clsSummaryOperator)
         sdgTableOptions.ShowDialog(Me)
         bResetFormatSubdialog = False
     End Sub
 
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnFactor.ControlValueChanged
-        'If bRCodeSet Then
-        If rdoNoColumnFactor.Checked Then
-            clsGtTableROperator.RemoveParameterByName("col_factor")
-            clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
-        Else
-            clsGtTableROperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
-            If rdoSummary.Checked Then
-                clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
-                clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
-            ElseIf rdoVariable.Checked Then
-                clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=1)
-                clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
-            End If
-        End If
-        'End If
+        ConfigureColumnFactorsAndNames()
     End Sub
+
+    Private Sub ConfigureColumnFactorsAndNames()
+        If rdoCustomised.Checked Then
+            If rdoNoColumnFactor.Checked Then
+                clsSummaryOperator.RemoveParameterByName("col_factor")
+                clsDummyFunction.AddParameter("factor_cols", "NoColFactor", iPosition:=1)
+            Else
+                clsSummaryOperator.AddParameter("col_factor", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+                If rdoSummary.Checked Then
+                    clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
+                    clsPivotWiderFunction.AddParameter("names_from", "summary", iPosition:=0)
+                ElseIf rdoVariable.Checked Then
+                    clsDummyFunction.AddParameter("factor_cols", "Var", iPosition:=1)
+                    clsPivotWiderFunction.AddParameter("names_from", "variable", iPosition:=0)
+                End If
+            End If
+        Else
+            clsSummaryOperator.RemoveParameterByName("col_factor")
+            clsPivotWiderFunction.RemoveParameterByName("names_from")
+        End If
+    End Sub
+
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneVarSummarise.ControlContentsChanged, ucrNudMaxSum.ControlContentsChanged, ucrSaveSummary.ControlContentsChanged
         TestOKEnabled()
     End Sub

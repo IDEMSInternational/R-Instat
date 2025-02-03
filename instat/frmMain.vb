@@ -223,9 +223,15 @@ Public Class frmMain
         '---------------------------------------
 
         '--------------------------------------
-        CreateAdditionalLibraryDirectory()
+        Dim strVersion As String = My.Application.Info.Version.Major.ToString() & "." &
+                My.Application.Info.Version.Minor.ToString() & "." &
+                My.Application.Info.Version.Build.ToString()
+
+        Me.Text = "R-Instat " & strVersion
+
+        CreateAdditionalLibraryDirectory(strVersion)
         '-------------------------------------
-        SetAppVersionNumber()
+
         isMaximised = True 'Need to get the windowstate when the application is loaded
         SetHideMenus()
     End Sub
@@ -411,9 +417,9 @@ Public Class frmMain
         End If
     End Function
 
-    Private Sub CreateAdditionalLibraryDirectory()
+    Private Sub CreateAdditionalLibraryDirectory(strVersion As String)
         ' Define the custom library path in the ApplicationData folder
-        Dim strLibraryPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "R-Instat", "library")
+        Dim strLibraryPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "R-Instat", strVersion, "library")
 
         Try
             ' Check if the directory exists, if not, create it
@@ -421,18 +427,15 @@ Public Class frmMain
                 Directory.CreateDirectory(strLibraryPath)
             End If
 
+
             'To ensure this part of the code only runs when the application Is Not in the Debug mode (i.e., in Release mode)
 #If Not DEBUG Then
-            ' Add the custom library path to R's .libPaths for user-level package installation
-            Dim strScript As String = $".libPaths(c('{strLibraryPath.Replace("\", "/")}', .libPaths()))" & Environment.NewLine &
-                   "if (length(.libPaths()) > 2) {
-                         current_paths <- .libPaths()
-                         valid_indices <- c(1, 3)[c(1, 3) <= length(current_paths)]
-                         .libPaths(current_paths[valid_indices])
-                   }"
+                     Dim clsSetLibPathsFunction As New RFunction
+            clsSetLibPathsFunction.SetRCommand("set_library_paths")
+            clsSetLibPathsFunction.AddParameter("library_path", Chr(34) & strLibraryPath.Replace("\", "/") & Chr(34))
 
             ' Execute the R script to update the library paths
-            clsRLink.RunScript(strScript:=strScript, bSeparateThread:=False, bSilent:=False)
+            clsRLink.RunScript(strScript:=clsSetLibPathsFunction.ToScript, bSeparateThread:=False, bSilent:=False)
 #End If
         Catch ex As Exception
             ' Handle potential errors (e.g., directory creation failure)
@@ -603,10 +606,8 @@ Public Class frmMain
         mnuTbLan.Visible = bVisible
     End Sub
 
-    Public Sub SetAppVersionNumber()
-        Me.Text = "R-Instat " & My.Application.Info.Version.Major.ToString() & "." &
-                My.Application.Info.Version.Minor.ToString() & "." &
-                My.Application.Info.Version.Build.ToString()
+    Public Sub SetAppVersionNumber(strVersionNumber As String)
+
     End Sub
 
     Private Sub SetHideMenus()
@@ -1746,6 +1747,10 @@ Public Class frmMain
     Public Sub UseColumnSelectionInDataView(bUseColumnSelecion As Boolean)
         ucrDataViewer.UseColumnSelectionInDataView(bUseColumnSelecion)
     End Sub
+
+    Public Function IsColumnSelectionApplied() As Boolean
+        Return ucrDataViewer.IsColumnSelectionApplied
+    End Function
 
     Public Sub SetCurrentDataFrame(strDataName As String)
         ucrDataViewer.SetCurrentDataFrame(strDataName)
@@ -2937,5 +2942,15 @@ Public Class frmMain
 
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         ucrDataViewer.Undo()
+    End Sub
+
+    Private Sub mnuRDataViewerWindow_Click(sender As Object, e As EventArgs) Handles mnuRDataViewerWindow.Click
+        ucrDataViewer.StartWait()
+        ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        ucrDataViewer.EndWait()
+    End Sub
+
+    Private Sub mnuClimaticModelOutfilling_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelOutfilling.Click
+        dlgOutfillingStationData.ShowDialog()
     End Sub
 End Class
