@@ -120,21 +120,21 @@ Public Class dlgPICSACrops
 
         ucrInputPlantingDates.SetParameter(New RParameter("plant_days", 5))
         ucrInputPlantingDates.SetValidationTypeAsNumericList()
-        ucrInputPlantingDates.SetItems({"160", "80, 90, 100, 110, 120", "92, 122, 153", "124, 184, 10", "92, 152, 15"})
+        ucrInputPlantingDates.SetItems({"160", "92, 122, 153", "124, 184, 10", "92, 152, 15"})
         ucrInputPlantingDates.AddQuotesIfUnrecognised = False
         ucrInputPlantingDates.bAllowNonConditionValues = True
 
         'Planting Length 
         ucrInputCropLengths.SetParameter(New RParameter("plant_lengths", 6))
         ucrInputCropLengths.SetValidationTypeAsNumericList()
-        ucrInputCropLengths.SetItems({"120", "100, 110, 120, 130, 140", "80, 90, 100, 110", "120, 150, 180", "60, 120, 10"})
+        ucrInputCropLengths.SetItems({"120", "100, 140, 10", "120, 150, 180", "60, 120, 10"})
         ucrInputCropLengths.AddQuotesIfUnrecognised = False
         ucrInputCropLengths.bAllowNonConditionValues = True
 
         'Water amount 
         ucrInputWaterAmounts.SetParameter(New RParameter("rain_totals", 7))
         ucrInputWaterAmounts.SetValidationTypeAsNumericList()
-        ucrInputWaterAmounts.SetItems({"600", "300, 400, 500, 600, 700", "300, 500, 700", "200, 600, 50", "500, 700, 25"})
+        ucrInputWaterAmounts.SetItems({"600", "300, 500, 700", "200, 600, 50", "500, 700, 25"})
         ucrInputWaterAmounts.AddQuotesIfUnrecognised = False
         ucrInputWaterAmounts.bAllowNonConditionValues = True
 
