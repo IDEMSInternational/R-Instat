@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsHeadRFunction, clsHeaderRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
+    Private clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -64,7 +64,8 @@ Public Class dlgGeneralTable
         ucrSaveTable.SetCheckBoxText("Store Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
-        ucrChkSelectTheme.Checked = True
+        ucrChkSelectTheme.Checked = False
+        ucrCboSelectThemes.Visible = False
         ucrChkSelectTheme.SetText("Select Theme")
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
@@ -79,6 +80,7 @@ Public Class dlgGeneralTable
         clsHeadRFunction = New RFunction
         clsGtRFunction = New RFunction
         clsHeaderRFunction = New RFunction
+        clsCellsTitleRFunction = New RFunction
         clsTitleFooterRFunction = New RFunction
         ucrSelectorCols.Reset()
         ucrReceiverMultipleCols.SetMeAsReceiver()
@@ -112,7 +114,13 @@ Public Class dlgGeneralTable
         clsTitleFooterRFunction.SetPackageName("gt")
         clsTitleFooterRFunction.SetRCommand("tab_footnote")
         clsTitleFooterRFunction.AddParameter("footnote", ucrInputTitleFooter.GetText, iPosition:=1)
+        clsTitleFooterRFunction.AddParameter("locations", clsRFunctionParameter:=clsCellsTitleRFunction, iPosition:=2)
         clsBaseOperator.AddParameter("theme_footer", clsRFunctionParameter:=clsTitleFooterRFunction)
+
+        Dim strGroupParamValue As String = "title"
+        clsCellsTitleRFunction.SetPackageName("gt")
+        clsCellsTitleRFunction.SetRCommand("cells_title")
+        clsCellsTitleRFunction.AddParameter(strParameterName:="groups", strParameterValue:=Chr(34) & strGroupParamValue & Chr(34), iPosition:=0)
 
         clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
@@ -143,6 +151,10 @@ Public Class dlgGeneralTable
         Else
             clsBaseOperator.RemoveParameterByName("head")
         End If
+    End Sub
+
+    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputTitle.ControlContentsChanged, ucrInputTitleFooter.ControlContentsChanged
+        ucrInputTitleFooter.Enabled = Not ucrInputTitle.IsEmpty()
     End Sub
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
