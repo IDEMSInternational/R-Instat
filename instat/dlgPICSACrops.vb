@@ -451,9 +451,6 @@ Public Class dlgPICSACrops
         isFilling = False
     End Sub
 
-
-
-
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
         Dim lstValues As New List(Of String)
 
