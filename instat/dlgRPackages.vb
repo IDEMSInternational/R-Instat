@@ -43,6 +43,7 @@ Public Class dlgInstallRPackage
         dctPackages.Add("rapidpror", Chr(34) & "rapidpror" & Chr(34))
         dctPackages.Add("openappr", Chr(34) & "openappr" & Chr(34))
         dctPackages.Add("networkGraphsR", Chr(34) & "networkGraphsR" & Chr(34))
+        dctPackages.Add("climdex.pcic", Chr(34) & "climdex.pcic" & Chr(34))
         ucrInputPackage.SetItems(dctPackages)
 
         ucrPnlRPackages.AddParameterValuesCondition(rdoCRAN, "checked", "cran")
