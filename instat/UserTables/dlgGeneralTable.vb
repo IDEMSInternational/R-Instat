@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
+    Private clsHeadRFunction, clsTitleStyleRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -24,7 +24,10 @@ Public Class dlgGeneralTable
     Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
         sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
         sdgTableOptions.ShowDialog(Me)
-        sdgTableOptions.ucrHeader.ucrInputTitle.GetText()
+        ucrInputTitle.SetText(sdgTableOptions.ucrHeader.ucrInputTitle.GetText())
+        ucrInputTitleFooter.SetText(sdgTableOptions.ucrHeader.ucrInputTitleFooter.GetText())
+        ucrCboSelectThemes.SetText(sdgTableOptions.ucrCboSelectThemes.GetText())
+        ucrChkSelectTheme.Checked = sdgTableOptions.ucrChkSelectTheme.Checked
     End Sub
 
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged
@@ -77,23 +80,22 @@ Public Class dlgGeneralTable
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
-        ' clsOperator = New ROperator
         clsHeadRFunction = New RFunction
         clsGtRFunction = New RFunction
         clsHeaderRFunction = New RFunction
         clsCellsTitleRFunction = New RFunction
-        clsTitleFooterRFunction = New RFunction
         ucrSelectorCols.Reset()
         ucrReceiverMultipleCols.SetMeAsReceiver()
         ucrSaveTable.Reset()
         ucrChkPreview.Checked = True
+        ucrChkSelectTheme.Checked = True
 
         clsBaseOperator.SetOperation("%>%")
         clsBaseOperator.bBrackets = False
 
         clsHeadRFunction.SetPackageName("utils")
         clsHeadRFunction.SetRCommand("head")
-        clsHeadRFunction.AddParameter(strParameterName:="x", strParameterValue:=100, iPosition:=0, bIncludeArgumentName:=False)
+        clsHeadRFunction.AddParameter(strParameterName:="x", strParameterValue:=10, iPosition:=0, bIncludeArgumentName:=False)
         clsBaseOperator.AddParameter(strParameterName:="head", clsRFunctionParameter:=clsHeadRFunction, iPosition:=1, bIncludeArgumentName:=False)
 
 
@@ -112,16 +114,12 @@ Public Class dlgGeneralTable
         clsHeaderRFunction.AddParameter("title", ucrInputTitle.GetText, iPosition:=1)
         clsBaseOperator.AddParameter("theme_Header", clsRFunctionParameter:=clsHeaderRFunction)
 
-        clsTitleFooterRFunction.SetPackageName("gt")
-        clsTitleFooterRFunction.SetRCommand("tab_footnote")
-        clsTitleFooterRFunction.AddParameter("footnote", ucrInputTitleFooter.GetText, iPosition:=1)
-        clsTitleFooterRFunction.AddParameter("locations", clsRFunctionParameter:=clsCellsTitleRFunction, iPosition:=2)
-        clsBaseOperator.AddParameter("theme_footer", clsRFunctionParameter:=clsTitleFooterRFunction)
-
         Dim strGroupParamValue As String = "title"
         clsCellsTitleRFunction.SetPackageName("gt")
         clsCellsTitleRFunction.SetRCommand("cells_title")
         clsCellsTitleRFunction.AddParameter(strParameterName:="groups", strParameterValue:=Chr(34) & strGroupParamValue & Chr(34), iPosition:=0)
+
+
 
         clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                   strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
@@ -136,7 +134,9 @@ Public Class dlgGeneralTable
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverMultipleCols.SetRCode(clsBaseOperator, bReset)
         ucrSaveTable.SetRCode(clsBaseOperator, bReset)
+
         ucrInputTitle.SetRCode(clsHeaderRFunction, True, bCloneIfNeeded:=True)
+
         ucrInputTitleFooter.SetRCode(clsTitleFooterRFunction, True, bCloneIfNeeded:=True)
         ucrChkPreview.SetRCode(clsBaseOperator, bReset)
         ucrNudPreview.SetRCode(clsHeadRFunction, bReset)

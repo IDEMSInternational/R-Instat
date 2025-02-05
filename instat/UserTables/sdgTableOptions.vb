@@ -58,6 +58,11 @@ Public Class sdgTableOptions
         ucrSourceNotes.Setup(clsOperator)
         ucrOtherStyles.Setup(clsOperator)
 
+        ucrHeader.ucrInputTitle.SetText(dlgGeneralTable.ucrInputTitle.GetText())
+        ucrHeader.ucrInputTitleFooter.SetText(dlgGeneralTable.ucrInputTitleFooter.GetText())
+        ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText())
+        ucrChkSelectTheme.Checked = dlgGeneralTable.ucrChkSelectTheme.Checked
+
         SetupTheme(clsOperator)
     End Sub
 
