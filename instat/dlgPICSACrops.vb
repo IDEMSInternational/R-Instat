@@ -27,7 +27,7 @@ Public Class dlgPICSACrops
     Private strCurrDataName As String = ""
     Private lstEndReceivers As New List(Of ucrReceiverSingle)
     Private lstStartReceivers As New List(Of ucrReceiverSingle)
-    Private isFilling As Boolean = False
+    Private bisFilling As Boolean = False
 
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
@@ -249,7 +249,6 @@ Public Class dlgPICSACrops
         'TODO This should be done further done.
         ' This ensures the correct data frame is set before attempting to fill the receiver
         'ucrReceiverYear.SetMeAsReceiver()
-        'ucrSelectorForCrops.SetDataframe(ucrReceiverYear.GetDataName())
         'Disabled as selector cannot yet auto set when multiple data frame are selected.
         ucrSelectorForCrops.SetRCode(clsCropsFunction, bReset)
         ucrSelectorSummary.SetRCode(clsCropsFunction, bReset)
@@ -258,7 +257,6 @@ Public Class dlgPICSACrops
         ucrReceiverRainfall.SetRCode(clsCropsFunction, bReset)
         ucrReceiverDay.SetRCode(clsCropsFunction, bReset)
         'ucrReceiverStart.SetMeAsReceiver()
-        ' ucrSelectorForCrops.SetDataframe(ucrReceiverStart.GetDataName())
         ucrReceiverStart.SetRCode(clsCropsFunction, bReset)
         ucrReceiverEnd.SetRCode(clsCropsFunction, bReset)
 
@@ -408,11 +406,11 @@ Public Class dlgPICSACrops
     End Sub
 
     Private Sub AutoFillReceivers(lstReceivers As List(Of ucrReceiverSingle))
-        If isFilling OrElse lstReceivers Is Nothing Then
+        If bisFilling OrElse lstReceivers Is Nothing Then
             Exit Sub
         End If
 
-        isFilling = True
+        bisFilling = True
 
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorSummary.CurrentReceiver
@@ -448,7 +446,7 @@ Public Class dlgPICSACrops
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
 
-        isFilling = False
+        bisFilling = False
     End Sub
 
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
