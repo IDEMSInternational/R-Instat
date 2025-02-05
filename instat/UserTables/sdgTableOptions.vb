@@ -36,6 +36,7 @@ Public Class sdgTableOptions
         ucrChkManualTheme.Checked = False
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
+        clsThemeRFunction.SetPackageName("gtExtras")
 
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
@@ -96,8 +97,8 @@ Public Class sdgTableOptions
         If ucrChkSelectTheme.Checked Then
             btnManualTheme.Visible = False
             ucrCboSelectThemes.Visible = True
-            clsThemeRFunction.SetPackageName("gtExtras")
-            clsThemeRFunction.ClearParameters()
+            'clsThemeRFunction.SetPackageName("gtExtras")
+            'clsThemeRFunction.ClearParameters()
         Else
             ucrCboSelectThemes.Visible = False
         End If

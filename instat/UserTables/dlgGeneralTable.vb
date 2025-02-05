@@ -162,7 +162,7 @@ Public Class dlgGeneralTable
         If ucrChkSelectTheme.Checked Then
             ucrCboSelectThemes.Visible = True
             clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
-            'clsThemeRFunction.SetPackageName("gtExtras")
+            clsThemeRFunction.SetPackageName("gtExtras")
             'clsThemeRFunction.ClearParameters()
         Else
             clsBaseOperator.RemoveParameterByName("theme_format")
