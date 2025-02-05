@@ -448,8 +448,29 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
       if(length(by) == 0) {
         stop("Cannot find linking columns to merge output from sub calculations with data for calculated_from.")
       }
-      if(join_into_overall) curr_data_list[[c_data_label]] <- dplyr::full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
-      else {
+      if(join_into_overall){
+        new_data_list <- self$get_data_frame(data_frame_name, use_current_filter = FALSE)
+        by_col_attributes <- list()
+        for(i in seq_along(by)) {
+          # Collect column attributes
+          by_col_attributes[[by[[i]]]] <- get_column_attributes(new_data_list[[by[[i]]]])
+          
+          # Check and align the data types for each "by" column
+          if (class(new_data_list[[by[[i]]]]) != class(curr_data_list[[c_data_label]][[by[[i]]]])) {
+            warning(paste0("Type is different for ", by[[i]], " in the two data frames. Setting as numeric in both data frames."))
+            
+            # Convert factors to numeric if necessary
+            if (class(new_data_list[[by[[i]]]]) == "factor") {
+              new_data_list[[by[[i]]]] <- as.numeric(as.character(new_data_list[[by[[i]]]]))
+            } else if (class(curr_data_list[[c_data_label]][[by[[i]]]]) == "factor") {
+              curr_data_list[[c_data_label]][[by[[i]]]] <- as.numeric(as.character(curr_data_list[[c_data_label]][[by[[i]]]]))
+            } else {
+              stop(paste0("Type is different for ", by[[i]], " in the two data frames and cannot be coerced."))
+            }
+          }
+        }
+        curr_data_list[[c_data_label]] <- dplyr::full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
+      } else {
         curr_groups <- dplyr::groups(curr_data_list[[c_data_label]])
         curr_data_list[[c_data_label]] <- dplyr::full_join(self$get_data_frame(data_frame_name, use_current_filter = FALSE), curr_data_list[[c_data_label]], by = by)
   #TODO investigate better way to do this
@@ -853,3 +874,27 @@ find_df_from_calc_from <- function(x, column) {
   }
   return("")
 }
+
+DataBook$set("public", "remove_unused_station_year_combinations", function(data_name, year, station){
+  # Create linked data name
+  linked_data_name <- self$get_linked_to_data_name(data_name, link_cols=c(year, station))
+  
+  # Column Summaries
+  self$calculate_summary(data_name = data_name,
+                              store_results=TRUE,
+                              factors=c(year, station), 
+                              summaries=c("summary_count"),
+                              silent=TRUE)
+  
+  self$rename_column_in_data(data_name = linked_data_name, column_name="count_all", new_val="count_year_station_combination_for_linking", label="")
+  
+  # Create Filter subdialog: Created new filter
+  self$add_filter(filter=list(C0=list(column="count_year_station_combination_for_linking", operation="! is.na")), data_name = linked_data_name, filter_name = "removing_additional_years")
+  
+  # Dialog: Filter
+  self$copy_data_object(data_name = linked_data_name, new_name = linked_data_name, filter_name="removing_additional_years")
+  
+  # Right click menu: Delete Column(s)
+  self$remove_columns_in_data(data_name=linked_data_name, cols="count_year_station_combination_for_linking")
+}
+)
