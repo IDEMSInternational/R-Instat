@@ -61,12 +61,11 @@ Public Class dlgView
 
         ucrChkRowNumbers.AddToLinkedControls(ucrNudNumberRows, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=6)
 
-
         ucrNudNumberRows.Visible = rdoDispOutputWindow.Checked
         ucrReceiverView.SetParameter(New RParameter("x", 1, bNewIncludeArgumentName:=False))
 
         ucrNudNumberRows.SetParameter(New RParameter("n", 1))
-        'ucrNudNumberRows.Minimum = 1
+
         ucrNudNumberRows.SetRDefault(6)
         ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
 
@@ -158,6 +157,7 @@ Public Class dlgView
 
         clsViewColumnsFunction.SetPackageName("utils")
         clsViewColumnsFunction.SetRCommand("View")
+
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -198,7 +198,6 @@ Public Class dlgView
         Else
             ucrBase.OKEnabled(False)
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -217,7 +216,6 @@ Public Class dlgView
             ucrSaveData.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
             If ucrNudNumberRows.GetText <> "" OrElse ucrChkDisplayFromTop.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsOutputWindowFunction)
-
                 If ucrChkDisplayFromTop.Checked Then
                     clsOutputWindowFunction.SetRCommand("head")
                 Else
@@ -231,6 +229,7 @@ Public Class dlgView
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectDataFunction)
             ucrBase.clsRsyntax.iCallType = 0
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewColumnsFunction)
+            clsViewColumnsFunction.AddParameter(strParameterName:="title", Chr(34) & ucrSelectorForView.strCurrentDataFrame & Chr(34), iPosition:=2)
             ucrSaveData.Visible = False
             cmdTableOptions.Visible = False
             ucrSaveData.Visible = False
@@ -271,6 +270,8 @@ Public Class dlgView
 
     Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
         DataFrameLength()
+        clsOutputWindowFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForView.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsHeadRFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForView.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
     End Sub
 
     Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click

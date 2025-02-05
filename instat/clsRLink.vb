@@ -970,7 +970,8 @@ Public Class RLink
                          Optional bSeparateThread As Boolean = True,
                          Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing,
                          Optional bUpdateGrids As Boolean = True,
-                         Optional bSilent As Boolean = False)
+                         Optional bSilent As Boolean = False,
+                         Optional bSkipScriptAndOutput As Boolean = False)
 
         'if there is no script to run then just ignore and exit sub
         If String.IsNullOrWhiteSpace(strScript) Then
@@ -1043,8 +1044,10 @@ Public Class RLink
                 End If
             End If
 
-            ' If strOutput is empty or does not contain valid HTML files, add strOutput itself as an output
-            clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
+            If Not bSkipScriptAndOutput Then
+                ' If strOutput is empty or does not contain valid HTML files, add strOutput itself as an output
+                clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
+            End If
 
 
         Catch e As Exception
