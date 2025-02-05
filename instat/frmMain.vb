@@ -2944,7 +2944,7 @@ Public Class frmMain
     Private Sub mnuToolsRestartR_Click(sender As Object, e As EventArgs) Handles mnuToolsRestartR.Click
         Dim memUsageAfterBytes As Long = clsRLink.clsEngine.Evaluate("pryr::mem_used()").AsNumeric(0)
         Dim memUsageAfterMB As Double = memUsageAfterBytes / (1024 * 1024)
-        Logger.Info("Memory Usage After Restart1: " & memUsageAfterMB.ToString("F2") & " MB")
+        Logger.Info("Memory Usage Before Restart: " & memUsageAfterMB.ToString("F2") & " MB")
         If clsRLink.RestartREngine Then
 
             Dim memUsageAfterBytes2 As Long = clsRLink.clsEngine.Evaluate("pryr::mem_used()").AsNumeric(0)
@@ -2967,7 +2967,7 @@ Public Class frmMain
 
             Dim memUsageAfterBytes1 As Long = clsRLink.clsEngine.Evaluate("pryr::mem_used()").AsNumeric(0)
             Dim memUsageAfterMB1 As Double = memUsageAfterBytes1 / (1024 * 1024)
-            Logger.Info("Memory Usage After Restart: " & memUsageAfterMB1.ToString("F2") & " MB")
+            Logger.Info("Memory Usage After Restart and resetting working folder: " & memUsageAfterMB1.ToString("F2") & " MB")
         Else
             MsgBox("Failed to restart the R engine. Please check the configuration or reinstall R-Instat.",
                        MsgBoxStyle.Critical, "Restart Failed")

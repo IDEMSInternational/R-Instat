@@ -221,7 +221,7 @@ Public Class RLink
 
                 Dim clsUnloadRPackages As New RFunction
                 clsUnloadRPackages.SetRCommand("unload_R_Instat_packages")
-                RunScript(clsUnloadRPackages.ToScript, strComment:="Saving data")
+                'RunScript(clsUnloadRPackages.ToScript, strComment:="Saving data")
 
                 clsEngine.Evaluate("rm(list = ls(all.names = TRUE))") ' Remove hidden objects as well
                 clsEngine.Evaluate("gc()") ' Trigger garbage collection
@@ -233,6 +233,7 @@ Public Class RLink
 
             ' Reset initialization flag
             bREngineInitialised = False
+            clsEngine.ClearGlobalEnvironment()
 
             ' Attempt to start a new R engine instance
             If StartREngine() Then
