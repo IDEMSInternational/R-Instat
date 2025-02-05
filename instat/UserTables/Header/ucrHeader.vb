@@ -1,8 +1,8 @@
 ﻿
 Public Class ucrHeader
     Private clsOperator As New ROperator
-    Private clsHeaderRFunction, clsTitleFooterRFunction, clsSubtitleFooterRFunction, clsTitleLocationRFunction, clsSubtitleLocationRFunction, clsTitleStyleRFunction, clsSubtitleStyleRFunction As New RFunction
-
+    Private clsHeaderRFunction, clsTitleFooterRFunction, clsSubtitleFooterRFunction, clsTitleLocationRFunction, clsSubtitleLocationRFunction, clsSubtitleStyleRFunction As New RFunction
+    Public clsTitleStyleRFunction As New RFunction
 
     Private bFirstload As Boolean = True
 

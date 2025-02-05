@@ -59,12 +59,13 @@ Public Class sdgTableOptions
         ucrSourceNotes.Setup(clsOperator)
         ucrOtherStyles.Setup(clsOperator)
 
+        SetupTheme(clsOperator)
         ucrHeader.ucrInputTitle.SetText(dlgGeneralTable.ucrInputTitle.GetText())
         ucrHeader.ucrInputTitleFooter.SetText(dlgGeneralTable.ucrInputTitleFooter.GetText())
         ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText())
         ucrChkSelectTheme.Checked = dlgGeneralTable.ucrChkSelectTheme.Checked
+        ucrHeader.clsTitleStyleRFunction = dlgGeneralTable.clsTitleStyleRFunction
 
-        SetupTheme(clsOperator)
     End Sub
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
@@ -88,7 +89,10 @@ Public Class sdgTableOptions
         Else
             clsThemeRFunction = New RFunction
             clsThemeRFunction.SetPackageName("gtExtras")
+            'Initialize the parameter in the clsOperator if it is not already there.
+            clsOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
         End If
+
     End Sub
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
@@ -102,6 +106,8 @@ Public Class sdgTableOptions
         Else
             ucrCboSelectThemes.Visible = False
         End If
+
+
     End Sub
 
     Private Sub ucrChkManualTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkManualTheme.ControlValueChanged

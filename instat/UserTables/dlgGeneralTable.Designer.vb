@@ -186,7 +186,6 @@ Partial Class dlgGeneralTable
         '
         'btnTitleStyle
         '
-        Me.btnTitleStyle.Enabled = False
         Me.btnTitleStyle.Location = New System.Drawing.Point(374, 42)
         Me.btnTitleStyle.Name = "btnTitleStyle"
         Me.btnTitleStyle.Size = New System.Drawing.Size(79, 23)
