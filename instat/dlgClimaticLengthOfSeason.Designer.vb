@@ -38,6 +38,8 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkLengthmore = New instat.ucrCheck()
         Me.ucrNudLenghtmore = New instat.ucrNud()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
+        Me.cmdDoyRange = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblStartofRains
@@ -203,7 +205,7 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrNudLenghtmore.AutoSize = True
         Me.ucrNudLenghtmore.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLenghtmore.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLenghtmore.Location = New System.Drawing.Point(149, 291)
+        Me.ucrNudLenghtmore.Location = New System.Drawing.Point(203, 24)
         Me.ucrNudLenghtmore.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLenghtmore.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLenghtmore.Name = "ucrNudLenghtmore"
@@ -211,12 +213,36 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrNudLenghtmore.TabIndex = 15
         Me.ucrNudLenghtmore.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.AutoSize = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(243, 293)
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(160, 22)
+        Me.ucrInputFilterPreview.TabIndex = 17
+        '
+        'cmdDoyRange
+        '
+        Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDoyRange.Location = New System.Drawing.Point(149, 293)
+        Me.cmdDoyRange.Name = "cmdDoyRange"
+        Me.cmdDoyRange.Size = New System.Drawing.Size(83, 26)
+        Me.cmdDoyRange.TabIndex = 16
+        Me.cmdDoyRange.Tag = ""
+        Me.cmdDoyRange.Text = "Day Range"
+        Me.cmdDoyRange.UseVisualStyleBackColor = True
+        '
         'dlgClimaticLengthOfSeason
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 384)
+        Me.Controls.Add(Me.ucrInputFilterPreview)
+        Me.Controls.Add(Me.cmdDoyRange)
         Me.Controls.Add(Me.ucrNudLenghtmore)
         Me.Controls.Add(Me.ucrChkLengthmore)
         Me.Controls.Add(Me.ucrChkType)
@@ -258,4 +284,6 @@ Partial Class dlgClimaticLengthOfSeason
     Friend WithEvents ucrInputLengthofSeason As ucrInputTextBox
     Friend WithEvents ucrNudLenghtmore As ucrNud
     Friend WithEvents ucrChkLengthmore As ucrCheck
+    Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
+    Friend WithEvents cmdDoyRange As Button
 End Class
