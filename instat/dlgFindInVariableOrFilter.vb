@@ -167,6 +167,7 @@ Public Class dlgFindInVariableOrFilter
         rdoCell.Checked = True
         ucrReceiverVariable.Clear()
         ucrInputPattern.cboInput.ResetText()
+        frmMain.ucrDataViewer.RemoveAllBackgroundColors()
     End Sub
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
