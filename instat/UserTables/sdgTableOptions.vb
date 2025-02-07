@@ -32,9 +32,10 @@ Public Class sdgTableOptions
 
     Private Sub InitialiseDialog()
         ucrSdgBaseButtons.iHelpTopicID = 146
-
-        ucrPnlThemesPanel.AddRadioButton(rdoSelectTheme)
-        ucrPnlThemesPanel.AddRadioButton(rdoManualTheme)
+        ucrChkSelectTheme.Checked = True
+        ucrChkManualTheme.Checked = False
+        ucrChkSelectTheme.SetText("Select Theme")
+        ucrChkManualTheme.SetText("Manual Theme")
 
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
@@ -84,20 +85,29 @@ Public Class sdgTableOptions
         End If
     End Sub
 
-    Private Sub ucrPnlThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlThemesPanel.ControlValueChanged
-        ucrCboSelectThemes.Visible = False
-        btnManualTheme.Visible = False
+    Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
+        ucrChkManualTheme.Checked = Not ucrChkSelectTheme.Checked
 
-        If rdoSelectTheme.Checked Then
+        If ucrChkSelectTheme.Checked Then
+            btnManualTheme.Visible = False
             ucrCboSelectThemes.Visible = True
             clsThemeRFunction.SetPackageName("gtExtras")
             clsThemeRFunction.ClearParameters()
-        ElseIf rdoManualTheme.Checked Then
+        Else
+            ucrCboSelectThemes.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrChkManualTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkManualTheme.ControlValueChanged
+        ucrChkSelectTheme.Checked = Not ucrChkManualTheme.Checked
+
+        If ucrChkManualTheme.Checked Then
             btnManualTheme.Visible = True
             clsThemeRFunction.SetPackageName("gt")
             clsThemeRFunction.SetRCommand("tab_options")
+        Else
+            btnManualTheme.Visible = False
         End If
-
     End Sub
 
     Private Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
