@@ -35,7 +35,7 @@ Public Class sdgTableOptions
     Private Sub InitialiseDialog()
         ucrSdgBaseButtons.iHelpTopicID = 146
         ucrChkSelectTheme.Checked = True
-        ucrChkManualTheme.Checked = False
+        'ucrChkManualTheme.Checked = False
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
 
@@ -93,28 +93,33 @@ Public Class sdgTableOptions
     End Sub
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
-        ucrChkManualTheme.Checked = Not ucrChkSelectTheme.Checked
 
         If ucrChkSelectTheme.Checked Then
             btnManualTheme.Visible = False
             ucrCboSelectThemes.Visible = True
-            clsThemeRFunction.SetPackageName("gtExtras")
-            clsThemeRFunction.ClearParameters()
+            ucrChkManualTheme.Checked = Not ucrChkSelectTheme.Checked
+            ' clsThemeRFunction.SetPackageName("gtExtras")
+            ' clsThemeRFunction.ClearParameters()
         Else
             ucrCboSelectThemes.Visible = False
         End If
     End Sub
 
     Private Sub ucrChkManualTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkManualTheme.ControlValueChanged
-        ucrChkSelectTheme.Checked = Not ucrChkManualTheme.Checked
 
         If ucrChkManualTheme.Checked Then
             btnManualTheme.Visible = True
+            ucrChkSelectTheme.Checked = Not ucrChkManualTheme.Checked
             clsThemeRFunction.SetPackageName("gt")
             clsThemeRFunction.SetRCommand("tab_options")
         Else
             btnManualTheme.Visible = False
         End If
+    End Sub
+
+    Private Sub btnManualTheme_Click(sender As Object, e As EventArgs) Handles btnManualTheme.Click
+        sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
+        sdgSummaryThemes.ShowDialog(Me)
     End Sub
 
     Private Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
@@ -144,11 +149,6 @@ Public Class sdgTableOptions
         End Select
 
         clsThemeRFunction.SetRCommand(strCommand)
-    End Sub
-
-    Private Sub btnManualTheme_Click(sender As Object, e As EventArgs) Handles btnManualTheme.Click
-        sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
-        sdgSummaryThemes.ShowDialog(Me)
     End Sub
 
     Private Sub SetThemeValuesOnReturn(clsOperator As ROperator)
