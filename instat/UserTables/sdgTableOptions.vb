@@ -26,6 +26,8 @@ Public Class sdgTableOptions
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
+            'adding these  because it's ignored on first load
+            ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText)
         End If
         autoTranslate(Me)
     End Sub
@@ -58,6 +60,11 @@ Public Class sdgTableOptions
         ucrSourceNotes.Setup(clsOperator)
         ucrOtherStyles.Setup(clsOperator)
 
+        ucrHeader.ucrInputTitle.SetText(dlgGeneralTable.ucrInputTitle.GetText)
+        ucrHeader.ucrInputTitleFooter.SetText(dlgGeneralTable.ucrInputTitleFooter.GetText)
+        ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText)
+        ucrChkSelectTheme.Checked = dlgGeneralTable.ucrChkSelectTheme.Checked
+        sdgTableStyles.GetNewUserInputAsRFunction()
         SetupTheme(clsOperator)
     End Sub
 
