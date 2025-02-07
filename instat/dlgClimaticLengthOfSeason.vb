@@ -35,6 +35,7 @@ Public Class dlgClimaticLengthOfSeason
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
+        Desablecontrols()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -81,14 +82,10 @@ Public Class dlgClimaticLengthOfSeason
         ucrChkLengthmore.SetText("Length_More")
         ucrChkLengthmore.AddParameterPresentCondition(True, "sub3", True)
         ucrChkLengthmore.AddParameterPresentCondition(False, "sub3", False)
-        ucrChkLengthmore.AddToLinkedControls({ucrNudLenghtmore, ucrInputFilterPreview}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=366)
+        ucrChkLengthmore.AddToLinkedControls(ucrInputFilterPreview, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=366)
 
-        ucrNudLenghtmore.SetParameter(New RParameter("left", 0, False))
-        ucrNudLenghtmore.DecimalPlaces = 0
-        ucrNudLenghtmore.Increment = 1
-        ucrNudLenghtmore.Minimum = 1
-        ucrNudLenghtmore.Maximum = 366
         EnableLengthmore()
+        Desablecontrols()
         ucrInputFilterPreview.IsReadOnly = True
     End Sub
 
@@ -263,7 +260,6 @@ Public Class dlgClimaticLengthOfSeason
         clsAscharactermoreFunction.SetRCommand("as.character")
 
         clsMinusmoreOPerator.SetOperation("-")
-        clsMinusmoreOPerator.AddParameter("left", clsRFunctionParameter:=clsIfElseFirstDoyFilledFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         clsDayToOperator.SetOperation("")
         clsDayToOperator.AddParameter("to", 366)
@@ -272,6 +268,7 @@ Public Class dlgClimaticLengthOfSeason
         'Base Function
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatCalcFunction)
+        Desablecontrols()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -296,7 +293,6 @@ Public Class dlgClimaticLengthOfSeason
         ucrChkLengthofSeason.SetRCode(clsCombinationListFunction, bReset)
         ucrChkType.SetRCode(clsCombinationListFunction, bReset)
         ucrChkLengthmore.SetRCode(clsCombinationListFunction, bReset)
-        'ucrNudLenghtmore.SetRCode(clsMinusmoreOPerator, bReset)
         ucrInputFilterPreview.SetRCode(clsMinusmoreOPerator, bReset)
     End Sub
 
@@ -365,7 +361,6 @@ Public Class dlgClimaticLengthOfSeason
 
     Private Sub ucrChkLengthmore_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLengthmore.ControlValueChanged
         EnableLengthmore()
-        '  UpdateDayFilterPreview()
         If ucrChkLengthmore.Checked Then
             clsCombinationListFunction.AddParameter("sub3", clsRFunctionParameter:=clsLengthmoreFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
@@ -396,18 +391,22 @@ Public Class dlgClimaticLengthOfSeason
         End If
     End Sub
 
-    'Private Sub UpdateDayFilterPreview()
-    '    If Not ucrChkLengthmore.Checked Then
-    '        ucrInputFilterPreview.SetName("")
-    '    Else
-    '        ucrInputFilterPreview.SetName(clsDayToOperator.ToScript())
-    '   ' End If
-    'End Sub
-
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
         sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndToFunction, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromListFunction, strNewMainDataFrame:=ucrSelectorLengthofSeason.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:="")
         sdgDoyRange.ShowDialog()
         ucrInputFilterPreview.SetName(clsDayToOperator.ToScript())
+        Desablecontrols()
+    End Sub
+
+    Private Sub ucrInputFilterPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFilterPreview.ControlValueChanged
+        If Not ucrInputFilterPreview.IsEmpty Then
+            clsMinusmoreOPerator.AddParameter("left", ucrInputFilterPreview.GetText(), iPosition:=0, bIncludeArgumentName:=False)
+        Else
+            clsMinusmoreOPerator.RemoveParameterByName("left")
+        End If
+    End Sub
+
+    Private Sub Desablecontrols()
         sdgDoyRange.rdoFromFixed.Enabled = False
         sdgDoyRange.rdoFromVariable.Enabled = False
         sdgDoyRange.ucrDoyFrom.Enabled = False
@@ -417,13 +416,9 @@ Public Class dlgClimaticLengthOfSeason
         sdgDoyRange.ucrReceiverTo.Enabled = False
         sdgDoyRange.ucrNudToDiff.Enabled = False
         sdgDoyRange.ucrSelectorDoy.Enabled = False
-    End Sub
-
-    Private Sub ucrInputFilterPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFilterPreview.ControlValueChanged
-        If Not ucrInputFilterPreview.IsEmpty Then
-            clsMinusmoreOPerator.AddParameter("left", ucrInputFilterPreview.GetText(), iPosition:=0, bIncludeArgumentName:=False)
-        Else
-            clsMinusmoreOPerator.RemoveParameterByName("left")
-        End If
+        sdgDoyRange.Size = New Size(603, 218)
+        sdgDoyRange.grpFrom.Location = New Size(10, 12)
+        sdgDoyRange.grpTo.Location = New Size(269, 12)
+        sdgDoyRange.ucrBaseSub.Location = New Size(185, 140)
     End Sub
 End Class

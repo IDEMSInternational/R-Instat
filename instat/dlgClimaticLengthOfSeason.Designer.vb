@@ -37,7 +37,6 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrSelectorLengthofSeason = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkLengthmore = New instat.ucrCheck()
-        Me.ucrNudLenghtmore = New instat.ucrNud()
         Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.cmdDoyRange = New System.Windows.Forms.Button()
         Me.SuspendLayout()
@@ -200,19 +199,6 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrChkLengthmore.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkLengthmore.TabIndex = 14
         '
-        'ucrNudLenghtmore
-        '
-        Me.ucrNudLenghtmore.AutoSize = True
-        Me.ucrNudLenghtmore.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLenghtmore.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLenghtmore.Location = New System.Drawing.Point(203, 24)
-        Me.ucrNudLenghtmore.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLenghtmore.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLenghtmore.Name = "ucrNudLenghtmore"
-        Me.ucrNudLenghtmore.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLenghtmore.TabIndex = 15
-        Me.ucrNudLenghtmore.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrInputFilterPreview
         '
         Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
@@ -243,7 +229,6 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ClientSize = New System.Drawing.Size(416, 384)
         Me.Controls.Add(Me.ucrInputFilterPreview)
         Me.Controls.Add(Me.cmdDoyRange)
-        Me.Controls.Add(Me.ucrNudLenghtmore)
         Me.Controls.Add(Me.ucrChkLengthmore)
         Me.Controls.Add(Me.ucrChkType)
         Me.Controls.Add(Me.ucrChkLengthofSeason)
@@ -282,7 +267,6 @@ Partial Class dlgClimaticLengthOfSeason
     Friend WithEvents ucrChkLengthofSeason As ucrCheck
     Friend WithEvents ucrInputTextType As ucrInputTextBox
     Friend WithEvents ucrInputLengthofSeason As ucrInputTextBox
-    Friend WithEvents ucrNudLenghtmore As ucrNud
     Friend WithEvents ucrChkLengthmore As ucrCheck
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
     Friend WithEvents cmdDoyRange As Button
