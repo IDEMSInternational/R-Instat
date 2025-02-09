@@ -6,7 +6,7 @@ Public Class dlgGeneralTable
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private strCommand As String
+    ' Private strCommand As String
 
     Private Sub dlgGeneralTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -89,6 +89,7 @@ Public Class dlgGeneralTable
         clsTitleFooterRFunction = New RFunction
         clsTitleStyleRFunction = New RFunction
 
+        SetupTheme(clsBaseOperator)
         ucrSelectorCols.Reset()
         ucrReceiverMultipleCols.SetMeAsReceiver()
         ucrSaveTable.Reset()
@@ -106,7 +107,7 @@ Public Class dlgGeneralTable
         clsGtRFunction.SetRCommand("gt")
         clsBaseOperator.AddParameter(strParameterName:="gt", clsRFunctionParameter:=clsGtRFunction, iPosition:=2, bIncludeArgumentName:=False)
 
-        '  Dim strCommand As String = ""
+        Dim strCommand As String = ""
         clsThemeRFunction.SetPackageName("gtExtras")
         clsThemeRFunction.SetRCommand(strCommand)
         clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
@@ -193,12 +194,22 @@ Public Class dlgGeneralTable
         If ucrChkSelectTheme.Checked Then
             ucrCboSelectThemes.Visible = True
 
-            clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
+            ' clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
 
         Else
-            clsBaseOperator.RemoveParameterByName("theme_format")
+            '   ucrCboSelectThemes.clearparameters
+            ' clsBaseOperator.RemoveParameterByName("theme_format")
             ucrCboSelectThemes.Visible = False
             clsThemeRFunction.ClearParameters()
+        End If
+    End Sub
+
+    Private Sub SetupTheme(clsBaseOperator As ROperator)
+        If clsBaseOperator.ContainsParameter("theme_format") Then
+            clsThemeRFunction = clsBaseOperator.GetParameter("theme_format").clsArgumentCodeStructure
+        Else
+            clsThemeRFunction = New RFunction
+            clsThemeRFunction.SetPackageName("gtExtras")
         End If
     End Sub
 
@@ -207,6 +218,7 @@ Public Class dlgGeneralTable
         If clsThemeRFunction Is Nothing Then
             Exit Sub
         End If
+        Dim strCommand As String = ""
         Select Case ucrCboSelectThemes.GetText
             Case "Dark Theme"
                 strCommand = "gt_theme_dark"

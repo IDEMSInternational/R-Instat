@@ -95,7 +95,7 @@ Public Class sdgTableStyles
 }
 
         ucrCboFontWeight.SetDropDownStyleAsNonEditable()
-        ucrCboFontWeight.SetParameter(New RParameter("font_weight", iNewPosition:=7)) ' Corrected parameter name
+        ucrCboFontWeight.SetParameter(New RParameter("weight", iNewPosition:=7)) ' Corrected parameter name
         ucrCboFontWeight.SetItems(dctFontWeight)
         ucrCboFontWeight.SetRDefault("NULL")
         '-----------------
@@ -141,7 +141,7 @@ Public Class sdgTableStyles
             {"Capitalize", Chr(34) & "capitalize" & Chr(34)}
         }
         ucrCboTransform.SetDropDownStyleAsNonEditable()
-        ucrCboTransform.SetParameter(New RParameter("text_transform", iNewPosition:=9)) ' Corrected parameter name
+        ucrCboTransform.SetParameter(New RParameter("transform", iNewPosition:=9)) ' Corrected parameter name
         ucrCboTransform.SetItems(dctTransform)
         ucrCboTransform.SetRDefault("NULL")
         '-----------------
@@ -181,7 +181,7 @@ Public Class sdgTableStyles
             {"Break Spaces", Chr(34) & "break-spaces" & Chr(34)} ' Corrected key
         }
         ucrCboWhiteSpace.SetDropDownStyleAsNonEditable()
-        ucrCboWhiteSpace.SetParameter(New RParameter("white_space", iNewPosition:=12)) ' Corrected parameter name and position
+        ucrCboWhiteSpace.SetParameter(New RParameter("whitespace", iNewPosition:=12)) ' Corrected parameter name and position
         ucrCboWhiteSpace.SetItems(dctWhiteSpace)
         ucrCboWhiteSpace.SetRDefault("NULL")
         '-----------------

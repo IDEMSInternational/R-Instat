@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class sdgTableOptions
 
     Private clsOperator As ROperator
-    Private clsThemeRFunction As RFunction
+    Private clsThemeRFunction, clsThemeRFunction2 As RFunction
     Private bFirstload As Boolean = True
 
     Private Sub sdgTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -99,26 +99,29 @@ Public Class sdgTableOptions
             ucrCboSelectThemes.Visible = True
             ucrChkManualTheme.Checked = Not ucrChkSelectTheme.Checked
             ' clsThemeRFunction.SetPackageName("gtExtras")
-            ' clsThemeRFunction.ClearParameters()
+            '  clsThemeRFunction.ClearParameters()
         Else
             ucrCboSelectThemes.Visible = False
         End If
     End Sub
 
     Private Sub ucrChkManualTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkManualTheme.ControlValueChanged
-
+        ' Dim clsThemeRFunction2 As New RFunction
         If ucrChkManualTheme.Checked Then
             btnManualTheme.Visible = True
             ucrChkSelectTheme.Checked = Not ucrChkManualTheme.Checked
-            clsThemeRFunction.SetPackageName("gt")
-            clsThemeRFunction.SetRCommand("tab_options")
+            'clsThemeRFunction2.SetPackageName("gt")
+            clsThemeRFunction2.SetRCommand("tab_options")
+
         Else
+            clsThemeRFunction.ClearParameters()
+
             btnManualTheme.Visible = False
         End If
     End Sub
 
     Private Sub btnManualTheme_Click(sender As Object, e As EventArgs) Handles btnManualTheme.Click
-        sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
+        sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction2)
         sdgSummaryThemes.ShowDialog(Me)
     End Sub
 
