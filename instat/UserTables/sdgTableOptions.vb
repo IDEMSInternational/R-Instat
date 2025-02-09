@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class sdgTableOptions
 
     Private clsOperator As ROperator
-    Private clsThemeRFunction, clsThemeRFunction2 As RFunction
+    Private clsThemeRFunction As RFunction
     Private bFirstload As Boolean = True
 
     Private Sub sdgTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -90,6 +90,11 @@ Public Class sdgTableOptions
             clsThemeRFunction = New RFunction
             clsThemeRFunction.SetPackageName("gtExtras")
         End If
+        If ucrChkManualTheme.Checked Then
+            sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
+        Else
+
+        End If
     End Sub
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
@@ -106,22 +111,21 @@ Public Class sdgTableOptions
     End Sub
 
     Private Sub ucrChkManualTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkManualTheme.ControlValueChanged
-        ' Dim clsThemeRFunction2 As New RFunction
+
         If ucrChkManualTheme.Checked Then
             btnManualTheme.Visible = True
             ucrChkSelectTheme.Checked = Not ucrChkManualTheme.Checked
-            'clsThemeRFunction2.SetPackageName("gt")
-            clsThemeRFunction2.SetRCommand("tab_options")
 
         Else
-            clsThemeRFunction.ClearParameters()
 
             btnManualTheme.Visible = False
         End If
     End Sub
 
     Private Sub btnManualTheme_Click(sender As Object, e As EventArgs) Handles btnManualTheme.Click
-        sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction2)
+        clsThemeRFunction.SetPackageName("gt")
+        clsThemeRFunction.SetRCommand("tab_options")
+        sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
         sdgSummaryThemes.ShowDialog(Me)
     End Sub
 
@@ -156,6 +160,11 @@ Public Class sdgTableOptions
 
     Private Sub SetThemeValuesOnReturn(clsOperator As ROperator)
         ' Set the themes parameter if there was a theme selected
+        If ucrChkManualTheme.Checked Then
+            sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
+        Else
+
+        End If
         If clsThemeRFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsThemeRFunction.strRCommand) Then
             clsOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
         Else

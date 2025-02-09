@@ -6,7 +6,6 @@ Public Class dlgGeneralTable
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    ' Private strCommand As String
 
     Private Sub dlgGeneralTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -81,7 +80,7 @@ Public Class dlgGeneralTable
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
-        ' clsOperator = New ROperator
+
         clsHeadRFunction = New RFunction
         clsGtRFunction = New RFunction
         clsHeaderRFunction = New RFunction
@@ -89,7 +88,6 @@ Public Class dlgGeneralTable
         clsTitleFooterRFunction = New RFunction
         clsTitleStyleRFunction = New RFunction
 
-        SetupTheme(clsBaseOperator)
         ucrSelectorCols.Reset()
         ucrReceiverMultipleCols.SetMeAsReceiver()
         ucrSaveTable.Reset()
@@ -114,16 +112,16 @@ Public Class dlgGeneralTable
 
 
         clsHeaderRFunction.SetPackageName("gt")
-            clsHeaderRFunction.SetRCommand("tab_header")
-            clsHeaderRFunction.AddParameter("title", ucrInputTitle.GetText, iPosition:=1)
-            clsBaseOperator.AddParameter("theme_Header", clsRFunctionParameter:=clsHeaderRFunction)
+        clsHeaderRFunction.SetRCommand("tab_header")
+        clsHeaderRFunction.AddParameter("title", ucrInputTitle.GetText, iPosition:=1)
+        clsBaseOperator.AddParameter("theme_Header", clsRFunctionParameter:=clsHeaderRFunction)
 
 
 
         clsTitleFooterRFunction.SetPackageName("gt")
-            clsTitleFooterRFunction.SetRCommand("tab_footnote")
-            clsTitleFooterRFunction.AddParameter("footnote", ucrInputTitleFooter.GetText, iPosition:=1)
-            clsTitleFooterRFunction.AddParameter("locations", clsRFunctionParameter:=clsCellsTitleRFunction, iPosition:=2)
+        clsTitleFooterRFunction.SetRCommand("tab_footnote")
+        clsTitleFooterRFunction.AddParameter("footnote", ucrInputTitleFooter.GetText, iPosition:=1)
+        clsTitleFooterRFunction.AddParameter("locations", clsRFunctionParameter:=clsCellsTitleRFunction, iPosition:=2)
         clsBaseOperator.AddParameter("theme_footer", clsRFunctionParameter:=clsTitleFooterRFunction)
 
         Dim strGroupParamValue As String = "title"
@@ -194,22 +192,13 @@ Public Class dlgGeneralTable
         If ucrChkSelectTheme.Checked Then
             ucrCboSelectThemes.Visible = True
 
-            ' clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
+            clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
 
         Else
-            '   ucrCboSelectThemes.clearparameters
-            ' clsBaseOperator.RemoveParameterByName("theme_format")
+
+            clsBaseOperator.RemoveParameterByName("theme_format")
             ucrCboSelectThemes.Visible = False
             clsThemeRFunction.ClearParameters()
-        End If
-    End Sub
-
-    Private Sub SetupTheme(clsBaseOperator As ROperator)
-        If clsBaseOperator.ContainsParameter("theme_format") Then
-            clsThemeRFunction = clsBaseOperator.GetParameter("theme_format").clsArgumentCodeStructure
-        Else
-            clsThemeRFunction = New RFunction
-            clsThemeRFunction.SetPackageName("gtExtras")
         End If
     End Sub
 
