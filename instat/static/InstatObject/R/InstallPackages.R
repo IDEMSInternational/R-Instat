@@ -40,7 +40,7 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
            "FNN", "fontawesome", "forcats", "foreach", "forecast", "foreign", 
            "formattable", "formula.tools", "Formula", "fracdiff", "fs", 
            "future.apply", "future", "gapminder", "gclus", "gcookbook", 
-           "generics", "GenSA", "geomtextpath", "geosphere", "gert", "getPass", 
+           "generics", "GenSA", "geomtextpath", "geosphere", "gert", 
            "GGally", "ggalt", "ggeffects", "ggfittext", "ggformula", "ggfortify", 
            "ggmosaic", "ggplot2", "ggplotify", "ggpmisc", "ggpp", "ggpubr", 
            "ggrepel", "ggridges", "ggsci", "ggside", "ggsignif", "ggstats", 
@@ -126,3 +126,6 @@ devtools::install_github("michael-franke/aida-package")
 devtools::install_github("rijaf-iri/CDT")
 devtools::install_github("IDEMSInternational/rapidpror")
 devtools::install_github("IDEMSInternational/epicsawrap")
+
+#install a specific version of getPass. See issue #9398.
+devtools::install_github("wrathematics/getPass", ref = "v0.2-2")
