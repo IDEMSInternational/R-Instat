@@ -2557,7 +2557,6 @@ Public Class frmMain
 
     Private Sub mnuViewSwapDataAndScript_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndScript.Click
         If Not ValidateCurrentDataFrame() Then Return
-        mnuViewSwapDataAndMetadata.Enabled = mnuViewSwapDataAndScript.Checked
         mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
         UpdateSwapDataAndScript()
         UpdateLayout()
@@ -2572,7 +2571,6 @@ Public Class frmMain
 
     Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
         If Not ValidateCurrentDataFrame() Then Return
-        mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndDataframeMetadata()
         UpdateLayout()
@@ -2954,7 +2952,7 @@ Public Class frmMain
 
     Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
         If Not ValidateCurrentDataFrame() Then Return
-        mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
+
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
@@ -2962,14 +2960,13 @@ Public Class frmMain
 
     Private Sub mnuSwapDataFrameMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataDataframeMetadata.Click
         If Not ValidateCurrentDataFrame() Then Return
-        mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
+
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndDataframeMetadata()
         UpdateLayout()
     End Sub
 
     Private Sub mnuSwapDataLogScript_Click(sender As Object, e As EventArgs) Handles mnuSwapDataLogScript.Click
-        mnuViewSwapDataAndMetadata.Enabled = mnuViewSwapDataAndScript.Checked
         mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
         UpdateSwapDataAndScript()
         UpdateLayout()
