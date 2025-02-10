@@ -296,6 +296,10 @@ Public Class ucrDataView
         Return _grid.GetWorksheetCount
     End Function
 
+    Public Sub RemoveAllBackgroundColors()
+        _grid.RemoveAllBackgroundColors()
+    End Sub
+
     Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False)
         _grid.AdjustColumnWidthAfterWrapping(strColumn, bApplyWrap)
     End Sub
