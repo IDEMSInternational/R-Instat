@@ -650,6 +650,7 @@ Public Class frmMain
     End Sub
 
     Private Sub UpdateSwapDataAndMetadata()
+        ClearAllPanels()
         If mnuViewSwapDataAndMetadata.Checked Then
             splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
             splMetadata.Panel1.Controls.Add(ucrDataViewer)
@@ -666,6 +667,7 @@ Public Class frmMain
     End Sub
 
     Private Sub UpdateSwapDataAndDataframeMetadata()
+        ClearAllPanels()
         If mnuViewSwapDataAndDataframeMetadata.Checked Then
             splDataOutput.Panel1.Controls.Add(ucrDataFrameMeta)
             splMetadata.Panel1.Controls.Add(ucrDataViewer)
@@ -681,7 +683,14 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub ClearAllPanels()
+        splDataOutput.Panel1.Controls.Clear()
+        splMetadata.Panel1.Controls.Clear()
+        splExtraWindows.Panel2.Controls.Clear()
+    End Sub
+
     Public Sub UpdateSwapDataAndScript()
+        ClearAllPanels()
         If mnuViewSwapDataAndScript.Checked Then
             splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
             splExtraWindows.Panel2.Controls.Add(ucrDataViewer)
