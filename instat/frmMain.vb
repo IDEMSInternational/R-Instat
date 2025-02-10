@@ -665,6 +665,22 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub UpdateSwapDataAndDataframeMetadata()
+        If mnuViewSwapDataAndDataframeMetadata.Checked Then
+            splDataOutput.Panel1.Controls.Add(ucrDataFrameMeta)
+            splMetadata.Panel1.Controls.Add(ucrDataViewer)
+            mnuViewDataFrameMetadata.Text = "Data View"
+            mnuViewDataView.Text = "Dataframe Metadata"
+            mnuSwapDataDataframeMetadata.Checked = True
+        Else
+            splDataOutput.Panel1.Controls.Add(ucrDataViewer)
+            splMetadata.Panel1.Controls.Add(ucrDataFrameMeta)
+            mnuViewDataFrameMetadata.Text = "Dataframe Metadata"
+            mnuViewDataView.Text = "Data View"
+            mnuSwapDataDataframeMetadata.Checked = False
+        End If
+    End Sub
+
     Public Sub UpdateSwapDataAndScript()
         If mnuViewSwapDataAndScript.Checked Then
             splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
@@ -2549,6 +2565,13 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
+    Private Sub mnuViewSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndDataframeMetadata.Click
+
+        mnuViewSwapDataAndDataframeMetadata.Checked = Not mnuViewSwapDataAndDataframeMetadata.Checked
+        UpdateSwapDataAndMetadata()
+        UpdateLayout()
+    End Sub
+
     Private Sub mnuViewSwapDataAndMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.CheckStateChanged
         If Not mnuViewSwapDataAndMetadata.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
             mnuViewColumnMetadata.Checked = False
@@ -2916,7 +2939,7 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
     End Sub
 
-    Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
+    Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs)
         mnuViewSwapDataAndScript.Enabled = mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()

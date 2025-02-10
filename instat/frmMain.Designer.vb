@@ -425,7 +425,6 @@ Partial Class frmMain
         Me.mnuMetadata = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuColumnMetadat = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDataFrameMetadat = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuSwapDataMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator76 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -711,6 +710,9 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewSwapDataAndDataframeMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSwapDataMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSwapDataDataframeMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1466,7 +1468,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutput, Me.mnuViewLogScript, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata, Me.mnuViewSwapDataAndScript})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutput, Me.mnuViewLogScript, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata, Me.mnuViewSwapDataAndScript, Me.mnuViewSwapDataAndDataframeMetadata})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(44, 22)
         Me.mnuView.Tag = "View"
@@ -1476,7 +1478,7 @@ Partial Class frmMain
         '
         Me.mnuViewDataView.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewDataView.Name = "mnuViewDataView"
-        Me.mnuViewDataView.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewDataView.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewDataView.Tag = "Data_View"
         Me.mnuViewDataView.Text = "Data View"
         '
@@ -1484,21 +1486,21 @@ Partial Class frmMain
         '
         Me.mnuViewOutput.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewOutput.Name = "mnuViewOutput"
-        Me.mnuViewOutput.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewOutput.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewOutput.Text = "Output"
         '
         'mnuViewLogScript
         '
         Me.mnuViewLogScript.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewLogScript.Name = "mnuViewLogScript"
-        Me.mnuViewLogScript.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewLogScript.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewLogScript.Text = "Log/Script"
         '
         'mnuViewColumnMetadata
         '
         Me.mnuViewColumnMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewColumnMetadata.Name = "mnuViewColumnMetadata"
-        Me.mnuViewColumnMetadata.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewColumnMetadata.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewColumnMetadata.Tag = "Column_Metadata"
         Me.mnuViewColumnMetadata.Text = "Column Metadata"
         '
@@ -1506,27 +1508,27 @@ Partial Class frmMain
         '
         Me.mnuViewDataFrameMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewDataFrameMetadata.Name = "mnuViewDataFrameMetadata"
-        Me.mnuViewDataFrameMetadata.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewDataFrameMetadata.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewDataFrameMetadata.Tag = "Data_Frame_Metadata"
         Me.mnuViewDataFrameMetadata.Text = "Data Frame Metadata"
         '
         'ToolStripSeparator22
         '
         Me.ToolStripSeparator22.Name = "ToolStripSeparator22"
-        Me.ToolStripSeparator22.Size = New System.Drawing.Size(210, 6)
+        Me.ToolStripSeparator22.Size = New System.Drawing.Size(265, 6)
         '
         'mnuViewStructuredMenu
         '
         Me.mnuViewStructuredMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewStructuredMenu.Name = "mnuViewStructuredMenu"
-        Me.mnuViewStructuredMenu.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewStructuredMenu.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewStructuredMenu.Text = "Structured Menu"
         '
         'mnuViewClimaticMenu
         '
         Me.mnuViewClimaticMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewClimaticMenu.Name = "mnuViewClimaticMenu"
-        Me.mnuViewClimaticMenu.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewClimaticMenu.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewClimaticMenu.Tag = ""
         Me.mnuViewClimaticMenu.Text = "Climatic Menu"
         '
@@ -1534,7 +1536,7 @@ Partial Class frmMain
         '
         Me.mnuViewProcurementMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewProcurementMenu.Name = "mnuViewProcurementMenu"
-        Me.mnuViewProcurementMenu.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewProcurementMenu.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewProcurementMenu.Tag = ""
         Me.mnuViewProcurementMenu.Text = "Procurement Menu"
         '
@@ -1542,33 +1544,33 @@ Partial Class frmMain
         '
         Me.mnuViewOptionsByContextMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewOptionsByContextMenu.Name = "mnuViewOptionsByContextMenu"
-        Me.mnuViewOptionsByContextMenu.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewOptionsByContextMenu.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewOptionsByContextMenu.Text = "Experiments"
         '
         'ToolStripSeparator39
         '
         Me.ToolStripSeparator39.Name = "ToolStripSeparator39"
-        Me.ToolStripSeparator39.Size = New System.Drawing.Size(210, 6)
+        Me.ToolStripSeparator39.Size = New System.Drawing.Size(265, 6)
         '
         'mnuViewResetToDefaultLayout
         '
         Me.mnuViewResetToDefaultLayout.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewResetToDefaultLayout.Name = "mnuViewResetToDefaultLayout"
-        Me.mnuViewResetToDefaultLayout.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewResetToDefaultLayout.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewResetToDefaultLayout.Text = "Reset to Default Layout"
         '
         'mnuViewSwapDataAndMetadata
         '
         Me.mnuViewSwapDataAndMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewSwapDataAndMetadata.Name = "mnuViewSwapDataAndMetadata"
-        Me.mnuViewSwapDataAndMetadata.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewSwapDataAndMetadata.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewSwapDataAndMetadata.Text = "Swap Data and Metadata"
         '
         'mnuViewSwapDataAndScript
         '
         Me.mnuViewSwapDataAndScript.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewSwapDataAndScript.Name = "mnuViewSwapDataAndScript"
-        Me.mnuViewSwapDataAndScript.Size = New System.Drawing.Size(213, 22)
+        Me.mnuViewSwapDataAndScript.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewSwapDataAndScript.Text = "Swap Data and  Log/Script"
         '
         'mnuHelp
@@ -3211,7 +3213,7 @@ Partial Class frmMain
         '
         Me.mnuTbDataView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.mnuTbDataView.DropDownButtonWidth = 18
-        Me.mnuTbDataView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDataViewWindow, Me.mnuRDataViewerWindow})
+        Me.mnuTbDataView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDataViewWindow, Me.mnuRDataViewerWindow, Me.mnuSwapDataMetadata, Me.mnuSwapDataDataframeMetadata})
         Me.mnuTbDataView.Image = Global.instat.My.Resources.Resources.dataframe2
         Me.mnuTbDataView.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbDataView.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
@@ -3223,14 +3225,14 @@ Partial Class frmMain
         '
         Me.mnuDataViewWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuDataViewWindow.Name = "mnuDataViewWindow"
-        Me.mnuDataViewWindow.Size = New System.Drawing.Size(148, 22)
+        Me.mnuDataViewWindow.Size = New System.Drawing.Size(263, 22)
         Me.mnuDataViewWindow.Text = "Data View"
         '
         'mnuRDataViewerWindow
         '
         Me.mnuRDataViewerWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuRDataViewerWindow.Name = "mnuRDataViewerWindow"
-        Me.mnuRDataViewerWindow.Size = New System.Drawing.Size(148, 22)
+        Me.mnuRDataViewerWindow.Size = New System.Drawing.Size(263, 22)
         Me.mnuRDataViewerWindow.Text = "R-Data Viewer"
         '
         'mnuTbOutput
@@ -3336,7 +3338,7 @@ Partial Class frmMain
         '
         Me.mnuMetadata.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.mnuMetadata.DropDownButtonWidth = 18
-        Me.mnuMetadata.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnMetadat, Me.mnuDataFrameMetadat, Me.mnuSwapDataMetadata})
+        Me.mnuMetadata.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnMetadat, Me.mnuDataFrameMetadat})
         Me.mnuMetadata.Image = CType(resources.GetObject("mnuMetadata.Image"), System.Drawing.Image)
         Me.mnuMetadata.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuMetadata.Name = "mnuMetadata"
@@ -3348,22 +3350,15 @@ Partial Class frmMain
         '
         Me.mnuColumnMetadat.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuColumnMetadat.Name = "mnuColumnMetadat"
-        Me.mnuColumnMetadat.Size = New System.Drawing.Size(214, 22)
+        Me.mnuColumnMetadat.Size = New System.Drawing.Size(202, 22)
         Me.mnuColumnMetadat.Text = "  Column Metadata..."
         '
         'mnuDataFrameMetadat
         '
         Me.mnuDataFrameMetadat.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuDataFrameMetadat.Name = "mnuDataFrameMetadat"
-        Me.mnuDataFrameMetadat.Size = New System.Drawing.Size(214, 22)
+        Me.mnuDataFrameMetadat.Size = New System.Drawing.Size(202, 22)
         Me.mnuDataFrameMetadat.Text = "  Data Frame Metadata..."
-        '
-        'mnuSwapDataMetadata
-        '
-        Me.mnuSwapDataMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.mnuSwapDataMetadata.Name = "mnuSwapDataMetadata"
-        Me.mnuSwapDataMetadata.Size = New System.Drawing.Size(214, 22)
-        Me.mnuSwapDataMetadata.Text = "Swap Data and Metadata..."
         '
         'ToolStripSeparator76
         '
@@ -3401,26 +3396,26 @@ Partial Class frmMain
         '
         Me.mnuToolBarHelp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuToolBarHelp.Name = "mnuToolBarHelp"
-        Me.mnuToolBarHelp.Size = New System.Drawing.Size(173, 22)
+        Me.mnuToolBarHelp.Size = New System.Drawing.Size(180, 22)
         Me.mnuToolBarHelp.Text = "Toolbar Help"
         '
         'mnuDataWindowHelp
         '
         Me.mnuDataWindowHelp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuDataWindowHelp.Name = "mnuDataWindowHelp"
-        Me.mnuDataWindowHelp.Size = New System.Drawing.Size(173, 22)
+        Me.mnuDataWindowHelp.Size = New System.Drawing.Size(180, 22)
         Me.mnuDataWindowHelp.Text = "Data Window Help"
         '
         'mnuOutputHelp
         '
         Me.mnuOutputHelp.Name = "mnuOutputHelp"
-        Me.mnuOutputHelp.Size = New System.Drawing.Size(173, 22)
+        Me.mnuOutputHelp.Size = New System.Drawing.Size(180, 22)
         Me.mnuOutputHelp.Text = "Output Help"
         '
         'mnuLogScriptHelp
         '
         Me.mnuLogScriptHelp.Name = "mnuLogScriptHelp"
-        Me.mnuLogScriptHelp.Size = New System.Drawing.Size(173, 22)
+        Me.mnuLogScriptHelp.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogScriptHelp.Text = "Log Script Help"
         '
         'ToolStripSeparator77
@@ -5315,6 +5310,24 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuViewSwapDataAndDataframeMetadata
+        '
+        Me.mnuViewSwapDataAndDataframeMetadata.Name = "mnuViewSwapDataAndDataframeMetadata"
+        Me.mnuViewSwapDataAndDataframeMetadata.Size = New System.Drawing.Size(268, 22)
+        Me.mnuViewSwapDataAndDataframeMetadata.Text = "Swap Data and Data Frame Metadata"
+        '
+        'mnuSwapDataMetadata
+        '
+        Me.mnuSwapDataMetadata.Name = "mnuSwapDataMetadata"
+        Me.mnuSwapDataMetadata.Size = New System.Drawing.Size(268, 22)
+        Me.mnuSwapDataMetadata.Text = "Swap Data With Column Metadata"
+        '
+        'mnuSwapDataDataframeMetadata
+        '
+        Me.mnuSwapDataDataframeMetadata.Name = "mnuSwapDataDataframeMetadata"
+        Me.mnuSwapDataDataframeMetadata.Size = New System.Drawing.Size(268, 22)
+        Me.mnuSwapDataDataframeMetadata.Text = "Swap Data With Dataframe Metadata"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -6032,7 +6045,6 @@ Partial Class frmMain
     Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuSwapDataLogScript As ToolStripMenuItem
-    Friend WithEvents mnuSwapDataMetadata As ToolStripMenuItem
     Friend WithEvents mnuHelpResourcesSite As ToolStripMenuItem
     Friend WithEvents mnuImportFromOpenAppBuilder As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
@@ -6047,4 +6059,7 @@ Partial Class frmMain
     Friend WithEvents mnuDataViewWindow As ToolStripMenuItem
     Friend WithEvents mnuRDataViewerWindow As ToolStripMenuItem
     Friend WithEvents mnuClimaticModelOutfilling As ToolStripMenuItem
+    Friend WithEvents mnuViewSwapDataAndDataframeMetadata As ToolStripMenuItem
+    Friend WithEvents mnuSwapDataMetadata As ToolStripMenuItem
+    Friend WithEvents mnuSwapDataDataframeMetadata As ToolStripMenuItem
 End Class
