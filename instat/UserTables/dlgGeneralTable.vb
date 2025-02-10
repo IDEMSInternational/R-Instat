@@ -24,6 +24,11 @@ Public Class dlgGeneralTable
     Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
         sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
         sdgTableOptions.ShowDialog(Me)
+        ucrInputTitle.SetText(sdgTableOptions.ucrHeader.ucrInputTitle.GetText)
+        ucrInputTitleFooter.SetText(sdgTableOptions.ucrHeader.ucrInputTitleFooter.GetText)
+        ucrCboSelectThemes.SetText(sdgTableOptions.ucrCboSelectThemes.GetText)
+        ucrChkSelectTheme.Checked = sdgTableOptions.ucrChkSelectTheme.Checked
+        sdgTableStyles.GetNewUserInputAsRFunction()
     End Sub
 
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged
@@ -75,13 +80,14 @@ Public Class dlgGeneralTable
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
-        ' clsOperator = New ROperator
+
         clsHeadRFunction = New RFunction
         clsGtRFunction = New RFunction
         clsHeaderRFunction = New RFunction
         clsCellsTitleRFunction = New RFunction
         clsTitleFooterRFunction = New RFunction
         clsTitleStyleRFunction = New RFunction
+
         ucrSelectorCols.Reset()
         ucrReceiverMultipleCols.SetMeAsReceiver()
         ucrSaveTable.Reset()
@@ -104,10 +110,13 @@ Public Class dlgGeneralTable
         clsThemeRFunction.SetRCommand(strCommand)
         clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
 
+
         clsHeaderRFunction.SetPackageName("gt")
         clsHeaderRFunction.SetRCommand("tab_header")
         clsHeaderRFunction.AddParameter("title", ucrInputTitle.GetText, iPosition:=1)
         clsBaseOperator.AddParameter("theme_Header", clsRFunctionParameter:=clsHeaderRFunction)
+
+
 
         clsTitleFooterRFunction.SetPackageName("gt")
         clsTitleFooterRFunction.SetRCommand("tab_footnote")
@@ -151,6 +160,8 @@ Public Class dlgGeneralTable
         End If
     End Sub
 
+
+
     Private Sub btnTitleFormat_Click(sender As Object, e As EventArgs) Handles btnTitleStyle.Click
         Dim clsListStyleRFunction As RFunction = clsTablesUtils.ShowStyleSubDialog(Me.ParentForm, clsTitleStyleRFunction)
         If clsListStyleRFunction Is Nothing Then
@@ -165,6 +176,16 @@ Public Class dlgGeneralTable
 
     Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputTitle.ControlContentsChanged, ucrInputTitleFooter.ControlContentsChanged
         ucrInputTitleFooter.Enabled = Not ucrInputTitle.IsEmpty()
+        If Not ucrInputTitle.IsEmpty Then
+            clsBaseOperator.AddParameter("theme_Header", clsRFunctionParameter:=clsHeaderRFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme_Header")
+        End If
+        If Not ucrInputTitleFooter.IsEmpty Then
+            clsBaseOperator.AddParameter("theme_footer", clsRFunctionParameter:=clsTitleFooterRFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme_footer")
+        End If
     End Sub
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
@@ -172,11 +193,10 @@ Public Class dlgGeneralTable
             ucrCboSelectThemes.Visible = True
 
             clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
-            'clsThemeRFunction.SetPackageName("gtExtras")
-            'clsThemeRFunction.ClearParameters()
-        Else
-            clsBaseOperator.RemoveParameterByName("theme_format")
 
+        Else
+
+            clsBaseOperator.RemoveParameterByName("theme_format")
             ucrCboSelectThemes.Visible = False
             clsThemeRFunction.ClearParameters()
         End If
@@ -187,7 +207,6 @@ Public Class dlgGeneralTable
         If clsThemeRFunction Is Nothing Then
             Exit Sub
         End If
-
         Dim strCommand As String = ""
         Select Case ucrCboSelectThemes.GetText
             Case "Dark Theme"

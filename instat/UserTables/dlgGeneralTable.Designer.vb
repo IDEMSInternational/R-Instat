@@ -64,7 +64,7 @@ Partial Class dlgGeneralTable
         '
         Me.ucrChkSelectTheme.AutoSize = True
         Me.ucrChkSelectTheme.Checked = False
-        Me.ucrChkSelectTheme.Location = New System.Drawing.Point(9, 233)
+        Me.ucrChkSelectTheme.Location = New System.Drawing.Point(9, 361)
         Me.ucrChkSelectTheme.Name = "ucrChkSelectTheme"
         Me.ucrChkSelectTheme.Size = New System.Drawing.Size(182, 23)
         Me.ucrChkSelectTheme.TabIndex = 33
@@ -75,7 +75,7 @@ Partial Class dlgGeneralTable
         Me.ucrCboSelectThemes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboSelectThemes.GetSetSelectedIndex = -1
         Me.ucrCboSelectThemes.IsReadOnly = False
-        Me.ucrCboSelectThemes.Location = New System.Drawing.Point(214, 233)
+        Me.ucrCboSelectThemes.Location = New System.Drawing.Point(214, 361)
         Me.ucrCboSelectThemes.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboSelectThemes.Name = "ucrCboSelectThemes"
         Me.ucrCboSelectThemes.Size = New System.Drawing.Size(168, 21)
@@ -155,7 +155,7 @@ Partial Class dlgGeneralTable
         Me.grpBoxTitle.Controls.Add(Me.btnTitleStyle)
         Me.grpBoxTitle.Controls.Add(Me.lblHeaderTitle)
         Me.grpBoxTitle.Controls.Add(Me.ucrInputTitleFooter)
-        Me.grpBoxTitle.Location = New System.Drawing.Point(7, 265)
+        Me.grpBoxTitle.Location = New System.Drawing.Point(7, 233)
         Me.grpBoxTitle.Name = "grpBoxTitle"
         Me.grpBoxTitle.Size = New System.Drawing.Size(463, 115)
         Me.grpBoxTitle.TabIndex = 34

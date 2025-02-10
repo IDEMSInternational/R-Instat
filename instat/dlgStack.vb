@@ -125,8 +125,8 @@ Public Class dlgStack
 
         ucrPnlCarryColumns.AddRadioButton(rdoCarryAllColumns)
         ucrPnlCarryColumns.AddRadioButton(rdoCarryColumns)
-        ucrPnlCarryColumns.AddParameterIsRFunctionCondition(rdoCarryAllColumns, "data")
-        ucrPnlCarryColumns.AddParameterIsROperatorCondition(rdoCarryColumns, "%>%")
+        ucrPnlCarryColumns.AddParameterValuesCondition(rdoCarryAllColumns, "checked", "all_columns")
+        ucrPnlCarryColumns.AddParameterValuesCondition(rdoCarryColumns, "checked", "columns")
 
         ucrInputValuesTo.SetParameter(New RParameter(" values_to", 4))
         ucrInputValuesTo.SetRDefault(Chr(34) & "value" & Chr(34))
@@ -237,6 +237,7 @@ Public Class dlgStack
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "all_columns", iPosition:=1)
 
         clsPivotLongerFunction.SetRCommand("pivot_longer")
         clsPivotLongerFunction.SetPackageName("tidyr")
@@ -300,7 +301,6 @@ Public Class dlgStack
         ucrChkDropMissingValues.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputValuesTo.SetRCode(clsPivotLongerFunction, bReset)
         ucrPnlStack.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlCarryColumns.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrChkDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrFactorInto.SetRCode(clsReshapeFunction, bReset)
@@ -309,6 +309,7 @@ Public Class dlgStack
             ucrReceiverDropValues.SetRCode(clsReshapeFunction, bReset)
             ucrChkDropVariables.SetRCode(clsDummyFunction, bReset)
             ucrReceiverColumnsToBeStack.SetRCode(clsPivotLongerFunction, bReset)
+            ucrPnlCarryColumns.SetRCode(clsDummyFunction, bReset)
         End If
     End Sub
 
