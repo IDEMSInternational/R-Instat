@@ -3,6 +3,7 @@ Sys.setlocale("LC_TIME", "C")
 
 #Install packages from CRAN archive
 install.packages("http://cran.r-project.org/src/contrib/Archive/signmedian.test/signmedian.test_1.5.1.tar.gz", repos=NULL, type="source")
+install.packages("https://cran.r-project.org/src/contrib/Archive/getPass/getPass_0.2-2.tar.gz", repos=NULL, type="source")
 
 #Install packages from win.binary
 install.packages("stringi", dependencies = FALSE,  repos='https://cloud.r-project.org', type = "win.binary")
@@ -126,6 +127,3 @@ devtools::install_github("michael-franke/aida-package")
 devtools::install_github("rijaf-iri/CDT")
 devtools::install_github("IDEMSInternational/rapidpror")
 devtools::install_github("IDEMSInternational/epicsawrap")
-
-#install a specific version of getPass. See issue #9398.
-devtools::install_github("wrathematics/getPass", ref = "v0.2-2")
