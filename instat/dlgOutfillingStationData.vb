@@ -125,7 +125,6 @@ Public Class dlgOutfillingStationData
         ucrChkStationToExclude.SetText("Station(s) to Exclude")
         ucrChkStationToExclude.AddParameterValuesCondition(True, "exclude", "True")
         ucrChkStationToExclude.AddParameterValuesCondition(False, "exclude", "False")
-        'ucrChkStationToExclude.AddToLinkedControls({ucrInputSelectStation}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudRandomSeed.SetParameter(New RParameter("set_seed", 10))
         ucrNudRandomSeed.SetMinMax(1, Integer.MaxValue)
@@ -139,8 +138,6 @@ Public Class dlgOutfillingStationData
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorOutfilling.ucrAvailableDataFrames)
         ucrSaveColumn.SetLabelText("Prefix for New Columns:")
         ucrSaveColumn.SetIsComboBox()
-
-        'ucrSaveColumn.setLinkedReceiver(ucrReceiverSplitTextColumn)
     End Sub
 
     Private Sub SetDefaults()
@@ -170,13 +167,6 @@ Public Class dlgOutfillingStationData
         clsDoFillingFunction.SetAssignTo(ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorOutfilling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText())
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDoFillingFunction)
-        'ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(),
-        '                                  strTempDataframe:=ucrSelectorOutfilling.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
-        '                                  bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix,
-        '                                  bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames,
-        '                                  bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
-        '                                  bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
