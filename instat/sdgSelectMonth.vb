@@ -30,6 +30,7 @@ Public Class sdgSelectMonth
         ucrMonthAsFactor.SetAsMultipleSelectorGrid(ucrReceiverMonth,
                                                    hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
                                                    bIncludeNALevel:=False)
+        ucrMonthAsFactor.btnSelectAll.Enabled = False
     End Sub
 
     Public Sub SetRCode(Optional clsNewInOperator As ROperator = Nothing, Optional clsNewListCalcFunction As RFunction = Nothing, Optional clsNewFilterMonthFunction As RFunction = Nothing, Optional ucrNewReceiverMonth As ucrReceiverSingle = Nothing, Optional bReset As Boolean = False)

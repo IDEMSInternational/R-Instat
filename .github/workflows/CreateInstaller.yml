@@ -95,7 +95,7 @@ jobs:
          
     # upload 32 bit installer without R
     - name: Upload the 32 bit installer as an artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "Output/"
@@ -113,7 +113,7 @@ jobs:
 
     # Upload 64 bit installer without R
     - name: Upload the 64 bit installer as an artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "Output/"
@@ -183,7 +183,7 @@ jobs:
       shell: cmd
       
     - name: Upload the 64 bit installer with R as an artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "Output/"
@@ -208,7 +208,7 @@ jobs:
       shell: cmd
       
     - name: Upload the 32 bit installer with R as an artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "Output/"

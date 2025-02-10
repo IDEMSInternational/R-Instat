@@ -22,7 +22,7 @@ Public Class dlgClimaticSummary
     Private iReceiverMaxY As Integer
     Private iReceiverLabelMaxY As Integer
     Private bResetSubdialog As Boolean = False
-    Private clsDefaultFunction, clsConcFunction, clsSummariesList,
+    Private clsDefaultFunction, clsIfElseFirstDoyFilledFunction, clsConcFunction, clsSummariesList,
         clsDefaultFactors, clsDayFilterCalc, clsDayFilterCalcFromConvert,
         clsDayFilterCalcFromList, clsAddDateFunction,
         clsDummyFunction As New RFunction
@@ -157,6 +157,7 @@ Public Class dlgClimaticSummary
         clsConcFunction = New RFunction
         clsAddDateFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsIfElseFirstDoyFilledFunction = New RFunction
 
         clsFromAndToConditionOperator = New ROperator
         clsDayFilterCalc = New RFunction
@@ -194,8 +195,7 @@ Public Class dlgClimaticSummary
 
         'TODO: what defaults do we want?
         clsSummariesList.SetRCommand("c")
-        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False, iPosition:=3)
+        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False, iPosition:=11)
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
@@ -289,7 +289,7 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
-        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFilterCalc, clsNewDayFromOperator:=clsFromConditionOperator, clsNewDayToOperator:=clsToConditionOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
+        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFilterCalc, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsFromConditionOperator, clsNewDayToOperator:=clsToConditionOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
         sdgDoyRange.ShowDialog()
         UpdateDayFilterPreview()
     End Sub

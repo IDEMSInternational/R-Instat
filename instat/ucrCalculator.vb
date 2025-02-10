@@ -266,9 +266,10 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdNthPrime, "gives the n-th prime. For example nth_prime(1000)= 7919")
         ttCalculator.SetToolTip(cmdGeneratePrimes, "generates the first n prime numbers equal to the number of rows in the data")
         ttCalculator.SetToolTip(cmdGCD, "greatest common divisor, for example gcd(18,42) = 6")
-        ttCalculator.SetToolTip(cmdSCM, "smallest common multiple, for example scm(18,42) = 126 (= 718 & 342)")
-        ttCalculator.SetToolTip(cmdCoprime, "also called mutually prime, for example coprime(30,77) = TRUE. (30 = 235, 77 = 7*11)")
-        ttCalculator.SetToolTip(cmdPhi, "Euler’s Totient Function. For example phi(12) = 4 (1, 2, 5, 7 are less than 12 and coprime)")
+        ttCalculator.SetToolTip(cmdReverseStr, "reverses a string. So reverse(""I am roger"") becomes ""regor ma I""")
+        ttCalculator.SetToolTip(cmdSCM, "smallest common multiple, for example scm(18,42) = 126(= 718 & 342)")
+        ttCalculator.SetToolTip(cmdCoprime, "also called mutually prime, For example coprime(30,77) = True. (30 = 235, 77 = 7*11)")
+        ttCalculator.SetToolTip(cmdPhi, "Euler's Totient Function. For example phi(12) = 4 (1, 2, 5, 7 are less than 12 and coprime)")
         ttCalculator.SetToolTip(cmdTwin, "twin primes, for example, twin(0,10) gives (3,5), & (5,7)")
         ttCalculator.SetToolTip(cmdCousin, "cousin primes, for example cousin(0,20) gives (3,7) & (13,17)")
         ttCalculator.SetToolTip(cmdSexy, "sexy primes (6 in Latin is sex!), for example sexy(0,40) gives (23,29) & (31,37)")
@@ -279,14 +280,15 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPalindrome, "generates palindromes to the length of the dataframe. For example the 100th palindromic number is 909")
         ttCalculator.SetToolTip(cmdCatalan, "generates Catalan numbers to the length of the data frame. The 5th is 10!/(5!*6!) =7 * 6 = 42")
         ttCalculator.SetToolTip(cmdPerfect, "divisors add to the number. So 6 = 1+2+3. Only 51 perfect numbers are currently known.")
+        ttCalculator.SetToolTip(cmdAbundant, "generates abundant numbers to the length of the data frame. 12 is is the first, because 1+2+3+4+6 > 12")
         ttCalculator.SetToolTip(cmdFrugal, "125 is frugal because 125 = 5(cubed) and 5 and 3 are fewer digits (2) than 125 (3).")
-        ttCalculator.SetToolTip(cmdPowerful, "36 = 2(squared)*3(squared) is powerful because for each divisor, here 2 and 3, its square is also a divisor.")
-        ttCalculator.SetToolTip(cmdUgly, "also called Regular or Hamming or 5-smooth numbers. Numbers for which the factors are only 2, or 3 or 5.")
-        ttCalculator.SetToolTip(cmdHappy, "13 is happy because 1(squared) + 3(squared) = 10, then 1(squared)+ 0(squared) = 1.")
-        ttCalculator.SetToolTip(cmdAchilles, "powerful numbers that are not perfect squares. 72 is the smallest Achilles number.")
-        ttCalculator.SetToolTip(cmdPadovan, "sum of last but 1 and last but 2 values. So from ...7, 9, 12, next is 7+9 = 16.")
+        ttCalculator.SetToolTip(cmdPowerful, "36 = 2(squared)*3(squared) is powerful because for each divisor, here 2 and 3, its square is also a divisor")
+        ttCalculator.SetToolTip(cmdUgly, "also called Regular or Hamming or 5-smooth numbers. Numbers for which the factors are only 2, or 3 or 5")
+        ttCalculator.SetToolTip(cmdHappy, "13 is happy because 1(squared) + 3(squared) = 10, then 1(squared)+ 0(squared) = 1")
+        ttCalculator.SetToolTip(cmdAchilles, "powerful numbers that are not perfect squares. 72 is the smallest Achilles number")
+        ttCalculator.SetToolTip(cmdPadovan, "sum of last but 1 and last but 2 values. So from ...7, 9, 12, next is 7+9 = 16")
         ttCalculator.SetToolTip(cmdTriangle, "number of objects in a triangle, so 0, 1, 3, 6, 10...")
-        ttCalculator.SetToolTip(cmdSquare, "squares of each integer, so 1, 4, 9, 16.")
+        ttCalculator.SetToolTip(cmdSquare, "squares of each integer, so 1, 4, 9, 16")
         ttCalculator.SetToolTip(cmdLucas, "generates Lucas numbers to the length of the dataframe. For example the 10th Lucas number is 76")
         ttCalculator.SetToolTip(cmdPrimorial, "gives the primorial (like the factorial, but just the primes up to the number) for a variable. For example primorial(c(7,8,9)) = 235*7 = (210, 210, 210)")
 
@@ -492,6 +494,10 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPascal, "Gives Pascal triangles, e.g. for c(1,2,3,4) gives 1, (1,1), (1, 2, 1), (1, 3, 3, 1)")
         ttCalculator.SetToolTip(cmdMASSFractions, "changes decimal data into a character variable with fractions. So 1.5 becomes 3/2, 0.25 becomes 1/4 etc.")
         ttCalculator.SetToolTip(cmdDecimals, "the inverse of the fractions key. So 3/2 becomes 1.5, 1/4 becomes 0.25 etc.")
+        ttCalculator.SetToolTip(cmdFrac10, "Give fraction our of 10 for a decimal value. For example for 0.36 the value is 4/10")
+        ttCalculator.SetToolTip(cmdFrac20, "Give fraction our of 20 for a decimal value. For example for 0.36 the value is 7/20")
+        ttCalculator.SetToolTip(cmdFrac100, "Give fraction our of 100 for a decimal value. For example for 0.36 the value is 36/100")
+        ttCalculator.SetToolTip(cmdFracDen, "Give fraction for a given denominator. For example frac_den(0.36, 50) gives 18/50")
         '---------------------------------------------------------------------------------------------------------------------
 
         Const strTooltipCmdLength = "number Of observations: For example length(c(1,2,3,4,NA)) = 5 "
@@ -1573,7 +1579,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPnorm_Click(sender As Object, e As EventArgs) Handles cmdPnorm.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnorm(q= , mean = 0, sd = 1, lower.tail = True, Log.p = False)", 54)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnorm(q= , mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)", 54)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("pnorm( )", 2)
         End If
@@ -2071,27 +2077,27 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ifelse(test= , ""yes"" , ""no"")", 15)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ifelse( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ifelse(, , )", 5)
         End If
     End Sub
 
     Private Sub cmdmatch_Click(sender As Object, e As EventArgs) Handles cmdmatch.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("match( )", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("match(, )", 3)
     End Sub
 
     Private Sub cmdwhen_Click(sender As Object, e As EventArgs) Handles cmdwhen.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::case_when( )", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::case_when(, )", 3)
     End Sub
 
     Private Sub cmdBetween_Click(sender As Object, e As EventArgs) Handles cmdBetween.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::between( )", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::between(, , )", 5)
     End Sub
 
     Private Sub cmdNear_Click(sender As Object, e As EventArgs) Handles cmdNear.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near(x= , y= )", 6)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near(, )", 3)
         End If
     End Sub
 
@@ -2099,7 +2105,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rep(x = , times = , length = , each = )", 32)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rep( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rep(, )", 3)
         End If
     End Sub
 
@@ -2107,7 +2113,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("seq(from = , to = , by = , length =  )", 28)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("seq( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("seq(, , )", 5)
         End If
     End Sub
 
@@ -5891,7 +5897,7 @@ Public Class ucrCalculator
 
     Private Sub cmdOrigin_Click(sender As Object, e As EventArgs) Handles cmdOrigin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(  p= ,o= )", 6)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(p= ,o= )", 6)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("polynom::change.origin(, )", 3)
         End If
@@ -6093,6 +6099,38 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("decimals(x= )", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("decimals( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdFrac10_Click(sender As Object, e As EventArgs) Handles cmdFrac10.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac10(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac10( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdFrac20_Click(sender As Object, e As EventArgs) Handles cmdFrac20.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac20(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac20( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdFrac100_Click(sender As Object, e As EventArgs) Handles cmdFrac100.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac100(x= )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac100( )", 2)
+        End If
+    End Sub
+
+    Private Sub cmdFracDen_Click(sender As Object, e As EventArgs) Handles cmdFracDen.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den(x= ,den= )", 8)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den(, )", 3)
         End If
     End Sub
 End Class

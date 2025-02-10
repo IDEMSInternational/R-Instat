@@ -4,43 +4,64 @@ DataSheet$set("public", "merge_data", function(new_data, by = NULL, type = "left
   old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   by_col_attributes <- list()
-  if(!is.null(by)) {
-    for(i in seq_along(by)) {
-      # TODO also check that !is.null(names(by)) ?
-      by_col_attributes[[names(by)[[i]]]] <- get_column_attributes(curr_data[[names(by)[[i]]]])
-    }
-  }
-  if(type == "left") {
-    new_data <- dplyr::left_join(curr_data, new_data, by)
-  }
-  else if(type == "right") {
-    new_data <- dplyr::right_join(curr_data, new_data, by)
-  }
-  else if(type == "full") {
-    new_data <- dplyr::full_join(curr_data, new_data, by)
-  }
-  else if(type == "inner") {
-    new_data <- dplyr::inner_join(curr_data, new_data, by)
-  }
-  else stop("type must be one of left, right, inner or full")
-  self$set_data(new_data)
-  self$append_to_changes(Merged_data)
-  #TODO will column/row count be correct here?
-  for(name in names(old_metadata)) {
-    if(!name %in% c("names", "class", "row.names")) {
-      self$append_to_metadata(name, old_metadata[[name]])
-    }
-  }
-  self$append_to_metadata(is_calculated_label, TRUE)
-  self$add_defaults_meta()
-  self$add_defaults_variables_metadata(setdiff(names(new_data), names(curr_data)))
-  if(!is.null(by)) {
-    for(i in seq_along(by_col_attributes)) {
-      self$append_column_attributes(col_name = names(by_col_attributes)[i], new_attr = by_col_attributes[[i]])
+  
+  if (!is.null(by)) {
+  for (i in seq_along(by)) {
+    # Collect column attributes
+    by_col_attributes[[by[[i]]]] <- get_column_attributes(curr_data[[by[[i]]]])
+
+    # Check and align the data types for each "by" column
+    if (!inherits(curr_data[[by[[i]]]], class(new_data[[by[[i]]]]))) {
+      warning(paste0("Type is different for ", by[[i]], " in the two data frames. Setting as numeric in both data frames."))
+
+      # Convert factors to numeric if necessary
+      if (inherits(curr_data[[by[[i]]]], "factor")) {
+        curr_data[[by[[i]]]] <- as.numeric(as.character(curr_data[[by[[i]]]]))
+      } else if (inherits(new_data[[by[[i]]]], "factor")) {
+        new_data[[by[[i]]]] <- as.numeric(as.character(new_data[[by[[i]]]]))
+      } else {
+        stop(paste0("Type is different for ", by[[i]], " in the two data frames and cannot be coerced."))
+      }
     }
   }
 }
-)
+
+  
+  # Perform the appropriate join based on the "type" argument
+  if (type == "left") {
+    new_data <- dplyr::left_join(curr_data, new_data, by = by)
+  } else if (type == "right") {
+    new_data <- dplyr::right_join(curr_data, new_data, by = by)
+  } else if (type == "full") {
+    new_data <- dplyr::full_join(curr_data, new_data, by = by)
+  } else if (type == "inner") {
+    new_data <- dplyr::inner_join(curr_data, new_data, by = by)
+  } else {
+    stop("type must be one of left, right, inner, or full")
+  }
+  
+  # Update the data in the object
+  self$set_data(new_data)
+  self$append_to_changes("Merged_data")
+  
+  # Restore the old metadata
+  for (name in names(old_metadata)) {
+    if (!name %in% c("names", "class", "row.names")) {
+      self$append_to_metadata(name, old_metadata[[name]])
+    }
+  }
+  
+  self$append_to_metadata("is_calculated_label", TRUE)
+  self$add_defaults_meta()
+  self$add_defaults_variables_metadata(setdiff(names(new_data), names(curr_data)))
+  
+  # Add back column attributes for the "by" columns
+  if (!is.null(by)) {
+    for (i in seq_along(by_col_attributes)) {
+      self$append_column_attributes(col_name = by[[i]], new_attr = by_col_attributes[[i]])
+    }
+  }
+})
 
 DataBook$set("public", "append_summaries_to_data_object", function(out, data_name, columns_to_summarise, summaries, factors = c(), summary_name, calc, calc_name = "") {
   if(!is.character(data_name)) stop("data_name must be of type character")
@@ -132,7 +153,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
     calculated_from <- as.list(manip_factors)
     names(calculated_from) <- rep(data_name, length(manip_factors))
     calculated_from <- as.list(calculated_from)
-    factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
+    factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from, param_list = list(drop = drop))
     manipulations <- list(factor_by)
   }
   else manipulations <- list()
@@ -142,7 +163,7 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
       calculated_from <- as.list(value_factors)
       names(calculated_from) <- rep(data_name, length(value_factors))
       calculated_from <- as.list(calculated_from)
-      factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
+      factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from, param_list = list(drop = drop))
       value_manipulations <- list(factor_by)
     }
     else value_manipulations <- list()
@@ -171,7 +192,10 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
       # function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
       if(is.null(result_names)) {
         result_name = summaries_display[j]
-        if(include_columns_to_summarise) result_name = paste0(result_name, sep, column_names)
+        if(include_columns_to_summarise){
+          if (!is.null(extra_args$y)) result_name <- paste0(result_name, sep, extra_args$y, sep, column_names)
+          else result_name <- paste0(result_name, sep, column_names)
+        }
       }
       #TODO result_names could be horizontal/vertical vector, matrix or single value
       else result_name <- result_names[i,j]
@@ -218,12 +242,22 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
     curr_filter_name <- curr_filter[["name"]]
     curr_filter_calc <- self$get_filter_as_instat_calculation(data_name, curr_filter_name)
     manipulations <- c(curr_filter_calc, manipulations)
-  }
+  } 
   if(!missing(additional_filter)) {
     manipulations <- c(additional_filter, manipulations)
   }
   combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
-  out <- self$apply_instat_calculation(combined_calc_sum)
+
+  # setting up param_list. Here we read in .drop and .preserve
+  param_list <- list()
+  if (length(combined_calc_sum$manipulations) > 0){
+      for (i in 1:length(combined_calc_sum$manipulations)){
+          if (combined_calc_sum$manipulations[[i]]$type %in% c("by", "filter")){
+              param_list <- c(param_list, combined_calc_sum$manipulations[[i]]$param_list)
+          }
+      }
+  }
+  out <- self$apply_instat_calculation(combined_calc_sum, param_list = param_list)
   # relocate so that the factors are first still for consistency	
   if (percentage_type != "none"){	
     out$data <- (out$data %>% dplyr::select(c(tidyselect::all_of(factors), tidyselect::all_of(manip_factors)), tidyselect::everything()))	
@@ -250,7 +284,7 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
   calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
   summaries <- unique(summaries)
   summaries <- summaries[order(match(summaries, all_summaries))]
-  summaries_count <- summaries[startsWith(summaries, "summary_count")]
+  summaries_count <- summaries[startsWith(summaries, "summary_count_all")]
   summaries_other <- setdiff(summaries, summaries_count)
   summaries <- c(summaries_count, summaries_other)
   count_summaries_max <- length(summaries_count)
@@ -413,9 +447,9 @@ missing_values_check <- function(x) {
 # summary function labels
 sum_label <- "summary_sum"
 mode_label <- "summary_mode"
-count_label <- "summary_count"
-count_missing_label <- "summary_count_missing"
-count_non_missing_label <- "summary_count_non_missing"
+count_label <- "summary_count_all"
+count_missing_label <- "summary_count_miss"
+count_non_missing_label <- "summary_count"
 sd_label <- "summary_sd"
 var_label <- "summary_var"
 median_label <- "summary_median"
@@ -487,7 +521,10 @@ ratio_of_standard_deviations_label <- "rSD"
 ratio_of_RMSE_label <- "rsr"
 sum_of_squared_residuals_label <- "ssq"
 volumetric_efficiency_label <- "VE"
-
+which_min_label <- "summary_which_min"
+which_max_label <- "summary_which_max"
+where_min_label <- "summary_where_min"
+where_max_label <- "summary_where_max"
 
 
 # list of all summary function names
@@ -497,8 +534,8 @@ all_summaries <- c(
   min_label, p10_label, p20_label, p25_label, p30_label, p33_label, p40_label, p60_label, p67_label, p70_label, p75_label, p80_label, p90_label, quartile_label, median_label,
   summary_median_absolute_deviation_label, summary_coef_var_label,
   summary_Qn_label, summary_Sn_label,
-  mode_label, mean_label,
-  trimmed_mean_label, max_label, sum_label,
+  mode_label, mean_label, which_min_label, which_max_label,where_max_label,
+  trimmed_mean_label, max_label, sum_label, where_min_label,
   sd_label, var_label, range_label, standard_error_mean_label,
   skewness_label, summary_skewness_mc_label, kurtosis_label,
   summary_outlier_limit_label,
@@ -521,8 +558,8 @@ all_summaries <- c(
 # which of the summaries should return a Date value when x is a Date?
 date_summaries <- c(
   min_label, p10_label, p20_label, p25_label, p30_label, p33_label, p40_label, p60_label, p67_label, p70_label, p75_label, p80_label, p90_label, quartile_label, median_label,
-  mode_label, mean_label, trimmed_mean_label,
-  max_label, first_label, last_label, nth_label,
+  mode_label, mean_label, trimmed_mean_label, which_min_label, which_max_label, where_min_label,
+  max_label, first_label, last_label, nth_label, where_max_label,
   circular_min_label, circular_Q1_label, circular_quantile_label,
   circular_median_label, circular_medianHL_label, circular_mean_label,
   circular_Q3_label, circular_max_label
@@ -541,13 +578,13 @@ na_check <- function(x, na_type = c(), na_consecutive_n = NULL, na_max_n = NULL,
   for (i in seq_along(na_type)) {
     type <- na_type[i]
     if (type %in% c("n","'n'")) {
-      res[i] <- summary_count_missing(x) <= na_max_n
+      res[i] <- summary_count_miss(x) <= na_max_n
     }
     else if (type %in% c("prop","'prop'")) {
-      res[i] <- (summary_count_missing(x) / summary_count(x)) <= na_max_prop / 100
+      res[i] <- (summary_count_miss(x) / summary_count(x)) <= na_max_prop / 100
     }
     else if (type %in% c("n_non_miss","'n_non_miss'")) {
-      res[i] <- summary_count_non_missing(x) >= na_min_n
+      res[i] <- summary_count(x) >= na_min_n
     }
     else if (type %in% c("FUN","'FUN'")) {
       res[i] <- na_FUN(x, ...)
@@ -685,16 +722,16 @@ summary_sum <- function (x, weights = NULL, na.rm = FALSE, na_type = "", ...) {
 }
 
 
-summary_count <- function(x, ...) {
+summary_count_all <- function(x, ...) {
   return(length(x))
 }
 
 
-summary_count_missing <- function(x, ...) {
+summary_count_miss <- function(x, ...) {
   return(sum(is.na(x)))
 }
 
-summary_count_non_missing <- function(x, ...) {
+summary_count <- function(x, ...) {
   return(sum(!is.na(x)))
 }
 
@@ -738,6 +775,69 @@ summary_min <- function (x, na.rm = FALSE, na_type = "", ...) {
     return(min(x, na.rm = na.rm))
   } 
 }
+
+summary_which_max <- function (x, na.rm = TRUE, na_type = "", ...) {
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else{
+    # Get the minimum value
+    max_value <- max(x, na.rm = na.rm)
+    # Return all indices where x is equal to the minimum value
+    return(which(x == max_value))
+  } 
+}
+
+summary_which_min <- function(x, na.rm = TRUE, na_type = "", ...) {
+  if(length(x) == 0 || (na.rm && length(x[!is.na(x)]) == 0)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    # Get the minimum value
+    min_value <- min(x, na.rm = na.rm)
+    # Return all indices where x is equal to the minimum value
+    return(which(x == min_value))
+  }
+}
+
+summary_where_max <- function(x, summary_where_y=NULL, na.rm = TRUE, na_type = "", ...) {  
+  # Check if vectors are empty
+  if (length(x) == 0 || length(summary_where_y) == 0) {
+    return(NA)
+  }
+  
+  # Handle NA values
+  if (na.rm) {
+    valid_indices <- !is.na(x) & !is.na(summary_where_y)
+    x <- x[valid_indices]
+    summary_where_y <- summary_where_y[valid_indices]
+  }
+  
+  # Find the index of the maximum value in x
+  max_index <- which.max(x)
+  
+  # Return the corresponding value in summary_where_y
+  return(summary_where_y[max_index])
+}
+
+summary_where_min <- function(x, summary_where_y=NULL, na.rm = TRUE, na_type = "", ...) {
+  # Check if vectors are empty
+  if (length(x) == 0 || length(summary_where_y) == 0) {
+    return(NA)
+  }
+  
+  # Handle NA values
+  if (na.rm) {
+    valid_indices <- !is.na(x) & !is.na(summary_where_y)
+    x <- x[valid_indices]
+    summary_where_y <- summary_where_y[valid_indices]
+  }
+  
+  # Find the index of the minimum value in x
+  min_index <- summary_which_min(x, na.rm = na.rm, na_type = na_type, ...)
+  
+  # Return the corresponding value in summary_where_y
+  return(summary_where_y[min_index])
+}
+    
 # get the range of the data
 summary_range <- function(x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
@@ -968,11 +1068,12 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
 }
 
 # cor function
-summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = NULL, method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = NULL, method = c("pearson", "kendall", "spearman"), cor_use = c("everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+  cor_use <- match.arg(cor_use)
   if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else {
     if (missing(weights) || is.null(weights)) {
-      return(cor(x = x, y = y, use = use, method = method))
+      return(cor(x = x, y = y, use = cor_use, method = method))
     }
     else {
       weights::wtd.cor(x = x, y = y, weight = weights)[1]
@@ -1015,7 +1116,7 @@ summary_nth <- function(x, nth_value, order_by = NULL, ...) {
 
 # n_distinct function
 summary_n_distinct<- function(x, na.rm = FALSE, ...) {
-  return(dplyr::n_distinct(x = x, na.rm = na.rm))
+  return(dplyr::n_distinct(x, na.rm = na.rm))
 }
 
 # sample function

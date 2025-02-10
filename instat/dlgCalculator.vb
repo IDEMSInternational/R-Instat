@@ -36,8 +36,11 @@ Public Class dlgCalculator
     Private strDefaultKeyboard As String
     ' Note: This list needs to be updated when a new keyboard is added.
     Private strKeyboards() As String = {"Basic", "Maths", "Logical and Symbols", "Transform", "Summary", "Probability", "Factor", "Text/Strings (Character Columns)", "Dates/Times", "Circular", "Wakefield", "Goodness of Fit", "List", "Complex", "Integer", "Functions"}
+    Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
+
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim start = DateTime.Now
         If bFirstLoad Then
             InitialiseDialog()
             iBasicWidth = Me.Width
@@ -48,6 +51,10 @@ Public Class dlgCalculator
         ReopenDialog()
         TestOKEnabled()
         autoTranslate(Me)
+
+        Logger.Debug("This is in the load")
+        Logger.Debug(Process.GetCurrentProcess().WorkingSet64)
+        Logger.Debug("Time", DateTime.Now - start)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -115,10 +122,8 @@ Public Class dlgCalculator
         clsDetachScalarsFunction.AddParameter("unload", "TRUE")
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction, 0)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
 
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 2)
 
         ucrBase.clsRsyntax.SetCommandString("")
 
@@ -197,7 +202,11 @@ Public Class dlgCalculator
             Dim strResut As String = ucrCalc.ucrSaveResultInto.GetText
             clsAddScalarFunction.AddParameter("scalar_name", Chr(34) & strResut & Chr(34), iPosition:=1)
             clsAddScalarFunction.AddParameter("scalar_value", strResut, iPosition:=2)
+            clsAddScalarFunction.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
+            clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 2)
             ucrBase.clsRsyntax.SetAssignTo(strResut)
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = False
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = True
@@ -205,14 +214,22 @@ Public Class dlgCalculator
             ucrCalc.ucrSaveResultInto.ucrChkSave.Enabled = False
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Visible = True
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Enabled = True
+        ElseIf ucrCalc.ucrSelectorForCalculations.checkBoxScalar.Checked Then
+            Dim strResut As String = ucrCalc.ucrSaveResultInto.GetText
+            clsAddScalarFunction.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
+            clsScalarsDataFuntion.AddParameter("data_name", Chr(34) & dataFrameName & Chr(34), iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddScalarFunction, 0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 2)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddScalarFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAttachScalarsFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDetachScalarsFunction)
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Enabled = True
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = True
             ucrCalc.ucrSaveResultInto.ucrChkSave.Enabled = True
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Visible = True
             ucrCalc.ucrSaveResultInto.ucrInputComboSave.Enabled = True
-
         End If
 
         ' Update command string and clear input try message name
@@ -246,7 +263,6 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachScalarsFunction, 1)
 
             ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, 1)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsDetachScalarsFunction, 2)
             ucrCalc.ucrSaveResultInto.Enabled = True
             ucrCalc.ucrChkStoreScalar.Visible = True
         Else

@@ -50,30 +50,31 @@ Public Class DlgDefineClimaticData
         Dim kvpRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("rain", {"rain", "prec", "rr", "prcp"}.ToList())
         Dim kvpDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("date", {"date", "record"}.ToList())
         Dim kvpStation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("station", {"station", "id", "name"}.ToList())
+        Dim kvpDistrict As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("district", {"district", "country", "countries"}.ToList())
         Dim kvpAltitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("alt", {"alt", "altitude", "elevation", "elev"}.ToList())
         Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"lon", "lont", "longitude"}.ToList())
         Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"lat", "latitude"}.ToList())
-        Dim kvpCloudCover As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("cloud_cover", {"cloud"}.ToList())
-        Dim kvpTempMax As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_max", {"tmax", "tx", "tempmax", "tmp_max", "tmpmax"}.ToList())
-        Dim kvpTempMin As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_min", {"tmin", "tn", "tempmin", "tmp_min", "tmpmin"}.ToList())
-        Dim kvpRadiation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("radiation", {"radiation", "rad"}.ToList())
-        Dim kvpSunshineHours As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("sunshine_hours", {"sunshine", "sunh", "sunhrs"}.ToList())
-        Dim kvpWindDirection As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("wind_direction", {"winddirection"}.ToList())
-        Dim kvpWindSpeed As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("wind_speed", {"windspeed"}.ToList())
+        Dim kvpCloudCover As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("cloud_cover", {"cloud", "cldtot"}.ToList())
+        Dim kvpTempMax As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_max", {"temp_max", "tmax", "tx", "tempmax", "tmp_max", "tmpmax"}.ToList())
+        Dim kvpTempMin As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("temp_min", {"temp_min", "tmin", "tn", "tempmin", "tmp_min", "tmpmin"}.ToList())
+        Dim kvpRadiation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("radiation", {"radiation", "rad", "radgls", "radsky", "radres", "radnaw", "raddwn", "radup", "raddsl"}.ToList())
+        Dim kvpSunshineHours As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("sunshine_hours", {"sunshine_hours", "sunshine", "sunh", "sunhrs", "sun"}.ToList())
+        Dim kvpWindDirection As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("wind_direction", {"wind_direction", "winddirection", "pkgstd"}.ToList())
+        Dim kvpWindSpeed As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("wind_speed", {"wind_speed", "windspeed", "wndspd", "pkgust", "pkgstd", "wndmil"}.ToList())
         Dim kvpYear As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("year", {"year"}.ToList())
         Dim kvpMonth As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("month", {"month"}.ToList())
         Dim kvpDay As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("day", {"day"}.ToList())
         Dim kvpDOY As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("doy", {"doy", "doy_366"}.ToList())
-        Dim kvpMinRH As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("hum_min", {"minhum", "hmin", "hn"}.ToList())
-        Dim kvpMaxRH As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("hum_max", {"maxhum", "hmax", "hx"}.ToList())
+        Dim kvpMinRH As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("hum_min", {"hum_min", "minhum", "hmin", "hn", "rhmin"}.ToList())
+        Dim kvpMaxRH As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("hum_max", {"hum_max", "maxhum", "hmax", "hx", "rhmax"}.ToList())
 
-        lstRecognisedTypes.AddRange({kvpRain, kvpCloudCover, kvpTempMax, kvpTempMin, kvpRadiation, kvpSunshineHours, kvpStation, kvpAltitude, kvpLatitude, kvpLongitude,
+        lstRecognisedTypes.AddRange({kvpRain, kvpDistrict, kvpCloudCover, kvpTempMax, kvpTempMin, kvpRadiation, kvpSunshineHours, kvpStation, kvpAltitude, kvpLatitude, kvpLongitude,
                                     kvpWindDirection, kvpWindSpeed, kvpYear, kvpMonth, kvpDay, kvpDOY, kvpDate, kvpMinRH, kvpMaxRH})
-        lstNewRecognisedTypes.AddRange({kvpStation, kvpAltitude, kvpLatitude, kvpLongitude})
+        lstNewRecognisedTypes.AddRange({kvpStation, kvpDistrict, kvpAltitude, kvpLatitude, kvpLongitude})
         lstReceivers.AddRange({ucrReceiverCloudCover, ucrReceiverDay, ucrReceiverMaxTemp, ucrReceiverMinTemp, ucrReceiverMonth, ucrReceiverRadiation,
-                              ucrReceiverRain, ucrReceiverStation, ucrReceiverAltitude, ucrReceiverLatitude, ucrReceiverLongitude, ucrReceiverSunshine,
+                              ucrReceiverRain, ucrReceiverStation, ucrReceiverAltitude, ucrReceiverLatitude, ucrReceiverLongitude, ucrReceiverSunshine, ucrReceiverDiscrit,
                               ucrReceiverWindDirection, ucrReceiverWindSpeed, ucrReceiverYear, ucrReceiverDOY, ucrReceiverDate, ucrReceiverMinRH, ucrReceiverMaxRH})
-        lstNewReceivers.AddRange({ucrReceiverStationMeta, ucrReceiverAltMeta, ucrReceiverLatMeta, ucrReceiverLonMeta})
+        lstNewReceivers.AddRange({ucrReceiverStationMeta, ucrReceiverAltMeta, ucrReceiverLatMeta, ucrReceiverLonMeta, ucrReceiverDiscritMeta})
 
         ucrSelectorDefineClimaticData.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDefineClimaticData.SetParameterIsString()
@@ -86,6 +87,8 @@ Public Class DlgDefineClimaticData
         ucrReceiverLongitude.Tag = "lon"
         ucrReceiverLatitude.Tag = "lat"
         ucrReceiverStationMeta.Tag = "station"
+        ucrReceiverDiscritMeta.Tag = "district"
+        ucrReceiverDiscrit.Tag = "district"
         ucrReceiverAltMeta.Tag = "alt"
         ucrReceiverLonMeta.Tag = "lon"
         ucrReceiverLatMeta.Tag = "lat"
@@ -234,8 +237,9 @@ Public Class DlgDefineClimaticData
 
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorDefineClimaticData.lstAvailableVariable.Items
+                    Dim strClimaticType As String = GetClimaticTypeFromRCommand(lviTempVariable.Text)
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) OrElse (strClimaticType IsNot Nothing AndAlso strClimaticType.Contains(strValue)) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorDefineClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
@@ -267,8 +271,9 @@ Public Class DlgDefineClimaticData
 
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorLinkedDataFrame.lstAvailableVariable.Items
+                    Dim strClimaticType As String = GetClimaticTypeFromRCommand(lviTempVariable.Text)
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) OrElse (strClimaticType IsNot Nothing AndAlso strClimaticType.Contains(strValue)) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorLinkedDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
@@ -286,6 +291,31 @@ Public Class DlgDefineClimaticData
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
     End Sub
+
+    Private Function GetClimaticTypeFromRCommand(strName As String) As String
+        Try
+            Dim clsGetClimaticTypeFunction As New RFunction
+
+            clsGetClimaticTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_climatic_type")
+            clsGetClimaticTypeFunction.AddParameter("attr_name", Chr(34) & "Climatic_Type" & Chr(34))
+            clsGetClimaticTypeFunction.AddParameter("col_name", Chr(34) & strName & Chr(34))
+            clsGetClimaticTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34))
+
+            Dim result As SymbolicExpression
+            result = frmMain.clsRLink.RunInternalScriptGetValue(clsGetClimaticTypeFunction.ToScript())
+
+            ' Check if result is Nothing or has no values before trying to access
+            If result IsNot Nothing AndAlso result.Type <> Internals.SymbolicExpressionType.Null Then
+                Dim strClimaticType As String = result.AsCharacter(0)
+                If Not String.IsNullOrEmpty(strClimaticType) Then
+                    Return strClimaticType
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        Return String.Empty
+    End Function
 
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
         Dim lstValues As New List(Of String)
@@ -385,7 +415,7 @@ Public Class DlgDefineClimaticData
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkLinkedMetaData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLinkedMetaData.ControlValueChanged, ucrReceiverAltMeta.ControlValueChanged, ucrReceiverLatMeta.ControlValueChanged, ucrReceiverLonMeta.ControlValueChanged, ucrReceiverStationMeta.ControlValueChanged
+    Private Sub ucrChkLinkedMetaData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLinkedMetaData.ControlValueChanged, ucrReceiverAltMeta.ControlValueChanged, ucrReceiverLatMeta.ControlValueChanged, ucrReceiverLonMeta.ControlValueChanged, ucrReceiverStationMeta.ControlValueChanged, ucrReceiverDiscritMeta.ControlValueChanged
         If ucrChkLinkedMetaData.Checked Then
             ucrSelectorLinkedDataFrame.Visible = True
             grpMeta.Visible = True

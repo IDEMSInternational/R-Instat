@@ -222,7 +222,18 @@ Public Class frmMain
         AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
         '---------------------------------------
 
+        '--------------------------------------
+        Dim strVersion As String = My.Application.Info.Version.Major.ToString() & "." &
+                My.Application.Info.Version.Minor.ToString() & "." &
+                My.Application.Info.Version.Build.ToString()
+
+        Me.Text = "R-Instat " & strVersion
+
+        CreateAdditionalLibraryDirectory(strVersion)
+        '-------------------------------------
+
         isMaximised = True 'Need to get the windowstate when the application is loaded
+        SetHideMenus()
     End Sub
 
     Private Sub CheckForUpdates()
@@ -243,9 +254,22 @@ Public Class frmMain
                     myProcess.StartInfo.FileName = "https://r-instat.org/"
                     myProcess.Start()
                 End If
+            Else
+                ' Current version is up to date, show a message
+                MessageBox.Show("You are using the latest version of R-Instat (" & strCurrVersion & ").", "R-Instat is Up to Date",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
+        Catch ex As WebException
+            ' Handle specific network-related exceptions
+            MessageBox.Show("It seems you are not connected to the internet or the website is unreachable. Please check your connection and try again.", "Network Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            MsgBox("Network issues or website not accessible")
+            ' Handle other exceptions
+            MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            ' Dispose of the web client to release resources
+            webClient.Dispose()
         End Try
     End Sub
 
@@ -299,7 +323,7 @@ Public Class frmMain
         mnuDataFrameMetadat.Checked = False
         mnuSwapDataLogScript.Checked = False
         mnuSwapDataMetadata.Checked = False
-        mnuTbDataView.Checked = True
+        mnuDataViewWindow.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
         UpdateLayout()
@@ -360,7 +384,7 @@ Public Class frmMain
             MsgBox(ex.Message)
         End Try
 
-        mnuTbDataView.Checked = mnuViewDataView.Checked
+        mnuDataViewWindow.Checked = mnuViewDataView.Checked
         mnuOutputWindow.Checked = mnuViewOutput.Checked
         mnuLogScript.Checked = mnuViewLogScript.Checked
     End Sub
@@ -392,6 +416,32 @@ Public Class frmMain
             Return True
         End If
     End Function
+
+    Private Sub CreateAdditionalLibraryDirectory(strVersion As String)
+        ' Define the custom library path in the ApplicationData folder
+        Dim strLibraryPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "R-Instat", strVersion, "library")
+
+        Try
+            ' Check if the directory exists, if not, create it
+            If Not Directory.Exists(strLibraryPath) Then
+                Directory.CreateDirectory(strLibraryPath)
+            End If
+
+
+            'To ensure this part of the code only runs when the application Is Not in the Debug mode (i.e., in Release mode)
+#If Not DEBUG Then
+                     Dim clsSetLibPathsFunction As New RFunction
+            clsSetLibPathsFunction.SetRCommand("set_library_paths")
+            clsSetLibPathsFunction.AddParameter("library_path", Chr(34) & strLibraryPath.Replace("\", "/") & Chr(34))
+
+            ' Execute the R script to update the library paths
+            clsRLink.RunScript(strScript:=clsSetLibPathsFunction.ToScript, bSeparateThread:=False, bSilent:=False)
+#End If
+        Catch ex As Exception
+            ' Handle potential errors (e.g., directory creation failure)
+            MessageBox.Show($"Failed to create or update library directory: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
     Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strRScripts As String = ""
@@ -464,22 +514,24 @@ Public Class frmMain
             Dim lastExitStatus As String = File.ReadAllText(strMarkerFilePath).Trim()
             If lastExitStatus <> "CleanExit" AndAlso
                 MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
-                              "Would you like to see auto recovery options?",
+                              "The Tools > Restore Backup dialog allows you to restore backed-up data, or save the corresponding log file." & Environment.NewLine &
+                              "To proceed, click Yes.",
                               MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
 
-                dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
-                dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
-                dlgAutoSaveRecovery.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
-                dlgAutoSaveRecovery.ShowDialog()
+                dlgRestoreBackup.ShowDialog()
 
                 'todo. the dialog design is meant to only return just one option; script, data file path or new session.
                 'refactor the dialog to enforce the design
 
                 'get the R script from read file if selected by the user
-                strScript = dlgAutoSaveRecovery.GetScript()
+                strScript = dlgRestoreBackup.GetScript()
                 'get the data file path if selected by the user
-                strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
+                strDataFilePath = dlgRestoreBackup.GetDataFilePath()
             End If
+        End If
+
+        If Not Directory.Exists(strAutoSaveLogFolderPath) Then
+            Directory.CreateDirectory(strAutoSaveLogFolderPath)
         End If
 
         Using writer As StreamWriter = New StreamWriter(strMarkerFilePath, False)
@@ -491,7 +543,7 @@ Public Class frmMain
 
         '---------------------------------------
         'delete the recovery files
-        If strAutoSavedLogFilePaths.Length > 0 Then
+        If strAutoSavedLogFilePaths.Length > 1 Then
             Try
                 File.Delete(strAutoSavedLogFilePaths(1)) '1 to avoid deleting app_marker file
             Catch ex As Exception
@@ -552,6 +604,19 @@ Public Class frmMain
 
     Public Sub SetLanButtonVisibility(bVisible As Boolean)
         mnuTbLan.Visible = bVisible
+    End Sub
+
+    Public Sub SetAppVersionNumber(strVersionNumber As String)
+
+    End Sub
+
+    Private Sub SetHideMenus()
+        mnuViewProcurementMenu.Checked = False
+        mnuProcurement.Visible = False
+        mnuViewOptionsByContextMenu.Checked = False
+        mnuOptionsByContext.Visible = False
+        mnuViewStructuredMenu.Checked = False
+        mnuStructured.Visible = False
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -644,6 +709,10 @@ Public Class frmMain
         End If
     End Sub
 
+    Public Sub DisableEnableUndo(bDisable As Boolean)
+        ucrDataViewer.DisableEnableUndo(bDisable)
+    End Sub
+
     Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
         dlgNewDataFrame.ShowDialog()
     End Sub
@@ -651,10 +720,6 @@ Public Class frmMain
     Private Sub mnuPrepareColumnNumericRegularSequence_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnNumericRegularSequence.Click
         dlgRegularSequence.SetNumericSequenceAsDefaultOption()
         dlgRegularSequence.ShowDialog()
-    End Sub
-
-    Private Sub mnuDescribeSpecificTables_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificTables.Click
-        dlgSummaryTables.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareReshapeStack_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeStack.Click
@@ -811,11 +876,23 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuHelpHelp_Click(sender As Object, e As EventArgs)
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TableOfContents, "")
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "135")
     End Sub
 
-    Private Sub mnuTbHelp_Click(sender As Object, e As EventArgs) Handles mnuTbHelp.Click
+    Private Sub mnuTbHelp_Click(sender As Object, e As EventArgs) Handles mnuTbHelp.ButtonClick, mnuToolBarHelp.Click
         mnuHelpHelp_Click(sender, e)
+    End Sub
+
+    Private Sub mnuDataWindowHelp_Click(sender As Object, e As EventArgs) Handles mnuDataWindowHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "134")
+    End Sub
+
+    Private Sub mnuOutputHelp_Click(sender As Object, e As EventArgs) Handles mnuOutputHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "540")
+    End Sub
+
+    Private Sub mnuLogScriptHelp_Click(sender As Object, e As EventArgs) Handles mnuLogScriptHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
 
     Private Sub mnuPrepareFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click
@@ -1108,8 +1185,8 @@ Public Class frmMain
         Dim strCurrentStatus As String
 
         strCurrentStatus = tstatus.Text
-        If clsRLink.bInstatObjectExists Then
-            tstatus.Text = "Auto saving data..."
+        If clsRLink.bInstatObjectExists AndAlso ucrDataViewer.HasDataChanged Then
+            tstatus.Text = GetTranslation("Auto saving data...")
             Cursor = Cursors.WaitCursor
             If Not Directory.Exists(strAutoSaveDataFolderPath) Then
                 Directory.CreateDirectory(strAutoSaveDataFolderPath)
@@ -1119,7 +1196,7 @@ Public Class frmMain
             strTempFile = "data_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & ".rds"
             strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
 
-            Dim strBackupMessage As String = $"##########{vbCrLf}## Backing up data and log files on: {DateTime.Now}{vbCrLf}##########"
+            Dim strBackupMessage As String = $"##########{vbCrLf}## Backing up data and metadata on: {DateTime.Now}{vbCrLf}##########"
             Me.ucrScriptWindow.LogText(strBackupMessage)
             clsRLink.AppendToAutoSaveLog(strBackupMessage)
 
@@ -1127,11 +1204,12 @@ Public Class frmMain
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & strCurrentAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
             clsRLink.RunInternalScript(clsSaveRDS.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
+
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
             bFirstBackupDone = True
+            ucrDataViewer.HasDataChanged = False
         End If
-        autoTranslate(Me)
     End Sub
 
     Public Sub DeleteAutoSaveFiles()
@@ -1414,10 +1492,6 @@ Public Class frmMain
         dlgClimSoft.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateFileImportfromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportfromClimSoftWizard.Click
-        dlgClimsoftWizard.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticFileImportFromCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportfromCliData.Click
         dlgCliData.ShowDialog()
     End Sub
@@ -1675,6 +1749,10 @@ Public Class frmMain
         ucrDataViewer.UseColumnSelectionInDataView(bUseColumnSelecion)
     End Sub
 
+    Public Function IsColumnSelectionApplied() As Boolean
+        Return ucrDataViewer.IsColumnSelectionApplied
+    End Function
+
     Public Sub SetCurrentDataFrame(strDataName As String)
         ucrDataViewer.SetCurrentDataFrame(strDataName)
         ucrColumnMeta.SetCurrentDataFrame(strDataName)
@@ -1783,8 +1861,9 @@ Public Class frmMain
         dlgInfill.ShowDialog()
     End Sub
 
-    Private Sub mnuDataView_Click(sender As Object, e As EventArgs) Handles mnuTbDataView.Click
+    Private Sub mnuDataView_Click(sender As Object, e As EventArgs) Handles mnuTbDataView.ButtonClick, mnuDataViewWindow.Click
         mnuViewDataView.Checked = Not mnuViewDataView.Checked
+        mnuDataViewWindow.Checked = mnuViewDataView.Checked
         UpdateLayout()
     End Sub
 
@@ -2782,6 +2861,13 @@ Public Class frmMain
         dlgExportClimaticDefinitions.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeSummaries.Click
+        dlgSummaryTables.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribePresentation_Click(sender As Object, e As EventArgs) Handles mnuDescribePresentation.Click
+        dlgGeneralTable.ShowDialog()
+    End Sub
     Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileToolStripMenuItem.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "13")
     End Sub
@@ -2844,7 +2930,28 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
-    Private Sub RInstatResourcesSiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RInstatResourcesSiteToolStripMenuItem.Click
+    Private Sub RInstatResourcesSiteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuHelpResourcesSite.Click
         Process.Start("https://ecampus.r-instat.org/course/view.php?id=14")
+    End Sub
+
+    Private Sub mnuImportFromOpenAppBuilder_Click(sender As Object, e As EventArgs) Handles mnuImportFromOpenAppBuilder.Click
+        dlgImportOpenAppBuilder.ShowDialog()
+    End Sub
+    Private Sub mnuClimaticCheckDataDistances_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataDistances.Click
+        dlgDistances.ShowDialog()
+    End Sub
+
+    Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
+        ucrDataViewer.Undo()
+    End Sub
+
+    Private Sub mnuRDataViewerWindow_Click(sender As Object, e As EventArgs) Handles mnuRDataViewerWindow.Click
+        ucrDataViewer.StartWait()
+        ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        ucrDataViewer.EndWait()
+    End Sub
+
+    Private Sub mnuClimaticModelOutfilling_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelOutfilling.Click
+        dlgOutfillingStationData.ShowDialog()
     End Sub
 End Class
