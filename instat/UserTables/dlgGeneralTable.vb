@@ -77,7 +77,6 @@ Public Class dlgGeneralTable
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
     End Sub
 
-
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
 
@@ -110,13 +109,10 @@ Public Class dlgGeneralTable
         clsThemeRFunction.SetRCommand(strCommand)
         clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
 
-
         clsHeaderRFunction.SetPackageName("gt")
         clsHeaderRFunction.SetRCommand("tab_header")
         clsHeaderRFunction.AddParameter("title", ucrInputTitle.GetText, iPosition:=1)
         clsBaseOperator.AddParameter("theme_Header", clsRFunctionParameter:=clsHeaderRFunction)
-
-
 
         clsTitleFooterRFunction.SetPackageName("gt")
         clsTitleFooterRFunction.SetRCommand("tab_footnote")
@@ -138,7 +134,6 @@ Public Class dlgGeneralTable
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
-
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverMultipleCols.SetRCode(clsBaseOperator, bReset)
         ucrSaveTable.SetRCode(clsBaseOperator, bReset)
@@ -159,8 +154,6 @@ Public Class dlgGeneralTable
             clsBaseOperator.RemoveParameterByName("head")
         End If
     End Sub
-
-
 
     Private Sub btnTitleFormat_Click(sender As Object, e As EventArgs) Handles btnTitleStyle.Click
         Dim clsListStyleRFunction As RFunction = clsTablesUtils.ShowStyleSubDialog(Me.ParentForm, clsTitleStyleRFunction)
@@ -191,11 +184,8 @@ Public Class dlgGeneralTable
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
         If ucrChkSelectTheme.Checked Then
             ucrCboSelectThemes.Visible = True
-
             clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
-
         Else
-
             clsBaseOperator.RemoveParameterByName("theme_format")
             ucrCboSelectThemes.Visible = False
             clsThemeRFunction.ClearParameters()
@@ -229,6 +219,5 @@ Public Class dlgGeneralTable
 
         clsThemeRFunction.SetRCommand(strCommand)
     End Sub
-
 
 End Class

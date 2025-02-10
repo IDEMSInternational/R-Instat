@@ -35,7 +35,6 @@ Public Class sdgTableOptions
     Private Sub InitialiseDialog()
         ucrSdgBaseButtons.iHelpTopicID = 146
         ucrChkSelectTheme.Checked = True
-        'ucrChkManualTheme.Checked = False
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
 
@@ -92,19 +91,15 @@ Public Class sdgTableOptions
         End If
         If ucrChkManualTheme.Checked Then
             sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
-        Else
-
         End If
     End Sub
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
-
         If ucrChkSelectTheme.Checked Then
             btnManualTheme.Visible = False
             ucrCboSelectThemes.Visible = True
-            ucrChkManualTheme.Checked = Not ucrChkSelectTheme.Checked
-            ' clsThemeRFunction.SetPackageName("gtExtras")
-            '  clsThemeRFunction.ClearParameters()
+        ElseIf ucrChkSelectTheme.Checked Then
+            ucrChkManualTheme.Checked = True
         Else
             ucrCboSelectThemes.Visible = False
         End If
@@ -115,10 +110,7 @@ Public Class sdgTableOptions
         If ucrChkManualTheme.Checked Then
             btnManualTheme.Visible = True
             ucrChkSelectTheme.Checked = Not ucrChkManualTheme.Checked
-
-        Else
-
-            btnManualTheme.Visible = False
+            btnManualTheme.Visible = ucrChkManualTheme.Checked
         End If
     End Sub
 
@@ -162,8 +154,6 @@ Public Class sdgTableOptions
         ' Set the themes parameter if there was a theme selected
         If ucrChkManualTheme.Checked Then
             sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
-        Else
-
         End If
         If clsThemeRFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsThemeRFunction.strRCommand) Then
             clsOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
