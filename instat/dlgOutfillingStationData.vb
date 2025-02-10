@@ -19,6 +19,7 @@ Imports instat.Translations
 Public Class dlgOutfillingStationData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog = False
     Private clsDoFillingFunction As New RFunction
     Private clsDummyFunction As New RFunction
 
@@ -124,7 +125,7 @@ Public Class dlgOutfillingStationData
         ucrChkStationToExclude.SetText("Station(s) to Exclude")
         ucrChkStationToExclude.AddParameterValuesCondition(True, "exclude", "True")
         ucrChkStationToExclude.AddParameterValuesCondition(False, "exclude", "False")
-        ucrChkStationToExclude.AddToLinkedControls({ucrInputSelectStation}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkStationToExclude.AddToLinkedControls({ucrInputSelectStation}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudRandomSeed.SetParameter(New RParameter("set_seed", 10))
         ucrNudRandomSeed.SetMinMax(1, Integer.MaxValue)
@@ -134,15 +135,12 @@ Public Class dlgOutfillingStationData
         ucrChkRandomSeed.AddParameterValuesCondition(False, "seed", "False")
         ucrChkRandomSeed.AddToLinkedControls({ucrNudRandomSeed}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=999)
 
-        ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
-        ucrInputSelectStation.strQuotes = ""
+        ucrSaveColumn.SetSaveTypeAsColumn()
+        ucrSaveColumn.SetDataFrameSelector(ucrSelectorOutfilling.ucrAvailableDataFrames)
+        ucrSaveColumn.SetLabelText("Prefix for New Columns:")
+        ucrSaveColumn.SetIsComboBox()
 
-        ucrSaveResultInto.SetPrefix("outfilled")
-        ucrSaveResultInto.SetSaveTypeAsColumn()
-        ucrSaveResultInto.SetIsComboBox()
-        ucrSaveResultInto.SetCheckBoxText("Store Result")
-        ucrSaveResultInto.SetAssignToIfUncheckedValue("last_outfilled")
-        ucrSaveResultInto.SetDataFrameSelector(ucrSelectorOutfilling.ucrAvailableDataFrames)
+        'ucrSaveColumn.setLinkedReceiver(ucrReceiverSplitTextColumn)
     End Sub
 
     Private Sub SetDefaults()
@@ -150,13 +148,12 @@ Public Class dlgOutfillingStationData
         clsDummyFunction = New RFunction
 
         ucrSelectorOutfilling.Reset()
-        ucrInputSelectStation.SetName("")
         ucrInputBins.Reset()
-        ucrInputSelectStation.Reset()
         ucrReceiverStation.SetMeAsReceiver()
 
-        ucrSaveResultInto.Reset()
-        ucrSaveResultInto.ucrChkSave.Checked = True
+        ucrSaveColumn.Reset()
+
+        bResetSubdialog = True
 
         ucrInputBins.SetName("1, 3, 5, 10, 15, 20")
         ucrInputOmitMonths.SetName("5,6,7,8,9")
@@ -170,13 +167,15 @@ Public Class dlgOutfillingStationData
         clsDoFillingFunction.SetAssignTo("infill_data")
         clsDoFillingFunction.AddParameter("markovflag", "TRUE", iPosition:=6)
 
+        clsDoFillingFunction.SetAssignTo(ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorOutfilling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText())
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsDoFillingFunction)
-        ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(),
-                                          strTempDataframe:=ucrSelectorOutfilling.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
-                                          bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix,
-                                          bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames,
-                                          bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
-                                          bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
+        'ucrBase.clsRsyntax.SetAssignTo(ucrSaveResultInto.GetText(), strTempColumn:=ucrSaveResultInto.GetText(),
+        '                                  strTempDataframe:=ucrSelectorOutfilling.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
+        '                                  bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix,
+        '                                  bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames,
+        '                                  bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore,
+        '                                  bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
 
     End Sub
 
@@ -196,9 +195,12 @@ Public Class dlgOutfillingStationData
         ucrInputDist.SetRCode(clsDoFillingFunction, bReset)
         ucrInputMarkov.SetRCode(clsDoFillingFunction, bReset)
         ucrReceiverStation.SetRCode(clsDoFillingFunction, bReset)
-        ucrInputSelectStation.SetRCode(clsDoFillingFunction, bReset)
-        ucrSaveResultInto.SetRCode(clsDoFillingFunction, bReset)
+        ucrSaveColumn.SetRCode(clsDoFillingFunction, bReset)
         AddTargetMonthsVar()
+        FilterFactorsVisibility()
+        If bReset Then
+            ucrChkStationToExclude.SetRCode(clsDummyFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -211,6 +213,7 @@ Public Class dlgOutfillingStationData
           Not ucrNudCount.IsEmpty AndAlso
           Not ucrNudDays.IsEmpty AndAlso
           Not ucrInputBins.IsEmpty AndAlso
+          ucrSaveColumn.IsComplete() AndAlso
           Not ucrInputDist.IsEmpty AndAlso
           Not ucrInputMarkov.IsEmpty Then
             ucrBase.OKEnabled(True)
@@ -279,6 +282,7 @@ Public Class dlgOutfillingStationData
         Else
             clsDoFillingFunction.RemoveParameterByName("rfe")
         End If
+        SetDataFramePrefix()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -289,18 +293,8 @@ Public Class dlgOutfillingStationData
 
     Private Sub ucrReceiverEstimates_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimates.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged,
             ucrReceiverLongitude.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrInputBins.ControlContentsChanged,
-            ucrInputDist.ControlContentsChanged, ucrInputMarkov.ControlContentsChanged, ucrNudCount.ControlContentsChanged, ucrNudDays.ControlContentsChanged
+            ucrInputDist.ControlContentsChanged, ucrInputMarkov.ControlContentsChanged, ucrNudCount.ControlContentsChanged, ucrNudDays.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrInputSelectStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSelectStation.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrChkStationToExclude.ControlValueChanged
-        If ucrChkStationToExclude.Checked AndAlso Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty Then
-            clsDoFillingFunction.AddParameter("station_to_exclude ", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=10)
-            clsDummyFunction.AddParameter("exclude", "True", iPosition:=1)
-        Else
-            clsDoFillingFunction.RemoveParameterByName("station_to_exclude")
-            clsDummyFunction.AddParameter("exclude", "False", iPosition:=1)
-        End If
     End Sub
 
     Private Sub ucrInputOmitMonths_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputOmitMonths.ControlValueChanged
@@ -314,6 +308,42 @@ Public Class dlgOutfillingStationData
         Else
             clsDoFillingFunction.RemoveParameterByName("set_seed")
             clsDummyFunction.AddParameter("seed", "False", iPosition:=2)
+        End If
+    End Sub
+
+    Private Sub cmdFilterFromFactors_Click(sender As Object, e As EventArgs) Handles cmdFilterFromFactors.Click
+        ' Ensure the dataframe and parameters are set before showing the dialog
+        sdgFiltersFromFactor.SetRcodeAndDefaultDataFrame(ucrSelectorOutfilling, bReset:=bResetSubdialog)
+        sdgFiltersFromFactor.ShowDialog()
+
+        ' Retrieve the selected stations and add them to the main function
+        Dim strSelectedStations As String = sdgFiltersFromFactor.GetSelectedStations()
+
+        If strSelectedStations <> "" Then
+            clsDoFillingFunction.AddParameter("stations_to_include", strSelectedStations)
+        Else
+            clsDoFillingFunction.RemoveParameterByName("stations_to_include")
+        End If
+
+        bResetSubdialog = False
+    End Sub
+
+    Private Sub ucrChkStationToExclude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStationToExclude.ControlValueChanged
+        FilterFactorsVisibility()
+    End Sub
+
+    Private Sub FilterFactorsVisibility()
+        cmdFilterFromFactors.Visible = ucrChkStationToExclude.Checked
+    End Sub
+
+    Private Sub SetDataFramePrefix()
+        Dim strDataframeName As String = ucrReceiverEstimates.GetVariableNames(False)
+        If strDataframeName = "" OrElse ucrSaveColumn.bUserTyped Then
+            Exit Sub
+        End If
+        If Not ucrReceiverEstimates.IsEmpty Then
+            ucrSaveColumn.SetPrefix(strDataframeName & "_")
+
         End If
     End Sub
 

@@ -79,4 +79,17 @@ Public Class sdgFiltersFromFactor
     Private Sub ucrSelectorFiltersFromFactors_DataFrameChanged() Handles ucrSelectorFiltersFromFactors.DataFrameChanged
         clsAddFilterFromFactors.AddParameter("data_name", Chr(34) & ucrSelectorFiltersFromFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub
+
+    Public Function GetSelectedStations() As String
+        Dim strSelectedLevels As String = mdlCoreControl.GetRVector(
+        ucrFactorLevels.GetSelectedCellValues(ucrFactor.DefaultColumnNames.Label, True)
+    )
+
+        If strSelectedLevels <> "" Then
+            Return strSelectedLevels
+        Else
+            Return ""
+        End If
+    End Function
+
 End Class
