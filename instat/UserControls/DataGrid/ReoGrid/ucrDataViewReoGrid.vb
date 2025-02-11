@@ -375,6 +375,15 @@ Public Class ucrDataViewReoGrid
         Next
     End Sub
 
+    Private Sub RemoveAllBackgroundColors() Implements IDataViewGrid.RemoveAllBackgroundColors
+        For rowNumber As Integer = 0 To grdData.CurrentWorksheet.RowCount - 1
+            For colIndex As Integer = 0 To grdData.CurrentWorksheet.ColumnCount - 1
+                grdData.CurrentWorksheet.Cells(rowNumber, colIndex).Style.BackColor = Color.Transparent
+            Next
+        Next
+        grdData.CurrentWorksheet.RequestInvalidate()
+    End Sub
+
     Public Sub SearchRowInGrid(rowNumbers As List(Of Integer), strColumn As String, Optional iRow As Integer = 0,
                             Optional bApplyToRows As Boolean = False) Implements IDataViewGrid.SearchRowInGrid
         Dim currSheet = grdData.CurrentWorksheet
