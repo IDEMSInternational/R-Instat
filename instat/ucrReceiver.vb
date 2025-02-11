@@ -475,9 +475,9 @@ Public Class ucrReceiver
                 End If
                 Clear()
                 If lstCurrentVariables IsNot Nothing Then
-                    If Selector IsNot Nothing Then
-                        strTempDataName = Selector.strCurrentDataFrame
-                    End If
+
+                    strTempDataName = If(Selector?.strCurrentDataFrame?.Trim() <> "", Selector.strCurrentDataFrame, "data_names")
+
                     If TypeOf Me Is ucrReceiverMultiple Then
 
                         'TODO This only works if the selector is updated before receivers and dialog only uses one data frame!
