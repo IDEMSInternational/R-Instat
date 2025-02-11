@@ -318,6 +318,7 @@ Public Class frmMain
         mnuViewColumnMetadata.Checked = False
         mnuViewLogScript.Checked = False
         mnuViewSwapDataAndMetadata.Checked = False
+        mnuViewSwapDataAndDataframeMetadata.Checked = False
         mnuViewSwapDataAndScript.Checked = False
         mnuColumnMetadat.Checked = False
         mnuDataFrameMetadat.Checked = False
@@ -327,6 +328,9 @@ Public Class frmMain
         mnuDataViewWindow.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
+        UpdateSwapDataAndScript()
+        UpdateSwapDataAndMetadata()
+        UpdateSwapDataFrameAndMetadata()
         UpdateLayout()
     End Sub
 
@@ -339,6 +343,7 @@ Public Class frmMain
                             AndAlso Not mnuViewDataFrameMetadata.Checked _
                             AndAlso Not mnuViewLogScript.Checked _
                             AndAlso Not mnuViewSwapDataAndMetadata.Checked _
+                            AndAlso Not mnuViewSwapDataAndDataframeMetadata.Checked _
                             AndAlso Not mnuViewSwapDataAndScript.Checked Then
                 splOverall.Hide()
             Else
@@ -655,8 +660,6 @@ Public Class frmMain
             ClearAllPanels()
             splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
             splMetadata.Panel1.Controls.Add(ucrDataViewer)
-            mnuViewColumnMetadata.Text = "Data View"
-            mnuViewDataView.Text = "Column Metadata"
             mnuSwapDataMetadata.Checked = True
             mnuViewSwapDataAndDataframeMetadata.Checked = False
             mnuViewSwapDataAndScript.Checked = False
@@ -665,20 +668,15 @@ Public Class frmMain
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splMetadata.Panel1.Controls.Add(ucrColumnMeta)
-            mnuViewColumnMetadata.Text = "Column Metadata"
-            mnuViewDataView.Text = "Data View"
             mnuSwapDataMetadata.Checked = False
         End If
     End Sub
 
     Private Sub UpdateSwapDataFrameAndMetadata()
         If mnuViewSwapDataAndDataframeMetadata.Checked Then
-
             ClearAllPanels()
             splDataOutput.Panel1.Controls.Add(ucrDataFrameMeta)
-            splMetadata.Panel1.Controls.Add(ucrDataViewer)
-            mnuViewDataFrameMetadata.Text = "Data View"
-            mnuViewDataView.Text = "Dataframe Metadata"
+            splMetadata.Panel2.Controls.Add(ucrDataViewer)
             mnuSwapDataDataframeMetadata.Checked = True
             mnuViewSwapDataAndMetadata.Checked = False
             mnuViewSwapDataAndScript.Checked = False
@@ -686,9 +684,7 @@ Public Class frmMain
             mnuSwapDataLogScript.Checked = False
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
-            splMetadata.Panel1.Controls.Add(ucrDataFrameMeta)
-            mnuViewDataFrameMetadata.Text = "Dataframe Metadata"
-            mnuViewDataView.Text = "Data View"
+            splMetadata.Panel2.Controls.Add(ucrDataFrameMeta)
             mnuSwapDataDataframeMetadata.Checked = False
         End If
     End Sub
@@ -698,8 +694,6 @@ Public Class frmMain
             ClearAllPanels()
             splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
             splExtraWindows.Panel2.Controls.Add(ucrDataViewer)
-            mnuViewLogScript.Text = "Data View"
-            mnuViewDataView.Text = "Log/Script"
             mnuSwapDataLogScript.Checked = True
             mnuViewSwapDataAndDataframeMetadata.Checked = False
             mnuViewSwapDataAndMetadata.Checked = False
@@ -708,16 +702,15 @@ Public Class frmMain
         Else
             splDataOutput.Panel1.Controls.Add(ucrDataViewer)
             splExtraWindows.Panel2.Controls.Add(ucrScriptWindow)
-            mnuViewLogScript.Text = "Log/Script"
-            mnuViewDataView.Text = "Data View"
             mnuSwapDataLogScript.Checked = False
         End If
     End Sub
 
     ' Helper method To clear all panels
     Private Sub ClearAllPanels()
-        splDataOutput.Panel1.Controls.Clear()
+        '  splDataOutput.Panel1.Controls.Clear()
         splMetadata.Panel1.Controls.Clear()
+        splMetadata.Panel2.Controls.Clear()
         splExtraWindows.Panel2.Controls.Clear()
     End Sub
 
@@ -1714,9 +1707,9 @@ Public Class frmMain
 
     Private Sub mnuViewResetToDefaultLayout_Click(sender As Object, e As EventArgs) Handles mnuViewResetToDefaultLayout.Click
         SetToDefaultLayout()
-        UpdateSwapDataAndScript()
-        UpdateSwapDataAndMetadata()
-        UpdateSwapDataFrameAndMetadata()
+        'UpdateSwapDataAndScript()
+        'UpdateSwapDataAndMetadata()
+        'UpdateSwapDataFrameAndMetadata()
     End Sub
 
     Private Sub ucrDataViewer_Enter(sender As Object, e As EventArgs) Handles ucrDataViewer.Enter
@@ -1918,10 +1911,11 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbResetLayout_Click(sender As Object, e As EventArgs) Handles mnuTbResetLayout.Click
+
         SetToDefaultLayout()
-        UpdateSwapDataAndScript()
-        UpdateSwapDataAndMetadata()
-        UpdateSwapDataFrameAndMetadata()
+        'UpdateSwapDataAndScript()
+        'UpdateSwapDataAndMetadata()
+        'UpdateSwapDataFrameAndMetadata()
     End Sub
 
     Public Sub SetToolbarHeight(iHeight As Integer)
