@@ -81,6 +81,7 @@ Partial Class dlgStringHandling
         Me.rdoReplaceAll = New System.Windows.Forms.RadioButton()
         Me.rdoReplaceFirst = New System.Windows.Forms.RadioButton()
         Me.ucrPnlReplaceOptions = New instat.UcrPanel()
+        Me.rdoToNa = New System.Windows.Forms.RadioButton()
         Me.grpModifiers.SuspendLayout()
         Me.grpDetectOptions.SuspendLayout()
         Me.grpFindOptions.SuspendLayout()
@@ -125,7 +126,7 @@ Partial Class dlgStringHandling
         Me.rdoDetect.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDetect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDetect.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDetect.Location = New System.Drawing.Point(20, 4)
+        Me.rdoDetect.Location = New System.Drawing.Point(14, 4)
         Me.rdoDetect.Name = "rdoDetect"
         Me.rdoDetect.Size = New System.Drawing.Size(86, 41)
         Me.rdoDetect.TabIndex = 1
@@ -142,10 +143,10 @@ Partial Class dlgStringHandling
         Me.rdoRemove.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRemove.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRemove.Location = New System.Drawing.Point(338, 4)
+        Me.rdoRemove.Location = New System.Drawing.Point(392, 4)
         Me.rdoRemove.Name = "rdoRemove"
         Me.rdoRemove.Size = New System.Drawing.Size(80, 41)
-        Me.rdoRemove.TabIndex = 5
+        Me.rdoRemove.TabIndex = 6
         Me.rdoRemove.TabStop = True
         Me.rdoRemove.Text = "Remove"
         Me.rdoRemove.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -159,12 +160,12 @@ Partial Class dlgStringHandling
         Me.rdoReplaceNa.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplaceNa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoReplaceNa.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoReplaceNa.Location = New System.Drawing.Point(260, 4)
+        Me.rdoReplaceNa.Location = New System.Drawing.Point(314, 4)
         Me.rdoReplaceNa.Name = "rdoReplaceNa"
         Me.rdoReplaceNa.Size = New System.Drawing.Size(80, 41)
-        Me.rdoReplaceNa.TabIndex = 4
+        Me.rdoReplaceNa.TabIndex = 5
         Me.rdoReplaceNa.TabStop = True
-        Me.rdoReplaceNa.Text = "Replace NA"
+        Me.rdoReplaceNa.Text = "From NA"
         Me.rdoReplaceNa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoReplaceNa.UseVisualStyleBackColor = True
         '
@@ -176,7 +177,7 @@ Partial Class dlgStringHandling
         Me.rdoReplace.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplace.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoReplace.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoReplace.Location = New System.Drawing.Point(182, 4)
+        Me.rdoReplace.Location = New System.Drawing.Point(176, 4)
         Me.rdoReplace.Name = "rdoReplace"
         Me.rdoReplace.Size = New System.Drawing.Size(80, 41)
         Me.rdoReplace.TabIndex = 3
@@ -193,7 +194,7 @@ Partial Class dlgStringHandling
         Me.rdoFind.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoFind.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoFind.Location = New System.Drawing.Point(104, 4)
+        Me.rdoFind.Location = New System.Drawing.Point(98, 4)
         Me.rdoFind.Name = "rdoFind"
         Me.rdoFind.Size = New System.Drawing.Size(80, 41)
         Me.rdoFind.TabIndex = 2
@@ -503,9 +504,9 @@ Partial Class dlgStringHandling
         'ucrPnlStringHandling
         '
         Me.ucrPnlStringHandling.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(16, 1)
+        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(10, 1)
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
-        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(409, 46)
+        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(462, 46)
         Me.ucrPnlStringHandling.TabIndex = 0
         '
         'grpReplaceOptions
@@ -562,12 +563,30 @@ Partial Class dlgStringHandling
         Me.ucrPnlReplaceOptions.Size = New System.Drawing.Size(146, 75)
         Me.ucrPnlReplaceOptions.TabIndex = 0
         '
+        'rdoToNa
+        '
+        Me.rdoToNa.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoToNa.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoToNa.FlatAppearance.BorderSize = 2
+        Me.rdoToNa.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoToNa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoToNa.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoToNa.Location = New System.Drawing.Point(252, 4)
+        Me.rdoToNa.Name = "rdoToNa"
+        Me.rdoToNa.Size = New System.Drawing.Size(64, 41)
+        Me.rdoToNa.TabIndex = 4
+        Me.rdoToNa.TabStop = True
+        Me.rdoToNa.Text = "To NA"
+        Me.rdoToNa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoToNa.UseVisualStyleBackColor = True
+        '
         'dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(438, 483)
+        Me.ClientSize = New System.Drawing.Size(481, 483)
+        Me.Controls.Add(Me.rdoToNa)
         Me.Controls.Add(Me.ucrChkRemoveAll)
         Me.Controls.Add(Me.ucrInputReplaceNaBy)
         Me.Controls.Add(Me.ucrChkReplaceBy)
@@ -657,4 +676,5 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoReplaceAll As RadioButton
     Friend WithEvents rdoReplaceFirst As RadioButton
     Friend WithEvents ucrPnlReplaceOptions As UcrPanel
+    Friend WithEvents rdoToNa As RadioButton
 End Class
