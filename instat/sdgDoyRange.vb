@@ -18,6 +18,7 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class sdgDoyRange
+    Public isFromDlgClimaticLengthOfSeason As Boolean = False
     Private clsDoyFilterCalc As RFunction
     Private clsCalcFromList As RFunction
     Private clsCalcFromMainDataFrame As RFunction
@@ -31,6 +32,7 @@ Public Class sdgDoyRange
 
     Private Sub sdgDoyRange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        Desablecontrols()
     End Sub
 
     Public Sub Setup(clsNewDoyFilterCalc As RFunction, clsNewDayFromOperator As ROperator, clsNewDayToOperator As ROperator, clsNewCalcFromList As RFunction, strNewMainDataFrame As String, strNewDoyColumn As String, Optional clsNewIfElseFirstDoyFilledFunction As RFunction = Nothing)
@@ -263,5 +265,23 @@ Public Class sdgDoyRange
     Private Sub FromControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDoyFrom.ControlValueChanged, ucrReceiverFrom.ControlValueChanged
         UpdateFromValues()
         UpdateToValues()
+    End Sub
+
+    Public Sub Desablecontrols()
+        If Me.isFromDlgClimaticLengthOfSeason Then
+            Me.rdoFromFixed.Enabled = False
+            Me.rdoFromVariable.Enabled = False
+            Me.ucrDoyFrom.Enabled = False
+            Me.ucrReceiverFrom.Enabled = False
+            Me.rdoToVariable.Enabled = False
+            Me.rdoLength.Enabled = False
+            Me.ucrReceiverTo.Enabled = False
+            Me.ucrNudToDiff.Enabled = False
+            Me.ucrSelectorDoy.Enabled = False
+            Me.Size = New Size(603, 218)
+            Me.grpFrom.Location = New Size(10, 12)
+            Me.grpTo.Location = New Size(269, 12)
+            Me.ucrBaseSub.Location = New Size(185, 140)
+        End If
     End Sub
 End Class
