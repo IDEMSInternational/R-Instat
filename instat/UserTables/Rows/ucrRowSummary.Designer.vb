@@ -23,6 +23,8 @@ Partial Class ucrRowSummary
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.dataGridSummaries = New System.Windows.Forms.DataGridView()
+        Me.colType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnStyle = New System.Windows.Forms.Button()
         Me.lblSummaryTypes = New System.Windows.Forms.Label()
         Me.lblSummaries = New System.Windows.Forms.Label()
@@ -41,8 +43,6 @@ Partial Class ucrRowSummary
         Me.ucrTxtReplaceNa = New instat.ucrInputTextBox()
         Me.ucrCboSummaryType = New instat.ucrInputComboBox()
         Me.ucrTxtSummaryLabel = New instat.ucrInputTextBox()
-        Me.colType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dataGridSummaries, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -59,11 +59,27 @@ Partial Class ucrRowSummary
         Me.dataGridSummaries.Size = New System.Drawing.Size(522, 120)
         Me.dataGridSummaries.TabIndex = 335
         '
+        'colType
+        '
+        Me.colType.HeaderText = "Summary Expression"
+        Me.colType.MinimumWidth = 8
+        Me.colType.Name = "colType"
+        Me.colType.ReadOnly = True
+        Me.colType.Width = 150
+        '
+        'colExpression
+        '
+        Me.colExpression.HeaderText = "Style Expression"
+        Me.colExpression.MinimumWidth = 8
+        Me.colExpression.Name = "colExpression"
+        Me.colExpression.ReadOnly = True
+        Me.colExpression.Width = 150
+        '
         'btnStyle
         '
         Me.btnStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.btnStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnStyle.Location = New System.Drawing.Point(740, 303)
+        Me.btnStyle.Location = New System.Drawing.Point(740, 304)
         Me.btnStyle.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnStyle.Name = "btnStyle"
         Me.btnStyle.Size = New System.Drawing.Size(126, 35)
@@ -134,7 +150,7 @@ Partial Class ucrRowSummary
         '
         Me.lblReplaceWith.AutoSize = True
         Me.lblReplaceWith.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReplaceWith.Location = New System.Drawing.Point(590, 144)
+        Me.lblReplaceWith.Location = New System.Drawing.Point(590, 216)
         Me.lblReplaceWith.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblReplaceWith.Name = "lblReplaceWith"
         Me.lblReplaceWith.Size = New System.Drawing.Size(203, 20)
@@ -169,12 +185,12 @@ Partial Class ucrRowSummary
         '
         Me.lblGroupId.AutoSize = True
         Me.lblGroupId.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblGroupId.Location = New System.Drawing.Point(590, 216)
+        Me.lblGroupId.Location = New System.Drawing.Point(590, 144)
         Me.lblGroupId.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblGroupId.Name = "lblGroupId"
-        Me.lblGroupId.Size = New System.Drawing.Size(152, 20)
+        Me.lblGroupId.Size = New System.Drawing.Size(79, 20)
         Me.lblGroupId.TabIndex = 352
-        Me.lblGroupId.Text = "Group ID (Optional):"
+        Me.lblGroupId.Text = "Group ID:"
         '
         'lblSide
         '
@@ -194,7 +210,7 @@ Partial Class ucrRowSummary
         Me.ucrCboSide.GetSetSelectedIndex = -1
         Me.ucrCboSide.IsReadOnly = False
         Me.ucrCboSide.Location = New System.Drawing.Point(359, 237)
-        Me.ucrCboSide.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrCboSide.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboSide.Name = "ucrCboSide"
         Me.ucrCboSide.Size = New System.Drawing.Size(176, 40)
         Me.ucrCboSide.TabIndex = 355
@@ -205,7 +221,7 @@ Partial Class ucrRowSummary
         Me.ucrTxtGroupId.AutoSize = True
         Me.ucrTxtGroupId.IsMultiline = False
         Me.ucrTxtGroupId.IsReadOnly = False
-        Me.ucrTxtGroupId.Location = New System.Drawing.Point(594, 240)
+        Me.ucrTxtGroupId.Location = New System.Drawing.Point(594, 168)
         Me.ucrTxtGroupId.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrTxtGroupId.Name = "ucrTxtGroupId"
         Me.ucrTxtGroupId.Size = New System.Drawing.Size(180, 32)
@@ -242,7 +258,7 @@ Partial Class ucrRowSummary
         Me.ucrTxtReplaceNa.AutoSize = True
         Me.ucrTxtReplaceNa.IsMultiline = False
         Me.ucrTxtReplaceNa.IsReadOnly = False
-        Me.ucrTxtReplaceNa.Location = New System.Drawing.Point(594, 166)
+        Me.ucrTxtReplaceNa.Location = New System.Drawing.Point(594, 238)
         Me.ucrTxtReplaceNa.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrTxtReplaceNa.Name = "ucrTxtReplaceNa"
         Me.ucrTxtReplaceNa.Size = New System.Drawing.Size(180, 32)
@@ -255,7 +271,7 @@ Partial Class ucrRowSummary
         Me.ucrCboSummaryType.GetSetSelectedIndex = -1
         Me.ucrCboSummaryType.IsReadOnly = False
         Me.ucrCboSummaryType.Location = New System.Drawing.Point(359, 167)
-        Me.ucrCboSummaryType.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrCboSummaryType.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboSummaryType.Name = "ucrCboSummaryType"
         Me.ucrCboSummaryType.Size = New System.Drawing.Size(176, 40)
         Me.ucrCboSummaryType.TabIndex = 345
@@ -271,22 +287,6 @@ Partial Class ucrRowSummary
         Me.ucrTxtSummaryLabel.Name = "ucrTxtSummaryLabel"
         Me.ucrTxtSummaryLabel.Size = New System.Drawing.Size(180, 32)
         Me.ucrTxtSummaryLabel.TabIndex = 343
-        '
-        'colType
-        '
-        Me.colType.HeaderText = "Summary Expression"
-        Me.colType.MinimumWidth = 8
-        Me.colType.Name = "colType"
-        Me.colType.ReadOnly = True
-        Me.colType.Width = 150
-        '
-        'colExpression
-        '
-        Me.colExpression.HeaderText = "Style Expression"
-        Me.colExpression.MinimumWidth = 8
-        Me.colExpression.Name = "colExpression"
-        Me.colExpression.ReadOnly = True
-        Me.colExpression.Width = 150
         '
         'ucrRowSummary
         '
