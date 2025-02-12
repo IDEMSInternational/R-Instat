@@ -3431,7 +3431,9 @@ time_operation <- function(expr) {
   print(timing)
 }
 
-set_library_paths <- function(library_path) {
+set_library_paths <- function() {
+  # Get the Roaming AppData path
+  library_path <- file.path(Sys.getenv("APPDATA"), "R-Instat", "library")
   # Update the library paths
   .libPaths(c(library_path, .libPaths()))
   

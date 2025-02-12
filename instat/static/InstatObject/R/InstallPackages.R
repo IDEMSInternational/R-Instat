@@ -129,3 +129,16 @@ devtools::install_github("IDEMSInternational/epicsawrap")
 
 #install a specific version of getPass. See issue #9398.
 devtools::install_github("wrathematics/getPass", ref = "v0.2-2")
+
+# Get the Roaming AppData path
+roaming_path <- file.path(Sys.getenv("APPDATA"), "R-Instat", "library")
+
+# Create the folder if it doesn't exist
+if (!dir.exists(roaming_path)) {
+  dir.create(roaming_path, recursive = TRUE)
+  message("Folder created at: ", roaming_path)
+} else {
+  message("Folder already exists at: ", roaming_path)
+}
+# Install the 'getPass' package to the specified directory
+install.packages("getPass", lib = roaming_path)
