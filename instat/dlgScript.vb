@@ -237,6 +237,11 @@ Public Class dlgScript
             ucrInputSaveDataFrame.SetVisible(False)
             ucrChkSaveDataFrameSingle.SetVisible(False)
             ucrPnlSaveDataFrame.SetVisible(False)
+            ucrInputSaveColumn.SetVisible(False)
+            ucrInputDataframeColumn.SetVisible(False)
+            lblSaveColumn.Visible = False
+            lblSaveDataFrame.Visible = False
+            lblSaveText.Visible = False
             SetupSaveDataControl("Column", RObjectTypeLabel.Column, "")
         ElseIf rdoSaveOutputObject.Checked Then
             ucrSaveObject.Location = New Point(ucrSaveObject.Location.X, ucrCboSaveOutputObjectFormat.Location.Y + 33)
@@ -249,6 +254,11 @@ Public Class dlgScript
             ucrCboSaveOutputObjectFormat.SetVisible(True)
             ucrChkSaveDataFrameSingle.SetVisible(False)
             ucrPnlSaveDataFrame.SetVisible(False)
+            ucrInputSaveColumn.SetVisible(False)
+            ucrInputDataframeColumn.SetVisible(False)
+            lblSaveColumn.Visible = False
+            lblSaveDataFrame.Visible = False
+            lblSaveText.Visible = False
             SetupSaveDataControl(ucrCboSaveOutputObjectType.GetText(), dctOutputObjectTypes.Item(ucrCboSaveOutputObjectType.GetText()), dctOutputObjectFormats.Item(ucrCboSaveOutputObjectFormat.GetText()))
         End If
     End Sub
