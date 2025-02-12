@@ -146,7 +146,7 @@ Partial Class dlgStringHandling
         Me.rdoRemove.Location = New System.Drawing.Point(392, 4)
         Me.rdoRemove.Name = "rdoRemove"
         Me.rdoRemove.Size = New System.Drawing.Size(80, 41)
-        Me.rdoRemove.TabIndex = 5
+        Me.rdoRemove.TabIndex = 6
         Me.rdoRemove.TabStop = True
         Me.rdoRemove.Text = "Remove"
         Me.rdoRemove.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -163,9 +163,9 @@ Partial Class dlgStringHandling
         Me.rdoReplaceNa.Location = New System.Drawing.Point(314, 4)
         Me.rdoReplaceNa.Name = "rdoReplaceNa"
         Me.rdoReplaceNa.Size = New System.Drawing.Size(80, 41)
-        Me.rdoReplaceNa.TabIndex = 4
+        Me.rdoReplaceNa.TabIndex = 5
         Me.rdoReplaceNa.TabStop = True
-        Me.rdoReplaceNa.Text = "Replace NA"
+        Me.rdoReplaceNa.Text = "From NA"
         Me.rdoReplaceNa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoReplaceNa.UseVisualStyleBackColor = True
         '
@@ -574,7 +574,7 @@ Partial Class dlgStringHandling
         Me.rdoToNa.Location = New System.Drawing.Point(252, 4)
         Me.rdoToNa.Name = "rdoToNa"
         Me.rdoToNa.Size = New System.Drawing.Size(64, 41)
-        Me.rdoToNa.TabIndex = 43
+        Me.rdoToNa.TabIndex = 4
         Me.rdoToNa.TabStop = True
         Me.rdoToNa.Text = "To NA"
         Me.rdoToNa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
