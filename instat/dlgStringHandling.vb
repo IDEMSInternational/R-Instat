@@ -18,10 +18,10 @@ Imports instat.Translations
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction,
-            clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction, clsRemoveFunction, clsReplaceNaFunction,
+    Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction, clsNaIfFunction,
+            clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction, clsRemoveFunction, clsReplaceNaFunction, clsStrToLowerFunction,
             clsStartsFunction, clsEndsFunction, clsMatchAllFunction, clsExtractAllFunction, clsLocateAllFunction, clsRemoveAllFunction,
-            clsReplaceCellFunction, clsAsDataFrameFunction, clsMutateFunction, clsReplaceGrepFunction As New RFunction
+            clsReplaceCellFunction, clsCurrentNewColumnFunction, clsAsDataFrameFunction, clsMutateFunction, clsReplaceGrepFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsDummyFunction, clsFindDummyFunction As New RFunction
 
@@ -54,12 +54,14 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddRadioButton(rdoFind)
         ucrPnlStringHandling.AddRadioButton(rdoReplaceNa)
         ucrPnlStringHandling.AddRadioButton(rdoRemove)
+        ucrPnlStringHandling.AddRadioButton(rdoToNa)
 
         ucrPnlStringHandling.AddParameterValuesCondition(rdoDetects, "string_handling", "detect")
         ucrPnlStringHandling.AddParameterValuesCondition(rdoReplace, "string_handling", "replace")
         ucrPnlStringHandling.AddParameterValuesCondition(rdoFind, "string_handling", "find")
         ucrPnlStringHandling.AddParameterValuesCondition(rdoReplaceNa, "string_handling", "replace_na")
         ucrPnlStringHandling.AddParameterValuesCondition(rdoRemove, "string_handling", "remove")
+        ucrPnlStringHandling.AddParameterValuesCondition(rdoToNa, "string_handling", "to_na")
 
         ucrPnlDetectOptions.AddRadioButton(rdoDetects)
         ucrPnlDetectOptions.AddRadioButton(rdoStarts)
@@ -143,6 +145,7 @@ Public Class dlgStringHandling
 
         ucrChkReplaceBy.AddToLinkedControls(ucrInputReplaceNaBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
         ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy, ucrPnlReplaceOptions}, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls({ucrInputPattern, ucrChkIgnoreCase}, {rdoToNa}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls({ucrInputPattern, ucrChkIgnoreCase, ucrChkIncludeRegularExpressions}, {rdoDetect, rdoFind, rdoReplace, rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrChkBoundary, {rdoDetect, rdoFind}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrPnlDetectOptions, {rdoDetect}, bNewLinkedHideIfParameterMissing:=True)
@@ -182,9 +185,10 @@ Public Class dlgStringHandling
         clsReplaceCellFunction = New RFunction
         clsAsDataFrameFunction = New RFunction
         clsMutateFunction = New RFunction
+        clsNaIfFunction = New RFunction
         clsPipeOperator = New ROperator
         clsReplaceGrepFunction = New RFunction
-
+        clsStrToLowerFunction = New RFunction
         ucrSelectorStringHandling.Reset()
 
         ucrInputReplaceBy.Reset()
@@ -267,6 +271,12 @@ Public Class dlgStringHandling
         clsPipeOperator.AddParameter("x", "df", iPosition:=0, bIncludeArgumentName:=False)
         clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
 
+        clsNaIfFunction.SetPackageName("dplyr")
+        clsNaIfFunction.SetRCommand("na_if")
+
+        clsStrToLowerFunction.SetPackageName("stringr")
+        clsStrToLowerFunction.SetRCommand("str_to_lower")
+
         clsDetectFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
         NewColumnName()
@@ -313,6 +323,7 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.AddAdditionalRCode(clsMatchAllFunction, iAdditionalPairNo:=12)
         ucrSaveStringHandling.AddAdditionalRCode(clsRemoveAllFunction, iAdditionalPairNo:=13)
         ucrSaveStringHandling.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=14)
+        ucrSaveStringHandling.AddAdditionalRCode(clsNaIfFunction, iAdditionalPairNo:=15)
 
         ucrReceiverStringHandling.SetRCode(clsDetectFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
@@ -333,7 +344,7 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub TestOkEnabled()
-        If (rdoDetect.Checked OrElse rdoFind.Checked OrElse rdoReplace.Checked OrElse rdoRemove.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() Then
+        If (rdoDetect.Checked OrElse rdoFind.Checked OrElse rdoReplace.Checked OrElse rdoRemove.Checked OrElse rdoToNa.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() Then
             ucrBase.OKEnabled(True)
         ElseIf rdoReplaceNa.Checked AndAlso ucrSaveStringHandling.IsComplete() Then
             ucrBase.OKEnabled(True)
@@ -359,6 +370,7 @@ Public Class dlgStringHandling
     Private Sub AddRemoveParameters()
         clsStringCollFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         clsRegexFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsNaIfFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         If ucrChkIncludeRegularExpressions.Checked Then
             clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
             clsRemoveFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction, bIncludeArgumentName:=False, iPosition:=1)
@@ -446,6 +458,9 @@ Public Class dlgStringHandling
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceNaFunction)
             ucrSaveStringHandling.SetPrefix("replace_na")
             clsFindDummyFunction.AddParameter("string_handling", "replace_na", iPosition:=3)
+        ElseIf rdoToNa.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsNaIfFunction)
+            ucrSaveStringHandling.SetPrefix("replace")
         ElseIf rdoRemove.Checked Then
             If ucrChkRemoveAll.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveAllFunction)
@@ -461,6 +476,7 @@ Public Class dlgStringHandling
         AddRemoveParameters()
         CellParameters()
         RegularExpressionControl()
+        IgnoreCaseControl()
     End Sub
 
     Private Sub ChangePrefixName()
@@ -525,5 +541,32 @@ Public Class dlgStringHandling
         ElseIf rdoReplaceCell.Checked Then
             clsFindDummyFunction.AddParameter("replace", "replace", iPosition:=2)
         End If
+    End Sub
+
+    Private Sub IgnoreCaseControl()
+        clsCurrentNewColumnFunction = ucrReceiverStringHandling.GetVariables()
+        clsCurrentNewColumnFunction.SetAssignTo("columns")
+        If rdoToNa.Checked Then
+            If ucrChkIgnoreCase.Checked Then
+                clsStrToLowerFunction.AddParameter("var1", clsRFunctionParameter:=clsCurrentNewColumnFunction, bIncludeArgumentName:=False, iPosition:=0)
+                clsNaIfFunction.AddParameter("string", clsRFunctionParameter:=clsStrToLowerFunction, bIncludeArgumentName:=False, iPosition:=0)
+                clsNaIfFunction.RemoveParameterByName("var2")
+            Else
+                clsNaIfFunction.AddParameter("var2", clsRFunctionParameter:=clsCurrentNewColumnFunction, bIncludeArgumentName:=False, iPosition:=0)
+                clsStrToLowerFunction.RemoveParameterByName("var1")
+                clsNaIfFunction.RemoveParameterByName("string")
+            End If
+        Else
+            clsStrToLowerFunction.RemoveParameterByName("var1")
+            clsNaIfFunction.RemoveParameterByName("string")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlValueChanged
+        IgnoreCaseControl()
+    End Sub
+
+    Private Sub ucrChkIgnoreCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreCase.ControlValueChanged
+        IgnoreCaseControl()
     End Sub
 End Class
