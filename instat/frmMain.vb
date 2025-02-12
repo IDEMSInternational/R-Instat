@@ -229,7 +229,7 @@ Public Class frmMain
 
         Me.Text = "R-Instat " & strVersion
 
-        CreateAdditionalLibraryDirectory(strVersion)
+        SetAdditionalLibraryDirectory()
         '-------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
@@ -417,7 +417,7 @@ Public Class frmMain
         End If
     End Function
 
-    Private Sub CreateAdditionalLibraryDirectory(strVersion As String)
+    Private Sub SetAdditionalLibraryDirectory()
         Try
 
             'To ensure this part of the code only runs when the application Is Not in the Debug mode (i.e., in Release mode)
