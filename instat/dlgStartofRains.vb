@@ -18,12 +18,12 @@ Imports instat.Translations
 
 Public Class dlgStartofRains
     Private bResetSubdialog As Boolean = True
-    Private clsCalcRainDay, clsCalcStartDOY, clsVectorFunction, clsGetlinkeddataFunction, clsGetDataFrameFunction, clsListevapFunction, clsRollEvaporationFunction, clsFractionEvapFunction, clsSumEvapFunction, clsConvertColumnType1Function, clsConvertColumnType2Function, clsConvertColumnTypeFunction, clsGetColumnDataTypeFunction, clsDummyFunction, clsIfelseStatusFunction, clsIfelseStatus1Function, clsFirstStatusFunction, clsIsNAStatusFunction, clsCalcStartDate, clsCombinationCalc, clsListCalFunction, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
+    Private clsCalcRainDay, clsCalcStartDOY, clsConvertssndLinkedVariableFunction, clsDeleteunusedrowFunction, clsRunStartStatus2Function, clsStartRainCombine2Function, clsListFunction, clsNastatus2Function, clsIfElseStatus2Function, clsStatRainStatus2Function, clsSetnameRainStatusFunction, clsSetnameRainFunction, clsCalculatedListformFunction, clsConvertLinkedvariablesvectorFunction, clsConvertLinkedVariablesFunction, clsStationTypeFunction, clsConvertStationtypeFunction, clsVectorFunction, clsGetlinkeddataFunction, clsGetDataFrameFunction, clsListevapFunction, clsRollEvaporationFunction, clsFractionEvapFunction, clsSumEvapFunction, clsConvertColumnType1Function, clsConvertColumnType2Function, clsConvertColumnTypeFunction, clsGetColumnDataTypeFunction, clsDummyFunction, clsIfelseStatusFunction, clsIfelseStatus1Function, clsFirstStatusFunction, clsIsNAStatusFunction, clsCalcStartDate, clsCombinationCalc, clsListCalFunction, clsCombinationManipList, clsCombinationSubCalcList, clsListSubCalc, clsManipulationFirstDOYPerYear, clsConditionsFilter, clsCombinedList As New RFunction
     Private clsDayFromAndTo, clsGroupByStation, clsGroupByYear, clsListToTalRain, clsApplyInstatFunction, clsFirstDOY, clsFirstDate As New RFunction
     Private clsDayFromAndToOperator, clsEvapOperator, clsDayFromOperator, clsDayToOperator, clsRainDayOperator, clsRainDayConditionOperator, clsConditionsAndOperator, clsTRCombineOperator, clsRollingSumRainDayOperator, clsDSCombineOperator, clsDPCombineOperator As New ROperator
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
 
-    Private clsSpellsFunction As New RFunction
+    Private clsSpellsFunction, clsIfElseFirstDoyFilledFunction As New RFunction
     Private clsRainDaySpellsOperator As New ROperator
 
     Private clsConditionsOrOverallOperator As New ROperator
@@ -238,6 +238,10 @@ Public Class dlgStartofRains
         Dim strStartDoy As String = "start_rain"
         Dim strRollSumRainDryPeriod As String = "roll_sum_rain_dry_period"
         Dim strYearType As String = "year_type"
+        Dim strStationType As String = "station_type"
+        Dim strcalculatedfromlist As String = "calculated_from_list"
+        Dim strStartStatus2 As String = "start_rain_status2"
+        Dim strstartraincombinedstatus2 As String = "start_rain_combined_status_2"
 
         clsRainRollingSumFunction = New RFunction
         clsGetlinkeddataFunction = New RFunction
@@ -246,6 +250,13 @@ Public Class dlgStartofRains
         clsDayFilterCalcFromConvert = New RFunction
         clsDayFilterCalcFromList = New RFunction
         clsDummyFunction = New RFunction
+        clsIfElseFirstDoyFilledFunction = New RFunction
+        clsConvertLinkedvariablesvectorFunction = New RFunction
+        clsSetnameRainStatusFunction = New RFunction
+        clsSetnameRainFunction = New RFunction
+        clsIfElseStatus2Function = New RFunction
+        clsNastatus2Function = New RFunction
+        clsListFunction = New RFunction
 
         clsDayFromAndTo.Clear()
         clsDayFromAndToOperator.Clear()
@@ -275,6 +286,15 @@ Public Class dlgStartofRains
         clsEvapOperator.Clear()
         clsRollEvaporationFunction.Clear()
         clsListevapFunction.Clear()
+        clsStationTypeFunction.Clear()
+        clsConvertStationtypeFunction.Clear()
+        clsConvertLinkedVariablesFunction.Clear()
+        clsCalculatedListformFunction.Clear()
+        clsStatRainStatus2Function.Clear()
+        clsStartRainCombine2Function.Clear()
+        clsRunStartStatus2Function.Clear()
+        clsConvertssndLinkedVariableFunction.Clear()
+        clsDeleteunusedrowFunction.Clear()
 
         clsSpellsFunction.Clear()
         clsRainDaySpellsOperator.Clear()
@@ -390,7 +410,7 @@ Public Class dlgStartofRains
 
         clsConvertColumnType1Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsConvertColumnType1Function.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-        clsConvertColumnType1Function.AddParameter("to_type", "year_type", iPosition:=2)
+        clsConvertColumnType1Function.AddParameter("to_type", strYearType, iPosition:=2)
 
         'TOTAL RAIN: associated with ucrChkTotalRainfall
         clsCalcRainRollingSum.SetRCommand("instat_calculation$new")
@@ -768,8 +788,8 @@ Public Class dlgStartofRains
         clsVectorFunction.SetRCommand("c")
 
         clsConvertColumnType2Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
-        clsConvertColumnType2Function.AddParameter("data_name", "linked_data_name", iPosition:=0)
-        clsConvertColumnType2Function.AddParameter("to_type", "year_type", iPosition:=2)
+        clsConvertColumnType2Function.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertColumnType2Function.AddParameter("to_type", strStationType, iPosition:=2)
 
         'Run Calculations
         clsListCalFunction.SetRCommand("list")
@@ -780,17 +800,82 @@ Public Class dlgStartofRains
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsCombinationCalc, iPosition:=0)
         clsApplyInstatFunction.AddParameter("param_list", clsRFunctionParameter:=clsListCalFunction, iPosition:=2)
 
+        clsStationTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
+        clsStationTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsStationTypeFunction.SetAssignTo(strStationType)
+
+        clsConvertStationtypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsConvertStationtypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertStationtypeFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
+
+        clsConvertLinkedVariablesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_linked_variable")
+        clsConvertLinkedVariablesFunction.AddParameter("from_data_frame", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertLinkedVariablesFunction.AddParameter("link_cols", clsRFunctionParameter:=clsConvertLinkedvariablesvectorFunction, iPosition:=2)
+
+        clsConvertLinkedvariablesvectorFunction.SetRCommand("c")
+
+        clsCalculatedListformFunction.SetRCommand("c")
+        clsCalculatedListformFunction.AddParameter("x", clsRFunctionParameter:=clsSetnameRainStatusFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsCalculatedListformFunction.AddParameter("y", clsRFunctionParameter:=clsSetNameRainFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsCalculatedListformFunction.SetAssignTo(strcalculatedfromlist)
+
+        clsSetnameRainStatusFunction.SetRCommand("setNames")
+        clsSetnameRainStatusFunction.AddParameter("x", Chr(34) & strStartStatus & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsSetnameRainStatusFunction.AddParameter("y", "linked_data_name", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsSetnameRainFunction.SetRCommand("setNames")
+        clsSetnameRainFunction.AddParameter("x", Chr(34) & strStartDoy & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsSetnameRainFunction.AddParameter("y", "linked_data_name", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsStatRainStatus2Function.SetRCommand("instat_calculation$new")
+        clsStatRainStatus2Function.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsStatRainStatus2Function.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseStatus2Function, iPosition:=1)
+        clsStatRainStatus2Function.AddParameter("calculated_from", strcalculatedfromlist, iPosition:=2)
+        clsStatRainStatus2Function.AddParameter("result_name", Chr(34) & "start_rain_status" & Chr(34), iPosition:=3)
+        clsStatRainStatus2Function.AddParameter("save", "2", iPosition:=4)
+        clsStatRainStatus2Function.SetAssignTo(strStartStatus2)
+        clsIfElseStatus2Function.SetRCommand("ifelse")
+        clsIfElseStatus2Function.bToScriptAsRString = True
+        clsIfElseStatus2Function.AddParameter("test", clsRFunctionParameter:=clsNastatus2Function, iPosition:=0, bIncludeArgumentName:=False)
+        clsIfElseStatus2Function.AddParameter("yes", "TRUE", iPosition:=1, bIncludeArgumentName:=False)
+        clsIfElseStatus2Function.AddParameter("no", strStartStatus, iPosition:=2, bIncludeArgumentName:=False)
+
+        clsNastatus2Function.SetRCommand("!is.na")
+        clsNastatus2Function.AddParameter("x", strStartDoy, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsStartRainCombine2Function.SetRCommand("instat_calculation$new")
+        clsStartRainCombine2Function.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
+        clsStartRainCombine2Function.AddParameter("sub_calculations", clsRFunctionParameter:=clsListFunction, iPosition:=1)
+        clsStartRainCombine2Function.SetAssignTo(strstartraincombinedstatus2)
+
+        clsListFunction.SetRCommand("list")
+        clsListFunction.AddParameter("x", strStartStatus2, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsRunStartStatus2Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsRunStartStatus2Function.AddParameter("calc", strstartraincombinedstatus2, iPosition:=0)
+        clsRunStartStatus2Function.AddParameter("display", "FALSE", iPosition:=1)
+        clsRunStartStatus2Function.AddParameter("param_list", clsRFunctionParameter:=clsListCalFunction, iPosition:=2)
+
+        clsConvertssndLinkedVariableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_linked_variable")
+        clsConvertssndLinkedVariableFunction.AddParameter("from_data_frame", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertssndLinkedVariableFunction.AddParameter("link_cols", clsRFunctionParameter:=clsConvertLinkedvariablesvectorFunction, iPosition:=1)
+
+        clsDeleteunusedrowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_unused_station_year_combinations")
+        clsDeleteunusedrowFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+
         ucrBase.clsRsyntax.ClearCodes()
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnDataTypeFunction, iPosition:=0)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertColumnTypeFunction, iPosition:=1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsGetlinkeddataFunction, iPosition:=0)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType1Function, iPosition:=1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType2Function, iPosition:=2)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertLinkedVariablesFunction, iPosition:=4)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnType1Function, iPosition:=5)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsConvertssndLinkedVariableFunction, iPosition:=8)
         SetReceiver()
         ChangeDSValue()
         AdditionalCondition()
+        GroupByStationOptions()
+        AddRemoveStartStatus()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -807,10 +892,10 @@ Public Class dlgStartofRains
         ucrNudTROverDays.AddAdditionalCodeParameterPair(clsRollEvaporationFunction, New RParameter("n", 1), iAdditionalPairNo:=1)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
-        ucrChkAsDoy.SetRCode(clsCombinationSubCalcList, bReset)
-        ucrChkStatus.SetRCode(clsDummyFunction, bReset)
-        ucrChkAsDate.SetRCode(clsDummyFunction, bReset)
         If bReset Then
+            ucrChkAsDoy.SetRCode(clsCombinationSubCalcList, bReset)
+            ucrChkStatus.SetRCode(clsDummyFunction, bReset)
+            ucrChkAsDate.SetRCode(clsDummyFunction, bReset)
             ucrChkAdditional.SetRCode(clsDummyFunction, bReset)
         End If
         ucrInputThreshold.SetRCode(clsRainDayOperator, bReset)
@@ -865,7 +950,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
-        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
+        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
         sdgDoyRange.ShowDialog()
         UpdateDayFilterPreview()
     End Sub
@@ -927,15 +1012,31 @@ Public Class dlgStartofRains
 
     Private Sub GroupByStationOptions()
         If Not ucrReceiverStation.IsEmpty Then
+            clsDeleteunusedrowFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(), iPosition:=2)
             clsCombinationManipList.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
             clsListToTalRain.AddParameter("manip1", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False)
             clsCalcRainRollingSum.AddParameter("manipulations", clsRFunctionParameter:=clsListToTalRain, iPosition:=4)
             clsGroupByStation.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=3)
+            clsConvertStationtypeFunction.AddParameter("col_names", ucrReceiverStation.GetVariableNames(), iPosition:=1)
+            clsConvertLinkedvariablesvectorFunction.AddParameter("y", ucrReceiverStation.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
+            clsStationTypeFunction.AddParameter("columns", ucrReceiverStation.GetVariableNames(), iPosition:=1)
+            clsConvertColumnType2Function.AddParameter("col_names", ucrReceiverStation.GetVariableNames(), iPosition:=1)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsStationTypeFunction, iPosition:=2)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsConvertStationtypeFunction, iPosition:=3)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDeleteunusedrowFunction, iPosition:=7)
         Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDeleteunusedrowFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsStationTypeFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsConvertStationtypeFunction)
+            clsDeleteunusedrowFunction.RemoveParameterByName("station")
+            clsConvertStationtypeFunction.RemoveParameterByName("col_names")
             clsCombinationManipList.RemoveParameterByName("manip1")
             clsListToTalRain.RemoveParameterByName("manip1")
             clsCalcRainRollingSum.RemoveParameterByName("manipulations")
             clsGroupByStation.RemoveParameterByName("calculated_from")
+            clsConvertLinkedvariablesvectorFunction.RemoveParameterByName("y")
+            clsStationTypeFunction.RemoveParameterByName("columns")
+            clsConvertColumnType2Function.RemoveParameterByName("col_names")
         End If
     End Sub
 
@@ -944,14 +1045,16 @@ Public Class dlgStartofRains
             clsGetColumnDataTypeFunction.AddParameter("columns", ucrReceiverYear.GetVariableNames(), iPosition:=1)
             clsConvertColumnTypeFunction.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
             clsConvertColumnType1Function.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
-            clsConvertColumnType2Function.AddParameter("col_names", ucrReceiverYear.GetVariableNames(), iPosition:=1)
+            clsDeleteunusedrowFunction.AddParameter("year", ucrReceiverYear.GetVariableNames(), iPosition:=1)
             clsGroupByYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")", iPosition:=3)
+            clsConvertLinkedvariablesvectorFunction.AddParameter("x", ucrReceiverYear.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
         Else
+            clsDeleteunusedrowFunction.RemoveParameterByName("year")
             clsGroupByYear.RemoveParameterByName("calculated_from")
             clsGetColumnDataTypeFunction.RemoveParameterByName("columns")
             clsConvertColumnTypeFunction.RemoveParameterByName("col_names")
             clsConvertColumnType1Function.RemoveParameterByName("col_names")
-            clsConvertColumnType2Function.RemoveParameterByName("col_names")
+            clsConvertLinkedvariablesvectorFunction.RemoveParameterByName("x")
         End If
     End Sub
 
@@ -1024,6 +1127,13 @@ Public Class dlgStartofRains
         clsConvertColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsConvertColumnType1Function.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsGetlinkeddataFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsStationTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertStationtypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertLinkedVariablesFunction.AddParameter("from_data_frame", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertssndLinkedVariableFunction.AddParameter("from_data_frame", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsDeleteunusedrowFunction.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsConvertColumnType2Function.AddParameter("data_name", Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+
         clsDayFilterCalcFromList.ClearParameters()
     End Sub
 
@@ -1056,7 +1166,24 @@ Public Class dlgStartofRains
         clsSORStatusSummary.clsSORFilterOperator.AddParameter("left", strParameterValue:=ucrInputNewDoyColumnName.GetText, bIncludeArgumentName:=False, iPosition:=0)
     End Sub
 
+    Private Sub AddRemoveStartStatus()
+        If ucrChkStatus.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsGetlinkeddataFunction, iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsCalculatedListformFunction, iPosition:=1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsStatRainStatus2Function, iPosition:=2)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsStartRainCombine2Function, iPosition:=3)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsRunStartStatus2Function, iPosition:=4)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetlinkeddataFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsCalculatedListformFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsStatRainStatus2Function)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsStartRainCombine2Function)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRunStartStatus2Function)
+        End If
+    End Sub
+
     Private Sub ucrChkStatus_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStatus.ControlValueChanged
+        AddRemoveStartStatus()
         If ucrChkStatus.Checked Then
             clsCombinationSubCalcList.AddParameter("sub3", clsRFunctionParameter:=clsCalcStatus, bIncludeArgumentName:=False, iPosition:=2)
             clsListSubCalc.AddParameter("sub3", clsRFunctionParameter:=clsCalcStatus, bIncludeArgumentName:=False, iPosition:=2)
