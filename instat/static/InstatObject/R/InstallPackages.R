@@ -1,6 +1,32 @@
 Sys.setenv(TZ='GMT')
 Sys.setlocale("LC_TIME", "C")
 
+# Get the Roaming AppData path
+library_path <- file.path(Sys.getenv("APPDATA"), "R-Instat", "0.8.2", "library")
+
+# Create the folder if it doesn't exist
+if (!dir.exists(library_path)) {
+  dir.create(library_path, recursive = TRUE)
+  message("Folder created at: ", library_path)
+} else {
+  message("Folder already exists at: ", library_path)
+}
+
+# Update the library paths
+.libPaths(c(library_path, .libPaths()))
+
+# Check if there are more than 2 library paths
+if (length(.libPaths()) > 2) {
+  # Get the current library paths
+  current_paths <- .libPaths()
+  
+  # Select valid indices (1 and 3) only if they exist
+  valid_indices <- c(1, 3)[c(1, 3) <= length(current_paths)]
+  
+  # Set the library paths to the valid ones
+  .libPaths(current_paths[valid_indices])
+}
+
 #Install packages from CRAN archive
 install.packages("http://cran.r-project.org/src/contrib/Archive/signmedian.test/signmedian.test_1.5.1.tar.gz", repos=NULL, type="source")
 
@@ -40,7 +66,7 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
            "FNN", "fontawesome", "forcats", "foreach", "forecast", "foreign", 
            "formattable", "formula.tools", "Formula", "fracdiff", "fs", 
            "future.apply", "future", "gapminder", "gclus", "gcookbook", 
-           "generics", "GenSA", "geomtextpath", "geosphere", "gert", 
+           "generics", "GenSA", "geomtextpath", "geosphere", "gert", "getPass",
            "GGally", "ggalt", "ggeffects", "ggfittext", "ggformula", "ggfortify", 
            "ggmosaic", "ggplot2", "ggplotify", "ggpmisc", "ggpp", "ggpubr", 
            "ggrepel", "ggridges", "ggsci", "ggside", "ggsignif", "ggstats", 
@@ -114,11 +140,11 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
 
 install.packages(packs, dependencies = FALSE, repos='https://cloud.r-project.org', type="win.binary")
 
-# Only use internal library
-if (length(.libPaths()) >= 2){
-  current_paths <- .libPaths()
-  .libPaths(current_paths[c(1, 3)[c(1, 3) <= length(current_paths)]])
-}
+# # Only use internal library
+# if (length(.libPaths()) >= 2){
+#   current_paths <- .libPaths()
+#   .libPaths(current_paths[c(1, 3)[c(1, 3) <= length(current_paths)]])
+# }
 
 #install development packages not on CRAN
 devtools::install_github("ianmoran11/mmtable2")
@@ -127,15 +153,3 @@ devtools::install_github("rijaf-iri/CDT")
 devtools::install_github("IDEMSInternational/rapidpror")
 devtools::install_github("IDEMSInternational/epicsawrap")
 
-# Get the Roaming AppData path
-roaming_path <- file.path(Sys.getenv("APPDATA"), "R-Instat", "0.8.2", "library")
-
-# Create the folder if it doesn't exist
-if (!dir.exists(roaming_path)) {
-  dir.create(roaming_path, recursive = TRUE)
-  message("Folder created at: ", roaming_path)
-} else {
-  message("Folder already exists at: ", roaming_path)
-}
-# Install the 'getPass' package to the specified directory
-install.packages("getPass", lib = roaming_path)
