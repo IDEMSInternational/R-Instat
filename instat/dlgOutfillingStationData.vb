@@ -122,7 +122,7 @@ Public Class dlgOutfillingStationData
         ucrChkOmitMonths.AddParameterValuesCondition(False, "omit", "False")
         ucrChkOmitMonths.AddToLinkedControls({ucrInputOmitMonths}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkStationToExclude.SetText("Station(s) to Exclude")
+        ucrChkStationToExclude.SetText("Stations")
         ucrChkStationToExclude.AddParameterValuesCondition(True, "exclude", "True")
         ucrChkStationToExclude.AddParameterValuesCondition(False, "exclude", "False")
 

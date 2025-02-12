@@ -354,7 +354,7 @@ Partial Class dlgOutfillingStationData
         '
         Me.ucrChkStationToExclude.AutoSize = True
         Me.ucrChkStationToExclude.Checked = False
-        Me.ucrChkStationToExclude.Location = New System.Drawing.Point(6, 205)
+        Me.ucrChkStationToExclude.Location = New System.Drawing.Point(6, 202)
         Me.ucrChkStationToExclude.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkStationToExclude.Name = "ucrChkStationToExclude"
         Me.ucrChkStationToExclude.Size = New System.Drawing.Size(125, 23)
@@ -396,12 +396,12 @@ Partial Class dlgOutfillingStationData
         'cmdFilterFromFactors
         '
         Me.cmdFilterFromFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFilterFromFactors.Location = New System.Drawing.Point(130, 195)
+        Me.cmdFilterFromFactors.Location = New System.Drawing.Point(133, 197)
         Me.cmdFilterFromFactors.Name = "cmdFilterFromFactors"
-        Me.cmdFilterFromFactors.Size = New System.Drawing.Size(129, 38)
+        Me.cmdFilterFromFactors.Size = New System.Drawing.Size(73, 33)
         Me.cmdFilterFromFactors.TabIndex = 33
         Me.cmdFilterFromFactors.Tag = "Define_New_Filter"
-        Me.cmdFilterFromFactors.Text = "Station(s) to Exclude"
+        Me.cmdFilterFromFactors.Text = "Include"
         Me.cmdFilterFromFactors.UseVisualStyleBackColor = True
         '
         'dlgOutfillingStationData
