@@ -18,6 +18,7 @@ Imports instat.Translations
 
 Public Class sdgSummaryThemes
     Private clsThemesTabOptionsFunction As New RFunction
+
     Private bRCodeSet As Boolean = False
     Private bControlsInitialised As Boolean = False
 
