@@ -145,8 +145,8 @@ Public Class dlgStringHandling
 
         ucrChkReplaceBy.AddToLinkedControls(ucrInputReplaceNaBy, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NA")
         ucrPnlStringHandling.AddToLinkedControls({ucrInputReplaceBy, ucrPnlReplaceOptions}, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls({ucrInputPattern, ucrChkIgnoreCase}, {rdoToNa}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls({ucrInputPattern, ucrChkIgnoreCase, ucrChkIncludeRegularExpressions}, {rdoDetect, rdoFind, rdoReplace, rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrChkIncludeRegularExpressions, {rdoDetect, rdoFind, rdoReplace, rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls({ucrInputPattern, ucrChkIgnoreCase}, {rdoDetect, rdoToNa, rdoFind, rdoReplace, rdoRemove}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrChkBoundary, {rdoDetect, rdoFind}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrPnlDetectOptions, {rdoDetect}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringHandling.AddToLinkedControls(ucrPnlFindOptions, {rdoFind}, bNewLinkedHideIfParameterMissing:=True)
