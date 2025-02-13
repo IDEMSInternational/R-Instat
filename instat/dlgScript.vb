@@ -248,6 +248,7 @@ Public Class dlgScript
         rdoGetDataFrame.Checked = True
         rdoDataFrame.Checked = True
         rdoSidePlot.Checked = True
+        rdoTextPath.Enabled = False
         ucrSelectorForRank.Reset()
         ucrReceiverForCalculation.Clear()
         'activate the selected tab to library tab
