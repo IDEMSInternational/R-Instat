@@ -23,6 +23,8 @@ Public Class dlgScript
     Private clsGetRObjectFunction, clsGetSelectedDataFrameFunction As New RFunction
     Private dctOutputObjectTypes As New Dictionary(Of String, String)
     Private dctOutputObjectFormats As New Dictionary(Of String, String)
+    Private dctXSidePlot As New Dictionary(Of String, String)
+    Private dctYSidePlot As New Dictionary(Of String, String)
 
     Private Sub dlgScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -56,6 +58,30 @@ Public Class dlgScript
         dctOutputObjectFormats.Add("Text", RObjectFormat.Text)
         dctOutputObjectFormats.Add("Html", RObjectFormat.Html)
 
+        dctXSidePlot.Add("GeomBar", "ggside::geom_xsidebar()")
+        dctXSidePlot.Add("GeomBoxplot", "ggside::geom_xsideboxplot()")
+        dctXSidePlot.Add("GeomDensity", "ggside::geom_xsidedensity()")
+        dctXSidePlot.Add("GeomFreqpoly", "ggside::geom_xsidefreqpoly()")
+        dctXSidePlot.Add("GeomHistogram", "ggside::geom_xsidehistogram()")
+        dctXSidePlot.Add("GeomLine", "ggside::geom_xsideline()")
+        dctXSidePlot.Add("GeomPath", "ggside::geom_xsidebar()")
+        dctXSidePlot.Add("GeomPoint", "ggside::geom_xsidepoint()")
+        dctXSidePlot.Add("GeomText", "ggside::geom_xsidetext()")
+        dctXSidePlot.Add("GeomTile", "ggside::geom_xsidetile()")
+        dctXSidePlot.Add("GeomViolin", "ggside::geom_xsideviolin()")
+
+        dctYSidePlot.Add("GeomBar", "ggside::geom_ysidebar()")
+        dctYSidePlot.Add("GeomBoxplot", "ggside::geom_ysideboxplot()")
+        dctYSidePlot.Add("GeomDensity", "ggside::geom_ysidedensity()")
+        dctYSidePlot.Add("GeomFreqpoly", "ggside::geom_ysidefreqpoly()")
+        dctYSidePlot.Add("GeomHistogram", "ggside::geom_ysidehistogram()")
+        dctYSidePlot.Add("GeomLine", "ggside::geom_ysideline()")
+        dctYSidePlot.Add("GeomPath", "ggside::geom_ysidebar()")
+        dctYSidePlot.Add("GeomPoint", "ggside::geom_ysidepoint()")
+        dctYSidePlot.Add("GeomText", "ggside::geom_ysidetext()")
+        dctYSidePlot.Add("GeomTile", "ggside::geom_ysidetile()")
+        dctYSidePlot.Add("GeomViolin", "ggside::geom_ysideviolin()")
+
         '--------------------------------
         'save controls
         ucrPnlSaveData.AddRadioButton(rdoSaveDataFrame)
@@ -72,6 +98,14 @@ Public Class dlgScript
         ucrCboSaveOutputObjectFormat.SetLinkedDisplayControl(lblSaveObjectFormat)
         ucrCboSaveOutputObjectFormat.GetSetSelectedIndex = 0
 
+        ucrCboInputXSide.SetItems(dctXSidePlot, bSetConditions:=False)
+        ucrCboInputXSide.SetDropDownStyleAsNonEditable()
+        ucrCboInputXSide.GetSetSelectedIndex = 0
+
+        ucrCboInputYSide.SetItems(dctYSidePlot, bSetConditions:=False)
+        ucrCboInputYSide.SetDropDownStyleAsNonEditable()
+        ucrCboInputYSide.GetSetSelectedIndex = 1
+
         ucrSaveObject.SetLabelText("Store Graph")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetDataFrameSelector(ucrDataFrameSaveOutputSelect)
@@ -84,12 +118,17 @@ Public Class dlgScript
 
         ucrChkDisplayGraph.SetText("Display Output")
 
+        ucrChkXSide.SetText("X Side")
+        ucrChkYSide.SetText("Y Side")
         '--------------------------------
         'Get data controls
 
         ucrPnlGetData.AddRadioButton(rdoGetDataFrame)
         ucrPnlGetData.AddRadioButton(rdoGetColumn)
         ucrPnlGetData.AddRadioButton(rdoGetOutputObject)
+
+        ucrPnlGraph.AddRadioButton(rdoTextPath)
+        ucrPnlGraph.AddRadioButton(rdoSidePlot)
 
         ucrDataFrameGetDF.SetLabelText("Get Data Frame:")
 
@@ -208,6 +247,7 @@ Public Class dlgScript
         ucrDataFrameGetDF.Reset()
         rdoGetDataFrame.Checked = True
         rdoDataFrame.Checked = True
+        rdoSidePlot.Checked = True
         ucrSelectorForRank.Reset()
         ucrReceiverForCalculation.Clear()
         'activate the selected tab to library tab
@@ -904,5 +944,81 @@ Public Class dlgScript
     Private Sub ucrReceiverRank_Enter(sender As Object, e As EventArgs) Handles ucrReceiverRank.Enter
         ucrSelectorForRank.SetItemType("column_selection")
     End Sub
+
+    Private Sub ucrPnlGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraph.ControlValueChanged
+        'ucrChkXSide.SetVisible(False)
+        'ucrChkYSide.SetVisible(False)
+        'ucrInputXSide.SetVisible(False)
+        'ucrInputYSide.SetVisible(False)
+        If rdoTextPath.Checked Then
+            lblText.Visible = True
+            ucrInputTextPath.SetVisible(True)
+            ucrCboInputText.SetVisible(True)
+            ucrCboInputGeom.SetVisible(True)
+            ucrChkXSide.SetVisible(False)
+            ucrChkYSide.SetVisible(False)
+            ucrCboInputXSide.SetVisible(False)
+            ucrCboInputYSide.SetVisible(False)
+        ElseIf rdoSidePlot.Checked Then
+            ucrChkXSide.SetVisible(True)
+            ucrChkXSide.OnControlValueChanged()
+            ucrChkYSide.SetVisible(True)
+            ucrChkYSide.OnControlValueChanged()
+            ucrCboInputXSide.SetVisible(True)
+            ucrCboInputXSide.OnControlValueChanged()
+            ucrCboInputYSide.SetVisible(True)
+            ucrCboInputYSide.OnControlValueChanged()
+            lblText.Visible = False
+            ucrInputTextPath.SetVisible(False)
+            ucrCboInputText.SetVisible(False)
+            ucrCboInputGeom.SetVisible(False)
+        End If
+    End Sub
+
+    Private Sub ucrChkXSide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXSide.ControlValueChanged, ucrCboInputXSide.ControlValueChanged
+        ucrCboInputXSide.Visible = ucrChkXSide.Checked
+    End Sub
+
+    Private Sub ucrChkYSide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYSide.ControlValueChanged, ucrCboInputYSide.ControlValueChanged
+        ucrCboInputYSide.Visible = ucrChkYSide.Checked
+    End Sub
+
+    Private Sub ucrCboInputXSide_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCboInputXSide.ControlContentsChanged, ucrCboInputYSide.ControlContentsChanged
+        Dim strScript As String = ""
+        Dim strXSide As String = ""
+        Dim strYSide As String = ""
+
+        ' Get selected X Side value only if the checkbox is checked
+        If ucrChkXSide.Checked Then
+            If Not ucrCboInputXSide.IsEmpty() Then
+                Dim strSelectedX As String = ucrCboInputXSide.GetValue()
+                If dctXSidePlot.ContainsKey(strSelectedX) Then
+                    strXSide = dctXSidePlot(strSelectedX)
+                End If
+            End If
+        End If
+
+        ' Get selected Y Side value only if the checkbox is checked
+        If ucrChkYSide.Checked Then
+            If Not ucrCboInputYSide.IsEmpty() Then
+                Dim strSelectedY As String = ucrCboInputYSide.GetValue()
+                If dctYSidePlot.ContainsKey(strSelectedY) Then
+                    strYSide = dctYSidePlot(strSelectedY)
+                End If
+            End If
+        End If
+
+        ' Construct the script
+        If Not String.IsNullOrEmpty(strXSide) Then
+            strScript &= " + " & strXSide
+        End If
+        If Not String.IsNullOrEmpty(strYSide) Then
+            strScript &= " + " & strYSide
+        End If
+
+        ' Preview the script
+        PreviewScript(strScript)
+    End Sub
+
 
 End Class
