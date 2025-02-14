@@ -322,16 +322,23 @@ Public Class frmMain
         mnuViewSwapDataAndScript.Checked = False
         mnuColumnMetadat.Checked = False
         mnuDataFrameMetadat.Checked = False
-        mnuSwapDataLogScript.Checked = False
         mnuSwapDataMetadata.Checked = False
         mnuSwapDataDataframeMetadata.Checked = False
         mnuDataViewWindow.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
+
+        EnableDisbaleViewSwapMenu(True)
         UpdateSwapDataAndScript()
         UpdateSwapDataAndMetadata()
         UpdateSwapDataFrameAndMetadata()
         UpdateLayout()
+    End Sub
+
+    Public Sub EnableDisbaleViewSwapMenu(bEnable As Boolean)
+        mnuViewSwapDataAndMetadata.Enabled = bEnable
+        mnuViewSwapDataAndDataframeMetadata.Enabled = bEnable
+        mnuViewSwapDataAndScript.Enabled = bEnable
     End Sub
 
     Public Sub UpdateLayout()
@@ -657,7 +664,6 @@ Public Class frmMain
 
     Private Sub UpdateSwapDataAndMetadata()
         If mnuViewSwapDataAndMetadata.Checked Then
-            ClearAllPanels()
             splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
             splMetadata.Panel1.Controls.Add(ucrDataViewer)
             mnuSwapDataMetadata.Checked = True
@@ -674,7 +680,6 @@ Public Class frmMain
 
     Private Sub UpdateSwapDataFrameAndMetadata()
         If mnuViewSwapDataAndDataframeMetadata.Checked Then
-            ClearAllPanels()
             splDataOutput.Panel1.Controls.Add(ucrDataFrameMeta)
             splMetadata.Panel2.Controls.Add(ucrDataViewer)
             mnuSwapDataDataframeMetadata.Checked = True
@@ -691,7 +696,6 @@ Public Class frmMain
 
     Public Sub UpdateSwapDataAndScript()
         If mnuViewSwapDataAndScript.Checked Then
-            ClearAllPanels()
             splDataOutput.Panel1.Controls.Add(ucrScriptWindow)
             splExtraWindows.Panel2.Controls.Add(ucrDataViewer)
             mnuSwapDataLogScript.Checked = True
@@ -704,14 +708,6 @@ Public Class frmMain
             splExtraWindows.Panel2.Controls.Add(ucrScriptWindow)
             mnuSwapDataLogScript.Checked = False
         End If
-    End Sub
-
-    ' Helper method To clear all panels
-    Private Sub ClearAllPanels()
-        '  splDataOutput.Panel1.Controls.Clear()
-        splMetadata.Panel1.Controls.Clear()
-        splMetadata.Panel2.Controls.Clear()
-        splExtraWindows.Panel2.Controls.Clear()
     End Sub
 
     Public Sub SaveInstatOptions(strFilePath As String)
@@ -819,7 +815,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuViewDataFrameMetadata.Click
-        If Not ValidateCurrentDataFrame() Then Return
         mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
         mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
         UpdateLayout()
@@ -853,7 +848,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
-        If Not ValidateCurrentDataFrame() Then Return
         mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         UpdateLayout()
@@ -881,7 +875,6 @@ Public Class frmMain
     Private Sub mnuPrepareDataFileDeleteSheets_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectDeleteDataFrame.Click
         dlgDeleteDataFrames.ShowDialog()
     End Sub
-
 
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
         dlgDeleteRowsOrColums.ShowDialog()
@@ -1034,14 +1027,6 @@ Public Class frmMain
     Private Sub mnuPrepareFactorDummyVariable_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorDummyVariables.Click
         dlgDummyVariables.ShowDialog()
     End Sub
-
-    'Private Sub mnuStatisticsAnalysisOfVarianceGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralANOVAGeneral.Click
-    '    dlgGeneralANOVA.ShowDialog()
-    'End Sub
-
-    'Private Sub mnuStatisticsRegressionGeneral_Click(sender As Object, e As EventArgs) Handles mnuModelOtherGeneralRegression.Click
-    '    dlgGeneralRegression.ShowDialog()
-    'End Sub
 
     Private Sub mnuPrepareTextTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextTransform.Click
         dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Prepare
@@ -1687,29 +1672,12 @@ Public Class frmMain
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
-    'Private Sub mnuProcurementPrepareStandardiseCountryName_Click(sender As Object, e As EventArgs)
-    '    Dim lstDataNames As List(Of String)
-
-    '    lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
-    '    If lstDataNames.Count > 0 Then
-    '        dlgStandardiseCountryNames.strDefaultDataFrame = lstDataNames(0)
-    '        dlgStandardiseCountryNames.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")
-    '    Else
-    '        dlgStandardiseCountryNames.strDefaultDataFrame = ""
-    '        dlgStandardiseCountryNames.strDefaultColumn = ""
-    '    End If
-    '    dlgStandardiseCountryNames.ShowDialog()
-    'End Sub
-
     Private Sub mnuProcurementPrepareRecodeNumericIntoQuantiles_Click(sender As Object, e As EventArgs) Handles mnuProcurementPrepareRecodeNumericIntoQuantiles.Click
         dlgRecodeNumericIntoQuantiles.ShowDialog()
     End Sub
 
     Private Sub mnuViewResetToDefaultLayout_Click(sender As Object, e As EventArgs) Handles mnuViewResetToDefaultLayout.Click
         SetToDefaultLayout()
-        'UpdateSwapDataAndScript()
-        'UpdateSwapDataAndMetadata()
-        'UpdateSwapDataFrameAndMetadata()
     End Sub
 
     Private Sub ucrDataViewer_Enter(sender As Object, e As EventArgs) Handles ucrDataViewer.Enter
@@ -1911,11 +1879,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTbResetLayout_Click(sender As Object, e As EventArgs) Handles mnuTbResetLayout.Click
-
         SetToDefaultLayout()
-        'UpdateSwapDataAndScript()
-        'UpdateSwapDataAndMetadata()
-        'UpdateSwapDataFrameAndMetadata()
     End Sub
 
     Public Sub SetToolbarHeight(iHeight As Integer)
@@ -2345,21 +2309,18 @@ Public Class frmMain
     End Sub
 
     Private Sub MnuMetadata_ButtonClick(sender As Object, e As EventArgs) Handles mnuMetadata.ButtonClick
-        If Not ValidateCurrentDataFrame() Then Return
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuColumnMetadat_Click(sender As Object, e As EventArgs) Handles mnuColumnMetadat.Click
-        If Not ValidateCurrentDataFrame() Then Return
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuDataFrameMetadat_Click(sender As Object, e As EventArgs) Handles mnuDataFrameMetadat.Click
-        If Not ValidateCurrentDataFrame() Then Return
         mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
         mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
         UpdateLayout()
@@ -2575,6 +2536,8 @@ Public Class frmMain
 
     Private Sub mnuViewSwapDataAndScript_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndScript.Click
         mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
+        mnuViewSwapDataAndMetadata.Enabled = Not mnuViewSwapDataAndScript.Checked
+        mnuViewSwapDataAndDataframeMetadata.Enabled = Not mnuViewSwapDataAndScript.Checked
         UpdateSwapDataAndScript()
         UpdateLayout()
     End Sub
@@ -2587,15 +2550,17 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
-        If Not ValidateCurrentDataFrame() Then Return
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
+        mnuViewSwapDataAndDataframeMetadata.Enabled = Not mnuViewSwapDataAndMetadata.Checked
+        mnuViewSwapDataAndScript.Enabled = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
     End Sub
 
     Private Sub mnuViewSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndDataframeMetadata.Click
-        If Not ValidateCurrentDataFrame() Then Return
         mnuViewSwapDataAndDataframeMetadata.Checked = Not mnuViewSwapDataAndDataframeMetadata.Checked
+        mnuViewSwapDataAndMetadata.Enabled = Not mnuViewSwapDataAndDataframeMetadata.Checked
+        mnuViewSwapDataAndScript.Enabled = Not mnuViewSwapDataAndDataframeMetadata.Checked
         UpdateSwapDataFrameAndMetadata()
         UpdateLayout()
     End Sub
@@ -2975,22 +2940,14 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
-        If Not ValidateCurrentDataFrame() Then Return
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
     End Sub
 
     Private Sub mnuSwapDataAndDataframeMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataDataframeMetadata.Click
-        If Not ValidateCurrentDataFrame() Then Return
         mnuViewSwapDataAndDataframeMetadata.Checked = Not mnuViewSwapDataAndDataframeMetadata.Checked
         UpdateSwapDataFrameAndMetadata()
-        UpdateLayout()
-    End Sub
-
-    Private Sub mnuSwapDataLogScript_Click(sender As Object, e As EventArgs) Handles mnuSwapDataLogScript.Click
-        mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
-        UpdateSwapDataAndScript()
         UpdateLayout()
     End Sub
 
@@ -3010,19 +2967,10 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuRDataViewerWindow_Click(sender As Object, e As EventArgs) Handles mnuRDataViewerWindow.Click
-        If Not ValidateCurrentDataFrame() Then Return ' Exit if no DataFrame is focused
         ucrDataViewer.StartWait()
         ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
         ucrDataViewer.EndWait()
     End Sub
-
-    Private Function ValidateCurrentDataFrame() As Boolean
-        If IsNothing(ucrDataViewer.GetCurrentDataFrameFocus()) Then
-            MessageBox.Show("No DataFrame is currently loaded or focused.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return False
-        End If
-        Return True
-    End Function
 
     Private Sub mnuClimaticModelOutfilling_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelOutfilling.Click
         dlgOutfillingStationData.ShowDialog()
