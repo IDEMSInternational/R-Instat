@@ -37,7 +37,9 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrSelectorLengthofSeason = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkLengthmore = New instat.ucrCheck()
-        Me.ucrNudLenghtmore = New instat.ucrNud()
+        Me.lblEndFilled = New System.Windows.Forms.Label()
+        Me.ucrReceiverEndFilled = New instat.ucrReceiverSingle()
+        Me.ucrInputTextLengthmore = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblStartofRains
@@ -52,7 +54,7 @@ Partial Class dlgClimaticLengthOfSeason
         'lblStartofRainsLogical
         '
         Me.lblStartofRainsLogical.AutoSize = True
-        Me.lblStartofRainsLogical.Location = New System.Drawing.Point(281, 75)
+        Me.lblStartofRainsLogical.Location = New System.Drawing.Point(281, 69)
         Me.lblStartofRainsLogical.Name = "lblStartofRainsLogical"
         Me.lblStartofRainsLogical.Size = New System.Drawing.Size(80, 13)
         Me.lblStartofRainsLogical.TabIndex = 3
@@ -61,7 +63,7 @@ Partial Class dlgClimaticLengthOfSeason
         'lblEndofRains
         '
         Me.lblEndofRains.AutoSize = True
-        Me.lblEndofRains.Location = New System.Drawing.Point(280, 120)
+        Me.lblEndofRains.Location = New System.Drawing.Point(280, 108)
         Me.lblEndofRains.Name = "lblEndofRains"
         Me.lblEndofRains.Size = New System.Drawing.Size(29, 13)
         Me.lblEndofRains.TabIndex = 5
@@ -70,7 +72,7 @@ Partial Class dlgClimaticLengthOfSeason
         'lblEndofRainsLogical
         '
         Me.lblEndofRainsLogical.AutoSize = True
-        Me.lblEndofRainsLogical.Location = New System.Drawing.Point(280, 166)
+        Me.lblEndofRainsLogical.Location = New System.Drawing.Point(280, 147)
         Me.lblEndofRainsLogical.Name = "lblEndofRainsLogical"
         Me.lblEndofRainsLogical.Size = New System.Drawing.Size(77, 13)
         Me.lblEndofRainsLogical.TabIndex = 7
@@ -80,7 +82,7 @@ Partial Class dlgClimaticLengthOfSeason
         '
         Me.ucrChkType.AutoSize = True
         Me.ucrChkType.Checked = False
-        Me.ucrChkType.Location = New System.Drawing.Point(5, 260)
+        Me.ucrChkType.Location = New System.Drawing.Point(5, 263)
         Me.ucrChkType.Name = "ucrChkType"
         Me.ucrChkType.Size = New System.Drawing.Size(87, 23)
         Me.ucrChkType.TabIndex = 11
@@ -89,7 +91,7 @@ Partial Class dlgClimaticLengthOfSeason
         '
         Me.ucrChkLengthofSeason.AutoSize = True
         Me.ucrChkLengthofSeason.Checked = False
-        Me.ucrChkLengthofSeason.Location = New System.Drawing.Point(5, 228)
+        Me.ucrChkLengthofSeason.Location = New System.Drawing.Point(5, 231)
         Me.ucrChkLengthofSeason.Name = "ucrChkLengthofSeason"
         Me.ucrChkLengthofSeason.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkLengthofSeason.TabIndex = 9
@@ -100,7 +102,7 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrInputTextType.AutoSize = True
         Me.ucrInputTextType.IsMultiline = False
         Me.ucrInputTextType.IsReadOnly = False
-        Me.ucrInputTextType.Location = New System.Drawing.Point(149, 259)
+        Me.ucrInputTextType.Location = New System.Drawing.Point(149, 262)
         Me.ucrInputTextType.Name = "ucrInputTextType"
         Me.ucrInputTextType.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputTextType.TabIndex = 12
@@ -111,7 +113,7 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrInputLengthofSeason.AutoSize = True
         Me.ucrInputLengthofSeason.IsMultiline = False
         Me.ucrInputLengthofSeason.IsReadOnly = False
-        Me.ucrInputLengthofSeason.Location = New System.Drawing.Point(149, 227)
+        Me.ucrInputLengthofSeason.Location = New System.Drawing.Point(149, 230)
         Me.ucrInputLengthofSeason.Name = "ucrInputLengthofSeason"
         Me.ucrInputLengthofSeason.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputLengthofSeason.TabIndex = 10
@@ -120,7 +122,7 @@ Partial Class dlgClimaticLengthOfSeason
         '
         Me.ucrReceiverStartofRainsLogical.AutoSize = True
         Me.ucrReceiverStartofRainsLogical.frmParent = Me
-        Me.ucrReceiverStartofRainsLogical.Location = New System.Drawing.Point(283, 92)
+        Me.ucrReceiverStartofRainsLogical.Location = New System.Drawing.Point(283, 86)
         Me.ucrReceiverStartofRainsLogical.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStartofRainsLogical.Name = "ucrReceiverStartofRainsLogical"
         Me.ucrReceiverStartofRainsLogical.Selector = Nothing
@@ -133,7 +135,7 @@ Partial Class dlgClimaticLengthOfSeason
         '
         Me.ucrReceiverEndofRainsLogical.AutoSize = True
         Me.ucrReceiverEndofRainsLogical.frmParent = Me
-        Me.ucrReceiverEndofRainsLogical.Location = New System.Drawing.Point(283, 182)
+        Me.ucrReceiverEndofRainsLogical.Location = New System.Drawing.Point(283, 163)
         Me.ucrReceiverEndofRainsLogical.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEndofRainsLogical.Name = "ucrReceiverEndofRainsLogical"
         Me.ucrReceiverEndofRainsLogical.Selector = Nothing
@@ -146,7 +148,7 @@ Partial Class dlgClimaticLengthOfSeason
         '
         Me.ucrReceiverEndofRains.AutoSize = True
         Me.ucrReceiverEndofRains.frmParent = Me
-        Me.ucrReceiverEndofRains.Location = New System.Drawing.Point(283, 136)
+        Me.ucrReceiverEndofRains.Location = New System.Drawing.Point(283, 124)
         Me.ucrReceiverEndofRains.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEndofRains.Name = "ucrReceiverEndofRains"
         Me.ucrReceiverEndofRains.Selector = Nothing
@@ -193,23 +195,43 @@ Partial Class dlgClimaticLengthOfSeason
         '
         Me.ucrChkLengthmore.AutoSize = True
         Me.ucrChkLengthmore.Checked = False
-        Me.ucrChkLengthmore.Location = New System.Drawing.Point(5, 293)
+        Me.ucrChkLengthmore.Location = New System.Drawing.Point(5, 296)
         Me.ucrChkLengthmore.Name = "ucrChkLengthmore"
         Me.ucrChkLengthmore.Size = New System.Drawing.Size(143, 23)
         Me.ucrChkLengthmore.TabIndex = 14
         '
-        'ucrNudLenghtmore
+        'lblEndFilled
         '
-        Me.ucrNudLenghtmore.AutoSize = True
-        Me.ucrNudLenghtmore.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLenghtmore.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLenghtmore.Location = New System.Drawing.Point(149, 291)
-        Me.ucrNudLenghtmore.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLenghtmore.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLenghtmore.Name = "ucrNudLenghtmore"
-        Me.ucrNudLenghtmore.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLenghtmore.TabIndex = 15
-        Me.ucrNudLenghtmore.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.lblEndFilled.AutoSize = True
+        Me.lblEndFilled.Location = New System.Drawing.Point(281, 186)
+        Me.lblEndFilled.Name = "lblEndFilled"
+        Me.lblEndFilled.Size = New System.Drawing.Size(77, 13)
+        Me.lblEndFilled.TabIndex = 16
+        Me.lblEndFilled.Text = "End Status (L):"
+        '
+        'ucrReceiverEndFilled
+        '
+        Me.ucrReceiverEndFilled.AutoSize = True
+        Me.ucrReceiverEndFilled.frmParent = Me
+        Me.ucrReceiverEndFilled.Location = New System.Drawing.Point(284, 202)
+        Me.ucrReceiverEndFilled.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverEndFilled.Name = "ucrReceiverEndFilled"
+        Me.ucrReceiverEndFilled.Selector = Nothing
+        Me.ucrReceiverEndFilled.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverEndFilled.strNcFilePath = ""
+        Me.ucrReceiverEndFilled.TabIndex = 17
+        Me.ucrReceiverEndFilled.ucrSelector = Nothing
+        '
+        'ucrInputTextLengthmore
+        '
+        Me.ucrInputTextLengthmore.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextLengthmore.AutoSize = True
+        Me.ucrInputTextLengthmore.IsMultiline = False
+        Me.ucrInputTextLengthmore.IsReadOnly = False
+        Me.ucrInputTextLengthmore.Location = New System.Drawing.Point(149, 293)
+        Me.ucrInputTextLengthmore.Name = "ucrInputTextLengthmore"
+        Me.ucrInputTextLengthmore.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputTextLengthmore.TabIndex = 18
         '
         'dlgClimaticLengthOfSeason
         '
@@ -217,7 +239,9 @@ Partial Class dlgClimaticLengthOfSeason
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(416, 384)
-        Me.Controls.Add(Me.ucrNudLenghtmore)
+        Me.Controls.Add(Me.ucrInputTextLengthmore)
+        Me.Controls.Add(Me.lblEndFilled)
+        Me.Controls.Add(Me.ucrReceiverEndFilled)
         Me.Controls.Add(Me.ucrChkLengthmore)
         Me.Controls.Add(Me.ucrChkType)
         Me.Controls.Add(Me.ucrChkLengthofSeason)
@@ -256,6 +280,8 @@ Partial Class dlgClimaticLengthOfSeason
     Friend WithEvents ucrChkLengthofSeason As ucrCheck
     Friend WithEvents ucrInputTextType As ucrInputTextBox
     Friend WithEvents ucrInputLengthofSeason As ucrInputTextBox
-    Friend WithEvents ucrNudLenghtmore As ucrNud
     Friend WithEvents ucrChkLengthmore As ucrCheck
+    Friend WithEvents ucrInputTextLengthmore As ucrInputTextBox
+    Friend WithEvents lblEndFilled As Label
+    Friend WithEvents ucrReceiverEndFilled As ucrReceiverSingle
 End Class
