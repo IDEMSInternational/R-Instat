@@ -51,14 +51,15 @@ Partial Class dlgOutfillingStationData
         Me.ucrChkStationToExclude = New instat.ucrCheck()
         Me.ucrChkRandomSeed = New instat.ucrCheck()
         Me.ucrNudRandomSeed = New instat.ucrNud()
-        Me.ucrSaveColumn = New instat.ucrSave()
         Me.cmdFilterFromFactors = New System.Windows.Forms.Button()
+        Me.ucrSaveResultEst = New instat.ucrSave()
+        Me.ucrSaveResultGen = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(6, 432)
+        Me.ucrBase.Location = New System.Drawing.Point(6, 455)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 51)
@@ -384,15 +385,6 @@ Partial Class dlgOutfillingStationData
         Me.ucrNudRandomSeed.TabIndex = 31
         Me.ucrNudRandomSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrSaveColumn
-        '
-        Me.ucrSaveColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveColumn.Location = New System.Drawing.Point(9, 396)
-        Me.ucrSaveColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveColumn.Name = "ucrSaveColumn"
-        Me.ucrSaveColumn.Size = New System.Drawing.Size(292, 21)
-        Me.ucrSaveColumn.TabIndex = 32
-        '
         'cmdFilterFromFactors
         '
         Me.cmdFilterFromFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -404,13 +396,32 @@ Partial Class dlgOutfillingStationData
         Me.cmdFilterFromFactors.Text = "Include"
         Me.cmdFilterFromFactors.UseVisualStyleBackColor = True
         '
+        'ucrSaveResultEst
+        '
+        Me.ucrSaveResultEst.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveResultEst.Location = New System.Drawing.Point(6, 387)
+        Me.ucrSaveResultEst.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.ucrSaveResultEst.Name = "ucrSaveResultEst"
+        Me.ucrSaveResultEst.Size = New System.Drawing.Size(326, 22)
+        Me.ucrSaveResultEst.TabIndex = 197
+        '
+        'ucrSaveResultGen
+        '
+        Me.ucrSaveResultGen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveResultGen.Location = New System.Drawing.Point(6, 421)
+        Me.ucrSaveResultGen.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.ucrSaveResultGen.Name = "ucrSaveResultGen"
+        Me.ucrSaveResultGen.Size = New System.Drawing.Size(326, 22)
+        Me.ucrSaveResultGen.TabIndex = 198
+        '
         'dlgOutfillingStationData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(463, 493)
+        Me.ClientSize = New System.Drawing.Size(463, 517)
+        Me.Controls.Add(Me.ucrSaveResultGen)
+        Me.Controls.Add(Me.ucrSaveResultEst)
         Me.Controls.Add(Me.cmdFilterFromFactors)
-        Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrNudRandomSeed)
         Me.Controls.Add(Me.ucrChkRandomSeed)
         Me.Controls.Add(Me.ucrChkStationToExclude)
@@ -481,6 +492,7 @@ Partial Class dlgOutfillingStationData
     Friend WithEvents ucrNudRandomSeed As ucrNud
     Friend WithEvents ucrChkRandomSeed As ucrCheck
     Friend WithEvents ucrChkStationToExclude As ucrCheck
-    Friend WithEvents ucrSaveColumn As ucrSave
     Friend WithEvents cmdFilterFromFactors As Button
+    Friend WithEvents ucrSaveResultGen As ucrSave
+    Friend WithEvents ucrSaveResultEst As ucrSave
 End Class
