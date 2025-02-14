@@ -324,6 +324,7 @@ Public Class frmMain
         mnuDataFrameMetadat.Checked = False
         mnuSwapDataMetadata.Checked = False
         mnuSwapDataDataframeMetadata.Checked = False
+        mnuSwapDataLogScript.Checked = False
         mnuDataViewWindow.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
@@ -338,7 +339,6 @@ Public Class frmMain
     Public Sub EnableDisbaleViewSwapMenu(bEnable As Boolean)
         mnuViewSwapDataAndMetadata.Enabled = bEnable
         mnuViewSwapDataAndDataframeMetadata.Enabled = bEnable
-        mnuViewSwapDataAndScript.Enabled = bEnable
     End Sub
 
     Public Sub UpdateLayout()
@@ -2937,6 +2937,12 @@ Public Class frmMain
 
     Private Sub MenusAndDialogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MenusAndDialogsToolStripMenuItem.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
+    End Sub
+
+    Private Sub mnuSwapDataLogScript_Click(sender As Object, e As EventArgs) Handles mnuSwapDataLogScript.Click
+        mnuViewSwapDataAndMetadata.Enabled = mnuViewSwapDataAndScript.Checked
+        mnuViewSwapDataAndScript.Checked = Not mnuViewSwapDataAndScript.Checked
+        UpdateSwapDataAndScript()
     End Sub
 
     Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
