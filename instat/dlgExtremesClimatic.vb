@@ -22,7 +22,7 @@ Public Class dlgExtremesClimatic
     Private bUpdateMinMax As Boolean = True
     Private clsExtreme As New RFunction
     Private strCurrDataName As String = ""
-    Private clsGroupByFunction, clsRunCalcFunction, clsDayFromAndTo, clsDayManipulation As New RFunction
+    Private clsGroupByFunction, clsIfElseFirstDoyFilledFunction, clsRunCalcFunction, clsDayFromAndTo, clsDayManipulation As New RFunction
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsCurrCalc As RFunction
@@ -334,6 +334,7 @@ Public Class dlgExtremesClimatic
         clsPlotMrlFunction = New RFunction
         clsThresholdPlotFunction = New RFunction
         clsDeclusteringFunction = New RFunction
+        clsIfElseFirstDoyFilledFunction = New RFunction
         clsDummyRfunction = clsPlotMrlFunction
 
         ucrSelectorClimaticExtremes.Reset()
@@ -637,7 +638,7 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
-        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
+        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
         sdgDoyRange.ShowDialog()
         UpdateDayFilterPreview()
     End Sub
