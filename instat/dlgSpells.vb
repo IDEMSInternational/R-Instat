@@ -176,6 +176,7 @@ Public Class dlgSpells
         ' key
 
         clsDayFilterCalcFromConvert = New RFunction
+        clsDayFilterCalcFromConvert.SetPackageName("databook")
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
         clsDayFilterCalcFromList = New RFunction
         clsDayFilterCalcFromList.SetRCommand("list")

@@ -584,6 +584,7 @@ Public Class dlgEndOfRainsSeason
         clsGroupByStationCalc.SetAssignTo("grouping_by_station")
 
         ' Doy Filter
+        clsDoyFilterCalcFromConvert.SetPackageName("databook")
         clsDoyFilterCalcFromConvert.SetRCommand("calc_from_convert")
         clsDoyFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDoyFilterCalcFromList, iPosition:=0)
 
@@ -595,8 +596,6 @@ Public Class dlgEndOfRainsSeason
         clsDoyFilterCalc.AddParameter("calculated_from", clsRFunctionParameter:=clsDoyFilterCalcFromConvert, iPosition:=2)
         clsDoyFilterCalc.SetAssignTo(strDoyFilter)
 
-        clsDoyFilterCalcFromConvert.SetRCommand("calc_from_convert")
-        clsDoyFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDoyFilterCalcFromList, iPosition:=0)
 
         clsDoyFilterCalcFromList.SetRCommand("list")
 

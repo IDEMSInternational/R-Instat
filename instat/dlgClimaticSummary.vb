@@ -165,6 +165,7 @@ Public Class dlgClimaticSummary
         clsToConditionOperator = New ROperator
 
         clsDayFilterCalcFromConvert = New RFunction
+        clsDayFilterCalcFromConvert.SetPackageName("databook")
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
         clsDayFilterCalcFromList = New RFunction
         clsDayFilterCalcFromList.SetRCommand("list")

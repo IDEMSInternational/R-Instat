@@ -601,6 +601,7 @@ Public Class dlgTransformClimatic
         clsDayToOperator.SetOperation("<=")
         clsDayToOperator.AddParameter("to", 366, iPosition:=1)
 
+        clsDoyFilterCalcFromConvert.SetPackageName("databook")
         clsDoyFilterCalcFromConvert.SetRCommand("calc_from_convert")
         clsDoyFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDoyFilterCalcFromList, iPosition:=0)
 

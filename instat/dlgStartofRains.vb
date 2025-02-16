@@ -362,6 +362,7 @@ Public Class dlgStartofRains
         bResetSubdialog = True
         ucrSelectorForStartofRains.Reset()
 
+        clsDayFilterCalcFromConvert.SetPackageName("databook")
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
 
         clsDayFilterCalcFromList.SetRCommand("list")
