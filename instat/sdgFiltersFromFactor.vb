@@ -55,6 +55,8 @@ Public Class sdgFiltersFromFactor
                                                   dctParamAndColNames:=dctParamAndColNames,
                                                   hiddenColNames:={ucrFactor.DefaultColumnNames.Level},
                                                   bIncludeNALevel:=False)
+        ' Automatically select all rows by default
+        AddHandler ucrReceiverFactor.SelectionChanged, AddressOf SelectAllFactorLevels
 
     End Sub
 
@@ -91,5 +93,11 @@ Public Class sdgFiltersFromFactor
             Return ""
         End If
     End Function
+
+    Private Sub SelectAllFactorLevels()
+        If ucrFactorLevels.RowCount > 0 Then
+            ucrFactorLevels.SelectAllGridRows(True) ' Pass True to select all rows
+        End If
+    End Sub
 
 End Class

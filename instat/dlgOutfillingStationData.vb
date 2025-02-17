@@ -369,10 +369,10 @@ Public Class dlgOutfillingStationData
 
         If Not ucrReceiverEstimates.IsEmpty Then
             If ucrSaveResultEst.ucrChkSave.Checked Then
-                ucrSaveResultEst.SetPrefix(strDataframeName & "_" & "out")
+                ucrSaveResultEst.SetPrefix(strDataframeName & "_" & "gen")
             End If
             If ucrSaveResultGen.ucrChkSave.Checked Then
-                ucrSaveResultGen.SetPrefix(strDataframeNameGen & "_" & "gen")
+                ucrSaveResultGen.SetPrefix(strDataframeNameGen & "_" & "out")
             End If
         End If
     End Sub
