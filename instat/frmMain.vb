@@ -444,6 +444,7 @@ Public Class frmMain
             'To ensure this part of the code only runs when the application Is Not in the Debug mode (i.e., in Release mode)
 #If Not DEBUG Then
                      Dim clsSetLibPathsFunction As New RFunction
+            clsSetLibPathsFunction.SetPackageName("instatExtras")
             clsSetLibPathsFunction.SetRCommand("set_library_paths")
             clsSetLibPathsFunction.AddParameter("library_path", Chr(34) & strLibraryPath.Replace("\", "/") & Chr(34))
 
