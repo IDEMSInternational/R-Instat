@@ -348,6 +348,7 @@ Public Class dlgClimaticLengthOfSeason
         AutoFillReceivers(lstEndStatusReceivers)
         AutoFillReceivers(lstStartStatusReceivers)
         AutoFillReceivers(lstFilledReceivers)
+        AddRemoveMaxFilled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -414,6 +415,7 @@ Public Class dlgClimaticLengthOfSeason
         TestOKEnabled()
         EnableLengthmore()
         AddRemoveLengthmore()
+        AddRemoveMaxFilled()
     End Sub
 
     Private Sub ucrSelectorLengthofSeason_DataFrameChanged() Handles ucrSelectorLengthofSeason.DataFrameChanged
@@ -431,6 +433,7 @@ Public Class dlgClimaticLengthOfSeason
     Private Sub ucrChkLengthmore_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLengthmore.ControlValueChanged
         EnableLengthmore()
         AddRemoveLengthmore()
+        AddRemoveMaxFilled()
     End Sub
 
     Private Sub EnableLengthmore()
@@ -461,7 +464,7 @@ Public Class dlgClimaticLengthOfSeason
     End Sub
 
     Private Sub AddRemoveMaxFilled()
-        If Not ucrReceiverEndFilled.IsEmpty AndAlso ucrReceiverEndFilled.Enabled Then
+        If Not ucrReceiverEndFilled.IsEmpty AndAlso ucrReceiverEndFilled.Enabled AndAlso (ucrChkLengthmore.Checked AndAlso ucrChkLengthmore.Enabled) Then
             ucrBase.clsRsyntax.AddToBeforeCodes(clsMaxFunction, iPosition:=0)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsMaxFunction)
