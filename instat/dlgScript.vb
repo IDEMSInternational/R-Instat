@@ -169,6 +169,7 @@ Public Class dlgScript
     Private Function GetPackages() As String()
         Dim arrAvailablePackages() As String = {}
         Dim clsGetPackages As New RFunction
+        clsGetPackages.SetPackageName("instatExtras")
         clsGetPackages.SetRCommand("get_installed_packages_with_data")
         clsGetPackages.AddParameter("with_data", "FALSE")
         Dim expPackageNames As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPackages.ToScript(), bSeparateThread:=False, bSilent:=True)
@@ -646,6 +647,7 @@ Public Class dlgScript
         Try
 
             Dim clsLibraryExpFunction As New RFunction
+            clsLibraryExpFunction.SetPackageName("instatExtras")
             clsLibraryExpFunction.SetRCommand("getExample")
             clsLibraryExpFunction.AddParameter("package", Chr(34) & ucrCboExamplePackages.GetText() & Chr(34), iPosition:=1)
             clsLibraryExpFunction.AddParameter("topic", Chr(34) & strTopic & Chr(34), iPosition:=0)

@@ -254,6 +254,7 @@ Public Class dlgStack
         clsReshapeFunction.AddParameter("direction", Chr(34) & "long" & Chr(34), iPosition:=4)
         clsReshapeFunction.AddParameter("idvar", Chr(34) & "id" & Chr(34), iPosition:=5)
 
+        clsSplitColumnsFunction.SetPackageName("instatExtras")
         clsSplitColumnsFunction.SetRCommand("split_items_in_groups")
         clsSplitColumnsFunction.AddParameter("num", 2)
 
