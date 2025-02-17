@@ -58,25 +58,25 @@ Public Class dlgScript
         dctOutputObjectFormats.Add("Text", RObjectFormat.Text)
         dctOutputObjectFormats.Add("Html", RObjectFormat.Html)
 
+        dctXSidePlot.Add("None ", " ")
         dctXSidePlot.Add("GeomBar", "ggside::geom_xsidebar()")
         dctXSidePlot.Add("GeomBoxplot", "ggside::geom_xsideboxplot()")
         dctXSidePlot.Add("GeomDensity", "ggside::geom_xsidedensity()")
         dctXSidePlot.Add("GeomFreqpoly", "ggside::geom_xsidefreqpoly()")
         dctXSidePlot.Add("GeomHistogram", "ggside::geom_xsidehistogram()")
         dctXSidePlot.Add("GeomLine", "ggside::geom_xsideline()")
-        dctXSidePlot.Add("GeomPath", "ggside::geom_xsidebar()")
         dctXSidePlot.Add("GeomPoint", "ggside::geom_xsidepoint()")
         dctXSidePlot.Add("GeomText", "ggside::geom_xsidetext()")
         dctXSidePlot.Add("GeomTile", "ggside::geom_xsidetile()")
         dctXSidePlot.Add("GeomViolin", "ggside::geom_xsideviolin()")
 
+        dctYSidePlot.Add("None ", " ")
         dctYSidePlot.Add("GeomBar", "ggside::geom_ysidebar()")
         dctYSidePlot.Add("GeomBoxplot", "ggside::geom_ysideboxplot()")
         dctYSidePlot.Add("GeomDensity", "ggside::geom_ysidedensity()")
         dctYSidePlot.Add("GeomFreqpoly", "ggside::geom_ysidefreqpoly()")
         dctYSidePlot.Add("GeomHistogram", "ggside::geom_ysidehistogram()")
         dctYSidePlot.Add("GeomLine", "ggside::geom_ysideline()")
-        dctYSidePlot.Add("GeomPath", "ggside::geom_ysidebar()")
         dctYSidePlot.Add("GeomPoint", "ggside::geom_ysidepoint()")
         dctYSidePlot.Add("GeomText", "ggside::geom_ysidetext()")
         dctYSidePlot.Add("GeomTile", "ggside::geom_ysidetile()")
@@ -118,8 +118,8 @@ Public Class dlgScript
 
         ucrChkDisplayGraph.SetText("Display Output")
 
-        ucrChkXSide.SetText("X Side")
-        ucrChkYSide.SetText("Y Side")
+        ucrChkXSide.SetText("Top")
+        ucrChkYSide.SetText("Right")
         '--------------------------------
         'Get data controls
 
@@ -989,7 +989,6 @@ Public Class dlgScript
         Dim strXSide As String = ""
         Dim strYSide As String = ""
 
-        ' Get selected X Side value only if the checkbox is checked
         If ucrChkXSide.Checked Then
             If Not ucrCboInputXSide.IsEmpty() Then
                 Dim strSelectedX As String = ucrCboInputXSide.GetValue()
@@ -999,7 +998,6 @@ Public Class dlgScript
             End If
         End If
 
-        ' Get selected Y Side value only if the checkbox is checked
         If ucrChkYSide.Checked Then
             If Not ucrCboInputYSide.IsEmpty() Then
                 Dim strSelectedY As String = ucrCboInputYSide.GetValue()
@@ -1009,7 +1007,6 @@ Public Class dlgScript
             End If
         End If
 
-        ' Construct the script
         If Not String.IsNullOrEmpty(strXSide) Then
             strScript &= " + " & strXSide
         End If
@@ -1017,7 +1014,6 @@ Public Class dlgScript
             strScript &= " + " & strYSide
         End If
 
-        ' Preview the script
         PreviewScript(strScript)
     End Sub
 
