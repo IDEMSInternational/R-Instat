@@ -21,6 +21,7 @@ Public Class sdgDoyRange
     Private clsDoyFilterCalc As RFunction
     Private clsCalcFromList As RFunction
     Private clsCalcFromMainDataFrame As RFunction
+    Public clsIfElseFirstDoyFilledFunction As RFunction
     Private clsDayFromOperator As ROperator
     Private clsDayToOperator As ROperator
     Private bControlsInitialised As Boolean = False
@@ -32,7 +33,7 @@ Public Class sdgDoyRange
         autoTranslate(Me)
     End Sub
 
-    Public Sub Setup(clsNewDoyFilterCalc As RFunction, clsNewDayFromOperator As ROperator, clsNewDayToOperator As ROperator, clsNewCalcFromList As RFunction, strNewMainDataFrame As String, strNewDoyColumn As String)
+    Public Sub Setup(clsNewDoyFilterCalc As RFunction, clsNewDayFromOperator As ROperator, clsNewDayToOperator As ROperator, clsNewCalcFromList As RFunction, strNewMainDataFrame As String, strNewDoyColumn As String, Optional clsNewIfElseFirstDoyFilledFunction As RFunction = Nothing)
         Dim iFrom As Integer
         Dim iTo As Integer
         Dim iDiff As Integer
@@ -55,6 +56,7 @@ Public Class sdgDoyRange
         End If
         clsDoyFilterCalc = clsNewDoyFilterCalc
         clsCalcFromList = clsNewCalcFromList
+        clsIfElseFirstDoyFilledFunction = clsNewIfElseFirstDoyFilledFunction
         strMainDataFrame = strNewMainDataFrame
         strDoyColumn = strNewDoyColumn
 
@@ -217,8 +219,10 @@ Public Class sdgDoyRange
         If bUpdate Then
             If rdoToFixed.Checked Then
                 clsDayToOperator.AddParameter("to", strParameterValue:=ucrDoyTo.GetValue(), iPosition:=1)
+                clsIfElseFirstDoyFilledFunction.AddParameter("yes", strParameterValue:=ucrDoyTo.GetValue(), iPosition:=1)
             ElseIf rdoToVariable.Checked Then
                 clsDayToOperator.AddParameter("to", strParameterValue:=ucrReceiverTo.GetVariableNames(False), iPosition:=1)
+                clsIfElseFirstDoyFilledFunction.AddParameter("yes", strParameterValue:=ucrReceiverTo.GetVariableNames(False), iPosition:=1)
             ElseIf rdoLength.Checked Then
                 clsFixedDiffOp.SetOperation("+")
                 If clsDayFromOperator.ContainsParameter("from") Then
@@ -226,6 +230,7 @@ Public Class sdgDoyRange
                     clsFixedDiffOp.AddParameter("diff", strParameterValue:=ucrNudToDiff.Value, iPosition:=1)
                     clsFixedDiffOp.bBrackets = True
                     clsDayToOperator.AddParameter("to", clsROperatorParameter:=clsFixedDiffOp, iPosition:=1)
+                    clsIfElseFirstDoyFilledFunction.AddParameter("yes", clsROperatorParameter:=clsFixedDiffOp, iPosition:=1)
                 End If
             End If
             UpdateCalculatedFrom()
