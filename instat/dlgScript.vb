@@ -1076,5 +1076,28 @@ Public Class dlgScript
         PreviewScript(strScript)
     End Sub
 
+    Private Sub ucrCboInputText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCboInputText.ControlContentsChanged, ucrCboInputlabel.ControlContentsChanged
+        Dim strSelectedText As String = ucrCboInputText.GetValue()
+        Dim strSelectedLabel As String = ucrCboInputlabel.GetValue()
 
+        Dim strLabel As String = ucrReceiverTextPath.GetVariableNames()
+
+        ' Initialize the script
+        Dim strScript As String = ""
+
+        ' Check if a valid geom_textpath is selected and label is not empty
+        If dctText.ContainsKey(strSelectedText) AndAlso Not String.IsNullOrEmpty(strLabel) Then
+            Dim strGeomFunction As String = dctText(strSelectedText)
+            strScript = " + " & strGeomFunction & "(aes(label=" & strLabel & "))"
+        End If
+
+        'If dctLabel.ContainsKey(strSelectedText) AndAlso Not String.IsNullOrEmpty(strLabel) Then
+        '    Dim strGeomLabelFunction As String = dctLabel(strSelectedLabel)
+        '    strScript = strGeomLabelFunction & "(aes(label=" & strLabel & "))"
+        'End If
+
+        ' Display or preview the constructed script
+        PreviewScript(strScript)
+
+    End Sub
 End Class
