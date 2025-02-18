@@ -1082,13 +1082,20 @@ Public Class dlgScript
         Dim strLabel As String = ucrReceiverTextPath.GetVariableNames()
 
         ' Define additional parameters for specific text geoms
-        Dim dctAdditionalParams As New Dictionary(Of String, String)
-        dctAdditionalParams.Add("geomtextpath::geom_textabline", "slope=0.5, intercept=4")
-        dctAdditionalParams.Add("geomtextpath::geom_textvline", "xintercept=2")
-        dctAdditionalParams.Add("geomtextpath::geom_texthline", "yintercept=3")
-        dctAdditionalParams.Add("geomtextpath::geom_textdensity", "y=..density..")
-        dctAdditionalParams.Add("geomtextpath::geom_textsegment", "xend=4, yend=7")
+        Dim dctAdditionalTextParams As New Dictionary(Of String, String)
+        dctAdditionalTextParams.Add("geomtextpath::geom_textabline", "slope=0.5, intercept=4")
+        dctAdditionalTextParams.Add("geomtextpath::geom_textvline", "xintercept=2")
+        dctAdditionalTextParams.Add("geomtextpath::geom_texthline", "yintercept=3")
+        dctAdditionalTextParams.Add("geomtextpath::geom_textdensity", "y=..density..")
+        dctAdditionalTextParams.Add("geomtextpath::geom_textsegment", "xend=4, yend=7")
 
+        ' Define additional parameters for specific label geoms
+        Dim dctAdditionalLabelParams As New Dictionary(Of String, String)
+        dctAdditionalLabelParams.Add("geomtextpath::geom_labelabline", "slope=0.5, intercept=4")
+        dctAdditionalLabelParams.Add("geomtextpath::geom_labelvline", "xintercept=2")
+        dctAdditionalLabelParams.Add("geomtextpath::geom_labelhline", "yintercept=3")
+        dctAdditionalLabelParams.Add("geomtextpath::geom_labeldensity", "y=..density..")
+        dctAdditionalLabelParams.Add("geomtextpath::geom_labelsegment", "xend=4, yend=7")
 
         ' Initialize the script
         Dim strScript As String = ""
@@ -1101,41 +1108,53 @@ Public Class dlgScript
 
         ' If either is checked and label is not empty, construct aes(label=)
         If bShowLabel AndAlso Not String.IsNullOrEmpty(strLabel) Then
-            strAesLabel = "(aes(label=" & strLabel & "))"
+            strAesLabel = "label=" & strLabel
         End If
         If bShowText AndAlso Not String.IsNullOrEmpty(strLabel) Then
             strAesText = "label=" & strLabel
         End If
 
         ' Check if a valid geom_textpath is selected
-        If Not ucrCboInputText.IsEmpty Then
-            If dctText.ContainsKey(strSelectedText) Then
-                Dim strGeomFunction As String = dctText(strSelectedText)
-                Dim strAdditionalParams As String = ""
-                ' Check for additional parameters for the selected geom
-                If dctAdditionalParams.ContainsKey(strGeomFunction) Then
-                    strAdditionalParams = dctAdditionalParams(strGeomFunction)
-                End If
-
-                ' If additional parameters exist, add them inside aes()
-                If Not String.IsNullOrEmpty(strAdditionalParams) Then
-                    ' If label already exists, add a comma before additional params
-                    If Not String.IsNullOrEmpty(strAesText) Then
-                        strAesText &= ", "
+        If ucrChkText.Checked Then
+            If Not ucrCboInputText.IsEmpty Then
+                If dctText.ContainsKey(strSelectedText) Then
+                    Dim strGeomFunction As String = dctText(strSelectedText)
+                    Dim strAdditionalParams As String = ""
+                    If dctAdditionalTextParams.ContainsKey(strGeomFunction) Then
+                        strAdditionalParams = dctAdditionalTextParams(strGeomFunction)
                     End If
-                    strAesText &= strAdditionalParams
-                End If
+                    If Not String.IsNullOrEmpty(strAdditionalParams) Then
+                        If Not String.IsNullOrEmpty(strAesText) Then
+                            strAesText &= ", "
+                        End If
+                        strAesText &= strAdditionalParams
+                    End If
 
-                ' Construct the script with all aes() params combined
-                strScript &= " + " & strGeomFunction & "(aes(" & strAesText & "))"
+                    ' Construct the script with all aes() params combined
+                    strScript &= " + " & strGeomFunction & "(aes(" & strAesText & "))"
+                End If
             End If
         End If
 
         ' Check if a valid geom_label is selected
-        If Not ucrCboInputlabel.IsEmpty Then
-            If dctLabel.ContainsKey(strSelectedLabel) Then
-                Dim strGeomLabelFunction As String = dctLabel(strSelectedLabel)
-                strScript &= " + " & strGeomLabelFunction & strAesLabel
+        If ucrChkLabel.Checked Then
+            If Not ucrCboInputlabel.IsEmpty Then
+                If dctLabel.ContainsKey(strSelectedLabel) Then
+                    Dim strGeomLabelFunction As String = dctLabel(strSelectedLabel)
+                    Dim strAdditionalParams As String = ""
+
+                    If dctAdditionalLabelParams.ContainsKey(strGeomLabelFunction) Then
+                        strAdditionalParams = dctAdditionalLabelParams(strGeomLabelFunction)
+                    End If
+                    If Not String.IsNullOrEmpty(strAdditionalParams) Then
+                        If Not String.IsNullOrEmpty(strAesLabel) Then
+                            strAesLabel &= ", "
+                        End If
+                        strAesLabel &= strAdditionalParams
+                    End If
+                    ' Construct the script with all aes() params combined
+                    strScript &= " + " & strGeomLabelFunction & "(aes(" & strAesLabel & "))"
+                End If
             End If
         End If
 
