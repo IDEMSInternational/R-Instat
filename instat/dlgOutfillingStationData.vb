@@ -329,6 +329,8 @@ Public Class dlgOutfillingStationData
     Private Sub cmdFilterFromFactors_Click(sender As Object, e As EventArgs) Handles cmdFilterFromFactors.Click
         ' Ensure the dataframe and parameters are set before showing the dialog
         sdgFiltersFromFactor.SetRcodeAndDefaultDataFrame(ucrSelectorOutfilling, bReset:=bResetSubdialog)
+
+        sdgFiltersFromFactor.enumFactorMode = sdgFiltersFromFactor.FactorMode.OutFilling
         sdgFiltersFromFactor.ShowDialog()
 
         ' Retrieve the selected stations and add them to the main function
