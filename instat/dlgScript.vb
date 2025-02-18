@@ -25,6 +25,8 @@ Public Class dlgScript
     Private dctOutputObjectFormats As New Dictionary(Of String, String)
     Private dctXSidePlot As New Dictionary(Of String, String)
     Private dctYSidePlot As New Dictionary(Of String, String)
+    Private dctLabel As New Dictionary(Of String, String)
+    Private dctText As New Dictionary(Of String, String)
 
     Private Sub dlgScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -57,6 +59,30 @@ Public Class dlgScript
         dctOutputObjectFormats.Add("Image", RObjectFormat.Image)
         dctOutputObjectFormats.Add("Text", RObjectFormat.Text)
         dctOutputObjectFormats.Add("Html", RObjectFormat.Html)
+
+        dctText.Add("None ", " ")
+        dctText.Add("Textpath", "geomtextpath::geom_textpath")
+        dctText.Add("Textabline", "geomtextpath::geom_textabline")
+        dctText.Add("Textsegment", "geomtextpath::geom_textsegment")
+        dctText.Add("Textline", "geomtextpath::geom_textline")
+        dctText.Add("Texthline", "geomtextpath::geom_texthline")
+        dctText.Add("Textvline", "geomtextpath::geom_textvline")
+        dctText.Add("Textdensity", "geomtextpath::geom_textdensity")
+        dctText.Add("Textsmooth", "geomtextpath::geom_textsmooth")
+        dctText.Add("Textdensity2d", "geomtextpath::geom_textdensity2d")
+        dctText.Add("Textsf", "geomtextpath::geom_textsf")
+
+        dctLabel.Add("None ", " ")
+        dctLabel.Add("labelpath", "geomtextpath::geom_labelpath")
+        dctLabel.Add("labelabline", "geomtextpath::geom_labelabline")
+        dctLabel.Add("labelsegment", "geomtextpath::geom_labelsegment")
+        dctLabel.Add("labelline", "geomtextpath::geom_labelline")
+        dctLabel.Add("labelhline", "geomtextpath::geom_labelhline")
+        dctLabel.Add("labelvline", "geomtextpath::geom_labelvline")
+        dctLabel.Add("labeldensity", "geomtextpath::geom_labeldensity")
+        dctLabel.Add("labelsmooth", "geomtextpath::geom_labelsmooth")
+        dctLabel.Add("labeldensity2d", "geomtextpath::geom_labeldensity2d")
+        dctLabel.Add("labelsf", "geomtextpath::geom_labelsf")
 
         dctXSidePlot.Add("None ", " ")
         dctXSidePlot.Add("GeomBar", "ggside::geom_xsidebar()")
@@ -104,7 +130,15 @@ Public Class dlgScript
 
         ucrCboInputYSide.SetItems(dctYSidePlot, bSetConditions:=False)
         ucrCboInputYSide.SetDropDownStyleAsNonEditable()
-        ucrCboInputYSide.GetSetSelectedIndex = 1
+        ucrCboInputYSide.GetSetSelectedIndex = 0
+
+        ucrCboInputText.SetItems(dctText, bSetConditions:=False)
+        ucrCboInputText.SetDropDownStyleAsNonEditable()
+        ucrCboInputText.GetSetSelectedIndex = 0
+
+        ucrCboInputlabel.SetItems(dctLabel, bSetConditions:=False)
+        ucrCboInputlabel.SetDropDownStyleAsNonEditable()
+        ucrCboInputlabel.GetSetSelectedIndex = 0
 
         ucrSaveObject.SetLabelText("Store Graph")
         ucrSaveObject.SetIsComboBox()
@@ -117,6 +151,9 @@ Public Class dlgScript
         ucrChkSaveDataFrameSingle.SetText("Single")
 
         ucrChkDisplayGraph.SetText("Display Output")
+
+        ucrChkLabel.SetText("Label Option")
+        ucrChkText.SetText("Text Option")
 
         ucrChkXSide.SetText("Top")
         ucrChkYSide.SetText("Right")
@@ -202,6 +239,15 @@ Public Class dlgScript
         ucrSelectorForRank.SetItemType("column_selection")
         ucrReceiverRank.strSelectorHeading = "Column selections"
 
+        ucrReceiverTextPath.SetParameter(New RParameter("label", 0))
+        ucrReceiverTextPath.Selector = ucrSelectorTextPath
+        ucrReceiverTextPath.SetMeAsReceiver()
+        ucrReceiverTextPath.bUseFilteredData = False
+        ucrReceiverTextPath.SetParameterIsRFunction()
+
+        ucrSelectorTextPath.SetItemType("column")
+        ucrReceiverTextPath.strSelectorHeading = "Variables"
+
     End Sub
 
     'todo. this function should eventually be removed once we have a control that displays packages
@@ -248,7 +294,6 @@ Public Class dlgScript
         rdoGetDataFrame.Checked = True
         rdoDataFrame.Checked = True
         rdoSidePlot.Checked = True
-        rdoTextPath.Enabled = False
         ucrSelectorForRank.Reset()
         ucrReceiverForCalculation.Clear()
         'activate the selected tab to library tab
@@ -947,15 +992,18 @@ Public Class dlgScript
     End Sub
 
     Private Sub ucrPnlGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraph.ControlValueChanged
-        'ucrChkXSide.SetVisible(False)
-        'ucrChkYSide.SetVisible(False)
-        'ucrInputXSide.SetVisible(False)
-        'ucrInputYSide.SetVisible(False)
         If rdoTextPath.Checked Then
+            ucrSelectorTextPath.SetVisible(True)
             lblText.Visible = True
-            ucrInputTextPath.SetVisible(True)
+            ucrReceiverTextPath.SetVisible(True)
             ucrCboInputText.SetVisible(True)
-            ucrCboInputGeom.SetVisible(True)
+            ucrCboInputText.OnControlValueChanged()
+            ucrCboInputlabel.SetVisible(True)
+            ucrCboInputlabel.OnControlValueChanged()
+            ucrChkText.SetVisible(True)
+            ucrChkText.OnControlValueChanged()
+            ucrChkLabel.SetVisible(True)
+            ucrChkLabel.OnControlValueChanged()
             ucrChkXSide.SetVisible(False)
             ucrChkYSide.SetVisible(False)
             ucrCboInputXSide.SetVisible(False)
@@ -970,10 +1018,21 @@ Public Class dlgScript
             ucrCboInputYSide.SetVisible(True)
             ucrCboInputYSide.OnControlValueChanged()
             lblText.Visible = False
-            ucrInputTextPath.SetVisible(False)
+            ucrSelectorTextPath.SetVisible(False)
+            ucrReceiverTextPath.SetVisible(False)
             ucrCboInputText.SetVisible(False)
-            ucrCboInputGeom.SetVisible(False)
+            ucrCboInputlabel.SetVisible(False)
+            ucrChkText.SetVisible(False)
+            ucrChkLabel.SetVisible(False)
         End If
+    End Sub
+
+    Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged, ucrCboInputlabel.ControlValueChanged
+        ucrCboInputlabel.Visible = ucrChkLabel.Checked
+    End Sub
+
+    Private Sub ucrChkText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkText.ControlValueChanged, ucrCboInputText.ControlValueChanged
+        ucrCboInputText.Visible = ucrChkText.Checked
     End Sub
 
     Private Sub ucrChkXSide_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXSide.ControlValueChanged, ucrCboInputXSide.ControlValueChanged
