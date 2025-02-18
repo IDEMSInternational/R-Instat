@@ -210,6 +210,7 @@ Public Class dlgRestrict
 
     Private Sub cmdFilterFromFactors_Click(sender As Object, e As EventArgs) Handles cmdFilterFromFactors.Click
         sdgFiltersFromFactor.SetRcodeAndDefaultDataFrame(ucrSelectorFilter, bReset:=bResetSubdialog)
+        sdgFiltersFromFactor.enumFactorMode = sdgFiltersFromFactor.FactorMode.Filter
         sdgFiltersFromFactor.ShowDialog()
         bResetSubdialog = False
         ucrSelectorFilter.LoadList()
