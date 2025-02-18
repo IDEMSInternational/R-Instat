@@ -2333,6 +2333,7 @@ Public Class frmMain
         clsLastObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
 
         Dim clsViewObjectRFunction As New RFunction
+        clsViewObjectRFunction.SetPackageName("instatExtras")
         clsViewObjectRFunction.SetRCommand("view_object_data")
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsLastObjectRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
@@ -2354,6 +2355,7 @@ Public Class frmMain
         clsPlotlyRFunction.SetRCommand("ggplotly")
         clsPlotlyRFunction.AddParameter("p", clsRFunctionParameter:=clsLastObjectRFunction, iPosition:=0)
 
+        clsViewObjectRFunction.SetPackageName("instatExtras")
         clsViewObjectRFunction.SetRCommand("view_object_data")
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsPlotlyRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))

@@ -213,7 +213,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement1.SetMeAsReceiver()
 
         'GroupBy
-        clsGroupByFunc.SetRCommand("instat_calculation$new")
+        clsGroupByFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByFunc.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByFunc.SetAssignTo("grouping")
         clsGroupingListFunc.SetRCommand("list")
@@ -244,7 +244,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsDiffOp.SetOperation("|")
 
         'Group By Month for Outliers 
-        clsGroupByMonth.SetRCommand("instat_calculation$new")
+        clsGroupByMonth.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByMonth.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByMonth.SetAssignTo("grouping_month")
 
@@ -267,7 +267,7 @@ Public Class dlgClimaticCheckDataTemperature
         clsDiffListSubCalc.SetOperation(",")
 
         'Main calculation filter
-        clsCalcFilterFunc.SetRCommand("instat_calculation$new")
+        clsCalcFilterFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsCalcFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator, iPosition:=1)
         clsCalcFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsFilterListFunc, iPosition:=2)

@@ -291,7 +291,7 @@ Public Class sdgCalculationsSummmary
 
         iSubCalcCount = iSubCalcCount + 1
         strCalcName = "sub_cal" & iSubCalcCount
-        clsSubCalcFunction.SetRCommand("instat_calculation$new")
+        clsSubCalcFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsSubCalcFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
         clsSubCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsSubCalcFunction.AddParameter("save", "0")
@@ -318,7 +318,7 @@ Public Class sdgCalculationsSummmary
 
         iManipCount = iManipCount + 1
         strCalcName = "manip" & iManipCount
-        clsManipFunction.SetRCommand("instat_calculation$new")
+        clsManipFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsManipFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
         clsManipFunction.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsManipFunction.AddParameter("save", "0")

@@ -362,6 +362,7 @@ Public Class dlgStartofRains
         bResetSubdialog = True
         ucrSelectorForStartofRains.Reset()
 
+        clsDayFilterCalcFromConvert.SetPackageName("databook")
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
 
         clsDayFilterCalcFromList.SetRCommand("list")
@@ -372,7 +373,7 @@ Public Class dlgStartofRains
         clsDummyFunction.AddParameter("additional", "False", iPosition:=2)
 
         'Day From and To
-        clsDayFromAndTo.SetRCommand("instat_calculation$new")
+        clsDayFromAndTo.SetRCommand("instatCalculations::instat_calculation$new")
         clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsDayFromAndTo.AddParameter("function_exp", clsROperatorParameter:=clsDayFromAndToOperator, iPosition:=1)
         clsDayFromAndTo.AddParameter("calculated_from", clsRFunctionParameter:=clsDayFilterCalcFromConvert, iPosition:=2)
@@ -391,12 +392,12 @@ Public Class dlgStartofRains
         clsDayToOperator.AddParameter("to", 366, iPosition:=1)
 
         ' group_by_station
-        clsGroupByStation.SetRCommand("instat_calculation$new")
+        clsGroupByStation.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByStation.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByStation.SetAssignTo("grouping_by_station")
 
         ' group_by_year
-        clsGroupByYear.SetRCommand("instat_calculation$new")
+        clsGroupByYear.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByYear.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByYear.SetAssignTo("grouping_by_year")
 
@@ -413,7 +414,7 @@ Public Class dlgStartofRains
         clsConvertColumnType1Function.AddParameter("to_type", strYearType, iPosition:=2)
 
         'TOTAL RAIN: associated with ucrChkTotalRainfall
-        clsCalcRainRollingSum.SetRCommand("instat_calculation$new")
+        clsCalcRainRollingSum.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcRainRollingSum.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCalcRainRollingSum.AddParameter("function_exp", clsRFunctionParameter:=clsRainRollingSumFunction, iPosition:=1)
         clsCalcRainRollingSum.AddParameter("result_name", Chr(34) & strRollSumRain & Chr(34), iPosition:=2)
@@ -434,7 +435,7 @@ Public Class dlgStartofRains
         clsIsNaFirstRollSumRain.AddParameter("x", clsRFunctionParameter:=clsFirstRollSumRain, iPosition:=0)
 
         ' RAINY DAY associated with ucrChkNumberOfRainyDays
-        clsCalcRainDay.SetRCommand("instat_calculation$new")
+        clsCalcRainDay.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcRainDay.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCalcRainDay.AddParameter("function_exp", clsROperatorParameter:=clsRainDayOperator, iPosition:=1)
         clsCalcRainDay.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
@@ -444,7 +445,7 @@ Public Class dlgStartofRains
         clsRainDayOperator.bToScriptAsRString = True
         clsRainDayOperator.AddParameter("threshold", 0.85, iPosition:=1)
 
-        clsCalcRainDayRollingSum.SetRCommand("instat_calculation$new")
+        clsCalcRainDayRollingSum.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcRainDayRollingSum.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCalcRainDayRollingSum.AddParameter("function_exp", clsRFunctionParameter:=clsRainDayRollingSumFunction, iPosition:=1)
         clsCalcRainDayRollingSum.AddParameter("result_name", Chr(34) & strRollSumRainDay & Chr(34), iPosition:=2)
@@ -476,7 +477,7 @@ Public Class dlgStartofRains
         clsListToTalRain.SetRCommand("list")
 
         'SOR_Filter
-        clsSORFilter.SetRCommand("instat_calculation$new")
+        clsSORFilter.SetRCommand("instatCalculations::instat_calculation$new")
         clsSORFilter.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsSORFilter.AddParameter("function_exp", clsROperatorParameter:=clsLessFilterOperator, iPosition:=1)
         clsSORFilter.AddParameter("sub_calculations", clsRFunctionParameter:=clsListSubCalc, iPosition:=4)
@@ -502,7 +503,7 @@ Public Class dlgStartofRains
         clsTRWetSpellFunction.bToScriptAsRString = True
         clsTRWetSpellList.SetRCommand("list")
         clsTRWetSpellList.AddParameter("sub1", clsRFunctionParameter:=clsCalcRainRollingSum, bIncludeArgumentName:=False)
-        clsTRWetSpell.SetRCommand("instat_calculation$new")
+        clsTRWetSpell.SetRCommand("instatCalculations::instat_calculation$new")
         clsTRWetSpell.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsTRWetSpell.AddParameter("function_exp", clsRFunctionParameter:=clsTRWetSpellFunction, iPosition:=1)
         clsTRWetSpellFunction.SetRCommand("quantile")
@@ -514,7 +515,7 @@ Public Class dlgStartofRains
         clsTRWetSpell.SetAssignTo("total_rainfall_wet_spell")
 
         'DRY SPELL associated with ucrChkDrySpell
-        clsCalcDrySpell.SetRCommand("instat_calculation$new")
+        clsCalcDrySpell.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcDrySpell.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCalcDrySpell.AddParameter("function_exp", clsRFunctionParameter:=clsSpellsFunction, iPosition:=1)
         clsCalcDrySpell.AddParameter("result_name", Chr(34) & strDrySpell & Chr(34), iPosition:=2)
@@ -532,7 +533,7 @@ Public Class dlgStartofRains
         clsRainDaySpellsOperator.AddParameter("0", strRainDay, iPosition:=0)
         clsRainDaySpellsOperator.AddParameter("1", "0", iPosition:=1)
 
-        clsCalcDrySpellRollMax.SetRCommand("instat_calculation$new")
+        clsCalcDrySpellRollMax.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcDrySpellRollMax.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCalcDrySpellRollMax.AddParameter("function_exp", clsRFunctionParameter:=clsDrySpellPeriodLeadFunction, iPosition:=1)
         clsCalcDrySpellRollMax.AddParameter("result_name", Chr(34) & strRollMaxDrySpell & Chr(34), iPosition:=2)
@@ -560,7 +561,7 @@ Public Class dlgStartofRains
         clsIsNaFirstDrySpell.SetRCommand("is.na")
         clsIsNaFirstDrySpell.AddParameter("x", clsRFunctionParameter:=clsFirstDrySpell, iPosition:=0)
 
-        clsFractionEvapFunction.SetRCommand("instat_calculation$new")
+        clsFractionEvapFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsFractionEvapFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsFractionEvapFunction.AddParameter("function_exp", clsROperatorParameter:=clsEvapOperator, iPosition:=1)
         clsFractionEvapFunction.AddParameter("result_name", Chr(34) & strFactionEvap & Chr(34), iPosition:=2)
@@ -569,7 +570,7 @@ Public Class dlgStartofRains
         clsEvapOperator.SetOperation("*")
         clsEvapOperator.bToScriptAsRString = True
 
-        clsSumEvapFunction.SetRCommand("instat_calculation$new")
+        clsSumEvapFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsSumEvapFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSumEvapFunction.AddParameter("function_exp", clsRFunctionParameter:=clsRollEvaporationFunction, iPosition:=1)
         clsSumEvapFunction.AddParameter("result_name", Chr(34) & strSumFractionEvap & Chr(34), iPosition:=2)
@@ -587,7 +588,7 @@ Public Class dlgStartofRains
         clsRollEvaporationFunction.bToScriptAsRString = True
 
         'DRY PERIOD
-        clsCalcRainRollingSumDryPeriod.SetRCommand("instat_calculation$new")
+        clsCalcRainRollingSumDryPeriod.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcRainRollingSumDryPeriod.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCalcRainRollingSumDryPeriod.AddParameter("function_exp", clsRFunctionParameter:=clsLeadRollingSumRainDryPeriodFunction, iPosition:=1)
         clsCalcRainRollingSumDryPeriod.AddParameter("result_name", Chr(34) & strRollSumRainDryPeriod & Chr(34), iPosition:=2)
@@ -602,7 +603,7 @@ Public Class dlgStartofRains
         clsRollingSumRainDryPeriodFunction.AddParameter("n", 30, iPosition:=1)
         clsRollingSumRainDryPeriodFunction.AddParameter("fill", "NA", iPosition:=2)
 
-        clsCalcRollSumNumberDryPeriod.SetRCommand("instat_calculation$new")
+        clsCalcRollSumNumberDryPeriod.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcRollSumNumberDryPeriod.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCalcRollSumNumberDryPeriod.AddParameter("function_exp", clsRFunctionParameter:=clsRollSumNumberDryPeriodFunction, iPosition:=1)
         clsCalcRollSumNumberDryPeriod.AddParameter("sub_calculations", clsRFunctionParameter:=clsRollSumNumberDryPeriodSubCalcList, iPosition:=4)
@@ -640,7 +641,7 @@ Public Class dlgStartofRains
         clsIsNaFirstDryPeriod.AddParameter("x", clsRFunctionParameter:=clsFirstDryPeriod, iPosition:=0)
 
         ' Combined filter
-        clsConditionsFilter.SetRCommand("instat_calculation$new")
+        clsConditionsFilter.SetRCommand("instatCalculations::instat_calculation$new")
         clsConditionsFilter.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsConditionsFilter.AddParameter("function_exp", clsROperatorParameter:=clsConditionsOrOverallOperator, iPosition:=1)
         clsConditionsFilter.AddParameter("sub_calculations", clsRFunctionParameter:=clsCombinedList, iPosition:=4)
@@ -689,7 +690,7 @@ Public Class dlgStartofRains
         clsDPCombineOperator.AddParameter("dp_max", 0, iPosition:=1)
 
         ' First DOY
-        clsCalcStartDOY.SetRCommand("instat_calculation$new")
+        clsCalcStartDOY.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcStartDOY.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsCalcStartDOY.AddParameter("function_exp", clsRFunctionParameter:=clsIfelseStartDOY, iPosition:=1)
         clsCalcStartDOY.AddParameter("result_name", Chr(34) & strStartDoy & Chr(34), iPosition:=2)
@@ -716,7 +717,7 @@ Public Class dlgStartofRains
         clsFirstRain.SetRCommand("first")
 
         'First Date
-        clsCalcStartDate.SetRCommand("instat_calculation$new")
+        clsCalcStartDate.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcStartDate.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsCalcStartDate.AddParameter("function_exp", clsRFunctionParameter:=clsIfelseStartDate, iPosition:=1)
         clsCalcStartDate.AddParameter("result_name", Chr(34) & strStartDate & Chr(34), iPosition:=2)
@@ -735,7 +736,7 @@ Public Class dlgStartofRains
         clsFirstDate.AddParameter("default", "NA", iPosition:=1)
 
         ' Status
-        clsCalcStatus.SetRCommand("instat_calculation$new")
+        clsCalcStatus.SetRCommand("instatCalculations::instat_calculation$new")
         clsCalcStatus.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsCalcStatus.AddParameter("function_exp", clsRFunctionParameter:=clsIfelseStatusFunction, iPosition:=1)
         clsCalcStatus.AddParameter("result_name", Chr(34) & strStartStatus & Chr(34), iPosition:=3)
@@ -761,7 +762,7 @@ Public Class dlgStartofRains
         clsIsNAStatusFunction.AddParameter("x", strRollSumRain, iPosition:=0, bIncludeArgumentName:=False)
 
         'Combination
-        clsCombinationCalc.SetRCommand("instat_calculation$new")
+        clsCombinationCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsCombinationCalc.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
         clsCombinationCalc.AddParameter("manipulations", clsRFunctionParameter:=clsCombinationManipList, iPosition:=1)
         clsCombinationCalc.AddParameter("sub_calculation", clsRFunctionParameter:=clsCombinationSubCalcList, iPosition:=2)

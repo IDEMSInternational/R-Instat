@@ -292,7 +292,7 @@ Public Class dlgClimaticCheckDataRain
         bResetSubdialog = True
 
         'Group Function
-        clsGroupByFunc.SetRCommand("instat_calculation$new")
+        clsGroupByFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByFunc.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByFunc.SetAssignTo("grouping")
 
@@ -300,7 +300,7 @@ Public Class dlgClimaticCheckDataRain
         clsListFunc.AddParameter("sub1", clsRFunctionParameter:=clsGroupByFunc, bIncludeArgumentName:=False, iPosition:=1)
 
         'Main Filter
-        clsRainFilterFunc.SetRCommand("instat_calculation$new")
+        clsRainFilterFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsRainFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsRainFilterFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrOperator, iPosition:=1)
         clsRainFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListSubCalc, iPosition:=2)
@@ -310,7 +310,7 @@ Public Class dlgClimaticCheckDataRain
         clsManuplationDayListFunction.SetRCommand("list")
         clsManuplationDayListFunction.AddParameter("list", clsRFunctionParameter:=clsRainFilterFunc, iPosition:=0, bIncludeArgumentName:=False)
 
-        clsDayFilterFunc.SetRCommand("instat_calculation$new")
+        clsDayFilterFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsDayFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsDayFilterFunc.AddParameter("function_exp", Chr(34) & "day" & Chr(34), iPosition:=1)
         clsDayFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListDayFunction, iPosition:=2)
@@ -337,7 +337,7 @@ Public Class dlgClimaticCheckDataRain
         clsLargeLessOperator.SetOperation("<")
         clsLargeLessOperator.AddParameter("right", bIncludeArgumentName:=False, strParameterValue:="-1E-8", iPosition:=1)
 
-        clsLargeTestCalcFunc.SetRCommand("instat_calculation$new")
+        clsLargeTestCalcFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsLargeTestCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsLargeTestCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrLargeOperator, iPosition:=1)
         clsLargeTestCalcFunc.AddParameter("result_name", Chr(34) & strLargeTest & Chr(34), iPosition:=3)
@@ -370,13 +370,13 @@ Public Class dlgClimaticCheckDataRain
         clsRepFunc.AddParameter("second", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=1)
         clsRepFunc.bToScriptAsRString = True
 
-        clsSameCalcFunc.SetRCommand("instat_calculation$new")
+        clsSameCalcFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsSameCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSameCalcFunc.AddParameter("function_exp", clsRFunctionParameter:=clsRepFunc, iPosition:=1)
         clsSameCalcFunc.AddParameter("result_name", Chr(34) & strSameCalc & Chr(34), iPosition:=3)
         clsSameCalcFunc.SetAssignTo("same_calculation")
 
-        clsSameTestFunc.SetRCommand("instat_calculation$new")
+        clsSameTestFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsSameTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSameTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsAndOperator, iPosition:=1)
         clsSameTestFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsSameList, iPosition:=2)
@@ -415,13 +415,13 @@ Public Class dlgClimaticCheckDataRain
         clsMultipleOperator.AddParameter("left", clsROperatorParameter:=clsEqualOperator, iPosition:=0)
         clsMultipleOperator.AddParameter("right", clsRFunctionParameter:=clsCumSumFuc, iPosition:=1)
 
-        clsCumulativeCalcFunc.SetRCommand("instat_calculation$new")
+        clsCumulativeCalcFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsCumulativeCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCumulativeCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsMinusOperator, iPosition:=1)
         clsCumulativeCalcFunc.AddParameter("result_name", Chr(34) & strCumulativeCalc & Chr(34), iPosition:=3)
         clsCumulativeCalcFunc.SetAssignTo("cumulative_calculation")
 
-        clsCumulativeTestFunc.SetRCommand("instat_calculation$new")
+        clsCumulativeTestFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsCumulativeTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCumulativeTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsSecondGreaterOperator, iPosition:=1)
         clsCumulativeTestFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsCumulativeList, iPosition:=2)
@@ -438,11 +438,11 @@ Public Class dlgClimaticCheckDataRain
         clsIsNaFunction.SetRCommand("is.na")
 
         'Group By Month 
-        clsGroupByMonth.SetRCommand("instat_calculation$new")
+        clsGroupByMonth.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByMonth.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByMonth.SetAssignTo("grouping_month")
 
-        clsGroupByMonthYearFunction.SetRCommand("instat_calculation$new")
+        clsGroupByMonthYearFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByMonthYearFunction.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByMonthYearFunction.SetAssignTo("grouping_month_year")
 
@@ -459,13 +459,13 @@ Public Class dlgClimaticCheckDataRain
         clsRainyDaysOperator.bBrackets = True
         clsRainyDaysOperator.bToScriptAsRString = True
 
-        clsRainyDaysFunc.SetRCommand("instat_calculation$new")
+        clsRainyDaysFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsRainyDaysFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsRainyDaysFunc.AddParameter("function_exp", clsROperatorParameter:=clsRainyDaysOperator, iPosition:=0)
         clsRainyDaysFunc.SetAssignTo("rainydays_filter")
 
         'upper Outlier Limit function
-        clsUpperOutlierLimitValueCalcFunc.SetRCommand("instat_calculation$new")
+        clsUpperOutlierLimitValueCalcFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsUpperOutlierLimitValueCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsUpperOutlierLimitValueCalcFunc.AddParameter("function_exp", clsRFunctionParameter:=clsUpperOutlierLimitFunc, iPosition:=1)
         clsUpperOutlierLimitValueCalcFunc.AddParameter("result_name", Chr(34) & strUpperOutlierLimit & Chr(34), iPosition:=4)
@@ -481,7 +481,7 @@ Public Class dlgClimaticCheckDataRain
         clsUpperOutlierOperator.bBrackets = False
         clsUpperOutlierOperator.bToScriptAsRString = True
 
-        clsUpperOutlierlimitTestFunc.SetRCommand("instat_calculation$new")
+        clsUpperOutlierlimitTestFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsUpperOutlierlimitTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsUpperOutlierlimitTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsUpperOutlierOperator, iPosition:=1)
         clsUpperOutlierlimitTestFunc.AddParameter("result_name", Chr(34) & strUpperOutlierTest & Chr(34), iPosition:=3)
@@ -492,7 +492,7 @@ Public Class dlgClimaticCheckDataRain
         clsUpperListOutlier.AddParameter("sub1", clsRFunctionParameter:=clsUpperOutlierLimitValueCalcFunc, bIncludeArgumentName:=False, iPosition:=0)
 
         'lower Outlier Limit function
-        clsLowerOutlierLimitValueCalcFunc.SetRCommand("instat_calculation$new")
+        clsLowerOutlierLimitValueCalcFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsLowerOutlierLimitValueCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsLowerOutlierLimitValueCalcFunc.AddParameter("function_exp", clsRFunctionParameter:=clsLowerOutlierLimitFunc, iPosition:=1)
         clsLowerOutlierLimitValueCalcFunc.AddParameter("result_name", Chr(34) & strLowerOutlierLimit & Chr(34), iPosition:=4)
@@ -508,7 +508,7 @@ Public Class dlgClimaticCheckDataRain
         clsLowerOutlierOperator.bBrackets = False
         clsLowerOutlierOperator.bToScriptAsRString = True
 
-        clsLowerOutlierlimitTestFunc.SetRCommand("instat_calculation$new")
+        clsLowerOutlierlimitTestFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsLowerOutlierlimitTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsLowerOutlierlimitTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsLowerOutlierOperator, iPosition:=1)
         clsLowerOutlierlimitTestFunc.AddParameter("result_name", Chr(34) & strLowerOutlierTest & Chr(34), iPosition:=3)
@@ -530,7 +530,7 @@ Public Class dlgClimaticCheckDataRain
         clsOrOperator.bToScriptAsRString = True
 
         'Dry Month Calculations
-        clsFilterMonthFunction.SetRCommand("instat_calculation$new")
+        clsFilterMonthFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsFilterMonthFunction.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsFilterMonthFunction.AddParameter("function_exp", clsROperatorParameter:=clsInOperator, iPosition:=1)
         clsFilterMonthFunction.SetAssignTo("filter_months")
@@ -544,14 +544,14 @@ Public Class dlgClimaticCheckDataRain
         clsNotOperator.bSpaceAroundOperation = False
         clsNotOperator.AddParameter("space", "", iPosition:=0)
 
-        clsDryMonthCalculationFunc.SetRCommand("instat_calculation$new")
+        clsDryMonthCalculationFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsDryMonthCalculationFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsDryMonthCalculationFunc.AddParameter("function_exp", clsROperatorParameter:=clsDryMonthAndOperator, iPosition:=1)
         clsDryMonthCalculationFunc.AddParameter("manipulations", clsRFunctionParameter:=clsListCalcFunction, iPosition:=3)
         clsDryMonthCalculationFunc.AddParameter("result_name", Chr(34) & strDryMonthCalc & Chr(34), iPosition:=4)
         clsDryMonthCalculationFunc.SetAssignTo("dry_month_calculation")
 
-        clsDayFilterCalcFunction.SetRCommand("instat_calculation$new")
+        clsDayFilterCalcFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsDayFilterCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsDayFilterCalcFunction.AddParameter("function_exp", clsROperatorParameter:=clsDayEqualOperator, iPosition:=1)
         clsDayFilterCalcFunction.AddParameter("manipulations", clsRFunctionParameter:=clsManuplationDayListFunction, iPosition:=3)
@@ -590,7 +590,7 @@ Public Class dlgClimaticCheckDataRain
 
         clsNotIsNaFunction.SetRCommand("!is.na")
 
-        clsDryMonthTestCalculationFunc.SetRCommand("instat_calculation$new")
+        clsDryMonthTestCalculationFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsDryMonthTestCalculationFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsDryMonthTestCalculationFunc.AddParameter("function_exp", clsROperatorParameter:=clsDryTestAndOperator, iPosition:=1)
         clsDryMonthTestCalculationFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsListTestFunction, iPosition:=3)

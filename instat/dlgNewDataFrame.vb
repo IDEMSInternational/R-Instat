@@ -141,6 +141,7 @@ Public Class dlgNewDataFrame
         clsCorporaFunction.SetPackageName("rcorpora")
         clsCorporaFunction.SetRCommand("corpora")
 
+        clsListDfFunction.SetPackageName("instatExtras")
         clsListDfFunction.SetRCommand("read_corpora")
 
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
