@@ -1079,25 +1079,69 @@ Public Class dlgScript
     Private Sub ucrCboInputText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCboInputText.ControlContentsChanged, ucrCboInputlabel.ControlContentsChanged
         Dim strSelectedText As String = ucrCboInputText.GetValue()
         Dim strSelectedLabel As String = ucrCboInputlabel.GetValue()
-
         Dim strLabel As String = ucrReceiverTextPath.GetVariableNames()
+
+        ' Define additional parameters for specific text geoms
+        Dim dctAdditionalParams As New Dictionary(Of String, String)
+        dctAdditionalParams.Add("geomtextpath::geom_textabline", "slope=0.5, intercept=4")
+        dctAdditionalParams.Add("geomtextpath::geom_textvline", "xintercept=2")
+        dctAdditionalParams.Add("geomtextpath::geom_texthline", "yintercept=3")
+        dctAdditionalParams.Add("geomtextpath::geom_textdensity", "y=..density..")
+        dctAdditionalParams.Add("geomtextpath::geom_textsegment", "xend=4, yend=7")
+
 
         ' Initialize the script
         Dim strScript As String = ""
 
-        ' Check if a valid geom_textpath is selected and label is not empty
-        If dctText.ContainsKey(strSelectedText) AndAlso Not String.IsNullOrEmpty(strLabel) Then
-            Dim strGeomFunction As String = dctText(strSelectedText)
-            strScript = " + " & strGeomFunction & "(aes(label=" & strLabel & "))"
+        ' Check if either ucrChkLabel or ucrChkText is checked
+        Dim bShowLabel As Boolean = ucrChkLabel.Checked
+        Dim strAesLabel As String = ""
+        Dim bShowText As Boolean = ucrChkText.Checked
+        Dim strAesText As String = ""
+
+        ' If either is checked and label is not empty, construct aes(label=)
+        If bShowLabel AndAlso Not String.IsNullOrEmpty(strLabel) Then
+            strAesLabel = "(aes(label=" & strLabel & "))"
+        End If
+        If bShowText AndAlso Not String.IsNullOrEmpty(strLabel) Then
+            strAesText = "label=" & strLabel
         End If
 
-        'If dctLabel.ContainsKey(strSelectedText) AndAlso Not String.IsNullOrEmpty(strLabel) Then
-        '    Dim strGeomLabelFunction As String = dctLabel(strSelectedLabel)
-        '    strScript = strGeomLabelFunction & "(aes(label=" & strLabel & "))"
-        'End If
+        ' Check if a valid geom_textpath is selected
+        If Not ucrCboInputText.IsEmpty Then
+            If dctText.ContainsKey(strSelectedText) Then
+                Dim strGeomFunction As String = dctText(strSelectedText)
+                Dim strAdditionalParams As String = ""
+                ' Check for additional parameters for the selected geom
+                If dctAdditionalParams.ContainsKey(strGeomFunction) Then
+                    strAdditionalParams = dctAdditionalParams(strGeomFunction)
+                End If
+
+                ' If additional parameters exist, add them inside aes()
+                If Not String.IsNullOrEmpty(strAdditionalParams) Then
+                    ' If label already exists, add a comma before additional params
+                    If Not String.IsNullOrEmpty(strAesText) Then
+                        strAesText &= ", "
+                    End If
+                    strAesText &= strAdditionalParams
+                End If
+
+                ' Construct the script with all aes() params combined
+                strScript &= " + " & strGeomFunction & "(aes(" & strAesText & "))"
+            End If
+        End If
+
+        ' Check if a valid geom_label is selected
+        If Not ucrCboInputlabel.IsEmpty Then
+            If dctLabel.ContainsKey(strSelectedLabel) Then
+                Dim strGeomLabelFunction As String = dctLabel(strSelectedLabel)
+                strScript &= " + " & strGeomLabelFunction & strAesLabel
+            End If
+        End If
 
         ' Display or preview the constructed script
         PreviewScript(strScript)
-
     End Sub
+
+
 End Class
