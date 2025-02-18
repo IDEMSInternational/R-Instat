@@ -31,6 +31,7 @@ Public Class clsDataFramePage
     Private _lstColumns As List(Of clsColumnHeaderDisplay)
     Private _hasChanged As Boolean
     Private _useColumnSelectionInDataView As Boolean
+    Private _HasDataChangedForAutoSave As Boolean
 
     Private ReadOnly Property iColumnIncrements As Integer
         Get
@@ -141,6 +142,19 @@ Public Class clsDataFramePage
     End Property
 
     ''' <summary>
+    ''' holds whether the dataframe is different from visual grid component and trigger auto save
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property HasDataChangedForAutoSave() As Boolean
+        Get
+            Return _HasDataChangedForAutoSave
+        End Get
+        Set(ByVal value As Boolean)
+            _HasDataChangedForAutoSave = value
+        End Set
+    End Property
+
+    ''' <summary>
     ''' Create a new instance of a dataframe page
     ''' </summary>
     ''' <param name="rLink"></param>
@@ -152,6 +166,7 @@ Public Class clsDataFramePage
         _iColumnStart = 1
         _iRowStart = 1
         _hasChanged = True
+        _HasDataChangedForAutoSave = True
         _useColumnSelectionInDataView = True
     End Sub
 
@@ -236,7 +251,7 @@ Public Class clsDataFramePage
 
         Dim strDisable As String = If(bDisable, "TRUE", "FALSE")
         clsEnableDisableUndoRFunction.AddParameter("disable_undo", strDisable)
-        _clsRLink.RunScript(clsEnableDisableUndoRFunction.ToScript)
+        _clsRLink.RunScript(clsEnableDisableUndoRFunction.ToScript, bSkipScriptAndOutput:=True)
 
     End Sub
 
