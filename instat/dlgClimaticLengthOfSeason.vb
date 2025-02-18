@@ -340,7 +340,6 @@ Public Class dlgClimaticLengthOfSeason
         ucrChkLengthofSeason.SetRCode(clsCombinationListFunction, bReset)
         ucrChkType.SetRCode(clsCombinationListFunction, bReset)
         ucrChkLengthmore.SetRCode(clsCombinationListFunction, bReset)
-        ' ucrNudLenghtmore.SetRCode(clsMinusmoreOPerator, bReset)
         ucrInputTextLengthmore.SetRCode(clsLengthmoreFunction, bReset)
         ucrReceiverEndFilled.SetRCode(clsMaxFunction, bReset)
         AutoFillReceivers(lstEndReceivers)
