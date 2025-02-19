@@ -26,6 +26,8 @@ Public Class dlgClimaticLengthOfSeason
     Private lstStartStatusReceivers As New List(Of ucrReceiverSingle)
     Private lstFilledReceivers As New List(Of ucrReceiverSingle)
     Private bisFilling As Boolean = False
+    Private bUserClearedReceiver As Boolean = False
+    Private bDataChanged As Boolean = False
     Private clsLengthOfSeasonFunction, clsMaxFunction, clsLengthmoreFunction, clsListFunction, clsAscharactermoreFunction, clsConvertColumnTypeFunction, clsElseIfMoreFunction, clsApplyInstatCalcFunction, clsAsCharacterFunction, clsCombinationCalcFunction, clsStartEndStatusFunction, clsCaseWhenFunction, clsIsNAFunction, clsIsNA1Function, clsCombinationListFunction As New RFunction
     Private clsMinusOpertor, clsAssignMoreOperator, clsMinusmoreOPerator, clsAndOperator, clsOROperator, clsCaseWhenOperator, clsCaseWhen1Operator, clsCaseWhen2Operator, clsCaseWhen3Operator, clsAssignOperator, clsAssign1Operator, clsAssign2Operator, clsAssign3Operator, clsAssign4Operator, clsAnd1Operator, clsAnd2Operator As New ROperator
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
@@ -47,6 +49,10 @@ Public Class dlgClimaticLengthOfSeason
         AutoFillReceivers(lstEndStatusReceivers)
         AutoFillReceivers(lstStartStatusReceivers)
         AutoFillReceivers(lstFilledReceivers)
+        If Not bUserClearedReceiver Then
+            AutoFillReceivers(lstFilledReceivers)
+        End If
+        bDataChanged = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -134,7 +140,7 @@ Public Class dlgClimaticLengthOfSeason
         AutoFillReceivers(lstStartReceivers)
         AutoFillReceivers(lstEndStatusReceivers)
         AutoFillReceivers(lstStartStatusReceivers)
-        AutoFillReceivers(lstFilledReceivers)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -379,6 +385,8 @@ Public Class dlgClimaticLengthOfSeason
     End Sub
 
     Private Sub ucrSelectorLengthofSeason_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLengthofSeason.ControlValueChanged
+        bDataChanged = True
+        bUserClearedReceiver = False
         strCurrDataName = Chr(34) & ucrSelectorLengthofSeason.strCurrentDataFrame & Chr(34)
         AutoFillReceivers(lstEndReceivers)
         AutoFillReceivers(lstStartReceivers)
@@ -486,9 +494,12 @@ Public Class dlgClimaticLengthOfSeason
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorLengthofSeason.CurrentReceiver
         Dim strSelectedValue As String
-        Dim bFound As Boolean = False
 
         For Each ucrTempReceiver As ucrReceiver In lstReceivers
+            If ucrTempReceiver Is ucrReceiverEndFilled AndAlso bUserClearedReceiver Then
+                Continue For
+            End If
+
             ucrTempReceiver.SetMeAsReceiver()
             lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
 
@@ -496,11 +507,7 @@ Public Class dlgClimaticLengthOfSeason
                 Dim lstAvailable As List(Of String) = ucrSelectorLengthofSeason.lstAvailableVariable.Items.Cast(Of ListViewItem) _
                 .Select(Function(item) Regex.Replace(item.Text.ToLower(), "[^\w]", String.Empty)).ToList()
 
-                If lstRecognisedValues.Contains("end_season") AndAlso lstAvailable.Contains("end_season") Then
-                    strSelectedValue = "end_season"
-                Else
-                    strSelectedValue = lstRecognisedValues.FirstOrDefault(Function(val) lstAvailable.Contains(val))
-                End If
+                strSelectedValue = lstRecognisedValues.FirstOrDefault(Function(val) lstAvailable.Contains(val))
 
                 If Not String.IsNullOrEmpty(strSelectedValue) Then
                     Dim matchingItem As ListViewItem = ucrSelectorLengthofSeason.lstAvailableVariable.Items.Cast(Of ListViewItem) _
@@ -531,4 +538,10 @@ Public Class dlgClimaticLengthOfSeason
         Next
         Return lstValues
     End Function
+
+    Private Sub ucrReceiverEndFilled_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEndFilled.ControlContentsChanged
+        If ucrReceiverEndFilled.IsEmpty Then
+            bUserClearedReceiver = True
+        End If
+    End Sub
 End Class
