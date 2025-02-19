@@ -205,9 +205,9 @@ Partial Class dlgClimaticLengthOfSeason
         Me.lblEndFilled.AutoSize = True
         Me.lblEndFilled.Location = New System.Drawing.Point(281, 199)
         Me.lblEndFilled.Name = "lblEndFilled"
-        Me.lblEndFilled.Size = New System.Drawing.Size(77, 13)
+        Me.lblEndFilled.Size = New System.Drawing.Size(56, 13)
         Me.lblEndFilled.TabIndex = 16
-        Me.lblEndFilled.Text = "End Status (L):"
+        Me.lblEndFilled.Text = "End Filled:"
         '
         'ucrReceiverEndFilled
         '
