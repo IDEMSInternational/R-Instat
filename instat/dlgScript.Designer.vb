@@ -159,7 +159,7 @@ Partial Class dlgScript
         'rdoFromRFile
         '
         Me.rdoFromRFile.AutoSize = True
-        Me.rdoFromRFile.Location = New System.Drawing.Point(49, 202)
+        Me.rdoFromRFile.Location = New System.Drawing.Point(49, 206)
         Me.rdoFromRFile.Margin = New System.Windows.Forms.Padding(2)
         Me.rdoFromRFile.Name = "rdoFromRFile"
         Me.rdoFromRFile.Size = New System.Drawing.Size(81, 17)
@@ -174,7 +174,7 @@ Partial Class dlgScript
         Me.ucrInputSaveRFile.AutoSize = True
         Me.ucrInputSaveRFile.IsMultiline = False
         Me.ucrInputSaveRFile.IsReadOnly = False
-        Me.ucrInputSaveRFile.Location = New System.Drawing.Point(67, 228)
+        Me.ucrInputSaveRFile.Location = New System.Drawing.Point(67, 231)
         Me.ucrInputSaveRFile.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputSaveRFile.Name = "ucrInputSaveRFile"
         Me.ucrInputSaveRFile.Size = New System.Drawing.Size(145, 21)
@@ -259,7 +259,7 @@ Partial Class dlgScript
         '
         Me.ucrChkDisplayGraph.AutoSize = True
         Me.ucrChkDisplayGraph.Checked = False
-        Me.ucrChkDisplayGraph.Location = New System.Drawing.Point(88, 217)
+        Me.ucrChkDisplayGraph.Location = New System.Drawing.Point(88, 225)
         Me.ucrChkDisplayGraph.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkDisplayGraph.Name = "ucrChkDisplayGraph"
         Me.ucrChkDisplayGraph.Size = New System.Drawing.Size(113, 34)
