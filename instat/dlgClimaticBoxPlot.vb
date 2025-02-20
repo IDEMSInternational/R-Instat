@@ -269,6 +269,7 @@ Public Class dlgClimaticBoxPlot
         clsRaesFunction.SetRCommand("aes")
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
 
+        clsAsFactorFunction.SetPackageName("instatExtras")
         clsAsFactorFunction.SetRCommand("make_factor")
         clsAsFactorFunction.AddParameter("x", Chr(34) & Chr(34), bIncludeArgumentName:=False)
 

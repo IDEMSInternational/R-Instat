@@ -61,7 +61,7 @@ Public Class dlgCalculationsSummary
         clsApplyCalculation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyCalculation.AddParameter("calc", clsRFunctionParameter:=clsNewCalculationFunction)
 
-        clsNewCalculationFunction.SetRCommand("instat_calculation$new")
+        clsNewCalculationFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsNewCalculationFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
         clsNewCalculationFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsNewCalculationFunction.AddParameter("save", "2")

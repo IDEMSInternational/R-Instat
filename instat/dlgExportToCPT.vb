@@ -124,6 +124,7 @@ Public Class dlgExportToCPT
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
 
+        clsOutputCPT.SetPackageName("instatClimatic")
         clsOutputCPT.SetRCommand("output_CPT")
 
         clsExportCPT.SetPackageName("rio")
