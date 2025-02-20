@@ -835,7 +835,7 @@ Public Class dlgImportDataset
 
         clsTempImport.RemoveAssignTo()
 
-        clsAsCharacterFunc.SetPackageName("instatClimatic")
+        clsAsCharacterFunc.SetPackageName("instatExtras")
         clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
         clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
