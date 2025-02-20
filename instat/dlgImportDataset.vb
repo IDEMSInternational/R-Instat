@@ -803,17 +803,16 @@ Public Class dlgImportDataset
         ElseIf IsJSONFileFormat() Then
             strRowMaxParamName = "nrows"
         ElseIf IsExcelFileFormat() Then
+            bCanImport = True 'assume can still import the entire excel file
             If dctSelectedExcelSheets.Count = 0 Then
                 lblNoPreview.Show()
                 lblImportingSheets.Show()
                 lblImportingSheets.Text = "No sheet selected."
-                bCanImport = True 'assume can still import the entire excel file
                 Exit Sub
             ElseIf dctSelectedExcelSheets.Count > 1 Then
                 lblNoPreview.Show()
                 lblImportingSheets.Show()
                 lblImportingSheets.Text = "Importing the following sheets:" & Environment.NewLine & String.Join(", ", dctSelectedExcelSheets.Values)
-                bCanImport = True 'assume can import all selected sheets
                 Exit Sub
             End If
             strRowMaxParamName = "n_max"
