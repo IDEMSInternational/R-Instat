@@ -557,7 +557,7 @@ Public Class dlgTransformClimatic
         clsRollConsecutiveSumFunction.SetRCommand("rollapply")
         clsRollConsecutiveSumFunction.AddParameter("align", Chr(39) & "left" & Chr(39))
         clsRollConsecutiveSumFunction.AddParameter("width", 21, iPosition:=1)
-        clsRollConsecutiveSumFunction.AddParameter("FUN", "max_consecutive_sum")
+        clsRollConsecutiveSumFunction.AddParameter("FUN", "instatExtras::max_consecutive_sum")
         clsRollConsecutiveSumFunction.AddParameter("fill", "NA")
         clsRollConsecutiveSumFunction.AddParameter("data", strRainDay)
 
@@ -652,6 +652,7 @@ Public Class dlgTransformClimatic
         clsWBOperator1.bSpaceAroundOperation = True
         clsWBOperator1.bBrackets = False
 
+        clsWBEvaporationMinFunction.SetPackageName("instatClimatic")
         clsWBEvaporationMinFunction.SetRCommand("WB_evaporation")
         clsWBEvaporationMinFunction.AddParameter("water_balance", "..1", iPosition:=0, bIncludeArgumentName:=False)
         clsWBEvaporationMinFunction.AddParameter("y", "..2", iPosition:=4, bIncludeArgumentName:=False)
@@ -1068,7 +1069,7 @@ Public Class dlgTransformClimatic
             clsRTransform.RemoveParameterByName("sub_calculations")
             clsTransformCheck = clsRTransform
         ElseIf rdoSpell.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & ".spells(x = " & strRainDay & ")" & Chr(34), iPosition:=1)
+            clsRTransform.AddParameter("function_exp", Chr(34) & "instatClimatic::spells(x = " & strRainDay & ")" & Chr(34), iPosition:=1)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsRTransformCountSpellSub, iPosition:=4)
             clsRTransform.RemoveParameterByName("calculated_from")
             clsTransformCheck = clsRTransform

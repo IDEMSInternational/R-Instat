@@ -464,16 +464,19 @@ Public Class dlgExtremesClimatic
         clsFilterExtremeExp.SetOperation("==")
         clsFilterExtremeExp.bToScriptAsRString = True
 
+        clsPlotMrlFunction.SetPackageName("instatClimatic")
         clsPlotMrlFunction.SetRCommand("plot_mrl")
         clsPlotMrlFunction.AddParameter("ncol", "1", iPosition:=3)
         clsPlotMrlFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
+        clsThresholdPlotFunction.SetPackageName("instatClimatic")
         clsThresholdPlotFunction.SetRCommand("plot_multiple_threshold")
         clsThresholdPlotFunction.AddParameter("nint", "10", iPosition:=5)
         clsThresholdPlotFunction.AddParameter("alpha", "0.05", iPosition:=6)
         clsThresholdPlotFunction.AddParameter("ncol", "1", iPosition:=7)
         clsThresholdPlotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
+        clsDeclusteringFunction.SetPackageName("instatClimatic")
         clsDeclusteringFunction.SetRCommand("plot_declustered")
         clsDeclusteringFunction.AddParameter("threshold", "40", iPosition:=3)
         clsDeclusteringFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")

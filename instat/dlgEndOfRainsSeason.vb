@@ -735,6 +735,7 @@ Public Class dlgEndOfRainsSeason
         clsWBOperator1.bSpaceAroundOperation = True
         clsWBOperator1.bBrackets = False
 
+        clsWBEvaporationMinFunction.SetPackageName("instatClimatic")
         clsWBEvaporationMinFunction.SetRCommand("WB_evaporation")
         clsWBEvaporationMinFunction.AddParameter("water_balance", "..1", iPosition:=0, bIncludeArgumentName:=False)
         clsWBEvaporationMinFunction.AddParameter("y", "..2", iPosition:=4, bIncludeArgumentName:=False)

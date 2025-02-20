@@ -414,6 +414,7 @@ Public Class ucrFactor
         clsGetFactorDataFunction.AddParameter("data_name", strDataFrameName)
         clsGetFactorDataFunction.AddParameter("col_name", strFactorVariableName)
         clsGetFactorDataFunction.AddParameter("include_NA_level", If(bIncludeNALevel, "TRUE", "FALSE"))
+        clsConvertToCharFunction.SetPackageName("instatClimatic")
         clsConvertToCharFunction.SetRCommand("convert_to_character_matrix")
         clsConvertToCharFunction.AddParameter("data", clsRFunctionParameter:=clsGetFactorDataFunction)
         expDataFrame = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharFunction.ToScript(), bSilent:=True)

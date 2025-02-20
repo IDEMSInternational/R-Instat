@@ -259,7 +259,8 @@ Public Class dlgSpells
 
 
         clsDotSpellsFunction.bToScriptAsRString = True
-        clsDotSpellsFunction.SetRCommand(".spells")
+        clsDotSpellsFunction.SetPackageName("instatClimatic")
+        clsDotSpellsFunction.SetRCommand("spells")
         clsDotSpellsFunction.AddParameter("x", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=0)
 
         clsSpellFunction.SetRCommand("instatCalculations::instat_calculation$new")
@@ -317,7 +318,8 @@ Public Class dlgSpells
         clsMaxSpellManipulation.AddParameter("manip3", clsRFunctionParameter:=clsDayFilter, bIncludeArgumentName:=False, iPosition:=2)
 
         clsSpellsFunction.bToScriptAsRString = True
-        clsSpellsFunction.SetRCommand(".spells")
+        clsSpellsFunction.SetPackageName("instatClimatic")
+        clsSpellsFunction.SetRCommand("spells")
         clsSpellsFunction.AddParameter("x", strSpellLogical)
 
 
