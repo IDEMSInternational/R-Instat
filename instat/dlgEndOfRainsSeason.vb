@@ -960,7 +960,7 @@ Public Class dlgEndOfRainsSeason
         clsEndSeasonFirstDoySummaryCalc.AddParameter("save", "2", iPosition:=6)
         clsEndSeasonFirstDoySummaryCalc.SetAssignTo(strEndSeason)
 
-        clsEndSeasonFirstDoySummaryCalcFilledFunction.SetRCommand("instat_calculation$new")
+        clsEndSeasonFirstDoySummaryCalcFilledFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("function_exp", clsRFunctionParameter:=clsIfElseFirstDoyFilledFunction, iPosition:=1)
         clsEndSeasonFirstDoySummaryCalcFilledFunction.AddParameter("result_name", Chr(34) & strEndSeasonFilled & Chr(34), iPosition:=3)
@@ -1075,7 +1075,7 @@ Public Class dlgEndOfRainsSeason
 
         clsConvertlinkedvariable1Function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_linked_variable")
 
-        clsConditionCheckFunction.SetRCommand("instat_calculation$new")
+        clsConditionCheckFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsConditionCheckFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsConditionCheckFunction.AddParameter("function_exp", clsRFunctionParameter:=clsElseifCondCheckFunction, iPosition:=1)
         clsConditionCheckFunction.AddParameter("result_name", Chr(34) & strCondCheck & Chr(34), iPosition:=2)
@@ -1101,7 +1101,7 @@ Public Class dlgEndOfRainsSeason
 
         clsIsnaConditionCheckFunction.SetRCommand("is.na")
 
-        clsConditionsFilterCondCheckFunction.SetRCommand("instat_calculation$new")
+        clsConditionsFilterCondCheckFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsConditionsFilterCondCheckFunction.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsConditionsFilterCondCheckFunction.AddParameter("function_exp", clsROperatorParameter:=clsCheckConditionFilterOperator, iPosition:=1)
         clsConditionsFilterCondCheckFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsListCondCheckFilterFunction, iPosition:=2)
@@ -1122,7 +1122,7 @@ Public Class dlgEndOfRainsSeason
         clsIsnaSecondConditionFilterFunction.SetRCommand("is.na")
         clsIsnaSecondConditionFilterFunction.AddParameter("x", "conditions_check", iPosition:=0, bIncludeArgumentName:=False)
 
-        clsEndSeasonCombinationCalcStatusFunction.SetRCommand("instat_calculation$new")
+        clsEndSeasonCombinationCalcStatusFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsEndSeasonCombinationCalcStatusFunction.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
         clsEndSeasonCombinationCalcStatusFunction.AddParameter("manipulations", clsRFunctionParameter:=clsEndSeasonCombinationManipulationListStatusFunction, iPosition:=1)
         clsEndSeasonCombinationCalcStatusFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsEndSeasonCombinationSubCalcListStatusFunction, iPosition:=2)
@@ -1157,7 +1157,7 @@ Public Class dlgEndOfRainsSeason
         clsSetNamesEndSeasonFunction.AddParameter("x", Chr(34) & strEndSeason & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsSetNamesEndSeasonFunction.AddParameter("y", strLinkeddata, iPosition:=1, bIncludeArgumentName:=False)
 
-        clsEndSeasonStatus2Function.SetRCommand("instat_calculation$new")
+        clsEndSeasonStatus2Function.SetRCommand("instatCalculations::instat_calculation$new")
         clsEndSeasonStatus2Function.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsEndSeasonStatus2Function.AddParameter("function_exp", clsRFunctionParameter:=clsIfelseStatus2Function, iPosition:=1)
         clsEndSeasonStatus2Function.AddParameter("calculated_from", strCalformlist, iPosition:=2)
@@ -1174,7 +1174,7 @@ Public Class dlgEndOfRainsSeason
         clsIsnaStatus2Function.SetRCommand("!is.na")
         clsIsnaStatus2Function.AddParameter("x", strEndSeason, iPosition:=0, bIncludeArgumentName:=False)
 
-        clsEndSeasonCombiStatus2Function.SetRCommand("instat_calculation$new")
+        clsEndSeasonCombiStatus2Function.SetRCommand("instatCalculations::instat_calculation$new")
         clsEndSeasonCombiStatus2Function.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
         clsEndSeasonCombiStatus2Function.AddParameter("sub_calculations", clsRFunctionParameter:=clsEndSeasonCombiStatus2ListFunction, iPosition:=2)
         clsEndSeasonCombiStatus2Function.SetAssignTo(strEndSeasonCombiStatus2)

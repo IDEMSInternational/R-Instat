@@ -131,7 +131,8 @@ Public Class dlgClimaticLengthOfSeason
         ucrReceiverStartofRains.SetMeAsReceiver()
 
         'length of season calculation
-        clsLengthOfSeasonFunction.SetRCommand("instatCalculations::instat_calculation$new")
+        clsLengthOfSeasonFunction.SetPackageName("instatCalculations")
+        clsLengthOfSeasonFunction.SetRCommand("instat_calculation$new")
         clsLengthOfSeasonFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsLengthOfSeasonFunction.AddParameter("function_exp", clsROperatorParameter:=clsMinusOpertor, iPosition:=1)
         clsLengthOfSeasonFunction.AddParameter("result_name", Chr(34) & strLengthName & Chr(34), iPosition:=2)
@@ -142,7 +143,8 @@ Public Class dlgClimaticLengthOfSeason
         clsMinusOpertor.bToScriptAsRString = True
 
         'start status calculation
-        clsStartEndStatusFunction.SetRCommand("instatCalculations::instat_calculation$new")
+        clsStartEndStatusFunction.SetPackageName("instatCalculations")
+        clsStartEndStatusFunction.SetRCommand("instat_calculation$new")
         clsStartEndStatusFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsStartEndStatusFunction.AddParameter("function_exp", clsRFunctionParameter:=clsCaseWhenFunction, iPosition:=1)
         clsStartEndStatusFunction.AddParameter("result_name", Chr(34) & strTypeName & Chr(34), iPosition:=2)
@@ -220,7 +222,8 @@ Public Class dlgClimaticLengthOfSeason
         clsOROperator.bBrackets = False
 
         'combination calculation
-        clsCombinationCalcFunction.SetRCommand("instatCalculations::instat_calculation$new")
+        clsCombinationCalcFunction.SetPackageName("instatCalculations")
+        clsCombinationCalcFunction.SetRCommand("instat_calculation$new")
         clsCombinationCalcFunction.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
         clsCombinationCalcFunction.AddParameter("sub_calculation", clsRFunctionParameter:=clsCombinationListFunction, iPosition:=2)
         clsCombinationCalcFunction.SetAssignTo("length_rains_combined")
@@ -236,6 +239,7 @@ Public Class dlgClimaticLengthOfSeason
         clsConvertColumnTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsConvertColumnTypeFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
 
+        clsLengthmoreFunction.SetPackageName("instatCalculations")
         clsLengthmoreFunction.SetRCommand("instat_calculation$new")
         clsLengthmoreFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsLengthmoreFunction.AddParameter("function_exp", clsRFunctionParameter:=clsElseIfMoreFunction, iPosition:=1)
