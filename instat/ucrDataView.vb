@@ -161,6 +161,7 @@ Public Class ucrDataView
         _hasChanged = True
         EnableDisableUndoMenu()
         _grid.Focus()
+        frmMain.EnableDisbaleViewSwapMenu(_clsDataBook.DataFrames.Count > 0)
     End Sub
 
     ''' <summary>
