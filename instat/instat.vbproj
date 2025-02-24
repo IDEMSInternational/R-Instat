@@ -391,10 +391,10 @@
     <Compile Include="sdgSummaryThemes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="static\InstatObject\R\dlgOutfillingStationData.Designer.vb">
+    <Compile Include="dlgOutfillingStationData.Designer.vb">
       <DependentUpon>dlgOutfillingStationData.vb</DependentUpon>
     </Compile>
-    <Compile Include="static\InstatObject\R\dlgOutfillingStationData.vb">
+    <Compile Include="dlgOutfillingStationData.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
@@ -3450,7 +3450,7 @@
     <EmbeddedResource Include="sdgSummaryThemes.resx">
       <DependentUpon>sdgSummaryThemes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="static\InstatObject\R\dlgOutfillingStationData.resx">
+    <EmbeddedResource Include="dlgOutfillingStationData.resx">
       <DependentUpon>dlgOutfillingStationData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
