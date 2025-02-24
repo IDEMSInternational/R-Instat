@@ -77,12 +77,12 @@ Public Class dlgInsertColumn
         ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
 
         ucrInputDefaultValue.SetParameter(New RParameter("col_data", 5))
-        dctDefaultValue.Add("NA", "NA")
+        dctDefaultValue.Add("NA", "NA_real_")
         dctDefaultValue.Add("0", "0")
         dctDefaultValue.Add("Kisumu", Chr(34) & "Kisumu" & Chr(34))
         dctDefaultValue.Add("New Zealand", Chr(34) & "New Zealand" & Chr(34))
-        dctDefaultValue.Add("True", Chr(34) & "True" & Chr(34))
-        dctDefaultValue.Add("False", Chr(34) & "False" & Chr(34))
+        dctDefaultValue.Add("True", "TRUE")
+        dctDefaultValue.Add("False", "FALSE")
         ucrInputDefaultValue.SetItems(dctDefaultValue)
         ucrInputDefaultValue.AddQuotesIfUnrecognised = True
         ucrInputDefaultValue.bAllowNonConditionValues = True
@@ -120,9 +120,6 @@ Public Class dlgInsertColumn
         ucrPnlBeforeAfter.SetLinkedDisplayControl(grpOptions)
         ucrNudNumberOfRows.SetLinkedDisplayControl(lblNumberOfRowsToInsert)
         ucrNudStartRow.SetLinkedDisplayControl(lblStartPos)
-        ucrReceiverColumnsToInsert.SetLinkedDisplayControl(lblColumn)
-
-        ttColumnDefaultValue.SetToolTip(ucrInputDefaultValue.cboInput, "Include the quotes if the default value is a string e.g. ""small"". Do not include quotes if the default value is logical e.g. TRUE")
 
     End Sub
 
