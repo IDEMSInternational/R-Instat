@@ -1047,7 +1047,6 @@ Public Class dlgImportDataset
         TryGridPreview()
         RemoveMissingValues()
         TestOkEnabled()
-        InitializeSheetSelection()
     End Sub
 
     Private Sub InitializeSheetSelection()
@@ -1058,7 +1057,9 @@ Public Class dlgImportDataset
             clbSheets.SetItemChecked(0, True) ' Check the first sheet
             dctSelectedExcelSheets(1) = clbSheets.Items.Item(0).ToString()
             AddHandler clbSheets.ItemCheck, AddressOf clbSheets_ItemCheck
+            lblImportingSheets.Hide()
         End If
+        TryGridPreview()
     End Sub
 
 
