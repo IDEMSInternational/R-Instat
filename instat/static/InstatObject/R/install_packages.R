@@ -43,7 +43,6 @@ pkgs <-
     "mosaic",
     "ncdf4",
     "ncdf4.helpers",
-    "getPass",
     "RMySQL",
     "DBI",
     "EnvStats",
