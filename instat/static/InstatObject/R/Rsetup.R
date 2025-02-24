@@ -225,8 +225,8 @@ packages_not_loaded <- function() {
 load_R_Instat_packages()
 
 setwd(dirname(parent.frame(2)$ofile))
-source("instat_object_R6.R")
-source("data_object_R6.R")
+# source("instat_object_R6.R")
+# source("data_object_R6.R")
 source("labels_and_defaults.R")
 source("stand_alone_functions.R")
 files <- sort(dir(file.path(getwd(), 'Backend_Components/'), pattern=".R$", full.names = TRUE, recursive = TRUE))
