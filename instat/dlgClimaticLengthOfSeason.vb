@@ -48,7 +48,6 @@ Public Class dlgClimaticLengthOfSeason
         AutoFillReceivers(lstStartReceivers)
         AutoFillReceivers(lstEndStatusReceivers)
         AutoFillReceivers(lstStartStatusReceivers)
-        AutoFillReceivers(lstFilledReceivers)
         If Not bUserClearedReceiver Then
             AutoFillReceivers(lstFilledReceivers)
         End If
@@ -345,7 +344,9 @@ Public Class dlgClimaticLengthOfSeason
         ucrInputTextType.SetRCode(clsStartEndStatusFunction, bReset)
         ucrChkLengthofSeason.SetRCode(clsCombinationListFunction, bReset)
         ucrChkType.SetRCode(clsCombinationListFunction, bReset)
-        ucrChkLengthmore.SetRCode(clsCombinationListFunction, bReset)
+        If bReset Then
+            ucrChkLengthmore.SetRCode(clsCombinationListFunction, bReset)
+        End If
         ucrInputTextLengthmore.SetRCode(clsLengthmoreFunction, bReset)
         ucrReceiverEndFilled.SetRCode(clsMaxFunction, bReset)
         AutoFillReceivers(lstEndReceivers)
@@ -444,7 +445,7 @@ Public Class dlgClimaticLengthOfSeason
     End Sub
 
     Private Sub EnableLengthmore()
-        ucrChkLengthmore.Enabled = (Not ucrReceiverEndFilled.IsEmpty) AndAlso ucrReceiverEndFilled.Enabled
+        ucrChkLengthmore.Enabled = Not ucrReceiverEndFilled.IsEmpty AndAlso ucrReceiverEndFilled.Enabled
     End Sub
 
     Private Sub ucrInputLengthofSeason_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLengthofSeason.ControlValueChanged
