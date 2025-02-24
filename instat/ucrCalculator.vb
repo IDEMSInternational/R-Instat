@@ -574,6 +574,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCor, "correlation between 2 variables. It is a value between -1 and +1.")
         ttCalculator.SetToolTip(cmdCov, "covariance between 2 variables.")
         ttCalculator.SetToolTip(cmdQuantile, "a quantile, given a value between 0 and 1. So quantile(c(1,2,3,4,10), 0.25) = 2 and is the lower quartile.")
+        ttCalculator.SetToolTip(cmdQuantile3, "quantile for an ordered factor. So quantile(cut, 0.25) for the cut variable from ggplotdiamonds data gives the 3rd level, namely Very Good")
         ttCalculator.SetToolTip(cmdwhichmax, "Row number of the maximum value. So which.max(c(4,3,10,1,2)) is 3")
         ttCalculator.SetToolTip(cmdwhichmin, "Row number of the minimum value. So which.min(c(4,3,10,1,2)) is 4")
         ttCalculator.SetToolTip(cmdwheremax, "Value of a variable at the which.max position. So for c(""a"",""b"",""c"",""d"",""e""), is ""c"", for the data in which.max tooltip.")
@@ -1421,23 +1422,31 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdQuantile_Click(sender As Object, e As EventArgs) Handles cmdQuantile.Click
-        Dim clsQuantileFunction As New RFunction
+        Dim strSelectedData As String
+        Dim strQuantileCommand As String
 
-        clsDataFunction.SetRCommand("nrow")
-        clsDataFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+        ' Get the currently selected dataset
+        strSelectedData = ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
+        If chkShowParameters.Checked Then
+            strQuantileCommand = "quantile(x = " & strSelectedData & ", probs = 0.5, na.rm = TRUE, names = FALSE, type = 7)"
+        Else
+            strQuantileCommand = "quantile(x= " & strSelectedData & ", probs = 0.5, na.rm = TRUE)"
+        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strQuantileCommand, 1)
+    End Sub
 
-        clsQuantileFunction.SetRCommand("quantile")
-        clsQuantileFunction.AddParameter("x", "", iPosition:=0)
-        clsQuantileFunction.AddParameter("probs", "0.5", iPosition:=1)
-        clsQuantileFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
-        clsQuantileFunction.AddParameter("names", "FALSE", iPosition:=3)
-        clsQuantileFunction.AddParameter("type", "7", iPosition:=4)
+    Private Sub cmdQuantile3_Click(sender As Object, e As EventArgs) Handles cmdQuantile3.Click
+        Dim strSelectedData As String
+        Dim strQuantileCommand As String
 
-        clsRepFunction.SetRCommand("rep")
-        clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsQuantileFunction, iPosition:=0)
-        clsRepFunction.AddParameter("len", clsRFunctionParameter:=clsDataFunction, iPosition:=1)
-
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRepFunction.ToScript, 66)
+        ' Get the currently selected dataset
+        strSelectedData = ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
+        If chkShowParameters.Checked Then
+            strQuantileCommand = "quantile(x = " & strSelectedData & ", probs = 0.5, na.rm = TRUE, names = FALSE, type = 3)"
+        Else
+            strQuantileCommand = "quantile(x= " & strSelectedData & ", probs = 0.5,  na.rm = TRUE, type = 3)"
+        End If
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strQuantileCommand, 1)
     End Sub
 
     Private Sub cmdIQR_Click(sender As Object, e As EventArgs) Handles cmdIQR.Click
