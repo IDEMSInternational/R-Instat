@@ -94,10 +94,19 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
            # mmtable2 package from GitHub added manually to list
            # install with devtools::install_github("ianmoran11/mmtable2")
            # aida-package package from GitHub added manually to list
-            # install with remotes::install_github('michael-franke/aida-package')
-            # CDT package from GitHub added manually to list
-            # install with devtools::install_github("rijaf-iri/CDT")
-           "mmtable2",  "aida", "CDT"
+           # install with remotes::install_github('michael-franke/aida-package')
+           # CDT package from GitHub added manually to list
+           # install with devtools::install_github("rijaf-iri/CDT")
+           # instatClimatic package from GitHub added manually to list
+           # install with devtools::install_github("IDEMSInternational/instatClimatic", upgrade = "always")
+           # instatExtras package from GitHub added manually to list
+           # install with GitHub devtools::install_github("IDEMSInternational/instatExtras", upgrade = "always")
+           # databook package from GitHub added manually to list
+           # install with devtools::install_github("IDEMSInternational/databook", upgrade = "always")
+           # instatCalculations package from GitHub added manually to list
+           # install with GitHub devtools::install_github("IDEMSInternational/instatCalculations", upgrade = "always")
+           
+           "mmtable2",  "aida", "CDT", "instatExtras", "instatClimatic", "databook", "instatCalculations"
            )
 
 versions <- c("1.4-8", "1.3-7", "1.24", "0.1.5", "1.2.1.1", "2.8.0", 
@@ -180,6 +189,11 @@ versions <- c("1.4-8", "1.3-7", "1.24", "0.1.5", "1.2.1.1", "2.8.0",
               # mmtable2 package from GitHub added manually to list
               # aida-package package from GitHub added manually to list
               # CDT package from GitHub added manually to list
+              # instatClimatic package from GitHub added manually to list
+              # instatExtras package from GitHub added manually to list
+              # databook package from GitHub added manually to list
+              # instatCalculations package from GitHub added manually to list
+              
               "0.1.3","0.4.3","6.5" 
               )
 
@@ -205,7 +219,10 @@ load_R_Instat_packages <- function() {
   # tidyr loaded because unite() function is required by mmtable() function from mmtable2 package
   # purrr loaded because map_int() is required  by function(s) such as header_top_left() from mmtable2 package
   # mc2d loaded because of triangular and continuous empirical distributions
-  packs_to_load <- c("purrr", "plyr", "tidyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield", "circular", "latticeExtra", "texmex", "mc2d")
+  packs_to_load <- c("purrr", "plyr", "tidyr", "dplyr", "ggplot2", "ggthemes", 
+                     "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield",
+                     "circular", "latticeExtra", "texmex", "mc2d", 
+                     "instatExtras", "instatClimatic", "databook", "instatCalculations")
   for(pack in packs_to_load) {
     try(library(pack, character.only = TRUE))
   }
