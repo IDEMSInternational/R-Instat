@@ -124,6 +124,7 @@ Public Class ucrGeom
         Dim clsgeom_blank As New Geoms
         Dim clsgeom_boxplot As New Geoms
         Dim clsgeom_categorical_model As New Geoms
+        Dim clsgeom_connector As New Geoms
         Dim clsgeom_contour As New Geoms
         Dim clsgeom_count As New Geoms
         Dim clsgeom_col As New Geoms
@@ -132,6 +133,7 @@ Public Class ucrGeom
         Dim clsgeom_density As New Geoms
         Dim clsgeom_density2d As New Geoms
         Dim clsgeom_density_2d As New Geoms
+        Dim clsgeom_diverging As New Geoms
         Dim clsgeom_dumbbell As New Geoms
         Dim clsgeom_dotplot As New Geoms
         Dim clsgeom_encircle As New Geoms
@@ -618,6 +620,34 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_col)
 
+        clsgeom_connector.SetGeomName("geom_connector")
+        'Mandatory Aesthetics
+        clsgeom_connector.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}))
+        clsgeom_diverging.AddAesParameter("y", strIncludedDataTypes:=({"numeric", "factor"}))
+        clsgeom_connector.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
+        clsgeom_connector.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_connector.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_connector.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_connector.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
+        clsgeom_connector.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
+        'Warning: Size varies the outline of the bars, hence changes are difficult to see if fill and colour take the same values. 
+        'Warning: Finally it Is Not advised To use size For discrete variables (R message), however, continuous variables mapped to size when the stat is "count" are ignored (no changes in the graph).
+
+        'Geom_connector layer parameters
+        clsgeom_connector.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
+        'Global Layer parameters
+        clsgeom_connector.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        'clsgeom_connector.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "diverging" & Chr(34), Chr(34) & "likert" & Chr(34), "position_diverging(.5)", "position_diverging(cutoff = NULL)", "position_diverging(cutoff = 5)", Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        'See global comments about position.
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_connector.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_connector.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_connector.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
+        clsgeom_connector.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
+        clsgeom_connector.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+
+        'lstAllGeoms.Add(clsgeom_connector)
+
         clsgeom_contour.SetGeomName("geom_contour")
         ''Mandatory
         clsgeom_contour.AddAesParameter("x", bIsMandatory:=True)
@@ -954,6 +984,41 @@ Public Class ucrGeom
         clsgeom_density_ridges_gradient.AddLayerParameter("rel_min_height", "numeric", "0.01", lstParameterStrings:={3, 0, 0.1})
 
         lstAllGeoms.Add(clsgeom_density_ridges_gradient)
+
+        clsgeom_diverging.SetGeomName("geom_diverging")
+        'Mandatory Aesthetics
+        clsgeom_diverging.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}), bIsMandatory:=True)
+        'All data types work as x aesthetics although the most common one is factor.
+        'Warning: the group aesthetic could be added, doesn't send errors, but using group doesn't work very well. Histograms have been designed to deal with continuous x and grouping (using stat_bin). Group is not mentioned as an available aesthetic in the documentation.
+
+        'Optional aesthetics
+        clsgeom_diverging.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}))
+        'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom. This is handled by sdgLayerOptions.ucrSdgLayerBase_ClickReturn. 
+        'Alternatively, one can map a continuous variable to the aesthetics weight (other variable types produce an error as stat_count is using sum for that variable). Each bar will then add the values taken by this value for the different events falling under the count of each bar (proceeds to a weighted count).
+        'Warning: In this case, the label of the y axis is still count, whereas it should take the name of the variable mapped to weight probably. Also, if a variable has been mapped to y (stat is "identity") then the weight aesthetic is ignored (no warning in R).
+        clsgeom_diverging.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
+        clsgeom_diverging.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_diverging.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_diverging.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_diverging.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
+        clsgeom_diverging.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
+        ''Warning: Size varies the outline of the bars, hence changes are difficult to see if fill and colour take the same values. 
+        ''Warning: Finally it Is Not advised To use size For discrete variables (R message), however, continuous variables mapped to size when the stat is "count" are ignored (no changes in the graph).
+
+        'Geom_diverging layer parameters
+        clsgeom_diverging.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
+        'Global Layer parameters
+        clsgeom_diverging.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_diverging.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "diverging" & Chr(34), Chr(34) & "likert" & Chr(34), "position_diverging(.5)", "position_diverging(cutoff = NULL)", "position_diverging(cutoff = 5)", Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        'See global comments about position.
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_diverging.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_diverging.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_diverging.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
+        clsgeom_diverging.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
+        clsgeom_diverging.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+
+        lstAllGeoms.Add(clsgeom_diverging)
 
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
