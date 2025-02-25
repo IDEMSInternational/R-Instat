@@ -2989,7 +2989,7 @@ getRowHeadersWithText <- function(data, column, searchText, ignore_case, use_reg
       searchText <- paste0("^", searchText, "$")
     }
     # Find the rows that match the search text
-    matchingRows <- grepl(searchText, data[[column]], ignore.case = ignore_case, perl = TRUE)
+    matchingRows <- grepl(searchText, data[[column]], ignore.case = ignore_case, fixed  = TRUE)
   }
   # Get the row headers where the search text is found
   rowHeaders <- rownames(data)[matchingRows]
