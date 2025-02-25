@@ -695,6 +695,7 @@ Public Class dlgBarAndPieChart
             ucrChkBinWidth.SetRCode(clsRgeomBarFunction, bReset)
         End If
         HideShowWidth()
+        AddRemoveCountlabel()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -1287,7 +1288,7 @@ Public Class dlgBarAndPieChart
         ChangeParameterName()
         AddStatsParm()
         HideShowWidth()
-
+        AddRemoveCountlabel()
         If rdoTreeMap.Checked Then
             ucrReceiverArea.SetMeAsReceiver()
         ElseIf rdoWordCloud.Checked Then
@@ -1368,6 +1369,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrChkAddLabelsText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsText.ControlValueChanged
+        AddRemoveCountlabel()
         If ucrChkAddLabelsText.Checked Then
             clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=5)
         Else
@@ -1391,15 +1393,24 @@ Public Class dlgBarAndPieChart
         Else
             clsGeomTextFunction.AddParameter("position", "position_identity()", iPosition:=2)
         End If
-        If rdoFrequency.Checked Then
-            clsGeomTextFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=0)
-            If ucrChkAddLabelsText.Checked AndAlso
-                clsTextAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "label") < 0 Then
+    End Sub
+
+
+    Private Sub AddRemoveCountlabel()
+        clsGeomTextFunction.RemoveParameterByName("stat")
+        clsTextAesFunction.RemoveParameterByName("label")
+        If ucrChkAddLabelsText.Checked AndAlso
+          clsTextAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "label") < 0 Then
+            If rdoFrequency.Checked Then
                 clsTextAesFunction.AddParameter("label", "..count..", iPosition:=0)
+                clsGeomTextFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=0)
+            Else
+                clsGeomTextFunction.RemoveParameterByName("stat")
+                clsTextAesFunction.AddParameter("label", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
             End If
         Else
             clsGeomTextFunction.RemoveParameterByName("stat")
-            clsTextAesFunction.AddParameter("label", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+            clsTextAesFunction.RemoveParameterByName("label")
         End If
     End Sub
 
@@ -1450,7 +1461,7 @@ Public Class dlgBarAndPieChart
         If rdoFrequency.Checked AndAlso ucrChkBinWidth.Checked AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric" Then
             clsRgeomBarFunction.AddParameter("stat", Chr(34) & "bin" & Chr(34), iPosition:=1)
         Else
-            clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
+            ChangeParameterName()
         End If
     End Sub
 
