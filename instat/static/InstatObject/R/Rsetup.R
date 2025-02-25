@@ -193,7 +193,7 @@ versions <- c("1.4-8", "1.3-7", "1.24", "0.1.5", "1.2.1.1", "2.8.0",
               # databook package from GitHub added manually to list
               # instatCalculations package from GitHub added manually to list
               
-              "0.1.3","0.4.3","6.5" 
+              "0.1.3", "0.4.3", "6.5", "0.2.1", "0.2.1", "0.1.4", "0.1.2"
               )
 
 ##################################################
