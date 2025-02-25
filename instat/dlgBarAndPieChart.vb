@@ -1395,7 +1395,6 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-
     Private Sub AddRemoveCountlabel()
         clsGeomTextFunction.RemoveParameterByName("stat")
         clsTextAesFunction.RemoveParameterByName("label")
@@ -1464,5 +1463,4 @@ Public Class dlgBarAndPieChart
             ChangeParameterName()
         End If
     End Sub
-
 End Class
