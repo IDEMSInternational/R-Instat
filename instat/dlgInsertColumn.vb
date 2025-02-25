@@ -81,8 +81,8 @@ Public Class dlgInsertColumn
         dctDefaultValue.Add("0", "0")
         dctDefaultValue.Add("Kisumu", Chr(34) & "Kisumu" & Chr(34))
         dctDefaultValue.Add("New Zealand", Chr(34) & "New Zealand" & Chr(34))
-        dctDefaultValue.Add("True", "TRUE")
-        dctDefaultValue.Add("False", "FALSE")
+        dctDefaultValue.Add("TRUE", "TRUE")
+        dctDefaultValue.Add("FALSE", "FALSE")
         ucrInputDefaultValue.SetItems(dctDefaultValue)
         ucrInputDefaultValue.AddQuotesIfUnrecognised = True
         ucrInputDefaultValue.bAllowNonConditionValues = True
