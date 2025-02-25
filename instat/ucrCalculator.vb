@@ -1422,31 +1422,19 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdQuantile_Click(sender As Object, e As EventArgs) Handles cmdQuantile.Click
-        Dim strSelectedData As String
-        Dim strQuantileCommand As String
-
-        ' Get the currently selected dataset
-        strSelectedData = ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
         If chkShowParameters.Checked Then
-            strQuantileCommand = "quantile(x = " & strSelectedData & ", probs = 0.5, na.rm = TRUE, names = FALSE, type = 7)"
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x = , probs = 0.5, na.rm = TRUE, names = FALSE, type = 7)", 54)
         Else
-            strQuantileCommand = "quantile(x= " & strSelectedData & ", probs = 0.5, na.rm = TRUE)"
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= , probs = 0.5, na.rm = TRUE)", 29)
         End If
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strQuantileCommand, 1)
     End Sub
 
     Private Sub cmdQuantile3_Click(sender As Object, e As EventArgs) Handles cmdQuantile3.Click
-        Dim strSelectedData As String
-        Dim strQuantileCommand As String
-
-        ' Get the currently selected dataset
-        strSelectedData = ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
         If chkShowParameters.Checked Then
-            strQuantileCommand = "quantile(x = " & strSelectedData & ", probs = 0.5, na.rm = TRUE, names = FALSE, type = 3)"
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x = , probs = 0.5, na.rm = TRUE, names = FALSE, type = 3)", 54)
         Else
-            strQuantileCommand = "quantile(x= " & strSelectedData & ", probs = 0.5,  na.rm = TRUE, type = 3)"
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= , probs = 0.5, na.rm = TRUE, type = 3)", 39)
         End If
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(strQuantileCommand, 1)
     End Sub
 
     Private Sub cmdIQR_Click(sender As Object, e As EventArgs) Handles cmdIQR.Click
