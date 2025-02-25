@@ -574,7 +574,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCor, "correlation between 2 variables. It is a value between -1 and +1.")
         ttCalculator.SetToolTip(cmdCov, "covariance between 2 variables.")
         ttCalculator.SetToolTip(cmdQuantile, "a quantile, given a value between 0 and 1. So quantile(c(1,2,3,4,10), 0.25) = 2 and is the lower quartile.")
-        ttCalculator.SetToolTip(cmdQuantile3, "quantile for an ordered factor. So quantile(cut, 0.25) for the cut variable from ggplotdiamonds data gives the 3rd level, namely Very Good")
+        ttCalculator.SetToolTip(cmdQuantile3, "quantile for an ordered factor. So quantile(cut, 0.25) for variable from ggplot2 diamonds, gives the 3rd level, namely Very Good")
         ttCalculator.SetToolTip(cmdwhichmax, "Row number of the maximum value. So which.max(c(4,3,10,1,2)) is 3")
         ttCalculator.SetToolTip(cmdwhichmin, "Row number of the minimum value. So which.min(c(4,3,10,1,2)) is 4")
         ttCalculator.SetToolTip(cmdwheremax, "Value of a variable at the which.max position. So for c(""a"",""b"",""c"",""d"",""e""), is ""c"", for the data in which.max tooltip.")
@@ -1425,7 +1425,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x = , probs = 0.5, na.rm = TRUE, names = FALSE, type = 7)", 54)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= , probs = 0.5, na.rm = TRUE)", 29)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x = , probs = 0.5, na.rm = TRUE)", 29)
         End If
     End Sub
 
@@ -1433,7 +1433,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x = , probs = 0.5, na.rm = TRUE, names = FALSE, type = 3)", 54)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x= , probs = 0.5, na.rm = TRUE, type = 3)", 39)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x = , probs = 0.5, na.rm = TRUE, type = 3)", 39)
         End If
     End Sub
 
