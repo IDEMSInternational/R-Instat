@@ -192,9 +192,9 @@ Partial Class sdgTableOptions
         Me.tbpThemes.Controls.Add(Me.ucrChkManualTheme)
         Me.tbpThemes.Controls.Add(Me.ucrCboSelectThemes)
         Me.tbpThemes.Controls.Add(Me.btnManualTheme)
-        Me.tbpThemes.Controls.Add(Me.rdoSelectTheme)
-        Me.tbpThemes.Controls.Add(Me.rdoManualTheme)
-        Me.tbpThemes.Controls.Add(Me.ucrPnlThemesPanel)
+        'Me.tbpThemes.Controls.Add(Me.rdoSelectTheme)
+        'Me.tbpThemes.Controls.Add(Me.rdoManualTheme)
+        'Me.tbpThemes.Controls.Add(Me.ucrPnlThemesPanel)
         Me.tbpThemes.Location = New System.Drawing.Point(4, 29)
         Me.tbpThemes.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbpThemes.Name = "tbpThemes"
@@ -245,36 +245,36 @@ Partial Class sdgTableOptions
         '
         'rdoSelectTheme
         '
-        Me.rdoSelectTheme.AutoSize = True
-        Me.rdoSelectTheme.Checked = True
-        Me.rdoSelectTheme.Location = New System.Drawing.Point(33, 48)
-        Me.rdoSelectTheme.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.rdoSelectTheme.Name = "rdoSelectTheme"
-        Me.rdoSelectTheme.Size = New System.Drawing.Size(128, 24)
-        Me.rdoSelectTheme.TabIndex = 0
-        Me.rdoSelectTheme.TabStop = True
-        Me.rdoSelectTheme.Text = "Select Theme"
-        Me.rdoSelectTheme.UseVisualStyleBackColor = True
+        'Me.rdoSelectTheme.AutoSize = True
+        'Me.rdoSelectTheme.Checked = True
+        'Me.rdoSelectTheme.Location = New System.Drawing.Point(33, 48)
+        'Me.rdoSelectTheme.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        'Me.rdoSelectTheme.Name = "rdoSelectTheme"
+        'Me.rdoSelectTheme.Size = New System.Drawing.Size(128, 24)
+        'Me.rdoSelectTheme.TabIndex = 0
+        'Me.rdoSelectTheme.TabStop = True
+        'Me.rdoSelectTheme.Text = "Select Theme"
+        'Me.rdoSelectTheme.UseVisualStyleBackColor = True
         '
         'rdoManualTheme
         '
-        Me.rdoManualTheme.AutoSize = True
-        Me.rdoManualTheme.Location = New System.Drawing.Point(33, 94)
-        Me.rdoManualTheme.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.rdoManualTheme.Name = "rdoManualTheme"
-        Me.rdoManualTheme.Size = New System.Drawing.Size(135, 24)
-        Me.rdoManualTheme.TabIndex = 1
-        Me.rdoManualTheme.Text = "Manual Theme"
-        Me.rdoManualTheme.UseVisualStyleBackColor = True
+        'Me.rdoManualTheme.AutoSize = True
+        'Me.rdoManualTheme.Location = New System.Drawing.Point(33, 94)
+        'Me.rdoManualTheme.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        'Me.rdoManualTheme.Name = "rdoManualTheme"
+        'Me.rdoManualTheme.Size = New System.Drawing.Size(135, 24)
+        'Me.rdoManualTheme.TabIndex = 1
+        'Me.rdoManualTheme.Text = "Manual Theme"
+        'Me.rdoManualTheme.UseVisualStyleBackColor = True
         '
         'ucrPnlThemesPanel
         '
-        Me.ucrPnlThemesPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlThemesPanel.Location = New System.Drawing.Point(18, 25)
-        Me.ucrPnlThemesPanel.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrPnlThemesPanel.Name = "ucrPnlThemesPanel"
-        Me.ucrPnlThemesPanel.Size = New System.Drawing.Size(524, 108)
-        Me.ucrPnlThemesPanel.TabIndex = 4
+        'Me.ucrPnlThemesPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        'Me.ucrPnlThemesPanel.Location = New System.Drawing.Point(18, 25)
+        'Me.ucrPnlThemesPanel.Margin = New System.Windows.Forms.Padding(9)
+        'Me.ucrPnlThemesPanel.Name = "ucrPnlThemesPanel"
+        'Me.ucrPnlThemesPanel.Size = New System.Drawing.Size(524, 108)
+        'Me.ucrPnlThemesPanel.TabIndex = 4
         '
         'tbpOtherStyles
         '
