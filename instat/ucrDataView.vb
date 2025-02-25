@@ -23,6 +23,7 @@ Public Class ucrDataView
     Private _clsDataBook As clsDataBook
     Private _grid As IDataViewGrid
     Private bOnlyUpdateOneCell As Boolean = False
+    Private _hasChanged As Boolean
 
     Public WriteOnly Property DataBook() As clsDataBook
         Set(value As clsDataBook)
@@ -157,8 +158,10 @@ Public Class ucrDataView
                 RefreshDisplayInformation()
             End If
         End If
+        _hasChanged = True
         EnableDisableUndoMenu()
         _grid.Focus()
+        frmMain.EnableDisbaleViewSwapMenu(_clsDataBook.DataFrames.Count > 0)
     End Sub
 
     ''' <summary>
@@ -184,6 +187,23 @@ Public Class ucrDataView
     Public Function GetCurrentDataFrameNameFocus() As String
         Return If(_grid.CurrentWorksheet Is Nothing, Nothing, _grid.CurrentWorksheet.Name)
     End Function
+
+    Public Property HasDataChanged() As Boolean
+        Get
+            Dim currentDataFrame = GetCurrentDataFrameFocus()
+            If currentDataFrame IsNot Nothing AndAlso currentDataFrame.clsVisibleDataFramePage IsNot Nothing Then
+                Return currentDataFrame.clsVisibleDataFramePage.HasDataChangedForAutoSave
+            End If
+            Return False ' Or a default value
+        End Get
+        Set(ByVal value As Boolean)
+            Dim currentDataFrame = GetCurrentDataFrameFocus()
+            If currentDataFrame IsNot Nothing AndAlso currentDataFrame.clsVisibleDataFramePage IsNot Nothing Then
+                currentDataFrame.clsVisibleDataFramePage.HasDataChangedForAutoSave = value
+            End If
+            ' Optionally handle the case where currentDataFrame is Nothing
+        End Set
+    End Property
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
         If GetSelectedColumns.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
@@ -276,6 +296,10 @@ Public Class ucrDataView
     Public Function GetWorkSheetCount() As Integer
         Return _grid.GetWorksheetCount
     End Function
+
+    Public Sub RemoveAllBackgroundColors()
+        _grid.RemoveAllBackgroundColors()
+    End Sub
 
     Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False)
         _grid.AdjustColumnWidthAfterWrapping(strColumn, bApplyWrap)
@@ -466,6 +490,10 @@ Public Class ucrDataView
         End If
     End Sub
 
+    Public Function IsColumnSelectionApplied() As Boolean
+        Return GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied
+    End Function
+
     Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
         Return _grid.GetSelectedColumns()
     End Function
@@ -506,12 +534,12 @@ Public Class ucrDataView
         Return GetSelectedRows.LastOrDefault()
     End Function
 
-    Private Sub StartWait()
+    Public Sub StartWait()
         Cursor = Cursors.WaitCursor
         _grid.bEnabled = False
     End Sub
 
-    Private Sub EndWait()
+    Public Sub EndWait()
         _grid.bEnabled = True
         Cursor = Cursors.Default
     End Sub
@@ -576,12 +604,6 @@ Public Class ucrDataView
     Private Sub mnuUnfreeze_Click(sender As Object, e As EventArgs)
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.UnFreezeColumns()
-        EndWait()
-    End Sub
-
-    Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
         EndWait()
     End Sub
 
@@ -694,7 +716,20 @@ Public Class ucrDataView
             Else
                 Dim bCheckLabels As Boolean = GetCurrentDataFrameFocus().clsPrepareFunctions.CheckHasLabels(strColumn)
                 If bCheckLabels Then
-                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                    frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
+                    frmConvertToNumeric.SetColumnName(strColumn)
+                    frmConvertToNumeric.CheckLabels(bCheckLabels)
+                    frmConvertToNumeric.SetNonNumeric(iNonNumericValues)
+                    frmConvertToNumeric.ShowDialog()
+                    ' Yes for "normal" convert and No for "labelled" convert
+                    Select Case frmConvertToNumeric.DialogResult
+                        Case DialogResult.Yes
+                            GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                        Case DialogResult.No
+                            GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
+                        Case DialogResult.Cancel
+                            Continue For
+                    End Select
                 Else
                     frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().strName)
                     frmConvertToNumeric.SetColumnName(strColumn)

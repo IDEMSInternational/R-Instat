@@ -36,11 +36,10 @@ Partial Class sdgTableOptions
         Me.tbpSourceNotes = New System.Windows.Forms.TabPage()
         Me.ucrSourceNotes = New instat.ucrSourceNotes()
         Me.tbpThemes = New System.Windows.Forms.TabPage()
+        Me.ucrChkSelectTheme = New instat.ucrCheck()
+        Me.ucrChkManualTheme = New instat.ucrCheck()
         Me.ucrCboSelectThemes = New instat.ucrInputComboBox()
         Me.btnManualTheme = New System.Windows.Forms.Button()
-        Me.rdoSelectTheme = New System.Windows.Forms.RadioButton()
-        Me.rdoManualTheme = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlThemesPanel = New instat.UcrPanel()
         Me.tbpOtherStyles = New System.Windows.Forms.TabPage()
         Me.ucrOtherStyles = New instat.ucrOtherStyles()
         Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
@@ -189,6 +188,8 @@ Partial Class sdgTableOptions
         '
         'tbpThemes
         '
+        Me.tbpThemes.Controls.Add(Me.ucrChkSelectTheme)
+        Me.tbpThemes.Controls.Add(Me.ucrChkManualTheme)
         Me.tbpThemes.Controls.Add(Me.ucrCboSelectThemes)
         Me.tbpThemes.Controls.Add(Me.btnManualTheme)
         Me.tbpThemes.Controls.Add(Me.rdoSelectTheme)
@@ -201,6 +202,24 @@ Partial Class sdgTableOptions
         Me.tbpThemes.TabIndex = 6
         Me.tbpThemes.Text = "Themes"
         Me.tbpThemes.UseVisualStyleBackColor = True
+        '
+        'ucrChkSelectTheme
+        '
+        Me.ucrChkSelectTheme.AutoSize = True
+        Me.ucrChkSelectTheme.Checked = False
+        Me.ucrChkSelectTheme.Location = New System.Drawing.Point(25, 29)
+        Me.ucrChkSelectTheme.Name = "ucrChkSelectTheme"
+        Me.ucrChkSelectTheme.Size = New System.Drawing.Size(182, 23)
+        Me.ucrChkSelectTheme.TabIndex = 29
+        '
+        'ucrChkManualTheme
+        '
+        Me.ucrChkManualTheme.AutoSize = True
+        Me.ucrChkManualTheme.Checked = False
+        Me.ucrChkManualTheme.Location = New System.Drawing.Point(25, 57)
+        Me.ucrChkManualTheme.Name = "ucrChkManualTheme"
+        Me.ucrChkManualTheme.Size = New System.Drawing.Size(182, 23)
+        Me.ucrChkManualTheme.TabIndex = 28
         '
         'ucrCboSelectThemes
         '
@@ -319,9 +338,6 @@ Partial Class sdgTableOptions
     Friend WithEvents tbpThemes As TabPage
     Friend WithEvents ucrCboSelectThemes As ucrInputComboBox
     Friend WithEvents btnManualTheme As Button
-    Friend WithEvents rdoSelectTheme As RadioButton
-    Friend WithEvents rdoManualTheme As RadioButton
-    Friend WithEvents ucrPnlThemesPanel As UcrPanel
     Friend WithEvents ucrSourceNotes As ucrSourceNotes
     Friend WithEvents tbpRows As TabPage
     Friend WithEvents ucrHeader As ucrHeader
@@ -334,4 +350,6 @@ Partial Class sdgTableOptions
     Friend WithEvents ucrSdgBaseButtons As ucrButtonsSubdialogue
     Friend WithEvents tbpOtherStyles As TabPage
     Friend WithEvents ucrOtherStyles As ucrOtherStyles
+    Friend WithEvents ucrChkSelectTheme As ucrCheck
+    Friend WithEvents ucrChkManualTheme As ucrCheck
 End Class

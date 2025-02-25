@@ -7,8 +7,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppVersion= {#GetStringFileInfo("instat\bin\x64\Release\instat.exe", "FileVersion")}
 AppId={{5455FC1A-85BE-4679-B600-8A1A4FC3CDD9-{#SetupSetting("AppVersion")}}
-AppName=R-Instat
-AppVerName ={code:GetShortAppVersion|{#SetupSetting("AppVersion")}}
+AppName=R-Instat {#SetupSetting("AppVersion")}
+AppVerName =R-Instat {#SetupSetting("AppVersion")}
 
 AppPublisher=African Maths Initiative
 AppPublisherURL=http://r-instat.org/

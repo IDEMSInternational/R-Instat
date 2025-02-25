@@ -148,9 +148,9 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddFunctionNamesCondition(rdoTreeMap, {"geom_treemap", "geom_treemap_text"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoWordCloud, {"geom_text_wordcloud", "scale_size_area"})
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrReceiverByFactor, ucrInputBarChartPositions, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart, ucrChkBacktoback}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrReceiverByFactor, ucrInputBarChartPositions, ucrChkAddLabelsText, ucrVariablesAsFactorForBarChart, ucrChkBacktoback}, {rdoFrequency, rdoValue}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverX, ucrChkReorderValue, ucrInputAddReorder, ucrChkLollipop}, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrChkReorderFrequency, ucrInputAddReorder}, {rdoFrequency}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkReorderFrequency, ucrChkBinWidth, ucrInputAddReorder}, {rdoFrequency}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverArea, ucrReceiverFill, ucrChkLayout, ucrChkStart, ucrChkAddLabelsTreemap}, {rdoTreeMap}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverWordcloudAngle, ucrReceiverWordcloudColor, ucrReceiverWordcloudLabel, ucrReceiverWordcloudSize, ucrChkIncreaseSize}, {rdoWordCloud}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
@@ -300,6 +300,12 @@ Public Class dlgBarAndPieChart
         ucrNudLollipopSize.Increment = 1
         ucrNudLollipopSize.Minimum = 1
         ucrNudLollipopSize.Maximum = 15
+
+        ucrChkBinWidth.SetText("Binwidth")
+        ucrChkBinWidth.AddToLinkedControls({ucrInputWidth}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1.5)
+
+        ucrInputWidth.SetParameter(New RParameter("binwidth", 3))
+        ucrInputWidth.SetValidationTypeAsNumeric()
 
         ucrChkLollipop.SetText("Lollipop")
         ucrChkLollipop.AddParameterPresentCondition(True, "geom_lollipop")
@@ -481,7 +487,6 @@ Public Class dlgBarAndPieChart
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
         clsRgeomBarFunction.AddParameter("position", Chr(34) & "stack" & Chr(34), iPosition:=0)
-        clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -641,6 +646,8 @@ Public Class dlgBarAndPieChart
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        HideShowWidth()
+        EnableDisablesOptions()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -679,12 +686,15 @@ Public Class dlgBarAndPieChart
         ucrChkReorderFrequency.SetRCode(clsDummyFunction, bReset)
         ucrChkLegend.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputWidth.SetRCode(clsRgeomBarFunction, bReset)
 
         If bReset Then
             ucrChkStart.SetRCode(clsGeomTreemapFunction, bReset)
             ucrChkLayout.SetRCode(clsGeomTreemapFunction, bReset)
             ucrChkIncreaseSize.SetRCode(clsScaleSizeAreaFunction, bReset)
+            ucrChkBinWidth.SetRCode(clsRgeomBarFunction, bReset)
         End If
+        HideShowWidth()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -814,6 +824,15 @@ Public Class dlgBarAndPieChart
 
     Private Sub toolStripMenuItemPointOptions_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemTextOptions.Click
         openSdgLayerOptions(clsGeomTextFunction, clsTextAesFunction)
+    End Sub
+
+    Private Sub EnableDisablesOptions()
+        toolStripMenuItemBarchartOptions.Enabled = rdoFrequency.Checked OrElse rdoValue.Checked
+        toolStripMenuItemTextOptions.Enabled = ucrChkAddLabelsText.Checked AndAlso (rdoValue.Checked OrElse rdoFrequency.Checked)
+        toolStripMenuItemTreemapTextOptionsOptions.Enabled = ucrChkAddLabelsTreemap.Checked AndAlso rdoTreeMap.Checked
+        toolStripMenuItemWordcloudOptions.Enabled = rdoWordCloud.Checked AndAlso rdoWordCloud.Checked
+        toolStripMenuItemTreemapOptions.Enabled = rdoTreeMap.Checked
+        toolStripMenuItemLollipopOptions.Enabled = ucrChkLollipop.Checked AndAlso rdoValue.Checked
     End Sub
 
     Private Sub SetDialogOptions()
@@ -1264,7 +1283,11 @@ Public Class dlgBarAndPieChart
         ucrInputAddReorder.ControlValueChanged, ucrInputReorderValue.ControlValueChanged, ucrNudMaxSize.ControlValueChanged,
         ucrChkIncreaseSize.ControlValueChanged, ucrChkLollipop.ControlValueChanged
         SetDialogOptions()
+        EnableDisablesOptions()
         ChangeParameterName()
+        AddStatsParm()
+        HideShowWidth()
+
         If rdoTreeMap.Checked Then
             ucrReceiverArea.SetMeAsReceiver()
         ElseIf rdoWordCloud.Checked Then
@@ -1284,18 +1307,18 @@ Public Class dlgBarAndPieChart
 
     Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged,
         ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+        clsBaseOperator.RemoveParameterByName("geom_bar1")
+        clsBaseOperator.RemoveParameterByName("geom_bar2")
+        clsBaseOperator.RemoveParameterByName("scale_y_symmetric")
+        clsAesFunction1.RemoveParameterByName("y")
+        clsAesFunction2.RemoveParameterByName("y")
+        clsRgeomBarFunction2.RemoveParameterByName("aes")
+        clsRgeomBarFunction1.RemoveParameterByName("aes")
+        clsRggplotFunction.RemoveParameterByName("aes")
         If rdoFrequency.Checked OrElse rdoValue.Checked Then
-            clsBaseOperator.RemoveParameterByName("geom_bar1")
-            clsBaseOperator.RemoveParameterByName("geom_bar2")
-            clsBaseOperator.RemoveParameterByName("scale_y_symmetric")
-            clsAesFunction1.RemoveParameterByName("y")
-            clsAesFunction2.RemoveParameterByName("y")
-            clsRgeomBarFunction2.RemoveParameterByName("aes")
-            clsRgeomBarFunction1.RemoveParameterByName("aes")
             ucrChkPolarCoordinates.Enabled = True
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
-            clsRggplotFunction.RemoveParameterByName("aes")
             If ucrChkBacktoback.Checked Then
                 ucrChkPolarCoordinates.Enabled = False
                 ucrChkPolarCoordinates.Checked = Not ucrChkBacktoback.Checked
@@ -1317,9 +1340,14 @@ Public Class dlgBarAndPieChart
                     clsRgeomBarFunction1.AddParameter("aes", clsRFunctionParameter:=clsAesFunction1, iPosition:=1, bIncludeArgumentName:=False)
                 End If
             End If
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_bar")
+            clsRggplotFunction.RemoveParameterByName("mapping")
         End If
         ChangeParameterName()
         SetGeomTextOptions()
+        HideShowWidth()
+        AddStatsParm()
     End Sub
 
     Private Sub ucrChkPolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPolarCoordinates.ControlValueChanged, ucrPnlPolar.ControlValueChanged,
@@ -1390,10 +1418,40 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrChkAddLabelsTreemap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabelsTreemap.ControlValueChanged
+        EnableDisablesOptions()
         If ucrChkAddLabelsTreemap.Checked Then
             clsBaseOperator.AddParameter("geom_treemap_text", clsRFunctionParameter:=clsGeomTreemapTextFunction, iPosition:=3)
         Else
             clsBaseOperator.RemoveParameterByName("geom_treemap_text")
         End If
     End Sub
+
+    Private Sub ucrChkBinWidth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBinWidth.ControlValueChanged, ucrInputWidth.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged
+        If ucrChkBinWidth.Checked AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric" Then
+            clsRgeomBarFunction.AddParameter("binwidth", ucrInputWidth.GetText, iPosition:=4)
+        Else
+            clsRgeomBarFunction.RemoveParameterByName("binwidth")
+        End If
+        AddStatsParm()
+        HideShowWidth()
+    End Sub
+
+    Private Sub HideShowWidth()
+        If rdoFrequency.Checked AndAlso (Not ucrVariablesAsFactorForBarChart.IsEmpty AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric") Then
+            ucrChkBinWidth.Visible = True
+            ucrInputWidth.Visible = ucrChkBinWidth.Checked
+        Else
+            ucrChkBinWidth.Visible = False
+            ucrInputWidth.Visible = False
+        End If
+    End Sub
+
+    Private Sub AddStatsParm()
+        If rdoFrequency.Checked AndAlso ucrChkBinWidth.Checked AndAlso ucrVariablesAsFactorForBarChart.ucrSingleVariable.strCurrDataType = "numeric" Then
+            clsRgeomBarFunction.AddParameter("stat", Chr(34) & "bin" & Chr(34), iPosition:=1)
+        Else
+            clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
+        End If
+    End Sub
+
 End Class
