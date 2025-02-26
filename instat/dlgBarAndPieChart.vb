@@ -1395,21 +1395,19 @@ Public Class dlgBarAndPieChart
         End If
     End Sub
 
-    Private Sub AddRemoveCountlabel()
+    Private Sub AddRemoveCountLabel()
+        ' Remove existing parameters before adding new ones
         clsGeomTextFunction.RemoveParameterByName("stat")
         clsTextAesFunction.RemoveParameterByName("label")
-        If ucrChkAddLabelsText.Checked AndAlso
-          clsTextAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "label") < 0 Then
+
+        ' Add label and stat parameters if checkbox is checked and label isn't already set
+        If ucrChkAddLabelsText.Checked AndAlso Not clsTextAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "label") >= 0 Then
             If rdoFrequency.Checked Then
                 clsTextAesFunction.AddParameter("label", "..count..", iPosition:=0)
-                clsGeomTextFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=0)
+                clsGeomTextFunction.AddParameter("stat", """count""", iPosition:=0)
             Else
-                clsGeomTextFunction.RemoveParameterByName("stat")
                 clsTextAesFunction.AddParameter("label", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
             End If
-        Else
-            clsGeomTextFunction.RemoveParameterByName("stat")
-            clsTextAesFunction.RemoveParameterByName("label")
         End If
     End Sub
 
