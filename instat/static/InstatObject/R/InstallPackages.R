@@ -40,7 +40,7 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
            "FNN", "fontawesome", "forcats", "foreach", "forecast", "foreign", 
            "formattable", "formula.tools", "Formula", "fracdiff", "fs", 
            "future.apply", "future", "gapminder", "gclus", "gcookbook", 
-           "generics", "GenSA", "geomtextpath", "geosphere", "gert",
+           "generics", "GenSA", "geomtextpath", "geosphere", "gert", "getPass", 
            "GGally", "ggalt", "ggeffects", "ggfittext", "ggformula", "ggfortify", 
            "ggmosaic", "ggplot2", "ggplotify", "ggpmisc", "ggpp", "ggpubr", 
            "ggrepel", "ggridges", "ggsci", "ggside", "ggsignif", "ggstats", 
@@ -93,13 +93,12 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
            "shinyFiles", "shinyjs", "shinystan", "shinythemes", "shinyWidgets", 
            "sjlabelled", "sjmisc", "sjPlot", "sjstats", "skimr", "snakecase", 
            "SnowballC", "sodium", "sourcetools", "sp", "spam", "SparseM", 
-           "sparsevctrs", "SPEI", "splines2", "splus2R", "SQUAREM", "StanHeaders", 
            "statip", "statquotes", "statsr", "stinepack", "stringdist", 
-           #"stringi", 
-           #"stringr", 
+           #"stringi",
+           #"stringr",
            "strucchange", "styler", "survival", "svglite", 
            "sys", "systemfonts", "tensorA", 
-           #"terra", 
+           #"terra",
            "testthat", "texmex", 
            "textshaping", "TH.data", "threejs", "tibble", "tidyr", "tidyselect", 
            "tidytext", "timechange", "timeDate", "tinytex", "TLMoments", 
@@ -129,3 +128,7 @@ devtools::install_github("michael-franke/aida-package")
 devtools::install_github("rijaf-iri/CDT")
 devtools::install_github("IDEMSInternational/rapidpror")
 devtools::install_github("IDEMSInternational/epicsawrap")
+devtools::install_github("IDEMSInternational/instatClimatic", upgrade = "always")
+devtools::install_github("IDEMSInternational/instatExtras", upgrade = "always")
+devtools::install_github("IDEMSInternational/databook", upgrade = "always")
+devtools::install_github("IDEMSInternational/instatCalculations", upgrade = "always")
