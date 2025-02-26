@@ -927,7 +927,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrChkBinWidth.Location = New System.Drawing.Point(12, 270)
         Me.ucrChkBinWidth.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkBinWidth.Name = "ucrChkBinWidth"
-        Me.ucrChkBinWidth.Size = New System.Drawing.Size(144, 23)
+        Me.ucrChkBinWidth.Size = New System.Drawing.Size(127, 23)
         Me.ucrChkBinWidth.TabIndex = 90
         '
         'dlgBarAndPieChart
