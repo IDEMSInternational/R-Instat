@@ -161,6 +161,7 @@ Public Class ucrDataView
         _hasChanged = True
         EnableDisableUndoMenu()
         _grid.Focus()
+        frmMain.EnableDisbaleViewSwapMenu(_clsDataBook.DataFrames.Count > 0)
     End Sub
 
     ''' <summary>
@@ -295,6 +296,10 @@ Public Class ucrDataView
     Public Function GetWorkSheetCount() As Integer
         Return _grid.GetWorksheetCount
     End Function
+
+    Public Sub RemoveAllBackgroundColors()
+        _grid.RemoveAllBackgroundColors()
+    End Sub
 
     Public Sub AdjustColumnWidthAfterWrapping(strColumn As String, Optional bApplyWrap As Boolean = False)
         _grid.AdjustColumnWidthAfterWrapping(strColumn, bApplyWrap)

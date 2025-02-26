@@ -48,6 +48,8 @@ Public Interface IDataViewGrid
 
     Sub Focus()
 
+    Sub RemoveAllBackgroundColors()
+
     Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
 
     Function GetFirstRowHeader() As String

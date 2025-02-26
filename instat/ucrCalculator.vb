@@ -2077,27 +2077,27 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ifelse(test= , ""yes"" , ""no"")", 15)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ifelse( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ifelse(, , )", 5)
         End If
     End Sub
 
     Private Sub cmdmatch_Click(sender As Object, e As EventArgs) Handles cmdmatch.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("match( )", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("match(, )", 3)
     End Sub
 
     Private Sub cmdwhen_Click(sender As Object, e As EventArgs) Handles cmdwhen.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::case_when( )", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::case_when(, )", 3)
     End Sub
 
     Private Sub cmdBetween_Click(sender As Object, e As EventArgs) Handles cmdBetween.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::between( )", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::between(, , )", 5)
     End Sub
 
     Private Sub cmdNear_Click(sender As Object, e As EventArgs) Handles cmdNear.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near(x= , y= )", 6)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::near(, )", 3)
         End If
     End Sub
 
@@ -2105,7 +2105,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rep(x = , times = , length = , each = )", 32)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rep( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("rep(, )", 3)
         End If
     End Sub
 
@@ -2113,7 +2113,7 @@ Public Class ucrCalculator
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("seq(from = , to = , by = , length =  )", 28)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("seq( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("seq(, , )", 5)
         End If
     End Sub
 
@@ -6104,33 +6104,33 @@ Public Class ucrCalculator
 
     Private Sub cmdFrac10_Click(sender As Object, e As EventArgs) Handles cmdFrac10.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac10(x= )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac10(x= )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac10( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac10( )", 2)
         End If
     End Sub
 
     Private Sub cmdFrac20_Click(sender As Object, e As EventArgs) Handles cmdFrac20.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac20(x= )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac20(x= )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac20( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac20( )", 2)
         End If
     End Sub
 
     Private Sub cmdFrac100_Click(sender As Object, e As EventArgs) Handles cmdFrac100.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac100(x= )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac100(x= )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac100( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac100( )", 2)
         End If
     End Sub
 
     Private Sub cmdFracDen_Click(sender As Object, e As EventArgs) Handles cmdFracDen.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den(x= ,den= )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac_den(x= ,den= )", 8)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den(, )", 3)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac_den(, )", 3)
         End If
     End Sub
 End Class

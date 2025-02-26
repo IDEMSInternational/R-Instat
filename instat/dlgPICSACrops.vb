@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports System.Text.RegularExpressions
+
 
 Public Class dlgPICSACrops
     Private clsCropsFunction As New RFunction
@@ -23,6 +25,11 @@ Public Class dlgPICSACrops
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private strCurrDataName As String = ""
+    Private lstEndReceivers As New List(Of ucrReceiverSingle)
+    Private lstStartReceivers As New List(Of ucrReceiverSingle)
+    Private bisFilling As Boolean = False
+
+    Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
     Private Sub dlgPICSACrops_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -36,6 +43,8 @@ Public Class dlgPICSACrops
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
+        AutoFillReceivers(lstEndReceivers)
+        AutoFillReceivers(lstStartReceivers)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -43,8 +52,22 @@ Public Class dlgPICSACrops
         ' Sub dialog not yet created.
         cmdOptions.Visible = False
 
+        Dim kvpEnd As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("end_season", {"end_season", "end_rains", "end_rain_filled", "end_season_filled"}.ToList())
+        Dim kvpStart As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("start_rain", {"start_rain"}.ToList())
+
+        lstRecognisedTypes.AddRange({kvpEnd, kvpStart})
+
+        lstEndReceivers.AddRange({ucrReceiverEnd})
+
+        lstStartReceivers.AddRange({ucrReceiverStart})
+
+        ucrSelectorForCrops.SetLabelText("Data Frame (Daily):")
         ucrSelectorForCrops.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForCrops.SetParameterIsString()
+
+        ucrSelectorSummary.SetLabelText("Data Frame (Summary):")
+        ucrSelectorSummary.SetParameter(New RParameter("season_data_name", 8))
+        ucrSelectorSummary.SetParameterIsString()
 
         'Year Receiver
         ucrReceiverYear.Selector = ucrSelectorForCrops
@@ -75,18 +98,18 @@ Public Class dlgPICSACrops
         ucrReceiverDay.bAutoFill = True
 
         'Start Receiver
+        ucrReceiverStart.Selector = ucrSelectorSummary
         ucrReceiverStart.SetParameter(New RParameter("start_day", 8))
         ucrReceiverStart.SetParameterIsString()
         ucrReceiverStart.SetDataType("numeric")
-        ucrReceiverStart.Selector = ucrSelectorForCrops
-        ucrReceiverStart.bAttachedToPrimaryDataFrame = False
+        ucrReceiverStart.Tag = "start_rain"
 
         'End Receiver
-        ucrReceiverEnd.Selector = ucrSelectorForCrops
+        ucrReceiverEnd.Selector = ucrSelectorSummary
         ucrReceiverEnd.SetParameter(New RParameter("end_day", 9))
         ucrReceiverEnd.SetParameterIsString()
         ucrReceiverEnd.SetDataType("numeric")
-        ucrReceiverEnd.bAttachedToPrimaryDataFrame = False
+        ucrReceiverEnd.Tag = "end_season"
 
         ucrPnlStartCheck.AddRadioButton(rdoYes)
         ucrPnlStartCheck.AddRadioButton(rdoNo)
@@ -97,23 +120,27 @@ Public Class dlgPICSACrops
 
         ucrInputPlantingDates.SetParameter(New RParameter("plant_days", 5))
         ucrInputPlantingDates.SetValidationTypeAsNumericList()
-        ucrInputPlantingDates.SetItems({"160", "80, 90, 100, 110, 120", "92, 122, 153", "124, 184, 10", "92, 152, 15"})
+        ucrInputPlantingDates.SetItems({"160", "92, 122, 153", "124, 184, 10", "92, 152, 15"})
         ucrInputPlantingDates.AddQuotesIfUnrecognised = False
         ucrInputPlantingDates.bAllowNonConditionValues = True
+        ttPlanting.SetToolTip(ucrInputPlantingDates.cboInput, " The day number for planting. Starting from January, April 1st is day 92. Starting from July, November 1st is day 124. ")
+
 
         'Planting Length 
         ucrInputCropLengths.SetParameter(New RParameter("plant_lengths", 6))
         ucrInputCropLengths.SetValidationTypeAsNumericList()
-        ucrInputCropLengths.SetItems({"120", "100, 110, 120, 130, 140", "80, 90, 100, 110", "120, 150, 180", "60, 120, 10"})
+        ucrInputCropLengths.SetItems({"120", "100, 140, 10", "120, 150, 180", "60, 120, 10"})
         ucrInputCropLengths.AddQuotesIfUnrecognised = False
         ucrInputCropLengths.bAllowNonConditionValues = True
+        ttPlanting.SetToolTip(ucrInputCropLengths.cboInput, " The crop duration, in days. Often between 60 days (2 months) and 150 days (5 months). ")
 
         'Water amount 
         ucrInputWaterAmounts.SetParameter(New RParameter("rain_totals", 7))
         ucrInputWaterAmounts.SetValidationTypeAsNumericList()
-        ucrInputWaterAmounts.SetItems({"600", "300, 400, 500, 600, 700", "300, 500, 700", "200, 600, 50", "500, 700, 25"})
+        ucrInputWaterAmounts.SetItems({"600", "300, 500, 700", "200, 600, 50", "500, 700, 25"})
         ucrInputWaterAmounts.AddQuotesIfUnrecognised = False
         ucrInputWaterAmounts.bAllowNonConditionValues = True
+        ttPlanting.SetToolTip(ucrInputWaterAmounts.cboInput, " The amount of water (rainfall) needed for the crop. Usually between 250mm and 1000mm. ")
 
         'Planting Date Panel
         'ucrPnlPlantingDate.SetParameter(New RParameter("planting_days", clsCropsFunction, 5))
@@ -179,6 +206,8 @@ Public Class dlgPICSACrops
 
         'Linking of controls
         ucrChkDataProp.AddToLinkedControls(ucrChkDataCrops, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        AutoFillReceivers(lstEndReceivers)
+        AutoFillReceivers(lstStartReceivers)
     End Sub
 
     Private Sub SetDefaults()
@@ -190,7 +219,9 @@ Public Class dlgPICSACrops
         'Currently this must come before reset to ensure autofilling is done correctly
         'Once autofilling is being triggered correctly this can go after Reset.
         ucrSelectorForCrops.Reset()
+        ucrSelectorSummary.Reset()
         ucrReceiverRainfall.SetMeAsReceiver()
+        ucrReceiverStart.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("check", "both", iPosition:=0)
 
@@ -218,15 +249,14 @@ Public Class dlgPICSACrops
         'TODO This should be done further done.
         ' This ensures the correct data frame is set before attempting to fill the receiver
         'ucrReceiverYear.SetMeAsReceiver()
-        ucrSelectorForCrops.SetDataframe(ucrReceiverYear.GetDataName())
         'Disabled as selector cannot yet auto set when multiple data frame are selected.
-        'ucrSelectorForCrops.SetRCode(clsCropsFunction, bReset)
+        ucrSelectorForCrops.SetRCode(clsCropsFunction, bReset)
+        ucrSelectorSummary.SetRCode(clsCropsFunction, bReset)
         ucrReceiverYear.SetRCode(clsCropsFunction, bReset)
         ucrReceiverStation.SetRCode(clsCropsFunction, bReset)
         ucrReceiverRainfall.SetRCode(clsCropsFunction, bReset)
         ucrReceiverDay.SetRCode(clsCropsFunction, bReset)
         'ucrReceiverStart.SetMeAsReceiver()
-        ucrSelectorForCrops.SetDataframe(ucrReceiverStart.GetDataName())
         ucrReceiverStart.SetRCode(clsCropsFunction, bReset)
         ucrReceiverEnd.SetRCode(clsCropsFunction, bReset)
 
@@ -237,6 +267,8 @@ Public Class dlgPICSACrops
             ucrPnlStartCheck.SetRCode(clsDummyFunction, bReset)
         End If
         AddingStartCheckParm()
+        AutoFillReceivers(lstEndReceivers)
+        AutoFillReceivers(lstStartReceivers)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -258,12 +290,14 @@ Public Class dlgPICSACrops
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSelectorForCrops_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForCrops.ControlValueChanged
+    Private Sub ucrSelectorForCrops_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForCrops.ControlValueChanged, ucrSelectorSummary.ControlValueChanged
         If ucrSelectorForCrops.CurrentReceiver Is Nothing OrElse ucrSelectorForCrops.CurrentReceiver.bAttachedToPrimaryDataFrame Then
             clsCropsFunction.AddParameter("data_name", Chr(34) & ucrSelectorForCrops.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         Else
-            clsCropsFunction.AddParameter("season_data_name", Chr(34) & ucrSelectorForCrops.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=8)
+            clsCropsFunction.AddParameter("season_data_name", Chr(34) & ucrSelectorSummary.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=8)
         End If
+        AutoFillReceivers(lstEndReceivers)
+        AutoFillReceivers(lstStartReceivers)
     End Sub
 
     Private Sub PlantingDaysParam()
@@ -371,4 +405,59 @@ Public Class dlgPICSACrops
         End If
     End Sub
 
+    Private Sub AutoFillReceivers(lstReceivers As List(Of ucrReceiverSingle))
+        If bisFilling OrElse lstReceivers Is Nothing Then
+            Exit Sub
+        End If
+
+        bisFilling = True
+
+        Dim lstRecognisedValues As List(Of String)
+        Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorSummary.CurrentReceiver
+        Dim strSelectedValue As String
+        Dim bFound As Boolean = False
+
+        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+            ucrTempReceiver.SetMeAsReceiver()
+            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+
+            If lstRecognisedValues.Count > 0 Then
+                Dim lstAvailable As List(Of String) = ucrSelectorSummary.lstAvailableVariable.Items.Cast(Of ListViewItem) _
+                .Select(Function(item) Regex.Replace(item.Text.ToLower(), "[^\w]", String.Empty)).ToList()
+
+                If lstRecognisedValues.Contains("end_season") AndAlso lstAvailable.Contains("end_season") Then
+                    strSelectedValue = "end_season"
+                Else
+                    strSelectedValue = lstRecognisedValues.FirstOrDefault(Function(val) lstAvailable.Contains(val))
+                End If
+
+                If Not String.IsNullOrEmpty(strSelectedValue) Then
+                    Dim matchingItem As ListViewItem = ucrSelectorSummary.lstAvailableVariable.Items.Cast(Of ListViewItem) _
+                    .FirstOrDefault(Function(item) Regex.Replace(item.Text.ToLower(), "[^\w]", String.Empty) = strSelectedValue)
+
+                    If matchingItem IsNot Nothing Then
+                        ucrTempReceiver.Add(matchingItem.Text, ucrSelectorSummary.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                    End If
+                End If
+            End If
+        Next
+
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+
+        bisFilling = False
+    End Sub
+
+    Private Function GetRecognisedValues(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
 End Class
