@@ -209,6 +209,50 @@ Public Class RLink
         Return bREngineInitialised
     End Function
 
+    Public Function RestartREngine() As Boolean
+        Try
+            If clsEngine IsNot Nothing Then
+                Dim clsSaveFunction As New RFunction
+                clsSaveFunction.SetRCommand("saveRDS")
+                clsSaveFunction.AddParameter("file", Chr(34) & "my_data" & Chr(34))
+                clsSaveFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
+
+                RunScript(clsSaveFunction.ToScript, strComment:="Saving data")
+
+                Dim clsUnloadRPackages As New RFunction
+                clsUnloadRPackages.SetRCommand("unload_R_Instat_packages")
+                'RunScript(clsUnloadRPackages.ToScript, strComment:="Saving data")
+
+                clsEngine.Evaluate("rm(list = ls(all.names = TRUE))") ' Remove hidden objects as well
+                clsEngine.Evaluate("gc()") ' Trigger garbage collection
+                clsEngine.ClearGlobalEnvironment()
+                GC.Collect()
+                GC.WaitForPendingFinalizers()
+                Logger.Info("R engine reset.")
+            End If
+
+            ' Reset initialization flag
+            bREngineInitialised = False
+            clsEngine.ClearGlobalEnvironment()
+
+            ' Attempt to start a new R engine instance
+            If StartREngine() Then
+                MsgBox("R engine restarted successfully.", MsgBoxStyle.Information, "Restart Successful")
+                Return True
+            Else
+                MsgBox("Failed to restart the R engine. Please check the configuration or reinstall R-Instat.",
+                   MsgBoxStyle.Critical, "Restart Failed")
+                Return False
+            End If
+
+        Catch ex As Exception
+            ' Handle any unexpected errors during the restart process
+            MsgBox(ex.Message & Environment.NewLine & "Could not restart the connection to R.",
+               MsgBoxStyle.Critical, "Restart R Engine Failed")
+            Return False
+        End Try
+    End Function
+
     Private Function CheckIfRVersionIsSupported() As Boolean
         Dim bSupported As Boolean = False
         Try
@@ -625,6 +669,7 @@ Public Class RLink
         Dim strExistingNames As String
         Dim expPrefix As SymbolicExpression
 
+        clsGetDefault.SetPackageName("instatExtras")
         clsGetDefault.SetRCommand("next_default_item")
         clsGetDefault.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
         strExistingNames = GetListAsRString(lstItems)
@@ -740,7 +785,7 @@ Public Class RLink
                                       bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
             ElseIf Not clsRStatement.IsAssignment _
                 AndAlso Not String.IsNullOrWhiteSpace(clsRStatement.TextNoFormatting) Then
-                strOutput = GetFileOutput("view_object_data(object = " _
+                strOutput = GetFileOutput("instatExtras::view_object_data(object = " _
                                           & clsRStatement.TextNoFormatting _
                                           & " , object_format = 'text' )", bSilent:=False,
                                           bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
@@ -751,7 +796,7 @@ Public Class RLink
 
             ' Add output to logger
             clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
-                        bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
+                        bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("instatExtras::view_object_data"))
 
             ' Log the script
             LogScript(clsRStatement.Text.TrimEnd(vbCr, vbLf))
@@ -850,7 +895,7 @@ Public Class RLink
                     Dim strRStatementAsSingleLine As String = strRStatement.Replace(vbCr, String.Empty)
                     strRStatementAsSingleLine = strRStatementAsSingleLine.Replace(vbLf, String.Empty)
                     'wrap final command inside view_object_data just in case there is an output object
-                    strOutput = GetFileOutput("view_object_data(object = " & strRStatementAsSingleLine & " , object_format = 'text' )", False, False, Nothing)
+                    strOutput = GetFileOutput("instatExtras::view_object_data(object = " & strRStatementAsSingleLine & " , object_format = 'text' )", False, False, Nothing)
                 Else
                     Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
                 End If
@@ -993,7 +1038,7 @@ Public Class RLink
                         End If
 
                         If bSuccess Then
-                            strOutput = GetFileOutput("view_object_data(object = " & arrExecutableRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
+                            strOutput = GetFileOutput("instatExtras::view_object_data(object = " & arrExecutableRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                         End If
                     End If
 
@@ -2113,6 +2158,7 @@ Public Class RLink
         clsGetColumn.SetRCommand(strInstatDataObject & "$get_columns_from_data")
         clsGetColumn.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
         clsGetColumn.AddParameter("col_names", Chr(34) & strColumn & Chr(34))
+        clsIsBinary.SetPackageName("instatExtras")
         clsIsBinary.SetRCommand("is.binary")
         clsIsBinary.AddParameter("x", clsRFunctionParameter:=clsGetColumn)
         expBinary = RunInternalScriptGetValue(clsIsBinary.ToScript())
@@ -2216,7 +2262,7 @@ Public Class RLink
         Dim strRStatementTrimmed As String = TrimStartRStatement(strRStatement)
         Return strRStatementTrimmed.StartsWith(strInstatDataObject & "$get_object_data") _
                OrElse strRStatementTrimmed.StartsWith(strInstatDataObject & "$get_last_object_data") _
-               OrElse strRStatementTrimmed.StartsWith("view_object_data")
+               OrElse strRStatementTrimmed.StartsWith("instatExtras::view_object_data")
     End Function
 
     Private Function TrimStartRStatement(strRStatement As String) As String

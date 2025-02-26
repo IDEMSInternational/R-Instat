@@ -219,6 +219,7 @@ Public Class dlgDisplayTopN
         clsFilterFunction.SetRCommand("filter")
         clsFilterFunction.AddParameter("0", clsRFunctionParameter:=clsInTopNFunction, iPosition:=0, bIncludeArgumentName:=False)
 
+        clsInTopNFunction.SetPackageName("instatExtras")
         clsInTopNFunction.SetRCommand("in_top_n")
         clsInTopNFunction.AddParameter("n", "10", iPosition:=1)
 

@@ -182,6 +182,7 @@ Public Class dlgOtherRosePlots
 
         ucrInputStatistic.SetName("mean")
 
+        clsOtherRosePlots.SetPackageName("instatClimatic")
         clsOtherRosePlots.SetRCommand("other_rose_plots")
 
         clsOtherRosePlots.AddParameter("trans", "TRUE", iPosition:=9)

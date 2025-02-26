@@ -118,9 +118,11 @@ Public Class dlgInstallRPackage
         Dim chrOutput As CharacterVector
 
         If rdoCRAN.Checked Then
+            clsPackageCheck.SetPackageName("instatExtras")
             clsPackageCheck.SetRCommand("package_check")
             clsPackageCheck.AddParameter("package", Chr(34) & ucrInputTextBoxRPackage.GetText() & Chr(34))
         ElseIf rdoRPackage.Checked Then
+            clsPackageCheck.SetPackageName("instatExtras")
             clsPackageCheck.SetRCommand("check_github_repo")
             clsPackageCheck.AddParameter("repo", Chr(34) & ucrInputPackage.GetText() & Chr(34))
             clsPackageCheck.AddParameter("owner", Chr(34) & ucrInputRepositoryName.GetText() & Chr(34))

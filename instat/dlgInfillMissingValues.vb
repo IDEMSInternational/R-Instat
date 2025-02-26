@@ -326,7 +326,7 @@ Public Class dlgInfillMissingValues
 
         clsAggregateFunction.SetPackageName("zoo")
         clsAggregateFunction.SetRCommand("na.aggregate")
-        clsAggregateFunction.AddParameter("FUN", "summary_mean", iPosition:=2)
+        clsAggregateFunction.AddParameter("FUN", "databook::summary_mean", iPosition:=2)
         clsAggregateFunction.AddParameter("maxgap", 10, iPosition:=5)
 
         clsSetSeedFunction.SetRCommand("set.seed")

@@ -5,9 +5,9 @@ Sys.setlocale("LC_TIME", "C")
 install.packages("http://cran.r-project.org/src/contrib/Archive/signmedian.test/signmedian.test_1.5.1.tar.gz", repos=NULL, type="source")
 
 #Install packages from win.binary
-install.packages("stringi", dependencies = FALSE,  repos='https://cloud.r-project.org', type = "win.binary")
-install.packages("stringr", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
-install.packages("RMySQL", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
+# install.packages("stringi", dependencies = FALSE,  repos='https://cloud.r-project.org', type = "win.binary")
+# install.packages("stringr", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
+# install.packages("RMySQL", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
 install.packages("terra", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
 install.packages("XML", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
 
