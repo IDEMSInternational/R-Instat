@@ -87,6 +87,7 @@ Public Class dlgImportDataset
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
+        InitializeSheetSelection()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -1048,6 +1049,21 @@ Public Class dlgImportDataset
         TestOkEnabled()
     End Sub
 
+    Private Sub InitializeSheetSelection()
+        ' Ensure at least one sheet exists
+        If clbSheets.Items.Count > 0 Then
+            ' Temporarily remove event handling to prevent infinite recursion
+            RemoveHandler clbSheets.ItemCheck, AddressOf clbSheets_ItemCheck
+            clbSheets.SetItemChecked(0, True) ' Check the first sheet
+            dctSelectedExcelSheets(1) = clbSheets.Items.Item(0).ToString()
+            AddHandler clbSheets.ItemCheck, AddressOf clbSheets_ItemCheck
+            lblImportingSheets.Hide()
+        End If
+        TryGridPreview()
+        TestOkEnabled()
+    End Sub
+
+
     Private Sub ucrSaveFile_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveFile.ControlContentsChanged
         TestOkEnabled()
     End Sub
@@ -1101,6 +1117,11 @@ Public Class dlgImportDataset
             clsImportExcel.AddParameter("range", clsROperatorParameter:=clsRangeOperator)
         Else
             clsImportExcel.RemoveParameterByName("range")
+        End If
+        If ucrChkRange.Checked Then
+            clsImportExcelMulti.AddParameter("range", clsROperatorParameter:=clsRangeOperator)
+        Else
+            clsImportExcelMulti.RemoveParameterByName("range")
         End If
         TryGridPreview()
         TestOkEnabled()
