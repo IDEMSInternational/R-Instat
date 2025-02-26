@@ -282,6 +282,7 @@ Partial Class ucrCalculator
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.cmdQuantile3 = New System.Windows.Forms.Button()
         Me.cmdwheremin = New System.Windows.Forms.Button()
         Me.cmdwhichmax = New System.Windows.Forms.Button()
         Me.cmdwheremax = New System.Windows.Forms.Button()
@@ -3553,6 +3554,7 @@ Partial Class ucrCalculator
         '
         'grpSummary
         '
+        Me.grpSummary.Controls.Add(Me.cmdQuantile3)
         Me.grpSummary.Controls.Add(Me.cmdwheremin)
         Me.grpSummary.Controls.Add(Me.cmdwhichmax)
         Me.grpSummary.Controls.Add(Me.cmdwheremax)
@@ -3591,10 +3593,22 @@ Partial Class ucrCalculator
         Me.grpSummary.Margin = New System.Windows.Forms.Padding(2)
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.Padding = New System.Windows.Forms.Padding(2)
-        Me.grpSummary.Size = New System.Drawing.Size(295, 337)
+        Me.grpSummary.Size = New System.Drawing.Size(295, 361)
         Me.grpSummary.TabIndex = 185
         Me.grpSummary.TabStop = False
         Me.grpSummary.Text = "Summary"
+        '
+        'cmdQuantile3
+        '
+        Me.cmdQuantile3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.cmdQuantile3.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdQuantile3.Location = New System.Drawing.Point(215, 188)
+        Me.cmdQuantile3.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdQuantile3.Name = "cmdQuantile3"
+        Me.cmdQuantile3.Size = New System.Drawing.Size(69, 30)
+        Me.cmdQuantile3.TabIndex = 194
+        Me.cmdQuantile3.Text = "quantile3"
+        Me.cmdQuantile3.UseVisualStyleBackColor = True
         '
         'cmdwheremin
         '
@@ -3646,7 +3660,7 @@ Partial Class ucrCalculator
         '
         Me.cmdSummaryRHelp.AutoSize = True
         Me.cmdSummaryRHelp.ContextMenuStrip = Me.ContextMenuStripSummary
-        Me.cmdSummaryRHelp.Location = New System.Drawing.Point(194, 188)
+        Me.cmdSummaryRHelp.Location = New System.Drawing.Point(194, 217)
         Me.cmdSummaryRHelp.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdSummaryRHelp.Name = "cmdSummaryRHelp"
         Me.cmdSummaryRHelp.Size = New System.Drawing.Size(90, 30)
@@ -3771,7 +3785,7 @@ Partial Class ucrCalculator
         Me.cmdCor.Location = New System.Drawing.Point(2, 188)
         Me.cmdCor.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCor.Name = "cmdCor"
-        Me.cmdCor.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCor.Size = New System.Drawing.Size(72, 30)
         Me.cmdCor.TabIndex = 175
         Me.cmdCor.Text = "cor"
         Me.cmdCor.UseVisualStyleBackColor = True
@@ -3779,10 +3793,10 @@ Partial Class ucrCalculator
         'cmdCov
         '
         Me.cmdCov.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCov.Location = New System.Drawing.Point(63, 188)
+        Me.cmdCov.Location = New System.Drawing.Point(73, 188)
         Me.cmdCov.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCov.Name = "cmdCov"
-        Me.cmdCov.Size = New System.Drawing.Size(56, 30)
+        Me.cmdCov.Size = New System.Drawing.Size(72, 30)
         Me.cmdCov.TabIndex = 174
         Me.cmdCov.Text = "cov"
         Me.cmdCov.UseVisualStyleBackColor = True
@@ -3897,10 +3911,10 @@ Partial Class ucrCalculator
         '
         Me.cmdQuantile.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQuantile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQuantile.Location = New System.Drawing.Point(118, 188)
+        Me.cmdQuantile.Location = New System.Drawing.Point(144, 188)
         Me.cmdQuantile.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdQuantile.Name = "cmdQuantile"
-        Me.cmdQuantile.Size = New System.Drawing.Size(56, 30)
+        Me.cmdQuantile.Size = New System.Drawing.Size(72, 30)
         Me.cmdQuantile.TabIndex = 164
         Me.cmdQuantile.Text = "quantile"
         Me.cmdQuantile.UseVisualStyleBackColor = True
@@ -4025,7 +4039,7 @@ Partial Class ucrCalculator
         Me.grpFrequencies.Controls.Add(Me.cmdFreqMin)
         Me.grpFrequencies.Controls.Add(Me.cmdFreqSum)
         Me.grpFrequencies.Controls.Add(Me.cmdFreqLength)
-        Me.grpFrequencies.Location = New System.Drawing.Point(2, 226)
+        Me.grpFrequencies.Location = New System.Drawing.Point(2, 250)
         Me.grpFrequencies.Margin = New System.Windows.Forms.Padding(2)
         Me.grpFrequencies.Name = "grpFrequencies"
         Me.grpFrequencies.Padding = New System.Windows.Forms.Padding(2)
@@ -8233,6 +8247,11 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpSymbols)
+        Me.Controls.Add(Me.grpTransform)
+        Me.Controls.Add(Me.grpModifier)
+        Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpFunctions)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpDates)
@@ -8244,11 +8263,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpInteger)
         Me.Controls.Add(Me.grpTestString)
         Me.Controls.Add(Me.grpComplex)
-        Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpSymbols)
-        Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.grpModifier)
-        Me.Controls.Add(Me.grpWakefield)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "ucrCalculator"
         Me.Size = New System.Drawing.Size(898, 458)
@@ -8941,4 +8955,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdFrac20 As Button
     Friend WithEvents cmdFrac100 As Button
     Friend WithEvents cmdFrac10 As Button
+    Friend WithEvents cmdQuantile3 As Button
 End Class
