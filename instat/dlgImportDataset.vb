@@ -1060,6 +1060,7 @@ Public Class dlgImportDataset
             lblImportingSheets.Hide()
         End If
         TryGridPreview()
+        TestOkEnabled()
     End Sub
 
 
