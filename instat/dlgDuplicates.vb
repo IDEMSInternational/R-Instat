@@ -157,9 +157,11 @@ Public Class dlgDuplicateRows
         clsDuplicated2.SetRCommand("duplicated2")
 
         ' For the third rdo we run clsStreakFunction
+        clsStreakFunction.SetPackageName("instatExtras")
         clsStreakFunction.SetRCommand("duplicated_cases")
         clsStreakFunction.AddParameter("ignore", "NULL")
 
+        clsDupCountIndex.SetPackageName("instatExtras")
         clsDupCountIndex.SetRCommand("duplicated_count_index")
         clsDupCountIndex.AddParameter("type", Chr(34) & "index" & Chr(34))
 

@@ -210,7 +210,9 @@ Public Class dlgInventoryPlot
         clsInventoryPlot.AddParameter("facet_by", "NULL", iPosition:=8)
         clsInventoryPlot.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
+        clsClimaticMissing.SetPackageName("instatClimatic")
         clsClimaticMissing.SetRCommand("climatic_missing")
+        clsClimaticDetails.SetPackageName("instatClimatic")
         clsClimaticDetails.SetRCommand("climatic_details")
         clsClimaticDetails.SetAssignTo("detail")
 
@@ -224,6 +226,7 @@ Public Class dlgInventoryPlot
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
         clsAddKeyFunction.AddParameter("col_names", "key_cols", iPosition:=1)
 
+        clsCumulativeInventoryFunction.SetPackageName("instatClimatic")
         clsCumulativeInventoryFunction.SetRCommand("cumulative_inventory")
         clsCumulativeInventoryFunction.AddParameter("from", Chr(34) & "From" & Chr(34), iPosition:=1)
         clsCumulativeInventoryFunction.AddParameter("to", Chr(34) & "To" & Chr(34), iPosition:=2)

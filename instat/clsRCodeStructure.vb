@@ -530,6 +530,7 @@ Public Class RCodeStructure
 
                 If _strAssignToObjectTypeLabel = RObjectTypeLabel.Graph Then
                     Dim clsCheckGraphRFunction As New RFunction
+                    clsCheckGraphRFunction.SetPackageName("instatExtras")
                     clsCheckGraphRFunction.SetRCommand("check_graph")
                     clsCheckGraphRFunction.AddParameter("graph_object", _strAssignToObject)
                     clsAddRObject.AddParameter("object", clsRFunctionParameter:=clsCheckGraphRFunction)

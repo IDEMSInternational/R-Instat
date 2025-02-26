@@ -216,6 +216,7 @@ Public Class sdgOpenNetCDF
             lstDimAxes = Nothing
         End If
         If lstDimAxes IsNot Nothing Then
+            clsGetBoundsFunction.SetPackageName("instatExtras")
             clsGetBoundsFunction.SetRCommand("nc_get_dim_min_max")
             clsGetBoundsFunction.AddParameter("nc", clsRFunctionParameter:=clsNcOpenFunction)
             For i As Integer = 0 To lstDims.Count - 1

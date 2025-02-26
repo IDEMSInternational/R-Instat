@@ -93,6 +93,7 @@ Public Class dlgCanonicalCorrelationAnalysis
                                                   strRDataFrameNameToAddObjectTo:=ucrSelectorCCA.strCurrentDataFrame,
                                                   strObjectName:="last_model")
 
+        clsRFunctionCoef.SetPackageName("instatExtras")
         clsRFunctionCoef.SetRCommand("cancor_coef")
         clsRFunctionCoef.bExcludeAssignedFunctionOutput = False
         clsRFunctionCoef.SetAssignToOutputObject(strRObjectToAssignTo:="last_summary",

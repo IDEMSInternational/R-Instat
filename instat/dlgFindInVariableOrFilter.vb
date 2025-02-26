@@ -113,6 +113,7 @@ Public Class dlgFindInVariableOrFilter
 
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
+        clsGetRowHeadersFunction.SetPackageName("instatExtras")
         clsGetRowHeadersFunction.SetRCommand("getRowHeadersWithText")
         clsGetRowHeadersFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
         clsGetRowHeadersFunction.AddParameter("ignore_case", "TRUE", iPosition:=3)

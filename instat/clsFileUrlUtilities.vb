@@ -50,6 +50,7 @@ Public Class clsFileUrlUtilities
         If bVignette Then
             Dim clsGetVignetteFunction As New RFunction
 
+            clsGetVignetteFunction.SetPackageName("instatExtras")
             clsGetVignetteFunction.SetRCommand("get_vignette")
             clsGetVignetteFunction.AddParameter("package", Chr(34) & strPackageName & Chr(34), iPosition:=0)
             strURL = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVignetteFunction.ToScript(), bSeparateThread:=False).AsCharacter(0)
