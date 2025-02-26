@@ -163,6 +163,7 @@ Public Class ucrGeom
         Dim clsgeom_point As New Geoms
         Dim clsgeom_pointrange As New Geoms
         Dim clsgeom_polygon As New Geoms
+        Dim clsgeom_prop_bar As New Geoms
         Dim clsgeom_qq As New Geoms
         Dim clsgeom_qq_line As New Geoms
         Dim clsgeom_quantile As New Geoms
@@ -1843,39 +1844,39 @@ Public Class ucrGeom
         clsgeom_polygon.AddLayerParameter("direction", "list", Chr(34) & "vh" & Chr(34), lstParameterStrings:={Chr(34) & "vh" & Chr(34), Chr(34) & "hv" & Chr(34)})
         lstAllGeoms.Add(clsgeom_polygon)
 
-        clsgeom_bar.SetGeomName("geom_bar")
+        clsgeom_prop_bar.SetGeomName("geom_prop_bar")
         'Mandatory Aesthetics
-        clsgeom_bar.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}), bIsMandatory:=True)
+        clsgeom_prop_bar.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}), bIsMandatory:=True)
         'All data types work as x aesthetics although the most common one is factor.
         'Warning: the group aesthetic could be added, doesn't send errors, but using group doesn't work very well. Histograms have been designed to deal with continuous x and grouping (using stat_bin). Group is not mentioned as an available aesthetic in the documentation.
 
         'Optional aesthetics
-        clsgeom_bar.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}))
+        clsgeom_prop_bar.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}))
         'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom. This is handled by sdgLayerOptions.ucrSdgLayerBase_ClickReturn. 
         'Alternatively, one can map a continuous variable to the aesthetics weight (other variable types produce an error as stat_count is using sum for that variable). Each bar will then add the values taken by this value for the different events falling under the count of each bar (proceeds to a weighted count).
         'Warning: In this case, the label of the y axis is still count, whereas it should take the name of the variable mapped to weight probably. Also, if a variable has been mapped to y (stat is "identity") then the weight aesthetic is ignored (no warning in R).
-        clsgeom_bar.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
-        clsgeom_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
-        clsgeom_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_prop_bar.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
+        clsgeom_prop_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_prop_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_prop_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsgeom_prop_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
+        clsgeom_prop_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
         'Warning: Size varies the outline of the bars, hence changes are difficult to see if fill and colour take the same values. 
         'Warning: Finally it Is Not advised To use size For discrete variables (R message), however, continuous variables mapped to size when the stat is "count" are ignored (no changes in the graph).
 
         'Geom_Bar layer parameters
-        clsgeom_bar.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
+        clsgeom_prop_bar.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
         'Global Layer parameters
-        clsgeom_bar.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
-        clsgeom_bar.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_prop_bar.AddLayerParameter("stat", "list", Chr(34) & "count" & Chr(34), lstParameterStrings:={Chr(34) & "count" & Chr(34), Chr(34) & "identity" & Chr(34)})
+        clsgeom_prop_bar.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_prop_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
         'See global comments about position.
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
-        clsgeom_bar.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
-        clsgeom_bar.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_bar.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
-        clsgeom_bar.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
-        clsgeom_bar.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+        clsgeom_prop_bar.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_prop_bar.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_prop_bar.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
+        clsgeom_prop_bar.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
+        clsgeom_prop_bar.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
         lstAllGeoms.Add(clsgeom_prop_bar)
 
