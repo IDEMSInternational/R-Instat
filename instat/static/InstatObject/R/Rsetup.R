@@ -220,7 +220,7 @@ load_R_Instat_packages <- function() {
   # mc2d loaded because of triangular and continuous empirical distributions
   packs_to_load <- c("purrr", "plyr", "tidyr", "dplyr", "ggplot2", "ggthemes", 
                      "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield",
-                     "circular", "latticeExtra", "texmex", "mc2d", 
+                     "circular", "latticeExtra", "texmex", "mc2d", "gt",
                      "instatExtras", "instatClimatic", "databook", "instatCalculations")
   for(pack in packs_to_load) {
     try(library(pack, character.only = TRUE))
