@@ -6104,33 +6104,33 @@ Public Class ucrCalculator
 
     Private Sub cmdFrac10_Click(sender As Object, e As EventArgs) Handles cmdFrac10.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac10(x= )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac10(x= )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac10( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac10( )", 2)
         End If
     End Sub
 
     Private Sub cmdFrac20_Click(sender As Object, e As EventArgs) Handles cmdFrac20.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac20(x= )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac20(x= )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac20( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac20( )", 2)
         End If
     End Sub
 
     Private Sub cmdFrac100_Click(sender As Object, e As EventArgs) Handles cmdFrac100.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac100(x= )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac100(x= )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac100( )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac100( )", 2)
         End If
     End Sub
 
     Private Sub cmdFracDen_Click(sender As Object, e As EventArgs) Handles cmdFracDen.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den(x= ,den= )", 8)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac_den(x= ,den= )", 8)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("frac_den(, )", 3)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac_den(, )", 3)
         End If
     End Sub
 End Class

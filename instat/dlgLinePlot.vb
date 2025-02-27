@@ -550,9 +550,11 @@ Public Class dlgLinePlot
         clsGeomSmoothFunc.SetRCommand("geom_smooth")
         clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
 
+        clsGgSlopeFunction.SetPackageName("instatExtras")
         clsGgSlopeFunction.SetRCommand("slopegraph")
         clsGgSlopeFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
+        clsSlopeThemeFunction.SetPackageName("instatExtras")
         clsSlopeThemeFunction.SetRCommand("slopegraph_theme")
 
         clsFacetFunction.SetPackageName("ggplot2")
