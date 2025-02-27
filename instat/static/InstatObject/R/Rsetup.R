@@ -26,7 +26,7 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
            "FNN", "fontawesome", "forcats", "foreach", "forecast", "foreign", 
            "formattable", "formula.tools", "Formula", "fracdiff", "fs", 
            "future.apply", "future", "gapminder", "gclus", "gcookbook", 
-           "generics", "GenSA", "geomtextpath", "geosphere", "gert", "getPass", 
+           "generics", "GenSA", "geomtextpath", "geosphere", "gert",
            "GGally", "ggalt", "ggeffects", "ggfittext", "ggformula", "ggfortify", 
            "ggmosaic", "ggplot2", "ggplotify", "ggpmisc", "ggpp", "ggpubr", 
            "ggrepel", "ggridges", "ggsci", "ggside", "ggsignif", "ggstats", 
@@ -77,6 +77,7 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
            "shinyFiles", "shinyjs", "shinystan", "shinythemes", "shinyWidgets", 
            "sjlabelled", "sjmisc", "sjPlot", "sjstats", "skimr", "snakecase", 
            "SnowballC", "sodium", "sourcetools", "sp", "spam", "SparseM", 
+           "sparsevctrs", "SPEI", "splines2", "splus2R", "SQUAREM", "StanHeaders", 
            "statip", "statquotes", "statsr", "stinepack", "stringdist", 
            "stringi", "stringr", "strucchange", "styler", "survival", "svglite", 
            "sys", "systemfonts", "tensorA", "terra", "testthat", "texmex", 
@@ -130,7 +131,7 @@ versions <- c("1.4-8", "1.3-7", "1.24", "0.1.5", "1.2.1.1", "2.8.0",
               "0.6.2", "1.01-2", "1.1.4.1", "0.5.3", "1.0.0", "1.5.2", "8.23.0", 
               "0.8-88", "0.2.1", "1.7.1", "1.2-5", "1.5-3", "1.6.5", "1.11.3", 
               "1.34.0", "1.0.0", "1.3.2", "2.0", "0.1.3", "1.1.14.1", "0.1.5", 
-              "1.5-20", "2.1.4", "0.2-4", "2.2.1", "0.4.0", "2.2.0", "0.10.2", 
+              "1.5-20", "2.1.4", "2.2.1", "0.4.0", "2.2.0", "0.10.2", 
               "0.12.0", "0.4.17", "0.3.3", "3.5.1", "0.1.2", "0.6.1", "0.5.8-1", 
               "0.6.0", "0.9.6", "0.5.6", "3.2.0", "0.3.1", "0.6.4", "0.8.0", 
               "0.1.2", "5.1.0", "0.6.2", "1.4.1", "0.1.2", "2.6.7", "4.1-8", 
@@ -218,10 +219,7 @@ load_R_Instat_packages <- function() {
   # tidyr loaded because unite() function is required by mmtable() function from mmtable2 package
   # purrr loaded because map_int() is required  by function(s) such as header_top_left() from mmtable2 package
   # mc2d loaded because of triangular and continuous empirical distributions
-  packs_to_load <- c("purrr", "plyr", "tidyr", "dplyr", "ggplot2", "ggthemes", 
-                     "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield",
-                     "circular", "latticeExtra", "texmex", "mc2d", "gt",
-                     "instatExtras", "instatClimatic", "databook", "instatCalculations")
+  packs_to_load <- c("ggplot2", "gt", "instatExtras", "instatClimatic", "databook", "instatCalculations")
   for(pack in packs_to_load) {
     try(library(pack, character.only = TRUE))
   }
