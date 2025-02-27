@@ -156,7 +156,7 @@
       <HintPath>..\packages\R.NET.1.9.0\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
     <Reference Include="RInsightF461, Version=0.0.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RInsightF461.0.0.10\lib\net461\RInsightF461.dll</HintPath>
+      <HintPath>..\packages\RInsightF461.0.0.11\lib\net461\RInsightF461.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
@@ -446,6 +446,18 @@
     <Compile Include="UserTables\Columns\ucrColumnFootNote.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnHide.Designer.vb">
+      <DependentUpon>ucrColumnHide.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnHide.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnMissingTexts.Designer.vb">
+      <DependentUpon>ucrColumnMissingTexts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnMissingTexts.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\Columns\ucrColumnNanoPlots.Designer.vb">
       <DependentUpon>ucrColumnNanoPlots.vb</DependentUpon>
     </Compile>
@@ -480,6 +492,12 @@
       <DependentUpon>ucrRowExpression.vb</DependentUpon>
     </Compile>
     <Compile Include="UserTables\Rows\ucrRowExpression.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Rows\ucrRowsGrandSummary.Designer.vb">
+      <DependentUpon>ucrRowsGrandSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Rows\ucrRowsGrandSummary.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\sdgTableOptions.Designer.vb">
@@ -3477,6 +3495,12 @@
     <EmbeddedResource Include="UserTables\Columns\ucrColumnFootNote.resx">
       <DependentUpon>ucrColumnFootNote.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnHide.resx">
+      <DependentUpon>ucrColumnHide.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnMissingTexts.resx">
+      <DependentUpon>ucrColumnMissingTexts.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Columns\ucrColumnNanoPlots.resx">
       <DependentUpon>ucrColumnNanoPlots.vb</DependentUpon>
     </EmbeddedResource>
@@ -3494,6 +3518,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Rows\ucrRowExpression.resx">
       <DependentUpon>ucrRowExpression.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Rows\ucrRowsGrandSummary.resx">
+      <DependentUpon>ucrRowsGrandSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\sdgTableOptions.resx">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>

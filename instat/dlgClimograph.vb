@@ -578,6 +578,7 @@ Public Class dlgClimograph
         clsPipeOperator.SetOperation("%>%")
         SetPipeAssignTo()
 
+        clsGgwalterliethFunction.SetPackageName("instatClimatic")
         clsGgwalterliethFunction.SetRCommand("ggwalter_lieth")
 
         clsFacetFunction.SetPackageName("ggplot2")

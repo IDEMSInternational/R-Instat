@@ -206,11 +206,11 @@ packages_not_installed <- function() {
 
 load_R_Instat_packages <- function() {
   # ggthemes temp added because themes list doesn't contain package names
-  # sp needed for plot.region() function which requires sp loaded but gives errors through R-Instat
+  # sp needed for plot.region() function which requires sp loaded but gives errors through R-Instat ## note that this function is now in instatClimatic.
   # plyr and dplyr loaded in order to avoid conflicts
   # ggplot2 loaded for convenience
   # svglite and ggfortify needed for View Graph dialog
-  # PCICt needed to access PCICt class when importing NETcdf files
+  # PCICt needed to access PCICt class when importing NETcdf files  # this is loaded in with instatClimatic now I think.
   # ggmosaic because geom_mosaic aes only work when ggmosaic is loaded
   # wakefield because many functions do not work without loading (https://github.com/trinker/wakefield/issues/11)
   # latticeExtra because conditionalQuantile key positions work well when latticeExtra is loaded
