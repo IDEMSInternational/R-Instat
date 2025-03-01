@@ -26,7 +26,7 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
            "FNN", "fontawesome", "forcats", "foreach", "forecast", "foreign", 
            "formattable", "formula.tools", "Formula", "fracdiff", "fs", 
            "future.apply", "future", "gapminder", "gclus", "gcookbook", 
-           "generics", "GenSA", "geomtextpath", "geosphere", "gert", "getPass", 
+           "generics", "GenSA", "geomtextpath", "geosphere", "gert", "getPass",
            "GGally", "ggalt", "ggeffects", "ggfittext", "ggformula", "ggfortify", 
            "ggmosaic", "ggplot2", "ggplotify", "ggpmisc", "ggpp", "ggpubr", 
            "ggrepel", "ggridges", "ggsci", "ggside", "ggsignif", "ggstats", 
@@ -94,10 +94,19 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
            # mmtable2 package from GitHub added manually to list
            # install with devtools::install_github("ianmoran11/mmtable2")
            # aida-package package from GitHub added manually to list
-            # install with remotes::install_github('michael-franke/aida-package')
-            # CDT package from GitHub added manually to list
-            # install with devtools::install_github("rijaf-iri/CDT")
-           "mmtable2",  "aida", "CDT"
+           # install with remotes::install_github('michael-franke/aida-package')
+           # CDT package from GitHub added manually to list
+           # install with devtools::install_github("rijaf-iri/CDT")
+           # instatClimatic package from GitHub added manually to list
+           # install with devtools::install_github("IDEMSInternational/instatClimatic", upgrade = "always")
+           # instatExtras package from GitHub added manually to list
+           # install with GitHub devtools::install_github("IDEMSInternational/instatExtras", upgrade = "always")
+           # databook package from GitHub added manually to list
+           # install with devtools::install_github("IDEMSInternational/databook", upgrade = "always")
+           # instatCalculations package from GitHub added manually to list
+           # install with GitHub devtools::install_github("IDEMSInternational/instatCalculations", upgrade = "always")
+           
+           "mmtable2",  "aida", "CDT", "instatExtras", "instatClimatic", "databook", "instatCalculations"
            )
 
 versions <- c("1.4-8", "1.3-7", "1.24", "0.1.5", "1.2.1.1", "2.8.0", 
@@ -106,23 +115,23 @@ versions <- c("1.4-8", "1.3-7", "1.24", "0.1.5", "1.2.1.1", "2.8.0",
               "4.6.0-1", "1.0-9", "1.2.4", "1.3-31", "1.0-10", "1.1.5", "1.0.7", 
               "0.9.0", "0.71.1", "1.1.0", "3.7.6", "0.9.0", "3.1-3", "3.0-5", 
               "7.0-1", "1.1.0", "0.6.3", "2.3", "2.3.2", "0.76", "2.3-62", 
-              "0.4.16", "0.2-6", "0.5-1", "7.3-23", "0.4-11", "3.6.3", "3.2-5", 
+              "0.4.16", "0.2-6", "0.5-1", "7.3-23", "0.4-11", "3.6.4", "3.2-5", 
               "0.8.0", "0.7.2", "0.3-66", "2.1.8", "3.5.2", "1.4.0", "1.2.9", 
               "0.19-4.1", "0.2-20", "1.4-3", "2.0.19", "2.3.4", "2.1-1", "1.3.0", 
               "1.9.2", "2.0.0", "1.0.2", "1.1-12", "0.95", "0.4.4", "1.6.0", 
-              "1.1.3", "0.5.1", "1.5.3", "2.0.2", "1.2.1", "2.1.1", "6.2.0", 
+              "1.1.3", "0.5.1", "1.5.3", "2.0.2", "1.2.1", "2.1.1", "6.2.1", 
               "1.25.6", "3.2.30", "1.16.4", "0.1.9", "1.0.0", "1.2-42", "1.2.3", 
               "2.0-4", "1.19.0", "1.1-3-1", "4.1.6", "1.4.3", "0.99.59", "1.40", 
               "1.10", "2.4.5", "1.6.5", "0.3.5", "0.6.37", "1.2-2", "0.5.0", 
               "4.6.25", "1.2", "0.4.4", "1.1.4", "0.8.0", "0.33", "1.23-1", 
-              "1.1.1.6", "1.7-16", "2.0.2", "1.0.0", "0.5.0", "0.3.2", "1.4-0", 
+              "1.1.1.6", "1.7-16", "2.0.3", "1.0.0", "0.5.0", "0.3.2", "1.4-0", 
               "1.10.7", "3.0.0", "1.5.1", "1.0.3", "1.16", "3.3", "0.8-35", 
               "1.0-0", "1.10.0", "0.19", "1.0", "2.2", "1.0.7", "2.11", "1.0.6", 
               "1.0.9", "2.1.2", "1.7.5", "1.2.0", "16.3", "1.0.3", "1.2-2", 
               "0.6.2", "1.01-2", "1.1.4.1", "0.5.3", "1.0.0", "1.5.2", "8.23.0", 
               "0.8-88", "0.2.1", "1.7.1", "1.2-5", "1.5-3", "1.6.5", "1.11.3", 
               "1.34.0", "1.0.0", "1.3.2", "2.0", "0.1.3", "1.1.14.1", "0.1.5", 
-              "1.5-20", "2.1.4", "0.2-2", "2.2.1", "0.4.0", "2.2.0", "0.10.2", 
+              "1.5-20", "2.1.4", "0.2.2", "2.2.1", "0.4.0", "2.2.0", "0.10.2", 
               "0.12.0", "0.4.17", "0.3.3", "3.5.1", "0.1.2", "0.6.1", "0.5.8-1", 
               "0.6.0", "0.9.6", "0.5.6", "3.2.0", "0.3.1", "0.6.4", "0.8.0", 
               "0.1.2", "5.1.0", "0.6.2", "1.4.1", "0.1.2", "2.6.7", "4.1-8", 
@@ -133,7 +142,7 @@ versions <- c("1.4-8", "1.3-7", "1.24", "0.1.5", "1.2.1.1", "2.8.0",
               "1.4.7", "1.1.0", "0.6-0.1", "0.7-0.1", "1.2-13", "2.1.4", "3.3", 
               "1.0.7", "0.3.1", "0.3.21", "1.0.2", "1.1-6", "1.0-5", "0.9-15", 
               "1.4", "0.2.7", "1.0.14", "1.0.0", "2.2.1", "2.7-6", "0.1-10", 
-              "0.1.4", "1.8.9", "0.1.0", "2.2.1", "2.23-26", "1.3.2", "1.49", 
+              "0.1.4", "1.9.0", "0.1.0", "2.2.1", "2.23-26", "1.3.2", "1.49", 
               "0.4.3", "2.14.0", "12.0-0", "1.4.1", "0.22-6", "0.6-30", "1.8.1", 
               "0.2.2", "3.2", "0.5.0", "1.0-10", "1.0.4", "0.9.1", "1.1-36", 
               "3.1-3", "1.7-4", "3.2", "2.5.1", "1.3-1", "0.9-40", "2.8.0", 
@@ -150,12 +159,12 @@ versions <- c("1.4-8", "1.3-7", "1.24", "0.1.5", "1.2.1.1", "2.8.0",
               "4.10.4", "3.8-4", "2.8-5", "1.8.9", "0.1-8", "1.4-1", "1.6.0", 
               "1.0.0", "0.3.18", "1.2.0", "1.6.1", "1.1.2", "1.18.5", "3.8.5", 
               "2024.06.25", "0.1.1", "0.4.0", "1.2.3", "0.15.1", "1.0-14", 
-              "1.3.2", "0.4-27", "1.8.1", "1.0.4", "0.1-2", "1.5-8", "0.4.26", 
+              "1.3.2", "0.4-27", "1.9.0", "1.0.4", "0.1-2", "1.5-8", "0.4.26", 
               "6.00", "0.7.8", "1.5.1", "1.0.4", "0.16.0", "1.8.2", "1.27.0", 
-              "2.12.3", "2.5.1", "1.3.3", "0.1", "0.3.3", "3.6-31", "0.51.6", 
+              "2.12.3", "2.6.1", "1.3.3", "0.1", "0.3.3", "3.6-31", "0.51.6", 
               "2.3", "1.4.0", "1.1-3", "2.0.1", "1.0.14", "14.2.3-1", "0.3.4.0.2", 
               "5.1.10", "0.3.1", "1.98-1.16", "2.6.2", "0.4.4", "0.6.1", "2.3.2", 
-              "2.1.5", "1.4.3", "1.1.0", "0.4.0", "0.5-1", "1.0-5", "2.0.0", 
+              "2.1.5", "1.4.3", "1.1.1", "0.4.0", "0.5-1", "1.0-5", "2.0.0", 
               "2.1.2", "2.5.0", "1.1.7", "0.8.9", "1.4.4", "1.3.17", "1.2.3", 
               "1.12.1", "1.1.5", "2.29", "1.3.7", "1.0-0", "0.11.0", "0.99-4-1", 
               "1.8.2.4", "7.3.2", "4.1.24", "0.3.0", "2.0.4", "2.1.0", "2.3.9", 
@@ -167,20 +176,25 @@ versions <- c("1.4-8", "1.3-7", "1.24", "0.1.5", "1.2.1.1", "2.8.0",
               "0.11.1", "0.7.1", "1.4.0", "0.1.7-1", "2.2-0", "2.11-1", "1.84-2", 
               "0.2.0", "1.8.1", "0.5.3", "1.3-5", "2021.1", "2.32.10", "0.2.3", 
               "0.3.2", "0.3.0", "1.5", "0.9.15", "1.8.4", "1.5.1", "1.5-4", 
-              "1.10.3", "3.8-3", "2.1.3", "3.4.3", "1.2.1", "0.36.2.1", "1.8-15", 
+              "1.10.3", "3.8-3", "2.1.3", "3.4.3", "1.2.1", "0.36.2.1", "1.8-21", 
               "3.2.3", "2.4.9", "1.0.0", "1.1-3", "0.3.3", "3.2.1", "1.3.1", 
-              "1.2.1", "0.4.2", "0.3.0", "4041.110", "0.54", "0.7.5.3", "0.3.0", 
+              "1.2.1", "0.4.2", "0.3.0", "4041.110", "0.55", "0.7.5.3", "0.3.0", 
               "2.5.6", "1.1.6", "1.3.1", "0.10-58", "1.2-4", "0.24.4", "0.4.0", 
               "1.2.2", "0.8-5", "1.3-4", "1.0.1", "3.1.0", "1.2.4", "6.0.1", 
               "1.6-1", "1.4-13", "0.8-5", "0.6.5", "2.6-10", "1.44", "0.6.5", 
               "0.4.2", "0.6.0", "2.7.0", "1.6.5", "1.0.2", "0.3.6", "0.6.1", 
-              "1.2.2", "0.4.1", "3.0.2", "0.9.4", "2.6", "1.5.1", "0.50", "3.99-0.18", 
+              "1.2.2", "0.4.1", "3.0.2", "0.9.4", "2.6", "1.5.1", "0.51", "3.99-0.18", 
               "1.3.6", "1.0.1", "1.8-4", "0.14.1", "2.3.10", "0.2.0", "2.3.2", 
               "1.8-12", "0.2.1", "0.11-1",
               # mmtable2 package from GitHub added manually to list
               # aida-package package from GitHub added manually to list
               # CDT package from GitHub added manually to list
-              "0.1.3","0.4.3","6.5" 
+              # instatClimatic package from GitHub added manually to list
+              # instatExtras package from GitHub added manually to list
+              # databook package from GitHub added manually to list
+              # instatCalculations package from GitHub added manually to list
+              
+              "0.1.3", "0.4.3", "6.5", "0.2.1", "0.2.1", "0.1.4", "0.1.2"
               )
 
 ##################################################
@@ -193,11 +207,11 @@ packages_not_installed <- function() {
 
 load_R_Instat_packages <- function() {
   # ggthemes temp added because themes list doesn't contain package names
-  # sp needed for plot.region() function which requires sp loaded but gives errors through R-Instat
+  # sp needed for plot.region() function which requires sp loaded but gives errors through R-Instat ## note that this function is now in instatClimatic.
   # plyr and dplyr loaded in order to avoid conflicts
   # ggplot2 loaded for convenience
   # svglite and ggfortify needed for View Graph dialog
-  # PCICt needed to access PCICt class when importing NETcdf files
+  # PCICt needed to access PCICt class when importing NETcdf files  # this is loaded in with instatClimatic now I think.
   # ggmosaic because geom_mosaic aes only work when ggmosaic is loaded
   # wakefield because many functions do not work without loading (https://github.com/trinker/wakefield/issues/11)
   # latticeExtra because conditionalQuantile key positions work well when latticeExtra is loaded
@@ -205,7 +219,7 @@ load_R_Instat_packages <- function() {
   # tidyr loaded because unite() function is required by mmtable() function from mmtable2 package
   # purrr loaded because map_int() is required  by function(s) such as header_top_left() from mmtable2 package
   # mc2d loaded because of triangular and continuous empirical distributions
-  packs_to_load <- c("purrr", "plyr", "tidyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield", "circular", "latticeExtra", "texmex", "mc2d")
+  packs_to_load <- c("ggplot2", "gt", "instatExtras", "instatClimatic", "databook", "instatCalculations")
   for(pack in packs_to_load) {
     try(library(pack, character.only = TRUE))
   }
@@ -225,8 +239,8 @@ packages_not_loaded <- function() {
 load_R_Instat_packages()
 
 setwd(dirname(parent.frame(2)$ofile))
-source("instat_object_R6.R")
-source("data_object_R6.R")
+# source("instat_object_R6.R")
+# source("data_object_R6.R")
 source("labels_and_defaults.R")
 source("stand_alone_functions.R")
 files <- sort(dir(file.path(getwd(), 'Backend_Components/'), pattern=".R$", full.names = TRUE, recursive = TRUE))

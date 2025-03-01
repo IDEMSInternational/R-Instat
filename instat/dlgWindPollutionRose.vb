@@ -118,7 +118,8 @@ Public Class dlgWindPollutionRose
         
         ucrSelectorWindPollutionRose.Reset()
         ucrReceiverDate.SetMeAsReceiver()
-        
+
+        clsPollutionRoseFunction.SetPackageName("instatClimatic")
         clsPollutionRoseFunction.SetRCommand("wind_pollution_rose")
         clsPollutionRoseFunction.AddParameter("paddle", "FALSE", iPosition:=7)
         clsPollutionRoseFunction.AddParameter("statistic", Chr(34) & "prop.count" & Chr(34), iPosition:=8)

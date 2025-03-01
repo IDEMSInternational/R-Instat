@@ -54,6 +54,7 @@ Public Class dlgHelpVignettes
 
         ucrChkFunction.SetText("Function Name:")
 
+        clsGetPackages.SetPackageName("instatExtras")
         clsGetPackages.SetRCommand("get_installed_packages_with_data")
         clsGetPackages.AddParameter("with_data", "FALSE")
         expPackageNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPackages.ToScript(),bSeparateThread:=False, bSilent:=True)

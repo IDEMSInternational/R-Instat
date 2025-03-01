@@ -109,6 +109,7 @@ Public Class dlgExportToWWR
         ucrSelectorExportToWWR.Reset()
         ucrReceiverStationIdentifier.SetMeAsReceiver()
 
+        clsWWRExport.SetPackageName("instatClimatic")
         clsWWRExport.SetRCommand("wwr_export")
         clsWWRExport.AddParameter("folder", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\", "/"), iPosition:=20)
 
