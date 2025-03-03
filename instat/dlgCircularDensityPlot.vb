@@ -150,6 +150,7 @@ Public Class dlgCircularDensityPlot
         clsScatterPlotFunction.AddParameter("sep", 0.0003, iPosition:=5)
         clsScatterPlotFunction.AddParameter("shrink", 1, iPosition:=9)
 
+        clsRecordGraphFunction.SetPackageName("instatExtras")
         clsRecordGraphFunction.SetRCommand("record_graph")
         clsRecordGraphFunction.AddParameter("x", clsRFunctionParameter:=clsDensityPlotFunction, iPosition:=0)
 

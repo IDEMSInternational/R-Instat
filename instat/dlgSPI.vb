@@ -175,9 +175,11 @@ Public Class dlgSPI
         clsSpeiFunction.AddParameter("kernel", clsRFunctionParameter:=clsListFunction, iPosition:=2)
         clsSpeiFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
 
+        clsSpeiInputFunction.SetPackageName("instatClimatic")
         clsSpeiInputFunction.SetRCommand("spei_input")
         clsSpeiInputFunction.SetAssignTo("data_ts")
 
+        clsSpeiOutputFunction.SetPackageName("instatClimatic")
         clsSpeiOutputFunction.SetRCommand("spei_output")
         clsPlotFunction.SetRCommand("plot")
 

@@ -40,7 +40,7 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
            "FNN", "fontawesome", "forcats", "foreach", "forecast", "foreign", 
            "formattable", "formula.tools", "Formula", "fracdiff", "fs", 
            "future.apply", "future", "gapminder", "gclus", "gcookbook", 
-           "generics", "GenSA", "geomtextpath", "geosphere", "gert",
+           "generics", "GenSA", "geomtextpath", "geosphere", "gert", 
            "GGally", "ggalt", "ggeffects", "ggfittext", "ggformula", "ggfortify", 
            "ggmosaic", "ggplot2", "ggplotify", "ggpmisc", "ggpp", "ggpubr", 
            "ggrepel", "ggridges", "ggsci", "ggside", "ggsignif", "ggstats", 
@@ -83,7 +83,7 @@ packs <- c("abind", "agricolae", "agridat", "agriTutorial",
            "relimp", "rematch", "rematch2", "remotes", "repr", "reshape", 
            "reshape2", "rgl", "rio", "rje", "rlang", "rmarkdown", "RMAWGEN", 
            "Rmpfr", 
-           #"RMySQL", 
+           #"RMySQL",
            "robustbase", "rootSolve", "roxygen2", "rpart", 
            "rpivotTable", "rprojroot", "rrefine", "RSQLite", "rstan", "rstanarm", 
            "rstantools", "rstatix", "rstudioapi", "rtf", "Rttf2pt1", "rversions", 
@@ -129,3 +129,7 @@ devtools::install_github("michael-franke/aida-package")
 devtools::install_github("rijaf-iri/CDT")
 devtools::install_github("IDEMSInternational/rapidpror")
 devtools::install_github("IDEMSInternational/epicsawrap")
+devtools::install_github("IDEMSInternational/instatClimatic", dependencies = FALSE, force = TRUE)
+devtools::install_github("IDEMSInternational/instatExtras", dependencies = FALSE, force = TRUE)
+devtools::install_github("IDEMSInternational/databook", dependencies = FALSE, force = TRUE)
+devtools::install_github("IDEMSInternational/instatCalculations", dependencies = FALSE, force = TRUE)

@@ -139,6 +139,7 @@ Public Class dlgCompareColumns
         ucrReceiverFirst.SetMeAsReceiver()
         ucrSaveLogical.Reset()
 
+        clsCompareColumnsFunction.SetPackageName("instatExtras")
         clsCompareColumnsFunction.SetRCommand("compare_columns")
         clsYinXOperator.SetOperation("%in%")
 
