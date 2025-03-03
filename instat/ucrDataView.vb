@@ -506,7 +506,7 @@ Public Class ucrDataView
         Return GetSelectedColumns().Select(Function(x) x.strName).ToList()
     End Function
 
-    Private Function GetFirstSelectedColumnName() As String
+    Public Function GetFirstSelectedColumnName() As String
         Return GetSelectedColumns().FirstOrDefault().strName
     End Function
 

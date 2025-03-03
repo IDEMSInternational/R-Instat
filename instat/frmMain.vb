@@ -966,6 +966,13 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
+        Dim strSelectedColumn As String = ""
+        If Not String.IsNullOrEmpty(ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow) AndAlso ucrColumnMeta.IsVisible Then
+            strSelectedColumn = ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow
+        ElseIf Not String.IsNullOrEmpty(ucrDataViewer.GetFirstSelectedColumnName) Then
+            strSelectedColumn = ucrDataViewer.GetFirstSelectedColumnName
+        End If
+        dlgReorderLevels.SelectedColumn = strSelectedColumn
         dlgReorderLevels.ShowDialog()
     End Sub
 
