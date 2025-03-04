@@ -289,8 +289,11 @@ Public Class dlgReorderLevels
         Dim strDataName As String = ucrSelectorFactorLevelsToReorder.strCurrentDataFrame
         If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
             strTempSelectedVariable = _strSelectedColumn
-        Else
+        ElseIf ucrSelectorFactorLevelsToReorder.lstAvailableVariable.Items.Count > 0 Then
             strTempSelectedVariable = ucrSelectorFactorLevelsToReorder.lstAvailableVariable.Items(0).Text
+        Else
+            ' Handle the case where there are no available variables
+            Exit Sub
         End If
 
         ucrReceiverFactor.Add(strTempSelectedVariable, strDataName)
