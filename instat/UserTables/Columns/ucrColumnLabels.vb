@@ -1,4 +1,5 @@
 ﻿Imports System.Reflection
+Imports RDotNet
 
 Public Class ucrColumnLabels
 
@@ -7,7 +8,11 @@ Public Class ucrColumnLabels
 
     Private Sub InitialiseDialog()
         ucrReceiverSingleCol.Selector = ucrSelectorCols
+        ucrReceiverSingleCol.strSelectorHeading = "Tables"
+        ucrReceiverSingleCol.SetItemType(RObjectTypeLabel.Table)
         ucrReceiverSingleCol.SetMeAsReceiver()
+        ucrInputColLabel.Visible = False
+        lblColLabels.Visible = False
     End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
@@ -99,4 +104,25 @@ Public Class ucrColumnLabels
         clsOperator.AddParameter(New RParameter(strParameterName:="cols_label_param", strParamValue:=clsColsLabelRFunction, bNewIncludeArgumentName:=False))
     End Sub
 
+    Private Sub ucrReceiverSingleCol_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingleCol.ControlValueChanged
+        Dim clsGetRObject As New RFunction
+        Dim clsAsDataFrame As New RFunction
+        clsGetRObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetRObject.AddParameter("data_name", Chr(34) & ucrSelectorCols.strCurrentDataFrame & Chr(34))
+        clsGetRObject.AddParameter("object_name", ucrReceiverSingleCol.GetVariableNames)
+
+        clsAsDataFrame.SetRCommand("as.data.frame")
+        clsAsDataFrame.AddParameter("object", clsRFunctionParameter:=clsGetRObject, bIncludeArgumentName:=False)
+        Dim strScript As String = "colnames(" & clsAsDataFrame.ToScript & ")"
+        Dim lstObjectss As GenericVector
+        lstObjectss = frmMain.clsRLink.RunInternalScriptGetValue(strScript).AsList
+
+        If dataGridColLabels.Rows.Count < lstObjectss.Count Then
+            dataGridColLabels.Rows.Add(lstObjectss.Count - dataGridColLabels.Rows.Count)
+        End If
+        For i = 0 To lstObjectss.Count - 1
+            dataGridColLabels.Rows(i).Cells(0).Value = lstObjectss(i).AsCharacter(0)
+        Next
+
+    End Sub
 End Class
