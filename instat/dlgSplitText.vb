@@ -145,13 +145,9 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("string", 0), iAdditionalPairNo:=1)
-        'ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("var", 0), iAdditionalPairNo:=2)
-
         ucrSaveColumn.AddAdditionalRCode(clsTextComponentsMaximum, iAdditionalPairNo:=1)
         ucrSaveColumn.AddAdditionalRCode(clsBinaryColumns, iAdditionalPairNo:=2)
 
-        'ucrReceiverSplitTextColumn.SetRCode(clsTextComponentsFixed, bReset)
         ucrInputPattern.SetRCode(clsPatternDummyFunction, bReset)
         ucrNudPieces.SetRCode(clsTextComponentsFixed, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsSplitDummyFunction, bReset)
