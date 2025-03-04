@@ -968,7 +968,7 @@ Public Class frmMain
         dlgConvertColumns.ShowDialog()
     End Sub
 
-    Private Sub SetDefaultValueInReorderLevels()
+    Public Sub SetDefaultValueInReorderLevels()
         Dim strSelectedColumn As String = ""
         If Not String.IsNullOrEmpty(ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow) AndAlso ucrColumnMeta.IsVisible Then
             strSelectedColumn = ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow
