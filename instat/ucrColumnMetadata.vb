@@ -522,4 +522,9 @@ Public Class ucrColumnMetadata
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
     End Sub
 
+    Private Sub mnuConvertToDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
+        dlgMakeDate.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
+        dlgMakeDate.enumMakedateMode = dlgMakeDate.MakedateMode.Column
+        dlgMakeDate.ShowDialog()
+    End Sub
 End Class

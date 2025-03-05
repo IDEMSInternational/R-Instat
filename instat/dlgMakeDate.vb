@@ -21,6 +21,7 @@ Public Class dlgMakeDate
     Public Enum MakedateMode
         Prepare
         Climatic
+        Column
     End Enum
 
     Public clsPaste As New RFunction
@@ -456,6 +457,8 @@ Public Class dlgMakeDate
                 ucrBase.iHelpTopicID = 461
             Case MakedateMode.Climatic
                 ucrBase.iHelpTopicID = 493
+            Case MakedateMode.Column
+                rdoSingleColumn.Checked = True
         End Select
     End Sub
 

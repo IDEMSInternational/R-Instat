@@ -590,6 +590,12 @@ Public Class ucrDataView
         EndWait()
     End Sub
 
+    Private Sub mnuConvertToDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
+        dlgMakeDate.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
+        dlgMakeDate.enumMakedateMode = dlgMakeDate.MakedateMode.Column
+        dlgMakeDate.ShowDialog()
+    End Sub
+
     Private Sub mnuSort_Click(sender As Object, e As EventArgs) Handles mnuSort.Click
         dlgSort.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
         dlgSort.ShowDialog()
