@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgPasteNewColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsReadClipDataRFunction As New RFunction
+    Private clsReadClipDataRFunction, clsDummyFunction As New RFunction
     Private clsImportColsToExistingDFRFunction As RFunction
     'used to prevent TestOkEnabled from being called multiple times when loading the dialog. 
     Private bValidatePasteData As Boolean = False
@@ -52,6 +52,7 @@ Public Class dlgPasteNewColumns
         ucrPnl.AddFunctionNamesCondition(rdoDataFrame, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=False)
         ucrPnl.AddFunctionNamesCondition(rdoColumns, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data", bNewIsPositive:=True)
         ucrPnl.AddToLinkedControls({ucrDFSelected, ucrChkKeepExstingCols}, {rdoColumns}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnl.AddToLinkedControls(ucrChkSpaceSeperated, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkRowHeader.SetText("First row is header")
         ucrChkRowHeader.SetParameter(New RParameter("header", 1))
@@ -78,6 +79,9 @@ Public Class dlgPasteNewColumns
         ucrChkKeepExstingCols.SetParameter(New RParameter("use_col_name_as_prefix", 2))
         ucrChkKeepExstingCols.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         '----------------------------
+        ucrChkSpaceSeperated.SetText("Space Separated")
+        ucrChkSpaceSeperated.AddParameterValuesCondition(True, "sep", "True")
+        ucrChkSpaceSeperated.AddParameterValuesCondition(False, "sep", "False")
 
         ucrNudPreviewLines.Minimum = 10
     End Sub
@@ -85,10 +89,13 @@ Public Class dlgPasteNewColumns
     Private Sub SetDefaults()
         clsImportColsToExistingDFRFunction = New RFunction
         clsReadClipDataRFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrNudPreviewLines.Value = 10
         ucrSaveNewDFName.Reset()
         ucrDFSelected.Reset()
+
+        clsDummyFunction.AddParameter("sep", "False", iPosition:=0)
 
         'todo. some clip data values work well with read_delim R function.
         'that's why readr references have been left here for future testing and reference.
@@ -114,6 +121,7 @@ Public Class dlgPasteNewColumns
 
         ucrDFSelected.SetRCode(clsImportColsToExistingDFRFunction, bReset)
         ucrChkKeepExstingCols.SetRCode(clsImportColsToExistingDFRFunction, bReset)
+        ucrChkSpaceSeperated.SetRCode(clsDummyFunction, bReset)
 
         ucrPnl.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
@@ -228,6 +236,16 @@ Public Class dlgPasteNewColumns
         SetRCodeForControls(True)
         bValidatePasteData = True
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkSpaceSeperated_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpaceSeperated.ControlValueChanged
+        If ucrChkSpaceSeperated.Checked Then
+            clsReadClipDataRFunction.AddParameter("sep", Chr(34) & "" & Chr(34), iPosition:=2)
+            clsDummyFunction.AddParameter("sep", "True", iPosition:=1)
+        Else
+            clsReadClipDataRFunction.RemoveParameterByName("sep")
+            clsDummyFunction.AddParameter("sep", "False", iPosition:=0)
+        End If
     End Sub
 
 End Class
