@@ -74,6 +74,7 @@ Public Class dlgSplitText
 
         ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         dctPatternPairs.Add("Space ( )", Chr(34) & " " & Chr(34))
+        dctPatternPairs.Add("Spaces ( )", Chr(34) & " " & Chr(34) & " ") ' Adds an invisible difference
         dctPatternPairs.Add("Period .", Chr(34) & "." & Chr(34))
         dctPatternPairs.Add("Comma ,", Chr(34) & "," & Chr(34))
         dctPatternPairs.Add("Colon :", Chr(34) & ":" & Chr(34))
@@ -256,7 +257,7 @@ Public Class dlgSplitText
         clsTextComponentsFixed.RemoveParameterByName("string")
         clsBinaryColumns.RemoveParameterByName("string")
         Select Case ucrInputPattern.GetText()
-            Case "Space ( )"
+            Case "Spaces ( )"
                 clsSquishFunction.AddParameter("split", clsRFunctionParameter:=clsCurrentNewColumnFunction, bIncludeArgumentName:=False, iPosition:=0)
                 clsTextComponentsFixed.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
                 clsTextComponentsMaximum.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
