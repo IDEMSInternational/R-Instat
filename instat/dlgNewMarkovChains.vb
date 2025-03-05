@@ -85,19 +85,19 @@ Public Class dlgNewMarkovChains
         clsIfelseFunction.SetRCommand("ifelse")
 
         clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsWDCalcFunction.SetRCommand("instat_calculation$new")
+        clsWDCalcFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsWDCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
 
         clsLagFunction.SetRCommand("lag")
-        clsWDCalcFunction.SetRCommand("instat_calculation$new")
+        clsWDCalcFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsWDCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
 
-        clsLagCalcFunction.SetRCommand("instat_calculation$new")
+        clsLagCalcFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsLagCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
 
         clsSubCalcsList.SetRCommand("list")
 
-        clsOverallLagCalcFunction.SetRCommand("instat_calculation$new")
+        clsOverallLagCalcFunction.SetRCommand("instatCalculations::instat_calculation$new")
 
         clsFormulaOp.SetOperation("~")
 

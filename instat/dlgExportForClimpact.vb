@@ -99,6 +99,7 @@ Public Class dlgExportForClimpact
 
         ucrSelectorImportToClimpact.Reset()
 
+        clsOutputClimpact.SetPackageName("instatClimatic")
         clsOutputClimpact.SetRCommand("write_weather_data")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsOutputClimpact)

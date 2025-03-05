@@ -328,6 +328,8 @@ Public Class frmMain
         mnuDataViewWindow.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
+        UpdateSwapDataAndMetadata()
+        UpdateSwapDataAndScript()
 
         EnableDisbaleViewSwapMenu(True)
         UpdateSwapDataAndScript()
@@ -444,6 +446,7 @@ Public Class frmMain
             'To ensure this part of the code only runs when the application Is Not in the Debug mode (i.e., in Release mode)
 #If Not DEBUG Then
                      Dim clsSetLibPathsFunction As New RFunction
+            clsSetLibPathsFunction.SetPackageName("instatExtras")
             clsSetLibPathsFunction.SetRCommand("set_library_paths")
             clsSetLibPathsFunction.AddParameter("library_path", Chr(34) & strLibraryPath.Replace("\", "/") & Chr(34))
 
@@ -850,6 +853,7 @@ Public Class frmMain
     Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
         mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        ucrColumnMeta.IsEnabled = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
@@ -2311,12 +2315,14 @@ Public Class frmMain
     Private Sub MnuMetadata_ButtonClick(sender As Object, e As EventArgs) Handles mnuMetadata.ButtonClick
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
+        ucrColumnMeta.IsEnabled = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuColumnMetadat_Click(sender As Object, e As EventArgs) Handles mnuColumnMetadat.Click
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
+        ucrColumnMeta.IsEnabled = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
@@ -2333,6 +2339,7 @@ Public Class frmMain
         clsLastObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=1)
 
         Dim clsViewObjectRFunction As New RFunction
+        clsViewObjectRFunction.SetPackageName("instatExtras")
         clsViewObjectRFunction.SetRCommand("view_object_data")
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsLastObjectRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
@@ -2354,6 +2361,7 @@ Public Class frmMain
         clsPlotlyRFunction.SetRCommand("ggplotly")
         clsPlotlyRFunction.AddParameter("p", clsRFunctionParameter:=clsLastObjectRFunction, iPosition:=0)
 
+        clsViewObjectRFunction.SetPackageName("instatExtras")
         clsViewObjectRFunction.SetRCommand("view_object_data")
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsPlotlyRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Html & Chr(34))
@@ -2551,6 +2559,7 @@ Public Class frmMain
 
     Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
+        ucrColumnMeta.IsEnabled = mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndDataframeMetadata.Enabled = Not mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndScript.Enabled = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
@@ -2947,6 +2956,7 @@ Public Class frmMain
 
     Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
+        ucrColumnMeta.IsEnabled = mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
     End Sub
