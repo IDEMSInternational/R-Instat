@@ -68,7 +68,6 @@ Partial Class ucrColumnMetadata
         Me.mnuConvertToFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCovertToOrderedFactors = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertText = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuConvertToLogical = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertVariate = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuLevelsLabels = New System.Windows.Forms.ToolStripMenuItem()
@@ -80,9 +79,9 @@ Partial Class ucrColumnMetadata
         Me.mnuColumnContextRemoveCurrentColumnSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuConvertToDate = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuConvertToDate = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.statusColumnMenu.SuspendLayout()
         Me.propertiesContextMenuStrip.SuspendLayout()
@@ -290,12 +289,6 @@ Partial Class ucrColumnMetadata
         Me.mnuConvertText.Size = New System.Drawing.Size(214, 22)
         Me.mnuConvertText.Text = "Convert to Character"
         '
-        'mnuConvertToLogical
-        '
-        Me.mnuConvertToLogical.Name = "mnuConvertToLogical"
-        Me.mnuConvertToLogical.Size = New System.Drawing.Size(214, 22)
-        Me.mnuConvertToLogical.Text = "Convert to Logical"
-        '
         'mnuConvertVariate
         '
         Me.mnuConvertVariate.Name = "mnuConvertVariate"
@@ -358,9 +351,15 @@ Partial Class ucrColumnMetadata
         'columnContextMenuStrip
         '
         Me.columnContextMenuStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertVariate, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToDate, Me.mnuConvertToLogical, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuSort, Me.mnuAddComment, Me.mnuColumnFilterRows, Me.mnuColumnContextSelectColumns, Me.mnuColumnContextRemoveCurrentColumnSelection, Me.mnuClearColumnFilter, Me.ToolStripSeparator3, Me.mnuHelp1})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertVariate, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToDate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuSort, Me.mnuAddComment, Me.mnuColumnFilterRows, Me.mnuColumnContextSelectColumns, Me.mnuColumnContextRemoveCurrentColumnSelection, Me.mnuClearColumnFilter, Me.ToolStripSeparator3, Me.mnuHelp1})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
         Me.columnContextMenuStrip.Size = New System.Drawing.Size(215, 468)
+        '
+        'mnuConvertToDate
+        '
+        Me.mnuConvertToDate.Name = "mnuConvertToDate"
+        Me.mnuConvertToDate.Size = New System.Drawing.Size(214, 22)
+        Me.mnuConvertToDate.Text = "Convert to Date"
         '
         'ToolStripSeparator3
         '
@@ -372,12 +371,6 @@ Partial Class ucrColumnMetadata
         Me.mnuHelp1.Name = "mnuHelp1"
         Me.mnuHelp1.Size = New System.Drawing.Size(214, 22)
         Me.mnuHelp1.Text = "Help"
-        '
-        'mnuConvertToDate
-        '
-        Me.mnuConvertToDate.Name = "mnuConvertToDate"
-        Me.mnuConvertToDate.Size = New System.Drawing.Size(214, 22)
-        Me.mnuConvertToDate.Text = "Convert to Date"
         '
         'ucrColumnMetadata
         '
@@ -422,7 +415,6 @@ Partial Class ucrColumnMetadata
     Friend WithEvents mnuConvertToFactor As ToolStripMenuItem
     Friend WithEvents mnuCovertToOrderedFactors As ToolStripMenuItem
     Friend WithEvents mnuConvertText As ToolStripMenuItem
-    Friend WithEvents mnuConvertToLogical As ToolStripMenuItem
     Friend WithEvents mnuConvertVariate As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents mnuLevelsLabels As ToolStripMenuItem

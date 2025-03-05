@@ -50,11 +50,11 @@ Partial Class ucrDataView
         Me.mnuEditCell2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteCells2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuConvertVariate = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertToFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCovertToOrderedFactors = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertText = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuConvertToLogical = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuConvertVariate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuConvertToDate = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuLevelsLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem21 = New System.Windows.Forms.ToolStripSeparator()
@@ -151,7 +151,6 @@ Partial Class ucrDataView
         Me.ucrReoGrid = New instat.ucrDataViewReoGrid()
         Me.ucrLinuxGrid = New instat.ucrDataViewLinuxGrid()
         Me.ttGoToRowOrColPage = New System.Windows.Forms.ToolTip(Me.components)
-        Me.mnuConvertToDate = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -168,9 +167,9 @@ Partial Class ucrDataView
         'columnContextMenuStrip
         '
         Me.columnContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.ToolStripSeparator13, Me.mnuEditCell2, Me.mnuDeleteCells2, Me.toolStripMenuItem2, Me.mnuConvertVariate, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToDate, Me.mnuConvertToLogical, Me.ToolStripSeparator1, Me.mnuLevelsLabels, Me.toolStripMenuItem21, Me.mnuSort, Me.mnuColumnAddComment, Me.mnuColumnFilterRows, Me.mnuColumnContextColumnSelection, Me.mnuColumnContextRemoveCurrentColumnSelection, Me.mnuClearColumnFilter, Me.ToolStripSeparator8, Me.mnuHelp})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.ToolStripSeparator13, Me.mnuEditCell2, Me.mnuDeleteCells2, Me.toolStripMenuItem2, Me.mnuConvertVariate, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToDate, Me.ToolStripSeparator1, Me.mnuLevelsLabels, Me.toolStripMenuItem21, Me.mnuSort, Me.mnuColumnAddComment, Me.mnuColumnFilterRows, Me.mnuColumnContextColumnSelection, Me.mnuColumnContextRemoveCurrentColumnSelection, Me.mnuClearColumnFilter, Me.ToolStripSeparator8, Me.mnuHelp})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(215, 540)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(215, 496)
         '
         'mnuColumnRename
         '
@@ -232,6 +231,12 @@ Partial Class ucrDataView
         Me.toolStripMenuItem2.Name = "toolStripMenuItem2"
         Me.toolStripMenuItem2.Size = New System.Drawing.Size(211, 6)
         '
+        'mnuConvertVariate
+        '
+        Me.mnuConvertVariate.Name = "mnuConvertVariate"
+        Me.mnuConvertVariate.Size = New System.Drawing.Size(214, 22)
+        Me.mnuConvertVariate.Text = "Convert to Numeric"
+        '
         'mnuConvertToFactor
         '
         Me.mnuConvertToFactor.Name = "mnuConvertToFactor"
@@ -250,17 +255,11 @@ Partial Class ucrDataView
         Me.mnuConvertText.Size = New System.Drawing.Size(214, 22)
         Me.mnuConvertText.Text = "Convert to Character"
         '
-        'mnuConvertToLogical
+        'mnuConvertToDate
         '
-        Me.mnuConvertToLogical.Name = "mnuConvertToLogical"
-        Me.mnuConvertToLogical.Size = New System.Drawing.Size(214, 22)
-        Me.mnuConvertToLogical.Text = "Convert to Logical"
-        '
-        'mnuConvertVariate
-        '
-        Me.mnuConvertVariate.Name = "mnuConvertVariate"
-        Me.mnuConvertVariate.Size = New System.Drawing.Size(214, 22)
-        Me.mnuConvertVariate.Text = "Convert to Numeric"
+        Me.mnuConvertToDate.Name = "mnuConvertToDate"
+        Me.mnuConvertToDate.Size = New System.Drawing.Size(214, 22)
+        Me.mnuConvertToDate.Text = "Convert to Date"
         '
         'ToolStripSeparator1
         '
@@ -1059,12 +1058,6 @@ Partial Class ucrDataView
         Me.ucrLinuxGrid.Size = New System.Drawing.Size(247, 439)
         Me.ucrLinuxGrid.TabIndex = 13
         '
-        'mnuConvertToDate
-        '
-        Me.mnuConvertToDate.Name = "mnuConvertToDate"
-        Me.mnuConvertToDate.Size = New System.Drawing.Size(214, 22)
-        Me.mnuConvertToDate.Text = "Convert to Date"
-        '
         'ucrDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1127,7 +1120,6 @@ Partial Class ucrDataView
     Friend WithEvents mnuAddComment As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents lblHeaderDataView As Label
-    Friend WithEvents mnuConvertToLogical As ToolStripMenuItem
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents mnuLevelsLabels As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator

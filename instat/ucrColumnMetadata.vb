@@ -320,12 +320,6 @@ Public Class ucrColumnMetadata
         EndWait()
     End Sub
 
-    Private Sub mnuConvertToLogical_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogical.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToLogical(GetSelectedDataframeColumnsFromSelectedRows)
-        EndWait()
-    End Sub
-
     Private Sub mnuClearColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuClearColumnFilter.Click
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentFilter()
