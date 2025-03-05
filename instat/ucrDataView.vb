@@ -584,7 +584,7 @@ Public Class ucrDataView
         EndWait()
     End Sub
 
-    Private Sub mnuConvertToDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
+    Private Sub mnuConvertToDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click, mnuConvertToColumnDate.Click
         dlgMakeDate.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
         dlgMakeDate.enumMakedateMode = dlgMakeDate.MakedateMode.Column
         dlgMakeDate.ShowDialog()
@@ -699,12 +699,6 @@ Public Class ucrDataView
     Private Sub mnuConvertToCharacter_Click(sender As Object, e As EventArgs) Handles mnuConvertToCharacter.Click
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToCharacter(GetSelectedColumnNames())
-        EndWait()
-    End Sub
-
-    Private Sub mnuConvertToLogic_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogic.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToLogical(GetSelectedColumnNames())
         EndWait()
     End Sub
 
