@@ -254,9 +254,7 @@ Public Class dlgPasteNewColumns
             clsReadClipDataRFunction.RemoveParameterByName("sep")
             clsDummyFunction.AddParameter("sep", "False", iPosition:=0)
         End If
-        If bValidatePasteData Then
-            TestOkEnabled(True)
-        End If
+        TestOkEnabled(True)
     End Sub
 
 End Class
