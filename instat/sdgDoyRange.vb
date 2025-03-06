@@ -62,6 +62,7 @@ Public Class sdgDoyRange
 
         ucrSelectorDoy.SetPrimaryDataFrameOptions(strMainDataFrame, True, True)
 
+        clsFindDfFunc.SetPackageName("databook")
         clsFindDfFunc.SetRCommand("find_df_from_calc_from")
         clsFindDfFunc.AddParameter("x", clsRFunctionParameter:=clsCalcFromList, iPosition:=0)
 
