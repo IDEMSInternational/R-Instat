@@ -166,6 +166,14 @@ Public Class dlgPasteNewColumns
                 Return False
             End If
 
+            ' Disable "Space Separated" only if user didn't check it manually
+            If dfTemp.ColumnCount > 1 AndAlso Not ucrChkSpaceSeperated.Checked Then
+                ucrChkSpaceSeperated.Checked = False ' Uncheck if more than one column
+                ucrChkSpaceSeperated.Enabled = False ' Disable it
+            Else
+                ucrChkSpaceSeperated.Enabled = True ' Allow user to enable it
+            End If
+
             'preview data
             frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols, iRowMax:=ucrNudPreviewLines.Value)
             lblConfirmText.Text = "Columns: " & dfTemp.ColumnCount & " | Rows: " & dfTemp.RowCount & Environment.NewLine & "Click Ok to paste data."
@@ -222,10 +230,10 @@ Public Class dlgPasteNewColumns
         End If
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrDFSelected.ControlContentsChanged, ucrSaveNewDFName.ControlContentsChanged, ucrChkKeepExstingCols.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrDFSelected.ControlContentsChanged, ucrSaveNewDFName.ControlContentsChanged, ucrChkKeepExstingCols.ControlContentsChanged, ucrChkSpaceSeperated.ControlContentsChanged
         If bValidatePasteData Then
             'disabled unnecessary validation of copied data because it may take long for large datasets
-            TestOkEnabled(bValidateCopiedData:=ucrchangedControl IsNot ucrSaveNewDFName AndAlso ucrchangedControl IsNot ucrDFSelected AndAlso ucrchangedControl IsNot ucrChkKeepExstingCols)
+            TestOkEnabled(bValidateCopiedData:=ucrchangedControl IsNot ucrSaveNewDFName AndAlso ucrchangedControl IsNot ucrDFSelected AndAlso ucrchangedControl IsNot ucrChkKeepExstingCols AndAlso ucrchangedControl IsNot ucrChkSpaceSeperated)
         End If
     End Sub
 
@@ -245,6 +253,9 @@ Public Class dlgPasteNewColumns
         Else
             clsReadClipDataRFunction.RemoveParameterByName("sep")
             clsDummyFunction.AddParameter("sep", "False", iPosition:=0)
+        End If
+        If bValidatePasteData Then
+            TestOkEnabled(True)
         End If
     End Sub
 
