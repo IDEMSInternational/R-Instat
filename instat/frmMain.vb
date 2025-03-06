@@ -227,14 +227,21 @@ Public Class frmMain
                 My.Application.Info.Version.Minor.ToString() & "." &
                 My.Application.Info.Version.Build.ToString()
 
-        Me.Text = "R-Instat " & strVersion
+        Me.Text = "R-Instat " & GetVersionNumber()
 
-        CreateAdditionalLibraryDirectory(strVersion)
+        'CreateAdditionalLibraryDirectory(strVersion)
         '-------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
         SetHideMenus()
     End Sub
+
+    Public Function GetVersionNumber() As String
+        Dim strVersion As String = My.Application.Info.Version.Major.ToString() & "." &
+                My.Application.Info.Version.Minor.ToString() & "." &
+                My.Application.Info.Version.Build.ToString()
+        Return strVersion
+    End Function
 
     Private Sub CheckForUpdates()
         Dim webClient As New WebClient()
@@ -431,33 +438,6 @@ Public Class frmMain
             Return True
         End If
     End Function
-
-    Private Sub CreateAdditionalLibraryDirectory(strVersion As String)
-        ' Define the custom library path in the ApplicationData folder
-        Dim strLibraryPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "R-Instat", strVersion, "library")
-
-        Try
-            ' Check if the directory exists, if not, create it
-            If Not Directory.Exists(strLibraryPath) Then
-                Directory.CreateDirectory(strLibraryPath)
-            End If
-
-
-            'To ensure this part of the code only runs when the application Is Not in the Debug mode (i.e., in Release mode)
-#If Not DEBUG Then
-                     Dim clsSetLibPathsFunction As New RFunction
-            clsSetLibPathsFunction.SetPackageName("instatExtras")
-            clsSetLibPathsFunction.SetRCommand("set_library_paths")
-            clsSetLibPathsFunction.AddParameter("library_path", Chr(34) & strLibraryPath.Replace("\", "/") & Chr(34))
-
-            ' Execute the R script to update the library paths
-            clsRLink.RunScript(strScript:=clsSetLibPathsFunction.ToScript, bSeparateThread:=False, bSilent:=False)
-#End If
-        Catch ex As Exception
-            ' Handle potential errors (e.g., directory creation failure)
-            MessageBox.Show($"Failed to create or update library directory: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
 
     Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strRScripts As String = ""
