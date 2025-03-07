@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction As New RFunction
+    Private clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -44,10 +44,43 @@ Public Class dlgGeneralTable
     Private Sub initialiseDialog()
         ucrBase.iHelpTopicID = 419
 
+        ucrPnlOptions.AddRadioButton(rdoDataFrame)
+        ucrPnlOptions.AddRadioButton(rdoMultiple)
+        ucrPnlOptions.AddRadioButton(rdoSingle)
+
+        ucrPnlOptions.AddParameterValuesCondition(rdoDataFrame, "checked", "Data Frame")
+        ucrPnlOptions.AddParameterValuesCondition(rdoSingle, "checked", "Single")
+        ucrPnlOptions.AddParameterValuesCondition(rdoMultiple, "checked", "Multiple")
+
+        ucrPnlOptions.AddToLinkedControls({ucrInputTitle, ucrInputTitleFooter, ucrSaveTable, ucrChkSelectTheme}, {rdoDataFrame, rdoSingle, rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkPreview, ucrReceiverMultipleCols}, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleColFactor, ucrReceiverSingleVariable, ucrReceiverMultipleRowFactors}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleVariablesMul}, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrReceiverMultipleCols.SetParameter(New RParameter("df_columns_to_use_param", 0, bNewIncludeArgumentName:=False))
         ucrReceiverMultipleCols.SetParameterIsRFunction()
         ucrReceiverMultipleCols.Selector = ucrSelectorCols
         ucrReceiverMultipleCols.SetLinkedDisplayControl(lblColumns)
+
+        ucrReceiverMultipleRowFactors.SetParameter(New RParameter("df_columns_to_use_param", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverMultipleRowFactors.SetParameterIsRFunction()
+        ucrReceiverMultipleRowFactors.Selector = ucrSelectorCols
+        ucrReceiverMultipleRowFactors.SetLinkedDisplayControl(lblRowFactor)
+
+        ucrReceiverMultipleColFactor.SetParameter(New RParameter("df_columns_to_use_param", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverMultipleColFactor.SetParameterIsRFunction()
+        ucrReceiverMultipleColFactor.Selector = ucrSelectorCols
+        ucrReceiverMultipleColFactor.SetLinkedDisplayControl(lblColFactor)
+
+        ucrReceiverSingleVariable.SetParameter(New RParameter("df_columns_to_use_param", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverSingleVariable.SetParameterIsRFunction()
+        ucrReceiverSingleVariable.Selector = ucrSelectorCols
+        ucrReceiverSingleVariable.SetLinkedDisplayControl(lblVariable)
+
+        ucrReceiverMultipleVariablesMul.SetParameter(New RParameter("df_columns_to_use_param", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverMultipleVariablesMul.SetParameterIsRFunction()
+        ucrReceiverMultipleVariablesMul.Selector = ucrSelectorCols
+        ucrReceiverMultipleVariablesMul.SetLinkedDisplayControl(lblVariblesMul)
 
         ucrInputTitle.SetParameter(New RParameter("title", iNewPosition:=0))
         ucrInputTitleFooter.SetParameter(New RParameter("footnote", iNewPosition:=0))
@@ -70,7 +103,7 @@ Public Class dlgGeneralTable
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
         ucrChkSelectTheme.Checked = True
-        ucrChkSelectTheme.SetText("Select Theme")
+        ucrChkSelectTheme.SetText("Theme")
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
 
@@ -86,6 +119,7 @@ Public Class dlgGeneralTable
         clsCellsTitleRFunction = New RFunction
         clsTitleFooterRFunction = New RFunction
         clsTitleStyleRFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         ucrSelectorCols.Reset()
         ucrReceiverMultipleCols.SetMeAsReceiver()
@@ -94,6 +128,8 @@ Public Class dlgGeneralTable
 
         clsBaseOperator.SetOperation("%>%")
         clsBaseOperator.bBrackets = False
+
+        clsDummyFunction.AddParameter("checked", "Data Frame", iPosition:=0)
 
         clsHeadRFunction.SetPackageName("utils")
         clsHeadRFunction.SetRCommand("head")
@@ -141,6 +177,7 @@ Public Class dlgGeneralTable
         ucrInputTitleFooter.SetRCode(clsTitleFooterRFunction, True, bCloneIfNeeded:=True)
         ucrChkPreview.SetRCode(clsBaseOperator, bReset)
         ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
+        ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
