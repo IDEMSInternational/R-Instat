@@ -341,7 +341,11 @@ Public Class ucrColumnMetadata
         Cursor = Cursors.Default
     End Sub
 
-    Private Function GetFirstSelectedDataframeColumnFromSelectedRow() As String
+    Public Function IsVisible() As Boolean
+        Return _grid.bVisible
+    End Function
+
+    Public Function GetFirstSelectedDataframeColumnFromSelectedRow() As String
         Return _grid.GetCellValue(_grid.GetSelectedRows(0) - 1, strNameLabel)
     End Function
 

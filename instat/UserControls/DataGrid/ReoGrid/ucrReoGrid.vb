@@ -231,6 +231,12 @@ Public MustInherit Class ucrReoGrid
     Private Function GetCellValue(iRow As Integer, strColumn As String) As String Implements IGrid.GetCellValue
         For i As Integer = 0 To grdData.CurrentWorksheet.ColumnCount - 1
             Dim strColumnHeader As String = grdData.CurrentWorksheet.ColumnHeaders(i).Text
+
+            ' Ensure strColumnHeader is not Nothing before processing
+            If String.IsNullOrEmpty(strColumnHeader) Then
+                Continue For ' Skip this iteration
+            End If
+
             If strColumnHeader.Contains("(") Then
                 strColumnHeader = strColumnHeader.Split("(")(0)
             End If
