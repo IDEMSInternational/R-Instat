@@ -1528,13 +1528,13 @@ Public Class ucrGeom
         clsgeom_likert.AddLayerParameter("default_by", "list", "NULL", lstParameterStrings:={"NULL", Chr(34) & "total" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "x" & Chr(34)})
         clsgeom_likert.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_likert.AddLayerParameter("position", "list", "ggstats::position_likert()", lstParameterStrings:={"ggstats::position_likert()", "ggstats::position_likert(.5)", "ggstats::position_likert(cutoff = NULL)", "ggstats::position_likert(cutoff = 1)", Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
-        ''See global comments about position.
-        ''Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
-        'clsgeom_likert.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
-        'clsgeom_likert.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        'clsgeom_likert.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
-        'clsgeom_likert.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
-        'clsgeom_likert.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+        'See global comments about position.
+        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        clsgeom_likert.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        clsgeom_likert.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_likert.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
+        clsgeom_likert.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
+        clsgeom_likert.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
 
         lstAllGeoms.Add(clsgeom_likert)
 
