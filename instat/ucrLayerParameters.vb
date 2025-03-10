@@ -49,20 +49,19 @@ Public Class ucrLayerParameters
         Dim i As Integer = 0
         ' Fill the labels and checkboxes
         If clsCurrGeom IsNot Nothing Then
-            ' Ensure clsGeomFunction is not null before using it
+            'Ensure clsGeomFunction Is Not null before using it
             If clsGeomFunction IsNot Nothing AndAlso clsGeomFunction.strRCommand = "geom_likert" Then
                 ' Ensure "position" is set to ggstats::position_likert() if not manually changed
                 If Not clsGeomFunction.ContainsParameter("position") Then
                     clsGeomFunction.AddParameter("position", "ggstats::position_likert()")
                 End If
             End If
-            If clsGeomFunction IsNot Nothing AndAlso clsGeomFunction.strRCommand = "geom_pyramid" OrElse clsGeomFunction.strRCommand = "geom_diverging" Then
+            If clsGeomFunction IsNot Nothing AndAlso (clsGeomFunction.strRCommand = "geom_pyramid" OrElse clsGeomFunction.strRCommand = "geom_diverging") Then
                 ' Ensure "position" is set to ggstats::position_likert() if not manually changed
                 If Not clsGeomFunction.ContainsParameter("position") Then
                     clsGeomFunction.AddParameter("position", "ggstats::position_diverging()")
                 End If
             End If
-
             For i = 0 To (lstLayerParameterControl.Count - 1)
                 If (i < clsCurrGeom.clsLayerParameters.Count) Then
                     lstLayerParameterControl(i).SetControl(clsGeomFunction, clsCurrGeom.clsLayerParameters(i), bReset:=bReset)
@@ -72,7 +71,6 @@ Public Class ucrLayerParameters
             Next
         End If
     End Sub
-
 
     Private Sub ucrLayerParameters_GeomChanged() Handles Me.GeomChanged
         If ucrGeomWithAes IsNot Nothing Then

@@ -503,34 +503,25 @@ Public Class ucrGeom
 
         clsgeom_bar_connector.SetGeomPackage("ggstats")
         clsgeom_bar_connector.SetGeomName("geom_bar_connector")
-        clsgeom_bar_connector.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}))
-        'All data types work as x aesthetics although the most common one is factor.
-        'Warning: the group aesthetic could be added, doesn't send errors, but using group doesn't work very well. Histograms have been designed to deal with continuous x and grouping (using stat_bin). Group is not mentioned as an available aesthetic in the documentation.
-
+        clsgeom_bar_connector.AddAesParameter("x", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+        clsgeom_bar_connector.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
+        clsgeom_bar_connector.AddAesParameter("group", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+        clsgeom_bar_connector.AddAesParameter("fill", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
         'Optional aesthetics
-        clsgeom_bar_connector.AddAesParameter("y", strIncludedDataTypes:=({"numeric", "factor"}))
-        'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom. This is handled by sdgLayerOptions.ucrSdgLayerBase_ClickReturn. 
-        'Alternatively, one can map a continuous variable to the aesthetics weight (other variable types produce an error as stat_count is using sum for that variable). Each bar will then add the values taken by this value for the different events falling under the count of each bar (proceeds to a weighted count).
-        'Warning: In this case, the label of the y axis is still count, whereas it should take the name of the variable mapped to weight probably. Also, if a variable has been mapped to y (stat is "identity") then the weight aesthetic is ignored (no warning in R).
         clsgeom_bar_connector.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
         clsgeom_bar_connector.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_bar_connector.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_bar_connector.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_bar_connector.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
         clsgeom_bar_connector.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
-        'Warning: Size varies the outline of the bars, hence changes are difficult to see if fill and colour take the same values. 
-        'Warning: Finally it Is Not advised To use size For discrete variables (R message), however, continuous variables mapped to size when the stat is "count" are ignored (no changes in the graph).
-
         'Geom_Bar_connector layer parameters
         clsgeom_bar_connector.AddLayerParameter("width", "numeric", "0.10", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
         'Global Layer parameters
         clsgeom_bar_connector.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_bar_connector.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_bar_connector.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), Chr(34) & "likert" & Chr(34), Chr(34) & "diverging" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_bar_connector.AddLayerParameter("na.rm", "boolean", "FALSE")
         clsgeom_bar_connector.AddLayerParameter("continuous", "boolean", "FALSE")
         clsgeom_bar_connector.AddLayerParameter("orientation", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'See global comments about position.
-        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_bar_connector.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_bar_connector.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_bar_connector.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
@@ -668,17 +659,17 @@ Public Class ucrGeom
 
         clsgeom_connector.SetGeomPackage("ggstats")
         clsgeom_connector.SetGeomName("geom_connector")
-        clsgeom_connector.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}))
-        clsgeom_connector.AddAesParameter("y", strIncludedDataTypes:=({"numeric", "factor"}), bIsMandatory:=True)
+        'Mandatory
+        clsgeom_connector.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}), bIsMandatory:=True)
+        clsgeom_connector.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
+        clsgeom_connector.AddAesParameter("colour", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+
+        'Optional
         clsgeom_connector.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
         clsgeom_connector.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_connector.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_connector.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_connector.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
         clsgeom_connector.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
-        'Warning: Size varies the outline of the bars, hence changes are difficult to see if fill and colour take the same values. 
-        'Warning: Finally it Is Not advised To use size For discrete variables (R message), however, continuous variables mapped to size when the stat is "count" are ignored (no changes in the graph).
-
         'Geom_connector layer parameters
         clsgeom_connector.AddLayerParameter("width", "numeric", "0.10", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
         'Global Layer parameters
@@ -1036,28 +1027,22 @@ Public Class ucrGeom
         clsgeom_diverging.SetGeomPackage("ggstats")
         clsgeom_diverging.SetGeomName("geom_diverging")
         'Mandatory Aesthetics
-        clsgeom_diverging.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}), bIsMandatory:=True)
-        'All data types work as x aesthetics although the most common one is factor.
-        'Warning: the group aesthetic could be added, doesn't send errors, but using group doesn't work very well. Histograms have been designed to deal with continuous x and grouping (using stat_bin). Group is not mentioned as an available aesthetic in the documentation.
-
+        clsgeom_diverging.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}))
+        clsgeom_diverging.AddAesParameter("y", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+        clsgeom_diverging.AddAesParameter("fill", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
         'Optional aesthetics
-        clsgeom_diverging.AddAesParameter("y", strIncludedDataTypes:=({"numeric", "factor"}))
-        'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom. This is handled by sdgLayerOptions.ucrSdgLayerBase_ClickReturn. 
-        'Alternatively, one can map a continuous variable to the aesthetics weight (other variable types produce an error as stat_count is using sum for that variable). Each bar will then add the values taken by this value for the different events falling under the count of each bar (proceeds to a weighted count).
-        'Warning: In this case, the label of the y axis is still count, whereas it should take the name of the variable mapped to weight probably. Also, if a variable has been mapped to y (stat is "identity") then the weight aesthetic is ignored (no warning in R).
         clsgeom_diverging.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
         clsgeom_diverging.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_diverging.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_diverging.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_diverging.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
         clsgeom_diverging.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
         'Geom_diverging layer parameters
         clsgeom_diverging.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
-        'Global Layer parameters
+        ''Global Layer parameters
         clsgeom_diverging.AddLayerParameter("complete", "editablelist", Chr(34) & "fill" & Chr(34), lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
         clsgeom_diverging.AddLayerParameter("default_by", "list", Chr(34) & "total" & Chr(34), lstParameterStrings:={Chr(34) & "total" & Chr(34), "NULL", Chr(34) & "fill" & Chr(34), Chr(34) & "x" & Chr(34)})
         clsgeom_diverging.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_diverging.AddLayerParameter("position", "list", "ggstats::position_diverging()", lstParameterStrings:={"ggstats::diverging()", "ggstats::position_diverging(.5)", "ggstats::position_diverging(cutoff = NULL)", "ggstats::position_diverging(cutoff = 5)", Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_diverging.AddLayerParameter("position", "list", "ggstats::position_diverging()", lstParameterStrings:={"ggstats::position_diverging()", "ggstats::position_diverging(.5)", "ggstats::position_diverging(cutoff = NULL)", "ggstats::position_diverging(cutoff = 5)", Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_diverging.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
         clsgeom_diverging.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
@@ -1526,34 +1511,31 @@ Public Class ucrGeom
 
         clsgeom_likert.SetGeomPackage("ggstats")
         clsgeom_likert.SetGeomName("geom_likert")
+        'Mandatory
         clsgeom_likert.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}))
-        clsgeom_likert.AddAesParameter("y", strIncludedDataTypes:=({"numeric", "factor"}))
-        'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom. This is handled by sdgLayerOptions.ucrSdgLayerBase_ClickReturn. 
-        'Alternatively, one can map a continuous variable to the aesthetics weight (other variable types produce an error as stat_count is using sum for that variable). Each bar will then add the values taken by this value for the different events falling under the count of each bar (proceeds to a weighted count).
-        'Warning: In this case, the label of the y axis is still count, whereas it should take the name of the variable mapped to weight probably. Also, if a variable has been mapped to y (stat is "identity") then the weight aesthetic is ignored (no warning in R).
+        clsgeom_likert.AddAesParameter("y", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+        clsgeom_likert.AddAesParameter("fill", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+        'Optional
         clsgeom_likert.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
         clsgeom_likert.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_likert.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_likert.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_likert.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
         clsgeom_likert.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
-        ''Warning: Size varies the outline of the bars, hence changes are difficult to see if fill and colour take the same values. 
-        ''Warning: Finally it Is Not advised To use size For discrete variables (R message), however, continuous variables mapped to size when the stat is "count" are ignored (no changes in the graph).
-
         'Geom_likert layer parameters
         clsgeom_likert.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
-        'Global Layer parameters
-        clsgeom_likert.AddLayerParameter("complete", "editablelist", Chr(34) & "fill" & Chr(34), lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
-        clsgeom_likert.AddLayerParameter("default_by", "list", Chr(34) & "x" & Chr(34), lstParameterStrings:={Chr(34) & "total" & Chr(34), "NULL", Chr(34) & "fill" & Chr(34), Chr(34) & "x" & Chr(34)})
+        ''Global Layer parameters
+        clsgeom_likert.AddLayerParameter("complete", "editablelist", Chr(34) & "fill" & Chr(34), lstParameterStrings:={Chr(34) & "fill" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "x" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
+        clsgeom_likert.AddLayerParameter("default_by", "list", "NULL", lstParameterStrings:={"NULL", Chr(34) & "total" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "x" & Chr(34)})
         clsgeom_likert.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_likert.AddLayerParameter("position", "list", "ggstarts::position_likert()", lstParameterStrings:={"ggstarts::position_likert()", "ggstarts::position_likert(.5)", "ggstarts::position_likert(cutoff = NULL)", "ggstarts::position_likert(cutoff = 1)", Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
-        'See global comments about position.
-        'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
-        clsgeom_likert.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
-        clsgeom_likert.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
-        clsgeom_likert.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
-        clsgeom_likert.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
-        clsgeom_likert.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+        clsgeom_likert.AddLayerParameter("position", "list", "ggstats::position_likert()", lstParameterStrings:={"ggstats::position_likert()", "ggstats::position_likert(.5)", "ggstats::position_likert(cutoff = NULL)", "ggstats::position_likert(cutoff = 1)", Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        ''See global comments about position.
+        ''Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
+        'clsgeom_likert.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
+        'clsgeom_likert.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
+        'clsgeom_likert.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
+        'clsgeom_likert.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Note: alpha only acts on the fill for bars. The outline is not getting transparent.
+        'clsgeom_likert.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) ''Varies the size of outline. Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+
         lstAllGeoms.Add(clsgeom_likert)
 
         clsgeom_likert_text.SetGeomPackage("ggstats")
@@ -1859,27 +1841,23 @@ Public Class ucrGeom
         clsgeom_polygon.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_polygon.AddLayerParameter("direction", "list", Chr(34) & "vh" & Chr(34), lstParameterStrings:={Chr(34) & "vh" & Chr(34), Chr(34) & "hv" & Chr(34)})
         lstAllGeoms.Add(clsgeom_polygon)
-
+        'Mandatory
         clsgeom_prop_bar.SetGeomPackage("ggstats")
         clsgeom_prop_bar.SetGeomName("geom_prop_bar")
         clsgeom_prop_bar.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}), bIsMandatory:=True)
+        clsgeom_prop_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}), bIsMandatory:=True)
+        clsgeom_prop_bar.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
+        clsgeom_prop_bar.AddAesParameter("by", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
+        'Optional
         clsgeom_prop_bar.AddAesParameter("y", strIncludedDataTypes:=({"numeric", "factor"}))
-        'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom. This is handled by sdgLayerOptions.ucrSdgLayerBase_ClickReturn. 
-        'Alternatively, one can map a continuous variable to the aesthetics weight (other variable types produce an error as stat_count is using sum for that variable). Each bar will then add the values taken by this value for the different events falling under the count of each bar (proceeds to a weighted count).
-        'Warning: In this case, the label of the y axis is still count, whereas it should take the name of the variable mapped to weight probably. Also, if a variable has been mapped to y (stat is "identity") then the weight aesthetic is ignored (no warning in R).
-        clsgeom_prop_bar.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
         clsgeom_prop_bar.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_prop_bar.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_prop_bar.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_prop_bar.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
         clsgeom_prop_bar.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
-        'Warning: Size varies the outline of the bars, hence changes are difficult to see if fill and colour take the same values. 
-        'Warning: Finally it Is Not advised To use size For discrete variables (R message), however, continuous variables mapped to size when the stat is "count" are ignored (no changes in the graph).
-
         'Geom_Bar layer parameters
         clsgeom_prop_bar.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
         'Global Layer parameters
-        clsgeom_prop_bar.AddLayerParameter("complete", "editablelist", "NULL", lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
+        clsgeom_prop_bar.AddLayerParameter("complete", "editablelist", "NULL", lstParameterStrings:={"NULL", Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
         clsgeom_prop_bar.AddLayerParameter("default_by", "list", Chr(34) & "x" & Chr(34), lstParameterStrings:={Chr(34) & "total" & Chr(34), "NULL", Chr(34) & "fill" & Chr(34), Chr(34) & "x" & Chr(34)})
         clsgeom_prop_bar.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_prop_bar.AddLayerParameter("position", "list", Chr(34) & "stack" & Chr(34), lstParameterStrings:={Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
@@ -1896,24 +1874,23 @@ Public Class ucrGeom
         clsgeom_prop_connector.SetGeomPackage("ggstats")
         clsgeom_prop_connector.SetGeomName("geom_prop_connector")
         'Mandatory Aesthetics
-        clsgeom_prop_connector.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}))
-        clsgeom_prop_connector.AddAesParameter("y", strIncludedDataTypes:=({"numeric", "factor"}))
+        clsgeom_prop_connector.AddAesParameter("x", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+        clsgeom_prop_connector.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
+        clsgeom_prop_connector.AddAesParameter("fill", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+        clsgeom_prop_connector.AddAesParameter("group", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+        'Optional
         clsgeom_prop_connector.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
         clsgeom_prop_connector.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_prop_connector.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_prop_connector.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_prop_connector.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
         clsgeom_prop_connector.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
-        'Warning: Size varies the outline of the bars, hence changes are difficult to see if fill and colour take the same values. 
-        'Warning: Finally it Is Not advised To use size For discrete variables (R message), however, continuous variables mapped to size when the stat is "count" are ignored (no changes in the graph).
-
         'Geom_connector layer parameters
         clsgeom_prop_connector.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
         'Global Layer parameters
-        clsgeom_prop_connector.AddLayerParameter("complete", "editablelist", "NULL", lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
+        clsgeom_prop_connector.AddLayerParameter("complete", "editablelist", "NULL", lstParameterStrings:={"NULL", Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
         clsgeom_prop_connector.AddLayerParameter("default_by", "list", Chr(34) & "fill" & Chr(34), lstParameterStrings:={Chr(34) & "total" & Chr(34), "NULL", Chr(34) & "fill" & Chr(34), Chr(34) & "x" & Chr(34)})
         clsgeom_prop_connector.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_prop_connector.AddLayerParameter("position", "list", "position_stack(0.5)", lstParameterStrings:={Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_prop_connector.AddLayerParameter("position", "list", "position_stack(0.5)", lstParameterStrings:={"position_stack(0.5)", Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
         clsgeom_prop_connector.AddLayerParameter("na.rm", "boolean", "FALSE")
         clsgeom_prop_connector.AddLayerParameter("continuous", "boolean", "FALSE")
         clsgeom_prop_connector.AddLayerParameter("orientation", "list", "NA", lstParameterStrings:={"NA", "TRUE", "FALSE"})
@@ -1951,10 +1928,10 @@ Public Class ucrGeom
         clsgeom_prop_text.AddLayerParameter("check_overlap", "boolean", "FALSE") 'If TRUE, text that overlaps previous text in the same layer will not be plotted. A quick and dirty way
         clsgeom_prop_text.AddLayerParameter("parse", "boolean", "FALSE") 'If TRUE, the labels will be parsed into expressions and displayed as described in ?plotmath
         'Global Layer parameters
-        clsgeom_prop_text.AddLayerParameter("complete", "editablelist", "NULL", lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
+        clsgeom_prop_text.AddLayerParameter("complete", "editablelist", "NULL", lstParameterStrings:={"NULL", Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
         clsgeom_prop_text.AddLayerParameter("default_by", "list", Chr(34) & "x" & Chr(34), lstParameterStrings:={Chr(34) & "total" & Chr(34), "NULL", Chr(34) & "fill" & Chr(34), Chr(34) & "x" & Chr(34)})
         clsgeom_prop_text.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_prop_text.AddLayerParameter("position", "editablelist", "ggstats::position_diverging(0.5)", lstParameterStrings:={"ggstats::position_diverging()", "ggstats::position_likert(0.5)", "position_stack(vjust = 0.9)", "position_stack(vjust = 0.5, reverse = TRUE)", "position_dodge(width = 0.9)", "position_jitter(width = 0.9)", "position_fill(vjust = 0.9)"}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
+        clsgeom_prop_text.AddLayerParameter("position", "editablelist", "ggstats::position_diverging(0.5)", lstParameterStrings:={"ggstats::position_diverging(0.5)", "ggstats::position_diverging()", "ggstats::position_likert(0.5)", "position_stack(vjust = 0.9)", "position_stack(vjust = 0.5, reverse = TRUE)", "position_dodge(width = 0.9)", "position_jitter(width = 0.9)", "position_fill(vjust = 0.9)"}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
         'Warning: cannot use both position and nudge_x;nudge_y !!! Doesn't crash the software...
         'Aesthetics as layer parameters.
         clsgeom_prop_text.AddLayerParameter("family", "list", Chr(34) & Chr(34), lstParameterStrings:={Chr(34) & Chr(34), Chr(34) & "serif" & Chr(34), Chr(34) & "sans" & Chr(34), Chr(34) & "mono" & Chr(34), Chr(34) & "symbol" & Chr(34)}) 'Warning: could add more fonts, maybe use extrafonts package ?
@@ -1971,26 +1948,22 @@ Public Class ucrGeom
 
         clsgeom_pyramid.SetGeomPackage("ggstats")
         clsgeom_pyramid.SetGeomName("geom_pyramid")
+        'Mandatory
+        clsgeom_pyramid.AddAesParameter("y", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
+        clsgeom_pyramid.AddAesParameter("fill", strIncludedDataTypes:=({"factor"}), bIsMandatory:=True)
+        clsgeom_pyramid.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}), bIsMandatory:=True)
+        'Optional
         clsgeom_pyramid.AddAesParameter("x", strIncludedDataTypes:=({"numeric", "factor"}))
-        clsgeom_pyramid.AddAesParameter("y", strIncludedDataTypes:=({"numeric", "factor"}))
-        'Warning: we can map a numeric variable to y but we must include stat = “identity” inside the geom. This is handled by sdgLayerOptions.ucrSdgLayerBase_ClickReturn. 
-        'Alternatively, one can map a continuous variable to the aesthetics weight (other variable types produce an error as stat_count is using sum for that variable). Each bar will then add the values taken by this value for the different events falling under the count of each bar (proceeds to a weighted count).
-        'Warning: In this case, the label of the y axis is still count, whereas it should take the name of the variable mapped to weight probably. Also, if a variable has been mapped to y (stat is "identity") then the weight aesthetic is ignored (no warning in R).
-        clsgeom_pyramid.AddAesParameter("weight", strIncludedDataTypes:=({"numeric"}))
         clsgeom_pyramid.AddAesParameter("alpha", strIncludedDataTypes:=({"factor", "numeric"}))
-        clsgeom_pyramid.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_pyramid.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
         clsgeom_pyramid.AddAesParameter("linetype", strIncludedDataTypes:=({"factor"})) 'Warning: This distinguishes bars by varying the outline, however, the distinguished bars only visibly look different if the colour and the fill aesthetics take different values.
-        clsgeom_pyramid.AddAesParameter("size", strIncludedDataTypes:=({"factor", "numeric"}))
-        'Warning: Size varies the outline of the bars, hence changes are difficult to see if fill and colour take the same values. 
-        'Warning: Finally it Is Not advised To use size For discrete variables (R message), however, continuous variables mapped to size when the stat is "count" are ignored (no changes in the graph).
         'Geom_pyramid layer parameters
         clsgeom_pyramid.AddLayerParameter("width", "numeric", "0.90", lstParameterStrings:={2, 0, 1}) 'The width of the bars is given as a proportion of the data resolution.
         'Global Layer parameters
-        clsgeom_pyramid.AddLayerParameter("complete", "editablelist", "NULL", lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
+        clsgeom_pyramid.AddLayerParameter("complete", "editablelist", "NULL", lstParameterStrings:={"NULL", Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
         clsgeom_pyramid.AddLayerParameter("default_by", "list", Chr(34) & "total" & Chr(34), lstParameterStrings:={Chr(34) & "total" & Chr(34), "NULL", Chr(34) & "fill" & Chr(34), Chr(34) & "x" & Chr(34)})
         clsgeom_pyramid.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_pyramid.AddLayerParameter("position", "list", "ggstats::position_diverging()", lstParameterStrings:={"ggstats::position_diverging()", "ggstats::position_likert()", "ggstats::position_diverging(0.5)", Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_pyramid.AddLayerParameter("position", "list", "ggstats::position_diverging()", lstParameterStrings:={"ggstats::position_diverging()", "ggstats::position_diverging(0.5)", "ggstarts::position_likert()", "ggstarts::position_likert(.5)", "ggstarts::position_likert(cutoff = NULL)", "ggstarts::position_likert(cutoff = 1)", Chr(34) & "stack" & Chr(34), "position_stack(reverse = TRUE)", Chr(34) & "dodge" & Chr(34), Chr(34) & "dodge2" & Chr(34), Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34), "position_jitterdodge()", Chr(34) & "nudge" & Chr(34), Chr(34) & "fill" & Chr(34)})
         'See global comments about position.
         'Aesthetics as layer parameters... Used to fix colour, transparence, ... of the geom on that Layer.
         clsgeom_pyramid.AddLayerParameter("fill", "colour", Chr(34) & "white" & Chr(34))
@@ -2026,10 +1999,10 @@ Public Class ucrGeom
         clsgeom_pyramid_text.AddLayerParameter("check_overlap", "boolean", "FALSE") 'If TRUE, text that overlaps previous text in the same layer will not be plotted. A quick and dirty way
         clsgeom_pyramid_text.AddLayerParameter("parse", "boolean", "FALSE") 'If TRUE, the labels will be parsed into expressions and displayed as described in ?plotmath
         'Global Layer parameters
-        clsgeom_pyramid_text.AddLayerParameter("complete", "editablelist", "NULL", lstParameterStrings:={Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
+        clsgeom_pyramid_text.AddLayerParameter("complete", "editablelist", "NULL", lstParameterStrings:={"NULL", Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34), Chr(34) & "fill" & Chr(34), Chr(34) & "colour" & Chr(34)}) 'size of the font, if smaller than 0 and below gives minimal size (excluded negatives to avoid confusion...)
         clsgeom_pyramid_text.AddLayerParameter("default_by", "list", Chr(34) & "total" & Chr(34), lstParameterStrings:={Chr(34) & "total" & Chr(34), "NULL", Chr(34) & "fill" & Chr(34), Chr(34) & "x" & Chr(34)})
         clsgeom_pyramid_text.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_pyramid_text.AddLayerParameter("position", "editablelist", "ggstats::position_diverging(0.5)", lstParameterStrings:={"ggstats::position_diverging()", "ggstats::position_likert(0.5)", "ggstats::position_diverging(0.5)", "position_stack(vjust = 0.9)", "position_stack(vjust = 0.5, reverse = TRUE)", "position_dodge(width = 0.9)", "position_jitter(width = 0.9)", "position_fill(vjust = 0.9)"}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
+        clsgeom_pyramid_text.AddLayerParameter("position", "editablelist", "ggstats::position_diverging(0.5)", lstParameterStrings:={"ggstats::position_diverging(0.5)", "ggstats::position_diverging()", "ggstats::position_likert(0.5)", "position_stack(vjust = 0.9)", "position_stack(vjust = 0.5, reverse = TRUE)", "position_dodge(width = 0.9)", "position_jitter(width = 0.9)", "position_fill(vjust = 0.9)"}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
         'Warning: cannot use both position and nudge_x;nudge_y !!! Doesn't crash the software...
         'Aesthetics as layer parameters.
         clsgeom_pyramid_text.AddLayerParameter("family", "list", Chr(34) & Chr(34), lstParameterStrings:={Chr(34) & Chr(34), Chr(34) & "serif" & Chr(34), Chr(34) & "sans" & Chr(34), Chr(34) & "mono" & Chr(34), Chr(34) & "symbol" & Chr(34)}) 'Warning: could add more fonts, maybe use extrafonts package ?
