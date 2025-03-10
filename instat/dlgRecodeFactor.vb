@@ -27,6 +27,8 @@ Public Class dlgRecodeFactor
     Private clsDummyFunction As New RFunction
     Private bReset As Boolean = True
     Private Const strNewLabelColName As String = "New Label"
+    Private _strSelectedColumn As String
+
 
     Private Sub dlgRecodeFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -37,6 +39,7 @@ Public Class dlgRecodeFactor
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetSelectedColumn()
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
@@ -335,6 +338,30 @@ Public Class dlgRecodeFactor
         If (Not ucrSaveNewColumn.bUserTyped) AndAlso (Not ucrReceiverFactor.IsEmpty) Then
             ucrSaveNewColumn.SetPrefix(ucrReceiverFactor.GetVariableNames(bWithQuotes:=False) & "_recoded")
         End If
+    End Sub
+
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        Dim strTempSelectedVariable As String = ""
+        Dim strDataName As String = ucrSelectorForRecode.strCurrentDataFrame
+        If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
+            strTempSelectedVariable = _strSelectedColumn
+        ElseIf ucrSelectorForRecode.lstAvailableVariable.Items.Count > 0 Then
+            strTempSelectedVariable = ucrSelectorForRecode.lstAvailableVariable.Items(0).Text
+        Else
+            ' Handle the case where there are no available variables
+            Exit Sub
+        End If
+
+        ucrReceiverFactor.Add(strTempSelectedVariable, strDataName)
     End Sub
 
     Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrFactorLevels.ControlContentsChanged, ucrPnlKeep.ControlContentsChanged

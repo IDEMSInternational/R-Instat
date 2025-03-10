@@ -931,7 +931,20 @@ Public Class frmMain
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
 
+    Public Sub SetDefaultValueInRecodeFactor()
+        Dim strSelectedColumn As String = ""
+        If Not String.IsNullOrEmpty(ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow) AndAlso ucrColumnMeta.IsVisible Then
+            strSelectedColumn = ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow
+        ElseIf Not String.IsNullOrEmpty(ucrDataViewer.GetFirstSelectedColumnName) Then
+            strSelectedColumn = ucrDataViewer.GetFirstSelectedColumnName
+        End If
+        dlgRecodeFactor.SelectedColumn = strSelectedColumn
+        dlgDummyVariables.SelectedColumn = strSelectedColumn
+        dlgLabelsLevels.SelectedColumn = strSelectedColumn
+    End Sub
+
     Private Sub mnuPrepareFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click
+        SetDefaultValueInRecodeFactor()
         dlgRecodeFactor.ShowDialog()
     End Sub
 
@@ -960,6 +973,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorLevelsLabels.Click
+        SetDefaultValueInRecodeFactor()
         dlgLabelsLevels.ShowDialog()
     End Sub
 
@@ -1043,6 +1057,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorDummyVariable_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorDummyVariables.Click
+        SetDefaultValueInReorderLevels()
         dlgDummyVariables.ShowDialog()
     End Sub
 
