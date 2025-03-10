@@ -77,6 +77,11 @@ Partial Class ucrScript
         Me.cmdRunStatementSelection = New System.Windows.Forms.Button()
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.toolTipScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuFindNext = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFindPrev = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuReplace = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuReplaceAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel.SuspendLayout()
@@ -86,9 +91,9 @@ Partial Class ucrScript
         'mnuContextScript
         '
         Me.mnuContextScript.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuRedo, Me.ToolStripSeparator1, Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuSelectAll, Me.mnuClear, Me.ToolStripSeparator2, Me.mnuRunCurrentStatementSelection, Me.mnuRunAllText, Me.ToolStripSeparator5, Me.mnuReformatCode, Me.ToolStripSeparator3, Me.mnuOpenScriptasFile, Me.mnuInsertScript, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.ToolStripSeparator4, Me.mnuHelp})
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuRedo, Me.ToolStripSeparator1, Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuSelectAll, Me.mnuClear, Me.ToolStripSeparator2, Me.mnuFindNext, Me.mnuFindPrev, Me.mnuReplace, Me.mnuReplaceAll, Me.ToolStripSeparator6, Me.mnuRunCurrentStatementSelection, Me.mnuRunAllText, Me.ToolStripSeparator5, Me.mnuReformatCode, Me.ToolStripSeparator3, Me.mnuOpenScriptasFile, Me.mnuInsertScript, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.ToolStripSeparator4, Me.mnuHelp})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(306, 364)
+        Me.mnuContextScript.Size = New System.Drawing.Size(306, 480)
         '
         'mnuUndo
         '
@@ -377,6 +382,45 @@ Partial Class ucrScript
         Me.TabControl.Size = New System.Drawing.Size(664, 441)
         Me.TabControl.TabIndex = 1
         '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(302, 6)
+        '
+        'mnuFindNext
+        '
+        Me.mnuFindNext.Name = "mnuFindNext"
+        Me.mnuFindNext.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
+        Me.mnuFindNext.Size = New System.Drawing.Size(305, 22)
+        Me.mnuFindNext.Text = "Find Next"
+        Me.mnuFindNext.ToolTipText = "Highlights the next occurrence of the selected text, and moves the cursor there"
+        '
+        'mnuFindPrev
+        '
+        Me.mnuFindPrev.Name = "mnuFindPrev"
+        Me.mnuFindPrev.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
+        Me.mnuFindPrev.Size = New System.Drawing.Size(305, 22)
+        Me.mnuFindPrev.Text = "Find Prev"
+        Me.mnuFindPrev.ToolTipText = "Highlights the previous occurrence of the selected text, and moves the cursor the" &
+    "re"
+        '
+        'mnuReplace
+        '
+        Me.mnuReplace.Name = "mnuReplace"
+        Me.mnuReplace.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+        Me.mnuReplace.Size = New System.Drawing.Size(305, 22)
+        Me.mnuReplace.Text = "Replace"
+        Me.mnuReplace.ToolTipText = "Replaces the next occurrence of the selected text with the contents of the clipbo" &
+    "ard, and moves the cursor there"
+        '
+        'mnuReplaceAll
+        '
+        Me.mnuReplaceAll.Name = "mnuReplaceAll"
+        Me.mnuReplaceAll.Size = New System.Drawing.Size(305, 22)
+        Me.mnuReplaceAll.Text = "Replace All"
+        Me.mnuReplaceAll.ToolTipText = "Replaces all occurrences of the selected text with the contents of the clipboard," &
+    " and moves the cursor to the last occurrence replaced"
+        '
         'ucrScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -432,4 +476,9 @@ Partial Class ucrScript
     Friend WithEvents contextMenuStriptInsert As ContextMenuStrip
     Friend WithEvents toolStripMenuItemInsertStatement As ToolStripMenuItem
     Friend WithEvents toolStripMenuItemInsertCommentUncomment As ToolStripMenuItem
+    Friend WithEvents mnuFindNext As ToolStripMenuItem
+    Friend WithEvents mnuFindPrev As ToolStripMenuItem
+    Friend WithEvents mnuReplace As ToolStripMenuItem
+    Friend WithEvents mnuReplaceAll As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
 End Class
