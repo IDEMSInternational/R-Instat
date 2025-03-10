@@ -29,6 +29,24 @@ Public Class ucrScript
     Private clsRScript As RScript = Nothing
     Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
 
+    Private ReadOnly Property IsFindValid As Boolean
+        Get
+            Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
+            Dim bTextSelected As Boolean = clsScriptActive.SelectedText.Length > 0
+
+            Return bScriptExists AndAlso bTextSelected
+        End Get
+    End Property
+
+    Private ReadOnly Property IsReplaceValid As Boolean
+        Get
+            Dim bClipoardContainsText As Boolean = Clipboard.ContainsData(DataFormats.Text)
+            Dim bIsScriptTab As Boolean = TabControl.SelectedIndex <> iTabIndexLog
+
+            Return IsFindValid AndAlso bIsScriptTab AndAlso bClipoardContainsText
+        End Get
+    End Property
+
     Friend WithEvents clsScriptActive As Scintilla
     Friend WithEvents clsScriptLog As Scintilla
 
@@ -330,6 +348,10 @@ Public Class ucrScript
         mnuPaste.Enabled = bEnable
         mnuSelectAll.Enabled = bEnable
         mnuClear.Enabled = bEnable
+        mnuFindNext.Enabled = bEnable
+        mnuFindPrev.Enabled = bEnable
+        mnuReplace.Enabled = bEnable
+        mnuReplaceAll.Enabled = bEnable
         mnuRunCurrentStatementSelection.Enabled = bEnable
         mnuRunAllText.Enabled = bEnable
         mnuLoadScriptFromFile.Enabled = bEnable
@@ -824,13 +846,19 @@ Public Class ucrScript
             mnuUndo.Enabled = clsScriptActive.CanUndo
             mnuRedo.Enabled = clsScriptActive.CanRedo
             mnuCut.Enabled = bScriptSelected
-            mnuCopy.Enabled = bScriptSelected
             mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
             mnuClear.Enabled = bScriptExists
             mnuLoadScriptFromFile.Enabled = True
         End If
 
+        'enable find/replace options
+        mnuFindNext.Enabled = IsFindValid
+        mnuFindPrev.Enabled = IsFindValid
+        mnuReplace.Enabled = IsReplaceValid
+        mnuReplaceAll.Enabled = IsReplaceValid
+
         'enable remaining options based on tab state
+        mnuCopy.Enabled = bScriptSelected
         mnuSelectAll.Enabled = bScriptExists
         mnuRunCurrentStatementSelection.Enabled = bScriptExists
         mnuRunAllText.Enabled = bScriptExists
@@ -870,6 +898,34 @@ Public Class ucrScript
         End If
         clsScriptActive.ClearAll()
         EnableDisableButtons()
+    End Sub
+
+    Private Sub mnuFindNext_Click(sender As Object, e As EventArgs) Handles mnuFindNext.Click
+        If Not IsFindValid Then
+            Exit Sub
+        End If
+
+    End Sub
+
+    Private Sub mnuFindPrev_Click(sender As Object, e As EventArgs) Handles mnuFindPrev.Click
+        If Not IsFindValid Then
+            Exit Sub
+        End If
+
+    End Sub
+
+    Private Sub mnuReplace_Click(sender As Object, e As EventArgs) Handles mnuReplace.Click
+        If Not IsReplaceValid Then
+            Exit Sub
+        End If
+
+    End Sub
+
+    Private Sub mnuReplaceAll_Click(sender As Object, e As EventArgs) Handles mnuReplaceAll.Click
+        If Not IsReplaceValid Then
+            Exit Sub
+        End If
+
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
