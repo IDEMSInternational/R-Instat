@@ -234,6 +234,8 @@ Public Class frmMain
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
         SetHideMenus()
+
+        mnuToolsRestartR.Enabled = True
     End Sub
 
     Private Sub CheckForUpdates()
@@ -459,12 +461,12 @@ Public Class frmMain
         End Try
     End Sub
 
-    Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
+    Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook(Optional bRefreshGrid As Boolean = True)
         Dim strRScripts As String = ""
         Dim strDataFilePath As String = ""
 
         'could either be a file path or a script
-        PromptAndSetAutoRecoveredPrevSessionData(strRScripts, strDataFilePath)
+        PromptAndSetAutoRecoveredPrevSessionData(strScript:=strRScripts, strDataFilePath:=strDataFilePath, bCleanExit:=bRefreshGrid)
 
         'if no script recovered then use the default R set up script
         If String.IsNullOrEmpty(strRScripts) Then
@@ -481,7 +483,7 @@ Public Class frmMain
 
         'execute the R-Instat set up R scripts
         For Each strLine As String In strRScripts.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-            clsRLink.RunScript(strScript:=strLine.Trim(), bSeparateThread:=True, bSilent:=True)
+            clsRLink.RunScript(strScript:=strLine.Trim(), bSeparateThread:=True, bSilent:=True, bUpdateGrids:=bRefreshGrid)
         Next
 
         'as of 16/05/2023. clsDataBook depends on clsRLink.bInstatObjectExists property
@@ -489,7 +491,7 @@ Public Class frmMain
 
         'grids are only updated when clsRLink.bInstatObjectExists = True
         If clsRLink.RunInternalScriptGetValue(strScript:="exists('" & clsRLink.strInstatDataObject & "')",
-                                              bSeparateThread:=True, bSilent:=True).AsCharacter(0) = "TRUE" Then
+                                              bSeparateThread:=True, bSilent:=True).AsCharacter(0) = "TRUE" AndAlso bRefreshGrid Then
             'set R-Instat R object as exists if it has been set up in R level and refresh the grids
             'refreshing grids internally updates the .Net databook object as well.
             clsRLink.bInstatObjectExists = True
@@ -498,7 +500,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub PromptAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, ByRef strDataFilePath As String)
+    Private Sub PromptAndSetAutoRecoveredPrevSessionData(ByRef strScript As String, ByRef strDataFilePath As String, Optional bCleanExit As Boolean = True)
 
         'if there is  another R-Instat process in the machine then no need to check for autorecovery files
         If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
@@ -526,7 +528,7 @@ Public Class frmMain
         '---------------------------------------
         'prompt user for recovery selection
         'Check if the marker file exists
-        If File.Exists(strMarkerFilePath) Then
+        If File.Exists(strMarkerFilePath) AndAlso bCleanExit Then
             Dim lastExitStatus As String = File.ReadAllText(strMarkerFilePath).Trim()
             If lastExitStatus <> "CleanExit" AndAlso
                 MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine &
@@ -2980,6 +2982,39 @@ Public Class frmMain
 
     Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         ucrDataViewer.Undo()
+    End Sub
+
+    Private Sub mnuToolsRestartR_Click(sender As Object, e As EventArgs) Handles mnuToolsRestartR.Click
+        Dim memUsageAfterBytes As Long = clsRLink.clsEngine.Evaluate("pryr::mem_used()").AsNumeric(0)
+        Dim memUsageAfterMB As Double = memUsageAfterBytes / (1024 * 1024)
+        Logger.Info("Memory Usage Before Restart: " & memUsageAfterMB.ToString("F2") & " MB")
+        If clsRLink.RestartREngine Then
+
+            Dim memUsageAfterBytes2 As Long = clsRLink.clsEngine.Evaluate("pryr::mem_used()").AsNumeric(0)
+            Dim memUsageAfterMB2 As Double = memUsageAfterBytes2 / (1024 * 1024)
+            Logger.Info("Memory Usage After Restart: " & memUsageAfterMB2.ToString("F2") & " MB")
+
+            'execute R-Instat R set up scripts to set up R data book
+            ExecuteSetupRScriptsAndSetupRLinkAndDatabook(bRefreshGrid:=False)
+            'execute R global options used by R-Instat R data book
+            clsInstatOptions.ExecuteRGlobalOptions()
+
+            Dim clsImportRDS As New RFunction
+            Dim clsReadRDS As New RFunction
+
+            clsReadRDS.SetRCommand("readRDS")
+            clsReadRDS.AddParameter("file", Chr(34) & "my_data" & Chr(34))
+            clsImportRDS.SetRCommand(clsRLink.strInstatDataObject & "$import_RDS")
+            clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
+            clsRLink.RunScript(clsImportRDS.ToScript, strComment:="Import data")
+
+            Dim memUsageAfterBytes1 As Long = clsRLink.clsEngine.Evaluate("pryr::mem_used()").AsNumeric(0)
+            Dim memUsageAfterMB1 As Double = memUsageAfterBytes1 / (1024 * 1024)
+            Logger.Info("Memory Usage After Restart and resetting working folder: " & memUsageAfterMB1.ToString("F2") & " MB")
+        Else
+            MsgBox("Failed to restart the R engine. Please check the configuration or reinstall R-Instat.",
+                       MsgBoxStyle.Critical, "Restart Failed")
+        End If
     End Sub
 
     Private Sub mnuRDataViewerWindow_Click(sender As Object, e As EventArgs) Handles mnuRDataViewerWindow.Click
