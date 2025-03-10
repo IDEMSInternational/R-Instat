@@ -127,7 +127,7 @@ Public Class dlgThreeVariablePivotTable
         ucrSelectorPivot.Reset()
         ucrSavePivot.Reset()
 
-        clsDummyFunction.AddParameter("order", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("order", "True", iPosition:=0)
 
         clsRelevelPasteFunction.SetRCommand("return_variable_levels")
         clsRelevelPasteFunction.SetAssignTo("relevel_variables")
