@@ -284,6 +284,7 @@ Public Class dlgOneWayFrequencies
             ucrReceiverTableGraph.SetMeAsReceiver()
             ucrChkTableGraphWeights.Checked = clsTableSjMiscFrqRFunction.ContainsParameter("weight.by") OrElse clsGraphSjGGFreqPlotRFunction.ContainsParameter("weight.by")
             ucrChkTableGraphGroupData.Checked = clsTableSjMiscFrqRFunction.ContainsParameter("auto.group") OrElse clsGraphSjGGFreqPlotRFunction.ContainsParameter("auto.grp")
+            ucrReceiverStemAndLeaf.Clear()
 
             If rdoFrqTable.Checked Then
                 'the ideal way to determine the checked radio button would be to use AddFunctionNamesCondition()
@@ -299,6 +300,7 @@ Public Class dlgOneWayFrequencies
             End If
 
         ElseIf rdoFrqStemLeaf.Checked Then
+            ucrReceiverTableGraph.Clear()
             ucrReceiverStemAndLeaf.SetMeAsReceiver()
             ucrChkStemLeafWidth.Checked = clsStemLeafRFunction.ContainsParameter("width")
             ucrChkStemLeafScale.Checked = clsStemLeafRFunction.ContainsParameter("scale")

@@ -40,6 +40,7 @@ Public Class dlgViewGraph
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 525
+        ucrBase.clsRsyntax.bSeparateThread = False
 
         'Selector
         ucrGraphsSelector.SetParameter(New RParameter("data_name", 0))
@@ -63,7 +64,6 @@ Public Class dlgViewGraph
 
         'todo. Calling print() from this dialog doesn't work. investigate why
         'temporarily disabled
-        rdoRViewer.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -84,6 +84,7 @@ Public Class dlgViewGraph
         clsPrintRFunction.SetRCommand("print")
         clsPrintRFunction.AddParameter("x", clsRFunctionParameter:=clsGetObjectRFunction, iPosition:=0)
 
+        clsViewObjectRFunction.SetPackageName("instatExtras")
         clsViewObjectRFunction.SetRCommand("view_object_data")
         clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
         clsViewObjectRFunction.AddParameter("object_format", strParameterValue:=Chr(34) & RObjectFormat.Image & Chr(34))
@@ -125,8 +126,7 @@ Public Class dlgViewGraph
             clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=2)
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectRFunction)
         ElseIf rdoRViewer.Checked Then
-            'clsViewObjectRFunction.AddParameter("object", clsRFunctionParameter:=clsGetObjectRFunction)
-            'clsViewObjectRFunction.RemoveParameterByName("object_format")
+            clsGetObjectRFunction.AddParameter("as_file", strParameterValue:="FALSE", iPosition:=2)
             ucrBase.clsRsyntax.SetBaseRFunction(clsPrintRFunction)
         End If
     End Sub

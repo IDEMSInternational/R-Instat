@@ -47,11 +47,18 @@ Public Class ucrReceiverMultiple
         'first eliminate all items that already exist
         'this improves perfomance significantly for wide data sets
         For Each kvpTempItem As KeyValuePair(Of String, String) In lstItems
-            Dim item As ListViewItem = lstSelectedVariables.FindItemWithText(kvpTempItem.Value)
-            If item Is Nothing OrElse Not item.Text.Equals(kvpTempItem.Value, StringComparison.Ordinal) Then
+            Dim isMatchFound As Boolean = False
+            For Each item As ListViewItem In lstSelectedVariables.Items
+                If item.Text.Equals(kvpTempItem.Value, StringComparison.Ordinal) Then
+                    isMatchFound = True
+                    Exit For
+                End If
+            Next
+            If Not isMatchFound Then
                 lstActualItemsToAdd.Add(kvpTempItem)
             End If
         Next
+
 
         If lstActualItemsToAdd.Count = 0 Then
             Exit Sub
@@ -412,7 +419,7 @@ Public Class ucrReceiverMultiple
                 If bIsCategoricalNumeric Then
                     ' logical can be considered as both categorical or numeric so should be dealt with on individual dialogs
                     For i As Integer = 0 To strDataTypes.Count - 1
-                        If strDataTypes(i).Contains("factor") OrElse strDataTypes(i).Contains("character") Then
+                        If strDataTypes(i).Contains("factor") OrElse strDataTypes(i).Contains("character") OrElse strDataTypes(i).Contains("ordered") Then
                             strDataTypes(i) = "categorical"
                         ElseIf Not strDataTypes(i).Contains("logical") Then
                             strDataTypes(i) = "numeric"

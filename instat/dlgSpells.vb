@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgSpells
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsSpellLength, clsMaxSpellManipulation, clsSubSpellLength1 As New RFunction
+    Private clsSpellLength, clsMaxSpellManipulation, clsIfElseFirstDoyFilledFunction, clsSubSpellLength1 As New RFunction
     Private clsMaxSpellSummary, clsMaxValueList, clsMaxFunction, clsMaxSpellSubCalcs As New RFunction
     Private clsDayFilter, clsGroupBy, clsGroupByStation, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
@@ -135,6 +135,7 @@ Public Class dlgSpells
         clsRSpellFilterSubFunct = New RFunction
         clsSpellFilterFunction = New RFunction
         clsDotSpellsFunction = New RFunction
+        clsIfElseFirstDoyFilledFunction = New RFunction
         Dim strSpellLogical As String = "spell_day"
         Dim strSpellName As String = "spell_length"
 
@@ -175,6 +176,7 @@ Public Class dlgSpells
         ' key
 
         clsDayFilterCalcFromConvert = New RFunction
+        clsDayFilterCalcFromConvert.SetPackageName("databook")
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
         clsDayFilterCalcFromList = New RFunction
         clsDayFilterCalcFromList.SetRCommand("list")
@@ -182,7 +184,7 @@ Public Class dlgSpells
 
         'DayFromandTo
         clsDayFromAndToOperator.bToScriptAsRString = True
-        clsDayFilter.SetRCommand("instat_calculation$new")
+        clsDayFilter.SetRCommand("instatCalculations::instat_calculation$new")
         clsDayFilter.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsDayFilter.AddParameter("function_exp", clsROperatorParameter:=clsDayFromAndToOperator, iPosition:=1)
         clsDayFromAndToOperator.SetOperation("&")
@@ -197,16 +199,16 @@ Public Class dlgSpells
         clsDayFilter.AddParameter("calculated_from", clsRFunctionParameter:=clsDayFilterCalcFromConvert, iPosition:=2)
 
         ' group
-        clsGroupBy.SetRCommand("instat_calculation$new")
+        clsGroupBy.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupBy.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsGroupBy.SetAssignTo("grouping")
 
-        clsGroupByStation.SetRCommand("instat_calculation$new")
+        clsGroupByStation.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByStation.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByStation.SetAssignTo("group_by_station")
 
         ' rain_day
-        clsSpellLogicalCalc.SetRCommand("instat_calculation$new")
+        clsSpellLogicalCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsSpellLogicalCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSpellLogicalCalc.AddParameter("function_exp", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=1)
         clsSpellLogicalCalc.AddParameter("result_name", Chr(34) & strSpellLogical & Chr(34), iPosition:=2)
@@ -224,7 +226,7 @@ Public Class dlgSpells
         clsLessThanOperator.SetOperation("<")
 
         ' Spell Length
-        clsSpellLength.SetRCommand("instat_calculation$new")
+        clsSpellLength.SetRCommand("instatCalculations::instat_calculation$new")
         clsSpellLength.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSpellLength.AddParameter("result_name", Chr(34) & strSpellName & Chr(34), iPosition:=2)
         clsSpellLength.AddParameter("function_exp", clsRFunctionParameter:=clsSpellsFunction)
@@ -236,7 +238,7 @@ Public Class dlgSpells
         clsSpellsManipulationsFunc.SetRCommand("list")
         clsSpellsManipulationsFunc.AddParameter("group_by_year", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=0)
 
-        clsSpellsLogicalCalc.SetRCommand("instat_calculation$new")
+        clsSpellsLogicalCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsSpellsLogicalCalc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSpellsLogicalCalc.AddParameter("function_exp", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=1)
         clsSpellsLogicalCalc.AddParameter("result_name", Chr(34) & strSpellDay & Chr(34), iPosition:=2)
@@ -245,7 +247,7 @@ Public Class dlgSpells
         clsSpellManipulationsFunc.SetRCommand("list")
         clsSpellManipulationsFunc.AddParameter("group_by_station", clsRFunctionParameter:=clsGroupByStation, bIncludeArgumentName:=False, iPosition:=0)
 
-        'clsSpellsLogCalcFunc.SetRCommand("instat_calculation$new")
+        'clsSpellsLogCalcFunc.SetRCommand("instatCalculations::instat_calculation$new")
         'clsSpellsLogCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         'clsSpellsLogCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=1)
         'clsSpellsLogCalcFunc.AddParameter("result_name", Chr(34) & strSpellDay & Chr(34), iPosition:=2)
@@ -257,10 +259,11 @@ Public Class dlgSpells
 
 
         clsDotSpellsFunction.bToScriptAsRString = True
-        clsDotSpellsFunction.SetRCommand(".spells")
+        clsDotSpellsFunction.SetPackageName("instatClimatic")
+        clsDotSpellsFunction.SetRCommand("spells")
         clsDotSpellsFunction.AddParameter("x", clsROperatorParameter:=clsSpellLogicalAndOperator, iPosition:=0)
 
-        clsSpellFunction.SetRCommand("instat_calculation$new")
+        clsSpellFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsSpellFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSpellFunction.AddParameter("function_exp", clsRFunctionParameter:=clsDotSpellsFunction, iPosition:=1) ' changes depending on the rdo
         clsSpellFunction.AddParameter("result_name", Chr(34) & "spell" & Chr(34), iPosition:=2)
@@ -271,7 +274,7 @@ Public Class dlgSpells
         clsRSpellFilterSubFunct.SetRCommand("list")
         clsRSpellFilterSubFunct.AddParameter("sub1", clsRFunctionParameter:=clsSpellFunction, bIncludeArgumentName:=False, iPosition:=0)
 
-        clsSpellFilterFunction.SetRCommand("instat_calculation$new")
+        clsSpellFilterFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsSpellFilterFunction.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsSpellFilterFunction.AddParameter("function_exp", Chr(34) & "dplyr::lead(c(NA,diff(spell)))<0" & Chr(34), iPosition:=1) ' changes depending on the rdo
         clsSpellFilterFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsRSpellFilterSubFunct, iPosition:=2)
@@ -280,7 +283,7 @@ Public Class dlgSpells
 
         ' Additional Checkbox
         'clsAdditionalConditionReplaceFunction.bToScriptAsRString = True
-        'clsAdditionalCondition.SetRCommand("instat_calculation$new")
+        'clsAdditionalCondition.SetRCommand("instatCalculations::instat_calculation$new")
         'clsAdditionalCondition.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         'clsAdditionalCondition.AddParameter("function_exp", clsRFunctionParameter:=clsAdditionalConditionReplaceFunction, iPosition:=1)
         'clsAdditionalCondition.AddParameter("result_name", Chr(34) & strSpellDay & Chr(34), iPosition:=2)
@@ -294,7 +297,7 @@ Public Class dlgSpells
         'clsAdditionalCondition.AddParameter("sub_calculation", clsRFunctionParameter:=clsAdditionalConditionList)
 
         'Max Summary
-        clsMaxSpellSummary.SetRCommand("instat_calculation$new")
+        clsMaxSpellSummary.SetRCommand("instatCalculations::instat_calculation$new")
         clsMaxSpellSummary.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsMaxSpellSummary.AddParameter("function_exp", clsRFunctionParameter:=clsMaxFunction, iPosition:=1)
         clsMaxSpellSummary.AddParameter("save", 2, iPosition:=6)
@@ -315,7 +318,8 @@ Public Class dlgSpells
         clsMaxSpellManipulation.AddParameter("manip3", clsRFunctionParameter:=clsDayFilter, bIncludeArgumentName:=False, iPosition:=2)
 
         clsSpellsFunction.bToScriptAsRString = True
-        clsSpellsFunction.SetRCommand(".spells")
+        clsSpellsFunction.SetPackageName("instatClimatic")
+        clsSpellsFunction.SetRCommand("spells")
         clsSpellsFunction.AddParameter("x", strSpellLogical)
 
 
@@ -348,7 +352,7 @@ Public Class dlgSpells
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
-        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFilter, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
+        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFilter, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
         sdgDoyRange.ShowDialog()
         UpdateDayFilterPreview()
     End Sub

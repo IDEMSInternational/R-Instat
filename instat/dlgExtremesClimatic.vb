@@ -22,7 +22,7 @@ Public Class dlgExtremesClimatic
     Private bUpdateMinMax As Boolean = True
     Private clsExtreme As New RFunction
     Private strCurrDataName As String = ""
-    Private clsGroupByFunction, clsRunCalcFunction, clsDayFromAndTo, clsDayManipulation As New RFunction
+    Private clsGroupByFunction, clsIfElseFirstDoyFilledFunction, clsRunCalcFunction, clsDayFromAndTo, clsDayManipulation As New RFunction
     Private clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsCurrCalc As RFunction
@@ -334,6 +334,7 @@ Public Class dlgExtremesClimatic
         clsPlotMrlFunction = New RFunction
         clsThresholdPlotFunction = New RFunction
         clsDeclusteringFunction = New RFunction
+        clsIfElseFirstDoyFilledFunction = New RFunction
         clsDummyRfunction = clsPlotMrlFunction
 
         ucrSelectorClimaticExtremes.Reset()
@@ -345,6 +346,7 @@ Public Class dlgExtremesClimatic
         SetCalculationValues()
 
         clsDayFilterCalcFromConvert = New RFunction
+        clsDayFilterCalcFromConvert.SetPackageName("databook")
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
         clsDayFilterCalcFromList = New RFunction
         clsDayFilterCalcFromList.SetRCommand("list")
@@ -352,7 +354,7 @@ Public Class dlgExtremesClimatic
 
         ' Days
         clsDayFromAndToOperator.bToScriptAsRString = True
-        clsDayFromAndTo.SetRCommand("instat_calculation$new")
+        clsDayFromAndTo.SetRCommand("instatCalculations::instat_calculation$new")
         clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsDayFromAndTo.AddParameter("function_exp", clsROperatorParameter:=clsDayFromAndToOperator, iPosition:=1)
         clsDayFromAndToOperator.SetOperation("&")
@@ -368,13 +370,13 @@ Public Class dlgExtremesClimatic
         UpdateDayFilterPreview()
 
         ' For the Min/Max option:
-        clsGroupByFunction.SetRCommand("instat_calculation$new")
+        clsGroupByFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByFunction.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByFunction.SetAssignTo("grouping")
 
         clsMinMaxManipulationsFunction.SetRCommand("list")
         clsMinMaxFuncExp.bToScriptAsRString = True
-        clsMinMaxSummariseFunction.SetRCommand("instat_calculation$new")
+        clsMinMaxSummariseFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsMinMaxSummariseFunction.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsMinMaxSummariseFunction.AddParameter("function_exp", clsRFunctionParameter:=clsMinMaxFuncExp, iPosition:=1)
         clsMinMaxFuncExp.SetRCommand("max")
@@ -389,7 +391,7 @@ Public Class dlgExtremesClimatic
         ' For the Peaks option:
         clsDayManipulation.SetRCommand("list")
         clsPeaksFilterOperator.bToScriptAsRString = True
-        clsPeaksFilterFunction.SetRCommand("instat_calculation$new")
+        clsPeaksFilterFunction.SetRCommand("instatCalculations::instat_calculation$new")
         clsPeaksFilterFunction.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsPeaksFilterFunction.AddParameter("function_exp", clsROperatorParameter:=clsPeaksFilterOperator, iPosition:=1)
         clsPeaksFilterOperator.SetOperation(">=") ' this value changes depending what is selected in the combo box. Temp. fix in a sub, but needs a proper fix.
@@ -401,7 +403,7 @@ Public Class dlgExtremesClimatic
         clsPeaksFilterFunction.SetAssignTo("peak_filter")
 
         'Code for carry columns
-        clsCombinationCalc.SetRCommand("instat_calculation$new")
+        clsCombinationCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsCombinationCalc.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
         clsCombinationCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsCombinationSubCalcs, iPosition:=1)
         clsCombinationCalc.AddParameter("manipulations", clsRFunctionParameter:=clsCombinationManipulations, iPosition:=2)
@@ -418,7 +420,7 @@ Public Class dlgExtremesClimatic
 
         clsDateCarryCalcFromList.SetRCommand("list")
 
-        clsFirstDateSummary.SetRCommand("instat_calculation$new")
+        clsFirstDateSummary.SetRCommand("instatCalculations::instat_calculation$new")
         clsFirstDateSummary.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsFirstDateSummary.AddParameter("function_exp", clsRFunctionParameter:=clsFirstFunction, iPosition:=1)
         clsFirstDateSummary.AddParameter("calculated_from", clsRFunctionParameter:=clsDateCarryCalcFromList, iPosition:=2)
@@ -429,7 +431,7 @@ Public Class dlgExtremesClimatic
         clsFirstFunction.SetRCommand("first")
         clsFirstFunction.bToScriptAsRString = True
 
-        clsLastDateSummary.SetRCommand("instat_calculation$new")
+        clsLastDateSummary.SetRCommand("instatCalculations::instat_calculation$new")
         clsLastDateSummary.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsLastDateSummary.AddParameter("function_exp", clsRFunctionParameter:=clsLastFunction, iPosition:=1)
         clsLastDateSummary.AddParameter("calculated_from", clsRFunctionParameter:=clsDateCarryCalcFromList, iPosition:=2)
@@ -440,7 +442,7 @@ Public Class dlgExtremesClimatic
         clsLastFunction.SetRCommand("last")
         clsLastFunction.bToScriptAsRString = True
 
-        clsNSummary.SetRCommand("instat_calculation$new")
+        clsNSummary.SetRCommand("instatCalculations::instat_calculation$new")
         clsNSummary.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsNSummary.AddParameter("function_exp", clsRFunctionParameter:=clsNFunction, iPosition:=1)
         clsNSummary.AddParameter("calculated_from", clsRFunctionParameter:=clsDateCarryCalcFromList, iPosition:=2)
@@ -450,7 +452,7 @@ Public Class dlgExtremesClimatic
         clsNFunction.SetRCommand("summary_count_all")
         clsNFunction.bToScriptAsRString = True
 
-        clsFilterExtremeCalc.SetRCommand("instat_calculation$new")
+        clsFilterExtremeCalc.SetRCommand("instatCalculations::instat_calculation$new")
         clsFilterExtremeCalc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsFilterExtremeCalc.AddParameter("function_exp", clsROperatorParameter:=clsFilterExtremeExp, iPosition:=1)
         clsFilterExtremeCalc.AddParameter("sub_calculations", clsRFunctionParameter:=clsFilterExtremeSubCalcs, iPosition:=2)
@@ -462,16 +464,19 @@ Public Class dlgExtremesClimatic
         clsFilterExtremeExp.SetOperation("==")
         clsFilterExtremeExp.bToScriptAsRString = True
 
+        clsPlotMrlFunction.SetPackageName("instatClimatic")
         clsPlotMrlFunction.SetRCommand("plot_mrl")
         clsPlotMrlFunction.AddParameter("ncol", "1", iPosition:=3)
         clsPlotMrlFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
+        clsThresholdPlotFunction.SetPackageName("instatClimatic")
         clsThresholdPlotFunction.SetRCommand("plot_multiple_threshold")
         clsThresholdPlotFunction.AddParameter("nint", "10", iPosition:=5)
         clsThresholdPlotFunction.AddParameter("alpha", "0.05", iPosition:=6)
         clsThresholdPlotFunction.AddParameter("ncol", "1", iPosition:=7)
         clsThresholdPlotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
+        clsDeclusteringFunction.SetPackageName("instatClimatic")
         clsDeclusteringFunction.SetRCommand("plot_declustered")
         clsDeclusteringFunction.AddParameter("threshold", "40", iPosition:=3)
         clsDeclusteringFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -637,7 +642,7 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
-        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
+        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
         sdgDoyRange.ShowDialog()
         UpdateDayFilterPreview()
     End Sub

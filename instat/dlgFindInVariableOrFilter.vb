@@ -113,6 +113,7 @@ Public Class dlgFindInVariableOrFilter
 
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
+        clsGetRowHeadersFunction.SetPackageName("instatExtras")
         clsGetRowHeadersFunction.SetRCommand("getRowHeadersWithText")
         clsGetRowHeadersFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
         clsGetRowHeadersFunction.AddParameter("ignore_case", "TRUE", iPosition:=3)
@@ -167,6 +168,7 @@ Public Class dlgFindInVariableOrFilter
         rdoCell.Checked = True
         ucrReceiverVariable.Clear()
         ucrInputPattern.cboInput.ResetText()
+        frmMain.ucrDataViewer.RemoveAllBackgroundColors()
     End Sub
 
     Private Sub cmdFind_Click(sender As Object, e As EventArgs) Handles cmdFind.Click
@@ -216,10 +218,16 @@ Public Class dlgFindInVariableOrFilter
                 Dim bApplyToRows As Boolean = (rdoVariable.Checked AndAlso rdoRow.Checked) OrElse rdoInFilter.Checked
                 frmMain.ucrDataViewer.SearchRowInGrid(rowNumbers:=lstRowNumbers, strColumn:=strColumn,
                                                        iRow:=iRow, bApplyToRows:=bApplyToRows)
+                lblFoundRow.Visible = True
                 lblFoundRow.Text = "Found Row: " & iRow
                 lblFoundRow.Visible = True
                 iCountRowClick += 1
                 SetControlsVisible(False)
+                If iRow = -2147483648 Then
+                    lblFoundRow.Text = "No cell rows found"
+                Else
+                    lblFoundRow.Text = "Found Row: " & iRow
+                End If
             Else
                 Dim lstColumnNames As New List(Of String)
                 lstColumnNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetRowsFunction.ToScript()).AsCharacter.ToList

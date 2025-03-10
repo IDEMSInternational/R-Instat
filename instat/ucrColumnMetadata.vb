@@ -32,6 +32,7 @@ Public Class ucrColumnMetadata
     Private strLabelsLabel As String = "labels"
     Private strLabelsScientific As String = "Scientific"
     Private _Refreshed As Boolean = False
+    Private _isEnabled As Boolean
     Private bWideDataSetPromptResponse As DialogResult = DialogResult.None
 
     Public Sub New()
@@ -150,14 +151,23 @@ Public Class ucrColumnMetadata
         _grid.UpdateAllWorksheetStyles()
     End Sub
 
+    Public Property IsEnabled() As Boolean
+        Get
+            Return _isEnabled
+        End Get
+        Set(ByVal value As Boolean)
+            _isEnabled = value
+        End Set
+    End Property
+
     Public Sub RefreshGridData()
         'todo. a temporary useful fix because of wide data sets
         'only refresh the grid when the data book is initialised and the grid is visible
         'displaying more than a 1000 rows takes a lot of time
         'in the long term, this window should have 'paging' feature similar to the data viewer to display 11000 rows only.
-        If _clsDataBook IsNot Nothing And Visible Then
-            _grid.RemoveOldWorksheets()
+        If _clsDataBook IsNot Nothing AndAlso Visible AndAlso _isEnabled Then
             AddAndUpdateWorksheets()
+            _grid.RemoveOldWorksheets()
             _grid.bVisible = _clsDataBook.DataFrames.Count > 0
         End If
     End Sub
@@ -337,7 +347,11 @@ Public Class ucrColumnMetadata
         Cursor = Cursors.Default
     End Sub
 
-    Private Function GetFirstSelectedDataframeColumnFromSelectedRow() As String
+    Public Function IsVisible() As Boolean
+        Return _grid.bVisible
+    End Function
+
+    Public Function GetFirstSelectedDataframeColumnFromSelectedRow() As String
         Return _grid.GetCellValue(_grid.GetSelectedRows(0) - 1, strNameLabel)
     End Function
 
@@ -471,12 +485,6 @@ Public Class ucrColumnMetadata
     Private Sub copySheet_Click(sender As Object, e As EventArgs) Handles copySheet.Click
         dlgCopyDataFrame.SetCurrentDataframe(_grid.CurrentWorksheet.Name)
         dlgCopyDataFrame.ShowDialog()
-    End Sub
-
-    Private Sub viewSheet_Click(sender As Object, e As EventArgs) Handles viewSheet.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
-        EndWait()
     End Sub
 
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click

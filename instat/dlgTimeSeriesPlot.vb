@@ -433,6 +433,7 @@ Public Class dlgTimeSeriesPlot
         clsSd.AddParameter("x", strValue, iPosition:=0)
         clsSd.AddParameter("na.rm", "TRUE", iPosition:=1)
 
+        clsSlope.SetPackageName("instatExtras")
         clsSlope.SetRCommand("slope")
         clsSlope.AddParameter("y", strValue, iPosition:=0)
 

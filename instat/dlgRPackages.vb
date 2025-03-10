@@ -43,6 +43,7 @@ Public Class dlgInstallRPackage
         dctPackages.Add("rapidpror", Chr(34) & "rapidpror" & Chr(34))
         dctPackages.Add("openappr", Chr(34) & "openappr" & Chr(34))
         dctPackages.Add("networkGraphsR", Chr(34) & "networkGraphsR" & Chr(34))
+        dctPackages.Add("climdex.pcic", Chr(34) & "climdex.pcic" & Chr(34))
         ucrInputPackage.SetItems(dctPackages)
 
         ucrPnlRPackages.AddParameterValuesCondition(rdoCRAN, "checked", "cran")
@@ -117,9 +118,11 @@ Public Class dlgInstallRPackage
         Dim chrOutput As CharacterVector
 
         If rdoCRAN.Checked Then
+            clsPackageCheck.SetPackageName("instatExtras")
             clsPackageCheck.SetRCommand("package_check")
             clsPackageCheck.AddParameter("package", Chr(34) & ucrInputTextBoxRPackage.GetText() & Chr(34))
         ElseIf rdoRPackage.Checked Then
+            clsPackageCheck.SetPackageName("instatExtras")
             clsPackageCheck.SetRCommand("check_github_repo")
             clsPackageCheck.AddParameter("repo", Chr(34) & ucrInputPackage.GetText() & Chr(34))
             clsPackageCheck.AddParameter("owner", Chr(34) & ucrInputRepositoryName.GetText() & Chr(34))

@@ -117,6 +117,7 @@ Public Class dlgClimdexIndices
         ucrReceiverStation.SetMeAsReceiver()
         ucrChkSave.Checked = True
 
+        clsClimdex.SetPackageName("instatClimatic")
         clsClimdex.SetRCommand("climdex")
 
         clsClimdex.AddParameter("indices", clsRFunctionParameter:=clsIndices, iPosition:=8)

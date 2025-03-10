@@ -68,6 +68,7 @@ Public Class dlgPlotRegion
         ucrReceiverLongitude.SetMeAsReceiver()
         clsPlotRegionFunction.AddParameter("time_point", clsRFunctionParameter:=clsAsDateTimeFunction, iPosition:=5)
 
+        clsPlotRegionFunction.SetPackageName("instatClimatic")
         clsPlotRegionFunction.SetRCommand("plot.region")
         clsAsDateTimeFunction.SetRCommand("as.Date")
         clsSequenceFunction.SetRCommand("seq")
