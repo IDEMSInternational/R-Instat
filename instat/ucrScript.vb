@@ -371,6 +371,74 @@ Public Class ucrScript
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
+    '''    Searches for the next occurrence of <paramref name="strTextToFind"/> in the active 
+    '''    script and highlights it.
+    ''' </summary>
+    ''' <param name="strTextToFind"></param>
+    ''' <returns>True if the active script contains at least one instance of 
+    '''     <paramref name="strTextToFind"/>, else returns False</returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function FindAndHighlightNextOccurrence(strTextToFind As String) As Boolean
+
+        Dim iCurrentCursorPosition As Integer = clsScriptActive.CurrentPosition
+        Dim iNextOccurrencePosition As Integer = -1
+
+        ' If cursor not at end of text, search from cursor position
+        If iCurrentCursorPosition < clsScriptActive.Text.Length Then
+            iNextOccurrencePosition = clsScriptActive.Text.IndexOf(strTextToFind, iCurrentCursorPosition + 1)
+        End If
+
+        ' If the text is not found, search from the beginning of the text
+        If iNextOccurrencePosition = -1 Then
+            iNextOccurrencePosition = clsScriptActive.Text.IndexOf(strTextToFind, 0)
+        End If
+
+        If iNextOccurrencePosition = -1 Then
+            Return False
+        End If
+
+        clsScriptActive.GotoPosition(iNextOccurrencePosition)
+        clsScriptActive.SetSelection(iNextOccurrencePosition, iNextOccurrencePosition + strTextToFind.Length)
+
+        Return True
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''    Searches for the previous occurrence of <paramref name="strTextToFind"/> in the active 
+    '''    script and highlights it.
+    ''' </summary>
+    ''' <param name="strTextToFind"></param>
+    ''' <returns>True if the active script contains at least one instance of 
+    '''     <paramref name="strTextToFind"/>, else returns False</returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function FindAndHighlightPreviousOccurrence(strTextToFind As String) As Boolean
+
+        Dim iCurrentCursorPosition As Integer = clsScriptActive.CurrentPosition
+        Dim iPrevOccurrencePosition As Integer = -1
+
+        ' If cursor not at start of text, search from cursor position
+        If iCurrentCursorPosition > 0 Then
+            iPrevOccurrencePosition = clsScriptActive.Text.LastIndexOf(strTextToFind, iCurrentCursorPosition - 1)
+        End If
+
+        ' If the text is not found, search from the end of the text
+        If iPrevOccurrencePosition = -1 Then
+            iPrevOccurrencePosition = clsScriptActive.Text.LastIndexOf(strTextToFind, clsScriptActive.Text.Length - 1)
+        End If
+
+        If iPrevOccurrencePosition = -1 Then
+            Return False
+        End If
+
+        clsScriptActive.GotoPosition(iPrevOccurrencePosition)
+        clsScriptActive.SetSelection(iPrevOccurrencePosition, iPrevOccurrencePosition + strTextToFind.Length)
+
+        Return True
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
     '''     If the caret is next to a bracket, then it highlights the paired open/close bracket. 
     '''     If it cannot find a paired bracket, then it displays the bracket next to the caret in 
     '''     the specified error colour. For nested indented brackets, also shows a vertical 
@@ -905,6 +973,9 @@ Public Class ucrScript
             Exit Sub
         End If
 
+        If Not FindAndHighlightNextOccurrence(clsScriptActive.SelectedText) Then
+            MsgBox("The search text was not found.", MsgBoxStyle.Information, "Text Not Found")
+        End If
     End Sub
 
     Private Sub mnuFindPrev_Click(sender As Object, e As EventArgs) Handles mnuFindPrev.Click
@@ -912,6 +983,9 @@ Public Class ucrScript
             Exit Sub
         End If
 
+        If Not FindAndHighlightPreviousOccurrence(clsScriptActive.SelectedText) Then
+            MsgBox("The search text was not found.", MsgBoxStyle.Information, "Text Not Found")
+        End If
     End Sub
 
     Private Sub mnuReplace_Click(sender As Object, e As EventArgs) Handles mnuReplace.Click
