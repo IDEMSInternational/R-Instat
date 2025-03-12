@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
+    Private clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -31,7 +31,7 @@ Public Class dlgGeneralTable
         sdgTableStyles.GetNewUserInputAsRFunction()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged, ucrReceiverMultipleColFactor.ControlContentsChanged, ucrReceiverMultipleRowFactors.ControlContentsChanged, ucrReceiverMultipleVariablesMul.ControlContentsChanged, ucrReceiverSingleVariable.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -54,16 +54,17 @@ Public Class dlgGeneralTable
 
         ucrPnlOptions.AddToLinkedControls({ucrInputTitle, ucrInputTitleFooter, ucrSaveTable, ucrChkSelectTheme}, {rdoDataFrame, rdoSingle, rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkPreview, ucrReceiverMultipleCols}, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleColFactor, ucrReceiverSingleVariable, ucrReceiverMultipleRowFactors}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverSingleVariable}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleVariablesMul}, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleColFactor, ucrReceiverMultipleRowFactors}, {rdoMultiple, rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverMultipleCols.SetParameter(New RParameter("df_columns_to_use_param", 0, bNewIncludeArgumentName:=False))
         ucrReceiverMultipleCols.SetParameterIsRFunction()
         ucrReceiverMultipleCols.Selector = ucrSelectorCols
         ucrReceiverMultipleCols.SetLinkedDisplayControl(lblColumns)
 
-        ucrReceiverMultipleRowFactors.SetParameter(New RParameter("df_columns_to_use_param", 0, bNewIncludeArgumentName:=False))
-        ucrReceiverMultipleRowFactors.SetParameterIsRFunction()
+        ucrReceiverMultipleRowFactors.SetParameter(New RParameter("names_from", 0))
+        ucrReceiverMultipleRowFactors.SetParameterIsString()
         ucrReceiverMultipleRowFactors.Selector = ucrSelectorCols
         ucrReceiverMultipleRowFactors.SetLinkedDisplayControl(lblRowFactor)
 
@@ -72,13 +73,13 @@ Public Class dlgGeneralTable
         ucrReceiverMultipleColFactor.Selector = ucrSelectorCols
         ucrReceiverMultipleColFactor.SetLinkedDisplayControl(lblColFactor)
 
-        ucrReceiverSingleVariable.SetParameter(New RParameter("df_columns_to_use_param", 0, bNewIncludeArgumentName:=False))
-        ucrReceiverSingleVariable.SetParameterIsRFunction()
+        ucrReceiverSingleVariable.SetParameter(New RParameter("values_from", 1))
+        ucrReceiverSingleVariable.SetParameterIsString()
         ucrReceiverSingleVariable.Selector = ucrSelectorCols
         ucrReceiverSingleVariable.SetLinkedDisplayControl(lblVariable)
 
-        ucrReceiverMultipleVariablesMul.SetParameter(New RParameter("df_columns_to_use_param", 0, bNewIncludeArgumentName:=False))
-        ucrReceiverMultipleVariablesMul.SetParameterIsRFunction()
+        ucrReceiverMultipleVariablesMul.SetParameter(New RParameter("values_from", 1, bNewIncludeArgumentName:=False))
+        ucrReceiverMultipleVariablesMul.SetParameterIsString()
         ucrReceiverMultipleVariablesMul.Selector = ucrSelectorCols
         ucrReceiverMultipleVariablesMul.SetLinkedDisplayControl(lblVariblesMul)
 
@@ -120,6 +121,8 @@ Public Class dlgGeneralTable
         clsTitleFooterRFunction = New RFunction
         clsTitleStyleRFunction = New RFunction
         clsDummyFunction = New RFunction
+        clsPivotWiderFunction = New RFunction
+        clsFormatTableFunction = New RFunction
 
         ucrSelectorCols.Reset()
         ucrReceiverMultipleCols.SetMeAsReceiver()
@@ -156,6 +159,14 @@ Public Class dlgGeneralTable
         clsTitleFooterRFunction.AddParameter("locations", clsRFunctionParameter:=clsCellsTitleRFunction, iPosition:=2)
         clsBaseOperator.AddParameter("theme_footer", clsRFunctionParameter:=clsTitleFooterRFunction)
 
+        clsPivotWiderFunction.SetPackageName("tidyr")
+        clsPivotWiderFunction.SetRCommand("pivot_wider")
+        'clsPivotWinderFunction.AddParameter("names_from", ucrReceiverMultipleRowFactors.GetText, iPosition:=1)
+        'clsPivotWinderFunction.AddParameter("values_from", clsRFunctionParameter:=clsCellsTitleRFunction, iPosition:=2)
+        ' clsBaseOperator.AddParameter("pivot_wider", clsRFunctionParameter:=clsPivotWiderFunction)
+
+        clsFormatTableFunction.SetRCommand("format_gt_table")
+
         Dim strGroupParamValue As String = "title"
         clsCellsTitleRFunction.SetPackageName("gt")
         clsCellsTitleRFunction.SetRCommand("cells_title")
@@ -178,10 +189,35 @@ Public Class dlgGeneralTable
         ucrChkPreview.SetRCode(clsBaseOperator, bReset)
         ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
         ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
+        ucrReceiverMultipleRowFactors.SetRCode(clsPivotWiderFunction, bReset)
+        ucrReceiverSingleVariable.SetRCode(clsPivotWiderFunction, bReset)
+        ucrReceiverMultipleColFactor.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(Not ucrReceiverMultipleCols.IsEmpty AndAlso ucrSaveTable.IsComplete)
+        If rdoDataFrame.Checked Then
+            ucrBase.OKEnabled(Not ucrReceiverMultipleCols.IsEmpty AndAlso ucrSaveTable.IsComplete)
+        ElseIf rdoSingle.Checked Then
+            ucrBase.OKEnabled(Not ucrReceiverMultipleColFactor.IsEmpty AndAlso Not ucrReceiverMultipleRowFactors.IsEmpty AndAlso Not ucrReceiverSingleVariable.IsEmpty AndAlso ucrSaveTable.IsComplete)
+        Else
+            ucrBase.OKEnabled(Not ucrReceiverMultipleColFactor.IsEmpty AndAlso Not ucrReceiverMultipleRowFactors.IsEmpty AndAlso Not ucrReceiverMultipleVariablesMul.IsEmpty AndAlso ucrSaveTable.IsComplete)
+        End If
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        AddRemovePivotwider()
+    End Sub
+
+    Private Sub AddRemovePivotwider()
+        If rdoSingle.Checked OrElse rdoMultiple.Checked Then
+            clsBaseOperator.RemoveParameterByName("head")
+            ucrReceiverMultipleRowFactors.SetMeAsReceiver()
+            clsBaseOperator.AddParameter("pivot_wider", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
+            clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=2)
+        Else
+            clsBaseOperator.RemoveParameterByName("pivot_wider")
+            clsBaseOperator.RemoveParameterByName("format_table")
+        End If
     End Sub
 
     Private Sub ucrChkPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPreview.ControlValueChanged
@@ -256,5 +292,4 @@ Public Class dlgGeneralTable
 
         clsThemeRFunction.SetRCommand(strCommand)
     End Sub
-
 End Class
