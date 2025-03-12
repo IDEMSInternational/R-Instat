@@ -1004,7 +1004,7 @@ Public Class ucrScript
         If Not isReplaceValid Then
             Exit Sub
         End If
-
+        ReplaceAll(clsScriptActive.SelectedText, Clipboard.GetText())
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
@@ -1109,6 +1109,33 @@ Public Class ucrScript
         End If
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''    Returns the number of occurrences of <paramref name="strTextToFind"/> in the script.
+    ''' </summary>
+    ''' <param name="strTextToFind"></param>
+    ''' <returns>the number of occurrences of <paramref name="strTextToFind"/> in the script</returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function NumOfOccurences(strTextToFind As String) As Integer
+        If String.IsNullOrEmpty(strTextToFind) Then
+            Return 0
+        End If
+
+        Dim strScriptText As String = clsScriptActive.Text
+        Dim iCount As Integer = 0
+        Dim iPosition As Integer = 0
+
+        While iPosition <> -1
+            iPosition = strScriptText.IndexOf(strTextToFind, iPosition)
+            If iPosition <> -1 Then
+                iCount += 1
+                iPosition += strTextToFind.Length
+            End If
+        End While
+
+        Return iCount
+    End Function
+
     Private Sub tabControl_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl.Selected
         Dim tabPageControls = TabControl.SelectedTab.Controls
         For Each control In tabPageControls
@@ -1156,6 +1183,57 @@ Public Class ucrScript
         TabControl.SelectedTab.Text = sender.text
         sender.Dispose()
     End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    ''' Finds all occurrences of <paramref name="strFindText"/> in the script and replaces them all 
+    ''' with <paramref name="strReplacementText"/>. Moves the caret to the start of the script and, 
+    ''' if needed, scrolls the caret into view.
+    ''' </summary>
+    ''' <param name="strFindText"> The text to search for</param>
+    ''' <param name="strReplacementText"> The new text to replace <paramref name="strFindText"/></param>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub ReplaceAll(strFindText As String, strReplacementText As String)
+
+        If String.IsNullOrEmpty(strFindText) Then
+            MsgBox("The text to find cannot be empty.", MsgBoxStyle.Exclamation, "Replace All")
+            Exit Sub
+        End If
+
+        Dim iCount As Integer = NumOfOccurences(strFindText)
+        If iCount = 0 Then
+            MsgBox("The text to find was not found in the document.", MsgBoxStyle.Information, "Replace All")
+            Exit Sub
+        End If
+
+        Dim result As MsgBoxResult = MsgBox(
+                $"Do you want to replace {iCount} occurrence(s) of the selected text?",
+                vbYesNo + vbQuestion, "Replace All")
+        If result = MsgBoxResult.No Then
+            Exit Sub
+        End If
+
+        ' Replace all occurrences of the text to find with the replacement text
+        Dim iPosition As Integer = 0
+        clsScriptActive.BeginUndoAction()
+        Try
+            While iPosition <> -1
+                iPosition = clsScriptActive.Text.IndexOf(strFindText, iPosition)
+                If iPosition <> -1 Then
+                    clsScriptActive.TargetStart = iPosition
+                    clsScriptActive.TargetEnd = iPosition + strFindText.Length
+                    clsScriptActive.ReplaceTarget(strReplacementText)
+                    iPosition += strReplacementText.Length
+                End If
+            End While
+        Finally
+            clsScriptActive.EndUndoAction()
+        End Try
+
+        clsScriptActive.GotoPosition(0)
+        clsScriptActive.ScrollCaret()
+    End Sub
+
     Private Sub mnuReformatCode_Click(sender As Object, e As EventArgs) Handles mnuReformatCode.Click
         ' Exit early if no text is selected
         If clsScriptActive.SelectionStart = clsScriptActive.SelectionEnd Then

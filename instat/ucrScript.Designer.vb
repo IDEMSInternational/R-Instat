@@ -49,6 +49,11 @@ Partial Class ucrScript
         Me.mnuSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClear = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuFindNext = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFindPrev = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuReplace = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuReplaceAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuRunCurrentStatementSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRunAllText = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
@@ -77,11 +82,6 @@ Partial Class ucrScript
         Me.cmdRunStatementSelection = New System.Windows.Forms.Button()
         Me.TabControl = New System.Windows.Forms.TabControl()
         Me.toolTipScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuFindNext = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFindPrev = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuReplace = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuReplaceAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.Panel.SuspendLayout()
@@ -153,6 +153,45 @@ Partial Class ucrScript
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(302, 6)
+        '
+        'mnuFindNext
+        '
+        Me.mnuFindNext.Name = "mnuFindNext"
+        Me.mnuFindNext.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
+        Me.mnuFindNext.Size = New System.Drawing.Size(305, 22)
+        Me.mnuFindNext.Text = "Find Next"
+        Me.mnuFindNext.ToolTipText = "Highlights the next occurrence of the selected text, and moves the cursor there"
+        '
+        'mnuFindPrev
+        '
+        Me.mnuFindPrev.Name = "mnuFindPrev"
+        Me.mnuFindPrev.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
+        Me.mnuFindPrev.Size = New System.Drawing.Size(305, 22)
+        Me.mnuFindPrev.Text = "Find Prev"
+        Me.mnuFindPrev.ToolTipText = "Highlights the previous occurrence of the selected text, and moves the cursor the" &
+    "re"
+        '
+        'mnuReplace
+        '
+        Me.mnuReplace.Name = "mnuReplace"
+        Me.mnuReplace.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
+        Me.mnuReplace.Size = New System.Drawing.Size(305, 22)
+        Me.mnuReplace.Text = "Replace"
+        Me.mnuReplace.ToolTipText = "Replaces the next occurrence of the selected text with the contents of the clipbo" &
+    "ard, and moves the cursor there"
+        '
+        'mnuReplaceAll
+        '
+        Me.mnuReplaceAll.Name = "mnuReplaceAll"
+        Me.mnuReplaceAll.Size = New System.Drawing.Size(305, 22)
+        Me.mnuReplaceAll.Text = "Replace All"
+        Me.mnuReplaceAll.ToolTipText = "Replaces all occurrences of the selected text with the contents of the clipboard," &
+    " and moves the cursor to the start of the script"
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(302, 6)
         '
         'mnuRunCurrentStatementSelection
         '
@@ -381,45 +420,6 @@ Partial Class ucrScript
         Me.TabControl.SelectedIndex = 0
         Me.TabControl.Size = New System.Drawing.Size(664, 441)
         Me.TabControl.TabIndex = 1
-        '
-        'ToolStripSeparator6
-        '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(302, 6)
-        '
-        'mnuFindNext
-        '
-        Me.mnuFindNext.Name = "mnuFindNext"
-        Me.mnuFindNext.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
-        Me.mnuFindNext.Size = New System.Drawing.Size(305, 22)
-        Me.mnuFindNext.Text = "Find Next"
-        Me.mnuFindNext.ToolTipText = "Highlights the next occurrence of the selected text, and moves the cursor there"
-        '
-        'mnuFindPrev
-        '
-        Me.mnuFindPrev.Name = "mnuFindPrev"
-        Me.mnuFindPrev.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.mnuFindPrev.Size = New System.Drawing.Size(305, 22)
-        Me.mnuFindPrev.Text = "Find Prev"
-        Me.mnuFindPrev.ToolTipText = "Highlights the previous occurrence of the selected text, and moves the cursor the" &
-    "re"
-        '
-        'mnuReplace
-        '
-        Me.mnuReplace.Name = "mnuReplace"
-        Me.mnuReplace.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.mnuReplace.Size = New System.Drawing.Size(305, 22)
-        Me.mnuReplace.Text = "Replace"
-        Me.mnuReplace.ToolTipText = "Replaces the next occurrence of the selected text with the contents of the clipbo" &
-    "ard, and moves the cursor there"
-        '
-        'mnuReplaceAll
-        '
-        Me.mnuReplaceAll.Name = "mnuReplaceAll"
-        Me.mnuReplaceAll.Size = New System.Drawing.Size(305, 22)
-        Me.mnuReplaceAll.Text = "Replace All"
-        Me.mnuReplaceAll.ToolTipText = "Replaces all occurrences of the selected text with the contents of the clipboard," &
-    " and moves the cursor to the last occurrence replaced"
         '
         'ucrScript
         '
