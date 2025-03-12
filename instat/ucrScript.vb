@@ -973,9 +973,9 @@ Public Class ucrScript
             Exit Sub
         End If
 
-        If Not FindAndHighlightNextOccurrence(clsScriptActive.SelectedText) Then
-            MsgBox("The search text was not found.", MsgBoxStyle.Information, "Text Not Found")
-        End If
+        ' Function will never return false when searching for the selected text,
+        ' so ignore the return value
+        FindAndHighlightNextOccurrence(clsScriptActive.SelectedText)
     End Sub
 
     Private Sub mnuFindPrev_Click(sender As Object, e As EventArgs) Handles mnuFindPrev.Click
@@ -983,9 +983,9 @@ Public Class ucrScript
             Exit Sub
         End If
 
-        If Not FindAndHighlightPreviousOccurrence(clsScriptActive.SelectedText) Then
-            MsgBox("The search text was not found.", MsgBoxStyle.Information, "Text Not Found")
-        End If
+        ' Function will never return false when searching for the selected text,
+        ' so ignore the return value
+        FindAndHighlightPreviousOccurrence(clsScriptActive.SelectedText)
     End Sub
 
     Private Sub mnuReplace_Click(sender As Object, e As EventArgs) Handles mnuReplace.Click
@@ -993,6 +993,11 @@ Public Class ucrScript
             Exit Sub
         End If
 
+        Dim strSelectedTextOrigional As String = clsScriptActive.SelectedText
+        clsScriptActive.ReplaceSelection(Clipboard.GetText())
+        If Not FindAndHighlightNextOccurrence(strSelectedTextOrigional) Then
+            MsgBox("No more occurrences found.", MsgBoxStyle.Information, "Replace")
+        End If
     End Sub
 
     Private Sub mnuReplaceAll_Click(sender As Object, e As EventArgs) Handles mnuReplaceAll.Click
