@@ -29,6 +29,24 @@ Public Class ucrScript
     Private clsRScript As RScript = Nothing
     Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
 
+    Private ReadOnly Property isFindValid As Boolean
+        Get
+            Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
+            Dim bTextSelected As Boolean = clsScriptActive.SelectedText.Length > 0
+
+            Return bScriptExists AndAlso bTextSelected
+        End Get
+    End Property
+
+    Private ReadOnly Property isReplaceValid As Boolean
+        Get
+            Dim bClipoardContainsText As Boolean = Clipboard.ContainsData(DataFormats.Text)
+            Dim bIsScriptTab As Boolean = TabControl.SelectedIndex <> iTabIndexLog
+
+            Return isFindValid AndAlso bIsScriptTab AndAlso bClipoardContainsText
+        End Get
+    End Property
+
     Friend WithEvents clsScriptActive As Scintilla
     Friend WithEvents clsScriptLog As Scintilla
 
@@ -330,6 +348,10 @@ Public Class ucrScript
         mnuPaste.Enabled = bEnable
         mnuSelectAll.Enabled = bEnable
         mnuClear.Enabled = bEnable
+        mnuFindNext.Enabled = bEnable
+        mnuFindPrev.Enabled = bEnable
+        mnuReplace.Enabled = bEnable
+        mnuReplaceAll.Enabled = bEnable
         mnuRunCurrentStatementSelection.Enabled = bEnable
         mnuRunAllText.Enabled = bEnable
         mnuLoadScriptFromFile.Enabled = bEnable
@@ -346,6 +368,74 @@ Public Class ucrScript
         cmdRunAll.Enabled = bEnable
         EnableRightClickMenuOptions(bEnable)
     End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''    Searches for the next occurrence of <paramref name="strTextToFind"/> in the active 
+    '''    script and highlights it.
+    ''' </summary>
+    ''' <param name="strTextToFind"></param>
+    ''' <returns>True if the active script contains at least one instance of 
+    '''     <paramref name="strTextToFind"/>, else returns False</returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function FindAndHighlightNextOccurrence(strTextToFind As String) As Boolean
+
+        Dim iCurrentCursorPosition As Integer = clsScriptActive.CurrentPosition
+        Dim iNextOccurrencePosition As Integer = -1
+
+        ' If cursor not at end of text, search from cursor position
+        If iCurrentCursorPosition < clsScriptActive.Text.Length Then
+            iNextOccurrencePosition = clsScriptActive.Text.IndexOf(strTextToFind, iCurrentCursorPosition + 1)
+        End If
+
+        ' If the text is not found, search from the beginning of the text
+        If iNextOccurrencePosition = -1 Then
+            iNextOccurrencePosition = clsScriptActive.Text.IndexOf(strTextToFind, 0)
+        End If
+
+        If iNextOccurrencePosition = -1 Then
+            Return False
+        End If
+
+        clsScriptActive.GotoPosition(iNextOccurrencePosition)
+        clsScriptActive.SetSelection(iNextOccurrencePosition, iNextOccurrencePosition + strTextToFind.Length)
+
+        Return True
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''    Searches for the previous occurrence of <paramref name="strTextToFind"/> in the active 
+    '''    script and highlights it.
+    ''' </summary>
+    ''' <param name="strTextToFind"></param>
+    ''' <returns>True if the active script contains at least one instance of 
+    '''     <paramref name="strTextToFind"/>, else returns False</returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function FindAndHighlightPreviousOccurrence(strTextToFind As String) As Boolean
+
+        Dim iCurrentCursorPosition As Integer = clsScriptActive.CurrentPosition
+        Dim iPrevOccurrencePosition As Integer = -1
+
+        ' If cursor not at start of text, search from cursor position
+        If iCurrentCursorPosition > 0 Then
+            iPrevOccurrencePosition = clsScriptActive.Text.LastIndexOf(strTextToFind, iCurrentCursorPosition - 1)
+        End If
+
+        ' If the text is not found, search from the end of the text
+        If iPrevOccurrencePosition = -1 Then
+            iPrevOccurrencePosition = clsScriptActive.Text.LastIndexOf(strTextToFind, clsScriptActive.Text.Length - 1)
+        End If
+
+        If iPrevOccurrencePosition = -1 Then
+            Return False
+        End If
+
+        clsScriptActive.GotoPosition(iPrevOccurrencePosition)
+        clsScriptActive.SetSelection(iPrevOccurrencePosition, iPrevOccurrencePosition + strTextToFind.Length)
+
+        Return True
+    End Function
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
@@ -824,13 +914,19 @@ Public Class ucrScript
             mnuUndo.Enabled = clsScriptActive.CanUndo
             mnuRedo.Enabled = clsScriptActive.CanRedo
             mnuCut.Enabled = bScriptSelected
-            mnuCopy.Enabled = bScriptSelected
             mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
             mnuClear.Enabled = bScriptExists
             mnuLoadScriptFromFile.Enabled = True
         End If
 
+        'enable find/replace options
+        mnuFindNext.Enabled = isFindValid
+        mnuFindPrev.Enabled = isFindValid
+        mnuReplace.Enabled = isReplaceValid
+        mnuReplaceAll.Enabled = isReplaceValid
+
         'enable remaining options based on tab state
+        mnuCopy.Enabled = bScriptSelected
         mnuSelectAll.Enabled = bScriptExists
         mnuRunCurrentStatementSelection.Enabled = bScriptExists
         mnuRunAllText.Enabled = bScriptExists
@@ -870,6 +966,45 @@ Public Class ucrScript
         End If
         clsScriptActive.ClearAll()
         EnableDisableButtons()
+    End Sub
+
+    Private Sub mnuFindNext_Click(sender As Object, e As EventArgs) Handles mnuFindNext.Click
+        If Not isFindValid Then
+            Exit Sub
+        End If
+
+        ' Function will never return false when searching for the selected text,
+        ' so ignore the return value
+        FindAndHighlightNextOccurrence(clsScriptActive.SelectedText)
+    End Sub
+
+    Private Sub mnuFindPrev_Click(sender As Object, e As EventArgs) Handles mnuFindPrev.Click
+        If Not isFindValid Then
+            Exit Sub
+        End If
+
+        ' Function will never return false when searching for the selected text,
+        ' so ignore the return value
+        FindAndHighlightPreviousOccurrence(clsScriptActive.SelectedText)
+    End Sub
+
+    Private Sub mnuReplace_Click(sender As Object, e As EventArgs) Handles mnuReplace.Click
+        If Not isReplaceValid Then
+            Exit Sub
+        End If
+
+        Dim strSelectedTextOrigional As String = clsScriptActive.SelectedText
+        clsScriptActive.ReplaceSelection(Clipboard.GetText())
+        If Not FindAndHighlightNextOccurrence(strSelectedTextOrigional) Then
+            MsgBox("No more occurrences found.", MsgBoxStyle.Information, "Replace")
+        End If
+    End Sub
+
+    Private Sub mnuReplaceAll_Click(sender As Object, e As EventArgs) Handles mnuReplaceAll.Click
+        If Not isReplaceValid Then
+            Exit Sub
+        End If
+        ReplaceAll(clsScriptActive.SelectedText, Clipboard.GetText())
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
@@ -974,6 +1109,33 @@ Public Class ucrScript
         End If
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''    Returns the number of occurrences of <paramref name="strTextToFind"/> in the script.
+    ''' </summary>
+    ''' <param name="strTextToFind"></param>
+    ''' <returns>the number of occurrences of <paramref name="strTextToFind"/> in the script</returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function NumOfOccurences(strTextToFind As String) As Integer
+        If String.IsNullOrEmpty(strTextToFind) Then
+            Return 0
+        End If
+
+        Dim strScriptText As String = clsScriptActive.Text
+        Dim iCount As Integer = 0
+        Dim iPosition As Integer = 0
+
+        While iPosition <> -1
+            iPosition = strScriptText.IndexOf(strTextToFind, iPosition)
+            If iPosition <> -1 Then
+                iCount += 1
+                iPosition += strTextToFind.Length
+            End If
+        End While
+
+        Return iCount
+    End Function
+
     Private Sub tabControl_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl.Selected
         Dim tabPageControls = TabControl.SelectedTab.Controls
         For Each control In tabPageControls
@@ -1021,6 +1183,57 @@ Public Class ucrScript
         TabControl.SelectedTab.Text = sender.text
         sender.Dispose()
     End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    ''' Finds all occurrences of <paramref name="strFindText"/> in the script and replaces them all 
+    ''' with <paramref name="strReplacementText"/>. Moves the caret to the start of the script and, 
+    ''' if needed, scrolls the caret into view.
+    ''' </summary>
+    ''' <param name="strFindText"> The text to search for</param>
+    ''' <param name="strReplacementText"> The new text to replace <paramref name="strFindText"/></param>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub ReplaceAll(strFindText As String, strReplacementText As String)
+
+        If String.IsNullOrEmpty(strFindText) Then
+            MsgBox("The text to find cannot be empty.", MsgBoxStyle.Exclamation, "Replace All")
+            Exit Sub
+        End If
+
+        Dim iCount As Integer = NumOfOccurences(strFindText)
+        If iCount = 0 Then
+            MsgBox("The text to find was not found in the document.", MsgBoxStyle.Information, "Replace All")
+            Exit Sub
+        End If
+
+        Dim result As MsgBoxResult = MsgBox(
+                $"Do you want to replace {iCount} occurrence(s) of the selected text?",
+                vbYesNo + vbQuestion, "Replace All")
+        If result = MsgBoxResult.No Then
+            Exit Sub
+        End If
+
+        ' Replace all occurrences of the text to find with the replacement text
+        Dim iPosition As Integer = 0
+        clsScriptActive.BeginUndoAction()
+        Try
+            While iPosition <> -1
+                iPosition = clsScriptActive.Text.IndexOf(strFindText, iPosition)
+                If iPosition <> -1 Then
+                    clsScriptActive.TargetStart = iPosition
+                    clsScriptActive.TargetEnd = iPosition + strFindText.Length
+                    clsScriptActive.ReplaceTarget(strReplacementText)
+                    iPosition += strReplacementText.Length
+                End If
+            End While
+        Finally
+            clsScriptActive.EndUndoAction()
+        End Try
+
+        clsScriptActive.GotoPosition(0)
+        clsScriptActive.ScrollCaret()
+    End Sub
+
     Private Sub mnuReformatCode_Click(sender As Object, e As EventArgs) Handles mnuReformatCode.Click
         ' Exit early if no text is selected
         If clsScriptActive.SelectionStart = clsScriptActive.SelectionEnd Then
