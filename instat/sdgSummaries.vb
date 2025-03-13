@@ -217,8 +217,6 @@ Public Class sdgSummaries
         ucrInputComboPropTest.SetDropDownStyleAsNonEditable()
 
         ucrInputPropValue.SetParameter(New RParameter("prop_value", 6))
-        'ucrInputPropValue.SetValidationTypeAsNumeric()
-        'ucrInputPropValue.AddQuotesIfUnrecognised = False
 
         ucrInputComboCountTest.SetParameter(New RParameter("count_test", 7))
         Dim dctCountTest As New Dictionary(Of String, String)
@@ -231,8 +229,6 @@ Public Class sdgSummaries
         ucrInputComboCountTest.SetDropDownStyleAsNonEditable()
 
         ucrInputCountValue.SetParameter(New RParameter("count_value", 8))
-        'ucrInputCountValue.SetValidationTypeAsNumeric()
-        'ucrInputCountValue.AddQuotesIfUnrecognised = False
 
         ucrChkProportion.SetParameter(New RParameter("proportion_calc", 42), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "proportion_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkProportion.SetText("Proportion")
@@ -441,9 +437,7 @@ Public Class sdgSummaries
             ucrPnlPosition.SetRCode(clsDummyFunction, bReset)
         End If
         ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        'ucrInputPropValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputComboPropTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        'ucrInputCountValue.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputComboCountTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPercentile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFraction.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
