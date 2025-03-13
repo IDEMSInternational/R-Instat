@@ -155,7 +155,7 @@ Partial Class dlgGeneralTable
         Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(282, 21)
+        Me.rdoSingle.Location = New System.Drawing.Point(104, 21)
         Me.rdoSingle.Name = "rdoSingle"
         Me.rdoSingle.Size = New System.Drawing.Size(91, 28)
         Me.rdoSingle.TabIndex = 37
@@ -174,7 +174,7 @@ Partial Class dlgGeneralTable
         Me.rdoDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDataFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDataFrame.Location = New System.Drawing.Point(104, 21)
+        Me.rdoDataFrame.Location = New System.Drawing.Point(282, 21)
         Me.rdoDataFrame.Name = "rdoDataFrame"
         Me.rdoDataFrame.Size = New System.Drawing.Size(91, 28)
         Me.rdoDataFrame.TabIndex = 38
@@ -362,6 +362,7 @@ Partial Class dlgGeneralTable
         'ucrReceiverMultipleVariablesMul
         '
         Me.ucrReceiverMultipleVariablesMul.AutoSize = True
+        Me.ucrReceiverMultipleVariablesMul.Enabled = False
         Me.ucrReceiverMultipleVariablesMul.frmParent = Me
         Me.ucrReceiverMultipleVariablesMul.Location = New System.Drawing.Point(293, 312)
         Me.ucrReceiverMultipleVariablesMul.Margin = New System.Windows.Forms.Padding(0)
