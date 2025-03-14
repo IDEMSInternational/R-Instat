@@ -214,6 +214,15 @@ Public Class clsRecentFiles
                 If dfTemp.Name = "dlgReorderLevels" Then
                     frmMain.SetDefaultValueInReorderLevels()
                 End If
+                If dfTemp.Name = "dlgRecodeFactor" Then
+                    frmMain.SetDefaultValueInReorderLevels()
+                End If
+                If dfTemp.Name = "dlgDummyVariables" Then
+                    frmMain.SetDefaultValueInReorderLevels()
+                End If
+                If dfTemp.Name = "dlgLabelsLevels" Then
+                    frmMain.SetDefaultValueInReorderLevels()
+                End If
                 dfTemp.ShowDialog()
                 Exit Sub
             End If

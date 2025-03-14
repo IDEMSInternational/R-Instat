@@ -22,6 +22,7 @@ Public Class dlgLabelsLevels
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
+    Private _strSelectedColumn As String
 
     Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -32,6 +33,7 @@ Public Class dlgLabelsLevels
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetSelectedColumn()
         bReset = False
         If bUseSelectedColumn Then
             SetDefaultColumn()
@@ -155,6 +157,30 @@ Public Class dlgLabelsLevels
         ucrChkIncludeLevelNumbers.Checked = frmMain.clsRLink.IsVariablesMetadata(
                 ucrReceiverLabels.GetDataName(), "labels", ucrReceiverLabels.GetVariableNames(False))
         ucrChkIncludeLevelNumbers.Enabled = Not ucrChkIncludeLevelNumbers.Checked
+    End Sub
+
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        Dim strTempSelectedVariable As String = ""
+        Dim strDataName As String = ucrSelectorForLabels.strCurrentDataFrame
+        If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
+            strTempSelectedVariable = _strSelectedColumn
+        ElseIf ucrSelectorForLabels.lstAvailableVariable.Items.Count > 0 Then
+            strTempSelectedVariable = ucrSelectorForLabels.lstAvailableVariable.Items(0).Text
+        Else
+            ' Handle the case where there are no available variables
+            Exit Sub
+        End If
+
+        ucrReceiverLabels.Add(strTempSelectedVariable, strDataName)
     End Sub
 
     Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkIncludeLevelNumbers.ControlValueChanged

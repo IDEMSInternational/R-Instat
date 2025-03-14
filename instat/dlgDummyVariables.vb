@@ -20,6 +20,9 @@ Public Class dlgDummyVariables
     Private bReset As Boolean = True
     Private clsDummyColsFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private _strSelectedColumn As String
+
+
     Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -29,6 +32,7 @@ Public Class dlgDummyVariables
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetSelectedColumn()
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
@@ -110,6 +114,30 @@ Public Class dlgDummyVariables
             clsDummyColsFunction.AddParameter("remove_first_dummy", "FALSE", iPosition:=2)
             clsDummyColsFunction.AddParameter("remove_most_frequent_dummy", "TRUE", iPosition:=3)
         End If
+    End Sub
+
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        Dim strTempSelectedVariable As String = ""
+        Dim strDataName As String = ucrSelectorDummyVariable.strCurrentDataFrame
+        If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
+            strTempSelectedVariable = _strSelectedColumn
+        ElseIf ucrSelectorDummyVariable.lstAvailableVariable.Items.Count > 0 Then
+            strTempSelectedVariable = ucrSelectorDummyVariable.lstAvailableVariable.Items(0).Text
+        Else
+            ' Handle the case where there are no available variables
+            Exit Sub
+        End If
+
+        ucrReceiverFactor.Add(strTempSelectedVariable, strDataName)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
