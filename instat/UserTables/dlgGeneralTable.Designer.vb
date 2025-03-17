@@ -45,10 +45,10 @@ Partial Class dlgGeneralTable
         Me.ucrReceiverMultipleRowFactors = New instat.ucrReceiverMultiple()
         Me.lblColFactor = New System.Windows.Forms.Label()
         Me.ucrReceiverMultipleColFactor = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverSingleVariable = New instat.ucrReceiverSingle()
         Me.lblVariable = New System.Windows.Forms.Label()
         Me.lblVariblesMul = New System.Windows.Forms.Label()
         Me.ucrReceiverMultipleVariablesMul = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverSingleVariable = New instat.ucrReceiverSingle()
         Me.grpBoxTitle.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -326,19 +326,6 @@ Partial Class dlgGeneralTable
         Me.ucrReceiverMultipleColFactor.TabIndex = 41
         Me.ucrReceiverMultipleColFactor.ucrSelector = Nothing
         '
-        'ucrReceiverSingleVariable
-        '
-        Me.ucrReceiverSingleVariable.AutoSize = True
-        Me.ucrReceiverSingleVariable.frmParent = Me
-        Me.ucrReceiverSingleVariable.Location = New System.Drawing.Point(293, 311)
-        Me.ucrReceiverSingleVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSingleVariable.Name = "ucrReceiverSingleVariable"
-        Me.ucrReceiverSingleVariable.Selector = Nothing
-        Me.ucrReceiverSingleVariable.Size = New System.Drawing.Size(141, 20)
-        Me.ucrReceiverSingleVariable.strNcFilePath = ""
-        Me.ucrReceiverSingleVariable.TabIndex = 43
-        Me.ucrReceiverSingleVariable.ucrSelector = Nothing
-        '
         'lblVariable
         '
         Me.lblVariable.AutoSize = True
@@ -373,6 +360,19 @@ Partial Class dlgGeneralTable
         Me.ucrReceiverMultipleVariablesMul.TabIndex = 45
         Me.ucrReceiverMultipleVariablesMul.ucrSelector = Nothing
         '
+        'ucrReceiverSingleVariable
+        '
+        Me.ucrReceiverSingleVariable.AutoSize = True
+        Me.ucrReceiverSingleVariable.frmParent = Me
+        Me.ucrReceiverSingleVariable.Location = New System.Drawing.Point(293, 312)
+        Me.ucrReceiverSingleVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSingleVariable.Name = "ucrReceiverSingleVariable"
+        Me.ucrReceiverSingleVariable.Selector = Nothing
+        Me.ucrReceiverSingleVariable.Size = New System.Drawing.Size(141, 26)
+        Me.ucrReceiverSingleVariable.strNcFilePath = ""
+        Me.ucrReceiverSingleVariable.TabIndex = 142
+        Me.ucrReceiverSingleVariable.ucrSelector = Nothing
+        '
         'dlgGeneralTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -382,7 +382,6 @@ Partial Class dlgGeneralTable
         Me.Controls.Add(Me.ucrReceiverMultipleVariablesMul)
         Me.Controls.Add(Me.ucrCboSelectThemes)
         Me.Controls.Add(Me.lblVariable)
-        Me.Controls.Add(Me.ucrReceiverSingleVariable)
         Me.Controls.Add(Me.rdoDataFrame)
         Me.Controls.Add(Me.rdoSingle)
         Me.Controls.Add(Me.rdoMultiple)
@@ -401,6 +400,7 @@ Partial Class dlgGeneralTable
         Me.Controls.Add(Me.ucrReceiverMultipleRowFactors)
         Me.Controls.Add(Me.lblColFactor)
         Me.Controls.Add(Me.ucrReceiverMultipleColFactor)
+        Me.Controls.Add(Me.ucrReceiverSingleVariable)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgGeneralTable"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -435,7 +435,7 @@ Partial Class dlgGeneralTable
     Friend WithEvents lblColFactor As Label
     Friend WithEvents ucrReceiverMultipleColFactor As ucrReceiverMultiple
     Friend WithEvents lblVariable As Label
-    Friend WithEvents ucrReceiverSingleVariable As ucrReceiverSingle
     Friend WithEvents lblVariblesMul As Label
     Friend WithEvents ucrReceiverMultipleVariablesMul As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverSingleVariable As ucrReceiverSingle
 End Class
