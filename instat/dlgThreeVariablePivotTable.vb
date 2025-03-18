@@ -67,7 +67,6 @@ Public Class dlgThreeVariablePivotTable
 
         ucrReceiverAdditionalRowFactor.SetParameter(New RParameter("val", iNewPosition:=4))
         ucrReceiverAdditionalRowFactor.SetParameterIsString()
-        ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
         ucrReceiverAdditionalRowFactor.Selector = ucrSelectorPivot
 
         ucrChkSelectedVariable.AddParameterIsRFunctionCondition(False, "data", True)
@@ -113,10 +112,6 @@ Public Class dlgThreeVariablePivotTable
 }.Concat(lstCommonRenderers).ToArray()
 
         ucrInputTableChart.SetParameter(New RParameter("rendererName", iNewPosition:=5))
-        'ucrInputTableChart.SetItems({"Table", "Table Barchart", "Heatmap", "Row Heatmap", "Col Heatmap",
-        ' "Treemap", "Horizontal Bar Chart", "Horizontal Stacked Barchart", "Bar Chart", "Stacked Bar Chart",
-        ' "Line Chart", "Area chart", "Scatter Chart"}, bAddConditions:=True)
-        'ucrInputTableChart.SetItems(lstNormalRenderers, bAddConditions:=True)
         ucrInputTableChart.SetLinkedDisplayControl(lblTableChart)
 
         ucrInputSummary.SetParameter(New RParameter("aggregatorName", iNewPosition:=6))
@@ -276,7 +271,6 @@ Public Class dlgThreeVariablePivotTable
 
                 ucrReceiverInitialColumnFactor.bAutoFill = False
 
-                ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
                 ucrReceiverAdditionalRowFactor.bAutoFill = False
             Case PivotMode.Describe
                 ucrBase.iHelpTopicID = 417
@@ -285,7 +279,6 @@ Public Class dlgThreeVariablePivotTable
 
                 ucrReceiverInitialColumnFactor.bAutoFill = False
 
-                ucrReceiverAdditionalRowFactor.SetIncludedDataTypes({"numeric", "Date", "logical"})
                 ucrReceiverAdditionalRowFactor.bAutoFill = False
             Case PivotMode.Climatic
                 Dim strMonthCol As String
@@ -389,7 +382,6 @@ Public Class dlgThreeVariablePivotTable
         ' Refresh the control
         ucrInputTableChart.Refresh()
     End Sub
-
 
     Private Sub ucrChkIncludeSubTotals_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeSubTotals.ControlValueChanged
         UpdateRendererOptions()
