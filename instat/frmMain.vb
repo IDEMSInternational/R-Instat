@@ -870,18 +870,12 @@ Public Class frmMain
 
     Private Sub SaveMenuState(state As Boolean)
         System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(MenuStateFilePath))
-
-        ' Show path for debugging
-        MessageBox.Show("File saved at: " & MenuStateFilePath)
-
         System.IO.File.WriteAllText(MenuStateFilePath, state.ToString())
     End Sub
 
     Private Function LoadMenuState() As Boolean
         If System.IO.File.Exists(MenuStateFilePath) Then
             Dim stateText As String = System.IO.File.ReadAllText(MenuStateFilePath).Trim()
-
-            ' Correct usage of TryParse
             Dim result As Boolean
             If Boolean.TryParse(stateText, result) Then
                 Return result
