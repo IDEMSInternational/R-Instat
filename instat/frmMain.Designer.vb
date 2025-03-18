@@ -409,9 +409,10 @@ Partial Class frmMain
         Me.separator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbDataView = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuDataViewWindow = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuRDataViewerWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSwapDataMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSwapDataDataframeMetadata = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRDataViewerWindow = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredMenuOption = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTbOutput = New System.Windows.Forms.ToolStripSplitButton()
         Me.mnuOutputWindow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuShowRCommand = New System.Windows.Forms.ToolStripMenuItem()
@@ -746,7 +747,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariableVisualiseData, Me.ToolStripSeparator72, Me.mnuDescribeOneVariableSummarise, Me.mnuDescribeOneVariableGraph, Me.ToolStripSeparator33, Me.mnuDescribeOneVariableFrequencies, Me.mnuDescribeOneVariableRatingData})
         Me.mnuDescribeOneVariable.Name = "mnuDescribeOneVariable"
-        Me.mnuDescribeOneVariable.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeOneVariable.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeOneVariable.Tag = "One_Variable"
         Me.mnuDescribeOneVariable.Text = "One Variable"
         '
@@ -799,7 +800,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoThreeVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoThreeVariablesPivotTable, Me.ToolStripSeparator36, Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesGraph, Me.ToolStripSeparator34, Me.mnuDescribeTwoThreeVariablesCorrelations, Me.mnuDescribeTwoThreeVariablesTwoWayFrequencies, Me.mnuDescribeTwoThreeVariablesThreeWayFrequencies})
         Me.mnuDescribeTwoThreeVariables.Name = "mnuDescribeTwoThreeVariables"
-        Me.mnuDescribeTwoThreeVariables.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeTwoThreeVariables.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeTwoThreeVariables.Tag = "Two_Variables"
         Me.mnuDescribeTwoThreeVariables.Text = "Two/Three Variables"
         '
@@ -861,7 +862,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeSpecificTablesGraphs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLineSmoothPlot, Me.ToolStripSeparator38, Me.mnuDescribeGeneral, Me.ToolStripSeparator26, Me.mnuDescribeSpecificMapPlot, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificMosaic, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot})
         Me.mnuDescribeSpecificTablesGraphs.Name = "mnuDescribeSpecificTablesGraphs"
-        Me.mnuDescribeSpecificTablesGraphs.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeSpecificTablesGraphs.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeSpecificTablesGraphs.Tag = "Graph_Dialogs"
         Me.mnuDescribeSpecificTablesGraphs.Text = "Graphs"
         '
@@ -961,7 +962,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeSpecificTables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSummaries, Me.mnuDescribePresentation})
         Me.mnuDescribeSpecificTables.Name = "mnuDescribeSpecificTables"
-        Me.mnuDescribeSpecificTables.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeSpecificTables.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeSpecificTables.Tag = "Table_Dialogs"
         Me.mnuDescribeSpecificTables.Text = "Tables..."
         Me.mnuDescribeSpecificTables.ToolTipText = "Frequency tables and Summary tables"
@@ -981,13 +982,13 @@ Partial Class frmMain
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(175, 6)
         '
         'mnuDescribeMultivariate
         '
         Me.mnuDescribeMultivariate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeMultivariateCorrelations, Me.mnuDescribeMultivariateprincipalComponents, Me.mnuDescribeMultivariateCanonicalCorrelations, Me.mnuDescribeMultivariateClusterAnalysis})
         Me.mnuDescribeMultivariate.Name = "mnuDescribeMultivariate"
-        Me.mnuDescribeMultivariate.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeMultivariate.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeMultivariate.Text = "Multivariate"
         '
         'mnuDescribeMultivariateCorrelations
@@ -1019,38 +1020,38 @@ Partial Class frmMain
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(175, 6)
         '
         'mnuDescribeUseTable
         '
         Me.mnuDescribeUseTable.Name = "mnuDescribeUseTable"
-        Me.mnuDescribeUseTable.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeUseTable.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeUseTable.Text = "Use Table..."
         '
         'mnuDescribeUseGraph
         '
         Me.mnuDescribeUseGraph.Name = "mnuDescribeUseGraph"
-        Me.mnuDescribeUseGraph.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeUseGraph.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeUseGraph.Text = "Use Graph..."
         '
         'mnuDescribeCombineGraph
         '
         Me.mnuDescribeCombineGraph.Name = "mnuDescribeCombineGraph"
-        Me.mnuDescribeCombineGraph.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeCombineGraph.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeCombineGraph.Text = "Combine Graphs..."
         '
         'mnuDescribeThemes
         '
         Me.mnuDescribeThemes.Enabled = False
         Me.mnuDescribeThemes.Name = "mnuDescribeThemes"
-        Me.mnuDescribeThemes.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeThemes.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeThemes.Text = "Themes..."
         Me.mnuDescribeThemes.Visible = False
         '
         'mnuDescribeViewGraph
         '
         Me.mnuDescribeViewGraph.Name = "mnuDescribeViewGraph"
-        Me.mnuDescribeViewGraph.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeViewGraph.Size = New System.Drawing.Size(178, 22)
         Me.mnuDescribeViewGraph.Text = "View Graph..."
         '
         'mnuModel
@@ -3219,7 +3220,7 @@ Partial Class frmMain
         '
         Me.mnuTbDataView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.mnuTbDataView.DropDownButtonWidth = 18
-        Me.mnuTbDataView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDataViewWindow, Me.mnuSwapDataMetadata, Me.mnuSwapDataDataframeMetadata, Me.mnuRDataViewerWindow})
+        Me.mnuTbDataView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDataViewWindow, Me.mnuSwapDataMetadata, Me.mnuSwapDataDataframeMetadata, Me.mnuRDataViewerWindow, Me.mnuStructuredMenuOption})
         Me.mnuTbDataView.Image = Global.instat.My.Resources.Resources.dataframe2
         Me.mnuTbDataView.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbDataView.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
@@ -3234,13 +3235,6 @@ Partial Class frmMain
         Me.mnuDataViewWindow.Size = New System.Drawing.Size(268, 22)
         Me.mnuDataViewWindow.Text = "Data View"
         '
-        'mnuRDataViewerWindow
-        '
-        Me.mnuRDataViewerWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.mnuRDataViewerWindow.Name = "mnuRDataViewerWindow"
-        Me.mnuRDataViewerWindow.Size = New System.Drawing.Size(268, 22)
-        Me.mnuRDataViewerWindow.Text = "R-Data Viewer"
-        '
         'mnuSwapDataMetadata
         '
         Me.mnuSwapDataMetadata.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
@@ -3254,6 +3248,20 @@ Partial Class frmMain
         Me.mnuSwapDataDataframeMetadata.Name = "mnuSwapDataDataframeMetadata"
         Me.mnuSwapDataDataframeMetadata.Size = New System.Drawing.Size(268, 22)
         Me.mnuSwapDataDataframeMetadata.Text = "Swap Data With Dataframe Metadata"
+        '
+        'mnuRDataViewerWindow
+        '
+        Me.mnuRDataViewerWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuRDataViewerWindow.Name = "mnuRDataViewerWindow"
+        Me.mnuRDataViewerWindow.Size = New System.Drawing.Size(268, 22)
+        Me.mnuRDataViewerWindow.Text = "R-Data Viewer"
+        '
+        'mnuStructuredMenuOption
+        '
+        Me.mnuStructuredMenuOption.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuStructuredMenuOption.Name = "mnuStructuredMenuOption"
+        Me.mnuStructuredMenuOption.Size = New System.Drawing.Size(268, 22)
+        Me.mnuStructuredMenuOption.Text = "Structured Menu"
         '
         'mnuTbOutput
         '
@@ -5220,6 +5228,7 @@ Partial Class frmMain
         Me.ucrColumnMeta.BackColor = System.Drawing.SystemColors.Control
         Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrColumnMeta.IsEnabled = False
         Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
         Me.ucrColumnMeta.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrColumnMeta.Name = "ucrColumnMeta"
@@ -6064,4 +6073,5 @@ Partial Class frmMain
     Friend WithEvents mnuViewSwapDataAndDataframeMetadata As ToolStripMenuItem
     Friend WithEvents mnuSwapDataMetadata As ToolStripMenuItem
     Friend WithEvents mnuSwapDataDataframeMetadata As ToolStripMenuItem
+    Friend WithEvents mnuStructuredMenuOption As ToolStripMenuItem
 End Class

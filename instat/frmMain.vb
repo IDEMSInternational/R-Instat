@@ -44,6 +44,9 @@ Public Class frmMain
     Private clsDataBook As clsDataBook
     Private Shared ReadOnly Logger As NLog.Logger = NLog.LogManager.GetCurrentClassLogger()
     Public bFirstBackupDone As Boolean = False
+
+    Private ReadOnly MenuStateFilePath As String = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "YourAppName", "MenuState.txt")
+
     Public ReadOnly Property DataBook As clsDataBook
         Get
             Return clsDataBook
@@ -156,6 +159,7 @@ Public Class frmMain
         '---------------------------------------
         'toggle the optional form menu items based on set opyions
         mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
+        mnuStructuredMenuOption.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
@@ -234,6 +238,7 @@ Public Class frmMain
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
         SetHideMenus()
+        ShowHideMenus()
     End Sub
 
     Private Sub CheckForUpdates()
@@ -631,8 +636,8 @@ Public Class frmMain
         mnuProcurement.Visible = False
         mnuViewOptionsByContextMenu.Checked = False
         mnuOptionsByContext.Visible = False
-        mnuViewStructuredMenu.Checked = False
-        mnuStructured.Visible = False
+        'mnuViewStructuredMenu.Checked = False
+        'mnuStructured.Visible = False
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -857,6 +862,43 @@ Public Class frmMain
         UpdateLayout()
     End Sub
 
+    Private Sub ShowHideMenus()
+        mnuStructuredMenuOption.Checked = LoadMenuState()
+        clsInstatOptions.SetShowStructuredMenu(mnuStructuredMenuOption.Checked)
+        clsInstatOptions.ExecuteRGlobalOptions()
+    End Sub
+
+    Private Sub SaveMenuState(state As Boolean)
+        System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(MenuStateFilePath))
+
+        ' Show path for debugging
+        MessageBox.Show("File saved at: " & MenuStateFilePath)
+
+        System.IO.File.WriteAllText(MenuStateFilePath, state.ToString())
+    End Sub
+
+    Private Function LoadMenuState() As Boolean
+        If System.IO.File.Exists(MenuStateFilePath) Then
+            Dim stateText As String = System.IO.File.ReadAllText(MenuStateFilePath).Trim()
+
+            ' Correct usage of TryParse
+            Dim result As Boolean
+            If Boolean.TryParse(stateText, result) Then
+                Return result
+            End If
+        End If
+        Return False ' Default to hidden
+    End Function
+
+
+    Private Sub mnuStructuredMenuOption_Click(sender As Object, e As EventArgs) Handles mnuStructuredMenuOption.Click
+        mnuStructuredMenuOption.Checked = mnuViewStructuredMenu.Checked
+        mnuStructuredMenuOption.Checked = Not mnuStructuredMenuOption.Checked
+        clsInstatOptions.SetShowStructuredMenu(Not mnuViewStructuredMenu.Checked)
+        clsInstatOptions.ExecuteRGlobalOptions()
+        SaveMenuState(mnuStructuredMenuOption.Checked)
+    End Sub
+
     Private Sub mnuShowRCommand_Click(sender As Object, e As EventArgs) Handles mnuShowRCommand.Click
         mnuShowRCommand.Checked = Not mnuShowRCommand.Checked
         clsInstatOptions.SetCommandInOutpt(mnuShowRCommand.Checked)
@@ -1055,6 +1097,7 @@ Public Class frmMain
         dlgOptions.ShowDialog()
         mnuShowRCommand.Checked = dlgOptions.ucrChkShowRCommandsinOutputWindow.chkCheck.Checked
         mnuIncludeComments.Checked = dlgOptions.ucrChkIncludeCommentsbyDefault.chkCheck.Checked
+        mnuStructuredMenuOption.Checked = dlgOptions.ucrChkViewStructuredMenu.chkCheck.Checked
     End Sub
 
     Private Sub mnuModelProbabilityDistributionsRandomSamplesUseModel_Click(sender As Object, e As EventArgs) Handles mnuModelProbabilityDistributionsRandomSamplesUseModel.Click
@@ -1907,6 +1950,7 @@ Public Class frmMain
     Public Sub SetShowStructuredMenu(bNewShowStructuredMenu As Boolean)
         mnuStructured.Visible = bNewShowStructuredMenu
         mnuViewStructuredMenu.Checked = bNewShowStructuredMenu
+        mnuStructuredMenuOption.Checked = bNewShowStructuredMenu
     End Sub
     Public Sub SetShowClimaticMenu(bNewShowClimaticMenu As Boolean)
         mnuClimatic.Visible = bNewShowClimaticMenu
