@@ -77,8 +77,6 @@ Public Class dlgGeneralTable
         ucrReceiverMultipleColFactor.SetParameter(New RParameter("col_names", 1))
         ucrReceiverMultipleColFactor.SetParameterIsString()
         ucrReceiverMultipleColFactor.Selector = ucrSelectorCols
-        ucrReceiverMultipleColFactor.strSelectorHeading = "Factors"
-        ucrReceiverMultipleColFactor.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverMultipleColFactor.SetLinkedDisplayControl(lblColFactor)
 
         ucrReceiverSingleVariable.SetParameter(New RParameter("values_from", 1))
