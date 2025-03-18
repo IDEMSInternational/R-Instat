@@ -24,6 +24,8 @@ Public Class dlgThreeVariablePivotTable
         clsSelectFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Public enumPivotMode As PivotMode = PivotMode.Prepare
+    Private lstSubtotalRenderers As String()
+    Private lstNormalRenderers As String()
 
     Public Enum PivotMode
         Prepare
@@ -82,7 +84,7 @@ Public Class dlgThreeVariablePivotTable
         ucrChkIncludeSubTotals.SetParameter(New RParameter("subtotals", iNewPosition:=3))
         ucrChkIncludeSubTotals.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrChkNumericVariable.SetText("Numeric Variable (Optional):")
+        ucrChkNumericVariable.SetText("Variable (Optional):")
         ucrChkNumericVariable.AddParameterPresentCondition(True, "rendererName")
         ucrChkNumericVariable.AddParameterPresentCondition(False, "rendererName", False)
         ucrChkNumericVariable.AddToLinkedControls({ucrReceiverAdditionalRowFactor}, {True}, bNewLinkedHideIfParameterMissing:=True,
@@ -94,10 +96,27 @@ Public Class dlgThreeVariablePivotTable
                                                   bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True,
                                                   objNewDefaultState:="Average", bNewLinkedChangeToDefaultState:=True)
 
+        Dim lstCommonRenderers As String() = {
+    "Treemap", "Horizontal Bar Chart", "Horizontal Stacked Bar Chart",
+    "Bar Chart", "Stacked Bar Chart", "Line Chart", "Area Chart", "Scatter Chart"
+}
+
+        ' Define renderers for the unchecked case (normal)
+        lstNormalRenderers = {
+    "Table", "Table Barchart", "Heatmap", "Row Heatmap", "Col Heatmap"
+}.Concat(lstCommonRenderers).ToArray()
+
+        ' Define renderers for the checked case (subtotal versions)
+        lstSubtotalRenderers = {
+    "Table With Subtotal", "Table With Subtotal Bar Chart", "Table With Subtotal Heatmap",
+    "Table With Subtotal Row Heatmap", "Table With Subtotal Col Heatmap"
+}.Concat(lstCommonRenderers).ToArray()
+
         ucrInputTableChart.SetParameter(New RParameter("rendererName", iNewPosition:=5))
-        ucrInputTableChart.SetItems({"Table", "Table Barchart", "Heatmap", "Row Heatmap", "Col Heatmap",
-         "Treemap", "Horizontal Bar Chart", "Horizontal Stacked Barchart", "Bar Chart", "Stacked Bar Chart",
-         "Line Chart", "Area chart", "Scatter Chart"}, bAddConditions:=True)
+        'ucrInputTableChart.SetItems({"Table", "Table Barchart", "Heatmap", "Row Heatmap", "Col Heatmap",
+        ' "Treemap", "Horizontal Bar Chart", "Horizontal Stacked Barchart", "Bar Chart", "Stacked Bar Chart",
+        ' "Line Chart", "Area chart", "Scatter Chart"}, bAddConditions:=True)
+        'ucrInputTableChart.SetItems(lstNormalRenderers, bAddConditions:=True)
         ucrInputTableChart.SetLinkedDisplayControl(lblTableChart)
 
         ucrInputSummary.SetParameter(New RParameter("aggregatorName", iNewPosition:=6))
@@ -114,6 +133,7 @@ Public Class dlgThreeVariablePivotTable
         ucrSavePivot.SetIsComboBox()
         ucrSavePivot.SetCheckBoxText("Store Table")
         ucrSavePivot.SetAssignToIfUncheckedValue("last_table")
+        UpdateRendererOptions()
     End Sub
 
     Private Sub SetDefaults()
@@ -126,6 +146,7 @@ Public Class dlgThreeVariablePivotTable
         ucrReceiverInitialRowFactors.SetMeAsReceiver()
         ucrSelectorPivot.Reset()
         ucrSavePivot.Reset()
+        ucrInputTableChart.Reset()
 
         clsDummyFunction.AddParameter("order", "True", iPosition:=0)
 
@@ -342,6 +363,36 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub ucrChkFactorsOrder_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFactorsOrder.ControlValueChanged
         SetFactorSortingOrder()
+    End Sub
+
+    Private Sub UpdateRendererOptions()
+        ' Decide which list to use based on checkbox state
+        Dim lstFinalRenderers As String()
+
+        If ucrChkIncludeSubTotals.Checked Then
+            lstFinalRenderers = lstSubtotalRenderers
+        Else
+            lstFinalRenderers = lstNormalRenderers
+        End If
+
+        ' Update available items
+        ucrInputTableChart.SetItems({}, bAddConditions:=False)
+        ucrInputTableChart.SetItems(lstFinalRenderers, bAddConditions:=True)
+
+        ' Set the first item as the default selection if the list is not empty
+        If lstFinalRenderers.Length > 0 Then
+            ucrInputTableChart.SetText(lstFinalRenderers(0))
+        Else
+            ucrInputTableChart.SetText("")
+        End If
+
+        ' Refresh the control
+        ucrInputTableChart.Refresh()
+    End Sub
+
+
+    Private Sub ucrChkIncludeSubTotals_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeSubTotals.ControlValueChanged
+        UpdateRendererOptions()
     End Sub
 
 End Class
