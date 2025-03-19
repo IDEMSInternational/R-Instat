@@ -31,7 +31,7 @@ Public Class dlgGeneralTable
         sdgTableStyles.GetNewUserInputAsRFunction()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged, ucrReceiverMultipleColFactor.ControlContentsChanged, ucrReceiverMultipleRowFactors.ControlContentsChanged, ucrReceiverMultipleVariablesMul.ControlContentsChanged, ucrReceiverSingleVariable.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged, ucrReceiverMultipleColFactor.ControlContentsChanged, ucrReceiverMultipleRowFactors.ControlContentsChanged, ucrReceiverMultipleVariablesMul.ControlContentsChanged, ucrReceiverSingleVariable.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -55,12 +55,10 @@ Public Class dlgGeneralTable
         ucrPnlOptions.AddParameterValuesCondition(rdoSingle, "checked", "Single")
         ucrPnlOptions.AddParameterValuesCondition(rdoMultiple, "checked", "Multiple")
 
-        ucrPnlOptions.AddToLinkedControls({ucrInputTitle, ucrInputTitleFooter, ucrSaveTable, ucrChkSelectTheme}, {rdoDataFrame, rdoSingle, rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkPreview, ucrReceiverMultipleCols}, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverSingleVariable}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleVariablesMul}, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleColFactor, ucrReceiverMultipleRowFactors}, {rdoMultiple, rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
 
         ucrReceiverMultipleCols.SetParameter(New RParameter("col_names", 1))
         ucrReceiverMultipleCols.SetParameterIsString()
@@ -70,13 +68,15 @@ Public Class dlgGeneralTable
         ucrReceiverMultipleRowFactors.SetParameter(New RParameter("names_from", 0))
         ucrReceiverMultipleRowFactors.SetParameterIsString()
         ucrReceiverMultipleRowFactors.Selector = ucrSelectorCols
+        ucrReceiverMultipleRowFactors.SetIncludedDataTypes({"factor"})
         ucrReceiverMultipleRowFactors.strSelectorHeading = "Factors"
-        ucrReceiverMultipleRowFactors.SetIncludedDataTypes({"factor"}, bStrict:=True)
         ucrReceiverMultipleRowFactors.SetLinkedDisplayControl(lblRowFactor)
 
         ucrReceiverMultipleColFactor.SetParameter(New RParameter("col_names", 1))
         ucrReceiverMultipleColFactor.SetParameterIsString()
         ucrReceiverMultipleColFactor.Selector = ucrSelectorCols
+        ucrReceiverMultipleColFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverMultipleColFactor.strSelectorHeading = "Factors"
         ucrReceiverMultipleColFactor.SetLinkedDisplayControl(lblColFactor)
 
         ucrReceiverSingleVariable.SetParameter(New RParameter("values_from", 1))
@@ -109,12 +109,14 @@ Public Class dlgGeneralTable
         ucrSaveTable.SetCheckBoxText("Store Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
-        ucrChkSelectTheme.Checked = True
         ucrChkSelectTheme.SetText("Theme")
+        ucrChkSelectTheme.AddParameterValuesCondition(True, "theme", "True")
+        ucrChkSelectTheme.AddParameterValuesCondition(False, "theme", "False")
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        SetDefaults()
     End Sub
 
     Private Sub SetDefaults()
@@ -147,6 +149,7 @@ Public Class dlgGeneralTable
         clsGetdataSingleFunction.AddParameter("data_name", Chr(34) & ucrSelectorCols.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
 
         clsDummyFunction.AddParameter("checked", "Single", iPosition:=0)
+        clsDummyFunction.AddParameter("theme", "True", iPosition:=1)
 
         clsHeadRFunction.SetPackageName("utils")
         clsHeadRFunction.SetRCommand("head")
@@ -192,26 +195,25 @@ Public Class dlgGeneralTable
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverMultipleCols.SetRCode(clsGetdataFunction, bReset)
         ucrSaveTable.SetRCode(clsBaseOperator, bReset)
         ucrInputTitle.SetRCode(clsHeaderRFunction, True, bCloneIfNeeded:=True)
         ucrInputTitleFooter.SetRCode(clsTitleFooterRFunction, True, bCloneIfNeeded:=True)
         If bReset Then
+            ucrChkSelectTheme.SetRCode(clsDummyFunction, bReset)
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
             ucrChkPreview.SetRCode(clsBaseOperator, bReset)
             ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
         End If
-        ucrReceiverMultipleRowFactors.SetRCode(clsPivotWiderFunction, bReset)
-        ucrReceiverSingleVariable.SetRCode(clsPivotWiderFunction, bReset)
-        ucrReceiverMultipleColFactor.SetRCode(clsGetdataSingleFunction, bReset)
         ucrReceiverMultipleVariablesMul.SetRCode(clsPivotWiderFunction, bReset)
+        Updateparameter()
+        AddRemoveThemes()
     End Sub
 
     Private Sub TestOKEnabled()
         If rdoDataFrame.Checked Then
             ucrBase.OKEnabled(Not ucrReceiverMultipleCols.IsEmpty AndAlso ucrSaveTable.IsComplete)
         ElseIf rdoSingle.Checked Then
-            ucrBase.OKEnabled(Not ucrReceiverMultipleColFactor.IsEmpty AndAlso Not ucrReceiverMultipleRowFactors.IsEmpty AndAlso Not ucrReceiverSingleVariable.IsEmpty AndAlso ucrSaveTable.IsComplete)
+            ucrBase.OKEnabled(Not ucrReceiverSingleVariable.IsEmpty AndAlso ucrSaveTable.IsComplete AndAlso (Not ucrReceiverMultipleColFactor.IsEmpty OrElse Not ucrReceiverMultipleRowFactors.IsEmpty))
         Else
             ucrBase.OKEnabled(Not ucrReceiverMultipleColFactor.IsEmpty AndAlso Not ucrReceiverMultipleRowFactors.IsEmpty AndAlso ucrSaveTable.IsComplete)
         End If
@@ -219,6 +221,8 @@ Public Class dlgGeneralTable
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrReceiverSingleVariable.ControlValueChanged
         AddRemovePivotwider()
+        AddRemoveThemes()
+        Updateparameter()
     End Sub
 
     Private Sub AddRemovePivotwider()
@@ -230,6 +234,7 @@ Public Class dlgGeneralTable
             clsBaseOperator.RemoveParameterByName("head")
             clsBaseOperator.RemoveParameterByName("gt")
             ucrReceiverMultipleRowFactors.SetMeAsReceiver()
+            Updateparameter()
             clsPivotWiderFunction.AddParameter("values_from", ucrReceiverSingleVariable.GetVariableNames(False), iPosition:=1)
             clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataSingleFunction, iPosition:=0, bIncludeArgumentName:=False)
             clsBaseOperator.AddParameter("pivot_wider", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
@@ -242,6 +247,22 @@ Public Class dlgGeneralTable
             clsBaseOperator.RemoveParameterByName("format_table")
             clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataFunction, iPosition:=0, bIncludeArgumentName:=False)
             clsBaseOperator.AddParameter("gt", clsRFunctionParameter:=clsGtRFunction, iPosition:=2, bIncludeArgumentName:=False)
+        End If
+    End Sub
+
+    Private Sub Updateparameter()
+        If Not ucrReceiverMultipleColFactor.IsEmpty AndAlso Not ucrReceiverMultipleRowFactors.IsEmpty Then
+            clsGetdataSingleFunction.AddParameter("col_name", "c(" & ucrReceiverMultipleColFactor.GetVariableNames() & ", " & ucrReceiverMultipleRowFactors.GetVariableNames() & ", " & ucrReceiverSingleVariable.GetVariableNames() & ")")
+            clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleRowFactors.GetVariableNames(), iPosition:=0)
+        ElseIf ucrReceiverMultipleRowFactors.IsEmpty AndAlso Not ucrReceiverMultipleColFactor.IsEmpty Then
+            clsGetdataSingleFunction.AddParameter("col_name", "c(" & ucrReceiverMultipleColFactor.GetVariableNames() & ", " & ucrReceiverSingleVariable.GetVariableNames() & ")")
+            clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleColFactor.GetVariableNames(), iPosition:=0)
+        ElseIf Not ucrReceiverMultipleRowFactors.IsEmpty AndAlso ucrReceiverMultipleColFactor.IsEmpty Then
+            clsGetdataSingleFunction.AddParameter("col_name", "c(" & ucrReceiverMultipleRowFactors.GetVariableNames() & ", " & ucrReceiverSingleVariable.GetVariableNames() & ")")
+            clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleRowFactors.GetVariableNames(), iPosition:=0)
+        Else
+            clsPivotWiderFunction.RemoveParameterByName("names_from")
+            clsGetdataSingleFunction.RemoveParameterByName("col_name")
         End If
     End Sub
 
@@ -284,6 +305,10 @@ Public Class dlgGeneralTable
     End Sub
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
+        AddRemoveThemes()
+    End Sub
+
+    Private Sub AddRemoveThemes()
         If ucrChkSelectTheme.Checked Then
             ucrCboSelectThemes.Visible = True
             clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
@@ -295,7 +320,7 @@ Public Class dlgGeneralTable
     End Sub
 
     Private Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
-
+        AddRemoveThemes()
         If clsThemeRFunction Is Nothing Then
             Exit Sub
         End If
@@ -325,5 +350,9 @@ Public Class dlgGeneralTable
     Private Sub ucrSelectorCols_DataFrameChanged() Handles ucrSelectorCols.DataFrameChanged
         clsGetdataFunction.AddParameter("data_name", Chr(34) & ucrSelectorCols.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsGetdataSingleFunction.AddParameter("data_name", Chr(34) & ucrSelectorCols.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub ucrReceiverMultipleRowFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleRowFactors.ControlValueChanged, ucrReceiverMultipleColFactor.ControlValueChanged
+        Updateparameter()
     End Sub
 End Class
