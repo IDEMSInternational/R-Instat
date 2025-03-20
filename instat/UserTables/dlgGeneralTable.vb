@@ -252,13 +252,94 @@ Public Class dlgGeneralTable
 
     Private Sub Updateparameter()
         If Not ucrReceiverMultipleColFactor.IsEmpty AndAlso Not ucrReceiverMultipleRowFactors.IsEmpty Then
-            clsGetdataSingleFunction.AddParameter("col_name", "c(" & ucrReceiverMultipleColFactor.GetVariableNames() & ", " & ucrReceiverMultipleRowFactors.GetVariableNames() & ", " & ucrReceiverSingleVariable.GetVariableNames() & ")")
+            ' Get the variable names from each receiver
+            Dim colFactorVars As String = ucrReceiverMultipleColFactor.GetVariableNames(False)
+            Dim rowFactorVars As String = ucrReceiverMultipleRowFactors.GetVariableNames(False)
+            Dim singleVar As String = ucrReceiverSingleVariable.GetVariableNames(False)
+
+            ' Function to clean and split variable strings
+            Dim cleanVars As Func(Of String, String()) = Function(varString)
+                                                             If String.IsNullOrEmpty(varString) Then Return New String() {}
+                                                             ' Remove "c(" and ")" and split by comma
+                                                             Dim cleaned As String = varString.Replace("c(", "").Replace(")", "").Trim()
+                                                             Return cleaned.Split(","c).Select(Function(v) v.Trim()).ToArray()
+                                                         End Function
+
+            ' Get cleaned variable arrays
+            Dim colFactorList As String() = cleanVars(colFactorVars)
+            Dim rowFactorList As String() = cleanVars(rowFactorVars)
+            Dim singleVarList As String() = cleanVars(singleVar)
+
+            ' Combine all variables into a single list
+            Dim allVars As New List(Of String)
+            allVars.AddRange(colFactorList)
+            allVars.AddRange(rowFactorList)
+            allVars.AddRange(singleVarList)
+
+            ' Format the final string as a flat c() vector
+            Dim result As String = "c(" & String.Join(",", allVars.Select(Function(v) """" & v.Trim() & """")) & ")"
+            clsGetdataSingleFunction.AddParameter("col_name", result)
+            ' clsGetdataSingleFunction.AddParameter("col_name", "c(" & ucrReceiverMultipleColFactor.GetVariableNames() & ", " & ucrReceiverMultipleRowFactors.GetVariableNames() & ", " & ucrReceiverSingleVariable.GetVariableNames() & ")")
             clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleRowFactors.GetVariableNames(), iPosition:=0)
         ElseIf ucrReceiverMultipleRowFactors.IsEmpty AndAlso Not ucrReceiverMultipleColFactor.IsEmpty Then
-            clsGetdataSingleFunction.AddParameter("col_name", "c(" & ucrReceiverMultipleColFactor.GetVariableNames() & ", " & ucrReceiverSingleVariable.GetVariableNames() & ")")
+            Dim colFactorVars As String = ucrReceiverMultipleColFactor.GetVariableNames(False)
+            ' Dim rowFactorVars As String = ucrReceiverMultipleRowFactors.GetVariableNames(False)
+            Dim singleVar As String = ucrReceiverSingleVariable.GetVariableNames(False)
+
+            ' Function to clean and split variable strings
+            Dim cleanVars As Func(Of String, String()) = Function(varString)
+                                                             If String.IsNullOrEmpty(varString) Then Return New String() {}
+                                                             ' Remove "c(" and ")" and split by comma
+                                                             Dim cleaned As String = varString.Replace("c(", "").Replace(")", "").Trim()
+                                                             Return cleaned.Split(","c).Select(Function(v) v.Trim()).ToArray()
+                                                         End Function
+
+            ' Get cleaned variable arrays
+            Dim colFactorList As String() = cleanVars(colFactorVars)
+            ' Dim rowFactorList As String() = cleanVars(rowFactorVars)
+            Dim singleVarList As String() = cleanVars(singleVar)
+
+            ' Combine all variables into a single list
+            Dim allVars As New List(Of String)
+            allVars.AddRange(colFactorList)
+            ' allVars.AddRange(rowFactorList)
+            allVars.AddRange(singleVarList)
+
+            ' Format the final string as a flat c() vector
+            Dim result As String = "c(" & String.Join(",", allVars.Select(Function(v) """" & v.Trim() & """")) & ")"
+            clsGetdataSingleFunction.AddParameter("col_name", result)
+
+            'clsGetdataSingleFunction.AddParameter("col_name", "c(" & ucrReceiverMultipleColFactor.GetVariableNames() & ", " & ucrReceiverSingleVariable.GetVariableNames() & ")")
             clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleColFactor.GetVariableNames(), iPosition:=0)
         ElseIf Not ucrReceiverMultipleRowFactors.IsEmpty AndAlso ucrReceiverMultipleColFactor.IsEmpty Then
-            clsGetdataSingleFunction.AddParameter("col_name", "c(" & ucrReceiverMultipleRowFactors.GetVariableNames() & ", " & ucrReceiverSingleVariable.GetVariableNames() & ")")
+            ' Dim colFactorVars As String = ucrReceiverMultipleColFactor.GetVariableNames(False)
+            Dim rowFactorVars As String = ucrReceiverMultipleRowFactors.GetVariableNames(False)
+            Dim singleVar As String = ucrReceiverSingleVariable.GetVariableNames(False)
+
+            ' Function to clean and split variable strings
+            Dim cleanVars As Func(Of String, String()) = Function(varString)
+                                                             If String.IsNullOrEmpty(varString) Then Return New String() {}
+                                                             ' Remove "c(" and ")" and split by comma
+                                                             Dim cleaned As String = varString.Replace("c(", "").Replace(")", "").Trim()
+                                                             Return cleaned.Split(","c).Select(Function(v) v.Trim()).ToArray()
+                                                         End Function
+
+            ' Get cleaned variable arrays
+            'Dim colFactorList As String() = cleanVars(colFactorVars)
+            Dim rowFactorList As String() = cleanVars(rowFactorVars)
+            Dim singleVarList As String() = cleanVars(singleVar)
+
+            ' Combine all variables into a single list
+            Dim allVars As New List(Of String)
+            ' allVars.AddRange(colFactorList)
+            allVars.AddRange(rowFactorList)
+            allVars.AddRange(singleVarList)
+
+            ' Format the final string as a flat c() vector
+            Dim result As String = "c(" & String.Join(",", allVars.Select(Function(v) """" & v.Trim() & """")) & ")"
+            clsGetdataSingleFunction.AddParameter("col_name", result)
+
+            'clsGetdataSingleFunction.AddParameter("col_name", "c(" & ucrReceiverMultipleRowFactors.GetVariableNames() & ", " & ucrReceiverSingleVariable.GetVariableNames() & ")")
             clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleRowFactors.GetVariableNames(), iPosition:=0)
         Else
             clsPivotWiderFunction.RemoveParameterByName("names_from")
