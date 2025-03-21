@@ -181,6 +181,9 @@ pkgs <-
     "fivethirtyeight",
     "CGPfunctions",
     "ggside",
+    "Weighted.Desc.Stat",
+    "weights",
+    "nanonext",
     "collapse"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
