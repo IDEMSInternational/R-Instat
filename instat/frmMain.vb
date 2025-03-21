@@ -1958,6 +1958,7 @@ Public Class frmMain
 
     Private Sub mnuViewStructuredMenu_Click(sender As Object, e As EventArgs) Handles mnuViewStructuredMenu.Click
         clsInstatOptions.SetShowStructuredMenu(Not mnuViewStructuredMenu.Checked)
+        SaveMenuState(mnuStructuredMenuOption.Checked)
     End Sub
     Private Sub mnuViewClimaticMenu_Click(sender As Object, e As EventArgs) Handles mnuViewClimaticMenu.Click
         clsInstatOptions.SetShowClimaticMenu(Not mnuViewClimaticMenu.Checked)
