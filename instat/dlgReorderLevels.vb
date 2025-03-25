@@ -289,6 +289,10 @@ Public Class dlgReorderLevels
         Dim strDataName As String = ucrSelectorFactorLevelsToReorder.strCurrentDataFrame
         If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
             strTempSelectedVariable = _strSelectedColumn
+            Dim strTemp As String = clsDummyFunction.GetParameter("strVal").strArgumentValue
+            If Not String.IsNullOrEmpty(strTemp) AndAlso strTempSelectedVariable <> strTemp Then
+                strTempSelectedVariable = strTemp
+            End If
         ElseIf ucrSelectorFactorLevelsToReorder.lstAvailableVariable.Items.Count > 0 Then
             strTempSelectedVariable = ucrSelectorFactorLevelsToReorder.lstAvailableVariable.Items(0).Text
         Else
@@ -308,6 +312,7 @@ Public Class dlgReorderLevels
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlProperty.ControlValueChanged, ucrReceiverVariable.ControlValueChanged, ucrChkReverseVariable.ControlValueChanged, ucrInputOptions.ControlValueChanged, ucrReceiverFactorX.ControlValueChanged, ucrInputOrder.ControlValueChanged
         If rdoHand.Checked Then
             ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsReorderFunction)
         ElseIf rdoProperty.Checked OrElse rdoVariable.Checked Then
             ucrReceiverFactorX.SetMeAsReceiver()
