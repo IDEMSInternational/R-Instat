@@ -49,6 +49,8 @@ Partial Class dlgGeneralTable
         Me.lblVariblesMul = New System.Windows.Forms.Label()
         Me.ucrReceiverMultipleVariablesMul = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSingleVariable = New instat.ucrReceiverSingle()
+        Me.ucrNudPosition = New instat.ucrNud()
+        Me.lblposition = New System.Windows.Forms.Label()
         Me.grpBoxTitle.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -373,11 +375,36 @@ Partial Class dlgGeneralTable
         Me.ucrReceiverSingleVariable.TabIndex = 142
         Me.ucrReceiverSingleVariable.ucrSelector = Nothing
         '
+        'ucrNudPosition
+        '
+        Me.ucrNudPosition.AutoSize = True
+        Me.ucrNudPosition.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPosition.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPosition.Location = New System.Drawing.Point(111, 379)
+        Me.ucrNudPosition.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPosition.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPosition.Name = "ucrNudPosition"
+        Me.ucrNudPosition.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPosition.TabIndex = 143
+        Me.ucrNudPosition.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblposition
+        '
+        Me.lblposition.AutoSize = True
+        Me.lblposition.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblposition.Location = New System.Drawing.Point(12, 383)
+        Me.lblposition.Name = "lblposition"
+        Me.lblposition.Size = New System.Drawing.Size(93, 13)
+        Me.lblposition.TabIndex = 144
+        Me.lblposition.Text = "Position Variables:"
+        '
         'dlgGeneralTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(476, 636)
+        Me.Controls.Add(Me.lblposition)
+        Me.Controls.Add(Me.ucrNudPosition)
         Me.Controls.Add(Me.lblVariblesMul)
         Me.Controls.Add(Me.ucrReceiverMultipleVariablesMul)
         Me.Controls.Add(Me.ucrCboSelectThemes)
@@ -438,4 +465,6 @@ Partial Class dlgGeneralTable
     Friend WithEvents lblVariblesMul As Label
     Friend WithEvents ucrReceiverMultipleVariablesMul As ucrReceiverMultiple
     Friend WithEvents ucrReceiverSingleVariable As ucrReceiverSingle
+    Friend WithEvents lblposition As Label
+    Friend WithEvents ucrNudPosition As ucrNud
 End Class
