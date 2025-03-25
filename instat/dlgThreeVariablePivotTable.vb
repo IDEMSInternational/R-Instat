@@ -20,12 +20,15 @@ Public Class dlgThreeVariablePivotTable
     Private bReset As Boolean = True
     Private clsConcatenateFunction,
           clsDummyFunction,
-        clsRelevelPasteFunction, clsRPivotTableFunction,
+        clsRelevelPasteFunction, clsGetDataFrameFunction, clsRPivotTableFunction,
         clsSelectFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Public enumPivotMode As PivotMode = PivotMode.Prepare
     Private lstSubtotalRenderers As String()
     Private lstNormalRenderers As String()
+    Private isChkNumericSingleChecked As Boolean = False
+    Private isChkNumericMultipleChecked As Boolean = False
+    Private isHandlingChange As Boolean = False
 
     Public Enum PivotMode
         Prepare
@@ -47,10 +50,19 @@ Public Class dlgThreeVariablePivotTable
         autoTranslate(Me)
         TestOkEnabled()
         AutofillMode()
+        ConfigureLinkedControls()
+        DialogSize()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
+        ucrPnlOptions.AddRadioButton(rdoSingle)
+        ucrPnlOptions.AddRadioButton(rdoMultiple)
+        ucrPnlOptions.AddRadioButton(rdoDataFrame)
+        ucrPnlOptions.AddParameterValuesCondition(rdoSingle, "checked", "single")
+        ucrPnlOptions.AddParameterValuesCondition(rdoMultiple, "checked", "multiple")
+        ucrPnlOptions.AddParameterValuesCondition(rdoDataFrame, "checked", "dataframe")
 
         ucrSelectorPivot.SetParameter(New RParameter("data", iNewPosition:=0))
         ucrSelectorPivot.SetParameterIsrfunction()
@@ -62,8 +74,13 @@ Public Class dlgThreeVariablePivotTable
         ucrReceiverInitialColumnFactor.SetParameter(New RParameter("cols", iNewPosition:=2))
         ucrReceiverInitialColumnFactor.SetParameterIsString()
         ucrReceiverInitialColumnFactor.Selector = ucrSelectorPivot
+        ucrReceiverInitialColumnFactor.SetLinkedDisplayControl(lblInitialColumnFactor)
 
         ucrReceiverSelectedVariable.Selector = ucrSelectorPivot
+
+        ucrReceiverMultipleAddRows.SetParameter(New RParameter("measure.vars", iNewPosition:=2))
+        ucrReceiverMultipleAddRows.SetParameterIsString()
+        ucrReceiverMultipleAddRows.Selector = ucrSelectorPivot
 
         ucrReceiverAdditionalRowFactor.SetParameter(New RParameter("val", iNewPosition:=4))
         ucrReceiverAdditionalRowFactor.SetParameterIsString()
@@ -83,13 +100,13 @@ Public Class dlgThreeVariablePivotTable
         ucrChkIncludeSubTotals.SetParameter(New RParameter("subtotals", iNewPosition:=3))
         ucrChkIncludeSubTotals.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrChkNumericVariable.SetText("Variable (Optional):")
+        'ucrChkNumericVariable.SetText("Variable (Optional):")
         ucrChkNumericVariable.AddParameterPresentCondition(True, "rendererName")
         ucrChkNumericVariable.AddParameterPresentCondition(False, "rendererName", False)
-        ucrChkNumericVariable.AddToLinkedControls({ucrReceiverAdditionalRowFactor}, {True}, bNewLinkedHideIfParameterMissing:=True,
-                                                  bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        'ucrChkNumericVariable.AddToLinkedControls({ucrReceiverAdditionalRowFactor}, {True}, bNewLinkedHideIfParameterMissing:=True,
+        '                                          bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
         ucrChkNumericVariable.AddToLinkedControls({ucrInputTableChart}, {True}, bNewLinkedHideIfParameterMissing:=True,
-                                                  bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True,
+        bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True,
                                                   objNewDefaultState:="Table", bNewLinkedChangeToDefaultState:=True)
         ucrChkNumericVariable.AddToLinkedControls({ucrInputSummary}, {True}, bNewLinkedHideIfParameterMissing:=True,
                                                   bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True,
@@ -122,6 +139,9 @@ Public Class dlgThreeVariablePivotTable
                                     "Count as Fraction of Total", "Count as Fraction of Rows", "Count as Fraction of Columns"}, bAddConditions:=True)
         ucrInputSummary.SetLinkedDisplayControl(lblSummary)
 
+        ucrPnlOptions.AddToLinkedControls({ucrChkNumericVariable, ucrChkIncludeSubTotals, ucrReceiverInitialColumnFactor, ucrChkSelectedVariable}, {rdoSingle, rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+
         ucrSavePivot.SetPrefix("pivot_table")
         ucrSavePivot.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSavePivot.SetDataFrameSelector(ucrSelectorPivot.ucrAvailableDataFrames)
@@ -129,6 +149,8 @@ Public Class dlgThreeVariablePivotTable
         ucrSavePivot.SetCheckBoxText("Store Table")
         ucrSavePivot.SetAssignToIfUncheckedValue("last_table")
         UpdateRendererOptions()
+        ConfigureLinkedControls()
+        DialogSize()
     End Sub
 
     Private Sub SetDefaults()
@@ -136,6 +158,7 @@ Public Class dlgThreeVariablePivotTable
         clsRelevelPasteFunction = New RFunction
         clsRPivotTableFunction = New RFunction
         clsSelectFunction = New RFunction
+        clsGetDataFrameFunction = New RFunction
         clsPipeOperator = New ROperator
 
         ucrReceiverInitialRowFactors.SetMeAsReceiver()
@@ -144,6 +167,8 @@ Public Class dlgThreeVariablePivotTable
         ucrInputTableChart.Reset()
 
         clsDummyFunction.AddParameter("order", "True", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "single", iPosition:=1)
+        clsDummyFunction.AddParameter("var", "False", iPosition:=2)
 
         clsRelevelPasteFunction.SetRCommand("return_variable_levels")
         clsRelevelPasteFunction.SetAssignTo("relevel_variables")
@@ -163,6 +188,9 @@ Public Class dlgThreeVariablePivotTable
         clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsRPivotTableFunction.SetAssignTo("last_table")
 
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetDataFrameFunction.AddParameter("stack_data", "TRUE", iPosition:=1)
+
         clsRPivotTableFunction.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
                                                    strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
                                                    strRObjectFormatToAssignTo:=RObjectFormat.Html,
@@ -175,23 +203,46 @@ Public Class dlgThreeVariablePivotTable
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRcodeSet = False
         ucrSelectorPivot.SetRCode(clsPipeOperator, bReset)
-        ucrReceiverInitialColumnFactor.SetRCode(clsRPivotTableFunction, bReset)
+        'ucrReceiverInitialColumnFactor.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkNumericVariable.SetRCode(clsRPivotTableFunction, bReset)
         ucrReceiverInitialRowFactors.SetRCode(clsRPivotTableFunction, bReset)
         ucrSavePivot.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkSelectedVariable.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkIncludeSubTotals.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkFactorsOrder.SetRCode(clsDummyFunction, bReset)
+        ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
         bRcodeSet = True
+        SetFactorSortingOrder()
+        AddingVariable()
+
     End Sub
 
     Private Sub TestOkEnabled()
+        ' Base condition for enabling OK
         If ucrSavePivot.IsComplete AndAlso Not String.IsNullOrEmpty(ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text) Then
-            ucrBase.OKEnabled(True)
+            ' Additional conditions only if rdoMultiple is checked
+            If rdoMultiple.Checked Then
+                ' If ucrChkNumericVariable is checked, enforce the additional condition
+                If ucrChkNumericVariable.Checked Then
+                    If ucrReceiverMultipleAddRows.lstSelectedVariables.Items.Count > 1 Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
+                        Exit Sub
+                    End If
+                Else
+                    ' If ucrChkNumericVariable is NOT checked, fallback to the base condition
+                    ucrBase.OKEnabled(True)
+                End If
+            Else
+                ' If any other radio button is checked, enable OK based on the base condition
+                ucrBase.OKEnabled(True)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -204,8 +255,10 @@ Public Class dlgThreeVariablePivotTable
         If ucrChkSelectedVariable.Checked Then
             ucrReceiverSelectedVariable.SetMeAsReceiver()
         Else
-            If ucrChkNumericVariable.Checked Then
+            If rdoSingle.Checked AndAlso ucrChkNumericVariable.Checked Then
                 ucrReceiverAdditionalRowFactor.SetMeAsReceiver()
+            ElseIf rdoMultiple.Checked AndAlso ucrChkNumericVariable.Checked Then
+                ucrReceiverMultipleAddRows.SetMeAsReceiver()
             Else
                 ucrReceiverInitialRowFactors.SetMeAsReceiver()
             End If
@@ -218,6 +271,7 @@ Public Class dlgThreeVariablePivotTable
         AutofillMode()
         SetFactorSortingOrder()
         clsRPivotTableFunction._strDataFrameNameToAddAssignToObject = ucrSelectorPivot.strCurrentDataFrame
+        clsGetDataFrameFunction.SetAssignTo(ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
     End Sub
 
     Private Sub ChangeDataParameterValue()
@@ -260,6 +314,7 @@ Public Class dlgThreeVariablePivotTable
                 iPosition += 1
             End If
         End If
+        SetFactorSortingOrder()
     End Sub
 
     Private Sub AutofillMode()
@@ -316,16 +371,46 @@ Public Class dlgThreeVariablePivotTable
     End Sub
 
     Private Sub SetFactorSortingOrder()
+
         Dim DataFrame As String = ucrSelectorPivot.strCurrentDataFrame
 
+        ' Ensure clsRelevelPasteFunction is reset before checking conditions
+        clsRPivotTableFunction.RemoveParameterByName("sorters")
+        clsRelevelPasteFunction.RemoveParameterByName("data")
+        clsRelevelPasteFunction.RemoveParameterByName("data_stack")
+        clsRPivotTableFunction.RemoveParameterByName("val")
+
         If ucrChkFactorsOrder.Checked Then
-            clsRelevelPasteFunction.AddParameter("data", DataFrame, iPosition:=0, bIncludeArgumentName:=False)
-            clsRPivotTableFunction.AddParameter("sorters", clsRFunctionParameter:=clsRelevelPasteFunction, iPosition:=3)
-            clsDummyFunction.AddParameter("order", "True", iPosition:=2)
+            clsDummyFunction.AddParameter("order", "True", iPosition:=0)
+            If rdoSingle.Checked Then
+                clsRelevelPasteFunction.AddParameter("data", DataFrame, iPosition:=0, bIncludeArgumentName:=False)
+                clsRPivotTableFunction.AddParameter("sorters", clsRFunctionParameter:=clsRelevelPasteFunction, iPosition:=3)
+                clsDummyFunction.AddParameter("checked", "single", iPosition:=1)
+                If ucrChkNumericVariable.Checked Then
+                    clsRPivotTableFunction.AddParameter("val", ucrReceiverAdditionalRowFactor.GetVariableNames, iPosition:=3)
+                Else
+                    clsRPivotTableFunction.RemoveParameterByName("val")
+                End If
+            ElseIf rdoMultiple.Checked Then
+                clsDummyFunction.AddParameter("checked", "multiple", iPosition:=1)
+                If ucrChkNumericVariable.Checked Then
+                    clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & DataFrame & Chr(34), iPosition:=0)
+                    clsGetDataFrameFunction.AddParameter("measure.vars", ucrReceiverMultipleAddRows.GetVariableNames(), iPosition:=2)
+                    clsRelevelPasteFunction.AddParameter("data_stack", clsRFunctionParameter:=clsGetDataFrameFunction, bIncludeArgumentName:=False)
+                    clsRPivotTableFunction.AddParameter("val", Chr(34) & "value" & Chr(34), iPosition:=3)
+                Else
+                    clsRelevelPasteFunction.AddParameter("data", DataFrame, iPosition:=0, bIncludeArgumentName:=False)
+                    clsGetDataFrameFunction.RemoveParameterByName("measure.vars")
+                    clsRPivotTableFunction.RemoveParameterByName("val")
+                End If
+                clsRPivotTableFunction.AddParameter("sorters", clsRFunctionParameter:=clsRelevelPasteFunction, iPosition:=3)
+            ElseIf rdoDataFrame.Checked Then
+                clsRelevelPasteFunction.AddParameter("data", DataFrame, iPosition:=0, bIncludeArgumentName:=False)
+                clsRPivotTableFunction.AddParameter("sorters", clsRFunctionParameter:=clsRelevelPasteFunction, iPosition:=3)
+                clsDummyFunction.AddParameter("checked", "dataframe", iPosition:=1)
+            End If
         Else
-            clsDummyFunction.AddParameter("order", "False", iPosition:=2)
-            clsRPivotTableFunction.RemoveParameterByName("sorters")
-            clsRelevelPasteFunction.RemoveParameterByName("data")
+            clsDummyFunction.AddParameter("order", "False", iPosition:=0)
         End If
     End Sub
 
@@ -340,18 +425,23 @@ Public Class dlgThreeVariablePivotTable
         Next
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkNumericVariable.ControlContentsChanged, ucrReceiverMultipleAddRows.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ucrChkNumericVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNumericVariable.ControlValueChanged
-        If ucrChkNumericVariable.Checked Then
+        If rdoSingle.Checked AndAlso ucrChkNumericVariable.Checked Then
             ucrReceiverAdditionalRowFactor.SetMeAsReceiver()
+        ElseIf rdoMultiple.Checked AndAlso ucrChkNumericVariable.Checked Then
+            ucrReceiverMultipleAddRows.SetMeAsReceiver()
         ElseIf Not ucrChkNumericVariable.Checked AndAlso ucrChkSelectedVariable.Checked Then
             ucrReceiverSelectedVariable.SetMeAsReceiver()
         Else
             ucrReceiverInitialRowFactors.SetMeAsReceiver()
         End If
+        ConfigureLinkedControls()
+        SetFactorSortingOrder()
+        AddingVariable()
     End Sub
 
     Private Sub ucrChkFactorsOrder_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFactorsOrder.ControlValueChanged
@@ -385,6 +475,110 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub ucrChkIncludeSubTotals_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeSubTotals.ControlValueChanged
         UpdateRendererOptions()
+        'ConfigureLinkedControls()
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If isHandlingChange Then Exit Sub ' Prevent recursion
+
+        isHandlingChange = True ' Set flag to prevent event re-entry
+
+        ' Store the current checkbox state before switching
+        Dim previousState As Boolean = ucrChkNumericVariable.Checked
+
+        ' Restore the saved state first before updating the variables
+        If rdoSingle.Checked Then
+            ucrChkNumericVariable.Checked = isChkNumericSingleChecked ' Restore saved state
+            isChkNumericMultipleChecked = previousState ' Save the current state
+        ElseIf rdoMultiple.Checked Then
+            ucrChkNumericVariable.Checked = isChkNumericMultipleChecked ' Restore saved state
+            isChkNumericSingleChecked = previousState ' Save the current state
+        End If
+
+        ' Perform additional actions
+        SetFactorSortingOrder()
+        ConfigureLinkedControls()
+        AddingVariable()
+        DialogSize()
+        isHandlingChange = False ' Reset flag
+    End Sub
+
+
+    Private Sub ConfigureLinkedControls()
+        ' Set all receivers to be hidden initially
+        ucrReceiverAdditionalRowFactor.Visible = False
+        ucrReceiverMultipleAddRows.Visible = False
+
+        ' Update the checkbox text based on the selected radio button
+        If rdoSingle.Checked Then
+            ucrChkNumericVariable.SetText("Variable (Optional):")
+        ElseIf rdoMultiple.Checked Then
+            ucrChkNumericVariable.SetText("Variables:")
+        End If
+
+        ' Ensure the correct receiver is displayed based on checkbox state
+        If ucrChkNumericVariable.Checked Then
+            If rdoSingle.Checked Then
+                ucrReceiverAdditionalRowFactor.Visible = True
+            ElseIf rdoMultiple.Checked Then
+                ucrReceiverMultipleAddRows.Visible = True
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrReceiverMultipleAddRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleAddRows.ControlValueChanged
+        SetFactorSortingOrder()
+    End Sub
+
+    Private Sub AddingVariable()
+        ' Remove "cols" parameter when rdoDataFrame is checked
+        If rdoDataFrame.Checked Then
+            clsRPivotTableFunction.RemoveParameterByName("cols")
+            Exit Sub
+        End If
+
+        Dim strVariables As String = ucrReceiverInitialColumnFactor.GetVariableNames()
+
+        ' Check if multiple variables are selected
+        If rdoMultiple.Checked Then
+            If ucrChkNumericVariable.Checked Then
+                If strVariables <> "" Then
+                    ' Remove the outer c() if it exists
+                    strVariables = strVariables.Replace("c(", "").Replace(")", "")
+
+                    ' Append "variable" properly
+                    clsRPivotTableFunction.AddParameter("cols", "c(" & strVariables & ", ""variable"")", iPosition:=2)
+                Else
+                    ' If no variables are selected, just pass "variable" alone
+                    clsRPivotTableFunction.AddParameter("cols", "c(""variable"")", iPosition:=2)
+                End If
+            Else
+                ' If NumericVariable is not checked, add strVariables as it is
+                clsRPivotTableFunction.AddParameter("cols", strVariables, iPosition:=2)
+            End If
+        ElseIf rdoSingle.Checked Then
+            clsRPivotTableFunction.AddParameter("cols", strVariables, iPosition:=2)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverInitialColumnFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged
+        AddingVariable()
+    End Sub
+
+    Private Sub DialogSize()
+        If rdoSingle.Checked Then
+            Me.Size = New Size(433, 606)
+            Me.ucrBase.Location = New Point(9, 510)
+            ucrSavePivot.Location = New Point(9, 480)
+        ElseIf rdoMultiple.Checked Then
+            Me.Size = New Size(433, 606)
+            Me.ucrBase.Location = New Point(9, 510)
+            ucrSavePivot.Location = New Point(9, 480)
+        Else
+            Me.Size = New Size(433, 430)
+            Me.ucrBase.Location = New Point(9, 400)
+            ucrSavePivot.Location = New Point(9, 370)
+        End If
     End Sub
 
 End Class
