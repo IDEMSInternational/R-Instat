@@ -253,6 +253,10 @@ Public Class dlgRecodeFactor
         Dim strDataName As String = ucrSelectorForRecode.strCurrentDataFrame
         If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
             strTempSelectedVariable = _strSelectedColumn
+            Dim strTemp As String = clsDummyFunction.GetParameter("strVal").strArgumentValue
+            If Not String.IsNullOrEmpty(strTemp) AndAlso strTempSelectedVariable <> strTemp Then
+                strTempSelectedVariable = strTemp
+            End If
         ElseIf ucrSelectorForRecode.lstAvailableVariable.Items.Count > 0 Then
             strTempSelectedVariable = ucrSelectorForRecode.lstAvailableVariable.Items(0).Text
         Else
@@ -305,10 +309,16 @@ Public Class dlgRecodeFactor
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlMethods.ControlValueChanged, ucrPnlKeep.ControlValueChanged, ucrInputOther.ControlValueChanged, ucrNudLevels.ControlValueChanged, ucrNudCommonValues.ControlValueChanged, ucrNudFrequentValues.ControlValueChanged, ucrFactorLevels.ControlValueChanged
         If rdoRecode.Checked Then
+            ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsPlyrRevalueFunction)
         ElseIf rdoAddNa.Checked Then
+            ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsFctExplicitNaFunction)
         ElseIf rdoOther.Checked OrElse rdoLump.Checked Then
+            ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             If ucrInputOther.IsEmpty OrElse ucrInputOther.GetText = "Other" Then
                 clsFctOtherFunction.AddParameter("other_level", Chr(34) & "Other" & Chr(34), iPosition:=2)
                 clsFctLowFreqFunction.AddParameter("other_level", Chr(34) & "Other" & Chr(34), iPosition:=2)
@@ -323,6 +333,8 @@ Public Class dlgRecodeFactor
                 clsFctLumpNFunction.AddParameter("other_level", Chr(34) & ucrInputOther.GetText() & Chr(34), iPosition:=2)
             End If
             If rdoOther.Checked Then
+                ucrReceiverFactor.SetMeAsReceiver()
+                clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
                 clsFctOtherFunction.RemoveParameterByName("keep")
                 clsFctOtherFunction.RemoveParameterByName("drop")
                 If rdoKeep.Checked Then
