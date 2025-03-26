@@ -47,6 +47,7 @@ Partial Class dlgThreeVariablePivotTable
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrReceiverMultipleAddRows = New instat.ucrReceiverMultiple()
+        Me.lblVariables = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblInitialColumnFactor
@@ -310,6 +311,17 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrReceiverMultipleAddRows.TabIndex = 74
         Me.ucrReceiverMultipleAddRows.ucrSelector = Nothing
         '
+        'lblVariables
+        '
+        Me.lblVariables.AutoSize = True
+        Me.lblVariables.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVariables.Location = New System.Drawing.Point(247, 274)
+        Me.lblVariables.Name = "lblVariables"
+        Me.lblVariables.Size = New System.Drawing.Size(53, 13)
+        Me.lblVariables.TabIndex = 75
+        Me.lblVariables.Tag = "Initial Row Factor:"
+        Me.lblVariables.Text = "Variables:"
+        '
         'dlgThreeVariablePivotTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -338,6 +350,7 @@ Partial Class dlgThreeVariablePivotTable
         Me.Controls.Add(Me.ucrSelectorPivot)
         Me.Controls.Add(Me.ucrReceiverMultipleAddRows)
         Me.Controls.Add(Me.ucrChkNumericVariable)
+        Me.Controls.Add(Me.lblVariables)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -372,4 +385,5 @@ Partial Class dlgThreeVariablePivotTable
     Friend WithEvents rdoSingle As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents ucrReceiverMultipleAddRows As ucrReceiverMultiple
+    Friend WithEvents lblVariables As Label
 End Class
