@@ -48,6 +48,8 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrReceiverMultipleAddRows = New instat.ucrReceiverMultiple()
         Me.lblVariables = New System.Windows.Forms.Label()
+        Me.lblPositionVar = New System.Windows.Forms.Label()
+        Me.ucrNudPositionVar = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'lblInitialColumnFactor
@@ -322,12 +324,40 @@ Partial Class dlgThreeVariablePivotTable
         Me.lblVariables.Tag = "Initial Row Factor:"
         Me.lblVariables.Text = "Variables:"
         '
+        'lblPositionVar
+        '
+        Me.lblPositionVar.AutoSize = True
+        Me.lblPositionVar.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPositionVar.Location = New System.Drawing.Point(13, 414)
+        Me.lblPositionVar.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblPositionVar.Name = "lblPositionVar"
+        Me.lblPositionVar.Size = New System.Drawing.Size(105, 13)
+        Me.lblPositionVar.TabIndex = 77
+        Me.lblPositionVar.Tag = "Significant_Figures:"
+        Me.lblPositionVar.Text = "Position of Variables:"
+        '
+        'ucrNudPositionVar
+        '
+        Me.ucrNudPositionVar.AutoSize = True
+        Me.ucrNudPositionVar.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPositionVar.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPositionVar.Location = New System.Drawing.Point(164, 410)
+        Me.ucrNudPositionVar.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrNudPositionVar.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPositionVar.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPositionVar.Name = "ucrNudPositionVar"
+        Me.ucrNudPositionVar.Size = New System.Drawing.Size(49, 19)
+        Me.ucrNudPositionVar.TabIndex = 76
+        Me.ucrNudPositionVar.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgThreeVariablePivotTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(417, 567)
+        Me.Controls.Add(Me.lblPositionVar)
+        Me.Controls.Add(Me.ucrNudPositionVar)
         Me.Controls.Add(Me.rdoDataFrame)
         Me.Controls.Add(Me.rdoMultiple)
         Me.Controls.Add(Me.rdoSingle)
@@ -386,4 +416,6 @@ Partial Class dlgThreeVariablePivotTable
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents ucrReceiverMultipleAddRows As ucrReceiverMultiple
     Friend WithEvents lblVariables As Label
+    Friend WithEvents lblPositionVar As Label
+    Friend WithEvents ucrNudPositionVar As ucrNud
 End Class
