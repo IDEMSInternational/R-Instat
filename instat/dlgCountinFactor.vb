@@ -59,8 +59,10 @@ Public Class dlgCountinFactor
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
+
         ucrCountSelector.Reset()
         ucrNewColName.Reset()
+
         clsDefaultFunction.SetPackageName("dae")
         clsDefaultFunction.SetRCommand("fac.nested")
         clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrCountSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
@@ -85,7 +87,6 @@ Public Class dlgCountinFactor
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
@@ -100,15 +101,9 @@ Public Class dlgCountinFactor
             For Each item As ListViewItem In ucrCountSelector.lstAvailableVariable.Items
                 availableFactors.Add(item.Text) ' Extract the text property of each ListViewItem
             Next
-
-            ' Debugging statement
-            Debug.Print("Available Factors: " & String.Join(", ", availableFactors))
-
             ' If factors are available, add the first one to the receiver
             If availableFactors IsNot Nothing AndAlso availableFactors.Count > 0 Then
                 Dim firstFactor As String = availableFactors(0).Trim()
-
-                Debug.Print("First Factor: " & firstFactor)
 
                 ' Prevent recursion by checking if the receiver already has the first factor
                 If ucrCountReceiver.GetVariableNames() <> firstFactor Then
@@ -120,14 +115,8 @@ Public Class dlgCountinFactor
                     Finally
                         AddHandler ucrCountReceiver.ControlContentsChanged, AddressOf ucrCountReceiver_ControlContentsChanged
                     End Try
-
-                    Debug.Print("Added Factor to Receiver.")
                 End If
-            Else
-                Debug.Print("No factors found.")
             End If
-        Else
-            Debug.Print("No data frame selected.")
         End If
     End Sub
 
