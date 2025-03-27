@@ -134,19 +134,30 @@ Public Class dlgDummyVariables
     Private Sub SetSelectedColumn()
         Dim strTempSelectedVariable As String = ""
         Dim strDataName As String = ucrSelectorDummyVariable.strCurrentDataFrame
-        If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
+        Dim strTemp As String = ""
+
+        ' Retrieve parameter value safely
+        Dim clsParam = clsDummyFunction.GetParameter("strVal")
+        If clsParam IsNot Nothing Then
+            strTemp = clsParam.strArgumentValue
+        End If
+        ' If _strSelectedColumn is valid and a factor, use it
+        If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso
+       frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
             strTempSelectedVariable = _strSelectedColumn
-            Dim strTemp As String = clsDummyFunction.GetParameter("strVal").strArgumentValue
-            If Not String.IsNullOrEmpty(strTemp) AndAlso strTempSelectedVariable <> strTemp Then
-                strTempSelectedVariable = strTemp
-            End If
         ElseIf ucrSelectorDummyVariable.lstAvailableVariable.Items.Count > 0 Then
+            ' If no selected column, use first available variable
             strTempSelectedVariable = ucrSelectorDummyVariable.lstAvailableVariable.Items(0).Text
         Else
-            ' Handle the case where there are no available variables
+            ' No available variables, exit
             Exit Sub
         End If
+        ' Ensure strTemp takes precedence if it's valid
+        If Not String.IsNullOrEmpty(strTemp) AndAlso strTempSelectedVariable <> strTemp Then
+            strTempSelectedVariable = strTemp
+        End If
 
+        ' Add the selected variable to the receiver
         ucrReceiverFactor.Add(strTempSelectedVariable, strDataName)
     End Sub
 
