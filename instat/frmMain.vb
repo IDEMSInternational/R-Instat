@@ -233,7 +233,6 @@ Public Class frmMain
         '-------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
-        SetHideMenus()
     End Sub
 
     Private Sub CheckForUpdates()
@@ -620,19 +619,6 @@ Public Class frmMain
 
     Public Sub SetLanButtonVisibility(bVisible As Boolean)
         mnuTbLan.Visible = bVisible
-    End Sub
-
-    Public Sub SetAppVersionNumber(strVersionNumber As String)
-
-    End Sub
-
-    Private Sub SetHideMenus()
-        mnuViewProcurementMenu.Checked = False
-        mnuProcurement.Visible = False
-        mnuViewOptionsByContextMenu.Checked = False
-        mnuOptionsByContext.Visible = False
-        mnuViewStructuredMenu.Checked = False
-        mnuStructured.Visible = False
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
