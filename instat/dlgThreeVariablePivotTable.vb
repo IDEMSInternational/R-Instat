@@ -26,9 +26,6 @@ Public Class dlgThreeVariablePivotTable
     Public enumPivotMode As PivotMode = PivotMode.Prepare
     Private lstSubtotalRenderers As String()
     Private lstNormalRenderers As String()
-    Private isChkNumericSingleChecked As Boolean = False
-    Private isChkNumericMultipleChecked As Boolean = False
-    Private isHandlingChange As Boolean = False
 
     Public Enum PivotMode
         Prepare
