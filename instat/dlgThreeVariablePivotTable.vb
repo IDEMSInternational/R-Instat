@@ -203,9 +203,7 @@ Public Class dlgThreeVariablePivotTable
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRPivotTableFunction)
         MinMaxValVariable()
-        UpdateLinkedControls()
-        UpdateAggregatorParameter()
-        UpdateRendereParameter()
+        UpdateVisibilityAndParameters()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -224,9 +222,7 @@ Public Class dlgThreeVariablePivotTable
         SetFactorSortingOrder()
         AddingVariable()
         MinMaxValVariable()
-        UpdateAggregatorParameter()
-        UpdateRendereParameter()
-        UpdateLinkedControls()
+        UpdateVisibilityAndParameters()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -442,9 +438,7 @@ Public Class dlgThreeVariablePivotTable
 
         SetFactorSortingOrder()
         AddingVariable()
-        UpdateLinkedControls()
-        UpdateAggregatorParameter()
-        UpdateRendereParameter()
+        UpdateVisibilityAndParameters()
     End Sub
 
     Private Sub ucrChkFactorsOrder_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFactorsOrder.ControlValueChanged
@@ -491,16 +485,12 @@ Public Class dlgThreeVariablePivotTable
         DialogSize()
         AddingVariable()
         MinMaxValVariable()
-        UpdateLinkedControls()
-        UpdateAggregatorParameter()
-        UpdateRendereParameter()
+        UpdateVisibilityAndParameters()
     End Sub
 
     Private Sub ucrReceiverMultipleAddRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleAddRows.ControlValueChanged
         SetFactorSortingOrder()
-        UpdateAggregatorParameter()
-        UpdateLinkedControls()
-        UpdateRendereParameter()
+        UpdateVisibilityAndParameters()
     End Sub
 
     Private Sub ucrReceiverInitialColumnFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged
@@ -624,8 +614,7 @@ Public Class dlgThreeVariablePivotTable
         ucrNudPositionVar.Value = defaultPosition
     End Sub
 
-    Private Sub UpdateLinkedControls()
-        ' First, clear existing links
+    Private Sub UpdateVisibilityAndParameters()
         Dim bShow As Boolean = False
 
         If rdoSingle.Checked Then
@@ -636,42 +625,37 @@ Public Class dlgThreeVariablePivotTable
             End If
         End If
 
-        ' Set visibility based on the condition
+        ' Set visibility
         ucrInputTableChart.Visible = bShow
         ucrInputSummary.Visible = bShow
 
-        ' Remove parameters if the inputs are hidden
-        If Not bShow Then
+        ' Update parameters based on input values
+        If bShow Then
+            ' Add parameters if inputs are NOT empty
+            If Not ucrInputTableChart.IsEmpty Then
+                clsRPivotTableFunction.AddParameter("rendererName", Chr(34) & ucrInputTableChart.GetText & Chr(34), iPosition:=5)
+            Else
+                clsRPivotTableFunction.RemoveParameterByName("rendererName")
+            End If
+
+            If Not ucrInputSummary.IsEmpty Then
+                clsRPivotTableFunction.AddParameter("aggregatorName", Chr(34) & ucrInputSummary.GetText & Chr(34), iPosition:=5)
+            Else
+                clsRPivotTableFunction.RemoveParameterByName("aggregatorName")
+            End If
+        Else
+            ' Remove parameters when the inputs are hidden
             clsRPivotTableFunction.RemoveParameterByName("rendererName")
             clsRPivotTableFunction.RemoveParameterByName("aggregatorName")
         End If
     End Sub
 
-
     Private Sub ucrInputTableChart_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTableChart.ControlValueChanged
-        UpdateRendereParameter()
-        UpdateLinkedControls()
+        UpdateVisibilityAndParameters()
     End Sub
 
     Private Sub ucrInputSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSummary.ControlValueChanged
-        UpdateAggregatorParameter()
-        UpdateLinkedControls()
-    End Sub
-
-    Private Sub UpdateAggregatorParameter()
-        If Not ucrInputSummary.IsEmpty Then
-            clsRPivotTableFunction.AddParameter("aggregatorName", Chr(34) & ucrInputSummary.GetText & Chr(34), iPosition:=5)
-        Else
-            clsRPivotTableFunction.RemoveParameterByName("aggregatorName")
-        End If
-    End Sub
-
-    Private Sub UpdateRendereParameter()
-        If Not ucrInputTableChart.IsEmpty Then
-            clsRPivotTableFunction.AddParameter("rendererName", Chr(34) & ucrInputTableChart.GetText & Chr(34), iPosition:=5)
-        Else
-            clsRPivotTableFunction.RemoveParameterByName("rendererName")
-        End If
+        UpdateVisibilityAndParameters()
     End Sub
 
 End Class
