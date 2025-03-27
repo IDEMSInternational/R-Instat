@@ -93,7 +93,13 @@ Public Class dlgThreeVariablePivotTable
         ucrChkFactorsOrder.AddParameterValuesCondition(False, "order", "False")
         ucrChkFactorsOrder.SetText("Factor Labels in Order")
 
-        ucrNudPositionVar.SetLinkedDisplayControl(lblPositionVar)
+        ucrPnlVariables.AddRadioButton(rdoColumns)
+        ucrPnlVariables.AddRadioButton(rdoRows)
+        ucrPnlVariables.AddParameterValuesCondition(rdoColumns, "check", "cols")
+        ucrPnlVariables.AddParameterValuesCondition(rdoRows, "check", "rows")
+
+        ucrPnlVariables.AddToLinkedControls(ucrNudPositionVarCols, {rdoColumns}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVariables.AddToLinkedControls(ucrNudPositionVarRows, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkIncludeSubTotals.SetText("Subtotals")
         ucrChkIncludeSubTotals.SetParameter(New RParameter("subtotals", iNewPosition:=3))
@@ -137,7 +143,7 @@ Public Class dlgThreeVariablePivotTable
         ucrInputSummary.SetLinkedDisplayControl(lblSummary)
         ucrPnlOptions.AddToLinkedControls(ucrChkNumericVariable, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleAddRows, ucrNudPositionVar}, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleAddRows, ucrPnlVariables}, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlOptions.AddToLinkedControls({ucrChkIncludeSubTotals, ucrReceiverInitialColumnFactor, ucrChkSelectedVariable}, {rdoSingle, rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -171,6 +177,8 @@ Public Class dlgThreeVariablePivotTable
         clsDummyFunction.AddParameter("checked", "single", iPosition:=1)
         clsDummyFunction.AddParameter("total", "False", iPosition:=2)
         clsDummyFunction.AddParameter("renderer", "False", iPosition:=3)
+        clsDummyFunction.AddParameter("check", "cols", iPosition:=4)
+
 
         clsRelevelPasteFunction.SetRCommand("return_variable_levels")
         clsRelevelPasteFunction.SetAssignTo("relevel_variables")
@@ -200,6 +208,7 @@ Public Class dlgThreeVariablePivotTable
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRPivotTableFunction)
         MinMaxValVariable()
+        MinMaxValRowVariable()
         UpdateVisibilityAndParameters()
     End Sub
 
@@ -210,15 +219,16 @@ Public Class dlgThreeVariablePivotTable
         ucrChkSelectedVariable.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkFactorsOrder.SetRCode(clsDummyFunction, bReset)
         ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
+        ucrNudPositionVarCols.SetRCode(clsRPivotTableFunction, bReset)
+        ucrNudPositionVarRows.SetRCode(clsRPivotTableFunction, bReset)
         If bReset Then
-            ucrNudPositionVar.SetRCode(clsRPivotTableFunction, bReset)
             ucrChkIncludeSubTotals.SetRCode(clsDummyFunction, bReset)
             ucrChkNumericVariable.SetRCode(clsDummyFunction, bReset)
+            ucrPnlVariables.SetRCode(clsDummyFunction, bReset)
         End If
         bRcodeSet = True
         SetFactorSortingOrder()
         AddingVariable()
-        MinMaxValVariable()
         UpdateVisibilityAndParameters()
     End Sub
 
@@ -227,12 +237,12 @@ Public Class dlgThreeVariablePivotTable
         If ucrSavePivot.IsComplete AndAlso Not String.IsNullOrEmpty(ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text) Then
             ' Additional conditions only if rdoMultiple is checked
             If rdoMultiple.Checked Then
-                If ucrReceiverMultipleAddRows.lstSelectedVariables.Items.Count > 1 Then
+                If ucrReceiverMultipleAddRows.lstSelectedVariables.Items.Count > 1 AndAlso Not ucrReceiverInitialColumnFactor.IsEmpty AndAlso Not ucrReceiverInitialRowFactors.IsEmpty Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
-                        Exit Sub
-                    End If
+                    Exit Sub
+                End If
 
             Else
                 ' If any other radio button is checked, enable OK based on the base condition
@@ -316,6 +326,7 @@ Public Class dlgThreeVariablePivotTable
         SetFactorSortingOrder()
         AddingVariable()
         MinMaxValVariable()
+        MinMaxValRowVariable()
     End Sub
 
     Private Sub AutofillMode()
@@ -420,7 +431,7 @@ Public Class dlgThreeVariablePivotTable
         Next
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkNumericVariable.ControlContentsChanged, ucrReceiverMultipleAddRows.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkNumericVariable.ControlContentsChanged, ucrReceiverMultipleAddRows.ControlContentsChanged, ucrReceiverInitialColumnFactor.ControlContentsChanged, ucrReceiverInitialRowFactors.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -482,6 +493,7 @@ Public Class dlgThreeVariablePivotTable
         DialogSize()
         AddingVariable()
         MinMaxValVariable()
+        MinMaxValRowVariable()
         UpdateVisibilityAndParameters()
     End Sub
 
@@ -493,6 +505,7 @@ Public Class dlgThreeVariablePivotTable
     Private Sub ucrReceiverInitialColumnFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged
         AddingVariable()
         MinMaxValVariable()
+        MinMaxValRowVariable()
     End Sub
 
     Private Sub DialogSize()
@@ -514,7 +527,8 @@ Public Class dlgThreeVariablePivotTable
     Private Sub AddingVariable()
         Dim lstRowVars As List(Of String) = ucrReceiverInitialRowFactors.GetVariableNamesAsList()
         Dim lstColVars As List(Of String) = ucrReceiverInitialColumnFactor.GetVariableNamesAsList()
-        Dim positionVar As Integer = ucrNudPositionVar.Value
+        Dim positionVarCols As Integer = ucrNudPositionVarCols.Value
+        Dim positionVarRows As Integer = ucrNudPositionVarRows.Value
 
         ' Ensure variables are wrapped in double quotes
         lstRowVars = lstRowVars.Select(Function(x) """" & x & """").ToList()
@@ -547,38 +561,21 @@ Public Class dlgThreeVariablePivotTable
             Exit Sub
         End If
 
-        ' If rdoMultiple is checked, insert "variable" correctly
+        ' If rdoMultiple is checked, insert "variable" correctly based on rdoCols and rdoRows
         If rdoMultiple.Checked Then
-            If lstRowVars.Count = 0 AndAlso lstColVars.Count = 0 Then
-                ' If both are empty, add "variable" to rows only
-                lstRowVars.Add("""variable""")
-            ElseIf lstRowVars.Count > 0 AndAlso lstColVars.Count = 0 Then
-                ' Only rows have variables, add "variable" to rows at the correct position
-                If positionVar <= lstRowVars.Count Then
-                    lstRowVars.Insert(Math.Max(0, positionVar - 1), """variable""")
-                Else
-                    lstRowVars.Add("""variable""")
-                End If
-                clsRPivotTableFunction.RemoveParameterByName("cols") ' Remove cols since it’s empty
-            ElseIf lstRowVars.Count = 0 AndAlso lstColVars.Count > 0 Then
-                ' Only cols have variables, add "variable" to cols at the correct position
-                If positionVar <= lstColVars.Count Then
-                    lstColVars.Insert(Math.Max(0, positionVar - 1), """variable""")
+            If rdoColumns.Checked Then
+                ' "variable" should be added to cols at the specified position
+                If positionVarCols <= lstColVars.Count Then
+                    lstColVars.Insert(Math.Max(0, positionVarCols - 1), """variable""")
                 Else
                     lstColVars.Add("""variable""")
                 End If
-                clsRPivotTableFunction.RemoveParameterByName("rows") ' Remove rows since it’s empty
-            Else
-                ' If both rows and cols have variables, position "variable" correctly
-                If positionVar <= lstRowVars.Count Then
-                    lstRowVars.Insert(Math.Max(0, positionVar - 1), """variable""")
+            ElseIf rdoRows.Checked Then
+                ' "variable" should be added to rows at the specified position
+                If positionVarRows <= lstRowVars.Count Then
+                    lstRowVars.Insert(Math.Max(0, positionVarRows - 1), """variable""")
                 Else
-                    Dim adjustedPos As Integer = positionVar - lstRowVars.Count - 1
-                    If adjustedPos <= lstColVars.Count Then
-                        lstColVars.Insert(Math.Max(0, adjustedPos), """variable""")
-                    Else
-                        lstColVars.Add("""variable""")
-                    End If
+                    lstRowVars.Add("""variable""")
                 End If
             End If
         End If
@@ -592,23 +589,36 @@ Public Class dlgThreeVariablePivotTable
         If lstColVars.Count > 0 Then clsRPivotTableFunction.AddParameter("cols", strColVars, iPosition:=2)
     End Sub
 
-    Private Sub ucrNudPositionVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudPositionVar.ControlValueChanged
+    Private Sub ucrNudPositionVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudPositionVarCols.ControlValueChanged
         AddingVariable()
     End Sub
 
     Private Sub MinMaxValVariable()
-        Dim selectedRows As List(Of String) = ucrReceiverInitialRowFactors.GetVariableNamesAsList()
         Dim selectedCols As List(Of String) = ucrReceiverInitialColumnFactor.GetVariableNamesAsList()
 
-        Dim totalVars As Integer = selectedRows.Count + selectedCols.Count
+        Dim totalVars As Integer = selectedCols.Count
         Dim defaultPosition As Integer = totalVars + 1
 
         ' Set minimum and maximum values
-        ucrNudPositionVar.Minimum = 1
-        ucrNudPositionVar.Maximum = defaultPosition
+        ucrNudPositionVarCols.Minimum = 1
+        ucrNudPositionVarCols.Maximum = defaultPosition
 
         ' Set default value to one more than total row + col factors
-        ucrNudPositionVar.Value = defaultPosition
+        ucrNudPositionVarCols.Value = defaultPosition
+    End Sub
+
+    Private Sub MinMaxValRowVariable()
+        Dim selectedRows As List(Of String) = ucrReceiverInitialRowFactors.GetVariableNamesAsList()
+
+        Dim totalVars As Integer = selectedRows.Count
+        Dim defaultPosition As Integer = totalVars + 1
+
+        ' Set minimum and maximum values
+        ucrNudPositionVarRows.Minimum = 1
+        ucrNudPositionVarRows.Maximum = defaultPosition
+
+        ' Set default value to one more than total row + col factors
+        ucrNudPositionVarRows.Value = defaultPosition
     End Sub
 
     Private Sub UpdateVisibilityAndParameters()
@@ -653,6 +663,12 @@ Public Class dlgThreeVariablePivotTable
 
     Private Sub ucrInputSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSummary.ControlValueChanged
         UpdateVisibilityAndParameters()
+    End Sub
+
+    Private Sub ucrPnlVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlVariables.ControlValueChanged
+        AddingVariable()
+        MinMaxValRowVariable()
+        MinMaxValVariable()
     End Sub
 
 End Class
