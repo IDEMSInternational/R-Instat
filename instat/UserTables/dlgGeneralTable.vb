@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
+    Private clsSpannerFunction, clsEvererythingFunction, clsPivotLongerFunction, clsSelectFunction, clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderMulFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -31,7 +31,7 @@ Public Class dlgGeneralTable
         sdgTableStyles.GetNewUserInputAsRFunction()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged, ucrReceiverMultipleColFactor.ControlContentsChanged, ucrReceiverMultipleRowFactors.ControlContentsChanged, ucrReceiverMultipleVariablesMul.ControlContentsChanged, ucrReceiverSingleVariable.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged, ucrReceiverMultipleRowFactors.ControlContentsChanged, ucrReceiverMultipleVariablesMul.ControlContentsChanged, ucrReceiverSingleVariable.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrReceiverMultipleColFactor.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -51,13 +51,22 @@ Public Class dlgGeneralTable
         ucrPnlOptions.AddRadioButton(rdoMultiple)
         ucrPnlOptions.AddRadioButton(rdoSingle)
 
+        ucrPnlPosition.AddRadioButton(rdoAscolumn)
+        ucrPnlPosition.AddRadioButton(rdoAsrow)
+
+        ucrPnlPosition.AddParameterValuesCondition(rdoAscolumn, "check", "Column")
+        ucrPnlPosition.AddParameterValuesCondition(rdoAsrow, "check", "row")
+
+        ucrPnlPosition.AddToLinkedControls(ucrNudColumn, {rdoAscolumn}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPosition.AddToLinkedControls(ucrNudRow, {rdoAsrow}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlOptions.AddParameterValuesCondition(rdoDataFrame, "checked", "Data Frame")
         ucrPnlOptions.AddParameterValuesCondition(rdoSingle, "checked", "Single")
         ucrPnlOptions.AddParameterValuesCondition(rdoMultiple, "checked", "Multiple")
 
         ucrPnlOptions.AddToLinkedControls({ucrChkPreview, ucrReceiverMultipleCols}, {rdoDataFrame}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverSingleVariable}, {rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleVariablesMul}, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleVariablesMul, ucrPnlPosition}, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleColFactor, ucrReceiverMultipleRowFactors}, {rdoMultiple, rdoSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrReceiverMultipleCols.SetParameter(New RParameter("col_names", 1))
@@ -102,11 +111,6 @@ Public Class dlgGeneralTable
         ucrNudPreview.Maximum = Decimal.MaxValue
         ucrNudPreview.SetRDefault(6)
 
-        ucrNudPosition.SetParameter(New RParameter("position", 0))
-        ucrNudPosition.SetMinMax(1, 4)
-        ucrNudPosition.SetRDefault(4)
-        ucrNudPosition.SetLinkedDisplayControl(lblposition)
-
         ucrSaveTable.SetPrefix("presentation_table")
         ucrSaveTable.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrSelectorCols.ucrAvailableDataFrames)
@@ -135,13 +139,19 @@ Public Class dlgGeneralTable
         clsTitleStyleRFunction = New RFunction
         clsDummyFunction = New RFunction
         clsPivotWiderFunction = New RFunction
+        clsPivotWiderMulFunction = New RFunction
         clsFormatTableFunction = New RFunction
         clsGetdataFunction = New RFunction
         clsGetdataSingleFunction = New RFunction
         clsGetdataMultipleFunction = New RFunction
+        clsSelectFunction = New RFunction
+        clsPivotLongerFunction = New RFunction
+        clsEvererythingFunction = New RFunction
+        clsSpannerFunction = New RFunction
 
         ucrSelectorCols.Reset()
         ucrSaveTable.Reset()
+        ucrReceiverMultipleRowFactors.SetMeAsReceiver()
         ucrChkPreview.Checked = True
         ucrCboSelectThemes.SetText("Dark Theme")
 
@@ -159,6 +169,7 @@ Public Class dlgGeneralTable
 
         clsDummyFunction.AddParameter("checked", "Single", iPosition:=0)
         clsDummyFunction.AddParameter("theme", "False", iPosition:=1)
+        clsDummyFunction.AddParameter("check", "row", iPosition:=2)
 
         clsHeadRFunction.SetPackageName("utils")
         clsHeadRFunction.SetRCommand("head")
@@ -187,7 +198,26 @@ Public Class dlgGeneralTable
         clsPivotWiderFunction.SetPackageName("tidyr")
         clsPivotWiderFunction.SetRCommand("pivot_wider")
 
+        clsPivotWiderMulFunction.SetPackageName("tidyr")
+        clsPivotWiderMulFunction.SetRCommand("pivot_wider")
+
         clsFormatTableFunction.SetRCommand("format_gt_table")
+
+        clsPivotLongerFunction.SetPackageName("tidyr")
+        clsPivotLongerFunction.SetRCommand("pivot_longer")
+        clsPivotLongerFunction.AddParameter("names_to", Chr(34) & "summary_type" & Chr(34), iPosition:=1)
+        clsPivotLongerFunction.AddParameter(" values_to", Chr(34) & "value" & Chr(34), iPosition:=2)
+
+        clsSelectFunction.SetPackageName("dplyr")
+        clsSelectFunction.SetRCommand("select")
+        clsSelectFunction.AddParameter("everything", clsRFunctionParameter:=clsEvererythingFunction, iPosition:=5, bIncludeArgumentName:=False)
+
+        clsEvererythingFunction.SetPackageName("tidyselect")
+        clsEvererythingFunction.SetRCommand("everything")
+
+        clsSpannerFunction.SetPackageName("gt")
+        clsSpannerFunction.SetRCommand("tab_spanner_delim")
+        clsSpannerFunction.AddParameter("delim", Chr(34) & "__" & Chr(34), iPosition:=0)
 
         Dim strGroupParamValue As String = "title"
         clsCellsTitleRFunction.SetPackageName("gt")
@@ -201,6 +231,8 @@ Public Class dlgGeneralTable
                                                   strObjectName:="last_table")
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        MinMaxValRowVariable()
+        MinMaxValVariable()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -212,10 +244,14 @@ Public Class dlgGeneralTable
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
             ucrChkPreview.SetRCode(clsBaseOperator, bReset)
             ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
+            ucrPnlPosition.SetRCode(clsDummyFunction, bReset)
+            ucrNudRow.SetRCode(clsSelectFunction, bReset)
+            ucrNudColumn.SetRCode(clsSelectFunction, bReset)
         End If
         ucrReceiverMultipleCols.SetRCode(clsGetdataFunction, bReset)
         Updateparameter()
         AddRemoveThemes()
+        AddingSummaryType()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -224,25 +260,31 @@ Public Class dlgGeneralTable
         ElseIf rdoSingle.Checked Then
             ucrBase.OKEnabled(Not ucrReceiverSingleVariable.IsEmpty AndAlso ucrSaveTable.IsComplete AndAlso (Not ucrReceiverMultipleColFactor.IsEmpty OrElse Not ucrReceiverMultipleRowFactors.IsEmpty))
         Else
-            ucrBase.OKEnabled(Not ucrReceiverMultipleColFactor.IsEmpty AndAlso Not ucrReceiverMultipleRowFactors.IsEmpty AndAlso ucrSaveTable.IsComplete)
+            ucrBase.OKEnabled(Not ucrReceiverMultipleVariablesMul.IsEmpty AndAlso ucrSaveTable.IsComplete AndAlso (Not ucrReceiverMultipleColFactor.IsEmpty OrElse Not ucrReceiverMultipleRowFactors.IsEmpty))
         End If
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrReceiverSingleVariable.ControlValueChanged, ucrReceiverMultipleVariablesMul.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrReceiverSingleVariable.ControlValueChanged, ucrReceiverMultipleVariablesMul.ControlValueChanged, ucrReceiverMultipleCols.ControlValueChanged
         AddRemovePivotwider()
         AddRemoveThemes()
         Updateparameter()
+        AddingSummaryType()
+        MinMaxValRowVariable()
+        MinMaxValVariable()
     End Sub
 
     Private Sub AddRemovePivotwider()
         clsBaseOperator.RemoveParameterByName("get_columns_from_data")
         clsBaseOperator.RemoveParameterByName("pivot_wider")
+        clsBaseOperator.RemoveParameterByName("pivot_wider_mul")
+        clsBaseOperator.RemoveParameterByName("pivot_longer")
         clsBaseOperator.RemoveParameterByName("format_table")
+        clsBaseOperator.RemoveParameterByName("select")
+        clsBaseOperator.RemoveParameterByName("spanner")
 
         If rdoSingle.Checked Then
             clsBaseOperator.RemoveParameterByName("head")
             clsBaseOperator.RemoveParameterByName("gt")
-            ucrReceiverMultipleRowFactors.SetMeAsReceiver()
             Updateparameter()
             clsPivotWiderFunction.AddParameter("values_from", ucrReceiverSingleVariable.GetVariableNames(False), iPosition:=1)
             clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataSingleFunction, iPosition:=0, bIncludeArgumentName:=False)
@@ -251,12 +293,14 @@ Public Class dlgGeneralTable
         ElseIf rdoMultiple.Checked Then
             clsBaseOperator.RemoveParameterByName("head")
             clsBaseOperator.RemoveParameterByName("gt")
-            ucrReceiverMultipleRowFactors.SetMeAsReceiver()
             Updateparameter()
-            clsPivotWiderFunction.AddParameter("values_from", ucrReceiverMultipleVariablesMul.GetVariableNames(False), iPosition:=1)
+            clsPivotLongerFunction.AddParameter("cols", ucrReceiverMultipleVariablesMul.GetVariableNames(), iPosition:=0)
+            clsPivotWiderMulFunction.AddParameter("values_from", Chr(34) & "value" & Chr(34), iPosition:=3)
             clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataMultipleFunction, iPosition:=0, bIncludeArgumentName:=False)
-            clsBaseOperator.AddParameter("pivot_wider", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
-            clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=2)
+            clsBaseOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=1)
+            clsBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
+            clsBaseOperator.AddParameter("pivot_wider_mul", clsRFunctionParameter:=clsPivotWiderMulFunction, iPosition:=3)
+            clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=4)
         Else
             ucrChkPreview.Checked = True
             AddRemoveHead()
@@ -268,397 +312,157 @@ Public Class dlgGeneralTable
         End If
     End Sub
 
-    Private Sub Updateparameter()
-        ' Helper function to clean and split variable strings
-        Dim cleanVars As Func(Of String, String()) = Function(varString)
-                                                         If String.IsNullOrEmpty(varString) Then Return New String() {}
-                                                         Dim cleaned As String = varString.Replace("c(", "").Replace(")", "").Trim()
-                                                         Return cleaned.Split(","c).Select(Function(v) v.Trim()).ToArray()
-                                                     End Function
+    Private Sub AddingSummaryType()
+        Dim lstRowVars As List(Of String) = ucrReceiverMultipleRowFactors.GetVariableNamesAsList()
+        Dim lstColVars As List(Of String) = ucrReceiverMultipleColFactor.GetVariableNamesAsList()
+        Dim positionVarCols As Integer = ucrNudColumn.Value
+        Dim positionVarRows As Integer = ucrNudRow.Value
 
-        ' Remove pivot-related parameters by default
-        clsBaseOperator.RemoveParameterByName("pivot_longer")
-        clsBaseOperator.RemoveParameterByName("arrange")
-        clsBaseOperator.RemoveParameterByName("pivot_wider")
-        clsBaseOperator.RemoveParameterByName("format_table")
-        clsGetdataSingleFunction.RemoveParameterByName("col_name")
-        clsGetdataMultipleFunction.RemoveParameterByName("col_name")
-        clsPivotWiderFunction.RemoveParameterByName("names_from")
-        clsPivotWiderFunction.RemoveParameterByName("values_from")
+        ' Ensure variables are wrapped in double quotes
+        lstRowVars = lstRowVars.Select(Function(x) """" & x & """").ToList()
+        lstColVars = lstColVars.Select(Function(x) """" & x & """").ToList()
 
-        If rdoDataFrame.Checked Then
-            ' For rdoDataFrame, no pivot functions are needed
-            ' Just retrieve the selected columns using clsGetdataSingleFunction
-            If Not ucrReceiverMultipleCols.IsEmpty Then
-                Dim selectedCols As String = ucrReceiverMultipleCols.GetVariableNames(False)
-                Dim colList As String() = cleanVars(selectedCols)
-                Dim result As String = "c(" & String.Join(",", colList.Select(Function(v) """" & v.Trim() & """")) & ")"
-                clsGetdataSingleFunction.AddParameter("col_name", result)
+        ' If rdoMultiple is checked, insert "variable" correctly based on rdoCols and rdoRows
+        If rdoMultiple.Checked Then
+            If rdoAscolumn.Checked Then
+                ' "variable" should be added to cols at the specified position
+                If positionVarCols <= lstColVars.Count Then
+                    lstColVars.Insert(Math.Max(0, positionVarCols - 1), """summary_type""")
+                Else
+                    lstColVars.Add("""summary_type""")
+                End If
+            ElseIf rdoAsrow.Checked Then
+                ' "variable" should be added to rows at the specified position
+                If positionVarRows <= lstRowVars.Count Then
+                    lstRowVars.Insert(Math.Max(0, positionVarRows - 1), """summary_type""")
+                Else
+                    lstRowVars.Add("""summary_type""")
+                End If
             End If
-        ElseIf rdoSingle.Checked Then
-            ' Logic for rdoSingle using clsGetdataSingleFunction
-            Dim summaryVars As String() = cleanVars(ucrReceiverSingleVariable.GetVariableNames(False))
+        End If
 
-            ' Check receiver states
-            Dim hasRowFactor As Boolean = Not ucrReceiverMultipleRowFactors.IsEmpty
-            Dim hasColFactor As Boolean = Not ucrReceiverMultipleColFactor.IsEmpty
+        ' Ensure correct formatting for rows and cols
+        Dim strRowVars As String = "c(" & String.Join(", ", lstRowVars) & ")"
+        Dim strColVars As String = "c(" & String.Join(", ", lstColVars) & ")"
 
-            ' Get the position of the summary variables
-            Dim summaryPosition As Integer = ucrNudPosition.Value
-
-            ' Create a new RFunction for pivot_longer
-            Dim clsPivotLongerFunction As New RFunction
-            clsPivotLongerFunction.SetPackageName("tidyr")
-            clsPivotLongerFunction.SetRCommand("pivot_longer")
-            clsPivotLongerFunction.AddParameter("cols", "c(" & String.Join(",", summaryVars.Select(Function(v) """" & v & """")) & ")", iPosition:=0)
-            clsPivotLongerFunction.AddParameter("names_to", """summary_type""", iPosition:=1)
-            clsPivotLongerFunction.AddParameter("values_to", """value""", iPosition:=2)
-
-            ' Create a new RFunction for arrange
-            Dim clsArrangeFunction As New RFunction
-            clsArrangeFunction.SetPackageName("dplyr")
-            clsArrangeFunction.SetRCommand("arrange")
-
-            If hasColFactor Or hasRowFactor Then
-                ' Get variable names from receivers (only if not empty)
-                Dim rowFactorVars As String = If(hasRowFactor, ucrReceiverMultipleRowFactors.GetVariableNames(False), "")
-                Dim colFactorVars As String = If(hasColFactor, ucrReceiverMultipleColFactor.GetVariableNames(False), "")
-
-                ' Get cleaned variable arrays
-                Dim colFactorList As String() = cleanVars(colFactorVars)
-                Dim rowFactorList As String() = cleanVars(rowFactorVars)
-
-                ' Define the factors in their default order (without summary variables)
-                Dim rowFactors As New List(Of String)
-                Dim colFactors As New List(Of String)(colFactorList)
-
-                ' If row factors are empty, use column factors for row ordering
-                If hasRowFactor Then
-                    rowFactors.AddRange(rowFactorList)
-                ElseIf hasColFactor Then
-                    rowFactors.AddRange(colFactorList)
-                End If
-
-                ' Adjust the row and column factors based on the summary position
-                Dim newRowFactors As New List(Of String)
-                Dim newColFactors As New List(Of String)
-
-                ' Position 1: Summary variables are the first row factor
-                If summaryPosition = 1 Then
-                    newRowFactors.Add("summary_type")
-                    newRowFactors.AddRange(rowFactors)
-                    newColFactors.AddRange(colFactors)
-                    ' Position 2: Summary variables come after the first row factor
-                ElseIf summaryPosition = 2 Then
-                    If rowFactors.Count >= 1 Then newRowFactors.Add(rowFactors(0))
-                    newRowFactors.Add("summary_type")
-                    If rowFactors.Count > 1 Then newRowFactors.AddRange(rowFactors.Skip(1))
-                    newColFactors.AddRange(colFactors)
-                    ' Position 3: Summary variables come after all row factors
-                ElseIf summaryPosition = 3 Then
-                    newRowFactors.AddRange(rowFactors)
-                    newRowFactors.Add("summary_type")
-                    newColFactors.AddRange(colFactors)
-                    ' Position 4: Summary variables act as a second column factor
-                ElseIf summaryPosition = 4 Then
-                    newRowFactors.AddRange(rowFactors)
-                    newColFactors.AddRange(colFactors)
-                    newColFactors.Add("summary_type")
-                End If
-
-                ' Combine all variables for col_name (all variables involved in the pivot)
-                Dim allVars As New List(Of String)
-                Dim uniqueVars As New HashSet(Of String)
-
-                ' Add row factors and column factors (excluding summary_type, which is added by pivot_longer)
-                For Each var In rowFactors
-                    If uniqueVars.Add(var) Then allVars.Add(var)
-                Next
-                For Each var In colFactors
-                    If uniqueVars.Add(var) Then allVars.Add(var)
-                Next
-                ' Add the summary variables
-                For Each var In summaryVars
-                    If uniqueVars.Add(var) Then allVars.Add(var)
-                Next
-
-                ' Format the col_name parameter as a flat c() vector
-                Dim colNameResult As String = "c(" & String.Join(",", allVars.Select(Function(v) """" & v.Trim() & """")) & ")"
-                clsGetdataSingleFunction.AddParameter("col_name", colNameResult)
-
-                ' Add pivot_longer to the pipeline
-                clsBaseOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=1)
-
-                ' Add arrange to the pipeline to control row order
-                If newRowFactors.Count > 0 Then
-                    Dim arrangeVars As String = String.Join(",", newRowFactors.Select(Function(v) v))
-                    clsArrangeFunction.AddParameter("vars", arrangeVars, iPosition:=0, bIncludeArgumentName:=False)
-                    clsBaseOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=2)
-                End If
-
-                ' Add pivot_wider to the pipeline
-                If newColFactors.Count > 0 Then
-                    Dim namesFrom As String = "c(" & String.Join(",", newColFactors.Select(Function(v) """" & v & """")) & ")"
-                    clsPivotWiderFunction.AddParameter("names_from", namesFrom, iPosition:=0)
-                End If
-                clsPivotWiderFunction.AddParameter("values_from", """value""", iPosition:=1)
-                clsBaseOperator.AddParameter("pivot_wider", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=3)
-
-                ' Add format_gt_table to the pipeline
-                clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=4)
-            End If
-        ElseIf rdoMultiple.Checked Then
-            ' Logic for rdoMultiple using clsGetdataMultipleFunction
-            Dim summaryVars As String() = cleanVars(ucrReceiverMultipleVariablesMul.GetVariableNames(False))
-
-            ' Check receiver states
-            Dim hasRowFactor As Boolean = Not ucrReceiverMultipleRowFactors.IsEmpty
-            Dim hasColFactor As Boolean = Not ucrReceiverMultipleColFactor.IsEmpty
-
-            ' Get the position of the summary variables
-            Dim summaryPosition As Integer = ucrNudPosition.Value
-
-            ' Create a new RFunction for pivot_longer
-            Dim clsPivotLongerFunction As New RFunction
-            clsPivotLongerFunction.SetPackageName("tidyr")
-            clsPivotLongerFunction.SetRCommand("pivot_longer")
-            clsPivotLongerFunction.AddParameter("cols", "c(" & String.Join(",", summaryVars.Select(Function(v) """" & v & """")) & ")", iPosition:=0)
-            clsPivotLongerFunction.AddParameter("names_to", """summary_type""", iPosition:=1)
-            clsPivotLongerFunction.AddParameter("values_to", """value""", iPosition:=2)
-
-            ' Create a new RFunction for arrange
-            Dim clsArrangeFunction As New RFunction
-            clsArrangeFunction.SetPackageName("dplyr")
-            clsArrangeFunction.SetRCommand("arrange")
-
-            If hasColFactor Or hasRowFactor Then
-                ' Get variable names from receivers (only if not empty)
-                Dim rowFactorVars As String = If(hasRowFactor, ucrReceiverMultipleRowFactors.GetVariableNames(False), "")
-                Dim colFactorVars As String = If(hasColFactor, ucrReceiverMultipleColFactor.GetVariableNames(False), "")
-
-                ' Get cleaned variable arrays
-                Dim colFactorList As String() = cleanVars(colFactorVars)
-                Dim rowFactorList As String() = cleanVars(rowFactorVars)
-
-                ' Define the factors in their default order (without summary variables)
-                Dim rowFactors As New List(Of String)
-                Dim colFactors As New List(Of String)(colFactorList)
-
-                ' If row factors are empty, use column factors for row ordering
-                If hasRowFactor Then
-                    rowFactors.AddRange(rowFactorList)
-                ElseIf hasColFactor Then
-                    rowFactors.AddRange(colFactorList)
-                End If
-
-                ' Adjust the row and column factors based on the summary position
-                Dim newRowFactors As New List(Of String)
-                Dim newColFactors As New List(Of String)
-
-                ' Position 1: Summary variables are the first row factor
-                If summaryPosition = 1 Then
-                    newRowFactors.Add("summary_type")
-                    newRowFactors.AddRange(rowFactors)
-                    newColFactors.AddRange(colFactors)
-                    ' Position 2: Summary variables come after the first row factor
-                ElseIf summaryPosition = 2 Then
-                    If rowFactors.Count >= 1 Then newRowFactors.Add(rowFactors(0))
-                    newRowFactors.Add("summary_type")
-                    If rowFactors.Count > 1 Then newRowFactors.AddRange(rowFactors.Skip(1))
-                    newColFactors.AddRange(colFactors)
-                    ' Position 3: Summary variables come after all row factors
-                ElseIf summaryPosition = 3 Then
-                    newRowFactors.AddRange(rowFactors)
-                    newRowFactors.Add("summary_type")
-                    newColFactors.AddRange(colFactors)
-                    ' Position 4: Summary variables act as a second column factor
-                ElseIf summaryPosition = 4 Then
-                    newRowFactors.AddRange(rowFactors)
-                    newColFactors.AddRange(colFactors)
-                    newColFactors.Add("summary_type")
-                End If
-
-                ' Combine all variables for col_name (all variables involved in the pivot)
-                Dim allVars As New List(Of String)
-                Dim uniqueVars As New HashSet(Of String)
-
-                ' Add row factors and column factors (excluding summary_type, which is added by pivot_longer)
-                For Each var In rowFactors
-                    If uniqueVars.Add(var) Then allVars.Add(var)
-                Next
-                For Each var In colFactors
-                    If uniqueVars.Add(var) Then allVars.Add(var)
-                Next
-                ' Add the summary variables
-                For Each var In summaryVars
-                    If uniqueVars.Add(var) Then allVars.Add(var)
-                Next
-
-                ' Format the col_name parameter as a flat c() vector
-                Dim colNameResult As String = "c(" & String.Join(",", allVars.Select(Function(v) """" & v.Trim() & """")) & ")"
-                clsGetdataMultipleFunction.AddParameter("col_name", colNameResult)
-
-                ' Add pivot_longer to the pipeline
-                clsBaseOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=1)
-
-                ' Add arrange to the pipeline to control row order
-                If newRowFactors.Count > 0 Then
-                    Dim arrangeVars As String = String.Join(",", newRowFactors.Select(Function(v) v))
-                    clsArrangeFunction.AddParameter("vars", arrangeVars, iPosition:=0, bIncludeArgumentName:=False)
-                    clsBaseOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=2)
-                End If
-
-                ' Add pivot_wider to the pipeline
-                If newColFactors.Count > 0 Then
-                    Dim namesFrom As String = "c(" & String.Join(",", newColFactors.Select(Function(v) """" & v & """")) & ")"
-                    clsPivotWiderFunction.AddParameter("names_from", namesFrom, iPosition:=0)
-                End If
-                clsPivotWiderFunction.AddParameter("values_from", """value""", iPosition:=1)
-                clsBaseOperator.AddParameter("pivot_wider", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=3)
-
-                ' Add format_gt_table to the pipeline
-                clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=4)
-            End If
+        ' Add parameters while preventing c(c(...))
+        If rdoAsrow.Checked Then
+            clsBaseOperator.RemoveParameterByName("spanner")
+            clsPivotWiderMulFunction.RemoveParameterByName("names_sep")
+            If lstRowVars.Count > 0 Then clsSelectFunction.AddParameter("rows", strRowVars, iPosition:=0, bIncludeArgumentName:=False)
+            clsBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
+        Else
+            clsBaseOperator.RemoveParameterByName("select")
+            clsPivotWiderMulFunction.AddParameter("names_sep", Chr(34) & "__" & Chr(34), iPosition:=2)
+            If lstColVars.Count > 0 Then clsPivotWiderMulFunction.AddParameter("names_from", strColVars, iPosition:=0)
+            clsBaseOperator.AddParameter("spanner", clsRFunctionParameter:=clsSpannerFunction, iPosition:=5)
         End If
     End Sub
 
-    'Private Sub Updateparameter()
-    '    If rdoSingle.Checked Then
-    '        clsGetdataFunction.RemoveParameterByName("col_name")
-    '        ' Helper function to clean and split variable strings
-    '        Dim cleanVars As Func(Of String, String()) = Function(varString)
-    '                                                         If String.IsNullOrEmpty(varString) Then Return New String() {}
-    '                                                         Dim cleaned As String = varString.Replace("c(", "").Replace(")", "").Trim()
-    '                                                         Return cleaned.Split(","c).Select(Function(v) v.Trim()).ToArray()
-    '                                                     End Function
+    Private Sub MinMaxValVariable()
+        Dim selectedCols As List(Of String) = ucrReceiverMultipleColFactor.GetVariableNamesAsList()
+        Dim totalVars As Integer = selectedCols.Count
+        Dim defaultPosition As Integer = totalVars + 1
 
-    '        ' Check receiver states
-    '        Dim hasRowFactor As Boolean = Not ucrReceiverMultipleColFactor.IsEmpty
-    '        Dim hasColFactor As Boolean = Not ucrReceiverMultipleRowFactors.IsEmpty
+        ' Set minimum and maximum values
+        ucrNudColumn.Minimum = 1
+        ucrNudColumn.Maximum = defaultPosition
 
-    ' Get the position of the summary variables
-    'Dim summaryPosition As Integer = ucrNudPosition.Value
+        ' Set default value to one more than total row + col factors
+        ucrNudColumn.Value = defaultPosition
+    End Sub
 
-    ' Define the summary variables (hard-coded for this example)
-    '' Dim summaryVars As String() = {"min_yield", "mean_yield", "max_yield"}
+    Private Sub MinMaxValRowVariable()
+        Dim selectedRows As List(Of String) = ucrReceiverMultipleRowFactors.GetVariableNamesAsList()
+        Dim totalVars As Integer = selectedRows.Count
+        Dim defaultPosition As Integer = totalVars + 1
 
-    ' Create a new RFunction for pivot_longer
-    ' Dim clsPivotLongerFunction As New RFunction
-    'clsPivotLongerFunction.SetPackageName("tidyr")
-    'clsPivotLongerFunction.SetRCommand("pivot_longer")
-    'clsPivotLongerFunction.AddParameter("cols", ucrReceiverSingleVariable.GetVariableNames(False), iPosition:=0)
-    'clsPivotLongerFunction.AddParameter("names_to", Chr(34) & "summary_type" & Chr(34), iPosition:=1)
-    'clsPivotLongerFunction.AddParameter("values_to", Chr(34) & "value" & Chr(34), iPosition:=2)
+        ' Set minimum and maximum values
+        ucrNudRow.Minimum = 1
+        ucrNudRow.Maximum = defaultPosition
 
-    '        If hasColFactor Or hasRowFactor Then
-    '            ' Get variable names from receivers (only if not empty)
-    '            Dim rowFactorVars As String = If(hasRowFactor, ucrReceiverMultipleColFactor.GetVariableNames(False), "")
-    '            Dim colFactorVars As String = If(hasColFactor, ucrReceiverMultipleRowFactors.GetVariableNames(False), "")
-    '            Dim singleVar As String = ucrReceiverSingleVariable.GetVariableNames(False)
+        ' Set default value to one more than total row + col factors
+        ucrNudRow.Value = defaultPosition
+    End Sub
 
-    '            ' Get cleaned variable arrays
-    '            Dim colFactorList As String() = cleanVars(colFactorVars)
-    '            Dim rowFactorList As String() = cleanVars(rowFactorVars)
-    '            Dim singleVarList As String() = cleanVars(singleVar)
+    Private Sub Updateparameter()
+        If rdoSingle.Checked Then
+            If Not ucrReceiverMultipleColFactor.IsEmpty OrElse Not ucrReceiverMultipleRowFactors.IsEmpty Then
+                ' Collect variables from receivers
+                Dim colFactorVars As String = ucrReceiverMultipleColFactor.GetVariableNames(False)
+                Dim rowFactorVars As String = ucrReceiverMultipleRowFactors.GetVariableNames(False)
+                Dim singleVar As String = ucrReceiverSingleVariable.GetVariableNames(False)
 
-    '            ' Combine all variables into a list while preserving order and removing duplicates
-    '            Dim allVars As New List(Of String)
-    '            Dim uniqueVars As New HashSet(Of String)
+                ' Function to clean and split variable strings into unique values
+                Dim cleanVars As Func(Of String, IEnumerable(Of String)) = Function(varString)
+                                                                               If String.IsNullOrEmpty(varString) Then Return New List(Of String)()
+                                                                               Return varString.Replace("c(", "").Replace(")", "").Trim().
+                    Split(","c).Select(Function(v) v.Trim()).
+                    Where(Function(v) Not String.IsNullOrEmpty(v)).
+                    Distinct()
+                                                                           End Function
+                ' Combine all variables and remove duplicates
+                Dim allVars As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+                allVars.UnionWith(cleanVars(colFactorVars))
+                allVars.UnionWith(cleanVars(rowFactorVars))
+                allVars.UnionWith(cleanVars(singleVar))
 
-    '            ' Add variables in order: colFactor, rowFactor, singleVar
-    '            If hasColFactor Then
-    '                For Each var In colFactorList
-    '                    If uniqueVars.Add(var) Then allVars.Add(var)
-    '                Next
-    '            End If
-    '            If hasRowFactor Then
-    '                For Each var In rowFactorList
-    '                    If uniqueVars.Add(var) Then allVars.Add(var)
-    '                Next
-    '            End If
-    '            For Each var In singleVarList
-    '                If uniqueVars.Add(var) Then allVars.Add(var)
-    '            Next
+                ' Set col_name with unique values
+                Dim result As String = "c(" & String.Join(",", allVars.Select(Function(v) """" & v & """")) & ")"
+                clsGetdataSingleFunction.AddParameter("col_name", result)
 
-    '            ' Format the final string as a flat c() vector
-    '            Dim result As String = "c(" & String.Join(",", allVars.Select(Function(v) """" & v.Trim() & """")) & ")"
-    '            clsGetdataSingleFunction.AddParameter("col_name", result)
+                ' Maintain original pivot and select function logic
+                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleColFactor.GetVariableNames(), iPosition:=0)
+            Else
+                ' Remove parameters if necessary
+                clsPivotWiderFunction.RemoveParameterByName("names_from")
+                clsGetdataSingleFunction.RemoveParameterByName("col_name")
+            End If
 
-    '            ' Set names_from parameter based on conditions
-    '            If hasRowFactor Then
-    '                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleColFactor.GetVariableNames(), iPosition:=0)
-    '            ElseIf hasColFactor Then
-    '                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleRowFactors.GetVariableNames(), iPosition:=0)
-    '            End If
-    '        Else
-    '            ' Clear parameters if both colFactor and rowFactor are empty
-    '            clsPivotWiderFunction.RemoveParameterByName("names_from")
-    '            clsGetdataSingleFunction.RemoveParameterByName("col_name")
-    '        End If
-    '    ElseIf rdoMultiple.Checked Then
-    '        clsGetdataFunction.RemoveParameterByName("col_name")
-    '        ' Helper function to clean and split variable strings
-    '        Dim cleanVars As Func(Of String, String()) = Function(varString)
-    '                                                         If String.IsNullOrEmpty(varString) Then Return New String() {}
-    '                                                         Dim cleaned As String = varString.Replace("c(", "").Replace(")", "").Trim()
-    '                                                         Return cleaned.Split(","c).Select(Function(v) v.Trim()).ToArray()
-    '                                                     End Function
+        ElseIf rdoMultiple.Checked Then
+            If Not ucrReceiverMultipleColFactor.IsEmpty OrElse Not ucrReceiverMultipleRowFactors.IsEmpty Then
+                ' Collect variables from receivers
+                Dim colFactorVars As String = ucrReceiverMultipleColFactor.GetVariableNames(False)
+                Dim rowFactorVars As String = ucrReceiverMultipleRowFactors.GetVariableNames(False)
+                Dim singleVar As String = ucrReceiverMultipleVariablesMul.GetVariableNames(False)
 
-    '        ' Check receiver states
-    '        Dim hasRowFactor As Boolean = Not ucrReceiverMultipleColFactor.IsEmpty
-    '        Dim hasColFactor As Boolean = Not ucrReceiverMultipleRowFactors.IsEmpty
+                ' Function to clean and split variable strings into unique values
+                Dim cleanVars As Func(Of String, IEnumerable(Of String)) = Function(varString)
+                                                                               If String.IsNullOrEmpty(varString) Then Return New List(Of String)()
+                                                                               Return varString.Replace("c(", "").Replace(")", "").Trim().
+                    Split(","c).Select(Function(v) v.Trim()).
+                    Where(Function(v) Not String.IsNullOrEmpty(v)).
+                    Distinct()
+                                                                           End Function
+                ' Combine all variables and remove duplicates
+                Dim allVars As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+                allVars.UnionWith(cleanVars(colFactorVars))
+                allVars.UnionWith(cleanVars(rowFactorVars))
+                allVars.UnionWith(cleanVars(singleVar))
 
-    '        If hasColFactor Or hasRowFactor Then
-    '            ' Get variable names from receivers (only if not empty)
-    '            Dim rowFactorVars As String = If(hasRowFactor, ucrReceiverMultipleColFactor.GetVariableNames(False), "")
-    '            Dim colFactorVars As String = If(hasColFactor, ucrReceiverMultipleRowFactors.GetVariableNames(False), "")
-    '            Dim multiVar As String = ucrReceiverMultipleVariablesMul.GetVariableNames(False)
+                ' Set col_name with unique values
+                Dim result As String = "c(" & String.Join(",", allVars.Select(Function(v) """" & v & """")) & ")"
+                clsGetdataMultipleFunction.AddParameter("col_name", result)
 
-    '            ' Get cleaned variable arrays
-    '            Dim colFactorList As String() = cleanVars(colFactorVars)
-    '            Dim rowFactorList As String() = cleanVars(rowFactorVars)
-    '            Dim multiVarList As String() = cleanVars(multiVar)
-
-    '            ' Combine all variables into a list while preserving order and removing duplicates
-    '            Dim allVars As New List(Of String)
-    '            Dim uniqueVars As New HashSet(Of String)
-
-    '            ' Add variables in order: colFactor, rowFactor, singleVar
-    '            If hasColFactor Then
-    '                For Each var In colFactorList
-    '                    If uniqueVars.Add(var) Then allVars.Add(var)
-    '                Next
-    '            End If
-    '            If hasRowFactor Then
-    '                For Each var In rowFactorList
-    '                    If uniqueVars.Add(var) Then allVars.Add(var)
-    '                Next
-    '            End If
-    '            For Each var In multiVarList
-    '                If uniqueVars.Add(var) Then allVars.Add(var)
-    '            Next
-
-    '            ' Format the final string as a flat c() vector
-    '            Dim result As String = "c(" & String.Join(",", allVars.Select(Function(v) """" & v.Trim() & """")) & ")"
-    '            clsGetdataMultipleFunction.AddParameter("col_name", result)
-
-    '            ' Set names_from parameter based on conditions
-    '            If hasRowFactor Then
-    '                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleColFactor.GetVariableNames(), iPosition:=0)
-    '            ElseIf hasColFactor Then
-    '                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleRowFactors.GetVariableNames(), iPosition:=0)
-    '            End If
-    '        Else
-    '            ' Clear parameters if both colFactor and rowFactor are empty
-    '            clsPivotWiderFunction.RemoveParameterByName("names_from")
-    '            clsGetdataMultipleFunction.RemoveParameterByName("col_name")
-    '        End If
-    '    Else
-    '        clsGetdataSingleFunction.RemoveParameterByName("col_name")
-    '        clsPivotWiderFunction.RemoveParameterByName("names_from")
-    '        clsGetdataMultipleFunction.RemoveParameterByName("col_name")
-    '    End If
-    'End Sub
+                ' Maintain original pivot and select function logic
+                clsPivotWiderMulFunction.AddParameter("names_from", ucrReceiverMultipleColFactor.GetVariableNames(), iPosition:=0)
+            Else
+                ' Remove parameters if necessary
+                clsPivotWiderMulFunction.RemoveParameterByName("names_from")
+                clsGetdataMultipleFunction.RemoveParameterByName("col_name")
+            End If
+        Else
+            ' Default case
+            clsBaseOperator.RemoveParameterByName("pivot_wider")
+            clsBaseOperator.RemoveParameterByName("pivot_wider_mul")
+            clsGetdataSingleFunction.RemoveParameterByName("col_name")
+            clsGetdataMultipleFunction.RemoveParameterByName("col_name")
+            clsPivotWiderFunction.RemoveParameterByName("names_from")
+            clsPivotWiderFunction.RemoveParameterByName("values_from")
+            clsPivotWiderMulFunction.RemoveParameterByName("names_from")
+            clsPivotWiderMulFunction.RemoveParameterByName("values_from")
+        End If
+    End Sub
 
     Private Sub AddRemoveHead()
         If ucrChkPreview.Checked Then
@@ -749,9 +553,23 @@ Public Class dlgGeneralTable
 
     Private Sub ucrReceiverMultipleRowFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleRowFactors.ControlValueChanged, ucrReceiverMultipleColFactor.ControlValueChanged
         Updateparameter()
+        MinMaxValRowVariable()
+        MinMaxValVariable()
+        AddingSummaryType()
     End Sub
 
-    Private Sub ucrNudPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudPosition.ControlValueChanged
+    Private Sub ucrNudPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRow.ControlValueChanged
         Updateparameter()
+        AddingSummaryType()
+    End Sub
+
+    Private Sub ucrPnlPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPosition.ControlValueChanged
+        AddingSummaryType()
+        MinMaxValRowVariable()
+        MinMaxValVariable()
+    End Sub
+
+    Private Sub ucrNudColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudColumn.ControlValueChanged
+        AddingSummaryType()
     End Sub
 End Class

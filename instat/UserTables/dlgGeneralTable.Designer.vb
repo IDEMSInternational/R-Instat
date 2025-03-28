@@ -44,13 +44,16 @@ Partial Class dlgGeneralTable
         Me.lblRowFactor = New System.Windows.Forms.Label()
         Me.ucrReceiverMultipleRowFactors = New instat.ucrReceiverMultiple()
         Me.lblColFactor = New System.Windows.Forms.Label()
-        Me.ucrReceiverMultipleColFactor = New instat.ucrReceiverMultiple()
         Me.lblVariable = New System.Windows.Forms.Label()
         Me.lblVariblesMul = New System.Windows.Forms.Label()
         Me.ucrReceiverMultipleVariablesMul = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSingleVariable = New instat.ucrReceiverSingle()
-        Me.ucrNudPosition = New instat.ucrNud()
-        Me.lblposition = New System.Windows.Forms.Label()
+        Me.ucrNudRow = New instat.ucrNud()
+        Me.ucrPnlPosition = New instat.UcrPanel()
+        Me.rdoAscolumn = New System.Windows.Forms.RadioButton()
+        Me.rdoAsrow = New System.Windows.Forms.RadioButton()
+        Me.ucrNudColumn = New instat.ucrNud()
+        Me.ucrReceiverMultipleColFactor = New instat.ucrReceiverMultiple()
         Me.grpBoxTitle.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -315,19 +318,6 @@ Partial Class dlgGeneralTable
         Me.lblColFactor.TabIndex = 42
         Me.lblColFactor.Text = "Column Factors:"
         '
-        'ucrReceiverMultipleColFactor
-        '
-        Me.ucrReceiverMultipleColFactor.AutoSize = True
-        Me.ucrReceiverMultipleColFactor.frmParent = Me
-        Me.ucrReceiverMultipleColFactor.Location = New System.Drawing.Point(293, 207)
-        Me.ucrReceiverMultipleColFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleColFactor.Name = "ucrReceiverMultipleColFactor"
-        Me.ucrReceiverMultipleColFactor.Selector = Nothing
-        Me.ucrReceiverMultipleColFactor.Size = New System.Drawing.Size(141, 74)
-        Me.ucrReceiverMultipleColFactor.strNcFilePath = ""
-        Me.ucrReceiverMultipleColFactor.TabIndex = 41
-        Me.ucrReceiverMultipleColFactor.ucrSelector = Nothing
-        '
         'lblVariable
         '
         Me.lblVariable.AutoSize = True
@@ -351,7 +341,6 @@ Partial Class dlgGeneralTable
         'ucrReceiverMultipleVariablesMul
         '
         Me.ucrReceiverMultipleVariablesMul.AutoSize = True
-        Me.ucrReceiverMultipleVariablesMul.Enabled = False
         Me.ucrReceiverMultipleVariablesMul.frmParent = Me
         Me.ucrReceiverMultipleVariablesMul.Location = New System.Drawing.Point(293, 312)
         Me.ucrReceiverMultipleVariablesMul.Margin = New System.Windows.Forms.Padding(0)
@@ -359,7 +348,7 @@ Partial Class dlgGeneralTable
         Me.ucrReceiverMultipleVariablesMul.Selector = Nothing
         Me.ucrReceiverMultipleVariablesMul.Size = New System.Drawing.Size(141, 74)
         Me.ucrReceiverMultipleVariablesMul.strNcFilePath = ""
-        Me.ucrReceiverMultipleVariablesMul.TabIndex = 45
+        Me.ucrReceiverMultipleVariablesMul.TabIndex = 43
         Me.ucrReceiverMultipleVariablesMul.ucrSelector = Nothing
         '
         'ucrReceiverSingleVariable
@@ -375,36 +364,86 @@ Partial Class dlgGeneralTable
         Me.ucrReceiverSingleVariable.TabIndex = 142
         Me.ucrReceiverSingleVariable.ucrSelector = Nothing
         '
-        'ucrNudPosition
+        'ucrNudRow
         '
-        Me.ucrNudPosition.AutoSize = True
-        Me.ucrNudPosition.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPosition.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPosition.Location = New System.Drawing.Point(111, 379)
-        Me.ucrNudPosition.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPosition.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPosition.Name = "ucrNudPosition"
-        Me.ucrNudPosition.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPosition.TabIndex = 143
-        Me.ucrNudPosition.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRow.AutoSize = True
+        Me.ucrNudRow.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRow.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRow.Location = New System.Drawing.Point(211, 354)
+        Me.ucrNudRow.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRow.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRow.Name = "ucrNudRow"
+        Me.ucrNudRow.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudRow.TabIndex = 143
+        Me.ucrNudRow.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblposition
+        'ucrPnlPosition
         '
-        Me.lblposition.AutoSize = True
-        Me.lblposition.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblposition.Location = New System.Drawing.Point(12, 383)
-        Me.lblposition.Name = "lblposition"
-        Me.lblposition.Size = New System.Drawing.Size(93, 13)
-        Me.lblposition.TabIndex = 144
-        Me.lblposition.Text = "Position Variables:"
+        Me.ucrPnlPosition.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlPosition.Location = New System.Drawing.Point(5, 345)
+        Me.ucrPnlPosition.Name = "ucrPnlPosition"
+        Me.ucrPnlPosition.Size = New System.Drawing.Size(186, 83)
+        Me.ucrPnlPosition.TabIndex = 145
+        '
+        'rdoAscolumn
+        '
+        Me.rdoAscolumn.AutoSize = True
+        Me.rdoAscolumn.Location = New System.Drawing.Point(12, 397)
+        Me.rdoAscolumn.Name = "rdoAscolumn"
+        Me.rdoAscolumn.Size = New System.Drawing.Size(128, 17)
+        Me.rdoAscolumn.TabIndex = 146
+        Me.rdoAscolumn.TabStop = True
+        Me.rdoAscolumn.Text = "Variables as Columns:"
+        Me.rdoAscolumn.UseVisualStyleBackColor = True
+        '
+        'rdoAsrow
+        '
+        Me.rdoAsrow.AutoSize = True
+        Me.rdoAsrow.Location = New System.Drawing.Point(12, 357)
+        Me.rdoAsrow.Name = "rdoAsrow"
+        Me.rdoAsrow.Size = New System.Drawing.Size(115, 17)
+        Me.rdoAsrow.TabIndex = 147
+        Me.rdoAsrow.TabStop = True
+        Me.rdoAsrow.Text = "Variables as Rows:"
+        Me.rdoAsrow.UseVisualStyleBackColor = True
+        '
+        'ucrNudColumn
+        '
+        Me.ucrNudColumn.AutoSize = True
+        Me.ucrNudColumn.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumn.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColumn.Location = New System.Drawing.Point(211, 397)
+        Me.ucrNudColumn.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColumn.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumn.Name = "ucrNudColumn"
+        Me.ucrNudColumn.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudColumn.TabIndex = 148
+        Me.ucrNudColumn.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrReceiverMultipleColFactor
+        '
+        Me.ucrReceiverMultipleColFactor.AutoSize = True
+        Me.ucrReceiverMultipleColFactor.frmParent = Me
+        Me.ucrReceiverMultipleColFactor.Location = New System.Drawing.Point(293, 205)
+        Me.ucrReceiverMultipleColFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultipleColFactor.Name = "ucrReceiverMultipleColFactor"
+        Me.ucrReceiverMultipleColFactor.Selector = Nothing
+        Me.ucrReceiverMultipleColFactor.Size = New System.Drawing.Size(141, 74)
+        Me.ucrReceiverMultipleColFactor.strNcFilePath = ""
+        Me.ucrReceiverMultipleColFactor.TabIndex = 149
+        Me.ucrReceiverMultipleColFactor.ucrSelector = Nothing
         '
         'dlgGeneralTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(476, 636)
-        Me.Controls.Add(Me.lblposition)
-        Me.Controls.Add(Me.ucrNudPosition)
+        Me.Controls.Add(Me.ucrReceiverMultipleColFactor)
+        Me.Controls.Add(Me.ucrNudColumn)
+        Me.Controls.Add(Me.rdoAsrow)
+        Me.Controls.Add(Me.rdoAscolumn)
+        Me.Controls.Add(Me.ucrPnlPosition)
+        Me.Controls.Add(Me.ucrNudRow)
         Me.Controls.Add(Me.lblVariblesMul)
         Me.Controls.Add(Me.ucrReceiverMultipleVariablesMul)
         Me.Controls.Add(Me.ucrCboSelectThemes)
@@ -426,7 +465,6 @@ Partial Class dlgGeneralTable
         Me.Controls.Add(Me.lblRowFactor)
         Me.Controls.Add(Me.ucrReceiverMultipleRowFactors)
         Me.Controls.Add(Me.lblColFactor)
-        Me.Controls.Add(Me.ucrReceiverMultipleColFactor)
         Me.Controls.Add(Me.ucrReceiverSingleVariable)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgGeneralTable"
@@ -460,11 +498,14 @@ Partial Class dlgGeneralTable
     Friend WithEvents lblRowFactor As Label
     Friend WithEvents ucrReceiverMultipleRowFactors As ucrReceiverMultiple
     Friend WithEvents lblColFactor As Label
-    Friend WithEvents ucrReceiverMultipleColFactor As ucrReceiverMultiple
     Friend WithEvents lblVariable As Label
     Friend WithEvents lblVariblesMul As Label
     Friend WithEvents ucrReceiverMultipleVariablesMul As ucrReceiverMultiple
     Friend WithEvents ucrReceiverSingleVariable As ucrReceiverSingle
-    Friend WithEvents lblposition As Label
-    Friend WithEvents ucrNudPosition As ucrNud
+    Friend WithEvents ucrNudRow As ucrNud
+    Friend WithEvents ucrNudColumn As ucrNud
+    Friend WithEvents rdoAsrow As RadioButton
+    Friend WithEvents rdoAscolumn As RadioButton
+    Friend WithEvents ucrPnlPosition As UcrPanel
+    Friend WithEvents ucrReceiverMultipleColFactor As ucrReceiverMultiple
 End Class
