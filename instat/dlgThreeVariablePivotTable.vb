@@ -175,7 +175,7 @@ Public Class dlgThreeVariablePivotTable
         clsDummyFunction.AddParameter("checked", "single", iPosition:=1)
         clsDummyFunction.AddParameter("total", "False", iPosition:=2)
         clsDummyFunction.AddParameter("renderer", "False", iPosition:=3)
-        clsDummyFunction.AddParameter("check", "rows", iPosition:=4)
+        clsDummyFunction.AddParameter("check", "cols", iPosition:=4)
 
         clsRelevelPasteFunction.SetRCommand("return_variable_levels")
         clsRelevelPasteFunction.SetAssignTo("relevel_variables")
