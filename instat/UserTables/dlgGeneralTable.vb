@@ -244,9 +244,9 @@ Public Class dlgGeneralTable
             ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
             ucrChkPreview.SetRCode(clsBaseOperator, bReset)
             ucrNudPreview.SetRCode(clsHeadRFunction, bReset)
-            ucrPnlPosition.SetRCode(clsDummyFunction, bReset)
             ucrNudRow.SetRCode(clsSelectFunction, bReset)
-            ucrNudColumn.SetRCode(clsSelectFunction, bReset)
+            ucrNudColumn.SetRCode(clsPivotWiderMulFunction, bReset)
+            ucrPnlPosition.SetRCode(clsDummyFunction, bReset)
         End If
         ucrReceiverMultipleCols.SetRCode(clsGetdataFunction, bReset)
         Updateparameter()
@@ -267,10 +267,7 @@ Public Class dlgGeneralTable
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrReceiverSingleVariable.ControlValueChanged, ucrReceiverMultipleVariablesMul.ControlValueChanged, ucrReceiverMultipleCols.ControlValueChanged
         AddRemovePivotwider()
         AddRemoveThemes()
-        Updateparameter()
         AddingSummaryType()
-        MinMaxValRowVariable()
-        MinMaxValVariable()
     End Sub
 
     Private Sub AddRemovePivotwider()
@@ -558,8 +555,7 @@ Public Class dlgGeneralTable
         AddingSummaryType()
     End Sub
 
-    Private Sub ucrNudPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRow.ControlValueChanged
-        Updateparameter()
+    Private Sub ucrNudRow_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRow.ControlValueChanged
         AddingSummaryType()
     End Sub
 
