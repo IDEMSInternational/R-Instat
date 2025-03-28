@@ -18,10 +18,11 @@ Imports RDotNet
 Public Class dlgLabelsLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsViewLabelsFunction, clsSumCountMissingFunction As New RFunction
+    Private clsViewLabelsFunction, clsSumCountMissingFunction, clsDummyFunction As New RFunction
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
+    Private _strSelectedColumn As String
 
     Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -32,6 +33,7 @@ Public Class dlgLabelsLevels
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetSelectedColumn()
         bReset = False
         If bUseSelectedColumn Then
             SetDefaultColumn()
@@ -74,6 +76,7 @@ Public Class dlgLabelsLevels
     Private Sub SetDefaults()
         clsViewLabelsFunction = New RFunction
         clsSumCountMissingFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         cmdAddLevel.Enabled = False
         ucrSelectorForLabels.Reset()
@@ -81,6 +84,9 @@ Public Class dlgLabelsLevels
 
 
         clsSumCountMissingFunction.SetRCommand("summary_count_miss")
+
+        ucrReceiverLabels.SetMeAsReceiver()
+        clsDummyFunction.AddParameter("strVal", ucrReceiverLabels.GetVariableNames(False))
 
         clsViewLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabelsFunction)
@@ -157,6 +163,45 @@ Public Class dlgLabelsLevels
         ucrChkIncludeLevelNumbers.Enabled = Not ucrChkIncludeLevelNumbers.Checked
     End Sub
 
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        Dim strTempSelectedVariable As String = ""
+        Dim strDataName As String = ucrSelectorForLabels.strCurrentDataFrame
+        Dim strTemp As String = ""
+
+        ' Retrieve parameter value safely
+        Dim clsParam = clsDummyFunction.GetParameter("strVal")
+        If clsParam IsNot Nothing Then
+            strTemp = clsParam.strArgumentValue
+        End If
+        ' If _strSelectedColumn is valid and a factor, use it
+        If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso
+       frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
+            strTempSelectedVariable = _strSelectedColumn
+        ElseIf ucrSelectorForLabels.lstAvailableVariable.Items.Count > 0 Then
+            ' If no selected column, use first available variable
+            strTempSelectedVariable = ucrSelectorForLabels.lstAvailableVariable.Items(0).Text
+        Else
+            ' No available variables, exit
+            Exit Sub
+        End If
+        ' Ensure strTemp takes precedence if it's valid
+        If Not String.IsNullOrEmpty(strTemp) AndAlso strTempSelectedVariable <> strTemp Then
+            strTempSelectedVariable = strTemp
+        End If
+
+        ' Add the selected variable to the receiver
+        ucrReceiverLabels.Add(strTempSelectedVariable, strDataName)
+    End Sub
+
     Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkIncludeLevelNumbers.ControlValueChanged
 
         'only add levels if indicated by the user
@@ -185,6 +230,12 @@ Public Class dlgLabelsLevels
         cmdAddLevel.Enabled = Not ucrReceiverLabels.IsEmpty
         CountLevels()
         TestOKEnabled()
+
     End Sub
 
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlContentsChanged
+        TestOKEnabled()
+        ucrReceiverLabels.SetMeAsReceiver()
+        clsDummyFunction.AddParameter("strVal", ucrReceiverLabels.GetVariableNames(False))
+    End Sub
 End Class
