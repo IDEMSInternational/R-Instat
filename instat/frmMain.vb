@@ -886,6 +886,18 @@ Public Class frmMain
 
     Private Sub mnuTbLast10Dialogs_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLast10Dialogs.ButtonClick
         If clsRecentItems.lstRecentDialogs.Count > 0 Then
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgReorderLevels" Then
+                SetDefaultValueInReorderLevels()
+            End If
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgRecodeFactor" Then
+                SetDefaultValueInReorderLevels()
+            End If
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgDummyVariables" Then
+                SetDefaultValueInReorderLevels()
+            End If
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgLabelsLevels" Then
+                SetDefaultValueInReorderLevels()
+            End If
             clsRecentItems.lstRecentDialogs.Last.ShowDialog()
         End If
     End Sub
@@ -929,6 +941,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click
+        SetDefaultValueInReorderLevels()
         dlgRecodeFactor.ShowDialog()
     End Sub
 
@@ -957,6 +970,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorLevelsLabels.Click
+        SetDefaultValueInReorderLevels()
         dlgLabelsLevels.ShowDialog()
     End Sub
 
@@ -965,7 +979,21 @@ Public Class frmMain
         dlgConvertColumns.ShowDialog()
     End Sub
 
+    Public Sub SetDefaultValueInReorderLevels()
+        Dim strSelectedColumn As String = ""
+        If Not String.IsNullOrEmpty(ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow) AndAlso ucrColumnMeta.IsVisible Then
+            strSelectedColumn = ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow
+        ElseIf Not String.IsNullOrEmpty(ucrDataViewer.GetFirstSelectedColumnName) Then
+            strSelectedColumn = ucrDataViewer.GetFirstSelectedColumnName
+        End If
+        dlgReorderLevels.SelectedColumn = strSelectedColumn
+        dlgRecodeFactor.SelectedColumn = strSelectedColumn
+        dlgDummyVariables.SelectedColumn = strSelectedColumn
+        dlgLabelsLevels.SelectedColumn = strSelectedColumn
+    End Sub
+
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
+        SetDefaultValueInReorderLevels()
         dlgReorderLevels.ShowDialog()
     End Sub
 
