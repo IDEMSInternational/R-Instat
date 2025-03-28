@@ -53,6 +53,7 @@ Partial Class dlgThreeVariablePivotTable
         Me.rdoColumns = New System.Windows.Forms.RadioButton()
         Me.ucrNudPositionVarRows = New instat.ucrNud()
         Me.ucrPnlVariables = New instat.UcrPanel()
+        Me.grpDisplay = New System.Windows.Forms.GroupBox()
         Me.SuspendLayout()
         '
         'lblInitialColumnFactor
@@ -332,7 +333,7 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrNudPositionVarCols.AutoSize = True
         Me.ucrNudPositionVarCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPositionVarCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPositionVarCols.Location = New System.Drawing.Point(155, 387)
+        Me.ucrNudPositionVarCols.Location = New System.Drawing.Point(155, 417)
         Me.ucrNudPositionVarCols.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudPositionVarCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPositionVarCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -344,7 +345,7 @@ Partial Class dlgThreeVariablePivotTable
         'rdoRows
         '
         Me.rdoRows.AutoSize = True
-        Me.rdoRows.Location = New System.Drawing.Point(23, 419)
+        Me.rdoRows.Location = New System.Drawing.Point(23, 388)
         Me.rdoRows.Name = "rdoRows"
         Me.rdoRows.Size = New System.Drawing.Size(115, 17)
         Me.rdoRows.TabIndex = 78
@@ -355,7 +356,7 @@ Partial Class dlgThreeVariablePivotTable
         'rdoColumns
         '
         Me.rdoColumns.AutoSize = True
-        Me.rdoColumns.Location = New System.Drawing.Point(23, 388)
+        Me.rdoColumns.Location = New System.Drawing.Point(23, 419)
         Me.rdoColumns.Name = "rdoColumns"
         Me.rdoColumns.Size = New System.Drawing.Size(128, 17)
         Me.rdoColumns.TabIndex = 79
@@ -368,7 +369,7 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrNudPositionVarRows.AutoSize = True
         Me.ucrNudPositionVarRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPositionVarRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPositionVarRows.Location = New System.Drawing.Point(155, 417)
+        Me.ucrNudPositionVarRows.Location = New System.Drawing.Point(155, 387)
         Me.ucrNudPositionVarRows.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudPositionVarRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPositionVarRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -384,6 +385,15 @@ Partial Class dlgThreeVariablePivotTable
         Me.ucrPnlVariables.Name = "ucrPnlVariables"
         Me.ucrPnlVariables.Size = New System.Drawing.Size(139, 48)
         Me.ucrPnlVariables.TabIndex = 81
+        '
+        'grpDisplay
+        '
+        Me.grpDisplay.Location = New System.Drawing.Point(9, 367)
+        Me.grpDisplay.Name = "grpDisplay"
+        Me.grpDisplay.Size = New System.Drawing.Size(200, 100)
+        Me.grpDisplay.TabIndex = 82
+        Me.grpDisplay.TabStop = False
+        Me.grpDisplay.Text = "Position of Variables"
         '
         'dlgThreeVariablePivotTable
         '
@@ -419,6 +429,7 @@ Partial Class dlgThreeVariablePivotTable
         Me.Controls.Add(Me.ucrChkNumericVariable)
         Me.Controls.Add(Me.lblVariables)
         Me.Controls.Add(Me.ucrPnlVariables)
+        Me.Controls.Add(Me.grpDisplay)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -459,4 +470,5 @@ Partial Class dlgThreeVariablePivotTable
     Friend WithEvents rdoRows As RadioButton
     Friend WithEvents ucrNudPositionVarRows As ucrNud
     Friend WithEvents ucrPnlVariables As UcrPanel
+    Friend WithEvents grpDisplay As GroupBox
 End Class

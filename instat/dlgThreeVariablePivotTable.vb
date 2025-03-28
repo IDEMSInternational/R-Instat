@@ -133,7 +133,6 @@ Public Class dlgThreeVariablePivotTable
         ucrInputTableChart.SetLinkedDisplayControl(lblTableChart)
         ucrInputTableChart.SetName("Table")
 
-
         ucrInputSummary.SetParameter(New RParameter("aggregatorName", iNewPosition:=6))
         ucrInputSummary.SetItems({"Average", "Count Unique Values", "List Unique Values", "Sum", "Integer Sum",
                                     "Count", "Median", "Sample Variance", "Sample Standard Deviation", "Minimum",
@@ -146,7 +145,6 @@ Public Class dlgThreeVariablePivotTable
         ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleAddRows, ucrPnlVariables}, {rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlOptions.AddToLinkedControls({ucrChkIncludeSubTotals, ucrReceiverInitialColumnFactor, ucrChkSelectedVariable}, {rdoSingle, rdoMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
 
         ucrSavePivot.SetPrefix("pivot_table")
         ucrSavePivot.SetSaveType(RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
@@ -177,8 +175,7 @@ Public Class dlgThreeVariablePivotTable
         clsDummyFunction.AddParameter("checked", "single", iPosition:=1)
         clsDummyFunction.AddParameter("total", "False", iPosition:=2)
         clsDummyFunction.AddParameter("renderer", "False", iPosition:=3)
-        clsDummyFunction.AddParameter("check", "cols", iPosition:=4)
-
+        clsDummyFunction.AddParameter("check", "rows", iPosition:=4)
 
         clsRelevelPasteFunction.SetRCommand("return_variable_levels")
         clsRelevelPasteFunction.SetAssignTo("relevel_variables")
@@ -219,12 +216,12 @@ Public Class dlgThreeVariablePivotTable
         ucrChkSelectedVariable.SetRCode(clsRPivotTableFunction, bReset)
         ucrChkFactorsOrder.SetRCode(clsDummyFunction, bReset)
         ucrPnlOptions.SetRCode(clsDummyFunction, bReset)
-        ucrNudPositionVarCols.SetRCode(clsRPivotTableFunction, bReset)
-        ucrNudPositionVarRows.SetRCode(clsRPivotTableFunction, bReset)
         If bReset Then
             ucrChkIncludeSubTotals.SetRCode(clsDummyFunction, bReset)
             ucrChkNumericVariable.SetRCode(clsDummyFunction, bReset)
             ucrPnlVariables.SetRCode(clsDummyFunction, bReset)
+            ucrNudPositionVarCols.SetRCode(clsRPivotTableFunction, bReset)
+            ucrNudPositionVarRows.SetRCode(clsRPivotTableFunction, bReset)
         End If
         bRcodeSet = True
         SetFactorSortingOrder()
@@ -252,7 +249,6 @@ Public Class dlgThreeVariablePivotTable
             ucrBase.OKEnabled(False)
         End If
     End Sub
-
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -513,14 +509,17 @@ Public Class dlgThreeVariablePivotTable
             Me.Size = New Size(433, 606)
             Me.ucrBase.Location = New Point(9, 510)
             ucrSavePivot.Location = New Point(9, 480)
+            grpDisplay.Visible = False
         ElseIf rdoMultiple.Checked Then
             Me.Size = New Size(433, 606)
             Me.ucrBase.Location = New Point(9, 510)
             ucrSavePivot.Location = New Point(9, 480)
+            grpDisplay.Visible = True
         Else
             Me.Size = New Size(433, 430)
             Me.ucrBase.Location = New Point(9, 400)
             ucrSavePivot.Location = New Point(9, 370)
+            grpDisplay.Visible = False
         End If
     End Sub
 
@@ -589,7 +588,7 @@ Public Class dlgThreeVariablePivotTable
         If lstColVars.Count > 0 Then clsRPivotTableFunction.AddParameter("cols", strColVars, iPosition:=2)
     End Sub
 
-    Private Sub ucrNudPositionVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudPositionVarCols.ControlValueChanged
+    Private Sub ucrNudPositionVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudPositionVarCols.ControlValueChanged, ucrNudPositionVarRows.ControlValueChanged
         AddingVariable()
     End Sub
 
