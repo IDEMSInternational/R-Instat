@@ -1804,6 +1804,17 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's links. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
+    '''
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function GetRankingNames(Optional strDataFrameName As String = "") As List(Of String)
+        Return GetNames(strDataFrameName, "$get_ranking_names")
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets the table, filter, graph, key, surv or link names of the <paramref name="strDataFrameName"/> 
     '''             data frame depending on the <paramref name="strRCommand"/>. </summary>
     '''

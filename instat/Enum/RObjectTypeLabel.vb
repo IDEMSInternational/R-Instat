@@ -12,6 +12,6 @@ Public Structure RObjectTypeLabel
     Public Const Graph As String = "graph"
     Public Const Table As String = "table"
     Public Const Model As String = "model"
-    Public Const StructureLabel As String = "structure" ' e.g Survival objects
+    Public Const StructureLabel As String = "structure" ' e.g Survival, ranking, grouped_ranking objects
     Public Const Summary As String = "summary" ' e.g objects of text formats
 End Structure

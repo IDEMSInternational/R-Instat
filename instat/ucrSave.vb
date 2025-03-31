@@ -19,7 +19,7 @@ Imports instat.Translations
 ''' <summary>   This control allows the user to specify how an object should be saved. 
 '''             <para>
 '''             This control can save the following types of objects: 'column', 'dataframe', 
-'''             'graph', model', 'surv', 'table'.
+'''             'graph', model', 'surv', 'ranking', 'grouped_ranking', or 'table'.
 '''             The user can enter/update the name of the saved object via a text box or combo box.
 '''             A combo box may be used to display a list of possible save names (e.g. the existing 
 '''             column names).
@@ -55,7 +55,7 @@ Public Class ucrSave
     '''             (mutually exclusive with bShowCheckBox, see note above) 
     Private bShowLabel As Boolean = False 'TODO SJL 04/06/20 always set to the opposite of bShowCheckBox. Remove bShowLabel? May be an edge case (not yet implemented) want save/combo box with neither label or check box (e.g. if you want a separate label somewhere else in the dialog)
     ''' <summary>   Type of object saved by this control 
-    '''             (valid values are: 'column', 'dataframe', 'graph', model', 'surv', 'table') 
+    '''             (valid values are: 'column', 'dataframe', 'graph', model', 'surv', 'ranking', 'grouped_ranking', 'table') 
     '''             </summary>
     Private _strRObjectLabel As String = "column"
     Private _strRObjectFormat As String
@@ -372,7 +372,7 @@ Public Class ucrSave
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets save type to <paramref name="strRObjectType"/>. Valid values are: 
-    '''             "column", "dataframe", "graph", "model", "surv" or "table".
+    '''             "column", "dataframe", "graph", "model", "surv", "ranking", "group_ranking", or "table".
     '''             Sets the combobox and textbox to be the same type.
     '''             If type is "column" then makes the 'position' button visible, else makes it not
     '''             visible. This is because the position functionality is currently only 
@@ -382,7 +382,7 @@ Public Class ucrSave
     '''             </summary>
     '''
     ''' <param name="strRObjectType">  The type of object saved by this control. Valid values are: 
-    '''                         "column", "dataframe", "graph", "model", "surv" or "table". 
+    '''                         "column", "dataframe", "graph", "model", "surv", "ranking", "group_ranking", or "table". 
     '''                         An invalid value throws a developer error.</param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SetSaveType(strRObjectType As String, Optional strRObjectFormat As String = "")
@@ -453,6 +453,22 @@ Public Class ucrSave
     ''' </summary>
     Public Sub SetSaveTypeAsSurv()
         'assumption is by default a survival is in text format
+        SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+    ''' <summary>   
+    ''' Sets save type as ranking. 
+    ''' todo. deprecate
+    ''' </summary>
+    Public Sub SetSaveTypeAsRanking()
+        'assumption is by default a ranking is in text format
+        SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
+    End Sub
+    ''' <summary>   
+    ''' Sets save type as grouped ranking. 
+    ''' todo. deprecate
+    ''' </summary>
+    Public Sub SetSaveTypeAsGroupedRanking()
+        'assumption is by default a grouped ranking is in text format
         SetSaveType(strRObjectType:=RObjectTypeLabel.StructureLabel, strRObjectFormat:=RObjectFormat.Text)
     End Sub
     ''' <summary>   
