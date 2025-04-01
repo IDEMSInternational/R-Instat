@@ -80,7 +80,7 @@ Public Class dlgOptions
         ucrChkViewStructuredMenu.SetText("Show Structured Menu")
         ucrChkViewClimaticMenu.SetText("Show Climatic Menu")
         ucrChkViewProcurementMenu.SetText("Show Procurement Menu")
-        ucrChkViewOptionsByContextMenu.SetText("Show Options By Context Menu")
+        ucrChkViewOptionsByContextMenu.SetText("Show Experiments Menu")
         ucrChkShowRCommandsinOutputWindow.SetText("Show R Commands in Output Window")
         ucrChkShowSignifStars.SetText("Show stars on summary tables for coefficients")
         ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
