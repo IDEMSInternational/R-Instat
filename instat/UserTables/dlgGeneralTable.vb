@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsSpannerFunction, clsEvererythingFunction, clsPivotLongerFunction, clsSelectFunction, clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderMulFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
+    Private clsArrangeFunction, clsSpannerFunction, clsEvererythingFunction, clsPivotLongerFunction, clsSelectFunction, clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderMulFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -54,7 +54,7 @@ Public Class dlgGeneralTable
         ucrPnlPosition.AddRadioButton(rdoAscolumn)
         ucrPnlPosition.AddRadioButton(rdoAsrow)
 
-        ucrPnlPosition.AddParameterValuesCondition(rdoAscolumn, "check", "Column")
+        ucrPnlPosition.AddParameterValuesCondition(rdoAscolumn, "check", "column")
         ucrPnlPosition.AddParameterValuesCondition(rdoAsrow, "check", "row")
 
         ucrPnlPosition.AddToLinkedControls(ucrNudColumn, {rdoAscolumn}, bNewLinkedHideIfParameterMissing:=True)
@@ -148,6 +148,7 @@ Public Class dlgGeneralTable
         clsPivotLongerFunction = New RFunction
         clsEvererythingFunction = New RFunction
         clsSpannerFunction = New RFunction
+        clsArrangeFunction = New RFunction
 
         ucrSelectorCols.Reset()
         ucrSaveTable.Reset()
@@ -169,7 +170,7 @@ Public Class dlgGeneralTable
 
         clsDummyFunction.AddParameter("checked", "Single", iPosition:=0)
         clsDummyFunction.AddParameter("theme", "False", iPosition:=1)
-        clsDummyFunction.AddParameter("check", "row", iPosition:=2)
+        clsDummyFunction.AddParameter("check", "column", iPosition:=2)
 
         clsHeadRFunction.SetPackageName("utils")
         clsHeadRFunction.SetRCommand("head")
@@ -219,6 +220,9 @@ Public Class dlgGeneralTable
         clsSpannerFunction.SetRCommand("tab_spanner_delim")
         clsSpannerFunction.AddParameter("delim", Chr(34) & "__" & Chr(34), iPosition:=0)
 
+        clsArrangeFunction.SetPackageName("dplyr")
+        clsArrangeFunction.SetRCommand("arrange")
+
         Dim strGroupParamValue As String = "title"
         clsCellsTitleRFunction.SetPackageName("gt")
         clsCellsTitleRFunction.SetRCommand("cells_title")
@@ -252,6 +256,7 @@ Public Class dlgGeneralTable
         Updateparameter()
         AddRemoveThemes()
         AddingSummaryType()
+        AddRemovespanner()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -268,6 +273,9 @@ Public Class dlgGeneralTable
         AddRemovePivotwider()
         AddRemoveThemes()
         AddingSummaryType()
+        AddRemoveArrange()
+        HidePosition()
+        AddRemovespanner()
     End Sub
 
     Private Sub AddRemovePivotwider()
@@ -285,8 +293,8 @@ Public Class dlgGeneralTable
             Updateparameter()
             clsPivotWiderFunction.AddParameter("values_from", ucrReceiverSingleVariable.GetVariableNames(False), iPosition:=1)
             clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataSingleFunction, iPosition:=0, bIncludeArgumentName:=False)
-            clsBaseOperator.AddParameter("pivot_wider", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=1)
-            clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=2)
+            clsBaseOperator.AddParameter("pivot_wider", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=2)
+            clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=3)
         ElseIf rdoMultiple.Checked Then
             clsBaseOperator.RemoveParameterByName("head")
             clsBaseOperator.RemoveParameterByName("gt")
@@ -294,10 +302,10 @@ Public Class dlgGeneralTable
             clsPivotLongerFunction.AddParameter("cols", ucrReceiverMultipleVariablesMul.GetVariableNames(), iPosition:=0)
             clsPivotWiderMulFunction.AddParameter("values_from", Chr(34) & "value" & Chr(34), iPosition:=3)
             clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataMultipleFunction, iPosition:=0, bIncludeArgumentName:=False)
-            clsBaseOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=1)
-            clsBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
-            clsBaseOperator.AddParameter("pivot_wider_mul", clsRFunctionParameter:=clsPivotWiderMulFunction, iPosition:=3)
-            clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=4)
+            clsBaseOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=2)
+            clsBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=3)
+            clsBaseOperator.AddParameter("pivot_wider_mul", clsRFunctionParameter:=clsPivotWiderMulFunction, iPosition:=4)
+            clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=5)
         Else
             ucrChkPreview.Checked = True
             AddRemoveHead()
@@ -307,6 +315,22 @@ Public Class dlgGeneralTable
             clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataFunction, iPosition:=0, bIncludeArgumentName:=False)
             clsBaseOperator.AddParameter("gt", clsRFunctionParameter:=clsGtRFunction, iPosition:=2, bIncludeArgumentName:=False)
         End If
+    End Sub
+
+    Private Sub AddRemoveArrange()
+        If rdoSingle.Checked OrElse rdoMultiple.Checked Then
+            Dim lstArrangeRowVars As String = ucrReceiverMultipleRowFactors.GetVariableNames(False)
+            ' Supposons que les noms des variables soient séparés par des virgules dans la chaîne retournée
+            Dim formattedArrangeRowVars As String = lstArrangeRowVars.Replace("c(", "").Replace(")", "").Replace("""", "")
+            clsArrangeFunction.AddParameter("x", formattedArrangeRowVars, iPosition:=0, bIncludeArgumentName:=False)
+            clsBaseOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=1)
+        Else
+            clsBaseOperator.RemoveParameterByName("arrange")
+        End If
+    End Sub
+
+    Private Sub HidePosition()
+        grpPosition.Visible = rdoMultiple.Checked
     End Sub
 
     Private Sub AddingSummaryType()
@@ -322,6 +346,8 @@ Public Class dlgGeneralTable
         ' If rdoMultiple is checked, insert "variable" correctly based on rdoCols and rdoRows
         If rdoMultiple.Checked Then
             If rdoAscolumn.Checked Then
+                ' Remove "summary_type" from lstRowVars
+                lstRowVars.Remove("""summary_type""")
                 ' "variable" should be added to cols at the specified position
                 If positionVarCols <= lstColVars.Count Then
                     lstColVars.Insert(Math.Max(0, positionVarCols - 1), """summary_type""")
@@ -329,6 +355,8 @@ Public Class dlgGeneralTable
                     lstColVars.Add("""summary_type""")
                 End If
             ElseIf rdoAsrow.Checked Then
+                ' Remove "summary_type" from lstColVars
+                lstColVars.Remove("""summary_type""")
                 ' "variable" should be added to rows at the specified position
                 If positionVarRows <= lstRowVars.Count Then
                     lstRowVars.Insert(Math.Max(0, positionVarRows - 1), """summary_type""")
@@ -336,6 +364,10 @@ Public Class dlgGeneralTable
                     lstRowVars.Add("""summary_type""")
                 End If
             End If
+        Else
+            clsBaseOperator.RemoveParameterByName("pivot_wider_mul")
+            clsBaseOperator.RemoveParameterByName("select")
+            clsBaseOperator.RemoveParameterByName("spanner")
         End If
 
         ' Ensure correct formatting for rows and cols
@@ -344,15 +376,28 @@ Public Class dlgGeneralTable
 
         ' Add parameters while preventing c(c(...))
         If rdoAsrow.Checked Then
-            clsBaseOperator.RemoveParameterByName("spanner")
             clsPivotWiderMulFunction.RemoveParameterByName("names_sep")
             If lstRowVars.Count > 0 Then clsSelectFunction.AddParameter("rows", strRowVars, iPosition:=0, bIncludeArgumentName:=False)
-            clsBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=2)
+            clsPivotWiderMulFunction.AddParameter("names_from", ucrReceiverMultipleColFactor.GetVariableNames(), iPosition:=0)
+            clsBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=3)
         Else
             clsBaseOperator.RemoveParameterByName("select")
             clsPivotWiderMulFunction.AddParameter("names_sep", Chr(34) & "__" & Chr(34), iPosition:=2)
             If lstColVars.Count > 0 Then clsPivotWiderMulFunction.AddParameter("names_from", strColVars, iPosition:=0)
-            clsBaseOperator.AddParameter("spanner", clsRFunctionParameter:=clsSpannerFunction, iPosition:=5)
+        End If
+    End Sub
+
+    Private Sub AddRemovespanner()
+        If rdoMultiple.Checked Then
+            If rdoAscolumn.Checked Then
+                clsBaseOperator.RemoveParameterByName("select")
+                clsBaseOperator.AddParameter("spanner", clsRFunctionParameter:=clsSpannerFunction, iPosition:=6)
+            Else
+                clsBaseOperator.RemoveParameterByName("spanner")
+            End If
+        Else
+            clsBaseOperator.RemoveParameterByName("select")
+            clsBaseOperator.RemoveParameterByName("spanner")
         End If
     End Sub
 
@@ -390,21 +435,21 @@ Public Class dlgGeneralTable
                 Dim rowFactorVars As String = ucrReceiverMultipleRowFactors.GetVariableNames(False)
                 Dim singleVar As String = ucrReceiverSingleVariable.GetVariableNames(False)
 
-                ' Function to clean and split variable strings into unique values
-                Dim cleanVars As Func(Of String, IEnumerable(Of String)) = Function(varString)
-                                                                               If String.IsNullOrEmpty(varString) Then Return New List(Of String)()
-                                                                               Return varString.Replace("c(", "").Replace(")", "").Trim().
-                    Split(","c).Select(Function(v) v.Trim()).
-                    Where(Function(v) Not String.IsNullOrEmpty(v)).
-                    Distinct()
-                                                                           End Function
-                ' Combine all variables and remove duplicates
-                Dim allVars As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
-                allVars.UnionWith(cleanVars(colFactorVars))
-                allVars.UnionWith(cleanVars(rowFactorVars))
-                allVars.UnionWith(cleanVars(singleVar))
+                ' Function to clean and split variable strings while keeping duplicates
+                Dim cleanVars As Func(Of String, List(Of String)) = Function(varString)
+                                                                        If String.IsNullOrEmpty(varString) Then Return New List(Of String)()
+                                                                        Return varString.Replace("c(", "").Replace(")", "").Trim().
+                                Split(","c).Select(Function(v) v.Trim()).
+                                Where(Function(v) Not String.IsNullOrEmpty(v)).
+                                ToList()
+                                                                    End Function
+                ' Combine all variables and keep duplicates
+                Dim allVars As New List(Of String)
+                allVars.AddRange(cleanVars(colFactorVars))
+                allVars.AddRange(cleanVars(rowFactorVars))
+                allVars.AddRange(cleanVars(singleVar))
 
-                ' Set col_name with unique values
+                ' Set col_name with all values including duplicates
                 Dim result As String = "c(" & String.Join(",", allVars.Select(Function(v) """" & v & """")) & ")"
                 clsGetdataSingleFunction.AddParameter("col_name", result)
 
@@ -423,21 +468,21 @@ Public Class dlgGeneralTable
                 Dim rowFactorVars As String = ucrReceiverMultipleRowFactors.GetVariableNames(False)
                 Dim singleVar As String = ucrReceiverMultipleVariablesMul.GetVariableNames(False)
 
-                ' Function to clean and split variable strings into unique values
-                Dim cleanVars As Func(Of String, IEnumerable(Of String)) = Function(varString)
-                                                                               If String.IsNullOrEmpty(varString) Then Return New List(Of String)()
-                                                                               Return varString.Replace("c(", "").Replace(")", "").Trim().
-                    Split(","c).Select(Function(v) v.Trim()).
-                    Where(Function(v) Not String.IsNullOrEmpty(v)).
-                    Distinct()
-                                                                           End Function
-                ' Combine all variables and remove duplicates
-                Dim allVars As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
-                allVars.UnionWith(cleanVars(colFactorVars))
-                allVars.UnionWith(cleanVars(rowFactorVars))
-                allVars.UnionWith(cleanVars(singleVar))
+                ' Function to clean and split variable strings while keeping duplicates
+                Dim cleanVars As Func(Of String, List(Of String)) = Function(varString)
+                                                                        If String.IsNullOrEmpty(varString) Then Return New List(Of String)()
+                                                                        Return varString.Replace("c(", "").Replace(")", "").Trim().
+                                Split(","c).Select(Function(v) v.Trim()).
+                                Where(Function(v) Not String.IsNullOrEmpty(v)).
+                                ToList()
+                                                                    End Function
+                ' Combine all variables and keep duplicates
+                Dim allVars As New List(Of String)
+                allVars.AddRange(cleanVars(colFactorVars))
+                allVars.AddRange(cleanVars(rowFactorVars))
+                allVars.AddRange(cleanVars(singleVar))
 
-                ' Set col_name with unique values
+                ' Set col_name with all values including duplicates
                 Dim result As String = "c(" & String.Join(",", allVars.Select(Function(v) """" & v & """")) & ")"
                 clsGetdataMultipleFunction.AddParameter("col_name", result)
 
@@ -553,6 +598,7 @@ Public Class dlgGeneralTable
         MinMaxValRowVariable()
         MinMaxValVariable()
         AddingSummaryType()
+        AddRemoveArrange()
     End Sub
 
     Private Sub ucrNudRow_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRow.ControlValueChanged
@@ -563,6 +609,8 @@ Public Class dlgGeneralTable
         AddingSummaryType()
         MinMaxValRowVariable()
         MinMaxValVariable()
+        HidePosition()
+        AddRemovespanner()
     End Sub
 
     Private Sub ucrNudColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudColumn.ControlValueChanged
