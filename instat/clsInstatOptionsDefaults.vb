@@ -18,10 +18,10 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTbIncludeRDefaultParameters As Boolean = False
     Public Shared ReadOnly DEFAULTbCommandsinOutput As Boolean = False
     Public Shared ReadOnly DEFAULTbIncludeCommentDefault As Boolean = True
-    Public Shared ReadOnly DEFAULTbShowProcurementMenu As Boolean = True
+    Public Shared ReadOnly DEFAULTbShowProcurementMenu As Boolean = False
     Public Shared ReadOnly DEFAULTbShowClimaticMenu As Boolean = True
-    Public Shared ReadOnly DEFAULTbShowStructuredMenu As Boolean = True
-    Public Shared ReadOnly DEFAULTbShowOptionsByContextMenu As Boolean = True
+    Public Shared ReadOnly DEFAULTbShowStructuredMenu As Boolean = False
+    Public Shared ReadOnly DEFAULTbShowOptionsByContextMenu As Boolean = False
     Public Shared ReadOnly DEFAULTfntOutput As Font = New Font(FontFamily.GenericMonospace, 11, FontStyle.Regular)
     Public Shared ReadOnly DEFAULTclrOutput As Color = Color.Blue
     Public Shared ReadOnly DEFAULTfntComment As Font = New Font(FontFamily.GenericSansSerif, 11, FontStyle.Regular)

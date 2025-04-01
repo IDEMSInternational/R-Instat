@@ -320,12 +320,6 @@ Public Class ucrColumnMetadata
         EndWait()
     End Sub
 
-    Private Sub mnuConvertToLogical_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogical.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToLogical(GetSelectedDataframeColumnsFromSelectedRows)
-        EndWait()
-    End Sub
-
     Private Sub mnuClearColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuClearColumnFilter.Click
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentFilter()
@@ -347,7 +341,11 @@ Public Class ucrColumnMetadata
         Cursor = Cursors.Default
     End Sub
 
-    Private Function GetFirstSelectedDataframeColumnFromSelectedRow() As String
+    Public Function IsVisible() As Boolean
+        Return _grid.bVisible
+    End Function
+
+    Public Function GetFirstSelectedDataframeColumnFromSelectedRow() As String
         Return _grid.GetCellValue(_grid.GetSelectedRows(0) - 1, strNameLabel)
     End Function
 
@@ -522,4 +520,9 @@ Public Class ucrColumnMetadata
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
     End Sub
 
+    Private Sub mnuConvertToDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
+        dlgMakeDate.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
+        dlgMakeDate.enumMakedateMode = dlgMakeDate.MakedateMode.Column
+        dlgMakeDate.ShowDialog()
+    End Sub
 End Class
