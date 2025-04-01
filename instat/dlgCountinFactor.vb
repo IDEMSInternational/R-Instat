@@ -32,6 +32,7 @@ Public Class dlgCountinFactor
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
+        AutoFillReceiverWithFirstFactor()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -53,6 +54,7 @@ Public Class dlgCountinFactor
         ucrNewColName.SetDataFrameSelector(ucrCountSelector.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")
         ucrNewColName.setLinkedReceiver(ucrCountReceiver)
+        AutoFillReceiverWithFirstFactor()
     End Sub
 
     Private Sub SetDefaults()
@@ -70,6 +72,9 @@ Public Class dlgCountinFactor
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If bReset Then
+            AutoFillReceiverWithFirstFactor()
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -86,7 +91,40 @@ Public Class dlgCountinFactor
         TestOkEnabled()
     End Sub
 
+    Private Sub AutoFillReceiverWithFirstFactor()
+        ' Check if a data frame is selected
+        If Not String.IsNullOrEmpty(ucrCountSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) Then
+            Dim strDataFrame As String = ucrCountSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+
+            ' Retrieve all variables in the selector (extracting text from ListViewItem objects)
+            Dim availableFactors As List(Of String) = New List(Of String)
+            For Each item As ListViewItem In ucrCountSelector.lstAvailableVariable.Items
+                availableFactors.Add(item.Text) ' Extract the text property of each ListViewItem
+            Next
+            ' If factors are available, add the first one to the receiver
+            If availableFactors IsNot Nothing AndAlso availableFactors.Count > 0 Then
+                Dim firstFactor As String = availableFactors(0).Trim()
+
+                ' Prevent recursion by checking if the receiver already has the first factor
+                If ucrCountReceiver.GetVariableNames() <> firstFactor Then
+                    RemoveHandler ucrCountReceiver.ControlContentsChanged, AddressOf ucrCountReceiver_ControlContentsChanged
+
+                    Try
+                        ucrCountReceiver.Add(firstFactor, strDataFrame) ' Add the first factor to the receiver
+
+                    Finally
+                        AddHandler ucrCountReceiver.ControlContentsChanged, AddressOf ucrCountReceiver_ControlContentsChanged
+                    End Try
+                End If
+            End If
+        End If
+    End Sub
+
     Private Sub ucrCountReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCountReceiver.ControlContentsChanged, ucrNewColName.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrCountSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCountSelector.ControlValueChanged
+        AutoFillReceiverWithFirstFactor()
     End Sub
 End Class
