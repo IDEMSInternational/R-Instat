@@ -84,7 +84,7 @@ Partial Class dlgGeneralTable
         Me.grpBoxTitle.Controls.Add(Me.btnTitleStyle)
         Me.grpBoxTitle.Controls.Add(Me.lblHeaderTitle)
         Me.grpBoxTitle.Controls.Add(Me.ucrInputTitleFooter)
-        Me.grpBoxTitle.Location = New System.Drawing.Point(7, 451)
+        Me.grpBoxTitle.Location = New System.Drawing.Point(9, 377)
         Me.grpBoxTitle.Name = "grpBoxTitle"
         Me.grpBoxTitle.Size = New System.Drawing.Size(463, 101)
         Me.grpBoxTitle.TabIndex = 34
@@ -203,7 +203,7 @@ Partial Class dlgGeneralTable
         '
         Me.ucrChkSelectTheme.AutoSize = True
         Me.ucrChkSelectTheme.Checked = False
-        Me.ucrChkSelectTheme.Location = New System.Drawing.Point(9, 312)
+        Me.ucrChkSelectTheme.Location = New System.Drawing.Point(9, 330)
         Me.ucrChkSelectTheme.Name = "ucrChkSelectTheme"
         Me.ucrChkSelectTheme.Size = New System.Drawing.Size(94, 23)
         Me.ucrChkSelectTheme.TabIndex = 33
@@ -214,7 +214,7 @@ Partial Class dlgGeneralTable
         Me.ucrCboSelectThemes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrCboSelectThemes.GetSetSelectedIndex = -1
         Me.ucrCboSelectThemes.IsReadOnly = False
-        Me.ucrCboSelectThemes.Location = New System.Drawing.Point(93, 312)
+        Me.ucrCboSelectThemes.Location = New System.Drawing.Point(93, 330)
         Me.ucrCboSelectThemes.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrCboSelectThemes.Name = "ucrCboSelectThemes"
         Me.ucrCboSelectThemes.Size = New System.Drawing.Size(168, 21)
@@ -247,7 +247,7 @@ Partial Class dlgGeneralTable
         'ucrSaveTable
         '
         Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 562)
+        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 493)
         Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTable.Name = "ucrSaveTable"
         Me.ucrSaveTable.Size = New System.Drawing.Size(319, 24)
@@ -256,7 +256,7 @@ Partial Class dlgGeneralTable
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 597)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 528)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -371,7 +371,7 @@ Partial Class dlgGeneralTable
         Me.ucrNudRow.AutoSize = True
         Me.ucrNudRow.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRow.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRow.Location = New System.Drawing.Point(184, 49)
+        Me.ucrNudRow.Location = New System.Drawing.Point(184, 20)
         Me.ucrNudRow.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRow.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRow.Name = "ucrNudRow"
@@ -390,7 +390,7 @@ Partial Class dlgGeneralTable
         'rdoAscolumn
         '
         Me.rdoAscolumn.AutoSize = True
-        Me.rdoAscolumn.Location = New System.Drawing.Point(17, 23)
+        Me.rdoAscolumn.Location = New System.Drawing.Point(17, 54)
         Me.rdoAscolumn.Name = "rdoAscolumn"
         Me.rdoAscolumn.Size = New System.Drawing.Size(65, 17)
         Me.rdoAscolumn.TabIndex = 146
@@ -401,7 +401,7 @@ Partial Class dlgGeneralTable
         'rdoAsrow
         '
         Me.rdoAsrow.AutoSize = True
-        Me.rdoAsrow.Location = New System.Drawing.Point(17, 52)
+        Me.rdoAsrow.Location = New System.Drawing.Point(17, 23)
         Me.rdoAsrow.Name = "rdoAsrow"
         Me.rdoAsrow.Size = New System.Drawing.Size(52, 17)
         Me.rdoAsrow.TabIndex = 147
@@ -414,7 +414,7 @@ Partial Class dlgGeneralTable
         Me.ucrNudColumn.AutoSize = True
         Me.ucrNudColumn.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColumn.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudColumn.Location = New System.Drawing.Point(184, 23)
+        Me.ucrNudColumn.Location = New System.Drawing.Point(184, 54)
         Me.ucrNudColumn.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudColumn.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColumn.Name = "ucrNudColumn"
@@ -442,18 +442,18 @@ Partial Class dlgGeneralTable
         Me.grpPosition.Controls.Add(Me.ucrPnlPosition)
         Me.grpPosition.Controls.Add(Me.ucrNudRow)
         Me.grpPosition.Controls.Add(Me.ucrNudColumn)
-        Me.grpPosition.Location = New System.Drawing.Point(9, 352)
+        Me.grpPosition.Location = New System.Drawing.Point(9, 392)
         Me.grpPosition.Name = "grpPosition"
-        Me.grpPosition.Size = New System.Drawing.Size(252, 89)
+        Me.grpPosition.Size = New System.Drawing.Size(285, 89)
         Me.grpPosition.TabIndex = 150
         Me.grpPosition.TabStop = False
-        Me.grpPosition.Text = "Position of Variable"
+        Me.grpPosition.Text = "Position of Variables"
         '
         'dlgGeneralTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(476, 656)
+        Me.ClientSize = New System.Drawing.Size(476, 588)
         Me.Controls.Add(Me.grpPosition)
         Me.Controls.Add(Me.ucrReceiverMultipleColFactor)
         Me.Controls.Add(Me.lblVariblesMul)
