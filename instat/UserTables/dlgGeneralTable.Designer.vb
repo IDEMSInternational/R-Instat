@@ -84,7 +84,7 @@ Partial Class dlgGeneralTable
         Me.grpBoxTitle.Controls.Add(Me.btnTitleStyle)
         Me.grpBoxTitle.Controls.Add(Me.lblHeaderTitle)
         Me.grpBoxTitle.Controls.Add(Me.ucrInputTitleFooter)
-        Me.grpBoxTitle.Location = New System.Drawing.Point(9, 377)
+        Me.grpBoxTitle.Location = New System.Drawing.Point(9, 496)
         Me.grpBoxTitle.Name = "grpBoxTitle"
         Me.grpBoxTitle.Size = New System.Drawing.Size(463, 101)
         Me.grpBoxTitle.TabIndex = 34
@@ -247,7 +247,7 @@ Partial Class dlgGeneralTable
         'ucrSaveTable
         '
         Me.ucrSaveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 493)
+        Me.ucrSaveTable.Location = New System.Drawing.Point(9, 607)
         Me.ucrSaveTable.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveTable.Name = "ucrSaveTable"
         Me.ucrSaveTable.Size = New System.Drawing.Size(319, 24)
@@ -256,7 +256,7 @@ Partial Class dlgGeneralTable
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(9, 528)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 642)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -453,7 +453,7 @@ Partial Class dlgGeneralTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(476, 588)
+        Me.ClientSize = New System.Drawing.Size(476, 702)
         Me.Controls.Add(Me.grpPosition)
         Me.Controls.Add(Me.ucrReceiverMultipleColFactor)
         Me.Controls.Add(Me.lblVariblesMul)
