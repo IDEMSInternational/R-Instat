@@ -70,7 +70,6 @@ Public Class dlgReferenceLevel
         clsDummyFunction = New RFunction
         ucrSelectorForReferenceLevels.Reset()
 
-
         ucrReceiverReferenceLevels.SetMeAsReceiver()
         clsDummyFunction.AddParameter("strVal", ucrReceiverReferenceLevels.GetVariableNames(False))
         clsSetRefLevel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_reference_level")
