@@ -226,6 +226,9 @@ Public Class clsRecentFiles
                 If dfTemp.Name = "dlgReferenceLevel" Then
                     frmMain.SetDefaultValueInReorderLevels()
                 End If
+                If dfTemp.Name = "dlgFactorDataFrame" Then
+                    frmMain.SetDefaultValueInReorderLevels()
+                End If
                 dfTemp.ShowDialog()
                 Exit Sub
             End If

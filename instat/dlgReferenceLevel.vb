@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports instat.clsColumnSelectionUtility
+
 
 Public Class dlgReferenceLevel
     Private bFirstLoad As Boolean = True
