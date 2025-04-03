@@ -629,6 +629,12 @@ Partial Class frmMain
         Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTricotDescribe = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotDescribeTraits = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotDescribeCorrelations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotModelPlackettLuce = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotModelWithoutCovariates = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotModelTree = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotModelOverall = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotModelCharacterisation = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurement = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDefineData = New System.Windows.Forms.ToolStripMenuItem()
@@ -721,12 +727,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTricotDescribeCorrelations = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTricotModelPlackettLuce = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTricotModelWithoutCovariates = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTricotModelTree = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTricotModelOverall = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTricotModelCharacterisation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewTricotMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1482,7 +1483,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutput, Me.mnuViewLogScript, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata, Me.mnuViewSwapDataAndDataframeMetadata, Me.mnuViewSwapDataAndScript})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutput, Me.mnuViewLogScript, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewTricotMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata, Me.mnuViewSwapDataAndDataframeMetadata, Me.mnuViewSwapDataAndScript})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(65, 29)
         Me.mnuView.Tag = "View"
@@ -4726,8 +4727,45 @@ Partial Class frmMain
         'mnuTricotDescribeTraits
         '
         Me.mnuTricotDescribeTraits.Name = "mnuTricotDescribeTraits"
-        Me.mnuTricotDescribeTraits.Size = New System.Drawing.Size(270, 34)
+        Me.mnuTricotDescribeTraits.Size = New System.Drawing.Size(221, 34)
         Me.mnuTricotDescribeTraits.Text = "Traits..."
+        '
+        'mnuTricotDescribeCorrelations
+        '
+        Me.mnuTricotDescribeCorrelations.Name = "mnuTricotDescribeCorrelations"
+        Me.mnuTricotDescribeCorrelations.Size = New System.Drawing.Size(221, 34)
+        Me.mnuTricotDescribeCorrelations.Text = "Correlations..."
+        '
+        'mnuTricotModelPlackettLuce
+        '
+        Me.mnuTricotModelPlackettLuce.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTricotModelWithoutCovariates, Me.mnuTricotModelTree, Me.mnuTricotModelOverall, Me.mnuTricotModelCharacterisation})
+        Me.mnuTricotModelPlackettLuce.Name = "mnuTricotModelPlackettLuce"
+        Me.mnuTricotModelPlackettLuce.Size = New System.Drawing.Size(303, 34)
+        Me.mnuTricotModelPlackettLuce.Text = "Model (Plackett-Luce)"
+        '
+        'mnuTricotModelWithoutCovariates
+        '
+        Me.mnuTricotModelWithoutCovariates.Name = "mnuTricotModelWithoutCovariates"
+        Me.mnuTricotModelWithoutCovariates.Size = New System.Drawing.Size(277, 34)
+        Me.mnuTricotModelWithoutCovariates.Text = "Without Covariates..."
+        '
+        'mnuTricotModelTree
+        '
+        Me.mnuTricotModelTree.Name = "mnuTricotModelTree"
+        Me.mnuTricotModelTree.Size = New System.Drawing.Size(277, 34)
+        Me.mnuTricotModelTree.Text = "Tree..."
+        '
+        'mnuTricotModelOverall
+        '
+        Me.mnuTricotModelOverall.Name = "mnuTricotModelOverall"
+        Me.mnuTricotModelOverall.Size = New System.Drawing.Size(277, 34)
+        Me.mnuTricotModelOverall.Text = "Overall..."
+        '
+        'mnuTricotModelCharacterisation
+        '
+        Me.mnuTricotModelCharacterisation.Name = "mnuTricotModelCharacterisation"
+        Me.mnuTricotModelCharacterisation.Size = New System.Drawing.Size(277, 34)
+        Me.mnuTricotModelCharacterisation.Text = "Characterisation..."
         '
         'mnuProcurement
         '
@@ -5399,42 +5437,11 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'mnuTricotDescribeCorrelations
+        'mnuViewTricotMenu
         '
-        Me.mnuTricotDescribeCorrelations.Name = "mnuTricotDescribeCorrelations"
-        Me.mnuTricotDescribeCorrelations.Size = New System.Drawing.Size(270, 34)
-        Me.mnuTricotDescribeCorrelations.Text = "Correlations..."
-        '
-        'mnuTricotModelPlackettLuce
-        '
-        Me.mnuTricotModelPlackettLuce.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTricotModelWithoutCovariates, Me.mnuTricotModelTree, Me.mnuTricotModelOverall, Me.mnuTricotModelCharacterisation})
-        Me.mnuTricotModelPlackettLuce.Name = "mnuTricotModelPlackettLuce"
-        Me.mnuTricotModelPlackettLuce.Size = New System.Drawing.Size(303, 34)
-        Me.mnuTricotModelPlackettLuce.Text = "Model (Plackett-Luce)"
-        '
-        'mnuTricotModelWithoutCovariates
-        '
-        Me.mnuTricotModelWithoutCovariates.Name = "mnuTricotModelWithoutCovariates"
-        Me.mnuTricotModelWithoutCovariates.Size = New System.Drawing.Size(277, 34)
-        Me.mnuTricotModelWithoutCovariates.Text = "Without Covariates..."
-        '
-        'mnuTricotModelTree
-        '
-        Me.mnuTricotModelTree.Name = "mnuTricotModelTree"
-        Me.mnuTricotModelTree.Size = New System.Drawing.Size(277, 34)
-        Me.mnuTricotModelTree.Text = "Tree..."
-        '
-        'mnuTricotModelOverall
-        '
-        Me.mnuTricotModelOverall.Name = "mnuTricotModelOverall"
-        Me.mnuTricotModelOverall.Size = New System.Drawing.Size(277, 34)
-        Me.mnuTricotModelOverall.Text = "Overall..."
-        '
-        'mnuTricotModelCharacterisation
-        '
-        Me.mnuTricotModelCharacterisation.Name = "mnuTricotModelCharacterisation"
-        Me.mnuTricotModelCharacterisation.Size = New System.Drawing.Size(277, 34)
-        Me.mnuTricotModelCharacterisation.Text = "Characterisation..."
+        Me.mnuViewTricotMenu.Name = "mnuViewTricotMenu"
+        Me.mnuViewTricotMenu.Size = New System.Drawing.Size(410, 34)
+        Me.mnuViewTricotMenu.Text = "Tricot Menu"
         '
         'frmMain
         '
@@ -6185,4 +6192,5 @@ Partial Class frmMain
     Friend WithEvents mnuTricotModelTree As ToolStripMenuItem
     Friend WithEvents mnuTricotModelOverall As ToolStripMenuItem
     Friend WithEvents mnuTricotModelCharacterisation As ToolStripMenuItem
+    Friend WithEvents mnuViewTricotMenu As ToolStripMenuItem
 End Class
