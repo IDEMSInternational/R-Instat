@@ -621,6 +621,14 @@ Partial Class frmMain
         Me.mnuStructuredProcurement = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredOptionByContext = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredSurvey = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotImportFromClimMob = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotTransformClimMob = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotDefineTricotData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotGenotypeData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuTricotDescribe = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotDescribeTraits = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurement = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProcurementDefineData = New System.Windows.Forms.ToolStripMenuItem()
@@ -713,6 +721,12 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotDescribeCorrelations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotModelPlackettLuce = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotModelWithoutCovariates = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotModelTree = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotModelOverall = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotModelCharacterisation = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3466,11 +3480,10 @@ Partial Class frmMain
         Me.mnuBar.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.mnuBar.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.mnuBar.ImeMode = System.Windows.Forms.ImeMode.[On]
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuPrepare, Me.mnuDescribe, Me.mnuModel, Me.mnuStructured, Me.mnuClimatic, Me.mnuProcurement, Me.mnuOptionsByContext, Me.mnuTools, Me.mnuView, Me.mnuHelp})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuPrepare, Me.mnuDescribe, Me.mnuModel, Me.mnuStructured, Me.mnuClimatic, Me.mnuTricot, Me.mnuProcurement, Me.mnuOptionsByContext, Me.mnuTools, Me.mnuView, Me.mnuHelp})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.Name = "mnuBar"
-        Me.mnuBar.Padding = New System.Windows.Forms.Padding(6, 2, 0, 2)
         Me.mnuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.mnuBar.ShowItemToolTips = True
         Me.mnuBar.Size = New System.Drawing.Size(1251, 33)
@@ -4667,6 +4680,55 @@ Partial Class frmMain
         Me.mnuStructuredSurvey.Text = "Survey"
         Me.mnuStructuredSurvey.Visible = False
         '
+        'mnuTricot
+        '
+        Me.mnuTricot.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTricotImportFromClimMob, Me.mnuTricotTransformClimMob, Me.mnuTricotDefineTricotData, Me.mnuTricotGenotypeData, Me.ToolStripSeparator20, Me.mnuTricotDescribe, Me.mnuTricotModelPlackettLuce})
+        Me.mnuTricot.Name = "mnuTricot"
+        Me.mnuTricot.Size = New System.Drawing.Size(70, 29)
+        Me.mnuTricot.Text = "Tricot"
+        '
+        'mnuTricotImportFromClimMob
+        '
+        Me.mnuTricotImportFromClimMob.Name = "mnuTricotImportFromClimMob"
+        Me.mnuTricotImportFromClimMob.Size = New System.Drawing.Size(303, 34)
+        Me.mnuTricotImportFromClimMob.Text = "Import from ClimMob..."
+        '
+        'mnuTricotTransformClimMob
+        '
+        Me.mnuTricotTransformClimMob.Name = "mnuTricotTransformClimMob"
+        Me.mnuTricotTransformClimMob.Size = New System.Drawing.Size(303, 34)
+        Me.mnuTricotTransformClimMob.Text = "Transform ClimMob..."
+        '
+        'mnuTricotDefineTricotData
+        '
+        Me.mnuTricotDefineTricotData.Name = "mnuTricotDefineTricotData"
+        Me.mnuTricotDefineTricotData.Size = New System.Drawing.Size(303, 34)
+        Me.mnuTricotDefineTricotData.Text = "Define Tricot Data..."
+        '
+        'mnuTricotGenotypeData
+        '
+        Me.mnuTricotGenotypeData.Name = "mnuTricotGenotypeData"
+        Me.mnuTricotGenotypeData.Size = New System.Drawing.Size(303, 34)
+        Me.mnuTricotGenotypeData.Text = "Genotype Data..."
+        '
+        'ToolStripSeparator20
+        '
+        Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
+        Me.ToolStripSeparator20.Size = New System.Drawing.Size(300, 6)
+        '
+        'mnuTricotDescribe
+        '
+        Me.mnuTricotDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTricotDescribeTraits, Me.mnuTricotDescribeCorrelations})
+        Me.mnuTricotDescribe.Name = "mnuTricotDescribe"
+        Me.mnuTricotDescribe.Size = New System.Drawing.Size(303, 34)
+        Me.mnuTricotDescribe.Text = "Describe"
+        '
+        'mnuTricotDescribeTraits
+        '
+        Me.mnuTricotDescribeTraits.Name = "mnuTricotDescribeTraits"
+        Me.mnuTricotDescribeTraits.Size = New System.Drawing.Size(270, 34)
+        Me.mnuTricotDescribeTraits.Text = "Traits..."
+        '
         'mnuProcurement
         '
         Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementOpenFromLibrary, Me.mnuProcurementDefineData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.mnuProcurementMapping, Me.mnuProcurementModel, Me.ToolStripSeparator45, Me.mnuProcurementDefineRedFlags, Me.mnuProcurementUseCRI})
@@ -4926,7 +4988,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckDataDuplicateRows, Me.mnuOptionsByContextCheckDataCompareColumns, Me.ToolStripSeparator47, Me.mnuOptionsByContextCheckDataOneVariableSummarise, Me.mnuOptionsByContextCheckDataOneVariableGraph, Me.mnuOptionsByContextCheckDataOneVariableFrequencies})
         Me.mnuOptionsByContextCheckData.Name = "mnuOptionsByContextCheckData"
-        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(270, 34)
+        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(209, 34)
         Me.mnuOptionsByContextCheckData.Text = "Check Data"
         '
         'mnuOptionsByContextCheckDataDuplicateRows
@@ -4968,7 +5030,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDefine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDefineOnStation, Me.mnuOptionsByContextDefineOnFarm})
         Me.mnuOptionsByContextDefine.Name = "mnuOptionsByContextDefine"
-        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(270, 34)
+        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(209, 34)
         Me.mnuOptionsByContextDefine.Text = "Define"
         '
         'mnuOptionsByContextDefineOnStation
@@ -4987,7 +5049,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
         Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
-        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(270, 34)
+        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(209, 34)
         Me.mnuOptionsByContextPrepare.Text = "Prepare"
         '
         'mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions
@@ -5023,7 +5085,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments, Me.mnuOptionsByContextDescribeBoxplot})
         Me.mnuOptionsByContextDescribe.Name = "mnuOptionsByContextDescribe"
-        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(270, 34)
+        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(209, 34)
         Me.mnuOptionsByContextDescribe.Text = "Describe"
         '
         'mnuOptionsByContextDescribeCompareTwoTreatments
@@ -5049,7 +5111,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextModelFitModel, Me.mnuOptionsByContextGeneralFitModel})
         Me.mnuOptionsByContextModel.Name = "mnuOptionsByContextModel"
-        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(270, 34)
+        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(209, 34)
         Me.mnuOptionsByContextModel.Text = "Model"
         '
         'mnuOptionsByContextModelFitModel
@@ -5068,7 +5130,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextCropModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCropModelApsimxExamples})
         Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
-        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(270, 34)
+        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(209, 34)
         Me.mnuOptionsByContextCropModel.Text = "Crop Model"
         '
         'mnuOptionsByContextCropModelApsimxExamples
@@ -5158,7 +5220,7 @@ Partial Class frmMain
         Me.splOverall.BackColor = System.Drawing.Color.LightGray
         Me.splOverall.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splOverall.Location = New System.Drawing.Point(0, 72)
-        Me.splOverall.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splOverall.Margin = New System.Windows.Forms.Padding(4)
         Me.splOverall.Name = "splOverall"
         Me.splOverall.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -5181,7 +5243,7 @@ Partial Class frmMain
         Me.splExtraWindows.BackColor = System.Drawing.Color.LightGray
         Me.splExtraWindows.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splExtraWindows.Location = New System.Drawing.Point(0, 0)
-        Me.splExtraWindows.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splExtraWindows.Margin = New System.Windows.Forms.Padding(4)
         Me.splExtraWindows.Name = "splExtraWindows"
         '
         'splExtraWindows.Panel1
@@ -5203,7 +5265,7 @@ Partial Class frmMain
         Me.splMetadata.BackColor = System.Drawing.Color.LightGray
         Me.splMetadata.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splMetadata.Location = New System.Drawing.Point(0, 0)
-        Me.splMetadata.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splMetadata.Margin = New System.Windows.Forms.Padding(4)
         Me.splMetadata.Name = "splMetadata"
         '
         'splMetadata.Panel1
@@ -5261,7 +5323,7 @@ Partial Class frmMain
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
         Me.splDataOutput.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splDataOutput.Location = New System.Drawing.Point(0, 0)
-        Me.splDataOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.splDataOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.splDataOutput.Name = "splDataOutput"
         '
         'splDataOutput.Panel1
@@ -5337,6 +5399,43 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
+        'mnuTricotDescribeCorrelations
+        '
+        Me.mnuTricotDescribeCorrelations.Name = "mnuTricotDescribeCorrelations"
+        Me.mnuTricotDescribeCorrelations.Size = New System.Drawing.Size(270, 34)
+        Me.mnuTricotDescribeCorrelations.Text = "Correlations..."
+        '
+        'mnuTricotModelPlackettLuce
+        '
+        Me.mnuTricotModelPlackettLuce.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTricotModelWithoutCovariates, Me.mnuTricotModelTree, Me.mnuTricotModelOverall, Me.mnuTricotModelCharacterisation})
+        Me.mnuTricotModelPlackettLuce.Name = "mnuTricotModelPlackettLuce"
+        Me.mnuTricotModelPlackettLuce.Size = New System.Drawing.Size(303, 34)
+        Me.mnuTricotModelPlackettLuce.Text = "Model (Plackett-Luce)"
+        '
+        'mnuTricotModelWithoutCovariates
+        '
+        Me.mnuTricotModelWithoutCovariates.Name = "mnuTricotModelWithoutCovariates"
+        Me.mnuTricotModelWithoutCovariates.Size = New System.Drawing.Size(277, 34)
+        Me.mnuTricotModelWithoutCovariates.Text = "Without Covariates..."
+        '
+        'mnuTricotModelTree
+        '
+        Me.mnuTricotModelTree.Name = "mnuTricotModelTree"
+        Me.mnuTricotModelTree.Size = New System.Drawing.Size(277, 34)
+        Me.mnuTricotModelTree.Text = "Tree..."
+        '
+        'mnuTricotModelOverall
+        '
+        Me.mnuTricotModelOverall.Name = "mnuTricotModelOverall"
+        Me.mnuTricotModelOverall.Size = New System.Drawing.Size(277, 34)
+        Me.mnuTricotModelOverall.Text = "Overall..."
+        '
+        'mnuTricotModelCharacterisation
+        '
+        Me.mnuTricotModelCharacterisation.Name = "mnuTricotModelCharacterisation"
+        Me.mnuTricotModelCharacterisation.Size = New System.Drawing.Size(277, 34)
+        Me.mnuTricotModelCharacterisation.Text = "Characterisation..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
@@ -5349,7 +5448,7 @@ Partial Class frmMain
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmMain"
         Me.Text = "R-Instat .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -6072,4 +6171,18 @@ Partial Class frmMain
     Friend WithEvents mnuViewSwapDataAndDataframeMetadata As ToolStripMenuItem
     Friend WithEvents mnuSwapDataMetadata As ToolStripMenuItem
     Friend WithEvents mnuSwapDataDataframeMetadata As ToolStripMenuItem
+    Friend WithEvents mnuTricot As ToolStripMenuItem
+    Friend WithEvents mnuTricotImportFromClimMob As ToolStripMenuItem
+    Friend WithEvents mnuTricotTransformClimMob As ToolStripMenuItem
+    Friend WithEvents mnuTricotDefineTricotData As ToolStripMenuItem
+    Friend WithEvents mnuTricotGenotypeData As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
+    Friend WithEvents mnuTricotDescribe As ToolStripMenuItem
+    Friend WithEvents mnuTricotDescribeTraits As ToolStripMenuItem
+    Friend WithEvents mnuTricotDescribeCorrelations As ToolStripMenuItem
+    Friend WithEvents mnuTricotModelPlackettLuce As ToolStripMenuItem
+    Friend WithEvents mnuTricotModelWithoutCovariates As ToolStripMenuItem
+    Friend WithEvents mnuTricotModelTree As ToolStripMenuItem
+    Friend WithEvents mnuTricotModelOverall As ToolStripMenuItem
+    Friend WithEvents mnuTricotModelCharacterisation As ToolStripMenuItem
 End Class
