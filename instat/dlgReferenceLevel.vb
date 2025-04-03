@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports instat.ColumnSelectionUtility
+Imports instat.clsColumnSelectionUtility
 
 Public Class dlgReferenceLevel
     Private bFirstLoad As Boolean = True
@@ -104,11 +104,10 @@ Public Class dlgReferenceLevel
 
     Private Sub SetSelectedColumn()
         ' Call the utility method to perform the column selection logic.
-        ColumnSelectionUtility.SetSelectedColumn(ucrSelectorForReferenceLevels.lstAvailableVariable,
+        clsColumnSelectionUtility.SetSelectedColumn(ucrSelectorForReferenceLevels.lstAvailableVariable,
                                                  ucrReceiverReferenceLevels,
                                                  clsDummyFunction,
-                                                 frmMain.clsRLink,
-                                                  ucrSelectorForReferenceLevels.strCurrentDataFrame,
+                                                 ucrSelectorForReferenceLevels.strCurrentDataFrame,
                                                  _strSelectedColumn)
     End Sub
 

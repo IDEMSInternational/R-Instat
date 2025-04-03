@@ -221,6 +221,7 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsFileUrlUtilities.vb" />
+    <Compile Include="clsColumnSelectionUtility.vb" />
     <Compile Include="dlgApsimx.Designer.vb">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
     </Compile>
@@ -325,7 +326,6 @@
     </Compile>
     <Compile Include="Enum\RObjectFormat.vb" />
     <Compile Include="Enum\RObjectTypeLabel.vb" />
-    <Compile Include="Record\ColumnSelectionUtility.vb" />
     <Compile Include="sdgAdditionalCondition.Designer.vb">
       <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>
     </Compile>
