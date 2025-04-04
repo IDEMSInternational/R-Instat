@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsArrangecolSingleFunction, clsArrangecolmulFunction, clsSpannerSingleFunction, clsArrangerowMulFunction, clsArrangerowsingleFunction, clsSpannerFunction, clsEvererythingFunction, clsPivotLongerFunction, clsSelectFunction, clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderMulFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
+    Private clsSpannerFunction, clsEvererythingFunction, clsPivotLongerFunction, clsSelectFunction, clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderMulFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -150,11 +150,6 @@ Public Class dlgGeneralTable
         clsPivotLongerFunction = New RFunction
         clsEvererythingFunction = New RFunction
         clsSpannerFunction = New RFunction
-        clsArrangerowsingleFunction = New RFunction
-        clsArrangecolmulFunction = New RFunction
-        clsArrangecolSingleFunction = New RFunction
-        clsArrangerowMulFunction = New RFunction
-        clsSpannerSingleFunction = New RFunction
 
         ucrSelectorCols.Reset()
         ucrSaveTable.Reset()
@@ -208,6 +203,7 @@ Public Class dlgGeneralTable
 
         clsPivotWiderMulFunction.SetPackageName("tidyr")
         clsPivotWiderMulFunction.SetRCommand("pivot_wider")
+        clsPivotWiderMulFunction.AddParameter("names_sep", Chr(34) & "__" & Chr(34), iPosition:=2)
 
         clsFormatTableFunction.SetRCommand("format_gt_table")
 
@@ -227,21 +223,6 @@ Public Class dlgGeneralTable
         clsSpannerFunction.SetRCommand("tab_spanner_delim")
         clsSpannerFunction.AddParameter("delim", Chr(34) & "__" & Chr(34), iPosition:=0)
 
-        clsSpannerSingleFunction.SetPackageName("gt")
-        clsSpannerSingleFunction.SetRCommand("tab_spanner_delim")
-        clsSpannerSingleFunction.AddParameter("delim", Chr(34) & "__" & Chr(34), iPosition:=0)
-
-        clsArrangerowsingleFunction.SetPackageName("dplyr")
-        clsArrangerowsingleFunction.SetRCommand("arrange")
-
-        clsArrangecolSingleFunction.SetPackageName("dplyr")
-        clsArrangecolSingleFunction.SetRCommand("arrange")
-
-        clsArrangerowMulFunction.SetPackageName("dplyr")
-        clsArrangerowMulFunction.SetRCommand("arrange")
-
-        clsArrangecolmulFunction.SetPackageName("dplyr")
-        clsArrangecolmulFunction.SetRCommand("arrange")
 
         Dim strGroupParamValue As String = "title"
         clsCellsTitleRFunction.SetPackageName("gt")
@@ -276,7 +257,6 @@ Public Class dlgGeneralTable
         Updateparameter()
         AddRemoveThemes()
         AddingSummaryType()
-        AddRemovespanner()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -295,6 +275,7 @@ Public Class dlgGeneralTable
         AddingSummaryType()
         HidePosition()
         AddRemovespanner()
+        AddRemoveSelect()
         DialogueSize()
     End Sub
 
@@ -304,9 +285,6 @@ Public Class dlgGeneralTable
         clsBaseOperator.RemoveParameterByName("pivot_wider_mul")
         clsBaseOperator.RemoveParameterByName("pivot_longer")
         clsBaseOperator.RemoveParameterByName("format_table")
-        clsBaseOperator.RemoveParameterByName("select")
-        clsBaseOperator.RemoveParameterByName("spanner_multiple")
-        clsBaseOperator.RemoveParameterByName("spanner_single")
 
         If rdoSingle.Checked Then
             clsBaseOperator.RemoveParameterByName("head")
@@ -314,21 +292,24 @@ Public Class dlgGeneralTable
             Updateparameter()
             clsPivotWiderFunction.AddParameter("values_from", ucrReceiverSingleVariable.GetVariableNames(False), iPosition:=1)
             clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataSingleFunction, iPosition:=0, bIncludeArgumentName:=False)
-            clsBaseOperator.AddParameter("pivot_wider", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=3)
+            If Not ucrReceiverMultipleColFactor.IsEmpty Then
+                clsBaseOperator.AddParameter("pivot_wider", clsRFunctionParameter:=clsPivotWiderFunction, iPosition:=3)
+            Else
+                clsBaseOperator.RemoveParameterByName("pivot_wider")
+            End If
             clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=4)
-        ElseIf rdoMultiple.Checked Then
-            clsBaseOperator.RemoveParameterByName("head")
-            clsBaseOperator.RemoveParameterByName("gt")
-            Updateparameter()
-            clsPivotLongerFunction.AddParameter("cols", ucrReceiverMultipleVariablesMul.GetVariableNames(), iPosition:=0)
-            clsPivotWiderMulFunction.AddParameter("values_from", Chr(34) & "value" & Chr(34), iPosition:=3)
-            clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataMultipleFunction, iPosition:=0, bIncludeArgumentName:=False)
-            clsBaseOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=3)
-            clsBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=6)
-            clsBaseOperator.AddParameter("pivot_wider_mul", clsRFunctionParameter:=clsPivotWiderMulFunction, iPosition:=7)
-            clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=8)
-        Else
-            ucrChkPreview.Checked = True
+            ElseIf rdoMultiple.Checked Then
+                clsBaseOperator.RemoveParameterByName("head")
+                clsBaseOperator.RemoveParameterByName("gt")
+                Updateparameter()
+                clsPivotLongerFunction.AddParameter("cols", ucrReceiverMultipleVariablesMul.GetVariableNames(), iPosition:=0)
+                clsPivotWiderMulFunction.AddParameter("values_from", Chr(34) & "value" & Chr(34), iPosition:=3)
+                clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataMultipleFunction, iPosition:=0, bIncludeArgumentName:=False)
+                clsBaseOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=3)
+                clsBaseOperator.AddParameter("pivot_wider_mul", clsRFunctionParameter:=clsPivotWiderMulFunction, iPosition:=7)
+                clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=8)
+            Else
+                ucrChkPreview.Checked = True
             AddRemoveHead()
             ucrReceiverMultipleCols.SetMeAsReceiver()
             clsBaseOperator.RemoveParameterByName("pivot_wider")
@@ -345,15 +326,15 @@ Public Class dlgGeneralTable
             Me.ucrSaveTable.Location = New Size(9, 480)
             Me.ucrBase.Location = New Point(9, 515)
         ElseIf rdoSingle.Checked Then
-            Me.Size = New Size(492, 627)
-            Me.grpBoxTitle.Location = New Size(7, 377)
-            Me.ucrSaveTable.Location = New Size(9, 493)
-            Me.ucrBase.Location = New Point(9, 528)
+            Me.Size = New Size(492, 574)
+            Me.grpBoxTitle.Location = New Size(7, 340)
+            Me.ucrSaveTable.Location = New Size(9, 448)
+            Me.ucrBase.Location = New Point(9, 478)
         Else
-            Me.Size = New Size(492, 741)
-            Me.grpBoxTitle.Location = New Size(7, 496)
-            Me.ucrSaveTable.Location = New Size(9, 607)
-            Me.ucrBase.Location = New Point(9, 642)
+            Me.Size = New Size(492, 629)
+            Me.grpBoxTitle.Location = New Size(7, 401)
+            Me.ucrSaveTable.Location = New Size(9, 508)
+            Me.ucrBase.Location = New Point(9, 536)
         End If
     End Sub
 
@@ -366,34 +347,6 @@ Public Class dlgGeneralTable
         Dim lstColVars As List(Of String) = ucrReceiverMultipleColFactor.GetVariableNamesAsList()
         Dim ipositionVarCols As Integer = ucrNudColumn.Value
         Dim ipositionVarRows As Integer = ucrNudRow.Value
-        Dim strArrangeRowVars As String = ucrReceiverMultipleRowFactors.GetVariableNames(False)
-        Dim strformattedArrangeRowVars As String = strArrangeRowVars.Replace("c(", "").Replace(")", "").Replace("""", "")
-        Dim strArrangecolVars As String = ucrReceiverMultipleColFactor.GetVariableNames(False)
-        Dim strformattedArrangecolars As String = strArrangecolVars.Replace("c(", "").Replace(")", "").Replace("""", "")
-
-        If rdoSingle.Checked Then
-            If Not ucrReceiverMultipleRowFactors.IsEmpty AndAlso ucrReceiverMultipleRowFactors.GetVariableNamesAsList.Count > 1 Then
-                clsArrangerowsingleFunction.AddParameter("x", strformattedArrangeRowVars, iPosition:=0, bIncludeArgumentName:=False)
-                If Not ucrReceiverMultipleColFactor.IsEmpty AndAlso ucrReceiverMultipleColFactor.GetVariableNamesAsList.Count > 1 Then
-                    clsArrangecolSingleFunction.AddParameter("x", strformattedArrangecolars, iPosition:=0, bIncludeArgumentName:=False)
-                    clsBaseOperator.AddParameter("arrange_col_sin", clsRFunctionParameter:=clsArrangecolSingleFunction, iPosition:=2)
-                Else
-                    clsBaseOperator.RemoveParameterByName("arrange_col_sin")
-                End If
-                clsBaseOperator.AddParameter("arrange_row_sin", clsRFunctionParameter:=clsArrangerowsingleFunction, iPosition:=1)
-            Else
-                clsBaseOperator.RemoveParameterByName("arrange_row_sin")
-                If Not ucrReceiverMultipleColFactor.IsEmpty AndAlso ucrReceiverMultipleColFactor.GetVariableNamesAsList.Count > 1 Then
-                    clsArrangecolSingleFunction.AddParameter("x", strformattedArrangecolars, iPosition:=0, bIncludeArgumentName:=False)
-                    clsBaseOperator.AddParameter("arrange_col_sin", clsRFunctionParameter:=clsArrangecolSingleFunction, iPosition:=2)
-                Else
-                    clsBaseOperator.RemoveParameterByName("arrange_col_sin")
-                End If
-            End If
-        Else
-            clsBaseOperator.RemoveParameterByName("arrange_col_sin")
-            clsBaseOperator.RemoveParameterByName("arrange_row_sin")
-        End If
 
         ' Ensure variables are wrapped in double quotes
         lstRowVars = lstRowVars.Select(Function(x) """" & x & """").ToList()
@@ -401,12 +354,7 @@ Public Class dlgGeneralTable
 
         ' If rdoMultiple is checked, insert "variable" correctly based on rdoCols and rdoRows
         If rdoMultiple.Checked Then
-            clsBaseOperator.RemoveParameterByName("arrange_row_mul")
-            clsBaseOperator.RemoveParameterByName("arrange_col_mul")
-
             If rdoAscolumn.Checked Then
-                ' Remove "summary_type" from lstRowVars
-                lstRowVars.Remove("""summary_type""")
                 ' "variable" should be added to cols at the specified position
                 If ipositionVarCols <= lstColVars.Count Then
                     lstColVars.Insert(Math.Max(0, ipositionVarCols - 1), """summary_type""")
@@ -414,8 +362,6 @@ Public Class dlgGeneralTable
                     lstColVars.Add("""summary_type""")
                 End If
             ElseIf rdoAsrow.Checked Then
-                ' Remove "summary_type" from lstColVars
-                lstColVars.Remove("""summary_type""")
                 ' "variable" should be added to rows at the specified position
                 If ipositionVarRows <= lstRowVars.Count Then
                     lstRowVars.Insert(Math.Max(0, ipositionVarRows - 1), """summary_type""")
@@ -423,32 +369,6 @@ Public Class dlgGeneralTable
                     lstRowVars.Add("""summary_type""")
                 End If
             End If
-
-            Dim strRowArrang As String = String.Join(", ", lstRowVars)
-            Dim strColArrang As String = String.Join(", ", lstColVars)
-            Dim strArrangRow As String = strRowArrang.Replace("""", "")
-            Dim strArrangCol As String = strColArrang.Replace("""", "")
-
-            If Not ucrReceiverMultipleColFactor.IsEmpty Then
-                If lstColVars.Count > 0 Then clsArrangecolmulFunction.AddParameter("x", strArrangCol, iPosition:=0, bIncludeArgumentName:=False)
-                clsBaseOperator.AddParameter("arrange_col_mul", clsRFunctionParameter:=clsArrangecolmulFunction, iPosition:=4)
-                If Not ucrReceiverMultipleRowFactors.IsEmpty AndAlso rdoAscolumn.Checked Then
-                    clsArrangerowMulFunction.AddParameter("x", strArrangRow, iPosition:=0, bIncludeArgumentName:=False)
-                    clsBaseOperator.AddParameter("arrange_row_mul", clsRFunctionParameter:=clsArrangerowMulFunction, iPosition:=5)
-                Else
-                    clsBaseOperator.RemoveParameterByName("arrange_row_mul")
-                End If
-            Else
-                    If lstRowVars.Count > 0 Then clsArrangerowMulFunction.AddParameter("x", strArrangRow, iPosition:=0, bIncludeArgumentName:=False)
-                clsBaseOperator.AddParameter("arrange_row_mul", clsRFunctionParameter:=clsArrangerowMulFunction, iPosition:=4)
-            End If
-        Else
-            clsBaseOperator.RemoveParameterByName("pivot_wider_mul")
-            clsBaseOperator.RemoveParameterByName("select")
-            clsBaseOperator.RemoveParameterByName("spanner_single")
-            clsBaseOperator.RemoveParameterByName("spanner_multiple")
-            clsBaseOperator.RemoveParameterByName("arrange_row_mul")
-            clsBaseOperator.RemoveParameterByName("arrange_col_mul")
         End If
 
         ' Ensure correct formatting for rows and cols
@@ -457,28 +377,26 @@ Public Class dlgGeneralTable
 
         ' Add parameters while preventing c(c(...))
         If rdoAsrow.Checked Then
-            If lstRowVars.Count > 0 Then clsSelectFunction.AddParameter("rows", strRowVars, iPosition:=0, bIncludeArgumentName:=False)
             clsPivotWiderMulFunction.AddParameter("names_from", ucrReceiverMultipleColFactor.GetVariableNames(), iPosition:=0)
-            clsBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=5)
+            If lstRowVars.Count > 0 Then clsSelectFunction.AddParameter("rows", strRowVars, iPosition:=0, bIncludeArgumentName:=False)
         Else
-            clsBaseOperator.RemoveParameterByName("select")
-            clsPivotWiderMulFunction.AddParameter("names_sep", Chr(34) & "__" & Chr(34), iPosition:=2)
             If lstColVars.Count > 0 Then clsPivotWiderMulFunction.AddParameter("names_from", strColVars, iPosition:=0)
         End If
     End Sub
 
-    Private Sub AddRemovespanner()
-        If rdoMultiple.Checked Then
-            clsBaseOperator.RemoveParameterByName("spanner_single")
-            clsBaseOperator.AddParameter("spanner_multiple", clsRFunctionParameter:=clsSpannerFunction, iPosition:=9)
-        ElseIf rdoSingle.Checked Then
-            clsBaseOperator.AddParameter("spanner_single", clsRFunctionParameter:=clsSpannerSingleFunction, iPosition:=6)
-            clsBaseOperator.RemoveParameterByName("select")
-            clsBaseOperator.RemoveParameterByName("spanner_multiple")
+    Private Sub AddRemoveSelect()
+        If rdoMultiple.Checked AndAlso rdoAsrow.Checked Then
+            clsBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=6)
         Else
             clsBaseOperator.RemoveParameterByName("select")
-            clsBaseOperator.RemoveParameterByName("spanner_multiple")
-            clsBaseOperator.RemoveParameterByName("spanner_single")
+        End If
+    End Sub
+
+    Private Sub AddRemovespanner()
+        If rdoMultiple.Checked OrElse rdoSingle.Checked Then
+            clsBaseOperator.AddParameter("spanner", clsRFunctionParameter:=clsSpannerFunction, iPosition:=9)
+        Else
+            clsBaseOperator.RemoveParameterByName("spanner")
         End If
     End Sub
 
@@ -652,7 +570,7 @@ Public Class dlgGeneralTable
         MinMaxValRowVariable()
         MinMaxValVariable()
         AddingSummaryType()
-        AddRemovespanner()
+        AddRemovePivotwider()
     End Sub
 
     Private Sub ucrNudRow_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRow.ControlValueChanged
@@ -665,6 +583,7 @@ Public Class dlgGeneralTable
         MinMaxValVariable()
         HidePosition()
         AddRemovespanner()
+        AddRemoveSelect()
     End Sub
 
     Private Sub ucrNudColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudColumn.ControlValueChanged
