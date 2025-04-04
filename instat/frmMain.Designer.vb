@@ -152,6 +152,7 @@ Partial Class frmMain
         Me.ToolStripSeparator22 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuViewStructuredMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewClimaticMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewTricotMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewProcurementMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewOptionsByContextMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator39 = New System.Windows.Forms.ToolStripSeparator()
@@ -727,7 +728,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuViewTricotMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1483,7 +1483,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutput, Me.mnuViewLogScript, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewTricotMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata, Me.mnuViewSwapDataAndDataframeMetadata, Me.mnuViewSwapDataAndScript})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutput, Me.mnuViewLogScript, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewTricotMenu, Me.mnuViewOptionsByContextMenu, Me.mnuViewProcurementMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata, Me.mnuViewSwapDataAndDataframeMetadata, Me.mnuViewSwapDataAndScript})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(65, 29)
         Me.mnuView.Tag = "View"
@@ -1546,6 +1546,13 @@ Partial Class frmMain
         Me.mnuViewClimaticMenu.Size = New System.Drawing.Size(410, 34)
         Me.mnuViewClimaticMenu.Tag = ""
         Me.mnuViewClimaticMenu.Text = "Climatic Menu"
+        '
+        'mnuViewTricotMenu
+        '
+        Me.mnuViewTricotMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuViewTricotMenu.Name = "mnuViewTricotMenu"
+        Me.mnuViewTricotMenu.Size = New System.Drawing.Size(410, 34)
+        Me.mnuViewTricotMenu.Text = "Tricot Menu"
         '
         'mnuViewProcurementMenu
         '
@@ -3481,7 +3488,7 @@ Partial Class frmMain
         Me.mnuBar.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
         Me.mnuBar.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.mnuBar.ImeMode = System.Windows.Forms.ImeMode.[On]
-        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuPrepare, Me.mnuDescribe, Me.mnuModel, Me.mnuStructured, Me.mnuClimatic, Me.mnuTricot, Me.mnuProcurement, Me.mnuOptionsByContext, Me.mnuTools, Me.mnuView, Me.mnuHelp})
+        Me.mnuBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuEdit, Me.mnuPrepare, Me.mnuDescribe, Me.mnuModel, Me.mnuStructured, Me.mnuClimatic, Me.mnuTricot, Me.mnuOptionsByContext, Me.mnuProcurement, Me.mnuTools, Me.mnuView, Me.mnuHelp})
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.Name = "mnuBar"
@@ -5026,7 +5033,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckDataDuplicateRows, Me.mnuOptionsByContextCheckDataCompareColumns, Me.ToolStripSeparator47, Me.mnuOptionsByContextCheckDataOneVariableSummarise, Me.mnuOptionsByContextCheckDataOneVariableGraph, Me.mnuOptionsByContextCheckDataOneVariableFrequencies})
         Me.mnuOptionsByContextCheckData.Name = "mnuOptionsByContextCheckData"
-        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(209, 34)
+        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(270, 34)
         Me.mnuOptionsByContextCheckData.Text = "Check Data"
         '
         'mnuOptionsByContextCheckDataDuplicateRows
@@ -5068,7 +5075,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDefine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDefineOnStation, Me.mnuOptionsByContextDefineOnFarm})
         Me.mnuOptionsByContextDefine.Name = "mnuOptionsByContextDefine"
-        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(209, 34)
+        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(270, 34)
         Me.mnuOptionsByContextDefine.Text = "Define"
         '
         'mnuOptionsByContextDefineOnStation
@@ -5087,7 +5094,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
         Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
-        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(209, 34)
+        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(270, 34)
         Me.mnuOptionsByContextPrepare.Text = "Prepare"
         '
         'mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions
@@ -5123,7 +5130,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments, Me.mnuOptionsByContextDescribeBoxplot})
         Me.mnuOptionsByContextDescribe.Name = "mnuOptionsByContextDescribe"
-        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(209, 34)
+        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(270, 34)
         Me.mnuOptionsByContextDescribe.Text = "Describe"
         '
         'mnuOptionsByContextDescribeCompareTwoTreatments
@@ -5149,7 +5156,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextModelFitModel, Me.mnuOptionsByContextGeneralFitModel})
         Me.mnuOptionsByContextModel.Name = "mnuOptionsByContextModel"
-        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(209, 34)
+        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(270, 34)
         Me.mnuOptionsByContextModel.Text = "Model"
         '
         'mnuOptionsByContextModelFitModel
@@ -5168,7 +5175,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextCropModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCropModelApsimxExamples})
         Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
-        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(209, 34)
+        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(270, 34)
         Me.mnuOptionsByContextCropModel.Text = "Crop Model"
         '
         'mnuOptionsByContextCropModelApsimxExamples
@@ -5436,12 +5443,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuViewTricotMenu
-        '
-        Me.mnuViewTricotMenu.Name = "mnuViewTricotMenu"
-        Me.mnuViewTricotMenu.Size = New System.Drawing.Size(410, 34)
-        Me.mnuViewTricotMenu.Text = "Tricot Menu"
         '
         'frmMain
         '

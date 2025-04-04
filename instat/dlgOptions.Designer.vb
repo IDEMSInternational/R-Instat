@@ -122,6 +122,7 @@ Partial Class dlgOptions
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphDisplay = New instat.UcrPanel()
         Me.tbpTailoredMenus = New System.Windows.Forms.TabPage()
+        Me.ucrChkViewTricotMenu = New instat.ucrCheck()
         Me.ucrChkViewStructuredMenu = New instat.ucrCheck()
         Me.ucrChkViewOptionsByContextMenu = New instat.ucrCheck()
         Me.ucrChkViewProcurementMenu = New instat.ucrCheck()
@@ -137,7 +138,6 @@ Partial Class dlgOptions
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
         Me.tbpWebsite = New System.Windows.Forms.TabPage()
         Me.ucrChkReminder = New instat.ucrCheck()
-        Me.ucrChkViewTricotMenu = New instat.ucrCheck()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -1117,6 +1117,16 @@ Partial Class dlgOptions
         Me.tbpTailoredMenus.Text = "Tailored Menus"
         Me.tbpTailoredMenus.UseVisualStyleBackColor = True
         '
+        'ucrChkViewTricotMenu
+        '
+        Me.ucrChkViewTricotMenu.AutoSize = True
+        Me.ucrChkViewTricotMenu.Checked = False
+        Me.ucrChkViewTricotMenu.Location = New System.Drawing.Point(10, 132)
+        Me.ucrChkViewTricotMenu.Margin = New System.Windows.Forms.Padding(8)
+        Me.ucrChkViewTricotMenu.Name = "ucrChkViewTricotMenu"
+        Me.ucrChkViewTricotMenu.Size = New System.Drawing.Size(620, 51)
+        Me.ucrChkViewTricotMenu.TabIndex = 3
+        '
         'ucrChkViewStructuredMenu
         '
         Me.ucrChkViewStructuredMenu.AutoSize = True
@@ -1131,7 +1141,7 @@ Partial Class dlgOptions
         '
         Me.ucrChkViewOptionsByContextMenu.AutoSize = True
         Me.ucrChkViewOptionsByContextMenu.Checked = False
-        Me.ucrChkViewOptionsByContextMenu.Location = New System.Drawing.Point(10, 206)
+        Me.ucrChkViewOptionsByContextMenu.Location = New System.Drawing.Point(10, 190)
         Me.ucrChkViewOptionsByContextMenu.Margin = New System.Windows.Forms.Padding(8)
         Me.ucrChkViewOptionsByContextMenu.Name = "ucrChkViewOptionsByContextMenu"
         Me.ucrChkViewOptionsByContextMenu.Size = New System.Drawing.Size(620, 51)
@@ -1141,7 +1151,7 @@ Partial Class dlgOptions
         '
         Me.ucrChkViewProcurementMenu.AutoSize = True
         Me.ucrChkViewProcurementMenu.Checked = False
-        Me.ucrChkViewProcurementMenu.Location = New System.Drawing.Point(10, 142)
+        Me.ucrChkViewProcurementMenu.Location = New System.Drawing.Point(10, 247)
         Me.ucrChkViewProcurementMenu.Margin = New System.Windows.Forms.Padding(8)
         Me.ucrChkViewProcurementMenu.Name = "ucrChkViewProcurementMenu"
         Me.ucrChkViewProcurementMenu.Size = New System.Drawing.Size(620, 51)
@@ -1151,7 +1161,7 @@ Partial Class dlgOptions
         '
         Me.ucrChkViewClimaticMenu.AutoSize = True
         Me.ucrChkViewClimaticMenu.Checked = False
-        Me.ucrChkViewClimaticMenu.Location = New System.Drawing.Point(10, 80)
+        Me.ucrChkViewClimaticMenu.Location = New System.Drawing.Point(10, 77)
         Me.ucrChkViewClimaticMenu.Margin = New System.Windows.Forms.Padding(8)
         Me.ucrChkViewClimaticMenu.Name = "ucrChkViewClimaticMenu"
         Me.ucrChkViewClimaticMenu.Size = New System.Drawing.Size(610, 51)
@@ -1288,16 +1298,6 @@ Partial Class dlgOptions
         Me.ucrChkReminder.Name = "ucrChkReminder"
         Me.ucrChkReminder.Size = New System.Drawing.Size(620, 51)
         Me.ucrChkReminder.TabIndex = 2
-        '
-        'ucrChkViewTricotMenu
-        '
-        Me.ucrChkViewTricotMenu.AutoSize = True
-        Me.ucrChkViewTricotMenu.Checked = False
-        Me.ucrChkViewTricotMenu.Location = New System.Drawing.Point(10, 272)
-        Me.ucrChkViewTricotMenu.Margin = New System.Windows.Forms.Padding(8)
-        Me.ucrChkViewTricotMenu.Name = "ucrChkViewTricotMenu"
-        Me.ucrChkViewTricotMenu.Size = New System.Drawing.Size(620, 51)
-        Me.ucrChkViewTricotMenu.TabIndex = 3
         '
         'dlgOptions
         '
