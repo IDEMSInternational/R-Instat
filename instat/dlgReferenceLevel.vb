@@ -15,11 +15,15 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+
+
 Public Class dlgReferenceLevel
     Private bFirstLoad As Boolean = True
     Public strDefaultDataFrame As String = ""
     Private bReset As Boolean = True
-    Private clsSetRefLevel As New RFunction
+    Private clsSetRefLevel, clsDummyFunction As New RFunction
+    Private _strSelectedColumn As String
+
     Private Sub dlgReferenceLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -29,6 +33,7 @@ Public Class dlgReferenceLevel
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetSelectedColumn()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
@@ -62,8 +67,11 @@ Public Class dlgReferenceLevel
 
     Private Sub SetDefaults()
         clsSetRefLevel = New RFunction
+        clsDummyFunction = New RFunction
         ucrSelectorForReferenceLevels.Reset()
 
+        ucrReceiverReferenceLevels.SetMeAsReceiver()
+        clsDummyFunction.AddParameter("strVal", ucrReceiverReferenceLevels.GetVariableNames(False))
         clsSetRefLevel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_reference_level")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSetRefLevel)
     End Sub
@@ -84,7 +92,27 @@ Public Class dlgReferenceLevel
         TestOKEnabled()
     End Sub
 
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        ' Call the utility method to perform the column selection logic.
+        clsColumnSelectionUtility.SetSelectedColumn(ucrSelectorForReferenceLevels.lstAvailableVariable,
+                                                 ucrReceiverReferenceLevels,
+                                                 clsDummyFunction,
+                                                 ucrSelectorForReferenceLevels.strCurrentDataFrame,
+                                                 _strSelectedColumn)
+    End Sub
+
     Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReferenceLevels.ControlValueChanged, ucrFactorReferenceLevels.ControlValueChanged
         TestOKEnabled()
+        ucrReceiverReferenceLevels.SetMeAsReceiver()
+        clsDummyFunction.AddParameter("strVal", ucrReceiverReferenceLevels.GetVariableNames(False))
     End Sub
 End Class

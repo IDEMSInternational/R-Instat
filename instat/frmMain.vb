@@ -952,6 +952,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReferenceLevel.Click
+        SetDefaultValueInReorderLevels()
         dlgReferenceLevel.ShowDialog()
     End Sub
 
@@ -976,6 +977,8 @@ Public Class frmMain
         dlgRecodeFactor.SelectedColumn = strSelectedColumn
         dlgDummyVariables.SelectedColumn = strSelectedColumn
         dlgLabelsLevels.SelectedColumn = strSelectedColumn
+        dlgReferenceLevel.SelectedColumn = strSelectedColumn
+        dlgFactorDataFrame.SelectedColumn = strSelectedColumn
     End Sub
 
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
@@ -1011,6 +1014,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorSheet_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorFactorDataFrame.Click
+        SetDefaultValueInReorderLevels()
         dlgFactorDataFrame.ShowDialog()
     End Sub
 
