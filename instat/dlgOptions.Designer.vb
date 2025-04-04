@@ -66,6 +66,8 @@ Partial Class dlgOptions
         Me.ucrNudPreviewRows = New instat.ucrNud()
         Me.pnImportData = New System.Windows.Forms.Panel()
         Me.tbpOutputWindow = New System.Windows.Forms.TabPage()
+        Me.lblWidth = New System.Windows.Forms.Label()
+        Me.ucrNudWidth = New instat.ucrNud()
         Me.ucrNudMaxOutputsHeight = New instat.ucrNud()
         Me.ucrChkMaxOutputsHeight = New instat.ucrCheck()
         Me.ucrChkShowRCommandsinOutputWindow = New instat.ucrCheck()
@@ -120,6 +122,7 @@ Partial Class dlgOptions
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphDisplay = New instat.UcrPanel()
         Me.tbpTailoredMenus = New System.Windows.Forms.TabPage()
+        Me.ucrChkViewTricotMenu = New instat.ucrCheck()
         Me.ucrChkViewStructuredMenu = New instat.ucrCheck()
         Me.ucrChkViewOptionsByContextMenu = New instat.ucrCheck()
         Me.ucrChkViewProcurementMenu = New instat.ucrCheck()
@@ -135,8 +138,6 @@ Partial Class dlgOptions
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
         Me.tbpWebsite = New System.Windows.Forms.TabPage()
         Me.ucrChkReminder = New instat.ucrCheck()
-        Me.ucrNudWidth = New instat.ucrNud()
-        Me.lblWidth = New System.Windows.Forms.Label()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -458,6 +459,29 @@ Partial Class dlgOptions
         Me.tbpOutputWindow.TabIndex = 2
         Me.tbpOutputWindow.Text = "Output Window"
         Me.tbpOutputWindow.UseVisualStyleBackColor = True
+        '
+        'lblWidth
+        '
+        Me.lblWidth.AutoSize = True
+        Me.lblWidth.Location = New System.Drawing.Point(543, 281)
+        Me.lblWidth.Name = "lblWidth"
+        Me.lblWidth.Size = New System.Drawing.Size(127, 20)
+        Me.lblWidth.TabIndex = 31
+        Me.lblWidth.Text = "Width to Display:"
+        '
+        'ucrNudWidth
+        '
+        Me.ucrNudWidth.AutoSize = True
+        Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWidth.Location = New System.Drawing.Point(759, 277)
+        Me.ucrNudWidth.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWidth.Name = "ucrNudWidth"
+        Me.ucrNudWidth.Size = New System.Drawing.Size(75, 30)
+        Me.ucrNudWidth.TabIndex = 30
+        Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudMaxOutputsHeight
         '
@@ -1079,6 +1103,7 @@ Partial Class dlgOptions
         '
         'tbpTailoredMenus
         '
+        Me.tbpTailoredMenus.Controls.Add(Me.ucrChkViewTricotMenu)
         Me.tbpTailoredMenus.Controls.Add(Me.ucrChkViewStructuredMenu)
         Me.tbpTailoredMenus.Controls.Add(Me.ucrChkViewOptionsByContextMenu)
         Me.tbpTailoredMenus.Controls.Add(Me.ucrChkViewProcurementMenu)
@@ -1091,6 +1116,16 @@ Partial Class dlgOptions
         Me.tbpTailoredMenus.TabIndex = 13
         Me.tbpTailoredMenus.Text = "Tailored Menus"
         Me.tbpTailoredMenus.UseVisualStyleBackColor = True
+        '
+        'ucrChkViewTricotMenu
+        '
+        Me.ucrChkViewTricotMenu.AutoSize = True
+        Me.ucrChkViewTricotMenu.Checked = False
+        Me.ucrChkViewTricotMenu.Location = New System.Drawing.Point(10, 132)
+        Me.ucrChkViewTricotMenu.Margin = New System.Windows.Forms.Padding(8)
+        Me.ucrChkViewTricotMenu.Name = "ucrChkViewTricotMenu"
+        Me.ucrChkViewTricotMenu.Size = New System.Drawing.Size(620, 51)
+        Me.ucrChkViewTricotMenu.TabIndex = 3
         '
         'ucrChkViewStructuredMenu
         '
@@ -1106,7 +1141,7 @@ Partial Class dlgOptions
         '
         Me.ucrChkViewOptionsByContextMenu.AutoSize = True
         Me.ucrChkViewOptionsByContextMenu.Checked = False
-        Me.ucrChkViewOptionsByContextMenu.Location = New System.Drawing.Point(10, 206)
+        Me.ucrChkViewOptionsByContextMenu.Location = New System.Drawing.Point(10, 190)
         Me.ucrChkViewOptionsByContextMenu.Margin = New System.Windows.Forms.Padding(8)
         Me.ucrChkViewOptionsByContextMenu.Name = "ucrChkViewOptionsByContextMenu"
         Me.ucrChkViewOptionsByContextMenu.Size = New System.Drawing.Size(620, 51)
@@ -1116,7 +1151,7 @@ Partial Class dlgOptions
         '
         Me.ucrChkViewProcurementMenu.AutoSize = True
         Me.ucrChkViewProcurementMenu.Checked = False
-        Me.ucrChkViewProcurementMenu.Location = New System.Drawing.Point(10, 142)
+        Me.ucrChkViewProcurementMenu.Location = New System.Drawing.Point(10, 247)
         Me.ucrChkViewProcurementMenu.Margin = New System.Windows.Forms.Padding(8)
         Me.ucrChkViewProcurementMenu.Name = "ucrChkViewProcurementMenu"
         Me.ucrChkViewProcurementMenu.Size = New System.Drawing.Size(620, 51)
@@ -1126,7 +1161,7 @@ Partial Class dlgOptions
         '
         Me.ucrChkViewClimaticMenu.AutoSize = True
         Me.ucrChkViewClimaticMenu.Checked = False
-        Me.ucrChkViewClimaticMenu.Location = New System.Drawing.Point(10, 80)
+        Me.ucrChkViewClimaticMenu.Location = New System.Drawing.Point(10, 77)
         Me.ucrChkViewClimaticMenu.Margin = New System.Windows.Forms.Padding(8)
         Me.ucrChkViewClimaticMenu.Name = "ucrChkViewClimaticMenu"
         Me.ucrChkViewClimaticMenu.Size = New System.Drawing.Size(610, 51)
@@ -1263,29 +1298,6 @@ Partial Class dlgOptions
         Me.ucrChkReminder.Name = "ucrChkReminder"
         Me.ucrChkReminder.Size = New System.Drawing.Size(620, 51)
         Me.ucrChkReminder.TabIndex = 2
-        '
-        'ucrNudWidth
-        '
-        Me.ucrNudWidth.AutoSize = True
-        Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWidth.Location = New System.Drawing.Point(759, 277)
-        Me.ucrNudWidth.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWidth.Name = "ucrNudWidth"
-        Me.ucrNudWidth.Size = New System.Drawing.Size(75, 30)
-        Me.ucrNudWidth.TabIndex = 30
-        Me.ucrNudWidth.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblWidth
-        '
-        Me.lblWidth.AutoSize = True
-        Me.lblWidth.Location = New System.Drawing.Point(543, 281)
-        Me.lblWidth.Name = "lblWidth"
-        Me.lblWidth.Size = New System.Drawing.Size(127, 20)
-        Me.lblWidth.TabIndex = 31
-        Me.lblWidth.Text = "Width to Display:"
         '
         'dlgOptions
         '
@@ -1439,4 +1451,5 @@ Partial Class dlgOptions
     Friend WithEvents ucrChkTurnOffUndo As ucrCheck
     Friend WithEvents lblWidth As Label
     Friend WithEvents ucrNudWidth As ucrNud
+    Friend WithEvents ucrChkViewTricotMenu As ucrCheck
 End Class

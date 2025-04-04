@@ -19,6 +19,7 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTbCommandsinOutput As Boolean = False
     Public Shared ReadOnly DEFAULTbIncludeCommentDefault As Boolean = True
     Public Shared ReadOnly DEFAULTbShowProcurementMenu As Boolean = False
+    Public Shared ReadOnly DEFAULTbShowTricotMenu As Boolean = False
     Public Shared ReadOnly DEFAULTbShowClimaticMenu As Boolean = True
     Public Shared ReadOnly DEFAULTbShowStructuredMenu As Boolean = False
     Public Shared ReadOnly DEFAULTbShowOptionsByContextMenu As Boolean = False
