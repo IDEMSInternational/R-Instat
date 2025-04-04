@@ -168,6 +168,8 @@ Public Class RCodeStructure
     ''' <param name="strTempModel">                 (Optional) The new value for the model. </param>
     ''' <param name="strTempGraph">                 (Optional) The new value for the graph. </param>
     ''' <param name="strTempSurv">                  (Optional) The new value for the surv. </param>
+    ''' <param name="strTempRanking">               (Optional) The new value for the ranking. </param>
+    ''' <param name="strTempGroupedRanking">        (Optional) The new value for the grouped ranking. </param>
     ''' <param name="strTempTable">                 (Optional) The new value for the table. </param>
     ''' <param name="bAssignToIsPrefix">            (Optional) The new value for bAssignToIsPrefix. </param>
     ''' <param name="bAssignToColumnWithoutNames">  (Optional) The new value for bAssignToColumnWithoutNames. </param>
@@ -186,6 +188,8 @@ Public Class RCodeStructure
                            Optional strTempModel As String = "",
                            Optional strTempGraph As String = "",
                            Optional strTempSurv As String = "",
+                           Optional strTempRanking As String = "",
+                           Optional strTempGroupedRanking As String = "",
                            Optional strTempTable As String = "",
                            Optional bAssignToIsPrefix As Boolean = False,
                            Optional bAssignToColumnWithoutNames As Boolean = False,
@@ -255,6 +259,20 @@ Public Class RCodeStructure
             strNewRObjectTypeToAssignTo = strTempSurv
             strNewRObjectTypeLabelToAssignTo = RObjectTypeLabel.StructureLabel
             'assumption is, by default a survival is in text format
+            strNewRObjectFormatToAssignTo = RObjectFormat.Text
+        End If
+
+        If Not strTempRanking = "" Then
+            strNewRObjectTypeToAssignTo = strTempRanking
+            strNewRObjectTypeLabelToAssignTo = RObjectTypeLabel.StructureLabel
+            'assumption is, by default a ranking object is in text format
+            strNewRObjectFormatToAssignTo = RObjectFormat.Text
+        End If
+
+        If Not strTempGroupedRanking = "" Then
+            strNewRObjectTypeToAssignTo = strTempGroupedRanking
+            strNewRObjectTypeLabelToAssignTo = RObjectTypeLabel.StructureLabel
+            'assumption is, by default a grouped ranking object is in text format
             strNewRObjectFormatToAssignTo = RObjectFormat.Text
         End If
 
