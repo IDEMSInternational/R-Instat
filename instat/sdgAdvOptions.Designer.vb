@@ -43,9 +43,10 @@ Partial Class sdgAdvOptions
         'lblDist
         '
         Me.lblDist.AutoSize = True
-        Me.lblDist.Location = New System.Drawing.Point(413, 158)
+        Me.lblDist.Location = New System.Drawing.Point(275, 107)
+        Me.lblDist.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblDist.Name = "lblDist"
-        Me.lblDist.Size = New System.Drawing.Size(93, 20)
+        Me.lblDist.Size = New System.Drawing.Size(62, 13)
         Me.lblDist.TabIndex = 29
         Me.lblDist.Text = "Distribution:"
         '
@@ -55,27 +56,29 @@ Partial Class sdgAdvOptions
         Me.ucrInputDist.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputDist.GetSetSelectedIndex = -1
         Me.ucrInputDist.IsReadOnly = False
-        Me.ucrInputDist.Location = New System.Drawing.Point(509, 155)
-        Me.ucrInputDist.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputDist.Location = New System.Drawing.Point(339, 103)
+        Me.ucrInputDist.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputDist.Name = "ucrInputDist"
-        Me.ucrInputDist.Size = New System.Drawing.Size(116, 32)
+        Me.ucrInputDist.Size = New System.Drawing.Size(77, 21)
         Me.ucrInputDist.TabIndex = 30
         '
         'lblCount
         '
         Me.lblCount.AutoSize = True
-        Me.lblCount.Location = New System.Drawing.Point(23, 161)
+        Me.lblCount.Location = New System.Drawing.Point(15, 106)
+        Me.lblCount.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblCount.Name = "lblCount"
-        Me.lblCount.Size = New System.Drawing.Size(56, 20)
+        Me.lblCount.Size = New System.Drawing.Size(38, 13)
         Me.lblCount.TabIndex = 25
         Me.lblCount.Text = "Count:"
         '
         'lblDays
         '
         Me.lblDays.AutoSize = True
-        Me.lblDays.Location = New System.Drawing.Point(203, 161)
+        Me.lblDays.Location = New System.Drawing.Point(135, 106)
+        Me.lblDays.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblDays.Name = "lblDays"
-        Me.lblDays.Size = New System.Drawing.Size(49, 20)
+        Me.lblDays.Size = New System.Drawing.Size(34, 13)
         Me.lblDays.TabIndex = 27
         Me.lblDays.Text = "Days:"
         '
@@ -84,12 +87,12 @@ Partial Class sdgAdvOptions
         Me.ucrNudDays.AutoSize = True
         Me.ucrNudDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDays.Location = New System.Drawing.Point(258, 158)
-        Me.ucrNudDays.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudDays.Location = New System.Drawing.Point(172, 103)
+        Me.ucrNudDays.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrNudDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDays.Name = "ucrNudDays"
-        Me.ucrNudDays.Size = New System.Drawing.Size(75, 32)
+        Me.ucrNudDays.Size = New System.Drawing.Size(50, 21)
         Me.ucrNudDays.TabIndex = 28
         Me.ucrNudDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -98,21 +101,22 @@ Partial Class sdgAdvOptions
         Me.ucrNudCount.AutoSize = True
         Me.ucrNudCount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCount.Location = New System.Drawing.Point(82, 158)
-        Me.ucrNudCount.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudCount.Location = New System.Drawing.Point(55, 103)
+        Me.ucrNudCount.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrNudCount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCount.Name = "ucrNudCount"
-        Me.ucrNudCount.Size = New System.Drawing.Size(75, 35)
+        Me.ucrNudCount.Size = New System.Drawing.Size(50, 23)
         Me.ucrNudCount.TabIndex = 26
         Me.ucrNudCount.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblBins
         '
         Me.lblBins.AutoSize = True
-        Me.lblBins.Location = New System.Drawing.Point(238, 89)
+        Me.lblBins.Location = New System.Drawing.Point(159, 58)
+        Me.lblBins.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblBins.Name = "lblBins"
-        Me.lblBins.Size = New System.Drawing.Size(44, 20)
+        Me.lblBins.Size = New System.Drawing.Size(30, 13)
         Me.lblBins.TabIndex = 23
         Me.lblBins.Text = "Bins:"
         '
@@ -122,29 +126,28 @@ Partial Class sdgAdvOptions
         Me.ucrInputBins.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputBins.GetSetSelectedIndex = -1
         Me.ucrInputBins.IsReadOnly = False
-        Me.ucrInputBins.Location = New System.Drawing.Point(286, 85)
-        Me.ucrInputBins.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputBins.Location = New System.Drawing.Point(191, 55)
+        Me.ucrInputBins.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputBins.Name = "ucrInputBins"
-        Me.ucrInputBins.Size = New System.Drawing.Size(198, 32)
+        Me.ucrInputBins.Size = New System.Drawing.Size(132, 21)
         Me.ucrInputBins.TabIndex = 24
         '
         'ucrButtonsOptions
         '
         Me.ucrButtonsOptions.AutoSize = True
-        Me.ucrButtonsOptions.Location = New System.Drawing.Point(140, 200)
-        Me.ucrButtonsOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrButtonsOptions.Location = New System.Drawing.Point(93, 130)
         Me.ucrButtonsOptions.Name = "ucrButtonsOptions"
-        Me.ucrButtonsOptions.Size = New System.Drawing.Size(335, 42)
+        Me.ucrButtonsOptions.Size = New System.Drawing.Size(224, 29)
         Me.ucrButtonsOptions.TabIndex = 31
         '
         'ucrChkCalcByMonth
         '
         Me.ucrChkCalcByMonth.AutoSize = True
         Me.ucrChkCalcByMonth.Checked = False
-        Me.ucrChkCalcByMonth.Location = New System.Drawing.Point(238, 39)
-        Me.ucrChkCalcByMonth.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkCalcByMonth.Location = New System.Drawing.Point(159, 25)
+        Me.ucrChkCalcByMonth.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrChkCalcByMonth.Name = "ucrChkCalcByMonth"
-        Me.ucrChkCalcByMonth.Size = New System.Drawing.Size(188, 35)
+        Me.ucrChkCalcByMonth.Size = New System.Drawing.Size(125, 23)
         Me.ucrChkCalcByMonth.TabIndex = 34
         '
         'ucrNudBins
@@ -152,31 +155,31 @@ Partial Class sdgAdvOptions
         Me.ucrNudBins.AutoSize = True
         Me.ucrNudBins.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBins.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBins.Location = New System.Drawing.Point(549, 41)
-        Me.ucrNudBins.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrNudBins.Location = New System.Drawing.Point(366, 27)
+        Me.ucrNudBins.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrNudBins.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBins.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBins.Name = "ucrNudBins"
-        Me.ucrNudBins.Size = New System.Drawing.Size(75, 32)
+        Me.ucrNudBins.Size = New System.Drawing.Size(50, 21)
         Me.ucrNudBins.TabIndex = 36
         Me.ucrNudBins.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblNumberBins
         '
         Me.lblNumberBins.AutoSize = True
-        Me.lblNumberBins.Location = New System.Drawing.Point(427, 44)
+        Me.lblNumberBins.Location = New System.Drawing.Point(285, 29)
+        Me.lblNumberBins.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblNumberBins.Name = "lblNumberBins"
-        Me.lblNumberBins.Size = New System.Drawing.Size(118, 20)
+        Me.lblNumberBins.Size = New System.Drawing.Size(79, 13)
         Me.lblNumberBins.TabIndex = 37
         Me.lblNumberBins.Text = "Number of Bins"
         '
         'rdoAutoCalculate
         '
         Me.rdoAutoCalculate.AutoSize = True
-        Me.rdoAutoCalculate.Location = New System.Drawing.Point(41, 42)
-        Me.rdoAutoCalculate.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoAutoCalculate.Location = New System.Drawing.Point(27, 27)
         Me.rdoAutoCalculate.Name = "rdoAutoCalculate"
-        Me.rdoAutoCalculate.Size = New System.Drawing.Size(170, 24)
+        Me.rdoAutoCalculate.Size = New System.Drawing.Size(116, 17)
         Me.rdoAutoCalculate.TabIndex = 83
         Me.rdoAutoCalculate.TabStop = True
         Me.rdoAutoCalculate.Text = "Autocalculate Bins:"
@@ -185,10 +188,9 @@ Partial Class sdgAdvOptions
         'rdoSpecifyBins
         '
         Me.rdoSpecifyBins.AutoSize = True
-        Me.rdoSpecifyBins.Location = New System.Drawing.Point(41, 88)
-        Me.rdoSpecifyBins.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSpecifyBins.Location = New System.Drawing.Point(27, 57)
         Me.rdoSpecifyBins.Name = "rdoSpecifyBins"
-        Me.rdoSpecifyBins.Size = New System.Drawing.Size(125, 24)
+        Me.rdoSpecifyBins.Size = New System.Drawing.Size(86, 17)
         Me.rdoSpecifyBins.TabIndex = 84
         Me.rdoSpecifyBins.TabStop = True
         Me.rdoSpecifyBins.Text = "Specify Bins:"
@@ -197,28 +199,26 @@ Partial Class sdgAdvOptions
         'ucrPnlBins
         '
         Me.ucrPnlBins.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlBins.Location = New System.Drawing.Point(25, 42)
-        Me.ucrPnlBins.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlBins.Location = New System.Drawing.Point(17, 27)
+        Me.ucrPnlBins.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrPnlBins.Name = "ucrPnlBins"
-        Me.ucrPnlBins.Size = New System.Drawing.Size(186, 72)
+        Me.ucrPnlBins.Size = New System.Drawing.Size(124, 47)
         Me.ucrPnlBins.TabIndex = 85
         '
         'grpDisplay
         '
-        Me.grpDisplay.Location = New System.Drawing.Point(21, 10)
-        Me.grpDisplay.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpDisplay.Location = New System.Drawing.Point(14, 6)
         Me.grpDisplay.Name = "grpDisplay"
-        Me.grpDisplay.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpDisplay.Size = New System.Drawing.Size(617, 130)
+        Me.grpDisplay.Size = New System.Drawing.Size(411, 84)
         Me.grpDisplay.TabIndex = 86
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Bins"
         '
         'sdgAdvOptions
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(641, 257)
+        Me.ClientSize = New System.Drawing.Size(427, 167)
         Me.Controls.Add(Me.rdoSpecifyBins)
         Me.Controls.Add(Me.rdoAutoCalculate)
         Me.Controls.Add(Me.lblNumberBins)
@@ -236,6 +236,7 @@ Partial Class sdgAdvOptions
         Me.Controls.Add(Me.ucrPnlBins)
         Me.Controls.Add(Me.grpDisplay)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgAdvOptions"

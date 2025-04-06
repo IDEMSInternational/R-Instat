@@ -20,7 +20,7 @@ Public Class dlgOutfillingStationData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog = False
-    Private clsDoFillingFunction As New RFunction
+    Public clsDoFillingFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsSelectFunction, clsSelectFunction2 As New RFunction
 
@@ -96,7 +96,6 @@ Public Class dlgOutfillingStationData
         dctLogical.Add("FALSE", "FALSE")
         ucrInputMarkov.SetItems(dctLogical)
         ucrInputMarkov.SetDropDownStyleAsNonEditable()
-
 
         ucrChkOmitMonths.SetText("Dry Month(s)")
         ucrChkOmitMonths.AddParameterValuesCondition(True, "omit", "True")

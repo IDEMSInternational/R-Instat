@@ -30,16 +30,19 @@ Public Class sdgAdvOptions
         Dim dctDist As New Dictionary(Of String, String)
         ucrButtonsOptions.iHelpTopicID = 708
 
+        'Add radio buttons to the panel and prevents them from shifting outside the panel on reopening
+
         If Not bInitialised Then
             ucrPnlBins.AddRadioButton(rdoAutoCalculate)
             ucrPnlBins.AddRadioButton(rdoSpecifyBins)
-            ucrPnlBins.AddParameterPresentCondition(rdoAutoCalculate, "autobins", "TRUE")
-            ucrPnlBins.AddParameterPresentCondition(rdoSpecifyBins, "autobins", "FALSE")
+            ucrPnlBins.AddParameterValuesCondition(rdoAutoCalculate, "autobins", "True")
+            ucrPnlBins.AddParameterValuesCondition(rdoSpecifyBins, "autobins", "False")
+
             bInitialised = True
         End If
 
-        ucrPnlBins.AddToLinkedControls({ucrChkCalcByMonth, ucrNudBins}, {rdoAutoCalculate}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlBins.AddToLinkedControls(ucrInputBins, {rdoSpecifyBins}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlBins.AddToLinkedControls({ucrChkCalcByMonth, ucrNudBins}, {rdoAutoCalculate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlBins.AddToLinkedControls(ucrInputBins, {rdoSpecifyBins}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrChkCalcByMonth.SetText("Calculate by Month")
         ucrChkCalcByMonth.AddParameterValuesCondition(True, "calc", "True")
@@ -82,7 +85,9 @@ Public Class sdgAdvOptions
         End If
         clsDummyFunction = New RFunction
 
-        clsDummyFunction.AddParameter("calc", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("calc", "True", iPosition:=0)
+        clsDummyFunction.AddParameter("autobins", "True", iPosition:=1)
+
 
         clsDoFillingFunction = clsNewDoFillingFunction
 
@@ -90,14 +95,12 @@ Public Class sdgAdvOptions
         ucrNudDays.SetRCode(clsDoFillingFunction, bReset)
         ucrInputDist.SetRCode(clsDoFillingFunction, bReset)
         ucrNudBins.SetRCode(clsDoFillingFunction, bReset)
-
         If bReset Then
-            ucrPnlBins.SetRCode(clsDoFillingFunction, bReset)
             ucrChkCalcByMonth.SetRCode(clsDummyFunction, bReset)
+            ucrPnlBins.SetRCode(clsDummyFunction, bReset)
         End If
 
     End Sub
-
 
     Private Sub AddCustomBinsParmeter()
         If rdoSpecifyBins.Checked Then
@@ -158,7 +161,7 @@ Public Class sdgAdvOptions
     Private Sub AddByMonthParameter()
         If rdoAutoCalculate.Checked Then
             If ucrChkCalcByMonth.Checked Then
-                clsDoFillingFunction.AddParameter("by_month  ", "TRUE", iPosition:=112)
+                clsDoFillingFunction.AddParameter("by_month", "TRUE", iPosition:=112)
             Else
                 clsDoFillingFunction.RemoveParameterByName("by_month")
             End If
@@ -176,11 +179,9 @@ Public Class sdgAdvOptions
         AddNumberOfBinsParameter()
         AddByMonthParameter()
 
-        If rdoAutoCalculate.Checked Then
-            clsDoFillingFunction.AddParameter("autobins", "TRUE", iPosition:=11)
-        Else
-            clsDoFillingFunction.RemoveParameterByName("autobins")
-        End If
+        ' Always add autobins with a value
+        clsDoFillingFunction.RemoveParameterByName("autobins")
+        clsDoFillingFunction.AddParameter("autobins", If(rdoAutoCalculate.Checked, "TRUE", "FALSE"), iPosition:=11)
     End Sub
 
 End Class
