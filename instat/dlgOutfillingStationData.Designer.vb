@@ -36,15 +36,7 @@ Partial Class dlgOutfillingStationData
         Me.lblLong = New System.Windows.Forms.Label()
         Me.lblRain = New System.Windows.Forms.Label()
         Me.lblEstimates = New System.Windows.Forms.Label()
-        Me.ucrInputBins = New instat.ucrInputComboBox()
-        Me.lblBins = New System.Windows.Forms.Label()
-        Me.ucrNudCount = New instat.ucrNud()
-        Me.ucrNudDays = New instat.ucrNud()
-        Me.lblDays = New System.Windows.Forms.Label()
-        Me.lblCount = New System.Windows.Forms.Label()
-        Me.ucrInputDist = New instat.ucrInputComboBox()
         Me.ucrInputMarkov = New instat.ucrInputComboBox()
-        Me.lblDist = New System.Windows.Forms.Label()
         Me.lblMarkov = New System.Windows.Forms.Label()
         Me.ucrChkOmitMonths = New instat.ucrCheck()
         Me.ucrInputOmitMonths = New instat.ucrInputComboBox()
@@ -54,15 +46,16 @@ Partial Class dlgOutfillingStationData
         Me.cmdFilterFromFactors = New System.Windows.Forms.Button()
         Me.ucrSaveResultEst = New instat.ucrSave()
         Me.ucrSaveResultGen = New instat.ucrSave()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrBase
         '
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(6, 455)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 636)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 51)
+        Me.ucrBase.Size = New System.Drawing.Size(615, 87)
         Me.ucrBase.TabIndex = 27
         '
         'ucrSelectorOutfilling
@@ -71,21 +64,21 @@ Partial Class dlgOutfillingStationData
         Me.ucrSelectorOutfilling.bDropUnusedFilterLevels = False
         Me.ucrSelectorOutfilling.bShowHiddenColumns = False
         Me.ucrSelectorOutfilling.bUseCurrentFilter = True
-        Me.ucrSelectorOutfilling.Location = New System.Drawing.Point(6, 10)
+        Me.ucrSelectorOutfilling.Location = New System.Drawing.Point(9, 15)
         Me.ucrSelectorOutfilling.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOutfilling.Name = "ucrSelectorOutfilling"
-        Me.ucrSelectorOutfilling.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorOutfilling.Size = New System.Drawing.Size(320, 282)
         Me.ucrSelectorOutfilling.TabIndex = 0
         '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(328, 39)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(492, 60)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(180, 32)
         Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.TabIndex = 2
         Me.ucrReceiverStation.ucrSelector = Nothing
@@ -94,11 +87,11 @@ Partial Class dlgOutfillingStationData
         '
         Me.ucrReceiverRain.AutoSize = True
         Me.ucrReceiverRain.frmParent = Me
-        Me.ucrReceiverRain.Location = New System.Drawing.Point(328, 221)
+        Me.ucrReceiverRain.Location = New System.Drawing.Point(492, 340)
         Me.ucrReceiverRain.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRain.Name = "ucrReceiverRain"
         Me.ucrReceiverRain.Selector = Nothing
-        Me.ucrReceiverRain.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverRain.Size = New System.Drawing.Size(180, 31)
         Me.ucrReceiverRain.strNcFilePath = ""
         Me.ucrReceiverRain.TabIndex = 12
         Me.ucrReceiverRain.ucrSelector = Nothing
@@ -107,11 +100,11 @@ Partial Class dlgOutfillingStationData
         '
         Me.ucrReceiverLongitude.AutoSize = True
         Me.ucrReceiverLongitude.frmParent = Me
-        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(328, 177)
+        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(492, 272)
         Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
         Me.ucrReceiverLongitude.Selector = Nothing
-        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(180, 32)
         Me.ucrReceiverLongitude.strNcFilePath = ""
         Me.ucrReceiverLongitude.TabIndex = 10
         Me.ucrReceiverLongitude.ucrSelector = Nothing
@@ -120,11 +113,11 @@ Partial Class dlgOutfillingStationData
         '
         Me.ucrReceiverLatitude.AutoSize = True
         Me.ucrReceiverLatitude.frmParent = Me
-        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(328, 130)
+        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(492, 200)
         Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
         Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(120, 23)
+        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(180, 35)
         Me.ucrReceiverLatitude.strNcFilePath = ""
         Me.ucrReceiverLatitude.TabIndex = 8
         Me.ucrReceiverLatitude.ucrSelector = Nothing
@@ -133,11 +126,11 @@ Partial Class dlgOutfillingStationData
         '
         Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(328, 83)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(492, 128)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(180, 31)
         Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.TabIndex = 6
         Me.ucrReceiverDate.ucrSelector = Nothing
@@ -146,11 +139,11 @@ Partial Class dlgOutfillingStationData
         '
         Me.ucrReceiverEstimates.AutoSize = True
         Me.ucrReceiverEstimates.frmParent = Me
-        Me.ucrReceiverEstimates.Location = New System.Drawing.Point(328, 267)
+        Me.ucrReceiverEstimates.Location = New System.Drawing.Point(492, 411)
         Me.ucrReceiverEstimates.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverEstimates.Name = "ucrReceiverEstimates"
         Me.ucrReceiverEstimates.Selector = Nothing
-        Me.ucrReceiverEstimates.Size = New System.Drawing.Size(120, 22)
+        Me.ucrReceiverEstimates.Size = New System.Drawing.Size(180, 34)
         Me.ucrReceiverEstimates.strNcFilePath = ""
         Me.ucrReceiverEstimates.TabIndex = 14
         Me.ucrReceiverEstimates.ucrSelector = Nothing
@@ -158,144 +151,56 @@ Partial Class dlgOutfillingStationData
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(331, 21)
-        Me.lblStation.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblStation.Location = New System.Drawing.Point(496, 32)
         Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(43, 13)
+        Me.lblStation.Size = New System.Drawing.Size(64, 20)
         Me.lblStation.TabIndex = 1
         Me.lblStation.Text = "Station:"
         '
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(331, 66)
-        Me.lblDate.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblDate.Location = New System.Drawing.Point(496, 102)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(33, 13)
+        Me.lblDate.Size = New System.Drawing.Size(48, 20)
         Me.lblDate.TabIndex = 5
         Me.lblDate.Text = "Date:"
         '
         'lblLatitude
         '
         Me.lblLatitude.AutoSize = True
-        Me.lblLatitude.Location = New System.Drawing.Point(331, 113)
-        Me.lblLatitude.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblLatitude.Location = New System.Drawing.Point(496, 174)
         Me.lblLatitude.Name = "lblLatitude"
-        Me.lblLatitude.Size = New System.Drawing.Size(48, 13)
+        Me.lblLatitude.Size = New System.Drawing.Size(71, 20)
         Me.lblLatitude.TabIndex = 7
         Me.lblLatitude.Text = "Latitude:"
         '
         'lblLong
         '
         Me.lblLong.AutoSize = True
-        Me.lblLong.Location = New System.Drawing.Point(331, 159)
-        Me.lblLong.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblLong.Location = New System.Drawing.Point(496, 245)
         Me.lblLong.Name = "lblLong"
-        Me.lblLong.Size = New System.Drawing.Size(57, 13)
+        Me.lblLong.Size = New System.Drawing.Size(84, 20)
         Me.lblLong.TabIndex = 9
         Me.lblLong.Text = "Longitude:"
         '
         'lblRain
         '
         Me.lblRain.AutoSize = True
-        Me.lblRain.Location = New System.Drawing.Point(331, 204)
-        Me.lblRain.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblRain.Location = New System.Drawing.Point(496, 314)
         Me.lblRain.Name = "lblRain"
-        Me.lblRain.Size = New System.Drawing.Size(32, 13)
+        Me.lblRain.Size = New System.Drawing.Size(46, 20)
         Me.lblRain.TabIndex = 11
         Me.lblRain.Text = "Rain:"
         '
         'lblEstimates
         '
         Me.lblEstimates.AutoSize = True
-        Me.lblEstimates.Location = New System.Drawing.Point(331, 248)
-        Me.lblEstimates.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblEstimates.Location = New System.Drawing.Point(496, 382)
         Me.lblEstimates.Name = "lblEstimates"
-        Me.lblEstimates.Size = New System.Drawing.Size(55, 13)
+        Me.lblEstimates.Size = New System.Drawing.Size(84, 20)
         Me.lblEstimates.TabIndex = 13
         Me.lblEstimates.Text = "Estimates:"
-        '
-        'ucrInputBins
-        '
-        Me.ucrInputBins.AddQuotesIfUnrecognised = True
-        Me.ucrInputBins.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputBins.GetSetSelectedIndex = -1
-        Me.ucrInputBins.IsReadOnly = False
-        Me.ucrInputBins.Location = New System.Drawing.Point(60, 324)
-        Me.ucrInputBins.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrInputBins.Name = "ucrInputBins"
-        Me.ucrInputBins.Size = New System.Drawing.Size(132, 21)
-        Me.ucrInputBins.TabIndex = 16
-        '
-        'lblBins
-        '
-        Me.lblBins.AutoSize = True
-        Me.lblBins.Location = New System.Drawing.Point(6, 328)
-        Me.lblBins.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblBins.Name = "lblBins"
-        Me.lblBins.Size = New System.Drawing.Size(30, 13)
-        Me.lblBins.TabIndex = 15
-        Me.lblBins.Text = "Bins:"
-        '
-        'ucrNudCount
-        '
-        Me.ucrNudCount.AutoSize = True
-        Me.ucrNudCount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCount.Location = New System.Drawing.Point(60, 356)
-        Me.ucrNudCount.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrNudCount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCount.Name = "ucrNudCount"
-        Me.ucrNudCount.Size = New System.Drawing.Size(50, 32)
-        Me.ucrNudCount.TabIndex = 18
-        Me.ucrNudCount.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudDays
-        '
-        Me.ucrNudDays.AutoSize = True
-        Me.ucrNudDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDays.Location = New System.Drawing.Point(328, 297)
-        Me.ucrNudDays.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrNudDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDays.Name = "ucrNudDays"
-        Me.ucrNudDays.Size = New System.Drawing.Size(50, 21)
-        Me.ucrNudDays.TabIndex = 20
-        Me.ucrNudDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblDays
-        '
-        Me.lblDays.AutoSize = True
-        Me.lblDays.Location = New System.Drawing.Point(291, 299)
-        Me.lblDays.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblDays.Name = "lblDays"
-        Me.lblDays.Size = New System.Drawing.Size(34, 13)
-        Me.lblDays.TabIndex = 19
-        Me.lblDays.Text = "Days:"
-        '
-        'lblCount
-        '
-        Me.lblCount.AutoSize = True
-        Me.lblCount.Location = New System.Drawing.Point(6, 360)
-        Me.lblCount.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblCount.Name = "lblCount"
-        Me.lblCount.Size = New System.Drawing.Size(38, 13)
-        Me.lblCount.TabIndex = 17
-        Me.lblCount.Text = "Count:"
-        '
-        'ucrInputDist
-        '
-        Me.ucrInputDist.AddQuotesIfUnrecognised = True
-        Me.ucrInputDist.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrInputDist.GetSetSelectedIndex = -1
-        Me.ucrInputDist.IsReadOnly = False
-        Me.ucrInputDist.Location = New System.Drawing.Point(328, 330)
-        Me.ucrInputDist.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrInputDist.Name = "ucrInputDist"
-        Me.ucrInputDist.Size = New System.Drawing.Size(77, 21)
-        Me.ucrInputDist.TabIndex = 22
         '
         'ucrInputMarkov
         '
@@ -303,29 +208,18 @@ Partial Class dlgOutfillingStationData
         Me.ucrInputMarkov.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMarkov.GetSetSelectedIndex = -1
         Me.ucrInputMarkov.IsReadOnly = False
-        Me.ucrInputMarkov.Location = New System.Drawing.Point(328, 369)
-        Me.ucrInputMarkov.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrInputMarkov.Location = New System.Drawing.Point(77, 491)
+        Me.ucrInputMarkov.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputMarkov.Name = "ucrInputMarkov"
-        Me.ucrInputMarkov.Size = New System.Drawing.Size(77, 21)
+        Me.ucrInputMarkov.Size = New System.Drawing.Size(116, 32)
         Me.ucrInputMarkov.TabIndex = 24
-        '
-        'lblDist
-        '
-        Me.lblDist.AutoSize = True
-        Me.lblDist.Location = New System.Drawing.Point(264, 332)
-        Me.lblDist.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblDist.Name = "lblDist"
-        Me.lblDist.Size = New System.Drawing.Size(62, 13)
-        Me.lblDist.TabIndex = 21
-        Me.lblDist.Text = "Distribution:"
         '
         'lblMarkov
         '
         Me.lblMarkov.AutoSize = True
-        Me.lblMarkov.Location = New System.Drawing.Point(282, 372)
-        Me.lblMarkov.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblMarkov.Location = New System.Drawing.Point(5, 494)
         Me.lblMarkov.Name = "lblMarkov"
-        Me.lblMarkov.Size = New System.Drawing.Size(46, 13)
+        Me.lblMarkov.Size = New System.Drawing.Size(64, 20)
         Me.lblMarkov.TabIndex = 23
         Me.lblMarkov.Text = "Markov:"
         '
@@ -333,10 +227,10 @@ Partial Class dlgOutfillingStationData
         '
         Me.ucrChkOmitMonths.AutoSize = True
         Me.ucrChkOmitMonths.Checked = False
-        Me.ucrChkOmitMonths.Location = New System.Drawing.Point(6, 245)
-        Me.ucrChkOmitMonths.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkOmitMonths.Location = New System.Drawing.Point(9, 377)
+        Me.ucrChkOmitMonths.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkOmitMonths.Name = "ucrChkOmitMonths"
-        Me.ucrChkOmitMonths.Size = New System.Drawing.Size(114, 23)
+        Me.ucrChkOmitMonths.Size = New System.Drawing.Size(171, 35)
         Me.ucrChkOmitMonths.TabIndex = 25
         '
         'ucrInputOmitMonths
@@ -345,30 +239,30 @@ Partial Class dlgOutfillingStationData
         Me.ucrInputOmitMonths.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputOmitMonths.GetSetSelectedIndex = -1
         Me.ucrInputOmitMonths.IsReadOnly = False
-        Me.ucrInputOmitMonths.Location = New System.Drawing.Point(133, 244)
-        Me.ucrInputOmitMonths.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrInputOmitMonths.Location = New System.Drawing.Point(200, 375)
+        Me.ucrInputOmitMonths.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputOmitMonths.Name = "ucrInputOmitMonths"
-        Me.ucrInputOmitMonths.Size = New System.Drawing.Size(114, 21)
+        Me.ucrInputOmitMonths.Size = New System.Drawing.Size(171, 32)
         Me.ucrInputOmitMonths.TabIndex = 28
         '
         'ucrChkStationToExclude
         '
         Me.ucrChkStationToExclude.AutoSize = True
         Me.ucrChkStationToExclude.Checked = False
-        Me.ucrChkStationToExclude.Location = New System.Drawing.Point(6, 202)
-        Me.ucrChkStationToExclude.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkStationToExclude.Location = New System.Drawing.Point(9, 311)
+        Me.ucrChkStationToExclude.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkStationToExclude.Name = "ucrChkStationToExclude"
-        Me.ucrChkStationToExclude.Size = New System.Drawing.Size(125, 23)
+        Me.ucrChkStationToExclude.Size = New System.Drawing.Size(188, 35)
         Me.ucrChkStationToExclude.TabIndex = 29
         '
         'ucrChkRandomSeed
         '
         Me.ucrChkRandomSeed.AutoSize = True
         Me.ucrChkRandomSeed.Checked = False
-        Me.ucrChkRandomSeed.Location = New System.Drawing.Point(6, 282)
-        Me.ucrChkRandomSeed.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkRandomSeed.Location = New System.Drawing.Point(9, 434)
+        Me.ucrChkRandomSeed.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkRandomSeed.Name = "ucrChkRandomSeed"
-        Me.ucrChkRandomSeed.Size = New System.Drawing.Size(117, 23)
+        Me.ucrChkRandomSeed.Size = New System.Drawing.Size(176, 35)
         Me.ucrChkRandomSeed.TabIndex = 30
         '
         'ucrNudRandomSeed
@@ -376,21 +270,22 @@ Partial Class dlgOutfillingStationData
         Me.ucrNudRandomSeed.AutoSize = True
         Me.ucrNudRandomSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRandomSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRandomSeed.Location = New System.Drawing.Point(133, 284)
-        Me.ucrNudRandomSeed.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrNudRandomSeed.Location = New System.Drawing.Point(200, 437)
+        Me.ucrNudRandomSeed.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrNudRandomSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRandomSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRandomSeed.Name = "ucrNudRandomSeed"
-        Me.ucrNudRandomSeed.Size = New System.Drawing.Size(78, 27)
+        Me.ucrNudRandomSeed.Size = New System.Drawing.Size(117, 42)
         Me.ucrNudRandomSeed.TabIndex = 31
         Me.ucrNudRandomSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'cmdFilterFromFactors
         '
         Me.cmdFilterFromFactors.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFilterFromFactors.Location = New System.Drawing.Point(133, 197)
+        Me.cmdFilterFromFactors.Location = New System.Drawing.Point(200, 303)
+        Me.cmdFilterFromFactors.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdFilterFromFactors.Name = "cmdFilterFromFactors"
-        Me.cmdFilterFromFactors.Size = New System.Drawing.Size(73, 33)
+        Me.cmdFilterFromFactors.Size = New System.Drawing.Size(110, 51)
         Me.cmdFilterFromFactors.TabIndex = 33
         Me.cmdFilterFromFactors.Tag = "Define_New_Filter"
         Me.cmdFilterFromFactors.Text = "Include"
@@ -399,26 +294,39 @@ Partial Class dlgOutfillingStationData
         'ucrSaveResultEst
         '
         Me.ucrSaveResultEst.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveResultEst.Location = New System.Drawing.Point(6, 387)
-        Me.ucrSaveResultEst.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.ucrSaveResultEst.Location = New System.Drawing.Point(9, 540)
+        Me.ucrSaveResultEst.Margin = New System.Windows.Forms.Padding(6, 9, 6, 9)
         Me.ucrSaveResultEst.Name = "ucrSaveResultEst"
-        Me.ucrSaveResultEst.Size = New System.Drawing.Size(326, 22)
+        Me.ucrSaveResultEst.Size = New System.Drawing.Size(489, 34)
         Me.ucrSaveResultEst.TabIndex = 197
         '
         'ucrSaveResultGen
         '
         Me.ucrSaveResultGen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveResultGen.Location = New System.Drawing.Point(6, 421)
-        Me.ucrSaveResultGen.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.ucrSaveResultGen.Location = New System.Drawing.Point(9, 593)
+        Me.ucrSaveResultGen.Margin = New System.Windows.Forms.Padding(6, 9, 6, 9)
         Me.ucrSaveResultGen.Name = "ucrSaveResultGen"
-        Me.ucrSaveResultGen.Size = New System.Drawing.Size(326, 22)
+        Me.ucrSaveResultGen.Size = New System.Drawing.Size(489, 34)
         Me.ucrSaveResultGen.TabIndex = 198
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOptions.Location = New System.Drawing.Point(492, 464)
+        Me.cmdOptions.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(164, 51)
+        Me.cmdOptions.TabIndex = 199
+        Me.cmdOptions.Tag = "Define_New_Filter"
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'dlgOutfillingStationData
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(463, 517)
+        Me.ClientSize = New System.Drawing.Size(694, 740)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrSaveResultGen)
         Me.Controls.Add(Me.ucrSaveResultEst)
         Me.Controls.Add(Me.cmdFilterFromFactors)
@@ -428,15 +336,7 @@ Partial Class dlgOutfillingStationData
         Me.Controls.Add(Me.ucrInputOmitMonths)
         Me.Controls.Add(Me.ucrChkOmitMonths)
         Me.Controls.Add(Me.lblMarkov)
-        Me.Controls.Add(Me.lblDist)
         Me.Controls.Add(Me.ucrInputMarkov)
-        Me.Controls.Add(Me.ucrInputDist)
-        Me.Controls.Add(Me.lblCount)
-        Me.Controls.Add(Me.lblDays)
-        Me.Controls.Add(Me.ucrNudDays)
-        Me.Controls.Add(Me.ucrNudCount)
-        Me.Controls.Add(Me.lblBins)
-        Me.Controls.Add(Me.ucrInputBins)
         Me.Controls.Add(Me.lblEstimates)
         Me.Controls.Add(Me.lblRain)
         Me.Controls.Add(Me.lblLong)
@@ -452,7 +352,6 @@ Partial Class dlgOutfillingStationData
         Me.Controls.Add(Me.ucrSelectorOutfilling)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgOutfillingStationData"
@@ -477,16 +376,8 @@ Partial Class dlgOutfillingStationData
     Friend WithEvents ucrReceiverLatitude As ucrReceiverSingle
     Friend WithEvents ucrReceiverLongitude As ucrReceiverSingle
     Friend WithEvents ucrReceiverRain As ucrReceiverSingle
-    Friend WithEvents lblCount As Label
-    Friend WithEvents lblDays As Label
-    Friend WithEvents ucrNudDays As ucrNud
-    Friend WithEvents ucrNudCount As ucrNud
-    Friend WithEvents lblBins As Label
-    Friend WithEvents ucrInputBins As ucrInputComboBox
     Friend WithEvents lblMarkov As Label
-    Friend WithEvents lblDist As Label
     Friend WithEvents ucrInputMarkov As ucrInputComboBox
-    Friend WithEvents ucrInputDist As ucrInputComboBox
     Friend WithEvents ucrChkOmitMonths As ucrCheck
     Friend WithEvents ucrInputOmitMonths As ucrInputComboBox
     Friend WithEvents ucrNudRandomSeed As ucrNud
@@ -495,4 +386,5 @@ Partial Class dlgOutfillingStationData
     Friend WithEvents cmdFilterFromFactors As Button
     Friend WithEvents ucrSaveResultGen As ucrSave
     Friend WithEvents ucrSaveResultEst As ucrSave
+    Friend WithEvents cmdOptions As Button
 End Class
