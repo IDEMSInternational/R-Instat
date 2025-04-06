@@ -31,13 +31,11 @@ Public Class sdgAdvOptions
         ucrButtonsOptions.iHelpTopicID = 708
 
         'Add radio buttons to the panel and prevents them from shifting outside the panel on reopening
-
         If Not bInitialised Then
             ucrPnlBins.AddRadioButton(rdoAutoCalculate)
             ucrPnlBins.AddRadioButton(rdoSpecifyBins)
             ucrPnlBins.AddParameterValuesCondition(rdoAutoCalculate, "autobins", "True")
             ucrPnlBins.AddParameterValuesCondition(rdoSpecifyBins, "autobins", "False")
-
             bInitialised = True
         End If
 
@@ -87,7 +85,6 @@ Public Class sdgAdvOptions
 
         clsDummyFunction.AddParameter("calc", "True", iPosition:=0)
         clsDummyFunction.AddParameter("autobins", "True", iPosition:=1)
-
 
         clsDoFillingFunction = clsNewDoFillingFunction
 
