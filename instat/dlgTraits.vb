@@ -19,6 +19,10 @@ Imports instat.Translations
 Public Class dlgTraits
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+
+    Private clsGetVarMetadataFunction, clsGetObjectRFunction, clsRankingsItemsFunction,
+                  clsPlotNetWorkFunction, clsCFunction As New RFunction
+    Private clsGetRankingOperator, clsColNamesOperator As New ROperator
     Private Sub dlgTraits_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -34,26 +38,79 @@ Public Class dlgTraits
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
 
         ucrTraitGraphSelector.SetParameter(New RParameter("data_name", 0))
         ucrTraitGraphSelector.SetParameterIsString()
 
-        ucrReceiverTrait.SetParameter(New RParameter("", 1))
+        ucrReceiverTrait.SetParameter(New RParameter("column", 1, bNewIncludeArgumentName:=False))
         ucrReceiverTrait.Selector = ucrTraitGraphSelector
         ucrReceiverTrait.SetParameterIsString()
+        ucrReceiverTrait.bAutoFill = True
         ucrReceiverTrait.strSelectorHeading = "Traits"
-        ucrReceiverTrait.SetIncludedDataTypes({"traits"})
+        ucrReceiverTrait.SetMeAsReceiver()
+        ucrReceiverTrait.SetTricotType({"traits"})
     End Sub
 
     Private Sub SetDefaults()
-
+        clsGetVarMetadataFunction = New RFunction
+        clsGetObjectRFunction = New RFunction
+        clsRankingsItemsFunction = New RFunction
+        clsPlotNetWorkFunction = New RFunction
+        clsCFunction = New RFunction
+        clsGetRankingOperator = New ROperator
+        clsColNamesOperator = New ROperator
 
         ucrTraitGraphSelector.Reset()
-        ucrReceiverTrait.SetMeAsReceiver()
+
+        clsCFunction.SetRCommand("c")
+        clsCFunction.SetAssignTo("col_names")
+        Dim strCAssignedScript As String = ""
+        clsCFunction.ToScript(strScript:=strCAssignedScript)
+
+        clsGetVarMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+        clsGetVarMetadataFunction.AddParameter("column", clsRFunctionParameter:=clsCFunction, iPosition:=1)
+        clsGetVarMetadataFunction.SetAssignTo("get_index_names ")
+        Dim strVarMetadataAssignedScript As String = ""
+        clsGetVarMetadataFunction.ToScript(strScript:=strVarMetadataAssignedScript)
+
+        clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object")
+        clsGetObjectRFunction.AddParameter("list", Chr(34) & "rankings_list" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+
+        clsGetRankingOperator.SetOperation("$")
+        clsGetRankingOperator.AddParameter("left", clsRFunctionParameter:=clsGetObjectRFunction, iPosition:=0)
+        clsGetRankingOperator.AddParameter("right", "object")
+        clsGetRankingOperator.bSpaceAroundOperation = False
+        clsGetRankingOperator.SetAssignTo("rankings_object")
+        Dim strGetRankingAssignedScript As String = ""
+        clsGetRankingOperator.ToScript(strScript:=strGetRankingAssignedScript)
+
+        clsRankingsItemsFunction.SetRCommand("get_ranking_items")
+        clsRankingsItemsFunction.AddParameter("data", clsRFunctionParameter:=clsGetVarMetadataFunction, iPosition:=0)
+        clsRankingsItemsFunction.AddParameter("vars_to_get", "col_names", iPosition:=1)
+        clsRankingsItemsFunction.AddParameter("index", Chr(34) & "rankings_index" & Chr(34), iPosition:=2)
+        clsRankingsItemsFunction.AddParameter("rankings_object", clsROperatorParameter:=clsGetRankingOperator, bIncludeArgumentName:=False, iPosition:=3)
+        clsRankingsItemsFunction.SetAssignTo("rankings_object")
+        Dim strAssignedScript As String = ""
+        clsRankingsItemsFunction.ToScript(strScript:=strAssignedScript)
+
+        clsColNamesOperator.SetOperation("<-")
+        clsColNamesOperator.AddParameter("left", "names(rankings_object)")
+        clsColNamesOperator.AddParameter("right", "col_names")
+
+        clsPlotNetWorkFunction.SetRCommand("plot_network")
+        clsPlotNetWorkFunction.AddParameter("rank", "rankings_object[[1]]", bIncludeArgumentName:=False)
+        clsPlotNetWorkFunction.iCallType = 3
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRankingsItemsFunction)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsColNamesOperator, 1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsPlotNetWorkFunction, 2)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrTraitGraphSelector.AddAdditionalCodeParameterPair(clsGetObjectRFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
+        ucrTraitGraphSelector.SetRCode(clsGetVarMetadataFunction, bReset)
+        ucrReceiverTrait.SetRCode(clsCFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
