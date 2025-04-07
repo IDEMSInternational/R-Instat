@@ -3426,6 +3426,9 @@
     <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
       <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraits.resx">
+      <DependentUpon>dlgTraits.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgUseTable.resx">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
     </EmbeddedResource>
