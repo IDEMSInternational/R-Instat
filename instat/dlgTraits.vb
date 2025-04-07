@@ -19,7 +19,6 @@ Imports instat.Translations
 Public Class dlgTraits
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
     Private clsGetVarMetadataFunction, clsGetObjectRFunction, clsRankingsItemsFunction,
                   clsPlotNetWorkFunction, clsCFunction As New RFunction
     Private clsGetRankingOperator, clsColNamesOperator As New ROperator
