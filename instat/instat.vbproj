@@ -317,6 +317,12 @@
     <Compile Include="dlgSurvey.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTraits.Designer.vb">
+      <DependentUpon>dlgTraits.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraits.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgUseTable.Designer.vb">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
     </Compile>
