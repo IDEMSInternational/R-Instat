@@ -569,6 +569,18 @@ Public Class ucrReceiver
         SetIncludedAutoFillProperties(dctTemp)
     End Sub
 
+    Public Sub SetTricotType(strInclude As String())
+        Dim strTypes(strInclude.Count - 1) As String
+
+        Array.Copy(strInclude, strTypes, strInclude.Length)
+        'If the two previous lines where not added, the modification of value performed on strTypes was immediately performed on strInclude, then the argument passed into the function such as clsCurrGeom.clsAesParameters(i).strIncludedDataTypes in ucrGeomListWithAes.SetParameters would have been edited (i.e. quotes would have been added to the types names in the strIncludedDataTypes of the i'th AesParameter of the current Geom...), which we don't want !
+
+        For i = 0 To strInclude.Count - 1
+            strTypes(i) = Chr(34) & strInclude(i) & Chr(34)
+        Next
+        AddIncludedMetadataProperty("Tricot_Type", strTypes)
+    End Sub
+
     Public Sub SetOptionsByContextType(strSingleType As String, Optional strQuotes As String = Chr(34))
         AddIncludedMetadataProperty("O_by_C_Type", {strQuotes & strSingleType & strQuotes})
     End Sub
