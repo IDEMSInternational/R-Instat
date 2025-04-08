@@ -19,47 +19,47 @@ Public Class clsColumnSelectionUtility
     ''' <summary>
     ''' Selects a column based on the provided parameters.
     ''' </summary>
-    ''' <param name="ucrSelector">An object representing the selector (must expose a lstAvailableVariable with Items and a strCurrentDataFrame property).</param>
+    ''' <param name="lstSelectoritems">A List representing items in the selector (must expose a lstAvailableVariable with Items and a strCurrentDataFrame property).</param>
     ''' <param name="ucrReceiver">An object representing the receiver that has an Add method.</param>
     ''' <param name="dummyFunction">An instance of the dummy function (or related class) that provides GetParameter.</param>
-    ''' <param name="dataName">Name of the current data frame.</param>
+    ''' <param name="strdataName">Name of the current data frame.</param>
     ''' <param name="selectedColumn">The current selected column value (it will be updated by this method).</param>
-    Public Shared Sub SetSelectedColumn(ByVal ucrSelector As ListView,
+    Public Shared Sub SetSelectedColumn(ByVal lstSelectoritems As ListView,
                                           ByVal ucrReceiver As Object,
                                           ByVal dummyFunction As Object,
-                                          ByVal dataName As String,
+                                          ByVal strdataName As String,
                                           ByRef selectedColumn As String)
-        Dim tempSelectedVariable As String = ""
-        Dim temp As String = ""
+        Dim strtempSelectedVariable As String = ""
+        Dim strtemp As String = ""
 
         ' Retrieve parameter value safely
         Dim clsParam = dummyFunction.GetParameter("strVal")
         If clsParam IsNot Nothing Then
-            temp = clsParam.strArgumentValue
+            strtemp = clsParam.strArgumentValue
         End If
 
         ' If selectedColumn is valid and a factor, use it
         If Not String.IsNullOrEmpty(selectedColumn) AndAlso
-          frmMain.clsRLink.GetDataType(dataName, selectedColumn).Contains("factor") Then
-            tempSelectedVariable = selectedColumn
-        ElseIf ucrSelector.Items.Count > 0 Then
+          frmMain.clsRLink.GetDataType(strdataName, selectedColumn).Contains("factor") Then
+            strtempSelectedVariable = selectedColumn
+        ElseIf lstSelectoritems.Items.Count > 0 Then
             ' If no valid selected column, use the first available variable
-            tempSelectedVariable = ucrSelector.Items(0).Text
+            strtempSelectedVariable = lstSelectoritems.Items(0).Text
         Else
             ' No available variables, exit the method
             Exit Sub
         End If
 
         ' If temp takes precedence, update tempSelectedVariable
-        If Not String.IsNullOrEmpty(temp) AndAlso tempSelectedVariable <> temp Then
-            tempSelectedVariable = temp
+        If Not String.IsNullOrEmpty(strtemp) AndAlso strtempSelectedVariable <> strtemp Then
+            strtempSelectedVariable = strtemp
         End If
 
         ' Add the selected variable to the receiver
-        ucrReceiver.Add(tempSelectedVariable, dataName)
+        ucrReceiver.Add(strtempSelectedVariable, strdataName)
 
         ' Optionally update the selected column (if needed)
-        selectedColumn = tempSelectedVariable
+        selectedColumn = strtempSelectedVariable
     End Sub
 End Class
 
