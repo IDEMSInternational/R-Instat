@@ -37,7 +37,7 @@ Public Class dlgTraits
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrTraitGraphSelector.SetParameter(New RParameter("data_name", 0))
