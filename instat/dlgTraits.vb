@@ -19,7 +19,6 @@ Imports instat.Translations
 Public Class dlgTraits
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
     Private clsGetVarMetadataFunction, clsGetObjectRFunction, clsRankingsItemsFunction,
                   clsPlotNetWorkFunction, clsCFunction As New RFunction
     Private clsGetRankingOperator, clsColNamesOperator As New ROperator
@@ -39,6 +38,7 @@ Public Class dlgTraits
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
+        ucrBase.clsRsyntax.iCallType = 3
 
         ucrTraitGraphSelector.SetParameter(New RParameter("data_name", 0))
         ucrTraitGraphSelector.SetParameterIsString()
@@ -50,6 +50,13 @@ Public Class dlgTraits
         ucrReceiverTrait.strSelectorHeading = "Traits"
         ucrReceiverTrait.SetMeAsReceiver()
         ucrReceiverTrait.SetTricotType({"traits"})
+
+        ucrSaveTraits.SetPrefix("trait_plot")
+        ucrSaveTraits.SetIsComboBox()
+        ucrSaveTraits.SetCheckBoxText("Store Graph")
+        ucrSaveTraits.SetSaveTypeAsGraph()
+        ucrSaveTraits.SetDataFrameSelector(ucrTraitGraphSelector.ucrAvailableDataFrames)
+        ucrSaveTraits.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
@@ -62,6 +69,7 @@ Public Class dlgTraits
         clsColNamesOperator = New ROperator
 
         ucrTraitGraphSelector.Reset()
+        ucrSaveTraits.Reset()
 
         clsCFunction.SetRCommand("c")
         clsCFunction.SetAssignTo("col_names")
@@ -98,23 +106,26 @@ Public Class dlgTraits
         clsColNamesOperator.AddParameter("left", "names(rankings_object)")
         clsColNamesOperator.AddParameter("right", "col_names")
 
+        clsPlotNetWorkFunction.iCallType = 3
         clsPlotNetWorkFunction.SetRCommand("plot_network")
         clsPlotNetWorkFunction.AddParameter("rank", "rankings_object[[1]]", bIncludeArgumentName:=False)
-        clsPlotNetWorkFunction.iCallType = 3
+        clsPlotNetWorkFunction.SetAssignTo("last_graph", strTempDataframe:=ucrTraitGraphSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRankingsItemsFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsColNamesOperator, 1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsPlotNetWorkFunction, 2)
+        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsRankingsItemsFunction, 1)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsColNamesOperator, 2)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPlotNetWorkFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrTraitGraphSelector.AddAdditionalCodeParameterPair(clsGetObjectRFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
         ucrTraitGraphSelector.SetRCode(clsGetVarMetadataFunction, bReset)
         ucrReceiverTrait.SetRCode(clsCFunction, bReset)
+        ucrSaveTraits.SetRCode(clsPlotNetWorkFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(Not ucrReceiverTrait.IsEmpty)
+        ucrBase.OKEnabled(Not ucrReceiverTrait.IsEmpty AndAlso ucrSaveTraits.IsComplete)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -123,7 +134,7 @@ Public Class dlgTraits
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTraitGraphSelector.ControlContentsChanged, ucrReceiverTrait.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTraitGraphSelector.ControlContentsChanged, ucrReceiverTrait.ControlContentsChanged, ucrSaveTraits.ControlContentsChanged
         TestOKEnabled()
     End Sub
 

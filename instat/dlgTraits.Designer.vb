@@ -22,11 +22,55 @@ Partial Class dlgTraits
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrTraitGraphSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverTrait = New instat.ucrReceiverSingle()
         Me.lblTrait = New System.Windows.Forms.Label()
+        Me.ucrSaveTraits = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverTrait = New instat.ucrReceiverSingle()
+        Me.ucrTraitGraphSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
+        '
+        'lblTrait
+        '
+        Me.lblTrait.AutoSize = True
+        Me.lblTrait.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTrait.Location = New System.Drawing.Point(398, 72)
+        Me.lblTrait.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTrait.Name = "lblTrait"
+        Me.lblTrait.Size = New System.Drawing.Size(44, 20)
+        Me.lblTrait.TabIndex = 1
+        Me.lblTrait.Text = "Trait:"
+        '
+        'ucrSaveTraits
+        '
+        Me.ucrSaveTraits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveTraits.Location = New System.Drawing.Point(10, 301)
+        Me.ucrSaveTraits.Margin = New System.Windows.Forms.Padding(6, 7, 6, 7)
+        Me.ucrSaveTraits.Name = "ucrSaveTraits"
+        Me.ucrSaveTraits.Size = New System.Drawing.Size(409, 50)
+        Me.ucrSaveTraits.TabIndex = 3
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 364)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
+        Me.ucrBase.TabIndex = 4
+        '
+        'ucrReceiverTrait
+        '
+        Me.ucrReceiverTrait.AutoSize = True
+        Me.ucrReceiverTrait.frmParent = Me
+        Me.ucrReceiverTrait.Location = New System.Drawing.Point(399, 95)
+        Me.ucrReceiverTrait.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTrait.Name = "ucrReceiverTrait"
+        Me.ucrReceiverTrait.Selector = Nothing
+        Me.ucrReceiverTrait.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverTrait.strNcFilePath = ""
+        Me.ucrReceiverTrait.TabIndex = 2
+        Me.ucrReceiverTrait.ucrSelector = Nothing
         '
         'ucrTraitGraphSelector
         '
@@ -38,47 +82,14 @@ Partial Class dlgTraits
         Me.ucrTraitGraphSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrTraitGraphSelector.Name = "ucrTraitGraphSelector"
         Me.ucrTraitGraphSelector.Size = New System.Drawing.Size(320, 274)
-        Me.ucrTraitGraphSelector.TabIndex = 4
-        '
-        'ucrReceiverTrait
-        '
-        Me.ucrReceiverTrait.AutoSize = True
-        Me.ucrReceiverTrait.frmParent = Me
-        Me.ucrReceiverTrait.Location = New System.Drawing.Point(391, 83)
-        Me.ucrReceiverTrait.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverTrait.Name = "ucrReceiverTrait"
-        Me.ucrReceiverTrait.Selector = Nothing
-        Me.ucrReceiverTrait.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverTrait.strNcFilePath = ""
-        Me.ucrReceiverTrait.TabIndex = 5
-        Me.ucrReceiverTrait.ucrSelector = Nothing
-        '
-        'lblTrait
-        '
-        Me.lblTrait.AutoSize = True
-        Me.lblTrait.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTrait.Location = New System.Drawing.Point(390, 60)
-        Me.lblTrait.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblTrait.Name = "lblTrait"
-        Me.lblTrait.Size = New System.Drawing.Size(44, 20)
-        Me.lblTrait.TabIndex = 25
-        Me.lblTrait.Text = "Trait:"
-        '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(11, 320)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
-        Me.ucrBase.TabIndex = 26
+        Me.ucrTraitGraphSelector.TabIndex = 0
         '
         'dlgTraits
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(630, 405)
+        Me.ClientSize = New System.Drawing.Size(630, 456)
+        Me.Controls.Add(Me.ucrSaveTraits)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblTrait)
         Me.Controls.Add(Me.ucrReceiverTrait)
@@ -99,4 +110,5 @@ Partial Class dlgTraits
     Friend WithEvents ucrReceiverTrait As ucrReceiverSingle
     Friend WithEvents lblTrait As Label
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSaveTraits As ucrSave
 End Class
