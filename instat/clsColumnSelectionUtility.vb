@@ -28,7 +28,7 @@ Public Class clsColumnSelectionUtility
                                           ByVal ucrReceiver As Object,
                                           ByVal dummyFunction As Object,
                                           ByVal strdataName As String,
-                                          ByRef selectedColumn As String)
+                                          ByRef strselectedColumn As String)
         Dim strtempSelectedVariable As String = ""
         Dim strtemp As String = ""
 
@@ -39,9 +39,9 @@ Public Class clsColumnSelectionUtility
         End If
 
         ' If selectedColumn is valid and a factor, use it
-        If Not String.IsNullOrEmpty(selectedColumn) AndAlso
-          frmMain.clsRLink.GetDataType(strdataName, selectedColumn).Contains("factor") Then
-            strtempSelectedVariable = selectedColumn
+        If Not String.IsNullOrEmpty(strselectedColumn) AndAlso
+          frmMain.clsRLink.GetDataType(strdataName, strselectedColumn).Contains("factor") Then
+            strtempSelectedVariable = strselectedColumn
         ElseIf lstSelectoritems.Items.Count > 0 Then
             ' If no valid selected column, use the first available variable
             strtempSelectedVariable = lstSelectoritems.Items(0).Text
@@ -59,7 +59,7 @@ Public Class clsColumnSelectionUtility
         ucrReceiver.Add(strtempSelectedVariable, strdataName)
 
         ' Optionally update the selected column (if needed)
-        selectedColumn = strtempSelectedVariable
+        strselectedColumn = strtempSelectedVariable
     End Sub
 End Class
 
