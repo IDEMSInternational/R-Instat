@@ -23,7 +23,7 @@ Public Class clsColumnSelectionUtility
     ''' <param name="ucrReceiver">An object representing the receiver that has an Add method.</param>
     ''' <param name="dummyFunction">An instance of the dummy function (or related class) that provides GetParameter.</param>
     ''' <param name="strdataName">Name of the current data frame.</param>
-    ''' <param name="selectedColumn">The current selected column value (it will be updated by this method).</param>
+    ''' <param name="strselectedColumn">The current selected column value (it will be updated by this method).</param>
     Public Shared Sub SetSelectedColumn(ByVal lstSelectoritems As ListView,
                                           ByVal ucrReceiver As Object,
                                           ByVal dummyFunction As Object,
@@ -32,7 +32,7 @@ Public Class clsColumnSelectionUtility
         Dim strtempSelectedVariable As String = ""
         Dim strtemp As String = ""
 
-        ' Retrieve parameter value safely
+        ' Retrieve parameter value
         Dim clsParam = dummyFunction.GetParameter("strVal")
         If clsParam IsNot Nothing Then
             strtemp = clsParam.strArgumentValue
