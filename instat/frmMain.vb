@@ -158,6 +158,7 @@ Public Class frmMain
         mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+        mnuViewTricotMenu.Checked = clsInstatOptions.bShowTricotMenu
         mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
         mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
@@ -233,7 +234,6 @@ Public Class frmMain
         '-------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
-        SetHideMenus()
     End Sub
 
     Private Sub CheckForUpdates()
@@ -622,19 +622,6 @@ Public Class frmMain
         mnuTbLan.Visible = bVisible
     End Sub
 
-    Public Sub SetAppVersionNumber(strVersionNumber As String)
-
-    End Sub
-
-    Private Sub SetHideMenus()
-        mnuViewProcurementMenu.Checked = False
-        mnuProcurement.Visible = False
-        mnuViewOptionsByContextMenu.Checked = False
-        mnuOptionsByContext.Visible = False
-        mnuViewStructuredMenu.Checked = False
-        mnuStructured.Visible = False
-    End Sub
-
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
         mnuFile.Enabled = bEnabled
         mnuEdit.Enabled = bEnabled
@@ -886,6 +873,18 @@ Public Class frmMain
 
     Private Sub mnuTbLast10Dialogs_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLast10Dialogs.ButtonClick
         If clsRecentItems.lstRecentDialogs.Count > 0 Then
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgReorderLevels" Then
+                SetDefaultValueInReorderLevels()
+            End If
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgRecodeFactor" Then
+                SetDefaultValueInReorderLevels()
+            End If
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgDummyVariables" Then
+                SetDefaultValueInReorderLevels()
+            End If
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgLabelsLevels" Then
+                SetDefaultValueInReorderLevels()
+            End If
             clsRecentItems.lstRecentDialogs.Last.ShowDialog()
         End If
     End Sub
@@ -929,6 +928,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click
+        SetDefaultValueInReorderLevels()
         dlgRecodeFactor.ShowDialog()
     End Sub
 
@@ -957,6 +957,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorLevelsLabels.Click
+        SetDefaultValueInReorderLevels()
         dlgLabelsLevels.ShowDialog()
     End Sub
 
@@ -965,7 +966,21 @@ Public Class frmMain
         dlgConvertColumns.ShowDialog()
     End Sub
 
+    Public Sub SetDefaultValueInReorderLevels()
+        Dim strSelectedColumn As String = ""
+        If Not String.IsNullOrEmpty(ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow) AndAlso ucrColumnMeta.IsVisible Then
+            strSelectedColumn = ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow
+        ElseIf Not String.IsNullOrEmpty(ucrDataViewer.GetFirstSelectedColumnName) Then
+            strSelectedColumn = ucrDataViewer.GetFirstSelectedColumnName
+        End If
+        dlgReorderLevels.SelectedColumn = strSelectedColumn
+        dlgRecodeFactor.SelectedColumn = strSelectedColumn
+        dlgDummyVariables.SelectedColumn = strSelectedColumn
+        dlgLabelsLevels.SelectedColumn = strSelectedColumn
+    End Sub
+
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
+        SetDefaultValueInReorderLevels()
         dlgReorderLevels.ShowDialog()
     End Sub
 
@@ -1899,6 +1914,11 @@ Public Class frmMain
         dlgImportDataset.ShowDialog()
     End Sub
 
+    Public Sub SetShowTricotMenu(bNewShowTricotMenu As Boolean)
+        mnuTricot.Visible = bNewShowTricotMenu
+        mnuViewTricotMenu.Checked = bNewShowTricotMenu
+    End Sub
+
     Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
         mnuProcurement.Visible = bNewShowProcurementMenu
         mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
@@ -1923,6 +1943,10 @@ Public Class frmMain
     End Sub
     Private Sub mnuViewClimaticMenu_Click(sender As Object, e As EventArgs) Handles mnuViewClimaticMenu.Click
         clsInstatOptions.SetShowClimaticMenu(Not mnuViewClimaticMenu.Checked)
+    End Sub
+
+    Private Sub mnuViewTricotMenu_Click(sender As Object, e As EventArgs) Handles mnuViewTricotMenu.Click
+        clsInstatOptions.SetShowTricotMenu(Not mnuViewTricotMenu.Checked)
     End Sub
 
     Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
