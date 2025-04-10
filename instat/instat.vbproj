@@ -317,6 +317,12 @@
     <Compile Include="dlgSurvey.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTraitCorrelations.Designer.vb">
+      <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraitCorrelations.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgUseTable.Designer.vb">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
     </Compile>
@@ -3419,6 +3425,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
       <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraitCorrelations.resx">
+      <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseTable.resx">
       <DependentUpon>dlgUseTable.vb</DependentUpon>

@@ -3016,4 +3016,7 @@ Public Class frmMain
         dlgOutfillingStationData.ShowDialog()
     End Sub
 
+    Private Sub mnuTricotDescribeCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeCorrelations.Click
+        dlgTraitCorrelations.ShowDialog()
+    End Sub
 End Class
