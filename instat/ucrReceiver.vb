@@ -572,7 +572,7 @@ Public Class ucrReceiver
     Public Sub SetTricotType(strInclude As String())
         If strInclude Is Nothing OrElse strInclude.Length = 0 Then Exit Sub
 
-        Dim strTypes = strInclude.Select(Function(s) $"""{s}""").ToArray()
+        Dim strTypes As String() = strInclude.Select(Function(s) $"""{s}""").ToArray()
         AddIncludedMetadataProperty("Tricot_Type", strTypes)
     End Sub
 
