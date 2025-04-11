@@ -34,6 +34,8 @@ Public Class dlgReorderLevels
 
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
+    Private _strSelectedColumn As String
+
 
     Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -44,6 +46,7 @@ Public Class dlgReorderLevels
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetSelectedColumn()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -272,6 +275,47 @@ Public Class dlgReorderLevels
         End If
     End Sub
 
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        Dim strTempSelectedVariable As String = ""
+        Dim strDataName As String = ucrSelectorFactorLevelsToReorder.strCurrentDataFrame
+        Dim strTemp As String = ""
+
+        ' Retrieve parameter value safely
+        Dim clsParam = clsDummyFunction.GetParameter("strVal")
+        If clsParam IsNot Nothing Then
+            strTemp = clsParam.strArgumentValue
+        End If
+
+        ' If _strSelectedColumn is valid and a factor, use it
+        If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso
+       frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
+            strTempSelectedVariable = _strSelectedColumn
+        ElseIf ucrSelectorFactorLevelsToReorder.lstAvailableVariable.Items.Count > 0 Then
+            ' If no selected column, use first available variable
+            strTempSelectedVariable = ucrSelectorFactorLevelsToReorder.lstAvailableVariable.Items(0).Text
+        Else
+            ' No available variables, exit
+            Exit Sub
+        End If
+
+        ' Ensure strTemp takes precedence if it's valid
+        If Not String.IsNullOrEmpty(strTemp) AndAlso strTempSelectedVariable <> strTemp Then
+            strTempSelectedVariable = strTemp
+        End If
+
+        ' Add the selected variable to the receiver
+        ucrReceiverFactor.Add(strTempSelectedVariable, strDataName)
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -281,6 +325,7 @@ Public Class dlgReorderLevels
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlProperty.ControlValueChanged, ucrReceiverVariable.ControlValueChanged, ucrChkReverseVariable.ControlValueChanged, ucrInputOptions.ControlValueChanged, ucrReceiverFactorX.ControlValueChanged, ucrInputOrder.ControlValueChanged
         If rdoHand.Checked Then
             ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsReorderFunction)
         ElseIf rdoProperty.Checked OrElse rdoVariable.Checked Then
             ucrReceiverFactorX.SetMeAsReceiver()

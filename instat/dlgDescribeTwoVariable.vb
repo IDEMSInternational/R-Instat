@@ -317,6 +317,7 @@ Public Class dlgDescribeTwoVariable
         clsDummyFunction.AddParameter("var", "False", iPosition:=5)
         clsDummyFunction.AddParameter("percent", "col", iPosition:=6)
 
+        clsPivotWiderFunction.SetPackageName("tidyr")
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=2)
 
