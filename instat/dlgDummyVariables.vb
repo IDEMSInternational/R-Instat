@@ -20,6 +20,9 @@ Public Class dlgDummyVariables
     Private bReset As Boolean = True
     Private clsDummyColsFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private _strSelectedColumn As String
+
+
     Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -29,6 +32,7 @@ Public Class dlgDummyVariables
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetSelectedColumn()
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
@@ -98,21 +102,68 @@ Public Class dlgDummyVariables
 
     Private Sub ucrPnlLevelOmitted_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLevelOmitted.ControlValueChanged
         If rdoNone.Checked Then
+            ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             clsDummyFunction.AddParameter("checked", "none", iPosition:=0)
             clsDummyColsFunction.AddParameter("remove_first_dummy", "FALSE", iPosition:=2)
             clsDummyColsFunction.AddParameter("remove_most_frequent_dummy", "FALSE", iPosition:=3)
         ElseIf rdoFirst.Checked Then
+            ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             clsDummyFunction.AddParameter("checked", "first", iPosition:=0)
             clsDummyColsFunction.AddParameter("remove_first_dummy", "TRUE", iPosition:=2)
             clsDummyColsFunction.AddParameter("remove_most_frequent_dummy", "FALSE", iPosition:=3)
         ElseIf rdoMostFrequent.Checked Then
+            ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             clsDummyFunction.AddParameter("checked", "most", iPosition:=0)
             clsDummyColsFunction.AddParameter("remove_first_dummy", "FALSE", iPosition:=2)
             clsDummyColsFunction.AddParameter("remove_most_frequent_dummy", "TRUE", iPosition:=3)
         End If
     End Sub
 
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        Dim strTempSelectedVariable As String = ""
+        Dim strDataName As String = ucrSelectorDummyVariable.strCurrentDataFrame
+        Dim strTemp As String = ""
+
+        ' Retrieve parameter value safely
+        Dim clsParam = clsDummyFunction.GetParameter("strVal")
+        If clsParam IsNot Nothing Then
+            strTemp = clsParam.strArgumentValue
+        End If
+        ' If _strSelectedColumn is valid and a factor, use it
+        If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso
+       frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
+            strTempSelectedVariable = _strSelectedColumn
+        ElseIf ucrSelectorDummyVariable.lstAvailableVariable.Items.Count > 0 Then
+            ' If no selected column, use first available variable
+            strTempSelectedVariable = ucrSelectorDummyVariable.lstAvailableVariable.Items(0).Text
+        Else
+            ' No available variables, exit
+            Exit Sub
+        End If
+        ' Ensure strTemp takes precedence if it's valid
+        If Not String.IsNullOrEmpty(strTemp) AndAlso strTempSelectedVariable <> strTemp Then
+            strTempSelectedVariable = strTemp
+        End If
+
+        ' Add the selected variable to the receiver
+        ucrReceiverFactor.Add(strTempSelectedVariable, strDataName)
+    End Sub
+
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
         TestOkEnabled()
+        ucrReceiverFactor.SetMeAsReceiver()
+        clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
     End Sub
 End Class

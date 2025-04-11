@@ -569,6 +569,13 @@ Public Class ucrReceiver
         SetIncludedAutoFillProperties(dctTemp)
     End Sub
 
+    Public Sub SetTricotType(strInclude As String())
+        If strInclude Is Nothing OrElse strInclude.Length = 0 Then Exit Sub
+
+        Dim strTypes As String() = strInclude.Select(Function(s) $"""{s}""").ToArray()
+        AddIncludedMetadataProperty("Tricot_Type", strTypes)
+    End Sub
+
     Public Sub SetOptionsByContextType(strSingleType As String, Optional strQuotes As String = Chr(34))
         AddIncludedMetadataProperty("O_by_C_Type", {strQuotes & strSingleType & strQuotes})
     End Sub
