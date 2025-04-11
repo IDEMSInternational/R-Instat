@@ -3016,4 +3016,7 @@ Public Class frmMain
         dlgOutfillingStationData.ShowDialog()
     End Sub
 
+    Private Sub mnuTricotDescribeTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeTraits.Click
+        dlgTraits.ShowDialog()
+    End Sub
 End Class
