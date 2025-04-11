@@ -3018,5 +3018,7 @@ Public Class frmMain
 
     Private Sub mnuTricotDescribeCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeCorrelations.Click
         dlgTraitCorrelations.ShowDialog()
+    Private Sub mnuTricotDescribeTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeTraits.Click
+        dlgTraits.ShowDialog()
     End Sub
 End Class

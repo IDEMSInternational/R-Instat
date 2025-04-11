@@ -321,6 +321,10 @@
       <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTraitCorrelations.vb">
+    <Compile Include="dlgTraits.Designer.vb">
+      <DependentUpon>dlgTraits.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraits.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgUseTable.Designer.vb">
@@ -3428,6 +3432,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTraitCorrelations.resx">
       <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTraits.resx">
+      <DependentUpon>dlgTraits.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseTable.resx">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
