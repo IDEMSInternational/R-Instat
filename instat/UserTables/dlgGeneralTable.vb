@@ -2,7 +2,7 @@
 
 Public Class dlgGeneralTable
     Private clsBaseOperator As New ROperator
-    Private clsCompleteSingFunction, clsArrangeSingFunction, clsCompleteFunction, clsArrangeFunction, clsSpannerFunction, clsEvererythingFunction, clsPivotLongerFunction, clsSelectFunction, clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderAscolumnFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
+    Private clsDropLevelsMulFunction, clsDropLevelsSingFunction, clsCompleteSingFunction, clsArrangeSingFunction, clsCompleteFunction, clsArrangeFunction, clsSpannerFunction, clsEvererythingFunction, clsPivotLongerFunction, clsSelectFunction, clsGetdataFunction, clsGetdataMultipleFunction, clsGetdataSingleFunction, clsPivotWiderAscolumnFunction, clsPivotWiderFunction, clsFormatTableFunction, clsHeadRFunction, clsHeaderRFunction, clsCellsTitleRFunction, clsTitleStyleRFunction, clsTitleFooterRFunction, clsGtRFunction, clsThemeRFunction, clsDummyFunction As New RFunction
 
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -154,6 +154,8 @@ Public Class dlgGeneralTable
         clsArrangeFunction = New RFunction
         clsCompleteSingFunction = New RFunction
         clsArrangeSingFunction = New RFunction
+        clsDropLevelsMulFunction = New RFunction
+        clsDropLevelsSingFunction = New RFunction
 
         ucrSelectorCols.Reset()
         ucrSaveTable.Reset()
@@ -240,6 +242,10 @@ Public Class dlgGeneralTable
         clsArrangeSingFunction.SetPackageName("dplyr")
         clsArrangeSingFunction.SetRCommand("arrange")
 
+        clsDropLevelsMulFunction.SetRCommand("droplevels")
+
+        clsDropLevelsSingFunction.SetRCommand("droplevels")
+
         Dim strGroupParamValue As String = "title"
         clsCellsTitleRFunction.SetPackageName("gt")
         clsCellsTitleRFunction.SetRCommand("cells_title")
@@ -294,6 +300,7 @@ Public Class dlgGeneralTable
         AddRemoveSelect()
         DialogueSize()
         AddRemoveComplete_arrangeFunction()
+        AddRemoveDroplevel()
     End Sub
 
     Private Sub AddRemovePivotwider()
@@ -321,7 +328,7 @@ Public Class dlgGeneralTable
                 Updateparameter()
             clsPivotLongerFunction.AddParameter("cols", ucrReceiverMultipleVariablesMul.GetVariableNames(), iPosition:=0)
             clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataMultipleFunction, iPosition:=0, bIncludeArgumentName:=False)
-            clsBaseOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=2)
+            clsBaseOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=3)
             If Not ucrReceiverMultipleColFactor.IsEmpty Then
                 clsBaseOperator.AddParameter("pivot_wider_col", clsRFunctionParameter:=clsPivotWiderAscolumnFunction, iPosition:=7)
             Else
@@ -389,7 +396,7 @@ Public Class dlgGeneralTable
                 clsArrangeFunction.AddParameter("y", strColArrang, iPosition:=0, bIncludeArgumentName:=False)
                 clsCompleteFunction.AddParameter("x", strCompleteCol, iPosition:=0, bIncludeArgumentName:=False)
             End If
-            clsBaseOperator.AddParameter("complete", clsRFunctionParameter:=clsCompleteFunction, iPosition:=1)
+            clsBaseOperator.AddParameter("complete", clsRFunctionParameter:=clsCompleteFunction, iPosition:=2)
             clsBaseOperator.AddParameter("arrange", clsRFunctionParameter:=clsArrangeFunction, iPosition:=8)
         ElseIf rdoSingle.Checked Then
             If Not ucrReceiverMultipleRowFactors.IsEmpty Then
@@ -403,7 +410,7 @@ Public Class dlgGeneralTable
                 clsArrangeSingFunction.AddParameter("y", strColArrang, iPosition:=0, bIncludeArgumentName:=False)
                 clsCompleteSingFunction.AddParameter("x", strCompleteCol, iPosition:=0, bIncludeArgumentName:=False)
             End If
-            clsBaseOperator.AddParameter("completesing", clsRFunctionParameter:=clsCompleteSingFunction, iPosition:=1)
+            clsBaseOperator.AddParameter("completesing", clsRFunctionParameter:=clsCompleteSingFunction, iPosition:=2)
             clsBaseOperator.AddParameter("arrangesing", clsRFunctionParameter:=clsArrangeSingFunction, iPosition:=4)
         Else
             clsBaseOperator.RemoveParameterByName("complete")
@@ -483,10 +490,22 @@ Public Class dlgGeneralTable
         End If
     End Sub
 
+    Private Sub AddRemoveDroplevel()
+        clsBaseOperator.RemoveParameterByName("drop_mul")
+        clsBaseOperator.RemoveParameterByName("drop_sing")
+        If rdoSingle.Checked Then
+            clsBaseOperator.AddParameter("drop_sing", clsRFunctionParameter:=clsDropLevelsSingFunction, iPosition:=1)
+        ElseIf rdoMultiple.Checked Then
+            clsBaseOperator.AddParameter("drop_mul", clsRFunctionParameter:=clsDropLevelsMulFunction, iPosition:=1)
+        Else
+            clsBaseOperator.RemoveParameterByName("drop_mul")
+            clsBaseOperator.RemoveParameterByName("drop_sing")
+        End If
+    End Sub
 
     Private Sub AddRemoveSelect()
         If rdoMultiple.Checked AndAlso rdoAsrow.Checked Then
-            clsBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=3)
+            clsBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelectFunction, iPosition:=4)
         Else
             clsBaseOperator.RemoveParameterByName("select")
         End If
@@ -544,7 +563,6 @@ Public Class dlgGeneralTable
                 clsGetdataSingleFunction.AddParameter("col_name", "c(" & strformattedstrrowFactorVarsSingle & ", " & strsingleVarSingle & ")")
                 clsPivotWiderFunction.AddParameter("names_from", ucrReceiverMultipleRowFactors.GetVariableNames(), iPosition:=0)
             End If
-
         ElseIf rdoMultiple.Checked Then
             Dim strcolFactorVarsMul As String = ucrReceiverMultipleColFactor.GetVariableNames()
             Dim strrowFactorVarsMul As String = ucrReceiverMultipleRowFactors.GetVariableNames()
