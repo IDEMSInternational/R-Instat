@@ -524,12 +524,6 @@ Public Class ucrReceiverMultiple
         CheckSingleType()
     End Sub
 
-    Private Sub lstSelectedVariables_ClientSizeChanged(ByVal sender As Object, ByVal e As EventArgs) Handles lstSelectedVariables.ClientSizeChanged
-        If lstSelectedVariables.Columns.Count > 0 Then
-            lstSelectedVariables.Columns(0).Width = lstSelectedVariables.ClientSize.Width
-        End If
-    End Sub
-
     Private Sub ucrReceiverMultiple_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
         CheckSingleType()
     End Sub
