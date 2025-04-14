@@ -158,6 +158,7 @@ Public Class frmMain
         mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+        mnuViewTricotMenu.Checked = clsInstatOptions.bShowTricotMenu
         mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
         mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
@@ -1913,6 +1914,11 @@ Public Class frmMain
         dlgImportDataset.ShowDialog()
     End Sub
 
+    Public Sub SetShowTricotMenu(bNewShowTricotMenu As Boolean)
+        mnuTricot.Visible = bNewShowTricotMenu
+        mnuViewTricotMenu.Checked = bNewShowTricotMenu
+    End Sub
+
     Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
         mnuProcurement.Visible = bNewShowProcurementMenu
         mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
@@ -1937,6 +1943,10 @@ Public Class frmMain
     End Sub
     Private Sub mnuViewClimaticMenu_Click(sender As Object, e As EventArgs) Handles mnuViewClimaticMenu.Click
         clsInstatOptions.SetShowClimaticMenu(Not mnuViewClimaticMenu.Checked)
+    End Sub
+
+    Private Sub mnuViewTricotMenu_Click(sender As Object, e As EventArgs) Handles mnuViewTricotMenu.Click
+        clsInstatOptions.SetShowTricotMenu(Not mnuViewTricotMenu.Checked)
     End Sub
 
     Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
@@ -3006,4 +3016,7 @@ Public Class frmMain
         dlgOutfillingStationData.ShowDialog()
     End Sub
 
+    Private Sub mnuTricotDescribeTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeTraits.Click
+        dlgTraits.ShowDialog()
+    End Sub
 End Class
