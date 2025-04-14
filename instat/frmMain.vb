@@ -3016,4 +3016,23 @@ Public Class frmMain
         dlgOutfillingStationData.ShowDialog()
     End Sub
 
+    Private Sub mnuTricotDescribeTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeTraits.Click
+        dlgTraits.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotDefineTricotData_Click(sender As Object, e As EventArgs) Handles mnuTricotDefineTricotData.Click
+        dlgDefineTricotData.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotModelWithoutCovariates_Click(sender As Object, e As EventArgs) Handles mnuTricotModelWithoutCovariates.Click
+        dlgPlacketLuceModel.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotModelTree_Click(sender As Object, e As EventArgs) Handles mnuTricotModelTree.Click
+        dlgModellingTree.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotTransformClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotTransformClimMob.Click
+        dlgTransformTricotData.ShowDialog()
+    End Sub
 End Class
