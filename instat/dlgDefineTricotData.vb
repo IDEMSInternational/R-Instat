@@ -18,5 +18,7 @@ Imports instat.Translations
 Imports System.Text.RegularExpressions
 Imports RDotNet
 Public Class dlgDefineTricotData
+    Private Sub dlgDefineTricotData_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+    End Sub
 End Class
