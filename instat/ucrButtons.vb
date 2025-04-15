@@ -14,10 +14,22 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.IO
 Imports instat.Translations
+Imports Newtonsoft.Json
+Imports RInsightF461
 
 Public Class ucrButtons
-    Public clsRsyntax As RSyntax
+    ''' <summary>
+    ''' todo
+    ''' </summary>
+    Public Enum EnumTextType
+        comment
+        isComment
+    End Enum
+
+    Public Shadows clsRsyntax As RSyntax
+
     Public iHelpTopicID As Integer
     Public bFirstLoad As Boolean
 
@@ -28,6 +40,11 @@ Public Class ucrButtons
     Public bAppendScriptsAtCurrentScriptWindowCursorPosition As Boolean = False
     Public bAddScriptToScriptWindowOnClickOk As Boolean = True
     Public bMakeVisibleScriptWindow As Boolean = True
+
+    Public strDialogName = ""
+    Public dctConfigurableValues As New Dictionary(Of String, String)
+    Public lstTransformToScript As New List(Of clsTransformationRModel)
+    Public lstTransformFromControl As New List(Of clsTransformationControl)
 
     Public Event BeforeClickOk(sender As Object, e As EventArgs)
     Public Event ClickOk(sender As Object, e As EventArgs)
@@ -41,7 +58,7 @@ Public Class ucrButtons
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        clsRsyntax = New RSyntax
+        clsRSyntax = New RSyntax
         iHelpTopicID = -1
         bFirstLoad = True
     End Sub
@@ -125,6 +142,7 @@ Public Class ucrButtons
         Dim clsRemoveListFun As New RFunction
         Dim lstAssignToCodes As New List(Of RCodeStructure) 'todo. remove after refactoring GetAllAssignTo
         Dim lstAssignToStrings As New List(Of String)
+        Dim strExpected As String = ""
 
         'rm is the R function to remove the created objects from the memory at the end of the script and c is the function that puts them together in a list
         clsRemoveFunc.SetRCommand("rm")
@@ -137,15 +155,16 @@ Public Class ucrButtons
             strComments = ""
         End If
         If Not bRun AndAlso strComments <> "" Then
+            strExpected &= frmMain.clsRLink.GetFormattedComment(strComments) & Environment.NewLine & vbLf
             frmMain.AddToScriptWindow(frmMain.clsRLink.GetFormattedComment(strComments) & Environment.NewLine, bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
 
         'Get this list before doing ToScript then no need for global variable name
-        clsRsyntax.GetAllAssignTo(lstAssignToCodes, lstAssignToStrings)
+        clsRSyntax.GetAllAssignTo(lstAssignToCodes, lstAssignToStrings)
 
         'Run additional before codes
-        lstBeforeCodes = clsRsyntax.GetBeforeCodes()
-        lstBeforeScripts = clsRsyntax.GetScriptsFromCodeList(lstBeforeCodes)
+        lstBeforeCodes = clsRSyntax.GetBeforeCodes()
+        lstBeforeScripts = clsRSyntax.GetScriptsFromCodeList(lstBeforeCodes)
         For i As Integer = 0 To lstBeforeCodes.Count - 1
             If bFirstCode Then
                 strComment = strComments
@@ -154,8 +173,9 @@ Public Class ucrButtons
                 strComment = ""
             End If
             If bRun Then
-                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
+                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRSyntax.bSeparateThread)
             Else
+                strExpected &= lstBeforeScripts(i) & vbLf
                 frmMain.AddToScriptWindow(lstBeforeScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         Next
@@ -168,14 +188,15 @@ Public Class ucrButtons
             Else
                 strComment = ""
             End If
-            frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
+            frmMain.clsRLink.RunScript(clsRSyntax.GetScript(), clsRSyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRSyntax.bSeparateThread)
         Else
-            frmMain.AddToScriptWindow(clsRsyntax.GetScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            strExpected &= clsRSyntax.GetScript() & vbLf
+            frmMain.AddToScriptWindow(clsRSyntax.GetScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
 
         'Run additional after codes
-        lstAfterCodes = clsRsyntax.GetAfterCodes()
-        lstAfterScripts = clsRsyntax.GetScriptsFromCodeList(lstAfterCodes)
+        lstAfterCodes = clsRSyntax.GetAfterCodes()
+        lstAfterScripts = clsRSyntax.GetScriptsFromCodeList(lstAfterCodes)
         For i As Integer = 0 To lstAfterCodes.Count - 1
             If bRun Then
                 If bFirstCode Then
@@ -184,8 +205,9 @@ Public Class ucrButtons
                 Else
                     strComment = ""
                 End If
-                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=clsRsyntax.bShowWaitDialogOverride)
+                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRSyntax.bSeparateThread, bShowWaitDialogOverride:=clsRSyntax.bShowWaitDialogOverride)
             Else
+                strExpected &= lstAfterScripts(i) & vbLf
                 frmMain.AddToScriptWindow(lstAfterScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         Next
@@ -211,9 +233,13 @@ Public Class ucrButtons
             If bRun Then
                 frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
             Else
+                strExpected &= clsRemoveFunc.ToScript()
                 frmMain.AddToScriptWindow(clsRemoveFunc.ToScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
             End If
         End If
+
+        CreateRScriptUsingXpBackEnd(strExpected)
+
     End Sub
 
     Public Sub OKEnabled(bEnabled As Boolean)
@@ -259,6 +285,53 @@ Public Class ucrButtons
         End If
         SetCommentEditable()
         ResetCommentToInstatOptionComment()
+    End Sub
+
+    ''' <summary>
+    ''' todo move this sub
+    ''' </summary>
+    Private Sub CreateRScriptUsingXpBackEnd(strExpected As String)
+        If String.IsNullOrEmpty(strDialogName) Then
+            Exit Sub
+        End If
+
+        'update the configurable values from the current state of the controls
+        For Each transform As clsTransformationControl In lstTransformFromControl
+            transform.UpdateConfigurableValue(dctConfigurableValues)
+        Next
+
+        'build the R model from the R script
+        Dim strScriptReset = File.ReadAllText("C:\Users\steph\source\repos\R-InstatLite\instatLite\DialogDefinitions\Dlg" + strDialogName + "\dlg" + strDialogName + ".R")
+        Dim rScript As RScript = New RScript(strScriptReset)
+
+        'update the R model from the configurable values
+        Dim strTransformationsRJson As String = File.ReadAllText("C:\Users\steph\source\repos\R-InstatLite\instatLite\DialogDefinitions\Dlg" + strDialogName + "\dlg" + strDialogName + ".json")
+        lstTransformToScript = JsonConvert.DeserializeObject(Of List(Of clsTransformationRModel))(strTransformationsRJson)
+        For Each transform As clsTransformationRModel In lstTransformToScript
+            transform.updateRModel(rScript, dctConfigurableValues)
+        Next
+
+        'write the expected script (script built from RSyntax classes)
+        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim strFilePath As String = Path.Combine(strDesktopPath, "tmp", "expected.R")
+        strExpected = vbLf & vbLf & vbLf & strExpected
+        If File.Exists(strFilePath) Then
+            File.AppendAllText(strFilePath, strExpected)
+        Else
+            Directory.CreateDirectory(Path.GetDirectoryName(strFilePath))
+            File.WriteAllText(strFilePath, strExpected)
+        End If
+
+        'write the actual script (script built from the R model)
+        Dim strActual As String = rScript.GetAsExecutableScript()
+        strFilePath = Path.Combine(strDesktopPath, "tmp", "actual.R")
+        strActual = vbLf & vbLf & vbLf & strActual
+        If File.Exists(strFilePath) Then
+            File.AppendAllText(strFilePath, strActual)
+        Else
+            Directory.CreateDirectory(Path.GetDirectoryName(strFilePath))
+            File.WriteAllText(strFilePath, strActual)
+        End If
     End Sub
 
     Private Sub ResetCommentToInstatOptionComment()

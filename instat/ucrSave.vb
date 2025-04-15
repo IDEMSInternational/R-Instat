@@ -767,7 +767,7 @@ Public Class ucrSave
     '''
     ''' <returns>   The text from the text/combo box. </returns>
     '''--------------------------------------------------------------------------------------------
-    Public Function GetText() As String
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
         If bIsComboBox Then
             Return ucrInputComboSave.GetText()
         Else

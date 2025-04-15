@@ -1,0 +1,5 @@
+﻿_dataFrame <- data_book$get_data_frame(data_name="_dataFrame")
+last_graph <- ggplot2::ggplot(data=_dataFrame, mapping=ggplot2::aes(y=_y, x=_x)) + theme_grey()
+data_book$add_object(data_name="_dataFrame", object_name="last_graph", object_type_label="graph", object_format="image", object=check_graph(graph_object=last_graph))
+data_book$get_object_data(data_name="_dataFrame", object_name="last_graph", as_file=TRUE)
+rm(list=c("last_graph", "_dataFrame"))

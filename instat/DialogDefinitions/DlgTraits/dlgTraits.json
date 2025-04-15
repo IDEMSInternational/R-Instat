@@ -1,0 +1,664 @@
+[
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isComment",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "operatorUpdateParamPresentation",
+                "iStatementNumber": 0,
+                "strFunctionName": "<-",
+                "iParameterNumber": 0,
+                "strValueKey": "comment"
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "operatorUpdateParam",
+        "iStatementNumber": 0,
+        "strFunctionName": "<-",
+        "iParameterNumber": 0,
+        "strValueKey": "dataFrame"
+    },
+    {
+        "enumTransformationType": "functionUpdateParamValue",
+        "iStatementNumber": 0,
+        "strFunctionName": "get_data_frame",
+        "iParameterNumber": 0,
+        "strValueKey": "dataFrame",
+        "bIsQuoted": true
+    },
+    {
+        "enumTransformationType": "ifFalseExecuteChildTransformations",
+        "strValueKey": "isSingleVariable",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "functionAddParam",
+                "iStatementNumber": 0,
+                "strFunctionName": "get_data_frame",
+                "iParameterNumber": 1,
+                "strParameterName": "stack_data",
+                "strScript": "TRUE"
+            },
+            {
+                "enumTransformationType": "functionAddParam",
+                "iStatementNumber": 0,
+                "strFunctionName": "get_data_frame",
+                "iParameterNumber": 2,
+                "strParameterName": "measure.vars",
+                "strValueKey": "variableNames"
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "functionUpdateParamValue",
+        "iStatementNumber": 1,
+        "strFunctionName": "ggplot",
+        "iParameterNumber": 0,
+        "strValueKey": "dataFrame"
+    },
+    {
+        "enumTransformationType": "quoteEmptyString",
+        "iStatementNumber": 1,
+        "strFunctionName": "aes",
+        "iParameterNumber": 1,
+        "strValueKey": "x"
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isSingleVariable",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 1,
+                "strFunctionName": "aes",
+                "iParameterNumber": 0,
+                "strValueKey": "y"
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isGroupToConnect",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                "strValueKey": "secondFactor",
+                "strValueDefault": "",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "operatorAddParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "+",
+                        "iParameterNumber": 1,
+                        "strScript": "ggplot2::stat_summary(geom=\"line\", group=1, color=\"blue\", size=1.5, fun.y=_funY)"
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "stat_summary",
+                        "iParameterNumber": 4,
+                        "strValueKey": "inputSummaries",
+                        "bIsQuoted": true
+                    },
+                    {
+                        "enumTransformationType": "ifTrueExecuteChildTransformations",
+                        "strValueKey": "isBoxPlot",
+                        "lstTransformations": [
+                            {
+                                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                                "strValueKey": "isTufte",
+                                "lstTransformations": [
+                                    {
+                                        "enumTransformationType": "functionUpdateParamValue",
+                                        "iStatementNumber": 1,
+                                        "strFunctionName": "stat_summary",
+                                        "iParameterNumber": 3,
+                                        "strScript": "0.7"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "enumTransformationType": "ifFalseExecuteChildTransformations",
+                "strValueKey": "secondFactor",
+                "strValueDefault": "",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "operatorAddParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "+",
+                        "iParameterNumber": 1,
+                        "strScript": "ggplot2::stat_summary(geom=\"line\", fun.y=_funY, size=1.5, ggplot2::aes(group=_group, colour=_colour), position=ggplot2::position_dodge(width=0.9))"
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "stat_summary",
+                        "iParameterNumber": 1,
+                        "strValueKey": "inputSummaries",
+                        "bIsQuoted": true
+                    },
+                    {
+                        "enumTransformationType": "ifTrueExecuteChildTransformations",
+                        "strValueKey": "isBoxPlot",
+                        "lstTransformations": [
+                            {
+                                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                                "strValueKey": "isTufte",
+                                "lstTransformations": [
+                                    {
+                                        "enumTransformationType": "functionUpdateParamValue",
+                                        "iStatementNumber": 1,
+                                        "strFunctionName": "stat_summary",
+                                        "iParameterNumber": 2,
+                                        "strScript": "0.7"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "aes",
+                        "iOccurence": 1,
+                        "iParameterNumber": 0,
+                        "strValueKey": "secondFactor"
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "aes",
+                        "iOccurence": 1,
+                        "iParameterNumber": 1,
+                        "strValueKey": "secondFactor"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifFalseExecuteChildTransformations",
+        "strValueKey": "isJitter",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                "strValueKey": "isAddPoints",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "operatorAddParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "+",
+                        "iParameterNumber": 1,
+                        "strScript": "ggplot2::geom_jitter(height=0, width=_width)"
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "geom_jitter",
+                        "iParameterNumber": 1,
+                        "strValueKey": "jitterExtra"
+                    },
+                    {
+                        "enumTransformationType": "ifFalseExecuteChildTransformations",
+                        "strValueKey": "transparency",
+                        "strValueDefault": "1",
+                        "lstTransformations": [
+                            {
+                                "enumTransformationType": "functionAddParam",
+                                "iStatementNumber": 1,
+                                "strFunctionName": "geom_jitter",
+                                "iParameterNumber": 1,
+                                "strParameterName": "alpha",
+                                "strValueKey": "transparency"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isBoxPlot",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "ifFalseExecuteChildTransformations",
+                "strValueKey": "isTufte",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "operatorAddParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "+",
+                        "iParameterNumber": 1,
+                        "strScript": "ggplot2::geom_boxplot()"
+                    },
+                    {
+                        "enumTransformationType": "ifFalseExecuteChildTransformations",
+                        "strValueKey": "x",
+                        "strValueDefault": "",
+                        "lstTransformations": [
+                            {
+                                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                                "strValueKey": "isFactorFactor",
+                                "strValueDefault": "FALSE",
+                                "lstTransformations": [
+                                    {
+                                        "enumTransformationType": "ifTrueExecuteChildTransformations",
+                                        "strValueKey": "isWidth",
+                                        "lstTransformations": [
+                                            {
+                                                "enumTransformationType": "functionAddParam",
+                                                "iStatementNumber": 1,
+                                                "strFunctionName": "geom_boxplot",
+                                                "iParameterNumber": 0,
+                                                "strParameterName": "",
+                                                "strScript": "ggplot2::aes(group=ggplot2::cut_width(_var, width=_width))"
+                                            },
+                                            {
+                                                "enumTransformationType": "functionUpdateParamValue",
+                                                "iStatementNumber": 1,
+                                                "strFunctionName": "cut_width",
+                                                "iParameterNumber": 0,
+                                                "strValueKey": "x"
+                                            },
+                                            {
+                                                "enumTransformationType": "functionUpdateParamValue",
+                                                "iStatementNumber": 1,
+                                                "strFunctionName": "cut_width",
+                                                "iParameterNumber": 1,
+                                                "strValueKey": "inputWidth"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "enumTransformationType": "functionAddRemoveParamByName",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "geom_boxplot",
+                        "iParameterNumber": 0,
+                        "strParameterName": "varwidth",
+                        "strValueDefault": "FALSE",
+                        "strValueKey": "isVarWidth"
+                    },
+                    {
+                        "enumTransformationType": "ifTrueExecuteChildTransformations",
+                        "strValueKey": "isAddPoints",
+                        "lstTransformations": [
+                            {
+                                "enumTransformationType": "functionAddParam",
+                                "iStatementNumber": 1,
+                                "strFunctionName": "geom_boxplot",
+                                "iParameterNumber": 99,
+                                "strParameterName": "outlier.shape",
+                                "strScript": "NA"
+                            }
+                        ]
+                    },
+                    {
+                        "enumTransformationType": "functionAddParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "geom_boxplot",
+                        "iParameterNumber": 99,
+                        "strParameterName": "outlier.colour",
+                        "strScript": "\"red\""
+                    },
+                    {
+                        "enumTransformationType": "functionAddRemoveParamByName",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "aes",
+                        "strParameterName": "fill",
+                        "strValueKey": "secondFactor",
+                        "iParameterNumber": 2
+                    }
+                ]
+            },
+            {
+                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                "strValueKey": "isTufte",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "functionAddRemoveParamByName",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "aes",
+                        "strParameterName": "colour",
+                        "strValueKey": "secondFactor",
+                        "iParameterNumber": 2
+                    },
+                    {
+                        "enumTransformationType": "operatorAddParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "+",
+                        "iParameterNumber": 1,
+                        "strScript": "ggthemes::geom_tufteboxplot(stat=\"boxplot\", median.type=\"line\", coef =1.5)"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isViolin",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "operatorAddParam",
+                "iStatementNumber": 1,
+                "strFunctionName": "+",
+                "iParameterNumber": 1,
+                "strScript": "ggplot2::geom_violin()"
+            },
+            {
+                "enumTransformationType": "ifFalseExecuteChildTransformations",
+                "strValueKey": "x",
+                "strValueDefault": "",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "ifTrueExecuteChildTransformations",
+                        "strValueKey": "isFactorFactor",
+                        "strValueDefault": "FALSE",
+                        "lstTransformations": [
+                            {
+                                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                                "strValueKey": "isWidth",
+                                "lstTransformations": [
+                                    {
+                                        "enumTransformationType": "functionAddParam",
+                                        "iStatementNumber": 1,
+                                        "strFunctionName": "geom_violin",
+                                        "iParameterNumber": 0,
+                                        "strParameterName": "",
+                                        "strScript": "ggplot2::aes(group=ggplot2::cut_width(_var, width=_width))"
+                                    },
+                                    {
+                                        "enumTransformationType": "functionUpdateParamValue",
+                                        "iStatementNumber": 1,
+                                        "strFunctionName": "cut_width",
+                                        "iParameterNumber": 0,
+                                        "strValueKey": "x"
+                                    },
+                                    {
+                                        "enumTransformationType": "functionUpdateParamValue",
+                                        "iStatementNumber": 1,
+                                        "strFunctionName": "cut_width",
+                                        "iParameterNumber": 1,
+                                        "strValueKey": "inputWidth"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "enumTransformationType": "functionAddRemoveParamByName",
+                "iStatementNumber": 1,
+                "strFunctionName": "aes",
+                "strParameterName": "fill",
+                "strValueKey": "secondFactor",
+                "iParameterNumber": 2
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isJitter",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "functionAddRemoveParamByName",
+                "iStatementNumber": 1,
+                "strFunctionName": "aes",
+                "strParameterName": "colour",
+                "strValueKey": "secondFactor",
+                "iParameterNumber": 2
+            },
+            {
+                "enumTransformationType": "operatorAddParam",
+                "iStatementNumber": 1,
+                "strFunctionName": "+",
+                "iParameterNumber": 1,
+                "strScript": "ggplot2::geom_jitter(height=0, width=0.2)"
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifFalseExecuteChildTransformations",
+        "strValueKey": "isSingleVariable",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 1,
+                "strFunctionName": "aes",
+                "iParameterNumber": 0,
+                "strScript": "value"
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isLegend",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "operatorAddParam",
+                "iStatementNumber": 1,
+                "strFunctionName": "+",
+                "iParameterNumber": 99,
+                "strScript": "ggplot2::theme(legend.position=_legendPosition)"
+            },
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 1,
+                "strFunctionName": "theme",
+                "iParameterNumber": 0,
+                "strValueKey": "legendPosition"
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifFalseExecuteChildTransformations",
+        "strValueKey": "isBoxPlot",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                "strValueKey": "isBoxPlotExtra",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "operatorAddParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "+",
+                        "iParameterNumber": 99,
+                        "strScript": "ggplot2::geom_boxplot(width=_width)"
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "geom_boxplot",
+                        "iParameterNumber": 0,
+                        "strValueKey": "widthExtra"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifFalseExecuteChildTransformations",
+        "strValueKey": "facetBy",
+        "strValueDefault": "",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                "strValueKey": "facetByType",
+                "strValueDefault": "Facet Wrap",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "operatorAddParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "+",
+                        "iParameterNumber": 99,
+                        "strScript": "ggplot2::facet_wrap(facets= ~ _facetBy)"
+                    },
+                    {
+                        "enumTransformationType": "operatorUpdateParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "~",
+                        "iParameterNumber": 0,
+                        "strValueKey": "facetBy"
+                    }
+                ]
+            },
+            {
+                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                "strValueKey": "facetByType",
+                "strValueDefault": "Facet Row",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "operatorAddParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "+",
+                        "iParameterNumber": 99,
+                        "strScript": "ggplot2::facet_grid(facets=_facetBy ~ .)"
+                    },
+                    {
+                        "enumTransformationType": "operatorUpdateParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "~",
+                        "iParameterNumber": 0,
+                        "strValueKey": "facetBy"
+                    }
+                ]
+            },
+            {
+                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                "strValueKey": "facetByType",
+                "strValueDefault": "Facet Column",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "operatorAddParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "+",
+                        "iParameterNumber": 99,
+                        "strScript": "ggplot2::facet_grid(facets=. ~ _facetBy)"
+                    },
+                    {
+                        "enumTransformationType": "operatorUpdateParam",
+                        "iStatementNumber": 1,
+                        "strFunctionName": "~",
+                        "iParameterNumber": 1,
+                        "strValueKey": "facetBy"
+                    }
+                ]
+            },
+            {
+                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                "strValueKey": "facetByType",
+                "strValueDefault": "None",
+                "lstTransformations": [
+                ]
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isHorizontalBoxPlot",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "operatorAddParam",
+                "iStatementNumber": 1,
+                "strFunctionName": "+",
+                "iParameterNumber": 99,
+                "strScript": "ggplot2::coord_flip()"
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isSaveGraph",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "operatorUpdateParam",
+                "iStatementNumber": 1,
+                "strFunctionName": "<-",
+                "iParameterNumber": 0,
+                "strValueKey": "saveName"
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "functionUpdateParamValue",
+        "iStatementNumber": 2,
+        "strFunctionName": "add_object",
+        "iParameterNumber": 0,
+        "strValueKey": "dataFrame",
+        "bIsQuoted": true
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isSaveGraph",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 2,
+                "strFunctionName": "add_object",
+                "iParameterNumber": 1,
+                "strValueKey": "saveName",
+                "bIsQuoted": true
+            },
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 2,
+                "strFunctionName": "check_graph",
+                "iParameterNumber": 0,
+                "strValueKey": "saveName"
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "functionUpdateParamValue",
+        "iStatementNumber": 3,
+        "strFunctionName": "get_object_data",
+        "iParameterNumber": 0,
+        "strValueKey": "dataFrame",
+        "bIsQuoted": true
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isSaveGraph",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 3,
+                "strFunctionName": "get_object_data",
+                "iParameterNumber": 1,
+                "strValueKey": "saveName",
+                "bIsQuoted": true
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isSaveGraph",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 4,
+                "strFunctionName": "c",
+                "iParameterNumber": 0,
+                "strValueKey": "saveName",
+                "bIsQuoted": true
+            }
+        ]
+    },
+    {
+        "bIsQuoted": true,
+        "iParameterNumber": 1,
+        "iStatementNumber": 4,
+        "strFunctionName": "c",
+        "strValueKey": "dataFrame",
+        "enumTransformationType": "functionUpdateParamValue"
+    }
+]
