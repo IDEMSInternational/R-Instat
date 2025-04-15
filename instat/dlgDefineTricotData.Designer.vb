@@ -58,7 +58,7 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(13, 639)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 626)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -83,7 +83,7 @@ Partial Class dlgDefineTricotData
         Me.grpDateTime.Margin = New System.Windows.Forms.Padding(4)
         Me.grpDateTime.Name = "grpDateTime"
         Me.grpDateTime.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpDateTime.Size = New System.Drawing.Size(710, 311)
+        Me.grpDateTime.Size = New System.Drawing.Size(710, 300)
         Me.grpDateTime.TabIndex = 0
         Me.grpDateTime.TabStop = False
         Me.grpDateTime.Tag = ""
@@ -93,7 +93,7 @@ Partial Class dlgDefineTricotData
         '
         Me.Label4.AutoSize = True
         Me.Label4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label4.Location = New System.Drawing.Point(523, 174)
+        Me.Label4.Location = New System.Drawing.Point(523, 180)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(104, 20)
@@ -130,7 +130,7 @@ Partial Class dlgDefineTricotData
         '
         Me.Label1.AutoSize = True
         Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(523, 22)
+        Me.Label1.Location = New System.Drawing.Point(523, 27)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(75, 20)
@@ -141,7 +141,7 @@ Partial Class dlgDefineTricotData
         '
         Me.Label3.AutoSize = True
         Me.Label3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label3.Location = New System.Drawing.Point(357, 194)
+        Me.Label3.Location = New System.Drawing.Point(357, 199)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(109, 20)
@@ -152,7 +152,7 @@ Partial Class dlgDefineTricotData
         '
         Me.Label2.AutoSize = True
         Me.Label2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label2.Location = New System.Drawing.Point(357, 137)
+        Me.Label2.Location = New System.Drawing.Point(357, 142)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(84, 20)
@@ -170,6 +170,7 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverLevelPlantingDate.Size = New System.Drawing.Size(147, 30)
         Me.ucrReceiverLevelPlantingDate.strNcFilePath = ""
         Me.ucrReceiverLevelPlantingDate.TabIndex = 5
+        Me.ucrReceiverLevelPlantingDate.Tag = "planting_date"
         Me.ucrReceiverLevelPlantingDate.ucrSelector = Nothing
         '
         'ucrReceiverLevelLongitude
@@ -183,13 +184,14 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverLevelLongitude.Size = New System.Drawing.Size(147, 30)
         Me.ucrReceiverLevelLongitude.strNcFilePath = ""
         Me.ucrReceiverLevelLongitude.TabIndex = 4
+        Me.ucrReceiverLevelLongitude.Tag = "lon"
         Me.ucrReceiverLevelLongitude.ucrSelector = Nothing
         '
         'lblLatitude
         '
         Me.lblLatitude.AutoSize = True
         Me.lblLatitude.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLatitude.Location = New System.Drawing.Point(357, 79)
+        Me.lblLatitude.Location = New System.Drawing.Point(357, 84)
         Me.lblLatitude.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLatitude.Name = "lblLatitude"
         Me.lblLatitude.Size = New System.Drawing.Size(71, 20)
@@ -207,6 +209,7 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverLevelLatitude.Size = New System.Drawing.Size(147, 30)
         Me.ucrReceiverLevelLatitude.strNcFilePath = ""
         Me.ucrReceiverLevelLatitude.TabIndex = 3
+        Me.ucrReceiverLevelLatitude.Tag = "lat"
         Me.ucrReceiverLevelLatitude.ucrSelector = Nothing
         '
         'ucrSelectorIDLevelData
@@ -225,7 +228,7 @@ Partial Class dlgDefineTricotData
         '
         Me.lblID.AutoSize = True
         Me.lblID.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblID.Location = New System.Drawing.Point(357, 22)
+        Me.lblID.Location = New System.Drawing.Point(357, 27)
         Me.lblID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblID.Name = "lblID"
         Me.lblID.Size = New System.Drawing.Size(30, 20)
@@ -243,6 +246,7 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverLevelID.Size = New System.Drawing.Size(147, 30)
         Me.ucrReceiverLevelID.strNcFilePath = ""
         Me.ucrReceiverLevelID.TabIndex = 2
+        Me.ucrReceiverLevelID.Tag = "id"
         Me.ucrReceiverLevelID.ucrSelector = Nothing
         '
         'GroupBox1
@@ -250,11 +254,11 @@ Partial Class dlgDefineTricotData
         Me.GroupBox1.Controls.Add(Me.ucrSelectorVarietyLevelData)
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Controls.Add(Me.ucrReceiverVarietyLevelVariety)
-        Me.GroupBox1.Location = New System.Drawing.Point(731, 18)
+        Me.GroupBox1.Location = New System.Drawing.Point(731, 12)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox1.Size = New System.Drawing.Size(504, 306)
+        Me.GroupBox1.Size = New System.Drawing.Size(504, 300)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Tag = ""
@@ -276,7 +280,7 @@ Partial Class dlgDefineTricotData
         '
         Me.Label10.AutoSize = True
         Me.Label10.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label10.Location = New System.Drawing.Point(348, 24)
+        Me.Label10.Location = New System.Drawing.Point(348, 28)
         Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(62, 20)
@@ -294,6 +298,7 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverVarietyLevelVariety.Size = New System.Drawing.Size(147, 30)
         Me.ucrReceiverVarietyLevelVariety.strNcFilePath = ""
         Me.ucrReceiverVarietyLevelVariety.TabIndex = 9
+        Me.ucrReceiverVarietyLevelVariety.Tag = "item"
         Me.ucrReceiverVarietyLevelVariety.ucrSelector = Nothing
         '
         'GroupBox2
@@ -305,7 +310,7 @@ Partial Class dlgDefineTricotData
         Me.GroupBox2.Controls.Add(Me.ucrSelectorIDVarietyLevel)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.ucrReceiverIDVarietyLevelVariety)
-        Me.GroupBox2.Location = New System.Drawing.Point(13, 324)
+        Me.GroupBox2.Location = New System.Drawing.Point(13, 313)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
@@ -319,7 +324,7 @@ Partial Class dlgDefineTricotData
         '
         Me.Label7.AutoSize = True
         Me.Label7.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label7.Location = New System.Drawing.Point(366, 146)
+        Me.Label7.Location = New System.Drawing.Point(366, 150)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(52, 20)
@@ -330,7 +335,7 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrReceiverIDVarietyLevelTraits.AutoSize = True
         Me.ucrReceiverIDVarietyLevelTraits.frmParent = Me
-        Me.ucrReceiverIDVarietyLevelTraits.Location = New System.Drawing.Point(363, 172)
+        Me.ucrReceiverIDVarietyLevelTraits.Location = New System.Drawing.Point(363, 171)
         Me.ucrReceiverIDVarietyLevelTraits.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDVarietyLevelTraits.Name = "ucrReceiverIDVarietyLevelTraits"
         Me.ucrReceiverIDVarietyLevelTraits.Selector = Nothing
@@ -350,13 +355,14 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverIDVarietyLevelID.Size = New System.Drawing.Size(147, 30)
         Me.ucrReceiverIDVarietyLevelID.strNcFilePath = ""
         Me.ucrReceiverIDVarietyLevelID.TabIndex = 11
+        Me.ucrReceiverIDVarietyLevelID.Tag = "id"
         Me.ucrReceiverIDVarietyLevelID.ucrSelector = Nothing
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label6.Location = New System.Drawing.Point(366, 30)
+        Me.Label6.Location = New System.Drawing.Point(366, 35)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(30, 20)
@@ -379,7 +385,7 @@ Partial Class dlgDefineTricotData
         '
         Me.Label5.AutoSize = True
         Me.Label5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label5.Location = New System.Drawing.Point(366, 87)
+        Me.Label5.Location = New System.Drawing.Point(366, 92)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(62, 20)
@@ -397,13 +403,14 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverIDVarietyLevelVariety.Size = New System.Drawing.Size(147, 30)
         Me.ucrReceiverIDVarietyLevelVariety.strNcFilePath = ""
         Me.ucrReceiverIDVarietyLevelVariety.TabIndex = 12
+        Me.ucrReceiverIDVarietyLevelVariety.Tag = "item"
         Me.ucrReceiverIDVarietyLevelVariety.ucrSelector = Nothing
         '
         'dlgDefineTricotData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(1247, 732)
+        Me.ClientSize = New System.Drawing.Size(1247, 715)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.grpDateTime)
