@@ -39,11 +39,11 @@ Public Class dlgDefineTricotData
 
     Private Sub InitialiseDialog()
         Dim kvpID As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("id", {"id", "ID", "participant_id", "participant_name"}.ToList())
-        Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"lon", "long", "lont", "longitude", "Longitude", "Lon"}.ToList())
-        Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"lat", "latitude", "Lat", "Latitude"}.ToList())
+        Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("longitude", {"lon", "long", "lont", "longitude", "Longitude", "Lon"}.ToList())
+        Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("latitude", {"lat", "latitude", "Lat", "Latitude"}.ToList())
         Dim kvpPlantingDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("planting_date", {"planting_date", "Planting_date", "plantingdate"}.ToList())
         Dim kvpOverAll As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("overall", {"overall", "overall_perf", "Overall"}.ToList())
-        Dim kvpVariety As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("item", {"item", "items", "variety", "varieties"}.ToList())
+        Dim kvpVariety As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("varieties", {"item", "items", "variety", "varieties"}.ToList())
 
 
         lstRecognisedTypes.AddRange({kvpID, kvpLongitude, kvpLatitude, kvpPlantingDate, kvpOverAll, kvpVariety})
@@ -51,17 +51,15 @@ Public Class dlgDefineTricotData
         lstReceiversVarityLevel.AddRange({ucrReceiverVarietyLevelVariety})
         lstReceiversIDVarietyLevel.AddRange({ucrReceiverIDVarietyLevelID, ucrReceiverIDVarietyLevelVariety})
 
-        ucrReceiverLevelID.Selector = ucrSelectorIDLevelData
-        ucrReceiverLevelLatitude.Selector = ucrSelectorIDLevelData
-        ucrReceiverLevelLongitude.Selector = ucrSelectorIDLevelData
-        ucrReceiverLevelPlantingDate.Selector = ucrSelectorIDLevelData
+
         ucrReceiverLevelOverallTraits.Selector = ucrSelectorIDLevelData
         ucrReceiverLevelVarieties.Selector = ucrSelectorIDLevelData
 
+        SetRSelector(ucrSelectorIDLevelData, lstReceiversLevelID)
+
         ucrReceiverVarietyLevelVariety.Selector = ucrSelectorVarietyLevelData
 
-        ucrReceiverIDVarietyLevelID.Selector = ucrSelectorIDVarietyLevel
-        ucrReceiverIDVarietyLevelVariety.Selector = ucrSelectorIDVarietyLevel
+        SetRSelector(ucrSelectorIDVarietyLevel, lstReceiversIDVarietyLevel)
         ucrReceiverIDVarietyLevelTraits.Selector = ucrSelectorIDVarietyLevel
 
     End Sub
@@ -76,6 +74,16 @@ Public Class dlgDefineTricotData
 
     Private Sub SetRCodeForControls(bReset As Boolean)
 
+    End Sub
+
+    Private Sub SetRSelector(sender As ucrSelectorByDataFrameAddRemove, lstReceivers As List(Of ucrReceiverSingle))
+        Dim ucrTempReceiver As ucrReceiver
+        For Each ucrTempReceiver In lstReceivers
+            ucrTempReceiver.SetParameter(New RParameter(ucrTempReceiver.Tag))
+            ucrTempReceiver.Selector = sender
+            ucrTempReceiver.SetParameterIsString()
+            ucrTempReceiver.bExcludeFromSelector = True
+        Next
     End Sub
 
     Private Sub AutoFillReceivers(sender As ucrSelectorByDataFrameAddRemove, lstReceivers As List(Of ucrReceiverSingle))
