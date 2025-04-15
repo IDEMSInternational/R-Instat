@@ -254,14 +254,23 @@ Public Class RLink
     Public Function GetRSetupScript() As String
         Dim clsSetWd As New RFunction
         Dim clsSource As New RFunction
+        Dim clsSetLibPaths As New RFunction
         Dim strScript As String = ""
 
         clsSetWd.SetRCommand("setwd")
         clsSetWd.AddParameter("dir", Chr(34) & Path.Combine(frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath) & Chr(34)) 'This is bad the wd should be flexible and not automatically set to the instat object directory 
+
         clsSource.SetRCommand("source")
         clsSource.AddParameter("file", Chr(34) & "Rsetup.R" & Chr(34))
 
+        clsSetLibPaths.SetPackageName("instatExtras")
+        clsSetLibPaths.SetRCommand("set_library_paths")
+        clsSetLibPaths.AddParameter("version", Chr(34) & frmMain.GetVersionNumber & Chr(34))
+
         strScript = strScript & clsSetWd.ToScript() & Environment.NewLine
+#If Not DEBUG Then
+        strScript = strScript & clsSetLibPaths.ToScript() & Environment.NewLine
+#End If
         strScript = strScript & clsSource.ToScript() & Environment.NewLine
         strScript = strScript & GetCreateNewDatabookObjectRScript() & Environment.NewLine
 
