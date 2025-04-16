@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports System.IO
 Imports instat.Translations
 Imports Newtonsoft.Json
@@ -58,10 +59,50 @@ Public Class ucrButtons
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        clsRSyntax = New RSyntax
+        clsRsyntax = New RSyntax
         iHelpTopicID = -1
         bFirstLoad = True
     End Sub
+
+    ''' <summary>
+    '''  Returns information about the dialog comment as specified by <paramref name="enumTextType"/>.
+    '''  If <paramref name="enumTextType"/> is not specified, returns the comment text.
+    ''' </summary>
+    ''' <param name="enumTextType"></param>
+    ''' <returns>The comment information specified by <paramref name="enumTextType"/>: either the 
+    ''' comment text; or the state of the comment check box ("TRUE" or "FALSE").</returns>
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        If enumTextType Is Nothing Then
+            enumTextType = ucrButtons.EnumTextType.comment
+        End If
+
+        Dim textType As EnumTextType
+        Try
+            textType = DirectCast(enumTextType, EnumTextType)
+        Catch ex As InvalidCastException
+            Throw New InvalidCastException("Invalid text type requested from buttons.")
+        End Try
+
+        Select Case textType
+            Case ucrButtons.EnumTextType.comment
+                ' Split the comment into lines
+                Dim lines As String() = txtComment.Text.Split(New String() {vbCrLf, vbCr, vbLf},
+                                                              StringSplitOptions.RemoveEmptyEntries)
+
+                ' Prepend "# " to each line that is not just whitespace, ignore blank lines
+                Dim strComment As String = ""
+                For i As Integer = 0 To lines.Length - 1
+                    strComment &= "# " & lines(i) & vbCrLf
+                Next
+
+                Return strComment & vbCrLf
+
+            Case ucrButtons.EnumTextType.isComment
+                Return If(chkComment.Checked, "TRUE", "FALSE")
+        End Select
+
+        Throw New InvalidEnumArgumentException("Unhandled text type requested from buttons.")
+    End Function
 
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.ParentForm.Close()
@@ -160,11 +201,11 @@ Public Class ucrButtons
         End If
 
         'Get this list before doing ToScript then no need for global variable name
-        clsRSyntax.GetAllAssignTo(lstAssignToCodes, lstAssignToStrings)
+        clsRsyntax.GetAllAssignTo(lstAssignToCodes, lstAssignToStrings)
 
         'Run additional before codes
-        lstBeforeCodes = clsRSyntax.GetBeforeCodes()
-        lstBeforeScripts = clsRSyntax.GetScriptsFromCodeList(lstBeforeCodes)
+        lstBeforeCodes = clsRsyntax.GetBeforeCodes()
+        lstBeforeScripts = clsRsyntax.GetScriptsFromCodeList(lstBeforeCodes)
         For i As Integer = 0 To lstBeforeCodes.Count - 1
             If bFirstCode Then
                 strComment = strComments
@@ -173,7 +214,7 @@ Public Class ucrButtons
                 strComment = ""
             End If
             If bRun Then
-                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRSyntax.bSeparateThread)
+                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
             Else
                 strExpected &= lstBeforeScripts(i) & vbLf
                 frmMain.AddToScriptWindow(lstBeforeScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
@@ -188,15 +229,15 @@ Public Class ucrButtons
             Else
                 strComment = ""
             End If
-            frmMain.clsRLink.RunScript(clsRSyntax.GetScript(), clsRSyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRSyntax.bSeparateThread)
+            frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
         Else
-            strExpected &= clsRSyntax.GetScript() & vbLf
-            frmMain.AddToScriptWindow(clsRSyntax.GetScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
+            strExpected &= clsRsyntax.GetScript() & vbLf
+            frmMain.AddToScriptWindow(clsRsyntax.GetScript(), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
         End If
 
         'Run additional after codes
-        lstAfterCodes = clsRSyntax.GetAfterCodes()
-        lstAfterScripts = clsRSyntax.GetScriptsFromCodeList(lstAfterCodes)
+        lstAfterCodes = clsRsyntax.GetAfterCodes()
+        lstAfterScripts = clsRsyntax.GetScriptsFromCodeList(lstAfterCodes)
         For i As Integer = 0 To lstAfterCodes.Count - 1
             If bRun Then
                 If bFirstCode Then
@@ -205,7 +246,7 @@ Public Class ucrButtons
                 Else
                     strComment = ""
                 End If
-                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRSyntax.bSeparateThread, bShowWaitDialogOverride:=clsRSyntax.bShowWaitDialogOverride)
+                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread, bShowWaitDialogOverride:=clsRsyntax.bShowWaitDialogOverride)
             Else
                 strExpected &= lstAfterScripts(i) & vbLf
                 frmMain.AddToScriptWindow(lstAfterScripts(i), bMakeVisible:=bMakeVisibleScriptWindow, bAppendAtCurrentCursorPosition:=bAppendScriptsAtCurrentScriptWindowCursorPosition)
