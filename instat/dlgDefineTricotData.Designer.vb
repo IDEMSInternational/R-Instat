@@ -298,7 +298,7 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverVarietyLevelVariety.Size = New System.Drawing.Size(147, 30)
         Me.ucrReceiverVarietyLevelVariety.strNcFilePath = ""
         Me.ucrReceiverVarietyLevelVariety.TabIndex = 9
-        Me.ucrReceiverVarietyLevelVariety.Tag = "varieties"
+        Me.ucrReceiverVarietyLevelVariety.Tag = "variety"
         Me.ucrReceiverVarietyLevelVariety.ucrSelector = Nothing
         '
         'GroupBox2
@@ -403,7 +403,7 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverIDVarietyLevelVariety.Size = New System.Drawing.Size(147, 30)
         Me.ucrReceiverIDVarietyLevelVariety.strNcFilePath = ""
         Me.ucrReceiverIDVarietyLevelVariety.TabIndex = 12
-        Me.ucrReceiverIDVarietyLevelVariety.Tag = "varieties"
+        Me.ucrReceiverIDVarietyLevelVariety.Tag = "variety"
         Me.ucrReceiverIDVarietyLevelVariety.ucrSelector = Nothing
         '
         'dlgDefineTricotData

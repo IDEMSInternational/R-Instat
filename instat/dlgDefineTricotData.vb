@@ -22,8 +22,11 @@ Public Class dlgDefineTricotData
     Private bReset As Boolean = True
     Private lstReceiversLevelID, lstReceiversVarityLevel, lstReceiversIDVarietyLevel As New List(Of ucrReceiverSingle)
     Private lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Private clsGetColumnSelection, clsUnameFunction, clsCreateRankingFunction, clsGroupRankingFunction,
+        clsGetDataFrameFunction, clsAddRankingObjFunction, clsAddGrpRankingObjFunction As New RFunction
     Private clsDATIDLevelFunction, clsDATVarietyLevelFunction, clsDATIDVarietyFunction As New RFunction
     Private clsCDATIDLevelFunction, cslCDATVarietyLevelFunction, clsCDATIDLevelVarietiesFunction, clsCDATIDLevelTraitsFunction As New RFunction
+    Private clsOperator As New ROperator
 
     Private Sub dlgDefineTricotData_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -61,7 +64,6 @@ Public Class dlgDefineTricotData
         ucrReceiverLevelOverallTraits.Selector = ucrSelectorIDLevelData
         ucrReceiverLevelOverallTraits.SetParameterIsString()
         ucrReceiverLevelOverallTraits.strSelectorHeading = "Variables"
-        'ucrReceiverLevelOverallTraits.SetIncludedDataTypes({"numeric"})
 
         ucrReceiverLevelVarieties.SetParameter(New RParameter("varieties", 1))
         ucrReceiverLevelVarieties.Selector = ucrSelectorIDLevelData
@@ -100,6 +102,14 @@ Public Class dlgDefineTricotData
         clsCDATIDLevelVarietiesFunction = New RFunction
         clsCDATIDLevelTraitsFunction = New RFunction
         cslCDATVarietyLevelFunction = New RFunction
+        clsGetColumnSelection = New RFunction
+        clsUnameFunction = New RFunction
+        clsCreateRankingFunction = New RFunction
+        clsGroupRankingFunction = New RFunction
+        clsGetDataFrameFunction = New RFunction
+        clsAddRankingObjFunction = New RFunction
+        clsAddGrpRankingObjFunction = New RFunction
+        clsOperator = New ROperator
 
         ucrReceiverLevelID.SetMeAsReceiver()
 
@@ -108,23 +118,66 @@ Public Class dlgDefineTricotData
         cslCDATVarietyLevelFunction.SetRCommand("c")
         clsCDATIDLevelTraitsFunction.SetRCommand("c")
 
-        clsDATIDLevelFunction.SetRCommand("define_as_tricot")
+        clsDATIDLevelFunction.SetRCommand("data_book$define_as_tricot")
         clsDATIDLevelFunction.AddParameter("types", clsRFunctionParameter:=clsCDATIDLevelFunction, iPosition:=2)
         clsDATIDLevelFunction.AddParameter("auto_selection", "TRUE", iPosition:=4)
 
-        clsDATVarietyLevelFunction.SetRCommand("define_as_tricot")
+        clsDATVarietyLevelFunction.SetRCommand("data_book$define_as_tricot")
         clsDATVarietyLevelFunction.AddParameter("types", clsRFunctionParameter:=cslCDATVarietyLevelFunction, iPosition:=2)
         clsDATVarietyLevelFunction.AddParameter("auto_selection", "TRUE", iPosition:=3)
 
-        clsDATIDVarietyFunction.SetRCommand("define_as_tricot")
+        clsDATIDVarietyFunction.SetRCommand("data_book$define_as_tricot")
         clsDATIDVarietyFunction.AddParameter("key_col_names", clsRFunctionParameter:=clsCDATIDLevelTraitsFunction, iPosition:=1)
         clsDATIDVarietyFunction.AddParameter("types", clsRFunctionParameter:=clsCDATIDLevelVarietiesFunction, iPosition:=2)
         clsDATIDVarietyFunction.AddParameter("auto_selection", "TRUE", iPosition:=3)
 
+        clsGetColumnSelection.SetRCommand("data_book$get_column_selection")
+        clsGetColumnSelection.SetAssignTo("traits")
+        clsGetColumnSelection.ToScript(strScript:="")
+
+        clsOperator.SetOperation("$")
+        clsOperator.AddParameter("left", clsRFunctionParameter:=clsGetColumnSelection)
+        clsOperator.AddParameter("right", "conditions$C0$parameters$x")
+        clsOperator.bSpaceAroundOperation = False
+
+        clsUnameFunction.SetRCommand("unname")
+        clsUnameFunction.AddParameter("param", clsROperatorParameter:=clsOperator, bIncludeArgumentName:=False)
+        clsUnameFunction.SetAssignTo("traits")
+        clsUnameFunction.ToScript(strScript:="")
+
+        clsGetDataFrameFunction.SetRCommand("data_book$get_data_frame")
+
+        clsCreateRankingFunction.SetRCommand("instatExtras$create_rankings_list")
+        clsCreateRankingFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+        clsCreateRankingFunction.AddParameter("traits", clsRFunctionParameter:=clsUnameFunction, iPosition:=1)
+        clsCreateRankingFunction.AddParameter("flag", "FALSE", iPosition:=4, bIncludeArgumentName:=False)
+        clsCreateRankingFunction.SetAssignTo("rankings_list")
+        clsCreateRankingFunction.ToScript(strScript:="")
+
+        clsGroupRankingFunction.SetRCommand("instatExtras$create_rankings_list")
+        clsGroupRankingFunction.AddParameter("traits", "traits", iPosition:=1)
+        clsGroupRankingFunction.AddParameter("flag", "TRUE", iPosition:=4, bIncludeArgumentName:=False)
+        clsGroupRankingFunction.SetAssignTo("grouped_rankings_list")
+        clsGroupRankingFunction.ToScript(strScript:="")
+
+        clsAddRankingObjFunction.SetRCommand("data_book$add_object")
+        clsAddRankingObjFunction.AddParameter("object_name", Chr(34) & "rankings_list" & Chr(34), iPosition:=1)
+        clsAddRankingObjFunction.AddParameter("object_type_label", Chr(34) & "structure" & Chr(34), iPosition:=2)
+        clsAddRankingObjFunction.AddParameter("object_format", Chr(34) & "text" & Chr(34), iPosition:=3)
+        clsAddRankingObjFunction.AddParameter("object", clsRFunctionParameter:=clsCreateRankingFunction, iPosition:=4)
+
+        clsAddGrpRankingObjFunction.SetRCommand("data_book$add_object")
+        clsAddGrpRankingObjFunction.AddParameter("object_name", Chr(34) & "grouped_rankings_list" & Chr(34), iPosition:=1)
+        clsAddGrpRankingObjFunction.AddParameter("object_type_label", Chr(34) & "structure" & Chr(34), iPosition:=2)
+        clsAddGrpRankingObjFunction.AddParameter("object_format", Chr(34) & "text" & Chr(34), iPosition:=3)
+        clsAddGrpRankingObjFunction.AddParameter("object", clsRFunctionParameter:=clsGroupRankingFunction, iPosition:=4)
+
         ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDATIDLevelFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDATVarietyLevelFunction, 1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDATIDVarietyFunction, 2)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDLevelFunction, 1)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsDATVarietyLevelFunction, 2)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDVarietyFunction, 3)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAddRankingObjFunction, 4)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAddGrpRankingObjFunction)
 
         AutoFillReceivers(ucrSelectorIDLevelData, lstReceiversLevelID)
         AutoFillReceivers(ucrSelectorVarietyLevelData, lstReceiversVarityLevel)
@@ -132,10 +185,19 @@ Public Class dlgDefineTricotData
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrSelectorIDVarietyLevel.AddAdditionalCodeParameterPair(clsGetColumnSelection, New RParameter("data_name", 0), iAdditionalPairNo:=1)
+        ucrSelectorIDVarietyLevel.AddAdditionalCodeParameterPair(clsGetDataFrameFunction, New RParameter("data_name", 0), iAdditionalPairNo:=2)
+        ucrSelectorIDVarietyLevel.AddAdditionalCodeParameterPair(clsAddGrpRankingObjFunction, New RParameter("data_name", 0), iAdditionalPairNo:=3)
+        ucrSelectorIDVarietyLevel.AddAdditionalCodeParameterPair(clsAddRankingObjFunction, New RParameter("data_name", 0), iAdditionalPairNo:=4)
         ucrReceiverLevelID.AddAdditionalCodeParameterPair(clsDATIDLevelFunction, New RParameter("key_col_names", 1), iAdditionalPairNo:=1)
         ucrReceiverVarietyLevelVariety.AddAdditionalCodeParameterPair(cslCDATVarietyLevelFunction, New RParameter("variety", 0), iAdditionalPairNo:=1)
         ucrReceiverIDVarietyLevelID.AddAdditionalCodeParameterPair(clsCDATIDLevelTraitsFunction, New RParameter("id", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverIDVarietyLevelVariety.AddAdditionalCodeParameterPair(clsCDATIDLevelTraitsFunction, New RParameter("variety", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverIDVarietyLevelTraits.AddAdditionalCodeParameterPair(clsGetColumnSelection, New RParameter("name", 1), iAdditionalPairNo:=1)
+        ucrReceiverIDVarietyLevelVariety.AddAdditionalCodeParameterPair(clsCreateRankingFunction, New RParameter("variety", 2), iAdditionalPairNo:=2)
+        ucrReceiverIDVarietyLevelID.AddAdditionalCodeParameterPair(clsCreateRankingFunction, New RParameter("id", 3), iAdditionalPairNo:=2)
+        ucrReceiverIDVarietyLevelVariety.AddAdditionalCodeParameterPair(clsGroupRankingFunction, New RParameter("variety", 2), iAdditionalPairNo:=3)
+        ucrReceiverIDVarietyLevelID.AddAdditionalCodeParameterPair(clsGroupRankingFunction, New RParameter("id", 3), iAdditionalPairNo:=3)
 
         ucrSelectorIDLevelData.SetRCode(clsDATIDLevelFunction, bReset)
         ucrReceiverLevelID.SetRCode(clsCDATIDLevelFunction, bReset)
@@ -214,7 +276,9 @@ Public Class dlgDefineTricotData
     End Function
 
     Private Sub TestOKEnabled()
-
+        ucrBase.OKEnabled(ucrReceiverIDVarietyLevelID IsNot Nothing AndAlso
+                          ucrReceiverIDVarietyLevelVariety IsNot Nothing AndAlso
+                          ucrReceiverIDVarietyLevelTraits IsNot Nothing)
     End Sub
 
     Private Sub ucrSelectorIDLevelData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDLevelData.ControlValueChanged
@@ -227,6 +291,11 @@ Public Class dlgDefineTricotData
 
     Private Sub ucrSelectorIDVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDVarietyLevel.ControlValueChanged
         AutoFillReceivers(ucrSelectorIDVarietyLevel, lstReceiversIDVarietyLevel)
+        Dim strDataName As String = ucrSelectorIDVarietyLevel.strCurrentDataFrame
+        clsGetDataFrameFunction.SetAssignTo(strDataName)
+        clsGetDataFrameFunction.ToScript(strScript:="")
+
+        clsGroupRankingFunction.AddParameter("data", strDataName, iPosition:=0)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -235,5 +304,8 @@ Public Class dlgDefineTricotData
         TestOKEnabled()
     End Sub
 
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVarietyLevelID.ControlContentsChanged, ucrReceiverIDVarietyLevelVariety.ControlContentsChanged, ucrReceiverIDVarietyLevelTraits.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 
 End Class
