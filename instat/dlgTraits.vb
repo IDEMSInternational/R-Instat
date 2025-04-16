@@ -57,6 +57,32 @@ Public Class dlgTraits
         ucrSaveTraits.SetSaveTypeAsGraph()
         ucrSaveTraits.SetDataFrameSelector(ucrTraitGraphSelector.ucrAvailableDataFrames)
         ucrSaveTraits.SetAssignToIfUncheckedValue("last_graph")
+
+        ' only needed if cross-platform back-end used
+        InitialiseScriptTransformations()
+
+    End Sub
+
+    Private Sub InitialiseScriptTransformations()
+        ucrBase.strDialogName = "Traits"
+
+        ucrBase.dctConfigurableValues = New Dictionary(Of String, String) From {
+            {"comment", ""},
+            {"dataFrame", ""},
+            {"graphName", ""},
+            {"isComment", ""},
+            {"isStoreGraph", ""},
+            {"trait", ""}
+        }
+
+        ucrBase.lstTransformFromControl = New List(Of clsTransformationControl) From {
+            New clsTransformationControl With {.strKey = "comment", .clsControl = ucrBase, .enumTextType = ucrButtons.EnumTextType.comment},
+            New clsTransformationControl With {.strKey = "dataFrame", .clsControl = ucrTraitGraphSelector.ucrAvailableDataFrames},
+            New clsTransformationControl With {.strKey = "graphName", .clsControl = ucrSaveTraits, .enumTextType = ucrSave.SaveLocation.saveName},
+            New clsTransformationControl With {.strKey = "isComment", .clsControl = ucrBase, .enumTextType = ucrButtons.EnumTextType.isComment},
+            New clsTransformationControl With {.strKey = "isStoreGraph", .clsControl = ucrSaveTraits, .enumTextType = ucrSave.SaveLocation.isChecked},
+            New clsTransformationControl With {.strKey = "trait", .clsControl = ucrReceiverTrait}
+        }
     End Sub
 
     Private Sub SetDefaults()
