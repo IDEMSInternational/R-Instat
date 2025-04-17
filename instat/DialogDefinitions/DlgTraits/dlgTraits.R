@@ -1,5 +1,6 @@
 ﻿col_names <- c("_colNames")
-get_index_names  <- data_book$get_variables_metadata(data_name="_dataFrame", column=col_names)
+get_index_names  <- data_book$get_variables_metadata(
+    data_name="_dataFrame", column=col_names)
 rankings_object <- data_book$get_object(data_name="_dataFrame", "rankings_list")$object
 rankings_object <- get_ranking_items(data=get_index_names , vars_to_get=col_names, index="rankings_index", rankings_object)
 
