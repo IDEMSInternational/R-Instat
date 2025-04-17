@@ -58,7 +58,7 @@ Public Class ucrReceiverMultiple
                 lstActualItemsToAdd.Add(kvpTempItem)
             End If
         Next
-
+        lstSelectedVariables.Columns(0).Width = -2 ' Auto-resize to fit content
 
         If lstActualItemsToAdd.Count = 0 Then
             Exit Sub
@@ -83,6 +83,13 @@ Public Class ucrReceiverMultiple
 
         OnSelectionChanged()
     End Sub
+
+    Private Sub lstSelectedVariables_Resize(sender As Object, e As EventArgs) Handles lstSelectedVariables.Resize
+        If lstSelectedVariables.Columns.Count > 0 Then
+            lstSelectedVariables.Columns(0).Width = lstSelectedVariables.ClientSize.Width
+        End If
+    End Sub
+
 
     'add new group if it exist and return it
     'support of multiple groups assumes that the receiver may have variables from more than one data frame
@@ -522,12 +529,6 @@ Public Class ucrReceiverMultiple
         bSingleType = bIsSingleType
         bCategoricalNumeric = bIsCategoricalNumeric
         CheckSingleType()
-    End Sub
-
-    Private Sub lstSelectedVariables_ClientSizeChanged(ByVal sender As Object, ByVal e As EventArgs) Handles lstSelectedVariables.ClientSizeChanged
-        If lstSelectedVariables.Columns.Count > 0 Then
-            lstSelectedVariables.Columns(0).Width = lstSelectedVariables.ClientSize.Width
-        End If
     End Sub
 
     Private Sub ucrReceiverMultiple_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
