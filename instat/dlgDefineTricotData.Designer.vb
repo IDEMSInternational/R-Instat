@@ -24,30 +24,30 @@ Partial Class dlgDefineTricotData
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpDateTime = New System.Windows.Forms.GroupBox()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblTraits = New System.Windows.Forms.Label()
         Me.ucrReceiverLevelOverallTraits = New instat.ucrReceiverMultiple()
         Me.ucrReceiverLevelVarieties = New instat.ucrReceiverMultiple()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblVarieties = New System.Windows.Forms.Label()
+        Me.lblPlantingDate = New System.Windows.Forms.Label()
+        Me.lblLon = New System.Windows.Forms.Label()
         Me.ucrReceiverLevelPlantingDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverLevelLongitude = New instat.ucrReceiverSingle()
-        Me.lblLatitude = New System.Windows.Forms.Label()
+        Me.lblLat = New System.Windows.Forms.Label()
         Me.ucrReceiverLevelLatitude = New instat.ucrReceiverSingle()
         Me.ucrSelectorIDLevelData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblID = New System.Windows.Forms.Label()
         Me.ucrReceiverLevelID = New instat.ucrReceiverSingle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ucrSelectorVarietyLevelData = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lblVVariety = New System.Windows.Forms.Label()
         Me.ucrReceiverVarietyLevelVariety = New instat.ucrReceiverSingle()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblIVTraits = New System.Windows.Forms.Label()
         Me.ucrReceiverIDVarietyLevelTraits = New instat.ucrReceiverMultiple()
         Me.ucrReceiverIDVarietyLevelID = New instat.ucrReceiverSingle()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblIVID = New System.Windows.Forms.Label()
         Me.ucrSelectorIDVarietyLevel = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblIVVariety = New System.Windows.Forms.Label()
         Me.ucrReceiverIDVarietyLevelVariety = New instat.ucrReceiverSingle()
         Me.grpDateTime.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -66,15 +66,15 @@ Partial Class dlgDefineTricotData
         '
         'grpDateTime
         '
-        Me.grpDateTime.Controls.Add(Me.Label4)
+        Me.grpDateTime.Controls.Add(Me.lblTraits)
         Me.grpDateTime.Controls.Add(Me.ucrReceiverLevelOverallTraits)
         Me.grpDateTime.Controls.Add(Me.ucrReceiverLevelVarieties)
-        Me.grpDateTime.Controls.Add(Me.Label1)
-        Me.grpDateTime.Controls.Add(Me.Label3)
-        Me.grpDateTime.Controls.Add(Me.Label2)
+        Me.grpDateTime.Controls.Add(Me.lblVarieties)
+        Me.grpDateTime.Controls.Add(Me.lblPlantingDate)
+        Me.grpDateTime.Controls.Add(Me.lblLon)
         Me.grpDateTime.Controls.Add(Me.ucrReceiverLevelPlantingDate)
         Me.grpDateTime.Controls.Add(Me.ucrReceiverLevelLongitude)
-        Me.grpDateTime.Controls.Add(Me.lblLatitude)
+        Me.grpDateTime.Controls.Add(Me.lblLat)
         Me.grpDateTime.Controls.Add(Me.ucrReceiverLevelLatitude)
         Me.grpDateTime.Controls.Add(Me.ucrSelectorIDLevelData)
         Me.grpDateTime.Controls.Add(Me.lblID)
@@ -89,26 +89,26 @@ Partial Class dlgDefineTricotData
         Me.grpDateTime.Tag = ""
         Me.grpDateTime.Text = "ID-Level Data"
         '
-        'Label4
+        'lblTraits
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label4.Location = New System.Drawing.Point(523, 180)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(104, 20)
-        Me.Label4.TabIndex = 12
-        Me.Label4.Text = "Overall Traits:"
+        Me.lblTraits.AutoSize = True
+        Me.lblTraits.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblTraits.Location = New System.Drawing.Point(523, 142)
+        Me.lblTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTraits.Name = "lblTraits"
+        Me.lblTraits.Size = New System.Drawing.Size(52, 20)
+        Me.lblTraits.TabIndex = 12
+        Me.lblTraits.Text = "Traits:"
         '
         'ucrReceiverLevelOverallTraits
         '
         Me.ucrReceiverLevelOverallTraits.AutoSize = True
         Me.ucrReceiverLevelOverallTraits.frmParent = Me
-        Me.ucrReceiverLevelOverallTraits.Location = New System.Drawing.Point(519, 200)
+        Me.ucrReceiverLevelOverallTraits.Location = New System.Drawing.Point(519, 162)
         Me.ucrReceiverLevelOverallTraits.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLevelOverallTraits.Name = "ucrReceiverLevelOverallTraits"
         Me.ucrReceiverLevelOverallTraits.Selector = Nothing
-        Me.ucrReceiverLevelOverallTraits.Size = New System.Drawing.Size(180, 86)
+        Me.ucrReceiverLevelOverallTraits.Size = New System.Drawing.Size(180, 124)
         Me.ucrReceiverLevelOverallTraits.strNcFilePath = ""
         Me.ucrReceiverLevelOverallTraits.TabIndex = 7
         Me.ucrReceiverLevelOverallTraits.ucrSelector = Nothing
@@ -121,43 +121,43 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverLevelVarieties.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLevelVarieties.Name = "ucrReceiverLevelVarieties"
         Me.ucrReceiverLevelVarieties.Selector = Nothing
-        Me.ucrReceiverLevelVarieties.Size = New System.Drawing.Size(180, 121)
+        Me.ucrReceiverLevelVarieties.Size = New System.Drawing.Size(180, 88)
         Me.ucrReceiverLevelVarieties.strNcFilePath = ""
         Me.ucrReceiverLevelVarieties.TabIndex = 6
         Me.ucrReceiverLevelVarieties.ucrSelector = Nothing
         '
-        'Label1
+        'lblVarieties
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(523, 27)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(75, 20)
-        Me.Label1.TabIndex = 10
-        Me.Label1.Text = "Varieties:"
+        Me.lblVarieties.AutoSize = True
+        Me.lblVarieties.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVarieties.Location = New System.Drawing.Point(523, 27)
+        Me.lblVarieties.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblVarieties.Name = "lblVarieties"
+        Me.lblVarieties.Size = New System.Drawing.Size(75, 20)
+        Me.lblVarieties.TabIndex = 10
+        Me.lblVarieties.Text = "Varieties:"
         '
-        'Label3
+        'lblPlantingDate
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label3.Location = New System.Drawing.Point(351, 199)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(109, 20)
-        Me.Label3.TabIndex = 8
-        Me.Label3.Text = "Planting Date:"
+        Me.lblPlantingDate.AutoSize = True
+        Me.lblPlantingDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblPlantingDate.Location = New System.Drawing.Point(351, 199)
+        Me.lblPlantingDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPlantingDate.Name = "lblPlantingDate"
+        Me.lblPlantingDate.Size = New System.Drawing.Size(109, 20)
+        Me.lblPlantingDate.TabIndex = 8
+        Me.lblPlantingDate.Text = "Planting Date:"
         '
-        'Label2
+        'lblLon
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label2.Location = New System.Drawing.Point(351, 142)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(84, 20)
-        Me.Label2.TabIndex = 6
-        Me.Label2.Text = "Longitude:"
+        Me.lblLon.AutoSize = True
+        Me.lblLon.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLon.Location = New System.Drawing.Point(351, 142)
+        Me.lblLon.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLon.Name = "lblLon"
+        Me.lblLon.Size = New System.Drawing.Size(84, 20)
+        Me.lblLon.TabIndex = 6
+        Me.lblLon.Text = "Longitude:"
         '
         'ucrReceiverLevelPlantingDate
         '
@@ -187,16 +187,16 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverLevelLongitude.Tag = "longitude"
         Me.ucrReceiverLevelLongitude.ucrSelector = Nothing
         '
-        'lblLatitude
+        'lblLat
         '
-        Me.lblLatitude.AutoSize = True
-        Me.lblLatitude.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLatitude.Location = New System.Drawing.Point(351, 84)
-        Me.lblLatitude.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblLatitude.Name = "lblLatitude"
-        Me.lblLatitude.Size = New System.Drawing.Size(71, 20)
-        Me.lblLatitude.TabIndex = 4
-        Me.lblLatitude.Text = "Latitude:"
+        Me.lblLat.AutoSize = True
+        Me.lblLat.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblLat.Location = New System.Drawing.Point(351, 84)
+        Me.lblLat.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLat.Name = "lblLat"
+        Me.lblLat.Size = New System.Drawing.Size(71, 20)
+        Me.lblLat.TabIndex = 4
+        Me.lblLat.Text = "Latitude:"
         '
         'ucrReceiverLevelLatitude
         '
@@ -252,7 +252,7 @@ Partial Class dlgDefineTricotData
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.ucrSelectorVarietyLevelData)
-        Me.GroupBox1.Controls.Add(Me.Label10)
+        Me.GroupBox1.Controls.Add(Me.lblVVariety)
         Me.GroupBox1.Controls.Add(Me.ucrReceiverVarietyLevelVariety)
         Me.GroupBox1.Location = New System.Drawing.Point(731, 7)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
@@ -276,16 +276,16 @@ Partial Class dlgDefineTricotData
         Me.ucrSelectorVarietyLevelData.Size = New System.Drawing.Size(320, 274)
         Me.ucrSelectorVarietyLevelData.TabIndex = 8
         '
-        'Label10
+        'lblVVariety
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label10.Location = New System.Drawing.Point(343, 28)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(62, 20)
-        Me.Label10.TabIndex = 0
-        Me.Label10.Text = "Variety:"
+        Me.lblVVariety.AutoSize = True
+        Me.lblVVariety.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblVVariety.Location = New System.Drawing.Point(343, 28)
+        Me.lblVVariety.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblVVariety.Name = "lblVVariety"
+        Me.lblVVariety.Size = New System.Drawing.Size(62, 20)
+        Me.lblVVariety.TabIndex = 0
+        Me.lblVVariety.Text = "Variety:"
         '
         'ucrReceiverVarietyLevelVariety
         '
@@ -303,12 +303,12 @@ Partial Class dlgDefineTricotData
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.lblIVTraits)
         Me.GroupBox2.Controls.Add(Me.ucrReceiverIDVarietyLevelTraits)
         Me.GroupBox2.Controls.Add(Me.ucrReceiverIDVarietyLevelID)
-        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.lblIVID)
         Me.GroupBox2.Controls.Add(Me.ucrSelectorIDVarietyLevel)
-        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Controls.Add(Me.lblIVVariety)
         Me.GroupBox2.Controls.Add(Me.ucrReceiverIDVarietyLevelVariety)
         Me.GroupBox2.Location = New System.Drawing.Point(13, 304)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
@@ -320,16 +320,16 @@ Partial Class dlgDefineTricotData
         Me.GroupBox2.Tag = ""
         Me.GroupBox2.Text = "ID-Variety Level Data"
         '
-        'Label7
+        'lblIVTraits
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label7.Location = New System.Drawing.Point(364, 150)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(52, 20)
-        Me.Label7.TabIndex = 18
-        Me.Label7.Text = "Traits:"
+        Me.lblIVTraits.AutoSize = True
+        Me.lblIVTraits.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblIVTraits.Location = New System.Drawing.Point(364, 150)
+        Me.lblIVTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblIVTraits.Name = "lblIVTraits"
+        Me.lblIVTraits.Size = New System.Drawing.Size(52, 20)
+        Me.lblIVTraits.TabIndex = 18
+        Me.lblIVTraits.Text = "Traits:"
         '
         'ucrReceiverIDVarietyLevelTraits
         '
@@ -358,16 +358,16 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverIDVarietyLevelID.Tag = "id"
         Me.ucrReceiverIDVarietyLevelID.ucrSelector = Nothing
         '
-        'Label6
+        'lblIVID
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label6.Location = New System.Drawing.Point(364, 35)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(30, 20)
-        Me.Label6.TabIndex = 3
-        Me.Label6.Text = "ID:"
+        Me.lblIVID.AutoSize = True
+        Me.lblIVID.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblIVID.Location = New System.Drawing.Point(364, 35)
+        Me.lblIVID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblIVID.Name = "lblIVID"
+        Me.lblIVID.Size = New System.Drawing.Size(30, 20)
+        Me.lblIVID.TabIndex = 3
+        Me.lblIVID.Text = "ID:"
         '
         'ucrSelectorIDVarietyLevel
         '
@@ -381,16 +381,16 @@ Partial Class dlgDefineTricotData
         Me.ucrSelectorIDVarietyLevel.Size = New System.Drawing.Size(320, 274)
         Me.ucrSelectorIDVarietyLevel.TabIndex = 10
         '
-        'Label5
+        'lblIVVariety
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label5.Location = New System.Drawing.Point(364, 92)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(62, 20)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Variety:"
+        Me.lblIVVariety.AutoSize = True
+        Me.lblIVVariety.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblIVVariety.Location = New System.Drawing.Point(364, 92)
+        Me.lblIVVariety.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblIVVariety.Name = "lblIVVariety"
+        Me.lblIVVariety.Size = New System.Drawing.Size(62, 20)
+        Me.lblIVVariety.TabIndex = 0
+        Me.lblIVVariety.Text = "Variety:"
         '
         'ucrReceiverIDVarietyLevelVariety
         '
@@ -439,26 +439,26 @@ Partial Class dlgDefineTricotData
     Friend WithEvents lblID As Label
     Friend WithEvents ucrReceiverLevelID As ucrReceiverSingle
     Friend WithEvents ucrSelectorIDLevelData As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblPlantingDate As Label
+    Friend WithEvents lblLon As Label
     Friend WithEvents ucrReceiverLevelPlantingDate As ucrReceiverSingle
     Friend WithEvents ucrReceiverLevelLongitude As ucrReceiverSingle
-    Friend WithEvents lblLatitude As Label
+    Friend WithEvents lblLat As Label
     Friend WithEvents ucrReceiverLevelLatitude As ucrReceiverSingle
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblVarieties As Label
+    Friend WithEvents lblTraits As Label
     Friend WithEvents ucrReceiverLevelOverallTraits As ucrReceiverMultiple
     Friend WithEvents ucrReceiverLevelVarieties As ucrReceiverMultiple
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents ucrSelectorVarietyLevelData As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents Label10 As Label
+    Friend WithEvents lblVVariety As Label
     Friend WithEvents ucrReceiverVarietyLevelVariety As ucrReceiverSingle
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents ucrSelectorIDVarietyLevel As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents Label5 As Label
+    Friend WithEvents lblIVVariety As Label
     Friend WithEvents ucrReceiverIDVarietyLevelVariety As ucrReceiverSingle
     Friend WithEvents ucrReceiverIDVarietyLevelID As ucrReceiverSingle
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
+    Friend WithEvents lblIVID As Label
+    Friend WithEvents lblIVTraits As Label
     Friend WithEvents ucrReceiverIDVarietyLevelTraits As ucrReceiverMultiple
 End Class
