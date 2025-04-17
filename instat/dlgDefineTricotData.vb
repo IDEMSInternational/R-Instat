@@ -47,11 +47,11 @@ Public Class dlgDefineTricotData
         Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("longitude", {"lon", "long", "lont", "longitude", "Longitude", "Lon"}.ToList())
         Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("latitude", {"lat", "latitude", "Lat", "Latitude"}.ToList())
         Dim kvpPlantingDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("planting_date", {"planting_date", "Planting_date", "plantingdate"}.ToList())
-        Dim kvpOverAll As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("overall", {"overall", "overall_perf", "Overall"}.ToList())
+        Dim kvpTraits As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("traits", {"overall", "overall_perf", "Overall"}.ToList())
         Dim kvpVariety As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("variety", {"item", "items", "variety", "varieties"}.ToList())
 
 
-        lstRecognisedTypes.AddRange({kvpID, kvpLongitude, kvpLatitude, kvpPlantingDate, kvpOverAll, kvpVariety})
+        lstRecognisedTypes.AddRange({kvpID, kvpLongitude, kvpLatitude, kvpPlantingDate, kvpTraits, kvpVariety})
         lstReceiversLevelID.AddRange({ucrReceiverLevelID, ucrReceiverLevelLatitude, ucrReceiverLevelLongitude, ucrReceiverLevelPlantingDate})
         lstReceiversVarityLevel.AddRange({ucrReceiverVarietyLevelVariety})
         lstReceiversIDVarietyLevel.AddRange({ucrReceiverIDVarietyLevelID, ucrReceiverIDVarietyLevelVariety})
@@ -60,7 +60,7 @@ Public Class dlgDefineTricotData
         ucrSelectorIDLevelData.SetParameterIsString()
 
         'ID Level Data (run by the top groupbox)
-        ucrReceiverLevelOverallTraits.SetParameter(New RParameter("overall_trait", 5))
+        ucrReceiverLevelOverallTraits.SetParameter(New RParameter("traits", 5))
         ucrReceiverLevelOverallTraits.Selector = ucrSelectorIDLevelData
         ucrReceiverLevelOverallTraits.SetParameterIsString()
         ucrReceiverLevelOverallTraits.strSelectorHeading = "Variables"
