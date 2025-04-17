@@ -58,7 +58,7 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(13, 626)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 614)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
@@ -79,7 +79,7 @@ Partial Class dlgDefineTricotData
         Me.grpDateTime.Controls.Add(Me.ucrSelectorIDLevelData)
         Me.grpDateTime.Controls.Add(Me.lblID)
         Me.grpDateTime.Controls.Add(Me.ucrReceiverLevelID)
-        Me.grpDateTime.Location = New System.Drawing.Point(13, 12)
+        Me.grpDateTime.Location = New System.Drawing.Point(13, 7)
         Me.grpDateTime.Margin = New System.Windows.Forms.Padding(4)
         Me.grpDateTime.Name = "grpDateTime"
         Me.grpDateTime.Padding = New System.Windows.Forms.Padding(4)
@@ -254,7 +254,7 @@ Partial Class dlgDefineTricotData
         Me.GroupBox1.Controls.Add(Me.ucrSelectorVarietyLevelData)
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Controls.Add(Me.ucrReceiverVarietyLevelVariety)
-        Me.GroupBox1.Location = New System.Drawing.Point(731, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(731, 7)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
@@ -310,7 +310,7 @@ Partial Class dlgDefineTricotData
         Me.GroupBox2.Controls.Add(Me.ucrSelectorIDVarietyLevel)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.ucrReceiverIDVarietyLevelVariety)
-        Me.GroupBox2.Location = New System.Drawing.Point(13, 313)
+        Me.GroupBox2.Location = New System.Drawing.Point(13, 304)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
