@@ -82,7 +82,7 @@ Partial Class dlgCountinFactor
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(9, 240)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 4
         '
         'ucrCountSelector
@@ -94,7 +94,7 @@ Partial Class dlgCountinFactor
         Me.ucrCountSelector.Location = New System.Drawing.Point(9, 9)
         Me.ucrCountSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCountSelector.Name = "ucrCountSelector"
-        Me.ucrCountSelector.Size = New System.Drawing.Size(213, 183)
+        Me.ucrCountSelector.Size = New System.Drawing.Size(230, 183)
         Me.ucrCountSelector.TabIndex = 0
         '
         'dlgCountinFactor
