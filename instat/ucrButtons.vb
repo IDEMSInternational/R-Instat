@@ -342,11 +342,12 @@ Public Class ucrButtons
         Next
 
         'build the R model from the R script
-        Dim strScriptReset = File.ReadAllText("C:\Users\steph\source\repos\R-Instat\instat\DialogDefinitions\Dlg" + strDialogName + "\dlg" + strDialogName + ".R")
+        Dim strDialogPathStem As String = Path.Combine(frmMain.strStaticPath & "\DialogDefinitions\Dlg" + strDialogName + "\dlg" + strDialogName)
+        Dim strScriptReset = File.ReadAllText(strDialogPathStem + ".R")
         Dim rScript As RScript = New RScript(strScriptReset)
 
         'update the R model from the configurable values
-        Dim strTransformationsRJson As String = File.ReadAllText("C:\Users\steph\source\repos\R-Instat\instat\DialogDefinitions\Dlg" + strDialogName + "\dlg" + strDialogName + ".json")
+        Dim strTransformationsRJson As String = File.ReadAllText(strDialogPathStem + ".json")
         lstTransformToScript = JsonConvert.DeserializeObject(Of List(Of clsTransformationRModel))(strTransformationsRJson)
         For Each transform As clsTransformationRModel In lstTransformToScript
             transform.updateRModel(rScript, dctConfigurableValues)
