@@ -636,6 +636,20 @@ Partial Class frmMain
         Me.mnuTricotModelTree = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotModelOverall = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotModelCharacterisation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotXp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator84 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem12 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem13 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem14 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContext = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextCheckData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsByContextCheckDataDuplicateRows = New System.Windows.Forms.ToolStripMenuItem()
@@ -728,20 +742,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTricotXp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator84 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem12 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem13 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem14 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewTricotXpMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1497,7 +1498,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutput, Me.mnuViewLogScript, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewTricotMenu, Me.mnuViewOptionsByContextMenu, Me.mnuViewProcurementMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata, Me.mnuViewSwapDataAndDataframeMetadata, Me.mnuViewSwapDataAndScript})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutput, Me.mnuViewLogScript, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewTricotMenu, Me.mnuViewTricotXpMenu, Me.mnuViewOptionsByContextMenu, Me.mnuViewProcurementMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata, Me.mnuViewSwapDataAndDataframeMetadata, Me.mnuViewSwapDataAndScript})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(44, 22)
         Me.mnuView.Tag = "View"
@@ -4787,6 +4788,92 @@ Partial Class frmMain
         Me.mnuTricotModelCharacterisation.Size = New System.Drawing.Size(184, 22)
         Me.mnuTricotModelCharacterisation.Text = "Characterisation..."
         '
+        'mnuTricotXp
+        '
+        Me.mnuTricotXp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6, Me.ToolStripSeparator84, Me.ToolStripMenuItem7, Me.ToolStripMenuItem10})
+        Me.mnuTricotXp.Name = "mnuTricotXp"
+        Me.mnuTricotXp.Size = New System.Drawing.Size(63, 22)
+        Me.mnuTricotXp.Text = "TricotXP"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(201, 22)
+        Me.ToolStripMenuItem3.Text = "Import from ClimMob..."
+        '
+        'ToolStripMenuItem4
+        '
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(201, 22)
+        Me.ToolStripMenuItem4.Text = "Transform ClimMob..."
+        '
+        'ToolStripMenuItem5
+        '
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(201, 22)
+        Me.ToolStripMenuItem5.Text = "Define Tricot Data..."
+        '
+        'ToolStripMenuItem6
+        '
+        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
+        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(201, 22)
+        Me.ToolStripMenuItem6.Text = "Genotype Data..."
+        '
+        'ToolStripSeparator84
+        '
+        Me.ToolStripSeparator84.Name = "ToolStripSeparator84"
+        Me.ToolStripSeparator84.Size = New System.Drawing.Size(198, 6)
+        '
+        'ToolStripMenuItem7
+        '
+        Me.ToolStripMenuItem7.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem8, Me.ToolStripMenuItem9})
+        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
+        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(201, 22)
+        Me.ToolStripMenuItem7.Text = "Describe"
+        '
+        'ToolStripMenuItem8
+        '
+        Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
+        Me.ToolStripMenuItem8.Size = New System.Drawing.Size(147, 22)
+        Me.ToolStripMenuItem8.Text = "Traits..."
+        '
+        'ToolStripMenuItem9
+        '
+        Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
+        Me.ToolStripMenuItem9.Size = New System.Drawing.Size(147, 22)
+        Me.ToolStripMenuItem9.Text = "Correlations..."
+        '
+        'ToolStripMenuItem10
+        '
+        Me.ToolStripMenuItem10.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem11, Me.ToolStripMenuItem12, Me.ToolStripMenuItem13, Me.ToolStripMenuItem14})
+        Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
+        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(201, 22)
+        Me.ToolStripMenuItem10.Text = "Model (Plackett-Luce)"
+        '
+        'ToolStripMenuItem11
+        '
+        Me.ToolStripMenuItem11.Name = "ToolStripMenuItem11"
+        Me.ToolStripMenuItem11.Size = New System.Drawing.Size(184, 22)
+        Me.ToolStripMenuItem11.Text = "Without Covariates..."
+        '
+        'ToolStripMenuItem12
+        '
+        Me.ToolStripMenuItem12.Name = "ToolStripMenuItem12"
+        Me.ToolStripMenuItem12.Size = New System.Drawing.Size(184, 22)
+        Me.ToolStripMenuItem12.Text = "Tree..."
+        '
+        'ToolStripMenuItem13
+        '
+        Me.ToolStripMenuItem13.Name = "ToolStripMenuItem13"
+        Me.ToolStripMenuItem13.Size = New System.Drawing.Size(184, 22)
+        Me.ToolStripMenuItem13.Text = "Overall..."
+        '
+        'ToolStripMenuItem14
+        '
+        Me.ToolStripMenuItem14.Name = "ToolStripMenuItem14"
+        Me.ToolStripMenuItem14.Size = New System.Drawing.Size(184, 22)
+        Me.ToolStripMenuItem14.Text = "Characterisation..."
+        '
         'mnuOptionsByContext
         '
         Me.mnuOptionsByContext.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckData, Me.mnuOptionsByContextDefine, Me.mnuOptionsByContextPrepare, Me.mnuOptionsByContextDescribe, Me.mnuOptionsByContextModel, Me.mnuOptionsByContextCropModel})
@@ -5453,91 +5540,11 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'mnuTricotXp
+        'mnuViewTricotXpMenu
         '
-        Me.mnuTricotXp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6, Me.ToolStripSeparator84, Me.ToolStripMenuItem7, Me.ToolStripMenuItem10})
-        Me.mnuTricotXp.Name = "mnuTricotXp"
-        Me.mnuTricotXp.Size = New System.Drawing.Size(49, 22)
-        Me.mnuTricotXp.Text = "TricotXP"
-        '
-        'ToolStripMenuItem3
-        '
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(201, 22)
-        Me.ToolStripMenuItem3.Text = "Import from ClimMob..."
-        '
-        'ToolStripMenuItem4
-        '
-        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(201, 22)
-        Me.ToolStripMenuItem4.Text = "Transform ClimMob..."
-        '
-        'ToolStripMenuItem5
-        '
-        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(201, 22)
-        Me.ToolStripMenuItem5.Text = "Define Tricot Data..."
-        '
-        'ToolStripMenuItem6
-        '
-        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(201, 22)
-        Me.ToolStripMenuItem6.Text = "Genotype Data..."
-        '
-        'ToolStripSeparator84
-        '
-        Me.ToolStripSeparator84.Name = "ToolStripSeparator84"
-        Me.ToolStripSeparator84.Size = New System.Drawing.Size(198, 6)
-        '
-        'ToolStripMenuItem7
-        '
-        Me.ToolStripMenuItem7.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem8, Me.ToolStripMenuItem9})
-        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
-        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(201, 22)
-        Me.ToolStripMenuItem7.Text = "Describe"
-        '
-        'ToolStripMenuItem8
-        '
-        Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
-        Me.ToolStripMenuItem8.Size = New System.Drawing.Size(147, 22)
-        Me.ToolStripMenuItem8.Text = "Traits..."
-        '
-        'ToolStripMenuItem9
-        '
-        Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
-        Me.ToolStripMenuItem9.Size = New System.Drawing.Size(147, 22)
-        Me.ToolStripMenuItem9.Text = "Correlations..."
-        '
-        'ToolStripMenuItem10
-        '
-        Me.ToolStripMenuItem10.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem11, Me.ToolStripMenuItem12, Me.ToolStripMenuItem13, Me.ToolStripMenuItem14})
-        Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
-        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(201, 22)
-        Me.ToolStripMenuItem10.Text = "Model (Plackett-Luce)"
-        '
-        'ToolStripMenuItem11
-        '
-        Me.ToolStripMenuItem11.Name = "ToolStripMenuItem11"
-        Me.ToolStripMenuItem11.Size = New System.Drawing.Size(184, 22)
-        Me.ToolStripMenuItem11.Text = "Without Covariates..."
-        '
-        'ToolStripMenuItem12
-        '
-        Me.ToolStripMenuItem12.Name = "ToolStripMenuItem12"
-        Me.ToolStripMenuItem12.Size = New System.Drawing.Size(184, 22)
-        Me.ToolStripMenuItem12.Text = "Tree..."
-        '
-        'ToolStripMenuItem13
-        '
-        Me.ToolStripMenuItem13.Name = "ToolStripMenuItem13"
-        Me.ToolStripMenuItem13.Size = New System.Drawing.Size(184, 22)
-        Me.ToolStripMenuItem13.Text = "Overall..."
-        '
-        'ToolStripMenuItem14
-        '
-        Me.ToolStripMenuItem14.Name = "ToolStripMenuItem14"
-        Me.ToolStripMenuItem14.Size = New System.Drawing.Size(184, 22)
-        Me.ToolStripMenuItem14.Text = "Characterisation..."
+        Me.mnuViewTricotXpMenu.Name = "mnuViewTricotXpMenu"
+        Me.mnuViewTricotXpMenu.Size = New System.Drawing.Size(268, 22)
+        Me.mnuViewTricotXpMenu.Text = "Tricot XP Menu"
         '
         'frmMain
         '
@@ -6302,4 +6309,5 @@ Partial Class frmMain
     Friend WithEvents ToolStripMenuItem12 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem13 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem14 As ToolStripMenuItem
+    Friend WithEvents mnuViewTricotXpMenu As ToolStripMenuItem
 End Class
