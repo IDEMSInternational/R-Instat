@@ -643,7 +643,7 @@ Partial Class frmMain
         Me.ToolStripMenuItem6 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator84 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotXpDescribeTraits = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
@@ -4826,16 +4826,16 @@ Partial Class frmMain
         '
         'ToolStripMenuItem7
         '
-        Me.ToolStripMenuItem7.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem8, Me.ToolStripMenuItem9})
+        Me.ToolStripMenuItem7.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTricotXpDescribeTraits, Me.ToolStripMenuItem9})
         Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
         Me.ToolStripMenuItem7.Size = New System.Drawing.Size(201, 22)
         Me.ToolStripMenuItem7.Text = "Describe"
         '
-        'ToolStripMenuItem8
+        'mnuTricotXpDescribeTraits
         '
-        Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
-        Me.ToolStripMenuItem8.Size = New System.Drawing.Size(147, 22)
-        Me.ToolStripMenuItem8.Text = "Traits..."
+        Me.mnuTricotXpDescribeTraits.Name = "mnuTricotXpDescribeTraits"
+        Me.mnuTricotXpDescribeTraits.Size = New System.Drawing.Size(147, 22)
+        Me.mnuTricotXpDescribeTraits.Text = "Traits..."
         '
         'ToolStripMenuItem9
         '
@@ -6303,7 +6303,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripMenuItem6 As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator84 As ToolStripSeparator
     Friend WithEvents ToolStripMenuItem7 As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem8 As ToolStripMenuItem
+    Friend WithEvents mnuTricotXpDescribeTraits As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem9 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem10 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem11 As ToolStripMenuItem
