@@ -5542,6 +5542,7 @@ Partial Class frmMain
         '
         'mnuViewTricotXpMenu
         '
+        Me.mnuViewTricotXpMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuViewTricotXpMenu.Name = "mnuViewTricotXpMenu"
         Me.mnuViewTricotXpMenu.Size = New System.Drawing.Size(268, 22)
         Me.mnuViewTricotXpMenu.Text = "Tricot XP Menu"
