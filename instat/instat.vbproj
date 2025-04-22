@@ -357,6 +357,8 @@
       <DependentUpon>dlgTraitsXp.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTraitsXp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTransformTricotData.Designer.vb">
       <DependentUpon>dlgTransformTricotData.vb</DependentUpon>
     </Compile>
