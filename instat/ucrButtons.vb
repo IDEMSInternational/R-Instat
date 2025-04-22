@@ -22,7 +22,7 @@ Imports RInsightF461
 
 Public Class ucrButtons
     ''' <summary>
-    ''' todo
+    ''' Specifies the type of information required when calling <see cref="GetText([Enum])"/>.
     ''' </summary>
     Public Enum EnumTextType
         comment
@@ -329,8 +329,12 @@ Public Class ucrButtons
     End Sub
 
     ''' <summary>
-    ''' todo move this sub
+    ''' Creates the R script using the cross-platform backend. 
+    ''' Writes both <paramref name="strExpected"/> and the cross-platform backend R script to the 
+    ''' Desktop (in tmp/expected.R and tmp/actual.R respectively). These files are for testing 
+    ''' the cross-platform backend.
     ''' </summary>
+    ''' <param name="strExpected"> The R script generated using the classic approach.</param>
     Private Sub CreateRScriptUsingXpBackEnd(strExpected As String)
         If String.IsNullOrEmpty(strDialogName) Then
             Exit Sub
