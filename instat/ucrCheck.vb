@@ -190,5 +190,4 @@ Public Class ucrCheck
         Return If(chkCheck.Checked, "TRUE", "FALSE")
     End Function
 
-
 End Class

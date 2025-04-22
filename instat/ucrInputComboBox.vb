@@ -19,7 +19,8 @@ Imports System.ComponentModel
 Public Class ucrInputComboBox
 
     ''' <summary>
-    ''' Specifies either the combo box's key or value is to be returned by GetText()
+    ''' Specifies the type of information required when calling <see cref="GetText([Enum])"/>.
+    ''' In this case, either the combo box's key or value.
     ''' </summary>
     Public Enum EnumTextType
         key

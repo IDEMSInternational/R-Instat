@@ -36,7 +36,7 @@ Public Class ucrSave
     ' 
 
     ''' <summary>
-    ''' Specifies the type of information about the save control to be returned by GetText()
+    ''' Specifies the type of information required when calling <see cref="GetText([Enum])"/>.
     ''' </summary>
     Public Enum SaveLocation
         adjacentColumn

@@ -20,7 +20,7 @@ Imports RDotNet
 Public Class ucrReceiverSingle
 
     ''' <summary>
-    ''' Specifies the type of information about the receiver to be returned by GetText()
+    ''' Specifies the type of information required when calling <see cref="GetText([Enum])"/>.
     ''' </summary>
     Public Enum EnumTextType
         isFactor

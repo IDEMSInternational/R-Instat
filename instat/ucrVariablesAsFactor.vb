@@ -21,7 +21,7 @@ Imports instat.Translations
 Public Class ucrVariablesAsFactor
 
     ''' <summary>
-    ''' Specifies the type of information about the control to be returned by GetText()
+    ''' Specifies the type of information required when calling <see cref="GetText([Enum])"/>.
     ''' </summary>
     Public Enum EnumTextType
         isSingleVariable
