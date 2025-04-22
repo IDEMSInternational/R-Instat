@@ -328,6 +328,12 @@
     <Compile Include="dlgTraits.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTraitsXp.Designer.vb">
+      <DependentUpon>dlgTraitsXp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraitsXp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgUseTable.Designer.vb">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
     </Compile>
@@ -3433,6 +3439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTraits.resx">
       <DependentUpon>dlgTraits.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraitsXp.resx">
+      <DependentUpon>dlgTraitsXp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseTable.resx">
       <DependentUpon>dlgUseTable.vb</DependentUpon>

@@ -3031,7 +3031,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuTricotDescribeXpTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraits.Click
-        dlgTraits.ShowDialog()
+        dlgTraitsXp.ShowDialog()
     End Sub
 
 End Class
