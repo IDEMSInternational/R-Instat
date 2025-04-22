@@ -3485,6 +3485,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTraitsXp.resx">
       <DependentUpon>dlgTraitsXp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTransformTricotData.resx">
       <DependentUpon>dlgTransformTricotData.vb</DependentUpon>
     </EmbeddedResource>
