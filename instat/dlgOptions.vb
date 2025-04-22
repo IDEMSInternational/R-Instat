@@ -452,10 +452,6 @@ Public Class dlgOptions
         ApplyEnabled(True)
     End Sub
 
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWidth.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrNudRowUndoLimit.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxOutputsHeight.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudColUndoLimit.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewTricotMenu.ControlValueChanged, ucrChkViewTricotXpMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkTurnOffUndo.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkReminder.ControlValueChanged, ucrChkMaxOutputsHeight.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged
-
-    End Sub
-
     Private Sub SetVisibleLanButton()
         If frmMain.clsInstatOptions IsNot Nothing Then
             If frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
