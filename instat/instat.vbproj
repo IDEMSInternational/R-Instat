@@ -226,6 +226,7 @@
     <Compile Include="clsFileUrlUtilities.vb" />
     <Compile Include="clsTransformationControl.vb" />
     <Compile Include="clsTransformationRModel.vb" />
+    <Compile Include="clsColumnSelectionUtility.vb" />
     <Compile Include="dlgApsimx.Designer.vb">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
     </Compile>
@@ -242,6 +243,12 @@
       <DependentUpon>dlgClusterAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgClusterAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgDefineTricotData.Designer.vb">
+      <DependentUpon>dlgDefineTricotData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDefineTricotData.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDistances.Designer.vb">
@@ -298,6 +305,18 @@
     <Compile Include="dlgImportOpenAppBuilder.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgModellingTree.Designer.vb">
+      <DependentUpon>dlgModellingTree.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgModellingTree.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPlacketLuceModel.Designer.vb">
+      <DependentUpon>dlgPlacketLuceModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPlacketLuceModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRandomSplit.Designer.vb">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
     </Compile>
@@ -322,6 +341,12 @@
     <Compile Include="dlgSurvey.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTraitCorrelations.Designer.vb">
+      <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraitCorrelations.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTraits.Designer.vb">
       <DependentUpon>dlgTraits.vb</DependentUpon>
     </Compile>
@@ -332,6 +357,10 @@
       <DependentUpon>dlgTraitsXp.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTraitsXp.vb">
+    <Compile Include="dlgTransformTricotData.Designer.vb">
+      <DependentUpon>dlgTransformTricotData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTransformTricotData.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgUseTable.Designer.vb">
@@ -3340,6 +3369,9 @@
     <EmbeddedResource Include="dlgCopySpecial.resx">
       <DependentUpon>dlgCopySpecial.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgDefineTricotData.resx">
+      <DependentUpon>dlgDefineTricotData.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -3392,11 +3424,17 @@
     <EmbeddedResource Include="dlgMachineLearning.resx">
       <DependentUpon>dlgMachineLearning.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgModellingTree.resx">
+      <DependentUpon>dlgModellingTree.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPasteNewColumns.resx">
       <DependentUpon>dlgPasteNewColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPlacketLuceModel.resx">
+      <DependentUpon>dlgPlacketLuceModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRandomSplit.resx">
       <DependentUpon>dlgRandomSplit.vb</DependentUpon>
@@ -3437,11 +3475,16 @@
     <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
       <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraitCorrelations.resx">
+      <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTraits.resx">
       <DependentUpon>dlgTraits.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTraitsXp.resx">
       <DependentUpon>dlgTraitsXp.vb</DependentUpon>
+    <EmbeddedResource Include="dlgTransformTricotData.resx">
+      <DependentUpon>dlgTransformTricotData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseTable.resx">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
