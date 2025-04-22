@@ -121,8 +121,8 @@ Partial Class dlgCountinFactor
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrCountSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrCountReceiver As ucrReceiverSingle
     Friend WithEvents lblSelectedFactor As Label
     Friend WithEvents ucrNewColName As ucrSave
+    Friend WithEvents ucrCountSelector As ucrSelectorByDataFrameAddRemove
 End Class

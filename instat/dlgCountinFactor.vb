@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgCountinFactor
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsDefaultFunction, clsDummyFunction As New RFunction
+    Private _strSelectedColumn As String
 
     Private Sub dlgCountinFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -29,10 +30,10 @@ Public Class dlgCountinFactor
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetSelectedColumn()
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
-        AutoFillReceiverWithFirstFactor()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -54,27 +55,23 @@ Public Class dlgCountinFactor
         ucrNewColName.SetDataFrameSelector(ucrCountSelector.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")
         ucrNewColName.setLinkedReceiver(ucrCountReceiver)
-        AutoFillReceiverWithFirstFactor()
     End Sub
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-
+        clsDummyFunction = New RFunction
         ucrCountSelector.Reset()
         ucrNewColName.Reset()
 
         clsDefaultFunction.SetPackageName("dae")
         clsDefaultFunction.SetRCommand("fac.nested")
         clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrCountSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
-
+        clsDummyFunction.AddParameter("strVal", ucrCountReceiver.GetVariableNames(False))
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        If bReset Then
-            AutoFillReceiverWithFirstFactor()
-        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -91,40 +88,26 @@ Public Class dlgCountinFactor
         TestOkEnabled()
     End Sub
 
-    Private Sub AutoFillReceiverWithFirstFactor()
-        ' Check if a data frame is selected
-        If Not String.IsNullOrEmpty(ucrCountSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) Then
-            Dim strDataFrame As String = ucrCountSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
 
-            ' Retrieve all variables in the selector (extracting text from ListViewItem objects)
-            Dim availableFactors As List(Of String) = New List(Of String)
-            For Each item As ListViewItem In ucrCountSelector.lstAvailableVariable.Items
-                availableFactors.Add(item.Text) ' Extract the text property of each ListViewItem
-            Next
-            ' If factors are available, add the first one to the receiver
-            If availableFactors IsNot Nothing AndAlso availableFactors.Count > 0 Then
-                Dim firstFactor As String = availableFactors(0).Trim()
-
-                ' Prevent recursion by checking if the receiver already has the first factor
-                If ucrCountReceiver.GetVariableNames() <> firstFactor Then
-                    RemoveHandler ucrCountReceiver.ControlContentsChanged, AddressOf ucrCountReceiver_ControlContentsChanged
-
-                    Try
-                        ucrCountReceiver.Add(firstFactor, strDataFrame) ' Add the first factor to the receiver
-
-                    Finally
-                        AddHandler ucrCountReceiver.ControlContentsChanged, AddressOf ucrCountReceiver_ControlContentsChanged
-                    End Try
-                End If
-            End If
-        End If
+    Private Sub SetSelectedColumn()
+        ' Call the utility method to perform the column selection logic.
+        clsColumnSelectionUtility.SetSelectedColumn(ucrCountSelector.lstAvailableVariable,
+                                                 ucrCountReceiver,
+                                                 clsDummyFunction,
+                                                 ucrCountSelector.strCurrentDataFrame,
+                                                 _strSelectedColumn)
     End Sub
 
     Private Sub ucrCountReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCountReceiver.ControlContentsChanged, ucrNewColName.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrCountSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCountSelector.ControlValueChanged
-        AutoFillReceiverWithFirstFactor()
-    End Sub
 End Class
