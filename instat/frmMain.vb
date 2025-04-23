@@ -3019,4 +3019,8 @@ Public Class frmMain
     Private Sub mnuTricotDescribeTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeTraits.Click
         dlgTraits.ShowDialog()
     End Sub
+
+    Private Sub mnuTricotImportFromClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotImportFromClimMob.Click
+        dlgImportfromClimMob.ShowDialog()
+    End Sub
 End Class
