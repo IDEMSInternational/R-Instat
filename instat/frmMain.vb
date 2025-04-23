@@ -159,6 +159,7 @@ Public Class frmMain
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         mnuViewTricotMenu.Checked = clsInstatOptions.bShowTricotMenu
+        mnuViewTricotXpMenu.Checked = clsInstatOptions.bShowTricotXpMenu
         mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
         mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
@@ -1923,6 +1924,11 @@ Public Class frmMain
         mnuViewTricotMenu.Checked = bNewShowTricotMenu
     End Sub
 
+    Public Sub SetShowTricotXpMenu(bNewShowTricotXpMenu As Boolean)
+        mnuTricotXp.Visible = bNewShowTricotXpMenu
+        mnuViewTricotXpMenu.Checked = bNewShowTricotXpMenu
+    End Sub
+
     Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
         mnuProcurement.Visible = bNewShowProcurementMenu
         mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
@@ -1951,6 +1957,10 @@ Public Class frmMain
 
     Private Sub mnuViewTricotMenu_Click(sender As Object, e As EventArgs) Handles mnuViewTricotMenu.Click
         clsInstatOptions.SetShowTricotMenu(Not mnuViewTricotMenu.Checked)
+    End Sub
+
+    Private Sub mnuViewTricotXpMenu_Click(sender As Object, e As EventArgs) Handles mnuViewTricotXpMenu.Click
+        clsInstatOptions.SetShowTricotXpMenu(Not mnuViewTricotXpMenu.Checked)
     End Sub
 
     Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
@@ -3022,6 +3032,10 @@ Public Class frmMain
 
     Private Sub mnuTricotDescribeTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeTraits.Click
         dlgTraits.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotDescribeXpTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraits.Click
+        dlgTraitsXp.ShowDialog()
     End Sub
 
     Private Sub mnuTricotDefineTricotData_Click(sender As Object, e As EventArgs) Handles mnuTricotDefineTricotData.Click

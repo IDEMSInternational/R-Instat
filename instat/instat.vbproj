@@ -147,6 +147,9 @@
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.5.1.0\lib\net46\NLog.dll</HintPath>
     </Reference>
@@ -221,6 +224,8 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsFileUrlUtilities.vb" />
+    <Compile Include="clsTransformationControl.vb" />
+    <Compile Include="clsTransformationRModel.vb" />
     <Compile Include="clsColumnSelectionUtility.vb" />
     <Compile Include="dlgApsimx.Designer.vb">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
@@ -346,6 +351,12 @@
       <DependentUpon>dlgTraits.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTraits.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTraitsXp.Designer.vb">
+      <DependentUpon>dlgTraitsXp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraitsXp.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTransformTricotData.Designer.vb">
@@ -3472,6 +3483,9 @@
     <EmbeddedResource Include="dlgTraits.resx">
       <DependentUpon>dlgTraits.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraitsXp.resx">
+      <DependentUpon>dlgTraitsXp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTransformTricotData.resx">
       <DependentUpon>dlgTransformTricotData.vb</DependentUpon>
     </EmbeddedResource>
@@ -5733,6 +5747,8 @@
     <Content Include="Resources\upward-arrow1.png" />
     <Content Include="translations\translateDynamic.txt" />
     <Content Include="translations\translateIgnore.txt" />
+    <None Include="DialogDefinitions\DlgTraits\dlgTraits.json" />
+    <None Include="DialogDefinitions\DlgTraits\dlgTraits.R" />
     <None Include="instat.licenseheader" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -6072,6 +6088,12 @@
     <Content Include="static\Help\Statistics Glossary.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\DialogDefinitions\DlgTraits\dlgTraits.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\DialogDefinitions\DlgTraits\dlgTraits.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="static\Help\LICENSE" />
     <None Include="static\Help\LICENSE" />
     <Content Include="static\Help\R-Instat.pdf" />
