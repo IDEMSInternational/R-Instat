@@ -49,7 +49,7 @@ Public Class dlgImportfromClimMob
         ucrInputServerName.SetLinkedDisplayControl(lblServerName)
         ucrInputServerName.SetParameter(New RParameter("server", 1))
 
-        ucrInputChooseForm.SetParameter(New RParameter("project_name", 3))
+        ucrInputChooseForm.SetParameter(New RParameter("right", 3))
         ucrInputChooseForm.bAllowNonConditionValues = True
 
         ucrSaveFile.SetPrefix("climmob_dataframe")
@@ -93,7 +93,7 @@ Public Class dlgImportfromClimMob
 
         clsThirdOperator.SetOperation("==")
         clsThirdOperator.AddParameter("left", "project_id", iPosition:=0)
-        clsThirdOperator.AddParameter("right", "project_name", iPosition:=1) ' right = value in the ucrInputBox
+        clsThirdOperator.AddParameter("right", Chr(34) & ucrInputChooseForm.GetText & Chr(34), iPosition:=1) ' right = value in the ucrInputBox
         clsThirdOperator.bSpaceAroundOperation = False
 
         clsFourthOperator.SetOperation("%>%")
@@ -126,12 +126,15 @@ Public Class dlgImportfromClimMob
         clsSecondDplyrFunction.SetPackageName("dplyr")
         clsSecondDplyrFunction.SetRCommand("pull")
         clsSecondDplyrFunction.AddParameter("project", "user_owner", bIncludeArgumentName:=False)
-        
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsClimmobFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         'ucrInputServerName.SetRCode(clsProjectsFunction, bReset)
+        ucrInputChooseForm.AddAdditionalCodeParameterPair(clsClimmobFunction, New RParameter("project", 1), 1)
+
+        ucrInputChooseForm.SetRCode(clsThirdOperator, bReset)
         ucrSaveFile.SetRCode(clsClimmobFunction, bReset)
     End Sub
 
@@ -154,11 +157,10 @@ Public Class dlgImportfromClimMob
 
     Private Sub ucrInputChooseForm_NameChanged() Handles ucrInputChooseForm.ControlValueChanged
         If ucrInputChooseForm.IsEmpty() Then
-            clsClimmobFunction.RemoveParameterByName("project")
+            clsThirdOperator.RemoveParameterByName("right")
         Else
-            clsClimmobFunction.AddParameter("project", Chr(34) & ucrInputChooseForm.GetText & Chr(34))
+            clsThirdOperator.AddParameter("right", Chr(34) & ucrInputChooseForm.GetText & Chr(34))
         End If
-        'TestOKEnabled()
     End Sub
 
     Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdKey.Click
