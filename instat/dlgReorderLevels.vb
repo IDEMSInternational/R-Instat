@@ -285,35 +285,12 @@ Public Class dlgReorderLevels
     End Property
 
     Private Sub SetSelectedColumn()
-        Dim strTempSelectedVariable As String = ""
-        Dim strDataName As String = ucrSelectorFactorLevelsToReorder.strCurrentDataFrame
-        Dim strTemp As String = ""
-
-        ' Retrieve parameter value safely
-        Dim clsParam = clsDummyFunction.GetParameter("strVal")
-        If clsParam IsNot Nothing Then
-            strTemp = clsParam.strArgumentValue
-        End If
-
-        ' If _strSelectedColumn is valid and a factor, use it
-        If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso
-       frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
-            strTempSelectedVariable = _strSelectedColumn
-        ElseIf ucrSelectorFactorLevelsToReorder.lstAvailableVariable.Items.Count > 0 Then
-            ' If no selected column, use first available variable
-            strTempSelectedVariable = ucrSelectorFactorLevelsToReorder.lstAvailableVariable.Items(0).Text
-        Else
-            ' No available variables, exit
-            Exit Sub
-        End If
-
-        ' Ensure strTemp takes precedence if it's valid
-        If Not String.IsNullOrEmpty(strTemp) AndAlso strTempSelectedVariable <> strTemp Then
-            strTempSelectedVariable = strTemp
-        End If
-
-        ' Add the selected variable to the receiver
-        ucrReceiverFactor.Add(strTempSelectedVariable, strDataName)
+        ' Call the utility method to perform the column selection logic.
+        clsColumnSelectionUtility.SetSelectedColumn(ucrSelectorFactorLevelsToReorder.lstAvailableVariable,
+                                                 ucrReceiverFactor,
+                                                 clsDummyFunction,
+                                                 ucrSelectorFactorLevelsToReorder.strCurrentDataFrame,
+                                                 _strSelectedColumn)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

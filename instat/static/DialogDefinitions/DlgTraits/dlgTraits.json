@@ -1,0 +1,99 @@
+[
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isComment",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "operatorUpdateParamPresentation",
+                "iStatementNumber": 0,
+                "strFunctionName": "<-",
+                "iParameterNumber": 0,
+                "strValueKey": "comment"
+            }
+        ]
+    },
+    {
+        "enumTransformationType": "functionUpdateParamValue",
+        "iStatementNumber": 0,
+        "strFunctionName": "c",
+        "iParameterNumber": 0,
+        "strValueKey": "trait",
+        "bIsQuoted": true
+    },
+    {
+        "enumTransformationType": "functionUpdateParamValue",
+        "iStatementNumber": 1,
+        "strFunctionName": "get_variables_metadata",
+        "iParameterNumber": 0,
+        "strValueKey": "dataFrame",
+        "bIsQuoted": true
+    },
+    {
+        "enumTransformationType": "functionUpdateParamValue",
+        "iStatementNumber": 2,
+        "strFunctionName": "get_object",
+        "iParameterNumber": 0,
+        "strValueKey": "dataFrame",
+        "bIsQuoted": true
+    },
+    {
+        "enumTransformationType": "functionUpdateParamValue",
+        "iStatementNumber": 6,
+        "strFunctionName": "add_object",
+        "iParameterNumber": 0,
+        "strValueKey": "dataFrame",
+        "bIsQuoted": true
+    },
+    {
+        "enumTransformationType": "functionUpdateParamValue",
+        "iStatementNumber": 7,
+        "strFunctionName": "get_object_data",
+        "iParameterNumber": 0,
+        "strValueKey": "dataFrame",
+        "bIsQuoted": true
+    },
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isStoreGraph",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "operatorUpdateParam",
+                "iStatementNumber": 5,
+                "strFunctionName": "<-",
+                "iParameterNumber": 0,
+                "strValueKey": "graphName"
+            },
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 6,
+                "strFunctionName": "add_object",
+                "iParameterNumber": 1,
+                "strValueKey": "graphName",
+                "bIsQuoted": true
+            },
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 6,
+                "strFunctionName": "check_graph",
+                "iParameterNumber": 0,
+                "strValueKey": "graphName"
+            },
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 7,
+                "strFunctionName": "get_object_data",
+                "iParameterNumber": 1,
+                "strValueKey": "graphName",
+                "bIsQuoted": true
+            },
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 8,
+                "strFunctionName": "c",
+                "iParameterNumber": 0,
+                "strValueKey": "graphName",
+                "bIsQuoted": true
+            }
+        ]
+    }
+]

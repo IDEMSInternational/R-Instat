@@ -159,6 +159,7 @@ Public Class frmMain
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         mnuViewTricotMenu.Checked = clsInstatOptions.bShowTricotMenu
+        mnuViewTricotXpMenu.Checked = clsInstatOptions.bShowTricotXpMenu
         mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
         mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
@@ -953,6 +954,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReferenceLevel.Click
+        SetDefaultValueInReorderLevels()
         dlgReferenceLevel.ShowDialog()
     End Sub
 
@@ -977,6 +979,8 @@ Public Class frmMain
         dlgRecodeFactor.SelectedColumn = strSelectedColumn
         dlgDummyVariables.SelectedColumn = strSelectedColumn
         dlgLabelsLevels.SelectedColumn = strSelectedColumn
+        dlgReferenceLevel.SelectedColumn = strSelectedColumn
+        dlgFactorDataFrame.SelectedColumn = strSelectedColumn
     End Sub
 
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
@@ -1012,6 +1016,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorSheet_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorFactorDataFrame.Click
+        SetDefaultValueInReorderLevels()
         dlgFactorDataFrame.ShowDialog()
     End Sub
 
@@ -1919,6 +1924,11 @@ Public Class frmMain
         mnuViewTricotMenu.Checked = bNewShowTricotMenu
     End Sub
 
+    Public Sub SetShowTricotXpMenu(bNewShowTricotXpMenu As Boolean)
+        mnuTricotXp.Visible = bNewShowTricotXpMenu
+        mnuViewTricotXpMenu.Checked = bNewShowTricotXpMenu
+    End Sub
+
     Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
         mnuProcurement.Visible = bNewShowProcurementMenu
         mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
@@ -1947,6 +1957,10 @@ Public Class frmMain
 
     Private Sub mnuViewTricotMenu_Click(sender As Object, e As EventArgs) Handles mnuViewTricotMenu.Click
         clsInstatOptions.SetShowTricotMenu(Not mnuViewTricotMenu.Checked)
+    End Sub
+
+    Private Sub mnuViewTricotXpMenu_Click(sender As Object, e As EventArgs) Handles mnuViewTricotXpMenu.Click
+        clsInstatOptions.SetShowTricotXpMenu(Not mnuViewTricotXpMenu.Checked)
     End Sub
 
     Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
@@ -3020,7 +3034,32 @@ Public Class frmMain
         dlgTraits.ShowDialog()
     End Sub
 
+
     Private Sub mnuTricotImportFromClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotImportFromClimMob.Click
         dlgImportfromClimMob.ShowDialog()
+
+    Private Sub mnuTricotDescribeXpTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraits.Click
+        dlgTraitsXp.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotDefineTricotData_Click(sender As Object, e As EventArgs) Handles mnuTricotDefineTricotData.Click
+        dlgDefineTricotData.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotModelWithoutCovariates_Click(sender As Object, e As EventArgs) Handles mnuTricotModelWithoutCovariates.Click
+        dlgPlacketLuceModel.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotModelTree_Click(sender As Object, e As EventArgs) Handles mnuTricotModelTree.Click
+        dlgModellingTree.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotTransformClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotTransformClimMob.Click
+        dlgTransformTricotData.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotDescribeCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeCorrelations.Click
+        dlgTraitCorrelations.ShowDialog()
+
     End Sub
 End Class

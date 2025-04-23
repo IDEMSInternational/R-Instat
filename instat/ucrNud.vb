@@ -145,7 +145,7 @@ Public Class ucrNud
         Return bTemp
     End Function
 
-    Public Function GetText() As String
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
         If nudUpDown.Text = "" Then
             Return ""
         Else
