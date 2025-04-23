@@ -21,11 +21,10 @@ Public Class dlgImportfromClimMob
     Private clsKeysFunction, clsClimmobFunction, clsProjectsFunction, clsDplyrFunction, clsSecondDplyrFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsFirstOperator As New ROperator
+    Private clsFirstOperator, clsKeysOverallFunction As New ROperator
     Private clsSecondOperator As New ROperator
     Private clsThirdOperator As New ROperator
     Private clsFourthOperator As New ROperator
-
     Private ReadOnly strClimmob3 As String = "climmob3"
     Private ReadOnly str1000FARMS As String = "1000FARMS"
     Private ReadOnly strAVISA As String = "AVISA"
@@ -53,9 +52,9 @@ Public Class dlgImportfromClimMob
         ucrInputChooseForm.SetParameter(New RParameter("project_name", 3))
         ucrInputChooseForm.bAllowNonConditionValues = True
 
-        ucrSaveFile.SetPrefix("Climmob_dataframe")
+        ucrSaveFile.SetPrefix("climmob_dataframe")
         ucrSaveFile.SetSaveTypeAsDataFrame()
-        ucrSaveFile.SetLabelText("New Data Frame Name:")
+        ucrSaveFile.SetLabelText(" Data Frame Name:")
         ucrSaveFile.SetIsTextBox()
         ucrSaveFile.ucrInputTextSave.bAutoChangeOnLeave = True
     End Sub
@@ -66,6 +65,7 @@ Public Class dlgImportfromClimMob
         clsProjectsFunction = New RFunction
         clsDplyrFunction = New RFunction
         clsSecondDplyrFunction = New RFunction
+        clsKeysOverallFunction = New ROperator
         clsFirstOperator = New ROperator
         clsSecondOperator = New ROperator
         clsThirdOperator = New ROperator
@@ -74,21 +74,26 @@ Public Class dlgImportfromClimMob
         ucrInputServerName.SetText(strClimmob3)
         ucrInputServerName.bUpdateRCodeFromControl = True
 
+        ' Set up to get Project ID name for the input form button
+        clsProjectsFunction.SetPackageName("ClimMobTools")
+        clsProjectsFunction.SetRCommand("getProjectsCM")
+        clsProjectsFunction.AddParameter("key", clsROperatorParameter:=clsKeysOverallFunction, iPosition:=2)
+        'clsProjectsFunction.SetAssignTo(strTemp:="project_list")
+
         clsFirstOperator.SetOperation("$")
         clsFirstOperator.AddParameter("left", clsRFunctionParameter:=clsProjectsFunction, iPosition:=0)
-        clsFirstOperator.AddParameter("right", "project_name", iPosition:=1)
+        clsFirstOperator.AddParameter("right", "project_id", iPosition:=1)
         clsFirstOperator.bSpaceAroundOperation = False
 
         clsSecondOperator.SetOperation("%>%")
         clsSecondOperator.AddParameter("left", clsRFunctionParameter:=clsProjectsFunction, iPosition:=0)
-        'clsSecondOperator.AddParameter("right", clsRFunctionParameter:=clsDplyrFunction, iPosition:=1)
         clsSecondOperator.AddParameter("right", clsROperatorParameter:=clsFourthOperator, iPosition:=2)
         clsSecondOperator.bSpaceAroundOperation = False
         clsSecondOperator.SetAssignTo("user_owner")
 
         clsThirdOperator.SetOperation("==")
         clsThirdOperator.AddParameter("left", "project_id", iPosition:=0)
-        clsThirdOperator.AddParameter("right", "project_name", iPosition:=1)
+        clsThirdOperator.AddParameter("right", "project_name", iPosition:=1) ' right = value in the ucrInputBox
         clsThirdOperator.bSpaceAroundOperation = False
 
         clsFourthOperator.SetOperation("%>%")
@@ -99,19 +104,17 @@ Public Class dlgImportfromClimMob
         ucrInputChooseForm.bAllowNonConditionValues = True
         ucrInputChooseForm.SetName("")
 
+        clsKeysOverallFunction.SetOperation("[")
+        clsKeysOverallFunction.AddParameter("left", clsRFunctionParameter:=clsKeysFunction, iPosition:=0)
+        clsKeysOverallFunction.AddParameter("right", "1,]", iPosition:=1)
         clsKeysFunction.SetRCommand("read.table")
         clsKeysFunction.AddParameter(strParameterName:="key", Chr(34) & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsKeysFunction.AddParameter(strParameterName:="quote", Chr(34) & "\""" & Chr(34), iPosition:=1)
         clsKeysFunction.AddParameter(strParameterName:="comment.char", Chr(34) & Chr(34), iPosition:=2)
 
-        clsProjectsFunction.SetPackageName("ClimMobTools")
-        clsProjectsFunction.SetRCommand("getProjectsCM")
-        clsProjectsFunction.AddParameter("key", clsRFunctionParameter:=clsKeysFunction, iPosition:=2)
-        'clsProjectsFunction.SetAssignTo(strTemp:="project_list")
-
         clsClimmobFunction.SetPackageName("ClimMobTools")
         clsClimmobFunction.SetRCommand("getDataCM")
-        clsClimmobFunction.AddParameter("key", clsRFunctionParameter:=clsKeysFunction, iPosition:=0)
+        clsClimmobFunction.AddParameter("key", clsROperatorParameter:=clsKeysOverallFunction, iPosition:=0)
         clsClimmobFunction.AddParameter("project", ucrInputChooseForm.GetText, iPosition:=1)
         clsClimmobFunction.AddParameter("userowner", clsROperatorParameter:=clsSecondOperator, iPosition:=2)
         clsClimmobFunction.AddParameter("pivot.wider", "TRUE")
@@ -123,10 +126,7 @@ Public Class dlgImportfromClimMob
         clsSecondDplyrFunction.SetPackageName("dplyr")
         clsSecondDplyrFunction.SetRCommand("pull")
         clsSecondDplyrFunction.AddParameter("project", "user_owner", bIncludeArgumentName:=False)
-
-        'ucrBase.clsRsyntax.AddToBeforeCodes(clsKeysFunction, 0)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsProjectsFunction, 1)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsFirstOperator, 2)
+        
         ucrBase.clsRsyntax.SetBaseRFunction(clsClimmobFunction)
     End Sub
 
