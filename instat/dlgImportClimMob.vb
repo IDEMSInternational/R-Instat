@@ -78,7 +78,6 @@ Public Class dlgImportfromClimMob
         clsProjectsFunction.SetPackageName("ClimMobTools")
         clsProjectsFunction.SetRCommand("getProjectsCM")
         clsProjectsFunction.AddParameter("key", clsROperatorParameter:=clsKeysOverallFunction, iPosition:=2)
-        'clsProjectsFunction.SetAssignTo(strTemp:="project_list")
 
         clsFirstOperator.SetOperation("$")
         clsFirstOperator.AddParameter("left", clsRFunctionParameter:=clsProjectsFunction, iPosition:=0)
@@ -131,7 +130,6 @@ Public Class dlgImportfromClimMob
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrInputServerName.SetRCode(clsProjectsFunction, bReset)
         ucrInputChooseForm.AddAdditionalCodeParameterPair(clsClimmobFunction, New RParameter("project", 1), 1)
 
         ucrInputChooseForm.SetRCode(clsThirdOperator, bReset)
@@ -141,7 +139,6 @@ Public Class dlgImportfromClimMob
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        'TestOKEnabled()
     End Sub
 
     Private Sub ucrInputServerName_NameChanged() Handles ucrInputServerName.ControlValueChanged
@@ -152,7 +149,6 @@ Public Class dlgImportfromClimMob
             clsProjectsFunction.AddParameter("server", Chr(34) & ucrInputServerName.GetText & Chr(34))
             clsClimmobFunction.AddParameter("server", Chr(34) & ucrInputServerName.GetText & Chr(34))
         End If
-        'TestOKEnabled()
     End Sub
 
     Private Sub ucrInputChooseForm_NameChanged() Handles ucrInputChooseForm.ControlValueChanged
@@ -166,7 +162,6 @@ Public Class dlgImportfromClimMob
     Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdKey.Click
         sdgImportFromClimMob.Setup(clsKeysFunction.GetParameter("key"))
         sdgImportFromClimMob.ShowDialog()
-        'TestOKEnabled()
     End Sub
 
     Private Sub ucrInputServerName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputServerName.ControlContentsChanged
@@ -177,7 +172,6 @@ Public Class dlgImportfromClimMob
         End If
         ucrInputChooseForm.cboInput.Items.Clear()
         ucrInputChooseForm.SetText("")
-        'TestOKEnabled()
     End Sub
 
     Private Sub cmdFindForms_click(sender As Object, e As EventArgs) Handles cmdFindForms.Click

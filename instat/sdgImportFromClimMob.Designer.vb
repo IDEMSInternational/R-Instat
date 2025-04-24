@@ -76,8 +76,10 @@ Partial Class sdgImportFromClimMob
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.ucrInputKeyPath)
         Me.Controls.Add(Me.lblKkey)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgImportFromClimMob"
         Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Import From ClimMob"
         Me.ResumeLayout(False)
         Me.PerformLayout()

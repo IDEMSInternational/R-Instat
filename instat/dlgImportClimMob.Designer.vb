@@ -112,8 +112,10 @@ Partial Class dlgImportfromClimMob
         Me.Controls.Add(Me.ucrInputChooseForm)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblServerName)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgImportfromClimMob"
         Me.ShowIcon = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Import From ClimMob"
         Me.ResumeLayout(False)
         Me.PerformLayout()
