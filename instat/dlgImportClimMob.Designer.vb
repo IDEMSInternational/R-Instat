@@ -29,11 +29,13 @@ Partial Class dlgImportfromClimMob
         Me.cmdKey = New System.Windows.Forms.Button()
         Me.ucrInputServerName = New instat.ucrInputComboBox()
         Me.ucrSaveFile = New instat.ucrSave()
+        Me.ucrChkDefineTricotData = New instat.ucrCheck()
+        Me.cmdTricotData = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmdFindForms
         '
-        Me.cmdFindForms.Location = New System.Drawing.Point(5, 89)
+        Me.cmdFindForms.Location = New System.Drawing.Point(26, 89)
         Me.cmdFindForms.Name = "cmdFindForms"
         Me.cmdFindForms.Size = New System.Drawing.Size(102, 23)
         Me.cmdFindForms.TabIndex = 9
@@ -46,7 +48,7 @@ Partial Class dlgImportfromClimMob
         Me.ucrInputChooseForm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputChooseForm.GetSetSelectedIndex = -1
         Me.ucrInputChooseForm.IsReadOnly = False
-        Me.ucrInputChooseForm.Location = New System.Drawing.Point(123, 91)
+        Me.ucrInputChooseForm.Location = New System.Drawing.Point(139, 91)
         Me.ucrInputChooseForm.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputChooseForm.Name = "ucrInputChooseForm"
         Me.ucrInputChooseForm.Size = New System.Drawing.Size(167, 21)
@@ -64,7 +66,7 @@ Partial Class dlgImportfromClimMob
         '
         'lblServerName
         '
-        Me.lblServerName.Location = New System.Drawing.Point(21, 54)
+        Me.lblServerName.Location = New System.Drawing.Point(26, 54)
         Me.lblServerName.Name = "lblServerName"
         Me.lblServerName.Size = New System.Drawing.Size(112, 21)
         Me.lblServerName.TabIndex = 7
@@ -85,7 +87,7 @@ Partial Class dlgImportfromClimMob
         Me.ucrInputServerName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputServerName.GetSetSelectedIndex = -1
         Me.ucrInputServerName.IsReadOnly = False
-        Me.ucrInputServerName.Location = New System.Drawing.Point(123, 54)
+        Me.ucrInputServerName.Location = New System.Drawing.Point(140, 54)
         Me.ucrInputServerName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputServerName.Name = "ucrInputServerName"
         Me.ucrInputServerName.Size = New System.Drawing.Size(167, 21)
@@ -100,11 +102,33 @@ Partial Class dlgImportfromClimMob
         Me.ucrSaveFile.Size = New System.Drawing.Size(385, 22)
         Me.ucrSaveFile.TabIndex = 30
         '
+        'ucrChkDefineTricotData
+        '
+        Me.ucrChkDefineTricotData.AutoSize = True
+        Me.ucrChkDefineTricotData.Checked = False
+        Me.ucrChkDefineTricotData.Location = New System.Drawing.Point(27, 142)
+        Me.ucrChkDefineTricotData.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrChkDefineTricotData.Name = "ucrChkDefineTricotData"
+        Me.ucrChkDefineTricotData.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkDefineTricotData.TabIndex = 31
+        '
+        'cmdTricotData
+        '
+        Me.cmdTricotData.Location = New System.Drawing.Point(140, 142)
+        Me.cmdTricotData.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdTricotData.Name = "cmdTricotData"
+        Me.cmdTricotData.Size = New System.Drawing.Size(109, 23)
+        Me.cmdTricotData.TabIndex = 32
+        Me.cmdTricotData.Text = "Options"
+        Me.cmdTricotData.UseVisualStyleBackColor = True
+        '
         'dlgImportfromClimMob
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 280)
+        Me.Controls.Add(Me.ucrChkDefineTricotData)
+        Me.Controls.Add(Me.cmdTricotData)
         Me.Controls.Add(Me.ucrSaveFile)
         Me.Controls.Add(Me.ucrInputServerName)
         Me.Controls.Add(Me.cmdKey)
@@ -129,4 +153,6 @@ Partial Class dlgImportfromClimMob
     Friend WithEvents cmdKey As Button
     Friend WithEvents ucrInputServerName As ucrInputComboBox
     Friend WithEvents ucrSaveFile As ucrSave
+    Friend WithEvents ucrChkDefineTricotData As ucrCheck
+    Friend WithEvents cmdTricotData As Button
 End Class

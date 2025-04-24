@@ -52,6 +52,9 @@ Public Class dlgImportfromClimMob
         ucrInputChooseForm.SetParameter(New RParameter("right", 3))
         ucrInputChooseForm.bAllowNonConditionValues = True
 
+        ucrChkDefineTricotData.SetText("Define Tricot Data")
+        cmdTricotData.Visible = False
+
         ucrSaveFile.SetPrefix("climmob_dataframe")
         ucrSaveFile.SetSaveTypeAsDataFrame()
         ucrSaveFile.SetLabelText(" Data Frame Name:")
@@ -164,6 +167,11 @@ Public Class dlgImportfromClimMob
         sdgImportFromClimMob.ShowDialog()
     End Sub
 
+    Private Sub cmdTricotData_Click(sender As Object, e As EventArgs) Handles cmdTricotData.Click
+        'sdgImportFromClimMob.Setup(clsKeysFunction.GetParameter("key"))
+        'sdgDefi.ShowDialog()
+    End Sub
+
     Private Sub ucrInputServerName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputServerName.ControlContentsChanged
         If ucrInputServerName.IsEmpty() Then
             cmdFindForms.Enabled = False
@@ -191,6 +199,14 @@ Public Class dlgImportfromClimMob
             End If
         Else
             ucrInputChooseForm.cboInput.Items.Clear()
+        End If
+    End Sub
+
+    Private Sub ucrChkDefineTricotData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineTricotData.ControlContentsChanged
+        If ucrChkDefineTricotData.Checked Then
+            cmdTricotData.Visible = True
+        Else
+            cmdTricotData.Visible = False
         End If
     End Sub
 End Class
