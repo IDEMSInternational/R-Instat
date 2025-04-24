@@ -282,10 +282,21 @@ Public Class dlgDefineTricotData
         Return lstValues
     End Function
 
+    Public Function AreAllDataframessDifferent(strData1 As String, strData2 As String, strData3 As String) As Boolean
+        Return (strData1 <> strData2) AndAlso (strData1 <> strData3) AndAlso (strData2 <> strData3)
+    End Function
+
+
     Private Sub TestOKEnabled()
+        Dim bDataFramesDifferent As Boolean = AreAllDataframessDifferent(
+        ucrSelectorIDLevelData.strCurrentDataFrame,
+        ucrSelectorIDVarietyLevel.strCurrentDataFrame,
+        ucrSelectorVarietyLevelData.strCurrentDataFrame
+    )
         ucrBase.OKEnabled(Not ucrReceiverIDVarietyLevelID.IsEmpty AndAlso
                           Not ucrReceiverIDVarietyLevelVariety.IsEmpty AndAlso
-                          Not ucrReceiverIDVarietyLevelTraits.IsEmpty)
+                          Not ucrReceiverIDVarietyLevelTraits.IsEmpty AndAlso Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
+                          Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent)
     End Sub
 
     Private Sub ucrSelectorIDLevelData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDLevelData.ControlValueChanged
@@ -311,7 +322,7 @@ Public Class dlgDefineTricotData
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVarietyLevelID.ControlContentsChanged, ucrReceiverIDVarietyLevelVariety.ControlContentsChanged, ucrReceiverIDVarietyLevelTraits.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVarietyLevelID.ControlContentsChanged, ucrReceiverIDVarietyLevelVariety.ControlContentsChanged, ucrReceiverIDVarietyLevelTraits.ControlContentsChanged, ucrReceiverVarietyLevelVariety.ControlContentsChanged, ucrReceiverVarietyLevelVariety.ControlContentsChanged, ucrSelectorIDLevelData.ControlContentsChanged, ucrSelectorIDVarietyLevel.ControlContentsChanged, ucrSelectorVarietyLevelData.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
