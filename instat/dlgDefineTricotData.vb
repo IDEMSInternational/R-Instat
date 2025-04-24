@@ -43,6 +43,8 @@ Public Class dlgDefineTricotData
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 328
+
         Dim kvpID As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("id", {"id", "ID", "participant_id", "participant_name"}.ToList())
         Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("longitude", {"lon", "long", "lont", "longitude", "Longitude", "Lon"}.ToList())
         Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("latitude", {"lat", "latitude", "Lat", "Latitude"}.ToList())
@@ -181,6 +183,7 @@ Public Class dlgDefineTricotData
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDVarietyFunction, 3)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAddRankingObjFunction, 4)
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddGrpRankingObjFunction)
+        ucrBase.clsRsyntax.iCallType = 2
 
         AutoFillReceivers(ucrSelectorIDLevelData, lstReceiversLevelID)
         AutoFillReceivers(ucrSelectorVarietyLevelData, lstReceiversVarityLevel)
