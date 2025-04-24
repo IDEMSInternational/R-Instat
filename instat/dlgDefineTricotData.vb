@@ -123,15 +123,18 @@ Public Class dlgDefineTricotData
         clsDATIDLevelFunction.SetRCommand("data_book$define_as_tricot")
         clsDATIDLevelFunction.AddParameter("types", clsRFunctionParameter:=clsCDATIDLevelFunction, iPosition:=2)
         clsDATIDLevelFunction.AddParameter("auto_selection", "TRUE", iPosition:=4)
+        clsDATIDLevelFunction.iCallType = 2
 
         clsDATVarietyLevelFunction.SetRCommand("data_book$define_as_tricot")
         clsDATVarietyLevelFunction.AddParameter("types", clsRFunctionParameter:=cslCDATVarietyLevelFunction, iPosition:=2)
         clsDATVarietyLevelFunction.AddParameter("auto_selection", "TRUE", iPosition:=3)
+        clsDATVarietyLevelFunction.iCallType = 2
 
         clsDATIDVarietyFunction.SetRCommand("data_book$define_as_tricot")
         clsDATIDVarietyFunction.AddParameter("key_col_names", clsRFunctionParameter:=clsCDATIDLevelTraitsFunction, iPosition:=1)
         clsDATIDVarietyFunction.AddParameter("types", clsRFunctionParameter:=clsCDATIDLevelVarietiesFunction, iPosition:=2)
         clsDATIDVarietyFunction.AddParameter("auto_selection", "TRUE", iPosition:=3)
+        clsDATIDVarietyFunction.iCallType = 2
 
         clsGetColumnSelection.SetRCommand("data_book$get_column_selection")
         clsGetColumnSelection.AddParameter("name", Chr(34) & "traits_selection" & Chr(34), iPosition:=1)
@@ -183,7 +186,6 @@ Public Class dlgDefineTricotData
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDVarietyFunction, 3)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAddRankingObjFunction, 4)
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddGrpRankingObjFunction)
-        ucrBase.clsRsyntax.iCallType = 2
 
         AutoFillReceivers(ucrSelectorIDLevelData, lstReceiversLevelID)
         AutoFillReceivers(ucrSelectorVarietyLevelData, lstReceiversVarityLevel)
