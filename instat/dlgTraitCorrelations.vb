@@ -75,6 +75,7 @@ Public Class dlgTraitCorrelations
         ucrSaveCorrelation.SetDataFrameSelector(ucrSelecetorTraits.ucrAvailableDataFrames)
         ucrSaveCorrelation.SetIsComboBox()
         HideShowOptions()
+        ChangeOutputObject()
     End Sub
 
     Private Sub SetDefaults()
@@ -170,7 +171,6 @@ Public Class dlgTraitCorrelations
         clsFashionFunction.SetPackageName("corrr")
         clsFashionFunction.SetRCommand("fashion")
         clsFashionFunction.AddParameter("var", clsROperatorParameter:=clsPipe2Operator, iPosition:=0, bIncludeArgumentName:=False)
-        ''clsFashionFunction.SetAssignTo("kendall_rankings")
 
         clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
         clsGetObjectRFunction.AddParameter("as_file", "TRUE", iPosition:=3)
@@ -178,7 +178,6 @@ Public Class dlgTraitCorrelations
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator)
         ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
-
         ChangeOutputObject()
     End Sub
 
@@ -187,13 +186,14 @@ Public Class dlgTraitCorrelations
         ucrNudDecimalPlaces.SetRCode(clsFashionFunction, bReset)
         ucrChkLeadingZeros.SetRCode(clsFashionFunction, bReset)
         ucrChkDisplayOptions.SetRCode(clsDummyFunction, bReset)
+
         If bReset Then
             ucrPnlOutput.SetRCode(clsDummyFunction, bReset)
-            ucrSaveCorrelation.SetRCode(clsFashionFunction, bReset)
             ucrChkIncludePValues.SetRCode(clsDummyFunction, bReset)
+            ucrSaveCorrelation.SetRCode(clsFashionFunction, bReset)
         End If
-        ChangeOutputObject()
 
+        ChangeOutputObject()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -248,6 +248,7 @@ Public Class dlgTraitCorrelations
             clsPipe2Operator.AddParameter("right", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
         End If
     End Sub
+
     Private Sub AddingDecimals()
         If ucrChkDisplayOptions.Checked Then
             clsDummyFunction.AddParameter("display", "True", iPosition:=0)
@@ -259,7 +260,7 @@ Public Class dlgTraitCorrelations
             End If
         Else
             clsDummyFunction.AddParameter("display", "False", iPosition:=0)
-
+            clsFashionFunction.RemoveParameterByName("decimals")
         End If
     End Sub
 
@@ -270,8 +271,11 @@ Public Class dlgTraitCorrelations
             Else
                 clsFashionFunction.RemoveParameterByName("leading_zeros")
             End If
+        Else
+            clsFashionFunction.RemoveParameterByName("leading_zeros")
         End If
     End Sub
+
     Private Sub ucrNudDecimalPlaces_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudDecimalPlaces.ControlValueChanged
         AddingDecimals()
     End Sub
@@ -290,58 +294,47 @@ Public Class dlgTraitCorrelations
     End Sub
 
     Private Sub ChangeOutputObject()
-        Dim isDisplayChecked As Boolean = ucrChkDisplayOptions.Checked
-        Dim isAsTextChecked As Boolean = rdoAsText.Checked
 
-        If isDisplayChecked Then
-            If isAsTextChecked Then
-                SetOutputAsTable()
+        If ucrChkDisplayOptions.Checked Then
+            clsFashionFunction.RemoveAssignTo()
+            If rdoAsText.Checked Then
+                clsDummyFunction.AddParameter("output", "as.table", iPosition:=2)
+                ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
+                ucrSaveCorrelation.SetCheckBoxText("Store Table")
+                ucrSaveCorrelation.SetPrefix("summary_table")
+                ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_table")
+
             Else
-                SetOutputAsDataFrame()
+                clsDummyFunction.AddParameter("output", "as.dataframe", iPosition:=2)
+                clsFashionFunction.RemoveAssignTo()
+                ucrSaveCorrelation.SetSaveTypeAsDataFrame()
+                ucrSaveCorrelation.SetCheckBoxText("Store Data Frame")
+                ucrSaveCorrelation.SetPrefix("data_frame")
+                ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_dataframe")
             End If
         Else
-            SetOutputAsTable()
+
+            ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
+            ucrSaveCorrelation.SetCheckBoxText("Store Table")
+            ucrSaveCorrelation.SetPrefix("summary_table")
+            ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_table")
+
         End If
     End Sub
-
-    Private Sub SetOutputAsTable()
-        ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectRFunction, iPosition:=1)
-        clsDummyFunction.AddParameter("output", "as.table", iPosition:=2)
-        ucrSaveCorrelation.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Text)
-        ucrSaveCorrelation.SetCheckBoxText("Store Table")
-        ucrSaveCorrelation.SetPrefix("summary_table")
-        ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_table")
-        clsFashionFunction.SetAssignToOutputObject(
-        strRObjectToAssignTo:="last_table",
-        strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
-        strRObjectFormatToAssignTo:=RObjectFormat.Text,
-        strRDataFrameNameToAddObjectTo:=ucrSelecetorTraits.strCurrentDataFrame,
-        strObjectName:="last_table")
-    End Sub
-
-    Private Sub SetOutputAsDataFrame()
-        clsDummyFunction.AddParameter("output", "as.dataframe", iPosition:=2)
-        clsFashionFunction.RemoveAssignTo()
-        ucrSaveCorrelation.SetSaveTypeAsDataFrame()
-        ucrSaveCorrelation.SetCheckBoxText("Store Data Frame")
-        ucrSaveCorrelation.SetPrefix("data_frame")
-        ucrSaveCorrelation.SetAssignToIfUncheckedValue("last_dataframe")
-        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectRFunction)
-    End Sub
-
 
     Private Sub ChangeBaseFunction()
         If bRcodeSet Then
             If ucrChkDisplayOptions.Checked Then
-                'ucrBase.clsRsyntax.SetBaseRFunction(clsFashionFunction)
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectRFunction)
                 If rdoAsDataFrame.Checked Then
                     ucrBase.clsRsyntax.iCallType = 0
+                    ucrBase.clsRsyntax.RemoveFromAfterCodes(clsGetObjectRFunction)
+                Else
+                    ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectRFunction, iPosition:=1)
                 End If
             Else
-                'ucrBase.clsRsyntax.SetBaseROperator(clsPipe2Operator)
+                ucrBase.clsRsyntax.AddToAfterCodes(clsGetObjectRFunction, iPosition:=1)
             End If
-            'ucrBase.clsRsyntax.SetBaseROperator(clsPipe2Operator)
-
         End If
     End Sub
 
@@ -359,5 +352,9 @@ Public Class dlgTraitCorrelations
 
     Private Sub ucrSaveCorrelation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveCorrelation.ControlContentsChanged, ucrReceiverTrait.ControlContentsChanged, ucrReceiverTraitsToCompare.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveCorrelation_TextChanged(sender As Object, e As EventArgs) Handles ucrSaveCorrelation.TextChanged
+        ChangeOutputObject()
     End Sub
 End Class
