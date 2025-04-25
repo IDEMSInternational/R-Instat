@@ -385,6 +385,12 @@
     <Compile Include="sdgAdditionalCondition.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgAdvOptions.Designer.vb">
+      <DependentUpon>sdgAdvOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgAdvOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgClimsoft.Designer.vb">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </Compile>
@@ -3527,6 +3533,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgAdditionalCondition.resx">
       <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgAdvOptions.resx">
+      <DependentUpon>sdgAdvOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimsoft.resx">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>
