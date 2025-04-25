@@ -53,7 +53,7 @@ Public Class ucrInput
         bLastSilent = bSilent
     End Sub
 
-    Public Overridable Function GetText() As String
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
         Return ""
     End Function
 
