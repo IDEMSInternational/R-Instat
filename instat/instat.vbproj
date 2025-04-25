@@ -287,6 +287,12 @@
     <Compile Include="dlgIDFCurves.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportClimMob.Designer.vb">
+      <DependentUpon>dlgImportClimMob.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportClimMob.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromPostgres.Designer.vb">
       <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
     </Compile>
@@ -391,6 +397,12 @@
     <Compile Include="sdgDefineAnnualRainfall.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDefineTricotData.Designer.vb">
+      <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDefineTricotData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgFlowsToImport.Designer.vb">
       <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
     </Compile>
@@ -407,6 +419,12 @@
       <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgHSMissingOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgImportFromClimMob.Designer.vb">
+      <DependentUpon>sdgImportFromClimMob.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgImportFromClimMob.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgLocation.Designer.vb">
@@ -3405,6 +3423,9 @@
     <EmbeddedResource Include="dlgIDFCurves.resx">
       <DependentUpon>dlgIDFCurves.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportClimMob.resx">
+      <DependentUpon>dlgImportClimMob.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
     </EmbeddedResource>
@@ -3513,6 +3534,9 @@
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgDefineTricotData.resx">
+      <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgFlowsToImport.resx">
       <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
     </EmbeddedResource>
@@ -3521,6 +3545,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHSMissingOptions.resx">
       <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportFromClimMob.resx">
+      <DependentUpon>sdgImportFromClimMob.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLocation.resx">
       <DependentUpon>sdgLocation.vb</DependentUpon>

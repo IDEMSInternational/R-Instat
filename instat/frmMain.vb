@@ -3036,6 +3036,11 @@ Public Class frmMain
         dlgTraits.ShowDialog()
     End Sub
 
+
+    Private Sub mnuTricotImportFromClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotImportFromClimMob.Click
+        dlgImportfromClimMob.ShowDialog()
+    End Sub
+
     Private Sub mnuTricotDescribeXpTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraits.Click
         dlgTraitsXp.ShowDialog()
     End Sub
@@ -3058,5 +3063,6 @@ Public Class frmMain
 
     Private Sub mnuTricotDescribeCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeCorrelations.Click
         dlgTraitCorrelations.ShowDialog()
+
     End Sub
 End Class
