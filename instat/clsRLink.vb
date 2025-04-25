@@ -625,6 +625,7 @@ Public Class RLink
         Dim strExistingNames As String
         Dim expPrefix As SymbolicExpression
 
+        clsGetDefault.SetPackageName("instatExtras")
         clsGetDefault.SetRCommand("next_default_item")
         clsGetDefault.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
         strExistingNames = GetListAsRString(lstItems)
@@ -740,7 +741,7 @@ Public Class RLink
                                       bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
             ElseIf Not clsRStatement.IsAssignment _
                 AndAlso Not String.IsNullOrWhiteSpace(clsRStatement.TextNoFormatting) Then
-                strOutput = GetFileOutput("view_object_data(object = " _
+                strOutput = GetFileOutput("instatExtras::view_object_data(object = " _
                                           & clsRStatement.TextNoFormatting _
                                           & " , object_format = 'text' )", bSilent:=False,
                                           bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
@@ -751,7 +752,7 @@ Public Class RLink
 
             ' Add output to logger
             clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
-                        bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("view_object_data"))
+                        bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("instatExtras::view_object_data"))
 
             ' Log the script
             LogScript(clsRStatement.Text.TrimEnd(vbCr, vbLf))
@@ -850,7 +851,7 @@ Public Class RLink
                     Dim strRStatementAsSingleLine As String = strRStatement.Replace(vbCr, String.Empty)
                     strRStatementAsSingleLine = strRStatementAsSingleLine.Replace(vbLf, String.Empty)
                     'wrap final command inside view_object_data just in case there is an output object
-                    strOutput = GetFileOutput("view_object_data(object = " & strRStatementAsSingleLine & " , object_format = 'text' )", False, False, Nothing)
+                    strOutput = GetFileOutput("instatExtras::view_object_data(object = " & strRStatementAsSingleLine & " , object_format = 'text' )", False, False, Nothing)
                 Else
                     Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
                 End If
@@ -993,7 +994,7 @@ Public Class RLink
                         End If
 
                         If bSuccess Then
-                            strOutput = GetFileOutput("view_object_data(object = " & arrExecutableRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
+                            strOutput = GetFileOutput("instatExtras::view_object_data(object = " & arrExecutableRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                         End If
                     End If
 
@@ -2113,6 +2114,7 @@ Public Class RLink
         clsGetColumn.SetRCommand(strInstatDataObject & "$get_columns_from_data")
         clsGetColumn.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
         clsGetColumn.AddParameter("col_names", Chr(34) & strColumn & Chr(34))
+        clsIsBinary.SetPackageName("instatExtras")
         clsIsBinary.SetRCommand("is.binary")
         clsIsBinary.AddParameter("x", clsRFunctionParameter:=clsGetColumn)
         expBinary = RunInternalScriptGetValue(clsIsBinary.ToScript())
@@ -2216,7 +2218,7 @@ Public Class RLink
         Dim strRStatementTrimmed As String = TrimStartRStatement(strRStatement)
         Return strRStatementTrimmed.StartsWith(strInstatDataObject & "$get_object_data") _
                OrElse strRStatementTrimmed.StartsWith(strInstatDataObject & "$get_last_object_data") _
-               OrElse strRStatementTrimmed.StartsWith("view_object_data")
+               OrElse strRStatementTrimmed.StartsWith("instatExtras::view_object_data")
     End Function
 
     Private Function TrimStartRStatement(strRStatement As String) As String

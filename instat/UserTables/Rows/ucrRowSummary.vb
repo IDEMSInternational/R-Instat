@@ -1,5 +1,4 @@
 ﻿Public Class ucrRowSummary
-
     Private bFirstLoad As Boolean = True
     Private clsOperator As New ROperator
     Private dctSummaryTypes, dctSides As New Dictionary(Of String, String)
@@ -35,23 +34,15 @@
 
         btnFormat.Tag = Nothing
         btnStyle.Tag = Nothing
-
-        ' TODO. Disabled due to error thrwon when using data book. See comments inside GetFnParameters()
-        lblSummaryLabel.Enabled = False
-        ucrTxtSummaryLabel.Enabled = False
-
-        ' TODO. Disabled until R is upgraded
-        lblSide.Enabled = False
-        ucrCboSide.Enabled = False
-        btnFormat.Enabled = False
-        btnStyle.Enabled = False
     End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
         Me.clsOperator = clsOperator
 
         ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+        ucrReceiverMultipleCols.Clear()
         dataGridSummaries.Rows.Clear()
+        btnAddSummaries.Enabled = False
 
         ' Note, the sequence of these 2 functions matters
         SetupSummaryRowInDataGrid(clsTablesUtils.FindRFunctionsParamsWithRCommand({"summary_rows"}, clsOperator))
@@ -64,16 +55,6 @@
             Dim row As New DataGridViewRow
             row.CreateCells(dataGridSummaries)
             row.Cells(0).Value = clsTabSummaryRowRFunction.Clone.ToScript
-
-            ' TODO. In future we could get the individual parameters
-
-            'For Each clsTabRowGroupRParam As RParameter In clsTabSummaryRowRFunction.clsParameters
-            '    If clsTabRowGroupRParam.strArgumentName = "fns" Then
-            '        row.Cells(0).Value = clsTablesUtils.GetStringValue(clsTabRowGroupRParam.strArgumentValue, False)
-            '    ElseIf clsTabRowGroupRParam.strArgumentName = "fms" Then
-            '        row.Cells(1).Value = clsTablesUtils.GetStringValue(clsTabRowGroupRParam.strArgumentValue, False)
-            '    End If
-            'Next
             Dim arrParams(2) As RParameter
             arrParams(0) = clsRParam
             row.Tag = arrParams
@@ -143,10 +124,7 @@
     End Sub
 
     Private Sub btnAddSummaries_Click(sender As Object, e As EventArgs) Handles btnAddSummaries.Click
-        Dim strSpannerLabel As String = ucrTxtGroupId.GetValue()
-        Dim strSpannerId As String = strSpannerLabel.Replace(" ", String.Empty)
-        Dim strSpannerColsRFunction As String = mdlCoreControl.GetRVector(ucrReceiverMultipleCols.GetVariableNamesList(bWithQuotes:=False), bOnlyIfMultipleElement:=False)
-        Dim strSpannerStyleExpression As String = ""
+        Dim strGroupStyleExpression As String = ""
 
         Dim clsSummaryRowsRFunction As New RFunction
         clsSummaryRowsRFunction.SetPackageName("gt")
@@ -165,8 +143,7 @@
             clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="fmt", strParamValue:=clsFormatRFunction, iNewPosition:=3))
         End If
 
-        'TODO. Commented out until R-Instat R is upgraded 
-        'clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="side", strParamValue:=Chr(34) & dctSides.Item(ucrCboSide.GetText) & Chr(34), iNewPosition:=4))
+        clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="side", strParamValue:=Chr(34) & dctSides.Item(ucrCboSide.GetText) & Chr(34), iNewPosition:=4))
 
         If Not ucrTxtReplaceNa.IsEmpty Then
             clsSummaryRowsRFunction.AddParameter(New RParameter(strParameterName:="missing_text", strParamValue:=Chr(34) & ucrTxtReplaceNa.GetText & Chr(34), iNewPosition:=0))
@@ -174,20 +151,20 @@
 
         Dim arrParams(2) As RParameter
 
-        ' Add add the spanner parameter as the first element
+        ' Add add the summary row parameter as the first item
         arrParams(0) = New RParameter(strParameterName:="summary_rows_param" & (dataGridSummaries.Rows.Count + 1), strParamValue:=clsSummaryRowsRFunction, bNewIncludeArgumentName:=False)
 
         ' Add the spanner style as the second element
         If btnStyle.Tag IsNot Nothing Then
             Dim clsTabStyleRFunction As RFunction = btnStyle.Tag
-            strSpannerStyleExpression = clsTabStyleRFunction.Clone.ToScript
+            strGroupStyleExpression = clsTabStyleRFunction.Clone.ToScript
             arrParams(1) = New RParameter(strParameterName:="tab_style_cells_summary_param" & (dataGridSummaries.Rows.Count + 1), strParamValue:=clsTabStyleRFunction, bNewIncludeArgumentName:=False)
         End If
 
         Dim row As New DataGridViewRow
         row.CreateCells(dataGridSummaries)
         row.Cells(0).Value = clsSummaryRowsRFunction.Clone.ToScript
-        row.Cells(1).Value = strSpannerStyleExpression
+        row.Cells(1).Value = strGroupStyleExpression
         ' Tag the array of parameters
         row.Tag = arrParams
         dataGridSummaries.Rows.Add(row)
@@ -200,17 +177,11 @@
     End Sub
 
     Private Function GetFnParameters() As String
-        ' TODO. As of 08/08/2024, GT example like list(fn = "min", label = "Minimum", id = "min") throws an error when exeuted in R-Instat
-        ' TODO. Investigate why the error why is thrown when using the databook 
-
         Dim strFnType As String = dctSummaryTypes.Item(ucrCboSummaryType.GetText)
         Dim strFnParams As String = "id = " & Chr(34) & strFnType & Chr(34) & ", fn = " & Chr(34) & strFnType & Chr(34)
-        If Not ucrTxtSummaryLabel.IsEmpty Then
-            strFnParams = strFnParams & ", label = " & Chr(34) & ucrCboSummaryType.GetText & Chr(34)
-        End If
-        ' TODO. Commented out due to error thrown
-        'Return "list(" & strFnParams & ")"
-        Return Chr(34) & strFnType & Chr(34)
+        Dim strSummaryLabel As String = If(Not ucrTxtSummaryLabel.IsEmpty, ucrTxtSummaryLabel.GetText, ucrCboSummaryType.GetText)
+        strFnParams = strFnParams & ", label = " & Chr(34) & strSummaryLabel & Chr(34)
+        Return "list(" & strFnParams & ")"
     End Function
 
     Private Sub btnClearSummaries_Click(sender As Object, e As EventArgs) Handles btnClearSummaries.Click

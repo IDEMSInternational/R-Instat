@@ -506,7 +506,7 @@ Public Class ucrDataView
         Return GetSelectedColumns().Select(Function(x) x.strName).ToList()
     End Function
 
-    Private Function GetFirstSelectedColumnName() As String
+    Public Function GetFirstSelectedColumnName() As String
         Return GetSelectedColumns().FirstOrDefault().strName
     End Function
 
@@ -550,12 +550,6 @@ Public Class ucrDataView
         EndWait()
     End Sub
 
-    Private Sub mnuConvertToLogical_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogical.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToLogical(GetSelectedColumnNames())
-        EndWait()
-    End Sub
-
     Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToFactor(GetSelectedColumnNames())
@@ -588,6 +582,12 @@ Public Class ucrDataView
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentFilter()
         EndWait()
+    End Sub
+
+    Private Sub mnuConvertToDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click, mnuConvertToColumnDate.Click
+        dlgMakeDate.SetCurrentColumn(GetFirstSelectedColumnName(), _grid.CurrentWorksheet.Name)
+        dlgMakeDate.enumMakedateMode = dlgMakeDate.MakedateMode.Column
+        dlgMakeDate.ShowDialog()
     End Sub
 
     Private Sub mnuSort_Click(sender As Object, e As EventArgs) Handles mnuSort.Click
@@ -699,12 +699,6 @@ Public Class ucrDataView
     Private Sub mnuConvertToCharacter_Click(sender As Object, e As EventArgs) Handles mnuConvertToCharacter.Click
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToCharacter(GetSelectedColumnNames())
-        EndWait()
-    End Sub
-
-    Private Sub mnuConvertToLogic_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogic.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToLogical(GetSelectedColumnNames())
         EndWait()
     End Sub
 

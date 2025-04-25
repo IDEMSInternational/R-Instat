@@ -116,13 +116,13 @@ Public Class dlgFindNonnumericValues
         clsAsNumericFunction.SetRCommand("as.numeric")
         clsAsNumericFunction.AddParameter("x", clsRFunctionParameter:=clsAsCharacterFunction, bIncludeArgumentName:=False, iPosition:=1)
 
-        clsNonNumericCalcFunc.SetRCommand("instat_calculation$new")
+        clsNonNumericCalcFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsNonNumericCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsNonNumericCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsNotEqualToOperator, iPosition:=1)
         clsNonNumericCalcFunc.AddParameter("result_name", Chr(34) & strLogicalColumn & Chr(34), iPosition:=3)
         clsNonNumericCalcFunc.AddParameter("save", 2, iPosition:=4)
 
-        clsNonNumericFilterFunc.SetRCommand("instat_calculation$new")
+        clsNonNumericFilterFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsNonNumericFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsNonNumericFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clslSubCalcListFunc, iPosition:=2)
         clsNonNumericFilterFunc.AddParameter("result_data_frame", Chr(34) & "Filter" & Chr(34), iPosition:=3)
