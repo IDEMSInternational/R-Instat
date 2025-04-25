@@ -53,6 +53,8 @@ Public Class dlgImportfromClimMob
         ucrInputChooseForm.bAllowNonConditionValues = True
 
         ucrChkDefineTricotData.SetText("Define Tricot Data")
+        ucrChkDefineTricotData.Enabled = False
+
         cmdTricotData.Visible = False
 
         ucrSaveFile.SetPrefix("climmob_dataframe")

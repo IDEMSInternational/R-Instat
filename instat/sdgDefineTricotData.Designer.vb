@@ -159,9 +159,11 @@ Partial Class sdgDefineTricotData
         Me.Controls.Add(Me.lblID)
         Me.Controls.Add(Me.ucrReceiverTricotData)
         Me.Controls.Add(Me.ucrSelectorTricotData)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "sdgDefineTricotData"
         Me.ShowIcon = False
-        Me.Text = "DefineTricotData"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Define Tricot Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
