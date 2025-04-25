@@ -107,7 +107,7 @@ Public Class ucrReceiverExpression
         MyBase.RemoveSelected()
     End Sub
 
-    Public Function GetText() As String
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
         Return cboExpression.Text
     End Function
 

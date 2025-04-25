@@ -40,6 +40,7 @@ Imports RDotNet
     Public bIncludeCommentDefault As Nullable(Of Boolean) 'sets the default for comments on the dialog
     Public bShowProcurementMenu As Nullable(Of Boolean)
     Public bShowTricotMenu As Nullable(Of Boolean)
+    Public bShowTricotXpMenu As Nullable(Of Boolean)
     Public bShowStructuredMenu As Nullable(Of Boolean)
     Public bShowClimaticMenu As Nullable(Of Boolean)
     Public bShowOptionsByContextMenu As Nullable(Of Boolean)
@@ -70,6 +71,7 @@ Imports RDotNet
         bShowStructuredMenu = clsInstatOptionsDefaults.DEFAULTbShowStructuredMenu
         bShowProcurementMenu = clsInstatOptionsDefaults.DEFAULTbShowProcurementMenu
         bShowTricotMenu = clsInstatOptionsDefaults.DEFAULTbShowTricotMenu
+        bShowTricotXpMenu = clsInstatOptionsDefaults.DEFAULTbShowTricotXpMenu
         bShowOptionsByContextMenu = clsInstatOptionsDefaults.DEFAULTbShowOptionsByContextMenu
         fntOutput = clsInstatOptionsDefaults.DEFAULTfntOutput
         clrOutput = clsInstatOptionsDefaults.DEFAULTclrOutput
@@ -241,6 +243,12 @@ Imports RDotNet
             SetShowTricotMenu(bShowTricotMenu)
         Else
             SetShowTricotMenu(clsInstatOptionsDefaults.DEFAULTbShowTricotMenu)
+        End If
+
+        If bShowTricotXpMenu.HasValue Then
+            SetShowTricotXpMenu(bShowTricotXpMenu)
+        Else
+            SetShowTricotXpMenu(clsInstatOptionsDefaults.DEFAULTbShowTricotXpMenu)
         End If
 
         If bShowProcurementMenu.HasValue Then
@@ -563,6 +571,11 @@ Imports RDotNet
     Public Sub SetShowTricotMenu(bNewShowTricotMenu As Boolean)
         bShowTricotMenu = bNewShowTricotMenu
         frmMain.SetShowTricotMenu(bNewShowTricotMenu)
+    End Sub
+
+    Public Sub SetShowTricotXpMenu(bNewShowTricotXpMenu As Boolean)
+        bShowTricotXpMenu = bNewShowTricotXpMenu
+        frmMain.SetShowTricotXpMenu(bNewShowTricotXpMenu)
     End Sub
 
     Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
