@@ -168,8 +168,8 @@ Public Class dlgImportfromClimMob
     End Sub
 
     Private Sub cmdTricotData_Click(sender As Object, e As EventArgs) Handles cmdTricotData.Click
-        'sdgImportFromClimMob.Setup(clsKeysFunction.GetParameter("key"))
-        'sdgDefi.ShowDialog()
+        'sdgDefineTricotData.Setup(clsKeysFunction.GetParameter("key"))
+        sdgDefineTricotData.ShowDialog()
     End Sub
 
     Private Sub ucrInputServerName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputServerName.ControlContentsChanged
