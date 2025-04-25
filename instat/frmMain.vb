@@ -981,6 +981,7 @@ Public Class frmMain
         dlgLabelsLevels.SelectedColumn = strSelectedColumn
         dlgReferenceLevel.SelectedColumn = strSelectedColumn
         dlgFactorDataFrame.SelectedColumn = strSelectedColumn
+        dlgCountinFactor.SelectedColumn = strSelectedColumn
     End Sub
 
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
@@ -2347,6 +2348,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnFactorCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
+        SetDefaultValueInReorderLevels()
         dlgCountinFactor.ShowDialog()
     End Sub
 
