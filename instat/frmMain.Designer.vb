@@ -4788,8 +4788,8 @@ Partial Class frmMain
         'mnuTricotModelOverall
         '
         Me.mnuTricotModelOverall.Name = "mnuTricotModelOverall"
-        Me.mnuTricotModelOverall.Size = New System.Drawing.Size(277, 34)
-        Me.mnuTricotModelOverall.Text = "Overall..."
+        Me.mnuTricotModelOverall.Size = New System.Drawing.Size(304, 34)
+        Me.mnuTricotModelOverall.Text = "Model (One Covariate)..."
         '
         'mnuTricotModelCharacterisation
         '
