@@ -407,6 +407,8 @@
       <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDisplayModelOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgDefineTricotData.Designer.vb">
       <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
     </Compile>
