@@ -3522,6 +3522,9 @@
     <EmbeddedResource Include="dlgTransformTricotData.resx">
       <DependentUpon>dlgTransformTricotData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTricotModelOneVarCov.resx">
+      <DependentUpon>dlgTricotModelOneVarCov.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgUseTable.resx">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
     </EmbeddedResource>
