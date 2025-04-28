@@ -180,4 +180,14 @@ Public Class ucrCheck
             chkCheck.Visible = bVisible
         End Set
     End Property
+
+    ''' <summary>
+    '''  Returns if the check box is checked or not.
+    ''' </summary>
+    ''' <param name="enumTextType"> not used.</param>
+    ''' <returns>"TRUE" if the check box is checked, else "FALSE".</returns>
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        Return If(chkCheck.Checked, "TRUE", "FALSE")
+    End Function
+
 End Class

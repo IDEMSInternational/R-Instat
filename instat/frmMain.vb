@@ -159,6 +159,7 @@ Public Class frmMain
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         mnuViewTricotMenu.Checked = clsInstatOptions.bShowTricotMenu
+        mnuViewTricotXpMenu.Checked = clsInstatOptions.bShowTricotXpMenu
         mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
         mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
@@ -228,13 +229,20 @@ Public Class frmMain
                 My.Application.Info.Version.Minor.ToString() & "." &
                 My.Application.Info.Version.Build.ToString()
 
-        Me.Text = "R-Instat " & strVersion
+        Me.Text = "R-Instat " & GetVersionNumber()
 
-        CreateAdditionalLibraryDirectory(strVersion)
+        'CreateAdditionalLibraryDirectory(strVersion)
         '-------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
+
+    Public Function GetVersionNumber() As String
+        Dim strVersion As String = My.Application.Info.Version.Major.ToString() & "." &
+                My.Application.Info.Version.Minor.ToString() & "." &
+                My.Application.Info.Version.Build.ToString()
+        Return strVersion
+    End Function
 
     Private Sub CheckForUpdates()
         Dim webClient As New WebClient()
@@ -431,33 +439,6 @@ Public Class frmMain
             Return True
         End If
     End Function
-
-    Private Sub CreateAdditionalLibraryDirectory(strVersion As String)
-        ' Define the custom library path in the ApplicationData folder
-        Dim strLibraryPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "R-Instat", strVersion, "library")
-
-        Try
-            ' Check if the directory exists, if not, create it
-            If Not Directory.Exists(strLibraryPath) Then
-                Directory.CreateDirectory(strLibraryPath)
-            End If
-
-
-            'To ensure this part of the code only runs when the application Is Not in the Debug mode (i.e., in Release mode)
-#If Not DEBUG Then
-                     Dim clsSetLibPathsFunction As New RFunction
-            clsSetLibPathsFunction.SetPackageName("instatExtras")
-            clsSetLibPathsFunction.SetRCommand("set_library_paths")
-            clsSetLibPathsFunction.AddParameter("library_path", Chr(34) & strLibraryPath.Replace("\", "/") & Chr(34))
-
-            ' Execute the R script to update the library paths
-            clsRLink.RunScript(strScript:=clsSetLibPathsFunction.ToScript, bSeparateThread:=False, bSilent:=False)
-#End If
-        Catch ex As Exception
-            ' Handle potential errors (e.g., directory creation failure)
-            MessageBox.Show($"Failed to create or update library directory: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
 
     Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strRScripts As String = ""
@@ -980,6 +961,7 @@ Public Class frmMain
         dlgLabelsLevels.SelectedColumn = strSelectedColumn
         dlgReferenceLevel.SelectedColumn = strSelectedColumn
         dlgFactorDataFrame.SelectedColumn = strSelectedColumn
+        dlgCountinFactor.SelectedColumn = strSelectedColumn
     End Sub
 
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
@@ -1923,6 +1905,11 @@ Public Class frmMain
         mnuViewTricotMenu.Checked = bNewShowTricotMenu
     End Sub
 
+    Public Sub SetShowTricotXpMenu(bNewShowTricotXpMenu As Boolean)
+        mnuTricotXp.Visible = bNewShowTricotXpMenu
+        mnuViewTricotXpMenu.Checked = bNewShowTricotXpMenu
+    End Sub
+
     Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
         mnuProcurement.Visible = bNewShowProcurementMenu
         mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
@@ -1951,6 +1938,10 @@ Public Class frmMain
 
     Private Sub mnuViewTricotMenu_Click(sender As Object, e As EventArgs) Handles mnuViewTricotMenu.Click
         clsInstatOptions.SetShowTricotMenu(Not mnuViewTricotMenu.Checked)
+    End Sub
+
+    Private Sub mnuViewTricotXpMenu_Click(sender As Object, e As EventArgs) Handles mnuViewTricotXpMenu.Click
+        clsInstatOptions.SetShowTricotXpMenu(Not mnuViewTricotXpMenu.Checked)
     End Sub
 
     Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
@@ -2337,6 +2328,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnFactorCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
+        SetDefaultValueInReorderLevels()
         dlgCountinFactor.ShowDialog()
     End Sub
 
@@ -3024,6 +3016,15 @@ Public Class frmMain
         dlgTraits.ShowDialog()
     End Sub
 
+
+    Private Sub mnuTricotImportFromClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotImportFromClimMob.Click
+        dlgImportfromClimMob.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotDescribeXpTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraits.Click
+        dlgTraitsXp.ShowDialog()
+    End Sub
+
     Private Sub mnuTricotDefineTricotData_Click(sender As Object, e As EventArgs) Handles mnuTricotDefineTricotData.Click
         dlgDefineTricotData.ShowDialog()
     End Sub
@@ -3042,5 +3043,6 @@ Public Class frmMain
 
     Private Sub mnuTricotDescribeCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeCorrelations.Click
         dlgTraitCorrelations.ShowDialog()
+
     End Sub
 End Class

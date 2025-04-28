@@ -14,9 +14,19 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports RDotNet
 
 Public Class ucrReceiverSingle
+
+    ''' <summary>
+    ''' Specifies the type of information required when calling <see cref="GetText([Enum])"/>.
+    ''' </summary>
+    Public Enum EnumTextType
+        isFactor
+        text
+    End Enum
+
     Dim strDataFrameName As String
     Public strCurrDataType As String
     Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
@@ -318,4 +328,36 @@ Public Class ucrReceiverSingle
     Public Overrides Function GetItemsDataFrames() As List(Of String)
         Return New List(Of String)({strDataFrameName})
     End Function
+
+    ''' <summary>
+    '''  Returns information about the receiver's current selection as specified by 
+    '''  <paramref name="enumTextType"/>.
+    '''  If <paramref name="enumTextType"/> is not specified, returns the receiver's text.
+    '''  If <paramref name="enumTextType"/> is invalid, then throws an exception.
+    ''' </summary>
+    ''' <param name="enumTextType"></param>
+    ''' <returns>Information about the receiver's current selection as specified by 
+    '''     <paramref name="enumTextType"/></returns>
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        If enumTextType Is Nothing Then
+            enumTextType = ucrReceiverSingle.EnumTextType.text
+        End If
+
+        Dim textType As EnumTextType
+        Try
+            textType = DirectCast(enumTextType, EnumTextType)
+        Catch ex As InvalidCastException
+            Throw New InvalidCastException("Invalid text type requested from single receiver.")
+        End Try
+
+        Select Case textType
+            Case ucrReceiverSingle.EnumTextType.isFactor
+                Return If(strCurrDataType = "factor", "TRUE", "FALSE")
+            Case ucrReceiverSingle.EnumTextType.text
+                Return txtReceiverSingle.Text
+        End Select
+
+        Throw New InvalidEnumArgumentException("Unhandled text type requested from single receiver.")
+    End Function
+
 End Class
