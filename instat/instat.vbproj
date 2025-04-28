@@ -373,6 +373,12 @@
     <Compile Include="sdgDefineAnnualRainfall.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDisplayModelOptions.Designer.vb">
+      <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDisplayModelOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgFlowsToImport.Designer.vb">
       <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
     </Compile>
@@ -3488,6 +3494,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDisplayModelOptions.resx">
+      <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFlowsToImport.resx">
       <DependentUpon>sdgFlowsToImport.vb</DependentUpon>

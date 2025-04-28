@@ -26,8 +26,8 @@ Partial Class dlgPlacketLuceModel
         Me.ucrReceiverMultipleTraits = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblTraits = New System.Windows.Forms.Label()
-        Me.btnModelOptions = New System.Windows.Forms.Button()
-        Me.bntDisplayOptions = New System.Windows.Forms.Button()
+        Me.cmdModelOptions = New System.Windows.Forms.Button()
+        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.ucrSaveResult = New instat.ucrSave()
         Me.SuspendLayout()
         '
@@ -40,7 +40,7 @@ Partial Class dlgPlacketLuceModel
         Me.ucrSelectorTraitsPL.Location = New System.Drawing.Point(9, 20)
         Me.ucrSelectorTraitsPL.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorTraitsPL.Name = "ucrSelectorTraitsPL"
-        Me.ucrSelectorTraitsPL.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorTraitsPL.Size = New System.Drawing.Size(234, 183)
         Me.ucrSelectorTraitsPL.TabIndex = 0
         '
         'ucrReceiverMultipleTraits
@@ -73,23 +73,23 @@ Partial Class dlgPlacketLuceModel
         Me.lblTraits.TabIndex = 3
         Me.lblTraits.Text = "Traits To Model:"
         '
-        'btnModelOptions
+        'cmdModelOptions
         '
-        Me.btnModelOptions.Location = New System.Drawing.Point(269, 165)
-        Me.btnModelOptions.Name = "btnModelOptions"
-        Me.btnModelOptions.Size = New System.Drawing.Size(120, 23)
-        Me.btnModelOptions.TabIndex = 31
-        Me.btnModelOptions.Text = "Model Options"
-        Me.btnModelOptions.UseVisualStyleBackColor = True
+        Me.cmdModelOptions.Location = New System.Drawing.Point(269, 165)
+        Me.cmdModelOptions.Name = "cmdModelOptions"
+        Me.cmdModelOptions.Size = New System.Drawing.Size(120, 23)
+        Me.cmdModelOptions.TabIndex = 31
+        Me.cmdModelOptions.Text = "Model Options"
+        Me.cmdModelOptions.UseVisualStyleBackColor = True
         '
-        'bntDisplayOptions
+        'cmdDisplayOptions
         '
-        Me.bntDisplayOptions.Location = New System.Drawing.Point(269, 208)
-        Me.bntDisplayOptions.Name = "bntDisplayOptions"
-        Me.bntDisplayOptions.Size = New System.Drawing.Size(120, 23)
-        Me.bntDisplayOptions.TabIndex = 32
-        Me.bntDisplayOptions.Text = "Display Options"
-        Me.bntDisplayOptions.UseVisualStyleBackColor = True
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(269, 208)
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.Size = New System.Drawing.Size(120, 23)
+        Me.cmdDisplayOptions.TabIndex = 32
+        Me.cmdDisplayOptions.Text = "Display Options"
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
         'ucrSaveResult
         '
@@ -106,8 +106,8 @@ Partial Class dlgPlacketLuceModel
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 339)
         Me.Controls.Add(Me.ucrSaveResult)
-        Me.Controls.Add(Me.bntDisplayOptions)
-        Me.Controls.Add(Me.btnModelOptions)
+        Me.Controls.Add(Me.cmdDisplayOptions)
+        Me.Controls.Add(Me.cmdModelOptions)
         Me.Controls.Add(Me.lblTraits)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverMultipleTraits)
@@ -127,7 +127,7 @@ Partial Class dlgPlacketLuceModel
     Friend WithEvents ucrReceiverMultipleTraits As ucrReceiverMultiple
     Friend WithEvents lblTraits As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents bntDisplayOptions As Button
-    Friend WithEvents btnModelOptions As Button
+    Friend WithEvents cmdDisplayOptions As Button
+    Friend WithEvents cmdModelOptions As Button
     Friend WithEvents ucrSaveResult As ucrSave
 End Class
