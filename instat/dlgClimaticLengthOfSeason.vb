@@ -15,13 +15,22 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports System.Text.RegularExpressions
 Public Class dlgClimaticLengthOfSeason
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private strCurrDataName As String = ""
-
-    Private clsLengthOfSeasonFunction, clsLengthmoreFunction, clsListFunction, clsAscharactermoreFunction, clsConvertColumnTypeFunction, clsElseIfMoreFunction, clsApplyInstatCalcFunction, clsAsCharacterFunction, clsCombinationCalcFunction, clsStartEndStatusFunction, clsCaseWhenFunction, clsIsNAFunction, clsIsNA1Function, clsCombinationListFunction As New RFunction
+    Private lstEndReceivers As New List(Of ucrReceiverSingle)
+    Private lstStartReceivers As New List(Of ucrReceiverSingle)
+    Private lstEndStatusReceivers As New List(Of ucrReceiverSingle)
+    Private lstStartStatusReceivers As New List(Of ucrReceiverSingle)
+    Private lstFilledReceivers As New List(Of ucrReceiverSingle)
+    Private bisFilling As Boolean = False
+    Private bUserClearedReceiver As Boolean = False
+    Private bDataChanged As Boolean = False
+    Private clsLengthOfSeasonFunction, clsMaxFunction, clsLengthmoreFunction, clsListFunction, clsAscharactermoreFunction, clsConvertColumnTypeFunction, clsElseIfMoreFunction, clsApplyInstatCalcFunction, clsAsCharacterFunction, clsCombinationCalcFunction, clsStartEndStatusFunction, clsCaseWhenFunction, clsIsNAFunction, clsIsNA1Function, clsCombinationListFunction As New RFunction
     Private clsMinusOpertor, clsAssignMoreOperator, clsMinusmoreOPerator, clsAndOperator, clsOROperator, clsCaseWhenOperator, clsCaseWhen1Operator, clsCaseWhen2Operator, clsCaseWhen3Operator, clsAssignOperator, clsAssign1Operator, clsAssign2Operator, clsAssign3Operator, clsAssign4Operator, clsAnd1Operator, clsAnd2Operator As New ROperator
+    Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
     Private Sub dlgClimaticLengthOfSeason_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -35,29 +44,59 @@ Public Class dlgClimaticLengthOfSeason
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
+        AutoFillReceivers(lstEndReceivers)
+        AutoFillReceivers(lstStartReceivers)
+        AutoFillReceivers(lstEndStatusReceivers)
+        AutoFillReceivers(lstStartStatusReceivers)
+        If Not bUserClearedReceiver Then
+            AutoFillReceivers(lstFilledReceivers)
+        End If
+        bDataChanged = False
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 564
+        Dim kvpEnd As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("end_season", {"end_season", "end_rains"}.ToList())
+        Dim kvpStart As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("start_rain", {"start_rain"}.ToList())
+        Dim kvpEndStatus As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("end_season_status", {"end_season_status", "end_rains_status"}.ToList())
+        Dim kvpStartStatus As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("start_rain_status", {"start_rain_status"}.ToList())
+        Dim kvpFilled As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("end_season_filled", {"end_season_filled"}.ToList())
+
+        lstRecognisedTypes.AddRange({kvpEnd, kvpStart, kvpFilled, kvpEndStatus, kvpStartStatus})
+
+        lstEndReceivers.AddRange({ucrReceiverEndofRains})
+
+        lstStartReceivers.AddRange({ucrReceiverStartofRains})
+
+        lstEndStatusReceivers.AddRange({ucrReceiverEndofRainsLogical})
+
+        lstStartStatusReceivers.AddRange({ucrReceiverStartofRainsLogical})
+
+        lstFilledReceivers.AddRange({ucrReceiverEndFilled})
+
         ucrReceiverStartofRains.SetParameter(New RParameter("start_doy", 1, bNewIncludeArgumentName:=False))
         ucrReceiverStartofRains.SetParameterIsString()
         ucrReceiverStartofRains.bWithQuotes = False
         ucrReceiverStartofRains.Selector = ucrSelectorLengthofSeason
+        ucrReceiverStartofRains.Tag = "start_rain"
         ucrSelectorLengthofSeason.bUseCurrentFilter = False
 
         ucrReceiverStartofRainsLogical.SetParameter(New RParameter("start_status", 0, bNewIncludeArgumentName:=False))
         ucrReceiverStartofRainsLogical.SetParameterIsString()
         ucrReceiverStartofRainsLogical.bWithQuotes = False
+        ucrReceiverStartofRainsLogical.Tag = "start_rain_status"
         ucrReceiverStartofRainsLogical.Selector = ucrSelectorLengthofSeason
 
         ucrReceiverEndofRains.SetParameter(New RParameter("end_rain", 0, bNewIncludeArgumentName:=False))
         ucrReceiverEndofRains.SetParameterIsString()
         ucrReceiverEndofRains.bWithQuotes = False
+        ucrReceiverEndofRains.Tag = "end_season"
         ucrReceiverEndofRains.Selector = ucrSelectorLengthofSeason
 
         ucrReceiverEndofRainsLogical.SetParameter(New RParameter("end_status", 1, bNewIncludeArgumentName:=False))
         ucrReceiverEndofRainsLogical.SetParameterIsString()
         ucrReceiverEndofRainsLogical.bWithQuotes = False
+        ucrReceiverEndofRainsLogical.Tag = "end_season_status"
         ucrReceiverEndofRainsLogical.Selector = ucrSelectorLengthofSeason
 
         ucrChkLengthofSeason.AddParameterPresentCondition(True, "sub1", True)
@@ -81,14 +120,26 @@ Public Class dlgClimaticLengthOfSeason
         ucrChkLengthmore.SetText("Length_More")
         ucrChkLengthmore.AddParameterPresentCondition(True, "sub3", True)
         ucrChkLengthmore.AddParameterPresentCondition(False, "sub3", False)
-        ucrChkLengthmore.AddToLinkedControls(ucrNudLenghtmore, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=366)
+        ucrChkLengthmore.AddToLinkedControls(ucrInputTextLengthmore, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrNudLenghtmore.SetParameter(New RParameter("left", 0, False))
-        ucrNudLenghtmore.DecimalPlaces = 0
-        ucrNudLenghtmore.Increment = 1
-        ucrNudLenghtmore.Minimum = 1
-        ucrNudLenghtmore.Maximum = 366
+        ucrInputTextLengthmore.SetParameter(New RParameter("result_name", 2))
+        ucrInputTextLengthmore.SetDataFrameSelector(ucrSelectorLengthofSeason.ucrAvailableDataFrames)
+        ucrInputTextLengthmore.SetName("length_more")
+
+        ucrReceiverEndFilled.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverEndFilled.SetParameterIsRFunction()
+        ucrReceiverEndFilled.bWithQuotes = False
+        ucrReceiverEndFilled.Selector = ucrSelectorLengthofSeason
+        ucrReceiverEndFilled.Tag = "end_season_filled"
+        ucrReceiverEndFilled.SetLinkedDisplayControl(lblEndFilled)
+
         EnableLengthmore()
+        EnableReceiver()
+        AutoFillReceivers(lstEndReceivers)
+        AutoFillReceivers(lstStartReceivers)
+        AutoFillReceivers(lstEndStatusReceivers)
+        AutoFillReceivers(lstStartStatusReceivers)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -97,7 +148,8 @@ Public Class dlgClimaticLengthOfSeason
 
         clsAscharactermoreFunction = New RFunction
         clsListFunction = New RFunction
-        clsMinusmoreOPerator =New ROperator
+        clsMaxFunction = New RFunction
+        clsMinusmoreOPerator = New ROperator
 
         clsLengthOfSeasonFunction.Clear()
         clsCombinationCalcFunction.Clear()
@@ -263,10 +315,16 @@ Public Class dlgClimaticLengthOfSeason
         clsAscharactermoreFunction.SetRCommand("as.character")
 
         clsMinusmoreOPerator.SetOperation("-")
+        clsMinusmoreOPerator.AddParameter("left", "max_filled", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsMaxFunction.SetRCommand("max")
+        clsMaxFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+        clsMaxFunction.SetAssignTo("max_filled")
 
         'Base Function
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatCalcFunction)
+        AddRemoveMaxFilled()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -290,8 +348,17 @@ Public Class dlgClimaticLengthOfSeason
         ucrInputTextType.SetRCode(clsStartEndStatusFunction, bReset)
         ucrChkLengthofSeason.SetRCode(clsCombinationListFunction, bReset)
         ucrChkType.SetRCode(clsCombinationListFunction, bReset)
-        ucrChkLengthmore.SetRCode(clsCombinationListFunction, bReset)
-        ucrNudLenghtmore.SetRCode(clsMinusmoreOPerator, bReset)
+        If bReset Then
+            ucrChkLengthmore.SetRCode(clsCombinationListFunction, bReset)
+        End If
+        ucrInputTextLengthmore.SetRCode(clsLengthmoreFunction, bReset)
+        ucrReceiverEndFilled.SetRCode(clsMaxFunction, bReset)
+        AutoFillReceivers(lstEndReceivers)
+        AutoFillReceivers(lstStartReceivers)
+        AutoFillReceivers(lstEndStatusReceivers)
+        AutoFillReceivers(lstStartStatusReceivers)
+        AutoFillReceivers(lstFilledReceivers)
+        AddRemoveMaxFilled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -318,11 +385,19 @@ Public Class dlgClimaticLengthOfSeason
     End Sub
 
     Private Sub ucrReceiverStartofRains_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStartofRains.ControlValueChanged, ucrReceiverEndofRains.ControlValueChanged
+        EnableReceiver()
         clsLengthOfSeasonFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStartofRains.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverEndofRains.GetVariableNames & ")", iPosition:=3)
     End Sub
 
     Private Sub ucrSelectorLengthofSeason_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLengthofSeason.ControlValueChanged
+        bDataChanged = True
+        bUserClearedReceiver = False
         strCurrDataName = Chr(34) & ucrSelectorLengthofSeason.strCurrentDataFrame & Chr(34)
+        AutoFillReceivers(lstEndReceivers)
+        AutoFillReceivers(lstStartReceivers)
+        AutoFillReceivers(lstEndStatusReceivers)
+        AutoFillReceivers(lstStartStatusReceivers)
+        AutoFillReceivers(lstFilledReceivers)
     End Sub
 
     Private Sub ucrReceiverStartofRainsLogical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStartofRainsLogical.ControlValueChanged, ucrReceiverEndofRainsLogical.ControlValueChanged
@@ -338,7 +413,6 @@ Public Class dlgClimaticLengthOfSeason
     End Sub
 
     Private Sub ucrChkType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkType.ControlValueChanged
-        EnableLengthmore()
         If ucrChkType.Checked Then
             clsCombinationListFunction.AddParameter("sub2", clsRFunctionParameter:=clsStartEndStatusFunction, bIncludeArgumentName:=False, iPosition:=1)
             ucrBase.clsRsyntax.AddToAfterCodes(clsConvertColumnTypeFunction, iPosition:=0)
@@ -349,25 +423,33 @@ Public Class dlgClimaticLengthOfSeason
         End If
     End Sub
 
-    Private Sub ucrChkLengthofSeason_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkLengthofSeason.ControlContentsChanged, ucrChkType.ControlContentsChanged, ucrInputLengthofSeason.ControlContentsChanged, ucrInputTextType.ControlContentsChanged, ucrReceiverStartofRains.ControlContentsChanged, ucrReceiverEndofRains.ControlContentsChanged, ucrReceiverStartofRainsLogical.ControlContentsChanged, ucrReceiverEndofRainsLogical.ControlContentsChanged
+    Private Sub ucrChkLengthofSeason_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkLengthofSeason.ControlContentsChanged, ucrChkType.ControlContentsChanged, ucrInputLengthofSeason.ControlContentsChanged, ucrInputTextType.ControlContentsChanged, ucrReceiverStartofRains.ControlContentsChanged, ucrReceiverEndofRains.ControlContentsChanged, ucrReceiverStartofRainsLogical.ControlContentsChanged, ucrReceiverEndofRainsLogical.ControlContentsChanged, ucrReceiverEndFilled.ControlContentsChanged, ucrChkLengthmore.ControlContentsChanged, ucrInputTextLengthmore.ControlContentsChanged
         TestOKEnabled()
+        EnableLengthmore()
+        AddRemoveLengthmore()
+        AddRemoveMaxFilled()
     End Sub
 
     Private Sub ucrSelectorLengthofSeason_DataFrameChanged() Handles ucrSelectorLengthofSeason.DataFrameChanged
         clsConvertColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorLengthofSeason.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub
 
-    Private Sub ucrChkLengthmore_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLengthmore.ControlValueChanged
-        EnableLengthmore()
-        If ucrChkLengthmore.Checked Then
+    Private Sub AddRemoveLengthmore()
+        If ucrChkLengthmore.Checked AndAlso ucrChkLengthmore.Enabled Then
             clsCombinationListFunction.AddParameter("sub3", clsRFunctionParameter:=clsLengthmoreFunction, bIncludeArgumentName:=False, iPosition:=2)
         Else
             clsCombinationListFunction.RemoveParameterByName("sub3")
         End If
     End Sub
 
+    Private Sub ucrChkLengthmore_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLengthmore.ControlValueChanged
+        EnableLengthmore()
+        AddRemoveLengthmore()
+        AddRemoveMaxFilled()
+    End Sub
+
     Private Sub EnableLengthmore()
-        ucrChkLengthmore.Enabled = ucrChkType.Checked
+        ucrChkLengthmore.Enabled = Not ucrReceiverEndFilled.IsEmpty AndAlso ucrReceiverEndFilled.Enabled
     End Sub
 
     Private Sub ucrInputLengthofSeason_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLengthofSeason.ControlValueChanged
@@ -385,6 +467,86 @@ Public Class dlgClimaticLengthOfSeason
             clsAscharactermoreFunction.AddParameter("x", ucrInputTextType.GetText(), iPosition:=0, bIncludeArgumentName:=False)
         Else
             clsAscharactermoreFunction.RemoveParameterByName("x")
+        End If
+    End Sub
+
+    Private Sub EnableReceiver()
+        EnableLengthmore()
+        ucrReceiverEndFilled.Enabled = ucrReceiverEndofRains.GetVariableNames().Contains("end_season")
+    End Sub
+
+    Private Sub AddRemoveMaxFilled()
+        If Not ucrReceiverEndFilled.IsEmpty AndAlso ucrReceiverEndFilled.Enabled AndAlso (ucrChkLengthmore.Checked AndAlso ucrChkLengthmore.Enabled) Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsMaxFunction, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsMaxFunction)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverEndFilled_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEndFilled.ControlValueChanged
+        EnableLengthmore()
+        EnableReceiver()
+        AddRemoveMaxFilled()
+    End Sub
+
+    Private Sub AutoFillReceivers(lstReceivers As List(Of ucrReceiverSingle))
+        If bisFilling OrElse lstReceivers Is Nothing Then
+            Exit Sub
+        End If
+
+        bisFilling = True
+
+        Dim lstRecognisedValues As List(Of String)
+        Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorLengthofSeason.CurrentReceiver
+        Dim strSelectedValue As String
+
+        For Each ucrTempReceiver As ucrReceiver In lstReceivers
+            If ucrTempReceiver Is ucrReceiverEndFilled AndAlso bUserClearedReceiver Then
+                Continue For
+            End If
+
+            ucrTempReceiver.SetMeAsReceiver()
+            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+
+            If lstRecognisedValues.Count > 0 Then
+                Dim lstAvailable As List(Of String) = ucrSelectorLengthofSeason.lstAvailableVariable.Items.Cast(Of ListViewItem) _
+                .Select(Function(item) Regex.Replace(item.Text.ToLower(), "[^\w]", String.Empty)).ToList()
+
+                strSelectedValue = lstRecognisedValues.FirstOrDefault(Function(val) lstAvailable.Contains(val))
+
+                If Not String.IsNullOrEmpty(strSelectedValue) Then
+                    Dim matchingItem As ListViewItem = ucrSelectorLengthofSeason.lstAvailableVariable.Items.Cast(Of ListViewItem) _
+                    .FirstOrDefault(Function(item) Regex.Replace(item.Text.ToLower(), "[^\w]", String.Empty) = strSelectedValue)
+
+                    If matchingItem IsNot Nothing Then
+                        ucrTempReceiver.Add(matchingItem.Text, ucrSelectorLengthofSeason.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                    End If
+                End If
+            End If
+        Next
+
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+
+        bisFilling = False
+    End Sub
+
+    Private Function GetRecognisedValues(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
+
+    Private Sub ucrReceiverEndFilled_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEndFilled.ControlContentsChanged
+        If ucrReceiverEndFilled.IsEmpty Then
+            bUserClearedReceiver = True
         End If
     End Sub
 End Class

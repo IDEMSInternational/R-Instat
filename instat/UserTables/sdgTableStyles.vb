@@ -87,15 +87,15 @@ Public Class sdgTableStyles
 
         '-----------------
         Dim dctFontWeight As New Dictionary(Of String, String) From {
-            {"Default", "NULL"},
-            {"Normal", Chr(34) & "normal" & Chr(34)},
-            {"Bold", Chr(34) & "bold" & Chr(34)},
-            {"Lighter", Chr(34) & "lighter" & Chr(34)},
-            {"Bolder", Chr(34) & "bold" & Chr(34)}
-        }
+    {"Default", "NULL"},
+    {"Normal", Chr(34) & "normal" & Chr(34)},
+    {"Bold", Chr(34) & "bold" & Chr(34)},
+    {"Lighter", Chr(34) & "lighter" & Chr(34)},
+    {"Bolder", Chr(34) & "bolder" & Chr(34)}
+}
 
         ucrCboFontWeight.SetDropDownStyleAsNonEditable()
-        ucrCboFontWeight.SetParameter(New RParameter("weight", iNewPosition:=7))
+        ucrCboFontWeight.SetParameter(New RParameter("weight", iNewPosition:=7)) ' Corrected parameter name
         ucrCboFontWeight.SetItems(dctFontWeight)
         ucrCboFontWeight.SetRDefault("NULL")
         '-----------------
@@ -133,6 +133,7 @@ Public Class sdgTableStyles
         '-----------------
 
         '-----------------
+        ' Transform
         Dim dctTransform As New Dictionary(Of String, String) From {
             {"Default", "NULL"},
             {"Uppercase", Chr(34) & "uppercase" & Chr(34)},
@@ -140,7 +141,7 @@ Public Class sdgTableStyles
             {"Capitalize", Chr(34) & "capitalize" & Chr(34)}
         }
         ucrCboTransform.SetDropDownStyleAsNonEditable()
-        ucrCboTransform.SetParameter(New RParameter("transform", iNewPosition:=9))
+        ucrCboTransform.SetParameter(New RParameter("transform", iNewPosition:=9)) ' Corrected parameter name
         ucrCboTransform.SetItems(dctTransform)
         ucrCboTransform.SetRDefault("NULL")
         '-----------------
@@ -169,18 +170,18 @@ Public Class sdgTableStyles
         ucrNudIndent.SetRDefault(0)
         '-----------------
 
-        '-----------------
+        ' White Space
         Dim dctWhiteSpace As New Dictionary(Of String, String) From {
             {"Default", "NULL"},
             {"Normal", Chr(34) & "normal" & Chr(34)},
-            {"No wrap", Chr(34) & "nowrap" & Chr(34)},
+            {"No Wrap", Chr(34) & "nowrap" & Chr(34)}, ' Corrected key
             {"Pre", Chr(34) & "pre" & Chr(34)},
-            {"Pre-wrap", Chr(34) & "pre-wrap" & Chr(34)},
-            {"Pre-line", Chr(34) & "pre-line" & Chr(34)},
-            {"Break-spaces", Chr(34) & "break-spaces" & Chr(34)}
+            {"Pre-Wrap", Chr(34) & "pre-wrap" & Chr(34)}, ' Corrected key
+            {"Pre-Line", Chr(34) & "pre-line" & Chr(34)}, ' Corrected key
+            {"Break Spaces", Chr(34) & "break-spaces" & Chr(34)} ' Corrected key
         }
         ucrCboWhiteSpace.SetDropDownStyleAsNonEditable()
-        ucrCboWhiteSpace.SetParameter(New RParameter("transform", iNewPosition:=11))
+        ucrCboWhiteSpace.SetParameter(New RParameter("whitespace", iNewPosition:=12)) ' Corrected parameter name and position
         ucrCboWhiteSpace.SetItems(dctWhiteSpace)
         ucrCboWhiteSpace.SetRDefault("NULL")
         '-----------------

@@ -132,6 +132,10 @@ pkgs <-
     # install.packages('remotes')
     # also install aida-package from GitHub remotes::install_github('michael-franke/aida-package')
     # also install CDT from GitHub devtools::install_github("rijaf-iri/CDT")
+    # also install instatClimatic from GitHub devtools::install_github("IDEMSInternational/instatClimatic", upgrade = "always")
+    # also install instatExtras from GitHub devtools::install_github("IDEMSInternational/instatExtras", upgrade = "always")
+    # also install databook from GitHub devtools::install_github("IDEMSInternational/databook", upgrade = "always")
+    # also install instatCalculations from GitHub devtools::install_github("IDEMSInternational/instatCalculations", upgrade = "always")
     "corrr",
     "dslabs",
     "coin",
@@ -177,7 +181,11 @@ pkgs <-
     "fivethirtyeight",
     "CGPfunctions",
     "ggside",
-    "collapse"
+    "Weighted.Desc.Stat",
+    "weights",
+    "nanonext",
+    "collapse",
+    "PlackettLuce"
  )
 pkgList <- pkgDep(pkgs, type="win.binary", repos = "https://cran.rstudio.com/", suggests = FALSE, includeBasePkgs = FALSE, Rversion = r_version)
 pth <- "C:/Users/Antoine/Documents/RPackages"

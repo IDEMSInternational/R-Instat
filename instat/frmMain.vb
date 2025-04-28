@@ -158,6 +158,8 @@ Public Class frmMain
         mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
         mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
         mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
+        mnuViewTricotMenu.Checked = clsInstatOptions.bShowTricotMenu
+        mnuViewTricotXpMenu.Checked = clsInstatOptions.bShowTricotXpMenu
         mnuIncludeComments.Checked = clsInstatOptions.bIncludeCommentDefault
         mnuShowRCommand.Checked = clsInstatOptions.bCommandsinOutput
         mnuTbLan.Visible = clsInstatOptions.strLanguageCultureCode <> "en-GB"
@@ -227,16 +229,25 @@ Public Class frmMain
                 My.Application.Info.Version.Minor.ToString() & "." &
                 My.Application.Info.Version.Build.ToString()
 
-        Me.Text = "R-Instat " & strVersion
+        Me.Text = "R-Instat " & GetVersionNumber()
 
-        CreateAdditionalLibraryDirectory(strVersion)
+        'CreateAdditionalLibraryDirectory(strVersion)
         '-------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
+
         SetHideMenus()
 
         mnuToolsRestartR.Enabled = True
+
     End Sub
+
+    Public Function GetVersionNumber() As String
+        Dim strVersion As String = My.Application.Info.Version.Major.ToString() & "." &
+                My.Application.Info.Version.Minor.ToString() & "." &
+                My.Application.Info.Version.Build.ToString()
+        Return strVersion
+    End Function
 
     Private Sub CheckForUpdates()
         Dim webClient As New WebClient()
@@ -330,6 +341,8 @@ Public Class frmMain
         mnuDataViewWindow.Checked = True
         mnuOutputWindow.Checked = True
         mnuLogScript.Checked = False
+        UpdateSwapDataAndMetadata()
+        UpdateSwapDataAndScript()
 
         EnableDisbaleViewSwapMenu(True)
         UpdateSwapDataAndScript()
@@ -622,19 +635,6 @@ Public Class frmMain
         mnuTbLan.Visible = bVisible
     End Sub
 
-    Public Sub SetAppVersionNumber(strVersionNumber As String)
-
-    End Sub
-
-    Private Sub SetHideMenus()
-        mnuViewProcurementMenu.Checked = False
-        mnuProcurement.Visible = False
-        mnuViewOptionsByContextMenu.Checked = False
-        mnuOptionsByContext.Visible = False
-        mnuViewStructuredMenu.Checked = False
-        mnuStructured.Visible = False
-    End Sub
-
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
         mnuFile.Enabled = bEnabled
         mnuEdit.Enabled = bEnabled
@@ -853,6 +853,7 @@ Public Class frmMain
     Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
         mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        ucrColumnMeta.IsEnabled = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
@@ -885,6 +886,18 @@ Public Class frmMain
 
     Private Sub mnuTbLast10Dialogs_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLast10Dialogs.ButtonClick
         If clsRecentItems.lstRecentDialogs.Count > 0 Then
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgReorderLevels" Then
+                SetDefaultValueInReorderLevels()
+            End If
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgRecodeFactor" Then
+                SetDefaultValueInReorderLevels()
+            End If
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgDummyVariables" Then
+                SetDefaultValueInReorderLevels()
+            End If
+            If clsRecentItems.lstRecentDialogs.Last.Name = "dlgLabelsLevels" Then
+                SetDefaultValueInReorderLevels()
+            End If
             clsRecentItems.lstRecentDialogs.Last.ShowDialog()
         End If
     End Sub
@@ -928,6 +941,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click
+        SetDefaultValueInReorderLevels()
         dlgRecodeFactor.ShowDialog()
     End Sub
 
@@ -952,10 +966,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReferenceLevel.Click
+        SetDefaultValueInReorderLevels()
         dlgReferenceLevel.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorLevelsLabels.Click
+        SetDefaultValueInReorderLevels()
         dlgLabelsLevels.ShowDialog()
     End Sub
 
@@ -964,7 +980,24 @@ Public Class frmMain
         dlgConvertColumns.ShowDialog()
     End Sub
 
+    Public Sub SetDefaultValueInReorderLevels()
+        Dim strSelectedColumn As String = ""
+        If Not String.IsNullOrEmpty(ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow) AndAlso ucrColumnMeta.IsVisible Then
+            strSelectedColumn = ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow
+        ElseIf Not String.IsNullOrEmpty(ucrDataViewer.GetFirstSelectedColumnName) Then
+            strSelectedColumn = ucrDataViewer.GetFirstSelectedColumnName
+        End If
+        dlgReorderLevels.SelectedColumn = strSelectedColumn
+        dlgRecodeFactor.SelectedColumn = strSelectedColumn
+        dlgDummyVariables.SelectedColumn = strSelectedColumn
+        dlgLabelsLevels.SelectedColumn = strSelectedColumn
+        dlgReferenceLevel.SelectedColumn = strSelectedColumn
+        dlgFactorDataFrame.SelectedColumn = strSelectedColumn
+        dlgCountinFactor.SelectedColumn = strSelectedColumn
+    End Sub
+
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
+        SetDefaultValueInReorderLevels()
         dlgReorderLevels.ShowDialog()
     End Sub
 
@@ -996,6 +1029,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorSheet_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorFactorDataFrame.Click
+        SetDefaultValueInReorderLevels()
         dlgFactorDataFrame.ShowDialog()
     End Sub
 
@@ -1898,6 +1932,16 @@ Public Class frmMain
         dlgImportDataset.ShowDialog()
     End Sub
 
+    Public Sub SetShowTricotMenu(bNewShowTricotMenu As Boolean)
+        mnuTricot.Visible = bNewShowTricotMenu
+        mnuViewTricotMenu.Checked = bNewShowTricotMenu
+    End Sub
+
+    Public Sub SetShowTricotXpMenu(bNewShowTricotXpMenu As Boolean)
+        mnuTricotXp.Visible = bNewShowTricotXpMenu
+        mnuViewTricotXpMenu.Checked = bNewShowTricotXpMenu
+    End Sub
+
     Public Sub SetShowProcurementMenu(bNewShowProcurementMenu As Boolean)
         mnuProcurement.Visible = bNewShowProcurementMenu
         mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
@@ -1922,6 +1966,14 @@ Public Class frmMain
     End Sub
     Private Sub mnuViewClimaticMenu_Click(sender As Object, e As EventArgs) Handles mnuViewClimaticMenu.Click
         clsInstatOptions.SetShowClimaticMenu(Not mnuViewClimaticMenu.Checked)
+    End Sub
+
+    Private Sub mnuViewTricotMenu_Click(sender As Object, e As EventArgs) Handles mnuViewTricotMenu.Click
+        clsInstatOptions.SetShowTricotMenu(Not mnuViewTricotMenu.Checked)
+    End Sub
+
+    Private Sub mnuViewTricotXpMenu_Click(sender As Object, e As EventArgs) Handles mnuViewTricotXpMenu.Click
+        clsInstatOptions.SetShowTricotXpMenu(Not mnuViewTricotXpMenu.Checked)
     End Sub
 
     Private Sub mnuViewProcurementMenu_Click(sender As Object, e As EventArgs) Handles mnuViewProcurementMenu.Click
@@ -2308,18 +2360,21 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnFactorCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
+        SetDefaultValueInReorderLevels()
         dlgCountinFactor.ShowDialog()
     End Sub
 
     Private Sub MnuMetadata_ButtonClick(sender As Object, e As EventArgs) Handles mnuMetadata.ButtonClick
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
+        ucrColumnMeta.IsEnabled = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuColumnMetadat_Click(sender As Object, e As EventArgs) Handles mnuColumnMetadat.Click
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
         mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
+        ucrColumnMeta.IsEnabled = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
@@ -2556,6 +2611,7 @@ Public Class frmMain
 
     Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
+        ucrColumnMeta.IsEnabled = mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndDataframeMetadata.Enabled = Not mnuViewSwapDataAndMetadata.Checked
         mnuViewSwapDataAndScript.Enabled = Not mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
@@ -2952,6 +3008,7 @@ Public Class frmMain
 
     Private Sub mnuSwapDataMetadata_Click(sender As Object, e As EventArgs) Handles mnuSwapDataMetadata.Click
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
+        ucrColumnMeta.IsEnabled = mnuViewSwapDataAndMetadata.Checked
         UpdateSwapDataAndMetadata()
         UpdateLayout()
     End Sub
@@ -3020,4 +3077,37 @@ Public Class frmMain
         dlgOutfillingStationData.ShowDialog()
     End Sub
 
+    Private Sub mnuTricotDescribeTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeTraits.Click
+        dlgTraits.ShowDialog()
+    End Sub
+
+
+    Private Sub mnuTricotImportFromClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotImportFromClimMob.Click
+        dlgImportfromClimMob.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotDescribeXpTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraits.Click
+        dlgTraitsXp.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotDefineTricotData_Click(sender As Object, e As EventArgs) Handles mnuTricotDefineTricotData.Click
+        dlgDefineTricotData.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotModelWithoutCovariates_Click(sender As Object, e As EventArgs) Handles mnuTricotModelWithoutCovariates.Click
+        dlgPlacketLuceModel.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotModelTree_Click(sender As Object, e As EventArgs) Handles mnuTricotModelTree.Click
+        dlgModellingTree.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotTransformClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotTransformClimMob.Click
+        dlgTransformTricotData.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotDescribeCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeCorrelations.Click
+        dlgTraitCorrelations.ShowDialog()
+
+    End Sub
 End Class
