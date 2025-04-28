@@ -52,7 +52,6 @@ Public Class dlgTransformTricotData
         ucrReceiverTricotData.SetMeAsReceiver()
         clsOutputDataLevel.SetPackageName("instatExtras")
         clsOutputDataLevel.SetRCommand("summarise_data_levels")
-        'clsOutputDataLevel.SetAssignTo("output_data_levels")
 
         clsCreateTricotData.SetPackageName("databook")
         clsCreateTricotData.SetRCommand("create_tricot_data")
@@ -68,7 +67,6 @@ Public Class dlgTransformTricotData
         OverallSymbolOperator.AddParameter("right", "1,]", iPosition:=1)
         OverallSymbolOperator.bSpaceAroundOperation = False
 
-        'ucrBase.clsRsyntax.AddToBeforeCodes(clsOutputDataLevel)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsOutputLevelsOperator)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCreateTricotData)
     End Sub
@@ -80,13 +78,20 @@ Public Class dlgTransformTricotData
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        'TestOKEnabled()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ucrReceiverTricotData.IsEmpty Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub cmdFindForms_click(sender As Object, e As EventArgs) Handles cmdCheckTricotData.Click
         Dim strFormNames() As String
         Dim expTemp As SymbolicExpression
-
 
         Cursor = Cursors.WaitCursor
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsOutputLevelsOperator.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
