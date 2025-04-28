@@ -371,6 +371,12 @@
     <Compile Include="dlgTransformTricotData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTricotModelOneVarCov.Designer.vb">
+      <DependentUpon>dlgTricotModelOneVarCov.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTricotModelOneVarCov.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgUseTable.Designer.vb">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
     </Compile>
