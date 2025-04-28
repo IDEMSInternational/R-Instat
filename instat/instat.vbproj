@@ -147,6 +147,9 @@
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.5.1.0\lib\net46\NLog.dll</HintPath>
     </Reference>
@@ -221,6 +224,9 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsFileUrlUtilities.vb" />
+    <Compile Include="clsTransformationControl.vb" />
+    <Compile Include="clsTransformationRModel.vb" />
+    <Compile Include="clsColumnSelectionUtility.vb" />
     <Compile Include="dlgApsimx.Designer.vb">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
     </Compile>
@@ -281,6 +287,12 @@
     <Compile Include="dlgIDFCurves.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportClimMob.Designer.vb">
+      <DependentUpon>dlgImportClimMob.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportClimMob.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromPostgres.Designer.vb">
       <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
     </Compile>
@@ -335,10 +347,22 @@
     <Compile Include="dlgSurvey.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTraitCorrelations.Designer.vb">
+      <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraitCorrelations.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTraits.Designer.vb">
       <DependentUpon>dlgTraits.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTraits.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTraitsXp.Designer.vb">
+      <DependentUpon>dlgTraitsXp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraitsXp.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTransformTricotData.Designer.vb">
@@ -361,6 +385,12 @@
     <Compile Include="sdgAdditionalCondition.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgAdvOptions.Designer.vb">
+      <DependentUpon>sdgAdvOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgAdvOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgClimsoft.Designer.vb">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </Compile>
@@ -377,6 +407,10 @@
       <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDisplayModelOptions.vb">
+    <Compile Include="sdgDefineTricotData.Designer.vb">
+      <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDefineTricotData.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgFlowsToImport.Designer.vb">
@@ -395,6 +429,12 @@
       <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgHSMissingOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgImportFromClimMob.Designer.vb">
+      <DependentUpon>sdgImportFromClimMob.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgImportFromClimMob.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgLocation.Designer.vb">
@@ -3393,6 +3433,9 @@
     <EmbeddedResource Include="dlgIDFCurves.resx">
       <DependentUpon>dlgIDFCurves.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportClimMob.resx">
+      <DependentUpon>dlgImportClimMob.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
     </EmbeddedResource>
@@ -3465,8 +3508,14 @@
     <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
       <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraitCorrelations.resx">
+      <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTraits.resx">
       <DependentUpon>dlgTraits.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraitsXp.resx">
+      <DependentUpon>dlgTraitsXp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTransformTricotData.resx">
       <DependentUpon>dlgTransformTricotData.vb</DependentUpon>
@@ -3489,6 +3538,9 @@
     <EmbeddedResource Include="sdgAdditionalCondition.resx">
       <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgAdvOptions.resx">
+      <DependentUpon>sdgAdvOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgClimsoft.resx">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </EmbeddedResource>
@@ -3497,6 +3549,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDisplayModelOptions.resx">
       <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
+    <EmbeddedResource Include="sdgDefineTricotData.resx">
+      <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFlowsToImport.resx">
       <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
@@ -3506,6 +3560,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgHSMissingOptions.resx">
       <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportFromClimMob.resx">
+      <DependentUpon>sdgImportFromClimMob.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLocation.resx">
       <DependentUpon>sdgLocation.vb</DependentUpon>
@@ -5732,6 +5789,8 @@
     <Content Include="Resources\upward-arrow1.png" />
     <Content Include="translations\translateDynamic.txt" />
     <Content Include="translations\translateIgnore.txt" />
+    <None Include="DialogDefinitions\DlgTraits\dlgTraits.json" />
+    <None Include="DialogDefinitions\DlgTraits\dlgTraits.R" />
     <None Include="instat.licenseheader" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -6071,6 +6130,12 @@
     <Content Include="static\Help\Statistics Glossary.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\DialogDefinitions\DlgTraits\dlgTraits.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\DialogDefinitions\DlgTraits\dlgTraits.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="static\Help\LICENSE" />
     <None Include="static\Help\LICENSE" />
     <Content Include="static\Help\R-Instat.pdf" />
