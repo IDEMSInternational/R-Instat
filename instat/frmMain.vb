@@ -3045,4 +3045,12 @@ Public Class frmMain
         dlgTraitCorrelations.ShowDialog()
 
     End Sub
+
+    Private Sub SampleModellingTreeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SampleModellingTreeToolStripMenuItem.Click
+        dlgModellingTree.ShowDialog()
+    End Sub
+
+    Private Sub SampleModellingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SampleModellingToolStripMenuItem.Click
+        dlgModelling.ShowDialog()
+    End Sub
 End Class

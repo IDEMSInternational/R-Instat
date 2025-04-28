@@ -173,6 +173,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkSwapXYVar.SetText("Swap First/Second Variables")
         ucrChkSwapXYVar.AddParameterValuesCondition(True, "var", "True")
         ucrChkSwapXYVar.AddParameterValuesCondition(False, "var", "False")
+        ' This controls the visibility of the display margins check box
         ucrChkSwapXYVar.AddToLinkedControls({ucrChkDisplayMargins}, {False}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlDescribe.AddRadioButton(rdoTwoVariable)
