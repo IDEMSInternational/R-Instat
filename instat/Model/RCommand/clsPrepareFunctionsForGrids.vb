@@ -124,6 +124,7 @@ Public Class clsPrepareFunctionsForGrids
         clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strColumnName & Chr(34), iPosition:=1)
         clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=2)
 
+        clsNNonNumeric.SetPackageName("instatExtras")
         clsNNonNumeric.SetRCommand("n_non_numeric")
         clsNNonNumeric.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=0)
         expTemp = _RLink.RunInternalScriptGetValue(clsNNonNumeric.ToScript(), bSilent:=True)
@@ -184,7 +185,7 @@ Public Class clsPrepareFunctionsForGrids
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
         clsGetDataFrame.SetAssignTo(_strDataFrame)
         strTemp = clsViewDataFrame.ToScript(strScript)
-        _RLink.RunScript(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
+        _RLink.RunScript(strScript & strTemp, strComment:="Toolbar Option: View R Data Frame", bSeparateThread:=False)
     End Sub
     ''' <summary>
     ''' insert new rows

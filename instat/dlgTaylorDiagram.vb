@@ -35,6 +35,7 @@ Public Class dlgTaylorDiagram
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID= 643
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorTaylorDiagram.SetParameter(New RParameter("mydata", 0))
@@ -70,7 +71,7 @@ Public Class dlgTaylorDiagram
         ucrChkNormalise.SetRDefault("FALSE")
 
         ucrSavePlot.SetPrefix("taylor_diagram_plot")
-        ucrSavePlot.SetCheckBoxText("Save Graph")
+        ucrSavePlot.SetCheckBoxText("Store Graph")
         ucrSavePlot.SetIsComboBox()
         ucrSavePlot.SetSaveTypeAsGraph()
         ucrSavePlot.SetDataFrameSelector(ucrSelectorTaylorDiagram.ucrAvailableDataFrames)

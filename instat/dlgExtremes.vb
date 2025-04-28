@@ -47,6 +47,7 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
     Private Sub InitialiseDialog()
         Dim dctFevdTypes As New Dictionary(Of String, String)
 
+        ucrBase.iHelpTopicID = 488
         ucrInputExtremes.SetParameter(New RParameter("type", 1))
         dctFevdTypes.Add("GEV", Chr(34) & "GEV" & Chr(34))
         dctFevdTypes.Add("GP", Chr(34) & "GP" & Chr(34))
@@ -85,7 +86,7 @@ clsInitialListFunction, clsOmitMissingFunction As New RFunction
 
         ucrSaveExtremes.SetPrefix("extreme")
         ucrSaveExtremes.SetIsComboBox()
-        ucrSaveExtremes.SetCheckBoxText("Save Model:")
+        ucrSaveExtremes.SetCheckBoxText("Store Model:")
         ucrSaveExtremes.SetSaveTypeAsModel()
         ucrSaveExtremes.SetDataFrameSelector(ucrSelectorExtremes.ucrAvailableDataFrames)
         ucrSaveExtremes.SetAssignToIfUncheckedValue("last_model")

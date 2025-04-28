@@ -14,9 +14,19 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports RDotNet
 
 Public Class ucrReceiverSingle
+
+    ''' <summary>
+    ''' Specifies the type of information required when calling <see cref="GetText([Enum])"/>.
+    ''' </summary>
+    Public Enum EnumTextType
+        isFactor
+        text
+    End Enum
+
     Dim strDataFrameName As String
     Public strCurrDataType As String
     Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
@@ -35,7 +45,7 @@ Public Class ucrReceiverSingle
         strCurrDataType = ""
     End Sub
 
-    Public Overrides Sub AddSelected()
+    Public Overrides Sub AddSelectedSelectorVariables()
         'Dim tempObjects(Selector.lstAvailableVariable.SelectedItems.Count - 1) As ListViewItem
 
         If Selector.lstAvailableVariable.SelectedItems.Count = 1 Then
@@ -53,16 +63,6 @@ Public Class ucrReceiverSingle
         Dim expColumnType As SymbolicExpression
         Dim bRemove As Boolean = False
 
-        'Would prefer to have remove selected but that will first clear the receiver
-        'This has issues when reading RSyntax and filling receivers e.g. in Specific plot dialogs
-        'Because it modifies the list of parameters it is looping through when clearing first, crashing
-        'Below is the part from RemoveSelected() that is needed
-        'This is only an issue with single receiver
-        'If RemoveSelected() later contains other things, this may need to be updated.
-        'RemoveSelected()
-        If Selector IsNot Nothing Then
-            Selector.RemoveFromVariablesList(txtReceiverSingle.Text, strDataFrame)
-        End If
         MyBase.Add(strItem, strDataFrame)
 
         strCurrentItemType = If(bTypeSet, strType, Selector?.GetItemType())
@@ -118,9 +118,6 @@ Public Class ucrReceiverSingle
             End If
             strDataFrameName = strDataFrame
             txtReceiverSingle.Text = strItem
-            If Selector IsNot Nothing Then
-                Selector.AddToVariablesList(strItem, strDataFrameName)
-            End If
             If bRemove Then
                 RemoveSelected()
             End If
@@ -130,13 +127,20 @@ Public Class ucrReceiverSingle
 
     Public Overrides Sub RemoveSelected()
         If txtReceiverSingle.Enabled Then
-            If Selector IsNot Nothing Then
-                Selector.RemoveFromVariablesList(txtReceiverSingle.Text, strDataFrameName)
-            End If
             txtReceiverSingle.Text = ""
             strDataFrameName = ""
         End If
         MyBase.RemoveSelected()
+    End Sub
+
+    ''' <summary>
+    ''' Removes any variable in the single receiver
+    ''' that is not in the list of variables of the selector
+    ''' </summary>
+    Public Overrides Sub RemoveAnyVariablesNotInSelector()
+        If Not IsEmpty() AndAlso Selector?.lstAvailableVariable.FindItemWithText(txtReceiverSingle.Text) Is Nothing Then
+            Clear()
+        End If
     End Sub
 
     Public Overrides Sub Clear()
@@ -235,21 +239,15 @@ Public Class ucrReceiverSingle
     End Function
 
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
-        Dim strTemp As String = ""
-        If txtReceiverSingle.Text <> "" Then
-            If bWithQuotes Then
-                strTemp = Chr(34) & txtReceiverSingle.Text & Chr(34)
-            Else
-                strTemp = txtReceiverSingle.Text
-            End If
-        End If
-        Return strTemp
+        Return If(bWithQuotes, Chr(34) & txtReceiverSingle.Text & Chr(34), txtReceiverSingle.Text)
     End Function
 
     Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
-        Dim arrTemp As String() = Nothing
-        arrTemp = {GetVariableNames()}
-        Return arrTemp
+        If bWithQuotes Then
+            Return {strQuotes & txtReceiverSingle.Text & strQuotes}
+        Else
+            Return {txtReceiverSingle.Text}
+        End If
     End Function
 
     Public Function GetDataName() As String
@@ -281,7 +279,6 @@ Public Class ucrReceiverSingle
         If bDisableReceiver Then
             Add("variable", "")
             Me.Enabled = False
-            Selector.RemoveFromVariablesList("variable")
         Else
             Me.Enabled = True
             If txtReceiverSingle.Text = "variable" Then
@@ -331,4 +328,36 @@ Public Class ucrReceiverSingle
     Public Overrides Function GetItemsDataFrames() As List(Of String)
         Return New List(Of String)({strDataFrameName})
     End Function
+
+    ''' <summary>
+    '''  Returns information about the receiver's current selection as specified by 
+    '''  <paramref name="enumTextType"/>.
+    '''  If <paramref name="enumTextType"/> is not specified, returns the receiver's text.
+    '''  If <paramref name="enumTextType"/> is invalid, then throws an exception.
+    ''' </summary>
+    ''' <param name="enumTextType"></param>
+    ''' <returns>Information about the receiver's current selection as specified by 
+    '''     <paramref name="enumTextType"/></returns>
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        If enumTextType Is Nothing Then
+            enumTextType = ucrReceiverSingle.EnumTextType.text
+        End If
+
+        Dim textType As EnumTextType
+        Try
+            textType = DirectCast(enumTextType, EnumTextType)
+        Catch ex As InvalidCastException
+            Throw New InvalidCastException("Invalid text type requested from single receiver.")
+        End Try
+
+        Select Case textType
+            Case ucrReceiverSingle.EnumTextType.isFactor
+                Return If(strCurrDataType = "factor", "TRUE", "FALSE")
+            Case ucrReceiverSingle.EnumTextType.text
+                Return txtReceiverSingle.Text
+        End Select
+
+        Throw New InvalidEnumArgumentException("Unhandled text type requested from single receiver.")
+    End Function
+
 End Class

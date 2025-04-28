@@ -48,7 +48,7 @@ Public Class dlgTwoWayFrequencies
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 415
+        ucrBase.iHelpTopicID = 289
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
@@ -379,12 +379,12 @@ Public Class dlgTwoWayFrequencies
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
             ucrSaveGraph.SetSaveType(RObjectTypeLabel.Summary, strRObjectFormat:=RObjectFormat.Html)
             ucrSaveGraph.SetAssignToIfUncheckedValue("last_summary")
-            ucrSaveGraph.SetCheckBoxText("Save Summary")
+            ucrSaveGraph.SetCheckBoxText("Store Summary")
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjPlot)
             ucrSaveGraph.SetSaveType(RObjectTypeLabel.Graph, strRObjectFormat:=RObjectFormat.Image)
             ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
-            ucrSaveGraph.SetCheckBoxText("Save Graph")
+            ucrSaveGraph.SetCheckBoxText("Store Graph")
         End If
     End Sub
 

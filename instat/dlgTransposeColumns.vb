@@ -105,7 +105,7 @@ Public Class dlgTransposeColumns
         NewDefaultName()
     End Sub
     Private Sub ucrReceiverColumnsToTranspose_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToTranspose.ControlValueChanged
-        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
+        ucrBase.clsRsyntax.GetBeforeCodes().Clear()
         clsGetColumnNamesFunction = ucrReceiverColumnsToTranspose.GetVariables(True).Clone
         clsGetColumnNamesFunction.SetAssignTo("columns")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnNamesFunction)
@@ -137,19 +137,24 @@ Public Class dlgTransposeColumns
         ucrSelectorTransposeColumns.lstAvailableVariable.Columns.Add("Variables")
     End Sub
     Private Sub ucrReceiverVariableNames_Enter(sender As Object, e As EventArgs) Handles ucrReceiverVariableNames.Enter
-        Dim grps As New ListViewGroup
         ClearSelector()
         If Not ucrReceiverColumnsToTranspose.IsEmpty Then
-            If ucrReceiverColumnsToTranspose.GetVariableNamesList(False).Count > 1 Then
-                grps = New ListViewGroup(key:=ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
-                                         headerText:=ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                ucrSelectorTransposeColumns.lstAvailableVariable.Groups.Add(grps)
+            '-------------------------
+            'todo. this code block below requires more refactoring.
+            'it should use the selector functions for adding items instead of accessing the selector controls
+            Dim arrItems As String() = ucrReceiverColumnsToTranspose.GetVariableNamesList(False)
+            If arrItems.Count > 1 Then
+                ucrSelectorTransposeColumns.lstAvailableVariable.Groups.Add(New ListViewGroup(
+                                                                            key:=ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text,
+                                                                            headerText:=ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text))
             End If
-            For j = 0 To ucrReceiverColumnsToTranspose.GetVariableNamesList(False).Count - 1
-                ucrSelectorTransposeColumns.lstAvailableVariable.Items.Add(ucrReceiverColumnsToTranspose.GetVariableNamesList(False)(j))
+
+            For j = 0 To arrItems.Count - 1
+                ucrSelectorTransposeColumns.lstAvailableVariable.Items.Add(arrItems(j))
                 ucrSelectorTransposeColumns.lstAvailableVariable.Items(j).Tag = ucrSelectorTransposeColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-                ucrSelectorTransposeColumns.lstAvailableVariable.Items(j).ToolTipText = ucrReceiverColumnsToTranspose.GetVariableNamesList(False)(0)
+                ucrSelectorTransposeColumns.lstAvailableVariable.Items(j).ToolTipText = arrItems(j)
             Next
+            '-------------------------
         End If
     End Sub
     Private Sub ucrSelectorTransposeColumns_DataFrameChanged() Handles ucrSelectorTransposeColumns.DataFrameChanged

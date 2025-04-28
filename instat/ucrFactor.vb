@@ -189,15 +189,15 @@ Public Class ucrFactor
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub _grdSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles _grdSheet.AfterCellEdit
+    Private Sub _grdSheet_CellEditTextChanging(sender As Object, e As CellEditTextChangingEventArgs) Handles _grdSheet.CellEditTextChanging
 
         Dim bValid As Boolean = True
         'do levels entry validation
         If _grdSheet.ColumnHeaders(e.Cell.Column).Text = DefaultColumnNames.Level Then
-            If Not IsNumeric(e.NewData) Then
+            If Not IsNumeric(e.Text) Then
                 MsgBox("Levels must be numeric values", MsgBoxStyle.Information, "Invalid Value")
                 bValid = False
-            ElseIf e.NewData.Contains(".") Then
+            ElseIf e.Text.Contains(".") Then
                 MsgBox("Levels must not be decimal", MsgBoxStyle.Information, "Invalid Value")
 
                 bValid = False
@@ -207,13 +207,13 @@ Public Class ucrFactor
         If bValid Then
             'set the new data before calling OnControlValueChanged
             'very important especially when writing to the parameter value
-            _grdSheet(e.Cell.Row, e.Cell.Column) = e.NewData
+            _grdSheet(e.Cell.Row, e.Cell.Column) = e.Text
             'this will raise ControlContentsChanged event
             'and also update parameter and R code with the values
             OnControlValueChanged()
             e.Cell.Style.BackColor = Color.Gold
         Else
-            e.EndReason = EndEditReason.Cancel
+        'Todo what will happen if the text is not valid
         End If
 
     End Sub
@@ -414,6 +414,7 @@ Public Class ucrFactor
         clsGetFactorDataFunction.AddParameter("data_name", strDataFrameName)
         clsGetFactorDataFunction.AddParameter("col_name", strFactorVariableName)
         clsGetFactorDataFunction.AddParameter("include_NA_level", If(bIncludeNALevel, "TRUE", "FALSE"))
+        clsConvertToCharFunction.SetPackageName("instatExtras")
         clsConvertToCharFunction.SetRCommand("convert_to_character_matrix")
         clsConvertToCharFunction.AddParameter("data", clsRFunctionParameter:=clsGetFactorDataFunction)
         expDataFrame = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharFunction.ToScript(), bSilent:=True)
@@ -936,4 +937,5 @@ Public Class ucrFactor
         lblSelected.Visible = iSelectCol > 0
         SetToggleButtonSettings()
     End Sub
+
 End Class

@@ -17,6 +17,13 @@
 Imports instat.Translations
 
 Public Class dlgStack
+    Public enumStackMode As String = StackMode.Prepare
+    Public Enum StackMode
+        Prepare
+        Climatic
+    End Enum
+
+
     Private clsUnnestTokensFunction As New RFunction
     Private clsPivotLongerFunction As New RFunction
     Private clsSelectFunction As New RFunction
@@ -39,6 +46,7 @@ Public Class dlgStack
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
@@ -117,8 +125,8 @@ Public Class dlgStack
 
         ucrPnlCarryColumns.AddRadioButton(rdoCarryAllColumns)
         ucrPnlCarryColumns.AddRadioButton(rdoCarryColumns)
-        ucrPnlCarryColumns.AddParameterIsRFunctionCondition(rdoCarryAllColumns, "data")
-        ucrPnlCarryColumns.AddParameterIsROperatorCondition(rdoCarryColumns, "%>%")
+        ucrPnlCarryColumns.AddParameterValuesCondition(rdoCarryAllColumns, "checked", "all_columns")
+        ucrPnlCarryColumns.AddParameterValuesCondition(rdoCarryColumns, "checked", "columns")
 
         ucrInputValuesTo.SetParameter(New RParameter(" values_to", 4))
         ucrInputValuesTo.SetRDefault(Chr(34) & "value" & Chr(34))
@@ -229,6 +237,7 @@ Public Class dlgStack
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
 
         clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
+        clsDummyFunction.AddParameter("checked", "all_columns", iPosition:=1)
 
         clsPivotLongerFunction.SetRCommand("pivot_longer")
         clsPivotLongerFunction.SetPackageName("tidyr")
@@ -245,6 +254,7 @@ Public Class dlgStack
         clsReshapeFunction.AddParameter("direction", Chr(34) & "long" & Chr(34), iPosition:=4)
         clsReshapeFunction.AddParameter("idvar", Chr(34) & "id" & Chr(34), iPosition:=5)
 
+        clsSplitColumnsFunction.SetPackageName("instatExtras")
         clsSplitColumnsFunction.SetRCommand("split_items_in_groups")
         clsSplitColumnsFunction.AddParameter("num", 2)
 
@@ -292,7 +302,6 @@ Public Class dlgStack
         ucrChkDropMissingValues.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputValuesTo.SetRCode(clsPivotLongerFunction, bReset)
         ucrPnlStack.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlCarryColumns.SetRCode(clsPivotLongerFunction, bReset)
         ucrInputDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrChkDropPrefix.SetRCode(clsPivotLongerFunction, bReset)
         ucrFactorInto.SetRCode(clsReshapeFunction, bReset)
@@ -301,6 +310,7 @@ Public Class dlgStack
             ucrReceiverDropValues.SetRCode(clsReshapeFunction, bReset)
             ucrChkDropVariables.SetRCode(clsDummyFunction, bReset)
             ucrReceiverColumnsToBeStack.SetRCode(clsPivotLongerFunction, bReset)
+            ucrPnlCarryColumns.SetRCode(clsDummyFunction, bReset)
         End If
     End Sub
 
@@ -476,6 +486,15 @@ Public Class dlgStack
             clsDummyFunction.AddParameter("drop", "False", iPosition:=0)
         End If
         Excludevariables()
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumStackMode
+            Case StackMode.Prepare
+                ucrBase.iHelpTopicID = 57
+            Case StackMode.Climatic
+                ucrBase.iHelpTopicID = 607
+        End Select
     End Sub
 
     Private Sub Excludevariables()

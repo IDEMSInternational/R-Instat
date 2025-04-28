@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
-Imports RScript
+Imports RInsightF461
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R interface. 
@@ -113,6 +113,9 @@ Public Class RLink
     ''' <summary>   The graph display option (e.g. 'view_output_window' or 'view_separate_window'). </summary>
     Public strGraphDisplayOption As String = "view_output_window"
 
+    ''' <summary> If true then show all the selected columns to the selector listview. </summary>
+    Public bUseColumnSelection As Boolean = False
+
 
     ''' <summary> The current grid (the worksheet that appears similar to a spreadsheet on the 
     ''' left-hand side of the display). </summary>
@@ -129,13 +132,13 @@ Public Class RLink
     Private strRVersionMajorRequired As String = "4"
 
     ''' <summary>   The R version minor required. </summary>
-    Private strRVersionMinorRequired As String = "1"
+    Private strRVersionMinorRequired As String = "4"
 
     ''' <summary>   The R version required. </summary>
-    Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
+    Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".1"
 
     ''' <summary>   The R bundled version. </summary>
-    Private strRBundledVersion As String = "4.1.3"
+    Private strRBundledVersion As String = "4.4.1"
 
     Private clsOutputLogger As clsOutputLogger
 
@@ -197,9 +200,9 @@ Public Class RLink
         Catch ex As Exception
             MsgBox(ex.Message & Environment.NewLine & "Could not establish connection to R." & Environment.NewLine &
                    "R-Instat requires version " & strRVersionRequired & " of R." & Environment.NewLine &
-                   "Note that R-Instat does not work with R below 3.5.0. We recommend using R " & strRBundledVersion &
-                   ".  Try reruning the installation to install R " & strRBundledVersion & " or download R " &
-                   strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/ and restart R-Instat.",
+                   "Note that R-Instat does not work with R below 4.4.1. We recommend using R " & strRBundledVersion &
+                   ".  Try rerunning the installation to install R " & strRBundledVersion & " or download R " &
+                   strRBundledVersion & " from https://cran.r-project.org/bin/windows/base/old/" & strRBundledVersion & "/  and restart R-Instat.",
                    MsgBoxStyle.Critical, "Cannot initialise R connection.")
         End Try
 
@@ -225,7 +228,7 @@ Public Class RLink
                 MsgBox("Could not determine version of R installed on your machine. R-Instat requires version: " & strRVersionRequired & vbNewLine &
                                        "Try uninstalling any versions of R and rerun the installation to install R " & strRVersionRequired & " or download R " &
                                        strRVersionRequired & "From https://cran.r-project.org/bin/windows/base/old/" & strRVersionRequired &
-                                       "And restart R-Instat.",
+                                       " and restart R-Instat.",
                                        MsgBoxStyle.Critical, "R Version error.")
             ElseIf strMajor <> strRVersionMajorRequired OrElse strMinor.Substring(0, 1) < strRVersionMinorRequired Then
                 MsgBox("Your current version of R is outdated. You are currently running R version: " & strMajor & "." & strMinor & Environment.NewLine &
@@ -251,14 +254,23 @@ Public Class RLink
     Public Function GetRSetupScript() As String
         Dim clsSetWd As New RFunction
         Dim clsSource As New RFunction
+        Dim clsSetLibPaths As New RFunction
         Dim strScript As String = ""
 
         clsSetWd.SetRCommand("setwd")
         clsSetWd.AddParameter("dir", Chr(34) & Path.Combine(frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath) & Chr(34)) 'This is bad the wd should be flexible and not automatically set to the instat object directory 
+
         clsSource.SetRCommand("source")
         clsSource.AddParameter("file", Chr(34) & "Rsetup.R" & Chr(34))
 
+        clsSetLibPaths.SetPackageName("instatExtras")
+        clsSetLibPaths.SetRCommand("set_library_paths")
+        clsSetLibPaths.AddParameter("version", Chr(34) & frmMain.GetVersionNumber & Chr(34))
+
         strScript = strScript & clsSetWd.ToScript() & Environment.NewLine
+#If Not DEBUG Then
+        strScript = strScript & clsSetLibPaths.ToScript() & Environment.NewLine
+#End If
         strScript = strScript & clsSource.ToScript() & Environment.NewLine
         strScript = strScript & GetCreateNewDatabookObjectRScript() & Environment.NewLine
 
@@ -622,6 +634,7 @@ Public Class RLink
         Dim strExistingNames As String
         Dim expPrefix As SymbolicExpression
 
+        clsGetDefault.SetPackageName("instatExtras")
         clsGetDefault.SetRCommand("next_default_item")
         clsGetDefault.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
         strExistingNames = GetListAsRString(lstItems)
@@ -643,7 +656,7 @@ Public Class RLink
     '''
     ''' <param name="strScript">    The text to add to the save log file. </param>
     '''--------------------------------------------------------------------------------------------
-    Private Sub AppendToAutoSaveLog(strScript As String)
+    Public Sub AppendToAutoSaveLog(strScript As String)
         Dim strTempFile As String
         Dim i As Integer = 1
         Try
@@ -716,6 +729,162 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Executes <paramref name="clsRStatement"/>. If it is not an assignment 
+    '''             statement, then attempts to display the output.</summary>
+    '''
+    ''' <param name="clsRStatement">  The R code statement to execute </param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub RunRStatement(clsRStatement As RStatement)
+
+        'if there is no script to run then just ignore and exit sub
+        If String.IsNullOrWhiteSpace(clsRStatement.Text) Then
+            Exit Sub
+        End If
+
+        Try
+            Dim strOutput As String = ""
+
+            'if not an assignment operation, then capture the output
+            If IsStatementViewObject(clsRStatement.TextNoFormatting) Then
+                strOutput = GetFileOutput(clsRStatement.TextNoFormatting, bSilent:=False,
+                                      bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
+            ElseIf Not clsRStatement.IsAssignment _
+                AndAlso Not String.IsNullOrWhiteSpace(clsRStatement.TextNoFormatting) Then
+                strOutput = GetFileOutput("instatExtras::view_object_data(object = " _
+                                          & clsRStatement.TextNoFormatting _
+                                          & " , object_format = 'text' )", bSilent:=False,
+                                          bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
+            Else
+                Evaluate(clsRStatement.Text, bSilent:=False, bSeparateThread:=False,
+                         bShowWaitDialogOverride:=Nothing)
+            End If
+
+            ' Add output to logger
+            clsOutputLogger.AddOutput(clsRStatement.Text, strOutput, bAsFile:=True,
+                        bDisplayOutputInExternalViewer:=clsRStatement.TextNoFormatting.StartsWith("instatExtras::view_object_data"))
+
+            ' Log the script
+            LogScript(clsRStatement.Text.TrimEnd(vbCr, vbLf))
+
+        Catch e As Exception
+            MsgBox(e.Message & Environment.NewLine &
+                   "The error occurred in attempting to run the following R command:" &
+                   Environment.NewLine & clsRStatement.Text, MsgBoxStyle.Critical,
+                   "Error running R command")
+        End Try
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> This method executes the <paramref name="strScript"/> R script and displays 
+    '''           the output as text or graph (determined by <paramref name="strScript"/>).
+    '''           <para>R commands may be split over multiple lines. This is only allowed if the  
+    '''           non-final line ends with '+', ',', or '%>%'; or there are one or more brackets/
+    '''           quotations that have not been closed.
+    '''           This function is named '...FromWindow' because it's designed to execute scripts 
+    '''           entered by a human from a dialog window (e.g. a script window). These scripts 
+    '''           may contain R commands split over multiple lines to make the commands more 
+    '''           readable.</para><para>
+    '''           </para>
+    ''' </summary>
+    ''' <param name="strScript">    The R script to execute.</param>
+    ''' <param name="strComment">   The comment to prefix to the script.</param>
+    '''--------------------------------------------------------------------------------------------
+    Public Sub RunScriptFromWindow(strScript As String, strComment As String)
+
+        If String.IsNullOrWhiteSpace(strScript) Then
+            Exit Sub
+        End If
+
+        'Prefix comment to script
+        Dim strRStatement As String = ""
+        Dim strRStatementComment As String = If(String.IsNullOrEmpty(strComment), "", GetFormattedComment(strComment))
+
+        'for each line in script
+        For Each strScriptLine As String In strScript.Split(Environment.NewLine)
+
+            'if line is empty or only whitespace then ignore line
+            Dim strTrimmedLine As String = strScriptLine.Trim(vbLf).Trim()
+            If strTrimmedLine.Length <= 0 Then
+                Continue For
+            End If
+
+            'find any comments (character '#' and anything after)
+            Dim iCommentPos As Integer = strTrimmedLine.IndexOf("#")
+            Select Case iCommentPos
+                Case 0      'a normal comment line (starts with '#')
+                    strRStatementComment &= If(String.IsNullOrEmpty(strRStatementComment), "", Environment.NewLine) _
+                                            & strTrimmedLine
+                    Continue For
+                Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
+                    strRStatementComment &= If(String.IsNullOrEmpty(strRStatementComment), "", Environment.NewLine) _
+                                            & strTrimmedLine.Substring(strTrimmedLine.IndexOf("#"c))
+                    strTrimmedLine = strTrimmedLine.Substring(0, iCommentPos).Trim()
+            End Select
+
+            'else append line of script to command
+            strRStatement &= If(String.IsNullOrEmpty(strRStatement), "", Environment.NewLine) & strTrimmedLine
+
+            'if line ends in a '+', ',', or '%>%'; or there are open brackets; or open quotations, 
+            '    then assume command is not complete
+            Dim cLastChar As Char = strTrimmedLine.Last
+            Dim strLast3Chars As String = ""
+            Dim iNumOpenRound As Integer = strRStatement.Where(Function(c) c = "("c).Count
+            Dim iNumClosedRound As Integer = strRStatement.Where(Function(c) c = ")"c).Count
+            Dim iNumOpenCurlies As Integer = strRStatement.Where(Function(c) c = "{"c).Count
+            Dim iNumClosedCurlies As Integer = strRStatement.Where(Function(c) c = "}"c).Count
+            Dim iNumDoubleQuotes As Integer = strRStatement.Where(Function(c) c = """"c).Count
+            If strTrimmedLine.Length >= 3 Then
+                strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
+            End If
+            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" _
+                    OrElse iNumOpenRound <> iNumClosedRound _
+                    OrElse iNumOpenCurlies <> iNumClosedCurlies _
+                    OrElse iNumDoubleQuotes Mod 2 Then
+                Continue For
+            End If
+
+            'We now have what we think is a complete R statement, so try and execute it
+            Try
+                Dim strOutput As String = ""
+                Dim bAsFile As Boolean = True
+                Dim bDisplayOutputInExternalViewer As Boolean = False
+
+                If IsStatementViewObject(strRStatement) Then
+                    strOutput = GetFileOutput(strRStatement, False, False, Nothing)
+                    'if statement generates a view_object then display in external viewer (maximised)
+                    bDisplayOutputInExternalViewer = strRStatement.Contains("view_object_data")
+                ElseIf IsStatementPrint(strRStatement) Then
+                    bAsFile = False
+                    Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
+                ElseIf Not IsStatementAssignment(strRStatement) Then 'if not an assignment operation, then capture the output
+                    Dim strRStatementAsSingleLine As String = strRStatement.Replace(vbCr, String.Empty)
+                    strRStatementAsSingleLine = strRStatementAsSingleLine.Replace(vbLf, String.Empty)
+                    'wrap final command inside view_object_data just in case there is an output object
+                    strOutput = GetFileOutput("instatExtras::view_object_data(object = " & strRStatementAsSingleLine & " , object_format = 'text' )", False, False, Nothing)
+                Else
+                    Evaluate(strRStatement, bSilent:=False, bSeparateThread:=False, bShowWaitDialogOverride:=Nothing)
+                End If
+
+                clsOutputLogger.AddOutput(If(String.IsNullOrEmpty(strRStatementComment), "",
+                        strRStatementComment & Environment.NewLine) & strRStatement,
+                        strOutput, bAsFile, bDisplayOutputInExternalViewer)
+                LogScript(strRStatement, strRStatementComment)
+
+            Catch e As Exception
+                MsgBox(e.Message & Environment.NewLine &
+                       "The error occurred in attempting to run the following R command(s):" &
+                       Environment.NewLine &
+                       strRStatement, MsgBoxStyle.Critical, "Error running R command(s)")
+            End Try
+
+            strRStatement = ""
+            strRStatementComment = ""
+        Next
+
+        frmMain.UpdateAllGrids()
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
     ''' <summary>
     ''' This method executes the <paramref name="strScript"/> R script(s) and displays the output. The
     ''' output may be displayed as text, graph or html (see <paramref name="iCallType"/>).
@@ -767,7 +936,8 @@ Public Class RLink
                          Optional bSeparateThread As Boolean = True,
                          Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing,
                          Optional bUpdateGrids As Boolean = True,
-                         Optional bSilent As Boolean = False)
+                         Optional bSilent As Boolean = False,
+                         Optional bSkipScriptAndOutput As Boolean = False)
 
         'if there is no script to run then just ignore and exit sub
         If String.IsNullOrWhiteSpace(strScript) Then
@@ -794,15 +964,11 @@ Public Class RLink
             If arrExecutableRScriptLines.Length > 0 Then
                 'get the last R script command. todo, this should eventually use the RScript library functions to identify the last R script command
                 Dim strLastScript As String = arrExecutableRScriptLines.Last()
-                If strLastScript.StartsWith(strInstatDataObject & "$get_object_data") OrElse
-                strLastScript.StartsWith(strInstatDataObject & "$get_last_object_data") OrElse
-                strLastScript.StartsWith("view_object_data") Then
-
+                If IsStatementViewObject(strLastScript) Then
                     strOutput = GetFileOutput(strScript, bSilent, bSeparateThread, bShowWaitDialogOverride)
                     'if last function is view_object then display in external viewer (maximised)
                     bDisplayOutputInExternalViewer = strLastScript.Contains("view_object_data")
-
-                ElseIf strLastScript.StartsWith("print") Then
+                ElseIf IsStatementPrint(strLastScript) Then
                     bAsFile = False
                     Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 ElseIf iCallType = 0 Then
@@ -810,10 +976,9 @@ Public Class RLink
                     bAsFile = False
                     Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                 ElseIf iCallType = 1 OrElse iCallType = 4 Then
-                    'todo. this is used by the calculator dialog
-                    'todo.  icall types 1 and 4 seem not to be used anywhere? remove this block? 
+                    'this is used by the calculator dialog
                     'else if script output should be stored in a temp variable
-                    ' TODO SJL In RInstat, iCallType only seems to be 0, 2 or 3. Are icall types 1 and 4 used?
+                    ' TODO SJL In RInstat, iCallType only seems to be -1, 0, 1, 2 or 3. Is icallType 4 used?
                     bAsFile = False
                     Dim strTempAssignTo As String = ".temp_val"
                     'TODO check this is valid syntax in all cases
@@ -827,7 +992,7 @@ Public Class RLink
                     'else if script output should not be ignored or not stored as an object or variable
 
                     'if output should be stored as a variable just execute the script
-                    If arrExecutableRScriptLines.Last().Contains("<-") Then
+                    If IsStatementAssignment(arrExecutableRScriptLines.Last()) Then
                         Evaluate(strScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
                     Else
                         'else capture the output as plain text
@@ -838,16 +1003,18 @@ Public Class RLink
                         End If
 
                         If bSuccess Then
-                            strOutput = GetFileOutput("view_object_data(object = " & arrExecutableRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
+                            strOutput = GetFileOutput("instatExtras::view_object_data(object = " & arrExecutableRScriptLines.Last() & " , object_format = 'text' )", bSilent, bSeparateThread, bShowWaitDialogOverride)
                         End If
                     End If
 
                 End If
             End If
 
+            If Not bSkipScriptAndOutput Then
+                ' If strOutput is empty or does not contain valid HTML files, add strOutput itself as an output
+                clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
+            End If
 
-            'log script and output
-            clsOutputLogger.AddOutput(strScriptWithComment, strOutput, bAsFile, bDisplayOutputInExternalViewer)
 
         Catch e As Exception
             MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
@@ -862,102 +1029,33 @@ Public Class RLink
     ''' <summary>
     ''' Gets the file path name if file is available and has contents, else returns an empty string
     ''' </summary>
-    ''' <param name="strScript">Script that produces a file output</param>
+    ''' <param name="strScript">Script that produces a file output. The last line of the script 
+    '''     must be a single line R statement that generates output.</param>
     ''' <param name="bSilent"></param>
     ''' <param name="bSeparateThread"></param>
     ''' <param name="bShowWaitDialogOverride"></param>
     ''' <returns>file path name if file is avaialble and has contents else empty string</returns>
     Private Function GetFileOutput(strScript As String, bSilent As Boolean, bSeparateThread As Boolean, bShowWaitDialogOverride As Nullable(Of Boolean)) As String
-        Dim strFilePath As String = ""
+        Dim strFilesPath As String = ""
         Dim strTempAssignTo As String = ".temp_val"
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strNewAssignedToScript As String = ConstructAssignTo(strTempAssignTo, strScript)
         Evaluate(strNewAssignedToScript, bSilent:=bSilent, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-        expTemp = GetSymbol(strTempAssignTo, bSilent:=bSilent)
+        'get file path. If not found then silently return nothing
+        expTemp = GetSymbol(strTempAssignTo, bSilent:=True)
         Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
         If expTemp IsNot Nothing Then
-            'get the file path name, check if it exists and whether it has contents
-            'if not, just return empty file path
-            strFilePath = String.Join(Environment.NewLine, expTemp.AsCharacter())
-            If Not File.Exists(strFilePath) OrElse New FileInfo(strFilePath).Length = 0 Then
-                strFilePath = ""
-            End If
+            ' Convert CharacterVector to String() array
+            Dim arrFilesPath As String() = expTemp.AsCharacter().Select(Function(x) x.ToString()).ToArray()
+
+            ' Filter out invalid file paths
+            arrFilesPath = arrFilesPath.Where(Function(path) File.Exists(path) AndAlso New FileInfo(path).Length > 0).ToArray()
+
+            ' Join the valid file paths with newline characters
+            strFilesPath = String.Join(Environment.NewLine, arrFilesPath)
         End If
-        Return strFilePath
-    End Function
 
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary> This method executes the <paramref name="strNewScript"/> R script and displays 
-    '''           the output as text or graph (determined by <paramref name="strNewScript"/>).
-    '''           <para>R commands may be split over multiple lines. This is only allowed if the  
-    '''           non-final line ends with '+', ',', or '%>%'; or there are one or more '{'
-    '''           brackets that have not been closed with an equivalent '}' bracket.
-    '''           This function is named '...FromWindow' because it's designed to execute scripts 
-    '''           entered by a human from a dialog window (e.g. a script window). These scripts 
-    '''           may contain R commands split over multiple lines to make the commands more 
-    '''           readable.</para>
-    ''' </summary>
-    ''' <param name="strNewScript">    The R script to execute.</param>
-    ''' <param name="strNewComment">   Shown as a comment. If this parameter is "" then shows 
-    '''                                <paramref name="strNewScript"/> as the comment.</param>
-    ''' 
-    ''' <returns> Any text at the end of <paramref name="strNewScript"/> that was not executed.
-    '''           If all the text in <paramref name="strNewScript"/> was executed then returns "".
-    '''           </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function RunScriptFromWindow(strNewScript As String, strNewComment As String) As String
-        Dim strScriptCmd As String = ""
-
-
-        'for each line in script
-        For Each strScriptLine As String In strNewScript.Split(Environment.NewLine)
-            'remove any comments (character '#' and anything after)
-            Dim iCommentPos As Integer = strScriptLine.IndexOf("#")
-            Select Case iCommentPos
-                Case 0      'a normal comment line (starts with '#')
-                    Continue For
-                Case Is > 0 ' a line with an appended comment (e.g. 'x <- 1 # generate data' converted to 'x <- 1 ')
-                    strScriptLine = strScriptLine.Substring(0, iCommentPos - 1)
-            End Select
-
-            'if line is empty or only whitespace then ignore line
-            Dim strTrimmedLine As String = strScriptLine.Trim(vbLf).Trim()
-            If strTrimmedLine.Length <= 0 Then
-                Continue For
-            End If
-
-            'else append line of script to command
-            strScriptCmd &= strScriptLine
-
-            'if line ends in a '+', ',', or '%>%'; or there are open curly braces; or open quotations, 
-            '    then assume command is not complete
-            Dim cLastChar As Char = strTrimmedLine.Last
-            Dim strLast3Chars As String = ""
-            Dim iNumOpenRound As Integer = strScriptCmd.Where(Function(c) c = "("c).Count
-            Dim iNumClosedRound As Integer = strScriptCmd.Where(Function(c) c = ")"c).Count
-            Dim iNumOpenCurlies As Integer = strScriptCmd.Where(Function(c) c = "{"c).Count
-            Dim iNumClosedCurlies As Integer = strScriptCmd.Where(Function(c) c = "}"c).Count
-            Dim iNumDoubleQuotes As Integer = strScriptCmd.Where(Function(c) c = """"c).Count
-            If strTrimmedLine.Length >= 3 Then
-                strLast3Chars = strTrimmedLine.Substring(strTrimmedLine.Length - 3)
-            End If
-            If cLastChar = "+" OrElse cLastChar = "," OrElse strLast3Chars = "%>%" _
-                    OrElse iNumOpenRound <> iNumClosedRound _
-                    OrElse iNumOpenCurlies <> iNumClosedCurlies _
-                    OrElse iNumDoubleQuotes Mod 2 Then
-                Continue For
-            End If
-
-            'else execute command
-            Dim iCallType As Integer = 5
-            If strScriptCmd.Contains(strInstatDataObject & "$get_graphs") Then
-                iCallType = 3
-            End If
-            RunScript(strScriptCmd.Trim(vbLf), iCallType:=iCallType, strComment:=strNewComment, bSeparateThread:=False, bSilent:=False)
-            strScriptCmd = ""
-            strNewComment = ""
-        Next
-        Return strScriptCmd
+        Return strFilesPath
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -1310,6 +1408,8 @@ Public Class RLink
             Select Case strType
                 Case "column"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_column_names")
+                    'TODO. why not apply or not the column selection at the R level.
+                    clsGetItems.AddParameter("use_current_column_selection", If(bUseColumnSelection, "TRUE", "FALSE"))
                 Case "metadata"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_metadata_fields")
                 Case "filter"
@@ -1333,6 +1433,8 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_link_names")
                 Case "key"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_key_names")
+                Case "scalar"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_scalar_names")
                 Case "database_variables"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_database_variable_names")
                     clsGetItems.AddParameter("query", Chr(34) & strDatabaseQuery & Chr(34))
@@ -1438,6 +1540,23 @@ Public Class RLink
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub LogScript(strScript As String, Optional strComment As String = "")
+
+        Dim strScriptWithComment As String =
+                If(String.IsNullOrWhiteSpace(strComment),
+                    "", strComment & Environment.NewLine) &
+                If(String.IsNullOrWhiteSpace(strScript),
+                    "",
+                    strScript & Environment.NewLine)
+
+        If String.IsNullOrWhiteSpace(strScriptWithComment) Then
+            Exit Sub
+        End If
+
+        frmMain.ucrScriptWindow.LogText(strScriptWithComment)
+        AppendToAutoSaveLog(strScriptWithComment)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -2004,6 +2123,7 @@ Public Class RLink
         clsGetColumn.SetRCommand(strInstatDataObject & "$get_columns_from_data")
         clsGetColumn.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
         clsGetColumn.AddParameter("col_names", Chr(34) & strColumn & Chr(34))
+        clsIsBinary.SetPackageName("instatExtras")
         clsIsBinary.SetRCommand("is.binary")
         clsIsBinary.AddParameter("x", clsRFunctionParameter:=clsGetColumn)
         expBinary = RunInternalScriptGetValue(clsIsBinary.ToScript())
@@ -2094,104 +2214,25 @@ Public Class RLink
         Return strReconstructedComment
     End Function
 
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   
-    ''' Gets the list of clsRParameters from the <paramref name="strFunctionName"/> function 
-    ''' definition. 
-    ''' For example, the function "str_split(string, pattern, n = Inf, simplify = FALSE)" returns 
-    ''' the following parameters:
-    ''' <list type="bullet">
-    '''     <item><description>
-    '''             clsParameter 1: Argument Name ="string" , Parameter position = 0 , Default value = NOTHING 
-    '''     </description></item><item><description>
-    '''             clsParameter 2: Argument Name = "patterm" , Parameter position = 1 , Default value = NOTHING
-    '''     </description></item><item><description>
-    '''             clsParameter 3: Argument Name="n" , Parameter position = 2 , Default value = "Inf"
-    '''     </description></item><item><description>
-    '''             clsParameter 4: Argument Name="simplify" , Parameter position = 3 , Default value = "FALSE")
-    '''     </description></item>
-    ''' </list></summary>
-    ''' 
-    ''' <param name="strFunctionName">  The function name provided. </param>
-    '''
-    ''' <returns>   The list of clsRParameters. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Private Function GetRFunctionDefinitionParameters(strFunctionName As String) As List(Of clsRParameter)
-        'Note: this function is not currently called but it will be used in future
-        '      functionality to populate dialogs from script.
-        '      Please do not delete this function. (@lloyddewit 24/11/21)
-
-        'temporary object that retrieves the output from the environment
-        Dim strTempAssignTo As String = ".temp_func"
-        Dim expTemp As SymbolicExpression
-        Dim clsFormalsFunction As New RFunction
-        Dim lstRParameters As New List(Of clsRParameter)
-        Dim clsAsListFunction As New RFunction
-
-        clsAsListFunction.SetRCommand("as.list")
-        clsAsListFunction.AddParameter(clsRFunctionParameter:=clsFormalsFunction, bIncludeArgumentName:=False, iPosition:=0)
-
-        'The 'formals' function returns the parameters for a specified function. 
-        'for example, for the function "str_split(string, pattern, n = Inf, simplify = FALSE)", formals returns
-        '    $string
-        '    $pattern 
-        '    $n 
-        '    [1] Inf 
-        '    $simplify 
-        '    [1] FALSE 
-        clsFormalsFunction.SetRCommand("formals")
-        clsFormalsFunction.AddParameter(strParameterValue:=strFunctionName, bIncludeArgumentName:=False, iPosition:=0)
-
-        'TODO check that the fuction name provided has no pening and closing brackets at the end
-        '?QUESTION /CLARIFICATION Parameters value fror the function  ?gt::cols_merge() are being split into different parts
-        If Not Evaluate(strTempAssignTo & " <- " & "capture.output(" & clsAsListFunction.ToScript() & ")", bSilent:=True) Then
-            'Error getting the parameters either the function name provided is incorrect/package containing the function isn't loaded 
-            Return Nothing
-        End If
-        expTemp = GetSymbol(strTempAssignTo)
-        Evaluate("rm(" & strTempAssignTo & ")", bSilent:=True)
-        If expTemp Is Nothing Then
-            Return Nothing
-        End If
-        Dim iNewArgPosition As Integer = 0
-        'parameter name position
-        Dim iParameterName As Integer = 0
-        'parameter value position
-        Dim iParameterValue As Integer = 1
-        While (iParameterName < expTemp.AsCharacter().Length)
-            Dim clsNewRParameter As New clsRParameter
-
-            'Assign the parameter Name
-            clsNewRParameter.strArgName = expTemp.AsCharacter(iParameterName).TrimStart("$")
-            'Adding the parameter value
-            'check to remove the [1] notation before some parameter values
-            If expTemp.AsCharacter(iParameterValue).Contains("[1]") Then
-                Dim strcleanArgument As String = expTemp.AsCharacter(iParameterValue).Remove(expTemp.AsCharacter(iParameterValue).IndexOf("["), 3)
-                clsNewRParameter.clsArgValueDefault = New clsRScript(strcleanArgument).lstRStatements(0).clsElement
-            Else
-                'Empty String are Not accepted hence the modification below
-                If String.IsNullOrEmpty(expTemp.AsCharacter(iParameterValue)) Then
-                    clsNewRParameter.clsArgValueDefault = New clsRScript("NODEFAULTVALUE").lstRStatements(0).clsElement
-                Else
-                    clsNewRParameter.clsArgValueDefault = New clsRScript(expTemp.AsCharacter(iParameterValue)).lstRStatements(0).clsElement
-                End If
-
-            End If
-            'Assign the parameter Value
-            clsNewRParameter.iArgPosDefinition = iNewArgPosition
-
-            'TEMPORARY FUNCTIONALITY FOR PRESENTATION
-            Console.WriteLine("PARAMETER" & clsNewRParameter.iArgPosDefinition)
-            Console.WriteLine("..strArgumentName:" & clsNewRParameter.strArgName)
-            Console.WriteLine("..strArgumentValue:" & clsNewRParameter.clsArgValueDefault.strTxt)
-            Console.WriteLine("..ArgumentPosition:" & clsNewRParameter.iArgPosDefinition)
-
-            iNewArgPosition += 1
-            iParameterName += 3
-            iParameterValue += 3
-            lstRParameters.Add(clsNewRParameter)
-        End While
-
-        Return lstRParameters
+    Private Function IsStatementAssignment(strRStatement As String) As Boolean
+        Return strRStatement.Contains("<-")
     End Function
+
+    Private Function IsStatementPrint(strRStatement As String) As Boolean
+        Dim strRStatementTrimmed As String = TrimStartRStatement(strRStatement)
+        Return strRStatementTrimmed.StartsWith("print")
+    End Function
+
+    Private Function IsStatementViewObject(strRStatement As String) As Boolean
+        Dim strRStatementTrimmed As String = TrimStartRStatement(strRStatement)
+        Return strRStatementTrimmed.StartsWith(strInstatDataObject & "$get_object_data") _
+               OrElse strRStatementTrimmed.StartsWith(strInstatDataObject & "$get_last_object_data") _
+               OrElse strRStatementTrimmed.StartsWith("instatExtras::view_object_data")
+    End Function
+
+    Private Function TrimStartRStatement(strRStatement As String) As String
+        Dim arrTrimChars As Char() = {" "c, vbTab, vbLf, vbCr}
+        Return strRStatement.TrimStart(arrTrimChars)
+    End Function
+
 End Class

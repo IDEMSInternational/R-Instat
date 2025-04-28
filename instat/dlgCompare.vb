@@ -48,7 +48,7 @@ Public Class dlgCompare
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 562
+        ucrBase.iHelpTopicID = 634
         ucrPnlCompare.AddRadioButton(rdoDifferences)
         ucrPnlCompare.AddRadioButton(rdoAnomalies)
         ucrPnlCompare.AddParameterPresentCondition(rdoDifferences, "manipulations", False)
@@ -139,11 +139,11 @@ Public Class dlgCompare
         ucrSaveSecondCol.Reset()
 
         'group_by_station_day_of_year
-        clsGroupByStationWithinYear.SetRCommand("instat_calculation$new")
+        clsGroupByStationWithinYear.SetRCommand("instatCalculations::instat_calculation$new")
         clsGroupByStationWithinYear.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=0)
         clsGroupByStationWithinYear.SetAssignTo("grouping")
 
-        clsBiasCalculation.SetRCommand("instat_calculation$new")
+        clsBiasCalculation.SetRCommand("instatCalculations::instat_calculation$new")
         clsBiasCalculation.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsBiasCalculation.AddParameter("function_exp", clsROperatorParameter:=clsDiffOperator, iPosition:=1)
         clsBiasCalculation.AddParameter("result_name", Chr(34) & "bias" & Chr(34), iPosition:=2)
@@ -153,7 +153,7 @@ Public Class dlgCompare
         clsDiffOperator.SetOperation("-")
         clsDiffOperator.bToScriptAsRString = True
 
-        clsAbsDevCalculation.SetRCommand("instat_calculation$new")
+        clsAbsDevCalculation.SetRCommand("instatCalculations::instat_calculation$new")
         clsAbsDevCalculation.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsAbsDevCalculation.AddParameter("function_exp", clsRFunctionParameter:=clsAbsDevFunction, iPosition:=1)
         clsAbsDevCalculation.AddParameter("result_name", Chr(34) & "absdev" & Chr(34), iPosition:=2)
@@ -166,7 +166,7 @@ Public Class dlgCompare
         clsAbsDevFunction.bToScriptAsRString = True
         clsAbsDevFunction.AddParameter("diff", clsROperatorParameter:=clsMinusOperator, bIncludeArgumentName:=False)
 
-        clsCombinedCalculation.SetRCommand("instat_calculation$new")
+        clsCombinedCalculation.SetRCommand("instatCalculations::instat_calculation$new")
         clsCombinedCalculation.AddParameter("type", Chr(34) & "combination" & Chr(34), iPosition:=0)
         clsCombinedCalculation.AddParameter("sub_calculation", clsRFunctionParameter:=clsListFunction, iPosition:=2)
         clsCombinedCalculation.SetAssignTo("combined_calculation")
@@ -178,7 +178,7 @@ Public Class dlgCompare
         clsListManipulation.SetRCommand("list")
 
         'Anomalies calculations
-        clsSateliteAnomalies.SetRCommand("instat_calculation$new")
+        clsSateliteAnomalies.SetRCommand("instatCalculations::instat_calculation$new")
         clsSateliteAnomalies.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSateliteAnomalies.AddParameter("function_exp", clsROperatorParameter:=clsSateliteMinusOperator, iPosition:=1)
         clsSateliteAnomalies.AddParameter("result_name", Chr(34) & "satellite_anom" & Chr(34), iPosition:=2)
@@ -192,7 +192,7 @@ Public Class dlgCompare
         clsSateliteMeanFunction.SetRCommand("mean")
         clsSateliteMeanFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
 
-        clsStationAnomalies.SetRCommand("instat_calculation$new")
+        clsStationAnomalies.SetRCommand("instatCalculations::instat_calculation$new")
         clsStationAnomalies.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsStationAnomalies.AddParameter("function_exp", clsROperatorParameter:=clsStationMinusOperator, iPosition:=1)
         clsStationAnomalies.AddParameter("result_name", Chr(34) & "station_anom" & Chr(34), iPosition:=2)

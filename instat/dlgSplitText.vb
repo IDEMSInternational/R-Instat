@@ -16,9 +16,15 @@
 
 Imports instat.Translations
 Public Class dlgSplitText
+    Public enumSplitMode As String = SplitMode.Prepare
+    Public Enum SplitMode
+        Prepare
+        Climatic
+    End Enum
+
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsTextComponentsFixed, clsTextComponentsMaximum, clsStringCollFunction As New RFunction
+    Private clsTextComponentsFixed, clsCurrentNewColumnFunction, clsSquishFunction, clsTextComponentsMaximum, clsStringCollFunction As New RFunction
     Private clsBinaryColumns As New RFunction
     Private clsSplitDummyFunction As New RFunction
     Private clsPatternDummyFunction As New RFunction
@@ -33,6 +39,7 @@ Public Class dlgSplitText
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
@@ -67,6 +74,7 @@ Public Class dlgSplitText
 
         ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         dctPatternPairs.Add("Space ( )", Chr(34) & " " & Chr(34))
+        dctPatternPairs.Add("Spaces ( )", Chr(34) & " " & Chr(34) & " ") ' Adds an invisible difference
         dctPatternPairs.Add("Period .", Chr(34) & "." & Chr(34))
         dctPatternPairs.Add("Comma ,", Chr(34) & "," & Chr(34))
         dctPatternPairs.Add("Colon :", Chr(34) & ":" & Chr(34))
@@ -98,6 +106,8 @@ Public Class dlgSplitText
         clsStringCollFunction = New RFunction
         clsSplitDummyFunction = New RFunction
         clsPatternDummyFunction = New RFunction
+        clsSquishFunction = New RFunction
+        clsCurrentNewColumnFunction = New RFunction
 
         ucrSelectorSplitTextColumn.Reset()
         ucrSaveColumn.Reset()
@@ -126,6 +136,9 @@ Public Class dlgSplitText
         clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
         clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
 
+        clsSquishFunction.SetPackageName("stringr")
+        clsSquishFunction.SetRCommand("str_squish")
+
         clsTextComponentsFixed.SetAssignTo(ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText())
         clsTextComponentsMaximum.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
         clsBinaryColumns.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
@@ -133,19 +146,16 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("string", 0), iAdditionalPairNo:=1)
-        ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("var", 0), iAdditionalPairNo:=2)
-
         ucrSaveColumn.AddAdditionalRCode(clsTextComponentsMaximum, iAdditionalPairNo:=1)
         ucrSaveColumn.AddAdditionalRCode(clsBinaryColumns, iAdditionalPairNo:=2)
 
-        ucrReceiverSplitTextColumn.SetRCode(clsTextComponentsFixed, bReset)
         ucrInputPattern.SetRCode(clsPatternDummyFunction, bReset)
         ucrNudPieces.SetRCode(clsTextComponentsFixed, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsSplitDummyFunction, bReset)
         ucrPnlSplitText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlTextComponents.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveColumn.SetRCode(clsTextComponentsFixed, bReset)
+        SetTextSplittingParameters()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -162,6 +172,16 @@ Public Class dlgSplitText
         TestOKEnabled()
         sdgConstructRegexExpression.ucrReceiverForRegex.Clear()
     End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumSplitMode
+            Case SplitMode.Prepare
+                ucrBase.iHelpTopicID = 344
+            Case SplitMode.Climatic
+                ucrBase.iHelpTopicID = 601
+        End Select
+    End Sub
+
 
     Private Sub cmdAddkeyboard_Click(sender As Object, e As EventArgs) Handles cmdAddkeyboard.Click
         sdgConstructRegexExpression.ShowDialog()
@@ -219,11 +239,34 @@ Public Class dlgSplitText
                 ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
             End If
         End If
+        SetTextSplittingParameters()
     End Sub
 
     Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverSplitTextColumn.ControlValueChanged, ucrInputPattern.ControlValueChanged, ucrInputRegexPattern.ControlValueChanged
+        clsCurrentNewColumnFunction = ucrReceiverSplitTextColumn.GetVariables()
+        clsCurrentNewColumnFunction.SetAssignTo(ucrReceiverSplitTextColumn.GetVariableNames(False))
+
         ChangeParametersValues()
         SetVisibleAddKeyboardButton()
+        SetTextSplittingParameters()
+    End Sub
+
+    Private Sub SetTextSplittingParameters()
+        clsSquishFunction.RemoveParameterByName("split")
+        clsTextComponentsMaximum.RemoveParameterByName("string")
+        clsTextComponentsFixed.RemoveParameterByName("string")
+        clsBinaryColumns.RemoveParameterByName("string")
+        Select Case ucrInputPattern.GetText()
+            Case "Spaces ( )"
+                clsSquishFunction.AddParameter("split", clsRFunctionParameter:=clsCurrentNewColumnFunction, bIncludeArgumentName:=False, iPosition:=0)
+                clsTextComponentsFixed.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
+                clsTextComponentsMaximum.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
+                clsBinaryColumns.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
+            Case Else
+                clsTextComponentsFixed.AddParameter("string", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
+                clsTextComponentsMaximum.AddParameter("string", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
+                clsBinaryColumns.AddParameter("string", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
+        End Select
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrPnlSplitText.ControlContentsChanged

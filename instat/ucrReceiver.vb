@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Windows.Documents
 Imports instat
 Imports instat.Translations
 Imports RDotNet
@@ -98,7 +99,7 @@ Public Class ucrReceiver
         bUpdateRCodeFromControl = True
     End Sub
 
-    Public Overridable Sub AddSelected()
+    Public Overridable Sub AddSelectedSelectorVariables()
 
     End Sub
 
@@ -133,7 +134,7 @@ Public Class ucrReceiver
     End Sub
 
     'This refers to the selector list of columns
-    Public Overridable Sub RemoveAnyVariablesNotInList()
+    Public Overridable Sub RemoveAnyVariablesNotInSelector()
 
     End Sub
 
@@ -150,18 +151,15 @@ Public Class ucrReceiver
     End Property
 
     Public Overridable Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
-        Dim clsGetVariablesFunc As New RFunction
-        Return clsGetVariablesFunc
+        Return New RFunction
     End Function
 
     Public Overridable Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
-        Dim strVarNames As String = ""
-        Return strVarNames
+        Return ""
     End Function
 
     Public Overridable Function GetVariableNamesList(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
-        Dim strVarNames As String() = Nothing
-        Return strVarNames
+        Return Nothing
     End Function
 
     Public Overridable Sub SetMeAsReceiver()
@@ -419,6 +417,8 @@ Public Class ucrReceiver
                 strItemsParameterNameInRFunction = "link_name"
             Case "calculation"
                 strItemsParameterNameInRFunction = "calculation_name"
+            Case "scalar"
+                strItemsParameterNameInRFunction = "scalar_name"
         End Select
         If IsCurrentReceiver() Then
             Selector.LoadList()
@@ -456,7 +456,7 @@ Public Class ucrReceiver
         If clsTempParameter IsNot Nothing Then
             If bChangeParameterValue Then
                 If bParameterIsString AndAlso clsTempParameter.bIsString Then
-                    If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) Then
+                    If (strValuesToIgnore IsNot Nothing AndAlso strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) OrElse Not String.IsNullOrEmpty(clsTempParameter.strArgumentValue) Then
                         lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue, strPackageName:=strVariablesListPackageName, strFunctionName:=strVariablesListFunctionName)
                     End If
                     'TODO how to recover the data frame name in this case
@@ -475,16 +475,34 @@ Public Class ucrReceiver
                 End If
                 Clear()
                 If lstCurrentVariables IsNot Nothing Then
-                    For Each strTemp As String In lstCurrentVariables
+
+                    strTempDataName = If(Selector?.strCurrentDataFrame?.Trim() <> "", Selector.strCurrentDataFrame, "data_names")
+
+                    If TypeOf Me Is ucrReceiverMultiple Then
+
                         'TODO This only works if the selector is updated before receivers and dialog only uses one data frame!
                         '     Needs to change eventually.
-                        If Selector IsNot Nothing AndAlso strTemp <> "" Then
-                            If strTempDataName = "" Then
-                                strTempDataName = Selector.strCurrentDataFrame
-                            End If
+                        Dim lstItems As New List(Of KeyValuePair(Of String, String))
+                        For Each strTemp As String In lstCurrentVariables
+                            lstItems.Add(New KeyValuePair(Of String, String)(strTempDataName, strTemp))
+                        Next
+
+                        DirectCast(Me, ucrReceiverMultiple).AddMultiple(lstItems)
+                        'TODO. In PR #8605, this subroutine was found to also be called in the selector control when LoadList is called (CurrentReceiver.RemoveAnyVariablesNotInSelector()).
+                        'This can lead to slow perfomance in dialogs when it comes to wide datasets
+                        RemoveAnyVariablesNotInSelector() 'needed due to the Autofill option
+                    Else
+                        For Each strTemp As String In lstCurrentVariables
+                            'TODO This only works if the selector is updated before receivers and dialog only uses one data frame!
+                            '     Needs to change eventually.
+                            'TODO. This subroutine call also makes the single receiver automatically clear deleted columns when dialogs are reopened
+                            'However, it does not clear output objects and other data objects. What causes clearing of such objects is  
+                            'when CurrentReceiver.RemoveAnyVariablesNotInSelector() is called in the LoadList() of selector control
                             Add(strTemp, strTempDataName)
-                        End If
-                    Next
+                        Next
+                    End If
+
+
                 End If
             End If
         End If
@@ -549,6 +567,13 @@ Public Class ucrReceiver
         Next
         dctTemp.Add("Climatic_Type", arrTypes)
         SetIncludedAutoFillProperties(dctTemp)
+    End Sub
+
+    Public Sub SetTricotType(strInclude As String())
+        If strInclude Is Nothing OrElse strInclude.Length = 0 Then Exit Sub
+
+        Dim strTypes As String() = strInclude.Select(Function(s) $"""{s}""").ToArray()
+        AddIncludedMetadataProperty("Tricot_Type", strTypes)
     End Sub
 
     Public Sub SetOptionsByContextType(strSingleType As String, Optional strQuotes As String = Chr(34))

@@ -42,6 +42,7 @@ Public Class dlgConditionalQuantilePlot
         Dim dctLegendPosition As New Dictionary(Of String, String)
         Dim dctStatistics As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.iHelpTopicID = 642
 
         ucrConditionalQuantilePlotSelector.SetParameter(New RParameter("mydata", 0))
         ucrConditionalQuantilePlotSelector.SetParameterIsrfunction()
@@ -130,7 +131,7 @@ Public Class dlgConditionalQuantilePlot
         ucrReceiverType.SetLinkedDisplayControl(lblType)
 
         ucrSavePlot.SetPrefix("cond_quantile_plot")
-        ucrSavePlot.SetCheckBoxText("Save Graph")
+        ucrSavePlot.SetCheckBoxText("Store Graph")
         ucrSavePlot.SetIsComboBox()
         ucrSavePlot.SetSaveTypeAsGraph()
         ucrSavePlot.SetDataFrameSelector(ucrConditionalQuantilePlotSelector.ucrAvailableDataFrames)

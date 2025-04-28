@@ -141,6 +141,7 @@ Public Class dlgNewDataFrame
         clsCorporaFunction.SetPackageName("rcorpora")
         clsCorporaFunction.SetRCommand("corpora")
 
+        clsListDfFunction.SetPackageName("instatExtras")
         clsListDfFunction.SetRCommand("read_corpora")
 
         'e.g of Function to be constructed . data.frame(data=matrix(data = NA,nrow = 10, ncol = 2))
@@ -812,7 +813,7 @@ Public Class dlgNewDataFrame
         End If
     End Sub
 
-    Private Sub ucrInputCategory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCategory.ControlValueChanged, ucrInputListInCategory.ControlValueChanged
+    Private Sub ucrInputCategory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCategory.ControlValueChanged, ucrInputListInCategory.ControlValueChanged, ucrPnlDataFrame.ControlValueChanged
         clsCorporaFunction.ClearParameters()
         If ucrChangedControl Is ucrInputCategory Then
             LoadLists()

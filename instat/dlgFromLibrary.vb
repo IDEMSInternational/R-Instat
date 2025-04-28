@@ -65,6 +65,7 @@ Public Class dlgFromLibrary
 
         lstCollection.HideSelection = False
 
+        clsGetPackages.SetPackageName("instatExtras")
         clsGetPackages.SetRCommand("get_installed_packages_with_data")
         expPackageNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetPackages.ToScript(), bSilent:=True)
         If expPackageNames IsNot Nothing AndAlso expPackageNames.Type <> Internals.SymbolicExpressionType.Null Then
@@ -232,6 +233,7 @@ Public Class dlgFromLibrary
         Dim strPackageName As String = ucrInputPackages.cboInput.SelectedItem
         Dim strTopic As String = lstCollection.SelectedItems(0).Text
         If strPackageName <> "" AndAlso strTopic <> "" Then
+            Dim frmMaximiseOutput As New frmMaximiseOutput
             frmMaximiseOutput.Show(strFileName:=clsFileUrlUtilities.GetHelpFileURL(strPackageName:=strPackageName, strTopic:=strTopic), bReplace:=False)
         End If
     End Sub

@@ -285,7 +285,7 @@ Public Class dlgInfillMissingValues
         ucrSaveGraph.SetPrefix("missing_plot")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
@@ -326,7 +326,7 @@ Public Class dlgInfillMissingValues
 
         clsAggregateFunction.SetPackageName("zoo")
         clsAggregateFunction.SetRCommand("na.aggregate")
-        clsAggregateFunction.AddParameter("FUN", "summary_mean", iPosition:=2)
+        clsAggregateFunction.AddParameter("FUN", "databook::summary_mean", iPosition:=2)
         clsAggregateFunction.AddParameter("maxgap", 10, iPosition:=5)
 
         clsSetSeedFunction.SetRCommand("set.seed")

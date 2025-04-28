@@ -18,10 +18,11 @@ Imports RDotNet
 Public Class dlgLabelsLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsViewLabelsFunction, clsSumCountMissingFunction As New RFunction
+    Private clsViewLabelsFunction, clsSumCountMissingFunction, clsDummyFunction As New RFunction
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
+    Private _strSelectedColumn As String
 
     Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -32,6 +33,7 @@ Public Class dlgLabelsLevels
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetSelectedColumn()
         bReset = False
         If bUseSelectedColumn Then
             SetDefaultColumn()
@@ -74,13 +76,17 @@ Public Class dlgLabelsLevels
     Private Sub SetDefaults()
         clsViewLabelsFunction = New RFunction
         clsSumCountMissingFunction = New RFunction
+        clsDummyFunction = New RFunction
 
         cmdAddLevel.Enabled = False
         ucrSelectorForLabels.Reset()
         ucrSelectorForLabels.Focus()
 
 
-        clsSumCountMissingFunction.SetRCommand("summary_count_missing")
+        clsSumCountMissingFunction.SetRCommand("summary_count_miss")
+
+        ucrReceiverLabels.SetMeAsReceiver()
+        clsDummyFunction.AddParameter("strVal", ucrReceiverLabels.GetVariableNames(False))
 
         clsViewLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabelsFunction)
@@ -157,6 +163,24 @@ Public Class dlgLabelsLevels
         ucrChkIncludeLevelNumbers.Enabled = Not ucrChkIncludeLevelNumbers.Checked
     End Sub
 
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        ' Call the utility method to perform the column selection logic.
+        clsColumnSelectionUtility.SetSelectedColumn(ucrSelectorForLabels.lstAvailableVariable,
+                                                 ucrReceiverLabels,
+                                                 clsDummyFunction,
+                                                 ucrSelectorForLabels.strCurrentDataFrame,
+                                                 _strSelectedColumn)
+    End Sub
+
     Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkIncludeLevelNumbers.ControlValueChanged
 
         'only add levels if indicated by the user
@@ -185,6 +209,12 @@ Public Class dlgLabelsLevels
         cmdAddLevel.Enabled = Not ucrReceiverLabels.IsEmpty
         CountLevels()
         TestOKEnabled()
+
     End Sub
 
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlContentsChanged
+        TestOKEnabled()
+        ucrReceiverLabels.SetMeAsReceiver()
+        clsDummyFunction.AddParameter("strVal", ucrReceiverLabels.GetVariableNames(False))
+    End Sub
 End Class

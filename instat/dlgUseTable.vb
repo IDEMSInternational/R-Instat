@@ -13,22 +13,13 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports System.IO
 Imports instat.Translations
 Public Class dlgUseTable
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRFunctionAsHTML, clsRFunctionAsRTF, clsRFunctionAsWord, clsRFunctionAsLaTex, clsUseTableFunction As New RFunction
-
-    Private clsTableTitleFunction, clsTabFootnoteTitleFunction, clsTableSourcenoteFunction, clsDummyFunction,
-                                        clsThemesTabOptionsFunction, clsFootnoteCellFunction, clsSecondFootnoteCellBodyFunction,
-                                       clsFootnoteTitleLocationFunction, clsFootnoteCellBodyFunction,
-                                       clsFootnoteSubtitleLocationFunction, clsTabFootnoteSubtitleFunction,
-                                        clsSecondFootnoteCellFunction, clsTabStyleCellTitleFunction,
-                                       clsTabStyleCellTextFunction, clsTabStyleFunction, clsTabStylePxFunction,
-                                       clsgtExtraThemesFunction As New RFunction
-
-    Private clsPipeOperator, clsSummaryOperator, clsJoiningPipeOperator As ROperator
+    Private clsGetGtTableFunction, clsSaveGtRFunction As New RFunction
+    Private clsGtTableROperator, clsBaseOperator As New ROperator
 
     Private Sub dlgUseTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,150 +47,74 @@ Public Class dlgUseTable
         ucrTablesReceiver.strSelectorHeading = "Tables"
         ucrTablesReceiver.SetItemType(RObjectTypeLabel.Table)
 
-        ''To Be enabled later when the formats are supported.
-        rdoAsHTML.Enabled = False
-        rdoAsLaTex.Enabled = False
-        rdoAsRTF.Enabled = False
-        rdoAsWord.Enabled = False
-        'ucrPnlExportOptions.AddRadioButton(rdoAsHTML)
-        'ucrPnlExportOptions.AddRadioButton(rdoAsRTF)
-        'ucrPnlExportOptions.AddRadioButton(rdoAsWord)
-        'ucrPnlExportOptions.AddRadioButton(rdoAsLaTex)
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsHTML, "as_raw_html")
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsRTF, "as_rtf")
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsWord, "as_word")
-        'ucrPnlExportOptions.AddFunctionNamesCondition(rdoAsLaTex, "as_word")
-
         ucrSaveTable.SetPrefix("use_table")
         ucrSaveTable.SetSaveType(strRObjectType:=RObjectTypeLabel.Table, strRObjectFormat:=RObjectFormat.Html)
         ucrSaveTable.SetDataFrameSelector(ucrTablesSelector.ucrAvailableDataFrames)
-        ucrSaveTable.SetCheckBoxText("Save New Table")
+        ucrSaveTable.SetCheckBoxText("Store New Table")
         ucrSaveTable.SetIsComboBox()
-        ucrSaveTable.SetAssignToIfUncheckedValue("table")
+        ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
+
+        ucrChkExport.SetText("Export Table")
+        ucrChkExport.Checked = True ' Forces the controls to be hidden
+        'cboFileType.Items.AddRange({"HTML (*.html)", "PDF (*.pdf)", "PNG (*.png)", "LaTeX (*.tex)", "RTF (*.rtf)", "Word (*.docx)"})
+        cboFileType.Items.AddRange({"HTML (*.html)", "LaTeX (*.tex)", "RTF (*.rtf)"})
     End Sub
 
     Private Sub SetDefaults()
-        clsRFunctionAsHTML = New RFunction
-        clsRFunctionAsRTF = New RFunction
-        clsRFunctionAsWord = New RFunction
-        clsRFunctionAsLaTex = New RFunction
-        clsUseTableFunction = New RFunction
-        clsPipeOperator = New ROperator
+        clsGtTableROperator = New ROperator
+        clsBaseOperator = New ROperator
+        clsGetGtTableFunction = New RFunction
+        clsSaveGtRFunction = New RFunction
 
-        clsTableTitleFunction = New RFunction
-        clsTabFootnoteTitleFunction = New RFunction
-        clsTableSourcenoteFunction = New RFunction
-        clsDummyFunction = New RFunction
-        clsThemesTabOptionsFunction = New RFunction
-        clsFootnoteCellFunction = New RFunction
-        clsSecondFootnoteCellBodyFunction = New RFunction
-        clsFootnoteTitleLocationFunction = New RFunction
-        clsFootnoteCellBodyFunction = New RFunction
-        clsFootnoteSubtitleLocationFunction = New RFunction
-        clsTabFootnoteSubtitleFunction = New RFunction
-        clsSecondFootnoteCellFunction = New RFunction
-        clsTabStyleCellTextFunction = New RFunction
-        clsTabStyleFunction = New RFunction
-        clsTabStylePxFunction = New RFunction
-        clsTabStyleCellTitleFunction = New RFunction
-        clsSummaryOperator = New ROperator
-        clsJoiningPipeOperator = New ROperator
-        clsgtExtraThemesFunction = New RFunction
-
-        'rdoAsHTML.Checked = True
-        ucrTablesReceiver.SetMeAsReceiver()
         ucrTablesSelector.Reset()
+        ucrTablesReceiver.SetMeAsReceiver()
         ucrSaveTable.Reset()
+        ucrChkExport.Checked = False
+        cboFileType.SelectedIndex = 0
+        ucrFilePath.ResetPathControl()
 
-        clsDummyFunction.AddParameter("theme", "select", iPosition:=11)
+        clsGetGtTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
 
-        clsgtExtraThemesFunction.SetPackageName("gtExtras")
+        clsGtTableROperator.SetOperation("%>%")
+        clsGtTableROperator.bBrackets = False
+        clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsGetGtTableFunction, iPosition:=0, bIncludeArgumentName:=False)
 
-        clsJoiningPipeOperator.SetOperation("%>%")
-        clsJoiningPipeOperator.AddParameter("object", clsRFunctionParameter:=clsUseTableFunction, iPosition:=0)
+        ' Set base operator
+        clsBaseOperator.SetOperation("%>%")
+        clsBaseOperator.bBrackets = False
+        clsBaseOperator.AddParameter(strParameterName:="gt_tbl_operator", clsROperatorParameter:=clsGtTableROperator, iPosition:=0, bIncludeArgumentName:=False)
+        clsBaseOperator.SetAssignToOutputObject(strRObjectToAssignTo:="last_table",
+                                                  strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Table,
+                                                  strRObjectFormatToAssignTo:=RObjectFormat.Html,
+                                                  strRDataFrameNameToAddObjectTo:=ucrTablesSelector.strCurrentDataFrame,
+                                                  strObjectName:="last_table")
 
-        clsSummaryOperator.SetOperation("+")
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
-        clsTabStyleFunction.SetRCommand("tab_style")
-        clsTabStyleFunction.SetPackageName("gt")
-        clsTabStyleFunction.AddParameter("style", clsRFunctionParameter:=clsTabStyleCellTextFunction, iPosition:=0)
-        clsTabStyleFunction.AddParameter("location", clsRFunctionParameter:=clsTabStyleCellTitleFunction, iPosition:=1)
-
-        clsTabStyleCellTitleFunction.SetPackageName("gt")
-        clsTabStyleCellTitleFunction.SetRCommand("cells_title")
-        clsTabStyleCellTitleFunction.AddParameter("groups", Chr(34) & "title" & Chr(34), iPosition:=0)
-
-        clsTabStyleCellTextFunction.SetPackageName("gt")
-        clsTabStyleCellTextFunction.SetRCommand("cell_text")
-        clsTabStyleCellTextFunction.AddParameter("size", clsRFunctionParameter:=clsTabStylePxFunction, iPosition:=0)
-
-        clsTabStylePxFunction.SetPackageName("gt")
-        clsTabStylePxFunction.SetRCommand("px")
-        clsTabStylePxFunction.AddParameter("size", "18", bIncludeArgumentName:=False, iPosition:=0)
-
-        clsTableTitleFunction.SetPackageName("gt")
-        clsTableTitleFunction.SetRCommand("tab_header")
-
-        clsTabFootnoteTitleFunction.SetPackageName("gt")
-        clsTabFootnoteTitleFunction.SetRCommand("tab_footnote")
-
-        clsTabFootnoteSubtitleFunction.SetPackageName("gt")
-        clsTabFootnoteSubtitleFunction.SetRCommand("tab_footnote")
-
-        clsFootnoteCellFunction.SetPackageName("gt")
-        clsFootnoteCellFunction.SetRCommand("tab_footnote")
-
-        clsSecondFootnoteCellFunction.SetPackageName("gt")
-        clsSecondFootnoteCellFunction.SetRCommand("tab_footnote")
-
-        clsFootnoteTitleLocationFunction.SetPackageName("gt")
-        clsFootnoteTitleLocationFunction.SetRCommand("cells_title")
-
-        clsFootnoteSubtitleLocationFunction.SetPackageName("gt")
-        clsFootnoteSubtitleLocationFunction.SetRCommand("cells_title")
-
-        clsTableSourcenoteFunction.SetPackageName("gt")
-        clsTableSourcenoteFunction.SetRCommand("tab_source_note")
-
-        clsFootnoteCellBodyFunction.SetPackageName("gt")
-        clsFootnoteCellBodyFunction.SetRCommand("cells_body")
-
-        clsSecondFootnoteCellBodyFunction.SetPackageName("gt")
-        clsSecondFootnoteCellBodyFunction.SetRCommand("cells_body")
-
-        clsThemesTabOptionsFunction.SetPackageName("gt")
-        clsThemesTabOptionsFunction.SetRCommand("tab_options")
-
-        clsRFunctionAsHTML.SetPackageName("gt")
-        clsRFunctionAsHTML.SetRCommand("as_raw_html")
-
-        clsRFunctionAsRTF.SetPackageName("gt")
-        clsRFunctionAsRTF.SetRCommand("as_rtf")
-
-        clsRFunctionAsWord.SetPackageName("gt")
-        clsRFunctionAsWord.SetRCommand("as_word")
-
-        clsRFunctionAsLaTex.SetPackageName("gt")
-        clsRFunctionAsLaTex.SetRCommand("as_word")
-
-        clsUseTableFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-
-        clsPipeOperator.SetOperation("%>%")
-
-        ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
+        ' For export operations which is an after code
+        clsSaveGtRFunction.SetPackageName("gt")
+        clsSaveGtRFunction.SetRCommand("gtsave")
+        clsSaveGtRFunction.AddParameter(strParameterName:="data", clsROperatorParameter:=clsGtTableROperator, iPosition:=0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrTablesSelector.SetRCode(clsUseTableFunction, bReset)
-        ucrTablesReceiver.SetRCode(clsUseTableFunction, bReset)
-        ucrSaveTable.SetRCode(clsJoiningPipeOperator, bReset)
+        ucrTablesSelector.SetRCode(clsGetGtTableFunction, bReset)
+        ucrTablesReceiver.SetRCode(clsGetGtTableFunction, bReset)
+
+        ucrSaveTable.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
+        ucrBase.OKEnabled(False)
+
         If Not ucrTablesReceiver.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
+            If ucrSaveTable.IsComplete Then
+                ucrBase.OKEnabled(True)
+            End If
+
+            If ucrChkExport.Checked AndAlso Not ucrFilePath.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            End If
         End If
     End Sub
 
@@ -209,30 +124,59 @@ Public Class dlgUseTable
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdFormatOptions_Click(sender As Object, e As EventArgs) Handles cmdFormatOptions.Click
-        sdgFormatSummaryTables.SetRCode(clsNewTableTitleFunction:=clsTableTitleFunction, clsNewTabFootnoteTitleFunction:=clsTabFootnoteTitleFunction, clsNewTableSourcenoteFunction:=clsTableSourcenoteFunction, clsNewDummyFunction:=clsDummyFunction,
-                                        clsNewFootnoteCellFunction:=clsFootnoteCellFunction, clsNewSecondFootnoteCellBodyFunction:=clsSecondFootnoteCellBodyFunction,
-                                        clsNewPipeOperator:=clsPipeOperator, clsNewFootnoteTitleLocationFunction:=clsFootnoteTitleLocationFunction, clsNewFootnoteCellBodyFunction:=clsFootnoteCellBodyFunction,
-                                        clsNewFootnoteSubtitleLocationFunction:=clsFootnoteSubtitleLocationFunction, clsNewTabFootnoteSubtitleFunction:=clsTabFootnoteSubtitleFunction, clsNewJoiningOperator:=clsJoiningPipeOperator,
-                                        clsNewMutableOPerator:=clsSummaryOperator, clsNewSecondFootnoteCellFunction:=clsSecondFootnoteCellFunction,
-                                        clsNewTabStyleCellTextFunction:=clsTabStyleCellTextFunction, clsNewTabStyleFunction:=clsTabStyleFunction, clsNewTabStylePxFunction:=clsTabStylePxFunction,
-                                        clsNewgtExtraThemesFunction:=clsgtExtraThemesFunction, clsNewThemesTabOptionFunction:=clsThemesTabOptionsFunction, bReset:=bReset)
-        sdgFormatSummaryTables.ShowDialog()
+    Private Sub btnTableOptions_Click(sender As Object, e As EventArgs) Handles btnTableOptions.Click
+        sdgTableOptions.Setup(ucrTablesSelector.strCurrentDataFrame, clsGtTableROperator)
+        sdgTableOptions.ShowDialog(Me)
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTablesReceiver.ControlContentsChanged, ucrSaveTable.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlExportOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExportOptions.ControlValueChanged
-        If rdoAsHTML.Checked Then
-            clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsHTML)
-        ElseIf rdoAsRTF.Checked Then
-            clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsRTF)
-        ElseIf rdoAsWord.Checked Then
-            clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsWord)
+    Private Sub ucrChkExport_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkExport.ControlContentsChanged
+        If ucrChkExport.Checked Then
+            lblFileType.Visible = True
+            cboFileType.Visible = True
+            ucrFilePath.Visible = True
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSaveGtRFunction)
         Else
-            clsJoiningPipeOperator.AddParameter("y", clsRFunctionParameter:=clsRFunctionAsLaTex)
+            lblFileType.Visible = False
+            cboFileType.Visible = False
+            ucrFilePath.Visible = False
+            ucrBase.clsRsyntax.GetAfterCodes().Clear()
         End If
+        TestOKEnabled()
     End Sub
+
+    Private Sub cboFileType_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFileType.SelectedValueChanged
+        ucrFilePath.Clear()
+        ucrFilePath.FilePathDialogFilter = GetFilePathDialogFilterText(cboFileType.SelectedItem)
+    End Sub
+
+    Private Sub ucrFilePath_FilePathChanged() Handles ucrFilePath.FilePathChanged
+        If Not ucrFilePath.IsEmpty Then
+            Dim strFileName As String = Path.GetFileName(ucrFilePath.FilePath)
+            Dim strFilePath As String = Path.GetDirectoryName(ucrFilePath.FilePath).Replace("\", "/")
+
+            clsSaveGtRFunction.AddParameter("filename", Chr(34) & strFileName & Chr(34), iPosition:=1)
+            clsSaveGtRFunction.AddParameter("path", Chr(34) & strFilePath & Chr(34), iPosition:=2)
+        End If
+        TestOKEnabled()
+    End Sub
+
+    ''' <summary>
+    ''' TODO. Later push this functionality to ucrFilePath control. It's also needed by dlgExportDataset
+    ''' Expected string format: "filetype (*.ext)" 
+    ''' </summary>
+    ''' <param name="strText"></param>
+    ''' <returns></returns>
+    Private Function GetFilePathDialogFilterText(strText As String) As String
+        If String.IsNullOrEmpty(strText) Then
+            Return ""
+        End If
+
+        'example of filter string format returned: Excel files|*.xlsx
+        Dim arrStr() As String = strText.Split({"(", ")"}, StringSplitOptions.RemoveEmptyEntries)
+        Return arrStr(0) & "|" & arrStr(1)
+    End Function
 End Class

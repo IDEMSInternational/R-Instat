@@ -15,10 +15,21 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports System.Text.RegularExpressions
 Public Class dlgInfill
+    Public enumFilldateMode As String = FilldateMode.Prepare
+    Public Enum FilldateMode
+        Prepare
+        Climatic
+    End Enum
+
+    Private isFilling As Boolean = False
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
+    Private lstStationReceivers As New List(Of ucrReceiverMultiple)
+    Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+
     Private Sub dlgInfill_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -28,6 +39,7 @@ Public Class dlgInfill
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -36,6 +48,12 @@ Public Class dlgInfill
         ucrBase.iHelpTopicID = 497
 
         ucrBase.clsRsyntax.iCallType = 2
+
+        Dim kvpStation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("station", {"station", "station.", "id", "name"}.ToList())
+
+        lstStationReceivers.AddRange({ucrReceiverFactors})
+
+        lstRecognisedTypes.AddRange({kvpStation})
         'Set receiver
         ucrReceiverDate.Selector = ucrInfillSelector
         ucrReceiverDate.SetDataType("Date")
@@ -48,6 +66,7 @@ Public Class dlgInfill
         ucrReceiverFactors.SetIncludedDataTypes({"factor"})
         ucrReceiverFactors.Selector = ucrInfillSelector
         ucrReceiverFactors.strSelectorHeading = "Factors"
+        ucrReceiverFactors.Tag = "station"
         ucrReceiverFactors.SetParameter(New RParameter("factors", 5))
         ucrReceiverFactors.SetParameterIsString()
 
@@ -111,6 +130,7 @@ Public Class dlgInfill
         If bReset Then
             SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
+        AutoFillStation()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -134,18 +154,78 @@ Public Class dlgInfill
         End Select
     End Sub
 
-    Private Sub AutoFillStation()
-        If ucrInfillSelector.CurrentReceiver IsNot Nothing Then
-            ucrInfillSelector.CurrentReceiver.SetMeAsReceiver()
-        End If
-        ucrReceiverFactors.AddItemsWithMetadataProperty(ucrInfillSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Climatic_Type", {"station_label"})
+    Private Sub SetHelpOptions()
+        Select Case enumFilldateMode
+            Case FilldateMode.Prepare
+                ucrBase.iHelpTopicID = 497
+            Case FilldateMode.Climatic
+                ucrBase.iHelpTopicID = 357
+        End Select
     End Sub
+
+    Private Sub AutoFillStation()
+        If isFilling Then
+            Exit Sub
+        End If
+        isFilling = True
+
+        ' Temporarily remove the event handler
+        RemoveHandler ucrInfillSelector.ControlValueChanged, AddressOf AutoFillStation
+
+        Dim lstRecognisedValues As List(Of String)
+        Dim ucrCurrentReceiver As ucrReceiver
+        Dim bFound As Boolean = False
+
+        ucrCurrentReceiver = ucrInfillSelector.CurrentReceiver
+
+        For Each ucrTempReceiver As ucrReceiver In lstStationReceivers
+            ucrTempReceiver.SetMeAsReceiver()
+            lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
+
+            If lstRecognisedValues.Count > 0 Then
+                For Each lviTempVariable As ListViewItem In ucrInfillSelector.lstAvailableVariable.Items
+                    For Each strValue As String In lstRecognisedValues
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
+                            ucrTempReceiver.Add(lviTempVariable.Text, ucrInfillSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                            bFound = True
+                            Exit For
+                        End If
+                    Next
+                    If bFound Then
+                        bFound = False
+                        Exit For
+                    End If
+                Next
+            End If
+        Next
+
+        If ucrCurrentReceiver IsNot Nothing Then
+            ucrCurrentReceiver.SetMeAsReceiver()
+        End If
+
+        ' Re-enable the event handler
+        AddHandler ucrInfillSelector.ControlValueChanged, AddressOf AutoFillStation
+
+        isFilling = False
+    End Sub
+
+    Private Function GetRecognisedValues(strVariable As String) As List(Of String)
+        Dim lstValues As New List(Of String)
+
+        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
+            If kvpTemp.Key = strVariable Then
+                lstValues = kvpTemp.Value
+                Exit For
+            End If
+        Next
+        Return lstValues
+    End Function
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrInfillSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInfillSelector.ControlValueChanged
+    Private Sub ucrInfillSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInfillSelector.ControlValueChanged, ucrReceiverFactors.ControlValueChanged
         AutoFillStation()
     End Sub
 End Class

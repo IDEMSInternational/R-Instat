@@ -46,7 +46,7 @@ Public Class dlgColumnStats
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 64
 
-        ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
+        'ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
         cmdMissingOptions.Enabled = False
 
         ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
@@ -56,6 +56,7 @@ Public Class dlgColumnStats
         ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverSelectedVariables.SetParameterIsString()
         ucrReceiverSelectedVariables.Selector = ucrSelectorForColumnStatistics
+        'ucrReceiverSelectedVariables.SetSingleTypeStatus(True)
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
         ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
@@ -71,15 +72,12 @@ Public Class dlgColumnStats
         ucrChkOriginalLevel.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOriginalLevel.SetRDefault("FALSE")
 
-        ucrChkPrintOutput.SetParameter(New RParameter("return_output", 4))
         ucrChkPrintOutput.SetText("Print Results to Output Window")
-        ucrChkPrintOutput.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkPrintOutput.SetRDefault("FALSE")
 
         ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 5))
         ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
         ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDropUnusedLevels.SetRDefault("FALSE")
+        ucrChkDropUnusedLevels.SetRDefault("TRUE")
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -111,16 +109,17 @@ Public Class dlgColumnStats
         clsConcFunction.SetRCommand("c")
 
         clsSummariesList.SetRCommand("c")
-        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False, iPosition:=3)
+        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False, iPosition:=11)
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
+        clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
         'Prevents an error if user chooses non count summaries with no columns to summarise
         clsDefaultFunction.AddParameter("silent", "TRUE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
+
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -156,11 +155,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub TestOKEnabled()
-        If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) AndAlso sdgSummaries.bOkEnabled Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not clsSummariesList.clsParameters.Count = 0 AndAlso sdgSummaries.bOkEnabled AndAlso Not ucrReceiverSelectedVariables.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -174,13 +169,6 @@ Public Class dlgColumnStats
         sdgSummaries.ShowDialog()
         bResetSubdialog = False
         strDefaultTab = ""
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmdProportionsPercentages_Click(sender As Object, e As EventArgs) Handles cmdProportionsPercentages.Click
-        sdgProportionsPercentages.SetRFunction(clsDefaultFunction, bResetSubdialog)
-        sdgProportionsPercentages.ShowDialog()
-        bResetSubdialog = False
         TestOKEnabled()
     End Sub
 
@@ -232,7 +220,36 @@ Public Class dlgColumnStats
         sdgMissingOptions.ShowDialog()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
+    Private Sub ucrReceiverByFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlValueChanged, ucrChkStoreResults.ControlValueChanged, ucrChkPrintOutput.ControlValueChanged, ucrReceiverSelectedVariables.ControlValueChanged, ucrChkOriginalLevel.ControlValueChanged
+        If Not ucrChkOriginalLevel.Checked Then
+            If ucrReceiverByFactor.IsEmpty AndAlso Not ucrReceiverSelectedVariables.IsEmpty Then
+                clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=3)
+                clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
+                ucrBase.clsRsyntax.iCallType = 2
+            Else
+                clsDefaultFunction.RemoveParameterByName("return_output")
+                If ucrChkStoreResults.Checked Then
+                    clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
+                Else
+                    clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=3)
+                End If
+                If ucrChkPrintOutput.Checked Then
+                    clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
+                Else
+                    clsDefaultFunction.AddParameter("return_output", "FALSE", iPosition:=4)
+                End If
+            End If
+        Else
+            If ucrChkPrintOutput.Checked Then
+                clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=4)
+            Else
+                clsDefaultFunction.RemoveParameterByName("return_output")
+            End If
+            clsDefaultFunction.AddParameter("store_results", "TRUE", iPosition:=3)
+        End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

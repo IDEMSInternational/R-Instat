@@ -87,6 +87,7 @@ Public Class dlgImportDataset
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
+        InitializeSheetSelection()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -716,6 +717,7 @@ Public Class dlgImportDataset
                               "Load Script From File", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     Try
                         frmMain.ucrScriptWindow.strActiveTabText = File.ReadAllText(strFilePathSystem)
+                        frmMain.clsRecentItems.addToMenu(Replace(strFilePathSystem, "\", "/"))
                     Catch
                         MessageBox.Show("Could not load the script from file." &
                               Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.",
@@ -802,17 +804,16 @@ Public Class dlgImportDataset
         ElseIf IsJSONFileFormat() Then
             strRowMaxParamName = "nrows"
         ElseIf IsExcelFileFormat() Then
+            bCanImport = True 'assume can still import the entire excel file
             If dctSelectedExcelSheets.Count = 0 Then
                 lblNoPreview.Show()
                 lblImportingSheets.Show()
                 lblImportingSheets.Text = "No sheet selected."
-                bCanImport = True 'assume can still import the entire excel file
                 Exit Sub
             ElseIf dctSelectedExcelSheets.Count > 1 Then
                 lblNoPreview.Show()
                 lblImportingSheets.Show()
                 lblImportingSheets.Text = "Importing the following sheets:" & Environment.NewLine & String.Join(", ", dctSelectedExcelSheets.Values)
-                bCanImport = True 'assume can import all selected sheets
                 Exit Sub
             End If
             strRowMaxParamName = "n_max"
@@ -835,6 +836,7 @@ Public Class dlgImportDataset
 
         clsTempImport.RemoveAssignTo()
 
+        clsAsCharacterFunc.SetPackageName("instatExtras")
         clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
         clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
@@ -1047,6 +1049,21 @@ Public Class dlgImportDataset
         TestOkEnabled()
     End Sub
 
+    Private Sub InitializeSheetSelection()
+        ' Ensure at least one sheet exists
+        If clbSheets.Items.Count > 0 Then
+            ' Temporarily remove event handling to prevent infinite recursion
+            RemoveHandler clbSheets.ItemCheck, AddressOf clbSheets_ItemCheck
+            clbSheets.SetItemChecked(0, True) ' Check the first sheet
+            dctSelectedExcelSheets(1) = clbSheets.Items.Item(0).ToString()
+            AddHandler clbSheets.ItemCheck, AddressOf clbSheets_ItemCheck
+            lblImportingSheets.Hide()
+        End If
+        TryGridPreview()
+        TestOkEnabled()
+    End Sub
+
+
     Private Sub ucrSaveFile_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveFile.ControlContentsChanged
         TestOkEnabled()
     End Sub
@@ -1100,6 +1117,11 @@ Public Class dlgImportDataset
             clsImportExcel.AddParameter("range", clsROperatorParameter:=clsRangeOperator)
         Else
             clsImportExcel.RemoveParameterByName("range")
+        End If
+        If ucrChkRange.Checked Then
+            clsImportExcelMulti.AddParameter("range", clsROperatorParameter:=clsRangeOperator)
+        Else
+            clsImportExcelMulti.RemoveParameterByName("range")
         End If
         TryGridPreview()
         TestOkEnabled()

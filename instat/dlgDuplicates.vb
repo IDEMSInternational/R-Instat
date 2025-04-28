@@ -17,6 +17,12 @@
 Imports RDotNet
 Imports instat.Translations
 Public Class dlgDuplicateRows
+    Public enumDuplicateMode As String = DuplicateMode.Prepare
+    Public Enum DuplicateMode
+        Prepare
+        Climatic
+    End Enum
+
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsDuplicated2, clsDuplicated, clsStreakFunction, clsSubsetCol, clsDupCountIndex, clsSummaryFunction, clsGetColumnsFunction As New RFunction
@@ -30,13 +36,13 @@ Public Class dlgDuplicateRows
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 547
         Dim dctConditions As New Dictionary(Of String, String)
         Dim dctType As New Dictionary(Of String, String)
 
@@ -151,9 +157,11 @@ Public Class dlgDuplicateRows
         clsDuplicated2.SetRCommand("duplicated2")
 
         ' For the third rdo we run clsStreakFunction
+        clsStreakFunction.SetPackageName("instatExtras")
         clsStreakFunction.SetRCommand("duplicated_cases")
         clsStreakFunction.AddParameter("ignore", "NULL")
 
+        clsDupCountIndex.SetPackageName("instatExtras")
         clsDupCountIndex.SetRCommand("duplicated_count_index")
         clsDupCountIndex.AddParameter("type", Chr(34) & "index" & Chr(34))
 
@@ -265,6 +273,15 @@ Public Class dlgDuplicateRows
             ucrSelectorDuplicateswithVariables.SetParameterIsString()
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(True)
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumDuplicateMode
+            Case DuplicateMode.Prepare
+                ucrBase.iHelpTopicID = 547
+            Case DuplicateMode.Climatic
+                ucrBase.iHelpTopicID = 605
+        End Select
     End Sub
 
     Private Sub SetBaseFunction()

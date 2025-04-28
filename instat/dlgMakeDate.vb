@@ -17,6 +17,13 @@
 Imports instat.Translations
 Imports System.Text.RegularExpressions
 Public Class dlgMakeDate
+    Public enumMakedateMode As String = MakedateMode.Prepare
+    Public Enum MakedateMode
+        Prepare
+        Climatic
+        Column
+    End Enum
+
     Public clsPaste As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -30,6 +37,7 @@ Public Class dlgMakeDate
     Private clsGregorianDefault, clsJulianDateDefault, clsAsCharacterFunction, clsDummyFunction As New RFunction
     Private clsDefaultFunction As New RFunction
     Private clsConcFunction As New RFunction
+    Private clsNumericFunction As New RFunction
     Private clsDivisionOperator, clsMultiplicationOperator As New ROperator
 
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -44,6 +52,7 @@ Public Class dlgMakeDate
             SetDefaultColumn()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -173,7 +182,7 @@ Public Class dlgMakeDate
         ucrSaveDate.SetPrefix("date")
         ucrSaveDate.SetSaveTypeAsColumn()
         ucrSaveDate.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
-        ucrSaveDate.SetLabelText("Save Date:")
+        ucrSaveDate.SetLabelText("Store Date:")
 
         ucrSaveDate.SetIsComboBox()
 
@@ -317,6 +326,7 @@ Public Class dlgMakeDate
         clsDivisionOperator = New ROperator
         clsMultiplicationOperator = New ROperator
         clsDummyFunction = New RFunction
+        clsNumericFunction = New RFunction
 
         clsDefaultFunction = New RFunction
         clsConcFunction = New RFunction
@@ -344,8 +354,9 @@ Public Class dlgMakeDate
         clsMakeYearMonthDay.AddParameter("month_format", Chr(34) & "%m" & Chr(34))
 
         clsDateFunction.SetRCommand("as.Date")
-        clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
         clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate, iPosition:=1)
+
+        clsNumericFunction.SetRCommand("as.numeric")
 
         clsDivisionOperator.SetOperation("/")
         clsDivisionOperator.bAllBrackets = True
@@ -440,6 +451,17 @@ Public Class dlgMakeDate
         TestOKEnabled()
     End Sub
 
+    Private Sub SetHelpOptions()
+        Select Case enumMakedateMode
+            Case MakedateMode.Prepare
+                ucrBase.iHelpTopicID = 461
+            Case MakedateMode.Climatic
+                ucrBase.iHelpTopicID = 493
+            Case MakedateMode.Column
+                rdoSingleColumn.Checked = True
+        End Select
+    End Sub
+
     Private Sub AutoFillReceivers()
         Dim ucrCurrentReceiver As ucrReceiver = ucrSelectorMakeDate.CurrentReceiver
         Dim lstRecognisedValues As List(Of String) = New List(Of String)
@@ -508,22 +530,26 @@ Public Class dlgMakeDate
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged, ucrInputFormat.ControlValueChanged, ucrInputOrigin.ControlValueChanged
         ucrReceiverForDate.RemoveIncludedMetadataProperty("class")
         clsDateFunction.RemoveParameterByName("yearmoda")
-        clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
+        clsNumericFunction.RemoveParameterByName("number")
         If rdoDefaultFormat.Checked Then
             cmdHelp.Visible = False
-            ucrReceiverForDate.SetExcludedDataTypes({"numeric"})
             clsDateFunction.RemoveParameterByName("format")
             clsDateFunction.RemoveParameterByName("origin")
+            clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
         ElseIf rdoOrigin.Checked Then
             cmdHelp.Visible = False
-            ucrReceiverForDate.SetIncludedDataTypes({"numeric", "date"})
             If ucrInputOrigin.GetText = "Excel (1899/12/30)" Then
+                clsNumericFunction.AddParameter("number", clsROperatorParameter:=clsDivisionOperator, iPosition:=0, bIncludeArgumentName:=False)
+                clsDateFunction.AddParameter("x", clsRFunctionParameter:=clsNumericFunction, iPosition:=0)
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsDefaultDate)
             ElseIf ucrInputOrigin.GetText = "Gregorian (1600/03/01)" Then
+                clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsGregorianDefault)
             ElseIf ucrInputOrigin.GetText = "Julian Day Number (-4713/11/24)" Then
+                clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsJulianDateDefault)
             ElseIf ucrInputOrigin.GetText = "R (1970/01/01)" Then
+                clsDateFunction.AddParameter("x", clsROperatorParameter:=clsDivisionOperator, iPosition:=0)
                 clsDateFunction.AddParameter("origin", clsRFunctionParameter:=clsRDefaultDate)
             End If
         ElseIf rdoSpecifyFormat.Checked Then

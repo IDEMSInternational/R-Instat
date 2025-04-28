@@ -25,6 +25,7 @@ Public Class ucrOutputPages
     Private _outputLogger As clsOutputLogger
     Private _selectedOutputPage As ucrOutputPage
     Private _strSaveDirectory As String
+    Private checkBoxSelectAll As New CheckBox()
     Public Sub New()
 
         ' This call is required by the designer.
@@ -36,6 +37,10 @@ Public Class ucrOutputPages
         _selectedOutputPage = ucrMainOutputPage
         _allOutputPages = New List(Of ucrOutputPage)
         EnableDisableTopButtons()
+    End Sub
+
+    Private Sub ucrOutputPages_Load(sender As Object, e As EventArgs) Handles Me.Load
+        AddSelectAllCheckBoxToToolStripControl()
     End Sub
 
     ''' <summary>
@@ -84,6 +89,7 @@ Public Class ucrOutputPages
 
     Private Sub AddNewOutput(outputElement As clsOutputElement, bDisplayOutputInExternalViewer As Boolean)
         ucrMainOutputPage.AddNewOutput(outputElement, bDisplayOutputInExternalViewer)
+        UpdateSelectAllCheckBoxText()
     End Sub
 
     Private Sub AddNewOutputToTab(outputElement As clsOutputElement, tabName As String)
@@ -153,6 +159,7 @@ Public Class ucrOutputPages
             tbMoveUp.Enabled = False
         End If
         tbRename.Enabled = _selectedOutputPage.BCanRename
+        UpdateSelectAllCheckBoxText()
     End Sub
 
     Private Sub RefreshPage()
@@ -213,6 +220,7 @@ Public Class ucrOutputPages
             _outputLogger.AddOutputToFilteredList(element.Clone, strTabName)
         Next
         _selectedOutputPage.ClearAllCheckBoxes()
+        UpdateSelectAllCheckBoxText()
     End Sub
 
     Private Sub tbCopy_Click(sender As Object, e As EventArgs) Handles tbCopy.Click
@@ -239,6 +247,7 @@ Public Class ucrOutputPages
         Else
             RefreshPage()
         End If
+        UpdateSelectAllCheckBoxText()
     End Sub
 
     ''' <summary>
@@ -286,6 +295,10 @@ Public Class ucrOutputPages
         SaveTab()
     End Sub
 
+    Private Sub tbHelp_Click(sender As Object, e As EventArgs) Handles tbHelp.Click
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "/" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "540")
+    End Sub
+
     Private Sub UpdateTabsInDropDown()
         tdbAddToExisting.DropDownItems.Clear()
         For Each list In _outputLogger.FilteredOutputs
@@ -299,4 +312,74 @@ Public Class ucrOutputPages
             End If
         Next
     End Sub
+
+    Private Sub AddSelectAllCheckBoxToToolStripControl()
+        ' Create a ToolStripControlHost to host the CheckBox
+        Dim checkBoxHost As ToolStripControlHost = New ToolStripControlHost(checkBoxSelectAll)
+
+        ' Insert the CheckBox host at the beginning of tsButtons items
+        tsButtons.Items.Insert(0, checkBoxHost)
+
+        ' Create a ToolTip for the checkBoxSelectAll CheckBox
+        Dim ttcheckBoxSelectAll As New ToolTip
+        ttcheckBoxSelectAll.SetToolTip(checkBoxSelectAll, "Toggle selection for all elements")
+
+        ' Add a Click event handler to the checkBoxSelectAll CheckBox
+        AddHandler checkBoxSelectAll.Click, AddressOf checkBoxSelectAll_Click
+    End Sub
+
+    ''' <summary>
+    ''' Updates the text and state of checkBoxSelectAll based on selected elements and output count.
+    ''' </summary>
+    Private Sub UpdateSelectAllCheckBoxText()
+        ' Check if _outputLogger is initialized
+        If _outputLogger Is Nothing Then
+            Exit Sub ' Exit the sub if logger is not initialized
+        End If
+
+        ' Variable to hold the count of output elements
+        Dim iCountOutputElements As Integer = 0
+
+        ' Determine the count of output elements based on the selected tab
+        If SelectedTab() = "Main" Then
+            iCountOutputElements = _outputLogger.OutputElements.Count
+        Else
+            iCountOutputElements = _outputLogger.GetFilteredList(SelectedTab).Output.Count
+        End If
+
+        ' Enable or disable checkBoxSelectAll based on the count of output elements
+        checkBoxSelectAll.Enabled = iCountOutputElements > 0
+
+        ' Get the count of selected elements
+        Dim iSelectedElements = _selectedOutputPage.SelectedElements.Count
+
+        ' Determine the text and check state of checkBoxSelectAll based on selected and total elements
+        Select Case True
+            Case iSelectedElements > 0 AndAlso iCountOutputElements > iSelectedElements
+                ' Indeterminate state when some but not all elements are selected
+                checkBoxSelectAll.Text = $"{iSelectedElements} item(s)"
+                checkBoxSelectAll.CheckState = CheckState.Indeterminate
+            Case iSelectedElements > 0 AndAlso iCountOutputElements = iSelectedElements
+                ' All elements selected
+                checkBoxSelectAll.Text = "Deselect All"
+                checkBoxSelectAll.CheckState = CheckState.Checked
+            Case Else
+                ' No elements selected
+                checkBoxSelectAll.Text = "Select All"
+                checkBoxSelectAll.CheckState = CheckState.Unchecked
+        End Select
+    End Sub
+
+    Private Sub checkBoxSelectAll_Click(sender As Object, e As EventArgs)
+        ' Handle CheckBox checked changed event here
+        Dim checkBoxSelectAll As CheckBox = TryCast(sender, CheckBox)
+
+        If checkBoxSelectAll.Checked Then
+            _selectedOutputPage.SelectAllCheckBoxes()
+        Else
+            _selectedOutputPage.ClearAllCheckBoxes()
+        End If
+        EnableDisableTopButtons()
+    End Sub
+
 End Class

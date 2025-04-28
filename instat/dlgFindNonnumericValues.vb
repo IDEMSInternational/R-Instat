@@ -17,6 +17,12 @@
 Imports instat
 Imports instat.Translations
 Public Class dlgFindNonnumericValues
+    Public enumNonNumericMode As String = NonNumericMode.Prepare
+    Public Enum NonNumericMode
+        Prepare
+        Climatic
+    End Enum
+
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bUseSelectedColumn As Boolean = False
@@ -42,11 +48,11 @@ Public Class dlgFindNonnumericValues
         If bUseSelectedColumn Then
             SetSelectedColumn()
         End If
+        SetHelpOptions()
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 545
         ucrSelectorShowNonNumericValues.SetParameter(New RParameter("data_name", 0))
         ucrSelectorShowNonNumericValues.SetParameterIsString()
 
@@ -110,13 +116,13 @@ Public Class dlgFindNonnumericValues
         clsAsNumericFunction.SetRCommand("as.numeric")
         clsAsNumericFunction.AddParameter("x", clsRFunctionParameter:=clsAsCharacterFunction, bIncludeArgumentName:=False, iPosition:=1)
 
-        clsNonNumericCalcFunc.SetRCommand("instat_calculation$new")
+        clsNonNumericCalcFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsNonNumericCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsNonNumericCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsNotEqualToOperator, iPosition:=1)
         clsNonNumericCalcFunc.AddParameter("result_name", Chr(34) & strLogicalColumn & Chr(34), iPosition:=3)
         clsNonNumericCalcFunc.AddParameter("save", 2, iPosition:=4)
 
-        clsNonNumericFilterFunc.SetRCommand("instat_calculation$new")
+        clsNonNumericFilterFunc.SetRCommand("instatCalculations::instat_calculation$new")
         clsNonNumericFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsNonNumericFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clslSubCalcListFunc, iPosition:=2)
         clsNonNumericFilterFunc.AddParameter("result_data_frame", Chr(34) & "Filter" & Chr(34), iPosition:=3)
@@ -171,6 +177,15 @@ Public Class dlgFindNonnumericValues
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumNonNumericMode
+            Case NonNumericMode.Prepare
+                ucrBase.iHelpTopicID = 545
+            Case NonNumericMode.Climatic
+                ucrBase.iHelpTopicID = 603
+        End Select
     End Sub
 
     Private Sub ucrChkShowSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowSummary.ControlValueChanged

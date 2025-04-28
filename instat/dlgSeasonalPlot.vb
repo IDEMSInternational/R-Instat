@@ -98,6 +98,7 @@ Public Class dlgSeasonalPlot
     End Sub
 
     Private Sub InitiliseDialog()
+        ucrBase.iHelpTopicID = 640
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -182,7 +183,7 @@ Public Class dlgSeasonalPlot
         ucrSaveGraph.SetPrefix("seasonality_plot")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetCheckBoxText("Store Graph")
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorSeasonalityComparisons.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
@@ -434,6 +435,7 @@ Public Class dlgSeasonalPlot
         clsPasteFunction.AddParameter("y", Chr(34) & "y~" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
         clsPasteFunction.AddParameter("fourier", clsRFunctionParameter:=clsFourierSeriesFunction, bIncludeArgumentName:=False, iPosition:=1)
 
+        clsFourierSeriesFunction.SetPackageName("instatClimatic")
         clsFourierSeriesFunction.SetRCommand("fourier_series")
         clsFourierSeriesFunction.AddParameter("x", Chr(34) & "x" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
         clsFourierSeriesFunction.AddParameter("n", 3, iPosition:=1)

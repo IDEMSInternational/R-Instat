@@ -14,20 +14,92 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Collections.Specialized
 Imports System.IO
 Imports System.Windows.Controls
+Imports RInsightF461
 Imports ScintillaNET
+Imports RDotNet
 
 Public Class ucrScript
 
     Private bIsTextChanged = False
     Private iMaxLineNumberCharLength As Integer = 0
     Private Const iTabIndexLog As Integer = 0
-    Private Const strComment As String = "Code run from Script Window"
+    Private clsRScript As RScript = Nothing
     Private strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
+
+    Private ReadOnly Property isFindValid As Boolean
+        Get
+            Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
+            Dim bTextSelected As Boolean = clsScriptActive.SelectedText.Length > 0
+
+            Return bScriptExists AndAlso bTextSelected
+        End Get
+    End Property
+
+    Private ReadOnly Property isReplaceValid As Boolean
+        Get
+            Dim bClipoardContainsText As Boolean = Clipboard.ContainsData(DataFormats.Text)
+            Dim bIsScriptTab As Boolean = TabControl.SelectedIndex <> iTabIndexLog
+
+            Return isFindValid AndAlso bIsScriptTab AndAlso bClipoardContainsText
+        End Get
+    End Property
 
     Friend WithEvents clsScriptActive As Scintilla
     Friend WithEvents clsScriptLog As Scintilla
+
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+
+        ' Add any initialization after the InitializeComponent() call.
+        SetupInitialLayout()
+
+    End Sub
+
+    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        toolTipScriptWindow.SetToolTip(cmdRunStatementSelection, "Run the current statement or selection. (Ctrl+Enter)")
+        toolTipScriptWindow.SetToolTip(cmdRunAll, "Run all the text in the tab. (Ctrl+Alt+R)")
+        toolTipScriptWindow.SetToolTip(cmdLoadScript, "Load a script from file into the current tab.")
+        toolTipScriptWindow.SetToolTip(cmdSave, "Save the script in the current tab to a file.")
+        toolTipScriptWindow.SetToolTip(cmdAddTab, "Add a new tab.")
+        toolTipScriptWindow.SetToolTip(cmdRemoveTab, "Delete the current tab.")
+        toolTipScriptWindow.SetToolTip(cmdClear, "Clear the contents of the current tab. (Ctrl+L)")
+        toolTipScriptWindow.SetToolTip(cmdHelp, "Display the Script Window help information.")
+
+        mnuUndo.ToolTipText = "Undo the last change. (Ctrl+Z)"
+        mnuRedo.ToolTipText = "Redo the last change. (Ctrl+Y)"
+        mnuCut.ToolTipText = "Copy the selected text to the clipboard, then delete the text. (Ctrl+X)"
+        mnuCopy.ToolTipText = "Copy the selected text to the clipboard. (Ctrl+C)"
+        mnuPaste.ToolTipText = "Paste the contents of the clipboard into the current tab. (Ctrl+V)"
+        mnuSelectAll.ToolTipText = "Select all the contents of the current tab. (Ctrl+A)"
+        mnuClear.ToolTipText = "Clear the contents of the current tab. (Ctrl+L)"
+        mnuRunCurrentStatementSelection.ToolTipText = "Run the current statement or selection. (Ctrl+Enter)"
+        mnuRunAllText.ToolTipText = "Run all the text in the tab. (Ctrl+Alt+R)"
+        mnuOpenScriptasFile.ToolTipText = "Save file to log folder and open file in external editor."
+        mnuLoadScriptFromFile.ToolTipText = "Load script from file into the current tab."
+        mnuSaveScript.ToolTipText = "Save the script in the current tab to a file."
+        mnuHelp.ToolTipText = "Display the Script Window help information."
+        mnuInsertScript.ToolTipText = "Insert script in the current tab."
+
+        'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
+        mnuRunCurrentStatementSelection.ShortcutKeys = Keys.Enter Or Keys.Control
+
+        'Make the script tab the selected tab
+        TabControl.SelectTab(1)
+    End Sub
+
+    Private Sub SetupInitialLayout()
+        'Create log tab
+        AddTab(bIsLogTab:=True)
+
+        'Create script tab
+        AddTab()
+    End Sub
 
     ''' <summary>
     '''     The current text in the active tab. 
@@ -47,9 +119,22 @@ Public Class ucrScript
     '''     Appends <paramref name="strText"/> to the end of the text in the active tab.
     ''' </summary>
     ''' <param name="strText"> The text to append to the contents of the active tab.</param>
-    Public Sub AppendText(strText As String)
-        clsScriptActive.AppendText(Environment.NewLine & strText)
-        clsScriptActive.GotoPosition(clsScriptActive.TextLength)
+    Public Sub AppendText(strText As String, Optional bAppendAtCurrentCursorPosition As Boolean = False)
+        If String.IsNullOrEmpty(strText) Then
+            Exit Sub
+        End If
+
+        If bAppendAtCurrentCursorPosition Then
+            clsScriptActive.InsertText(clsScriptActive.CurrentPosition, strText & Environment.NewLine)
+            ' Todo. find a way of going to the last position of the inserted "group of text".
+            ' Currently this just goes to the last position of the first line of inserted text
+            clsScriptActive.GotoPosition(clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition)
+        Else
+            clsScriptActive.AppendText(Environment.NewLine & strText)
+            clsScriptActive.GotoPosition(clsScriptActive.TextLength)
+        End If
+
+
         EnableDisableButtons()
     End Sub
 
@@ -148,11 +233,10 @@ Public Class ucrScript
 
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save " & If(bIsLog, "Log", "Script") & " To File"
-            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgSave.Filter = "R Script File (*.R)|*.R|Text File (*.txt)|*.txt|JSON File (*.json)|*.json"
+            dlgSave.FileName = Path.GetFileName(TabControl.SelectedTab.Text)
 
-            'Ensure that dialog opens in correct folder.
-            'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
-            'not work (I think a bug in WinForms).So we need to use static variables instead.
+            ' Ensure that dialog opens in the correct folder.
             Static strInitialDirectory As String = frmMain.clsInstatOptions.strWorkingDirectory
             Static strInitialDirectoryLog As String = frmMain.clsInstatOptions.strWorkingDirectory
             dlgSave.InitialDirectory = If(bIsLog, strInitialDirectoryLog, strInitialDirectory)
@@ -160,8 +244,12 @@ Public Class ucrScript
             If dlgSave.ShowDialog() = DialogResult.OK Then
                 Try
                     File.WriteAllText(dlgSave.FileName, If(bIsLog, clsScriptLog.Text, clsScriptActive.Text))
+                    strInitialDirectory = Path.GetDirectoryName(dlgSave.FileName)
                     bIsTextChanged = False
-                    TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgSave.FileName)
+                    TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgSave.FileName)
+                    frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(strInitialDirectory), System.IO.Path.GetFileName(dlgSave.FileName)), "\", "/"))
+                    frmMain.bDataSaved = True
+
                     If bIsLog Then
                         strInitialDirectoryLog = Path.GetDirectoryName(dlgSave.FileName)
                     Else
@@ -169,8 +257,8 @@ Public Class ucrScript
                     End If
                 Catch
                     MsgBox("Could not save the " & If(bIsLog, "Log", "Script") & " file." & Environment.NewLine &
-                           "The file may be in use by another program or you may not have access to write to the specified location.",
-                           vbExclamation, "Save " & If(bIsLog, "Log", "Script"))
+                   "The file may be in use by another program or you may not have access to write to the specified location.",
+                   vbExclamation, "Save " & If(bIsLog, "Log", "Script"))
                 End Try
             End If
         End Using
@@ -230,6 +318,7 @@ Public Class ucrScript
 
         TabControl.SelectedTab = tabPageAdded
         bIsTextChanged = False
+        clsRScript = Nothing
         EnableDisableButtons()
     End Sub
 
@@ -238,7 +327,7 @@ Public Class ucrScript
         Dim bIsLogTab As Boolean = TabControl.SelectedIndex = iTabIndexLog
         Dim bScriptExists As Boolean = clsScriptActive.TextLength > 0
 
-        cmdRunLineSelection.Enabled = bScriptExists
+        cmdRunStatementSelection.Enabled = bScriptExists
         cmdRunAll.Enabled = bScriptExists
         cmdLoadScript.Enabled = Not bIsLogTab
         cmdSave.Enabled = bScriptExists
@@ -247,15 +336,10 @@ Public Class ucrScript
         cmdRemoveTab.Enabled = TabControl.TabCount > 2 AndAlso Not bIsLogTab
     End Sub
 
-    Private Sub EnableRunButtons(bEnable As Boolean)
-        cmdRunLineSelection.Enabled = bEnable
-        cmdRunAll.Enabled = bEnable
-    End Sub
-
     ''' <summary>
     ''' Enables or disables all right click menu options
     ''' </summary>
-    ''' <param name="bEnable">If true, enables all right click options,false otherwise</param>
+    ''' <param name="bEnable">If true, enables all right click options, false disables them</param>
     Private Sub EnableRightClickMenuOptions(bEnable As Boolean)
         mnuUndo.Enabled = bEnable
         mnuRedo.Enabled = bEnable
@@ -264,12 +348,94 @@ Public Class ucrScript
         mnuPaste.Enabled = bEnable
         mnuSelectAll.Enabled = bEnable
         mnuClear.Enabled = bEnable
-        mnuRunCurrentLineSelection.Enabled = bEnable
+        mnuFindNext.Enabled = bEnable
+        mnuFindPrev.Enabled = bEnable
+        mnuReplace.Enabled = bEnable
+        mnuReplaceAll.Enabled = bEnable
+        mnuRunCurrentStatementSelection.Enabled = bEnable
         mnuRunAllText.Enabled = bEnable
         mnuLoadScriptFromFile.Enabled = bEnable
         mnuOpenScriptasFile.Enabled = bEnable
         mnuSaveScript.Enabled = bEnable
     End Sub
+
+    ''' <summary>
+    ''' Enables or disables the run buttons and all right click menu options
+    ''' </summary>
+    ''' <param name="bEnable">If true, enables buttons/options, else disables them</param>
+    Private Sub EnableRunOptions(bEnable As Boolean)
+        cmdRunStatementSelection.Enabled = bEnable
+        cmdRunAll.Enabled = bEnable
+        EnableRightClickMenuOptions(bEnable)
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''    Searches for the next occurrence of <paramref name="strTextToFind"/> in the active 
+    '''    script and highlights it.
+    ''' </summary>
+    ''' <param name="strTextToFind"></param>
+    ''' <returns>True if the active script contains at least one instance of 
+    '''     <paramref name="strTextToFind"/>, else returns False</returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function FindAndHighlightNextOccurrence(strTextToFind As String) As Boolean
+
+        Dim iCurrentCursorPosition As Integer = clsScriptActive.CurrentPosition
+        Dim iNextOccurrencePosition As Integer = -1
+
+        ' If cursor not at end of text, search from cursor position
+        If iCurrentCursorPosition < clsScriptActive.Text.Length Then
+            iNextOccurrencePosition = clsScriptActive.Text.IndexOf(strTextToFind, iCurrentCursorPosition + 1)
+        End If
+
+        ' If the text is not found, search from the beginning of the text
+        If iNextOccurrencePosition = -1 Then
+            iNextOccurrencePosition = clsScriptActive.Text.IndexOf(strTextToFind, 0)
+        End If
+
+        If iNextOccurrencePosition = -1 Then
+            Return False
+        End If
+
+        clsScriptActive.GotoPosition(iNextOccurrencePosition)
+        clsScriptActive.SetSelection(iNextOccurrencePosition, iNextOccurrencePosition + strTextToFind.Length)
+
+        Return True
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''    Searches for the previous occurrence of <paramref name="strTextToFind"/> in the active 
+    '''    script and highlights it.
+    ''' </summary>
+    ''' <param name="strTextToFind"></param>
+    ''' <returns>True if the active script contains at least one instance of 
+    '''     <paramref name="strTextToFind"/>, else returns False</returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function FindAndHighlightPreviousOccurrence(strTextToFind As String) As Boolean
+
+        Dim iCurrentCursorPosition As Integer = clsScriptActive.CurrentPosition
+        Dim iPrevOccurrencePosition As Integer = -1
+
+        ' If cursor not at start of text, search from cursor position
+        If iCurrentCursorPosition > 0 Then
+            iPrevOccurrencePosition = clsScriptActive.Text.LastIndexOf(strTextToFind, iCurrentCursorPosition - 1)
+        End If
+
+        ' If the text is not found, search from the end of the text
+        If iPrevOccurrencePosition = -1 Then
+            iPrevOccurrencePosition = clsScriptActive.Text.LastIndexOf(strTextToFind, clsScriptActive.Text.Length - 1)
+        End If
+
+        If iPrevOccurrencePosition = -1 Then
+            Return False
+        End If
+
+        clsScriptActive.GotoPosition(iPrevOccurrencePosition)
+        clsScriptActive.SetSelection(iPrevOccurrencePosition, iPrevOccurrencePosition + strTextToFind.Length)
+
+        Return True
+    End Function
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
@@ -421,6 +587,12 @@ Public Class ucrScript
     End Sub
 
     Private Function IsBracket(iNewChar As Integer) As Boolean
+        'the `Chr()` function may throw an exception for higher value integers,
+        '    so check value is in a reasonable range. Note: 40 = `(` and 125 = `}`
+        If iNewChar < 40 OrElse iNewChar > 125 Then
+            Return False
+        End If
+
         Dim arrRBrackets() As String = {"(", ")", "{", "}", "[", "]"}
         Return arrRBrackets.Contains(Chr(iNewChar))
     End Function
@@ -448,9 +620,9 @@ Public Class ucrScript
 
         Using dlgLoad As New OpenFileDialog
             dlgLoad.Title = "Load Script From Text File"
-            dlgLoad.Filter = "Text & R Script Files (*.txt,*.R)|*.txt;*.R|R Script File (*.R)|*.R|Text File (*.txt)|*.txt"
+            dlgLoad.Filter = "Text & R Script Files (*.txt, *.R, *.json)|*.txt;*.R;*.json|R Script File (*.R)|*.R|Text File (*.txt)|*.txt|JSON File (*.json)|*.json"
 
-            'Ensure that dialog opens in correct folder.
+            ' Ensure that dialog opens in the correct folder.
             'In theory, we should be able to use `dlgLoad.RestoreDirectory = True` but this does
             'not work (I think a bug in WinForms).So we need to use a static variable instead.
             Static strInitialDirectory As String = frmMain.clsInstatOptions.strWorkingDirectory
@@ -462,9 +634,12 @@ Public Class ucrScript
 
             Try
                 frmMain.ucrScriptWindow.clsScriptActive.Text = File.ReadAllText(dlgLoad.FileName)
-                TabControl.SelectedTab.Text = System.IO.Path.GetFileName(dlgLoad.FileName)
+                TabControl.SelectedTab.Text = System.IO.Path.GetFileNameWithoutExtension(dlgLoad.FileName)
                 strInitialDirectory = Path.GetDirectoryName(dlgLoad.FileName)
                 bIsTextChanged = False
+                clsRScript = Nothing
+                frmMain.clsRecentItems.addToMenu(Replace(Path.Combine(Path.GetFullPath(strInitialDirectory), System.IO.Path.GetFileName(dlgLoad.FileName)), "\", "/"))
+                frmMain.bDataSaved = True
             Catch
                 MsgBox("Could not load the script from file." & Environment.NewLine &
                        "The file may be in use by another program or you may not have access to read from the specified location.",
@@ -550,24 +725,107 @@ Public Class ucrScript
         Return clsNewScript
     End Function
 
-    Private Sub RunCurrentLine()
-        Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
+    Private Sub RunCurrentStatement()
 
-        If clsScriptActive.TextLength > 0 Then
-            Dim strLineTextString = clsScriptActive.Lines(clsScriptActive.CurrentLine).Text
-            strScriptCmd &= vbCrLf & strLineTextString 'insert carriage return to ensure that new text starts on new line
-            strScriptCmd = RunText(strScriptCmd)
-
-            Dim iNextLinePos As Integer = clsScriptActive.Lines(clsScriptActive.CurrentLine).EndPosition
-            clsScriptActive.GotoPosition(iNextLinePos)
+        If clsScriptActive.TextLength <= 0 Then
+            Exit Sub
         End If
+
+        'temporarily disable the buttons in case its a long operation
+        EnableRunOptions(False)
+
+        Try
+            Dim dctRStatements As OrderedDictionary
+            Try
+                If clsRScript Is Nothing Then
+                    clsRScript = New RScript(clsScriptActive.Text)
+                End If
+                dctRStatements = clsRScript.statements
+            Catch ex As Exception
+                MsgBox("R script parsing failed with message:" & Environment.NewLine _
+                   & Environment.NewLine & ex.Message & Environment.NewLine & Environment.NewLine _
+                   & "Try using 'Run All' or 'Run Selected'. This will execute the script using a less strict method.",
+                   MsgBoxStyle.Information, "Could not parse R script")
+                Exit Sub
+            End Try
+
+            If IsNothing(dctRStatements) OrElse dctRStatements.Count = 0 Then
+                Exit Sub
+            End If
+
+            Dim iCaretPos As Integer = clsScriptActive.CurrentPosition
+            Dim iNextStatementPos As Integer = 0
+            Dim clsRStatement As RStatement = Nothing
+
+            For Each kvpDictEntry As DictionaryEntry In dctRStatements
+                If kvpDictEntry.Key > iCaretPos Then
+                    iNextStatementPos = kvpDictEntry.Key
+                    Exit For
+                End If
+                clsRStatement = kvpDictEntry.Value
+            Next
+
+            'if we will execute the only/last statement
+            If iNextStatementPos = 0 Then
+                ' if there is no blank line at end of text, then add blank line
+                If Not (clsScriptActive.Text.EndsWith(vbCr) _
+                    OrElse clsScriptActive.Text.EndsWith(vbLf)) Then
+                    clsScriptActive.AppendText(vbCrLf)
+                End If
+                iNextStatementPos = clsScriptActive.TextLength
+
+            Else 'else move caret to first non-blank line of next statement
+                For iTextPos As Integer = iNextStatementPos To clsScriptActive.Text.Length - 1
+                    Dim chrNext As Char = clsScriptActive.Text.Chars(iTextPos)
+                    If chrNext <> vbLf AndAlso chrNext <> vbCr AndAlso Not Char.IsWhiteSpace(chrNext) Then
+                        iNextStatementPos = iTextPos
+                        Exit For
+                    End If
+                Next
+            End If
+
+            clsScriptActive.GotoPosition(iNextStatementPos)
+
+            frmMain.clsRLink.RunRStatement(clsRStatement)
+            frmMain.UpdateAllGrids()
+        Finally
+            EnableRunOptions(True)
+        End Try
     End Sub
 
-    Private Function RunText(strText As String) As String
-        Return If(Not String.IsNullOrEmpty(strText),
-                  frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment),
-                  "")
-    End Function
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''     Executes the <paramref name="strScript"/> R script.
+    ''' </summary>
+    ''' <param name="strScript"> The R script to execute.</param>
+    ''' <param name="strComment">Converted into an R comment and prefixed to the script.</param>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub RunScript(strScript As String, strComment As String)
+
+        EnableRunOptions(False) 'temporarily disable the run buttons in case its a long operation
+
+        Dim dctRStatements As OrderedDictionary
+        Try
+            dctRStatements = New RScript(frmMain.clsRLink.GetFormattedComment(strComment) _
+                                            & Environment.NewLine & strScript).statements
+        Catch ex As Exception
+            MsgBox("R script parsing failed with message:" & Environment.NewLine _
+                   & Environment.NewLine & ex.Message & Environment.NewLine & Environment.NewLine _
+                   & "R-Instat will now attempt to execute the script using a less strict method.",
+                   MsgBoxStyle.Information, "Could Not Parse R Script")
+            frmMain.clsRLink.RunScriptFromWindow(strScript.Trim(vbLf), strComment)
+            dctRStatements = Nothing
+        End Try
+
+        If Not IsNothing(dctRStatements) Then
+            For Each kvpDictEntry As DictionaryEntry In dctRStatements
+                frmMain.clsRLink.RunRStatement(kvpDictEntry.Value)
+            Next
+            frmMain.UpdateAllGrids()
+        End If
+
+        EnableRunOptions(True)
+    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>
@@ -602,6 +860,7 @@ Public Class ucrScript
 
     Private Sub clsScriptActive_TextChanged(sender As Object, e As EventArgs) Handles clsScriptActive.TextChanged
         bIsTextChanged = True
+        clsRScript = Nothing
         EnableDisableButtons()
         SetLineNumberMarginWidth(clsScriptActive.Lines.Count.ToString().Length)
     End Sub
@@ -640,7 +899,6 @@ Public Class ucrScript
         EnableDisableButtons()
     End Sub
 
-
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
         'enable and disable menu options based on the active script properties before the user views them
 
@@ -656,15 +914,21 @@ Public Class ucrScript
             mnuUndo.Enabled = clsScriptActive.CanUndo
             mnuRedo.Enabled = clsScriptActive.CanRedo
             mnuCut.Enabled = bScriptSelected
-            mnuCopy.Enabled = bScriptSelected
             mnuPaste.Enabled = Clipboard.ContainsData(DataFormats.Text)
             mnuClear.Enabled = bScriptExists
             mnuLoadScriptFromFile.Enabled = True
         End If
 
+        'enable find/replace options
+        mnuFindNext.Enabled = isFindValid
+        mnuFindPrev.Enabled = isFindValid
+        mnuReplace.Enabled = isReplaceValid
+        mnuReplaceAll.Enabled = isReplaceValid
+
         'enable remaining options based on tab state
+        mnuCopy.Enabled = bScriptSelected
         mnuSelectAll.Enabled = bScriptExists
-        mnuRunCurrentLineSelection.Enabled = bScriptExists
+        mnuRunCurrentStatementSelection.Enabled = bScriptExists
         mnuRunAllText.Enabled = bScriptExists
         mnuOpenScriptasFile.Enabled = bScriptExists
         mnuSaveScript.Enabled = bScriptExists
@@ -702,6 +966,45 @@ Public Class ucrScript
         End If
         clsScriptActive.ClearAll()
         EnableDisableButtons()
+    End Sub
+
+    Private Sub mnuFindNext_Click(sender As Object, e As EventArgs) Handles mnuFindNext.Click
+        If Not isFindValid Then
+            Exit Sub
+        End If
+
+        ' Function will never return false when searching for the selected text,
+        ' so ignore the return value
+        FindAndHighlightNextOccurrence(clsScriptActive.SelectedText)
+    End Sub
+
+    Private Sub mnuFindPrev_Click(sender As Object, e As EventArgs) Handles mnuFindPrev.Click
+        If Not isFindValid Then
+            Exit Sub
+        End If
+
+        ' Function will never return false when searching for the selected text,
+        ' so ignore the return value
+        FindAndHighlightPreviousOccurrence(clsScriptActive.SelectedText)
+    End Sub
+
+    Private Sub mnuReplace_Click(sender As Object, e As EventArgs) Handles mnuReplace.Click
+        If Not isReplaceValid Then
+            Exit Sub
+        End If
+
+        Dim strSelectedTextOrigional As String = clsScriptActive.SelectedText
+        clsScriptActive.ReplaceSelection(Clipboard.GetText())
+        If Not FindAndHighlightNextOccurrence(strSelectedTextOrigional) Then
+            MsgBox("No more occurrences found.", MsgBoxStyle.Information, "Replace")
+        End If
+    End Sub
+
+    Private Sub mnuReplaceAll_Click(sender As Object, e As EventArgs) Handles mnuReplaceAll.Click
+        If Not isReplaceValid Then
+            Exit Sub
+        End If
+        ReplaceAll(clsScriptActive.SelectedText, Clipboard.GetText())
     End Sub
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click, cmdHelp.Click
@@ -750,6 +1053,15 @@ Public Class ucrScript
         End If
     End Sub
 
+    ' Ensure the cursor is visible by scrolling it into view
+    Private Sub SetFocusAndScrollCaret()
+        ' Set focus back to the ScintillaNET editor control
+        clsScriptActive.Focus()
+
+        ' Ensure the cursor is visible by scrolling it into view
+        clsScriptActive.ScrollCaret()
+    End Sub
+
     Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click, cmdRunAll.Click
         If clsScriptActive.TextLength < 1 _
                 OrElse MsgBox("Are you sure you want to run the entire contents of the script window?",
@@ -757,24 +1069,19 @@ Public Class ucrScript
             Exit Sub
         End If
 
-        EnableRunButtons(False) 'temporarily disable the run buttons in case its a long operation
-        EnableRightClickMenuOptions(False)
-        RunText(clsScriptActive.Text)
-        EnableRunButtons(True)
-        EnableRightClickMenuOptions(True)
+        RunScript(clsScriptActive.Text, "Code run from Script Window (all text)")
+
+        SetFocusAndScrollCaret()
     End Sub
 
-    Private Sub mnuRunCurrentLineSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click, cmdRunLineSelection.Click
-        'temporarily disable the buttons in case its a long operation
-        EnableRunButtons(False)
-        EnableRightClickMenuOptions(False)
+    Private Sub mnuRunCurrentStatementSelection_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentStatementSelection.Click, cmdRunStatementSelection.Click
         If clsScriptActive.SelectedText.Length > 0 Then
-            RunText(clsScriptActive.SelectedText)
+            RunScript(clsScriptActive.SelectedText, "Code run from Script Window (selected text)")
         Else
-            RunCurrentLine()
+            RunCurrentStatement()
         End If
-        EnableRunButtons(True)
-        EnableRightClickMenuOptions(True)
+
+        SetFocusAndScrollCaret()
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
@@ -802,6 +1109,33 @@ Public Class ucrScript
         End If
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    '''    Returns the number of occurrences of <paramref name="strTextToFind"/> in the script.
+    ''' </summary>
+    ''' <param name="strTextToFind"></param>
+    ''' <returns>the number of occurrences of <paramref name="strTextToFind"/> in the script</returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function NumOfOccurences(strTextToFind As String) As Integer
+        If String.IsNullOrEmpty(strTextToFind) Then
+            Return 0
+        End If
+
+        Dim strScriptText As String = clsScriptActive.Text
+        Dim iCount As Integer = 0
+        Dim iPosition As Integer = 0
+
+        While iPosition <> -1
+            iPosition = strScriptText.IndexOf(strTextToFind, iPosition)
+            If iPosition <> -1 Then
+                iCount += 1
+                iPosition += strTextToFind.Length
+            End If
+        End While
+
+        Return iCount
+    End Function
+
     Private Sub tabControl_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl.Selected
         Dim tabPageControls = TabControl.SelectedTab.Controls
         For Each control In tabPageControls
@@ -812,53 +1146,174 @@ Public Class ucrScript
                 'This is just to be on the safe side. It is not worth the extra complexity of
                 'checking if the script is the same as the associated file name
                 bIsTextChanged = clsScriptActive.TextLength > 0
-
+                clsRScript = Nothing
                 EnableDisableButtons()
                 Exit Sub
             End If
         Next
 
         If IsNothing(clsScriptActive) Then
-            MsgBox("Developer error: could not find editor winfow in tab.")
+            MsgBox("Developer error: could not find editor window in tab.")
         End If
     End Sub
 
-    Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub TabControl_DoubleClick(sender As Object, e As EventArgs) Handles TabControl.DoubleClick
+        Dim rectangle = TabControl.GetTabRect(TabControl.SelectedIndex())
+        rectangle = TabControl.RectangleToScreen(rectangle)
+        rectangle = TabControl.Parent.RectangleToClient(rectangle)
+        Dim textbox As New System.Windows.Forms.TextBox
 
-        toolTipScriptWindow.SetToolTip(cmdRunLineSelection, "Run the current line or selection. (Ctrl+Enter)")
-        toolTipScriptWindow.SetToolTip(cmdRunAll, "Run all the text in the tab. (Ctrl+Alt+R)")
-        toolTipScriptWindow.SetToolTip(cmdLoadScript, "Load a script from file into the current tab.")
-        toolTipScriptWindow.SetToolTip(cmdSave, "Save the script in the current tab to a file.")
-        toolTipScriptWindow.SetToolTip(cmdAddTab, "Add a new tab.")
-        toolTipScriptWindow.SetToolTip(cmdRemoveTab, "Delete the current tab.")
-        toolTipScriptWindow.SetToolTip(cmdClear, "Clear the contents of the current tab. (Ctrl+L)")
-        toolTipScriptWindow.SetToolTip(cmdHelp, "Display the Script Window help information.")
+        AddHandler textbox.Leave, AddressOf RenameTextboxLeave
+        AddHandler textbox.KeyDown, AddressOf RenameTextboxKeyDown
+        textbox.SetBounds(rectangle.Left, rectangle.Top, rectangle.Width, rectangle.Height)
+        Me.Controls.Add(textbox)
+        textbox.BringToFront()
+        textbox.Focus()
+    End Sub
 
-        mnuUndo.ToolTipText = "Undo the last change. (Ctrl+Z)"
-        mnuRedo.ToolTipText = "Redo the last change. (Ctrl+Y)"
-        mnuCut.ToolTipText = "Copy the selected text to the clipboard, then delete the text. (Ctrl+X)"
-        mnuCopy.ToolTipText = "Copy the selected text to the clipboard. (Ctrl+C)"
-        mnuPaste.ToolTipText = "Paste the contents of the clipboard into the current tab. (Ctrl+V)"
-        mnuSelectAll.ToolTipText = "Select all the contents of the current tab. (Ctrl+A)"
-        mnuClear.ToolTipText = "Clear the contents of the current tab. (Ctrl+L)"
-        mnuRunCurrentLineSelection.ToolTipText = "Run the current line or selection. (Ctrl+Enter)"
-        mnuRunAllText.ToolTipText = "Run all the text in the tab. (Ctrl+Alt+R)"
-        mnuOpenScriptasFile.ToolTipText = "Save file to log folder and open file in external editor."
-        mnuLoadScriptFromFile.ToolTipText = "Load script from file into the current tab."
-        mnuSaveScript.ToolTipText = "Save the script in the current tab to a file."
-        mnuHelp.ToolTipText = "Display the Script Window help information."
+    Private Sub RenameTextboxKeyDown(sender As Object, e As KeyEventArgs)
+        If e.KeyCode = Keys.Enter Then
+            TabControl.SelectedTab.Text = sender.text
+            'Move focus from the textbox - this will make it dispose
+            TabControl.SelectedTab.Focus()
+        End If
+    End Sub
 
-        'normally we would do this in the designer, but designer doesn't allow enter key as shortcut
-        mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
+    Private Sub RenameTextboxLeave(sender As Object, e As EventArgs)
+        TabControl.SelectedTab.Text = sender.text
+        sender.Dispose()
+    End Sub
 
-        'Create log tab
-        AddTab(bIsLogTab:=True)
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>
+    ''' Finds all occurrences of <paramref name="strFindText"/> in the script and replaces them all 
+    ''' with <paramref name="strReplacementText"/>. Moves the caret to the start of the script and, 
+    ''' if needed, scrolls the caret into view.
+    ''' </summary>
+    ''' <param name="strFindText"> The text to search for</param>
+    ''' <param name="strReplacementText"> The new text to replace <paramref name="strFindText"/></param>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub ReplaceAll(strFindText As String, strReplacementText As String)
 
-        'Create script tab
-        AddTab()
+        If String.IsNullOrEmpty(strFindText) Then
+            MsgBox("The text to find cannot be empty.", MsgBoxStyle.Exclamation, "Replace All")
+            Exit Sub
+        End If
 
-        'Make the log tab the selected tab
-        TabControl.SelectTab(iTabIndexLog)
+        Dim iCount As Integer = NumOfOccurences(strFindText)
+        If iCount = 0 Then
+            MsgBox("The text to find was not found in the document.", MsgBoxStyle.Information, "Replace All")
+            Exit Sub
+        End If
+
+        Dim result As MsgBoxResult = MsgBox(
+                $"Do you want to replace {iCount} occurrence(s) of the selected text?",
+                vbYesNo + vbQuestion, "Replace All")
+        If result = MsgBoxResult.No Then
+            Exit Sub
+        End If
+
+        ' Replace all occurrences of the text to find with the replacement text
+        Dim iPosition As Integer = 0
+        clsScriptActive.BeginUndoAction()
+        Try
+            While iPosition <> -1
+                iPosition = clsScriptActive.Text.IndexOf(strFindText, iPosition)
+                If iPosition <> -1 Then
+                    clsScriptActive.TargetStart = iPosition
+                    clsScriptActive.TargetEnd = iPosition + strFindText.Length
+                    clsScriptActive.ReplaceTarget(strReplacementText)
+                    iPosition += strReplacementText.Length
+                End If
+            End While
+        Finally
+            clsScriptActive.EndUndoAction()
+        End Try
+
+        clsScriptActive.GotoPosition(0)
+        clsScriptActive.ScrollCaret()
+    End Sub
+
+    Private Sub mnuReformatCode_Click(sender As Object, e As EventArgs) Handles mnuReformatCode.Click
+        ' Exit early if no text is selected
+        If clsScriptActive.SelectionStart = clsScriptActive.SelectionEnd Then
+            Exit Sub
+        End If
+
+        ' Your R script text from Scintilla
+        Dim scriptText As String = clsScriptActive.SelectedText.Replace("""", "\""")
+        Dim clsStylerFunction As New RFunction
+
+        clsStylerFunction.SetPackageName("styler")
+        clsStylerFunction.SetRCommand("style_text")
+        clsStylerFunction.AddParameter("text", Chr(34) & scriptText & Chr(34), bIncludeArgumentName:=False)
+
+        Dim expTemp As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsStylerFunction.ToScript(), bSilent:=True)
+
+        ' Check if the result from R is valid
+        If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+            ' If valid, format and replace the selected text
+            Dim formattedCode As String() = expTemp.AsCharacter().ToArray
+            Dim formattedText As String = String.Join(Environment.NewLine, formattedCode)
+            clsScriptActive.ReplaceSelection(formattedText)
+        End If
+    End Sub
+
+    Private Sub cmdInsert_Click(sender As Object, e As EventArgs) Handles cmdInsert.Click, toolStripMenuItemInsertStatement.Click
+        dlgScript.ShowDialog()
+    End Sub
+
+    Private Sub toolStripMenuItemInsertCommentUncomment_Click(sender As Object, e As EventArgs) Handles toolStripMenuItemInsertCommentUncomment.Click
+        Dim originalCaretPosition As Integer = clsScriptActive.CurrentPosition
+
+        ' Get the start and end positions of the selected text
+        Dim selectionStart As Integer = clsScriptActive.SelectionStart
+        Dim selectionEnd As Integer = clsScriptActive.SelectionEnd
+
+        ' Get the start and end lines of the selection
+        Dim startLine As Integer = clsScriptActive.LineFromPosition(selectionStart)
+        Dim endLine As Integer = clsScriptActive.LineFromPosition(selectionEnd)
+
+        ' Begin updating text
+        clsScriptActive.BeginUndoAction()
+
+        Try
+            ' Check if all lines are commented or not
+            Dim allCommented As Boolean = True
+            For lineIndex As Integer = startLine To endLine
+                Dim lineText As String = clsScriptActive.Lines(lineIndex).Text.TrimStart()
+                If Not lineText.StartsWith("#") Then
+                    allCommented = False
+                    Exit For
+                End If
+            Next
+
+            ' Toggle comment status for each line
+            For lineIndex As Integer = startLine To endLine
+                Dim line As Line = clsScriptActive.Lines(lineIndex)
+                Dim lineStartPos As Integer = line.Position
+                Dim lineEndPos As Integer = lineStartPos + line.Length
+                Dim lineText As String = line.Text
+                Dim iCountSpace As Integer = System.Text.RegularExpressions.Regex.Matches(lineText, "#\s#").Count
+                If iCountSpace > 0 Then iCountSpace += 1
+
+                If allCommented Then
+                    ' Set the target range to the matched text
+                    clsScriptActive.TargetStart = lineStartPos
+                    clsScriptActive.TargetEnd = lineStartPos + lineText.Count(Function(c) c = "#"c) + iCountSpace
+                    ' Replace the target range with an empty string to remove the `#`
+                    clsScriptActive.ReplaceTarget("")
+                Else
+                    ' Comment: Add `#` at the start
+                    clsScriptActive.InsertText(lineStartPos, "# ")
+                End If
+            Next
+        Finally
+            clsScriptActive.EndUndoAction()
+        End Try
+
+        clsScriptActive.Focus()
+        clsScriptActive.GotoPosition(originalCaretPosition)
     End Sub
 
 End Class

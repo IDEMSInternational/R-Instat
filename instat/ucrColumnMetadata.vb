@@ -31,6 +31,55 @@ Public Class ucrColumnMetadata
     Private strDataTypeLabel As String = "DataType"
     Private strLabelsLabel As String = "labels"
     Private strLabelsScientific As String = "Scientific"
+    Private _Refreshed As Boolean = False
+    Private _isEnabled As Boolean
+    Private bWideDataSetPromptResponse As DialogResult = DialogResult.None
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        SetupInitialLayoutAndGrid()
+    End Sub
+
+    Private Sub ucrColumnMetadata_Load(sender As Object, e As EventArgs) Handles Me.Load
+        mnuInsertColsAfter.Visible = False
+        mnuInsertColsBefore.Visible = False
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub ucrColumnMetadata_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        'todo. a temporary useful fix because of wide data sets
+        'the grid may not have the latest contents because of being hidden
+        'once 'paging' feature is implemented, this block can be removed.
+        RefreshGridData()
+    End Sub
+
+    Private Sub SetupInitialLayoutAndGrid()
+        lstNonEditableColumns.AddRange({"class", "labels", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
+
+        'DEBUG
+        ' If True Then
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+            _grid = ucrLinuxGrid
+            tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Percent
+            tlpTableContainer.ColumnStyles(0).Width = 100
+            tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Absolute
+            tlpTableContainer.ColumnStyles(1).Width = 0
+        Else
+            _grid = ucrReoGrid
+            tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Absolute
+            tlpTableContainer.ColumnStyles(0).Width = 0
+            tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Percent
+            tlpTableContainer.ColumnStyles(1).Width = 100
+        End If
+        _grid.SetNonEditableColumns(lstNonEditableColumns)
+        _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, columnContextMenuStrip, statusColumnMenu)
+        AddHandler _grid.EditValue, AddressOf EditValue
+        AddHandler _grid.DeleteLabels, AddressOf DeleteLables
+    End Sub
 
     Public WriteOnly Property DataBook() As clsDataBook
         Set(ByVal value As clsDataBook)
@@ -38,12 +87,6 @@ Public Class ucrColumnMetadata
             _grid.DataBook = value
         End Set
     End Property
-
-    Private Sub frmVariables_Load(sender As Object, e As EventArgs) Handles Me.Load
-        loadForm()
-        mnuInsertColsAfter.Visible = False
-        mnuInsertColsBefore.Visible = False
-    End Sub
 
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
         Return _clsDataBook.GetDataFrame(_grid.CurrentWorksheet.Name)
@@ -54,10 +97,32 @@ Public Class ucrColumnMetadata
             Exit Sub
         End If
 
-        _grid.CurrentWorksheet = fillWorksheet
-        _grid.UpdateWorksheetStyle(fillWorksheet)
-        _grid.AddColumns(dataFrame.clsColumnMetaData)
-        _grid.AddRowData(dataFrame.clsColumnMetaData)
+        Dim bFillData As Boolean = True
+
+        'check for wide data sets and prompt users about it
+        'todo. this check is necessary for wide data sets
+        'once the "paging" feature is implemented, then the check can be removed.
+        'see issue #7161 and PR #8465 for more discussions
+        If dataFrame.clsColumnMetaData.iRowCount > 1000 Then
+            'if not asked or no response before then prompt for a response
+            If bWideDataSetPromptResponse = DialogResult.None Then
+                bWideDataSetPromptResponse = MessageBox.Show(Me, "Are you sure you need wide data set(s) column metadata?  If so, be patient.  It, will be slow to load the first time", "Wide Data Set(s) Detected",
+                                                             MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+            End If
+
+            'if response is no or no response given then don't fill the worksheet with data
+            If bWideDataSetPromptResponse = DialogResult.No Then
+                bFillData = False
+            End If
+        End If
+
+        If bFillData Then
+            _grid.CurrentWorksheet = fillWorksheet
+            _grid.UpdateWorksheetStyle(fillWorksheet)
+            _grid.AddColumns(dataFrame.clsColumnMetaData)
+            _grid.AddRowData(dataFrame.clsColumnMetaData)
+        End If
+
         dataFrame.clsColumnMetaData.HasChanged = False
     End Sub
 
@@ -86,37 +151,25 @@ Public Class ucrColumnMetadata
         _grid.UpdateAllWorksheetStyles()
     End Sub
 
+    Public Property IsEnabled() As Boolean
+        Get
+            Return _isEnabled
+        End Get
+        Set(ByVal value As Boolean)
+            _isEnabled = value
+        End Set
+    End Property
+
     Public Sub RefreshGridData()
-        If _clsDataBook IsNot Nothing Then
-            _grid.RemoveOldWorksheets()
+        'todo. a temporary useful fix because of wide data sets
+        'only refresh the grid when the data book is initialised and the grid is visible
+        'displaying more than a 1000 rows takes a lot of time
+        'in the long term, this window should have 'paging' feature similar to the data viewer to display 11000 rows only.
+        If _clsDataBook IsNot Nothing AndAlso Visible AndAlso _isEnabled Then
             AddAndUpdateWorksheets()
+            _grid.RemoveOldWorksheets()
             _grid.bVisible = _clsDataBook.DataFrames.Count > 0
         End If
-    End Sub
-
-    Private Sub loadForm()
-        lstNonEditableColumns.AddRange({"class", "labels", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
-
-        'DEBUG
-        ' If True Then
-        If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
-            _grid = ucrLinuxGrid
-            tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Percent
-            tlpTableContainer.ColumnStyles(0).Width = 100
-            tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Absolute
-            tlpTableContainer.ColumnStyles(1).Width = 0
-        Else
-            _grid = ucrReoGrid
-            tlpTableContainer.ColumnStyles(0).SizeType = SizeType.Absolute
-            tlpTableContainer.ColumnStyles(0).Width = 0
-            tlpTableContainer.ColumnStyles(1).SizeType = SizeType.Percent
-            tlpTableContainer.ColumnStyles(1).Width = 100
-        End If
-        _grid.SetNonEditableColumns(lstNonEditableColumns)
-        _grid.SetContextmenuStrips(Nothing, cellContextMenuStrip, columnContextMenuStrip, statusColumnMenu)
-        AddHandler _grid.EditValue, AddressOf EditValue
-        AddHandler _grid.DeleteLabels, AddressOf DeleteLables
-        autoTranslate(Me)
     End Sub
 
     Public Sub SetCurrentDataFrame(strDataName As String)
@@ -131,7 +184,7 @@ Public Class ucrColumnMetadata
         Dim clsDeleteLabelsFunction As New RFunction
 
         If strColumnName = strLabelsLabel Then
-            If MsgBox("This will delete the selected label(s) and replace with (NA)." &
+            If MsgBox("This will delete the selected label(s) and replace them with (NA)." &
                                 Environment.NewLine & "Continue?",
                                 MessageBoxButtons.YesNo, "Delete Labels") = DialogResult.Yes Then
 
@@ -267,12 +320,6 @@ Public Class ucrColumnMetadata
         EndWait()
     End Sub
 
-    Private Sub mnuConvertToLogical_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogical.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToLogical(GetSelectedDataframeColumnsFromSelectedRows)
-        EndWait()
-    End Sub
-
     Private Sub mnuClearColumnFilter_Click(sender As Object, e As EventArgs) Handles mnuClearColumnFilter.Click
         StartWait()
         GetCurrentDataFrameFocus().clsPrepareFunctions.RemoveCurrentFilter()
@@ -294,7 +341,11 @@ Public Class ucrColumnMetadata
         Cursor = Cursors.Default
     End Sub
 
-    Private Function GetFirstSelectedDataframeColumnFromSelectedRow() As String
+    Public Function IsVisible() As Boolean
+        Return _grid.bVisible
+    End Function
+
+    Public Function GetFirstSelectedDataframeColumnFromSelectedRow() As String
         Return _grid.GetCellValue(_grid.GetSelectedRows(0) - 1, strNameLabel)
     End Function
 
@@ -307,7 +358,7 @@ Public Class ucrColumnMetadata
         Return selectedDataframeColumns
     End Function
 
-    Private Function IsOnlyOneDataframeColumnSeleted() As Boolean
+    Private Function IsOnlyOneDataframeColumnSelected() As Boolean
         Return _grid.GetSelectedRows().Count = 1
     End Function
 
@@ -344,7 +395,7 @@ Public Class ucrColumnMetadata
         If _grid.GetSelectedRows.Count = GetCurrentDataFrameFocus()?.iTotalColumnCount Then
             MsgBox("Cannot delete all visible columns." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
         Else
-            Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
+            Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?", MessageBoxButtons.YesNo, "Delete Column")
             If deleteCol = DialogResult.Yes Then
                 StartWait()
                 GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteColumn(GetSelectedDataframeColumnsFromSelectedRows)
@@ -370,7 +421,7 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub columnContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles columnContextMenuStrip.Opening
-        If IsOnlyOneDataFrameColumnSeleted() Then
+        If IsOnlyOneDataframeColumnSelected() Then
             mnuLevelsLabels.Enabled = IsFirstSelectedDataFrameColumnAFactor()
             mnuDeleteCol.Text = GetTranslation("Delete Column")
             mnuInsertColsBefore.Text = GetTranslation("Insert 1 Column Before")
@@ -430,12 +481,6 @@ Public Class ucrColumnMetadata
         dlgCopyDataFrame.ShowDialog()
     End Sub
 
-    Private Sub viewSheet_Click(sender As Object, e As EventArgs) Handles viewSheet.Click
-        StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
-        EndWait()
-    End Sub
-
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
         dlgReorderDataFrame.ShowDialog()
     End Sub
@@ -465,7 +510,19 @@ Public Class ucrColumnMetadata
         EndWait()
     End Sub
 
+    Public Sub UseColumnSelectionInMetaData(bUseColumnSelecion As Boolean)
+        If GetCurrentDataFrameFocus() IsNot Nothing Then
+            GetCurrentDataFrameFocus().clsColumnMetaData.UseColumnSelectionInMetaData = bUseColumnSelecion
+        End If
+    End Sub
+
     Private Sub mnuHelp1_Click(sender As Object, e As EventArgs) Handles mnuHelp1.Click, mnuHelp2.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "543")
+    End Sub
+
+    Private Sub mnuConvertToDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click
+        dlgMakeDate.SetCurrentColumn(GetFirstSelectedDataframeColumnFromSelectedRow(), _grid.CurrentWorksheet.Name)
+        dlgMakeDate.enumMakedateMode = dlgMakeDate.MakedateMode.Column
+        dlgMakeDate.ShowDialog()
     End Sub
 End Class

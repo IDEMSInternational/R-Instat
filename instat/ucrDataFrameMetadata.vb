@@ -30,6 +30,20 @@ Public Class ucrDataFrameMetadata
     Private clsViewDataFrame As New RFunction
     Private clsGetDataFrame As New RFunction
 
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        SetupInitialLayoutAndGrid()
+    End Sub
+    Private Sub ucrDataFrameMetadata_Load(sender As Object, e As EventArgs) Handles Me.Load
+        clsViewDataFrame.SetRCommand("View")
+        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
+    End Sub
+
+
     Public WriteOnly Property DataBook() As clsDataBook
         Set(ByVal value As clsDataBook)
             _clsDataBook = value
@@ -37,14 +51,7 @@ Public Class ucrDataFrameMetadata
         End Set
     End Property
 
-    Private Sub frmMetaData_Load(sender As Object, e As EventArgs) Handles Me.Load
-        LoadForm()
-        clsViewDataFrame.SetRCommand("View")
-        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
-    End Sub
-
-    Private Sub LoadForm()
+    Private Sub SetupInitialLayoutAndGrid()
         lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Row_Count", "Column_Count", "Is_Linkable", "Is_Calculated"})
 
         'Debug
@@ -193,16 +200,6 @@ Public Class ucrDataFrameMetadata
         dlgCopyDataFrame.ShowDialog()
     End Sub
 
-    Private Sub viewSheet_Click(sender As Object, e As EventArgs) Handles viewSheet.Click
-        Dim strScript As String = ""
-        Dim strTemp As String
-        clsGetDataFrame.AddParameter("data_name", Chr(34) & GetSelectedDataframeNameFromSelectedRow() & Chr(34), iPosition:=0)
-        clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame, iPosition:=0)
-        clsGetDataFrame.SetAssignTo(GetSelectedDataframeNameFromSelectedRow)
-        strTemp = clsViewDataFrame.ToScript(strScript)
-        RunScriptFromDataFrameMetadata(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
-    End Sub
-
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
         dlgReorderDataFrame.ShowDialog()
     End Sub
@@ -214,5 +211,9 @@ Public Class ucrDataFrameMetadata
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
         dlgAddComment.SetPosition(strDataFrame:=_grid.CurrentWorksheet.Name)
         dlgAddComment.ShowDialog()
+    End Sub
+
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "544")
     End Sub
 End Class

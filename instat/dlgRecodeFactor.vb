@@ -27,6 +27,7 @@ Public Class dlgRecodeFactor
     Private clsDummyFunction As New RFunction
     Private bReset As Boolean = True
     Private Const strNewLabelColName As String = "New Label"
+    Private _strSelectedColumn As String
 
     Private Sub dlgRecodeFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -37,6 +38,7 @@ Public Class dlgRecodeFactor
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetSelectedColumn()
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
@@ -237,6 +239,24 @@ Public Class dlgRecodeFactor
         End If
     End Sub
 
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        ' Call the utility method to perform the column selection logic.
+        clsColumnSelectionUtility.SetSelectedColumn(ucrSelectorForRecode.lstAvailableVariable,
+                                                 ucrReceiverFactor,
+                                                 clsDummyFunction,
+                                                 ucrSelectorForRecode.strCurrentDataFrame,
+                                                 _strSelectedColumn)
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
@@ -279,10 +299,16 @@ Public Class dlgRecodeFactor
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged, ucrPnlMethods.ControlValueChanged, ucrPnlKeep.ControlValueChanged, ucrInputOther.ControlValueChanged, ucrNudLevels.ControlValueChanged, ucrNudCommonValues.ControlValueChanged, ucrNudFrequentValues.ControlValueChanged, ucrFactorLevels.ControlValueChanged
         If rdoRecode.Checked Then
+            ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsPlyrRevalueFunction)
         ElseIf rdoAddNa.Checked Then
+            ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             ucrBase.clsRsyntax.SetBaseRFunction(clsFctExplicitNaFunction)
         ElseIf rdoOther.Checked OrElse rdoLump.Checked Then
+            ucrReceiverFactor.SetMeAsReceiver()
+            clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
             If ucrInputOther.IsEmpty OrElse ucrInputOther.GetText = "Other" Then
                 clsFctOtherFunction.AddParameter("other_level", Chr(34) & "Other" & Chr(34), iPosition:=2)
                 clsFctLowFreqFunction.AddParameter("other_level", Chr(34) & "Other" & Chr(34), iPosition:=2)
@@ -297,6 +323,8 @@ Public Class dlgRecodeFactor
                 clsFctLumpNFunction.AddParameter("other_level", Chr(34) & ucrInputOther.GetText() & Chr(34), iPosition:=2)
             End If
             If rdoOther.Checked Then
+                ucrReceiverFactor.SetMeAsReceiver()
+                clsDummyFunction.AddParameter("strVal", ucrReceiverFactor.GetVariableNames(False))
                 clsFctOtherFunction.RemoveParameterByName("keep")
                 clsFctOtherFunction.RemoveParameterByName("drop")
                 If rdoKeep.Checked Then

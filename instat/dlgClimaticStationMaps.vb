@@ -64,7 +64,7 @@ Public Class dlgClimaticStationMaps
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 558
+        ucrBase.iHelpTopicID = 645
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -120,7 +120,7 @@ Public Class dlgClimaticStationMaps
         ucrSaveMap.SetPrefix("map")
         ucrSaveMap.SetSaveTypeAsGraph()
         ucrSaveMap.SetIsComboBox()
-        ucrSaveMap.SetCheckBoxText("Save Map")
+        ucrSaveMap.SetCheckBoxText("Store Map")
         ucrSaveMap.SetAssignToIfUncheckedValue("last_map")
         ucrSaveMap.SetDataFrameSelector(ucrSelectorOutline.ucrAvailableDataFrames)
 
