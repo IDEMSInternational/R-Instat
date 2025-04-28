@@ -1192,4 +1192,14 @@ Public Class ucrCore
     Public Overridable Sub SetAddRemoveParameter(bNew As Boolean)
         bAddRemoveParameter = bNew
     End Sub
+
+    ''' <summary>
+    ''' Returns information about the state of the control. This should be overridden in child 
+    ''' classes. If not overwritten, then throws an exception.
+    ''' </summary>
+    ''' <returns> Never returns (exception thrown) </returns>
+    Public Overridable Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        Throw New Exception("GetText should only be called for child classes")
+    End Function
+
 End Class

@@ -782,7 +782,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub linkStartOpenLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenLibrary.LinkClicked
-        dlgFromLibrary.ShowDialog()
+        dlgFromLibrary.Show()
     End Sub
 
     ''' <summary>

@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgCountinFactor
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsDefaultFunction, clsDummyFunction As New RFunction
+    Private _strSelectedColumn As String
 
     Private Sub dlgCountinFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -29,6 +30,7 @@ Public Class dlgCountinFactor
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetSelectedColumn()
         bReset = False
         TestOkEnabled()
         autoTranslate(Me)
@@ -57,14 +59,14 @@ Public Class dlgCountinFactor
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-
+        clsDummyFunction = New RFunction
         ucrCountSelector.Reset()
         ucrNewColName.Reset()
 
         clsDefaultFunction.SetPackageName("dae")
         clsDefaultFunction.SetRCommand("fac.nested")
         clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrCountSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
-
+        clsDummyFunction.AddParameter("strVal", ucrCountReceiver.GetVariableNames(False))
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
@@ -86,7 +88,26 @@ Public Class dlgCountinFactor
         TestOkEnabled()
     End Sub
 
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        ' Call the utility method to perform the column selection logic.
+        clsColumnSelectionUtility.SetSelectedColumn(ucrCountSelector.lstAvailableVariable,
+                                                 ucrCountReceiver,
+                                                 clsDummyFunction,
+                                                 ucrCountSelector.strCurrentDataFrame,
+                                                 _strSelectedColumn)
+    End Sub
+
     Private Sub ucrCountReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCountReceiver.ControlContentsChanged, ucrNewColName.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class
