@@ -22,6 +22,7 @@ Public Class sdgDisplayModelOptions
     Private clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction As RFunction
     Private clsGetDataFrameFunction, clsSndgetVarmataFunction, clsLevelFunction, clsFactorFunction As RFunction
     Private clsStatsOperator, clsCoefOperator, clsAssignOperator, clsSpaceOperator As ROperator
+    Private clsGetObjectHeatFunction, clsGetObjectPlotFunction, clsGetObjectBarFunction, clsAddObjectHeatFunction, clsAddObjectPlotFunction, clsAddObjectBarFunction As RFunction
     Private bRCodeSet As Boolean = True
     Private bControlsInitialised As Boolean = False
     Private clsRSyntax As New RSyntax
@@ -125,7 +126,7 @@ Public Class sdgDisplayModelOptions
         bControlsInitialised = False
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction, clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction, clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction, clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewGetDataFrameFunction As RFunction, clsNewSndgetVarmataFunction As RFunction, clsNewLevelFunction As RFunction, clsNewFactorFunction As RFunction, clsNewStatsOperator As ROperator, clsNewAssigneOperator As ROperator, clsNewSpaceOperator As ROperator, clsNewCoefOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewGetObjectHeatFunction As RFunction, clsNewGetObjectPlotFunction As RFunction, clsNewGetObjectBarFunction As RFunction, clsNewAddObjectHeatFunction As RFunction, clsNewAddObjectPlotFunction As RFunction, clsNewAddObjectBarFunction As RFunction, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction, clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction, clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction, clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewGetDataFrameFunction As RFunction, clsNewSndgetVarmataFunction As RFunction, clsNewLevelFunction As RFunction, clsNewFactorFunction As RFunction, clsNewStatsOperator As ROperator, clsNewAssigneOperator As ROperator, clsNewSpaceOperator As ROperator, clsNewCoefOperator As ROperator, Optional bReset As Boolean = False)
         ucrNudConfLevel.SetText("0.95")
         bRCodeSet = False
         If Not bControlsInitialised Then
@@ -133,6 +134,12 @@ Public Class sdgDisplayModelOptions
         End If
 
         clsRSyntax = clsNewRSyntax
+        clsGetObjectHeatFunction = clsNewGetObjectHeatFunction
+        clsGetObjectPlotFunction = clsNewGetObjectPlotFunction
+        clsGetObjectBarFunction = clsNewGetObjectBarFunction
+        clsAddObjectHeatFunction = clsNewAddObjectHeatFunction
+        clsAddObjectPlotFunction = clsNewAddObjectPlotFunction
+        clsAddObjectBarFunction = clsNewAddObjectBarFunction
         clsAnnovaFunction = clsNewAnnovaFunction
         clsSummaryFunction = clsNewSummaryFunction
         clsEstimatesFunction = clsNewEstimatesFunction
@@ -334,17 +341,25 @@ Public Class sdgDisplayModelOptions
         If ucrChkPlot.Checked Then
             clsRSyntax.AddToBeforeCodes(clsPlotFunction)
             clsRSyntax.AddToBeforeCodes(clsWrapPlotFunction)
+            clsRSyntax.AddToBeforeCodes(clsAddObjectPlotFunction)
+            clsRSyntax.AddToBeforeCodes(clsGetObjectPlotFunction)
         Else
             clsRSyntax.RemoveFromBeforeCodes(clsPlotFunction)
             clsRSyntax.RemoveFromBeforeCodes(clsWrapPlotFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsAddObjectPlotFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsGetObjectPlotFunction)
         End If
     End Sub
 
     Private Sub ucrChkHeat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkHeat.ControlValueChanged
         If ucrChkHeat.Checked Then
             clsRSyntax.AddToBeforeCodes(clsHeatFunction)
+            clsRSyntax.AddToBeforeCodes(clsAddObjectHeatFunction)
+            clsRSyntax.AddToBeforeCodes(clsGetObjectHeatFunction)
         Else
             clsRSyntax.RemoveFromBeforeCodes(clsHeatFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsAddObjectHeatFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsGetObjectHeatFunction)
         End If
     End Sub
 
@@ -352,9 +367,13 @@ Public Class sdgDisplayModelOptions
         If ucrChkBar.Checked Then
             clsRSyntax.AddToBeforeCodes(clsBarfunction)
             clsRSyntax.AddToBeforeCodes(clsWrapBarFunction)
+            clsRSyntax.AddToBeforeCodes(clsAddObjectBarFunction)
+            clsRSyntax.AddToBeforeCodes(clsGetObjectBarFunction)
         Else
             clsRSyntax.RemoveFromBeforeCodes(clsBarfunction)
             clsRSyntax.RemoveFromBeforeCodes(clsWrapBarFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsAddObjectBarFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsGetObjectBarFunction)
         End If
     End Sub
 End Class

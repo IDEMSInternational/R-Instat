@@ -23,6 +23,7 @@ Public Class dlgPlacketLuceModel
     Private clsGetDataFrameFunction, clsSndgetVarmataFunction, clsLevelFunction, clsFactorFunction, clsNamesFunction, clsGetVarMetadataFunction, clsGetObjectRFunction, clsRankingsItemsFunction, clsVarFunction, clsMapFunction, clsPlacketFunction As RFunction
     Private clsPlotFunction, clsWrapPlotFunction, clsWrapBarFunction, clsHeatFunction, clsBarfunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsSummaryFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction, clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
     Private clsCoefFunction, clsStatsFunction As RFunction
+    Private clsGetObjectHeatFunction, clsGetObjectPlotFunction, clsGetObjectBarFunction, clsAddObjectHeatFunction, clsAddObjectPlotFunction, clsAddObjectBarFunction As RFunction
     Private clsStatsOperator, clsCoefOperator As ROperator
     Private clsAssignOperator, clsSpaceOpreator As ROperator
     Private clsGetRankingOperator, clsModelOperator, clsPlacketOperator, clsNamesOperator As ROperator
@@ -43,7 +44,7 @@ Public Class dlgPlacketLuceModel
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.clsRsyntax.iCallType = 2
 
         ucrSelectorTraitsPL.SetParameter(New RParameter("data_name", 0))
         ucrSelectorTraitsPL.SetParameterIsString()
@@ -97,6 +98,12 @@ Public Class dlgPlacketLuceModel
         clsFactorFunction = New RFunction
         clsWrapBarFunction = New RFunction
         clsWrapPlotFunction = New RFunction
+        clsGetObjectHeatFunction = New RFunction
+        clsGetObjectPlotFunction = New RFunction
+        clsGetObjectBarFunction = New RFunction
+        clsAddObjectHeatFunction = New RFunction
+        clsAddObjectPlotFunction = New RFunction
+        clsAddObjectBarFunction = New RFunction
 
         clsSpaceOpreator = New ROperator
         clsAssignOperator = New ROperator
@@ -160,16 +167,19 @@ Public Class dlgPlacketLuceModel
         clsAnnovaFunction.SetRCommand("map")
         clsAnnovaFunction.AddParameter(".x", "mod", iPosition:=0)
         clsAnnovaFunction.AddParameter(".f", "~stats::anova(.x)", iPosition:=1)
+        clsAnnovaFunction.iCallType = 2
 
         clsSummaryFunction.SetPackageName("purrr")
         clsSummaryFunction.SetRCommand("map")
         clsSummaryFunction.AddParameter(".x", "mod", iPosition:=0)
         clsSummaryFunction.AddParameter(".f", "~summary(.x)", iPosition:=1)
+        clsSummaryFunction.iCallType = 2
 
         clsEstimatesFunction.SetPackageName("purrr")
         clsEstimatesFunction.SetRCommand("map")
         clsEstimatesFunction.AddParameter(".x", "mod", iPosition:=0)
         clsEstimatesFunction.AddParameter(".f", clsROperatorParameter:=clsCoefOperator, iPosition:=1)
+        clsEstimatesFunction.iCallType = 2
 
         clsCoefOperator.SetOperation("~")
         clsCoefOperator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
@@ -182,6 +192,7 @@ Public Class dlgPlacketLuceModel
         clsConfidenLimFunction.SetRCommand("map")
         clsConfidenLimFunction.AddParameter(".x", "mod", iPosition:=0)
         clsConfidenLimFunction.AddParameter(".f", clsROperatorParameter:=clsStatsOperator, iPosition:=1)
+        clsConfidenLimFunction.iCallType = 2
 
         clsStatsOperator.SetOperation("~")
         clsStatsOperator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
@@ -196,41 +207,49 @@ Public Class dlgPlacketLuceModel
         clsAICFunction.SetRCommand("map")
         clsAICFunction.AddParameter(".x", "mod", iPosition:=0)
         clsAICFunction.AddParameter(".f", "~AIC(.x)", iPosition:=1)
+        clsAICFunction.iCallType = 2
 
         clsDevianceFunction.SetPackageName("purrr")
         clsDevianceFunction.SetRCommand("map")
         clsDevianceFunction.AddParameter(".x", "mod", iPosition:=0)
         clsDevianceFunction.AddParameter(".f", "~deviance(.x)", iPosition:=1)
+        clsDevianceFunction.iCallType = 2
 
         clsSecondEstimatesFunction.SetPackageName("purrr")
         clsSecondEstimatesFunction.SetRCommand("map")
         clsSecondEstimatesFunction.AddParameter(".x", "mod", iPosition:=0)
         clsSecondEstimatesFunction.AddParameter(".f", "~fitted.values(.x)", iPosition:=1)
+        clsSecondEstimatesFunction.iCallType = 2
 
         clsPariPropFunction.SetPackageName("purrr")
         clsPariPropFunction.SetRCommand("map")
         clsPariPropFunction.AddParameter(".x", "mod", iPosition:=0)
         clsPariPropFunction.AddParameter(".f", "~gosset::pairwise_probs(coef(.x))", iPosition:=1)
+        clsPariPropFunction.iCallType = 2
 
         clsReliabilityFunction.SetPackageName("purrr")
         clsReliabilityFunction.SetRCommand("map")
         clsReliabilityFunction.AddParameter(".x", "purrr::imap(.x = mod,  .f = ~gosset::reliability(.x, ref = variety_baseline))", iPosition:=0)
         clsReliabilityFunction.AddParameter(".f", "~ .x %>% dplyr::mutate(reliability_rescaled = round(reliability / 0.5 - 1, 2))", iPosition:=1)
+        clsReliabilityFunction.iCallType = 2
 
         clsItemsFunction.SetPackageName("purrr")
         clsItemsFunction.SetRCommand("map")
         clsItemsFunction.AddParameter(".x", "mod", iPosition:=0)
         clsItemsFunction.AddParameter(".f", "~PlackettLuce::itempar(.x)", iPosition:=1)
+        clsItemsFunction.iCallType = 2
 
         clsVarianCovaMatrixFunction.SetPackageName("purrr")
         clsVarianCovaMatrixFunction.SetRCommand("map")
         clsVarianCovaMatrixFunction.AddParameter(".x", "mod", iPosition:=0)
         clsVarianCovaMatrixFunction.AddParameter(".f", "~vcov(.x)", iPosition:=1)
+        clsVarianCovaMatrixFunction.iCallType = 2
 
         clsQuasivarianceFunction.SetPackageName("purrr")
         clsQuasivarianceFunction.SetRCommand("map")
         clsQuasivarianceFunction.AddParameter(".x", "mod", iPosition:=0)
         clsQuasivarianceFunction.AddParameter(".f", "~qvcalc::qvcalc(PlackettLuce::itempar(.x))", iPosition:=1)
+        clsQuasivarianceFunction.iCallType = 2
 
         clsAssignOperator.SetOperation("<-")
         Dim strDataname As String = ucrSelectorTraitsPL.ucrAvailableDataFrames.cboAvailableDataFrames.Text
@@ -257,21 +276,28 @@ Public Class dlgPlacketLuceModel
         clsFactorFunction.SetRCommand("factor")
         clsFactorFunction.AddParameter("x", ucrSelectorTraitsPL.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "[[var_name]]")
 
-        '        breadwheat_by_ID_variety <- data_book$get_data_frame("breadwheat_by_ID_variety")
-        'var_name <- data_book$get_variables_from_metadata(data_name = "breadwheat_by_ID_variety", property = "Tricot_Type", property_value = "variety")
-        'variety_baseline <- levels(factor(breadwheat_by_ID_variety[[var_name]]))[1]
-
         clsPlotFunction.SetPackageName("purrr")
         clsPlotFunction.SetRCommand("map2")
         clsPlotFunction.AddParameter(".x", "mod", iPosition:=0)
         clsPlotFunction.AddParameter(".y", "names(mod)", iPosition:=1)
-        clsPlotFunction.AddParameter(".f", "~graphics::plot(x = .x) + ggplot2::ggtitle(.y))", iPosition:=2)
+        clsPlotFunction.AddParameter(".f", "~gosset:::plot.PlackettLuce(x = .x) + ggplot2::ggtitle(.y)", iPosition:=2)
         clsPlotFunction.SetAssignTo("list_of_plots")
 
         clsHeatFunction.SetPackageName("gosset")
         clsHeatFunction.SetRCommand("worth_map")
         clsHeatFunction.AddParameter(".x", "mod", iPosition:=0, bIncludeArgumentName:=False)
         clsHeatFunction.AddParameter("labels", "names(mod)", iPosition:=1)
+        clsHeatFunction.SetAssignTo("last_graph")
+
+        clsAddObjectHeatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
+        clsAddObjectHeatFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        clsAddObjectHeatFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
+        clsAddObjectHeatFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
+        clsAddObjectHeatFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
+
+        clsGetObjectHeatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectHeatFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        clsGetObjectHeatFunction.AddParameter("as_file", "TRUE", iPosition:=2)
 
         clsBarfunction.SetPackageName("purrr")
         clsBarfunction.SetRCommand("map2")
@@ -283,10 +309,32 @@ Public Class dlgPlacketLuceModel
         clsWrapPlotFunction.SetPackageName("patchwork")
         clsWrapPlotFunction.SetRCommand("wrap_plots")
         clsWrapPlotFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
+        clsWrapPlotFunction.SetAssignTo("last_graph")
+
+        clsAddObjectPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
+        clsAddObjectPlotFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        clsAddObjectPlotFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
+        clsAddObjectPlotFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
+        clsAddObjectPlotFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
+
+        clsGetObjectPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectPlotFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        clsGetObjectPlotFunction.AddParameter("as_file", "TRUE", iPosition:=2)
 
         clsWrapBarFunction.SetPackageName("patchwork")
         clsWrapBarFunction.SetRCommand("wrap_plots")
         clsWrapBarFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
+        clsWrapBarFunction.SetAssignTo("last_graph")
+
+        clsAddObjectBarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
+        clsAddObjectBarFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        clsAddObjectBarFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
+        clsAddObjectBarFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
+        clsAddObjectBarFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
+
+        clsGetObjectBarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetObjectBarFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        clsGetObjectBarFunction.AddParameter("as_file", "TRUE", iPosition:=2)
 
         clsModelOperator.SetOperation("")
         clsModelOperator.AddParameter("left", "mod", iPosition:=0)
@@ -297,11 +345,7 @@ Public Class dlgPlacketLuceModel
                                                   strObjectName:="last_model")
 
         ucrBase.clsRsyntax.ClearCodes()
-        ' ucrBase.clsRsyntax.AddToBeforeCodes(clsGetVarMetadataFunction, iPosition:=0)
-        ' ucrBase.clsRsyntax.AddToBeforeCodes(clsGetRankingOperator, iPosition:=1)
-        ' ucrBase.clsRsyntax.AddToBeforeCodes(clsVarFunction, iPosition:=2)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsRankingsItemsFunction, iPosition:=3)
-
         ucrBase.clsRsyntax.AddToBeforeCodes(clsMapFunction, iPosition:=4)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=5)
         ucrBase.clsRsyntax.SetBaseROperator(clsModelOperator)
@@ -311,6 +355,12 @@ Public Class dlgPlacketLuceModel
         ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsGetObjectRFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
         ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsGetDataFrameFunction, New RParameter("x", 0, False), iAdditionalPairNo:=2)
         ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsSndgetVarmataFunction, New RParameter("data_name", 0), iAdditionalPairNo:=3)
+        ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsAddObjectBarFunction, New RParameter("data_name", 0), iAdditionalPairNo:=4)
+        ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsAddObjectHeatFunction, New RParameter("data_name", 0), iAdditionalPairNo:=5)
+        ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsAddObjectPlotFunction, New RParameter("data_name", 0), iAdditionalPairNo:=6)
+        ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsGetObjectBarFunction, New RParameter("data_name", 0), iAdditionalPairNo:=7)
+        ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsGetObjectHeatFunction, New RParameter("data_name", 0), iAdditionalPairNo:=8)
+        ucrSelectorTraitsPL.AddAdditionalCodeParameterPair(clsGetObjectPlotFunction, New RParameter("data_name", 0), iAdditionalPairNo:=9)
         ucrReceiverMultipleTraits.SetRCode(clsVarFunction, bReset)
         ucrSelectorTraitsPL.SetRCode(clsGetVarMetadataFunction, bReset)
         ucrSaveResult.SetRCode(clsModelOperator, bReset)
@@ -331,7 +381,7 @@ Public Class dlgPlacketLuceModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction, clsNewAnnovaFunction:=clsAnnovaFunction, clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction, clsNewCoefFunction:=clsCoefFunction, clsNewCoefOperator:=clsCoefOperator, clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction, clsNewItemsFunction:=clsItemsFunction, clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction, clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction, clsNewNodeLabFuction:=clsNodeLabFuction, clsNewStatsOperator:=clsStatsOperator, clsNewSndgetVarmataFunction:=clsSndgetVarmataFunction, clsNewSpaceOperator:=clsSpaceOpreator, clsNewLevelFunction:=clsLevelFunction, clsNewAssigneOperator:=clsAssignOperator, clsNewFactorFunction:=clsFactorFunction, clsNewGetDataFrameFunction:=clsGetDataFrameFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, bReset:=bResetSubdialog)
+        sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewGetObjectHeatFunction:=clsGetObjectHeatFunction, clsNewGetObjectPlotFunction:=clsGetObjectPlotFunction, clsNewGetObjectBarFunction:=clsGetObjectBarFunction, clsNewAddObjectHeatFunction:=clsAddObjectHeatFunction, clsNewAddObjectPlotFunction:=clsAddObjectPlotFunction, clsNewAddObjectBarFunction:=clsAddObjectBarFunction, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction, clsNewAnnovaFunction:=clsAnnovaFunction, clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction, clsNewCoefFunction:=clsCoefFunction, clsNewCoefOperator:=clsCoefOperator, clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction, clsNewItemsFunction:=clsItemsFunction, clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction, clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction, clsNewNodeLabFuction:=clsNodeLabFuction, clsNewStatsOperator:=clsStatsOperator, clsNewSndgetVarmataFunction:=clsSndgetVarmataFunction, clsNewSpaceOperator:=clsSpaceOpreator, clsNewLevelFunction:=clsLevelFunction, clsNewAssigneOperator:=clsAssignOperator, clsNewFactorFunction:=clsFactorFunction, clsNewGetDataFrameFunction:=clsGetDataFrameFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, bReset:=bResetSubdialog)
         sdgDisplayModelOptions.ucrChkRegret.Enabled = False
         sdgDisplayModelOptions.ucrChkNodeLabel.Enabled = False
         sdgDisplayModelOptions.ucrChkNodeRules.Enabled = False
@@ -341,7 +391,6 @@ Public Class dlgPlacketLuceModel
         AddRemoveFunctions()
     End Sub
 
-
     Private Sub AddRemoveFunctions()
         If sdgDisplayModelOptions.ucrChkReability.Checked OrElse sdgDisplayModelOptions.ucrChkHeat.Checked OrElse sdgDisplayModelOptions.ucrChkBar.Checked Then
             clsMapFunction.AddParameter("ref", "variety_baseline", iPosition:=2)
@@ -350,7 +399,6 @@ Public Class dlgPlacketLuceModel
             ucrBase.clsRsyntax.AddToBeforeCodes(clsSpaceOpreator, iPosition:=6)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsMapFunction, iPosition:=7)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=8)
-
         Else
             clsMapFunction.RemoveParameterByName("ref")
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAssignOperator)
