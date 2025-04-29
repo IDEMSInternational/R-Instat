@@ -39,6 +39,7 @@ Public Class dlgTransformTricotData
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 671
         ucrReceiverTricotData.SetParameter(New RParameter("data_list", 0))
         ucrReceiverTricotData.SetParameterIsString()
         ucrReceiverTricotData.Selector = ucrSelectorTricotData
@@ -85,6 +86,12 @@ Public Class dlgTransformTricotData
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgTransformations.SetRFunction(clsNewRFunction:=clsOutputDataLevel, clsNewDefaultFunction:=clsCreateTricotData, ucrNewBaseSelector:=ucrSelectorTricotData, bReset:=bResetSubdialog)
+        sdgTransformations.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub TestOKEnabled()
