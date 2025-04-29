@@ -166,7 +166,7 @@ Public Class dlgPlacketLuceModel
         clsAnnovaFunction.SetPackageName("purrr")
         clsAnnovaFunction.SetRCommand("map")
         clsAnnovaFunction.AddParameter(".x", "mod", iPosition:=0)
-        clsAnnovaFunction.AddParameter(".f", "~stats::anova(.x)", iPosition:=1)
+        clsAnnovaFunction.AddParameter(".f", "~gosset:::anova.PlackettLuce(.x)", iPosition:=1)
         clsAnnovaFunction.iCallType = 2
 
         clsSummaryFunction.SetPackageName("purrr")
