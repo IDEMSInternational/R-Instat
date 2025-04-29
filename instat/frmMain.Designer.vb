@@ -177,11 +177,6 @@ Partial Class frmMain
         Me.PrepareToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator83 = New System.Windows.Forms.ToolStripSeparator()
-        Me.StructuredToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ClimaticToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ProcurementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExperimentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAboutR = New System.Windows.Forms.ToolStripMenuItem()
@@ -748,6 +743,13 @@ Partial Class frmMain
         Me.DuplicatesKeyVariableCheckToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TwoThreeVariableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GraphSummariseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptionalMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StructuredToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClimaticToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProcurementToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExperimentsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TricotMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TricotXPMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1631,7 +1633,7 @@ Partial Class frmMain
         '
         'mnuHelp
         '
-        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpFAQ, Me.mnuHelpGetingStarted, Me.mnuHelpData, Me.ToolStripSeparator28, Me.mnuHelpWindows, Me.ToolStripSeparator81, Me.mnuHelpMenus, Me.mnuHelpAboutR, Me.mnuHelpLearningStatistics, Me.mnuHelpRPackages, Me.mnuHelpGlossary, Me.mnuHelpLicence, Me.ToolStripSeparator29, Me.mnuHelpResourcesSite, Me.mnuHelpPackagesDocumentation})
+        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpFAQ, Me.mnuHelpGetingStarted, Me.mnuHelpData, Me.ToolStripSeparator28, Me.mnuHelpWindows, Me.ToolStripSeparator81, Me.mnuHelpMenus, Me.OptionalMenuToolStripMenuItem, Me.mnuHelpAboutR, Me.mnuHelpLearningStatistics, Me.mnuHelpRPackages, Me.mnuHelpGlossary, Me.mnuHelpLicence, Me.ToolStripSeparator29, Me.mnuHelpResourcesSite, Me.mnuHelpPackagesDocumentation})
         Me.mnuHelp.Name = "mnuHelp"
         Me.mnuHelp.Size = New System.Drawing.Size(44, 22)
         Me.mnuHelp.Tag = "Help"
@@ -1679,10 +1681,10 @@ Partial Class frmMain
         '
         'mnuHelpMenus
         '
-        Me.mnuHelpMenus.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenusAndDialogsToolStripMenuItem, Me.ToolStripSeparator82, Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.PrepareToolStripMenuItem, Me.DescribeToolStripMenuItem, Me.ModelToolStripMenuItem, Me.ToolStripSeparator83, Me.StructuredToolStripMenuItem, Me.ClimaticToolStripMenuItem, Me.ProcurementToolStripMenuItem, Me.ExperimentsToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ViewToolStripMenuItem})
+        Me.mnuHelpMenus.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenusAndDialogsToolStripMenuItem, Me.ToolStripSeparator82, Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.PrepareToolStripMenuItem, Me.DescribeToolStripMenuItem, Me.ModelToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ViewToolStripMenuItem})
         Me.mnuHelpMenus.Name = "mnuHelpMenus"
         Me.mnuHelpMenus.Size = New System.Drawing.Size(239, 22)
-        Me.mnuHelpMenus.Text = "Menus and Dialogs"
+        Me.mnuHelpMenus.Text = "Menu"
         '
         'MenusAndDialogsToolStripMenuItem
         '
@@ -1724,35 +1726,6 @@ Partial Class frmMain
         Me.ModelToolStripMenuItem.Name = "ModelToolStripMenuItem"
         Me.ModelToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
         Me.ModelToolStripMenuItem.Text = "Model..."
-        '
-        'ToolStripSeparator83
-        '
-        Me.ToolStripSeparator83.Name = "ToolStripSeparator83"
-        Me.ToolStripSeparator83.Size = New System.Drawing.Size(181, 6)
-        '
-        'StructuredToolStripMenuItem
-        '
-        Me.StructuredToolStripMenuItem.Name = "StructuredToolStripMenuItem"
-        Me.StructuredToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
-        Me.StructuredToolStripMenuItem.Text = "Structured..."
-        '
-        'ClimaticToolStripMenuItem
-        '
-        Me.ClimaticToolStripMenuItem.Name = "ClimaticToolStripMenuItem"
-        Me.ClimaticToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
-        Me.ClimaticToolStripMenuItem.Text = "Climatic..."
-        '
-        'ProcurementToolStripMenuItem
-        '
-        Me.ProcurementToolStripMenuItem.Name = "ProcurementToolStripMenuItem"
-        Me.ProcurementToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
-        Me.ProcurementToolStripMenuItem.Text = "Procurement..."
-        '
-        'ExperimentsToolStripMenuItem
-        '
-        Me.ExperimentsToolStripMenuItem.Name = "ExperimentsToolStripMenuItem"
-        Me.ExperimentsToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
-        Me.ExperimentsToolStripMenuItem.Text = "Experiments..."
         '
         'ToolsToolStripMenuItem
         '
@@ -5580,6 +5553,49 @@ Partial Class frmMain
         Me.GraphSummariseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.GraphSummariseToolStripMenuItem.Text = "graph summarise"
         '
+        'OptionalMenuToolStripMenuItem
+        '
+        Me.OptionalMenuToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StructuredToolStripMenuItem1, Me.ClimaticToolStripMenuItem1, Me.ProcurementToolStripMenuItem1, Me.ExperimentsToolStripMenuItem1, Me.TricotMenuToolStripMenuItem, Me.TricotXPMenuToolStripMenuItem})
+        Me.OptionalMenuToolStripMenuItem.Name = "OptionalMenuToolStripMenuItem"
+        Me.OptionalMenuToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
+        Me.OptionalMenuToolStripMenuItem.Text = "Optional Menu"
+        '
+        'StructuredToolStripMenuItem1
+        '
+        Me.StructuredToolStripMenuItem1.Name = "StructuredToolStripMenuItem1"
+        Me.StructuredToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.StructuredToolStripMenuItem1.Text = "Structured"
+        '
+        'ClimaticToolStripMenuItem1
+        '
+        Me.ClimaticToolStripMenuItem1.Name = "ClimaticToolStripMenuItem1"
+        Me.ClimaticToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.ClimaticToolStripMenuItem1.Text = "Climatic"
+        '
+        'ProcurementToolStripMenuItem1
+        '
+        Me.ProcurementToolStripMenuItem1.Name = "ProcurementToolStripMenuItem1"
+        Me.ProcurementToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.ProcurementToolStripMenuItem1.Text = "Procurement"
+        '
+        'ExperimentsToolStripMenuItem1
+        '
+        Me.ExperimentsToolStripMenuItem1.Name = "ExperimentsToolStripMenuItem1"
+        Me.ExperimentsToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.ExperimentsToolStripMenuItem1.Text = "Experiments"
+        '
+        'TricotMenuToolStripMenuItem
+        '
+        Me.TricotMenuToolStripMenuItem.Name = "TricotMenuToolStripMenuItem"
+        Me.TricotMenuToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TricotMenuToolStripMenuItem.Text = "Tricot Menu"
+        '
+        'TricotXPMenuToolStripMenuItem
+        '
+        Me.TricotXPMenuToolStripMenuItem.Name = "TricotXPMenuToolStripMenuItem"
+        Me.TricotXPMenuToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TricotXPMenuToolStripMenuItem.Text = "Tricot XP Menu"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -6284,13 +6300,8 @@ Partial Class frmMain
     Friend WithEvents PrepareToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DescribeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ModelToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents StructuredToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ClimaticToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator81 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator82 As ToolStripSeparator
-    Friend WithEvents ToolStripSeparator83 As ToolStripSeparator
-    Friend WithEvents ProcurementToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExperimentsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuSwapDataLogScript As ToolStripMenuItem
@@ -6349,4 +6360,11 @@ Partial Class frmMain
     Friend WithEvents DuplicatesKeyVariableCheckToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TwoThreeVariableToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GraphSummariseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OptionalMenuToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StructuredToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ClimaticToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ProcurementToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ExperimentsToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents TricotMenuToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TricotXPMenuToolStripMenuItem As ToolStripMenuItem
 End Class
