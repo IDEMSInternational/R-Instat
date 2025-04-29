@@ -3045,4 +3045,8 @@ Public Class frmMain
         dlgTraitCorrelations.ShowDialog()
 
     End Sub
+
+    Private Sub DuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicatesToolStripMenuItem.Click
+
+    End Sub
 End Class
