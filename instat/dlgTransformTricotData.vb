@@ -36,6 +36,7 @@ Public Class dlgTransformTricotData
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 671
         ucrReceiverTricotData.SetParameter(New RParameter("data_list", 0))
         ucrReceiverTricotData.SetParameterIsRFunction()
         ucrReceiverTricotData.Selector = ucrSelectorTricotData
