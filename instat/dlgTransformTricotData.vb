@@ -23,6 +23,7 @@ Public Class dlgTransformTricotData
     Private clsOutputLevelsOperator, OverallSymbolOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
 
     Private Sub dlgTransformTricotData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -80,6 +81,12 @@ Public Class dlgTransformTricotData
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgTransformations.SetRFunction(clsNewRFunction:=clsOutputDataLevel, clsNewDefaultFunction:=clsCreateTricotData, ucrNewBaseSelector:=ucrSelectorTricotData, bReset:=bResetSubdialog)
+        sdgTransformations.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub TestOKEnabled()

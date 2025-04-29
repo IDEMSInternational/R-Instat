@@ -445,6 +445,12 @@
     <Compile Include="dlgOutfillingStationData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgTransformations.Designer.vb">
+      <DependentUpon>sdgTransformations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTransformations.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
     </Compile>
@@ -3539,6 +3545,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOutfillingStationData.resx">
       <DependentUpon>dlgOutfillingStationData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTransformations.resx">
+      <DependentUpon>sdgTransformations.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
