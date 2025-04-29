@@ -3045,4 +3045,8 @@ Public Class frmMain
         dlgTraitCorrelations.ShowDialog()
 
     End Sub
+
+    Private Sub mnuTricotModelOverall_Click(sender As Object, e As EventArgs) Handles mnuTricotModelOverall.Click
+        dlgTricotModelOneVarCov.ShowDialog()
+    End Sub
 End Class
