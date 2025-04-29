@@ -44,6 +44,7 @@ Public Class dlgImportfromClimMob
 
     Private Sub InitialiseDialog()
 
+        ucrBase.iHelpTopicID = 650
         ucrInputServerName.SetItems({strClimmob3, str1000FARMS, strAVISA, strRTB})
         ucrInputServerName.SetDropDownStyleAsNonEditable()
         ucrInputServerName.SetLinkedDisplayControl(lblServerName)
