@@ -5541,13 +5541,13 @@ Partial Class frmMain
         Me.TwoThreeVariableToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GraphSummariseToolStripMenuItem})
         Me.TwoThreeVariableToolStripMenuItem.Name = "TwoThreeVariableToolStripMenuItem"
         Me.TwoThreeVariableToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.TwoThreeVariableToolStripMenuItem.Text = "Two/Three Variable"
+        Me.TwoThreeVariableToolStripMenuItem.Text = "Two/Three Variables"
         '
         'GraphSummariseToolStripMenuItem
         '
         Me.GraphSummariseToolStripMenuItem.Name = "GraphSummariseToolStripMenuItem"
         Me.GraphSummariseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.GraphSummariseToolStripMenuItem.Text = "Graph Summarise"
+        Me.GraphSummariseToolStripMenuItem.Text = "graph summarise"
         '
         'PrepareToolStripMenuItem1
         '
@@ -5577,8 +5577,8 @@ Partial Class frmMain
         'DuplicatesToolStripMenuItem
         '
         Me.DuplicatesToolStripMenuItem.Name = "DuplicatesToolStripMenuItem"
-        Me.DuplicatesToolStripMenuItem.Size = New System.Drawing.Size(234, 22)
-        Me.DuplicatesToolStripMenuItem.Text = "Duplicate (Key Variable Check)"
+        Me.DuplicatesToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
+        Me.DuplicatesToolStripMenuItem.Text = "Duplicates (Key Variable Check)"
         '
         'frmMain
         '
