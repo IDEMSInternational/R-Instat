@@ -27,7 +27,7 @@ Partial Class sdgTransformations
         Me.rdoIDLevel = New System.Windows.Forms.RadioButton()
         Me.ucrPnlTransformations = New instat.UcrPanel()
         Me.rdoIDVarietyLevel = New System.Windows.Forms.RadioButton()
-        Me.ucrSelectorTricotTransformations = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorTricotIDLevel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverIDVariable = New instat.ucrReceiverSingle()
         Me.lblIDVariable = New System.Windows.Forms.Label()
         Me.lblVariety = New System.Windows.Forms.Label()
@@ -43,6 +43,18 @@ Partial Class sdgTransformations
         Me.lblGoodTraits = New System.Windows.Forms.Label()
         Me.lblBadTraits = New System.Windows.Forms.Label()
         Me.lblNAs = New System.Windows.Forms.Label()
+        Me.ucrReceiverIDVarietyVar = New instat.ucrReceiverSingle()
+        Me.ucrReceiverIDVarietyLevel = New instat.ucrReceiverSingle()
+        Me.lblVariety2 = New System.Windows.Forms.Label()
+        Me.ucrReceiverTraitID = New instat.ucrReceiverSingle()
+        Me.ucrReceiverTraitsVariety = New instat.ucrReceiverSingle()
+        Me.lblIDVariable2 = New System.Windows.Forms.Label()
+        Me.lblIDVariable3 = New System.Windows.Forms.Label()
+        Me.lblVariety3 = New System.Windows.Forms.Label()
+        Me.lblTrait2 = New System.Windows.Forms.Label()
+        Me.ucrSelectorTricotVarietyLevel = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorIDVarietyLevel = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorIDVarTraitLevel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'rdoIDVarietyTraitLevel
@@ -121,17 +133,17 @@ Partial Class sdgTransformations
         Me.rdoIDVarietyLevel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoIDVarietyLevel.UseVisualStyleBackColor = True
         '
-        'ucrSelectorTricotTransformations
+        'ucrSelectorTricotIDLevel
         '
-        Me.ucrSelectorTricotTransformations.AutoSize = True
-        Me.ucrSelectorTricotTransformations.bDropUnusedFilterLevels = False
-        Me.ucrSelectorTricotTransformations.bShowHiddenColumns = False
-        Me.ucrSelectorTricotTransformations.bUseCurrentFilter = True
-        Me.ucrSelectorTricotTransformations.Location = New System.Drawing.Point(12, 73)
-        Me.ucrSelectorTricotTransformations.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorTricotTransformations.Name = "ucrSelectorTricotTransformations"
-        Me.ucrSelectorTricotTransformations.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorTricotTransformations.TabIndex = 9
+        Me.ucrSelectorTricotIDLevel.AutoSize = True
+        Me.ucrSelectorTricotIDLevel.bDropUnusedFilterLevels = False
+        Me.ucrSelectorTricotIDLevel.bShowHiddenColumns = False
+        Me.ucrSelectorTricotIDLevel.bUseCurrentFilter = True
+        Me.ucrSelectorTricotIDLevel.Location = New System.Drawing.Point(12, 73)
+        Me.ucrSelectorTricotIDLevel.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorTricotIDLevel.Name = "ucrSelectorTricotIDLevel"
+        Me.ucrSelectorTricotIDLevel.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorTricotIDLevel.TabIndex = 9
         '
         'ucrReceiverIDVariable
         '
@@ -158,7 +170,7 @@ Partial Class sdgTransformations
         'lblVariety
         '
         Me.lblVariety.AutoSize = True
-        Me.lblVariety.Location = New System.Drawing.Point(307, 129)
+        Me.lblVariety.Location = New System.Drawing.Point(307, 73)
         Me.lblVariety.Name = "lblVariety"
         Me.lblVariety.Size = New System.Drawing.Size(42, 13)
         Me.lblVariety.TabIndex = 15
@@ -168,7 +180,7 @@ Partial Class sdgTransformations
         '
         Me.ucrReceiverVariety.AutoSize = True
         Me.ucrReceiverVariety.frmParent = Me
-        Me.ucrReceiverVariety.Location = New System.Drawing.Point(310, 155)
+        Me.ucrReceiverVariety.Location = New System.Drawing.Point(310, 99)
         Me.ucrReceiverVariety.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariety.Name = "ucrReceiverVariety"
         Me.ucrReceiverVariety.Selector = Nothing
@@ -180,7 +192,7 @@ Partial Class sdgTransformations
         'lblTraits
         '
         Me.lblTraits.AutoSize = True
-        Me.lblTraits.Location = New System.Drawing.Point(307, 185)
+        Me.lblTraits.Location = New System.Drawing.Point(309, 220)
         Me.lblTraits.Name = "lblTraits"
         Me.lblTraits.Size = New System.Drawing.Size(36, 13)
         Me.lblTraits.TabIndex = 17
@@ -190,7 +202,7 @@ Partial Class sdgTransformations
         '
         Me.ucrReceiverTraits1.AutoSize = True
         Me.ucrReceiverTraits1.frmParent = Me
-        Me.ucrReceiverTraits1.Location = New System.Drawing.Point(310, 211)
+        Me.ucrReceiverTraits1.Location = New System.Drawing.Point(311, 238)
         Me.ucrReceiverTraits1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTraits1.Name = "ucrReceiverTraits1"
         Me.ucrReceiverTraits1.Selector = Nothing
@@ -202,7 +214,7 @@ Partial Class sdgTransformations
         'ucrBaseSdgCorrPlot
         '
         Me.ucrBaseSdgCorrPlot.AutoSize = True
-        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(98, 375)
+        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(98, 379)
         Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
         Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSdgCorrPlot.TabIndex = 18
@@ -211,7 +223,7 @@ Partial Class sdgTransformations
         '
         Me.ucrReceiverTraits2.AutoSize = True
         Me.ucrReceiverTraits2.frmParent = Me
-        Me.ucrReceiverTraits2.Location = New System.Drawing.Point(310, 260)
+        Me.ucrReceiverTraits2.Location = New System.Drawing.Point(310, 238)
         Me.ucrReceiverTraits2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTraits2.Name = "ucrReceiverTraits2"
         Me.ucrReceiverTraits2.Selector = Nothing
@@ -259,7 +271,7 @@ Partial Class sdgTransformations
         Me.ucrInputGoodTraits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputGoodTraits.GetSetSelectedIndex = -1
         Me.ucrInputGoodTraits.IsReadOnly = False
-        Me.ucrInputGoodTraits.Location = New System.Drawing.Point(310, 154)
+        Me.ucrInputGoodTraits.Location = New System.Drawing.Point(310, 149)
         Me.ucrInputGoodTraits.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputGoodTraits.Name = "ucrInputGoodTraits"
         Me.ucrInputGoodTraits.Size = New System.Drawing.Size(137, 21)
@@ -268,7 +280,7 @@ Partial Class sdgTransformations
         'lblGoodTraits
         '
         Me.lblGoodTraits.AutoSize = True
-        Me.lblGoodTraits.Location = New System.Drawing.Point(307, 132)
+        Me.lblGoodTraits.Location = New System.Drawing.Point(307, 131)
         Me.lblGoodTraits.Name = "lblGoodTraits"
         Me.lblGoodTraits.Size = New System.Drawing.Size(94, 13)
         Me.lblGoodTraits.TabIndex = 24
@@ -286,17 +298,162 @@ Partial Class sdgTransformations
         'lblNAs
         '
         Me.lblNAs.AutoSize = True
-        Me.lblNAs.Location = New System.Drawing.Point(308, 220)
+        Me.lblNAs.Location = New System.Drawing.Point(309, 220)
         Me.lblNAs.Name = "lblNAs"
         Me.lblNAs.Size = New System.Drawing.Size(81, 13)
         Me.lblNAs.TabIndex = 26
         Me.lblNAs.Text = "NA denoted by:"
         '
+        'ucrReceiverIDVarietyVar
+        '
+        Me.ucrReceiverIDVarietyVar.AutoSize = True
+        Me.ucrReceiverIDVarietyVar.frmParent = Me
+        Me.ucrReceiverIDVarietyVar.Location = New System.Drawing.Point(311, 150)
+        Me.ucrReceiverIDVarietyVar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverIDVarietyVar.Name = "ucrReceiverIDVarietyVar"
+        Me.ucrReceiverIDVarietyVar.Selector = Nothing
+        Me.ucrReceiverIDVarietyVar.Size = New System.Drawing.Size(113, 20)
+        Me.ucrReceiverIDVarietyVar.strNcFilePath = ""
+        Me.ucrReceiverIDVarietyVar.TabIndex = 27
+        Me.ucrReceiverIDVarietyVar.ucrSelector = Nothing
+        '
+        'ucrReceiverIDVarietyLevel
+        '
+        Me.ucrReceiverIDVarietyLevel.AutoSize = True
+        Me.ucrReceiverIDVarietyLevel.frmParent = Me
+        Me.ucrReceiverIDVarietyLevel.Location = New System.Drawing.Point(310, 99)
+        Me.ucrReceiverIDVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverIDVarietyLevel.Name = "ucrReceiverIDVarietyLevel"
+        Me.ucrReceiverIDVarietyLevel.Selector = Nothing
+        Me.ucrReceiverIDVarietyLevel.Size = New System.Drawing.Size(113, 20)
+        Me.ucrReceiverIDVarietyLevel.strNcFilePath = ""
+        Me.ucrReceiverIDVarietyLevel.TabIndex = 28
+        Me.ucrReceiverIDVarietyLevel.ucrSelector = Nothing
+        '
+        'lblVariety2
+        '
+        Me.lblVariety2.AutoSize = True
+        Me.lblVariety2.Location = New System.Drawing.Point(308, 133)
+        Me.lblVariety2.Name = "lblVariety2"
+        Me.lblVariety2.Size = New System.Drawing.Size(42, 13)
+        Me.lblVariety2.TabIndex = 29
+        Me.lblVariety2.Text = "Variety:"
+        '
+        'ucrReceiverTraitID
+        '
+        Me.ucrReceiverTraitID.AutoSize = True
+        Me.ucrReceiverTraitID.frmParent = Me
+        Me.ucrReceiverTraitID.Location = New System.Drawing.Point(310, 99)
+        Me.ucrReceiverTraitID.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTraitID.Name = "ucrReceiverTraitID"
+        Me.ucrReceiverTraitID.Selector = Nothing
+        Me.ucrReceiverTraitID.Size = New System.Drawing.Size(113, 20)
+        Me.ucrReceiverTraitID.strNcFilePath = ""
+        Me.ucrReceiverTraitID.TabIndex = 30
+        Me.ucrReceiverTraitID.ucrSelector = Nothing
+        '
+        'ucrReceiverTraitsVariety
+        '
+        Me.ucrReceiverTraitsVariety.AutoSize = True
+        Me.ucrReceiverTraitsVariety.frmParent = Me
+        Me.ucrReceiverTraitsVariety.Location = New System.Drawing.Point(310, 150)
+        Me.ucrReceiverTraitsVariety.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTraitsVariety.Name = "ucrReceiverTraitsVariety"
+        Me.ucrReceiverTraitsVariety.Selector = Nothing
+        Me.ucrReceiverTraitsVariety.Size = New System.Drawing.Size(113, 20)
+        Me.ucrReceiverTraitsVariety.strNcFilePath = ""
+        Me.ucrReceiverTraitsVariety.TabIndex = 31
+        Me.ucrReceiverTraitsVariety.ucrSelector = Nothing
+        '
+        'lblIDVariable2
+        '
+        Me.lblIDVariable2.AutoSize = True
+        Me.lblIDVariable2.Location = New System.Drawing.Point(307, 77)
+        Me.lblIDVariable2.Name = "lblIDVariable2"
+        Me.lblIDVariable2.Size = New System.Drawing.Size(62, 13)
+        Me.lblIDVariable2.TabIndex = 32
+        Me.lblIDVariable2.Text = "ID Variable:"
+        '
+        'lblIDVariable3
+        '
+        Me.lblIDVariable3.AutoSize = True
+        Me.lblIDVariable3.Location = New System.Drawing.Point(307, 80)
+        Me.lblIDVariable3.Name = "lblIDVariable3"
+        Me.lblIDVariable3.Size = New System.Drawing.Size(62, 13)
+        Me.lblIDVariable3.TabIndex = 33
+        Me.lblIDVariable3.Text = "ID Variable:"
+        '
+        'lblVariety3
+        '
+        Me.lblVariety3.AutoSize = True
+        Me.lblVariety3.Location = New System.Drawing.Point(307, 130)
+        Me.lblVariety3.Name = "lblVariety3"
+        Me.lblVariety3.Size = New System.Drawing.Size(42, 13)
+        Me.lblVariety3.TabIndex = 34
+        Me.lblVariety3.Text = "Variety:"
+        '
+        'lblTrait2
+        '
+        Me.lblTrait2.AutoSize = True
+        Me.lblTrait2.Location = New System.Drawing.Point(307, 220)
+        Me.lblTrait2.Name = "lblTrait2"
+        Me.lblTrait2.Size = New System.Drawing.Size(36, 13)
+        Me.lblTrait2.TabIndex = 35
+        Me.lblTrait2.Text = "Traits:"
+        '
+        'ucrSelectorTricotVarietyLevel
+        '
+        Me.ucrSelectorTricotVarietyLevel.AutoSize = True
+        Me.ucrSelectorTricotVarietyLevel.bDropUnusedFilterLevels = False
+        Me.ucrSelectorTricotVarietyLevel.bShowHiddenColumns = False
+        Me.ucrSelectorTricotVarietyLevel.bUseCurrentFilter = True
+        Me.ucrSelectorTricotVarietyLevel.Location = New System.Drawing.Point(9, 75)
+        Me.ucrSelectorTricotVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorTricotVarietyLevel.Name = "ucrSelectorTricotVarietyLevel"
+        Me.ucrSelectorTricotVarietyLevel.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorTricotVarietyLevel.TabIndex = 36
+        '
+        'ucrSelectorIDVarietyLevel
+        '
+        Me.ucrSelectorIDVarietyLevel.AutoSize = True
+        Me.ucrSelectorIDVarietyLevel.bDropUnusedFilterLevels = False
+        Me.ucrSelectorIDVarietyLevel.bShowHiddenColumns = False
+        Me.ucrSelectorIDVarietyLevel.bUseCurrentFilter = True
+        Me.ucrSelectorIDVarietyLevel.Location = New System.Drawing.Point(9, 75)
+        Me.ucrSelectorIDVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorIDVarietyLevel.Name = "ucrSelectorIDVarietyLevel"
+        Me.ucrSelectorIDVarietyLevel.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorIDVarietyLevel.TabIndex = 37
+        '
+        'ucrSelectorIDVarTraitLevel
+        '
+        Me.ucrSelectorIDVarTraitLevel.AutoSize = True
+        Me.ucrSelectorIDVarTraitLevel.bDropUnusedFilterLevels = False
+        Me.ucrSelectorIDVarTraitLevel.bShowHiddenColumns = False
+        Me.ucrSelectorIDVarTraitLevel.bUseCurrentFilter = True
+        Me.ucrSelectorIDVarTraitLevel.Location = New System.Drawing.Point(9, 75)
+        Me.ucrSelectorIDVarTraitLevel.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorIDVarTraitLevel.Name = "ucrSelectorIDVarTraitLevel"
+        Me.ucrSelectorIDVarTraitLevel.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorIDVarTraitLevel.TabIndex = 38
+        '
         'sdgTransformations
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(466, 415)
+        Me.ClientSize = New System.Drawing.Size(466, 423)
+        Me.Controls.Add(Me.ucrSelectorIDVarTraitLevel)
+        Me.Controls.Add(Me.ucrSelectorIDVarietyLevel)
+        Me.Controls.Add(Me.ucrSelectorTricotVarietyLevel)
+        Me.Controls.Add(Me.lblTrait2)
+        Me.Controls.Add(Me.lblVariety3)
+        Me.Controls.Add(Me.lblIDVariable3)
+        Me.Controls.Add(Me.lblIDVariable2)
+        Me.Controls.Add(Me.ucrReceiverTraitsVariety)
+        Me.Controls.Add(Me.ucrReceiverTraitID)
+        Me.Controls.Add(Me.lblVariety2)
+        Me.Controls.Add(Me.ucrReceiverIDVarietyLevel)
+        Me.Controls.Add(Me.ucrReceiverIDVarietyVar)
         Me.Controls.Add(Me.lblNAs)
         Me.Controls.Add(Me.lblBadTraits)
         Me.Controls.Add(Me.lblGoodTraits)
@@ -312,7 +469,7 @@ Partial Class sdgTransformations
         Me.Controls.Add(Me.ucrReceiverVariety)
         Me.Controls.Add(Me.lblIDVariable)
         Me.Controls.Add(Me.ucrReceiverIDVariable)
-        Me.Controls.Add(Me.ucrSelectorTricotTransformations)
+        Me.Controls.Add(Me.ucrSelectorTricotIDLevel)
         Me.Controls.Add(Me.rdoIDVarietyLevel)
         Me.Controls.Add(Me.rdoIDVarietyTraitLevel)
         Me.Controls.Add(Me.rdoVarietyLevel)
@@ -333,7 +490,7 @@ Partial Class sdgTransformations
     Friend WithEvents rdoIDLevel As RadioButton
     Friend WithEvents ucrPnlTransformations As UcrPanel
     Friend WithEvents rdoIDVarietyLevel As RadioButton
-    Friend WithEvents ucrSelectorTricotTransformations As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorTricotIDLevel As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverIDVariable As ucrReceiverSingle
     Friend WithEvents lblTraits As Label
     Friend WithEvents ucrReceiverTraits1 As ucrReceiverSingle
@@ -349,4 +506,16 @@ Partial Class sdgTransformations
     Friend WithEvents ucrInputGoodTraits As ucrInputComboBox
     Friend WithEvents ucrInputNAS As ucrInputComboBox
     Friend WithEvents ucrInputBadTraits As ucrInputComboBox
+    Friend WithEvents lblVariety2 As Label
+    Friend WithEvents ucrReceiverIDVarietyLevel As ucrReceiverSingle
+    Friend WithEvents ucrReceiverIDVarietyVar As ucrReceiverSingle
+    Friend WithEvents ucrReceiverTraitsVariety As ucrReceiverSingle
+    Friend WithEvents ucrReceiverTraitID As ucrReceiverSingle
+    Friend WithEvents lblIDVariable2 As Label
+    Friend WithEvents lblIDVariable3 As Label
+    Friend WithEvents lblTrait2 As Label
+    Friend WithEvents lblVariety3 As Label
+    Friend WithEvents ucrSelectorIDVarTraitLevel As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorIDVarietyLevel As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorTricotVarietyLevel As ucrSelectorByDataFrameAddRemove
 End Class

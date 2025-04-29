@@ -48,39 +48,67 @@ Public Class sdgTransformations
         ucrPnlTransformations.AddRadioButton(rdoVarietyLevel)
         ucrPnlTransformations.AddRadioButton(rdoIDVarietyTraitLevel)
 
-        ucrPnlTransformations.AddToLinkedControls({ucrReceiverIDVariable, ucrInputGoodTraits, ucrInputBadTraits, ucrInputNAS}, {rdoIDLevel}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransformations.AddToLinkedControls({ucrReceiverVariety}, {rdoVarietyLevel}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransformations.AddToLinkedControls({ucrReceiverVariety, ucrReceiverIDVariable, ucrReceiverTraits2}, {rdoIDVarietyLevel}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransformations.AddToLinkedControls({ucrReceiverVariety, ucrReceiverIDVariable, ucrReceiverTraits1}, {rdoIDVarietyTraitLevel}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransformations.AddToLinkedControls({ucrReceiverIDVariable, ucrInputGoodTraits, ucrInputBadTraits, ucrInputNAS, ucrSelectorTricotIDLevel}, {rdoIDLevel}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransformations.AddToLinkedControls({ucrReceiverVariety, ucrSelectorTricotVarietyLevel}, {rdoVarietyLevel}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransformations.AddToLinkedControls({ucrReceiverIDVarietyVar, ucrReceiverIDVarietyLevel, ucrReceiverTraits2, ucrSelectorIDVarietyLevel}, {rdoIDVarietyLevel}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransformations.AddToLinkedControls({ucrReceiverTraitsVariety, ucrReceiverTraitID, ucrReceiverTraits1, ucrSelectorIDVarTraitLevel}, {rdoIDVarietyTraitLevel}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrSelectorTricotTransformations.SetParameter(New RParameter("id_level_data", 0))
-        ucrSelectorTricotTransformations.SetParameterIsString()
+        ucrSelectorTricotIDLevel.SetParameter(New RParameter("id_level_data", 0))
+        ucrSelectorTricotIDLevel.SetParameterIsString()
 
         ucrReceiverIDVariable.SetParameter(New RParameter("id_cols", 1))
         ucrReceiverIDVariable.SetParameterIsString()
-        ucrReceiverIDVariable.Selector = ucrSelectorTricotTransformations
+        ucrReceiverIDVariable.Selector = ucrSelectorTricotIDLevel
         ucrReceiverIDVariable.strSelectorHeading = "ID"
         ucrReceiverIDVariable.SetItemType("column")
         ucrReceiverIDVariable.SetLinkedDisplayControl(lblIDVariable)
 
+        ucrReceiverIDVarietyLevel.SetParameter(New RParameter("id_cols", 1))
+        ucrReceiverIDVarietyLevel.SetParameterIsString()
+        ucrReceiverIDVarietyLevel.Selector = ucrSelectorIDVarietyLevel
+        ucrReceiverIDVarietyLevel.strSelectorHeading = "ID"
+        ucrReceiverIDVarietyLevel.SetItemType("column")
+        ucrReceiverIDVarietyLevel.SetLinkedDisplayControl(lblIDVariable2)
+
+        ucrReceiverTraitID.SetParameter(New RParameter("id_cols", 1))
+        ucrReceiverTraitID.SetParameterIsString()
+        ucrReceiverTraitID.Selector = ucrSelectorIDVarTraitLevel
+        ucrReceiverTraitID.strSelectorHeading = "ID"
+        ucrReceiverTraitID.SetItemType("column")
+        ucrReceiverTraitID.SetLinkedDisplayControl(lblIDVariable3)
+
         ucrReceiverVariety.SetParameter(New RParameter("variety_cols", 2))
         ucrReceiverVariety.SetParameterIsString()
-        ucrReceiverVariety.Selector = ucrSelectorTricotTransformations
-        ucrReceiverVariety.strSelectorHeading = "ID"
+        ucrReceiverVariety.Selector = ucrSelectorTricotVarietyLevel
+        ucrReceiverVariety.strSelectorHeading = "Variety"
         ucrReceiverVariety.SetItemType("column")
         ucrReceiverVariety.SetLinkedDisplayControl(lblVariety)
 
+        ucrReceiverTraitsVariety.SetParameter(New RParameter("variety_cols", 2))
+        ucrReceiverTraitsVariety.SetParameterIsString()
+        ucrReceiverTraitsVariety.Selector = ucrSelectorIDVarTraitLevel
+        ucrReceiverTraitsVariety.strSelectorHeading = "Variety"
+        ucrReceiverTraitsVariety.SetItemType("column")
+        ucrReceiverTraitsVariety.SetLinkedDisplayControl(lblVariety2)
+
+        ucrReceiverIDVarietyVar.SetParameter(New RParameter("variety_cols", 2))
+        ucrReceiverIDVarietyVar.SetParameterIsString()
+        ucrReceiverIDVarietyVar.Selector = ucrSelectorIDVarietyLevel
+        ucrReceiverIDVarietyVar.strSelectorHeading = "Variety"
+        ucrReceiverIDVarietyVar.SetItemType("column")
+        ucrReceiverIDVarietyVar.SetLinkedDisplayControl(lblVariety3)
+
         ucrReceiverTraits1.SetParameter(New RParameter("trait_cols", 3))
         ucrReceiverTraits1.SetParameterIsString()
-        ucrReceiverTraits1.Selector = ucrSelectorTricotTransformations
-        ucrReceiverTraits1.strSelectorHeading = "ID"
+        ucrReceiverTraits1.Selector = ucrSelectorIDVarTraitLevel
+        ucrReceiverTraits1.strSelectorHeading = "Traits"
         ucrReceiverTraits1.SetItemType("column")
         ucrReceiverTraits1.SetLinkedDisplayControl(lblTraits)
 
         ucrReceiverTraits2.SetParameter(New RParameter("trait_cols", 4))
         ucrReceiverTraits2.SetParameterIsString()
-        ucrReceiverTraits2.Selector = ucrSelectorTricotTransformations
-        ucrReceiverTraits2.strSelectorHeading = "ID"
+        ucrReceiverTraits2.Selector = ucrSelectorIDVarietyLevel
+        ucrReceiverTraits2.strSelectorHeading = "Traits"
         ucrReceiverTraits2.SetItemType("column")
         ucrReceiverTraits2.SetLinkedDisplayControl(lblTraits2)
 
@@ -112,34 +140,38 @@ Public Class sdgTransformations
         ucrInputBadTraits.bUpdateRCodeFromControl = True
         ucrInputNAS.SetText(strNot)
         ucrInputNAS.bUpdateRCodeFromControl = True
+
         ucrReceiverIDVariable.SetMeAsReceiver()
 
         ucrReceiverIDVariable.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
         ucrReceiverVariety.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
         ucrReceiverTraits1.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
         ucrReceiverTraits2.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
-
+        ucrReceiverIDVarietyLevel.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
+        ucrReceiverIDVarietyVar.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
+        ucrReceiverTraitID.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
+        ucrReceiverTraitsVariety.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
     End Sub
 
-    Private Sub SetDialogOptions()
-        If rdoIDLevel.Checked Then
-            ucrReceiverIDVariable.Visible = True
-            clsOutputDataLevel.RemoveParameterByName("variety_cols")
-            clsOutputDataLevel.RemoveParameterByName("trait_cols")
-        ElseIf rdoVarietyLevel.Checked Then
-            ucrReceiverVariety.Visible = True
-            clsOutputDataLevel.RemoveParameterByName("id_cols")
-            clsOutputDataLevel.RemoveParameterByName("trait_cols")
-        ElseIf rdoIDVarietyLevel.Checked Then
-            ucrReceiverVariety.Visible = True
-            ucrReceiverIDVariable.Visible = True
-            ucrReceiverTraits2.Visible = True
-        ElseIf rdoIDVarietyTraitLevel.Checked Then
-            ucrReceiverVariety.Visible = True
-            ucrReceiverIDVariable.Visible = True
-            ucrReceiverTraits1.Visible = True
-        End If
-    End Sub
+    'Private Sub SetDialogOptions()
+    '    If rdoIDLevel.Checked Then
+    '        ucrReceiverIDVariable.Visible = True
+    '        clsOutputDataLevel.RemoveParameterByName("variety_cols")
+    '        clsOutputDataLevel.RemoveParameterByName("trait_cols")
+    '    ElseIf rdoVarietyLevel.Checked Then
+    '        ucrReceiverVariety.Visible = True
+    '        clsOutputDataLevel.RemoveParameterByName("id_cols")
+    '        clsOutputDataLevel.RemoveParameterByName("trait_cols")
+    '    ElseIf rdoIDVarietyLevel.Checked Then
+    '        ucrReceiverVariety.Visible = True
+    '        ucrReceiverIDVariable.Visible = True
+    '        ucrReceiverTraits2.Visible = True
+    '    ElseIf rdoIDVarietyTraitLevel.Checked Then
+    '        ucrReceiverVariety.Visible = True
+    '        ucrReceiverIDVariable.Visible = True
+    '        ucrReceiverTraits1.Visible = True
+    '    End If
+    'End Sub
 
     Private Sub ucrInputGoodTraits_NameChanged() Handles ucrInputGoodTraits.ControlValueChanged
         If ucrInputGoodTraits.IsEmpty() Then
@@ -167,6 +199,6 @@ Public Class sdgTransformations
 
     Private Sub ucrPnlTransformations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransformations.ControlValueChanged, ucrReceiverIDVariable.ControlValueChanged, ucrReceiverVariety.ControlValueChanged, ucrReceiverTraits2.ControlValueChanged,
             ucrReceiverTraits1.ControlValueChanged, ucrInputBadTraits.ControlValueChanged, ucrInputGoodTraits.ControlValueChanged, ucrInputNAS.ControlValueChanged
-        SetDialogOptions()
+        'SetDialogOptions()
     End Sub
 End Class
