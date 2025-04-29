@@ -25,8 +25,12 @@ Public Class dlgDefineTricotData
     Private clsGetColumnSelection, clsUnameFunction, clsCreateRankingFunction, clsGroupRankingFunction,
         clsGetDataFrameFunction, clsAddRankingObjFunction, clsAddGrpRankingObjFunction As New RFunction
     Private clsDATIDLevelFunction, clsDATVarietyLevelFunction, clsDATIDVarietyFunction As New RFunction
+    Private clsAnyDuplicatesFunction, clsConcFunction, clsNewConcFunction, clsGetColFunction, clsDummyFunction As New RFunction
     Private clsCDATIDLevelFunction, cslCDATVarietyLevelFunction, clsCDATIDLevelVarietiesFunction, clsCDATIDLevelTraitsFunction As New RFunction
     Private clsOperator As New ROperator
+    Private bIsUnique As Boolean = True
+
+    Private strCurrentDataframeName As String
 
     Private Sub dlgDefineTricotData_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -43,7 +47,7 @@ Public Class dlgDefineTricotData
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 328
+        ucrBase.iHelpTopicID = 672
 
         Dim kvpID As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("id", {"id", "ID", "participant_id", "participant_name"}.ToList())
         Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("longitude", {"lon", "long", "lont", "longitude", "Longitude", "Lon"}.ToList())
@@ -112,6 +116,8 @@ Public Class dlgDefineTricotData
         clsAddRankingObjFunction = New RFunction
         clsAddGrpRankingObjFunction = New RFunction
         clsOperator = New ROperator
+        clsAnyDuplicatesFunction = New RFunction
+        clsGetColFunction = New RFunction
 
         ucrReceiverLevelID.SetMeAsReceiver()
 
@@ -180,12 +186,18 @@ Public Class dlgDefineTricotData
         clsAddGrpRankingObjFunction.AddParameter("object_format", Chr(34) & "text" & Chr(34), iPosition:=3)
         clsAddGrpRankingObjFunction.AddParameter("object", clsRFunctionParameter:=clsGroupRankingFunction, iPosition:=4)
 
+        clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
+        clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
+
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDLevelFunction, 1)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDATVarietyLevelFunction, 2)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDVarietyFunction, 3)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAddRankingObjFunction, 4)
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddGrpRankingObjFunction)
+        clsGetColFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
+        clsGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
 
         AutoFillReceivers(ucrSelectorIDLevelData, lstReceiversLevelID)
         AutoFillReceivers(ucrSelectorVarietyLevelData, lstReceiversVarityLevel)
@@ -298,11 +310,6 @@ Public Class dlgDefineTricotData
                           Not ucrReceiverIDVarietyLevelTraits.IsEmpty AndAlso Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
                           Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent)
     End Sub
-
-    Private Sub ucrSelectorIDLevelData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDLevelData.ControlValueChanged
-        AutoFillReceivers(ucrSelectorIDLevelData, lstReceiversLevelID)
-    End Sub
-
     Private Sub ucrSelectorVarietyLevelData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorVarietyLevelData.ControlValueChanged
         AutoFillReceivers(ucrSelectorVarietyLevelData, lstReceiversVarityLevel)
     End Sub
@@ -323,6 +330,117 @@ Public Class dlgDefineTricotData
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVarietyLevelID.ControlContentsChanged, ucrReceiverIDVarietyLevelVariety.ControlContentsChanged, ucrReceiverIDVarietyLevelTraits.ControlContentsChanged, ucrReceiverVarietyLevelVariety.ControlContentsChanged, ucrReceiverVarietyLevelVariety.ControlContentsChanged, ucrSelectorIDLevelData.ControlContentsChanged, ucrSelectorIDVarietyLevel.ControlContentsChanged, ucrSelectorVarietyLevelData.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles btnckeckduplicatesIDLevel.Click
+        Dim iAnyDuplicated As Integer
+
+        Try
+            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
+        Catch ex As Exception
+            iAnyDuplicated = -1
+        End Try
+
+        If iAnyDuplicated = -1 Then
+            ucrInputCheckInputIDLevel.SetName("Developer error! Could not check uniqueness.")
+            ucrInputCheckInputIDLevel.txtInput.BackColor = Color.Yellow
+            bIsUnique = False
+        ElseIf iAnyDuplicated > 0 Then
+            ucrInputCheckInputIDLevel.SetName("")
+            ucrInputCheckInputIDLevel.txtInput.BackColor = Color.LightCoral
+            bIsUnique = False
+            If ucrReceiverLevelID.IsEmpty Then
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates found.")
+                MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            Else
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates for station(s) were found.")
+                MsgBox("You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            End If
+        Else
+            ucrInputCheckInputIDLevel.SetName("No duplicate dates.")
+            ucrInputCheckInputIDLevel.txtInput.BackColor = Color.LightGreen
+            bIsUnique = True
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorIDLevelData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDLevelData.ControlValueChanged
+        strCurrentDataframeName = ucrSelectorIDLevelData.strCurrentDataFrame
+        clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLevelID.ControlValueChanged, ucrReceiverLevelID.ControlContentsChanged
+        'EnableDisableCheckUniqueBtn()
+        If Not ucrReceiverLevelID.IsEmpty Then
+            clsConcFunction.AddParameter("x1", ucrReceiverLevelID.GetVariableNames, bIncludeArgumentName:=False)
+        Else
+            clsConcFunction.RemoveParameterByName("x1")
+        End If
+    End Sub
+
+
+    Private Sub btncheckduplicatesvarietylevel_Click(sender As Object, e As EventArgs) Handles btncheckduplicatesvarietylevel.Click
+        Dim iAnyDuplicated As Integer
+
+        Try
+            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
+        Catch ex As Exception
+            iAnyDuplicated = -1
+        End Try
+
+        If iAnyDuplicated = -1 Then
+            ucrInputCheckInputVarietyLevel.SetName("Developer error! Could not check uniqueness.")
+            ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.Yellow
+            bIsUnique = False
+        ElseIf iAnyDuplicated > 0 Then
+            ucrInputCheckInputVarietyLevel.SetName("")
+            ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.LightCoral
+            bIsUnique = False
+            If ucrReceiverVarietyLevelVariety.IsEmpty Then
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates found.")
+                MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            Else
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates for station(s) were found.")
+                MsgBox("You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            End If
+        Else
+            ucrInputCheckInputVarietyLevel.SetName("No duplicate dates.")
+            ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.LightGreen
+            bIsUnique = True
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub btncheckduplicatesIDVarietyLevel_Click(sender As Object, e As EventArgs) Handles btncheckduplicatesIDVarietyLevel.Click
+        Dim iAnyDuplicated As Integer
+
+        Try
+            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
+        Catch ex As Exception
+            iAnyDuplicated = -1
+        End Try
+
+        If iAnyDuplicated = -1 Then
+            ucrInputCheckInputIDVarietyLevel.SetName("Developer error! Could not check uniqueness.")
+            ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.Yellow
+            bIsUnique = False
+        ElseIf iAnyDuplicated > 0 Then
+            ucrInputCheckInputIDVarietyLevel.SetName("")
+            ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.LightCoral
+            bIsUnique = False
+            If ucrReceiverIDVarietyLevelID.IsEmpty Then
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates found.")
+                MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            Else
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates for station(s) were found.")
+                MsgBox("You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            End If
+        Else
+            ucrInputCheckInputIDVarietyLevel.SetName("No duplicate dates.")
+            ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.LightGreen
+            bIsUnique = True
+        End If
         TestOKEnabled()
     End Sub
 
