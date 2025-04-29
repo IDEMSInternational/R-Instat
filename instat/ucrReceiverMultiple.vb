@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports RDotNet
 
 Public Class ucrReceiverMultiple
@@ -545,4 +546,16 @@ Public Class ucrReceiverMultiple
         Return strHeaders
     End Function
 
+    ''' <summary>
+    '''  Returns information about the receiver's current selection as specified by 
+    '''  <paramref name="enumTextType"/>.
+    '''  If <paramref name="enumTextType"/> is not specified, returns the receiver's text.
+    '''  If <paramref name="enumTextType"/> is invalid, then throws an exception.
+    ''' </summary>
+    ''' <param name="enumTextType"></param>
+    ''' <returns>Information about the receiver's current selection as specified by 
+    '''     <paramref name="enumTextType"/></returns>
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        Return GetVariableNames(bWithQuotes:=True)
+    End Function
 End Class

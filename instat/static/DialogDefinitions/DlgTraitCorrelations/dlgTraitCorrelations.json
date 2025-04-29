@@ -1,0 +1,15 @@
+[
+    {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isComment",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "operatorUpdateParamPresentation",
+                "iStatementNumber": 0,
+                "strFunctionName": "<-",
+                "iParameterNumber": 0,
+                "strValueKey": "comment"
+            }
+        ]
+    }
+]

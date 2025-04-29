@@ -21,6 +21,7 @@ Public Class dlgTraitCorrelationsXp
     Private bRcodeSet As Boolean = True
     Private clsGetVariablesMetadataFunction, clsGetObjectRFunction, clsDummyFunction, clsCombineVarsFunction, clsFashionFunction, clsGetObjectFunction, clsGetRankingItemsFunction, clsNamesFunction, clsMapDfrFunction, clsKendallTauFunction, clsMutateFunction, clsSelectFunction As New RFunction
     Private clsBaseLineOperator, clsObjectOperator, clsPipe2Operator, clsPipeOperator, clsNamesOperator, clsMultivarsOpeator As New ROperator
+    Private chkSaveAsTable As ucrCheck
 
     Private Sub dlgTraitCorrelationsXp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -76,6 +77,48 @@ Public Class dlgTraitCorrelationsXp
         ucrSaveCorrelation.SetIsComboBox()
         HideShowOptions()
         ChangeOutputObject()
+
+        ' only needed if cross-platform back-end used
+        InitialiseScriptTransformations()
+    End Sub
+
+    Private Sub InitialiseScriptTransformations()
+        ucrBase.strDialogName = "TraitCorrelations"
+
+        ucrBase.dctConfigurableValues = New Dictionary(Of String, String) From {
+            {"comment", ""},
+            {"dataFrame", ""},
+            {"decimalPlaces", ""},
+            {"isComment", ""},
+            {"isDisplayOptions", ""},
+            {"isIncludePValues", ""},
+            {"isLeadingZeroes", ""},
+            {"isSaveAsTable", ""},
+            {"isStoreTable", ""},
+            {"overallTrait", ""},
+            {"store", ""},
+            {"traitsToCompareTo", ""}
+        }
+
+        'we need a dummy check box linked to the radio button because the radio button is not a
+        'ucrCore control. The state of this checkbox is updated whenever the radio button changes.
+        chkSaveAsTable = New ucrCheck
+
+        ucrBase.lstTransformFromControl = New List(Of clsTransformationControl) From {
+            New clsTransformationControl With {.strKey = "comment", .clsControl = ucrBase, .enumTextType = ucrButtons.EnumTextType.comment},
+            New clsTransformationControl With {.strKey = "dataFrame", .clsControl = ucrSelecetorTraits.ucrAvailableDataFrames},
+            New clsTransformationControl With {.strKey = "decimalPlaces", .clsControl = ucrNudDecimalPlaces},
+            New clsTransformationControl With {.strKey = "isComment", .clsControl = ucrBase, .enumTextType = ucrButtons.EnumTextType.isComment},
+            New clsTransformationControl With {.strKey = "isDisplayOptions", .clsControl = ucrChkDisplayOptions},
+            New clsTransformationControl With {.strKey = "isIncludePValues", .clsControl = ucrChkIncludePValues},
+            New clsTransformationControl With {.strKey = "isLeadingZeroes", .clsControl = ucrChkLeadingZeros},
+            New clsTransformationControl With {.strKey = "isSaveAsTable", .clsControl = chkSaveAsTable},
+            New clsTransformationControl With {.strKey = "isStoreTable", .clsControl = ucrSaveCorrelation, .enumTextType = ucrSave.SaveLocation.isChecked},
+            New clsTransformationControl With {.strKey = "overallTrait", .clsControl = ucrReceiverTrait},
+            New clsTransformationControl With {.strKey = "store", .clsControl = ucrSaveCorrelation, .enumTextType = ucrSave.SaveLocation.saveName},
+            New clsTransformationControl With {.strKey = "traitsToCompareTo", .clsControl = ucrReceiverTraitsToCompare}
+        }
+
     End Sub
 
     Private Sub SetDefaults()
@@ -229,6 +272,19 @@ Public Class dlgTraitCorrelationsXp
 
     Private Sub ucrChkIncludePValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludePValues.ControlValueChanged
         AddPValues()
+    End Sub
+
+    ''' <summary>
+    ''' The cross-platform R script generation needs a control that inherits from ucrCore
+    ''' (because it needs a `GetText()` function). The standard WinForms radio button does not 
+    ''' inherit from ucrCore, so we need a dummy ucrCore control that always has the same state 
+    ''' as the radio button. This function ensures that the dummy check box is always in the same 
+    ''' state as the radio button.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub rdoAsText_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAsText.CheckedChanged
+        chkSaveAsTable.Checked = rdoAsText.Checked
     End Sub
 
     Private Sub AddPValues()
