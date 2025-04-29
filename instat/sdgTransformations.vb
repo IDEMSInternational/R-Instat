@@ -35,14 +35,10 @@ Public Class sdgTransformations
             bFirstLoad = False
         End If
 
-        If bReset Then
-            'SetRFunction()
-        End If
-        'SetRCodeForControls(bReset)
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBaseSdgTransformations.iHelpTopicID = 720
         ucrPnlTransformations.AddRadioButton(rdoIDLevel)
         ucrPnlTransformations.AddRadioButton(rdoIDVarietyLevel)
         ucrPnlTransformations.AddRadioButton(rdoVarietyLevel)

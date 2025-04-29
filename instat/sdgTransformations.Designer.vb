@@ -34,7 +34,7 @@ Partial Class sdgTransformations
         Me.ucrReceiverVariety = New instat.ucrReceiverSingle()
         Me.lblTraits = New System.Windows.Forms.Label()
         Me.ucrReceiverTraits1 = New instat.ucrReceiverSingle()
-        Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
+        Me.ucrBaseSdgTransformations = New instat.ucrButtonsSubdialogue()
         Me.ucrReceiverTraits2 = New instat.ucrReceiverMultiple()
         Me.lblTraits2 = New System.Windows.Forms.Label()
         Me.ucrInputBadTraits = New instat.ucrInputComboBox()
@@ -211,13 +211,13 @@ Partial Class sdgTransformations
         Me.ucrReceiverTraits1.TabIndex = 16
         Me.ucrReceiverTraits1.ucrSelector = Nothing
         '
-        'ucrBaseSdgCorrPlot
+        'ucrBaseSdgTransformations
         '
-        Me.ucrBaseSdgCorrPlot.AutoSize = True
-        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(98, 379)
-        Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
-        Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(224, 30)
-        Me.ucrBaseSdgCorrPlot.TabIndex = 18
+        Me.ucrBaseSdgTransformations.AutoSize = True
+        Me.ucrBaseSdgTransformations.Location = New System.Drawing.Point(98, 379)
+        Me.ucrBaseSdgTransformations.Name = "ucrBaseSdgTransformations"
+        Me.ucrBaseSdgTransformations.Size = New System.Drawing.Size(224, 30)
+        Me.ucrBaseSdgTransformations.TabIndex = 18
         '
         'ucrReceiverTraits2
         '
@@ -462,7 +462,7 @@ Partial Class sdgTransformations
         Me.Controls.Add(Me.ucrInputBadTraits)
         Me.Controls.Add(Me.lblTraits2)
         Me.Controls.Add(Me.ucrReceiverTraits2)
-        Me.Controls.Add(Me.ucrBaseSdgCorrPlot)
+        Me.Controls.Add(Me.ucrBaseSdgTransformations)
         Me.Controls.Add(Me.lblTraits)
         Me.Controls.Add(Me.ucrReceiverTraits1)
         Me.Controls.Add(Me.lblVariety)
@@ -497,7 +497,7 @@ Partial Class sdgTransformations
     Friend WithEvents lblVariety As Label
     Friend WithEvents ucrReceiverVariety As ucrReceiverSingle
     Friend WithEvents lblIDVariable As Label
-    Friend WithEvents ucrBaseSdgCorrPlot As ucrButtonsSubdialogue
+    Friend WithEvents ucrBaseSdgTransformations As ucrButtonsSubdialogue
     Friend WithEvents lblTraits2 As Label
     Friend WithEvents ucrReceiverTraits2 As ucrReceiverMultiple
     Friend WithEvents lblNAs As Label
