@@ -38,8 +38,8 @@ Public Class sdgDisplayModelOptions
         ucrChkModel.AddRSyntaxContainsFunctionNamesCondition(False, {"summary"}, False)
 
         ucrChkANOVA.SetText("ANOVA")
-        ucrChkANOVA.AddRSyntaxContainsFunctionNamesCondition(True, {"anova"}, True)
-        ucrChkANOVA.AddRSyntaxContainsFunctionNamesCondition(False, {"anova"}, False)
+        ucrChkANOVA.AddRSyntaxContainsFunctionNamesCondition(True, {"gosset:::anova.PlackettLuce(.x)"}, True)
+        ucrChkANOVA.AddRSyntaxContainsFunctionNamesCondition(False, {"gosset:::anova.PlackettLuce(.x)"}, False)
 
         ucrChkEstimates.SetText("Estimates")
         ucrChkEstimates.AddRSyntaxContainsFunctionNamesCondition(True, {"coef"}, True)
