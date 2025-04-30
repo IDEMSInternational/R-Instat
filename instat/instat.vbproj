@@ -174,7 +174,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
@@ -371,6 +370,12 @@
     <Compile Include="dlgTransformTricotData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTricotModelOneVarCov.Designer.vb">
+      <DependentUpon>dlgTricotModelOneVarCov.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTricotModelOneVarCov.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgUseTable.Designer.vb">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
     </Compile>
@@ -407,6 +412,12 @@
       <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDefineTricotData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgDisplayModelOptions.Designer.vb">
+      <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDisplayModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgFlowsToImport.Designer.vb">
@@ -3522,6 +3533,9 @@
     <EmbeddedResource Include="dlgTransformTricotData.resx">
       <DependentUpon>dlgTransformTricotData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTricotModelOneVarCov.resx">
+      <DependentUpon>dlgTricotModelOneVarCov.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgUseTable.resx">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
     </EmbeddedResource>
@@ -3551,6 +3565,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDefineTricotData.resx">
       <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDisplayModelOptions.resx">
+      <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFlowsToImport.resx">
       <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
@@ -6207,18 +6224,18 @@
     <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
-  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
     <Error Condition="!Exists('..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.104.4.24\build\cef.redist.x64.props'))" />
     <Error Condition="!Exists('..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.104.4.24\build\cef.redist.x86.props'))" />
     <Error Condition="!Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.props'))" />
     <Error Condition="!Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
   </Target>
   <Import Project="..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.104.4.240\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

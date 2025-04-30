@@ -56,9 +56,9 @@ Public Class dlgTransformTricotData
         clsOutputLevelsOperator = New ROperator
         OverallSymbolOperator = New ROperator
         bUniqueChecked = False
-        'ucrSelectorTricotData.Reset()
-        'ucrReceiverTricotData.SetMeAsReceiver()
-        'bResetSubdialog = True
+        ucrSelectorTricotData.Reset()
+        ucrInputTricotData.Reset()
+        bResetSubdialog = True
 
         ucrReceiverTricotData.SetMeAsReceiver()
         clsOutputDataLevel.SetPackageName("instatExtras")
