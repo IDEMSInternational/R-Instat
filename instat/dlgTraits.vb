@@ -37,6 +37,8 @@ Public Class dlgTraits
     End Sub
 
     Private Sub InitialiseDialog()
+
+        ucrBase.iHelpTopicID = 701
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
