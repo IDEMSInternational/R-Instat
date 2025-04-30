@@ -71,7 +71,6 @@ Public Class sdgTransformations
         ucrReceiverIDVariable.SetItemType("column")
         ucrReceiverIDVariable.SetTricotType("id")
         ucrReceiverIDVariable.bAutoFill = True
-        ucrReceiverIDVariable.SetLinkedDisplayControl(lblIDVariable)
 
         ucrReceiverIDVarietyLevel.SetParameter(New RParameter("id_cols_b", 1, bNewIncludeArgumentName:=False))
         ucrReceiverIDVarietyLevel.SetParameterIsString()
@@ -80,7 +79,6 @@ Public Class sdgTransformations
         ucrReceiverIDVarietyLevel.SetItemType("column")
         ucrReceiverIDVarietyLevel.SetTricotType("id")
         ucrReceiverIDVarietyLevel.bAutoFill = True
-        ucrReceiverIDVarietyLevel.SetLinkedDisplayControl(lblIDVariable2)
 
         ucrReceiverTraitID.SetParameter(New RParameter("id_cols_c", 1, bNewIncludeArgumentName:=False))
         ucrReceiverTraitID.SetParameterIsString()
@@ -89,7 +87,6 @@ Public Class sdgTransformations
         ucrReceiverTraitID.SetItemType("column")
         ucrReceiverTraitID.SetTricotType("id")
         ucrReceiverTraitID.bAutoFill = True
-        ucrReceiverTraitID.SetLinkedDisplayControl(lblIDVariable3)
 
         ucrReceiverVariety.SetParameter(New RParameter("variety_cols_a", 2, bNewIncludeArgumentName:=False))
         ucrReceiverVariety.SetParameterIsString()
@@ -98,7 +95,6 @@ Public Class sdgTransformations
         ucrReceiverVariety.SetItemType("column")
         ucrReceiverVariety.SetTricotType("variety")
         ucrReceiverVariety.bAutoFill = True
-        ucrReceiverVariety.SetLinkedDisplayControl(lblVariety)
 
         ucrReceiverTraitsVariety.SetParameter(New RParameter("variety_cols_b", 2, bNewIncludeArgumentName:=False))
         ucrReceiverTraitsVariety.SetParameterIsString()
@@ -107,7 +103,6 @@ Public Class sdgTransformations
         ucrReceiverTraitsVariety.SetItemType("column")
         ucrReceiverTraitsVariety.SetTricotType("variety")
         ucrReceiverTraitsVariety.bAutoFill = True
-        ucrReceiverTraitsVariety.SetLinkedDisplayControl(lblVariety2)
 
         ucrReceiverIDVarietyVar.SetParameter(New RParameter("variety_cols_c", 2, bNewIncludeArgumentName:=False))
         ucrReceiverIDVarietyVar.SetParameterIsString()
@@ -116,7 +111,6 @@ Public Class sdgTransformations
         ucrReceiverIDVarietyVar.SetItemType("column")
         ucrReceiverIDVarietyVar.SetTricotType("variety")
         ucrReceiverIDVarietyVar.bAutoFill = True
-        ucrReceiverIDVarietyVar.SetLinkedDisplayControl(lblVariety3)
 
         ucrReceiverTraits1.SetParameter(New RParameter("trait_cols_a", 3, bNewIncludeArgumentName:=False))
         ucrReceiverTraits1.SetParameterIsString()
@@ -125,7 +119,6 @@ Public Class sdgTransformations
         ucrReceiverTraits1.SetItemType("column")
         ucrReceiverTraits1.SetTricotType("traits")
         ucrReceiverTraits1.bAutoFill = True
-        ucrReceiverTraits1.SetLinkedDisplayControl(lblTraits)
 
         ucrReceiverTraits2.SetParameter(New RParameter("trait_cols_b", 4, bNewIncludeArgumentName:=False))
         ucrReceiverTraits2.SetParameterIsString()
@@ -134,22 +127,24 @@ Public Class sdgTransformations
         ucrReceiverTraits2.SetItemType("column")
         ucrReceiverTraits2.SetTricotType("traits")
         ucrReceiverTraits2.bAutoFill = True
-        ucrReceiverTraits2.SetLinkedDisplayControl(lblTraits2)
 
         ucrInputGoodTraits.SetItems({strPos, strBest})
         ucrInputGoodTraits.SetDropDownStyleAsNonEditable()
         ucrInputGoodTraits.SetLinkedDisplayControl(lblGoodTraits)
         ucrInputGoodTraits.SetParameter(New RParameter("good_suffixes", 5))
+        ucrInputGoodTraits.SetText(strPos)
 
         ucrInputBadTraits.SetItems({strNeg, strWorst})
         ucrInputBadTraits.SetDropDownStyleAsNonEditable()
         ucrInputBadTraits.SetLinkedDisplayControl(lblBadTraits)
         ucrInputBadTraits.SetParameter(New RParameter("bad_suffixes", 6))
+        ucrInputBadTraits.SetText(strNeg)
 
         ucrInputNAS.SetItems({strNot, strMissing, strNA})
         ucrInputNAS.SetDropDownStyleAsNonEditable()
         ucrInputNAS.SetLinkedDisplayControl(lblNAs)
         ucrInputNAS.SetParameter(New RParameter("na_candidates", 7))
+        ucrInputNAS.SetText(strNot)
 
     End Sub
 
@@ -184,6 +179,11 @@ Public Class sdgTransformations
         AutoFillReceivers(ucrSelectorTricotVarietyLevel, lstReceiversVarietyLevel)
         AutoFillReceivers(ucrSelectorIDVarietyLevel, lstReceiversIDVarietyLevel)
         AutoFillReceivers(ucrSelectorIDVarTraitLevel, lstReceiversIDVarietyTraitLevel)
+
+        If bReset Then
+            ucrReceiverIDVariable.SetMeAsReceiver()
+            tbOptions.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub ucrInputGoodTraits_NameChanged() Handles ucrInputGoodTraits.ControlValueChanged
@@ -237,8 +237,6 @@ Public Class sdgTransformations
     Private Sub ucrSelectorIDVarTraitLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDVarTraitLevel.ControlValueChanged
         AutoFillReceivers(ucrSelectorIDVarTraitLevel, lstReceiversIDVarietyTraitLevel)
     End Sub
-
-
 
     Private Sub FilledIDReceivers()
         If Not ucrReceiverIDVariable.IsEmpty OrElse Not ucrReceiverIDVarietyLevel.IsEmpty OrElse Not ucrReceiverTraitID.IsEmpty Then

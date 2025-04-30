@@ -68,7 +68,7 @@ Partial Class sdgTransformations
         Me.lblIDVariable.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIDVariable.Name = "lblIDVariable"
         Me.lblIDVariable.Size = New System.Drawing.Size(92, 20)
-        Me.lblIDVariable.TabIndex = 13
+        Me.lblIDVariable.TabIndex = 1
         Me.lblIDVariable.Text = "ID Variable:"
         '
         'lblVariety
@@ -78,7 +78,7 @@ Partial Class sdgTransformations
         Me.lblVariety.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblVariety.Name = "lblVariety"
         Me.lblVariety.Size = New System.Drawing.Size(62, 20)
-        Me.lblVariety.TabIndex = 15
+        Me.lblVariety.TabIndex = 1
         Me.lblVariety.Text = "Variety:"
         '
         'lblTraits
@@ -88,7 +88,7 @@ Partial Class sdgTransformations
         Me.lblTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTraits.Name = "lblTraits"
         Me.lblTraits.Size = New System.Drawing.Size(52, 20)
-        Me.lblTraits.TabIndex = 17
+        Me.lblTraits.TabIndex = 5
         Me.lblTraits.Text = "Traits:"
         '
         'lblTraits2
@@ -98,7 +98,7 @@ Partial Class sdgTransformations
         Me.lblTraits2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTraits2.Name = "lblTraits2"
         Me.lblTraits2.Size = New System.Drawing.Size(52, 20)
-        Me.lblTraits2.TabIndex = 20
+        Me.lblTraits2.TabIndex = 5
         Me.lblTraits2.Text = "Traits:"
         '
         'lblGoodTraits
@@ -108,7 +108,7 @@ Partial Class sdgTransformations
         Me.lblGoodTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblGoodTraits.Name = "lblGoodTraits"
         Me.lblGoodTraits.Size = New System.Drawing.Size(140, 20)
-        Me.lblGoodTraits.TabIndex = 24
+        Me.lblGoodTraits.TabIndex = 4
         Me.lblGoodTraits.Text = "Good Traits Suffix:"
         '
         'lblBadTraits
@@ -118,7 +118,7 @@ Partial Class sdgTransformations
         Me.lblBadTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblBadTraits.Name = "lblBadTraits"
         Me.lblBadTraits.Size = New System.Drawing.Size(129, 20)
-        Me.lblBadTraits.TabIndex = 25
+        Me.lblBadTraits.TabIndex = 6
         Me.lblBadTraits.Text = "Bad Traits Suffix:"
         '
         'lblNAs
@@ -128,7 +128,7 @@ Partial Class sdgTransformations
         Me.lblNAs.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblNAs.Name = "lblNAs"
         Me.lblNAs.Size = New System.Drawing.Size(118, 20)
-        Me.lblNAs.TabIndex = 26
+        Me.lblNAs.TabIndex = 8
         Me.lblNAs.Text = "NA denoted by:"
         '
         'lblVariety2
@@ -138,7 +138,7 @@ Partial Class sdgTransformations
         Me.lblVariety2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblVariety2.Name = "lblVariety2"
         Me.lblVariety2.Size = New System.Drawing.Size(62, 20)
-        Me.lblVariety2.TabIndex = 29
+        Me.lblVariety2.TabIndex = 3
         Me.lblVariety2.Text = "Variety:"
         '
         'lblIDVariable2
@@ -148,7 +148,7 @@ Partial Class sdgTransformations
         Me.lblIDVariable2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIDVariable2.Name = "lblIDVariable2"
         Me.lblIDVariable2.Size = New System.Drawing.Size(92, 20)
-        Me.lblIDVariable2.TabIndex = 32
+        Me.lblIDVariable2.TabIndex = 1
         Me.lblIDVariable2.Text = "ID Variable:"
         '
         'lblIDVariable3
@@ -158,7 +158,7 @@ Partial Class sdgTransformations
         Me.lblIDVariable3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIDVariable3.Name = "lblIDVariable3"
         Me.lblIDVariable3.Size = New System.Drawing.Size(92, 20)
-        Me.lblIDVariable3.TabIndex = 33
+        Me.lblIDVariable3.TabIndex = 2
         Me.lblIDVariable3.Text = "ID Variable:"
         '
         'lblVariety3
@@ -168,7 +168,7 @@ Partial Class sdgTransformations
         Me.lblVariety3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblVariety3.Name = "lblVariety3"
         Me.lblVariety3.Size = New System.Drawing.Size(62, 20)
-        Me.lblVariety3.TabIndex = 34
+        Me.lblVariety3.TabIndex = 3
         Me.lblVariety3.Text = "Variety:"
         '
         'ucrSelectorIDVarTraitLevel
@@ -181,7 +181,7 @@ Partial Class sdgTransformations
         Me.ucrSelectorIDVarTraitLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorIDVarTraitLevel.Name = "ucrSelectorIDVarTraitLevel"
         Me.ucrSelectorIDVarTraitLevel.Size = New System.Drawing.Size(320, 282)
-        Me.ucrSelectorIDVarTraitLevel.TabIndex = 5
+        Me.ucrSelectorIDVarTraitLevel.TabIndex = 0
         '
         'ucrSelectorIDVarietyLevel
         '
@@ -193,7 +193,7 @@ Partial Class sdgTransformations
         Me.ucrSelectorIDVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorIDVarietyLevel.Name = "ucrSelectorIDVarietyLevel"
         Me.ucrSelectorIDVarietyLevel.Size = New System.Drawing.Size(320, 282)
-        Me.ucrSelectorIDVarietyLevel.TabIndex = 6
+        Me.ucrSelectorIDVarietyLevel.TabIndex = 0
         '
         'ucrSelectorTricotVarietyLevel
         '
@@ -205,7 +205,7 @@ Partial Class sdgTransformations
         Me.ucrSelectorTricotVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorTricotVarietyLevel.Name = "ucrSelectorTricotVarietyLevel"
         Me.ucrSelectorTricotVarietyLevel.Size = New System.Drawing.Size(320, 282)
-        Me.ucrSelectorTricotVarietyLevel.TabIndex = 7
+        Me.ucrSelectorTricotVarietyLevel.TabIndex = 0
         '
         'ucrReceiverTraitsVariety
         '
@@ -217,7 +217,7 @@ Partial Class sdgTransformations
         Me.ucrReceiverTraitsVariety.Selector = Nothing
         Me.ucrReceiverTraitsVariety.Size = New System.Drawing.Size(170, 31)
         Me.ucrReceiverTraitsVariety.strNcFilePath = ""
-        Me.ucrReceiverTraitsVariety.TabIndex = 31
+        Me.ucrReceiverTraitsVariety.TabIndex = 4
         Me.ucrReceiverTraitsVariety.ucrSelector = Nothing
         '
         'ucrReceiverTraitID
@@ -230,7 +230,7 @@ Partial Class sdgTransformations
         Me.ucrReceiverTraitID.Selector = Nothing
         Me.ucrReceiverTraitID.Size = New System.Drawing.Size(170, 31)
         Me.ucrReceiverTraitID.strNcFilePath = ""
-        Me.ucrReceiverTraitID.TabIndex = 30
+        Me.ucrReceiverTraitID.TabIndex = 2
         Me.ucrReceiverTraitID.ucrSelector = Nothing
         '
         'ucrReceiverIDVarietyLevel
@@ -243,7 +243,7 @@ Partial Class sdgTransformations
         Me.ucrReceiverIDVarietyLevel.Selector = Nothing
         Me.ucrReceiverIDVarietyLevel.Size = New System.Drawing.Size(170, 31)
         Me.ucrReceiverIDVarietyLevel.strNcFilePath = ""
-        Me.ucrReceiverIDVarietyLevel.TabIndex = 28
+        Me.ucrReceiverIDVarietyLevel.TabIndex = 2
         Me.ucrReceiverIDVarietyLevel.ucrSelector = Nothing
         '
         'ucrReceiverIDVarietyVar
@@ -256,7 +256,7 @@ Partial Class sdgTransformations
         Me.ucrReceiverIDVarietyVar.Selector = Nothing
         Me.ucrReceiverIDVarietyVar.Size = New System.Drawing.Size(170, 31)
         Me.ucrReceiverIDVarietyVar.strNcFilePath = ""
-        Me.ucrReceiverIDVarietyVar.TabIndex = 27
+        Me.ucrReceiverIDVarietyVar.TabIndex = 4
         Me.ucrReceiverIDVarietyVar.ucrSelector = Nothing
         '
         'ucrInputGoodTraits
@@ -269,7 +269,7 @@ Partial Class sdgTransformations
         Me.ucrInputGoodTraits.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputGoodTraits.Name = "ucrInputGoodTraits"
         Me.ucrInputGoodTraits.Size = New System.Drawing.Size(206, 32)
-        Me.ucrInputGoodTraits.TabIndex = 23
+        Me.ucrInputGoodTraits.TabIndex = 5
         '
         'ucrInputNAS
         '
@@ -281,7 +281,7 @@ Partial Class sdgTransformations
         Me.ucrInputNAS.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputNAS.Name = "ucrInputNAS"
         Me.ucrInputNAS.Size = New System.Drawing.Size(206, 32)
-        Me.ucrInputNAS.TabIndex = 22
+        Me.ucrInputNAS.TabIndex = 0
         '
         'ucrInputBadTraits
         '
@@ -293,7 +293,7 @@ Partial Class sdgTransformations
         Me.ucrInputBadTraits.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputBadTraits.Name = "ucrInputBadTraits"
         Me.ucrInputBadTraits.Size = New System.Drawing.Size(206, 32)
-        Me.ucrInputBadTraits.TabIndex = 21
+        Me.ucrInputBadTraits.TabIndex = 7
         '
         'ucrReceiverTraits2
         '
@@ -305,7 +305,7 @@ Partial Class sdgTransformations
         Me.ucrReceiverTraits2.Selector = Nothing
         Me.ucrReceiverTraits2.Size = New System.Drawing.Size(206, 126)
         Me.ucrReceiverTraits2.strNcFilePath = ""
-        Me.ucrReceiverTraits2.TabIndex = 19
+        Me.ucrReceiverTraits2.TabIndex = 6
         Me.ucrReceiverTraits2.ucrSelector = Nothing
         '
         'ucrBaseSdgTransformations
@@ -315,7 +315,7 @@ Partial Class sdgTransformations
         Me.ucrBaseSdgTransformations.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBaseSdgTransformations.Name = "ucrBaseSdgTransformations"
         Me.ucrBaseSdgTransformations.Size = New System.Drawing.Size(336, 46)
-        Me.ucrBaseSdgTransformations.TabIndex = 8
+        Me.ucrBaseSdgTransformations.TabIndex = 1
         '
         'ucrReceiverTraits1
         '
@@ -327,7 +327,7 @@ Partial Class sdgTransformations
         Me.ucrReceiverTraits1.Selector = Nothing
         Me.ucrReceiverTraits1.Size = New System.Drawing.Size(170, 31)
         Me.ucrReceiverTraits1.strNcFilePath = ""
-        Me.ucrReceiverTraits1.TabIndex = 16
+        Me.ucrReceiverTraits1.TabIndex = 6
         Me.ucrReceiverTraits1.ucrSelector = Nothing
         '
         'ucrReceiverVariety
@@ -340,7 +340,7 @@ Partial Class sdgTransformations
         Me.ucrReceiverVariety.Selector = Nothing
         Me.ucrReceiverVariety.Size = New System.Drawing.Size(170, 31)
         Me.ucrReceiverVariety.strNcFilePath = ""
-        Me.ucrReceiverVariety.TabIndex = 14
+        Me.ucrReceiverVariety.TabIndex = 2
         Me.ucrReceiverVariety.ucrSelector = Nothing
         '
         'ucrReceiverIDVariable
@@ -353,7 +353,7 @@ Partial Class sdgTransformations
         Me.ucrReceiverIDVariable.Selector = Nothing
         Me.ucrReceiverIDVariable.Size = New System.Drawing.Size(170, 31)
         Me.ucrReceiverIDVariable.strNcFilePath = ""
-        Me.ucrReceiverIDVariable.TabIndex = 11
+        Me.ucrReceiverIDVariable.TabIndex = 3
         Me.ucrReceiverIDVariable.ucrSelector = Nothing
         '
         'ucrSelectorTricotIDLevel
@@ -366,7 +366,7 @@ Partial Class sdgTransformations
         Me.ucrSelectorTricotIDLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorTricotIDLevel.Name = "ucrSelectorTricotIDLevel"
         Me.ucrSelectorTricotIDLevel.Size = New System.Drawing.Size(320, 282)
-        Me.ucrSelectorTricotIDLevel.TabIndex = 9
+        Me.ucrSelectorTricotIDLevel.TabIndex = 0
         '
         'tbOptions
         '
@@ -378,7 +378,7 @@ Partial Class sdgTransformations
         Me.tbOptions.Name = "tbOptions"
         Me.tbOptions.SelectedIndex = 0
         Me.tbOptions.Size = New System.Drawing.Size(593, 435)
-        Me.tbOptions.TabIndex = 35
+        Me.tbOptions.TabIndex = 0
         '
         'tbIDLevel
         '
