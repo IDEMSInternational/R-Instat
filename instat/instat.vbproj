@@ -3566,6 +3566,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgImportFromClimMob.resx">
       <DependentUpon>sdgImportFromClimMob.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLocation.resx">
       <DependentUpon>sdgLocation.vb</DependentUpon>
