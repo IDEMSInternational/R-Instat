@@ -38,6 +38,7 @@ Public Class dlgTraitCorrelations
 
     Private Sub InitialiseDialog()
 
+        ucrBase.iHelpTopicID = 703
         ucrReceiverTrait.SetParameterIsRFunction()
         ucrReceiverTrait.Selector = ucrSelecetorTraits
 
