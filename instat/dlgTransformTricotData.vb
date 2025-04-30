@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+Imports System.Data.SqlClient
 Imports instat.Translations
 Imports RDotNet
 
@@ -56,9 +57,10 @@ Public Class dlgTransformTricotData
         clsOutputLevelsOperator = New ROperator
         OverallSymbolOperator = New ROperator
         bUniqueChecked = False
-        ucrSelectorTricotData.Reset()
-        ucrInputTricotData.Reset()
         bResetSubdialog = True
+        ucrSelectorTricotData.Reset()
+        ucrInputTricotData.SetText("")
+        ucrInputTricotData.txtInput.BackColor = Color.White
 
         ucrReceiverTricotData.SetMeAsReceiver()
         clsOutputDataLevel.SetPackageName("instatExtras")
@@ -119,15 +121,13 @@ Public Class dlgTransformTricotData
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(True)
-        'ucrBase.OKEnabled(Not ucrReceiverTricotData.IsEmpty AndAlso bUniqueChecked)
+        ucrBase.OKEnabled(Not ucrReceiverTricotData.IsEmpty AndAlso bUniqueChecked)
     End Sub
 
 
     Private Sub cmdCheckTricotData_click(sender As Object, e As EventArgs) Handles cmdCheckTricotData.Click
         Check()
     End Sub
-
 
     Private Sub Check()
         Dim clsPackageCheck As New RFunction
@@ -144,14 +144,17 @@ Public Class dlgTransformTricotData
 
         If expOutput Is Nothing OrElse expOutput.Type = Internals.SymbolicExpressionType.Null Then
             ucrInputTricotData.SetText("Cannot get data information.")
+            ucrInputTricotData.txtInput.BackColor = Color.White
             Exit Sub
         End If
 
         chrOutput = expOutput.AsCharacter
         If chrOutput.Count < 1 Then
             ucrInputTricotData.SetText("Cannot get data information.")
+            ucrInputTricotData.txtInput.BackColor = Color.White
             Exit Sub
         End If
+
         Select Case chrOutput(0)
             Case "0"
                 bUniqueChecked = False
@@ -176,7 +179,83 @@ Public Class dlgTransformTricotData
                 End If
                 ucrInputTricotData.txtInput.BackColor = Color.LightGreen
         End Select
+
+        ' Pass the output code into the popup logic
+        AddButtonInTryTextBox(chrOutput(0))
         TestOKEnabled()
     End Sub
+
+    Private Sub AddButtonInTryTextBox(Optional levelCode As String = "")
+        Dim strDetails() As String
+        Dim expTemp As SymbolicExpression
+
+        ' Remove old button if it exists
+        For Each ctrl As Control In ucrInputTricotData.Controls.OfType(Of Button).ToList()
+            If ctrl.Name = "btnTricotDetails" Then
+                ucrInputTricotData.Controls.Remove(ctrl)
+                ctrl.Dispose()
+            End If
+        Next
+
+        ' Add new button
+        Dim btnDetails As New Button With {
+            .Name = "btnTricotDetails"
+        }
+        ucrInputTricotData.Controls.Add(btnDetails)
+
+        btnDetails.Text = ":::"
+        btnDetails.Size = New Size(25, ucrInputTricotData.ClientSize.Height + 2)
+        btnDetails.TextAlign = ContentAlignment.TopCenter
+        btnDetails.FlatStyle = FlatStyle.Standard
+        btnDetails.FlatAppearance.BorderSize = 0
+        btnDetails.Cursor = Cursors.Default
+        btnDetails.Dock = DockStyle.Right
+        btnDetails.UseVisualStyleBackColor = True
+
+        AddHandler btnDetails.Click, Sub()
+                                         Dim frmPopUp As New Form
+                                         Dim txtPopUpErrorDetail As New TextBox
+
+                                         frmPopUp.ShowInTaskbar = False
+                                         frmPopUp.FormBorderStyle = FormBorderStyle.None
+                                         frmPopUp.Size = New Size(ucrInputTricotData.Width, 120)
+                                         frmPopUp.Controls.Add(txtPopUpErrorDetail)
+
+                                         txtPopUpErrorDetail.Dock = DockStyle.Fill
+                                         txtPopUpErrorDetail.Multiline = True
+                                         txtPopUpErrorDetail.ScrollBars = ScrollBars.Vertical
+                                         txtPopUpErrorDetail.WordWrap = True
+
+                                         AddHandler txtPopUpErrorDetail.LostFocus, Sub() frmPopUp.Close()
+                                         AddHandler txtPopUpErrorDetail.KeyDown, Sub(sender As Object, e As KeyEventArgs)
+                                                                                     If e.Control AndAlso e.KeyCode = Keys.Enter Then frmPopUp.Close()
+                                                                                 End Sub
+
+                                         Dim ctlpos As Point = ucrInputTricotData.PointToScreen(New Point(0, 0))
+                                         frmPopUp.StartPosition = FormStartPosition.Manual
+                                         frmPopUp.Location = New Point(ctlpos.X - 2, ctlpos.Y - frmPopUp.Height - 2)
+                                         frmPopUp.Show()
+
+                                         ' Handle different cases
+                                         If levelCode = "0" Then
+                                             txtPopUpErrorDetail.Text = "Need ID level data to proceed. If you have an ID variable, are they all unique? Check in Tricot > Tidy > Duplicate (Rows). Otherwise, change ID variable under Options to a unique variable."
+                                         ElseIf levelCode = "1" Then
+                                             txtPopUpErrorDetail.Text = "Multiple data frames given at ID level. Should only have one data frame at each level. You can merge data frames in the Prepare > Data Reshape > Merge (Join) Dialog"
+                                         ElseIf levelCode = "2" Then
+                                             txtPopUpErrorDetail.Text = "Tricot Data not found. Try using Options to define ID variables and click Check again."
+                                         Else
+                                             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsOutputLevelsOperator.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
+                                             If expTemp IsNot Nothing Then
+                                                 strDetails = expTemp.AsCharacter().ToArray()
+                                                 txtPopUpErrorDetail.Text = String.Join(", ", strDetails)
+                                             Else
+                                                 txtPopUpErrorDetail.Text = "No output."
+                                             End If
+                                         End If
+
+                                         txtPopUpErrorDetail.SelectionStart = txtPopUpErrorDetail.TextLength
+                                     End Sub
+    End Sub
+
 
 End Class

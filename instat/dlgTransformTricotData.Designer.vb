@@ -22,92 +22,94 @@ Partial Class dlgTransformTricotData
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrReceiverTricotData = New instat.ucrReceiverMultiple()
         Me.cmdCheckTricotData = New System.Windows.Forms.Button()
-        Me.ucrBase = New instat.ucrButtons()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.ucrSelectorTricotData = New instat.ucrSelectorAddRemove()
         Me.lblData = New System.Windows.Forms.Label()
         Me.ucrInputTricotData = New instat.ucrInputTextBox()
+        Me.ucrSelectorTricotData = New instat.ucrSelectorAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrReceiverTricotData = New instat.ucrReceiverMultiple()
         Me.SuspendLayout()
-        '
-        'ucrReceiverTricotData
-        '
-        Me.ucrReceiverTricotData.AutoSize = True
-        Me.ucrReceiverTricotData.frmParent = Me
-        Me.ucrReceiverTricotData.Location = New System.Drawing.Point(261, 60)
-        Me.ucrReceiverTricotData.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverTricotData.Name = "ucrReceiverTricotData"
-        Me.ucrReceiverTricotData.Selector = Nothing
-        Me.ucrReceiverTricotData.Size = New System.Drawing.Size(123, 100)
-        Me.ucrReceiverTricotData.strNcFilePath = ""
-        Me.ucrReceiverTricotData.TabIndex = 6
-        Me.ucrReceiverTricotData.ucrSelector = Nothing
         '
         'cmdCheckTricotData
         '
-        Me.cmdCheckTricotData.Location = New System.Drawing.Point(7, 193)
+        Me.cmdCheckTricotData.Location = New System.Drawing.Point(10, 270)
+        Me.cmdCheckTricotData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdCheckTricotData.Name = "cmdCheckTricotData"
-        Me.cmdCheckTricotData.Size = New System.Drawing.Size(101, 23)
-        Me.cmdCheckTricotData.TabIndex = 7
+        Me.cmdCheckTricotData.Size = New System.Drawing.Size(152, 35)
+        Me.cmdCheckTricotData.TabIndex = 3
         Me.cmdCheckTricotData.Text = "Check"
         Me.cmdCheckTricotData.UseVisualStyleBackColor = True
         '
-        'ucrBase
-        '
-        Me.ucrBase.AutoSize = True
-        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(7, 257)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 8
-        '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(307, 225)
+        Me.cmdOptions.Location = New System.Drawing.Point(460, 320)
+        Me.cmdOptions.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(101, 23)
-        Me.cmdOptions.TabIndex = 10
+        Me.cmdOptions.Size = New System.Drawing.Size(152, 35)
+        Me.cmdOptions.TabIndex = 5
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'ucrSelectorTricotData
-        '
-        Me.ucrSelectorTricotData.AutoSize = True
-        Me.ucrSelectorTricotData.bShowHiddenColumns = False
-        Me.ucrSelectorTricotData.Location = New System.Drawing.Point(7, 32)
-        Me.ucrSelectorTricotData.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorTricotData.Name = "ucrSelectorTricotData"
-        Me.ucrSelectorTricotData.Size = New System.Drawing.Size(218, 147)
-        Me.ucrSelectorTricotData.TabIndex = 11
         '
         'lblData
         '
         Me.lblData.AutoSize = True
-        Me.lblData.Location = New System.Drawing.Point(261, 45)
-        Me.lblData.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblData.Location = New System.Drawing.Point(392, 69)
         Me.lblData.Name = "lblData"
-        Me.lblData.Size = New System.Drawing.Size(65, 13)
-        Me.lblData.TabIndex = 12
+        Me.lblData.Size = New System.Drawing.Size(98, 20)
+        Me.lblData.TabIndex = 1
         Me.lblData.Text = "Data Frame:"
         '
         'ucrInputTricotData
         '
         Me.ucrInputTricotData.AddQuotesIfUnrecognised = True
         Me.ucrInputTricotData.AutoSize = True
-        Me.ucrInputTricotData.IsMultiline = False
+        Me.ucrInputTricotData.IsMultiline = True
         Me.ucrInputTricotData.IsReadOnly = True
-        Me.ucrInputTricotData.Location = New System.Drawing.Point(111, 195)
+        Me.ucrInputTricotData.Location = New System.Drawing.Point(166, 273)
+        Me.ucrInputTricotData.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputTricotData.Name = "ucrInputTricotData"
-        Me.ucrInputTricotData.Size = New System.Drawing.Size(297, 21)
-        Me.ucrInputTricotData.TabIndex = 13
+        Me.ucrInputTricotData.Size = New System.Drawing.Size(446, 32)
+        Me.ucrInputTricotData.TabIndex = 4
+        '
+        'ucrSelectorTricotData
+        '
+        Me.ucrSelectorTricotData.AutoSize = True
+        Me.ucrSelectorTricotData.bShowHiddenColumns = False
+        Me.ucrSelectorTricotData.Location = New System.Drawing.Point(10, 49)
+        Me.ucrSelectorTricotData.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorTricotData.Name = "ucrSelectorTricotData"
+        Me.ucrSelectorTricotData.Size = New System.Drawing.Size(327, 199)
+        Me.ucrSelectorTricotData.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.AutoSize = True
+        Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrBase.Location = New System.Drawing.Point(10, 369)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
+        Me.ucrBase.TabIndex = 6
+        '
+        'ucrReceiverTricotData
+        '
+        Me.ucrReceiverTricotData.AutoSize = True
+        Me.ucrReceiverTricotData.frmParent = Me
+        Me.ucrReceiverTricotData.Location = New System.Drawing.Point(392, 92)
+        Me.ucrReceiverTricotData.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTricotData.Name = "ucrReceiverTricotData"
+        Me.ucrReceiverTricotData.Selector = Nothing
+        Me.ucrReceiverTricotData.Size = New System.Drawing.Size(184, 154)
+        Me.ucrReceiverTricotData.strNcFilePath = ""
+        Me.ucrReceiverTricotData.TabIndex = 2
+        Me.ucrReceiverTricotData.ucrSelector = Nothing
         '
         'dlgTransformTricotData
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 315)
+        Me.ClientSize = New System.Drawing.Size(630, 459)
         Me.Controls.Add(Me.ucrInputTricotData)
         Me.Controls.Add(Me.lblData)
         Me.Controls.Add(Me.ucrSelectorTricotData)
@@ -116,6 +118,7 @@ Partial Class dlgTransformTricotData
         Me.Controls.Add(Me.cmdCheckTricotData)
         Me.Controls.Add(Me.ucrReceiverTricotData)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.MinimizeBox = False
         Me.Name = "dlgTransformTricotData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
