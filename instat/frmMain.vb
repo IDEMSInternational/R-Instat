@@ -3049,4 +3049,35 @@ Public Class frmMain
     Private Sub mnuTricotModelOverall_Click(sender As Object, e As EventArgs) Handles mnuTricotModelOverall.Click
         dlgTricotModelOneVarCov.ShowDialog()
     End Sub
+
+    'Examine/Edit Data Menu's in the Tricot Menu
+    'Visualise Data dialog
+    Private Sub mnuTricotVisualiseDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTricotVisualiseData.Click
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Climatic
+        dlgVisualizeData.ShowDialog()
+    End Sub
+
+    'Pivot table dialog
+    Private Sub mnuTricotPivotTable_Click(sender As Object, e As EventArgs) Handles mnuTricotPivotTable.Click
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Climatic
+        dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
+    'One Variable Summarise dialog
+    Private Sub OneVariableSummariseToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles mnuTricotOneVariableSummarise.Click
+        dlgOneVariableSummarise.enumOnevariableMode = dlgOneVariableSummarise.OnevariableMode.Climatic
+        dlgOneVariableSummarise.ShowDialog()
+    End Sub
+
+    ' One variable Graph dialog
+    Private Sub mnuTricotOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuTricotOneVariableGraph.Click
+        dlgOneVariableGraph.enumOnevariableMode = dlgOneVariableGraph.OnevariableMode.Climatic
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
+    'One variable Frequencies dialog
+    Private Sub mnuTricotOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuTricotOneVariableFrequencies.Click
+        dlgOneWayFrequencies.enumOnewayMode = dlgOneWayFrequencies.OnewayMode.Climatic
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
 End Class
