@@ -3095,4 +3095,8 @@ Public Class frmMain
         dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Describe
         dlgVisualizeData.ShowDialog()
     End Sub
+
+    Private Sub mnuTidyTransformTricot_Click(sender As Object, e As EventArgs) Handles mnuTidyTransformTricot.Click
+        dlgTransformTricotData.ShowDialog()
+    End Sub
 End Class
