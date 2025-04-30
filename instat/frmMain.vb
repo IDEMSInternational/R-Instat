@@ -3029,7 +3029,7 @@ Public Class frmMain
         dlgModellingTree.ShowDialog()
     End Sub
 
-    Private Sub mnuTricotTransformClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotTransformClimMob.Click
+    Private Sub mnuTricotTransformClimMob_Click(sender As Object, e As EventArgs)
         dlgTransformTricotData.ShowDialog()
     End Sub
 
@@ -3091,7 +3091,7 @@ Public Class frmMain
         dlgAddKey.ShowDialog()
     End Sub
 
-    Private Sub mnuVisualizeTricot_Click(sender As Object, e As EventArgs) Handles mnuVisualizeTricot.Click
+    Private Sub mnuVisualizeTricot_Click(sender As Object, e As EventArgs)
         dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Describe
         dlgVisualizeData.ShowDialog()
     End Sub

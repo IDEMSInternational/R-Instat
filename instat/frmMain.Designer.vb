@@ -180,12 +180,12 @@ Partial Class frmMain
         Me.mnuToolsHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionalMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuProcurementHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuExperimentsHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotMenuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotXPMenuHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuExperimentsHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAboutR = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpLearningStatistics = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpRPackages = New System.Windows.Forms.ToolStripMenuItem()
@@ -627,17 +627,21 @@ Partial Class frmMain
         Me.mnuStructuredSurvey = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotImportFromClimMob = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTricotTransformClimMob = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotDefineTricotData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
-        Me.PrepareToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuVisualizeTricot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPivotTablesTricot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOneVariableTricot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDuplicatesTricot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotDescribe = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSummariseTricot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeGraphTricots = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator83 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTricotDescribeTraits = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotDescribeCorrelations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TidyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTidyTransformTricot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator85 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuTidyDuplicateRows = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTidyAddMergeColumns = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator86 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AddKeyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotModelPlackettLuce = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotModelWithoutCovariates = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotModelTree = New System.Windows.Forms.ToolStripMenuItem()
@@ -747,16 +751,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuSummariseTricot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeGraphTricots = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator83 = New System.Windows.Forms.ToolStripSeparator()
-        Me.TidyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTidyTransformTricot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTidyDuplicateRows = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTidyAddMergeColumns = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AddKeyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator85 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator86 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -797,18 +791,18 @@ Partial Class frmMain
         'mnuDescribeOneVariableVisualiseData
         '
         Me.mnuDescribeOneVariableVisualiseData.Name = "mnuDescribeOneVariableVisualiseData"
-        Me.mnuDescribeOneVariableVisualiseData.Size = New System.Drawing.Size(155, 22)
+        Me.mnuDescribeOneVariableVisualiseData.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeOneVariableVisualiseData.Text = "Visualise Data..."
         '
         'ToolStripSeparator72
         '
         Me.ToolStripSeparator72.Name = "ToolStripSeparator72"
-        Me.ToolStripSeparator72.Size = New System.Drawing.Size(152, 6)
+        Me.ToolStripSeparator72.Size = New System.Drawing.Size(177, 6)
         '
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(155, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.ToolTipText = "One Variable Summarise, Skim and Customised"
@@ -816,26 +810,26 @@ Partial Class frmMain
         'mnuDescribeOneVariableGraph
         '
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(155, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
         'ToolStripSeparator33
         '
         Me.ToolStripSeparator33.Name = "ToolStripSeparator33"
-        Me.ToolStripSeparator33.Size = New System.Drawing.Size(152, 6)
+        Me.ToolStripSeparator33.Size = New System.Drawing.Size(177, 6)
         '
         'mnuDescribeOneVariableFrequencies
         '
         Me.mnuDescribeOneVariableFrequencies.Name = "mnuDescribeOneVariableFrequencies"
-        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(155, 22)
+        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeOneVariableFrequencies.Text = "Frequencies..."
         Me.mnuDescribeOneVariableFrequencies.ToolTipText = "Table or Graph. Also Stem and Leaf Plots"
         '
         'mnuDescribeOneVariableRatingData
         '
         Me.mnuDescribeOneVariableRatingData.Name = "mnuDescribeOneVariableRatingData"
-        Me.mnuDescribeOneVariableRatingData.Size = New System.Drawing.Size(155, 22)
+        Me.mnuDescribeOneVariableRatingData.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeOneVariableRatingData.Text = "Rating Data..."
         Me.mnuDescribeOneVariableRatingData.ToolTipText = "Table, Stacked Graph or Likert Graph"
         '
@@ -1696,54 +1690,54 @@ Partial Class frmMain
         'mnuMenusHelp
         '
         Me.mnuMenusHelp.Name = "mnuMenusHelp"
-        Me.mnuMenusHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuMenusHelp.Size = New System.Drawing.Size(128, 22)
         Me.mnuMenusHelp.Text = "Menus ..."
         '
         'ToolStripSeparator82
         '
         Me.ToolStripSeparator82.Name = "ToolStripSeparator82"
-        Me.ToolStripSeparator82.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator82.Size = New System.Drawing.Size(125, 6)
         '
         'mnuFileHelp
         '
         Me.mnuFileHelp.Name = "mnuFileHelp"
-        Me.mnuFileHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuFileHelp.Size = New System.Drawing.Size(128, 22)
         Me.mnuFileHelp.Text = "File..."
         '
         'mnuEditHelp
         '
         Me.mnuEditHelp.Name = "mnuEditHelp"
-        Me.mnuEditHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuEditHelp.Size = New System.Drawing.Size(128, 22)
         Me.mnuEditHelp.Text = "Edit..."
         '
         'mnuPrepareHelp
         '
         Me.mnuPrepareHelp.Name = "mnuPrepareHelp"
-        Me.mnuPrepareHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuPrepareHelp.Size = New System.Drawing.Size(128, 22)
         Me.mnuPrepareHelp.Text = "Prepare..."
         '
         'mnuDescribeHelp
         '
         Me.mnuDescribeHelp.Name = "mnuDescribeHelp"
-        Me.mnuDescribeHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuDescribeHelp.Size = New System.Drawing.Size(128, 22)
         Me.mnuDescribeHelp.Text = "Describe..."
         '
         'mnuModelHelp
         '
         Me.mnuModelHelp.Name = "mnuModelHelp"
-        Me.mnuModelHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuModelHelp.Size = New System.Drawing.Size(128, 22)
         Me.mnuModelHelp.Text = "Model..."
         '
         'mnuToolsHelp
         '
         Me.mnuToolsHelp.Name = "mnuToolsHelp"
-        Me.mnuToolsHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuToolsHelp.Size = New System.Drawing.Size(128, 22)
         Me.mnuToolsHelp.Text = "Tools..."
         '
         'mnuViewHelp
         '
         Me.mnuViewHelp.Name = "mnuViewHelp"
-        Me.mnuViewHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuViewHelp.Size = New System.Drawing.Size(128, 22)
         Me.mnuViewHelp.Text = "View..."
         '
         'OptionalMenuToolStripMenuItem
@@ -1753,41 +1747,41 @@ Partial Class frmMain
         Me.OptionalMenuToolStripMenuItem.Size = New System.Drawing.Size(239, 22)
         Me.OptionalMenuToolStripMenuItem.Text = "Optional Menu"
         '
-        'mnuStructuredHelp
-        '
-        Me.mnuStructuredHelp.Name = "mnuStructuredHelp"
-        Me.mnuStructuredHelp.Size = New System.Drawing.Size(180, 22)
-        Me.mnuStructuredHelp.Text = "Structured..."
-        '
         'mnuClimaticHelp
         '
         Me.mnuClimaticHelp.Name = "mnuClimaticHelp"
-        Me.mnuClimaticHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuClimaticHelp.Size = New System.Drawing.Size(164, 22)
         Me.mnuClimaticHelp.Text = "Climatic..."
         '
-        'mnuProcurementHelp
+        'mnuStructuredHelp
         '
-        Me.mnuProcurementHelp.Name = "mnuProcurementHelp"
-        Me.mnuProcurementHelp.Size = New System.Drawing.Size(180, 22)
-        Me.mnuProcurementHelp.Text = "Procurement..."
-        '
-        'mnuExperimentsHelp
-        '
-        Me.mnuExperimentsHelp.Name = "mnuExperimentsHelp"
-        Me.mnuExperimentsHelp.Size = New System.Drawing.Size(180, 22)
-        Me.mnuExperimentsHelp.Text = "Experiments..."
+        Me.mnuStructuredHelp.Name = "mnuStructuredHelp"
+        Me.mnuStructuredHelp.Size = New System.Drawing.Size(164, 22)
+        Me.mnuStructuredHelp.Text = "Structured..."
         '
         'mnuTricotMenuHelp
         '
         Me.mnuTricotMenuHelp.Name = "mnuTricotMenuHelp"
-        Me.mnuTricotMenuHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuTricotMenuHelp.Size = New System.Drawing.Size(164, 22)
         Me.mnuTricotMenuHelp.Text = "Tricot Menu..."
         '
         'mnuTricotXPMenuHelp
         '
         Me.mnuTricotXPMenuHelp.Name = "mnuTricotXPMenuHelp"
-        Me.mnuTricotXPMenuHelp.Size = New System.Drawing.Size(180, 22)
+        Me.mnuTricotXPMenuHelp.Size = New System.Drawing.Size(164, 22)
         Me.mnuTricotXPMenuHelp.Text = "Tricot XP Menu..."
+        '
+        'mnuExperimentsHelp
+        '
+        Me.mnuExperimentsHelp.Name = "mnuExperimentsHelp"
+        Me.mnuExperimentsHelp.Size = New System.Drawing.Size(164, 22)
+        Me.mnuExperimentsHelp.Text = "Experiments..."
+        '
+        'mnuProcurementHelp
+        '
+        Me.mnuProcurementHelp.Name = "mnuProcurementHelp"
+        Me.mnuProcurementHelp.Size = New System.Drawing.Size(164, 22)
+        Me.mnuProcurementHelp.Text = "Procurement..."
         '
         'mnuHelpAboutR
         '
@@ -4739,7 +4733,7 @@ Partial Class frmMain
         '
         'mnuTricot
         '
-        Me.mnuTricot.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTricotImportFromClimMob, Me.mnuTricotTransformClimMob, Me.mnuTricotDefineTricotData, Me.ToolStripSeparator20, Me.PrepareToolStripMenuItem1, Me.mnuTricotDescribe, Me.TidyToolStripMenuItem, Me.mnuTricotModelPlackettLuce})
+        Me.mnuTricot.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTricotImportFromClimMob, Me.TidyToolStripMenuItem, Me.mnuTricotDefineTricotData, Me.ToolStripSeparator20, Me.mnuTricotDescribe, Me.mnuTricotModelPlackettLuce})
         Me.mnuTricot.Name = "mnuTricot"
         Me.mnuTricot.Size = New System.Drawing.Size(49, 22)
         Me.mnuTricot.Text = "Tricot"
@@ -4749,12 +4743,6 @@ Partial Class frmMain
         Me.mnuTricotImportFromClimMob.Name = "mnuTricotImportFromClimMob"
         Me.mnuTricotImportFromClimMob.Size = New System.Drawing.Size(201, 22)
         Me.mnuTricotImportFromClimMob.Text = "Import from ClimMob..."
-        '
-        'mnuTricotTransformClimMob
-        '
-        Me.mnuTricotTransformClimMob.Name = "mnuTricotTransformClimMob"
-        Me.mnuTricotTransformClimMob.Size = New System.Drawing.Size(201, 22)
-        Me.mnuTricotTransformClimMob.Text = "Transform ClimMob..."
         '
         'mnuTricotDefineTricotData
         '
@@ -4767,43 +4755,29 @@ Partial Class frmMain
         Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
         Me.ToolStripSeparator20.Size = New System.Drawing.Size(198, 6)
         '
-        'PrepareToolStripMenuItem1
-        '
-        Me.PrepareToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuVisualizeTricot, Me.mnuPivotTablesTricot, Me.mnuOneVariableTricot, Me.mnuDuplicatesTricot})
-        Me.PrepareToolStripMenuItem1.Name = "PrepareToolStripMenuItem1"
-        Me.PrepareToolStripMenuItem1.Size = New System.Drawing.Size(201, 22)
-        Me.PrepareToolStripMenuItem1.Text = "Prepare"
-        '
-        'mnuVisualizeTricot
-        '
-        Me.mnuVisualizeTricot.Name = "mnuVisualizeTricot"
-        Me.mnuVisualizeTricot.Size = New System.Drawing.Size(248, 22)
-        Me.mnuVisualizeTricot.Text = "Visualise Data..."
-        '
-        'mnuPivotTablesTricot
-        '
-        Me.mnuPivotTablesTricot.Name = "mnuPivotTablesTricot"
-        Me.mnuPivotTablesTricot.Size = New System.Drawing.Size(248, 22)
-        Me.mnuPivotTablesTricot.Text = "Pivot Tables..."
-        '
-        'mnuOneVariableTricot
-        '
-        Me.mnuOneVariableTricot.Name = "mnuOneVariableTricot"
-        Me.mnuOneVariableTricot.Size = New System.Drawing.Size(248, 22)
-        Me.mnuOneVariableTricot.Text = "One Variable..."
-        '
-        'mnuDuplicatesTricot
-        '
-        Me.mnuDuplicatesTricot.Name = "mnuDuplicatesTricot"
-        Me.mnuDuplicatesTricot.Size = New System.Drawing.Size(248, 22)
-        Me.mnuDuplicatesTricot.Text = "Duplicates (Key Variable Check)..."
-        '
         'mnuTricotDescribe
         '
         Me.mnuTricotDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuSummariseTricot, Me.mnuDescribeGraphTricots, Me.ToolStripSeparator83, Me.mnuTricotDescribeTraits, Me.mnuTricotDescribeCorrelations})
         Me.mnuTricotDescribe.Name = "mnuTricotDescribe"
         Me.mnuTricotDescribe.Size = New System.Drawing.Size(201, 22)
         Me.mnuTricotDescribe.Text = "Describe"
+        '
+        'mnuSummariseTricot
+        '
+        Me.mnuSummariseTricot.Name = "mnuSummariseTricot"
+        Me.mnuSummariseTricot.Size = New System.Drawing.Size(211, 22)
+        Me.mnuSummariseTricot.Text = "Summarise 2/3 variables..."
+        '
+        'mnuDescribeGraphTricots
+        '
+        Me.mnuDescribeGraphTricots.Name = "mnuDescribeGraphTricots"
+        Me.mnuDescribeGraphTricots.Size = New System.Drawing.Size(211, 22)
+        Me.mnuDescribeGraphTricots.Text = "Graph 2/3 Variables..."
+        '
+        'ToolStripSeparator83
+        '
+        Me.ToolStripSeparator83.Name = "ToolStripSeparator83"
+        Me.ToolStripSeparator83.Size = New System.Drawing.Size(208, 6)
         '
         'mnuTricotDescribeTraits
         '
@@ -4816,6 +4790,47 @@ Partial Class frmMain
         Me.mnuTricotDescribeCorrelations.Name = "mnuTricotDescribeCorrelations"
         Me.mnuTricotDescribeCorrelations.Size = New System.Drawing.Size(211, 22)
         Me.mnuTricotDescribeCorrelations.Text = "Correlations..."
+        '
+        'TidyToolStripMenuItem
+        '
+        Me.TidyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTidyTransformTricot, Me.ToolStripSeparator85, Me.mnuTidyDuplicateRows, Me.mnuTidyAddMergeColumns, Me.ToolStripSeparator86, Me.AddKeyToolStripMenuItem})
+        Me.TidyToolStripMenuItem.Name = "TidyToolStripMenuItem"
+        Me.TidyToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.TidyToolStripMenuItem.Text = "Tidy Data"
+        '
+        'mnuTidyTransformTricot
+        '
+        Me.mnuTidyTransformTricot.Name = "mnuTidyTransformTricot"
+        Me.mnuTidyTransformTricot.Size = New System.Drawing.Size(201, 22)
+        Me.mnuTidyTransformTricot.Text = "Transform Tricot..."
+        '
+        'ToolStripSeparator85
+        '
+        Me.ToolStripSeparator85.Name = "ToolStripSeparator85"
+        Me.ToolStripSeparator85.Size = New System.Drawing.Size(198, 6)
+        '
+        'mnuTidyDuplicateRows
+        '
+        Me.mnuTidyDuplicateRows.Name = "mnuTidyDuplicateRows"
+        Me.mnuTidyDuplicateRows.Size = New System.Drawing.Size(201, 22)
+        Me.mnuTidyDuplicateRows.Text = "Duplicate Rows..."
+        '
+        'mnuTidyAddMergeColumns
+        '
+        Me.mnuTidyAddMergeColumns.Name = "mnuTidyAddMergeColumns"
+        Me.mnuTidyAddMergeColumns.Size = New System.Drawing.Size(201, 22)
+        Me.mnuTidyAddMergeColumns.Text = "Add (Merge) Columns..."
+        '
+        'ToolStripSeparator86
+        '
+        Me.ToolStripSeparator86.Name = "ToolStripSeparator86"
+        Me.ToolStripSeparator86.Size = New System.Drawing.Size(198, 6)
+        '
+        'AddKeyToolStripMenuItem
+        '
+        Me.AddKeyToolStripMenuItem.Name = "AddKeyToolStripMenuItem"
+        Me.AddKeyToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
+        Me.AddKeyToolStripMenuItem.Text = "Add Key..."
         '
         'mnuTricotModelPlackettLuce
         '
@@ -4945,7 +4960,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckDataDuplicateRows, Me.mnuOptionsByContextCheckDataCompareColumns, Me.ToolStripSeparator47, Me.mnuOptionsByContextCheckDataOneVariableSummarise, Me.mnuOptionsByContextCheckDataOneVariableGraph, Me.mnuOptionsByContextCheckDataOneVariableFrequencies})
         Me.mnuOptionsByContextCheckData.Name = "mnuOptionsByContextCheckData"
-        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextCheckData.Size = New System.Drawing.Size(137, 22)
         Me.mnuOptionsByContextCheckData.Text = "Check Data"
         '
         'mnuOptionsByContextCheckDataDuplicateRows
@@ -4987,7 +5002,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDefine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDefineOnStation, Me.mnuOptionsByContextDefineOnFarm})
         Me.mnuOptionsByContextDefine.Name = "mnuOptionsByContextDefine"
-        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextDefine.Size = New System.Drawing.Size(137, 22)
         Me.mnuOptionsByContextDefine.Text = "Define"
         '
         'mnuOptionsByContextDefineOnStation
@@ -5006,7 +5021,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions, Me.ToolStripSeparator48, Me.mnuOptionsByContextMergeAdditionalData, Me.mnuOptionsByContextPrepareStack, Me.mnuOptionsByContextPrepareUnstack})
         Me.mnuOptionsByContextPrepare.Name = "mnuOptionsByContextPrepare"
-        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextPrepare.Size = New System.Drawing.Size(137, 22)
         Me.mnuOptionsByContextPrepare.Text = "Prepare"
         '
         'mnuOptionsByContextPrepareCalculateDIfferenceBetweenOptions
@@ -5042,7 +5057,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextDescribeCompareTwoTreatments, Me.mnuOptionsByContextDescribeCompareMultipleTreatments, Me.mnuOptionsByContextDescribeBoxplot})
         Me.mnuOptionsByContextDescribe.Name = "mnuOptionsByContextDescribe"
-        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextDescribe.Size = New System.Drawing.Size(137, 22)
         Me.mnuOptionsByContextDescribe.Text = "Describe"
         '
         'mnuOptionsByContextDescribeCompareTwoTreatments
@@ -5068,7 +5083,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextModelFitModel, Me.mnuOptionsByContextGeneralFitModel})
         Me.mnuOptionsByContextModel.Name = "mnuOptionsByContextModel"
-        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextModel.Size = New System.Drawing.Size(137, 22)
         Me.mnuOptionsByContextModel.Text = "Model"
         '
         'mnuOptionsByContextModelFitModel
@@ -5087,7 +5102,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContextCropModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCropModelApsimxExamples})
         Me.mnuOptionsByContextCropModel.Name = "mnuOptionsByContextCropModel"
-        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(180, 22)
+        Me.mnuOptionsByContextCropModel.Size = New System.Drawing.Size(137, 22)
         Me.mnuOptionsByContextCropModel.Text = "Crop Model"
         '
         'mnuOptionsByContextCropModelApsimxExamples
@@ -5583,64 +5598,6 @@ Partial Class frmMain
         Me.mnuLogFile.Size = New System.Drawing.Size(180, 22)
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
-        '
-        'mnuSummariseTricot
-        '
-        Me.mnuSummariseTricot.Name = "mnuSummariseTricot"
-        Me.mnuSummariseTricot.Size = New System.Drawing.Size(211, 22)
-        Me.mnuSummariseTricot.Text = "Summarise 2/3 variables..."
-        '
-        'mnuDescribeGraphTricots
-        '
-        Me.mnuDescribeGraphTricots.Name = "mnuDescribeGraphTricots"
-        Me.mnuDescribeGraphTricots.Size = New System.Drawing.Size(211, 22)
-        Me.mnuDescribeGraphTricots.Text = "Graph 2/3 Variables..."
-        '
-        'ToolStripSeparator83
-        '
-        Me.ToolStripSeparator83.Name = "ToolStripSeparator83"
-        Me.ToolStripSeparator83.Size = New System.Drawing.Size(208, 6)
-        '
-        'TidyToolStripMenuItem
-        '
-        Me.TidyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTidyTransformTricot, Me.ToolStripSeparator85, Me.mnuTidyDuplicateRows, Me.mnuTidyAddMergeColumns, Me.ToolStripSeparator86, Me.AddKeyToolStripMenuItem})
-        Me.TidyToolStripMenuItem.Name = "TidyToolStripMenuItem"
-        Me.TidyToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
-        Me.TidyToolStripMenuItem.Text = "Tidy Data"
-        '
-        'mnuTidyTransformTricot
-        '
-        Me.mnuTidyTransformTricot.Name = "mnuTidyTransformTricot"
-        Me.mnuTidyTransformTricot.Size = New System.Drawing.Size(192, 22)
-        Me.mnuTidyTransformTricot.Text = "Transform Tricot..."
-        '
-        'mnuTidyDuplicateRows
-        '
-        Me.mnuTidyDuplicateRows.Name = "mnuTidyDuplicateRows"
-        Me.mnuTidyDuplicateRows.Size = New System.Drawing.Size(192, 22)
-        Me.mnuTidyDuplicateRows.Text = "Duplicate Rows..."
-        '
-        'mnuTidyAddMergeColumns
-        '
-        Me.mnuTidyAddMergeColumns.Name = "mnuTidyAddMergeColumns"
-        Me.mnuTidyAddMergeColumns.Size = New System.Drawing.Size(192, 22)
-        Me.mnuTidyAddMergeColumns.Text = "Add (Merge Columns)"
-        '
-        'AddKeyToolStripMenuItem
-        '
-        Me.AddKeyToolStripMenuItem.Name = "AddKeyToolStripMenuItem"
-        Me.AddKeyToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.AddKeyToolStripMenuItem.Text = "Add Key..."
-        '
-        'ToolStripSeparator85
-        '
-        Me.ToolStripSeparator85.Name = "ToolStripSeparator85"
-        Me.ToolStripSeparator85.Size = New System.Drawing.Size(189, 6)
-        '
-        'ToolStripSeparator86
-        '
-        Me.ToolStripSeparator86.Name = "ToolStripSeparator86"
-        Me.ToolStripSeparator86.Size = New System.Drawing.Size(189, 6)
         '
         'frmMain
         '
@@ -6370,7 +6327,6 @@ Partial Class frmMain
     Friend WithEvents mnuSwapDataDataframeMetadata As ToolStripMenuItem
     Friend WithEvents mnuTricot As ToolStripMenuItem
     Friend WithEvents mnuTricotImportFromClimMob As ToolStripMenuItem
-    Friend WithEvents mnuTricotTransformClimMob As ToolStripMenuItem
     Friend WithEvents mnuTricotDefineTricotData As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
     Friend WithEvents mnuTricotDescribe As ToolStripMenuItem
@@ -6398,11 +6354,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripMenuItem14 As ToolStripMenuItem
     Friend WithEvents mnuViewTricotXpMenu As ToolStripMenuItem
     Friend WithEvents mnuToolsRestartR As ToolStripMenuItem
-    Friend WithEvents PrepareToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents mnuVisualizeTricot As ToolStripMenuItem
-    Friend WithEvents mnuPivotTablesTricot As ToolStripMenuItem
-    Friend WithEvents mnuOneVariableTricot As ToolStripMenuItem
-    Friend WithEvents mnuDuplicatesTricot As ToolStripMenuItem
     Friend WithEvents OptionalMenuToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuStructuredHelp As ToolStripMenuItem
     Friend WithEvents mnuClimaticHelp As ToolStripMenuItem
