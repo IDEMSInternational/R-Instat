@@ -25,7 +25,7 @@ Public Class dlgDefineTricotData
     Private clsGetColumnSelection, clsUnameFunction, clsCreateRankingFunction, clsGroupRankingFunction,
         clsGetDataFrameFunction, clsAddRankingObjFunction, clsAddGrpRankingObjFunction As New RFunction
     Private clsDATIDLevelFunction, clsDATVarietyLevelFunction, clsDATIDVarietyFunction As New RFunction
-    Private clsAnyDuplicatesFunction, clsConcFunction, clsNewConcFunction, clsGetColFunction, clsDummyFunction As New RFunction
+    Private clsAnyDuplicatesFunction, clsVarietyDuplicatesFunction, clsIDVarietyDuplicatesFunction, clsConcFunction, clsNewConcFunction, clsGetColFunction, clsDummyFunction As New RFunction
     Private clsCDATIDLevelFunction, cslCDATVarietyLevelFunction, clsCDATIDLevelVarietiesFunction, clsCDATIDLevelTraitsFunction As New RFunction
     Private clsOperator As New ROperator
     Private bIsUnique As Boolean = True
@@ -117,6 +117,8 @@ Public Class dlgDefineTricotData
         clsAddGrpRankingObjFunction = New RFunction
         clsOperator = New ROperator
         clsAnyDuplicatesFunction = New RFunction
+        clsIDVarietyDuplicatesFunction = New RFunction
+        clsVarietyDuplicatesFunction = New RFunction
         clsGetColFunction = New RFunction
 
         ucrReceiverLevelID.SetMeAsReceiver()
@@ -188,6 +190,12 @@ Public Class dlgDefineTricotData
 
         clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
         clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
+
+        clsVarietyDuplicatesFunction.SetRCommand("anyDuplicated")
+        clsVarietyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
+
+        clsIDVarietyDuplicatesFunction.SetRCommand("anyDuplicated")
+        clsIDVarietyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDLevelFunction, 1)
@@ -333,7 +341,7 @@ Public Class dlgDefineTricotData
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles btnckeckduplicatesIDLevel.Click
+    Private Sub btnckeckduplicatesIDLevel_Click(sender As Object, e As EventArgs) Handles btnckeckduplicatesIDLevel.Click
         Dim iAnyDuplicated As Integer
 
         Try
@@ -351,14 +359,14 @@ Public Class dlgDefineTricotData
             ucrInputCheckInputIDLevel.txtInput.BackColor = Color.LightCoral
             bIsUnique = False
             If ucrReceiverLevelID.IsEmpty Then
-                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates found.")
-                MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate ID's found.")
+                MsgBox("You have multiple rows with the same ID.", MsgBoxStyle.Information, Title:="Duplicates")
             Else
-                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates for station(s) were found.")
-                MsgBox("You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate ID were found.")
+                MsgBox("You have multiple rows with the same ID's.", MsgBoxStyle.Information, Title:="Duplicates")
             End If
         Else
-            ucrInputCheckInputIDLevel.SetName("No duplicate dates.")
+            ucrInputCheckInputIDLevel.SetName("No duplicate ID.")
             ucrInputCheckInputIDLevel.txtInput.BackColor = Color.LightGreen
             bIsUnique = True
         End If
@@ -384,7 +392,7 @@ Public Class dlgDefineTricotData
         Dim iAnyDuplicated As Integer
 
         Try
-            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
+            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsVarietyDuplicatesFunction.ToScript()).AsInteger(0)
         Catch ex As Exception
             iAnyDuplicated = -1
         End Try
@@ -398,14 +406,14 @@ Public Class dlgDefineTricotData
             ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.LightCoral
             bIsUnique = False
             If ucrReceiverVarietyLevelVariety.IsEmpty Then
-                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates found.")
-                MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate varieties found.")
+                MsgBox("You have multiple rows with the same varieties.", MsgBoxStyle.Information, Title:="Duplicates")
             Else
-                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates for station(s) were found.")
-                MsgBox("You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate varieties were found.")
+                MsgBox("You have multiple rows with the same varieties.", MsgBoxStyle.Information, Title:="Duplicates")
             End If
         Else
-            ucrInputCheckInputVarietyLevel.SetName("No duplicate dates.")
+            ucrInputCheckInputVarietyLevel.SetName("No duplicate varieties.")
             ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.LightGreen
             bIsUnique = True
         End If
@@ -416,7 +424,7 @@ Public Class dlgDefineTricotData
         Dim iAnyDuplicated As Integer
 
         Try
-            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
+            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsIDVarietyDuplicatesFunction.ToScript()).AsInteger(0)
         Catch ex As Exception
             iAnyDuplicated = -1
         End Try
@@ -430,14 +438,14 @@ Public Class dlgDefineTricotData
             ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.LightCoral
             bIsUnique = False
             If ucrReceiverIDVarietyLevelID.IsEmpty Then
-                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates found.")
-                MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate ID-Variety combination found.")
+                MsgBox("You have multiple rows with the same ID-Variety combination.", MsgBoxStyle.Information, Title:="Duplicates")
             Else
-                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate dates for station(s) were found.")
-                MsgBox("You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+                ucrInputCheckInputIDVarietyLevel.SetName("Duplicate ID-Variety combination were found.")
+                MsgBox("You have multiple rows with the same ID-Variety combination.", MsgBoxStyle.Information, Title:="Duplicates")
             End If
         Else
-            ucrInputCheckInputIDVarietyLevel.SetName("No duplicate dates.")
+            ucrInputCheckInputIDVarietyLevel.SetName("No duplicate ID-Variety combination.")
             ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.LightGreen
             bIsUnique = True
         End If
