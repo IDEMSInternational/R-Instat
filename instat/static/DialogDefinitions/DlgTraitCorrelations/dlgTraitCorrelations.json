@@ -57,7 +57,7 @@
             },
             {
                 "enumTransformationType": "ifTrueExecuteChildTransformations",
-                "strValueKey": "isLeadingZeroes",
+                "strValueKey": "isLeadingZeros",
                 "lstTransformations": [
                     {
                         "enumTransformationType": "functionAddParam",
@@ -80,14 +80,14 @@
                 "iStatementNumber": 10,
                 "strFunctionName": "<-",
                 "iParameterNumber": 0,
-                "strValueKey": "store"
+                "strValueKey": "storeTableOrDataFrame"
             },
             {
                 "enumTransformationType": "functionUpdateParamValue",
                 "iStatementNumber": 11,
                 "strFunctionName": "add_object",
                 "iParameterNumber": 1,
-                "strValueKey": "store",
+                "strValueKey": "storeTableOrDataFrame",
                 "bIsQuoted": true
             },
             {
@@ -95,14 +95,14 @@
                 "iStatementNumber": 11,
                 "strFunctionName": "add_object",
                 "iParameterNumber": 4,
-                "strValueKey": "store"
+                "strValueKey": "storeTableOrDataFrame"
             },
             {
                 "enumTransformationType": "functionUpdateParamValue",
                 "iStatementNumber": 12,
                 "strFunctionName": "get_object_data",
                 "iParameterNumber": 1,
-                "strValueKey": "store",
+                "strValueKey": "storeTableOrDataFrame",
                 "bIsQuoted": true
             },
             {
@@ -110,7 +110,7 @@
                 "iStatementNumber": 13,
                 "strFunctionName": "c",
                 "iParameterNumber": 0,
-                "strValueKey": "store",
+                "strValueKey": "storeTableOrDataFrame",
                 "bIsQuoted": true
             }
         ]
