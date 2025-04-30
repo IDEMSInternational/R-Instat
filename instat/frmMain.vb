@@ -1685,7 +1685,7 @@ Public Class frmMain
         SetToDefaultLayout()
     End Sub
 
-    Private Sub ucrDataViewer_Enter(sender As Object, e As EventArgs)
+    Private Sub ucrDataViewer_Enter(sender As Object, e As EventArgs) Handles ucrDataViewer.Enter
         ctrActive = ucrDataViewer
     End Sub
 
@@ -1693,11 +1693,11 @@ Public Class frmMain
         ctrActive = ucrOutput
     End Sub
 
-    Private Sub ucrColumnMeta_Enter(sender As Object, e As EventArgs)
+    Private Sub ucrColumnMeta_Enter(sender As Object, e As EventArgs) Handles ucrColumnMeta.Enter
         ctrActive = ucrColumnMeta
     End Sub
 
-    Private Sub ucrDataFrameMeta_Enter(sender As Object, e As EventArgs)
+    Private Sub ucrDataFrameMeta_Enter(sender As Object, e As EventArgs) Handles ucrDataFrameMeta.Enter
         ctrActive = ucrDataFrameMeta
     End Sub
 
