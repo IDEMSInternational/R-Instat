@@ -45,6 +45,7 @@ Public Class dlgTricotModelOneVarCov
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.iHelpTopicID = 706
 
         ucrSelectorTraitsRanking.SetParameter(New RParameter("data_name", 0))
         ucrSelectorTraitsRanking.SetParameterIsString()
