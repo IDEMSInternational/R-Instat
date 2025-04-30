@@ -326,7 +326,7 @@ Partial Class dlgModellingTree
         Me.ucrReceiverExpressionModellingTree.AutoSize = True
         Me.ucrReceiverExpressionModellingTree.frmParent = Me
         Me.ucrReceiverExpressionModellingTree.Location = New System.Drawing.Point(251, 185)
-        Me.ucrReceiverExpressionModellingTree.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrReceiverExpressionModellingTree.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrReceiverExpressionModellingTree.Name = "ucrReceiverExpressionModellingTree"
         Me.ucrReceiverExpressionModellingTree.Selector = Nothing
         Me.ucrReceiverExpressionModellingTree.Size = New System.Drawing.Size(256, 30)
@@ -361,7 +361,7 @@ Partial Class dlgModellingTree
         Me.ucrInputModelPreview.IsMultiline = False
         Me.ucrInputModelPreview.IsReadOnly = False
         Me.ucrInputModelPreview.Location = New System.Drawing.Point(104, 465)
-        Me.ucrInputModelPreview.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputModelPreview.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
         Me.ucrInputModelPreview.Size = New System.Drawing.Size(261, 21)
         Me.ucrInputModelPreview.TabIndex = 45
@@ -403,7 +403,7 @@ Partial Class dlgModellingTree
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(15, 535)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 49
@@ -424,7 +424,7 @@ Partial Class dlgModellingTree
         '
         Me.btnCheck.Location = New System.Drawing.Point(11, 422)
         Me.btnCheck.Name = "btnCheck"
-        Me.btnCheck.Size = New System.Drawing.Size(75, 23)
+        Me.btnCheck.Size = New System.Drawing.Size(75, 20)
         Me.btnCheck.TabIndex = 53
         Me.btnCheck.Text = "Check"
         Me.btnCheck.UseVisualStyleBackColor = True
@@ -438,7 +438,7 @@ Partial Class dlgModellingTree
         Me.ucrInputCheck.Location = New System.Drawing.Point(104, 422)
         Me.ucrInputCheck.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputCheck.Name = "ucrInputCheck"
-        Me.ucrInputCheck.Size = New System.Drawing.Size(261, 21)
+        Me.ucrInputCheck.Size = New System.Drawing.Size(261, 20)
         Me.ucrInputCheck.TabIndex = 54
         '
         'dlgModellingTree

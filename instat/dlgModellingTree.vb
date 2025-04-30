@@ -54,6 +54,7 @@ Public Class dlgModellingTree
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+            bUniqueChecked = False
         End If
         If bReset Then
             SetDefaults()
@@ -62,7 +63,6 @@ Public Class dlgModellingTree
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
-        bUniqueChecked = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -176,6 +176,7 @@ Public Class dlgModellingTree
 
         ucrInputCheck.SetName("")
         ucrInputCheck.txtInput.BackColor = Color.White
+        ucrInputCheck.IsReadOnly = True
 
         clsGetVariablesMetaDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetVariablesMetaDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorByDataFrameAddRemoveForModellingTree.strCurrentDataFrame & Chr(34), bIncludeArgumentName:=False)
@@ -624,7 +625,7 @@ Public Class dlgModellingTree
             clsNewAddObjectBarFunction:=clsAddObjectBarFunction, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
             clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewGetObjectHeatFunction:=clsHeatFunction
         )
-        sdgDisplayModelOptions.ucrChkANOVA.Enabled = False And
+        sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = False
         sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = False
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = False
