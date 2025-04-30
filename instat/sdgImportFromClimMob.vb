@@ -25,7 +25,7 @@ Public Class sdgImportFromClimMob
 
     Public Sub Setup(clsNewKeyParameter As RParameter)
 
-        ucrBaseSubdialog.iHelpTopicID = 716
+        ucrBaseSubdialog.iHelpTopicID = 715
         ucrInputKeyPath.SetParameter(clsNewKeyParameter, 0)
     End Sub
 
