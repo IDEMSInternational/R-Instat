@@ -94,7 +94,7 @@ Public Class dlgTraitCorrelationsXp
             {"isIncludePValues", ""},
             {"isLeadingZeroes", ""},
             {"isSaveAsTable", ""},
-            {"isStoreTable", ""},
+            {"isStoreTableOrDataFrame", ""},
             {"overallTrait", ""},
             {"store", ""},
             {"traitsToCompareTo", ""}
@@ -113,7 +113,7 @@ Public Class dlgTraitCorrelationsXp
             New clsTransformationControl With {.strKey = "isIncludePValues", .clsControl = ucrChkIncludePValues},
             New clsTransformationControl With {.strKey = "isLeadingZeroes", .clsControl = ucrChkLeadingZeros},
             New clsTransformationControl With {.strKey = "isSaveAsTable", .clsControl = chkSaveAsTable},
-            New clsTransformationControl With {.strKey = "isStoreTable", .clsControl = ucrSaveCorrelation, .enumTextType = ucrSave.SaveLocation.isChecked},
+            New clsTransformationControl With {.strKey = "isStoreTableOrDataFrame", .clsControl = ucrSaveCorrelation, .enumTextType = ucrSave.SaveLocation.isChecked},
             New clsTransformationControl With {.strKey = "overallTrait", .clsControl = ucrReceiverTrait},
             New clsTransformationControl With {.strKey = "store", .clsControl = ucrSaveCorrelation, .enumTextType = ucrSave.SaveLocation.saveName},
             New clsTransformationControl With {.strKey = "traitsToCompareTo", .clsControl = ucrReceiverTraitsToCompare}

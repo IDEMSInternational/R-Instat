@@ -7,6 +7,9 @@ compare_variables  <- get_ranking_items(data=get_index_names, rankings_object, v
 names(compare_variables ) <- all_vars
 kendall_rankings <- ~ gosset::kendallTau(x=compare_variables[[.x]], y=compare_variables[[baseline]])
 kendall_rankings <- purrr::map_dfr(.x=multiple_vars, kendall_rankings) %>% dplyr::mutate(.before=everything(), trait=multiple_vars)
-kendall_rankings <- _kendallRankingsPipe
+kendall_rankings <- kendall_rankings %>% dplyr::select(-c(`Pr(>|z|)`, `Zvalue`))
+last_table <- corrr::fashion(kendall_rankings)
+data_book$add_object(data_name="_dataFrame", object_name="last_table", object_type_label="table", object_format="text", object=last_table)
 
+data_book$get_object_data(data_name="_dataFrame", object_name="last_table", as_file=TRUE)
 rm(list=c("last_table", "kendall_rankings", "compare_variables ", "get_index_names", "rankings_object", "all_vars", "baseline", "multiple_vars"))
