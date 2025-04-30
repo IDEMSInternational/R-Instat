@@ -20,11 +20,10 @@ Imports System.Text.RegularExpressions
 Public Class sdgTransformations
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Public clsOutputDataLevel, clsCreateTricotData As New RFunction
+    Public clsOutputDataLevel, clsCreateTricotData, clsIDColsFunction, clsVarietyColsFunction, clsTraitColsFunction As New RFunction
     Private ucrBaseSelector As ucrSelector
     Private lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
     Private lstReceiversLevelID, lstReceiversVarietyLevel, lstReceiversIDVarietyLevel, lstReceiversIDVarietyTraitLevel As New List(Of ucrReceiverSingle)
-    Private isFilling As Boolean = False
 
     Private ReadOnly strPos As String = "_pos"
     Private ReadOnly strBest As String = "_best"
@@ -39,10 +38,7 @@ Public Class sdgTransformations
             InitialiseDialog()
             bFirstLoad = False
         End If
-        AutoFillReceivers()
-        AutoFillReceiversVariety()
-        AutoFillReceiversIDVariety()
-        AutoFillReceiversTraits()
+
     End Sub
 
     Private Sub InitialiseDialog()
@@ -60,8 +56,12 @@ Public Class sdgTransformations
 
         ucrSelectorTricotIDLevel.SetParameter(New RParameter("id_level_data", 0))
         ucrSelectorTricotIDLevel.SetParameterIsString()
+        SetRSelector(ucrSelectorTricotIDLevel, lstReceiversLevelID)
+        SetRSelector(ucrSelectorTricotVarietyLevel, lstReceiversVarietyLevel)
+        SetRSelector(ucrSelectorIDVarietyLevel, lstReceiversIDVarietyLevel)
+        SetRSelector(ucrSelectorIDVarTraitLevel, lstReceiversIDVarietyTraitLevel)
 
-        ucrReceiverIDVariable.SetParameter(New RParameter("id_cols", 1))
+        ucrReceiverIDVariable.SetParameter(New RParameter("id_cols_a", 1, bNewIncludeArgumentName:=False))
         ucrReceiverIDVariable.SetParameterIsString()
         ucrReceiverIDVariable.Selector = ucrSelectorTricotIDLevel
         ucrReceiverIDVariable.strSelectorHeading = "ID"
@@ -70,7 +70,7 @@ Public Class sdgTransformations
         ucrReceiverIDVariable.bAutoFill = True
         ucrReceiverIDVariable.SetLinkedDisplayControl(lblIDVariable)
 
-        ucrReceiverIDVarietyLevel.SetParameter(New RParameter("id_cols", 1))
+        ucrReceiverIDVarietyLevel.SetParameter(New RParameter("id_cols_b", 1, bNewIncludeArgumentName:=False))
         ucrReceiverIDVarietyLevel.SetParameterIsString()
         ucrReceiverIDVarietyLevel.Selector = ucrSelectorIDVarietyLevel
         ucrReceiverIDVarietyLevel.strSelectorHeading = "ID"
@@ -79,7 +79,7 @@ Public Class sdgTransformations
         ucrReceiverIDVarietyLevel.bAutoFill = True
         ucrReceiverIDVarietyLevel.SetLinkedDisplayControl(lblIDVariable2)
 
-        ucrReceiverTraitID.SetParameter(New RParameter("id_cols", 1))
+        ucrReceiverTraitID.SetParameter(New RParameter("id_cols_c", 1, bNewIncludeArgumentName:=False))
         ucrReceiverTraitID.SetParameterIsString()
         ucrReceiverTraitID.Selector = ucrSelectorIDVarTraitLevel
         ucrReceiverTraitID.strSelectorHeading = "ID"
@@ -88,7 +88,7 @@ Public Class sdgTransformations
         ucrReceiverTraitID.bAutoFill = True
         ucrReceiverTraitID.SetLinkedDisplayControl(lblIDVariable3)
 
-        ucrReceiverVariety.SetParameter(New RParameter("variety_cols", 2))
+        ucrReceiverVariety.SetParameter(New RParameter("variety_cols_a", 2, bNewIncludeArgumentName:=False))
         ucrReceiverVariety.SetParameterIsString()
         ucrReceiverVariety.Selector = ucrSelectorTricotVarietyLevel
         ucrReceiverVariety.strSelectorHeading = "Variety"
@@ -97,7 +97,7 @@ Public Class sdgTransformations
         ucrReceiverVariety.bAutoFill = True
         ucrReceiverVariety.SetLinkedDisplayControl(lblVariety)
 
-        ucrReceiverTraitsVariety.SetParameter(New RParameter("variety_cols", 2))
+        ucrReceiverTraitsVariety.SetParameter(New RParameter("variety_cols_b", 2, bNewIncludeArgumentName:=False))
         ucrReceiverTraitsVariety.SetParameterIsString()
         ucrReceiverTraitsVariety.Selector = ucrSelectorIDVarTraitLevel
         ucrReceiverTraitsVariety.strSelectorHeading = "Variety"
@@ -106,7 +106,7 @@ Public Class sdgTransformations
         ucrReceiverTraitsVariety.bAutoFill = True
         ucrReceiverTraitsVariety.SetLinkedDisplayControl(lblVariety2)
 
-        ucrReceiverIDVarietyVar.SetParameter(New RParameter("variety_cols", 2))
+        ucrReceiverIDVarietyVar.SetParameter(New RParameter("variety_cols_c", 2, bNewIncludeArgumentName:=False))
         ucrReceiverIDVarietyVar.SetParameterIsString()
         ucrReceiverIDVarietyVar.Selector = ucrSelectorIDVarietyLevel
         ucrReceiverIDVarietyVar.strSelectorHeading = "Variety"
@@ -115,7 +115,7 @@ Public Class sdgTransformations
         ucrReceiverIDVarietyVar.bAutoFill = True
         ucrReceiverIDVarietyVar.SetLinkedDisplayControl(lblVariety3)
 
-        ucrReceiverTraits1.SetParameter(New RParameter("trait_cols", 3))
+        ucrReceiverTraits1.SetParameter(New RParameter("trait_cols_a", 3, bNewIncludeArgumentName:=False))
         ucrReceiverTraits1.SetParameterIsString()
         ucrReceiverTraits1.Selector = ucrSelectorIDVarTraitLevel
         ucrReceiverTraits1.strSelectorHeading = "Traits"
@@ -124,7 +124,7 @@ Public Class sdgTransformations
         ucrReceiverTraits1.bAutoFill = True
         ucrReceiverTraits1.SetLinkedDisplayControl(lblTraits)
 
-        ucrReceiverTraits2.SetParameter(New RParameter("trait_cols", 4))
+        ucrReceiverTraits2.SetParameter(New RParameter("trait_cols_b", 4, bNewIncludeArgumentName:=False))
         ucrReceiverTraits2.SetParameterIsString()
         ucrReceiverTraits2.Selector = ucrSelectorIDVarietyLevel
         ucrReceiverTraits2.strSelectorHeading = "Traits"
@@ -150,9 +150,12 @@ Public Class sdgTransformations
 
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strDefaultTab As String = "")
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewIDColsFunction As RFunction, clsNewVarietyColsFunction As RFunction, clsNewTraitColsFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strDefaultTab As String = "")
         clsOutputDataLevel = clsNewRFunction
         clsCreateTricotData = clsNewDefaultFunction
+        clsIDColsFunction = clsNewIDColsFunction
+        clsVarietyColsFunction = clsNewVarietyColsFunction
+        clsTraitColsFunction = clsNewTraitColsFunction
         ucrBaseSelector = ucrNewBaseSelector
 
         ucrInputGoodTraits.SetText(strPos)
@@ -162,19 +165,22 @@ Public Class sdgTransformations
         ucrInputNAS.SetText(strNot)
         ucrInputNAS.bUpdateRCodeFromControl = True
 
-        ucrReceiverIDVariable.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
-        ucrReceiverVariety.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
-        ucrReceiverTraits1.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
-        ucrReceiverTraits2.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
-        ucrReceiverIDVarietyLevel.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
-        ucrReceiverIDVarietyVar.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
-        ucrReceiverTraitID.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
-        ucrReceiverTraitsVariety.SetRCode(clsOutputDataLevel, bReset, bCloneIfNeeded:=True)
+        ucrReceiverIDVariable.AddAdditionalCodeParameterPair(clsCreateTricotData, New RParameter("id_col", 0, bNewIncludeArgumentName:=True), iAdditionalPairNo:=1)
 
-        AutoFillReceivers()
-        AutoFillReceiversVariety()
-        AutoFillReceiversIDVariety()
-        AutoFillReceiversTraits()
+        ucrReceiverIDVariable.SetRCode(clsIDColsFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverIDVarietyLevel.SetRCode(clsIDColsFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverTraitID.SetRCode(clsIDColsFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrReceiverVariety.SetRCode(clsVarietyColsFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverIDVarietyVar.SetRCode(clsVarietyColsFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverTraitsVariety.SetRCode(clsVarietyColsFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrReceiverTraits1.SetRCode(clsTraitColsFunction, bReset, bCloneIfNeeded:=True)
+
+        AutoFillReceivers(ucrSelectorTricotIDLevel, lstReceiversLevelID)
+        AutoFillReceivers(ucrSelectorTricotVarietyLevel, lstReceiversVarietyLevel)
+        AutoFillReceivers(ucrSelectorIDVarietyLevel, lstReceiversIDVarietyLevel)
+        AutoFillReceivers(ucrSelectorIDVarTraitLevel, lstReceiversIDVarietyTraitLevel)
     End Sub
 
     Private Sub ucrInputGoodTraits_NameChanged() Handles ucrInputGoodTraits.ControlValueChanged
@@ -201,51 +207,151 @@ Public Class sdgTransformations
         End If
     End Sub
 
-    Private Sub ucrPnlTransformations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVariable.ControlValueChanged, ucrReceiverVariety.ControlValueChanged, ucrReceiverTraits2.ControlValueChanged,
-            ucrReceiverTraits1.ControlValueChanged, ucrInputBadTraits.ControlValueChanged, ucrInputGoodTraits.ControlValueChanged, ucrInputNAS.ControlValueChanged
-        'SetDialogOptions()
+    Private Sub ucrIDReceivers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVariable.ControlValueChanged, ucrReceiverIDVarietyLevel.ControlValueChanged, ucrReceiverTraitID.ControlValueChanged
+        FilledIDReceivers()
+    End Sub
+
+    Private Sub ucrVarietyReceivers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariety.ControlValueChanged, ucrReceiverIDVarietyLevel.ControlValueChanged, ucrReceiverTraitsVariety.ControlValueChanged
+        FilledVarietyReceivers()
+    End Sub
+
+    Private Sub ucrTraitReceivers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTraits1.ControlValueChanged
+        FilledTraitReceivers()
     End Sub
 
     Private Sub ucrSelectorTricotIDLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTricotIDLevel.ControlValueChanged
-        AutoFillReceivers()
+        AutoFillReceivers(ucrSelectorTricotIDLevel, lstReceiversLevelID)
     End Sub
 
     Private Sub ucrSelectorTricotVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTricotVarietyLevel.ControlValueChanged
-        AutoFillReceiversVariety()
+        AutoFillReceivers(ucrSelectorTricotVarietyLevel, lstReceiversVarietyLevel)
     End Sub
 
     Private Sub ucrSelectorIDVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDVarietyLevel.ControlValueChanged
-        AutoFillReceiversIDVariety()
+        AutoFillReceivers(ucrSelectorIDVarietyLevel, lstReceiversIDVarietyLevel)
     End Sub
 
     Private Sub ucrSelectorIDVarTraitLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDVarTraitLevel.ControlValueChanged
-        AutoFillReceiversTraits()
+        AutoFillReceivers(ucrSelectorIDVarTraitLevel, lstReceiversIDVarietyTraitLevel)
     End Sub
 
-    Private Sub AutoFillReceivers()
-        If isFilling Then
-            Exit Sub
+
+
+    Private Sub FilledIDReceivers()
+        If Not ucrReceiverIDVariable.IsEmpty OrElse Not ucrReceiverIDVarietyLevel.IsEmpty OrElse Not ucrReceiverTraitID.IsEmpty Then
+            clsIDColsFunction.RemoveParameterByName("id_1")
+            clsIDColsFunction.RemoveParameterByName("id_2")
+            clsIDColsFunction.RemoveParameterByName("id_3")
+            clsIDColsFunction.RemoveParameterByName("id_4")
+            If Not ucrReceiverIDVariable.IsEmpty Then
+                clsIDColsFunction.AddParameter("id_cols_a", strParameterValue:=ucrReceiverIDVariable.GetVariableNames, bIncludeArgumentName:=False)
+            Else
+                clsIDColsFunction.RemoveParameterByName("id_cols_a")
+            End If
+            If Not ucrReceiverIDVariable.IsEmpty Then
+                clsIDColsFunction.AddParameter("id_cols_b", strParameterValue:=ucrReceiverIDVarietyLevel.GetVariableNames, bIncludeArgumentName:=False)
+            Else
+                clsIDColsFunction.RemoveParameterByName("id_cols_b")
+            End If
+            If Not ucrReceiverIDVariable.IsEmpty Then
+                clsIDColsFunction.AddParameter("id_cols_c", strParameterValue:=ucrReceiverTraitID.GetVariableNames, bIncludeArgumentName:=False)
+            Else
+                clsIDColsFunction.RemoveParameterByName("id_cols_c")
+            End If
+        Else
+            clsIDColsFunction.AddParameter("id_1", Chr(34) & "ID" & Chr(34), bIncludeArgumentName:=False)
+            clsIDColsFunction.AddParameter("id_2", Chr(34) & "id" & Chr(34), bIncludeArgumentName:=False)
+            clsIDColsFunction.AddParameter("id_3", Chr(34) & "participant_name" & Chr(34), bIncludeArgumentName:=False)
+            clsIDColsFunction.AddParameter("id_4", Chr(34) & "participant_id" & Chr(34), bIncludeArgumentName:=False)
         End If
-        isFilling = True
+    End Sub
 
-        ' Temporarily remove the event handler
-        RemoveHandler ucrSelectorTricotIDLevel.ControlValueChanged, AddressOf AutoFillReceivers
+    Private Sub FilledVarietyReceivers()
+        If Not ucrReceiverIDVariable.IsEmpty OrElse Not ucrReceiverIDVarietyLevel.IsEmpty OrElse Not ucrReceiverTraitID.IsEmpty Then
+            clsVarietyColsFunction.RemoveParameterByName("var_1")
+            clsVarietyColsFunction.RemoveParameterByName("var_2")
+            clsVarietyColsFunction.RemoveParameterByName("var_3")
+            clsVarietyColsFunction.RemoveParameterByName("var_4")
+            clsVarietyColsFunction.RemoveParameterByName("var_5")
+            clsVarietyColsFunction.RemoveParameterByName("var_6")
+            If Not ucrReceiverVariety.IsEmpty Then
+                clsVarietyColsFunction.AddParameter("variety_cols_a", strParameterValue:=ucrReceiverVariety.GetVariableNames, bIncludeArgumentName:=False)
+            Else
+                clsVarietyColsFunction.RemoveParameterByName("variety_cols_a")
+            End If
+            If Not ucrReceiverIDVarietyVar.IsEmpty Then
+                clsVarietyColsFunction.AddParameter("variety_cols_b", strParameterValue:=ucrReceiverIDVarietyVar.GetVariableNames, bIncludeArgumentName:=False)
+            Else
+                clsVarietyColsFunction.RemoveParameterByName("variety_cols_b")
+            End If
+            If Not ucrReceiverTraitsVariety.IsEmpty Then
+                clsVarietyColsFunction.AddParameter("variety_cols_c", strParameterValue:=ucrReceiverTraitsVariety.GetVariableNames, bIncludeArgumentName:=False)
+            Else
+                clsVarietyColsFunction.RemoveParameterByName("variety_cols_c")
+            End If
+        Else
+            clsVarietyColsFunction.AddParameter("var_1", Chr(34) & "variety" & Chr(34), bIncludeArgumentName:=False)
+            clsVarietyColsFunction.AddParameter("var_2", Chr(34) & "varieties" & Chr(34), bIncludeArgumentName:=False)
+            clsVarietyColsFunction.AddParameter("var_3", Chr(34) & "item" & Chr(34), bIncludeArgumentName:=False)
+            clsVarietyColsFunction.AddParameter("var_4", Chr(34) & "items" & Chr(34), bIncludeArgumentName:=False)
+            clsVarietyColsFunction.AddParameter("var_5", Chr(34) & "Genotype" & Chr(34), bIncludeArgumentName:=False)
+            clsVarietyColsFunction.AddParameter("var_6", Chr(34) & "genotype" & Chr(34), bIncludeArgumentName:=False)
+        End If
+    End Sub
 
+    Private Sub FilledTraitReceivers()
+        If Not ucrReceiverIDVariable.IsEmpty OrElse Not ucrReceiverIDVarietyLevel.IsEmpty OrElse Not ucrReceiverTraitID.IsEmpty Then
+            clsTraitColsFunction.RemoveParameterByName("trait_1")
+            clsTraitColsFunction.RemoveParameterByName("trait_2")
+            If Not ucrReceiverTraits1.IsEmpty Then
+                clsTraitColsFunction.AddParameter("trait_cols_a", strParameterValue:=ucrReceiverTraits1.GetVariableNames, bIncludeArgumentName:=False)
+            Else
+                clsIDColsFunction.RemoveParameterByName("trait_cols_a")
+            End If
+        Else
+            clsTraitColsFunction.AddParameter("trait_1", Chr(34) & "trait" & Chr(34), bIncludeArgumentName:=False)
+            clsTraitColsFunction.AddParameter("trait_2", Chr(34) & "traits" & Chr(34), bIncludeArgumentName:=False)
+        End If
+    End Sub
+
+    ' TODO: Want receivers to autofill
+    Private Sub tbOptions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbOptions.SelectedIndexChanged
+        Select Case tbOptions.SelectedTab.Name
+            Case "tbIDLevel"
+                ucrReceiverIDVariable.SetMeAsReceiver()
+                AutoFillReceivers(ucrSelectorTricotIDLevel, lstReceiversLevelID)
+            Case "tbVarietyLevel"
+                ucrReceiverVariety.SetMeAsReceiver()
+                AutoFillReceivers(ucrSelectorTricotVarietyLevel, lstReceiversVarietyLevel)
+            Case "tbIDVarietyLevel"
+                ucrReceiverIDVarietyLevel.SetMeAsReceiver()
+                AutoFillReceivers(ucrSelectorIDVarietyLevel, lstReceiversIDVarietyLevel)
+            Case "tbIDVarietyTraitLevel"
+                ucrReceiverTraitID.SetMeAsReceiver()
+                AutoFillReceivers(ucrSelectorIDVarTraitLevel, lstReceiversIDVarietyTraitLevel)
+        End Select
+    End Sub
+
+    Private Sub AutoFillReceivers(sender As ucrSelectorByDataFrameAddRemove, lstReceivers As List(Of ucrReceiverSingle))
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver
         Dim bFound As Boolean = False
 
-        ucrCurrentReceiver = ucrSelectorTricotIDLevel.CurrentReceiver
+        If lstReceivers.Count = 0 Then
+            Exit Sub
+        End If
 
-        For Each ucrTempReceiver As ucrReceiver In lstReceiversLevelID
+        ucrCurrentReceiver = sender.CurrentReceiver
+        Dim strData As String = sender.strCurrentDataFrame
+        For Each ucrTempReceiver As ucrReceiver In lstReceivers
             ucrTempReceiver.SetMeAsReceiver()
             lstRecognisedValues = GetRecognisedValues(ucrTempReceiver.Tag)
 
             If lstRecognisedValues.Count > 0 Then
-                For Each lviTempVariable As ListViewItem In ucrSelectorTricotIDLevel.lstAvailableVariable.Items
+                For Each lviTempVariable As ListViewItem In sender.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
-                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorTricotIDLevel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
+                            ucrTempReceiver.Add(lviTempVariable.Text, strData)
                             bFound = True
                             Exit For
                         End If
@@ -261,11 +367,16 @@ Public Class sdgTransformations
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
+    End Sub
 
-        ' Re-enable the event handler
-        AddHandler ucrSelectorTricotIDLevel.ControlValueChanged, AddressOf AutoFillReceivers
-
-        isFilling = False
+    Private Sub SetRSelector(sender As ucrSelectorByDataFrameAddRemove, lstReceivers As List(Of ucrReceiverSingle))
+        Dim ucrTempReceiver As ucrReceiver
+        For Each ucrTempReceiver In lstReceivers
+            ucrTempReceiver.SetParameter(New RParameter(ucrTempReceiver.Tag))
+            ucrTempReceiver.Selector = sender
+            ucrTempReceiver.SetParameterIsString()
+            ucrTempReceiver.bExcludeFromSelector = True
+        Next
     End Sub
 
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
@@ -279,179 +390,4 @@ Public Class sdgTransformations
         Next
         Return lstValues
     End Function
-
-    Private Sub AutoFillReceiversVariety()
-        If isFilling Then
-            Exit Sub
-        End If
-        isFilling = True
-
-        ' Temporarily remove the event handler
-        RemoveHandler ucrSelectorTricotVarietyLevel.ControlValueChanged, AddressOf AutoFillReceiversVariety
-
-        Dim lstRecognisedValues As List(Of String)
-        Dim ucrCurrentReceiver As ucrReceiver
-        Dim bFound As Boolean = False
-
-        ucrCurrentReceiver = ucrSelectorTricotVarietyLevel.CurrentReceiver
-
-        For Each ucrTempReceiver As ucrReceiver In lstReceiversVarietyLevel
-            ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetRecognisedValuesVariety(ucrTempReceiver.Tag)
-
-            If lstRecognisedValues.Count > 0 Then
-                For Each lviTempVariable As ListViewItem In ucrSelectorTricotVarietyLevel.lstAvailableVariable.Items
-                    For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
-                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorTricotVarietyLevel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                            bFound = True
-                            Exit For
-                        End If
-                    Next
-                    If bFound Then
-                        bFound = False
-                        Exit For
-                    End If
-                Next
-            End If
-        Next
-
-        If ucrCurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver.SetMeAsReceiver()
-        End If
-
-        ' Re-enable the event handler
-        AddHandler ucrSelectorTricotVarietyLevel.ControlValueChanged, AddressOf AutoFillReceiversVariety
-
-        isFilling = False
-    End Sub
-
-    Private Function GetRecognisedValuesVariety(strVariable As String) As List(Of String)
-        Dim lstValues As New List(Of String)
-
-        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
-            If kvpTemp.Key = strVariable Then
-                lstValues = kvpTemp.Value
-                Exit For
-            End If
-        Next
-        Return lstValues
-    End Function
-
-    Private Sub AutoFillReceiversIDVariety()
-        If isFilling Then
-            Exit Sub
-        End If
-        isFilling = True
-
-        ' Temporarily remove the event handler
-        RemoveHandler ucrSelectorIDVarietyLevel.ControlValueChanged, AddressOf AutoFillReceiversIDVariety
-
-        Dim lstRecognisedValues As List(Of String)
-        Dim ucrCurrentReceiver As ucrReceiver
-        Dim bFound As Boolean = False
-
-        ucrCurrentReceiver = ucrSelectorIDVarietyLevel.CurrentReceiver
-
-        For Each ucrTempReceiver As ucrReceiver In lstReceiversIDVarietyLevel
-            ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetRecognisedValuesIDVariety(ucrTempReceiver.Tag)
-
-            If lstRecognisedValues.Count > 0 Then
-                For Each lviTempVariable As ListViewItem In ucrSelectorIDVarietyLevel.lstAvailableVariable.Items
-                    For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
-                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorIDVarietyLevel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                            bFound = True
-                            Exit For
-                        End If
-                    Next
-                    If bFound Then
-                        bFound = False
-                        Exit For
-                    End If
-                Next
-            End If
-        Next
-
-        If ucrCurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver.SetMeAsReceiver()
-        End If
-
-        ' Re-enable the event handler
-        AddHandler ucrSelectorIDVarietyLevel.ControlValueChanged, AddressOf AutoFillReceiversIDVariety
-
-        isFilling = False
-    End Sub
-
-    Private Function GetRecognisedValuesIDVariety(strVariable As String) As List(Of String)
-        Dim lstValues As New List(Of String)
-
-        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
-            If kvpTemp.Key = strVariable Then
-                lstValues = kvpTemp.Value
-                Exit For
-            End If
-        Next
-        Return lstValues
-    End Function
-
-    Private Sub AutoFillReceiversTraits()
-        If isFilling Then
-            Exit Sub
-        End If
-        isFilling = True
-
-        ' Temporarily remove the event handler
-        RemoveHandler ucrSelectorIDVarTraitLevel.ControlValueChanged, AddressOf AutoFillReceiversTraits
-
-        Dim lstRecognisedValues As List(Of String)
-        Dim ucrCurrentReceiver As ucrReceiver
-        Dim bFound As Boolean = False
-
-        ucrCurrentReceiver = ucrSelectorIDVarTraitLevel.CurrentReceiver
-
-        For Each ucrTempReceiver As ucrReceiver In lstReceiversIDVarietyTraitLevel
-            ucrTempReceiver.SetMeAsReceiver()
-            lstRecognisedValues = GetRecognisedValuesTraits(ucrTempReceiver.Tag)
-
-            If lstRecognisedValues.Count > 0 Then
-                For Each lviTempVariable As ListViewItem In ucrSelectorIDVarTraitLevel.lstAvailableVariable.Items
-                    For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
-                            ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorIDVarTraitLevel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                            bFound = True
-                            Exit For
-                        End If
-                    Next
-                    If bFound Then
-                        bFound = False
-                        Exit For
-                    End If
-                Next
-            End If
-        Next
-
-        If ucrCurrentReceiver IsNot Nothing Then
-            ucrCurrentReceiver.SetMeAsReceiver()
-        End If
-
-        ' Re-enable the event handler
-        AddHandler ucrSelectorIDVarTraitLevel.ControlValueChanged, AddressOf AutoFillReceiversTraits
-
-        isFilling = False
-    End Sub
-
-    Private Function GetRecognisedValuesTraits(strVariable As String) As List(Of String)
-        Dim lstValues As New List(Of String)
-
-        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
-            If kvpTemp.Key = strVariable Then
-                lstValues = kvpTemp.Value
-                Exit For
-            End If
-        Next
-        Return lstValues
-    End Function
-
 End Class

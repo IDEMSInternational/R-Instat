@@ -210,7 +210,7 @@ Partial Class sdgTransformations
         'ucrReceiverTraitsVariety
         '
         Me.ucrReceiverTraitsVariety.AutoSize = True
-        Me.ucrReceiverTraitsVariety.frmParent = Me
+        Me.ucrReceiverTraitsVariety.frmParent = Nothing
         Me.ucrReceiverTraitsVariety.Location = New System.Drawing.Point(357, 160)
         Me.ucrReceiverTraitsVariety.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTraitsVariety.Name = "ucrReceiverTraitsVariety"
@@ -223,7 +223,7 @@ Partial Class sdgTransformations
         'ucrReceiverTraitID
         '
         Me.ucrReceiverTraitID.AutoSize = True
-        Me.ucrReceiverTraitID.frmParent = Me
+        Me.ucrReceiverTraitID.frmParent = Nothing
         Me.ucrReceiverTraitID.Location = New System.Drawing.Point(359, 81)
         Me.ucrReceiverTraitID.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTraitID.Name = "ucrReceiverTraitID"
@@ -236,7 +236,7 @@ Partial Class sdgTransformations
         'ucrReceiverIDVarietyLevel
         '
         Me.ucrReceiverIDVarietyLevel.AutoSize = True
-        Me.ucrReceiverIDVarietyLevel.frmParent = Me
+        Me.ucrReceiverIDVarietyLevel.frmParent = Nothing
         Me.ucrReceiverIDVarietyLevel.Location = New System.Drawing.Point(359, 81)
         Me.ucrReceiverIDVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDVarietyLevel.Name = "ucrReceiverIDVarietyLevel"
@@ -249,7 +249,7 @@ Partial Class sdgTransformations
         'ucrReceiverIDVarietyVar
         '
         Me.ucrReceiverIDVarietyVar.AutoSize = True
-        Me.ucrReceiverIDVarietyVar.frmParent = Me
+        Me.ucrReceiverIDVarietyVar.frmParent = Nothing
         Me.ucrReceiverIDVarietyVar.Location = New System.Drawing.Point(357, 160)
         Me.ucrReceiverIDVarietyVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDVarietyVar.Name = "ucrReceiverIDVarietyVar"
@@ -298,7 +298,7 @@ Partial Class sdgTransformations
         'ucrReceiverTraits2
         '
         Me.ucrReceiverTraits2.AutoSize = True
-        Me.ucrReceiverTraits2.frmParent = Me
+        Me.ucrReceiverTraits2.frmParent = Nothing
         Me.ucrReceiverTraits2.Location = New System.Drawing.Point(357, 230)
         Me.ucrReceiverTraits2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTraits2.Name = "ucrReceiverTraits2"
@@ -320,7 +320,7 @@ Partial Class sdgTransformations
         'ucrReceiverTraits1
         '
         Me.ucrReceiverTraits1.AutoSize = True
-        Me.ucrReceiverTraits1.frmParent = Me
+        Me.ucrReceiverTraits1.frmParent = Nothing
         Me.ucrReceiverTraits1.Location = New System.Drawing.Point(357, 230)
         Me.ucrReceiverTraits1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTraits1.Name = "ucrReceiverTraits1"
@@ -333,7 +333,7 @@ Partial Class sdgTransformations
         'ucrReceiverVariety
         '
         Me.ucrReceiverVariety.AutoSize = True
-        Me.ucrReceiverVariety.frmParent = Me
+        Me.ucrReceiverVariety.frmParent = Nothing
         Me.ucrReceiverVariety.Location = New System.Drawing.Point(359, 81)
         Me.ucrReceiverVariety.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariety.Name = "ucrReceiverVariety"
@@ -346,7 +346,7 @@ Partial Class sdgTransformations
         'ucrReceiverIDVariable
         '
         Me.ucrReceiverIDVariable.AutoSize = True
-        Me.ucrReceiverIDVariable.frmParent = Me
+        Me.ucrReceiverIDVariable.frmParent = Nothing
         Me.ucrReceiverIDVariable.Location = New System.Drawing.Point(359, 81)
         Me.ucrReceiverIDVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDVariable.Name = "ucrReceiverIDVariable"

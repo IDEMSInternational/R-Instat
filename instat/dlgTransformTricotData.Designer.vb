@@ -28,6 +28,7 @@ Partial Class dlgTransformTricotData
         Me.ucrInputTricotData = New instat.ucrInputTextBox()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrSelectorTricotData = New instat.ucrSelectorAddRemove()
+        Me.lblData = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrReceiverTricotData
@@ -58,7 +59,7 @@ Partial Class dlgTransformTricotData
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 396)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 8
@@ -70,7 +71,7 @@ Partial Class dlgTransformTricotData
         Me.ucrInputTricotData.IsMultiline = False
         Me.ucrInputTricotData.IsReadOnly = True
         Me.ucrInputTricotData.Location = New System.Drawing.Point(174, 310)
-        Me.ucrInputTricotData.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputTricotData.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputTricotData.Name = "ucrInputTricotData"
         Me.ucrInputTricotData.Size = New System.Drawing.Size(274, 32)
         Me.ucrInputTricotData.TabIndex = 9
@@ -95,11 +96,21 @@ Partial Class dlgTransformTricotData
         Me.ucrSelectorTricotData.Size = New System.Drawing.Size(327, 226)
         Me.ucrSelectorTricotData.TabIndex = 11
         '
+        'lblData
+        '
+        Me.lblData.AutoSize = True
+        Me.lblData.Location = New System.Drawing.Point(391, 69)
+        Me.lblData.Name = "lblData"
+        Me.lblData.Size = New System.Drawing.Size(98, 20)
+        Me.lblData.TabIndex = 12
+        Me.lblData.Text = "Data Frame:"
+        '
         'dlgTransformTricotData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(630, 485)
+        Me.Controls.Add(Me.lblData)
         Me.Controls.Add(Me.ucrSelectorTricotData)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrInputTricotData)
@@ -122,4 +133,5 @@ Partial Class dlgTransformTricotData
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrInputTricotData As ucrInputTextBox
     Friend WithEvents ucrSelectorTricotData As ucrSelectorAddRemove
+    Friend WithEvents lblData As Label
 End Class
