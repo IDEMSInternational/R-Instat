@@ -173,6 +173,8 @@ Public Class dlgDescribeTwoVariable
         ucrChkSwapXYVar.SetText("Swap First/Second Variables")
         ucrChkSwapXYVar.AddParameterValuesCondition(True, "var", "True")
         ucrChkSwapXYVar.AddParameterValuesCondition(False, "var", "False")
+        ' This controls the visibility of the display margins check box
+        ucrChkSwapXYVar.AddToLinkedControls({ucrChkDisplayMargins}, {False}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlDescribe.AddRadioButton(rdoTwoVariable)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
@@ -1005,10 +1007,10 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
-        ucrReceiverFirstVars.Clear()
-        ucrReceiverThreeVariableSecondFactor.Clear()
-        ucrReceiverThreeVariableThirdVariable.Clear()
-        ucrReceiverSecondTwoVariableFactor.Clear()
+        'ucrReceiverFirstVars.Clear()
+        'ucrReceiverThreeVariableSecondFactor.Clear()
+        'ucrReceiverThreeVariableThirdVariable.Clear()
+        'ucrReceiverSecondTwoVariableFactor.Clear()
         ucrReceiverFirstVars.SetMeAsReceiver()
 
         If rdoSkim.Checked Then
@@ -1148,7 +1150,7 @@ Public Class dlgDescribeTwoVariable
             If IsFactorByFactor() Then
                 clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverSecondTwoVariableFactor.GetVariableNames & "," & ".x" & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ".x")
-                clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
+                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverSecondTwoVariableFactor.GetVariableNames(bWithQuotes:=False), iPosition:=1)
             ElseIf IsFactorByNumeric() Then
                 clsSummaryTableFunction.AddParameter("factors", ".x")
                 clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
