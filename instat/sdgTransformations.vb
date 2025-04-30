@@ -38,7 +38,10 @@ Public Class sdgTransformations
             InitialiseDialog()
             bFirstLoad = False
         End If
-
+        AutoFillReceivers(ucrSelectorTricotIDLevel, lstReceiversLevelID)
+        AutoFillReceivers(ucrSelectorTricotVarietyLevel, lstReceiversVarietyLevel)
+        AutoFillReceivers(ucrSelectorIDVarietyLevel, lstReceiversIDVarietyLevel)
+        AutoFillReceivers(ucrSelectorIDVarTraitLevel, lstReceiversIDVarietyTraitLevel)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -157,7 +160,7 @@ Public Class sdgTransformations
         clsVarietyColsFunction = clsNewVarietyColsFunction
         clsTraitColsFunction = clsNewTraitColsFunction
         ucrBaseSelector = ucrNewBaseSelector
-
+        ucrReceiverIDVariable.SetMeAsReceiver()
         ucrInputGoodTraits.SetText(strPos)
         ucrInputGoodTraits.bUpdateRCodeFromControl = True
         ucrInputBadTraits.SetText(strNeg)
