@@ -480,10 +480,17 @@
     <Compile Include="dlgOutfillingStationData.vb">
       <SubType>Form</SubType>
     </Compile>
+
     <Compile Include="sdgTransformations.Designer.vb">
       <DependentUpon>sdgTransformations.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgTransformations.vb">
+
+    <Compile Include="sdgTricotModelOptions.Designer.vb">
+      <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTricotModelOptions.vb">
+
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
@@ -3580,6 +3587,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgImportFromClimMob.resx">
       <DependentUpon>sdgImportFromClimMob.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLocation.resx">
       <DependentUpon>sdgLocation.vb</DependentUpon>
@@ -3599,8 +3607,13 @@
     <EmbeddedResource Include="dlgOutfillingStationData.resx">
       <DependentUpon>dlgOutfillingStationData.vb</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="sdgTransformations.resx">
       <DependentUpon>sdgTransformations.vb</DependentUpon>
+
+    <EmbeddedResource Include="sdgTricotModelOptions.resx">
+      <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
+
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
