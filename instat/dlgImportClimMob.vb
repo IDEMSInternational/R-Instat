@@ -164,11 +164,7 @@ Public Class dlgImportfromClimMob
             clsThirdOperator.AddParameter("right", Chr(34) & ucrInputChooseForm.GetText & Chr(34))
         End If
     End Sub
-
-    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
-
-    End Sub
-
+    
     Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdKey.Click
         sdgImportFromClimMob.Setup(clsKeysFunction.GetParameter("key"))
         sdgImportFromClimMob.ShowDialog()
