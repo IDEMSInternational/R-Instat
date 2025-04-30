@@ -415,6 +415,12 @@
     <Compile Include="sdgDefineTricotData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDisplayModelOptions.Designer.vb">
+      <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDisplayModelOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgFlowsToImport.Designer.vb">
       <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
     </Compile>
@@ -3554,6 +3560,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDefineTricotData.resx">
       <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDisplayModelOptions.resx">
+      <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFlowsToImport.resx">
       <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
