@@ -75,7 +75,6 @@ Public Class dlgTricotModelOneVarCov
     End Sub
 
     Private Sub setDefaults()
-
         clsGetVariablesMetadataFunction = New RFunction
         clsGetObjectFunction = New RFunction
         clsObjectOperator = New ROperator
@@ -98,7 +97,6 @@ Public Class dlgTricotModelOneVarCov
         ucrTricOneVarSave.Reset()
         ucrSelectorTraitsRanking.Reset()
         ucrSelectorVarietyLevel.Reset()
-        'ucrInputCheckVariety.Reset()
 
         bResetSubDialog = True
 
@@ -213,26 +211,25 @@ Public Class dlgTricotModelOneVarCov
         TestOkEnabled()
     End Sub
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTraitsReceiver.ControlContentsChanged, ucrVarietyLevelReceiver.ControlContentsChanged,
-        ucrTricOneVarSave.ControlContentsChanged, ucrSelectorVarietyLevel.ControlContentsChanged ', ucrInputCheckVariety.ControlContentsChanged
+        ucrTricOneVarSave.ControlContentsChanged, ucrSelectorVarietyLevel.ControlContentsChanged
         TestOkEnabled()
     End Sub
     Private Sub ucrVarietyLevelReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVarietyLevelReceiver.ControlValueChanged
         clsTilde2Operator.AddParameter("right", ucrVarietyLevelReceiver.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
         clsGetColumn.AddParameter("col_name", ucrVarietyLevelReceiver.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
-
+        CheckVarietyUnique()
     End Sub
-    Private Sub cmdCheckVariety_Click(sender As Object, e As EventArgs) Handles cmdCheckVariety.Click
+
+    Private Sub CheckVarietyUnique()
         Dim iAnyDuplicated As Integer
-        'If Not ucrVarietyLevelReceiver.IsEmpty Then
-        ucrInputCheckVariety.txtInput.BackColor = Color.White
+        If Not ucrVarietyLevelReceiver.IsEmpty Then
+            Try
+                iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsCheckUniqueFunction.ToScript()).AsInteger(0)
+            Catch ex As Exception
+                iAnyDuplicated = 0
+            End Try
 
-        Try
-            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsCheckUniqueFunction.ToScript()).AsInteger(0)
-        Catch ex As Exception
-            iAnyDuplicated = 0
-        End Try
-
-        If iAnyDuplicated = 0 Then
+            If iAnyDuplicated = 0 Then
                 ucrInputCheckVariety.SetName("Model fails. There is no variety variable that is Tricot-Defined in this data.")
                 ucrInputCheckVariety.txtInput.BackColor = Color.Coral
                 bIsUnique = False
@@ -251,10 +248,10 @@ Public Class dlgTricotModelOneVarCov
                 bIsUnique = True
             End If
 
-        'Else
-        'ucrInputCheckVariety.Reset()
-        'End If
-        TestOkEnabled()
+        Else
+            ucrInputCheckVariety.SetName("")
+            ucrInputCheckVariety.txtInput.BackColor = Color.White
+        End If
     End Sub
 
     Private Sub ucrSelectorVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorVarietyLevel.ControlValueChanged
@@ -263,7 +260,8 @@ Public Class dlgTricotModelOneVarCov
     End Sub
 
     Private Sub btnModelOptions_Click(sender As Object, e As EventArgs) Handles btnModelOptions.Click
-        sdgTricotModelOptions.SetRFunction(clsNewRFunction:=clsPladmmFunction, bReset = bResetSubDialog)
+        sdgTricotModelOptions.SetRCode(clsNewRFunction:=clsPladmmFunction, clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog)
+
         sdgTricotModelOptions.ShowDialog(Me)
 
         bResetSubDialog = False

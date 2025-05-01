@@ -18,8 +18,8 @@ Imports instat.Translations
 Public Class sdgTricotModelOptions
     Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = True
+    Private clsRSyntax As New RSyntax
     Public clsPladmmFunction As New RFunction
-    'Private clsDummyFunction As New RFunction
 
     Private Sub sdgTricotModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -31,7 +31,6 @@ Public Class sdgTricotModelOptions
         ucrChkPenaltyPar.AddToLinkedControls(ucrNudPenaltyPar, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
         ucrNudPenaltyPar.SetParameter(New RParameter("rho"))
-        ' ucrNudPenaltyPar.DecimalPlaces = 2
         ucrNudPenaltyPar.Increment = 1
         ucrNudPenaltyPar.SetMinMax(iNewMin:=1, iNewMax:=200000000)
         ucrNudPenaltyPar.SetRDefault(1)
@@ -48,7 +47,7 @@ Public Class sdgTricotModelOptions
 
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRFunction As RFunction, clsNewRSyntax As RSyntax, Optional bReset As Boolean = False)
         ucrInputNumberIt.SetText("500")
         ucrInputConvTotal.SetText("0.0001")
         bRCodeSet = False
@@ -57,9 +56,13 @@ Public Class sdgTricotModelOptions
             InitialiseControls()
         End If
 
+        clsRSyntax = clsNewRSyntax
         clsPladmmFunction = clsNewRFunction
-
-        ucrNudPenaltyPar.SetRCode(clsNewRFunction, bReset, bCloneIfNeeded:=True)
+        If bReset Then
+            ucrChkPenaltyPar.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+            ucrChkConvTotal.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+            ucrChkNumberIt.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        End If
 
         AddRemoveParameters()
     End Sub
