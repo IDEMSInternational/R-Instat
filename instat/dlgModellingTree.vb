@@ -611,20 +611,18 @@ Public Class dlgModellingTree
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction, clsNewCoefOperator:=clsCoefOperator,
+        sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction,
             clsNewCoefFunction:=clscoefFunction, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction,
             clsNewEstimatesFunction:=clsEstimatesFunction, clsNewDevianceFunction:=clsDevianceMainFunction,
             clsNewPariPropFunction:=clsPairwiseProbMainFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
             clsNewItemsFunction:=clsItemsParFunction, clsNewRegretFunction:=clsRegretFunction, clsNewNodeLabFuction:=clsNodeLabelsFunction,
             clsNewNodeRuleFunction:=clsNodeRulesFunction, clsNewTopItemFunction:=clsTopItemsFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewAICFunction:=clsUnListAICFunction,
-            clsNewSpaceOperator:=clsEmptySpaceOperator, clsNewLevelFunction:=clsLevelsFunction, clsNewGetDataFrameFunction:=clsGetDataFrameFunction,
-            clsNewFactorFunction:=clsFactorFunction, clsNewAssigneOperator:=clsAssignOperator, bReset:=bResetSubDialog, clsNewAnnovaFunction:=clsAnnovaFunction,
-            clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewStatsFunction:=clsStatsFunction, clsNewStatsOperator:=clsStatsOperator,
-            clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewSndgetVarmataFunction:=clsGetVariablesFromMetaDataFunction,
-            clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, clsNewGetObjectPlotFunction:=clsGetObjectPlotFunction,
-            clsNewGetObjectBarFunction:=clsGetObjectBarFunction, clsNewAddObjectHeatFunction:=clsAddObjectHeatFunction, clsNewAddObjectPlotFunction:=clsAddObjectPlotFunction,
-            clsNewAddObjectBarFunction:=clsAddObjectBarFunction, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
-            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewGetObjectHeatFunction:=clsHeatFunction
+            bReset:=bResetSubDialog, clsNewAnnovaFunction:=clsAnnovaFunction,
+            clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewStatsFunction:=clsStatsFunction,
+            clsNewQuasivarianceFunction:=clsQuasivarianceFunction,
+            clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction,
+            clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
+            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction
         )
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = False
