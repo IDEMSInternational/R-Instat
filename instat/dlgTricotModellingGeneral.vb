@@ -17,6 +17,7 @@ Public Class dlgTricotModellingGeneral
             clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction, clsGetObjectPlotFunction,
             clsGetObjectBarFunction, clsAddObjectHeatFunction, clsAddObjectPlotFunction, clsAddObjectBarFunction, clsHeatFunction,
             clsPlotFunction, clsBarfunction, clsWrapPlotFunction, clsWrapBarFunction, clsTreeFunction As New RFunction
+
     Private clsObjectOperator, clsTildeOperator, clsTilde2Operator, clsBracketOperator, clsDevianceOperator, clsPairwiseProbOperator,
             clsNamesOperator, clsModelOperator, clsSpaceOperator, clsTilde3Operator, clsEmptySpaceOperator, clsCoefOperator,
             clsAICOperator, clsStatsOperator As New ROperator
@@ -68,7 +69,7 @@ Public Class dlgTricotModellingGeneral
         ucrSaveModellingGeneral.SetPrefix("gen_model")
         ucrSaveModellingGeneral.SetAssignToIfUncheckedValue("last_model")
 
-        btnModelOptions.Enabled = False
+        btnModelOptions.Enabled = True
         btnDisplayOptions.Enabled = True
     End Sub
 
@@ -296,41 +297,12 @@ Public Class dlgTricotModellingGeneral
         clsPairwiseProbMainFunction.AddParameter(".x", "mod_list", iPosition:=0)
         clsPairwiseProbMainFunction.AddParameter(".f", clsROperatorParameter:=clsPairwiseProbOperator, iPosition:=1)
 
-        'clsReliabilityFunction.SetPackageName("purrr")
-        'clsReliabilityFunction.SetRCommand("map")
-        'clsReliabilityFunction.AddParameter(".x", "purrr::imap(.x = mod_list,  .f = ~gosset::reliability(.x, ref = variety_baseline[1]))", iPosition:=0)
-        'clsReliabilityFunction.AddParameter(".f", "~ .x %>% dplyr::mutate(reliability_rescaled = round(reliability / 0.5 - 1, 2))", iPosition:=1)
-        'clsReliabilityFunction.iCallType = 2
 
         clsItemsParFunction.SetPackageName("purrr")
         clsItemsParFunction.SetRCommand("map")
         clsItemsParFunction.AddParameter(".x", "mod_list", iPosition:=0)
         clsItemsParFunction.AddParameter(".f", "~PlackettLuce::itempar(.x)", iPosition:=1)
         clsItemsParFunction.iCallType = 2
-
-        'clsRegretFunction.SetPackageName("purrr")
-        'clsRegretFunction.SetRCommand("map")
-        'clsRegretFunction.AddParameter(".x", "mod_list", iPosition:=0)
-        'clsRegretFunction.AddParameter(".f", "~gosset::regret(.x)", iPosition:=1)
-        'clsRegretFunction.iCallType = 2
-
-        'clsNodeLabelsFunction.SetPackageName("purrr")
-        'clsNodeLabelsFunction.SetRCommand("map")
-        'clsNodeLabelsFunction.AddParameter(".x", "mod_list")
-        'clsNodeLabelsFunction.AddParameter(".f", "~gosset::node_labels(.x)")
-        'clsNodeLabelsFunction.iCallType = 2
-
-        'clsNodeRulesFunction.SetPackageName("purrr")
-        'clsNodeRulesFunction.SetRCommand("map")
-        'clsNodeRulesFunction.AddParameter(".x", "mod_list")
-        'clsNodeRulesFunction.AddParameter(".f", "~gosset::node_rules(.x)")
-        'clsNodeRulesFunction.iCallType = 2
-
-        'clsTopItemsFunction.SetPackageName("purrr")
-        'clsTopItemsFunction.SetRCommand("map")
-        'clsTopItemsFunction.AddParameter(".x", "mod_list")
-        'clsTopItemsFunction.AddParameter(".f", "~gosset::top_items(.x, top = 3))")
-        'clsTopItemsFunction.iCallType = 2
 
         clsAICFunction.SetRCommand("AIC")
         clsAICFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
@@ -350,12 +322,6 @@ Public Class dlgTricotModellingGeneral
         clsAICMainFunction.AddParameter(".f", clsROperatorParameter:=clsAICOperator, iPosition:=1)
         clsAICMainFunction.iCallType = 2
 
-        'clsAnnovaFunction.SetPackageName("purrr")
-        'clsAnnovaFunction.SetRCommand("map")
-        'clsAnnovaFunction.AddParameter(".x", "mod_list", iPosition:=0)
-        'clsAnnovaFunction.AddParameter(".f", "~gosset:::anova.PlackettLuce(.x)", iPosition:=1)
-        'clsAnnovaFunction.iCallType = 2
-
         clsStatsFunction.SetPackageName("stats")
         clsStatsFunction.SetRCommand("confint")
         clsStatsFunction.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
@@ -371,12 +337,6 @@ Public Class dlgTricotModellingGeneral
         clsConfidenLimFunction.AddParameter(".x", "mod_list", iPosition:=0)
         clsConfidenLimFunction.AddParameter(".f", clsROperatorParameter:=clsStatsOperator, iPosition:=1)
         clsConfidenLimFunction.iCallType = 2
-
-        'clsQuasivarianceFunction.SetPackageName("purrr")
-        'clsQuasivarianceFunction.SetRCommand("map")
-        'clsQuasivarianceFunction.AddParameter(".x", "mod_list", iPosition:=0)
-        'clsQuasivarianceFunction.AddParameter(".f", "~qvcalc::qvcalc(PlackettLuce::itempar(.x))", iPosition:=1)
-        'clsQuasivarianceFunction.iCallType = 2
 
         clsVarianCovaMatrixFunction.SetPackageName("purrr")
         clsVarianCovaMatrixFunction.SetRCommand("map")
@@ -416,20 +376,20 @@ Public Class dlgTricotModellingGeneral
         clsHeatFunction.SetPackageName("gosset")
         clsHeatFunction.SetRCommand("worth_map")
         clsHeatFunction.AddParameter(".x", "mod_list", iPosition:=0, bIncludeArgumentName:=False)
-        clsHeatFunction.AddParameter("labels", "names(mod)", iPosition:=1)
+        clsHeatFunction.AddParameter("labels", "names(mod_list)", iPosition:=1)
         clsHeatFunction.SetAssignTo("last_graph")
 
         clsPlotFunction.SetPackageName("purrr")
         clsPlotFunction.SetRCommand("map2")
         clsPlotFunction.AddParameter(".x", "mod_list", iPosition:=0)
-        clsPlotFunction.AddParameter(".y", "names(mod)", iPosition:=1)
+        clsPlotFunction.AddParameter(".y", "names(mod_list)", iPosition:=1)
         clsPlotFunction.AddParameter(".f", "~gosset:::plot.PlackettLuce(x = .x) + ggplot2::ggtitle(.y)", iPosition:=2)
         clsPlotFunction.SetAssignTo("list_of_plots")
 
         clsBarfunction.SetPackageName("purrr")
         clsBarfunction.SetRCommand("map2")
         clsBarfunction.AddParameter(".x", "mod_list", iPosition:=0)
-        clsBarfunction.AddParameter(".y", "names(mod)", iPosition:=1)
+        clsBarfunction.AddParameter(".y", "names(mod_list)", iPosition:=1)
         clsBarfunction.AddParameter(".f", "~gosset::worth_bar(.x) + ggplot2::ggtitle(.y)", iPosition:=2)
         clsBarfunction.SetAssignTo("list_of_plots")
 
@@ -446,7 +406,6 @@ Public Class dlgTricotModellingGeneral
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetRankingItemsFunction, iPosition:=3)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction, iPosition:=4)
-        'ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumn)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetVariablesFromMetaDataFunction, iPosition:=5)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsBracketOperator, iPosition:=6)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=7)
@@ -559,7 +518,20 @@ Public Class dlgTricotModellingGeneral
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = False
         sdgDisplayModelOptions.grpTrees.Enabled = False
         sdgDisplayModelOptions.rdoTree.Enabled = False
+        sdgDisplayModelOptions.rdoPlot.Enabled = False
+        sdgDisplayModelOptions.rdoBar.Enabled = False
         sdgDisplayModelOptions.ShowDialog()
+        bResetSubDialog = False
+    End Sub
+
+
+    Private Sub btnModelOptions_Click(sender As Object, e As EventArgs) Handles btnModelOptions.Click
+        sdgTricotModelOptions.SetRCode(
+            clsNewRFunction:=clsPladmmFunction,
+            clsNewRSyntax:=ucrBase.clsRsyntax,
+            bReset:=bResetSubDialog
+        )
+        sdgTricotModelOptions.ShowDialog()
         bResetSubDialog = False
     End Sub
 
