@@ -3129,4 +3129,8 @@ Public Class frmMain
         dlgOneWayFrequencies.enumOnewayMode = dlgOneWayFrequencies.OnewayMode.Climatic
         dlgOneWayFrequencies.ShowDialog()
     End Sub
+
+    Private Sub mnuTricotModelCharacterisation_Click(sender As Object, e As EventArgs) Handles mnuTricotModelCharacterisation.Click
+        dlgTricotModellingGeneral.ShowDialog()
+    End Sub
 End Class
