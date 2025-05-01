@@ -16,7 +16,10 @@
 
 Imports instat.Translations
 Public Class sdgTricotModelOptions
+    Private bControlsInitialised As Boolean = False
+    Private bRCodeSet As Boolean = True
     Public clsPladmmFunction As New RFunction
+    'Private clsDummyFunction As New RFunction
 
     Private Sub sdgTricotModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -24,56 +27,73 @@ Public Class sdgTricotModelOptions
 
     Private Sub InitialiseControls()
 
+        ucrChkPenaltyPar.SetText("Penalty Parameter")
+        ucrChkPenaltyPar.AddToLinkedControls(ucrNudPenaltyPar, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+
         ucrNudPenaltyPar.SetParameter(New RParameter("rho"))
-        ucrNudPenaltyPar.DecimalPlaces = 2
+        ' ucrNudPenaltyPar.DecimalPlaces = 2
         ucrNudPenaltyPar.Increment = 1
+        ucrNudPenaltyPar.SetMinMax(iNewMin:=1, iNewMax:=200000000)
         ucrNudPenaltyPar.SetRDefault(1)
 
-        ucrChkPenaltyPar.AddToLinkedControls(ucrNudPenaltyPar, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkPenaltyPar.SetText("Penalty Parameter")
-
-        ucrNudNumberIt.SetParameter(New RParameter("n_iter"))
-        ucrNudNumberIt.Increment = 1
-        ucrNudNumberIt.SetRDefault(500)
-
-        ucrChkNumberIt.AddToLinkedControls(ucrNudNumberIt, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkNumberIt.SetText("Number of Iterations")
+
+        ucrInputNumberIt.SetParameter(New RParameter("n_iter"))
+        ucrInputNumberIt.SetValidationTypeAsNumeric()
 
         ucrInputConvTotal.SetParameter(New RParameter("rtol"))
         ucrInputConvTotal.SetValidationTypeAsNumeric()
-        ucrInputConvTotal.SetRDefault(0.0001)
 
-        ucrChkConvTotal.AddToLinkedControls(ucrInputConvTotal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkConvTotal.SetText("Convergence Total")
 
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction)
+        ucrInputNumberIt.SetText("500")
+        ucrInputConvTotal.SetText("0.0001")
+        bRCodeSet = False
+
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+
         clsPladmmFunction = clsNewRFunction
+
+        AddRemoveParameters()
     End Sub
 
     Private Sub AddRemoveParameters()
         If ucrChkPenaltyPar.Checked Then
+            ucrNudPenaltyPar.Visible = True
             clsPladmmFunction.AddParameter("rho", ucrNudPenaltyPar.GetText, iPosition:=3)
+            ucrNudPenaltyPar.SetRDefault(1)
         Else
             clsPladmmFunction.RemoveParameterByName("rho")
+            ucrNudPenaltyPar.Visible = False
         End If
 
         If ucrChkNumberIt.Checked Then
-            clsPladmmFunction.AddParameter("n_iter", ucrNudNumberIt.GetText, iPosition:=4)
+            ucrInputNumberIt.Visible = True
+            ucrInputNumberIt.SetRDefault(500)
+            clsPladmmFunction.AddParameter("n_iter", ucrInputNumberIt.GetText, iPosition:=4)
         Else
             clsPladmmFunction.RemoveParameterByName("n_iter")
+            ucrInputNumberIt.Visible = False
         End If
 
         If ucrChkConvTotal.Checked Then
+            ucrInputConvTotal.Visible = True
+            ucrInputConvTotal.SetRDefault(0.0001)
             clsPladmmFunction.AddParameter("rtol", ucrInputConvTotal.GetText, iPosition:=5)
         Else
             clsPladmmFunction.RemoveParameterByName("rtol")
+            ucrInputConvTotal.Visible = False
         End If
     End Sub
 
     Private Sub ucrChecks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPenaltyPar.ControlValueChanged,
-        ucrChkNumberIt.ControlValueChanged, ucrChkConvTotal.ControlValueChanged
+        ucrChkNumberIt.ControlValueChanged, ucrChkConvTotal.ControlValueChanged, ucrNudPenaltyPar.ControlValueChanged, ucrInputConvTotal.ControlValueChanged
         AddRemoveParameters()
     End Sub
+
 End Class
