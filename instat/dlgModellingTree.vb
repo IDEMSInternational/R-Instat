@@ -40,7 +40,7 @@ Public Class dlgModellingTree
     Private clsPairwiseProbFunction, clsPairwiseProbMainFunction, clsReliabilityFunction, clsItemsParFunction As New RFunction
     Private clsCoefOperator, clsAICOperator, clsDevianceOperator, clsPairwiseProbOperator, clsStatsOperator, clsModelOperator As New ROperator
     Private clsAnnovaFunction, clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction As New RFunction
-    Private clsWrapBarFunction, clsWrapPlotFunction, clsGetObjectHeatFunction, clsGetObjectPlotFunction, clsGetObjectBarFunction As New RFunction
+    Private clsWrapBarFunction, clsWrapPlotFunction As New RFunction
 
     Private clsAddObjectHeatFunction, clsAddObjectPlotFunction, clsAddObjectBarFunction, clsHeatFunction, clsTreeFunction As New RFunction
     Private clsPlotFunction, clsBarfunction As New RFunction
@@ -79,13 +79,13 @@ Public Class dlgModellingTree
         ucrReceiverModellingTree.SetParameter(New RParameter("vars_to_get", 1))
         ucrReceiverModellingTree.SetParameterIsRFunction()
         ucrReceiverModellingTree.Selector = ucrSelectorByDataFrameAddRemoveForModellingTree
+        ucrReceiverModellingTree.strSelectorHeading = "Traits"
 
         ucrReceiverExpressionModellingTree.SetParameter(New RParameter("y", 2))
         ucrReceiverExpressionModellingTree.SetParameterIsString()
         ucrReceiverExpressionModellingTree.bWithQuotes = False
         ucrReceiverExpressionModellingTree.AddtoCombobox("1")
-        'ucrTryModelling.SetReceiver(ucrReceiverExpressionModellingTree)
-        'ucrTryModelling.SetIsModel()
+        ucrReceiverExpressionModellingTree.strSelectorHeading = "Variables"
 
         ucrModelName.SetDataFrameSelector(ucrSelectorByDataFrameAddRemoveForModellingTree.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("gen_model")
@@ -137,11 +137,8 @@ Public Class dlgModellingTree
         clsStatsFunction = New RFunction
         clsQuasivarianceFunction = New RFunction
         clsVarianCovaMatrixFunction = New RFunction
-        clsGetObjectHeatFunction = New RFunction
         clsWrapBarFunction = New RFunction
         clsWrapPlotFunction = New RFunction
-        clsGetObjectPlotFunction = New RFunction
-        clsGetObjectBarFunction = New RFunction
         clsAddObjectHeatFunction = New RFunction
         clsAddObjectPlotFunction = New RFunction
         clsAddObjectBarFunction = New RFunction
@@ -456,35 +453,11 @@ Public Class dlgModellingTree
         clsBarfunction.AddParameter(".f", "~gosset::worth_bar(.x) + ggplot2::ggtitle(.y)", iPosition:=2)
         clsBarfunction.SetAssignTo("list_of_plots")
 
-        'clsGetObjectHeatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        'clsGetObjectHeatFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        'clsGetObjectHeatFunction.AddParameter("as_file", "TRUE", iPosition:=2)
-
-        'clsGetObjectPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        'clsGetObjectPlotFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        'clsGetObjectPlotFunction.AddParameter("as_file", "TRUE", iPosition:=2)
-
-        'clsGetObjectBarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        'clsGetObjectBarFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        'clsGetObjectBarFunction.AddParameter("as_file", "TRUE", iPosition:=2)
-
         clsAddObjectHeatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
         clsAddObjectHeatFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
         clsAddObjectHeatFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
         clsAddObjectHeatFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
         clsAddObjectHeatFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
-
-        'clsAddObjectPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
-        'clsAddObjectPlotFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        'clsAddObjectPlotFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
-        'clsAddObjectPlotFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
-        'clsAddObjectPlotFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
-
-        'clsAddObjectBarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
-        'clsAddObjectBarFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        'clsAddObjectBarFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
-        'clsAddObjectBarFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
-        'clsAddObjectBarFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -502,7 +475,6 @@ Public Class dlgModellingTree
 
 
         bResetModelOptions = True
-        'ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrModelName.ControlValueChanged
@@ -512,11 +484,6 @@ Public Class dlgModellingTree
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-        'ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsAddObjectBarFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
-        'ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsAddObjectHeatFunction, New RParameter("data_name", 0), iAdditionalPairNo:=2)
-        'ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsAddObjectPlotFunction, New RParameter("data_name", 0), iAdditionalPairNo:=3)
-        'ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsGetObjectHeatFunction, New RParameter("data_name", 0), iAdditionalPairNo:=4)
-        'ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsGetObjectPlotFunction, New RParameter("data_name", 0), iAdditionalPairNo:=5)
 
         ucrModelName.AddAdditionalRCode(clsModelOperator, bReset)
         ucrModelName.SetRCode(clsModelOperator)
@@ -642,7 +609,6 @@ Public Class dlgModellingTree
         Dim expOutput As SymbolicExpression
         Dim chrOutput As CharacterVector
         Dim strFormNames() As String
-        'Dim expTemp As SymbolicExpression
 
         ' Resetting the background color of the input control 
         ucrInputCheck.txtInput.BackColor = Color.White
