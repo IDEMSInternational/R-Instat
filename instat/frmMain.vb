@@ -3099,4 +3099,8 @@ Public Class frmMain
     Private Sub mnuTidyTransformTricot_Click(sender As Object, e As EventArgs) Handles mnuTidyTransformTricot.Click
         dlgTransformTricotData.ShowDialog()
     End Sub
+
+    Private Sub mnuTricotModelCharacterisation_Click(sender As Object, e As EventArgs) Handles mnuTricotModelCharacterisation.Click
+        dlgTricotModellingGeneral.ShowDialog()
+    End Sub
 End Class
