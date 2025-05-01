@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -23,12 +23,19 @@ Public Class dlgDefineTricotData
     Private lstReceiversLevelID, lstReceiversVarityLevel, lstReceiversIDVarietyLevel As New List(Of ucrReceiverSingle)
     Private lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
     Private clsGetColumnSelection, clsUnameFunction, clsCreateRankingFunction, clsGroupRankingFunction,
-        clsGetDataFrameFunction, clsAddRankingObjFunction, clsAddGrpRankingObjFunction As New RFunction
+    clsGetDataFrameFunction, clsAddRankingObjFunction, clsAddGrpRankingObjFunction As New RFunction
     Private clsDATIDLevelFunction, clsDATVarietyLevelFunction, clsDATIDVarietyFunction As New RFunction
-    Private clsAnyDuplicatesFunction, clsVarietyDuplicatesFunction, clsIDVarietyDuplicatesFunction, clsConcFunction, clsNewConcFunction, clsGetColFunction, clsDummyFunction As New RFunction
+    Private clsAnyDuplicatesFunction, clsVarietyDuplicatesFunction, clsIDVarietyDuplicatesFunction, clsConcFunction, clsConcVarietyFunction, clsNewConcFunction, clsGetColFunction, clsGetVarietyFunction, clsIDVarietyPasteFunction, clsIDVarietyPasteIDFunction, clsIDVarietyPasteVarietyFunction, clsIDVarietyPasteIDConcFunction, clsIDVarietyPasteVarietyConcFunction, clsDummyFunction As New RFunction
     Private clsCDATIDLevelFunction, cslCDATVarietyLevelFunction, clsCDATIDLevelVarietiesFunction, clsCDATIDLevelTraitsFunction As New RFunction
+
+    Private Sub ucrReceiverLevelID_Load(sender As Object, e As EventArgs) Handles ucrReceiverLevelID.Load
+
+    End Sub
+
     Private clsOperator As New ROperator
     Private bIsUnique As Boolean = True
+    Private bIsUniqueVariety As Boolean = True
+    Private bIsUniqueID As Boolean = True
 
     Private strCurrentDataframeName As String
 
@@ -115,13 +122,27 @@ Public Class dlgDefineTricotData
         clsGetDataFrameFunction = New RFunction
         clsAddRankingObjFunction = New RFunction
         clsAddGrpRankingObjFunction = New RFunction
+        clsConcVarietyFunction = New RFunction
+        clsConcFunction = New RFunction
         clsOperator = New ROperator
         clsAnyDuplicatesFunction = New RFunction
         clsIDVarietyDuplicatesFunction = New RFunction
         clsVarietyDuplicatesFunction = New RFunction
         clsGetColFunction = New RFunction
+        clsIDVarietyPasteFunction = New RFunction
+        clsIDVarietyPasteIDFunction = New RFunction
+        clsIDVarietyPasteVarietyFunction = New RFunction
+        clsIDVarietyPasteIDConcFunction = New RFunction
+        clsIDVarietyPasteVarietyConcFunction = New RFunction
+        clsGetVarietyFunction = New RFunction
 
         ucrReceiverLevelID.SetMeAsReceiver()
+        ucrInputCheckInputIDLevel.txtInput.BackColor = Color.White
+        ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.White
+        ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.White
+        ucrInputCheckInputIDLevel.SetText("")
+        ucrInputCheckInputVarietyLevel.SetText("")
+        ucrInputCheckInputIDVarietyLevel.SetText("")
 
         clsCDATIDLevelFunction.SetRCommand("c")
         clsCDATIDLevelVarietiesFunction.SetRCommand("c")
@@ -192,10 +213,10 @@ Public Class dlgDefineTricotData
         clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
 
         clsVarietyDuplicatesFunction.SetRCommand("anyDuplicated")
-        clsVarietyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
+        clsVarietyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetVarietyFunction)
 
         clsIDVarietyDuplicatesFunction.SetRCommand("anyDuplicated")
-        clsIDVarietyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
+        clsIDVarietyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsIDVarietyPasteFunction)
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDLevelFunction, 1)
@@ -203,9 +224,26 @@ Public Class dlgDefineTricotData
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDVarietyFunction, 3)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAddRankingObjFunction, 4)
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddGrpRankingObjFunction)
+
         clsGetColFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
+        clsGetColFunction.AddParameter("data_name", Chr(34) & ucrSelectorIDLevelData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
         clsGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
+
+        clsGetVarietyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetVarietyFunction.AddParameter("data_name", Chr(34) & ucrSelectorVarietyLevelData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsGetVarietyFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcVarietyFunction)
+
+        clsIDVarietyPasteFunction.SetRCommand("paste0")
+        clsIDVarietyPasteFunction.AddParameter("x1", clsRFunctionParameter:=clsIDVarietyPasteIDFunction, bIncludeArgumentName:=False)
+        clsIDVarietyPasteFunction.AddParameter("x2", clsRFunctionParameter:=clsIDVarietyPasteVarietyFunction, bIncludeArgumentName:=False)
+
+        clsIDVarietyPasteIDFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsIDVarietyPasteIDFunction.AddParameter("data_name", Chr(34) & ucrSelectorIDVarietyLevel.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsIDVarietyPasteIDFunction.AddParameter("col_names", clsRFunctionParameter:=clsIDVarietyPasteIDConcFunction)
+
+        clsIDVarietyPasteVarietyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsIDVarietyPasteVarietyFunction.AddParameter("data_name", Chr(34) & ucrSelectorIDVarietyLevel.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsIDVarietyPasteVarietyFunction.AddParameter("col_names", clsRFunctionParameter:=clsIDVarietyPasteVarietyConcFunction)
 
         AutoFillReceivers(ucrSelectorIDLevelData, lstReceiversLevelID)
         AutoFillReceivers(ucrSelectorVarietyLevelData, lstReceiversVarityLevel)
@@ -309,17 +347,15 @@ Public Class dlgDefineTricotData
 
     Private Sub TestOKEnabled()
         Dim bDataFramesDifferent As Boolean = AreAllDataframessDifferent(
-        ucrSelectorIDLevelData.strCurrentDataFrame,
-        ucrSelectorIDVarietyLevel.strCurrentDataFrame,
-        ucrSelectorVarietyLevelData.strCurrentDataFrame
-    )
+    ucrSelectorIDLevelData.strCurrentDataFrame,
+    ucrSelectorIDVarietyLevel.strCurrentDataFrame,
+    ucrSelectorVarietyLevelData.strCurrentDataFrame
+)
         ucrBase.OKEnabled(Not ucrReceiverIDVarietyLevelID.IsEmpty AndAlso
-                          Not ucrReceiverIDVarietyLevelVariety.IsEmpty AndAlso
-                          Not ucrReceiverIDVarietyLevelTraits.IsEmpty AndAlso Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
-                          Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent)
-    End Sub
-    Private Sub ucrSelectorVarietyLevelData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorVarietyLevelData.ControlValueChanged
-        AutoFillReceivers(ucrSelectorVarietyLevelData, lstReceiversVarityLevel)
+                      Not ucrReceiverIDVarietyLevelVariety.IsEmpty AndAlso
+                      Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
+                      Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent AndAlso
+                      bIsUnique AndAlso bIsUniqueID AndAlso bIsUniqueVariety)
     End Sub
 
     Private Sub ucrSelectorIDVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDVarietyLevel.ControlValueChanged
@@ -378,6 +414,17 @@ Public Class dlgDefineTricotData
         clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
     End Sub
 
+    Private Sub ucrSelectorVarietyLevelData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorVarietyLevelData.ControlValueChanged
+        AutoFillReceivers(ucrSelectorVarietyLevelData, lstReceiversVarityLevel)
+        strCurrentDataframeName = ucrSelectorVarietyLevelData.strCurrentDataFrame
+        clsGetVarietyFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
+    End Sub
+    Private Sub ucrSelectorIDVarietyLevelData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDVarietyLevel.ControlValueChanged
+        strCurrentDataframeName = ucrSelectorIDVarietyLevel.strCurrentDataFrame
+        clsIDVarietyPasteIDFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
+        clsIDVarietyPasteVarietyFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34), iPosition:=0)
+    End Sub
+
     Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLevelID.ControlValueChanged, ucrReceiverLevelID.ControlContentsChanged
         'EnableDisableCheckUniqueBtn()
         If Not ucrReceiverLevelID.IsEmpty Then
@@ -387,6 +434,32 @@ Public Class dlgDefineTricotData
         End If
     End Sub
 
+    Private Sub ucrReceiverVarietyLevelVariety_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVarietyLevelVariety.ControlValueChanged, ucrReceiverVarietyLevelVariety.ControlContentsChanged
+        'EnableDisableCheckUniqueBtn()
+        If Not ucrReceiverVarietyLevelVariety.IsEmpty Then
+            clsConcVarietyFunction.AddParameter("x1", ucrReceiverVarietyLevelVariety.GetVariableNames, bIncludeArgumentName:=False)
+        Else
+            clsConcVarietyFunction.RemoveParameterByName("x1")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverIDVarietyLevelID_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVarietyLevelID.ControlValueChanged, ucrReceiverVarietyLevelVariety.ControlContentsChanged
+        'EnableDisableCheckUniqueBtn()
+        If Not ucrReceiverIDVarietyLevelID.IsEmpty Then
+            clsIDVarietyPasteIDConcFunction.AddParameter("x1", ucrReceiverIDVarietyLevelID.GetVariableNames, bIncludeArgumentName:=False)
+        Else
+            clsIDVarietyPasteIDConcFunction.RemoveParameterByName("x1")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverIDVarietyLevelVariety_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVarietyLevelVariety.ControlValueChanged, ucrReceiverVarietyLevelVariety.ControlContentsChanged
+        'EnableDisableCheckUniqueBtn()
+        If Not ucrReceiverIDVarietyLevelVariety.IsEmpty Then
+            clsIDVarietyPasteVarietyConcFunction.AddParameter("x1", ucrReceiverIDVarietyLevelVariety.GetVariableNames, bIncludeArgumentName:=False)
+        Else
+            clsIDVarietyPasteVarietyConcFunction.RemoveParameterByName("x1")
+        End If
+    End Sub
 
     Private Sub btncheckduplicatesvarietylevel_Click(sender As Object, e As EventArgs) Handles btncheckduplicatesvarietylevel.Click
         Dim iAnyDuplicated As Integer
@@ -400,11 +473,11 @@ Public Class dlgDefineTricotData
         If iAnyDuplicated = -1 Then
             ucrInputCheckInputVarietyLevel.SetName("Developer error! Could not check uniqueness.")
             ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.Yellow
-            bIsUnique = False
+            bIsUniqueVariety = False
         ElseIf iAnyDuplicated > 0 Then
             ucrInputCheckInputVarietyLevel.SetName("")
             ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.LightCoral
-            bIsUnique = False
+            bIsUniqueVariety = False
             If ucrReceiverVarietyLevelVariety.IsEmpty Then
                 ucrInputCheckInputIDVarietyLevel.SetName("Duplicate varieties found.")
                 MsgBox("You have multiple rows with the same varieties.", MsgBoxStyle.Information, Title:="Duplicates")
@@ -415,7 +488,7 @@ Public Class dlgDefineTricotData
         Else
             ucrInputCheckInputVarietyLevel.SetName("No duplicate varieties.")
             ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.LightGreen
-            bIsUnique = True
+            bIsUniqueVariety = True
         End If
         TestOKEnabled()
     End Sub
@@ -432,11 +505,11 @@ Public Class dlgDefineTricotData
         If iAnyDuplicated = -1 Then
             ucrInputCheckInputIDVarietyLevel.SetName("Developer error! Could not check uniqueness.")
             ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.Yellow
-            bIsUnique = False
+            bIsUniqueID = False
         ElseIf iAnyDuplicated > 0 Then
             ucrInputCheckInputIDVarietyLevel.SetName("")
             ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.LightCoral
-            bIsUnique = False
+            bIsUniqueID = False
             If ucrReceiverIDVarietyLevelID.IsEmpty Then
                 ucrInputCheckInputIDVarietyLevel.SetName("Duplicate ID-Variety combination found.")
                 MsgBox("You have multiple rows with the same ID-Variety combination.", MsgBoxStyle.Information, Title:="Duplicates")
@@ -447,9 +520,8 @@ Public Class dlgDefineTricotData
         Else
             ucrInputCheckInputIDVarietyLevel.SetName("No duplicate ID-Variety combination.")
             ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.LightGreen
-            bIsUnique = True
+            bIsUniqueID = True
         End If
         TestOKEnabled()
     End Sub
-
 End Class
