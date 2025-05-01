@@ -390,6 +390,7 @@ Public Class dlgTricotModellingGeneral
         clsWrapPlotFunction.SetRCommand("wrap_plots")
         clsWrapPlotFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
         clsWrapPlotFunction.SetAssignTo("last_graph")
+        clsWrapPlotFunction.iCallType = 3
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetRankingItemsFunction, iPosition:=3)
