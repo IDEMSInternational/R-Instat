@@ -48,7 +48,7 @@ Public Class sdgTricotModelOptions
 
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
         ucrInputNumberIt.SetText("500")
         ucrInputConvTotal.SetText("0.0001")
         bRCodeSet = False
@@ -58,6 +58,8 @@ Public Class sdgTricotModelOptions
         End If
 
         clsPladmmFunction = clsNewRFunction
+
+        ucrNudPenaltyPar.SetRCode(clsNewRFunction, bReset, bCloneIfNeeded:=True)
 
         AddRemoveParameters()
     End Sub
