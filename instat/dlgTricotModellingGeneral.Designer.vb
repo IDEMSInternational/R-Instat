@@ -64,7 +64,7 @@ Partial Class dlgTricotModellingGeneral
         Me.ucrInputCheckVariety.IsMultiline = False
         Me.ucrInputCheckVariety.IsReadOnly = False
         Me.ucrInputCheckVariety.Location = New System.Drawing.Point(196, 605)
-        Me.ucrInputCheckVariety.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputCheckVariety.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputCheckVariety.Name = "ucrInputCheckVariety"
         Me.ucrInputCheckVariety.Size = New System.Drawing.Size(400, 32)
         Me.ucrInputCheckVariety.TabIndex = 9
@@ -179,9 +179,9 @@ Partial Class dlgTricotModellingGeneral
         Me.grpSecondCalc.Controls.Add(Me.cmdTan)
         Me.grpSecondCalc.Controls.Add(Me.cmdExp)
         Me.grpSecondCalc.Location = New System.Drawing.Point(587, 348)
-        Me.grpSecondCalc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpSecondCalc.Margin = New System.Windows.Forms.Padding(4)
         Me.grpSecondCalc.Name = "grpSecondCalc"
-        Me.grpSecondCalc.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpSecondCalc.Padding = New System.Windows.Forms.Padding(4)
         Me.grpSecondCalc.Size = New System.Drawing.Size(189, 166)
         Me.grpSecondCalc.TabIndex = 7
         Me.grpSecondCalc.TabStop = False
@@ -266,9 +266,9 @@ Partial Class dlgTricotModellingGeneral
         Me.grpFirstCalc.Controls.Add(Me.cmdZero)
         Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
         Me.grpFirstCalc.Location = New System.Drawing.Point(390, 348)
-        Me.grpFirstCalc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpFirstCalc.Margin = New System.Windows.Forms.Padding(4)
         Me.grpFirstCalc.Name = "grpFirstCalc"
-        Me.grpFirstCalc.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpFirstCalc.Padding = New System.Windows.Forms.Padding(4)
         Me.grpFirstCalc.Size = New System.Drawing.Size(196, 166)
         Me.grpFirstCalc.TabIndex = 6
         Me.grpFirstCalc.TabStop = False
@@ -409,7 +409,7 @@ Partial Class dlgTricotModellingGeneral
         Me.ucrReceiverExpressionModellingGeneral.AutoSize = True
         Me.ucrReceiverExpressionModellingGeneral.frmParent = Me
         Me.ucrReceiverExpressionModellingGeneral.Location = New System.Drawing.Point(390, 306)
-        Me.ucrReceiverExpressionModellingGeneral.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrReceiverExpressionModellingGeneral.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrReceiverExpressionModellingGeneral.Name = "ucrReceiverExpressionModellingGeneral"
         Me.ucrReceiverExpressionModellingGeneral.Selector = Nothing
         Me.ucrReceiverExpressionModellingGeneral.Size = New System.Drawing.Size(384, 45)
@@ -438,7 +438,7 @@ Partial Class dlgTricotModellingGeneral
         Me.Controls.Add(Me.ucrSelectorVarietyLevel)
         Me.Controls.Add(Me.ucrSelectorTraitsRanking)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgTricotModellingGeneral"
