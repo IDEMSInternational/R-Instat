@@ -462,15 +462,22 @@ Public Class dlgDescribeTwoVariable
         clsMapGtFunction.SetRCommand("map")
         clsMapGtFunction.AddParameter("gttbl", clsRFunctionParameter:=clsgtFunction, bIncludeArgumentName:=False)
 
-        clsgtFunction.SetPackageName("gt")
-        clsgtFunction.SetRCommand("gt")
+        'clsgtFunction.SetPackageName("gt")
+        clsgtFunction.SetRCommand("generate_summary_tables")
 
         clsGtTableROperator.SetOperation("%>%")
         clsGtTableROperator.bBrackets = False
         clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsgtFunction, iPosition:=0, bIncludeArgumentName:=False)
 
+
+
+
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+
+
+
+
 
         clsPivotOperator.SetOperation("%>%")
         clsPivotOperator.AddParameter("left", clsRFunctionParameter:=clsPivotWiderFunction)
