@@ -63,38 +63,36 @@ Partial Class dlgTricotModellingGeneral
         Me.ucrInputCheckVariety.AutoSize = True
         Me.ucrInputCheckVariety.IsMultiline = False
         Me.ucrInputCheckVariety.IsReadOnly = False
-        Me.ucrInputCheckVariety.Location = New System.Drawing.Point(155, 432)
+        Me.ucrInputCheckVariety.Location = New System.Drawing.Point(196, 605)
+        Me.ucrInputCheckVariety.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
         Me.ucrInputCheckVariety.Name = "ucrInputCheckVariety"
-        Me.ucrInputCheckVariety.Size = New System.Drawing.Size(307, 21)
-        Me.ucrInputCheckVariety.TabIndex = 25
+        Me.ucrInputCheckVariety.Size = New System.Drawing.Size(400, 32)
+        Me.ucrInputCheckVariety.TabIndex = 9
         '
         'cmdCheckVariety
         '
-        Me.cmdCheckVariety.Location = New System.Drawing.Point(19, 432)
-        Me.cmdCheckVariety.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdCheckVariety.Location = New System.Drawing.Point(15, 601)
         Me.cmdCheckVariety.Name = "cmdCheckVariety"
-        Me.cmdCheckVariety.Size = New System.Drawing.Size(113, 21)
-        Me.cmdCheckVariety.TabIndex = 24
+        Me.cmdCheckVariety.Size = New System.Drawing.Size(170, 32)
+        Me.cmdCheckVariety.TabIndex = 8
         Me.cmdCheckVariety.Text = "Check Variety"
         Me.cmdCheckVariety.UseVisualStyleBackColor = True
         '
         'btnDisplayOptions
         '
-        Me.btnDisplayOptions.Location = New System.Drawing.Point(390, 394)
-        Me.btnDisplayOptions.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnDisplayOptions.Location = New System.Drawing.Point(604, 603)
         Me.btnDisplayOptions.Name = "btnDisplayOptions"
-        Me.btnDisplayOptions.Size = New System.Drawing.Size(115, 21)
-        Me.btnDisplayOptions.TabIndex = 23
+        Me.btnDisplayOptions.Size = New System.Drawing.Size(172, 32)
+        Me.btnDisplayOptions.TabIndex = 11
         Me.btnDisplayOptions.Text = "Display Options"
         Me.btnDisplayOptions.UseVisualStyleBackColor = True
         '
         'btnModelOptions
         '
-        Me.btnModelOptions.Location = New System.Drawing.Point(390, 368)
-        Me.btnModelOptions.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnModelOptions.Location = New System.Drawing.Point(604, 565)
         Me.btnModelOptions.Name = "btnModelOptions"
-        Me.btnModelOptions.Size = New System.Drawing.Size(115, 21)
-        Me.btnModelOptions.TabIndex = 22
+        Me.btnModelOptions.Size = New System.Drawing.Size(172, 32)
+        Me.btnModelOptions.TabIndex = 10
         Me.btnModelOptions.Text = "Model Options"
         Me.btnModelOptions.UseVisualStyleBackColor = True
         '
@@ -102,52 +100,50 @@ Partial Class dlgTricotModellingGeneral
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(19, 493)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrBase.Location = New System.Drawing.Point(15, 708)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 21
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
+        Me.ucrBase.TabIndex = 13
         '
         'ucrSaveModellingGeneral
         '
         Me.ucrSaveModellingGeneral.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveModellingGeneral.Location = New System.Drawing.Point(19, 461)
-        Me.ucrSaveModellingGeneral.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveModellingGeneral.Location = New System.Drawing.Point(15, 646)
+        Me.ucrSaveModellingGeneral.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveModellingGeneral.Name = "ucrSaveModellingGeneral"
-        Me.ucrSaveModellingGeneral.Size = New System.Drawing.Size(403, 32)
-        Me.ucrSaveModellingGeneral.TabIndex = 20
+        Me.ucrSaveModellingGeneral.Size = New System.Drawing.Size(604, 48)
+        Me.ucrSaveModellingGeneral.TabIndex = 12
         '
         'lblExplanatory
         '
         Me.lblExplanatory.AutoSize = True
-        Me.lblExplanatory.Location = New System.Drawing.Point(257, 190)
-        Me.lblExplanatory.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblExplanatory.Location = New System.Drawing.Point(386, 284)
         Me.lblExplanatory.Name = "lblExplanatory"
-        Me.lblExplanatory.Size = New System.Drawing.Size(106, 13)
-        Me.lblExplanatory.TabIndex = 19
+        Me.lblExplanatory.Size = New System.Drawing.Size(158, 20)
+        Me.lblExplanatory.TabIndex = 4
         Me.lblExplanatory.Text = "Explanatory Variable:"
         '
         'lblTraitsToModel
         '
         Me.lblTraitsToModel.AutoSize = True
-        Me.lblTraitsToModel.Location = New System.Drawing.Point(257, 20)
-        Me.lblTraitsToModel.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblTraitsToModel.Location = New System.Drawing.Point(393, 62)
         Me.lblTraitsToModel.Name = "lblTraitsToModel"
-        Me.lblTraitsToModel.Size = New System.Drawing.Size(80, 13)
-        Me.lblTraitsToModel.TabIndex = 18
+        Me.lblTraitsToModel.Size = New System.Drawing.Size(117, 20)
+        Me.lblTraitsToModel.TabIndex = 1
         Me.lblTraitsToModel.Text = "Traits to Model:"
         '
         'ucrTraitsReceiver
         '
         Me.ucrTraitsReceiver.AutoSize = True
         Me.ucrTraitsReceiver.frmParent = Me
-        Me.ucrTraitsReceiver.Location = New System.Drawing.Point(260, 41)
+        Me.ucrTraitsReceiver.Location = New System.Drawing.Point(390, 85)
         Me.ucrTraitsReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrTraitsReceiver.Name = "ucrTraitsReceiver"
         Me.ucrTraitsReceiver.Selector = Nothing
-        Me.ucrTraitsReceiver.Size = New System.Drawing.Size(256, 129)
+        Me.ucrTraitsReceiver.Size = New System.Drawing.Size(259, 181)
         Me.ucrTraitsReceiver.strNcFilePath = ""
-        Me.ucrTraitsReceiver.TabIndex = 16
+        Me.ucrTraitsReceiver.TabIndex = 2
         Me.ucrTraitsReceiver.ucrSelector = Nothing
         '
         'ucrSelectorVarietyLevel
@@ -156,11 +152,11 @@ Partial Class dlgTricotModellingGeneral
         Me.ucrSelectorVarietyLevel.bDropUnusedFilterLevels = False
         Me.ucrSelectorVarietyLevel.bShowHiddenColumns = False
         Me.ucrSelectorVarietyLevel.bUseCurrentFilter = True
-        Me.ucrSelectorVarietyLevel.Location = New System.Drawing.Point(19, 232)
+        Me.ucrSelectorVarietyLevel.Location = New System.Drawing.Point(15, 306)
         Me.ucrSelectorVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorVarietyLevel.Name = "ucrSelectorVarietyLevel"
-        Me.ucrSelectorVarietyLevel.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorVarietyLevel.TabIndex = 15
+        Me.ucrSelectorVarietyLevel.Size = New System.Drawing.Size(320, 274)
+        Me.ucrSelectorVarietyLevel.TabIndex = 3
         '
         'ucrSelectorTraitsRanking
         '
@@ -168,11 +164,11 @@ Partial Class dlgTricotModellingGeneral
         Me.ucrSelectorTraitsRanking.bDropUnusedFilterLevels = False
         Me.ucrSelectorTraitsRanking.bShowHiddenColumns = False
         Me.ucrSelectorTraitsRanking.bUseCurrentFilter = True
-        Me.ucrSelectorTraitsRanking.Location = New System.Drawing.Point(19, 20)
+        Me.ucrSelectorTraitsRanking.Location = New System.Drawing.Point(15, 15)
         Me.ucrSelectorTraitsRanking.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorTraitsRanking.Name = "ucrSelectorTraitsRanking"
-        Me.ucrSelectorTraitsRanking.Size = New System.Drawing.Size(213, 183)
-        Me.ucrSelectorTraitsRanking.TabIndex = 14
+        Me.ucrSelectorTraitsRanking.Size = New System.Drawing.Size(320, 274)
+        Me.ucrSelectorTraitsRanking.TabIndex = 0
         '
         'grpSecondCalc
         '
@@ -182,19 +178,21 @@ Partial Class dlgTricotModellingGeneral
         Me.grpSecondCalc.Controls.Add(Me.cmdLog)
         Me.grpSecondCalc.Controls.Add(Me.cmdTan)
         Me.grpSecondCalc.Controls.Add(Me.cmdExp)
-        Me.grpSecondCalc.Location = New System.Drawing.Point(390, 243)
+        Me.grpSecondCalc.Location = New System.Drawing.Point(587, 348)
+        Me.grpSecondCalc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpSecondCalc.Name = "grpSecondCalc"
-        Me.grpSecondCalc.Size = New System.Drawing.Size(126, 111)
-        Me.grpSecondCalc.TabIndex = 44
+        Me.grpSecondCalc.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpSecondCalc.Size = New System.Drawing.Size(189, 166)
+        Me.grpSecondCalc.TabIndex = 7
         Me.grpSecondCalc.TabStop = False
         '
         'cmdCos
         '
         Me.cmdCos.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCos.Location = New System.Drawing.Point(62, 10)
-        Me.cmdCos.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdCos.Location = New System.Drawing.Point(93, 15)
+        Me.cmdCos.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdCos.Name = "cmdCos"
-        Me.cmdCos.Size = New System.Drawing.Size(56, 30)
+        Me.cmdCos.Size = New System.Drawing.Size(84, 45)
         Me.cmdCos.TabIndex = 1
         Me.cmdCos.Text = "cos"
         Me.cmdCos.UseVisualStyleBackColor = True
@@ -202,10 +200,10 @@ Partial Class dlgTricotModellingGeneral
         'cmdSqrt
         '
         Me.cmdSqrt.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSqrt.Location = New System.Drawing.Point(5, 10)
-        Me.cmdSqrt.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSqrt.Location = New System.Drawing.Point(8, 15)
+        Me.cmdSqrt.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdSqrt.Name = "cmdSqrt"
-        Me.cmdSqrt.Size = New System.Drawing.Size(56, 30)
+        Me.cmdSqrt.Size = New System.Drawing.Size(84, 45)
         Me.cmdSqrt.TabIndex = 0
         Me.cmdSqrt.Text = "sqrt"
         Me.cmdSqrt.UseVisualStyleBackColor = True
@@ -213,10 +211,10 @@ Partial Class dlgTricotModellingGeneral
         'cmdSin
         '
         Me.cmdSin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSin.Location = New System.Drawing.Point(62, 42)
-        Me.cmdSin.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdSin.Location = New System.Drawing.Point(93, 63)
+        Me.cmdSin.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdSin.Name = "cmdSin"
-        Me.cmdSin.Size = New System.Drawing.Size(56, 30)
+        Me.cmdSin.Size = New System.Drawing.Size(84, 45)
         Me.cmdSin.TabIndex = 3
         Me.cmdSin.Text = "sin"
         Me.cmdSin.UseVisualStyleBackColor = True
@@ -224,10 +222,10 @@ Partial Class dlgTricotModellingGeneral
         'cmdLog
         '
         Me.cmdLog.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLog.Location = New System.Drawing.Point(5, 42)
-        Me.cmdLog.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdLog.Location = New System.Drawing.Point(8, 63)
+        Me.cmdLog.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdLog.Name = "cmdLog"
-        Me.cmdLog.Size = New System.Drawing.Size(56, 30)
+        Me.cmdLog.Size = New System.Drawing.Size(84, 45)
         Me.cmdLog.TabIndex = 2
         Me.cmdLog.Text = "log"
         Me.cmdLog.UseVisualStyleBackColor = True
@@ -235,10 +233,10 @@ Partial Class dlgTricotModellingGeneral
         'cmdTan
         '
         Me.cmdTan.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTan.Location = New System.Drawing.Point(62, 74)
-        Me.cmdTan.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdTan.Location = New System.Drawing.Point(93, 111)
+        Me.cmdTan.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdTan.Name = "cmdTan"
-        Me.cmdTan.Size = New System.Drawing.Size(56, 30)
+        Me.cmdTan.Size = New System.Drawing.Size(84, 45)
         Me.cmdTan.TabIndex = 5
         Me.cmdTan.Text = "tan"
         Me.cmdTan.UseVisualStyleBackColor = True
@@ -246,10 +244,10 @@ Partial Class dlgTricotModellingGeneral
         'cmdExp
         '
         Me.cmdExp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdExp.Location = New System.Drawing.Point(5, 74)
-        Me.cmdExp.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdExp.Location = New System.Drawing.Point(8, 111)
+        Me.cmdExp.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdExp.Name = "cmdExp"
-        Me.cmdExp.Size = New System.Drawing.Size(56, 30)
+        Me.cmdExp.Size = New System.Drawing.Size(84, 45)
         Me.cmdExp.TabIndex = 4
         Me.cmdExp.Text = "exp"
         Me.cmdExp.UseVisualStyleBackColor = True
@@ -267,20 +265,22 @@ Partial Class dlgTricotModellingGeneral
         Me.grpFirstCalc.Controls.Add(Me.cmdClear)
         Me.grpFirstCalc.Controls.Add(Me.cmdZero)
         Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
-        Me.grpFirstCalc.Location = New System.Drawing.Point(260, 243)
+        Me.grpFirstCalc.Location = New System.Drawing.Point(390, 348)
+        Me.grpFirstCalc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpFirstCalc.Name = "grpFirstCalc"
-        Me.grpFirstCalc.Size = New System.Drawing.Size(131, 111)
-        Me.grpFirstCalc.TabIndex = 43
+        Me.grpFirstCalc.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpFirstCalc.Size = New System.Drawing.Size(196, 166)
+        Me.grpFirstCalc.TabIndex = 6
         Me.grpFirstCalc.TabStop = False
         '
         'cmdMultiply
         '
         Me.cmdMultiply.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cmdMultiply.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMultiply.Location = New System.Drawing.Point(67, 10)
-        Me.cmdMultiply.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdMultiply.Location = New System.Drawing.Point(100, 15)
+        Me.cmdMultiply.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdMultiply.Name = "cmdMultiply"
-        Me.cmdMultiply.Size = New System.Drawing.Size(29, 30)
+        Me.cmdMultiply.Size = New System.Drawing.Size(44, 45)
         Me.cmdMultiply.TabIndex = 2
         Me.cmdMultiply.Text = "*"
         Me.cmdMultiply.UseVisualStyleBackColor = True
@@ -289,10 +289,10 @@ Partial Class dlgTricotModellingGeneral
         '
         Me.cmdColon.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cmdColon.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdColon.Location = New System.Drawing.Point(37, 10)
-        Me.cmdColon.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdColon.Location = New System.Drawing.Point(56, 15)
+        Me.cmdColon.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdColon.Name = "cmdColon"
-        Me.cmdColon.Size = New System.Drawing.Size(29, 30)
+        Me.cmdColon.Size = New System.Drawing.Size(44, 45)
         Me.cmdColon.TabIndex = 1
         Me.cmdColon.Text = ":"
         Me.cmdColon.UseVisualStyleBackColor = True
@@ -301,10 +301,10 @@ Partial Class dlgTricotModellingGeneral
         '
         Me.cmdPlus.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cmdPlus.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlus.Location = New System.Drawing.Point(7, 10)
-        Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPlus.Location = New System.Drawing.Point(10, 15)
+        Me.cmdPlus.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdPlus.Name = "cmdPlus"
-        Me.cmdPlus.Size = New System.Drawing.Size(29, 30)
+        Me.cmdPlus.Size = New System.Drawing.Size(44, 45)
         Me.cmdPlus.TabIndex = 0
         Me.cmdPlus.Text = "+"
         Me.cmdPlus.UseVisualStyleBackColor = True
@@ -313,10 +313,10 @@ Partial Class dlgTricotModellingGeneral
         '
         Me.cmdPower.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cmdPower.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPower.Location = New System.Drawing.Point(97, 41)
-        Me.cmdPower.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdPower.Location = New System.Drawing.Point(146, 62)
+        Me.cmdPower.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdPower.Name = "cmdPower"
-        Me.cmdPower.Size = New System.Drawing.Size(29, 32)
+        Me.cmdPower.Size = New System.Drawing.Size(44, 48)
         Me.cmdPower.TabIndex = 7
         Me.cmdPower.Text = "^"
         Me.cmdPower.UseVisualStyleBackColor = True
@@ -325,10 +325,10 @@ Partial Class dlgTricotModellingGeneral
         '
         Me.cmdClosingBracket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
         Me.cmdClosingBracket.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdClosingBracket.Location = New System.Drawing.Point(67, 41)
-        Me.cmdClosingBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdClosingBracket.Location = New System.Drawing.Point(100, 62)
+        Me.cmdClosingBracket.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdClosingBracket.Name = "cmdClosingBracket"
-        Me.cmdClosingBracket.Size = New System.Drawing.Size(29, 32)
+        Me.cmdClosingBracket.Size = New System.Drawing.Size(44, 48)
         Me.cmdClosingBracket.TabIndex = 6
         Me.cmdClosingBracket.Text = ")"
         Me.cmdClosingBracket.UseVisualStyleBackColor = True
@@ -337,10 +337,10 @@ Partial Class dlgTricotModellingGeneral
         '
         Me.cmdOpeningBracket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
         Me.cmdOpeningBracket.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOpeningBracket.Location = New System.Drawing.Point(37, 41)
-        Me.cmdOpeningBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdOpeningBracket.Location = New System.Drawing.Point(56, 62)
+        Me.cmdOpeningBracket.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdOpeningBracket.Name = "cmdOpeningBracket"
-        Me.cmdOpeningBracket.Size = New System.Drawing.Size(29, 32)
+        Me.cmdOpeningBracket.Size = New System.Drawing.Size(44, 48)
         Me.cmdOpeningBracket.TabIndex = 5
         Me.cmdOpeningBracket.Text = "("
         Me.cmdOpeningBracket.UseVisualStyleBackColor = True
@@ -349,10 +349,10 @@ Partial Class dlgTricotModellingGeneral
         '
         Me.cmdDiv.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cmdDiv.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDiv.Location = New System.Drawing.Point(97, 10)
-        Me.cmdDiv.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDiv.Location = New System.Drawing.Point(146, 15)
+        Me.cmdDiv.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdDiv.Name = "cmdDiv"
-        Me.cmdDiv.Size = New System.Drawing.Size(29, 30)
+        Me.cmdDiv.Size = New System.Drawing.Size(44, 45)
         Me.cmdDiv.TabIndex = 3
         Me.cmdDiv.Text = "/"
         Me.cmdDiv.UseVisualStyleBackColor = True
@@ -361,10 +361,10 @@ Partial Class dlgTricotModellingGeneral
         '
         Me.cmdDoubleBracket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
         Me.cmdDoubleBracket.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDoubleBracket.Location = New System.Drawing.Point(7, 41)
-        Me.cmdDoubleBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDoubleBracket.Location = New System.Drawing.Point(10, 62)
+        Me.cmdDoubleBracket.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdDoubleBracket.Name = "cmdDoubleBracket"
-        Me.cmdDoubleBracket.Size = New System.Drawing.Size(29, 32)
+        Me.cmdDoubleBracket.Size = New System.Drawing.Size(44, 48)
         Me.cmdDoubleBracket.TabIndex = 4
         Me.cmdDoubleBracket.Text = "( )"
         Me.cmdDoubleBracket.UseVisualStyleBackColor = True
@@ -372,10 +372,10 @@ Partial Class dlgTricotModellingGeneral
         'cmdClear
         '
         Me.cmdClear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdClear.Location = New System.Drawing.Point(67, 74)
-        Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdClear.Location = New System.Drawing.Point(100, 111)
+        Me.cmdClear.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(60, 30)
+        Me.cmdClear.Size = New System.Drawing.Size(90, 45)
         Me.cmdClear.TabIndex = 10
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
@@ -384,10 +384,10 @@ Partial Class dlgTricotModellingGeneral
         '
         Me.cmdZero.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.75!)
         Me.cmdZero.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdZero.Location = New System.Drawing.Point(37, 74)
-        Me.cmdZero.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdZero.Location = New System.Drawing.Point(56, 111)
+        Me.cmdZero.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdZero.Name = "cmdZero"
-        Me.cmdZero.Size = New System.Drawing.Size(29, 30)
+        Me.cmdZero.Size = New System.Drawing.Size(44, 45)
         Me.cmdZero.TabIndex = 9
         Me.cmdZero.Text = "l()"
         Me.cmdZero.UseVisualStyleBackColor = True
@@ -396,10 +396,10 @@ Partial Class dlgTricotModellingGeneral
         '
         Me.cmdMinus.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
         Me.cmdMinus.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMinus.Location = New System.Drawing.Point(7, 74)
-        Me.cmdMinus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdMinus.Location = New System.Drawing.Point(10, 111)
+        Me.cmdMinus.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cmdMinus.Name = "cmdMinus"
-        Me.cmdMinus.Size = New System.Drawing.Size(29, 30)
+        Me.cmdMinus.Size = New System.Drawing.Size(44, 45)
         Me.cmdMinus.TabIndex = 8
         Me.cmdMinus.Text = "-"
         Me.cmdMinus.UseVisualStyleBackColor = True
@@ -408,21 +408,21 @@ Partial Class dlgTricotModellingGeneral
         '
         Me.ucrReceiverExpressionModellingGeneral.AutoSize = True
         Me.ucrReceiverExpressionModellingGeneral.frmParent = Me
-        Me.ucrReceiverExpressionModellingGeneral.Location = New System.Drawing.Point(260, 209)
-        Me.ucrReceiverExpressionModellingGeneral.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrReceiverExpressionModellingGeneral.Location = New System.Drawing.Point(390, 306)
+        Me.ucrReceiverExpressionModellingGeneral.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrReceiverExpressionModellingGeneral.Name = "ucrReceiverExpressionModellingGeneral"
         Me.ucrReceiverExpressionModellingGeneral.Selector = Nothing
-        Me.ucrReceiverExpressionModellingGeneral.Size = New System.Drawing.Size(256, 30)
+        Me.ucrReceiverExpressionModellingGeneral.Size = New System.Drawing.Size(384, 45)
         Me.ucrReceiverExpressionModellingGeneral.strNcFilePath = ""
-        Me.ucrReceiverExpressionModellingGeneral.TabIndex = 45
+        Me.ucrReceiverExpressionModellingGeneral.TabIndex = 5
         Me.ucrReceiverExpressionModellingGeneral.ucrSelector = Nothing
         '
         'dlgTricotModellingGeneral
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(534, 561)
+        Me.ClientSize = New System.Drawing.Size(797, 797)
         Me.Controls.Add(Me.ucrReceiverExpressionModellingGeneral)
         Me.Controls.Add(Me.grpSecondCalc)
         Me.Controls.Add(Me.grpFirstCalc)
@@ -438,6 +438,7 @@ Partial Class dlgTricotModellingGeneral
         Me.Controls.Add(Me.ucrSelectorVarietyLevel)
         Me.Controls.Add(Me.ucrSelectorTraitsRanking)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgTricotModellingGeneral"
