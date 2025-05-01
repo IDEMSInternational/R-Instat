@@ -20,7 +20,6 @@ Public Class sdgDisplayModelOptions
     Private clsSummaryFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction, clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
     Private clsCoefFunction, clsStatsFunction As RFunction
     Private clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction As RFunction
-    Private bRCodeSet As Boolean = True
     Private bControlsInitialised As Boolean = False
     Private clsRSyntax As New RSyntax
 
@@ -29,7 +28,6 @@ Public Class sdgDisplayModelOptions
     End Sub
 
     Private Sub InitialiseDialog()
-        ' InitialiseTabs()
         ucrChkModel.SetText("Summary")
         ucrChkModel.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"}, True)
         ucrChkModel.AddRSyntaxContainsFunctionNamesCondition(False, {"summary"}, False)
@@ -57,7 +55,6 @@ Public Class sdgDisplayModelOptions
         ucrNudConfLevel.Increment = 0.01
         ucrNudConfLevel.SetMinMax(0, 1)
         ucrNudConfLevel.SetLinkedDisplayControl(lblConfLevel)
-        'ucrNudConfLevel.SetRDefault(0.95)
 
         ucrChkAIC.SetText("AIC")
         ucrChkAIC.AddRSyntaxContainsFunctionNamesCondition(True, {"aic"}, True)
@@ -133,7 +130,6 @@ Public Class sdgDisplayModelOptions
 
     Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction, clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction, clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction, clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, Optional bReset As Boolean = False)
         ucrNudConfLevel.SetText("0.95")
-        bRCodeSet = False
         If Not bControlsInitialised Then
             InitialiseDialog()
         End If
