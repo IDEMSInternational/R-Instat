@@ -114,8 +114,6 @@ Public Class dlgTricotModelOneVarCov
         clsAddObjectBarFunction = New RFunction
         clsHeatFunction = New RFunction
         clsPlotFunction = New RFunction
-        'clsBarfunction = New RFunction
-        'clsAnnovaFunction = New RFunction
         clsSummaryFunction = New RFunction
         clsAICFunction = New RFunction
         clsCoefFunction = New RFunction
@@ -125,14 +123,8 @@ Public Class dlgTricotModelOneVarCov
         clsItemsFunction = New RFunction
         clsPariPropFunction = New RFunction
         clsQuasivarianceFunction = New RFunction
-        'clsReliabilityFunction = New RFunction
         clsSecondEstimatesFunction = New RFunction
         clsStatsFunction = New RFunction
-        'clsRegretFunction = New RFunction
-        'clsTopItemFunction = New RFunction
-        'clsNodeRuleFunction = New RFunction
-        'clsNodeLabFuction = New RFunction
-        'clsSndgetVarmataFunction = New RFunction
         clsLevelFunction = New RFunction
         clsFactorFunction = New RFunction
         clsGetDataFrameFunction = New RFunction
@@ -344,7 +336,6 @@ Public Class dlgTricotModelOneVarCov
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
-
         End If
     End Sub
 
@@ -443,7 +434,6 @@ Public Class dlgTricotModelOneVarCov
         If sdgDisplayModelOptions.ucrChkHeat.Checked Then
             ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=6)
         Else
-
             ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=6)
         End If
     End Sub
