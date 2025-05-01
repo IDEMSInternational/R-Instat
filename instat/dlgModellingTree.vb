@@ -339,6 +339,7 @@ Public Class dlgModellingTree
         clsSecondEstimatesFunction.AddParameter(".f", "~fitted.values(.x)", iPosition:=1)
         clsSecondEstimatesFunction.iCallType = 2
 
+        clsPairwiseProbFunction.SetPackageName("gosset")
         clsPairwiseProbFunction.SetRCommand("pairwise_probs")
         clsPairwiseProbFunction.AddParameter("x", clsRFunctionParameter:=clscoefFunction, bIncludeArgumentName:=False, iPosition:=0)
 
@@ -354,14 +355,14 @@ Public Class dlgModellingTree
 
         clsReliabilityFunction.SetPackageName("purrr")
         clsReliabilityFunction.SetRCommand("map")
-        clsReliabilityFunction.AddParameter(".x", "purrr::imap(.x = mod_list,  .f = ~reliability(.x, ref = variety_baseline[1]))", iPosition:=0)
+        clsReliabilityFunction.AddParameter(".x", "purrr::imap(.x = mod_list,  .f = ~gosset::reliability(.x, ref = variety_baseline[1]))", iPosition:=0)
         clsReliabilityFunction.AddParameter(".f", "~ .x %>% dplyr::mutate(reliability_rescaled = round(reliability / 0.5 - 1, 2))", iPosition:=1)
         clsReliabilityFunction.iCallType = 2
 
         clsItemsParFunction.SetPackageName("purrr")
         clsItemsParFunction.SetRCommand("map")
         clsItemsParFunction.AddParameter(".x", "mod_list", iPosition:=0)
-        clsItemsParFunction.AddParameter(".f", "~itempar(.x)", iPosition:=1)
+        clsItemsParFunction.AddParameter(".f", "~PlackettLuce::itempar(.x)", iPosition:=1)
         clsItemsParFunction.iCallType = 2
 
         clsRegretFunction.SetPackageName("purrr")
@@ -385,7 +386,7 @@ Public Class dlgModellingTree
         clsTopItemsFunction.SetPackageName("purrr")
         clsTopItemsFunction.SetRCommand("map")
         clsTopItemsFunction.AddParameter(".x", "mod_list")
-        clsTopItemsFunction.AddParameter(".f", "~gosset::top_items(.x, top = 3))")
+        clsTopItemsFunction.AddParameter(".f", "~gosset::top_items(.x, top = 3)")
         clsTopItemsFunction.iCallType = 2
 
         clsAnnovaFunction.SetPackageName("purrr")
