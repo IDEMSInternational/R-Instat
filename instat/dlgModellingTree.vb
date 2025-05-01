@@ -36,13 +36,13 @@ Public Class dlgModellingTree
     'Sub dialog Functions and Operators
     Private clsSummaryFunction, clsEstimatesFunction, clscoefFunction, clsUnListAICFunction, clsAICFunction, clsAICMainFunction As New RFunction
     Private clsDevianceFunction, clsDevianceMainFunction, clsSecondEstimatesFunction As New RFunction
-    Private clsRegretFunction, clsNodeLabelsFunction, clsNodeRulesFunction, clsTopItemsFunction, clsTreeFunction As New RFunction
+    Private clsRegretFunction, clsNodeLabelsFunction, clsNodeRulesFunction, clsTopItemsFunction As New RFunction
     Private clsPairwiseProbFunction, clsPairwiseProbMainFunction, clsReliabilityFunction, clsItemsParFunction As New RFunction
     Private clsCoefOperator, clsAICOperator, clsDevianceOperator, clsPairwiseProbOperator, clsStatsOperator, clsModelOperator As New ROperator
     Private clsAnnovaFunction, clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction As New RFunction
     Private clsWrapBarFunction, clsWrapPlotFunction, clsGetObjectHeatFunction, clsGetObjectPlotFunction, clsGetObjectBarFunction As New RFunction
 
-    Private clsAddObjectHeatFunction, clsAddObjectPlotFunction, clsAddObjectBarFunction, clsHeatFunction As New RFunction
+    Private clsAddObjectHeatFunction, clsAddObjectPlotFunction, clsAddObjectBarFunction, clsHeatFunction, clsTreeFunction As New RFunction
     Private clsPlotFunction, clsBarfunction As New RFunction
 
     Public bResetSubDialog As Boolean = False
@@ -318,7 +318,7 @@ Public Class dlgModellingTree
         clsAICMainFunction.SetRCommand("map")
         clsAICMainFunction.AddParameter(".x", "mod_list", iPosition:=0)
         clsAICMainFunction.AddParameter(".f", clsROperatorParameter:=clsAICOperator, iPosition:=1)
-        clsAICMainFunction.icallType = 2
+        clsAICMainFunction.iCallType = 2
 
         clsDevianceFunction.SetRCommand("deviance")
         clsDevianceFunction.AddParameter("x", ".x", bIncludeArgumentName:=False)
@@ -433,39 +433,40 @@ Public Class dlgModellingTree
         clsWrapPlotFunction.SetPackageName("patchwork")
         clsWrapPlotFunction.SetRCommand("wrap_plots")
         clsWrapPlotFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
-        clsWrapPlotFunction.SetAssignTo("last_graph")
+        clsWrapPlotFunction.bExcludeAssignedFunctionOutput = False
+        clsWrapPlotFunction.iCallType = 3
 
         clsHeatFunction.SetPackageName("gosset")
         clsHeatFunction.SetRCommand("worth_map")
-        clsHeatFunction.AddParameter(".x", "mod", iPosition:=0, bIncludeArgumentName:=False)
-        clsHeatFunction.AddParameter("labels", "names(mod)", iPosition:=1)
+        clsHeatFunction.AddParameter(".x", "mod_list", iPosition:=0, bIncludeArgumentName:=False)
+        clsHeatFunction.AddParameter("labels", "names(mod_list)", iPosition:=1)
         clsHeatFunction.SetAssignTo("last_graph")
 
         clsPlotFunction.SetPackageName("purrr")
         clsPlotFunction.SetRCommand("map2")
-        clsPlotFunction.AddParameter(".x", "mod", iPosition:=0)
-        clsPlotFunction.AddParameter(".y", "names(mod)", iPosition:=1)
+        clsPlotFunction.AddParameter(".x", "mod_list", iPosition:=0)
+        clsPlotFunction.AddParameter(".y", "names(mod_list)", iPosition:=1)
         clsPlotFunction.AddParameter(".f", "~gosset:::plot.PlackettLuce(x = .x) + ggplot2::ggtitle(.y)", iPosition:=2)
         clsPlotFunction.SetAssignTo("list_of_plots")
 
         clsBarfunction.SetPackageName("purrr")
         clsBarfunction.SetRCommand("map2")
-        clsBarfunction.AddParameter(".x", "mod", iPosition:=0)
-        clsBarfunction.AddParameter(".y", "names(mod)", iPosition:=1)
+        clsBarfunction.AddParameter(".x", "mod_list", iPosition:=0)
+        clsBarfunction.AddParameter(".y", "names(mod_list)", iPosition:=1)
         clsBarfunction.AddParameter(".f", "~gosset::worth_bar(.x) + ggplot2::ggtitle(.y)", iPosition:=2)
         clsBarfunction.SetAssignTo("list_of_plots")
 
-        clsGetObjectHeatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        clsGetObjectHeatFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        clsGetObjectHeatFunction.AddParameter("as_file", "TRUE", iPosition:=2)
+        'clsGetObjectHeatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        'clsGetObjectHeatFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        'clsGetObjectHeatFunction.AddParameter("as_file", "TRUE", iPosition:=2)
 
-        clsGetObjectPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        clsGetObjectPlotFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        clsGetObjectPlotFunction.AddParameter("as_file", "TRUE", iPosition:=2)
+        'clsGetObjectPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        'clsGetObjectPlotFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        'clsGetObjectPlotFunction.AddParameter("as_file", "TRUE", iPosition:=2)
 
-        clsGetObjectBarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        clsGetObjectBarFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        clsGetObjectBarFunction.AddParameter("as_file", "TRUE", iPosition:=2)
+        'clsGetObjectBarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        'clsGetObjectBarFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        'clsGetObjectBarFunction.AddParameter("as_file", "TRUE", iPosition:=2)
 
         clsAddObjectHeatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
         clsAddObjectHeatFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
@@ -473,17 +474,17 @@ Public Class dlgModellingTree
         clsAddObjectHeatFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
         clsAddObjectHeatFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
 
-        clsAddObjectPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
-        clsAddObjectPlotFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        clsAddObjectPlotFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
-        clsAddObjectPlotFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
-        clsAddObjectPlotFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
+        'clsAddObjectPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
+        'clsAddObjectPlotFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        'clsAddObjectPlotFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
+        'clsAddObjectPlotFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
+        'clsAddObjectPlotFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
 
-        clsAddObjectBarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
-        clsAddObjectBarFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        clsAddObjectBarFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
-        clsAddObjectBarFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
-        clsAddObjectBarFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
+        'clsAddObjectBarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
+        'clsAddObjectBarFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
+        'clsAddObjectBarFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
+        'clsAddObjectBarFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
+        'clsAddObjectBarFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -511,11 +512,11 @@ Public Class dlgModellingTree
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
-        ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsAddObjectBarFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
-        ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsAddObjectHeatFunction, New RParameter("data_name", 0), iAdditionalPairNo:=2)
-        ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsAddObjectPlotFunction, New RParameter("data_name", 0), iAdditionalPairNo:=3)
-        ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsGetObjectHeatFunction, New RParameter("data_name", 0), iAdditionalPairNo:=4)
-        ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsGetObjectPlotFunction, New RParameter("data_name", 0), iAdditionalPairNo:=5)
+        'ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsAddObjectBarFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
+        'ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsAddObjectHeatFunction, New RParameter("data_name", 0), iAdditionalPairNo:=2)
+        'ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsAddObjectPlotFunction, New RParameter("data_name", 0), iAdditionalPairNo:=3)
+        'ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsGetObjectHeatFunction, New RParameter("data_name", 0), iAdditionalPairNo:=4)
+        'ucrSelectorByDataFrameAddRemoveForModellingTree.AddAdditionalCodeParameterPair(clsGetObjectPlotFunction, New RParameter("data_name", 0), iAdditionalPairNo:=5)
 
         ucrModelName.AddAdditionalRCode(clsModelOperator, bReset)
         ucrModelName.SetRCode(clsModelOperator)
@@ -609,26 +610,24 @@ Public Class dlgModellingTree
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
 
     End Sub
-
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction,
-            clsNewCoefFunction:=clscoefFunction, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction,
+        sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction, clsNewCoefFunction:=clscoefFunction, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction,
             clsNewEstimatesFunction:=clsEstimatesFunction, clsNewDevianceFunction:=clsDevianceMainFunction,
             clsNewPariPropFunction:=clsPairwiseProbMainFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
             clsNewItemsFunction:=clsItemsParFunction, clsNewRegretFunction:=clsRegretFunction, clsNewNodeLabFuction:=clsNodeLabelsFunction,
             clsNewNodeRuleFunction:=clsNodeRulesFunction, clsNewTopItemFunction:=clsTopItemsFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewAICFunction:=clsUnListAICFunction,
             bReset:=bResetSubDialog, clsNewAnnovaFunction:=clsAnnovaFunction,
             clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewStatsFunction:=clsStatsFunction,
-            clsNewQuasivarianceFunction:=clsQuasivarianceFunction,
-            clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction,
+            clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction,
             clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
-            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction,
-            clsNewTreeFunction:=clsTreeFunction
-        )
+            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction
+)
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = False
         sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = False
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = False
+        sdgDisplayModelOptions.rdoPlot.Enabled = False
+        sdgDisplayModelOptions.rdoTree.Enabled = False
         sdgDisplayModelOptions.ShowDialog()
         bResetSubDialog = False
     End Sub
@@ -767,10 +766,3 @@ Public Class dlgModellingTree
     End Sub
 
 End Class
-
-
-
-
-
-
-
