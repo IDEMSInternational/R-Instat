@@ -5,7 +5,7 @@ Public Class dlgInstallRPackage
     Private bFirstLoad As Boolean = True
     Private bUniqueChecked As Boolean = False
     Private clsInstallPackage As New RFunction
-    Private clsRepositoryFunction, clsDetachFunction As New RFunction
+    Private clsRepositoryFunction, clsDetachFunction, clsDisplayRFunction As New RFunction
     Private clsBeforeOptionsFunc As New RFunction
     Private clsAfterOptionsFunc As New RFunction
     Private clsDummyFunction As New RFunction
@@ -69,6 +69,7 @@ Public Class dlgInstallRPackage
         clsBeforeOptionsFunc = New RFunction
         clsAfterOptionsFunc = New RFunction
         clsRepositoryFunction = New RFunction
+        clsDisplayRFunction = New RFunction
         clsDetachFunction = New RFunction
         clsDummyFunction = New RFunction
         bUniqueChecked = False
@@ -82,7 +83,7 @@ Public Class dlgInstallRPackage
         clsBeforeOptionsFunc.AddParameter(strParameterName:="warn", strParameterValue:="2")
 
         clsDetachFunction.SetPackageName("instatExtras")
-        clsDetachFunction.SetRCommand("detach")
+        clsDetachFunction.SetRCommand("detach_package")
         clsDetachFunction.AddParameter("unload ", "TRUE", iPosition:=1)
 
         clsRepositoryFunction.SetRCommand("install_github")
@@ -119,6 +120,7 @@ Public Class dlgInstallRPackage
         CheckEnable()
         TestOkEnabled()
         GithubOption()
+        AddRemoveLibraryFunction()
     End Sub
 
     Private Sub Check()
@@ -239,7 +241,7 @@ Public Class dlgInstallRPackage
     End Sub
 
     Private Sub cmdCheck_Click(sender As Object, e As EventArgs) Handles cmdCheck.Click
-        check()
+        Check()
     End Sub
 
     Private Sub ucrPnlRPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRPackages.ControlValueChanged
@@ -247,6 +249,8 @@ Public Class dlgInstallRPackage
             ucrBase.clsRsyntax.SetBaseRFunction(clsInstallPackage)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsBeforeOptionsFunc)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAfterOptionsFunc)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDetachFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDisplayRFunction)
         Else
             ucrBase.clsRsyntax.AddToBeforeCodes(clsDetachFunction)
             ucrBase.clsRsyntax.SetBaseRFunction(clsRepositoryFunction)
@@ -258,17 +262,31 @@ Public Class dlgInstallRPackage
 
     Private Sub ucrInputRepositoryName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRepositoryName.ControlValueChanged
         TestOkEnabled()
-        GithubOption()
+        Call GithubOption()
         bUniqueChecked = False
     End Sub
 
     Private Sub GithubOption()
         If Not (ucrInputPackage.IsEmpty AndAlso ucrInputRepositoryName.IsEmpty) Then
             clsDetachFunction.AddParameter("package", Chr(34) & "package:" & ucrInputPackage.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-            clsRepositoryFunction.AddParameter("paste", Chr(34) & ucrInputRepositoryName.GetText & "/" & ucrInputPackage.GetText() & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+            clsRepositoryFunction.AddParameter("paste", Chr(34) & ucrInputRepositoryName.GetText & "/" & ucrInputPackage.GetText() & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         Else
             clsDetachFunction.RemoveParameterByName("package")
             clsRepositoryFunction.RemoveParameterByName("paste")
+        End If
+    End Sub
+
+
+    Private Sub AddRemoveLibraryFunction()
+        Dim selectedPackage As String = ucrInputPackage.GetText
+        Dim allowedPackages As New List(Of String) From {"instatExtras", "instatClimatic", "instatCalculations", "databook"}
+
+        If allowedPackages.Contains(selectedPackage) Then
+            clsDisplayRFunction.SetRCommand("library")
+            clsDisplayRFunction.AddParameter("library", Chr(34) & selectedPackage & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDisplayRFunction)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDisplayRFunction)
         End If
     End Sub
 
