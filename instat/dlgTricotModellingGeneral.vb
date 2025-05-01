@@ -386,22 +386,10 @@ Public Class dlgTricotModellingGeneral
         clsPlotFunction.AddParameter(".f", "~gosset:::plot.PlackettLuce(x = .x) + ggplot2::ggtitle(.y)", iPosition:=2)
         clsPlotFunction.SetAssignTo("list_of_plots")
 
-        clsBarfunction.SetPackageName("purrr")
-        clsBarfunction.SetRCommand("map2")
-        clsBarfunction.AddParameter(".x", "mod_list", iPosition:=0)
-        clsBarfunction.AddParameter(".y", "names(mod_list)", iPosition:=1)
-        clsBarfunction.AddParameter(".f", "~gosset::worth_bar(.x) + ggplot2::ggtitle(.y)", iPosition:=2)
-        clsBarfunction.SetAssignTo("list_of_plots")
-
         clsWrapPlotFunction.SetPackageName("patchwork")
         clsWrapPlotFunction.SetRCommand("wrap_plots")
         clsWrapPlotFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
         clsWrapPlotFunction.SetAssignTo("last_graph")
-
-        clsWrapBarFunction.SetPackageName("patchwork")
-        clsWrapBarFunction.SetRCommand("wrap_plots")
-        clsWrapBarFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
-        clsWrapBarFunction.SetAssignTo("last_graph")
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetRankingItemsFunction, iPosition:=3)
