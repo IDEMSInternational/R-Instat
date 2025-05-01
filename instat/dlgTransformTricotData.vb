@@ -39,6 +39,7 @@ Public Class dlgTransformTricotData
         OverallSymbolOperator = New ROperator
         bUniqueChecked = False
         bResetSubdialog = True
+        ucrBase.clsRsyntax.iCallType = 2
         ucrSelectorTricotData.Reset()
         ucrInputTricotData.SetText("")
         ucrInputTricotData.txtInput.BackColor = Color.White
