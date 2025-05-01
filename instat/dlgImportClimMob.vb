@@ -44,6 +44,7 @@ Public Class dlgImportfromClimMob
 
     Private Sub InitialiseDialog()
 
+        ucrBase.iHelpTopicID = 650
         ucrInputServerName.SetItems({strClimmob3, str1000FARMS, strAVISA, strRTB})
         ucrInputServerName.SetDropDownStyleAsNonEditable()
         ucrInputServerName.SetLinkedDisplayControl(lblServerName)
@@ -86,7 +87,7 @@ Public Class dlgImportfromClimMob
 
         clsFirstOperator.SetOperation("$")
         clsFirstOperator.AddParameter("left", clsRFunctionParameter:=clsProjectsFunction, iPosition:=0)
-        clsFirstOperator.AddParameter("right", "project_id", iPosition:=1)
+        clsFirstOperator.AddParameter("right", "project_code", iPosition:=1)
         clsFirstOperator.bSpaceAroundOperation = False
 
         clsSecondOperator.SetOperation("%>%")
@@ -96,7 +97,7 @@ Public Class dlgImportfromClimMob
         clsSecondOperator.SetAssignTo("user_owner")
 
         clsThirdOperator.SetOperation("==")
-        clsThirdOperator.AddParameter("left", "project_id", iPosition:=0)
+        clsThirdOperator.AddParameter("left", "project_code", iPosition:=0)
         clsThirdOperator.AddParameter("right", Chr(34) & ucrInputChooseForm.GetText & Chr(34), iPosition:=1) ' right = value in the ucrInputBox
         clsThirdOperator.bSpaceAroundOperation = False
 
@@ -163,7 +164,7 @@ Public Class dlgImportfromClimMob
             clsThirdOperator.AddParameter("right", Chr(34) & ucrInputChooseForm.GetText & Chr(34))
         End If
     End Sub
-
+    
     Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdKey.Click
         sdgImportFromClimMob.Setup(clsKeysFunction.GetParameter("key"))
         sdgImportFromClimMob.ShowDialog()
