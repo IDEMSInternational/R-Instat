@@ -16,7 +16,7 @@ Public Class dlgTricotModellingGeneral
             clsNodeRulesFunction, clsTopItemsFunction, clsAICFunction, clsUnListAICFunction, clsAICMainFunction, clsAnnovaFunction,
             clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction, clsGetObjectPlotFunction,
             clsGetObjectBarFunction, clsAddObjectHeatFunction, clsAddObjectPlotFunction, clsAddObjectBarFunction, clsHeatFunction,
-            clsPlotFunction, clsBarfunction, clsWrapPlotFunction, clsWrapBarFunction As New RFunction
+            clsPlotFunction, clsBarfunction, clsWrapPlotFunction, clsWrapBarFunction, clsTreeFunction As New RFunction
     Private clsObjectOperator, clsTildeOperator, clsTilde2Operator, clsBracketOperator, clsDevianceOperator, clsPairwiseProbOperator,
             clsNamesOperator, clsModelOperator, clsSpaceOperator, clsTilde3Operator, clsEmptySpaceOperator, clsCoefOperator,
             clsAICOperator, clsStatsOperator As New ROperator
@@ -552,15 +552,13 @@ Public Class dlgTricotModellingGeneral
             clsNewQuasivarianceFunction:=clsQuasivarianceFunction,
             clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction,
             clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
-            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction
+            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction
         )
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkReability.Enabled = False
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = False
-        sdgDisplayModelOptions.ucrChkRegret.Enabled = False
-        sdgDisplayModelOptions.ucrChkNodeLabel.Enabled = False
-        sdgDisplayModelOptions.ucrChkNodeRules.Enabled = False
-        sdgDisplayModelOptions.ucrChkTopItem.Enabled = False
+        sdgDisplayModelOptions.grpTrees.Enabled = False
+        sdgDisplayModelOptions.rdoTree.Enabled = False
         sdgDisplayModelOptions.ShowDialog()
         bResetSubDialog = False
     End Sub
