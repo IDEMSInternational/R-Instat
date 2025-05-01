@@ -54,6 +54,7 @@ Public Class dlgModellingTree
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+            bUniqueChecked = False
         End If
         If bReset Then
             SetDefaults()
@@ -62,7 +63,6 @@ Public Class dlgModellingTree
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
-        bUniqueChecked = False
     End Sub
 
     Private Sub InitialiseDialog()
@@ -176,6 +176,7 @@ Public Class dlgModellingTree
 
         ucrInputCheck.SetName("")
         ucrInputCheck.txtInput.BackColor = Color.White
+        ucrInputCheck.IsReadOnly = True
 
         clsGetVariablesMetaDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetVariablesMetaDataFunction.AddParameter("data_name", Chr(34) & ucrSelectorByDataFrameAddRemoveForModellingTree.strCurrentDataFrame & Chr(34), bIncludeArgumentName:=False)
@@ -338,6 +339,7 @@ Public Class dlgModellingTree
         clsSecondEstimatesFunction.AddParameter(".f", "~fitted.values(.x)", iPosition:=1)
         clsSecondEstimatesFunction.iCallType = 2
 
+        clsPairwiseProbFunction.SetPackageName("gosset")
         clsPairwiseProbFunction.SetRCommand("pairwise_probs")
         clsPairwiseProbFunction.AddParameter("x", clsRFunctionParameter:=clscoefFunction, bIncludeArgumentName:=False, iPosition:=0)
 
@@ -353,14 +355,14 @@ Public Class dlgModellingTree
 
         clsReliabilityFunction.SetPackageName("purrr")
         clsReliabilityFunction.SetRCommand("map")
-        clsReliabilityFunction.AddParameter(".x", "purrr::imap(.x = mod_list,  .f = ~reliability(.x, ref = variety_baseline[1]))", iPosition:=0)
+        clsReliabilityFunction.AddParameter(".x", "purrr::imap(.x = mod_list,  .f = ~gosset::reliability(.x, ref = variety_baseline[1]))", iPosition:=0)
         clsReliabilityFunction.AddParameter(".f", "~ .x %>% dplyr::mutate(reliability_rescaled = round(reliability / 0.5 - 1, 2))", iPosition:=1)
         clsReliabilityFunction.iCallType = 2
 
         clsItemsParFunction.SetPackageName("purrr")
         clsItemsParFunction.SetRCommand("map")
         clsItemsParFunction.AddParameter(".x", "mod_list", iPosition:=0)
-        clsItemsParFunction.AddParameter(".f", "~itempar(.x)", iPosition:=1)
+        clsItemsParFunction.AddParameter(".f", "~PlackettLuce::itempar(.x)", iPosition:=1)
         clsItemsParFunction.iCallType = 2
 
         clsRegretFunction.SetPackageName("purrr")
@@ -384,7 +386,7 @@ Public Class dlgModellingTree
         clsTopItemsFunction.SetPackageName("purrr")
         clsTopItemsFunction.SetRCommand("map")
         clsTopItemsFunction.AddParameter(".x", "mod_list")
-        clsTopItemsFunction.AddParameter(".f", "~gosset::top_items(.x, top = 3))")
+        clsTopItemsFunction.AddParameter(".f", "~gosset::top_items(.x, top = 3)")
         clsTopItemsFunction.iCallType = 2
 
         clsAnnovaFunction.SetPackageName("purrr")
@@ -624,7 +626,7 @@ Public Class dlgModellingTree
             clsNewAddObjectBarFunction:=clsAddObjectBarFunction, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
             clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewGetObjectHeatFunction:=clsHeatFunction
         )
-        sdgDisplayModelOptions.ucrChkANOVA.Enabled = False And
+        sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = False
         sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = False
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = False
@@ -764,12 +766,4 @@ Public Class dlgModellingTree
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ucrReceiverExpressionModellingTree.AddtoCombobox(ucrReceiverExpressionModellingTree.GetText)
     End Sub
-
 End Class
-
-
-
-
-
-
-
