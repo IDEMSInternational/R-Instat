@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class sdgTricotModelOptions
+Partial Class sdgTransformations
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,7 +24,7 @@ Partial Class sdgTricotModelOptions
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'sdgTricotModelOptions
+        'sdgTransformations
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -32,10 +32,10 @@ Partial Class sdgTricotModelOptions
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "sdgTricotModelOptions"
+        Me.Name = "sdgTransformations"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Model Options"
+        Me.Text = "Transform Tricot"
         Me.ResumeLayout(False)
 
     End Sub
