@@ -36,7 +36,7 @@ Public Class dlgModellingTree
     'Sub dialog Functions and Operators
     Private clsSummaryFunction, clsEstimatesFunction, clscoefFunction, clsUnListAICFunction, clsAICFunction, clsAICMainFunction As New RFunction
     Private clsDevianceFunction, clsDevianceMainFunction, clsSecondEstimatesFunction As New RFunction
-    Private clsRegretFunction, clsNodeLabelsFunction, clsNodeRulesFunction, clsTopItemsFunction As New RFunction
+    Private clsRegretFunction, clsNodeLabelsFunction, clsNodeRulesFunction, clsTopItemsFunction, clsTreeFunction As New RFunction
     Private clsPairwiseProbFunction, clsPairwiseProbMainFunction, clsReliabilityFunction, clsItemsParFunction As New RFunction
     Private clsCoefOperator, clsAICOperator, clsDevianceOperator, clsPairwiseProbOperator, clsStatsOperator, clsModelOperator As New ROperator
     Private clsAnnovaFunction, clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction As New RFunction
@@ -622,7 +622,8 @@ Public Class dlgModellingTree
             clsNewQuasivarianceFunction:=clsQuasivarianceFunction,
             clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction,
             clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
-            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction
+            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction,
+            clsNewTreeFunction:=clsTreeFunction
         )
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = False
