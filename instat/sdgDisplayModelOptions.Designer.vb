@@ -25,11 +25,13 @@ Partial Class sdgDisplayModelOptions
         Me.lblNumber = New System.Windows.Forms.Label()
         Me.lblConfLevel = New System.Windows.Forms.Label()
         Me.tpGraphics = New System.Windows.Forms.TabPage()
+        Me.rdoBar = New System.Windows.Forms.RadioButton()
+        Me.rdoMap = New System.Windows.Forms.RadioButton()
+        Me.rdoPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoNoPlot = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlPlots = New instat.UcrPanel()
         Me.ucrChkLogGraphic = New instat.ucrCheck()
         Me.ucrSavePlots = New instat.ucrSave()
-        Me.ucrChkHeat = New instat.ucrCheck()
-        Me.ucrChkBar = New instat.ucrCheck()
-        Me.ucrChkPlot = New instat.ucrCheck()
         Me.tpDisplay = New System.Windows.Forms.TabPage()
         Me.ucrNudNumber = New instat.ucrNud()
         Me.ucrChkTopItem = New instat.ucrCheck()
@@ -80,10 +82,12 @@ Partial Class sdgDisplayModelOptions
         'tpGraphics
         '
         Me.tpGraphics.Controls.Add(Me.ucrChkLogGraphic)
+        Me.tpGraphics.Controls.Add(Me.rdoBar)
+        Me.tpGraphics.Controls.Add(Me.rdoMap)
+        Me.tpGraphics.Controls.Add(Me.rdoPlot)
+        Me.tpGraphics.Controls.Add(Me.rdoNoPlot)
+        Me.tpGraphics.Controls.Add(Me.ucrPnlPlots)
         Me.tpGraphics.Controls.Add(Me.ucrSavePlots)
-        Me.tpGraphics.Controls.Add(Me.ucrChkHeat)
-        Me.tpGraphics.Controls.Add(Me.ucrChkBar)
-        Me.tpGraphics.Controls.Add(Me.ucrChkPlot)
         Me.tpGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tpGraphics.Name = "tpGraphics"
         Me.tpGraphics.Padding = New System.Windows.Forms.Padding(3)
@@ -93,11 +97,59 @@ Partial Class sdgDisplayModelOptions
         Me.tpGraphics.Text = "Graphics"
         Me.tpGraphics.UseVisualStyleBackColor = True
         '
+        'rdoBar
+        '
+        Me.rdoBar.AutoSize = True
+        Me.rdoBar.Location = New System.Drawing.Point(10, 88)
+        Me.rdoBar.Name = "rdoBar"
+        Me.rdoBar.Size = New System.Drawing.Size(73, 17)
+        Me.rdoBar.TabIndex = 16
+        Me.rdoBar.Text = "Worth Bar"
+        Me.rdoBar.UseVisualStyleBackColor = True
+        '
+        'rdoMap
+        '
+        Me.rdoMap.AutoSize = True
+        Me.rdoMap.Location = New System.Drawing.Point(10, 65)
+        Me.rdoMap.Name = "rdoMap"
+        Me.rdoMap.Size = New System.Drawing.Size(78, 17)
+        Me.rdoMap.TabIndex = 15
+        Me.rdoMap.Text = "Worth Map"
+        Me.rdoMap.UseVisualStyleBackColor = True
+        '
+        'rdoPlot
+        '
+        Me.rdoPlot.AutoSize = True
+        Me.rdoPlot.Location = New System.Drawing.Point(10, 42)
+        Me.rdoPlot.Name = "rdoPlot"
+        Me.rdoPlot.Size = New System.Drawing.Size(43, 17)
+        Me.rdoPlot.TabIndex = 14
+        Me.rdoPlot.Text = "Plot"
+        Me.rdoPlot.UseVisualStyleBackColor = True
+        '
+        'rdoNoPlot
+        '
+        Me.rdoNoPlot.AutoSize = True
+        Me.rdoNoPlot.Location = New System.Drawing.Point(10, 19)
+        Me.rdoNoPlot.Name = "rdoNoPlot"
+        Me.rdoNoPlot.Size = New System.Drawing.Size(60, 17)
+        Me.rdoNoPlot.TabIndex = 13
+        Me.rdoNoPlot.Text = "No Plot"
+        Me.rdoNoPlot.UseVisualStyleBackColor = True
+        '
+        'ucrPnlPlots
+        '
+        Me.ucrPnlPlots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlPlots.Location = New System.Drawing.Point(6, 15)
+        Me.ucrPnlPlots.Name = "ucrPnlPlots"
+        Me.ucrPnlPlots.Size = New System.Drawing.Size(281, 110)
+        Me.ucrPnlPlots.TabIndex = 12
+        '
         'ucrChkLogGraphic
         '
         Me.ucrChkLogGraphic.AutoSize = True
         Me.ucrChkLogGraphic.Checked = False
-        Me.ucrChkLogGraphic.Location = New System.Drawing.Point(184, 46)
+        Me.ucrChkLogGraphic.Location = New System.Drawing.Point(143, 65)
         Me.ucrChkLogGraphic.Name = "ucrChkLogGraphic"
         Me.ucrChkLogGraphic.Size = New System.Drawing.Size(121, 23)
         Me.ucrChkLogGraphic.TabIndex = 10
@@ -105,38 +157,11 @@ Partial Class sdgDisplayModelOptions
         'ucrSavePlots
         '
         Me.ucrSavePlots.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSavePlots.Location = New System.Drawing.Point(4, 106)
+        Me.ucrSavePlots.Location = New System.Drawing.Point(6, 133)
         Me.ucrSavePlots.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlots.Name = "ucrSavePlots"
         Me.ucrSavePlots.Size = New System.Drawing.Size(261, 24)
         Me.ucrSavePlots.TabIndex = 11
-        '
-        'ucrChkHeat
-        '
-        Me.ucrChkHeat.AutoSize = True
-        Me.ucrChkHeat.Checked = False
-        Me.ucrChkHeat.Location = New System.Drawing.Point(6, 46)
-        Me.ucrChkHeat.Name = "ucrChkHeat"
-        Me.ucrChkHeat.Size = New System.Drawing.Size(213, 23)
-        Me.ucrChkHeat.TabIndex = 2
-        '
-        'ucrChkBar
-        '
-        Me.ucrChkBar.AutoSize = True
-        Me.ucrChkBar.Checked = False
-        Me.ucrChkBar.Location = New System.Drawing.Point(6, 75)
-        Me.ucrChkBar.Name = "ucrChkBar"
-        Me.ucrChkBar.Size = New System.Drawing.Size(213, 23)
-        Me.ucrChkBar.TabIndex = 1
-        '
-        'ucrChkPlot
-        '
-        Me.ucrChkPlot.AutoSize = True
-        Me.ucrChkPlot.Checked = False
-        Me.ucrChkPlot.Location = New System.Drawing.Point(6, 17)
-        Me.ucrChkPlot.Name = "ucrChkPlot"
-        Me.ucrChkPlot.Size = New System.Drawing.Size(100, 23)
-        Me.ucrChkPlot.TabIndex = 0
         '
         'tpDisplay
         '
@@ -411,13 +436,15 @@ Partial Class sdgDisplayModelOptions
     Friend WithEvents ucrChkANOVA As ucrCheck
     Friend WithEvents ucrChkModel As ucrCheck
     Friend WithEvents lblConfLevel As Label
-    Friend WithEvents ucrChkHeat As ucrCheck
-    Friend WithEvents ucrChkBar As ucrCheck
-    Friend WithEvents ucrChkPlot As ucrCheck
     Friend WithEvents tpGraphics As TabPage
     Friend WithEvents ucrSdgButtons As ucrButtonsSubdialogue
     Friend WithEvents tpDisplay As TabPage
     Friend WithEvents tbpDisplayOptions As TabControl
     Friend WithEvents ucrChkLogGraphic As ucrCheck
     Friend WithEvents ucrSavePlots As ucrSave
+    Friend WithEvents rdoBar As RadioButton
+    Friend WithEvents rdoMap As RadioButton
+    Friend WithEvents rdoPlot As RadioButton
+    Friend WithEvents rdoNoPlot As RadioButton
+    Friend WithEvents ucrPnlPlots As UcrPanel
 End Class

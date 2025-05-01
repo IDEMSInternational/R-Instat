@@ -19,8 +19,9 @@ Imports instat.Translations
 Public Class sdgDisplayModelOptions
     Private clsSummaryFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction, clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
     Private clsCoefFunction, clsStatsFunction As RFunction
-    Private clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction As RFunction
+    Private clsDummyFunction, clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction As RFunction
     Private bControlsInitialised As Boolean = False
+    Private bInitialised As Boolean = False
     Private clsRSyntax As New RSyntax
 
     Private Sub sdgDisplayModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -111,18 +112,27 @@ Public Class sdgDisplayModelOptions
         ucrNudNumber.SetLinkedDisplayControl(lblNumber)
         ucrNudNumber.SetRDefault(1)
 
+        If Not bInitialised Then
+            ucrPnlPlots.AddRadioButton(rdoNoPlot)
+            ucrPnlPlots.AddRadioButton(rdoPlot)
+            ucrPnlPlots.AddRadioButton(rdoMap)
+            ucrPnlPlots.AddRadioButton(rdoBar)
+            ucrPnlPlots.AddParameterValuesCondition(rdoNoPlot, "plot", "True")
+            ucrPnlPlots.AddParameterValuesCondition(rdoPlot, "plot", "False")
+            ucrPnlPlots.AddParameterValuesCondition(rdoMap, "plot", "False")
+            ucrPnlPlots.AddParameterValuesCondition(rdoBar, "plot", "False")
+            ucrPnlPlots.AddToLinkedControls({ucrChkLogGraphic}, {rdoMap}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+            bInitialised = True
+        End If
+
+        ucrChkLogGraphic.SetText("Log")
+
         ucrSavePlots.SetPrefix("plot")
         ucrSavePlots.SetSaveTypeAsGraph()
         ucrSavePlots.SetDataFrameSelector(dlgPlacketLuceModel.ucrSelectorTraitsPL.ucrAvailableDataFrames)
         ucrSavePlots.SetCheckBoxText("Store Graph")
         ucrSavePlots.SetIsComboBox()
         ucrSavePlots.SetAssignToIfUncheckedValue("last_graph")
-
-        ucrChkPlot.SetText("Plot")
-        ucrChkBar.SetText("Bar Chart of Estimated Worth")
-        ucrChkHeat.SetText("Heatmap of Estimated Worth")
-        ucrChkHeat.AddToLinkedControls(ucrChkLogGraphic, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLogGraphic.SetText("Log")
 
         ucrChkLogGraphic.Enabled = False
         bControlsInitialised = False
@@ -135,6 +145,8 @@ Public Class sdgDisplayModelOptions
         End If
 
         clsRSyntax = clsNewRSyntax
+        clsDummyFunction = New RFunction
+        clsDummyFunction.AddParameter("plot", "True", iPosition:=0)
         clsAnnovaFunction = clsNewAnnovaFunction
         clsSummaryFunction = clsNewSummaryFunction
         clsEstimatesFunction = clsNewEstimatesFunction
@@ -182,10 +194,8 @@ Public Class sdgDisplayModelOptions
             ucrSavePlots.AddAdditionalRCode(clsWrapPlotFunction, 1)
             ucrSavePlots.AddAdditionalRCode(clsWrapBarFunction, 2)
             ucrSavePlots.SetRCode(clsHeatFunction, bReset, bCloneIfNeeded:=True)
-            ucrChkPlot.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-            ucrChkHeat.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-            ucrChkBar.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrChkLogGraphic.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+            ucrPnlPlots.SetRCode(clsDummyFunction, bReset)
         End If
     End Sub
 
@@ -325,31 +335,25 @@ Public Class sdgDisplayModelOptions
         End If
     End Sub
 
-    Private Sub ucrChkPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPlot.ControlValueChanged
-        If ucrChkPlot.Checked Then
+    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
+        If rdoBar.Checked Then
+            clsRSyntax.AddToBeforeCodes(clsBarfunction)
+            clsRSyntax.AddToBeforeCodes(clsWrapBarFunction)
+        Else
+            clsRSyntax.RemoveFromBeforeCodes(clsBarfunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsWrapBarFunction)
+        End If
+        If rdoPlot.Checked Then
             clsRSyntax.AddToBeforeCodes(clsPlotFunction)
             clsRSyntax.AddToBeforeCodes(clsWrapPlotFunction)
         Else
             clsRSyntax.RemoveFromBeforeCodes(clsPlotFunction)
             clsRSyntax.RemoveFromBeforeCodes(clsWrapPlotFunction)
         End If
-    End Sub
-
-    Private Sub ucrChkHeat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkHeat.ControlValueChanged
-        If ucrChkHeat.Checked Then
+        If rdoMap.Checked Then
             clsRSyntax.AddToBeforeCodes(clsHeatFunction)
         Else
             clsRSyntax.RemoveFromBeforeCodes(clsHeatFunction)
-        End If
-    End Sub
-
-    Private Sub ucrChkBar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBar.ControlValueChanged
-        If ucrChkBar.Checked Then
-            clsRSyntax.AddToBeforeCodes(clsBarfunction)
-            clsRSyntax.AddToBeforeCodes(clsWrapBarFunction)
-        Else
-            clsRSyntax.RemoveFromBeforeCodes(clsBarfunction)
-            clsRSyntax.RemoveFromBeforeCodes(clsWrapBarFunction)
         End If
     End Sub
 End Class

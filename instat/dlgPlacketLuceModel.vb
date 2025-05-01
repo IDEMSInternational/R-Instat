@@ -351,7 +351,7 @@ Public Class dlgPlacketLuceModel
     End Sub
 
     Private Sub AddRemoveFunctions()
-        If sdgDisplayModelOptions.ucrChkReability.Checked OrElse sdgDisplayModelOptions.ucrChkHeat.Checked OrElse sdgDisplayModelOptions.ucrChkBar.Checked Then
+        If sdgDisplayModelOptions.ucrChkReability.Checked OrElse sdgDisplayModelOptions.rdoMap.Checked OrElse sdgDisplayModelOptions.rdoBar.Checked Then
             clsMapFunction.AddParameter("ref", "variety_baseline", iPosition:=2)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignOperator, iPosition:=4)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsSndgetVarmataFunction, iPosition:=5)
