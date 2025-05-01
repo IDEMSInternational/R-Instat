@@ -20,10 +20,14 @@ Imports System.Text.RegularExpressions
 Public Class sdgDefineTricotData
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Public bControlsInitialised As Boolean = False
+    Private bInitialised As Boolean = False
+    Public clsRsyntax As New RSyntax
+
     Private lstReceiversLevelID As New List(Of ucrReceiverSingle)
     Private lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
 
-    Private clsSetColumnSelection, clsTricotDataFunction, clsAddColumnSelection As New RFunction
+    Public clsSetColumnSelection, clsListCoFunction, clsList1CoFunction, clsList1Function, clsListFunction, clsList2Function, clsGetDataFrameFunction, clsTricotDataFunction, clsAddColumnSelection As New RFunction
 
     Private ReadOnly strPos As String = "_pos"
     Private ReadOnly strBest As String = "_best"
@@ -36,17 +40,15 @@ Public Class sdgDefineTricotData
     Private Sub sdgDefineTricotData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            InitialiseDialog()
+            InitialiseControls()
             bFirstLoad = False
         End If
-        If bReset Then
-            SetDefaults()
-        End If
+
         SetRCodeForControls(bReset)
         bReset = False
     End Sub
 
-    Private Sub InitialiseDialog()
+    Public Sub InitialiseControls()
 
         Dim kvpID As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("id", {"id", "ID", "participant_id", "participant_name"}.ToList())
 
@@ -72,44 +74,37 @@ Public Class sdgDefineTricotData
         ucrInputNAs.SetParameter(New RParameter("na_candidates", 4))
         AutoFillReceivers(ucrSelectorTricotData, lstReceiversLevelID)
     End Sub
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewSetColumnSelection As RFunction, clsNewList1CoFunction As RFunction, clsNewListCoFunction As RFunction, clsNewList1Function As RFunction, clsNewList2Function As RFunction, clsNewListFunction As RFunction, clsNewTricotDataFunction As RFunction, clsNewAddColumnSelection As RFunction, clsNewGetDataFrameFunction As RFunction, Optional bReset As Boolean = False)
 
-    Private Sub SetDefaults()
-        clsSetColumnSelection = New RFunction
-        clsTricotDataFunction = New RFunction
-        clsAddColumnSelection = New RFunction
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
 
-        ucrInputGoodTrait.SetText(strPos)
-        ucrInputGoodTrait.bUpdateRCodeFromControl = True
+        clsSetColumnSelection = clsNewSetColumnSelection
+        clsTricotDataFunction = clsNewTricotDataFunction
+        clsAddColumnSelection = clsNewAddColumnSelection
+        clsGetDataFrameFunction = clsNewGetDataFrameFunction
+        clsList2Function = clsNewList2Function
+        clsListFunction = clsNewListFunction
+        clsList1Function = clsNewList1Function
+        clsListCoFunction = clsNewListCoFunction
+        clsList1CoFunction = clsNewList1CoFunction
+        clsRsyntax = clsNewRSyntax
+
         ucrInputBadTrait.SetText(strNeg)
-        ucrInputBadTrait.bUpdateRCodeFromControl = True
-        ucrInputNAs.SetText(strNot)
-        ucrInputNAs.bUpdateRCodeFromControl = True
-        ucrReceiverTricotData.SetMeAsReceiver()
+        ucrInputGoodTrait.SetText(strPos)
 
-        clsTricotDataFunction.SetPackageName("databook")
-        clsTricotDataFunction.SetRCommand("create_tricot_data")
-        clsTricotDataFunction.AddParameter("output_data_levels", "NULL")
-        clsTricotDataFunction.AddParameter("id_level_data", ucrSelectorTricotData.strCurrentDataFrame)
-        clsTricotDataFunction.AddParameter("id_col", ucrReceiverTricotData.GetVariableNames)
-        clsTricotDataFunction.AddParameter("good_suffixes", ucrInputGoodTrait.GetText)
-        clsTricotDataFunction.AddParameter("bad_suffixes", ucrInputBadTrait.GetText)
-        clsTricotDataFunction.AddParameter("na_candidates ", ucrInputNAs.GetText)
-
-        clsSetColumnSelection.SetRCommand("data_book$set_current_column_selection")
-        clsSetColumnSelection.AddParameter("data_name", ucrSelectorTricotData.strCurrentDataFrame, iPosition:=1)
-        clsSetColumnSelection.AddParameter("name", Chr(34) & "remove_traits" & Chr(34), iPosition:=2)
-
-        clsAddColumnSelection.SetRCommand("add_column_selection")
-        clsAddColumnSelection.AddParameter("data_name", ucrSelectorTricotData.strCurrentDataFrame, iPosition:=1)
-        clsAddColumnSelection.AddParameter("name", Chr(34) & "remove_traits" & Chr(34), iPosition:=2)
-        clsAddColumnSelection.AddParameter("column_selection")
+        SetBaseFunctions()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorTricotData.AddAdditionalCodeParameterPair(clsAddColumnSelection, New RParameter("data_name", 0), iAdditionalPairNo:=1)
-        ucrSelectorTricotData.AddAdditionalCodeParameterPair(clsSetColumnSelection, New RParameter("data_name", 0), iAdditionalPairNo:=2)
 
-        ucrSelectorTricotData.SetRCode(clsTricotDataFunction, bReset)
+    Private Sub SetRCodeForControls(bReset As Boolean)
+
+        'ucrInputBadTrait.SetRCode(clsList1CoFunction, bReset)
+        'ucrInputGoodTrait.SetRCode(clsList2Function, bReset)
+
+
+        SetBaseFunctions()
     End Sub
 
     Private Sub AutoFillReceivers(sender As ucrSelectorByDataFrameAddRemove, lstReceivers As List(Of ucrReceiverSingle))
@@ -161,8 +156,35 @@ Public Class sdgDefineTricotData
 
     Private Sub ucrSelectorTricotData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTricotData.ControlValueChanged
         AutoFillReceivers(ucrSelectorTricotData, lstReceiversLevelID)
+        clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorTricotData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsAddColumnSelection.AddParameter("data_name", Chr(34) & ucrSelectorTricotData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsTricotDataFunction.AddParameter("id_level_data", Chr(34) & ucrSelectorTricotData.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+
+        clsGetDataFrameFunction.SetAssignTo(ucrSelectorTricotData.strCurrentDataFrame)
     End Sub
 
+    Private Sub ucrInputGoodTrait_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGoodTrait.ControlValueChanged
+        If Not ucrInputGoodTrait.IsEmpty Then
+            clsList2Function.AddParameter("match", Chr(34) & ucrInputGoodTrait.GetText & Chr(34), iPosition:=0)
+        Else
+            clsList2Function.RemoveParameterByName("match")
+        End If
+    End Sub
 
+    Private Sub ucrInputBadTrait_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputBadTrait.ControlValueChanged
+        If Not ucrInputBadTrait.IsEmpty Then
+            clsList1CoFunction.AddParameter("match", Chr(34) & ucrInputBadTrait.GetText & Chr(34), iPosition:=0)
+        Else
+            clsList1CoFunction.RemoveParameterByName("match")
 
+        End If
+    End Sub
+
+    Public Sub SetBaseFunctions()
+        clsRsyntax.ClearCodes()
+        clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction, 0)
+        clsRsyntax.AddToBeforeCodes(clsTricotDataFunction, 1)
+        clsRsyntax.AddToBeforeCodes(clsAddColumnSelection, 2)
+        clsRsyntax.AddToBeforeCodes(clsSetColumnSelection, 3)
+    End Sub
 End Class
