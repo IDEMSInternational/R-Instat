@@ -462,8 +462,8 @@ Public Class dlgDescribeTwoVariable
         clsMapGtFunction.SetRCommand("map")
         clsMapGtFunction.AddParameter("gttbl", clsRFunctionParameter:=clsgtFunction, bIncludeArgumentName:=False)
 
-        clsgtFunction.SetPackageName("gt")
-        clsgtFunction.SetRCommand("gt")
+        clsgtFunction.SetPackageName("instatExtras")
+        clsgtFunction.SetRCommand("generate_summary_tables")
 
         clsGtTableROperator.SetOperation("%>%")
         clsGtTableROperator.bBrackets = False
