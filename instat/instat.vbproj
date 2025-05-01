@@ -371,6 +371,12 @@
     <Compile Include="dlgTransformTricotData.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTricotModelOneVarCov.Designer.vb">
+      <DependentUpon>dlgTricotModelOneVarCov.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTricotModelOneVarCov.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgUseTable.Designer.vb">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
     </Compile>
@@ -407,6 +413,12 @@
       <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDefineTricotData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgDisplayModelOptions.Designer.vb">
+      <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDisplayModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgFlowsToImport.Designer.vb">
@@ -467,6 +479,18 @@
       <DependentUpon>dlgOutfillingStationData.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOutfillingStationData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgTransformations.Designer.vb">
+      <DependentUpon>sdgTransformations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTransformations.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgTricotModelOptions.Designer.vb">
+      <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTricotModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
@@ -3516,6 +3540,9 @@
     <EmbeddedResource Include="dlgTransformTricotData.resx">
       <DependentUpon>dlgTransformTricotData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTricotModelOneVarCov.resx">
+      <DependentUpon>dlgTricotModelOneVarCov.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgUseTable.resx">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
     </EmbeddedResource>
@@ -3546,6 +3573,9 @@
     <EmbeddedResource Include="sdgDefineTricotData.resx">
       <DependentUpon>sdgDefineTricotData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgDisplayModelOptions.resx">
+      <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgFlowsToImport.resx">
       <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
     </EmbeddedResource>
@@ -3557,6 +3587,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgImportFromClimMob.resx">
       <DependentUpon>sdgImportFromClimMob.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLocation.resx">
       <DependentUpon>sdgLocation.vb</DependentUpon>
@@ -3575,6 +3606,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOutfillingStationData.resx">
       <DependentUpon>dlgOutfillingStationData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTransformations.resx">
+      <DependentUpon>sdgTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTricotModelOptions.resx">
+      <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
