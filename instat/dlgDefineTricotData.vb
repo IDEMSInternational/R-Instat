@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@ Public Class dlgDefineTricotData
     Private lstReceiversLevelID, lstReceiversVarityLevel, lstReceiversIDVarietyLevel As New List(Of ucrReceiverSingle)
     Private lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
     Private clsGetColumnSelection, clsUnameFunction, clsCreateRankingFunction, clsGroupRankingFunction,
-        clsGetDataFrameFunction, clsAddRankingObjFunction, clsAddGrpRankingObjFunction As New RFunction
+    clsGetDataFrameFunction, clsAddRankingObjFunction, clsAddGrpRankingObjFunction As New RFunction
     Private clsDATIDLevelFunction, clsDATVarietyLevelFunction, clsDATIDVarietyFunction As New RFunction
     Private clsAnyDuplicatesFunction, clsVarietyDuplicatesFunction, clsIDVarietyDuplicatesFunction, clsConcFunction, clsConcVarietyFunction, clsNewConcFunction, clsGetColFunction, clsGetVarietyFunction, clsIDVarietyPasteFunction, clsIDVarietyPasteIDFunction, clsIDVarietyPasteVarietyFunction, clsIDVarietyPasteIDConcFunction, clsIDVarietyPasteVarietyConcFunction, clsDummyFunction As New RFunction
     Private clsCDATIDLevelFunction, cslCDATVarietyLevelFunction, clsCDATIDLevelVarietiesFunction, clsCDATIDLevelTraitsFunction As New RFunction
@@ -34,6 +34,8 @@ Public Class dlgDefineTricotData
 
     Private clsOperator As New ROperator
     Private bIsUnique As Boolean = True
+    Private bIsUniqueVariety As Boolean = True
+    Private bIsUniqueID As Boolean = True
 
     Private strCurrentDataframeName As String
 
@@ -135,6 +137,12 @@ Public Class dlgDefineTricotData
         clsGetVarietyFunction = New RFunction
 
         ucrReceiverLevelID.SetMeAsReceiver()
+        ucrInputCheckInputIDLevel.txtInput.BackColor = Color.White
+        ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.White
+        ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.White
+        ucrInputCheckInputIDLevel.SetText("")
+        ucrInputCheckInputVarietyLevel.SetText("")
+        ucrInputCheckInputIDVarietyLevel.SetText("")
 
         clsCDATIDLevelFunction.SetRCommand("c")
         clsCDATIDLevelVarietiesFunction.SetRCommand("c")
@@ -339,14 +347,15 @@ Public Class dlgDefineTricotData
 
     Private Sub TestOKEnabled()
         Dim bDataFramesDifferent As Boolean = AreAllDataframessDifferent(
-        ucrSelectorIDLevelData.strCurrentDataFrame,
-        ucrSelectorIDVarietyLevel.strCurrentDataFrame,
-        ucrSelectorVarietyLevelData.strCurrentDataFrame
-    )
+    ucrSelectorIDLevelData.strCurrentDataFrame,
+    ucrSelectorIDVarietyLevel.strCurrentDataFrame,
+    ucrSelectorVarietyLevelData.strCurrentDataFrame
+)
         ucrBase.OKEnabled(Not ucrReceiverIDVarietyLevelID.IsEmpty AndAlso
-                          Not ucrReceiverIDVarietyLevelVariety.IsEmpty AndAlso
-                          Not ucrReceiverIDVarietyLevelTraits.IsEmpty AndAlso Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
-                          Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent)
+                      Not ucrReceiverIDVarietyLevelVariety.IsEmpty AndAlso
+                      Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
+                      Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent AndAlso
+                      bIsUnique AndAlso bIsUniqueID AndAlso bIsUniqueVariety)
     End Sub
 
     Private Sub ucrSelectorIDVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDVarietyLevel.ControlValueChanged
@@ -464,11 +473,11 @@ Public Class dlgDefineTricotData
         If iAnyDuplicated = -1 Then
             ucrInputCheckInputVarietyLevel.SetName("Developer error! Could not check uniqueness.")
             ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.Yellow
-            bIsUnique = False
+            bIsUniqueVariety = False
         ElseIf iAnyDuplicated > 0 Then
             ucrInputCheckInputVarietyLevel.SetName("")
             ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.LightCoral
-            bIsUnique = False
+            bIsUniqueVariety = False
             If ucrReceiverVarietyLevelVariety.IsEmpty Then
                 ucrInputCheckInputIDVarietyLevel.SetName("Duplicate varieties found.")
                 MsgBox("You have multiple rows with the same varieties.", MsgBoxStyle.Information, Title:="Duplicates")
@@ -479,7 +488,7 @@ Public Class dlgDefineTricotData
         Else
             ucrInputCheckInputVarietyLevel.SetName("No duplicate varieties.")
             ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.LightGreen
-            bIsUnique = True
+            bIsUniqueVariety = True
         End If
         TestOKEnabled()
     End Sub
@@ -496,11 +505,11 @@ Public Class dlgDefineTricotData
         If iAnyDuplicated = -1 Then
             ucrInputCheckInputIDVarietyLevel.SetName("Developer error! Could not check uniqueness.")
             ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.Yellow
-            bIsUnique = False
+            bIsUniqueID = False
         ElseIf iAnyDuplicated > 0 Then
             ucrInputCheckInputIDVarietyLevel.SetName("")
             ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.LightCoral
-            bIsUnique = False
+            bIsUniqueID = False
             If ucrReceiverIDVarietyLevelID.IsEmpty Then
                 ucrInputCheckInputIDVarietyLevel.SetName("Duplicate ID-Variety combination found.")
                 MsgBox("You have multiple rows with the same ID-Variety combination.", MsgBoxStyle.Information, Title:="Duplicates")
@@ -511,9 +520,8 @@ Public Class dlgDefineTricotData
         Else
             ucrInputCheckInputIDVarietyLevel.SetName("No duplicate ID-Variety combination.")
             ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.LightGreen
-            bIsUnique = True
+            bIsUniqueID = True
         End If
         TestOKEnabled()
     End Sub
-
 End Class
