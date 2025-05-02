@@ -26,7 +26,6 @@ Public Class dlgModellingTree
     Public clsFormulaOperator As New ROperator
 
     Public clsRConvert As New RFunction
-    Public bResetModelOptions As Boolean = False
 
     Private clsFactorFunction, clsLevelsFunction, clsMappingFunction, clsPlackettLuceFunction As New RFunction
     Private clsGetVariablesMetaDataFunction, clsRGetObjectFunction, clsGetRankingItemsFunction, clsNamesFunction As New RFunction
@@ -42,11 +41,10 @@ Public Class dlgModellingTree
     Private clsAnnovaFunction, clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction As New RFunction
     Private clsWrapBarFunction, clsWrapPlotFunction As New RFunction
 
-    Private clsAddObjectHeatFunction, clsAddObjectPlotFunction, clsAddObjectBarFunction, clsHeatFunction, clsTreeFunction As New RFunction
+    Private clsAddObjectHeatFunction, clsHeatFunction, clsTreeFunction As New RFunction
     Private clsPlotFunction, clsBarfunction As New RFunction
 
     Public bResetSubDialog As Boolean = False
-    Public bResetOptionsSubDialog As Boolean = False
 
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
 
@@ -86,6 +84,9 @@ Public Class dlgModellingTree
         ucrReceiverExpressionModellingTree.bWithQuotes = False
         ucrReceiverExpressionModellingTree.AddtoCombobox("1")
         ucrReceiverExpressionModellingTree.strSelectorHeading = "Variables"
+
+        ucrInputCheck.SetLinkedDisplayControl(lblCheckVareity)
+
 
         ucrModelName.SetDataFrameSelector(ucrSelectorByDataFrameAddRemoveForModellingTree.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("gen_model")
@@ -140,8 +141,6 @@ Public Class dlgModellingTree
         clsWrapBarFunction = New RFunction
         clsWrapPlotFunction = New RFunction
         clsAddObjectHeatFunction = New RFunction
-        clsAddObjectPlotFunction = New RFunction
-        clsAddObjectBarFunction = New RFunction
         clsBarfunction = New RFunction
         clsHeatFunction = New RFunction
         clsPlotFunction = New RFunction
@@ -422,22 +421,13 @@ Public Class dlgModellingTree
 
         ' Functions/Operators in the Graphs Tab under the display option (need review)
         '------------------------------------------------------------------------------------------------------------------------------------------
-        clsWrapBarFunction.SetPackageName("patchwork")
-        clsWrapBarFunction.SetRCommand("wrap_plots")
-        clsWrapBarFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
-        clsWrapBarFunction.SetAssignTo("last_graph")
-
-        clsWrapPlotFunction.SetPackageName("patchwork")
-        clsWrapPlotFunction.SetRCommand("wrap_plots")
-        clsWrapPlotFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
-        clsWrapPlotFunction.bExcludeAssignedFunctionOutput = False
-        clsWrapPlotFunction.iCallType = 3
-
         clsHeatFunction.SetPackageName("gosset")
         clsHeatFunction.SetRCommand("worth_map")
         clsHeatFunction.AddParameter(".x", "mod_list", iPosition:=0, bIncludeArgumentName:=False)
         clsHeatFunction.AddParameter("labels", "names(mod_list)", iPosition:=1)
         clsHeatFunction.SetAssignTo("last_graph")
+        clsHeatFunction.bExcludeAssignedFunctionOutput = False
+        clsHeatFunction.iCallType = 3
 
         clsPlotFunction.SetPackageName("purrr")
         clsPlotFunction.SetRCommand("map2")
@@ -452,12 +442,27 @@ Public Class dlgModellingTree
         clsBarfunction.AddParameter(".y", "names(mod_list)", iPosition:=1)
         clsBarfunction.AddParameter(".f", "~gosset::worth_bar(.x) + ggplot2::ggtitle(.y)", iPosition:=2)
         clsBarfunction.SetAssignTo("list_of_plots")
+        clsBarfunction.bExcludeAssignedFunctionOutput = False
+        clsBarfunction.iCallType = 3
 
         clsAddObjectHeatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
         clsAddObjectHeatFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
         clsAddObjectHeatFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
         clsAddObjectHeatFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
         clsAddObjectHeatFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
+
+        clsWrapBarFunction.SetPackageName("patchwork")
+        clsWrapBarFunction.SetRCommand("wrap_plots")
+        clsWrapBarFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
+        clsWrapBarFunction.bExcludeAssignedFunctionOutput = False
+        clsWrapBarFunction.iCallType = 3
+
+        clsWrapPlotFunction.SetPackageName("patchwork")
+        clsWrapPlotFunction.SetRCommand("wrap_plots")
+        clsWrapPlotFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
+        clsWrapPlotFunction.bExcludeAssignedFunctionOutput = False
+        clsWrapPlotFunction.iCallType = 3
+
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -473,8 +478,6 @@ Public Class dlgModellingTree
 
         ucrBase.clsRsyntax.SetBaseROperator(clsModelOperator)
 
-
-        bResetModelOptions = True
     End Sub
 
     Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrModelName.ControlValueChanged
@@ -493,7 +496,8 @@ Public Class dlgModellingTree
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverModellingTree.IsEmpty()) AndAlso (Not ucrReceiverExpressionModellingTree.IsEmpty()) AndAlso bUniqueChecked Then
+        If (Not ucrReceiverModellingTree.IsEmpty()) AndAlso (Not ucrReceiverExpressionModellingTree.IsEmpty()) AndAlso bUniqueChecked AndAlso
+            (Not ucrInputCheck.IsEmpty()) AndAlso ucrModelName.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -588,71 +592,80 @@ Public Class dlgModellingTree
             clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction,
             clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
             clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction
-)
+        )
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = False
         sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = False
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = False
+        sdgDisplayModelOptions.ucrChkEstimates.Enabled = True
+        sdgDisplayModelOptions.ucrChkAIC.Enabled = True
+        sdgDisplayModelOptions.ucrChkDeviance.Enabled = True
+        sdgDisplayModelOptions.ucrChkSndEstimetes.Enabled = True
+        sdgDisplayModelOptions.ucrChkParProp.Enabled = True
+        sdgDisplayModelOptions.ucrChkReability.Enabled = True
+        sdgDisplayModelOptions.ucrChkItemPara.Enabled = True
         sdgDisplayModelOptions.rdoPlot.Enabled = False
         sdgDisplayModelOptions.rdoTree.Enabled = False
+        sdgDisplayModelOptions.rdoNoPlot.Enabled = True
+        sdgDisplayModelOptions.rdoMap.Enabled = True
+        sdgDisplayModelOptions.rdoBar.Enabled = True
+        sdgDisplayModelOptions.grpTrees.Enabled = True
         sdgDisplayModelOptions.ShowDialog()
         bResetSubDialog = False
-    End Sub
-
-
-    Private Sub btnCheck_Click(sender As Object, e As EventArgs) Handles btnCheck.Click
-        Check()
     End Sub
 
     Private Sub Check()
         Dim clsPackageCheck As New RFunction
         Dim expOutput As SymbolicExpression
         Dim chrOutput As CharacterVector
-        Dim strFormNames() As String
 
-        ' Resetting the background color of the input control 
-        ucrInputCheck.txtInput.BackColor = Color.White
+        If Not ucrReceiverExpressionModellingTree.IsEmpty AndAlso Not ucrReceiverModellingTree.IsEmpty Then
+            clsPackageCheck.SetPackageName("databook")
+            clsPackageCheck.SetRCommand("check_ID_data_level")
+            clsPackageCheck.AddParameter("data", Chr(34) & UcrSelectorByDataFrameForModellingTreeSecond.strCurrentDataFrame & Chr(34))
 
-        clsPackageCheck.SetPackageName("databook")
-        clsPackageCheck.SetRCommand("check_ID_data_level")
-        clsPackageCheck.AddParameter("data", Chr(34) & UcrSelectorByDataFrameForModellingTreeSecond.strCurrentDataFrame & Chr(34))
+            expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)
 
-        expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)
+            If expOutput Is Nothing OrElse expOutput.Type = Internals.SymbolicExpressionType.Null Then
+                ucrInputCheck.SetText("Cannot get data information.")
+                Exit Sub
+            End If
 
-        If expOutput Is Nothing OrElse expOutput.Type = Internals.SymbolicExpressionType.Null Then
-            ucrInputCheck.SetText("Cannot get data information.")
-            Exit Sub
-        End If
+            chrOutput = expOutput.AsCharacter
+            If chrOutput.Count < 1 Then
+                ucrInputCheck.SetText("Cannot get data information.")
+                ucrInputCheck.txtInput.BackColor = Color.White
+                Exit Sub
+            End If
+            Select Case chrOutput(0)
+                Case "0"
+                    bUniqueChecked = False
+                    ucrInputCheck.SetText("There is no ID variable that is Tricot-Defined in this data.")
+                    ucrInputCheck.txtInput.BackColor = Color.LightCoral
+                Case "1"
+                    bUniqueChecked = False
+                    ucrInputCheck.SetText("No key columns are defined in the dataset.")
+                    ucrInputCheck.txtInput.BackColor = Color.LightCoral
+                Case "2"
+                    bUniqueChecked = False
+                    ucrInputCheck.SetText("Only ID level data can be used for this data. This is data where there is a unique row for each ID variable given.")
+                    ucrInputCheck.txtInput.BackColor = Color.LightCoral
+                Case "3"
+                    bUniqueChecked = True
+                    ucrInputCheck.SetText("Success. The dataset is Tricot-defined and at the ID level.")
+                    ucrInputCheck.txtInput.BackColor = Color.LightGreen
+            End Select
 
-        chrOutput = expOutput.AsCharacter
-        If chrOutput.Count < 1 Then
-            ucrInputCheck.SetText("Cannot get data information.")
+        Else
+            ucrInputCheck.SetName("")
             ucrInputCheck.txtInput.BackColor = Color.White
-            Exit Sub
         End If
-        Select Case chrOutput(0)
-            Case "0"
-                bUniqueChecked = False
-                ucrInputCheck.SetText("There is no ID variable that is Tricot-Defined in this data.")
-                ucrInputCheck.txtInput.BackColor = Color.LightCoral
-            Case "1"
-                bUniqueChecked = False
-                ucrInputCheck.SetText("No key columns are defined in the dataset.")
-                ucrInputCheck.txtInput.BackColor = Color.LightCoral
-            Case "2"
-                bUniqueChecked = False
-                ucrInputCheck.SetText("Only ID level data can be used for this data. This is data where there is a unique row for each ID variable given.")
-                ucrInputCheck.txtInput.BackColor = Color.LightCoral
-            Case "3"
-                bUniqueChecked = True
-                ucrInputCheck.SetText("Success. The dataset is Tricot-defined and at the ID level.")
-                ucrInputCheck.txtInput.BackColor = Color.LightGreen
-        End Select
-        TestOKEnabled()
+
+        'TestOKEnabled()
     End Sub
 
     Private Sub UpdatePreview()
-        If Not ucrReceiverModellingTree.IsEmpty Then
+        If Not ucrReceiverExpressionModellingTree.IsEmpty Then
             ucrInputModelPreview.SetName(clsFormularTildaOperator.ToScript())
         Else
             ucrInputModelPreview.SetName("")
@@ -679,7 +692,15 @@ Public Class dlgModellingTree
     Private Sub ucrReceiverExpressionModellingTree_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionModellingTree.ControlValueChanged
         clsFormularTildaOperator.AddParameter("right", ucrReceiverExpressionModellingTree.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=2)
         UpdatePreview()
+        Check()
+        UpdatePreview()
         TestOKEnabled()
+    End Sub
+
+
+    Private Sub ucrReceiverExpressionModellingTree_ControlContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionModellingTree.ControlContentsChanged, UcrSelectorByDataFrameForModellingTreeSecond.ControlContentsChanged
+        clsFormularTildaOperator.AddParameter("right", ucrReceiverExpressionModellingTree.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=2)
+        UpdatePreview()
     End Sub
 
     Private Sub ucrReceiverModellingTree_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverModellingTree.ControlValueChanged
