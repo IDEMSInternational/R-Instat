@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -28,7 +28,7 @@ Public Class dlgTricotModelOneVarCov
     clsCoefFunction, clsConfidenLimFunction, clsDevianceFunction, clsEstimatesFunction, clsItemsFunction,
     clsPariPropFunction, clsQuasivarianceFunction, clsReliabilityFunction, clsSecondEstimatesFunction,
     clsStatsFunction, clsRegretFunction, clsTopItemFunction, clsNodeRuleFunction, clsNodeLabFuction,
-    clsSndgetVarmataFunction, clsLevelFunction,
+    clsSndgetVarmataFunction, clsLevelFunction, clsTreeFunction,
     clsFactorFunction, clsGetDataFrameFunction, clsVarianCovaMatrixFunction As New RFunction
 
     Private clsMapFunction As New RFunction
@@ -403,19 +403,14 @@ Public Class dlgTricotModelOneVarCov
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles btnDisplayOptions.Click
         sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction,
-                                        clsNewGetObjectHeatFunction:=clsGetObjectHeatFunction, clsNewGetObjectPlotFunction:=clsGetObjectPlotFunction,
-                                        clsNewGetObjectBarFunction:=clsGetObjectBarFunction, clsNewAddObjectHeatFunction:=clsAddObjectHeatFunction,
-                                        clsNewAddObjectPlotFunction:=clsAddObjectPlotFunction, clsNewAddObjectBarFunction:=clsAddObjectBarFunction,
                                         clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
                                         clsNewAnnovaFunction:=clsAnnovaFunction, clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction,
-                                        clsNewCoefFunction:=clsCoefFunction, clsNewCoefOperator:=clsCoefOperator, clsNewConfidenLimFunction:=clsConfidenLimFunction,
+                                        clsNewCoefFunction:=clsCoefFunction, clsNewConfidenLimFunction:=clsConfidenLimFunction,
                                         clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction, clsNewItemsFunction:=clsItemsFunction,
                                         clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
                                         clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction,
                                         clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction, clsNewNodeLabFuction:=clsNodeLabFuction,
-                                        clsNewStatsOperator:=clsStatsOperator, clsNewSndgetVarmataFunction:=clsSndgetVarmataFunction, clsNewSpaceOperator:=clsSpaceOpreator,
-                                        clsNewLevelFunction:=clsLevelFunction, clsNewAssigneOperator:=clsAssignOperator, clsNewFactorFunction:=clsFactorFunction,
-                                        clsNewGetDataFrameFunction:=clsGetDataFrameFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, bReset:=bResetSubDialog)
+                                        clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, clsNewTreeFunction:=clsTreeFunction, bReset:=bResetSubDialog)
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkReability.Enabled = False
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = False
@@ -423,15 +418,16 @@ Public Class dlgTricotModelOneVarCov
         sdgDisplayModelOptions.ucrChkNodeLabel.Enabled = False
         sdgDisplayModelOptions.ucrChkNodeRules.Enabled = False
         sdgDisplayModelOptions.ucrChkTopItem.Enabled = False
-        sdgDisplayModelOptions.ucrChkPlot.Enabled = False
-        sdgDisplayModelOptions.ucrChkBar.Enabled = False
 
+        sdgDisplayModelOptions.rdoPlot.Enabled = False
+        sdgDisplayModelOptions.rdoBar.Enabled = False
+        sdgDisplayModelOptions.rdoTree.Enabled = False
         sdgDisplayModelOptions.ShowDialog()
         bResetSubDialog = False
         AddRemoveFunctions()
     End Sub
     Private Sub AddRemoveFunctions()
-        If sdgDisplayModelOptions.ucrChkHeat.Checked Then
+        If sdgDisplayModelOptions.rdoMap.Checked Then
             ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=6)
         Else
             ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=6)
