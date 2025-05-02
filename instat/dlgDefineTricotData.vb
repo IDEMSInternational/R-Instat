@@ -146,6 +146,9 @@ Public Class dlgDefineTricotData
         bIsUniqueVariety = False
         bIsUniqueID = False
 
+        lblIVTraits.Text = "Traits:"
+        lblVarieties.Text = "Varieties:"
+        lblTraits.Text = "Traits:"
 
         ucrReceiverLevelID.SetMeAsReceiver()
         ucrInputCheckInputIDLevel.txtInput.BackColor = Color.White
@@ -513,6 +516,19 @@ Public Class dlgDefineTricotData
         Else
             clsIDVarietyPasteVarietyConcFunction.RemoveParameterByName("x1")
         End If
+
+    End Sub
+
+    Private Sub ucrReceiverIDVarietyLevelTraitsOnly_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVarietyLevelTraits.ControlValueChanged
+        columnCounters(ucrReceiverIDVarietyLevelTraits, lblIVTraits, "Traits:")
+    End Sub
+
+    Private Sub ucrReceiverLevelVarietiesOnly_ControlValueChanges(ucrChangedControl As ucrCore) Handles ucrReceiverLevelVarieties.ControlValueChanged
+        columnCounters(ucrReceiverLevelVarieties, lblVarieties, "Varieties:")
+    End Sub
+
+    Private Sub ucrReceiverLevelOverallTraitsOnly_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLevelOverallTraits.ControlValueChanged
+        columnCounters(ucrReceiverLevelOverallTraits, lblTraits, "Traits:")
     End Sub
 
     Private Sub ucrChkDefineIDLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineIDLevel.ControlValueChanged
@@ -535,6 +551,14 @@ Public Class dlgDefineTricotData
         End If
     End Sub
 
+
+    Private Sub columnCounters(receiverControl As ucrReceiverMultiple, associatedLabelControl As Label, associatedLabelText As String)
+
+        Dim NumOfColumns = receiverControl.Count
+
+        associatedLabelControl.Text = associatedLabelText & "   (" & CStr(NumOfColumns) & ")"
+
+    End Sub
 
     Private Sub btncheckduplicatesvarietylevel_Click(sender As Object, e As EventArgs) Handles btncheckduplicatesvarietylevel.Click
         Dim iAnyDuplicated As Integer
