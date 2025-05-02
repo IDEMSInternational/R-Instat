@@ -135,6 +135,7 @@ Public Class dlgTricotModellingGeneral
         ucrInputCheckVariety.SetName("")
         ucrInputCheckVariety.txtInput.BackColor = Color.White
         ucrInputCheckVariety.IsReadOnly = True
+
         ucrTraitsReceiver.SetMeAsReceiver()
 
         clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
@@ -370,7 +371,7 @@ Public Class dlgTricotModellingGeneral
 
     Private Sub TestOkEnabled()
         If Not ucrTraitsReceiver.IsEmpty AndAlso Not ucrReceiverExpressionModellingGeneral.IsEmpty AndAlso
-            ucrSaveModellingGeneral.IsComplete AndAlso Not ucrInputCheckVariety.IsEmpty AndAlso bIsUnique = True Then
+            Not ucrInputCheckVariety.IsEmpty AndAlso bIsUnique Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -466,6 +467,22 @@ Public Class dlgTricotModellingGeneral
         sdgDisplayModelOptions.rdoTree.Enabled = False
         sdgDisplayModelOptions.rdoPlot.Enabled = False
         sdgDisplayModelOptions.rdoBar.Enabled = False
+
+
+
+        sdgDisplayModelOptions.ucrChkConfLimits.Enabled = True
+        sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = True
+        sdgDisplayModelOptions.ucrChkEstimates.Enabled = True
+        sdgDisplayModelOptions.ucrChkAIC.Enabled = True
+        sdgDisplayModelOptions.ucrChkDeviance.Enabled = True
+        sdgDisplayModelOptions.ucrChkSndEstimetes.Enabled = True
+        sdgDisplayModelOptions.ucrChkParProp.Enabled = True
+
+        sdgDisplayModelOptions.ucrChkItemPara.Enabled = True
+        sdgDisplayModelOptions.rdoNoPlot.Enabled = True
+        sdgDisplayModelOptions.rdoMap.Enabled = True
+
+
         sdgDisplayModelOptions.ShowDialog()
         bResetSubDialog = False
     End Sub
@@ -487,7 +504,7 @@ Public Class dlgTricotModellingGeneral
         TestOkEnabled()
     End Sub
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTraitsReceiver.ControlContentsChanged,
-        ucrSaveModellingGeneral.ControlContentsChanged, ucrSelectorVarietyLevel.ControlContentsChanged
+        ucrSaveModellingGeneral.ControlContentsChanged, ucrReceiverExpressionModellingGeneral.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -496,7 +513,7 @@ Public Class dlgTricotModellingGeneral
     'REVIEW THIS FUNCTION
     Private Sub ucrVarietyLevelReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionModellingGeneral.ControlValueChanged
         clsTilde2Operator.AddParameter("right", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
-
+        Check()
     End Sub
 
 
@@ -513,52 +530,57 @@ Public Class dlgTricotModellingGeneral
         clsGetDataFrameFunction.SetAssignTo(ucrSelectorTraitsRanking.strCurrentDataFrame)
     End Sub
 
-    Private Sub cmdCheckVariety_Click(sender As Object, e As EventArgs) Handles cmdCheckVariety.Click
+    Private Sub Check()
         Dim chrOutput As CharacterVector
         Dim clsPackageCheck As New RFunction
         Dim expOutput As SymbolicExpression
 
+        If Not ucrReceiverExpressionModellingGeneral.IsEmpty AndAlso Not ucrTraitsReceiver.IsEmpty Then
 
-        ' Resetting the background color of the input control 
-        ucrInputCheckVariety.txtInput.BackColor = Color.White
+            clsPackageCheck.SetPackageName("databook")
+            clsPackageCheck.SetRCommand("check_variety_data_level")
+            clsPackageCheck.AddParameter("data", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34))
 
-        clsPackageCheck.SetPackageName("databook")
-        clsPackageCheck.SetRCommand("check_variety_data_level")
-        clsPackageCheck.AddParameter("data", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34))
-
-        expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript())
+            expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript())
 
 
-        If expOutput Is Nothing OrElse expOutput.Type = RDotNet.Internals.SymbolicExpressionType.Null Then
-            ucrInputCheckVariety.SetName("Model fails. There is no variety variable that is Tricot-Defined in this data.")
-            Exit Sub
-        End If
-
-        chrOutput = expOutput.AsCharacter()
-        If chrOutput.Count < 1 Then
-            ucrInputCheckVariety.SetText("Cannot get data information.")
-            ucrInputCheckVariety.txtInput.BackColor = Color.White
-            Exit Sub
-        End If
-        Select Case chrOutput(0)
-            Case "0"
-                bIsUnique = False
+            If expOutput Is Nothing OrElse expOutput.Type = RDotNet.Internals.SymbolicExpressionType.Null Then
                 ucrInputCheckVariety.SetName("Model fails. There is no variety variable that is Tricot-Defined in this data.")
-                ucrInputCheckVariety.txtInput.BackColor = Color.Coral
-            Case "1"
-                bIsUnique = False
-                ucrInputCheckVariety.SetName("Model fails. No key columns are defined in the dataset.")
-                ucrInputCheckVariety.txtInput.BackColor = Color.Coral
-            Case "2"
-                bIsUnique = False
-                ucrInputCheckVariety.SetName("Model fails. Only variety level data can be used for this data. This is data where there is a unique row for each variety given.")
-                ucrInputCheckVariety.txtInput.BackColor = Color.Coral
-            Case "3"
-                bIsUnique = True
-                ucrInputCheckVariety.SetName("Model runs OK.")
-                ucrInputCheckVariety.txtInput.BackColor = Color.LightGreen
-        End Select
-        TestOkEnabled()
+                Exit Sub
+            End If
+
+            chrOutput = expOutput.AsCharacter()
+            If chrOutput.Count < 1 Then
+                ucrInputCheckVariety.SetText("Cannot get data information.")
+                ucrInputCheckVariety.txtInput.BackColor = Color.White
+                Exit Sub
+            End If
+            Select Case chrOutput(0)
+                Case "0"
+                    bIsUnique = False
+                    ucrInputCheckVariety.SetName("Model fails. There is no variety variable that is Tricot-Defined in this data.")
+                    ucrInputCheckVariety.txtInput.BackColor = Color.Coral
+                Case "1"
+                    bIsUnique = False
+                    ucrInputCheckVariety.SetName("Model fails. No key columns are defined in the dataset.")
+                    ucrInputCheckVariety.txtInput.BackColor = Color.Coral
+                Case "2"
+                    bIsUnique = False
+                    ucrInputCheckVariety.SetName("Model fails. Only variety level data can be used for this data. This is data where there is a unique row for each variety given.")
+                    ucrInputCheckVariety.txtInput.BackColor = Color.Coral
+                Case "3"
+                    bIsUnique = True
+                    ucrInputCheckVariety.SetName("Model runs OK.")
+                    ucrInputCheckVariety.txtInput.BackColor = Color.LightGreen
+            End Select
+
+        Else
+            ucrInputCheckVariety.SetName("")
+            ucrInputCheckVariety.txtInput.BackColor = Color.White
+
+        End If
+
+
     End Sub
 
 End Class

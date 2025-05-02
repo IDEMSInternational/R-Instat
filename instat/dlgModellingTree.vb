@@ -85,6 +85,9 @@ Public Class dlgModellingTree
         ucrReceiverExpressionModellingTree.AddtoCombobox("1")
         ucrReceiverExpressionModellingTree.strSelectorHeading = "Variables"
 
+        ucrInputCheck.SetLinkedDisplayControl(lblCheckVareity)
+
+
         ucrModelName.SetDataFrameSelector(ucrSelectorByDataFrameAddRemoveForModellingTree.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("gen_model")
         ucrModelName.SetSaveTypeAsModel()
@@ -493,7 +496,8 @@ Public Class dlgModellingTree
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverModellingTree.IsEmpty()) AndAlso (Not ucrReceiverExpressionModellingTree.IsEmpty()) AndAlso bUniqueChecked Then
+        If (Not ucrReceiverModellingTree.IsEmpty()) AndAlso (Not ucrReceiverExpressionModellingTree.IsEmpty()) AndAlso bUniqueChecked AndAlso
+            (Not ucrInputCheck.IsEmpty()) AndAlso ucrModelName.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -588,20 +592,26 @@ Public Class dlgModellingTree
             clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction,
             clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
             clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction
-)
+        )
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = False
         sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = False
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = False
+        sdgDisplayModelOptions.ucrChkEstimates.Enabled = True
+        sdgDisplayModelOptions.ucrChkAIC.Enabled = True
+        sdgDisplayModelOptions.ucrChkDeviance.Enabled = True
+        sdgDisplayModelOptions.ucrChkSndEstimetes.Enabled = True
+        sdgDisplayModelOptions.ucrChkParProp.Enabled = True
+        sdgDisplayModelOptions.ucrChkReability.Enabled = True
+        sdgDisplayModelOptions.ucrChkItemPara.Enabled = True
         sdgDisplayModelOptions.rdoPlot.Enabled = False
         sdgDisplayModelOptions.rdoTree.Enabled = False
+        sdgDisplayModelOptions.rdoNoPlot.Enabled = True
+        sdgDisplayModelOptions.rdoMap.Enabled = True
+        sdgDisplayModelOptions.rdoBar.Enabled = True
+        sdgDisplayModelOptions.grpTrees.Enabled = True
         sdgDisplayModelOptions.ShowDialog()
         bResetSubDialog = False
-    End Sub
-
-
-    Private Sub btnCheck_Click(sender As Object, e As EventArgs) Handles btnCheck.Click
-        Check()
     End Sub
 
     Private Sub Check()
@@ -609,49 +619,53 @@ Public Class dlgModellingTree
         Dim expOutput As SymbolicExpression
         Dim chrOutput As CharacterVector
 
-        ' Resetting the background color of the input control 
-        ucrInputCheck.txtInput.BackColor = Color.White
+        If Not ucrReceiverExpressionModellingTree.IsEmpty AndAlso Not ucrReceiverModellingTree.IsEmpty Then
+            clsPackageCheck.SetPackageName("databook")
+            clsPackageCheck.SetRCommand("check_ID_data_level")
+            clsPackageCheck.AddParameter("data", Chr(34) & UcrSelectorByDataFrameForModellingTreeSecond.strCurrentDataFrame & Chr(34))
 
-        clsPackageCheck.SetPackageName("databook")
-        clsPackageCheck.SetRCommand("check_ID_data_level")
-        clsPackageCheck.AddParameter("data", Chr(34) & UcrSelectorByDataFrameForModellingTreeSecond.strCurrentDataFrame & Chr(34))
+            expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)
 
-        expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)
+            If expOutput Is Nothing OrElse expOutput.Type = Internals.SymbolicExpressionType.Null Then
+                ucrInputCheck.SetText("Cannot get data information.")
+                Exit Sub
+            End If
 
-        If expOutput Is Nothing OrElse expOutput.Type = Internals.SymbolicExpressionType.Null Then
-            ucrInputCheck.SetText("Cannot get data information.")
-            Exit Sub
-        End If
+            chrOutput = expOutput.AsCharacter
+            If chrOutput.Count < 1 Then
+                ucrInputCheck.SetText("Cannot get data information.")
+                ucrInputCheck.txtInput.BackColor = Color.White
+                Exit Sub
+            End If
+            Select Case chrOutput(0)
+                Case "0"
+                    bUniqueChecked = False
+                    ucrInputCheck.SetText("There is no ID variable that is Tricot-Defined in this data.")
+                    ucrInputCheck.txtInput.BackColor = Color.LightCoral
+                Case "1"
+                    bUniqueChecked = False
+                    ucrInputCheck.SetText("No key columns are defined in the dataset.")
+                    ucrInputCheck.txtInput.BackColor = Color.LightCoral
+                Case "2"
+                    bUniqueChecked = False
+                    ucrInputCheck.SetText("Only ID level data can be used for this data. This is data where there is a unique row for each ID variable given.")
+                    ucrInputCheck.txtInput.BackColor = Color.LightCoral
+                Case "3"
+                    bUniqueChecked = True
+                    ucrInputCheck.SetText("Success. The dataset is Tricot-defined and at the ID level.")
+                    ucrInputCheck.txtInput.BackColor = Color.LightGreen
+            End Select
 
-        chrOutput = expOutput.AsCharacter
-        If chrOutput.Count < 1 Then
-            ucrInputCheck.SetText("Cannot get data information.")
+        Else
+            ucrInputCheck.SetName("")
             ucrInputCheck.txtInput.BackColor = Color.White
-            Exit Sub
         End If
-        Select Case chrOutput(0)
-            Case "0"
-                bUniqueChecked = False
-                ucrInputCheck.SetText("There is no ID variable that is Tricot-Defined in this data.")
-                ucrInputCheck.txtInput.BackColor = Color.LightCoral
-            Case "1"
-                bUniqueChecked = False
-                ucrInputCheck.SetText("No key columns are defined in the dataset.")
-                ucrInputCheck.txtInput.BackColor = Color.LightCoral
-            Case "2"
-                bUniqueChecked = False
-                ucrInputCheck.SetText("Only ID level data can be used for this data. This is data where there is a unique row for each ID variable given.")
-                ucrInputCheck.txtInput.BackColor = Color.LightCoral
-            Case "3"
-                bUniqueChecked = True
-                ucrInputCheck.SetText("Success. The dataset is Tricot-defined and at the ID level.")
-                ucrInputCheck.txtInput.BackColor = Color.LightGreen
-        End Select
-        TestOKEnabled()
+
+        'TestOKEnabled()
     End Sub
 
     Private Sub UpdatePreview()
-        If Not ucrReceiverModellingTree.IsEmpty Then
+        If Not ucrReceiverExpressionModellingTree.IsEmpty Then
             ucrInputModelPreview.SetName(clsFormularTildaOperator.ToScript())
         Else
             ucrInputModelPreview.SetName("")
@@ -678,7 +692,15 @@ Public Class dlgModellingTree
     Private Sub ucrReceiverExpressionModellingTree_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionModellingTree.ControlValueChanged
         clsFormularTildaOperator.AddParameter("right", ucrReceiverExpressionModellingTree.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=2)
         UpdatePreview()
+        Check()
+        UpdatePreview()
         TestOKEnabled()
+    End Sub
+
+
+    Private Sub ucrReceiverExpressionModellingTree_ControlContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionModellingTree.ControlContentsChanged, UcrSelectorByDataFrameForModellingTreeSecond.ControlContentsChanged
+        clsFormularTildaOperator.AddParameter("right", ucrReceiverExpressionModellingTree.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=2)
+        UpdatePreview()
     End Sub
 
     Private Sub ucrReceiverModellingTree_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverModellingTree.ControlValueChanged
