@@ -3133,4 +3133,8 @@ Public Class frmMain
     Private Sub mnuTricotModelCharacterisation_Click(sender As Object, e As EventArgs) Handles mnuTricotModelCharacterisation.Click
         dlgTricotModellingGeneral.ShowDialog()
     End Sub
+
+    Private Sub OptionalMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionalMenuToolStripMenuItem.Click
+
+    End Sub
 End Class
