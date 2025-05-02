@@ -78,7 +78,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 414
+        ucrBase.iHelpTopicID = 743
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 

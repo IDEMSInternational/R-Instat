@@ -28,7 +28,7 @@ Public Class sdgMerge
     End Sub
 
     Public Sub InitiatiseControls()
-        ucrSubBase.iHelpTopicID = 51
+        ucrSubBase.iHelpTopicID = 741
 
         ucrSelectorFirstDF.SetLabelText("First Data Frame")
         ucrSelectorSecondDF.SetLabelText("Second Data Frame")
