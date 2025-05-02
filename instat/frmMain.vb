@@ -3099,4 +3099,42 @@ Public Class frmMain
     Private Sub mnuTidyTransformTricot_Click(sender As Object, e As EventArgs) Handles mnuTidyTransformTricot.Click
         dlgTransformTricotData.ShowDialog()
     End Sub
+
+    'Visualise data dialog
+    Private Sub mnuTricotexamineeditdataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataVisualiseData.Click
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Climatic
+        dlgVisualizeData.ShowDialog()
+    End Sub
+
+    'Pivot table dialog
+    Private Sub mnuTricotexamineeditdataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataPivotTable.Click
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Climatic
+        dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
+    'One Variable Summarise Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableSummarise.Click
+        dlgOneVariableSummarise.enumOnevariableMode = dlgOneVariableSummarise.OnevariableMode.Climatic
+        dlgOneVariableSummarise.ShowDialog()
+    End Sub
+
+    'One Variable Graph Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableGraph.Click
+        dlgOneVariableGraph.enumOnevariableMode = dlgOneVariableGraph.OnevariableMode.Climatic
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
+    'One Variable Frequencies Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableFrequencies.Click
+        dlgOneWayFrequencies.enumOnewayMode = dlgOneWayFrequencies.OnewayMode.Climatic
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotModelCharacterisation_Click(sender As Object, e As EventArgs) Handles mnuTricotModelCharacterisation.Click
+        dlgTricotModellingGeneral.ShowDialog()
+    End Sub
+
+    Private Sub OptionalMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionalMenuToolStripMenuItem.Click
+
+    End Sub
 End Class
