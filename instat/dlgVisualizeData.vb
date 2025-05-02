@@ -61,6 +61,7 @@ Public Class dlgVisualizeData
         Dim dctPaletteGuess As New Dictionary(Of String, String)
         Dim dctColourPallette As New Dictionary(Of String, String)
 
+        ucrBase.iHelpTopicID = 733
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
