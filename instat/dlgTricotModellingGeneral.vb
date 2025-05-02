@@ -8,18 +8,16 @@ Public Class dlgTricotModellingGeneral
 
     Private bIsUnique As Boolean = True
     Private clsGetVariablesMetadataFunction As New RFunction
-    Private clsGetObjectFunction, clsGetRankingItemsFunction, clsGetDataFrameFunction, clsGetColumn,
-            clsLevelsFunction, clsFactorsFunction, clsMappingFunction, clsPladmmFunction, clsNamesFunction,
-            clsCheckUniqueFunction, clsGetVariablesFromMetaDataFunction, clsFactorFunction, clsSummaryFunction, clscoefFunction,
+    Private clsGetObjectFunction, clsGetRankingItemsFunction, clsGetDataFrameFunction, clsLevelsFunction, clsMappingFunction, clsPladmmFunction,
+            clsNamesFunction, clsGetVariablesFromMetaDataFunction, clsFactorFunction, clsSummaryFunction, clscoefFunction,
             clsEstimatesFunction, clsSecondEstimatesFunction, clsDevianceFunction, clsDevianceMainFunction, clsPairwiseProbFunction,
             clsPairwiseProbMainFunction, clsReliabilityFunction, clsItemsParFunction, clsRegretFunction, clsNodeLabelsFunction,
             clsNodeRulesFunction, clsTopItemsFunction, clsAICFunction, clsUnListAICFunction, clsAICMainFunction, clsAnnovaFunction,
-            clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction, clsGetObjectPlotFunction,
-            clsGetObjectBarFunction, clsAddObjectHeatFunction, clsAddObjectPlotFunction, clsAddObjectBarFunction, clsHeatFunction,
+            clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction, clsHeatFunction,
             clsPlotFunction, clsBarfunction, clsWrapPlotFunction, clsWrapBarFunction, clsTreeFunction As New RFunction
 
     Private clsObjectOperator, clsTildeOperator, clsTilde2Operator, clsBracketOperator, clsDevianceOperator, clsPairwiseProbOperator,
-            clsNamesOperator, clsModelOperator, clsSpaceOperator, clsTilde3Operator, clsEmptySpaceOperator, clsCoefOperator,
+            clsNamesOperator, clsModelOperator, clsSpaceOperator, clsEmptySpaceOperator, clsCoefOperator,
             clsAICOperator, clsStatsOperator As New ROperator
 
     Private Sub dlgTricotModellingGeneral_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -79,7 +77,6 @@ Public Class dlgTricotModellingGeneral
         clsObjectOperator = New ROperator
         clsSpaceOperator = New ROperator
         clsGetRankingItemsFunction = New RFunction
-        clsGetColumn = New RFunction
         clsLevelsFunction = New RFunction
         clsMappingFunction = New RFunction
         clsPladmmFunction = New RFunction
@@ -88,7 +85,6 @@ Public Class dlgTricotModellingGeneral
         clscoefFunction = New RFunction
         clsTildeOperator = New ROperator
         clsTilde2Operator = New ROperator
-        'clsFactorsFunction = New RFunction
         clsEmptySpaceOperator = New ROperator
         clsFactorFunction = New RFunction
         clsAICMainFunction = New RFunction
@@ -96,8 +92,6 @@ Public Class dlgTricotModellingGeneral
         clsNamesFunction = New RFunction
         clsNamesOperator = New ROperator
         clsModelOperator = New ROperator
-        'clsCheckUniqueFunction = New RFunction
-        clsTilde3Operator = New ROperator
 
         ' Sub Dialogs
         '-----------------------------------------------------------------------------------------------------
@@ -126,11 +120,6 @@ Public Class dlgTricotModellingGeneral
         clsStatsFunction = New RFunction
         clsQuasivarianceFunction = New RFunction
         clsVarianCovaMatrixFunction = New RFunction
-        clsGetObjectPlotFunction = New RFunction
-        clsGetObjectBarFunction = New RFunction
-        clsAddObjectHeatFunction = New RFunction
-        clsAddObjectPlotFunction = New RFunction
-        clsAddObjectBarFunction = New RFunction
         clsHeatFunction = New RFunction
         clsPlotFunction = New RFunction
         clsBarfunction = New RFunction
@@ -147,8 +136,6 @@ Public Class dlgTricotModellingGeneral
         ucrInputCheckVariety.txtInput.BackColor = Color.White
         ucrInputCheckVariety.IsReadOnly = True
         ucrTraitsReceiver.SetMeAsReceiver()
-
-        'clsCheckUniqueFunction.SetRCommand("check_variety_data_level")
 
         clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetVariablesMetadataFunction.SetAssignTo("get_index_names")
@@ -179,9 +166,6 @@ Public Class dlgTricotModellingGeneral
         clsGetRankingItemsFunction.AddParameter("data_object", clsROperatorParameter:=clsObjectOperator, iPosition:=1, bIncludeArgumentName:=False)
         clsGetRankingItemsFunction.SetAssignTo("rankings_object")
 
-        'clsGetColumn.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        'clsGetColumn.SetAssignTo("column")
-
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
         clsGetDataFrameFunction.AddParameter("data", Chr(34) & ucrSelectorTraitsRanking.strCurrentDataFrame & Chr(34), bIncludeArgumentName:=False)
         clsGetDataFrameFunction.SetAssignTo(ucrSelectorTraitsRanking.strCurrentDataFrame)
@@ -197,9 +181,6 @@ Public Class dlgTricotModellingGeneral
 
         clsLevelsFunction.SetRCommand("levels")
         clsLevelsFunction.AddParameter("x", clsRFunctionParameter:=clsFactorFunction, iPosition:=0, bIncludeArgumentName:=False)
-
-        'clsFactorsFunction.SetRCommand("factor")
-        'clsFactorsFunction.AddParameter("x", clsRFunctionParameter:=clsGetColumn, iPosition:=0, bIncludeArgumentName:=False)
 
         clsBracketOperator.SetOperation("[")
         clsBracketOperator.AddParameter("left", clsRFunctionParameter:=clsLevelsFunction, iPosition:=0)
@@ -347,37 +328,13 @@ Public Class dlgTricotModellingGeneral
 
         ' PLOT FUNCTIONS
         '-------------------------------------------------------------------------------------------------------------------
-        clsGetObjectPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        clsGetObjectPlotFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        clsGetObjectPlotFunction.AddParameter("as_file", "TRUE", iPosition:=2)
-
-        clsGetObjectBarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        clsGetObjectBarFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        clsGetObjectBarFunction.AddParameter("as_file", "TRUE", iPosition:=2)
-
-        clsAddObjectHeatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
-        clsAddObjectHeatFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        clsAddObjectHeatFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
-        clsAddObjectHeatFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
-        clsAddObjectHeatFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
-
-        clsAddObjectPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
-        clsAddObjectPlotFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        clsAddObjectPlotFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
-        clsAddObjectPlotFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
-        clsAddObjectPlotFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
-
-        clsAddObjectBarFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
-        clsAddObjectBarFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
-        clsAddObjectBarFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
-        clsAddObjectBarFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
-        clsAddObjectBarFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
-
         clsHeatFunction.SetPackageName("gosset")
         clsHeatFunction.SetRCommand("worth_map")
         clsHeatFunction.AddParameter(".x", "mod_list", iPosition:=0, bIncludeArgumentName:=False)
         clsHeatFunction.AddParameter("labels", "names(mod_list)", iPosition:=1)
         clsHeatFunction.SetAssignTo("last_graph")
+        clsHeatFunction.bExcludeAssignedFunctionOutput = False
+        clsHeatFunction.iCallType = 3
 
         clsPlotFunction.SetPackageName("purrr")
         clsPlotFunction.SetRCommand("map2")
@@ -539,7 +496,6 @@ Public Class dlgTricotModellingGeneral
     'REVIEW THIS FUNCTION
     Private Sub ucrVarietyLevelReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionModellingGeneral.ControlValueChanged
         clsTilde2Operator.AddParameter("right", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
-        'clsGetColumn.AddParameter("col_name", ucrReceiverExpressionModellingGeneral.GetText, iPosition:=1, bIncludeArgumentName:=False)
 
     End Sub
 

@@ -26,7 +26,6 @@ Public Class dlgModellingTree
     Public clsFormulaOperator As New ROperator
 
     Public clsRConvert As New RFunction
-    Public bResetModelOptions As Boolean = False
 
     Private clsFactorFunction, clsLevelsFunction, clsMappingFunction, clsPlackettLuceFunction As New RFunction
     Private clsGetVariablesMetaDataFunction, clsRGetObjectFunction, clsGetRankingItemsFunction, clsNamesFunction As New RFunction
@@ -42,11 +41,10 @@ Public Class dlgModellingTree
     Private clsAnnovaFunction, clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction As New RFunction
     Private clsWrapBarFunction, clsWrapPlotFunction As New RFunction
 
-    Private clsAddObjectHeatFunction, clsAddObjectPlotFunction, clsAddObjectBarFunction, clsHeatFunction, clsTreeFunction As New RFunction
+    Private clsAddObjectHeatFunction, clsHeatFunction, clsTreeFunction As New RFunction
     Private clsPlotFunction, clsBarfunction As New RFunction
 
     Public bResetSubDialog As Boolean = False
-    Public bResetOptionsSubDialog As Boolean = False
 
     Private dctPlotFunctions As New Dictionary(Of String, RFunction)
 
@@ -140,8 +138,6 @@ Public Class dlgModellingTree
         clsWrapBarFunction = New RFunction
         clsWrapPlotFunction = New RFunction
         clsAddObjectHeatFunction = New RFunction
-        clsAddObjectPlotFunction = New RFunction
-        clsAddObjectBarFunction = New RFunction
         clsBarfunction = New RFunction
         clsHeatFunction = New RFunction
         clsPlotFunction = New RFunction
@@ -422,22 +418,13 @@ Public Class dlgModellingTree
 
         ' Functions/Operators in the Graphs Tab under the display option (need review)
         '------------------------------------------------------------------------------------------------------------------------------------------
-        clsWrapBarFunction.SetPackageName("patchwork")
-        clsWrapBarFunction.SetRCommand("wrap_plots")
-        clsWrapBarFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
-        clsWrapBarFunction.SetAssignTo("last_graph")
-
-        clsWrapPlotFunction.SetPackageName("patchwork")
-        clsWrapPlotFunction.SetRCommand("wrap_plots")
-        clsWrapPlotFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
-        clsWrapPlotFunction.bExcludeAssignedFunctionOutput = False
-        clsWrapPlotFunction.iCallType = 3
-
         clsHeatFunction.SetPackageName("gosset")
         clsHeatFunction.SetRCommand("worth_map")
         clsHeatFunction.AddParameter(".x", "mod_list", iPosition:=0, bIncludeArgumentName:=False)
         clsHeatFunction.AddParameter("labels", "names(mod_list)", iPosition:=1)
         clsHeatFunction.SetAssignTo("last_graph")
+        clsHeatFunction.bExcludeAssignedFunctionOutput = False
+        clsHeatFunction.iCallType = 3
 
         clsPlotFunction.SetPackageName("purrr")
         clsPlotFunction.SetRCommand("map2")
@@ -452,12 +439,27 @@ Public Class dlgModellingTree
         clsBarfunction.AddParameter(".y", "names(mod_list)", iPosition:=1)
         clsBarfunction.AddParameter(".f", "~gosset::worth_bar(.x) + ggplot2::ggtitle(.y)", iPosition:=2)
         clsBarfunction.SetAssignTo("list_of_plots")
+        clsBarfunction.bExcludeAssignedFunctionOutput = False
+        clsBarfunction.iCallType = 3
 
         clsAddObjectHeatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
         clsAddObjectHeatFunction.AddParameter("object_name", Chr(34) & "last_graph" & Chr(34), iPosition:=1)
         clsAddObjectHeatFunction.AddParameter("object_type_label", Chr(34) & "graph" & Chr(34), iPosition:=2)
         clsAddObjectHeatFunction.AddParameter("object_format", Chr(34) & "image" & Chr(34), iPosition:=3)
         clsAddObjectHeatFunction.AddParameter("object", "instatExtras::check_graph(graph_object=last_graph)", iPosition:=4)
+
+        clsWrapBarFunction.SetPackageName("patchwork")
+        clsWrapBarFunction.SetRCommand("wrap_plots")
+        clsWrapBarFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
+        clsWrapBarFunction.bExcludeAssignedFunctionOutput = False
+        clsWrapBarFunction.iCallType = 3
+
+        clsWrapPlotFunction.SetPackageName("patchwork")
+        clsWrapPlotFunction.SetRCommand("wrap_plots")
+        clsWrapPlotFunction.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
+        clsWrapPlotFunction.bExcludeAssignedFunctionOutput = False
+        clsWrapPlotFunction.iCallType = 3
+
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -473,8 +475,6 @@ Public Class dlgModellingTree
 
         ucrBase.clsRsyntax.SetBaseROperator(clsModelOperator)
 
-
-        bResetModelOptions = True
     End Sub
 
     Private Sub assignToControlsChanged(ucrChangedControl As ucrCore) Handles ucrModelName.ControlValueChanged
@@ -608,7 +608,6 @@ Public Class dlgModellingTree
         Dim clsPackageCheck As New RFunction
         Dim expOutput As SymbolicExpression
         Dim chrOutput As CharacterVector
-        Dim strFormNames() As String
 
         ' Resetting the background color of the input control 
         ucrInputCheck.txtInput.BackColor = Color.White
