@@ -28,14 +28,11 @@ Public Class dlgDefineTricotData
     Private clsAnyDuplicatesFunction, clsVarietyDuplicatesFunction, clsIDVarietyDuplicatesFunction, clsConcFunction, clsConcVarietyFunction, clsNewConcFunction, clsGetColFunction, clsGetVarietyFunction, clsIDVarietyPasteFunction, clsIDVarietyPasteIDFunction, clsIDVarietyPasteVarietyFunction, clsIDVarietyPasteIDConcFunction, clsIDVarietyPasteVarietyConcFunction, clsDummyFunction As New RFunction
     Private clsCDATIDLevelFunction, cslCDATVarietyLevelFunction, clsCDATIDLevelVarietiesFunction, clsCDATIDLevelTraitsFunction As New RFunction
 
-    Private Sub ucrReceiverLevelID_Load(sender As Object, e As EventArgs) Handles ucrReceiverLevelID.Load
-
-    End Sub
 
     Private clsOperator As New ROperator
-    Private bIsUnique As Boolean = True
-    Private bIsUniqueVariety As Boolean = True
-    Private bIsUniqueID As Boolean = True
+    Private bIsUnique As Boolean = False
+    Private bIsUniqueVariety As Boolean = False
+    Private bIsUniqueID As Boolean = False
 
     Private strCurrentDataframeName As String
 
@@ -71,6 +68,15 @@ Public Class dlgDefineTricotData
 
         ucrSelectorIDLevelData.SetParameter(New RParameter("data_name", 0))
         ucrSelectorIDLevelData.SetParameterIsString()
+
+        ucrChkDefineIDLevel.SetText("Define ID Level Data")
+        ucrChkDefineIDLevel.Checked = False
+        grpIDLevel.Visible = False
+
+
+        ucrChkDefineVarietyLevel.SetText("Define Variety Level Data")
+        ucrChkDefineVarietyLevel.Checked = False
+        grpVarietyLevel.Visible = False
 
         'ID Level Data (run by the top groupbox)
         ucrReceiverLevelOverallTraits.SetParameter(New RParameter("traits", 5))
@@ -136,6 +142,11 @@ Public Class dlgDefineTricotData
         clsIDVarietyPasteVarietyConcFunction = New RFunction
         clsGetVarietyFunction = New RFunction
 
+        bIsUnique = False
+        bIsUniqueVariety = False
+        bIsUniqueID = False
+
+
         ucrReceiverLevelID.SetMeAsReceiver()
         ucrInputCheckInputIDLevel.txtInput.BackColor = Color.White
         ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.White
@@ -166,6 +177,7 @@ Public Class dlgDefineTricotData
         clsDATIDVarietyFunction.iCallType = 2
 
         clsGetColumnSelection.SetRCommand("data_book$get_column_selection")
+        clsGetColumnSelection.AddParameter("data_name", Chr(34) & ucrSelectorIDVarietyLevel.strCurrentDataFrame & Chr(34))
         clsGetColumnSelection.AddParameter("name", Chr(34) & "traits_selection" & Chr(34), iPosition:=1)
         clsGetColumnSelection.SetAssignTo("traits")
         clsGetColumnSelection.ToScript(strScript:="")
@@ -180,7 +192,11 @@ Public Class dlgDefineTricotData
         clsUnameFunction.SetAssignTo("traits")
         clsUnameFunction.ToScript(strScript:="")
 
+
         clsGetDataFrameFunction.SetRCommand("data_book$get_data_frame")
+        clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorIDVarietyLevel.strCurrentDataFrame & Chr(34))
+        clsGetDataFrameFunction.SetAssignTo(ucrSelectorIDVarietyLevel.strCurrentDataFrame)
+        clsGetDataFrameFunction.ToScript(strScript:="")
 
         clsCreateRankingFunction.SetPackageName("instatExtras")
         clsCreateRankingFunction.SetRCommand("create_rankings_list")
@@ -219,8 +235,8 @@ Public Class dlgDefineTricotData
         clsIDVarietyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsIDVarietyPasteFunction)
 
         ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDLevelFunction, 1)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsDATVarietyLevelFunction, 2)
+        'ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDLevelFunction, 1)
+        'ucrBase.clsRsyntax.AddToBeforeCodes(clsDATVarietyLevelFunction, 2)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDVarietyFunction, 3)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAddRankingObjFunction, 4)
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddGrpRankingObjFunction)
@@ -345,17 +361,48 @@ Public Class dlgDefineTricotData
     End Function
 
 
-    Private Sub TestOKEnabled()
+    '    Private Sub TestOKEnabled()
+    '        Dim bDataFramesDifferent As Boolean = AreAllDataframessDifferent(
+    '    ucrSelectorIDLevelData.strCurrentDataFrame,
+    '    ucrSelectorIDVarietyLevel.strCurrentDataFrame,
+    '    ucrSelectorVarietyLevelData.strCurrentDataFrame
+    ')
+    '        ucrBase.OKEnabled(Not ucrReceiverIDVarietyLevelID.IsEmpty AndAlso
+    '                      Not ucrReceiverIDVarietyLevelVariety.IsEmpty AndAlso
+    '                      Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
+    '                      Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent AndAlso
+    '                      bIsUnique AndAlso bIsUniqueID AndAlso bIsUniqueVariety)
+    '    End Sub
+
+    Private Sub TestOkEnabled()
         Dim bDataFramesDifferent As Boolean = AreAllDataframessDifferent(
-    ucrSelectorIDLevelData.strCurrentDataFrame,
-    ucrSelectorIDVarietyLevel.strCurrentDataFrame,
-    ucrSelectorVarietyLevelData.strCurrentDataFrame
-)
-        ucrBase.OKEnabled(Not ucrReceiverIDVarietyLevelID.IsEmpty AndAlso
-                      Not ucrReceiverIDVarietyLevelVariety.IsEmpty AndAlso
-                      Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
-                      Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent AndAlso
-                      bIsUnique AndAlso bIsUniqueID AndAlso bIsUniqueVariety)
+        ucrSelectorIDLevelData.strCurrentDataFrame,
+            ucrSelectorIDVarietyLevel.strCurrentDataFrame,
+            ucrSelectorVarietyLevelData.strCurrentDataFrame
+        )
+
+        Dim bIDVariety_By_ID_Dfn_Dataframes = ucrSelectorIDLevelData.strCurrentDataFrame <> ucrSelectorIDVarietyLevel.strCurrentDataFrame
+        Dim bIDVariety_By_Variety_Dfn_Dataframes = ucrSelectorVarietyLevelData.strCurrentDataFrame <> ucrSelectorIDVarietyLevel.strCurrentDataFrame
+        Dim bAllFilledIDVarietyReceivers = Not ucrReceiverIDVarietyLevelID.IsEmpty AndAlso Not ucrReceiverIDVarietyLevelVariety.IsEmpty
+
+
+        If ucrChkDefineIDLevel.Checked And ucrChkDefineVarietyLevel.Checked Then
+            ucrBase.OKEnabled(Not ucrReceiverIDVarietyLevelID.IsEmpty AndAlso
+                          Not ucrReceiverIDVarietyLevelVariety.IsEmpty AndAlso
+                          Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
+                          Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent AndAlso
+                          bIsUnique AndAlso bIsUniqueID AndAlso bIsUniqueVariety)
+        ElseIf ucrChkDefineIDLevel.Checked Then
+            ucrBase.OKEnabled(bIsUnique AndAlso bIsUniqueID AndAlso bIDVariety_By_ID_Dfn_Dataframes AndAlso
+                              bAllFilledIDVarietyReceivers AndAlso
+                              Not ucrReceiverLevelID.IsEmpty)
+        ElseIf ucrChkDefineVarietyLevel.Checked Then
+            ucrBase.OKEnabled(bIDVariety_By_Variety_Dfn_Dataframes AndAlso
+                              bAllFilledIDVarietyReceivers AndAlso
+                              Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso bIsUniqueVariety)
+        Else
+            ucrBase.OKEnabled(bIsUniqueID AndAlso bAllFilledIDVarietyReceivers)
+        End If
     End Sub
 
     Private Sub ucrSelectorIDVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDVarietyLevel.ControlValueChanged
@@ -363,6 +410,13 @@ Public Class dlgDefineTricotData
         Dim strDataName As String = ucrSelectorIDVarietyLevel.strCurrentDataFrame
         clsGetDataFrameFunction.SetAssignTo(strDataName)
         clsGetDataFrameFunction.ToScript(strScript:="")
+
+        If clsGetColumnSelection.ContainsParameter("data_name") Then
+            clsGetColumnSelection.RemoveParameterByName("data_name")
+            clsGetColumnSelection.AddParameter("data_name", Chr(34) & ucrSelectorIDVarietyLevel.strCurrentDataFrame & Chr(34))
+        End If
+
+
 
         clsGroupRankingFunction.AddParameter("data", strDataName, iPosition:=0)
     End Sub
@@ -460,6 +514,27 @@ Public Class dlgDefineTricotData
             clsIDVarietyPasteVarietyConcFunction.RemoveParameterByName("x1")
         End If
     End Sub
+
+    Private Sub ucrChkDefineIDLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineIDLevel.ControlValueChanged
+        If ucrChkDefineIDLevel.Checked Then
+            grpIDLevel.Visible = True
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDLevelFunction, 1)
+        Else
+            grpIDLevel.Visible = False
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDATIDLevelFunction)
+        End If
+    End Sub
+
+    Private Sub ucrChkDefineVarietyLevel_ControlValueChanged(ucrChanged As ucrCore) Handles ucrChkDefineVarietyLevel.ControlValueChanged
+        If ucrChkDefineVarietyLevel.Checked Then
+            grpVarietyLevel.Visible = True
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsDATVarietyLevelFunction, 2)
+        Else
+            grpVarietyLevel.Visible = False
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDATVarietyLevelFunction)
+        End If
+    End Sub
+
 
     Private Sub btncheckduplicatesvarietylevel_Click(sender As Object, e As EventArgs) Handles btncheckduplicatesvarietylevel.Click
         Dim iAnyDuplicated As Integer
