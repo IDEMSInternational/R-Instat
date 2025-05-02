@@ -19,6 +19,7 @@ Imports RDotNet
 Public Class dlgTricotModelOneVarCov
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Public bResetSubDialog As Boolean = False
     Private bIsUnique As Boolean = True
     Private clsGetVariablesMetadataFunction As New RFunction
     Private clsGetObjectFunction, clsGetRankingItemsFunction, clsGetDataFrameFunction, clsGetColumn,
@@ -26,7 +27,6 @@ Public Class dlgTricotModelOneVarCov
     clsCheckUniqueFunction As New RFunction
     Private clsObjectOperator, clsTildeOperator, clsTilde2Operator, clsBracketOperator,
         clsNamesOperator, clsModelOperator, clsSpaceOperator, clsTilde3Operator As New ROperator
-
 
 
     Private Sub dlgTricotModelOneVarCov_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -71,12 +71,10 @@ Public Class dlgTricotModelOneVarCov
         ucrTricOneVarSave.SetIsComboBox()
         ucrTricOneVarSave.SetAssignToIfUncheckedValue("last_model")
 
-        btnModelOptions.Enabled = False
         btnDisplayOptions.Enabled = False
     End Sub
 
     Private Sub setDefaults()
-
         clsGetVariablesMetadataFunction = New RFunction
         clsGetObjectFunction = New RFunction
         clsObjectOperator = New ROperator
@@ -99,6 +97,13 @@ Public Class dlgTricotModelOneVarCov
         ucrTricOneVarSave.Reset()
         ucrSelectorTraitsRanking.Reset()
         ucrSelectorVarietyLevel.Reset()
+
+        bResetSubDialog = True
+
+        ucrInputCheckVariety.SetName("")
+        ucrInputCheckVariety.txtInput.BackColor = Color.White
+        ucrInputCheckVariety.IsReadOnly = True
+
 
         clsCheckUniqueFunction.SetRCommand("check_variety_data_level")
 
@@ -200,7 +205,6 @@ Public Class dlgTricotModelOneVarCov
         End If
     End Sub
 
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         setDefaults()
         SetRcodeForControls(True)
@@ -213,41 +217,54 @@ Public Class dlgTricotModelOneVarCov
     Private Sub ucrVarietyLevelReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVarietyLevelReceiver.ControlValueChanged
         clsTilde2Operator.AddParameter("right", ucrVarietyLevelReceiver.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
         clsGetColumn.AddParameter("col_name", ucrVarietyLevelReceiver.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
-
+        CheckVarietyUnique()
     End Sub
-    Private Sub cmdCheckVariety_Click(sender As Object, e As EventArgs) Handles cmdCheckVariety.Click
+
+    Private Sub CheckVarietyUnique()
         Dim iAnyDuplicated As Integer
+        If Not ucrVarietyLevelReceiver.IsEmpty Then
+            Try
+                iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsCheckUniqueFunction.ToScript()).AsInteger(0)
+            Catch ex As Exception
+                iAnyDuplicated = 0
+            End Try
 
-        Try
-            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsCheckUniqueFunction.ToScript()).AsInteger(0)
-        Catch ex As Exception
-            iAnyDuplicated = 0
-        End Try
+            If iAnyDuplicated = 0 Then
+                ucrInputCheckVariety.SetName("Model fails. There is no variety variable that is Tricot-Defined in this data.")
+                ucrInputCheckVariety.txtInput.BackColor = Color.Coral
+                bIsUnique = False
+            ElseIf iAnyDuplicated = 1 Then
+                ucrInputCheckVariety.SetName("Model fails. No key columns are defined in the dataset.")
+                ucrInputCheckVariety.txtInput.BackColor = Color.Coral
+                bIsUnique = False
 
-        If iAnyDuplicated = 0 Then
-            ucrInputCheckVariety.SetName("Model fails. There is no variety variable that is Tricot-Defined in this data.")
-            ucrInputCheckVariety.txtInput.BackColor = Color.Coral
-            bIsUnique = False
-        ElseIf iAnyDuplicated = 1 Then
-            ucrInputCheckVariety.SetName("Model fails. No key columns are defined in the dataset.")
-            ucrInputCheckVariety.txtInput.BackColor = Color.Coral
-            bIsUnique = False
+            ElseIf iAnyDuplicated = 2 Then
+                ucrInputCheckVariety.SetName("Model fails. Only variety level data can be used for this data. This is data where there is a unique row for each variety given.")
+                ucrInputCheckVariety.txtInput.BackColor = Color.Coral
+                bIsUnique = False
+            Else
+                ucrInputCheckVariety.SetName("Model runs OK.")
+                ucrInputCheckVariety.txtInput.BackColor = Color.LightGreen
+                bIsUnique = True
+            End If
 
-        ElseIf iAnyDuplicated = 2 Then
-            ucrInputCheckVariety.SetName("Model fails. Only variety level data can be used for this data. This is data where there is a unique row for each variety given.")
-            ucrInputCheckVariety.txtInput.BackColor = Color.Coral
-            bIsUnique = False
         Else
-            ucrInputCheckVariety.SetName("Model runs OK.")
-            ucrInputCheckVariety.txtInput.BackColor = Color.LightGreen
-            bIsUnique = True
+            ucrInputCheckVariety.SetName("")
+            ucrInputCheckVariety.txtInput.BackColor = Color.White
         End If
-        TestOkEnabled()
     End Sub
 
     Private Sub ucrSelectorVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorVarietyLevel.ControlValueChanged
         clsGetColumn.AddParameter("x", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsCheckUniqueFunction.AddParameter("x", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-
     End Sub
+
+    Private Sub btnModelOptions_Click(sender As Object, e As EventArgs) Handles btnModelOptions.Click
+        sdgTricotModelOptions.SetRCode(clsNewRFunction:=clsPladmmFunction, clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog)
+
+        sdgTricotModelOptions.ShowDialog(Me)
+
+        bResetSubDialog = False
+    End Sub
+
 End Class
