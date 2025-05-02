@@ -302,7 +302,6 @@ Public Class dlgDescribeTwoVariable
         clsListFunction.AddParameter("factor", "factors", iPosition:=0)
         clsListFunction.AddParameter("summary", "summaries", iPosition:=1)
 
-        clsCrossDfFunction.SetPackageName("purrr")
         clsCrossDfFunction.SetRCommand("cross_df")
         clsCrossDfFunction.AddParameter("list", clsRFunctionParameter:=clsListFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsCrossDfFunction.SetAssignTo("combinations")
