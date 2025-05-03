@@ -181,11 +181,8 @@ Public Class frmMain
         '---------------------------------------
 
         '---------------------------------------
-        'start the R engine and install any missing R packages
-        'only proceed if;
-        '1. R engine has been started
-        '2. All packages have been installed
-        If Not (clsRLink.StartREngine() AndAlso AllPackagesInstalled()) Then
+        'Starts the R engine for the application and exits if initialization fails.
+        If Not clsRLink.StartREngine() Then
             Application.Exit()
             Environment.Exit(0)
         End If
@@ -196,6 +193,12 @@ Public Class frmMain
         ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         'execute R global options used by R-Instat R data book
         clsInstatOptions.ExecuteRGlobalOptions()
+        '---------------------------------------
+
+        '----------------------------------------
+        'Checks for the existence of all required R packages for the application.
+        'If any packages are missing, attempts to install them.
+        AllPackagesInstalled()
         '---------------------------------------
 
         '---------------------------------------
@@ -428,17 +431,19 @@ Public Class frmMain
         Return clsInstatOptions
     End Function
 
-    Private Function AllPackagesInstalled() As Boolean
-        'check missing R packages and prompt to install them
-        Dim arrMissingPackages() As String = clsRLink.GetRPackagesNotInstalled()
-        If arrMissingPackages IsNot Nothing AndAlso arrMissingPackages.Length > 0 Then
-            frmPackageIssues.SetMissingPackages(arrMissingPackages)
-            frmPackageIssues.ShowDialog()
-            Return Not frmPackageIssues.bCloseRInstat
-        Else
-            Return True
-        End If
-    End Function
+    Private Sub AllPackagesInstalled()
+        Try
+            'check missing R packages and prompt to install them
+            Dim arrMissingPackages() As String = clsRLink.GetRPackagesNotInstalled()
+            If arrMissingPackages IsNot Nothing AndAlso arrMissingPackages.Length > 0 Then
+                frmPackageIssues.SetMissingPackages(arrMissingPackages)
+                frmPackageIssues.ShowDialog()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
 
     Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strRScripts As String = ""
