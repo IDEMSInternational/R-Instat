@@ -46,7 +46,7 @@ Public Class DlgDefineClimaticData
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 328
+        ucrBase.iHelpTopicID = 672
         Dim kvpRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("rain", {"rain", "prec", "rr", "prcp"}.ToList())
         Dim kvpDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("date", {"date", "record"}.ToList())
         Dim kvpStation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("station", {"station", "id", "name"}.ToList())

@@ -55,7 +55,7 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 410
+        ucrBase.iHelpTopicID = 735
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
