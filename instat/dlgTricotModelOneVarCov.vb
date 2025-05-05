@@ -28,7 +28,7 @@ Public Class dlgTricotModelOneVarCov
     clsCoefFunction, clsConfidenLimFunction, clsDevianceFunction, clsEstimatesFunction, clsItemsFunction,
     clsPariPropFunction, clsQuasivarianceFunction, clsReliabilityFunction, clsSecondEstimatesFunction,
     clsStatsFunction, clsRegretFunction, clsTopItemFunction, clsNodeRuleFunction, clsNodeLabFuction,
-    clsSndgetVarmataFunction, clsLevelFunction,
+    clsSndgetVarmataFunction, clsLevelFunction, clsTreeFunction,
     clsFactorFunction, clsGetDataFrameFunction, clsVarianCovaMatrixFunction As New RFunction
 
     Private clsMapFunction As New RFunction
@@ -125,6 +125,7 @@ Public Class dlgTricotModelOneVarCov
         clsQuasivarianceFunction = New RFunction
         clsSecondEstimatesFunction = New RFunction
         clsStatsFunction = New RFunction
+        clsTreeFunction = New RFunction
         clsLevelFunction = New RFunction
         clsFactorFunction = New RFunction
         clsGetDataFrameFunction = New RFunction
@@ -395,43 +396,34 @@ Public Class dlgTricotModelOneVarCov
 
     Private Sub btnModelOptions_Click(sender As Object, e As EventArgs) Handles btnModelOptions.Click
         sdgTricotModelOptions.SetRCode(clsNewRFunction:=clsPladmmFunction, clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog)
-
         sdgTricotModelOptions.ShowDialog(Me)
-
         bResetSubDialog = False
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles btnDisplayOptions.Click
         sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction,
-                                        clsNewGetObjectHeatFunction:=clsGetObjectHeatFunction, clsNewGetObjectPlotFunction:=clsGetObjectPlotFunction,
-                                        clsNewGetObjectBarFunction:=clsGetObjectBarFunction, clsNewAddObjectHeatFunction:=clsAddObjectHeatFunction,
-                                        clsNewAddObjectPlotFunction:=clsAddObjectPlotFunction, clsNewAddObjectBarFunction:=clsAddObjectBarFunction,
                                         clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
                                         clsNewAnnovaFunction:=clsAnnovaFunction, clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction,
-                                        clsNewCoefFunction:=clsCoefFunction, clsNewCoefOperator:=clsCoefOperator, clsNewConfidenLimFunction:=clsConfidenLimFunction,
+                                        clsNewCoefFunction:=clsCoefFunction, clsNewConfidenLimFunction:=clsConfidenLimFunction,
                                         clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction, clsNewItemsFunction:=clsItemsFunction,
                                         clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
                                         clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction,
                                         clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction, clsNewNodeLabFuction:=clsNodeLabFuction,
-                                        clsNewStatsOperator:=clsStatsOperator, clsNewSndgetVarmataFunction:=clsSndgetVarmataFunction, clsNewSpaceOperator:=clsSpaceOpreator,
-                                        clsNewLevelFunction:=clsLevelFunction, clsNewAssigneOperator:=clsAssignOperator, clsNewFactorFunction:=clsFactorFunction,
-                                        clsNewGetDataFrameFunction:=clsGetDataFrameFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, bReset:=bResetSubDialog)
+                                        clsNewTreeFunction:=clsTreeFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, bReset:=bResetSubDialog)
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkReability.Enabled = False
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = False
-        sdgDisplayModelOptions.ucrChkRegret.Enabled = False
-        sdgDisplayModelOptions.ucrChkNodeLabel.Enabled = False
-        sdgDisplayModelOptions.ucrChkNodeRules.Enabled = False
-        sdgDisplayModelOptions.ucrChkTopItem.Enabled = False
-        sdgDisplayModelOptions.ucrChkPlot.Enabled = False
-        sdgDisplayModelOptions.ucrChkBar.Enabled = False
+        sdgDisplayModelOptions.grpTrees.Enabled = False
+        sdgDisplayModelOptions.rdoPlot.Enabled = False
+        sdgDisplayModelOptions.rdoBar.Enabled = False
+        sdgDisplayModelOptions.rdoTree.Enabled = False
 
         sdgDisplayModelOptions.ShowDialog()
         bResetSubDialog = False
         AddRemoveFunctions()
     End Sub
     Private Sub AddRemoveFunctions()
-        If sdgDisplayModelOptions.ucrChkHeat.Checked Then
+        If sdgDisplayModelOptions.rdoMap.Checked Then
             ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=6)
         Else
             ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=6)
