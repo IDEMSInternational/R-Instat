@@ -120,7 +120,7 @@ Public Class clsTransformationRModel
                 rScript.OperatorAddParam(iStatementNumber, strFunctionName, iParameterNumber, strValue)
 
             Case TransformationType.operatorUpdateParam
-                rScript.OperatorUpdateParam(iStatementNumber, strFunctionName, iParameterNumber, strValue)
+                rScript.OperatorUpdateParam(iStatementNumber, strFunctionName, iParameterNumber, strValue, bIsQuoted)
 
             Case TransformationType.operatorUpdateParamPresentation
                 rScript.OperatorUpdateParamPresentation(iStatementNumber, strFunctionName, iParameterNumber, strValue)
