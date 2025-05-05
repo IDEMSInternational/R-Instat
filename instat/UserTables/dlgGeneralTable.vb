@@ -23,8 +23,17 @@ Public Class dlgGeneralTable
     End Sub
 
     Private Sub btnMoreOptions_Click(sender As Object, e As EventArgs) Handles btnMoreOptions.Click
-        sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
-        sdgTableOptions.ShowDialog(Me)
+        If rdoSingle.Checked Then
+            sdgBeforeTablesOption.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
+            sdgBeforeTablesOption.ShowDialog(Me)
+        ElseIf rdoMultiple.Checked Then
+            sdgBeforeTablesOption.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
+            sdgBeforeTablesOption.ShowDialog(Me)
+        Else
+            sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
+            sdgTableOptions.ShowDialog(Me)
+        End If
+
         ucrInputTitle.SetText(sdgTableOptions.ucrHeader.ucrInputTitle.GetText)
         ucrInputTitleFooter.SetText(sdgTableOptions.ucrHeader.ucrInputTitleFooter.GetText)
         ucrCboSelectThemes.SetText(sdgTableOptions.ucrCboSelectThemes.GetText)
