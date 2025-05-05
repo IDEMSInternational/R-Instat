@@ -464,11 +464,10 @@ Public Class dlgTricotModellingGeneral
         sdgDisplayModelOptions.ucrChkReability.Enabled = False
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = False
         sdgDisplayModelOptions.grpTrees.Enabled = False
-        sdgDisplayModelOptions.rdoTree.Enabled = False
         sdgDisplayModelOptions.rdoPlot.Enabled = False
         sdgDisplayModelOptions.rdoBar.Enabled = False
-
-
+        sdgDisplayModelOptions.rdoTree.Enabled = False
+        sdgDisplayModelOptions.rdoMap.Enabled = True
 
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = True
         sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = True
@@ -479,9 +478,6 @@ Public Class dlgTricotModellingGeneral
         sdgDisplayModelOptions.ucrChkParProp.Enabled = True
 
         sdgDisplayModelOptions.ucrChkItemPara.Enabled = True
-        sdgDisplayModelOptions.rdoNoPlot.Enabled = True
-        sdgDisplayModelOptions.rdoMap.Enabled = True
-
 
         sdgDisplayModelOptions.ShowDialog()
         bResetSubDialog = False

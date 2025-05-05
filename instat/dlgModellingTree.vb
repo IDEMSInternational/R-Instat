@@ -611,6 +611,7 @@ Public Class dlgModellingTree
         sdgDisplayModelOptions.rdoMap.Enabled = True
         sdgDisplayModelOptions.rdoBar.Enabled = True
         sdgDisplayModelOptions.grpTrees.Enabled = True
+
         sdgDisplayModelOptions.ShowDialog()
         bResetSubDialog = False
     End Sub
