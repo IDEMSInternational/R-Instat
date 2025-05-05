@@ -229,13 +229,20 @@ Public Class frmMain
                 My.Application.Info.Version.Minor.ToString() & "." &
                 My.Application.Info.Version.Build.ToString()
 
-        Me.Text = "R-Instat " & strVersion
+        Me.Text = "R-Instat " & GetVersionNumber()
 
-        CreateAdditionalLibraryDirectory(strVersion)
+        'CreateAdditionalLibraryDirectory(strVersion)
         '-------------------------------------
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
+
+    Public Function GetVersionNumber() As String
+        Dim strVersion As String = My.Application.Info.Version.Major.ToString() & "." &
+                My.Application.Info.Version.Minor.ToString() & "." &
+                My.Application.Info.Version.Build.ToString()
+        Return strVersion
+    End Function
 
     Private Sub CheckForUpdates()
         Dim webClient As New WebClient()
@@ -432,33 +439,6 @@ Public Class frmMain
             Return True
         End If
     End Function
-
-    Private Sub CreateAdditionalLibraryDirectory(strVersion As String)
-        ' Define the custom library path in the ApplicationData folder
-        Dim strLibraryPath As String = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "R-Instat", strVersion, "library")
-
-        Try
-            ' Check if the directory exists, if not, create it
-            If Not Directory.Exists(strLibraryPath) Then
-                Directory.CreateDirectory(strLibraryPath)
-            End If
-
-
-            'To ensure this part of the code only runs when the application Is Not in the Debug mode (i.e., in Release mode)
-#If Not DEBUG Then
-                     Dim clsSetLibPathsFunction As New RFunction
-            clsSetLibPathsFunction.SetPackageName("instatExtras")
-            clsSetLibPathsFunction.SetRCommand("set_library_paths")
-            clsSetLibPathsFunction.AddParameter("library_path", Chr(34) & strLibraryPath.Replace("\", "/") & Chr(34))
-
-            ' Execute the R script to update the library paths
-            clsRLink.RunScript(strScript:=clsSetLibPathsFunction.ToScript, bSeparateThread:=False, bSilent:=False)
-#End If
-        Catch ex As Exception
-            ' Handle potential errors (e.g., directory creation failure)
-            MessageBox.Show($"Failed to create or update library directory: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
 
     Private Sub ExecuteSetupRScriptsAndSetupRLinkAndDatabook()
         Dim strRScripts As String = ""
@@ -981,6 +961,7 @@ Public Class frmMain
         dlgLabelsLevels.SelectedColumn = strSelectedColumn
         dlgReferenceLevel.SelectedColumn = strSelectedColumn
         dlgFactorDataFrame.SelectedColumn = strSelectedColumn
+        dlgCountinFactor.SelectedColumn = strSelectedColumn
     End Sub
 
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
@@ -2347,6 +2328,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnFactorCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
+        SetDefaultValueInReorderLevels()
         dlgCountinFactor.ShowDialog()
     End Sub
 
@@ -2938,51 +2920,43 @@ Public Class frmMain
     Private Sub mnuDescribePresentation_Click(sender As Object, e As EventArgs) Handles mnuDescribePresentation.Click
         dlgGeneralTable.ShowDialog()
     End Sub
-    Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileToolStripMenuItem.Click
+    Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuFileHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "13")
     End Sub
 
-    Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem.Click
+    Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuEditHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "7")
     End Sub
 
-    Private Sub PrepareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrepareToolStripMenuItem.Click
+    Private Sub PrepareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuPrepareHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "9")
     End Sub
 
-    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DescribeToolStripMenuItem.Click
+    Private Sub DescribeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "18")
     End Sub
 
-    Private Sub ModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModelToolStripMenuItem.Click
+    Private Sub ModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuModelHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "17")
     End Sub
 
-    Private Sub StructuredToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StructuredToolStripMenuItem.Click
+    Private Sub StructuredToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "454")
     End Sub
 
-    Private Sub ClimaticToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClimaticToolStripMenuItem.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "19")
-    End Sub
 
-    Private Sub ProcurementToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProcurementToolStripMenuItem.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "498")
-    End Sub
 
-    Private Sub ExperimentsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExperimentsToolStripMenuItem.Click
-        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "570")
-    End Sub
 
-    Private Sub ToolsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolsToolStripMenuItem.Click
+
+    Private Sub ToolsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuToolsHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "8")
     End Sub
 
-    Private Sub ViewToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ViewToolStripMenuItem.Click
+    Private Sub ViewToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles mnuViewHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "21")
     End Sub
 
-    Private Sub MenusAndDialogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MenusAndDialogsToolStripMenuItem.Click
+    Private Sub MenusAndDialogsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuMenusHelp.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "12")
     End Sub
 
@@ -3034,6 +3008,11 @@ Public Class frmMain
         dlgTraits.ShowDialog()
     End Sub
 
+
+    Private Sub mnuTricotImportFromClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotImportFromClimMob.Click
+        dlgImportfromClimMob.ShowDialog()
+    End Sub
+
     Private Sub mnuTricotDescribeXpTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraits.Click
         dlgTraitsXp.ShowDialog()
     End Sub
@@ -3050,11 +3029,112 @@ Public Class frmMain
         dlgModellingTree.ShowDialog()
     End Sub
 
-    Private Sub mnuTricotTransformClimMob_Click(sender As Object, e As EventArgs) Handles mnuTricotTransformClimMob.Click
+    Private Sub mnuTricotTransformClimMob_Click(sender As Object, e As EventArgs)
         dlgTransformTricotData.ShowDialog()
     End Sub
 
     Private Sub mnuTricotDescribeCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotDescribeCorrelations.Click
         dlgTraitCorrelations.ShowDialog()
+
+    End Sub
+
+    Private Sub mnuTricotModelOverall_Click(sender As Object, e As EventArgs) Handles mnuTricotModelOverall.Click
+        dlgTricotModelOneVarCov.ShowDialog()
+    End Sub
+
+    Private Sub StructuredToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuStructuredHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "454")
+    End Sub
+
+    Private Sub ClimaticToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuClimaticHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "19")
+    End Sub
+
+    Private Sub ProcurementToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuProcurementHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "498")
+    End Sub
+
+    Private Sub ExperimentsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuExperimentsHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "570")
+    End Sub
+
+    Private Sub TricotMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTricotMenuHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "669")
+    End Sub
+
+    Private Sub TricotXPMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTricotXPMenuHelp.Click
+        Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "729")
+    End Sub
+
+    Private Sub Summarise23VariablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuSummariseTricot.Click
+        dlgDescribeTwoVariable.enumTwovariableMode = dlgDescribeTwoVariable.TwovariableMode.Climatic
+        dlgDescribeTwoVariable.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeGraphTricots_Click(sender As Object, e As EventArgs) Handles mnuDescribeGraphTricots.Click
+        dlgDescribeTwoVarGraph.enumTwovarMode = dlgDescribeTwoVarGraph.TwovarMode.Climatic
+        dlgDescribeTwoVarGraph.ShowDialog()
+    End Sub
+
+    Private Sub mnuTidyAddMergeColumns_Click(sender As Object, e As EventArgs) Handles mnuTidyAddMergeColumns.Click
+        dlgMergeAdditionalData.enumMergeMode = dlgMergeAdditionalData.MergeMode.Climatic
+        dlgMergeAdditionalData.ShowDialog()
+    End Sub
+
+    Private Sub DuplicateRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTidyDuplicateRows.Click
+        dlgDuplicateRows.enumDuplicateMode = dlgDuplicateRows.DuplicateMode.Climatic
+        dlgDuplicateRows.ShowDialog()
+    End Sub
+
+    Private Sub AddKeyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddKeyToolStripMenuItem.Click
+        dlgAddKey.enumAddkeyMode = dlgAddKey.AddkeyMode.Climatic
+        dlgAddKey.ShowDialog()
+    End Sub
+
+    Private Sub mnuVisualizeTricot_Click(sender As Object, e As EventArgs)
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Describe
+        dlgVisualizeData.ShowDialog()
+    End Sub
+
+    Private Sub mnuTidyTransformTricot_Click(sender As Object, e As EventArgs) Handles mnuTidyTransformTricot.Click
+        dlgTransformTricotData.ShowDialog()
+    End Sub
+
+    'Visualise data dialog
+    Private Sub mnuTricotexamineeditdataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataVisualiseData.Click
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Climatic
+        dlgVisualizeData.ShowDialog()
+    End Sub
+
+    'Pivot table dialog
+    Private Sub mnuTricotexamineeditdataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataPivotTable.Click
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Climatic
+        dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
+    'One Variable Summarise Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableSummarise.Click
+        dlgOneVariableSummarise.enumOnevariableMode = dlgOneVariableSummarise.OnevariableMode.Climatic
+        dlgOneVariableSummarise.ShowDialog()
+    End Sub
+
+    'One Variable Graph Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableGraph.Click
+        dlgOneVariableGraph.enumOnevariableMode = dlgOneVariableGraph.OnevariableMode.Climatic
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
+    'One Variable Frequencies Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableFrequencies.Click
+        dlgOneWayFrequencies.enumOnewayMode = dlgOneWayFrequencies.OnewayMode.Climatic
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotModelCharacterisation_Click(sender As Object, e As EventArgs) Handles mnuTricotModelCharacterisation.Click
+        dlgTricotModellingGeneral.ShowDialog()
+    End Sub
+
+    Private Sub OptionalMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionalMenuToolStripMenuItem.Click
+
     End Sub
 End Class

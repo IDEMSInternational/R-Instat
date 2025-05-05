@@ -46,6 +46,7 @@ Public Class dlgDuplicateRows
         Dim dctConditions As New Dictionary(Of String, String)
         Dim dctType As New Dictionary(Of String, String)
 
+        ucrBase.iHelpTopicID = 698
         ucrBase.clsRsyntax.iCallType = 0
 
         ucrPnlOptions.AddRadioButton(rdoDataFrame)

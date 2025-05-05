@@ -49,7 +49,7 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 412
+        ucrBase.iHelpTopicID = 736
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
