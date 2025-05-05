@@ -1,5 +1,18 @@
 [
     {
+        "enumTransformationType": "ifTrueExecuteChildTransformations",
+        "strValueKey": "isComment",
+        "lstTransformations": [
+            {
+                "enumTransformationType": "operatorUpdateParamPresentation",
+                "iStatementNumber": 0,
+                "strFunctionName": "<-",
+                "iParameterNumber": 0,
+                "strValueKey": "comment"
+            }
+        ]
+    },
+    {
         "enumTransformationType": "functionUpdateParamValue",
         "iStatementNumber": 0,
         "strFunctionName": "get_variables_metadata",
@@ -73,75 +86,74 @@
     },
     {
         "enumTransformationType": "ifTrueExecuteChildTransformations",
-        "strValueKey": "isStoreTableOrDataFrame",
+        "strValueKey": "isSaveAsTable",
         "lstTransformations": [
             {
-                "enumTransformationType": "operatorUpdateParam",
+                "enumTransformationType": "scriptInsert",
                 "iStatementNumber": 10,
-                "strFunctionName": "<-",
+                "strScript": "\nlast_table <- corrr::fashion(kendall_rankings)\ndata_book$add_object(data_name=\"_dataFrame\", object_name=\"last_table\", object_type_label=\"table\", object_format=\"text\", object=last_table)\n\ndata_book$get_object_data(data_name=\"_dataFrame\", object_name=\"last_table\", as_file=TRUE)"
+            },
+            {
+                "enumTransformationType": "functionUpdateParamValue",
+                "iStatementNumber": 11,
+                "strFunctionName": "add_object",
                 "iParameterNumber": 0,
-                "strValueKey": "storeTableOrDataFrame"
-            },
-            {
-                "enumTransformationType": "functionUpdateParamValue",
-                "iStatementNumber": 11,
-                "strFunctionName": "add_object",
-                "iParameterNumber": 1,
-                "strValueKey": "storeTableOrDataFrame",
+                "strValueKey": "dataFrame",
                 "bIsQuoted": true
-            },
-            {
-                "enumTransformationType": "functionUpdateParamValue",
-                "iStatementNumber": 11,
-                "strFunctionName": "add_object",
-                "iParameterNumber": 4,
-                "strValueKey": "storeTableOrDataFrame"
             },
             {
                 "enumTransformationType": "functionUpdateParamValue",
                 "iStatementNumber": 12,
                 "strFunctionName": "get_object_data",
-                "iParameterNumber": 1,
-                "strValueKey": "storeTableOrDataFrame",
+                "iParameterNumber": 0,
+                "strValueKey": "dataFrame",
                 "bIsQuoted": true
             },
             {
-                "enumTransformationType": "functionUpdateParamValue",
-                "iStatementNumber": 13,
-                "strFunctionName": "c",
-                "iParameterNumber": 0,
-                "strValueKey": "storeTableOrDataFrame",
-                "bIsQuoted": true
+                "enumTransformationType": "ifTrueExecuteChildTransformations",
+                "strValueKey": "isStoreTableOrDataFrame",
+                "lstTransformations": [
+                    {
+                        "enumTransformationType": "operatorUpdateParam",
+                        "iStatementNumber": 10,
+                        "strFunctionName": "<-",
+                        "iParameterNumber": 0,
+                        "strValueKey": "storeTableOrDataFrame"
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 11,
+                        "strFunctionName": "add_object",
+                        "iParameterNumber": 1,
+                        "strValueKey": "storeTableOrDataFrame",
+                        "bIsQuoted": true
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 11,
+                        "strFunctionName": "add_object",
+                        "iParameterNumber": 4,
+                        "strValueKey": "storeTableOrDataFrame"
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 12,
+                        "strFunctionName": "get_object_data",
+                        "iParameterNumber": 1,
+                        "strValueKey": "storeTableOrDataFrame",
+                        "bIsQuoted": true
+                    },
+                    {
+                        "enumTransformationType": "functionUpdateParamValue",
+                        "iStatementNumber": 13,
+                        "strFunctionName": "c",
+                        "iParameterNumber": 0,
+                        "strValueKey": "storeTableOrDataFrame",
+                        "bIsQuoted": true
+                    }
+                ]
             }
-        ]
-    },
-    {
-        "enumTransformationType": "functionUpdateParamValue",
-        "iStatementNumber": 11,
-        "strFunctionName": "add_object",
-        "iParameterNumber": 0,
-        "strValueKey": "dataFrame",
-        "bIsQuoted": true
-    },
-    {
-        "enumTransformationType": "functionUpdateParamValue",
-        "iStatementNumber": 12,
-        "strFunctionName": "get_object_data",
-        "iParameterNumber": 0,
-        "strValueKey": "dataFrame",
-        "bIsQuoted": true
-    },
-    {
-        "enumTransformationType": "ifTrueExecuteChildTransformations",
-        "strValueKey": "isComment",
-        "lstTransformations": [
-            {
-                "enumTransformationType": "operatorUpdateParamPresentation",
-                "iStatementNumber": 0,
-                "strFunctionName": "<-",
-                "iParameterNumber": 0,
-                "strValueKey": "comment"
-            }
+
         ]
     }
 ]
