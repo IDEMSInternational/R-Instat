@@ -38,7 +38,7 @@ Public Class sdgDisplayModelOptions
         ucrChkANOVA.AddRSyntaxContainsFunctionNamesCondition(True, {"gosset:::anova.PlackettLuce(.x)"}, True)
         ucrChkANOVA.AddRSyntaxContainsFunctionNamesCondition(False, {"gosset:::anova.PlackettLuce(.x)"}, False)
 
-        ucrChkEstimates.SetText("Estimates")
+        ucrChkEstimates.SetText("Coefficients")
         ucrChkEstimates.AddRSyntaxContainsFunctionNamesCondition(True, {"coef"}, True)
         ucrChkEstimates.AddRSyntaxContainsFunctionNamesCondition(False, {"coef"}, False)
         ucrChkEstimates.AddToLinkedControls(ucrChkLog, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -66,7 +66,7 @@ Public Class sdgDisplayModelOptions
         ucrChkDeviance.AddRSyntaxContainsFunctionNamesCondition(True, {"deviance"}, True)
         ucrChkDeviance.AddRSyntaxContainsFunctionNamesCondition(False, {"deviance"}, False)
 
-        ucrChkSndEstimetes.SetText("Estimates")
+        ucrChkSndEstimetes.SetText("Fitted Values")
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(True, {"snd_estimates"}, True)
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(False, {"snd_estimates"}, False)
 
