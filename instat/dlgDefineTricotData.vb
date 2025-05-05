@@ -47,7 +47,7 @@ Public Class dlgDefineTricotData
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOKEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -211,18 +211,21 @@ Public Class dlgDefineTricotData
 
         clsGroupRankingFunction.SetPackageName("instatExtras")
         clsGroupRankingFunction.SetRCommand("create_rankings_list")
+        clsGroupRankingFunction.AddParameter("data", ucrSelectorIDVarietyLevel.strCurrentDataFrame, iPosition:=0)
         clsGroupRankingFunction.AddParameter("traits", "traits", iPosition:=1)
         clsGroupRankingFunction.AddParameter("flag", "TRUE", iPosition:=4, bIncludeArgumentName:=False)
         clsGroupRankingFunction.SetAssignTo("grouped_rankings_list")
         clsGroupRankingFunction.ToScript(strScript:="")
 
         clsAddRankingObjFunction.SetRCommand("data_book$add_object")
+        clsAddRankingObjFunction.AddParameter("data_name", Chr(34) & ucrSelectorIDVarietyLevel.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsAddRankingObjFunction.AddParameter("object_name", Chr(34) & "rankings_list" & Chr(34), iPosition:=1)
         clsAddRankingObjFunction.AddParameter("object_type_label", Chr(34) & "structure" & Chr(34), iPosition:=2)
         clsAddRankingObjFunction.AddParameter("object_format", Chr(34) & "text" & Chr(34), iPosition:=3)
         clsAddRankingObjFunction.AddParameter("object", clsRFunctionParameter:=clsCreateRankingFunction, iPosition:=4)
 
         clsAddGrpRankingObjFunction.SetRCommand("data_book$add_object")
+        clsAddGrpRankingObjFunction.AddParameter("data_name", Chr(34) & ucrSelectorIDVarietyLevel.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsAddGrpRankingObjFunction.AddParameter("object_name", Chr(34) & "grouped_rankings_list" & Chr(34), iPosition:=1)
         clsAddGrpRankingObjFunction.AddParameter("object_type_label", Chr(34) & "structure" & Chr(34), iPosition:=2)
         clsAddGrpRankingObjFunction.AddParameter("object_format", Chr(34) & "text" & Chr(34), iPosition:=3)
@@ -267,6 +270,9 @@ Public Class dlgDefineTricotData
         AutoFillReceivers(ucrSelectorIDLevelData, lstReceiversLevelID)
         AutoFillReceivers(ucrSelectorVarietyLevelData, lstReceiversVarityLevel)
         AutoFillReceivers(ucrSelectorIDVarietyLevel, lstReceiversIDVarietyLevel)
+
+        changedIDLevelChecked()
+        changedVarietyLevelChecked()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -390,19 +396,20 @@ Public Class dlgDefineTricotData
 
 
         If ucrChkDefineIDLevel.Checked And ucrChkDefineVarietyLevel.Checked Then
-            ucrBase.OKEnabled(Not ucrReceiverIDVarietyLevelID.IsEmpty AndAlso
+            ucrBase.OKEnabled(bIsUnique AndAlso bIsUniqueID AndAlso bIsUniqueVariety AndAlso
+                          Not ucrReceiverIDVarietyLevelID.IsEmpty AndAlso
                           Not ucrReceiverIDVarietyLevelVariety.IsEmpty AndAlso
                           Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
-                          Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent AndAlso
-                          bIsUnique AndAlso bIsUniqueID AndAlso bIsUniqueVariety)
+                          Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent
+                          )
         ElseIf ucrChkDefineIDLevel.Checked Then
             ucrBase.OKEnabled(bIsUnique AndAlso bIsUniqueID AndAlso bIDVariety_By_ID_Dfn_Dataframes AndAlso
                               bAllFilledIDVarietyReceivers AndAlso
                               Not ucrReceiverLevelID.IsEmpty)
         ElseIf ucrChkDefineVarietyLevel.Checked Then
-            ucrBase.OKEnabled(bIDVariety_By_Variety_Dfn_Dataframes AndAlso
+            ucrBase.OKEnabled(bIsUniqueVariety AndAlso bIsUniqueID AndAlso bIDVariety_By_Variety_Dfn_Dataframes AndAlso
                               bAllFilledIDVarietyReceivers AndAlso
-                              Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso bIsUniqueVariety)
+                              Not ucrReceiverVarietyLevelVariety.IsEmpty)
         Else
             ucrBase.OKEnabled(bIsUniqueID AndAlso bAllFilledIDVarietyReceivers)
         End If
@@ -427,11 +434,11 @@ Public Class dlgDefineTricotData
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOKEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVarietyLevelID.ControlContentsChanged, ucrReceiverIDVarietyLevelVariety.ControlContentsChanged, ucrReceiverIDVarietyLevelTraits.ControlContentsChanged, ucrReceiverVarietyLevelVariety.ControlContentsChanged, ucrReceiverVarietyLevelVariety.ControlContentsChanged, ucrSelectorIDLevelData.ControlContentsChanged, ucrSelectorIDVarietyLevel.ControlContentsChanged, ucrSelectorVarietyLevelData.ControlContentsChanged
-        TestOKEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub btnckeckduplicatesIDLevel_Click(sender As Object, e As EventArgs) Handles btnckeckduplicatesIDLevel.Click
@@ -463,7 +470,7 @@ Public Class dlgDefineTricotData
             ucrInputCheckInputIDLevel.txtInput.BackColor = Color.LightGreen
             bIsUnique = True
         End If
-        TestOKEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrSelectorIDLevelData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDLevelData.ControlValueChanged
@@ -532,6 +539,18 @@ Public Class dlgDefineTricotData
     End Sub
 
     Private Sub ucrChkDefineIDLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineIDLevel.ControlValueChanged
+        changedIDLevelChecked()
+        TestOkEnabled()
+    End Sub
+
+
+
+    Private Sub ucrChkDefineVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineVarietyLevel.ControlValueChanged
+        changedVarietyLevelChecked()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub changedIDLevelChecked()
         If ucrChkDefineIDLevel.Checked Then
             grpIDLevel.Visible = True
             ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDLevelFunction, 1)
@@ -541,16 +560,32 @@ Public Class dlgDefineTricotData
         End If
     End Sub
 
-    Private Sub ucrChkDefineVarietyLevel_ControlValueChanged(ucrChanged As ucrCore) Handles ucrChkDefineVarietyLevel.ControlValueChanged
+    Private Sub changedVarietyLevelChecked()
         If ucrChkDefineVarietyLevel.Checked Then
             grpVarietyLevel.Visible = True
             ucrBase.clsRsyntax.AddToBeforeCodes(clsDATVarietyLevelFunction, 2)
         Else
             grpVarietyLevel.Visible = False
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDATVarietyLevelFunction)
+        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDATVarietyLevelFunction)
+
         End If
     End Sub
 
+    'Private Sub ucrChkDefineIDLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineIDLevel.ControlValueChanged
+    '    If ucrChkDefineIDLevel.Checked Then
+    '        ucrBase.clsRsyntax.AddToBeforeCodes(clsDATIDLevelFunction, 1)
+    '    Else
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDATIDLevelFunction)
+    '    End If
+    'End Sub
+
+    'Private Sub ucrChkDefineVarietyLevel_ControlValueChanges(ucrChangedControl As ucrCore) Handles ucrChkDefineVarietyLevel.ControlValueChanged
+    '    If ucrChkDefineVarietyLevel.Checked Then
+    '        ucrBase.clsRsyntax.AddToBeforeCodes(clsDATVarietyLevelFunction, 2)
+    '    Else
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDATVarietyLevelFunction)
+    '    End If
+    'End Sub
 
     Private Sub columnCounters(receiverControl As ucrReceiverMultiple, associatedLabelControl As Label, associatedLabelText As String)
 
@@ -589,7 +624,7 @@ Public Class dlgDefineTricotData
             ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.LightGreen
             bIsUniqueVariety = True
         End If
-        TestOKEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub btncheckduplicatesIDVarietyLevel_Click(sender As Object, e As EventArgs) Handles btncheckduplicatesIDVarietyLevel.Click
@@ -621,6 +656,6 @@ Public Class dlgDefineTricotData
             ucrInputCheckInputIDVarietyLevel.txtInput.BackColor = Color.LightGreen
             bIsUniqueID = True
         End If
-        TestOKEnabled()
+        TestOkEnabled()
     End Sub
 End Class
