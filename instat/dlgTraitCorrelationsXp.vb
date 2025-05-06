@@ -343,6 +343,13 @@ Public Class dlgTraitCorrelationsXp
         ChangeOutputObject()
         HideShowOptions()
         AddPValues()
+
+        ' always output a table when display options not checked
+        If Not ucrChkDisplayOptions.Checked Then
+            chkSaveAsTable.Checked = True
+        Else
+            chkSaveAsTable.Checked = rdoAsText.Checked
+        End If
     End Sub
 
     Private Sub ucrChkLeadingZeros_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLeadingZeros.ControlValueChanged
