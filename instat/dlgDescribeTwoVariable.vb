@@ -78,7 +78,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 414
+        ucrBase.iHelpTopicID = 743
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -302,6 +302,7 @@ Public Class dlgDescribeTwoVariable
         clsListFunction.AddParameter("factor", "factors", iPosition:=0)
         clsListFunction.AddParameter("summary", "summaries", iPosition:=1)
 
+        clsCrossDfFunction.SetPackageName("purrr")
         clsCrossDfFunction.SetRCommand("cross_df")
         clsCrossDfFunction.AddParameter("list", clsRFunctionParameter:=clsListFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsCrossDfFunction.SetAssignTo("combinations")
