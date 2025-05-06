@@ -284,7 +284,7 @@ Partial Class sdgPLModelOptions
         Me.lblMean.Name = "lblMean"
         Me.lblMean.Size = New System.Drawing.Size(43, 13)
         Me.lblMean.TabIndex = 4
-        Me.lblMean.Text = "Meaan:"
+        Me.lblMean.Text = "Mean:"
         '
         'ucrNudRate
         '
