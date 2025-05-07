@@ -324,8 +324,8 @@ Public Class dlgSummaryTables
             Exit Sub
         End If
 
-        sdgTableOptions.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsROperator)
-        sdgTableOptions.ShowDialog(Me)
+        sdgBeforeTablesOption.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsROperator)
+        sdgBeforeTablesOption.ShowDialog(Me)
 
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
