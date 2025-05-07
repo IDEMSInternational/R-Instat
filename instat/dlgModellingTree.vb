@@ -39,7 +39,7 @@ Public Class dlgModellingTree
     Private clsPairwiseProbFunction, clsPairwiseProbMainFunction, clsReliabilityFunction, clsItemsParFunction As New RFunction
     Private clsCoefOperator, clsAICOperator, clsDevianceOperator, clsPairwiseProbOperator, clsStatsOperator, clsModelOperator As New ROperator
     Private clsAnnovaFunction, clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction As New RFunction
-    Private clsWrapBarFunction, clsWrapPlotFunction As New RFunction
+    Private clsWrapBarFunction, clsWrapPlotFunction, clsPlacketFunction As New RFunction
 
     Private clsAddObjectHeatFunction, clsHeatFunction, clsTreeFunction As New RFunction
     Private clsPlotFunction, clsBarfunction As New RFunction
@@ -144,6 +144,7 @@ Public Class dlgModellingTree
         clsAddObjectHeatFunction = New RFunction
         clsBarfunction = New RFunction
         clsHeatFunction = New RFunction
+        clsPlacketFunction = New RFunction
         clsPlotFunction = New RFunction
         clsCoefOperator = New ROperator
         clsAICOperator = New ROperator
@@ -465,6 +466,12 @@ Public Class dlgModellingTree
         clsWrapPlotFunction.iCallType = 3
 
 
+        ' PLACKET FUNCTION FOR THE MODEL OPTIONS SUB-DIALOG
+        '---------------------------------------------------------------------------------------------------------------------------------------------
+        clsPlacketFunction.SetPackageName("PlackettLuce")
+        clsPlacketFunction.SetRCommand("PlackettLuce")
+        clsPlacketFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
+
         ucrBase.clsRsyntax.ClearCodes()
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction)
@@ -580,7 +587,9 @@ Public Class dlgModellingTree
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
-
+        sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog, clsNewPlacketFunction:=clsPlacketFunction)
+        sdgPLModelOptions.ShowDialog()
+        bResetSubDialog = False
     End Sub
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction, clsNewCoefFunction:=clscoefFunction, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction,
