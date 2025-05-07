@@ -61,8 +61,6 @@ Public Class dlgPlacketLuceModel
         ucrSaveResult.SetCheckBoxText("Store Model")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorTraitsPL.ucrAvailableDataFrames)
-
-        'cmdModelOptions.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -147,14 +145,6 @@ Public Class dlgPlacketLuceModel
         clsPlacketFunction.SetPackageName("PlackettLuce")
         clsPlacketFunction.SetRCommand("PlackettLuce")
         clsPlacketFunction.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
-        'clsPlacketFunction.AddParameter("gamma", "NULL")
-        'clsPlacketFunction.AddParameter("sigma", "NULL")
-        'clsPlacketFunction.AddParameter("method", "c(""iterative scaling"", ""BFGS"", ""L-BFGS"")")
-        'clsPlacketFunction.AddParameter("weights", "freq(rankings)")
-        'clsPlacketFunction.AddParameter("na.action", "getOption(""na.action"")")
-        'clsPlacketFunction.AddParameter("maxit", "c(500,10)")
-        'clsPlacketFunction.AddParameter("steffensen", "0.1")
-        'clsPlacketFunction.AddParameter("epsilon", "1e-07")
 
         clsNamesOperator.SetOperation("<-")
         clsNamesOperator.AddParameter("left", clsRFunctionParameter:=clsNamesFunction)
@@ -335,7 +325,7 @@ Public Class dlgPlacketLuceModel
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(Not ucrReceiverMultipleTraits.IsEmpty AndAlso ucrSaveResult.IsComplete)
+        ucrBase.OKEnabled(Not ucrReceiverMultipleTraits.IsEmpty AndAlso ucrSaveResult.IsComplete AndAlso Not ucrSelectorTraitsPL.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -352,6 +342,20 @@ Public Class dlgPlacketLuceModel
         sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction, clsNewAnnovaFunction:=clsAnnovaFunction, clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction, clsNewCoefFunction:=clsCoefFunction, clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction, clsNewItemsFunction:=clsItemsFunction, clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction, clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction, clsNewNodeLabFuction:=clsNodeLabFuction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, clsNewTreeFunction:=clsTreeFunction, bReset:=bResetSubdialog)
         sdgDisplayModelOptions.grpTrees.Enabled = False
         sdgDisplayModelOptions.rdoTree.Enabled = False
+        sdgDisplayModelOptions.ucrChkANOVA.Enabled = True
+        sdgDisplayModelOptions.ucrChkReability.Enabled = True
+        sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = True
+        sdgDisplayModelOptions.rdoPlot.Enabled = True
+        sdgDisplayModelOptions.rdoBar.Enabled = True
+        sdgDisplayModelOptions.rdoMap.Enabled = True
+        sdgDisplayModelOptions.ucrChkConfLimits.Enabled = True
+        sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = True
+        sdgDisplayModelOptions.ucrChkEstimates.Enabled = True
+        sdgDisplayModelOptions.ucrChkAIC.Enabled = True
+        sdgDisplayModelOptions.ucrChkDeviance.Enabled = True
+        sdgDisplayModelOptions.ucrChkSndEstimetes.Enabled = True
+        sdgDisplayModelOptions.ucrChkParProp.Enabled = True
+        sdgDisplayModelOptions.ucrChkItemPara.Enabled = True
         sdgDisplayModelOptions.ShowDialog()
         bResetSubdialog = False
         AddRemoveFunctions()
@@ -379,5 +383,11 @@ Public Class dlgPlacketLuceModel
         sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewPlacketFunction:=clsPlacketFunction, bReset:=bResetSubdialog)
         sdgPLModelOptions.ShowDialog()
         bResetSubdialog = False
+    End Sub
+
+    Private Sub ucrSelectorTraitsPL_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTraitsPL.ControlValueChanged
+        If clsGetObjectRFunction.ContainsParameter("data_name") Then
+            clsGetObjectRFunction.AddParameter("data_name", Chr(34) & ucrSelectorTraitsPL.strCurrentDataFrame & Chr(34))
+        End If
     End Sub
 End Class
