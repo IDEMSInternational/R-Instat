@@ -144,7 +144,7 @@ Public Class dlgModellingTree
         clsAddObjectHeatFunction = New RFunction
         clsBarfunction = New RFunction
         clsHeatFunction = New RFunction
-        clsPlacketFunction = New RFunction
+        'clsPlacketFunction = New RFunction
         clsPlotFunction = New RFunction
         clsCoefOperator = New ROperator
         clsAICOperator = New ROperator
@@ -468,9 +468,9 @@ Public Class dlgModellingTree
 
         ' PLACKET FUNCTION FOR THE MODEL OPTIONS SUB-DIALOG
         '---------------------------------------------------------------------------------------------------------------------------------------------
-        clsPlacketFunction.SetPackageName("PlackettLuce")
-        clsPlacketFunction.SetRCommand("PlackettLuce")
-        clsPlacketFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
+        'clsPlacketFunction.SetPackageName("PlackettLuce")
+        'clsPlacketFunction.SetRCommand("PlackettLuce")
+        'clsPlacketFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -587,7 +587,9 @@ Public Class dlgModellingTree
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
-        sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog, clsNewPlacketFunction:=clsPlacketFunction)
+        sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog, clsNewPlacketFunction:=clsPlackettLuceFunction)
+        sdgPLModelOptions.ucrChkMultivariateNormal.Enabled = False
+        sdgPLModelOptions.ucrChkGamma.Enabled = False
         sdgPLModelOptions.ShowDialog()
         bResetSubDialog = False
     End Sub
