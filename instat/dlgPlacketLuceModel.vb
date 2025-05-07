@@ -383,6 +383,7 @@ Public Class dlgPlacketLuceModel
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewPlacketFunction:=clsPlacketFunction, bReset:=bResetSubdialog)
         sdgPLModelOptions.ShowDialog()
+        sdgPLModelOptions.ucrChkMultivariateNormal.Enabled = True
         bResetSubdialog = False
     End Sub
 End Class
