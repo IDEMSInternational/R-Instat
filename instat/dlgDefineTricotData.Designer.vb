@@ -370,26 +370,6 @@ Partial Class dlgDefineTricotData
         Me.ucrReceiverVarietyLevelVariety.Tag = "variety"
         Me.ucrReceiverVarietyLevelVariety.ucrSelector = Nothing
         '
-
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.ucrInputCheckInputIDVarietyLevel)
-        Me.GroupBox2.Controls.Add(Me.btncheckduplicatesIDVarietyLevel)
-        Me.GroupBox2.Controls.Add(Me.lblIVTraits)
-        Me.GroupBox2.Controls.Add(Me.ucrReceiverIDVarietyLevelTraits)
-        Me.GroupBox2.Controls.Add(Me.ucrReceiverIDVarietyLevelID)
-        Me.GroupBox2.Controls.Add(Me.lblIVID)
-        Me.GroupBox2.Controls.Add(Me.ucrSelectorIDVarietyLevel)
-        Me.GroupBox2.Controls.Add(Me.lblIVVariety)
-        Me.GroupBox2.Controls.Add(Me.ucrReceiverIDVarietyLevelVariety)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 306)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(592, 301)
-        Me.GroupBox2.TabIndex = 15
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Tag = ""
-        Me.GroupBox2.Text = "Plot Level"
-
         'grpIDVarietyLevel
         '
         Me.grpIDVarietyLevel.Controls.Add(Me.ucrInputCheckInputIDVarietyLevel)
