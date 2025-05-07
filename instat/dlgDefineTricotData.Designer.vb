@@ -372,7 +372,7 @@ Partial Class dlgDefineTricotData
         Me.GroupBox2.TabIndex = 15
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Tag = ""
-        Me.GroupBox2.Text = "ID-Variety Level Data"
+        Me.GroupBox2.Text = "Plot Level"
         '
         'ucrInputCheckInputIDVarietyLevel
         '

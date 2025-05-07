@@ -426,7 +426,7 @@ Partial Class sdgTransformations
         Me.tbIDVarietyLevel.Padding = New System.Windows.Forms.Padding(3)
         Me.tbIDVarietyLevel.Size = New System.Drawing.Size(585, 402)
         Me.tbIDVarietyLevel.TabIndex = 2
-        Me.tbIDVarietyLevel.Text = "ID-Variety Level"
+        Me.tbIDVarietyLevel.Text = "Plot Level"
         Me.tbIDVarietyLevel.UseVisualStyleBackColor = True
         '
         'tbIDVarietyTraitLevel
