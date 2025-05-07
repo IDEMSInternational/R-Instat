@@ -62,7 +62,7 @@ Public Class dlgPlacketLuceModel
         ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorTraitsPL.ucrAvailableDataFrames)
 
-        cmdModelOptions.Enabled = False
+        'cmdModelOptions.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -147,6 +147,14 @@ Public Class dlgPlacketLuceModel
         clsPlacketFunction.SetPackageName("PlackettLuce")
         clsPlacketFunction.SetRCommand("PlackettLuce")
         clsPlacketFunction.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
+        'clsPlacketFunction.AddParameter("gamma", "NULL")
+        'clsPlacketFunction.AddParameter("sigma", "NULL")
+        'clsPlacketFunction.AddParameter("method", "c(""iterative scaling"", ""BFGS"", ""L-BFGS"")")
+        'clsPlacketFunction.AddParameter("weights", "freq(rankings)")
+        'clsPlacketFunction.AddParameter("na.action", "getOption(""na.action"")")
+        'clsPlacketFunction.AddParameter("maxit", "c(500,10)")
+        'clsPlacketFunction.AddParameter("steffensen", "0.1")
+        'clsPlacketFunction.AddParameter("epsilon", "1e-07")
 
         clsNamesOperator.SetOperation("<-")
         clsNamesOperator.AddParameter("left", clsRFunctionParameter:=clsNamesFunction)
@@ -365,5 +373,11 @@ Public Class dlgPlacketLuceModel
             ucrBase.clsRsyntax.AddToBeforeCodes(clsMapFunction, iPosition:=4)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=5)
         End If
+    End Sub
+
+    Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewPlacketFunction:=clsPlacketFunction, bReset:=bResetSubdialog)
+        sdgPLModelOptions.ShowDialog()
+        bResetSubdialog = False
     End Sub
 End Class

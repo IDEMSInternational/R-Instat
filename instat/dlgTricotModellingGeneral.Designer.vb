@@ -23,7 +23,6 @@ Partial Class dlgTricotModellingGeneral
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrInputCheckVariety = New instat.ucrInputTextBox()
-        Me.cmdCheckVariety = New System.Windows.Forms.Button()
         Me.btnDisplayOptions = New System.Windows.Forms.Button()
         Me.btnModelOptions = New System.Windows.Forms.Button()
         Me.ucrBase = New instat.ucrButtons()
@@ -53,6 +52,7 @@ Partial Class dlgTricotModellingGeneral
         Me.cmdZero = New System.Windows.Forms.Button()
         Me.cmdMinus = New System.Windows.Forms.Button()
         Me.ucrReceiverExpressionModellingGeneral = New instat.ucrReceiverExpression()
+        Me.lblCheckVareity = New System.Windows.Forms.Label()
         Me.grpSecondCalc.SuspendLayout()
         Me.grpFirstCalc.SuspendLayout()
         Me.SuspendLayout()
@@ -63,20 +63,11 @@ Partial Class dlgTricotModellingGeneral
         Me.ucrInputCheckVariety.AutoSize = True
         Me.ucrInputCheckVariety.IsMultiline = False
         Me.ucrInputCheckVariety.IsReadOnly = False
-        Me.ucrInputCheckVariety.Location = New System.Drawing.Point(196, 605)
+        Me.ucrInputCheckVariety.Location = New System.Drawing.Point(86, 603)
         Me.ucrInputCheckVariety.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputCheckVariety.Name = "ucrInputCheckVariety"
         Me.ucrInputCheckVariety.Size = New System.Drawing.Size(400, 32)
         Me.ucrInputCheckVariety.TabIndex = 9
-        '
-        'cmdCheckVariety
-        '
-        Me.cmdCheckVariety.Location = New System.Drawing.Point(15, 601)
-        Me.cmdCheckVariety.Name = "cmdCheckVariety"
-        Me.cmdCheckVariety.Size = New System.Drawing.Size(170, 32)
-        Me.cmdCheckVariety.TabIndex = 8
-        Me.cmdCheckVariety.Text = "Check Variety"
-        Me.cmdCheckVariety.UseVisualStyleBackColor = True
         '
         'btnDisplayOptions
         '
@@ -417,17 +408,26 @@ Partial Class dlgTricotModellingGeneral
         Me.ucrReceiverExpressionModellingGeneral.TabIndex = 5
         Me.ucrReceiverExpressionModellingGeneral.ucrSelector = Nothing
         '
+        'lblCheckVareity
+        '
+        Me.lblCheckVareity.AutoSize = True
+        Me.lblCheckVareity.Location = New System.Drawing.Point(11, 603)
+        Me.lblCheckVareity.Name = "lblCheckVareity"
+        Me.lblCheckVareity.Size = New System.Drawing.Size(58, 20)
+        Me.lblCheckVareity.TabIndex = 56
+        Me.lblCheckVareity.Text = "Check:"
+        '
         'dlgTricotModellingGeneral
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(797, 797)
+        Me.Controls.Add(Me.lblCheckVareity)
         Me.Controls.Add(Me.ucrReceiverExpressionModellingGeneral)
         Me.Controls.Add(Me.grpSecondCalc)
         Me.Controls.Add(Me.grpFirstCalc)
         Me.Controls.Add(Me.ucrInputCheckVariety)
-        Me.Controls.Add(Me.cmdCheckVariety)
         Me.Controls.Add(Me.btnDisplayOptions)
         Me.Controls.Add(Me.btnModelOptions)
         Me.Controls.Add(Me.ucrBase)
@@ -452,7 +452,6 @@ Partial Class dlgTricotModellingGeneral
     End Sub
 
     Friend WithEvents ucrInputCheckVariety As ucrInputTextBox
-    Friend WithEvents cmdCheckVariety As Button
     Friend WithEvents btnDisplayOptions As Button
     Friend WithEvents btnModelOptions As Button
     Friend WithEvents ucrBase As ucrButtons
@@ -482,4 +481,5 @@ Partial Class dlgTricotModellingGeneral
     Friend WithEvents cmdZero As Button
     Friend WithEvents cmdMinus As Button
     Friend WithEvents ucrReceiverExpressionModellingGeneral As ucrReceiverExpression
+    Friend WithEvents lblCheckVareity As Label
 End Class
