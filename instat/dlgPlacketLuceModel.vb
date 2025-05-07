@@ -384,6 +384,7 @@ Public Class dlgPlacketLuceModel
         sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewPlacketFunction:=clsPlacketFunction, bReset:=bResetSubdialog)
         sdgPLModelOptions.ShowDialog()
         sdgPLModelOptions.ucrChkMultivariateNormal.Enabled = True
+        sdgPLModelOptions.ucrChkGamma.Enabled = True
         bResetSubdialog = False
     End Sub
 End Class
