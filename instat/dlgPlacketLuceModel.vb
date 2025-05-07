@@ -117,6 +117,7 @@ Public Class dlgPlacketLuceModel
         clsGetVarMetadataFunction.SetAssignTo("get_index_names")
 
         clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object")
+       clsGetObjectRFunction.AddParameter("data_name", Chr(34) & ucrSelectorTraitsPL.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsGetObjectRFunction.AddParameter("object_name", Chr(34) & "rankings_list" & Chr(34), iPosition:=1)
 
         clsGetRankingOperator.SetOperation("$")
@@ -383,11 +384,5 @@ Public Class dlgPlacketLuceModel
         sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewPlacketFunction:=clsPlacketFunction, bReset:=bResetSubdialog)
         sdgPLModelOptions.ShowDialog()
         bResetSubdialog = False
-    End Sub
-
-    Private Sub ucrSelectorTraitsPL_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTraitsPL.ControlValueChanged
-        If clsGetObjectRFunction.ContainsParameter("data_name") Then
-            clsGetObjectRFunction.AddParameter("data_name", Chr(34) & ucrSelectorTraitsPL.strCurrentDataFrame & Chr(34))
-        End If
     End Sub
 End Class
