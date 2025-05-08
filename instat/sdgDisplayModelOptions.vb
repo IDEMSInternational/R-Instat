@@ -31,8 +31,8 @@ Public Class sdgDisplayModelOptions
 
     Private Sub InitialiseDialog()
         ucrChkModel.SetText("Summary")
-        ucrChkModel.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"}, True)
-        ucrChkModel.AddRSyntaxContainsFunctionNamesCondition(False, {"summary"}, False)
+        ucrChkModel.AddParameterValuesCondition(True, "summary", "True")
+        ucrChkModel.AddParameterValuesCondition(False, "summary", "False")
 
         ucrChkANOVA.SetText("ANOVA")
         ucrChkANOVA.AddRSyntaxContainsFunctionNamesCondition(True, {"gosset:::anova.PlackettLuce(.x)"}, True)
@@ -150,6 +150,7 @@ Public Class sdgDisplayModelOptions
         clsRSyntax = clsNewRSyntax
         clsDummyFunction = New RFunction
         clsDummyFunction.AddParameter("plot", "True", iPosition:=0)
+        clsDummyFunction.AddParameter("summary", "True", iPosition:=1)
         clsAnnovaFunction = clsNewAnnovaFunction
         clsSummaryFunction = clsNewSummaryFunction
         clsEstimatesFunction = clsNewEstimatesFunction
@@ -177,7 +178,7 @@ Public Class sdgDisplayModelOptions
 
         If bReset Then
             ucrChkANOVA.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-            ucrChkModel.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+            ucrChkModel.SetRCode(clsDummyFunction, bReset)
             ucrChkEstimates.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrChkLog.SetRCode(clsCoefFunction, bReset, bCloneIfNeeded:=True)
             ucrChkAIC.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
