@@ -97,7 +97,7 @@ Partial Class dlgDefineTricotData
         Me.grpDateTime.TabIndex = 0
         Me.grpDateTime.TabStop = False
         Me.grpDateTime.Tag = ""
-        Me.grpDateTime.Text = "Plot Level"
+        Me.grpDateTime.Text = "ID-Level Data"
         '
         'ucrInputCheckInputIDLevel
         '
