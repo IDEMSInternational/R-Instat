@@ -202,6 +202,7 @@ Public Class sdgDisplayModelOptions
             ucrChkLogGraphic.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrPnlPlots.SetRCode(clsDummyFunction, bReset)
         End If
+        AddRemoveSummary()
     End Sub
 
     Private Sub ucrChkAIC_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAIC.ControlValueChanged
@@ -261,6 +262,10 @@ Public Class sdgDisplayModelOptions
     End Sub
 
     Private Sub ucrChkModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkModel.ControlValueChanged
+        AddRemoveSummary()
+    End Sub
+
+    Private Sub AddRemoveSummary()
         If ucrChkModel.Checked Then
             clsRSyntax.AddToBeforeCodes(clsSummaryFunction)
         Else
