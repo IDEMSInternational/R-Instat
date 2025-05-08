@@ -3137,4 +3137,16 @@ Public Class frmMain
     Private Sub OptionalMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionalMenuToolStripMenuItem.Click
 
     End Sub
+
+    'Reoder Factor Levels
+    Private Sub mnuReorderFactorLevels_Click(sender As Object, e As EventArgs) Handles mnuReorderFactorLevels.Click
+        SetDefaultValueInReorderLevels()
+        dlgReorderLevels.ShowDialog()
+    End Sub
+
+    'Transform Text
+    Private Sub mnuTransformText_Click(sender As Object, e As EventArgs) Handles mnuTransformText.Click
+        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Prepare
+        dlgTransformText.ShowDialog()
+    End Sub
 End Class
