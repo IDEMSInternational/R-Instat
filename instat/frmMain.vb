@@ -3155,4 +3155,13 @@ Public Class frmMain
         dlgUnstack.enumUnstackMode = dlgUnstack.UnstackMode.Prepare
         dlgUnstack.ShowDialog()
     End Sub
+
+    Private Sub mnuReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuReorderLevels.Click
+        dlgReorderLevels.ShowDialog()
+    End Sub
+
+    Private Sub TransformTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTransformText.Click
+        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Prepare
+        dlgTransformText.ShowDialog()
+    End Sub
 End Class
