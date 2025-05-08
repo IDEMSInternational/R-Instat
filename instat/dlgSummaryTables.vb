@@ -221,8 +221,8 @@ Public Class dlgSummaryTables
 
         ' Gt function
         Dim clsGtFunction As New RFunction
-        clsGtFunction.SetPackageName("gt")
-        clsGtFunction.SetRCommand("gt")
+        clsGtFunction.SetPackageName("instatExtras")
+        clsGtFunction.SetRCommand("generate_summary_tables")
 
         ClsTabSpannerDelimFunction.SetPackageName("gt")
         ClsTabSpannerDelimFunction.SetRCommand("tab_spanner_delim")
