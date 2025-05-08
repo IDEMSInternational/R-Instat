@@ -68,7 +68,7 @@ Partial Class dlgDefineTricotData
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(14, 694)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 14
@@ -92,9 +92,9 @@ Partial Class dlgDefineTricotData
         Me.grpIDLevel.Controls.Add(Me.ucrReceiverLevelID)
         Me.grpIDLevel.Controls.Add(Me.ucrSelectorIDLevelData)
         Me.grpIDLevel.Location = New System.Drawing.Point(14, 357)
-        Me.grpIDLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpIDLevel.Margin = New System.Windows.Forms.Padding(4)
         Me.grpIDLevel.Name = "grpIDLevel"
-        Me.grpIDLevel.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpIDLevel.Padding = New System.Windows.Forms.Padding(4)
         Me.grpIDLevel.Size = New System.Drawing.Size(821, 338)
         Me.grpIDLevel.TabIndex = 0
         Me.grpIDLevel.TabStop = False
@@ -105,8 +105,8 @@ Partial Class dlgDefineTricotData
         '
         Me.lblPlantingDate.AutoSize = True
         Me.lblPlantingDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPlantingDate.Location = New System.Drawing.Point(350, 198)
-        Me.lblPlantingDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPlantingDate.Location = New System.Drawing.Point(234, 133)
+        Me.lblPlantingDate.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPlantingDate.Name = "lblPlantingDate"
         Me.lblPlantingDate.Size = New System.Drawing.Size(109, 20)
         Me.lblPlantingDate.TabIndex = 8
@@ -119,7 +119,7 @@ Partial Class dlgDefineTricotData
         Me.ucrInputCheckInputIDLevel.IsMultiline = False
         Me.ucrInputCheckInputIDLevel.IsReadOnly = False
         Me.ucrInputCheckInputIDLevel.Location = New System.Drawing.Point(186, 302)
-        Me.ucrInputCheckInputIDLevel.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputCheckInputIDLevel.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputCheckInputIDLevel.Name = "ucrInputCheckInputIDLevel"
         Me.ucrInputCheckInputIDLevel.Size = New System.Drawing.Size(564, 32)
         Me.ucrInputCheckInputIDLevel.TabIndex = 15
@@ -130,7 +130,7 @@ Partial Class dlgDefineTricotData
         Me.UcrInput1.AutoSize = True
         Me.UcrInput1.IsReadOnly = False
         Me.UcrInput1.Location = New System.Drawing.Point(204, 316)
-        Me.UcrInput1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.UcrInput1.Margin = New System.Windows.Forms.Padding(6)
         Me.UcrInput1.Name = "UcrInput1"
         Me.UcrInput1.Size = New System.Drawing.Size(228, 26)
         Me.UcrInput1.TabIndex = 14
@@ -138,7 +138,7 @@ Partial Class dlgDefineTricotData
         'btnckeckduplicatesIDLevel
         '
         Me.btnckeckduplicatesIDLevel.Location = New System.Drawing.Point(10, 298)
-        Me.btnckeckduplicatesIDLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnckeckduplicatesIDLevel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnckeckduplicatesIDLevel.Name = "btnckeckduplicatesIDLevel"
         Me.btnckeckduplicatesIDLevel.Size = New System.Drawing.Size(172, 34)
         Me.btnckeckduplicatesIDLevel.TabIndex = 13
@@ -302,9 +302,9 @@ Partial Class dlgDefineTricotData
         Me.grpVarietyLevel.Controls.Add(Me.lblVVariety)
         Me.grpVarietyLevel.Controls.Add(Me.ucrReceiverVarietyLevelVariety)
         Me.grpVarietyLevel.Location = New System.Drawing.Point(843, 357)
-        Me.grpVarietyLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpVarietyLevel.Margin = New System.Windows.Forms.Padding(4)
         Me.grpVarietyLevel.Name = "grpVarietyLevel"
-        Me.grpVarietyLevel.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpVarietyLevel.Padding = New System.Windows.Forms.Padding(4)
         Me.grpVarietyLevel.Size = New System.Drawing.Size(541, 338)
         Me.grpVarietyLevel.TabIndex = 1
         Me.grpVarietyLevel.TabStop = False
@@ -318,7 +318,7 @@ Partial Class dlgDefineTricotData
         Me.ucrInputCheckInputVarietyLevel.IsMultiline = False
         Me.ucrInputCheckInputVarietyLevel.IsReadOnly = False
         Me.ucrInputCheckInputVarietyLevel.Location = New System.Drawing.Point(188, 302)
-        Me.ucrInputCheckInputVarietyLevel.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputCheckInputVarietyLevel.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputCheckInputVarietyLevel.Name = "ucrInputCheckInputVarietyLevel"
         Me.ucrInputCheckInputVarietyLevel.Size = New System.Drawing.Size(341, 32)
         Me.ucrInputCheckInputVarietyLevel.TabIndex = 15
@@ -326,7 +326,7 @@ Partial Class dlgDefineTricotData
         'btncheckduplicatesvarietylevel
         '
         Me.btncheckduplicatesvarietylevel.Location = New System.Drawing.Point(10, 298)
-        Me.btncheckduplicatesvarietylevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btncheckduplicatesvarietylevel.Margin = New System.Windows.Forms.Padding(4)
         Me.btncheckduplicatesvarietylevel.Name = "btncheckduplicatesvarietylevel"
         Me.btncheckduplicatesvarietylevel.Size = New System.Drawing.Size(172, 34)
         Me.btncheckduplicatesvarietylevel.TabIndex = 14
@@ -382,14 +382,14 @@ Partial Class dlgDefineTricotData
         Me.grpIDVarietyLevel.Controls.Add(Me.lblIVVariety)
         Me.grpIDVarietyLevel.Controls.Add(Me.ucrReceiverIDVarietyLevelVariety)
         Me.grpIDVarietyLevel.Location = New System.Drawing.Point(14, 14)
-        Me.grpIDVarietyLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpIDVarietyLevel.Margin = New System.Windows.Forms.Padding(4)
         Me.grpIDVarietyLevel.Name = "grpIDVarietyLevel"
-        Me.grpIDVarietyLevel.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpIDVarietyLevel.Padding = New System.Windows.Forms.Padding(4)
         Me.grpIDVarietyLevel.Size = New System.Drawing.Size(821, 338)
         Me.grpIDVarietyLevel.TabIndex = 15
         Me.grpIDVarietyLevel.TabStop = False
         Me.grpIDVarietyLevel.Tag = ""
-        Me.grpIDVarietyLevel.Text = "ID-Variety Level Data"
+        Me.grpIDVarietyLevel.Text = "Plot Level Data"
         '
         'ucrInputCheckInputIDVarietyLevel
         '
@@ -398,7 +398,7 @@ Partial Class dlgDefineTricotData
         Me.ucrInputCheckInputIDVarietyLevel.IsMultiline = False
         Me.ucrInputCheckInputIDVarietyLevel.IsReadOnly = False
         Me.ucrInputCheckInputIDVarietyLevel.Location = New System.Drawing.Point(186, 302)
-        Me.ucrInputCheckInputIDVarietyLevel.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputCheckInputIDVarietyLevel.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputCheckInputIDVarietyLevel.Name = "ucrInputCheckInputIDVarietyLevel"
         Me.ucrInputCheckInputIDVarietyLevel.Size = New System.Drawing.Size(564, 32)
         Me.ucrInputCheckInputIDVarietyLevel.TabIndex = 20
@@ -406,7 +406,7 @@ Partial Class dlgDefineTricotData
         'btncheckduplicatesIDVarietyLevel
         '
         Me.btncheckduplicatesIDVarietyLevel.Location = New System.Drawing.Point(10, 298)
-        Me.btncheckduplicatesIDVarietyLevel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btncheckduplicatesIDVarietyLevel.Margin = New System.Windows.Forms.Padding(4)
         Me.btncheckduplicatesIDVarietyLevel.Name = "btncheckduplicatesIDVarietyLevel"
         Me.btncheckduplicatesIDVarietyLevel.Size = New System.Drawing.Size(172, 34)
         Me.btncheckduplicatesIDVarietyLevel.TabIndex = 19
@@ -532,7 +532,7 @@ Partial Class dlgDefineTricotData
         Me.Controls.Add(Me.grpIDLevel)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDefineTricotData"

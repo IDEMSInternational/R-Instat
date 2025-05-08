@@ -101,9 +101,9 @@ Public Class sdgPLModelOptions
         ucrChkMaxit.AddToLinkedControls({ucrNudMaxIterations, ucrNudOuterIterations}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True) ', bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.95")
 
         ucrNudMaxIterations.SetParameter(New RParameter("maxita", 0, False))
-        ucrNudMaxIterations.Increment = 1
-        ucrNudMaxIterations.Minimum = 1
-        ucrNudMaxIterations.Maximum = 1000
+        ucrNudMaxIterations.Increment = 100
+        ucrNudMaxIterations.Minimum = 100
+        ucrNudMaxIterations.Maximum = 10000
         ucrNudMaxIterations.SetLinkedDisplayControl(lblMaximumIterations)
         ucrNudMaxIterations.SetRDefault(500)
 
