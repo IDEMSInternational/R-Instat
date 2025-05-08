@@ -221,8 +221,8 @@ Public Class dlgSummaryTables
 
         ' Gt function
         Dim clsGtFunction As New RFunction
-        clsGtFunction.SetPackageName("gt")
-        clsGtFunction.SetRCommand("gt")
+        clsGtFunction.SetPackageName("instatExtras")
+        clsGtFunction.SetRCommand("generate_summary_tables")
 
         ClsTabSpannerDelimFunction.SetPackageName("gt")
         ClsTabSpannerDelimFunction.SetRCommand("tab_spanner_delim")
@@ -324,8 +324,8 @@ Public Class dlgSummaryTables
             Exit Sub
         End If
 
-        sdgTableOptions.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsROperator)
-        sdgTableOptions.ShowDialog(Me)
+        sdgBeforeTablesOption.Setup(ucrSelectorSummaryTables.strCurrentDataFrame, clsROperator)
+        sdgBeforeTablesOption.ShowDialog(Me)
 
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
