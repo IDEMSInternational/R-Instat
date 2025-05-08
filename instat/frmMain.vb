@@ -3096,9 +3096,10 @@ Public Class frmMain
         dlgVisualizeData.ShowDialog()
     End Sub
 
-    Private Sub mnuTidyTransformTricot_Click(sender As Object, e As EventArgs) Handles mnuTidyTransformTricot.Click
-        dlgTransformTricotData.ShowDialog()
-    End Sub
+    'Removed the transform tricot data dialog as it is not working
+    'Private Sub mnuTidyTransformTricot_Click(sender As Object, e As EventArgs)
+    '    dlgTransformTricotData.ShowDialog()
+    'End Sub
 
     'Visualise data dialog
     Private Sub mnuTricotexamineeditdataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataVisualiseData.Click
@@ -3136,5 +3137,31 @@ Public Class frmMain
 
     Private Sub OptionalMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionalMenuToolStripMenuItem.Click
 
+    End Sub
+
+    'Transform and define as tricot 
+    Private Sub mnuTransformAndDefineAsTricot_Click(sender As Object, e As EventArgs) Handles mnuTransformAndDefineAsTricot.Click
+        dlgTransformTricotData.ShowDialog()
+    End Sub
+
+    'Stack pivot longer dialog
+    Private Sub mnuStackPivotLonger_Click(sender As Object, e As EventArgs) Handles mnuStackPivotLonger.Click
+        dlgStack.enumStackMode = dlgStack.StackMode.Prepare
+        dlgStack.ShowDialog()
+    End Sub
+
+    'Unstacked pivot wider dialog
+    Private Sub mnuUnstackPivotWider_Click(sender As Object, e As EventArgs) Handles mnuUnstackPivotWider.Click
+        dlgUnstack.enumUnstackMode = dlgUnstack.UnstackMode.Prepare
+        dlgUnstack.ShowDialog()
+    End Sub
+
+    Private Sub mnuReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuReorderLevels.Click
+        dlgReorderLevels.ShowDialog()
+    End Sub
+
+    Private Sub TransformTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTransformText.Click
+        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Prepare
+        dlgTransformText.ShowDialog()
     End Sub
 End Class
