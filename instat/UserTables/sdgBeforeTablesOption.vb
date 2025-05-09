@@ -35,8 +35,14 @@ Public Class sdgBeforeTablesOption
     Private Sub InitialiseDialog()
         ucrSdgBaseButtons.iHelpTopicID = 146
         ucrChkSelectTheme.Checked = True
+        ucrNewCellFormats.Visible = False
+        ucrColumnNewMissingTexts.Visible = False
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
+
+        ucrPnlCells.AddRadioButton(rdoDataFormat)
+        ucrPnlCells.AddRadioButton(rdoReplaceNa)
+        rdoDataFormat.Checked = True
 
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
@@ -54,6 +60,8 @@ Public Class sdgBeforeTablesOption
         ucrHeader.Setup(clsOperator)
         ucrSourceNotes.Setup(clsOperator)
         ucrOtherStyles.Setup(clsOperator)
+        ucrNewCellFormats.Setup(strDataFrameName, clsOperator)
+        ucrColumnNewMissingTexts.Setup(strDataFrameName, clsOperator)
 
         ucrHeader.ucrInputTitle.SetText(dlgGeneralTable.ucrInputTitle.GetText)
         ucrHeader.ucrInputTitleFooter.SetText(dlgGeneralTable.ucrInputTitleFooter.GetText)
@@ -67,6 +75,8 @@ Public Class sdgBeforeTablesOption
         ucrHeader.SetValuesToOperator()
         ucrSourceNotes.SetValuesToOperator()
         ucrOtherStyles.SetValuesToOperator()
+        ucrNewCellFormats.SetValuesToOperator()
+        ucrColumnNewMissingTexts.SetValuesToOperator()
         SetThemeValuesOnReturn(clsOperator)
     End Sub
 
@@ -152,5 +162,11 @@ Public Class sdgBeforeTablesOption
             clsOperator.RemoveParameterByName("theme_format")
         End If
     End Sub
+
+    Private Sub ucrPnlRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCells.ControlValueChanged
+        ucrNewCellFormats.Visible = rdoDataFormat.Checked
+        ucrColumnNewMissingTexts.Visible = rdoReplaceNa.Checked
+    End Sub
+
     '-----------------------------------------
 End Class

@@ -535,6 +535,12 @@
     <Compile Include="UserTables\Cells\Formats\ucrCellFormats.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.Designer.vb">
+      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\Cells\Styles\ucrCellStyles.Designer.vb">
       <DependentUpon>ucrCellStyles.vb</DependentUpon>
     </Compile>
@@ -564,6 +570,12 @@
       <DependentUpon>ucrColumnNanoPlots.vb</DependentUpon>
     </Compile>
     <Compile Include="UserTables\Columns\ucrColumnNanoPlots.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnNewMissingTexts.Designer.vb">
+      <DependentUpon>ucrColumnNewMissingTexts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Columns\ucrColumnNewMissingTexts.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserTables\Columns\ucrColumnStyles.Designer.vb">
@@ -3646,6 +3658,9 @@
     <EmbeddedResource Include="UserTables\Cells\Formats\ucrCellFormats.resx">
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\ucrNewCellFormats.resx">
+      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Styles\ucrCellStyles.resx">
       <DependentUpon>ucrCellStyles.vb</DependentUpon>
     </EmbeddedResource>
@@ -3660,6 +3675,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Columns\ucrColumnNanoPlots.resx">
       <DependentUpon>ucrColumnNanoPlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Columns\ucrColumnNewMissingTexts.resx">
+      <DependentUpon>ucrColumnNewMissingTexts.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Columns\ucrColumnStyles.resx">
       <DependentUpon>ucrColumnStyles.vb</DependentUpon>
