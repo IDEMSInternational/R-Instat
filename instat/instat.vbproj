@@ -158,8 +158,8 @@
     <Reference Include="RDotNet, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.9.0\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RInsightF461, Version=0.0.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RInsightF461.0.0.11\lib\net461\RInsightF461.dll</HintPath>
+    <Reference Include="RInsightF461, Version=0.0.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RInsightF461.0.0.12\lib\net461\RInsightF461.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
@@ -351,6 +351,12 @@
       <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTraitCorrelations.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTraitCorrelationsXp.Designer.vb">
+      <DependentUpon>dlgTraitCorrelationsXp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraitCorrelationsXp.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTraits.Designer.vb">
@@ -3543,6 +3549,9 @@
     <EmbeddedResource Include="dlgTraitCorrelations.resx">
       <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraitCorrelationsXp.resx">
+      <DependentUpon>dlgTraitCorrelationsXp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTraits.resx">
       <DependentUpon>dlgTraits.vb</DependentUpon>
     </EmbeddedResource>
@@ -6179,6 +6188,12 @@
     <Content Include="static\Help\Statistics Glossary.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\DialogDefinitions\DlgTraitCorrelations\dlgTraitCorrelations.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\DialogDefinitions\DlgTraitCorrelations\dlgTraitCorrelations.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="static\DialogDefinitions\DlgTraits\dlgTraits.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

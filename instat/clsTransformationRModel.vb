@@ -72,6 +72,7 @@ Public Class clsTransformationRModel
         operatorUpdateParam
         operatorUpdateParamPresentation
         quoteEmptyString
+        scriptInsert
     End Enum
 
     <JsonConverter(GetType(StringEnumConverter))>
@@ -120,7 +121,7 @@ Public Class clsTransformationRModel
                 rScript.OperatorAddParam(iStatementNumber, strFunctionName, iParameterNumber, strValue)
 
             Case TransformationType.operatorUpdateParam
-                rScript.OperatorUpdateParam(iStatementNumber, strFunctionName, iParameterNumber, strValue)
+                rScript.OperatorUpdateParam(iStatementNumber, strFunctionName, iParameterNumber, strValue, bIsQuoted)
 
             Case TransformationType.operatorUpdateParamPresentation
                 rScript.OperatorUpdateParamPresentation(iStatementNumber, strFunctionName, iParameterNumber, strValue)
@@ -131,6 +132,9 @@ Public Class clsTransformationRModel
                 Else
                     rScript.FunctionUpdateParamValue(iStatementNumber, strFunctionName, iParameterNumber, strValue, bIsQuoted)
                 End If
+
+            Case TransformationType.scriptInsert
+                rScript.ScriptInsert(iStatementNumber, strValue)
         End Select
     End Sub
 
