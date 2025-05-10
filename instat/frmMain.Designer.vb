@@ -637,6 +637,8 @@ Partial Class frmMain
         Me.mnuTricotexamineeditdataOneVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
         Me.TidyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTidyDuplicateRows = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuReorderLevels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTransformText = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator85 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuStackPivotLonger = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuUnstackPivotWider = New System.Windows.Forms.ToolStripMenuItem()
@@ -665,7 +667,7 @@ Partial Class frmMain
         Me.ToolStripSeparator84 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTricotXpDescribeTraits = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotXpDescribeCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem12 = New System.Windows.Forms.ToolStripMenuItem()
@@ -761,8 +763,8 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuReorderLevels = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuTransformText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTricotXpDescribeTraitCorrelations = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -788,7 +790,7 @@ Partial Class frmMain
         '
         Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoThreeVariables, Me.mnuDescribeSpecificTablesGraphs, Me.mnuDescribeSpecificTables, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.ToolStripSeparator13, Me.mnuDescribeUseTable, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeViewGraph})
         Me.mnuDescribe.Name = "mnuDescribe"
-        Me.mnuDescribe.Size = New System.Drawing.Size(81, 24)
+        Me.mnuDescribe.Size = New System.Drawing.Size(81, 34)
         Me.mnuDescribe.Tag = "Describe"
         Me.mnuDescribe.Text = "Describe"
         '
@@ -1107,7 +1109,7 @@ Partial Class frmMain
         '
         Me.mnuModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelProbabilityDistributions, Me.ToolStripSeparator3, Me.mnuModelFitModel, Me.mnuModelCompareModels, Me.mnuModelUseModel, Me.mnuModelOtherOneVariable, Me.mnuModelOtherTwoVariables, Me.mnuModelOtherThreeVariables, Me.mnuModelOtherGeneral})
         Me.mnuModel.Name = "mnuModel"
-        Me.mnuModel.Size = New System.Drawing.Size(66, 24)
+        Me.mnuModel.Size = New System.Drawing.Size(66, 34)
         Me.mnuModel.Tag = "Model"
         Me.mnuModel.Text = "Model"
         '
@@ -1520,7 +1522,7 @@ Partial Class frmMain
         '
         Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutput, Me.mnuViewLogScript, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewTricotMenu, Me.mnuViewTricotXpMenu, Me.mnuViewOptionsByContextMenu, Me.mnuViewProcurementMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata, Me.mnuViewSwapDataAndDataframeMetadata, Me.mnuViewSwapDataAndScript})
         Me.mnuView.Name = "mnuView"
-        Me.mnuView.Size = New System.Drawing.Size(55, 24)
+        Me.mnuView.Size = New System.Drawing.Size(55, 34)
         Me.mnuView.Tag = "View"
         Me.mnuView.Text = "View"
         '
@@ -1648,7 +1650,7 @@ Partial Class frmMain
         '
         Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpHelpIntroduction, Me.mnuHelpFAQ, Me.mnuHelpGetingStarted, Me.mnuHelpData, Me.ToolStripSeparator28, Me.mnuHelpWindows, Me.ToolStripSeparator81, Me.mnuHelpMenus, Me.OptionalMenuToolStripMenuItem, Me.mnuHelpAboutR, Me.mnuHelpLearningStatistics, Me.mnuHelpRPackages, Me.mnuHelpGlossary, Me.mnuHelpLicence, Me.ToolStripSeparator29, Me.mnuHelpResourcesSite, Me.mnuHelpPackagesDocumentation})
         Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(55, 24)
+        Me.mnuHelp.Size = New System.Drawing.Size(55, 34)
         Me.mnuHelp.Tag = "Help"
         Me.mnuHelp.Text = "Help"
         '
@@ -1854,7 +1856,7 @@ Partial Class frmMain
         '
         Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuExamineEditData, Me.mnuClimaticTidyandExamine, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticNCMP, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.mnuClimaticCompare, Me.mnuClimaticMapping, Me.ToolStripSeparator16, Me.mnuClimaticModel, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticClimateMethods})
         Me.mnuClimatic.Name = "mnuClimatic"
-        Me.mnuClimatic.Size = New System.Drawing.Size(77, 24)
+        Me.mnuClimatic.Size = New System.Drawing.Size(77, 34)
         Me.mnuClimatic.Tag = "Climatic"
         Me.mnuClimatic.Text = "Climatic"
         '
@@ -3124,7 +3126,7 @@ Partial Class frmMain
         '
         Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuUndo, Me.mnuEditFind, Me.mnuEditCopy, Me.mnuEditPaste, Me.mnuEditPasteNew, Me.mnuEditWordwrap, Me.mnuEditSelectAll})
         Me.mnuEdit.Name = "mnuEdit"
-        Me.mnuEdit.Size = New System.Drawing.Size(49, 24)
+        Me.mnuEdit.Size = New System.Drawing.Size(49, 34)
         Me.mnuEdit.Tag = "Edit"
         Me.mnuEdit.Text = "Edit"
         '
@@ -3183,18 +3185,18 @@ Partial Class frmMain
         '
         Me.stsStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.stsStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tstatus})
-        Me.stsStrip.Location = New System.Drawing.Point(0, 696)
+        Me.stsStrip.Location = New System.Drawing.Point(0, 689)
         Me.stsStrip.Name = "stsStrip"
         Me.stsStrip.Padding = New System.Windows.Forms.Padding(2, 0, 22, 0)
         Me.stsStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.stsStrip.Size = New System.Drawing.Size(1250, 26)
+        Me.stsStrip.Size = New System.Drawing.Size(1250, 33)
         Me.stsStrip.TabIndex = 8
         Me.stsStrip.Text = "Status"
         '
         'tstatus
         '
         Me.tstatus.Name = "tstatus"
-        Me.tstatus.Size = New System.Drawing.Size(151, 20)
+        Me.tstatus.Size = New System.Drawing.Size(151, 27)
         Me.tstatus.Text = "No worksheet loaded"
         '
         'Tool_strip
@@ -3203,11 +3205,11 @@ Partial Class frmMain
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
         Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbLast10Dialogs, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.ToolStripSeparator74, Me.mnuLastGraph, Me.ToolStripSeparator75, Me.mnuTbLogScript, Me.mnuMetadata, Me.ToolStripSeparator76, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.ToolStripSeparator77, Me.mnuTbLan, Me.separator1})
-        Me.Tool_strip.Location = New System.Drawing.Point(0, 30)
+        Me.Tool_strip.Location = New System.Drawing.Point(0, 48)
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.Tool_strip.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Tool_strip.Size = New System.Drawing.Size(1250, 37)
+        Me.Tool_strip.Size = New System.Drawing.Size(1250, 46)
         Me.Tool_strip.TabIndex = 7
         Me.Tool_strip.Text = "Tool"
         '
@@ -3219,7 +3221,7 @@ Partial Class frmMain
         Me.mnuTbOpen.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbOpen.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbOpen.Name = "mnuTbOpen"
-        Me.mnuTbOpen.Size = New System.Drawing.Size(53, 34)
+        Me.mnuTbOpen.Size = New System.Drawing.Size(53, 43)
         Me.mnuTbOpen.Text = "&Open"
         Me.mnuTbOpen.ToolTipText = "Import"
         '
@@ -3230,7 +3232,7 @@ Partial Class frmMain
         Me.mnuTbOpenFromLibrary.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbOpenFromLibrary.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbOpenFromLibrary.Name = "mnuTbOpenFromLibrary"
-        Me.mnuTbOpenFromLibrary.Size = New System.Drawing.Size(34, 34)
+        Me.mnuTbOpenFromLibrary.Size = New System.Drawing.Size(34, 43)
         Me.mnuTbOpenFromLibrary.ToolTipText = "Import From Library"
         '
         'mnuTbSave
@@ -3242,7 +3244,7 @@ Partial Class frmMain
         Me.mnuTbSave.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbSave.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbSave.Name = "mnuTbSave"
-        Me.mnuTbSave.Size = New System.Drawing.Size(53, 34)
+        Me.mnuTbSave.Size = New System.Drawing.Size(53, 43)
         Me.mnuTbSave.Text = "&Save"
         '
         'mnuSaveData
@@ -3275,7 +3277,7 @@ Partial Class frmMain
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 37)
+        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 46)
         '
         'mnuTbLast10Dialogs
         '
@@ -3284,14 +3286,14 @@ Partial Class frmMain
         Me.mnuTbLast10Dialogs.Image = Global.instat.My.Resources.Resources.last10dialogs
         Me.mnuTbLast10Dialogs.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbLast10Dialogs.Name = "mnuTbLast10Dialogs"
-        Me.mnuTbLast10Dialogs.Size = New System.Drawing.Size(53, 34)
+        Me.mnuTbLast10Dialogs.Size = New System.Drawing.Size(53, 43)
         Me.mnuTbLast10Dialogs.Text = "ToolStripSplitButton3"
         Me.mnuTbLast10Dialogs.ToolTipText = "View/Edit Last Dialogue"
         '
         'separator2
         '
         Me.separator2.Name = "separator2"
-        Me.separator2.Size = New System.Drawing.Size(6, 37)
+        Me.separator2.Size = New System.Drawing.Size(6, 46)
         '
         'mnuTbDataView
         '
@@ -3302,7 +3304,7 @@ Partial Class frmMain
         Me.mnuTbDataView.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbDataView.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbDataView.Name = "mnuTbDataView"
-        Me.mnuTbDataView.Size = New System.Drawing.Size(53, 34)
+        Me.mnuTbDataView.Size = New System.Drawing.Size(53, 43)
         Me.mnuTbDataView.ToolTipText = "Toggle Data view open and closed"
         '
         'mnuDataViewWindow
@@ -3342,7 +3344,7 @@ Partial Class frmMain
         Me.mnuTbOutput.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbOutput.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbOutput.Name = "mnuTbOutput"
-        Me.mnuTbOutput.Size = New System.Drawing.Size(53, 34)
+        Me.mnuTbOutput.Size = New System.Drawing.Size(53, 43)
         Me.mnuTbOutput.ToolTipText = "Toggle Output window open and closed"
         '
         'mnuOutputWindow
@@ -3369,7 +3371,7 @@ Partial Class frmMain
         'ToolStripSeparator74
         '
         Me.ToolStripSeparator74.Name = "ToolStripSeparator74"
-        Me.ToolStripSeparator74.Size = New System.Drawing.Size(6, 37)
+        Me.ToolStripSeparator74.Size = New System.Drawing.Size(6, 46)
         '
         'mnuLastGraph
         '
@@ -3379,7 +3381,7 @@ Partial Class frmMain
         Me.mnuLastGraph.Image = CType(resources.GetObject("mnuLastGraph.Image"), System.Drawing.Image)
         Me.mnuLastGraph.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuLastGraph.Name = "mnuLastGraph"
-        Me.mnuLastGraph.Size = New System.Drawing.Size(53, 34)
+        Me.mnuLastGraph.Size = New System.Drawing.Size(53, 43)
         Me.mnuLastGraph.Text = "ToolStripSplitButton3"
         Me.mnuLastGraph.ToolTipText = "View Last Graph"
         '
@@ -3404,7 +3406,7 @@ Partial Class frmMain
         'ToolStripSeparator75
         '
         Me.ToolStripSeparator75.Name = "ToolStripSeparator75"
-        Me.ToolStripSeparator75.Size = New System.Drawing.Size(6, 37)
+        Me.ToolStripSeparator75.Size = New System.Drawing.Size(6, 46)
         '
         'mnuTbLogScript
         '
@@ -3414,7 +3416,7 @@ Partial Class frmMain
         Me.mnuTbLogScript.Image = Global.instat.My.Resources.Resources.scriptwindow
         Me.mnuTbLogScript.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbLogScript.Name = "mnuTbLogScript"
-        Me.mnuTbLogScript.Size = New System.Drawing.Size(53, 34)
+        Me.mnuTbLogScript.Size = New System.Drawing.Size(53, 43)
         Me.mnuTbLogScript.Text = "LogScript"
         Me.mnuTbLogScript.ToolTipText = "Toggle Log/Script window open and closed"
         '
@@ -3440,7 +3442,7 @@ Partial Class frmMain
         Me.mnuMetadata.Image = CType(resources.GetObject("mnuMetadata.Image"), System.Drawing.Image)
         Me.mnuMetadata.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuMetadata.Name = "mnuMetadata"
-        Me.mnuMetadata.Size = New System.Drawing.Size(53, 34)
+        Me.mnuMetadata.Size = New System.Drawing.Size(53, 43)
         Me.mnuMetadata.Text = "ToolStripSplitButton2"
         Me.mnuMetadata.ToolTipText = "Toggle Metadata windows open and closed"
         '
@@ -3461,7 +3463,7 @@ Partial Class frmMain
         'ToolStripSeparator76
         '
         Me.ToolStripSeparator76.Name = "ToolStripSeparator76"
-        Me.ToolStripSeparator76.Size = New System.Drawing.Size(6, 37)
+        Me.ToolStripSeparator76.Size = New System.Drawing.Size(6, 46)
         '
         'mnuTbResetLayout
         '
@@ -3470,13 +3472,13 @@ Partial Class frmMain
         Me.mnuTbResetLayout.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbResetLayout.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbResetLayout.Name = "mnuTbResetLayout"
-        Me.mnuTbResetLayout.Size = New System.Drawing.Size(34, 34)
+        Me.mnuTbResetLayout.Size = New System.Drawing.Size(34, 43)
         Me.mnuTbResetLayout.ToolTipText = "Reset to Default Layout"
         '
         'separator3
         '
         Me.separator3.Name = "separator3"
-        Me.separator3.Size = New System.Drawing.Size(6, 37)
+        Me.separator3.Size = New System.Drawing.Size(6, 46)
         '
         'mnuTbHelp
         '
@@ -3486,7 +3488,7 @@ Partial Class frmMain
         Me.mnuTbHelp.Image = Global.instat.My.Resources.Resources.help2
         Me.mnuTbHelp.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbHelp.Name = "mnuTbHelp"
-        Me.mnuTbHelp.Size = New System.Drawing.Size(53, 34)
+        Me.mnuTbHelp.Size = New System.Drawing.Size(53, 43)
         Me.mnuTbHelp.Text = "LogScript"
         Me.mnuTbHelp.ToolTipText = "Help Window"
         '
@@ -3519,7 +3521,7 @@ Partial Class frmMain
         'ToolStripSeparator77
         '
         Me.ToolStripSeparator77.Name = "ToolStripSeparator77"
-        Me.ToolStripSeparator77.Size = New System.Drawing.Size(6, 37)
+        Me.ToolStripSeparator77.Size = New System.Drawing.Size(6, 46)
         '
         'mnuTbLan
         '
@@ -3528,13 +3530,13 @@ Partial Class frmMain
         Me.mnuTbLan.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbLan.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbLan.Name = "mnuTbLan"
-        Me.mnuTbLan.Size = New System.Drawing.Size(34, 34)
+        Me.mnuTbLan.Size = New System.Drawing.Size(34, 43)
         Me.mnuTbLan.ToolTipText = "Changes the menu language to English, and from English"
         '
         'separator1
         '
         Me.separator1.Name = "separator1"
-        Me.separator1.Size = New System.Drawing.Size(6, 37)
+        Me.separator1.Size = New System.Drawing.Size(6, 46)
         '
         'mnuBar
         '
@@ -3549,7 +3551,7 @@ Partial Class frmMain
         Me.mnuBar.Padding = New System.Windows.Forms.Padding(5, 2, 0, 2)
         Me.mnuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.mnuBar.ShowItemToolTips = True
-        Me.mnuBar.Size = New System.Drawing.Size(1250, 30)
+        Me.mnuBar.Size = New System.Drawing.Size(1250, 38)
         Me.mnuBar.TabIndex = 6
         Me.mnuBar.Text = "Menu_strip"
         '
@@ -3557,7 +3559,7 @@ Partial Class frmMain
         '
         Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileImportFromFile, Me.mnuFileImportFromLibrary, Me.ToolStripSeparator35, Me.mnuFileImportFromODK, Me.mnuFileImportFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportFromPostgres, Me.mnuFileImportFromRapidPro, Me.mnuFileImportandTidyNetCDFFile, Me.mnuImportFromOpenAppBuilder, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
-        Me.mnuFile.Size = New System.Drawing.Size(46, 24)
+        Me.mnuFile.Size = New System.Drawing.Size(46, 34)
         Me.mnuFile.Tag = "File"
         Me.mnuFile.Text = "File"
         '
@@ -3696,7 +3698,7 @@ Partial Class frmMain
         '
         Me.mnuPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrame, Me.mnuPrepareCheckData, Me.ToolStripSeparator6, Me.mnuPrepareCalculator, Me.ToolStripSeparator79, Me.mnuPrepareColumnCalculate, Me.mnuPrepareColumnFactor, Me.mnuPrepareColumnText, Me.mnuPrepareColumnDate, Me.mnuPrepareColumnDefine, Me.ToolStripSeparator4, Me.mnuPrepareDataReshape, Me.ToolStripSeparator7, Me.mnuPrepareKeysAndLinks, Me.mnuPrepareDataBook, Me.mnuPrepareRObjects})
         Me.mnuPrepare.Name = "mnuPrepare"
-        Me.mnuPrepare.Size = New System.Drawing.Size(74, 24)
+        Me.mnuPrepare.Size = New System.Drawing.Size(74, 34)
         Me.mnuPrepare.Tag = "Prepare"
         Me.mnuPrepare.Text = "Prepare"
         '
@@ -3704,7 +3706,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareDataFrame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataFrameViewData, Me.mnuPrepareDataFrameRenameColumn, Me.mnuPrepareDataFrameDuplicateColumn, Me.mnuPrepareDataFrameRowNumbersNames, Me.ToolStripSeparator1, Me.mnuPrepareDataFrameSort, Me.mnuPrepareDataFrameFilterRows, Me.mnuPrepareDataFrameSelectColumns, Me.mnuPrepareDataFrameReplaceValues, Me.mnuPrepareDataFrameConvertColumns, Me.ToolStripSeparator2, Me.mnuPrepareDataFrameReorderColumns, Me.mnuPrepareDataFrameAddMergeColumns, Me.mnuPrepareDataFrameInsertColumnsRows, Me.mnuPrepareDataFrameDeleteColumnsRows, Me.mnuPrepareDataFrameProtectColumn, Me.mnuPrepareDataFrameFreezeColumns, Me.mnuPrepareDataframeColourByProperty})
         Me.mnuPrepareDataFrame.Name = "mnuPrepareDataFrame"
-        Me.mnuPrepareDataFrame.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareDataFrame.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareDataFrame.Tag = "Data_Frame"
         Me.mnuPrepareDataFrame.Text = "Data Frame"
         '
@@ -3835,7 +3837,7 @@ Partial Class frmMain
         Me.mnuPrepareCheckData.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.mnuPrepareCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareCheckDataVisualiseData, Me.mnuPrepareCheckDataPivotTable, Me.ToolStripSeparator50, Me.mnuPrepareCheckDataDuplicates, Me.mnuPrepareCheckDataCompareColumns, Me.mnuPrepareCheckDataNonNumericCases, Me.ToolStripSeparator49, Me.mnuPrepareCheckDataBoxplot, Me.mnuPrepareCheckDataOneVariableSummarise, Me.mnuPrepareCheckDataOneVariableGraph, Me.mnuPrepareCheckDataOneWayFrequencies, Me.mnuPrepareCheckDataViewDeleteLabels, Me.ToolStripSeparator41, Me.mnuPrepareCheckDataExportOpenRefine, Me.mnuPrepareCheckDataImportOpenRefine, Me.ToolStripSeparator40, Me.mnuPreparePrepareToShareJitter, Me.mnuPrepareCheckDataPrePareToShareSdcPackage, Me.mnuPrepareCheckDataAnonymiseIDColumn})
         Me.mnuPrepareCheckData.Name = "mnuPrepareCheckData"
-        Me.mnuPrepareCheckData.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareCheckData.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareCheckData.Text = "Check Data"
         '
         'mnuPrepareCheckDataVisualiseData
@@ -3958,25 +3960,25 @@ Partial Class frmMain
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(221, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(203, 6)
         '
         'mnuPrepareCalculator
         '
         Me.mnuPrepareCalculator.Name = "mnuPrepareCalculator"
-        Me.mnuPrepareCalculator.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareCalculator.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareCalculator.Tag = "Calculator..."
         Me.mnuPrepareCalculator.Text = "Calculator..."
         '
         'ToolStripSeparator79
         '
         Me.ToolStripSeparator79.Name = "ToolStripSeparator79"
-        Me.ToolStripSeparator79.Size = New System.Drawing.Size(221, 6)
+        Me.ToolStripSeparator79.Size = New System.Drawing.Size(203, 6)
         '
         'mnuPrepareColumnCalculate
         '
         Me.mnuPrepareColumnCalculate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnNumericRegularSequence, Me.mnuPrepareColumnNumericEnter, Me.ToolStripSeparator25, Me.mnuPrepareColumnNumericRowSummaries, Me.mnuPrepareColumnNumericTransform, Me.mnuPrepareColumnNumericPolynomials, Me.ToolStripSeparator56, Me.mnuPrepareColumnNumericRandomSamples, Me.mnuPrepareColumnNumericPermuteRows})
         Me.mnuPrepareColumnCalculate.Name = "mnuPrepareColumnCalculate"
-        Me.mnuPrepareColumnCalculate.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareColumnCalculate.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareColumnCalculate.Tag = "Column:_Calculate"
         Me.mnuPrepareColumnCalculate.Text = "Column: Numeric"
         '
@@ -4041,7 +4043,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnFactorConvertToFactor, Me.mnuPrepareColumnFactorRecodeNumeric, Me.mnuPrepareColumnFactorCountInFactor, Me.ToolStripSeparator12, Me.mnuPrepareColumnFactorRecodeFactor, Me.mnuPrepareColumnFactorCombineFactors, Me.mnuPrepareColumnFactorDummyVariables, Me.ToolStripSeparator14, Me.mnuPrepareColumnFactorLevelsLabels, Me.mnuPrepareColumnFactorReorderLevels, Me.mnuPrepareColumnFactorReferenceLevel, Me.mnuPrepareColumnFactorUnusedLevels, Me.mnuPrepareColumnFactorContrasts, Me.ToolStripSeparator19, Me.mnuPrepareColumnFactorFactorDataFrame})
         Me.mnuPrepareColumnFactor.Name = "mnuPrepareColumnFactor"
-        Me.mnuPrepareColumnFactor.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareColumnFactor.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareColumnFactor.Tag = "Column:_Factor"
         Me.mnuPrepareColumnFactor.Text = "Column: Factor"
         '
@@ -4147,7 +4149,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnText.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnTextFindReplace, Me.mnuPrepareColumnTextSearch, Me.mnuPrepareColumnTextTransform, Me.mnuPrepareColumnTextSplit, Me.mnuPrepareColumnTextCombine, Me.mnuPrepareColumnTextMatch, Me.mnuPrepareColumnTextDistance})
         Me.mnuPrepareColumnText.Name = "mnuPrepareColumnText"
-        Me.mnuPrepareColumnText.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareColumnText.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareColumnText.Tag = "Column:_Text"
         Me.mnuPrepareColumnText.Text = "Column: Text"
         '
@@ -4206,7 +4208,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnDate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnDateGenerateDate, Me.mnuPrepareColumnDateMakeDate, Me.mnuPrepareColumnDateInfillMissingDates, Me.mnuPrepareColumnDateUseDate, Me.mnuPrepareColumnDateMakeTime, Me.mnuPrepareColumnDateUseTime})
         Me.mnuPrepareColumnDate.Name = "mnuPrepareColumnDate"
-        Me.mnuPrepareColumnDate.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareColumnDate.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareColumnDate.Text = "Column: Date"
         '
         'mnuPrepareColumnDateGenerateDate
@@ -4253,7 +4255,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnDefine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnDefineConvertColumns, Me.ToolStripSeparator55, Me.mnuPrepareColumnDefineCircular})
         Me.mnuPrepareColumnDefine.Name = "mnuPrepareColumnDefine"
-        Me.mnuPrepareColumnDefine.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareColumnDefine.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareColumnDefine.Text = "Column: Define"
         '
         'mnuPrepareColumnDefineConvertColumns
@@ -4276,13 +4278,13 @@ Partial Class frmMain
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(221, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(203, 6)
         '
         'mnuPrepareDataReshape
         '
         Me.mnuPrepareDataReshape.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnReshapeColumnSummaries, Me.mnuPrepareColumnReshapeGeneralSummaries, Me.ToolStripSeparator10, Me.mnuPrepareColumnReshapeStack, Me.mnuPrepareColumnReshapeUnstack, Me.mnuPrepareColumnReshapeMerge, Me.ToolStripSeparator11, Me.mnuPrepareAppendDataFrame, Me.mnuPrepareColumnReshapeSubset, Me.mnuPrepareColumnReshapeRandomSubset, Me.mnuPrepareColumnReshapeTranspose, Me.mnuPrepareDataReshapeScaleOrDistance, Me.mnuPrepareDataReshapeRandomSplit})
         Me.mnuPrepareDataReshape.Name = "mnuPrepareDataReshape"
-        Me.mnuPrepareDataReshape.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareDataReshape.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareDataReshape.Tag = ""
         Me.mnuPrepareDataReshape.Text = "Data Reshape"
         '
@@ -4372,13 +4374,13 @@ Partial Class frmMain
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(221, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(203, 6)
         '
         'mnuPrepareKeysAndLinks
         '
         Me.mnuPrepareKeysAndLinks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareKeysAndLinksAddKey, Me.mnuPrepareKeysAndLinksViewAndRemoveKey, Me.mnuPrepareKeysAndLinksAddLink, Me.mnuPrepareKeysAndLinksViewAndRemoveKeys, Me.mnuPrepareKeysAndLinksAddComment})
         Me.mnuPrepareKeysAndLinks.Name = "mnuPrepareKeysAndLinks"
-        Me.mnuPrepareKeysAndLinks.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareKeysAndLinks.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareKeysAndLinks.Text = "Keys and Links"
         '
         'mnuPrepareKeysAndLinksAddKey
@@ -4415,7 +4417,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareDataBook.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareDataObjectDataFrameMetadata, Me.mnuPrepareDataObjectRenameDataFrame, Me.mnuPrepareDataObjectReorderDataFrames, Me.mnuPrepareDataObjectCopyDataFrame, Me.mnuPrepareDataObjectDeleteDataFrame, Me.ToolStripSeparator21, Me.mnuPrepareDataObjectHideDataframes, Me.mnuPrepareDataObjectMetadata, Me.mnuPrepareDataObjectRenameMetadata, Me.mnuPrepareDataObjectReorderMetadata, Me.mnuPrepareDataObjectDeleteMetadata})
         Me.mnuPrepareDataBook.Name = "mnuPrepareDataBook"
-        Me.mnuPrepareDataBook.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareDataBook.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareDataBook.Tag = "Data_Object"
         Me.mnuPrepareDataBook.Text = "Data Book"
         '
@@ -4505,7 +4507,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareRObjects.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareRObjectsView, Me.mnuPrepareRObjectsRename, Me.mnuPrepareRObjectsReorder, Me.mnuPrepareRObjectsDelete})
         Me.mnuPrepareRObjects.Name = "mnuPrepareRObjects"
-        Me.mnuPrepareRObjects.Size = New System.Drawing.Size(224, 26)
+        Me.mnuPrepareRObjects.Size = New System.Drawing.Size(206, 26)
         Me.mnuPrepareRObjects.Tag = "R_Objects"
         Me.mnuPrepareRObjects.Text = "R Objects"
         '
@@ -4541,7 +4543,7 @@ Partial Class frmMain
         '
         Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63, Me.mnuStructuredClimatic, Me.mnuStructuredProcurement, Me.mnuStructuredOptionByContext, Me.mnuStructuredSurvey})
         Me.mnuStructured.Name = "mnuStructured"
-        Me.mnuStructured.Size = New System.Drawing.Size(91, 24)
+        Me.mnuStructured.Size = New System.Drawing.Size(91, 34)
         Me.mnuStructured.Text = "Structured"
         '
         'mnuStructuredCircular
@@ -4747,7 +4749,7 @@ Partial Class frmMain
         '
         Me.mnuTricot.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTricotImportFromClimMob, Me.ToolStripSeparator87, Me.mnuTricotExamineData, Me.TidyToolStripMenuItem, Me.mnuTransformAndDefineAsTricot, Me.mnuTricotDefineTricotData, Me.ToolStripSeparator20, Me.mnuTricotDescribe, Me.mnuTricotModelPlackettLuce})
         Me.mnuTricot.Name = "mnuTricot"
-        Me.mnuTricot.Size = New System.Drawing.Size(60, 26)
+        Me.mnuTricot.Size = New System.Drawing.Size(60, 34)
         Me.mnuTricot.Text = "Tricot"
         '
         'mnuTricotImportFromClimMob
@@ -4815,6 +4817,18 @@ Partial Class frmMain
         Me.mnuTidyDuplicateRows.Name = "mnuTidyDuplicateRows"
         Me.mnuTidyDuplicateRows.Size = New System.Drawing.Size(247, 26)
         Me.mnuTidyDuplicateRows.Text = "Duplicate Rows..."
+        '
+        'mnuReorderLevels
+        '
+        Me.mnuReorderLevels.Name = "mnuReorderLevels"
+        Me.mnuReorderLevels.Size = New System.Drawing.Size(247, 26)
+        Me.mnuReorderLevels.Text = "Reorder Factor Levels..."
+        '
+        'mnuTransformText
+        '
+        Me.mnuTransformText.Name = "mnuTransformText"
+        Me.mnuTransformText.Size = New System.Drawing.Size(247, 26)
+        Me.mnuTransformText.Text = "Transform Text..."
         '
         'ToolStripSeparator85
         '
@@ -4938,7 +4952,7 @@ Partial Class frmMain
         '
         Me.mnuTricotXp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6, Me.ToolStripSeparator84, Me.ToolStripMenuItem7, Me.ToolStripMenuItem10})
         Me.mnuTricotXp.Name = "mnuTricotXp"
-        Me.mnuTricotXp.Size = New System.Drawing.Size(77, 24)
+        Me.mnuTricotXp.Size = New System.Drawing.Size(77, 34)
         Me.mnuTricotXp.Text = "TricotXP"
         '
         'ToolStripMenuItem3
@@ -4972,7 +4986,7 @@ Partial Class frmMain
         '
         'ToolStripMenuItem7
         '
-        Me.ToolStripMenuItem7.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTricotXpDescribeTraits, Me.ToolStripMenuItem9})
+        Me.ToolStripMenuItem7.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTricotXpDescribeTraits, Me.mnuTricotXpDescribeTraitCorrelations})
         Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
         Me.ToolStripMenuItem7.Size = New System.Drawing.Size(247, 26)
         Me.ToolStripMenuItem7.Text = "Describe"
@@ -4983,11 +4997,11 @@ Partial Class frmMain
         Me.mnuTricotXpDescribeTraits.Size = New System.Drawing.Size(181, 26)
         Me.mnuTricotXpDescribeTraits.Text = "Traits..."
         '
-        'ToolStripMenuItem9
+        'mnuTricotXpDescribeCorrelations
         '
-        Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
-        Me.ToolStripMenuItem9.Size = New System.Drawing.Size(181, 26)
-        Me.ToolStripMenuItem9.Text = "Correlations..."
+        Me.mnuTricotXpDescribeCorrelations.Name = "mnuTricotXpDescribeCorrelations"
+        Me.mnuTricotXpDescribeCorrelations.Size = New System.Drawing.Size(181, 26)
+        Me.mnuTricotXpDescribeCorrelations.Text = "Correlations..."
         '
         'ToolStripMenuItem10
         '
@@ -5024,7 +5038,7 @@ Partial Class frmMain
         '
         Me.mnuOptionsByContext.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsByContextCheckData, Me.mnuOptionsByContextDefine, Me.mnuOptionsByContextPrepare, Me.mnuOptionsByContextDescribe, Me.mnuOptionsByContextModel, Me.mnuOptionsByContextCropModel})
         Me.mnuOptionsByContext.Name = "mnuOptionsByContext"
-        Me.mnuOptionsByContext.Size = New System.Drawing.Size(104, 24)
+        Me.mnuOptionsByContext.Size = New System.Drawing.Size(104, 34)
         Me.mnuOptionsByContext.Text = "Experiments"
         '
         'mnuOptionsByContextCheckData
@@ -5186,7 +5200,7 @@ Partial Class frmMain
         '
         Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementOpenFromLibrary, Me.mnuProcurementDefineData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.mnuProcurementMapping, Me.mnuProcurementModel, Me.ToolStripSeparator45, Me.mnuProcurementDefineRedFlags, Me.mnuProcurementUseCRI})
         Me.mnuProcurement.Name = "mnuProcurement"
-        Me.mnuProcurement.Size = New System.Drawing.Size(107, 24)
+        Me.mnuProcurement.Size = New System.Drawing.Size(107, 34)
         Me.mnuProcurement.Text = "Procurement"
         '
         'mnuProcurementOpenFromLibrary
@@ -5434,7 +5448,7 @@ Partial Class frmMain
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsRestartR, Me.mnuToolsCheckForUpdates, Me.mnuToolsClearOutputWindow, Me.ToolStripSeparator5, Me.mnuToolsRestoreBackup, Me.mnuToolsInstallRPackage, Me.mnuToolsOptions})
         Me.mnuTools.Name = "mnuTools"
-        Me.mnuTools.Size = New System.Drawing.Size(58, 24)
+        Me.mnuTools.Size = New System.Drawing.Size(58, 34)
         Me.mnuTools.Text = "Tools"
         '
         'mnuToolsRestartR
@@ -5494,7 +5508,7 @@ Partial Class frmMain
         '
         Me.splOverall.BackColor = System.Drawing.Color.LightGray
         Me.splOverall.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.splOverall.Location = New System.Drawing.Point(0, 67)
+        Me.splOverall.Location = New System.Drawing.Point(0, 105)
         Me.splOverall.Margin = New System.Windows.Forms.Padding(2)
         Me.splOverall.Name = "splOverall"
         Me.splOverall.Orientation = System.Windows.Forms.Orientation.Horizontal
@@ -5508,8 +5522,8 @@ Partial Class frmMain
         '
         Me.splOverall.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splOverall.Panel2.Controls.Add(Me.splDataOutput)
-        Me.splOverall.Size = New System.Drawing.Size(1250, 629)
-        Me.splOverall.SplitterDistance = 242
+        Me.splOverall.Size = New System.Drawing.Size(1250, 575)
+        Me.splOverall.SplitterDistance = 221
         Me.splOverall.SplitterWidth = 8
         Me.splOverall.TabIndex = 10
         '
@@ -5530,7 +5544,7 @@ Partial Class frmMain
         '
         Me.splExtraWindows.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splExtraWindows.Panel2.Controls.Add(Me.ucrScriptWindow)
-        Me.splExtraWindows.Size = New System.Drawing.Size(1250, 242)
+        Me.splExtraWindows.Size = New System.Drawing.Size(1250, 221)
         Me.splExtraWindows.SplitterDistance = 375
         Me.splExtraWindows.SplitterWidth = 8
         Me.splExtraWindows.TabIndex = 0
@@ -5551,7 +5565,7 @@ Partial Class frmMain
         '
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
-        Me.splMetadata.Size = New System.Drawing.Size(375, 242)
+        Me.splMetadata.Size = New System.Drawing.Size(375, 221)
         Me.splMetadata.SplitterDistance = 98
         Me.splMetadata.SplitterWidth = 8
         Me.splMetadata.TabIndex = 0
@@ -5566,7 +5580,7 @@ Partial Class frmMain
         Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
         Me.ucrColumnMeta.Margin = New System.Windows.Forms.Padding(5, 8, 5, 8)
         Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        Me.ucrColumnMeta.Size = New System.Drawing.Size(98, 242)
+        Me.ucrColumnMeta.Size = New System.Drawing.Size(98, 221)
         Me.ucrColumnMeta.TabIndex = 0
         '
         'ucrDataFrameMeta
@@ -5577,7 +5591,7 @@ Partial Class frmMain
         Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataFrameMeta.Margin = New System.Windows.Forms.Padding(5, 8, 5, 8)
         Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(269, 242)
+        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(269, 221)
         Me.ucrDataFrameMeta.TabIndex = 0
         '
         'ucrScriptWindow
@@ -5588,7 +5602,7 @@ Partial Class frmMain
         Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
         Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(5, 8, 5, 8)
         Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(867, 242)
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(867, 221)
         Me.ucrScriptWindow.strActiveTabText = ""
         Me.ucrScriptWindow.TabIndex = 2
         Me.ucrScriptWindow.Tag = "Script_Window"
@@ -5610,7 +5624,7 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
-        Me.splDataOutput.Size = New System.Drawing.Size(1250, 379)
+        Me.splDataOutput.Size = New System.Drawing.Size(1250, 346)
         Me.splDataOutput.SplitterDistance = 571
         Me.splDataOutput.SplitterWidth = 8
         Me.splDataOutput.TabIndex = 0
@@ -5624,7 +5638,7 @@ Partial Class frmMain
         Me.ucrDataViewer.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataViewer.Margin = New System.Windows.Forms.Padding(5, 8, 5, 8)
         Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Size = New System.Drawing.Size(571, 379)
+        Me.ucrDataViewer.Size = New System.Drawing.Size(571, 346)
         Me.ucrDataViewer.TabIndex = 0
         Me.ucrDataViewer.Tag = "Data_View"
         '
@@ -5636,7 +5650,7 @@ Partial Class frmMain
         Me.ucrOutput.Location = New System.Drawing.Point(0, 0)
         Me.ucrOutput.Margin = New System.Windows.Forms.Padding(5, 8, 5, 8)
         Me.ucrOutput.Name = "ucrOutput"
-        Me.ucrOutput.Size = New System.Drawing.Size(671, 379)
+        Me.ucrOutput.Size = New System.Drawing.Size(671, 346)
         Me.ucrOutput.TabIndex = 0
         '
         'mnuPlotly
@@ -5674,23 +5688,23 @@ Partial Class frmMain
         Me.mnuLogFile.Text = "Log Window..."
         Me.mnuLogFile.ToolTipText = "Log Window"
         '
-        'mnuReorderLevels
+        'ToolStripMenuItem9
         '
-        Me.mnuReorderLevels.Name = "mnuReorderLevels"
-        Me.mnuReorderLevels.Size = New System.Drawing.Size(247, 26)
-        Me.mnuReorderLevels.Text = "Reorder Factor Levels..."
+        Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
+        Me.ToolStripMenuItem9.Size = New System.Drawing.Size(181, 26)
+        Me.ToolStripMenuItem9.Text = "Correlations..."
         '
-        'mnuTransformText
+        'mnuTricotXpDescribeTraitCorrelations
         '
-        Me.mnuTransformText.Name = "mnuTransformText"
-        Me.mnuTransformText.Size = New System.Drawing.Size(247, 26)
-        Me.mnuTransformText.Text = "Transform Text..."
+        Me.mnuTricotXpDescribeTraitCorrelations.Name = "mnuTricotXpDescribeTraitCorrelations"
+        Me.mnuTricotXpDescribeTraitCorrelations.Size = New System.Drawing.Size(181, 26)
+        Me.mnuTricotXpDescribeTraitCorrelations.Text = "Correlations..."
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(120.0!, 120.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(1250, 722)
+        Me.ClientSize = New System.Drawing.Size(1000, 577)
         Me.Controls.Add(Me.splOverall)
         Me.Controls.Add(Me.stsStrip)
         Me.Controls.Add(Me.Tool_strip)
@@ -6434,7 +6448,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator84 As ToolStripSeparator
     Friend WithEvents ToolStripMenuItem7 As ToolStripMenuItem
     Friend WithEvents mnuTricotXpDescribeTraits As ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem9 As ToolStripMenuItem
+    Friend WithEvents mnuTricotXpDescribeCorrelations As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem10 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem11 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem12 As ToolStripMenuItem
@@ -6471,4 +6485,6 @@ Partial Class frmMain
     Friend WithEvents mnuUnstackPivotWider As ToolStripMenuItem
     Friend WithEvents mnuReorderLevels As ToolStripMenuItem
     Friend WithEvents mnuTransformText As ToolStripMenuItem
+    Friend WithEvents mnuTricotXpDescribeTraitCorrelations As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem9 As ToolStripMenuItem
 End Class

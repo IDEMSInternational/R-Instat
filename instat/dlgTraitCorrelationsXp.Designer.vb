@@ -258,7 +258,7 @@ Partial Class dlgTraitCorrelationsXp
         Me.MinimizeBox = False
         Me.Name = "dlgTraitCorrelations"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Trait Correlations"
+        Me.Text = "Trait Correlations XP"
         Me.grpDisplayOptions.ResumeLayout(False)
         Me.grpDisplayOptions.PerformLayout()
         Me.grpOutput.ResumeLayout(False)

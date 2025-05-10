@@ -23,7 +23,7 @@ Public Class dlgTraitCorrelationsXp
     Private clsBaseLineOperator, clsObjectOperator, clsPipe2Operator, clsPipeOperator, clsNamesOperator, clsMultivarsOpeator As New ROperator
     Private chkSaveAsTable As ucrCheck
 
-    Private Sub dlgTraitCorrelations_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgTraitCorrelationsXp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
