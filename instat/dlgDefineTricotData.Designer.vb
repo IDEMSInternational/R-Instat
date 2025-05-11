@@ -68,7 +68,7 @@ Partial Class dlgDefineTricotData
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(14, 694)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 14
@@ -105,10 +105,10 @@ Partial Class dlgDefineTricotData
         '
         Me.lblPlantingDate.AutoSize = True
         Me.lblPlantingDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPlantingDate.Location = New System.Drawing.Point(234, 133)
+        Me.lblPlantingDate.Location = New System.Drawing.Point(350, 203)
         Me.lblPlantingDate.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPlantingDate.Name = "lblPlantingDate"
-        Me.lblPlantingDate.Size = New System.Drawing.Size(109, 20)
+        Me.lblPlantingDate.Size = New System.Drawing.Size(74, 13)
         Me.lblPlantingDate.TabIndex = 8
         Me.lblPlantingDate.Text = "Planting Date:"
         '
@@ -130,7 +130,7 @@ Partial Class dlgDefineTricotData
         Me.UcrInput1.AutoSize = True
         Me.UcrInput1.IsReadOnly = False
         Me.UcrInput1.Location = New System.Drawing.Point(204, 316)
-        Me.UcrInput1.Margin = New System.Windows.Forms.Padding(6)
+        Me.UcrInput1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.UcrInput1.Name = "UcrInput1"
         Me.UcrInput1.Size = New System.Drawing.Size(228, 26)
         Me.UcrInput1.TabIndex = 14
@@ -152,7 +152,7 @@ Partial Class dlgDefineTricotData
         Me.lblTraits.Location = New System.Drawing.Point(576, 160)
         Me.lblTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTraits.Name = "lblTraits"
-        Me.lblTraits.Size = New System.Drawing.Size(52, 20)
+        Me.lblTraits.Size = New System.Drawing.Size(36, 13)
         Me.lblTraits.TabIndex = 12
         Me.lblTraits.Text = "Traits:"
         '
@@ -189,7 +189,7 @@ Partial Class dlgDefineTricotData
         Me.lblVarieties.Location = New System.Drawing.Point(576, 22)
         Me.lblVarieties.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblVarieties.Name = "lblVarieties"
-        Me.lblVarieties.Size = New System.Drawing.Size(75, 20)
+        Me.lblVarieties.Size = New System.Drawing.Size(50, 13)
         Me.lblVarieties.TabIndex = 10
         Me.lblVarieties.Text = "Varieties:"
         '
@@ -200,7 +200,7 @@ Partial Class dlgDefineTricotData
         Me.lblLon.Location = New System.Drawing.Point(350, 142)
         Me.lblLon.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLon.Name = "lblLon"
-        Me.lblLon.Size = New System.Drawing.Size(84, 20)
+        Me.lblLon.Size = New System.Drawing.Size(57, 13)
         Me.lblLon.TabIndex = 6
         Me.lblLon.Text = "Longitude:"
         '
@@ -239,7 +239,7 @@ Partial Class dlgDefineTricotData
         Me.lblLat.Location = New System.Drawing.Point(350, 84)
         Me.lblLat.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLat.Name = "lblLat"
-        Me.lblLat.Size = New System.Drawing.Size(71, 20)
+        Me.lblLat.Size = New System.Drawing.Size(48, 13)
         Me.lblLat.TabIndex = 4
         Me.lblLat.Text = "Latitude:"
         '
@@ -264,7 +264,7 @@ Partial Class dlgDefineTricotData
         Me.lblID.Location = New System.Drawing.Point(350, 26)
         Me.lblID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblID.Name = "lblID"
-        Me.lblID.Size = New System.Drawing.Size(30, 20)
+        Me.lblID.Size = New System.Drawing.Size(21, 13)
         Me.lblID.TabIndex = 2
         Me.lblID.Text = "ID:"
         '
@@ -352,7 +352,7 @@ Partial Class dlgDefineTricotData
         Me.lblVVariety.Location = New System.Drawing.Point(351, 74)
         Me.lblVVariety.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblVVariety.Name = "lblVVariety"
-        Me.lblVVariety.Size = New System.Drawing.Size(62, 20)
+        Me.lblVVariety.Size = New System.Drawing.Size(42, 13)
         Me.lblVVariety.TabIndex = 0
         Me.lblVVariety.Text = "Variety:"
         '
@@ -420,7 +420,7 @@ Partial Class dlgDefineTricotData
         Me.lblIVTraits.Location = New System.Drawing.Point(354, 162)
         Me.lblIVTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIVTraits.Name = "lblIVTraits"
-        Me.lblIVTraits.Size = New System.Drawing.Size(52, 20)
+        Me.lblIVTraits.Size = New System.Drawing.Size(36, 13)
         Me.lblIVTraits.TabIndex = 18
         Me.lblIVTraits.Text = "Traits:"
         '
@@ -458,7 +458,7 @@ Partial Class dlgDefineTricotData
         Me.lblIVID.Location = New System.Drawing.Point(354, 46)
         Me.lblIVID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIVID.Name = "lblIVID"
-        Me.lblIVID.Size = New System.Drawing.Size(30, 20)
+        Me.lblIVID.Size = New System.Drawing.Size(21, 13)
         Me.lblIVID.TabIndex = 3
         Me.lblIVID.Text = "ID:"
         '
@@ -481,7 +481,7 @@ Partial Class dlgDefineTricotData
         Me.lblIVVariety.Location = New System.Drawing.Point(354, 104)
         Me.lblIVVariety.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIVVariety.Name = "lblIVVariety"
-        Me.lblIVVariety.Size = New System.Drawing.Size(62, 20)
+        Me.lblIVVariety.Size = New System.Drawing.Size(42, 13)
         Me.lblIVVariety.TabIndex = 0
         Me.lblIVVariety.Text = "Variety:"
         '

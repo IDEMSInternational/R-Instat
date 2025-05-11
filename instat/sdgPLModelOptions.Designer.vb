@@ -56,23 +56,24 @@ Partial Class sdgPLModelOptions
         '
         Me.ucrChkTreatsNAs.AutoSize = True
         Me.ucrChkTreatsNAs.Checked = False
-        Me.ucrChkTreatsNAs.Location = New System.Drawing.Point(16, 220)
+        Me.ucrChkTreatsNAs.Location = New System.Drawing.Point(10, 232)
+        Me.ucrChkTreatsNAs.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkTreatsNAs.Name = "ucrChkTreatsNAs"
-        Me.ucrChkTreatsNAs.Size = New System.Drawing.Size(93, 23)
-        Me.ucrChkTreatsNAs.TabIndex = 334
+        Me.ucrChkTreatsNAs.Size = New System.Drawing.Size(93, 34)
+        Me.ucrChkTreatsNAs.TabIndex = 5
         '
         'ucrNudShape
         '
         Me.ucrNudShape.AutoSize = True
         Me.ucrNudShape.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShape.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudShape.Location = New System.Drawing.Point(181, 79)
+        Me.ucrNudShape.Location = New System.Drawing.Point(181, 81)
         Me.ucrNudShape.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudShape.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudShape.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShape.Name = "ucrNudShape"
         Me.ucrNudShape.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudShape.TabIndex = 23
+        Me.ucrNudShape.TabIndex = 7
         Me.ucrNudShape.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudSigma
@@ -80,22 +81,22 @@ Partial Class sdgPLModelOptions
         Me.ucrNudSigma.AutoSize = True
         Me.ucrNudSigma.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSigma.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSigma.Location = New System.Drawing.Point(181, 51)
+        Me.ucrNudSigma.Location = New System.Drawing.Point(181, 48)
         Me.ucrNudSigma.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudSigma.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSigma.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSigma.Name = "ucrNudSigma"
         Me.ucrNudSigma.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSigma.TabIndex = 24
+        Me.ucrNudSigma.TabIndex = 4
         Me.ucrNudSigma.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblRate
         '
         Me.lblRate.AutoSize = True
-        Me.lblRate.Location = New System.Drawing.Point(123, 113)
+        Me.lblRate.Location = New System.Drawing.Point(125, 111)
         Me.lblRate.Name = "lblRate"
         Me.lblRate.Size = New System.Drawing.Size(33, 13)
-        Me.lblRate.TabIndex = 11
+        Me.lblRate.TabIndex = 8
         Me.lblRate.Text = "Rate:"
         '
         'ucrNudMean
@@ -109,47 +110,49 @@ Partial Class sdgPLModelOptions
         Me.ucrNudMean.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMean.Name = "ucrNudMean"
         Me.ucrNudMean.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMean.TabIndex = 21
+        Me.ucrNudMean.TabIndex = 2
         Me.ucrNudMean.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblSigma
         '
         Me.lblSigma.AutoSize = True
-        Me.lblSigma.Location = New System.Drawing.Point(123, 54)
+        Me.lblSigma.Location = New System.Drawing.Point(124, 48)
         Me.lblSigma.Name = "lblSigma"
         Me.lblSigma.Size = New System.Drawing.Size(39, 13)
-        Me.lblSigma.TabIndex = 8
+        Me.lblSigma.TabIndex = 3
         Me.lblSigma.Text = "Sigma:"
         '
         'ucrChkWeights
         '
         Me.ucrChkWeights.AutoSize = True
         Me.ucrChkWeights.Checked = False
-        Me.ucrChkWeights.Location = New System.Drawing.Point(16, 192)
+        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 196)
+        Me.ucrChkWeights.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkWeights.Name = "ucrChkWeights"
-        Me.ucrChkWeights.Size = New System.Drawing.Size(85, 23)
-        Me.ucrChkWeights.TabIndex = 336
+        Me.ucrChkWeights.Size = New System.Drawing.Size(105, 34)
+        Me.ucrChkWeights.TabIndex = 3
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
-        Me.ucrBase.Location = New System.Drawing.Point(22, 380)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 401)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(224, 30)
-        Me.ucrBase.TabIndex = 342
+        Me.ucrBase.Size = New System.Drawing.Size(335, 42)
+        Me.ucrBase.TabIndex = 16
         '
         'ucrNudMaxIterations
         '
         Me.ucrNudMaxIterations.AutoSize = True
         Me.ucrNudMaxIterations.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxIterations.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxIterations.Location = New System.Drawing.Point(224, 251)
+        Me.ucrNudMaxIterations.Location = New System.Drawing.Point(209, 270)
         Me.ucrNudMaxIterations.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudMaxIterations.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxIterations.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxIterations.Name = "ucrNudMaxIterations"
         Me.ucrNudMaxIterations.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaxIterations.TabIndex = 341
+        Me.ucrNudMaxIterations.TabIndex = 9
         Me.ucrNudMaxIterations.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputNA
@@ -158,10 +161,11 @@ Partial Class sdgPLModelOptions
         Me.ucrInputNA.AutoSize = True
         Me.ucrInputNA.IsMultiline = False
         Me.ucrInputNA.IsReadOnly = False
-        Me.ucrInputNA.Location = New System.Drawing.Point(136, 219)
+        Me.ucrInputNA.Location = New System.Drawing.Point(120, 231)
+        Me.ucrInputNA.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputNA.Name = "ucrInputNA"
-        Me.ucrInputNA.Size = New System.Drawing.Size(105, 21)
-        Me.ucrInputNA.TabIndex = 339
+        Me.ucrInputNA.Size = New System.Drawing.Size(139, 27)
+        Me.ucrInputNA.TabIndex = 6
         '
         'ucrInputWeight
         '
@@ -169,10 +173,11 @@ Partial Class sdgPLModelOptions
         Me.ucrInputWeight.AutoSize = True
         Me.ucrInputWeight.IsMultiline = False
         Me.ucrInputWeight.IsReadOnly = False
-        Me.ucrInputWeight.Location = New System.Drawing.Point(136, 190)
+        Me.ucrInputWeight.Location = New System.Drawing.Point(119, 197)
+        Me.ucrInputWeight.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputWeight.Name = "ucrInputWeight"
-        Me.ucrInputWeight.Size = New System.Drawing.Size(105, 21)
-        Me.ucrInputWeight.TabIndex = 338
+        Me.ucrInputWeight.Size = New System.Drawing.Size(140, 29)
+        Me.ucrInputWeight.TabIndex = 4
         '
         'ucrInputMethod
         '
@@ -180,23 +185,24 @@ Partial Class sdgPLModelOptions
         Me.ucrInputMethod.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(136, 162)
+        Me.ucrInputMethod.Location = New System.Drawing.Point(119, 163)
+        Me.ucrInputMethod.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputMethod.Name = "ucrInputMethod"
-        Me.ucrInputMethod.Size = New System.Drawing.Size(105, 26)
-        Me.ucrInputMethod.TabIndex = 337
+        Me.ucrInputMethod.Size = New System.Drawing.Size(140, 26)
+        Me.ucrInputMethod.TabIndex = 2
         '
         'ucrNudSteffenson
         '
         Me.ucrNudSteffenson.AutoSize = True
         Me.ucrNudSteffenson.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSteffenson.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSteffenson.Location = New System.Drawing.Point(225, 350)
+        Me.ucrNudSteffenson.Location = New System.Drawing.Point(120, 367)
         Me.ucrNudSteffenson.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudSteffenson.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSteffenson.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSteffenson.Name = "ucrNudSteffenson"
         Me.ucrNudSteffenson.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSteffenson.TabIndex = 335
+        Me.ucrNudSteffenson.TabIndex = 15
         Me.ucrNudSteffenson.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudOuterIterations
@@ -204,31 +210,31 @@ Partial Class sdgPLModelOptions
         Me.ucrNudOuterIterations.AutoSize = True
         Me.ucrNudOuterIterations.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudOuterIterations.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudOuterIterations.Location = New System.Drawing.Point(224, 286)
+        Me.ucrNudOuterIterations.Location = New System.Drawing.Point(209, 300)
         Me.ucrNudOuterIterations.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudOuterIterations.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudOuterIterations.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudOuterIterations.Name = "ucrNudOuterIterations"
         Me.ucrNudOuterIterations.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudOuterIterations.TabIndex = 333
+        Me.ucrNudOuterIterations.TabIndex = 11
         Me.ucrNudOuterIterations.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblOuterIterations
         '
         Me.lblOuterIterations.AutoSize = True
-        Me.lblOuterIterations.Location = New System.Drawing.Point(116, 289)
+        Me.lblOuterIterations.Location = New System.Drawing.Point(108, 303)
         Me.lblOuterIterations.Name = "lblOuterIterations"
         Me.lblOuterIterations.Size = New System.Drawing.Size(85, 13)
-        Me.lblOuterIterations.TabIndex = 329
+        Me.lblOuterIterations.TabIndex = 10
         Me.lblOuterIterations.Text = " Outer Iterations:"
         '
         'lblMaximumIterations
         '
         Me.lblMaximumIterations.AutoSize = True
-        Me.lblMaximumIterations.Location = New System.Drawing.Point(116, 253)
+        Me.lblMaximumIterations.Location = New System.Drawing.Point(109, 272)
         Me.lblMaximumIterations.Name = "lblMaximumIterations"
         Me.lblMaximumIterations.Size = New System.Drawing.Size(100, 13)
-        Me.lblMaximumIterations.TabIndex = 331
+        Me.lblMaximumIterations.TabIndex = 8
         Me.lblMaximumIterations.Text = "Maximum Iterations:"
         '
         'grpPriors
@@ -245,8 +251,8 @@ Partial Class sdgPLModelOptions
         Me.grpPriors.Controls.Add(Me.lblSigma)
         Me.grpPriors.Location = New System.Drawing.Point(10, 12)
         Me.grpPriors.Name = "grpPriors"
-        Me.grpPriors.Size = New System.Drawing.Size(252, 145)
-        Me.grpPriors.TabIndex = 328
+        Me.grpPriors.Size = New System.Drawing.Size(267, 143)
+        Me.grpPriors.TabIndex = 0
         Me.grpPriors.TabStop = False
         Me.grpPriors.Text = "Priors"
         '
@@ -254,36 +260,38 @@ Partial Class sdgPLModelOptions
         '
         Me.ucrChkMultivariateNormal.AutoSize = True
         Me.ucrChkMultivariateNormal.Checked = False
-        Me.ucrChkMultivariateNormal.Location = New System.Drawing.Point(6, 21)
+        Me.ucrChkMultivariateNormal.Location = New System.Drawing.Point(7, 19)
+        Me.ucrChkMultivariateNormal.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkMultivariateNormal.Name = "ucrChkMultivariateNormal"
-        Me.ucrChkMultivariateNormal.Size = New System.Drawing.Size(93, 23)
-        Me.ucrChkMultivariateNormal.TabIndex = 28
+        Me.ucrChkMultivariateNormal.Size = New System.Drawing.Size(93, 34)
+        Me.ucrChkMultivariateNormal.TabIndex = 0
         '
         'ucrChkGamma
         '
         Me.ucrChkGamma.AutoSize = True
         Me.ucrChkGamma.Checked = False
-        Me.ucrChkGamma.Location = New System.Drawing.Point(6, 86)
+        Me.ucrChkGamma.Location = New System.Drawing.Point(7, 79)
+        Me.ucrChkGamma.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkGamma.Name = "ucrChkGamma"
-        Me.ucrChkGamma.Size = New System.Drawing.Size(93, 23)
-        Me.ucrChkGamma.TabIndex = 25
+        Me.ucrChkGamma.Size = New System.Drawing.Size(93, 34)
+        Me.ucrChkGamma.TabIndex = 5
         '
         'lblShape
         '
         Me.lblShape.AutoSize = True
-        Me.lblShape.Location = New System.Drawing.Point(123, 86)
+        Me.lblShape.Location = New System.Drawing.Point(124, 84)
         Me.lblShape.Name = "lblShape"
         Me.lblShape.Size = New System.Drawing.Size(41, 13)
-        Me.lblShape.TabIndex = 5
+        Me.lblShape.TabIndex = 6
         Me.lblShape.Text = "Shape:"
         '
         'lblMean
         '
         Me.lblMean.AutoSize = True
-        Me.lblMean.Location = New System.Drawing.Point(123, 25)
+        Me.lblMean.Location = New System.Drawing.Point(123, 23)
         Me.lblMean.Name = "lblMean"
-        Me.lblMean.Size = New System.Drawing.Size(43, 13)
-        Me.lblMean.TabIndex = 4
+        Me.lblMean.Size = New System.Drawing.Size(37, 13)
+        Me.lblMean.TabIndex = 1
         Me.lblMean.Text = "Mean:"
         '
         'ucrNudRate
@@ -291,50 +299,54 @@ Partial Class sdgPLModelOptions
         Me.ucrNudRate.AutoSize = True
         Me.ucrNudRate.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRate.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRate.Location = New System.Drawing.Point(181, 107)
+        Me.ucrNudRate.Location = New System.Drawing.Point(181, 109)
         Me.ucrNudRate.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudRate.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRate.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRate.Name = "ucrNudRate"
         Me.ucrNudRate.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRate.TabIndex = 22
+        Me.ucrNudRate.TabIndex = 9
         Me.ucrNudRate.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkMaxit
         '
         Me.ucrChkMaxit.AutoSize = True
         Me.ucrChkMaxit.Checked = False
-        Me.ucrChkMaxit.Location = New System.Drawing.Point(16, 261)
+        Me.ucrChkMaxit.Location = New System.Drawing.Point(10, 268)
+        Me.ucrChkMaxit.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkMaxit.Name = "ucrChkMaxit"
-        Me.ucrChkMaxit.Size = New System.Drawing.Size(93, 23)
-        Me.ucrChkMaxit.TabIndex = 344
+        Me.ucrChkMaxit.Size = New System.Drawing.Size(93, 34)
+        Me.ucrChkMaxit.TabIndex = 7
         '
         'ucrChkMethod
         '
         Me.ucrChkMethod.AutoSize = True
         Me.ucrChkMethod.Checked = False
-        Me.ucrChkMethod.Location = New System.Drawing.Point(16, 164)
+        Me.ucrChkMethod.Location = New System.Drawing.Point(10, 162)
+        Me.ucrChkMethod.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkMethod.Name = "ucrChkMethod"
-        Me.ucrChkMethod.Size = New System.Drawing.Size(93, 23)
-        Me.ucrChkMethod.TabIndex = 345
+        Me.ucrChkMethod.Size = New System.Drawing.Size(93, 34)
+        Me.ucrChkMethod.TabIndex = 1
         '
         'ucrChkEpsilon
         '
         Me.ucrChkEpsilon.AutoSize = True
         Me.ucrChkEpsilon.Checked = False
-        Me.ucrChkEpsilon.Location = New System.Drawing.Point(16, 314)
+        Me.ucrChkEpsilon.Location = New System.Drawing.Point(10, 331)
+        Me.ucrChkEpsilon.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkEpsilon.Name = "ucrChkEpsilon"
-        Me.ucrChkEpsilon.Size = New System.Drawing.Size(93, 23)
-        Me.ucrChkEpsilon.TabIndex = 346
+        Me.ucrChkEpsilon.Size = New System.Drawing.Size(93, 34)
+        Me.ucrChkEpsilon.TabIndex = 12
         '
         'ucrChkSteffenson
         '
         Me.ucrChkSteffenson.AutoSize = True
         Me.ucrChkSteffenson.Checked = False
-        Me.ucrChkSteffenson.Location = New System.Drawing.Point(16, 351)
+        Me.ucrChkSteffenson.Location = New System.Drawing.Point(10, 367)
+        Me.ucrChkSteffenson.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrChkSteffenson.Name = "ucrChkSteffenson"
-        Me.ucrChkSteffenson.Size = New System.Drawing.Size(93, 23)
-        Me.ucrChkSteffenson.TabIndex = 347
+        Me.ucrChkSteffenson.Size = New System.Drawing.Size(93, 34)
+        Me.ucrChkSteffenson.TabIndex = 14
         '
         'ucrInputEpsilon
         '
@@ -342,16 +354,17 @@ Partial Class sdgPLModelOptions
         Me.ucrInputEpsilon.AutoSize = True
         Me.ucrInputEpsilon.IsMultiline = False
         Me.ucrInputEpsilon.IsReadOnly = False
-        Me.ucrInputEpsilon.Location = New System.Drawing.Point(136, 314)
+        Me.ucrInputEpsilon.Location = New System.Drawing.Point(120, 333)
+        Me.ucrInputEpsilon.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrInputEpsilon.Name = "ucrInputEpsilon"
-        Me.ucrInputEpsilon.Size = New System.Drawing.Size(105, 21)
-        Me.ucrInputEpsilon.TabIndex = 348
+        Me.ucrInputEpsilon.Size = New System.Drawing.Size(139, 28)
+        Me.ucrInputEpsilon.TabIndex = 13
         '
         'sdgPLModelOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(289, 422)
+        Me.ClientSize = New System.Drawing.Size(293, 448)
         Me.Controls.Add(Me.ucrInputEpsilon)
         Me.Controls.Add(Me.ucrChkSteffenson)
         Me.Controls.Add(Me.ucrChkEpsilon)
@@ -374,7 +387,7 @@ Partial Class sdgPLModelOptions
         Me.MinimizeBox = False
         Me.Name = "sdgPLModelOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "PLackett-Luce Model Options"
+        Me.Text = "Plackett-Luce Model Options"
         Me.grpPriors.ResumeLayout(False)
         Me.grpPriors.PerformLayout()
         Me.ResumeLayout(False)
