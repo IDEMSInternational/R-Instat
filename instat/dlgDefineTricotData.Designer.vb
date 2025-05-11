@@ -67,10 +67,10 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(14, 694)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 473)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
         '
         'grpIDLevel
@@ -91,11 +91,9 @@ Partial Class dlgDefineTricotData
         Me.grpIDLevel.Controls.Add(Me.lblID)
         Me.grpIDLevel.Controls.Add(Me.ucrReceiverLevelID)
         Me.grpIDLevel.Controls.Add(Me.ucrSelectorIDLevelData)
-        Me.grpIDLevel.Location = New System.Drawing.Point(14, 357)
-        Me.grpIDLevel.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpIDLevel.Location = New System.Drawing.Point(9, 238)
         Me.grpIDLevel.Name = "grpIDLevel"
-        Me.grpIDLevel.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpIDLevel.Size = New System.Drawing.Size(821, 338)
+        Me.grpIDLevel.Size = New System.Drawing.Size(495, 225)
         Me.grpIDLevel.TabIndex = 0
         Me.grpIDLevel.TabStop = False
         Me.grpIDLevel.Tag = ""
@@ -105,8 +103,8 @@ Partial Class dlgDefineTricotData
         '
         Me.lblPlantingDate.AutoSize = True
         Me.lblPlantingDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPlantingDate.Location = New System.Drawing.Point(350, 203)
-        Me.lblPlantingDate.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblPlantingDate.Location = New System.Drawing.Point(228, 137)
+        Me.lblPlantingDate.Margin = New System.Windows.Forms.Padding(1, 0, 1, 0)
         Me.lblPlantingDate.Name = "lblPlantingDate"
         Me.lblPlantingDate.Size = New System.Drawing.Size(74, 13)
         Me.lblPlantingDate.TabIndex = 8
@@ -118,10 +116,10 @@ Partial Class dlgDefineTricotData
         Me.ucrInputCheckInputIDLevel.AutoSize = True
         Me.ucrInputCheckInputIDLevel.IsMultiline = False
         Me.ucrInputCheckInputIDLevel.IsReadOnly = False
-        Me.ucrInputCheckInputIDLevel.Location = New System.Drawing.Point(186, 302)
-        Me.ucrInputCheckInputIDLevel.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputCheckInputIDLevel.Location = New System.Drawing.Point(124, 201)
+        Me.ucrInputCheckInputIDLevel.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputCheckInputIDLevel.Name = "ucrInputCheckInputIDLevel"
-        Me.ucrInputCheckInputIDLevel.Size = New System.Drawing.Size(564, 32)
+        Me.ucrInputCheckInputIDLevel.Size = New System.Drawing.Size(365, 21)
         Me.ucrInputCheckInputIDLevel.TabIndex = 15
         '
         'UcrInput1
@@ -129,18 +127,17 @@ Partial Class dlgDefineTricotData
         Me.UcrInput1.AddQuotesIfUnrecognised = True
         Me.UcrInput1.AutoSize = True
         Me.UcrInput1.IsReadOnly = False
-        Me.UcrInput1.Location = New System.Drawing.Point(204, 316)
-        Me.UcrInput1.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.UcrInput1.Location = New System.Drawing.Point(136, 211)
+        Me.UcrInput1.Margin = New System.Windows.Forms.Padding(4)
         Me.UcrInput1.Name = "UcrInput1"
-        Me.UcrInput1.Size = New System.Drawing.Size(228, 26)
+        Me.UcrInput1.Size = New System.Drawing.Size(152, 17)
         Me.UcrInput1.TabIndex = 14
         '
         'btnckeckduplicatesIDLevel
         '
-        Me.btnckeckduplicatesIDLevel.Location = New System.Drawing.Point(10, 298)
-        Me.btnckeckduplicatesIDLevel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnckeckduplicatesIDLevel.Location = New System.Drawing.Point(7, 199)
         Me.btnckeckduplicatesIDLevel.Name = "btnckeckduplicatesIDLevel"
-        Me.btnckeckduplicatesIDLevel.Size = New System.Drawing.Size(172, 34)
+        Me.btnckeckduplicatesIDLevel.Size = New System.Drawing.Size(115, 23)
         Me.btnckeckduplicatesIDLevel.TabIndex = 13
         Me.btnckeckduplicatesIDLevel.Text = "Check Duplicates"
         Me.btnckeckduplicatesIDLevel.UseVisualStyleBackColor = True
@@ -149,8 +146,7 @@ Partial Class dlgDefineTricotData
         '
         Me.lblTraits.AutoSize = True
         Me.lblTraits.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTraits.Location = New System.Drawing.Point(576, 160)
-        Me.lblTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTraits.Location = New System.Drawing.Point(362, 107)
         Me.lblTraits.Name = "lblTraits"
         Me.lblTraits.Size = New System.Drawing.Size(36, 13)
         Me.lblTraits.TabIndex = 12
@@ -160,11 +156,11 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrReceiverLevelOverallTraits.AutoSize = True
         Me.ucrReceiverLevelOverallTraits.frmParent = Me
-        Me.ucrReceiverLevelOverallTraits.Location = New System.Drawing.Point(572, 184)
+        Me.ucrReceiverLevelOverallTraits.Location = New System.Drawing.Point(359, 123)
         Me.ucrReceiverLevelOverallTraits.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLevelOverallTraits.Name = "ucrReceiverLevelOverallTraits"
         Me.ucrReceiverLevelOverallTraits.Selector = Nothing
-        Me.ucrReceiverLevelOverallTraits.Size = New System.Drawing.Size(232, 105)
+        Me.ucrReceiverLevelOverallTraits.Size = New System.Drawing.Size(130, 70)
         Me.ucrReceiverLevelOverallTraits.strNcFilePath = ""
         Me.ucrReceiverLevelOverallTraits.TabIndex = 7
         Me.ucrReceiverLevelOverallTraits.ucrSelector = Nothing
@@ -173,11 +169,11 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrReceiverLevelVarieties.AutoSize = True
         Me.ucrReceiverLevelVarieties.frmParent = Me
-        Me.ucrReceiverLevelVarieties.Location = New System.Drawing.Point(572, 46)
+        Me.ucrReceiverLevelVarieties.Location = New System.Drawing.Point(359, 31)
         Me.ucrReceiverLevelVarieties.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLevelVarieties.Name = "ucrReceiverLevelVarieties"
         Me.ucrReceiverLevelVarieties.Selector = Nothing
-        Me.ucrReceiverLevelVarieties.Size = New System.Drawing.Size(232, 105)
+        Me.ucrReceiverLevelVarieties.Size = New System.Drawing.Size(130, 70)
         Me.ucrReceiverLevelVarieties.strNcFilePath = ""
         Me.ucrReceiverLevelVarieties.TabIndex = 6
         Me.ucrReceiverLevelVarieties.ucrSelector = Nothing
@@ -186,8 +182,7 @@ Partial Class dlgDefineTricotData
         '
         Me.lblVarieties.AutoSize = True
         Me.lblVarieties.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVarieties.Location = New System.Drawing.Point(576, 22)
-        Me.lblVarieties.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblVarieties.Location = New System.Drawing.Point(362, 15)
         Me.lblVarieties.Name = "lblVarieties"
         Me.lblVarieties.Size = New System.Drawing.Size(50, 13)
         Me.lblVarieties.TabIndex = 10
@@ -197,8 +192,7 @@ Partial Class dlgDefineTricotData
         '
         Me.lblLon.AutoSize = True
         Me.lblLon.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLon.Location = New System.Drawing.Point(350, 142)
-        Me.lblLon.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLon.Location = New System.Drawing.Point(228, 97)
         Me.lblLon.Name = "lblLon"
         Me.lblLon.Size = New System.Drawing.Size(57, 13)
         Me.lblLon.TabIndex = 6
@@ -208,11 +202,11 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrReceiverLevelPlantingDate.AutoSize = True
         Me.ucrReceiverLevelPlantingDate.frmParent = Me
-        Me.ucrReceiverLevelPlantingDate.Location = New System.Drawing.Point(354, 218)
+        Me.ucrReceiverLevelPlantingDate.Location = New System.Drawing.Point(225, 152)
         Me.ucrReceiverLevelPlantingDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLevelPlantingDate.Name = "ucrReceiverLevelPlantingDate"
         Me.ucrReceiverLevelPlantingDate.Selector = Nothing
-        Me.ucrReceiverLevelPlantingDate.Size = New System.Drawing.Size(198, 30)
+        Me.ucrReceiverLevelPlantingDate.Size = New System.Drawing.Size(125, 20)
         Me.ucrReceiverLevelPlantingDate.strNcFilePath = ""
         Me.ucrReceiverLevelPlantingDate.TabIndex = 5
         Me.ucrReceiverLevelPlantingDate.Tag = "planting_date"
@@ -222,11 +216,11 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrReceiverLevelLongitude.AutoSize = True
         Me.ucrReceiverLevelLongitude.frmParent = Me
-        Me.ucrReceiverLevelLongitude.Location = New System.Drawing.Point(354, 162)
+        Me.ucrReceiverLevelLongitude.Location = New System.Drawing.Point(225, 112)
         Me.ucrReceiverLevelLongitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLevelLongitude.Name = "ucrReceiverLevelLongitude"
         Me.ucrReceiverLevelLongitude.Selector = Nothing
-        Me.ucrReceiverLevelLongitude.Size = New System.Drawing.Size(198, 30)
+        Me.ucrReceiverLevelLongitude.Size = New System.Drawing.Size(125, 20)
         Me.ucrReceiverLevelLongitude.strNcFilePath = ""
         Me.ucrReceiverLevelLongitude.TabIndex = 4
         Me.ucrReceiverLevelLongitude.Tag = "longitude"
@@ -236,8 +230,7 @@ Partial Class dlgDefineTricotData
         '
         Me.lblLat.AutoSize = True
         Me.lblLat.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLat.Location = New System.Drawing.Point(350, 84)
-        Me.lblLat.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblLat.Location = New System.Drawing.Point(228, 56)
         Me.lblLat.Name = "lblLat"
         Me.lblLat.Size = New System.Drawing.Size(48, 13)
         Me.lblLat.TabIndex = 4
@@ -247,11 +240,11 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrReceiverLevelLatitude.AutoSize = True
         Me.ucrReceiverLevelLatitude.frmParent = Me
-        Me.ucrReceiverLevelLatitude.Location = New System.Drawing.Point(354, 106)
+        Me.ucrReceiverLevelLatitude.Location = New System.Drawing.Point(225, 71)
         Me.ucrReceiverLevelLatitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLevelLatitude.Name = "ucrReceiverLevelLatitude"
         Me.ucrReceiverLevelLatitude.Selector = Nothing
-        Me.ucrReceiverLevelLatitude.Size = New System.Drawing.Size(198, 30)
+        Me.ucrReceiverLevelLatitude.Size = New System.Drawing.Size(125, 20)
         Me.ucrReceiverLevelLatitude.strNcFilePath = ""
         Me.ucrReceiverLevelLatitude.TabIndex = 3
         Me.ucrReceiverLevelLatitude.Tag = "latitude"
@@ -261,8 +254,7 @@ Partial Class dlgDefineTricotData
         '
         Me.lblID.AutoSize = True
         Me.lblID.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblID.Location = New System.Drawing.Point(350, 26)
-        Me.lblID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblID.Location = New System.Drawing.Point(228, 18)
         Me.lblID.Name = "lblID"
         Me.lblID.Size = New System.Drawing.Size(21, 13)
         Me.lblID.TabIndex = 2
@@ -272,11 +264,11 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrReceiverLevelID.AutoSize = True
         Me.ucrReceiverLevelID.frmParent = Me
-        Me.ucrReceiverLevelID.Location = New System.Drawing.Point(354, 46)
+        Me.ucrReceiverLevelID.Location = New System.Drawing.Point(225, 31)
         Me.ucrReceiverLevelID.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLevelID.Name = "ucrReceiverLevelID"
         Me.ucrReceiverLevelID.Selector = Nothing
-        Me.ucrReceiverLevelID.Size = New System.Drawing.Size(198, 30)
+        Me.ucrReceiverLevelID.Size = New System.Drawing.Size(125, 20)
         Me.ucrReceiverLevelID.strNcFilePath = ""
         Me.ucrReceiverLevelID.TabIndex = 2
         Me.ucrReceiverLevelID.Tag = "id"
@@ -288,10 +280,10 @@ Partial Class dlgDefineTricotData
         Me.ucrSelectorIDLevelData.bDropUnusedFilterLevels = False
         Me.ucrSelectorIDLevelData.bShowHiddenColumns = False
         Me.ucrSelectorIDLevelData.bUseCurrentFilter = True
-        Me.ucrSelectorIDLevelData.Location = New System.Drawing.Point(10, 22)
+        Me.ucrSelectorIDLevelData.Location = New System.Drawing.Point(7, 15)
         Me.ucrSelectorIDLevelData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorIDLevelData.Name = "ucrSelectorIDLevelData"
-        Me.ucrSelectorIDLevelData.Size = New System.Drawing.Size(318, 274)
+        Me.ucrSelectorIDLevelData.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorIDLevelData.TabIndex = 1
         '
         'grpVarietyLevel
@@ -301,11 +293,9 @@ Partial Class dlgDefineTricotData
         Me.grpVarietyLevel.Controls.Add(Me.ucrSelectorVarietyLevelData)
         Me.grpVarietyLevel.Controls.Add(Me.lblVVariety)
         Me.grpVarietyLevel.Controls.Add(Me.ucrReceiverVarietyLevelVariety)
-        Me.grpVarietyLevel.Location = New System.Drawing.Point(843, 357)
-        Me.grpVarietyLevel.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpVarietyLevel.Location = New System.Drawing.Point(510, 238)
         Me.grpVarietyLevel.Name = "grpVarietyLevel"
-        Me.grpVarietyLevel.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpVarietyLevel.Size = New System.Drawing.Size(541, 338)
+        Me.grpVarietyLevel.Size = New System.Drawing.Size(361, 225)
         Me.grpVarietyLevel.TabIndex = 1
         Me.grpVarietyLevel.TabStop = False
         Me.grpVarietyLevel.Tag = ""
@@ -317,18 +307,17 @@ Partial Class dlgDefineTricotData
         Me.ucrInputCheckInputVarietyLevel.AutoSize = True
         Me.ucrInputCheckInputVarietyLevel.IsMultiline = False
         Me.ucrInputCheckInputVarietyLevel.IsReadOnly = False
-        Me.ucrInputCheckInputVarietyLevel.Location = New System.Drawing.Point(188, 302)
-        Me.ucrInputCheckInputVarietyLevel.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputCheckInputVarietyLevel.Location = New System.Drawing.Point(125, 201)
+        Me.ucrInputCheckInputVarietyLevel.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputCheckInputVarietyLevel.Name = "ucrInputCheckInputVarietyLevel"
-        Me.ucrInputCheckInputVarietyLevel.Size = New System.Drawing.Size(341, 32)
+        Me.ucrInputCheckInputVarietyLevel.Size = New System.Drawing.Size(227, 21)
         Me.ucrInputCheckInputVarietyLevel.TabIndex = 15
         '
         'btncheckduplicatesvarietylevel
         '
-        Me.btncheckduplicatesvarietylevel.Location = New System.Drawing.Point(10, 298)
-        Me.btncheckduplicatesvarietylevel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btncheckduplicatesvarietylevel.Location = New System.Drawing.Point(7, 199)
         Me.btncheckduplicatesvarietylevel.Name = "btncheckduplicatesvarietylevel"
-        Me.btncheckduplicatesvarietylevel.Size = New System.Drawing.Size(172, 34)
+        Me.btncheckduplicatesvarietylevel.Size = New System.Drawing.Size(115, 23)
         Me.btncheckduplicatesvarietylevel.TabIndex = 14
         Me.btncheckduplicatesvarietylevel.Text = "Check Duplicates"
         Me.btncheckduplicatesvarietylevel.UseVisualStyleBackColor = True
@@ -339,18 +328,17 @@ Partial Class dlgDefineTricotData
         Me.ucrSelectorVarietyLevelData.bDropUnusedFilterLevels = False
         Me.ucrSelectorVarietyLevelData.bShowHiddenColumns = False
         Me.ucrSelectorVarietyLevelData.bUseCurrentFilter = True
-        Me.ucrSelectorVarietyLevelData.Location = New System.Drawing.Point(10, 22)
+        Me.ucrSelectorVarietyLevelData.Location = New System.Drawing.Point(7, 15)
         Me.ucrSelectorVarietyLevelData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorVarietyLevelData.Name = "ucrSelectorVarietyLevelData"
-        Me.ucrSelectorVarietyLevelData.Size = New System.Drawing.Size(330, 274)
+        Me.ucrSelectorVarietyLevelData.Size = New System.Drawing.Size(220, 183)
         Me.ucrSelectorVarietyLevelData.TabIndex = 8
         '
         'lblVVariety
         '
         Me.lblVVariety.AutoSize = True
         Me.lblVVariety.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVVariety.Location = New System.Drawing.Point(351, 74)
-        Me.lblVVariety.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblVVariety.Location = New System.Drawing.Point(234, 49)
         Me.lblVVariety.Name = "lblVVariety"
         Me.lblVVariety.Size = New System.Drawing.Size(42, 13)
         Me.lblVVariety.TabIndex = 0
@@ -360,11 +348,11 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrReceiverVarietyLevelVariety.AutoSize = True
         Me.ucrReceiverVarietyLevelVariety.frmParent = Me
-        Me.ucrReceiverVarietyLevelVariety.Location = New System.Drawing.Point(347, 98)
+        Me.ucrReceiverVarietyLevelVariety.Location = New System.Drawing.Point(227, 65)
         Me.ucrReceiverVarietyLevelVariety.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVarietyLevelVariety.Name = "ucrReceiverVarietyLevelVariety"
         Me.ucrReceiverVarietyLevelVariety.Selector = Nothing
-        Me.ucrReceiverVarietyLevelVariety.Size = New System.Drawing.Size(182, 30)
+        Me.ucrReceiverVarietyLevelVariety.Size = New System.Drawing.Size(125, 20)
         Me.ucrReceiverVarietyLevelVariety.strNcFilePath = ""
         Me.ucrReceiverVarietyLevelVariety.TabIndex = 9
         Me.ucrReceiverVarietyLevelVariety.Tag = "variety"
@@ -381,11 +369,9 @@ Partial Class dlgDefineTricotData
         Me.grpIDVarietyLevel.Controls.Add(Me.ucrSelectorIDVarietyLevel)
         Me.grpIDVarietyLevel.Controls.Add(Me.lblIVVariety)
         Me.grpIDVarietyLevel.Controls.Add(Me.ucrReceiverIDVarietyLevelVariety)
-        Me.grpIDVarietyLevel.Location = New System.Drawing.Point(14, 14)
-        Me.grpIDVarietyLevel.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpIDVarietyLevel.Location = New System.Drawing.Point(9, 9)
         Me.grpIDVarietyLevel.Name = "grpIDVarietyLevel"
-        Me.grpIDVarietyLevel.Padding = New System.Windows.Forms.Padding(4)
-        Me.grpIDVarietyLevel.Size = New System.Drawing.Size(821, 338)
+        Me.grpIDVarietyLevel.Size = New System.Drawing.Size(495, 225)
         Me.grpIDVarietyLevel.TabIndex = 15
         Me.grpIDVarietyLevel.TabStop = False
         Me.grpIDVarietyLevel.Tag = ""
@@ -397,18 +383,17 @@ Partial Class dlgDefineTricotData
         Me.ucrInputCheckInputIDVarietyLevel.AutoSize = True
         Me.ucrInputCheckInputIDVarietyLevel.IsMultiline = False
         Me.ucrInputCheckInputIDVarietyLevel.IsReadOnly = False
-        Me.ucrInputCheckInputIDVarietyLevel.Location = New System.Drawing.Point(186, 302)
-        Me.ucrInputCheckInputIDVarietyLevel.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputCheckInputIDVarietyLevel.Location = New System.Drawing.Point(124, 201)
+        Me.ucrInputCheckInputIDVarietyLevel.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputCheckInputIDVarietyLevel.Name = "ucrInputCheckInputIDVarietyLevel"
-        Me.ucrInputCheckInputIDVarietyLevel.Size = New System.Drawing.Size(564, 32)
+        Me.ucrInputCheckInputIDVarietyLevel.Size = New System.Drawing.Size(365, 21)
         Me.ucrInputCheckInputIDVarietyLevel.TabIndex = 20
         '
         'btncheckduplicatesIDVarietyLevel
         '
-        Me.btncheckduplicatesIDVarietyLevel.Location = New System.Drawing.Point(10, 298)
-        Me.btncheckduplicatesIDVarietyLevel.Margin = New System.Windows.Forms.Padding(4)
+        Me.btncheckduplicatesIDVarietyLevel.Location = New System.Drawing.Point(7, 199)
         Me.btncheckduplicatesIDVarietyLevel.Name = "btncheckduplicatesIDVarietyLevel"
-        Me.btncheckduplicatesIDVarietyLevel.Size = New System.Drawing.Size(172, 34)
+        Me.btncheckduplicatesIDVarietyLevel.Size = New System.Drawing.Size(115, 23)
         Me.btncheckduplicatesIDVarietyLevel.TabIndex = 19
         Me.btncheckduplicatesIDVarietyLevel.Text = "Check Duplicates"
         Me.btncheckduplicatesIDVarietyLevel.UseVisualStyleBackColor = True
@@ -417,8 +402,7 @@ Partial Class dlgDefineTricotData
         '
         Me.lblIVTraits.AutoSize = True
         Me.lblIVTraits.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIVTraits.Location = New System.Drawing.Point(354, 162)
-        Me.lblIVTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblIVTraits.Location = New System.Drawing.Point(225, 107)
         Me.lblIVTraits.Name = "lblIVTraits"
         Me.lblIVTraits.Size = New System.Drawing.Size(36, 13)
         Me.lblIVTraits.TabIndex = 18
@@ -428,11 +412,11 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrReceiverIDVarietyLevelTraits.AutoSize = True
         Me.ucrReceiverIDVarietyLevelTraits.frmParent = Me
-        Me.ucrReceiverIDVarietyLevelTraits.Location = New System.Drawing.Point(354, 184)
+        Me.ucrReceiverIDVarietyLevelTraits.Location = New System.Drawing.Point(225, 122)
         Me.ucrReceiverIDVarietyLevelTraits.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDVarietyLevelTraits.Name = "ucrReceiverIDVarietyLevelTraits"
         Me.ucrReceiverIDVarietyLevelTraits.Selector = Nothing
-        Me.ucrReceiverIDVarietyLevelTraits.Size = New System.Drawing.Size(225, 105)
+        Me.ucrReceiverIDVarietyLevelTraits.Size = New System.Drawing.Size(130, 70)
         Me.ucrReceiverIDVarietyLevelTraits.strNcFilePath = ""
         Me.ucrReceiverIDVarietyLevelTraits.TabIndex = 13
         Me.ucrReceiverIDVarietyLevelTraits.ucrSelector = Nothing
@@ -441,11 +425,11 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrReceiverIDVarietyLevelID.AutoSize = True
         Me.ucrReceiverIDVarietyLevelID.frmParent = Me
-        Me.ucrReceiverIDVarietyLevelID.Location = New System.Drawing.Point(354, 69)
+        Me.ucrReceiverIDVarietyLevelID.Location = New System.Drawing.Point(225, 45)
         Me.ucrReceiverIDVarietyLevelID.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDVarietyLevelID.Name = "ucrReceiverIDVarietyLevelID"
         Me.ucrReceiverIDVarietyLevelID.Selector = Nothing
-        Me.ucrReceiverIDVarietyLevelID.Size = New System.Drawing.Size(225, 30)
+        Me.ucrReceiverIDVarietyLevelID.Size = New System.Drawing.Size(130, 20)
         Me.ucrReceiverIDVarietyLevelID.strNcFilePath = ""
         Me.ucrReceiverIDVarietyLevelID.TabIndex = 11
         Me.ucrReceiverIDVarietyLevelID.Tag = "id"
@@ -455,8 +439,7 @@ Partial Class dlgDefineTricotData
         '
         Me.lblIVID.AutoSize = True
         Me.lblIVID.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIVID.Location = New System.Drawing.Point(354, 46)
-        Me.lblIVID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblIVID.Location = New System.Drawing.Point(225, 30)
         Me.lblIVID.Name = "lblIVID"
         Me.lblIVID.Size = New System.Drawing.Size(21, 13)
         Me.lblIVID.TabIndex = 3
@@ -468,18 +451,17 @@ Partial Class dlgDefineTricotData
         Me.ucrSelectorIDVarietyLevel.bDropUnusedFilterLevels = False
         Me.ucrSelectorIDVarietyLevel.bShowHiddenColumns = False
         Me.ucrSelectorIDVarietyLevel.bUseCurrentFilter = True
-        Me.ucrSelectorIDVarietyLevel.Location = New System.Drawing.Point(10, 22)
+        Me.ucrSelectorIDVarietyLevel.Location = New System.Drawing.Point(7, 15)
         Me.ucrSelectorIDVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorIDVarietyLevel.Name = "ucrSelectorIDVarietyLevel"
-        Me.ucrSelectorIDVarietyLevel.Size = New System.Drawing.Size(338, 274)
+        Me.ucrSelectorIDVarietyLevel.Size = New System.Drawing.Size(215, 183)
         Me.ucrSelectorIDVarietyLevel.TabIndex = 10
         '
         'lblIVVariety
         '
         Me.lblIVVariety.AutoSize = True
         Me.lblIVVariety.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIVVariety.Location = New System.Drawing.Point(354, 104)
-        Me.lblIVVariety.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblIVVariety.Location = New System.Drawing.Point(225, 68)
         Me.lblIVVariety.Name = "lblIVVariety"
         Me.lblIVVariety.Size = New System.Drawing.Size(42, 13)
         Me.lblIVVariety.TabIndex = 0
@@ -489,11 +471,11 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrReceiverIDVarietyLevelVariety.AutoSize = True
         Me.ucrReceiverIDVarietyLevelVariety.frmParent = Me
-        Me.ucrReceiverIDVarietyLevelVariety.Location = New System.Drawing.Point(354, 126)
+        Me.ucrReceiverIDVarietyLevelVariety.Location = New System.Drawing.Point(225, 83)
         Me.ucrReceiverIDVarietyLevelVariety.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDVarietyLevelVariety.Name = "ucrReceiverIDVarietyLevelVariety"
         Me.ucrReceiverIDVarietyLevelVariety.Selector = Nothing
-        Me.ucrReceiverIDVarietyLevelVariety.Size = New System.Drawing.Size(225, 30)
+        Me.ucrReceiverIDVarietyLevelVariety.Size = New System.Drawing.Size(130, 20)
         Me.ucrReceiverIDVarietyLevelVariety.strNcFilePath = ""
         Me.ucrReceiverIDVarietyLevelVariety.TabIndex = 12
         Me.ucrReceiverIDVarietyLevelVariety.Tag = "variety"
@@ -503,28 +485,28 @@ Partial Class dlgDefineTricotData
         '
         Me.ucrChkDefineIDLevel.AutoSize = True
         Me.ucrChkDefineIDLevel.Checked = False
-        Me.ucrChkDefineIDLevel.Location = New System.Drawing.Point(845, 276)
-        Me.ucrChkDefineIDLevel.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDefineIDLevel.Location = New System.Drawing.Point(511, 184)
+        Me.ucrChkDefineIDLevel.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkDefineIDLevel.Name = "ucrChkDefineIDLevel"
-        Me.ucrChkDefineIDLevel.Size = New System.Drawing.Size(302, 34)
+        Me.ucrChkDefineIDLevel.Size = New System.Drawing.Size(201, 23)
         Me.ucrChkDefineIDLevel.TabIndex = 16
         '
         'ucrChkDefineVarietyLevel
         '
         Me.ucrChkDefineVarietyLevel.AutoSize = True
         Me.ucrChkDefineVarietyLevel.Checked = False
-        Me.ucrChkDefineVarietyLevel.Location = New System.Drawing.Point(845, 318)
-        Me.ucrChkDefineVarietyLevel.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDefineVarietyLevel.Location = New System.Drawing.Point(511, 212)
+        Me.ucrChkDefineVarietyLevel.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkDefineVarietyLevel.Name = "ucrChkDefineVarietyLevel"
-        Me.ucrChkDefineVarietyLevel.Size = New System.Drawing.Size(302, 34)
+        Me.ucrChkDefineVarietyLevel.Size = New System.Drawing.Size(201, 23)
         Me.ucrChkDefineVarietyLevel.TabIndex = 17
         '
         'dlgDefineTricotData
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1401, 782)
+        Me.ClientSize = New System.Drawing.Size(879, 531)
         Me.Controls.Add(Me.ucrChkDefineVarietyLevel)
         Me.Controls.Add(Me.ucrChkDefineIDLevel)
         Me.Controls.Add(Me.grpIDVarietyLevel)
@@ -532,7 +514,6 @@ Partial Class dlgDefineTricotData
         Me.Controls.Add(Me.grpIDLevel)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDefineTricotData"

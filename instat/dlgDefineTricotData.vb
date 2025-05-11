@@ -150,6 +150,7 @@ Public Class dlgDefineTricotData
         lblVarieties.Text = "Varieties:"
         lblTraits.Text = "Traits:"
 
+        ucrReceiverIDVarietyLevelID.SetMeAsReceiver()
         ucrReceiverLevelID.SetMeAsReceiver()
         ucrInputCheckInputIDLevel.txtInput.BackColor = Color.White
         ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.White
@@ -306,6 +307,7 @@ Public Class dlgDefineTricotData
         ucrReceiverIDVarietyLevelTraits.SetRCode(clsCDATIDLevelVarietiesFunction, bReset)
     End Sub
 
+
     Private Sub SetRSelector(sender As ucrSelectorByDataFrameAddRemove, lstReceivers As List(Of ucrReceiverSingle))
         Dim ucrTempReceiver As ucrReceiver
         For Each ucrTempReceiver In lstReceivers
@@ -368,20 +370,6 @@ Public Class dlgDefineTricotData
     Public Function AreAllDataframessDifferent(strData1 As String, strData2 As String, strData3 As String) As Boolean
         Return (strData1 <> strData2) AndAlso (strData1 <> strData3) AndAlso (strData2 <> strData3)
     End Function
-
-
-    '    Private Sub TestOKEnabled()
-    '        Dim bDataFramesDifferent As Boolean = AreAllDataframessDifferent(
-    '    ucrSelectorIDLevelData.strCurrentDataFrame,
-    '    ucrSelectorIDVarietyLevel.strCurrentDataFrame,
-    '    ucrSelectorVarietyLevelData.strCurrentDataFrame
-    ')
-    '        ucrBase.OKEnabled(Not ucrReceiverIDVarietyLevelID.IsEmpty AndAlso
-    '                      Not ucrReceiverIDVarietyLevelVariety.IsEmpty AndAlso
-    '                      Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
-    '                      Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent AndAlso
-    '                      bIsUnique AndAlso bIsUniqueID AndAlso bIsUniqueVariety)
-    '    End Sub
 
     Private Sub TestOkEnabled()
         Dim bDataFramesDifferent As Boolean = AreAllDataframessDifferent(
