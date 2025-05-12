@@ -20,6 +20,7 @@ Imports RDotNet
 Public Class dlgImportfromClimMob
     Private clsKeysFunction, clsClimmobFunction, clsProjectsFunction, clsDplyrFunction, clsSecondDplyrFunction As New RFunction
     Private bFirstLoad As Boolean = True
+    Private bKeyRetrieved As Boolean = False
     Private bReset As Boolean = True
     Private clsFirstOperator, clsKeysOverallFunction As New ROperator
     Private clsSecondOperator As New ROperator
@@ -52,11 +53,6 @@ Public Class dlgImportfromClimMob
 
         ucrInputChooseForm.SetParameter(New RParameter("right", 3))
         ucrInputChooseForm.bAllowNonConditionValues = True
-
-        ucrChkDefineTricotData.SetText("Define Tricot Data")
-        ucrChkDefineTricotData.Enabled = False
-
-        cmdTricotData.Visible = False
 
         ucrSaveFile.SetPrefix("climmob_dataframe")
         ucrSaveFile.SetSaveTypeAsDataFrame()
@@ -164,15 +160,22 @@ Public Class dlgImportfromClimMob
             clsThirdOperator.AddParameter("right", Chr(34) & ucrInputChooseForm.GetText & Chr(34))
         End If
     End Sub
-    
+
+    Private Sub FindForms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Only disable on first load, otherwise restore last known state
+        If Not bKeyRetrieved Then
+            cmdFindForms.Enabled = False
+        Else
+            cmdFindForms.Enabled = True
+        End If
+    End Sub
+
     Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdKey.Click
         sdgImportFromClimMob.Setup(clsKeysFunction.GetParameter("key"))
         sdgImportFromClimMob.ShowDialog()
-    End Sub
-
-    Private Sub cmdTricotData_Click(sender As Object, e As EventArgs) Handles cmdTricotData.Click
-        'sdgDefineTricotData.Setup(clsKeysFunction.GetParameter("key"))
-        sdgDefineTricotData.ShowDialog()
+        ' Enable Find Forms
+        cmdFindForms.Enabled = True
+        bKeyRetrieved = True
     End Sub
 
     Private Sub ucrInputServerName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputServerName.ControlContentsChanged
@@ -202,14 +205,6 @@ Public Class dlgImportfromClimMob
             End If
         Else
             ucrInputChooseForm.cboInput.Items.Clear()
-        End If
-    End Sub
-
-    Private Sub ucrChkDefineTricotData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineTricotData.ControlContentsChanged
-        If ucrChkDefineTricotData.Checked Then
-            cmdTricotData.Visible = True
-        Else
-            cmdTricotData.Visible = False
         End If
     End Sub
 End Class

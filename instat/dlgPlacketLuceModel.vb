@@ -61,8 +61,6 @@ Public Class dlgPlacketLuceModel
         ucrSaveResult.SetCheckBoxText("Store Model")
         ucrSaveResult.SetAssignToIfUncheckedValue("last_model")
         ucrSaveResult.SetDataFrameSelector(ucrSelectorTraitsPL.ucrAvailableDataFrames)
-
-        cmdModelOptions.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -119,6 +117,7 @@ Public Class dlgPlacketLuceModel
         clsGetVarMetadataFunction.SetAssignTo("get_index_names")
 
         clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object")
+       clsGetObjectRFunction.AddParameter("data_name", Chr(34) & ucrSelectorTraitsPL.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsGetObjectRFunction.AddParameter("object_name", Chr(34) & "rankings_list" & Chr(34), iPosition:=1)
 
         clsGetRankingOperator.SetOperation("$")
@@ -327,7 +326,7 @@ Public Class dlgPlacketLuceModel
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(Not ucrReceiverMultipleTraits.IsEmpty AndAlso ucrSaveResult.IsComplete)
+        ucrBase.OKEnabled(Not ucrReceiverMultipleTraits.IsEmpty AndAlso ucrSaveResult.IsComplete AndAlso Not ucrSelectorTraitsPL.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -344,6 +343,20 @@ Public Class dlgPlacketLuceModel
         sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction, clsNewAnnovaFunction:=clsAnnovaFunction, clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction, clsNewCoefFunction:=clsCoefFunction, clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction, clsNewItemsFunction:=clsItemsFunction, clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction, clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction, clsNewNodeLabFuction:=clsNodeLabFuction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, clsNewTreeFunction:=clsTreeFunction, bReset:=bResetSubdialog)
         sdgDisplayModelOptions.grpTrees.Enabled = False
         sdgDisplayModelOptions.rdoTree.Enabled = False
+        sdgDisplayModelOptions.ucrChkANOVA.Enabled = True
+        sdgDisplayModelOptions.ucrChkReability.Enabled = True
+        sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = True
+        sdgDisplayModelOptions.rdoPlot.Enabled = True
+        sdgDisplayModelOptions.rdoBar.Enabled = True
+        sdgDisplayModelOptions.rdoMap.Enabled = True
+        sdgDisplayModelOptions.ucrChkConfLimits.Enabled = True
+        sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = True
+        sdgDisplayModelOptions.ucrChkEstimates.Enabled = True
+        sdgDisplayModelOptions.ucrChkAIC.Enabled = True
+        sdgDisplayModelOptions.ucrChkDeviance.Enabled = True
+        sdgDisplayModelOptions.ucrChkSndEstimetes.Enabled = True
+        sdgDisplayModelOptions.ucrChkParProp.Enabled = True
+        sdgDisplayModelOptions.ucrChkItemPara.Enabled = True
         sdgDisplayModelOptions.ShowDialog()
         bResetSubdialog = False
         AddRemoveFunctions()
@@ -365,5 +378,13 @@ Public Class dlgPlacketLuceModel
             ucrBase.clsRsyntax.AddToBeforeCodes(clsMapFunction, iPosition:=4)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=5)
         End If
+    End Sub
+
+    Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewPlacketFunction:=clsPlacketFunction, bReset:=bResetSubdialog)
+        sdgPLModelOptions.ShowDialog()
+        sdgPLModelOptions.ucrChkMultivariateNormal.Enabled = True
+        sdgPLModelOptions.ucrChkGamma.Enabled = True
+        bResetSubdialog = False
     End Sub
 End Class
