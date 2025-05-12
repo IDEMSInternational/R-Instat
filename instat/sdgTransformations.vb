@@ -174,10 +174,10 @@ Public Class sdgTransformations
         AutoFillReceiverVarId()
         AutoFillReceiverVariety()
 
-        'If bReset Then
-        '    ucrReceiverIDVariable.SetMeAsReceiver()
-        '    tbOptions.SelectedIndex = 0
-        'End If
+        If bReset Then
+            ucrReceiverIDVariable.SetMeAsReceiver()
+            tbOptions.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub ucrInputGoodTraits_NameChanged() Handles ucrInputGoodTraits.ControlValueChanged
