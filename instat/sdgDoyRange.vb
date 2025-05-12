@@ -22,12 +22,14 @@ Public Class sdgDoyRange
     Private clsCalcFromList As RFunction
     Private clsCalcFromMainDataFrame As RFunction
     Public clsIfElseFirstDoyFilledFunction As RFunction
+    Private clsDummyFunction As New RFunction
     Private clsDayFromOperator As ROperator
     Private clsDayToOperator As ROperator
     Private bControlsInitialised As Boolean = False
     Private strMainDataFrame As String
     Private strDoyColumn As String
     Private bUpdate As Boolean = True
+    Public Event UseDateChanged()
 
     Private Sub sdgDoyRange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -54,6 +56,7 @@ Public Class sdgDoyRange
             InitialiseControls()
             bUpdate = True
         End If
+
         clsDoyFilterCalc = clsNewDoyFilterCalc
         clsCalcFromList = clsNewCalcFromList
         clsIfElseFirstDoyFilledFunction = clsNewIfElseFirstDoyFilledFunction
@@ -61,6 +64,8 @@ Public Class sdgDoyRange
         strDoyColumn = strNewDoyColumn
 
         ucrSelectorDoy.SetPrimaryDataFrameOptions(strMainDataFrame, True, True)
+
+        clsDummyFunction.AddParameter("date", "False", iPosition:=0)
 
         clsFindDfFunc.SetPackageName("databook")
         clsFindDfFunc.SetRCommand("find_df_from_calc_from")
@@ -148,6 +153,7 @@ Public Class sdgDoyRange
                 End If
             End If
         End If
+
     End Sub
 
     Public Sub InitialiseControls()
@@ -157,7 +163,7 @@ Public Class sdgDoyRange
         ucrPnlFrom.AddRadioButton(rdoFromFixed)
         ucrPnlFrom.AddRadioButton(rdoFromVariable)
         ucrPnlFrom.AddToLinkedControls(ucrDoyFrom, {rdoFromFixed}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrom.AddToLinkedControls(ucrReceiverFrom, {rdoFromVariable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrom.AddToLinkedControls({ucrReceiverFrom, ucrChkUseDate}, {rdoFromVariable}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlTo.AddRadioButton(rdoToFixed)
         ucrPnlTo.AddRadioButton(rdoToVariable)
@@ -168,8 +174,14 @@ Public Class sdgDoyRange
 
         ucrReceiverFrom.Selector = ucrSelectorDoy
         'Strict because we only want numeric/integer, not Dates etc.
-        ucrReceiverFrom.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+        'ucrReceiverFrom.SetIncludedDataTypes({"numeric"}, bStrict:=True)
         ucrReceiverFrom.strSelectorHeading = "Numerics"
+
+        ucrChkUseDate.SetText("Use Date")
+        ucrChkUseDate.AddParameterValuesCondition(True, "date", "True")
+        ucrChkUseDate.AddParameterValuesCondition(False, "date", "False")
+        ucrChkUseDate.SetRCode(clsDummyFunction, bReset:=True)
+
 
         ucrReceiverTo.Selector = ucrSelectorDoy
         ucrReceiverTo.SetIncludedDataTypes({"numeric"}, bStrict:=True)
@@ -180,6 +192,8 @@ Public Class sdgDoyRange
 
         bControlsInitialised = True
         ucrSelectorDoy.Reset()
+        AddUseDate()
+        EnableUseDate()
     End Sub
 
     Private Sub Fromrdo_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFromFixed.CheckedChanged, rdoFromVariable.CheckedChanged
@@ -188,6 +202,7 @@ Public Class sdgDoyRange
             ucrReceiverFrom.SetMeAsReceiver()
         End If
         SetSelectorVisible()
+        AddUseDate()
     End Sub
 
     Private Sub SetSelectorVisible()
@@ -264,5 +279,47 @@ Public Class sdgDoyRange
     Private Sub FromControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDoyFrom.ControlValueChanged, ucrReceiverFrom.ControlValueChanged
         UpdateFromValues()
         UpdateToValues()
+        AddUseDate()
+    End Sub
+
+    Private Sub AddUseDate()
+        If rdoFromVariable.Checked Then
+            If ucrChkUseDate.Enabled AndAlso ucrChkUseDate.Checked Then
+                ' Set the allowed data type first
+                ucrReceiverFrom.SetIncludedDataTypes({"Date"}, bStrict:=True)
+
+                ' Add the parameter to the function
+                clsDummyFunction.AddParameter("date", "True", iPosition:=0)
+            Else
+                ucrReceiverFrom.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+
+                clsDummyFunction.AddParameter("date", "False", iPosition:=0)
+            End If
+        Else
+            ucrChkUseDate.Checked = False
+        End If
+
+        dlgClimaticSummary.AddDateDoy()
+        EnableUseDate()
+    End Sub
+
+
+    Private Sub ucrChkUseDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUseDate.ControlValueChanged
+        AddUseDate()
+        EnableUseDate()
+    End Sub
+
+    Private Sub ucrPnlFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrom.ControlValueChanged
+        AddUseDate()
+    End Sub
+
+    Public Sub EnableUseDate()
+        If Not dlgClimaticSummary.ucrReceiverStation.IsEmpty Then
+            ucrChkUseDate.Enabled = True
+            ucrChkUseDate.Visible = dlgClimaticSummary.rdoStation.Checked
+        Else
+            ucrChkUseDate.Enabled = False
+            ucrChkUseDate.Visible = False
+        End If
     End Sub
 End Class
