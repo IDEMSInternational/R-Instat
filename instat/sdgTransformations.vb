@@ -409,7 +409,6 @@ Public Class sdgTransformations
         Return lstValues
     End Function
 
-
     Private Sub AutoFillReceiverIdLevel()
         If isFilling Then
             Exit Sub
