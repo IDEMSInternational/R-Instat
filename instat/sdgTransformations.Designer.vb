@@ -47,13 +47,13 @@ Partial Class sdgTransformations
         Me.ucrBaseSdgTransformations = New instat.ucrButtonsSubdialogue()
         Me.ucrReceiverTraits1 = New instat.ucrReceiverSingle()
         Me.ucrReceiverVariety = New instat.ucrReceiverSingle()
-        Me.ucrReceiverIDVariable = New instat.ucrReceiverSingle()
         Me.ucrSelectorTricotIDLevel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbOptions = New System.Windows.Forms.TabControl()
         Me.tbIDLevel = New System.Windows.Forms.TabPage()
         Me.tbVarietyLevel = New System.Windows.Forms.TabPage()
         Me.tbIDVarietyLevel = New System.Windows.Forms.TabPage()
         Me.tbIDVarietyTraitLevel = New System.Windows.Forms.TabPage()
+        Me.ucrReceiverIDVariable = New instat.ucrReceiverSingle()
         Me.tbOptions.SuspendLayout()
         Me.tbIDLevel.SuspendLayout()
         Me.tbVarietyLevel.SuspendLayout()
@@ -343,19 +343,6 @@ Partial Class sdgTransformations
         Me.ucrReceiverVariety.TabIndex = 2
         Me.ucrReceiverVariety.ucrSelector = Nothing
         '
-        'ucrReceiverIDVariable
-        '
-        Me.ucrReceiverIDVariable.AutoSize = True
-        Me.ucrReceiverIDVariable.frmParent = Nothing
-        Me.ucrReceiverIDVariable.Location = New System.Drawing.Point(359, 81)
-        Me.ucrReceiverIDVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverIDVariable.Name = "ucrReceiverIDVariable"
-        Me.ucrReceiverIDVariable.Selector = Nothing
-        Me.ucrReceiverIDVariable.Size = New System.Drawing.Size(170, 31)
-        Me.ucrReceiverIDVariable.strNcFilePath = ""
-        Me.ucrReceiverIDVariable.TabIndex = 3
-        Me.ucrReceiverIDVariable.ucrSelector = Nothing
-        '
         'ucrSelectorTricotIDLevel
         '
         Me.ucrSelectorTricotIDLevel.AutoSize = True
@@ -382,6 +369,7 @@ Partial Class sdgTransformations
         '
         'tbIDLevel
         '
+        Me.tbIDLevel.Controls.Add(Me.ucrReceiverIDVariable)
         Me.tbIDLevel.Controls.Add(Me.ucrInputBadTraits)
         Me.tbIDLevel.Controls.Add(Me.ucrInputNAS)
         Me.tbIDLevel.Controls.Add(Me.lblBadTraits)
@@ -390,7 +378,6 @@ Partial Class sdgTransformations
         Me.tbIDLevel.Controls.Add(Me.ucrInputGoodTraits)
         Me.tbIDLevel.Controls.Add(Me.lblGoodTraits)
         Me.tbIDLevel.Controls.Add(Me.ucrSelectorTricotIDLevel)
-        Me.tbIDLevel.Controls.Add(Me.ucrReceiverIDVariable)
         Me.tbIDLevel.Location = New System.Drawing.Point(4, 29)
         Me.tbIDLevel.Name = "tbIDLevel"
         Me.tbIDLevel.Padding = New System.Windows.Forms.Padding(3)
@@ -446,6 +433,19 @@ Partial Class sdgTransformations
         Me.tbIDVarietyTraitLevel.Text = "Plot-Trait Level"
         Me.tbIDVarietyTraitLevel.UseVisualStyleBackColor = True
         '
+        'ucrReceiverIDVariable
+        '
+        Me.ucrReceiverIDVariable.AutoSize = True
+        Me.ucrReceiverIDVariable.frmParent = Me
+        Me.ucrReceiverIDVariable.Location = New System.Drawing.Point(357, 88)
+        Me.ucrReceiverIDVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverIDVariable.Name = "ucrReceiverIDVariable"
+        Me.ucrReceiverIDVariable.Selector = Nothing
+        Me.ucrReceiverIDVariable.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverIDVariable.strNcFilePath = ""
+        Me.ucrReceiverIDVariable.TabIndex = 9
+        Me.ucrReceiverIDVariable.ucrSelector = Nothing
+        '
         'sdgTransformations
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -473,7 +473,6 @@ Partial Class sdgTransformations
 
     End Sub
     Friend WithEvents ucrSelectorTricotIDLevel As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverIDVariable As ucrReceiverSingle
     Friend WithEvents lblTraits As Label
     Friend WithEvents ucrReceiverTraits1 As ucrReceiverSingle
     Friend WithEvents lblVariety As Label
@@ -504,4 +503,5 @@ Partial Class sdgTransformations
     Friend WithEvents tbVarietyLevel As TabPage
     Friend WithEvents tbIDVarietyLevel As TabPage
     Friend WithEvents tbIDVarietyTraitLevel As TabPage
+    Friend WithEvents ucrReceiverIDVariable As ucrReceiverSingle
 End Class
