@@ -353,4 +353,8 @@ Public Class ucrDataFrame
         End If
     End Sub
 
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        Return strCurrDataFrame
+    End Function
+
 End Class

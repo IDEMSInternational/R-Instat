@@ -58,7 +58,7 @@ Public Class ucrReceiverMultiple
                 lstActualItemsToAdd.Add(kvpTempItem)
             End If
         Next
-
+        lstSelectedVariables.Columns(0).Width = -2 ' Auto-resize to fit content
 
         If lstActualItemsToAdd.Count = 0 Then
             Exit Sub
@@ -83,6 +83,13 @@ Public Class ucrReceiverMultiple
 
         OnSelectionChanged()
     End Sub
+
+    Private Sub lstSelectedVariables_Resize(sender As Object, e As EventArgs) Handles lstSelectedVariables.Resize
+        If lstSelectedVariables.Columns.Count > 0 Then
+            lstSelectedVariables.Columns(0).Width = lstSelectedVariables.ClientSize.Width
+        End If
+    End Sub
+
 
     'add new group if it exist and return it
     'support of multiple groups assumes that the receiver may have variables from more than one data frame
@@ -524,12 +531,6 @@ Public Class ucrReceiverMultiple
         CheckSingleType()
     End Sub
 
-    Private Sub lstSelectedVariables_ClientSizeChanged(ByVal sender As Object, ByVal e As EventArgs) Handles lstSelectedVariables.ClientSizeChanged
-        If lstSelectedVariables.Columns.Count > 0 Then
-            lstSelectedVariables.Columns(0).Width = lstSelectedVariables.ClientSize.Width
-        End If
-    End Sub
-
     Private Sub ucrReceiverMultiple_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
         CheckSingleType()
     End Sub
@@ -542,6 +543,19 @@ Public Class ucrReceiverMultiple
             strHeaders.Add(grpTemp.Name)
         Next
         Return strHeaders
+    End Function
+
+    ''' <summary>
+    '''  Returns information about the receiver's current selection as specified by 
+    '''  <paramref name="enumTextType"/>.
+    '''  If <paramref name="enumTextType"/> is not specified, returns the receiver's text.
+    '''  If <paramref name="enumTextType"/> is invalid, then throws an exception.
+    ''' </summary>
+    ''' <param name="enumTextType"></param>
+    ''' <returns>Information about the receiver's current selection as specified by 
+    '''     <paramref name="enumTextType"/></returns>
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
+        Return GetVariableNames(bWithQuotes:=True)
     End Function
 
 End Class

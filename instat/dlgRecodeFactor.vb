@@ -249,33 +249,12 @@ Public Class dlgRecodeFactor
     End Property
 
     Private Sub SetSelectedColumn()
-        Dim strTempSelectedVariable As String = ""
-        Dim strDataName As String = ucrSelectorForRecode.strCurrentDataFrame
-        Dim strTemp As String = ""
-
-        ' Retrieve parameter value safely
-        Dim clsParam = clsDummyFunction.GetParameter("strVal")
-        If clsParam IsNot Nothing Then
-            strTemp = clsParam.strArgumentValue
-        End If
-        ' If _strSelectedColumn is valid and a factor, use it
-        If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso
-       frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
-            strTempSelectedVariable = _strSelectedColumn
-        ElseIf ucrSelectorForRecode.lstAvailableVariable.Items.Count > 0 Then
-            ' If no selected column, use first available variable
-            strTempSelectedVariable = ucrSelectorForRecode.lstAvailableVariable.Items(0).Text
-        Else
-            ' No available variables, exit
-            Exit Sub
-        End If
-        ' Ensure strTemp takes precedence if it's valid
-        If Not String.IsNullOrEmpty(strTemp) AndAlso strTempSelectedVariable <> strTemp Then
-            strTempSelectedVariable = strTemp
-        End If
-
-        ' Add the selected variable to the receiver
-        ucrReceiverFactor.Add(strTempSelectedVariable, strDataName)
+        ' Call the utility method to perform the column selection logic.
+        clsColumnSelectionUtility.SetSelectedColumn(ucrSelectorForRecode.lstAvailableVariable,
+                                                 ucrReceiverFactor,
+                                                 clsDummyFunction,
+                                                 ucrSelectorForRecode.strCurrentDataFrame,
+                                                 _strSelectedColumn)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgFactorDataFrame
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsDefaultFunction, clsDummyFunction As New RFunction
+    Private _strSelectedColumn As String
 
     Private Sub ucrSelectorFactorDataFrame_Load(sender As Object, e As EventArgs) Handles ucrSelectorFactorDataFrame.Load
         If bFirstLoad Then
@@ -29,6 +30,7 @@ Public Class dlgFactorDataFrame
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetSelectedColumn()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -71,7 +73,7 @@ Public Class dlgFactorDataFrame
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-
+        clsDummyFunction = New RFunction
         ucrInputFactorNames.Reset()
         ucrSelectorFactorDataFrame.Reset()
         ucrInputFactorNames.ResetText()
@@ -80,6 +82,7 @@ Public Class dlgFactorDataFrame
         clsDefaultFunction.AddParameter("replace", "TRUE", iPosition:=4)
         clsDefaultFunction.AddParameter("summary_count", "TRUE", iPosition:=5)
 
+        clsDummyFunction.AddParameter("strVal", ucrReceiverFactorDataFrame.GetVariableNames(False))
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
@@ -107,8 +110,28 @@ Public Class dlgFactorDataFrame
         End If
     End Sub
 
+    Public Property SelectedColumn As String
+        Get
+            Return _strSelectedColumn
+        End Get
+        Set(value As String)
+            _strSelectedColumn = value
+        End Set
+    End Property
+
+    Private Sub SetSelectedColumn()
+        ' Call the utility method to perform the column selection logic.
+        clsColumnSelectionUtility.SetSelectedColumn(ucrSelectorFactorDataFrame.lstAvailableVariable,
+                                                 ucrReceiverFactorDataFrame,
+                                                 clsDummyFunction,
+                                                 ucrSelectorFactorDataFrame.strCurrentDataFrame,
+                                                 _strSelectedColumn)
+    End Sub
+
     Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ControlContentsChanged, ucrReceiverFactorDataFrame.ControlContentsChanged,
         ucrSelectorFactorDataFrame.ControlContentsChanged, ucrChkFrequencies.ControlContentsChanged, ucrChkAddCurrentContrasts.ControlContentsChanged
         TestOKEnabled()
+        ucrReceiverFactorDataFrame.SetMeAsReceiver()
+        clsDummyFunction.AddParameter("strVal", ucrReceiverFactorDataFrame.GetVariableNames(False))
     End Sub
 End Class

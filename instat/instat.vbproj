@@ -147,6 +147,9 @@
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.5.1.0\lib\net46\NLog.dll</HintPath>
     </Reference>
@@ -155,8 +158,8 @@
     <Reference Include="RDotNet, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.9.0\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RInsightF461, Version=0.0.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RInsightF461.0.0.11\lib\net461\RInsightF461.dll</HintPath>
+    <Reference Include="RInsightF461, Version=0.0.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RInsightF461.0.0.12\lib\net461\RInsightF461.dll</HintPath>
     </Reference>
     <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
@@ -221,6 +224,9 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsFileUrlUtilities.vb" />
+    <Compile Include="clsTransformationControl.vb" />
+    <Compile Include="clsTransformationRModel.vb" />
+    <Compile Include="clsColumnSelectionUtility.vb" />
     <Compile Include="dlgApsimx.Designer.vb">
       <DependentUpon>dlgApsimx.vb</DependentUpon>
     </Compile>
@@ -281,6 +287,12 @@
     <Compile Include="dlgIDFCurves.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportClimMob.Designer.vb">
+      <DependentUpon>dlgImportClimMob.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportClimMob.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromPostgres.Designer.vb">
       <DependentUpon>dlgImportFromPostgres.vb</DependentUpon>
     </Compile>
@@ -335,16 +347,46 @@
     <Compile Include="dlgSurvey.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTraitCorrelations.Designer.vb">
+      <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraitCorrelations.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTraitCorrelationsXp.Designer.vb">
+      <DependentUpon>dlgTraitCorrelationsXp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraitCorrelationsXp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTraits.Designer.vb">
       <DependentUpon>dlgTraits.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTraits.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTraitsXp.Designer.vb">
+      <DependentUpon>dlgTraitsXp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTraitsXp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTransformTricotData.Designer.vb">
       <DependentUpon>dlgTransformTricotData.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTransformTricotData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTricotModellingGeneral.Designer.vb">
+      <DependentUpon>dlgTricotModellingGeneral.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTricotModellingGeneral.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTricotModelOneVarCov.Designer.vb">
+      <DependentUpon>dlgTricotModelOneVarCov.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTricotModelOneVarCov.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgUseTable.Designer.vb">
@@ -361,6 +403,12 @@
     <Compile Include="sdgAdditionalCondition.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgAdvOptions.Designer.vb">
+      <DependentUpon>sdgAdvOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgAdvOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgClimsoft.Designer.vb">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </Compile>
@@ -371,6 +419,12 @@
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDefineAnnualRainfall.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgDisplayModelOptions.Designer.vb">
+      <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDisplayModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgFlowsToImport.Designer.vb">
@@ -391,6 +445,12 @@
     <Compile Include="sdgHSMissingOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgImportFromClimMob.Designer.vb">
+      <DependentUpon>sdgImportFromClimMob.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgImportFromClimMob.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgLocation.Designer.vb">
       <DependentUpon>sdgLocation.vb</DependentUpon>
     </Compile>
@@ -401,6 +461,12 @@
       <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgPairPlotOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgPLModelOptions.Designer.vb">
+      <DependentUpon>sdgPLModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgPLModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgPMConstants.Designer.vb">
@@ -425,6 +491,18 @@
       <DependentUpon>dlgOutfillingStationData.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOutfillingStationData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgTransformations.Designer.vb">
+      <DependentUpon>sdgTransformations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTransformations.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgTricotModelOptions.Designer.vb">
+      <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTricotModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
@@ -529,6 +607,12 @@
     </Compile>
     <Compile Include="UserTables\Rows\ucrRowsGrandSummary.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserTables\sdgBeforeTablesOption.Designer.vb">
+      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\sdgBeforeTablesOption.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserTables\sdgTableOptions.Designer.vb">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
@@ -3387,6 +3471,9 @@
     <EmbeddedResource Include="dlgIDFCurves.resx">
       <DependentUpon>dlgIDFCurves.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportClimMob.resx">
+      <DependentUpon>dlgImportClimMob.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
     </EmbeddedResource>
@@ -3459,11 +3546,26 @@
     <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
       <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraitCorrelations.resx">
+      <DependentUpon>dlgTraitCorrelations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraitCorrelationsXp.resx">
+      <DependentUpon>dlgTraitCorrelationsXp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTraits.resx">
       <DependentUpon>dlgTraits.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTraitsXp.resx">
+      <DependentUpon>dlgTraitsXp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTransformTricotData.resx">
       <DependentUpon>dlgTransformTricotData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTricotModellingGeneral.resx">
+      <DependentUpon>dlgTricotModellingGeneral.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTricotModelOneVarCov.resx">
+      <DependentUpon>dlgTricotModelOneVarCov.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseTable.resx">
       <DependentUpon>dlgUseTable.vb</DependentUpon>
@@ -3483,11 +3585,17 @@
     <EmbeddedResource Include="sdgAdditionalCondition.resx">
       <DependentUpon>sdgAdditionalCondition.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgAdvOptions.resx">
+      <DependentUpon>sdgAdvOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgClimsoft.resx">
       <DependentUpon>sdgClimsoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDefineAnnualRainfall.resx">
       <DependentUpon>sdgDefineAnnualRainfall.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDisplayModelOptions.resx">
+      <DependentUpon>sdgDisplayModelOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFlowsToImport.resx">
       <DependentUpon>sdgFlowsToImport.vb</DependentUpon>
@@ -3498,11 +3606,18 @@
     <EmbeddedResource Include="sdgHSMissingOptions.resx">
       <DependentUpon>sdgHSMissingOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgImportFromClimMob.resx">
+      <DependentUpon>sdgImportFromClimMob.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgLocation.resx">
       <DependentUpon>sdgLocation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPairPlotOptions.resx">
       <DependentUpon>sdgPairPlotOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgPLModelOptions.resx">
+      <DependentUpon>sdgPLModelOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgPMConstants.resx">
       <DependentUpon>sdgPMConstants.vb</DependentUpon>
@@ -3515,6 +3630,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOutfillingStationData.resx">
       <DependentUpon>dlgOutfillingStationData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTransformations.resx">
+      <DependentUpon>sdgTransformations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTricotModelOptions.resx">
+      <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
@@ -3566,6 +3687,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Rows\ucrRowsGrandSummary.resx">
       <DependentUpon>ucrRowsGrandSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\sdgBeforeTablesOption.resx">
+      <DependentUpon>sdgBeforeTablesOption.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\sdgTableOptions.resx">
       <DependentUpon>sdgTableOptions.vb</DependentUpon>
@@ -5723,6 +5847,8 @@
     <Content Include="Resources\upward-arrow1.png" />
     <Content Include="translations\translateDynamic.txt" />
     <Content Include="translations\translateIgnore.txt" />
+    <None Include="DialogDefinitions\DlgTraits\dlgTraits.json" />
+    <None Include="DialogDefinitions\DlgTraits\dlgTraits.R" />
     <None Include="instat.licenseheader" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -6062,6 +6188,18 @@
     <Content Include="static\Help\Statistics Glossary.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\DialogDefinitions\DlgTraitCorrelations\dlgTraitCorrelations.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\DialogDefinitions\DlgTraitCorrelations\dlgTraitCorrelations.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\DialogDefinitions\DlgTraits\dlgTraits.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="static\DialogDefinitions\DlgTraits\dlgTraits.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="static\Help\LICENSE" />
     <None Include="static\Help\LICENSE" />
     <Content Include="static\Help\R-Instat.pdf" />

@@ -49,7 +49,7 @@ Public Class dlgAddKey
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 504
+        ucrBase.iHelpTopicID = 742
         ucrBase.clsRsyntax.iCallType = 2
         ucrInputCheckInput.IsReadOnly = True
         EnableDisableCmdCheckUnique()

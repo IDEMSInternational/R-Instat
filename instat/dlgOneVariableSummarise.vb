@@ -55,7 +55,7 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 410
+        ucrBase.iHelpTopicID = 735
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -362,8 +362,8 @@ Public Class dlgOneVariableSummarise
     End Sub
 
     Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
-        sdgTableOptions.Setup(ucrSelectorOneVarSummarise.strCurrentDataFrame, clsSummaryOperator)
-        sdgTableOptions.ShowDialog(Me)
+        sdgBeforeTablesOption.Setup(ucrSelectorOneVarSummarise.strCurrentDataFrame, clsSummaryOperator)
+        sdgBeforeTablesOption.ShowDialog(Me)
         bResetFormatSubdialog = False
     End Sub
 
