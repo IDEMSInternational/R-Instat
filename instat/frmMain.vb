@@ -3017,6 +3017,10 @@ Public Class frmMain
         dlgTraitsXp.ShowDialog()
     End Sub
 
+    Private Sub mnuTricotDescribeXpTraitCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraitCorrelations.Click
+        dlgTraitCorrelationsXp.ShowDialog()
+    End Sub
+
     Private Sub mnuTricotDefineTricotData_Click(sender As Object, e As EventArgs) Handles mnuTricotDefineTricotData.Click
         dlgDefineTricotData.ShowDialog()
     End Sub
