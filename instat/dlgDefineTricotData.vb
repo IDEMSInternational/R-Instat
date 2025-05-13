@@ -149,6 +149,8 @@ Public Class dlgDefineTricotData
         ' resetting ucrChks
         ucrChkDefineIDLevel.Checked = False
         ucrChkDefineVarietyLevel.Checked = False
+        ucrSelectorIDLevelData.Reset()
+        ucrSelectorVarietyLevelData.Reset()
 
         ucrReceiverIDVarietyLevelID.SetMeAsReceiver()
         ucrReceiverLevelID.SetMeAsReceiver()
