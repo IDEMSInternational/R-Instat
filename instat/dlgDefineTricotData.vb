@@ -150,6 +150,11 @@ Public Class dlgDefineTricotData
         lblVarieties.Text = "Varieties:"
         lblTraits.Text = "Traits:"
 
+        ' Resetting multiple receivers
+        ucrReceiverIDVarietyLevelTraits.Clear()
+        ucrReceiverLevelVarieties.Clear()
+        ucrReceiverLevelOverallTraits.Clear()
+
         ucrReceiverIDVarietyLevelID.SetMeAsReceiver()
         ucrReceiverLevelID.SetMeAsReceiver()
         ucrInputCheckInputIDLevel.txtInput.BackColor = Color.White
