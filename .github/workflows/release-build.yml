@@ -94,7 +94,7 @@ jobs:
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "Output/"
-        name: rinstat64NoR
+        name: rinstat-no-R
         
     - name: Remove 64 bit without R installer
       run: |
@@ -203,6 +203,6 @@ jobs:
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "Output/"
-        name: rinstat64WithR-innosetup    
+        name: rinstat    
   
             
