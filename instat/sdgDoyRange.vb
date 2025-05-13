@@ -303,7 +303,6 @@ Public Class sdgDoyRange
         EnableUseDate()
     End Sub
 
-
     Private Sub ucrChkUseDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUseDate.ControlValueChanged
         AddUseDate()
         EnableUseDate()
@@ -314,12 +313,13 @@ Public Class sdgDoyRange
     End Sub
 
     Public Sub EnableUseDate()
-        If Not dlgClimaticSummary.ucrReceiverStation.IsEmpty Then
+        If dlgClimaticSummary.rdoStation.Checked Then
             ucrChkUseDate.Enabled = True
-            ucrChkUseDate.Visible = dlgClimaticSummary.rdoStation.Checked
+            ucrChkUseDate.Visible = True
         Else
             ucrChkUseDate.Enabled = False
             ucrChkUseDate.Visible = False
         End If
     End Sub
+
 End Class
