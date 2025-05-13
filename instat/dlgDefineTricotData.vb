@@ -70,12 +70,9 @@ Public Class dlgDefineTricotData
         ucrSelectorIDLevelData.SetParameterIsString()
 
         ucrChkDefineIDLevel.SetText("Define ID Level Data")
-        ucrChkDefineIDLevel.Checked = False
         grpIDLevel.Visible = False
 
-
         ucrChkDefineVarietyLevel.SetText("Define Variety Level Data")
-        ucrChkDefineVarietyLevel.Checked = False
         grpVarietyLevel.Visible = False
 
         'ID Level Data (run by the top groupbox)
@@ -111,6 +108,9 @@ Public Class dlgDefineTricotData
         ucrReceiverIDVarietyLevelTraits.SetParameterIsString()
         ucrReceiverIDVarietyLevelTraits.strSelectorHeading = "Id"
 
+        lblIVTraits.Text = "Traits:"
+        lblVarieties.Text = "Varieties:"
+        lblTraits.Text = "Traits:"
     End Sub
 
     Private Sub SetDefaults()
@@ -146,14 +146,9 @@ Public Class dlgDefineTricotData
         bIsUniqueVariety = False
         bIsUniqueID = False
 
-        lblIVTraits.Text = "Traits:"
-        lblVarieties.Text = "Varieties:"
-        lblTraits.Text = "Traits:"
-
-        ' Resetting multiple receivers
-        ucrReceiverIDVarietyLevelTraits.Clear()
-        ucrReceiverLevelVarieties.Clear()
-        ucrReceiverLevelOverallTraits.Clear()
+        ' resetting ucrChks
+        ucrChkDefineIDLevel.Checked = False
+        ucrChkDefineVarietyLevel.Checked = False
 
         ucrReceiverIDVarietyLevelID.SetMeAsReceiver()
         ucrReceiverLevelID.SetMeAsReceiver()
