@@ -18,8 +18,9 @@ Imports instat.Translations
 
 Public Class sdgDisplayModelOptions
     Private clsSummaryFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction, clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
-    Private clsCoefFunction, clsStatsFunction As RFunction
+    Private clsCoefFunction, clsStatsFunction, clsImportDataFunction As RFunction
     Private clsDummyFunction, clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction, clsTreeFunction As RFunction
+    Private clsPipeOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bInitialised As Boolean = False
 
@@ -41,11 +42,15 @@ Public Class sdgDisplayModelOptions
         ucrChkEstimates.SetText("Coefficients")
         ucrChkEstimates.AddRSyntaxContainsFunctionNamesCondition(True, {"coef"}, True)
         ucrChkEstimates.AddRSyntaxContainsFunctionNamesCondition(False, {"coef"}, False)
-        ucrChkEstimates.AddToLinkedControls(ucrChkLog, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkEstimates.AddToLinkedControls({ucrChkLog, ucrChkSave}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkLog.SetText("Log")
         ucrChkLog.AddRSyntaxContainsFunctionNamesCondition(True, {"log"}, True)
         ucrChkLog.AddRSyntaxContainsFunctionNamesCondition(False, {"log"}, False)
+
+        ucrChkSave.SetText("Save")
+        ucrChkSave.AddRSyntaxContainsFunctionNamesCondition(True, {"save"}, True)
+        ucrChkSave.AddRSyntaxContainsFunctionNamesCondition(False, {"save"}, False)
 
         ucrChkConfLimits.SetText("Confidence Limits")
         ucrChkConfLimits.AddRSyntaxContainsFunctionNamesCondition(True, {"confint"}, True)
@@ -141,7 +146,7 @@ Public Class sdgDisplayModelOptions
         bControlsInitialised = False
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction, clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction, clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction, clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewTreeFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction, clsNewImportDataFunction As RFunction, clsNewPipeOperator As ROperator, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction, clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction, clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction, clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewTreeFunction As RFunction, Optional bReset As Boolean = False)
         ucrNudConfLevel.SetText("0.95")
         If Not bControlsInitialised Then
             InitialiseDialog()
@@ -154,6 +159,8 @@ Public Class sdgDisplayModelOptions
         clsAnnovaFunction = clsNewAnnovaFunction
         clsSummaryFunction = clsNewSummaryFunction
         clsEstimatesFunction = clsNewEstimatesFunction
+        clsImportDataFunction = clsNewImportDataFunction
+        clsPipeOperator = clsNewPipeOperator
         clsConfidenLimFunction = clsNewConfidenLimFunction
         clsAICFunction = clsNewAICFunction
         clsDevianceFunction = clsNewDevianceFunction
@@ -180,6 +187,7 @@ Public Class sdgDisplayModelOptions
             ucrChkANOVA.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrChkModel.SetRCode(clsDummyFunction, bReset)
             ucrChkEstimates.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+            ucrChkSave.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrChkLog.SetRCode(clsCoefFunction, bReset, bCloneIfNeeded:=True)
             ucrChkAIC.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrChkConfLimits.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
@@ -239,9 +247,10 @@ Public Class sdgDisplayModelOptions
 
     Private Sub ucrChkEstimates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEstimates.ControlValueChanged
         If ucrChkEstimates.Checked Then
-            clsRSyntax.AddToBeforeCodes(clsEstimatesFunction)
+            clsRSyntax.AddToBeforeCodes(clsEstimatesFunction, iPosition:=11)
         Else
             clsRSyntax.RemoveFromBeforeCodes(clsEstimatesFunction)
+            ucrChkSave.Checked = False
         End If
     End Sub
 
@@ -260,6 +269,21 @@ Public Class sdgDisplayModelOptions
             clsCoefFunction.RemoveParameterByName("log")
         End If
     End Sub
+
+    Private Sub ucrChkSave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSave.ControlValueChanged
+
+
+        If ucrChkSave.Checked Then
+            clsEstimatesFunction.SetAssignTo("coefficients_data")
+            clsRSyntax.AddToBeforeCodes(clsPipeOperator, iPosition:=12)
+            clsRSyntax.AddToBeforeCodes(clsImportDataFunction, iPosition:=13)
+        Else
+            clsEstimatesFunction.RemoveAssignTo()
+            clsRSyntax.RemoveFromBeforeCodes(clsPipeOperator)
+            clsRSyntax.RemoveFromBeforeCodes(clsImportDataFunction)
+        End If
+    End Sub
+
 
     Private Sub ucrChkModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkModel.ControlValueChanged
         AddRemoveSummary()

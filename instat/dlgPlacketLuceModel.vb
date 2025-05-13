@@ -22,8 +22,8 @@ Public Class dlgPlacketLuceModel
     Private bResetSubdialog As Boolean = True
     Private clsGetDataFrameFunction, clsSndgetVarmataFunction, clsLevelFunction, clsFactorFunction, clsNamesFunction, clsGetVarMetadataFunction, clsGetObjectRFunction, clsRankingsItemsFunction, clsVarFunction, clsMapFunction, clsPlacketFunction As RFunction
     Private clsPlotFunction, clsWrapPlotFunction, clsWrapBarFunction, clsHeatFunction, clsBarfunction, clsTreeFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsSummaryFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction, clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
-    Private clsCoefFunction, clsStatsFunction As RFunction
-    Private clsStatsOperator, clsCoefOperator As ROperator
+    Private clsCoefFunction, clsStatsFunction, clsLdplyFunction, clsPivotLongerFunction, clsPivotWiderFunction, clsListFunction, clsImportDataFunction As RFunction
+    Private clsStatsOperator, clsCoefOperator, clsPipeOperator As ROperator
     Private clsAssignOperator, clsSpaceOpreator As ROperator
     Private clsGetRankingOperator, clsModelOperator, clsPlacketOperator, clsNamesOperator As ROperator
 
@@ -74,6 +74,15 @@ Public Class dlgPlacketLuceModel
         clsAnnovaFunction = New RFunction
         clsSummaryFunction = New RFunction
         clsEstimatesFunction = New RFunction
+
+
+        clsLdplyFunction = New RFunction
+        clsPivotLongerFunction = New RFunction
+        clsPivotWiderFunction = New RFunction
+        clsListFunction = New RFunction
+        clsImportDataFunction = New RFunction
+
+
         clsConfidenLimFunction = New RFunction
         clsAICFunction = New RFunction
         clsDevianceFunction = New RFunction
@@ -96,6 +105,7 @@ Public Class dlgPlacketLuceModel
         clsWrapBarFunction = New RFunction
         clsWrapPlotFunction = New RFunction
 
+        clsPipeOperator = New ROperator
         clsSpaceOpreator = New ROperator
         clsAssignOperator = New ROperator
         clsGetRankingOperator = New ROperator
@@ -179,6 +189,36 @@ Public Class dlgPlacketLuceModel
 
         clsCoefFunction.SetRCommand("coef")
         clsCoefFunction.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
+
+        ' Adding the function for the save checkbox
+        clsLdplyFunction.SetPackageName("plyr")
+        clsLdplyFunction.SetRCommand("ldply")
+        clsLdplyFunction.AddParameter("left", "coefficients_data", bIncludeArgumentName:=False, iPosition:=0)
+
+        clsPivotLongerFunction.SetPackageName("tidyr")
+        clsPivotLongerFunction.SetRCommand("pivot_longer")
+        clsPivotLongerFunction.AddParameter("cols", "-`.id`")
+
+        clsPivotWiderFunction.SetPackageName("tidyr")
+        clsPivotWiderFunction.SetRCommand("pivot_wider")
+        clsPivotWiderFunction.AddParameter("names_from", "`.id`")
+        clsPivotWiderFunction.AddParameter("values_from", "value")
+
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("first", clsRFunctionParameter:=clsLdplyFunction, bIncludeArgumentName:=False)
+        clsPipeOperator.AddParameter("second", clsRFunctionParameter:=clsPivotLongerFunction, bIncludeArgumentName:=False)
+        clsPipeOperator.AddParameter("third", clsRFunctionParameter:=clsPivotWiderFunction, bIncludeArgumentName:=False)
+        clsPipeOperator.SetAssignTo("coefficients_data")
+
+        clsListFunction.SetRCommand("list")
+        clsListFunction.AddParameter("coefficients_data", "coefficients_data")
+
+        clsImportDataFunction.SetRCommand("data_book$import_data")
+        clsImportDataFunction.AddParameter("left", clsRFunctionParameter:=clsListFunction, bIncludeArgumentName:=False)
+
+
+
+
 
         clsConfidenLimFunction.SetPackageName("purrr")
         clsConfidenLimFunction.SetRCommand("map")
@@ -340,12 +380,14 @@ Public Class dlgPlacketLuceModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction, clsNewAnnovaFunction:=clsAnnovaFunction, clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction, clsNewCoefFunction:=clsCoefFunction, clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction, clsNewItemsFunction:=clsItemsFunction, clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction, clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction, clsNewNodeLabFuction:=clsNodeLabFuction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, clsNewTreeFunction:=clsTreeFunction, bReset:=bResetSubdialog)
+        sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction, clsNewAnnovaFunction:=clsAnnovaFunction, clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction, clsNewCoefFunction:=clsCoefFunction, clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction, clsNewImportDataFunction:=clsImportDataFunction, clsNewPipeOperator:=clsPipeOperator, clsNewItemsFunction:=clsItemsFunction, clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction, clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction, clsNewNodeLabFuction:=clsNodeLabFuction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, clsNewTreeFunction:=clsTreeFunction, bReset:=bResetSubdialog)
         sdgDisplayModelOptions.grpTrees.Enabled = False
         sdgDisplayModelOptions.rdoTree.Enabled = False
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = True
         sdgDisplayModelOptions.ucrChkReability.Enabled = True
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = True
+        sdgDisplayModelOptions.ucrChkSave.Enabled = True
+        sdgDisplayModelOptions.ucrChkSave.Visible = True
         sdgDisplayModelOptions.rdoPlot.Enabled = True
         sdgDisplayModelOptions.rdoBar.Enabled = True
         sdgDisplayModelOptions.rdoMap.Enabled = True

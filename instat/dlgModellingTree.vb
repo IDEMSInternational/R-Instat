@@ -37,11 +37,11 @@ Public Class dlgModellingTree
     Private clsDevianceFunction, clsDevianceMainFunction, clsSecondEstimatesFunction As New RFunction
     Private clsRegretFunction, clsNodeLabelsFunction, clsNodeRulesFunction, clsTopItemsFunction As New RFunction
     Private clsPairwiseProbFunction, clsPairwiseProbMainFunction, clsReliabilityFunction, clsItemsParFunction As New RFunction
-    Private clsCoefOperator, clsAICOperator, clsDevianceOperator, clsPairwiseProbOperator, clsStatsOperator, clsModelOperator As New ROperator
+    Private clsCoefOperator, clsAICOperator, clsDevianceOperator, clsPairwiseProbOperator, clsStatsOperator, clsModelOperator, clsPipeOperator As New ROperator
     Private clsAnnovaFunction, clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction As New RFunction
     Private clsWrapBarFunction, clsWrapPlotFunction, clsPlacketFunction As New RFunction
 
-    Private clsAddObjectHeatFunction, clsHeatFunction, clsTreeFunction As New RFunction
+    Private clsAddObjectHeatFunction, clsHeatFunction, clsTreeFunction, clsImportDataFunction As New RFunction
     Private clsPlotFunction, clsBarfunction As New RFunction
 
     Public bResetSubDialog As Boolean = False
@@ -298,7 +298,7 @@ Public Class dlgModellingTree
         clsEstimatesFunction.SetRCommand("map")
         clsEstimatesFunction.AddParameter(".x", "mod_list", iPosition:=0)
         clsEstimatesFunction.AddParameter(".f", clsROperatorParameter:=clsCoefOperator, iPosition:=1)
-        clsEstimatesFunction.iCallType = 2
+        'clsEstimatesFunction.iCallType = 2
 
         clsAICFunction.SetRCommand("AIC")
         clsAICFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
@@ -474,15 +474,15 @@ Public Class dlgModellingTree
 
         ucrBase.clsRsyntax.ClearCodes()
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetSecondDataFrameFunction)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetVariablesFromMetaDataFunction)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction, iPosition:=1)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetSecondDataFrameFunction, iPosition:=2)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetVariablesFromMetaDataFunction, iPosition:=3)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsLibraryFunction)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsLibraryFunction, iPosition:=4)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsMappingFunction)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsMappingFunction, iPosition:=5)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignOperator)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignOperator, iPosition:=6)
 
         ucrBase.clsRsyntax.SetBaseROperator(clsModelOperator)
 
@@ -595,7 +595,7 @@ Public Class dlgModellingTree
     End Sub
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction, clsNewCoefFunction:=clscoefFunction, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction,
-            clsNewEstimatesFunction:=clsEstimatesFunction, clsNewDevianceFunction:=clsDevianceMainFunction,
+            clsNewEstimatesFunction:=clsEstimatesFunction, clsNewImportDataFunction:=clsImportDataFunction, clsNewPipeOperator:=clsPipeOperator, clsNewDevianceFunction:=clsDevianceMainFunction,
             clsNewPariPropFunction:=clsPairwiseProbMainFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
             clsNewItemsFunction:=clsItemsParFunction, clsNewRegretFunction:=clsRegretFunction, clsNewNodeLabFuction:=clsNodeLabelsFunction,
             clsNewNodeRuleFunction:=clsNodeRulesFunction, clsNewTopItemFunction:=clsTopItemsFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewAICFunction:=clsUnListAICFunction,
@@ -616,6 +616,9 @@ Public Class dlgModellingTree
         sdgDisplayModelOptions.ucrChkParProp.Enabled = True
         sdgDisplayModelOptions.ucrChkReability.Enabled = True
         sdgDisplayModelOptions.ucrChkItemPara.Enabled = True
+        sdgDisplayModelOptions.ucrChkSave.Checked = False
+        sdgDisplayModelOptions.ucrChkSave.Enabled = False
+        sdgDisplayModelOptions.ucrChkSave.Visible = False
         sdgDisplayModelOptions.rdoPlot.Enabled = False
         sdgDisplayModelOptions.rdoTree.Enabled = False
         sdgDisplayModelOptions.rdoNoPlot.Enabled = True
