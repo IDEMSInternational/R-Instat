@@ -48,6 +48,11 @@ Public Class clsTransformationRModel
     Public strParameterName As String
 
     ''' <summary>
+    ''' The dictionary key to use to find the name of the parameter to update in the R model.
+    ''' </summary>
+    Public strParameterNameKey As String
+
+    ''' <summary>
     ''' A valid R script to update the R model with.
     ''' </summary>
     Public strScript As String
@@ -56,6 +61,10 @@ Public Class clsTransformationRModel
     ''' Used as part of the condition in some transformations.
     ''' </summary>
     Public strValueDefault As String = "TRUE"
+
+    ''' <summary>
+    ''' The dictionary key to use to find the value to update in the R model.
+    ''' </summary>
     Public strValueKey As String
 
     ''' <summary>
@@ -87,8 +96,9 @@ Public Class clsTransformationRModel
     ''' <param name="dctConfigurableValues"> The dictionary of configurable values to reference 
     '''                                      when performing the transformation</param>
     Public Sub updateRModel(rScript As RScript, dctConfigurableValues As Dictionary(Of String, String))
-
+        'todo remove strValue, just use strScript
         Dim strValue As String = If(String.IsNullOrEmpty(strValueKey), strScript, dctConfigurableValues(strValueKey))
+        strParameterName = If(String.IsNullOrEmpty(strParameterNameKey), strParameterName, dctConfigurableValues(strParameterNameKey))
 
         Select Case enumTransformationType
             Case TransformationType.functionAddParam
