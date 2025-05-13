@@ -34,15 +34,10 @@ Public Class sdgTableOptions
 
     Private Sub InitialiseDialog()
         ucrSdgBaseButtons.iHelpTopicID = 146
-        ucrNewCellFormats.Visible = False
-        ucrColumnNewMissingTexts.Visible = False
+        ucrNewCellFormats.Visible = True
         ucrChkSelectTheme.Checked = True
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
-
-        ucrPnlCells.AddRadioButton(rdoDataFormat)
-        ucrPnlCells.AddRadioButton(rdoReplaceNa)
-        rdoDataFormat.Checked = True
 
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
@@ -63,7 +58,6 @@ Public Class sdgTableOptions
         ucrColumns.Setup(strDataFrameName, clsOperator)
         ucrCells.Setup(strDataFrameName, clsOperator)
         ucrNewCellFormats.Setup(strDataFrameName, clsOperator)
-        ucrColumnNewMissingTexts.Setup(strDataFrameName, clsOperator)
         ucrSourceNotes.Setup(clsOperator)
         ucrOtherStyles.Setup(clsOperator)
 
@@ -84,7 +78,7 @@ Public Class sdgTableOptions
         ucrSourceNotes.SetValuesToOperator()
         ucrOtherStyles.SetValuesToOperator()
         ucrNewCellFormats.SetValuesToOperator()
-        ucrColumnNewMissingTexts.SetValuesToOperator()
+
         SetThemeValuesOnReturn(clsOperator)
     End Sub
 
@@ -172,9 +166,5 @@ Public Class sdgTableOptions
         End If
     End Sub
     '-----------------------------------------
-    Private Sub ucrPnlRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCells.ControlValueChanged
-        ucrNewCellFormats.Visible = rdoDataFormat.Checked
-        ucrColumnNewMissingTexts.Visible = rdoReplaceNa.Checked
-    End Sub
 
 End Class
