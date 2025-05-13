@@ -3,6 +3,7 @@ Sys.setlocale("LC_TIME", "C")
 
 #Install packages from CRAN archive
 install.packages("http://cran.r-project.org/src/contrib/Archive/signmedian.test/signmedian.test_1.5.1.tar.gz", repos=NULL, type="source")
+install.packages("https://cran.r-project.org/src/contrib/Archive/ncdf4.helpers/ncdf4.helpers_0.3-7.tar.gz", repos=NULL, type="source")
 
 #Install packages from win.binary
 install.packages("stringi", dependencies = FALSE,  repos='https://cloud.r-project.org', type = "win.binary")
