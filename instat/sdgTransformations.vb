@@ -65,62 +65,54 @@ Public Class sdgTransformations
         ucrReceiverIDVariable.strSelectorHeading = "ID"
         ucrReceiverIDVariable.SetItemType("column")
         ucrReceiverIDVariable.Tag = "id"
-        ucrReceiverIDVariable.bAutoFill = True
 
         ucrReceiverIDVarietyLevel.SetParameter(New RParameter("id_cols_b", 1, bNewIncludeArgumentName:=False))
         ucrReceiverIDVarietyLevel.SetParameterIsString()
         ucrReceiverIDVarietyLevel.Selector = ucrSelectorIDVarietyLevel
         ucrReceiverIDVarietyLevel.strSelectorHeading = "ID"
         ucrReceiverIDVarietyLevel.SetItemType("column")
-        ucrReceiverIDVarietyLevel.SetTricotType("id")
-        ucrReceiverIDVarietyLevel.bAutoFill = True
+        ucrReceiverIDVarietyLevel.Tag = "id"
 
         ucrReceiverTraitID.SetParameter(New RParameter("id_cols_c", 1, bNewIncludeArgumentName:=False))
         ucrReceiverTraitID.SetParameterIsString()
         ucrReceiverTraitID.Selector = ucrSelectorIDVarTraitLevel
         ucrReceiverTraitID.strSelectorHeading = "ID"
         ucrReceiverTraitID.SetItemType("column")
-        ucrReceiverTraitID.SetTricotType("id")
-        ucrReceiverTraitID.bAutoFill = True
+        ucrReceiverTraitID.Tag = "id"
 
         ucrReceiverVariety.SetParameter(New RParameter("variety_cols_a", 2, bNewIncludeArgumentName:=False))
         ucrReceiverVariety.SetParameterIsString()
         ucrReceiverVariety.Selector = ucrSelectorTricotVarietyLevel
         ucrReceiverVariety.strSelectorHeading = "Variety"
         ucrReceiverVariety.SetItemType("column")
-        ucrReceiverVariety.SetTricotType("variety")
-        ucrReceiverVariety.bAutoFill = True
+        ucrReceiverVariety.Tag = "variety"
 
         ucrReceiverTraitsVariety.SetParameter(New RParameter("variety_cols_b", 2, bNewIncludeArgumentName:=False))
         ucrReceiverTraitsVariety.SetParameterIsString()
         ucrReceiverTraitsVariety.Selector = ucrSelectorIDVarTraitLevel
         ucrReceiverTraitsVariety.strSelectorHeading = "Variety"
         ucrReceiverTraitsVariety.SetItemType("column")
-        ucrReceiverTraitsVariety.SetTricotType("variety")
-        ucrReceiverTraitsVariety.bAutoFill = True
+        ucrReceiverTraitsVariety.Tag = "variety"
 
         ucrReceiverIDVarietyVar.SetParameter(New RParameter("variety_cols_c", 2, bNewIncludeArgumentName:=False))
         ucrReceiverIDVarietyVar.SetParameterIsString()
         ucrReceiverIDVarietyVar.Selector = ucrSelectorIDVarietyLevel
         ucrReceiverIDVarietyVar.strSelectorHeading = "Variety"
         ucrReceiverIDVarietyVar.SetItemType("column")
-        ucrReceiverIDVarietyVar.SetTricotType("variety")
-        ucrReceiverIDVarietyVar.bAutoFill = True
+        ucrReceiverIDVarietyVar.Tag = "variety"
 
         ucrReceiverTraits1.SetParameter(New RParameter("trait_cols_a", 3, bNewIncludeArgumentName:=False))
         ucrReceiverTraits1.SetParameterIsString()
         ucrReceiverTraits1.Selector = ucrSelectorIDVarTraitLevel
         ucrReceiverTraits1.strSelectorHeading = "Traits"
         ucrReceiverTraits1.SetItemType("column")
-        ucrReceiverTraits1.SetTricotType("traits")
-        ucrReceiverTraits1.bAutoFill = True
+        ucrReceiverTraits1.Tag = "traits"
 
         ucrReceiverTraits2.SetParameter(New RParameter("trait_cols_b", 4, bNewIncludeArgumentName:=False))
         ucrReceiverTraits2.SetParameterIsString()
         ucrReceiverTraits2.Selector = ucrSelectorIDVarietyLevel
         ucrReceiverTraits2.strSelectorHeading = "Traits"
         ucrReceiverTraits2.SetItemType("column")
-
 
         ucrInputGoodTraits.SetItems({strPos, strBest})
         ucrInputGoodTraits.SetDropDownStyleAsNonEditable()
@@ -315,7 +307,7 @@ Public Class sdgTransformations
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorIDVarTraitLevel.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]_", String.Empty).Contains(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorIDVarTraitLevel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
@@ -373,7 +365,7 @@ Public Class sdgTransformations
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorTricotVarietyLevel.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorTricotVarietyLevel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
@@ -431,7 +423,7 @@ Public Class sdgTransformations
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorTricotIDLevel.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]_", String.Empty).Contains(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorTricotIDLevel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
@@ -489,7 +481,7 @@ Public Class sdgTransformations
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrSelectorIDVarietyLevel.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]", String.Empty).Equals(strValue) Then
+                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]_", String.Empty).Contains(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorIDVarietyLevel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
