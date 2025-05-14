@@ -211,6 +211,14 @@ Public Class clsRecentFiles
             'Note: Translate both sides of the comparison in case the 2 sides are in different languages.
             '      This is possible if the language was recently changed.
             If GetTranslation(dfTemp.Text) = GetTranslation(DirectCast(sender, ToolStripMenuItem).Text) Then
+                If frmEditor.IsDataSetLoaded() Then
+                    Select Case dfTemp.Name
+                        Case "dlgReorderLevels", "dlgRecodeFactor", "dlgDummyVariables",
+                            "dlgLabelsLevels", "dlgReferenceLevel", "dlgFactorDataFrame",
+                             "dlgCountinFactor"
+                            frmMain.SetDefaultValueInReorderLevels()
+                    End Select
+                End If
                 dfTemp.ShowDialog()
                 Exit Sub
             End If
