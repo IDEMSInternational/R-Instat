@@ -3017,6 +3017,10 @@ Public Class frmMain
         dlgTraitsXp.ShowDialog()
     End Sub
 
+    Private Sub mnuTricotDescribeXpTraitCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraitCorrelations.Click
+        dlgTraitCorrelationsXp.ShowDialog()
+    End Sub
+
     Private Sub mnuTricotDefineTricotData_Click(sender As Object, e As EventArgs) Handles mnuTricotDefineTricotData.Click
         dlgDefineTricotData.ShowDialog()
     End Sub
@@ -3096,7 +3100,72 @@ Public Class frmMain
         dlgVisualizeData.ShowDialog()
     End Sub
 
-    Private Sub mnuTidyTransformTricot_Click(sender As Object, e As EventArgs) Handles mnuTidyTransformTricot.Click
+    'Removed the transform tricot data dialog as it is not working
+    'Private Sub mnuTidyTransformTricot_Click(sender As Object, e As EventArgs)
+    '    dlgTransformTricotData.ShowDialog()
+    'End Sub
+
+    'Visualise data dialog
+    Private Sub mnuTricotexamineeditdataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataVisualiseData.Click
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Climatic
+        dlgVisualizeData.ShowDialog()
+    End Sub
+
+    'Pivot table dialog
+    Private Sub mnuTricotexamineeditdataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataPivotTable.Click
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Climatic
+        dlgThreeVariablePivotTable.ShowDialog()
+    End Sub
+
+    'One Variable Summarise Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableSummarise.Click
+        dlgOneVariableSummarise.enumOnevariableMode = dlgOneVariableSummarise.OnevariableMode.Climatic
+        dlgOneVariableSummarise.ShowDialog()
+    End Sub
+
+    'One Variable Graph Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableGraph.Click
+        dlgOneVariableGraph.enumOnevariableMode = dlgOneVariableGraph.OnevariableMode.Climatic
+        dlgOneVariableGraph.ShowDialog()
+    End Sub
+
+    'One Variable Frequencies Dialog
+    Private Sub mnuTricotexamineeditdataOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableFrequencies.Click
+        dlgOneWayFrequencies.enumOnewayMode = dlgOneWayFrequencies.OnewayMode.Climatic
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotModelCharacterisation_Click(sender As Object, e As EventArgs) Handles mnuTricotModelCharacterisation.Click
+        dlgTricotModellingGeneral.ShowDialog()
+    End Sub
+
+    Private Sub OptionalMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionalMenuToolStripMenuItem.Click
+
+    End Sub
+
+    'Transform and define as tricot 
+    Private Sub mnuTransformAndDefineAsTricot_Click(sender As Object, e As EventArgs) Handles mnuTransformAndDefineAsTricot.Click
         dlgTransformTricotData.ShowDialog()
+    End Sub
+
+    'Stack pivot longer dialog
+    Private Sub mnuStackPivotLonger_Click(sender As Object, e As EventArgs) Handles mnuStackPivotLonger.Click
+        dlgStack.enumStackMode = dlgStack.StackMode.Prepare
+        dlgStack.ShowDialog()
+    End Sub
+
+    'Unstacked pivot wider dialog
+    Private Sub mnuUnstackPivotWider_Click(sender As Object, e As EventArgs) Handles mnuUnstackPivotWider.Click
+        dlgUnstack.enumUnstackMode = dlgUnstack.UnstackMode.Prepare
+        dlgUnstack.ShowDialog()
+    End Sub
+
+    Private Sub mnuReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuReorderLevels.Click
+        dlgReorderLevels.ShowDialog()
+    End Sub
+
+    Private Sub TransformTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTransformText.Click
+        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Prepare
+        dlgTransformText.ShowDialog()
     End Sub
 End Class

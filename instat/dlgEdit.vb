@@ -221,6 +221,12 @@ Public Class dlgEdit
                     bInputLogical = False
                     bDate = False
                     bNewName = False
+                Case "ordered,factor"
+                    ucrInputRows.Visible = True
+                    bInputRow = True
+                    bInputLogical = False
+                    bDate = False
+                    bNewName = False
                 Case "date"
                     ucrDate.Visible = True
                     bInputRow = False
