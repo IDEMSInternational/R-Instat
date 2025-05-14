@@ -51,6 +51,7 @@ Public Class dlgThreeVariablePivotTable
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 734
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrPnlOptions.AddRadioButton(rdoSingle)
