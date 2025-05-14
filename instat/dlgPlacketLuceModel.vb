@@ -74,15 +74,11 @@ Public Class dlgPlacketLuceModel
         clsAnnovaFunction = New RFunction
         clsSummaryFunction = New RFunction
         clsEstimatesFunction = New RFunction
-
-
         clsLdplyFunction = New RFunction
         clsPivotLongerFunction = New RFunction
         clsPivotWiderFunction = New RFunction
         clsListFunction = New RFunction
         clsImportDataFunction = New RFunction
-
-
         clsConfidenLimFunction = New RFunction
         clsAICFunction = New RFunction
         clsDevianceFunction = New RFunction
@@ -386,7 +382,6 @@ Public Class dlgPlacketLuceModel
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = True
         sdgDisplayModelOptions.ucrChkReability.Enabled = True
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = True
-        sdgDisplayModelOptions.ucrChkSave.Enabled = True
         sdgDisplayModelOptions.ucrChkSave.Visible = True
         sdgDisplayModelOptions.rdoPlot.Enabled = True
         sdgDisplayModelOptions.rdoBar.Enabled = True
