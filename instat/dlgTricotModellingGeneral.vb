@@ -469,7 +469,6 @@ Public Class dlgTricotModellingGeneral
         sdgDisplayModelOptions.rdoTree.Enabled = False
         sdgDisplayModelOptions.rdoMap.Enabled = True
         sdgDisplayModelOptions.ucrChkSave.Checked = False
-        sdgDisplayModelOptions.ucrChkSave.Enabled = False
         sdgDisplayModelOptions.ucrChkSave.Visible = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = True
         sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = True
