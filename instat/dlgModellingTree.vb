@@ -617,7 +617,6 @@ Public Class dlgModellingTree
         sdgDisplayModelOptions.ucrChkReability.Enabled = True
         sdgDisplayModelOptions.ucrChkItemPara.Enabled = True
         sdgDisplayModelOptions.ucrChkSave.Checked = False
-        sdgDisplayModelOptions.ucrChkSave.Enabled = False
         sdgDisplayModelOptions.ucrChkSave.Visible = False
         sdgDisplayModelOptions.rdoPlot.Enabled = False
         sdgDisplayModelOptions.rdoTree.Enabled = False
