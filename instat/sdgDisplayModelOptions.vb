@@ -48,7 +48,7 @@ Public Class sdgDisplayModelOptions
         ucrChkLog.AddRSyntaxContainsFunctionNamesCondition(True, {"log"}, True)
         ucrChkLog.AddRSyntaxContainsFunctionNamesCondition(False, {"log"}, False)
 
-        ucrChkSave.SetText("Store")
+        ucrChkSave.SetText("Store as Data Frame")
         ucrChkSave.AddRSyntaxContainsFunctionNamesCondition(True, {"save"}, True)
         ucrChkSave.AddRSyntaxContainsFunctionNamesCondition(False, {"save"}, False)
 
