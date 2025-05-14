@@ -298,7 +298,7 @@ Public Class dlgModellingTree
         clsEstimatesFunction.SetRCommand("map")
         clsEstimatesFunction.AddParameter(".x", "mod_list", iPosition:=0)
         clsEstimatesFunction.AddParameter(".f", clsROperatorParameter:=clsCoefOperator, iPosition:=1)
-        'clsEstimatesFunction.iCallType = 2
+        clsEstimatesFunction.iCallType = 2
 
         clsAICFunction.SetRCommand("AIC")
         clsAICFunction.AddParameter("x", ".x", bIncludeArgumentName:=False, iPosition:=0)
