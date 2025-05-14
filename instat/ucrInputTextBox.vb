@@ -61,7 +61,7 @@ Public Class ucrInputTextBox
         End If
     End Sub
 
-    Public Overrides Function GetText() As String
+    Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
         Return txtInput.Text
     End Function
 

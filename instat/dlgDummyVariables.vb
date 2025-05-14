@@ -132,33 +132,12 @@ Public Class dlgDummyVariables
     End Property
 
     Private Sub SetSelectedColumn()
-        Dim strTempSelectedVariable As String = ""
-        Dim strDataName As String = ucrSelectorDummyVariable.strCurrentDataFrame
-        Dim strTemp As String = ""
-
-        ' Retrieve parameter value safely
-        Dim clsParam = clsDummyFunction.GetParameter("strVal")
-        If clsParam IsNot Nothing Then
-            strTemp = clsParam.strArgumentValue
-        End If
-        ' If _strSelectedColumn is valid and a factor, use it
-        If Not String.IsNullOrEmpty(_strSelectedColumn) AndAlso
-       frmMain.clsRLink.GetDataType(strDataName, _strSelectedColumn).Contains("factor") Then
-            strTempSelectedVariable = _strSelectedColumn
-        ElseIf ucrSelectorDummyVariable.lstAvailableVariable.Items.Count > 0 Then
-            ' If no selected column, use first available variable
-            strTempSelectedVariable = ucrSelectorDummyVariable.lstAvailableVariable.Items(0).Text
-        Else
-            ' No available variables, exit
-            Exit Sub
-        End If
-        ' Ensure strTemp takes precedence if it's valid
-        If Not String.IsNullOrEmpty(strTemp) AndAlso strTempSelectedVariable <> strTemp Then
-            strTempSelectedVariable = strTemp
-        End If
-
-        ' Add the selected variable to the receiver
-        ucrReceiverFactor.Add(strTempSelectedVariable, strDataName)
+        ' Call the utility method to perform the column selection logic.
+        clsColumnSelectionUtility.SetSelectedColumn(ucrSelectorDummyVariable.lstAvailableVariable,
+                                                 ucrReceiverFactor,
+                                                 clsDummyFunction,
+                                                 ucrSelectorDummyVariable.strCurrentDataFrame,
+                                                 _strSelectedColumn)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged

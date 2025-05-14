@@ -20,7 +20,7 @@ Public Class dlgOutfillingStationData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog = False
-    Private clsDoFillingFunction As New RFunction
+    Public clsDoFillingFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsSelectFunction, clsSelectFunction2 As New RFunction
 
@@ -41,7 +41,7 @@ Public Class dlgOutfillingStationData
 
     Private Sub InitialiseDialog()
         Dim dctLogical As New Dictionary(Of String, String)
-        Dim dctDist As New Dictionary(Of String, String)
+        ucrBase.iHelpTopicID = 489
 
         ucrSelectorOutfilling.SetParameter(New RParameter("data", 0))
         ucrSelectorOutfilling.SetParameterIsrfunction()
@@ -86,11 +86,6 @@ Public Class dlgOutfillingStationData
         ucrReceiverLatitude.bAutoFill = True
         ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitude)
 
-        ucrInputBins.SetParameter(New RParameter("custom_bins", 5))
-        ucrInputBins.SetValidationTypeAsNumericList()
-        ucrInputBins.SetItems({"1, 3, 5, 10, 15, 20", "1.2, 4, 8, 16, 32"})
-        ucrInputBins.AddQuotesIfUnrecognised = False
-
         ucrInputOmitMonths.SetParameter(New RParameter("target_months", 10))
         ucrInputOmitMonths.SetValidationTypeAsNumericList()
         ucrInputOmitMonths.SetItems({"5,6,7,8,9", "1, 2, 3, 11, 12", "1,2,12"})
@@ -101,23 +96,6 @@ Public Class dlgOutfillingStationData
         dctLogical.Add("FALSE", "FALSE")
         ucrInputMarkov.SetItems(dctLogical)
         ucrInputMarkov.SetDropDownStyleAsNonEditable()
-
-        ucrInputDist.SetParameter(New RParameter("distribution_flag", 7))
-        dctDist.Add("gamma", Chr(34) & "gamma" & Chr(34))
-        dctDist.Add("lognormal", Chr(34) & "lognormal" & Chr(34))
-        ucrInputDist.SetItems(dctDist)
-        ucrInputDist.SetRDefault(Chr(34) & "gamma" & Chr(34))
-        ucrInputDist.SetDropDownStyleAsNonEditable()
-
-        ucrNudCount.SetParameter(New RParameter("count_filter", 8))
-        ucrNudCount.SetLinkedDisplayControl(lblCount)
-        ucrNudCount.SetMinMax(1, Integer.MaxValue)
-        ucrNudCount.SetRDefault(10)
-
-        ucrNudDays.SetParameter(New RParameter("min_rainy_days_threshold", 9))
-        ucrNudDays.SetLinkedDisplayControl(lblDays)
-        ucrNudDays.SetMinMax(1, Integer.MaxValue)
-        ucrNudDays.SetRDefault(50)
 
         ucrChkOmitMonths.SetText("Dry Month(s)")
         ucrChkOmitMonths.AddParameterValuesCondition(True, "omit", "True")
@@ -156,7 +134,6 @@ Public Class dlgOutfillingStationData
         clsSelectFunction2 = New RFunction
 
         ucrSelectorOutfilling.Reset()
-        ucrInputBins.Reset()
         ucrReceiverStation.SetMeAsReceiver()
         EnsureSaveResultsChecked()
         ucrSaveResultEst.Reset()
@@ -165,7 +142,6 @@ Public Class dlgOutfillingStationData
 
         bResetSubdialog = True
 
-        ucrInputBins.SetName("1, 3, 5, 10, 15, 20")
         ucrInputOmitMonths.SetName("5,6,7,8,9")
 
         clsDummyFunction.AddParameter("omit", "False", iPosition:=0)
@@ -202,10 +178,7 @@ Public Class dlgOutfillingStationData
         ucrReceiverLatitude.SetRCode(clsDoFillingFunction, bReset)
         ucrReceiverLongitude.SetRCode(clsDoFillingFunction, bReset)
         ucrReceiverRain.SetRCode(clsDoFillingFunction, bReset)
-        ucrNudCount.SetRCode(clsDoFillingFunction, bReset)
-        ucrNudDays.SetRCode(clsDoFillingFunction, bReset)
         ucrNudRandomSeed.SetRCode(clsDoFillingFunction, bReset)
-        ucrInputDist.SetRCode(clsDoFillingFunction, bReset)
         ucrInputMarkov.SetRCode(clsDoFillingFunction, bReset)
         ucrReceiverStation.SetRCode(clsDoFillingFunction, bReset)
         ucrSaveResultEst.SetRCode(clsSelectFunction, bReset)
@@ -222,13 +195,9 @@ Public Class dlgOutfillingStationData
        Not ucrReceiverLatitude.IsEmpty AndAlso
        Not ucrReceiverLongitude.IsEmpty AndAlso
        Not ucrReceiverRain.IsEmpty AndAlso
-       Not ucrNudCount.IsEmpty AndAlso
-       Not ucrNudDays.IsEmpty AndAlso
-       Not ucrInputBins.IsEmpty AndAlso
        (Not ucrChkStationToExclude.Checked OrElse (ucrChkStationToExclude.Checked AndAlso sdgFiltersFromFactor.GetSelectedStations() <> "")) AndAlso
        (ucrSaveResultEst.ucrChkSave.Checked AndAlso ucrSaveResultEst.IsComplete()) AndAlso
        (ucrSaveResultGen.ucrChkSave.Checked AndAlso ucrSaveResultGen.IsComplete()) AndAlso
-       Not ucrInputDist.IsEmpty AndAlso
        Not ucrInputMarkov.IsEmpty Then
 
             ucrBase.OKEnabled(True)
@@ -248,38 +217,6 @@ Public Class dlgOutfillingStationData
         Else
             clsDoFillingFunction.RemoveParameterByName("target_months")
             clsDummyFunction.AddParameter("omit", "False", iPosition:=0)
-        End If
-    End Sub
-
-    Private Sub ucrInputBins_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputBins.ControlValueChanged
-        If Not ucrInputBins.IsEmpty Then
-            clsDoFillingFunction.AddParameter("custom_bins", "c(" & ucrInputBins.GetText & ")", iPosition:=5)
-        Else
-            clsDoFillingFunction.RemoveParameterByName("custom_bins")
-        End If
-    End Sub
-
-    Private Sub ucrNudCount_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudCount.ControlValueChanged
-        If Not ucrNudCount.IsEmpty Then
-            clsDoFillingFunction.AddParameter("count_filter", ucrNudCount.GetText, iPosition:=8)
-        Else
-            clsDoFillingFunction.RemoveParameterByName("count_filter")
-        End If
-    End Sub
-
-    Private Sub ucrNudDays_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudDays.ControlValueChanged
-        If Not ucrNudDays.IsEmpty Then
-            clsDoFillingFunction.AddParameter("min_rainy_days_threshold", ucrNudDays.GetText, iPosition:=9)
-        Else
-            clsDoFillingFunction.RemoveParameterByName("min_rainy_days_threshold")
-        End If
-    End Sub
-
-    Private Sub ucrInputDist_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDist.ControlValueChanged
-        If Not ucrInputDist.IsEmpty Then
-            clsDoFillingFunction.AddParameter("distribution_flag", Chr(34) & ucrInputDist.GetText & Chr(34), iPosition:=7)
-        Else
-            clsDoFillingFunction.RemoveParameterByName("distribution_flag")
         End If
     End Sub
 
@@ -307,8 +244,7 @@ Public Class dlgOutfillingStationData
     End Sub
 
     Private Sub ucrReceiverEstimates_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimates.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged,
-            ucrReceiverLongitude.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrInputBins.ControlContentsChanged, ucrChkStationToExclude.ControlContentsChanged,
-            ucrInputDist.ControlContentsChanged, ucrInputMarkov.ControlContentsChanged, ucrNudCount.ControlContentsChanged, ucrNudDays.ControlContentsChanged, ucrSaveResultGen.ControlContentsChanged, ucrSaveResultEst.ControlContentsChanged
+            ucrReceiverLongitude.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrChkStationToExclude.ControlContentsChanged, ucrInputMarkov.ControlContentsChanged, ucrSaveResultGen.ControlContentsChanged, ucrSaveResultEst.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -363,6 +299,12 @@ Public Class dlgOutfillingStationData
     Private Sub EnsureSaveResultsChecked()
         ucrSaveResultEst.ucrChkSave.Checked = True
         ucrSaveResultGen.ucrChkSave.Checked = True
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgAdvOptions.SetRCode(clsNewDoFillingFunction:=clsDoFillingFunction, bReset:=bResetSubdialog)
+        sdgAdvOptions.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub SetDataFramePrefix()
