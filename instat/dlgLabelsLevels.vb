@@ -82,7 +82,6 @@ Public Class dlgLabelsLevels
         ucrSelectorForLabels.Reset()
         ucrSelectorForLabels.Focus()
 
-
         clsSumCountMissingFunction.SetRCommand("summary_count_miss")
 
         ucrReceiverLabels.SetMeAsReceiver()
@@ -91,7 +90,6 @@ Public Class dlgLabelsLevels
         clsViewLabelsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabelsFunction)
         AddNewLabels()
-
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -229,4 +227,5 @@ Public Class dlgLabelsLevels
         ucrReceiverLabels.SetMeAsReceiver()
         clsDummyFunction.AddParameter("strVal", ucrReceiverLabels.GetVariableNames(False))
     End Sub
+
 End Class
