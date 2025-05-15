@@ -27,10 +27,10 @@ Public Class dlgTricotModelOneVarCov
         clsCoefFunction, clsConfidenLimFunction, clsDevianceFunction, clsEstimatesFunction, clsItemsFunction,
         clsPariPropFunction, clsQuasivarianceFunction, clsReliabilityFunction, clsSecondEstimatesFunction,
         clsStatsFunction, clsRegretFunction, clsTopItemFunction, clsNodeRuleFunction, clsNodeLabFuction,
-        clsTreeFunction, clsVarianCovaMatrixFunction As New RFunction
+        clsTreeFunction, clsVarianCovaMatrixFunction, clsImportDataFunction As New RFunction
 
     Private clsMapFunction As New RFunction
-    Private clsCoefOperator, clsStatsOperator, clsSpaceOpreator, clsAssignOperator As New ROperator
+    Private clsCoefOperator, clsStatsOperator, clsSpaceOpreator, clsAssignOperator, clsPipeOperator As New ROperator
 
     Private clsGetObjectFunction, clsGetRankingItemsFunction, clsGetColumn,
         clsLevelsFunction, clsFactorsFunction, clsMappingFunction, clsPladmmFunction, clsNamesFunction,
@@ -382,7 +382,7 @@ Public Class dlgTricotModelOneVarCov
                                         clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
                                         clsNewAnnovaFunction:=clsAnnovaFunction, clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction,
                                         clsNewCoefFunction:=clsCoefFunction, clsNewConfidenLimFunction:=clsConfidenLimFunction,
-                                        clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction, clsNewItemsFunction:=clsItemsFunction,
+                                        clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction, clsNewImportDataFunction:=clsImportDataFunction, clsNewPipeOperator:=clsPipeOperator, clsNewItemsFunction:=clsItemsFunction,
                                         clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
                                         clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction,
                                         clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction, clsNewNodeLabFuction:=clsNodeLabFuction,
@@ -395,7 +395,8 @@ Public Class dlgTricotModelOneVarCov
         sdgDisplayModelOptions.rdoBar.Enabled = False
         sdgDisplayModelOptions.rdoTree.Enabled = False
         sdgDisplayModelOptions.rdoMap.Enabled = True
-
+        sdgDisplayModelOptions.ucrChkSave.Checked = False
+        sdgDisplayModelOptions.ucrChkSave.Visible = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = True
         sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = True
         sdgDisplayModelOptions.ucrChkEstimates.Enabled = True

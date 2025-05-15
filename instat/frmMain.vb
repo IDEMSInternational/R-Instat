@@ -3017,6 +3017,10 @@ Public Class frmMain
         dlgTraitsXp.ShowDialog()
     End Sub
 
+    Private Sub mnuTricotDescribeXpTraitCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraitCorrelations.Click
+        dlgTraitCorrelationsXp.ShowDialog()
+    End Sub
+
     Private Sub mnuTricotDefineTricotData_Click(sender As Object, e As EventArgs) Handles mnuTricotDefineTricotData.Click
         dlgDefineTricotData.ShowDialog()
     End Sub
@@ -3163,5 +3167,18 @@ Public Class frmMain
     Private Sub TransformTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTransformText.Click
         dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Prepare
         dlgTransformText.ShowDialog()
+    End Sub
+
+    Private Sub RowNumbersNamesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RowNumbersNamesToolStripMenuItem.Click
+        dlgRowNamesOrNumbers.ShowDialog()
+    End Sub
+
+    Private Sub RecodeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecodeFactorToolStripMenuItem.Click
+        SetDefaultValueInReorderLevels()
+        dlgRecodeFactor.ShowDialog()
+    End Sub
+
+    Private Sub CombineFactorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineFactorsToolStripMenuItem.Click
+        dlgCombine.ShowDialog()
     End Sub
 End Class
