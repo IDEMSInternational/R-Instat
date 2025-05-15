@@ -4886,14 +4886,6 @@ Public Class ucrCalculator
         OpenHelpPage()
     End Sub
 
-    Private Sub MASSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MASSToolStripMenuItem.Click
-        CalculationsOptions()
-        If ucrInputCalOptions.GetText = "Transform" Then
-            strPackageName = "MASS"
-        End If
-        OpenHelpPage()
-    End Sub
-
 
     Private Sub ScalesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScalesToolStripMenuItem.Click
         CalculationsOptions()
@@ -5188,6 +5180,14 @@ Public Class ucrCalculator
         CalculationsOptions()
         If ucrInputCalOptions.GetText = "Factor" Then
             strPackageName = "forcats"
+        End If
+        OpenHelpPage()
+    End Sub
+
+    Private Sub LabelledToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LabelledToolStripMenuItem.Click
+        CalculationsOptions()
+        If ucrInputCalOptions.GetText = "Factor" Then
+            strPackageName = "labelled"
         End If
         OpenHelpPage()
     End Sub
@@ -6130,4 +6130,6 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac_den(, )", 3)
         End If
     End Sub
+
+
 End Class

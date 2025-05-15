@@ -58,7 +58,7 @@ Public Class dlgDefineTricotData
         Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("latitude", {"lat", "latitude", "Lat", "Latitude"}.ToList())
         Dim kvpPlantingDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("planting_date", {"planting_date", "Planting_date", "plantingdate"}.ToList())
         Dim kvpTraits As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("traits", {"overall", "overall_perf", "Overall"}.ToList())
-        Dim kvpVariety As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("variety", {"item", "items", "variety", "varieties"}.ToList())
+        Dim kvpVariety As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("variety", {"item", "items", "variety", "varieties", "genotype", "gen", "genotypes"}.ToList())
 
 
         lstRecognisedTypes.AddRange({kvpID, kvpLongitude, kvpLatitude, kvpPlantingDate, kvpTraits, kvpVariety})
@@ -70,12 +70,9 @@ Public Class dlgDefineTricotData
         ucrSelectorIDLevelData.SetParameterIsString()
 
         ucrChkDefineIDLevel.SetText("Define ID Level Data")
-        ucrChkDefineIDLevel.Checked = False
         grpIDLevel.Visible = False
 
-
         ucrChkDefineVarietyLevel.SetText("Define Variety Level Data")
-        ucrChkDefineVarietyLevel.Checked = False
         grpVarietyLevel.Visible = False
 
         'ID Level Data (run by the top groupbox)
@@ -111,6 +108,9 @@ Public Class dlgDefineTricotData
         ucrReceiverIDVarietyLevelTraits.SetParameterIsString()
         ucrReceiverIDVarietyLevelTraits.strSelectorHeading = "Id"
 
+        lblIVTraits.Text = "Traits:"
+        lblVarieties.Text = "Varieties:"
+        lblTraits.Text = "Traits:"
     End Sub
 
     Private Sub SetDefaults()
@@ -146,9 +146,11 @@ Public Class dlgDefineTricotData
         bIsUniqueVariety = False
         bIsUniqueID = False
 
-        lblIVTraits.Text = "Traits:"
-        lblVarieties.Text = "Varieties:"
-        lblTraits.Text = "Traits:"
+        ' resetting ucrChks
+        ucrChkDefineIDLevel.Checked = False
+        ucrChkDefineVarietyLevel.Checked = False
+        ucrSelectorIDLevelData.Reset()
+        ucrSelectorVarietyLevelData.Reset()
 
         ucrReceiverIDVarietyLevelID.SetMeAsReceiver()
         ucrReceiverLevelID.SetMeAsReceiver()
