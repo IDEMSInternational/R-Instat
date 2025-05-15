@@ -909,9 +909,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click
-        If frmEditor.IsDataSetLoaded Then
-            SetDefaultValueInReorderLevels()
-        End If
+        SetDefaultValueInReorderLevels()
         dlgRecodeFactor.ShowDialog()
     End Sub
 
@@ -936,16 +934,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorReferenceLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReferenceLevel.Click
-        If frmEditor.IsDataSetLoaded Then
-            SetDefaultValueInReorderLevels()
-        End If
+        SetDefaultValueInReorderLevels()
         dlgReferenceLevel.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareFactorLabel_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorLevelsLabels.Click
-        If frmEditor.IsDataSetLoaded Then
-            SetDefaultValueInReorderLevels()
-        End If
+        SetDefaultValueInReorderLevels()
         dlgLabelsLevels.ShowDialog()
     End Sub
 
@@ -955,12 +949,18 @@ Public Class frmMain
     End Sub
 
     Public Sub SetDefaultValueInReorderLevels()
+        ' Exit early if there's no dataset loaded
+        If Not frmEditor.IsDataSetLoaded() Then
+            Exit Sub
+        End If
+
         Dim strSelectedColumn As String = ""
         If Not String.IsNullOrEmpty(ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow) AndAlso ucrColumnMeta.IsVisible Then
             strSelectedColumn = ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow
         ElseIf Not String.IsNullOrEmpty(ucrDataViewer.GetFirstSelectedColumnName) Then
             strSelectedColumn = ucrDataViewer.GetFirstSelectedColumnName
         End If
+
         dlgReorderLevels.SelectedColumn = strSelectedColumn
         dlgRecodeFactor.SelectedColumn = strSelectedColumn
         dlgDummyVariables.SelectedColumn = strSelectedColumn
@@ -970,11 +970,9 @@ Public Class frmMain
         dlgCountinFactor.SelectedColumn = strSelectedColumn
     End Sub
 
-    Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
-        If frmEditor.IsDataSetLoaded Then
-            SetDefaultValueInReorderLevels()
-        End If
 
+    Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
+        SetDefaultValueInReorderLevels()
         dlgReorderLevels.ShowDialog()
     End Sub
 
@@ -1006,9 +1004,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorSheet_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorFactorDataFrame.Click
-        If frmEditor.IsDataSetLoaded Then
-            SetDefaultValueInReorderLevels()
-        End If
+        SetDefaultValueInReorderLevels()
         dlgFactorDataFrame.ShowDialog()
     End Sub
 
@@ -2339,9 +2335,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareColumnFactorCountInFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCountInFactor.Click
-        If frmEditor.IsDataSetLoaded Then
-            SetDefaultValueInReorderLevels()
-        End If
+        SetDefaultValueInReorderLevels()
         dlgCountinFactor.ShowDialog()
     End Sub
 
