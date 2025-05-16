@@ -33,12 +33,13 @@ Public Class dlgGeneralTable
             sdgTableOptions.Setup(ucrSelectorCols.strCurrentDataFrame, clsBaseOperator)
             sdgTableOptions.ShowDialog(Me)
         End If
-
         ucrInputTitle.SetText(sdgTableOptions.ucrHeader.ucrInputTitle.GetText)
         ucrInputTitleFooter.SetText(sdgTableOptions.ucrHeader.ucrInputTitleFooter.GetText)
         ucrCboSelectThemes.SetText(sdgTableOptions.ucrCboSelectThemes.GetText)
         ucrChkSelectTheme.Checked = sdgTableOptions.ucrChkSelectTheme.Checked
         sdgTableStyles.GetNewUserInputAsRFunction()
+        sdgTableOptions.UpdateFmtNumberFunction()
+        sdgTableOptions.UpdateSubMissingFunction()
     End Sub
 
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged, ucrReceiverMultipleRowFactors.ControlContentsChanged, ucrReceiverMultipleVariablesMul.ControlContentsChanged, ucrReceiverSingleVariable.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrReceiverMultipleColFactor.ControlContentsChanged
@@ -199,7 +200,7 @@ Public Class dlgGeneralTable
 
         clsThemeRFunction.SetPackageName("gtExtras")
         clsThemeRFunction.SetRCommand("gt_theme_dark")
-        clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction, iPosition:=4)
+        clsBaseOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction, iPosition:=5)
 
         clsHeaderRFunction.SetPackageName("gt")
         clsHeaderRFunction.SetRCommand("tab_header")
@@ -333,8 +334,8 @@ Public Class dlgGeneralTable
             clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=5)
         ElseIf rdoMultiple.Checked Then
             clsBaseOperator.RemoveParameterByName("head")
-                clsBaseOperator.RemoveParameterByName("gt")
-                Updateparameter()
+            clsBaseOperator.RemoveParameterByName("gt")
+            Updateparameter()
             clsPivotLongerFunction.AddParameter("cols", ucrReceiverMultipleVariablesMul.GetVariableNames(), iPosition:=0)
             clsBaseOperator.AddParameter("get_columns_from_data", clsRFunctionParameter:=clsGetdataMultipleFunction, iPosition:=0, bIncludeArgumentName:=False)
             clsBaseOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=3)
@@ -344,8 +345,8 @@ Public Class dlgGeneralTable
                 clsBaseOperator.RemoveParameterByName("pivot_wider_col")
             End If
             clsBaseOperator.AddParameter("format_table", clsRFunctionParameter:=clsFormatTableFunction, iPosition:=9)
-            Else
-                ucrChkPreview.Checked = True
+        Else
+            ucrChkPreview.Checked = True
             AddRemoveHead()
             ucrReceiverMultipleCols.SetMeAsReceiver()
             clsBaseOperator.RemoveParameterByName("pivot_wider")

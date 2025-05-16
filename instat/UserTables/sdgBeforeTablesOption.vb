@@ -20,6 +20,7 @@ Public Class sdgBeforeTablesOption
 
     Private clsOperator As ROperator
     Private clsThemeRFunction As RFunction
+    Private clsFmtNumberFunction, clsSubMissingFunction As RFunction
     Private bFirstload As Boolean = True
 
     Private Sub sdgBeforeTablesOption_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -38,8 +39,21 @@ Public Class sdgBeforeTablesOption
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
 
+        ucrChkDecimal.SetText("Decimal Place")
+        ucrChkDecimal.Checked = False
+        ucrChkDecimal.AddToLinkedControls(ucrNudDecimal, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudDecimal.SetMinMax(1, 10)
+        ucrNudDecimal.Increment = 1
+        ucrNudDecimal.SetRDefault(2)
+
+        ucrChkMissing.SetText("Display NA")
+        ucrChkMissing.Checked = False
+        ucrChkMissing.AddToLinkedControls(ucrInputTextMissing, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputTextMissing.SetText("NA")
+
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
+        HideTableControls()
     End Sub
 
     ''' <summary>
@@ -60,7 +74,72 @@ Public Class sdgBeforeTablesOption
         ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText)
         ucrChkSelectTheme.Checked = dlgGeneralTable.ucrChkSelectTheme.Checked
         sdgTableStyles.GetNewUserInputAsRFunction()
+
+        clsFmtNumberFunction = New RFunction
+        clsFmtNumberFunction.SetRCommand("fmt_number")
+        clsFmtNumberFunction.AddParameter("columns", "where(is.numeric)", iPosition:=0)
+
+        clsSubMissingFunction = New RFunction
+        clsSubMissingFunction.SetRCommand("sub_missing")
+        clsSubMissingFunction.AddParameter("missing_text", "-", iPosition:=0)
         SetupTheme(clsOperator)
+        UpdateSubMissingFunction()
+        UpdateFmtNumberFunction()
+    End Sub
+
+    Private Sub UpdateFmtNumberFunction()
+        If clsOperator Is Nothing Then Exit Sub
+
+        If ucrChkDecimal.Checked Then
+            clsFmtNumberFunction.AddParameter("decimals", ucrNudDecimal.GetText, iPosition:=1)
+
+            clsOperator.AddParameter("fmt_number", clsRFunctionParameter:=clsFmtNumberFunction, iPosition:=10)
+        Else
+            clsOperator.RemoveParameterByName("fmt_number")
+        End If
+    End Sub
+
+
+    Private Sub UpdateSubMissingFunction()
+        If clsOperator Is Nothing Then Exit Sub
+
+        If ucrChkMissing.Checked Then
+            clsSubMissingFunction.AddParameter("missing_text", Chr(34) & ucrInputTextMissing.GetText & Chr(34), iPosition:=0)
+            clsOperator.AddParameter("sub_missing", clsRFunctionParameter:=clsSubMissingFunction, iPosition:=11)
+        Else
+            clsOperator.RemoveParameterByName("sub_missing")
+        End If
+    End Sub
+
+    Private Sub ucrNudDecimal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudDecimal.ControlValueChanged
+        UpdateFmtNumberFunction()
+    End Sub
+
+    Private Sub ucrInputTextMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTextMissing.ControlValueChanged
+        UpdateSubMissingFunction()
+    End Sub
+
+    Private Sub HideTableControls()
+        If ucrChkDecimal.Checked Then
+            ucrNudDecimal.Visible = True
+        Else
+            ucrNudDecimal.Visible = False
+        End If
+        If ucrChkMissing.Checked Then
+            ucrInputTextMissing.Visible = True
+        Else
+            ucrInputTextMissing.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrChkDecimal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDecimal.ControlValueChanged
+        UpdateFmtNumberFunction()
+        HideTableControls()
+    End Sub
+
+    Private Sub ucrChkMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMissing.ControlValueChanged
+        UpdateSubMissingFunction()
+        HideTableControls()
     End Sub
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
