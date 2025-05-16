@@ -35,11 +35,17 @@ Partial Class sdgBeforeTablesOption
         Me.tbpOtherStyles = New System.Windows.Forms.TabPage()
         Me.ucrOtherStyles = New instat.ucrOtherStyles()
         Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputTextMissing = New instat.ucrInputTextBox()
+        Me.ucrNudDecimal = New instat.ucrNud()
+        Me.ucrChkDecimal = New instat.ucrCheck()
+        Me.tbpTable = New System.Windows.Forms.TabPage()
+        Me.ucrChkMissing = New instat.ucrCheck()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
         Me.tbpSourceNotes.SuspendLayout()
         Me.tbpThemes.SuspendLayout()
         Me.tbpOtherStyles.SuspendLayout()
+        Me.tbpTable.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpFormatOptions
@@ -48,6 +54,7 @@ Partial Class sdgBeforeTablesOption
         Me.tbpFormatOptions.Controls.Add(Me.tbpSourceNotes)
         Me.tbpFormatOptions.Controls.Add(Me.tbpThemes)
         Me.tbpFormatOptions.Controls.Add(Me.tbpOtherStyles)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpTable)
         Me.tbpFormatOptions.Location = New System.Drawing.Point(2, 1)
         Me.tbpFormatOptions.Name = "tbpFormatOptions"
         Me.tbpFormatOptions.SelectedIndex = 0
@@ -175,6 +182,62 @@ Partial Class sdgBeforeTablesOption
         Me.ucrSdgBaseButtons.Size = New System.Drawing.Size(224, 30)
         Me.ucrSdgBaseButtons.TabIndex = 344
         '
+        'ucrInputTextMissing
+        '
+        Me.ucrInputTextMissing.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextMissing.AutoSize = True
+        Me.ucrInputTextMissing.IsMultiline = False
+        Me.ucrInputTextMissing.IsReadOnly = False
+        Me.ucrInputTextMissing.Location = New System.Drawing.Point(143, 67)
+        Me.ucrInputTextMissing.Name = "ucrInputTextMissing"
+        Me.ucrInputTextMissing.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputTextMissing.TabIndex = 3
+        '
+        'ucrNudDecimal
+        '
+        Me.ucrNudDecimal.AutoSize = True
+        Me.ucrNudDecimal.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDecimal.Location = New System.Drawing.Point(143, 25)
+        Me.ucrNudDecimal.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDecimal.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDecimal.Name = "ucrNudDecimal"
+        Me.ucrNudDecimal.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDecimal.TabIndex = 2
+        Me.ucrNudDecimal.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkDecimal
+        '
+        Me.ucrChkDecimal.AutoSize = True
+        Me.ucrChkDecimal.Checked = False
+        Me.ucrChkDecimal.Location = New System.Drawing.Point(21, 26)
+        Me.ucrChkDecimal.Name = "ucrChkDecimal"
+        Me.ucrChkDecimal.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkDecimal.TabIndex = 0
+        '
+        'tbpTable
+        '
+        Me.tbpTable.Controls.Add(Me.ucrInputTextMissing)
+        Me.tbpTable.Controls.Add(Me.ucrNudDecimal)
+        Me.tbpTable.Controls.Add(Me.ucrChkMissing)
+        Me.tbpTable.Controls.Add(Me.ucrChkDecimal)
+        Me.tbpTable.Location = New System.Drawing.Point(4, 22)
+        Me.tbpTable.Name = "tbpTable"
+        Me.tbpTable.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpTable.Size = New System.Drawing.Size(637, 363)
+        Me.tbpTable.TabIndex = 12
+        Me.tbpTable.Text = "Table"
+        Me.tbpTable.UseVisualStyleBackColor = True
+        '
+        'ucrChkMissing
+        '
+        Me.ucrChkMissing.AutoSize = True
+        Me.ucrChkMissing.Checked = False
+        Me.ucrChkMissing.Location = New System.Drawing.Point(21, 70)
+        Me.ucrChkMissing.Name = "ucrChkMissing"
+        Me.ucrChkMissing.Size = New System.Drawing.Size(100, 23)
+        Me.ucrChkMissing.TabIndex = 1
+        '
         'sdgBeforeTablesOption
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -195,6 +258,8 @@ Partial Class sdgBeforeTablesOption
         Me.tbpThemes.ResumeLayout(False)
         Me.tbpThemes.PerformLayout()
         Me.tbpOtherStyles.ResumeLayout(False)
+        Me.tbpTable.ResumeLayout(False)
+        Me.tbpTable.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -213,4 +278,9 @@ Partial Class sdgBeforeTablesOption
     Friend WithEvents tbpOtherStyles As TabPage
     Friend WithEvents ucrOtherStyles As ucrOtherStyles
     Friend WithEvents ucrSdgBaseButtons As ucrButtonsSubdialogue
+    Friend WithEvents tbpTable As TabPage
+    Friend WithEvents ucrInputTextMissing As ucrInputTextBox
+    Friend WithEvents ucrNudDecimal As ucrNud
+    Friend WithEvents ucrChkMissing As ucrCheck
+    Friend WithEvents ucrChkDecimal As ucrCheck
 End Class
