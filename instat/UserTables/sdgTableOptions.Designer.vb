@@ -42,6 +42,8 @@ Partial Class sdgTableOptions
         Me.btnManualTheme = New System.Windows.Forms.Button()
         Me.tbpOtherStyles = New System.Windows.Forms.TabPage()
         Me.ucrOtherStyles = New instat.ucrOtherStyles()
+        Me.tbpTables = New System.Windows.Forms.TabPage()
+        Me.ucrNewCellFormats = New instat.ucrNewCellFormats()
         Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
@@ -52,6 +54,7 @@ Partial Class sdgTableOptions
         Me.tbpSourceNotes.SuspendLayout()
         Me.tbpThemes.SuspendLayout()
         Me.tbpOtherStyles.SuspendLayout()
+        Me.tbpTables.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpFormatOptions
@@ -64,6 +67,7 @@ Partial Class sdgTableOptions
         Me.tbpFormatOptions.Controls.Add(Me.tbpSourceNotes)
         Me.tbpFormatOptions.Controls.Add(Me.tbpThemes)
         Me.tbpFormatOptions.Controls.Add(Me.tbpOtherStyles)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpTables)
         Me.tbpFormatOptions.Location = New System.Drawing.Point(3, 5)
         Me.tbpFormatOptions.Name = "tbpFormatOptions"
         Me.tbpFormatOptions.SelectedIndex = 0
@@ -254,6 +258,24 @@ Partial Class sdgTableOptions
         Me.ucrOtherStyles.Size = New System.Drawing.Size(326, 179)
         Me.ucrOtherStyles.TabIndex = 0
         '
+        'tbpTables
+        '
+        Me.tbpTables.Controls.Add(Me.ucrNewCellFormats)
+        Me.tbpTables.Location = New System.Drawing.Point(4, 22)
+        Me.tbpTables.Name = "tbpTables"
+        Me.tbpTables.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpTables.Size = New System.Drawing.Size(765, 431)
+        Me.tbpTables.TabIndex = 11
+        Me.tbpTables.Text = "Table"
+        Me.tbpTables.UseVisualStyleBackColor = True
+        '
+        'ucrNewCellFormats
+        '
+        Me.ucrNewCellFormats.Location = New System.Drawing.Point(12, 9)
+        Me.ucrNewCellFormats.Name = "ucrNewCellFormats"
+        Me.ucrNewCellFormats.Size = New System.Drawing.Size(602, 364)
+        Me.ucrNewCellFormats.TabIndex = 303
+        '
         'ucrSdgBaseButtons
         '
         Me.ucrSdgBaseButtons.AutoSize = True
@@ -284,6 +306,7 @@ Partial Class sdgTableOptions
         Me.tbpThemes.ResumeLayout(False)
         Me.tbpThemes.PerformLayout()
         Me.tbpOtherStyles.ResumeLayout(False)
+        Me.tbpTables.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -310,4 +333,6 @@ Partial Class sdgTableOptions
     Friend WithEvents ucrOtherStyles As ucrOtherStyles
     Friend WithEvents ucrChkSelectTheme As ucrCheck
     Friend WithEvents ucrChkManualTheme As ucrCheck
+    Friend WithEvents tbpTables As TabPage
+    Friend WithEvents ucrNewCellFormats As ucrNewCellFormats
 End Class

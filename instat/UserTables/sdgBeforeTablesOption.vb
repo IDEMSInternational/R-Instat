@@ -35,6 +35,7 @@ Public Class sdgBeforeTablesOption
     Private Sub InitialiseDialog()
         ucrSdgBaseButtons.iHelpTopicID = 146
         ucrChkSelectTheme.Checked = True
+        ucrNewCellFormats.Visible = True
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
 
@@ -54,6 +55,7 @@ Public Class sdgBeforeTablesOption
         ucrHeader.Setup(clsOperator)
         ucrSourceNotes.Setup(clsOperator)
         ucrOtherStyles.Setup(clsOperator)
+        ucrNewCellFormats.Setup(strDataFrameName, clsOperator)
 
         ucrHeader.ucrInputTitle.SetText(dlgGeneralTable.ucrInputTitle.GetText)
         ucrHeader.ucrInputTitleFooter.SetText(dlgGeneralTable.ucrInputTitleFooter.GetText)
@@ -67,6 +69,8 @@ Public Class sdgBeforeTablesOption
         ucrHeader.SetValuesToOperator()
         ucrSourceNotes.SetValuesToOperator()
         ucrOtherStyles.SetValuesToOperator()
+        ucrNewCellFormats.SetValuesToOperator()
+        'ucrColumnNewMissingTexts.SetValuesToOperator()
         SetThemeValuesOnReturn(clsOperator)
     End Sub
 
@@ -152,5 +156,6 @@ Public Class sdgBeforeTablesOption
             clsOperator.RemoveParameterByName("theme_format")
         End If
     End Sub
+
     '-----------------------------------------
 End Class
