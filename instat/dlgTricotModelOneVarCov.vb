@@ -27,7 +27,7 @@ Public Class dlgTricotModelOneVarCov
         clsCoefFunction, clsConfidenLimFunction, clsDevianceFunction, clsEstimatesFunction, clsItemsFunction,
         clsPariPropFunction, clsQuasivarianceFunction, clsReliabilityFunction, clsSecondEstimatesFunction,
         clsStatsFunction, clsRegretFunction, clsTopItemFunction, clsNodeRuleFunction, clsNodeLabFuction,
-        clsTreeFunction, clsVarianCovaMatrixFunction, clsImportDataFunction, clsWrapTrees, clsSecondLibraryFunction As New RFunction
+        clsTreeFunction, clsVarianCovaMatrixFunction, clsImportDataFunction, clsWrapTrees As New RFunction
 
     Private clsMapFunction As New RFunction
     Private clsCoefOperator, clsStatsOperator, clsSpaceOpreator, clsAssignOperator, clsPipeOperator As New ROperator
@@ -386,7 +386,7 @@ Public Class dlgTricotModelOneVarCov
                                         clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
                                         clsNewRSyntax:=ucrBase.clsRsyntax, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction, clsNewStatsFunction:=clsStatsFunction, clsNewRegretFunction:=clsRegretFunction,
                                         clsNewTopItemFunction:=clsTopItemFunction, clsNewNodeRuleFunction:=clsNodeRuleFunction, clsNewNodeLabFuction:=clsNodeLabFuction,
-                                        clsNewTreeFunction:=clsTreeFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, clsNewLibraryFunction:=clsSecondLibraryFunction, bReset:=bResetSubDialog)
+                                        clsNewTreeFunction:=clsTreeFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction, bReset:=bResetSubDialog)
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkReability.Enabled = False
         sdgDisplayModelOptions.ucrChkQuasiVa.Enabled = False
