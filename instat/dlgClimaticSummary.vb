@@ -207,7 +207,6 @@ Public Class dlgClimaticSummary
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("factors", clsRFunctionParameter:=clsDefaultFactors, iPosition:=1)
-        'clsDefaultFunction.AddParameter("additional_filter", clsRFunctionParameter:=clsDayFilterCalc, iPosition:=5)
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
         clsDefaultFunction.AddParameter("silent", "TRUE")
 
@@ -237,8 +236,11 @@ Public Class dlgClimaticSummary
         ucrChkPrintOutput.SetRCode(clsDefaultFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverDate.SetRCode(clsAddDateFunction, bReset)
-        ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
         ucrPnlAnnualWithin.SetRCode(clsDummyFunction, bReset)
+
+        If bReset Then
+            ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
+        End If
     End Sub
 
     'TODO: run these things at the correct times
@@ -429,13 +431,11 @@ Public Class dlgClimaticSummary
         If ucrChkDayRange.Checked Then
             cmdDoyRange.Enabled = True
             ucrInputFilterPreview.Visible = True
-            clsDummyFunction.AddParameter("day", "True", iPosition:=0)
             clsDefaultFunction.AddParameter("additional_filter", clsRFunctionParameter:=clsDayFilterCalc, iPosition:=5)
         Else
             cmdDoyRange.Enabled = False
             ucrInputFilterPreview.Visible = False
             clsDefaultFunction.RemoveParameterByName("additional_filter")
-            clsDummyFunction.AddParameter("day", "False", iPosition:=0)
         End If
     End Sub
 

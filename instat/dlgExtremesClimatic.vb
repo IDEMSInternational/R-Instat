@@ -391,7 +391,6 @@ Public Class dlgExtremesClimatic
         clsMinMaxSummariseFunction.AddParameter("result_name", "max", iPosition:=2)
         clsMinMaxSummariseFunction.AddParameter("manipulations", clsRFunctionParameter:=clsMinMaxManipulationsFunction, iPosition:=3)
         clsMinMaxManipulationsFunction.AddParameter("sub1", clsRFunctionParameter:=clsGroupByFunction, bIncludeArgumentName:=False, iPosition:=0)
-        'clsMinMaxManipulationsFunction.AddParameter("sub2", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=1)
         clsMinMaxSummariseFunction.AddParameter("save", 2, iPosition:=4)
         clsMinMaxSummariseFunction.SetAssignTo("min_max_summary")
 
@@ -405,7 +404,6 @@ Public Class dlgExtremesClimatic
         clsPeaksFilterOperator.AddParameter("left", iPosition:=0)
         clsPeaksFilterOperator.AddParameter("right", "60", iPosition:=1)
         clsPeaksFilterFunction.AddParameter("manipulations", clsRFunctionParameter:=clsDayManipulation, iPosition:=2)
-        'clsDayManipulation.AddParameter("sub1", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=0)
         clsPeaksFilterFunction.AddParameter("save", 2, iPosition:=3)
         clsPeaksFilterFunction.SetAssignTo("peak_filter")
 
@@ -422,7 +420,6 @@ Public Class dlgExtremesClimatic
 
         clsCombinationManipulations.SetRCommand("list")
         clsCombinationManipulations.AddParameter("manip1", "grouping", iPosition:=0, bIncludeArgumentName:=False)
-        'clsCombinationManipulations.AddParameter("manip2", clsRFunctionParameter:=clsDayFromAndTo, iPosition:=1, bIncludeArgumentName:=False)
         clsCombinationManipulations.AddParameter("manip3", clsRFunctionParameter:=clsFilterExtremeCalc, iPosition:=1, bIncludeArgumentName:=False)
 
         clsDateCarryCalcFromList.SetRCommand("list")
@@ -545,10 +542,10 @@ Public Class dlgExtremesClimatic
         ucrChkDeclustering.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrSaveThresholdPlot.SetRCode(clsThresholdPlotFunction)
         ucrSaveMrlPlot.SetRCode(clsPlotMrlFunction, bReset)
-        ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
         'This is done on bReset because we don't want to SetAssignTo when this save control is hidden
         If bReset Then
             ucrSaveDeclusteredPlot.SetRCode(clsDeclusteringFunction, bReset)
+            ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
         End If
         bUpdateMinMax = True
     End Sub
@@ -848,7 +845,6 @@ Public Class dlgExtremesClimatic
         If ucrChkDayRange.Checked Then
             cmdDoyRange.Enabled = True
             ucrInputFilterPreview.Visible = True
-            clsDummyFunction.AddParameter("day", "True", iPosition:=0)
             clsCombinationManipulations.AddParameter("manip2", "day_from_and_to", iPosition:=1, bIncludeArgumentName:=False)
             clsDayManipulation.AddParameter("sub1", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=0)
             clsMinMaxManipulationsFunction.AddParameter("sub2", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False, iPosition:=1)
@@ -858,7 +854,6 @@ Public Class dlgExtremesClimatic
             clsDayManipulation.RemoveParameterByName("sub1")
             clsCombinationManipulations.RemoveParameterByName("manip2")
             clsMinMaxManipulationsFunction.RemoveParameterByName("sub2")
-            clsDummyFunction.AddParameter("day", "False", iPosition:=0)
         End If
 
     End Sub

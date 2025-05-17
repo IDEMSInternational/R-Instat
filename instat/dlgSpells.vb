@@ -322,7 +322,6 @@ Public Class dlgSpells
         clsMaxSpellManipulation.SetRCommand("list")
         clsMaxSpellManipulation.AddParameter("manip1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
         clsMaxSpellManipulation.AddParameter("manip2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=1)
-        'clsMaxSpellManipulation.AddParameter("manip3", clsRFunctionParameter:=clsDayFilter, bIncludeArgumentName:=False, iPosition:=2)
 
         clsSpellsFunction.bToScriptAsRString = True
         clsSpellsFunction.SetPackageName("instatClimatic")
@@ -356,7 +355,9 @@ Public Class dlgSpells
         ucrInputSpellUpper.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxSpellSummary, bReset)
         ucrPnlOptions.SetRCode(clsCurrCalc, bReset)
-        ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
+        If bReset Then
+            ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
+        End If
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
@@ -514,13 +515,11 @@ Public Class dlgSpells
         If ucrChkDayRange.Checked Then
             cmdDoyRange.Enabled = True
             ucrInputFilterPreview.Visible = True
-            clsDummyFunction.AddParameter("day", "True", iPosition:=0)
             clsMaxSpellManipulation.AddParameter("manip3", clsRFunctionParameter:=clsDayFilter, bIncludeArgumentName:=False, iPosition:=2)
         Else
             cmdDoyRange.Enabled = False
             ucrInputFilterPreview.Visible = False
             clsMaxSpellManipulation.RemoveParameterByName("manip3")
-            clsDummyFunction.AddParameter("day", "False", iPosition:=0)
         End If
     End Sub
 

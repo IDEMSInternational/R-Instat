@@ -80,10 +80,9 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnual.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnual.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnual.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnual.Location = New System.Drawing.Point(18, 21)
-        Me.rdoAnnual.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoAnnual.Location = New System.Drawing.Point(12, 14)
         Me.rdoAnnual.Name = "rdoAnnual"
-        Me.rdoAnnual.Size = New System.Drawing.Size(100, 40)
+        Me.rdoAnnual.Size = New System.Drawing.Size(67, 27)
         Me.rdoAnnual.TabIndex = 1
         Me.rdoAnnual.TabStop = True
         Me.rdoAnnual.Text = "Annual"
@@ -98,10 +97,9 @@ Partial Class dlgClimaticSummary
         Me.rdoWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWithinYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoWithinYear.Location = New System.Drawing.Point(244, 21)
-        Me.rdoWithinYear.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoWithinYear.Location = New System.Drawing.Point(163, 14)
         Me.rdoWithinYear.Name = "rdoWithinYear"
-        Me.rdoWithinYear.Size = New System.Drawing.Size(132, 40)
+        Me.rdoWithinYear.Size = New System.Drawing.Size(88, 27)
         Me.rdoWithinYear.TabIndex = 3
         Me.rdoWithinYear.TabStop = True
         Me.rdoWithinYear.Text = "Within Year"
@@ -116,10 +114,9 @@ Partial Class dlgClimaticSummary
         Me.rdoAnnualWithinYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnualWithinYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnualWithinYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnualWithinYear.Location = New System.Drawing.Point(116, 21)
-        Me.rdoAnnualWithinYear.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoAnnualWithinYear.Location = New System.Drawing.Point(77, 14)
         Me.rdoAnnualWithinYear.Name = "rdoAnnualWithinYear"
-        Me.rdoAnnualWithinYear.Size = New System.Drawing.Size(132, 40)
+        Me.rdoAnnualWithinYear.Size = New System.Drawing.Size(88, 27)
         Me.rdoAnnualWithinYear.TabIndex = 2
         Me.rdoAnnualWithinYear.TabStop = True
         Me.rdoAnnualWithinYear.Text = "Annual+Within"
@@ -130,10 +127,9 @@ Partial Class dlgClimaticSummary
         '
         Me.lblStation.AutoSize = True
         Me.lblStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStation.Location = New System.Drawing.Point(432, 102)
-        Me.lblStation.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblStation.Location = New System.Drawing.Point(288, 68)
         Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(64, 20)
+        Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 7
         Me.lblStation.Text = "Station:"
         '
@@ -141,10 +137,9 @@ Partial Class dlgClimaticSummary
         '
         Me.lblDate.AutoSize = True
         Me.lblDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDate.Location = New System.Drawing.Point(432, 164)
-        Me.lblDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDate.Location = New System.Drawing.Point(288, 109)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(48, 20)
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 9
         Me.lblDate.Text = "Date:"
         '
@@ -152,10 +147,9 @@ Partial Class dlgClimaticSummary
         '
         Me.lblDay.AutoSize = True
         Me.lblDay.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDay.Location = New System.Drawing.Point(432, 368)
-        Me.lblDay.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDay.Location = New System.Drawing.Point(288, 245)
         Me.lblDay.Name = "lblDay"
-        Me.lblDay.Size = New System.Drawing.Size(97, 20)
+        Me.lblDay.Size = New System.Drawing.Size(66, 13)
         Me.lblDay.TabIndex = 13
         Me.lblDay.Text = "Day of Year:"
         '
@@ -163,20 +157,18 @@ Partial Class dlgClimaticSummary
         '
         Me.lblElement.AutoSize = True
         Me.lblElement.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblElement.Location = New System.Drawing.Point(432, 225)
-        Me.lblElement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblElement.Location = New System.Drawing.Point(288, 150)
         Me.lblElement.Name = "lblElement"
-        Me.lblElement.Size = New System.Drawing.Size(72, 20)
+        Me.lblElement.Size = New System.Drawing.Size(48, 13)
         Me.lblElement.TabIndex = 11
         Me.lblElement.Text = "Element:"
         '
         'cmdSummary
         '
         Me.cmdSummary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSummary.Location = New System.Drawing.Point(432, 556)
-        Me.cmdSummary.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdSummary.Location = New System.Drawing.Point(288, 371)
         Me.cmdSummary.Name = "cmdSummary"
-        Me.cmdSummary.Size = New System.Drawing.Size(180, 39)
+        Me.cmdSummary.Size = New System.Drawing.Size(120, 26)
         Me.cmdSummary.TabIndex = 20
         Me.cmdSummary.Tag = "Summaries"
         Me.cmdSummary.Text = "Summaries"
@@ -186,10 +178,9 @@ Partial Class dlgClimaticSummary
         '
         Me.lblWithinYear.AutoSize = True
         Me.lblWithinYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblWithinYear.Location = New System.Drawing.Point(432, 490)
-        Me.lblWithinYear.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblWithinYear.Location = New System.Drawing.Point(288, 327)
         Me.lblWithinYear.Name = "lblWithinYear"
-        Me.lblWithinYear.Size = New System.Drawing.Size(95, 20)
+        Me.lblWithinYear.Size = New System.Drawing.Size(65, 13)
         Me.lblWithinYear.TabIndex = 17
         Me.lblWithinYear.Text = "Within Year:"
         '
@@ -201,11 +192,9 @@ Partial Class dlgClimaticSummary
         Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
         Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
         Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
-        Me.grpOptions.Location = New System.Drawing.Point(8, 350)
-        Me.grpOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpOptions.Location = New System.Drawing.Point(5, 233)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.grpOptions.Size = New System.Drawing.Size(420, 204)
+        Me.grpOptions.Size = New System.Drawing.Size(280, 136)
         Me.grpOptions.TabIndex = 19
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
@@ -213,10 +202,9 @@ Partial Class dlgClimaticSummary
         'cmdMissingOptions
         '
         Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(326, 124)
-        Me.cmdMissingOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(217, 83)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"
-        Me.cmdMissingOptions.Size = New System.Drawing.Size(90, 39)
+        Me.cmdMissingOptions.Size = New System.Drawing.Size(60, 26)
         Me.cmdMissingOptions.TabIndex = 19
         Me.cmdMissingOptions.Tag = "MissingOptions"
         Me.cmdMissingOptions.Text = "Options"
@@ -226,59 +214,58 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrChkOmitMissing.AutoSize = True
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(9, 129)
-        Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(6, 86)
+        Me.ucrChkOmitMissing.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(267, 51)
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(178, 25)
         Me.ucrChkOmitMissing.TabIndex = 5
         '
         'ucrChkAddDateColumn
         '
         Me.ucrChkAddDateColumn.AutoSize = True
         Me.ucrChkAddDateColumn.Checked = False
-        Me.ucrChkAddDateColumn.Location = New System.Drawing.Point(9, 164)
-        Me.ucrChkAddDateColumn.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkAddDateColumn.Location = New System.Drawing.Point(6, 110)
+        Me.ucrChkAddDateColumn.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkAddDateColumn.Name = "ucrChkAddDateColumn"
-        Me.ucrChkAddDateColumn.Size = New System.Drawing.Size(328, 51)
+        Me.ucrChkAddDateColumn.Size = New System.Drawing.Size(219, 27)
         Me.ucrChkAddDateColumn.TabIndex = 4
         '
         'ucrChkStoreResults
         '
         Me.ucrChkStoreResults.AutoSize = True
         Me.ucrChkStoreResults.Checked = False
-        Me.ucrChkStoreResults.Location = New System.Drawing.Point(9, 26)
-        Me.ucrChkStoreResults.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkStoreResults.Location = New System.Drawing.Point(6, 17)
+        Me.ucrChkStoreResults.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(382, 51)
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(255, 25)
         Me.ucrChkStoreResults.TabIndex = 0
         '
         'ucrChkPrintOutput
         '
         Me.ucrChkPrintOutput.AutoSize = True
         Me.ucrChkPrintOutput.Checked = False
-        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(9, 60)
-        Me.ucrChkPrintOutput.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(6, 40)
+        Me.ucrChkPrintOutput.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(381, 51)
+        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(254, 25)
         Me.ucrChkPrintOutput.TabIndex = 1
         '
         'ucrChkDropUnusedLevels
         '
         Me.ucrChkDropUnusedLevels.AutoSize = True
         Me.ucrChkDropUnusedLevels.Checked = False
-        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(9, 94)
-        Me.ucrChkDropUnusedLevels.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 63)
+        Me.ucrChkDropUnusedLevels.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
-        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(222, 51)
+        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(148, 25)
         Me.ucrChkDropUnusedLevels.TabIndex = 2
         '
         'cmdDoyRange
         '
         Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDoyRange.Location = New System.Drawing.Point(6, 596)
-        Me.cmdDoyRange.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdDoyRange.Location = New System.Drawing.Point(4, 397)
         Me.cmdDoyRange.Name = "cmdDoyRange"
-        Me.cmdDoyRange.Size = New System.Drawing.Size(130, 39)
+        Me.cmdDoyRange.Size = New System.Drawing.Size(87, 26)
         Me.cmdDoyRange.TabIndex = 21
         Me.cmdDoyRange.Tag = ""
         Me.cmdDoyRange.Text = "Day Range"
@@ -288,10 +275,9 @@ Partial Class dlgClimaticSummary
         '
         Me.lblYear.AutoSize = True
         Me.lblYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYear.Location = New System.Drawing.Point(432, 429)
-        Me.lblYear.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblYear.Location = New System.Drawing.Point(288, 286)
         Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(47, 20)
+        Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 15
         Me.lblYear.Text = "Year:"
         '
@@ -303,10 +289,9 @@ Partial Class dlgClimaticSummary
         Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoStation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoStation.Location = New System.Drawing.Point(489, 21)
-        Me.rdoStation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoStation.Location = New System.Drawing.Point(326, 14)
         Me.rdoStation.Name = "rdoStation"
-        Me.rdoStation.Size = New System.Drawing.Size(92, 40)
+        Me.rdoStation.Size = New System.Drawing.Size(61, 27)
         Me.rdoStation.TabIndex = 5
         Me.rdoStation.TabStop = True
         Me.rdoStation.Text = "Station"
@@ -321,10 +306,9 @@ Partial Class dlgClimaticSummary
         Me.rdoDaily.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDaily.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDaily.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDaily.Location = New System.Drawing.Point(374, 21)
-        Me.rdoDaily.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdoDaily.Location = New System.Drawing.Point(249, 14)
         Me.rdoDaily.Name = "rdoDaily"
-        Me.rdoDaily.Size = New System.Drawing.Size(123, 40)
+        Me.rdoDaily.Size = New System.Drawing.Size(82, 27)
         Me.rdoDaily.TabIndex = 4
         Me.rdoDaily.TabStop = True
         Me.rdoDaily.Text = "Daily"
@@ -335,11 +319,11 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrReceiverElements.AutoSize = True
         Me.ucrReceiverElements.frmParent = Me
-        Me.ucrReceiverElements.Location = New System.Drawing.Point(432, 246)
+        Me.ucrReceiverElements.Location = New System.Drawing.Point(288, 164)
         Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElements.Name = "ucrReceiverElements"
         Me.ucrReceiverElements.Selector = Nothing
-        Me.ucrReceiverElements.Size = New System.Drawing.Size(184, 117)
+        Me.ucrReceiverElements.Size = New System.Drawing.Size(123, 78)
         Me.ucrReceiverElements.strNcFilePath = ""
         Me.ucrReceiverElements.TabIndex = 12
         Me.ucrReceiverElements.ucrSelector = Nothing
@@ -350,10 +334,10 @@ Partial Class dlgClimaticSummary
         Me.ucrInputFilterPreview.AutoSize = True
         Me.ucrInputFilterPreview.IsMultiline = False
         Me.ucrInputFilterPreview.IsReadOnly = True
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(132, 600)
-        Me.ucrInputFilterPreview.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(90, 400)
+        Me.ucrInputFilterPreview.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(363, 33)
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
         Me.ucrInputFilterPreview.TabIndex = 22
         '
         'ucrSelectorVariable
@@ -362,21 +346,21 @@ Partial Class dlgClimaticSummary
         Me.ucrSelectorVariable.bDropUnusedFilterLevels = False
         Me.ucrSelectorVariable.bShowHiddenColumns = False
         Me.ucrSelectorVariable.bUseCurrentFilter = True
-        Me.ucrSelectorVariable.Location = New System.Drawing.Point(8, 72)
+        Me.ucrSelectorVariable.Location = New System.Drawing.Point(5, 48)
         Me.ucrSelectorVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorVariable.Name = "ucrSelectorVariable"
-        Me.ucrSelectorVariable.Size = New System.Drawing.Size(320, 274)
+        Me.ucrSelectorVariable.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorVariable.TabIndex = 6
         '
         'ucrReceiverWithinYear
         '
         Me.ucrReceiverWithinYear.AutoSize = True
         Me.ucrReceiverWithinYear.frmParent = Me
-        Me.ucrReceiverWithinYear.Location = New System.Drawing.Point(432, 513)
+        Me.ucrReceiverWithinYear.Location = New System.Drawing.Point(288, 342)
         Me.ucrReceiverWithinYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWithinYear.Name = "ucrReceiverWithinYear"
         Me.ucrReceiverWithinYear.Selector = Nothing
-        Me.ucrReceiverWithinYear.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverWithinYear.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWithinYear.strNcFilePath = ""
         Me.ucrReceiverWithinYear.TabIndex = 18
         Me.ucrReceiverWithinYear.ucrSelector = Nothing
@@ -385,11 +369,11 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrReceiverDOY.AutoSize = True
         Me.ucrReceiverDOY.frmParent = Me
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(432, 393)
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(288, 262)
         Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
-        Me.ucrReceiverDOY.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverDOY.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDOY.strNcFilePath = ""
         Me.ucrReceiverDOY.TabIndex = 14
         Me.ucrReceiverDOY.ucrSelector = Nothing
@@ -398,11 +382,11 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrReceiverYear.AutoSize = True
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(432, 453)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(288, 302)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
-        Me.ucrReceiverYear.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
         Me.ucrReceiverYear.TabIndex = 16
         Me.ucrReceiverYear.ucrSelector = Nothing
@@ -411,11 +395,11 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrReceiverDate.AutoSize = True
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(432, 186)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(288, 124)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.TabIndex = 10
         Me.ucrReceiverDate.ucrSelector = Nothing
@@ -424,11 +408,11 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrReceiverStation.AutoSize = True
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(432, 126)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(288, 84)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.TabIndex = 8
         Me.ucrReceiverStation.ucrSelector = Nothing
@@ -437,37 +421,37 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(8, 633)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 427)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 23
         '
         'ucrPnlAnnualWithin
         '
         Me.ucrPnlAnnualWithin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlAnnualWithin.Location = New System.Drawing.Point(14, 15)
-        Me.ucrPnlAnnualWithin.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrPnlAnnualWithin.Location = New System.Drawing.Point(9, 10)
+        Me.ucrPnlAnnualWithin.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlAnnualWithin.Name = "ucrPnlAnnualWithin"
-        Me.ucrPnlAnnualWithin.Size = New System.Drawing.Size(594, 52)
+        Me.ucrPnlAnnualWithin.Size = New System.Drawing.Size(396, 35)
         Me.ucrPnlAnnualWithin.TabIndex = 0
         '
         'ucrChkDayRange
         '
         Me.ucrChkDayRange.AutoSize = True
         Me.ucrChkDayRange.Checked = False
-        Me.ucrChkDayRange.Location = New System.Drawing.Point(497, 600)
-        Me.ucrChkDayRange.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkDayRange.Location = New System.Drawing.Point(331, 403)
+        Me.ucrChkDayRange.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkDayRange.Name = "ucrChkDayRange"
-        Me.ucrChkDayRange.Size = New System.Drawing.Size(120, 34)
-        Me.ucrChkDayRange.TabIndex = 24
+        Me.ucrChkDayRange.Size = New System.Drawing.Size(82, 27)
+        Me.ucrChkDayRange.TabIndex = 25
         '
         'dlgClimaticSummary
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(621, 720)
+        Me.ClientSize = New System.Drawing.Size(436, 478)
         Me.Controls.Add(Me.ucrChkDayRange)
         Me.Controls.Add(Me.rdoDaily)
         Me.Controls.Add(Me.rdoStation)
@@ -494,7 +478,6 @@ Partial Class dlgClimaticSummary
         Me.Controls.Add(Me.rdoAnnual)
         Me.Controls.Add(Me.ucrPnlAnnualWithin)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgClimaticSummary"
