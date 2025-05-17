@@ -29,7 +29,7 @@ Public Class dlgModellingTree
 
     Private clsFactorFunction, clsLevelsFunction, clsMappingFunction, clsPlackettLuceFunction As New RFunction
     Private clsGetVariablesMetaDataFunction, clsRGetObjectFunction, clsGetRankingItemsFunction, clsNamesFunction As New RFunction
-    Private clsGetDataFrameFunction, clsGetVariablesFromMetaDataFunction, clsGetSecondDataFrameFunction, clsLibraryFunction, clsSecondLibraryFunction As New RFunction
+    Private clsGetDataFrameFunction, clsGetVariablesFromMetaDataFunction, clsGetSecondDataFrameFunction, clsLibraryFunction As New RFunction
     Private clsTildaOperator, clsRankingsOperator, clsEmptySpaceOperator, clsFormularTildaOperator, clsVarOperator, clsAssignOperator, clsSaveOperator As New ROperator
 
     'Sub dialog Functions and Operators
@@ -142,7 +142,6 @@ Public Class dlgModellingTree
         clsWrapBarFunction = New RFunction
         clsWrapPlotFunction = New RFunction
         clsWrapTrees = New RFunction
-        clsSecondLibraryFunction = New RFunction
         clsAddObjectHeatFunction = New RFunction
         clsBarfunction = New RFunction
         clsHeatFunction = New RFunction
@@ -256,9 +255,6 @@ Public Class dlgModellingTree
 
         clsLibraryFunction.SetRCommand("library")
         clsLibraryFunction.AddParameter("package_name", "PlackettLuce", bIncludeArgumentName:=False)
-
-        clsSecondLibraryFunction.SetRCommand("library")
-        clsSecondLibraryFunction.AddParameter("package_name", "patchwork", bIncludeArgumentName:=False)
 
         clsNamesFunction.SetRCommand("names")
         clsNamesFunction.AddParameter("x", "mod_list", bIncludeArgumentName:=False)
@@ -628,7 +624,7 @@ Public Class dlgModellingTree
             clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewStatsFunction:=clsStatsFunction,
             clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction,
             clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
-            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction, clsNewWrapTree:=clsWrapTrees, clsNewLibraryFunction:=clsSecondLibraryFunction
+            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction, clsNewWrapTree:=clsWrapTrees
         )
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = False
