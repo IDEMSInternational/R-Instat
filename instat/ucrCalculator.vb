@@ -109,6 +109,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdNasplin, "Spline interpolation of missing values. For example na.spline(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,2.5,4,7,12)")
         ttCalculator.SetToolTip(cmdNaest, "Missing values as the mean (usually) overall or with a factor. For example na.aggregate(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,3.75,4,7,3.75)")
         ttCalculator.SetToolTip(cmdRescale, "Transforms to (0, 1) scale, using (x - min)/(max - min)")
+        ttCalculator.SetToolTip(cmdRollApply, "rollapply: moving (or rolling) sum. For example rollapply(c(3,2,1,6,2),width=3,fill=NA, FUN=min) = (NA,1,1,1,NA)")
+
 
         'Logical and Symbols toooltips
         ttCalculator.SetToolTip(cmdPower, "power(^)or exponent and can also be given as **. For example 2^3 = 8")
@@ -2064,6 +2066,20 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scales::rescale( ,narm=TRUE)", 12)
         End If
+    End Sub
+
+    Private Sub cmdRollApply_Click(sender As Object, e As EventArgs) Handles cmdRollApply.Click
+        Dim clsRollApplyFunction As New RFunction
+
+        clsRollApplyFunction.SetPackageName("zoo")
+        clsRollApplyFunction.SetRCommand("rollapply")
+        clsRollApplyFunction.AddParameter("x", "", bIncludeArgumentName:=False, iPosition:=0)
+        clsRollApplyFunction.AddParameter("width", "3", iPosition:=1)
+        clsRollApplyFunction.AddParameter("FUN", "", iPosition:=2)
+        clsRollApplyFunction.AddParameter("fill", "NA", iPosition:=3)
+        clsRollApplyFunction.AddParameter("align", Chr(34) & "center" & Chr(34), iPosition:=4)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRollApplyFunction.ToScript, 41)
     End Sub
 
     Private Sub cmdRowRank_Click(sender As Object, e As EventArgs) Handles cmdRowRank.Click
