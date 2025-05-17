@@ -30,7 +30,7 @@ Public Class dlgSummaryTables
 
     Private clsDummyFunction As New RFunction
 
-    Private clsSummaryOperator, clsFrequencyOperator, clsJoiningPipeOperator, clsSpannerOperator As New ROperator
+    Private clsSummaryOperator, clsSelectOperator, clsFrequencyOperator, clsJoiningPipeOperator, clsSpannerOperator As New ROperator
 
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -188,6 +188,7 @@ Public Class dlgSummaryTables
         clsSummaryOperator = New ROperator
         clsFrequencyOperator = New ROperator
         clsSpannerOperator = New ROperator
+        clsSelectOperator = New ROperator
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -219,10 +220,14 @@ Public Class dlgSummaryTables
         clsFrequencyDefaultFunction.AddParameter("summaries", "count_label", iPosition:=11)
         clsFrequencyDefaultFunction.SetAssignToObject("frequency_table")
 
+        clsSelectOperator.SetOperation("%>%")
+        clsSelectOperator.AddParameter("left", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsSelectOperator.AddParameter("rigth", "select(-`summary-variable`)", iPosition:=1, bIncludeArgumentName:=False)
+        clsSelectOperator.SetAssignToObject("frequency_table")
+
         ' Gt function
         Dim clsGtFunction As New RFunction
-        clsGtFunction.SetPackageName("instatExtras")
-        clsGtFunction.SetRCommand("generate_summary_tables")
+        clsGtFunction.SetRCommand("format_gt_table")
 
         ClsTabSpannerDelimFunction.SetPackageName("gt")
         ClsTabSpannerDelimFunction.SetRCommand("tab_spanner_delim")
@@ -241,7 +246,7 @@ Public Class dlgSummaryTables
 
         clsFrequencyOperator.SetOperation("%>%")
         clsFrequencyOperator.bBrackets = False
-        clsFrequencyOperator.AddParameter("tableFun", clsRFunctionParameter:=clsFrequencyDefaultFunction, iPosition:=0)
+        clsFrequencyOperator.AddParameter("tableFun", clsROperatorParameter:=clsSelectOperator, iPosition:=0)
         clsFrequencyOperator.AddParameter("right", clsROperatorParameter:=clsSpannerOperator, iPosition:=3)
 
         clsJoiningPipeOperator.SetOperation("%>%")
@@ -583,6 +588,9 @@ Public Class dlgSummaryTables
             For i As Integer = varNames.Count - 1 To Math.Max(varNames.Count - numSumm, 0) Step -1
                 namesFromList.Add(varNames(i))
             Next
+
+            ' Reverse to ensure the summary is positioned last (right-most) in names_from
+            namesFromList.Reverse()
 
             ' Convert namesFromList to a comma-separated string for names_from parameter
             Dim varsSummary As String = "c(" & String.Join(",", namesFromList) & ")"
