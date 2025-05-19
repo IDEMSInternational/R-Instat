@@ -29,7 +29,7 @@ Public Class dlgModellingTree
 
     Private clsFactorFunction, clsLevelsFunction, clsMappingFunction, clsPlackettLuceFunction As New RFunction
     Private clsGetVariablesMetaDataFunction, clsRGetObjectFunction, clsGetRankingItemsFunction, clsNamesFunction As New RFunction
-    Private clsGetDataFrameFunction, clsGetVariablesFromMetaDataFunction, clsGetSecondDataFrameFunction, clsLibraryFunction As New RFunction
+    Private clsGetDataFrameFunction, clsGetVariablesFromMetaDataFunction, clsGetSecondDataFrameFunction, clsLibraryFunction, clsSecondLibraryFunction As New RFunction
     Private clsTildaOperator, clsRankingsOperator, clsEmptySpaceOperator, clsFormularTildaOperator, clsVarOperator, clsAssignOperator, clsSaveOperator As New ROperator
 
     'Sub dialog Functions and Operators
@@ -39,7 +39,7 @@ Public Class dlgModellingTree
     Private clsPairwiseProbFunction, clsPairwiseProbMainFunction, clsReliabilityFunction, clsItemsParFunction As New RFunction
     Private clsCoefOperator, clsAICOperator, clsDevianceOperator, clsPairwiseProbOperator, clsStatsOperator, clsModelOperator, clsPipeOperator As New ROperator
     Private clsAnnovaFunction, clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction As New RFunction
-    Private clsWrapBarFunction, clsWrapPlotFunction, clsPlacketFunction As New RFunction
+    Private clsWrapBarFunction, clsWrapPlotFunction, clsPlacketFunction, clsWrapTrees As New RFunction
 
     Private clsAddObjectHeatFunction, clsHeatFunction, clsTreeFunction, clsImportDataFunction As New RFunction
     Private clsPlotFunction, clsBarfunction As New RFunction
@@ -141,10 +141,12 @@ Public Class dlgModellingTree
         clsVarianCovaMatrixFunction = New RFunction
         clsWrapBarFunction = New RFunction
         clsWrapPlotFunction = New RFunction
+        clsWrapTrees = New RFunction
+        clsSecondLibraryFunction = New RFunction
         clsAddObjectHeatFunction = New RFunction
         clsBarfunction = New RFunction
         clsHeatFunction = New RFunction
-        'clsPlacketFunction = New RFunction
+        clsTreeFunction = New RFunction
         clsPlotFunction = New RFunction
         clsCoefOperator = New ROperator
         clsAICOperator = New ROperator
@@ -254,6 +256,9 @@ Public Class dlgModellingTree
 
         clsLibraryFunction.SetRCommand("library")
         clsLibraryFunction.AddParameter("package_name", "PlackettLuce", bIncludeArgumentName:=False)
+
+        clsSecondLibraryFunction.SetRCommand("library")
+        clsSecondLibraryFunction.AddParameter("package_name", "patchwork", bIncludeArgumentName:=False)
 
         clsNamesFunction.SetRCommand("names")
         clsNamesFunction.AddParameter("x", "mod_list", bIncludeArgumentName:=False)
@@ -431,6 +436,15 @@ Public Class dlgModellingTree
         clsHeatFunction.bExcludeAssignedFunctionOutput = False
         clsHeatFunction.iCallType = 3
 
+        clsTreeFunction.SetPackageName("purrr")
+        clsTreeFunction.SetRCommand("map2")
+        clsTreeFunction.AddParameter(".x", "mod_list", iPosition:=0)
+        clsTreeFunction.AddParameter(".y", "names(mod_list)", iPosition:=1)
+        clsTreeFunction.AddParameter(".f", "~plot_pltree(.x) + ggplot2::labs(caption = .y)")
+        clsTreeFunction.SetAssignTo("list_of_plots")
+        clsTreeFunction.bExcludeAssignedFunctionOutput = False
+        clsTreeFunction.iCallType = 3
+
         clsPlotFunction.SetPackageName("purrr")
         clsPlotFunction.SetRCommand("map2")
         clsPlotFunction.AddParameter(".x", "mod_list", iPosition:=0)
@@ -465,6 +479,17 @@ Public Class dlgModellingTree
         clsWrapPlotFunction.bExcludeAssignedFunctionOutput = False
         clsWrapPlotFunction.iCallType = 3
 
+        clsWrapTrees.SetPackageName("patchwork")
+        clsWrapTrees.SetRCommand("wrap_plots")
+        clsWrapTrees.AddParameter("x", "list_of_plots", iPosition:=0, bIncludeArgumentName:=False)
+        clsWrapTrees.bExcludeAssignedFunctionOutput = False
+        clsWrapTrees.iCallType = 3
+        clsWrapTrees.SetAssignToOutputObject(
+            strObjectName:="last_graph",
+            strRObjectTypeLabelToAssignTo:=RObjectTypeLabel.Graph,
+            strRObjectFormatToAssignTo:=RObjectFormat.Image,
+            strRObjectToAssignTo:="last_graph"
+        )
 
         ' PLACKET FUNCTION FOR THE MODEL OPTIONS SUB-DIALOG
         '---------------------------------------------------------------------------------------------------------------------------------------------
@@ -603,7 +628,7 @@ Public Class dlgModellingTree
             clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewStatsFunction:=clsStatsFunction,
             clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction,
             clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
-            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction
+            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction, clsNewWrapTree:=clsWrapTrees, clsNewLibraryFunction:=clsSecondLibraryFunction
         )
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = False
@@ -619,7 +644,7 @@ Public Class dlgModellingTree
         sdgDisplayModelOptions.ucrChkSave.Checked = False
         sdgDisplayModelOptions.ucrChkSave.Visible = False
         sdgDisplayModelOptions.rdoPlot.Enabled = False
-        sdgDisplayModelOptions.rdoTree.Enabled = False
+        sdgDisplayModelOptions.rdoTree.Enabled = True
         sdgDisplayModelOptions.rdoNoPlot.Enabled = True
         sdgDisplayModelOptions.rdoMap.Enabled = True
         sdgDisplayModelOptions.rdoBar.Enabled = True
