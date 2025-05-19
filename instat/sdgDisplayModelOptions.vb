@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class sdgDisplayModelOptions
     Private clsSummaryFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction, clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
     Private clsCoefFunction, clsStatsFunction, clsImportDataFunction As RFunction
-    Private clsDummyFunction, clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction, clsTreeFunction As RFunction
+    Private clsDummyFunction, clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction, clsTreeFunction, clsWrapTrees As RFunction
     Private clsPipeOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bInitialised As Boolean = False
@@ -123,6 +123,7 @@ Public Class sdgDisplayModelOptions
             ucrPnlPlots.AddRadioButton(rdoPlot)
             ucrPnlPlots.AddRadioButton(rdoMap)
             ucrPnlPlots.AddRadioButton(rdoBar)
+            ucrPnlPlots.AddRadioButton(rdoTree)
             ucrPnlPlots.AddParameterValuesCondition(rdoNoPlot, "plot", "True")
             ucrPnlPlots.AddParameterValuesCondition(rdoPlot, "plot", "False")
             ucrPnlPlots.AddParameterValuesCondition(rdoMap, "plot", "False")
@@ -146,7 +147,7 @@ Public Class sdgDisplayModelOptions
         bControlsInitialised = False
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction, clsNewImportDataFunction As RFunction, clsNewPipeOperator As ROperator, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction, clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction, clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction, clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewTreeFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction, clsNewImportDataFunction As RFunction, clsNewPipeOperator As ROperator, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction, clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction, clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction, clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewTreeFunction As RFunction, clsNewWrapTree As RFunction, Optional bReset As Boolean = False)
         ucrNudConfLevel.SetText("0.95")
         If Not bControlsInitialised Then
             InitialiseDialog()
@@ -182,6 +183,7 @@ Public Class sdgDisplayModelOptions
         clsTreeFunction = clsNewTreeFunction
         clsWrapBarFunction = clsNewWrapBarFunction
         clsWrapPlotFunction = clsNewWrapPlotFunction
+        clsWrapTrees = clsNewWrapTree
 
         If bReset Then
             ucrChkANOVA.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
@@ -378,9 +380,11 @@ Public Class sdgDisplayModelOptions
             clsRSyntax.RemoveFromBeforeCodes(clsWrapBarFunction)
         End If
         If rdoTree.Checked Then
-            clsRSyntax.AddToBeforeCodes(clsTreeFunction) ' purrr::map2(.x = mod_list, .y = names(mod_list), .f = ~ plot(x = .x))
+            clsRSyntax.AddToBeforeCodes(clsTreeFunction)
+            clsRSyntax.AddToBeforeCodes(clsWrapTrees)
         Else
             clsRSyntax.RemoveFromBeforeCodes(clsTreeFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsWrapTrees)
         End If
         If rdoPlot.Checked Then
             clsRSyntax.AddToBeforeCodes(clsPlotFunction)
