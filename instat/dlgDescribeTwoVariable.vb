@@ -74,7 +74,6 @@ Public Class dlgDescribeTwoVariable
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-
         iUcrBaseXLocation = ucrBase.Location.X
         iDialogueXsize = Me.Size.Width
 
