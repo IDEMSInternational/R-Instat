@@ -6139,5 +6139,11 @@ Public Class ucrCalculator
         End If
     End Sub
 
-
+    Private Sub cmdIdentical_Click(sender As Object, e As EventArgs) Handles cmdIdentical.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::count_differences(x= ,y= )", 6)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::count_differences(, )", 3)
+        End If
+    End Sub
 End Class
