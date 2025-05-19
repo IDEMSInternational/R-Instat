@@ -19,7 +19,7 @@ Public Class dlgSpells
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsSpellLength, clsMaxSpellManipulation, clsIfElseFirstDoyFilledFunction, clsSubSpellLength1 As New RFunction
-    Private clsMaxSpellSummary, clsMaxValueList, clsMaxFunction, clsMaxSpellSubCalcs As New RFunction
+    Private clsMaxSpellSummary, clsDummyFunction, clsMaxValueList, clsMaxFunction, clsMaxSpellSubCalcs As New RFunction
     Private clsDayFilter, clsGroupBy, clsGroupByStation, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsSpellLogicalCalc, clsSpellsLogicalCalc, clsSpellsLogCalcFunc, clsDotSpellsFunction As New RFunction
@@ -114,7 +114,11 @@ Public Class dlgSpells
         'ucrChkConditional.SetText("Assume condition not satisfied at start of each period")
         'ucrChkConditional.SetParameter(New RParameter("initial_value"))
         'ucrChkConditional.SetValuesCheckedAndUnchecked("0", "NA_real_")
-        'ucrChkConditional.SetRDefault("NA_real_")
+        'ucrChkConditional.SetRDefault("NA_real_
+
+        ucrChkDayRange.SetText("Day Range")
+        ucrChkDayRange.AddParameterValuesCondition(True, "day", "True")
+        ucrChkDayRange.AddParameterValuesCondition(False, "day", "False")
 
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
@@ -136,6 +140,7 @@ Public Class dlgSpells
         clsSpellFilterFunction = New RFunction
         clsDotSpellsFunction = New RFunction
         clsIfElseFirstDoyFilledFunction = New RFunction
+        clsDummyFunction = New RFunction
         Dim strSpellLogical As String = "spell_day"
         Dim strSpellName As String = "spell_length"
 
@@ -172,6 +177,8 @@ Public Class dlgSpells
         ucrInputNewColumnName.SetName("spells")
         ucrInputSpellLower.SetName(0)
         ucrInputSpellUpper.SetName(0.85)
+
+        clsDummyFunction.AddParameter("day", "False", iPosition:=0)
 
         ' key
 
@@ -315,7 +322,6 @@ Public Class dlgSpells
         clsMaxSpellManipulation.SetRCommand("list")
         clsMaxSpellManipulation.AddParameter("manip1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
         clsMaxSpellManipulation.AddParameter("manip2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=1)
-        clsMaxSpellManipulation.AddParameter("manip3", clsRFunctionParameter:=clsDayFilter, bIncludeArgumentName:=False, iPosition:=2)
 
         clsSpellsFunction.bToScriptAsRString = True
         clsSpellsFunction.SetPackageName("instatClimatic")
@@ -329,7 +335,7 @@ Public Class dlgSpells
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxSpellSummary, iPosition:=0)
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
-
+        AddDayRange()
         'Base Function
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
     End Sub
@@ -349,12 +355,16 @@ Public Class dlgSpells
         ucrInputSpellUpper.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxSpellSummary, bReset)
         ucrPnlOptions.SetRCode(clsCurrCalc, bReset)
+        If bReset Then
+            ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
+        End If
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
         sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFilter, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
         sdgDoyRange.ShowDialog()
         UpdateDayFilterPreview()
+        AddDayRange()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -498,5 +508,22 @@ Public Class dlgSpells
         Else
             ucrInputFilterPreview.SetName(clsDayFromAndToOperator.ToScript())
         End If
+    End Sub
+
+    Private Sub AddDayRange()
+
+        If ucrChkDayRange.Checked Then
+            cmdDoyRange.Enabled = True
+            ucrInputFilterPreview.Visible = True
+            clsMaxSpellManipulation.AddParameter("manip3", clsRFunctionParameter:=clsDayFilter, bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            cmdDoyRange.Enabled = False
+            ucrInputFilterPreview.Visible = False
+            clsMaxSpellManipulation.RemoveParameterByName("manip3")
+        End If
+    End Sub
+
+    Private Sub ucrChkDayRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDayRange.ControlValueChanged
+        AddDayRange()
     End Sub
 End Class
