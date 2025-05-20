@@ -498,7 +498,6 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdFrac20, "Give fraction our of 20 for a decimal value. For example for 0.36 the value is 7/20")
         ttCalculator.SetToolTip(cmdFrac100, "Give fraction our of 100 for a decimal value. For example for 0.36 the value is 36/100")
         ttCalculator.SetToolTip(cmdFracDen, "Give fraction for a given denominator. For example frac_den(0.36, 50) gives 18/50")
-        ttCalculator.SetToolTip(cmdIdentical, "Returns the number of rows not identical")
         '---------------------------------------------------------------------------------------------------------------------
 
         Const strTooltipCmdLength = "number Of observations: For example length(c(1,2,3,4,NA)) = 5 "
@@ -6140,11 +6139,5 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdIdentical_Click(sender As Object, e As EventArgs) Handles cmdIdentical.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::count_differences(x= ,y= )", 6)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::count_differences(, )", 3)
-        End If
-    End Sub
+
 End Class
