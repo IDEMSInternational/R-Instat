@@ -35,7 +35,20 @@ Public Class dlgReorderLevels
     Private ReadOnly strAscending As String = "Ascending"
     Private ReadOnly strDescending As String = "Descending"
     Private _strSelectedColumn As String
+    Public enumReorderLevelsMode As String = ReorderLevelsMode.Prepare
+    Public Enum ReorderLevelsMode
+        Prepare
+        Tricot
+    End Enum
 
+    Private Sub SetHelpOptions()
+        Select Case enumReorderLevelsMode
+            Case ReorderLevelsMode.Prepare
+                ucrBase.iHelpTopicID = 36
+            Case ReorderLevelsMode.Tricot
+                ucrBase.iHelpTopicID = 747
+        End Select
+    End Sub
 
     Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then

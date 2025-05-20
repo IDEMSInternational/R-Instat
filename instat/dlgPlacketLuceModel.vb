@@ -42,6 +42,8 @@ Public Class dlgPlacketLuceModel
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 704
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorTraitsPL.SetParameter(New RParameter("data_name", 0))
