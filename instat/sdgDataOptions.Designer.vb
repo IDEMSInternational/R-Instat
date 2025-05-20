@@ -41,7 +41,6 @@ Partial Class sdgDataOptions
         Me.tbcDataOptions = New System.Windows.Forms.TabControl()
         Me.tbRows = New System.Windows.Forms.TabPage()
         Me.cmdRemoveCurrentFilter = New System.Windows.Forms.Button()
-        Me.ucrSelectorFilters = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
         Me.grpApplyOptions = New System.Windows.Forms.GroupBox()
@@ -50,6 +49,7 @@ Partial Class sdgDataOptions
         Me.cmdDefineNewFilter = New System.Windows.Forms.Button()
         Me.lblFilter = New System.Windows.Forms.Label()
         Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
+        Me.ucrSelectorFilters = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbColumns = New System.Windows.Forms.TabPage()
         Me.lblSelectPreview = New System.Windows.Forms.Label()
         Me.ucrInputSelectPreview = New instat.ucrInputTextBox()
@@ -59,8 +59,8 @@ Partial Class sdgDataOptions
         Me.rdoColumnsForAllDialogs = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverSelect = New instat.ucrReceiverSingle()
         Me.lblSelection = New System.Windows.Forms.Label()
-        Me.ucrSelectorForSelectColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdDefineNewSelect = New System.Windows.Forms.Button()
+        Me.ucrSelectorForSelectColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSubDialogueBase = New instat.ucrButtonsSubdialogue()
         Me.tbcDataOptions.SuspendLayout()
         Me.tbRows.SuspendLayout()
@@ -111,18 +111,6 @@ Partial Class sdgDataOptions
         Me.cmdRemoveCurrentFilter.Tag = "Define_New_Filter"
         Me.cmdRemoveCurrentFilter.Text = "Remove Current Filter"
         Me.cmdRemoveCurrentFilter.UseVisualStyleBackColor = True
-        '
-        'ucrSelectorFilters
-        '
-        Me.ucrSelectorFilters.AutoSize = True
-        Me.ucrSelectorFilters.bDropUnusedFilterLevels = False
-        Me.ucrSelectorFilters.bShowHiddenColumns = False
-        Me.ucrSelectorFilters.bUseCurrentFilter = True
-        Me.ucrSelectorFilters.Location = New System.Drawing.Point(4, 22)
-        Me.ucrSelectorFilters.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
-        Me.ucrSelectorFilters.Size = New System.Drawing.Size(477, 411)
-        Me.ucrSelectorFilters.TabIndex = 0
         '
         'ucrInputFilterPreview
         '
@@ -226,6 +214,18 @@ Partial Class sdgDataOptions
         Me.ucrReceiverFilter.TabIndex = 2
         Me.ucrReceiverFilter.ucrSelector = Nothing
         '
+        'ucrSelectorFilters
+        '
+        Me.ucrSelectorFilters.AutoSize = True
+        Me.ucrSelectorFilters.bDropUnusedFilterLevels = False
+        Me.ucrSelectorFilters.bShowHiddenColumns = False
+        Me.ucrSelectorFilters.bUseCurrentFilter = True
+        Me.ucrSelectorFilters.Location = New System.Drawing.Point(4, 22)
+        Me.ucrSelectorFilters.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
+        Me.ucrSelectorFilters.Size = New System.Drawing.Size(477, 411)
+        Me.ucrSelectorFilters.TabIndex = 0
+        '
         'tbColumns
         '
         Me.tbColumns.Controls.Add(Me.lblSelectPreview)
@@ -250,7 +250,7 @@ Partial Class sdgDataOptions
         '
         Me.lblSelectPreview.AutoSize = True
         Me.lblSelectPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectPreview.Location = New System.Drawing.Point(14, 316)
+        Me.lblSelectPreview.Location = New System.Drawing.Point(12, 316)
         Me.lblSelectPreview.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSelectPreview.Name = "lblSelectPreview"
         Me.lblSelectPreview.Size = New System.Drawing.Size(137, 20)
@@ -263,10 +263,10 @@ Partial Class sdgDataOptions
         Me.ucrInputSelectPreview.AutoSize = True
         Me.ucrInputSelectPreview.IsMultiline = True
         Me.ucrInputSelectPreview.IsReadOnly = False
-        Me.ucrInputSelectPreview.Location = New System.Drawing.Point(158, 298)
+        Me.ucrInputSelectPreview.Location = New System.Drawing.Point(151, 314)
         Me.ucrInputSelectPreview.Margin = New System.Windows.Forms.Padding(15)
         Me.ucrInputSelectPreview.Name = "ucrInputSelectPreview"
-        Me.ucrInputSelectPreview.Size = New System.Drawing.Size(357, 53)
+        Me.ucrInputSelectPreview.Size = New System.Drawing.Size(364, 30)
         Me.ucrInputSelectPreview.TabIndex = 9
         '
         'cmdRemoveCurrentColumnSelection
@@ -347,18 +347,6 @@ Partial Class sdgDataOptions
         Me.lblSelection.TabIndex = 1
         Me.lblSelection.Text = "Selection:"
         '
-        'ucrSelectorForSelectColumns
-        '
-        Me.ucrSelectorForSelectColumns.AutoSize = True
-        Me.ucrSelectorForSelectColumns.bDropUnusedFilterLevels = False
-        Me.ucrSelectorForSelectColumns.bShowHiddenColumns = False
-        Me.ucrSelectorForSelectColumns.bUseCurrentFilter = True
-        Me.ucrSelectorForSelectColumns.Location = New System.Drawing.Point(4, 4)
-        Me.ucrSelectorForSelectColumns.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForSelectColumns.Name = "ucrSelectorForSelectColumns"
-        Me.ucrSelectorForSelectColumns.Size = New System.Drawing.Size(477, 411)
-        Me.ucrSelectorForSelectColumns.TabIndex = 0
-        '
         'cmdDefineNewSelect
         '
         Me.cmdDefineNewSelect.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -370,6 +358,18 @@ Partial Class sdgDataOptions
         Me.cmdDefineNewSelect.Tag = ""
         Me.cmdDefineNewSelect.Text = "Define New Selection"
         Me.cmdDefineNewSelect.UseVisualStyleBackColor = True
+        '
+        'ucrSelectorForSelectColumns
+        '
+        Me.ucrSelectorForSelectColumns.AutoSize = True
+        Me.ucrSelectorForSelectColumns.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForSelectColumns.bShowHiddenColumns = False
+        Me.ucrSelectorForSelectColumns.bUseCurrentFilter = True
+        Me.ucrSelectorForSelectColumns.Location = New System.Drawing.Point(4, 4)
+        Me.ucrSelectorForSelectColumns.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForSelectColumns.Name = "ucrSelectorForSelectColumns"
+        Me.ucrSelectorForSelectColumns.Size = New System.Drawing.Size(477, 411)
+        Me.ucrSelectorForSelectColumns.TabIndex = 0
         '
         'ucrSubDialogueBase
         '
