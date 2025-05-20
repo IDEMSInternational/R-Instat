@@ -107,8 +107,8 @@ Public Class dlgCorrelation
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ttKendall.SetToolTip(rdoKendall, "A rank-based measure for monotonic relationships (i.e., as one variable increases, the other consistently increases or decreases). Generally more robust to small sample sizes and ties than Spearman.")
-        ttPearson.SetToolTip(rdoPearson, "A rank-based measure that captures monotonic relationships (i.e., as one variable increases, the other consistently increases or decreases). Less sensitive to outliers; does not assume normality.")
-        ttSpearman.SetToolTip(rdoSpearman, "Measures linear relationships between two continuous variables. Assumes normality and is sensitive to outliers")
+        ttPearson.SetToolTip(rdoPearson, "Measures linear relationships between two continuous variables. Assumes normality and is sensitive to outliers")
+        ttSpearman.SetToolTip(rdoSpearman, "A rank-based measure that captures monotonic relationships (i.e., as one variable increases, the other consistently increases or decreases). Less sensitive to outliers; does not assume normality.")
 
         ucrReceiverFirstColumn.SetParameter(New RParameter("x", 0))
         ucrReceiverFirstColumn.SetParameterIsRFunction()
