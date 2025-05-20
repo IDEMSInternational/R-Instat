@@ -109,6 +109,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlExtremesType = New instat.UcrPanel()
         Me.ucrChkDayRange = New instat.ucrCheck()
+        Me.rdoStation = New System.Windows.Forms.RadioButton()
         Me.grpMinMaxOptions.SuspendLayout()
         Me.grpPeakOptions.SuspendLayout()
         Me.grpThresholdOptions.SuspendLayout()
@@ -267,7 +268,7 @@ Partial Class dlgExtremesClimatic
         Me.rdoMinMax.FlatAppearance.BorderSize = 2
         Me.rdoMinMax.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMinMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoMinMax.Location = New System.Drawing.Point(81, 6)
+        Me.rdoMinMax.Location = New System.Drawing.Point(39, 6)
         Me.rdoMinMax.Name = "rdoMinMax"
         Me.rdoMinMax.Size = New System.Drawing.Size(88, 27)
         Me.rdoMinMax.TabIndex = 1
@@ -283,7 +284,7 @@ Partial Class dlgExtremesClimatic
         Me.rdoPeaks.FlatAppearance.BorderSize = 2
         Me.rdoPeaks.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPeaks.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoPeaks.Location = New System.Drawing.Point(256, 6)
+        Me.rdoPeaks.Location = New System.Drawing.Point(210, 6)
         Me.rdoPeaks.Name = "rdoPeaks"
         Me.rdoPeaks.Size = New System.Drawing.Size(87, 27)
         Me.rdoPeaks.TabIndex = 3
@@ -648,7 +649,7 @@ Partial Class dlgExtremesClimatic
         Me.rdoThreshold.FlatAppearance.BorderSize = 2
         Me.rdoThreshold.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoThreshold.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoThreshold.Location = New System.Drawing.Point(169, 6)
+        Me.rdoThreshold.Location = New System.Drawing.Point(125, 6)
         Me.rdoThreshold.Name = "rdoThreshold"
         Me.rdoThreshold.Size = New System.Drawing.Size(87, 27)
         Me.rdoThreshold.TabIndex = 2
@@ -878,11 +879,12 @@ Partial Class dlgExtremesClimatic
         '
         'ucrPnlExtremesType
         '
+        Me.ucrPnlExtremesType.AccessibleDescription = "                              "
         Me.ucrPnlExtremesType.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlExtremesType.Location = New System.Drawing.Point(72, 2)
+        Me.ucrPnlExtremesType.Location = New System.Drawing.Point(36, 2)
         Me.ucrPnlExtremesType.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlExtremesType.Name = "ucrPnlExtremesType"
-        Me.ucrPnlExtremesType.Size = New System.Drawing.Size(280, 37)
+        Me.ucrPnlExtremesType.Size = New System.Drawing.Size(359, 37)
         Me.ucrPnlExtremesType.TabIndex = 0
         '
         'ucrChkDayRange
@@ -895,12 +897,29 @@ Partial Class dlgExtremesClimatic
         Me.ucrChkDayRange.Size = New System.Drawing.Size(80, 23)
         Me.ucrChkDayRange.TabIndex = 54
         '
+        'rdoStation
+        '
+        Me.rdoStation.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoStation.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStation.FlatAppearance.BorderSize = 2
+        Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoStation.Location = New System.Drawing.Point(295, 6)
+        Me.rdoStation.Name = "rdoStation"
+        Me.rdoStation.Size = New System.Drawing.Size(88, 27)
+        Me.rdoStation.TabIndex = 55
+        Me.rdoStation.TabStop = True
+        Me.rdoStation.Text = "Station"
+        Me.rdoStation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoStation.UseVisualStyleBackColor = True
+        '
         'dlgExtremesClimatic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(429, 467)
+        Me.Controls.Add(Me.rdoStation)
         Me.Controls.Add(Me.ucrChkDayRange)
         Me.Controls.Add(Me.ucrChkDeclustering)
         Me.Controls.Add(Me.grpDeclusteringOptions)
@@ -1026,4 +1045,5 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents ucrChkRunLength As ucrCheck
     Friend WithEvents ucrChkDeclustering As ucrCheck
     Friend WithEvents ucrChkDayRange As ucrCheck
+    Friend WithEvents rdoStation As RadioButton
 End Class
