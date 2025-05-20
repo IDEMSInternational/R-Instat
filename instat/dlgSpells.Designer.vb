@@ -63,6 +63,7 @@ Partial Class dlgSpells
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrSelectorForSpells = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.rdoStation = New System.Windows.Forms.RadioButton()
         Me.grpRainParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -133,7 +134,7 @@ Partial Class dlgSpells
         Me.ucrChkDayRange.AutoSize = True
         Me.ucrChkDayRange.Checked = False
         Me.ucrChkDayRange.Location = New System.Drawing.Point(335, 29)
-        Me.ucrChkDayRange.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrChkDayRange.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkDayRange.Name = "ucrChkDayRange"
         Me.ucrChkDayRange.Size = New System.Drawing.Size(80, 23)
         Me.ucrChkDayRange.TabIndex = 21
@@ -145,7 +146,7 @@ Partial Class dlgSpells
         Me.ucrInputFilterPreview.IsMultiline = False
         Me.ucrInputFilterPreview.IsReadOnly = True
         Me.ucrInputFilterPreview.Location = New System.Drawing.Point(90, 25)
-        Me.ucrInputFilterPreview.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputFilterPreview.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
         Me.ucrInputFilterPreview.TabIndex = 16
@@ -168,7 +169,7 @@ Partial Class dlgSpells
         Me.ucrInputSpellLower.IsMultiline = False
         Me.ucrInputSpellLower.IsReadOnly = False
         Me.ucrInputSpellLower.Location = New System.Drawing.Point(168, 55)
-        Me.ucrInputSpellLower.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputSpellLower.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
         Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputSpellLower.TabIndex = 18
@@ -180,7 +181,7 @@ Partial Class dlgSpells
         Me.ucrInputCondition.GetSetSelectedIndex = -1
         Me.ucrInputCondition.IsReadOnly = False
         Me.ucrInputCondition.Location = New System.Drawing.Point(13, 55)
-        Me.ucrInputCondition.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputCondition.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputCondition.Name = "ucrInputCondition"
         Me.ucrInputCondition.Size = New System.Drawing.Size(141, 21)
         Me.ucrInputCondition.TabIndex = 17
@@ -192,7 +193,7 @@ Partial Class dlgSpells
         Me.ucrInputSpellUpper.IsMultiline = False
         Me.ucrInputSpellUpper.IsReadOnly = False
         Me.ucrInputSpellUpper.Location = New System.Drawing.Point(272, 55)
-        Me.ucrInputSpellUpper.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputSpellUpper.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
         Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputSpellUpper.TabIndex = 20
@@ -224,7 +225,7 @@ Partial Class dlgSpells
         Me.rdoAnnuel.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAnnuel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAnnuel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAnnuel.Location = New System.Drawing.Point(91, 8)
+        Me.rdoAnnuel.Location = New System.Drawing.Point(60, 8)
         Me.rdoAnnuel.Name = "rdoAnnuel"
         Me.rdoAnnuel.Size = New System.Drawing.Size(130, 28)
         Me.rdoAnnuel.TabIndex = 1
@@ -242,7 +243,7 @@ Partial Class dlgSpells
         Me.rdoSpells.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSpells.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSpells.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSpells.Location = New System.Drawing.Point(220, 8)
+        Me.rdoSpells.Location = New System.Drawing.Point(188, 8)
         Me.rdoSpells.Name = "rdoSpells"
         Me.rdoSpells.Size = New System.Drawing.Size(110, 28)
         Me.rdoSpells.TabIndex = 2
@@ -254,10 +255,10 @@ Partial Class dlgSpells
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(90, 3)
-        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(58, 3)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(243, 36)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(360, 36)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrInputNewColumnName
@@ -267,7 +268,7 @@ Partial Class dlgSpells
         Me.ucrInputNewColumnName.IsMultiline = False
         Me.ucrInputNewColumnName.IsReadOnly = False
         Me.ucrInputNewColumnName.Location = New System.Drawing.Point(171, 360)
-        Me.ucrInputNewColumnName.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputNewColumnName.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
         Me.ucrInputNewColumnName.Size = New System.Drawing.Size(187, 21)
         Me.ucrInputNewColumnName.TabIndex = 22
@@ -354,10 +355,28 @@ Partial Class dlgSpells
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 387)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 23
+        '
+        'rdoStation
+        '
+        Me.rdoStation.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoStation.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoStation.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStation.FlatAppearance.BorderSize = 2
+        Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoStation.Location = New System.Drawing.Point(296, 8)
+        Me.rdoStation.Name = "rdoStation"
+        Me.rdoStation.Size = New System.Drawing.Size(110, 28)
+        Me.rdoStation.TabIndex = 24
+        Me.rdoStation.Tag = "All_Spells"
+        Me.rdoStation.Text = "Station"
+        Me.rdoStation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoStation.UseVisualStyleBackColor = False
         '
         'dlgSpells
         '
@@ -365,6 +384,7 @@ Partial Class dlgSpells
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(447, 441)
+        Me.Controls.Add(Me.rdoStation)
         Me.Controls.Add(Me.rdoAnnuel)
         Me.Controls.Add(Me.rdoSpells)
         Me.Controls.Add(Me.ucrPnlOptions)
@@ -422,4 +442,5 @@ Partial Class dlgSpells
     Friend WithEvents rdoSpells As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents ucrChkDayRange As ucrCheck
+    Friend WithEvents rdoStation As RadioButton
 End Class
