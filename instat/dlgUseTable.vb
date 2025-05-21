@@ -128,7 +128,7 @@ Public Class dlgUseTable
     Private Sub btnTableOptions_Click(sender As Object, e As EventArgs) Handles btnTableOptions.Click
         sdgTableOptions.Setup(ucrTablesSelector.strCurrentDataFrame, clsGtTableROperator)
         sdgTableOptions.ShowDialog(Me)
-        Add() ' Call AFTER user closes the dialog
+        Add()
     End Sub
 
 
