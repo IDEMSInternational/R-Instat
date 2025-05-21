@@ -29,7 +29,6 @@ Public Class ucrColumnLabels
         Me.clsOperator = clsOperator
 
         ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
-        dataGridColLabels.Rows.Clear()
 
         clsRenameFunction.clsParameters.Clear()
 
