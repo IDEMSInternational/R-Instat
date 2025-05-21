@@ -283,6 +283,7 @@ Partial Class ucrCalculator
         Me.cmdCos = New System.Windows.Forms.Button()
         Me.cmdSqrt = New System.Windows.Forms.Button()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.cmdIdentical = New System.Windows.Forms.Button()
         Me.cmdQuantile3 = New System.Windows.Forms.Button()
         Me.cmdwheremin = New System.Windows.Forms.Button()
         Me.cmdwhichmax = New System.Windows.Forms.Button()
@@ -1870,18 +1871,18 @@ Partial Class ucrCalculator
         Me.ContextMenuStripFactor.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ContextMenuStripFactor.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FactorForcatsToolStripMenuItem, Me.LabelledToolStripMenuItem})
         Me.ContextMenuStripFactor.Name = "ContextMenuStrip1"
-        Me.ContextMenuStripFactor.Size = New System.Drawing.Size(241, 101)
+        Me.ContextMenuStripFactor.Size = New System.Drawing.Size(146, 68)
         '
         'FactorForcatsToolStripMenuItem
         '
         Me.FactorForcatsToolStripMenuItem.Name = "FactorForcatsToolStripMenuItem"
-        Me.FactorForcatsToolStripMenuItem.Size = New System.Drawing.Size(240, 32)
+        Me.FactorForcatsToolStripMenuItem.Size = New System.Drawing.Size(145, 32)
         Me.FactorForcatsToolStripMenuItem.Text = "forcats"
         '
         'LabelledToolStripMenuItem
         '
         Me.LabelledToolStripMenuItem.Name = "LabelledToolStripMenuItem"
-        Me.LabelledToolStripMenuItem.Size = New System.Drawing.Size(240, 32)
+        Me.LabelledToolStripMenuItem.Size = New System.Drawing.Size(145, 32)
         Me.LabelledToolStripMenuItem.Text = "labelled"
         '
         'cmdShuffle
@@ -3333,6 +3334,7 @@ Partial Class ucrCalculator
         '
         'grpSummary
         '
+        Me.grpSummary.Controls.Add(Me.cmdIdentical)
         Me.grpSummary.Controls.Add(Me.cmdQuantile3)
         Me.grpSummary.Controls.Add(Me.cmdwheremin)
         Me.grpSummary.Controls.Add(Me.cmdwhichmax)
@@ -3375,13 +3377,23 @@ Partial Class ucrCalculator
         Me.grpSummary.TabStop = False
         Me.grpSummary.Text = "Summary"
         '
+        'cmdIdentical
+        '
+        Me.cmdIdentical.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdIdentical.Location = New System.Drawing.Point(94, 282)
+        Me.cmdIdentical.Name = "cmdIdentical"
+        Me.cmdIdentical.Size = New System.Drawing.Size(84, 45)
+        Me.cmdIdentical.TabIndex = 195
+        Me.cmdIdentical.Text = "identical"
+        Me.cmdIdentical.UseVisualStyleBackColor = True
+        '
         'cmdQuantile3
         '
         Me.cmdQuantile3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQuantile3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQuantile3.Location = New System.Drawing.Point(322, 282)
+        Me.cmdQuantile3.Location = New System.Drawing.Point(342, 282)
         Me.cmdQuantile3.Name = "cmdQuantile3"
-        Me.cmdQuantile3.Size = New System.Drawing.Size(104, 45)
+        Me.cmdQuantile3.Size = New System.Drawing.Size(84, 45)
         Me.cmdQuantile3.TabIndex = 194
         Me.cmdQuantile3.Text = "quantile3"
         Me.cmdQuantile3.UseVisualStyleBackColor = True
@@ -3549,7 +3561,7 @@ Partial Class ucrCalculator
         Me.cmdCor.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdCor.Location = New System.Drawing.Point(3, 282)
         Me.cmdCor.Name = "cmdCor"
-        Me.cmdCor.Size = New System.Drawing.Size(108, 45)
+        Me.cmdCor.Size = New System.Drawing.Size(93, 45)
         Me.cmdCor.TabIndex = 175
         Me.cmdCor.Text = "cor"
         Me.cmdCor.UseVisualStyleBackColor = True
@@ -3557,9 +3569,9 @@ Partial Class ucrCalculator
         'cmdCov
         '
         Me.cmdCov.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCov.Location = New System.Drawing.Point(110, 282)
+        Me.cmdCov.Location = New System.Drawing.Point(177, 282)
         Me.cmdCov.Name = "cmdCov"
-        Me.cmdCov.Size = New System.Drawing.Size(108, 45)
+        Me.cmdCov.Size = New System.Drawing.Size(85, 45)
         Me.cmdCov.TabIndex = 174
         Me.cmdCov.Text = "cov"
         Me.cmdCov.UseVisualStyleBackColor = True
@@ -3665,9 +3677,9 @@ Partial Class ucrCalculator
         '
         Me.cmdQuantile.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdQuantile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQuantile.Location = New System.Drawing.Point(216, 282)
+        Me.cmdQuantile.Location = New System.Drawing.Point(260, 282)
         Me.cmdQuantile.Name = "cmdQuantile"
-        Me.cmdQuantile.Size = New System.Drawing.Size(108, 45)
+        Me.cmdQuantile.Size = New System.Drawing.Size(84, 45)
         Me.cmdQuantile.TabIndex = 164
         Me.cmdQuantile.Text = "quantile"
         Me.cmdQuantile.UseVisualStyleBackColor = True
@@ -7648,6 +7660,7 @@ Partial Class ucrCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpList)
         Me.Controls.Add(Me.ucrChkStoreScalar)
         Me.Controls.Add(Me.cmdRhelpList)
@@ -7661,7 +7674,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.ucrSelectorForCalculations)
         Me.Controls.Add(Me.ucrReceiverForCalculation)
         Me.Controls.Add(Me.lblExpression)
-        Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpModifier)
@@ -8369,4 +8381,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdFrac10 As Button
     Friend WithEvents cmdQuantile3 As Button
     Friend WithEvents LabelledToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents cmdIdentical As Button
 End Class
