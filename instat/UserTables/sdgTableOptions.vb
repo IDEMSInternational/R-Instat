@@ -39,14 +39,14 @@ Public Class sdgTableOptions
 
     Private Sub InitialiseDialog()
         ucrSdgBaseButtons.iHelpTopicID = 146
-        'ucrNewCellFormats.Visible = True
+
         ucrChkSelectTheme.Checked = True
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
 
         ucrChkDataFormat.SetText("Specify the Data Format")
         ucrChkMissingValues.SetText("Replace NA")
-
+        ucrChkDataFormat.Enabled = False
         grpMissingValues.Visible = False
         btnNumberFormat.Visible = False
         btnDateFormat.Visible = False
@@ -79,7 +79,6 @@ Public Class sdgTableOptions
         ucrRows.Setup(strDataFrameName, clsOperator)
         ucrColumns.Setup(strDataFrameName, clsOperator)
         ucrCells.Setup(strDataFrameName, clsOperator)
-        'ucrNewCellFormats.Setup(strDataFrameName, clsOperator)
         ucrSourceNotes.Setup(clsOperator)
         ucrOtherStyles.Setup(clsOperator)
 
@@ -100,7 +99,6 @@ Public Class sdgTableOptions
         ucrCells.SetValuesToOperator()
         ucrSourceNotes.SetValuesToOperator()
         ucrOtherStyles.SetValuesToOperator()
-        'ucrNewCellFormats.SetValuesToOperator()
 
         SetThemeValuesOnReturn(clsOperator)
         SetSubMissingValuesOnReturn(clsOperator)

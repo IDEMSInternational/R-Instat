@@ -17,6 +17,7 @@
 Imports instat.Translations
 
 Public Class sdgBeforeTablesOption
+    Private lstFormatRFunctions As New List(Of RFunction)
 
     Private clsOperator As ROperator
     Private clsThemeRFunction, clsSubMissingRFunction As RFunction
@@ -40,13 +41,12 @@ Public Class sdgBeforeTablesOption
     Private Sub InitialiseDialog()
         ucrSdgBaseButtons.iHelpTopicID = 146
         ucrChkSelectTheme.Checked = True
-        'ucrNewCellFormats.Visible = True
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
 
         ucrChkDataFormat.SetText("Specify the Data Format")
         ucrChkMissingValues.SetText("Replace NA")
-
+        ucrChkDataFormat.Enabled = False
         grpMissingValues.Visible = False
         btnNumberFormat.Visible = False
         btnDateFormat.Visible = False
@@ -76,7 +76,6 @@ Public Class sdgBeforeTablesOption
         ucrHeader.Setup(clsOperator)
         ucrSourceNotes.Setup(clsOperator)
         ucrOtherStyles.Setup(clsOperator)
-        'ucrNewCellFormats.Setup(strDataFrameName, clsOperator)
 
         ucrHeader.ucrInputTitle.SetText(dlgGeneralTable.ucrInputTitle.GetText)
         ucrHeader.ucrInputTitleFooter.SetText(dlgGeneralTable.ucrInputTitleFooter.GetText)
@@ -85,14 +84,13 @@ Public Class sdgBeforeTablesOption
         sdgTableStyles.GetNewUserInputAsRFunction()
         SetupTheme(clsOperator)
         SetupSubMissing(clsOperator)
+        SetupFormatFunctions(clsOperator)
     End Sub
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
         ucrHeader.SetValuesToOperator()
         ucrSourceNotes.SetValuesToOperator()
         ucrOtherStyles.SetValuesToOperator()
-        'ucrNewCellFormats.SetValuesToOperator()
-        'ucrColumnNewMissingTexts.SetValuesToOperator()
         SetThemeValuesOnReturn(clsOperator)
         SetSubMissingValuesOnReturn(clsOperator)
     End Sub
@@ -226,7 +224,10 @@ Public Class sdgBeforeTablesOption
         clsFormatRFunction = sdgCellFormatTextOptions.GetNewUserInputAsRFunction()
         If clsFormatRFunction Is Nothing Then
             Exit Sub
+        Else
+            lstFormatRFunctions.Add(clsFormatRFunction)
         End If
+
     End Sub
 
     Private Sub btnDateFormat_Click(sender As Object, e As EventArgs) Handles btnDateFormat.Click
@@ -235,6 +236,8 @@ Public Class sdgBeforeTablesOption
         clsFormatRFunction = sdgCellFormatDateOptions.GetNewUserInputAsRFunction()
         If clsFormatRFunction Is Nothing Then
             Exit Sub
+        Else
+            lstFormatRFunctions.Add(clsFormatRFunction)
         End If
     End Sub
 
@@ -245,7 +248,10 @@ Public Class sdgBeforeTablesOption
 
         If clsFormatRFunction Is Nothing Then
             Exit Sub
+        Else
+            lstFormatRFunctions.Add(clsFormatRFunction)
         End If
+
     End Sub
 
     Private Sub SetupSubMissing(clsOperator As ROperator)
@@ -283,5 +289,36 @@ Public Class sdgBeforeTablesOption
         UpdateSubMissingParam(ucrTxtMissingText.GetText())
 
     End Sub
+
+    Private Sub SetupFormatFunctions(clsOperator As ROperator)
+        lstFormatRFunctions.Clear()
+
+        Dim clsFormatParams = clsTablesUtils.FindRFunctionsParamsWithRCommand(
+        {"fmt", "fmt_units", "fmt_number", "fmt_currency"}, clsOperator)
+
+        For Each clsParam In clsFormatParams
+            Dim clsFunc As RFunction = clsParam.clsArgumentCodeStructure
+            If clsFunc IsNot Nothing Then
+                lstFormatRFunctions.Add(clsFunc)
+            End If
+        Next
+    End Sub
+
+    Private Sub SetFormatFunctionsOnReturn(clsOperator As ROperator)
+        ' Remove existing
+        clsTablesUtils.RemoveRFunctionsParamsWithRCommand(
+        {"fmt", "fmt_units", "fmt_number", "fmt_currency"}, clsOperator)
+
+        ' Add new
+        For i = 0 To lstFormatRFunctions.Count - 1
+            Dim clsFunc = lstFormatRFunctions(i)
+            Dim strParamName = "fmt_param" & (i + 1)
+
+            Dim clsParam As New RParameter(strParamName, clsFunc, bNewIncludeArgumentName:=False)
+            clsOperator.AddParameter(strParameterName:=strParamName, clsRFunctionParameter:=clsFunc)
+
+        Next
+    End Sub
+
     '-----------------------------------------
 End Class
