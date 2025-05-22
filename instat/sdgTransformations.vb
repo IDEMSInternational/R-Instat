@@ -115,13 +115,13 @@ Public Class sdgTransformations
         ucrReceiverTraits2.SetItemType("column")
 
         ucrInputGoodTraits.SetItems({strPos, strBest})
-        ucrInputGoodTraits.SetDropDownStyleAsNonEditable()
+        ucrInputGoodTraits.SetDropDownStyleAsEditable(True)
         ucrInputGoodTraits.SetLinkedDisplayControl(lblGoodTraits)
         ucrInputGoodTraits.SetParameter(New RParameter("good_suffixes", 5))
         ucrInputGoodTraits.SetText(strPos)
 
         ucrInputBadTraits.SetItems({strNeg, strWorst})
-        ucrInputBadTraits.SetDropDownStyleAsNonEditable()
+        ucrInputBadTraits.SetDropDownStyleAsEditable(True)
         ucrInputBadTraits.SetLinkedDisplayControl(lblBadTraits)
         ucrInputBadTraits.SetParameter(New RParameter("bad_suffixes", 6))
         ucrInputBadTraits.SetText(strNeg)
@@ -132,6 +132,15 @@ Public Class sdgTransformations
         ucrInputNAS.SetParameter(New RParameter("na_candidates", 7))
         ucrInputNAS.SetText(strNot)
 
+        chkChooseTraitsSuffix.Text = "Choose Traits Suffix"
+        chkChooseTraitsSuffix.Checked = False
+        chkChooseTraitsSuffix.AutoSize = True
+
+        ' Hide Good/Bad Traits controls initially
+        lblGoodTraits.Visible = False
+        ucrInputGoodTraits.Visible = False
+        lblBadTraits.Visible = False
+        ucrInputBadTraits.Visible = False
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewIDColsFunction As RFunction, clsNewVarietyColsFunction As RFunction, clsNewTraitColsFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strDefaultTab As String = "")
@@ -531,6 +540,18 @@ Public Class sdgTransformations
 
     Private Sub ucrSelectorIDVarTraitLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIDVarTraitLevel.ControlValueChanged
         AutoFillReceiverTraitsType()
+    End Sub
+
+    Private Sub chkChooseTraitsSuffix_CheckedChanged(sender As Object, e As EventArgs) Handles chkChooseTraitsSuffix.CheckedChanged
+        Dim visible As Boolean = chkChooseTraitsSuffix.Checked
+        lblGoodTraits.Visible = visible
+        ucrInputGoodTraits.Visible = visible
+        lblBadTraits.Visible = visible
+        ucrInputBadTraits.Visible = visible
+        If Not visible Then
+            ucrInputGoodTraits.SetText("")
+            ucrInputBadTraits.SetText("")
+        End If
     End Sub
 
 End Class
