@@ -89,8 +89,8 @@ Public Class dlgUseTable
                                                   strRDataFrameNameToAddObjectTo:=ucrTablesSelector.strCurrentDataFrame,
                                                   strObjectName:="last_table")
 
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-
         ' For export operations which is an after code
         clsSaveGtRFunction.SetPackageName("gt")
         clsSaveGtRFunction.SetRCommand("gtsave")
@@ -125,9 +125,11 @@ Public Class dlgUseTable
     End Sub
 
     Private Sub btnTableOptions_Click(sender As Object, e As EventArgs) Handles btnTableOptions.Click
-        sdgTableOptions.Setup(ucrTablesSelector.strCurrentDataFrame, clsGtTableROperator)
-        sdgTableOptions.ShowDialog(Me)
+        sdgTableOptionsAfter.Setup(ucrTablesSelector.strCurrentDataFrame, clsGtTableROperator)
+        sdgTableOptionsAfter.ShowDialog()
+        AddRemoveGetDataObjColumn()
     End Sub
+
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTablesReceiver.ControlContentsChanged, ucrSaveTable.ControlContentsChanged
         TestOKEnabled()
@@ -179,4 +181,22 @@ Public Class dlgUseTable
         Dim arrStr() As String = strText.Split({"(", ")"}, StringSplitOptions.RemoveEmptyEntries)
         Return arrStr(0) & "|" & arrStr(1)
     End Function
+
+    Public Sub AddRemoveGetDataObjColumn()
+        Dim clsGetDataObjFunction As New RFunction
+        clsGetDataObjFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetDataObjFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+        clsGetDataObjFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrReceiverSingleCol.GetVariableNames())
+        clsGetDataObjFunction.SetAssignTo("last_graph")
+        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+        If sdgTableOptionsAfter.ucrColumns.rdoColLabel.Checked Then
+            If Not sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrReceiverSingleCol.IsEmpty Then
+                ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataObjFunction, iPosition:=0)
+            Else
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+            End If
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+        End If
+    End Sub
 End Class

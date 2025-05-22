@@ -3338,6 +3338,12 @@
     <Compile Include="UserTables\Rows\ucrRowSummary.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\sdgTableOptionsAfter.Designer.vb">
+      <DependentUpon>sdgTableOptionsAfter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\sdgTableOptionsAfter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UserTables\sdgTableRowExpression.Designer.vb">
       <DependentUpon>sdgTableRowExpression.vb</DependentUpon>
     </Compile>
@@ -5818,6 +5824,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Rows\ucrRowSummary.resx">
       <DependentUpon>ucrRowSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\sdgTableOptionsAfter.resx">
+      <DependentUpon>sdgTableOptionsAfter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\sdgTableRowExpression.resx">
       <DependentUpon>sdgTableRowExpression.vb</DependentUpon>
