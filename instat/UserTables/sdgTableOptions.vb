@@ -19,8 +19,13 @@ Imports instat.Translations
 Public Class sdgTableOptions
 
     Private clsOperator As ROperator
-    Private clsThemeRFunction As RFunction
+    Private clsThemeRFunction, clsSubMissingRFunction As RFunction
     Private bFirstload As Boolean = True
+
+    Private ReadOnly strZero As String = "0"
+    Private ReadOnly strMultipleDashes As String = "...."
+    Private ReadOnly strMissing As String = "missing"
+    Private ReadOnly strStar As String = "***"
 
     Private Sub sdgTableOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -34,9 +39,27 @@ Public Class sdgTableOptions
 
     Private Sub InitialiseDialog()
         ucrSdgBaseButtons.iHelpTopicID = 146
+
         ucrChkSelectTheme.Checked = True
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
+
+        ucrChkDataFormat.SetText("Specify the Data Format")
+        ucrChkMissingValues.SetText("Replace NA")
+        ucrChkDataFormat.Enabled = False
+        grpMissingValues.Visible = False
+        btnNumberFormat.Visible = False
+        btnDateFormat.Visible = False
+        btnTextFormat.Visible = False
+        rdoNumber.Visible = False
+        rdoDate.Visible = False
+        rdoText.Visible = False
+
+        ucrPnlFormat.AddRadioButton(rdoNumber)
+        ucrPnlFormat.AddRadioButton(rdoDate)
+        ucrPnlFormat.AddRadioButton(rdoText)
+
+        ucrTxtMissingText.SetItems({strZero, strMultipleDashes, strMissing, strStar})
 
         ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
@@ -65,6 +88,7 @@ Public Class sdgTableOptions
         ucrChkSelectTheme.Checked = dlgGeneralTable.ucrChkSelectTheme.Checked
         sdgTableStyles.GetNewUserInputAsRFunction()
         SetupTheme(clsOperator)
+        SetupSubMissing(clsOperator)
     End Sub
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
@@ -75,7 +99,9 @@ Public Class sdgTableOptions
         ucrCells.SetValuesToOperator()
         ucrSourceNotes.SetValuesToOperator()
         ucrOtherStyles.SetValuesToOperator()
+
         SetThemeValuesOnReturn(clsOperator)
+        SetSubMissingValuesOnReturn(clsOperator)
     End Sub
 
 
@@ -93,6 +119,47 @@ Public Class sdgTableOptions
             sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
         End If
     End Sub
+
+    Private Sub ucrChkDataFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDataFormat.ControlValueChanged
+        If ucrChkDataFormat.Checked Then
+            ucrPnlFormat.Visible = True
+            rdoNumber.Visible = True
+            rdoDate.Visible = True
+            rdoText.Visible = True
+        Else
+            rdoNumber.Visible = False
+            rdoDate.Visible = False
+            rdoText.Visible = False
+        End If
+
+    End Sub
+
+    Private Sub ucrChkMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMissingValues.ControlValueChanged
+        If ucrChkMissingValues.Checked Then
+            grpMissingValues.Visible = True
+        Else
+            grpMissingValues.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged
+        If rdoNumber.Checked Then
+            btnNumberFormat.Visible = True
+        Else
+            btnNumberFormat.Visible = False
+        End If
+        If rdoDate.Checked Then
+            btnDateFormat.Visible = True
+        Else
+            btnDateFormat.Visible = False
+        End If
+        If rdoText.Checked Then
+            btnTextFormat.Visible = True
+        Else
+            btnTextFormat.Visible = False
+        End If
+    End Sub
+
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
         If ucrChkSelectTheme.Checked Then
@@ -161,7 +228,69 @@ Public Class sdgTableOptions
             clsOperator.RemoveParameterByName("theme_format")
         End If
     End Sub
-    '-----------------------------------------
 
+    Private Sub btnTextFormat_Click(sender As Object, e As EventArgs) Handles btnTextFormat.Click
+        Dim clsFormatRFunction As RFunction = Nothing
+        sdgCellFormatTextOptions.ShowDialog(Me.ParentForm)
+        clsFormatRFunction = sdgCellFormatTextOptions.GetNewUserInputAsRFunction()
+        If clsFormatRFunction Is Nothing Then
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub btnDateFormat_Click(sender As Object, e As EventArgs) Handles btnDateFormat.Click
+        Dim clsFormatRFunction As RFunction = Nothing
+        sdgCellFormatDateOptions.ShowDialog(Me.ParentForm)
+        clsFormatRFunction = sdgCellFormatDateOptions.GetNewUserInputAsRFunction()
+        If clsFormatRFunction Is Nothing Then
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub btnNumberFormat_Click(sender As Object, e As EventArgs) Handles btnNumberFormat.Click
+        Dim clsFormatRFunction As RFunction = Nothing
+        sdgCellFormatNumberOptions.ShowDialog(Me.ParentForm)
+        clsFormatRFunction = sdgCellFormatNumberOptions.GetNewUserInputAsRFunction()
+
+        If clsFormatRFunction Is Nothing Then
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub SetupSubMissing(clsOperator As ROperator)
+        If clsOperator.ContainsParameter("sub_missing") Then
+            clsSubMissingRFunction = clsOperator.GetParameter("sub_missing").clsArgumentCodeStructure
+        Else
+            clsSubMissingRFunction = New RFunction
+            clsSubMissingRFunction.SetPackageName("gt")
+            clsSubMissingRFunction.SetRCommand("sub_missing")
+            ' seed it with whatever is currently in the text box (could be blank)
+            UpdateSubMissingParam(ucrTxtMissingText.GetText())
+        End If
+    End Sub
+
+    Private Sub UpdateSubMissingParam(strText As String)
+        If Not String.IsNullOrEmpty(strText) Then
+            clsOperator.RemoveParameterByName("sub_missing")
+            Dim quoted = Chr(34) & strText & Chr(34)
+            clsSubMissingRFunction.AddParameter(strParameterName:="missing_text",
+                                            strParameterValue:=quoted,
+                                            iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub SetSubMissingValuesOnReturn(clsOperator As ROperator)
+        ' Set the sub_missing parameter if it was configured
+        If clsSubMissingRFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsSubMissingRFunction.strRCommand) Then
+            clsOperator.AddParameter("sub_missing", clsRFunctionParameter:=clsSubMissingRFunction)
+        Else
+            clsOperator.RemoveParameterByName("sub_missing")
+        End If
+    End Sub
+
+    Private Sub ucrTxtMissingText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTxtMissingText.ControlValueChanged
+        UpdateSubMissingParam(ucrTxtMissingText.GetText())
+    End Sub
+    '-----------------------------------------
 
 End Class
