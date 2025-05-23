@@ -14,7 +14,7 @@ Public Class dlgTricotModellingGeneral
             clsPairwiseProbMainFunction, clsReliabilityFunction, clsItemsParFunction, clsRegretFunction, clsNodeLabelsFunction,
             clsNodeRulesFunction, clsTopItemsFunction, clsAICFunction, clsUnListAICFunction, clsAICMainFunction, clsAnnovaFunction,
             clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction, clsHeatFunction, clsPackageCheck,
-            clsPlotFunction, clsBarfunction, clsWrapPlotFunction, clsWrapBarFunction, clsTreeFunction, clsImportDataFunction, clsWrapTrees,
+            clsPlotFunction, clsBarfunction, clsWrapPlotFunction, clsWrapBarFunction, clsTreeFunction, clsImportDataFunction, clsDefineAsTricotFunction, clsWrapTrees,
             clsGetVarFromMetaData, clsGetColumnFromData, clsDataUnstackedFunction, clsPullFunction, clsFactor2Function, clsLevels2Function,
             clsPladmm2Function, clsMappings2Function, clsNames2Function, clsDataFunction, clsGetDataframe2function As New RFunction
 
@@ -146,7 +146,6 @@ Public Class dlgTricotModellingGeneral
         clsBarfunction = New RFunction
         clsWrapPlotFunction = New RFunction
         clsWrapBarFunction = New RFunction
-
         bResetSubDialog = True
         bCheck7Passed = False
 
@@ -550,7 +549,7 @@ Public Class dlgTricotModellingGeneral
     Private Sub btnDisplayOptions_Click(sender As Object, e As EventArgs) Handles btnDisplayOptions.Click
         sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction,
             clsNewCoefFunction:=clscoefFunction, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction,
-            clsNewEstimatesFunction:=clsEstimatesFunction, clsNewImportDataFunction:=clsImportDataFunction, clsNewPipeOperator:=clsPipeOperator, clsNewDevianceFunction:=clsDevianceMainFunction,
+            clsNewEstimatesFunction:=clsEstimatesFunction, clsNewImportDataFunction:=clsImportDataFunction, clsNewDefineAsTricotFunction:=clsDefineAsTricotFunction, clsNewPipeOperator:=clsPipeOperator, clsNewDevianceFunction:=clsDevianceMainFunction,
             clsNewPariPropFunction:=clsPairwiseProbMainFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
             clsNewItemsFunction:=clsItemsParFunction, clsNewRegretFunction:=clsRegretFunction, clsNewNodeLabFuction:=clsNodeLabelsFunction,
             clsNewNodeRuleFunction:=clsNodeRulesFunction, clsNewTopItemFunction:=clsTopItemsFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewAICFunction:=clsUnListAICFunction,
