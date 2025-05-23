@@ -25,6 +25,21 @@ Public Class dlgRowNamesOrNumbers
     Private clsDummyFunction As New RFunction
     Private clsGetVectorFunction As New RFunction
     Private clsHmiscFunction As New RFunction
+    Public enumRowNamesOrNumbersMode As String = RowNamesOrNumbersMode.Prepare
+
+    Public Enum RowNamesOrNumbersMode
+        Prepare
+        Tricot
+    End Enum
+
+    Private Sub SetHelpOptions()
+        Select Case enumRowNamesOrNumbersMode
+            Case RowNamesOrNumbersMode.Prepare
+                ucrBase.iHelpTopicID = 178
+            Case RowNamesOrNumbersMode.Tricot
+                ucrBase.iHelpTopicID = 745
+        End Select
+    End Sub
     Private clsRemoveFilter As New RFunction
 
 

@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
+Imports instat.dlgDuplicateRows
 Imports instat.Translations
 
 Public Class dlgRecodeFactor
@@ -28,6 +29,21 @@ Public Class dlgRecodeFactor
     Private bReset As Boolean = True
     Private Const strNewLabelColName As String = "New Label"
     Private _strSelectedColumn As String
+    Public enumRecodeFactorMode As String = RecodeFactorMode.Prepare
+
+    Public Enum RecodeFactorMode
+        Prepare
+        Tricot
+    End Enum
+
+    Private Sub SetHelpOptions()
+        Select Case enumRecodeFactorMode
+            Case RecodeFactorMode.Prepare
+                ucrBase.iHelpTopicID = 37
+            Case RecodeFactorMode.Tricot
+                ucrBase.iHelpTopicID = 746
+        End Select
+    End Sub
 
     Private Sub dlgRecodeFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then

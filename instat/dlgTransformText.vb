@@ -22,6 +22,7 @@ Public Class dlgTransformText
         Prepare
         Describe
         Climatic
+        Tricot
     End Enum
 
     Public bFirstLoad As Boolean = True
@@ -488,6 +489,8 @@ Public Class dlgTransformText
                 ucrBase.iHelpTopicID = 343
             Case TransformMode.Climatic
                 ucrBase.iHelpTopicID = 606
+            Case TransformMode.Tricot
+                ucrBase.iHelpTopicID = 749
         End Select
     End Sub
 

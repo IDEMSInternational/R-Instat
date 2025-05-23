@@ -22,6 +22,7 @@ Public Class dlgOneVariableGraph
         Prepare
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private bFirstLoad As Boolean = True
@@ -159,6 +160,8 @@ Public Class dlgOneVariableGraph
                 ucrBase.iHelpTopicID = 412
             Case OnevariableMode.Climatic
                 ucrBase.iHelpTopicID = 616
+            Case OnevariableMode.Tricot
+                ucrBase.iHelpTopicID = 736
         End Select
     End Sub
 

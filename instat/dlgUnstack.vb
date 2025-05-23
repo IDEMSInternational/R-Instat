@@ -21,6 +21,7 @@ Public Class dlgUnstack
     Public Enum UnstackMode
         Prepare
         Climatic
+        Tricot
     End Enum
 
     Public bFirstLoad As Boolean = True
@@ -392,6 +393,8 @@ Public Class dlgUnstack
                 ucrBase.iHelpTopicID = 58
             Case UnstackMode.Climatic
                 ucrBase.iHelpTopicID = 608
+            Case UnstackMode.Tricot
+                ucrBase.iHelpTopicID = 751
         End Select
     End Sub
 
