@@ -448,7 +448,10 @@ Public Class ucrAxes
             ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctYPosition))
             ucrInputPosition.SetDefaultState("Left")
         End If
-        ucrInputAxisType.SetName(strAxisType)
+
+        If bReset Then
+            ucrInputAxisType.SetName(strAxisType)
+        End If
 
         If bIsX Then
             ucrInputPositionDiscrete.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctXPosition))
@@ -638,6 +641,7 @@ Public Class ucrAxes
         SetLabel()
         AddRemoveContinuousXYScales()
         AddRemoveDiscreteXYScales()
+        AddRemoveDateXYScales()
         AddRemoveLimits()
         AddRemoveLonglabels()
     End Sub
@@ -686,6 +690,15 @@ Public Class ucrAxes
         End If
     End Sub
 
+    Private Sub AddRemoveDateXYScales()
+        Dim strScaleParam As String = $"scale_{strAxis}_date"
+        If clsXYScaleDateFunction.clsParameters.Count > 0 Then
+            clsBaseOperator.AddParameter(strScaleParam, clsRFunctionParameter:=clsXYScaleDateFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName(strScaleParam)
+        End If
+    End Sub
+
     Private Sub AddRemoveScaleFunctions()
         If strAxisType = "continuous" Then
             AddRemoveContinuousXYScales()
@@ -693,6 +706,7 @@ Public Class ucrAxes
             clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "date")
             clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "discrete")
         ElseIf strAxisType = "date" Then
+            AddRemoveDateXYScales()
             clsBaseOperator.AddParameter("scale" & "_" & strAxis & "_" & "date", clsRFunctionParameter:=clsXYScaleDateFunction)
             clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "discrete")
             clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & "continuous")
@@ -814,6 +828,7 @@ Public Class ucrAxes
         ucrChkLimitsFrom.ControlValueChanged, ucrChkLongLabels.ControlValueChanged, ucrChkDropUnusedLevels.ControlValueChanged
         AddRemoveContinuousXYScales()
         AddRemoveDiscreteXYScales()
+        AddRemoveDateXYScales()
         AddRemoveScaleFunctions()
         AddRemoveLimits()
         AddRemoveLonglabels()
@@ -895,6 +910,7 @@ Public Class ucrAxes
                 clsXYScaleDateFunction.AddParameter("date_breaks", clsROperatorParameter:=clsXYScaleDateBreakOperator, iPosition:=1)
             End If
         End If
+        AddRemoveDateXYScales()
     End Sub
 
     Private Sub ExpandControl()
