@@ -76,6 +76,8 @@ Partial Class dlgUseModel
         Me.ContextMenuStripSegmented = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuSegmented = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpEmmeans = New System.Windows.Forms.GroupBox()
+        Me.cmdcurlySign = New System.Windows.Forms.Button()
+        Me.cmdQuotes = New System.Windows.Forms.Button()
         Me.cmdXtable = New System.Windows.Forms.Button()
         Me.cmdTest = New System.Windows.Forms.Button()
         Me.cmdPairs = New System.Windows.Forms.Button()
@@ -104,8 +106,6 @@ Partial Class dlgUseModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverForTestColumn = New instat.ucrReceiverExpression()
         Me.ucrInputComboRPackage = New instat.ucrInputComboBox()
-        Me.cmdQuotes = New System.Windows.Forms.Button()
-        Me.cmdcurlySign = New System.Windows.Forms.Button()
         Me.grpGeneral.SuspendLayout()
         Me.grpPrediction.SuspendLayout()
         Me.grpExtrRemes.SuspendLayout()
@@ -333,7 +333,7 @@ Partial Class dlgUseModel
         Me.cmdPlotFevd.Name = "cmdPlotFevd"
         Me.cmdPlotFevd.Size = New System.Drawing.Size(69, 30)
         Me.cmdPlotFevd.TabIndex = 159
-        Me.cmdPlotFevd.Text = "plot.fevd"
+        Me.cmdPlotFevd.Text = "plot"
         Me.cmdPlotFevd.UseVisualStyleBackColor = True
         '
         'cmdSummaryFevd
@@ -344,7 +344,7 @@ Partial Class dlgUseModel
         Me.cmdSummaryFevd.Name = "cmdSummaryFevd"
         Me.cmdSummaryFevd.Size = New System.Drawing.Size(83, 30)
         Me.cmdSummaryFevd.TabIndex = 158
-        Me.cmdSummaryFevd.Text = "summary.fevd"
+        Me.cmdSummaryFevd.Text = "summary"
         Me.cmdSummaryFevd.UseVisualStyleBackColor = True
         '
         'cmdPrintFevd
@@ -355,7 +355,7 @@ Partial Class dlgUseModel
         Me.cmdPrintFevd.Name = "cmdPrintFevd"
         Me.cmdPrintFevd.Size = New System.Drawing.Size(69, 30)
         Me.cmdPrintFevd.TabIndex = 157
-        Me.cmdPrintFevd.Text = "print.fevd"
+        Me.cmdPrintFevd.Text = "print"
         Me.cmdPrintFevd.UseVisualStyleBackColor = True
         '
         'cmdLrTest
@@ -704,6 +704,28 @@ Partial Class dlgUseModel
         Me.grpEmmeans.TabStop = False
         Me.grpEmmeans.Text = "Emmeans"
         '
+        'cmdcurlySign
+        '
+        Me.cmdcurlySign.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdcurlySign.Location = New System.Drawing.Point(140, 99)
+        Me.cmdcurlySign.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdcurlySign.Name = "cmdcurlySign"
+        Me.cmdcurlySign.Size = New System.Drawing.Size(69, 30)
+        Me.cmdcurlySign.TabIndex = 167
+        Me.cmdcurlySign.Text = "~"
+        Me.cmdcurlySign.UseVisualStyleBackColor = True
+        '
+        'cmdQuotes
+        '
+        Me.cmdQuotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdQuotes.Location = New System.Drawing.Point(72, 99)
+        Me.cmdQuotes.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdQuotes.Name = "cmdQuotes"
+        Me.cmdQuotes.Size = New System.Drawing.Size(69, 30)
+        Me.cmdQuotes.TabIndex = 166
+        Me.cmdQuotes.Text = """   """
+        Me.cmdQuotes.UseVisualStyleBackColor = True
+        '
         'cmdXtable
         '
         Me.cmdXtable.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -932,7 +954,7 @@ Partial Class dlgUseModel
         'ucrSaveResult
         '
         Me.ucrSaveResult.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 319)
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 329)
         Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
@@ -1007,56 +1029,34 @@ Partial Class dlgUseModel
         Me.ucrInputComboRPackage.Size = New System.Drawing.Size(122, 21)
         Me.ucrInputComboRPackage.TabIndex = 5
         '
-        'cmdQuotes
-        '
-        Me.cmdQuotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQuotes.Location = New System.Drawing.Point(72, 99)
-        Me.cmdQuotes.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdQuotes.Name = "cmdQuotes"
-        Me.cmdQuotes.Size = New System.Drawing.Size(69, 30)
-        Me.cmdQuotes.TabIndex = 166
-        Me.cmdQuotes.Text = """   """
-        Me.cmdQuotes.UseVisualStyleBackColor = True
-        '
-        'cmdcurlySign
-        '
-        Me.cmdcurlySign.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdcurlySign.Location = New System.Drawing.Point(140, 99)
-        Me.cmdcurlySign.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdcurlySign.Name = "cmdcurlySign"
-        Me.cmdcurlySign.Size = New System.Drawing.Size(69, 30)
-        Me.cmdcurlySign.TabIndex = 167
-        Me.cmdcurlySign.Text = "~"
-        Me.cmdcurlySign.UseVisualStyleBackColor = True
-        '
         'dlgUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(582, 423)
-        Me.Controls.Add(Me.grpEmmeans)
-        Me.Controls.Add(Me.grpSegmented)
         Me.Controls.Add(Me.cmdRHelpEmmeans)
         Me.Controls.Add(Me.cmdRHelpSegmented)
         Me.Controls.Add(Me.cmdRHelpExtRemes)
         Me.Controls.Add(Me.cmdRHelpGeneral)
         Me.Controls.Add(Me.cmdRHelpPrediction)
-        Me.Controls.Add(Me.grpGeneral)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.lblRpackage)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.ucrChkIncludeArguments)
         Me.Controls.Add(Me.cmdClear)
-        Me.Controls.Add(Me.grpExtrRemes)
         Me.Controls.Add(Me.ucrInputModels)
         Me.Controls.Add(Me.lblModels)
-        Me.Controls.Add(Me.grpPrediction)
         Me.Controls.Add(Me.ucrSelectorUseModel)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblModel)
         Me.Controls.Add(Me.ucrReceiverForTestColumn)
         Me.Controls.Add(Me.ucrInputComboRPackage)
+        Me.Controls.Add(Me.grpSegmented)
+        Me.Controls.Add(Me.grpGeneral)
+        Me.Controls.Add(Me.grpExtrRemes)
+        Me.Controls.Add(Me.grpPrediction)
+        Me.Controls.Add(Me.grpEmmeans)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MinimizeBox = False
         Me.Name = "dlgUseModel"
