@@ -65,7 +65,8 @@ Public Class dlgTricotModelOneVarCov
         ucrTraitsReceiver.SetParameterIsString()
         ucrTraitsReceiver.SetMeAsReceiver()
         ucrTraitsReceiver.strSelectorHeading = "Traits"
-        ucrTraitsReceiver.SetTricotType({"traits"})
+        ucrTraitsReceiver.SetTricotType("traits")
+        ucrTraitsReceiver.bAutoFill = True
 
         ucrSelectorVarietyLevel.SetParameter(New RParameter("data", 3))
         ucrSelectorVarietyLevel.SetParameterIsrfunction()
