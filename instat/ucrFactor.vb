@@ -937,5 +937,4 @@ Public Class ucrFactor
         SetToggleButtonSettings()
     End Sub
 
-
 End Class
