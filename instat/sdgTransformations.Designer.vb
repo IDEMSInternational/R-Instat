@@ -105,7 +105,7 @@ Partial Class sdgTransformations
         Me.lblGoodTraits.Name = "lblGoodTraits"
         Me.lblGoodTraits.Size = New System.Drawing.Size(94, 13)
         Me.lblGoodTraits.TabIndex = 4
-        Me.lblGoodTraits.Text = "Good Traits Suffix:"
+        Me.lblGoodTraits.Text = "Positive Traits Suffix:"
         '
         'lblBadTraits
         '
@@ -114,7 +114,7 @@ Partial Class sdgTransformations
         Me.lblBadTraits.Name = "lblBadTraits"
         Me.lblBadTraits.Size = New System.Drawing.Size(87, 13)
         Me.lblBadTraits.TabIndex = 6
-        Me.lblBadTraits.Text = "Bad Traits Suffix:"
+        Me.lblBadTraits.Text = "Negative Traits Suffix:"
         '
         'lblNAs
         '
