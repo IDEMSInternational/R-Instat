@@ -50,10 +50,11 @@ Partial Class sdgTransformations
         Me.ucrSelectorTricotIDLevel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbOptions = New System.Windows.Forms.TabControl()
         Me.tbIDLevel = New System.Windows.Forms.TabPage()
+        Me.ucrReceiverIDVariable = New instat.ucrReceiverSingle()
         Me.tbVarietyLevel = New System.Windows.Forms.TabPage()
         Me.tbIDVarietyLevel = New System.Windows.Forms.TabPage()
         Me.tbIDVarietyTraitLevel = New System.Windows.Forms.TabPage()
-        Me.ucrReceiverIDVariable = New instat.ucrReceiverSingle()
+        Me.chkChooseTraitsSuffix = New System.Windows.Forms.CheckBox()
         Me.tbOptions.SuspendLayout()
         Me.tbIDLevel.SuspendLayout()
         Me.tbVarietyLevel.SuspendLayout()
@@ -64,110 +65,99 @@ Partial Class sdgTransformations
         'lblIDVariable
         '
         Me.lblIDVariable.AutoSize = True
-        Me.lblIDVariable.Location = New System.Drawing.Point(357, 59)
-        Me.lblIDVariable.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblIDVariable.Location = New System.Drawing.Point(238, 38)
         Me.lblIDVariable.Name = "lblIDVariable"
-        Me.lblIDVariable.Size = New System.Drawing.Size(92, 20)
+        Me.lblIDVariable.Size = New System.Drawing.Size(62, 13)
         Me.lblIDVariable.TabIndex = 1
         Me.lblIDVariable.Text = "ID Variable:"
         '
         'lblVariety
         '
         Me.lblVariety.AutoSize = True
-        Me.lblVariety.Location = New System.Drawing.Point(357, 59)
-        Me.lblVariety.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblVariety.Location = New System.Drawing.Point(238, 38)
         Me.lblVariety.Name = "lblVariety"
-        Me.lblVariety.Size = New System.Drawing.Size(62, 20)
+        Me.lblVariety.Size = New System.Drawing.Size(42, 13)
         Me.lblVariety.TabIndex = 1
         Me.lblVariety.Text = "Variety:"
         '
         'lblTraits
         '
         Me.lblTraits.AutoSize = True
-        Me.lblTraits.Location = New System.Drawing.Point(355, 206)
-        Me.lblTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTraits.Location = New System.Drawing.Point(237, 134)
         Me.lblTraits.Name = "lblTraits"
-        Me.lblTraits.Size = New System.Drawing.Size(52, 20)
+        Me.lblTraits.Size = New System.Drawing.Size(36, 13)
         Me.lblTraits.TabIndex = 5
         Me.lblTraits.Text = "Traits:"
         '
         'lblTraits2
         '
         Me.lblTraits2.AutoSize = True
-        Me.lblTraits2.Location = New System.Drawing.Point(355, 206)
-        Me.lblTraits2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTraits2.Location = New System.Drawing.Point(237, 134)
         Me.lblTraits2.Name = "lblTraits2"
-        Me.lblTraits2.Size = New System.Drawing.Size(52, 20)
+        Me.lblTraits2.Size = New System.Drawing.Size(36, 13)
         Me.lblTraits2.TabIndex = 5
         Me.lblTraits2.Text = "Traits:"
         '
         'lblGoodTraits
         '
         Me.lblGoodTraits.AutoSize = True
-        Me.lblGoodTraits.Location = New System.Drawing.Point(357, 137)
-        Me.lblGoodTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblGoodTraits.Location = New System.Drawing.Point(238, 89)
         Me.lblGoodTraits.Name = "lblGoodTraits"
-        Me.lblGoodTraits.Size = New System.Drawing.Size(140, 20)
+        Me.lblGoodTraits.Size = New System.Drawing.Size(94, 13)
         Me.lblGoodTraits.TabIndex = 4
-        Me.lblGoodTraits.Text = "Good Traits Suffix:"
+        Me.lblGoodTraits.Text = "Positive Traits Suffix:"
         '
         'lblBadTraits
         '
         Me.lblBadTraits.AutoSize = True
-        Me.lblBadTraits.Location = New System.Drawing.Point(355, 206)
-        Me.lblBadTraits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblBadTraits.Location = New System.Drawing.Point(237, 134)
         Me.lblBadTraits.Name = "lblBadTraits"
-        Me.lblBadTraits.Size = New System.Drawing.Size(129, 20)
+        Me.lblBadTraits.Size = New System.Drawing.Size(87, 13)
         Me.lblBadTraits.TabIndex = 6
-        Me.lblBadTraits.Text = "Bad Traits Suffix:"
+        Me.lblBadTraits.Text = "Negative Traits Suffix:"
         '
         'lblNAs
         '
         Me.lblNAs.AutoSize = True
-        Me.lblNAs.Location = New System.Drawing.Point(357, 273)
-        Me.lblNAs.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblNAs.Location = New System.Drawing.Point(238, 177)
         Me.lblNAs.Name = "lblNAs"
-        Me.lblNAs.Size = New System.Drawing.Size(118, 20)
+        Me.lblNAs.Size = New System.Drawing.Size(81, 13)
         Me.lblNAs.TabIndex = 8
         Me.lblNAs.Text = "NA denoted by:"
         '
         'lblVariety2
         '
         Me.lblVariety2.AutoSize = True
-        Me.lblVariety2.Location = New System.Drawing.Point(357, 137)
-        Me.lblVariety2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblVariety2.Location = New System.Drawing.Point(238, 89)
         Me.lblVariety2.Name = "lblVariety2"
-        Me.lblVariety2.Size = New System.Drawing.Size(62, 20)
+        Me.lblVariety2.Size = New System.Drawing.Size(42, 13)
         Me.lblVariety2.TabIndex = 3
         Me.lblVariety2.Text = "Variety:"
         '
         'lblIDVariable2
         '
         Me.lblIDVariable2.AutoSize = True
-        Me.lblIDVariable2.Location = New System.Drawing.Point(357, 59)
-        Me.lblIDVariable2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblIDVariable2.Location = New System.Drawing.Point(238, 38)
         Me.lblIDVariable2.Name = "lblIDVariable2"
-        Me.lblIDVariable2.Size = New System.Drawing.Size(92, 20)
+        Me.lblIDVariable2.Size = New System.Drawing.Size(62, 13)
         Me.lblIDVariable2.TabIndex = 1
         Me.lblIDVariable2.Text = "ID Variable:"
         '
         'lblIDVariable3
         '
         Me.lblIDVariable3.AutoSize = True
-        Me.lblIDVariable3.Location = New System.Drawing.Point(357, 59)
-        Me.lblIDVariable3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblIDVariable3.Location = New System.Drawing.Point(238, 38)
         Me.lblIDVariable3.Name = "lblIDVariable3"
-        Me.lblIDVariable3.Size = New System.Drawing.Size(92, 20)
+        Me.lblIDVariable3.Size = New System.Drawing.Size(62, 13)
         Me.lblIDVariable3.TabIndex = 2
         Me.lblIDVariable3.Text = "ID Variable:"
         '
         'lblVariety3
         '
         Me.lblVariety3.AutoSize = True
-        Me.lblVariety3.Location = New System.Drawing.Point(357, 137)
-        Me.lblVariety3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblVariety3.Location = New System.Drawing.Point(238, 89)
         Me.lblVariety3.Name = "lblVariety3"
-        Me.lblVariety3.Size = New System.Drawing.Size(62, 20)
+        Me.lblVariety3.Size = New System.Drawing.Size(42, 13)
         Me.lblVariety3.TabIndex = 3
         Me.lblVariety3.Text = "Variety:"
         '
@@ -177,10 +167,10 @@ Partial Class sdgTransformations
         Me.ucrSelectorIDVarTraitLevel.bDropUnusedFilterLevels = False
         Me.ucrSelectorIDVarTraitLevel.bShowHiddenColumns = False
         Me.ucrSelectorIDVarTraitLevel.bUseCurrentFilter = True
-        Me.ucrSelectorIDVarTraitLevel.Location = New System.Drawing.Point(18, 19)
+        Me.ucrSelectorIDVarTraitLevel.Location = New System.Drawing.Point(12, 12)
         Me.ucrSelectorIDVarTraitLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorIDVarTraitLevel.Name = "ucrSelectorIDVarTraitLevel"
-        Me.ucrSelectorIDVarTraitLevel.Size = New System.Drawing.Size(320, 282)
+        Me.ucrSelectorIDVarTraitLevel.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorIDVarTraitLevel.TabIndex = 0
         '
         'ucrSelectorIDVarietyLevel
@@ -189,10 +179,10 @@ Partial Class sdgTransformations
         Me.ucrSelectorIDVarietyLevel.bDropUnusedFilterLevels = False
         Me.ucrSelectorIDVarietyLevel.bShowHiddenColumns = False
         Me.ucrSelectorIDVarietyLevel.bUseCurrentFilter = True
-        Me.ucrSelectorIDVarietyLevel.Location = New System.Drawing.Point(18, 19)
+        Me.ucrSelectorIDVarietyLevel.Location = New System.Drawing.Point(12, 12)
         Me.ucrSelectorIDVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorIDVarietyLevel.Name = "ucrSelectorIDVarietyLevel"
-        Me.ucrSelectorIDVarietyLevel.Size = New System.Drawing.Size(320, 282)
+        Me.ucrSelectorIDVarietyLevel.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorIDVarietyLevel.TabIndex = 0
         '
         'ucrSelectorTricotVarietyLevel
@@ -201,21 +191,21 @@ Partial Class sdgTransformations
         Me.ucrSelectorTricotVarietyLevel.bDropUnusedFilterLevels = False
         Me.ucrSelectorTricotVarietyLevel.bShowHiddenColumns = False
         Me.ucrSelectorTricotVarietyLevel.bUseCurrentFilter = True
-        Me.ucrSelectorTricotVarietyLevel.Location = New System.Drawing.Point(18, 19)
+        Me.ucrSelectorTricotVarietyLevel.Location = New System.Drawing.Point(12, 12)
         Me.ucrSelectorTricotVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorTricotVarietyLevel.Name = "ucrSelectorTricotVarietyLevel"
-        Me.ucrSelectorTricotVarietyLevel.Size = New System.Drawing.Size(320, 282)
+        Me.ucrSelectorTricotVarietyLevel.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorTricotVarietyLevel.TabIndex = 0
         '
         'ucrReceiverTraitsVariety
         '
         Me.ucrReceiverTraitsVariety.AutoSize = True
         Me.ucrReceiverTraitsVariety.frmParent = Nothing
-        Me.ucrReceiverTraitsVariety.Location = New System.Drawing.Point(357, 160)
+        Me.ucrReceiverTraitsVariety.Location = New System.Drawing.Point(238, 104)
         Me.ucrReceiverTraitsVariety.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTraitsVariety.Name = "ucrReceiverTraitsVariety"
         Me.ucrReceiverTraitsVariety.Selector = Nothing
-        Me.ucrReceiverTraitsVariety.Size = New System.Drawing.Size(170, 31)
+        Me.ucrReceiverTraitsVariety.Size = New System.Drawing.Size(113, 20)
         Me.ucrReceiverTraitsVariety.strNcFilePath = ""
         Me.ucrReceiverTraitsVariety.TabIndex = 4
         Me.ucrReceiverTraitsVariety.ucrSelector = Nothing
@@ -224,11 +214,11 @@ Partial Class sdgTransformations
         '
         Me.ucrReceiverTraitID.AutoSize = True
         Me.ucrReceiverTraitID.frmParent = Nothing
-        Me.ucrReceiverTraitID.Location = New System.Drawing.Point(359, 81)
+        Me.ucrReceiverTraitID.Location = New System.Drawing.Point(239, 53)
         Me.ucrReceiverTraitID.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTraitID.Name = "ucrReceiverTraitID"
         Me.ucrReceiverTraitID.Selector = Nothing
-        Me.ucrReceiverTraitID.Size = New System.Drawing.Size(170, 31)
+        Me.ucrReceiverTraitID.Size = New System.Drawing.Size(113, 20)
         Me.ucrReceiverTraitID.strNcFilePath = ""
         Me.ucrReceiverTraitID.TabIndex = 2
         Me.ucrReceiverTraitID.ucrSelector = Nothing
@@ -237,11 +227,11 @@ Partial Class sdgTransformations
         '
         Me.ucrReceiverIDVarietyLevel.AutoSize = True
         Me.ucrReceiverIDVarietyLevel.frmParent = Nothing
-        Me.ucrReceiverIDVarietyLevel.Location = New System.Drawing.Point(359, 81)
+        Me.ucrReceiverIDVarietyLevel.Location = New System.Drawing.Point(239, 53)
         Me.ucrReceiverIDVarietyLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDVarietyLevel.Name = "ucrReceiverIDVarietyLevel"
         Me.ucrReceiverIDVarietyLevel.Selector = Nothing
-        Me.ucrReceiverIDVarietyLevel.Size = New System.Drawing.Size(170, 31)
+        Me.ucrReceiverIDVarietyLevel.Size = New System.Drawing.Size(113, 20)
         Me.ucrReceiverIDVarietyLevel.strNcFilePath = ""
         Me.ucrReceiverIDVarietyLevel.TabIndex = 2
         Me.ucrReceiverIDVarietyLevel.ucrSelector = Nothing
@@ -250,11 +240,11 @@ Partial Class sdgTransformations
         '
         Me.ucrReceiverIDVarietyVar.AutoSize = True
         Me.ucrReceiverIDVarietyVar.frmParent = Nothing
-        Me.ucrReceiverIDVarietyVar.Location = New System.Drawing.Point(357, 160)
+        Me.ucrReceiverIDVarietyVar.Location = New System.Drawing.Point(238, 104)
         Me.ucrReceiverIDVarietyVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDVarietyVar.Name = "ucrReceiverIDVarietyVar"
         Me.ucrReceiverIDVarietyVar.Selector = Nothing
-        Me.ucrReceiverIDVarietyVar.Size = New System.Drawing.Size(170, 31)
+        Me.ucrReceiverIDVarietyVar.Size = New System.Drawing.Size(113, 20)
         Me.ucrReceiverIDVarietyVar.strNcFilePath = ""
         Me.ucrReceiverIDVarietyVar.TabIndex = 4
         Me.ucrReceiverIDVarietyVar.ucrSelector = Nothing
@@ -265,10 +255,10 @@ Partial Class sdgTransformations
         Me.ucrInputGoodTraits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputGoodTraits.GetSetSelectedIndex = -1
         Me.ucrInputGoodTraits.IsReadOnly = False
-        Me.ucrInputGoodTraits.Location = New System.Drawing.Point(357, 160)
-        Me.ucrInputGoodTraits.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputGoodTraits.Location = New System.Drawing.Point(238, 104)
+        Me.ucrInputGoodTraits.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputGoodTraits.Name = "ucrInputGoodTraits"
-        Me.ucrInputGoodTraits.Size = New System.Drawing.Size(206, 32)
+        Me.ucrInputGoodTraits.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputGoodTraits.TabIndex = 5
         '
         'ucrInputNAS
@@ -277,10 +267,10 @@ Partial Class sdgTransformations
         Me.ucrInputNAS.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputNAS.GetSetSelectedIndex = -1
         Me.ucrInputNAS.IsReadOnly = False
-        Me.ucrInputNAS.Location = New System.Drawing.Point(357, 297)
-        Me.ucrInputNAS.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputNAS.Location = New System.Drawing.Point(238, 193)
+        Me.ucrInputNAS.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputNAS.Name = "ucrInputNAS"
-        Me.ucrInputNAS.Size = New System.Drawing.Size(206, 32)
+        Me.ucrInputNAS.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputNAS.TabIndex = 0
         '
         'ucrInputBadTraits
@@ -289,21 +279,21 @@ Partial Class sdgTransformations
         Me.ucrInputBadTraits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputBadTraits.GetSetSelectedIndex = -1
         Me.ucrInputBadTraits.IsReadOnly = False
-        Me.ucrInputBadTraits.Location = New System.Drawing.Point(357, 230)
-        Me.ucrInputBadTraits.Margin = New System.Windows.Forms.Padding(14)
+        Me.ucrInputBadTraits.Location = New System.Drawing.Point(238, 150)
+        Me.ucrInputBadTraits.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputBadTraits.Name = "ucrInputBadTraits"
-        Me.ucrInputBadTraits.Size = New System.Drawing.Size(206, 32)
+        Me.ucrInputBadTraits.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputBadTraits.TabIndex = 7
         '
         'ucrReceiverTraits2
         '
         Me.ucrReceiverTraits2.AutoSize = True
         Me.ucrReceiverTraits2.frmParent = Nothing
-        Me.ucrReceiverTraits2.Location = New System.Drawing.Point(357, 230)
+        Me.ucrReceiverTraits2.Location = New System.Drawing.Point(238, 150)
         Me.ucrReceiverTraits2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTraits2.Name = "ucrReceiverTraits2"
         Me.ucrReceiverTraits2.Selector = Nothing
-        Me.ucrReceiverTraits2.Size = New System.Drawing.Size(206, 126)
+        Me.ucrReceiverTraits2.Size = New System.Drawing.Size(137, 82)
         Me.ucrReceiverTraits2.strNcFilePath = ""
         Me.ucrReceiverTraits2.TabIndex = 6
         Me.ucrReceiverTraits2.ucrSelector = Nothing
@@ -311,21 +301,21 @@ Partial Class sdgTransformations
         'ucrBaseSdgTransformations
         '
         Me.ucrBaseSdgTransformations.AutoSize = True
-        Me.ucrBaseSdgTransformations.Location = New System.Drawing.Point(129, 456)
-        Me.ucrBaseSdgTransformations.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrBaseSdgTransformations.Location = New System.Drawing.Point(86, 296)
+        Me.ucrBaseSdgTransformations.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBaseSdgTransformations.Name = "ucrBaseSdgTransformations"
-        Me.ucrBaseSdgTransformations.Size = New System.Drawing.Size(336, 46)
+        Me.ucrBaseSdgTransformations.Size = New System.Drawing.Size(224, 30)
         Me.ucrBaseSdgTransformations.TabIndex = 1
         '
         'ucrReceiverTraits1
         '
         Me.ucrReceiverTraits1.AutoSize = True
         Me.ucrReceiverTraits1.frmParent = Nothing
-        Me.ucrReceiverTraits1.Location = New System.Drawing.Point(357, 230)
+        Me.ucrReceiverTraits1.Location = New System.Drawing.Point(238, 150)
         Me.ucrReceiverTraits1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTraits1.Name = "ucrReceiverTraits1"
         Me.ucrReceiverTraits1.Selector = Nothing
-        Me.ucrReceiverTraits1.Size = New System.Drawing.Size(170, 31)
+        Me.ucrReceiverTraits1.Size = New System.Drawing.Size(113, 20)
         Me.ucrReceiverTraits1.strNcFilePath = ""
         Me.ucrReceiverTraits1.TabIndex = 6
         Me.ucrReceiverTraits1.ucrSelector = Nothing
@@ -334,11 +324,11 @@ Partial Class sdgTransformations
         '
         Me.ucrReceiverVariety.AutoSize = True
         Me.ucrReceiverVariety.frmParent = Nothing
-        Me.ucrReceiverVariety.Location = New System.Drawing.Point(359, 81)
+        Me.ucrReceiverVariety.Location = New System.Drawing.Point(239, 53)
         Me.ucrReceiverVariety.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariety.Name = "ucrReceiverVariety"
         Me.ucrReceiverVariety.Selector = Nothing
-        Me.ucrReceiverVariety.Size = New System.Drawing.Size(170, 31)
+        Me.ucrReceiverVariety.Size = New System.Drawing.Size(113, 20)
         Me.ucrReceiverVariety.strNcFilePath = ""
         Me.ucrReceiverVariety.TabIndex = 2
         Me.ucrReceiverVariety.ucrSelector = Nothing
@@ -349,10 +339,10 @@ Partial Class sdgTransformations
         Me.ucrSelectorTricotIDLevel.bDropUnusedFilterLevels = False
         Me.ucrSelectorTricotIDLevel.bShowHiddenColumns = False
         Me.ucrSelectorTricotIDLevel.bUseCurrentFilter = True
-        Me.ucrSelectorTricotIDLevel.Location = New System.Drawing.Point(18, 19)
+        Me.ucrSelectorTricotIDLevel.Location = New System.Drawing.Point(12, 12)
         Me.ucrSelectorTricotIDLevel.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorTricotIDLevel.Name = "ucrSelectorTricotIDLevel"
-        Me.ucrSelectorTricotIDLevel.Size = New System.Drawing.Size(320, 282)
+        Me.ucrSelectorTricotIDLevel.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorTricotIDLevel.TabIndex = 0
         '
         'tbOptions
@@ -361,14 +351,16 @@ Partial Class sdgTransformations
         Me.tbOptions.Controls.Add(Me.tbVarietyLevel)
         Me.tbOptions.Controls.Add(Me.tbIDVarietyLevel)
         Me.tbOptions.Controls.Add(Me.tbIDVarietyTraitLevel)
-        Me.tbOptions.Location = New System.Drawing.Point(12, 12)
+        Me.tbOptions.Location = New System.Drawing.Point(8, 8)
+        Me.tbOptions.Margin = New System.Windows.Forms.Padding(2)
         Me.tbOptions.Name = "tbOptions"
         Me.tbOptions.SelectedIndex = 0
-        Me.tbOptions.Size = New System.Drawing.Size(593, 435)
+        Me.tbOptions.Size = New System.Drawing.Size(395, 283)
         Me.tbOptions.TabIndex = 0
         '
         'tbIDLevel
         '
+        Me.tbIDLevel.Controls.Add(Me.chkChooseTraitsSuffix)
         Me.tbIDLevel.Controls.Add(Me.ucrReceiverIDVariable)
         Me.tbIDLevel.Controls.Add(Me.ucrInputBadTraits)
         Me.tbIDLevel.Controls.Add(Me.ucrInputNAS)
@@ -378,23 +370,38 @@ Partial Class sdgTransformations
         Me.tbIDLevel.Controls.Add(Me.ucrInputGoodTraits)
         Me.tbIDLevel.Controls.Add(Me.lblGoodTraits)
         Me.tbIDLevel.Controls.Add(Me.ucrSelectorTricotIDLevel)
-        Me.tbIDLevel.Location = New System.Drawing.Point(4, 29)
+        Me.tbIDLevel.Location = New System.Drawing.Point(4, 22)
+        Me.tbIDLevel.Margin = New System.Windows.Forms.Padding(2)
         Me.tbIDLevel.Name = "tbIDLevel"
-        Me.tbIDLevel.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbIDLevel.Size = New System.Drawing.Size(585, 402)
+        Me.tbIDLevel.Padding = New System.Windows.Forms.Padding(2)
+        Me.tbIDLevel.Size = New System.Drawing.Size(387, 257)
         Me.tbIDLevel.TabIndex = 0
         Me.tbIDLevel.Text = "ID Level"
         Me.tbIDLevel.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverIDVariable
+        '
+        Me.ucrReceiverIDVariable.AutoSize = True
+        Me.ucrReceiverIDVariable.frmParent = Nothing
+        Me.ucrReceiverIDVariable.Location = New System.Drawing.Point(238, 57)
+        Me.ucrReceiverIDVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverIDVariable.Name = "ucrReceiverIDVariable"
+        Me.ucrReceiverIDVariable.Selector = Nothing
+        Me.ucrReceiverIDVariable.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverIDVariable.strNcFilePath = ""
+        Me.ucrReceiverIDVariable.TabIndex = 9
+        Me.ucrReceiverIDVariable.ucrSelector = Nothing
         '
         'tbVarietyLevel
         '
         Me.tbVarietyLevel.Controls.Add(Me.ucrSelectorTricotVarietyLevel)
         Me.tbVarietyLevel.Controls.Add(Me.ucrReceiverVariety)
         Me.tbVarietyLevel.Controls.Add(Me.lblVariety)
-        Me.tbVarietyLevel.Location = New System.Drawing.Point(4, 29)
+        Me.tbVarietyLevel.Location = New System.Drawing.Point(4, 22)
+        Me.tbVarietyLevel.Margin = New System.Windows.Forms.Padding(2)
         Me.tbVarietyLevel.Name = "tbVarietyLevel"
-        Me.tbVarietyLevel.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbVarietyLevel.Size = New System.Drawing.Size(585, 402)
+        Me.tbVarietyLevel.Padding = New System.Windows.Forms.Padding(2)
+        Me.tbVarietyLevel.Size = New System.Drawing.Size(387, 257)
         Me.tbVarietyLevel.TabIndex = 1
         Me.tbVarietyLevel.Text = "Variety Level"
         Me.tbVarietyLevel.UseVisualStyleBackColor = True
@@ -408,10 +415,11 @@ Partial Class sdgTransformations
         Me.tbIDVarietyLevel.Controls.Add(Me.ucrReceiverTraits2)
         Me.tbIDVarietyLevel.Controls.Add(Me.lblTraits)
         Me.tbIDVarietyLevel.Controls.Add(Me.ucrReceiverIDVarietyVar)
-        Me.tbIDVarietyLevel.Location = New System.Drawing.Point(4, 29)
+        Me.tbIDVarietyLevel.Location = New System.Drawing.Point(4, 22)
+        Me.tbIDVarietyLevel.Margin = New System.Windows.Forms.Padding(2)
         Me.tbIDVarietyLevel.Name = "tbIDVarietyLevel"
-        Me.tbIDVarietyLevel.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbIDVarietyLevel.Size = New System.Drawing.Size(585, 402)
+        Me.tbIDVarietyLevel.Padding = New System.Windows.Forms.Padding(2)
+        Me.tbIDVarietyLevel.Size = New System.Drawing.Size(387, 257)
         Me.tbIDVarietyLevel.TabIndex = 2
         Me.tbIDVarietyLevel.Text = "Plot Level"
         Me.tbIDVarietyLevel.UseVisualStyleBackColor = True
@@ -425,36 +433,33 @@ Partial Class sdgTransformations
         Me.tbIDVarietyTraitLevel.Controls.Add(Me.ucrReceiverTraitID)
         Me.tbIDVarietyTraitLevel.Controls.Add(Me.lblTraits2)
         Me.tbIDVarietyTraitLevel.Controls.Add(Me.ucrReceiverTraits1)
-        Me.tbIDVarietyTraitLevel.Location = New System.Drawing.Point(4, 29)
+        Me.tbIDVarietyTraitLevel.Location = New System.Drawing.Point(4, 22)
+        Me.tbIDVarietyTraitLevel.Margin = New System.Windows.Forms.Padding(2)
         Me.tbIDVarietyTraitLevel.Name = "tbIDVarietyTraitLevel"
-        Me.tbIDVarietyTraitLevel.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbIDVarietyTraitLevel.Size = New System.Drawing.Size(585, 402)
+        Me.tbIDVarietyTraitLevel.Padding = New System.Windows.Forms.Padding(2)
+        Me.tbIDVarietyTraitLevel.Size = New System.Drawing.Size(387, 257)
         Me.tbIDVarietyTraitLevel.TabIndex = 3
         Me.tbIDVarietyTraitLevel.Text = "Plot-Trait Level"
         Me.tbIDVarietyTraitLevel.UseVisualStyleBackColor = True
         '
-        'ucrReceiverIDVariable
+        'chkChooseTraitsSuffix
         '
-        Me.ucrReceiverIDVariable.AutoSize = True
-        Me.ucrReceiverIDVariable.frmParent = Me
-        Me.ucrReceiverIDVariable.Location = New System.Drawing.Point(357, 88)
-        Me.ucrReceiverIDVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverIDVariable.Name = "ucrReceiverIDVariable"
-        Me.ucrReceiverIDVariable.Selector = Nothing
-        Me.ucrReceiverIDVariable.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverIDVariable.strNcFilePath = ""
-        Me.ucrReceiverIDVariable.TabIndex = 9
-        Me.ucrReceiverIDVariable.ucrSelector = Nothing
+        Me.chkChooseTraitsSuffix.AutoSize = True
+        Me.chkChooseTraitsSuffix.Location = New System.Drawing.Point(238, 6)
+        Me.chkChooseTraitsSuffix.Name = "chkChooseTraitsSuffix"
+        Me.chkChooseTraitsSuffix.Size = New System.Drawing.Size(120, 17)
+        Me.chkChooseTraitsSuffix.TabIndex = 10
+        Me.chkChooseTraitsSuffix.Text = "Choose Traits Suffix"
+        Me.chkChooseTraitsSuffix.UseVisualStyleBackColor = True
         '
         'sdgTransformations
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(623, 517)
+        Me.ClientSize = New System.Drawing.Size(415, 336)
         Me.Controls.Add(Me.tbOptions)
         Me.Controls.Add(Me.ucrBaseSdgTransformations)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "sdgTransformations"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -504,4 +509,5 @@ Partial Class sdgTransformations
     Friend WithEvents tbIDVarietyLevel As TabPage
     Friend WithEvents tbIDVarietyTraitLevel As TabPage
     Friend WithEvents ucrReceiverIDVariable As ucrReceiverSingle
+    Friend WithEvents chkChooseTraitsSuffix As CheckBox
 End Class
