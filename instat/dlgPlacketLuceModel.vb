@@ -53,7 +53,8 @@ Public Class dlgPlacketLuceModel
         ucrReceiverMultipleTraits.Selector = ucrSelectorTraitsPL
         ucrReceiverMultipleTraits.strSelectorHeading = "Traits"
         ucrReceiverMultipleTraits.SetMeAsReceiver()
-        ucrReceiverMultipleTraits.SetTricotType({"traits"})
+        ucrReceiverMultipleTraits.SetTricotType("traits")
+        ucrReceiverMultipleTraits.bAutoFill = True
         ucrReceiverMultipleTraits.SetLinkedDisplayControl(lblTraits)
 
         ucrSaveResult.SetPrefix("model")
