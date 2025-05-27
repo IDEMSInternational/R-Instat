@@ -1,4 +1,6 @@
-﻿Public Class ucrColumnWidth
+﻿Imports RDotNet
+
+Public Class ucrColumnWidth
 
     Private clsOperator As New ROperator
     Private bFirstload As Boolean = True
@@ -11,8 +13,10 @@
     End Sub
 
     Private Sub InitialiseControl()
-        ucrReceiverMultipleCols.Selector = ucrSelectorCols
-        ucrReceiverMultipleCols.SetMeAsReceiver()
+        ucrReceiverSingleCol.Selector = ucrSelectorCols
+        ucrReceiverSingleCol.strSelectorHeading = "Tables"
+        ucrReceiverSingleCol.SetItemType(RObjectTypeLabel.Table)
+        ucrReceiverSingleCol.SetMeAsReceiver()
 
         ucrNudWidth.Minimum = 0
         ucrNudWidth.Maximum = Decimal.MaxValue
@@ -42,31 +46,12 @@
         Next
     End Sub
 
-    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged
-        btnAdd.Enabled = Not ucrReceiverMultipleCols.IsEmpty
+    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore)
+        btnAdd.Enabled = Not ucrReceiverSingleCol.IsEmpty
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-
-        Dim clsColWidthRFunction As New RFunction
-        clsColWidthRFunction.SetPackageName("gt")
-        clsColWidthRFunction.SetRCommand("cols_width")
-        clsColWidthRFunction.AddParameter(strParameterName:="column_param", strParameterValue:=ucrReceiverMultipleCols.GetVariableNames(bWithQuotes:=False) & " ~ px(" & ucrNudWidth.Value & ")", iPosition:=0, bIncludeArgumentName:=False)
-
-        ' Create parameter with unique name
-        Dim clsRParam As New RParameter(strParameterName:="tab_col_width_param" & (dataGrid.Rows.Count + 1), strParamValue:=clsColWidthRFunction, bNewIncludeArgumentName:=False)
-
-        ' Create row and its cells
-        Dim row As New DataGridViewRow
-        row.CreateCells(dataGrid)
-        row.Cells(0).Value = clsColWidthRFunction.Clone.ToScript
-
-        ' Tag the row with the parameter 
-        row.Tag = clsRParam
-
-        ' Add it to grid
-        dataGrid.Rows.Add(row)
-
+        AddRemoveColumns()
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
@@ -79,5 +64,45 @@
 
         ' Add new changes
         clsTablesUtils.AddGridRowTagsRParamsToROperator(dataGrid, clsOperator)
+    End Sub
+
+    Private Sub AddRemoveColumns()
+        Dim clsGetRObjectFunction As New RFunction
+        Dim clsAsDataFrameFunction As New RFunction
+        clsGetRObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetRObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorCols.strCurrentDataFrame & Chr(34))
+        clsGetRObjectFunction.AddParameter("object_name", ucrReceiverSingleCol.GetVariableNames)
+
+        clsAsDataFrameFunction.SetRCommand("as.data.frame")
+        clsAsDataFrameFunction.AddParameter("object", clsRFunctionParameter:=clsGetRObjectFunction, bIncludeArgumentName:=False)
+        Dim strScript As String = "colnames(" & clsAsDataFrameFunction.ToScript & ")"
+        Dim lstObjectss As GenericVector
+        lstObjectss = frmMain.clsRLink.RunInternalScriptGetValue(strScript).AsList
+
+        Dim strAllNames As String = "c(" & String.Join(", ", lstObjectss.Select(Function(x) """" & x.AsCharacter(0) & """")) & ")"
+
+        Dim clsColWidthRFunction As New RFunction
+        clsColWidthRFunction.SetPackageName("gt")
+        clsColWidthRFunction.SetRCommand("cols_width")
+        clsColWidthRFunction.AddParameter(strParameterName:="column_param", strParameterValue:=strAllNames & " ~ px(" & ucrNudWidth.Value & ")", iPosition:=0, bIncludeArgumentName:=False)
+
+        Dim clsPipeOperator As New ROperator
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("left", "last_table", iPosition:=0)
+        clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsColWidthRFunction, iPosition:=1)
+
+        ' Create parameter with unique name
+        Dim clsRParam As New RParameter(strParameterName:="tab_col_width_param" & (dataGrid.Rows.Count + 1), strParamValue:=clsPipeOperator, bNewIncludeArgumentName:=False)
+
+        ' Create row and its cells
+        Dim row As New DataGridViewRow
+        row.CreateCells(dataGrid)
+        row.Cells(0).Value = clsPipeOperator.Clone.ToScript
+
+        ' Tag the row with the parameter 
+        row.Tag = clsRParam
+
+        ' Add it to grid
+        dataGrid.Rows.Add(row)
     End Sub
 End Class

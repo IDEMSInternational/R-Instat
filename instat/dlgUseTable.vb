@@ -182,21 +182,184 @@ Public Class dlgUseTable
         Return arrStr(0) & "|" & arrStr(1)
     End Function
 
+    'Public Sub AddRemoveGetDataObjColumn()
+    '    Dim clsGetDataObjFunction As New RFunction
+    '    clsGetDataObjFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+    '    clsGetDataObjFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+    '    clsGetDataObjFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrReceiverSingleCol.GetVariableNames())
+    '    clsGetDataObjFunction.SetAssignTo("last_table")
+
+    '    Dim clsGetDataObjWidthFunction As New RFunction
+    '    clsGetDataObjWidthFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+    '    clsGetDataObjWidthFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnWidth.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+    '    clsGetDataObjWidthFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnWidth.ucrReceiverSingleCol.GetVariableNames())
+    '    clsGetDataObjWidthFunction.SetAssignTo("last_table")
+
+    '    Dim clsGetDataObjMissingFunction As New RFunction
+    '    clsGetDataObjMissingFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+    '    clsGetDataObjMissingFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnMissingTexts.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+    '    clsGetDataObjMissingFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnMissingTexts.ucrReceiverSingleCol.GetVariableNames())
+    '    clsGetDataObjMissingFunction.SetAssignTo("last_table")
+
+    '    Dim clsGetDataObjStyleFunction As New RFunction
+    '    clsGetDataObjStyleFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+    '    clsGetDataObjStyleFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnMissingTexts.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+    '    clsGetDataObjStyleFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnMissingTexts.ucrReceiverSingleCol.GetVariableNames())
+    '    clsGetDataObjStyleFunction.SetAssignTo("last_table")
+
+    '    Dim clsGetDataFootFunction As New RFunction
+    '    clsGetDataFootFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+    '    clsGetDataFootFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnFootNote.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+    '    clsGetDataFootFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnFootNote.ucrReceiverSingleCol.GetVariableNames())
+    '    clsGetDataFootFunction.SetAssignTo("last_table")
+
+    '    Dim clsGetDataObjSpannerFunction As New RFunction
+    '    clsGetDataObjSpannerFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+    '    clsGetDataObjSpannerFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnSpanners.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+    '    clsGetDataObjSpannerFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnSpanners.ucrReceiverSingleCol.GetVariableNames())
+    '    clsGetDataObjSpannerFunction.SetAssignTo("last_table")
+
+    '    Dim clsGetDataObjNanoFunction As New RFunction
+    '    clsGetDataObjNanoFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+    '    clsGetDataObjNanoFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnNanoPlots.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+    '    clsGetDataObjNanoFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnNanoPlots.ucrReceiverSingleCol.GetVariableNames())
+    '    clsGetDataObjNanoFunction.SetAssignTo("last_table")
+    '    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjSpannerFunction)
+    '    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjStyleFunction)
+    '    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFootFunction)
+    '    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjNanoFunction)
+    '    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjMissingFunction)
+    '    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+    '    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjWidthFunction)
+    '    If sdgTableOptionsAfter.ucrColumns.rdoColLabel.Checked Then
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjSpannerFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjStyleFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFootFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjNanoFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjMissingFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjWidthFunction)
+    '        If Not sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrReceiverSingleCol.IsEmpty Then
+    '            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataObjFunction, iPosition:=0)
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+    '        End If
+    '    ElseIf sdgTableOptionsAfter.ucrColumns.rdoColWidth.Checked Then
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjSpannerFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjStyleFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFootFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjNanoFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjMissingFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+    '        If Not sdgTableOptionsAfter.ucrColumns.ucrColumnWidth.ucrReceiverSingleCol.IsEmpty Then
+    '            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataObjWidthFunction, iPosition:=0)
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjWidthFunction)
+    '        End If
+    '    ElseIf sdgTableOptionsAfter.ucrColumns.rdoColMissing.Checked Then
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjSpannerFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjStyleFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFootFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjNanoFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjWidthFunction)
+    '        If Not sdgTableOptionsAfter.ucrColumns.ucrColumnMissingTexts.ucrReceiverSingleCol.IsEmpty Then
+    '            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataObjMissingFunction, iPosition:=0)
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjMissingFunction)
+    '        End If
+    '    ElseIf sdgTableOptionsAfter.ucrColumns.rdoColStyles.Checked Then
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjSpannerFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFootFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjNanoFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjMissingFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjWidthFunction)
+    '        If Not sdgTableOptionsAfter.ucrColumns.ucrColumnStyles.ucrReceiverSingleCol.IsEmpty Then
+    '            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataObjStyleFunction, iPosition:=0)
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjStyleFunction)
+    '        End If
+    '    ElseIf sdgTableOptionsAfter.ucrColumns.rdoColFootNotes.Checked Then
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjSpannerFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjStyleFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjNanoFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjMissingFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjWidthFunction)
+    '        If Not sdgTableOptionsAfter.ucrColumns.ucrColumnFootNote.ucrReceiverSingleCol.IsEmpty Then
+    '            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFootFunction, iPosition:=0)
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFootFunction)
+    '        End If
+    '    ElseIf sdgTableOptionsAfter.ucrColumns.rdoColSpanners.Checked Then
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjStyleFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFootFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjNanoFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjMissingFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjWidthFunction)
+    '        If Not sdgTableOptionsAfter.ucrColumns.ucrColumnSpanners.ucrReceiverSingleCol.IsEmpty Then
+    '            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataObjSpannerFunction, iPosition:=0)
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjSpannerFunction)
+    '        End If
+    '    ElseIf sdgTableOptionsAfter.ucrColumns.rdoColNanoPlot.Checked Then
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjSpannerFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjStyleFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFootFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjMissingFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+    '        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjWidthFunction)
+    '        If Not sdgTableOptionsAfter.ucrColumns.ucrColumnNanoPlots.ucrReceiverSingleCol.IsEmpty Then
+    '            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataObjNanoFunction, iPosition:=0)
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjNanoFunction)
+    '        End If
+    '    End If
+    'End Sub
     Public Sub AddRemoveGetDataObjColumn()
+
+        ' Étape 1 : Supprimer les fonctions get_object_data existantes
+        Dim lstBeforeCodes As List(Of RCodeStructure) = ucrBase.clsRsyntax.GetBeforeCodes()
+
+        ' Supprimer en commençant par la fin pour éviter les erreurs d'indexation
+        For i As Integer = lstBeforeCodes.Count - 1 To 0 Step -1
+            Dim clsFunc As RFunction = TryCast(lstBeforeCodes(i), RFunction)
+            If clsFunc IsNot Nothing AndAlso clsFunc.strRCommand.Contains("get_object_data") Then
+                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsFunc)
+            End If
+        Next
+
+        ' Étape 2 : Créer et ajouter la nouvelle fonction selon le bouton coché
         Dim clsGetDataObjFunction As New RFunction
         clsGetDataObjFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
-        clsGetDataObjFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrSelectorCols.strCurrentDataFrame & Chr(34))
-        clsGetDataObjFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrReceiverSingleCol.GetVariableNames())
-        clsGetDataObjFunction.SetAssignTo("last_graph")
-        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
-        If sdgTableOptionsAfter.ucrColumns.rdoColLabel.Checked Then
-            If Not sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrReceiverSingleCol.IsEmpty Then
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataObjFunction, iPosition:=0)
-            Else
-                ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
-            End If
+        clsGetDataObjFunction.SetAssignTo("last_table")
+
+        If sdgTableOptionsAfter.ucrColumns.rdoColLabel.Checked AndAlso Not sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrReceiverSingleCol.IsEmpty Then
+            clsGetDataObjFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+            clsGetDataObjFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnLabels.ucrReceiverSingleCol.GetVariableNames())
+        ElseIf sdgTableOptionsAfter.ucrColumns.rdoColWidth.Checked AndAlso Not sdgTableOptionsAfter.ucrColumns.ucrColumnWidth.ucrReceiverSingleCol.IsEmpty Then
+            clsGetDataObjFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnWidth.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+            clsGetDataObjFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnWidth.ucrReceiverSingleCol.GetVariableNames())
+        ElseIf sdgTableOptionsAfter.ucrColumns.rdoColMissing.Checked AndAlso Not sdgTableOptionsAfter.ucrColumns.ucrColumnMissingTexts.ucrReceiverSingleCol.IsEmpty Then
+            clsGetDataObjFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnMissingTexts.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+            clsGetDataObjFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnMissingTexts.ucrReceiverSingleCol.GetVariableNames())
+        ElseIf sdgTableOptionsAfter.ucrColumns.rdoColStyles.Checked AndAlso Not sdgTableOptionsAfter.ucrColumns.ucrColumnStyles.ucrReceiverSingleCol.IsEmpty Then
+            clsGetDataObjFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnStyles.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+            clsGetDataObjFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnStyles.ucrReceiverSingleCol.GetVariableNames())
+        ElseIf sdgTableOptionsAfter.ucrColumns.rdoColFootNotes.Checked AndAlso Not sdgTableOptionsAfter.ucrColumns.ucrColumnFootNote.ucrReceiverSingleCol.IsEmpty Then
+            clsGetDataObjFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnFootNote.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+            clsGetDataObjFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnFootNote.ucrReceiverSingleCol.GetVariableNames())
+        ElseIf sdgTableOptionsAfter.ucrColumns.rdoColSpanners.Checked AndAlso Not sdgTableOptionsAfter.ucrColumns.ucrColumnSpanners.ucrReceiverSingleCol.IsEmpty Then
+            clsGetDataObjFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnSpanners.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+            clsGetDataObjFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnSpanners.ucrReceiverSingleCol.GetVariableNames())
+        ElseIf sdgTableOptionsAfter.ucrColumns.rdoColNanoPlot.Checked AndAlso Not sdgTableOptionsAfter.ucrColumns.ucrColumnNanoPlots.ucrReceiverSingleCol.IsEmpty Then
+            clsGetDataObjFunction.AddParameter("data_name", Chr(34) & sdgTableOptionsAfter.ucrColumns.ucrColumnNanoPlots.ucrSelectorCols.strCurrentDataFrame & Chr(34))
+            clsGetDataObjFunction.AddParameter("object_name", sdgTableOptionsAfter.ucrColumns.ucrColumnNanoPlots.ucrReceiverSingleCol.GetVariableNames())
         Else
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataObjFunction)
+            Exit Sub
         End If
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataObjFunction, iPosition:=0)
     End Sub
 End Class

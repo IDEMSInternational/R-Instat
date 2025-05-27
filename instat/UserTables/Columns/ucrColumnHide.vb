@@ -14,6 +14,8 @@ Public Class ucrColumnHide
 
     Private Sub InitialiseControl()
         ucrReceiverMultipleCols.Selector = ucrSelectorCols
+        ucrReceiverMultipleCols.strSelectorHeading = "Tables"
+        ucrReceiverMultipleCols.SetItemType(RObjectTypeLabel.Table)
         ucrReceiverMultipleCols.SetMeAsReceiver()
     End Sub
 
