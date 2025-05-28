@@ -19,7 +19,7 @@ Public Class dlgImportGriddedData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bShowMessageBox As Boolean
-    Private clsDownloadFromIRIFunction As New RFunction
+    Private clsDownloadFromIRIFunction, clsMultipleIRIFunction, clsDummyFunction As New RFunction
     Private dctDownloadPairs, dctFiles As New Dictionary(Of String, String)
     Private Sub dlgImportGriddedData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -37,6 +37,38 @@ Public Class dlgImportGriddedData
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 526
+
+        ucrSelectorIRIVariable.SetParameter(New RParameter("data_frame", 1))
+        ucrSelectorIRIVariable.SetParameterIsrfunction()
+
+        ucrReceiverLatitude.SetParameter(New RParameter("min_lat ", 4))
+        ucrReceiverLatitude.Selector = ucrSelectorIRIVariable
+        ucrReceiverLatitude.SetParameterIsString()
+        ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitude)
+
+        ucrReceiverLongtitude.SetParameter(New RParameter("min_lon ", 5))
+        ucrReceiverLongtitude.Selector = ucrSelectorIRIVariable
+        ucrReceiverLongtitude.SetParameterIsString()
+        ucrReceiverLongtitude.SetLinkedDisplayControl(lblLongtude)
+
+        ucrReceiverIDVariable.SetParameter(New RParameter("id_var", 2))
+        ucrReceiverIDVariable.Selector = ucrSelectorIRIVariable
+        ucrReceiverIDVariable.SetParameterIsString()
+        ucrReceiverIDVariable.SetLinkedDisplayControl(lblIDVariable)
+        ucrReceiverIDVariable.SetMeAsReceiver()
+
+        ucrReceiverMinPlantingDate.SetParameter(New RParameter("min_date ", 6))
+        ucrReceiverMinPlantingDate.Selector = ucrSelectorIRIVariable
+        ucrReceiverMinPlantingDate.SetParameterIsString()
+        ucrReceiverMinPlantingDate.SetLinkedDisplayControl(lblPlantingDateMin)
+
+        ucrReceiverMaxPlantingDate.SetParameter(New RParameter("max_date", 7))
+        ucrReceiverMaxPlantingDate.Selector = ucrSelectorIRIVariable
+        ucrReceiverMaxPlantingDate.SetParameterIsString()
+
+        ucrNudMaxPlantingDate.SetParameter(New RParameter("max_date ", 7))
+        ucrNudMaxPlantingDate.SetMinMax(25, 366)
+        ucrNudMaxPlantingDate.Increment = 1
 
         ucrInputSource.SetParameter(New RParameter("source", 0))
         dctDownloadPairs.Add("NASA", Chr(34) & "NASA" & Chr(34))
@@ -84,6 +116,18 @@ Public Class dlgImportGriddedData
         ucrPnlDateRange.AddParameterPresentCondition(rdoCustomRange, {"min_date", "max_date"})
         ucrPnlDateRange.AddParameterPresentCondition(rdoEntireRange, {"min_date", "max_date"}, False)
 
+        ucrPnlOptions.AddRadioButton(rdoIRIValue)
+        ucrPnlOptions.AddRadioButton(rdoIRIVariable)
+
+        ucrPnlOptions.AddFunctionNamesCondition(rdoIRIValue, frmMain.clsRLink.strInstatDataObject & "$download_from_IRI")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoIRIVariable, frmMain.clsRLink.strInstatDataObject & "data_book$download_from_IRI_multiple")
+
+        ucrPnlMaxPlantingDate.AddRadioButton(rdoMaxPlantValue)
+        ucrPnlMaxPlantingDate.AddRadioButton(rdoVariableMaxPlant)
+
+        ucrPnlMaxPlantingDate.AddFunctionNamesCondition(rdoMaxPlantValue, "max_date")
+        ucrPnlMaxPlantingDate.AddFunctionNamesCondition(rdoVariableMaxPlant, "max_date")
+
         ucrChkDontImportData.SetParameter(New RParameter("import", 11))
         ucrChkDontImportData.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
         ucrChkDontImportData.SetText("Don' t import data after downloading")
@@ -102,7 +146,11 @@ Public Class dlgImportGriddedData
 
     Private Sub SetDefaults()
         clsDownloadFromIRIFunction = New RFunction
+        clsMultipleIRIFunction = New RFunction
+        clsDummyFunction = New RFunction
         bShowMessageBox = True
+
+        rdoIRIValue.Checked = True
 
         dctFiles = New Dictionary(Of String, String)
         dctFiles.Add("TRMM 3B42 3-Hourly Precipitation", Chr(34) & "3_hourly_prcp" & Chr(34))
@@ -119,17 +167,22 @@ Public Class dlgImportGriddedData
         clsDownloadFromIRIFunction.AddParameter("max_lat", 0.5, iPosition:=6)
         clsDownloadFromIRIFunction.AddParameter("download_type", Chr(34) & "Point" & Chr(34), iPosition:=10)
 
+        clsDummyFunction.AddParameter("checked", "max_date", iPosition:=0)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsDownloadFromIRIFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrSelectorIRIVariable.SetRCode(clsMultipleIRIFunction, bReset)
+        ucrPnlMaxPlantingDate.SetRCode(clsDummyFunction, bReset)
         If bReset Then
             SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrInputNewDataFrameName.IsEmpty OrElse (rdoPoint.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty)) OrElse (rdoArea.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty OrElse ucrInputMaxLon.IsEmpty OrElse ucrInputMaxLat.IsEmpty)) OrElse ucrInputFilePath.IsEmpty OrElse (Not rdoCustomRange.Checked AndAlso ucrDtpMinDate.DateValue > ucrDtpMaxDate.DateValue) Then
+        If ucrInputNewDataFrameName.IsEmpty OrElse (rdoPoint.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty)) OrElse (rdoArea.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty OrElse ucrInputMaxLon.IsEmpty OrElse ucrInputMaxLat.IsEmpty)) OrElse ucrInputFilePath.IsEmpty OrElse (Not rdoCustomRange.Checked AndAlso ucrDtpMinDate.DateValue > ucrDtpMaxDate.DateValue) OrElse
+            (rdoIRIVariable.Checked AndAlso (ucrReceiverIDVariable.IsEmpty OrElse ucrReceiverLatitude.IsEmpty OrElse ucrReceiverLongtitude.IsEmpty)) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -241,7 +294,81 @@ Public Class dlgImportGriddedData
         End If
     End Sub
 
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If rdoIRIValue.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDownloadFromIRIFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsMultipleIRIFunction)
+        ElseIf rdoIRIVariable.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleIRIFunction)
+            UpdateParameters()
+        End If
+        HideShowControls()
+    End Sub
+
+    Private Sub HideShowControls()
+        If rdoIRIValue.Checked Then
+            grpDateRange.Show()
+            grpLocationRange.Show()
+            grpImportIRIVariable.Hide()
+        ElseIf rdoIRIVariable.Checked Then
+            grpImportIRIVariable.Show()
+            grpDateRange.Hide()
+            grpLocationRange.Hide()
+            rdoMaxPlantValue.Checked = True
+        End If
+    End Sub
+
+    Private Sub UpdateParameters()
+        clsMultipleIRIFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "data_book$download_from_IRI_multiple")
+        clsMultipleIRIFunction.AddParameter("data", Chr(34) & "3_hourly_prcp" & Chr(34), iPosition:=2)
+        clsMultipleIRIFunction.AddParameter("path", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\", "/"), iPosition:=3)
+    End Sub
+
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDataFrameName.ControlContentsChanged, ucrInputMinLon.ControlContentsChanged, ucrInputMaxLon.ControlContentsChanged, ucrInputMinLat.ControlContentsChanged, ucrInputMaxLat.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrDtpMinDate.ControlContentsChanged, ucrDtpMaxDate.ControlContentsChanged, ucrPnlDateRange.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlMaxPlantingDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMaxPlantingDate.ControlValueChanged
+        clsMultipleIRIFunction.RemoveParameterByName("max_date")
+        If rdoMaxPlantValue.Checked Then
+            ucrReceiverMaxPlantingDate.Visible = True
+            ucrNudMaxPlantingDate.Visible = False
+        ElseIf rdoVariableMaxPlant.Checked Then
+            ucrNudMaxPlantingDate.Visible = True
+            ucrReceiverMaxPlantingDate.Visible = False
+            clsMultipleIRIFunction.AddParameter("max_date ", Chr(34) & ucrNudMaxPlantingDate.GetText & Chr(34), iPosition:=7)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverIDVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVariable.ControlValueChanged
+        If Not ucrReceiverIDVariable.IsEmpty Then
+            clsMultipleIRIFunction.AddParameter("id_var ", ucrReceiverIDVariable.GetVariableNames, iPosition:=1)
+        Else
+            clsMultipleIRIFunction.RemoveParameterByName("id_var")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverLatitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlValueChanged
+        If Not ucrReceiverLatitude.IsEmpty Then
+            clsMultipleIRIFunction.AddParameter("min_lat", ucrReceiverLatitude.GetVariableNames, iPosition:=5)
+        Else
+            clsMultipleIRIFunction.RemoveParameterByName("min_lat")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverLongtitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLongtitude.ControlValueChanged
+        If Not ucrReceiverLongtitude.IsEmpty Then
+            clsMultipleIRIFunction.AddParameter("min_lon", ucrReceiverLatitude.GetVariableNames, iPosition:=4)
+        Else
+            clsMultipleIRIFunction.RemoveParameterByName("min_lon")
+        End If
+    End Sub
+
+    Private Sub ucrReceiverMinPlantingDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMinPlantingDate.ControlValueChanged
+        If Not ucrReceiverMinPlantingDate.IsEmpty Then
+            clsMultipleIRIFunction.AddParameter("min_date", ucrReceiverMinPlantingDate.GetVariableNames, iPosition:=6)
+        Else
+            clsMultipleIRIFunction.RemoveParameterByName("min_date")
+        End If
     End Sub
 End Class
