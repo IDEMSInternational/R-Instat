@@ -222,11 +222,17 @@
                                 "strValueKey": "storeTableOrDataFrame"
                             },
                             {
-                                "enumTransformationType": "functionUpdateParamValue",
+                                "enumTransformationType": "functionRemoveParamByName",
                                 "iStatementNumber": 11,
                                 "strFunctionName": "list",
-                                "iParameterNumber": 0,
-                                "strValueKey": "storeTableOrDataFrame",
+                                "strParameterName": "last_dataframe"
+                            },
+                            {
+                                "enumTransformationType": "functionAddParam",
+                                "iStatementNumber": 11,
+                                "strFunctionName": "list",
+                                "strParameterNameKey": "storeTableOrDataFrame",
+                                "strValueKey": "storeTableOrDataFrame"
                             },
                             {
                                 "enumTransformationType": "functionUpdateParamValue",
