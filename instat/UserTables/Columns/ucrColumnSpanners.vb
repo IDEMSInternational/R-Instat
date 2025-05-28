@@ -1,4 +1,5 @@
 ﻿Imports unvell.ReoGrid.IO.OpenXML.Schema
+Imports RDotNet
 
 Public Class ucrColumnSpanners
 
@@ -6,8 +7,10 @@ Public Class ucrColumnSpanners
     Private bFirstload As Boolean = True
 
     Private Sub InitialiseDialog()
-        ucrReceiverMultipleCols.Selector = ucrSelectorCols
-        ucrReceiverMultipleCols.SetMeAsReceiver()
+        ucrReceiverSingleCol.Selector = ucrSelectorCols
+        ucrReceiverSingleCol.strSelectorHeading = "Tables"
+        ucrReceiverSingleCol.SetItemType(RObjectTypeLabel.Table)
+        ucrReceiverSingleCol.SetMeAsReceiver()
     End Sub
 
     Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
@@ -73,17 +76,32 @@ Public Class ucrColumnSpanners
     End Sub
 
     Private Sub btnAddColSpanner_Click(sender As Object, e As EventArgs) Handles btnAddColSpanner.Click
+        Dim clsGetRObjectFunction As New RFunction
+        Dim clsAsDataFrameFunction As New RFunction
+        clsGetRObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object_data")
+        clsGetRObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorCols.strCurrentDataFrame & Chr(34))
+        clsGetRObjectFunction.AddParameter("object_name", ucrReceiverSingleCol.GetVariableNames)
+
+        clsAsDataFrameFunction.SetRCommand("as.data.frame")
+        clsAsDataFrameFunction.AddParameter("object", clsRFunctionParameter:=clsGetRObjectFunction, bIncludeArgumentName:=False)
+        Dim strScript As String = "colnames(" & clsAsDataFrameFunction.ToScript & ")"
+        Dim lstObjectss As GenericVector
+        lstObjectss = frmMain.clsRLink.RunInternalScriptGetValue(strScript).AsList
+
+        Dim strAllNames As String = "c(" & String.Join(", ", lstObjectss.Select(Function(x) x.AsCharacter(0))) & ")"
+
         Dim strSpannerLabel As String = ucrInputColSpanner.GetText()
         Dim strSpannerId As String = strSpannerLabel.Replace(" ", String.Empty)
-        Dim strSpannerColsRFunction As String = mdlCoreControl.GetRVector(ucrReceiverMultipleCols.GetVariableNamesList(bWithQuotes:=False), bOnlyIfMultipleElement:=False)
+        Dim strSpannerColsRFunction As String = strAllNames
         Dim strSpannerStyleExpression As String = ""
 
         Dim clsTabSpannerRFunction As New RFunction
         clsTabSpannerRFunction.SetPackageName("gt")
         clsTabSpannerRFunction.SetRCommand("tab_spanner")
-        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="label", strParamValue:=clsTablesUtils.GetStringValue(strSpannerLabel, True), iNewPosition:=0))
-        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=strSpannerColsRFunction, iNewPosition:=1))
-        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="id", strParamValue:=clsTablesUtils.GetStringValue(strSpannerId, True), iNewPosition:=2))
+        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="data", strParamValue:=ucrReceiverSingleCol.GetVariableNames(bWithQuotes:=False), iNewPosition:=0))
+        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="label", strParamValue:=clsTablesUtils.GetStringValue(strSpannerLabel, True), iNewPosition:=1))
+        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="columns", strParamValue:=strSpannerColsRFunction, iNewPosition:=2))
+        clsTabSpannerRFunction.AddParameter(New RParameter(strParameterName:="id", strParamValue:=clsTablesUtils.GetStringValue(strSpannerId, True), iNewPosition:=3))
 
         Dim arrParams(2) As RParameter
 
@@ -114,13 +132,13 @@ Public Class ucrColumnSpanners
         row.Tag = arrParams
         dataGridColSpanners.Rows.Add(row)
 
-        ucrReceiverMultipleCols.Clear()
+        ' ucrReceiverSingleCol.Clear()
         ucrInputColSpanner.SetName("")
         ucrInputColSpanner.Tag = Nothing
     End Sub
 
-    Private Sub ucrColSpanner_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleCols.ControlContentsChanged, ucrInputColSpanner.ControlContentsChanged
-        btnAddColSpanner.Enabled = Not ucrReceiverMultipleCols.IsEmpty AndAlso Not ucrInputColSpanner.IsEmpty
+    Private Sub ucrColSpanner_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingleCol.ControlContentsChanged, ucrInputColSpanner.ControlContentsChanged
+        btnAddColSpanner.Enabled = Not ucrReceiverSingleCol.IsEmpty AndAlso Not ucrInputColSpanner.IsEmpty
     End Sub
 
     Private Sub btnClearSpanners_Click(sender As Object, e As EventArgs) Handles btnClearSpanners.Click
