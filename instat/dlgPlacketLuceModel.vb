@@ -312,7 +312,7 @@ Public Class dlgPlacketLuceModel
         clsLevelFunction.AddParameter("x", clsRFunctionParameter:=clsFactorFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         clsFactorFunction.SetRCommand("factor")
-        clsFactorFunction.AddParameter("x", ucrSelectorTraitsPL.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "[[var_name]]")
+        clsFactorFunction.AddParameter("x", ucrSelectorTraitsPL.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "[[var_name]]", bIncludeArgumentName:=False)
 
         clsPlotFunction.SetPackageName("purrr")
         clsPlotFunction.SetRCommand("map2")
