@@ -125,8 +125,8 @@ Public Class dlgImportGriddedData
         ucrPnlMaxPlantingDate.AddRadioButton(rdoMaxPlantValue)
         ucrPnlMaxPlantingDate.AddRadioButton(rdoVariableMaxPlant)
 
-        ucrPnlMaxPlantingDate.AddParameterValuesCondition(rdoMaxPlantValue, "checked", True)
-        ucrPnlMaxPlantingDate.AddParameterValuesCondition(rdoVariableMaxPlant, "checked", False)
+        ucrPnlMaxPlantingDate.AddFunctionNamesCondition(rdoMaxPlantValue, "max_date")
+        ucrPnlMaxPlantingDate.AddFunctionNamesCondition(rdoVariableMaxPlant, "max_date")
 
         ucrChkDontImportData.SetParameter(New RParameter("import", 11))
         ucrChkDontImportData.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
@@ -181,7 +181,8 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrInputNewDataFrameName.IsEmpty OrElse (rdoPoint.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty)) OrElse (rdoArea.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty OrElse ucrInputMaxLon.IsEmpty OrElse ucrInputMaxLat.IsEmpty)) OrElse ucrInputFilePath.IsEmpty OrElse (Not rdoCustomRange.Checked AndAlso ucrDtpMinDate.DateValue > ucrDtpMaxDate.DateValue) Then
+        If ucrInputNewDataFrameName.IsEmpty OrElse (rdoPoint.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty)) OrElse (rdoArea.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty OrElse ucrInputMaxLon.IsEmpty OrElse ucrInputMaxLat.IsEmpty)) OrElse ucrInputFilePath.IsEmpty OrElse (Not rdoCustomRange.Checked AndAlso ucrDtpMinDate.DateValue > ucrDtpMaxDate.DateValue) OrElse
+            (rdoIRIVariable.Checked AndAlso (ucrReceiverIDVariable.IsEmpty OrElse ucrReceiverLatitude.IsEmpty OrElse ucrReceiverLongtitude.IsEmpty)) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
