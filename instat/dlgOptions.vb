@@ -107,6 +107,9 @@ Public Class dlgOptions
         ucrNudMaxOutputsHeight.Minimum = 0
         ucrNudMaxOutputsHeight.Maximum = 1000
 
+        tbpWebsite.Enabled = False
+        ucrChkReminder.Enabled = False
+
         SetVisibleLanButton()
     End Sub
 
