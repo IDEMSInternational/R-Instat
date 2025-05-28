@@ -217,6 +217,10 @@ Public Class sdgSummaries
         ucrInputComboPropTest.SetDropDownStyleAsNonEditable()
 
         ucrInputPropValue.SetParameter(New RParameter("prop_value", 6))
+<<<<<<< HEAD
+=======
+
+>>>>>>> b93e9b9b083ae2c6f7eac2db4c2b89639f5e3694
 
         ucrInputComboCountTest.SetParameter(New RParameter("count_test", 7))
         Dim dctCountTest As New Dictionary(Of String, String)
@@ -229,6 +233,10 @@ Public Class sdgSummaries
         ucrInputComboCountTest.SetDropDownStyleAsNonEditable()
 
         ucrInputCountValue.SetParameter(New RParameter("count_value", 8))
+<<<<<<< HEAD
+=======
+
+>>>>>>> b93e9b9b083ae2c6f7eac2db4c2b89639f5e3694
 
         ucrChkProportion.SetParameter(New RParameter("proportion_calc", 42), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "proportion_calc" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkProportion.SetText("Proportion")
@@ -437,7 +445,13 @@ Public Class sdgSummaries
             ucrPnlPosition.SetRCode(clsDummyFunction, bReset)
         End If
         ucrChkPercentage.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+<<<<<<< HEAD
         ucrInputComboPropTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+=======
+
+        ucrInputComboPropTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+
+>>>>>>> b93e9b9b083ae2c6f7eac2db4c2b89639f5e3694
         ucrInputComboCountTest.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputPercentile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFraction.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
@@ -449,6 +463,10 @@ Public Class sdgSummaries
 
         ucrChkCount.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkProportion.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+<<<<<<< HEAD
+=======
+
+>>>>>>> b93e9b9b083ae2c6f7eac2db4c2b89639f5e3694
         ucrChkTrimmedMean.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkNTotal.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkNonMissing.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -503,6 +521,10 @@ Public Class sdgSummaries
         ucrChkMax.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkQ1.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkQ3.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+<<<<<<< HEAD
+=======
+
+>>>>>>> b93e9b9b083ae2c6f7eac2db4c2b89639f5e3694
         ucrChkSd.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkVar.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkAngVar.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -695,6 +717,36 @@ Public Class sdgSummaries
             clsDefaultFunction.AddParameter("summary_where_y", ucrReceiverInclude.GetVariableNames, iPosition:=2)
         Else
             clsDefaultFunction.RemoveParameterByName("summary_where_y")
+        End If
+    End Sub
+
+    Private Sub ucrInputPropValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPropValue.ControlValueChanged, ucrChkProportion.ControlValueChanged
+
+        Dim strValue As String = ucrInputPropValue.GetText()
+
+        If ucrChkProportion.Checked AndAlso Not ucrInputPropValue.IsEmpty Then
+            If IsNumeric(strValue) Then
+                clsDefaultFunction.AddParameter("prop_value", strValue, iPosition:=6)
+            Else
+                clsDefaultFunction.AddParameter("prop_value", Chr(34) & "'" & strValue & "'" & Chr(34), iPosition:=6)
+            End If
+        Else
+            clsDefaultFunction.RemoveParameterByName("prop_value")
+        End If
+    End Sub
+
+    Private Sub ucrInputCountValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputCountValue.ControlValueChanged, ucrChkCount.ControlValueChanged
+
+        Dim strValue As String = ucrInputCountValue.GetText()
+
+        If ucrChkCount.Checked AndAlso Not ucrInputCountValue.IsEmpty Then
+            If IsNumeric(strValue) Then
+                clsDefaultFunction.AddParameter("count_value", strValue, iPosition:=8)
+            Else
+                clsDefaultFunction.AddParameter("count_value", Chr(34) & "'" & strValue & "'" & Chr(34), iPosition:=8)
+            End If
+        Else
+            clsDefaultFunction.RemoveParameterByName("count_value")
         End If
     End Sub
 
