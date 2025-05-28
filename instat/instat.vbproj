@@ -542,6 +542,12 @@
     <Compile Include="UserTables\Cells\Formats\ucrCellFormats.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.Designer.vb">
+      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserTables\Cells\Formats\ucrNewCellFormats.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\Cells\Styles\ucrCellStyles.Designer.vb">
       <DependentUpon>ucrCellStyles.vb</DependentUpon>
     </Compile>
@@ -3655,6 +3661,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Formats\ucrCellFormats.resx">
       <DependentUpon>ucrCellFormats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTables\Cells\Formats\ucrNewCellFormats.resx">
+      <DependentUpon>ucrNewCellFormats.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\Styles\ucrCellStyles.resx">
       <DependentUpon>ucrCellStyles.vb</DependentUpon>
