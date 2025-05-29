@@ -41,7 +41,7 @@ Public Class dlgModellingTree
     Private clsAnnovaFunction, clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction As New RFunction
     Private clsWrapBarFunction, clsWrapPlotFunction, clsPlacketFunction, clsWrapTrees As New RFunction
 
-    Private clsAddObjectHeatFunction, clsHeatFunction, clsTreeFunction, clsImportDataFunction As New RFunction
+    Private clsAddObjectHeatFunction, clsHeatFunction, clsTreeFunction, clsImportDataFunction, clsDefineAsTricotFunction As New RFunction
     Private clsPlotFunction, clsBarfunction As New RFunction
 
     Public bResetSubDialog As Boolean = False
@@ -78,7 +78,8 @@ Public Class dlgModellingTree
         ucrReceiverModellingTree.SetParameterIsRFunction()
         ucrReceiverModellingTree.Selector = ucrSelectorByDataFrameAddRemoveForModellingTree
         ucrReceiverModellingTree.strSelectorHeading = "Traits"
-        ucrReceiverModellingTree.SetTricotType({"traits"})
+        ucrReceiverModellingTree.SetTricotType("traits")
+        ucrReceiverModellingTree.bAutoFill = True
 
         ucrReceiverExpressionModellingTree.SetParameter(New RParameter("y", 2))
         ucrReceiverExpressionModellingTree.SetParameterIsString()
@@ -616,7 +617,7 @@ Public Class dlgModellingTree
     End Sub
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction, clsNewCoefFunction:=clscoefFunction, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction,
-            clsNewEstimatesFunction:=clsEstimatesFunction, clsNewImportDataFunction:=clsImportDataFunction, clsNewPipeOperator:=clsPipeOperator, clsNewDevianceFunction:=clsDevianceMainFunction,
+            clsNewEstimatesFunction:=clsEstimatesFunction, clsNewImportDataFunction:=clsImportDataFunction, clsNewDefineAsTricotFunction:=clsDefineAsTricotFunction, clsNewPipeOperator:=clsPipeOperator, clsNewDevianceFunction:=clsDevianceMainFunction,
             clsNewPariPropFunction:=clsPairwiseProbMainFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
             clsNewItemsFunction:=clsItemsParFunction, clsNewRegretFunction:=clsRegretFunction, clsNewNodeLabFuction:=clsNodeLabelsFunction,
             clsNewNodeRuleFunction:=clsNodeRulesFunction, clsNewTopItemFunction:=clsTopItemsFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewAICFunction:=clsUnListAICFunction,
