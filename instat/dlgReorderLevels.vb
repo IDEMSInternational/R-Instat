@@ -222,7 +222,7 @@ Public Class dlgReorderLevels
 
         clsForcatsRelevelFunction.SetPackageName("forcats")
         clsForcatsRelevelFunction.SetRCommand("fct_relevel")
-        clsForcatsRelevelFunction.AddParameter("sort", "sort", iPosition:=1)
+        clsForcatsRelevelFunction.AddParameter("sort", "sort", iPosition:=1, bIncludeArgumentName:=False)
 
         clsForcatsReorderFunction.SetPackageName("forcats")
         clsForcatsReorderFunction.SetRCommand("fct_reorder")
