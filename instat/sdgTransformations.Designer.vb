@@ -50,10 +50,10 @@ Partial Class sdgTransformations
         Me.ucrSelectorTricotIDLevel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbOptions = New System.Windows.Forms.TabControl()
         Me.tbIDLevel = New System.Windows.Forms.TabPage()
+        Me.ucrReceiverIDVariable = New instat.ucrReceiverSingle()
         Me.tbVarietyLevel = New System.Windows.Forms.TabPage()
         Me.tbIDVarietyLevel = New System.Windows.Forms.TabPage()
         Me.tbIDVarietyTraitLevel = New System.Windows.Forms.TabPage()
-        Me.ucrReceiverIDVariable = New instat.ucrReceiverSingle()
         Me.tbOptions.SuspendLayout()
         Me.tbIDLevel.SuspendLayout()
         Me.tbVarietyLevel.SuspendLayout()
@@ -386,6 +386,19 @@ Partial Class sdgTransformations
         Me.tbIDLevel.Text = "ID Level"
         Me.tbIDLevel.UseVisualStyleBackColor = True
         '
+        'ucrReceiverIDVariable
+        '
+        Me.ucrReceiverIDVariable.AutoSize = True
+        Me.ucrReceiverIDVariable.frmParent = Nothing
+        Me.ucrReceiverIDVariable.Location = New System.Drawing.Point(357, 88)
+        Me.ucrReceiverIDVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverIDVariable.Name = "ucrReceiverIDVariable"
+        Me.ucrReceiverIDVariable.Selector = Nothing
+        Me.ucrReceiverIDVariable.Size = New System.Drawing.Size(180, 30)
+        Me.ucrReceiverIDVariable.strNcFilePath = ""
+        Me.ucrReceiverIDVariable.TabIndex = 9
+        Me.ucrReceiverIDVariable.ucrSelector = Nothing
+        '
         'tbVarietyLevel
         '
         Me.tbVarietyLevel.Controls.Add(Me.ucrSelectorTricotVarietyLevel)
@@ -432,19 +445,6 @@ Partial Class sdgTransformations
         Me.tbIDVarietyTraitLevel.TabIndex = 3
         Me.tbIDVarietyTraitLevel.Text = "Plot-Trait Level"
         Me.tbIDVarietyTraitLevel.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverIDVariable
-        '
-        Me.ucrReceiverIDVariable.AutoSize = True
-        Me.ucrReceiverIDVariable.frmParent = Me
-        Me.ucrReceiverIDVariable.Location = New System.Drawing.Point(357, 88)
-        Me.ucrReceiverIDVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverIDVariable.Name = "ucrReceiverIDVariable"
-        Me.ucrReceiverIDVariable.Selector = Nothing
-        Me.ucrReceiverIDVariable.Size = New System.Drawing.Size(180, 30)
-        Me.ucrReceiverIDVariable.strNcFilePath = ""
-        Me.ucrReceiverIDVariable.TabIndex = 9
-        Me.ucrReceiverIDVariable.ucrSelector = Nothing
         '
         'sdgTransformations
         '

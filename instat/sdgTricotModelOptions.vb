@@ -21,6 +21,22 @@ Public Class sdgTricotModelOptions
     Private clsRSyntax As New RSyntax
     Public clsPladmmFunction As New RFunction
 
+    Public enumTricotModelOptionsMode As String = TricotModelOptionsMode.dlgTricotModelOneVarCov
+
+    Public Enum TricotModelOptionsMode
+        dlgTricotModelOneVarCov
+        dlgTricotModellingGeneral
+    End Enum
+
+    Private Sub setHelpOptions()
+        Select Case enumTricotModelOptionsMode
+            Case TricotModelOptionsMode.dlgTricotModelOneVarCov
+                ucrSdgButton.iHelpTopicID = 725
+            Case TricotModelOptionsMode.dlgTricotModellingGeneral
+                ucrSdgButton.iHelpTopicID = 727
+        End Select
+    End Sub
+
     Private Sub sdgTricotModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub

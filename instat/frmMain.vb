@@ -3124,7 +3124,7 @@ Public Class frmMain
 
     'Pivot table dialog
     Private Sub mnuTricotexamineeditdataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataPivotTable.Click
-        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Climatic
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Tricot
         dlgThreeVariablePivotTable.ShowDialog()
     End Sub
 

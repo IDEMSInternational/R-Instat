@@ -32,6 +32,22 @@ Public Class sdgPLModelOptions
         End If
     End Sub
 
+    Public enumPLModelOptionsMode As String = PLModelOptionsMode.dlgPlacketLuceModel
+
+    Public Enum PLModelOptionsMode
+        dlgPlacketLuceModel
+        dlgModellingTree
+    End Enum
+
+    Public Sub setHelpOptions()
+        Select Case enumPLModelOptionsMode
+            Case PLModelOptionsMode.dlgPlacketLuceModel
+                ucrBase.iHelpTopicID = 721
+            Case PLModelOptionsMode.dlgModellingTree
+                ucrBase.iHelpTopicID = 723
+        End Select
+    End Sub
+
     Private Sub InitialiseDialog()
         ucrChkMultivariateNormal.SetParameter(New RParameter("normal"))
         ucrChkMultivariateNormal.SetText("Normal")

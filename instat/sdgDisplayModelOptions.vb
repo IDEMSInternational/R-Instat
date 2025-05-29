@@ -23,11 +23,32 @@ Public Class sdgDisplayModelOptions
     Private clsPipeOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bInitialised As Boolean = False
+    Public enumPlacketLuceModelMode As String = PlacketLuceModelMode.dlgPlacketLuceModel
 
     Private clsRSyntax As New RSyntax
 
     Private Sub sdgDisplayModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+    End Sub
+
+    Public Enum PlacketLuceModelMode
+        dlgPlacketLuceModel
+        dlgModellingTree
+        dlgTricotModelOneVarCov
+        dlgTricotModellingGeneral
+    End Enum
+
+    Private Sub SetHelpOptions()
+        Select Case enumPlacketLuceModelMode
+            Case PlacketLuceModelMode.dlgPlacketLuceModel
+                ucrSdgButtons.iHelpTopicID = 723
+            Case PlacketLuceModelMode.dlgModellingTree
+                ucrSdgButtons.iHelpTopicID = 724
+            Case PlacketLuceModelMode.dlgTricotModelOneVarCov
+                ucrSdgButtons.iHelpTopicID = 726
+            Case PlacketLuceModelMode.dlgTricotModellingGeneral
+                ucrSdgButtons.iHelpTopicID = 728
+        End Select
     End Sub
 
     Private Sub InitialiseDialog()
