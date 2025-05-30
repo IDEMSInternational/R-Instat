@@ -18,18 +18,14 @@ Imports instat
 Imports instat.Translations
 
 Public Class ucrTables
-    Public clsCurrDataFrame As New RFunction
+    Public clsCurrTable As New RFunction
     Public bFirstLoad As Boolean = True
-    Private bPvtUseFilteredData As Boolean
-    Private bPvtDropUnusedFilterLevels As Boolean = False
-
-    Private strCachedDataFrameName As String = ""
+    Private strDataName As String = ""
+    Private strCachedTableName As String = ""
 
     'todo. rename this property to SelectedDataFrameName. 
-    Public ReadOnly Property strCurrDataFrame As String
+    Public ReadOnly Property strCurrTable As String
         Get
-            'return cboAvailableTables.Text because cboAvailableTables.SelectedItem
-            'could be Nothing
             Return cboAvailableTables.Text
         End Get
     End Property
@@ -72,18 +68,27 @@ Public Class ucrTables
 
         'always load data frame names on load event because a data frame may have been deleted
         'and the control needs to refresh the data frame names.
-        LoadDataFrameNamesAndFillComboBox()
+        LoadTableNamesAndFillComboBox()
     End Sub
 
     Private Sub InitialiseControl()
-        bUseCurrentFilter = True
+        AddHandler ucrDataFrame.ControlValueChanged, AddressOf OnDataFrameChanged
         lblTable.AutoSize = True
         bUpdateRCodeFromControl = True
     End Sub
 
+    Private Sub OnDataFrameChanged()
+        strDataName = ucrDataFrame.strCurrDataFrame
+        LoadTableNamesAndFillComboBox()
+    End Sub
+
+    'Private Sub cboAvailableTables_DropDown(sender As Object, e As EventArgs) Handles cboAvailableTables.DropDown
+    '    LoadTableNamesAndFillComboBox()
+    'End Sub
+
     Public Sub Reset()
         cboAvailableTables.Items.Clear()
-        LoadDataFrameNamesAndFillComboBox()
+        LoadTableNamesAndFillComboBox()
         'if there is a default data frame name then just select it, if it exists
         If Not String.IsNullOrEmpty(frmMain.strDefaultDataFrame) AndAlso cboAvailableTables.Items.Contains(frmMain.strDefaultDataFrame) Then
             cboAvailableTables.SelectedItem = frmMain.strDefaultDataFrame
@@ -97,66 +102,25 @@ Public Class ucrTables
     End Sub
 
     ''' <summary>
-    ''' <para>loads data frame names and fills the combobox used for selection</para> 
-    ''' <para>Updates the necessary values too</para>
-    ''' </summary>
-    Private Sub LoadDataFrameNamesAndFillComboBox()
-        bSuppressRefresh = True
-
-        'get current selected data frame name first before deleting
-        Dim strSelectedDataFrameName As String = cboAvailableTables.Text
-        'then clear items
-        cboAvailableTables.Items.Clear()
-        'add new items 
-        If bOnlyLinkedToPrimaryDataFrames Then
-            'todo. GetLinkedToDataFrameNames should also be done through the data book
-            'As of 22/04/022 the data book did not have this feature
-            cboAvailableTables.Items.AddRange(frmMain.clsRLink.GetLinkedToDataFrameNames(strPrimaryDataFrame, bIncludePrimaryDataFrameAsLinked).ToArray)
-        ElseIf frmMain.DataBook IsNot Nothing Then
-            'Above check was added because of issue #4557.
-            'todo. Once the DataBook is moved to a global class, then it can be removed
-            For Each dataFrame As clsDataFrame In frmMain.DataBook.DataFrames
-                cboAvailableTables.Items.Add(dataFrame.strName)
-            Next
-        End If
-
-        If cboAvailableTables.Items.Count > 0 Then
-            If cboAvailableTables.Items.Contains(strSelectedDataFrameName) Then
-                'try to restore the data frame name that was previously selected
-                cboAvailableTables.SelectedItem = strSelectedDataFrameName
-            Else
-                'if this control did not have any any data frame previously selected
-                'then set one from data viewer focused data frame
-                'get data viewer selected data frame 
-                cboAvailableTables.SelectedItem = frmMain.ucrDataViewer.GetCurrentDataFrameNameFocus()
-            End If
-
-        End If
-
-        bSuppressRefresh = False
-
-        UpdateValuesAndRaiseEvents()
-    End Sub
-
-    ''' <summary>
     ''' updates necessary values if the cached data frame is not equal to selected data frame
     ''' </summary>
     Private Sub UpdateValuesAndRaiseEvents()
 
         'only set the other values and raise events if the data frame truly changed
-        If strCachedDataFrameName = cboAvailableTables.Text Then
+        If strCachedTableName = cboAvailableTables.Text Then
             Exit Sub
         End If
 
         'set parameter properties. Note we are updating this R Function at this level because
         'of how it's being used by other dialogs
-        clsCurrDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsCurrDataFrame.AddParameter(strParameterName:="data_name",
-                                      strParameterValue:=Chr(34) & cboAvailableTables.Text & Chr(34), iPosition:=0)
-        clsCurrDataFrame.SetAssignTo(cboAvailableTables.Text)
+        clsCurrTable.SetRCommand("data_book$get_object_data")
+        clsCurrTable.AddParameter("data_name", Chr(34) & strDataName & Chr(34), iPosition:=0)
+        clsCurrTable.AddParameter("object_name", Chr(34) & cboAvailableTables.Text & Chr(34), iPosition:=1)
+        clsCurrTable.AddParameter("as_file", "FALSE", iPosition:=2)
+        clsCurrTable.SetAssignTo(cboAvailableTables.Text)
 
         'set cached data frame name
-        strCachedDataFrameName = cboAvailableTables.Text
+        strCachedTableName = cboAvailableTables.Text
 
         'raise event
         OnControlValueChanged()
@@ -205,7 +169,7 @@ Public Class ucrTables
             If bParameterIsString Then
                 clsTempParam.SetArgumentValue(Chr(34) & cboAvailableTables.Text & Chr(34))
             ElseIf bParameterIsRFunction Then
-                clsTempParam.SetArgument(clsCurrDataFrame)
+                clsTempParam.SetArgument(clsCurrTable)
             End If
         End If
     End Sub
@@ -222,53 +186,37 @@ Public Class ucrTables
     ''' <para>Default is True.</para>
     ''' </param>
     Public Sub SetDataframe(strDataFrameName As String, Optional bEnableUserSelection As Boolean = True)
-        'set if data frame name should be selectable
+        strDataName = strDataFrameName
         cboAvailableTables.Enabled = bEnableUserSelection
 
-        'load and fill all the data frame names
-        LoadDataFrameNamesAndFillComboBox()
-
-        'set the passed data frame name as the selected one
-        If cboAvailableTables.Items.Contains(strDataFrameName) Then
-            cboAvailableTables.SelectedItem = strDataFrameName
-        End If
+        LoadTableNamesAndFillComboBox()
     End Sub
 
-    Public Property bUseCurrentFilter As Boolean
-        Get
-            Return bPvtUseFilteredData
-        End Get
-        Set(bValue As Boolean)
-            bPvtUseFilteredData = bValue
-            If bPvtUseFilteredData Then
-                If frmMain.clsInstatOptions IsNot Nothing AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    clsCurrDataFrame.AddParameter("use_current_filter", "TRUE")
-                Else
-                    clsCurrDataFrame.RemoveParameterByName("use_current_filter")
-                End If
-            Else
-                clsCurrDataFrame.AddParameter("use_current_filter", "FALSE")
-            End If
-        End Set
-    End Property
+    Private Sub LoadTableNamesAndFillComboBox()
+        Debug.Print("Calling table load for data frame: " & strDataName)
 
-    Public Property bDropUnusedFilterLevels As Boolean
-        Get
-            Return bPvtDropUnusedFilterLevels
-        End Get
-        Set(bValue As Boolean)
-            bPvtDropUnusedFilterLevels = bValue
-            If bPvtDropUnusedFilterLevels Then
-                clsCurrDataFrame.AddParameter("drop_unused_filter_levels", "TRUE")
-            Else
-                If frmMain.clsInstatOptions IsNot Nothing AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    clsCurrDataFrame.AddParameter("drop_unused_filter_levels", "FALSE")
-                Else
-                    clsCurrDataFrame.RemoveParameterByName("drop_unused_filter_levels")
-                End If
+        bSuppressRefresh = True
+        Dim strSelectedTable As String = cboAvailableTables.Text
+        cboAvailableTables.Items.Clear()
+
+        If Not String.IsNullOrEmpty(strDataName) Then
+            Dim lstTables As List(Of String) = frmMain.clsRLink.GetObjectNames(strDataName, "table")
+            Debug.Print("Got " & lstTables.Count.ToString() & " tables")
+            If lstTables IsNot Nothing Then
+                cboAvailableTables.Items.AddRange(lstTables.ToArray())
             End If
-        End Set
-    End Property
+        End If
+
+        If cboAvailableTables.Items.Contains(strSelectedTable) Then
+            cboAvailableTables.SelectedItem = strSelectedTable
+        ElseIf cboAvailableTables.Items.Count > 0 Then
+            cboAvailableTables.SelectedIndex = 0
+        End If
+
+        bSuppressRefresh = False
+        UpdateValuesAndRaiseEvents()
+    End Sub
+
 
     Private Sub mnuRightClickCopy_Click(sender As Object, e As EventArgs) Handles mnuRightClickCopy.Click
         'TODO Combo box should be replaced by ucrInput so that context menu done automatically
@@ -297,7 +245,7 @@ Public Class ucrTables
                 End If
             End If
         End If
-        If strDataFrameName <> "" AndAlso strDataFrameName <> strCurrDataFrame Then
+        If strDataFrameName <> "" AndAlso strDataFrameName <> strCurrTable Then
             'Substring used to removed quotes on either side
             strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2)
             SetDataframe(strDataFrameName)
@@ -349,12 +297,22 @@ Public Class ucrTables
         bOnlyLinkedToPrimaryDataFrames = bNewOnlyLinkedToPrimaryDataFrames
         bIncludePrimaryDataFrameAsLinked = bNewIncludePrimaryDataFrameAsLinked
         If bUpdate Then
-            LoadDataFrameNamesAndFillComboBox()
+            LoadTableNamesAndFillComboBox()
         End If
     End Sub
 
     Public Overrides Function GetText(Optional enumTextType As [Enum] = Nothing) As String
-        Return strCurrDataFrame
+        Return strCurrTable
     End Function
+    Public ReadOnly Property SelectedTable As String
+        Get
+            Return cboAvailableTables.Text
+        End Get
+    End Property
 
+    Public ReadOnly Property SelectedDataFrame As String
+        Get
+            Return ucrDataFrame.strCurrDataFrame
+        End Get
+    End Property
 End Class

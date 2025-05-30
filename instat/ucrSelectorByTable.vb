@@ -17,17 +17,20 @@
 Imports instat
 
 Public Class ucrSelectorByTable
-
     Public Overrides Sub LoadList()
-        If ucrAvailableTables.cboAvailableTables.Text <> "" Then
-            MyBase.LoadList()
-        Else
-            lstAvailableVariable.Clear()
+        lstAvailableVariable.Items.Clear()
+
+        If ucrAvailableTables.SelectedDataFrame <> "" AndAlso ucrAvailableTables.SelectedTable <> "" Then
+            Dim colNames As List(Of String) = frmMain.clsRLink.GetColumnNamesFromTable(ucrAvailableTables.SelectedDataFrame, ucrAvailableTables.SelectedTable)
+
+            For Each colName In colNames
+                lstAvailableVariable.Items.Add(colName)
+            Next
         End If
     End Sub
 
     Private Sub ucrAvailableTables_ControlValueChanged(sender As Object) Handles ucrAvailableTables.ControlValueChanged
-        strCurrentDataFrame = ucrAvailableTables.cboAvailableTables.Text
+        strCurrentDataFrame = ucrAvailableTables.SelectedTable
         If CurrentReceiver Is Nothing OrElse CurrentReceiver.bAttachedToPrimaryDataFrame Then
             strPrimaryDataFrame = strCurrentDataFrame
         End If
@@ -52,24 +55,6 @@ Public Class ucrSelectorByTable
     Public Overridable Sub SetVariablesVisible(bVisible As Boolean)
         lstAvailableVariable.Visible = bVisible
     End Sub
-
-    Public Property bUseCurrentFilter As Boolean
-        Get
-            Return ucrAvailableTables.bUseCurrentFilter
-        End Get
-        Set(bValue As Boolean)
-            ucrAvailableTables.bUseCurrentFilter = bValue
-        End Set
-    End Property
-
-    Public Property bDropUnusedFilterLevels As Boolean
-        Get
-            Return ucrAvailableTables.bDropUnusedFilterLevels
-        End Get
-        Set(bValue As Boolean)
-            ucrAvailableTables.bDropUnusedFilterLevels = bValue
-        End Set
-    End Property
 
     Public Sub SetParameterIsString()
         ucrAvailableTables.SetParameterIsString()

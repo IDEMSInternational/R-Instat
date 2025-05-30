@@ -1,6 +1,39 @@
 ﻿Imports System.ComponentModel
 
 Public Class ucrSelectorByTablesAddRemove
+    Public Overrides Sub LoadList()
+        Debug.Print("LoadList called")
+
+        lstAvailableVariable.Items.Clear()
+
+        Debug.Print("SelectedDataFrame: " & ucrAvailableTables.SelectedDataFrame)
+        Debug.Print("SelectedTable: " & ucrAvailableTables.SelectedTable)
+
+        If ucrAvailableTables.SelectedDataFrame <> "" AndAlso ucrAvailableTables.SelectedTable <> "" Then
+            Dim lstColNames As List(Of String) = frmMain.clsRLink.GetColumnNamesFromTable(
+            strDataName:=ucrAvailableTables.SelectedDataFrame,
+            strTableName:=ucrAvailableTables.SelectedTable
+        )
+
+            If lstColNames IsNot Nothing Then
+                Debug.Print("Column names found: " & String.Join(", ", lstColNames))
+                For Each strCol As String In lstColNames
+                    lstAvailableVariable.Items.Add(strCol)
+                Next
+            Else
+                Debug.Print("lstColNames is Nothing!")
+            End If
+        Else
+            Debug.Print("One of the selectors is blank")
+        End If
+    End Sub
+
+
+    Private Sub ucrAvailableTables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrAvailableTables.ControlValueChanged
+        LoadList()
+        OnControlValueChanged()
+    End Sub
+
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click, toolStripAddSelected.Click
         Add()
     End Sub
@@ -28,16 +61,7 @@ Public Class ucrSelectorByTablesAddRemove
         btnAdd.Visible = bVisible
     End Sub
 
-    Public Sub HideShowAddOrDataOptionsOrListView(Optional bAddVisible As Boolean = True,
-                                                  Optional bDataOptionsVisible As Boolean = True,
-                                                  Optional bListVariables As Boolean = True)
-        btnAdd.Visible = bAddVisible
-        lstAvailableVariable.Visible = bListVariables
-    End Sub
-
     Private Sub contextMenuStripAdd_Opening(sender As Object, e As CancelEventArgs) Handles contextMenuStripAdd.Opening
-        'todo. this code block should be set under CurrentReceiver change event
-        'once the event is added it can be removed from here.
         If CurrentReceiver Is Nothing Then
             toolStripAddSelected.Enabled = False
             toolStripAddAll.Enabled = False

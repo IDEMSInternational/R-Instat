@@ -44,6 +44,7 @@ Partial Class ucrTables
         Me.mnuRightClickCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRightClickSetData = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblTable = New System.Windows.Forms.Label()
+        Me.ucrDataFrame = New instat.ucrDataFrame()
         Me.mnuRightClick.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -53,10 +54,10 @@ Partial Class ucrTables
         Me.cboAvailableTables.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cboAvailableTables.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAvailableTables.FormattingEnabled = True
-        Me.cboAvailableTables.Location = New System.Drawing.Point(0, 28)
+        Me.cboAvailableTables.Location = New System.Drawing.Point(0, 106)
         Me.cboAvailableTables.Margin = New System.Windows.Forms.Padding(4)
         Me.cboAvailableTables.Name = "cboAvailableTables"
-        Me.cboAvailableTables.Size = New System.Drawing.Size(220, 27)
+        Me.cboAvailableTables.Size = New System.Drawing.Size(220, 21)
         Me.cboAvailableTables.TabIndex = 0
         '
         'mnuRightClick
@@ -80,7 +81,7 @@ Partial Class ucrTables
         '
         'lblTable
         '
-        Me.lblTable.Location = New System.Drawing.Point(0, 4)
+        Me.lblTable.Location = New System.Drawing.Point(0, 82)
         Me.lblTable.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTable.Name = "lblTable"
         Me.lblTable.Size = New System.Drawing.Size(98, 20)
@@ -88,17 +89,30 @@ Partial Class ucrTables
         Me.lblTable.Tag = "Table:"
         Me.lblTable.Text = "Table:"
         '
+        'ucrDataFrame
+        '
+        Me.ucrDataFrame.AutoSize = True
+        Me.ucrDataFrame.bDropUnusedFilterLevels = False
+        Me.ucrDataFrame.bUseCurrentFilter = True
+        Me.ucrDataFrame.Location = New System.Drawing.Point(0, 3)
+        Me.ucrDataFrame.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrame.Name = "ucrDataFrame"
+        Me.ucrDataFrame.Size = New System.Drawing.Size(224, 53)
+        Me.ucrDataFrame.TabIndex = 2
+        '
         'ucrTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.ucrDataFrame)
         Me.Controls.Add(Me.lblTable)
         Me.Controls.Add(Me.cboAvailableTables)
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ucrTables"
-        Me.Size = New System.Drawing.Size(226, 75)
+        Me.Size = New System.Drawing.Size(226, 140)
         Me.mnuRightClick.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -107,4 +121,5 @@ Partial Class ucrTables
     Friend WithEvents mnuRightClick As ContextMenuStrip
     Friend WithEvents mnuRightClickCopy As ToolStripMenuItem
     Friend WithEvents mnuRightClickSetData As ToolStripMenuItem
+    Friend WithEvents ucrDataFrame As ucrDataFrame
 End Class

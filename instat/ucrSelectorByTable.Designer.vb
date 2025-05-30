@@ -44,19 +44,17 @@ Partial Class ucrSelectorByTable
         'lstAvailableVariable
         '
         Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.None
-        Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 75)
+        Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 140)
         Me.lstAvailableVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.lstAvailableVariable.TabIndex = 1
         '
         'ucrAvailableTables
         '
         Me.ucrAvailableTables.AutoSize = True
-        Me.ucrAvailableTables.bDropUnusedFilterLevels = False
-        Me.ucrAvailableTables.bUseCurrentFilter = True
         Me.ucrAvailableTables.Location = New System.Drawing.Point(0, 0)
         Me.ucrAvailableTables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAvailableTables.Name = "ucrAvailableTables"
-        Me.ucrAvailableTables.Size = New System.Drawing.Size(224, 53)
+        Me.ucrAvailableTables.Size = New System.Drawing.Size(224, 131)
         Me.ucrAvailableTables.TabIndex = 0
         '
         'ucrSelectorByTable
