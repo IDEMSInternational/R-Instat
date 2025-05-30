@@ -19,6 +19,7 @@ Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
 Imports RInsightF461
+Imports RDotNet.Internals
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R interface. 
@@ -2233,6 +2234,27 @@ Public Class RLink
     Private Function TrimStartRStatement(strRStatement As String) As String
         Dim arrTrimChars As Char() = {" "c, vbTab, vbLf, vbCr}
         Return strRStatement.TrimStart(arrTrimChars)
+    End Function
+
+    Public Function GetColumnNamesFromTable(strDataName As String, strTableName As String) As List(Of String)
+        Dim clsGetColNamesFunc, clsGetTableValues As New RFunction
+        Dim expColNames As SymbolicExpression
+        Dim lstColNames As New List(Of String)
+        Dim clsTempAssign As New RFunction
+
+        clsGetTableValues.SetRCommand("colnames")
+        clsGetTableValues.AddParameter("x", "data_book$get_object_data(data_name = " & Chr(34) & strDataName & Chr(34) & ", object_name = " & Chr(34) & strTableName & Chr(34) & ", as_file = FALSE)[['_data']]", bIncludeArgumentName:=False)
+
+        Debug.Print("R Script: " & clsGetTableValues.ToScript())
+
+        expColNames = RunInternalScriptGetValue(clsGetTableValues.ToScript(), bSilent:=True)
+        If expColNames IsNot Nothing AndAlso Not expColNames.Type = Internals.SymbolicExpressionType.Null Then
+            lstColNames = expColNames.AsCharacter().ToList()
+        End If
+
+        Debug.Print("expColNames: " & expColNames.ToString())
+
+        Return lstColNames
     End Function
 
 End Class
