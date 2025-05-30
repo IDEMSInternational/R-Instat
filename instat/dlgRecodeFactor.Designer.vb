@@ -75,9 +75,10 @@ Partial Class dlgRecodeFactor
         '
         Me.lblFactor.AutoSize = True
         Me.lblFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactor.Location = New System.Drawing.Point(248, 56)
+        Me.lblFactor.Location = New System.Drawing.Point(372, 84)
+        Me.lblFactor.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(85, 13)
+        Me.lblFactor.Size = New System.Drawing.Size(126, 20)
         Me.lblFactor.TabIndex = 6
         Me.lblFactor.Text = "Factor Selected:"
         '
@@ -86,9 +87,11 @@ Partial Class dlgRecodeFactor
         Me.grpSelectedValues.Controls.Add(Me.rdoKeep)
         Me.grpSelectedValues.Controls.Add(Me.rdoDrop)
         Me.grpSelectedValues.Controls.Add(Me.ucrPnlMethods)
-        Me.grpSelectedValues.Location = New System.Drawing.Point(10, 240)
+        Me.grpSelectedValues.Location = New System.Drawing.Point(15, 360)
+        Me.grpSelectedValues.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpSelectedValues.Name = "grpSelectedValues"
-        Me.grpSelectedValues.Size = New System.Drawing.Size(152, 59)
+        Me.grpSelectedValues.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpSelectedValues.Size = New System.Drawing.Size(228, 88)
         Me.grpSelectedValues.TabIndex = 18
         Me.grpSelectedValues.TabStop = False
         Me.grpSelectedValues.Text = "Selected Values"
@@ -97,9 +100,10 @@ Partial Class dlgRecodeFactor
         '
         Me.rdoKeep.AutoSize = True
         Me.rdoKeep.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoKeep.Location = New System.Drawing.Point(15, 25)
+        Me.rdoKeep.Location = New System.Drawing.Point(22, 38)
+        Me.rdoKeep.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoKeep.Name = "rdoKeep"
-        Me.rdoKeep.Size = New System.Drawing.Size(50, 17)
+        Me.rdoKeep.Size = New System.Drawing.Size(71, 24)
         Me.rdoKeep.TabIndex = 20
         Me.rdoKeep.TabStop = True
         Me.rdoKeep.Text = "Keep"
@@ -109,9 +113,10 @@ Partial Class dlgRecodeFactor
         '
         Me.rdoDrop.AutoSize = True
         Me.rdoDrop.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDrop.Location = New System.Drawing.Point(77, 25)
+        Me.rdoDrop.Location = New System.Drawing.Point(116, 38)
+        Me.rdoDrop.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoDrop.Name = "rdoDrop"
-        Me.rdoDrop.Size = New System.Drawing.Size(48, 17)
+        Me.rdoDrop.Size = New System.Drawing.Size(69, 24)
         Me.rdoDrop.TabIndex = 21
         Me.rdoDrop.TabStop = True
         Me.rdoDrop.Text = "Drop"
@@ -120,18 +125,20 @@ Partial Class dlgRecodeFactor
         'ucrPnlMethods
         '
         Me.ucrPnlMethods.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlMethods.Location = New System.Drawing.Point(5, 15)
+        Me.ucrPnlMethods.Location = New System.Drawing.Point(8, 22)
+        Me.ucrPnlMethods.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrPnlMethods.Name = "ucrPnlMethods"
-        Me.ucrPnlMethods.Size = New System.Drawing.Size(140, 37)
+        Me.ucrPnlMethods.Size = New System.Drawing.Size(210, 56)
         Me.ucrPnlMethods.TabIndex = 19
         '
         'lblOther
         '
         Me.lblOther.AutoSize = True
         Me.lblOther.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblOther.Location = New System.Drawing.Point(248, 314)
+        Me.lblOther.Location = New System.Drawing.Point(372, 471)
+        Me.lblOther.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblOther.Name = "lblOther"
-        Me.lblOther.Size = New System.Drawing.Size(82, 13)
+        Me.lblOther.Size = New System.Drawing.Size(122, 20)
         Me.lblOther.TabIndex = 16
         Me.lblOther.Text = "Name for Other:"
         '
@@ -144,9 +151,10 @@ Partial Class dlgRecodeFactor
         Me.rdoRecode.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRecode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRecode.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRecode.Location = New System.Drawing.Point(142, 12)
+        Me.rdoRecode.Location = New System.Drawing.Point(213, 18)
+        Me.rdoRecode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoRecode.Name = "rdoRecode"
-        Me.rdoRecode.Size = New System.Drawing.Size(68, 28)
+        Me.rdoRecode.Size = New System.Drawing.Size(102, 42)
         Me.rdoRecode.TabIndex = 1
         Me.rdoRecode.TabStop = True
         Me.rdoRecode.Tag = "Recode"
@@ -163,9 +171,10 @@ Partial Class dlgRecodeFactor
         Me.rdoOther.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoOther.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoOther.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoOther.Location = New System.Drawing.Point(276, 12)
+        Me.rdoOther.Location = New System.Drawing.Point(414, 18)
+        Me.rdoOther.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoOther.Name = "rdoOther"
-        Me.rdoOther.Size = New System.Drawing.Size(75, 28)
+        Me.rdoOther.Size = New System.Drawing.Size(112, 42)
         Me.rdoOther.TabIndex = 3
         Me.rdoOther.TabStop = True
         Me.rdoOther.Tag = "Other"
@@ -182,9 +191,10 @@ Partial Class dlgRecodeFactor
         Me.rdoLump.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLump.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoLump.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoLump.Location = New System.Drawing.Point(350, 12)
+        Me.rdoLump.Location = New System.Drawing.Point(525, 18)
+        Me.rdoLump.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoLump.Name = "rdoLump"
-        Me.rdoLump.Size = New System.Drawing.Size(75, 28)
+        Me.rdoLump.Size = New System.Drawing.Size(112, 42)
         Me.rdoLump.TabIndex = 4
         Me.rdoLump.TabStop = True
         Me.rdoLump.Tag = "Lump"
@@ -202,9 +212,11 @@ Partial Class dlgRecodeFactor
         Me.grpKeep.Controls.Add(Me.rdoCommonValues)
         Me.grpKeep.Controls.Add(Me.rdoLevels)
         Me.grpKeep.Controls.Add(Me.ucrPnlKeep)
-        Me.grpKeep.Location = New System.Drawing.Point(248, 99)
+        Me.grpKeep.Location = New System.Drawing.Point(372, 148)
+        Me.grpKeep.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.grpKeep.Name = "grpKeep"
-        Me.grpKeep.Size = New System.Drawing.Size(285, 119)
+        Me.grpKeep.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpKeep.Size = New System.Drawing.Size(428, 178)
         Me.grpKeep.TabIndex = 11
         Me.grpKeep.TabStop = False
         Me.grpKeep.Text = "Keep"
@@ -214,11 +226,12 @@ Partial Class dlgRecodeFactor
         Me.ucrNudFrequentValues.AutoSize = True
         Me.ucrNudFrequentValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrequentValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrequentValues.Location = New System.Drawing.Point(208, 67)
+        Me.ucrNudFrequentValues.Location = New System.Drawing.Point(312, 100)
+        Me.ucrNudFrequentValues.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrNudFrequentValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudFrequentValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrequentValues.Name = "ucrNudFrequentValues"
-        Me.ucrNudFrequentValues.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFrequentValues.Size = New System.Drawing.Size(75, 30)
         Me.ucrNudFrequentValues.TabIndex = 18
         Me.ucrNudFrequentValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -227,11 +240,12 @@ Partial Class dlgRecodeFactor
         Me.ucrNudCommonValues.AutoSize = True
         Me.ucrNudCommonValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCommonValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCommonValues.Location = New System.Drawing.Point(208, 44)
+        Me.ucrNudCommonValues.Location = New System.Drawing.Point(312, 66)
+        Me.ucrNudCommonValues.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrNudCommonValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCommonValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCommonValues.Name = "ucrNudCommonValues"
-        Me.ucrNudCommonValues.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCommonValues.Size = New System.Drawing.Size(75, 30)
         Me.ucrNudCommonValues.TabIndex = 17
         Me.ucrNudCommonValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -240,11 +254,12 @@ Partial Class dlgRecodeFactor
         Me.ucrNudLevels.AutoSize = True
         Me.ucrNudLevels.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLevels.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLevels.Location = New System.Drawing.Point(208, 21)
+        Me.ucrNudLevels.Location = New System.Drawing.Point(312, 32)
+        Me.ucrNudLevels.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrNudLevels.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLevels.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLevels.Name = "ucrNudLevels"
-        Me.ucrNudLevels.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLevels.Size = New System.Drawing.Size(75, 30)
         Me.ucrNudLevels.TabIndex = 16
         Me.ucrNudLevels.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -252,9 +267,10 @@ Partial Class dlgRecodeFactor
         '
         Me.rdoMore.AutoSize = True
         Me.rdoMore.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMore.Location = New System.Drawing.Point(12, 93)
+        Me.rdoMore.Location = New System.Drawing.Point(18, 140)
+        Me.rdoMore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoMore.Name = "rdoMore"
-        Me.rdoMore.Size = New System.Drawing.Size(157, 17)
+        Me.rdoMore.Size = New System.Drawing.Size(231, 24)
         Me.rdoMore.TabIndex = 16
         Me.rdoMore.TabStop = True
         Me.rdoMore.Text = "Levels with more than Other"
@@ -264,9 +280,10 @@ Partial Class dlgRecodeFactor
         '
         Me.rdoFrequentValues.AutoSize = True
         Me.rdoFrequentValues.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoFrequentValues.Location = New System.Drawing.Point(12, 70)
+        Me.rdoFrequentValues.Location = New System.Drawing.Point(18, 105)
+        Me.rdoFrequentValues.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoFrequentValues.Name = "rdoFrequentValues"
-        Me.rdoFrequentValues.Size = New System.Drawing.Size(184, 17)
+        Me.rdoFrequentValues.Size = New System.Drawing.Size(272, 24)
         Me.rdoFrequentValues.TabIndex = 15
         Me.rdoFrequentValues.TabStop = True
         Me.rdoFrequentValues.Text = "Levels with at least this proportion"
@@ -276,9 +293,10 @@ Partial Class dlgRecodeFactor
         '
         Me.rdoCommonValues.AutoSize = True
         Me.rdoCommonValues.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCommonValues.Location = New System.Drawing.Point(12, 47)
+        Me.rdoCommonValues.Location = New System.Drawing.Point(18, 70)
+        Me.rdoCommonValues.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoCommonValues.Name = "rdoCommonValues"
-        Me.rdoCommonValues.Size = New System.Drawing.Size(168, 17)
+        Me.rdoCommonValues.Size = New System.Drawing.Size(247, 24)
         Me.rdoCommonValues.TabIndex = 14
         Me.rdoCommonValues.TabStop = True
         Me.rdoCommonValues.Text = "This number of common levels"
@@ -288,9 +306,10 @@ Partial Class dlgRecodeFactor
         '
         Me.rdoLevels.AutoSize = True
         Me.rdoLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoLevels.Location = New System.Drawing.Point(12, 24)
+        Me.rdoLevels.Location = New System.Drawing.Point(18, 36)
+        Me.rdoLevels.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoLevels.Name = "rdoLevels"
-        Me.rdoLevels.Size = New System.Drawing.Size(184, 17)
+        Me.rdoLevels.Size = New System.Drawing.Size(270, 24)
         Me.rdoLevels.TabIndex = 13
         Me.rdoLevels.TabStop = True
         Me.rdoLevels.Text = "Levels with at least this frequency"
@@ -299,9 +318,10 @@ Partial Class dlgRecodeFactor
         'ucrPnlKeep
         '
         Me.ucrPnlKeep.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlKeep.Location = New System.Drawing.Point(6, 16)
+        Me.ucrPnlKeep.Location = New System.Drawing.Point(9, 24)
+        Me.ucrPnlKeep.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrPnlKeep.Name = "ucrPnlKeep"
-        Me.ucrPnlKeep.Size = New System.Drawing.Size(273, 95)
+        Me.ucrPnlKeep.Size = New System.Drawing.Size(410, 142)
         Me.ucrPnlKeep.TabIndex = 12
         '
         'rdoAddNa
@@ -313,9 +333,10 @@ Partial Class dlgRecodeFactor
         Me.rdoAddNa.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoAddNa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoAddNa.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoAddNa.Location = New System.Drawing.Point(209, 12)
+        Me.rdoAddNa.Location = New System.Drawing.Point(314, 18)
+        Me.rdoAddNa.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.rdoAddNa.Name = "rdoAddNa"
-        Me.rdoAddNa.Size = New System.Drawing.Size(68, 28)
+        Me.rdoAddNa.Size = New System.Drawing.Size(102, 42)
         Me.rdoAddNa.TabIndex = 2
         Me.rdoAddNa.TabStop = True
         Me.rdoAddNa.Tag = "add_na"
@@ -327,9 +348,10 @@ Partial Class dlgRecodeFactor
         '
         Me.lblNameForNa.AutoSize = True
         Me.lblNameForNa.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNameForNa.Location = New System.Drawing.Point(248, 97)
+        Me.lblNameForNa.Location = New System.Drawing.Point(372, 146)
+        Me.lblNameForNa.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblNameForNa.Name = "lblNameForNa"
-        Me.lblNameForNa.Size = New System.Drawing.Size(71, 13)
+        Me.lblNameForNa.Size = New System.Drawing.Size(104, 20)
         Me.lblNameForNa.TabIndex = 8
         Me.lblNameForNa.Text = "Name for NA:"
         '
@@ -339,27 +361,29 @@ Partial Class dlgRecodeFactor
         Me.ucrInputAddNa.AutoSize = True
         Me.ucrInputAddNa.IsMultiline = False
         Me.ucrInputAddNa.IsReadOnly = False
-        Me.ucrInputAddNa.Location = New System.Drawing.Point(248, 113)
+        Me.ucrInputAddNa.Location = New System.Drawing.Point(372, 170)
+        Me.ucrInputAddNa.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
         Me.ucrInputAddNa.Name = "ucrInputAddNa"
-        Me.ucrInputAddNa.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputAddNa.Size = New System.Drawing.Size(176, 32)
         Me.ucrInputAddNa.TabIndex = 9
         '
         'ucrFactorLevels
         '
         Me.ucrFactorLevels.AutoSize = True
         Me.ucrFactorLevels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorLevels.Location = New System.Drawing.Point(248, 99)
-        Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrFactorLevels.Location = New System.Drawing.Point(372, 148)
+        Me.ucrFactorLevels.Margin = New System.Windows.Forms.Padding(8, 8, 8, 8)
         Me.ucrFactorLevels.Name = "ucrFactorLevels"
-        Me.ucrFactorLevels.Size = New System.Drawing.Size(295, 210)
+        Me.ucrFactorLevels.Size = New System.Drawing.Size(442, 314)
         Me.ucrFactorLevels.TabIndex = 15
         '
         'ucrPnlOptions
         '
         Me.ucrPnlOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(139, 6)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(208, 9)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(289, 36)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(434, 54)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'ucrInputOther
@@ -368,38 +392,40 @@ Partial Class dlgRecodeFactor
         Me.ucrInputOther.AutoSize = True
         Me.ucrInputOther.IsMultiline = False
         Me.ucrInputOther.IsReadOnly = False
-        Me.ucrInputOther.Location = New System.Drawing.Point(248, 329)
+        Me.ucrInputOther.Location = New System.Drawing.Point(372, 494)
+        Me.ucrInputOther.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
         Me.ucrInputOther.Name = "ucrInputOther"
-        Me.ucrInputOther.Size = New System.Drawing.Size(117, 21)
+        Me.ucrInputOther.Size = New System.Drawing.Size(176, 32)
         Me.ucrInputOther.TabIndex = 17
         '
         'ucrSaveNewColumn
         '
         Me.ucrSaveNewColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveNewColumn.Location = New System.Drawing.Point(10, 381)
-        Me.ucrSaveNewColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveNewColumn.Location = New System.Drawing.Point(15, 572)
+        Me.ucrSaveNewColumn.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
-        Me.ucrSaveNewColumn.Size = New System.Drawing.Size(358, 22)
+        Me.ucrSaveNewColumn.Size = New System.Drawing.Size(537, 33)
         Me.ucrSaveNewColumn.TabIndex = 22
         '
         'ucrFactorGrid
         '
         Me.ucrFactorGrid.AutoSize = True
         Me.ucrFactorGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorGrid.Location = New System.Drawing.Point(248, 99)
+        Me.ucrFactorGrid.Location = New System.Drawing.Point(372, 148)
+        Me.ucrFactorGrid.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrFactorGrid.Name = "ucrFactorGrid"
-        Me.ucrFactorGrid.Size = New System.Drawing.Size(288, 210)
+        Me.ucrFactorGrid.Size = New System.Drawing.Size(431, 314)
         Me.ucrFactorGrid.TabIndex = 10
         '
         'ucrReceiverFactor
         '
         Me.ucrReceiverFactor.AutoSize = True
         Me.ucrReceiverFactor.frmParent = Me
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(248, 71)
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(372, 106)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(180, 30)
         Me.ucrReceiverFactor.strNcFilePath = ""
         Me.ucrReceiverFactor.TabIndex = 7
         Me.ucrReceiverFactor.ucrSelector = Nothing
@@ -410,27 +436,28 @@ Partial Class dlgRecodeFactor
         Me.ucrSelectorForRecode.bDropUnusedFilterLevels = False
         Me.ucrSelectorForRecode.bShowHiddenColumns = False
         Me.ucrSelectorForRecode.bUseCurrentFilter = True
-        Me.ucrSelectorForRecode.Location = New System.Drawing.Point(10, 47)
+        Me.ucrSelectorForRecode.Location = New System.Drawing.Point(15, 70)
         Me.ucrSelectorForRecode.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
-        Me.ucrSelectorForRecode.Size = New System.Drawing.Size(213, 183)
+        Me.ucrSelectorForRecode.Size = New System.Drawing.Size(320, 274)
         Me.ucrSelectorForRecode.TabIndex = 5
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 410)
+        Me.ucrBase.Location = New System.Drawing.Point(15, 615)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 23
         '
         'dlgRecodeFactor
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(550, 467)
+        Me.ClientSize = New System.Drawing.Size(825, 700)
         Me.Controls.Add(Me.lblNameForNa)
         Me.Controls.Add(Me.ucrInputAddNa)
         Me.Controls.Add(Me.rdoAddNa)
@@ -450,6 +477,7 @@ Partial Class dlgRecodeFactor
         Me.Controls.Add(Me.ucrSelectorForRecode)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgRecodeFactor"

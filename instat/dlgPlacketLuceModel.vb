@@ -53,7 +53,8 @@ Public Class dlgPlacketLuceModel
         ucrReceiverMultipleTraits.Selector = ucrSelectorTraitsPL
         ucrReceiverMultipleTraits.strSelectorHeading = "Traits"
         ucrReceiverMultipleTraits.SetMeAsReceiver()
-        ucrReceiverMultipleTraits.SetTricotType({"traits"})
+        ucrReceiverMultipleTraits.SetTricotType("traits")
+        ucrReceiverMultipleTraits.bAutoFill = True
         ucrReceiverMultipleTraits.SetLinkedDisplayControl(lblTraits)
 
         ucrSaveResult.SetPrefix("model")
@@ -293,11 +294,13 @@ Public Class dlgPlacketLuceModel
         clsAssignOperator.AddParameter("left", strData, iPosition:=0, bIncludeArgumentName:=False)
         clsAssignOperator.AddParameter("right", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=1, bIncludeArgumentName:=False)
 
-        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetDataFrameFunction.SetRCommand("data_book$get_data_frame")
+        clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & strData & Chr(34), iPosition:=1)
 
         clsSndgetVarmataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_from_metadata")
-        clsSndgetVarmataFunction.AddParameter("property", Chr(34) & "Tricot_Type" & Chr(34), iPosition:=1)
-        clsSndgetVarmataFunction.AddParameter("property_value", Chr(34) & "variety" & Chr(34), iPosition:=2)
+        clsSndgetVarmataFunction.AddParameter("data_name", Chr(34) & strData & Chr(34), iPosition:=1)
+        clsSndgetVarmataFunction.AddParameter("property", Chr(34) & "Tricot_Type" & Chr(34), iPosition:=2)
+        clsSndgetVarmataFunction.AddParameter("property_value", Chr(34) & "variety" & Chr(34), iPosition:=3)
         clsSndgetVarmataFunction.SetAssignTo("var_name")
 
         clsSpaceOpreator.SetOperation("")
@@ -310,7 +313,7 @@ Public Class dlgPlacketLuceModel
         clsLevelFunction.AddParameter("x", clsRFunctionParameter:=clsFactorFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         clsFactorFunction.SetRCommand("factor")
-        clsFactorFunction.AddParameter("x", ucrSelectorTraitsPL.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "[[var_name]]")
+        clsFactorFunction.AddParameter("x", ucrSelectorTraitsPL.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "[[var_name]]", bIncludeArgumentName:=False)
 
         clsPlotFunction.SetPackageName("purrr")
         clsPlotFunction.SetRCommand("map2")
