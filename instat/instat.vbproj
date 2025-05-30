@@ -512,6 +512,12 @@
     <Compile Include="ucrSelectorByTable.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSelectorByTablesAddRemove.Designer.vb">
+      <DependentUpon>ucrSelectorByTablesAddRemove.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByTablesAddRemove.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrTables.Designer.vb">
       <DependentUpon>ucrTables.vb</DependentUpon>
     </Compile>
@@ -3661,6 +3667,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorByTable.sw-KE.resx">
       <DependentUpon>ucrSelectorByTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByTablesAddRemove.resx">
+      <DependentUpon>ucrSelectorByTablesAddRemove.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrTables.resx">
       <DependentUpon>ucrTables.vb</DependentUpon>
