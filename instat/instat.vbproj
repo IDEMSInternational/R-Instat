@@ -506,6 +506,12 @@
     <Compile Include="sdgTricotModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ucrSelectorByTable.Designer.vb">
+      <DependentUpon>ucrSelectorByTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByTable.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrTables.Designer.vb">
       <DependentUpon>ucrTables.vb</DependentUpon>
     </Compile>
@@ -3649,6 +3655,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgTricotModelOptions.resx">
       <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByTable.resx">
+      <DependentUpon>ucrSelectorByTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByTable.sw-KE.resx">
+      <DependentUpon>ucrSelectorByTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrTables.resx">
       <DependentUpon>ucrTables.vb</DependentUpon>
