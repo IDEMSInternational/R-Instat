@@ -42,25 +42,25 @@ Partial Class ucrSelectorByTablesAddRemove
         'toolStripAddSelected
         '
         Me.toolStripAddSelected.Name = "toolStripAddSelected"
-        Me.toolStripAddSelected.Size = New System.Drawing.Size(240, 32)
+        Me.toolStripAddSelected.Size = New System.Drawing.Size(189, 32)
         Me.toolStripAddSelected.Tag = "Add_selected"
         Me.toolStripAddSelected.Text = "Add Selected"
         '
         'toolStripAddAll
         '
         Me.toolStripAddAll.Name = "toolStripAddAll"
-        Me.toolStripAddAll.Size = New System.Drawing.Size(240, 32)
+        Me.toolStripAddAll.Size = New System.Drawing.Size(189, 32)
         Me.toolStripAddAll.Text = "Add All"
         '
         'ToolStripSeparatorContext
         '
         Me.ToolStripSeparatorContext.Name = "ToolStripSeparatorContext"
-        Me.ToolStripSeparatorContext.Size = New System.Drawing.Size(237, 6)
+        Me.ToolStripSeparatorContext.Size = New System.Drawing.Size(186, 6)
         '
         'toolStripHelp
         '
         Me.toolStripHelp.Name = "toolStripHelp"
-        Me.toolStripHelp.Size = New System.Drawing.Size(240, 32)
+        Me.toolStripHelp.Size = New System.Drawing.Size(189, 32)
         Me.toolStripHelp.Text = "Help"
         '
         'btnAdd
@@ -78,8 +78,8 @@ Partial Class ucrSelectorByTablesAddRemove
         '
         'ucrSelectorByTablesAddRemove
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "ucrSelectorByTablesAddRemove"
         Me.Size = New System.Drawing.Size(343, 336)
