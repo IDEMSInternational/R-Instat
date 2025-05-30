@@ -38,39 +38,40 @@ Partial Class ucrSelectorByTable
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrAvailableDataFrames = New instat.ucrDataFrame()
+        Me.ucrAvailableTables = New instat.ucrTables()
         Me.SuspendLayout()
         '
         'lstAvailableVariable
         '
         Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.None
-        Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 50)
+        Me.lstAvailableVariable.Location = New System.Drawing.Point(0, 75)
         Me.lstAvailableVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.lstAvailableVariable.TabIndex = 1
         '
-        'ucrAvailableDataFrames
+        'ucrAvailableTables
         '
-        Me.ucrAvailableDataFrames.AutoSize = True
-        Me.ucrAvailableDataFrames.bDropUnusedFilterLevels = False
-        Me.ucrAvailableDataFrames.bUseCurrentFilter = True
-        Me.ucrAvailableDataFrames.Location = New System.Drawing.Point(0, 0)
-        Me.ucrAvailableDataFrames.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrAvailableDataFrames.Name = "ucrAvailableDataFrames"
-        Me.ucrAvailableDataFrames.Size = New System.Drawing.Size(151, 50)
-        Me.ucrAvailableDataFrames.TabIndex = 84
+        Me.ucrAvailableTables.AutoSize = True
+        Me.ucrAvailableTables.bDropUnusedFilterLevels = False
+        Me.ucrAvailableTables.bUseCurrentFilter = True
+        Me.ucrAvailableTables.Location = New System.Drawing.Point(0, 0)
+        Me.ucrAvailableTables.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrAvailableTables.Name = "ucrAvailableTables"
+        Me.ucrAvailableTables.Size = New System.Drawing.Size(224, 53)
+        Me.ucrAvailableTables.TabIndex = 0
         '
-        'ucrSelectorByDataFrame
+        'ucrSelectorByTable
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.ucrAvailableDataFrames)
-        Me.Name = "ucrSelectorByDataFrame"
-        Me.Size = New System.Drawing.Size(151, 180)
+        Me.Controls.Add(Me.ucrAvailableTables)
+        Me.Name = "ucrSelectorByTable"
+        Me.Size = New System.Drawing.Size(336, 364)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
-        Me.Controls.SetChildIndex(Me.ucrAvailableDataFrames, 0)
+        Me.Controls.SetChildIndex(Me.ucrAvailableTables, 0)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Public WithEvents ucrAvailableDataFrames As ucrDataFrame
+    Public WithEvents ucrAvailableTables As ucrTables
 End Class
