@@ -36,15 +36,6 @@ Public Class dlgRecodeFactor
         Tricot
     End Enum
 
-    Private Sub SetHelpOptions()
-        Select Case enumRecodeFactorMode
-            Case RecodeFactorMode.Prepare
-                ucrBase.iHelpTopicID = 37
-            Case RecodeFactorMode.Tricot
-                ucrBase.iHelpTopicID = 746
-        End Select
-    End Sub
-
     Private Sub dlgRecodeFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -54,6 +45,7 @@ Public Class dlgRecodeFactor
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetHelpOptions()
         SetSelectedColumn()
         bReset = False
         autoTranslate(Me)
@@ -61,7 +53,7 @@ Public Class dlgRecodeFactor
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 37
+        'ucrBase.iHelpTopicID = 37
 
         ucrPnlOptions.AddRadioButton(rdoRecode)
         ucrPnlOptions.AddRadioButton(rdoAddNa)
@@ -373,6 +365,15 @@ Public Class dlgRecodeFactor
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumRecodeFactorMode
+            Case RecodeFactorMode.Prepare
+                ucrBase.iHelpTopicID = 37
+            Case RecodeFactorMode.Tricot
+                ucrBase.iHelpTopicID = 746
+        End Select
     End Sub
 
     Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged

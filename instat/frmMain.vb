@@ -3082,12 +3082,12 @@ Public Class frmMain
     End Sub
 
     Private Sub Summarise23VariablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuSummariseTricot.Click
-        dlgDescribeTwoVariable.enumTwovariableMode = dlgDescribeTwoVariable.TwovariableMode.Climatic
+        dlgDescribeTwoVariable.enumTwovariableMode = dlgDescribeTwoVariable.TwovariableMode.Tricot
         dlgDescribeTwoVariable.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeGraphTricots_Click(sender As Object, e As EventArgs) Handles mnuDescribeGraphTricots.Click
-        dlgDescribeTwoVarGraph.enumTwovarMode = dlgDescribeTwoVarGraph.TwovarMode.Climatic
+        dlgDescribeTwoVarGraph.enumTwovarMode = dlgDescribeTwoVarGraph.TwovarMode.Tricot
         dlgDescribeTwoVarGraph.ShowDialog()
     End Sub
 
@@ -3177,7 +3177,7 @@ Public Class frmMain
     End Sub
 
     Private Sub TransformTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTransformText.Click
-        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Prepare
+        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Tricot
         dlgTransformText.ShowDialog()
     End Sub
 

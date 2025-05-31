@@ -23,12 +23,6 @@ Public Class sdgImportFromClimMob
         autoTranslate(Me)
     End Sub
 
-    Private Sub InitialiseDialog()
-
-        ucrBaseSubdialog.iHelpTopicID = 716
-
-    End Sub
-
     Public Sub Setup(clsNewKeyParameter As RParameter)
         ucrBaseSubdialog.iHelpTopicID = 716
         ucrInputKeyPath.SetParameter(clsNewKeyParameter, 0)

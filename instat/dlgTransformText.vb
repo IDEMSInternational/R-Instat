@@ -18,6 +18,7 @@ Imports instat.Translations
 
 Public Class dlgTransformText
     Public enumTransformMode As String = TransformMode.Prepare
+
     Public Enum TransformMode
         Prepare
         Describe

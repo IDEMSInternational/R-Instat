@@ -24,33 +24,21 @@ Public Class sdgDisplayModelOptions
     Private clsPipeOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bInitialised As Boolean = False
-    Public enumPlacketLuceModelMode As String = PlacketLuceModelMode.dlgPlacketLuceModel
+    Public enumPlacketLuceModelMode As String = PlacketLuceModelMode.nocovariates
 
     Private clsRSyntax As New RSyntax
 
     Private Sub sdgDisplayModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        SetHelpOptions()
     End Sub
 
     Public Enum PlacketLuceModelMode
-        dlgPlacketLuceModel
-        dlgModellingTree
-        dlgTricotModelOneVarCov
-        dlgTricotModellingGeneral
+        nocovariates
+        tree
+        ModelOneVarCov2
+        ModellingGeneral2
     End Enum
-
-    Private Sub SetHelpOptions()
-        Select Case enumPlacketLuceModelMode
-            Case PlacketLuceModelMode.dlgPlacketLuceModel
-                ucrSdgButtons.iHelpTopicID = 723
-            Case PlacketLuceModelMode.dlgModellingTree
-                ucrSdgButtons.iHelpTopicID = 724
-            Case PlacketLuceModelMode.dlgTricotModelOneVarCov
-                ucrSdgButtons.iHelpTopicID = 726
-            Case PlacketLuceModelMode.dlgTricotModellingGeneral
-                ucrSdgButtons.iHelpTopicID = 728
-        End Select
-    End Sub
 
     Private Sub InitialiseDialog()
         ucrChkModel.SetText("Summary")
@@ -427,4 +415,18 @@ Public Class sdgDisplayModelOptions
             clsRSyntax.RemoveFromBeforeCodes(clsHeatFunction)
         End If
     End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumPlacketLuceModelMode
+            Case PlacketLuceModelMode.nocovariates
+                ucrSdgButtons.iHelpTopicID = 723
+            Case PlacketLuceModelMode.tree
+                ucrSdgButtons.iHelpTopicID = 724
+            Case PlacketLuceModelMode.ModelOneVarCov2
+                ucrSdgButtons.iHelpTopicID = 726
+            Case PlacketLuceModelMode.ModellingGeneral2
+                ucrSdgButtons.iHelpTopicID = 728
+        End Select
+    End Sub
+
 End Class

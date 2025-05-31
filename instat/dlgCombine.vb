@@ -19,19 +19,12 @@ Public Class dlgCombine
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Public enumCombineFactorsMode As String = CombineFactorsMode.Prepare
+
     Public Enum CombineFactorsMode
         Prepare
         Tricot
     End Enum
 
-    Private Sub SetHelpOptions()
-        Select Case enumCombineFactorsMode
-            Case CombineFactorsMode.Prepare
-                ucrBase.iHelpTopicID = 39
-            Case CombineFactorsMode.Tricot
-                ucrBase.iHelpTopicID = 748
-        End Select
-    End Sub
 
     Private Sub dlgCombine_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -42,6 +35,7 @@ Public Class dlgCombine
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetHelpOptions()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -123,4 +117,14 @@ Public Class dlgCombine
     Private Sub ucrFactorsReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFactorsReceiver.ControlContentsChanged, ucrNewColName.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumCombineFactorsMode
+            Case CombineFactorsMode.Prepare
+                ucrBase.iHelpTopicID = 39
+            Case CombineFactorsMode.Tricot
+                ucrBase.iHelpTopicID = 748
+        End Select
+    End Sub
+
 End Class

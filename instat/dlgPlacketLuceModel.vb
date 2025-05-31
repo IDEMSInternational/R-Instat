@@ -389,6 +389,7 @@ Public Class dlgPlacketLuceModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgDisplayModelOptions.enumPlacketLuceModelMode = sdgDisplayModelOptions.PlacketLuceModelMode.nocovariates
         sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapTree:=clsWrapTrees, clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction, clsNewAnnovaFunction:=clsAnnovaFunction,
                                         clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction, clsNewCoefFunction:=clsCoefFunction, clsNewConfidenLimFunction:=clsConfidenLimFunction, clsNewDevianceFunction:=clsDevianceFunction, clsNewEstimatesFunction:=clsEstimatesFunction,
                                         clsNewImportDataFunction:=clsImportDataFunction, clsNewDefineAsTricotFunction:=clsDefineAsTricotFunction, clsNewPipeOperator:=clsPipeOperator, clsNewItemsFunction:=clsItemsFunction, clsNewPariPropFunction:=clsPariPropFunction, clsNewQuasivarianceFunction:=clsQuasivarianceFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
@@ -436,6 +437,7 @@ Public Class dlgPlacketLuceModel
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgPLModelOptions.enumPLModelOptionsMode = sdgPLModelOptions.PLModelOptionsMode.Covariates
         sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewPlacketFunction:=clsPlacketFunction, bReset:=bResetSubdialog)
         sdgPLModelOptions.ShowDialog()
         sdgPLModelOptions.ucrChkMultivariateNormal.Enabled = True

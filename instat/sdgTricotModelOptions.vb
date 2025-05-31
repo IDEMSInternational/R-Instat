@@ -21,24 +21,16 @@ Public Class sdgTricotModelOptions
     Private clsRSyntax As New RSyntax
     Public clsPladmmFunction As New RFunction
 
-    Public enumTricotModelOptionsMode As String = TricotModelOptionsMode.dlgTricotModelOneVarCov
+    Public enumTricotModelOptionsMode As String = TricotModelOptionsMode.ModelOneVarCov
 
     Public Enum TricotModelOptionsMode
-        dlgTricotModelOneVarCov
-        dlgTricotModellingGeneral
+        ModelOneVarCov
+        ModellingGeneral
     End Enum
-
-    Private Sub setHelpOptions()
-        Select Case enumTricotModelOptionsMode
-            Case TricotModelOptionsMode.dlgTricotModelOneVarCov
-                ucrSdgButton.iHelpTopicID = 725
-            Case TricotModelOptionsMode.dlgTricotModellingGeneral
-                ucrSdgButton.iHelpTopicID = 727
-        End Select
-    End Sub
 
     Private Sub sdgTricotModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        setHelpOptions()
     End Sub
 
     Private Sub InitialiseControls()
@@ -110,6 +102,15 @@ Public Class sdgTricotModelOptions
             clsPladmmFunction.RemoveParameterByName("rtol")
             ucrInputConvTotal.Visible = False
         End If
+    End Sub
+
+    Private Sub setHelpOptions()
+        Select Case enumTricotModelOptionsMode
+            Case TricotModelOptionsMode.ModelOneVarCov
+                ucrSdgButton.iHelpTopicID = 725
+            Case TricotModelOptionsMode.ModellingGeneral
+                ucrSdgButton.iHelpTopicID = 727
+        End Select
     End Sub
 
     Private Sub ucrChecks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPenaltyPar.ControlValueChanged,

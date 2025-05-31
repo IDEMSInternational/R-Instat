@@ -41,15 +41,6 @@ Public Class dlgReorderLevels
         Tricot
     End Enum
 
-    Private Sub SetHelpOptions()
-        Select Case enumReorderLevelsMode
-            Case ReorderLevelsMode.Prepare
-                ucrBase.iHelpTopicID = 36
-            Case ReorderLevelsMode.Tricot
-                ucrBase.iHelpTopicID = 747
-        End Select
-    End Sub
-
     Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -59,6 +50,7 @@ Public Class dlgReorderLevels
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         SetSelectedColumn()
         bReset = False
         autoTranslate(Me)
@@ -66,7 +58,7 @@ Public Class dlgReorderLevels
 
     Private Sub InitialiseDialog()
         Dim dctOptions As New Dictionary(Of String, String)
-        ucrBase.iHelpTopicID = 36
+        'ucrBase.iHelpTopicID = 36
 
         ucrPnlOptions.AddRadioButton(rdoHand)
         ucrPnlOptions.AddRadioButton(rdoProperty)
@@ -356,6 +348,15 @@ Public Class dlgReorderLevels
                 ucrBase.clsRsyntax.SetBaseRFunction(clsForcatsReorderFunction)
             End If
         End If
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumReorderLevelsMode
+            Case ReorderLevelsMode.Prepare
+                ucrBase.iHelpTopicID = 36
+            Case ReorderLevelsMode.Tricot
+                ucrBase.iHelpTopicID = 747
+        End Select
     End Sub
 
     Private Sub rdoAppearance_MouseHover(sender As Object, e As EventArgs) Handles rdoAppearance.MouseHover
