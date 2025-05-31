@@ -25,6 +25,13 @@ Public Class dlgRowNamesOrNumbers
     Private clsDummyFunction As New RFunction
     Private clsGetVectorFunction As New RFunction
     Private clsHmiscFunction As New RFunction
+    Public enumRowNamesOrNumbersMode As String = RowNamesOrNumbersMode.Prepare
+
+    Public Enum RowNamesOrNumbersMode
+        Prepare
+        Tricot
+    End Enum
+
     Private clsRemoveFilter As New RFunction
 
 
@@ -38,6 +45,7 @@ Public Class dlgRowNamesOrNumbers
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetHelpOptions()
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
@@ -45,7 +53,7 @@ Public Class dlgRowNamesOrNumbers
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 178
+        'ucrBase.iHelpTopicID = 178
 
         ' selector
         ucrSelectorRowNames.SetParameter(New RParameter("data_name", 0))
@@ -190,6 +198,15 @@ Public Class dlgRowNamesOrNumbers
         End If
         AddRemoveKeyFromAfterCodes()
         RemoveCurrentFilter()
+    End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumRowNamesOrNumbersMode
+            Case RowNamesOrNumbersMode.Prepare
+                ucrBase.iHelpTopicID = 178
+            Case RowNamesOrNumbersMode.Tricot
+                ucrBase.iHelpTopicID = 745
+        End Select
     End Sub
 
     Private Sub AddRemoveKeyFromAfterCodes()

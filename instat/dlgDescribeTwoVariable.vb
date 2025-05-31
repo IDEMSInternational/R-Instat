@@ -20,6 +20,7 @@ Public Class dlgDescribeTwoVariable
     Public Enum TwovariableMode
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private bFirstLoad As Boolean = True
@@ -1595,6 +1596,8 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.iHelpTopicID = 414
             Case TwovariableMode.Climatic
                 ucrBase.iHelpTopicID = 408
+            Case TwovariableMode.Tricot
+                ucrBase.iHelpTopicID = 743
         End Select
     End Sub
 

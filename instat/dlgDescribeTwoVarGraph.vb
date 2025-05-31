@@ -21,6 +21,7 @@ Public Class dlgDescribeTwoVarGraph
     Public Enum TwovarMode
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private clsBaseOperator, clsPairOperator, clsCoordPolarStartOperator As New ROperator
@@ -1070,6 +1071,8 @@ Public Class dlgDescribeTwoVarGraph
                 ucrBase.iHelpTopicID = 416
             Case TwovarMode.Climatic
                 ucrBase.iHelpTopicID = 424
+            Case TwovarMode.Tricot
+                ucrBase.iHelpTopicID = 744
         End Select
     End Sub
 

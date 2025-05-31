@@ -548,6 +548,7 @@ Public Class dlgTricotModellingGeneral
     End Sub
 
     Private Sub btnDisplayOptions_Click(sender As Object, e As EventArgs) Handles btnDisplayOptions.Click
+        sdgDisplayModelOptions.enumPlacketLuceModelMode = sdgDisplayModelOptions.PlacketLuceModelMode.ModellingGeneral2
         sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction,
             clsNewCoefFunction:=clscoefFunction, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction,
             clsNewEstimatesFunction:=clsEstimatesFunction, clsNewImportDataFunction:=clsImportDataFunction, clsNewDefineAsTricotFunction:=clsDefineAsTricotFunction, clsNewPipeOperator:=clsPipeOperator, clsNewDevianceFunction:=clsDevianceMainFunction,
@@ -587,6 +588,7 @@ Public Class dlgTricotModellingGeneral
 
 
     Private Sub btnModelOptions_Click(sender As Object, e As EventArgs) Handles btnModelOptions.Click
+        sdgTricotModelOptions.enumTricotModelOptionsMode = sdgTricotModelOptions.TricotModelOptionsMode.ModellingGeneral
         sdgTricotModelOptions.SetRCode(
             clsNewRFunction:=clsPladmmFunction,
             clsNewRSyntax:=ucrBase.clsRsyntax,

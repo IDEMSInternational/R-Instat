@@ -23,6 +23,7 @@ Public Class sdgPLModelOptions
     Private clsPlacketFunction, clsVectorFunction, clsRepMeanFunction, clsRepSigFunction, clsdiagFunction, clsListNormalFunction, clsListGammaFunction As RFunction
     Private ReadOnly strgetOption As String = "getOption(""na.action"")"
     Private ReadOnly strFreq As String = "PlackettLuce::freq(.x)"
+    Public enumPLModelOptionsMode As String = PLModelOptionsMode.Covariates
 
     Private Sub sdgPLModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -30,7 +31,13 @@ Public Class sdgPLModelOptions
             InitialiseDialog()
             bFirstLoad = False
         End If
+        setHelpOptions()
     End Sub
+
+    Public Enum PLModelOptionsMode
+        Covariates
+        Tree
+    End Enum
 
     Private Sub InitialiseDialog()
         ucrChkMultivariateNormal.SetParameter(New RParameter("normal"))
@@ -316,6 +323,15 @@ Public Class sdgPLModelOptions
         Else
             clsPlacketFunction.RemoveParameterByName("maxit")
         End If
+    End Sub
+
+    Private Sub setHelpOptions()
+        Select Case enumPLModelOptionsMode
+            Case PLModelOptionsMode.Covariates
+                ucrBase.iHelpTopicID = 721
+            Case PLModelOptionsMode.Tree
+                ucrBase.iHelpTopicID = 723
+        End Select
     End Sub
 
     Private Sub ucrChkMaxit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMaxit.ControlValueChanged

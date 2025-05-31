@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.dlgUnstack
 Imports instat.Translations
 
 Public Class dlgStack
@@ -21,6 +22,7 @@ Public Class dlgStack
     Public Enum StackMode
         Prepare
         Climatic
+        Tricot
     End Enum
 
 
@@ -494,6 +496,8 @@ Public Class dlgStack
                 ucrBase.iHelpTopicID = 57
             Case StackMode.Climatic
                 ucrBase.iHelpTopicID = 607
+            Case UnstackMode.Tricot
+                ucrBase.iHelpTopicID = 750
         End Select
     End Sub
 
