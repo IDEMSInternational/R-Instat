@@ -162,12 +162,12 @@ Public Class dlgTransformTricotData
 
         clsIdOperator.SetOperation("%>%")
         clsIdOperator.AddParameter("left", "plot_data", iPosition:=0)
-        clsIdOperator.AddParameter("right", "dplyr::pull(c(id_col)", iPosition:=1)
+        clsIdOperator.AddParameter("right", "dplyr::pull(c(id_col))", iPosition:=1)
         clsIdOperator.SetAssignTo("plot_data_id_var")
 
         clsIdVarietyOperator.SetOperation("%>%")
         clsIdVarietyOperator.AddParameter("left", "plot_data", iPosition:=0)
-        clsIdVarietyOperator.AddParameter("right", "pull(c(variety_col)", iPosition:=1)
+        clsIdVarietyOperator.AddParameter("right", "pull(c(variety_col))", iPosition:=1)
         clsIdVarietyOperator.SetAssignTo("plot_data_variety_var")
 
         clsRankingFunction.SetPackageName("instatExtras")
@@ -203,7 +203,7 @@ Public Class dlgTransformTricotData
         clsAddGroupedFunction.AddParameter("object_format", Chr(34) & "text" & Chr(34), iPosition:=3)
         clsAddGroupedFunction.AddParameter("object", clsRFunctionParameter:=clsRankingGroupedFunction, iPosition:=4)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCreateTricotData)
+        'ucrBase.clsRsyntax.AddToAfterCodes(clsCreateTricotData, 0)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDefineTricotDataFunction, 0)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAddLinkFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAddFunction, 2)
