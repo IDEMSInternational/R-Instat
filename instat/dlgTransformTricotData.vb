@@ -4,7 +4,7 @@ Public Class dlgTransformTricotData
     Private clsOutputDataLevel, clsConcFunction, clsSetNameFunction, clsGetDataFrameFunction,
         clsListFunction, clsAddLinkFunction, clsGetVariablesPlotFunction, clsGetColumnSelectionFunction,
         clsGetVariablesVarietyFunction, clsDefineTricotDataFunction, clsAddFunction, clsAddGroupedFunction,
-        clsCheckDataLevel, clsRankingFunction, clsRankingGroupedFunction,
+        clsCheckDataLevel, clsRankingFunction, clsRankingGroupedFunction, clsUnameFunction,
         clsCreateTricotData, clsIDColsFunction, clsVarietyColsFunction, clsTraitColsFunction As New RFunction
     Private clsOutputLevelsOperator, clsIdVarietyOperator, clsIdOperator, clsTraitsOperator, clsPlotPullOperator, clsVarietyPullOperator, clsPlotOperator, clsVarietyOperator, OverallSymbolOperator As New ROperator
     Private bFirstLoad As Boolean = True
@@ -51,6 +51,7 @@ Public Class dlgTransformTricotData
         clsGetColumnSelectionFunction = New RFunction
         clsGetDataFrameFunction = New RFunction
         clsAddFunction = New RFunction
+        clsUnameFunction = New RFunction
         clsAddGroupedFunction = New RFunction
         clsOutputLevelsOperator = New ROperator
         OverallSymbolOperator = New ROperator
@@ -75,9 +76,19 @@ Public Class dlgTransformTricotData
         clsOutputDataLevel.SetAssignTo("output_data_levels")
 
         clsCreateTricotData.SetPackageName("databook")
-        clsCreateTricotData.SetRCommand("create_tricot_data")
-        clsCreateTricotData.AddParameter("output_data_levels", clsRFunctionParameter:=clsOutputDataLevel)
+        clsCreateTricotData.SetRCommand("create_tricot_datasets")
+        clsCreateTricotData.AddParameter("output_data_levels", clsRFunctionParameter:=clsOutputDataLevel, iPosition:=0, bIncludeArgumentName:=False)
         clsCreateTricotData.SetAssignTo("output_data_levels")
+
+        OverallSymbolOperator.SetOperation("[")
+        OverallSymbolOperator.AddParameter("left", "output_data_levels", iPosition:=0)
+        OverallSymbolOperator.AddParameter("right", "1,]", iPosition:=1)
+        OverallSymbolOperator.bSpaceAroundOperation = False
+
+        clsOutputLevelsOperator.SetOperation("$")
+        clsOutputLevelsOperator.AddParameter("left", clsROperatorParameter:=OverallSymbolOperator, iPosition:=0)
+        clsOutputLevelsOperator.AddParameter("right", "print", iPosition:=1)
+        clsOutputLevelsOperator.bSpaceAroundOperation = False
 
         clsDefineTricotDataFunction.SetRCommand("define_tricot_data")
         clsDefineTricotDataFunction.AddParameter("output_data_levels", clsRFunctionParameter:=clsCreateTricotData, iPosition:=0, bIncludeArgumentName:=False)
@@ -140,7 +151,10 @@ Public Class dlgTransformTricotData
         clsTraitsOperator.SetOperation("$")
         clsTraitsOperator.AddParameter("left", clsRFunctionParameter:=clsGetColumnSelectionFunction, iPosition:=0)
         clsTraitsOperator.AddParameter("right", "conditions$C0$parameters$x", iPosition:=1)
-        clsTraitsOperator.SetAssignTo("traits")
+
+        clsUnameFunction.SetRCommand("unname")
+        clsUnameFunction.AddParameter("trait", clsROperatorParameter:=clsTraitsOperator, bIncludeArgumentName:=False)
+        clsUnameFunction.SetAssignTo("traits")
 
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
         clsGetDataFrameFunction.AddParameter("plot", "plot_data_name", bIncludeArgumentName:=False)
@@ -159,7 +173,7 @@ Public Class dlgTransformTricotData
         clsRankingFunction.SetPackageName("instatExtras")
         clsRankingFunction.SetRCommand("create_rankings_list")
         clsRankingFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
-        clsRankingFunction.AddParameter("traits", clsROperatorParameter:=clsTraitsOperator, iPosition:=1)
+        clsRankingFunction.AddParameter("traits", clsRFunctionParameter:=clsUnameFunction, iPosition:=1)
         clsRankingFunction.AddParameter("id", clsROperatorParameter:=clsIdOperator, iPosition:=2)
         clsRankingFunction.AddParameter("variety", clsROperatorParameter:=clsIdVarietyOperator, iPosition:=3)
         clsRankingFunction.AddParameter("false", "FALSE", bIncludeArgumentName:=False, iPosition:=4)
@@ -189,21 +203,11 @@ Public Class dlgTransformTricotData
         clsAddGroupedFunction.AddParameter("object_format", Chr(34) & "text" & Chr(34), iPosition:=3)
         clsAddGroupedFunction.AddParameter("object", clsRFunctionParameter:=clsRankingGroupedFunction, iPosition:=4)
 
-
-        clsOutputLevelsOperator.SetOperation("$")
-        clsOutputLevelsOperator.AddParameter("left", clsROperatorParameter:=OverallSymbolOperator, iPosition:=0)
-        clsOutputLevelsOperator.AddParameter("right", "print", iPosition:=1)
-        clsOutputLevelsOperator.bSpaceAroundOperation = False
-
-        OverallSymbolOperator.SetOperation("[")
-        OverallSymbolOperator.AddParameter("left", clsRFunctionParameter:=clsOutputDataLevel, iPosition:=0)
-        OverallSymbolOperator.AddParameter("right", "1,]", iPosition:=1)
-        OverallSymbolOperator.bSpaceAroundOperation = False
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefineTricotDataFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAddLinkFunction, 0)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAddFunction, 1)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsAddGroupedFunction, 2)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCreateTricotData)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDefineTricotDataFunction, 0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAddLinkFunction, 1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAddFunction, 2)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAddGroupedFunction, 3)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
