@@ -1,8 +1,11 @@
 ﻿Imports RDotNet
 
 Public Class dlgTransformTricotData
-    Private clsOutputDataLevel, clsConcFunction, clsSetNameFunction, clsListFunction, clsAddLinkFunction, clsGetVariablesPlotFunction, clsGetVariablesVarietyFunction, clsDefineTricotDataFunction, clsCheckDataLevel, clsCreateTricotData, clsIDColsFunction, clsVarietyColsFunction, clsTraitColsFunction As New RFunction
-    Private clsOutputLevelsOperator, clsPlotPullOperator, clsVarietyPullOperator, clsPlotOperator, clsVarietyOperator, OverallSymbolOperator As New ROperator
+    Private clsOutputDataLevel, clsConcFunction, clsSetNameFunction, clsGetDataFrameFunction,
+        clsListFunction, clsAddLinkFunction, clsGetVariablesPlotFunction, clsGetColumnSelectionFunction,
+        clsGetVariablesVarietyFunction, clsDefineTricotDataFunction, clsCheckDataLevel, clsRankingFunction, clsRankingGroupedFunction,
+        clsCreateTricotData, clsIDColsFunction, clsVarietyColsFunction, clsTraitColsFunction As New RFunction
+    Private clsOutputLevelsOperator, clsIdVarietyOperator, clsIdOperator, clsTraitsOperator, clsPlotPullOperator, clsVarietyPullOperator, clsPlotOperator, clsVarietyOperator, OverallSymbolOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = True
@@ -42,12 +45,19 @@ Public Class dlgTransformTricotData
         clsConcFunction = New RFunction
         clsSetNameFunction = New RFunction
         clsListFunction = New RFunction
+        clsRankingFunction = New RFunction
+        clsRankingGroupedFunction = New RFunction
+        clsGetColumnSelectionFunction = New RFunction
+        clsGetDataFrameFunction = New RFunction
         clsOutputLevelsOperator = New ROperator
         OverallSymbolOperator = New ROperator
         clsPlotOperator = New ROperator
         clsVarietyPullOperator = New ROperator
         clsPlotPullOperator = New ROperator
         clsVarietyOperator = New ROperator
+        clsTraitsOperator = New ROperator
+        clsIdOperator = New ROperator
+        clsIdVarietyOperator = New ROperator
 
         bUniqueChecked = False
         bResetSubdialog = True
@@ -89,13 +99,13 @@ Public Class dlgTransformTricotData
         clsVarietyPullOperator.AddParameter("right", "dplyr::pull(dataset)", iPosition:=1)
         clsVarietyPullOperator.SetAssignTo("variety_data_name")
 
-        clsGetVariablesPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_variables_from_metadata")
+        clsGetVariablesPlotFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_from_metadata")
         clsGetVariablesPlotFunction.AddParameter("plot", clsROperatorParameter:=clsPlotPullOperator, iPosition:=0, bIncludeArgumentName:=False)
         clsGetVariablesPlotFunction.AddParameter("Tricot", Chr(34) & "Tricot_Type" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         clsGetVariablesPlotFunction.AddParameter("variety", Chr(34) & "variety" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
         clsGetVariablesPlotFunction.SetAssignTo("plot_data_type")
 
-        clsGetVariablesVarietyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_variables_from_metadata")
+        clsGetVariablesVarietyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_from_metadata")
         clsGetVariablesVarietyFunction.AddParameter("plot", clsROperatorParameter:=clsVarietyPullOperator, iPosition:=0, bIncludeArgumentName:=False)
         clsGetVariablesVarietyFunction.AddParameter("Tricot", Chr(34) & "Tricot_Type" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         clsGetVariablesVarietyFunction.AddParameter("variety", Chr(34) & "variety" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
@@ -111,14 +121,46 @@ Public Class dlgTransformTricotData
         clsConcFunction.SetRCommand("c")
         clsConcFunction.AddParameter("name", clsRFunctionParameter:=clsSetNameFunction, bIncludeArgumentName:=False, iPosition:=0)
 
-        clsAddLinkFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "add_link")
+        clsAddLinkFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_link")
         clsAddLinkFunction.AddParameter("from_data_frame", clsROperatorParameter:=clsPlotPullOperator, iPosition:=0)
         clsAddLinkFunction.AddParameter("to_data_frame", clsROperatorParameter:=clsVarietyPullOperator, iPosition:=1)
         clsAddLinkFunction.AddParameter("link_pairs", clsRFunctionParameter:=clsConcFunction, iPosition:=2)
         clsAddLinkFunction.AddParameter("type", Chr(34) & "keyed_link" & Chr(34), iPosition:=3)
         clsAddLinkFunction.AddParameter("link_name", Chr(34) & "link" & Chr(34), iPosition:=4)
 
+        'creating ranking objects
+        clsGetColumnSelectionFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_selection")
+        clsGetColumnSelectionFunction.AddParameter("name", Chr(34) & "traits_selection" & Chr(34), iPosition:=0)
+        clsGetColumnSelectionFunction.AddParameter("data_name", "plot_data_name", iPosition:=0)
+        clsGetColumnSelectionFunction.SetAssignTo("traits")
 
+        clsTraitsOperator.SetOperation("$")
+        clsTraitsOperator.AddParameter("left", clsRFunctionParameter:=clsGetColumnSelectionFunction, iPosition:=0)
+        clsTraitsOperator.AddParameter("right", "conditions$C0$parameters$x", iPosition:=1)
+        clsTraitsOperator.SetAssignTo("traits")
+
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "get_data_frame")
+        clsGetDataFrameFunction.AddParameter("plot", "plot_data_name", bIncludeArgumentName:=False)
+        clsGetDataFrameFunction.SetAssignTo("plot_data_name_data")
+
+        clsIdOperator.SetOperation("%>%")
+        clsIdOperator.AddParameter("left", "plot_data", iPosition:=0)
+        clsIdOperator.AddParameter("right", "dplyr::pull(c(id_col)", iPosition:=1)
+        clsIdOperator.SetAssignTo("plot_data_id_var")
+
+        clsIdVarietyOperator.SetOperation("%>%")
+        clsIdVarietyOperator.AddParameter("left", "plot_data", iPosition:=0)
+        clsIdVarietyOperator.AddParameter("right", "pull(c(variety_col)", iPosition:=1)
+        clsIdVarietyOperator.SetAssignTo("plot_data_variety_var ")
+
+        clsRankingFunction.SetPackageName("instatExtras")
+        clsRankingFunction.SetRCommand("create_rankings_list")
+        clsRankingFunction.AddParameter("data", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+        clsRankingFunction.AddParameter("traits", clsROperatorParameter:=clsTraitsOperator, iPosition:=1)
+        clsRankingFunction.AddParameter("id", clsROperatorParameter:=clsIdOperator, iPosition:=2)
+        clsRankingFunction.AddParameter("variety", clsROperatorParameter:=clsIdVarietyOperator, iPosition:=3)
+        clsRankingFunction.AddParameter("false", "FALSE", bIncludeArgumentName:=False, iPosition:=4)
+        clsRankingFunction.SetAssignTo("rankings_list")
 
         clsOutputLevelsOperator.SetOperation("$")
         clsOutputLevelsOperator.AddParameter("left", clsROperatorParameter:=OverallSymbolOperator, iPosition:=0)
