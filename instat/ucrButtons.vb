@@ -378,6 +378,9 @@ Public Class ucrButtons
             Directory.CreateDirectory(Path.GetDirectoryName(strFilePath))
             File.WriteAllText(strFilePath, strActual)
         End If
+
+        'todo
+        WriteUISpec()
     End Sub
 
     Private Sub ResetCommentToInstatOptionComment()
@@ -489,4 +492,117 @@ Public Class ucrButtons
                                          End Sub
 
     End Sub
+
+    'todo reposition and review functions below
+
+    ''' <summary>
+    ''' Recursively builds a UIElement tree from a clsTransformationRModel tree.
+    ''' </summary>
+    Private Function BuildUIElementTree(model As clsTransformationRModel) As UIElement
+        If model Is Nothing Then Return Nothing
+
+        ' Only create a UIElement if strValueKey is not null or empty
+        If String.IsNullOrEmpty(model.strValueKey) AndAlso (model.lstTransformations Is Nothing OrElse model.lstTransformations.Count = 0) Then
+            Return Nothing
+        End If
+
+        Dim element As New UIElement(model.strValueKey)
+        If model.lstTransformations IsNot Nothing Then
+            For Each child In model.lstTransformations
+                Dim childElement = BuildUIElementTree(child)
+                If childElement IsNot Nothing Then
+                    element.Children.Add(childElement)
+                End If
+            Next
+        End If
+        Return element
+    End Function
+
+    ''' <summary>
+    ''' Outputs the UIElement tree structure to the Debug window for demonstration.
+    ''' </summary>
+    Private Sub OutputUIElementTree(element As UIElement, level As Integer)
+        If element Is Nothing Then Return
+        If Not String.IsNullOrEmpty(element.ValueKey) Then
+            Debug.WriteLine($"{New String(" "c, level * 2)}Level {level}: {element.ValueKey}")
+        End If
+        For Each child In element.Children
+            OutputUIElementTree(child, level + 1)
+        Next
+    End Sub
+
+    ''' <summary>
+    ''' Loads the dialog's transformation JSON, builds a UIElement tree, outputs it, and removes duplicate nodes in each branch,
+    ''' but does not remove a node if it has children.
+    ''' </summary>
+    Private Sub WriteUISpec()
+        ' Load and deserialize the transformation JSON
+        Dim strDialogPathStem As String = Path.Combine(frmMain.strStaticPath & "\DialogDefinitions\Dlg" + strDialogName + "\dlg" + strDialogName)
+        Dim strTransformationsRJson As String = File.ReadAllText(strDialogPathStem + ".json")
+        lstTransformToScript = JsonConvert.DeserializeObject(Of List(Of clsTransformationRModel))(strTransformationsRJson)
+
+        ' Build the UIElement tree
+        Dim uiElements As New List(Of UIElement)
+        For Each model In lstTransformToScript
+            Dim element = BuildUIElementTree(model)
+            If element IsNot Nothing Then
+                uiElements.Add(element)
+            End If
+        Next
+
+        ' Output the UIElement tree structure to Debug
+        Debug.WriteLine("Before duplicate removal:")
+        For Each elem In uiElements
+            OutputUIElementTree(elem, 0)
+        Next
+
+        ' Remove duplicates in each branch, but do not remove a node if it has children
+        For i As Integer = 0 To uiElements.Count - 1
+            RemoveDuplicatesInBranchKeepWithChildren(uiElements(i), New HashSet(Of String)(StringComparer.OrdinalIgnoreCase), 0)
+        Next
+
+        Debug.WriteLine("After duplicate removal:")
+        For Each elem In uiElements
+            OutputUIElementTree(elem, 0)
+        Next
+    End Sub
+
+    ''' <summary>
+    ''' Recursively removes duplicate nodes in a branch. A node is a duplicate if its ValueKey has already appeared at the same or a lower level in the current branch,
+    ''' but a node is never removed if it has children.
+    ''' </summary>
+    ''' <param name="node">The current UIElement node.</param>
+    ''' <param name="ancestors">A set of ValueKeys already seen in this branch.</param>
+    ''' <param name="level">The current level in the tree.</param>
+    Private Sub RemoveDuplicatesInBranchKeepWithChildren(node As UIElement, ancestors As HashSet(Of String), level As Integer)
+        If node Is Nothing Then Return
+
+        ' Track ValueKeys seen in this branch up to this level
+        Dim currentAncestors = New HashSet(Of String)(ancestors, StringComparer.OrdinalIgnoreCase)
+        If Not String.IsNullOrEmpty(node.ValueKey) Then
+            currentAncestors.Add(node.ValueKey)
+        End If
+
+        ' Remove children that are duplicates (already in ancestors at this or a lower level), unless they have children
+        Dim uniqueChildren As New List(Of UIElement)
+        For Each child In node.Children
+            If String.IsNullOrEmpty(child.ValueKey) OrElse Not ancestors.Contains(child.ValueKey) OrElse (child.Children IsNot Nothing AndAlso child.Children.Count > 0) Then
+                RemoveDuplicatesInBranchKeepWithChildren(child, currentAncestors, level + 1)
+                uniqueChildren.Add(child)
+            End If
+            ' If duplicate and has no children, skip adding to uniqueChildren
+        Next
+        node.Children = uniqueChildren
+    End Sub
+
 End Class
+
+' todo Define the UIElement class (place this outside of ucrButtons, e.g., at the end of the file or in a separate file if preferred)
+Public Class UIElement
+    Public Property ValueKey As String
+    Public Property Children As New List(Of UIElement)
+    Public Sub New(strValueKey As String)
+        ValueKey = strValueKey
+    End Sub
+End Class
+
