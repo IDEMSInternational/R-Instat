@@ -4,7 +4,7 @@ Imports System.Text.RegularExpressions
 Public Class sdgTransformations
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Public clsOutputDataLevel, clsCreateTricotData, clsIDColsFunction, clsVarietyColsFunction, clsTraitColsFunction As New RFunction
+    Public clsOutputDataLevel, clsDefineTricotDataFunction, clsCreateTricotData, clsIDColsFunction, clsVarietyColsFunction, clsTraitColsFunction As New RFunction
     Private ucrBaseSelector As ucrSelector
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
     Dim lstRecognisedTraitsTypes As New List(Of KeyValuePair(Of String, List(Of String)))
@@ -134,12 +134,13 @@ Public Class sdgTransformations
 
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewIDColsFunction As RFunction, clsNewVarietyColsFunction As RFunction, clsNewTraitColsFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strDefaultTab As String = "")
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefineTricotDataFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewIDColsFunction As RFunction, clsNewVarietyColsFunction As RFunction, clsNewTraitColsFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strDefaultTab As String = "")
         clsOutputDataLevel = clsNewRFunction
         clsCreateTricotData = clsNewDefaultFunction
         clsIDColsFunction = clsNewIDColsFunction
         clsVarietyColsFunction = clsNewVarietyColsFunction
         clsTraitColsFunction = clsNewTraitColsFunction
+        clsDefineTricotDataFunction = clsNewDefineTricotDataFunction
         ucrBaseSelector = ucrNewBaseSelector
         ucrReceiverIDVariable.SetMeAsReceiver()
         ucrInputGoodTraits.SetText(strPos)
@@ -175,24 +176,31 @@ Public Class sdgTransformations
     Private Sub ucrInputGoodTraits_NameChanged() Handles ucrInputGoodTraits.ControlValueChanged
         If ucrInputGoodTraits.IsEmpty() Then
             clsCreateTricotData.RemoveParameterByName("good_suffixes")
+            clsDefineTricotDataFunction.RemoveParameterByName("good_suffixes")
         Else
             clsCreateTricotData.AddParameter("good_suffixes", Chr(34) & ucrInputGoodTraits.GetText & Chr(34))
+            clsDefineTricotDataFunction.AddParameter("good_suffixes", Chr(34) & ucrInputGoodTraits.GetText & Chr(34), iPosition:=1)
         End If
     End Sub
 
     Private Sub ucrInputBadTraits_NameChanged() Handles ucrInputBadTraits.ControlValueChanged
         If ucrInputBadTraits.IsEmpty() Then
             clsCreateTricotData.RemoveParameterByName("bad_suffixes")
+            clsDefineTricotDataFunction.RemoveParameterByName("bad_suffixes")
+
         Else
             clsCreateTricotData.AddParameter("bad_suffixes", Chr(34) & ucrInputBadTraits.GetText & Chr(34))
+            clsDefineTricotDataFunction.AddParameter("bad_suffixes", Chr(34) & ucrInputBadTraits.GetText & Chr(34), iPosition:=2)
         End If
     End Sub
 
     Private Sub ucrInputNAS_NameChanged() Handles ucrInputNAS.ControlValueChanged
         If ucrInputNAS.IsEmpty() Then
             clsCreateTricotData.RemoveParameterByName("na_candidates")
+            clsDefineTricotDataFunction.RemoveParameterByName("na_candidates")
         Else
             clsCreateTricotData.AddParameter("na_candidates", Chr(34) & ucrInputNAS.GetText & Chr(34))
+            clsDefineTricotDataFunction.AddParameter("na_candidates", Chr(34) & ucrInputNAS.GetText & Chr(34), iPosition:=3)
         End If
     End Sub
 
@@ -276,8 +284,10 @@ Public Class sdgTransformations
             clsTraitColsFunction.RemoveParameterByName("trait_2")
             If Not ucrReceiverTraits1.IsEmpty Then
                 clsTraitColsFunction.AddParameter("trait_cols_a", strParameterValue:=ucrReceiverTraits1.GetVariableNames, bIncludeArgumentName:=False)
+                clsDefineTricotDataFunction.AddParameter("trait_cols", strParameterValue:=ucrReceiverTraits1.GetVariableNames, iPosition:=4)
             Else
                 clsIDColsFunction.RemoveParameterByName("trait_cols_a")
+                clsDefineTricotDataFunction.RemoveParameterByName("trait_cols")
             End If
         Else
             clsTraitColsFunction.AddParameter("trait_1", Chr(34) & "trait" & Chr(34), bIncludeArgumentName:=False)
