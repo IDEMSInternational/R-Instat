@@ -50,29 +50,32 @@ Partial Class ucrInputTextBox
         Me.txtInput.ContextMenuStrip = Me.mnuRightClick
         Me.txtInput.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtInput.Location = New System.Drawing.Point(0, 0)
+        Me.txtInput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtInput.Name = "txtInput"
-        Me.txtInput.Size = New System.Drawing.Size(137, 20)
+        Me.txtInput.Size = New System.Drawing.Size(206, 26)
         Me.txtInput.TabIndex = 0
         '
         'mnuRightClick
         '
+        Me.mnuRightClick.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.mnuRightClick.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuRightClickCopy})
         Me.mnuRightClick.Name = "mnuRightClick"
-        Me.mnuRightClick.Size = New System.Drawing.Size(103, 26)
+        Me.mnuRightClick.Size = New System.Drawing.Size(127, 36)
         '
         'mnuRightClickCopy
         '
         Me.mnuRightClickCopy.Name = "mnuRightClickCopy"
-        Me.mnuRightClickCopy.Size = New System.Drawing.Size(102, 22)
+        Me.mnuRightClickCopy.Size = New System.Drawing.Size(126, 32)
         Me.mnuRightClickCopy.Text = "Copy"
         '
         'ucrInputTextBox
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.txtInput)
+        Me.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
         Me.Name = "ucrInputTextBox"
-        Me.Size = New System.Drawing.Size(137, 21)
+        Me.Size = New System.Drawing.Size(206, 32)
         Me.mnuRightClick.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -109,6 +109,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdNasplin, "Spline interpolation of missing values. For example na.spline(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,2.5,4,7,12)")
         ttCalculator.SetToolTip(cmdNaest, "Missing values as the mean (usually) overall or with a factor. For example na.aggregate(c(NA,NA,NA,2,2,NA,4,7,NA),maxgap=2,na.rm=FALSE) = (NA,NA,NA,2,2,3.75,4,7,3.75)")
         ttCalculator.SetToolTip(cmdRescale, "Transforms to (0, 1) scale, using (x - min)/(max - min)")
+        ttCalculator.SetToolTip(cmdRollApply, "Rolling summary for a function of your choice. The example given is for the 3 row count of values more than zero")
+
 
         'Logical and Symbols toooltips
         ttCalculator.SetToolTip(cmdPower, "power(^)or exponent and can also be given as **. For example 2^3 = 8")
@@ -498,6 +500,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdFrac20, "Give fraction our of 20 for a decimal value. For example for 0.36 the value is 7/20")
         ttCalculator.SetToolTip(cmdFrac100, "Give fraction our of 100 for a decimal value. For example for 0.36 the value is 36/100")
         ttCalculator.SetToolTip(cmdFracDen, "Give fraction for a given denominator. For example frac_den(0.36, 50) gives 18/50")
+        ttCalculator.SetToolTip(cmdIdentical, "Returns the number of rows not identical")
         '---------------------------------------------------------------------------------------------------------------------
 
         Const strTooltipCmdLength = "number Of observations: For example length(c(1,2,3,4,NA)) = 5 "
@@ -2065,6 +2068,21 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("scales::rescale( ,narm=TRUE)", 12)
         End If
     End Sub
+
+    Private Sub cmdRollApply_Click(sender As Object, e As EventArgs) Handles cmdRollApply.Click
+        Dim clsRollApplyFunction As New RFunction
+
+        clsRollApplyFunction.SetPackageName("zoo")
+        clsRollApplyFunction.SetRCommand("rollapply")
+        clsRollApplyFunction.AddParameter("x", "", bIncludeArgumentName:=False, iPosition:=0)
+        clsRollApplyFunction.AddParameter("width", "3", iPosition:=1)
+        clsRollApplyFunction.AddParameter("FUN", "function(x) {sum(x>0)}", iPosition:=2)
+        clsRollApplyFunction.AddParameter("fill", "NA", iPosition:=3)
+        clsRollApplyFunction.AddParameter("align", Chr(34) & "center" & Chr(34), iPosition:=4)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsRollApplyFunction.ToScript, 63)
+    End Sub
+
 
     Private Sub cmdRowRank_Click(sender As Object, e As EventArgs) Handles cmdRowRank.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dplyr::row_number( )", 2)
@@ -4621,11 +4639,19 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPhi_Click(sender As Object, e As EventArgs) Handles cmdPhi.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::phi(n= )", 2)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("primes::phi( )", 2)
-        End If
+
+        Dim clsPhiNRowsFunction As New RFunction
+        Dim clsPhiFunction As New RFunction
+
+        clsPhiNRowsFunction.SetRCommand("nrow")
+        clsPhiNRowsFunction.AddParameter("x", ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iPosition:=0)
+
+        clsPhiFunction.SetPackageName("primes")
+        clsPhiFunction.SetRCommand("phi")
+        clsPhiFunction.AddParameter("n", clsRFunctionParameter:=clsPhiNRowsFunction, iPosition:=0)
+
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(clsPhiFunction.ToScript, 0)
+
     End Sub
 
     Private Sub PrimeFunctions(strRCommand As String)
@@ -6131,5 +6157,11 @@ Public Class ucrCalculator
         End If
     End Sub
 
-
+    Private Sub cmdIdentical_Click(sender As Object, e As EventArgs) Handles cmdIdentical.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::count_differences(, )", 3)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::count_differences(, )", 3)
+        End If
+    End Sub
 End Class

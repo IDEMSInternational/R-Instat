@@ -70,6 +70,10 @@ Public Class dlgClimaticSummary
         ucrPnlAnnualWithin.AddRadioButton(rdoStation, "station")
         ucrPnlAnnualWithin.AddRadioButton(rdoDaily, "daily")
 
+        ucrChkDayRange.SetText("Day Range")
+        ucrChkDayRange.AddParameterValuesCondition(True, "day", "True")
+        ucrChkDayRange.AddParameterValuesCondition(False, "day", "False")
+
         'receivers:
         ' by receivers
         ucrReceiverStation.SetParameter(New RParameter("station", 0, False))
@@ -203,7 +207,6 @@ Public Class dlgClimaticSummary
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("factors", clsRFunctionParameter:=clsDefaultFactors, iPosition:=1)
-        clsDefaultFunction.AddParameter("additional_filter", clsRFunctionParameter:=clsDayFilterCalc, iPosition:=5)
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
         clsDefaultFunction.AddParameter("silent", "TRUE")
 
@@ -233,6 +236,7 @@ Public Class dlgClimaticSummary
         ucrChkPrintOutput.SetRCode(clsDefaultFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverDate.SetRCode(clsAddDateFunction, bReset)
+        ucrPnlAnnualWithin.SetRCode(clsDummyFunction, bReset)
 
         If bReset Then
             ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
@@ -303,6 +307,7 @@ Public Class dlgClimaticSummary
         AddDayRange()
         AddDateDoy()
         bResetSubdialog = False
+
     End Sub
 
     Private Sub WithinYearLabelReceiverLocation()

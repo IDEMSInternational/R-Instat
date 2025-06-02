@@ -326,6 +326,11 @@ Public Class frmEditor
         UpdateCurrentWorksheet()
     End Sub
 
+    Public Function IsDataSetLoaded() As Boolean
+        Dim grdCurrSheet As unvell.ReoGrid.Worksheet = grdData.CurrentWorksheet
+        Return grdCurrSheet IsNot Nothing AndAlso frmMain.clsRLink.GetDataFrameNames().Contains(grdCurrSheet.Name)
+    End Function
+
     Public Sub UpdateCurrentWorksheet()
         grdCurrSheet = grdData.CurrentWorksheet
         If grdCurrSheet IsNot Nothing AndAlso frmMain.clsRLink.GetDataFrameNames().Contains(grdCurrSheet.Name) Then
