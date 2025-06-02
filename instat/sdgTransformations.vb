@@ -115,13 +115,13 @@ Public Class sdgTransformations
         ucrReceiverTraits2.SetItemType("column")
 
         ucrInputGoodTraits.SetItems({strPos, strBest})
-        ucrInputGoodTraits.SetDropDownStyleAsNonEditable()
+        ucrInputGoodTraits.SetDropDownStyleAsEditable(True)
         ucrInputGoodTraits.SetLinkedDisplayControl(lblGoodTraits)
         ucrInputGoodTraits.SetParameter(New RParameter("good_suffixes", 5))
         ucrInputGoodTraits.SetText(strPos)
 
         ucrInputBadTraits.SetItems({strNeg, strWorst})
-        ucrInputBadTraits.SetDropDownStyleAsNonEditable()
+        ucrInputBadTraits.SetDropDownStyleAsEditable(True)
         ucrInputBadTraits.SetLinkedDisplayControl(lblBadTraits)
         ucrInputBadTraits.SetParameter(New RParameter("bad_suffixes", 6))
         ucrInputBadTraits.SetText(strNeg)
@@ -131,7 +131,6 @@ Public Class sdgTransformations
         ucrInputNAS.SetLinkedDisplayControl(lblNAs)
         ucrInputNAS.SetParameter(New RParameter("na_candidates", 7))
         ucrInputNAS.SetText(strNot)
-
     End Sub
 
     Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefineTricotDataFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewIDColsFunction As RFunction, clsNewVarietyColsFunction As RFunction, clsNewTraitColsFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strDefaultTab As String = "")
