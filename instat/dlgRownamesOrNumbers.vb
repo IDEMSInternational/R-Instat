@@ -25,7 +25,6 @@ Public Class dlgRowNamesOrNumbers
     Private clsDummyFunction As New RFunction
     Private clsGetVectorFunction As New RFunction
     Private clsHmiscFunction As New RFunction
-    Private clsRemoveFilter As New RFunction
 
 
     Private Sub dlgRowNamesOrNumbers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -41,7 +40,6 @@ Public Class dlgRowNamesOrNumbers
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
-        RemoveCurrentFilter()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -111,14 +109,11 @@ Public Class dlgRowNamesOrNumbers
         clsSetRowNamesFunction = New RFunction
         clsGetVectorFunction = New RFunction
         clsHmiscFunction = New RFunction
-        clsRemoveFilter = New RFunction
 
 
         ucrNewColumnName.Reset()
         ucrSelectorRowNames.Reset()
         ucrBase.clsRsyntax.GetAfterCodes().Clear()
-
-        clsRemoveFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
 
         clsDummyFunction.AddParameter("checked_rdo", "copy_row", iPosition:=1)
         clsDummyFunction.AddParameter("add_key", "TRUE", iPosition:=2)
@@ -138,7 +133,6 @@ Public Class dlgRowNamesOrNumbers
 
         clsSetRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_row_names")
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetRowNamesFunction)
-        RemoveCurrentFilter()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -189,7 +183,6 @@ Public Class dlgRowNamesOrNumbers
             End If
         End If
         AddRemoveKeyFromAfterCodes()
-        RemoveCurrentFilter()
     End Sub
 
     Private Sub AddRemoveKeyFromAfterCodes()
@@ -206,7 +199,6 @@ Public Class dlgRowNamesOrNumbers
 
     Private Sub ucrChkMakeColumnIntoKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMakeColumnIntoKey.ControlValueChanged
         AddRemoveKeyFromAfterCodes()
-        RemoveCurrentFilter()
     End Sub
 
     Private Sub ucrNewColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlValueChanged
@@ -220,17 +212,5 @@ Public Class dlgRowNamesOrNumbers
     End Sub
 
     Private Sub ucrSelectorRowNames_DataFrameChanged() Handles ucrSelectorRowNames.DataFrameChanged
-        Dim strDataFrame As String = Chr(34) & ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34)
-        clsRemoveFilter.AddParameter("data_name", strDataFrame, iPosition:=0)
-
     End Sub
-
-    Private Sub RemoveCurrentFilter()
-        If frmMain.ucrDataViewer.GetCurrentDataFrameFocus.clsFilterOrColumnSelection.bFilterApplied Then
-            ucrBase.clsRsyntax.AddToBeforeCodes(clsRemoveFilter, iPosition:=0)
-        Else
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRemoveFilter)
-        End If
-    End Sub
-
 End Class

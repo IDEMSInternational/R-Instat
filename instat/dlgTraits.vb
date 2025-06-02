@@ -48,11 +48,10 @@ Public Class dlgTraits
         ucrReceiverTrait.SetParameter(New RParameter("column", 1, bNewIncludeArgumentName:=False))
         ucrReceiverTrait.Selector = ucrTraitGraphSelector
         ucrReceiverTrait.SetParameterIsString()
-        ucrReceiverTrait.strSelectorHeading = "Traits"
-        ucrReceiverTrait.SetIncludedDataTypes({"numeric"})
-        ucrReceiverTrait.SetMeAsReceiver()
-        ucrReceiverTrait.SetTricotType("traits")
         ucrReceiverTrait.bAutoFill = True
+        ucrReceiverTrait.strSelectorHeading = "Traits"
+        ucrReceiverTrait.SetMeAsReceiver()
+        ucrReceiverTrait.SetTricotType({"traits"})
 
         ucrSaveTraits.SetPrefix("trait_plot")
         ucrSaveTraits.SetIsComboBox()

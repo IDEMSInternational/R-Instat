@@ -44,9 +44,6 @@ Public Class dlgTraitCorrelations
 
         ucrReceiverTraitsToCompare.SetParameterIsRFunction()
         ucrReceiverTraitsToCompare.Selector = ucrSelecetorTraits
-        ucrReceiverTraitsToCompare.strSelectorHeading = "Traits"
-        ucrReceiverTraitsToCompare.SetTricotType("traits")
-        ucrReceiverTraitsToCompare.bAutoFill = True
 
         ucrSelecetorTraits.SetParameterIsrfunction()
 

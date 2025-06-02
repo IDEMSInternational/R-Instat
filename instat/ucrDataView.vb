@@ -387,48 +387,29 @@ Public Class ucrDataView
             Exit Sub
         End If
 
-        Dim startRow As Integer = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow
-        Dim endRow As Integer = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow
-        Dim filteredRows As Integer = GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iFilteredRowCount
-        Dim totalRows As Integer = GetCurrentDataFrameFocus().iTotalRowCount
+        Dim strRowLabel As String = " " & GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartRow & ":" &
+                             GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndRow & " ("
+        Dim strColLabel As String = " " & GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartColumn & ":" &
+                              GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn & " ("
 
-        Dim strRowLabel As String
-        If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied AndAlso filteredRows = 0 Then
-            strRowLabel = " 0:0 ("
-        Else
-            strRowLabel = " " & startRow & ":" & endRow & " ("
-        End If
-
-        Dim startCol As Integer = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intStartColumn
-        Dim endCol As Integer = GetCurrentDataFrameFocus().clsVisibleDataFramePage.intEndColumn
-        Dim totalCols As Integer = GetCurrentDataFrameFocus().iTotalColumnCount
-
-        Dim strColLabel As String = " " & startCol & ":" & endCol & " ("
-
-        ' Set Row Display Text
-        lblRowDisplay.Text = GetTranslation("Rows") ' Required by translation engine
+        lblRowDisplay.Text = GetTranslation("Rows") 'don't change this code line, the scripts that create the translation database expect this exact format
         lblRowDisplay.Text &= strRowLabel
-
         If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bFilterApplied Then
-            lblRowDisplay.Text &= filteredRows & "/" & totalRows & ") | " &
-                              GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strName
+            lblRowDisplay.Text &= GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iFilteredRowCount &
+                                 "/" & GetCurrentDataFrameFocus().iTotalRowCount & ")" & " | " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strName
         Else
-            lblRowDisplay.Text &= totalRows & ")"
+            lblRowDisplay.Text &= GetCurrentDataFrameFocus().iTotalRowCount & ")"
         End If
 
-        ' Set Column Display Text
-        lblColDisplay.Text = GetTranslation("Columns") ' Required by translation engine
+        lblColDisplay.Text = GetTranslation("Columns") 'don't change this code line, the scripts that create the translation database expect this exact format
         lblColDisplay.Text &= strColLabel
-
         If GetCurrentDataFrameFocus().clsFilterOrColumnSelection.bColumnSelectionApplied AndAlso
-       GetCurrentDataFrameFocus.clsVisibleDataFramePage.UseColumnSelectionInDataView Then
+           GetCurrentDataFrameFocus.clsVisibleDataFramePage.UseColumnSelectionInDataView Then
             lblColDisplay.Text &= GetCurrentDataFrameFocus().clsFilterOrColumnSelection.iSelectedColumnCount &
-                              "/" & totalCols & ") | " &
-                              GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strSelectionName
+                                "/" & GetCurrentDataFrameFocus().iTotalColumnCount & ")" & " | " & GetCurrentDataFrameFocus().clsFilterOrColumnSelection.strSelectionName
         Else
-            lblColDisplay.Text &= totalCols & ")"
+            lblColDisplay.Text &= GetCurrentDataFrameFocus().iTotalColumnCount & ")"
         End If
-
         ResizeLabels()
     End Sub
 
@@ -801,7 +782,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub linkStartOpenLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenLibrary.LinkClicked
-        dlgFromLibrary.ShowDialog()
+        dlgFromLibrary.Show()
     End Sub
 
     ''' <summary>
