@@ -21,6 +21,7 @@ Public Class dlgTransformTricotData
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        TestOKEnabled()
         bUniqueChecked = False
     End Sub
 
@@ -184,7 +185,6 @@ Public Class dlgTransformTricotData
         clsRankingFunction.AddParameter("false", "FALSE", bIncludeArgumentName:=False, iPosition:=4)
         clsRankingFunction.SetAssignTo("rankings_list")
 
-
         clsAddFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
         clsAddFunction.AddParameter("data_name", "plot_data_name", iPosition:=0)
         clsAddFunction.AddParameter("object_name", Chr(34) & "rankings_list" & Chr(34), iPosition:=1)
@@ -208,6 +208,7 @@ Public Class dlgTransformTricotData
         clsAddGroupedFunction.AddParameter("object_format", Chr(34) & "text" & Chr(34), iPosition:=3)
         clsAddGroupedFunction.AddParameter("object", clsRFunctionParameter:=clsRankingGroupedFunction, iPosition:=4)
 
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsDefineTricotDataFunction, 0)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAddLinkFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAddFunction, 2)
@@ -252,7 +253,11 @@ Public Class dlgTransformTricotData
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(Not ucrReceiverTricotData.IsEmpty AndAlso bUniqueChecked)
+        If Not ucrReceiverTricotData.IsEmpty AndAlso bUniqueChecked Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
 
@@ -391,4 +396,9 @@ Public Class dlgTransformTricotData
     Private Sub ucrReceiverTricotData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTricotData.ControlValueChanged
         clsOutputDataLevelForCheck.AddParameter("data_list", ucrReceiverTricotData.GetVariableNames())
     End Sub
+
+    Private Sub ucrReceiverTricotData_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTricotData.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
 End Class
