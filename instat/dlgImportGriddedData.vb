@@ -41,12 +41,12 @@ Public Class dlgImportGriddedData
         ucrSelectorIRIVariable.SetParameter(New RParameter("data_frame", 1))
         ucrSelectorIRIVariable.SetParameterIsrfunction()
 
-        ucrReceiverLatitude.SetParameter(New RParameter("min_lat ", 4))
+        ucrReceiverLatitude.SetParameter(New RParameter("min_lat", 4))
         ucrReceiverLatitude.Selector = ucrSelectorIRIVariable
         ucrReceiverLatitude.SetParameterIsString()
         ucrReceiverLatitude.SetLinkedDisplayControl(lblLatitude)
 
-        ucrReceiverLongtitude.SetParameter(New RParameter("min_lon ", 5))
+        ucrReceiverLongtitude.SetParameter(New RParameter("min_lon", 5))
         ucrReceiverLongtitude.Selector = ucrSelectorIRIVariable
         ucrReceiverLongtitude.SetParameterIsString()
         ucrReceiverLongtitude.SetLinkedDisplayControl(lblLongtude)
@@ -57,7 +57,7 @@ Public Class dlgImportGriddedData
         ucrReceiverIDVariable.SetLinkedDisplayControl(lblIDVariable)
         ucrReceiverIDVariable.SetMeAsReceiver()
 
-        ucrReceiverMinPlantingDate.SetParameter(New RParameter("min_date ", 6))
+        ucrReceiverMinPlantingDate.SetParameter(New RParameter("min_date", 6))
         ucrReceiverMinPlantingDate.Selector = ucrSelectorIRIVariable
         ucrReceiverMinPlantingDate.SetParameterIsString()
         ucrReceiverMinPlantingDate.SetLinkedDisplayControl(lblPlantingDateMin)
@@ -66,7 +66,7 @@ Public Class dlgImportGriddedData
         ucrReceiverMaxPlantingDate.Selector = ucrSelectorIRIVariable
         ucrReceiverMaxPlantingDate.SetParameterIsString()
 
-        ucrNudMaxPlantingDate.SetParameter(New RParameter("max_date ", 7))
+        ucrNudMaxPlantingDate.SetParameter(New RParameter("max_date", 7))
         ucrNudMaxPlantingDate.SetMinMax(25, 366)
         ucrNudMaxPlantingDate.Increment = 1
 
@@ -336,13 +336,13 @@ Public Class dlgImportGriddedData
         ElseIf rdoVariableMaxPlant.Checked Then
             ucrNudMaxPlantingDate.Visible = True
             ucrReceiverMaxPlantingDate.Visible = False
-            clsMultipleIRIFunction.AddParameter("max_date ", Chr(34) & ucrNudMaxPlantingDate.GetText & Chr(34), iPosition:=7)
+            clsMultipleIRIFunction.AddParameter("max_date", Chr(34) & ucrNudMaxPlantingDate.GetText & Chr(34), iPosition:=7)
         End If
     End Sub
 
     Private Sub ucrReceiverIDVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVariable.ControlValueChanged
         If Not ucrReceiverIDVariable.IsEmpty Then
-            clsMultipleIRIFunction.AddParameter("id_var ", ucrReceiverIDVariable.GetVariableNames, iPosition:=1)
+            clsMultipleIRIFunction.AddParameter("id_var", ucrReceiverIDVariable.GetVariableNames, iPosition:=1)
         Else
             clsMultipleIRIFunction.RemoveParameterByName("id_var")
         End If
@@ -358,7 +358,7 @@ Public Class dlgImportGriddedData
 
     Private Sub ucrReceiverLongtitude_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLongtitude.ControlValueChanged
         If Not ucrReceiverLongtitude.IsEmpty Then
-            clsMultipleIRIFunction.AddParameter("min_lon", ucrReceiverLatitude.GetVariableNames, iPosition:=4)
+            clsMultipleIRIFunction.AddParameter("min_lon", ucrReceiverLongtitude.GetVariableNames, iPosition:=4)
         Else
             clsMultipleIRIFunction.RemoveParameterByName("min_lon")
         End If
