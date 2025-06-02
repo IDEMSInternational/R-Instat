@@ -3,7 +3,7 @@
 Public Class dlgTransformTricotData
     Private clsOutputDataLevel, clsConcFunction, clsSetNameFunction, clsGetDataFrameFunction,
         clsListFunction, clsAddLinkFunction, clsGetVariablesPlotFunction, clsGetColumnSelectionFunction,
-        clsGetVariablesVarietyFunction, clsDefineTricotDataFunction, clsAddFunction, clsAddGroupedFunction,
+        clsGetVariablesVarietyFunction, clsOutputDataLevelForCheck, clsDefineTricotDataFunction, clsAddFunction, clsAddGroupedFunction,
         clsCheckDataLevel, clsRankingFunction, clsRankingGroupedFunction, clsUnameFunction,
         clsCreateTricotData, clsIDColsFunction, clsVarietyColsFunction, clsTraitColsFunction As New RFunction
     Private clsOutputLevelsOperator, clsIdVarietyOperator, clsIdOperator, clsTraitsOperator, clsPlotPullOperator, clsVarietyPullOperator, clsPlotOperator, clsVarietyOperator, OverallSymbolOperator As New ROperator
@@ -52,6 +52,7 @@ Public Class dlgTransformTricotData
         clsGetDataFrameFunction = New RFunction
         clsAddFunction = New RFunction
         clsUnameFunction = New RFunction
+        clsOutputDataLevelForCheck = New RFunction
         clsAddGroupedFunction = New RFunction
         clsOutputLevelsOperator = New ROperator
         OverallSymbolOperator = New ROperator
@@ -71,6 +72,10 @@ Public Class dlgTransformTricotData
         ucrInputTricotData.txtInput.BackColor = Color.White
 
         ucrReceiverTricotData.SetMeAsReceiver()
+
+        clsOutputDataLevelForCheck.SetPackageName("instatExtras")
+        clsOutputDataLevelForCheck.SetRCommand("summarise_data_levels")
+
         clsOutputDataLevel.SetPackageName("instatExtras")
         clsOutputDataLevel.SetRCommand("summarise_data_levels")
         clsOutputDataLevel.SetAssignTo("output_data_levels")
@@ -81,7 +86,7 @@ Public Class dlgTransformTricotData
         clsCreateTricotData.SetAssignTo("output_data_levels")
 
         OverallSymbolOperator.SetOperation("[")
-        OverallSymbolOperator.AddParameter("left", "output_data_levels", iPosition:=0)
+        OverallSymbolOperator.AddParameter("left", clsRFunctionParameter:=clsOutputDataLevelForCheck, iPosition:=0)
         OverallSymbolOperator.AddParameter("right", "1,]", iPosition:=1)
         OverallSymbolOperator.bSpaceAroundOperation = False
 
@@ -203,7 +208,6 @@ Public Class dlgTransformTricotData
         clsAddGroupedFunction.AddParameter("object_format", Chr(34) & "text" & Chr(34), iPosition:=3)
         clsAddGroupedFunction.AddParameter("object", clsRFunctionParameter:=clsRankingGroupedFunction, iPosition:=4)
 
-        'ucrBase.clsRsyntax.AddToAfterCodes(clsCreateTricotData, 0)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDefineTricotDataFunction, 0)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAddLinkFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAddFunction, 2)
@@ -265,7 +269,7 @@ Public Class dlgTransformTricotData
 
         clsPackageCheck.SetPackageName("instatExtras")
         clsPackageCheck.SetRCommand("check_data_levels")
-        clsPackageCheck.AddParameter("x", clsRFunctionParameter:=clsOutputDataLevel)
+        clsPackageCheck.AddParameter("x", clsRFunctionParameter:=clsOutputDataLevelForCheck)
 
         expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript(), bSilent:=True)
 
@@ -382,5 +386,9 @@ Public Class dlgTransformTricotData
 
                                          txtPopUpErrorDetail.SelectionStart = txtPopUpErrorDetail.TextLength
                                      End Sub
+    End Sub
+
+    Private Sub ucrReceiverTricotData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTricotData.ControlValueChanged
+        clsOutputDataLevelForCheck.AddParameter("data_list", ucrReceiverTricotData.GetVariableNames())
     End Sub
 End Class
