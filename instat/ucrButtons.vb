@@ -511,7 +511,7 @@ Public Class ucrButtons
             For Each child In model.lstTransformations
                 Dim childElement = BuildUIElementTree(child)
                 If childElement IsNot Nothing Then
-                    element.Children.Add(childElement)
+                    element.lstChildren.Add(childElement)
                 End If
             Next
         End If
@@ -523,10 +523,10 @@ Public Class ucrButtons
     ''' </summary>
     Private Sub OutputUIElementTree(element As UIElement, level As Integer)
         If element Is Nothing Then Return
-        If Not String.IsNullOrEmpty(element.ValueKey) Then
-            Debug.WriteLine($"{New String(" "c, level * 2)}Level {level}: {element.ValueKey}")
+        If Not String.IsNullOrEmpty(element.strElementName) Then
+            Debug.WriteLine($"{New String(" "c, level * 2)}Level {level}: {element.strElementName}")
         End If
-        For Each child In element.Children
+        For Each child In element.lstChildren
             OutputUIElementTree(child, level + 1)
         Next
     End Sub
@@ -557,52 +557,66 @@ Public Class ucrButtons
         Next
 
         ' Remove duplicates in each branch, but do not remove a node if it has children
+        Dim lstUIElementsNoDuplicates As New List(Of UIElement)
+        Dim elementsAlreadyInBranch As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
         For i As Integer = 0 To uiElements.Count - 1
-            RemoveDuplicatesInBranchKeepWithChildren(uiElements(i), New HashSet(Of String)(StringComparer.OrdinalIgnoreCase), 0)
+            Dim elementNoDuplicate = GetUIElementNoDuplicates(uiElements(i), elementsAlreadyInBranch, 0)
+
+            If elementNoDuplicate Is Nothing Then Continue For
+
+            If Not elementsAlreadyInBranch.Contains(elementNoDuplicate.strElementName) Then
+                elementsAlreadyInBranch.Add(elementNoDuplicate.strElementName)
+            End If
+
+            lstUIElementsNoDuplicates.Add(elementNoDuplicate)
         Next
 
-        Debug.WriteLine("After duplicate removal:")
-        For Each elem In uiElements
+        Debug.WriteLine(vbCrLf & vbCrLf & "After duplicate removal:")
+        For Each elem In lstUIElementsNoDuplicates
             OutputUIElementTree(elem, 0)
         Next
     End Sub
 
-    ''' <summary>
-    ''' Recursively removes duplicate nodes in a branch. A node is a duplicate if its ValueKey has already appeared at the same or a lower level in the current branch,
-    ''' but a node is never removed if it has children.
-    ''' </summary>
-    ''' <param name="node">The current UIElement node.</param>
-    ''' <param name="ancestors">A set of ValueKeys already seen in this branch.</param>
-    ''' <param name="level">The current level in the tree.</param>
-    Private Sub RemoveDuplicatesInBranchKeepWithChildren(node As UIElement, ancestors As HashSet(Of String), level As Integer)
-        If node Is Nothing Then Return
+    Private Function GetUIElementNoDuplicates(element As UIElement, elementNamesAlreadyInParentBranch As HashSet(Of String), level As Integer) As UIElement
+        If element Is Nothing OrElse String.IsNullOrEmpty(element.strElementName) Then Return Nothing
 
-        ' Track ValueKeys seen in this branch up to this level
-        Dim currentAncestors = New HashSet(Of String)(ancestors, StringComparer.OrdinalIgnoreCase)
-        If Not String.IsNullOrEmpty(node.ValueKey) Then
-            currentAncestors.Add(node.ValueKey)
+        If elementNamesAlreadyInParentBranch.Contains(element.strElementName) AndAlso (element.lstChildren Is Nothing OrElse element.lstChildren.Count = 0) Then
+            Return Nothing
         End If
 
-        ' Remove children that are duplicates (already in ancestors at this or a lower level), unless they have children
-        Dim uniqueChildren As New List(Of UIElement)
-        For Each child In node.Children
-            If String.IsNullOrEmpty(child.ValueKey) OrElse Not ancestors.Contains(child.ValueKey) OrElse (child.Children IsNot Nothing AndAlso child.Children.Count > 0) Then
-                RemoveDuplicatesInBranchKeepWithChildren(child, currentAncestors, level + 1)
-                uniqueChildren.Add(child)
+        If element.lstChildren Is Nothing OrElse element.lstChildren.Count = 0 Then
+            Return element
+        End If
+
+        Dim elementNamesAlreadyInCurrentBranch = New HashSet(Of String)(elementNamesAlreadyInParentBranch, StringComparer.OrdinalIgnoreCase) From {
+            element.strElementName
+        }
+
+        Dim newChildren As New List(Of UIElement)
+        For Each child In element.lstChildren
+            Dim elementNoDuplicate = GetUIElementNoDuplicates(child, elementNamesAlreadyInCurrentBranch, level + 1)
+
+            If elementNoDuplicate Is Nothing Then Continue For
+
+            If Not elementNamesAlreadyInCurrentBranch.Contains(elementNoDuplicate.strElementName) Then
+                elementNamesAlreadyInCurrentBranch.Add(elementNoDuplicate.strElementName)
             End If
-            ' If duplicate and has no children, skip adding to uniqueChildren
+
+            newChildren.Add(elementNoDuplicate)
         Next
-        node.Children = uniqueChildren
-    End Sub
+
+        element.lstChildren = newChildren
+        Return element
+    End Function
 
 End Class
 
 ' todo Define the UIElement class (place this outside of ucrButtons, e.g., at the end of the file or in a separate file if preferred)
 Public Class UIElement
-    Public Property ValueKey As String
-    Public Property Children As New List(Of UIElement)
-    Public Sub New(strValueKey As String)
-        ValueKey = strValueKey
+    Public Property strElementName As String
+    Public Property lstChildren As New List(Of UIElement)
+    Public Sub New(strName As String)
+        strElementName = strName
     End Sub
 End Class
 
