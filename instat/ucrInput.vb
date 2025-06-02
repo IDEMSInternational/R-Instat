@@ -354,7 +354,7 @@ Public Class ucrInput
                     Dim vecOutput As CharacterVector
                     'is.numeric(x) returns true if the x expression is a valid one.
                     'So we use it here to check validity of the entry
-                    vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput("is.numeric(" & strText & ")", bSilent:=True)
+                    vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput("is.numeric(tryCatch(eval(parse(text=" & Chr(34) & strText & Chr(34) & ")), error=function(e) NA))", bSilent:=True)
                     If vecOutput IsNot Nothing AndAlso vecOutput.Length > 0 AndAlso Mid(vecOutput(0), 5).ToUpper = "TRUE" Then
                         iType = 0 'set as valid entry
                     End If
@@ -436,8 +436,14 @@ Public Class ucrInput
                 If strVal = "" Then Return 1
                 Dim clsTempParam As New RParameter
                 If bIsNumericInput Then
+                    Dim vecOutput As CharacterVector
                     If Not IsNumeric(strVal) AndAlso (Not (bAllowInf AndAlso ({"Inf", "-Inf"}.Contains(strVal)))) Then
-                        Return 2
+                        vecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(
+                            "is.numeric(tryCatch(eval(parse(text=" & Chr(34) & strVal & Chr(34) & ")), error=function(e) NA))",
+                            bSilent:=True)
+                        If vecOutput Is Nothing OrElse vecOutput.Length = 0 OrElse vecOutput(0).ToUpperInvariant().Contains("FALSE") Then
+                            Return 2
+                        End If
                     ElseIf IsNumeric(strVal) AndAlso (strVal > dcmMaximum OrElse strVal < dcmMinimum) Then
                         Return 3
                     End If
