@@ -125,8 +125,8 @@ Public Class dlgImportGriddedData
         ucrPnlMaxPlantingDate.AddRadioButton(rdoMaxPlantValue)
         ucrPnlMaxPlantingDate.AddRadioButton(rdoVariableMaxPlant)
 
-        ucrPnlMaxPlantingDate.AddFunctionNamesCondition(rdoMaxPlantValue, "max_date")
-        ucrPnlMaxPlantingDate.AddFunctionNamesCondition(rdoVariableMaxPlant, "max_date")
+        ucrPnlMaxPlantingDate.AddParameterValuesCondition(rdoMaxPlantValue, "multiple", "variable")
+        ucrPnlMaxPlantingDate.AddParameterValuesCondition(rdoVariableMaxPlant, "multiple", "value")
 
         ucrChkDontImportData.SetParameter(New RParameter("import", 11))
         ucrChkDontImportData.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
@@ -167,7 +167,7 @@ Public Class dlgImportGriddedData
         clsDownloadFromIRIFunction.AddParameter("max_lat", 0.5, iPosition:=6)
         clsDownloadFromIRIFunction.AddParameter("download_type", Chr(34) & "Point" & Chr(34), iPosition:=10)
 
-        clsDummyFunction.AddParameter("checked", "max_date", iPosition:=0)
+        clsDummyFunction.AddParameter("multiple", "variable", iPosition:=7)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDownloadFromIRIFunction)
     End Sub
@@ -369,6 +369,14 @@ Public Class dlgImportGriddedData
             clsMultipleIRIFunction.AddParameter("min_date", ucrReceiverMinPlantingDate.GetVariableNames, iPosition:=6)
         Else
             clsMultipleIRIFunction.RemoveParameterByName("min_date")
+        End If
+    End Sub
+
+    Private Sub ucrPnlMaxPlantingDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlMaxPlantingDate.ControlContentsChanged
+        If rdoMaxPlantValue.Checked Then
+            clsDummyFunction.AddParameter("multiple", "variable", iPosition:=7)
+        ElseIf rdoVariableMaxPlant.Checked Then
+            clsDummyFunction.AddParameter("multiple", "value", iPosition:=7)
         End If
     End Sub
 End Class
