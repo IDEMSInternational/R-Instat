@@ -746,13 +746,14 @@ Public Class dlgDescribeTwoVariable
                     cmdSummaries.Visible = True
                     cmdFormatTable.Visible = True
                     ucrChkOmitMissing.Visible = True
+                    cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
                     ucrChkMeans.Visible = False
                     ucrChkLevSig.Visible = False
                     ucrChkTotal.Visible = False
                     ucrChkInteraction.Visible = False
                     ucrSaveTable.Location = New Point(23, 450)
                     ucrChkOmitMissing.Location = New Point(15, 365)
-                    cmdMissingOptions.Location = New Point(17, 385)
+                    'cmdMissingOptions.Location = New Point(15, 365)
                     clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
                     ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                     ucrSaveTable.SetPrefix("summary_table")
