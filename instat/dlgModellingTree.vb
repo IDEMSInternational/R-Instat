@@ -78,7 +78,8 @@ Public Class dlgModellingTree
         ucrReceiverModellingTree.SetParameterIsRFunction()
         ucrReceiverModellingTree.Selector = ucrSelectorByDataFrameAddRemoveForModellingTree
         ucrReceiverModellingTree.strSelectorHeading = "Traits"
-        ucrReceiverModellingTree.SetTricotType({"traits"})
+        ucrReceiverModellingTree.SetTricotType("traits")
+        ucrReceiverModellingTree.bAutoFill = True
 
         ucrReceiverExpressionModellingTree.SetParameter(New RParameter("y", 2))
         ucrReceiverExpressionModellingTree.SetParameterIsString()
