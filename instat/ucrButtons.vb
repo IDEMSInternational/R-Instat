@@ -506,7 +506,9 @@ Public Class ucrButtons
             Return Nothing
         End If
 
-        Dim element As New UIElement(model.strValueKey)
+        Dim strElementName As String = model.strValueKey
+        strElementName += If(model.enumTransformationType = clsTransformationRModel.TransformationType.ifFalseExecuteChildTransformations, " F", "")
+        Dim element As New UIElement(strElementName)
         If model.lstTransformations IsNot Nothing Then
             For Each child In model.lstTransformations
                 Dim childElement = BuildUIElementTree(child)
@@ -519,17 +521,20 @@ Public Class ucrButtons
     End Function
 
     ''' <summary>
-    ''' Outputs the UIElement tree structure to the Debug window for demonstration.
+    ''' Returns a string representation of the UIElement tree structure, with indentation for each level.
     ''' </summary>
-    Private Sub OutputUIElementTree(element As UIElement, level As Integer)
-        If element Is Nothing Then Return
+    Private Function OutputUIElementTree(element As UIElement, level As Integer) As String
+        If element Is Nothing Then Return String.Empty
+
+        Dim sb As New System.Text.StringBuilder()
         If Not String.IsNullOrEmpty(element.strElementName) Then
-            Debug.WriteLine($"{New String(" "c, level * 2)}Level {level}: {element.strElementName}")
+            sb.AppendLine($"{New String(" "c, level * 2)}Level {level}: {element.strElementName}")
         End If
         For Each child In element.lstChildren
-            OutputUIElementTree(child, level + 1)
+            sb.Append(OutputUIElementTree(child, level + 1))
         Next
-    End Sub
+        Return sb.ToString()
+    End Function
 
     ''' <summary>
     ''' Loads the dialog's transformation JSON, builds a UIElement tree, outputs it, and removes duplicate nodes in each branch,
@@ -550,11 +555,20 @@ Public Class ucrButtons
             End If
         Next
 
-        ' Output the UIElement tree structure to Debug
-        Debug.WriteLine("Before duplicate removal:")
+        ' Output the UIElement tree structure to file
+        Dim strElementTree As String = vbLf & vbLf & "Before duplicate removal:" & vbLf & vbLf
         For Each elem In uiElements
-            OutputUIElementTree(elem, 0)
+            strElementTree += OutputUIElementTree(elem, 0)
         Next
+
+        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim strFilePath As String = Path.Combine(strDesktopPath, "tmp", "elementTree.txt")
+        If File.Exists(strFilePath) Then
+            File.AppendAllText(strFilePath, strElementTree)
+        Else
+            Directory.CreateDirectory(Path.GetDirectoryName(strFilePath))
+            File.WriteAllText(strFilePath, strElementTree)
+        End If
 
         ' Remove duplicates in each branch, but do not remove a node if it has children
         Dim lstUIElementsNoDuplicates As New List(Of UIElement)
@@ -571,10 +585,12 @@ Public Class ucrButtons
             lstUIElementsNoDuplicates.Add(elementNoDuplicate)
         Next
 
-        Debug.WriteLine(vbCrLf & vbCrLf & "After duplicate removal:")
+        strElementTree = vbLf & vbLf & "After duplicate removal:" & vbLf & vbLf
         For Each elem In lstUIElementsNoDuplicates
-            OutputUIElementTree(elem, 0)
+            strElementTree += OutputUIElementTree(elem, 0)
         Next
+        File.AppendAllText(strFilePath, strElementTree)
+
     End Sub
 
     Private Function GetUIElementNoDuplicates(element As UIElement, elementNamesAlreadyInParentBranch As HashSet(Of String), level As Integer) As UIElement

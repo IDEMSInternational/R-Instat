@@ -32,12 +32,6 @@
     },
     {
         "enumTransformationType": "ifFalseExecuteChildTransformations",
-        "strValueKey": "isStoreTableOrDataFrame",
-        "lstTransformations": [
-        ]
-    },
-    {
-        "enumTransformationType": "ifFalseExecuteChildTransformations",
         "strValueKey": "isDisplayOptions",
         "lstTransformations": [
             {
@@ -169,16 +163,10 @@
                         "iParameterNumber": 0,
                         "strValueKey": "dataFrame",
                         "bIsQuoted": true
-                    }
-                ]
-            },
-            {
-                "enumTransformationType": "ifTrueExecuteChildTransformations",
-                "strValueKey": "isStoreTableOrDataFrame",
-                "lstTransformations": [
+                    },
                     {
                         "enumTransformationType": "ifTrueExecuteChildTransformations",
-                        "strValueKey": "isSaveAsTable",
+                        "strValueKey": "isStoreTableOrDataFrame",
                         "lstTransformations": [
                             {
                                 "enumTransformationType": "operatorUpdateParam",
