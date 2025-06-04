@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgTableOptions
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -42,7 +42,20 @@ Partial Class sdgTableOptions
         Me.btnManualTheme = New System.Windows.Forms.Button()
         Me.tbpOtherStyles = New System.Windows.Forms.TabPage()
         Me.ucrOtherStyles = New instat.ucrOtherStyles()
+        Me.tbpTables = New System.Windows.Forms.TabPage()
         Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
+        Me.ucrTxtMissingText = New instat.ucrInputComboBox()
+        Me.rdoText = New System.Windows.Forms.RadioButton()
+        Me.rdoDate = New System.Windows.Forms.RadioButton()
+        Me.rdoNumber = New System.Windows.Forms.RadioButton()
+        Me.btnTextFormat = New System.Windows.Forms.Button()
+        Me.btnDateFormat = New System.Windows.Forms.Button()
+        Me.btnNumberFormat = New System.Windows.Forms.Button()
+        Me.grpMissingValues = New System.Windows.Forms.GroupBox()
+        Me.lblMissingText = New System.Windows.Forms.Label()
+        Me.ucrChkMissingValues = New instat.ucrCheck()
+        Me.ucrChkDataFormat = New instat.ucrCheck()
+        Me.ucrPnlFormat = New instat.UcrPanel()
         Me.tbpFormatOptions.SuspendLayout()
         Me.tbpHeader.SuspendLayout()
         Me.tbpStub.SuspendLayout()
@@ -52,6 +65,8 @@ Partial Class sdgTableOptions
         Me.tbpSourceNotes.SuspendLayout()
         Me.tbpThemes.SuspendLayout()
         Me.tbpOtherStyles.SuspendLayout()
+        Me.tbpTables.SuspendLayout()
+        Me.grpMissingValues.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpFormatOptions
@@ -64,6 +79,7 @@ Partial Class sdgTableOptions
         Me.tbpFormatOptions.Controls.Add(Me.tbpSourceNotes)
         Me.tbpFormatOptions.Controls.Add(Me.tbpThemes)
         Me.tbpFormatOptions.Controls.Add(Me.tbpOtherStyles)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpTables)
         Me.tbpFormatOptions.Location = New System.Drawing.Point(3, 5)
         Me.tbpFormatOptions.Name = "tbpFormatOptions"
         Me.tbpFormatOptions.SelectedIndex = 0
@@ -254,6 +270,26 @@ Partial Class sdgTableOptions
         Me.ucrOtherStyles.Size = New System.Drawing.Size(326, 179)
         Me.ucrOtherStyles.TabIndex = 0
         '
+        'tbpTables
+        '
+        Me.tbpTables.Controls.Add(Me.rdoText)
+        Me.tbpTables.Controls.Add(Me.rdoDate)
+        Me.tbpTables.Controls.Add(Me.rdoNumber)
+        Me.tbpTables.Controls.Add(Me.btnTextFormat)
+        Me.tbpTables.Controls.Add(Me.btnDateFormat)
+        Me.tbpTables.Controls.Add(Me.btnNumberFormat)
+        Me.tbpTables.Controls.Add(Me.grpMissingValues)
+        Me.tbpTables.Controls.Add(Me.ucrChkMissingValues)
+        Me.tbpTables.Controls.Add(Me.ucrChkDataFormat)
+        Me.tbpTables.Controls.Add(Me.ucrPnlFormat)
+        Me.tbpTables.Location = New System.Drawing.Point(4, 22)
+        Me.tbpTables.Name = "tbpTables"
+        Me.tbpTables.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpTables.Size = New System.Drawing.Size(765, 431)
+        Me.tbpTables.TabIndex = 11
+        Me.tbpTables.Text = "Table"
+        Me.tbpTables.UseVisualStyleBackColor = True
+        '
         'ucrSdgBaseButtons
         '
         Me.ucrSdgBaseButtons.AutoSize = True
@@ -262,6 +298,134 @@ Partial Class sdgTableOptions
         Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
         Me.ucrSdgBaseButtons.Size = New System.Drawing.Size(224, 30)
         Me.ucrSdgBaseButtons.TabIndex = 343
+        '
+        'ucrTxtMissingText
+        '
+        Me.ucrTxtMissingText.AddQuotesIfUnrecognised = True
+        Me.ucrTxtMissingText.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrTxtMissingText.GetSetSelectedIndex = -1
+        Me.ucrTxtMissingText.IsReadOnly = False
+        Me.ucrTxtMissingText.Location = New System.Drawing.Point(29, 35)
+        Me.ucrTxtMissingText.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrTxtMissingText.Name = "ucrTxtMissingText"
+        Me.ucrTxtMissingText.Size = New System.Drawing.Size(120, 23)
+        Me.ucrTxtMissingText.TabIndex = 378
+        '
+        'rdoText
+        '
+        Me.rdoText.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoText.Location = New System.Drawing.Point(198, 112)
+        Me.rdoText.Name = "rdoText"
+        Me.rdoText.Size = New System.Drawing.Size(89, 17)
+        Me.rdoText.TabIndex = 391
+        Me.rdoText.TabStop = True
+        Me.rdoText.Text = "Text"
+        Me.rdoText.UseVisualStyleBackColor = True
+        '
+        'rdoDate
+        '
+        Me.rdoDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoDate.Location = New System.Drawing.Point(198, 77)
+        Me.rdoDate.Name = "rdoDate"
+        Me.rdoDate.Size = New System.Drawing.Size(89, 17)
+        Me.rdoDate.TabIndex = 390
+        Me.rdoDate.TabStop = True
+        Me.rdoDate.Text = "Date"
+        Me.rdoDate.UseVisualStyleBackColor = True
+        '
+        'rdoNumber
+        '
+        Me.rdoNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoNumber.Location = New System.Drawing.Point(198, 43)
+        Me.rdoNumber.Name = "rdoNumber"
+        Me.rdoNumber.Size = New System.Drawing.Size(89, 16)
+        Me.rdoNumber.TabIndex = 389
+        Me.rdoNumber.TabStop = True
+        Me.rdoNumber.Text = "Number"
+        Me.rdoNumber.UseVisualStyleBackColor = True
+        '
+        'btnTextFormat
+        '
+        Me.btnTextFormat.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.btnTextFormat.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnTextFormat.Location = New System.Drawing.Point(290, 106)
+        Me.btnTextFormat.Name = "btnTextFormat"
+        Me.btnTextFormat.Size = New System.Drawing.Size(126, 23)
+        Me.btnTextFormat.TabIndex = 392
+        Me.btnTextFormat.Tag = ""
+        Me.btnTextFormat.Text = "Text Format"
+        Me.btnTextFormat.UseVisualStyleBackColor = True
+        '
+        'btnDateFormat
+        '
+        Me.btnDateFormat.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.btnDateFormat.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnDateFormat.Location = New System.Drawing.Point(290, 71)
+        Me.btnDateFormat.Name = "btnDateFormat"
+        Me.btnDateFormat.Size = New System.Drawing.Size(126, 23)
+        Me.btnDateFormat.TabIndex = 393
+        Me.btnDateFormat.Tag = ""
+        Me.btnDateFormat.Text = "Date Format"
+        Me.btnDateFormat.UseVisualStyleBackColor = True
+        '
+        'btnNumberFormat
+        '
+        Me.btnNumberFormat.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        Me.btnNumberFormat.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnNumberFormat.Location = New System.Drawing.Point(290, 40)
+        Me.btnNumberFormat.Name = "btnNumberFormat"
+        Me.btnNumberFormat.Size = New System.Drawing.Size(126, 23)
+        Me.btnNumberFormat.TabIndex = 394
+        Me.btnNumberFormat.Tag = ""
+        Me.btnNumberFormat.Text = "Number Format"
+        Me.btnNumberFormat.UseVisualStyleBackColor = True
+        '
+        'grpMissingValues
+        '
+        Me.grpMissingValues.Controls.Add(Me.lblMissingText)
+        Me.grpMissingValues.Controls.Add(Me.ucrTxtMissingText)
+        Me.grpMissingValues.Location = New System.Drawing.Point(198, 170)
+        Me.grpMissingValues.Name = "grpMissingValues"
+        Me.grpMissingValues.Size = New System.Drawing.Size(167, 88)
+        Me.grpMissingValues.TabIndex = 397
+        Me.grpMissingValues.TabStop = False
+        Me.grpMissingValues.Text = "Missing Values"
+        '
+        'lblMissingText
+        '
+        Me.lblMissingText.AutoSize = True
+        Me.lblMissingText.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMissingText.Location = New System.Drawing.Point(30, 16)
+        Me.lblMissingText.Name = "lblMissingText"
+        Me.lblMissingText.Size = New System.Drawing.Size(90, 13)
+        Me.lblMissingText.TabIndex = 377
+        Me.lblMissingText.Text = "Replace NA with:"
+        '
+        'ucrChkMissingValues
+        '
+        Me.ucrChkMissingValues.AutoSize = True
+        Me.ucrChkMissingValues.Checked = False
+        Me.ucrChkMissingValues.Location = New System.Drawing.Point(66, 170)
+        Me.ucrChkMissingValues.Name = "ucrChkMissingValues"
+        Me.ucrChkMissingValues.Size = New System.Drawing.Size(126, 23)
+        Me.ucrChkMissingValues.TabIndex = 396
+        '
+        'ucrChkDataFormat
+        '
+        Me.ucrChkDataFormat.AutoSize = True
+        Me.ucrChkDataFormat.Checked = False
+        Me.ucrChkDataFormat.Location = New System.Drawing.Point(66, 42)
+        Me.ucrChkDataFormat.Name = "ucrChkDataFormat"
+        Me.ucrChkDataFormat.Size = New System.Drawing.Size(126, 23)
+        Me.ucrChkDataFormat.TabIndex = 395
+        '
+        'ucrPnlFormat
+        '
+        Me.ucrPnlFormat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlFormat.Location = New System.Drawing.Point(194, 40)
+        Me.ucrPnlFormat.Name = "ucrPnlFormat"
+        Me.ucrPnlFormat.Size = New System.Drawing.Size(224, 88)
+        Me.ucrPnlFormat.TabIndex = 388
         '
         'sdgTableOptions
         '
@@ -284,6 +448,10 @@ Partial Class sdgTableOptions
         Me.tbpThemes.ResumeLayout(False)
         Me.tbpThemes.PerformLayout()
         Me.tbpOtherStyles.ResumeLayout(False)
+        Me.tbpTables.ResumeLayout(False)
+        Me.tbpTables.PerformLayout()
+        Me.grpMissingValues.ResumeLayout(False)
+        Me.grpMissingValues.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -310,4 +478,17 @@ Partial Class sdgTableOptions
     Friend WithEvents ucrOtherStyles As ucrOtherStyles
     Friend WithEvents ucrChkSelectTheme As ucrCheck
     Friend WithEvents ucrChkManualTheme As ucrCheck
+    Friend WithEvents tbpTables As TabPage
+    Friend WithEvents rdoText As RadioButton
+    Friend WithEvents rdoDate As RadioButton
+    Friend WithEvents rdoNumber As RadioButton
+    Friend WithEvents btnTextFormat As Button
+    Friend WithEvents btnDateFormat As Button
+    Friend WithEvents btnNumberFormat As Button
+    Friend WithEvents grpMissingValues As GroupBox
+    Friend WithEvents lblMissingText As Label
+    Friend WithEvents ucrTxtMissingText As ucrInputComboBox
+    Friend WithEvents ucrChkMissingValues As ucrCheck
+    Friend WithEvents ucrChkDataFormat As ucrCheck
+    Friend WithEvents ucrPnlFormat As UcrPanel
 End Class
