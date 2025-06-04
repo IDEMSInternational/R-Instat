@@ -79,6 +79,7 @@ Partial Class dlgBoxplot
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlPlots = New instat.UcrPanel()
         Me.lblWidth = New System.Windows.Forms.Label()
+        Me.ucrChkLabel = New instat.ucrCheck()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -259,6 +260,7 @@ Partial Class dlgBoxplot
         Me.ucrInputWidth.IsMultiline = False
         Me.ucrInputWidth.IsReadOnly = False
         Me.ucrInputWidth.Location = New System.Drawing.Point(130, 311)
+        Me.ucrInputWidth.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputWidth.Name = "ucrInputWidth"
         Me.ucrInputWidth.Size = New System.Drawing.Size(69, 21)
         Me.ucrInputWidth.TabIndex = 30
@@ -499,12 +501,22 @@ Partial Class dlgBoxplot
         Me.lblWidth.Tag = "By_Factor:"
         Me.lblWidth.Text = "Width:"
         '
+        'ucrChkLabel
+        '
+        Me.ucrChkLabel.AutoSize = True
+        Me.ucrChkLabel.Checked = False
+        Me.ucrChkLabel.Location = New System.Drawing.Point(10, 310)
+        Me.ucrChkLabel.Name = "ucrChkLabel"
+        Me.ucrChkLabel.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkLabel.TabIndex = 34
+        '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(425, 497)
+        Me.Controls.Add(Me.ucrChkLabel)
         Me.Controls.Add(Me.lblWidth)
         Me.Controls.Add(Me.ucrNudBoxPlot)
         Me.Controls.Add(Me.ucrChkBoxPlot)
@@ -592,4 +604,5 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrNudBoxPlot As ucrNud
     Friend WithEvents ucrChkBoxPlot As ucrCheck
     Friend WithEvents lblWidth As Label
+    Friend WithEvents ucrChkLabel As ucrCheck
 End Class

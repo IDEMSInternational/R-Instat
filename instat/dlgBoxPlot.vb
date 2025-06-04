@@ -89,7 +89,8 @@ Public Class dlgBoxplot
     Private strFirstParameterName As String = "geomfunc"
     Private strStatSummaryParameterName As String = "stat_summary"
     Private strAdditionalPointsParameterName As String = "add_jitter"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strStatSummaryParameterName, strAdditionalPointsParameterName}
+    Private strLabelOutierParameterName As String = "stat_summary"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strLabelOutierParameterName, strStatSummaryParameterName, strAdditionalPointsParameterName}
 
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -259,6 +260,11 @@ Public Class dlgBoxplot
         ucrChkGrouptoConnect.AddParameterPresentCondition(True, strStatSummaryParameterName, True)
         ucrChkGrouptoConnect.AddParameterPresentCondition(False, strStatSummaryParameterName, False)
         'this control exists but diabled for now
+
+        ucrChkLabel.SetText("Label Outliers")
+        ucrChkLabel.AddParameterPresentCondition(True, strLabelOutierParameterName, True)
+        ucrChkLabel.AddParameterPresentCondition(False, strLabelOutierParameterName, False)
+
         DialogueSize()
         HideShowWidth()
     End Sub
