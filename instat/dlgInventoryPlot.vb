@@ -310,11 +310,11 @@ Public Class dlgInventoryPlot
 
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs)
-        'there needs to be work on sdgplots before this could be linked 
-        'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        'sdgPlots.ShowDialog()
-    End Sub
+    'Private Sub cmdOptions_Click(sender As Object, e As EventArgs)
+    '    'there needs to be work on sdgplots before this could be linked 
+    '    'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+    '    'sdgPlots.ShowDialog()
+    'End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -413,4 +413,9 @@ Public Class dlgInventoryPlot
         End If
     End Sub
 
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgInventoryOptions.SetRFunction(clsNewInventoryFunction:=clsInventoryPlot, bReset:=bResetSubdialog)
+        sdgInventoryOptions.ShowDialog()
+        bResetSubdialog = False
+    End Sub
 End Class
