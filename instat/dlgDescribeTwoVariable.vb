@@ -607,7 +607,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkCorrelations.Visible = False
         ucrChkSwapXYVar.Visible = False
         ucrChkOmitMissing.Visible = False
-        cmdMissingOptions.Visible = False
+        'cmdMissingOptions.Visible = False
 
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = False
@@ -638,7 +638,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkLevSig.Visible = False
         ucrChkTotal.Visible = False
         ucrChkInteraction.Visible = False
-        cmdMissingOptions.Visible = False
+        'cmdMissingOptions.Visible = False
         ucrChkOmitMissing.Visible = False
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
@@ -876,8 +876,8 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.Visible = True
                 ucrChkOmitMissing.Visible = True
                 ucrSaveTable.Location = New Point(23, 440)
-                ucrChkOmitMissing.Location = New Point(15, 360)
-                cmdMissingOptions.Location = New Point(17, 380)
+                ucrChkOmitMissing.Location = New Point(15, 365)
+                'cmdMissingOptions.Location = New Point(17, 380)
             End If
         End If
         FactorColumns()
