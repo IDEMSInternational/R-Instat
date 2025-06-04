@@ -419,7 +419,7 @@ Public Class sdgDisplayModelOptions
     Private Sub SetHelpOptions()
         Select Case enumPlacketLuceModelMode
             Case PlacketLuceModelMode.nocovariates
-                ucrSdgButtons.iHelpTopicID = 723
+                ucrSdgButtons.iHelpTopicID = 722
             Case PlacketLuceModelMode.tree
                 ucrSdgButtons.iHelpTopicID = 724
             Case PlacketLuceModelMode.ModelOneVarCov2
