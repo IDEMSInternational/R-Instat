@@ -949,12 +949,18 @@ Public Class frmMain
     End Sub
 
     Public Sub SetDefaultValueInReorderLevels()
+        ' Exit early if there's no dataset loaded
+        If Not frmEditor.IsDataSetLoaded() Then
+            Exit Sub
+        End If
+
         Dim strSelectedColumn As String = ""
         If Not String.IsNullOrEmpty(ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow) AndAlso ucrColumnMeta.IsVisible Then
             strSelectedColumn = ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow
         ElseIf Not String.IsNullOrEmpty(ucrDataViewer.GetFirstSelectedColumnName) Then
             strSelectedColumn = ucrDataViewer.GetFirstSelectedColumnName
         End If
+
         dlgReorderLevels.SelectedColumn = strSelectedColumn
         dlgRecodeFactor.SelectedColumn = strSelectedColumn
         dlgDummyVariables.SelectedColumn = strSelectedColumn
@@ -963,6 +969,7 @@ Public Class frmMain
         dlgFactorDataFrame.SelectedColumn = strSelectedColumn
         dlgCountinFactor.SelectedColumn = strSelectedColumn
     End Sub
+
 
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
         SetDefaultValueInReorderLevels()
@@ -3167,5 +3174,18 @@ Public Class frmMain
     Private Sub TransformTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTransformText.Click
         dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Prepare
         dlgTransformText.ShowDialog()
+    End Sub
+
+    Private Sub RowNumbersNamesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RowNumbersNamesToolStripMenuItem.Click
+        dlgRowNamesOrNumbers.ShowDialog()
+    End Sub
+
+    Private Sub RecodeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecodeFactorToolStripMenuItem.Click
+        SetDefaultValueInReorderLevels()
+        dlgRecodeFactor.ShowDialog()
+    End Sub
+
+    Private Sub CombineFactorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineFactorsToolStripMenuItem.Click
+        dlgCombine.ShowDialog()
     End Sub
 End Class

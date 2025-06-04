@@ -23,6 +23,7 @@ Public Class sdgDataOptions
     Private clsRemoveCurrentFilter As RFunction
     Private clsRemoveCurrentColumnSelection As RFunction
     Private strCurrentDataFrame As String
+    Private clsSelectionView As New RFunction
 
     Public Sub New()
 
@@ -34,6 +35,7 @@ Public Class sdgDataOptions
         clsFilterPreview = New RFunction
         clsRemoveCurrentFilter = New RFunction
         clsRemoveCurrentColumnSelection = New RFunction
+        clsSelectionView = New RFunction
     End Sub
 
     Private Sub sdgDataOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -52,6 +54,7 @@ Public Class sdgDataOptions
         clsFilterPreview.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_string")
         clsRemoveCurrentFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
         clsRemoveCurrentColumnSelection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_column_selection")
+        clsSelectionView.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$column_selection_string")
 
         ucrReceiverFilter.Selector = ucrSelectorFilters
         ucrReceiverFilter.SetItemType("filter")
@@ -68,6 +71,7 @@ Public Class sdgDataOptions
         ucrReceiverSelect.strSelectorHeading = "Column Selections"
 
         ucrInputFilterPreview.txtInput.ReadOnly = True
+        ucrInputSelectPreview.txtInput.ReadOnly = True
     End Sub
 
     Public Sub SetDefaults()
@@ -164,6 +168,22 @@ Public Class sdgDataOptions
         frmMain.clsRLink.RunScript(clsRemoveCurrentColumnSelection.ToScript, strComment:="Data Options subdialog: Remove current column selection")
         If Not ucrReceiverSelect.IsEmpty Then
             ucrReceiverSelect.Clear()
+        End If
+    End Sub
+
+    Private Sub ucrReceiverSelect_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSelect.SelectionChanged
+        If ucrReceiverSelect.IsEmpty Then
+            ucrInputSelectPreview.SetName("( )")
+            clsSelectionView.RemoveParameterByName("name")
+            clsSelectionView.RemoveParameterByName("data_name")
+        Else
+            clsSelectionView.AddParameter("name", ucrReceiverSelect.GetVariableNames)
+            clsSelectionView.AddParameter("data_name", Chr(34) & ucrSelectorForSelectColumns.strCurrentDataFrame & Chr(34), iPosition:=0)
+            Try
+                ucrInputSelectPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsSelectionView.ToScript(), bSilent:=True).AsCharacter(0))
+            Catch ex As Exception
+                ucrInputSelectPreview.SetName("Preview not available")
+            End Try
         End If
     End Sub
 End Class
