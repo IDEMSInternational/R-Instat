@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class sdgInventoryOptions
     Private clsInventoryFunction, clsListFunction, clsKeyColourLabelFunction, clsBreaksFunction, clslabelsFunction, clsKeyMissingFunction As New RFunction
     Private bControlsInitialised As Boolean = False
+    Public bRCodeSet As Boolean = False
 
     Private Sub sdgInventoryOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -53,10 +54,10 @@ Public Class sdgInventoryOptions
         ucrNudRainThreshold.SetMinMax(0, 10)
         ucrNudRainThreshold.SetLinkedDisplayControl(lblRainThreshold)
 
-        ucrChkDisplayRainday.AddToLinkedControls(ucrColorsRainColour, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrColorsRainColour.SetLinkedDisplayControl(lblRainColour)
-        ucrColorsRainColour.SetParameter(New RParameter("rain", 0, False))
-        ucrColorsRainColour.SetRDefault("tan3")
+        ucrChkDisplayRainday.AddToLinkedControls(ucrColorsRain, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="green")
+        ucrColorsRain.SetLinkedDisplayControl(lblRainColour)
+        ucrColorsRain.SetParameter(New RParameter("rain", 0, False))
+        'ucrColorsRainColour.SetRDefault("tan3")
 
         ucrChkDisplayRainday.AddToLinkedControls(ucrColorsDryColour, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrColorsDryColour.SetLinkedDisplayControl(lblDryColour)
@@ -66,7 +67,8 @@ Public Class sdgInventoryOptions
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewInventoryFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewInventoryFunction As RFunction, Optional bReset As Boolean = False)
+        bRCodeSet = False
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -92,77 +94,106 @@ Public Class sdgInventoryOptions
 
         clsListFunction.SetRCommand("list")
 
-        ucrColorsRainColour.SetRCode(clsKeyColourLabelFunction, bReset)
-        ucrColorsDryColour.SetRCode(clsKeyColourLabelFunction, bReset)
-        ucrNudRainThreshold.SetRCode(clsBreaksFunction, bReset)
-        ucrInputDryLabel.SetRCode(clslabelsFunction, bReset)
+        ucrColorsRain.SetRCode(clsKeyColourLabelFunction, bReset)
         If bReset Then
+            ucrColorsDryColour.SetRCode(clsKeyColourLabelFunction, bReset)
+            ucrNudRainThreshold.SetRCode(clsBreaksFunction, bReset)
+            ucrInputDryLabel.SetRCode(clslabelsFunction, bReset)
             ucrInputRainLabel.SetRCode(clslabelsFunction, bReset)
+            ucrChkDisplayRainday.SetRCode(clsInventoryFunction, bReset)
+            ucrColorsNonMissing.SetRCode(clsKeyMissingFunction, bReset)
+            ucrColourMissing.SetRCode(clsKeyMissingFunction, bReset)
         End If
-        ucrChkDisplayRainday.SetRCode(clsInventoryFunction, bReset)
-        ucrColorsNonMissing.SetRCode(clsKeyMissingFunction, bReset)
-        ucrColourMissing.SetRCode(clsKeyMissingFunction, bReset)
+        bRCodeSet = True
     End Sub
 
     Private Sub ucrChkDisplayRainday_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayRainday.ControlValueChanged
         If ucrChkDisplayRainday.Checked Then
             clsInventoryFunction.AddParameter("display_rain_days", "TRUE")
             clsInventoryFunction.AddParameter("rain_cats", clsRFunctionParameter:=clsListFunction)
+            UpdateRaindrycolors()
         Else
             clsInventoryFunction.AddParameter("display_rain_days", "FALSE")
             clsInventoryFunction.RemoveParameterByName("rain_cats")
         End If
+
     End Sub
 
     Private Sub ucrInputRainLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputRainLabel.ControlValueChanged, ucrInputDryLabel.ControlValueChanged
-        If Not ucrInputRainLabel.IsEmpty Then
-            clslabelsFunction.AddParameter("rain", Chr(34) & ucrInputRainLabel.GetText() & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        Else
-            clslabelsFunction.RemoveParameterByName("rain")
-        End If
-        If Not ucrInputDryLabel.IsEmpty Then
-            clslabelsFunction.AddParameter("dry", Chr(34) & ucrInputDryLabel.GetText() & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
-        Else
-            clslabelsFunction.RemoveParameterByName("dry")
+        If bRCodeSet Then
+            If Not ucrInputRainLabel.IsEmpty Then
+                clslabelsFunction.AddParameter("rain", Chr(34) & ucrInputRainLabel.GetText() & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+            Else
+                clslabelsFunction.RemoveParameterByName("rain")
+            End If
+            If Not ucrInputDryLabel.IsEmpty Then
+                clslabelsFunction.AddParameter("dry", Chr(34) & ucrInputDryLabel.GetText() & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                clslabelsFunction.RemoveParameterByName("dry")
+            End If
         End If
         clsListFunction.AddParameter("labels", clsRFunctionParameter:=clslabelsFunction)
+
     End Sub
 
     Private Sub ucrNudRainThreshold_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRainThreshold.ControlValueChanged
-        If Not ucrNudRainThreshold.IsEmpty Then
-            clsBreaksFunction.AddParameter("x", ucrNudRainThreshold.GetText(), iPosition:=1, bIncludeArgumentName:=False)
-            clsListFunction.AddParameter("breaks", clsRFunctionParameter:=clsBreaksFunction)
-        Else
-            clsBreaksFunction.RemoveParameterByName("x")
-            clsListFunction.RemoveParameterByName("breaks")
+        If bRCodeSet Then
+            If Not ucrNudRainThreshold.IsEmpty Then
+                clsBreaksFunction.AddParameter("x", ucrNudRainThreshold.GetText(), iPosition:=1, bIncludeArgumentName:=False)
+                clsListFunction.AddParameter("breaks", clsRFunctionParameter:=clsBreaksFunction)
+            Else
+                clsBreaksFunction.RemoveParameterByName("x")
+                clsListFunction.RemoveParameterByName("breaks")
+            End If
         End If
     End Sub
 
-    Private Sub ucrColorsNonMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrColorsNonMissing.ControlValueChanged, ucrColourMissing.ControlValueChanged
-        If Not ucrColourMissing.IsEmpty Then
-            clsKeyMissingFunction.AddParameter("var1", Chr(34) & ucrColourMissing.GetText() & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        Else
-            clsKeyMissingFunction.RemoveParameterByName("var1")
-        End If
-        If Not ucrColorsNonMissing.IsEmpty Then
-            clsKeyMissingFunction.AddParameter("var2", Chr(34) & ucrColorsNonMissing.GetText() & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
-        Else
-            clsKeyMissingFunction.RemoveParameterByName("var2")
+    Private Sub UpdateamissingColour()
+        If bRCodeSet Then
+            If Not ucrColourMissing.IsEmpty Then
+                clsKeyMissingFunction.AddParameter("var1", Chr(34) & ucrColourMissing.GetText() & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+            Else
+                clsKeyMissingFunction.RemoveParameterByName("var1")
+            End If
+            If Not ucrColorsNonMissing.IsEmpty Then
+                clsKeyMissingFunction.AddParameter("var2", Chr(34) & ucrColorsNonMissing.GetText() & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                clsKeyMissingFunction.RemoveParameterByName("var2")
+            End If
         End If
         clsInventoryFunction.AddParameter("key_colours", clsRFunctionParameter:=clsKeyMissingFunction)
     End Sub
 
-    Private Sub ucrColorsDryColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrColorsDryColour.ControlValueChanged, ucrColorsRainColour.ControlValueChanged
-        If Not ucrColorsRainColour.IsEmpty Then
-            clsKeyColourLabelFunction.AddParameter("rain", Chr(34) & ucrColorsRainColour.GetText() & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        Else
-            clsKeyColourLabelFunction.RemoveParameterByName("rain")
-        End If
-        If Not ucrColorsDryColour.IsEmpty Then
-            clsKeyColourLabelFunction.AddParameter("dry", Chr(34) & ucrColorsDryColour.GetText() & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
-        Else
-            clsKeyColourLabelFunction.RemoveParameterByName("dry")
+    Private Sub ucrColorsNonMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrColorsNonMissing.ControlValueChanged
+        UpdateamissingColour()
+    End Sub
+
+    Private Sub ucrColourMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrColourMissing.ControlValueChanged
+        UpdateamissingColour()
+    End Sub
+
+    Private Sub UpdateRaindrycolors()
+        If bRCodeSet Then
+            If Not ucrColorsRain.IsEmpty Then
+                clsKeyColourLabelFunction.AddParameter("rain", Chr(34) & ucrColorsRain.GetText() & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+            Else
+                clsKeyColourLabelFunction.RemoveParameterByName("rain")
+            End If
+            If Not ucrColorsDryColour.IsEmpty Then
+                clsKeyColourLabelFunction.AddParameter("dry", Chr(34) & ucrColorsDryColour.GetText() & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+            Else
+                clsKeyColourLabelFunction.RemoveParameterByName("dry")
+            End If
         End If
         clsListFunction.AddParameter("key_colours", clsRFunctionParameter:=clsKeyColourLabelFunction)
+
+    End Sub
+
+    Private Sub ucrColorsDryColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrColorsDryColour.ControlValueChanged
+        UpdateRaindrycolors()
+    End Sub
+
+    Private Sub ucrColorsRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrColorsRain.ControlValueChanged
+        UpdateRaindrycolors()
     End Sub
 End Class

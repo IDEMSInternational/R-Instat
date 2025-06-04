@@ -29,8 +29,6 @@ Partial Class sdgInventoryOptions
         Me.ucrChkDisplayRainday = New instat.ucrCheck()
         Me.grpDisplayraindays = New System.Windows.Forms.GroupBox()
         Me.ucrColorsDryColour = New instat.ucrColors()
-        Me.ucrColorsRainColour = New instat.ucrColors()
-        Me.ucrNudRainThreshold = New instat.ucrNud()
         Me.ucrInputDryLabel = New instat.ucrInputTextBox()
         Me.ucrInputRainLabel = New instat.ucrInputTextBox()
         Me.lblRainThreshold = New System.Windows.Forms.Label()
@@ -38,7 +36,9 @@ Partial Class sdgInventoryOptions
         Me.lblDryColour = New System.Windows.Forms.Label()
         Me.lblRainLabel = New System.Windows.Forms.Label()
         Me.lblDryLabel = New System.Windows.Forms.Label()
+        Me.ucrNudRainThreshold = New instat.ucrNud()
         Me.ucrSdgLayerBase = New instat.ucrButtonsSubdialogue()
+        Me.ucrColorsRain = New instat.ucrColors()
         Me.grpDisplayraindays.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -93,8 +93,8 @@ Partial Class sdgInventoryOptions
         '
         'grpDisplayraindays
         '
+        Me.grpDisplayraindays.Controls.Add(Me.ucrColorsRain)
         Me.grpDisplayraindays.Controls.Add(Me.ucrColorsDryColour)
-        Me.grpDisplayraindays.Controls.Add(Me.ucrColorsRainColour)
         Me.grpDisplayraindays.Controls.Add(Me.ucrInputDryLabel)
         Me.grpDisplayraindays.Controls.Add(Me.ucrInputRainLabel)
         Me.grpDisplayraindays.Controls.Add(Me.lblRainThreshold)
@@ -120,30 +120,6 @@ Partial Class sdgInventoryOptions
         Me.ucrColorsDryColour.Name = "ucrColorsDryColour"
         Me.ucrColorsDryColour.Size = New System.Drawing.Size(63, 21)
         Me.ucrColorsDryColour.TabIndex = 120
-        '
-        'ucrColorsRainColour
-        '
-        Me.ucrColorsRainColour.AddQuotesIfUnrecognised = True
-        Me.ucrColorsRainColour.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrColorsRainColour.GetSetSelectedIndex = -1
-        Me.ucrColorsRainColour.IsReadOnly = False
-        Me.ucrColorsRainColour.Location = New System.Drawing.Point(157, 115)
-        Me.ucrColorsRainColour.Name = "ucrColorsRainColour"
-        Me.ucrColorsRainColour.Size = New System.Drawing.Size(63, 21)
-        Me.ucrColorsRainColour.TabIndex = 119
-        '
-        'ucrNudRainThreshold
-        '
-        Me.ucrNudRainThreshold.AutoSize = True
-        Me.ucrNudRainThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRainThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRainThreshold.Location = New System.Drawing.Point(157, 85)
-        Me.ucrNudRainThreshold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRainThreshold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRainThreshold.Name = "ucrNudRainThreshold"
-        Me.ucrNudRainThreshold.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRainThreshold.TabIndex = 121
-        Me.ucrNudRainThreshold.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputDryLabel
         '
@@ -214,6 +190,19 @@ Partial Class sdgInventoryOptions
         Me.lblDryLabel.TabIndex = 4
         Me.lblDryLabel.Text = "Dry Label"
         '
+        'ucrNudRainThreshold
+        '
+        Me.ucrNudRainThreshold.AutoSize = True
+        Me.ucrNudRainThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRainThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRainThreshold.Location = New System.Drawing.Point(157, 85)
+        Me.ucrNudRainThreshold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRainThreshold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRainThreshold.Name = "ucrNudRainThreshold"
+        Me.ucrNudRainThreshold.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudRainThreshold.TabIndex = 121
+        Me.ucrNudRainThreshold.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrSdgLayerBase
         '
         Me.ucrSdgLayerBase.AutoSize = True
@@ -221,6 +210,17 @@ Partial Class sdgInventoryOptions
         Me.ucrSdgLayerBase.Name = "ucrSdgLayerBase"
         Me.ucrSdgLayerBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrSdgLayerBase.TabIndex = 119
+        '
+        'ucrColorsRain
+        '
+        Me.ucrColorsRain.AddQuotesIfUnrecognised = True
+        Me.ucrColorsRain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrColorsRain.GetSetSelectedIndex = -1
+        Me.ucrColorsRain.IsReadOnly = False
+        Me.ucrColorsRain.Location = New System.Drawing.Point(157, 116)
+        Me.ucrColorsRain.Name = "ucrColorsRain"
+        Me.ucrColorsRain.Size = New System.Drawing.Size(63, 21)
+        Me.ucrColorsRain.TabIndex = 120
         '
         'sdgInventoryOptions
         '
@@ -257,11 +257,11 @@ Partial Class sdgInventoryOptions
     Friend WithEvents ucrInputRainLabel As ucrInputTextBox
     Friend WithEvents ucrNudRainThreshold As ucrNud
     Friend WithEvents ucrColorsDryColour As ucrColors
-    Friend WithEvents ucrColorsRainColour As ucrColors
     Friend WithEvents ucrSdgLayerBase As ucrButtonsSubdialogue
     Friend WithEvents lblRainThreshold As Label
     Friend WithEvents lblRainColour As Label
     Friend WithEvents lblDryColour As Label
     Friend WithEvents lblRainLabel As Label
     Friend WithEvents lblDryLabel As Label
+    Friend WithEvents ucrColorsRain As ucrColors
 End Class
