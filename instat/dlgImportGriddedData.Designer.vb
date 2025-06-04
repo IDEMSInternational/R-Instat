@@ -512,7 +512,7 @@ Partial Class dlgImportGriddedData
         'rdoMaxPlantValue
         '
         Me.rdoMaxPlantValue.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMaxPlantValue.Location = New System.Drawing.Point(260, 192)
+        Me.rdoMaxPlantValue.Location = New System.Drawing.Point(337, 192)
         Me.rdoMaxPlantValue.Name = "rdoMaxPlantValue"
         Me.rdoMaxPlantValue.Size = New System.Drawing.Size(54, 16)
         Me.rdoMaxPlantValue.TabIndex = 14
@@ -523,7 +523,7 @@ Partial Class dlgImportGriddedData
         'rdoVariableMaxPlant
         '
         Me.rdoVariableMaxPlant.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoVariableMaxPlant.Location = New System.Drawing.Point(317, 191)
+        Me.rdoVariableMaxPlant.Location = New System.Drawing.Point(258, 191)
         Me.rdoVariableMaxPlant.Name = "rdoVariableMaxPlant"
         Me.rdoVariableMaxPlant.Size = New System.Drawing.Size(79, 17)
         Me.rdoVariableMaxPlant.TabIndex = 15
@@ -544,7 +544,7 @@ Partial Class dlgImportGriddedData
         Me.ucrNudMaxPlantingDate.AutoSize = True
         Me.ucrNudMaxPlantingDate.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxPlantingDate.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxPlantingDate.Location = New System.Drawing.Point(259, 216)
+        Me.ucrNudMaxPlantingDate.Location = New System.Drawing.Point(333, 216)
         Me.ucrNudMaxPlantingDate.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxPlantingDate.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxPlantingDate.Name = "ucrNudMaxPlantingDate"

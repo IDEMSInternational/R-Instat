@@ -127,6 +127,7 @@ Public Class dlgImportGriddedData
         ucrPnlMaxPlantingDate.AddRadioButton(rdoMaxPlantValue)
         ucrPnlMaxPlantingDate.AddRadioButton(rdoVariableMaxPlant)
 
+        ucrPnlMaxPlantingDate.SetParameter(New RParameter("max_date", 8))
         ucrPnlMaxPlantingDate.AddParameterValuesCondition(rdoMaxPlantValue, "multiple", "variable")
         ucrPnlMaxPlantingDate.AddParameterValuesCondition(rdoVariableMaxPlant, "multiple", "value")
 
@@ -248,7 +249,6 @@ Public Class dlgImportGriddedData
                 ucrDtpMinDate.MinDate = New Date(1981, 1, 1)
                 ucrDtpMaxDate.MinDate = New Date(1981, 1, 1)
         End Select
-        UpdateParameters()
         ucrInputNewDataFrameName.SetName(ucrInputSource.GetText.ToLower)
     End Sub
 
@@ -295,7 +295,6 @@ Public Class dlgImportGriddedData
             ucrDtpMinDate.MinDate = New Date(1983, 1, 1)
             ucrDtpMaxDate.MinDate = New Date(1983, 1, 1)
         End If
-        UpdateParameters()
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
@@ -323,10 +322,11 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub UpdateParameters()
+
         clsMultipleIRIFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$download_from_IRI_multiple")
-        clsMultipleIRIFunction.AddParameter("data", Chr(34) & ucrInputData.GetValue & Chr(34), iPosition:=2)
-        clsMultipleIRIFunction.AddParameter("source", Chr(34) & ucrInputSource.GetValue & Chr(34), iPosition:=0)
-        clsMultipleIRIFunction.AddParameter("path", Chr(34) & Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\", "/") & Chr(34), iPosition:=3)
+        clsMultipleIRIFunction.AddParameter("data", Chr(34) & ucrInputData.GetText & Chr(34), iPosition:=2)
+        clsMultipleIRIFunction.AddParameter("source", Chr(34) & ucrInputSource.GetText & Chr(34), iPosition:=0)
+        'clsMultipleIRIFunction.AddParameter("path", Chr(34) & Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\", "/") & Chr(34), iPosition:=3)
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDataFrameName.ControlContentsChanged, ucrInputMinLon.ControlContentsChanged, ucrInputMaxLon.ControlContentsChanged, ucrInputMinLat.ControlContentsChanged, ucrInputMaxLat.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrDtpMinDate.ControlContentsChanged, ucrDtpMaxDate.ControlContentsChanged, ucrPnlDateRange.ControlContentsChanged
@@ -386,9 +386,12 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub ucrSelectorIRIVariable_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorIRIVariable.ControlContentsChanged
-        If Not ucrSelectorIRIVariable.IsEmpty Then
-            clsMultipleIRIFunction.AddParameter("data_frame", ucrSelectorIRIVariable.strCurrentDataFrame, iPosition:=4)
-        Else
+        If rdoIRIVariable.Checked Then
+            If Not ucrSelectorIRIVariable.IsEmpty Then
+                clsMultipleIRIFunction.AddParameter("data_frame", ucrSelectorIRIVariable.strCurrentDataFrame, iPosition:=4)
+            Else
+                clsMultipleIRIFunction.RemoveParameterByName("data_frame")
+            End If
             clsMultipleIRIFunction.RemoveParameterByName("data_frame")
         End If
     End Sub
