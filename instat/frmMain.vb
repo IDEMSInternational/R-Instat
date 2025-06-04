@@ -169,7 +169,7 @@ Public Class frmMain
         '---------------------------------------
         'Set up the Recent items; files, dialogs
         clsRecentItems = New clsRecentFiles(strAppDataPath)
-        clsRecentItems.SetToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs)
+        clsRecentItems.SetToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, mnuTbOpenFromLibrary)
         clsRecentItems.SetDataViewWindow(ucrDataViewer)
         'check existence of MRU list
         clsRecentItems.checkOnLoad()
@@ -1899,7 +1899,10 @@ Public Class frmMain
         'Tool_strip.ImageScalingSize = New Size(iHeight, iHeight)
     End Sub
 
-    Private Sub mnuTbOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuTbOpenFromLibrary.Click
+    'Private Sub mnuTbOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuTbOpenFromLibrary.Click
+    '    dlgFromLibrary.ShowDialog()
+    'End Sub
+    Private Sub mnuTbOpenFromLibrary_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbOpenFromLibrary.ButtonClick
         dlgFromLibrary.ShowDialog()
     End Sub
 
@@ -3188,4 +3191,5 @@ Public Class frmMain
     Private Sub CombineFactorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineFactorsToolStripMenuItem.Click
         dlgCombine.ShowDialog()
     End Sub
+
 End Class

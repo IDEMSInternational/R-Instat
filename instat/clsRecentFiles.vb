@@ -16,6 +16,7 @@
 
 Imports System.IO
 Imports instat.Translations
+Imports RDotNet
 
 Public Class clsRecentFiles
     Public lstRecentDialogs As New List(Of Form)
@@ -23,8 +24,10 @@ Public Class clsRecentFiles
     Private mnuTbShowLast10 As ToolStripSplitButton
     Private mnuFile As ToolStripMenuItem
     Private mnuFileIcon As ToolStripSplitButton
+    Private mnuTbOpenFromLibrary As ToolStripSplitButton
     ' declare a variable to contain the most recent opened items
     Private lstRecentOpenedFiles As New List(Of String)
+    Private lstRecentLibraryDatasets As New List(Of DataFrame)
 
     ''' <summary>
     ''' stores reference to the  the data view window used in frmMain. 
@@ -38,10 +41,12 @@ Public Class clsRecentFiles
 
     Public Sub SetToolStripItems(dfMnuFile As ToolStripMenuItem,
                                  dfMnuFileIcon As ToolStripSplitButton,
-                                 dfMnuShowLast10Dialogs As ToolStripSplitButton)
+                                 dfMnuShowLast10Dialogs As ToolStripSplitButton,
+                                 dfMnuTbOpenFromLibrary As ToolStripSplitButton)
         mnuFile = dfMnuFile
         mnuFileIcon = dfMnuFileIcon
         mnuTbShowLast10 = dfMnuShowLast10Dialogs
+        mnuTbOpenFromLibrary = dfMnuTbOpenFromLibrary
     End Sub
 
     Public Sub SetDataViewWindow(ucrDataViewWindow As ucrDataView)
@@ -120,6 +125,19 @@ Public Class clsRecentFiles
         UpdateRecentFilesMenuItems()
     End Sub
 
+    Public Sub addToMenu(dfdataframe As DataFrame)
+        'Checks for existance, else add it to the beginning
+        If lstRecentLibraryDatasets.Contains(dfdataframe) Then lstRecentLibraryDatasets.Remove(dfdataframe)
+        'adds to the list
+        lstRecentLibraryDatasets.Add(dfdataframe)
+        'checks that only 10 items are allowed
+        If lstRecentLibraryDatasets.Count > 10 Then
+            lstRecentLibraryDatasets.RemoveAt(0)
+        End If
+        'update recent dialogs menu items
+        UpdateRecentRDatasetsMenuItems()
+    End Sub
+
     ''' <summary>
     ''' updates the menu toolstrip to show the last 10 opened dialogs
     ''' </summary>
@@ -147,6 +165,36 @@ Public Class clsRecentFiles
             'mnuTbShowLast10.DropDownItems.Insert(mnuTbShowLast10.DropDownItems.Count - 1, clsItem)
             mnuTbShowLast10.DropDownItems.Add(clsItem)
         Next
+    End Sub
+
+    Private Sub UpdateRecentRDatasetsMenuItems()
+        Dim recentFile = Path.Combine(Application.StartupPath, "recentLibraryDatasets.txt")
+
+        mnuTbOpenFromLibrary.DropDownItems.Clear()
+
+        If File.Exists(recentFile) Then
+            For Each entry In File.ReadAllLines(recentFile)
+                Dim item As New ToolStripMenuItem(entry)
+                item.Tag = entry ' store "package::dataset"
+                AddHandler item.Click, AddressOf OnRecentLibraryDatasetClick
+                mnuTbOpenFromLibrary.DropDownItems.Add(item)
+            Next
+        End If
+    End Sub
+
+    Private Sub OnRecentLibraryDatasetClick(sender As Object, e As EventArgs)
+        Dim item As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
+        Dim value As String = item.Tag.ToString() ' e.g. "dslabs::mnist_127"
+
+        Dim split = value.Split(":"c)
+        If split.Length <> 2 Then Exit Sub
+
+        Dim pkg = split(0)
+        Dim dset = split(1)
+
+        ' Open dialog
+        dlgFromLibrary.SetInitialSelection(pkg, dset)
+        dlgFromLibrary.ShowDialog()
     End Sub
 
 
@@ -201,6 +249,10 @@ Public Class clsRecentFiles
         End If
     End Sub
 
+    Private Sub OnMnuRecentOpenedLibFile_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
     ''' <summary>
     ''' raised when last dialog menu item is clicked 
     ''' </summary>
@@ -237,7 +289,7 @@ Public Class clsRecentFiles
                                           Optional mnuFileIcon As ToolStripSplitButton = Nothing,
                                           Optional ucrDataViewWindow As ucrDataView = Nothing)
         'exit sub if file toolstrip, file icon toolstrip and data view are not initialised
-        If mnuFile Is Nothing AndAlso mnuFileIcon Is Nothing AndAlso ucrDataViewWindow Is Nothing Then
+        If mnuFile Is Nothing AndAlso mnuFileIcon Is Nothing AndAlso mnuTbOpenFromLibrary Is Nothing AndAlso ucrDataViewWindow Is Nothing Then
             Exit Sub
         End If
 
@@ -328,6 +380,13 @@ Public Class clsRecentFiles
                             clsItem.Tag = "MRU:more"
                             AddHandler clsItem.Click, AddressOf OnMnuRecentOpenedFile_Click
                             mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItem)
+                        End If
+                        If mnuTbOpenFromLibrary IsNot Nothing Then
+                            Dim clsItem As ToolStripMenuItem = New ToolStripMenuItem(GetTranslation("More ..."))
+                            clsItem.ToolTipText = GetTranslation("More ...")
+                            clsItem.Tag = "MRU:more"
+                            AddHandler clsItem.Click, AddressOf OnMnuRecentOpenedLibFile_Click
+                            mnuTbOpenFromLibrary.DropDownItems.Insert(mnuTbOpenFromLibrary.DropDownItems.Count, clsItem)
                         End If
 
                         If ucrDataViewWindow IsNot Nothing Then

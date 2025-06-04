@@ -14,17 +14,20 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.IO
 Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgFromLibrary
     Private strLibraryTemp As String = "dfLibrary"
     Private strPackages As String = "dfPackagesList"
-    Private strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
+    Public strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDataFunction As New RFunction
     Private dctPackages As New Dictionary(Of String, String)
+    Private initialPackage As String = ""
+    Private initialDataset As String = ""
 
     'a string array that holds the packages displayed in the combobox 
     'todo. this property can be removed once the PR that enhances the inputCombobox control is merged
@@ -199,6 +202,7 @@ Public Class dlgFromLibrary
             End If
         End If
         TestOkEnabled()
+        SaveOpenedRDataset()
         EnableHelp()
     End Sub
 
@@ -330,5 +334,69 @@ Public Class dlgFromLibrary
         If ucrBase.cmdOk.Enabled Then
             ucrBase.cmdOk.PerformClick()
         End If
+        SaveOpenedRDataset()
     End Sub
+
+    'To save the packge name and dataset names as a file for re-opening in the recent files.
+    Private Sub SaveToRecentLibraryDatasets(packageName As String, datasetName As String)
+        Dim recentFile = Path.Combine(Application.StartupPath, "recentLibraryDatasets.txt")
+        Dim entry = $"{packageName}::{datasetName}"
+        Dim list As New List(Of String)
+
+        If File.Exists(recentFile) Then list = File.ReadAllLines(recentFile).ToList()
+
+        list.Remove(entry)
+        list.Insert(0, entry)
+
+        If list.Count > 10 Then list = list.Take(10).ToList()
+
+        File.WriteAllLines(recentFile, list)
+    End Sub
+
+    Private Sub SaveOpenedRDataset()
+        If ucrBase.cmdOk.Enabled Then
+            SaveToRecentLibraryDatasets(ucrInputPackages.GetText(), lstCollection.SelectedItems(0).Text)
+        End If
+    End Sub
+
+    Public Sub SetInitialSelection(packageName As String, datasetName As String)
+        initialPackage = packageName
+        initialDataset = datasetName
+    End Sub
+
+    'Private Sub CheckingInitialPackageDataset()
+    '    If Not String.IsNullOrEmpty(initialPackage) Then
+    '        ucrInputPackages.SetText(initialPackage)
+    '        ' Trigger population of the dataset list
+    '        RefreshDatasetList()
+    '    End If
+
+    '    If Not String.IsNullOrEmpty(initialDataset) Then
+    '        For i As Integer = 0 To grdLibraryDataList.RowCount - 1
+    '            If grdLibraryDataList.Item(0, i).Value.ToString() = initialDataset Then
+    '                grdLibraryDataList.ClearSelection()
+    '                grdLibraryDataList.Rows(i).Selected = True
+    '                grdLibraryDataList.CurrentCell = grdLibraryDataList(0, i)
+    '                Exit For
+    '            End If
+    '        Next
+
+    '        ucrNewDataFrameName.SetName(initialDataset)
+    '    End If
+    'Dim lstItem As ListViewItem
+
+    '    lstCollection.Items.Clear()
+    '    If dfDataframe IsNot Nothing Then
+    '        For i As Integer = 0 To dfDataframe.RowCount - 1
+    '            lstItem = lstCollection.Items.Add(dfDataframe(i, 0))
+    '            If dfDataframe.ColumnCount > 1 Then
+    '                lstItem.SubItems.Add(dfDataframe(i, 1))
+    '            Else
+    '                lstItem.SubItems.Add("")
+    '            End If
+    '        Next
+    '        lstCollection.Select()
+    '    End If
+    'End Sub
+
 End Class
