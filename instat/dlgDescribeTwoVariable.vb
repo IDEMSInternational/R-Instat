@@ -607,7 +607,6 @@ Public Class dlgDescribeTwoVariable
         ucrChkCorrelations.Visible = False
         ucrChkSwapXYVar.Visible = False
         ucrChkOmitMissing.Visible = False
-        'cmdMissingOptions.Visible = False
 
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = False
@@ -638,7 +637,6 @@ Public Class dlgDescribeTwoVariable
         ucrChkLevSig.Visible = False
         ucrChkTotal.Visible = False
         ucrChkInteraction.Visible = False
-        'cmdMissingOptions.Visible = False
         ucrChkOmitMissing.Visible = False
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
@@ -753,7 +751,6 @@ Public Class dlgDescribeTwoVariable
                     ucrChkInteraction.Visible = False
                     ucrSaveTable.Location = New Point(23, 450)
                     ucrChkOmitMissing.Location = New Point(15, 365)
-                    'cmdMissingOptions.Location = New Point(15, 365)
                     clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
                     ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                     ucrSaveTable.SetPrefix("summary_table")
@@ -877,7 +874,6 @@ Public Class dlgDescribeTwoVariable
                 ucrChkOmitMissing.Visible = True
                 ucrSaveTable.Location = New Point(23, 440)
                 ucrChkOmitMissing.Location = New Point(15, 365)
-                'cmdMissingOptions.Location = New Point(17, 380)
             End If
         End If
         FactorColumns()
