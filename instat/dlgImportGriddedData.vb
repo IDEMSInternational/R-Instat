@@ -133,7 +133,7 @@ Public Class dlgImportGriddedData
 
         ucrChkDontImportData.SetParameter(New RParameter("import", 11))
         ucrChkDontImportData.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
-        ucrChkDontImportData.SetText("Don' t import data after downloading")
+        ucrChkDontImportData.SetText("Don't import data after downloading")
         ucrChkDontImportData.SetRDefault("TRUE")
 
         ucrPnlLocationRange.AddToLinkedControls({ucrInputMaxLat, ucrInputMaxLon}, {rdoArea}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -250,6 +250,7 @@ Public Class dlgImportGriddedData
                 ucrDtpMaxDate.MinDate = New Date(1981, 1, 1)
         End Select
         ucrInputNewDataFrameName.SetName(ucrInputSource.GetText.ToLower)
+        UpdateParameters()
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -322,10 +323,22 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub UpdateParameters()
+        Dim strDownload As String = ""
+        Dim strData As String = " "
+
+        Dim strSelectedSource As String = ucrInputSource.GetValue()
+        If dctDownloadPairs.ContainsKey(strSelectedSource) Then
+            strDownload = dctDownloadPairs(strSelectedSource)
+        End If
+
+        Dim strSelectedData As String = ucrInputData.GetValue()
+        If dctFiles.ContainsKey(strSelectedData) Then
+            strData = dctFiles(strSelectedData)
+        End If
 
         clsMultipleIRIFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$download_from_IRI_multiple")
-        clsMultipleIRIFunction.AddParameter("data", Chr(34) & ucrInputData.GetText & Chr(34), iPosition:=2)
-        clsMultipleIRIFunction.AddParameter("source", Chr(34) & ucrInputSource.GetText & Chr(34), iPosition:=0)
+        clsMultipleIRIFunction.AddParameter("data", strData, iPosition:=2)
+        clsMultipleIRIFunction.AddParameter("source", strDownload, iPosition:=0)
         'clsMultipleIRIFunction.AddParameter("path", Chr(34) & Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\", "/") & Chr(34), iPosition:=3)
     End Sub
 
