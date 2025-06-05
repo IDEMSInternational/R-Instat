@@ -542,6 +542,7 @@ Partial Class sdgTransformations
     Friend WithEvents tbVarietyLevel As TabPage
     Friend WithEvents tbIDVarietyLevel As TabPage
     Friend WithEvents tbIDVarietyTraitLevel As TabPage
+    Public Property chkChooseTraitsSuffix As CheckBox
     Friend WithEvents ucrReceiverIDVariable As ucrReceiverSingle
     Friend WithEvents ucrChkTraits As ucrCheck
 End Class
