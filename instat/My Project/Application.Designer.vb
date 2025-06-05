@@ -34,6 +34,5 @@ Namespace My
         Protected Overrides Sub OnCreateMainForm()
             Me.MainForm = Global.instat.frmMain
         End Sub
-    
     End Class
 End Namespace
