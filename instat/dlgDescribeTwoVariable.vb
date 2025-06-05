@@ -613,7 +613,7 @@ Public Class dlgDescribeTwoVariable
             ucrChkOmitMissing.Visible = Not ucrChkSwapXYVar.Checked AndAlso IsFactorByNumeric()
             ucrChkSwapXYVar.Visible = IsNumericByNumeric() OrElse IsFactorByNumeric()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
-            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked AndAlso ucrChkOmitMissing.Visible
+            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
         End If
         If rdoThreeVariable.Checked Then
             If IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
