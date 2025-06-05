@@ -24,10 +24,24 @@ Public Class dlgSplitText
 
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsTextComponentsFixed, clsCurrentNewColumnFunction, clsSquishFunction, clsTextComponentsMaximum, clsStringCollFunction As New RFunction
-    Private clsBinaryColumns As New RFunction
+    Private clsTextComponentsFixed, clsTextSelectFunction, clsTextMultipleFixedFunction, clsCurrentNewColumnFunction, clsSquishFunction, clsTextSelectMaxFunction, clsTextComponentsMaximum, clsStringCollFunction As New RFunction
+    Private clsBinaryColumns, clsBinarySelectFunction As New RFunction
     Private clsSplitDummyFunction As New RFunction
     Private clsPatternDummyFunction As New RFunction
+    Private clsGetDataFrameFunction As New RFunction
+    Private clsUnpackFunction As New RFunction
+    Private clsPaste2Function As New RFunction
+    Private clsEndsWithFunction As New RFunction
+    Private clsPasteFunction As New RFunction
+    Private clsMutateFunction As New RFunction
+    Private clsAcrossFunction As New RFunction
+    Private clsEverythingFunction As New RFunction
+    Private clsGetColSelectionNamesFunction As New RFunction
+    Private clsAddColumnsFunction As New RFunction
+    Private clsPipeOperator As New ROperator
+    Private clsDataFrameOperator As New ROperator
+    Private clsUnpackOperator As New ROperator
+    Private clsTildaOperator As New ROperator
     Private dctPatternPairs As New Dictionary(Of String, String)
 
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -59,6 +73,12 @@ Public Class dlgSplitText
 
         ucrPnlTextComponents.AddFunctionNamesCondition(rdoMaximumNumberOfComponents, "str_split")
         ucrPnlTextComponents.AddFunctionNamesCondition(rdoFixedNumberOfComponents, "str_split_fixed")
+
+        ucrPnlColumnSelectOptions.AddRadioButton(rdoSingle)
+        ucrPnlColumnSelectOptions.AddRadioButton(rdoMultiple)
+
+        ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoSingle, "col", "single")
+        ucrPnlColumnSelectOptions.AddParameterValuesCondition(rdoMultiple, "col", "multiple")
 
         ucrPnlTextComponents.AddToLinkedControls(ucrNudPieces, {rdoFixedNumberOfComponents}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=2, bNewLinkedChangeParameterValue:=True)
         ucrPnlSplitText.AddToLinkedControls(ucrChkIncludeRegularExpressions, {rdoTextComponents}, bNewLinkedHideIfParameterMissing:=True)
@@ -101,13 +121,31 @@ Public Class dlgSplitText
 
     Private Sub SetDefaults()
         clsTextComponentsFixed = New RFunction
+        clsTextSelectFunction = New RFunction
+        clsTextMultipleFixedFunction = New RFunction
         clsTextComponentsMaximum = New RFunction
+        clsTextSelectMaxFunction = New RFunction
         clsBinaryColumns = New RFunction
+        clsBinarySelectFunction = New RFunction
         clsStringCollFunction = New RFunction
         clsSplitDummyFunction = New RFunction
         clsPatternDummyFunction = New RFunction
         clsSquishFunction = New RFunction
         clsCurrentNewColumnFunction = New RFunction
+        clsGetDataFrameFunction = New RFunction
+        clsMutateFunction = New RFunction
+        clsAcrossFunction = New RFunction
+        clsEverythingFunction = New RFunction
+        clsPasteFunction = New RFunction
+        clsPaste2Function = New RFunction
+        clsEndsWithFunction = New RFunction
+        clsUnpackFunction = New RFunction
+        clsAddColumnsFunction = New RFunction
+        clsGetColSelectionNamesFunction = New RFunction
+        clsPipeOperator = New ROperator
+        clsDataFrameOperator = New ROperator
+        clsUnpackOperator = New ROperator
+        clsTildaOperator = New ROperator
 
         ucrSelectorSplitTextColumn.Reset()
         ucrSaveColumn.Reset()
@@ -115,6 +153,7 @@ Public Class dlgSplitText
         ucrInputRegexPattern.SetName("")
 
         clsSplitDummyFunction.AddParameter("checked", False, iPosition:=0)
+        clsSplitDummyFunction.AddParameter("col", "single", iPosition:=1)
 
         clsPatternDummyFunction.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
 
@@ -125,10 +164,25 @@ Public Class dlgSplitText
         clsBinaryColumns.SetPackageName("questionr")
         clsBinaryColumns.SetRCommand("multi.split")
 
+        clsBinarySelectFunction.SetPackageName("questionr")
+        clsBinarySelectFunction.SetRCommand("multi.split")
+        clsBinarySelectFunction.SetAssignTo("select")
+
         clsTextComponentsFixed.SetPackageName("stringr")
         clsTextComponentsFixed.SetRCommand("str_split_fixed")
         clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
         clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
+
+        clsTextSelectFunction.SetPackageName("stringr")
+        clsTextSelectFunction.SetRCommand("str_split_fixed")
+        clsTextSelectFunction.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+        clsTextSelectFunction.AddParameter("n", strParameterValue:=2, iPosition:=2)
+        clsTextSelectFunction.SetAssignTo("select")
+
+        clsTextMultipleFixedFunction.SetPackageName("stringr")
+        clsTextMultipleFixedFunction.SetRCommand("str_split_fixed")
+        clsTextMultipleFixedFunction.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+        clsTextMultipleFixedFunction.AddParameter("n", strParameterValue:=2, iPosition:=2)
 
         clsTextComponentsMaximum.SetPackageName("stringr")
         clsTextComponentsMaximum.SetRCommand("str_split")
@@ -136,18 +190,81 @@ Public Class dlgSplitText
         clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
         clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
 
+        clsTextSelectMaxFunction.SetPackageName("stringr")
+        clsTextSelectMaxFunction.SetRCommand("str_split")
+        clsTextSelectMaxFunction.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+        clsTextSelectMaxFunction.AddParameter("n", "Inf", iPosition:=2)
+        clsTextSelectMaxFunction.AddParameter("simplify", "TRUE", iPosition:=3)
+        clsTextSelectMaxFunction.SetAssignTo("select")
+
         clsSquishFunction.SetPackageName("stringr")
         clsSquishFunction.SetRCommand("str_squish")
+
+        clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+
+        clsGetColSelectionNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_selected_column_names")
+        clsGetColSelectionNamesFunction.AddParameter("use_current_filter", "FALSE", iPosition:=2)
+
+
+        clsTildaOperator.SetOperation("~")
+        clsTildaOperator.bAllBrackets = False
+        clsTildaOperator.AddParameter("left", "", iPosition:=0)
+        clsTildaOperator.AddParameter("right", clsRFunctionParameter:=clsTextMultipleFixedFunction, iPosition:=1)
+
+        clsDataFrameOperator.SetOperation("%>%")
+        clsDataFrameOperator.AddParameter("left", clsROperatorParameter:=clsTildaOperator, iPosition:=0)
+        clsDataFrameOperator.AddParameter("right", "as.data.frame()", iPosition:=1)
+
+        clsPasteFunction.SetRCommand("paste0")
+        clsPasteFunction.AddParameter("col", """{.col}_""", iPosition:=0, bIncludeArgumentName:=False)
+
+
+        clsEverythingFunction.SetRCommand("everything")
+        clsEverythingFunction.AddParameter("dot", ".", bIncludeArgumentName:=False, iPosition:=0)
+
+        clsAcrossFunction.SetPackageName("dplyr")
+        clsAcrossFunction.SetRCommand("across")
+        clsAcrossFunction.AddParameter("every", clsRFunctionParameter:=clsEverythingFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
+        clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
+
+        clsMutateFunction.SetPackageName("dplyr")
+        clsMutateFunction.SetRCommand("mutate")
+        clsMutateFunction.AddParameter(".names", clsRFunctionParameter:=clsAcrossFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("left", clsRFunctionParameter:=clsGetDataFrameFunction, iPosition:=0)
+        clsPipeOperator.AddParameter("right", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
+
+        clsPaste2Function.SetRCommand("paste0")
+        clsPaste2Function.AddParameter("names", """_""", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsEndsWithFunction.SetRCommand("ends_with")
+        clsEndsWithFunction.AddParameter("paste", clsRFunctionParameter:=clsPaste2Function, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsUnpackFunction.SetPackageName("tidyr")
+        clsUnpackFunction.SetRCommand("unpack")
+        clsUnpackFunction.AddParameter("cols", clsRFunctionParameter:=clsEndsWithFunction, iPosition:=0)
+        clsUnpackFunction.AddParameter("names", """.""", iPosition:=1)
+
+        clsUnpackOperator.SetOperation("%>%")
+        clsUnpackOperator.AddParameter("left", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+        clsUnpackOperator.AddParameter("right", clsRFunctionParameter:=clsUnpackFunction, iPosition:=1)
+        clsUnpackOperator.SetAssignTo("col")
+
 
         clsTextComponentsFixed.SetAssignTo(ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText())
         clsTextComponentsMaximum.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
         clsBinaryColumns.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSaveColumn.AddAdditionalRCode(clsTextComponentsMaximum, iAdditionalPairNo:=1)
         ucrSaveColumn.AddAdditionalRCode(clsBinaryColumns, iAdditionalPairNo:=2)
+        ucrSaveColumn.AddAdditionalRCode(clsUnpackOperator, iAdditionalPairNo:=2)
+        ucrNudPieces.AddAdditionalCodeParameterPair(clsTextMultipleFixedFunction, New RParameter("n", 1), iAdditionalPairNo:=1)
+        ucrNudPieces.AddAdditionalCodeParameterPair(clsTextSelectFunction, New RParameter("n", 1), iAdditionalPairNo:=2)
+
 
         ucrInputPattern.SetRCode(clsPatternDummyFunction, bReset)
         ucrNudPieces.SetRCode(clsTextComponentsFixed, bReset)
@@ -155,6 +272,7 @@ Public Class dlgSplitText
         ucrPnlSplitText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlTextComponents.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveColumn.SetRCode(clsTextComponentsFixed, bReset)
+        ucrPnlColumnSelectOptions.SetRCode(clsSplitDummyFunction, bReset)
         SetTextSplittingParameters()
     End Sub
 
@@ -216,36 +334,76 @@ Public Class dlgSplitText
             strPattern = Chr(34) & ucrInputPattern.GetText & Chr(34)
         End If
         clsTextComponentsFixed.RemoveParameterByName("pattern")
+        clsTextSelectFunction.RemoveParameterByName("pattern")
+        clsTextMultipleFixedFunction.RemoveParameterByName("pattern")
         clsTextComponentsMaximum.RemoveParameterByName("pattern")
+        clsTextSelectMaxFunction.RemoveParameterByName("pattern")
         clsBinaryColumns.AddParameter("split.char", strPattern, iPosition:=1)
+        clsBinarySelectFunction.AddParameter("split.char", strPattern, iPosition:=1)
+
         If ucrChkIncludeRegularExpressions.Checked Then
             clsTextComponentsFixed.AddParameter("pattern", Chr(34) & ucrInputRegexPattern.GetText & Chr(34), iPosition:=1)
             clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & ucrInputRegexPattern.GetText & Chr(34), iPosition:=1)
+            clsTextMultipleFixedFunction.AddParameter("pattern", Chr(34) & ucrInputRegexPattern.GetText & Chr(34), iPosition:=1)
+            clsTextSelectFunction.AddParameter("pattern", Chr(34) & ucrInputRegexPattern.GetText & Chr(34), iPosition:=1)
+            clsTextSelectMaxFunction.AddParameter("pattern", Chr(34) & ucrInputRegexPattern.GetText & Chr(34), iPosition:=1)
+
         Else
+            clsTextMultipleFixedFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
             clsStringCollFunction.AddParameter("pattern", strPattern, iPosition:=0)
             clsTextComponentsFixed.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
+            clsTextSelectFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
             clsTextComponentsMaximum.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
+            clsTextSelectMaxFunction.AddParameter("pattern", clsRFunctionParameter:=clsStringCollFunction, iPosition:=1)
         End If
     End Sub
 
     Private Sub SetBaseFunction()
-        If rdoBinaryColumns.Checked Then
-            cmdAddkeyboard.Visible = False
-            ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
-        Else
-            If rdoFixedNumberOfComponents.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
-            ElseIf rdoMaximumNumberOfComponents.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
+        If rdoSingle.Checked Then
+            If rdoBinaryColumns.Checked Then
+                cmdAddkeyboard.Visible = False
+                ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
+            Else
+                If rdoFixedNumberOfComponents.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
+                ElseIf rdoMaximumNumberOfComponents.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
+                End If
             End If
+        Else
+            ucrBase.clsRsyntax.SetBaseROperator(clsUnpackOperator)
+
         End If
+
         SetTextSplittingParameters()
+        AddSplitParameter()
     End Sub
 
+    Private Sub AddSplitParameter()
+        If rdoMultiple.Checked Then
+            If rdoBinaryColumns.Checked Then
+                clsPaste2Function.AddParameter("split", "select", iPosition:=1, bIncludeArgumentName:=False)
+                clsPasteFunction.AddParameter("", clsRFunctionParameter:=clsBinarySelectFunction, bIncludeArgumentName:=False)
+
+            Else
+                If rdoFixedNumberOfComponents.Checked Then
+                    clsPaste2Function.AddParameter("split", "select", iPosition:=1, bIncludeArgumentName:=False)
+                    clsPasteFunction.AddParameter("", clsRFunctionParameter:=clsTextSelectFunction, bIncludeArgumentName:=False)
+
+                ElseIf rdoMaximumNumberOfComponents.Checked Then
+                    clsPaste2Function.AddParameter("split", "select", iPosition:=1, bIncludeArgumentName:=False)
+                    clsPasteFunction.AddParameter("", clsRFunctionParameter:=clsTextSelectMaxFunction, bIncludeArgumentName:=False)
+
+                End If
+            End If
+        Else
+            clsPasteFunction.RemoveParameterByName("split")
+            clsPaste2Function.RemoveParameterByName("")
+        End If
+    End Sub
     Private Sub ucrChkIncludeRegularExpressions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverSplitTextColumn.ControlValueChanged, ucrInputPattern.ControlValueChanged, ucrInputRegexPattern.ControlValueChanged
         clsCurrentNewColumnFunction = ucrReceiverSplitTextColumn.GetVariables()
         clsCurrentNewColumnFunction.SetAssignTo(ucrReceiverSplitTextColumn.GetVariableNames(False))
-
         ChangeParametersValues()
         SetVisibleAddKeyboardButton()
         SetTextSplittingParameters()
@@ -254,22 +412,72 @@ Public Class dlgSplitText
     Private Sub SetTextSplittingParameters()
         clsSquishFunction.RemoveParameterByName("split")
         clsTextComponentsMaximum.RemoveParameterByName("string")
+
         clsTextComponentsFixed.RemoveParameterByName("string")
+        clsTextSelectFunction.RemoveParameterByName("string")
         clsBinaryColumns.RemoveParameterByName("string")
-        Select Case ucrInputPattern.GetText()
-            Case "Spaces ( )"
-                clsSquishFunction.AddParameter("split", clsRFunctionParameter:=clsCurrentNewColumnFunction, bIncludeArgumentName:=False, iPosition:=0)
-                clsTextComponentsFixed.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
-                clsTextComponentsMaximum.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
-                clsBinaryColumns.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
-            Case Else
-                clsTextComponentsFixed.AddParameter("string", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
-                clsTextComponentsMaximum.AddParameter("string", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
-                clsBinaryColumns.AddParameter("string", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
-        End Select
+        clsBinarySelectFunction.RemoveParameterByName("string")
+
+
+        clsTextMultipleFixedFunction.AddParameter("string", ".x", iPosition:=0)
+        If rdoSingle.Checked Then
+            Select Case ucrInputPattern.GetText()
+                Case "Spaces ( )"
+                    clsSquishFunction.AddParameter("split", clsRFunctionParameter:=clsCurrentNewColumnFunction, bIncludeArgumentName:=False, iPosition:=0)
+                    clsTextComponentsFixed.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
+                    clsTextComponentsMaximum.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
+                    clsBinaryColumns.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
+
+                Case Else
+                    clsTextComponentsFixed.AddParameter("string", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
+                    clsTextComponentsMaximum.AddParameter("string", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
+                    clsBinaryColumns.AddParameter("string", clsRFunctionParameter:=clsCurrentNewColumnFunction, iPosition:=0)
+            End Select
+        Else
+            Select Case ucrInputPattern.GetText()
+                Case "Spaces ( )"
+                    clsSquishFunction.AddParameter("split", clsRFunctionParameter:=clsGetColSelectionNamesFunction, bIncludeArgumentName:=False, iPosition:=0)
+                    clsTextSelectMaxFunction.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
+                    clsTextSelectFunction.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
+                    clsBinarySelectFunction.AddParameter("string", clsRFunctionParameter:=clsSquishFunction, iPosition:=0)
+
+                Case Else
+                    clsTextSelectMaxFunction.AddParameter("string", clsRFunctionParameter:=clsGetColSelectionNamesFunction, iPosition:=0)
+                    clsBinaryColumns.AddParameter("string", clsRFunctionParameter:=clsGetColSelectionNamesFunction, iPosition:=0)
+                    clsTextSelectFunction.AddParameter("string", clsRFunctionParameter:=clsGetColSelectionNamesFunction, iPosition:=0)
+                    clsBinarySelectFunction.AddParameter("string", clsRFunctionParameter:=clsGetColSelectionNamesFunction, iPosition:=0)
+            End Select
+        End If
+
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrPnlSplitText.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrPnlColumnSelectOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnSelectOptions.ControlValueChanged, ucrReceiverSplitTextColumn.ControlValueChanged, ucrSelectorSplitTextColumn.ControlValueChanged
+        clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorSplitTextColumn.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsGetDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverSplitTextColumn.GetVariableNames, iPosition:=1)
+        clsGetDataFrameFunction.SetAssignTo(ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsGetColSelectionNamesFunction.AddParameter("data_name", Chr(34) & ucrSelectorSplitTextColumn.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsGetColSelectionNamesFunction.AddParameter("col_names ", ucrReceiverSplitTextColumn.GetVariableNames, iPosition:=1)
+        clsGetColSelectionNamesFunction.SetAssignTo(ucrReceiverSplitTextColumn.GetVariableNames(False))
+
+
+        If rdoMultiple.Checked Then
+            clsSplitDummyFunction.AddParameter("col", "multiple", iPosition:=0)
+            ucrSelectorSplitTextColumn.SetItemType("column_selection")
+            ucrReceiverSplitTextColumn.strSelectorHeading = "Column selections"
+            lblSelectedFactor.Text = "Select:"
+
+        ElseIf rdoSingle.Checked Then
+
+            clsSplitDummyFunction.AddParameter("col", "single", iPosition:=0)
+            ucrSelectorSplitTextColumn.SetItemType("column")
+            ucrReceiverSplitTextColumn.strSelectorHeading = "Numerics"
+            lblSelectedFactor.Text = "Column:"
+        End If
+        SetBaseFunction()
+    End Sub
+
 End Class
