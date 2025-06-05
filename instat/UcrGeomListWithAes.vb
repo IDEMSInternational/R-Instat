@@ -293,7 +293,7 @@ Public Class ucrGeomListWithParameters
         'Warning: the dataframe needs to be set first. Indeed, this will enable IgnoreGlobalAes in the "datafram_changed" sub. In the same sub, Ignore global aes will be unticked and thus setAes called. If not done in this order, Ignore global aes is unticked below before the check box has been enabled and thus the event IngnoreGlobalAes.check.changed is not raised, and set aes never called.
         If ucrChkApplyOnAllLayers.Checked Then
             ucrChkIgnoreGlobalAes.Checked = False
-            ucrChkIgnoreGlobalAes.Hide()
+            'ucrChkIgnoreGlobalAes.Hide()
         Else
             ucrChkIgnoreGlobalAes.Show()
         End If
