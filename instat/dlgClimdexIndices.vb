@@ -172,65 +172,12 @@ Public Class dlgClimdexIndices
     End Sub
 
     Private Sub TestOkEnabled()
-        Dim bTempComplete As Boolean = Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty
-        Dim bPrecComplete As Boolean = Not ucrReceiverPrec.IsEmpty
-        Dim bDateComplete As Boolean = Not ucrReceiverDate.IsEmpty
-        Dim bYearComplete As Boolean = Not ucrReceiverYear.IsEmpty
-        Dim bMonthValid As Boolean = rdoAnnual.Checked OrElse Not ucrReceiverMonth.IsEmpty
-        Dim bIndicesSelected As Boolean = clsIndices.iParameterCount > 0
-
-        ' New condition: Either temperature OR precipitation, but not necessarily both
-        If (bTempComplete OrElse bPrecComplete) AndAlso bDateComplete AndAlso bYearComplete AndAlso bMonthValid AndAlso bIndicesSelected Then
+        If Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty AndAlso Not ucrReceiverPrec.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (rdoAnnual.Checked OrElse Not ucrReceiverMonth.IsEmpty) AndAlso clsIndices.iParameterCount > 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
-
-        ' Update Climdex RFunction parameters dynamically
-        If Not ucrReceiverPrec.IsEmpty Then
-            clsClimdex.AddParameter("prec", Chr(34) & ucrReceiverPrec.GetVariableNames(False)(0) & Chr(34), iPosition:=5)
-            clsClimdex.AddParameter("prec.qtiles", clsRFunctionParameter:=clsPrecQTiles, iPosition:=15)
-        Else
-            clsClimdex.RemoveParameterByName("prec")
-            clsClimdex.RemoveParameterByName("prec.qtiles")
-        End If
-
-        If Not ucrReceiverTmax.IsEmpty Then
-            clsClimdex.AddParameter("tmax", Chr(34) & ucrReceiverTmax.GetVariableNames(False)(0) & Chr(34), iPosition:=6)
-        Else
-            clsClimdex.RemoveParameterByName("tmax")
-        End If
-
-        If Not ucrReceiverTmin.IsEmpty Then
-            clsClimdex.AddParameter("tmin", Chr(34) & ucrReceiverTmin.GetVariableNames(False)(0) & Chr(34), iPosition:=7)
-        Else
-            clsClimdex.RemoveParameterByName("tmin")
-        End If
     End Sub
-
-
-    'Private Sub TestOkEnabled()
-    '    Dim bTempComplete As Boolean = Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty
-    '    Dim bPrecComplete As Boolean = Not ucrReceiverPrec.IsEmpty
-    '    Dim bDateComplete As Boolean = Not ucrReceiverDate.IsEmpty
-    '    Dim bYearComplete As Boolean = Not ucrReceiverYear.IsEmpty
-    '    Dim bMonthValid As Boolean = rdoAnnual.Checked OrElse Not ucrReceiverMonth.IsEmpty
-    '    Dim bIndicesSelected As Boolean = clsIndices.iParameterCount > 0
-
-    '    If (bTempComplete OrElse bPrecComplete) AndAlso bDateComplete AndAlso bYearComplete AndAlso bMonthValid AndAlso bIndicesSelected Then
-    '        ucrBase.OKEnabled(True)
-    '    Else
-    '        ucrBase.OKEnabled(False)
-    '    End If
-    'End Sub
-
-    'Private Sub TestOkEnabled()
-    '    If Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty AndAlso Not ucrReceiverPrec.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (rdoAnnual.Checked OrElse Not ucrReceiverMonth.IsEmpty) AndAlso clsIndices.iParameterCount > 0 Then
-    '        ucrBase.OKEnabled(True)
-    '    Else
-    '        ucrBase.OKEnabled(True)
-    '    End If
-    'End Sub
 
     Private Sub ucrBaseClimdex_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
