@@ -294,15 +294,19 @@ Public Class dlgTransformTricotData
         Select Case chrOutput(0)
             Case "0"
                 bUniqueChecked = False
-                ucrInputTricotData.SetText("Need ID level data to proceed. If you have an ID variable, are they all unique?")
+                ucrInputTricotData.SetText("No ID variable found. Click for more information.")
                 ucrInputTricotData.txtInput.BackColor = Color.LightCoral
             Case "1"
                 bUniqueChecked = False
-                ucrInputTricotData.SetText("Multiple data frames given at ID level. Should only have one data frame at each level.")
+                ucrInputTricotData.SetText("Multiple data frames given at ID level. Click for more information.")
                 ucrInputTricotData.txtInput.BackColor = Color.LightCoral
             Case "2"
                 bUniqueChecked = False
-                ucrInputTricotData.SetText("Tricot Data not found. Try using Options.")
+                ucrInputTricotData.SetText("No ID variable found. Click for more information.")
+                ucrInputTricotData.txtInput.BackColor = Color.LightCoral
+            Case "4"
+                bUniqueChecked = False
+                ucrInputTricotData.SetText("ID-Level Data found, but no traits found. Click for more.")
                 ucrInputTricotData.txtInput.BackColor = Color.LightCoral
             Case Else
                 bUniqueChecked = True
@@ -374,11 +378,13 @@ Public Class dlgTransformTricotData
 
                                          ' Handle different cases
                                          If levelCode = "0" Then
-                                             txtPopUpErrorDetail.Text = "Need ID level data to proceed. If you have an ID variable, are they all unique? Check in Tricot > Tidy > Duplicate (Rows). Otherwise, change ID variable under Options to a unique variable."
+                                             txtPopUpErrorDetail.Text = "Need ID level data to proceed. Tricot data is not found. Do you have an ID variable? If you have an ID variable, are they all unique? Check in Tricot > Tidy > Duplicate (Rows). Otherwise, change ID variable under Options to a unique variable."
                                          ElseIf levelCode = "1" Then
                                              txtPopUpErrorDetail.Text = "Multiple data frames given at ID level. Should only have one data frame at each level. You can merge data frames in the Prepare > Data Reshape > Merge (Join) Dialog"
                                          ElseIf levelCode = "2" Then
-                                             txtPopUpErrorDetail.Text = "Tricot Data not found. Try using Options to define ID variables and click Check again."
+                                             txtPopUpErrorDetail.Text = "Need ID level data to proceed. Try using Options to define ID variables and click Check again. If you have an ID variable, are they all unique? Check in Tricot > Tidy > Duplicate (Rows). Otherwise, change ID variable under Options to a unique variable."
+                                         ElseIf levelCode = "4" Then
+                                             txtPopUpErrorDetail.Text = "No traits variables found for ID-level data. If only ID-level data is supplied, the data needs the traits to have a double-barreled name for the traits variable, e.g., `yield_best`."
                                          Else
                                              expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsOutputLevelsOperator.ToScript(), bSeparateThread:=False, bShowWaitDialogOverride:=False)
                                              If expTemp IsNot Nothing Then
