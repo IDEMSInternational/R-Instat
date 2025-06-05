@@ -119,7 +119,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         Me.checkBoxScalar.AutoSize = True
         Me.checkBoxScalar.Location = New System.Drawing.Point(226, 153)
         Me.checkBoxScalar.Name = "checkBoxScalar"
-        Me.checkBoxScalar.Size = New System.Drawing.Size(80, 24)
+        Me.checkBoxScalar.Size = New System.Drawing.Size(63, 21)
         Me.checkBoxScalar.TabIndex = 86
         Me.checkBoxScalar.Text = "Scalar"
         Me.checkBoxScalar.UseVisualStyleBackColor = True
