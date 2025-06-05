@@ -23,8 +23,8 @@ Public Class dlgPlacketLuceModel
     Private bResetSubdialog As Boolean = True
     Private clsGetDataFrameFunction, clsSndgetVarmataFunction, clsLevelFunction, clsFactorFunction, clsNamesFunction, clsGetVarMetadataFunction, clsGetObjectRFunction, clsRankingsItemsFunction, clsVarFunction, clsMapFunction, clsPlacketFunction As RFunction
     Private clsPlotFunction, clsWrapPlotFunction, clsWrapBarFunction, clsHeatFunction, clsBarfunction, clsTreeFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsSummaryFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction, clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
-    Private clsCoefFunction, clsStatsFunction, clsLdplyFunction, clsPivotLongerFunction, clsPivotWiderFunction, clsListFunction, clsList2Function, clsImportDataFunction, clsDefineAsTricotFunction, clsWrapTrees As RFunction
-    Private clsStatsOperator, clsCoefOperator, clsPipeOperator As ROperator
+    Private clsCoefFunction, clsStatsFunction, clsPivotWiderFunction, clsListFunction, clsList2Function, clsImportDataFunction, clsDefineAsTricotFunction, clsWrapTrees, clsImapDfrFunction, clsTibbleFunction As RFunction
+    Private clsStatsOperator, clsCoefOperator, clsPipeOperator, clsTildeOperator As ROperator
     Private clsAssignOperator, clsSpaceOpreator As ROperator
     Private clsGetRankingOperator, clsModelOperator, clsPlacketOperator, clsNamesOperator As ROperator
 
@@ -76,8 +76,8 @@ Public Class dlgPlacketLuceModel
         clsAnnovaFunction = New RFunction
         clsSummaryFunction = New RFunction
         clsEstimatesFunction = New RFunction
-        clsLdplyFunction = New RFunction
-        clsPivotLongerFunction = New RFunction
+        clsImapDfrFunction = New RFunction
+        clsTibbleFunction = New RFunction
         clsPivotWiderFunction = New RFunction
         clsListFunction = New RFunction
         clsList2Function = New RFunction
@@ -104,7 +104,7 @@ Public Class dlgPlacketLuceModel
         clsFactorFunction = New RFunction
         clsWrapBarFunction = New RFunction
         clsWrapPlotFunction = New RFunction
-
+        clsTildeOperator = New ROperator
         clsPipeOperator = New ROperator
         clsSpaceOpreator = New ROperator
         clsAssignOperator = New ROperator
@@ -191,22 +191,28 @@ Public Class dlgPlacketLuceModel
         clsCoefFunction.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
 
         ' Adding the function for the save checkbox
-        clsLdplyFunction.SetPackageName("plyr")
-        clsLdplyFunction.SetRCommand("ldply")
-        clsLdplyFunction.AddParameter("left", "coefficients_data", bIncludeArgumentName:=False, iPosition:=0)
+        clsTibbleFunction.SetPackageName("tibble")
+        clsTibbleFunction.SetRCommand("tibble")
+        clsTibbleFunction.AddParameter("variety", "names(.x)", iPosition:=0)
+        clsTibbleFunction.AddParameter("value", "as.numeric(.x)", iPosition:=1)
+        clsTibbleFunction.AddParameter("trait", ".y", iPosition:=2)
 
-        clsPivotLongerFunction.SetPackageName("tidyr")
-        clsPivotLongerFunction.SetRCommand("pivot_longer")
-        clsPivotLongerFunction.AddParameter("cols", "-`.id`")
+        clsTildeOperator.SetOperation("~")
+        clsTildeOperator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
+        clsTildeOperator.AddParameter("right", "{" & clsTibbleFunction.ToScript & "}", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsImapDfrFunction.SetPackageName("purrr")
+        clsImapDfrFunction.SetRCommand("imap_dfr")
+        clsImapDfrFunction.AddParameter("first", clsROperatorParameter:=clsTildeOperator, iPosition:=0, bIncludeArgumentName:=False)
 
         clsPivotWiderFunction.SetPackageName("tidyr")
         clsPivotWiderFunction.SetRCommand("pivot_wider")
-        clsPivotWiderFunction.AddParameter("names_from", "`.id`")
+        clsPivotWiderFunction.AddParameter("names_from", "trait")
         clsPivotWiderFunction.AddParameter("values_from", "value")
 
         clsPipeOperator.SetOperation("%>%")
-        clsPipeOperator.AddParameter("first", clsRFunctionParameter:=clsLdplyFunction, bIncludeArgumentName:=False)
-        clsPipeOperator.AddParameter("second", clsRFunctionParameter:=clsPivotLongerFunction, bIncludeArgumentName:=False)
+        clsPipeOperator.AddParameter("first", "coefficients_data", iPosition:=0, bIncludeArgumentName:=False)
+        clsPipeOperator.AddParameter("second", clsRFunctionParameter:=clsImapDfrFunction, iPosition:=1, bIncludeArgumentName:=False)
         clsPipeOperator.AddParameter("third", clsRFunctionParameter:=clsPivotWiderFunction, bIncludeArgumentName:=False)
         clsPipeOperator.SetAssignTo("coefficients_data")
 
@@ -217,11 +223,11 @@ Public Class dlgPlacketLuceModel
         clsImportDataFunction.AddParameter("left", clsRFunctionParameter:=clsListFunction, bIncludeArgumentName:=False)
 
         clsList2Function.SetRCommand("c")
-        clsList2Function.AddParameter("variety", Chr(34) & "name" & Chr(34))
+        clsList2Function.AddParameter("variety", Chr(34) & "variety" & Chr(34))
 
         clsDefineAsTricotFunction.SetRCommand("data_book$define_as_tricot")
         clsDefineAsTricotFunction.AddParameter("data_name", Chr(34) & "coefficients_data" & Chr(34))
-        clsDefineAsTricotFunction.AddParameter("key_col_names", Chr(34) & "name" & Chr(34))
+        clsDefineAsTricotFunction.AddParameter("key_col_names", Chr(34) & "variety" & Chr(34))
         clsDefineAsTricotFunction.AddParameter("types", clsRFunctionParameter:=clsList2Function)
         clsDefineAsTricotFunction.AddParameter("auto_selection", "TRUE")
 

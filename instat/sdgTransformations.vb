@@ -4,7 +4,8 @@ Imports System.Text.RegularExpressions
 Public Class sdgTransformations
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Public clsOutputDataLevel, clsCreateTricotData, clsIDColsFunction, clsVarietyColsFunction, clsTraitColsFunction As New RFunction
+    Private clsDummyFunction As New RFunction
+    Public clsOutputDataLevel, clsDefineTricotDataFunction, clsCreateTricotData, clsIDColsFunction, clsVarietyColsFunction, clsTraitColsFunction As New RFunction
     Private ucrBaseSelector As ucrSelector
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
     Dim lstRecognisedTraitsTypes As New List(Of KeyValuePair(Of String, List(Of String)))
@@ -132,23 +133,19 @@ Public Class sdgTransformations
         ucrInputNAS.SetParameter(New RParameter("na_candidates", 7))
         ucrInputNAS.SetText(strNot)
 
-        chkChooseTraitsSuffix.Text = "Choose Traits Suffix"
-        chkChooseTraitsSuffix.Checked = False
-        chkChooseTraitsSuffix.AutoSize = True
-
-        ' Hide Good/Bad Traits controls initially
-        lblGoodTraits.Visible = False
-        ucrInputGoodTraits.Visible = False
-        lblBadTraits.Visible = False
-        ucrInputBadTraits.Visible = False
+        ucrChkTraits.SetText("Choose Traits Suffix")
+        ucrChkTraits.AddParameterValuesCondition(True, "check", "True")
+        ucrChkTraits.AddParameterValuesCondition(False, "check", "False")
+        SetVisibility()
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewIDColsFunction As RFunction, clsNewVarietyColsFunction As RFunction, clsNewTraitColsFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strDefaultTab As String = "")
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefineTricotDataFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewIDColsFunction As RFunction, clsNewVarietyColsFunction As RFunction, clsNewTraitColsFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strDefaultTab As String = "")
         clsOutputDataLevel = clsNewRFunction
         clsCreateTricotData = clsNewDefaultFunction
         clsIDColsFunction = clsNewIDColsFunction
         clsVarietyColsFunction = clsNewVarietyColsFunction
         clsTraitColsFunction = clsNewTraitColsFunction
+        clsDefineTricotDataFunction = clsNewDefineTricotDataFunction
         ucrBaseSelector = ucrNewBaseSelector
         ucrReceiverIDVariable.SetMeAsReceiver()
         ucrInputGoodTraits.SetText(strPos)
@@ -157,6 +154,8 @@ Public Class sdgTransformations
         ucrInputBadTraits.bUpdateRCodeFromControl = True
         ucrInputNAS.SetText(strNot)
         ucrInputNAS.bUpdateRCodeFromControl = True
+
+        clsDummyFunction.AddParameter("check", "False", iPosition:=0)
 
         ucrReceiverIDVariable.AddAdditionalCodeParameterPair(clsCreateTricotData, New RParameter("id_col", 0, bNewIncludeArgumentName:=True), iAdditionalPairNo:=1)
 
@@ -167,41 +166,56 @@ Public Class sdgTransformations
         ucrReceiverVariety.SetRCode(clsVarietyColsFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverIDVarietyVar.SetRCode(clsVarietyColsFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverTraitsVariety.SetRCode(clsVarietyColsFunction, bReset, bCloneIfNeeded:=True)
-
         ucrReceiverTraits1.SetRCode(clsTraitColsFunction, bReset, bCloneIfNeeded:=True)
 
         AutoFillReceiverTraitsType()
         AutoFillReceiverIdLevel()
         AutoFillReceiverVarId()
         AutoFillReceiverVariety()
+        SetVisibility()
 
         If bReset Then
+            ucrChkTraits.SetRCode(clsDummyFunction, bReset)
             ucrReceiverIDVariable.SetMeAsReceiver()
             tbOptions.SelectedIndex = 0
         End If
     End Sub
 
     Private Sub ucrInputGoodTraits_NameChanged() Handles ucrInputGoodTraits.ControlValueChanged
-        If ucrInputGoodTraits.IsEmpty() Then
-            clsCreateTricotData.RemoveParameterByName("good_suffixes")
-        Else
-            clsCreateTricotData.AddParameter("good_suffixes", Chr(34) & ucrInputGoodTraits.GetText & Chr(34))
-        End If
+        AddGoodSuffixesPar()
     End Sub
 
     Private Sub ucrInputBadTraits_NameChanged() Handles ucrInputBadTraits.ControlValueChanged
-        If ucrInputBadTraits.IsEmpty() Then
-            clsCreateTricotData.RemoveParameterByName("bad_suffixes")
-        Else
+        AddBadSuffixesPar()
+    End Sub
+
+    Private Sub AddBadSuffixesPar()
+        If ucrChkTraits.Checked AndAlso Not ucrInputBadTraits.IsEmpty Then
             clsCreateTricotData.AddParameter("bad_suffixes", Chr(34) & ucrInputBadTraits.GetText & Chr(34))
+            clsDefineTricotDataFunction.AddParameter("bad_suffixes", Chr(34) & ucrInputBadTraits.GetText & Chr(34), iPosition:=2)
+        Else
+            clsCreateTricotData.RemoveParameterByName("bad_suffixes")
+            clsDefineTricotDataFunction.RemoveParameterByName("bad_suffixes")
+        End If
+    End Sub
+
+    Private Sub AddGoodSuffixesPar()
+        If ucrChkTraits.Checked AndAlso Not ucrInputGoodTraits.IsEmpty Then
+            clsCreateTricotData.AddParameter("good_suffixes", Chr(34) & ucrInputGoodTraits.GetText & Chr(34))
+            clsDefineTricotDataFunction.AddParameter("good_suffixes", Chr(34) & ucrInputGoodTraits.GetText & Chr(34), iPosition:=1)
+        Else
+            clsCreateTricotData.RemoveParameterByName("good_suffixes")
+            clsDefineTricotDataFunction.RemoveParameterByName("good_suffixes")
         End If
     End Sub
 
     Private Sub ucrInputNAS_NameChanged() Handles ucrInputNAS.ControlValueChanged
         If ucrInputNAS.IsEmpty() Then
             clsCreateTricotData.RemoveParameterByName("na_candidates")
+            clsDefineTricotDataFunction.RemoveParameterByName("na_candidates")
         Else
             clsCreateTricotData.AddParameter("na_candidates", Chr(34) & ucrInputNAS.GetText & Chr(34))
+            clsDefineTricotDataFunction.AddParameter("na_candidates", Chr(34) & ucrInputNAS.GetText & Chr(34), iPosition:=3)
         End If
     End Sub
 
@@ -285,8 +299,10 @@ Public Class sdgTransformations
             clsTraitColsFunction.RemoveParameterByName("trait_2")
             If Not ucrReceiverTraits1.IsEmpty Then
                 clsTraitColsFunction.AddParameter("trait_cols_a", strParameterValue:=ucrReceiverTraits1.GetVariableNames, bIncludeArgumentName:=False)
+                clsDefineTricotDataFunction.AddParameter("trait_cols", strParameterValue:=ucrReceiverTraits1.GetVariableNames, iPosition:=4)
             Else
                 clsIDColsFunction.RemoveParameterByName("trait_cols_a")
+                clsDefineTricotDataFunction.RemoveParameterByName("trait_cols")
             End If
         Else
             clsTraitColsFunction.AddParameter("trait_1", Chr(34) & "trait" & Chr(34), bIncludeArgumentName:=False)
@@ -542,16 +558,14 @@ Public Class sdgTransformations
         AutoFillReceiverTraitsType()
     End Sub
 
-    Private Sub chkChooseTraitsSuffix_CheckedChanged(sender As Object, e As EventArgs) Handles chkChooseTraitsSuffix.CheckedChanged
-        Dim visible As Boolean = chkChooseTraitsSuffix.Checked
-        lblGoodTraits.Visible = visible
-        ucrInputGoodTraits.Visible = visible
-        lblBadTraits.Visible = visible
-        ucrInputBadTraits.Visible = visible
-        If Not visible Then
-            ucrInputGoodTraits.SetText("")
-            ucrInputBadTraits.SetText("")
-        End If
+    Private Sub ucrChkTraits_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTraits.ControlValueChanged
+        AddGoodSuffixesPar()
+        AddBadSuffixesPar()
+        SetVisibility()
     End Sub
 
+    Private Sub SetVisibility()
+        ucrInputGoodTraits.Visible = ucrChkTraits.Checked
+        ucrInputBadTraits.Visible = ucrChkTraits.Checked
+    End Sub
 End Class

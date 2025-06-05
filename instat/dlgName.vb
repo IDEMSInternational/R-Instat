@@ -597,16 +597,30 @@ Public Class dlgName
 
         If expItems IsNot Nothing AndAlso Not (expItems.Type = Internals.SymbolicExpressionType.Null) Then
             Dim strArr As String() = expItems.AsCharacter.ToArray
-            If strArr IsNot Nothing Then
-                'the number of labels for a column expected is 1
-                If strArr.Length = 1 Then
-                    strColLabel = strArr(0)
-                ElseIf strArr.Length > 1 Then
-                    MessageBox.Show(Me, "Developer error: retrieved column label should be one.", "Developer Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    strColLabel = strArr(strArr.Length - 1)
+
+            ' 🔧 New safer handling for shapefiles or multiple labels
+            Dim strSelectedVar As String = ucrReceiverName.GetVariableNames(bWithQuotes:=False).Trim()
+            Dim colIndex As Integer = -1
+
+            If strArr.Length = 1 Then
+                strColLabel = strArr(0)
+            ElseIf strArr.Length > 1 Then
+                Dim selectedVars As String() = ucrReceiverName.GetVariableNames(bWithQuotes:=False).Split(","c)
+                For i = 0 To selectedVars.Length - 1
+                    If selectedVars(i).Trim() = strSelectedVar Then
+                        colIndex = i
+                        Exit For
+                    End If
+                Next
+
+                If colIndex >= 0 AndAlso colIndex < strArr.Length Then
+                    strColLabel = strArr(colIndex)
+                Else
+                    MessageBox.Show(Me, "Unexpected result: could not find the label for the selected column.", "Label Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
             End If
         End If
+
         Return strColLabel
     End Function
 
