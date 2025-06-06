@@ -50,6 +50,7 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrChkVarWidth = New instat.ucrCheck()
         Me.ucrSelectorClimaticBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkLabel = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdBoxPlotOptions
@@ -373,12 +374,22 @@ Partial Class dlgClimaticBoxPlot
         Me.ucrSelectorClimaticBoxPlot.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorClimaticBoxPlot.TabIndex = 4
         '
+        'ucrChkLabel
+        '
+        Me.ucrChkLabel.AutoSize = True
+        Me.ucrChkLabel.Checked = False
+        Me.ucrChkLabel.Location = New System.Drawing.Point(246, 346)
+        Me.ucrChkLabel.Name = "ucrChkLabel"
+        Me.ucrChkLabel.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkLabel.TabIndex = 35
+        '
         'dlgClimaticBoxPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(461, 458)
+        Me.Controls.Add(Me.ucrChkLabel)
         Me.Controls.Add(Me.ucrNudOutlierCoefficient)
         Me.Controls.Add(Me.lblOutlierCoefficient)
         Me.Controls.Add(Me.ucrReceiverWithinYear)
@@ -445,4 +456,5 @@ Partial Class dlgClimaticBoxPlot
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrNudOutlierCoefficient As ucrNud
     Friend WithEvents lblOutlierCoefficient As Label
+    Friend WithEvents ucrChkLabel As ucrCheck
 End Class
