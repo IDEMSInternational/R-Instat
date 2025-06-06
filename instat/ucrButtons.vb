@@ -378,6 +378,9 @@ Public Class ucrButtons
             Directory.CreateDirectory(Path.GetDirectoryName(strFilePath))
             File.WriteAllText(strFilePath, strActual)
         End If
+
+        'todo
+        WriteUISpec()
     End Sub
 
     Private Sub ResetCommentToInstatOptionComment()
@@ -489,4 +492,147 @@ Public Class ucrButtons
                                          End Sub
 
     End Sub
+
+    'todo reposition and review functions below
+
+    ''' <summary>
+    ''' Recursively builds a UIElement tree from a clsTransformationRModel tree.
+    ''' </summary>
+    Private Function BuildUIElementTree(model As clsTransformationRModel) As UIElement
+        If model Is Nothing Then Return Nothing
+
+        ' Only create a UIElement if strValueKey is not null or empty
+        If String.IsNullOrEmpty(model.strValueKey) AndAlso (model.lstTransformations Is Nothing OrElse model.lstTransformations.Count = 0) Then
+            Return Nothing
+        End If
+
+        Dim strElementName As String = model.strValueKey
+        strElementName += If(model.enumTransformationType = clsTransformationRModel.TransformationType.ifFalseExecuteChildTransformations, " F", "")
+        Dim element As New UIElement(strElementName)
+        If model.lstTransformations IsNot Nothing Then
+            For Each child In model.lstTransformations
+                Dim childElement = BuildUIElementTree(child)
+                If childElement IsNot Nothing Then
+                    element.lstChildren.Add(childElement)
+                End If
+            Next
+        End If
+        Return element
+    End Function
+
+    ''' <summary>
+    ''' Returns a string representation of the UIElement tree structure, with indentation for each level.
+    ''' </summary>
+    Private Function OutputUIElementTree(element As UIElement, level As Integer) As String
+        If element Is Nothing Then Return String.Empty
+
+        Dim sb As New System.Text.StringBuilder()
+        If Not String.IsNullOrEmpty(element.strElementName) Then
+            sb.AppendLine($"{New String(" "c, level * 2)}Level {level}: {element.strElementName}")
+        End If
+        For Each child In element.lstChildren
+            sb.Append(OutputUIElementTree(child, level + 1))
+        Next
+        Return sb.ToString()
+    End Function
+
+    ''' <summary>
+    ''' Loads the dialog's transformation JSON, builds a UIElement tree, outputs it, and removes duplicate nodes in each branch,
+    ''' but does not remove a node if it has children.
+    ''' </summary>
+    Private Sub WriteUISpec()
+        ' Load and deserialize the transformation JSON
+        Dim strDialogPathStem As String = Path.Combine(frmMain.strStaticPath & "\DialogDefinitions\Dlg" + strDialogName + "\dlg" + strDialogName)
+        Dim strTransformationsRJson As String = File.ReadAllText(strDialogPathStem + ".json")
+        lstTransformToScript = JsonConvert.DeserializeObject(Of List(Of clsTransformationRModel))(strTransformationsRJson)
+
+        ' Build the UIElement tree
+        Dim uiElements As New List(Of UIElement)
+        For Each model In lstTransformToScript
+            Dim element = BuildUIElementTree(model)
+            If element IsNot Nothing Then
+                uiElements.Add(element)
+            End If
+        Next
+
+        ' Output the UIElement tree structure to file
+        Dim strElementTree As String = vbLf & vbLf & "Before duplicate removal:" & vbLf & vbLf
+        For Each elem In uiElements
+            strElementTree += OutputUIElementTree(elem, 0)
+        Next
+
+        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim strFilePath As String = Path.Combine(strDesktopPath, "tmp", "elementTree.txt")
+        If File.Exists(strFilePath) Then
+            File.AppendAllText(strFilePath, strElementTree)
+        Else
+            Directory.CreateDirectory(Path.GetDirectoryName(strFilePath))
+            File.WriteAllText(strFilePath, strElementTree)
+        End If
+
+        ' Remove duplicates in each branch, but do not remove a node if it has children
+        Dim lstUIElementsNoDuplicates As New List(Of UIElement)
+        Dim elementsAlreadyInBranch As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+        For i As Integer = 0 To uiElements.Count - 1
+            Dim elementNoDuplicate = GetUIElementNoDuplicates(uiElements(i), elementsAlreadyInBranch, 0)
+
+            If elementNoDuplicate Is Nothing Then Continue For
+
+            If Not elementsAlreadyInBranch.Contains(elementNoDuplicate.strElementName) Then
+                elementsAlreadyInBranch.Add(elementNoDuplicate.strElementName)
+            End If
+
+            lstUIElementsNoDuplicates.Add(elementNoDuplicate)
+        Next
+
+        strElementTree = vbLf & vbLf & "After duplicate removal:" & vbLf & vbLf
+        For Each elem In lstUIElementsNoDuplicates
+            strElementTree += OutputUIElementTree(elem, 0)
+        Next
+        File.AppendAllText(strFilePath, strElementTree)
+
+    End Sub
+
+    Private Function GetUIElementNoDuplicates(element As UIElement, elementNamesAlreadyInParentBranch As HashSet(Of String), level As Integer) As UIElement
+        If element Is Nothing OrElse String.IsNullOrEmpty(element.strElementName) Then Return Nothing
+
+        If elementNamesAlreadyInParentBranch.Contains(element.strElementName) AndAlso (element.lstChildren Is Nothing OrElse element.lstChildren.Count = 0) Then
+            Return Nothing
+        End If
+
+        If element.lstChildren Is Nothing OrElse element.lstChildren.Count = 0 Then
+            Return element
+        End If
+
+        Dim elementNamesAlreadyInCurrentBranch = New HashSet(Of String)(elementNamesAlreadyInParentBranch, StringComparer.OrdinalIgnoreCase) From {
+            element.strElementName
+        }
+
+        Dim newChildren As New List(Of UIElement)
+        For Each child In element.lstChildren
+            Dim elementNoDuplicate = GetUIElementNoDuplicates(child, elementNamesAlreadyInCurrentBranch, level + 1)
+
+            If elementNoDuplicate Is Nothing Then Continue For
+
+            If Not elementNamesAlreadyInCurrentBranch.Contains(elementNoDuplicate.strElementName) Then
+                elementNamesAlreadyInCurrentBranch.Add(elementNoDuplicate.strElementName)
+            End If
+
+            newChildren.Add(elementNoDuplicate)
+        Next
+
+        element.lstChildren = newChildren
+        Return element
+    End Function
+
 End Class
+
+' todo Define the UIElement class (place this outside of ucrButtons, e.g., at the end of the file or in a separate file if preferred)
+Public Class UIElement
+    Public Property strElementName As String
+    Public Property lstChildren As New List(Of UIElement)
+    Public Sub New(strName As String)
+        strElementName = strName
+    End Sub
+End Class
+
