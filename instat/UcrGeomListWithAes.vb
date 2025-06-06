@@ -410,7 +410,7 @@ Public Class ucrGeomListWithParameters
 
         'This is a temporary solution to issue which should be solved with geoms
         'This adds "" aes for x or y when no variables are mapped to them for geoms which require it, either adding to the global or local aes.
-        If clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" OrElse clsGeomFunction.strRCommand = "geom_violin" Then
+        If clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" OrElse clsGeomFunction.strRCommand = "geom_violin" OrElse clsGeomFunction.strRCommand = "stat_summary" Then
             If (clsGlobalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse ucrChkIgnoreGlobalAes.Checked) AndAlso clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsCurrentAesFunction.AddParameter("x", Chr(34) & Chr(34))
             End If

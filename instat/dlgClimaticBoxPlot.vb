@@ -46,6 +46,9 @@ Public Class dlgClimaticBoxPlot
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
 
+    'Functions for Label CheckBox
+    Private clsLabelSummaryFunction, clsAesLabelFunction, clsGeomTextFunction As RFunction
+
     Private strFacetWrap As String = "Facet Wrap"
     Private strFacetRow As String = "Facet Row"
     Private strFacetCol As String = "Facet Column"
@@ -164,6 +167,10 @@ Public Class dlgClimaticBoxPlot
         ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkVarWidth.SetRDefault("FALSE")
 
+        ucrChkLabel.SetText("Label Outliers")
+        ucrChkLabel.AddParameterPresentCondition(True, "stat_sumary", True)
+        ucrChkLabel.AddParameterPresentCondition(False, "stat_sumary", False)
+
         clsCoordFlipFunc.SetPackageName("ggplot2")
         clsCoordFlipFunc.SetRCommand("coord_flip")
         clsCoordFlipParam.SetArgumentName("coord_flip")
@@ -220,6 +227,9 @@ Public Class dlgClimaticBoxPlot
         clsFilterElementOperator = New ROperator
         clsFilterElementFunction = New RFunction
         clsAsFactorFunction = New RFunction
+        clsLabelSummaryFunction = New RFunction
+        clsAesLabelFunction = New RFunction
+        clsGeomTextFunction = New RFunction
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetRowOp.SetOperation("+")
@@ -277,6 +287,16 @@ Public Class dlgClimaticBoxPlot
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
         clsRgeomPlotFunction.AddParameter("varwidth", "FALSE", iPosition:=0)
 
+        clsLabelSummaryFunction.SetPackageName("ggplot2")
+        clsLabelSummaryFunction.SetRCommand("stat_summary")
+        clsLabelSummaryFunction.AddParameter("x", clsRFunctionParameter:=clsAesLabelFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsLabelSummaryFunction.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=1)
+        clsLabelSummaryFunction.AddParameter("fun", "\ (y) { o <- grDevices::boxplot.stats(y)$out; if(length(o) == 0) NA else o }", iPosition:=2)
+        clsLabelSummaryFunction.AddParameter("hjust", "-1", iPosition:=3)
+
+        clsAesLabelFunction.SetRCommand("aes")
+        clsAesLabelFunction.AddParameter("label", "round(ggplot2::after_stat(y), 1)", iPosition:=0)
+
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
@@ -318,6 +338,9 @@ Public Class dlgClimaticBoxPlot
         ucrReceiverElement.SetRCode(clsRaesFunction, bReset)
         ucrChkOmitBelow.SetRCode(clsFilteredDataOperator, bReset)
         ucrNudOmitBelow.SetRCode(clsFilterElementOperator, bReset)
+        If bReset Then
+            ucrChkLabel.SetRCode(clsLabelSummaryFunction)
+        End If
         bRCodeUpdated = True
     End Sub
 
@@ -575,6 +598,14 @@ Public Class dlgClimaticBoxPlot
             clsFilteredDataOperator.AddParameter("right", clsRFunctionParameter:=clsFilterElementFunction, iPosition:=1)
         Else
             clsFilteredDataOperator.RemoveParameterByName("right")
+        End If
+    End Sub
+
+    Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged
+        If ucrChkLabel.Checked Then
+            clsBaseOperator.AddParameter("label", clsRFunctionParameter:=clsLabelSummaryFunction, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("label")
         End If
     End Sub
 
