@@ -34,12 +34,13 @@ Public Class dlgSplitText
     Private clsEndsWithFunction As New RFunction
     Private clsPasteFunction As New RFunction
     Private clsMutateFunction As New RFunction
-    Private clsAcrossFunction As New RFunction
-    Private clsEverythingFunction As New RFunction
+    Private clsAcrossFunction, clsSelectFunction, clsNamesFunction As New RFunction
+    Private clsEverythingFunction, clsAnyFunction As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsDataFrameOperator As New ROperator
     Private clsUnpackOperator As New ROperator
     Private clsTildaOperator As New ROperator
+    Private clsSelectOperator As New ROperator
     Private dctPatternPairs As New Dictionary(Of String, String)
 
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -145,6 +146,7 @@ Public Class dlgSplitText
         clsDataFrameOperator = New ROperator
         clsUnpackOperator = New ROperator
         clsTildaOperator = New ROperator
+        clsSelectOperator = New ROperator
 
         ucrSelectorSplitTextColumn.Reset()
         ucrSaveColumn.Reset()
@@ -197,14 +199,12 @@ Public Class dlgSplitText
         clsTildaOperator.SetOperation(" ", bBracketsTemp:=False)
         clsTildaOperator.SetAssignTo("select")
 
-
         clsDataFrameOperator.SetOperation("%>%")
         clsDataFrameOperator.AddParameter("right", "as.data.frame()", iPosition:=1)
 
         clsPasteFunction.SetRCommand("paste0")
         clsPasteFunction.AddParameter("col", """{.col}_""", iPosition:=0, bIncludeArgumentName:=False)
         clsPasteFunction.AddParameter("", clsROperatorParameter:=clsTildaOperator, bIncludeArgumentName:=False)
-
 
         clsEverythingFunction.SetRCommand("everything")
         clsEverythingFunction.AddParameter("dot", ".", bIncludeArgumentName:=False, iPosition:=0)
@@ -238,10 +238,23 @@ Public Class dlgSplitText
         clsUnpackOperator.SetOperation("%>%")
         clsUnpackOperator.AddParameter("left", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
         clsUnpackOperator.AddParameter("right", clsRFunctionParameter:=clsUnpackFunction, iPosition:=1)
-        clsUnpackOperator.SetAssignTo("col")
+
+        clsNamesFunction.SetRCommand("names")
+
+        clsAnyFunction.SetRCommand("-any_of")
+        clsAnyFunction.AddParameter("any", clsRFunctionParameter:=clsNamesFunction, bIncludeArgumentName:=False)
+
+        clsSelectFunction.SetRCommand("select")
+        clsSelectFunction.AddParameter("select", clsRFunctionParameter:=clsAnyFunction, bIncludeArgumentName:=False)
+
+        clsSelectOperator.SetOperation("%>%")
+        clsSelectOperator.AddParameter("left", clsROperatorParameter:=clsUnpackOperator, iPosition:=0)
+        clsSelectOperator.AddParameter("right", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
+        clsSelectOperator.SetAssignTo("col")
+
 
         clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        clsAddColumnsFunction.AddParameter("col_data", clsROperatorParameter:=clsUnpackOperator, iPosition:=1)
+        clsAddColumnsFunction.AddParameter("col_data", clsROperatorParameter:=clsSelectOperator, iPosition:=1)
         clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=2)
 
     End Sub
@@ -382,9 +395,9 @@ Public Class dlgSplitText
 
     Private Sub NewDefaultName()
         If rdoSingle.Checked Then
-            ucrSaveColumn.btnColumnPosition.Visible = True
+            ucrSaveColumn.Visible = True
         ElseIf rdoMultiple.Checked Then
-            ucrSaveColumn.btnColumnPosition.Visible = False
+            ucrSaveColumn.Visible = False
         End If
     End Sub
 
@@ -436,6 +449,7 @@ Public Class dlgSplitText
         clsGetDataFrameFunction.SetAssignTo(ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         clsTildaOperator.AddParameter("", ucrReceiverSplitTextColumn.GetVariableNames, iPosition:=0, bIncludeArgumentName:=False)
         clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsNamesFunction.AddParameter("data_name", ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
 
         If rdoMultiple.Checked Then
             clsSplitDummyFunction.AddParameter("col", "multiple", iPosition:=0)
@@ -451,12 +465,6 @@ Public Class dlgSplitText
             lblSelectedFactor.Text = "Column:"
         End If
         SetBaseFunction()
-    End Sub
-
-    Private Sub ucrSaveColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveColumn.ControlValueChanged
-        If ucrSaveColumn.GetText <> "" AndAlso ucrSaveColumn.IsComplete() Then
-            clsAddColumnsFunction.AddParameter("col_name", Chr(34) & ucrSaveColumn.GetText & Chr(34), iPosition:=1)
-        End If
     End Sub
 
 End Class
