@@ -513,12 +513,14 @@ Public Class dlgTricotModelOneVarCov
     End Sub
 
     Private Sub btnModelOptions_Click(sender As Object, e As EventArgs) Handles btnModelOptions.Click
+        sdgTricotModelOptions.enumTricotModelOptionsMode = sdgTricotModelOptions.TricotModelOptionsMode.ModelOneVarCov
         sdgTricotModelOptions.SetRCode(clsNewRFunction:=clsPladmmFunction, clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog)
         sdgTricotModelOptions.ShowDialog(Me)
         bResetSubDialog = False
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles btnDisplayOptions.Click
+        sdgDisplayModelOptions.enumPlacketLuceModelMode = sdgDisplayModelOptions.PlacketLuceModelMode.ModelOneVarCov2
         sdgDisplayModelOptions.SetRCode(clsNewWrapBarFunction:=clsWrapBarFunction, clsNewWrapPlotFunction:=clsWrapPlotFunction,
                                         clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
                                         clsNewAnnovaFunction:=clsAnnovaFunction, clsNewSummaryFunction:=clsSummaryFunction, clsNewAICFunction:=clsAICFunction,
