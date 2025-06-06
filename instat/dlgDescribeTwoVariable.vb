@@ -608,14 +608,13 @@ Public Class dlgDescribeTwoVariable
         ucrChkCorrelations.Visible = False
         ucrChkSwapXYVar.Visible = False
         ucrChkOmitMissing.Visible = False
-        cmdMissingOptions.Visible = False
 
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = False
             ucrChkOmitMissing.Visible = Not ucrChkSwapXYVar.Checked AndAlso IsFactorByNumeric()
             ucrChkSwapXYVar.Visible = IsNumericByNumeric() OrElse IsFactorByNumeric()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
-            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked AndAlso ucrChkOmitMissing.Visible
+            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
         End If
         If rdoThreeVariable.Checked Then
             If IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
@@ -639,7 +638,6 @@ Public Class dlgDescribeTwoVariable
         ucrChkLevSig.Visible = False
         ucrChkTotal.Visible = False
         ucrChkInteraction.Visible = False
-        cmdMissingOptions.Visible = False
         ucrChkOmitMissing.Visible = False
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
@@ -747,13 +745,13 @@ Public Class dlgDescribeTwoVariable
                     cmdSummaries.Visible = True
                     cmdFormatTable.Visible = True
                     ucrChkOmitMissing.Visible = True
+                    cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
                     ucrChkMeans.Visible = False
                     ucrChkLevSig.Visible = False
                     ucrChkTotal.Visible = False
                     ucrChkInteraction.Visible = False
                     ucrSaveTable.Location = New Point(23, 450)
                     ucrChkOmitMissing.Location = New Point(15, 365)
-                    cmdMissingOptions.Location = New Point(17, 385)
                     clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
                     ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                     ucrSaveTable.SetPrefix("summary_table")
@@ -876,8 +874,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.Visible = True
                 ucrChkOmitMissing.Visible = True
                 ucrSaveTable.Location = New Point(23, 440)
-                ucrChkOmitMissing.Location = New Point(15, 360)
-                cmdMissingOptions.Location = New Point(17, 380)
+                ucrChkOmitMissing.Location = New Point(15, 365)
             End If
         End If
         FactorColumns()
