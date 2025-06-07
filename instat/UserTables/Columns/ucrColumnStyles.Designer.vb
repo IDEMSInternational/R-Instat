@@ -26,10 +26,10 @@ Partial Class ucrColumnStyles
         Me.btnClearFormats = New System.Windows.Forms.Button()
         Me.dataGridFormats = New System.Windows.Forms.DataGridView()
         Me.colStyles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ucrReceiverMultipleCols = New instat.ucrReceiverMultiple()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnEnterStyle = New System.Windows.Forms.Button()
         Me.ucrSelectorCols = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverSingleCol = New instat.ucrReceiverSingle()
         CType(Me.dataGridFormats, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -72,19 +72,6 @@ Partial Class ucrColumnStyles
         Me.colStyles.MinimumWidth = 8
         Me.colStyles.Name = "colStyles"
         '
-        'ucrReceiverMultipleCols
-        '
-        Me.ucrReceiverMultipleCols.AutoSize = True
-        Me.ucrReceiverMultipleCols.frmParent = Nothing
-        Me.ucrReceiverMultipleCols.Location = New System.Drawing.Point(234, 21)
-        Me.ucrReceiverMultipleCols.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleCols.Name = "ucrReceiverMultipleCols"
-        Me.ucrReceiverMultipleCols.Selector = Nothing
-        Me.ucrReceiverMultipleCols.Size = New System.Drawing.Size(120, 80)
-        Me.ucrReceiverMultipleCols.strNcFilePath = ""
-        Me.ucrReceiverMultipleCols.TabIndex = 334
-        Me.ucrReceiverMultipleCols.ucrSelector = Nothing
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -119,14 +106,27 @@ Partial Class ucrColumnStyles
         Me.ucrSelectorCols.Size = New System.Drawing.Size(213, 183)
         Me.ucrSelectorCols.TabIndex = 333
         '
+        'ucrReceiverSingleCol
+        '
+        Me.ucrReceiverSingleCol.AutoSize = True
+        Me.ucrReceiverSingleCol.frmParent = Nothing
+        Me.ucrReceiverSingleCol.Location = New System.Drawing.Point(237, 18)
+        Me.ucrReceiverSingleCol.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSingleCol.Name = "ucrReceiverSingleCol"
+        Me.ucrReceiverSingleCol.Selector = Nothing
+        Me.ucrReceiverSingleCol.Size = New System.Drawing.Size(120, 21)
+        Me.ucrReceiverSingleCol.strNcFilePath = ""
+        Me.ucrReceiverSingleCol.TabIndex = 341
+        Me.ucrReceiverSingleCol.ucrSelector = Nothing
+        '
         'ucrColumnStyles
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverSingleCol)
         Me.Controls.Add(Me.lblFormats)
         Me.Controls.Add(Me.btnClearFormats)
         Me.Controls.Add(Me.dataGridFormats)
-        Me.Controls.Add(Me.ucrReceiverMultipleCols)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnEnterStyle)
         Me.Controls.Add(Me.ucrSelectorCols)
@@ -142,8 +142,8 @@ Partial Class ucrColumnStyles
     Friend WithEvents btnClearFormats As Button
     Friend WithEvents dataGridFormats As DataGridView
     Friend WithEvents colStyles As DataGridViewTextBoxColumn
-    Friend WithEvents ucrReceiverMultipleCols As ucrReceiverMultiple
     Friend WithEvents Label1 As Label
     Friend WithEvents btnEnterStyle As Button
     Friend WithEvents ucrSelectorCols As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverSingleCol As ucrReceiverSingle
 End Class

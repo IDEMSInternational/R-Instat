@@ -1,0 +1,315 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class sdgTableOptionsAfter
+    Inherits System.Windows.Forms.Form
+
+    'Form remplace la méthode Dispose pour nettoyer la liste des composants.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Requise par le Concepteur Windows Form
+    Private components As System.ComponentModel.IContainer
+
+    'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
+    'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
+    'Ne la modifiez pas à l'aide de l'éditeur de code.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
+        Me.tbpOtherStyles = New System.Windows.Forms.TabPage()
+        Me.ucrOtherStyles = New instat.ucrOtherStyles()
+        Me.ucrChkSelectTheme = New instat.ucrCheck()
+        Me.ucrChkManualTheme = New instat.ucrCheck()
+        Me.ucrCboSelectThemes = New instat.ucrInputComboBox()
+        Me.btnManualTheme = New System.Windows.Forms.Button()
+        Me.tbpThemes = New System.Windows.Forms.TabPage()
+        Me.ucrSourceNotes = New instat.ucrSourceNotes()
+        Me.tbpSourceNotes = New System.Windows.Forms.TabPage()
+        Me.ucrCells = New instat.ucrCells()
+        Me.ucrRows = New instat.ucrRows()
+        Me.tbpRows = New System.Windows.Forms.TabPage()
+        Me.ucrColumns = New instat.ucrColumns()
+        Me.tbpColumns = New System.Windows.Forms.TabPage()
+        Me.ucrStub = New instat.ucrStub()
+        Me.tbpStub = New System.Windows.Forms.TabPage()
+        Me.ucrHeader = New instat.ucrHeader()
+        Me.tbpHeader = New System.Windows.Forms.TabPage()
+        Me.tbpCells = New System.Windows.Forms.TabPage()
+        Me.tbpFormatOptions = New System.Windows.Forms.TabControl()
+        Me.tbpOtherStyles.SuspendLayout()
+        Me.tbpThemes.SuspendLayout()
+        Me.tbpSourceNotes.SuspendLayout()
+        Me.tbpRows.SuspendLayout()
+        Me.tbpColumns.SuspendLayout()
+        Me.tbpStub.SuspendLayout()
+        Me.tbpHeader.SuspendLayout()
+        Me.tbpCells.SuspendLayout()
+        Me.tbpFormatOptions.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'ucrSdgBaseButtons
+        '
+        Me.ucrSdgBaseButtons.AutoSize = True
+        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(267, 465)
+        Me.ucrSdgBaseButtons.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
+        Me.ucrSdgBaseButtons.Size = New System.Drawing.Size(224, 30)
+        Me.ucrSdgBaseButtons.TabIndex = 345
+        '
+        'tbpOtherStyles
+        '
+        Me.tbpOtherStyles.Controls.Add(Me.ucrOtherStyles)
+        Me.tbpOtherStyles.Location = New System.Drawing.Point(4, 22)
+        Me.tbpOtherStyles.Name = "tbpOtherStyles"
+        Me.tbpOtherStyles.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpOtherStyles.Size = New System.Drawing.Size(765, 431)
+        Me.tbpOtherStyles.TabIndex = 10
+        Me.tbpOtherStyles.Text = "Other Styles"
+        Me.tbpOtherStyles.UseVisualStyleBackColor = True
+        '
+        'ucrOtherStyles
+        '
+        Me.ucrOtherStyles.Location = New System.Drawing.Point(8, 7)
+        Me.ucrOtherStyles.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrOtherStyles.Name = "ucrOtherStyles"
+        Me.ucrOtherStyles.Size = New System.Drawing.Size(326, 179)
+        Me.ucrOtherStyles.TabIndex = 0
+        '
+        'ucrChkSelectTheme
+        '
+        Me.ucrChkSelectTheme.AutoSize = True
+        Me.ucrChkSelectTheme.Checked = False
+        Me.ucrChkSelectTheme.Location = New System.Drawing.Point(17, 19)
+        Me.ucrChkSelectTheme.Margin = New System.Windows.Forms.Padding(2)
+        Me.ucrChkSelectTheme.Name = "ucrChkSelectTheme"
+        Me.ucrChkSelectTheme.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkSelectTheme.TabIndex = 29
+        '
+        'ucrChkManualTheme
+        '
+        Me.ucrChkManualTheme.AutoSize = True
+        Me.ucrChkManualTheme.Checked = False
+        Me.ucrChkManualTheme.Location = New System.Drawing.Point(17, 59)
+        Me.ucrChkManualTheme.Margin = New System.Windows.Forms.Padding(2)
+        Me.ucrChkManualTheme.Name = "ucrChkManualTheme"
+        Me.ucrChkManualTheme.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkManualTheme.TabIndex = 28
+        '
+        'ucrCboSelectThemes
+        '
+        Me.ucrCboSelectThemes.AddQuotesIfUnrecognised = True
+        Me.ucrCboSelectThemes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrCboSelectThemes.GetSetSelectedIndex = -1
+        Me.ucrCboSelectThemes.IsReadOnly = False
+        Me.ucrCboSelectThemes.Location = New System.Drawing.Point(153, 19)
+        Me.ucrCboSelectThemes.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrCboSelectThemes.Name = "ucrCboSelectThemes"
+        Me.ucrCboSelectThemes.Size = New System.Drawing.Size(150, 21)
+        Me.ucrCboSelectThemes.TabIndex = 3
+        '
+        'btnManualTheme
+        '
+        Me.btnManualTheme.Location = New System.Drawing.Point(154, 60)
+        Me.btnManualTheme.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnManualTheme.Name = "btnManualTheme"
+        Me.btnManualTheme.Size = New System.Drawing.Size(149, 21)
+        Me.btnManualTheme.TabIndex = 2
+        Me.btnManualTheme.Text = "Custom Theme"
+        Me.btnManualTheme.UseVisualStyleBackColor = True
+        '
+        'tbpThemes
+        '
+        Me.tbpThemes.Controls.Add(Me.ucrChkSelectTheme)
+        Me.tbpThemes.Controls.Add(Me.ucrChkManualTheme)
+        Me.tbpThemes.Controls.Add(Me.ucrCboSelectThemes)
+        Me.tbpThemes.Controls.Add(Me.btnManualTheme)
+        Me.tbpThemes.Location = New System.Drawing.Point(4, 22)
+        Me.tbpThemes.Margin = New System.Windows.Forms.Padding(2)
+        Me.tbpThemes.Name = "tbpThemes"
+        Me.tbpThemes.Size = New System.Drawing.Size(765, 431)
+        Me.tbpThemes.TabIndex = 6
+        Me.tbpThemes.Text = "Themes"
+        Me.tbpThemes.UseVisualStyleBackColor = True
+        '
+        'ucrSourceNotes
+        '
+        Me.ucrSourceNotes.Location = New System.Drawing.Point(7, 7)
+        Me.ucrSourceNotes.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSourceNotes.Name = "ucrSourceNotes"
+        Me.ucrSourceNotes.Size = New System.Drawing.Size(581, 190)
+        Me.ucrSourceNotes.TabIndex = 0
+        '
+        'tbpSourceNotes
+        '
+        Me.tbpSourceNotes.Controls.Add(Me.ucrSourceNotes)
+        Me.tbpSourceNotes.Location = New System.Drawing.Point(4, 22)
+        Me.tbpSourceNotes.Name = "tbpSourceNotes"
+        Me.tbpSourceNotes.Size = New System.Drawing.Size(765, 431)
+        Me.tbpSourceNotes.TabIndex = 4
+        Me.tbpSourceNotes.Text = "Source Notes"
+        Me.tbpSourceNotes.UseVisualStyleBackColor = True
+        '
+        'ucrCells
+        '
+        Me.ucrCells.Location = New System.Drawing.Point(8, 8)
+        Me.ucrCells.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrCells.Name = "ucrCells"
+        Me.ucrCells.Size = New System.Drawing.Size(644, 360)
+        Me.ucrCells.TabIndex = 6
+        '
+        'ucrRows
+        '
+        Me.ucrRows.Location = New System.Drawing.Point(7, 9)
+        Me.ucrRows.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrRows.Name = "ucrRows"
+        Me.ucrRows.Size = New System.Drawing.Size(755, 421)
+        Me.ucrRows.TabIndex = 0
+        '
+        'tbpRows
+        '
+        Me.tbpRows.Controls.Add(Me.ucrRows)
+        Me.tbpRows.Location = New System.Drawing.Point(4, 22)
+        Me.tbpRows.Name = "tbpRows"
+        Me.tbpRows.Size = New System.Drawing.Size(765, 431)
+        Me.tbpRows.TabIndex = 7
+        Me.tbpRows.Text = "Rows"
+        Me.tbpRows.UseVisualStyleBackColor = True
+        '
+        'ucrColumns
+        '
+        Me.ucrColumns.Location = New System.Drawing.Point(5, 6)
+        Me.ucrColumns.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrColumns.Name = "ucrColumns"
+        Me.ucrColumns.Size = New System.Drawing.Size(754, 424)
+        Me.ucrColumns.TabIndex = 0
+        '
+        'tbpColumns
+        '
+        Me.tbpColumns.Controls.Add(Me.ucrColumns)
+        Me.tbpColumns.Location = New System.Drawing.Point(4, 22)
+        Me.tbpColumns.Name = "tbpColumns"
+        Me.tbpColumns.Size = New System.Drawing.Size(765, 431)
+        Me.tbpColumns.TabIndex = 8
+        Me.tbpColumns.Text = "Columns"
+        Me.tbpColumns.UseVisualStyleBackColor = True
+        '
+        'ucrStub
+        '
+        Me.ucrStub.Location = New System.Drawing.Point(7, 7)
+        Me.ucrStub.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrStub.Name = "ucrStub"
+        Me.ucrStub.Size = New System.Drawing.Size(425, 258)
+        Me.ucrStub.TabIndex = 0
+        '
+        'tbpStub
+        '
+        Me.tbpStub.Controls.Add(Me.ucrStub)
+        Me.tbpStub.Location = New System.Drawing.Point(4, 22)
+        Me.tbpStub.Name = "tbpStub"
+        Me.tbpStub.Size = New System.Drawing.Size(765, 431)
+        Me.tbpStub.TabIndex = 9
+        Me.tbpStub.Text = "Stub"
+        Me.tbpStub.UseVisualStyleBackColor = True
+        '
+        'ucrHeader
+        '
+        Me.ucrHeader.Location = New System.Drawing.Point(7, 6)
+        Me.ucrHeader.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrHeader.Name = "ucrHeader"
+        Me.ucrHeader.Size = New System.Drawing.Size(601, 300)
+        Me.ucrHeader.TabIndex = 16
+        '
+        'tbpHeader
+        '
+        Me.tbpHeader.Controls.Add(Me.ucrHeader)
+        Me.tbpHeader.Location = New System.Drawing.Point(4, 22)
+        Me.tbpHeader.Name = "tbpHeader"
+        Me.tbpHeader.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpHeader.Size = New System.Drawing.Size(765, 431)
+        Me.tbpHeader.TabIndex = 0
+        Me.tbpHeader.Text = "Header"
+        Me.tbpHeader.UseVisualStyleBackColor = True
+        '
+        'tbpCells
+        '
+        Me.tbpCells.Controls.Add(Me.ucrCells)
+        Me.tbpCells.Location = New System.Drawing.Point(4, 22)
+        Me.tbpCells.Name = "tbpCells"
+        Me.tbpCells.Size = New System.Drawing.Size(765, 431)
+        Me.tbpCells.TabIndex = 3
+        Me.tbpCells.Text = "Cells"
+        Me.tbpCells.UseVisualStyleBackColor = True
+        '
+        'tbpFormatOptions
+        '
+        Me.tbpFormatOptions.Controls.Add(Me.tbpHeader)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpStub)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpColumns)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpRows)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpCells)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpSourceNotes)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpThemes)
+        Me.tbpFormatOptions.Controls.Add(Me.tbpOtherStyles)
+        Me.tbpFormatOptions.Location = New System.Drawing.Point(2, 5)
+        Me.tbpFormatOptions.Name = "tbpFormatOptions"
+        Me.tbpFormatOptions.SelectedIndex = 0
+        Me.tbpFormatOptions.Size = New System.Drawing.Size(773, 457)
+        Me.tbpFormatOptions.TabIndex = 344
+        '
+        'sdgTableOptionsAfter
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(777, 500)
+        Me.Controls.Add(Me.ucrSdgBaseButtons)
+        Me.Controls.Add(Me.tbpFormatOptions)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "sdgTableOptionsAfter"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Table Options"
+        Me.tbpOtherStyles.ResumeLayout(False)
+        Me.tbpThemes.ResumeLayout(False)
+        Me.tbpThemes.PerformLayout()
+        Me.tbpSourceNotes.ResumeLayout(False)
+        Me.tbpRows.ResumeLayout(False)
+        Me.tbpColumns.ResumeLayout(False)
+        Me.tbpStub.ResumeLayout(False)
+        Me.tbpHeader.ResumeLayout(False)
+        Me.tbpCells.ResumeLayout(False)
+        Me.tbpFormatOptions.ResumeLayout(False)
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+
+    Friend WithEvents ucrSdgBaseButtons As ucrButtonsSubdialogue
+    Friend WithEvents tbpOtherStyles As TabPage
+    Friend WithEvents ucrOtherStyles As ucrOtherStyles
+    Friend WithEvents ucrChkSelectTheme As ucrCheck
+    Friend WithEvents ucrChkManualTheme As ucrCheck
+    Friend WithEvents ucrCboSelectThemes As ucrInputComboBox
+    Friend WithEvents btnManualTheme As Button
+    Friend WithEvents tbpThemes As TabPage
+    Friend WithEvents ucrSourceNotes As ucrSourceNotes
+    Friend WithEvents tbpSourceNotes As TabPage
+    Friend WithEvents ucrCells As ucrCells
+    Friend WithEvents ucrRows As ucrRows
+    Friend WithEvents tbpRows As TabPage
+    Friend WithEvents ucrColumns As ucrColumns
+    Friend WithEvents tbpColumns As TabPage
+    Friend WithEvents ucrStub As ucrStub
+    Friend WithEvents tbpStub As TabPage
+    Friend WithEvents ucrHeader As ucrHeader
+    Friend WithEvents tbpHeader As TabPage
+    Friend WithEvents tbpCells As TabPage
+    Friend WithEvents tbpFormatOptions As TabControl
+End Class
