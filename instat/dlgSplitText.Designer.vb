@@ -59,13 +59,14 @@ Partial Class dlgSplitText
         Me.rdoMultiple = New System.Windows.Forms.RadioButton()
         Me.rdoSingle = New System.Windows.Forms.RadioButton()
         Me.ucrPnlColumnSelectOptions = New instat.UcrPanel()
+        Me.grpVar = New System.Windows.Forms.GroupBox()
         Me.SuspendLayout()
         '
         'lblSelectedFactor
         '
         Me.lblSelectedFactor.AutoSize = True
         Me.lblSelectedFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectedFactor.Location = New System.Drawing.Point(257, 85)
+        Me.lblSelectedFactor.Location = New System.Drawing.Point(257, 88)
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
         Me.lblSelectedFactor.Size = New System.Drawing.Size(80, 13)
         Me.lblSelectedFactor.TabIndex = 4
@@ -157,7 +158,7 @@ Partial Class dlgSplitText
         Me.ucrPnlSplitText.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlSplitText.Location = New System.Drawing.Point(55, 4)
         Me.ucrPnlSplitText.Name = "ucrPnlSplitText"
-        Me.ucrPnlSplitText.Size = New System.Drawing.Size(309, 37)
+        Me.ucrPnlSplitText.Size = New System.Drawing.Size(309, 33)
         Me.ucrPnlSplitText.TabIndex = 0
         '
         'ucrSaveColumn
@@ -197,7 +198,7 @@ Partial Class dlgSplitText
         '
         Me.ucrReceiverSplitTextColumn.AutoSize = True
         Me.ucrReceiverSplitTextColumn.frmParent = Me
-        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(257, 101)
+        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(257, 104)
         Me.ucrReceiverSplitTextColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSplitTextColumn.Name = "ucrReceiverSplitTextColumn"
         Me.ucrReceiverSplitTextColumn.Selector = Nothing
@@ -269,7 +270,7 @@ Partial Class dlgSplitText
         '
         Me.rdoMultiple.AutoSize = True
         Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMultiple.Location = New System.Drawing.Point(349, 53)
+        Me.rdoMultiple.Location = New System.Drawing.Point(349, 57)
         Me.rdoMultiple.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoMultiple.Name = "rdoMultiple"
         Me.rdoMultiple.Size = New System.Drawing.Size(61, 17)
@@ -282,7 +283,7 @@ Partial Class dlgSplitText
         '
         Me.rdoSingle.AutoSize = True
         Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoSingle.Location = New System.Drawing.Point(274, 51)
+        Me.rdoSingle.Location = New System.Drawing.Point(274, 57)
         Me.rdoSingle.Margin = New System.Windows.Forms.Padding(4)
         Me.rdoSingle.Name = "rdoSingle"
         Me.rdoSingle.Size = New System.Drawing.Size(54, 17)
@@ -294,11 +295,20 @@ Partial Class dlgSplitText
         'ucrPnlColumnSelectOptions
         '
         Me.ucrPnlColumnSelectOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlColumnSelectOptions.Location = New System.Drawing.Point(247, 47)
+        Me.ucrPnlColumnSelectOptions.Location = New System.Drawing.Point(247, 53)
         Me.ucrPnlColumnSelectOptions.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrPnlColumnSelectOptions.Name = "ucrPnlColumnSelectOptions"
-        Me.ucrPnlColumnSelectOptions.Size = New System.Drawing.Size(194, 29)
+        Me.ucrPnlColumnSelectOptions.Size = New System.Drawing.Size(194, 28)
         Me.ucrPnlColumnSelectOptions.TabIndex = 70
+        '
+        'grpVar
+        '
+        Me.grpVar.Location = New System.Drawing.Point(239, 41)
+        Me.grpVar.Name = "grpVar"
+        Me.grpVar.Size = New System.Drawing.Size(209, 43)
+        Me.grpVar.TabIndex = 72
+        Me.grpVar.TabStop = False
+        Me.grpVar.Text = "Variables"
         '
         'dlgSplitText
         '
@@ -327,6 +337,7 @@ Partial Class dlgSplitText
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlTextComponents)
         Me.Controls.Add(Me.ucrInputRegexPattern)
+        Me.Controls.Add(Me.grpVar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -360,4 +371,5 @@ Partial Class dlgSplitText
     Friend WithEvents rdoMultiple As RadioButton
     Friend WithEvents rdoSingle As RadioButton
     Friend WithEvents ucrPnlColumnSelectOptions As UcrPanel
+    Friend WithEvents grpVar As GroupBox
 End Class
