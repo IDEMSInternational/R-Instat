@@ -31,6 +31,7 @@ Public Class dlgThreeVariablePivotTable
         Prepare
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private Sub dlgThreeVariablePivotTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load

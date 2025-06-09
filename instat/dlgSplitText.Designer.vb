@@ -56,13 +56,17 @@ Partial Class dlgSplitText
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdAddkeyboard = New System.Windows.Forms.Button()
         Me.ucrInputRegexPattern = New instat.ucrInputTextBox()
+        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
+        Me.rdoSingle = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlColumnSelectOptions = New instat.UcrPanel()
+        Me.grpVar = New System.Windows.Forms.GroupBox()
         Me.SuspendLayout()
         '
         'lblSelectedFactor
         '
         Me.lblSelectedFactor.AutoSize = True
         Me.lblSelectedFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectedFactor.Location = New System.Drawing.Point(257, 62)
+        Me.lblSelectedFactor.Location = New System.Drawing.Point(257, 88)
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
         Me.lblSelectedFactor.Size = New System.Drawing.Size(80, 13)
         Me.lblSelectedFactor.TabIndex = 4
@@ -73,7 +77,7 @@ Partial Class dlgSplitText
         '
         Me.lblSplitBy.AutoSize = True
         Me.lblSplitBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSplitBy.Location = New System.Drawing.Point(255, 109)
+        Me.lblSplitBy.Location = New System.Drawing.Point(255, 125)
         Me.lblSplitBy.Name = "lblSplitBy"
         Me.lblSplitBy.Size = New System.Drawing.Size(44, 13)
         Me.lblSplitBy.TabIndex = 6
@@ -84,7 +88,7 @@ Partial Class dlgSplitText
         '
         Me.lblNumberofPiecesToReturn.AutoSize = True
         Me.lblNumberofPiecesToReturn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNumberofPiecesToReturn.Location = New System.Drawing.Point(255, 225)
+        Me.lblNumberofPiecesToReturn.Location = New System.Drawing.Point(255, 235)
         Me.lblNumberofPiecesToReturn.Name = "lblNumberofPiecesToReturn"
         Me.lblNumberofPiecesToReturn.Size = New System.Drawing.Size(141, 13)
         Me.lblNumberofPiecesToReturn.TabIndex = 11
@@ -101,7 +105,7 @@ Partial Class dlgSplitText
         Me.rdoTextComponents.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoTextComponents.Location = New System.Drawing.Point(98, 4)
         Me.rdoTextComponents.Name = "rdoTextComponents"
-        Me.rdoTextComponents.Size = New System.Drawing.Size(125, 45)
+        Me.rdoTextComponents.Size = New System.Drawing.Size(125, 31)
         Me.rdoTextComponents.TabIndex = 1
         Me.rdoTextComponents.TabStop = True
         Me.rdoTextComponents.Text = "Into Text Components"
@@ -116,9 +120,9 @@ Partial Class dlgSplitText
         Me.rdoBinaryColumns.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBinaryColumns.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoBinaryColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoBinaryColumns.Location = New System.Drawing.Point(222, 4)
+        Me.rdoBinaryColumns.Location = New System.Drawing.Point(221, 4)
         Me.rdoBinaryColumns.Name = "rdoBinaryColumns"
-        Me.rdoBinaryColumns.Size = New System.Drawing.Size(125, 45)
+        Me.rdoBinaryColumns.Size = New System.Drawing.Size(125, 31)
         Me.rdoBinaryColumns.TabIndex = 2
         Me.rdoBinaryColumns.TabStop = True
         Me.rdoBinaryColumns.Text = "Into Binary Columns"
@@ -129,7 +133,7 @@ Partial Class dlgSplitText
         '
         Me.rdoMaximumNumberOfComponents.AutoSize = True
         Me.rdoMaximumNumberOfComponents.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMaximumNumberOfComponents.Location = New System.Drawing.Point(257, 164)
+        Me.rdoMaximumNumberOfComponents.Location = New System.Drawing.Point(257, 176)
         Me.rdoMaximumNumberOfComponents.Name = "rdoMaximumNumberOfComponents"
         Me.rdoMaximumNumberOfComponents.Size = New System.Drawing.Size(183, 17)
         Me.rdoMaximumNumberOfComponents.TabIndex = 9
@@ -141,7 +145,7 @@ Partial Class dlgSplitText
         '
         Me.rdoFixedNumberOfComponents.AutoSize = True
         Me.rdoFixedNumberOfComponents.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoFixedNumberOfComponents.Location = New System.Drawing.Point(257, 189)
+        Me.rdoFixedNumberOfComponents.Location = New System.Drawing.Point(257, 201)
         Me.rdoFixedNumberOfComponents.Name = "rdoFixedNumberOfComponents"
         Me.rdoFixedNumberOfComponents.Size = New System.Drawing.Size(164, 17)
         Me.rdoFixedNumberOfComponents.TabIndex = 10
@@ -154,13 +158,13 @@ Partial Class dlgSplitText
         Me.ucrPnlSplitText.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrPnlSplitText.Location = New System.Drawing.Point(55, 4)
         Me.ucrPnlSplitText.Name = "ucrPnlSplitText"
-        Me.ucrPnlSplitText.Size = New System.Drawing.Size(309, 45)
+        Me.ucrPnlSplitText.Size = New System.Drawing.Size(309, 33)
         Me.ucrPnlSplitText.TabIndex = 0
         '
         'ucrSaveColumn
         '
         Me.ucrSaveColumn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveColumn.Location = New System.Drawing.Point(9, 304)
+        Me.ucrSaveColumn.Location = New System.Drawing.Point(9, 321)
         Me.ucrSaveColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
         Me.ucrSaveColumn.Size = New System.Drawing.Size(292, 21)
@@ -171,7 +175,7 @@ Partial Class dlgSplitText
         Me.ucrNudPieces.AutoSize = True
         Me.ucrNudPieces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPieces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPieces.Location = New System.Drawing.Point(257, 241)
+        Me.ucrNudPieces.Location = New System.Drawing.Point(257, 251)
         Me.ucrNudPieces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPieces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPieces.Name = "ucrNudPieces"
@@ -185,7 +189,7 @@ Partial Class dlgSplitText
         Me.ucrInputPattern.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputPattern.GetSetSelectedIndex = -1
         Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(257, 124)
+        Me.ucrInputPattern.Location = New System.Drawing.Point(257, 140)
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPattern.TabIndex = 7
@@ -194,7 +198,7 @@ Partial Class dlgSplitText
         '
         Me.ucrReceiverSplitTextColumn.AutoSize = True
         Me.ucrReceiverSplitTextColumn.frmParent = Me
-        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(257, 78)
+        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(257, 104)
         Me.ucrReceiverSplitTextColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSplitTextColumn.Name = "ucrReceiverSplitTextColumn"
         Me.ucrReceiverSplitTextColumn.Selector = Nothing
@@ -207,15 +211,15 @@ Partial Class dlgSplitText
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(10, 336)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 353)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 14
         '
         'ucrPnlTextComponents
         '
         Me.ucrPnlTextComponents.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrPnlTextComponents.Location = New System.Drawing.Point(236, 151)
+        Me.ucrPnlTextComponents.Location = New System.Drawing.Point(236, 166)
         Me.ucrPnlTextComponents.Name = "ucrPnlTextComponents"
         Me.ucrPnlTextComponents.Size = New System.Drawing.Size(205, 63)
         Me.ucrPnlTextComponents.TabIndex = 8
@@ -224,7 +228,7 @@ Partial Class dlgSplitText
         '
         Me.ucrChkIncludeRegularExpressions.AutoSize = True
         Me.ucrChkIncludeRegularExpressions.Checked = False
-        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(9, 273)
+        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(9, 284)
         Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
         Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(239, 23)
         Me.ucrChkIncludeRegularExpressions.TabIndex = 22
@@ -243,7 +247,7 @@ Partial Class dlgSplitText
         '
         'cmdAddkeyboard
         '
-        Me.cmdAddkeyboard.Location = New System.Drawing.Point(272, 273)
+        Me.cmdAddkeyboard.Location = New System.Drawing.Point(272, 285)
         Me.cmdAddkeyboard.Name = "cmdAddkeyboard"
         Me.cmdAddkeyboard.Size = New System.Drawing.Size(105, 23)
         Me.cmdAddkeyboard.TabIndex = 25
@@ -256,18 +260,65 @@ Partial Class dlgSplitText
         Me.ucrInputRegexPattern.AutoSize = True
         Me.ucrInputRegexPattern.IsMultiline = False
         Me.ucrInputRegexPattern.IsReadOnly = False
-        Me.ucrInputRegexPattern.Location = New System.Drawing.Point(257, 124)
+        Me.ucrInputRegexPattern.Location = New System.Drawing.Point(257, 140)
+        Me.ucrInputRegexPattern.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputRegexPattern.Name = "ucrInputRegexPattern"
         Me.ucrInputRegexPattern.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputRegexPattern.TabIndex = 26
+        '
+        'rdoMultiple
+        '
+        Me.rdoMultiple.AutoSize = True
+        Me.rdoMultiple.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoMultiple.Location = New System.Drawing.Point(349, 57)
+        Me.rdoMultiple.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoMultiple.Name = "rdoMultiple"
+        Me.rdoMultiple.Size = New System.Drawing.Size(61, 17)
+        Me.rdoMultiple.TabIndex = 71
+        Me.rdoMultiple.TabStop = True
+        Me.rdoMultiple.Text = "Multiple"
+        Me.rdoMultiple.UseVisualStyleBackColor = True
+        '
+        'rdoSingle
+        '
+        Me.rdoSingle.AutoSize = True
+        Me.rdoSingle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoSingle.Location = New System.Drawing.Point(274, 57)
+        Me.rdoSingle.Margin = New System.Windows.Forms.Padding(4)
+        Me.rdoSingle.Name = "rdoSingle"
+        Me.rdoSingle.Size = New System.Drawing.Size(54, 17)
+        Me.rdoSingle.TabIndex = 69
+        Me.rdoSingle.TabStop = True
+        Me.rdoSingle.Text = "Single"
+        Me.rdoSingle.UseVisualStyleBackColor = True
+        '
+        'ucrPnlColumnSelectOptions
+        '
+        Me.ucrPnlColumnSelectOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrPnlColumnSelectOptions.Location = New System.Drawing.Point(247, 53)
+        Me.ucrPnlColumnSelectOptions.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrPnlColumnSelectOptions.Name = "ucrPnlColumnSelectOptions"
+        Me.ucrPnlColumnSelectOptions.Size = New System.Drawing.Size(194, 28)
+        Me.ucrPnlColumnSelectOptions.TabIndex = 70
+        '
+        'grpVar
+        '
+        Me.grpVar.Location = New System.Drawing.Point(239, 41)
+        Me.grpVar.Name = "grpVar"
+        Me.grpVar.Size = New System.Drawing.Size(209, 43)
+        Me.grpVar.TabIndex = 72
+        Me.grpVar.TabStop = False
+        Me.grpVar.Text = "Variables"
         '
         'dlgSplitText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(453, 392)
-        Me.Controls.Add(Me.ucrInputRegexPattern)
+        Me.ClientSize = New System.Drawing.Size(453, 412)
+        Me.Controls.Add(Me.rdoMultiple)
+        Me.Controls.Add(Me.rdoSingle)
+        Me.Controls.Add(Me.ucrPnlColumnSelectOptions)
         Me.Controls.Add(Me.cmdAddkeyboard)
         Me.Controls.Add(Me.ucrSelectorSplitTextColumn)
         Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
@@ -285,6 +336,8 @@ Partial Class dlgSplitText
         Me.Controls.Add(Me.lblSelectedFactor)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlTextComponents)
+        Me.Controls.Add(Me.ucrInputRegexPattern)
+        Me.Controls.Add(Me.grpVar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -315,4 +368,8 @@ Partial Class dlgSplitText
     Friend WithEvents ucrSelectorSplitTextColumn As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdAddkeyboard As Button
     Friend WithEvents ucrInputRegexPattern As ucrInputTextBox
+    Friend WithEvents rdoMultiple As RadioButton
+    Friend WithEvents rdoSingle As RadioButton
+    Friend WithEvents ucrPnlColumnSelectOptions As UcrPanel
+    Friend WithEvents grpVar As GroupBox
 End Class
