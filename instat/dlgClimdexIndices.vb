@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports NLog.LayoutRenderers.Wrappers
 Public Class dlgClimdexIndices
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -27,6 +28,11 @@ Public Class dlgClimdexIndices
     Private clsTempQTiles As New RFunction
     Private clsPrecQTiles As New RFunction
     Private clsAddClimexIndices As New RFunction
+    Private clsPipeOperator As New ROperator
+    Private clsDollarSign0Operator As New ROperator
+    Private clsDollarSign1Operator As New ROperator
+    Private clsAssignOperator As New ROperator
+    Private clsVectorsFunction As New RFunction
 
     Private Sub dlgClimdex_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -98,6 +104,7 @@ Public Class dlgClimdexIndices
         ucrPnlAnnualMonthly.SetParameter(New RParameter("freq", 2))
         ucrPnlAnnualMonthly.AddRadioButton(rdoAnnual, Chr(34) & "annual" & Chr(34))
         ucrPnlAnnualMonthly.AddRadioButton(rdoMonthly, Chr(34) & "monthly" & Chr(34))
+        ucrPnlAnnualMonthly.AddRadioButton(rdoStation, Chr(34) & "station" & Chr(34))
         ucrPnlAnnualMonthly.SetRDefault(Chr(34) & "annual" & Chr(34))
         ucrPnlAnnualMonthly.AddToLinkedControls({ucrReceiverMonth}, {rdoMonthly}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -112,6 +119,11 @@ Public Class dlgClimdexIndices
         clsMaxMissingDays = New RFunction
         clsTempQTiles = New RFunction
         clsPrecQTiles = New RFunction
+        clsPipeOperator = New ROperator
+        clsDollarSign0Operator = New ROperator
+        clsDollarSign1Operator = New ROperator
+        clsAssignOperator = New ROperator
+        clsVectorsFunction = New RFunction
 
         ucrSelectorClimdex.Reset()
         ucrReceiverStation.SetMeAsReceiver()
@@ -127,11 +139,34 @@ Public Class dlgClimdexIndices
         clsClimdex.AddParameter("max.missing.days", clsRFunctionParameter:=clsMaxMissingDays, iPosition:=16)
         clsClimdex.SetAssignTo("ci")
 
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorClimdex.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0, bIncludeArgumentName:=False)
+        clsPipeOperator.AddParameter("right", "mutate(Date= lubridate::make_date(2000, lubridate::month(date), lubridate::day(date)), year=2000)", iPosition:=1)
+        clsPipeOperator.SetAssignTo(ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+
+        clsDollarSign0Operator.SetOperation("$")
+        clsDollarSign0Operator.AddParameter("left", "ci", iPosition:=0, bIncludeArgumentName:=False)
+        clsDollarSign0Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
+
+        clsDollarSign1Operator.SetOperation("$")
+        clsDollarSign1Operator.AddParameter("left", clsRFunctionParameter:=ucrSelectorClimdex.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0, bIncludeArgumentName:=False)
+        clsDollarSign1Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
+
+        clsVectorsFunction.SetRCommand("vec_cast")
+        clsVectorsFunction.SetPackageName("vctrs")
+        clsVectorsFunction.AddParameter("x", clsROperatorParameter:=clsDollarSign0Operator, iPosition:=0, bIncludeArgumentName:=False)
+        clsVectorsFunction.AddParameter("y", clsROperatorParameter:=clsDollarSign1Operator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsAssignOperator.SetOperation("<-")
+        clsAssignOperator.AddParameter("left", clsROperatorParameter:=clsDollarSign0Operator, iPosition:=0, bIncludeArgumentName:=False)
+        clsAssignOperator.AddParameter("right", clsRFunctionParameter:=clsVectorsFunction, iPosition:=1, bIncludeArgumentName:=False)
+
         clsIndices.SetRCommand("c")
 
         clsMaxMissingDays.SetRCommand("c")
         clsMaxMissingDays.AddParameter("annual", 15, iPosition:=0)
         clsMaxMissingDays.AddParameter("monthly", 3, iPosition:=1)
+        clsMaxMissingDays.AddParameter("seasonal", 6, iPosition:=2)
 
         clsBaseRange.SetRCommand("c")
         clsBaseRange.AddParameter("0", 1961, bIncludeArgumentName:=False, iPosition:=0)
@@ -153,12 +188,15 @@ Public Class dlgClimdexIndices
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrPnlAnnualMonthly.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("freq", iNewPosition:=2), iAdditionalPairNo:=1)
+        'ucrPnlAnnualMonthly.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("freq", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("station", iNewPosition:=3), iAdditionalPairNo:=1)
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("year", iNewPosition:=4), iAdditionalPairNo:=1)
         ucrReceiverMonth.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("month", iNewPosition:=5), iAdditionalPairNo:=1)
+        ' ucrReceiverStation.AddAdditionalCodeParameterPair(clsDollarSign0Operator, New RParameter("right", iNewPosition:=1), iAdditionalPairNo:=2)
+        'ucrReceiverStation.AddAdditionalCodeParameterPair(clsDollarSign1Operator, New RParameter("right", iNewPosition:=1), iAdditionalPairNo:=3)
 
-        ucrPnlAnnualMonthly.SetRCode(clsClimdex, bReset)
+        'ucrPnlAnnualMonthly.SetRCode(clsClimdex, bReset)
+        ucrPnlAnnualMonthly.SetRCode(clsAddClimexIndices, bReset)
         ucrSelectorClimdex.SetRCode(clsAddClimexIndices, bReset)
         ucrReceiverStation.SetRCode(clsClimdex, bReset)
         ucrReceiverDate.SetRCode(clsClimdex, bReset)
@@ -172,7 +210,7 @@ Public Class dlgClimdexIndices
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty AndAlso Not ucrReceiverPrec.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (rdoAnnual.Checked OrElse Not ucrReceiverMonth.IsEmpty) AndAlso clsIndices.iParameterCount > 0 Then
+        If Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty AndAlso Not ucrReceiverPrec.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (rdoAnnual.Checked OrElse Not ucrReceiverMonth.IsEmpty) AndAlso (rdoStation.Checked OrElse Not ucrReceiverStation.IsEmpty) AndAlso clsIndices.iParameterCount > 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -199,6 +237,9 @@ Public Class dlgClimdexIndices
             sdgClimdexIndices.grpTmaxAnnual.Enabled = True
             sdgClimdexIndices.grpTmaxTminAnnual.Enabled = True
             sdgClimdexIndices.grpPrecAnnual.Enabled = True
+            sdgClimdexIndices.ucrNudSeasonalMissingDays.Visible = False
+            ucrReceiverYear.Visible = True
+            lblYear.Visible = True
         ElseIf rdoMonthly.Checked Then
             clsIndices.RemoveParameterByName("fd")
             clsIndices.RemoveParameterByName("tr")
@@ -220,6 +261,17 @@ Public Class dlgClimdexIndices
             sdgClimdexIndices.grpTmaxAnnual.Enabled = False
             sdgClimdexIndices.grpTmaxTminAnnual.Enabled = False
             sdgClimdexIndices.grpPrecAnnual.Enabled = False
+            sdgClimdexIndices.ucrNudSeasonalMissingDays.Visible = False
+            ucrReceiverYear.Visible = True
+            lblYear.Visible = True
+        ElseIf rdoStation.Checked Then
+            ucrReceiverYear.Visible = False
+            lblYear.Visible = False
+            sdgClimdexIndices.grpTminAnnual.Enabled = True
+            sdgClimdexIndices.grpTmaxAnnual.Enabled = True
+            sdgClimdexIndices.grpTmaxTminAnnual.Enabled = True
+            sdgClimdexIndices.grpPrecAnnual.Enabled = True
+            sdgClimdexIndices.ucrNudSeasonalMissingDays.Visible = True
         End If
     End Sub
 
@@ -237,7 +289,7 @@ Public Class dlgClimdexIndices
 
     Private Sub ParameterCount()
         lblSelectedIndices.Text = clsIndices.iParameterCount
-        If rdoAnnual.Checked Then
+        If rdoAnnual.Checked OrElse rdoStation.Checked Then
             lblTotalIndices.Text = 27
         Else
             lblTotalIndices.Text = 11
@@ -259,6 +311,7 @@ Public Class dlgClimdexIndices
 
     Private Sub ucrPnlAnnualMonthly_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualMonthly.ControlValueChanged
         ParameterCount()
+        SetClimdexData()
     End Sub
 
     Private Sub ucrReceiverPrec_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrec.ControlValueChanged, ucrReceiverTmin.ControlValueChanged, ucrReceiverTmax.ControlValueChanged
@@ -271,6 +324,17 @@ Public Class dlgClimdexIndices
     End Sub
 
     Private Sub SetClimdexData()
-        clsClimdex.AddParameter("data", clsRFunctionParameter:=ucrSelectorClimdex.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        If rdoStation.Checked Then
+            clsClimdex.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignOperator, iPosition:=0)
+        Else
+            clsClimdex.AddParameter("data", clsRFunctionParameter:=ucrSelectorClimdex.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAssignOperator)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+        clsDollarSign0Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
+        clsDollarSign1Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
     End Sub
 End Class
