@@ -141,7 +141,7 @@ Public Class dlgClimdexIndices
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorClimdex.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0, bIncludeArgumentName:=False)
-        clsPipeOperator.AddParameter("right", "mutate(Date= lubridate::make_date(2000, lubridate::month(date), lubridate::day(date)), year=2000)", iPosition:=1)
+        clsPipeOperator.AddParameter("right", "mutate(Date= lubridate::make_date(2000, lubridate::month(date), lubridate::day(date)))", iPosition:=1)
         clsPipeOperator.SetAssignTo(ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         clsDollarSign0Operator.SetOperation("$")
