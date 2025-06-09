@@ -55,6 +55,9 @@ Partial Class sdgTransformations
         Me.tbVarietyLevel = New System.Windows.Forms.TabPage()
         Me.tbIDVarietyLevel = New System.Windows.Forms.TabPage()
         Me.tbIDVarietyTraitLevel = New System.Windows.Forms.TabPage()
+
+        Me.chkChooseTraitsSuffix = New System.Windows.Forms.CheckBox()
+
         Me.tbOptions.SuspendLayout()
         Me.tbIDLevel.SuspendLayout()
         Me.tbVarietyLevel.SuspendLayout()
@@ -402,11 +405,25 @@ Partial Class sdgTransformations
         '
         Me.ucrReceiverIDVariable.AutoSize = True
         Me.ucrReceiverIDVariable.frmParent = Nothing
+
         Me.ucrReceiverIDVariable.Location = New System.Drawing.Point(357, 88)
         Me.ucrReceiverIDVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDVariable.Name = "ucrReceiverIDVariable"
         Me.ucrReceiverIDVariable.Selector = Nothing
         Me.ucrReceiverIDVariable.Size = New System.Drawing.Size(180, 30)
+
+        Me.ucrReceiverIDVariable.Location = New System.Drawing.Point(238, 57)
+        Me.ucrReceiverIDVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverIDVariable.Name = "ucrReceiverIDVariable"
+        Me.ucrReceiverIDVariable.Selector = Nothing
+        Me.ucrReceiverIDVariable.Size = New System.Drawing.Size(120, 20)
+
+        Me.ucrReceiverIDVariable.Location = New System.Drawing.Point(357, 88)
+        Me.ucrReceiverIDVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverIDVariable.Name = "ucrReceiverIDVariable"
+        Me.ucrReceiverIDVariable.Selector = Nothing
+        Me.ucrReceiverIDVariable.Size = New System.Drawing.Size(180, 30)
+
         Me.ucrReceiverIDVariable.strNcFilePath = ""
         Me.ucrReceiverIDVariable.TabIndex = 3
         Me.ucrReceiverIDVariable.ucrSelector = Nothing
@@ -457,6 +474,16 @@ Partial Class sdgTransformations
         Me.tbIDVarietyTraitLevel.TabIndex = 3
         Me.tbIDVarietyTraitLevel.Text = "Plot-Trait Level"
         Me.tbIDVarietyTraitLevel.UseVisualStyleBackColor = True
+        '
+        'chkChooseTraitsSuffix
+        '
+        Me.chkChooseTraitsSuffix.AutoSize = True
+        Me.chkChooseTraitsSuffix.Location = New System.Drawing.Point(238, 6)
+        Me.chkChooseTraitsSuffix.Name = "chkChooseTraitsSuffix"
+        Me.chkChooseTraitsSuffix.Size = New System.Drawing.Size(120, 17)
+        Me.chkChooseTraitsSuffix.TabIndex = 10
+        Me.chkChooseTraitsSuffix.Text = "Choose Traits Suffix"
+        Me.chkChooseTraitsSuffix.UseVisualStyleBackColor = True
         '
         'sdgTransformations
         '
@@ -515,6 +542,7 @@ Partial Class sdgTransformations
     Friend WithEvents tbVarietyLevel As TabPage
     Friend WithEvents tbIDVarietyLevel As TabPage
     Friend WithEvents tbIDVarietyTraitLevel As TabPage
+    Public Property chkChooseTraitsSuffix As CheckBox
     Friend WithEvents ucrReceiverIDVariable As ucrReceiverSingle
     Friend WithEvents ucrChkTraits As ucrCheck
 End Class

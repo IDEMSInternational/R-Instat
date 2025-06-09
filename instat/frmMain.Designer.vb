@@ -637,6 +637,9 @@ Partial Class frmMain
         Me.mnuTricotexamineeditdataOneVariableFrequencies = New System.Windows.Forms.ToolStripMenuItem()
         Me.TidyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTidyDuplicateRows = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RowNumbersNamesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RecodeFactorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CombineFactorsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuReorderLevels = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTransformText = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator85 = New System.Windows.Forms.ToolStripSeparator()
@@ -770,9 +773,6 @@ Partial Class frmMain
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RowNumbersNamesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RecodeFactorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CombineFactorsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3557,7 +3557,6 @@ Partial Class frmMain
         Me.mnuBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.mnuBar.Location = New System.Drawing.Point(0, 0)
         Me.mnuBar.Name = "mnuBar"
-        Me.mnuBar.Padding = New System.Windows.Forms.Padding(6, 2, 0, 2)
         Me.mnuBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.mnuBar.ShowItemToolTips = True
         Me.mnuBar.Size = New System.Drawing.Size(1200, 33)
@@ -4165,35 +4164,35 @@ Partial Class frmMain
         'mnuPrepareColumnTextFindReplace
         '
         Me.mnuPrepareColumnTextFindReplace.Name = "mnuPrepareColumnTextFindReplace"
-        Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(227, 34)
+        Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(270, 34)
         Me.mnuPrepareColumnTextFindReplace.Tag = "Find/Replace..."
         Me.mnuPrepareColumnTextFindReplace.Text = "Find/Replace..."
         '
         'mnuPrepareColumnTextSearch
         '
         Me.mnuPrepareColumnTextSearch.Name = "mnuPrepareColumnTextSearch"
-        Me.mnuPrepareColumnTextSearch.Size = New System.Drawing.Size(227, 34)
+        Me.mnuPrepareColumnTextSearch.Size = New System.Drawing.Size(270, 34)
         Me.mnuPrepareColumnTextSearch.Text = "Search..."
         Me.mnuPrepareColumnTextSearch.Visible = False
         '
         'mnuPrepareColumnTextTransform
         '
         Me.mnuPrepareColumnTextTransform.Name = "mnuPrepareColumnTextTransform"
-        Me.mnuPrepareColumnTextTransform.Size = New System.Drawing.Size(227, 34)
+        Me.mnuPrepareColumnTextTransform.Size = New System.Drawing.Size(270, 34)
         Me.mnuPrepareColumnTextTransform.Tag = "Transform..."
         Me.mnuPrepareColumnTextTransform.Text = "Transform..."
         '
         'mnuPrepareColumnTextSplit
         '
         Me.mnuPrepareColumnTextSplit.Name = "mnuPrepareColumnTextSplit"
-        Me.mnuPrepareColumnTextSplit.Size = New System.Drawing.Size(227, 34)
+        Me.mnuPrepareColumnTextSplit.Size = New System.Drawing.Size(270, 34)
         Me.mnuPrepareColumnTextSplit.Tag = "Split..."
         Me.mnuPrepareColumnTextSplit.Text = "Split..."
         '
         'mnuPrepareColumnTextCombine
         '
         Me.mnuPrepareColumnTextCombine.Name = "mnuPrepareColumnTextCombine"
-        Me.mnuPrepareColumnTextCombine.Size = New System.Drawing.Size(227, 34)
+        Me.mnuPrepareColumnTextCombine.Size = New System.Drawing.Size(270, 34)
         Me.mnuPrepareColumnTextCombine.Tag = "Combine..."
         Me.mnuPrepareColumnTextCombine.Text = "Combine..."
         '
@@ -4201,7 +4200,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnTextMatch.Enabled = False
         Me.mnuPrepareColumnTextMatch.Name = "mnuPrepareColumnTextMatch"
-        Me.mnuPrepareColumnTextMatch.Size = New System.Drawing.Size(227, 34)
+        Me.mnuPrepareColumnTextMatch.Size = New System.Drawing.Size(270, 34)
         Me.mnuPrepareColumnTextMatch.Tag = "Match..."
         Me.mnuPrepareColumnTextMatch.Text = "Match..."
         Me.mnuPrepareColumnTextMatch.Visible = False
@@ -4209,7 +4208,7 @@ Partial Class frmMain
         'mnuPrepareColumnTextDistance
         '
         Me.mnuPrepareColumnTextDistance.Name = "mnuPrepareColumnTextDistance"
-        Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(227, 34)
+        Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(270, 34)
         Me.mnuPrepareColumnTextDistance.Tag = "Distance..."
         Me.mnuPrepareColumnTextDistance.Text = "Distance..."
         '
@@ -4824,53 +4823,71 @@ Partial Class frmMain
         'mnuTidyDuplicateRows
         '
         Me.mnuTidyDuplicateRows.Name = "mnuTidyDuplicateRows"
-        Me.mnuTidyDuplicateRows.Size = New System.Drawing.Size(310, 34)
+        Me.mnuTidyDuplicateRows.Size = New System.Drawing.Size(305, 34)
         Me.mnuTidyDuplicateRows.Text = "Duplicate Rows..."
+        '
+        'RowNumbersNamesToolStripMenuItem
+        '
+        Me.RowNumbersNamesToolStripMenuItem.Name = "RowNumbersNamesToolStripMenuItem"
+        Me.RowNumbersNamesToolStripMenuItem.Size = New System.Drawing.Size(305, 34)
+        Me.RowNumbersNamesToolStripMenuItem.Text = "Row Numbers/ Names..."
+        '
+        'RecodeFactorToolStripMenuItem
+        '
+        Me.RecodeFactorToolStripMenuItem.Name = "RecodeFactorToolStripMenuItem"
+        Me.RecodeFactorToolStripMenuItem.Size = New System.Drawing.Size(305, 34)
+        Me.RecodeFactorToolStripMenuItem.Text = "Recode Factor..."
+        '
+        'CombineFactorsToolStripMenuItem
+        '
+        Me.CombineFactorsToolStripMenuItem.Name = "CombineFactorsToolStripMenuItem"
+        Me.CombineFactorsToolStripMenuItem.Size = New System.Drawing.Size(305, 34)
+        Me.CombineFactorsToolStripMenuItem.Text = "Combine Factors..."
         '
         'mnuReorderLevels
         '
         Me.mnuReorderLevels.Name = "mnuReorderLevels"
-        Me.mnuReorderLevels.Size = New System.Drawing.Size(310, 34)
+        Me.mnuReorderLevels.Size = New System.Drawing.Size(305, 34)
         Me.mnuReorderLevels.Text = "Reorder Factor Levels..."
         '
         'mnuTransformText
         '
         Me.mnuTransformText.Name = "mnuTransformText"
-        Me.mnuTransformText.Size = New System.Drawing.Size(310, 34)
+        Me.mnuTransformText.Size = New System.Drawing.Size(305, 34)
         Me.mnuTransformText.Text = "Transform Text..."
         '
         'ToolStripSeparator85
         '
         Me.ToolStripSeparator85.Name = "ToolStripSeparator85"
-        Me.ToolStripSeparator85.Size = New System.Drawing.Size(307, 6)
+        Me.ToolStripSeparator85.Size = New System.Drawing.Size(302, 6)
         '
         'mnuStackPivotLonger
         '
         Me.mnuStackPivotLonger.Name = "mnuStackPivotLonger"
-        Me.mnuStackPivotLonger.Size = New System.Drawing.Size(310, 34)
+        Me.mnuStackPivotLonger.Size = New System.Drawing.Size(305, 34)
         Me.mnuStackPivotLonger.Text = "Stack (Pivot Longer)..."
         '
         'mnuUnstackPivotWider
         '
         Me.mnuUnstackPivotWider.Name = "mnuUnstackPivotWider"
-        Me.mnuUnstackPivotWider.Size = New System.Drawing.Size(310, 34)
+        Me.mnuUnstackPivotWider.Size = New System.Drawing.Size(305, 34)
         Me.mnuUnstackPivotWider.Text = "Unstack (Pivot Wider)..."
         '
         'mnuTidyAddMergeColumns
         '
         Me.mnuTidyAddMergeColumns.Name = "mnuTidyAddMergeColumns"
-        Me.mnuTidyAddMergeColumns.Size = New System.Drawing.Size(310, 34)
+        Me.mnuTidyAddMergeColumns.Size = New System.Drawing.Size(305, 34)
         Me.mnuTidyAddMergeColumns.Text = "Add (Merge) Columns..."
         '
         'ToolStripSeparator86
         '
         Me.ToolStripSeparator86.Name = "ToolStripSeparator86"
-        Me.ToolStripSeparator86.Size = New System.Drawing.Size(307, 6)
+        Me.ToolStripSeparator86.Size = New System.Drawing.Size(302, 6)
         '
         'AddKeyToolStripMenuItem
         '
         Me.AddKeyToolStripMenuItem.Name = "AddKeyToolStripMenuItem"
-        Me.AddKeyToolStripMenuItem.Size = New System.Drawing.Size(310, 34)
+        Me.AddKeyToolStripMenuItem.Size = New System.Drawing.Size(305, 34)
         Me.AddKeyToolStripMenuItem.Text = "Add Key..."
         '
         'mnuTransformAndDefineAsTricot
@@ -5576,7 +5593,7 @@ Partial Class frmMain
         Me.splOverall.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splOverall.Panel2.Controls.Add(Me.splDataOutput)
         Me.splOverall.Size = New System.Drawing.Size(1200, 588)
-        Me.splOverall.SplitterDistance = 225
+        Me.splOverall.SplitterDistance = 222
         Me.splOverall.SplitterWidth = 10
         Me.splOverall.TabIndex = 10
         '
@@ -5597,7 +5614,7 @@ Partial Class frmMain
         '
         Me.splExtraWindows.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splExtraWindows.Panel2.Controls.Add(Me.ucrScriptWindow)
-        Me.splExtraWindows.Size = New System.Drawing.Size(1200, 225)
+        Me.splExtraWindows.Size = New System.Drawing.Size(1200, 222)
         Me.splExtraWindows.SplitterDistance = 360
         Me.splExtraWindows.SplitterWidth = 10
         Me.splExtraWindows.TabIndex = 0
@@ -5618,8 +5635,8 @@ Partial Class frmMain
         '
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
-        Me.splMetadata.Size = New System.Drawing.Size(360, 225)
-        Me.splMetadata.SplitterDistance = 93
+        Me.splMetadata.Size = New System.Drawing.Size(360, 222)
+        Me.splMetadata.SplitterDistance = 92
         Me.splMetadata.SplitterWidth = 10
         Me.splMetadata.TabIndex = 0
         '
@@ -5633,7 +5650,7 @@ Partial Class frmMain
         Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
         Me.ucrColumnMeta.Margin = New System.Windows.Forms.Padding(6, 10, 6, 10)
         Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        Me.ucrColumnMeta.Size = New System.Drawing.Size(93, 225)
+        Me.ucrColumnMeta.Size = New System.Drawing.Size(92, 222)
         Me.ucrColumnMeta.TabIndex = 0
         '
         'ucrDataFrameMeta
@@ -5644,7 +5661,7 @@ Partial Class frmMain
         Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataFrameMeta.Margin = New System.Windows.Forms.Padding(6, 10, 6, 10)
         Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(257, 225)
+        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(258, 222)
         Me.ucrDataFrameMeta.TabIndex = 0
         '
         'ucrScriptWindow
@@ -5655,7 +5672,7 @@ Partial Class frmMain
         Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
         Me.ucrScriptWindow.Margin = New System.Windows.Forms.Padding(6, 10, 6, 10)
         Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(830, 225)
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(830, 222)
         Me.ucrScriptWindow.strActiveTabText = ""
         Me.ucrScriptWindow.TabIndex = 2
         Me.ucrScriptWindow.Tag = "Script_Window"
@@ -5677,8 +5694,8 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
-        Me.splDataOutput.Size = New System.Drawing.Size(1200, 353)
-        Me.splDataOutput.SplitterDistance = 547
+        Me.splDataOutput.Size = New System.Drawing.Size(1200, 356)
+        Me.splDataOutput.SplitterDistance = 544
         Me.splDataOutput.SplitterWidth = 10
         Me.splDataOutput.TabIndex = 0
         '
@@ -5691,7 +5708,7 @@ Partial Class frmMain
         Me.ucrDataViewer.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataViewer.Margin = New System.Windows.Forms.Padding(6, 10, 6, 10)
         Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Size = New System.Drawing.Size(547, 353)
+        Me.ucrDataViewer.Size = New System.Drawing.Size(544, 356)
         Me.ucrDataViewer.TabIndex = 0
         Me.ucrDataViewer.Tag = "Data_View"
         '
@@ -5703,7 +5720,7 @@ Partial Class frmMain
         Me.ucrOutput.Location = New System.Drawing.Point(0, 0)
         Me.ucrOutput.Margin = New System.Windows.Forms.Padding(6, 10, 6, 10)
         Me.ucrOutput.Name = "ucrOutput"
-        Me.ucrOutput.Size = New System.Drawing.Size(643, 353)
+        Me.ucrOutput.Size = New System.Drawing.Size(646, 356)
         Me.ucrOutput.TabIndex = 0
         '
         'mnuPlotly
@@ -5746,24 +5763,6 @@ Partial Class frmMain
         Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
         Me.ToolStripMenuItem9.Size = New System.Drawing.Size(181, 26)
         Me.ToolStripMenuItem9.Text = "Correlations..."
-        '
-        'RowNumbersNamesToolStripMenuItem
-        '
-        Me.RowNumbersNamesToolStripMenuItem.Name = "RowNumbersNamesToolStripMenuItem"
-        Me.RowNumbersNamesToolStripMenuItem.Size = New System.Drawing.Size(305, 34)
-        Me.RowNumbersNamesToolStripMenuItem.Text = "Row Numbers/ Names..."
-        '
-        'RecodeFactorToolStripMenuItem
-        '
-        Me.RecodeFactorToolStripMenuItem.Name = "RecodeFactorToolStripMenuItem"
-        Me.RecodeFactorToolStripMenuItem.Size = New System.Drawing.Size(305, 34)
-        Me.RecodeFactorToolStripMenuItem.Text = "Recode Factor..."
-        '
-        'CombineFactorsToolStripMenuItem
-        '
-        Me.CombineFactorsToolStripMenuItem.Name = "CombineFactorsToolStripMenuItem"
-        Me.CombineFactorsToolStripMenuItem.Size = New System.Drawing.Size(305, 34)
-        Me.CombineFactorsToolStripMenuItem.Text = "Combine Factors..."
         '
         'frmMain
         '
