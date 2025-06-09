@@ -47,7 +47,9 @@ Public Class dlgClimaticBoxPlot
     Private clsYScaleDateFunction As New RFunction
 
     'Functions for Label CheckBox
-    Private clsLabelSummaryFunction, clsAesLabelFunction, clsGeomTextFunction As RFunction
+    Private clsRoundFunction, clsLabelAfterFunction, clsLabelSummaryFunction, clsAesLabelFunction, clsBoxplotStatFunction, clsIfFunction, clsLengthFunction As RFunction
+    'Label Outlier Operators
+    Private clsOpenBraquetOperator, clsSpaceOperator, clsBraquetOperator, clsSemiCommatOperator, clsDollardOperator, clsEqualOperator, clsAssigneOperator As ROperator
 
     Private strFacetWrap As String = "Facet Wrap"
     Private strFacetRow As String = "Facet Row"
@@ -229,7 +231,20 @@ Public Class dlgClimaticBoxPlot
         clsAsFactorFunction = New RFunction
         clsLabelSummaryFunction = New RFunction
         clsAesLabelFunction = New RFunction
-        clsGeomTextFunction = New RFunction
+
+        clsRoundFunction = New RFunction
+        clsLabelAfterFunction = New RFunction
+        clsLengthFunction = New RFunction
+        clsIfFunction = New RFunction
+        clsBoxplotStatFunction = New RFunction
+
+        clsBraquetOperator = New ROperator
+        clsSpaceOperator = New ROperator
+        clsDollardOperator = New ROperator
+        clsSemiCommatOperator = New ROperator
+        clsEqualOperator = New ROperator
+        clsAssigneOperator = New ROperator
+        clsOpenBraquetOperator = New ROperator
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetRowOp.SetOperation("+")
@@ -291,11 +306,57 @@ Public Class dlgClimaticBoxPlot
         clsLabelSummaryFunction.SetRCommand("stat_summary")
         clsLabelSummaryFunction.AddParameter("x", clsRFunctionParameter:=clsAesLabelFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsLabelSummaryFunction.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=1)
-        clsLabelSummaryFunction.AddParameter("fun", "\ (y) { o <- grDevices::boxplot.stats(y)$out; if(length(o) == 0) NA else o }", iPosition:=2)
+        clsLabelSummaryFunction.AddParameter("fun", clsROperatorParameter:=clsOpenBraquetOperator, iPosition:=2)
         clsLabelSummaryFunction.AddParameter("hjust", "-1", iPosition:=3)
 
+        clsOpenBraquetOperator.SetOperation("{")
+        clsOpenBraquetOperator.AddParameter("left", "\ (y)", iPosition:=0, bIncludeArgumentName:=False)
+        clsOpenBraquetOperator.AddParameter("right", clsROperatorParameter:=clsAssigneOperator, bIncludeArgumentName:=False, iPosition:=1)
+
+        clsAssigneOperator.SetOperation("<-")
+        clsAssigneOperator.AddParameter("left", "o", iPosition:=0, bIncludeArgumentName:=False)
+        clsAssigneOperator.AddParameter("right", clsROperatorParameter:=clsDollardOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsDollardOperator.SetOperation("$")
+        clsDollardOperator.AddParameter("left", clsRFunctionParameter:=clsBoxplotStatFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsDollardOperator.AddParameter("right", "out; if(length(o) == 0) NAN else o }", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsBoxplotStatFunction.SetPackageName("grDevices")
+        clsBoxplotStatFunction.SetRCommand("boxplot.stats")
+        clsBoxplotStatFunction.AddParameter("x", "y", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsSemiCommatOperator.SetOperation(";")
+        clsSemiCommatOperator.AddParameter("left", "out", iPosition:=0, bIncludeArgumentName:=False)
+        clsSemiCommatOperator.AddParameter("right", clsROperatorParameter:=clsSpaceOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsSpaceOperator.SetOperation("")
+        clsSpaceOperator.AddParameter("left", clsRFunctionParameter:=clsIfFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsSpaceOperator.AddParameter("right", clsROperatorParameter:=clsBraquetOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsIfFunction.SetRCommand("if")
+        clsIfFunction.AddParameter("x", clsROperatorParameter:=clsEqualOperator, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsEqualOperator.SetOperation("==")
+        clsEqualOperator.AddParameter("left", clsRFunctionParameter:=clsLengthFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsEqualOperator.AddParameter("right", "0", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsLengthFunction.SetRCommand("length")
+        clsLengthFunction.AddParameter("x", "o", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsBraquetOperator.SetOperation("}")
+        clsBraquetOperator.AddParameter("left", "NAN else o", iPosition:=0, bIncludeArgumentName:=False)
+        clsBraquetOperator.AddParameter("right", "", iPosition:=1, bIncludeArgumentName:=False)
+
         clsAesLabelFunction.SetRCommand("aes")
-        clsAesLabelFunction.AddParameter("label", "round(ggplot2::after_stat(y), 1)", iPosition:=0)
+        clsAesLabelFunction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=0)
+
+        clsRoundFunction.SetRCommand("round")
+        clsRoundFunction.AddParameter("x", clsRFunctionParameter:=clsLabelAfterFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsRoundFunction.AddParameter("y", "1", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsLabelAfterFunction.SetPackageName("ggplot2")
+        clsLabelAfterFunction.SetRCommand("after_stat")
+        clsLabelAfterFunction.AddParameter("x", "y", iPosition:=0, bIncludeArgumentName:=False)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
