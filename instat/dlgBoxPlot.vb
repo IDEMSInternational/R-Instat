@@ -432,7 +432,7 @@ Public Class dlgBoxplot
 
         clsDollardOperator.SetOperation("$")
         clsDollardOperator.AddParameter("left", clsRFunctionParameter:=clsBoxplotStatFunction, iPosition:=0, bIncludeArgumentName:=False)
-        clsDollardOperator.AddParameter("right", "out; if(length(o) == 0) NAN else o }", iPosition:=1, bIncludeArgumentName:=False)
+        clsDollardOperator.AddParameter("right", clsROperatorParameter:=clsSemiCommatOperator, iPosition:=1, bIncludeArgumentName:=False)
 
         clsBoxplotStatFunction.SetPackageName("grDevices")
         clsBoxplotStatFunction.SetRCommand("boxplot.stats")
@@ -457,7 +457,7 @@ Public Class dlgBoxplot
         clsLengthFunction.AddParameter("x", "o", iPosition:=0, bIncludeArgumentName:=False)
 
         clsBraquetOperator.SetOperation("}")
-        clsBraquetOperator.AddParameter("left", "NAN else o", iPosition:=0, bIncludeArgumentName:=False)
+        clsBraquetOperator.AddParameter("left", "NaN else o", iPosition:=0, bIncludeArgumentName:=False)
         clsBraquetOperator.AddParameter("right", "", iPosition:=1, bIncludeArgumentName:=False)
 
         clsAesLabelFunction.SetRCommand("aes")
