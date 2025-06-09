@@ -105,6 +105,7 @@ Public Class dlgMakeDate
         ucrInputComboBoxMonthTwo.SetItems(dctMonthTwoItems)
         ucrInputComboBoxMonthTwo.SetDropDownStyleAsNonEditable()
 
+        dctDateFormat.Add("Year(4-digit).Month.Day", Chr(34) & "%Y.%m.%d" & Chr(34))
         dctDateFormat.Add("Year(4-digit)-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34))
         dctDateFormat.Add("Year(4-digit)/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34))
         dctDateFormat.Add("Year(4-digit)-Month(Full Name)-Day", Chr(34) & "%Y-%B-%d" & Chr(34))
