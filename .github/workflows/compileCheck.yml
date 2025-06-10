@@ -15,7 +15,7 @@ jobs:
         configuration: [Debug, Release]
 
     # running on 2019 so that .NET version 4.5 and lower can be used
-    runs-on: windows-2022 
+    runs-on: windows-2019
     
     # set variables
     env:
