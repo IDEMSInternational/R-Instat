@@ -17,7 +17,7 @@
 Imports instat.Translations
 
 Public Class sdgTableOptions
-
+    Private lstFormatRFunctions As New List(Of RFunction)
     Private clsOperator As ROperator
     Private clsThemeRFunction, clsSubMissingRFunction As RFunction
     Private bFirstload As Boolean = True
@@ -46,7 +46,7 @@ Public Class sdgTableOptions
 
         ucrChkDataFormat.SetText("Specify the Data Format")
         ucrChkMissingValues.SetText("Replace NA")
-        ucrChkDataFormat.Enabled = False
+        ucrChkDataFormat.Enabled = True
         grpMissingValues.Visible = False
         btnNumberFormat.Visible = False
         btnDateFormat.Visible = False
@@ -89,6 +89,7 @@ Public Class sdgTableOptions
         sdgTableStyles.GetNewUserInputAsRFunction()
         SetupTheme(clsOperator)
         SetupSubMissing(clsOperator)
+        SetupFormatFunctions(clsOperator)
     End Sub
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
@@ -102,6 +103,7 @@ Public Class sdgTableOptions
 
         SetThemeValuesOnReturn(clsOperator)
         SetSubMissingValuesOnReturn(clsOperator)
+        SetFormatFunctionsOnReturn(clsOperator)
     End Sub
 
 
@@ -124,12 +126,17 @@ Public Class sdgTableOptions
         If ucrChkDataFormat.Checked Then
             ucrPnlFormat.Visible = True
             rdoNumber.Visible = True
+            rdoNumber.Checked = True
             rdoDate.Visible = True
             rdoText.Visible = True
         Else
             rdoNumber.Visible = False
             rdoDate.Visible = False
             rdoText.Visible = False
+            btnDateFormat.Visible = False
+            btnNumberFormat.Visible = False
+            btnTextFormat.Visible = False
+            lstFormatRFunctions.Clear()
         End If
 
     End Sub
@@ -158,6 +165,7 @@ Public Class sdgTableOptions
         Else
             btnTextFormat.Visible = False
         End If
+        lstFormatRFunctions.Clear()
     End Sub
 
 
@@ -235,7 +243,10 @@ Public Class sdgTableOptions
         clsFormatRFunction = sdgCellFormatTextOptions.GetNewUserInputAsRFunction()
         If clsFormatRFunction Is Nothing Then
             Exit Sub
+        Else
+            lstFormatRFunctions.Add(clsFormatRFunction)
         End If
+
     End Sub
 
     Private Sub btnDateFormat_Click(sender As Object, e As EventArgs) Handles btnDateFormat.Click
@@ -244,6 +255,8 @@ Public Class sdgTableOptions
         clsFormatRFunction = sdgCellFormatDateOptions.GetNewUserInputAsRFunction()
         If clsFormatRFunction Is Nothing Then
             Exit Sub
+        Else
+            lstFormatRFunctions.Add(clsFormatRFunction)
         End If
     End Sub
 
@@ -254,7 +267,10 @@ Public Class sdgTableOptions
 
         If clsFormatRFunction Is Nothing Then
             Exit Sub
+        Else
+            lstFormatRFunctions.Add(clsFormatRFunction)
         End If
+
     End Sub
 
     Private Sub SetupSubMissing(clsOperator As ROperator)
@@ -290,6 +306,36 @@ Public Class sdgTableOptions
 
     Private Sub ucrTxtMissingText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTxtMissingText.ControlValueChanged
         UpdateSubMissingParam(ucrTxtMissingText.GetText())
+    End Sub
+
+    Private Sub SetupFormatFunctions(clsOperator As ROperator)
+        lstFormatRFunctions.Clear()
+
+        Dim clsFormatParams = clsTablesUtils.FindRFunctionsParamsWithRCommand(
+        {"fmt", "fmt_units", "fmt_number", "fmt_currency"}, clsOperator)
+
+        For Each clsParam In clsFormatParams
+            Dim clsFunc As RFunction = clsParam.clsArgumentCodeStructure
+            If clsFunc IsNot Nothing Then
+                lstFormatRFunctions.Add(clsFunc)
+            End If
+        Next
+    End Sub
+
+    Private Sub SetFormatFunctionsOnReturn(clsOperator As ROperator)
+
+        clsTablesUtils.RemoveRFunctionsParamsWithRCommand(
+        {"fmt", "fmt_units", "fmt_number", "fmt_currency"}, clsOperator)
+
+        ' Add new
+        For i = 0 To lstFormatRFunctions.Count - 1
+            Dim clsFunc = lstFormatRFunctions(i)
+            Dim strParamName = "fmt_param" & (i + 1)
+
+            Dim clsParam As New RParameter(strParamName, clsFunc, bNewIncludeArgumentName:=False)
+            clsOperator.AddParameter(strParameterName:=strParamName, clsRFunctionParameter:=clsFunc)
+
+        Next
     End Sub
     '-----------------------------------------
 

@@ -46,7 +46,7 @@ Public Class sdgBeforeTablesOption
 
         ucrChkDataFormat.SetText("Specify the Data Format")
         ucrChkMissingValues.SetText("Replace NA")
-        ucrChkDataFormat.Enabled = False
+        ucrChkDataFormat.Enabled = True
         grpMissingValues.Visible = False
         btnNumberFormat.Visible = False
         btnDateFormat.Visible = False
@@ -93,6 +93,7 @@ Public Class sdgBeforeTablesOption
         ucrOtherStyles.SetValuesToOperator()
         SetThemeValuesOnReturn(clsOperator)
         SetSubMissingValuesOnReturn(clsOperator)
+        SetFormatFunctionsOnReturn(clsOperator)
     End Sub
 
     '-----------------------------------------
@@ -170,12 +171,17 @@ Public Class sdgBeforeTablesOption
         If ucrChkDataFormat.Checked Then
             ucrPnlFormat.Visible = True
             rdoNumber.Visible = True
+            rdoNumber.Checked = True
             rdoDate.Visible = True
             rdoText.Visible = True
         Else
             rdoNumber.Visible = False
             rdoDate.Visible = False
             rdoText.Visible = False
+            btnDateFormat.Visible = False
+            btnNumberFormat.Visible = False
+            btnTextFormat.Visible = False
+            lstFormatRFunctions.Clear()
         End If
 
     End Sub
@@ -287,7 +293,6 @@ Public Class sdgBeforeTablesOption
 
     Private Sub ucrTxtMissingText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrTxtMissingText.ControlValueChanged
         UpdateSubMissingParam(ucrTxtMissingText.GetText())
-
     End Sub
 
     Private Sub SetupFormatFunctions(clsOperator As ROperator)
