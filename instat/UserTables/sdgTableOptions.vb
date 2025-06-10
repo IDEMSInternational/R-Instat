@@ -334,7 +334,6 @@ Public Class sdgTableOptions
 
             Dim clsParam As New RParameter(strParamName, clsFunc, bNewIncludeArgumentName:=False)
             clsOperator.AddParameter(strParameterName:=strParamName, clsRFunctionParameter:=clsFunc)
-
         Next
     End Sub
     '-----------------------------------------
