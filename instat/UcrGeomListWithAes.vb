@@ -291,7 +291,11 @@ Public Class ucrGeomListWithParameters
         'Question to be discussed: are we happy with this ? We don't want it to be the opposite, i.e. the global data frame to be changed when apply on all layers is ticked ? Would then need to "reset the global aes function"... See issue on github... All this should be revised when linking is studied.
         ucrGeomWithAesSelector.SetDataframe(strGlobalDataFrame, (Not ucrChkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
         'Warning: the dataframe needs to be set first. Indeed, this will enable IgnoreGlobalAes in the "datafram_changed" sub. In the same sub, Ignore global aes will be unticked and thus setAes called. If not done in this order, Ignore global aes is unticked below before the check box has been enabled and thus the event IngnoreGlobalAes.check.changed is not raised, and set aes never called.
-
+        If ucrChkApplyOnAllLayers.Checked Then
+            ucrChkIgnoreGlobalAes.Checked = False
+        Else
+            ucrChkIgnoreGlobalAes.Show()
+        End If
         ucrChkIgnoreGlobalAes.Show()
 
         SetReceiverColour()
