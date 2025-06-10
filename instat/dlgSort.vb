@@ -45,7 +45,6 @@ Public Class dlgSort
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 339
-        grpMissingValues.Enabled = False ' temporary
 
         'Add dataframe paramater
         ucrSelectForSort.SetParameter(New RParameter("data_name", 0))
@@ -64,10 +63,10 @@ Public Class dlgSort
         ucrPnlOrder.SetRDefault("FALSE")
 
         ''Currently Disabled
-        'ucrPnlMissingValues.SetParameter(New RParameter("na.last", 3))
-        'ucrPnlMissingValues.AddRadioButton(rdoFirst, "FALSE")
-        'ucrPnlMissingValues.AddRadioButton(rdoLast, "TRUE")
-        'ucrPnlMissingValues.SetRDefault("TRUE")
+        ucrPnlMissingValues.SetParameter(New RParameter("na.last", 3))
+        ucrPnlMissingValues.AddRadioButton(rdoFirst, "FALSE")
+        ucrPnlMissingValues.AddRadioButton(rdoLast, "TRUE")
+        ucrPnlMissingValues.SetRDefault("TRUE")
         ucrPnlMissingValues.bAllowNonConditionValues = True
     End Sub
 
@@ -120,5 +119,4 @@ Public Class dlgSort
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSort.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 End Class

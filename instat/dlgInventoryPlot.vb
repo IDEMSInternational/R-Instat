@@ -26,7 +26,7 @@ Public Class dlgInventoryPlot
     Private clsCumulativeInventoryFunction As New RFunction
     Private clsDummyFunction As New RFunction
     Private clsDataFrameFunction As New RFunction
-    Private bResetSubdialog As Boolean = True
+    Private bResetSubdialog As Boolean = False
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -195,11 +195,12 @@ Public Class dlgInventoryPlot
         clsCumulativeInventoryFunction = New RFunction
         clsDataFrameFunction = New RFunction
 
+        bResetSubdialog = True
+
         ucrInventoryPlotSelector.Reset()
         ucrReceiverElements.SetMeAsReceiver()
         ucrSaveGraph.Reset()
         ucrSaveDetails.Reset()
-        bResetSubdialog = True
 
         clsDummyFunction.AddParameter("checked", "graph", iPosition:=0)
         clsDummyFunction.AddParameter("summary", "True", iPosition:=1)
@@ -310,11 +311,11 @@ Public Class dlgInventoryPlot
 
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs)
-        'there needs to be work on sdgplots before this could be linked 
-        'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        'sdgPlots.ShowDialog()
-    End Sub
+    'Private Sub cmdOptions_Click(sender As Object, e As EventArgs)
+    '    'there needs to be work on sdgplots before this could be linked 
+    '    'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+    '    'sdgPlots.ShowDialog()
+    'End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -413,4 +414,9 @@ Public Class dlgInventoryPlot
         End If
     End Sub
 
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgInventoryOptions.SetRCode(clsNewInventoryFunction:=clsInventoryPlot, bReset:=bResetSubdialog)
+        sdgInventoryOptions.ShowDialog()
+        bResetSubdialog = False
+    End Sub
 End Class
