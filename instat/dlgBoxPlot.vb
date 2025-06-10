@@ -420,7 +420,7 @@ Public Class dlgBoxplot
         clsLabelSummaryFunction.AddParameter("x", clsRFunctionParameter:=clsAesLabelFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsLabelSummaryFunction.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=1)
         clsLabelSummaryFunction.AddParameter("fun", clsROperatorParameter:=clsOpenBraquetOperator, iPosition:=2)
-        clsLabelSummaryFunction.AddParameter("hjust", "-1", iPosition:=3)
+        clsLabelSummaryFunction.AddParameter("hjust", "-0.2", iPosition:=3)
 
         clsOpenBraquetOperator.SetOperation("{")
         clsOpenBraquetOperator.AddParameter("left", "\ (y)", iPosition:=0, bIncludeArgumentName:=False)
