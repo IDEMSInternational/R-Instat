@@ -387,6 +387,8 @@ Public Class dlgClimaticBoxPlot
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeUpdated = False
+        ucrNudOutlierCoefficient.AddAdditionalCodeParameterPair(clsBoxplotStatFunction, New RParameter("coef", 1), iAdditionalPairNo:=1)
+
         ucrSavePlot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorClimaticBoxPlot.SetRCode(clsFilteredDataOperator, bReset)
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
@@ -677,4 +679,17 @@ Public Class dlgClimaticBoxPlot
         AddRemoveFacets()
     End Sub
 
+    Private Sub ucrNudOutlierCoefficient_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudOutlierCoefficient.ControlValueChanged, ucrChkLabel.ControlValueChanged
+        If clsBoxplotStatFunction IsNot Nothing Then
+            If ucrChkLabel.Checked Then
+                If Not ucrNudOutlierCoefficient.IsEmpty Then
+                    clsBoxplotStatFunction.AddParameter("coef", ucrNudOutlierCoefficient.GetText(), iPosition:=1)
+                Else
+                    clsBoxplotStatFunction.RemoveParameterByName("coef")
+                End If
+            Else
+                clsBoxplotStatFunction.RemoveParameterByName("coef")
+            End If
+        End If
+    End Sub
 End Class
