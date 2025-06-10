@@ -77,6 +77,11 @@ Public Class dlgBoxplot
     Private clsPipeOperator As New ROperator
     Private clsGroupByFunction As New RFunction
 
+    'Functions for Label CheckBox
+    Private clsRoundFunction, clsLabelAfterFunction, clsLabelSummaryFunction, clsAesLabelFunction, clsBoxplotStatFunction, clsIfFunction, clsLengthFunction As RFunction
+    'Label Outlier Operators
+    Private clsOpenBraquetOperator, clsSpaceOperator, clsBraquetOperator, clsSemiCommatOperator, clsDollardOperator, clsEqualOperator, clsAssigneOperator As ROperator
+
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
     Private ReadOnly strFacetCol As String = "Facet Column"
@@ -89,7 +94,8 @@ Public Class dlgBoxplot
     Private strFirstParameterName As String = "geomfunc"
     Private strStatSummaryParameterName As String = "stat_summary"
     Private strAdditionalPointsParameterName As String = "add_jitter"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strStatSummaryParameterName, strAdditionalPointsParameterName}
+    Private strLabelOutierParameterName As String = "stat_summary"
+    Private strGeomParameterNames() As String = {strFirstParameterName, strLabelOutierParameterName, strStatSummaryParameterName, strAdditionalPointsParameterName}
 
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -259,8 +265,14 @@ Public Class dlgBoxplot
         ucrChkGrouptoConnect.AddParameterPresentCondition(True, strStatSummaryParameterName, True)
         ucrChkGrouptoConnect.AddParameterPresentCondition(False, strStatSummaryParameterName, False)
         'this control exists but diabled for now
+
+        ucrChkLabel.SetText("Label Outliers")
+        ucrChkLabel.AddParameterPresentCondition(True, strLabelOutierParameterName, True)
+        ucrChkLabel.AddParameterPresentCondition(False, strLabelOutierParameterName, False)
+
         DialogueSize()
         HideShowWidth()
+        EnableGeomText()
     End Sub
 
     Private Sub SetDefaults()
@@ -289,6 +301,22 @@ Public Class dlgBoxplot
         clsJitterplotFunction = New RFunction
         clsViolinplotFunction = New RFunction
         clsSummaryFunction = New RFunction
+        clsLabelSummaryFunction = New RFunction
+        clsAesLabelFunction = New RFunction
+        clsRoundFunction = New RFunction
+        clsLabelAfterFunction = New RFunction
+        clsLengthFunction = New RFunction
+        clsIfFunction = New RFunction
+        clsBoxplotStatFunction = New RFunction
+
+        clsBoxplotFunction = New RFunction
+        clsBraquetOperator = New ROperator
+        clsSpaceOperator = New ROperator
+        clsDollardOperator = New ROperator
+        clsSemiCommatOperator = New ROperator
+        clsEqualOperator = New ROperator
+        clsAssigneOperator = New ROperator
+        clsOpenBraquetOperator = New ROperator
 
         clsAddedJitterFunc.Clear()
 
@@ -387,6 +415,62 @@ Public Class dlgBoxplot
         clsGroupByFunction.SetPackageName("dplyr")
         clsGroupByFunction.SetRCommand("group_by")
 
+        clsLabelSummaryFunction.SetPackageName("ggplot2")
+        clsLabelSummaryFunction.SetRCommand("stat_summary")
+        clsLabelSummaryFunction.AddParameter("x", clsRFunctionParameter:=clsAesLabelFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsLabelSummaryFunction.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=1)
+        clsLabelSummaryFunction.AddParameter("fun", clsROperatorParameter:=clsOpenBraquetOperator, iPosition:=2)
+        clsLabelSummaryFunction.AddParameter("hjust", "-0.2", iPosition:=3)
+
+        clsOpenBraquetOperator.SetOperation("{")
+        clsOpenBraquetOperator.AddParameter("left", "\ (y)", iPosition:=0, bIncludeArgumentName:=False)
+        clsOpenBraquetOperator.AddParameter("right", clsROperatorParameter:=clsAssigneOperator, bIncludeArgumentName:=False, iPosition:=1)
+
+        clsAssigneOperator.SetOperation("<-")
+        clsAssigneOperator.AddParameter("left", "o", iPosition:=0, bIncludeArgumentName:=False)
+        clsAssigneOperator.AddParameter("right", clsROperatorParameter:=clsDollardOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsDollardOperator.SetOperation("$")
+        clsDollardOperator.AddParameter("left", clsRFunctionParameter:=clsBoxplotStatFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsDollardOperator.AddParameter("right", clsROperatorParameter:=clsSemiCommatOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsBoxplotStatFunction.SetPackageName("grDevices")
+        clsBoxplotStatFunction.SetRCommand("boxplot.stats")
+        clsBoxplotStatFunction.AddParameter("x", "y", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsSemiCommatOperator.SetOperation(";")
+        clsSemiCommatOperator.AddParameter("left", "out", iPosition:=0, bIncludeArgumentName:=False)
+        clsSemiCommatOperator.AddParameter("right", clsROperatorParameter:=clsSpaceOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsSpaceOperator.SetOperation("")
+        clsSpaceOperator.AddParameter("left", clsRFunctionParameter:=clsIfFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsSpaceOperator.AddParameter("right", clsROperatorParameter:=clsBraquetOperator, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsIfFunction.SetRCommand("if")
+        clsIfFunction.AddParameter("x", clsROperatorParameter:=clsEqualOperator, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsEqualOperator.SetOperation("==")
+        clsEqualOperator.AddParameter("left", clsRFunctionParameter:=clsLengthFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsEqualOperator.AddParameter("right", "0", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsLengthFunction.SetRCommand("length")
+        clsLengthFunction.AddParameter("x", "o", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsBraquetOperator.SetOperation("}")
+        clsBraquetOperator.AddParameter("left", "NaN else o", iPosition:=0, bIncludeArgumentName:=False)
+        clsBraquetOperator.AddParameter("right", "", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsAesLabelFunction.SetRCommand("aes")
+        clsAesLabelFunction.AddParameter("label", clsRFunctionParameter:=clsRoundFunction, iPosition:=0)
+
+        clsRoundFunction.SetRCommand("round")
+        clsRoundFunction.AddParameter("x", clsRFunctionParameter:=clsLabelAfterFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsRoundFunction.AddParameter("y", "1", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsLabelAfterFunction.SetPackageName("ggplot2")
+        clsLabelAfterFunction.SetRCommand("after_stat")
+        clsLabelAfterFunction.AddParameter("x", "y", iPosition:=0, bIncludeArgumentName:=False)
+
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
@@ -435,6 +519,7 @@ Public Class dlgBoxplot
         ucrInputWidth.SetRCode(clsCutWitdhFunction, bReset)
         ucrNudBoxPlot.SetRCode(clsGeomBoxPlotFunction, bReset)
         If bReset Then
+            ucrChkLabel.SetRCode(clsLabelSummaryFunction)
             AutoFacetStation()
             ucrChkBoxPlot.SetRCode(clsDummyFunction, bReset)
             ucrChkWidth.SetRCode(clsDummyFunction, bReset)
@@ -603,24 +688,36 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub DialogueSize()
-        If rdoBoxplotTufte.Checked OrElse rdoViolin.Checked Then
-            Me.Size = New Size(441, 536)
-            Me.ucrChkLegend.Location = New Size(10, 388)
-            Me.ucrInputLegendPosition.Location = New Size(105, 390)
-            Me.ucrInputStation.Location = New Size(335, 390)
-            Me.ucr1stFactorReceiver.Location = New Size(222, 391)
-            Me.lblFacetBy.Location = New Size(222, 376)
-            Me.ucrSaveBoxplot.Location = New Point(10, 418)
-            Me.ucrBase.Location = New Point(10, 442)
+        If rdoBoxplotTufte.Checked Then
+            Me.Size = New Size(441, 530)
+            Me.ucrChkLegend.Location = New Size(10, 383)
+            Me.ucrInputLegendPosition.Location = New Size(105, 383)
+            Me.ucrInputStation.Location = New Size(335, 383)
+            Me.ucr1stFactorReceiver.Location = New Size(222, 384)
+            Me.lblFacetBy.Location = New Size(222, 388)
+            Me.ucrSaveBoxplot.Location = New Point(10, 410)
+            Me.ucrBase.Location = New Point(10, 435)
+            Me.ucrChkLabel.Location = New Point(10, 334)
+        ElseIf rdoViolin.Checked Then
+            Me.Size = New Size(441, 557)
+            Me.ucrChkLegend.Location = New Size(10, 412)
+            Me.ucrInputLegendPosition.Location = New Size(105, 412)
+            Me.ucrInputStation.Location = New Size(335, 412)
+            Me.ucr1stFactorReceiver.Location = New Size(222, 413)
+            Me.lblFacetBy.Location = New Size(222, 400)
+            Me.ucrSaveBoxplot.Location = New Point(10, 439)
+            Me.ucrBase.Location = New Point(10, 466)
+            Me.ucrChkLabel.Location = New Point(10, 383)
         Else
             Me.Size = New Size(441, 500)
-            Me.ucrChkLegend.Location = New Size(10, 358)
+            Me.ucrChkLegend.Location = New Size(10, 360)
             Me.ucrInputLegendPosition.Location = New Size(105, 360)
             Me.ucrInputStation.Location = New Size(335, 360)
             Me.ucr1stFactorReceiver.Location = New Size(222, 361)
             Me.lblFacetBy.Location = New Size(222, 346)
             Me.ucrSaveBoxplot.Location = New Point(10, 390)
             Me.ucrBase.Location = New Point(10, 415)
+            Me.ucrChkLabel.Location = New Point(10, 310)
         End If
     End Sub
 
@@ -878,5 +975,22 @@ Public Class dlgBoxplot
 
     Private Sub ucrSecondFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSecondFactorReceiver.ControlValueChanged
         AddRemoveAesParm()
+    End Sub
+
+    Private Sub ToolStripMenuItemTextOptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTextOptions.Click
+        openSdgLayerOptions(clsLabelSummaryFunction)
+    End Sub
+
+    Private Sub EnableGeomText()
+        ToolStripMenuItemTextOptions.Enabled = ucrChkLabel.Checked
+    End Sub
+
+    Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged
+        If ucrChkLabel.Checked Then
+            clsBaseOperator.AddParameter("label", clsRFunctionParameter:=clsLabelSummaryFunction, bIncludeArgumentName:=False)
+        Else
+            clsBaseOperator.RemoveParameterByName("label")
+        End If
+        EnableGeomText()
     End Sub
 End Class
