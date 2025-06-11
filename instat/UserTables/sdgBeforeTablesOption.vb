@@ -44,8 +44,8 @@ Public Class sdgBeforeTablesOption
         ucrChkSelectTheme.SetText("Select Theme")
         ucrChkManualTheme.SetText("Manual Theme")
 
-        ucrChkDataFormat.SetText("Specify the Data Format")
-        ucrChkMissingValues.SetText("Replace NA")
+        ucrChkDataFormat.SetText("Format the Data:")
+        ucrChkMissingValues.SetText("Replace NA:")
         ucrChkDataFormat.Enabled = True
         grpMissingValues.Visible = False
         btnNumberFormat.Visible = False
