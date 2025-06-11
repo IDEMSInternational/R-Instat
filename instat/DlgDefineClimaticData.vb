@@ -74,24 +74,16 @@ Public Class DlgDefineClimaticData
         lstReceivers.AddRange({ucrReceiverCloudCover, ucrReceiverDay, ucrReceiverMaxTemp, ucrReceiverMinTemp, ucrReceiverMonth, ucrReceiverRadiation,
                               ucrReceiverRain, ucrReceiverStation, ucrReceiverAltitude, ucrReceiverLatitude, ucrReceiverLongitude, ucrReceiverSunshine, ucrReceiverDiscrit,
                               ucrReceiverWindDirection, ucrReceiverWindSpeed, ucrReceiverYear, ucrReceiverDOY, ucrReceiverDate, ucrReceiverMinRH, ucrReceiverMaxRH})
-        lstNewReceivers.AddRange({ucrReceiverStationMeta, ucrReceiverAltMeta, ucrReceiverLatMeta, ucrReceiverLonMeta, ucrReceiverDiscritMeta})
 
         ucrSelectorDefineClimaticData.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDefineClimaticData.SetParameterIsString()
-        ucrSelectorLinkedDataFrame.SetParameter(New RParameter("data_name", 1))
-        ucrSelectorLinkedDataFrame.SetParameterIsString()
         ucrReceiverDate.Tag = "date"
         ucrReceiverCloudCover.Tag = "cloud_cover"
         ucrReceiverStation.Tag = "station"
         ucrReceiverAltitude.Tag = "alt"
         ucrReceiverLongitude.Tag = "lon"
         ucrReceiverLatitude.Tag = "lat"
-        ucrReceiverStationMeta.Tag = "station"
-        ucrReceiverDiscritMeta.Tag = "district"
         ucrReceiverDiscrit.Tag = "district"
-        ucrReceiverAltMeta.Tag = "alt"
-        ucrReceiverLonMeta.Tag = "lon"
-        ucrReceiverLatMeta.Tag = "lat"
         ucrReceiverMaxTemp.Tag = "temp_max"
         ucrReceiverMinTemp.Tag = "temp_min"
         ucrReceiverRadiation.Tag = "radiation"
@@ -109,7 +101,6 @@ Public Class DlgDefineClimaticData
 
         ucrReceiverDate.SetIncludedDataTypes({"Date"})
         SetRSelector()
-        NewSetRSelector()
 
         ucrChkLinkedMetaData.SetText("Linked Meta Data")
         ucrChkLinkedMetaData.SetParameter(New RParameter("check", 0))
@@ -129,9 +120,6 @@ Public Class DlgDefineClimaticData
 
         ucrInputCheckInput.Reset()
         ucrReceiverDate.SetMeAsReceiver()
-
-        ucrSelectorLinkedDataFrame.Visible = False
-        grpMeta.Visible = False
 
         ucrChkLinkedMetaData.SetParameter(New RParameter("y", 0))
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
@@ -168,7 +156,6 @@ Public Class DlgDefineClimaticData
     Private Sub SetRCodeForControls(bReset As Boolean)
         If bReset Then
             ucrSelectorDefineClimaticData.SetRCode(clsDefaultFunction, bReset)
-            ucrSelectorLinkedDataFrame.SetRCode(clsNewDefautFunction, bReset)
         End If
 
         SetRCodesforReceivers(bReset)
@@ -212,16 +199,6 @@ Public Class DlgDefineClimaticData
         Next
     End Sub
 
-    Private Sub NewSetRSelector()
-        Dim ucrTempReceiver As ucrReceiver
-        For Each ucrTempReceiver In lstNewReceivers
-            ucrTempReceiver.SetParameter(New RParameter(ucrTempReceiver.Tag))
-            ucrTempReceiver.Selector = ucrSelectorLinkedDataFrame
-            ucrTempReceiver.SetParameterIsString()
-            ucrTempReceiver.bExcludeFromSelector = True
-        Next
-    End Sub
-
     Private Sub AutoFillReceivers()
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver
@@ -256,42 +233,7 @@ Public Class DlgDefineClimaticData
         End If
     End Sub
 
-    Private Sub NewAutoFillReceivers()
-        Dim lstRecognisedValues As List(Of String)
-        Dim ucrCurrentReceiver As ucrReceiver
-        Dim bFound As Boolean = False
 
-        If ucrChkLinkedMetaData.Checked Then
-            ucrCurrentReceiver = ucrSelectorLinkedDataFrame.CurrentReceiver
-            Dim strData As String = ucrSelectorLinkedDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-
-            For Each ucrTempReceiver As ucrReceiver In lstNewReceivers
-                ucrTempReceiver.SetMeAsReceiver()
-                lstRecognisedValues = GetNewRecognisedValues(ucrTempReceiver.Tag)
-
-                If lstRecognisedValues.Count > 0 Then
-                    For Each lviTempVariable As ListViewItem In ucrSelectorLinkedDataFrame.lstAvailableVariable.Items
-                        Dim strClimaticType As String = GetClimaticTypeFromRCommand(lviTempVariable.Text, strData)
-                        For Each strValue As String In lstRecognisedValues
-                            If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) OrElse (strClimaticType IsNot Nothing AndAlso strClimaticType.Contains(strValue)) Then
-                                ucrTempReceiver.Add(lviTempVariable.Text, strData)
-                                bFound = True
-                                Exit For
-                            End If
-                        Next
-                        If bFound Then
-                            bFound = False
-                            Exit For
-                        End If
-                    Next
-                End If
-            Next
-
-            If ucrCurrentReceiver IsNot Nothing Then
-                ucrCurrentReceiver.SetMeAsReceiver()
-            End If
-        End If
-    End Sub
 
     Private Function GetClimaticTypeFromRCommand(strName As String, strDataName As String) As String
         Try
@@ -322,18 +264,6 @@ Public Class DlgDefineClimaticData
         Dim lstValues As New List(Of String)
 
         For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
-            If kvpTemp.Key = strVariable Then
-                lstValues = kvpTemp.Value
-                Exit For
-            End If
-        Next
-        Return lstValues
-    End Function
-
-    Private Function GetNewRecognisedValues(strVariable As String) As List(Of String)
-        Dim lstValues As New List(Of String)
-
-        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstNewRecognisedTypes
             If kvpTemp.Key = strVariable Then
                 lstValues = kvpTemp.Value
                 Exit For
@@ -405,32 +335,7 @@ Public Class DlgDefineClimaticData
         AutoFillReceivers()
     End Sub
 
-    Private Sub ucrSelectorLinkedDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLinkedDataFrame.ControlValueChanged, ucrChkLinkedMetaData.ControlValueChanged
-        clsGetColFunction.AddParameter("data_name", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34), iPosition:=1)
-        NewAutoFillReceivers()
-    End Sub
-
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrChkLinkedMetaData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLinkedMetaData.ControlValueChanged, ucrReceiverAltMeta.ControlValueChanged, ucrReceiverLatMeta.ControlValueChanged, ucrReceiverLonMeta.ControlValueChanged, ucrReceiverStationMeta.ControlValueChanged, ucrReceiverDiscritMeta.ControlValueChanged
-        If ucrChkLinkedMetaData.Checked Then
-            ucrSelectorLinkedDataFrame.Visible = True
-            grpMeta.Visible = True
-            grpStation.Visible = False
-            ucrBase.clsRsyntax.AddToAfterCodes(clsNewDefautFunction, iPosition:=0)
-            clsNewDefautFunction.iCallType = 2
-        Else
-            ucrSelectorLinkedDataFrame.Visible = False
-            grpMeta.Visible = False
-            grpStation.Visible = True
-            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsNewDefautFunction)
-        End If
-        If Not ucrReceiverStationMeta.IsEmpty Then
-            clsNewConcFunction.AddParameter("x1", ucrReceiverStationMeta.GetVariableNames, bIncludeArgumentName:=False)
-        Else
-            clsNewConcFunction.RemoveParameterByName("x1")
-        End If
     End Sub
 End Class
