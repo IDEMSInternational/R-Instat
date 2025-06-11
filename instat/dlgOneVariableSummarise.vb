@@ -22,6 +22,7 @@ Public Class dlgOneVariableSummarise
         Prepare
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private bFirstLoad As Boolean = True
@@ -273,6 +274,8 @@ Public Class dlgOneVariableSummarise
                 ucrBase.iHelpTopicID = 410
             Case OnevariableMode.Climatic
                 ucrBase.iHelpTopicID = 615
+            Case OnevariableMode.Tricot
+                ucrBase.iHelpTopicID = 735
         End Select
     End Sub
 
