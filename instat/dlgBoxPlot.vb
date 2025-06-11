@@ -526,7 +526,6 @@ Public Class dlgBoxplot
         ucrChkTufte.SetRCode(clsCurrGeomFunction, bReset)
         ucrInputWidth.SetRCode(clsCutWitdhFunction, bReset)
         ucrNudBoxPlot.SetRCode(clsGeomBoxPlotFunction, bReset)
-        ucrNudOutlierCoefficient.SetRCode(clsBoxplotFunction, bReset)
         If bReset Then
             ucrNudOutlierCoefficient.SetRCode(clsBoxplotFunction, bReset)
             ucrChkLabel.SetRCode(clsLabelSummaryFunction)
