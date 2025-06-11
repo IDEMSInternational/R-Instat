@@ -132,7 +132,7 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
         ucrPnlPlots.AddToLinkedControls({ucrChkAddPoints}, {rdoBoxplotTufte, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlPlots.AddToLinkedControls({ucrChkTufte}, {rdoBoxplotTufte}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrChkTufte, ucrChkLabel}, {rdoBoxplotTufte}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTufte.AddToLinkedControls(ucrChkVarWidth, {"FALSE"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPlots.AddToLinkedControls(ucrChkBoxPlot, {rdoJitter, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -270,6 +270,13 @@ Public Class dlgBoxplot
         ucrChkLabel.AddParameterPresentCondition(True, strLabelOutierParameterName, True)
         ucrChkLabel.AddParameterPresentCondition(False, strLabelOutierParameterName, False)
 
+        ucrNudOutlierCoefficient.SetParameter(New RParameter("coef", iNewPosition:=1))
+        ucrNudOutlierCoefficient.DecimalPlaces = 1
+        ucrNudOutlierCoefficient.Increment = 0.1
+        ucrNudOutlierCoefficient.SetRDefault(1.5)
+
+        ucrNudOutlierCoefficient.SetLinkedDisplayControl(lblOutlierCoefficient)
+
         DialogueSize()
         HideShowWidth()
         EnableGeomText()
@@ -309,7 +316,6 @@ Public Class dlgBoxplot
         clsIfFunction = New RFunction
         clsBoxplotStatFunction = New RFunction
 
-        clsBoxplotFunction = New RFunction
         clsBraquetOperator = New ROperator
         clsSpaceOperator = New ROperator
         clsDollardOperator = New ROperator
@@ -496,6 +502,8 @@ Public Class dlgBoxplot
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrNudOutlierCoefficient.AddAdditionalCodeParameterPair(clsBoxplotStatFunction, New RParameter("coef", 1), iAdditionalPairNo:=1)
+
         ucrSaveBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorBoxPlot.SetRCode(clsRggplotFunction, bReset)
 
@@ -518,7 +526,9 @@ Public Class dlgBoxplot
         ucrChkTufte.SetRCode(clsCurrGeomFunction, bReset)
         ucrInputWidth.SetRCode(clsCutWitdhFunction, bReset)
         ucrNudBoxPlot.SetRCode(clsGeomBoxPlotFunction, bReset)
+        ucrNudOutlierCoefficient.SetRCode(clsBoxplotFunction, bReset)
         If bReset Then
+            ucrNudOutlierCoefficient.SetRCode(clsBoxplotFunction, bReset)
             ucrChkLabel.SetRCode(clsLabelSummaryFunction)
             AutoFacetStation()
             ucrChkBoxPlot.SetRCode(clsDummyFunction, bReset)
@@ -707,7 +717,6 @@ Public Class dlgBoxplot
             Me.lblFacetBy.Location = New Size(222, 400)
             Me.ucrSaveBoxplot.Location = New Point(10, 439)
             Me.ucrBase.Location = New Point(10, 466)
-            Me.ucrChkLabel.Location = New Point(10, 383)
         Else
             Me.Size = New Size(441, 500)
             Me.ucrChkLegend.Location = New Size(10, 360)
@@ -717,7 +726,6 @@ Public Class dlgBoxplot
             Me.lblFacetBy.Location = New Size(222, 346)
             Me.ucrSaveBoxplot.Location = New Point(10, 390)
             Me.ucrBase.Location = New Point(10, 415)
-            Me.ucrChkLabel.Location = New Point(10, 310)
         End If
     End Sub
 
@@ -985,8 +993,13 @@ Public Class dlgBoxplot
         ToolStripMenuItemTextOptions.Enabled = ucrChkLabel.Checked
     End Sub
 
-    Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged
+    Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged, ucrNudOutlierCoefficient.ControlValueChanged
         If ucrChkLabel.Checked Then
+            If Not ucrNudOutlierCoefficient.IsEmpty Then
+                clsBoxplotStatFunction.AddParameter("coef", ucrNudOutlierCoefficient.GetText(), iPosition:=1)
+            Else
+                clsBoxplotStatFunction.RemoveParameterByName("coef")
+            End If
             clsBaseOperator.AddParameter("label", clsRFunctionParameter:=clsLabelSummaryFunction, bIncludeArgumentName:=False)
         Else
             clsBaseOperator.RemoveParameterByName("label")

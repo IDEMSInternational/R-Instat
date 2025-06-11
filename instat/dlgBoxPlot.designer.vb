@@ -55,6 +55,8 @@ Partial Class dlgBoxplot
         Me.toolStripMenuItemViolinOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemTextOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.lblWidth = New System.Windows.Forms.Label()
+        Me.ucrChkLabel = New instat.ucrCheck()
         Me.ucrNudBoxPlot = New instat.ucrNud()
         Me.ucrChkBoxPlot = New instat.ucrCheck()
         Me.ucrInputWidth = New instat.ucrInputTextBox()
@@ -79,8 +81,8 @@ Partial Class dlgBoxplot
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlPlots = New instat.UcrPanel()
-        Me.lblWidth = New System.Windows.Forms.Label()
-        Me.ucrChkLabel = New instat.ucrCheck()
+        Me.ucrNudOutlierCoefficient = New instat.ucrNud()
+        Me.lblOutlierCoefficient = New System.Windows.Forms.Label()
         Me.contextMenuStripOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -237,6 +239,26 @@ Partial Class dlgBoxplot
         Me.lblFacetBy.TabIndex = 24
         Me.lblFacetBy.Tag = ""
         Me.lblFacetBy.Text = "Facet By:"
+        '
+        'lblWidth
+        '
+        Me.lblWidth.AutoSize = True
+        Me.lblWidth.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblWidth.Location = New System.Drawing.Point(125, 335)
+        Me.lblWidth.Name = "lblWidth"
+        Me.lblWidth.Size = New System.Drawing.Size(38, 13)
+        Me.lblWidth.TabIndex = 33
+        Me.lblWidth.Tag = "By_Factor:"
+        Me.lblWidth.Text = "Width:"
+        '
+        'ucrChkLabel
+        '
+        Me.ucrChkLabel.AutoSize = True
+        Me.ucrChkLabel.Checked = False
+        Me.ucrChkLabel.Location = New System.Drawing.Point(10, 332)
+        Me.ucrChkLabel.Name = "ucrChkLabel"
+        Me.ucrChkLabel.Size = New System.Drawing.Size(121, 23)
+        Me.ucrChkLabel.TabIndex = 34
         '
         'ucrNudBoxPlot
         '
@@ -497,25 +519,27 @@ Partial Class dlgBoxplot
         Me.ucrPnlPlots.Size = New System.Drawing.Size(410, 35)
         Me.ucrPnlPlots.TabIndex = 0
         '
-        'lblWidth
+        'ucrNudOutlierCoefficient
         '
-        Me.lblWidth.AutoSize = True
-        Me.lblWidth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblWidth.Location = New System.Drawing.Point(125, 335)
-        Me.lblWidth.Name = "lblWidth"
-        Me.lblWidth.Size = New System.Drawing.Size(38, 13)
-        Me.lblWidth.TabIndex = 33
-        Me.lblWidth.Tag = "By_Factor:"
-        Me.lblWidth.Text = "Width:"
+        Me.ucrNudOutlierCoefficient.AutoSize = True
+        Me.ucrNudOutlierCoefficient.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOutlierCoefficient.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudOutlierCoefficient.Location = New System.Drawing.Point(303, 332)
+        Me.ucrNudOutlierCoefficient.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudOutlierCoefficient.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudOutlierCoefficient.Name = "ucrNudOutlierCoefficient"
+        Me.ucrNudOutlierCoefficient.Size = New System.Drawing.Size(48, 20)
+        Me.ucrNudOutlierCoefficient.TabIndex = 36
+        Me.ucrNudOutlierCoefficient.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkLabel
+        'lblOutlierCoefficient
         '
-        Me.ucrChkLabel.AutoSize = True
-        Me.ucrChkLabel.Checked = False
-        Me.ucrChkLabel.Location = New System.Drawing.Point(10, 383)
-        Me.ucrChkLabel.Name = "ucrChkLabel"
-        Me.ucrChkLabel.Size = New System.Drawing.Size(121, 23)
-        Me.ucrChkLabel.TabIndex = 34
+        Me.lblOutlierCoefficient.AutoSize = True
+        Me.lblOutlierCoefficient.Location = New System.Drawing.Point(145, 336)
+        Me.lblOutlierCoefficient.Name = "lblOutlierCoefficient"
+        Me.lblOutlierCoefficient.Size = New System.Drawing.Size(102, 13)
+        Me.lblOutlierCoefficient.TabIndex = 35
+        Me.lblOutlierCoefficient.Text = "Outlier Coefficiennt :"
         '
         'dlgBoxplot
         '
@@ -523,6 +547,8 @@ Partial Class dlgBoxplot
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(425, 518)
+        Me.Controls.Add(Me.ucrNudOutlierCoefficient)
+        Me.Controls.Add(Me.lblOutlierCoefficient)
         Me.Controls.Add(Me.ucrChkLabel)
         Me.Controls.Add(Me.lblWidth)
         Me.Controls.Add(Me.ucrNudBoxPlot)
@@ -613,4 +639,6 @@ Partial Class dlgBoxplot
     Friend WithEvents lblWidth As Label
     Friend WithEvents ucrChkLabel As ucrCheck
     Friend WithEvents ToolStripMenuItemTextOptions As ToolStripMenuItem
+    Friend WithEvents ucrNudOutlierCoefficient As ucrNud
+    Friend WithEvents lblOutlierCoefficient As Label
 End Class
