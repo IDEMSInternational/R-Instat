@@ -187,7 +187,7 @@ Public Class dlgClimaticBoxPlot
 
         ucrNudOutlierCoefficient.SetLinkedDisplayControl(lblOutlierCoefficient)
 
-        ucrPnlPlots.AddToLinkedControls(ucrNudOutlierCoefficient, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrNudOutlierCoefficient, ucrChkLabel}, {rdoBoxplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         clsThemeFunc.SetPackageName("ggplot2")
         clsThemeFunc.SetRCommand("theme")
