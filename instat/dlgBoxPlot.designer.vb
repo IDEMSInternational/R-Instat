@@ -524,7 +524,7 @@ Partial Class dlgBoxplot
         Me.ucrNudOutlierCoefficient.AutoSize = True
         Me.ucrNudOutlierCoefficient.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudOutlierCoefficient.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudOutlierCoefficient.Location = New System.Drawing.Point(303, 332)
+        Me.ucrNudOutlierCoefficient.Location = New System.Drawing.Point(302, 333)
         Me.ucrNudOutlierCoefficient.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudOutlierCoefficient.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudOutlierCoefficient.Name = "ucrNudOutlierCoefficient"
@@ -535,7 +535,7 @@ Partial Class dlgBoxplot
         'lblOutlierCoefficient
         '
         Me.lblOutlierCoefficient.AutoSize = True
-        Me.lblOutlierCoefficient.Location = New System.Drawing.Point(145, 336)
+        Me.lblOutlierCoefficient.Location = New System.Drawing.Point(128, 336)
         Me.lblOutlierCoefficient.Name = "lblOutlierCoefficient"
         Me.lblOutlierCoefficient.Size = New System.Drawing.Size(102, 13)
         Me.lblOutlierCoefficient.TabIndex = 35
