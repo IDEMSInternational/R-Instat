@@ -496,6 +496,51 @@ Public Class ucrButtons
     'todo reposition and review functions below
 
     ''' <summary>
+    ''' Loads the dialog's transformation JSON, builds a UIElement tree, outputs it, and removes duplicate nodes in each branch,
+    ''' but does not remove a node if it has children.
+    ''' </summary>
+    Private Sub WriteUISpec()
+        ' Load and deserialize the transformation JSON
+        Dim strDialogPathStem As String = Path.Combine(frmMain.strStaticPath & "\DialogDefinitions\Dlg" + strDialogName + "\dlg" + strDialogName)
+        Dim strTransformationsRJson As String = File.ReadAllText(strDialogPathStem + ".json")
+        lstTransformToScript = JsonConvert.DeserializeObject(Of List(Of clsTransformationRModel))(strTransformationsRJson)
+
+        ' Build the initial UIElement tree
+        Dim rootElement As New UIElement("Root")
+        For Each model In lstTransformToScript
+            Dim element = BuildUIElementTree(model)
+            If element IsNot Nothing Then
+                rootElement.lstChildren.Add(element)
+            End If
+        Next
+
+        Dim strElementTree As String = vbLf & vbLf & "Before duplicate removal:" & vbLf & vbLf
+        strElementTree += OutputUIElementTree(rootElement, 0)
+
+        ' Remove duplicates in each branch
+        Dim elementsAlreadyInBranch As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+        Dim rootElementNoDuplicates = GetUIElementNoDuplicates(rootElement, elementsAlreadyInBranch, 0)
+        strElementTree += vbLf & vbLf & "After duplicate removal:" & vbLf & vbLf
+        strElementTree += OutputUIElementTree(rootElementNoDuplicates, 0)
+
+        ' If there are duplicates in different branches, then move duplicates to LCA (Lowest Common Ancestor)
+        Dim rootElementDuplicatesInLca As UIElement = GetUIElementMoveDuplicatesToCommonParent(rootElementNoDuplicates)
+        strElementTree += vbLf & vbLf & "After moving duplicates to Lowest Common Ancestor (LCA):" & vbLf & vbLf
+        strElementTree += OutputUIElementTree(rootElementDuplicatesInLca, 0)
+
+        ' Write the element tree to a file on the desktop
+        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim strFilePath As String = Path.Combine(strDesktopPath, "tmp", "elementTree.txt")
+        If File.Exists(strFilePath) Then
+            File.AppendAllText(strFilePath, strElementTree)
+        Else
+            Directory.CreateDirectory(Path.GetDirectoryName(strFilePath))
+            File.WriteAllText(strFilePath, strElementTree)
+        End If
+
+    End Sub
+
+    ''' <summary>
     ''' Recursively builds a UIElement tree from a clsTransformationRModel tree.
     ''' </summary>
     Private Function BuildUIElementTree(model As clsTransformationRModel) As UIElement
@@ -521,6 +566,209 @@ Public Class ucrButtons
     End Function
 
     ''' <summary>
+    ''' Returns a new UIElement tree with duplicates removed. A node is considered a duplicate if:
+    ''' - Its strElementName has already appeared in the current branch, and
+    ''' - Its child tree is identical (structure and strElementName) to another node with the same strElementName in the same branch.
+    ''' </summary>
+    Private Function GetUIElementNoDuplicates(element As UIElement, elementNamesAlreadyInParentBranch As HashSet(Of String), level As Integer) As UIElement
+        If element Is Nothing OrElse String.IsNullOrEmpty(element.strElementName) Then Return Nothing
+
+        ' Track all seen nodes with the same strElementName in this branch, along with their child trees
+        Static branchSeen As New Dictionary(Of Integer, Dictionary(Of String, List(Of UIElement)))
+        If Not branchSeen.ContainsKey(level) Then
+            branchSeen(level) = New Dictionary(Of String, List(Of UIElement))(StringComparer.OrdinalIgnoreCase)
+        End If
+
+        Dim seenAtThisLevel = branchSeen(level)
+        Dim isDuplicate As Boolean = False
+
+        If seenAtThisLevel.ContainsKey(element.strElementName) Then
+            For Each seenNode In seenAtThisLevel(element.strElementName)
+                If AreChildTreesIdentical(element, seenNode) Then
+                    isDuplicate = True
+                    Exit For
+                End If
+            Next
+        End If
+
+        If isDuplicate Then
+            Return Nothing
+        End If
+
+        ' Add this node to the seen list for this strElementName at this level
+        If Not seenAtThisLevel.ContainsKey(element.strElementName) Then
+            seenAtThisLevel(element.strElementName) = New List(Of UIElement)
+        End If
+        seenAtThisLevel(element.strElementName).Add(element)
+
+        ' Recurse for children
+        Dim elementNamesAlreadyInCurrentBranch = New HashSet(Of String)(elementNamesAlreadyInParentBranch, StringComparer.OrdinalIgnoreCase) From {
+            element.strElementName
+        }
+
+        Dim newChildren As New List(Of UIElement)
+        For Each child In element.lstChildren
+            Dim elementNoDuplicate = GetUIElementNoDuplicates(child, elementNamesAlreadyInCurrentBranch, level + 1)
+            If elementNoDuplicate IsNot Nothing Then
+                newChildren.Add(elementNoDuplicate)
+            End If
+        Next
+
+        element.lstChildren = newChildren
+        Return element
+    End Function
+
+    ''' <summary>
+    ''' Returns True if the two UIElement trees are structurally identical and all nodes have the same strElementName.
+    ''' </summary>
+    Private Function AreChildTreesIdentical(node1 As UIElement, node2 As UIElement) As Boolean
+        If node1 Is Nothing AndAlso node2 Is Nothing Then Return True
+        If node1 Is Nothing OrElse node2 Is Nothing Then Return False
+        If Not String.Equals(node1.strElementName, node2.strElementName, StringComparison.OrdinalIgnoreCase) Then Return False
+
+        If node1.lstChildren.Count <> node2.lstChildren.Count Then Return False
+
+        For i As Integer = 0 To node1.lstChildren.Count - 1
+            If Not AreChildTreesIdentical(node1.lstChildren(i), node2.lstChildren(i)) Then
+                Return False
+            End If
+        Next
+
+        Return True
+    End Function
+
+    ''' <summary>
+    ''' Returns a new UIElement tree where, for each strElementName that appears more than once,
+    ''' all nodes with that name are moved to be direct children of their lowest common ancestor (LCA).
+    ''' </summary>
+    Private Function GetUIElementMoveDuplicatesToCommonParent(element As UIElement) As UIElement
+        If element Is Nothing OrElse String.IsNullOrEmpty(element.strElementName) Then Return Nothing
+        If element.lstChildren Is Nothing OrElse element.lstChildren.Count = 0 Then
+            Return element
+        End If
+
+        ' Step 1: Traverse the tree and record all paths to each node by strElementName
+        Dim nameToPaths As New Dictionary(Of String, List(Of List(Of UIElement)))(StringComparer.OrdinalIgnoreCase)
+        RecordPaths(element, New List(Of UIElement), nameToPaths)
+
+        ' Step 2: For each duplicate name, find the LCA and collect all nodes to move
+        Dim nameToLca As New Dictionary(Of String, UIElement)(StringComparer.OrdinalIgnoreCase)
+        For Each kvp In nameToPaths
+            If kvp.Value.Count > 1 Then
+                Dim lca As UIElement = FindLCAFromPaths(kvp.Value)
+                nameToLca(kvp.Key) = lca
+            End If
+        Next
+
+        ' Step 3: Build a new tree, moving duplicates to their LCA
+        Dim nodeToParent As New Dictionary(Of UIElement, UIElement) ' For removal
+        BuildParentMap(element, Nothing, nodeToParent)
+
+        ' Collect all nodes to move for each duplicate name
+        Dim nameToNodesToMove As New Dictionary(Of String, List(Of UIElement))(StringComparer.OrdinalIgnoreCase)
+        For Each kvp In nameToPaths
+            If kvp.Value.Count > 1 Then
+                Dim nodes = kvp.Value.Select(Function(path) path.Last()).ToList()
+                nameToNodesToMove(kvp.Key) = nodes
+            End If
+        Next
+
+        ' Clone the tree so we don't mutate the original
+        Dim cloneMap As New Dictionary(Of UIElement, UIElement)
+        Dim newRoot As UIElement = CloneTree(element, cloneMap)
+
+        ' Remove all duplicate nodes from their current parents (except the LCA)
+        For Each kvp In nameToNodesToMove
+            Dim name = kvp.Key
+            Dim lca = If(nameToLca.ContainsKey(name), cloneMap(nameToLca(name)), Nothing)
+            If lca Is Nothing Then Continue For
+            Dim nodes = kvp.Value.Select(Function(n) cloneMap(n)).ToList()
+            For Each node In nodes
+                Dim parent = FindParent(newRoot, node)
+                If parent IsNot Nothing AndAlso parent IsNot lca Then
+                    parent.lstChildren.Remove(node)
+                End If
+            Next
+            ' Add all nodes as direct children of the LCA (if not already present)
+            For Each node In nodes
+                If Not lca.lstChildren.Contains(node) Then
+                    lca.lstChildren.Add(node)
+                End If
+            Next
+        Next
+
+        Return newRoot
+    End Function
+
+    ' Helper: Traverse the tree and record all paths to each node by strElementName
+    Private Sub RecordPaths(node As UIElement, path As List(Of UIElement), nameToPaths As Dictionary(Of String, List(Of List(Of UIElement)))
+    )
+        If node Is Nothing Then Return
+        Dim newPath = New List(Of UIElement)(path) From {node}
+        If Not String.IsNullOrEmpty(node.strElementName) Then
+            If Not nameToPaths.ContainsKey(node.strElementName) Then
+                nameToPaths(node.strElementName) = New List(Of List(Of UIElement))()
+            End If
+            nameToPaths(node.strElementName).Add(newPath)
+        End If
+        For Each child In node.lstChildren
+            RecordPaths(child, newPath, nameToPaths)
+        Next
+    End Sub
+
+    ' Helper: Find the lowest common ancestor from a list of paths
+    Private Function FindLCAFromPaths(paths As List(Of List(Of UIElement))) As UIElement
+        If paths Is Nothing OrElse paths.Count = 0 Then Return Nothing
+        Dim minLen = paths.Min(Function(p) p.Count)
+        Dim lca As UIElement = Nothing
+        For i = 0 To minLen - 1
+            Dim thisNode = paths(0)(i)
+            If paths.All(Function(p) p(i) Is thisNode) Then
+                lca = thisNode
+            Else
+                Exit For
+            End If
+        Next
+        Return lca
+    End Function
+
+    ' Helper: Build a map from node to parent
+    Private Sub BuildParentMap(node As UIElement, parent As UIElement, nodeToParent As Dictionary(Of UIElement, UIElement))
+        If node Is Nothing Then Return
+        If parent IsNot Nothing Then
+            nodeToParent(node) = parent
+        End If
+        For Each child In node.lstChildren
+            BuildParentMap(child, node, nodeToParent)
+        Next
+    End Sub
+
+    ' Helper: Clone the tree and build a map from old node to new node
+    Private Function CloneTree(node As UIElement, cloneMap As Dictionary(Of UIElement, UIElement)) As UIElement
+        If node Is Nothing Then Return Nothing
+        Dim newNode As New UIElement(node.strElementName)
+        cloneMap(node) = newNode
+        For Each child In node.lstChildren
+            Dim newChild = CloneTree(child, cloneMap)
+            If newChild IsNot Nothing Then
+                newNode.lstChildren.Add(newChild)
+            End If
+        Next
+        Return newNode
+    End Function
+
+    ' Helper: Find the parent of a node in the tree
+    Private Function FindParent(root As UIElement, target As UIElement) As UIElement
+        If root Is Nothing OrElse root.lstChildren Is Nothing Then Return Nothing
+        For Each child In root.lstChildren
+            If child Is target Then Return root
+            Dim found = FindParent(child, target)
+            If found IsNot Nothing Then Return found
+        Next
+        Return Nothing
+    End Function
+
+    ''' <summary>
     ''' Returns a string representation of the UIElement tree structure, with indentation for each level.
     ''' </summary>
     Private Function OutputUIElementTree(element As UIElement, level As Integer) As String
@@ -534,95 +782,6 @@ Public Class ucrButtons
             sb.Append(OutputUIElementTree(child, level + 1))
         Next
         Return sb.ToString()
-    End Function
-
-    ''' <summary>
-    ''' Loads the dialog's transformation JSON, builds a UIElement tree, outputs it, and removes duplicate nodes in each branch,
-    ''' but does not remove a node if it has children.
-    ''' </summary>
-    Private Sub WriteUISpec()
-        ' Load and deserialize the transformation JSON
-        Dim strDialogPathStem As String = Path.Combine(frmMain.strStaticPath & "\DialogDefinitions\Dlg" + strDialogName + "\dlg" + strDialogName)
-        Dim strTransformationsRJson As String = File.ReadAllText(strDialogPathStem + ".json")
-        lstTransformToScript = JsonConvert.DeserializeObject(Of List(Of clsTransformationRModel))(strTransformationsRJson)
-
-        ' Build the UIElement tree
-        Dim uiElements As New List(Of UIElement)
-        For Each model In lstTransformToScript
-            Dim element = BuildUIElementTree(model)
-            If element IsNot Nothing Then
-                uiElements.Add(element)
-            End If
-        Next
-
-        ' Output the UIElement tree structure to file
-        Dim strElementTree As String = vbLf & vbLf & "Before duplicate removal:" & vbLf & vbLf
-        For Each elem In uiElements
-            strElementTree += OutputUIElementTree(elem, 0)
-        Next
-
-        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        Dim strFilePath As String = Path.Combine(strDesktopPath, "tmp", "elementTree.txt")
-        If File.Exists(strFilePath) Then
-            File.AppendAllText(strFilePath, strElementTree)
-        Else
-            Directory.CreateDirectory(Path.GetDirectoryName(strFilePath))
-            File.WriteAllText(strFilePath, strElementTree)
-        End If
-
-        ' Remove duplicates in each branch, but do not remove a node if it has children
-        Dim lstUIElementsNoDuplicates As New List(Of UIElement)
-        Dim elementsAlreadyInBranch As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
-        For i As Integer = 0 To uiElements.Count - 1
-            Dim elementNoDuplicate = GetUIElementNoDuplicates(uiElements(i), elementsAlreadyInBranch, 0)
-
-            If elementNoDuplicate Is Nothing Then Continue For
-
-            If Not elementsAlreadyInBranch.Contains(elementNoDuplicate.strElementName) Then
-                elementsAlreadyInBranch.Add(elementNoDuplicate.strElementName)
-            End If
-
-            lstUIElementsNoDuplicates.Add(elementNoDuplicate)
-        Next
-
-        strElementTree = vbLf & vbLf & "After duplicate removal:" & vbLf & vbLf
-        For Each elem In lstUIElementsNoDuplicates
-            strElementTree += OutputUIElementTree(elem, 0)
-        Next
-        File.AppendAllText(strFilePath, strElementTree)
-
-    End Sub
-
-    Private Function GetUIElementNoDuplicates(element As UIElement, elementNamesAlreadyInParentBranch As HashSet(Of String), level As Integer) As UIElement
-        If element Is Nothing OrElse String.IsNullOrEmpty(element.strElementName) Then Return Nothing
-
-        If elementNamesAlreadyInParentBranch.Contains(element.strElementName) AndAlso (element.lstChildren Is Nothing OrElse element.lstChildren.Count = 0) Then
-            Return Nothing
-        End If
-
-        If element.lstChildren Is Nothing OrElse element.lstChildren.Count = 0 Then
-            Return element
-        End If
-
-        Dim elementNamesAlreadyInCurrentBranch = New HashSet(Of String)(elementNamesAlreadyInParentBranch, StringComparer.OrdinalIgnoreCase) From {
-            element.strElementName
-        }
-
-        Dim newChildren As New List(Of UIElement)
-        For Each child In element.lstChildren
-            Dim elementNoDuplicate = GetUIElementNoDuplicates(child, elementNamesAlreadyInCurrentBranch, level + 1)
-
-            If elementNoDuplicate Is Nothing Then Continue For
-
-            If Not elementNamesAlreadyInCurrentBranch.Contains(elementNoDuplicate.strElementName) Then
-                elementNamesAlreadyInCurrentBranch.Add(elementNoDuplicate.strElementName)
-            End If
-
-            newChildren.Add(elementNoDuplicate)
-        Next
-
-        element.lstChildren = newChildren
-        Return element
     End Function
 
 End Class
