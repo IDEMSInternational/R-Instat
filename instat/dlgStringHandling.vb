@@ -59,7 +59,7 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddRadioButton(rdoRemove)
         ucrPnlStringHandling.AddRadioButton(rdoToNa)
 
-        ucrPnlStringHandling.AddParameterValuesCondition(rdoDetects, "string_handling", "detect")
+        ucrPnlStringHandling.AddParameterValuesCondition(rdoDetect, "string_handling", "detect")
         ucrPnlStringHandling.AddParameterValuesCondition(rdoReplace, "string_handling", "replace")
         ucrPnlStringHandling.AddParameterValuesCondition(rdoFind, "string_handling", "find")
         ucrPnlStringHandling.AddParameterValuesCondition(rdoReplaceNa, "string_handling", "replace_na")
@@ -437,7 +437,6 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=14)
         ucrSaveStringHandling.AddAdditionalRCode(clsNaIfFunction, iAdditionalPairNo:=15)
 
-        ucrReceiverStringHandling.SetRCode(clsDetectFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsDummyFunction, bReset)
         ucrPnlColumnSelectOptions.SetRCode(clsReplaceDummyFunction, bReset)
@@ -454,6 +453,10 @@ Public Class dlgStringHandling
         ucrPnlFindOptions.SetRCode(clsFindDummyFunction, bReset)
         ucrPnlDetectOptions.SetRCode(clsFindDummyFunction, bReset)
         ucrPnlReplaceOptions.SetRCode(clsFindDummyFunction, bReset)
+
+        If bReset Then
+            ucrReceiverStringHandling.SetRCode(clsDetectFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -712,7 +715,6 @@ Public Class dlgStringHandling
     Private Sub SelectOptions()
         clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorStringHandling.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsGetDataFrameFunction.SetAssignTo(ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        'clsTildaOperator.AddParameter("", ucrReceiverStringHandling.GetVariableNames, iPosition:=0, bIncludeArgumentName:=False)
         clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         If rdoReplace.Checked Then
             If rdoMultiple.Checked Then
