@@ -21,15 +21,16 @@ Imports RDotNet
 Public Class DlgDefineClimaticData
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsTypesFunction, clsNewTypesFunction As New RFunction
+    Private clsTypesFunction, clsLinkedTypesFunction As New RFunction
     Private lstReceivers As New List(Of ucrReceiverSingle)
     Private lstNewReceivers As New List(Of ucrReceiverSingle)
     Private lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
     Private lstNewRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
-    Private clsDefaultFunction, clsNewDefautFunction As New RFunction
-    Private clsAnyDuplicatesFunction, clsConcFunction, clsNewConcFunction, clsGetColFunction, clsDummyFunction As New RFunction
+    Private clslLinkedAnyDuplicatesFunction, clsLinkedConcFunction, clsDefaultFunction, clsLinkedDefautFunction, clsLinkedGetColFunction As New RFunction
+    Private clsAnyDuplicatesFunction, clsConcFunction, clsGetColFunction, clsDummyFunction As New RFunction
     Private strCurrentDataframeName As String
     Private bIsUnique As Boolean = True
+    Private bResetSubDialog As Boolean = True
 
     Private Sub DlgDefineClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -70,7 +71,6 @@ Public Class DlgDefineClimaticData
 
         lstRecognisedTypes.AddRange({kvpRain, kvpDistrict, kvpCloudCover, kvpTempMax, kvpTempMin, kvpRadiation, kvpSunshineHours, kvpStation, kvpAltitude, kvpLatitude, kvpLongitude,
                                     kvpWindDirection, kvpWindSpeed, kvpYear, kvpMonth, kvpDay, kvpDOY, kvpDate, kvpMinRH, kvpMaxRH})
-        lstNewRecognisedTypes.AddRange({kvpStation, kvpDistrict, kvpAltitude, kvpLatitude, kvpLongitude})
         lstReceivers.AddRange({ucrReceiverCloudCover, ucrReceiverDay, ucrReceiverMaxTemp, ucrReceiverMinTemp, ucrReceiverMonth, ucrReceiverRadiation,
                               ucrReceiverRain, ucrReceiverStation, ucrReceiverAltitude, ucrReceiverLatitude, ucrReceiverLongitude, ucrReceiverSunshine, ucrReceiverDiscrit,
                               ucrReceiverWindDirection, ucrReceiverWindSpeed, ucrReceiverYear, ucrReceiverDOY, ucrReceiverDate, ucrReceiverMinRH, ucrReceiverMaxRH})
@@ -102,50 +102,56 @@ Public Class DlgDefineClimaticData
         ucrReceiverDate.SetIncludedDataTypes({"Date"})
         SetRSelector()
 
-        ucrChkLinkedMetaData.SetText("Linked Meta Data")
-        ucrChkLinkedMetaData.SetParameter(New RParameter("check", 0))
-        ucrChkLinkedMetaData.SetValuesCheckedAndUnchecked("True", "False")
-
         ucrBase.clsRsyntax.iCallType = 2
     End Sub
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
         clsGetColFunction = New RFunction
+        clsLinkedGetColFunction = New RFunction
         clsAnyDuplicatesFunction = New RFunction
         clsConcFunction = New RFunction
-        clsNewConcFunction = New RFunction
+        clsLinkedConcFunction = New RFunction
+        clslLinkedAnyDuplicatesFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsNewDefautFunction = New RFunction
+        clsLinkedDefautFunction = New RFunction
+
+        bResetSubDialog = True
 
         ucrInputCheckInput.Reset()
         ucrReceiverDate.SetMeAsReceiver()
 
-        ucrChkLinkedMetaData.SetParameter(New RParameter("y", 0))
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
         clsDefaultFunction.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
         clsDefaultFunction.AddParameter("key_col_names", clsRFunctionParameter:=clsConcFunction, iPosition:=2)
 
-        clsNewDefautFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
-        clsNewDefautFunction.AddParameter("types", clsRFunctionParameter:=clsNewTypesFunction)
-        clsNewDefautFunction.AddParameter("key_col_names", clsRFunctionParameter:=clsNewConcFunction, iPosition:=2)
+        clsLinkedDefautFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
+        clsLinkedDefautFunction.AddParameter("types", clsRFunctionParameter:=clsLinkedTypesFunction)
+        clsLinkedDefautFunction.AddParameter("key_col_names", clsRFunctionParameter:=clsLinkedConcFunction, iPosition:=2)
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
 
         clsTypesFunction.SetRCommand("c")
-        clsNewTypesFunction.SetRCommand("c")
+        clsLinkedTypesFunction.SetRCommand("c")
 
         clsConcFunction.SetRCommand("c")
 
-        clsNewConcFunction.SetRCommand("c")
+        clsLinkedConcFunction.SetRCommand("c")
 
         clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
         clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
+
+        clslLinkedAnyDuplicatesFunction.SetRCommand("anyDuplicated")
+        clslLinkedAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsLinkedGetColFunction)
 
         ucrBase.clsRsyntax.ClearCodes()
         clsGetColFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
         clsGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
+
+        clsLinkedGetColFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsLinkedGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
+        clsLinkedGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsLinkedConcFunction)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         ucrBase.clsRsyntax.bSeparateThread = False
@@ -157,11 +163,7 @@ Public Class DlgDefineClimaticData
         If bReset Then
             ucrSelectorDefineClimaticData.SetRCode(clsDefaultFunction, bReset)
         End If
-
         SetRCodesforReceivers(bReset)
-
-        ucrChkLinkedMetaData.SetRCode(clsDummyFunction, bReset)
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -185,7 +187,7 @@ Public Class DlgDefineClimaticData
         Next
 
         For Each ucrTempReceiver In lstNewReceivers
-            ucrTempReceiver.SetRCode(clsNewTypesFunction, bReset)
+            ucrTempReceiver.SetRCode(clsLinkedTypesFunction, bReset)
         Next
     End Sub
 
@@ -259,6 +261,12 @@ Public Class DlgDefineClimaticData
         End Try
         Return String.Empty
     End Function
+
+    Private Sub cmdLinkedStation_Click(sender As Object, e As EventArgs) Handles cmdLinkedStation.Click
+        sdgLinkedStationData.SetRCode(clsNewAnyDuplicatesFunction:=clsAnyDuplicatesFunction, clsNewConcFunction:=clsLinkedConcFunction, clsNewDefaultFunction:=clsLinkedDefautFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewGetColFunction:=clsLinkedGetColFunction, clsNewTypesFunction:=clsLinkedTypesFunction, bReset:=bResetSubDialog)
+        sdgLinkedStationData.ShowDialog()
+        bResetSubDialog = False
+    End Sub
 
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
         Dim lstValues As New List(Of String)

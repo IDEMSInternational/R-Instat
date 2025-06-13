@@ -82,10 +82,10 @@ Partial Class DlgDefineClimaticData
         Me.ucrReceiverMinTemp = New instat.ucrReceiverSingle()
         Me.lblWindSpeed = New System.Windows.Forms.Label()
         Me.lblWindDirection = New System.Windows.Forms.Label()
-        Me.ucrChkLinkedMetaData = New instat.ucrCheck()
         Me.ucrInputCheckInput = New instat.ucrInputTextBox()
         Me.ucrSelectorDefineClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdLinkedStation = New System.Windows.Forms.Button()
         Me.grpStation.SuspendLayout()
         Me.grpDateTime.SuspendLayout()
         Me.grpElements.SuspendLayout()
@@ -630,16 +630,6 @@ Partial Class DlgDefineClimaticData
         Me.lblWindDirection.TabIndex = 8
         Me.lblWindDirection.Text = "Wind Direction:"
         '
-        'ucrChkLinkedMetaData
-        '
-        Me.ucrChkLinkedMetaData.AutoSize = True
-        Me.ucrChkLinkedMetaData.Checked = False
-        Me.ucrChkLinkedMetaData.Location = New System.Drawing.Point(16, 204)
-        Me.ucrChkLinkedMetaData.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.ucrChkLinkedMetaData.Name = "ucrChkLinkedMetaData"
-        Me.ucrChkLinkedMetaData.Size = New System.Drawing.Size(195, 23)
-        Me.ucrChkLinkedMetaData.TabIndex = 7
-        '
         'ucrInputCheckInput
         '
         Me.ucrInputCheckInput.AddQuotesIfUnrecognised = True
@@ -647,7 +637,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrInputCheckInput.IsMultiline = False
         Me.ucrInputCheckInput.IsReadOnly = False
         Me.ucrInputCheckInput.Location = New System.Drawing.Point(147, 439)
-        Me.ucrInputCheckInput.Margin = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.ucrInputCheckInput.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
         Me.ucrInputCheckInput.Size = New System.Drawing.Size(253, 21)
         Me.ucrInputCheckInput.TabIndex = 10
@@ -669,10 +659,20 @@ Partial Class DlgDefineClimaticData
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(6, 476)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 11
+        '
+        'cmdLinkedStation
+        '
+        Me.cmdLinkedStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdLinkedStation.Location = New System.Drawing.Point(16, 206)
+        Me.cmdLinkedStation.Name = "cmdLinkedStation"
+        Me.cmdLinkedStation.Size = New System.Drawing.Size(139, 23)
+        Me.cmdLinkedStation.TabIndex = 12
+        Me.cmdLinkedStation.Text = "Linked Station Data"
+        Me.cmdLinkedStation.UseVisualStyleBackColor = True
         '
         'DlgDefineClimaticData
         '
@@ -680,7 +680,7 @@ Partial Class DlgDefineClimaticData
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(533, 531)
-        Me.Controls.Add(Me.ucrChkLinkedMetaData)
+        Me.Controls.Add(Me.cmdLinkedStation)
         Me.Controls.Add(Me.ucrInputCheckInput)
         Me.Controls.Add(Me.cmdCheckUnique)
         Me.Controls.Add(Me.ucrSelectorDefineClimaticData)
@@ -704,8 +704,6 @@ Partial Class DlgDefineClimaticData
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrChkLinkedMetaData As ucrCheck
     Friend WithEvents ucrInputCheckInput As ucrInputTextBox
     Friend WithEvents cmdCheckUnique As Button
     Friend WithEvents ucrSelectorDefineClimaticData As ucrSelectorByDataFrameAddRemove
@@ -753,4 +751,5 @@ Partial Class DlgDefineClimaticData
     Friend WithEvents ucrReceiverAltitude As ucrReceiverSingle
     Friend WithEvents lblDiscrit As Label
     Friend WithEvents ucrReceiverDiscrit As ucrReceiverSingle
+    Friend WithEvents cmdLinkedStation As Button
 End Class

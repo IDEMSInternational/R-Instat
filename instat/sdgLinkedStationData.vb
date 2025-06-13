@@ -20,32 +20,33 @@ Imports RDotNet
 
 Public Class sdgLinkedStationData
     Public bFirstLoad As Boolean = True
-    Private bReset As Boolean = True
-    Private clsTypesFunction, clsNewTypesFunction As New RFunction
-    Private lstReceivers As New List(Of ucrReceiverSingle)
+    Public bControlsInitialised As Boolean = False
+    Private clsTypesFunction As New RFunction
     Private lstNewReceivers As New List(Of ucrReceiverSingle)
-    Private lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
     Private lstNewRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
-    Private clsDefaultFunction, clsNewDefautFunction As New RFunction
-    Private clsAnyDuplicatesFunction, clsConcFunction, clsNewConcFunction, clsGetColFunction, clsDummyFunction As New RFunction
+    Private clsDefaultFunction As New RFunction
+    Private clsAnyDuplicatesFunction, clsConcFunction, clsGetColFunction As New RFunction
+    Private clsRSyntax As RSyntax
     Private strCurrentDataframeName As String
     Private bIsUnique As Boolean = True
 
     Private Sub sdgLinkedStationData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            InitialiseDialog()
+            InitialiseControls()
             bFirstLoad = False
         End If
-        SetRCodeForControls(bReset)
+        NewAutoFillReceivers()
     End Sub
 
-    Private Sub InitialiseDialog()
+    Private Sub InitialiseControls()
         Dim kvpStation As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("station", {"station", "id", "name"}.ToList())
         Dim kvpDistrict As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("district", {"district", "country", "countries"}.ToList())
         Dim kvpAltitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("alt", {"alt", "altitude", "elevation", "elev"}.ToList())
         Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"lon", "lont", "longitude"}.ToList())
         Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"lat", "latitude"}.ToList())
+
+        lstNewRecognisedTypes.AddRange({kvpStation, kvpDistrict, kvpAltitude, kvpLatitude, kvpLongitude})
 
         lstNewReceivers.AddRange({ucrReceiverStationMeta, ucrReceiverAltMeta, ucrReceiverLatMeta, ucrReceiverLonMeta, ucrReceiverDiscritMeta})
 
@@ -69,6 +70,61 @@ Public Class sdgLinkedStationData
             ucrTempReceiver.Selector = ucrSelectorLinkedDataFrame
             ucrTempReceiver.SetParameterIsString()
             ucrTempReceiver.bExcludeFromSelector = True
+        Next
+    End Sub
+
+    Public Sub SetRCode(clsNewAnyDuplicatesFunction As RFunction, clsNewGetColFunction As RFunction, clsNewTypesFunction As RFunction, clsNewConcFunction As RFunction, clsNewRSyntax As RSyntax, clsNewDefaultFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsRSyntax = clsNewRSyntax
+        clsDefaultFunction = clsNewDefaultFunction
+        clsConcFunction = clsNewConcFunction
+        clsTypesFunction = clsNewTypesFunction
+        clsGetColFunction = clsNewGetColFunction
+        clsAnyDuplicatesFunction = clsNewAnyDuplicatesFunction
+        ucrSelectorLinkedDataFrame.SetRCode(clsDefaultFunction, bReset)
+        SetRCodesforReceivers(bReset)
+        NewAutoFillReceivers()
+    End Sub
+
+    Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
+        Dim iAnyDuplicated As Integer
+
+        Try
+            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
+        Catch ex As Exception
+            iAnyDuplicated = -1
+        End Try
+
+        If iAnyDuplicated = -1 Then
+            ucrInputCheckInput.SetName("Developer error! Could not check uniqueness.")
+            ucrInputCheckInput.txtInput.BackColor = Color.Yellow
+            bIsUnique = False
+        ElseIf iAnyDuplicated > 0 Then
+            ucrInputCheckInput.SetName("")
+            ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
+            bIsUnique = False
+            If ucrReceiverStationMeta.IsEmpty Then
+                ucrInputCheckInput.SetName("Duplicate stations found.")
+                MsgBox("You have multiple rows with the same stations. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            Else
+                ucrInputCheckInput.SetName("Duplicate stations for station(s) were found.")
+                MsgBox("You have multiple rows with the same stations for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
+            End If
+        Else
+            ucrInputCheckInput.SetName("No duplicate stations.")
+            ucrInputCheckInput.txtInput.BackColor = Color.LightGreen
+            bIsUnique = True
+        End If
+    End Sub
+
+
+    Private Sub SetRCodesforReceivers(bReset As Boolean)
+        Dim ucrTempReceiver As ucrReceiver
+
+        For Each ucrTempReceiver In lstNewReceivers
+            ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
         Next
     End Sub
 
@@ -107,68 +163,18 @@ Public Class sdgLinkedStationData
         End If
     End Sub
 
-    Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
-        Dim iAnyDuplicated As Integer
-
-        Try
-            iAnyDuplicated = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyDuplicatesFunction.ToScript()).AsInteger(0)
-        Catch ex As Exception
-            iAnyDuplicated = -1
-        End Try
-
-        If iAnyDuplicated = -1 Then
-            ucrInputCheckInput.SetName("Developer error! Could not check uniqueness.")
-            ucrInputCheckInput.txtInput.BackColor = Color.Yellow
-            bIsUnique = False
-        ElseIf iAnyDuplicated > 0 Then
-            ucrInputCheckInput.SetName("")
-            ucrInputCheckInput.txtInput.BackColor = Color.LightCoral
-            bIsUnique = False
-            If ucrReceiverStationMeta.IsEmpty Then
-                ucrInputCheckInput.SetName("Duplicate dates found.")
-                MsgBox("You have multiple rows with the same dates. Did you forget to add the station column? Otherwise, use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
-            Else
-                ucrInputCheckInput.SetName("Duplicate dates for station(s) were found.")
-                MsgBox("You have multiple rows with the same dates for one or more stations. Use the Climatic > Tidy and Examine > Duplicates dialog to investigate these issues.", MsgBoxStyle.Information, Title:="Duplicates")
-            End If
-        Else
-            ucrInputCheckInput.SetName("No duplicate dates.")
-            ucrInputCheckInput.txtInput.BackColor = Color.LightGreen
-            bIsUnique = True
-        End If
-    End Sub
-
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorLinkedDataFrame.SetRCode(clsNewDefautFunction, bReset)
-        SetRCodesforReceivers(bReset)
-    End Sub
-
-    Private Sub SetRCodesforReceivers(bReset As Boolean)
-        Dim ucrTempReceiver As ucrReceiver
-        For Each ucrTempReceiver In lstReceivers
-            ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
-        Next
-
-        For Each ucrTempReceiver In lstNewReceivers
-            ucrTempReceiver.SetRCode(clsNewTypesFunction, bReset)
-        Next
-    End Sub
-
     Private Sub ucrSelectorLinkedDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLinkedDataFrame.ControlValueChanged
-        clsGetColFunction.AddParameter("data_name", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34), iPosition:=1)
         NewAutoFillReceivers()
     End Sub
 
-    Private Sub ucrChkLinkedMetaData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLinkedMetaData.ControlValueChanged, ucrReceiverAltMeta.ControlValueChanged, ucrReceiverLatMeta.ControlValueChanged, ucrReceiverLonMeta.ControlValueChanged, ucrReceiverStationMeta.ControlValueChanged, ucrReceiverDiscritMeta.ControlValueChanged
-        ucrSelectorLinkedDataFrame.Visible = True
-        ucrBase.clsRsyntax.AddToAfterCodes(clsNewDefautFunction, iPosition:=0)
-            clsNewDefautFunction.iCallType = 2
-        ucrSelectorLinkedDataFrame.Visible = False
-        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsNewDefautFunction)
+    Private Sub ucrChkLinkedMetaData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAltMeta.ControlValueChanged, ucrReceiverLatMeta.ControlValueChanged, ucrReceiverLonMeta.ControlValueChanged, ucrReceiverStationMeta.ControlValueChanged, ucrReceiverDiscritMeta.ControlValueChanged
         If Not ucrReceiverStationMeta.IsEmpty Then
-            clsNewConcFunction.AddParameter("x1", ucrReceiverStationMeta.GetVariableNames, bIncludeArgumentName:=False)
+            clsRSyntax.AddToAfterCodes(clsDefaultFunction, iPosition:=0)
+            clsDefaultFunction.iCallType = 2
+            clsConcFunction.AddParameter("x1", ucrReceiverStationMeta.GetVariableNames, bIncludeArgumentName:=False)
         Else
-            clsNewConcFunction.RemoveParameterByName("x1")
+            clsConcFunction.RemoveParameterByName("x1")
+            clsRSyntax.RemoveFromAfterCodes(clsDefaultFunction)
         End If
     End Sub
 
@@ -208,4 +214,8 @@ Public Class sdgLinkedStationData
         End Try
         Return String.Empty
     End Function
+
+    Private Sub ucrSelectorLinkedDataFrame_DataFrameChanged() Handles ucrSelectorLinkedDataFrame.DataFrameChanged
+        clsGetColFunction.AddParameter("data_name", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34), iPosition:=1)
+    End Sub
 End Class
