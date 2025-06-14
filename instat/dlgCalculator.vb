@@ -322,7 +322,7 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth * 1.5
                 ucrBase.iHelpTopicID = 129
             Case "Dates/Times"
-                Me.Width = iBasicWidth * 1.37
+                Me.Width = iBasicWidth * 1.51
                 ucrBase.iHelpTopicID = 130
             Case "Transform"
                 Me.Width = iBasicWidth * 1.48
