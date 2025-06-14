@@ -22,11 +22,12 @@ Public Class dlgStringHandling
             clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction, clsRemoveFunction, clsReplaceNaFunction, clsStrToLowerFunction,
             clsStartsFunction, clsEndsFunction, clsMatchAllFunction, clsExtractAllFunction, clsLocateAllFunction, clsRemoveAllFunction,
             clsReplaceCellFunction, clsCurrentNewColumnFunction, clsAsDataFrameFunction, clsMutateFunction, clsReplaceGrepFunction As New RFunction
-    Private clsPipeOperator, clsPipeSelectOperator, clsTildaOperator, clsDataFrameOperator, clsPipe2Operator, clsUnpackOperator As New ROperator
+    Private clsPipeOperator, clsTildaOperator, clsDataFrameOperator, clsPipe2Operator, clsUnpackOperator As New ROperator
     Private clsDummyFunction, clsFindDummyFunction, clsReplaceDummyFunction, clsColumnSelectionFunction,
         clsList1Function, clsList2Function, clsGetDataFrameFunction, clsPasteFunction, clsEverythingFunction,
         clsAcrossFunction, clsPaste2Function, clsEndsWithFunction, clsUnpackFunction, clsMutate2Function,
-       clsAddColumnsFunction, clsReplaceSelectFunction, clsReplaceAllSelectFunction As New RFunction
+       clsAddColumnsFunction, clsReplaceSelectFunction, clsReplaceAllSelectFunction, clsReplaceCellSelectFunction,
+       clsGreplCellSelectFunction As New RFunction
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -218,7 +219,8 @@ Public Class dlgStringHandling
         clsAddColumnsFunction = New RFunction
         clsReplaceSelectFunction = New RFunction
         clsReplaceAllSelectFunction = New RFunction
-        clsPipeSelectOperator = New ROperator
+        clsReplaceCellSelectFunction = New RFunction
+        clsGreplCellSelectFunction = New RFunction
         ucrSelectorStringHandling.Reset()
 
         ucrInputReplaceBy.Reset()
@@ -243,7 +245,6 @@ Public Class dlgStringHandling
         clsList1Function.AddParameter("parameters", "list(fn = is.factor)", iPosition:=1)
 
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-        clsGetDataFrameFunction.AddParameter("column_selection_name ", Chr(34) & "selection" & Chr(34), iPosition:=1)
 
         clsTildaOperator.SetOperation(" ", bBracketsTemp:=False)
         clsTildaOperator.SetAssignTo("select")
@@ -261,8 +262,6 @@ Public Class dlgStringHandling
         clsAcrossFunction.SetPackageName("dplyr")
         clsAcrossFunction.SetRCommand("across")
         clsAcrossFunction.AddParameter("every", clsRFunctionParameter:=clsEverythingFunction, bIncludeArgumentName:=False, iPosition:=0)
-        clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
-        clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
 
         clsMutate2Function.SetPackageName("dplyr")
         clsMutate2Function.SetRCommand("mutate")
@@ -292,6 +291,13 @@ Public Class dlgStringHandling
         clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsAddColumnsFunction.AddParameter("col_data", clsROperatorParameter:=clsUnpackOperator, iPosition:=1)
         clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=2)
+
+        clsGreplCellSelectFunction.SetRCommand("grepl")
+        clsGreplCellSelectFunction.AddParameter("dot", ".", iPosition:=1, bIncludeArgumentName:=False)
+
+        clsReplaceCellSelectFunction.SetRCommand("~replace")
+        clsReplaceCellSelectFunction.AddParameter("dot", ".", iPosition:=0, bIncludeArgumentName:=False)
+        clsReplaceCellSelectFunction.AddParameter("grep", clsRFunctionParameter:=clsGreplCellSelectFunction, iPosition:=1, bIncludeArgumentName:=False)
 
         clsDummyFunction.AddParameter("checked", False, iPosition:=0)
         clsDummyFunction.AddParameter("all", False, iPosition:=1)
@@ -375,10 +381,6 @@ Public Class dlgStringHandling
         clsPipeOperator.AddParameter("x", "df", iPosition:=0, bIncludeArgumentName:=False)
         clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
 
-        clsPipeSelectOperator.SetOperation("%>%")
-        clsPipeSelectOperator.AddParameter("x", "df", iPosition:=0, bIncludeArgumentName:=False)
-        clsPipeSelectOperator.AddParameter("y", clsRFunctionParameter:=clsMutateFunction, iPosition:=1)
-
         clsNaIfFunction.SetPackageName("dplyr")
         clsNaIfFunction.SetRCommand("na_if")
 
@@ -415,6 +417,7 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceCellFunction, New RParameter("values", 2), iAdditionalPairNo:=2)
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceSelectFunction, New RParameter("replacement", 2), iAdditionalPairNo:=3)
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceAllSelectFunction, New RParameter("replacement", 2), iAdditionalPairNo:=4)
+        ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceCellSelectFunction, New RParameter("values", 2), iAdditionalPairNo:=5)
 
         ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsRegexFunction, ucrChkIgnoreCase.GetParameter(), iAdditionalPairNo:=1)
         ucrChkIgnoreCase.AddAdditionalCodeParameterPair(clsReplaceGrepFunction, New RParameter("ignore.case", 2), iAdditionalPairNo:=2)
@@ -589,16 +592,24 @@ Public Class dlgStringHandling
                 End If
                 clsFindDummyFunction.AddParameter("string_handling", "replace", iPosition:=3)
             Else
-                ucrBase.clsRsyntax.AddToBeforeCodes(clsColumnSelectionFunction)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsAddColumnsFunction)
                 If rdoReplaceFirst.Checked Then
+                    clsAcrossFunction.RemoveParameterByName(".fns")
+                    clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
+                    clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
                     clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-
+                    ucrBase.clsRsyntax.AddToBeforeCodes(clsColumnSelectionFunction)
                 ElseIf rdoReplaceAll.Checked Then
+                    clsAcrossFunction.RemoveParameterByName(".fns")
+                    clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
+                    clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
                     clsDataFrameOperator.AddParameter("left", clsRFunctionParameter:=clsReplaceAllSelectFunction, iPosition:=0, bIncludeArgumentName:=False)
-
+                    ucrBase.clsRsyntax.AddToBeforeCodes(clsColumnSelectionFunction)
                 ElseIf rdoReplaceCell.Checked Then
-                    clsDataFrameOperator.AddParameter("left", clsROperatorParameter:=clsPipeSelectOperator, iPosition:=0, bIncludeArgumentName:=False)
+                    clsAcrossFunction.RemoveParameterByName("tilda")
+                    clsAcrossFunction.AddParameter(".fns", clsRFunctionParameter:=clsReplaceCellSelectFunction, iPosition:=1)
+                    clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
+                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsColumnSelectionFunction)
 
                 End If
             End If
@@ -671,8 +682,13 @@ Public Class dlgStringHandling
         If Not rdoReplace.Checked AndAlso Not rdoReplaceCell.Checked Then
             Exit Sub
         End If
-        clsReplaceGrepFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-        clsReplaceCellFunction.AddParameter("pattern", clsRFunctionParameter:=clsReplaceGrepFunction, bIncludeArgumentName:=False, iPosition:=1)
+        If rdoSingle.Checked Then
+            clsReplaceGrepFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+            clsReplaceCellFunction.AddParameter("pattern", clsRFunctionParameter:=clsReplaceGrepFunction, bIncludeArgumentName:=False, iPosition:=1)
+        Else
+            clsGreplCellSelectFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        End If
+
     End Sub
 
     Private Sub ucrPnlReplaceOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlReplaceOptions.ControlContentsChanged
@@ -704,10 +720,6 @@ Public Class dlgStringHandling
         End If
     End Sub
 
-    'Private Sub ucrReceiverStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlValueChanged
-    '    IgnoreCaseControl()
-    'End Sub
-
     Private Sub ucrChkIgnoreCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreCase.ControlValueChanged
         IgnoreCaseControl()
     End Sub
@@ -716,13 +728,14 @@ Public Class dlgStringHandling
         clsGetDataFrameFunction.AddParameter("data_name", Chr(34) & ucrSelectorStringHandling.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsGetDataFrameFunction.SetAssignTo(ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsGetDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverStringHandling.GetVariableNames, iPosition:=1)
+
         If rdoReplace.Checked Then
             If rdoMultiple.Checked Then
                 clsReplaceDummyFunction.AddParameter("col", "multiple", iPosition:=0)
                 ucrSelectorStringHandling.SetItemType("column_selection")
                 ucrReceiverStringHandling.strSelectorHeading = "Column selections"
                 lblColumn.Text = "Select:"
-
             ElseIf rdoSingle.Checked Then
                 clsReplaceDummyFunction.AddParameter("col", "single", iPosition:=0)
                 ucrSelectorStringHandling.SetItemType("column")
@@ -734,7 +747,5 @@ Public Class dlgStringHandling
             ucrReceiverStringHandling.strSelectorHeading = "Factors"
             lblColumn.Text = "Column:"
         End If
-
-        'SetBaseFunction()
     End Sub
 End Class
