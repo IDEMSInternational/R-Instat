@@ -1972,6 +1972,7 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , fmt=""ddd, d, mmm"")", 21)
     End Sub
 
+
     Private Sub cmdPlusY_Click(sender As Object, e As EventArgs) Handles cmdPlusY.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+y", 0)
     End Sub
