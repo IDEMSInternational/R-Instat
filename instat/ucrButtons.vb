@@ -517,20 +517,26 @@ Public Class ucrButtons
         Dim strElementTree As String = vbLf & vbLf & "Before duplicate removal:" & vbLf & vbLf
         strElementTree += OutputUIElementTree(rootElement, 0)
 
-        ' Remove siblings in each branch
+        ' Remove duplicate siblings
         Dim rootElementNoDuplicateSiblings = GetUIElementNoDuplicateSiblings(rootElement)
         strElementTree += vbLf & vbLf & "After duplicate sibling removal:" & vbLf & vbLf
         strElementTree += OutputUIElementTree(rootElementNoDuplicateSiblings, 0)
 
-        ' Remove duplicates in each branch
-        Dim rootElementNoDuplicateBranches = GetUIElementNoDuplicateBranches(rootElementNoDuplicateSiblings, New HashSet(Of String)(StringComparer.OrdinalIgnoreCase))
-        strElementTree += vbLf & vbLf & "After duplicate branch removal:" & vbLf & vbLf
-        strElementTree += OutputUIElementTree(rootElementNoDuplicateBranches, 0)
+        ' Remove nodes that are duplicates of their ancestors, or siblings of their ancestors
+        Dim rootElementNoDuplicateAncestors = GetUIElementNoDuplicateAncestors(rootElementNoDuplicateSiblings, Nothing, Nothing)
+        strElementTree += vbLf & vbLf & "After duplicate ancestor removal:" & vbLf & vbLf
+        strElementTree += OutputUIElementTree(rootElementNoDuplicateAncestors, 0)
 
-        ' If there are duplicates in different branches, then add duplicates to LCA (Lowest Common Ancestor)
-        Dim rootElementDuplicatesInLca As UIElement = GetUIElementAddDuplicatesToLca(rootElementNoDuplicateBranches) ' updated variable name here
-        strElementTree += vbLf & vbLf & "After adding duplicates to Lowest Common Ancestor (LCA):" & vbLf & vbLf
+        ' If there are duplicates in different branches, then find the largest duplicate tree and
+        '   add add it to the LCA (Lowest Common Ancestor)
+        Dim rootElementDuplicatesInLca As UIElement = GetUIElementAddDuplicatesToLca(rootElementNoDuplicateAncestors) ' updated variable name here
+        strElementTree += vbLf & vbLf & "After adding longest duplicate to Lowest Common Ancestor (LCA):" & vbLf & vbLf
         strElementTree += OutputUIElementTree(rootElementDuplicatesInLca, 0)
+
+        ' Remove nodes that are duplicates of their ancestors, or siblings of their ancestors
+        Dim rootElementDuplicatesInLcaCleaned = GetUIElementNoDuplicateAncestors(rootElementDuplicatesInLca, Nothing, Nothing)
+        strElementTree += vbLf & vbLf & "After cleaning LCA tree:" & vbLf & vbLf
+        strElementTree += OutputUIElementTree(rootElementDuplicatesInLcaCleaned, 0)
 
         ' Write the element tree to a file on the desktop
         Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
@@ -564,24 +570,40 @@ Public Class ucrButtons
         Return newElement
     End Function
 
-    Private Function GetUIElementNoDuplicateBranches(element As UIElement, signaturesInBranch As HashSet(Of String)) As UIElement
+    Private Function GetUIElementNoDuplicateAncestors(element As UIElement,
+                                                      ancestorsSignatures As HashSet(Of String),
+                                                      parentSiblings As HashSet(Of String)) As UIElement
         If element Is Nothing Then Return Nothing
 
-        ' If this strSignature has already been seen in this branch, remove this node
-        If signaturesInBranch.Contains(element.strSignature) Then
+        If ancestorsSignatures Is Nothing Then
+            ancestorsSignatures = New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+        End If
+
+        ' If this strSignature matches any ancestor, remove this node
+        If ancestorsSignatures.Contains(element.strSignature) Then
             Return Nothing
         End If
 
-        ' Add this node's strSignature to the set for this branch
-        Dim newSignaturesInBranch = New HashSet(Of String)(signaturesInBranch, StringComparer.OrdinalIgnoreCase)
-        newSignaturesInBranch.Add(element.strSignature)
+        ' Make a list of ancestors for this nodes children, include the siblings of this parent
+        Dim ancestorsSignaturesNew As New HashSet(Of String)(ancestorsSignatures, StringComparer.OrdinalIgnoreCase)
+        If parentSiblings IsNot Nothing Then
+            For Each siblingSignature In parentSiblings
+                ancestorsSignaturesNew.Add(siblingSignature)
+            Next
+        End If
 
-        ' Recurse for children
-        Dim newChildren As New List(Of UIElement)
+        ' Make a list of parent siblings for this nodes children
+        Dim siblingSignatures As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
         For Each child In element.lstChildren
-            Dim childNoDuplicate = GetUIElementNoDuplicateBranches(child, newSignaturesInBranch)
-            If childNoDuplicate IsNot Nothing Then
-                newChildren.Add(childNoDuplicate)
+            siblingSignatures.Add(child.strSignature)
+        Next
+
+        Dim newChildren As New List(Of UIElement)
+        For i As Integer = 0 To element.lstChildren.Count - 1
+            Dim child = element.lstChildren(i)
+            Dim cleanedChild = GetUIElementNoDuplicateAncestors(child, ancestorsSignaturesNew, siblingSignatures)
+            If cleanedChild IsNot Nothing Then
+                newChildren.Add(cleanedChild)
             End If
         Next
 
@@ -592,8 +614,9 @@ Public Class ucrButtons
     End Function
 
     ''' <summary>
-    ''' Returns a new UIElement tree that is the same as the input, but with extra nodes added:
-    ''' For each duplicate strSignature found during traversal, the duplicate node is also added as a child of the Lowest Common Ancestor (LCA) of the two nodes.
+    ''' Returns a new UIElement tree with one extra node added: if there are duplicate signatures in the tree,
+    ''' finds the duplicated node with the longest signature, finds any two nodes with this signature, finds their LCA,
+    ''' and adds a duplicate of the node as a child of the LCA. If no duplicates exist, returns Nothing.
     ''' </summary>
     Private Function GetUIElementAddDuplicatesToLca(element As UIElement) As UIElement
         If element Is Nothing Then Return Nothing
@@ -602,35 +625,36 @@ Public Class ucrButtons
         Dim signatureToPaths As New Dictionary(Of String, List(Of List(Of UIElement)))(StringComparer.OrdinalIgnoreCase)
         RecordSignaturePaths(element, New List(Of UIElement), signatureToPaths)
 
-        ' Step 2: Clone the tree so we can add nodes without mutating the original
+        ' Step 2: Find the duplicated signature with the longest signature string
+        Dim duplicatedSignatures = signatureToPaths.Where(Function(kvp) kvp.Value.Count > 1).ToList()
+        If duplicatedSignatures.Count = 0 Then
+            Return Nothing
+        End If
+
+        Dim longestDup = duplicatedSignatures.OrderByDescending(Function(kvp) kvp.Key.Length).First()
+        Dim signature As String = longestDup.Key
+        Dim paths As List(Of List(Of UIElement)) = longestDup.Value
+
+        ' Step 3: Pick any two nodes with this signature and find their LCA
+        Dim path1 = paths(0)
+        Dim path2 = paths(1)
+        Dim nodeToDuplicate = path2.Last() ' Use the second node as the one to duplicate
+        Dim lca = FindLCAFromPaths(New List(Of List(Of UIElement)) From {path1, path2})
+        If lca Is Nothing Then Return Nothing
+
+        ' Step 4: Clone the tree so we can add nodes without mutating the original
         Dim cloneMap As New Dictionary(Of UIElement, UIElement)
         Dim newRoot As UIElement = CloneTree(element, cloneMap)
 
-        ' Step 3: For each strSignature with more than one occurrence, add duplicates to the LCA
-        For Each kvp In signatureToPaths
-            Dim signature = kvp.Key
-            Dim paths = kvp.Value
-            If paths.Count > 1 Then
-                ' For each pair of duplicate nodes, add the duplicate to the LCA
-                For i As Integer = 0 To paths.Count - 2
-                    For j As Integer = i + 1 To paths.Count - 1
-                        Dim path1 = paths(i)
-                        Dim path2 = paths(j)
-                        Dim node1 = path1.Last()
-                        Dim node2 = path2.Last()
-                        Dim lca = FindLCAFromPaths(New List(Of List(Of UIElement)) From {path1, path2})
-                        If lca IsNot Nothing Then
-                            Dim lcaClone = FindNodeByPath(newRoot, path1, cloneMap, upToLca:=lca)
-                            Dim nodeToAdd = CloneSubtree(cloneMap(node2))
-                            ' Only add if not already present (by reference or by signature)
-                            If Not lcaClone.lstChildren.Any(Function(child) child.strSignature = nodeToAdd.strSignature) Then
-                                lcaClone.lstChildren.Add(nodeToAdd)
-                            End If
-                        End If
-                    Next
-                Next
-            End If
-        Next
+        ' Step 5: Find the LCA node in the cloned tree
+        Dim lcaClone = FindNodeByPath(newRoot, path1, cloneMap, upToLca:=lca)
+        If lcaClone Is Nothing Then Return newRoot
+
+        ' Step 6: Add a clone of the duplicate node to the LCA's children (if not already present)
+        Dim nodeToAdd = CloneSubtree(cloneMap(nodeToDuplicate))
+        If Not lcaClone.lstChildren.Any(Function(child) child.strSignature = nodeToAdd.strSignature) Then
+            lcaClone.lstChildren.Add(nodeToAdd)
+        End If
 
         Return newRoot
     End Function
@@ -709,157 +733,6 @@ Public Class ucrButtons
         Return element
     End Function
 
-    ''' <summary>
-    ''' Returns a new UIElement tree with duplicates removed. A node is considered a duplicate if:
-    ''' - Its strElementName has already appeared in the current branch, and
-    ''' - Its child tree is identical (structure and strElementName) to another node with the same strElementName in the same branch.
-    ''' </summary>
-    Private Function GetUIElementNoDuplicates(element As UIElement, elementNamesAlreadyInParentBranch As HashSet(Of String), level As Integer) As UIElement
-        If element Is Nothing OrElse String.IsNullOrEmpty(element.strElementName) Then Return Nothing
-
-        ' Track all seen nodes with the same strElementName in this branch, along with their child trees
-        Static branchSeen As New Dictionary(Of Integer, Dictionary(Of String, List(Of UIElement)))
-        If Not branchSeen.ContainsKey(level) Then
-            branchSeen(level) = New Dictionary(Of String, List(Of UIElement))(StringComparer.OrdinalIgnoreCase)
-        End If
-
-        Dim seenAtThisLevel = branchSeen(level)
-        Dim isDuplicate As Boolean = False
-
-        If seenAtThisLevel.ContainsKey(element.strElementName) Then
-            For Each seenNode In seenAtThisLevel(element.strElementName)
-                If AreChildTreesIdentical(element, seenNode) Then
-                    isDuplicate = True
-                    Exit For
-                End If
-            Next
-        End If
-
-        If isDuplicate Then
-            Return Nothing
-        End If
-
-        ' Add this node to the seen list for this strElementName at this level
-        If Not seenAtThisLevel.ContainsKey(element.strElementName) Then
-            seenAtThisLevel(element.strElementName) = New List(Of UIElement)
-        End If
-        seenAtThisLevel(element.strElementName).Add(element)
-
-        ' Recurse for children
-        Dim elementNamesAlreadyInCurrentBranch = New HashSet(Of String)(elementNamesAlreadyInParentBranch, StringComparer.OrdinalIgnoreCase) From {
-            element.strElementName
-        }
-
-        Dim newChildren As New List(Of UIElement)
-        For Each child In element.lstChildren
-            Dim elementNoDuplicate = GetUIElementNoDuplicates(child, elementNamesAlreadyInCurrentBranch, level + 1)
-            If elementNoDuplicate IsNot Nothing Then
-                newChildren.Add(elementNoDuplicate)
-            End If
-        Next
-
-        element.lstChildren = newChildren
-        Return element
-    End Function
-
-    ''' <summary>
-    ''' Returns True if the two UIElement trees are structurally identical and all nodes have the same strElementName.
-    ''' </summary>
-    Private Function AreChildTreesIdentical(node1 As UIElement, node2 As UIElement) As Boolean
-        If node1 Is Nothing AndAlso node2 Is Nothing Then Return True
-        If node1 Is Nothing OrElse node2 Is Nothing Then Return False
-        If Not String.Equals(node1.strElementName, node2.strElementName, StringComparison.OrdinalIgnoreCase) Then Return False
-
-        If node1.lstChildren.Count <> node2.lstChildren.Count Then Return False
-
-        For i As Integer = 0 To node1.lstChildren.Count - 1
-            If Not AreChildTreesIdentical(node1.lstChildren(i), node2.lstChildren(i)) Then
-                Return False
-            End If
-        Next
-
-        Return True
-    End Function
-
-    ''' <summary>
-    ''' Returns a new UIElement tree where, for each strElementName that appears more than once,
-    ''' all nodes with that name are moved to be direct children of their lowest common ancestor (LCA).
-    ''' </summary>
-    Private Function GetUIElementMoveDuplicatesToCommonParent(element As UIElement) As UIElement
-        If element Is Nothing OrElse String.IsNullOrEmpty(element.strElementName) Then Return Nothing
-        If element.lstChildren Is Nothing OrElse element.lstChildren.Count = 0 Then
-            Return element
-        End If
-
-        ' Step 1: Traverse the tree and record all paths to each node by strElementName
-        Dim nameToPaths As New Dictionary(Of String, List(Of List(Of UIElement)))(StringComparer.OrdinalIgnoreCase)
-        RecordPaths(element, New List(Of UIElement), nameToPaths)
-
-        ' Step 2: For each duplicate name, find the LCA and collect all nodes to move
-        Dim nameToLca As New Dictionary(Of String, UIElement)(StringComparer.OrdinalIgnoreCase)
-        For Each kvp In nameToPaths
-            If kvp.Value.Count > 1 Then
-                Dim lca As UIElement = FindLCAFromPaths(kvp.Value)
-                nameToLca(kvp.Key) = lca
-            End If
-        Next
-
-        ' Step 3: Build a new tree, moving duplicates to their LCA
-        Dim nodeToParent As New Dictionary(Of UIElement, UIElement) ' For removal
-        BuildParentMap(element, Nothing, nodeToParent)
-
-        ' Collect all nodes to move for each duplicate name
-        Dim nameToNodesToMove As New Dictionary(Of String, List(Of UIElement))(StringComparer.OrdinalIgnoreCase)
-        For Each kvp In nameToPaths
-            If kvp.Value.Count > 1 Then
-                Dim nodes = kvp.Value.Select(Function(path) path.Last()).ToList()
-                nameToNodesToMove(kvp.Key) = nodes
-            End If
-        Next
-
-        ' Clone the tree so we don't mutate the original
-        Dim cloneMap As New Dictionary(Of UIElement, UIElement)
-        Dim newRoot As UIElement = CloneTree(element, cloneMap)
-
-        ' Remove all duplicate nodes from their current parents (except the LCA)
-        For Each kvp In nameToNodesToMove
-            Dim name = kvp.Key
-            Dim lca = If(nameToLca.ContainsKey(name), cloneMap(nameToLca(name)), Nothing)
-            If lca Is Nothing Then Continue For
-            Dim nodes = kvp.Value.Select(Function(n) cloneMap(n)).ToList()
-            For Each node In nodes
-                Dim parent = FindParent(newRoot, node)
-                If parent IsNot Nothing AndAlso parent IsNot lca Then
-                    parent.lstChildren.Remove(node)
-                End If
-            Next
-            ' Add all nodes as direct children of the LCA (if not already present)
-            For Each node In nodes
-                If Not lca.lstChildren.Contains(node) Then
-                    lca.lstChildren.Add(node)
-                End If
-            Next
-        Next
-
-        Return newRoot
-    End Function
-
-    ' Helper: Traverse the tree and record all paths to each node by strElementName
-    Private Sub RecordPaths(node As UIElement, path As List(Of UIElement), nameToPaths As Dictionary(Of String, List(Of List(Of UIElement)))
-    )
-        If node Is Nothing Then Return
-        Dim newPath = New List(Of UIElement)(path) From {node}
-        If Not String.IsNullOrEmpty(node.strElementName) Then
-            If Not nameToPaths.ContainsKey(node.strElementName) Then
-                nameToPaths(node.strElementName) = New List(Of List(Of UIElement))()
-            End If
-            nameToPaths(node.strElementName).Add(newPath)
-        End If
-        For Each child In node.lstChildren
-            RecordPaths(child, newPath, nameToPaths)
-        Next
-    End Sub
-
     ' Helper: Find the lowest common ancestor from a list of paths
     Private Function FindLCAFromPaths(paths As List(Of List(Of UIElement))) As UIElement
         If paths Is Nothing OrElse paths.Count = 0 Then Return Nothing
@@ -876,17 +749,6 @@ Public Class ucrButtons
         Return lca
     End Function
 
-    ' Helper: Build a map from node to parent
-    Private Sub BuildParentMap(node As UIElement, parent As UIElement, nodeToParent As Dictionary(Of UIElement, UIElement))
-        If node Is Nothing Then Return
-        If parent IsNot Nothing Then
-            nodeToParent(node) = parent
-        End If
-        For Each child In node.lstChildren
-            BuildParentMap(child, node, nodeToParent)
-        Next
-    End Sub
-
     ' Helper: Clone the tree and build a map from old node to new node
     Private Function CloneTree(node As UIElement, cloneMap As Dictionary(Of UIElement, UIElement)) As UIElement
         If node Is Nothing Then Return Nothing
@@ -899,17 +761,6 @@ Public Class ucrButtons
             End If
         Next
         Return newNode
-    End Function
-
-    ' Helper: Find the parent of a node in the tree
-    Private Function FindParent(root As UIElement, target As UIElement) As UIElement
-        If root Is Nothing OrElse root.lstChildren Is Nothing Then Return Nothing
-        For Each child In root.lstChildren
-            If child Is target Then Return root
-            Dim found = FindParent(child, target)
-            If found IsNot Nothing Then Return found
-        Next
-        Return Nothing
     End Function
 
     ''' <summary>
