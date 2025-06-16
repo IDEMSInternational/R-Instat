@@ -27,7 +27,6 @@ Public Class sdgLinkedStationData
     Private clsDefaultFunction As New RFunction
     Private clsAnyDuplicatesFunction, clsConcFunction, clsGetColFunction As New RFunction
     Private clsRSyntax As RSyntax
-    Private strCurrentDataframeName As String
     Private bIsUnique As Boolean = True
 
     Private Sub sdgLinkedStationData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -118,7 +117,6 @@ Public Class sdgLinkedStationData
             bIsUnique = True
         End If
     End Sub
-
 
     Private Sub SetRCodesforReceivers(bReset As Boolean)
         Dim ucrTempReceiver As ucrReceiver

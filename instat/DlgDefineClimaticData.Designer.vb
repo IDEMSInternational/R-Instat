@@ -94,7 +94,7 @@ Partial Class DlgDefineClimaticData
         'cmdCheckUnique
         '
         Me.cmdCheckUnique.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCheckUnique.Location = New System.Drawing.Point(6, 437)
+        Me.cmdCheckUnique.Location = New System.Drawing.Point(6, 453)
         Me.cmdCheckUnique.Name = "cmdCheckUnique"
         Me.cmdCheckUnique.Size = New System.Drawing.Size(139, 23)
         Me.cmdCheckUnique.TabIndex = 9
@@ -163,7 +163,7 @@ Partial Class DlgDefineClimaticData
         Me.grpStation.Controls.Add(Me.ucrReceiverLongitude)
         Me.grpStation.Controls.Add(Me.ucrReceiverLatitude)
         Me.grpStation.Controls.Add(Me.ucrReceiverAltitude)
-        Me.grpStation.Location = New System.Drawing.Point(242, 211)
+        Me.grpStation.Location = New System.Drawing.Point(16, 198)
         Me.grpStation.Name = "grpStation"
         Me.grpStation.Size = New System.Drawing.Size(126, 216)
         Me.grpStation.TabIndex = 4
@@ -258,7 +258,7 @@ Partial Class DlgDefineClimaticData
         Me.grpDateTime.Controls.Add(Me.ucrReceiverMonth)
         Me.grpDateTime.Controls.Add(Me.ucrReceiverDay)
         Me.grpDateTime.Controls.Add(Me.lblDay)
-        Me.grpDateTime.Location = New System.Drawing.Point(242, 12)
+        Me.grpDateTime.Location = New System.Drawing.Point(161, 198)
         Me.grpDateTime.Name = "grpDateTime"
         Me.grpDateTime.Size = New System.Drawing.Size(126, 196)
         Me.grpDateTime.TabIndex = 3
@@ -403,7 +403,7 @@ Partial Class DlgDefineClimaticData
         Me.grpElements.Controls.Add(Me.ucrReceiverMinTemp)
         Me.grpElements.Controls.Add(Me.lblWindSpeed)
         Me.grpElements.Controls.Add(Me.lblWindDirection)
-        Me.grpElements.Location = New System.Drawing.Point(374, 12)
+        Me.grpElements.Location = New System.Drawing.Point(304, 13)
         Me.grpElements.Name = "grpElements"
         Me.grpElements.Size = New System.Drawing.Size(151, 395)
         Me.grpElements.TabIndex = 6
@@ -636,7 +636,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrInputCheckInput.AutoSize = True
         Me.ucrInputCheckInput.IsMultiline = False
         Me.ucrInputCheckInput.IsReadOnly = False
-        Me.ucrInputCheckInput.Location = New System.Drawing.Point(147, 439)
+        Me.ucrInputCheckInput.Location = New System.Drawing.Point(147, 455)
         Me.ucrInputCheckInput.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
         Me.ucrInputCheckInput.Size = New System.Drawing.Size(253, 21)
@@ -648,7 +648,7 @@ Partial Class DlgDefineClimaticData
         Me.ucrSelectorDefineClimaticData.bDropUnusedFilterLevels = False
         Me.ucrSelectorDefineClimaticData.bShowHiddenColumns = False
         Me.ucrSelectorDefineClimaticData.bUseCurrentFilter = True
-        Me.ucrSelectorDefineClimaticData.Location = New System.Drawing.Point(16, 9)
+        Me.ucrSelectorDefineClimaticData.Location = New System.Drawing.Point(16, 6)
         Me.ucrSelectorDefineClimaticData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDefineClimaticData.Name = "ucrSelectorDefineClimaticData"
         Me.ucrSelectorDefineClimaticData.Size = New System.Drawing.Size(213, 183)
@@ -658,7 +658,7 @@ Partial Class DlgDefineClimaticData
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(6, 476)
+        Me.ucrBase.Location = New System.Drawing.Point(6, 492)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
@@ -667,7 +667,7 @@ Partial Class DlgDefineClimaticData
         'cmdLinkedStation
         '
         Me.cmdLinkedStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLinkedStation.Location = New System.Drawing.Point(16, 206)
+        Me.cmdLinkedStation.Location = New System.Drawing.Point(6, 422)
         Me.cmdLinkedStation.Name = "cmdLinkedStation"
         Me.cmdLinkedStation.Size = New System.Drawing.Size(139, 23)
         Me.cmdLinkedStation.TabIndex = 12
@@ -679,7 +679,7 @@ Partial Class DlgDefineClimaticData
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(533, 531)
+        Me.ClientSize = New System.Drawing.Size(469, 551)
         Me.Controls.Add(Me.cmdLinkedStation)
         Me.Controls.Add(Me.ucrInputCheckInput)
         Me.Controls.Add(Me.cmdCheckUnique)

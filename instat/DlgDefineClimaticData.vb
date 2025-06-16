@@ -25,7 +25,6 @@ Public Class DlgDefineClimaticData
     Private lstReceivers As New List(Of ucrReceiverSingle)
     Private lstNewReceivers As New List(Of ucrReceiverSingle)
     Private lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
-    Private lstNewRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
     Private clslLinkedAnyDuplicatesFunction, clsLinkedConcFunction, clsDefaultFunction, clsLinkedDefautFunction, clsLinkedGetColFunction As New RFunction
     Private clsAnyDuplicatesFunction, clsConcFunction, clsGetColFunction, clsDummyFunction As New RFunction
     Private strCurrentDataframeName As String
@@ -234,8 +233,6 @@ Public Class DlgDefineClimaticData
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
     End Sub
-
-
 
     Private Function GetClimaticTypeFromRCommand(strName As String, strDataName As String) As String
         Try
