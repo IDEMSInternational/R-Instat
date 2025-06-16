@@ -527,16 +527,20 @@ Public Class ucrButtons
         strElementTree += vbLf & vbLf & "After duplicate ancestor removal:" & vbLf & vbLf
         strElementTree += OutputUIElementTree(rootElementNoDuplicateAncestors, 0)
 
-        ' If there are duplicates in different branches, then find the largest duplicate tree and
-        '   add add it to the LCA (Lowest Common Ancestor)
-        Dim rootElementDuplicatesInLca As UIElement = GetUIElementAddDuplicatesToLca(rootElementNoDuplicateAncestors) ' updated variable name here
-        strElementTree += vbLf & vbLf & "After adding longest duplicate to Lowest Common Ancestor (LCA):" & vbLf & vbLf
-        strElementTree += OutputUIElementTree(rootElementDuplicatesInLca, 0)
+        Dim rootElementDuplicatesInLca As UIElement
+        Do
+            ' If there are duplicates in different branches, then find the largest duplicate tree and
+            '   add add it to the LCA (Lowest Common Ancestor)
+            rootElementDuplicatesInLca = GetUIElementAddDuplicatesToLca(rootElementNoDuplicateAncestors) ' updated variable name here
+            strElementTree += vbLf & vbLf & "After adding longest duplicate to Lowest Common Ancestor (LCA):" & vbLf & vbLf
+            strElementTree += OutputUIElementTree(rootElementDuplicatesInLca, 0)
 
-        ' Remove nodes that are duplicates of their ancestors, or siblings of their ancestors
-        Dim rootElementDuplicatesInLcaCleaned = GetUIElementNoDuplicateAncestors(rootElementDuplicatesInLca, Nothing, Nothing)
-        strElementTree += vbLf & vbLf & "After cleaning LCA tree:" & vbLf & vbLf
-        strElementTree += OutputUIElementTree(rootElementDuplicatesInLcaCleaned, 0)
+            ' Remove nodes that are duplicates of their ancestors, or siblings of their ancestors
+            rootElementNoDuplicateAncestors = GetUIElementNoDuplicateAncestors(rootElementDuplicatesInLca, Nothing, Nothing)
+            strElementTree += vbLf & vbLf & "After cleaning LCA tree:" & vbLf & vbLf
+            strElementTree += OutputUIElementTree(rootElementNoDuplicateAncestors, 0)
+
+        Loop Until rootElementDuplicatesInLca Is Nothing
 
         ' Write the element tree to a file on the desktop
         Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
