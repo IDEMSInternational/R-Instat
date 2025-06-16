@@ -65,6 +65,61 @@ Public Class ucrAdditionalLayers
         Next
     End Sub
 
+    ' Enum for direction of movement
+    Private Enum Direction
+        Top
+        Up
+        Down
+        Bottom
+    End Enum
+
+    ' Method to reorder ListView items and keep lstLayerComplete in sync
+    Private Sub ReorderListViewItems(direction As Direction)
+        If lstLayers.SelectedItems.Count = 0 Then Return
+
+        Dim selectedIndex As Integer = lstLayers.SelectedIndices(0)
+        Dim item As ListViewItem = lstLayers.SelectedItems(0)
+        Dim layerComplete As Boolean = lstLayerComplete(selectedIndex)
+
+        lstLayers.Items.RemoveAt(selectedIndex)
+        lstLayerComplete.RemoveAt(selectedIndex)
+
+        Dim newIndex As Integer = selectedIndex
+
+        Select Case direction
+            Case Direction.Top
+                newIndex = 0
+            Case Direction.Up
+                newIndex = Math.Max(0, selectedIndex - 1)
+            Case Direction.Down
+                newIndex = Math.Min(lstLayers.Items.Count, selectedIndex + 1)
+            Case Direction.Bottom
+                newIndex = lstLayers.Items.Count
+        End Select
+
+        lstLayers.Items.Insert(newIndex, item)
+        lstLayerComplete.Insert(newIndex, layerComplete)
+        lstLayers.Items(newIndex).Selected = True
+        lstLayers.Select()
+    End Sub
+
+
+    Private Sub cmdUp_Click(sender As Object, e As EventArgs) Handles cmdUp.Click
+        ReorderListViewItems(Direction.Up)
+    End Sub
+
+    Private Sub cmdTop_Click(sender As Object, e As EventArgs) Handles cmdTop.Click
+        ReorderListViewItems(Direction.Top)
+    End Sub
+
+    Private Sub cmdDown_Click(sender As Object, e As EventArgs) Handles cmdDown.Click
+        ReorderListViewItems(Direction.Down)
+    End Sub
+
+    Private Sub cmdBottom_Click(sender As Object, e As EventArgs) Handles cmdBottom.Click
+        ReorderListViewItems(Direction.Bottom)
+    End Sub
+
     Private Sub AddLayerToList(clsGeomParameter As RParameter, strGeomName As String, bLayerComplete As Boolean)
         Dim lviLayer As ListViewItem
         Dim strLayerName As String
@@ -255,4 +310,21 @@ Public Class ucrAdditionalLayers
         End If
         Return strGeom
     End Function
+
+
+    Private Sub cmdgoUp_Click(sender As Object, e As EventArgs) Handles cmdUp.Click
+        ReorderListViewItems(Direction.Up)
+    End Sub
+
+    Private Sub cmdgoTop_Click(sender As Object, e As EventArgs) Handles cmdTop.Click
+        ReorderListViewItems(Direction.Top)
+    End Sub
+
+    Private Sub cmdgoDown_Click(sender As Object, e As EventArgs) Handles cmdDown.Click
+        ReorderListViewItems(Direction.Down)
+    End Sub
+
+    Private Sub cmdgoBottom_Click(sender As Object, e As EventArgs) Handles cmdBottom.Click
+        ReorderListViewItems(Direction.Bottom)
+    End Sub
 End Class
