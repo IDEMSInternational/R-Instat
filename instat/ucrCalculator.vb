@@ -124,7 +124,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdStars, "Displays also ., or , or **, or *** for the level of significance. with fmt="" then the value is omitted from the display.")
         ttCalculator.SetToolTip(cmdFormatComma, "Displays decimal point as comma.")
         ttCalculator.SetToolTip(cmdTrace, "Trace rainfall is recorded as 0.03mm in R-Instat. Here we restore it to be ""tr"".")
-        ttCalculator.SetToolTip(cmdAlignR, "Aligns values to the right. Use ""\c"" if you prefer them centred.")
+        ttCalculator.SetToolTip(cmdAlignR, "Aligns values to the right. Use ""\\c"" if you prefer them centred.")
         ttCalculator.SetToolTip(cmdFractions, "Displays values as fractions. So (0.1, 0.2, 0.25) is displayed as (1/10, 1/5, 1/4) The other 4 keys are copied from the Functions keyboard.")
         ttCalculator.SetToolTip(cmdFrac10, "Give fraction our of 10 for a decimal value. For example for 0.36 the value is 4/10")
         ttCalculator.SetToolTip(cmdFrac20, "Give fraction our of 20 for a decimal value. For example for 0.36 the value is 7/20")
@@ -1925,23 +1925,23 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPlusD_Click(sender As Object, e As EventArgs) Handles cmdPlusD.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+d", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("d", 0)
     End Sub
 
     Private Sub cmdPlusDD_Click(sender As Object, e As EventArgs) Handles cmdPlusDD.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+dd", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dd", 0)
     End Sub
 
     Private Sub cmdPlusDDD_Click(sender As Object, e As EventArgs) Handles cmdPlusDDD.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+ddd", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("ddd", 0)
     End Sub
 
     Private Sub cmdPlusDDDD_Click(sender As Object, e As EventArgs) Handles cmdPlusDDDD.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+dddd", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("dddd", 0)
     End Sub
 
     Private Sub cmdPlusPercJ_Click(sender As Object, e As EventArgs) Handles cmdPlusPercJ.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+%j", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%j", 0)
     End Sub
 
     Private Sub cmd040625_Click(sender As Object, e As EventArgs) Handles cmd040625.Click
@@ -1949,23 +1949,23 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPlusM_Click(sender As Object, e As EventArgs) Handles cmdPlusM.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+m", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("m", 0)
     End Sub
 
     Private Sub cmdPlusMM_Click(sender As Object, e As EventArgs) Handles cmdPlusMM.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+mm", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mm", 0)
     End Sub
 
     Private Sub cmdPlusMMM_Click(sender As Object, e As EventArgs) Handles cmdPlusMMM.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+mmm", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mmm", 0)
     End Sub
 
     Private Sub cmdPlusMMMM_Click(sender As Object, e As EventArgs) Handles cmdPlusMMMM.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+mmmm", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mmmm", 0)
     End Sub
 
     Private Sub cmdPlusPercD_Click(sender As Object, e As EventArgs) Handles cmdPlusPercD.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+%D", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%D", 0)
     End Sub
 
     Private Sub cmdMon4Jun_Click(sender As Object, e As EventArgs) Handles cmdMon4Jun.Click
@@ -1974,23 +1974,23 @@ Public Class ucrCalculator
 
 
     Private Sub cmdPlusY_Click(sender As Object, e As EventArgs) Handles cmdPlusY.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+y", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("y", 0)
     End Sub
 
     Private Sub cmdPlusYY_Click(sender As Object, e As EventArgs) Handles cmdPlusYY.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+yy", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("yy", 0)
     End Sub
 
     Private Sub cmdPlusYYYY_Click(sender As Object, e As EventArgs) Handles cmdPlusYYYY.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+yyyy", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("yyyy", 0)
     End Sub
 
     Private Sub cmdPlusPercC_Click(sender As Object, e As EventArgs) Handles cmdPlusPercC.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+%c", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%c", 0)
     End Sub
 
     Private Sub cmdPlusPercR_Click(sender As Object, e As EventArgs) Handles cmdPlusPercR.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+%r", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%r", 0)
     End Sub
 
     Private Sub cmd081547_Click(sender As Object, e As EventArgs) Handles cmd081547.Click
@@ -1998,31 +1998,24 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPlusPercH_Click(sender As Object, e As EventArgs) Handles cmdPlusPercH.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+%H", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%H", 0)
     End Sub
 
     Private Sub cmdPlusPercI_Click(sender As Object, e As EventArgs) Handles cmdPlusPercI.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+%I", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%I", 0)
     End Sub
 
     Private Sub cmdPlusPercP_Click(sender As Object, e As EventArgs) Handles cmdPlusPercP.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+%p", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%p", 0)
     End Sub
 
     Private Sub cmdPlusPercM_Click(sender As Object, e As EventArgs) Handles cmdPlusPercM.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+%M", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%M", 0)
     End Sub
 
     Private Sub cmdPlusPercS_Click(sender As Object, e As EventArgs) Handles cmdPlusPercS.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("+%S", 0)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%S", 0)
     End Sub
-
-
-
-
-
-
-
 
 
 
@@ -2256,7 +2249,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdPercent0_Click(sender As Object, e As EventArgs) Handles cmdPercent0.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=2, fmt=""%"")", 21)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=0, fmt=""%"")", 21)
     End Sub
 
     Private Sub cmdFormatNA_Click(sender As Object, e As EventArgs) Handles cmdFormatNA.Click
@@ -2288,7 +2281,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdAlignR_Click(sender As Object, e As EventArgs) Handles cmdAlignR.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=3, sci=20, align=""\r"")", 32)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , digits=3, sci=20, align=""\\r"")", 32)
     End Sub
 
     Private Sub cmdFractions_Click(sender As Object, e As EventArgs) Handles cmdFractions.Click
