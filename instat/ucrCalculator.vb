@@ -482,12 +482,6 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPlusYYYY, "year with century, for example 2025")
         ttCalculator.SetToolTip(cmdPlusPercC, "date and time together, including the day of the week - the same as ddd mmm d %H:%M:%S yyyy")
         ttCalculator.SetToolTip(cmdPlusPercR, "time of day - the same as %I:%M:%S %p")
-        ttCalculator.SetToolTip(cmd081547, "Hour in the day (with 24 hour clock), then minutes (0 to 59) and seconds (0 to 59)")
-        ttCalculator.SetToolTip(cmdPlusPercH, "hour of the day (00 - 23)")
-        ttCalculator.SetToolTip(cmdPlusPercI, "hour of the day (01 - 12) for 12 hour clock")
-        ttCalculator.SetToolTip(cmdPlusPercP, "AM/PM indicator")
-        ttCalculator.SetToolTip(cmdPlusPercM, "minute (00 - 59)")
-        ttCalculator.SetToolTip(cmdPlusPercS, "second (00 - 59)")
 
 
         ' Factor keyboard tooltips
@@ -1991,30 +1985,6 @@ Public Class ucrCalculator
 
     Private Sub cmdPlusPercR_Click(sender As Object, e As EventArgs) Handles cmdPlusPercR.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%r", 0)
-    End Sub
-
-    Private Sub cmd081547_Click(sender As Object, e As EventArgs) Handles cmd081547.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("DescTools::Format( , fmt=""%H, %M, %S"")", 20)
-    End Sub
-
-    Private Sub cmdPlusPercH_Click(sender As Object, e As EventArgs) Handles cmdPlusPercH.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%H", 0)
-    End Sub
-
-    Private Sub cmdPlusPercI_Click(sender As Object, e As EventArgs) Handles cmdPlusPercI.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%I", 0)
-    End Sub
-
-    Private Sub cmdPlusPercP_Click(sender As Object, e As EventArgs) Handles cmdPlusPercP.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%p", 0)
-    End Sub
-
-    Private Sub cmdPlusPercM_Click(sender As Object, e As EventArgs) Handles cmdPlusPercM.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%M", 0)
-    End Sub
-
-    Private Sub cmdPlusPercS_Click(sender As Object, e As EventArgs) Handles cmdPlusPercS.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%S", 0)
     End Sub
 
 

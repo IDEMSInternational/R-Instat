@@ -63,27 +63,21 @@ Partial Class ucrCalculator
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.grpDates = New System.Windows.Forms.GroupBox()
         Me.grpDateFormat = New System.Windows.Forms.GroupBox()
-        Me.cmdPlusPercS = New System.Windows.Forms.Button()
         Me.cmdPlusPercR = New System.Windows.Forms.Button()
         Me.cmdPlusPercD = New System.Windows.Forms.Button()
         Me.cmdPlusPercJ = New System.Windows.Forms.Button()
-        Me.cmdPlusPercM = New System.Windows.Forms.Button()
         Me.cmdPlusPercC = New System.Windows.Forms.Button()
         Me.cmdPlusMMMM = New System.Windows.Forms.Button()
         Me.cmdPlusDDDD = New System.Windows.Forms.Button()
-        Me.cmdPlusPercP = New System.Windows.Forms.Button()
         Me.cmdPlusYYYY = New System.Windows.Forms.Button()
         Me.cmdPlusMMM = New System.Windows.Forms.Button()
         Me.cmdPlusDDD = New System.Windows.Forms.Button()
-        Me.cmdPlusPercI = New System.Windows.Forms.Button()
         Me.cmdPlusYY = New System.Windows.Forms.Button()
         Me.cmdPlusMM = New System.Windows.Forms.Button()
         Me.cmdPlusDD = New System.Windows.Forms.Button()
-        Me.cmdPlusPercH = New System.Windows.Forms.Button()
         Me.cmdPlusY = New System.Windows.Forms.Button()
         Me.cmdPlusM = New System.Windows.Forms.Button()
         Me.cmdPlusD = New System.Windows.Forms.Button()
-        Me.cmd081547 = New System.Windows.Forms.Button()
         Me.cmdMon4Jun = New System.Windows.Forms.Button()
         Me.cmd040625 = New System.Windows.Forms.Button()
         Me.cmdJun4 = New System.Windows.Forms.Button()
@@ -1060,54 +1054,37 @@ Partial Class ucrCalculator
         Me.grpDates.Name = "grpDates"
         Me.grpDates.Padding = New System.Windows.Forms.Padding(2)
         Me.grpDates.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.grpDates.Size = New System.Drawing.Size(325, 323)
+        Me.grpDates.Size = New System.Drawing.Size(325, 294)
         Me.grpDates.TabIndex = 188
         Me.grpDates.TabStop = False
         Me.grpDates.Text = "Dates/Times"
         '
         'grpDateFormat
         '
-        Me.grpDateFormat.Controls.Add(Me.cmdPlusPercS)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusPercR)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusPercD)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusPercJ)
-        Me.grpDateFormat.Controls.Add(Me.cmdPlusPercM)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusPercC)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusMMMM)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusDDDD)
-        Me.grpDateFormat.Controls.Add(Me.cmdPlusPercP)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusYYYY)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusMMM)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusDDD)
-        Me.grpDateFormat.Controls.Add(Me.cmdPlusPercI)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusYY)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusMM)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusDD)
-        Me.grpDateFormat.Controls.Add(Me.cmdPlusPercH)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusY)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusM)
         Me.grpDateFormat.Controls.Add(Me.cmdPlusD)
-        Me.grpDateFormat.Controls.Add(Me.cmd081547)
         Me.grpDateFormat.Controls.Add(Me.cmdMon4Jun)
         Me.grpDateFormat.Controls.Add(Me.cmd040625)
         Me.grpDateFormat.Controls.Add(Me.cmdJun4)
         Me.grpDateFormat.Location = New System.Drawing.Point(6, 175)
         Me.grpDateFormat.Name = "grpDateFormat"
-        Me.grpDateFormat.Size = New System.Drawing.Size(316, 115)
+        Me.grpDateFormat.Size = New System.Drawing.Size(316, 90)
         Me.grpDateFormat.TabIndex = 243
         Me.grpDateFormat.TabStop = False
         Me.grpDateFormat.Text = "Format"
-        '
-        'cmdPlusPercS
-        '
-        Me.cmdPlusPercS.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlusPercS.Location = New System.Drawing.Point(265, 88)
-        Me.cmdPlusPercS.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdPlusPercS.Name = "cmdPlusPercS"
-        Me.cmdPlusPercS.Size = New System.Drawing.Size(50, 25)
-        Me.cmdPlusPercS.TabIndex = 261
-        Me.cmdPlusPercS.Text = "+%S"
-        Me.cmdPlusPercS.UseVisualStyleBackColor = True
         '
         'cmdPlusPercR
         '
@@ -1142,17 +1119,6 @@ Partial Class ucrCalculator
         Me.cmdPlusPercJ.Text = "+%j"
         Me.cmdPlusPercJ.UseVisualStyleBackColor = True
         '
-        'cmdPlusPercM
-        '
-        Me.cmdPlusPercM.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlusPercM.Location = New System.Drawing.Point(206, 88)
-        Me.cmdPlusPercM.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdPlusPercM.Name = "cmdPlusPercM"
-        Me.cmdPlusPercM.Size = New System.Drawing.Size(60, 25)
-        Me.cmdPlusPercM.TabIndex = 257
-        Me.cmdPlusPercM.Text = "+%M"
-        Me.cmdPlusPercM.UseVisualStyleBackColor = True
-        '
         'cmdPlusPercC
         '
         Me.cmdPlusPercC.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -1185,17 +1151,6 @@ Partial Class ucrCalculator
         Me.cmdPlusDDDD.TabIndex = 254
         Me.cmdPlusDDDD.Text = "+dddd"
         Me.cmdPlusDDDD.UseVisualStyleBackColor = True
-        '
-        'cmdPlusPercP
-        '
-        Me.cmdPlusPercP.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlusPercP.Location = New System.Drawing.Point(162, 88)
-        Me.cmdPlusPercP.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdPlusPercP.Name = "cmdPlusPercP"
-        Me.cmdPlusPercP.Size = New System.Drawing.Size(45, 25)
-        Me.cmdPlusPercP.TabIndex = 253
-        Me.cmdPlusPercP.Text = "+%p"
-        Me.cmdPlusPercP.UseVisualStyleBackColor = True
         '
         'cmdPlusYYYY
         '
@@ -1230,17 +1185,6 @@ Partial Class ucrCalculator
         Me.cmdPlusDDD.Text = "+ddd"
         Me.cmdPlusDDD.UseVisualStyleBackColor = True
         '
-        'cmdPlusPercI
-        '
-        Me.cmdPlusPercI.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlusPercI.Location = New System.Drawing.Point(113, 88)
-        Me.cmdPlusPercI.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdPlusPercI.Name = "cmdPlusPercI"
-        Me.cmdPlusPercI.Size = New System.Drawing.Size(50, 25)
-        Me.cmdPlusPercI.TabIndex = 249
-        Me.cmdPlusPercI.Text = "+%I"
-        Me.cmdPlusPercI.UseVisualStyleBackColor = True
-        '
         'cmdPlusYY
         '
         Me.cmdPlusYY.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -1274,17 +1218,6 @@ Partial Class ucrCalculator
         Me.cmdPlusDD.Text = "+dd"
         Me.cmdPlusDD.UseVisualStyleBackColor = True
         '
-        'cmdPlusPercH
-        '
-        Me.cmdPlusPercH.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlusPercH.Location = New System.Drawing.Point(69, 88)
-        Me.cmdPlusPercH.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdPlusPercH.Name = "cmdPlusPercH"
-        Me.cmdPlusPercH.Size = New System.Drawing.Size(45, 25)
-        Me.cmdPlusPercH.TabIndex = 245
-        Me.cmdPlusPercH.Text = "+%H"
-        Me.cmdPlusPercH.UseVisualStyleBackColor = True
-        '
         'cmdPlusY
         '
         Me.cmdPlusY.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -1317,17 +1250,6 @@ Partial Class ucrCalculator
         Me.cmdPlusD.TabIndex = 242
         Me.cmdPlusD.Text = "+d"
         Me.cmdPlusD.UseVisualStyleBackColor = True
-        '
-        'cmd081547
-        '
-        Me.cmd081547.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmd081547.Location = New System.Drawing.Point(0, 88)
-        Me.cmd081547.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmd081547.Name = "cmd081547"
-        Me.cmd081547.Size = New System.Drawing.Size(70, 25)
-        Me.cmd081547.TabIndex = 241
-        Me.cmd081547.Text = "08, 15, 47"
-        Me.cmd081547.UseVisualStyleBackColor = True
         '
         'cmdMon4Jun
         '
@@ -1632,7 +1554,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRHelp.AutoSize = True
         Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripDate
-        Me.cmdRHelp.Location = New System.Drawing.Point(211, 290)
+        Me.cmdRHelp.Location = New System.Drawing.Point(211, 264)
         Me.cmdRHelp.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRHelp.Name = "cmdRHelp"
         Me.cmdRHelp.Size = New System.Drawing.Size(110, 25)
@@ -9563,27 +9485,21 @@ Partial Class ucrCalculator
     Friend WithEvents cmdFrac10 As Button
     Friend WithEvents DesctoolsFormatToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents grpDateFormat As GroupBox
-    Friend WithEvents cmdPlusPercS As Button
     Friend WithEvents cmdPlusPercR As Button
     Friend WithEvents cmdPlusPercD As Button
     Friend WithEvents cmdPlusPercJ As Button
-    Friend WithEvents cmdPlusPercM As Button
     Friend WithEvents cmdPlusPercC As Button
     Friend WithEvents cmdPlusMMMM As Button
     Friend WithEvents cmdPlusDDDD As Button
-    Friend WithEvents cmdPlusPercP As Button
     Friend WithEvents cmdPlusYYYY As Button
     Friend WithEvents cmdPlusMMM As Button
     Friend WithEvents cmdPlusDDD As Button
-    Friend WithEvents cmdPlusPercI As Button
     Friend WithEvents cmdPlusYY As Button
     Friend WithEvents cmdPlusMM As Button
     Friend WithEvents cmdPlusDD As Button
-    Friend WithEvents cmdPlusPercH As Button
     Friend WithEvents cmdPlusY As Button
     Friend WithEvents cmdPlusM As Button
     Friend WithEvents cmdPlusD As Button
-    Friend WithEvents cmd081547 As Button
     Friend WithEvents cmdMon4Jun As Button
     Friend WithEvents cmd040625 As Button
     Friend WithEvents cmdJun4 As Button
