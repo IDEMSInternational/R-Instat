@@ -527,7 +527,8 @@ Public Class ucrButtons
         strElementTree += vbLf & vbLf & "After duplicate ancestor removal:" & vbLf & vbLf
         strElementTree += OutputUIElementTree(rootElementNoDuplicateAncestors, 0)
 
-        Dim rootElementDuplicatesInLca As UIElement
+        Dim rootElementDuplicatesInLca As UIElement = Nothing
+        Dim rootElementNoDuplicateAncestorsFinal As UIElement
         Do
             ' If there are duplicates in different branches, then find the largest duplicate tree and
             '   add add it to the LCA (Lowest Common Ancestor)
@@ -535,12 +536,24 @@ Public Class ucrButtons
             strElementTree += vbLf & vbLf & "After adding longest duplicate to Lowest Common Ancestor (LCA):" & vbLf & vbLf
             strElementTree += OutputUIElementTree(rootElementDuplicatesInLca, 0)
 
+            rootElementNoDuplicateAncestorsFinal = rootElementNoDuplicateAncestors.Clone()
+
             ' Remove nodes that are duplicates of their ancestors, or siblings of their ancestors
             rootElementNoDuplicateAncestors = GetUIElementNoDuplicateAncestors(rootElementDuplicatesInLca, Nothing, Nothing)
             strElementTree += vbLf & vbLf & "After cleaning LCA tree:" & vbLf & vbLf
             strElementTree += OutputUIElementTree(rootElementNoDuplicateAncestors, 0)
 
         Loop Until rootElementDuplicatesInLca Is Nothing
+
+        ' Remove duplicate true/false siblings
+        Dim rootElementNoDuplicateSiblingsTrueFalse = GetUIElementNoDuplicateSiblings(rootElementNoDuplicateAncestorsFinal, True)
+        strElementTree += vbLf & vbLf & "After duplicate true/false sibling removal:" & vbLf & vbLf
+        strElementTree += OutputUIElementTree(rootElementNoDuplicateSiblingsTrueFalse, 0)
+
+        ' Remove true/false nodes that are duplicates of their ancestors, or siblings of their ancestors
+        Dim rootElementNoDuplicateAncestorsTrueFalse = GetUIElementNoDuplicateAncestors(rootElementNoDuplicateSiblingsTrueFalse, Nothing, Nothing, True)
+        strElementTree += vbLf & vbLf & "After true/false duplicate ancestor removal:" & vbLf & vbLf
+        strElementTree += OutputUIElementTree(rootElementNoDuplicateAncestorsTrueFalse, 0)
 
         ' Write the element tree to a file on the desktop
         Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
@@ -554,15 +567,15 @@ Public Class ucrButtons
 
     End Sub
 
-    Private Function GetUIElementNoDuplicateSiblings(element As UIElement) As UIElement
+    Private Function GetUIElementNoDuplicateSiblings(element As UIElement, Optional bIgnoreTrueFalse As Boolean = False) As UIElement
         If element Is Nothing Then Return Nothing
 
         ' Process children and remove duplicates among siblings
         Dim seenSignatures As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
         Dim newChildren As New List(Of UIElement)
         For Each child In element.lstChildren
-            Dim cleanedChild = GetUIElementNoDuplicateSiblings(child)
-            If cleanedChild IsNot Nothing AndAlso Not seenSignatures.Contains(cleanedChild.strSignature) Then
+            Dim cleanedChild = GetUIElementNoDuplicateSiblings(child, bIgnoreTrueFalse)
+            If cleanedChild IsNot Nothing AndAlso Not IsSignatureInSet(cleanedChild.strSignature, seenSignatures, bIgnoreTrueFalse) Then
                 seenSignatures.Add(cleanedChild.strSignature)
                 newChildren.Add(cleanedChild)
             End If
@@ -576,7 +589,8 @@ Public Class ucrButtons
 
     Private Function GetUIElementNoDuplicateAncestors(element As UIElement,
                                                       ancestorsSignatures As HashSet(Of String),
-                                                      parentSiblings As HashSet(Of String)) As UIElement
+                                                      parentSiblings As HashSet(Of String),
+                                                      Optional bIgnoreTrueFalse As Boolean = False) As UIElement
         If element Is Nothing Then Return Nothing
 
         If ancestorsSignatures Is Nothing Then
@@ -584,7 +598,7 @@ Public Class ucrButtons
         End If
 
         ' If this strSignature matches any ancestor, remove this node
-        If ancestorsSignatures.Contains(element.strSignature) Then
+        If IsSignatureInSet(element.strSignature, ancestorsSignatures, bIgnoreTrueFalse) Then
             Return Nothing
         End If
 
@@ -605,7 +619,7 @@ Public Class ucrButtons
         Dim newChildren As New List(Of UIElement)
         For i As Integer = 0 To element.lstChildren.Count - 1
             Dim child = element.lstChildren(i)
-            Dim cleanedChild = GetUIElementNoDuplicateAncestors(child, ancestorsSignaturesNew, siblingSignatures)
+            Dim cleanedChild = GetUIElementNoDuplicateAncestors(child, ancestorsSignaturesNew, siblingSignatures, bIgnoreTrueFalse)
             If cleanedChild IsNot Nothing Then
                 newChildren.Add(cleanedChild)
             End If
@@ -661,6 +675,44 @@ Public Class ucrButtons
         End If
 
         Return newRoot
+    End Function
+
+    ''' <summary>
+    ''' Checks if strSignature is in signaturesToCompare, or if any string in signaturesToCompare starts with strSignature plus ", ".
+    ''' </summary>
+    Private Function IsSignatureInSet(strSignature As String,
+                                      signaturesToCompare As HashSet(Of String),
+                                      bIgnoreTrueFalse As Boolean) As Boolean
+
+        Dim strSignatureCleaned As String = If(bIgnoreTrueFalse, GetSignatureIgnoreTrueFalse(strSignature), strSignature)
+
+        Dim signaturesToCompareCleaned = New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+        For Each sig In signaturesToCompare
+            Dim sigCleaned As String = If(bIgnoreTrueFalse, GetSignatureIgnoreTrueFalse(sig), sig)
+            signaturesToCompareCleaned.Add(sigCleaned)
+        Next
+
+        If signaturesToCompareCleaned.Contains(strSignatureCleaned) Then
+            Return True
+        End If
+
+        Dim strSignatureExtended As String = strSignatureCleaned & ", "
+        Dim iSignatureLen As Integer = strSignatureExtended.Length
+        For Each sig In signaturesToCompareCleaned
+            If sig.Length >= iSignatureLen AndAlso String.Compare(sig.Substring(0, iSignatureLen), strSignatureExtended, StringComparison.Ordinal) = 0 Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
+
+    Private Shared Function GetSignatureIgnoreTrueFalse(strSignature As String) As String
+        If strSignature.EndsWith(" F", StringComparison.Ordinal) Then
+            strSignature = strSignature.Substring(0, strSignature.Length - 2)
+        End If
+        strSignature = strSignature.Replace(" F,", ",")
+        Return strSignature
     End Function
 
     ''' <summary>
@@ -813,5 +865,17 @@ Public Class UIElement
             End If
         Next
     End Sub
+
+    ''' <summary>
+    ''' Returns a deep copy of this UIElement and all its descendants.
+    ''' </summary>
+    Public Function Clone() As UIElement
+        Dim clonedElement As New UIElement(Me.strElementName)
+        For Each child In Me.lstChildren
+            clonedElement.lstChildren.Add(child.Clone())
+        Next
+        Return clonedElement
+    End Function
+
 End Class
 
