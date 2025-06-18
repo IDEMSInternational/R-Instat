@@ -483,7 +483,6 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdPlusPercC, "date and time together, including the day of the week - the same as ddd mmm d %H:%M:%S yyyy")
         ttCalculator.SetToolTip(cmdPlusPercR, "time of day - the same as %I:%M:%S %p")
 
-
         ' Factor keyboard tooltips
         ttCalculator.SetToolTip(cmdFactor, "Make a factor from a numeric or character variable")
         ttCalculator.SetToolTip(cmdAnon, "Anonymise factor levels, replacing them by a number. Optionally add a prefix, for example fct_anon(name, ""n"")")
@@ -1987,8 +1986,6 @@ Public Class ucrCalculator
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("%r", 0)
     End Sub
 
-
-
     Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
         ucrReceiverForCalculation.AddToReceiverAtCursorPosition("( )", 2)
     End Sub
@@ -2289,15 +2286,6 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("instatExtras::frac_den(, )", 3)
         End If
     End Sub
-
-
-
-
-
-
-
-
-
 
 
     Private Sub cmdRowRank_Click(sender As Object, e As EventArgs) Handles cmdRowRank.Click
