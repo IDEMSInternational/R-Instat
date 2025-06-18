@@ -572,18 +572,30 @@ Public Class ucrButtons
 
         ' Process children and remove duplicates among siblings
         Dim seenSignatures As New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
-        Dim newChildren As New List(Of UIElement)
+        Dim childrenParse1 As New List(Of UIElement)
         For Each child In element.lstChildren
             Dim cleanedChild = GetUIElementNoDuplicateSiblings(child, bIgnoreTrueFalse)
             If cleanedChild IsNot Nothing AndAlso Not IsSignatureInSet(cleanedChild.strSignature, seenSignatures, bIgnoreTrueFalse) Then
                 seenSignatures.Add(cleanedChild.strSignature)
-                newChildren.Add(cleanedChild)
+                childrenParse1.Add(cleanedChild)
+            End If
+        Next
+
+        'loop backwards through new children to see if we can remove any more siblings
+        seenSignatures = New HashSet(Of String)(StringComparer.OrdinalIgnoreCase)
+        Dim childrenParse2 As New List(Of UIElement)
+        For iChildIndex As Integer = childrenParse1.Count - 1 To 0 Step -1
+            Dim child = childrenParse1(iChildIndex)
+            Dim cleanedChild = GetUIElementNoDuplicateSiblings(child, bIgnoreTrueFalse)
+            If cleanedChild IsNot Nothing AndAlso Not IsSignatureInSet(cleanedChild.strSignature, seenSignatures, bIgnoreTrueFalse) Then
+                seenSignatures.Add(cleanedChild.strSignature)
+                childrenParse2.Add(cleanedChild)
             End If
         Next
 
         ' Create a new node to avoid mutating the original
         Dim newElement As New UIElement(element.strElementName)
-        newElement.lstChildren = newChildren
+        newElement.lstChildren = childrenParse2
         Return newElement
     End Function
 
