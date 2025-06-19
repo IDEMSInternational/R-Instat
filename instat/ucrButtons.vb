@@ -808,7 +808,8 @@ Public Class ucrButtons
         Dim lca As UIElement = Nothing
         For i = 0 To minLen - 1
             Dim thisNode = paths(0)(i)
-            If paths.All(Function(p) p(i) Is thisNode) Then
+            Dim iIndex = i 'needed to prevent warning in line below
+            If paths.All(Function(p) p(iIndex) Is thisNode) Then
                 lca = thisNode
             Else
                 Exit For
@@ -849,13 +850,16 @@ Public Class ucrButtons
 
 End Class
 
-' todo Define the UIElement class (place this outside of ucrButtons, e.g., at the end of the file or in a separate file if preferred)
 Public Class UIElement
     Public Property strElementName As String
+    Public Property strLabel As String
     Public Property lstChildren As New List(Of UIElement)
 
-    Public Sub New(strName As String)
+    Private ReadOnly resetDefault As String
+
+    Public Sub New(strName As String, Optional defaultValue As String = "")
         strElementName = strName
+        resetDefault = defaultValue
     End Sub
 
     ''' <summary>
@@ -866,6 +870,15 @@ Public Class UIElement
             Dim names As New List(Of String) From {strElementName}
             AddChildNames(lstChildren, names)
             Return String.Join(", ", names)
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' Returns the default value as a string. Can be overridden by child classes.
+    ''' </summary>
+    Public Overridable ReadOnly Property defaultAsString As String
+        Get
+            Return resetDefault
         End Get
     End Property
 
@@ -889,5 +902,147 @@ Public Class UIElement
         Return clonedElement
     End Function
 
+End Class
+
+''' <summary>
+''' A UIElement that has a boolean default value.
+''' </summary>
+Public Class UIElementBoolean
+    Inherits UIElement
+
+    ''' <summary>
+    ''' The default boolean value for this element.
+    ''' </summary>
+    Public Property resetdefault As Boolean
+
+    ''' <summary>
+    ''' Returns "True" if default is True, otherwise "False".
+    ''' </summary>
+    Public Overrides ReadOnly Property DefaultAsString As String
+        Get
+            Return If(resetdefault, "True", "False")
+        End Get
+    End Property
+
+    Public Sub New(strName As String, Optional defaultValue As Boolean = False)
+        MyBase.New(strName)
+        Me.resetdefault = defaultValue
+    End Sub
+End Class
+
+''' <summary>
+''' Abstract base class for numeric UI elements. Requires child classes to implement min, max, and increment properties.
+''' </summary>
+Public MustInherit Class UIElementNumber
+    Inherits UIElement
+
+    Protected Sub New(strName As String, Optional defaultValue As String = "")
+        MyBase.New(strName, defaultValue)
+    End Sub
+
+    ''' <summary>
+    ''' The minimum value allowed for this element.
+    ''' </summary>
+    Public MustOverride ReadOnly Property min As Double
+
+    ''' <summary>
+    ''' The maximum value allowed for this element.
+    ''' </summary>
+    Public MustOverride ReadOnly Property max As Double
+
+    ''' <summary>
+    ''' The increment step for this element.
+    ''' </summary>
+    Public MustOverride ReadOnly Property increment As Double
+End Class
+
+''' <summary>
+''' Represents a UI element for integer values, with required min, max, and increment properties.
+''' </summary>
+Public Class UIElementInteger
+    Inherits UIElementNumber
+
+    Private ReadOnly _min As Integer
+    Private ReadOnly _max As Integer
+    Private ReadOnly _increment As Integer
+
+    Public Sub New(strName As String, minValue As Integer, maxValue As Integer, incrementValue As Integer, Optional defaultValue As String = "")
+        MyBase.New(strName, defaultValue)
+        _min = minValue
+        _max = maxValue
+        _increment = incrementValue
+    End Sub
+
+    ''' <summary>
+    ''' The minimum integer value allowed for this element.
+    ''' </summary>
+    Public Overrides ReadOnly Property min As Double
+        Get
+            Return _min
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' The maximum integer value allowed for this element.
+    ''' </summary>
+    Public Overrides ReadOnly Property max As Double
+        Get
+            Return _max
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' The increment step for this element (integer).
+    ''' </summary>
+    Public Overrides ReadOnly Property increment As Double
+        Get
+            Return _increment
+        End Get
+    End Property
+End Class
+
+''' <summary>
+''' Represents a UI element for real (double) values, with required min, max, and increment properties.
+''' </summary>
+Public Class UIElementReal
+    Inherits UIElementNumber
+
+    Private ReadOnly _min As Double
+    Private ReadOnly _max As Double
+    Private ReadOnly _increment As Double
+
+    Public Sub New(strName As String, minValue As Double, maxValue As Double, incrementValue As Double, Optional defaultValue As String = "")
+        MyBase.New(strName, defaultValue)
+        _min = minValue
+        _max = maxValue
+        _increment = incrementValue
+    End Sub
+
+    ''' <summary>
+    ''' The minimum double value allowed for this element.
+    ''' </summary>
+    Public Overrides ReadOnly Property min As Double
+        Get
+            Return _min
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' The maximum double value allowed for this element.
+    ''' </summary>
+    Public Overrides ReadOnly Property max As Double
+        Get
+            Return _max
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' The increment step for this element (double).
+    ''' </summary>
+    Public Overrides ReadOnly Property increment As Double
+        Get
+            Return _increment
+        End Get
+    End Property
 End Class
 
