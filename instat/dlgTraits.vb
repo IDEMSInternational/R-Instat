@@ -133,11 +133,9 @@ Public Class dlgTraits
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        If clsWarningMessage.ConfirmReset() Then
-            SetDefaults()
-            SetRCodeForControls(True)
-            TestOKEnabled()
-        End If
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTraitGraphSelector.ControlContentsChanged, ucrReceiverTrait.ControlContentsChanged, ucrSaveTraits.ControlContentsChanged
