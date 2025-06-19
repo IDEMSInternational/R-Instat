@@ -62,6 +62,25 @@ Partial Class ucrCalculator
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.grpDates = New System.Windows.Forms.GroupBox()
+        Me.grpDateFormat = New System.Windows.Forms.GroupBox()
+        Me.cmdPlusPercR = New System.Windows.Forms.Button()
+        Me.cmdPlusPercD = New System.Windows.Forms.Button()
+        Me.cmdPlusPercJ = New System.Windows.Forms.Button()
+        Me.cmdPlusPercC = New System.Windows.Forms.Button()
+        Me.cmdPlusMMMM = New System.Windows.Forms.Button()
+        Me.cmdPlusDDDD = New System.Windows.Forms.Button()
+        Me.cmdPlusYYYY = New System.Windows.Forms.Button()
+        Me.cmdPlusMMM = New System.Windows.Forms.Button()
+        Me.cmdPlusDDD = New System.Windows.Forms.Button()
+        Me.cmdPlusYY = New System.Windows.Forms.Button()
+        Me.cmdPlusMM = New System.Windows.Forms.Button()
+        Me.cmdPlusDD = New System.Windows.Forms.Button()
+        Me.cmdPlusY = New System.Windows.Forms.Button()
+        Me.cmdPlusM = New System.Windows.Forms.Button()
+        Me.cmdPlusD = New System.Windows.Forms.Button()
+        Me.cmdMon4Jun = New System.Windows.Forms.Button()
+        Me.cmd040625 = New System.Windows.Forms.Button()
+        Me.cmdJun4 = New System.Windows.Forms.Button()
         Me.cmdYmdHms = New System.Windows.Forms.Button()
         Me.cmdYmdHm = New System.Windows.Forms.Button()
         Me.cmdAsDate = New System.Windows.Forms.Button()
@@ -90,6 +109,7 @@ Partial Class ucrCalculator
         Me.ContextMenuStripDate = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DateLubridateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DateHmsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DescToolsDateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripComplex = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ComplexBaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.grpInteger = New System.Windows.Forms.GroupBox()
@@ -388,16 +408,38 @@ Partial Class ucrCalculator
         Me.cmdBeta = New System.Windows.Forms.Button()
         Me.cmdDigamma = New System.Windows.Forms.Button()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
-        Me.cmdRollApply = New System.Windows.Forms.Button()
-        Me.cmdRank = New System.Windows.Forms.Button()
-        Me.cmdRescale = New System.Windows.Forms.Button()
-        Me.cmdScale = New System.Windows.Forms.Button()
         Me.cmdTransformRHelp = New instat.ucrSplitButton()
         Me.ContextMenuStripTransform = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.BaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DplyrToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ScalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ZooToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DesctoolsFormatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.grpTransFormFormat = New System.Windows.Forms.GroupBox()
+        Me.cmdFracDen = New System.Windows.Forms.Button()
+        Me.cmdFrac100 = New System.Windows.Forms.Button()
+        Me.cmdFrac20 = New System.Windows.Forms.Button()
+        Me.cmdFrac10 = New System.Windows.Forms.Button()
+        Me.cmdFractions = New System.Windows.Forms.Button()
+        Me.cmdAlignR = New System.Windows.Forms.Button()
+        Me.cmdTrace = New System.Windows.Forms.Button()
+        Me.cmdFormatComma = New System.Windows.Forms.Button()
+        Me.cmdStars = New System.Windows.Forms.Button()
+        Me.cmdPValue = New System.Windows.Forms.Button()
+        Me.cmdAlign = New System.Windows.Forms.Button()
+        Me.cmdFormatZero = New System.Windows.Forms.Button()
+        Me.cmdFormatNA = New System.Windows.Forms.Button()
+        Me.cmdPercent0 = New System.Windows.Forms.Button()
+        Me.cmdPercent = New System.Windows.Forms.Button()
+        Me.cmdEngineer = New System.Windows.Forms.Button()
+        Me.cmdScientific = New System.Windows.Forms.Button()
+        Me.cmdScientific4 = New System.Windows.Forms.Button()
+        Me.cmdInteger = New System.Windows.Forms.Button()
+        Me.cmdDecimal3 = New System.Windows.Forms.Button()
+        Me.cmdRollApply = New System.Windows.Forms.Button()
+        Me.cmdRank = New System.Windows.Forms.Button()
+        Me.cmdRescale = New System.Windows.Forms.Button()
+        Me.cmdScale = New System.Windows.Forms.Button()
         Me.cmdRev = New System.Windows.Forms.Button()
         Me.cmdMovProd = New System.Windows.Forms.Button()
         Me.cmdCumProd = New System.Windows.Forms.Button()
@@ -638,10 +680,6 @@ Partial Class ucrCalculator
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
         Me.grpFunctions = New System.Windows.Forms.GroupBox()
-        Me.cmdFracDen = New System.Windows.Forms.Button()
-        Me.cmdFrac20 = New System.Windows.Forms.Button()
-        Me.cmdFrac100 = New System.Windows.Forms.Button()
-        Me.cmdFrac10 = New System.Windows.Forms.Button()
         Me.cmdDigitsumSession = New System.Windows.Forms.Button()
         Me.cmdDigitsquSession = New System.Windows.Forms.Button()
         Me.cmdFunctionsDigitsum = New System.Windows.Forms.Button()
@@ -674,6 +712,7 @@ Partial Class ucrCalculator
         Me.ucrChkStoreScalar = New System.Windows.Forms.CheckBox()
         Me.grpBasic.SuspendLayout
         Me.grpDates.SuspendLayout
+        Me.grpDateFormat.SuspendLayout
         Me.ContextMenuStripDate.SuspendLayout
         Me.ContextMenuStripComplex.SuspendLayout
         Me.grpInteger.SuspendLayout
@@ -693,6 +732,7 @@ Partial Class ucrCalculator
         Me.grpRandom.SuspendLayout
         Me.grpTransform.SuspendLayout
         Me.ContextMenuStripTransform.SuspendLayout
+        Me.grpTransFormFormat.SuspendLayout
         Me.grpLogical.SuspendLayout
         Me.ContextMenuStripLogical.SuspendLayout
         Me.grpTestString.SuspendLayout
@@ -983,6 +1023,7 @@ Partial Class ucrCalculator
         '
         'grpDates
         '
+        Me.grpDates.Controls.Add(Me.grpDateFormat)
         Me.grpDates.Controls.Add(Me.cmdYmdHms)
         Me.grpDates.Controls.Add(Me.cmdYmdHm)
         Me.grpDates.Controls.Add(Me.cmdAsDate)
@@ -1013,18 +1054,243 @@ Partial Class ucrCalculator
         Me.grpDates.Name = "grpDates"
         Me.grpDates.Padding = New System.Windows.Forms.Padding(2)
         Me.grpDates.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.grpDates.Size = New System.Drawing.Size(252, 233)
+        Me.grpDates.Size = New System.Drawing.Size(325, 294)
         Me.grpDates.TabIndex = 188
         Me.grpDates.TabStop = False
         Me.grpDates.Text = "Dates/Times"
         '
+        'grpDateFormat
+        '
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusPercR)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusPercD)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusPercJ)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusPercC)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusMMMM)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusDDDD)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusYYYY)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusMMM)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusDDD)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusYY)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusMM)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusDD)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusY)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusM)
+        Me.grpDateFormat.Controls.Add(Me.cmdPlusD)
+        Me.grpDateFormat.Controls.Add(Me.cmdMon4Jun)
+        Me.grpDateFormat.Controls.Add(Me.cmd040625)
+        Me.grpDateFormat.Controls.Add(Me.cmdJun4)
+        Me.grpDateFormat.Location = New System.Drawing.Point(6, 175)
+        Me.grpDateFormat.Name = "grpDateFormat"
+        Me.grpDateFormat.Size = New System.Drawing.Size(316, 90)
+        Me.grpDateFormat.TabIndex = 243
+        Me.grpDateFormat.TabStop = False
+        Me.grpDateFormat.Text = "Format"
+        '
+        'cmdPlusPercR
+        '
+        Me.cmdPlusPercR.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusPercR.Location = New System.Drawing.Point(265, 64)
+        Me.cmdPlusPercR.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusPercR.Name = "cmdPlusPercR"
+        Me.cmdPlusPercR.Size = New System.Drawing.Size(50, 25)
+        Me.cmdPlusPercR.TabIndex = 260
+        Me.cmdPlusPercR.Text = "+%r"
+        Me.cmdPlusPercR.UseVisualStyleBackColor = True
+        '
+        'cmdPlusPercD
+        '
+        Me.cmdPlusPercD.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusPercD.Location = New System.Drawing.Point(265, 40)
+        Me.cmdPlusPercD.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusPercD.Name = "cmdPlusPercD"
+        Me.cmdPlusPercD.Size = New System.Drawing.Size(50, 25)
+        Me.cmdPlusPercD.TabIndex = 259
+        Me.cmdPlusPercD.Text = "+%D"
+        Me.cmdPlusPercD.UseVisualStyleBackColor = True
+        '
+        'cmdPlusPercJ
+        '
+        Me.cmdPlusPercJ.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusPercJ.Location = New System.Drawing.Point(265, 16)
+        Me.cmdPlusPercJ.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusPercJ.Name = "cmdPlusPercJ"
+        Me.cmdPlusPercJ.Size = New System.Drawing.Size(50, 25)
+        Me.cmdPlusPercJ.TabIndex = 258
+        Me.cmdPlusPercJ.Text = "+%j"
+        Me.cmdPlusPercJ.UseVisualStyleBackColor = True
+        '
+        'cmdPlusPercC
+        '
+        Me.cmdPlusPercC.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusPercC.Location = New System.Drawing.Point(206, 64)
+        Me.cmdPlusPercC.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusPercC.Name = "cmdPlusPercC"
+        Me.cmdPlusPercC.Size = New System.Drawing.Size(60, 25)
+        Me.cmdPlusPercC.TabIndex = 256
+        Me.cmdPlusPercC.Text = "+%c"
+        Me.cmdPlusPercC.UseVisualStyleBackColor = True
+        '
+        'cmdPlusMMMM
+        '
+        Me.cmdPlusMMMM.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusMMMM.Location = New System.Drawing.Point(206, 40)
+        Me.cmdPlusMMMM.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusMMMM.Name = "cmdPlusMMMM"
+        Me.cmdPlusMMMM.Size = New System.Drawing.Size(60, 25)
+        Me.cmdPlusMMMM.TabIndex = 255
+        Me.cmdPlusMMMM.Text = "+mmmm"
+        Me.cmdPlusMMMM.UseVisualStyleBackColor = True
+        '
+        'cmdPlusDDDD
+        '
+        Me.cmdPlusDDDD.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusDDDD.Location = New System.Drawing.Point(206, 16)
+        Me.cmdPlusDDDD.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusDDDD.Name = "cmdPlusDDDD"
+        Me.cmdPlusDDDD.Size = New System.Drawing.Size(60, 25)
+        Me.cmdPlusDDDD.TabIndex = 254
+        Me.cmdPlusDDDD.Text = "+dddd"
+        Me.cmdPlusDDDD.UseVisualStyleBackColor = True
+        '
+        'cmdPlusYYYY
+        '
+        Me.cmdPlusYYYY.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusYYYY.Location = New System.Drawing.Point(162, 64)
+        Me.cmdPlusYYYY.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusYYYY.Name = "cmdPlusYYYY"
+        Me.cmdPlusYYYY.Size = New System.Drawing.Size(45, 25)
+        Me.cmdPlusYYYY.TabIndex = 252
+        Me.cmdPlusYYYY.Text = "+yyyy"
+        Me.cmdPlusYYYY.UseVisualStyleBackColor = True
+        '
+        'cmdPlusMMM
+        '
+        Me.cmdPlusMMM.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusMMM.Location = New System.Drawing.Point(162, 40)
+        Me.cmdPlusMMM.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusMMM.Name = "cmdPlusMMM"
+        Me.cmdPlusMMM.Size = New System.Drawing.Size(45, 25)
+        Me.cmdPlusMMM.TabIndex = 251
+        Me.cmdPlusMMM.Text = "+mmm"
+        Me.cmdPlusMMM.UseVisualStyleBackColor = True
+        '
+        'cmdPlusDDD
+        '
+        Me.cmdPlusDDD.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusDDD.Location = New System.Drawing.Point(162, 16)
+        Me.cmdPlusDDD.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusDDD.Name = "cmdPlusDDD"
+        Me.cmdPlusDDD.Size = New System.Drawing.Size(45, 25)
+        Me.cmdPlusDDD.TabIndex = 250
+        Me.cmdPlusDDD.Text = "+ddd"
+        Me.cmdPlusDDD.UseVisualStyleBackColor = True
+        '
+        'cmdPlusYY
+        '
+        Me.cmdPlusYY.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusYY.Location = New System.Drawing.Point(113, 64)
+        Me.cmdPlusYY.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusYY.Name = "cmdPlusYY"
+        Me.cmdPlusYY.Size = New System.Drawing.Size(50, 25)
+        Me.cmdPlusYY.TabIndex = 248
+        Me.cmdPlusYY.Text = "+yy"
+        Me.cmdPlusYY.UseVisualStyleBackColor = True
+        '
+        'cmdPlusMM
+        '
+        Me.cmdPlusMM.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusMM.Location = New System.Drawing.Point(113, 40)
+        Me.cmdPlusMM.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusMM.Name = "cmdPlusMM"
+        Me.cmdPlusMM.Size = New System.Drawing.Size(50, 25)
+        Me.cmdPlusMM.TabIndex = 247
+        Me.cmdPlusMM.Text = "+mm"
+        Me.cmdPlusMM.UseVisualStyleBackColor = True
+        '
+        'cmdPlusDD
+        '
+        Me.cmdPlusDD.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusDD.Location = New System.Drawing.Point(113, 16)
+        Me.cmdPlusDD.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusDD.Name = "cmdPlusDD"
+        Me.cmdPlusDD.Size = New System.Drawing.Size(50, 25)
+        Me.cmdPlusDD.TabIndex = 246
+        Me.cmdPlusDD.Text = "+dd"
+        Me.cmdPlusDD.UseVisualStyleBackColor = True
+        '
+        'cmdPlusY
+        '
+        Me.cmdPlusY.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusY.Location = New System.Drawing.Point(69, 64)
+        Me.cmdPlusY.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusY.Name = "cmdPlusY"
+        Me.cmdPlusY.Size = New System.Drawing.Size(45, 25)
+        Me.cmdPlusY.TabIndex = 244
+        Me.cmdPlusY.Text = "+y"
+        Me.cmdPlusY.UseVisualStyleBackColor = True
+        '
+        'cmdPlusM
+        '
+        Me.cmdPlusM.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusM.Location = New System.Drawing.Point(69, 40)
+        Me.cmdPlusM.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusM.Name = "cmdPlusM"
+        Me.cmdPlusM.Size = New System.Drawing.Size(45, 25)
+        Me.cmdPlusM.TabIndex = 243
+        Me.cmdPlusM.Text = "+m"
+        Me.cmdPlusM.UseVisualStyleBackColor = True
+        '
+        'cmdPlusD
+        '
+        Me.cmdPlusD.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPlusD.Location = New System.Drawing.Point(69, 16)
+        Me.cmdPlusD.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPlusD.Name = "cmdPlusD"
+        Me.cmdPlusD.Size = New System.Drawing.Size(45, 25)
+        Me.cmdPlusD.TabIndex = 242
+        Me.cmdPlusD.Text = "+d"
+        Me.cmdPlusD.UseVisualStyleBackColor = True
+        '
+        'cmdMon4Jun
+        '
+        Me.cmdMon4Jun.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdMon4Jun.Location = New System.Drawing.Point(0, 64)
+        Me.cmdMon4Jun.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdMon4Jun.Name = "cmdMon4Jun"
+        Me.cmdMon4Jun.Size = New System.Drawing.Size(70, 25)
+        Me.cmdMon4Jun.TabIndex = 240
+        Me.cmdMon4Jun.Text = "Mon, 4 Jun"
+        Me.cmdMon4Jun.UseVisualStyleBackColor = True
+        '
+        'cmd040625
+        '
+        Me.cmd040625.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmd040625.Location = New System.Drawing.Point(0, 40)
+        Me.cmd040625.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmd040625.Name = "cmd040625"
+        Me.cmd040625.Size = New System.Drawing.Size(70, 25)
+        Me.cmd040625.TabIndex = 239
+        Me.cmd040625.Text = "04, 06, 25"
+        Me.cmd040625.UseVisualStyleBackColor = True
+        '
+        'cmdJun4
+        '
+        Me.cmdJun4.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdJun4.Location = New System.Drawing.Point(0, 16)
+        Me.cmdJun4.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdJun4.Name = "cmdJun4"
+        Me.cmdJun4.Size = New System.Drawing.Size(70, 25)
+        Me.cmdJun4.TabIndex = 238
+        Me.cmdJun4.Text = "Jun 4"
+        Me.cmdJun4.UseVisualStyleBackColor = True
+        '
         'cmdYmdHms
         '
         Me.cmdYmdHms.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdYmdHms.Location = New System.Drawing.Point(5, 73)
+        Me.cmdYmdHms.Location = New System.Drawing.Point(5, 63)
         Me.cmdYmdHms.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdYmdHms.Name = "cmdYmdHms"
-        Me.cmdYmdHms.Size = New System.Drawing.Size(60, 30)
+        Me.cmdYmdHms.Size = New System.Drawing.Size(80, 25)
         Me.cmdYmdHms.TabIndex = 242
         Me.cmdYmdHms.Text = "ymd.hms"
         Me.cmdYmdHms.UseVisualStyleBackColor = True
@@ -1032,10 +1298,10 @@ Partial Class ucrCalculator
         'cmdYmdHm
         '
         Me.cmdYmdHm.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdYmdHm.Location = New System.Drawing.Point(64, 73)
+        Me.cmdYmdHm.Location = New System.Drawing.Point(84, 63)
         Me.cmdYmdHm.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdYmdHm.Name = "cmdYmdHm"
-        Me.cmdYmdHm.Size = New System.Drawing.Size(60, 30)
+        Me.cmdYmdHm.Size = New System.Drawing.Size(80, 25)
         Me.cmdYmdHm.TabIndex = 241
         Me.cmdYmdHm.Text = "ymd.hm"
         Me.cmdYmdHm.UseVisualStyleBackColor = True
@@ -1043,10 +1309,10 @@ Partial Class ucrCalculator
         'cmdAsDate
         '
         Me.cmdAsDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAsDate.Location = New System.Drawing.Point(64, 15)
+        Me.cmdAsDate.Location = New System.Drawing.Point(84, 15)
         Me.cmdAsDate.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAsDate.Name = "cmdAsDate"
-        Me.cmdAsDate.Size = New System.Drawing.Size(60, 30)
+        Me.cmdAsDate.Size = New System.Drawing.Size(80, 25)
         Me.cmdAsDate.TabIndex = 240
         Me.cmdAsDate.Text = "as.date"
         Me.cmdAsDate.UseVisualStyleBackColor = True
@@ -1054,10 +1320,10 @@ Partial Class ucrCalculator
         'cmdAsTime
         '
         Me.cmdAsTime.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAsTime.Location = New System.Drawing.Point(191, 44)
+        Me.cmdAsTime.Location = New System.Drawing.Point(242, 39)
         Me.cmdAsTime.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAsTime.Name = "cmdAsTime"
-        Me.cmdAsTime.Size = New System.Drawing.Size(60, 30)
+        Me.cmdAsTime.Size = New System.Drawing.Size(80, 25)
         Me.cmdAsTime.TabIndex = 239
         Me.cmdAsTime.Text = "as.time"
         Me.cmdAsTime.UseVisualStyleBackColor = True
@@ -1065,10 +1331,10 @@ Partial Class ucrCalculator
         'cmdYmdH
         '
         Me.cmdYmdH.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdYmdH.Location = New System.Drawing.Point(123, 73)
+        Me.cmdYmdH.Location = New System.Drawing.Point(163, 63)
         Me.cmdYmdH.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdYmdH.Name = "cmdYmdH"
-        Me.cmdYmdH.Size = New System.Drawing.Size(69, 30)
+        Me.cmdYmdH.Size = New System.Drawing.Size(80, 25)
         Me.cmdYmdH.TabIndex = 238
         Me.cmdYmdH.Text = "ymd.h"
         Me.cmdYmdH.UseVisualStyleBackColor = True
@@ -1076,10 +1342,10 @@ Partial Class ucrCalculator
         'cmdPm
         '
         Me.cmdPm.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPm.Location = New System.Drawing.Point(5, 160)
+        Me.cmdPm.Location = New System.Drawing.Point(5, 135)
         Me.cmdPm.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPm.Name = "cmdPm"
-        Me.cmdPm.Size = New System.Drawing.Size(60, 30)
+        Me.cmdPm.Size = New System.Drawing.Size(80, 25)
         Me.cmdPm.TabIndex = 237
         Me.cmdPm.Text = "pm"
         Me.cmdPm.UseVisualStyleBackColor = True
@@ -1087,10 +1353,10 @@ Partial Class ucrCalculator
         'cmdTime
         '
         Me.cmdTime.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTime.Location = New System.Drawing.Point(191, 15)
+        Me.cmdTime.Location = New System.Drawing.Point(242, 15)
         Me.cmdTime.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdTime.Name = "cmdTime"
-        Me.cmdTime.Size = New System.Drawing.Size(60, 30)
+        Me.cmdTime.Size = New System.Drawing.Size(80, 25)
         Me.cmdTime.TabIndex = 236
         Me.cmdTime.Text = "time"
         Me.cmdTime.UseVisualStyleBackColor = True
@@ -1098,10 +1364,10 @@ Partial Class ucrCalculator
         'cmdDateTime
         '
         Me.cmdDateTime.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDateTime.Location = New System.Drawing.Point(123, 15)
+        Me.cmdDateTime.Location = New System.Drawing.Point(163, 15)
         Me.cmdDateTime.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDateTime.Name = "cmdDateTime"
-        Me.cmdDateTime.Size = New System.Drawing.Size(69, 30)
+        Me.cmdDateTime.Size = New System.Drawing.Size(80, 25)
         Me.cmdDateTime.TabIndex = 235
         Me.cmdDateTime.Text = "as.datetime"
         Me.cmdDateTime.UseVisualStyleBackColor = True
@@ -1109,10 +1375,10 @@ Partial Class ucrCalculator
         'cmdQuarter
         '
         Me.cmdQuarter.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdQuarter.Location = New System.Drawing.Point(64, 102)
+        Me.cmdQuarter.Location = New System.Drawing.Point(84, 87)
         Me.cmdQuarter.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdQuarter.Name = "cmdQuarter"
-        Me.cmdQuarter.Size = New System.Drawing.Size(60, 30)
+        Me.cmdQuarter.Size = New System.Drawing.Size(80, 25)
         Me.cmdQuarter.TabIndex = 234
         Me.cmdQuarter.Text = "quarter"
         Me.cmdQuarter.UseVisualStyleBackColor = True
@@ -1120,10 +1386,10 @@ Partial Class ucrCalculator
         'cmdD_In_M
         '
         Me.cmdD_In_M.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdD_In_M.Location = New System.Drawing.Point(123, 131)
+        Me.cmdD_In_M.Location = New System.Drawing.Point(163, 111)
         Me.cmdD_In_M.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdD_In_M.Name = "cmdD_In_M"
-        Me.cmdD_In_M.Size = New System.Drawing.Size(69, 30)
+        Me.cmdD_In_M.Size = New System.Drawing.Size(80, 25)
         Me.cmdD_In_M.TabIndex = 233
         Me.cmdD_In_M.Text = "d_in_m"
         Me.cmdD_In_M.UseVisualStyleBackColor = True
@@ -1131,10 +1397,10 @@ Partial Class ucrCalculator
         'cmdAm
         '
         Me.cmdAm.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdAm.Location = New System.Drawing.Point(191, 131)
+        Me.cmdAm.Location = New System.Drawing.Point(242, 111)
         Me.cmdAm.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdAm.Name = "cmdAm"
-        Me.cmdAm.Size = New System.Drawing.Size(60, 30)
+        Me.cmdAm.Size = New System.Drawing.Size(80, 25)
         Me.cmdAm.TabIndex = 232
         Me.cmdAm.Text = "am"
         Me.cmdAm.UseVisualStyleBackColor = True
@@ -1142,10 +1408,10 @@ Partial Class ucrCalculator
         'cmdSec
         '
         Me.cmdSec.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdSec.Location = New System.Drawing.Point(191, 160)
+        Me.cmdSec.Location = New System.Drawing.Point(242, 135)
         Me.cmdSec.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdSec.Name = "cmdSec"
-        Me.cmdSec.Size = New System.Drawing.Size(60, 30)
+        Me.cmdSec.Size = New System.Drawing.Size(80, 25)
         Me.cmdSec.TabIndex = 231
         Me.cmdSec.Text = "sec"
         Me.cmdSec.UseVisualStyleBackColor = True
@@ -1153,10 +1419,10 @@ Partial Class ucrCalculator
         'cmdHour
         '
         Me.cmdHour.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdHour.Location = New System.Drawing.Point(64, 160)
+        Me.cmdHour.Location = New System.Drawing.Point(84, 135)
         Me.cmdHour.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdHour.Name = "cmdHour"
-        Me.cmdHour.Size = New System.Drawing.Size(60, 30)
+        Me.cmdHour.Size = New System.Drawing.Size(80, 25)
         Me.cmdHour.TabIndex = 230
         Me.cmdHour.Text = "hour"
         Me.cmdHour.UseVisualStyleBackColor = True
@@ -1164,10 +1430,10 @@ Partial Class ucrCalculator
         'cmdMinutes
         '
         Me.cmdMinutes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMinutes.Location = New System.Drawing.Point(123, 160)
+        Me.cmdMinutes.Location = New System.Drawing.Point(163, 135)
         Me.cmdMinutes.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMinutes.Name = "cmdMinutes"
-        Me.cmdMinutes.Size = New System.Drawing.Size(69, 30)
+        Me.cmdMinutes.Size = New System.Drawing.Size(80, 25)
         Me.cmdMinutes.TabIndex = 229
         Me.cmdMinutes.Text = "min"
         Me.cmdMinutes.UseVisualStyleBackColor = True
@@ -1175,10 +1441,10 @@ Partial Class ucrCalculator
         'cmdDmy
         '
         Me.cmdDmy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDmy.Location = New System.Drawing.Point(64, 44)
+        Me.cmdDmy.Location = New System.Drawing.Point(84, 39)
         Me.cmdDmy.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDmy.Name = "cmdDmy"
-        Me.cmdDmy.Size = New System.Drawing.Size(60, 30)
+        Me.cmdDmy.Size = New System.Drawing.Size(80, 25)
         Me.cmdDmy.TabIndex = 228
         Me.cmdDmy.Tag = "dmy"
         Me.cmdDmy.Text = "dmy"
@@ -1187,10 +1453,10 @@ Partial Class ucrCalculator
         'cmdDay
         '
         Me.cmdDay.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDay.Location = New System.Drawing.Point(191, 102)
+        Me.cmdDay.Location = New System.Drawing.Point(242, 87)
         Me.cmdDay.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDay.Name = "cmdDay"
-        Me.cmdDay.Size = New System.Drawing.Size(60, 30)
+        Me.cmdDay.Size = New System.Drawing.Size(80, 25)
         Me.cmdDay.TabIndex = 227
         Me.cmdDay.Text = "day"
         Me.cmdDay.UseVisualStyleBackColor = True
@@ -1198,11 +1464,11 @@ Partial Class ucrCalculator
         'cmdMonth
         '
         Me.cmdMonth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMonth.Location = New System.Drawing.Point(123, 102)
+        Me.cmdMonth.Location = New System.Drawing.Point(163, 87)
         Me.cmdMonth.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMonth.Name = "cmdMonth"
         Me.cmdMonth.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdMonth.Size = New System.Drawing.Size(69, 30)
+        Me.cmdMonth.Size = New System.Drawing.Size(80, 25)
         Me.cmdMonth.TabIndex = 226
         Me.cmdMonth.Text = "month"
         Me.cmdMonth.UseVisualStyleBackColor = True
@@ -1210,10 +1476,10 @@ Partial Class ucrCalculator
         'cmdYear
         '
         Me.cmdYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdYear.Location = New System.Drawing.Point(5, 102)
+        Me.cmdYear.Location = New System.Drawing.Point(5, 87)
         Me.cmdYear.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdYear.Name = "cmdYear"
-        Me.cmdYear.Size = New System.Drawing.Size(60, 30)
+        Me.cmdYear.Size = New System.Drawing.Size(80, 25)
         Me.cmdYear.TabIndex = 225
         Me.cmdYear.Text = "year"
         Me.cmdYear.UseVisualStyleBackColor = True
@@ -1224,7 +1490,7 @@ Partial Class ucrCalculator
         Me.cmdDate.Location = New System.Drawing.Point(5, 15)
         Me.cmdDate.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDate.Name = "cmdDate"
-        Me.cmdDate.Size = New System.Drawing.Size(60, 30)
+        Me.cmdDate.Size = New System.Drawing.Size(80, 25)
         Me.cmdDate.TabIndex = 224
         Me.cmdDate.Text = "date"
         Me.cmdDate.UseVisualStyleBackColor = True
@@ -1232,10 +1498,10 @@ Partial Class ucrCalculator
         'cmdYday
         '
         Me.cmdYday.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdYday.Location = New System.Drawing.Point(5, 131)
+        Me.cmdYday.Location = New System.Drawing.Point(5, 111)
         Me.cmdYday.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdYday.Name = "cmdYday"
-        Me.cmdYday.Size = New System.Drawing.Size(60, 30)
+        Me.cmdYday.Size = New System.Drawing.Size(80, 25)
         Me.cmdYday.TabIndex = 223
         Me.cmdYday.Text = "yday"
         Me.cmdYday.UseVisualStyleBackColor = True
@@ -1243,10 +1509,10 @@ Partial Class ucrCalculator
         'cmdWday
         '
         Me.cmdWday.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdWday.Location = New System.Drawing.Point(64, 131)
+        Me.cmdWday.Location = New System.Drawing.Point(84, 111)
         Me.cmdWday.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdWday.Name = "cmdWday"
-        Me.cmdWday.Size = New System.Drawing.Size(60, 30)
+        Me.cmdWday.Size = New System.Drawing.Size(80, 25)
         Me.cmdWday.TabIndex = 222
         Me.cmdWday.Text = "wday"
         Me.cmdWday.UseVisualStyleBackColor = True
@@ -1254,10 +1520,10 @@ Partial Class ucrCalculator
         'cmdMdy
         '
         Me.cmdMdy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMdy.Location = New System.Drawing.Point(123, 44)
+        Me.cmdMdy.Location = New System.Drawing.Point(163, 39)
         Me.cmdMdy.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMdy.Name = "cmdMdy"
-        Me.cmdMdy.Size = New System.Drawing.Size(69, 30)
+        Me.cmdMdy.Size = New System.Drawing.Size(80, 25)
         Me.cmdMdy.TabIndex = 221
         Me.cmdMdy.Text = "mdy"
         Me.cmdMdy.UseVisualStyleBackColor = True
@@ -1265,10 +1531,10 @@ Partial Class ucrCalculator
         'cmdYmd
         '
         Me.cmdYmd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdYmd.Location = New System.Drawing.Point(5, 44)
+        Me.cmdYmd.Location = New System.Drawing.Point(5, 39)
         Me.cmdYmd.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdYmd.Name = "cmdYmd"
-        Me.cmdYmd.Size = New System.Drawing.Size(60, 30)
+        Me.cmdYmd.Size = New System.Drawing.Size(80, 25)
         Me.cmdYmd.TabIndex = 220
         Me.cmdYmd.Text = "ymd"
         Me.cmdYmd.UseVisualStyleBackColor = True
@@ -1276,10 +1542,10 @@ Partial Class ucrCalculator
         'cmdLeap
         '
         Me.cmdLeap.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLeap.Location = New System.Drawing.Point(191, 73)
+        Me.cmdLeap.Location = New System.Drawing.Point(242, 63)
         Me.cmdLeap.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdLeap.Name = "cmdLeap"
-        Me.cmdLeap.Size = New System.Drawing.Size(60, 30)
+        Me.cmdLeap.Size = New System.Drawing.Size(80, 25)
         Me.cmdLeap.TabIndex = 219
         Me.cmdLeap.Text = "leap"
         Me.cmdLeap.UseVisualStyleBackColor = True
@@ -1288,10 +1554,10 @@ Partial Class ucrCalculator
         '
         Me.cmdRHelp.AutoSize = True
         Me.cmdRHelp.ContextMenuStrip = Me.ContextMenuStripDate
-        Me.cmdRHelp.Location = New System.Drawing.Point(161, 189)
+        Me.cmdRHelp.Location = New System.Drawing.Point(211, 264)
         Me.cmdRHelp.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRHelp.Name = "cmdRHelp"
-        Me.cmdRHelp.Size = New System.Drawing.Size(90, 30)
+        Me.cmdRHelp.Size = New System.Drawing.Size(110, 25)
         Me.cmdRHelp.SplitMenuStrip = Me.ContextMenuStripDate
         Me.cmdRHelp.TabIndex = 212
         Me.cmdRHelp.Text = "R Help"
@@ -1300,21 +1566,27 @@ Partial Class ucrCalculator
         'ContextMenuStripDate
         '
         Me.ContextMenuStripDate.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ContextMenuStripDate.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DateLubridateToolStripMenuItem, Me.DateHmsToolStripMenuItem})
+        Me.ContextMenuStripDate.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DateLubridateToolStripMenuItem, Me.DateHmsToolStripMenuItem, Me.DescToolsDateToolStripMenuItem})
         Me.ContextMenuStripDate.Name = "ContextMenuStrip1"
-        Me.ContextMenuStripDate.Size = New System.Drawing.Size(122, 48)
+        Me.ContextMenuStripDate.Size = New System.Drawing.Size(127, 70)
         '
         'DateLubridateToolStripMenuItem
         '
         Me.DateLubridateToolStripMenuItem.Name = "DateLubridateToolStripMenuItem"
-        Me.DateLubridateToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
+        Me.DateLubridateToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.DateLubridateToolStripMenuItem.Text = "lubridate"
         '
         'DateHmsToolStripMenuItem
         '
         Me.DateHmsToolStripMenuItem.Name = "DateHmsToolStripMenuItem"
-        Me.DateHmsToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
+        Me.DateHmsToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.DateHmsToolStripMenuItem.Text = "hms"
+        '
+        'DescToolsDateToolStripMenuItem
+        '
+        Me.DescToolsDateToolStripMenuItem.Name = "DescToolsDateToolStripMenuItem"
+        Me.DescToolsDateToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.DescToolsDateToolStripMenuItem.Text = "DescTools"
         '
         'ContextMenuStripComplex
         '
@@ -4838,11 +5110,12 @@ Partial Class ucrCalculator
         '
         'grpTransform
         '
+        Me.grpTransform.Controls.Add(Me.cmdTransformRHelp)
+        Me.grpTransform.Controls.Add(Me.grpTransFormFormat)
         Me.grpTransform.Controls.Add(Me.cmdRollApply)
         Me.grpTransform.Controls.Add(Me.cmdRank)
         Me.grpTransform.Controls.Add(Me.cmdRescale)
         Me.grpTransform.Controls.Add(Me.cmdScale)
-        Me.grpTransform.Controls.Add(Me.cmdTransformRHelp)
         Me.grpTransform.Controls.Add(Me.cmdRev)
         Me.grpTransform.Controls.Add(Me.cmdMovProd)
         Me.grpTransform.Controls.Add(Me.cmdCumProd)
@@ -4875,63 +5148,19 @@ Partial Class ucrCalculator
         Me.grpTransform.Margin = New System.Windows.Forms.Padding(2)
         Me.grpTransform.Name = "grpTransform"
         Me.grpTransform.Padding = New System.Windows.Forms.Padding(2)
-        Me.grpTransform.Size = New System.Drawing.Size(310, 225)
+        Me.grpTransform.Size = New System.Drawing.Size(310, 340)
         Me.grpTransform.TabIndex = 189
         Me.grpTransform.TabStop = False
         Me.grpTransform.Text = "Transform"
-        '
-        'cmdRollApply
-        '
-        Me.cmdRollApply.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRollApply.Location = New System.Drawing.Point(63, 188)
-        Me.cmdRollApply.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdRollApply.Name = "cmdRollApply"
-        Me.cmdRollApply.Size = New System.Drawing.Size(62, 30)
-        Me.cmdRollApply.TabIndex = 208
-        Me.cmdRollApply.Text = "rollapply"
-        Me.cmdRollApply.UseVisualStyleBackColor = True
-        '
-        'cmdRank
-        '
-        Me.cmdRank.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRank.Location = New System.Drawing.Point(2, 130)
-        Me.cmdRank.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdRank.Name = "cmdRank"
-        Me.cmdRank.Size = New System.Drawing.Size(62, 30)
-        Me.cmdRank.TabIndex = 207
-        Me.cmdRank.Text = "rank"
-        Me.cmdRank.UseVisualStyleBackColor = True
-        '
-        'cmdRescale
-        '
-        Me.cmdRescale.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRescale.Location = New System.Drawing.Point(2, 188)
-        Me.cmdRescale.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdRescale.Name = "cmdRescale"
-        Me.cmdRescale.Size = New System.Drawing.Size(62, 30)
-        Me.cmdRescale.TabIndex = 206
-        Me.cmdRescale.Text = "rescale"
-        Me.cmdRescale.UseVisualStyleBackColor = True
-        '
-        'cmdScale
-        '
-        Me.cmdScale.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdScale.Location = New System.Drawing.Point(2, 159)
-        Me.cmdScale.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdScale.Name = "cmdScale"
-        Me.cmdScale.Size = New System.Drawing.Size(62, 30)
-        Me.cmdScale.TabIndex = 205
-        Me.cmdScale.Text = "scale"
-        Me.cmdScale.UseVisualStyleBackColor = True
         '
         'cmdTransformRHelp
         '
         Me.cmdTransformRHelp.AutoSize = True
         Me.cmdTransformRHelp.ContextMenuStrip = Me.ContextMenuStripTransform
-        Me.cmdTransformRHelp.Location = New System.Drawing.Point(218, 188)
+        Me.cmdTransformRHelp.Location = New System.Drawing.Point(218, 308)
         Me.cmdTransformRHelp.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdTransformRHelp.Name = "cmdTransformRHelp"
-        Me.cmdTransformRHelp.Size = New System.Drawing.Size(90, 30)
+        Me.cmdTransformRHelp.Size = New System.Drawing.Size(90, 25)
         Me.cmdTransformRHelp.SplitMenuStrip = Me.ContextMenuStripTransform
         Me.cmdTransformRHelp.TabIndex = 204
         Me.cmdTransformRHelp.Text = "R Help"
@@ -4940,41 +5169,340 @@ Partial Class ucrCalculator
         'ContextMenuStripTransform
         '
         Me.ContextMenuStripTransform.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ContextMenuStripTransform.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaseToolStripMenuItem, Me.DplyrToolStripMenuItem, Me.ScalesToolStripMenuItem, Me.ZooToolStripMenuItem})
+        Me.ContextMenuStripTransform.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaseToolStripMenuItem, Me.DplyrToolStripMenuItem, Me.ScalesToolStripMenuItem, Me.ZooToolStripMenuItem, Me.DesctoolsFormatToolStripMenuItem})
         Me.ContextMenuStripTransform.Name = "ContextMenuStrip1"
-        Me.ContextMenuStripTransform.Size = New System.Drawing.Size(106, 92)
+        Me.ContextMenuStripTransform.Size = New System.Drawing.Size(127, 114)
         '
         'BaseToolStripMenuItem
         '
         Me.BaseToolStripMenuItem.Name = "BaseToolStripMenuItem"
-        Me.BaseToolStripMenuItem.Size = New System.Drawing.Size(105, 22)
+        Me.BaseToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.BaseToolStripMenuItem.Text = "base"
         '
         'DplyrToolStripMenuItem
         '
         Me.DplyrToolStripMenuItem.Name = "DplyrToolStripMenuItem"
-        Me.DplyrToolStripMenuItem.Size = New System.Drawing.Size(105, 22)
+        Me.DplyrToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.DplyrToolStripMenuItem.Text = "dplyr"
         '
         'ScalesToolStripMenuItem
         '
         Me.ScalesToolStripMenuItem.Name = "ScalesToolStripMenuItem"
-        Me.ScalesToolStripMenuItem.Size = New System.Drawing.Size(105, 22)
+        Me.ScalesToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.ScalesToolStripMenuItem.Text = "scales"
         '
         'ZooToolStripMenuItem
         '
         Me.ZooToolStripMenuItem.Name = "ZooToolStripMenuItem"
-        Me.ZooToolStripMenuItem.Size = New System.Drawing.Size(105, 22)
+        Me.ZooToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.ZooToolStripMenuItem.Text = "zoo"
+        '
+        'DesctoolsFormatToolStripMenuItem
+        '
+        Me.DesctoolsFormatToolStripMenuItem.Name = "DesctoolsFormatToolStripMenuItem"
+        Me.DesctoolsFormatToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.DesctoolsFormatToolStripMenuItem.Text = "DescTools"
+        '
+        'grpTransFormFormat
+        '
+        Me.grpTransFormFormat.Controls.Add(Me.cmdFracDen)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdFrac100)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdFrac20)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdFrac10)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdFractions)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdAlignR)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdTrace)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdFormatComma)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdStars)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdPValue)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdAlign)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdFormatZero)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdFormatNA)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdPercent0)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdPercent)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdEngineer)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdScientific)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdScientific4)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdInteger)
+        Me.grpTransFormFormat.Controls.Add(Me.cmdDecimal3)
+        Me.grpTransFormFormat.Location = New System.Drawing.Point(3, 195)
+        Me.grpTransFormFormat.Name = "grpTransFormFormat"
+        Me.grpTransFormFormat.Size = New System.Drawing.Size(307, 116)
+        Me.grpTransFormFormat.TabIndex = 209
+        Me.grpTransFormFormat.TabStop = False
+        Me.grpTransFormFormat.Text = "Format"
+        '
+        'cmdFracDen
+        '
+        Me.cmdFracDen.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFracDen.Location = New System.Drawing.Point(244, 87)
+        Me.cmdFracDen.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFracDen.Name = "cmdFracDen"
+        Me.cmdFracDen.Size = New System.Drawing.Size(62, 25)
+        Me.cmdFracDen.TabIndex = 218
+        Me.cmdFracDen.Text = "frac_den"
+        Me.cmdFracDen.UseVisualStyleBackColor = True
+        '
+        'cmdFrac100
+        '
+        Me.cmdFrac100.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFrac100.Location = New System.Drawing.Point(183, 87)
+        Me.cmdFrac100.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFrac100.Name = "cmdFrac100"
+        Me.cmdFrac100.Size = New System.Drawing.Size(62, 25)
+        Me.cmdFrac100.TabIndex = 217
+        Me.cmdFrac100.Text = "frac100"
+        Me.cmdFrac100.UseVisualStyleBackColor = True
+        '
+        'cmdFrac20
+        '
+        Me.cmdFrac20.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFrac20.Location = New System.Drawing.Point(122, 87)
+        Me.cmdFrac20.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFrac20.Name = "cmdFrac20"
+        Me.cmdFrac20.Size = New System.Drawing.Size(62, 25)
+        Me.cmdFrac20.TabIndex = 216
+        Me.cmdFrac20.Text = "frac20"
+        Me.cmdFrac20.UseVisualStyleBackColor = True
+        '
+        'cmdFrac10
+        '
+        Me.cmdFrac10.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFrac10.Location = New System.Drawing.Point(61, 87)
+        Me.cmdFrac10.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFrac10.Name = "cmdFrac10"
+        Me.cmdFrac10.Size = New System.Drawing.Size(62, 25)
+        Me.cmdFrac10.TabIndex = 215
+        Me.cmdFrac10.Text = "frac10"
+        Me.cmdFrac10.UseVisualStyleBackColor = True
+        '
+        'cmdFractions
+        '
+        Me.cmdFractions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFractions.Location = New System.Drawing.Point(0, 87)
+        Me.cmdFractions.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFractions.Name = "cmdFractions"
+        Me.cmdFractions.Size = New System.Drawing.Size(62, 25)
+        Me.cmdFractions.TabIndex = 214
+        Me.cmdFractions.Text = "fractions"
+        Me.cmdFractions.UseVisualStyleBackColor = True
+        '
+        'cmdAlignR
+        '
+        Me.cmdAlignR.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAlignR.Location = New System.Drawing.Point(244, 63)
+        Me.cmdAlignR.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdAlignR.Name = "cmdAlignR"
+        Me.cmdAlignR.Size = New System.Drawing.Size(62, 25)
+        Me.cmdAlignR.TabIndex = 213
+        Me.cmdAlignR.Text = "align_r"
+        Me.cmdAlignR.UseVisualStyleBackColor = True
+        '
+        'cmdTrace
+        '
+        Me.cmdTrace.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTrace.Location = New System.Drawing.Point(183, 63)
+        Me.cmdTrace.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdTrace.Name = "cmdTrace"
+        Me.cmdTrace.Size = New System.Drawing.Size(62, 25)
+        Me.cmdTrace.TabIndex = 212
+        Me.cmdTrace.Text = "trace"
+        Me.cmdTrace.UseVisualStyleBackColor = True
+        '
+        'cmdFormatComma
+        '
+        Me.cmdFormatComma.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFormatComma.Location = New System.Drawing.Point(122, 63)
+        Me.cmdFormatComma.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFormatComma.Name = "cmdFormatComma"
+        Me.cmdFormatComma.Size = New System.Drawing.Size(62, 25)
+        Me.cmdFormatComma.TabIndex = 211
+        Me.cmdFormatComma.Text = "comma"
+        Me.cmdFormatComma.UseVisualStyleBackColor = True
+        '
+        'cmdStars
+        '
+        Me.cmdStars.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdStars.Location = New System.Drawing.Point(61, 63)
+        Me.cmdStars.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdStars.Name = "cmdStars"
+        Me.cmdStars.Size = New System.Drawing.Size(62, 25)
+        Me.cmdStars.TabIndex = 210
+        Me.cmdStars.Text = "stars"
+        Me.cmdStars.UseVisualStyleBackColor = True
+        '
+        'cmdPValue
+        '
+        Me.cmdPValue.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPValue.Location = New System.Drawing.Point(0, 63)
+        Me.cmdPValue.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPValue.Name = "cmdPValue"
+        Me.cmdPValue.Size = New System.Drawing.Size(62, 25)
+        Me.cmdPValue.TabIndex = 209
+        Me.cmdPValue.Text = "p-value"
+        Me.cmdPValue.UseVisualStyleBackColor = True
+        '
+        'cmdAlign
+        '
+        Me.cmdAlign.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdAlign.Location = New System.Drawing.Point(244, 39)
+        Me.cmdAlign.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdAlign.Name = "cmdAlign"
+        Me.cmdAlign.Size = New System.Drawing.Size(62, 25)
+        Me.cmdAlign.TabIndex = 208
+        Me.cmdAlign.Text = "align"
+        Me.cmdAlign.UseVisualStyleBackColor = True
+        '
+        'cmdFormatZero
+        '
+        Me.cmdFormatZero.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFormatZero.Location = New System.Drawing.Point(183, 39)
+        Me.cmdFormatZero.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFormatZero.Name = "cmdFormatZero"
+        Me.cmdFormatZero.Size = New System.Drawing.Size(62, 25)
+        Me.cmdFormatZero.TabIndex = 207
+        Me.cmdFormatZero.Text = "zero"
+        Me.cmdFormatZero.UseVisualStyleBackColor = True
+        '
+        'cmdFormatNA
+        '
+        Me.cmdFormatNA.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdFormatNA.Location = New System.Drawing.Point(122, 39)
+        Me.cmdFormatNA.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdFormatNA.Name = "cmdFormatNA"
+        Me.cmdFormatNA.Size = New System.Drawing.Size(62, 25)
+        Me.cmdFormatNA.TabIndex = 206
+        Me.cmdFormatNA.Text = "NA"
+        Me.cmdFormatNA.UseVisualStyleBackColor = True
+        '
+        'cmdPercent0
+        '
+        Me.cmdPercent0.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPercent0.Location = New System.Drawing.Point(61, 39)
+        Me.cmdPercent0.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPercent0.Name = "cmdPercent0"
+        Me.cmdPercent0.Size = New System.Drawing.Size(62, 25)
+        Me.cmdPercent0.TabIndex = 205
+        Me.cmdPercent0.Text = "percent0"
+        Me.cmdPercent0.UseVisualStyleBackColor = True
+        '
+        'cmdPercent
+        '
+        Me.cmdPercent.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdPercent.Location = New System.Drawing.Point(0, 39)
+        Me.cmdPercent.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdPercent.Name = "cmdPercent"
+        Me.cmdPercent.Size = New System.Drawing.Size(62, 25)
+        Me.cmdPercent.TabIndex = 204
+        Me.cmdPercent.Text = "percent"
+        Me.cmdPercent.UseVisualStyleBackColor = True
+        '
+        'cmdEngineer
+        '
+        Me.cmdEngineer.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdEngineer.Location = New System.Drawing.Point(244, 15)
+        Me.cmdEngineer.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdEngineer.Name = "cmdEngineer"
+        Me.cmdEngineer.Size = New System.Drawing.Size(62, 25)
+        Me.cmdEngineer.TabIndex = 203
+        Me.cmdEngineer.Text = "engineer"
+        Me.cmdEngineer.UseVisualStyleBackColor = True
+        '
+        'cmdScientific
+        '
+        Me.cmdScientific.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdScientific.Location = New System.Drawing.Point(183, 15)
+        Me.cmdScientific.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdScientific.Name = "cmdScientific"
+        Me.cmdScientific.Size = New System.Drawing.Size(62, 25)
+        Me.cmdScientific.TabIndex = 202
+        Me.cmdScientific.Text = "scientific"
+        Me.cmdScientific.UseVisualStyleBackColor = True
+        '
+        'cmdScientific4
+        '
+        Me.cmdScientific4.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdScientific4.Location = New System.Drawing.Point(122, 15)
+        Me.cmdScientific4.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdScientific4.Name = "cmdScientific4"
+        Me.cmdScientific4.Size = New System.Drawing.Size(62, 25)
+        Me.cmdScientific4.TabIndex = 201
+        Me.cmdScientific4.Text = "scientific4"
+        Me.cmdScientific4.UseVisualStyleBackColor = True
+        '
+        'cmdInteger
+        '
+        Me.cmdInteger.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdInteger.Location = New System.Drawing.Point(61, 15)
+        Me.cmdInteger.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdInteger.Name = "cmdInteger"
+        Me.cmdInteger.Size = New System.Drawing.Size(62, 25)
+        Me.cmdInteger.TabIndex = 200
+        Me.cmdInteger.Text = "integer"
+        Me.cmdInteger.UseVisualStyleBackColor = True
+        '
+        'cmdDecimal3
+        '
+        Me.cmdDecimal3.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdDecimal3.Location = New System.Drawing.Point(0, 15)
+        Me.cmdDecimal3.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdDecimal3.Name = "cmdDecimal3"
+        Me.cmdDecimal3.Size = New System.Drawing.Size(62, 25)
+        Me.cmdDecimal3.TabIndex = 199
+        Me.cmdDecimal3.Text = "decimal3"
+        Me.cmdDecimal3.UseVisualStyleBackColor = True
+        '
+        'cmdRollApply
+        '
+        Me.cmdRollApply.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRollApply.Location = New System.Drawing.Point(63, 158)
+        Me.cmdRollApply.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdRollApply.Name = "cmdRollApply"
+        Me.cmdRollApply.Size = New System.Drawing.Size(62, 25)
+        Me.cmdRollApply.TabIndex = 208
+        Me.cmdRollApply.Text = "rollapply"
+        Me.cmdRollApply.UseVisualStyleBackColor = True
+        '
+        'cmdRank
+        '
+        Me.cmdRank.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRank.Location = New System.Drawing.Point(2, 110)
+        Me.cmdRank.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdRank.Name = "cmdRank"
+        Me.cmdRank.Size = New System.Drawing.Size(62, 25)
+        Me.cmdRank.TabIndex = 207
+        Me.cmdRank.Text = "rank"
+        Me.cmdRank.UseVisualStyleBackColor = True
+        '
+        'cmdRescale
+        '
+        Me.cmdRescale.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdRescale.Location = New System.Drawing.Point(2, 158)
+        Me.cmdRescale.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdRescale.Name = "cmdRescale"
+        Me.cmdRescale.Size = New System.Drawing.Size(62, 25)
+        Me.cmdRescale.TabIndex = 206
+        Me.cmdRescale.Text = "rescale"
+        Me.cmdRescale.UseVisualStyleBackColor = True
+        '
+        'cmdScale
+        '
+        Me.cmdScale.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdScale.Location = New System.Drawing.Point(2, 134)
+        Me.cmdScale.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdScale.Name = "cmdScale"
+        Me.cmdScale.Size = New System.Drawing.Size(62, 25)
+        Me.cmdScale.TabIndex = 205
+        Me.cmdScale.Text = "scale"
+        Me.cmdScale.UseVisualStyleBackColor = True
         '
         'cmdRev
         '
         Me.cmdRev.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRev.Location = New System.Drawing.Point(124, 101)
+        Me.cmdRev.Location = New System.Drawing.Point(124, 86)
         Me.cmdRev.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRev.Name = "cmdRev"
-        Me.cmdRev.Size = New System.Drawing.Size(62, 30)
+        Me.cmdRev.Size = New System.Drawing.Size(62, 25)
         Me.cmdRev.TabIndex = 203
         Me.cmdRev.Text = "reverse"
         Me.cmdRev.UseVisualStyleBackColor = True
@@ -4982,10 +5510,10 @@ Partial Class ucrCalculator
         'cmdMovProd
         '
         Me.cmdMovProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMovProd.Location = New System.Drawing.Point(124, 72)
+        Me.cmdMovProd.Location = New System.Drawing.Point(124, 62)
         Me.cmdMovProd.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMovProd.Name = "cmdMovProd"
-        Me.cmdMovProd.Size = New System.Drawing.Size(62, 30)
+        Me.cmdMovProd.Size = New System.Drawing.Size(62, 25)
         Me.cmdMovProd.TabIndex = 202
         Me.cmdMovProd.Text = "movprod"
         Me.cmdMovProd.UseVisualStyleBackColor = True
@@ -4993,10 +5521,10 @@ Partial Class ucrCalculator
         'cmdCumProd
         '
         Me.cmdCumProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumProd.Location = New System.Drawing.Point(124, 43)
+        Me.cmdCumProd.Location = New System.Drawing.Point(124, 38)
         Me.cmdCumProd.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumProd.Name = "cmdCumProd"
-        Me.cmdCumProd.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCumProd.Size = New System.Drawing.Size(62, 25)
         Me.cmdCumProd.TabIndex = 201
         Me.cmdCumProd.Text = "cumprod"
         Me.cmdCumProd.UseVisualStyleBackColor = True
@@ -5007,7 +5535,7 @@ Partial Class ucrCalculator
         Me.cmdSortF.Location = New System.Drawing.Point(2, 14)
         Me.cmdSortF.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdSortF.Name = "cmdSortF"
-        Me.cmdSortF.Size = New System.Drawing.Size(62, 30)
+        Me.cmdSortF.Size = New System.Drawing.Size(62, 25)
         Me.cmdSortF.TabIndex = 198
         Me.cmdSortF.Text = "sort"
         Me.cmdSortF.UseVisualStyleBackColor = True
@@ -5015,10 +5543,10 @@ Partial Class ucrCalculator
         'cmdNasplin
         '
         Me.cmdNasplin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNasplin.Location = New System.Drawing.Point(246, 159)
+        Me.cmdNasplin.Location = New System.Drawing.Point(246, 134)
         Me.cmdNasplin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNasplin.Name = "cmdNasplin"
-        Me.cmdNasplin.Size = New System.Drawing.Size(62, 30)
+        Me.cmdNasplin.Size = New System.Drawing.Size(62, 25)
         Me.cmdNasplin.TabIndex = 197
         Me.cmdNasplin.Text = "nasplin"
         Me.cmdNasplin.UseVisualStyleBackColor = True
@@ -5026,10 +5554,10 @@ Partial Class ucrCalculator
         'cmdNaapprox
         '
         Me.cmdNaapprox.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNaapprox.Location = New System.Drawing.Point(185, 159)
+        Me.cmdNaapprox.Location = New System.Drawing.Point(185, 134)
         Me.cmdNaapprox.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNaapprox.Name = "cmdNaapprox"
-        Me.cmdNaapprox.Size = New System.Drawing.Size(62, 30)
+        Me.cmdNaapprox.Size = New System.Drawing.Size(62, 25)
         Me.cmdNaapprox.TabIndex = 196
         Me.cmdNaapprox.Text = "naapprox"
         Me.cmdNaapprox.UseVisualStyleBackColor = True
@@ -5037,10 +5565,10 @@ Partial Class ucrCalculator
         'cmdNaest
         '
         Me.cmdNaest.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNaest.Location = New System.Drawing.Point(124, 159)
+        Me.cmdNaest.Location = New System.Drawing.Point(124, 134)
         Me.cmdNaest.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNaest.Name = "cmdNaest"
-        Me.cmdNaest.Size = New System.Drawing.Size(62, 30)
+        Me.cmdNaest.Size = New System.Drawing.Size(62, 25)
         Me.cmdNaest.TabIndex = 195
         Me.cmdNaest.Text = "naest"
         Me.cmdNaest.UseVisualStyleBackColor = True
@@ -5048,10 +5576,10 @@ Partial Class ucrCalculator
         'cmdNafill
         '
         Me.cmdNafill.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNafill.Location = New System.Drawing.Point(63, 159)
+        Me.cmdNafill.Location = New System.Drawing.Point(63, 134)
         Me.cmdNafill.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNafill.Name = "cmdNafill"
-        Me.cmdNafill.Size = New System.Drawing.Size(62, 30)
+        Me.cmdNafill.Size = New System.Drawing.Size(62, 25)
         Me.cmdNafill.TabIndex = 194
         Me.cmdNafill.Text = "nafill"
         Me.cmdNafill.UseVisualStyleBackColor = True
@@ -5059,10 +5587,10 @@ Partial Class ucrCalculator
         'cmdMovmin
         '
         Me.cmdMovmin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMovmin.Location = New System.Drawing.Point(246, 72)
+        Me.cmdMovmin.Location = New System.Drawing.Point(246, 62)
         Me.cmdMovmin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMovmin.Name = "cmdMovmin"
-        Me.cmdMovmin.Size = New System.Drawing.Size(62, 30)
+        Me.cmdMovmin.Size = New System.Drawing.Size(62, 25)
         Me.cmdMovmin.TabIndex = 193
         Me.cmdMovmin.Text = "movmin"
         Me.cmdMovmin.UseVisualStyleBackColor = True
@@ -5070,10 +5598,10 @@ Partial Class ucrCalculator
         'cmdRowRank
         '
         Me.cmdRowRank.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRowRank.Location = New System.Drawing.Point(63, 130)
+        Me.cmdRowRank.Location = New System.Drawing.Point(63, 110)
         Me.cmdRowRank.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRowRank.Name = "cmdRowRank"
-        Me.cmdRowRank.Size = New System.Drawing.Size(62, 30)
+        Me.cmdRowRank.Size = New System.Drawing.Size(62, 25)
         Me.cmdRowRank.TabIndex = 192
         Me.cmdRowRank.Text = "r_rank"
         Me.cmdRowRank.UseVisualStyleBackColor = True
@@ -5081,10 +5609,10 @@ Partial Class ucrCalculator
         'cmdDiff
         '
         Me.cmdDiff.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDiff.Location = New System.Drawing.Point(63, 101)
+        Me.cmdDiff.Location = New System.Drawing.Point(63, 86)
         Me.cmdDiff.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDiff.Name = "cmdDiff"
-        Me.cmdDiff.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDiff.Size = New System.Drawing.Size(62, 25)
         Me.cmdDiff.TabIndex = 191
         Me.cmdDiff.Text = "diff"
         Me.cmdDiff.UseVisualStyleBackColor = True
@@ -5092,10 +5620,10 @@ Partial Class ucrCalculator
         'cmdCumdist
         '
         Me.cmdCumdist.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumdist.Location = New System.Drawing.Point(246, 101)
+        Me.cmdCumdist.Location = New System.Drawing.Point(246, 86)
         Me.cmdCumdist.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumdist.Name = "cmdCumdist"
-        Me.cmdCumdist.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCumdist.Size = New System.Drawing.Size(62, 25)
         Me.cmdCumdist.TabIndex = 190
         Me.cmdCumdist.Text = "cumdist"
         Me.cmdCumdist.UseVisualStyleBackColor = True
@@ -5103,10 +5631,10 @@ Partial Class ucrCalculator
         'cmdMovMean
         '
         Me.cmdMovMean.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMovMean.Location = New System.Drawing.Point(185, 72)
+        Me.cmdMovMean.Location = New System.Drawing.Point(185, 62)
         Me.cmdMovMean.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMovMean.Name = "cmdMovMean"
-        Me.cmdMovMean.Size = New System.Drawing.Size(62, 30)
+        Me.cmdMovMean.Size = New System.Drawing.Size(62, 25)
         Me.cmdMovMean.TabIndex = 189
         Me.cmdMovMean.Text = "movmean"
         Me.cmdMovMean.UseVisualStyleBackColor = True
@@ -5114,10 +5642,10 @@ Partial Class ucrCalculator
         'cmdCumMean
         '
         Me.cmdCumMean.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumMean.Location = New System.Drawing.Point(185, 43)
+        Me.cmdCumMean.Location = New System.Drawing.Point(185, 38)
         Me.cmdCumMean.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumMean.Name = "cmdCumMean"
-        Me.cmdCumMean.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCumMean.Size = New System.Drawing.Size(62, 25)
         Me.cmdCumMean.TabIndex = 188
         Me.cmdCumMean.Text = "cummean"
         Me.cmdCumMean.UseVisualStyleBackColor = True
@@ -5125,10 +5653,10 @@ Partial Class ucrCalculator
         'cmdNtile
         '
         Me.cmdNtile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdNtile.Location = New System.Drawing.Point(185, 101)
+        Me.cmdNtile.Location = New System.Drawing.Point(185, 86)
         Me.cmdNtile.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdNtile.Name = "cmdNtile"
-        Me.cmdNtile.Size = New System.Drawing.Size(62, 30)
+        Me.cmdNtile.Size = New System.Drawing.Size(62, 25)
         Me.cmdNtile.TabIndex = 187
         Me.cmdNtile.Text = "ntile"
         Me.cmdNtile.UseVisualStyleBackColor = True
@@ -5136,10 +5664,10 @@ Partial Class ucrCalculator
         'cmMovMed
         '
         Me.cmMovMed.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmMovMed.Location = New System.Drawing.Point(2, 101)
+        Me.cmMovMed.Location = New System.Drawing.Point(2, 86)
         Me.cmMovMed.Margin = New System.Windows.Forms.Padding(2)
         Me.cmMovMed.Name = "cmMovMed"
-        Me.cmMovMed.Size = New System.Drawing.Size(62, 30)
+        Me.cmMovMed.Size = New System.Drawing.Size(62, 25)
         Me.cmMovMed.TabIndex = 186
         Me.cmMovMed.Text = "movmed"
         Me.cmMovMed.UseVisualStyleBackColor = True
@@ -5147,10 +5675,10 @@ Partial Class ucrCalculator
         'cmdMRank
         '
         Me.cmdMRank.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMRank.Location = New System.Drawing.Point(124, 130)
+        Me.cmdMRank.Location = New System.Drawing.Point(124, 110)
         Me.cmdMRank.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMRank.Name = "cmdMRank"
-        Me.cmdMRank.Size = New System.Drawing.Size(62, 30)
+        Me.cmdMRank.Size = New System.Drawing.Size(62, 25)
         Me.cmdMRank.TabIndex = 185
         Me.cmdMRank.Text = "m_rank"
         Me.cmdMRank.UseVisualStyleBackColor = True
@@ -5158,10 +5686,10 @@ Partial Class ucrCalculator
         'cmdDRank
         '
         Me.cmdDRank.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDRank.Location = New System.Drawing.Point(185, 130)
+        Me.cmdDRank.Location = New System.Drawing.Point(185, 110)
         Me.cmdDRank.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdDRank.Name = "cmdDRank"
-        Me.cmdDRank.Size = New System.Drawing.Size(62, 30)
+        Me.cmdDRank.Size = New System.Drawing.Size(62, 25)
         Me.cmdDRank.TabIndex = 184
         Me.cmdDRank.Text = "d_rank"
         Me.cmdDRank.UseVisualStyleBackColor = True
@@ -5169,10 +5697,10 @@ Partial Class ucrCalculator
         'cmdMovMax
         '
         Me.cmdMovMax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMovMax.Location = New System.Drawing.Point(2, 72)
+        Me.cmdMovMax.Location = New System.Drawing.Point(2, 62)
         Me.cmdMovMax.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMovMax.Name = "cmdMovMax"
-        Me.cmdMovMax.Size = New System.Drawing.Size(62, 30)
+        Me.cmdMovMax.Size = New System.Drawing.Size(62, 25)
         Me.cmdMovMax.TabIndex = 183
         Me.cmdMovMax.Text = "movmax"
         Me.cmdMovMax.UseVisualStyleBackColor = True
@@ -5180,10 +5708,10 @@ Partial Class ucrCalculator
         'cmdMovSum
         '
         Me.cmdMovSum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMovSum.Location = New System.Drawing.Point(63, 72)
+        Me.cmdMovSum.Location = New System.Drawing.Point(63, 62)
         Me.cmdMovSum.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdMovSum.Name = "cmdMovSum"
-        Me.cmdMovSum.Size = New System.Drawing.Size(62, 30)
+        Me.cmdMovSum.Size = New System.Drawing.Size(62, 25)
         Me.cmdMovSum.TabIndex = 182
         Me.cmdMovSum.Text = "movsum"
         Me.cmdMovSum.UseVisualStyleBackColor = True
@@ -5192,10 +5720,10 @@ Partial Class ucrCalculator
         '
         Me.cmdPercentRank.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPercentRank.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPercentRank.Location = New System.Drawing.Point(246, 130)
+        Me.cmdPercentRank.Location = New System.Drawing.Point(246, 110)
         Me.cmdPercentRank.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPercentRank.Name = "cmdPercentRank"
-        Me.cmdPercentRank.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPercentRank.Size = New System.Drawing.Size(62, 25)
         Me.cmdPercentRank.TabIndex = 181
         Me.cmdPercentRank.Text = "% rank"
         Me.cmdPercentRank.UseVisualStyleBackColor = True
@@ -5203,10 +5731,10 @@ Partial Class ucrCalculator
         'cmdCumSum
         '
         Me.cmdCumSum.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumSum.Location = New System.Drawing.Point(63, 43)
+        Me.cmdCumSum.Location = New System.Drawing.Point(63, 38)
         Me.cmdCumSum.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumSum.Name = "cmdCumSum"
-        Me.cmdCumSum.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCumSum.Size = New System.Drawing.Size(62, 25)
         Me.cmdCumSum.TabIndex = 180
         Me.cmdCumSum.Text = "cumsum"
         Me.cmdCumSum.UseVisualStyleBackColor = True
@@ -5214,10 +5742,10 @@ Partial Class ucrCalculator
         'cmdCumMin
         '
         Me.cmdCumMin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumMin.Location = New System.Drawing.Point(246, 43)
+        Me.cmdCumMin.Location = New System.Drawing.Point(246, 38)
         Me.cmdCumMin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumMin.Name = "cmdCumMin"
-        Me.cmdCumMin.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCumMin.Size = New System.Drawing.Size(62, 25)
         Me.cmdCumMin.TabIndex = 179
         Me.cmdCumMin.Text = "cummin"
         Me.cmdCumMin.UseVisualStyleBackColor = True
@@ -5225,10 +5753,10 @@ Partial Class ucrCalculator
         'cmdCumMax
         '
         Me.cmdCumMax.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCumMax.Location = New System.Drawing.Point(2, 43)
+        Me.cmdCumMax.Location = New System.Drawing.Point(2, 38)
         Me.cmdCumMax.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCumMax.Name = "cmdCumMax"
-        Me.cmdCumMax.Size = New System.Drawing.Size(62, 30)
+        Me.cmdCumMax.Size = New System.Drawing.Size(62, 25)
         Me.cmdCumMax.TabIndex = 178
         Me.cmdCumMax.Text = "cummax"
         Me.cmdCumMax.UseVisualStyleBackColor = True
@@ -5239,7 +5767,7 @@ Partial Class ucrCalculator
         Me.cmdPMin.Location = New System.Drawing.Point(246, 14)
         Me.cmdPMin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPMin.Name = "cmdPMin"
-        Me.cmdPMin.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPMin.Size = New System.Drawing.Size(62, 25)
         Me.cmdPMin.TabIndex = 177
         Me.cmdPMin.Text = "pmin"
         Me.cmdPMin.UseVisualStyleBackColor = True
@@ -5250,7 +5778,7 @@ Partial Class ucrCalculator
         Me.cmdPMax.Location = New System.Drawing.Point(185, 14)
         Me.cmdPMax.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPMax.Name = "cmdPMax"
-        Me.cmdPMax.Size = New System.Drawing.Size(62, 30)
+        Me.cmdPMax.Size = New System.Drawing.Size(62, 25)
         Me.cmdPMax.TabIndex = 176
         Me.cmdPMax.Text = "pmax"
         Me.cmdPMax.UseVisualStyleBackColor = True
@@ -5261,7 +5789,7 @@ Partial Class ucrCalculator
         Me.cmdLag.Location = New System.Drawing.Point(63, 14)
         Me.cmdLag.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdLag.Name = "cmdLag"
-        Me.cmdLag.Size = New System.Drawing.Size(62, 30)
+        Me.cmdLag.Size = New System.Drawing.Size(62, 25)
         Me.cmdLag.TabIndex = 174
         Me.cmdLag.Text = "lag"
         Me.cmdLag.UseVisualStyleBackColor = True
@@ -5272,7 +5800,7 @@ Partial Class ucrCalculator
         Me.cmdLead.Location = New System.Drawing.Point(124, 14)
         Me.cmdLead.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdLead.Name = "cmdLead"
-        Me.cmdLead.Size = New System.Drawing.Size(62, 30)
+        Me.cmdLead.Size = New System.Drawing.Size(62, 25)
         Me.cmdLead.TabIndex = 175
         Me.cmdLead.Text = "lead"
         Me.cmdLead.UseVisualStyleBackColor = True
@@ -7817,10 +8345,6 @@ Partial Class ucrCalculator
         '
         'grpFunctions
         '
-        Me.grpFunctions.Controls.Add(Me.cmdFracDen)
-        Me.grpFunctions.Controls.Add(Me.cmdFrac20)
-        Me.grpFunctions.Controls.Add(Me.cmdFrac100)
-        Me.grpFunctions.Controls.Add(Me.cmdFrac10)
         Me.grpFunctions.Controls.Add(Me.cmdDigitsumSession)
         Me.grpFunctions.Controls.Add(Me.cmdDigitsquSession)
         Me.grpFunctions.Controls.Add(Me.cmdFunctionsDigitsum)
@@ -7854,54 +8378,10 @@ Partial Class ucrCalculator
         Me.grpFunctions.Margin = New System.Windows.Forms.Padding(2)
         Me.grpFunctions.Name = "grpFunctions"
         Me.grpFunctions.Padding = New System.Windows.Forms.Padding(2)
-        Me.grpFunctions.Size = New System.Drawing.Size(259, 280)
+        Me.grpFunctions.Size = New System.Drawing.Size(259, 259)
         Me.grpFunctions.TabIndex = 216
         Me.grpFunctions.TabStop = False
         Me.grpFunctions.Text = "Functions"
-        '
-        'cmdFracDen
-        '
-        Me.cmdFracDen.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFracDen.Location = New System.Drawing.Point(189, 159)
-        Me.cmdFracDen.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFracDen.Name = "cmdFracDen"
-        Me.cmdFracDen.Size = New System.Drawing.Size(62, 30)
-        Me.cmdFracDen.TabIndex = 232
-        Me.cmdFracDen.Text = "frac_den"
-        Me.cmdFracDen.UseVisualStyleBackColor = True
-        '
-        'cmdFrac20
-        '
-        Me.cmdFrac20.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFrac20.Location = New System.Drawing.Point(67, 159)
-        Me.cmdFrac20.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFrac20.Name = "cmdFrac20"
-        Me.cmdFrac20.Size = New System.Drawing.Size(62, 30)
-        Me.cmdFrac20.TabIndex = 231
-        Me.cmdFrac20.Text = "frac20"
-        Me.cmdFrac20.UseVisualStyleBackColor = True
-        '
-        'cmdFrac100
-        '
-        Me.cmdFrac100.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFrac100.Location = New System.Drawing.Point(128, 159)
-        Me.cmdFrac100.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFrac100.Name = "cmdFrac100"
-        Me.cmdFrac100.Size = New System.Drawing.Size(62, 30)
-        Me.cmdFrac100.TabIndex = 230
-        Me.cmdFrac100.Text = "frac100"
-        Me.cmdFrac100.UseVisualStyleBackColor = True
-        '
-        'cmdFrac10
-        '
-        Me.cmdFrac10.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdFrac10.Location = New System.Drawing.Point(2, 159)
-        Me.cmdFrac10.Margin = New System.Windows.Forms.Padding(2)
-        Me.cmdFrac10.Name = "cmdFrac10"
-        Me.cmdFrac10.Size = New System.Drawing.Size(66, 30)
-        Me.cmdFrac10.TabIndex = 229
-        Me.cmdFrac10.Text = "frac10"
-        Me.cmdFrac10.UseVisualStyleBackColor = True
         '
         'cmdDigitsumSession
         '
@@ -7985,7 +8465,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRhelpFunctions.AutoSize = True
         Me.cmdRhelpFunctions.ContextMenuStrip = Me.ContextMenuStripFunctions
-        Me.cmdRhelpFunctions.Location = New System.Drawing.Point(165, 246)
+        Me.cmdRhelpFunctions.Location = New System.Drawing.Point(165, 217)
         Me.cmdRhelpFunctions.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRhelpFunctions.Name = "cmdRhelpFunctions"
         Me.cmdRhelpFunctions.Size = New System.Drawing.Size(86, 30)
@@ -8080,7 +8560,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCoef.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCoef.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoef.Location = New System.Drawing.Point(128, 217)
+        Me.cmdCoef.Location = New System.Drawing.Point(128, 188)
         Me.cmdCoef.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCoef.Name = "cmdCoef"
         Me.cmdCoef.Size = New System.Drawing.Size(62, 30)
@@ -8104,7 +8584,7 @@ Partial Class ucrCalculator
         '
         Me.cmdProd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdProd.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdProd.Location = New System.Drawing.Point(2, 217)
+        Me.cmdProd.Location = New System.Drawing.Point(2, 188)
         Me.cmdProd.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdProd.Name = "cmdProd"
         Me.cmdProd.Size = New System.Drawing.Size(66, 30)
@@ -8128,7 +8608,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCombn.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCombn.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCombn.Location = New System.Drawing.Point(67, 217)
+        Me.cmdCombn.Location = New System.Drawing.Point(67, 188)
         Me.cmdCombn.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCombn.Name = "cmdCombn"
         Me.cmdCombn.Size = New System.Drawing.Size(62, 30)
@@ -8152,7 +8632,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCoeffs2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCoeffs2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoeffs2.Location = New System.Drawing.Point(189, 217)
+        Me.cmdCoeffs2.Location = New System.Drawing.Point(189, 188)
         Me.cmdCoeffs2.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCoeffs2.Name = "cmdCoeffs2"
         Me.cmdCoeffs2.Size = New System.Drawing.Size(62, 30)
@@ -8188,7 +8668,7 @@ Partial Class ucrCalculator
         '
         Me.cmdCoeffs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdCoeffs.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCoeffs.Location = New System.Drawing.Point(189, 188)
+        Me.cmdCoeffs.Location = New System.Drawing.Point(189, 159)
         Me.cmdCoeffs.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdCoeffs.Name = "cmdCoeffs"
         Me.cmdCoeffs.Size = New System.Drawing.Size(62, 30)
@@ -8212,7 +8692,7 @@ Partial Class ucrCalculator
         '
         Me.cmdRoots.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdRoots.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRoots.Location = New System.Drawing.Point(128, 188)
+        Me.cmdRoots.Location = New System.Drawing.Point(128, 159)
         Me.cmdRoots.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdRoots.Name = "cmdRoots"
         Me.cmdRoots.Size = New System.Drawing.Size(62, 30)
@@ -8224,7 +8704,7 @@ Partial Class ucrCalculator
         '
         Me.cmdPolynomial.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdPolynomial.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPolynomial.Location = New System.Drawing.Point(2, 188)
+        Me.cmdPolynomial.Location = New System.Drawing.Point(2, 159)
         Me.cmdPolynomial.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdPolynomial.Name = "cmdPolynomial"
         Me.cmdPolynomial.Size = New System.Drawing.Size(66, 30)
@@ -8236,7 +8716,7 @@ Partial Class ucrCalculator
         '
         Me.cmdOrigin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.cmdOrigin.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOrigin.Location = New System.Drawing.Point(67, 188)
+        Me.cmdOrigin.Location = New System.Drawing.Point(67, 159)
         Me.cmdOrigin.Margin = New System.Windows.Forms.Padding(2)
         Me.cmdOrigin.Name = "cmdOrigin"
         Me.cmdOrigin.Size = New System.Drawing.Size(62, 30)
@@ -8260,8 +8740,7 @@ Partial Class ucrCalculator
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.ucrChkStoreScalar)
         Me.Controls.Add(Me.cmdRhelpList)
         Me.Controls.Add(Me.cmdWakefieldHelp)
@@ -8276,10 +8755,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.lblExpression)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.grpModifier)
-        Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpFunctions)
-        Me.Controls.Add(Me.grpLogical)
-        Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpHydroGOF)
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
@@ -8289,12 +8764,18 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpTestString)
         Me.Controls.Add(Me.grpComplex)
         Me.Controls.Add(Me.grpList)
+        Me.Controls.Add(Me.grpTransform)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpFunctions)
+        Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpWakefield)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "ucrCalculator"
         Me.Size = New System.Drawing.Size(898, 458)
         Me.grpBasic.ResumeLayout(False)
         Me.grpDates.ResumeLayout(False)
         Me.grpDates.PerformLayout
+        Me.grpDateFormat.ResumeLayout(False)
         Me.ContextMenuStripDate.ResumeLayout(False)
         Me.ContextMenuStripComplex.ResumeLayout(False)
         Me.grpInteger.ResumeLayout(False)
@@ -8321,6 +8802,7 @@ Partial Class ucrCalculator
         Me.grpTransform.ResumeLayout(False)
         Me.grpTransform.PerformLayout
         Me.ContextMenuStripTransform.ResumeLayout(False)
+        Me.grpTransFormFormat.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
         Me.grpLogical.PerformLayout
         Me.ContextMenuStripLogical.ResumeLayout(False)
@@ -8976,12 +9458,50 @@ Partial Class ucrCalculator
     Friend WithEvents cmdRescale As Button
     Friend WithEvents ScalesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ucrChkStoreScalar As CheckBox
-    Friend WithEvents cmdFracDen As Button
-    Friend WithEvents cmdFrac20 As Button
-    Friend WithEvents cmdFrac100 As Button
-    Friend WithEvents cmdFrac10 As Button
     Friend WithEvents cmdQuantile3 As Button
     Friend WithEvents LabelledToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents cmdIdentical As Button
     Friend WithEvents cmdRollApply As Button
+    Friend WithEvents grpTransFormFormat As GroupBox
+    Friend WithEvents cmdFractions As Button
+    Friend WithEvents cmdAlignR As Button
+    Friend WithEvents cmdTrace As Button
+    Friend WithEvents cmdFormatComma As Button
+    Friend WithEvents cmdStars As Button
+    Friend WithEvents cmdPValue As Button
+    Friend WithEvents cmdAlign As Button
+    Friend WithEvents cmdFormatZero As Button
+    Friend WithEvents cmdFormatNA As Button
+    Friend WithEvents cmdPercent0 As Button
+    Friend WithEvents cmdPercent As Button
+    Friend WithEvents cmdEngineer As Button
+    Friend WithEvents cmdScientific As Button
+    Friend WithEvents cmdScientific4 As Button
+    Friend WithEvents cmdInteger As Button
+    Friend WithEvents cmdDecimal3 As Button
+    Friend WithEvents cmdFracDen As Button
+    Friend WithEvents cmdFrac100 As Button
+    Friend WithEvents cmdFrac20 As Button
+    Friend WithEvents cmdFrac10 As Button
+    Friend WithEvents DesctoolsFormatToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents grpDateFormat As GroupBox
+    Friend WithEvents cmdPlusPercR As Button
+    Friend WithEvents cmdPlusPercD As Button
+    Friend WithEvents cmdPlusPercJ As Button
+    Friend WithEvents cmdPlusPercC As Button
+    Friend WithEvents cmdPlusMMMM As Button
+    Friend WithEvents cmdPlusDDDD As Button
+    Friend WithEvents cmdPlusYYYY As Button
+    Friend WithEvents cmdPlusMMM As Button
+    Friend WithEvents cmdPlusDDD As Button
+    Friend WithEvents cmdPlusYY As Button
+    Friend WithEvents cmdPlusMM As Button
+    Friend WithEvents cmdPlusDD As Button
+    Friend WithEvents cmdPlusY As Button
+    Friend WithEvents cmdPlusM As Button
+    Friend WithEvents cmdPlusD As Button
+    Friend WithEvents cmdMon4Jun As Button
+    Friend WithEvents cmd040625 As Button
+    Friend WithEvents cmdJun4 As Button
+    Friend WithEvents DescToolsDateToolStripMenuItem As ToolStripMenuItem
 End Class
