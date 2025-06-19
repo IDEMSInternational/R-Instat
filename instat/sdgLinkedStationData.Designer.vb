@@ -179,10 +179,10 @@ Partial Class sdgLinkedStationData
         Me.ucrInputCheckInput.AutoSize = True
         Me.ucrInputCheckInput.IsMultiline = False
         Me.ucrInputCheckInput.IsReadOnly = False
-        Me.ucrInputCheckInput.Location = New System.Drawing.Point(147, 225)
+        Me.ucrInputCheckInput.Location = New System.Drawing.Point(146, 225)
         Me.ucrInputCheckInput.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
-        Me.ucrInputCheckInput.Size = New System.Drawing.Size(231, 21)
+        Me.ucrInputCheckInput.Size = New System.Drawing.Size(232, 21)
         Me.ucrInputCheckInput.TabIndex = 23
         '
         'cmdCheckUnique
@@ -190,7 +190,7 @@ Partial Class sdgLinkedStationData
         Me.cmdCheckUnique.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdCheckUnique.Location = New System.Drawing.Point(6, 223)
         Me.cmdCheckUnique.Name = "cmdCheckUnique"
-        Me.cmdCheckUnique.Size = New System.Drawing.Size(144, 23)
+        Me.cmdCheckUnique.Size = New System.Drawing.Size(128, 23)
         Me.cmdCheckUnique.TabIndex = 22
         Me.cmdCheckUnique.Text = "Check Duplicates"
         Me.cmdCheckUnique.UseVisualStyleBackColor = True

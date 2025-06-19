@@ -35,7 +35,6 @@ Public Class sdgLinkedStationData
             InitialiseControls()
             bFirstLoad = False
         End If
-        NewAutoFillReceivers()
     End Sub
 
     Private Sub InitialiseControls()
@@ -76,6 +75,7 @@ Public Class sdgLinkedStationData
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
+
         clsRSyntax = clsNewRSyntax
         clsDefaultFunction = clsNewDefaultFunction
         clsConcFunction = clsNewConcFunction
@@ -84,7 +84,6 @@ Public Class sdgLinkedStationData
         clsAnyDuplicatesFunction = clsNewAnyDuplicatesFunction
         ucrSelectorLinkedDataFrame.SetRCode(clsDefaultFunction, bReset)
         SetRCodesforReceivers(bReset)
-        NewAutoFillReceivers()
     End Sub
 
     Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
