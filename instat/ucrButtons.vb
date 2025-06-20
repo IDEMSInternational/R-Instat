@@ -851,15 +851,16 @@ Public Class ucrButtons
 End Class
 
 Public Class UIElement
-    Public Property strElementName As String
-    Public Property strLabel As String
+    Public ReadOnly Property strElementName As String
+    Public ReadOnly Property strLabel As String
     Public Property lstChildren As New List(Of UIElement)
 
-    Private ReadOnly resetDefault As String
+    Private ReadOnly strResetDefault As String
 
-    Public Sub New(strName As String, Optional defaultValue As String = "")
+    Public Sub New(strName As String, Optional defaultValue As String = "", Optional labelValue As String = "")
         strElementName = strName
-        resetDefault = defaultValue
+        strResetDefault = defaultValue
+        strLabel = labelValue
     End Sub
 
     ''' <summary>
@@ -878,7 +879,7 @@ Public Class UIElement
     ''' </summary>
     Public Overridable ReadOnly Property defaultAsString As String
         Get
-            Return resetDefault
+            Return strResetDefault
         End Get
     End Property
 
@@ -913,20 +914,20 @@ Public Class UIElementBoolean
     ''' <summary>
     ''' The default boolean value for this element.
     ''' </summary>
-    Public Property resetdefault As Boolean
+    Private ReadOnly bResetDefault As Boolean
 
     ''' <summary>
     ''' Returns "True" if default is True, otherwise "False".
     ''' </summary>
     Public Overrides ReadOnly Property DefaultAsString As String
         Get
-            Return If(resetdefault, "True", "False")
+            Return If(bResetDefault, "True", "False")
         End Get
     End Property
 
     Public Sub New(strName As String, Optional defaultValue As Boolean = False)
         MyBase.New(strName)
-        Me.resetdefault = defaultValue
+        bResetDefault = defaultValue
     End Sub
 End Class
 
