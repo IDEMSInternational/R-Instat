@@ -25,7 +25,7 @@ Public Class DlgDefineClimaticData
     Private lstReceivers As New List(Of ucrReceiverSingle)
     Private lstNewReceivers As New List(Of ucrReceiverSingle)
     Private lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
-    Private clslLinkedAnyDuplicatesFunction, clsLinkedConcFunction, clsDefaultFunction, clsLinkedDefautFunction, clsLinkedGetColFunction As New RFunction
+    Private clslLinkedAnyDuplicatesFunction, clsDefaultFunction, clsLinkedDefautFunction, clsLinkedGetColFunction As New RFunction
     Private clsAnyDuplicatesFunction, clsConcFunction, clsGetColFunction, clsDummyFunction As New RFunction
     Private strCurrentDataframeName As String
     Private bIsUnique As Boolean = True
@@ -110,10 +110,8 @@ Public Class DlgDefineClimaticData
         clsLinkedGetColFunction = New RFunction
         clsAnyDuplicatesFunction = New RFunction
         clsConcFunction = New RFunction
-        clsLinkedConcFunction = New RFunction
         clslLinkedAnyDuplicatesFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsLinkedDefautFunction = New RFunction
 
         bResetSubDialog = True
 
@@ -124,18 +122,14 @@ Public Class DlgDefineClimaticData
         clsDefaultFunction.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
         clsDefaultFunction.AddParameter("key_col_names", clsRFunctionParameter:=clsConcFunction, iPosition:=2)
 
-        clsLinkedDefautFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
-        clsLinkedDefautFunction.AddParameter("types", clsRFunctionParameter:=clsLinkedTypesFunction)
-        clsLinkedDefautFunction.AddParameter("key_col_names", clsRFunctionParameter:=clsLinkedConcFunction, iPosition:=2)
 
         clsDummyFunction.AddParameter("checked", "FALSE", iPosition:=0)
 
         clsTypesFunction.SetRCommand("c")
-        clsLinkedTypesFunction.SetRCommand("c")
 
         clsConcFunction.SetRCommand("c")
 
-        clsLinkedConcFunction.SetRCommand("c")
+
 
         clsAnyDuplicatesFunction.SetRCommand("anyDuplicated")
         clsAnyDuplicatesFunction.AddParameter("x", clsRFunctionParameter:=clsGetColFunction)
@@ -147,10 +141,6 @@ Public Class DlgDefineClimaticData
         clsGetColFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
         clsGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
-
-        clsLinkedGetColFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        clsLinkedGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
-        clsLinkedGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsLinkedConcFunction)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         ucrBase.clsRsyntax.bSeparateThread = False
@@ -260,7 +250,7 @@ Public Class DlgDefineClimaticData
     End Function
 
     Private Sub cmdLinkedStation_Click(sender As Object, e As EventArgs) Handles cmdLinkedStation.Click
-        sdgLinkedStationData.SetRCode(clsNewAnyDuplicatesFunction:=clsAnyDuplicatesFunction, clsNewConcFunction:=clsLinkedConcFunction, clsNewDefaultFunction:=clsLinkedDefautFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewGetColFunction:=clsLinkedGetColFunction, clsNewTypesFunction:=clsLinkedTypesFunction, bReset:=bResetSubDialog)
+        sdgLinkedStationData.SetRCode(clsNewAnyDuplicatesFunction:=clsAnyDuplicatesFunction, clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog)
         sdgLinkedStationData.ShowDialog()
         bResetSubDialog = False
     End Sub

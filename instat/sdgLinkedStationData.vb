@@ -24,10 +24,13 @@ Public Class sdgLinkedStationData
     Private clsTypesFunction As New RFunction
     Private lstNewReceivers As New List(Of ucrReceiverSingle)
     Private lstNewRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
-    Private clsDefaultFunction As New RFunction
+    Private clsDefaultFunction, clsAddLinkFunction As New RFunction
     Private clsAnyDuplicatesFunction, clsConcFunction, clsGetColFunction As New RFunction
     Private clsRSyntax As RSyntax
     Private bIsUnique As Boolean = True
+    Private strCurrentDataframeName As String
+    Private bDefaultFunctionValid As Boolean = False
+
 
     Private Sub sdgLinkedStationData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -71,19 +74,84 @@ Public Class sdgLinkedStationData
         Next
     End Sub
 
-    Public Sub SetRCode(clsNewAnyDuplicatesFunction As RFunction, clsNewGetColFunction As RFunction, clsNewTypesFunction As RFunction, clsNewConcFunction As RFunction, clsNewRSyntax As RSyntax, clsNewDefaultFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewAnyDuplicatesFunction As RFunction, clsNewRSyntax As RSyntax, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
+        ' Assign RSyntax and new empty RFunctions
         clsRSyntax = clsNewRSyntax
-        clsDefaultFunction = clsNewDefaultFunction
-        clsConcFunction = clsNewConcFunction
-        clsTypesFunction = clsNewTypesFunction
-        clsGetColFunction = clsNewGetColFunction
+
+        ' First remove old function calls from syntax
+        If Not clsDefaultFunction Is Nothing Then
+            clsRSyntax.RemoveFromAfterCodes(clsDefaultFunction)
+        End If
+        If Not clsAddLinkFunction Is Nothing Then
+            clsRSyntax.RemoveFromAfterCodes(clsAddLinkFunction)
+        End If
         clsAnyDuplicatesFunction = clsNewAnyDuplicatesFunction
+
+        ' New function instances
+        clsDefaultFunction = New RFunction
+        clsConcFunction = New RFunction
+        clsTypesFunction = New RFunction
+        clsGetColFunction = New RFunction
+
+        ' Set command before clearing or adding parameters
+        clsConcFunction.SetRCommand("c")
+        clsTypesFunction.SetRCommand("c")
+
+        ' Clear any previous parameters just in case
+        clsConcFunction.ClearParameters()
+        clsTypesFunction.ClearParameters()
+
+        ' Set default function with structure
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
+        clsDefaultFunction.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
+        clsDefaultFunction.AddParameter("key_col_names", clsRFunctionParameter:=clsConcFunction, iPosition:=2)
+
+        ' Setup GetCol function (if used elsewhere)
+        clsGetColFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColFunction.AddParameter("data_name", Chr(34) & strCurrentDataframeName & Chr(34))
+        clsGetColFunction.AddParameter("col_names", clsRFunctionParameter:=clsConcFunction)
+
+        bDefaultFunctionValid = True
+
+        '' Assign RCode to selector
         ucrSelectorLinkedDataFrame.SetRCode(clsDefaultFunction, bReset)
         SetRCodesforReceivers(bReset)
+    End Sub
+
+    Private Sub UpdateAddLinkFunction()
+        If clsRSyntax Is Nothing Then Exit Sub
+
+        ' Remove old link function if it exists
+        If clsAddLinkFunction IsNot Nothing Then
+            clsRSyntax.RemoveFromAfterCodes(clsAddLinkFunction)
+        End If
+
+        ' Skip if needed inputs are missing
+        If ucrReceiverStationMeta.IsEmpty OrElse ucrSelectorLinkedDataFrame.IsEmpty Then Exit Sub
+
+        ' Build new values
+        Dim strMainStationVar As String = DlgDefineClimaticData.ucrReceiverStation.GetVariableNames(False)
+        Dim strLinkedStationVar As String = ucrReceiverStationMeta.GetVariableNames
+
+        If String.IsNullOrEmpty(strMainStationVar) OrElse String.IsNullOrEmpty(strLinkedStationVar) Then Exit Sub
+
+        Dim strLinkPairs As String = "c(" & strMainStationVar & "=" & strLinkedStationVar & ")"
+
+        ' Create new function
+        clsAddLinkFunction = New RFunction
+        clsAddLinkFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_link")
+        clsAddLinkFunction.AddParameter("from_data_frame", Chr(34) & DlgDefineClimaticData.ucrSelectorDefineClimaticData.strCurrentDataFrame & Chr(34))
+        clsAddLinkFunction.AddParameter("to_data_frame", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34))
+        clsAddLinkFunction.AddParameter("type", Chr(34) & "keyed_link" & Chr(34))
+        clsAddLinkFunction.AddParameter("link_name", Chr(34) & "link" & Chr(34))
+        clsAddLinkFunction.AddParameter("link_pairs", strLinkPairs, bIncludeArgumentName:=True)
+
+        ' Add it once
+        clsRSyntax.AddToAfterCodes(clsAddLinkFunction)
     End Sub
 
     Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
@@ -162,16 +230,27 @@ Public Class sdgLinkedStationData
 
     Private Sub ucrSelectorLinkedDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorLinkedDataFrame.ControlValueChanged
         NewAutoFillReceivers()
+        clsAddLinkFunction.AddParameter("to_data_frame", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34), iPosition:=1)
+        clsGetColFunction.AddParameter("data_name", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34), iPosition:=1)
     End Sub
 
-    Private Sub ucrChkLinkedMetaData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAltMeta.ControlValueChanged, ucrReceiverLatMeta.ControlValueChanged, ucrReceiverLonMeta.ControlValueChanged, ucrReceiverStationMeta.ControlValueChanged, ucrReceiverDiscritMeta.ControlValueChanged
+    Private Sub ucrReceiverStationMeta_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAltMeta.ControlValueChanged, ucrReceiverLatMeta.ControlValueChanged, ucrReceiverLonMeta.ControlValueChanged, ucrReceiverStationMeta.ControlValueChanged, ucrReceiverDiscritMeta.ControlValueChanged
         If Not ucrReceiverStationMeta.IsEmpty Then
-            clsRSyntax.AddToAfterCodes(clsDefaultFunction, iPosition:=0)
-            clsDefaultFunction.iCallType = 2
+            ' Check and add clsDefaultFunction if it's valid
+            Dim strDefaultScript As String = clsDefaultFunction.ToScript().Trim()
+            If Not String.IsNullOrEmpty(strDefaultScript) AndAlso strDefaultScript <> "()" Then
+                clsRSyntax.RemoveFromAfterCodes(clsDefaultFunction)
+                clsRSyntax.AddToAfterCodes(clsDefaultFunction, iPosition:=0)
+            End If
+
+            ' Check and add clsAddLinkFunction if it's valid
+            UpdateAddLinkFunction()
+
             clsConcFunction.AddParameter("x1", ucrReceiverStationMeta.GetVariableNames, bIncludeArgumentName:=False)
         Else
             clsConcFunction.RemoveParameterByName("x1")
             clsRSyntax.RemoveFromAfterCodes(clsDefaultFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsAddLinkFunction)
         End If
     End Sub
 
@@ -211,8 +290,4 @@ Public Class sdgLinkedStationData
         End Try
         Return String.Empty
     End Function
-
-    Private Sub ucrSelectorLinkedDataFrame_DataFrameChanged() Handles ucrSelectorLinkedDataFrame.DataFrameChanged
-        clsGetColFunction.AddParameter("data_name", Chr(34) & ucrSelectorLinkedDataFrame.strCurrentDataFrame & Chr(34), iPosition:=1)
-    End Sub
 End Class
