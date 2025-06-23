@@ -52,6 +52,8 @@ Public Class dlgDefineTricotData
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 672
+        Me.Size = New Size(557, 334)
+        Me.ucrBase.Location = New Point(9, 241)
 
         Dim kvpID As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("id", {"id", "ID", "participant_id", "participant_name"}.ToList())
         Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("longitude", {"lon", "long", "lont", "longitude", "Longitude", "Lon"}.ToList())
@@ -276,6 +278,7 @@ Public Class dlgDefineTricotData
 
         changedIDLevelChecked()
         changedVarietyLevelChecked()
+        SetDialogSize()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -531,13 +534,13 @@ Public Class dlgDefineTricotData
     Private Sub ucrChkDefineIDLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineIDLevel.ControlValueChanged
         changedIDLevelChecked()
         TestOkEnabled()
+        SetDialogSize()
     End Sub
-
-
 
     Private Sub ucrChkDefineVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineVarietyLevel.ControlValueChanged
         changedVarietyLevelChecked()
         TestOkEnabled()
+        SetDialogSize()
     End Sub
 
     Private Sub changedIDLevelChecked()
@@ -556,7 +559,7 @@ Public Class dlgDefineTricotData
             ucrBase.clsRsyntax.AddToBeforeCodes(clsDATVarietyLevelFunction, 2)
         Else
             grpVarietyLevel.Visible = False
-        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDATVarietyLevelFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDATVarietyLevelFunction)
 
         End If
     End Sub
@@ -648,4 +651,18 @@ Public Class dlgDefineTricotData
         End If
         TestOkEnabled()
     End Sub
+
+    Private Sub SetDialogSize()
+        If ucrChkDefineVarietyLevel.Checked Then
+            Me.Size = New Size(879, 570)
+            Me.ucrBase.Location = New Point(9, 473)
+        ElseIf ucrChkDefineIDLevel.Checked Then
+            Me.Size = New Size(618, 570)
+            Me.ucrBase.Location = New Point(9, 473)
+        Else
+            Me.Size = New Size(557, 334)
+            Me.ucrBase.Location = New Point(9, 241)
+        End If
+    End Sub
+
 End Class
