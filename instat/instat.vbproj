@@ -457,6 +457,12 @@
     <Compile Include="sdgInventoryOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgLinkedStationData.Designer.vb">
+      <DependentUpon>sdgLinkedStationData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgLinkedStationData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgLocation.Designer.vb">
       <DependentUpon>sdgLocation.vb</DependentUpon>
     </Compile>
@@ -3624,6 +3630,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgInventoryOptions.resx">
       <DependentUpon>sdgInventoryOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgLinkedStationData.resx">
+      <DependentUpon>sdgLinkedStationData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgLocation.resx">
       <DependentUpon>sdgLocation.vb</DependentUpon>
