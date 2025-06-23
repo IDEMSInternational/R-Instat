@@ -616,17 +616,17 @@ Public Class dlgSummaryTables
         Dim selectedVariables As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList ' Example, adjust based on your control
         Dim selectedCount As Integer = selectedVariables.Count
         ' Ensure ucrNudColFactors.Maximum does not exceed the number of selected variables
-        If selectedCount > 0 Then
+        If selectedCount > 1 Then
             ucrNudColFactors.Maximum = selectedCount
 
             If ucrNudColFactors.Value > selectedCount Then
                 ucrNudColFactors.Value = selectedCount
             End If
 
-            ucrNudColFactors.Minimum = 0
+            ucrNudColFactors.Minimum = 1
 
         Else
-            ucrNudColFactors.Minimum = 0
+            ucrNudColFactors.Minimum = 1
         End If
 
     End Sub
