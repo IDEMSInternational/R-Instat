@@ -1448,9 +1448,10 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_calculation_names")
                 Case "gtcol"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_gtcol_names")
-                    clsGetItems.AddParameter("table_name", Chr(34) &  & Chr(34)
+                    clsGetItems.AddParameter("table_name", Chr(34) & strTableName & Chr(34))
                 Case "gtrow"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_gtrow_names")
+                    clsGetItems.AddParameter("table_name", Chr(34) & strTableName & Chr(34))
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             If lstView.TopItem IsNot Nothing Then

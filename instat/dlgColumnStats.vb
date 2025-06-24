@@ -56,11 +56,13 @@ Public Class dlgColumnStats
         ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverSelectedVariables.SetParameterIsString()
         ucrReceiverSelectedVariables.Selector = ucrSelectorForData
+        ucrReceiverSelectedVariables.SetItemType("gtrow")
         'ucrReceiverSelectedVariables.SetSingleTypeStatus(True)
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
         ucrReceiverByFactor.Selector = ucrSelectorForData
         ucrReceiverByFactor.SetParameterIsString()
+        ucrReceiverByFactor.SetItemType("gtcol")
 
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
         ucrChkStoreResults.SetText("Store Results")
@@ -87,6 +89,7 @@ Public Class dlgColumnStats
         ucrReceiverWeights.SetParameter(New RParameter("weights", 7))
         ucrReceiverWeights.Selector = ucrSelectorForData
         ucrReceiverWeights.SetParameterIsString()
+        ucrReceiverWeights.SetItemType("gtrow")
 
         'linking
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
