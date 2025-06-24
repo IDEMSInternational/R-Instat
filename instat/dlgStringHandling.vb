@@ -22,12 +22,12 @@ Public Class dlgStringHandling
             clsFixedFunction, clsRegexFunction, clsStringCollFunction, clsBoundaryFunction, clsRemoveFunction, clsReplaceNaFunction, clsStrToLowerFunction,
             clsStartsFunction, clsEndsFunction, clsMatchAllFunction, clsExtractAllFunction, clsLocateAllFunction, clsRemoveAllFunction,
             clsReplaceCellFunction, clsCurrentNewColumnFunction, clsAsDataFrameFunction, clsMutateFunction, clsReplaceGrepFunction As New RFunction
-    Private clsPipeOperator, clsTildaOperator, clsDataFrameOperator, clsPipe2Operator, clsUnpackOperator As New ROperator
+    Private clsPipeOperator, clsTildaOperator, clsDataFrameOperator, clsPipe2Operator, clsUnpackOperator, clsSelectOperator As New ROperator
     Private clsDummyFunction, clsFindDummyFunction, clsReplaceDummyFunction, clsColumnSelectionFunction,
         clsList1Function, clsList2Function, clsGetDataFrameFunction, clsPasteFunction, clsEverythingFunction,
         clsAcrossFunction, clsPaste2Function, clsEndsWithFunction, clsUnpackFunction, clsMutate2Function,
        clsAddColumnsFunction, clsReplaceSelectFunction, clsReplaceAllSelectFunction, clsReplaceCellSelectFunction,
-       clsGreplCellSelectFunction As New RFunction
+       clsGreplCellSelectFunction, clsNamesFunction, clsAnyFunction, clsSelectFunction As New RFunction
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -221,6 +221,10 @@ Public Class dlgStringHandling
         clsReplaceAllSelectFunction = New RFunction
         clsReplaceCellSelectFunction = New RFunction
         clsGreplCellSelectFunction = New RFunction
+        clsAnyFunction = New RFunction
+        clsNamesFunction = New RFunction
+        clsSelectFunction = New RFunction
+        clsSelectOperator = New ROperator
         ucrSelectorStringHandling.Reset()
 
         ucrInputReplaceBy.Reset()
@@ -286,10 +290,23 @@ Public Class dlgStringHandling
         clsUnpackOperator.SetOperation("%>%")
         clsUnpackOperator.AddParameter("left", clsROperatorParameter:=clsPipe2Operator, iPosition:=0)
         clsUnpackOperator.AddParameter("right", clsRFunctionParameter:=clsUnpackFunction, iPosition:=1)
-        clsUnpackOperator.SetAssignTo("col")
+
+        clsNamesFunction.SetRCommand("names")
+
+        clsAnyFunction.SetRCommand("-any_of")
+        clsAnyFunction.AddParameter("any", clsRFunctionParameter:=clsNamesFunction, bIncludeArgumentName:=False)
+
+        clsSelectFunction.SetPackageName("dplyr")
+        clsSelectFunction.SetRCommand("select")
+        clsSelectFunction.AddParameter("select", clsRFunctionParameter:=clsAnyFunction, bIncludeArgumentName:=False)
+
+        clsSelectOperator.SetOperation("%>%")
+        clsSelectOperator.AddParameter("left", clsROperatorParameter:=clsUnpackOperator, iPosition:=0)
+        clsSelectOperator.AddParameter("right", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
+        clsSelectOperator.SetAssignTo("col")
 
         clsAddColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        clsAddColumnsFunction.AddParameter("col_data", clsROperatorParameter:=clsUnpackOperator, iPosition:=1)
+        clsAddColumnsFunction.AddParameter("col_data", clsROperatorParameter:=clsSelectOperator, iPosition:=1)
         clsAddColumnsFunction.AddParameter("before", "FALSE", iPosition:=2)
 
         clsGreplCellSelectFunction.SetRCommand("grepl")
@@ -729,6 +746,7 @@ Public Class dlgStringHandling
         clsGetDataFrameFunction.SetAssignTo(ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsGetDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverStringHandling.GetVariableNames, iPosition:=1)
+        clsNamesFunction.AddParameter("data_name", ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
 
         If rdoReplace.Checked Then
             If rdoMultiple.Checked Then
