@@ -661,7 +661,7 @@ Public Class dlgDefineTricotData
             Me.ucrBase.Location = New Point(9, 473)
         Else
             Me.Size = New Size(557, 334)
-            Me.ucrBase.Location = New Point(9, 241)
+            Me.ucrBase.Location = New Point(9, 473)
         End If
     End Sub
 
