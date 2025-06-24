@@ -456,6 +456,7 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.AddAdditionalRCode(clsRemoveAllFunction, iAdditionalPairNo:=13)
         ucrSaveStringHandling.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=14)
         ucrSaveStringHandling.AddAdditionalRCode(clsNaIfFunction, iAdditionalPairNo:=15)
+        ucrSaveStringHandling.AddAdditionalRCode(clsAddColumnsFunction, iAdditionalPairNo:=16)
 
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsDummyFunction, bReset)
@@ -610,6 +611,7 @@ Public Class dlgStringHandling
                 clsFindDummyFunction.AddParameter("string_handling", "replace", iPosition:=3)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsAddColumnsFunction)
+                ucrSaveStringHandling.SetPrefix("select")
                 If rdoReplaceFirst.Checked Then
                     clsAcrossFunction.RemoveParameterByName(".fns")
                     clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
@@ -627,7 +629,6 @@ Public Class dlgStringHandling
                     clsAcrossFunction.AddParameter(".fns", clsRFunctionParameter:=clsReplaceCellSelectFunction, iPosition:=1)
                     clsAcrossFunction.AddParameter(".names", clsRFunctionParameter:=clsPasteFunction, iPosition:=2)
                     ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsColumnSelectionFunction)
-
                 End If
             End If
         ElseIf rdoReplaceNa.Checked Then
