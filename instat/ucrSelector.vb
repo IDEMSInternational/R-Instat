@@ -27,7 +27,7 @@ Public Class ucrSelector
     Public strPrimaryDataFrame As String
     Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
-    Private strType As String
+    Public strType As String
     Private bShowHiddenCols As Boolean = False
     Private WithEvents ucrLinkedSelector As ucrSelector
     Public bIsStacked As Boolean = False

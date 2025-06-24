@@ -1385,7 +1385,7 @@ Public Class RLink
     '''                                     Only used if <paramref name="strType"/> is 
     '''                                     'nc_dim_variables'.</param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "", Optional strTableName As String = "")
         Dim vecColumns As GenericVector = Nothing
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -1446,6 +1446,11 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_variable_sets_names")
                 Case "calculation"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_calculation_names")
+                Case "gtcol"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_gtcol_names")
+                    clsGetItems.AddParameter("table_name", Chr(34) &  & Chr(34)
+                Case "gtrow"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_gtrow_names")
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             If lstView.TopItem IsNot Nothing Then

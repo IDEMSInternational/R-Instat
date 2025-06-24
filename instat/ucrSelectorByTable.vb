@@ -18,15 +18,21 @@ Imports instat
 
 Public Class ucrSelectorByTable
     Public Overrides Sub LoadList()
-        lstAvailableVariable.Items.Clear()
+        Dim strCurrentType As String
+
+        'no need to load elements if receiver is nothing
+        If CurrentReceiver Is Nothing Then
+            Exit Sub
+        End If
 
         If ucrAvailableTables.SelectedDataFrame <> "" AndAlso ucrAvailableTables.SelectedTable <> "" Then
-            Dim colNames As List(Of String) = frmMain.clsRLink.GetColumnNamesFromTable(ucrAvailableTables.SelectedDataFrame, ucrAvailableTables.SelectedTable)
+            'set the type of 'elements' to show. If current receiver is set to a particular 'element' type then use it  
+            strCurrentType = If(CurrentReceiver.bTypeSet, CurrentReceiver.GetItemType(), strType)
 
-            For Each colName In colNames
-                lstAvailableVariable.Items.Add(colName)
-            Next
+            'todo, for columns, the list view should be field with variables from the .Net metadata object
+            frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, strDataFrameName:=strCurrentDataFrame, strTableName:=ucrAvailableTables.SelectedTable)
         End If
+
     End Sub
 
     Private Sub ucrAvailableTables_ControlValueChanged(sender As Object) Handles ucrAvailableTables.ControlValueChanged

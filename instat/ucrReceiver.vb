@@ -419,9 +419,13 @@ Public Class ucrReceiver
                 strItemsParameterNameInRFunction = "calculation_name"
             Case "scalar"
                 strItemsParameterNameInRFunction = "scalar_name"
+            Case "gtcol"
+                strItemsParameterNameInRFunction = "gtcol_name"
+            Case "gtrow"
+                strItemsParameterNameInRFunction = "gtrow_name"
         End Select
         If IsCurrentReceiver() Then
-            Selector.LoadList()
+            Selector.LoadList() ' this is where the selector is autopopulating ' which is the r cmd that loadlist is looking at?
         End If
         bTypeSet = True
     End Sub
