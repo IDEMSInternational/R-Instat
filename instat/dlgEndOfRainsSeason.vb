@@ -1683,4 +1683,5 @@ Public Class dlgEndOfRainsSeason
             bDialogJustShown = False ' So it doesn't repeat if Shown is triggered again
         End If
     End Sub
+
 End Class
