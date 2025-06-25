@@ -3009,6 +3009,8 @@ Public Class frmMain
         ucrDataViewer.StartWait()
         If mnuSwapDataMetadata.Checked Then
             ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewColumnMetaData()
+        ElseIf mnuSwapDataDataframeMetadata.Checked Then
+            ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataframeMetaData()
         Else
             ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
         End If
