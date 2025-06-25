@@ -620,6 +620,9 @@ Public Class dlgSummaryTables
         Dim selectedCount As Integer = selectedVariables.Count
         ' Ensure ucrNudColFactors.Maximum does not exceed the number of selected variables
         If selectedCount > 0 Then
+            If selectedCount = 1 Then
+                ucrNudColFactors.Value = 1
+            End If
             ucrNudColFactors.Maximum = selectedCount
 
             If ucrNudColFactors.Value > selectedCount Then
