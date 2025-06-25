@@ -109,7 +109,7 @@ Public Class dlgStringHandling
         ucrChkReplaceBy.SetParameter(New RParameter("replacement", 1), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrInputReplaceNaBy.SetParameter(New RParameter("replacement", 1))
 
-        ucrSaveStringHandling.SetPrefix("count")
+        'ucrSaveStringHandling.SetPrefix("count")
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSaveStringHandling.SetIsComboBox()
@@ -251,7 +251,6 @@ Public Class dlgStringHandling
         clsGetDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
         clsTildaOperator.SetOperation(" ", bBracketsTemp:=False)
-        clsTildaOperator.SetAssignTo("select")
 
         clsDataFrameOperator.SetOperation("%>%")
         clsDataFrameOperator.AddParameter("right", "as.data.frame()", iPosition:=1)
@@ -277,7 +276,7 @@ Public Class dlgStringHandling
 
         clsPaste2Function.SetRCommand("paste0")
         clsPaste2Function.AddParameter("names", """_""", iPosition:=0, bIncludeArgumentName:=False)
-        clsPaste2Function.AddParameter("split", "select", iPosition:=1, bIncludeArgumentName:=False)
+        clsPaste2Function.AddParameter("split", clsROperatorParameter:=clsTildaOperator, iPosition:=1, bIncludeArgumentName:=False)
 
         clsEndsWithFunction.SetRCommand("ends_with")
         clsEndsWithFunction.AddParameter("paste", clsRFunctionParameter:=clsPaste2Function, iPosition:=0, bIncludeArgumentName:=False)
@@ -456,7 +455,8 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.AddAdditionalRCode(clsRemoveAllFunction, iAdditionalPairNo:=13)
         ucrSaveStringHandling.AddAdditionalRCode(clsPipeOperator, iAdditionalPairNo:=14)
         ucrSaveStringHandling.AddAdditionalRCode(clsNaIfFunction, iAdditionalPairNo:=15)
-        ucrSaveStringHandling.AddAdditionalRCode(clsAddColumnsFunction, iAdditionalPairNo:=16)
+        'ucrSaveStringHandling.AddAdditionalRCode(clsTildaOperator, iAdditionalPairNo:=16)
+        'ucrSaveStringHandling.AddAdditionalRCode(clsAddColumnsFunction, iAdditionalPairNo:=17)
 
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsDummyFunction, bReset)
@@ -467,7 +467,7 @@ Public Class dlgStringHandling
         ucrInputBoundary.SetRCode(clsBoundaryFunction, bReset)
         ucrChkComments.SetRCode(clsRegexFunction, bReset)
         ucrChkMultiline.SetRCode(clsRegexFunction, bReset)
-        ucrSaveStringHandling.SetRCode(clsDetectFunction, bReset)
+        ' ucrSaveStringHandling.SetRCode(clsDetectFunction, bReset)
         ucrChkNegate.SetRCode(clsDetectFunction, bReset)
         ucrChkReplaceBy.SetRCode(clsReplaceNaFunction, bReset)
         ucrInputReplaceNaBy.SetRCode(clsReplaceNaFunction, bReset)
@@ -748,6 +748,7 @@ Public Class dlgStringHandling
         clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsGetDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverStringHandling.GetVariableNames, iPosition:=1)
         clsNamesFunction.AddParameter("data_name", ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
+        clsTildaOperator.SetAssignTo(ucrSaveStringHandling.GetText)
 
         If rdoReplace.Checked Then
             If rdoMultiple.Checked Then
