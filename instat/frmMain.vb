@@ -3007,7 +3007,13 @@ Public Class frmMain
 
     Private Sub mnuRDataViewerWindow_Click(sender As Object, e As EventArgs) Handles mnuRDataViewerWindow.Click
         ucrDataViewer.StartWait()
-        ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        If mnuSwapDataMetadata.Checked Then
+            ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewColumnMetaData()
+        ElseIf mnuSwapDataDataframeMetadata.Checked Then
+            ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataframeMetaData()
+        Else
+            ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        End If
         ucrDataViewer.EndWait()
     End Sub
 
