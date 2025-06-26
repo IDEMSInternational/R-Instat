@@ -17,18 +17,28 @@
 Imports instat.Translations
 
 Public Class sdgDisplayModelOptions
-    Private clsSummaryFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction, clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
-    Private clsCoefFunction, clsStatsFunction, clsImportDataFunction As RFunction
+    Private clsSummaryFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction,
+        clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
+    Private clsCoefFunction, clsStatsFunction, clsImportDataFunction, clsDefineAsTricotFunction As RFunction
     Private clsDummyFunction, clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction, clsTreeFunction, clsWrapTrees As RFunction
     Private clsPipeOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bInitialised As Boolean = False
+    Public enumPlacketLuceModelMode As String = PlacketLuceModelMode.nocovariates
 
     Private clsRSyntax As New RSyntax
 
     Private Sub sdgDisplayModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        SetHelpOptions()
     End Sub
+
+    Public Enum PlacketLuceModelMode
+        nocovariates
+        tree
+        ModelOneVarCov2
+        ModellingGeneral2
+    End Enum
 
     Private Sub InitialiseDialog()
         ucrChkModel.SetText("Summary")
@@ -147,7 +157,12 @@ Public Class sdgDisplayModelOptions
         bControlsInitialised = False
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction, clsNewImportDataFunction As RFunction, clsNewPipeOperator As ROperator, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction, clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction, clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction, clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewTreeFunction As RFunction, clsNewWrapTree As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction,
+                        clsNewImportDataFunction As RFunction, clsNewDefineAsTricotFunction As RFunction, clsNewPipeOperator As ROperator, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction,
+                        clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction,
+                        clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction,
+                        clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewTreeFunction As RFunction, clsNewWrapTree As RFunction, Optional bReset As Boolean = False)
+
         ucrNudConfLevel.SetText("0.95")
         If Not bControlsInitialised Then
             InitialiseDialog()
@@ -160,6 +175,7 @@ Public Class sdgDisplayModelOptions
         clsAnnovaFunction = clsNewAnnovaFunction
         clsSummaryFunction = clsNewSummaryFunction
         clsEstimatesFunction = clsNewEstimatesFunction
+        clsDefineAsTricotFunction = clsNewDefineAsTricotFunction
         clsImportDataFunction = clsNewImportDataFunction
         clsPipeOperator = clsNewPipeOperator
         clsConfidenLimFunction = clsNewConfidenLimFunction
@@ -273,16 +289,16 @@ Public Class sdgDisplayModelOptions
     End Sub
 
     Private Sub ucrChkSave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSave.ControlValueChanged
-
-
         If ucrChkSave.Checked Then
             clsEstimatesFunction.SetAssignTo("coefficients_data")
             clsRSyntax.AddToBeforeCodes(clsPipeOperator, iPosition:=12)
             clsRSyntax.AddToBeforeCodes(clsImportDataFunction, iPosition:=13)
+            clsRSyntax.AddToBeforeCodes(clsDefineAsTricotFunction, iPosition:=14)
         Else
             clsEstimatesFunction.RemoveAssignTo()
             clsRSyntax.RemoveFromBeforeCodes(clsPipeOperator)
             clsRSyntax.RemoveFromBeforeCodes(clsImportDataFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsDefineAsTricotFunction)
         End If
     End Sub
 
@@ -399,4 +415,18 @@ Public Class sdgDisplayModelOptions
             clsRSyntax.RemoveFromBeforeCodes(clsHeatFunction)
         End If
     End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumPlacketLuceModelMode
+            Case PlacketLuceModelMode.nocovariates
+                ucrSdgButtons.iHelpTopicID = 722
+            Case PlacketLuceModelMode.tree
+                ucrSdgButtons.iHelpTopicID = 724
+            Case PlacketLuceModelMode.ModelOneVarCov2
+                ucrSdgButtons.iHelpTopicID = 726
+            Case PlacketLuceModelMode.ModellingGeneral2
+                ucrSdgButtons.iHelpTopicID = 728
+        End Select
+    End Sub
+
 End Class

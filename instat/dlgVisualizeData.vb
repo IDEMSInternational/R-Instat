@@ -22,6 +22,7 @@ Public Class dlgVisualizeData
         Prepare
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private bFirstLoad As Boolean = True
@@ -345,6 +346,8 @@ Public Class dlgVisualizeData
                 ucrBase.iHelpTopicID = 600
             Case VisualizeMode.Climatic
                 ucrBase.iHelpTopicID = 524
+            Case VisualizeMode.Tricot
+                ucrBase.iHelpTopicID = 733
         End Select
     End Sub
 
