@@ -15,16 +15,18 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class clsWarningMessage
+    ' Indicates whether to show the reset warning message
+    Public Shared Property ShowWarning As Boolean = True
 
-
-    'Provides utility functions For managing user interactions With reset operations across multiple dialogs.
-
-    ' Public method to attempt a reset with warning
-    ' Returns True if user confirms reset; otherwise False
+    ' Public method to attempt a reset with optional warning
     Public Shared Function ConfirmReset() As Boolean
+        If Not ShowWarning Then
+            Return True
+        End If
+
         Dim result As MsgBoxResult = MsgBox("Warning: clicking reset will lose all values currently in the receivers",
                                             MsgBoxStyle.OkCancel + MsgBoxStyle.Exclamation, "Warning")
         Return result = MsgBoxResult.Ok
     End Function
-
 End Class
+
