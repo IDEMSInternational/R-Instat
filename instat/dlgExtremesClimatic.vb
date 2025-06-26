@@ -51,6 +51,7 @@ Public Class dlgExtremesClimatic
     Private clsThresholdPlotFunction As New RFunction
     Private clsDeclusteringFunction As New RFunction
     Private clsDummyRfunction As New RFunction
+    Private bResetSubdialog As Boolean = False
 
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -210,6 +211,7 @@ Public Class dlgExtremesClimatic
         ucrInputThresholdOperator.SetLinkedDisplayControl(lblNewDFName)
         ucrChkPrintSummary.SetLinkedDisplayControl(grpDeclusteringOptions)
         ucrNudDeclusterColumns.SetLinkedDisplayControl(lblDeclusterColumns)
+        AddDateDoy()
 
         ucrInputFilterPreview.IsReadOnly = True
 
@@ -362,6 +364,8 @@ Public Class dlgExtremesClimatic
         clsDayFilterCalcFromList.SetRCommand("list")
         clsDayFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDayFilterCalcFromList, iPosition:=0)
 
+        bResetSubdialog = True
+
         ' Days
         clsDayFromAndToOperator.bToScriptAsRString = True
         clsDayFromAndTo.SetRCommand("instatCalculations::instat_calculation$new")
@@ -497,11 +501,11 @@ Public Class dlgExtremesClimatic
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
         AddDayRange()
+        AddDateDoy()
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
         bUpdateMinMax = False
-        ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrInputSave.AddAdditionalCodeParameterPair(clsPeaksFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsPeaksFilterOperator, New RParameter("left"), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsFilterExtremeExp, New RParameter("left", 0), iAdditionalPairNo:=2)
@@ -515,7 +519,6 @@ Public Class dlgExtremesClimatic
 
         ucrInputThresholdValue.AddAdditionalCodeParameterPair(clsDeclusteringFunction, New RParameter("threshold", 3), iAdditionalPairNo:=1)
 
-        ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrInputThresholdValue.SetRCode(clsPeaksFilterOperator, bReset)
         ucrPnlMaxMin.SetRCode(clsMinMaxFuncExp, bReset)
         ucrReceiverElement.SetRCode(clsMinMaxFuncExp, bReset)
@@ -551,6 +554,7 @@ Public Class dlgExtremesClimatic
             ucrPnlExtremesType.SetRCode(clsCurrCalc, bReset)
         End If
         bUpdateMinMax = True
+        AddDateDoy()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -665,11 +669,13 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
-        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False), bSetUseDateVisible:=False)
+        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False), bSetUseDateVisible:=True, bReset:=bResetSubdialog)
         sdgDoyRange.ShowDialog()
-        sdgDoyRange.SetUseDateVisibility(False)
+        sdgDoyRange.SetUseDateVisibility(True)
         UpdateDayFilterPreview()
         AddDayRange()
+        AddDateDoy()
+        bResetSubdialog = False
     End Sub
 
     Private Sub ucrSelectorClimaticExtremes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticExtremes.ControlValueChanged
@@ -736,6 +742,7 @@ Public Class dlgExtremesClimatic
             clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         End If
         UpdateDayFilterPreview()
+        AddDateDoy()
     End Sub
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
@@ -751,11 +758,16 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub UpdateDayFilterPreview()
-        If ucrReceiverDOY.IsEmpty Then
-            ucrInputFilterPreview.SetName("")
-        Else
+        If Not ucrReceiverDate.IsEmpty AndAlso sdgDoyRange.UseDateChecked Then
             ucrInputFilterPreview.SetName(clsDayFromAndToOperator.ToScript())
+        Else
+            If ucrReceiverDOY.IsEmpty Then
+                ucrInputFilterPreview.SetName("")
+            Else
+                ucrInputFilterPreview.SetName(clsDayFromAndToOperator.ToScript())
+            End If
         End If
+        AddDateDoy()
     End Sub
 
     Private Sub ucrChkFirstDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstDate.ControlValueChanged
@@ -787,6 +799,27 @@ Public Class dlgExtremesClimatic
 
     Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged
         SetDateCalcFrom()
+        AddDateDoy()
+        UpdateDayFilterPreview()
+    End Sub
+
+    Public Sub AddDateDoy()
+        If sdgDoyRange.UseDateChecked Then
+            clsDayFromOperator.AddParameter("date", ucrReceiverDate.GetVariableNames(False), iPosition:=0)
+            clsDayToOperator.AddParameter("date", ucrReceiverDate.GetVariableNames(False), iPosition:=0)
+
+            clsDayFromOperator.RemoveParameterByName("doy")
+            clsDayToOperator.RemoveParameterByName("doy")
+
+        Else
+            clsDayFromOperator.AddParameter("doy", ucrReceiverDOY.GetVariableNames(False), iPosition:=0)
+            clsDayToOperator.AddParameter("doy", ucrReceiverDOY.GetVariableNames(False), iPosition:=0)
+
+            clsDayToOperator.RemoveParameterByName("date")
+
+            clsDayFromOperator.RemoveParameterByName("date")
+        End If
+
     End Sub
 
     Private Sub SetDateCalcFrom()
