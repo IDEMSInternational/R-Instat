@@ -27,11 +27,10 @@ Public Class dlgSummaryTables
     Private clsPivotWiderFunction As New RFunction
     Private ClsTabSpannerDelimFunction As New RFunction
     Private iUcrBaseXLocation, iDialogueXsize As Integer
-
+    Private firstAutoBumpDone As Boolean = False
     Private clsDummyFunction As New RFunction
-
     Private clsSummaryOperator, clsFrequencyOperator, clsJoiningPipeOperator, clsSpannerOperator As New ROperator
-
+    
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -681,29 +680,12 @@ Public Class dlgSummaryTables
 
     End Sub
 
-    'Private Sub SetColFactorDefaults()
-    '    Dim selectedColFactors As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList()
-    '    Dim defaultColFactors As Integer = selectedColFactors.Count
-
-    '    If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
-    '        If defaultColFactors = 1 Then
-    '            UcrNudColumnSumFactors.Value = 1
-    '        End If
-    '        UcrNudColumnSumFactors.Maximum = defaultColFactors + 2
-    '    ElseIf ucrReceiverSummaryCols.Count > 1 OrElse ucrReorderSummary.Count > 1 Then
-    '        UcrNudColumnSumFactors.Maximum = defaultColFactors + 1
-    '    Else
-    '        UcrNudColumnSumFactors.Maximum = defaultColFactors
-    '    End If
-    '    UcrNudColumnSumFactors.Minimum = 0
-    'End Sub
-
     Private Sub SetColFactorDefaults()
         Dim selectedColFactors As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList()
         Dim defaultColFactors As Integer = selectedColFactors.Count
 
+        ' setting the maximum and minimums
         UcrNudColumnSumFactors.Minimum = 0
-
         If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
             UcrNudColumnSumFactors.Maximum = defaultColFactors + 2
             If defaultColFactors = 1 Then
@@ -715,13 +697,10 @@ Public Class dlgSummaryTables
             UcrNudColumnSumFactors.Maximum = defaultColFactors
         End If
 
-        ' Ensuring the Value is within new bounds
-        If UcrNudColumnSumFactors.Value > UcrNudColumnSumFactors.Maximum Then
-            UcrNudColumnSumFactors.Value = UcrNudColumnSumFactors.Maximum
-        End If
-        If UcrNudColumnSumFactors.Value < UcrNudColumnSumFactors.Minimum Then
-            UcrNudColumnSumFactors.Value = UcrNudColumnSumFactors.Minimum
+        ' Only auto-bump Value from 0 to 1 the first time ever
+        If Not firstAutoBumpDone AndAlso (ucrReceiverSummaryCols.Count > 0 OrElse ucrReorderSummary.Count > 0) AndAlso UcrNudColumnSumFactors.Value = 0 Then
+            UcrNudColumnSumFactors.Value = 1
+            firstAutoBumpDone = True
         End If
     End Sub
-
 End Class
