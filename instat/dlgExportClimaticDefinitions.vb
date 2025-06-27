@@ -96,6 +96,16 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverMonth.bAutoFill = True
         ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
 
+        ucrReceiverRainIndicator.SetParameter(New RParameter("rain_days_name", 9))
+        ucrReceiverRainIndicator.Selector = ucrSelectorExportDefinitions
+        ucrReceiverRainIndicator.SetParameterIsString()
+        ucrReceiverRainIndicator.SetLinkedDisplayControl(lblRainIndicator)
+
+        ucrReceiverExtremIndicator.SetParameter(New RParameter("extreme_rainfall_column", 10))
+        ucrReceiverExtremIndicator.Selector = ucrSelectorExportDefinitions
+        ucrReceiverExtremIndicator.SetParameterIsString()
+        ucrReceiverExtremIndicator.SetLinkedDisplayControl(lblExtremRain)
+
         ucrChkAnnualRainfall.SetText("Annual Rainfall")
         ucrChkAnnualRainfall.AddParameterValuesCondition(True, "rain", "True")
         ucrChkAnnualRainfall.AddParameterValuesCondition(False, "rain", "False")
@@ -244,6 +254,9 @@ Public Class dlgExportClimaticDefinitions
         ucrReceiverDataYearMonth.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverMonth.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrReceiverRain.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        'ucrReceiverRainIndicator.SetRCode(clsExportRinstatToBucketFunction, bReset)
+        'ucrReceiverExtremIndicator.SetRCode(clsExportRinstatToBucketFunction, bReset)
+
         ucrReceiverYear.SetRCode(clsExportRinstatToBucketFunction, bReset)
         ucrSelectorExportDefinitions.SetRCode(clsExportRinstatToBucketFunction)
         ucrInputTokenPath.SetRCode(ClsGcsAuthFileFunction, bReset)
@@ -338,6 +351,7 @@ Public Class dlgExportClimaticDefinitions
         End If
         AddRemoveSummary()
         EnableDisableDefineButton()
+        AddExtremeRainParameter()
         TestOkEnabled()
     End Sub
 
@@ -412,15 +426,25 @@ Public Class dlgExportClimaticDefinitions
     End Sub
 
     Private Sub EnableDisableDefineButton()
+        ucrReceiverDataYearMonth.Visible = False
+        ucrReceiverDataYear.Visible = False
+        ucrReceiverRain.Visible = False
+        ucrReceiverRainIndicator.Visible = False
+        ucrReceiverExtremIndicator.Visible = False
+        ucrReceiverCropData.Visible = False
         If rdoUploadSummaries.Checked Then
             ucrReceiverDataYearMonth.Visible = ucrChkMonthlyTemp.Checked
             ucrReceiverDataYear.Visible = ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked
             ucrReceiverRain.Visible = ucrChkAnnualRainfall.Checked
+            ucrReceiverExtremIndicator.Visible = ucrChkAnnualRainfall.Checked
+            ucrReceiverRainIndicator.Visible = ucrChkAnnualRainfall.Checked
             ucrReceiverCropData.Visible = ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked
         Else
             ucrReceiverDataYearMonth.Visible = False
             ucrReceiverDataYear.Visible = False
             ucrReceiverRain.Visible = False
+            ucrReceiverRainIndicator.Visible = False
+            ucrReceiverExtremIndicator.Visible = False
             ucrReceiverCropData.Visible = False
         End If
 
@@ -470,8 +494,8 @@ Public Class dlgExportClimaticDefinitions
             Me.Size = New Size(475, 455)
             Me.ucrBase.Location = New Point(4, 360)
         Else
-            Me.Size = New Size(475, 539)
-            Me.ucrBase.Location = New Point(4, 434)
+            Me.Size = New Size(475, 570)
+            Me.ucrBase.Location = New Point(4, 475)
         End If
     End Sub
 
@@ -494,4 +518,31 @@ Public Class dlgExportClimaticDefinitions
             clsUpdateMetadataInfoFunction.RemoveParameterByName("country")
         End If
     End Sub
+
+    Private Sub AddExtremeRainParameter()
+        If ucrChkAnnualRainfall.Checked Then
+            If Not ucrReceiverExtremIndicator.IsEmpty Then
+                clsExportRinstatToBucketFunction.AddParameter("extreme_rainfall_column", ucrReceiverExtremIndicator.GetVariableNames, iPosition:=10)
+
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_rainfall_column")
+            End If
+
+            If Not ucrReceiverRainIndicator.IsEmpty Then
+                clsExportRinstatToBucketFunction.AddParameter("rain_days_name", ucrReceiverRainIndicator.GetVariableNames, iPosition:=9)
+
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("rain_days_name")
+            End If
+        Else
+            clsExportRinstatToBucketFunction.RemoveParameterByName("rain_days_name")
+            clsExportRinstatToBucketFunction.RemoveParameterByName("extreme_rainfall_column")
+
+        End If
+    End Sub
+
+    Private Sub ucrReceiverRainIndicator_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainIndicator.ControlValueChanged, ucrReceiverExtremIndicator.ControlValueChanged
+        AddExtremeRainParameter()
+    End Sub
+
 End Class
