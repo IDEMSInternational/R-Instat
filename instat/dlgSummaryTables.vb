@@ -57,10 +57,7 @@ Public Class dlgSummaryTables
         'summary_name = NA - 8
         ucrSelectorSummaryTables.SetParameter(New RParameter("data_name", 0))
         ucrSelectorSummaryTables.SetParameterIsString()
-
-        ' Adjusting the lower limit for 'Factor'
-        ucrNudColFactors.SetRDefault(1)
-
+        
         ucrReceiverSummaryCols.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverSummaryCols.Selector = ucrSelectorSummaryTables
         ucrReceiverSummaryCols.SetDataType("numeric")
