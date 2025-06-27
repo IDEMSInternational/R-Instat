@@ -187,6 +187,7 @@ Public Class dlgSummaryTables
         clsSummaryOperator = New ROperator
         clsFrequencyOperator = New ROperator
         clsSpannerOperator = New ROperator
+        firstAutoBumpDone = False
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -695,7 +696,7 @@ Public Class dlgSummaryTables
         End If
 
         ' Only auto-bump Value from 0 to 1 the first time ever
-        If Not firstAutoBumpDone AndAlso (ucrReceiverSummaryCols.Count > 1 OrElse ucrReorderSummary.Count > 1) AndAlso UcrNudColumnSumFactors.Value = 0 Then
+        If Not firstAutoBumpDone AndAlso (ucrReceiverSummaryCols.Count > 0 OrElse ucrReorderSummary.Count > 0) AndAlso UcrNudColumnSumFactors.Value = 0 AndAlso UcrNudColumnSumFactors.Maximum >= 1 Then
             UcrNudColumnSumFactors.Value = 1
             firstAutoBumpDone = True
         End If
