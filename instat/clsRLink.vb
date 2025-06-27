@@ -19,6 +19,7 @@ Imports RDotNet
 Imports unvell.ReoGrid
 Imports System.IO
 Imports RInsightF461
+Imports RDotNet.Internals
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>   An object of this class represents an R interface. 
@@ -1384,7 +1385,7 @@ Public Class RLink
     '''                                     Only used if <paramref name="strType"/> is 
     '''                                     'nc_dim_variables'.</param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "", Optional strTableName As String = "")
         Dim vecColumns As GenericVector = Nothing
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -1445,6 +1446,12 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_variable_sets_names")
                 Case "calculation"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_calculation_names")
+                Case "gtcol"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_gtcol_names")
+                    clsGetItems.AddParameter("table_name", Chr(34) & strTableName & Chr(34))
+                Case "gtrow"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_gtrow_names")
+                    clsGetItems.AddParameter("table_name", Chr(34) & strTableName & Chr(34))
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             If lstView.TopItem IsNot Nothing Then
@@ -2233,6 +2240,27 @@ Public Class RLink
     Private Function TrimStartRStatement(strRStatement As String) As String
         Dim arrTrimChars As Char() = {" "c, vbTab, vbLf, vbCr}
         Return strRStatement.TrimStart(arrTrimChars)
+    End Function
+
+    Public Function GetColumnNamesFromTable(strDataName As String, strTableName As String) As List(Of String)
+        Dim clsGetColNamesFunc, clsGetTableValues As New RFunction
+        Dim expColNames As SymbolicExpression
+        Dim lstColNames As New List(Of String)
+        Dim clsTempAssign As New RFunction
+
+        clsGetTableValues.SetRCommand("colnames")
+        clsGetTableValues.AddParameter("x", "data_book$get_object_data(data_name = " & Chr(34) & strDataName & Chr(34) & ", object_name = " & Chr(34) & strTableName & Chr(34) & ", as_file = FALSE)[['_data']]", bIncludeArgumentName:=False)
+
+        Debug.Print("R Script: " & clsGetTableValues.ToScript())
+
+        expColNames = RunInternalScriptGetValue(clsGetTableValues.ToScript(), bSilent:=True)
+        If expColNames IsNot Nothing AndAlso Not expColNames.Type = Internals.SymbolicExpressionType.Null Then
+            lstColNames = expColNames.AsCharacter().ToList()
+        End If
+
+        Debug.Print("expColNames: " & expColNames.ToString())
+
+        Return lstColNames
     End Function
 
 End Class
