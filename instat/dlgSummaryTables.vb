@@ -30,7 +30,7 @@ Public Class dlgSummaryTables
     Private firstAutoBumpDone As Boolean = False
     Private clsDummyFunction As New RFunction
     Private clsSummaryOperator, clsFrequencyOperator, clsJoiningPipeOperator, clsSpannerOperator As New ROperator
-    
+
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -57,7 +57,7 @@ Public Class dlgSummaryTables
         'summary_name = NA - 8
         ucrSelectorSummaryTables.SetParameter(New RParameter("data_name", 0))
         ucrSelectorSummaryTables.SetParameterIsString()
-        
+
         ucrReceiverSummaryCols.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverSummaryCols.Selector = ucrSelectorSummaryTables
         ucrReceiverSummaryCols.SetDataType("numeric")
