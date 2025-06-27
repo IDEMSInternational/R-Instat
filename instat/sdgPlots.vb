@@ -334,24 +334,14 @@ Public Class sdgPlots
         urChkSelectTheme.AddParameterPresentCondition(True, "theme_name")
         urChkSelectTheme.AddParameterPresentCondition(False, "theme_name", False)
         strThemes = GgplotDefaults.strThemes
-        Dim themePackages = GgplotDefaults.ThemePackageMap
-
-        For Each fullThemeName As String In strThemes
-            Dim displayName As String = If(fullThemeName.StartsWith("theme_"), fullThemeName.Substring(6), fullThemeName)
-
-            Dim qualifiedFunctionName As String
-            Dim packageName As String = Nothing
-
-            If themePackages.TryGetValue(fullThemeName, packageName) Then
-                qualifiedFunctionName = $"{packageName}::{fullThemeName}()"
+        'Would prefer to do this through functions but auto updating function name not currently supported through combo box control
+        For Each strTemp As String In strThemes
+            If strTemp.StartsWith("theme_") Then
+                dctThemes.Add(strTemp.Remove(0, 6), strTemp & "()")
             Else
-                qualifiedFunctionName = $"{fullThemeName}()"
+                dctThemes.Add(strTemp, strTemp & "()")
             End If
-
-            ' Add to the dictionary (display name → full R function call)
-            dctThemes(displayName) = qualifiedFunctionName
         Next
-
         ucrInputThemes.SetItems(dctThemes)
         ' ucrInputThemes.SetRDefault("theme_grey()")
         ucrInputThemes.SetDropDownStyleAsNonEditable()

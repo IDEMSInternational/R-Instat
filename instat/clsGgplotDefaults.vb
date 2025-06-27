@@ -65,32 +65,13 @@ Public Class GgplotDefaults
 
     Public Shared ReadOnly Property strThemes As String()
         Get
-            Dim strTemp As String() = {
-            "theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_grey",
-            "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_gdocs",
-            "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata",
-            "theme_tufte", "theme_wsj", "theme_excel", "theme_excel_new", "theme_economist_white", "theme_solarized_2",
-            "reset_theme_settings"
-        }
-            System.Array.Sort(strTemp)
+            Dim strTemp As String()
+            'TODO need to make proper functions and set package names
+            strTemp = {"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_grey", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj", "theme_excel", "theme_excel_new", "theme_economist_white", "theme_solarized_2", "reset_theme_settings"}
+            System.Array.Sort(Of String)(strTemp)
             Return strTemp
         End Get
     End Property
-
-    Public Shared ReadOnly Property ThemePackageMap As Dictionary(Of String, String)
-        Get
-            Return New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase) From {
-            {"theme_base", "ggthemes"}, {"theme_calc", "ggthemes"}, {"theme_economist", "ggthemes"},
-            {"theme_economist_white", "ggthemes"}, {"theme_excel", "ggthemes"}, {"theme_excel_new", "ggthemes"},
-            {"theme_few", "ggthemes"}, {"theme_fivethirtyeight", "ggthemes"}, {"theme_foundation", "ggthemes"},
-            {"theme_gdocs", "ggthemes"}, {"theme_igray", "ggthemes"}, {"theme_map", "ggthemes"},
-            {"theme_par", "ggthemes"}, {"theme_pander", "ggthemes"}, {"theme_solarized", "ggthemes"},
-            {"theme_solarized_2", "ggthemes"}, {"theme_solid", "ggthemes"}, {"theme_stata", "ggthemes"},
-            {"theme_tufte", "ggthemes"}, {"theme_wsj", "ggthemes"}, {"theme_hc", "ggthemes"}
-        }
-        End Get
-    End Property
-
 
     Public Shared ReadOnly Property clsXlabTitleFunction As RFunction
         Get
