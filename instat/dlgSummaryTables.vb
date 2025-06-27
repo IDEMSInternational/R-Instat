@@ -681,18 +681,47 @@ Public Class dlgSummaryTables
 
     End Sub
 
+    'Private Sub SetColFactorDefaults()
+    '    Dim selectedColFactors As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList()
+    '    Dim defaultColFactors As Integer = selectedColFactors.Count
+
+    '    If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
+    '        If defaultColFactors = 1 Then
+    '            UcrNudColumnSumFactors.Value = 1
+    '        End If
+    '        UcrNudColumnSumFactors.Maximum = defaultColFactors + 2
+    '    ElseIf ucrReceiverSummaryCols.Count > 1 OrElse ucrReorderSummary.Count > 1 Then
+    '        UcrNudColumnSumFactors.Maximum = defaultColFactors + 1
+    '    Else
+    '        UcrNudColumnSumFactors.Maximum = defaultColFactors
+    '    End If
+    '    UcrNudColumnSumFactors.Minimum = 0
+    'End Sub
+
     Private Sub SetColFactorDefaults()
         Dim selectedColFactors As List(Of String) = ucrReceiverFactors.GetVariableNamesAsList()
         Dim defaultColFactors As Integer = selectedColFactors.Count
 
+        UcrNudColumnSumFactors.Minimum = 0
+
         If ucrReceiverSummaryCols.Count > 1 AndAlso ucrReorderSummary.Count > 1 Then
             UcrNudColumnSumFactors.Maximum = defaultColFactors + 2
+            If defaultColFactors = 1 Then
+                UcrNudColumnSumFactors.Value = 1
+            End If
         ElseIf ucrReceiverSummaryCols.Count > 1 OrElse ucrReorderSummary.Count > 1 Then
             UcrNudColumnSumFactors.Maximum = defaultColFactors + 1
         Else
             UcrNudColumnSumFactors.Maximum = defaultColFactors
         End If
-        UcrNudColumnSumFactors.Minimum = 0
+
+        ' Ensuring the Value is within new bounds
+        If UcrNudColumnSumFactors.Value > UcrNudColumnSumFactors.Maximum Then
+            UcrNudColumnSumFactors.Value = UcrNudColumnSumFactors.Maximum
+        End If
+        If UcrNudColumnSumFactors.Value < UcrNudColumnSumFactors.Minimum Then
+            UcrNudColumnSumFactors.Value = UcrNudColumnSumFactors.Minimum
+        End If
     End Sub
 
 End Class
