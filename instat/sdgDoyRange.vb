@@ -294,6 +294,13 @@ Public Class sdgDoyRange
         bUseDateVisibility = bVisible
         If bControlsInitialised Then
             ucrChkUseDate.Visible = bVisible
+            If Not bVisible Then
+                ucrChkUseDate.Checked = False ' Always uncheck when hidden
+            End If
         End If
+    End Sub
+
+    Public Sub ResetUseDate()
+        ucrChkUseDate.Checked = False
     End Sub
 End Class

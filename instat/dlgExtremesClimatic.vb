@@ -211,7 +211,6 @@ Public Class dlgExtremesClimatic
         ucrInputThresholdOperator.SetLinkedDisplayControl(lblNewDFName)
         ucrChkPrintSummary.SetLinkedDisplayControl(grpDeclusteringOptions)
         ucrNudDeclusterColumns.SetLinkedDisplayControl(lblDeclusterColumns)
-        AddDateDoy()
 
         ucrInputFilterPreview.IsReadOnly = True
 
@@ -502,6 +501,7 @@ Public Class dlgExtremesClimatic
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
         AddDayRange()
         AddDateDoy()
+        UpdateDateDoy()
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -555,6 +555,8 @@ Public Class dlgExtremesClimatic
         End If
         bUpdateMinMax = True
         AddDateDoy()
+        UpdateDayFilterPreview()
+        UpdateDateDoy()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -657,6 +659,9 @@ Public Class dlgExtremesClimatic
         SetAssignName()
         SetThresholdBaseFunction()
         GroupByOptions()
+        AddDateDoy()
+        ResetUseDateIfNotStation()
+        UpdateDateDoy()
         TestOkEnabled()
 
         If rdoThreshold.Checked Then
@@ -669,12 +674,17 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
+        Dim bUseDate As Boolean = rdoStation.Checked
         sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFromAndTo, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False), bSetUseDateVisible:=True, bReset:=bResetSubdialog)
+        sdgDoyRange.SetUseDateVisibility(bUseDate)
+        If Not bUseDate Then
+            sdgDoyRange.ucrChkUseDate.Checked = False
+        End If
         sdgDoyRange.ShowDialog()
-        sdgDoyRange.SetUseDateVisibility(True)
         UpdateDayFilterPreview()
         AddDayRange()
         AddDateDoy()
+        UpdateDateDoy()
         bResetSubdialog = False
     End Sub
 
@@ -735,14 +745,9 @@ Public Class dlgExtremesClimatic
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrSelectorClimaticExtremes.ControlValueChanged, ucrReceiverDOY.ControlContentsChanged
         GroupByOptions()
-
-        If Not ucrReceiverDOY.IsEmpty Then
-            clsDayFilterCalcFromList.AddParameter(ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDOY.GetVariableNames(), iPosition:=0)
-        Else
-            clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        End If
         UpdateDayFilterPreview()
         AddDateDoy()
+        UpdateDateDoy()
     End Sub
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
@@ -768,6 +773,7 @@ Public Class dlgExtremesClimatic
             End If
         End If
         AddDateDoy()
+        UpdateDateDoy()
     End Sub
 
     Private Sub ucrChkFirstDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstDate.ControlValueChanged
@@ -801,25 +807,21 @@ Public Class dlgExtremesClimatic
         SetDateCalcFrom()
         AddDateDoy()
         UpdateDayFilterPreview()
+        UpdateDateDoy()
     End Sub
 
     Public Sub AddDateDoy()
-        If sdgDoyRange.UseDateChecked Then
+        If rdoStation.Checked AndAlso sdgDoyRange.UseDateChecked Then
             clsDayFromOperator.AddParameter("date", ucrReceiverDate.GetVariableNames(False), iPosition:=0)
             clsDayToOperator.AddParameter("date", ucrReceiverDate.GetVariableNames(False), iPosition:=0)
-
             clsDayFromOperator.RemoveParameterByName("doy")
             clsDayToOperator.RemoveParameterByName("doy")
-
         Else
             clsDayFromOperator.AddParameter("doy", ucrReceiverDOY.GetVariableNames(False), iPosition:=0)
             clsDayToOperator.AddParameter("doy", ucrReceiverDOY.GetVariableNames(False), iPosition:=0)
-
             clsDayToOperator.RemoveParameterByName("date")
-
             clsDayFromOperator.RemoveParameterByName("date")
         End If
-
     End Sub
 
     Private Sub SetDateCalcFrom()
@@ -906,10 +908,34 @@ Public Class dlgExtremesClimatic
             clsCombinationManipulations.RemoveParameterByName("manip2")
             clsMinMaxManipulationsFunction.RemoveParameterByName("sub2")
         End If
-
     End Sub
 
     Private Sub ucrChkDayRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDayRange.ControlValueChanged
         AddDayRange()
+    End Sub
+
+    Private Sub ResetUseDateIfNotStation()
+        If Not rdoStation.Checked Then
+            sdgDoyRange.ResetUseDate()
+            AddDateDoy()
+            UpdateDateDoy()
+            UpdateDayFilterPreview()
+        End If
+    End Sub
+
+    Private Sub UpdateDateDoy()
+        If rdoStation.Checked AndAlso sdgDoyRange.ucrChkUseDate.Checked Then
+            If Not ucrReceiverDate.IsEmpty Then
+                clsDayFilterCalcFromList.AddParameter(ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDate.GetVariableNames(), iPosition:=0)
+            Else
+                clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            End If
+        Else
+            If Not ucrReceiverDOY.IsEmpty Then
+                clsDayFilterCalcFromList.AddParameter(ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDOY.GetVariableNames(), iPosition:=0)
+            Else
+                clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            End If
+        End If
     End Sub
 End Class
