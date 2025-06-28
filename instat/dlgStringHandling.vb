@@ -28,6 +28,7 @@ Public Class dlgStringHandling
         clsAcrossFunction, clsPaste2Function, clsEndsWithFunction, clsUnpackFunction, clsMutate2Function,
        clsAddColumnsFunction, clsReplaceSelectFunction, clsReplaceAllSelectFunction, clsReplaceCellSelectFunction,
        clsGreplCellSelectFunction, clsNamesFunction, clsAnyFunction, clsSelectFunction As New RFunction
+    Private iCountPrefix As Integer = 0
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -41,6 +42,8 @@ Public Class dlgStringHandling
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
+        AddSavePrefix()
+
     End Sub
 
     Private Sub InitialiseDialog()
@@ -170,6 +173,7 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
         ucrInputPattern.SetLinkedDisplayControl(lblPattern)
         ucrChkBoundary.AddToLinkedControls(ucrInputBoundary, {True}, bNewLinkedHideIfParameterMissing:=True)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -276,7 +280,6 @@ Public Class dlgStringHandling
 
         clsPaste2Function.SetRCommand("paste0")
         clsPaste2Function.AddParameter("names", """_""", iPosition:=0, bIncludeArgumentName:=False)
-        clsPaste2Function.AddParameter("split", clsROperatorParameter:=clsTildaOperator, iPosition:=1, bIncludeArgumentName:=False)
 
         clsEndsWithFunction.SetRCommand("ends_with")
         clsEndsWithFunction.AddParameter("paste", clsRFunctionParameter:=clsPaste2Function, iPosition:=0, bIncludeArgumentName:=False)
@@ -403,7 +406,7 @@ Public Class dlgStringHandling
         clsStrToLowerFunction.SetPackageName("stringr")
         clsStrToLowerFunction.SetRCommand("str_to_lower")
 
-        clsDetectFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
+        'clsDetectFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
         NewColumnName()
     End Sub
@@ -546,7 +549,7 @@ Public Class dlgStringHandling
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged,
         ucrPnlDetectOptions.ControlValueChanged, ucrChkAll.ControlValueChanged, ucrPnlFindOptions.ControlValueChanged, ucrChkRemoveAll.ControlValueChanged, ucrSelectorStringHandling.ControlValueChanged,
         ucrInputReplaceNaBy.ControlValueChanged, ucrPnlReplaceOptions.ControlValueChanged, ucrPnlColumnSelectOptions.ControlValueChanged, ucrReceiverStringHandling.ControlValueChanged
-
+        AddSavePrefix()
         SetBaseFunction()
         SelectOptions()
         NewColumnName()
@@ -567,30 +570,30 @@ Public Class dlgStringHandling
             ElseIf rdoEnds.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsEndsFunction)
             End If
-            ucrSaveStringHandling.SetPrefix("detect")
+
             clsFindDummyFunction.AddParameter("string_handling", "detect", iPosition:=3)
         ElseIf rdoFind.Checked Then
             If rdoCount.Checked Then
                 clsFindDummyFunction.AddParameter("checked", "str_count", iPosition:=0)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
-                ucrSaveStringHandling.SetPrefix("count")
+
             ElseIf rdoExtract.Checked Then
                 clsFindDummyFunction.AddParameter("checked", "str_extract", iPosition:=0)
                 If ucrChkAll.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsExtractAllFunction)
-                    ucrSaveStringHandling.SetPrefix("extract_all")
+
                 Else
                     ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
-                    ucrSaveStringHandling.SetPrefix("extract")
+
                 End If
             ElseIf rdoLocate.Checked Then
                 clsFindDummyFunction.AddParameter("checked", "str_locate", iPosition:=0)
                 If ucrChkAll.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLocateAllFunction)
-                    ucrSaveStringHandling.SetPrefix("locate_all")
+
                 Else
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
-                    ucrSaveStringHandling.SetPrefix("locate")
+
                 End If
             End If
             clsFindDummyFunction.AddParameter("string_handling", "find", iPosition:=3)
@@ -599,19 +602,21 @@ Public Class dlgStringHandling
                 ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsColumnSelectionFunction)
                 If rdoReplaceFirst.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
-                    ucrSaveStringHandling.SetPrefix("replace")
+
                 ElseIf rdoReplaceAll.Checked Then
                     ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceAllFunction)
-                    ucrSaveStringHandling.SetPrefix("replace_all")
+
                 ElseIf rdoReplaceCell.Checked Then
                     ucrBase.clsRsyntax.AddToBeforeCodes(clsAsDataFrameFunction)
                     ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
-                    ucrSaveStringHandling.SetPrefix("replace_cell")
+
                 End If
                 clsFindDummyFunction.AddParameter("string_handling", "replace", iPosition:=3)
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsAddColumnsFunction)
-                ucrSaveStringHandling.SetPrefix("select")
+                ' ucrSaveStringHandling.SetPrefix("select")
+                'AddSelectPrefix()
+
                 If rdoReplaceFirst.Checked Then
                     clsAcrossFunction.RemoveParameterByName(".fns")
                     clsAcrossFunction.AddParameter("tilda", clsROperatorParameter:=clsDataFrameOperator, bIncludeArgumentName:=False, iPosition:=1)
@@ -633,18 +638,18 @@ Public Class dlgStringHandling
             End If
         ElseIf rdoReplaceNa.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceNaFunction)
-            ucrSaveStringHandling.SetPrefix("replace_na")
+
             clsFindDummyFunction.AddParameter("string_handling", "replace_na", iPosition:=3)
         ElseIf rdoToNa.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsNaIfFunction)
-            ucrSaveStringHandling.SetPrefix("replace")
+
         ElseIf rdoRemove.Checked Then
             If ucrChkRemoveAll.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveAllFunction)
-                ucrSaveStringHandling.SetPrefix("remove_all")
+
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveFunction)
-                ucrSaveStringHandling.SetPrefix("remove")
+
             End If
             clsFindDummyFunction.AddParameter("string_handling", "remove", iPosition:=3)
         End If
@@ -682,6 +687,7 @@ Public Class dlgStringHandling
 
     Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged, ucrPnlColumnSelectOptions.ControlContentsChanged
         TestOkEnabled()
+        ' AddSelectPrefix()
     End Sub
 
     Private Sub RegularExpressionControl()
@@ -748,7 +754,7 @@ Public Class dlgStringHandling
         clsAddColumnsFunction.AddParameter("data_name", Chr(34) & ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         clsGetDataFrameFunction.AddParameter("column_selection_name ", ucrReceiverStringHandling.GetVariableNames, iPosition:=1)
         clsNamesFunction.AddParameter("data_name", ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0, bIncludeArgumentName:=False)
-        clsTildaOperator.SetAssignTo(ucrSaveStringHandling.GetText)
+
 
         If rdoReplace.Checked Then
             If rdoMultiple.Checked Then
@@ -768,4 +774,67 @@ Public Class dlgStringHandling
             lblColumn.Text = "Column:"
         End If
     End Sub
+
+    Private Sub ucrSaveStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveStringHandling.ControlValueChanged
+        clsPaste2Function.AddParameter("split", ucrSaveStringHandling.GetText, iPosition:=1, bIncludeArgumentName:=False)
+        clsTildaOperator.SetAssignTo(ucrSaveStringHandling.GetText)
+    End Sub
+
+    Private Sub AddSavePrefix()
+
+        If rdoDetect.Checked Then
+            ucrSaveStringHandling.SetPrefix("detect")
+        ElseIf rdoFind.Checked Then
+            If rdoCount.Checked Then
+                ucrSaveStringHandling.SetPrefix("count")
+            ElseIf rdoExtract.Checked Then
+                If ucrChkAll.Checked Then
+                    ucrSaveStringHandling.SetPrefix("extract_all")
+                Else
+                    ucrSaveStringHandling.SetPrefix("extract")
+                End If
+            ElseIf rdoLocate.Checked Then
+                If ucrChkAll.Checked Then
+                    ucrSaveStringHandling.SetPrefix("locate_all")
+                Else
+                    ucrSaveStringHandling.SetPrefix("locate")
+                End If
+            End If
+        ElseIf rdoReplace.Checked Then
+            If rdoSingle.Checked Then
+                If rdoReplaceFirst.Checked Then
+                    ucrSaveStringHandling.SetPrefix("replace")
+                ElseIf rdoReplaceAll.Checked Then
+                    ucrSaveStringHandling.SetPrefix("replace_all")
+                ElseIf rdoReplaceCell.Checked Then
+                    ucrSaveStringHandling.SetPrefix("replace_cell")
+                End If
+            ElseIf rdoMultiple.Checked Then
+                ucrSaveStringHandling.SetPrefix("select")
+
+                'If iCountPrefix = 0 Then
+                '    ucrSaveStringHandling.SetPrefix("select")
+                'Else
+                '    ucrSaveStringHandling.SetPrefix("select" & iCountPrefix.ToString)
+                'End If
+            End If
+        ElseIf rdoReplaceNa.Checked Then
+            ucrSaveStringHandling.SetPrefix("replace_na")
+        ElseIf rdoToNa.Checked Then
+            ucrSaveStringHandling.SetPrefix("replace")
+        ElseIf rdoRemove.Checked Then
+            If ucrChkRemoveAll.Checked Then
+                ucrSaveStringHandling.SetPrefix("remove_all")
+            Else
+                ucrSaveStringHandling.SetPrefix("remove")
+            End If
+        End If
+
+        'PrefixIncrement()
+    End Sub
+    'Private Sub PrefixIncrement()
+    '    If rdoReplace.Checked AndAlso rdoMultiple.Checked Then
+    '        iCountPrefix += 1
+    '    End If
+    'End Sub
 End Class
