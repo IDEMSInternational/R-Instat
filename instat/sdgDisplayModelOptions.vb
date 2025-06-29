@@ -108,7 +108,7 @@ Public Class sdgDisplayModelOptions
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(True, {"snd_estimates"}, True)
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(False, {"snd_estimates"}, False)
 
-        ucrChkParProp.SetText("Pairewise Probabilities")
+        ucrChkParProp.SetText("Pairwise Probabilities")
         ucrChkParProp.AddRSyntaxContainsFunctionNamesCondition(True, {"pair"}, True)
         ucrChkParProp.AddRSyntaxContainsFunctionNamesCondition(False, {"pair"}, False)
 
