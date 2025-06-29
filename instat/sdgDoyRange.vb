@@ -58,7 +58,7 @@ Public Class sdgDoyRange
             InitialiseControls()
             bUpdate = True
         End If
-
+        ucrChkUseDate.Visible = bUseDateVisibility
         If bReset Then
             ucrChkUseDate.Checked = False
         End If
@@ -281,6 +281,7 @@ Public Class sdgDoyRange
 
     Private Sub ucrChkUseDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUseDate.ControlValueChanged
         dlgClimaticSummary.AddDateDoy()
+        dlgExtremesClimatic.AddDateDoy()
     End Sub
 
     Public ReadOnly Property UseDateChecked As Boolean
@@ -293,8 +294,13 @@ Public Class sdgDoyRange
         bUseDateVisibility = bVisible
         If bControlsInitialised Then
             ucrChkUseDate.Visible = bVisible
+            If Not bVisible Then
+                ucrChkUseDate.Checked = False ' Always uncheck when hidden
+            End If
         End If
     End Sub
 
-
+    Public Sub ResetUseDate()
+        ucrChkUseDate.Checked = False
+    End Sub
 End Class

@@ -207,14 +207,14 @@ Public Class dlgTricotModellingGeneral
         clsDataUnstackedFunction.SetRCommand("dcast")
         clsDataUnstackedFunction.AddParameter("data", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
         clsDataUnstackedFunction.AddParameter("formula", "variety_level_var" & " + " & ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False) & " ~ " & Chr(34) & "X" & Chr(34), iPosition:=1)
-        clsDataUnstackedFunction.SetAssignTo("cochran.bib_unstacked")
+        clsDataUnstackedFunction.SetAssignTo("data_unstacked")
 
         clsPullFunction.SetPackageName("dplyr")
         clsPullFunction.SetRCommand("pull")
         clsPullFunction.AddParameter("x", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
 
         clsPipe2Operator.SetOperation("%>%")
-        clsPipe2Operator.AddParameter("left", "cochran.bib_unstacked", iPosition:=0, bIncludeArgumentName:=False)
+        clsPipe2Operator.AddParameter("left", "data_unstacked", iPosition:=0, bIncludeArgumentName:=False)
         clsPipe2Operator.AddParameter("right", clsRFunctionParameter:=clsPullFunction, iPosition:=1, bIncludeArgumentName:=False)
         clsPipe2Operator.SetAssignTo(ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False))
 
@@ -238,7 +238,7 @@ Public Class dlgTricotModellingGeneral
         clsPladmm2Function.SetRCommand("pladmm")
         clsPladmm2Function.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
         clsPladmm2Function.AddParameter("y", clsROperatorParameter:=clsTilde3Operator, iPosition:=1, bIncludeArgumentName:=False)
-        clsPladmm2Function.AddParameter("data", "cochran.bib_unstacked", iPosition:=2)
+        clsPladmm2Function.AddParameter("data", "data_unstacked", iPosition:=2)
 
         clsTilde4Operator.SetOperation("~")
         clsTilde4Operator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
@@ -256,10 +256,6 @@ Public Class dlgTricotModellingGeneral
         clsNames2Operator.SetOperation("<-")
         clsNames2Operator.AddParameter("left", clsRFunctionParameter:=clsNames2Function, iPosition:=0, bIncludeArgumentName:=False)
         clsNames2Operator.AddParameter("right", "vars", iPosition:=1, bIncludeArgumentName:=False)
-
-
-
-
 
         clsSpaceOperator.SetOperation("")
         clsSpaceOperator.AddParameter("x", ucrTraitsReceiver.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
@@ -308,7 +304,7 @@ Public Class dlgTricotModellingGeneral
         clsPladmmFunction.SetRCommand("pladmm")
         clsPladmmFunction.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
         clsPladmmFunction.AddParameter("y", clsROperatorParameter:=clsTilde2Operator, iPosition:=1, bIncludeArgumentName:=False)
-
+        clsPladmmFunction.AddParameter("data", "data_unstacked", iPosition:=2)
 
         clsTilde2Operator.SetOperation("~")
         clsTilde2Operator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
@@ -462,10 +458,15 @@ Public Class dlgTricotModellingGeneral
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        ucrSelectorTraitsRanking.AddAdditionalCodeParameterPair(clsGetVariablesMetadataFunction, ucrSelectorTraitsRanking.GetParameter())
+        ucrSelectorTraitsRanking.AddAdditionalCodeParameterPair(clsGetVariablesMetadataFunction, ucrSelectorTraitsRanking.GetParameter(), iAdditionalPairNo:=1)
 
+        ucrSelectorVarietyLevel.AddAdditionalCodeParameterPair(clsGetVarFromMetaData, New RParameter("data", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrSelectorVarietyLevel.AddAdditionalCodeParameterPair(clsGetColumnFromData, New RParameter("data", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrSelectorVarietyLevel.AddAdditionalCodeParameterPair(clsDataFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrSelectorVarietyLevel.AddAdditionalCodeParameterPair(clsGetDataframe2function, New RParameter("data_name", iNewPosition:=0), iAdditionalPairNo:=4)
+
+        ucrSelectorVarietyLevel.SetRCode(clsPackageCheck, bReset)
         ucrSelectorTraitsRanking.SetRCode(clsGetObjectFunction, bReset)
-        ucrSelectorVarietyLevel.SetRCode(clsPladmmFunction, bReset)
         ucrTraitsReceiver.SetRCode(clsSpaceOperator, bReset)
         ucrSaveModellingGeneral.SetRCode(clsModelOperator, bReset)
     End Sub
