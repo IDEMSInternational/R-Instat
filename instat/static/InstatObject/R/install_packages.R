@@ -50,10 +50,8 @@ packs <-
     "jsonlite",
     "fitdistrplus",
     "visreg",
-    "climdex.pcic",
     "mosaic",
     "ncdf4",
-    "ncdf4.helpers",
     "RMySQL",
     "DBI",
     "EnvStats",
@@ -199,6 +197,9 @@ packs <-
 install.packages(packs, dependencies = TRUE, repos='https://cloud.r-project.org', type="win.binary")
 
 install.packages("https://cran.r-project.org/src/contrib/Archive/getPass/getPass_0.2-2.tar.gz", repos=NULL, type="source")
+install.packages("https://cran.r-project.org/src/contrib/Archive/PCICt/PCICt_0.5-4.tar.gz", repos=NULL, type="source")
+install.packages("https://cran.r-project.org/src/contrib/Archive/ncdf4.helpers/ncdf4.helpers_0.3-7.tar.gz", repos=NULL, type="source")
+install.packages("https://cran.r-project.org/src/contrib/Archive/climdex.pcic/climdex.pcic_1.1-11.tar.gz", repos=NULL, type="source")
 
 # Only use internal library
 if (length(.libPaths()) >= 2){
