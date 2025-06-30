@@ -15,10 +15,6 @@ on:
       revision_no:
         description: 'Revision'
         required: true
-      r-version:
-        description: 'Specify the R version to install'
-        required: true
-        default: '4.4.1'  # Default version if the user does not specify
 
 jobs:
 
@@ -71,7 +67,7 @@ jobs:
         # optional, default is ${{ github.workspace }}
         # Version number to set on [AssemblyVersion] and [AssemblyFileVersion] attributes of AssemblyInfo.cs/.vb files
         version: "${{ inputs.major_version }}.${{ inputs.minor_version }}.${{ inputs.revision_no }}.${env:BUILD_NUMBER}"
-   
+  
     # Create the app package by building and packaging the Windows Application Packaging project
     # 64bit  
     - name: Create the app package 64 bit
@@ -117,11 +113,27 @@ jobs:
         ROBOCOPY InstatData\data\ instat\bin\x64\Release\static\Library\ /E
       continue-on-error: true
 
-    # Install R
+    # Extract R version from clsRLink.vb
+    - name: Extract R version from clsRLink.vb
+      id: get-r-version
+      run: |
+        $content = Get-Content "instat\clsRLink.vb"
+        $versionLine = $content | Where-Object { $_ -match 'Private strRBundledVersion As String = "(.+)"' }
+        if ($versionLine) {
+          $rVersion = [regex]::Match($versionLine, 'Private strRBundledVersion As String = "(.+)"').Groups[1].Value
+          Write-Host "Found R version: $rVersion"
+          echo "r-version=$rVersion" >> $env:GITHUB_OUTPUT
+        } else {
+          Write-Host "Could not find R version, using default"
+          echo "r-version=4.4.1" >> $env:GITHUB_OUTPUT
+        }
+      shell: powershell
+     
+    # Install R using the extracted version
     - name: Set up R
       uses: r-lib/actions/setup-r@v2
       with:
-        r-version: ${{ inputs.r-version }}
+        r-version: ${{ steps.get-r-version.outputs.r-version }}  
 
     - name: Debug paths
       run: |
