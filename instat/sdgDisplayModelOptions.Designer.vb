@@ -22,6 +22,7 @@ Partial Class sdgDisplayModelOptions
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblNumber = New System.Windows.Forms.Label()
         Me.lblConfLevel = New System.Windows.Forms.Label()
         Me.tpGraphics = New System.Windows.Forms.TabPage()
@@ -54,9 +55,10 @@ Partial Class sdgDisplayModelOptions
         Me.ucrChkConfLimits = New instat.ucrCheck()
         Me.ucrChkANOVA = New instat.ucrCheck()
         Me.ucrChkModel = New instat.ucrCheck()
+        Me.ucrChkSave = New instat.ucrCheck()
         Me.tbpDisplayOptions = New System.Windows.Forms.TabControl()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkSave = New instat.ucrCheck()
+        Me.ttModelDisplay = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpGraphics.SuspendLayout()
         Me.tpDisplay.SuspendLayout()
         Me.grpTrees.SuspendLayout()
@@ -430,6 +432,16 @@ Partial Class sdgDisplayModelOptions
         Me.ucrChkModel.Size = New System.Drawing.Size(348, 34)
         Me.ucrChkModel.TabIndex = 7
         '
+        'ucrChkSave
+        '
+        Me.ucrChkSave.AutoSize = True
+        Me.ucrChkSave.Checked = False
+        Me.ucrChkSave.Location = New System.Drawing.Point(250, 128)
+        Me.ucrChkSave.Margin = New System.Windows.Forms.Padding(9)
+        Me.ucrChkSave.Name = "ucrChkSave"
+        Me.ucrChkSave.Size = New System.Drawing.Size(348, 34)
+        Me.ucrChkSave.TabIndex = 25
+        '
         'tbpDisplayOptions
         '
         Me.tbpDisplayOptions.Controls.Add(Me.tpDisplay)
@@ -449,16 +461,6 @@ Partial Class sdgDisplayModelOptions
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(336, 46)
         Me.ucrSdgButtons.TabIndex = 11
-        '
-        'ucrChkSave
-        '
-        Me.ucrChkSave.AutoSize = True
-        Me.ucrChkSave.Checked = False
-        Me.ucrChkSave.Location = New System.Drawing.Point(250, 128)
-        Me.ucrChkSave.Margin = New System.Windows.Forms.Padding(9)
-        Me.ucrChkSave.Name = "ucrChkSave"
-        Me.ucrChkSave.Size = New System.Drawing.Size(348, 34)
-        Me.ucrChkSave.TabIndex = 25
         '
         'sdgDisplayModelOptions
         '
@@ -521,4 +523,5 @@ Partial Class sdgDisplayModelOptions
     Friend WithEvents rdoTree As RadioButton
     Friend WithEvents grpTrees As GroupBox
     Friend WithEvents ucrChkSave As ucrCheck
+    Friend WithEvents ttModelDisplay As ToolTip
 End Class
