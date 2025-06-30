@@ -186,9 +186,9 @@ jobs:
         "ip <- installed.packages()[, c('Package', 'Version')]; ^
         pkgs <- sprintf('packs <- c(%s)', paste(sprintf('\"%s\"', ip[, 'Package']), collapse = ', ')); ^
         vers <- sprintf('versions <- c(%s)', paste(sprintf('\"%s\"', ip[, 'Version']), collapse = ', ')); ^
-        existing <- if (file.exists('instat/static/InstatObject/R/Rsetup.R')) readLines('instat/static/InstatObject/R/Rsetup.R') else character(0); ^
+        existing <- if (file.exists('${{ github.workspace }}/instat/static/InstatObject/R/Rsetup.R')) readLines('${{ github.workspace }}/instat/static/InstatObject/R/Rsetup.R') else character(0); ^
         new_content <- c(pkgs, vers, '', existing); ^
-        writeLines(new_content, 'instat/static/InstatObject/R/Rsetup.R')"
+        writeLines(new_content, '${{ github.workspace }}/instat/static/InstatObject/R/Rsetup.R')"
       shell: cmd
       
       
