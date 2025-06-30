@@ -93,7 +93,7 @@ jobs:
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "Output/"
-        name: rinstat64NoR
+        name: rinstat-no-R
         
     - name: Remove 64 bit without R installer
       run: |
@@ -177,8 +177,20 @@ jobs:
      
     - name: Install R packages (64 bit)
       run: |
-        "${{ github.workspace }}\instat\bin\x64\Release\static\R\bin\Rscript.exe" "${{ github.workspace }}\instat\static\InstatObject\R\InstallPackages.R"
+        "${{ github.workspace }}\instat\bin\x64\Release\static\R\bin\Rscript.exe" "${{ github.workspace }}\instat\static\InstatObject\R\install_packages.R"
       shell: cmd     
+
+    - name: Generate Rsetup.R file
+      run: |
+        "${{ github.workspace }}\instat\bin\x64\Release\static\R\bin\Rscript.exe" -e ^
+        "ip <- installed.packages()[, c('Package', 'Version')]; ^
+        pkgs <- sprintf('packs <- c(%s)', paste(sprintf('\"%s\"', ip[, 'Package']), collapse = ', ')); ^
+        vers <- sprintf('versions <- c(%s)', paste(sprintf('\"%s\"', ip[, 'Version']), collapse = ', ')); ^
+        existing <- if (file.exists('instat/static/InstatObject/R/Rsetup.R')) readLines('instat/static/InstatObject/R/Rsetup.R') else character(0); ^
+        new_content <- c(pkgs, vers, '', existing); ^
+        writeLines(new_content, 'instat/static/InstatObject/R/Rsetup.R')"
+      shell: cmd
+      
       
     - name: Building the installer 64bit - With R
       run: |
@@ -190,6 +202,6 @@ jobs:
       if: ${{ github.event_name != 'pull_request' }}
       with:
         path: "Output/"
-        name: rinstat64WithR-innosetup    
+        name: rinstat    
   
             
