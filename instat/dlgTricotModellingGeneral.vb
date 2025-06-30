@@ -206,7 +206,7 @@ Public Class dlgTricotModellingGeneral
         clsDataUnstackedFunction.SetPackageName("data.table")
         clsDataUnstackedFunction.SetRCommand("dcast")
         clsDataUnstackedFunction.AddParameter("data", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
-        clsDataUnstackedFunction.AddParameter("formula", "variety_level_var" & " + " & ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False) & " ~ " & Chr(34) & "X" & Chr(34), iPosition:=1)
+        clsDataUnstackedFunction.AddParameter("formula", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False) & " ~ " & Chr(34) & "X" & Chr(34), iPosition:=1)
         clsDataUnstackedFunction.SetAssignTo("data_unstacked")
 
         clsPullFunction.SetPackageName("dplyr")
@@ -214,7 +214,7 @@ Public Class dlgTricotModellingGeneral
         clsPullFunction.AddParameter("x", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
 
         clsPipe2Operator.SetOperation("%>%")
-        clsPipe2Operator.AddParameter("left", "data_unstacked", iPosition:=0, bIncludeArgumentName:=False)
+        clsPipe2Operator.AddParameter("left", clsRFunctionParameter:=clsDataUnstackedFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsPipe2Operator.AddParameter("right", clsRFunctionParameter:=clsPullFunction, iPosition:=1, bIncludeArgumentName:=False)
         clsPipe2Operator.SetAssignTo(ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False))
 
@@ -238,7 +238,7 @@ Public Class dlgTricotModellingGeneral
         clsPladmm2Function.SetRCommand("pladmm")
         clsPladmm2Function.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
         clsPladmm2Function.AddParameter("y", clsROperatorParameter:=clsTilde3Operator, iPosition:=1, bIncludeArgumentName:=False)
-        clsPladmm2Function.AddParameter("data", "data_unstacked", iPosition:=2)
+        clsPladmm2Function.AddParameter("data", clsRFunctionParameter:=clsDataUnstackedFunction, iPosition:=2)
 
         clsTilde4Operator.SetOperation("~")
         clsTilde4Operator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
@@ -304,7 +304,7 @@ Public Class dlgTricotModellingGeneral
         clsPladmmFunction.SetRCommand("pladmm")
         clsPladmmFunction.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
         clsPladmmFunction.AddParameter("y", clsROperatorParameter:=clsTilde2Operator, iPosition:=1, bIncludeArgumentName:=False)
-        clsPladmmFunction.AddParameter("data", "data_unstacked", iPosition:=2)
+        clsPladmmFunction.AddParameter("data", clsRFunctionParameter:=clsDataUnstackedFunction, iPosition:=2)
 
         clsTilde2Operator.SetOperation("~")
         clsTilde2Operator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
@@ -610,7 +610,7 @@ Public Class dlgTricotModellingGeneral
     End Sub
 
     Private Sub ucrReceiverExpressionModellingGeneral_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionModellingGeneral.ControlValueChanged
-        clsDataUnstackedFunction.AddParameter("formula", "variety_level_var" & " + " & ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False) & " ~ " & Chr(34) & "X" & Chr(34), iPosition:=1)
+        clsDataUnstackedFunction.AddParameter("formula", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False) & " ~ " & Chr(34) & "X" & Chr(34), iPosition:=1)
         clsTilde2Operator.AddParameter("right", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
         clsPackageCheck.AddParameter("col", Chr(34) & ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False) & Chr(34))
         clsPullFunction.AddParameter("x", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
