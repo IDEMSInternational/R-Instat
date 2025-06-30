@@ -61,17 +61,26 @@ jobs:
         
         Write-Host "Running package installation (this may take several minutes)..."
         
-        # Run R script and capture all output to a file
+        # Run R script and capture output using Start-Process
         $outputFile = "package_install_output.txt"
-        & "$R_HOME\bin\Rscript.exe" "$installScript" *>&1 | Tee-Object -FilePath $outputFile
+        $process = Start-Process -FilePath "$R_HOME\bin\Rscript.exe" -ArgumentList "`"$installScript`"" -RedirectStandardOutput $outputFile -RedirectStandardError $outputFile -Wait -PassThru -NoNewWindow
         
-        $exitCode = $LASTEXITCODE
+        $exitCode = $process.ExitCode
         Write-Host "Package installation completed with exit code: $exitCode"
         
-        # Show basic stats
+        # Show basic stats and some output
         if (Test-Path $outputFile) {
-          $lineCount = (Get-Content $outputFile).Count
+          $allLines = Get-Content $outputFile -ErrorAction SilentlyContinue
+          $lineCount = $allLines.Count
           Write-Host "Output captured: $lineCount lines"
+          
+          # Show last few lines as progress indication
+          if ($lineCount -gt 0) {
+            Write-Host "Last few lines of output:"
+            $allLines | Select-Object -Last 5 | ForEach-Object { Write-Host "  $_" }
+          }
+        } else {
+          Write-Host "Warning: No output file created"
         }
         
         echo "exit-code=$exitCode" >> $env:GITHUB_OUTPUT
