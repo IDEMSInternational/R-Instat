@@ -61,26 +61,38 @@ jobs:
         
         Write-Host "Running package installation (this may take several minutes)..."
         
-        # Run R script and capture output using Start-Process
-        $outputFile = "package_install_output.txt"
-        $process = Start-Process -FilePath "$R_HOME\bin\Rscript.exe" -ArgumentList "`"$installScript`"" -RedirectStandardOutput $outputFile -RedirectStandardError $outputFile -Wait -PassThru -NoNewWindow
+        # Run R script and capture output using Start-Process with separate files
+        $outputFile = "package_install_stdout.txt"
+        $errorFile = "package_install_stderr.txt"
+        $process = Start-Process -FilePath "$R_HOME\bin\Rscript.exe" -ArgumentList "`"$installScript`"" -RedirectStandardOutput $outputFile -RedirectStandardError $errorFile -Wait -PassThru -NoNewWindow
         
         $exitCode = $process.ExitCode
         Write-Host "Package installation completed with exit code: $exitCode"
         
-        # Show basic stats and some output
+        # Combine output files
+        $combinedOutput = @()
         if (Test-Path $outputFile) {
-          $allLines = Get-Content $outputFile -ErrorAction SilentlyContinue
-          $lineCount = $allLines.Count
-          Write-Host "Output captured: $lineCount lines"
+          $stdOut = Get-Content $outputFile -ErrorAction SilentlyContinue
+          if ($stdOut) { $combinedOutput += $stdOut }
+          Write-Host "Standard output lines: $($stdOut.Count)"
+        }
+        
+        if (Test-Path $errorFile) {
+          $stdErr = Get-Content $errorFile -ErrorAction SilentlyContinue
+          if ($stdErr) { $combinedOutput += $stdErr }
+          Write-Host "Standard error lines: $($stdErr.Count)"
+        }
+        
+        # Save combined output for analysis
+        if ($combinedOutput.Count -gt 0) {
+          $combinedOutput | Out-File -FilePath "package_install_output.txt" -Encoding UTF8
+          Write-Host "Total output captured: $($combinedOutput.Count) lines"
           
           # Show last few lines as progress indication
-          if ($lineCount -gt 0) {
-            Write-Host "Last few lines of output:"
-            $allLines | Select-Object -Last 5 | ForEach-Object { Write-Host "  $_" }
-          }
+          Write-Host "Last few lines of output:"
+          $combinedOutput | Select-Object -Last 5 | ForEach-Object { Write-Host "  $_" }
         } else {
-          Write-Host "Warning: No output file created"
+          Write-Host "Warning: No output captured"
         }
         
         echo "exit-code=$exitCode" >> $env:GITHUB_OUTPUT
