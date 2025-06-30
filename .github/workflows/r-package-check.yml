@@ -150,8 +150,8 @@ jobs:
         if ($errors.Count -gt 0) {
           Write-Host "`n❌ ERRORS FOUND ($($errors.Count)):"
           Write-Host "================================"
-          foreach ($error in $errors) {
-            Write-Host $error
+          foreach ($errorMsg in $errors) {
+            Write-Host $errorMsg
           }
         } else {
           Write-Host "`n✅ No errors found"
@@ -160,8 +160,8 @@ jobs:
         if ($warnings.Count -gt 0) {
           Write-Host "`n⚠️ WARNINGS FOUND ($($warnings.Count)):"
           Write-Host "===================================="
-          foreach ($warning in $warnings) {
-            Write-Host $warning
+          foreach ($warningMsg in $warnings) {
+            Write-Host $warningMsg
           }
         } else {
           Write-Host "`n✅ No warnings found"
