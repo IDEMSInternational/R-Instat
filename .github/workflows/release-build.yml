@@ -195,7 +195,7 @@ jobs:
     - name: Generate Rsetup.R file
       run: |
         $rscriptPath = "${{ github.workspace }}\instat\bin\x64\Release\static\R\bin\Rscript.exe"
-        $rsetupPath = "${{ github.workspace }}\instat\static\InstatObject\R\Rsetup.R"
+        $rsetupPath = "${{ github.workspace }}\instat\bin\x64\Release\static\InstatObject\R\Rsetup.R"
         
         Write-Host "Using Rscript: $rscriptPath"
         Write-Host "Output file: $rsetupPath"
