@@ -182,14 +182,19 @@ jobs:
 
     - name: Generate Rsetup.R file
       run: |
-        "${{ github.workspace }}\instat\bin\x64\Release\static\R\bin\Rscript.exe" -e ^
-        "ip <- installed.packages()[, c('Package', 'Version')]; ^
-        pkgs <- sprintf('packs <- c(%s)', paste(sprintf('\"%s\"', ip[, 'Package']), collapse = ', ')); ^
-        vers <- sprintf('versions <- c(%s)', paste(sprintf('\"%s\"', ip[, 'Version']), collapse = ', ')); ^
-        existing <- if (file.exists('${{ github.workspace }}\\instat\\static\\InstatObject\\R\\Rsetup.R')) readLines('${{ github.workspace }}\\instat\\static\\InstatObject\\R\\Rsetup.R') else character(0); ^
-        new_content <- c(pkgs, vers, '', existing); ^
-        writeLines(new_content, '${{ github.workspace }}\\instat\\static\\InstatObject\\R\\Rsetup.R')"
-      shell: cmd
+        $rscriptPath = "${{ github.workspace }}\instat\bin\x64\Release\static\R\bin\Rscript.exe"
+        $rsetupPath = "${{ github.workspace }}\instat\static\InstatObject\R\Rsetup.R"
+        
+        Write-Host "Using Rscript: $rscriptPath"
+        Write-Host "Output file: $rsetupPath"
+        
+        # Convert paths to forward slashes for R
+        $rsetupPathForR = $rsetupPath -replace '\\', '/'
+        
+        $rCommand = "ip <- installed.packages()[, c('Package', 'Version')]; pkgs <- sprintf('packs <- c(%s)', paste(sprintf('\`"%s\`"', ip[, 'Package']), collapse = ', ')); vers <- sprintf('versions <- c(%s)', paste(sprintf('\`"%s\`"', ip[, 'Version']), collapse = ', ')); existing <- if (file.exists('$rsetupPathForR')) readLines('$rsetupPathForR') else character(0); new_content <- c(pkgs, vers, '', existing); writeLines(new_content, '$rsetupPathForR')"
+        
+        & $rscriptPath -e $rCommand
+      shell: powershell
       
       
     - name: Building the installer 64bit - With R
