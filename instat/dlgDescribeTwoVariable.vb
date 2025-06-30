@@ -20,6 +20,7 @@ Public Class dlgDescribeTwoVariable
     Public Enum TwovariableMode
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private bFirstLoad As Boolean = True
@@ -607,14 +608,13 @@ Public Class dlgDescribeTwoVariable
         ucrChkCorrelations.Visible = False
         ucrChkSwapXYVar.Visible = False
         ucrChkOmitMissing.Visible = False
-        cmdMissingOptions.Visible = False
 
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = False
             ucrChkOmitMissing.Visible = Not ucrChkSwapXYVar.Checked AndAlso IsFactorByNumeric()
             ucrChkSwapXYVar.Visible = IsNumericByNumeric() OrElse IsFactorByNumeric()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
-            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked AndAlso ucrChkOmitMissing.Visible
+            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
         End If
         If rdoThreeVariable.Checked Then
             If IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
@@ -638,7 +638,6 @@ Public Class dlgDescribeTwoVariable
         ucrChkLevSig.Visible = False
         ucrChkTotal.Visible = False
         ucrChkInteraction.Visible = False
-        cmdMissingOptions.Visible = False
         ucrChkOmitMissing.Visible = False
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
@@ -746,13 +745,13 @@ Public Class dlgDescribeTwoVariable
                     cmdSummaries.Visible = True
                     cmdFormatTable.Visible = True
                     ucrChkOmitMissing.Visible = True
+                    cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
                     ucrChkMeans.Visible = False
                     ucrChkLevSig.Visible = False
                     ucrChkTotal.Visible = False
                     ucrChkInteraction.Visible = False
                     ucrSaveTable.Location = New Point(23, 450)
                     ucrChkOmitMissing.Location = New Point(15, 365)
-                    cmdMissingOptions.Location = New Point(17, 385)
                     clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
                     ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                     ucrSaveTable.SetPrefix("summary_table")
@@ -875,8 +874,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.Visible = True
                 ucrChkOmitMissing.Visible = True
                 ucrSaveTable.Location = New Point(23, 440)
-                ucrChkOmitMissing.Location = New Point(15, 360)
-                cmdMissingOptions.Location = New Point(17, 380)
+                ucrChkOmitMissing.Location = New Point(15, 365)
             End If
         End If
         FactorColumns()
@@ -1142,6 +1140,7 @@ Public Class dlgDescribeTwoVariable
         ElseIf rdoTwoVariable.Checked Then
             clsMapSummaryFunction.AddParameter(".f", clsROperatorParameter:=clsMapOperator, iPosition:=1)
             clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=2)
+            clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsgtFunction, iPosition:=0, bIncludeArgumentName:=False)
         End If
     End Sub
 
@@ -1594,6 +1593,8 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.iHelpTopicID = 414
             Case TwovariableMode.Climatic
                 ucrBase.iHelpTopicID = 408
+            Case TwovariableMode.Tricot
+                ucrBase.iHelpTopicID = 743
         End Select
     End Sub
 

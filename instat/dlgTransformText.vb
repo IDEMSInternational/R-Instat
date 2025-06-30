@@ -18,10 +18,12 @@ Imports instat.Translations
 
 Public Class dlgTransformText
     Public enumTransformMode As String = TransformMode.Prepare
+
     Public Enum TransformMode
         Prepare
         Describe
         Climatic
+        Tricot
     End Enum
 
     Public bFirstLoad As Boolean = True
@@ -488,6 +490,8 @@ Public Class dlgTransformText
                 ucrBase.iHelpTopicID = 343
             Case TransformMode.Climatic
                 ucrBase.iHelpTopicID = 606
+            Case TransformMode.Tricot
+                ucrBase.iHelpTopicID = 749
         End Select
     End Sub
 

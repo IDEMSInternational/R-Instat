@@ -5,7 +5,7 @@ Public Class dlgTricotModellingGeneral
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubDialog As Boolean = True
-
+    Private bCheck7Passed As Boolean = False
     Private bIsUnique As Boolean = True
     Private clsGetVariablesMetadataFunction As New RFunction
     Private clsGetObjectFunction, clsGetRankingItemsFunction, clsGetDataFrameFunction, clsLevelsFunction, clsMappingFunction, clsPladmmFunction,
@@ -13,12 +13,14 @@ Public Class dlgTricotModellingGeneral
             clsEstimatesFunction, clsSecondEstimatesFunction, clsDevianceFunction, clsDevianceMainFunction, clsPairwiseProbFunction,
             clsPairwiseProbMainFunction, clsReliabilityFunction, clsItemsParFunction, clsRegretFunction, clsNodeLabelsFunction,
             clsNodeRulesFunction, clsTopItemsFunction, clsAICFunction, clsUnListAICFunction, clsAICMainFunction, clsAnnovaFunction,
-            clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction, clsHeatFunction,
-            clsPlotFunction, clsBarfunction, clsWrapPlotFunction, clsWrapBarFunction, clsTreeFunction As New RFunction
+            clsConfidenLimFunction, clsStatsFunction, clsQuasivarianceFunction, clsVarianCovaMatrixFunction, clsHeatFunction, clsPackageCheck,
+            clsPlotFunction, clsBarfunction, clsWrapPlotFunction, clsWrapBarFunction, clsTreeFunction, clsImportDataFunction, clsDefineAsTricotFunction, clsWrapTrees,
+            clsGetVarFromMetaData, clsGetColumnFromData, clsDataUnstackedFunction, clsPullFunction, clsFactor2Function, clsLevels2Function,
+            clsPladmm2Function, clsMappings2Function, clsNames2Function, clsDataFunction, clsGetDataframe2function As New RFunction
 
     Private clsObjectOperator, clsTildeOperator, clsTilde2Operator, clsBracketOperator, clsDevianceOperator, clsPairwiseProbOperator,
-            clsNamesOperator, clsModelOperator, clsSpaceOperator, clsEmptySpaceOperator, clsCoefOperator,
-            clsAICOperator, clsStatsOperator As New ROperator
+            clsNamesOperator, clsModelOperator, clsSpaceOperator, clsEmptySpaceOperator, clsCoefOperator, clsPipe2Operator, clsBracket2Operator,
+            clsAICOperator, clsStatsOperator, clsPipeOperator, clsTilde3Operator, clsTilde4Operator, clsNames2Operator As New ROperator
 
     Private Sub dlgTricotModellingGeneral_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -28,7 +30,7 @@ Public Class dlgTricotModellingGeneral
         If bReset Then
             setDefaults()
         End If
-
+        bCheck7Passed = False
         SetRcodeForControls(bReset)
         bReset = False
         ' autoTranslate(Me)
@@ -48,9 +50,10 @@ Public Class dlgTricotModellingGeneral
         ucrTraitsReceiver.SetParameterIsString()
         ucrTraitsReceiver.SetMeAsReceiver()
         ucrTraitsReceiver.strSelectorHeading = "Traits"
-        ucrTraitsReceiver.SetTricotType({"traits"})
+        ucrTraitsReceiver.SetTricotType("traits")
+        ucrTraitsReceiver.bAutoFill = True
 
-        ucrSelectorVarietyLevel.SetParameter(New RParameter("data", 3))
+        ucrSelectorVarietyLevel.SetParameter(New RParameter("data", 0))
         ucrSelectorVarietyLevel.SetParameterIsrfunction()
 
         ucrReceiverExpressionModellingGeneral.SetParameter(New RParameter("y", 2))
@@ -66,6 +69,8 @@ Public Class dlgTricotModellingGeneral
         ucrSaveModellingGeneral.SetIsComboBox()
         ucrSaveModellingGeneral.SetPrefix("gen_model")
         ucrSaveModellingGeneral.SetAssignToIfUncheckedValue("last_model")
+
+        bCheck7Passed = False
 
         btnModelOptions.Enabled = True
         btnDisplayOptions.Enabled = True
@@ -83,6 +88,7 @@ Public Class dlgTricotModellingGeneral
         clsGetVariablesFromMetaDataFunction = New RFunction
         clsGetDataFrameFunction = New RFunction
         clscoefFunction = New RFunction
+        clsPackageCheck = New RFunction
         clsTildeOperator = New ROperator
         clsTilde2Operator = New ROperator
         clsEmptySpaceOperator = New ROperator
@@ -92,6 +98,22 @@ Public Class dlgTricotModellingGeneral
         clsNamesFunction = New RFunction
         clsNamesOperator = New ROperator
         clsModelOperator = New ROperator
+
+        clsGetVarFromMetaData = New RFunction
+        clsDataUnstackedFunction = New RFunction
+        clsGetDataframe2function = New RFunction
+        clsPullFunction = New RFunction
+        clsDataFunction = New RFunction
+        clsFactor2Function = New RFunction
+        clsLevels2Function = New RFunction
+        clsPladmm2Function = New RFunction
+        clsMappings2Function = New RFunction
+        clsNames2Function = New RFunction
+        clsNames2Operator = New ROperator
+        clsTilde4Operator = New ROperator
+        clsBracket2Operator = New ROperator
+        clsPipe2Operator = New ROperator
+        clsTilde3Operator = New ROperator
 
         ' Sub Dialogs
         '-----------------------------------------------------------------------------------------------------
@@ -125,8 +147,8 @@ Public Class dlgTricotModellingGeneral
         clsBarfunction = New RFunction
         clsWrapPlotFunction = New RFunction
         clsWrapBarFunction = New RFunction
-
         bResetSubDialog = True
+        bCheck7Passed = False
 
         ucrSaveModellingGeneral.Reset()
         ucrSelectorTraitsRanking.Reset()
@@ -137,6 +159,11 @@ Public Class dlgTricotModellingGeneral
         ucrInputCheckVariety.IsReadOnly = True
 
         ucrTraitsReceiver.SetMeAsReceiver()
+
+        clsPackageCheck.SetPackageName("databook")
+        clsPackageCheck.SetRCommand("check_variety_data_level")
+        clsPackageCheck.AddParameter("data", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34))
+        clsPackageCheck.AddParameter("col", Chr(34) & ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False) & Chr(34))
 
         clsGetVariablesMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         clsGetVariablesMetadataFunction.SetAssignTo("get_index_names")
@@ -155,6 +182,80 @@ Public Class dlgTricotModellingGeneral
         clsObjectOperator.AddParameter("right", "object", iPosition:=1)
         clsObjectOperator.SetAssignTo("rankings_object")
         clsObjectOperator.bSpaceAroundOperation = False
+
+
+        clsGetVarFromMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_from_metadata")
+        clsGetVarFromMetaData.AddParameter("data", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsGetVarFromMetaData.AddParameter("tricot_type", Chr(34) & "Tricot_Type" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsGetVarFromMetaData.AddParameter("variety", Chr(34) & "variety" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsGetVarFromMetaData.SetAssignTo("variety_level_var")
+
+        clsGetColumnFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetColumnFromData.AddParameter("data", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsGetColumnFromData.AddParameter("x", clsRFunctionParameter:=clsGetVarFromMetaData, iPosition:=1, bIncludeArgumentName:=False)
+        clsGetColumnFromData.SetAssignTo("variety_level_var")
+
+        clsGetDataframe2function.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsGetDataframe2function.AddParameter("data_name", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34), iPosition:=0)
+        clsGetDataframe2function.SetAssignTo(ucrSelectorVarietyLevel.strCurrentDataFrame)
+
+        clsDataFunction.SetPackageName("data.table")
+        clsDataFunction.SetRCommand("as.data.table")
+        clsDataFunction.AddParameter("x", ucrSelectorVarietyLevel.strCurrentDataFrame, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsDataUnstackedFunction.SetPackageName("data.table")
+        clsDataUnstackedFunction.SetRCommand("dcast")
+        clsDataUnstackedFunction.AddParameter("data", clsRFunctionParameter:=clsDataFunction, iPosition:=0)
+        clsDataUnstackedFunction.AddParameter("formula", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False) & " ~ " & Chr(34) & "X" & Chr(34), iPosition:=1)
+        clsDataUnstackedFunction.SetAssignTo("data_unstacked")
+
+        clsPullFunction.SetPackageName("dplyr")
+        clsPullFunction.SetRCommand("pull")
+        clsPullFunction.AddParameter("x", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
+
+        clsPipe2Operator.SetOperation("%>%")
+        clsPipe2Operator.AddParameter("left", clsRFunctionParameter:=clsDataUnstackedFunction, iPosition:=0, bIncludeArgumentName:=False)
+        clsPipe2Operator.AddParameter("right", clsRFunctionParameter:=clsPullFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsPipe2Operator.SetAssignTo(ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False))
+
+        clsFactor2Function.SetRCommand("factor")
+        clsFactor2Function.AddParameter("x", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
+
+        clsLevels2Function.SetRCommand("levels")
+        clsLevels2Function.AddParameter("x", clsRFunctionParameter:=clsFactor2Function, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsBracket2Operator.SetOperation("[")
+        clsBracket2Operator.AddParameter("left", clsRFunctionParameter:=clsLevels2Function, iPosition:=0, bIncludeArgumentName:=False)
+        clsBracket2Operator.AddParameter("right", "1]", iPosition:=1, bIncludeArgumentName:=False)
+        clsBracket2Operator.bSpaceAroundOperation = False
+        clsBracket2Operator.SetAssignTo("variety_baseline")
+
+        clsTilde3Operator.SetOperation("~")
+        clsTilde3Operator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
+        clsTilde3Operator.AddParameter("right", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
+
+        clsPladmm2Function.SetPackageName("PlackettLuce")
+        clsPladmm2Function.SetRCommand("pladmm")
+        clsPladmm2Function.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
+        clsPladmm2Function.AddParameter("y", clsROperatorParameter:=clsTilde3Operator, iPosition:=1, bIncludeArgumentName:=False)
+        clsPladmm2Function.AddParameter("data", clsRFunctionParameter:=clsDataUnstackedFunction, iPosition:=2)
+
+        clsTilde4Operator.SetOperation("~")
+        clsTilde4Operator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
+        clsTilde4Operator.AddParameter("right", clsRFunctionParameter:=clsPladmm2Function, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsMappings2Function.SetPackageName("purrr")
+        clsMappings2Function.SetRCommand("map")
+        clsMappings2Function.AddParameter(".x", "rankings_object", iPosition:=0)
+        clsMappings2Function.AddParameter(".f", clsROperatorParameter:=clsTilde4Operator, iPosition:=1)
+        clsMappings2Function.SetAssignTo("mod_list")
+
+        clsNames2Function.SetRCommand("names")
+        clsNames2Function.AddParameter("x", clsRFunctionParameter:=clsMappings2Function, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsNames2Operator.SetOperation("<-")
+        clsNames2Operator.AddParameter("left", clsRFunctionParameter:=clsNames2Function, iPosition:=0, bIncludeArgumentName:=False)
+        clsNames2Operator.AddParameter("right", "vars", iPosition:=1, bIncludeArgumentName:=False)
 
         clsSpaceOperator.SetOperation("")
         clsSpaceOperator.AddParameter("x", ucrTraitsReceiver.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
@@ -203,7 +304,7 @@ Public Class dlgTricotModellingGeneral
         clsPladmmFunction.SetRCommand("pladmm")
         clsPladmmFunction.AddParameter("x", ".x", iPosition:=0, bIncludeArgumentName:=False)
         clsPladmmFunction.AddParameter("y", clsROperatorParameter:=clsTilde2Operator, iPosition:=1, bIncludeArgumentName:=False)
-
+        clsPladmmFunction.AddParameter("data", clsRFunctionParameter:=clsDataUnstackedFunction, iPosition:=2)
 
         clsTilde2Operator.SetOperation("~")
         clsTilde2Operator.AddParameter("left", "", iPosition:=0, bIncludeArgumentName:=False)
@@ -352,19 +453,20 @@ Public Class dlgTricotModellingGeneral
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsGetRankingItemsFunction, iPosition:=3)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction, iPosition:=4)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetVariablesFromMetaDataFunction, iPosition:=5)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsBracketOperator, iPosition:=6)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=7)
 
         ucrBase.clsRsyntax.SetBaseROperator(clsModelOperator)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        ucrSelectorTraitsRanking.AddAdditionalCodeParameterPair(clsGetVariablesMetadataFunction, ucrSelectorTraitsRanking.GetParameter())
+        ucrSelectorTraitsRanking.AddAdditionalCodeParameterPair(clsGetVariablesMetadataFunction, ucrSelectorTraitsRanking.GetParameter(), iAdditionalPairNo:=1)
 
+        ucrSelectorVarietyLevel.AddAdditionalCodeParameterPair(clsGetVarFromMetaData, New RParameter("data", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrSelectorVarietyLevel.AddAdditionalCodeParameterPair(clsGetColumnFromData, New RParameter("data", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrSelectorVarietyLevel.AddAdditionalCodeParameterPair(clsDataFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrSelectorVarietyLevel.AddAdditionalCodeParameterPair(clsGetDataframe2function, New RParameter("data_name", iNewPosition:=0), iAdditionalPairNo:=4)
+
+        ucrSelectorVarietyLevel.SetRCode(clsPackageCheck, bReset)
         ucrSelectorTraitsRanking.SetRCode(clsGetObjectFunction, bReset)
-        ucrSelectorVarietyLevel.SetRCode(clsPladmmFunction, bReset)
         ucrTraitsReceiver.SetRCode(clsSpaceOperator, bReset)
         ucrSaveModellingGeneral.SetRCode(clsModelOperator, bReset)
     End Sub
@@ -447,9 +549,10 @@ Public Class dlgTricotModellingGeneral
     End Sub
 
     Private Sub btnDisplayOptions_Click(sender As Object, e As EventArgs) Handles btnDisplayOptions.Click
+        sdgDisplayModelOptions.enumPlacketLuceModelMode = sdgDisplayModelOptions.PlacketLuceModelMode.ModellingGeneral2
         sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction,
             clsNewCoefFunction:=clscoefFunction, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction,
-            clsNewEstimatesFunction:=clsEstimatesFunction, clsNewDevianceFunction:=clsDevianceMainFunction,
+            clsNewEstimatesFunction:=clsEstimatesFunction, clsNewImportDataFunction:=clsImportDataFunction, clsNewDefineAsTricotFunction:=clsDefineAsTricotFunction, clsNewPipeOperator:=clsPipeOperator, clsNewDevianceFunction:=clsDevianceMainFunction,
             clsNewPariPropFunction:=clsPairwiseProbMainFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
             clsNewItemsFunction:=clsItemsParFunction, clsNewRegretFunction:=clsRegretFunction, clsNewNodeLabFuction:=clsNodeLabelsFunction,
             clsNewNodeRuleFunction:=clsNodeRulesFunction, clsNewTopItemFunction:=clsTopItemsFunction, clsNewRSyntax:=ucrBase.clsRsyntax, clsNewAICFunction:=clsUnListAICFunction,
@@ -458,7 +561,7 @@ Public Class dlgTricotModellingGeneral
             clsNewQuasivarianceFunction:=clsQuasivarianceFunction,
             clsNewVarianCovaMatrixFunction:=clsVarianCovaMatrixFunction,
             clsNewHeatFunction:=clsHeatFunction, clsNewPlotFunction:=clsPlotFunction, clsNewBarfunction:=clsBarfunction,
-            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction
+            clsNewWrapPlotFunction:=clsWrapPlotFunction, clsNewWrapBarFunction:=clsWrapBarFunction, clsNewTreeFunction:=clsTreeFunction, clsNewWrapTree:=clsWrapTrees
         )
         sdgDisplayModelOptions.ucrChkANOVA.Enabled = False
         sdgDisplayModelOptions.ucrChkReability.Enabled = False
@@ -468,7 +571,8 @@ Public Class dlgTricotModellingGeneral
         sdgDisplayModelOptions.rdoBar.Enabled = False
         sdgDisplayModelOptions.rdoTree.Enabled = False
         sdgDisplayModelOptions.rdoMap.Enabled = True
-
+        sdgDisplayModelOptions.ucrChkSave.Checked = False
+        sdgDisplayModelOptions.ucrChkSave.Visible = False
         sdgDisplayModelOptions.ucrChkConfLimits.Enabled = True
         sdgDisplayModelOptions.ucrChkVaCoMa.Enabled = True
         sdgDisplayModelOptions.ucrChkEstimates.Enabled = True
@@ -485,6 +589,7 @@ Public Class dlgTricotModellingGeneral
 
 
     Private Sub btnModelOptions_Click(sender As Object, e As EventArgs) Handles btnModelOptions.Click
+        sdgTricotModelOptions.enumTricotModelOptionsMode = sdgTricotModelOptions.TricotModelOptionsMode.ModellingGeneral
         sdgTricotModelOptions.SetRCode(
             clsNewRFunction:=clsPladmmFunction,
             clsNewRSyntax:=ucrBase.clsRsyntax,
@@ -504,12 +609,16 @@ Public Class dlgTricotModellingGeneral
         TestOkEnabled()
     End Sub
 
-
-    '----------------------------------------------------------------------------------------------'
-    'REVIEW THIS FUNCTION
-    Private Sub ucrVarietyLevelReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionModellingGeneral.ControlValueChanged
+    Private Sub ucrReceiverExpressionModellingGeneral_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionModellingGeneral.ControlValueChanged
+        clsDataUnstackedFunction.AddParameter("formula", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False) & " ~ " & Chr(34) & "X" & Chr(34), iPosition:=1)
         clsTilde2Operator.AddParameter("right", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
+        clsPackageCheck.AddParameter("col", Chr(34) & ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False) & Chr(34))
+        clsPullFunction.AddParameter("x", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
+        clsPipe2Operator.SetAssignTo(ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False))
+        clsFactor2Function.AddParameter("x", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=0, bIncludeArgumentName:=False)
+        clsTilde3Operator.AddParameter("right", ucrReceiverExpressionModellingGeneral.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
         Check()
+        CheckAddCodesToBefore()
     End Sub
 
 
@@ -526,19 +635,51 @@ Public Class dlgTricotModellingGeneral
         clsGetDataFrameFunction.SetAssignTo(ucrSelectorTraitsRanking.strCurrentDataFrame)
     End Sub
 
+    Private Sub ucrSelectorVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorVarietyLevel.ControlValueChanged
+        clsGetVarFromMetaData.AddParameter("data", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsGetColumnFromData.AddParameter("data", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsGetDataframe2function.AddParameter("data_name", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34), iPosition:=0)
+        clsGetDataframe2function.SetAssignTo(ucrSelectorVarietyLevel.strCurrentDataFrame)
+        clsDataFunction.AddParameter("x", ucrSelectorVarietyLevel.strCurrentDataFrame, iPosition:=0, bIncludeArgumentName:=False)
+        clsPackageCheck.AddParameter("data", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34))
+    End Sub
+
+    Private Sub CheckAddCodesToBefore()
+        If bCheck7Passed Then
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataFrameFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetVariablesFromMetaDataFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsBracketOperator)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsNamesOperator)
+
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetColumnFromData, iPosition:=4)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataframe2function, iPosition:=5)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsDataUnstackedFunction, iPosition:=6)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsPipe2Operator, iPosition:=7)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsBracket2Operator, iPosition:=8)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsNames2Operator, iPosition:=9)
+
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetColumnFromData)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsGetDataframe2function)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDataUnstackedFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsPipe2Operator)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsBracket2Operator)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsNames2Operator)
+
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataFrameFunction, iPosition:=4)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsGetVariablesFromMetaDataFunction, iPosition:=5)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsBracketOperator, iPosition:=6)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsNamesOperator, iPosition:=7)
+        End If
+    End Sub
+
     Private Sub Check()
         Dim chrOutput As CharacterVector
-        Dim clsPackageCheck As New RFunction
         Dim expOutput As SymbolicExpression
 
         If Not ucrReceiverExpressionModellingGeneral.IsEmpty AndAlso Not ucrTraitsReceiver.IsEmpty Then
 
-            clsPackageCheck.SetPackageName("databook")
-            clsPackageCheck.SetRCommand("check_variety_data_level")
-            clsPackageCheck.AddParameter("data", Chr(34) & ucrSelectorVarietyLevel.strCurrentDataFrame & Chr(34))
-
             expOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsPackageCheck.ToScript())
-
 
             If expOutput Is Nothing OrElse expOutput.Type = RDotNet.Internals.SymbolicExpressionType.Null Then
                 ucrInputCheckVariety.SetName("Model fails. There is no variety variable that is Tricot-Defined in this data.")
@@ -568,6 +709,15 @@ Public Class dlgTricotModellingGeneral
                     bIsUnique = True
                     ucrInputCheckVariety.SetName("Model runs OK.")
                     ucrInputCheckVariety.txtInput.BackColor = Color.LightGreen
+                Case "7"
+                    bIsUnique = True
+                    bCheck7Passed = True
+                    ucrInputCheckVariety.SetName("Success. This data is at the plot level, but it can be used.")
+                    ucrInputCheckVariety.txtInput.BackColor = Color.LightGreen
+                Case "8"
+                    bIsUnique = False
+                    ucrInputCheckVariety.SetName("This data is at the plot level. Either use variety-level data, or use data where there is only one level of 'col' for each variety level.")
+                    ucrInputCheckVariety.txtInput.BackColor = Color.Coral
             End Select
 
         Else

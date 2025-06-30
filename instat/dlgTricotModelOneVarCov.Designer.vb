@@ -148,7 +148,7 @@ Partial Class dlgTricotModelOneVarCov
         Me.ucrInputCheckVariety.IsMultiline = False
         Me.ucrInputCheckVariety.IsReadOnly = False
         Me.ucrInputCheckVariety.Location = New System.Drawing.Point(144, 592)
-        Me.ucrInputCheckVariety.Margin = New System.Windows.Forms.Padding(14, 14, 14, 14)
+        Me.ucrInputCheckVariety.Margin = New System.Windows.Forms.Padding(14)
         Me.ucrInputCheckVariety.Name = "ucrInputCheckVariety"
         Me.ucrInputCheckVariety.Size = New System.Drawing.Size(484, 32)
         Me.ucrInputCheckVariety.TabIndex = 13
@@ -165,8 +165,9 @@ Partial Class dlgTricotModelOneVarCov
         '
         'dlgTricotModelOneVarCov
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(674, 774)
         Me.Controls.Add(Me.lblCheckVariety)
         Me.Controls.Add(Me.ucrInputCheckVariety)
@@ -180,6 +181,9 @@ Partial Class dlgTricotModelOneVarCov
         Me.Controls.Add(Me.ucrTraitsReceiver)
         Me.Controls.Add(Me.ucrSelectorVarietyLevel)
         Me.Controls.Add(Me.ucrSelectorTraitsRanking)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "dlgTricotModelOneVarCov"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

@@ -909,6 +909,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorRecode_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorRecodeFactor.Click
+        dlgRecodeFactor.enumRecodeFactorMode = dlgRecodeFactor.RecodeFactorMode.Prepare
         SetDefaultValueInReorderLevels()
         dlgRecodeFactor.ShowDialog()
     End Sub
@@ -949,12 +950,18 @@ Public Class frmMain
     End Sub
 
     Public Sub SetDefaultValueInReorderLevels()
+        ' Exit early if there's no dataset loaded
+        If Not frmEditor.IsDataSetLoaded() Then
+            Exit Sub
+        End If
+
         Dim strSelectedColumn As String = ""
         If Not String.IsNullOrEmpty(ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow) AndAlso ucrColumnMeta.IsVisible Then
             strSelectedColumn = ucrColumnMeta.GetFirstSelectedDataframeColumnFromSelectedRow
         ElseIf Not String.IsNullOrEmpty(ucrDataViewer.GetFirstSelectedColumnName) Then
             strSelectedColumn = ucrDataViewer.GetFirstSelectedColumnName
         End If
+
         dlgReorderLevels.SelectedColumn = strSelectedColumn
         dlgRecodeFactor.SelectedColumn = strSelectedColumn
         dlgDummyVariables.SelectedColumn = strSelectedColumn
@@ -964,7 +971,9 @@ Public Class frmMain
         dlgCountinFactor.SelectedColumn = strSelectedColumn
     End Sub
 
+
     Private Sub mnuPrepareFactorReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorReorderLevels.Click
+        dlgReorderLevels.enumReorderLevelsMode = dlgReorderLevels.ReorderLevelsMode.Prepare
         SetDefaultValueInReorderLevels()
         dlgReorderLevels.ShowDialog()
     End Sub
@@ -1026,6 +1035,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorCombine_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorCombineFactors.Click
+        dlgCombine.enumCombineFactorsMode = dlgCombine.CombineFactorsMode.Prepare
         dlgCombine.ShowDialog()
     End Sub
 
@@ -1135,6 +1145,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseDataFrameRowNumbersNames_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameRowNumbersNames.Click
+        dlgRowNamesOrNumbers.enumRowNamesOrNumbersMode = dlgRowNamesOrNumbers.RowNamesOrNumbersMode.Prepare
         dlgRowNamesOrNumbers.ShowDialog()
     End Sub
 
@@ -2996,7 +3007,13 @@ Public Class frmMain
 
     Private Sub mnuRDataViewerWindow_Click(sender As Object, e As EventArgs) Handles mnuRDataViewerWindow.Click
         ucrDataViewer.StartWait()
-        ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        If mnuSwapDataMetadata.Checked Then
+            ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewColumnMetaData()
+        ElseIf mnuSwapDataDataframeMetadata.Checked Then
+            ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataframeMetaData()
+        Else
+            ucrDataViewer.GetCurrentDataFrameFocus().clsPrepareFunctions.ViewDataFrame()
+        End If
         ucrDataViewer.EndWait()
     End Sub
 
@@ -3015,6 +3032,10 @@ Public Class frmMain
 
     Private Sub mnuTricotDescribeXpTraits_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraits.Click
         dlgTraitsXp.ShowDialog()
+    End Sub
+
+    Private Sub mnuTricotDescribeXpTraitCorrelations_Click(sender As Object, e As EventArgs) Handles mnuTricotXpDescribeTraitCorrelations.Click
+        dlgTraitCorrelationsXp.ShowDialog()
     End Sub
 
     Private Sub mnuTricotDefineTricotData_Click(sender As Object, e As EventArgs) Handles mnuTricotDefineTricotData.Click
@@ -3067,27 +3088,27 @@ Public Class frmMain
     End Sub
 
     Private Sub Summarise23VariablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuSummariseTricot.Click
-        dlgDescribeTwoVariable.enumTwovariableMode = dlgDescribeTwoVariable.TwovariableMode.Climatic
+        dlgDescribeTwoVariable.enumTwovariableMode = dlgDescribeTwoVariable.TwovariableMode.Tricot
         dlgDescribeTwoVariable.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeGraphTricots_Click(sender As Object, e As EventArgs) Handles mnuDescribeGraphTricots.Click
-        dlgDescribeTwoVarGraph.enumTwovarMode = dlgDescribeTwoVarGraph.TwovarMode.Climatic
+        dlgDescribeTwoVarGraph.enumTwovarMode = dlgDescribeTwoVarGraph.TwovarMode.Tricot
         dlgDescribeTwoVarGraph.ShowDialog()
     End Sub
 
     Private Sub mnuTidyAddMergeColumns_Click(sender As Object, e As EventArgs) Handles mnuTidyAddMergeColumns.Click
-        dlgMergeAdditionalData.enumMergeMode = dlgMergeAdditionalData.MergeMode.Climatic
+        dlgMergeAdditionalData.enumMergeMode = dlgMergeAdditionalData.MergeMode.Tricot
         dlgMergeAdditionalData.ShowDialog()
     End Sub
 
     Private Sub DuplicateRowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTidyDuplicateRows.Click
-        dlgDuplicateRows.enumDuplicateMode = dlgDuplicateRows.DuplicateMode.Climatic
+        dlgDuplicateRows.enumDuplicateMode = dlgDuplicateRows.DuplicateMode.Tricot
         dlgDuplicateRows.ShowDialog()
     End Sub
 
     Private Sub AddKeyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddKeyToolStripMenuItem.Click
-        dlgAddKey.enumAddkeyMode = dlgAddKey.AddkeyMode.Climatic
+        dlgAddKey.enumAddkeyMode = dlgAddKey.AddkeyMode.Tricot
         dlgAddKey.ShowDialog()
     End Sub
 
@@ -3103,31 +3124,31 @@ Public Class frmMain
 
     'Visualise data dialog
     Private Sub mnuTricotexamineeditdataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataVisualiseData.Click
-        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Climatic
+        dlgVisualizeData.enumVisualizeMode = dlgVisualizeData.VisualizeMode.Tricot
         dlgVisualizeData.ShowDialog()
     End Sub
 
     'Pivot table dialog
     Private Sub mnuTricotexamineeditdataPivotTable_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataPivotTable.Click
-        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Climatic
+        dlgThreeVariablePivotTable.enumPivotMode = dlgThreeVariablePivotTable.PivotMode.Tricot
         dlgThreeVariablePivotTable.ShowDialog()
     End Sub
 
     'One Variable Summarise Dialog
     Private Sub mnuTricotexamineeditdataOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableSummarise.Click
-        dlgOneVariableSummarise.enumOnevariableMode = dlgOneVariableSummarise.OnevariableMode.Climatic
+        dlgOneVariableSummarise.enumOnevariableMode = dlgOneVariableSummarise.OnevariableMode.Tricot
         dlgOneVariableSummarise.ShowDialog()
     End Sub
 
     'One Variable Graph Dialog
     Private Sub mnuTricotexamineeditdataOneVariableGraph_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableGraph.Click
-        dlgOneVariableGraph.enumOnevariableMode = dlgOneVariableGraph.OnevariableMode.Climatic
+        dlgOneVariableGraph.enumOnevariableMode = dlgOneVariableGraph.OnevariableMode.Tricot
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
     'One Variable Frequencies Dialog
     Private Sub mnuTricotexamineeditdataOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuTricotexamineeditdataOneVariableFrequencies.Click
-        dlgOneWayFrequencies.enumOnewayMode = dlgOneWayFrequencies.OnewayMode.Climatic
+        dlgOneWayFrequencies.enumOnewayMode = dlgOneWayFrequencies.OnewayMode.Tricot
         dlgOneWayFrequencies.ShowDialog()
     End Sub
 
@@ -3146,22 +3167,39 @@ Public Class frmMain
 
     'Stack pivot longer dialog
     Private Sub mnuStackPivotLonger_Click(sender As Object, e As EventArgs) Handles mnuStackPivotLonger.Click
-        dlgStack.enumStackMode = dlgStack.StackMode.Prepare
+        dlgStack.enumStackMode = dlgStack.StackMode.Tricot
         dlgStack.ShowDialog()
     End Sub
 
     'Unstacked pivot wider dialog
     Private Sub mnuUnstackPivotWider_Click(sender As Object, e As EventArgs) Handles mnuUnstackPivotWider.Click
-        dlgUnstack.enumUnstackMode = dlgUnstack.UnstackMode.Prepare
+        dlgUnstack.enumUnstackMode = dlgUnstack.UnstackMode.Tricot
         dlgUnstack.ShowDialog()
     End Sub
 
     Private Sub mnuReorderLevels_Click(sender As Object, e As EventArgs) Handles mnuReorderLevels.Click
+        dlgReorderLevels.enumReorderLevelsMode = dlgReorderLevels.ReorderLevelsMode.Tricot
         dlgReorderLevels.ShowDialog()
     End Sub
 
     Private Sub TransformTextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuTransformText.Click
-        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Prepare
+        dlgTransformText.enumTransformMode = dlgTransformText.TransformMode.Tricot
         dlgTransformText.ShowDialog()
+    End Sub
+
+    Private Sub RowNumbersNamesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RowNumbersNamesToolStripMenuItem.Click
+        dlgRowNamesOrNumbers.enumRowNamesOrNumbersMode = dlgRowNamesOrNumbers.RowNamesOrNumbersMode.Tricot
+        dlgRowNamesOrNumbers.ShowDialog()
+    End Sub
+
+    Private Sub RecodeFactorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecodeFactorToolStripMenuItem.Click
+        dlgRecodeFactor.enumRecodeFactorMode = dlgRecodeFactor.RecodeFactorMode.Tricot
+        SetDefaultValueInReorderLevels()
+        dlgRecodeFactor.ShowDialog()
+    End Sub
+
+    Private Sub CombineFactorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CombineFactorsToolStripMenuItem.Click
+        dlgCombine.enumCombineFactorsMode = dlgCombine.CombineFactorsMode.Tricot
+        dlgCombine.ShowDialog()
     End Sub
 End Class

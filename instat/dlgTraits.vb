@@ -48,10 +48,11 @@ Public Class dlgTraits
         ucrReceiverTrait.SetParameter(New RParameter("column", 1, bNewIncludeArgumentName:=False))
         ucrReceiverTrait.Selector = ucrTraitGraphSelector
         ucrReceiverTrait.SetParameterIsString()
-        ucrReceiverTrait.bAutoFill = True
         ucrReceiverTrait.strSelectorHeading = "Traits"
+        ucrReceiverTrait.SetIncludedDataTypes({"numeric"})
         ucrReceiverTrait.SetMeAsReceiver()
-        ucrReceiverTrait.SetTricotType({"traits"})
+        ucrReceiverTrait.SetTricotType("traits")
+        ucrReceiverTrait.bAutoFill = True
 
         ucrSaveTraits.SetPrefix("trait_plot")
         ucrSaveTraits.SetIsComboBox()
@@ -85,6 +86,7 @@ Public Class dlgTraits
         clsGetVarMetadataFunction.ToScript(strScript:=strVarMetadataAssignedScript)
 
         clsGetObjectRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_object")
+        clsGetObjectRFunction.AddParameter("data_name", Chr(34) & ucrTraitGraphSelector.strCurrentDataFrame & Chr(34), iPosition:=0)
         clsGetObjectRFunction.AddParameter("list", Chr(34) & "rankings_list" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
 
         clsGetRankingOperator.SetOperation("$")

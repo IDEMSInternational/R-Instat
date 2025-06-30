@@ -31,6 +31,7 @@ Public Class dlgThreeVariablePivotTable
         Prepare
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private Sub dlgThreeVariablePivotTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -281,45 +282,63 @@ Public Class dlgThreeVariablePivotTable
     End Sub
 
     Private Sub ChangeDataParameterValue()
-        If ucrChkSelectedVariable.Checked Then
-            clsRPivotTableFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+        If rdoMultiple.Checked OrElse rdoSingle.Checked Then
+            If ucrChkSelectedVariable.Checked Then
+                clsRPivotTableFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+            Else
+                clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            End If
         Else
             clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         End If
+
     End Sub
 
     Private Sub ReceiversChanged(ucrChangedControls As ucrCore) Handles ucrReceiverSelectedVariable.ControlValueChanged,
-        ucrReceiverInitialRowFactors.ControlValueChanged, ucrReceiverAdditionalRowFactor.ControlValueChanged
-        If Not bRcodeSet Then
-            Exit Sub
-        End If
+        ucrReceiverInitialRowFactors.ControlValueChanged, ucrReceiverInitialColumnFactor.ControlValueChanged,
+        ucrReceiverAdditionalRowFactor.ControlValueChanged, ucrReceiverMultipleAddRows.ControlValueChanged,
+        ucrChkSelectedVariable.ControlValueChanged, ucrChkNumericVariable.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+
+        If Not bRcodeSet Then Exit Sub
+
+        clsConcatenateFunction.ClearParameters()
 
         If ucrChkSelectedVariable.Checked Then
             Dim lstColumns As New List(Of String)
             Dim iPosition As Integer = 0
-            Dim strColumnVariableName As String = ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False)
-            Dim strRowVariableName As String = ucrReceiverAdditionalRowFactor.GetVariableNames(bWithQuotes:=False)
-            clsConcatenateFunction.ClearParameters()
+
+            ' Initial Row Factors
             If Not ucrReceiverInitialRowFactors.IsEmpty Then
                 CheckForDuplication(lstColumns, ucrReceiverInitialRowFactors, iPosition)
             End If
 
+            ' Selected Variables
             If Not ucrReceiverSelectedVariable.IsEmpty Then
                 CheckForDuplication(lstColumns, ucrReceiverSelectedVariable, iPosition)
             End If
 
-            If Not ucrReceiverInitialColumnFactor.IsEmpty AndAlso Not lstColumns.Contains(strColumnVariableName) Then
-                lstColumns.Add(ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False))
-                clsConcatenateFunction.AddParameter("col" & iPosition, strColumnVariableName, iPosition:=iPosition, bIncludeArgumentName:=False)
-                iPosition += 1
+            ' Initial Column Factors
+            If Not ucrReceiverInitialColumnFactor.IsEmpty Then
+                CheckForDuplication(lstColumns, ucrReceiverInitialColumnFactor, iPosition)
             End If
 
-            If Not ucrReceiverAdditionalRowFactor.IsEmpty AndAlso
-                Not lstColumns.Contains(strRowVariableName) AndAlso ucrChkNumericVariable.Checked Then
-                clsConcatenateFunction.AddParameter("col" & iPosition, strRowVariableName, iPosition:=iPosition, bIncludeArgumentName:=False)
-                iPosition += 1
+            ' Handle additional rows based on radio button mode
+            If rdoSingle.Checked Then
+                If Not ucrReceiverAdditionalRowFactor.IsEmpty AndAlso ucrChkNumericVariable.Checked Then
+                    Dim strRowVariableName As String = ucrReceiverAdditionalRowFactor.GetVariableNames(bWithQuotes:=False)
+                    If Not lstColumns.Contains(strRowVariableName) Then
+                        lstColumns.Add(strRowVariableName)
+                        clsConcatenateFunction.AddParameter("col" & iPosition, strRowVariableName, iPosition:=iPosition, bIncludeArgumentName:=False)
+                        iPosition += 1
+                    End If
+                End If
+            ElseIf rdoMultiple.Checked Then
+                If Not ucrReceiverMultipleAddRows.IsEmpty Then
+                    CheckForDuplication(lstColumns, ucrReceiverMultipleAddRows, iPosition)
+                End If
             End If
         End If
+
         SetFactorSortingOrder()
         AddingVariable()
         MinMaxValVariable()
@@ -492,6 +511,7 @@ Public Class dlgThreeVariablePivotTable
         MinMaxValVariable()
         MinMaxValRowVariable()
         UpdateVisibilityAndParameters()
+        ChangeDataParameterValue()
     End Sub
 
     Private Sub ucrReceiverMultipleAddRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleAddRows.ControlValueChanged

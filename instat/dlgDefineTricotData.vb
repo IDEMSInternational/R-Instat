@@ -52,13 +52,15 @@ Public Class dlgDefineTricotData
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 672
+        Me.Size = New Size(557, 334)
+        Me.ucrBase.Location = New Point(9, 241)
 
         Dim kvpID As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("id", {"id", "ID", "participant_id", "participant_name"}.ToList())
         Dim kvpLongitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("longitude", {"lon", "long", "lont", "longitude", "Longitude", "Lon"}.ToList())
         Dim kvpLatitude As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("latitude", {"lat", "latitude", "Lat", "Latitude"}.ToList())
         Dim kvpPlantingDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("planting_date", {"planting_date", "Planting_date", "plantingdate"}.ToList())
         Dim kvpTraits As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("traits", {"overall", "overall_perf", "Overall"}.ToList())
-        Dim kvpVariety As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("variety", {"item", "items", "variety", "varieties"}.ToList())
+        Dim kvpVariety As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("variety", {"item", "items", "variety", "varieties", "genotype", "gen", "genotypes"}.ToList())
 
 
         lstRecognisedTypes.AddRange({kvpID, kvpLongitude, kvpLatitude, kvpPlantingDate, kvpTraits, kvpVariety})
@@ -70,12 +72,9 @@ Public Class dlgDefineTricotData
         ucrSelectorIDLevelData.SetParameterIsString()
 
         ucrChkDefineIDLevel.SetText("Define ID Level Data")
-        ucrChkDefineIDLevel.Checked = False
         grpIDLevel.Visible = False
 
-
         ucrChkDefineVarietyLevel.SetText("Define Variety Level Data")
-        ucrChkDefineVarietyLevel.Checked = False
         grpVarietyLevel.Visible = False
 
         'ID Level Data (run by the top groupbox)
@@ -111,6 +110,9 @@ Public Class dlgDefineTricotData
         ucrReceiverIDVarietyLevelTraits.SetParameterIsString()
         ucrReceiverIDVarietyLevelTraits.strSelectorHeading = "Id"
 
+        lblIVTraits.Text = "Traits:"
+        lblVarieties.Text = "Varieties:"
+        lblTraits.Text = "Traits:"
     End Sub
 
     Private Sub SetDefaults()
@@ -146,10 +148,13 @@ Public Class dlgDefineTricotData
         bIsUniqueVariety = False
         bIsUniqueID = False
 
-        lblIVTraits.Text = "Traits:"
-        lblVarieties.Text = "Varieties:"
-        lblTraits.Text = "Traits:"
+        ' resetting ucrChks
+        ucrChkDefineIDLevel.Checked = False
+        ucrChkDefineVarietyLevel.Checked = False
+        ucrSelectorIDLevelData.Reset()
+        ucrSelectorVarietyLevelData.Reset()
 
+        ucrReceiverIDVarietyLevelID.SetMeAsReceiver()
         ucrReceiverLevelID.SetMeAsReceiver()
         ucrInputCheckInputIDLevel.txtInput.BackColor = Color.White
         ucrInputCheckInputVarietyLevel.txtInput.BackColor = Color.White
@@ -273,6 +278,7 @@ Public Class dlgDefineTricotData
 
         changedIDLevelChecked()
         changedVarietyLevelChecked()
+        SetDialogSize()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -305,6 +311,7 @@ Public Class dlgDefineTricotData
         ucrReceiverIDVarietyLevelVariety.SetRCode(clsCDATIDLevelVarietiesFunction, bReset)
         ucrReceiverIDVarietyLevelTraits.SetRCode(clsCDATIDLevelVarietiesFunction, bReset)
     End Sub
+
 
     Private Sub SetRSelector(sender As ucrSelectorByDataFrameAddRemove, lstReceivers As List(Of ucrReceiverSingle))
         Dim ucrTempReceiver As ucrReceiver
@@ -368,20 +375,6 @@ Public Class dlgDefineTricotData
     Public Function AreAllDataframessDifferent(strData1 As String, strData2 As String, strData3 As String) As Boolean
         Return (strData1 <> strData2) AndAlso (strData1 <> strData3) AndAlso (strData2 <> strData3)
     End Function
-
-
-    '    Private Sub TestOKEnabled()
-    '        Dim bDataFramesDifferent As Boolean = AreAllDataframessDifferent(
-    '    ucrSelectorIDLevelData.strCurrentDataFrame,
-    '    ucrSelectorIDVarietyLevel.strCurrentDataFrame,
-    '    ucrSelectorVarietyLevelData.strCurrentDataFrame
-    ')
-    '        ucrBase.OKEnabled(Not ucrReceiverIDVarietyLevelID.IsEmpty AndAlso
-    '                      Not ucrReceiverIDVarietyLevelVariety.IsEmpty AndAlso
-    '                      Not ucrReceiverVarietyLevelVariety.IsEmpty AndAlso
-    '                      Not ucrReceiverLevelID.IsEmpty AndAlso bDataFramesDifferent AndAlso
-    '                      bIsUnique AndAlso bIsUniqueID AndAlso bIsUniqueVariety)
-    '    End Sub
 
     Private Sub TestOkEnabled()
         Dim bDataFramesDifferent As Boolean = AreAllDataframessDifferent(
@@ -541,13 +534,13 @@ Public Class dlgDefineTricotData
     Private Sub ucrChkDefineIDLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineIDLevel.ControlValueChanged
         changedIDLevelChecked()
         TestOkEnabled()
+        SetDialogSize()
     End Sub
-
-
 
     Private Sub ucrChkDefineVarietyLevel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefineVarietyLevel.ControlValueChanged
         changedVarietyLevelChecked()
         TestOkEnabled()
+        SetDialogSize()
     End Sub
 
     Private Sub changedIDLevelChecked()
@@ -566,7 +559,7 @@ Public Class dlgDefineTricotData
             ucrBase.clsRsyntax.AddToBeforeCodes(clsDATVarietyLevelFunction, 2)
         Else
             grpVarietyLevel.Visible = False
-        ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDATVarietyLevelFunction)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDATVarietyLevelFunction)
 
         End If
     End Sub
@@ -658,4 +651,18 @@ Public Class dlgDefineTricotData
         End If
         TestOkEnabled()
     End Sub
+
+    Private Sub SetDialogSize()
+        If ucrChkDefineVarietyLevel.Checked Then
+            Me.Size = New Size(879, 570)
+            Me.ucrBase.Location = New Point(9, 473)
+        ElseIf ucrChkDefineIDLevel.Checked Then
+            Me.Size = New Size(618, 570)
+            Me.ucrBase.Location = New Point(9, 473)
+        Else
+            Me.Size = New Size(557, 334)
+            Me.ucrBase.Location = New Point(9, 473)
+        End If
+    End Sub
+
 End Class

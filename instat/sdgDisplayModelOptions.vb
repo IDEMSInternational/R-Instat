@@ -17,19 +17,53 @@
 Imports instat.Translations
 
 Public Class sdgDisplayModelOptions
-    Private clsSummaryFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction, clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
-    Private clsCoefFunction, clsStatsFunction As RFunction
-    Private clsDummyFunction, clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction, clsTreeFunction As RFunction
+    Private clsSummaryFunction, clsNodeLabFuction, clsNodeRuleFunction, clsTopItemFunction, clsRegretFunction, clsAnnovaFunction, clsEstimatesFunction, clsConfidenLimFunction,
+        clsAICFunction, clsDevianceFunction, clsSecondEstimatesFunction, clsPariPropFunction, clsReliabilityFunction, clsItemsFunction, clsVarianCovaMatrixFunction, clsQuasivarianceFunction As RFunction
+    Private clsCoefFunction, clsStatsFunction, clsImportDataFunction, clsDefineAsTricotFunction As RFunction
+    Private clsDummyFunction, clsPlotFunction, clsHeatFunction, clsWrapBarFunction, clsWrapPlotFunction, clsBarfunction, clsTreeFunction, clsWrapTrees As RFunction
+    Private clsPipeOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bInitialised As Boolean = False
+    Public enumPlacketLuceModelMode As String = PlacketLuceModelMode.nocovariates
 
     Private clsRSyntax As New RSyntax
 
     Private Sub sdgDisplayModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        SetHelpOptions()
     End Sub
 
+    Public Enum PlacketLuceModelMode
+        nocovariates
+        tree
+        ModelOneVarCov2
+        ModellingGeneral2
+    End Enum
+
     Private Sub InitialiseDialog()
+
+        ' Adding tooltips
+        AddToolTip(ucrChkModel, "Provides an overview of the model including item rankings, coefficients, and model fit.")
+        AddToolTip(ucrChkANOVA, "Assesses the goodness of fit for the Plackett Luce model fitted")
+        AddToolTip(ucrChkEstimates, "Displays the model coefficients (item worths), with an option to log-transform them for easier interpretation.")
+        AddToolTip(ucrChkConfLimits, "Shows confidence intervals for the estimated item worths, indicating the uncertainty around each value.")
+        AddToolTip(ucrChkAIC, "Displays Akaike's Information Criterion to help compare model quality, with lower values indicating better fit.")
+        AddToolTip(ucrChkDeviance, "Reports the deviance statistic, measuring how well the model fits the observed data (lower is better).")
+        AddToolTip(ucrChkSndEstimetes, "Lists the predicted probabilities or rankings from the fitted model.")
+        AddToolTip(ucrChkParProp, "Shows the probability of one item being preferred over another based on the model.")
+        AddToolTip(ucrChkReability, "Measures how consistently the model distinguishes between items, often used to assess precision or predictability.")
+        AddToolTip(ucrChkItemPara, "Lists the estimated worth (preference scores) of each item in the model.")
+        AddToolTip(ucrChkVaCoMa, "Displays the estimated variances and covariances between item parameters.")
+        AddToolTip(ucrChkQuasiVa, "Provides quasi-variances and standard errors, allowing valid comparisons between multiple items without needing a reference item.")
+        AddToolTip(ucrChkRegret, "Displays regret values at each node, reflecting the potential loss from not choosing the optimal item (based on worst-case scenarios).")
+        AddToolTip(ucrChkNodeLabel, "Shows labels for each terminal node, often based on top items or group summaries.")
+        AddToolTip(ucrChkNodeRules, "Lists the conditions (e.g. variable splits) used to form each node in the tree.")
+        AddToolTip(ucrChkTopItem, "Highlights the most preferred items within each terminal node, helping interpret local preferences across subgroups.")
+        ttModelDisplay.SetToolTip(rdoMap, "Displays a tree with faceted dotplots beneath it, showing the estimated item worths at each terminal node. Helps visualise how item rankings vary across subgroups.")
+        ttModelDisplay.SetToolTip(rdoBar, "Plots the item worths as a bar chart for a single model, making it easy to compare relative rankings.")
+        ttModelDisplay.SetToolTip(rdoTree, "Shows the structure of the Plackett-Luce tree, including the variables used for splits and the decision rules at each node.")
+
+
         ucrChkModel.SetText("Summary")
         ucrChkModel.AddParameterValuesCondition(True, "summary", "True")
         ucrChkModel.AddParameterValuesCondition(False, "summary", "False")
@@ -41,11 +75,15 @@ Public Class sdgDisplayModelOptions
         ucrChkEstimates.SetText("Coefficients")
         ucrChkEstimates.AddRSyntaxContainsFunctionNamesCondition(True, {"coef"}, True)
         ucrChkEstimates.AddRSyntaxContainsFunctionNamesCondition(False, {"coef"}, False)
-        ucrChkEstimates.AddToLinkedControls(ucrChkLog, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkEstimates.AddToLinkedControls({ucrChkLog, ucrChkSave}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkLog.SetText("Log")
         ucrChkLog.AddRSyntaxContainsFunctionNamesCondition(True, {"log"}, True)
         ucrChkLog.AddRSyntaxContainsFunctionNamesCondition(False, {"log"}, False)
+
+        ucrChkSave.SetText("Store as Data Frame")
+        ucrChkSave.AddRSyntaxContainsFunctionNamesCondition(True, {"save"}, True)
+        ucrChkSave.AddRSyntaxContainsFunctionNamesCondition(False, {"save"}, False)
 
         ucrChkConfLimits.SetText("Confidence Limits")
         ucrChkConfLimits.AddRSyntaxContainsFunctionNamesCondition(True, {"confint"}, True)
@@ -70,7 +108,7 @@ Public Class sdgDisplayModelOptions
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(True, {"snd_estimates"}, True)
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(False, {"snd_estimates"}, False)
 
-        ucrChkParProp.SetText("Pairewise Probabilities")
+        ucrChkParProp.SetText("Pairwise Probabilities")
         ucrChkParProp.AddRSyntaxContainsFunctionNamesCondition(True, {"pair"}, True)
         ucrChkParProp.AddRSyntaxContainsFunctionNamesCondition(False, {"pair"}, False)
 
@@ -118,6 +156,7 @@ Public Class sdgDisplayModelOptions
             ucrPnlPlots.AddRadioButton(rdoPlot)
             ucrPnlPlots.AddRadioButton(rdoMap)
             ucrPnlPlots.AddRadioButton(rdoBar)
+            ucrPnlPlots.AddRadioButton(rdoTree)
             ucrPnlPlots.AddParameterValuesCondition(rdoNoPlot, "plot", "True")
             ucrPnlPlots.AddParameterValuesCondition(rdoPlot, "plot", "False")
             ucrPnlPlots.AddParameterValuesCondition(rdoMap, "plot", "False")
@@ -141,7 +180,12 @@ Public Class sdgDisplayModelOptions
         bControlsInitialised = False
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction, clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction, clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction, clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewTreeFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewWrapPlotFunction As RFunction, clsNewWrapBarFunction As RFunction, clsNewSummaryFunction As RFunction, clsNewAnnovaFunction As RFunction, clsNewEstimatesFunction As RFunction,
+                        clsNewImportDataFunction As RFunction, clsNewDefineAsTricotFunction As RFunction, clsNewPipeOperator As ROperator, clsNewConfidenLimFunction As RFunction, clsNewAICFunction As RFunction, clsNewDevianceFunction As RFunction,
+                        clsNewSecondEstimatesFunction As RFunction, clsNewPariPropFunction As RFunction, clsNewReliabilityFunction As RFunction, clsNewItemsFunction As RFunction, clsNewVarianCovaMatrixFunction As RFunction,
+                        clsNewQuasivarianceFunction As RFunction, clsNewCoefFunction As RFunction, clsNewStatsFunction As RFunction, clsNewNodeLabFuction As RFunction, clsNewNodeRuleFunction As RFunction, clsNewTopItemFunction As RFunction,
+                        clsNewRegretFunction As RFunction, clsNewPlotFunction As RFunction, clsNewHeatFunction As RFunction, clsNewBarfunction As RFunction, clsNewTreeFunction As RFunction, clsNewWrapTree As RFunction, Optional bReset As Boolean = False)
+
         ucrNudConfLevel.SetText("0.95")
         If Not bControlsInitialised Then
             InitialiseDialog()
@@ -154,6 +198,9 @@ Public Class sdgDisplayModelOptions
         clsAnnovaFunction = clsNewAnnovaFunction
         clsSummaryFunction = clsNewSummaryFunction
         clsEstimatesFunction = clsNewEstimatesFunction
+        clsDefineAsTricotFunction = clsNewDefineAsTricotFunction
+        clsImportDataFunction = clsNewImportDataFunction
+        clsPipeOperator = clsNewPipeOperator
         clsConfidenLimFunction = clsNewConfidenLimFunction
         clsAICFunction = clsNewAICFunction
         clsDevianceFunction = clsNewDevianceFunction
@@ -175,11 +222,13 @@ Public Class sdgDisplayModelOptions
         clsTreeFunction = clsNewTreeFunction
         clsWrapBarFunction = clsNewWrapBarFunction
         clsWrapPlotFunction = clsNewWrapPlotFunction
+        clsWrapTrees = clsNewWrapTree
 
         If bReset Then
             ucrChkANOVA.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrChkModel.SetRCode(clsDummyFunction, bReset)
             ucrChkEstimates.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+            ucrChkSave.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrChkLog.SetRCode(clsCoefFunction, bReset, bCloneIfNeeded:=True)
             ucrChkAIC.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
             ucrChkConfLimits.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
@@ -203,6 +252,14 @@ Public Class sdgDisplayModelOptions
             ucrPnlPlots.SetRCode(clsDummyFunction, bReset)
         End If
         AddRemoveSummary()
+    End Sub
+
+    Private Sub AddToolTip(cntrl As ucrCore, value As String)
+        For Each element As Control In cntrl.Controls
+            If TypeOf element Is CheckBox Then
+                ttModelDisplay.SetToolTip(element, value)
+            End If
+        Next
     End Sub
 
     Private Sub ucrChkAIC_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAIC.ControlValueChanged
@@ -239,9 +296,10 @@ Public Class sdgDisplayModelOptions
 
     Private Sub ucrChkEstimates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEstimates.ControlValueChanged
         If ucrChkEstimates.Checked Then
-            clsRSyntax.AddToBeforeCodes(clsEstimatesFunction)
+            clsRSyntax.AddToBeforeCodes(clsEstimatesFunction, iPosition:=11)
         Else
             clsRSyntax.RemoveFromBeforeCodes(clsEstimatesFunction)
+            ucrChkSave.Checked = False
         End If
     End Sub
 
@@ -260,6 +318,21 @@ Public Class sdgDisplayModelOptions
             clsCoefFunction.RemoveParameterByName("log")
         End If
     End Sub
+
+    Private Sub ucrChkSave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSave.ControlValueChanged
+        If ucrChkSave.Checked Then
+            clsEstimatesFunction.SetAssignTo("coefficients_data")
+            clsRSyntax.AddToBeforeCodes(clsPipeOperator, iPosition:=12)
+            clsRSyntax.AddToBeforeCodes(clsImportDataFunction, iPosition:=13)
+            clsRSyntax.AddToBeforeCodes(clsDefineAsTricotFunction, iPosition:=14)
+        Else
+            clsEstimatesFunction.RemoveAssignTo()
+            clsRSyntax.RemoveFromBeforeCodes(clsPipeOperator)
+            clsRSyntax.RemoveFromBeforeCodes(clsImportDataFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsDefineAsTricotFunction)
+        End If
+    End Sub
+
 
     Private Sub ucrChkModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkModel.ControlValueChanged
         AddRemoveSummary()
@@ -354,9 +427,11 @@ Public Class sdgDisplayModelOptions
             clsRSyntax.RemoveFromBeforeCodes(clsWrapBarFunction)
         End If
         If rdoTree.Checked Then
-            clsRSyntax.AddToBeforeCodes(clsTreeFunction) ' purrr::map2(.x = mod_list, .y = names(mod_list), .f = ~ plot(x = .x))
+            clsRSyntax.AddToBeforeCodes(clsTreeFunction)
+            clsRSyntax.AddToBeforeCodes(clsWrapTrees)
         Else
             clsRSyntax.RemoveFromBeforeCodes(clsTreeFunction)
+            clsRSyntax.RemoveFromBeforeCodes(clsWrapTrees)
         End If
         If rdoPlot.Checked Then
             clsRSyntax.AddToBeforeCodes(clsPlotFunction)
@@ -371,4 +446,18 @@ Public Class sdgDisplayModelOptions
             clsRSyntax.RemoveFromBeforeCodes(clsHeatFunction)
         End If
     End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumPlacketLuceModelMode
+            Case PlacketLuceModelMode.nocovariates
+                ucrSdgButtons.iHelpTopicID = 722
+            Case PlacketLuceModelMode.tree
+                ucrSdgButtons.iHelpTopicID = 724
+            Case PlacketLuceModelMode.ModelOneVarCov2
+                ucrSdgButtons.iHelpTopicID = 726
+            Case PlacketLuceModelMode.ModellingGeneral2
+                ucrSdgButtons.iHelpTopicID = 728
+        End Select
+    End Sub
+
 End Class

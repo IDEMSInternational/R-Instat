@@ -48,6 +48,11 @@ Public Class clsTransformationRModel
     Public strParameterName As String
 
     ''' <summary>
+    ''' The dictionary key to use to find the name of the parameter to update in the R model.
+    ''' </summary>
+    Public strParameterNameKey As String
+
+    ''' <summary>
     ''' A valid R script to update the R model with.
     ''' </summary>
     Public strScript As String
@@ -56,6 +61,10 @@ Public Class clsTransformationRModel
     ''' Used as part of the condition in some transformations.
     ''' </summary>
     Public strValueDefault As String = "TRUE"
+
+    ''' <summary>
+    ''' The dictionary key to use to find the value to update in the R model.
+    ''' </summary>
     Public strValueKey As String
 
     ''' <summary>
@@ -72,6 +81,7 @@ Public Class clsTransformationRModel
         operatorUpdateParam
         operatorUpdateParamPresentation
         quoteEmptyString
+        scriptInsert
     End Enum
 
     <JsonConverter(GetType(StringEnumConverter))>
@@ -87,50 +97,54 @@ Public Class clsTransformationRModel
     '''                                      when performing the transformation</param>
     Public Sub updateRModel(rScript As RScript, dctConfigurableValues As Dictionary(Of String, String))
 
-        Dim strValue As String = If(String.IsNullOrEmpty(strValueKey), strScript, dctConfigurableValues(strValueKey))
+        strScript = If(String.IsNullOrEmpty(strValueKey), strScript, dctConfigurableValues(strValueKey))
+        strParameterName = If(String.IsNullOrEmpty(strParameterNameKey), strParameterName, dctConfigurableValues(strParameterNameKey))
 
         Select Case enumTransformationType
             Case TransformationType.functionAddParam
-                rScript.FunctionAddParam(iStatementNumber, strFunctionName, strParameterName, strValue, iParameterNumber, bIsQuoted)
+                rScript.FunctionAddParam(iStatementNumber, strFunctionName, strParameterName, strScript, iParameterNumber, bIsQuoted)
 
             Case TransformationType.functionAddRemoveParamByName
-                If String.IsNullOrEmpty(strValue) OrElse strValue = strValueDefault Then
+                If String.IsNullOrEmpty(strScript) OrElse strScript = strValueDefault Then
                     rScript.FunctionRemoveParamByName(iStatementNumber, strFunctionName, strParameterName)
                 Else
-                    rScript.FunctionAddParam(iStatementNumber, strFunctionName, strParameterName, strValue, iParameterNumber, bIsQuoted)
+                    rScript.FunctionAddParam(iStatementNumber, strFunctionName, strParameterName, strScript, iParameterNumber, bIsQuoted)
                 End If
 
             Case TransformationType.functionRemoveParamByName
                 rScript.FunctionRemoveParamByName(iStatementNumber, strFunctionName, strParameterName)
 
             Case TransformationType.functionUpdateParamValue
-                rScript.FunctionUpdateParamValue(iStatementNumber, strFunctionName, iParameterNumber, strValue, bIsQuoted, iOccurence)
+                rScript.FunctionUpdateParamValue(iStatementNumber, strFunctionName, iParameterNumber, strScript, bIsQuoted, iOccurence)
 
             Case TransformationType.ifFalseExecuteChildTransformations
-                If Not strValue = strValueDefault Then
+                If Not strScript = strValueDefault Then
                     ExecuteChildTransformations(rScript, dctConfigurableValues)
                 End If
 
             Case TransformationType.ifTrueExecuteChildTransformations
-                If strValue = strValueDefault Then
+                If strScript = strValueDefault Then
                     ExecuteChildTransformations(rScript, dctConfigurableValues)
                 End If
 
             Case TransformationType.operatorAddParam
-                rScript.OperatorAddParam(iStatementNumber, strFunctionName, iParameterNumber, strValue)
+                rScript.OperatorAddParam(iStatementNumber, strFunctionName, iParameterNumber, strScript)
 
             Case TransformationType.operatorUpdateParam
-                rScript.OperatorUpdateParam(iStatementNumber, strFunctionName, iParameterNumber, strValue)
+                rScript.OperatorUpdateParam(iStatementNumber, strFunctionName, iParameterNumber, strScript, bIsQuoted)
 
             Case TransformationType.operatorUpdateParamPresentation
-                rScript.OperatorUpdateParamPresentation(iStatementNumber, strFunctionName, iParameterNumber, strValue)
+                rScript.OperatorUpdateParamPresentation(iStatementNumber, strFunctionName, iParameterNumber, strScript)
 
             Case TransformationType.quoteEmptyString
-                If String.IsNullOrEmpty(strValue) Then
+                If String.IsNullOrEmpty(strScript) Then
                     rScript.FunctionUpdateParamValue(iStatementNumber, strFunctionName, iParameterNumber, "", True)
                 Else
-                    rScript.FunctionUpdateParamValue(iStatementNumber, strFunctionName, iParameterNumber, strValue, bIsQuoted)
+                    rScript.FunctionUpdateParamValue(iStatementNumber, strFunctionName, iParameterNumber, strScript, bIsQuoted)
                 End If
+
+            Case TransformationType.scriptInsert
+                rScript.ScriptInsert(iStatementNumber, strScript)
         End Select
     End Sub
 
