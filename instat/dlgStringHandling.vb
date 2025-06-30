@@ -406,7 +406,7 @@ Public Class dlgStringHandling
         clsStrToLowerFunction.SetPackageName("stringr")
         clsStrToLowerFunction.SetRCommand("str_to_lower")
 
-        'clsDetectFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
+        clsDetectFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
         NewColumnName()
     End Sub
@@ -830,11 +830,11 @@ Public Class dlgStringHandling
             End If
         End If
 
-        'PrefixIncrement()
+        PrefixIncrement()
     End Sub
-    'Private Sub PrefixIncrement()
-    '    If rdoReplace.Checked AndAlso rdoMultiple.Checked Then
-    '        iCountPrefix += 1
-    '    End If
-    'End Sub
+    Private Sub PrefixIncrement()
+        If rdoReplace.Checked AndAlso rdoMultiple.Checked Then
+            iCountPrefix += 1
+        End If
+    End Sub
 End Class
