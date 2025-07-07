@@ -191,7 +191,6 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverExtremRian.SetParameter(New RParameter("extreme_rain_days_col", 13))
         ucrReceiverExtremRian.Selector = ucrSelectorDefineAnnualRain
         ucrReceiverExtremRian.SetParameterIsString()
-        ucrReceiverExtremRian.Tag = "annual_rain_col"
         ucrReceiverExtremRian.bExcludeFromSelector = True
 
         ucrReceiverStartRainStatus.SetParameter(New RParameter("start_rains_status_column", 14))
@@ -474,7 +473,7 @@ Public Class sdgDefineAnnualRainfall
             ucrReceiverStartRainDate.ControlValueChanged, ucrReceiverStartRainDOY.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverExtremRian.ControlValueChanged
 
         If dlgExportClimaticDefinitions.ucrChkAnnualRainfall.Checked Then
-            If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (Not ucrReceiverAnnualRain.IsEmpty OrElse Not ucrReceiverEndRainsDate.IsEmpty OrElse Not ucrReceiverEndRainsDOY.IsEmpty OrElse ucrReceiverSeasonalLength.IsEmpty OrElse Not ucrReceiverExtremRian.IsEmpty OrElse Not ucrReceiverSeasonalRain.IsEmpty OrElse
+            If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (Not ucrReceiverAnnualRain.IsEmpty OrElse Not ucrReceiverEndRainsDate.IsEmpty OrElse Not ucrReceiverEndRainsDOY.IsEmpty OrElse Not ucrReceiverSeasonalLength.IsEmpty OrElse Not ucrReceiverExtremRian.IsEmpty OrElse Not ucrReceiverSeasonalRain.IsEmpty OrElse
              Not ucrReceiverEndSeasonDate.IsEmpty OrElse Not ucrReceiverEndSeasonDOY.IsEmpty OrElse Not ucrReceiverRainDaysSeason.IsEmpty OrElse Not ucrReceiverRainDaysYear.IsEmpty OrElse Not ucrReceiverStartRainDate.IsEmpty OrElse
              Not ucrReceiverStartRainDOY.IsEmpty) Then
 

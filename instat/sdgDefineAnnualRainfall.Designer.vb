@@ -25,6 +25,8 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblSeasonPlantingDay = New System.Windows.Forms.Label()
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.tbAnnualRainfall = New System.Windows.Forms.TabPage()
+        Me.lblExtremRain = New System.Windows.Forms.Label()
+        Me.ucrReceiverExtremRian = New instat.ucrReceiverSingle()
         Me.lblStartRainStatus = New System.Windows.Forms.Label()
         Me.ucrReceiverStartRainStatus = New instat.ucrReceiverSingle()
         Me.lblEndRainStatus = New System.Windows.Forms.Label()
@@ -120,8 +122,6 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverMonthlyTemp = New instat.ucrReceiverSingle()
         Me.ucrSelecetorMonthlyTemp = New instat.ucrSelectorByDataFrame()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
-        Me.lblExtremRain = New System.Windows.Forms.Label()
-        Me.ucrReceiverExtremRian = New instat.ucrReceiverSingle()
         Me.tbSummaries.SuspendLayout()
         Me.tbAnnualRainfall.SuspendLayout()
         Me.tbCropSuccessProp.SuspendLayout()
@@ -191,11 +191,33 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbAnnualRainfall.Controls.Add(Me.ucrSelectorDefineAnnualRain)
         Me.tbAnnualRainfall.Location = New System.Drawing.Point(4, 22)
         Me.tbAnnualRainfall.Name = "tbAnnualRainfall"
-        Me.tbAnnualRainfall.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.tbAnnualRainfall.Padding = New System.Windows.Forms.Padding(3)
         Me.tbAnnualRainfall.Size = New System.Drawing.Size(515, 480)
         Me.tbAnnualRainfall.TabIndex = 0
         Me.tbAnnualRainfall.Text = "Annual Rainfall"
         Me.tbAnnualRainfall.UseVisualStyleBackColor = True
+        '
+        'lblExtremRain
+        '
+        Me.lblExtremRain.AutoSize = True
+        Me.lblExtremRain.Location = New System.Drawing.Point(12, 396)
+        Me.lblExtremRain.Name = "lblExtremRain"
+        Me.lblExtremRain.Size = New System.Drawing.Size(86, 13)
+        Me.lblExtremRain.TabIndex = 11
+        Me.lblExtremRain.Text = "Extreme Rainfall:"
+        '
+        'ucrReceiverExtremRian
+        '
+        Me.ucrReceiverExtremRian.AutoSize = True
+        Me.ucrReceiverExtremRian.frmParent = Nothing
+        Me.ucrReceiverExtremRian.Location = New System.Drawing.Point(9, 414)
+        Me.ucrReceiverExtremRian.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverExtremRian.Name = "ucrReceiverExtremRian"
+        Me.ucrReceiverExtremRian.Selector = Nothing
+        Me.ucrReceiverExtremRian.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverExtremRian.strNcFilePath = ""
+        Me.ucrReceiverExtremRian.TabIndex = 12
+        Me.ucrReceiverExtremRian.ucrSelector = Nothing
         '
         'lblStartRainStatus
         '
@@ -203,7 +225,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblStartRainStatus.Location = New System.Drawing.Point(264, 326)
         Me.lblStartRainStatus.Name = "lblStartRainStatus"
         Me.lblStartRainStatus.Size = New System.Drawing.Size(95, 13)
-        Me.lblStartRainStatus.TabIndex = 27
+        Me.lblStartRainStatus.TabIndex = 29
         Me.lblStartRainStatus.Text = "Start Rains Status:"
         '
         'ucrReceiverStartRainStatus
@@ -216,7 +238,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverStartRainStatus.Selector = Nothing
         Me.ucrReceiverStartRainStatus.Size = New System.Drawing.Size(120, 25)
         Me.ucrReceiverStartRainStatus.strNcFilePath = ""
-        Me.ucrReceiverStartRainStatus.TabIndex = 28
+        Me.ucrReceiverStartRainStatus.TabIndex = 30
         Me.ucrReceiverStartRainStatus.ucrSelector = Nothing
         '
         'lblEndRainStatus
@@ -225,7 +247,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblEndRainStatus.Location = New System.Drawing.Point(264, 367)
         Me.lblEndRainStatus.Name = "lblEndRainStatus"
         Me.lblEndRainStatus.Size = New System.Drawing.Size(92, 13)
-        Me.lblEndRainStatus.TabIndex = 29
+        Me.lblEndRainStatus.TabIndex = 31
         Me.lblEndRainStatus.Text = "End Rains Status:"
         '
         'ucrReceiverEndRainStatus
@@ -238,7 +260,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverEndRainStatus.Selector = Nothing
         Me.ucrReceiverEndRainStatus.Size = New System.Drawing.Size(120, 25)
         Me.ucrReceiverEndRainStatus.strNcFilePath = ""
-        Me.ucrReceiverEndRainStatus.TabIndex = 30
+        Me.ucrReceiverEndRainStatus.TabIndex = 32
         Me.ucrReceiverEndRainStatus.ucrSelector = Nothing
         '
         'lblEndSeasonStatus
@@ -247,7 +269,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblEndSeasonStatus.Location = New System.Drawing.Point(264, 408)
         Me.lblEndSeasonStatus.Name = "lblEndSeasonStatus"
         Me.lblEndSeasonStatus.Size = New System.Drawing.Size(101, 13)
-        Me.lblEndSeasonStatus.TabIndex = 31
+        Me.lblEndSeasonStatus.TabIndex = 33
         Me.lblEndSeasonStatus.Text = "End Season Status:"
         '
         'ucrReceiverEndSeasonStatus
@@ -260,7 +282,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverEndSeasonStatus.Selector = Nothing
         Me.ucrReceiverEndSeasonStatus.Size = New System.Drawing.Size(120, 25)
         Me.ucrReceiverEndSeasonStatus.strNcFilePath = ""
-        Me.ucrReceiverEndSeasonStatus.TabIndex = 32
+        Me.ucrReceiverEndSeasonStatus.TabIndex = 34
         Me.ucrReceiverEndSeasonStatus.ucrSelector = Nothing
         '
         'lblRainyDaysYear
@@ -269,7 +291,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblRainyDaysYear.Location = New System.Drawing.Point(264, 86)
         Me.lblRainyDaysYear.Name = "lblRainyDaysYear"
         Me.lblRainyDaysYear.Size = New System.Drawing.Size(103, 13)
-        Me.lblRainyDaysYear.TabIndex = 15
+        Me.lblRainyDaysYear.TabIndex = 17
         Me.lblRainyDaysYear.Text = " Rainy Days in Year:"
         '
         'ucrReceiverRainDaysYear
@@ -282,7 +304,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverRainDaysYear.Selector = Nothing
         Me.ucrReceiverRainDaysYear.Size = New System.Drawing.Size(120, 25)
         Me.ucrReceiverRainDaysYear.strNcFilePath = ""
-        Me.ucrReceiverRainDaysYear.TabIndex = 16
+        Me.ucrReceiverRainDaysYear.TabIndex = 18
         Me.ucrReceiverRainDaysYear.ucrSelector = Nothing
         '
         'lblNoRainDaysSeason
@@ -291,7 +313,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblNoRainDaysSeason.Location = New System.Drawing.Point(264, 41)
         Me.lblNoRainDaysSeason.Name = "lblNoRainDaysSeason"
         Me.lblNoRainDaysSeason.Size = New System.Drawing.Size(117, 13)
-        Me.lblNoRainDaysSeason.TabIndex = 13
+        Me.lblNoRainDaysSeason.TabIndex = 15
         Me.lblNoRainDaysSeason.Text = " Rainy Days in Season:"
         '
         'lblSeasonalLength
@@ -300,7 +322,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblSeasonalLength.Location = New System.Drawing.Point(264, 124)
         Me.lblSeasonalLength.Name = "lblSeasonalLength"
         Me.lblSeasonalLength.Size = New System.Drawing.Size(90, 13)
-        Me.lblSeasonalLength.TabIndex = 17
+        Me.lblSeasonalLength.TabIndex = 19
         Me.lblSeasonalLength.Text = "Seasonal Length:"
         '
         'lblSeasonalRain
@@ -309,7 +331,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblSeasonalRain.Location = New System.Drawing.Point(12, 436)
         Me.lblSeasonalRain.Name = "lblSeasonalRain"
         Me.lblSeasonalRain.Size = New System.Drawing.Size(79, 13)
-        Me.lblSeasonalRain.TabIndex = 11
+        Me.lblSeasonalRain.TabIndex = 13
         Me.lblSeasonalRain.Text = "Seasonal Rain:"
         '
         'lblAnnualRain
@@ -327,7 +349,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblEndSeasonDate.Location = New System.Drawing.Point(264, 285)
         Me.lblEndSeasonDate.Name = "lblEndSeasonDate"
         Me.lblEndSeasonDate.Size = New System.Drawing.Size(97, 13)
-        Me.lblEndSeasonDate.TabIndex = 25
+        Me.lblEndSeasonDate.TabIndex = 27
         Me.lblEndSeasonDate.Text = "End Season(Date):"
         '
         'lblEndSeasonDOY
@@ -336,7 +358,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblEndSeasonDOY.Location = New System.Drawing.Point(264, 250)
         Me.lblEndSeasonDOY.Name = "lblEndSeasonDOY"
         Me.lblEndSeasonDOY.Size = New System.Drawing.Size(97, 13)
-        Me.lblEndSeasonDOY.TabIndex = 23
+        Me.lblEndSeasonDOY.TabIndex = 25
         Me.lblEndSeasonDOY.Text = "End Season(DOY):"
         '
         'lblEndRainDate
@@ -345,7 +367,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblEndRainDate.Location = New System.Drawing.Point(264, 207)
         Me.lblEndRainDate.Name = "lblEndRainDate"
         Me.lblEndRainDate.Size = New System.Drawing.Size(83, 13)
-        Me.lblEndRainDate.TabIndex = 21
+        Me.lblEndRainDate.TabIndex = 23
         Me.lblEndRainDate.Text = "End Rain(Date):"
         '
         'lblEndRainsDOY
@@ -354,7 +376,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.lblEndRainsDOY.Location = New System.Drawing.Point(264, 167)
         Me.lblEndRainsDOY.Name = "lblEndRainsDOY"
         Me.lblEndRainsDOY.Size = New System.Drawing.Size(83, 13)
-        Me.lblEndRainsDOY.TabIndex = 19
+        Me.lblEndRainsDOY.TabIndex = 21
         Me.lblEndRainsDOY.Text = "End Rain(DOY):"
         '
         'lblStartRainDate
@@ -455,7 +477,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverEndSeasonDate.Selector = Nothing
         Me.ucrReceiverEndSeasonDate.Size = New System.Drawing.Size(120, 25)
         Me.ucrReceiverEndSeasonDate.strNcFilePath = ""
-        Me.ucrReceiverEndSeasonDate.TabIndex = 26
+        Me.ucrReceiverEndSeasonDate.TabIndex = 28
         Me.ucrReceiverEndSeasonDate.ucrSelector = Nothing
         '
         'ucrReceiverEndSeasonDOY
@@ -468,7 +490,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverEndSeasonDOY.Selector = Nothing
         Me.ucrReceiverEndSeasonDOY.Size = New System.Drawing.Size(120, 25)
         Me.ucrReceiverEndSeasonDOY.strNcFilePath = ""
-        Me.ucrReceiverEndSeasonDOY.TabIndex = 24
+        Me.ucrReceiverEndSeasonDOY.TabIndex = 26
         Me.ucrReceiverEndSeasonDOY.ucrSelector = Nothing
         '
         'ucrReceiverEndRainsDOY
@@ -481,7 +503,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverEndRainsDOY.Selector = Nothing
         Me.ucrReceiverEndRainsDOY.Size = New System.Drawing.Size(120, 25)
         Me.ucrReceiverEndRainsDOY.strNcFilePath = ""
-        Me.ucrReceiverEndRainsDOY.TabIndex = 20
+        Me.ucrReceiverEndRainsDOY.TabIndex = 22
         Me.ucrReceiverEndRainsDOY.ucrSelector = Nothing
         '
         'ucrReceiverEndRainsDate
@@ -494,7 +516,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverEndRainsDate.Selector = Nothing
         Me.ucrReceiverEndRainsDate.Size = New System.Drawing.Size(120, 25)
         Me.ucrReceiverEndRainsDate.strNcFilePath = ""
-        Me.ucrReceiverEndRainsDate.TabIndex = 22
+        Me.ucrReceiverEndRainsDate.TabIndex = 24
         Me.ucrReceiverEndRainsDate.ucrSelector = Nothing
         '
         'ucrReceiverSeasonalLength
@@ -507,7 +529,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverSeasonalLength.Selector = Nothing
         Me.ucrReceiverSeasonalLength.Size = New System.Drawing.Size(120, 25)
         Me.ucrReceiverSeasonalLength.strNcFilePath = ""
-        Me.ucrReceiverSeasonalLength.TabIndex = 18
+        Me.ucrReceiverSeasonalLength.TabIndex = 20
         Me.ucrReceiverSeasonalLength.ucrSelector = Nothing
         '
         'ucrReceiverRainDaysSeason
@@ -520,7 +542,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverRainDaysSeason.Selector = Nothing
         Me.ucrReceiverRainDaysSeason.Size = New System.Drawing.Size(120, 25)
         Me.ucrReceiverRainDaysSeason.strNcFilePath = ""
-        Me.ucrReceiverRainDaysSeason.TabIndex = 14
+        Me.ucrReceiverRainDaysSeason.TabIndex = 16
         Me.ucrReceiverRainDaysSeason.ucrSelector = Nothing
         '
         'ucrReceiverSeasonalRain
@@ -533,7 +555,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrReceiverSeasonalRain.Selector = Nothing
         Me.ucrReceiverSeasonalRain.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverSeasonalRain.strNcFilePath = ""
-        Me.ucrReceiverSeasonalRain.TabIndex = 12
+        Me.ucrReceiverSeasonalRain.TabIndex = 14
         Me.ucrReceiverSeasonalRain.ucrSelector = Nothing
         '
         'ucrReceiverAnnualRain
@@ -558,7 +580,7 @@ Partial Class sdgDefineAnnualRainfall
         Me.ucrSelectorDefineAnnualRain.Location = New System.Drawing.Point(7, 5)
         Me.ucrSelectorDefineAnnualRain.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDefineAnnualRain.Name = "ucrSelectorDefineAnnualRain"
-        Me.ucrSelectorDefineAnnualRain.Size = New System.Drawing.Size(226, 268)
+        Me.ucrSelectorDefineAnnualRain.Size = New System.Drawing.Size(226, 182)
         Me.ucrSelectorDefineAnnualRain.TabIndex = 0
         '
         'tbCropSuccessProp
@@ -578,8 +600,8 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbCropSuccessProp.Controls.Add(Me.ucrSelectorCropProp)
         Me.tbCropSuccessProp.Location = New System.Drawing.Point(4, 22)
         Me.tbCropSuccessProp.Name = "tbCropSuccessProp"
-        Me.tbCropSuccessProp.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
-        Me.tbCropSuccessProp.Size = New System.Drawing.Size(515, 447)
+        Me.tbCropSuccessProp.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbCropSuccessProp.Size = New System.Drawing.Size(515, 480)
         Me.tbCropSuccessProp.TabIndex = 1
         Me.tbCropSuccessProp.Text = "Crop Success Prop"
         Me.tbCropSuccessProp.UseVisualStyleBackColor = True
@@ -741,8 +763,8 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbSeasonStartProb.Controls.Add(Me.ucrSelectorSeasonStartProp)
         Me.tbSeasonStartProb.Location = New System.Drawing.Point(4, 22)
         Me.tbSeasonStartProb.Name = "tbSeasonStartProb"
-        Me.tbSeasonStartProb.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
-        Me.tbSeasonStartProb.Size = New System.Drawing.Size(515, 447)
+        Me.tbSeasonStartProb.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbSeasonStartProb.Size = New System.Drawing.Size(515, 480)
         Me.tbSeasonStartProb.TabIndex = 2
         Me.tbSeasonStartProb.Text = "Season Start Prob"
         Me.tbSeasonStartProb.UseVisualStyleBackColor = True
@@ -859,8 +881,8 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbAnnualTempSummaries.Controls.Add(Me.ucrSelectorAnnualTemp)
         Me.tbAnnualTempSummaries.Location = New System.Drawing.Point(4, 22)
         Me.tbAnnualTempSummaries.Name = "tbAnnualTempSummaries"
-        Me.tbAnnualTempSummaries.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
-        Me.tbAnnualTempSummaries.Size = New System.Drawing.Size(515, 447)
+        Me.tbAnnualTempSummaries.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbAnnualTempSummaries.Size = New System.Drawing.Size(515, 480)
         Me.tbAnnualTempSummaries.TabIndex = 3
         Me.tbAnnualTempSummaries.Text = "Annual Temperature"
         Me.tbAnnualTempSummaries.UseVisualStyleBackColor = True
@@ -1076,8 +1098,8 @@ Partial Class sdgDefineAnnualRainfall
         Me.tbMonthlyTemp.Controls.Add(Me.ucrSelecetorMonthlyTemp)
         Me.tbMonthlyTemp.Location = New System.Drawing.Point(4, 22)
         Me.tbMonthlyTemp.Name = "tbMonthlyTemp"
-        Me.tbMonthlyTemp.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
-        Me.tbMonthlyTemp.Size = New System.Drawing.Size(515, 447)
+        Me.tbMonthlyTemp.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbMonthlyTemp.Size = New System.Drawing.Size(515, 480)
         Me.tbMonthlyTemp.TabIndex = 4
         Me.tbMonthlyTemp.Text = "Monthly Temperature"
         Me.tbMonthlyTemp.UseVisualStyleBackColor = True
@@ -1296,32 +1318,10 @@ Partial Class sdgDefineAnnualRainfall
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.Location = New System.Drawing.Point(157, 527)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(224, 30)
         Me.ucrBase.TabIndex = 35
-        '
-        'lblExtremRain
-        '
-        Me.lblExtremRain.AutoSize = True
-        Me.lblExtremRain.Location = New System.Drawing.Point(8, 396)
-        Me.lblExtremRain.Name = "lblExtremRain"
-        Me.lblExtremRain.Size = New System.Drawing.Size(86, 13)
-        Me.lblExtremRain.TabIndex = 33
-        Me.lblExtremRain.Text = "Extreme Rainfall:"
-        '
-        'ucrReceiverExtremRian
-        '
-        Me.ucrReceiverExtremRian.AutoSize = True
-        Me.ucrReceiverExtremRian.frmParent = Me
-        Me.ucrReceiverExtremRian.Location = New System.Drawing.Point(14, 414)
-        Me.ucrReceiverExtremRian.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverExtremRian.Name = "ucrReceiverExtremRian"
-        Me.ucrReceiverExtremRian.Selector = Nothing
-        Me.ucrReceiverExtremRian.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverExtremRian.strNcFilePath = ""
-        Me.ucrReceiverExtremRian.TabIndex = 34
-        Me.ucrReceiverExtremRian.ucrSelector = Nothing
         '
         'sdgDefineAnnualRainfall
         '

@@ -199,9 +199,9 @@ Partial Class dlgExportClimaticDefinitions
         'cmdDefine
         '
         Me.cmdDefine.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDefine.Location = New System.Drawing.Point(230, 443)
+        Me.cmdDefine.Location = New System.Drawing.Point(330, 449)
         Me.cmdDefine.Name = "cmdDefine"
-        Me.cmdDefine.Size = New System.Drawing.Size(80, 29)
+        Me.cmdDefine.Size = New System.Drawing.Size(125, 25)
         Me.cmdDefine.TabIndex = 72
         Me.cmdDefine.Text = "Define"
         Me.cmdDefine.UseVisualStyleBackColor = True
@@ -271,7 +271,7 @@ Partial Class dlgExportClimaticDefinitions
         '
         Me.ucrChkIncludeSummaryData.AutoSize = True
         Me.ucrChkIncludeSummaryData.Checked = False
-        Me.ucrChkIncludeSummaryData.Location = New System.Drawing.Point(6, 442)
+        Me.ucrChkIncludeSummaryData.Location = New System.Drawing.Point(6, 445)
         Me.ucrChkIncludeSummaryData.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkIncludeSummaryData.Name = "ucrChkIncludeSummaryData"
         Me.ucrChkIncludeSummaryData.Size = New System.Drawing.Size(221, 31)

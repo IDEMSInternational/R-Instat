@@ -287,24 +287,29 @@ Public Class dlgExportClimaticDefinitions
 
     Private Sub TestOkEnabled()
         If rdoUploadSummaries.Checked Then
-            If Not ucrReceiverStation.IsEmpty AndAlso
-           Not ucrReceiverYear.IsEmpty AndAlso
-           Not ucrInputCountry.IsEmpty AndAlso
-           Not ucrInputDefinitionsID.IsEmpty AndAlso
-           Not ucrInputTokenPath.IsEmpty Then
+            ' Basic required fields
+            Dim bRequiredFieldsFilled As Boolean = Not ucrReceiverStation.IsEmpty AndAlso
+                                               Not ucrReceiverYear.IsEmpty AndAlso
+                                               Not ucrInputCountry.IsEmpty AndAlso
+                                               Not ucrInputDefinitionsID.IsEmpty AndAlso
+                                               Not ucrInputTokenPath.IsEmpty
 
-                If (ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked) AndAlso
-                   Not ucrReceiverCropData.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                ElseIf ucrChkAnnualRainfall.Checked AndAlso
-                       Not ucrReceiverRain.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                ElseIf (ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked) AndAlso
-                       Not ucrReceiverDataYear.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                ElseIf ucrChkMonthlyTemp.Checked AndAlso
-                       Not ucrReceiverMonth.IsEmpty AndAlso
-                       Not ucrReceiverDataYearMonth.IsEmpty Then
+            If bRequiredFieldsFilled Then
+                ' Individual validity checks
+                Dim bCropChecked As Boolean = ucrChkCropSuccessProp.Checked OrElse ucrChkSeasonStartProp.Checked
+                Dim bCropOK As Boolean = Not bCropChecked OrElse Not ucrReceiverCropData.IsEmpty
+
+                Dim bAnnualRainOK As Boolean = Not ucrChkAnnualRainfall.Checked OrElse
+                                           (Not ucrReceiverRain.IsEmpty AndAlso Not ucrReceiverDataYear.IsEmpty)
+
+                Dim bAnnualTempOK As Boolean = Not ucrChkAnnualTemp.Checked OrElse
+                                           Not ucrReceiverDataYear.IsEmpty
+
+                Dim bMonthlyTempOK As Boolean = Not ucrChkMonthlyTemp.Checked OrElse
+                                            (Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverDataYearMonth.IsEmpty)
+
+                ' Final OK decision
+                If bCropOK AndAlso bAnnualRainOK AndAlso bAnnualTempOK AndAlso bMonthlyTempOK Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
@@ -312,14 +317,19 @@ Public Class dlgExportClimaticDefinitions
             Else
                 ucrBase.OKEnabled(False)
             End If
+
         Else
-            If Not ucrReceiverStationName.IsEmpty AndAlso Not ucrInputTokenPath.IsEmpty AndAlso Not ucrInputCountryMetadata.IsEmpty Then
+            ' Non-upload mode (metadata)
+            If Not ucrReceiverStationName.IsEmpty AndAlso
+           Not ucrInputTokenPath.IsEmpty AndAlso
+           Not ucrInputCountryMetadata.IsEmpty Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
         End If
     End Sub
+
 
     Private Sub AddRemoveSummary()
         If ucrChkAnnualRainfall.Checked OrElse ucrChkAnnualTemp.Checked OrElse ucrChkCropSuccessProp.Checked OrElse ucrChkExtremes.Checked OrElse ucrChkMonthlyTemp.Checked OrElse ucrChkSeasonStartProp.Checked Then
