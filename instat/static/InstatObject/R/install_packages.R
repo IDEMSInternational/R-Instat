@@ -194,7 +194,7 @@ packs <-
     "PlackettLuce"
  )
 
-#install.packages(packs, dependencies = TRUE, repos='https://cloud.r-project.org', type="win.binary")
+install.packages(packs, dependencies = TRUE, repos='https://cloud.r-project.org', type="win.binary")
 
 #install.packages("https://cran.r-project.org/src/contrib/Archive/getPass/getPass_0.2-2.tar.gz", repos=NULL, type="source")
 #install.packages("https://cran.r-project.org/src/contrib/Archive/PCICt/PCICt_0.5-4.tar.gz", repos=NULL, type="source")
