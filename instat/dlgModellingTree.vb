@@ -86,7 +86,7 @@ Public Class dlgModellingTree
         ucrReceiverExpressionModellingTree.bWithQuotes = False
         ucrReceiverExpressionModellingTree.AddtoCombobox("1")
         ucrReceiverExpressionModellingTree.strSelectorHeading = "Variables"
-        ucrReceiverExpressionModellingTree.SetExcludedDataTypes({"character"})
+        ucrReceiverExpressionModellingTree.SetIncludedDataTypes({"numeric", "factor"})
 
         ucrInputCheck.SetLinkedDisplayControl(lblCheckVareity)
 
