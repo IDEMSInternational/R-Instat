@@ -9,7 +9,7 @@ install.packages("stringi", dependencies = FALSE,  repos='https://cloud.r-projec
 install.packages("stringr", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
 install.packages("RMySQL", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
 install.packages("terra", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
-install.packages("XML", dependencies = FALSE, repos='http://cran.us.r-project.org', type = "win.binary")
+
 
 #Install packages from CRAN 
 packs <-
