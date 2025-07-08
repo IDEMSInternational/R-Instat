@@ -265,7 +265,7 @@ Partial Class dlgClimaticSummary
         Me.cmdDoyRange.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdDoyRange.Location = New System.Drawing.Point(4, 397)
         Me.cmdDoyRange.Name = "cmdDoyRange"
-        Me.cmdDoyRange.Size = New System.Drawing.Size(87, 26)
+        Me.cmdDoyRange.Size = New System.Drawing.Size(118, 26)
         Me.cmdDoyRange.TabIndex = 21
         Me.cmdDoyRange.Tag = ""
         Me.cmdDoyRange.Text = "Day Range"
@@ -334,10 +334,10 @@ Partial Class dlgClimaticSummary
         Me.ucrInputFilterPreview.AutoSize = True
         Me.ucrInputFilterPreview.IsMultiline = False
         Me.ucrInputFilterPreview.IsReadOnly = True
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(90, 400)
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(122, 400)
         Me.ucrInputFilterPreview.Margin = New System.Windows.Forms.Padding(9)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(210, 22)
         Me.ucrInputFilterPreview.TabIndex = 22
         '
         'ucrSelectorVariable
@@ -440,10 +440,10 @@ Partial Class dlgClimaticSummary
         '
         Me.ucrChkDayRange.AutoSize = True
         Me.ucrChkDayRange.Checked = False
-        Me.ucrChkDayRange.Location = New System.Drawing.Point(331, 403)
+        Me.ucrChkDayRange.Location = New System.Drawing.Point(334, 401)
         Me.ucrChkDayRange.Margin = New System.Windows.Forms.Padding(6)
         Me.ucrChkDayRange.Name = "ucrChkDayRange"
-        Me.ucrChkDayRange.Size = New System.Drawing.Size(82, 27)
+        Me.ucrChkDayRange.Size = New System.Drawing.Size(108, 27)
         Me.ucrChkDayRange.TabIndex = 25
         '
         'dlgClimaticSummary
@@ -451,7 +451,7 @@ Partial Class dlgClimaticSummary
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(436, 478)
+        Me.ClientSize = New System.Drawing.Size(452, 478)
         Me.Controls.Add(Me.ucrChkDayRange)
         Me.Controls.Add(Me.rdoDaily)
         Me.Controls.Add(Me.rdoStation)
