@@ -28,5 +28,14 @@ Public Class clsWarningMessage
                                             MsgBoxStyle.OkCancel + MsgBoxStyle.Exclamation, "Warning")
         Return result = MsgBoxResult.Ok
     End Function
+
+    Public Shared Function ConfirmDelete() As Boolean
+        If Not ShowWarning Then Return True
+
+        Dim result As MsgBoxResult = MsgBox("Are you sure you want to delete these column(s)?" & Environment.NewLine & "This action cannot be undone.",
+                                        MsgBoxStyle.YesNo + MsgBoxStyle.Exclamation, "Delete Column")
+        Return result = MsgBoxResult.Yes
+    End Function
+
 End Class
 

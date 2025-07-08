@@ -397,6 +397,7 @@ Partial Class frmMain
         Me.mnuEditPasteNew = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditWordwrap = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDisableWarningMessage = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
         Me.tstatus = New System.Windows.Forms.ToolStripStatusLabel()
@@ -773,7 +774,6 @@ Partial Class frmMain
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDisableWarningMessage = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3190,6 +3190,13 @@ Partial Class frmMain
         Me.mnuEditSelectAll.Tag = "Select_All"
         Me.mnuEditSelectAll.Text = "Select All "
         '
+        'mnuDisableWarningMessage
+        '
+        Me.mnuDisableWarningMessage.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuDisableWarningMessage.Name = "mnuDisableWarningMessage"
+        Me.mnuDisableWarningMessage.Size = New System.Drawing.Size(209, 22)
+        Me.mnuDisableWarningMessage.Text = "Disable Warning Message"
+        '
         'stsStrip
         '
         Me.stsStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -5580,7 +5587,7 @@ Partial Class frmMain
         Me.splOverall.BackColor = System.Drawing.Color.LightGray
         Me.splOverall.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splOverall.Location = New System.Drawing.Point(0, 61)
-        Me.splOverall.Margin = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.splOverall.Margin = New System.Windows.Forms.Padding(1)
         Me.splOverall.Name = "splOverall"
         Me.splOverall.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -5603,7 +5610,7 @@ Partial Class frmMain
         Me.splExtraWindows.BackColor = System.Drawing.Color.LightGray
         Me.splExtraWindows.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splExtraWindows.Location = New System.Drawing.Point(0, 0)
-        Me.splExtraWindows.Margin = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.splExtraWindows.Margin = New System.Windows.Forms.Padding(1)
         Me.splExtraWindows.Name = "splExtraWindows"
         '
         'splExtraWindows.Panel1
@@ -5625,7 +5632,7 @@ Partial Class frmMain
         Me.splMetadata.BackColor = System.Drawing.Color.LightGray
         Me.splMetadata.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splMetadata.Location = New System.Drawing.Point(0, 0)
-        Me.splMetadata.Margin = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.splMetadata.Margin = New System.Windows.Forms.Padding(1)
         Me.splMetadata.Name = "splMetadata"
         '
         'splMetadata.Panel1
@@ -5683,7 +5690,7 @@ Partial Class frmMain
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
         Me.splDataOutput.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splDataOutput.Location = New System.Drawing.Point(0, 0)
-        Me.splDataOutput.Margin = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.splDataOutput.Margin = New System.Windows.Forms.Padding(1)
         Me.splDataOutput.Name = "splDataOutput"
         '
         'splDataOutput.Panel1
@@ -5765,12 +5772,6 @@ Partial Class frmMain
         Me.ToolStripMenuItem9.Size = New System.Drawing.Size(181, 26)
         Me.ToolStripMenuItem9.Text = "Correlations..."
         '
-        'mnuDisableWarningMessage
-        '
-        Me.mnuDisableWarningMessage.Name = "mnuDisableWarningMessage"
-        Me.mnuDisableWarningMessage.Size = New System.Drawing.Size(209, 22)
-        Me.mnuDisableWarningMessage.Text = "Disable Warning Message"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -5783,7 +5784,7 @@ Partial Class frmMain
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuBar
-        Me.Margin = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.Margin = New System.Windows.Forms.Padding(1)
         Me.Name = "frmMain"
         Me.Text = "R-Instat .."
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
