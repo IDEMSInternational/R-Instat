@@ -30,6 +30,7 @@ Public Class dlgClimdexIndices
     Private clsAddClimexIndices As New RFunction
     Private clsPipeOperator As New ROperator
     Private clsDollarSign0Operator As New ROperator
+    Private clsDollarSign2Operator As New ROperator
     Private clsDollarSign1Operator As New ROperator
     Private clsAssignOperator As New ROperator
     Private clsVectorsFunction As New RFunction
@@ -122,6 +123,7 @@ Public Class dlgClimdexIndices
         clsPipeOperator = New ROperator
         clsDollarSign0Operator = New ROperator
         clsDollarSign1Operator = New ROperator
+        clsDollarSign2Operator = New ROperator
         clsAssignOperator = New ROperator
         clsVectorsFunction = New RFunction
 
@@ -145,12 +147,13 @@ Public Class dlgClimdexIndices
         clsPipeOperator.SetAssignTo(ucrSelectorClimdex.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         clsDollarSign0Operator.SetOperation("$")
-        clsDollarSign0Operator.AddParameter("left", "ci", iPosition:=0, bIncludeArgumentName:=False)
-        clsDollarSign0Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
+        clsDollarSign0Operator.AddParameter("left", clsRFunctionParameter:=clsClimdex, iPosition:=0, bIncludeArgumentName:=False)
+
+        clsDollarSign2Operator.SetOperation("$")
+        clsDollarSign2Operator.AddParameter("left", "ci", iPosition:=0, bIncludeArgumentName:=False)
 
         clsDollarSign1Operator.SetOperation("$")
         clsDollarSign1Operator.AddParameter("left", clsRFunctionParameter:=ucrSelectorClimdex.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0, bIncludeArgumentName:=False)
-        clsDollarSign1Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
 
         clsVectorsFunction.SetRCommand("vec_cast")
         clsVectorsFunction.SetPackageName("vctrs")
@@ -158,8 +161,9 @@ Public Class dlgClimdexIndices
         clsVectorsFunction.AddParameter("y", clsROperatorParameter:=clsDollarSign1Operator, iPosition:=1, bIncludeArgumentName:=False)
 
         clsAssignOperator.SetOperation("<-")
-        clsAssignOperator.AddParameter("left", clsROperatorParameter:=clsDollarSign0Operator, iPosition:=0, bIncludeArgumentName:=False)
+        clsAssignOperator.AddParameter("left", clsROperatorParameter:=clsDollarSign2Operator, iPosition:=0, bIncludeArgumentName:=False)
         clsAssignOperator.AddParameter("right", clsRFunctionParameter:=clsVectorsFunction, iPosition:=1, bIncludeArgumentName:=False)
+        clsAssignOperator.bBrackets = False
 
         clsIndices.SetRCommand("c")
 
@@ -180,7 +184,6 @@ Public Class dlgClimdexIndices
 
         ' For the sub dialog
         clsAddClimexIndices.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_climdex_indices")
-        clsAddClimexIndices.AddParameter("climdex_output", clsRFunctionParameter:=clsClimdex, iPosition:=1)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddClimexIndices)
         bResetSubdialog = True
@@ -188,12 +191,9 @@ Public Class dlgClimdexIndices
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrPnlAnnualMonthly.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("freq", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("station", iNewPosition:=3), iAdditionalPairNo:=1)
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("year", iNewPosition:=4), iAdditionalPairNo:=1)
         ucrReceiverMonth.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("month", iNewPosition:=5), iAdditionalPairNo:=1)
-        ' ucrReceiverStation.AddAdditionalCodeParameterPair(clsDollarSign0Operator, New RParameter("right", iNewPosition:=1), iAdditionalPairNo:=2)
-        'ucrReceiverStation.AddAdditionalCodeParameterPair(clsDollarSign1Operator, New RParameter("right", iNewPosition:=1), iAdditionalPairNo:=3)
 
         'ucrPnlAnnualMonthly.SetRCode(clsClimdex, bReset)
         ucrPnlAnnualMonthly.SetRCode(clsAddClimexIndices, bReset)
@@ -206,7 +206,6 @@ Public Class dlgClimdexIndices
         ucrReceiverTmax.SetRCode(clsClimdex, bReset)
         ucrReceiverTmin.SetRCode(clsClimdex, bReset)
 
-        SetClimdexData()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -327,14 +326,18 @@ Public Class dlgClimdexIndices
         If rdoStation.Checked Then
             clsClimdex.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignOperator, iPosition:=0)
+            clsAddClimexIndices.AddParameter("climdex_output", "ci", iPosition:=1)
+
         Else
             clsClimdex.AddParameter("data", clsRFunctionParameter:=ucrSelectorClimdex.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAssignOperator)
+            clsAddClimexIndices.AddParameter("climdex_output", clsRFunctionParameter:=clsClimdex, iPosition:=1)
         End If
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         clsDollarSign0Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
         clsDollarSign1Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
+        clsDollarSign2Operator.AddParameter("right", ucrReceiverStation.GetVariableNames(bWithQuotes:=False), iPosition:=1, bIncludeArgumentName:=False)
     End Sub
 End Class
