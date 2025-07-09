@@ -1,0 +1,182 @@
+name: Test R Package Installation
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+    
+jobs:
+  test-r-packages:
+    runs-on: windows-2022 
+    
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    
+    steps:
+    
+    # Check out R-Instat code
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0        
+
+    # Extract R version from clsRLink.vb
+    - name: Extract R version from clsRLink.vb
+      id: get-r-version
+      run: |
+        $content = Get-Content "instat\clsRLink.vb"
+        $versionLine = $content | Where-Object { $_ -match 'Private strRBundledVersion As String = "(.+)"' }
+        if ($versionLine) {
+          $rVersion = [regex]::Match($versionLine, 'Private strRBundledVersion As String = "(.+)"').Groups[1].Value
+          Write-Host "Found R version: $rVersion"
+          echo "r-version=$rVersion" >> $env:GITHUB_OUTPUT
+        } else {
+          Write-Host "Could not find R version, using default"
+          echo "r-version=4.4.1" >> $env:GITHUB_OUTPUT
+        }
+      shell: powershell
+     
+    # Install R using the extracted version
+    - name: Set up R
+      uses: r-lib/actions/setup-r@v2
+      with:
+        r-version: ${{ steps.get-r-version.outputs.r-version }}
+
+        
+    # Set up R-tools for package compilation
+    - name: Set R-tools
+      uses: r-windows/install-rtools@master 
+
+    # Test R package installation using the install_packages.R script
+    - name: Test R packages installation
+      run: |
+        Write-Host "Testing R package installation..."
+        $R_HOME = $(Rscript -e 'cat(R.home())')
+        Write-Host "Using R from: $R_HOME"
+        
+        $installScript = "${{ github.workspace }}\instat\static\InstatObject\R\install_packages.R"
+        Write-Host "Install script path: $installScript"
+        
+        Write-Host "Running package installation (this may take several minutes)..."
+        
+        # Run R script and capture output using Start-Process with separate files
+        $outputFile = "package_install_stdout.txt"
+        $errorFile = "package_install_stderr.txt"
+        $process = Start-Process -FilePath "$R_HOME\bin\Rscript.exe" -ArgumentList "`"$installScript`"" -RedirectStandardOutput $outputFile -RedirectStandardError $errorFile -Wait -PassThru -NoNewWindow
+        
+        $exitCode = $process.ExitCode
+        Write-Host "Package installation completed with exit code: $exitCode"
+        
+        # Combine output files
+        $combinedOutput = @()
+        if (Test-Path $outputFile) {
+          $stdOut = Get-Content $outputFile -ErrorAction SilentlyContinue
+          if ($stdOut) { $combinedOutput += $stdOut }
+          Write-Host "Standard output lines: $($stdOut.Count)"
+        }
+        
+        if (Test-Path $errorFile) {
+          $stdErr = Get-Content $errorFile -ErrorAction SilentlyContinue
+          if ($stdErr) { $combinedOutput += $stdErr }
+          Write-Host "Standard error lines: $($stdErr.Count)"
+        }
+        
+        # Save combined output for analysis
+        if ($combinedOutput.Count -gt 0) {
+          $combinedOutput | Out-File -FilePath "package_install_output.txt" -Encoding UTF8
+          Write-Host "Total output captured: $($combinedOutput.Count) lines"
+          
+          # Show last few lines as progress indication
+          Write-Host "Last few lines of output:"
+          $combinedOutput | Select-Object -Last 5 | ForEach-Object { Write-Host "  $_" }
+        } else {
+          Write-Host "Warning: No output captured"
+        }
+        
+        echo "exit-code=$exitCode" >> $env:GITHUB_OUTPUT
+      shell: powershell
+
+    # Analyze installation results and report errors/warnings
+    - name: Analyze installation results
+      run: |
+        Write-Host "Analyzing package installation results..."
+        
+        # Read the output file
+        $outputFile = "package_install_output.txt"
+        if (Test-Path $outputFile) {
+          $allOutput = Get-Content $outputFile -Encoding UTF8
+          Write-Host "Found output file with $($allOutput.Count) lines"
+        } else {
+          Write-Host "❌ No output file found from installation step"
+          exit 1
+        }
+        
+        # Filter for errors and warnings
+        $errors = @()
+        $warnings = @()
+        $currentPackage = ""
+        $packageCount = 0
+        
+        foreach ($line in $allOutput) {
+          if ($line) {
+            # Track packages being installed
+            if ($line -match "^\* installing \*source\* package '(.+?)'") {
+              $currentPackage = $matches[1]
+              $packageCount++
+            } elseif ($line -match "Installing package into") {
+              Write-Host "." -NoNewline  # Progress indicator
+            }
+            
+            # Capture errors
+            if ($line -match "ERROR:|Error in|Error:|compilation failed|installation failed|fatal error|non-zero exit status" -and $line -notmatch "Warning") {
+              $errors += "[$currentPackage] $line"
+            }
+            
+            # Capture warnings  
+            if ($line -match "Warning:|WARNING:" -and $line -notmatch "Error") {
+              $warnings += "[$currentPackage] $line"
+            }
+          }
+        }
+        
+        Write-Host "`n"  # New line after progress dots
+        
+        # Display results
+        Write-Host "=== PACKAGE INSTALLATION ANALYSIS ==="
+        Write-Host "Packages processed: $packageCount"
+        
+        if ($errors.Count -gt 0) {
+          Write-Host "`n❌ ERRORS FOUND ($($errors.Count)):"
+          Write-Host "================================"
+          foreach ($errorMsg in $errors) {
+            Write-Host $errorMsg
+          }
+        } else {
+          Write-Host "`n✅ No errors found"
+        }
+        
+        if ($warnings.Count -gt 0) {
+          Write-Host "`n⚠️ WARNINGS FOUND ($($warnings.Count)):"
+          Write-Host "===================================="
+          foreach ($warningMsg in $warnings) {
+            Write-Host $warningMsg
+          }
+        } else {
+          Write-Host "`n✅ No warnings found"
+        }
+        
+        Write-Host "`n=== END ANALYSIS ==="
+        
+        # Fail if there were errors
+        if ($errors.Count -gt 0) {
+          Write-Host "`n❌ Package installation failed due to $($errors.Count) error(s)"
+          exit 1
+        } else {
+          Write-Host "`n✅ Package installation analysis passed!"
+        }
+      shell: powershell
+
+
+

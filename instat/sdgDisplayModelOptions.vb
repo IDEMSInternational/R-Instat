@@ -24,14 +24,46 @@ Public Class sdgDisplayModelOptions
     Private clsPipeOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     Private bInitialised As Boolean = False
+    Public enumPlacketLuceModelMode As String = PlacketLuceModelMode.nocovariates
 
     Private clsRSyntax As New RSyntax
 
     Private Sub sdgDisplayModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        SetHelpOptions()
     End Sub
 
+    Public Enum PlacketLuceModelMode
+        nocovariates
+        tree
+        ModelOneVarCov2
+        ModellingGeneral2
+    End Enum
+
     Private Sub InitialiseDialog()
+
+        ' Adding tooltips
+        AddToolTip(ucrChkModel, "Provides an overview of the model including item rankings, coefficients, and model fit.")
+        AddToolTip(ucrChkANOVA, "Assesses the goodness of fit for the Plackett Luce model fitted")
+        AddToolTip(ucrChkEstimates, "Displays the model coefficients (item worths), with an option to log-transform them for easier interpretation.")
+        AddToolTip(ucrChkConfLimits, "Shows confidence intervals for the estimated item worths, indicating the uncertainty around each value.")
+        AddToolTip(ucrChkAIC, "Displays Akaike's Information Criterion to help compare model quality, with lower values indicating better fit.")
+        AddToolTip(ucrChkDeviance, "Reports the deviance statistic, measuring how well the model fits the observed data (lower is better).")
+        AddToolTip(ucrChkSndEstimetes, "Lists the predicted probabilities or rankings from the fitted model.")
+        AddToolTip(ucrChkParProp, "Shows the probability of one item being preferred over another based on the model.")
+        AddToolTip(ucrChkReability, "Measures how consistently the model distinguishes between items, often used to assess precision or predictability.")
+        AddToolTip(ucrChkItemPara, "Lists the estimated worth (preference scores) of each item in the model.")
+        AddToolTip(ucrChkVaCoMa, "Displays the estimated variances and covariances between item parameters.")
+        AddToolTip(ucrChkQuasiVa, "Provides quasi-variances and standard errors, allowing valid comparisons between multiple items without needing a reference item.")
+        AddToolTip(ucrChkRegret, "Displays regret values at each node, reflecting the potential loss from not choosing the optimal item (based on worst-case scenarios).")
+        AddToolTip(ucrChkNodeLabel, "Shows labels for each terminal node, often based on top items or group summaries.")
+        AddToolTip(ucrChkNodeRules, "Lists the conditions (e.g. variable splits) used to form each node in the tree.")
+        AddToolTip(ucrChkTopItem, "Highlights the most preferred items within each terminal node, helping interpret local preferences across subgroups.")
+        ttModelDisplay.SetToolTip(rdoMap, "Displays a tree with faceted dotplots beneath it, showing the estimated item worths at each terminal node. Helps visualise how item rankings vary across subgroups.")
+        ttModelDisplay.SetToolTip(rdoBar, "Plots the item worths as a bar chart for a single model, making it easy to compare relative rankings.")
+        ttModelDisplay.SetToolTip(rdoTree, "Shows the structure of the Plackett-Luce tree, including the variables used for splits and the decision rules at each node.")
+
+
         ucrChkModel.SetText("Summary")
         ucrChkModel.AddParameterValuesCondition(True, "summary", "True")
         ucrChkModel.AddParameterValuesCondition(False, "summary", "False")
@@ -76,7 +108,7 @@ Public Class sdgDisplayModelOptions
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(True, {"snd_estimates"}, True)
         ucrChkSndEstimetes.AddRSyntaxContainsFunctionNamesCondition(False, {"snd_estimates"}, False)
 
-        ucrChkParProp.SetText("Pairewise Probabilities")
+        ucrChkParProp.SetText("Pairwise Probabilities")
         ucrChkParProp.AddRSyntaxContainsFunctionNamesCondition(True, {"pair"}, True)
         ucrChkParProp.AddRSyntaxContainsFunctionNamesCondition(False, {"pair"}, False)
 
@@ -220,6 +252,14 @@ Public Class sdgDisplayModelOptions
             ucrPnlPlots.SetRCode(clsDummyFunction, bReset)
         End If
         AddRemoveSummary()
+    End Sub
+
+    Private Sub AddToolTip(cntrl As ucrCore, value As String)
+        For Each element As Control In cntrl.Controls
+            If TypeOf element Is CheckBox Then
+                ttModelDisplay.SetToolTip(element, value)
+            End If
+        Next
     End Sub
 
     Private Sub ucrChkAIC_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAIC.ControlValueChanged
@@ -406,4 +446,18 @@ Public Class sdgDisplayModelOptions
             clsRSyntax.RemoveFromBeforeCodes(clsHeatFunction)
         End If
     End Sub
+
+    Private Sub SetHelpOptions()
+        Select Case enumPlacketLuceModelMode
+            Case PlacketLuceModelMode.nocovariates
+                ucrSdgButtons.iHelpTopicID = 722
+            Case PlacketLuceModelMode.tree
+                ucrSdgButtons.iHelpTopicID = 724
+            Case PlacketLuceModelMode.ModelOneVarCov2
+                ucrSdgButtons.iHelpTopicID = 726
+            Case PlacketLuceModelMode.ModellingGeneral2
+                ucrSdgButtons.iHelpTopicID = 728
+        End Select
+    End Sub
+
 End Class
