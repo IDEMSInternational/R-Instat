@@ -186,11 +186,9 @@ packs <-
     "weights",
     "nanonext",
     "collapse",
-    "modeldata",
     "curl",
     "ClimMobTools",
     "gtsummary",
-    "ggthemes",
     "PlackettLuce"
  )
 
