@@ -49,6 +49,8 @@ Public Class dlgGeneralTable
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+        ucrInputTitle.ResetText()
+        ucrInputTitleFooter.ResetText()
     End Sub
 
     Private Sub initialiseDialog()
