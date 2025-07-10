@@ -115,6 +115,56 @@ Public Class sdgTransformations
         ucrReceiverTraits2.strSelectorHeading = "Traits"
         ucrReceiverTraits2.SetItemType("column")
 
+        ucrReceiverVarietyVariables.SetParameter(New RParameter("variety_cols", 3, bNewIncludeArgumentName:=False))
+        ucrReceiverVarietyVariables.SetLinkedDisplayControl(lblReceiverSpecifyVarietyVariables)
+        ucrReceiverVarietyVariables.SetParameterIsString()
+        ucrReceiverVarietyVariables.Selector = ucrSelectorTricotIDLevel
+        ucrReceiverVarietyVariables.strSelectorHeading = "Varieties"
+        ucrReceiverVarietyVariables.SetItemType("column")
+
+        ucrInputRankValues.SetLinkedDisplayControl(lblReceiverRankValues)
+        ucrInputRankValues.SetText("c(""A"", ""B"", ""C"")")
+
+        ucrReceiverTraitVariables.SetParameter(New RParameter("data_trait_cols", 3, bNewIncludeArgumentName:=False))
+        ucrReceiverTraitVariables.SetLinkedDisplayControl(lblTraitVariables)
+        ucrReceiverTraitVariables.SetParameterIsString()
+        ucrReceiverTraitVariables.Selector = ucrSelectorTricotIDLevel
+        ucrReceiverTraitVariables.strSelectorHeading = "Traits"
+        ucrReceiverTraitVariables.SetItemType("column")
+
+        ucrReceiverCarryColumns.SetParameter(New RParameter("carry_cols", 3, bNewIncludeArgumentName:=False))
+        ucrReceiverCarryColumns.SetLinkedDisplayControl(lblReceiverCarryColumns)
+        ucrReceiverCarryColumns.SetParameterIsString()
+        ucrReceiverCarryColumns.Selector = ucrSelectorTricotIDLevel
+        ucrReceiverCarryColumns.strSelectorHeading = "Carry Columns"
+        ucrReceiverCarryColumns.SetItemType("column")
+
+        ucrChkSpecifyVariety.SetText("Specify Variety Variables")
+        ucrChkSpecifyVariety.AddParameterValuesCondition(True, "check", "True")
+        ucrChkSpecifyVariety.AddParameterValuesCondition(False, "check", "False")
+        ucrChkSpecifyVariety.Checked = False
+        'ucrChkSpecifyVariety.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkSpecifyVariety.SetRDefault("FALSE")
+        ucrChkSpecifyVariety.AddToLinkedControls(ucrReceiverVarietyVariables, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkSpecifyRankValues.SetText("Specify Rank Values")
+        ucrChkSpecifyRankValues.AddParameterValuesCondition(True, "check", "True")
+        ucrChkSpecifyRankValues.AddParameterValuesCondition(False, "check", "False")
+        ucrChkSpecifyRankValues.AddToLinkedControls(ucrInputRankValues, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSpecifyRankValues.Checked = False
+
+        ucrChkSpecifyTraitVariables.SetText("Specify Trait Variables")
+        ucrChkSpecifyTraitVariables.AddParameterValuesCondition(True, "check", "True")
+        ucrChkSpecifyTraitVariables.AddParameterValuesCondition(False, "check", "False")
+        ucrChkSpecifyTraitVariables.AddToLinkedControls(ucrReceiverTraitVariables, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSpecifyTraitVariables.Checked = False
+
+        ucrChkCarryColumns.SetText("Carry columns")
+        ucrChkCarryColumns.AddParameterValuesCondition(True, "check", "True")
+        ucrChkCarryColumns.AddParameterValuesCondition(False, "check", "False")
+        ucrChkCarryColumns.AddToLinkedControls(ucrReceiverCarryColumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCarryColumns.Checked = False
+
         ucrInputGoodTraits.SetItems({strPos, strBest})
         ucrInputGoodTraits.SetDropDownStyleAsEditable(True)
         ucrInputGoodTraits.SetLinkedDisplayControl(lblGoodTraits)
@@ -175,6 +225,13 @@ Public Class sdgTransformations
         SetVisibility()
 
         If bReset Then
+            ucrReceiverVarietyVariables.Clear()
+            ucrReceiverTraitVariables.Clear()
+            ucrReceiverCarryColumns.Clear()
+            ucrChkSpecifyVariety.Checked = False
+            ucrChkSpecifyRankValues.Checked = False
+            ucrChkSpecifyTraitVariables.Checked = False
+            ucrChkCarryColumns.Checked = False
             ucrChkTraits.SetRCode(clsDummyFunction, bReset)
             ucrReceiverIDVariable.SetMeAsReceiver()
             tbOptions.SelectedIndex = 0
@@ -217,6 +274,84 @@ Public Class sdgTransformations
             clsCreateTricotData.AddParameter("na_candidates", Chr(34) & ucrInputNAS.GetText & Chr(34))
             clsDefineTricotDataFunction.AddParameter("na_candidates", Chr(34) & ucrInputNAS.GetText & Chr(34), iPosition:=3)
         End If
+    End Sub
+
+    Private Sub AddVarietyColsParam()
+        If ucrChkSpecifyVariety.Checked AndAlso Not ucrReceiverVarietyVariables.IsEmpty() Then
+            clsDefineTricotDataFunction.AddParameter("variety_cols", ucrReceiverVarietyVariables.GetVariableNames(), iPosition:=5)
+            clsCreateTricotData.AddParameter("variety_cols", ucrReceiverVarietyVariables.GetVariableNames(), iPosition:=5)
+        Else
+            If clsDefineTricotDataFunction.ContainsParameter("variety_cols") Then
+                clsDefineTricotDataFunction.RemoveParameterByName("variety_cols")
+            End If
+
+            If clsCreateTricotData.ContainsParameter("variety_cols") Then
+                clsCreateTricotData.RemoveParameterByName("variety_cols")
+            End If
+        End If
+    End Sub
+
+    Private Sub AddRankValuesParam()
+        If ucrChkSpecifyRankValues.Checked AndAlso Not ucrInputRankValues.IsEmpty() Then
+            clsCreateTricotData.AddParameter("rank_values", ucrInputRankValues.GetText(), iPosition:=6)
+        Else
+            If clsCreateTricotData.ContainsParameter("rank_values") Then
+                clsCreateTricotData.RemoveParameterByName("rank_values")
+            End If
+        End If
+    End Sub
+
+    Private Sub AddDataTraitColsParam()
+        If ucrChkSpecifyTraitVariables.Checked AndAlso Not ucrReceiverTraitVariables.IsEmpty() Then
+            clsCreateTricotData.AddParameter("data_trait_cols", ucrReceiverTraitVariables.GetVariableNames(), iPosition:=7)
+        Else
+            If clsCreateTricotData.ContainsParameter("data_trait_cols") Then
+                clsCreateTricotData.RemoveParameterByName("data_trait_cols")
+            End If
+        End If
+    End Sub
+
+    Private Sub AddCarryColsParam()
+        If ucrChkCarryColumns.Checked AndAlso Not ucrReceiverCarryColumns.IsEmpty() Then
+            clsCreateTricotData.AddParameter("carry_cols", ucrReceiverCarryColumns.GetVariableNames(), iPosition:=8)
+        Else
+            If clsCreateTricotData.ContainsParameter("carry_cols") Then
+                clsCreateTricotData.RemoveParameterByName("carry_cols")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkCarryColumns_ControlValueChanged(ucrControlChanged As ucrCore) Handles ucrChkCarryColumns.ControlValueChanged
+        AddCarryColsParam()
+    End Sub
+
+    Private Sub ucrReceiverCarryColumns_ControlValueChanged(ucrControlChanged As ucrCore) Handles ucrReceiverCarryColumns.ControlValueChanged
+        AddCarryColsParam()
+    End Sub
+
+    Private Sub ucrChkSpecifyTraitVariables_ControlValueChanged(ucrControlChanged As ucrCore) Handles ucrChkSpecifyTraitVariables.ControlValueChanged
+        AddDataTraitColsParam()
+    End Sub
+
+    Private Sub ucrReceiverTraitVariables_ControlValueChanged(ucrControlChanged As ucrCore) Handles ucrReceiverTraitVariables.ControlValueChanged
+        AddDataTraitColsParam()
+    End Sub
+
+
+    Private Sub ucrChkSpecifyRankValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyRankValues.ControlValueChanged
+        AddRankValuesParam()
+    End Sub
+
+    Private Sub ucrInputRankValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputRankValues.ControlValueChanged
+        AddRankValuesParam()
+    End Sub
+
+    Private Sub ucrChkSpecifyVariety_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyVariety.ControlValueChanged
+        AddVarietyColsParam()
+    End Sub
+
+    Private Sub ucrReceiverVarietyVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVarietyVariables.ControlValueChanged
+        AddVarietyColsParam()
     End Sub
 
     Private Sub ucrIDReceivers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverIDVarietyLevel.ControlValueChanged, ucrReceiverTraitID.ControlValueChanged
@@ -567,5 +702,9 @@ Public Class sdgTransformations
     Private Sub SetVisibility()
         ucrInputGoodTraits.Visible = ucrChkTraits.Checked
         ucrInputBadTraits.Visible = ucrChkTraits.Checked
+        ucrReceiverVarietyVariables.Visible = ucrChkSpecifyVariety.Checked
+        ucrInputRankValues.Visible = ucrChkSpecifyRankValues.Checked
+        ucrReceiverTraitVariables.Visible = ucrChkSpecifyTraitVariables.Checked
+        ucrReceiverCarryColumns.Visible = ucrChkCarryColumns.Checked
     End Sub
 End Class

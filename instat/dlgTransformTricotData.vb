@@ -249,7 +249,15 @@ Public Class dlgTransformTricotData
 
         sdgTransformations.SetRFunction(clsNewRFunction:=clsOutputDataLevel, clsNewDefaultFunction:=clsCreateTricotData, clsNewIDColsFunction:=clsIDColsFunction, clsNewVarietyColsFunction:=clsVarietyColsFunction, clsNewTraitColsFunction:=clsTraitColsFunction, clsNewDefineTricotDataFunction:=clsDefineTricotDataFunction, ucrNewBaseSelector:=ucrSelectorTricotData, bReset:=bResetSubdialog)
         sdgTransformations.ShowDialog()
+        ClearCheckOnSdgClose()
+        TestOKEnabled()
         bResetSubdialog = False
+    End Sub
+
+    Private Sub ClearCheckOnSdgClose()
+        bUniqueChecked = False
+        ucrInputTricotData.SetText("")
+        ucrInputTricotData.txtInput.BackColor = Color.White
     End Sub
 
     Private Sub TestOKEnabled()
