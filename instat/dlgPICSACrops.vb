@@ -123,7 +123,11 @@ Public Class dlgPICSACrops
         ucrInputPlantingDates.SetItems({"160", "92, 122, 153", "124, 184, 10", "92, 152, 15"})
         ucrInputPlantingDates.AddQuotesIfUnrecognised = False
         ucrInputPlantingDates.bAllowNonConditionValues = True
-        ttPlanting.SetToolTip(ucrInputPlantingDates.cboInput, " The day number for planting. Starting from January, April 1st is day 92. Starting from July, November 1st is day 124. ")
+        ttPlanting.SetToolTip(ucrInputPlantingDates.cboInput,
+        "The day number for planting." + Environment.NewLine +
+        "Starting from January, April 1st is day 92. Starting from July, November 1st is day 124." + Environment.NewLine + Environment.NewLine +
+        "Enter three comma-separated numbers to generate a sequence: from, to, by." + Environment.NewLine +
+        "For example, 93, 183, 15 produces 93, 108, 123, …, 183.")
 
 
         'Planting Length 
@@ -132,7 +136,10 @@ Public Class dlgPICSACrops
         ucrInputCropLengths.SetItems({"120", "100, 140, 10", "120, 150, 180", "60, 120, 10"})
         ucrInputCropLengths.AddQuotesIfUnrecognised = False
         ucrInputCropLengths.bAllowNonConditionValues = True
-        ttPlanting.SetToolTip(ucrInputCropLengths.cboInput, " The crop duration, in days. Often between 60 days (2 months) and 150 days (5 months). ")
+        ttPlanting.SetToolTip(ucrInputCropLengths.cboInput,
+        "The crop duration in days. Often between 60 (2 months) and 150 (5 months)." + Environment.NewLine + Environment.NewLine +
+        "Enter three comma-separated numbers to generate a sequence: from, to, by." + Environment.NewLine +
+        "For example, 45, 180, 30 produces 45, 75, 105, ..., 180.")
 
         'Water amount 
         ucrInputWaterAmounts.SetParameter(New RParameter("rain_totals", 7))
@@ -140,7 +147,11 @@ Public Class dlgPICSACrops
         ucrInputWaterAmounts.SetItems({"600", "300, 500, 700", "200, 600, 50", "500, 700, 25"})
         ucrInputWaterAmounts.AddQuotesIfUnrecognised = False
         ucrInputWaterAmounts.bAllowNonConditionValues = True
-        ttPlanting.SetToolTip(ucrInputWaterAmounts.cboInput, " The amount of water (rainfall) needed for the crop. Usually between 250mm and 1000mm. ")
+        ttPlanting.SetToolTip(ucrInputWaterAmounts.cboInput,
+        "The amount of water (rainfall) needed for the crop, usually between 250mm and 1000mm." + Environment.NewLine + Environment.NewLine +
+        "Enter three comma-separated numbers to generate a sequence: from, to, by." + Environment.NewLine +
+        "For example, 200, 1200, 50 produces 200, 250, 300, ..., 1200.")
+
 
         'Planting Date Panel
         'ucrPnlPlantingDate.SetParameter(New RParameter("planting_days", clsCropsFunction, 5))
