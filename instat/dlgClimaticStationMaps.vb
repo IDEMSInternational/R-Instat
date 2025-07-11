@@ -76,7 +76,9 @@ Public Class dlgClimaticStationMaps
         ucrSelectorStation.SetParameter(New RParameter("data", 0))
         ucrSelectorStation.SetParameterIsrfunction()
 
+        ucrReceiverGeometry.SetParameter(New RParameter("geometry", 0))
         ucrReceiverGeometry.Selector = ucrSelectorOutline
+        ucrReceiverGeometry.SetParameterIsRFunction()
 
         ucrReceiverFill.SetParameter(New RParameter("fill", 0))
         ucrReceiverFill.Selector = ucrSelectorOutline
@@ -306,6 +308,7 @@ Public Class dlgClimaticStationMaps
         ucrInputColour.SetRCode(clsLabelRepelFunction, bReset)
         ucrNudSize.SetRCode(clsLabelRepelFunction, bReset)
         ucrChkAddPoints.SetRCode(clsGGplotOperator, bReset)
+        ucrReceiverGeometry.SetRCode(clsSfAesFunction, bReset)
         If bReset Then
             ucrChkLabelledRectangle.SetRCode(clsGGplotOperator, bReset)
             ucrChkLabelAll.SetRCode(clsLabelRepelFunction, bReset)
@@ -481,6 +484,16 @@ Public Class dlgClimaticStationMaps
             If GeometryOutput IsNot Nothing AndAlso Not GeometryOutput.Type = Internals.SymbolicExpressionType.Null Then
                 ucrReceiverGeometry.Add(GeometryOutput.AsCharacter(0), ucrSelectorOutline.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             End If
+            clsSfAesFunction.AddParameter("geometry", clsRFunctionParameter:=clsGetGeometry)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverGeometry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverGeometry.ControlValueChanged
+        clsSfAesFunction.RemoveParameterByName("geometry")
+        If ucrReceiverGeometry.IsEmpty Then
+            AutoFillGeometry()
+        Else
+            clsSfAesFunction.AddParameter("geometry", clsRFunctionParameter:=ucrReceiverGeometry.GetVariables)
         End If
     End Sub
 
