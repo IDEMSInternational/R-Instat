@@ -130,6 +130,7 @@ Public Class dlgImportGriddedData
         ucrPnlMaxPlantingDate.SetParameter(New RParameter("max_date", 8))
         ucrPnlMaxPlantingDate.AddParameterValuesCondition(rdoMaxPlantValue, "multiple", "variable")
         ucrPnlMaxPlantingDate.AddParameterValuesCondition(rdoVariableMaxPlant, "multiple", "value")
+        ucrPnlMaxPlantingDate.SetDefaultState("variable")
 
         ucrChkDontImportData.SetParameter(New RParameter("import", 11))
         ucrChkDontImportData.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
