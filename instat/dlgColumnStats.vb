@@ -49,18 +49,20 @@ Public Class dlgColumnStats
         'ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
         cmdMissingOptions.Enabled = False
 
-        ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorForColumnStatistics.SetParameterIsString()
+        ucrSelectorForData.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForData.SetParameterIsString()
 
         ' only allow numeric variables in the first receiver, this will change once freq. tables is added
         ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverSelectedVariables.SetParameterIsString()
-        ucrReceiverSelectedVariables.Selector = ucrSelectorForColumnStatistics
+        ucrReceiverSelectedVariables.Selector = ucrSelectorForData
+        ucrReceiverSelectedVariables.SetItemType("gtrow")
         'ucrReceiverSelectedVariables.SetSingleTypeStatus(True)
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
-        ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
+        ucrReceiverByFactor.Selector = ucrSelectorForData
         ucrReceiverByFactor.SetParameterIsString()
+        ucrReceiverByFactor.SetItemType("gtcol")
 
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
         ucrChkStoreResults.SetText("Store Results")
@@ -85,8 +87,9 @@ Public Class dlgColumnStats
         ucrChkOmitMissing.SetRDefault("FALSE")
 
         ucrReceiverWeights.SetParameter(New RParameter("weights", 7))
-        ucrReceiverWeights.Selector = ucrSelectorForColumnStatistics
+        ucrReceiverWeights.Selector = ucrSelectorForData
         ucrReceiverWeights.SetParameterIsString()
+        ucrReceiverWeights.SetItemType("gtrow")
 
         'linking
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -102,7 +105,7 @@ Public Class dlgColumnStats
         clsSummariesList = New RFunction
         clsConcFunction = New RFunction
 
-        ucrSelectorForColumnStatistics.Reset()
+        ucrSelectorForData.Reset()
         sdgProportionsPercentages.ucrSelectorProportionsPercentiles.Reset()
         ucrReceiverSelectedVariables.SetMeAsReceiver()
 
@@ -131,7 +134,7 @@ Public Class dlgColumnStats
 
     Private Sub SetDefaultColumns()
         If strDefaultDataFrame <> "" Then
-            ucrSelectorForColumnStatistics.SetDataframe(strDefaultDataFrame)
+            ucrSelectorForData.SetDataframe(strDefaultDataFrame)
         End If
         If strDefaultVariables IsNot Nothing AndAlso strDefaultVariables.Count > 0 Then
             ucrReceiverSelectedVariables.Clear()
@@ -165,7 +168,7 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsNewRFunction:=clsSummariesList, clsNewDefaultFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, ucrNewBaseSelector:=ucrSelectorForColumnStatistics, bReset:=bResetSubdialog, strNewWeightLabel:=strWeightLabel, strDefaultTab:=strDefaultTab)
+        sdgSummaries.SetRFunction(clsNewRFunction:=clsSummariesList, clsNewDefaultFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, ucrNewBaseSelector:=ucrSelectorForData, bReset:=bResetSubdialog, strNewWeightLabel:=strWeightLabel, strDefaultTab:=strDefaultTab)
         sdgSummaries.ShowDialog()
         bResetSubdialog = False
         strDefaultTab = ""
