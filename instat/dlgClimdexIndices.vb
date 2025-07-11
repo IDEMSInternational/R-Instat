@@ -191,6 +191,7 @@ Public Class dlgClimdexIndices
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrPnlAnnualMonthly.AddAdditionalCodeParameterPair(clsClimdex, New RParameter("freq", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("station", iNewPosition:=3), iAdditionalPairNo:=1)
         ucrReceiverYear.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("year", iNewPosition:=4), iAdditionalPairNo:=1)
         ucrReceiverMonth.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("month", iNewPosition:=5), iAdditionalPairNo:=1)
@@ -205,7 +206,7 @@ Public Class dlgClimdexIndices
         ucrReceiverTmax.SetRCode(clsClimdex, bReset)
         ucrReceiverTmin.SetRCode(clsClimdex, bReset)
 
-        SetClimdexData()
+        ' SetClimdexData()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -327,14 +328,14 @@ Public Class dlgClimdexIndices
             clsClimdex.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsAssignOperator, iPosition:=0)
             clsAddClimexIndices.AddParameter("climdex_output", "ci", iPosition:=1)
-            clsClimdex.RemoveParameterByName("freq")
+            'clsClimdex.RemoveParameterByName("freq")
         Else
             clsClimdex.AddParameter("data", clsRFunctionParameter:=ucrSelectorClimdex.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsAssignOperator)
             clsAddClimexIndices.AddParameter("climdex_output", clsRFunctionParameter:=clsClimdex, iPosition:=1)
-            If rdoMonthly.Checked Then
-                ucrPnlAnnualMonthly.AddAdditionalCodeParameterPair(clsClimdex, New RParameter("freq", iNewPosition:=2), iAdditionalPairNo:=1)
-            End If
+            'If rdoMonthly.Checked Then
+            '    ucrPnlAnnualMonthly.AddAdditionalCodeParameterPair(clsClimdex, New RParameter("freq", iNewPosition:=2), iAdditionalPairNo:=1)
+            'End If
         End If
     End Sub
 
