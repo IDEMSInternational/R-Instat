@@ -1427,21 +1427,6 @@ Public Class dlgDescribeTwoVariable
         ucrReceiverColumns.ResetText()
         ucrReceiverThreeVariableSecondFactor.ResetText()
         ucrSaveTable.Reset()
-        ' Add any other receivers you use
-
-        ' Then refresh all dialog state
-        ChangeBaseRCode()
-        ChangeLocations()
-        UpdateSummaryTableFunction()
-        AddRemoveFrequencyParameters()
-        AddRemoveNAParameter()
-        AddRemoveFirstCorrParam()
-        AddRemoveThirdCorrParam()
-        AddRemoveSecondCorrParam()
-        AddRemoveSecondAnovaParam()
-        AddRemoveThirdAnovaParam()
-        AddRemoveFirstAnova2Param()
-        FactorColumns()
     End Sub
 
     ' This sub is commented out because it is not used in the current implementation.
