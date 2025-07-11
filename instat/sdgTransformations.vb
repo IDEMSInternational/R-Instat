@@ -144,8 +144,6 @@ Public Class sdgTransformations
         ucrChkSpecifyVariety.AddParameterValuesCondition(True, "check", "True")
         ucrChkSpecifyVariety.AddParameterValuesCondition(False, "check", "False")
         ucrChkSpecifyVariety.Checked = False
-        'ucrChkSpecifyVariety.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkSpecifyVariety.SetRDefault("FALSE")
         ucrChkSpecifyVariety.AddToLinkedControls(ucrReceiverVarietyVariables, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkSpecifyRankValues.SetText("Specify Rank Values")
@@ -256,30 +254,24 @@ Public Class sdgTransformations
     Private Sub AddBadSuffixesPar()
         If ucrChkTraits.Checked AndAlso Not ucrInputBadTraits.IsEmpty Then
             clsCreateTricotData.AddParameter("bad_suffixes", Chr(34) & ucrInputBadTraits.GetText & Chr(34))
-            'clsDefineTricotDataFunction.AddParameter("bad_suffixes", Chr(34) & ucrInputBadTraits.GetText & Chr(34), iPosition:=2)
         Else
             clsCreateTricotData.RemoveParameterByName("bad_suffixes")
-            'clsDefineTricotDataFunction.RemoveParameterByName("bad_suffixes")
         End If
     End Sub
 
     Private Sub AddGoodSuffixesPar()
         If ucrChkTraits.Checked AndAlso Not ucrInputGoodTraits.IsEmpty Then
             clsCreateTricotData.AddParameter("good_suffixes", Chr(34) & ucrInputGoodTraits.GetText & Chr(34))
-            'clsDefineTricotDataFunction.AddParameter("good_suffixes", Chr(34) & ucrInputGoodTraits.GetText & Chr(34), iPosition:=1)
         Else
             clsCreateTricotData.RemoveParameterByName("good_suffixes")
-            'clsDefineTricotDataFunction.RemoveParameterByName("good_suffixes")
         End If
     End Sub
 
     Private Sub ucrInputNAS_NameChanged() Handles ucrInputNAS.ControlValueChanged
         If ucrInputNAS.IsEmpty() Then
             clsCreateTricotData.RemoveParameterByName("na_candidates")
-            'clsDefineTricotDataFunction.RemoveParameterByName("na_candidates")
         Else
             clsCreateTricotData.AddParameter("na_candidates", Chr(34) & ucrInputNAS.GetText & Chr(34))
-            'clsDefineTricotDataFunction.AddParameter("na_candidates", Chr(34) & ucrInputNAS.GetText & Chr(34), iPosition:=3)
         End If
     End Sub
 
@@ -453,10 +445,8 @@ Public Class sdgTransformations
             clsTraitColsFunction.RemoveParameterByName("trait_2")
             If Not ucrReceiverTraits1.IsEmpty Then
                 clsTraitColsFunction.AddParameter("trait_cols_a", strParameterValue:=ucrReceiverTraits1.GetVariableNames, bIncludeArgumentName:=False)
-                'clsDefineTricotDataFunction.AddParameter("trait_cols", strParameterValue:=ucrReceiverTraits1.GetVariableNames, iPosition:=4)
             Else
                 clsIDColsFunction.RemoveParameterByName("trait_cols_a")
-                'clsDefineTricotDataFunction.RemoveParameterByName("trait_cols")
             End If
         Else
             clsTraitColsFunction.AddParameter("trait_1", Chr(34) & "trait" & Chr(34), bIncludeArgumentName:=False)
