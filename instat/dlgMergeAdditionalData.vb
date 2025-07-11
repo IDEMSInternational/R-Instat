@@ -22,6 +22,7 @@ Public Class dlgMergeAdditionalData
     Public Enum MergeMode
         Prepare
         Climatic
+        Tricot
     End Enum
 
     Private bFirstLoad As Boolean = True
@@ -124,6 +125,8 @@ Public Class dlgMergeAdditionalData
                 ucrBase.iHelpTopicID = 186
             Case MergeMode.Climatic
                 ucrBase.iHelpTopicID = 609
+            Case MergeMode.Tricot
+                ucrBase.iHelpTopicID = 740
         End Select
     End Sub
 

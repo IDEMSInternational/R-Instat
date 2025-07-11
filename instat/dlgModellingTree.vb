@@ -609,6 +609,7 @@ Public Class dlgModellingTree
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgPLModelOptions.enumPLModelOptionsMode = sdgPLModelOptions.PLModelOptionsMode.Tree
         sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog, clsNewPlacketFunction:=clsPlackettLuceFunction)
         sdgPLModelOptions.ucrChkMultivariateNormal.Enabled = False
         sdgPLModelOptions.ucrChkGamma.Enabled = False
@@ -616,6 +617,7 @@ Public Class dlgModellingTree
         bResetSubDialog = False
     End Sub
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgDisplayModelOptions.enumPlacketLuceModelMode = sdgDisplayModelOptions.PlacketLuceModelMode.tree
         sdgDisplayModelOptions.SetRCode(clsNewSummaryFunction:=clsSummaryFunction, clsNewCoefFunction:=clscoefFunction, clsNewSecondEstimatesFunction:=clsSecondEstimatesFunction,
             clsNewEstimatesFunction:=clsEstimatesFunction, clsNewImportDataFunction:=clsImportDataFunction, clsNewDefineAsTricotFunction:=clsDefineAsTricotFunction, clsNewPipeOperator:=clsPipeOperator, clsNewDevianceFunction:=clsDevianceMainFunction,
             clsNewPariPropFunction:=clsPairwiseProbMainFunction, clsNewReliabilityFunction:=clsReliabilityFunction,
