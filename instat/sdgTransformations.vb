@@ -123,7 +123,8 @@ Public Class sdgTransformations
         ucrReceiverVarietyVariables.SetItemType("column")
 
         ucrInputRankValues.SetLinkedDisplayControl(lblReceiverRankValues)
-        ucrInputRankValues.SetText("c(""A"", ""B"", ""C"")")
+        ucrInputRankValues.SetValidationTypeAsList()
+        ucrInputRankValues.SetText(Chr(34) & "A" & Chr(34) & "," & Chr(34) & "B" & Chr(34) & "," & Chr(34) & "C" & Chr(34))
 
         ucrReceiverTraitVariables.SetParameter(New RParameter("data_trait_cols", 3, bNewIncludeArgumentName:=False))
         ucrReceiverTraitVariables.SetLinkedDisplayControl(lblTraitVariables)
@@ -222,6 +223,12 @@ Public Class sdgTransformations
         AutoFillReceiverIdLevel()
         AutoFillReceiverVarId()
         AutoFillReceiverVariety()
+
+        AddVarietyColsParam()
+        AddRankValuesParam()
+        AddDataTraitColsParam()
+        AddCarryColsParam()
+
         SetVisibility()
 
         If bReset Then
@@ -249,38 +256,42 @@ Public Class sdgTransformations
     Private Sub AddBadSuffixesPar()
         If ucrChkTraits.Checked AndAlso Not ucrInputBadTraits.IsEmpty Then
             clsCreateTricotData.AddParameter("bad_suffixes", Chr(34) & ucrInputBadTraits.GetText & Chr(34))
-            clsDefineTricotDataFunction.AddParameter("bad_suffixes", Chr(34) & ucrInputBadTraits.GetText & Chr(34), iPosition:=2)
+            'clsDefineTricotDataFunction.AddParameter("bad_suffixes", Chr(34) & ucrInputBadTraits.GetText & Chr(34), iPosition:=2)
         Else
             clsCreateTricotData.RemoveParameterByName("bad_suffixes")
-            clsDefineTricotDataFunction.RemoveParameterByName("bad_suffixes")
+            'clsDefineTricotDataFunction.RemoveParameterByName("bad_suffixes")
         End If
     End Sub
 
     Private Sub AddGoodSuffixesPar()
         If ucrChkTraits.Checked AndAlso Not ucrInputGoodTraits.IsEmpty Then
             clsCreateTricotData.AddParameter("good_suffixes", Chr(34) & ucrInputGoodTraits.GetText & Chr(34))
-            clsDefineTricotDataFunction.AddParameter("good_suffixes", Chr(34) & ucrInputGoodTraits.GetText & Chr(34), iPosition:=1)
+            'clsDefineTricotDataFunction.AddParameter("good_suffixes", Chr(34) & ucrInputGoodTraits.GetText & Chr(34), iPosition:=1)
         Else
             clsCreateTricotData.RemoveParameterByName("good_suffixes")
-            clsDefineTricotDataFunction.RemoveParameterByName("good_suffixes")
+            'clsDefineTricotDataFunction.RemoveParameterByName("good_suffixes")
         End If
     End Sub
 
     Private Sub ucrInputNAS_NameChanged() Handles ucrInputNAS.ControlValueChanged
         If ucrInputNAS.IsEmpty() Then
             clsCreateTricotData.RemoveParameterByName("na_candidates")
-            clsDefineTricotDataFunction.RemoveParameterByName("na_candidates")
+            'clsDefineTricotDataFunction.RemoveParameterByName("na_candidates")
         Else
             clsCreateTricotData.AddParameter("na_candidates", Chr(34) & ucrInputNAS.GetText & Chr(34))
-            clsDefineTricotDataFunction.AddParameter("na_candidates", Chr(34) & ucrInputNAS.GetText & Chr(34), iPosition:=3)
+            'clsDefineTricotDataFunction.AddParameter("na_candidates", Chr(34) & ucrInputNAS.GetText & Chr(34), iPosition:=3)
         End If
     End Sub
 
     Private Sub AddVarietyColsParam()
-        If ucrChkSpecifyVariety.Checked AndAlso Not ucrReceiverVarietyVariables.IsEmpty() Then
-            clsDefineTricotDataFunction.AddParameter("variety_cols", ucrReceiverVarietyVariables.GetVariableNames(), iPosition:=5)
-            clsCreateTricotData.AddParameter("variety_cols", ucrReceiverVarietyVariables.GetVariableNames(), iPosition:=5)
+        If ucrChkSpecifyVariety.Checked Then
+            ucrReceiverVarietyVariables.SetMeAsReceiver()
+            If Not ucrReceiverVarietyVariables.IsEmpty() Then
+                clsDefineTricotDataFunction.AddParameter("variety_cols", ucrReceiverVarietyVariables.GetVariableNames(), iPosition:=5)
+                clsCreateTricotData.AddParameter("variety_cols", ucrReceiverVarietyVariables.GetVariableNames(), iPosition:=5)
+            End If
         Else
+            ucrReceiverIDVariable.SetMeAsReceiver()
             If clsDefineTricotDataFunction.ContainsParameter("variety_cols") Then
                 clsDefineTricotDataFunction.RemoveParameterByName("variety_cols")
             End If
@@ -293,7 +304,7 @@ Public Class sdgTransformations
 
     Private Sub AddRankValuesParam()
         If ucrChkSpecifyRankValues.Checked AndAlso Not ucrInputRankValues.IsEmpty() Then
-            clsCreateTricotData.AddParameter("rank_values", ucrInputRankValues.GetText(), iPosition:=6)
+            clsCreateTricotData.AddParameter("rank_values", "c(" & ucrInputRankValues.GetText() & ")", iPosition:=6)
         Else
             If clsCreateTricotData.ContainsParameter("rank_values") Then
                 clsCreateTricotData.RemoveParameterByName("rank_values")
@@ -302,9 +313,13 @@ Public Class sdgTransformations
     End Sub
 
     Private Sub AddDataTraitColsParam()
-        If ucrChkSpecifyTraitVariables.Checked AndAlso Not ucrReceiverTraitVariables.IsEmpty() Then
-            clsCreateTricotData.AddParameter("data_trait_cols", ucrReceiverTraitVariables.GetVariableNames(), iPosition:=7)
+        If ucrChkSpecifyTraitVariables.Checked Then
+            ucrReceiverTraitVariables.SetMeAsReceiver()
+            If Not ucrReceiverTraitVariables.IsEmpty() Then
+                clsCreateTricotData.AddParameter("data_trait_cols", ucrReceiverTraitVariables.GetVariableNames(), iPosition:=7)
+            End If
         Else
+            ucrReceiverIDVariable.SetMeAsReceiver()
             If clsCreateTricotData.ContainsParameter("data_trait_cols") Then
                 clsCreateTricotData.RemoveParameterByName("data_trait_cols")
             End If
@@ -312,9 +327,13 @@ Public Class sdgTransformations
     End Sub
 
     Private Sub AddCarryColsParam()
-        If ucrChkCarryColumns.Checked AndAlso Not ucrReceiverCarryColumns.IsEmpty() Then
-            clsCreateTricotData.AddParameter("carry_cols", ucrReceiverCarryColumns.GetVariableNames(), iPosition:=8)
+        If ucrChkCarryColumns.Checked Then
+            ucrReceiverCarryColumns.SetMeAsReceiver()
+            If Not ucrReceiverCarryColumns.IsEmpty() Then
+                clsCreateTricotData.AddParameter("carry_cols", ucrReceiverCarryColumns.GetVariableNames(), iPosition:=8)
+            End If
         Else
+            ucrReceiverIDVariable.SetMeAsReceiver()
             If clsCreateTricotData.ContainsParameter("carry_cols") Then
                 clsCreateTricotData.RemoveParameterByName("carry_cols")
             End If
@@ -434,10 +453,10 @@ Public Class sdgTransformations
             clsTraitColsFunction.RemoveParameterByName("trait_2")
             If Not ucrReceiverTraits1.IsEmpty Then
                 clsTraitColsFunction.AddParameter("trait_cols_a", strParameterValue:=ucrReceiverTraits1.GetVariableNames, bIncludeArgumentName:=False)
-                clsDefineTricotDataFunction.AddParameter("trait_cols", strParameterValue:=ucrReceiverTraits1.GetVariableNames, iPosition:=4)
+                'clsDefineTricotDataFunction.AddParameter("trait_cols", strParameterValue:=ucrReceiverTraits1.GetVariableNames, iPosition:=4)
             Else
                 clsIDColsFunction.RemoveParameterByName("trait_cols_a")
-                clsDefineTricotDataFunction.RemoveParameterByName("trait_cols")
+                'clsDefineTricotDataFunction.RemoveParameterByName("trait_cols")
             End If
         Else
             clsTraitColsFunction.AddParameter("trait_1", Chr(34) & "trait" & Chr(34), bIncludeArgumentName:=False)

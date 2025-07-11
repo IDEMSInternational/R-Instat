@@ -98,6 +98,7 @@ Public Class dlgTransformTricotData
 
         clsDefineTricotDataFunction.SetRCommand("define_tricot_data")
         clsDefineTricotDataFunction.AddParameter("output_data_levels", clsRFunctionParameter:=clsCreateTricotData, iPosition:=0, bIncludeArgumentName:=False)
+        clsDefineTricotDataFunction.iCallType = 2
 
         clsPlotOperator.SetOperation("%>%")
         clsPlotOperator.AddParameter("left", "output_data_levels", iPosition:=0)
@@ -184,6 +185,7 @@ Public Class dlgTransformTricotData
         clsRankingFunction.AddParameter("variety", clsROperatorParameter:=clsIdVarietyOperator, iPosition:=3)
         clsRankingFunction.AddParameter("false", "FALSE", bIncludeArgumentName:=False, iPosition:=4)
         clsRankingFunction.SetAssignTo("rankings_list")
+        clsRankingFunction.iCallType = 2
 
         clsAddFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
         clsAddFunction.AddParameter("data_name", "plot_data_name", iPosition:=0)
@@ -200,6 +202,7 @@ Public Class dlgTransformTricotData
         clsRankingGroupedFunction.AddParameter("variety", "plot_data_variety_var", iPosition:=3)
         clsRankingGroupedFunction.AddParameter("true", "TRUE", bIncludeArgumentName:=False, iPosition:=4)
         clsRankingGroupedFunction.SetAssignTo("grouped_rankings_list")
+        clsRankingGroupedFunction.iCallType = 2
 
         clsAddGroupedFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_object")
         clsAddGroupedFunction.AddParameter("data_name", "plot_data_name", iPosition:=0)
