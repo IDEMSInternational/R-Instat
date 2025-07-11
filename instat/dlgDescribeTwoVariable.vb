@@ -1410,10 +1410,30 @@ Public Class dlgDescribeTwoVariable
         ChangeBaseRCode()
     End Sub
 
+    'This sub is used to update the base R code when the control value changes in the ucrSelectorDescribeTwoVar.
+    'This now updated from the previous ucrSelectorDescribeTwoVar_ControlValueChanged sub.
     Private Sub ucrSelectorDescribeTwoVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeTwoVar.ControlValueChanged
-        clsGroupByPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsRAnovaTableFunction.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        ' Always update the data parameter for these functions
+        clsRAnovaTable2Function.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsRAnovaSwapTable2Funtion.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+
+        ' --- Clear all variable receivers to avoid referencing old variables ---
+        ucrReceiverFirstVars.ResetText()
+        ucrReceiverSecondTwoVariableFactor.ResetText()
+        ucrReceiverSkimrGroupByFactor.ResetText()
+        ucrReceiverSecondSkimrGroupByFactor.ResetText()
+        ucrReceiverThreeVariableThirdVariable.ResetText()
+        ucrReceiverPercentages.ResetText()
+        ucrReceiverColumns.ResetText()
+        ucrReceiverThreeVariableSecondFactor.ResetText()
+        ucrSaveTable.Reset()
     End Sub
+
+    ' This sub is commented out because it is not used in the current implementation.
+    'Private Sub ucrSelectorDescribeTwoVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDescribeTwoVar.ControlValueChanged
+    '    clsGroupByPipeOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+    '    clsRAnovaTableFunction.AddParameter("data", Chr(34) & ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+    'End Sub
 
     Private Sub UpdateSummaryTableFunction()
         If rdoSkim.Checked Then
