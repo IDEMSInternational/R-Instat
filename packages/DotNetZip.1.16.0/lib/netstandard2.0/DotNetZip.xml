@@ -4238,6 +4238,85 @@
              the version number on the DotNetZip assembly, formatted as a string.
             </returns>
         </member>
+        <member name="P:Ionic.Zip.Deflate64.InputBuffer.AvailableBits">
+            <summary>Total bits available in the input buffer.</summary>
+        </member>
+        <member name="P:Ionic.Zip.Deflate64.InputBuffer.AvailableBytes">
+            <summary>Total bytes available in the input buffer.</summary>
+        </member>
+        <member name="M:Ionic.Zip.Deflate64.InputBuffer.EnsureBitsAvailable(System.Int32)">
+            <summary>Ensure that count bits are in the bit buffer.</summary>
+            <param name="count">Can be up to 16.</param>
+            <returns>Returns false if input is not sufficient to make this true.</returns>
+        </member>
+        <member name="M:Ionic.Zip.Deflate64.InputBuffer.TryLoad16Bits">
+            <summary>
+            This function will try to load 16 or more bits into bitBuffer.
+            It returns whatever is contained in bitBuffer after loading.
+            The main difference between this and GetBits is that this will
+            never return -1. So the caller needs to check AvailableBits to
+            see how many bits are available.
+            </summary>
+        </member>
+        <member name="M:Ionic.Zip.Deflate64.InputBuffer.GetBits(System.Int32)">
+            <summary>Gets count bits from the input buffer. Returns -1 if not enough bits available.</summary>
+        </member>
+        <member name="M:Ionic.Zip.Deflate64.InputBuffer.CopyTo(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Copies length bytes from input buffer to output buffer starting at output[offset].
+            You have to make sure, that the buffer is byte aligned. If not enough bytes are
+            available, copies fewer bytes.
+            </summary>
+            <returns>Returns the number of bytes copied, 0 if no byte is available.</returns>
+        </member>
+        <member name="M:Ionic.Zip.Deflate64.InputBuffer.NeedsInput">
+            <summary>
+            Return true is all input bytes are used.
+            This means the caller can call SetInput to add more input.
+            </summary>
+        </member>
+        <member name="M:Ionic.Zip.Deflate64.InputBuffer.SetInput(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Set the byte array to be processed.
+            All the bits remained in bitBuffer will be processed before the new bytes.
+            We don't clone the byte array here since it is expensive.
+            The caller should make sure after a buffer is passed in.
+            It will not be changed before calling this function again.
+            </summary>
+        </member>
+        <member name="M:Ionic.Zip.Deflate64.InputBuffer.SkipBits(System.Int32)">
+            <summary>Skip n bits in the buffer.</summary>
+        </member>
+        <member name="M:Ionic.Zip.Deflate64.InputBuffer.SkipToByteBoundary">
+            <summary>Skips to the next byte boundary.</summary>
+        </member>
+        <member name="T:Ionic.Zip.Deflate64.OutputWindow">
+            <summary>
+            This class maintains a window for decompressed output.
+            We need to keep this because the decompressed information can be
+            a literal or a length/distance pair. For length/distance pair,
+            we need to look back in the output window and copy bytes from there.
+            We use a byte array of WindowSize circularly.
+            </summary>
+        </member>
+        <member name="M:Ionic.Zip.Deflate64.OutputWindow.Write(System.Byte)">
+            <summary>Add a byte to output window.</summary>
+        </member>
+        <member name="M:Ionic.Zip.Deflate64.OutputWindow.CopyFrom(Ionic.Zip.Deflate64.InputBuffer,System.Int32)">
+            <summary>
+            Copy up to length of bytes from input directly.
+            This is used for uncompressed block.
+            </summary>
+        </member>
+        <member name="P:Ionic.Zip.Deflate64.OutputWindow.FreeBytes">
+            <summary>Free space in output window.</summary>
+        </member>
+        <member name="P:Ionic.Zip.Deflate64.OutputWindow.AvailableBytes">
+            <summary>Bytes not consumed in output window.</summary>
+        </member>
+        <member name="M:Ionic.Zip.Deflate64.OutputWindow.CopyTo(System.Byte[],System.Int32,System.Int32)">
+            <summary>Copy the decompressed bytes to output array.</summary>
+        </member>
         <member name="T:Ionic.Zip.EncryptionAlgorithm">
              <summary>
              An enum that provides the various encryption algorithms supported by this
@@ -8011,7 +8090,7 @@
                <see
                href="http://www.pkware.com/documents/casestudies/APPNOTE.TXT">PKWare's
                ZIP Specification</see> describes a number of distinct
-               cmopression methods that can be used within a zip
+               compression methods that can be used within a zip
                file. DotNetZip supports a subset of them.
              </remarks>
         </member>
@@ -8026,6 +8105,12 @@
               href="http://www.ietf.org/rfc/rfc1951.txt">IETF RFC
               1951</see>.  This is the "normal" compression used in zip
               files. For COM environments, the value is 8.
+            </summary>
+        </member>
+        <member name="F:Ionic.Zip.CompressionMethod.Deflate64">
+            <summary>
+            DEFLATE64 compression. (Decompress only).
+            For COM environments, the value is 9.
             </summary>
         </member>
         <member name="F:Ionic.Zip.CompressionMethod.BZip2">

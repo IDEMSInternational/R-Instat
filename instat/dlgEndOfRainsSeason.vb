@@ -15,8 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
+
 Public Class dlgEndOfRainsSeason
     Private bFirstload As Boolean = True
+    Private bDialogJustShown As Boolean = False
     Private bReset As Boolean = True
     Private strRainMin As String = "rain_min"
     Private strRainMax As String = "rain_max"
@@ -179,6 +182,8 @@ Public Class dlgEndOfRainsSeason
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
+        bDialogJustShown = True
+
     End Sub
 
     Private Sub InitialiseDialog()
@@ -1468,6 +1473,9 @@ Public Class dlgEndOfRainsSeason
 
     Private Sub ucrPnlEvaporation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvaporation.ControlValueChanged, ucrReceiverEvaporation.ControlValueChanged, ucrInputEvaporation.ControlValueChanged
         Evaporation()
+        If Me.Visible Then
+            CheckForMissingValues()
+        End If
     End Sub
 
     Private Sub Evaporation()
@@ -1637,4 +1645,43 @@ Public Class dlgEndOfRainsSeason
         End If
         ucrChkFilled.Enabled = ucrChkEndofSeasonOccurence.Checked
     End Sub
+
+    Private Sub CheckForMissingValues()
+        If rdoEndOfSeasons.Checked AndAlso rdoVariableEvaporation.Checked Then
+            If Not ucrReceiverEvaporation.IsEmpty Then
+                Dim clsCalcFunction, clsIsNAFunction, clsAnyFunction As New RFunction
+                Dim strDataFrame As String = ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+                Dim strVariable As String = ucrReceiverEvaporation.GetVariableNames(False)
+
+                ' Build: any(is.na(data_book$get_columns_from_data(...)))
+                clsCalcFunction.SetRCommand("data_book$get_columns_from_data")
+                clsCalcFunction.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34), iPosition:=0)
+                clsCalcFunction.AddParameter("col_names", Chr(34) & strVariable & Chr(34), iPosition:=0)
+
+                clsIsNAFunction.SetRCommand("is.na")
+                clsIsNAFunction.AddParameter("na", clsRFunctionParameter:=clsCalcFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+                clsAnyFunction.SetRCommand("any")
+                clsAnyFunction.AddParameter("any", clsRFunctionParameter:=clsIsNAFunction, iPosition:=0, bIncludeArgumentName:=False)
+
+                ' Run and check result
+                Try
+                    Dim symResult As SymbolicExpression = frmMain.clsRLink.RunInternalScriptGetValue(clsAnyFunction.ToScript)
+                    If symResult.AsLogical()(0) Then
+                        MsgBox("Sorry, missing values are not permitted in this variable here. They have to be estimated first.", MsgBoxStyle.Exclamation)
+                    End If
+                Catch ex As Exception
+                    ' Do nothing on error — no message
+                End Try
+            End If
+        End If
+    End Sub
+
+    Private Sub dlgEndOfRainsSeason_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        If bDialogJustShown AndAlso Not ucrReceiverEvaporation.IsEmpty Then
+            CheckForMissingValues()
+            bDialogJustShown = False ' So it doesn't repeat if Shown is triggered again
+        End If
+    End Sub
+
 End Class
