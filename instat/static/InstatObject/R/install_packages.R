@@ -189,7 +189,8 @@ packs <-
     "curl",
     "ClimMobTools",
     "gtsummary",
-    "PlackettLuce"
+    "PlackettLuce",
+    "purrr"
  )
 
 install.packages(packs, dependencies = TRUE, repos='https://cloud.r-project.org', type="win.binary")
