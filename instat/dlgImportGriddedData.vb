@@ -68,7 +68,8 @@ Public Class dlgImportGriddedData
         ucrReceiverMaxPlantingDate.SetParameterIsString()
 
         ucrNudMaxPlantingDate.SetParameter(New RParameter("max_date", 7))
-        ucrNudMaxPlantingDate.SetMinMax(25, 366)
+        ucrNudMaxPlantingDate.Minimum = 25
+        ucrNudMaxPlantingDate.Maximum = 366
         ucrNudMaxPlantingDate.Increment = 1
 
         ucrInputSource.SetParameter(New RParameter("source", 0))
@@ -178,6 +179,7 @@ Public Class dlgImportGriddedData
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorIRIVariable.SetRCode(clsMultipleIRIFunction, bReset)
+        ucrNudMaxPlantingDate.SetRCode(clsMultipleIRIFunction, bReset)
         ucrPnlMaxPlantingDate.SetRCode(clsDummyFunction, bReset)
         If bReset Then
             SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -340,10 +342,10 @@ Public Class dlgImportGriddedData
         clsMultipleIRIFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$download_from_IRI_multiple")
         clsMultipleIRIFunction.AddParameter("data", strData, iPosition:=2)
         clsMultipleIRIFunction.AddParameter("source", strDownload, iPosition:=0)
-        'clsMultipleIRIFunction.AddParameter("path", Chr(34) & Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\", "/") & Chr(34), iPosition:=3)
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDataFrameName.ControlContentsChanged, ucrInputMinLon.ControlContentsChanged, ucrInputMaxLon.ControlContentsChanged, ucrInputMinLat.ControlContentsChanged, ucrInputMaxLat.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrDtpMinDate.ControlContentsChanged, ucrDtpMaxDate.ControlContentsChanged, ucrPnlDateRange.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDataFrameName.ControlContentsChanged, ucrInputMinLon.ControlContentsChanged, ucrInputMaxLon.ControlContentsChanged, ucrInputMinLat.ControlContentsChanged, ucrInputMaxLat.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrDtpMinDate.ControlContentsChanged, ucrDtpMaxDate.ControlContentsChanged, ucrPnlDateRange.ControlContentsChanged,
+            ucrReceiverIDVariable.ControlContentsChanged, ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongtitude.ControlContentsChanged, ucrReceiverMaxPlantingDate.ControlContentsChanged, ucrReceiverMinPlantingDate.ControlContentsChanged, ucrNudMaxPlantingDate.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -355,7 +357,6 @@ Public Class dlgImportGriddedData
         ElseIf rdoMaxPlantValue.Checked Then
             ucrNudMaxPlantingDate.Visible = True
             ucrReceiverMaxPlantingDate.Visible = False
-            clsMultipleIRIFunction.AddParameter("max_date", ucrNudMaxPlantingDate.GetText, iPosition:=7)
         End If
     End Sub
 
