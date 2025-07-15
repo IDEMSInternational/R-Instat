@@ -33,10 +33,11 @@ Partial Class dlgImportfromClimMob
         '
         'cmdFindForms
         '
-        Me.cmdFindForms.Location = New System.Drawing.Point(27, 91)
+        Me.cmdFindForms.Location = New System.Drawing.Point(13, 76)
+        Me.cmdFindForms.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdFindForms.Name = "cmdFindForms"
-        Me.cmdFindForms.Size = New System.Drawing.Size(100, 23)
-        Me.cmdFindForms.TabIndex = 9
+        Me.cmdFindForms.Size = New System.Drawing.Size(150, 35)
+        Me.cmdFindForms.TabIndex = 3
         Me.cmdFindForms.Text = "Find Forms"
         Me.cmdFindForms.UseVisualStyleBackColor = True
         '
@@ -46,36 +47,38 @@ Partial Class dlgImportfromClimMob
         Me.ucrInputChooseForm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputChooseForm.GetSetSelectedIndex = -1
         Me.ucrInputChooseForm.IsReadOnly = False
-        Me.ucrInputChooseForm.Location = New System.Drawing.Point(139, 91)
-        Me.ucrInputChooseForm.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputChooseForm.Location = New System.Drawing.Point(176, 80)
+        Me.ucrInputChooseForm.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputChooseForm.Name = "ucrInputChooseForm"
-        Me.ucrInputChooseForm.Size = New System.Drawing.Size(167, 23)
-        Me.ucrInputChooseForm.TabIndex = 11
+        Me.ucrInputChooseForm.Size = New System.Drawing.Size(287, 35)
+        Me.ucrInputChooseForm.TabIndex = 4
         '
         'ucrBase
         '
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrBase.Location = New System.Drawing.Point(5, 181)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 185)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 12
+        Me.ucrBase.Size = New System.Drawing.Size(611, 77)
+        Me.ucrBase.TabIndex = 6
         '
         'lblServerName
         '
-        Me.lblServerName.Location = New System.Drawing.Point(27, 54)
+        Me.lblServerName.Location = New System.Drawing.Point(18, 31)
+        Me.lblServerName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblServerName.Name = "lblServerName"
-        Me.lblServerName.Size = New System.Drawing.Size(111, 21)
-        Me.lblServerName.TabIndex = 7
+        Me.lblServerName.Size = New System.Drawing.Size(166, 32)
+        Me.lblServerName.TabIndex = 0
         Me.lblServerName.Text = "Server Name:"
         '
         'cmdKey
         '
-        Me.cmdKey.Location = New System.Drawing.Point(316, 54)
+        Me.cmdKey.Location = New System.Drawing.Point(476, 24)
+        Me.cmdKey.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cmdKey.Name = "cmdKey"
-        Me.cmdKey.Size = New System.Drawing.Size(86, 23)
-        Me.cmdKey.TabIndex = 15
+        Me.cmdKey.Size = New System.Drawing.Size(129, 35)
+        Me.cmdKey.TabIndex = 2
         Me.cmdKey.Text = "Get Key..."
         Me.cmdKey.UseVisualStyleBackColor = True
         '
@@ -85,26 +88,26 @@ Partial Class dlgImportfromClimMob
         Me.ucrInputServerName.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrInputServerName.GetSetSelectedIndex = -1
         Me.ucrInputServerName.IsReadOnly = False
-        Me.ucrInputServerName.Location = New System.Drawing.Point(139, 54)
-        Me.ucrInputServerName.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputServerName.Location = New System.Drawing.Point(141, 27)
+        Me.ucrInputServerName.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputServerName.Name = "ucrInputServerName"
-        Me.ucrInputServerName.Size = New System.Drawing.Size(167, 21)
-        Me.ucrInputServerName.TabIndex = 16
+        Me.ucrInputServerName.Size = New System.Drawing.Size(322, 32)
+        Me.ucrInputServerName.TabIndex = 1
         '
         'ucrSaveFile
         '
         Me.ucrSaveFile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ucrSaveFile.Location = New System.Drawing.Point(27, 145)
-        Me.ucrSaveFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveFile.Location = New System.Drawing.Point(13, 135)
+        Me.ucrSaveFile.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveFile.Name = "ucrSaveFile"
-        Me.ucrSaveFile.Size = New System.Drawing.Size(375, 22)
-        Me.ucrSaveFile.TabIndex = 30
+        Me.ucrSaveFile.Size = New System.Drawing.Size(562, 34)
+        Me.ucrSaveFile.TabIndex = 5
         '
         'dlgImportfromClimMob
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 241)
+        Me.ClientSize = New System.Drawing.Size(635, 272)
         Me.Controls.Add(Me.ucrSaveFile)
         Me.Controls.Add(Me.ucrInputServerName)
         Me.Controls.Add(Me.cmdKey)
@@ -113,6 +116,7 @@ Partial Class dlgImportfromClimMob
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblServerName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "dlgImportfromClimMob"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

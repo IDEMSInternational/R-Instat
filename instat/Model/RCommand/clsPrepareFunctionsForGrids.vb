@@ -205,6 +205,20 @@ Public Class clsPrepareFunctionsForGrids
         _RLink.RunScript(strScript & strTemp, strComment:="Toolbar Option: View R Column Metadata", bSeparateThread:=False)
     End Sub
 
+    Public Sub ViewDataframeMetaData()
+        Dim clsGetDataFrameMetaData As New RFunction
+        Dim clsViewMetaData As New RFunction
+        Dim strScript As String = ""
+        Dim strTemp As String
+        clsGetDataFrameMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame_metadata")
+        clsGetDataFrameMetaData.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
+        clsViewMetaData.SetRCommand("View")
+        clsViewMetaData.AddParameter("x", clsRFunctionParameter:=clsGetDataFrameMetaData)
+        clsGetDataFrameMetaData.SetAssignTo(_strDataFrame)
+        strTemp = clsViewMetaData.ToScript(strScript)
+        _RLink.RunScript(strScript & strTemp, strComment:="Toolbar Option: View R Data Frame Metadata", bSeparateThread:=False)
+    End Sub
+
     ''' <summary>
     ''' insert new rows
     ''' </summary>
