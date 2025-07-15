@@ -19,7 +19,7 @@ Public Class dlgSpells
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsSpellLength, clsMaxSpellManipulation, clsIfElseFirstDoyFilledFunction, clsSubSpellLength1 As New RFunction
-    Private clsMaxSpellSummary, clsMaxValueList, clsMaxFunction, clsMaxSpellSubCalcs As New RFunction
+    Private clsMaxSpellSummary, clsDummyFunction, clsMaxValueList, clsMaxFunction, clsMaxSpellSubCalcs As New RFunction
     Private clsDayFilter, clsGroupBy, clsGroupByStation, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsSpellLogicalCalc, clsSpellsLogicalCalc, clsSpellsLogCalcFunc, clsDotSpellsFunction As New RFunction
@@ -35,6 +35,7 @@ Public Class dlgSpells
     Private strGreaterThan As String = "Greater than or equal to"
     Private strBetween As String = "Between"
     Private strExcludingBetween As String = "Excluding between"
+    Private bResetSubdialog As Boolean = False
 
     Private Sub dlgSpells_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -55,8 +56,11 @@ Public Class dlgSpells
 
         ucrPnlOptions.AddRadioButton(rdoAnnuel)
         ucrPnlOptions.AddRadioButton(rdoSpells)
+        ucrPnlOptions.AddRadioButton(rdoStation)
         ucrPnlOptions.AddParameterValuesCondition(rdoAnnuel, "type", Chr(34) & "summary" & Chr(34))
         ucrPnlOptions.AddParameterValuesCondition(rdoSpells, "type", Chr(34) & "filter" & Chr(34))
+
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverYear, {rdoSpells, rdoAnnuel}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorForSpells.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForSpells.SetParameterIsString()
@@ -79,6 +83,7 @@ Public Class dlgSpells
         ucrReceiverYear.Selector = ucrSelectorForSpells
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.SetLinkedDisplayControl(lblYear)
 
         ucrReceiverDate.SetParameter(New RParameter("date", 0, False))
         ucrReceiverDate.SetParameterIsString()
@@ -114,7 +119,11 @@ Public Class dlgSpells
         'ucrChkConditional.SetText("Assume condition not satisfied at start of each period")
         'ucrChkConditional.SetParameter(New RParameter("initial_value"))
         'ucrChkConditional.SetValuesCheckedAndUnchecked("0", "NA_real_")
-        'ucrChkConditional.SetRDefault("NA_real_")
+        'ucrChkConditional.SetRDefault("NA_real_
+
+        ucrChkDayRange.SetText("Day Range")
+        ucrChkDayRange.AddParameterValuesCondition(True, "day", "True")
+        ucrChkDayRange.AddParameterValuesCondition(False, "day", "False")
 
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
@@ -123,7 +132,6 @@ Public Class dlgSpells
 
         ucrInputCondition.AddToLinkedControls(ucrInputSpellLower, {strLessThan, strGreaterThan, strBetween, strExcludingBetween}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrInputCondition.AddToLinkedControls(ucrInputSpellUpper, {strBetween, strExcludingBetween}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
-
         ucrInputFilterPreview.IsReadOnly = True
     End Sub
 
@@ -136,6 +144,7 @@ Public Class dlgSpells
         clsSpellFilterFunction = New RFunction
         clsDotSpellsFunction = New RFunction
         clsIfElseFirstDoyFilledFunction = New RFunction
+        clsDummyFunction = New RFunction
         Dim strSpellLogical As String = "spell_day"
         Dim strSpellName As String = "spell_length"
 
@@ -173,6 +182,8 @@ Public Class dlgSpells
         ucrInputSpellLower.SetName(0)
         ucrInputSpellUpper.SetName(0.85)
 
+        clsDummyFunction.AddParameter("day", "False", iPosition:=0)
+
         ' key
 
         clsDayFilterCalcFromConvert = New RFunction
@@ -182,6 +193,7 @@ Public Class dlgSpells
         clsDayFilterCalcFromList.SetRCommand("list")
         clsDayFilterCalcFromConvert.AddParameter("x", clsRFunctionParameter:=clsDayFilterCalcFromList, iPosition:=0)
 
+        bResetSubdialog = True
         'DayFromandTo
         clsDayFromAndToOperator.bToScriptAsRString = True
         clsDayFilter.SetRCommand("instatCalculations::instat_calculation$new")
@@ -315,27 +327,25 @@ Public Class dlgSpells
         clsMaxSpellManipulation.SetRCommand("list")
         clsMaxSpellManipulation.AddParameter("manip1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
         clsMaxSpellManipulation.AddParameter("manip2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False, iPosition:=1)
-        clsMaxSpellManipulation.AddParameter("manip3", clsRFunctionParameter:=clsDayFilter, bIncludeArgumentName:=False, iPosition:=2)
 
         clsSpellsFunction.bToScriptAsRString = True
         clsSpellsFunction.SetPackageName("instatClimatic")
         clsSpellsFunction.SetRCommand("spells")
         clsSpellsFunction.AddParameter("x", strSpellLogical)
 
-
-
         clsCurrCalc = clsMaxSpellSummary
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxSpellSummary, iPosition:=0)
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
-
+        AddDayRange()
+        AddDateDoy()
+        UpdateDateDoy()
         'Base Function
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsSpellLogicalGreaterThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsGreaterThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=2)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("rain", 0), iAdditionalPairNo:=3)
@@ -343,26 +353,48 @@ Public Class dlgSpells
         ucrInputSpellLower.AddAdditionalCodeParameterPair(clsLessThanOperator, New RParameter("left", 1), iAdditionalPairNo:=1)
         ucrInputNewColumnName.AddAdditionalCodeParameterPair(clsSpellFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
 
-        ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrReceiverElement.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputSpellLower.SetRCode(clsSpellLogicalGreaterThanOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsSpellLogicalLessThanOperator, bReset)
         ucrInputNewColumnName.SetRCode(clsMaxSpellSummary, bReset)
-        ucrPnlOptions.SetRCode(clsCurrCalc, bReset)
+        If bReset Then
+            ucrChkDayRange.SetRCode(clsDummyFunction, bReset)
+            ucrPnlOptions.SetRCode(clsCurrCalc, bReset)
+        End If
+        AddDateDoy()
+        UpdateDateDoy()
     End Sub
 
     Private Sub cmdDoyRange_Click(sender As Object, e As EventArgs) Handles cmdDoyRange.Click
-        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFilter, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False))
+        Dim bUseDate As Boolean = rdoStation.Checked
+        sdgDoyRange.Setup(clsNewDoyFilterCalc:=clsDayFilter, clsNewIfElseFirstDoyFilledFunction:=clsIfElseFirstDoyFilledFunction, clsNewDayFromOperator:=clsDayFromOperator, clsNewDayToOperator:=clsDayToOperator, clsNewCalcFromList:=clsDayFilterCalcFromList, strNewMainDataFrame:=ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strNewDoyColumn:=ucrReceiverDOY.GetVariableNames(False), bSetUseDateVisible:=True, bReset:=bResetSubdialog)
+        sdgDoyRange.SetUseDateVisibility(bUseDate)
+        If Not bUseDate Then
+            sdgDoyRange.ucrChkUseDate.Checked = False
+        End If
         sdgDoyRange.ShowDialog()
-        UpdateDayFilterPreview()
+            UpdateDayFilterPreview()
+        AddDayRange()
+        AddDateDoy()
+        UpdateDateDoy()
+        bResetSubdialog = False
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ((ucrInputCondition.GetText = strBetween AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strExcludingBetween AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strLessThan AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strGreaterThan AndAlso Not ucrInputSpellUpper.IsEmpty)) Then
-            ucrBase.OKEnabled(True)
+        If rdoSpells.Checked OrElse rdoAnnuel.Checked Then
+            If Not ucrReceiverElement.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ((ucrInputCondition.GetText = strBetween AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strExcludingBetween AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strLessThan AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strGreaterThan AndAlso Not ucrInputSpellUpper.IsEmpty)) Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
-            ucrBase.OKEnabled(False)
+            If Not ucrReceiverElement.IsEmpty AndAlso Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputNewColumnName.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso ((ucrInputCondition.GetText = strBetween AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strExcludingBetween AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strLessThan AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = strGreaterThan AndAlso Not ucrInputSpellUpper.IsEmpty)) Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -418,11 +450,16 @@ Public Class dlgSpells
     End Sub
 
     Private Sub GroupByOptions()
-        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
-            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")")
+        If rdoAnnuel.Checked OrElse rdoSpells.Checked Then
+            If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
+                clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")")
+            Else
+                clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")")
+            End If
         Else
-            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")")
+            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")", iPosition:=1)
         End If
+
     End Sub
 
     Private Sub GroupByStation()
@@ -437,14 +474,11 @@ Public Class dlgSpells
         End If
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorForSpells.ControlValueChanged
-        If Not ucrReceiverDOY.IsEmpty Then
-            clsDayFilterCalcFromList.AddParameter(ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDOY.GetVariableNames(), iPosition:=0)
-        Else
-            clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        End If
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrReceiverDOY.ControlValueChanged
         UpdateDayFilterPreview()
         GroupByStation()
+        AddDateDoy()
+        UpdateDateDoy()
     End Sub
 
     'Private Sub ucrChkConditional_ControlValueChanged(ucrChangedControl As ucrCore)
@@ -469,7 +503,11 @@ Public Class dlgSpells
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
-        If rdoAnnuel.Checked Then
+        ResetUseDateIfNotStation()
+        GroupByOptions()
+        TestOKEnabled()
+
+        If rdoAnnuel.Checked OrElse rdoStation.Checked Then
             clsCurrCalc = clsMaxSpellSummary
             clsSpellLogicalAndOperator.bToScriptAsRString = True
             clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxSpellSummary, iPosition:=0)
@@ -478,6 +516,8 @@ Public Class dlgSpells
             clsCurrCalc = clsSpellFilterFunction
             clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsSpellFilterFunction, iPosition:=0)
         End If
+        AddDateDoy()
+        UpdateDateDoy()
     End Sub
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
@@ -488,15 +528,95 @@ Public Class dlgSpells
         clsDayFilterCalcFromList.ClearParameters()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrInputNewColumnName.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrInputNewColumnName.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub UpdateDayFilterPreview()
-        If ucrReceiverDOY.IsEmpty Then
-            ucrInputFilterPreview.SetName("")
+    Public Sub AddDateDoy()
+        If rdoStation.Checked AndAlso sdgDoyRange.UseDateChecked Then
+            clsDayFromOperator.AddParameter("date", ucrReceiverDate.GetVariableNames(False), iPosition:=0)
+            clsDayToOperator.AddParameter("date", ucrReceiverDate.GetVariableNames(False), iPosition:=0)
+            clsDayFromOperator.RemoveParameterByName("doy")
+            clsDayToOperator.RemoveParameterByName("doy")
         Else
-            ucrInputFilterPreview.SetName(clsDayFromAndToOperator.ToScript())
+            clsDayFromOperator.AddParameter("doy", ucrReceiverDOY.GetVariableNames(False), iPosition:=0)
+            clsDayToOperator.AddParameter("doy", ucrReceiverDOY.GetVariableNames(False), iPosition:=0)
+            clsDayFromOperator.RemoveParameterByName("date")
+            clsDayToOperator.RemoveParameterByName("date")
+        End If
+    End Sub
+
+    Private Sub AddDayRange()
+        If ucrChkDayRange.Checked Then
+            cmdDoyRange.Enabled = True
+            ucrInputFilterPreview.Visible = True
+            clsMaxSpellManipulation.AddParameter("manip3", clsRFunctionParameter:=clsDayFilter, bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            cmdDoyRange.Enabled = False
+            ucrInputFilterPreview.Visible = False
+            clsMaxSpellManipulation.RemoveParameterByName("manip3")
+        End If
+    End Sub
+
+    Private Sub ucrChkDayRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDayRange.ControlValueChanged
+        AddDayRange()
+        UpdateDayFilterPreview()
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged
+        AddDateDoy()
+        UpdateDateDoy()
+        UpdateDayFilterPreview()
+    End Sub
+
+    Private bIsUpdatingPreview As Boolean = False
+
+    Private Sub ucrInputFilterPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFilterPreview.ControlValueChanged
+        If bIsUpdatingPreview Then Exit Sub
+        bIsUpdatingPreview = True
+        UpdateDayFilterPreview()
+        bIsUpdatingPreview = False
+    End Sub
+
+    Private Sub UpdateDayFilterPreview()
+        AddDateDoy() ' update first
+        UpdateDateDoy()
+        Dim strPreviewName As String
+        If Not ucrReceiverDate.IsEmpty AndAlso sdgDoyRange.UseDateChecked Then
+            strPreviewName = clsDayFromAndToOperator.ToScript()
+        ElseIf Not ucrReceiverDOY.IsEmpty Then
+            strPreviewName = clsDayFromAndToOperator.ToScript()
+        Else
+            strPreviewName = ""
+        End If
+
+        If ucrInputFilterPreview.GetText() <> strPreviewName Then
+            ucrInputFilterPreview.SetName(strPreviewName)
+        End If
+    End Sub
+
+    Private Sub ResetUseDateIfNotStation()
+        If Not rdoStation.Checked Then
+            sdgDoyRange.ResetUseDate()
+            AddDateDoy()
+            UpdateDateDoy()
+            UpdateDayFilterPreview()
+        End If
+    End Sub
+
+    Private Sub UpdateDateDoy()
+        If rdoStation.Checked AndAlso sdgDoyRange.ucrChkUseDate.Checked Then
+            If Not ucrReceiverDate.IsEmpty Then
+                clsDayFilterCalcFromList.AddParameter(ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDate.GetVariableNames(), iPosition:=0)
+            Else
+                clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            End If
+        Else
+            If Not ucrReceiverDOY.IsEmpty Then
+                clsDayFilterCalcFromList.AddParameter(ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDOY.GetVariableNames(), iPosition:=0)
+            Else
+                clsDayFilterCalcFromList.RemoveParameterByName(ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            End If
         End If
     End Sub
 End Class

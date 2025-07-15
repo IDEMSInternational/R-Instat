@@ -23,6 +23,7 @@ Public Class dlgAddKey
         Prepare
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private bFirstLoad As Boolean = True
@@ -49,7 +50,7 @@ Public Class dlgAddKey
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 504
+        ucrBase.iHelpTopicID = 742
         ucrBase.clsRsyntax.iCallType = 2
         ucrInputCheckInput.IsReadOnly = True
         EnableDisableCmdCheckUnique()
@@ -141,6 +142,8 @@ Public Class dlgAddKey
                 ucrBase.iHelpTopicID = 504
             Case AddkeyMode.Climatic
                 ucrBase.iHelpTopicID = 611
+            Case AddkeyMode.Tricot
+                ucrBase.iHelpTopicID = 742
         End Select
     End Sub
 

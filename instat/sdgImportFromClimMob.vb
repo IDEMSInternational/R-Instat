@@ -18,12 +18,23 @@ Imports instat.Translations
 Imports System.IO
 
 Public Class sdgImportFromClimMob
+    Private bFirstload As Boolean
+
     Private Sub sdgImportFromClimMob_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstload Then
+            InitialiseDialog()
+            bFirstload = False
+        End If
         ucrInputKeyPath.IsReadOnly = False
         autoTranslate(Me)
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrBaseSubdialog.iHelpTopicID = 716
+    End Sub
+
     Public Sub Setup(clsNewKeyParameter As RParameter)
+        'ucrBaseSubdialog.iHelpTopicID = 716
         ucrInputKeyPath.SetParameter(clsNewKeyParameter, 0)
     End Sub
 

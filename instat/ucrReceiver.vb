@@ -569,11 +569,20 @@ Public Class ucrReceiver
         SetIncludedAutoFillProperties(dctTemp)
     End Sub
 
-    Public Sub SetTricotType(strInclude As String())
-        If strInclude Is Nothing OrElse strInclude.Length = 0 Then Exit Sub
+    Public Sub SetTricotType(strTemp As String)
+        Dim dctTemp As New Dictionary(Of String, String())
+        SetTricotType({strTemp})
+    End Sub
 
-        Dim strTypes As String() = strInclude.Select(Function(s) $"""{s}""").ToArray()
-        AddIncludedMetadataProperty("Tricot_Type", strTypes)
+    Public Sub SetTricotType(enumTypes As IEnumerable(Of String))
+        Dim dctTemp As New Dictionary(Of String, String())
+        Dim arrTypes() As String = enumTypes.ToArray
+
+        For i As Integer = 0 To arrTypes.Count - 1
+            arrTypes(i) = Chr(34) & arrTypes(i) & Chr(34)
+        Next
+        dctTemp.Add("Tricot_Type", arrTypes)
+        SetIncludedAutoFillProperties(dctTemp)
     End Sub
 
     Public Sub SetOptionsByContextType(strSingleType As String, Optional strQuotes As String = Chr(34))

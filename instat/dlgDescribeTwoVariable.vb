@@ -20,6 +20,7 @@ Public Class dlgDescribeTwoVariable
     Public Enum TwovariableMode
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private bFirstLoad As Boolean = True
@@ -36,19 +37,11 @@ Public Class dlgDescribeTwoVariable
         clsThreeVariableCombineFrequencyParametersFunction, clsPivotWiderFunction, clsMappingFunction, clsMapping2Function, clsRAnovaTable2Function As New RFunction
 
     'FORMAT TABLE FUNCTIONS
-    Private clsFootnoteCellBodyFunction, clsFootnoteCellFunction,
-        clsFootnoteSubtitleLocationFunction, clsFootnoteTitleLocationFunction, clsSecondFootnoteCellBodyFunction,
-        clsSecondFootnoteCellFunction, clsStyleListFunction,
-        clsTabFootnoteSubtitleFunction, clsTabFootnoteTitleFunction,
-        clsTableSourcenoteFunction, clsTableTitleFunction, clsThemesTabOptionFunction,
-        clsTabStyleCellTextFunction, clsTabStyleCellTitleFunction, clsTabStyleFunction,
-        clsTabStylePxFunction, clsgtExtrasThemesFuction, clsCrossDfFunction, clsListFunction As New RFunction
-
+    Private clsgtExtrasThemesFuction, clsCrossDfFunction, clsListFunction, clsGtRFunction As New RFunction
 
     Private clsGroupByPipeOperator, clsSummaryOperator, clsGroupByPipeOperator2, clsGroupByPipeOperator3, clsGroupByPipeOperator4, clsGroupByPipeOperatorData As New ROperator
 
     Private clsTildOperator, clsMapOperator, clsGtTableROperator, clsPivotOperator As New ROperator
-
 
     Private clsgtFunction, clsMapSummaryFunction, clsMap2SummaryFunction, clsMapGtFunction As New RFunction
     'Frequency Parameters
@@ -78,7 +71,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 414
+        ucrBase.iHelpTopicID = 743
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -173,6 +166,8 @@ Public Class dlgDescribeTwoVariable
         ucrChkSwapXYVar.SetText("Swap First/Second Variables")
         ucrChkSwapXYVar.AddParameterValuesCondition(True, "var", "True")
         ucrChkSwapXYVar.AddParameterValuesCondition(False, "var", "False")
+        ' This controls the visibility of the display margins check box
+        ucrChkSwapXYVar.AddToLinkedControls({ucrChkDisplayMargins}, {False}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlDescribe.AddRadioButton(rdoTwoVariable)
         ucrPnlDescribe.AddRadioButton(rdoSkim)
@@ -214,29 +209,14 @@ Public Class dlgDescribeTwoVariable
         clsCombineFrequencyColParametersFunction = New RFunction
         clsCombineFunction = New RFunction
         clsDummyFunction = New RFunction
-        clsFootnoteCellBodyFunction = New RFunction
-        clsFootnoteCellFunction = New RFunction
-        clsFootnoteSubtitleLocationFunction = New RFunction
-        clsFootnoteTitleLocationFunction = New RFunction
         clsGroupByFunction = New RFunction
         clsRAnovaFunction = New RFunction
         clsRCorrelationFunction = New RFunction
-        clsSecondFootnoteCellBodyFunction = New RFunction
-        clsSecondFootnoteCellFunction = New RFunction
         clsSkimrFunction = New RFunction
-        clsStyleListFunction = New RFunction
         clsSummariesListFunction = New RFunction
         clsSummaryTableCombineFactorsFunction = New RFunction
         clsSummaryTableFunction = New RFunction
-        clsTabFootnoteSubtitleFunction = New RFunction
-        clsTabFootnoteTitleFunction = New RFunction
-        clsTableSourcenoteFunction = New RFunction
-        clsTableTitleFunction = New RFunction
-        clsThemesTabOptionFunction = New RFunction
-        clsTabStyleCellTextFunction = New RFunction
-        clsTabStyleCellTitleFunction = New RFunction
-        clsTabStyleFunction = New RFunction
-        clsTabStylePxFunction = New RFunction
+        clsGtRFunction = New RFunction
         clsThreeVariableCombineFrequencyParametersFunction = New RFunction
         clsGroupByPipeOperator = New ROperator
         clsJoiningPipeOperator = New ROperator
@@ -300,6 +280,7 @@ Public Class dlgDescribeTwoVariable
         clsListFunction.AddParameter("factor", "factors", iPosition:=0)
         clsListFunction.AddParameter("summary", "summaries", iPosition:=1)
 
+        clsCrossDfFunction.SetPackageName("purrr")
         clsCrossDfFunction.SetRCommand("cross_df")
         clsCrossDfFunction.AddParameter("list", clsRFunctionParameter:=clsListFunction, iPosition:=0, bIncludeArgumentName:=False)
         clsCrossDfFunction.SetAssignTo("combinations")
@@ -320,18 +301,6 @@ Public Class dlgDescribeTwoVariable
         clsPivotWiderFunction.SetPackageName("tidyr")
         clsPivotWiderFunction.SetRCommand("pivot_wider")
         clsPivotWiderFunction.AddParameter("values_from", "value", iPosition:=2)
-
-        clsFootnoteCellBodyFunction.SetPackageName("gt")
-        clsFootnoteCellBodyFunction.SetRCommand("cells_body")
-
-        clsFootnoteCellFunction.SetPackageName("gt")
-        clsFootnoteCellFunction.SetRCommand("tab_footnote")
-
-        clsFootnoteSubtitleLocationFunction.SetPackageName("gt")
-        clsFootnoteSubtitleLocationFunction.SetRCommand("cells_title")
-
-        clsFootnoteTitleLocationFunction.SetPackageName("gt")
-        clsFootnoteTitleLocationFunction.SetRCommand("cells_title")
 
         clsgtExtrasThemesFuction.SetPackageName("gtExtras")
 
@@ -430,14 +399,6 @@ Public Class dlgDescribeTwoVariable
 
         clsRCorrelationFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$cor")
 
-        clsSecondFootnoteCellBodyFunction.SetPackageName("gt")
-        clsSecondFootnoteCellBodyFunction.SetRCommand("cells_body")
-
-        clsSecondFootnoteCellFunction.SetPackageName("gt")
-        clsSecondFootnoteCellFunction.SetRCommand("tab_footnote")
-
-        clsStyleListFunction.SetRCommand("list")
-
         clsSummariesListFunction.SetRCommand("c")
         clsSummariesListFunction.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34),
                                               bIncludeArgumentName:=False, iPosition:=0)
@@ -460,19 +421,20 @@ Public Class dlgDescribeTwoVariable
         clsMapGtFunction.SetRCommand("map")
         clsMapGtFunction.AddParameter("gttbl", clsRFunctionParameter:=clsgtFunction, bIncludeArgumentName:=False)
 
-        clsgtFunction.SetPackageName("gt")
-        clsgtFunction.SetRCommand("gt")
+        clsgtFunction.SetPackageName("instatExtras")
+        clsgtFunction.SetRCommand("generate_summary_tables")
 
         clsGtTableROperator.SetOperation("%>%")
         clsGtTableROperator.bBrackets = False
-        clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsgtFunction, iPosition:=0, bIncludeArgumentName:=False)
 
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDescribeTwoVar.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
+        clsGtRFunction.SetPackageName("gt")
+        clsGtRFunction.SetRCommand("gt")
+
         clsPivotOperator.SetOperation("%>%")
         clsPivotOperator.AddParameter("left", clsRFunctionParameter:=clsPivotWiderFunction)
-        clsPivotOperator.AddParameter("right", clsRFunctionParameter:=clsgtFunction)
         clsPivotOperator.AddParameter("right", clsROperatorParameter:=clsGtTableROperator)
         clsPivotOperator.bBrackets = False
 
@@ -484,41 +446,6 @@ Public Class dlgDescribeTwoVariable
         clsJoiningPipeOperator.SetOperation("%>%")
         clsJoiningPipeOperator.AddParameter("gtable", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
         clsJoiningPipeOperator.bBrackets = False
-
-        clsTableSourcenoteFunction.SetPackageName("gt")
-        clsTableSourcenoteFunction.SetRCommand("tab_source_note")
-
-        clsTableTitleFunction.SetPackageName("gt")
-        clsTableTitleFunction.SetRCommand("tab_header")
-
-        clsTabFootnoteOperator.SetOperation("%>%")
-        clsTabFootnoteOperator.bBrackets = False
-
-        clsTabFootnoteTitleFunction.SetPackageName("gt")
-        clsTabFootnoteTitleFunction.SetRCommand("tab_footnote")
-
-        clsTabFootnoteSubtitleFunction.SetPackageName("gt")
-        clsTabFootnoteSubtitleFunction.SetRCommand("tab_footnote")
-
-        clsThemesTabOptionFunction.SetPackageName("gt")
-        clsThemesTabOptionFunction.SetRCommand("tab_options")
-
-        clsTabStyleCellTextFunction.SetPackageName("gt")
-        clsTabStyleCellTextFunction.SetRCommand("cell_text")
-        clsTabStyleCellTextFunction.AddParameter("size", clsRFunctionParameter:=clsTabStylePxFunction, iPosition:=0)
-
-        clsTabStyleCellTitleFunction.SetPackageName("gt")
-        clsTabStyleCellTitleFunction.SetRCommand("cells_title")
-        clsTabStyleCellTitleFunction.AddParameter("groups", Chr(34) & "title" & Chr(34), iPosition:=0)
-
-        clsTabStyleFunction.SetRCommand("tab_style")
-        clsTabStyleFunction.SetPackageName("gt")
-        clsTabStyleFunction.AddParameter("style", clsRFunctionParameter:=clsTabStyleCellTextFunction, iPosition:=0)
-        clsTabStyleFunction.AddParameter("location", clsRFunctionParameter:=clsTabStyleCellTitleFunction, iPosition:=1)
-
-        clsTabStylePxFunction.SetPackageName("gt")
-        clsTabStylePxFunction.SetRCommand("px")
-        clsTabStylePxFunction.AddParameter("size", "18", bIncludeArgumentName:=False, iPosition:=0)
 
         clsThreeVariableCombineFrequencyParametersFunction.SetRCommand("c")
 
@@ -681,14 +608,13 @@ Public Class dlgDescribeTwoVariable
         ucrChkCorrelations.Visible = False
         ucrChkSwapXYVar.Visible = False
         ucrChkOmitMissing.Visible = False
-        cmdMissingOptions.Visible = False
 
         If rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = False
             ucrChkOmitMissing.Visible = Not ucrChkSwapXYVar.Checked AndAlso IsFactorByNumeric()
             ucrChkSwapXYVar.Visible = IsNumericByNumeric() OrElse IsFactorByNumeric()
             ucrChkCorrelations.Visible = IsNumericByNumeric()
-            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked AndAlso ucrChkOmitMissing.Visible
+            cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
         End If
         If rdoThreeVariable.Checked Then
             If IsFactorByFactorByNumeric() OrElse IsFactorByNumericByFactor() Then
@@ -712,7 +638,6 @@ Public Class dlgDescribeTwoVariable
         ucrChkLevSig.Visible = False
         ucrChkTotal.Visible = False
         ucrChkInteraction.Visible = False
-        cmdMissingOptions.Visible = False
         ucrChkOmitMissing.Visible = False
         If rdoSkim.Checked Then
             clsDummyFunction.AddParameter("checked", "skim", iPosition:=0)
@@ -820,13 +745,13 @@ Public Class dlgDescribeTwoVariable
                     cmdSummaries.Visible = True
                     cmdFormatTable.Visible = True
                     ucrChkOmitMissing.Visible = True
+                    cmdMissingOptions.Visible = ucrChkOmitMissing.Checked
                     ucrChkMeans.Visible = False
                     ucrChkLevSig.Visible = False
                     ucrChkTotal.Visible = False
                     ucrChkInteraction.Visible = False
                     ucrSaveTable.Location = New Point(23, 450)
                     ucrChkOmitMissing.Location = New Point(15, 365)
-                    cmdMissingOptions.Location = New Point(17, 385)
                     clsDummyFunction.AddParameter("factor_cols", "Sum", iPosition:=1)
                     ucrBase.clsRsyntax.SetBaseROperator(clsJoiningPipeOperator)
                     ucrSaveTable.SetPrefix("summary_table")
@@ -949,8 +874,7 @@ Public Class dlgDescribeTwoVariable
                 ucrSaveTable.Visible = True
                 ucrChkOmitMissing.Visible = True
                 ucrSaveTable.Location = New Point(23, 440)
-                ucrChkOmitMissing.Location = New Point(15, 360)
-                cmdMissingOptions.Location = New Point(17, 380)
+                ucrChkOmitMissing.Location = New Point(15, 365)
             End If
         End If
         FactorColumns()
@@ -1005,10 +929,7 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub ucrPnlDescribe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDescribe.ControlValueChanged
-        ucrReceiverFirstVars.Clear()
-        ucrReceiverThreeVariableSecondFactor.Clear()
-        ucrReceiverThreeVariableThirdVariable.Clear()
-        ucrReceiverSecondTwoVariableFactor.Clear()
+
         ucrReceiverFirstVars.SetMeAsReceiver()
 
         If rdoSkim.Checked Then
@@ -1148,7 +1069,7 @@ Public Class dlgDescribeTwoVariable
             If IsFactorByFactor() Then
                 clsSummaryTableFunction.AddParameter("factors", "c(" & ucrReceiverSecondTwoVariableFactor.GetVariableNames & "," & ".x" & ")")
                 clsSummaryTableFunction.AddParameter("columns_to_summarise", ".x")
-                clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
+                clsPivotWiderFunction.AddParameter("names_from", ucrReceiverSecondTwoVariableFactor.GetVariableNames(bWithQuotes:=False), iPosition:=1)
             ElseIf IsFactorByNumeric() Then
                 clsSummaryTableFunction.AddParameter("factors", ".x")
                 clsPivotWiderFunction.AddParameter("names_from", "{{ .x }}", iPosition:=1)
@@ -1206,22 +1127,20 @@ Public Class dlgDescribeTwoVariable
                 clsSummariesOperator.AddParameter("summary", clsRFunctionParameter:=clsSummariesListFunction, iPosition:=0, bIncludeArgumentName:=False)
                 clsMap2SummaryFunction.AddParameter(".f", clsROperatorParameter:=clsMapOperator, iPosition:=2)
                 clsSummaryOperator.AddParameter("right", clsRFunctionParameter:=clsMap2SummaryFunction, iPosition:=2)
-
+                clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsgtFunction, iPosition:=0, bIncludeArgumentName:=False)
             ElseIf IsFactorByNumericByNumeric() Then
                 clsMapSummaryFunction.AddParameter(".f", clsROperatorParameter:=clsMapOperator, iPosition:=1)
                 clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=2)
-
-            ElseIf IsFactorByNumericByNumeric() Then
-                clsMapSummaryFunction.AddParameter(".f", clsROperatorParameter:=clsMapOperator, iPosition:=1)
-                clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=2)
-
+                clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsGtRFunction, iPosition:=0, bIncludeArgumentName:=False)
             ElseIf IsFactorByFactorByFactor() Then
                 clsMapSummaryFunction.AddParameter(".f", clsROperatorParameter:=clsMapOperator, iPosition:=1)
                 clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=2)
+                clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsgtFunction, iPosition:=0, bIncludeArgumentName:=False)
             End If
         ElseIf rdoTwoVariable.Checked Then
             clsMapSummaryFunction.AddParameter(".f", clsROperatorParameter:=clsMapOperator, iPosition:=1)
             clsSummaryOperator.AddParameter("tableFun", clsRFunctionParameter:=clsMapSummaryFunction, iPosition:=2)
+            clsGtTableROperator.AddParameter(strParameterName:="gt_tbl", clsRFunctionParameter:=clsgtFunction, iPosition:=0, bIncludeArgumentName:=False)
         End If
     End Sub
 
@@ -1354,7 +1273,6 @@ Public Class dlgDescribeTwoVariable
                 clsCombineAnova2Function.RemoveParameterByName("x")
             End If
         End If
-
     End Sub
 
     Private Sub AddRemoveThirdAnovaParam()
@@ -1675,8 +1593,9 @@ Public Class dlgDescribeTwoVariable
                 ucrBase.iHelpTopicID = 414
             Case TwovariableMode.Climatic
                 ucrBase.iHelpTopicID = 408
+            Case TwovariableMode.Tricot
+                ucrBase.iHelpTopicID = 743
         End Select
-
     End Sub
 
     Private Sub ucrReceiverFirstVars_ControlValueAndContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged,
@@ -1789,8 +1708,8 @@ Public Class dlgDescribeTwoVariable
     End Sub
 
     Private Sub cmdFormatTable_Click(sender As Object, e As EventArgs) Handles cmdFormatTable.Click
-        sdgTableOptions.Setup(ucrSelectorDescribeTwoVar.strCurrentDataFrame, clsGtTableROperator)
-        sdgTableOptions.ShowDialog(Me)
+        sdgBeforeTablesOption.Setup(ucrSelectorDescribeTwoVar.strCurrentDataFrame, clsGtTableROperator)
+        sdgBeforeTablesOption.ShowDialog(Me)
     End Sub
 
     Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click

@@ -70,7 +70,8 @@ Public Class sdgDefineAnnualRainfall
         Dim kvpTotalRain As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("total_rain_col", {"rain_total"}.ToList())
         Dim kvpPlantDay As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_day_col", {"plant_day"}.ToList())
         Dim kvpPlantLength As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_length_col", {"plant_length"}.ToList())
-        Dim kvpPropSuccess As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("prop_success_col", {"prop_success"}.ToList())
+        Dim kvpPropSuccess As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("prop_success_col", {"prop_success", "prop_success_with_start"}.ToList())
+        Dim kvpPropSuccessNoStart As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("prop_success_no_start_col", {"prop_success", "prop_success_no_start"}.ToList())
         Dim kvpStationCrop As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("station", {"station", "id", "name"}.ToList())
 
         Dim kvpPlantingDay As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("plant_day_col", {"plant_day"}.ToList())
@@ -81,7 +82,7 @@ Public Class sdgDefineAnnualRainfall
         lstRecognisedTypes.AddRange({kvpAnnualRain, kvpEndRainDate, kvpEndRainDOY, kvpEndRainStatus, kvpEndSeasonDate, kvpEndSeasonDOY, kvpEndSeasonStatus,
                                      kvpRainDaysSeason, kvpRainDaysYear, kvpSeasonalLength, kvpSeasonalRain, kvpStartRainDate,
                                     kvpStartRainDOY, kvpStartRainStatus})
-        lstRecognisedCropTypes.AddRange({kvpTotalRain, kvpStationCrop, kvpPlantDay, kvpPlantLength, kvpPropSuccess})
+        lstRecognisedCropTypes.AddRange({kvpTotalRain, kvpStationCrop, kvpPlantDay, kvpPlantLength, kvpPropSuccess, kvpPropSuccessNoStart})
         lstRecognisedPropTypes.AddRange({kvpPlantingDay, kvpYear, kvpStationProb, kvpPlantDayCond})
         lstRecognisedMonthTempTypes.AddRange({kvpMeanMinTemp, kvpMinMinTemp, kvpMaxMinTemp, kvpMeanMaxTemp, kvpMinMaxTemp, kvpMaxMaxTemp})
         lstRecognisedAnnTempTypes.AddRange({kvpMeanMinTemp, kvpMinMinTemp, kvpMaxMinTemp, kvpMeanMaxTemp, kvpMinMaxTemp, kvpMaxMaxTemp})
@@ -89,7 +90,7 @@ Public Class sdgDefineAnnualRainfall
         lstReceivers.AddRange({ucrReceiverAnnualRain, ucrReceiverEndRainsDate, ucrReceiverEndRainsDOY, ucrReceiverEndRainStatus, ucrReceiverEndSeasonDate, ucrReceiverEndSeasonDOY, ucrReceiverEndSeasonStatus, ucrReceiverRainDaysSeason, ucrReceiverRainDaysYear, ucrReceiverSeasonalLength, ucrReceiverSeasonalRain, ucrReceiverStartRainDate, ucrReceiverStartRainDOY, ucrReceiverStartRainStatus})
         lstReceiversAnnualTemp.AddRange({ucrReceiverMaxMaxAnnual, ucrReceiverMaxMaxMonthly, ucrReceiverMaxMinAnnual, ucrReceiverMaxMinMonthly, ucrReceiverMeanAnnual, ucrReceiverMeanMaxAnnual, ucrReceiverMeanmaxMonthly, ucrReceiverMeanminMontly, ucrReceiverMinMaxAnnual, ucrReceiverMinMaxMonthly, ucrReceiverMinMinAnnual, ucrReceiverMinMinMonthly})
         lstReceiversMonthTemp.AddRange({ucrReceiverMaxMaxAnnual, ucrReceiverMaxMaxMonthly, ucrReceiverMaxMinAnnual, ucrReceiverMaxMinMonthly, ucrReceiverMeanAnnual, ucrReceiverMeanMaxAnnual, ucrReceiverMeanmaxMonthly, ucrReceiverMeanminMontly, ucrReceiverMinMaxAnnual, ucrReceiverMinMaxMonthly, ucrReceiverMinMinAnnual, ucrReceiverMinMinMonthly})
-        lstReceiversCrop.AddRange({ucrReceiverPlantingDay, ucrReceiverStationCrop, ucrReceiverPlantingLenghth, ucrReceiverPropSuccess, ucrReceiverTotalRain})
+        lstReceiversCrop.AddRange({ucrReceiverPlantingDay, ucrReceiverStationCrop, ucrReceiverPlantingLenghth, ucrReceiverPropSuccess, ucrReceiverPropSuccessNoStart, ucrReceiverTotalRain})
         lstReceiversProp.AddRange({ucrReceiverPlantingDayCondition, ucrReceiverSeasonYear, ucrReceiverSeasonStationProb, ucrReceiverSeasonPlantingDay})
 
         ucrSelectorDefineAnnualRain.SetParameter(New RParameter("data", 0))
@@ -187,6 +188,11 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverAnnualRain.Tag = "annual_rain_col"
         ucrReceiverAnnualRain.bExcludeFromSelector = True
 
+        ucrReceiverExtremRian.SetParameter(New RParameter("extreme_rain_days_col", 13))
+        ucrReceiverExtremRian.Selector = ucrSelectorDefineAnnualRain
+        ucrReceiverExtremRian.SetParameterIsString()
+        ucrReceiverExtremRian.bExcludeFromSelector = True
+
         ucrReceiverStartRainStatus.SetParameter(New RParameter("start_rains_status_column", 14))
         ucrReceiverStartRainStatus.Selector = ucrSelectorDefineAnnualRain
         ucrReceiverStartRainStatus.SetParameterIsString()
@@ -229,11 +235,17 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverPlantingLenghth.Tag = "plant_length_col"
         ucrReceiverPlantingLenghth.bExcludeFromSelector = True
 
-        ucrReceiverPropSuccess.SetParameter(New RParameter("prop_success_col", 5))
+        ucrReceiverPropSuccess.SetParameter(New RParameter("prop_success_with_start_col", 5))
         ucrReceiverPropSuccess.Selector = ucrSelectorCropProp
         ucrReceiverPropSuccess.SetParameterIsString()
         ucrReceiverPropSuccess.Tag = "prop_success_col"
         ucrReceiverPropSuccess.bExcludeFromSelector = True
+
+        ucrReceiverPropSuccessNoStart.SetParameter(New RParameter("prop_success_no_start_col", 5))
+        ucrReceiverPropSuccessNoStart.Selector = ucrSelectorCropProp
+        ucrReceiverPropSuccessNoStart.SetParameterIsString()
+        ucrReceiverPropSuccessNoStart.Tag = "prop_success_no_start_col"
+        ucrReceiverPropSuccessNoStart.bExcludeFromSelector = True
 
         'Season start
         ucrReceiverSeasonStationProb.SetParameter(New RParameter("station_col", 1))
@@ -396,6 +408,8 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverMaxMinAnnual.AddAdditionalCodeParameterPair(clsExportRinstatToBucketFunction, New RParameter("max_tmin_column", 5), iAdditionalPairNo:=1)
 
         ucrReceiverAnnualRain.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+        ucrReceiverExtremRian.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
+
         ucrReceiverEndRainsDate.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrReceiverEndRainsDOY.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
         ucrReceiverEndSeasonDate.SetRCode(clsReforMattAnnualSummariesFunction, bReset)
@@ -418,6 +432,7 @@ Public Class sdgDefineAnnualRainfall
         ucrReceiverPlantingDay.SetRCode(clsReformatCropSuccessFunction, bReset)
         ucrReceiverPlantingLenghth.SetRCode(clsReformatCropSuccessFunction, bReset)
         ucrReceiverPropSuccess.SetRCode(clsReformatCropSuccessFunction, bReset)
+        ucrReceiverPropSuccessNoStart.SetRCode(clsReformatCropSuccessFunction, bReset)
         ucrSelectorCropProp.SetRCode(clsReformatCropSuccessFunction, bReset)
 
         ucrReceiverSeasonStationProb.SetRCode(clsReformatSeasonStartFunction, bReset)
@@ -455,10 +470,10 @@ Public Class sdgDefineAnnualRainfall
 
     Private Sub ucrReceiverAnnualRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAnnualRain.ControlValueChanged, ucrReceiverEndRainsDate.ControlValueChanged, ucrReceiverEndRainsDOY.ControlValueChanged, ucrReceiverEndSeasonDate.ControlValueChanged,
             ucrReceiverEndSeasonDOY.ControlValueChanged, ucrReceiverRainDaysSeason.ControlValueChanged, ucrReceiverRainDaysYear.ControlValueChanged, ucrReceiverSeasonalLength.ControlValueChanged, ucrReceiverSeasonalRain.ControlValueChanged,
-            ucrReceiverStartRainDate.ControlValueChanged, ucrReceiverStartRainDOY.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverYear.ControlValueChanged
+            ucrReceiverStartRainDate.ControlValueChanged, ucrReceiverStartRainDOY.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverExtremRian.ControlValueChanged
 
         If dlgExportClimaticDefinitions.ucrChkAnnualRainfall.Checked Then
-            If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (Not ucrReceiverAnnualRain.IsEmpty OrElse Not ucrReceiverEndRainsDate.IsEmpty OrElse Not ucrReceiverEndRainsDOY.IsEmpty OrElse ucrReceiverSeasonalLength.IsEmpty OrElse Not ucrReceiverSeasonalRain.IsEmpty OrElse
+            If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (Not ucrReceiverAnnualRain.IsEmpty OrElse Not ucrReceiverEndRainsDate.IsEmpty OrElse Not ucrReceiverEndRainsDOY.IsEmpty OrElse Not ucrReceiverSeasonalLength.IsEmpty OrElse Not ucrReceiverExtremRian.IsEmpty OrElse Not ucrReceiverSeasonalRain.IsEmpty OrElse
              Not ucrReceiverEndSeasonDate.IsEmpty OrElse Not ucrReceiverEndSeasonDOY.IsEmpty OrElse Not ucrReceiverRainDaysSeason.IsEmpty OrElse Not ucrReceiverRainDaysYear.IsEmpty OrElse Not ucrReceiverStartRainDate.IsEmpty OrElse
              Not ucrReceiverStartRainDOY.IsEmpty) Then
 
@@ -470,14 +485,15 @@ Public Class sdgDefineAnnualRainfall
         Else
             clsExportRinstatToBucketFunction.RemoveParameterByName("annual_rainfall_data")
         End If
+        AddAnnualSummariesPar()
     End Sub
 
     Private Sub ucrReceiverStationCrop_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStationCrop.ControlValueChanged, ucrReceiverTotalRain.ControlValueChanged, ucrReceiverPlantingDay.ControlValueChanged, ucrReceiverPlantingLenghth.ControlValueChanged,
-            ucrReceiverPropSuccess.ControlValueChanged
+            ucrReceiverPropSuccess.ControlValueChanged, ucrReceiverPropSuccessNoStart.ControlValueChanged
 
         If dlgExportClimaticDefinitions.ucrChkCropSuccessProp.Checked Then
 
-            If Not ucrReceiverStationCrop.IsEmpty AndAlso (Not ucrReceiverTotalRain.IsEmpty OrElse Not ucrReceiverPlantingDay.IsEmpty OrElse Not ucrReceiverPlantingLenghth.IsEmpty OrElse Not ucrReceiverPropSuccess.IsEmpty) Then
+            If Not ucrReceiverStationCrop.IsEmpty AndAlso (Not ucrReceiverTotalRain.IsEmpty OrElse Not ucrReceiverPlantingDay.IsEmpty OrElse Not ucrReceiverPlantingLenghth.IsEmpty OrElse Not ucrReceiverPropSuccess.IsEmpty OrElse Not ucrReceiverPropSuccessNoStart.IsEmpty) Then
                 clsExportRinstatToBucketFunction.AddParameter("crop_success_data", clsRFunctionParameter:=clsReformatCropSuccessFunction, iPosition:=9)
             Else
                 clsExportRinstatToBucketFunction.RemoveParameterByName("crop_success_data")
@@ -835,6 +851,41 @@ Public Class sdgDefineAnnualRainfall
 
     Private Sub ucrSelectorSeasonStartProp_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSeasonStartProp.ControlValueChanged
         AutoFillReceiversForSeasonsStart()
+    End Sub
+
+    Private Sub AddAnnualSummariesPar()
+        ' Always handle all 4 parameters regardless of checkbox state
+        If dlgExportClimaticDefinitions.ucrChkAnnualRainfall.Checked Then
+            If Not ucrReceiverAnnualRain.IsEmpty Then
+                clsExportRinstatToBucketFunction.AddParameter("annual_total_rain_col", ucrReceiverAnnualRain.GetVariableNames)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("annual_total_rain_col")
+            End If
+
+            If Not ucrReceiverSeasonalRain.IsEmpty Then
+                clsExportRinstatToBucketFunction.AddParameter("seasonal_total_rain_col", ucrReceiverSeasonalRain.GetVariableNames)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("seasonal_total_rain_col")
+            End If
+
+            If Not ucrReceiverRainDaysYear.IsEmpty Then
+                clsExportRinstatToBucketFunction.AddParameter("annual_rainday_col", ucrReceiverRainDaysYear.GetVariableNames)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("annual_rainday_col")
+            End If
+
+            If Not ucrReceiverRainDaysSeason.IsEmpty Then
+                clsExportRinstatToBucketFunction.AddParameter("seasonal_rainday_col", ucrReceiverRainDaysSeason.GetVariableNames)
+            Else
+                clsExportRinstatToBucketFunction.RemoveParameterByName("seasonal_rainday_col")
+            End If
+        Else
+            ' Remove all 4 parameters if the checkbox is not checked
+            clsExportRinstatToBucketFunction.RemoveParameterByName("annual_total_rain_col")
+            clsExportRinstatToBucketFunction.RemoveParameterByName("seasonal_total_rain_col")
+            clsExportRinstatToBucketFunction.RemoveParameterByName("annual_rainday_col")
+            clsExportRinstatToBucketFunction.RemoveParameterByName("seasonal_rainday_col")
+        End If
     End Sub
 
 End Class

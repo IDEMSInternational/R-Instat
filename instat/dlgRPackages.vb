@@ -5,7 +5,7 @@ Public Class dlgInstallRPackage
     Private bFirstLoad As Boolean = True
     Private bUniqueChecked As Boolean = False
     Private clsInstallPackage As New RFunction
-    Private clsRepositoryFunction As New RFunction
+    Private clsRepositoryFunction, clsDetachFunction, clsDisplayRFunction As New RFunction
     Private clsBeforeOptionsFunc As New RFunction
     Private clsAfterOptionsFunc As New RFunction
     Private clsDummyFunction As New RFunction
@@ -44,6 +44,10 @@ Public Class dlgInstallRPackage
         dctPackages.Add("openappr", Chr(34) & "openappr" & Chr(34))
         dctPackages.Add("networkGraphsR", Chr(34) & "networkGraphsR" & Chr(34))
         dctPackages.Add("climdex.pcic", Chr(34) & "climdex.pcic" & Chr(34))
+        dctPackages.Add("instatExtras", Chr(34) & "instatExtras" & Chr(34))
+        dctPackages.Add("instatClimatic", Chr(34) & "instatClimatic" & Chr(34))
+        dctPackages.Add("instatCalculations", Chr(34) & "instatCalculations" & Chr(34))
+        dctPackages.Add("databook", Chr(34) & "databook" & Chr(34))
         ucrInputPackage.SetItems(dctPackages)
 
         ucrPnlRPackages.AddParameterValuesCondition(rdoCRAN, "checked", "cran")
@@ -65,6 +69,8 @@ Public Class dlgInstallRPackage
         clsBeforeOptionsFunc = New RFunction
         clsAfterOptionsFunc = New RFunction
         clsRepositoryFunction = New RFunction
+        clsDisplayRFunction = New RFunction
+        clsDetachFunction = New RFunction
         clsDummyFunction = New RFunction
         bUniqueChecked = False
 
@@ -75,6 +81,10 @@ Public Class dlgInstallRPackage
 
         clsBeforeOptionsFunc.SetRCommand("options")
         clsBeforeOptionsFunc.AddParameter(strParameterName:="warn", strParameterValue:="2")
+
+        clsDetachFunction.SetPackageName("instatExtras")
+        clsDetachFunction.SetRCommand("detach_package")
+        clsDetachFunction.AddParameter("unload ", "TRUE", iPosition:=1)
 
         clsRepositoryFunction.SetRCommand("install_github")
         clsRepositoryFunction.SetPackageName("devtools")
@@ -110,6 +120,7 @@ Public Class dlgInstallRPackage
         CheckEnable()
         TestOkEnabled()
         GithubOption()
+        AddRemoveLibraryFunction()
     End Sub
 
     Private Sub Check()
@@ -193,17 +204,17 @@ Public Class dlgInstallRPackage
                     ucrInputMessage.SetText("Package exists in the repo and is ready for installation")
                     ucrInputMessage.txtInput.BackColor = Color.LightGreen
                     bUniqueChecked = True
-                End If 
+                End If
             Case "5"
                 If rdoCRAN.Checked Then
-                   ucrInputMessage.SetText("No internet connection.Try reconnecting")
-                   ucrInputMessage.txtInput.BackColor = Color.LightCoral
-                   bUniqueChecked = False
+                    ucrInputMessage.SetText("No internet connection.Try reconnecting")
+                    ucrInputMessage.txtInput.BackColor = Color.LightCoral
+                    bUniqueChecked = False
                 ElseIf rdoRPackage.Checked Then
                     ucrInputMessage.SetText("Package exists but is not in the R language")
                     ucrInputMessage.txtInput.BackColor = Color.LightCoral
                     bUniqueChecked = False
-                End If 
+                End If
             Case "6"
                 ucrInputMessage.SetText("Error occurred, repository doesn't exist")
                 ucrInputMessage.txtInput.BackColor = Color.LightCoral
@@ -230,7 +241,7 @@ Public Class dlgInstallRPackage
     End Sub
 
     Private Sub cmdCheck_Click(sender As Object, e As EventArgs) Handles cmdCheck.Click
-        check()
+        Check()
     End Sub
 
     Private Sub ucrPnlRPackages_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRPackages.ControlValueChanged
@@ -238,7 +249,10 @@ Public Class dlgInstallRPackage
             ucrBase.clsRsyntax.SetBaseRFunction(clsInstallPackage)
             ucrBase.clsRsyntax.AddToBeforeCodes(clsBeforeOptionsFunc)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAfterOptionsFunc)
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsDetachFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDisplayRFunction)
         Else
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsDetachFunction)
             ucrBase.clsRsyntax.SetBaseRFunction(clsRepositoryFunction)
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsBeforeOptionsFunc)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAfterOptionsFunc)
@@ -248,15 +262,31 @@ Public Class dlgInstallRPackage
 
     Private Sub ucrInputRepositoryName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputRepositoryName.ControlValueChanged
         TestOkEnabled()
-        GithubOption()
+        Call GithubOption()
         bUniqueChecked = False
     End Sub
 
     Private Sub GithubOption()
         If Not (ucrInputPackage.IsEmpty AndAlso ucrInputRepositoryName.IsEmpty) Then
-            clsRepositoryFunction.AddParameter("paste", Chr(34) & ucrInputRepositoryName.GetText & "/" & ucrInputPackage.GetText() & Chr(34), bIncludeArgumentName:=False)
+            clsDetachFunction.AddParameter("package", Chr(34) & "package:" & ucrInputPackage.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+            clsRepositoryFunction.AddParameter("paste", Chr(34) & ucrInputRepositoryName.GetText & "/" & ucrInputPackage.GetText() & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
         Else
+            clsDetachFunction.RemoveParameterByName("package")
             clsRepositoryFunction.RemoveParameterByName("paste")
+        End If
+    End Sub
+
+
+    Private Sub AddRemoveLibraryFunction()
+        Dim selectedPackage As String = ucrInputPackage.GetText
+        Dim allowedPackages As New List(Of String) From {"instatExtras", "instatClimatic", "instatCalculations", "databook"}
+
+        If allowedPackages.Contains(selectedPackage) Then
+            clsDisplayRFunction.SetRCommand("library")
+            clsDisplayRFunction.AddParameter("library", Chr(34) & selectedPackage & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDisplayRFunction)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDisplayRFunction)
         End If
     End Sub
 
@@ -265,4 +295,5 @@ Public Class dlgInstallRPackage
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
+
 End Class

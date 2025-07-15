@@ -38,11 +38,15 @@ Public Class dlgTraitCorrelations
 
     Private Sub InitialiseDialog()
 
+        ucrBase.iHelpTopicID = 703
         ucrReceiverTrait.SetParameterIsRFunction()
         ucrReceiverTrait.Selector = ucrSelecetorTraits
 
         ucrReceiverTraitsToCompare.SetParameterIsRFunction()
         ucrReceiverTraitsToCompare.Selector = ucrSelecetorTraits
+        ucrReceiverTraitsToCompare.strSelectorHeading = "Traits"
+        ucrReceiverTraitsToCompare.SetTricotType("traits")
+        ucrReceiverTraitsToCompare.bAutoFill = True
 
         ucrSelecetorTraits.SetParameterIsrfunction()
 

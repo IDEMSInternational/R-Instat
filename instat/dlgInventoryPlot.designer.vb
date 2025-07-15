@@ -159,7 +159,6 @@ Partial Class dlgInventoryPlot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Enabled = False
         Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdOptions.Location = New System.Drawing.Point(7, 240)
         Me.cmdOptions.Name = "cmdOptions"
@@ -425,6 +424,7 @@ Partial Class dlgInventoryPlot
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
         Me.ucrInputTitle.Location = New System.Drawing.Point(121, 381)
+        Me.ucrInputTitle.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrInputTitle.Name = "ucrInputTitle"
         Me.ucrInputTitle.Size = New System.Drawing.Size(204, 21)
         Me.ucrInputTitle.TabIndex = 59

@@ -20,6 +20,7 @@ Public Class dlgOneWayFrequencies
         Prepare
         Describe
         Climatic
+        Tricot
     End Enum
 
     Private bFirstLoad As Boolean = True
@@ -56,7 +57,7 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 518
+        ucrBase.iHelpTopicID = 738
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         '----------------------------------
@@ -467,6 +468,8 @@ Public Class dlgOneWayFrequencies
                 ucrBase.iHelpTopicID = 518
             Case OnewayMode.Climatic
                 ucrBase.iHelpTopicID = 617
+            Case OnewayMode.Tricot
+                ucrBase.iHelpTopicID = 738
         End Select
     End Sub
 End Class

@@ -156,16 +156,16 @@ Public Class ucrButtons
         'In the process, we want the RSyntax parameters to be set as at the end of GetScript. Hence the reset needs to come after.
         'Eventually, all this should be more neatly incorporated in the RSyntax machinery...
 
-        If bCloseForm Then
-            ParentForm.Close()
-        End If
-
         j = 0
         For Each ctrTempControl In ParentForm.Controls
             ctrTempControl.Enabled = lstCurrentEnabled(j)
             j = j + 1
         Next
         ParentForm.Cursor = Cursors.Default
+
+        If bCloseForm Then
+            ParentForm.Close()
+        End If
     End Sub
 
     Private Sub Scripts(bRun As Boolean)
