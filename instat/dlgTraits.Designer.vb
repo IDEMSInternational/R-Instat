@@ -22,18 +22,22 @@ Partial Class dlgTraits
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblTrait = New System.Windows.Forms.Label()
         Me.ucrSaveTraits = New instat.ucrSave()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverTrait = New instat.ucrReceiverSingle()
         Me.ucrTraitGraphSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkConnectivity = New instat.ucrCheck()
+        Me.ucrChkAdjacent = New instat.ucrCheck()
+        Me.ttRankings = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'lblTrait
         '
         Me.lblTrait.AutoSize = True
         Me.lblTrait.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblTrait.Location = New System.Drawing.Point(398, 72)
+        Me.lblTrait.Location = New System.Drawing.Point(384, 72)
         Me.lblTrait.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTrait.Name = "lblTrait"
         Me.lblTrait.Size = New System.Drawing.Size(44, 20)
@@ -54,7 +58,7 @@ Partial Class dlgTraits
         Me.ucrBase.AutoSize = True
         Me.ucrBase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ucrBase.Location = New System.Drawing.Point(10, 364)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(611, 77)
         Me.ucrBase.TabIndex = 4
@@ -63,7 +67,7 @@ Partial Class dlgTraits
         '
         Me.ucrReceiverTrait.AutoSize = True
         Me.ucrReceiverTrait.frmParent = Me
-        Me.ucrReceiverTrait.Location = New System.Drawing.Point(399, 95)
+        Me.ucrReceiverTrait.Location = New System.Drawing.Point(385, 95)
         Me.ucrReceiverTrait.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTrait.Name = "ucrReceiverTrait"
         Me.ucrReceiverTrait.Selector = Nothing
@@ -84,11 +88,33 @@ Partial Class dlgTraits
         Me.ucrTraitGraphSelector.Size = New System.Drawing.Size(320, 274)
         Me.ucrTraitGraphSelector.TabIndex = 0
         '
+        'ucrChkConnectivity
+        '
+        Me.ucrChkConnectivity.AutoSize = True
+        Me.ucrChkConnectivity.Checked = False
+        Me.ucrChkConnectivity.Location = New System.Drawing.Point(385, 154)
+        Me.ucrChkConnectivity.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkConnectivity.Name = "ucrChkConnectivity"
+        Me.ucrChkConnectivity.Size = New System.Drawing.Size(236, 34)
+        Me.ucrChkConnectivity.TabIndex = 5
+        '
+        'ucrChkAdjacent
+        '
+        Me.ucrChkAdjacent.AutoSize = True
+        Me.ucrChkAdjacent.Checked = False
+        Me.ucrChkAdjacent.Location = New System.Drawing.Point(385, 215)
+        Me.ucrChkAdjacent.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.ucrChkAdjacent.Name = "ucrChkAdjacent"
+        Me.ucrChkAdjacent.Size = New System.Drawing.Size(236, 34)
+        Me.ucrChkAdjacent.TabIndex = 6
+        '
         'dlgTraits
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(630, 456)
+        Me.Controls.Add(Me.ucrChkAdjacent)
+        Me.Controls.Add(Me.ucrChkConnectivity)
         Me.Controls.Add(Me.ucrSaveTraits)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblTrait)
@@ -100,7 +126,7 @@ Partial Class dlgTraits
         Me.Name = "dlgTraits"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Traits_Graph"
-        Me.Text = "Traits"
+        Me.Text = "Check Traits Connectivity"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -111,4 +137,7 @@ Partial Class dlgTraits
     Friend WithEvents lblTrait As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSaveTraits As ucrSave
+    Friend WithEvents ucrChkAdjacent As ucrCheck
+    Friend WithEvents ucrChkConnectivity As ucrCheck
+    Friend WithEvents ttRankings As ToolTip
 End Class
