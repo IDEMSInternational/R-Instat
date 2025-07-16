@@ -88,7 +88,7 @@ Public Class dlgTraits
         ucrSaveTraits.Reset()
 
         clsDummyFunction.AddParameter("connectivity", "True", iPosition:=0)
-        clsDummyFunction.AddParameter("adjacency", "True", iPosition:=1)
+        clsDummyFunction.AddParameter("adjacency", "False", iPosition:=1)
 
         clsConectivityFunction.SetPackageName("instatExtras")
         clsConectivityFunction.SetRCommand("check_connectivity")
