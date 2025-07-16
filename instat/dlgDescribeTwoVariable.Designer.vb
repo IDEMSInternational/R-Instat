@@ -130,7 +130,7 @@ Partial Class dlgDescribeTwoVariable
         'cmdMissingOptions
         '
         Me.cmdMissingOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdMissingOptions.Location = New System.Drawing.Point(146, 365)
+        Me.cmdMissingOptions.Location = New System.Drawing.Point(0, 15)
         Me.cmdMissingOptions.Name = "cmdMissingOptions"
         Me.cmdMissingOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdMissingOptions.TabIndex = 21
@@ -167,6 +167,7 @@ Partial Class dlgDescribeTwoVariable
         Me.grpSummaries.Controls.Add(Me.lblSummary)
         Me.grpSummaries.Controls.Add(Me.lblBy)
         Me.grpSummaries.Controls.Add(Me.lblSecondType)
+        Me.grpSummaries.Controls.Add(Me.cmdMissingOptions)
         Me.grpSummaries.Location = New System.Drawing.Point(11, 219)
         Me.grpSummaries.Name = "grpSummaries"
         Me.grpSummaries.Size = New System.Drawing.Size(210, 72)
@@ -641,7 +642,6 @@ Partial Class dlgDescribeTwoVariable
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(482, 467)
-        Me.Controls.Add(Me.cmdMissingOptions)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.ucrReceiverPercentages)
         Me.Controls.Add(Me.ucrReorderSummary)
