@@ -91,12 +91,14 @@ Public Class dlgTraits
         clsDummyFunction.AddParameter("adjacency", "False", iPosition:=1)
 
         clsConectivityFunction.SetPackageName("instatExtras")
-        clsConectivityFunction.SetRCommand("check_connectivity")
+        clsConectivityFunction.SetRCommand("connectivity_check")
         clsConectivityFunction.AddParameter("rank", "rankings_object[[1]]", bIncludeArgumentName:=False)
-
+        clsConectivityFunction.iCallType = 2
+        
         clsAdjacentFunction.SetPackageName("PlackettLuce")
         clsAdjacentFunction.SetRCommand("adjacency")
         clsAdjacentFunction.AddParameter("rank", "rankings_object[[1]]", bIncludeArgumentName:=False)
+        clsAdjacentFunction.iCallType = 2
 
         clsCFunction.SetRCommand("c")
         clsCFunction.SetAssignTo("col_names")
