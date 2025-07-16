@@ -614,6 +614,9 @@ Public Class dlgModellingTree
         sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, bReset:=bResetSubDialog, clsNewPlacketFunction:=clsPlackettLuceFunction)
         sdgPLModelOptions.ucrChkMultivariateNormal.Enabled = False
         sdgPLModelOptions.ucrChkGamma.Enabled = False
+        sdgPLModelOptions.ucrChkGamma.Enabled = True
+        sdgPLModelOptions.ucrChkMinSize.Visible = True
+        sdgPLModelOptions.ucrChkPValue.Visible = True
         sdgPLModelOptions.ShowDialog()
         bResetSubDialog = False
     End Sub
