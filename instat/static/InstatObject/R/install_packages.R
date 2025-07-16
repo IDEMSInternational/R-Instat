@@ -186,11 +186,9 @@ packs <-
     "weights",
     "nanonext",
     "collapse",
-    "modeldata",
     "curl",
     "ClimMobTools",
     "gtsummary",
-    "ggthemes",
     "PlackettLuce"
  )
 
@@ -208,12 +206,11 @@ if (length(.libPaths()) >= 2){
 }
 
 #install development packages not on CRAN
-devtools::install_github("ianmoran11/mmtable2")
-devtools::install_github("michael-franke/aida-package")
-devtools::install_github("rijaf-iri/CDT")
-devtools::install_github("IDEMSInternational/rapidpror")
-devtools::install_github("IDEMSInternational/epicsawrap")
-devtools::install_github("IDEMSInternational/instatCalculations", dependencies = FALSE, force = TRUE)
-devtools::install_github("IDEMSInternational/instatExtras", dependencies = TRUE, upgrade = "always", force = TRUE)
-devtools::install_github("IDEMSInternational/databook", dependencies = FALSE, force = TRUE)
-devtools::install_github("IDEMSInternational/instatClimatic", dependencies = FALSE, force = TRUE)
+devtools::install_github("michael-franke/aida-package", upgrade = "never")
+devtools::install_github("rijaf-iri/CDT", upgrade = "never")
+devtools::install_github("IDEMSInternational/rapidpror", upgrade = "never")
+devtools::install_github("IDEMSInternational/epicsawrap", upgrade = "never")
+devtools::install_github("IDEMSInternational/instatCalculations", dependencies = FALSE, force = TRUE, upgrade = "never")
+devtools::install_github("IDEMSInternational/instatExtras", dependencies = TRUE, upgrade = "never", force = TRUE)
+devtools::install_github("IDEMSInternational/databook", dependencies = FALSE, force = TRUE, upgrade = "never")
+devtools::install_github("IDEMSInternational/instatClimatic", dependencies = FALSE, force = TRUE, upgrade = "never")
