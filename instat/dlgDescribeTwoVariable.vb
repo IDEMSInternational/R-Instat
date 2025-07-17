@@ -654,7 +654,7 @@ Public Class dlgDescribeTwoVariable
                                                    strRObjectFormatToAssignTo:=RObjectFormat.Text,
                                                    strRDataFrameNameToAddObjectTo:=ucrSelectorDescribeTwoVar.strCurrentDataFrame,
                                                      strObjectName:="last_summary")
-
+            cmdMissingOptions.Visible = False
         ElseIf rdoTwoVariable.Checked Then
             ucrChkOmitMissing.Visible = False
             clsDummyFunction.AddParameter("checked", "customize", iPosition:=0)
