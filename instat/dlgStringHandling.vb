@@ -280,6 +280,7 @@ Public Class dlgStringHandling
 
         clsPaste2Function.SetRCommand("paste0")
         clsPaste2Function.AddParameter("names", """_""", iPosition:=0, bIncludeArgumentName:=False)
+        clsPaste2Function.AddParameter("split", "new_name", iPosition:=1, bIncludeArgumentName:=False)
 
         clsEndsWithFunction.SetRCommand("ends_with")
         clsEndsWithFunction.AddParameter("paste", clsRFunctionParameter:=clsPaste2Function, iPosition:=0, bIncludeArgumentName:=False)
@@ -431,7 +432,7 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsAsDataFrameFunction, New RParameter("x", 0), iAdditionalPairNo:=14)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceCellFunction, New RParameter("x", 0), iAdditionalPairNo:=15)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceGrepFunction, New RParameter("x", 1), iAdditionalPairNo:=16)
-        ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsTildaOperator, New RParameter("", 0), iAdditionalPairNo:=17)
+        'ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsTildaOperator, New RParameter("", 0), iAdditionalPairNo:=17)
 
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceCellFunction, New RParameter("values", 2), iAdditionalPairNo:=2)
@@ -762,8 +763,8 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub ucrSaveStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveStringHandling.ControlValueChanged
-        clsPaste2Function.AddParameter("split", ucrSaveStringHandling.GetText, iPosition:=1, bIncludeArgumentName:=False)
-        clsTildaOperator.SetAssignTo(ucrSaveStringHandling.GetText)
+        clsTildaOperator.AddParameter("new_name", Chr(34) & ucrSaveStringHandling.GetText & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsTildaOperator.SetAssignTo("new_name")
     End Sub
 
     Private Sub AddSavePrefix()
