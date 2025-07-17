@@ -141,6 +141,7 @@ Public Class sdgPLModelOptions
         ucrNudMinSize.SetParameter(New RParameter("minsize"))
         ucrNudMinSize.Increment = 1
         ucrNudMinSize.Minimum = 2
+        ucrNudMinSize.Maximum = Integer.MaxValue
         ucrNudMinSize.SetRDefault(5)
 
         ucrChkPValue.SetText("P-value")
@@ -153,8 +154,7 @@ Public Class sdgPLModelOptions
         ucrInputComboPValue.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
         ucrInputComboPValue.SetText(0.05)
         ucrInputComboPValue.bAllowNonConditionValues = True
-
-
+        ucrInputComboPValue.SetValidationTypeAsNumeric()
 
         ucrChkEpsilon.SetText("Epsilon")
         ucrChkEpsilon.AddRSyntaxContainsFunctionNamesCondition(True, {"epsilon"}, True)
@@ -209,7 +209,10 @@ Public Class sdgPLModelOptions
             ucrInputNA.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
             ucrInputWeight.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
             ucrInputEpsilon.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
-
+            ucrChkMinSize.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
+            ucrNudMinSize.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
+            ucrChkPValue.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
+            ucrInputComboPValue.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
             ucrNudSteffenson.SetRCode(clsPlacketFunction, bReset, bCloneIfNeeded:=True)
 
         End If
@@ -289,8 +292,8 @@ Public Class sdgPLModelOptions
         If ucrChkPValue.Checked Then
             clsPlacketFunction.AddParameter("alpha", ucrInputComboPValue.GetText(), iPosition:=12)
         Else
-            If clsPlacketFunction.ContainsParameter("minsize") Then
-                clsPlacketFunction.RemoveParameterByName("minsize")
+            If clsPlacketFunction.ContainsParameter("alpha") Then
+                clsPlacketFunction.RemoveParameterByName("alpha")
             End If
         End If
     End Sub
