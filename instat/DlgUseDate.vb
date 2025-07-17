@@ -158,6 +158,12 @@ Public Class dlgUseDate
         ucrChkShiftQuarterAbbr.SetText("")
         ucrChkShiftQuarterAbbr.SetRDefault("FALSE")
 
+        ucrPnluseformat.AddRadioButton(rdoUseColumn)
+        ucrPnluseformat.AddRadioButton(rdoFormatColumn)
+
+        ' Set rdoUseColumn as the default selected radio button
+        rdoUseColumn.Checked = True
+
         'start month
         Dim dctMonth As New Dictionary(Of String, String)
         dctMonth.Add("January", 1)
@@ -249,4 +255,35 @@ Public Class dlgUseDate
     Private Sub ucrInputComboBoxStartingMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboBoxStartingMonth.ControlValueChanged
         Shifted()
     End Sub
+
+    Private Sub rdoUseColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoUseColumn.CheckedChanged
+        If rdoUseColumn.Checked Then
+            ' Actions when Use Column is selected
+        End If
+        GroupBoxSettings()
+    End Sub
+
+    Private Sub rdoFormatColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFormatColumn.CheckedChanged
+        If rdoFormatColumn.Checked Then
+            ' Actions when Format Column is selected
+        End If
+        GroupBoxSettings()
+    End Sub
+
+    Private Sub GroupBoxSettings()
+        If rdoUseColumn.Checked Then
+            Panelusemode.Visible = True
+            Panelformatmode.Visible = False
+            grpUseColumnnewfrm.Visible = False
+            grpfrmdescrp.Visible = False ' Hide format description in use mode
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        ElseIf rdoFormatColumn.Checked Then
+            Panelusemode.Visible = False
+            Panelformatmode.Visible = True
+            grpUseColumnnewfrm.Visible = True
+            grpfrmdescrp.Visible = True ' Show format description in format mode
+            ' ucrBase.clsRsyntax.SetBaseRFunction(anotherFunction)
+        End If
+    End Sub
+
 End Class
