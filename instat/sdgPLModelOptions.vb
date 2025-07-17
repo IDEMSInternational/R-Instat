@@ -149,7 +149,7 @@ Public Class sdgPLModelOptions
         ucrChkPValue.AddToLinkedControls(ucrInputComboPValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputComboPValue.SetParameter(New RParameter("alpha"))
-        ucrInputComboPValue.SetItems({0.01, 0.1, 0.5})
+        ucrInputComboPValue.SetItems({0.01, 0.05, 0.1, 0.5})
         ucrInputComboPValue.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
         ucrInputComboPValue.SetText(0.05)
         ucrInputComboPValue.bAllowNonConditionValues = True
