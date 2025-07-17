@@ -838,7 +838,17 @@ Public Class dlgImportDataset
 
         clsAsCharacterFunc.SetPackageName("instatExtras")
         clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
-        clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
+
+        'If ucrChkDropEmptyCols is checked, add the script in the pipeOperator as the input to the data argument in the "convert_to_character_matrix" function
+        'The pipeOperator feeds the imported data to the "remove_empty" function in the janitor package to remove all the empty rows and columns
+        If ucrChkDropEmptyCols.Checked Then
+            Dim clsPipeClone As ROperator = clsPipeOperator.Clone()
+            clsPipeClone.RemoveAssignTo()
+            clsAsCharacterFunc.AddParameter("data", clsPipeClone.ToScript())
+        Else
+            clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
+        End If
+
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
         Try
             dfTemp = expTemp?.AsDataFrame
@@ -921,6 +931,7 @@ Public Class dlgImportDataset
         TryTextPreview()
         TryGridPreview()
         TestOkEnabled()
+        RemoveMissingValues()
     End Sub
 
     Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
@@ -1254,6 +1265,29 @@ Public Class dlgImportDataset
             ucrChkDropEmptyCols.Visible = True
             If ucrChkDropEmptyCols.Checked Then
                 Dim clsTempFunction As RFunction = clsPreviousBaseFunction.Clone
+                Dim iTemp As Integer
+                Dim strRowMaxParamName As String = ""
+
+                If IsTextFileFormat() Then
+                    strRowMaxParamName = If(rdoSeparatortext.Checked, "nrows", "n_max")
+                ElseIf IsCSVFileFormat() Then
+                    strRowMaxParamName = "nrows"
+                ElseIf IsJSONFileFormat() Then
+                    strRowMaxParamName = "nrows"
+                ElseIf IsExcelFileFormat() Then
+                    strRowMaxParamName = "n_max"
+                End If
+
+                'determine the correct maximum number of lines to preview 
+                If clsTempFunction.ContainsParameter(strRowMaxParamName) _
+                    AndAlso Integer.TryParse(clsTempFunction.GetParameter(strRowMaxParamName).strArgumentValue, iTemp) Then
+                    clsTempFunction.AddParameter(strRowMaxParamName, Math.Min(iTemp, ucrNudPreviewLines.Value))
+                Else
+                    clsTempFunction.AddParameter(strRowMaxParamName, ucrNudPreviewLines.Value)
+                End If
+
+
+
                 clsTempFunction.RemoveAssignTo()
                 clsTempFunction.bExcludeAssignedFunctionOutput = False
                 clsPipeOperator.AddParameter("y", clsRFunctionParameter:=clsTempFunction, iPosition:=0)
@@ -1266,5 +1300,6 @@ Public Class dlgImportDataset
 
     Private Sub ucrChkDropEmptyCols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDropEmptyCols.ControlValueChanged
         RemoveMissingValues()
+        TryGridPreview()
     End Sub
 End Class
