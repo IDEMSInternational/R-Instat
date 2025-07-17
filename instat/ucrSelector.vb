@@ -13,8 +13,10 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.Windows.Controls.Primitives
+
 Public Class ucrSelector
-    Public CurrentReceiver As ucrReceiver
+    Private _currentReceiver As ucrReceiver
     Public Event ResetAll()
     Public Event ResetReceivers()
     Public Event DataFrameChanged()
@@ -55,6 +57,12 @@ Public Class ucrSelector
         lstExcludedMetadataProperties = New List(Of KeyValuePair(Of String, String()))
         strType = "column"
     End Sub
+
+    Public ReadOnly Property CurrentReceiver As ucrReceiver
+        Get
+            Return _currentReceiver
+        End Get
+    End Property
 
     Private Sub ucrSelection_load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -144,7 +152,8 @@ Public Class ucrSelector
                                                                strHeading:=CurrentReceiver.strSelectorHeading,
                                                                arrStrExcludedItems:=arrStrExclud,
                                                                strDatabaseQuery:=CurrentReceiver.strDatabaseQuery,
-                                                               strNcFilePath:=CurrentReceiver.strNcFilePath)
+                                                               strNcFilePath:=CurrentReceiver.strNcFilePath,
+                                                               strObjectName:=CurrentReceiver.strObjectName)
             If strNewSelectorFillCondition = _strCurrentSelectorFillCondition Then
                 Exit Sub
             End If
@@ -158,7 +167,8 @@ Public Class ucrSelector
         'todo, for columns, the list view should be field with variables from the .Net metadata object
         frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strCurrentType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1),
                                       strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=arrStrExclud,
-                                      strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
+                                      strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath,
+                                      strObjectName:=CurrentReceiver.strObjectName)
         If Not CurrentReceiver.bExcludeFromSelector Then
             'TODO. Investigate why this has to be called here instead of just being called in ucrReceiver control.SetControlValue()
             'See PR #8605 for related comments added in ucrReceiver.
@@ -171,7 +181,7 @@ Public Class ucrSelector
     Private Function GetSelectorFillCondition(dataFrame As clsDataFrame, strElementType As String,
             lstCombinedMetadataLists As List(Of List(Of KeyValuePair(Of String, String()))),
             strHeading As String, arrStrExcludedItems As String(), strDatabaseQuery As String,
-            strNcFilePath As String)
+            strNcFilePath As String, strObjectName As String)
         Dim strSelectorFillCondition As String = ""
 
         If dataFrame IsNot Nothing Then
@@ -193,6 +203,10 @@ Public Class ucrSelector
 
         If Not String.IsNullOrEmpty(strNcFilePath) Then
             strSelectorFillCondition &= strNcFilePath
+        End If
+
+        If Not String.IsNullOrEmpty(strObjectName) Then
+            strSelectorFillCondition &= strObjectName
         End If
 
         If arrStrExcludedItems IsNot Nothing Then
@@ -225,7 +239,7 @@ Public Class ucrSelector
             CurrentReceiver.RemoveColor()
         End If
         If conReceiver IsNot Nothing Then
-            CurrentReceiver = conReceiver
+            _currentReceiver = conReceiver
             If CurrentReceiver.bAsReceiver Then CurrentReceiver.SetColor()
             SetPrimaryDataFrameOptions(strPrimaryDataFrame, Not CurrentReceiver.bAttachedToPrimaryDataFrame AndAlso CurrentReceiver.bOnlyLinkedToPrimaryDataFrames)
             If Not CurrentReceiver.IsEmpty Then
@@ -248,7 +262,7 @@ Public Class ucrSelector
                 lstAvailableVariable.MultiSelect = True
             End If
         Else
-            CurrentReceiver = Nothing
+            _currentReceiver = Nothing
         End If
     End Sub
 

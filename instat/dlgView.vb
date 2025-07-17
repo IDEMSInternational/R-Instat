@@ -275,7 +275,7 @@ Public Class dlgView
     End Sub
 
     Private Sub cmdTableOptions_Click(sender As Object, e As EventArgs) Handles cmdTableOptions.Click
-        sdgTableOptions.Setup(ucrSelectorForView.strCurrentDataFrame, clsBaseOperator)
+        sdgTableOptions.Setup(ucrSelectorForView.strCurrentDataFrame, clsBaseOperator, "")
         sdgTableOptions.ShowDialog(Me)
     End Sub
 

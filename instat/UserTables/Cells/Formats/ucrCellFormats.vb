@@ -1,27 +1,38 @@
 ﻿Public Class ucrCellFormats
-
     Private clsOperator As New ROperator
     Private bFirstload As Boolean = True
 
-
     Private Sub InitialiseControl()
-        ucrReceiverMultipleCols.Selector = ucrSelectorCols
+        ucrReceiverMultipleCols.Selector = ucrSelectorByDF
         ucrReceiverMultipleCols.SetMeAsReceiver()
 
         cboSelectFormat.SelectedIndex = 0
     End Sub
 
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
         If bFirstload Then
             InitialiseControl()
             bFirstload = False
         End If
 
+        ' Set up the selector and receiver
+        ucrReceiverMultipleCols.strObjectName = strTableName
+        If String.IsNullOrEmpty(strTableName) Then
+            ucrSelectorByDF.Visible = True
+            ucrSelectorByTableDF.Visible = False
+            ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByDF
+        Else
+            ucrSelectorByDF.Visible = False
+            ucrSelectorByTableDF.Visible = True
+            ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByTableDF
+        End If
+        ucrReceiverMultipleCols.SetMeAsReceiver()
+        ucrReceiverMultipleCols.Clear()
+
         Me.clsOperator = clsOperator
 
-        ' Set up the selector
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
-        ucrReceiverMultipleCols.SetMeAsReceiver()
         ucrRowExpression.Setup(strDataFrameName)
 
         ' Clear and Set up the data grid with contents

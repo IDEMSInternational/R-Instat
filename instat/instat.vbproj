@@ -517,6 +517,12 @@
     <Compile Include="sdgTricotModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ucrSelectorByOutputObject.Designer.vb">
+      <DependentUpon>ucrSelectorByOutputObject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByOutputObject.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
     </Compile>
@@ -3660,6 +3666,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgTricotModelOptions.resx">
       <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByOutputObject.resx">
+      <DependentUpon>ucrSelectorByOutputObject.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>

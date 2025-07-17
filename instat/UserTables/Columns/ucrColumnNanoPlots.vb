@@ -3,17 +3,8 @@
     Private clsOperator As New ROperator
     Private dctPlotTypes, dctMissingVals As New Dictionary(Of String, String)
 
-    Private Sub ucrRowSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseDialog()
-            bFirstLoad = False
-        End If
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrReceiverMultipleCols.Selector = ucrSelectorCols
+    Private Sub InitialiseControl()
         ucrReceiverMultipleCols.SetDataType("numeric", bStrict:=True)
-        ucrReceiverMultipleCols.SetMeAsReceiver()
 
         dctPlotTypes.Add("Line", "line")
         dctPlotTypes.Add("Bar", "bar")
@@ -34,11 +25,30 @@
         ucrChkAutoHideCols.SetText("Hide Selected Nano Plot Columns")
     End Sub
 
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
+        If bFirstLoad Then
+            InitialiseControl()
+            bFirstLoad = False
+        End If
+
+        ' Set up the selector and receiver
+        ucrReceiverMultipleCols.strObjectName = strTableName
+        If String.IsNullOrEmpty(strTableName) Then
+            ucrSelectorByDF.Visible = True
+            ucrSelectorByTableDF.Visible = False
+            ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByDF
+        Else
+            ucrSelectorByDF.Visible = False
+            ucrSelectorByTableDF.Visible = True
+            ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverMultipleCols.Selector = ucrSelectorByTableDF
+        End If
+        ucrReceiverMultipleCols.SetMeAsReceiver()
+        ucrReceiverMultipleCols.Clear()
+
         Me.clsOperator = clsOperator
 
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
-        ucrReceiverMultipleCols.Clear()
         dataGrid.Rows.Clear()
         ucrNudPlotHeight.Value = 2
         ucrChkAutoHideCols.Checked = True
