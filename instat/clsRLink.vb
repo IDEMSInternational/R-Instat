@@ -1384,7 +1384,7 @@ Public Class RLink
     '''                                     Only used if <paramref name="strType"/> is 
     '''                                     'nc_dim_variables'.</param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "", Optional strObjectName As String = "")
         Dim vecColumns As GenericVector = Nothing
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -1410,6 +1410,11 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_column_names")
                     'TODO. why not apply or not the column selection at the R level.
                     clsGetItems.AddParameter("use_current_column_selection", If(bUseColumnSelection, "TRUE", "FALSE"))
+
+                    If strObjectName <> "" Then
+                        'TODO. After refactoring data book code, add the `strObjectName` parameter here
+                    End If
+
                 Case "metadata"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_metadata_fields")
                 Case "filter"
@@ -1473,6 +1478,15 @@ Public Class RLink
             If strExcludedItems IsNot Nothing AndAlso strExcludedItems.Count > 0 Then
                 clsGetItems.AddParameter("excluded_items", GetListAsRString(strExcludedItems.ToList()))
             End If
+
+            'TODO. Temporarily overwrite the the `clsGetItems` until implementation of table column names is done at the data book level
+            If strObjectName <> "" Then
+                Dim clsNewGetTableValues As New RFunction
+                clsNewGetTableValues.SetRCommand("list")
+                clsNewGetTableValues.AddParameter("x", strDataFrameName & " = colnames(" & "data_book$get_object_data(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", object_name = " & Chr(34) & strObjectName & Chr(34) & ", as_file = FALSE)[['_data']]" & ")", bIncludeArgumentName:=False)
+                clsGetItems = clsNewGetTableValues
+            End If
+
             expItems = RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
             If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
                 vecColumns = expItems.AsList
