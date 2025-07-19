@@ -445,9 +445,14 @@ Public Class dlgPlacketLuceModel
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgPLModelOptions.enumPLModelOptionsMode = sdgPLModelOptions.PLModelOptionsMode.Covariates
         sdgPLModelOptions.SetRCode(clsNewRSyntax:=ucrBase.clsRsyntax, clsNewPlacketFunction:=clsPlacketFunction, bReset:=bResetSubdialog)
-        sdgPLModelOptions.ShowDialog()
         sdgPLModelOptions.ucrChkMultivariateNormal.Enabled = True
         sdgPLModelOptions.ucrChkGamma.Enabled = True
+        sdgPLModelOptions.ucrChkMinSize.Checked = False
+        sdgPLModelOptions.ucrChkMinSize.Visible = False
+        sdgPLModelOptions.ucrChkPValue.Checked = False
+        sdgPLModelOptions.ucrChkPValue.Visible = False
+        sdgPLModelOptions.ucrChkMethod.Enabled = True
+        sdgPLModelOptions.ShowDialog()
         bResetSubdialog = False
     End Sub
 End Class
