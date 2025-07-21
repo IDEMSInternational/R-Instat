@@ -517,6 +517,24 @@
     <Compile Include="sdgTricotModelOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ucrSelectorByTable.Designer.vb">
+      <DependentUpon>ucrSelectorByTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByTable.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrSelectorByTablesAddRemove.Designer.vb">
+      <DependentUpon>ucrSelectorByTablesAddRemove.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSelectorByTablesAddRemove.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrTables.Designer.vb">
+      <DependentUpon>ucrTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTables.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.Designer.vb">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
     </Compile>
@@ -3660,6 +3678,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgTricotModelOptions.resx">
       <DependentUpon>sdgTricotModelOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByTable.resx">
+      <DependentUpon>ucrSelectorByTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByTable.sw-KE.resx">
+      <DependentUpon>ucrSelectorByTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSelectorByTablesAddRemove.resx">
+      <DependentUpon>ucrSelectorByTablesAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrTables.resx">
+      <DependentUpon>ucrTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrTables.sw-KE.resx">
+      <DependentUpon>ucrTables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserTables\Cells\FootNotes\ucrCellsFootNotes.resx">
       <DependentUpon>ucrCellsFootNotes.vb</DependentUpon>
