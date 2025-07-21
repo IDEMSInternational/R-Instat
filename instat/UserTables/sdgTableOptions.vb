@@ -26,7 +26,7 @@ Public Class sdgTableOptions
             InitialiseDialog()
             bFirstload = False
             'adding these  because it's ignored on first load
-            ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText)
+            'ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText)
         End If
         autoTranslate(Me)
     End Sub
@@ -34,12 +34,15 @@ Public Class sdgTableOptions
     Private Sub InitialiseDialog()
         ucrSdgBaseButtons.iHelpTopicID = 146
 
-        ucrChkSelectTheme.Checked = True
+        ucrChkSelectTheme.Checked = False
         ucrChkSelectTheme.SetText("Select Theme")
-        ucrChkManualTheme.SetText("Manual Theme")
 
-        ucrCboSelectThemes.SetItems({"None", "Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
+        ucrCboSelectThemes.Visible = False
+        ucrCboSelectThemes.SetItems({"Dark Theme", "538 Theme", "Dot Matrix Theme", "Espn Theme", "Excel Theme", "Guardian Theme", "NY Times Theme", "PFF Theme"})
         ucrCboSelectThemes.SetDropDownStyleAsNonEditable()
+
+        ucrChkManualTheme.SetText("Manual Theme")
+        btnManualTheme.Visible = False
     End Sub
 
     ''' <summary>
@@ -58,12 +61,6 @@ Public Class sdgTableOptions
         ucrCells.Setup(strDataFrameName, clsOperator, strTableName)
         ucrSourceNotes.Setup(clsOperator)
         ucrOtherStyles.Setup(clsOperator)
-
-        ucrHeader.ucrInputTitle.SetText(dlgGeneralTable.ucrInputTitle.GetText)
-        ucrHeader.ucrInputTitleFooter.SetText(dlgGeneralTable.ucrInputTitleFooter.GetText)
-        ucrCboSelectThemes.SetText(dlgGeneralTable.ucrCboSelectThemes.GetText)
-        ucrChkSelectTheme.Checked = dlgGeneralTable.ucrChkSelectTheme.Checked
-        sdgTableStyles.GetNewUserInputAsRFunction()
         SetupTheme(clsOperator)
     End Sub
 
@@ -85,43 +82,49 @@ Public Class sdgTableOptions
     Private Sub SetupTheme(clsOperator As ROperator)
         If clsOperator.ContainsParameter("theme_format") Then
             clsThemeRFunction = clsOperator.GetParameter("theme_format").clsArgumentCodeStructure
-        Else
-            clsThemeRFunction = New RFunction
-            clsThemeRFunction.SetPackageName("gtExtras")
+            ' TODO. Set up the themes R function controls with the parameter values
         End If
+
+        ' TODO. This should be changed to checking for the `tab_options` paraneter from the ROperator
         If ucrChkManualTheme.Checked Then
             sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
         End If
     End Sub
 
     Private Sub ucrChkSelectTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSelectTheme.ControlValueChanged
+        clsThemeRFunction = New RFunction
         If ucrChkSelectTheme.Checked Then
-            btnManualTheme.Visible = False
-            ucrCboSelectThemes.Visible = True
-        ElseIf ucrChkSelectTheme.Checked Then
-            ucrChkManualTheme.Checked = True
-        Else
-            ucrCboSelectThemes.Visible = False
+            clsThemeRFunction.SetPackageName("gtExtras")
+            clsThemeRFunction.SetRCommand("gt_theme_dark")
+            ucrCboSelectThemes.SetName("Dark Theme")
         End If
+
+        ucrCboSelectThemes.Visible = ucrChkSelectTheme.Checked
+        If ucrChkSelectTheme.Checked AndAlso ucrChkManualTheme.Checked Then
+            ucrChkManualTheme.Checked = False
+        End If
+
     End Sub
 
     Private Sub ucrChkManualTheme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkManualTheme.ControlValueChanged
+        clsThemeRFunction = New RFunction
         If ucrChkManualTheme.Checked Then
-            btnManualTheme.Visible = True
-            ucrChkSelectTheme.Checked = Not ucrChkManualTheme.Checked
-            btnManualTheme.Visible = ucrChkManualTheme.Checked
+            clsThemeRFunction.SetPackageName("gt")
+            clsThemeRFunction.SetRCommand("tab_options")
+        End If
+
+        btnManualTheme.Visible = ucrChkManualTheme.Checked
+        If ucrChkManualTheme.Checked AndAlso ucrChkSelectTheme.Checked Then
+            ucrChkSelectTheme.Checked = False
         End If
     End Sub
 
     Private Sub btnManualTheme_Click(sender As Object, e As EventArgs) Handles btnManualTheme.Click
-        clsThemeRFunction.SetPackageName("gt")
-        clsThemeRFunction.SetRCommand("tab_options")
         sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
         sdgSummaryThemes.ShowDialog(Me)
     End Sub
 
     Private Sub ucrCboSelectThemes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrCboSelectThemes.ControlValueChanged
-
         If clsThemeRFunction Is Nothing Then
             Exit Sub
         End If
@@ -150,14 +153,14 @@ Public Class sdgTableOptions
     End Sub
 
     Private Sub SetThemeValuesOnReturn(clsOperator As ROperator)
-        ' Set the themes parameter if there was a theme selected
-        If ucrChkManualTheme.Checked Then
-            sdgSummaryThemes.SetRCode(bReset:=True, clsNewThemesTabOption:=clsThemeRFunction)
+        clsOperator.RemoveParameterByName("theme_format")
+
+        If Not ucrChkSelectTheme.Checked AndAlso Not ucrChkManualTheme.Checked Then
+            Exit Sub
         End If
+
         If clsThemeRFunction IsNot Nothing AndAlso Not String.IsNullOrEmpty(clsThemeRFunction.strRCommand) Then
             clsOperator.AddParameter("theme_format", clsRFunctionParameter:=clsThemeRFunction)
-        Else
-            clsOperator.RemoveParameterByName("theme_format")
         End If
     End Sub
     '-----------------------------------------

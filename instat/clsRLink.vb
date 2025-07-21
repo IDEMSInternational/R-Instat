@@ -1546,6 +1546,7 @@ Public Class RLink
                 ' This has been tested on high resolution screens but needs further testing
                 ' and possibly a better solution.
                 lstView.Columns(0).Width = lstView.Columns(0).Width - 2
+
                 If strTopItemText <> "" Then
                     lviTemp = lstView.FindItemWithText(strTopItemText)
                     If lviTemp IsNot Nothing Then
