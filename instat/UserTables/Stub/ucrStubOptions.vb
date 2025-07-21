@@ -3,31 +3,43 @@
     Private clsGtRFunction, clsStubHeadRFunction, clsStubStyleRFunction, clsStubLocationRFunction As New RFunction
     Private bFirstload As Boolean = True
 
-    Private Sub initialiseDialog()
+    Private Sub initialiseControl()
         ucrReceiverSingleRowName.SetParameter(New RParameter("rowname_col", 0))
         ucrReceiverSingleRowName.SetParameterIsString()
-        ucrReceiverSingleRowName.Selector = ucrSelectorCols
+        ucrReceiverSingleRowName.Selector = ucrSelectorByDF
         ucrReceiverSingleRowName.SetLinkedDisplayControl(lblRowName)
 
         ucrReceiverSingleGroupByCol.SetParameter(New RParameter("groupname_col", 1))
         ucrReceiverSingleGroupByCol.SetParameterIsString()
-        ucrReceiverSingleGroupByCol.Selector = ucrSelectorCols
+        ucrReceiverSingleGroupByCol.Selector = ucrSelectorByDF
         ucrReceiverSingleGroupByCol.SetLinkedDisplayControl(lblGroupByCol)
 
         ucrInputStubHead.SetParameter(New RParameter("label", 0))
     End Sub
 
-    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator)
-
+    Public Sub Setup(strDataFrameName As String, clsOperator As ROperator, strTableName As String)
         If bFirstload Then
-            initialiseDialog()
+            initialiseControl()
             bFirstload = False
         End If
 
-        Me.clsOperator = clsOperator
-
-        ucrSelectorCols.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+        ' Set up the selector and receiver
+        ucrReceiverSingleRowName.strObjectName = strTableName
+        If String.IsNullOrEmpty(strTableName) Then
+            ucrSelectorByDF.Visible = True
+            ucrSelectorByTableDF.Visible = False
+            ucrSelectorByDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverSingleRowName.Selector = ucrSelectorByDF
+        Else
+            ucrSelectorByDF.Visible = False
+            ucrSelectorByTableDF.Visible = True
+            ucrSelectorByTableDF.SetDataframe(strDataFrameName, bEnableDataframe:=False)
+            ucrReceiverSingleRowName.Selector = ucrSelectorByTableDF
+        End If
         ucrReceiverSingleRowName.SetMeAsReceiver()
+        ucrReceiverSingleRowName.Clear()
+
+        Me.clsOperator = clsOperator
 
         ' The GT paramter should always be there.
         clsGtRFunction = clsTablesUtils.FindRFunctionsParamsWithRCommand({"gt"}, clsOperator).FirstOrDefault()?.clsArgumentCodeStructure

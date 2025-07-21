@@ -52,7 +52,7 @@ Public Class sdgTableOptions
         clsOperator = clsNewOperator
 
         ucrHeader.Setup(clsOperator)
-        ucrStub.Setup(strDataFrameName, clsOperator)
+        ucrStub.Setup(strDataFrameName, clsOperator, strTableName)
         ucrRows.Setup(strDataFrameName, clsOperator, strTableName)
         ucrColumns.Setup(strDataFrameName, clsOperator, strTableName)
         ucrCells.Setup(strDataFrameName, clsOperator, strTableName)

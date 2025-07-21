@@ -1480,7 +1480,7 @@ Public Class RLink
             End If
 
             'TODO. Temporarily overwrite the the `clsGetItems` until implementation of table column names is done at the data book level
-            If strObjectName <> "" Then
+            If Not String.IsNullOrEmpty(strObjectName) Then
                 Dim clsNewGetTableValues As New RFunction
                 clsNewGetTableValues.SetRCommand("list")
                 clsNewGetTableValues.AddParameter("x", strDataFrameName & " = colnames(" & "data_book$get_object_data(data_name = " & Chr(34) & strDataFrameName & Chr(34) & ", object_name = " & Chr(34) & strObjectName & Chr(34) & ", as_file = FALSE)[['_data']]" & ")", bIncludeArgumentName:=False)
@@ -1505,7 +1505,7 @@ Public Class RLink
                                 lstView.Items(j).Group = lstView.Groups(i)
                             End If
                         Next
-                        If strType = "column" Then
+                        If strType = "column" AndAlso String.IsNullOrEmpty(strObjectName) Then
                             strColumnsRList = GetListAsRString(chrCurrColumns.ToList)
                             clsGetColumnTypes.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
                             clsGetColumnTypes.AddParameter("data_name", Chr(34) & vecColumns.Names(i) & Chr(34))
