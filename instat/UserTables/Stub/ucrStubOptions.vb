@@ -71,9 +71,7 @@
     End Sub
 
     Public Sub SetValuesToOperator()
-
         clsTablesUtils.RemoveRFunctionsParamsWithRCommand({"tab_stubhead"}, clsOperator)
-
         If Not ucrInputStubHead.IsEmpty Then
             clsOperator.AddParameter(New RParameter(strParameterName:="tab_stubhead_param", strParamValue:=clsStubHeadRFunction, bNewIncludeArgumentName:=False))
         End If
